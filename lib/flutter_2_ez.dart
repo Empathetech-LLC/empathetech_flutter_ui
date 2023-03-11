@@ -1,4 +1,4 @@
-library flutter_2_ez;
+library ez_ui;
 
 /// A Calculator.
 class Calculator {
