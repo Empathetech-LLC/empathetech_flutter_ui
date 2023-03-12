@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String backImageKey = 'backImage';
+const String noImageKey = 'noImage';
 const String backColorKey = 'appBackgroundColor';
 const String themeColorKey = 'themeColor';
 const String themeTextColorKey = 'themeTextColor';
@@ -38,11 +39,19 @@ class AppConfig {
 
   // Populate prefs, overwriting defaults whenever a user value is found
   static void init([Map<String, dynamic>? customDefaults]) {
+    // Load any custom defaults
     if (customDefaults != null) defaults.addAll(customDefaults);
 
+    // Start prefs with a deep copy of defaults
     prefs = new Map.from(defaults);
 
-    defaults.forEach((key, value) {
+    // Find all the keys that have been overwritten
+    List<String> toOverwrite =
+        preferences.getKeys().toSet().intersection(defaults.keys.toSet()).toList();
+
+    // Load the changes
+    toOverwrite.forEach((key) {
+      dynamic value = defaults[key];
       dynamic userPref;
 
       if (value is int) {
