@@ -25,7 +25,7 @@ Color invertColor(Color toInvert) {
 }
 
 // Returns whether text with a background of the passed color should be black or white
-Color getContrastPlatformText(Color background) {
+Color getContrastColor(Color background) {
   final r = background.red;
   final g = background.green;
   final b = background.blue;
