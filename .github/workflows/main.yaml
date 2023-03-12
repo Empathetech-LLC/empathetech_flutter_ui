@@ -1,0 +1,14 @@
+name: Health check extravaganza
+
+# Triggers the workflow on pull request events for the main branch
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  version_check:
+    runs-on: ubuntu-latest
+    name: Checks APP_VERSION and CHANGELOG.md files for updates.
+    steps:
+    - name: Version check action
+      uses: empathictech/versioning-checker@2.3
