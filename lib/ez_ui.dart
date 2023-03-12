@@ -93,7 +93,7 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? buttonStyle]) {
   return GestureDetector(
     child: PlatformElevatedButton(
-      material: (_, __) => MaterialElevatedButtonData(style: buttonStyle),
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
       onPressed: action,
       child: body,
     ),
@@ -107,7 +107,7 @@ Widget ezIconButton(
     [ButtonStyle? buttonStyle]) {
   return GestureDetector(
     child: PlatformIconButton(
-      material: (_, __) => MaterialIconButtonData(style: buttonStyle),
+      material: (context, platform) => MaterialIconButtonData(style: buttonStyle),
       onPressed: action,
       icon: body,
       materialIcon: mIcon,
@@ -125,7 +125,7 @@ void ezDialog(BuildContext context, String? title, List<Widget> build) {
   showPlatformDialog(
     context: context,
     builder: (context) => PlatformAlertDialog(
-      material: (_, __) => MaterialAlertDialogData(
+      material: (context, platform) => MaterialAlertDialogData(
         insetPadding: EdgeInsets.all(padding),
         titlePadding: title == null
             ? EdgeInsets.zero
