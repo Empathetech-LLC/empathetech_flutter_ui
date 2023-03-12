@@ -1,11 +1,10 @@
 library ez_ui;
 
-import 'package:ez_ui/src/helpers.dart';
-
-import '../../ez_ui.dart';
+import '../helpers.dart';
 import '../storage.dart';
 import '../app-config.dart';
 import '../text.dart';
+import '../../ez_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -76,17 +75,7 @@ class _ColorSettingState extends State<ColorSetting> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Color preview
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: resetColor,
-                foregroundColor: resetColor,
-                shadowColor: resetColor,
-                surfaceTintColor: resetColor,
-                fixedSize: Size(75, 75),
-              ),
-              onPressed: () {},
-              child: Container(),
-            ),
+            Container(width: 75, height: 75, color: resetColor),
             Container(height: AppConfig.prefs[dialogSpacingKey]),
 
             // Yes/no buttons
@@ -138,13 +127,9 @@ class _ColorSettingState extends State<ColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: themeTextColor,
-            foregroundColor: themeTextColor,
-            padding: EdgeInsets.all(padding),
-          ),
-          onPressed: () {},
+        PlatformTextButton(
+          padding: EdgeInsets.all(padding),
+          color: themeTextColor,
           child: PlatformText(
             widget.message,
             style: getTextStyle(colorSettingStyleKey),
@@ -153,20 +138,17 @@ class _ColorSettingState extends State<ColorSetting> {
         ),
 
         // Color preview/edit button
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: currColor,
-            foregroundColor: buttonColor,
-            side: BorderSide(color: buttonColor),
-            fixedSize: Size(75, 75),
+        GestureDetector(
+          child: PlatformIconButton(
+            color: currColor,
+            onPressed: changeColor,
+            icon: Icon(
+              PlatformIcons(context).edit,
+              color: getContrastColor(currColor),
+              size: 37.5,
+            ),
           ),
-          onPressed: changeColor,
           onLongPress: reset,
-          child: Icon(
-            Icons.edit,
-            color: getContrastColor(currColor),
-            size: 37.5,
-          ),
         ),
       ],
     );
