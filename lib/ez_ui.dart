@@ -118,7 +118,7 @@ Widget ezIconButton(
 }
 
 // Saves time on standardizing the dialog's padding
-void ezDialog(BuildContext context, String? title, List<Widget> build) {
+void ezDialog(BuildContext context, String? title, List<Widget>? build) {
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
