@@ -1,7 +1,6 @@
 library ez_ui;
 
-import 'package:ez_ui/src/text.dart';
-
+import 'src/text.dart';
 import 'src/helpers.dart';
 import 'src/app-config.dart';
 
@@ -19,10 +18,10 @@ Widget paddedText(String text, [TextStyle? style, TextAlign? alignment]) {
 }
 
 // Standard title card
-Widget titleCard(String title, [TextStyle? style]) {
+Widget titleCard(String title) {
   return Card(
     color: Color(AppConfig.prefs[themeColorKey]),
-    child: paddedText(title, style),
+    child: paddedText(title, getTextStyle(titleStyleKey)),
   );
 }
 
@@ -72,9 +71,9 @@ Widget warningCard(BuildContext context, String content) {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.warning, color: Colors.amber),
+              Icon(PlatformIcons(context).error, color: Colors.amber),
               PlatformText('WARNING', style: titleStyle),
-              Icon(Icons.warning, color: Colors.amber),
+              Icon(PlatformIcons(context).error, color: Colors.amber),
             ],
           ),
           Container(height: padding),
