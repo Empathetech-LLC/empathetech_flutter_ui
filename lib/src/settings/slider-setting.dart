@@ -5,6 +5,7 @@ import '../app-config.dart';
 import '../../ez_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ValueSetting extends StatefulWidget {
@@ -119,12 +120,11 @@ class _ValueSettingState extends State<ValueSetting> {
 
     toReturn.addAll([
       // Value slider
-      Slider(
+      PlatformSlider(
         value: currValue,
         min: widget.min,
         max: widget.max,
         divisions: widget.steps,
-        label: currValue.toString(),
         onChanged: (double value) {
           // Just update the on screen value while sliding around
           setState(() {
@@ -139,6 +139,7 @@ class _ValueSettingState extends State<ValueSetting> {
             AppConfig.preferences.setDouble(widget.prefsKey, value);
           }
         },
+        material: (context, platform) => MaterialSliderData(label: currValue.toString()),
       ),
       Container(height: buttonSpacer),
 
@@ -151,8 +152,8 @@ class _ValueSettingState extends State<ValueSetting> {
           });
         },
         () {},
-        Icon(Icons.restore),
-        Icon(Icons.restore),
+        Icon(PlatformIcons(context).refresh),
+        Icon(PlatformIcons(context).refresh),
         PlatformText('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
       ),
       Container(height: buttonSpacer),
