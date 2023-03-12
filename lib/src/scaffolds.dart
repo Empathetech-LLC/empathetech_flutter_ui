@@ -1,11 +1,10 @@
 library ez_ui;
 
-import 'package:flutter/cupertino.dart';
-
 import 'helpers.dart';
 import 'app-config.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // Standard full screen scaffold

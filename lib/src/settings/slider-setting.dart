@@ -1,8 +1,8 @@
 library ez_ui;
 
 import '../text.dart';
-import '../../ez_ui.dart';
 import '../app-config.dart';
+import '../../ez_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
