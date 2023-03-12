@@ -3,7 +3,6 @@ library ez_ui;
 import 'package:ez_ui/src/text.dart';
 
 import 'src/helpers.dart';
-import 'src/constants.dart';
 import 'src/app-config.dart';
 
 import 'package:flutter/material.dart';

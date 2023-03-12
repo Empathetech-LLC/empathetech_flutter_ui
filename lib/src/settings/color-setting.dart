@@ -4,7 +4,6 @@ import 'package:ez_ui/src/helpers.dart';
 
 import '../../ez_ui.dart';
 import '../storage.dart';
-import '../constants.dart';
 import '../app-config.dart';
 import '../text.dart';
 
@@ -66,7 +65,7 @@ class _ColorSettingState extends State<ColorSetting> {
 
   // Edit button onLongPress: reset the color to the app default
   void reset() {
-    Color resetColor = Color(defaultConfig[widget.toControl]);
+    Color resetColor = Color(AppConfig.defaults[widget.toControl]);
 
     ezDialog(
       context,

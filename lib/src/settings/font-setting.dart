@@ -1,6 +1,5 @@
 library ez_ui;
 
-import '../constants.dart';
 import '../../ez_ui.dart';
 import '../app-config.dart';
 import '../text.dart';
@@ -19,7 +18,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   //// Initialize state
 
   // Gather theme data
-  late String defaultFontFamily = defaultConfig[fontFamilyKey];
+  late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
   late String currFontFamily = AppConfig.prefs[fontFamilyKey];
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
