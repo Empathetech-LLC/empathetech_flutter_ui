@@ -64,8 +64,8 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(Icons.file_open),
-              Icon(Icons.file_open),
+              Icon(PlatformIcons(context).folderOpen),
+              Icon(PlatformIcons(context).folderOpen),
               PlatformText('File'),
             ),
             Container(height: buttonSpacer),
@@ -82,8 +82,8 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(Icons.camera_alt),
-              Icon(Icons.camera_alt),
+              Icon(PlatformIcons(context).photoCamera),
+              Icon(PlatformIcons(context).photoCamera),
               PlatformText('Camera'),
             ),
             Container(height: buttonSpacer),
@@ -98,8 +98,8 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(Icons.restore),
-              Icon(Icons.restore),
+              Icon(PlatformIcons(context).refresh),
+              Icon(PlatformIcons(context).refresh),
               PlatformText('Reset'),
             ),
             Container(height: buttonSpacer),
@@ -114,8 +114,8 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(Icons.clear),
-              Icon(Icons.clear),
+              Icon(PlatformIcons(context).clear),
+              Icon(PlatformIcons(context).clear),
               PlatformText('Clear'),
             ),
             Container(height: buttonSpacer),
@@ -142,7 +142,7 @@ class _ImageSettingState extends State<ImageSetting> {
             height: widget.prefsKey == backImageKey ? 160 : 75,
             width: widget.prefsKey == backImageKey ? 90 : 75,
             child: currPath == noImageKey
-                ? Icon(Icons.clear)
+                ? Icon(PlatformIcons(context).clear)
                 : buildImage(currPath, isAsset, BoxFit.fill),
           ),
         ],
