@@ -1,22 +1,29 @@
 library ez_ui;
 
+import 'package:flutter/cupertino.dart';
+
 import 'helpers.dart';
-import 'constants.dart';
 import 'app-config.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // Standard full screen scaffold
-Widget standardScaffold(BuildContext context, String title, Widget body,
-    DecorationImage? backgroundImage, Color backgroundColor, Drawer? hamburger) {
+Widget standardScaffold(
+    BuildContext context,
+    String title,
+    Widget body,
+    DecorationImage? backgroundImage,
+    Color backgroundColor,
+    Drawer? androidHamburger,
+    CupertinoNavigationBar? iosNavBar) {
   double margin = AppConfig.prefs[marginKey];
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
-    child: Scaffold(
-      appBar: AppBar(title: PlatformText(title)),
+    child: PlatformScaffold(
+      appBar: PlatformAppBar(title: PlatformText(title)),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -32,22 +39,26 @@ Widget standardScaffold(BuildContext context, String title, Widget body,
           margin: EdgeInsets.all(margin),
         ),
       ),
-      endDrawer: hamburger,
+      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
+      cupertino: (context, platform) =>
+          CupertinoPageScaffoldData(navigationBar: iosNavBar),
     ),
   );
 }
 
 // Nav screen: Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamburger,
-    BottomNavigationBar navBar) {
+Widget navScaffold(BuildContext context, String title, Widget body,
+    Drawer? androidHamburger, CupertinoNavigationBar? iosNavBar, PlatformNavBar navBar) {
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
-    child: Scaffold(
-      appBar: AppBar(title: PlatformText(title)),
+    child: PlatformScaffold(
+      appBar: PlatformAppBar(title: PlatformText(title)),
       body: body,
-      endDrawer: hamburger,
-      bottomNavigationBar: navBar,
+      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
+      cupertino: (context, platform) =>
+          CupertinoPageScaffoldData(navigationBar: iosNavBar),
+      bottomNavBar: navBar,
     ),
   );
 }
