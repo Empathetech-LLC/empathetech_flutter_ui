@@ -1,9 +1,9 @@
 library ez_ui;
 
-import 'package:ez_ui/src/text.dart';
+import '../ez_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:developer';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // Get screen width
 double screenWidth(BuildContext context) {
@@ -33,16 +33,8 @@ Color getContrastColor(Color background) {
   return (((r * 0.299) + (g * 0.587) + (b * 0.114)) >= 150) ? Colors.black : Colors.white;
 }
 
-// Log the passed message and display a snack bar/pop up for the user
-void popNLog(BuildContext context, String message, [int seconds = 3]) {
-  TextStyle style = getTextStyle(dialogContentStyleKey);
-
+// Log the passed message and display an alert dialog for the user
+void popNLog(BuildContext context, String message) {
   log(message);
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      duration: Duration(seconds: seconds),
-      content: PlatformText(message, style: style, textAlign: TextAlign.center),
-    ),
-  );
+  ezDialog(context, 'Attention:', [paddedText(message)]);
 }
