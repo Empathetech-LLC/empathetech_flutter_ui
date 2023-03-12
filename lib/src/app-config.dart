@@ -1,4 +1,4 @@
-library ez_ui;
+library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

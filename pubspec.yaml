@@ -1,7 +1,7 @@
-name: ez_ui
+name: empathetech_flutter_ui
 description: A Flutter package for fast, high quality UI development
 version: 1.0.0
-repository: https://github.com/Empathetech-LLC/ez_ui
+repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
   sdk: '>=2.19.3 <3.0.0'

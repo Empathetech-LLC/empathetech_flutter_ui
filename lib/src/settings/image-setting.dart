@@ -1,9 +1,9 @@
-library ez_ui;
+library empathetech_flutter_ui;
 
 import '../text.dart';
 import '../app-config.dart';
 import '../storage.dart';
-import '../../ez_ui.dart';
+import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

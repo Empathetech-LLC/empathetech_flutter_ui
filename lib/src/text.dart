@@ -1,4 +1,4 @@
-library ez_ui;
+library empathetech_flutter_ui;
 
 import 'app-config.dart';
 

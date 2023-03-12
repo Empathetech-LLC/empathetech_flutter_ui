@@ -1,8 +1,8 @@
-library ez_ui;
+library empathetech_flutter_ui;
 
 import 'helpers.dart';
 import 'app-config.dart';
-import '../ez_ui.dart';
+import '../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:path/path.dart';
