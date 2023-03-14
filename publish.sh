@@ -49,9 +49,7 @@ if [ $index -lt $final ]; then
   pal=$((index + 1))
   notes=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),$(( ${LINE_NUMS[pal]} - 1 ))p" CHANGELOG.md)
 else
-  notes=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),$(( ${LINE_NUMS[pal]} - 1 ))p" CHANGELOG.md)
+  notes=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),\$p" CHANGELOG.md)
 fi
 
-echo $notes
-
-#gh release create $version -t $version -n $notes
+gh release create "$version" -t "$version" -n "$notes"
