@@ -11,6 +11,6 @@ jobs:
     name: Checks APP_VERSION and CHANGELOG.md files for updates.
     steps:
     - name: Version check action
-      uses: empathictech/versioning-checker@latest
+      uses: empathictech/versioning-checker@2.1.4
       with:
         tracked_files: APP_VERSION,CHANGELOG.md,pubspec.yaml
