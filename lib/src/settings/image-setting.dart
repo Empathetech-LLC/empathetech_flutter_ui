@@ -10,15 +10,15 @@ class ImageSetting extends StatefulWidget {
   const ImageSetting({
     Key? key,
     required this.prefsKey,
-    required this.title,
     required this.isAssetImage,
-    required this.rollCredits,
+    required this.title,
+    required this.credits,
   }) : super(key: key);
 
   final String prefsKey;
-  final String title;
   final bool isAssetImage;
-  final void Function() rollCredits;
+  final String title;
+  final String credits;
 
   @override
   _ImageSettingState createState() => _ImageSettingState();
@@ -126,7 +126,7 @@ class _ImageSettingState extends State<ImageSetting> {
   Widget build(BuildContext context) {
     return ezButton(
       chooseImage,
-      widget.rollCredits,
+      () => ezDialog(context, 'Credit to:', [paddedText(widget.credits)]),
       Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
