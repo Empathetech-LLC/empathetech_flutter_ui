@@ -31,6 +31,7 @@ CHOSEN_LINE=$(grep -nE "$CURR_VERSION_REGEX" CHANGELOG.md | cut -d':' -f1)
 
 # Find the position of the current version in the lineage
 index=-1
+
 for i in "${!LINE_NUMS[@]}";
 do
   if [[ "${LINE_NUMS[$i]}" = "${CHOSEN_LINE}" ]];
@@ -41,15 +42,17 @@ do
 done
 
 # Return the appropriate snippet based on position
-notes=""
+NOTES=""
+
 len=${#LINE_NUMS[@]}
 final=$((len - 1))
 
 if [ $index -lt $final ]; then
   pal=$((index + 1))
-  notes=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),$(( ${LINE_NUMS[pal]} - 1 ))p" CHANGELOG.md)
+
+  NOTES=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),$(( ${LINE_NUMS[pal]} - 1 ))p" CHANGELOG.md)
 else
-  notes=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),\$p" CHANGELOG.md)
+  NOTES=$(sed -n "$(( ${LINE_NUMS[index]} + 1 )),\$p" CHANGELOG.md)
 fi
 
-gh release create "$version" -t "$version" -n "$notes"
+gh release create "$CURR_VERSION" -t "$CURR_VERSION" -n "$NOTES"
