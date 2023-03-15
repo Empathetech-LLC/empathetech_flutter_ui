@@ -10,6 +10,6 @@ jobs:
     name: Verify all files that track the version were updated
     steps:
     - name: Versioning checker
-      uses: empathictech/versioning-checker@2.1.4
+      uses: empathictech/versioning-checker@2.1.6
       with:
         tracked_files: APP_VERSION,CHANGELOG.md,pubspec.yaml
