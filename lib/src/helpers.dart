@@ -1,6 +1,6 @@
 library empathetech_flutter_ui;
 
-import 'widgets.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer';

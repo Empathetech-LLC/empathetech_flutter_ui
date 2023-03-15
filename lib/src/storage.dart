@@ -1,8 +1,6 @@
 library empathetech_flutter_ui;
 
-import 'helpers.dart';
-import 'app-config.dart';
-import 'widgets.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:path/path.dart';
