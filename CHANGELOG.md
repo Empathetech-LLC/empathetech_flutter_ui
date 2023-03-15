@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2023-03-15
+### Updated
+- Base dart file to be an exporter
+
 ## [1.0.4] - 2023-03-14
 ### Updated
 - Release strategy; good ol' fashioned shell scripts >> GitHub Actions (in this use case)
