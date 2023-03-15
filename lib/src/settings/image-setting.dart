@@ -1,9 +1,6 @@
 library empathetech_flutter_ui;
 
-import '../text.dart';
-import '../app-config.dart';
-import '../storage.dart';
-import '../../empathetech_flutter_ui.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,7 +17,7 @@ class ImageSetting extends StatefulWidget {
 
   final String prefsKey;
   final String title;
-  final bool Function(String path) isAssetImage;
+  final bool isAssetImage;
   final void Function() rollCredits;
 
   @override
@@ -127,9 +124,6 @@ class _ImageSettingState extends State<ImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    String path = AppConfig.prefs[widget.prefsKey];
-    bool isAsset = widget.isAssetImage(path);
-
     return ezButton(
       chooseImage,
       widget.rollCredits,
@@ -143,7 +137,7 @@ class _ImageSettingState extends State<ImageSetting> {
             width: widget.prefsKey == backImageKey ? 90 : 75,
             child: currPath == noImageKey
                 ? Icon(PlatformIcons(context).clear)
-                : buildImage(currPath, isAsset, BoxFit.fill),
+                : buildImage(currPath, widget.isAssetImage, BoxFit.fill),
           ),
         ],
       ),
