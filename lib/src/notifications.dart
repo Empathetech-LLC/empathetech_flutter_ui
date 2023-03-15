@@ -20,8 +20,8 @@ const AndroidInitializationSettings androidInitSettings =
 
 // Notification details
 const androidNotifDetails = AndroidNotificationDetails(
-  'signals',
-  'signals',
+  'local',
+  'local',
   importance: Importance.high,
   priority: Priority.high,
   playSound: true,
