@@ -48,7 +48,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                     Navigator.of(context).pop();
                   },
                   () {},
-                  PlatformText(
+                  Text(
                     font,
                     textAlign: TextAlign.center,
                     style: googleStyleAlias(font),
@@ -76,7 +76,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
         ezButton(
           chooseGoogleFont,
           () {},
-          PlatformText(
+          Text(
             'Choose font:\n$currFontFamily',
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -98,7 +98,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
             });
           },
           () {},
-          PlatformText(
+          Text(
             'Reset font\n($defaultFontFamily)',
             textAlign: TextAlign.center,
             maxLines: 2,

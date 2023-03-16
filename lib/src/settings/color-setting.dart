@@ -94,7 +94,7 @@ class _ColorSettingState extends State<ColorSetting> {
                   () {},
                   Icon(Icons.check),
                   Icon(Icons.check),
-                  PlatformText('Yes'),
+                  Text('Yes'),
                 ),
 
                 // No
@@ -103,7 +103,7 @@ class _ColorSettingState extends State<ColorSetting> {
                   () {},
                   Icon(Icons.cancel),
                   Icon(Icons.cancel),
-                  PlatformText('No'),
+                  Text('No'),
                 ),
               ],
             ),
@@ -126,7 +126,7 @@ class _ColorSettingState extends State<ColorSetting> {
         PlatformTextButton(
           padding: EdgeInsets.all(padding),
           color: themeTextColor,
-          child: PlatformText(
+          child: Text(
             widget.message,
             style: getTextStyle(colorSettingStyleKey),
             textAlign: TextAlign.center,

@@ -9,7 +9,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 Widget paddedText(String text, [TextStyle? style, TextAlign? alignment]) {
   return Padding(
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-    child: PlatformText(text, style: style, textAlign: alignment),
+    child: Text(text, style: style, textAlign: alignment),
   );
 }
 
@@ -34,11 +34,11 @@ Widget loadingMessage(BuildContext context, Image image) {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          PlatformText('Loading ', style: style),
+          Text('Loading ', style: style),
           elipsis,
-          PlatformText(' ', style: style),
+          Text(' ', style: style),
           elipsis,
-          PlatformText(' ', style: style),
+          Text(' ', style: style),
           elipsis,
         ],
       ),
@@ -68,14 +68,14 @@ Widget warningCard(BuildContext context, String content) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(PlatformIcons(context).error, color: Colors.amber),
-              PlatformText('WARNING', style: titleStyle),
+              Text('WARNING', style: titleStyle),
               Icon(PlatformIcons(context).error, color: Colors.amber),
             ],
           ),
           Container(height: padding),
 
           // Label
-          PlatformText(content, style: contentStyle, textAlign: TextAlign.center),
+          Text(content, style: contentStyle, textAlign: TextAlign.center),
         ],
       ),
     ),
@@ -128,7 +128,7 @@ void ezDialog(BuildContext context, String? title, List<Widget>? build) {
             : EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
         contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
-      title: title == null ? null : PlatformText(title, textAlign: TextAlign.center),
+      title: title == null ? null : Text(title, textAlign: TextAlign.center),
       actions: build,
     ),
   );
@@ -197,7 +197,7 @@ Widget ezList(String title, List<Widget> body, [bool open = false]) {
     backgroundColor: themeColor,
     textColor: themeTextColor,
     iconColor: themeTextColor,
-    title: PlatformText(title, style: titleStyle),
+    title: Text(title, style: titleStyle),
     children: body,
     initiallyExpanded: open,
     onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),

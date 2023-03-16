@@ -49,7 +49,7 @@ class _ValueSettingState extends State<ValueSetting> {
           ezButton(
             () {},
             () {},
-            PlatformText(
+            Text(
               'Preview: $currValue',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: currValue),
@@ -64,9 +64,9 @@ class _ValueSettingState extends State<ValueSetting> {
           ezCenterScroll(
             [
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, PlatformText('Preview $currValue')),
+              ezButton(() {}, () {}, Text('Preview $currValue')),
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, PlatformText('Preview $currValue')),
+              ezButton(() {}, () {}, Text('Preview $currValue')),
               SizedBox(height: currValue),
             ],
           ),
@@ -86,18 +86,18 @@ class _ValueSettingState extends State<ValueSetting> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // Button 1
-                    ezButton(() {}, () {}, PlatformText('Preview: $currValue')),
+                    ezButton(() {}, () {}, Text('Preview: $currValue')),
                     Container(height: currValue),
 
                     // Button 2
-                    ezButton(() {}, () {}, PlatformText('Preview: $currValue')),
+                    ezButton(() {}, () {}, Text('Preview: $currValue')),
                     Container(height: currValue),
                   ],
                 ),
               ],
             ),
             () {},
-            PlatformText('Press me'),
+            Text('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -110,9 +110,7 @@ class _ValueSettingState extends State<ValueSetting> {
 
   // Build the list of widgets to draw based on the value type
   List<Widget> buildList() {
-    List<Widget> toReturn = [
-      PlatformText(widget.title, style: getTextStyle(subTitleStyleKey))
-    ];
+    List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyleKey))];
 
     toReturn.addAll(preview());
 
@@ -152,7 +150,7 @@ class _ValueSettingState extends State<ValueSetting> {
         () {},
         Icon(PlatformIcons(context).refresh),
         Icon(PlatformIcons(context).refresh),
-        PlatformText('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
+        Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
       ),
       Container(height: buttonSpacer),
     ]);

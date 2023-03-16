@@ -63,7 +63,7 @@ class _ImageSettingState extends State<ImageSetting> {
               () {},
               Icon(PlatformIcons(context).folderOpen),
               Icon(PlatformIcons(context).folderOpen),
-              PlatformText('File'),
+              Text('File'),
             ),
             Container(height: buttonSpacer),
 
@@ -81,7 +81,7 @@ class _ImageSettingState extends State<ImageSetting> {
               () {},
               Icon(PlatformIcons(context).photoCamera),
               Icon(PlatformIcons(context).photoCamera),
-              PlatformText('Camera'),
+              Text('Camera'),
             ),
             Container(height: buttonSpacer),
 
@@ -97,7 +97,7 @@ class _ImageSettingState extends State<ImageSetting> {
               () {},
               Icon(PlatformIcons(context).refresh),
               Icon(PlatformIcons(context).refresh),
-              PlatformText('Reset'),
+              Text('Reset'),
             ),
             Container(height: buttonSpacer),
 
@@ -113,7 +113,7 @@ class _ImageSettingState extends State<ImageSetting> {
               () {},
               Icon(PlatformIcons(context).clear),
               Icon(PlatformIcons(context).clear),
-              PlatformText('Clear'),
+              Text('Clear'),
             ),
             Container(height: buttonSpacer),
           ],
@@ -131,7 +131,7 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          PlatformText(widget.title, style: getTextStyle(imageSettingStyleKey)),
+          Text(widget.title, style: getTextStyle(imageSettingStyleKey)),
           SizedBox(
             height: widget.prefsKey == backImageKey ? 160 : 75,
             width: widget.prefsKey == backImageKey ? 90 : 75,

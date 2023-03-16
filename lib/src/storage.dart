@@ -40,7 +40,7 @@ void colorPicker(
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Done'),
+            Text('Done'),
           ),
           Container(height: dialogSpacer),
 
@@ -50,7 +50,7 @@ void colorPicker(
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('Cancel'),
+            Text('Cancel'),
           ),
           Container(height: dialogSpacer),
         ],
