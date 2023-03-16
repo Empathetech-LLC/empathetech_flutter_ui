@@ -86,7 +86,7 @@ Widget warningCard(BuildContext context, String content) {
 
 // Platform elevated button wrapper
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
-    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+    [ButtonStyle? buttonStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
