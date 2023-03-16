@@ -114,6 +114,7 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
         style: textStyle ?? getTextStyle(buttonStyleKey),
       ),
       color: color,
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
       onPressed: action,
       material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
     ),
