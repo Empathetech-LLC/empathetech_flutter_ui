@@ -129,13 +129,12 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
   );
 }
 
-// Ditto but with an icon
-Widget ezIconButton(
-    void Function() action, void Function() longAction, Icon mIcon, cIcon, Widget body,
+// Platform icon button wrapper
+Widget ezIconButton(void Function() action, void Function() longAction, Widget mIcon,
+    Widget cIcon, Widget body,
     [ButtonStyle? buttonStyle]) {
   return GestureDetector(
     child: PlatformIconButton(
-      icon: body,
       onPressed: action,
 
       // Android button
@@ -147,6 +146,33 @@ Widget ezIconButton(
       cupertinoIcon: cIcon,
     ),
     onLongPress: longAction,
+  );
+}
+
+// Platform elevated button wrapper that requires an icon
+Widget ezTextIconButton(void Function() action, void Function() longAction, String text,
+    Icon mIcon, cIcon, Widget body,
+    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+  // Gather theme data
+  Color color = Color(AppConfig.prefs[buttonColorKey]);
+
+  return GestureDetector(
+    onLongPress: longAction,
+    child: PlatformElevatedButton(
+      onPressed: action,
+      color: color,
+      child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+
+      // Android button
+      material: (context, platform) => MaterialElevatedButtonData(
+        style: buttonStyle,
+        icon: mIcon,
+      ),
+
+      // iOS button
+      cupertino: (context, platform) => CupertinoElevatedButtonData(),
+    ),
   );
 }
 
