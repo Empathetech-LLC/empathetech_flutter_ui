@@ -13,7 +13,7 @@ Widget standardScaffold(
     Widget body,
     DecorationImage? backgroundImage,
     Color backgroundColor,
-    Drawer? androidHamburger,
+    Drawer? hamburger,
     CupertinoNavigationBar? iosNavBar) {
   // Gather theme data
   double margin = AppConfig.prefs[marginKey];
@@ -45,7 +45,7 @@ Widget standardScaffold(
           margin: EdgeInsets.all(margin),
         ),
       ),
-      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
+      material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
       cupertino: (context, platform) =>
           CupertinoPageScaffoldData(navigationBar: iosNavBar),
     ),
@@ -53,15 +53,15 @@ Widget standardScaffold(
 }
 
 // Nav screen: Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body,
-    Drawer? androidHamburger, CupertinoNavigationBar? iosNavBar, PlatformNavBar navBar) {
+Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamburger,
+    CupertinoNavigationBar? iosNavBar, PlatformNavBar navBar) {
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
     child: PlatformScaffold(
       appBar: PlatformAppBar(title: Text(title)),
       body: body,
-      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
+      material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
       cupertino: (context, platform) =>
           CupertinoPageScaffoldData(navigationBar: iosNavBar),
       bottomNavBar: navBar,
