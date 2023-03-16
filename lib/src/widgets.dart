@@ -203,3 +203,27 @@ Widget ezList(String title, List<Widget> body, [bool open = false]) {
     onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
   );
 }
+
+// Form field wrapper
+Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
+    [bool? private,
+    Iterable<String>? autofillHints,
+    String? Function(String?)? validator,
+    AutovalidateMode? autovalidateMode]) {
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  return Form(
+    key: key,
+    child: PlatformTextFormField(
+      cursorColor: themeTextColor,
+      controller: controller,
+      textAlign: TextAlign.center,
+      style: getTextStyle(dialogContentStyleKey),
+      obscureText: private,
+      hintText: hintText,
+      autofillHints: autofillHints,
+      validator: validator,
+      autovalidateMode: autovalidateMode,
+    ),
+  );
+}
