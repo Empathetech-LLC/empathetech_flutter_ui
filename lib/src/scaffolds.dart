@@ -18,6 +18,7 @@ Widget standardScaffold(
   // Gather theme data
   double margin = AppConfig.prefs[marginKey];
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
@@ -26,26 +27,31 @@ Widget standardScaffold(
       appBar: PlatformAppBar(
         title: Text(title, style: getTextStyle(titleStyleKey)),
         backgroundColor: themeColor,
+
+        // Android app bar
         material: (context, platform) => MaterialAppBarData(
           centerTitle: true,
+          iconTheme: IconThemeData(color: themeTextColor),
         ),
+
+        // iOS app bar
+        cupertino: (context, platform) => CupertinoNavigationBarData(),
       ),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          image: backgroundImage,
-        ),
 
-        // Wrapping the passed body in a margin'd container means UI code can always...
-        // ...use the full context width && have consistent margins
-        child: Container(
-          child: body,
-          margin: EdgeInsets.all(margin),
-        ),
+        // Background
+        decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+
+        // Build space
+        child: Container(child: body, margin: EdgeInsets.all(margin)),
       ),
+
+      // Android scaffold
       material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
+
+      // iOS scaffold
       cupertino: (context, platform) =>
           CupertinoPageScaffoldData(navigationBar: iosNavBar),
     ),
@@ -61,10 +67,14 @@ Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamb
     child: PlatformScaffold(
       appBar: PlatformAppBar(title: Text(title)),
       body: body,
+      bottomNavBar: navBar,
+
+      // Android scaffold
       material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
+
+      // iOS scaffold
       cupertino: (context, platform) =>
           CupertinoPageScaffoldData(navigationBar: iosNavBar),
-      bottomNavBar: navBar,
     ),
   );
 }
@@ -77,16 +87,11 @@ Widget navWindow(BuildContext context, Widget body, DecorationImage? backgroundI
   return Container(
     height: screenHeight(context),
     width: screenWidth(context),
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      image: backgroundImage,
-    ),
 
-    // Wrapping the passed body in a margin'd container means UI code can always...
-    // ...use the full context width && have consistent margins
-    child: Container(
-      child: body,
-      margin: EdgeInsets.all(margin),
-    ),
+    // Background
+    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+
+    // Build space
+    child: Container(child: body, margin: EdgeInsets.all(margin)),
   );
 }
