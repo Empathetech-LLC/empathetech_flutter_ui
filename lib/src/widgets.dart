@@ -91,13 +91,18 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
   return GestureDetector(
+    onLongPress: longAction,
     child: PlatformElevatedButton(
       child: body,
       color: color,
       onPressed: action,
+
+      // Android button
       material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
+
+      // iOS button
+      cupertino: (context, platform) => CupertinoElevatedButtonData(),
     ),
-    onLongPress: longAction,
   );
 }
 
@@ -108,17 +113,19 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
   return GestureDetector(
-    child: PlatformElevatedButton(
-      child: Text(
-        text,
-        style: textStyle ?? getTextStyle(buttonStyleKey),
-      ),
-      color: color,
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-      onPressed: action,
-      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
-    ),
     onLongPress: longAction,
+    child: PlatformElevatedButton(
+      onPressed: action,
+      color: color,
+      child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+
+      // Android button
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
+
+      // iOS button
+      cupertino: (context, platform) => CupertinoElevatedButtonData(),
+    ),
   );
 }
 
@@ -128,10 +135,15 @@ Widget ezIconButton(
     [ButtonStyle? buttonStyle]) {
   return GestureDetector(
     child: PlatformIconButton(
-      material: (context, platform) => MaterialIconButtonData(style: buttonStyle),
-      onPressed: action,
       icon: body,
+      onPressed: action,
+
+      // Android button
+      material: (context, platform) => MaterialIconButtonData(style: buttonStyle),
       materialIcon: mIcon,
+
+      // iOS button
+      cupertino: (context, platform) => CupertinoIconButtonData(),
       cupertinoIcon: cIcon,
     ),
     onLongPress: longAction,
@@ -151,16 +163,25 @@ void ezDialog(BuildContext context, String? title, List<Widget>? build) {
     builder: (context) => PlatformAlertDialog(
       title: title == null ? null : Text(title, textAlign: TextAlign.center),
       actions: build,
+
+      // Android dialog
       material: (context, platform) => MaterialAlertDialogData(
+        backgroundColor: backColor,
         insetPadding: EdgeInsets.all(padding),
+
+        // Title
+        titleTextStyle: getTextStyle(dialogTitleStyleKey),
         titlePadding: title == null
             ? EdgeInsets.zero
             : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        backgroundColor: backColor,
-        titleTextStyle: getTextStyle(dialogTitleStyleKey),
+
+        // Content
         contentTextStyle: getTextStyle(dialogContentStyleKey),
+        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
+
+      // iOS dialog
+      cupertino: (context, platform) => CupertinoAlertDialogData(),
     ),
   );
 }
