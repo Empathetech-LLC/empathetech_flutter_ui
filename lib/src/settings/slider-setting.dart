@@ -46,14 +46,11 @@ class _ValueSettingState extends State<ValueSetting> {
       case fontSizeKey:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          ezTextButton(
             () {},
             () {},
-            Text(
-              'Preview: $currValue',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: currValue),
-            ),
+            'Preview: $currValue',
+            TextStyle(fontSize: currValue),
           ),
           Container(height: buttonSpacer),
         ];
@@ -64,9 +61,9 @@ class _ValueSettingState extends State<ValueSetting> {
           ezCenterScroll(
             [
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezTextButton(() {}, () {}, 'Preview $currValue'),
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezTextButton(() {}, () {}, 'Preview $currValue'),
               SizedBox(height: currValue),
             ],
           ),
@@ -76,7 +73,7 @@ class _ValueSettingState extends State<ValueSetting> {
       case dialogSpacingKey:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          ezTextButton(
             () => ezDialog(
               context,
               'Space preview',
@@ -86,18 +83,18 @@ class _ValueSettingState extends State<ValueSetting> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // Button 1
-                    ezButton(() {}, () {}, Text('Preview: $currValue')),
+                    ezTextButton(() {}, () {}, 'Preview: $currValue'),
                     Container(height: currValue),
 
                     // Button 2
-                    ezButton(() {}, () {}, Text('Preview: $currValue')),
+                    ezTextButton(() {}, () {}, 'Preview: $currValue'),
                     Container(height: currValue),
                   ],
                 ),
               ],
             ),
             () {},
-            Text('Press me'),
+            'Press me',
           ),
           Container(height: buttonSpacer),
         ];

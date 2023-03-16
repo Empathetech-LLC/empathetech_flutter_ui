@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class FontFamilySetting extends StatefulWidget {
   const FontFamilySetting({Key? key}) : super(key: key);
@@ -39,7 +38,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Button with the title of the font in that font's style
-                ezButton(
+                ezTextButton(
                   () {
                     AppConfig.preferences.setString(fontFamilyKey, font);
                     setState(() {
@@ -48,11 +47,8 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                     Navigator.of(context).pop();
                   },
                   () {},
-                  Text(
-                    font,
-                    textAlign: TextAlign.center,
-                    style: googleStyleAlias(font),
-                  ),
+                  font,
+                  googleStyleAlias(font),
                 ),
                 Container(
                   height: buttonSpacer,
@@ -73,24 +69,20 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Font picker
-        ezButton(
+        ezTextButton(
           chooseGoogleFont,
           () {},
-          Text(
-            'Choose font:\n$currFontFamily',
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: buttonTextStyle.fontSize,
-              fontFamily: currFontFamily,
-              color: buttonTextStyle.color,
-            ),
+          'Choose font:\n$currFontFamily',
+          TextStyle(
+            fontSize: buttonTextStyle.fontSize,
+            fontFamily: currFontFamily,
+            color: buttonTextStyle.color,
           ),
         ),
         Container(height: buttonSpacer),
 
         // Font reset
-        ezButton(
+        ezTextButton(
           () {
             AppConfig.preferences.remove(fontFamilyKey);
             setState(() {
@@ -98,15 +90,11 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
             });
           },
           () {},
-          Text(
-            'Reset font\n($defaultFontFamily)',
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: buttonTextStyle.fontSize,
-              fontFamily: defaultFontFamily,
-              color: buttonTextStyle.color,
-            ),
+          'Reset font\n($defaultFontFamily)',
+          TextStyle(
+            fontSize: buttonTextStyle.fontSize,
+            fontFamily: defaultFontFamily,
+            color: buttonTextStyle.color,
           ),
         ),
       ],
