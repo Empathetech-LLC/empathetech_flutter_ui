@@ -15,13 +15,21 @@ Widget standardScaffold(
     Color backgroundColor,
     Drawer? androidHamburger,
     CupertinoNavigationBar? iosNavBar) {
+  // Gather theme data
   double margin = AppConfig.prefs[marginKey];
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: PlatformText(title)),
+      appBar: PlatformAppBar(
+        title: Text(title, style: getTextStyle(titleStyleKey)),
+        backgroundColor: themeColor,
+        material: (context, platform) => MaterialAppBarData(
+          centerTitle: true,
+        ),
+      ),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -51,7 +59,7 @@ Widget navScaffold(BuildContext context, String title, Widget body,
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: PlatformText(title)),
+      appBar: PlatformAppBar(title: Text(title)),
       body: body,
       material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
       cupertino: (context, platform) =>
