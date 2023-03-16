@@ -115,21 +115,27 @@ Widget ezIconButton(
 
 // Saves time on standardizing the dialog's padding
 void ezDialog(BuildContext context, String? title, List<Widget>? build) {
+  // Gather theme data
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
+
+  Color backColor = Color(AppConfig.prefs[themeColorKey]);
 
   showPlatformDialog(
     context: context,
     builder: (context) => PlatformAlertDialog(
+      title: title == null ? null : Text(title, textAlign: TextAlign.center),
+      actions: build,
       material: (context, platform) => MaterialAlertDialogData(
         insetPadding: EdgeInsets.all(padding),
         titlePadding: title == null
             ? EdgeInsets.zero
-            : EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
+            : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
         contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        backgroundColor: backColor,
+        titleTextStyle: getTextStyle(dialogTitleStyleKey),
+        contentTextStyle: getTextStyle(dialogContentStyleKey),
       ),
-      title: title == null ? null : Text(title, textAlign: TextAlign.center),
-      actions: build,
     ),
   );
 }
