@@ -87,11 +87,15 @@ Widget warningCard(BuildContext context, String content) {
 // Returns an standard elevated button wrapped in a container
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? buttonStyle]) {
+  // Gather theme data
+  Color color = Color(AppConfig.prefs[buttonColorKey]);
+
   return GestureDetector(
     child: PlatformElevatedButton(
-      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
-      onPressed: action,
       child: body,
+      color: color,
+      onPressed: action,
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
     ),
     onLongPress: longAction,
   );
