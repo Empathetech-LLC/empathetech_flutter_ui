@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -50,7 +51,7 @@ class _ImageSettingState extends State<ImageSetting> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // From file
-            ezIconButton(
+            ezTextIconButton(
               () async {
                 await changeImage(
                   context,
@@ -61,14 +62,14 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(PlatformIcons(context).folderOpen),
-              Icon(PlatformIcons(context).folderOpen),
-              Text('File'),
+              'File',
+              Icon(Icons.folder),
+              Icon(CupertinoIcons.folder),
             ),
             Container(height: buttonSpacer),
 
             // From camera
-            ezIconButton(
+            ezTextIconButton(
               () async {
                 await changeImage(
                   context,
@@ -79,14 +80,14 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(PlatformIcons(context).photoCamera),
-              Icon(PlatformIcons(context).photoCamera),
-              Text('Camera'),
+              'Camera',
+              Icon(Icons.camera),
+              Icon(CupertinoIcons.camera),
             ),
             Container(height: buttonSpacer),
 
             // Reset
-            ezIconButton(
+            ezTextIconButton(
               () {
                 AppConfig.preferences.remove(widget.prefsKey);
                 setState(() {
@@ -95,14 +96,14 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(PlatformIcons(context).refresh),
-              Icon(PlatformIcons(context).refresh),
-              Text('Reset'),
+              'Reset',
+              Icon(Icons.refresh),
+              Icon(CupertinoIcons.refresh),
             ),
             Container(height: buttonSpacer),
 
             // Clear
-            ezIconButton(
+            ezTextIconButton(
               () {
                 AppConfig.preferences.setString(widget.prefsKey, noImageKey);
                 setState(() {
@@ -111,9 +112,9 @@ class _ImageSettingState extends State<ImageSetting> {
                 Navigator.of(context).pop();
               },
               () {},
-              Icon(PlatformIcons(context).clear),
-              Icon(PlatformIcons(context).clear),
-              Text('Clear'),
+              'Clear',
+              Icon(Icons.clear),
+              Icon(CupertinoIcons.clear),
             ),
             Container(height: buttonSpacer),
           ],

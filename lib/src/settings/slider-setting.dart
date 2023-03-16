@@ -137,7 +137,7 @@ class _ValueSettingState extends State<ValueSetting> {
       Container(height: buttonSpacer),
 
       // Reset button
-      ezIconButton(
+      ezTextIconButton(
         () {
           AppConfig.preferences.remove(widget.prefsKey);
           setState(() {
@@ -145,9 +145,9 @@ class _ValueSettingState extends State<ValueSetting> {
           });
         },
         () {},
-        Icon(PlatformIcons(context).refresh),
-        Icon(PlatformIcons(context).refresh),
-        Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
+        'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
+        Icon(Icons.refresh),
+        Icon(CupertinoIcons.refresh),
       ),
       Container(height: buttonSpacer),
     ]);

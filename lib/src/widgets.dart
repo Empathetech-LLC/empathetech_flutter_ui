@@ -130,8 +130,8 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
 }
 
 // Platform icon button wrapper
-Widget ezIconButton(void Function() action, void Function() longAction, Widget mIcon,
-    Widget cIcon, Widget body,
+Widget ezIconButton(
+    void Function() action, void Function() longAction, Icon mIcon, Icon cIcon,
     [ButtonStyle? buttonStyle]) {
   return GestureDetector(
     child: PlatformIconButton(
@@ -151,7 +151,7 @@ Widget ezIconButton(void Function() action, void Function() longAction, Widget m
 
 // Platform elevated button wrapper that requires an icon
 Widget ezTextIconButton(void Function() action, void Function() longAction, String text,
-    Icon mIcon, cIcon, Widget body,
+    Icon mIcon, Icon cIcon,
     [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);

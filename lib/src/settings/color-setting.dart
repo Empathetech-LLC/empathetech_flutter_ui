@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSetting extends StatefulWidget {
@@ -80,7 +81,7 @@ class _ColorSettingState extends State<ColorSetting> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Yes
-                ezIconButton(
+                ezTextIconButton(
                   () {
                     // Remove the users setting
                     AppConfig.preferences.remove(widget.toControl);
@@ -92,18 +93,18 @@ class _ColorSettingState extends State<ColorSetting> {
                     Navigator.of(context).pop();
                   },
                   () {},
+                  'Yes',
                   Icon(Icons.check),
-                  Icon(Icons.check),
-                  Text('Yes'),
+                  Icon(CupertinoIcons.check_mark),
                 ),
 
                 // No
-                ezIconButton(
+                ezTextIconButton(
                   () => Navigator.of(context).pop(),
                   () {},
+                  'No',
                   Icon(Icons.cancel),
-                  Icon(Icons.cancel),
-                  Text('No'),
+                  Icon(CupertinoIcons.xmark),
                 ),
               ],
             ),

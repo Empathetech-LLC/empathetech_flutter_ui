@@ -5,10 +5,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Colors //////
 
@@ -35,22 +35,22 @@ void colorPicker(
           Container(height: dialogSpacer),
 
           // Apply
-          ezIconButton(
+          ezTextIconButton(
             apply,
             () {},
+            'Done',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Done'),
+            Icon(CupertinoIcons.check_mark),
           ),
           Container(height: dialogSpacer),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             cancel,
             () {},
+            'Cancel',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('Cancel'),
+            Icon(CupertinoIcons.xmark),
           ),
           Container(height: dialogSpacer),
         ],
