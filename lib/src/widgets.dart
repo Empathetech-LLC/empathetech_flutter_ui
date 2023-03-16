@@ -84,15 +84,35 @@ Widget warningCard(BuildContext context, String content) {
 
 //// Interactive widgets
 
-// Returns an standard elevated button wrapped in a container
+// Platform elevated button wrapper
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
-    [ButtonStyle? buttonStyle]) {
+    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
   return GestureDetector(
     child: PlatformElevatedButton(
       child: body,
+      color: color,
+      onPressed: action,
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
+    ),
+    onLongPress: longAction,
+  );
+}
+
+// Platform elevated button wrapper, only takes text as a body
+Widget ezTextButton(void Function() action, void Function() longAction, String text,
+    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+  // Gather theme data
+  Color color = Color(AppConfig.prefs[buttonColorKey]);
+
+  return GestureDetector(
+    child: PlatformElevatedButton(
+      child: Text(
+        text,
+        style: textStyle ?? getTextStyle(buttonStyleKey),
+      ),
       color: color,
       onPressed: action,
       material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
