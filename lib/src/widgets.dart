@@ -336,7 +336,7 @@ Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function
       ezTextIconButton(onConfirm, () {}, confirmMsg, confirmIcon),
 
       // Spacer
-      Container(width: AppConfig.prefs[buttonSpacingKey]),
+      Container(width: AppConfig.prefs[paddingKey]),
 
       // Deny
       ezTextIconButton(onDeny, () {}, denyMsg, denyIcon),
