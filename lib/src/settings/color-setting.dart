@@ -75,38 +75,22 @@ class _ColorSettingState extends State<ColorSetting> {
             Container(width: 75, height: 75, color: resetColor),
             Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-            // Yes/no buttons
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Yes
-                ezTextIconButton(
-                  () {
-                    // Remove the users setting
-                    AppConfig.preferences.remove(widget.toControl);
+            ezYesNoRow(
+              context,
+              // On yes
+              () {
+                // Remove the users setting
+                AppConfig.preferences.remove(widget.toControl);
 
-                    setState(() {
-                      currColor = resetColor;
-                    });
+                setState(() {
+                  currColor = resetColor;
+                });
 
-                    Navigator.of(context).pop();
-                  },
-                  () {},
-                  'Yes',
-                  Icon(Icons.check),
-                  Icon(CupertinoIcons.check_mark),
-                ),
+                Navigator.of(context).pop();
+              },
 
-                // No
-                ezTextIconButton(
-                  () => Navigator.of(context).pop(),
-                  () {},
-                  'No',
-                  Icon(Icons.cancel),
-                  Icon(CupertinoIcons.xmark),
-                ),
-              ],
+              // On no
+              () => Navigator.of(context).pop(),
             ),
           ],
         )
