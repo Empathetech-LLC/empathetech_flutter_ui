@@ -141,6 +141,7 @@ Widget ezTextIconButton(
     [TextStyle? textStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
+  double padding = AppConfig.prefs[paddingKey];
 
   return GestureDetector(
     onLongPress: longAction,
@@ -148,10 +149,11 @@ Widget ezTextIconButton(
       onPressed: action,
       color: color,
       child: Row(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           icon,
+          Container(width: padding),
           Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
         ],
       ),
