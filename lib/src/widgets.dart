@@ -270,6 +270,7 @@ Widget ezList(String title, List<Widget> body, [bool open = false]) {
 
 // Form field wrapper
 Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
+    MaterialTextFormFieldData material, CupertinoTextFormFieldData cupertino,
     [bool? private,
     Iterable<String>? autofillHints,
     String? Function(String?)? validator,
@@ -288,6 +289,8 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
       autofillHints: autofillHints,
       validator: validator,
       autovalidateMode: autovalidateMode,
+      material: (context, platform) => material,
+      cupertino: (context, platform) => cupertino,
     ),
   );
 }
