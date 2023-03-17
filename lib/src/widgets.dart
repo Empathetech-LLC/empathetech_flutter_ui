@@ -274,19 +274,27 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
     Iterable<String>? autofillHints,
     String? Function(String?)? validator,
     AutovalidateMode? autovalidateMode]) {
+  // Gather theme data
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  return PlatformTextFormField(
-    key: key,
-    cursorColor: themeTextColor,
-    controller: controller,
-    textAlign: TextAlign.center,
-    style: getTextStyle(dialogContentStyleKey),
-    obscureText: private,
-    hintText: hintText,
-    autofillHints: autofillHints,
-    validator: validator,
-    autovalidateMode: autovalidateMode,
+  return Container(
+    decoration: BoxDecoration(border: Border.all(color: buttonColor)),
+    child: PlatformTextFormField(
+      key: key,
+      cursorColor: themeTextColor,
+      controller: controller,
+      textAlign: TextAlign.center,
+      style: getTextStyle(dialogContentStyleKey),
+      obscureText: private,
+      hintText: hintText,
+      autofillHints: autofillHints,
+      validator: validator,
+      autovalidateMode: autovalidateMode,
+      material: (context, platform) => MaterialTextFormFieldData(
+        decoration: InputDecoration(hintStyle: getTextStyle(dialogContentStyleKey)),
+      ),
+    ),
   );
 }
 
