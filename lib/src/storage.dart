@@ -24,27 +24,25 @@ void colorPicker(
   ezDialog(
     context,
     'Pick a color!',
-    [
-      ezScrollView(
-        [
-          // Main event
-          ColorPicker(
-            pickerColor: startColor,
-            onColorChanged: onColorChange,
-          ),
-          Container(height: dialogSpacer),
+    ezScrollView(
+      [
+        // Main event
+        ColorPicker(
+          pickerColor: startColor,
+          onColorChanged: onColorChange,
+        ),
+        Container(height: dialogSpacer),
 
-          // Apply
-          ezYesNoCol(
-            context,
-            apply,
-            cancel,
-            'Apply',
-            'Cancel',
-          ),
-        ],
-      ),
-    ],
+        // Apply
+        ezYesNoCol(
+          context,
+          apply,
+          cancel,
+          'Apply',
+          'Cancel',
+        ),
+      ],
+    ),
   );
 }
 

@@ -33,31 +33,34 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       'Choose a font',
 
       // Children
-      myGoogleFonts
-          .map(
-            (String font) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Button with the title of the font in that font's style
-                ezTextButton(
-                  () {
-                    AppConfig.preferences.setString(fontFamilyKey, font);
-                    setState(() {
-                      currFontFamily = googleStyleAlias(font).fontFamily!;
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  () {},
-                  font,
-                  googleStyleAlias(font),
-                ),
-                Container(
-                  height: buttonSpacer,
-                ),
-              ],
-            ),
-          )
-          .toList(),
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: myGoogleFonts
+            .map(
+              (String font) => Column(
+                children: [
+                  // Button with the title of the font in that font's style
+                  ezTextButton(
+                    () {
+                      AppConfig.preferences.setString(fontFamilyKey, font);
+                      setState(() {
+                        currFontFamily = googleStyleAlias(font).fontFamily!;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                    () {},
+                    font,
+                    googleStyleAlias(font),
+                  ),
+                  Container(
+                    height: buttonSpacer,
+                  ),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

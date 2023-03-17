@@ -66,35 +66,33 @@ class _ColorSettingState extends State<ColorSetting> {
     ezDialog(
       context,
       'Reset to...',
-      [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Color preview
-            Container(width: 75, height: 75, color: resetColor),
-            Container(height: AppConfig.prefs[dialogSpacingKey]),
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // Color preview
+          Container(width: 75, height: 75, color: resetColor),
+          Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-            ezYesNoRow(
-              context,
-              // On yes
-              () {
-                // Remove the users setting
-                AppConfig.preferences.remove(widget.toControl);
+          ezYesNoRow(
+            context,
+            // On yes
+            () {
+              // Remove the users setting
+              AppConfig.preferences.remove(widget.toControl);
 
-                setState(() {
-                  currColor = resetColor;
-                });
+              setState(() {
+                currColor = resetColor;
+              });
 
-                Navigator.of(context).pop();
-              },
+              Navigator.of(context).pop();
+            },
 
-              // On no
-              () => Navigator.of(context).pop(),
-            ),
-          ],
-        )
-      ],
+            // On no
+            () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
     );
   }
 

@@ -45,77 +45,76 @@ class _ImageSettingState extends State<ImageSetting> {
       'Update background',
 
       // Body
-      [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // From file
-            ezTextIconButton(
-              () async {
-                await changeImage(
-                  context,
-                  widget.prefsKey,
-                  ImageSource.gallery,
-                );
 
-                Navigator.of(context).pop();
-              },
-              () {},
-              'File',
-              Icon(PlatformIcons(context).folder),
-            ),
-            Container(height: buttonSpacer),
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // From file
+          ezTextIconButton(
+            () async {
+              await changeImage(
+                context,
+                widget.prefsKey,
+                ImageSource.gallery,
+              );
 
-            // From camera
-            ezTextIconButton(
-              () async {
-                await changeImage(
-                  context,
-                  widget.prefsKey,
-                  ImageSource.camera,
-                );
+              Navigator.of(context).pop();
+            },
+            () {},
+            'File',
+            Icon(PlatformIcons(context).folder),
+          ),
+          Container(height: buttonSpacer),
 
-                Navigator.of(context).pop();
-              },
-              () {},
-              'Camera',
-              Icon(PlatformIcons(context).photoCamera),
-            ),
-            Container(height: buttonSpacer),
+          // From camera
+          ezTextIconButton(
+            () async {
+              await changeImage(
+                context,
+                widget.prefsKey,
+                ImageSource.camera,
+              );
 
-            // Reset
-            ezTextIconButton(
-              () {
-                AppConfig.preferences.remove(widget.prefsKey);
-                setState(() {
-                  currPath = AppConfig.defaults[widget.prefsKey];
-                });
-                Navigator.of(context).pop();
-              },
-              () {},
-              'Reset',
-              Icon(PlatformIcons(context).refresh),
-            ),
-            Container(height: buttonSpacer),
+              Navigator.of(context).pop();
+            },
+            () {},
+            'Camera',
+            Icon(PlatformIcons(context).photoCamera),
+          ),
+          Container(height: buttonSpacer),
 
-            // Clear
-            ezTextIconButton(
-              () {
-                AppConfig.preferences.setString(widget.prefsKey, noImageKey);
-                setState(() {
-                  currPath = noImageKey;
-                });
-                Navigator.of(context).pop();
-              },
-              () {},
-              'Clear',
-              Icon(PlatformIcons(context).clear),
-            ),
-            Container(height: buttonSpacer),
-          ],
-        ),
-      ],
+          // Reset
+          ezTextIconButton(
+            () {
+              AppConfig.preferences.remove(widget.prefsKey);
+              setState(() {
+                currPath = AppConfig.defaults[widget.prefsKey];
+              });
+              Navigator.of(context).pop();
+            },
+            () {},
+            'Reset',
+            Icon(PlatformIcons(context).refresh),
+          ),
+          Container(height: buttonSpacer),
+
+          // Clear
+          ezTextIconButton(
+            () {
+              AppConfig.preferences.setString(widget.prefsKey, noImageKey);
+              setState(() {
+                currPath = noImageKey;
+              });
+              Navigator.of(context).pop();
+            },
+            () {},
+            'Clear',
+            Icon(PlatformIcons(context).clear),
+          ),
+          Container(height: buttonSpacer),
+        ],
+      ),
     );
   }
 
@@ -123,7 +122,7 @@ class _ImageSettingState extends State<ImageSetting> {
   Widget build(BuildContext context) {
     return ezButton(
       chooseImage,
-      () => ezDialog(context, 'Credit to:', [paddedText(widget.credits)]),
+      () => ezDialog(context, 'Credit to:', paddedText(widget.credits)),
       Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

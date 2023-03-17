@@ -38,5 +38,5 @@ Color getContrastColor(Color background) {
 // Log the passed message and display an alert dialog for the user
 void popNLog(BuildContext context, String message) {
   log(message);
-  ezDialog(context, 'Attention:', [paddedText(message)]);
+  ezDialog(context, 'Attention:', paddedText(message));
 }

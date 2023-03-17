@@ -77,21 +77,19 @@ class _ValueSettingState extends State<ValueSetting> {
             () => ezDialog(
               context,
               'Space preview',
-              [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Button 1
-                    ezTextButton(() {}, () {}, 'Preview: $currValue'),
-                    Container(height: currValue),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Button 1
+                  ezTextButton(() {}, () {}, 'Preview: $currValue'),
+                  Container(height: currValue),
 
-                    // Button 2
-                    ezTextButton(() {}, () {}, 'Preview: $currValue'),
-                    Container(height: currValue),
-                  ],
-                ),
-              ],
+                  // Button 2
+                  ezTextButton(() {}, () {}, 'Preview: $currValue'),
+                  Container(height: currValue),
+                ],
+              ),
             ),
             () {},
             'Press me',
