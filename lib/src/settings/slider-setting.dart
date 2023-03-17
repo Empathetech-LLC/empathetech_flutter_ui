@@ -146,8 +146,7 @@ class _ValueSettingState extends State<ValueSetting> {
         },
         () {},
         'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
-        Icon(Icons.refresh),
-        Icon(CupertinoIcons.refresh),
+        Icon(PlatformIcons(context).refresh),
       ),
       Container(height: buttonSpacer),
     ]);
