@@ -163,7 +163,7 @@ Widget ezTextIconButton(
 }
 
 // Saves time on standardizing the dialog's padding
-void ezDialog(BuildContext context, String? title, List<Widget>? build) {
+void ezDialog(BuildContext context, String? title, Widget build) {
   // Gather theme data
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
@@ -174,7 +174,7 @@ void ezDialog(BuildContext context, String? title, List<Widget>? build) {
     context: context,
     builder: (context) => PlatformAlertDialog(
       title: title == null ? null : Text(title, textAlign: TextAlign.center),
-      actions: build,
+      content: build,
 
       // Android dialog
       material: (context, platform) => MaterialAlertDialogData(
