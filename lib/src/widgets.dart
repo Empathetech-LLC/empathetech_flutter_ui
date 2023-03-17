@@ -276,19 +276,17 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
     AutovalidateMode? autovalidateMode]) {
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  return Form(
+  return PlatformTextFormField(
     key: key,
-    child: PlatformTextFormField(
-      cursorColor: themeTextColor,
-      controller: controller,
-      textAlign: TextAlign.center,
-      style: getTextStyle(dialogContentStyleKey),
-      obscureText: private,
-      hintText: hintText,
-      autofillHints: autofillHints,
-      validator: validator,
-      autovalidateMode: autovalidateMode,
-    ),
+    cursorColor: themeTextColor,
+    controller: controller,
+    textAlign: TextAlign.center,
+    style: getTextStyle(dialogContentStyleKey),
+    obscureText: private,
+    hintText: hintText,
+    autofillHints: autofillHints,
+    validator: validator,
+    autovalidateMode: autovalidateMode,
   );
 }
 
