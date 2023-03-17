@@ -28,13 +28,13 @@ Widget standardScaffold(
         title: Text(title, style: getTextStyle(titleStyleKey)),
         backgroundColor: themeColor,
 
-        // Android app bar
+        // Android config
         material: (context, platform) => MaterialAppBarData(
           centerTitle: true,
           iconTheme: IconThemeData(color: themeTextColor),
         ),
 
-        // iOS app bar
+        // iOS config
         cupertino: (context, platform) => CupertinoNavigationBarData(),
       ),
       body: Container(
@@ -58,18 +58,41 @@ Widget standardScaffold(
 }
 
 // Nav screen: Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamburger,
-    CupertinoNavigationBar? iosNavBar, PlatformNavBar navBar) {
+Widget navScaffold(
+    BuildContext context,
+    String title,
+    Widget body,
+    MaterialScaffoldData androidConfig,
+    CupertinoNavigationBar? iosNavBar,
+    PlatformNavBar navBar) {
+  // Gather theme data
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(title)),
+      appBar: PlatformAppBar(
+        title: Text(title, style: getTextStyle(titleStyleKey)),
+        backgroundColor: themeColor,
+
+        // Android config
+        material: (context, platform) => MaterialAppBarData(
+          centerTitle: true,
+          iconTheme: IconThemeData(color: themeTextColor),
+        ),
+
+        // iOS config
+        cupertino: (context, platform) => CupertinoNavigationBarData(),
+      ),
+
       body: body,
+
       bottomNavBar: navBar,
 
-      // Android scaffold
-      material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
+      // Android config
+      material: (context, platform) => androidConfig,
 
       // iOS scaffold
       cupertino: (context, platform) =>
