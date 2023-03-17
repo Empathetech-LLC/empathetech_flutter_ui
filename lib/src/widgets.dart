@@ -1,6 +1,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 //// Static widgets
@@ -279,5 +280,57 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
       validator: validator,
       autovalidateMode: autovalidateMode,
     ),
+  );
+}
+
+// Wrapper for quickly making confirm/deny button in a column
+Widget ezYesNoCol(BuildContext context, void Function() onConfirm, void Function() onDeny,
+    [String confirmMsg = 'Yes',
+    String denyMsg = 'No',
+    Icon? customConfirm,
+    Icon? customDeny]) {
+  // Gather theme data
+  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      // Confirm
+      ezTextIconButton(onConfirm, () {}, confirmMsg, confirmIcon),
+
+      // Spacer
+      Container(height: AppConfig.prefs[buttonSpacingKey]),
+
+      // Deny
+      ezTextIconButton(onDeny, () {}, denyMsg, denyIcon),
+    ],
+  );
+}
+
+// Wrapper for quickly making confirm/deny button in a row
+Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function() onDeny,
+    [String confirmMsg = 'Yes',
+    String denyMsg = 'No',
+    Icon? customConfirm,
+    Icon? customDeny]) {
+  // Gather theme data
+  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      // Confirm
+      ezTextIconButton(onConfirm, () {}, confirmMsg, confirmIcon),
+
+      // Spacer
+      Container(width: AppConfig.prefs[buttonSpacingKey]),
+
+      // Deny
+      ezTextIconButton(onDeny, () {}, denyMsg, denyIcon),
+    ],
   );
 }
