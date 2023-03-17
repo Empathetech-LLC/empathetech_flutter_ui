@@ -341,3 +341,12 @@ Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function
     ],
   );
 }
+
+// Platform switch wrapper
+Widget ezSwitch(BuildContext context, bool value, void Function(bool)? onChanged) {
+  return PlatformSwitch(
+    value: value,
+    onChanged: onChanged,
+    activeColor: Color(AppConfig.prefs[buttonColorKey]),
+  );
+}
