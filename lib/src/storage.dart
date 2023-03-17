@@ -35,24 +35,13 @@ void colorPicker(
           Container(height: dialogSpacer),
 
           // Apply
-          ezTextIconButton(
+          ezYesNoCol(
+            context,
             apply,
-            () {},
-            'Done',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
-          Container(height: dialogSpacer),
-
-          // Cancel
-          ezTextIconButton(
             cancel,
-            () {},
+            'Apply',
             'Cancel',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
           ),
-          Container(height: dialogSpacer),
         ],
       ),
     ],
