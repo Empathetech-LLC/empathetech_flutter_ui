@@ -85,8 +85,7 @@ Widget warningCard(BuildContext context, String content) {
 //// Interactive widgets
 
 // Platform elevated button wrapper
-Widget ezButton(void Function() action, void Function() longAction, Widget body,
-    [ButtonStyle? buttonStyle]) {
+Widget ezButton(void Function() action, void Function() longAction, Widget body) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -96,19 +95,13 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
       child: body,
       color: color,
       onPressed: action,
-
-      // Android button
-      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
-
-      // iOS button
-      cupertino: (context, platform) => CupertinoElevatedButtonData(),
     ),
   );
 }
 
 // Platform elevated button wrapper, only takes text as a body
 Widget ezTextButton(void Function() action, void Function() longAction, String text,
-    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+    [TextStyle? textStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -119,40 +112,25 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
       color: color,
       child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
       padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-
-      // Android button
-      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
-
-      // iOS button
-      cupertino: (context, platform) => CupertinoElevatedButtonData(),
     ),
   );
 }
 
 // Platform icon button wrapper
-Widget ezIconButton(
-    void Function() action, void Function() longAction, Icon mIcon, Icon cIcon,
-    [ButtonStyle? buttonStyle]) {
+Widget ezIconButton(void Function() action, void Function() longAction, Icon icon) {
   return GestureDetector(
     child: PlatformIconButton(
+      icon: icon,
       onPressed: action,
-
-      // Android button
-      material: (context, platform) => MaterialIconButtonData(style: buttonStyle),
-      materialIcon: mIcon,
-
-      // iOS button
-      cupertino: (context, platform) => CupertinoIconButtonData(),
-      cupertinoIcon: cIcon,
     ),
     onLongPress: longAction,
   );
 }
 
 // Platform elevated button wrapper that requires an icon
-Widget ezTextIconButton(void Function() action, void Function() longAction, String text,
-    Icon mIcon, Icon cIcon,
-    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+Widget ezTextIconButton(
+    void Function() action, void Function() longAction, String text, Icon icon,
+    [TextStyle? textStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -161,17 +139,15 @@ Widget ezTextIconButton(void Function() action, void Function() longAction, Stri
     child: PlatformElevatedButton(
       onPressed: action,
       color: color,
-      child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-
-      // Android button
-      material: (context, platform) => MaterialElevatedButtonData(
-        style: buttonStyle,
-        icon: mIcon,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          icon,
+          Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+        ],
       ),
-
-      // iOS button
-      cupertino: (context, platform) => CupertinoElevatedButtonData(),
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
     ),
   );
 }
