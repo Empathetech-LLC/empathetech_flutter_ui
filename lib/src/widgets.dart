@@ -86,7 +86,8 @@ Widget warningCard(BuildContext context, String content) {
 //// Interactive widgets
 
 // Platform elevated button wrapper
-Widget ezButton(void Function() action, void Function() longAction, Widget body) {
+Widget ezButton(void Function() action, void Function() longAction, Widget body,
+    [ButtonStyle? buttonStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -96,13 +97,16 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body)
       child: body,
       color: color,
       onPressed: action,
+
+      // Android config
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
     ),
   );
 }
 
 // Platform elevated button wrapper, only takes text as a body
 Widget ezTextButton(void Function() action, void Function() longAction, String text,
-    [TextStyle? textStyle]) {
+    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -113,6 +117,9 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
       color: color,
       child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
       padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+
+      // Android config
+      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
     ),
   );
 }
