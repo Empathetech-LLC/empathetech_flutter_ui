@@ -13,7 +13,7 @@ Widget standardScaffold(
     Widget body,
     DecorationImage? backgroundImage,
     Color backgroundColor,
-    Drawer? hamburger,
+    MaterialScaffoldData androidConfig,
     CupertinoNavigationBar? iosNavBar) {
   // Gather theme data
   double margin = AppConfig.prefs[marginKey];
@@ -48,8 +48,7 @@ Widget standardScaffold(
         child: Container(child: body, margin: EdgeInsets.all(margin)),
       ),
 
-      // Android scaffold
-      material: (context, platform) => MaterialScaffoldData(endDrawer: hamburger),
+      material: (context, platform) => androidConfig,
 
       // iOS scaffold
       cupertino: (context, platform) =>
