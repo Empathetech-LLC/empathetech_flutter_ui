@@ -57,11 +57,20 @@ Widget standardScaffold(
 }
 
 // Nav screen: Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body, PlatformNavBar navBar,
-    MaterialScaffoldData androidConfig, CupertinoPageScaffoldData iosConfig) {
+Widget navScaffold(
+    BuildContext context,
+    String title,
+    Widget body,
+    int? index,
+    void Function(int)? onChanged,
+    List<BottomNavigationBarItem>? items,
+    MaterialScaffoldData androidConfig,
+    CupertinoPageScaffoldData iosConfig) {
   // Gather theme data
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
@@ -83,12 +92,29 @@ Widget navScaffold(BuildContext context, String title, Widget body, PlatformNavB
 
       body: body,
 
-      bottomNavBar: navBar,
+      bottomNavBar: PlatformNavBar(
+        currentIndex: index,
+        itemChanged: onChanged,
+        items: items,
 
-      // Android config
+        // Android nav bar config
+        material: (context, platform) => MaterialNavBarData(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: themeColor,
+          selectedItemColor: buttonColor,
+          selectedIconTheme: IconThemeData(color: buttonColor),
+          unselectedItemColor: themeTextColor,
+          unselectedIconTheme: IconThemeData(color: themeTextColor),
+        ),
+
+        // iOS nav bar config
+        cupertino: (context, platform) => CupertinoTabBarData(),
+      ),
+
+      // Android scaffold config
       material: (context, platform) => androidConfig,
 
-      // iOS scaffold
+      // iOS scaffold config
       cupertino: (context, platform) => iosConfig,
     ),
   );
