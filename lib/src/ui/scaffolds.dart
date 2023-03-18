@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Standard full screen scaffold
-Widget standardScaffold(
+/// Builds a [PlatformScaffold] from the passed values that will
+/// automatically update alongside [AppConfig]
+Widget ezScaffold(
     BuildContext context,
     String title,
     Widget body,
@@ -15,28 +16,12 @@ Widget standardScaffold(
     Color backgroundColor,
     MaterialScaffoldData androidConfig,
     CupertinoPageScaffoldData iosConfig) {
-  // Gather theme data
-  double margin = AppConfig.prefs[marginKey];
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-
-  // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
+    // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
+
     child: PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: Text(title, style: getTextStyle(titleStyleKey)),
-        backgroundColor: themeColor,
-
-        // Android config
-        material: (context, platform) => MaterialAppBarData(
-          centerTitle: true,
-          iconTheme: IconThemeData(color: themeTextColor),
-        ),
-
-        // iOS config
-        cupertino: (context, platform) => CupertinoNavigationBarData(),
-      ),
+      appBar: PlatformAppBar(title: Text(title)),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -45,19 +30,19 @@ Widget standardScaffold(
         decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
 
         // Build space
-        child: Container(child: body, margin: EdgeInsets.all(margin)),
+        child: Container(child: body, margin: EdgeInsets.all(AppConfig.prefs[marginKey])),
       ),
 
+      // Platform specific configurations
       material: (context, platform) => androidConfig,
-
-      // iOS scaffold
       cupertino: (context, platform) => iosConfig,
     ),
   );
 }
 
-// Nav screen: Outer screen
-Widget navScaffold(
+/// Builds a [PlatformScaffold] with a [BottomNavigationBar]/[CupertinoTabBar]
+/// from the passed values that will automatically update alongside [AppConfig]
+Widget ezNavScaffold(
     BuildContext context,
     String title,
     Widget body,
@@ -66,29 +51,12 @@ Widget navScaffold(
     List<BottomNavigationBarItem>? items,
     MaterialScaffoldData androidConfig,
     CupertinoPageScaffoldData iosConfig) {
-  // Gather theme data
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-
-  // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
+    // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
+
     child: PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: Text(title, style: getTextStyle(titleStyleKey)),
-        backgroundColor: themeColor,
-
-        // Android config
-        material: (context, platform) => MaterialAppBarData(
-          centerTitle: true,
-          iconTheme: IconThemeData(color: themeTextColor),
-        ),
-
-        // iOS config
-        cupertino: (context, platform) => CupertinoNavigationBarData(),
-      ),
+      appBar: PlatformAppBar(title: Text(title)),
 
       body: body,
 
@@ -97,30 +65,19 @@ Widget navScaffold(
         itemChanged: onChanged,
         items: items,
 
-        // Android nav bar config
-        material: (context, platform) => MaterialNavBarData(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: themeColor,
-          selectedItemColor: buttonColor,
-          selectedIconTheme: IconThemeData(color: buttonColor),
-          unselectedItemColor: themeTextColor,
-          unselectedIconTheme: IconThemeData(color: themeTextColor),
-        ),
-
-        // iOS nav bar config
+        // Platform specific configurations
+        material: (context, platform) => MaterialNavBarData(),
         cupertino: (context, platform) => CupertinoTabBarData(),
       ),
 
-      // Android scaffold config
+      // Platform specific configurations
       material: (context, platform) => androidConfig,
-
-      // iOS scaffold config
       cupertino: (context, platform) => iosConfig,
     ),
   );
 }
 
-// Nav screen: Inner screen
+/// Builds the "main screen" for and pages built with [ezNavScaffold]
 Widget navWindow(BuildContext context, Widget body, DecorationImage? backgroundImage,
     Color backgroundColor) {
   double margin = AppConfig.prefs[marginKey];

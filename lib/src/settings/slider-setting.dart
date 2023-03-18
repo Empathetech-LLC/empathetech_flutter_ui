@@ -130,7 +130,6 @@ class _ValueSettingState extends State<ValueSetting> {
             AppConfig.preferences.setDouble(widget.prefsKey, value);
           }
         },
-        material: (context, platform) => MaterialSliderData(label: currValue.toString()),
       ),
       Container(height: buttonSpacer),
 

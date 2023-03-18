@@ -291,9 +291,6 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
       autofillHints: autofillHints,
       validator: validator,
       autovalidateMode: autovalidateMode,
-      material: (context, platform) => MaterialTextFormFieldData(
-        decoration: InputDecoration(hintStyle: getTextStyle(dialogContentStyleKey)),
-      ),
     ),
   );
 }
