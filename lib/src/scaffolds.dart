@@ -58,13 +58,8 @@ Widget standardScaffold(
 }
 
 // Nav screen: Outer screen
-Widget navScaffold(
-    BuildContext context,
-    String title,
-    Widget body,
-    MaterialScaffoldData androidConfig,
-    CupertinoNavigationBar? iosNavBar,
-    PlatformNavBar navBar) {
+Widget navScaffold(BuildContext context, String title, Widget body, PlatformNavBar navBar,
+    MaterialScaffoldData androidConfig, CupertinoNavigationBar? iosNavBar) {
   // Gather theme data
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
