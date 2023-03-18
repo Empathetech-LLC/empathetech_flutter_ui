@@ -35,7 +35,7 @@ Color getContrastColor(Color background) {
   return (((r * 0.299) + (g * 0.587) + (b * 0.114)) >= 150) ? Colors.black : Colors.white;
 }
 
-// Log the passed message and display an alert dialog for the user
+/// Log the passed message and display an alert dialog for the user
 void popNLog(BuildContext context, String message) {
   log(message);
   ezDialog(context, 'Attention:', paddedText(message));
