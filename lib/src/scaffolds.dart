@@ -14,7 +14,7 @@ Widget standardScaffold(
     DecorationImage? backgroundImage,
     Color backgroundColor,
     MaterialScaffoldData androidConfig,
-    CupertinoNavigationBar? iosNavBar) {
+    CupertinoPageScaffoldData iosConfig) {
   // Gather theme data
   double margin = AppConfig.prefs[marginKey];
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
@@ -51,15 +51,14 @@ Widget standardScaffold(
       material: (context, platform) => androidConfig,
 
       // iOS scaffold
-      cupertino: (context, platform) =>
-          CupertinoPageScaffoldData(navigationBar: iosNavBar),
+      cupertino: (context, platform) => iosConfig,
     ),
   );
 }
 
 // Nav screen: Outer screen
 Widget navScaffold(BuildContext context, String title, Widget body, PlatformNavBar navBar,
-    MaterialScaffoldData androidConfig, CupertinoNavigationBar? iosNavBar) {
+    MaterialScaffoldData androidConfig, CupertinoPageScaffoldData iosConfig) {
   // Gather theme data
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
@@ -90,8 +89,7 @@ Widget navScaffold(BuildContext context, String title, Widget body, PlatformNavB
       material: (context, platform) => androidConfig,
 
       // iOS scaffold
-      cupertino: (context, platform) =>
-          CupertinoPageScaffoldData(navigationBar: iosNavBar),
+      cupertino: (context, platform) => iosConfig,
     ),
   );
 }
