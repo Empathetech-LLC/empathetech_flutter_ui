@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-// Supported text types
+// Local text type(s)
 
 const String defaultStyleKey = 'defaultStyle';
 const String titleStyleKey = 'titleStyle';
@@ -95,7 +95,31 @@ TextStyle getTextStyle(String textType) {
   }
 }
 
-// Supported Google fonts
+// Local text theme(s)
+
+TextTheme defaultTextTheme() {
+  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+
+  return TextTheme(
+    labelLarge: defaultTextStyle,
+    bodyLarge: defaultTextStyle,
+    titleLarge: defaultTextStyle,
+    displayLarge: defaultTextStyle,
+    headlineLarge: defaultTextStyle,
+    labelMedium: defaultTextStyle,
+    bodyMedium: defaultTextStyle,
+    titleMedium: defaultTextStyle,
+    displayMedium: defaultTextStyle,
+    headlineMedium: defaultTextStyle,
+    labelSmall: defaultTextStyle,
+    bodySmall: defaultTextStyle,
+    titleSmall: defaultTextStyle,
+    displaySmall: defaultTextStyle,
+    headlineSmall: defaultTextStyle,
+  );
+}
+
+// Supported Google font(s)
 
 const String soraKey = 'Sora';
 const String hahmletKey = 'Hahmlet';
