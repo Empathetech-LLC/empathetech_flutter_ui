@@ -139,9 +139,9 @@ Widget ezIconButton(void Function() action, void Function() longAction, IconData
       width: buttonTextSize * 2 + padding,
       height: buttonTextSize * 2 + padding,
       decoration: BoxDecoration(
-        color: buttonColor ?? Color(AppConfig.prefs[buttonColor]),
-        shape: BoxShape.circle,
-      ),
+          color: buttonColor ?? Color(AppConfig.prefs[buttonColor]),
+          shape: BoxShape.circle,
+          border: Border.all(color: Color(AppConfig.prefs[buttonColorKey]))),
       child: PlatformIconButton(
         onPressed: action,
         icon: Icon(
