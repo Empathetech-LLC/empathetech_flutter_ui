@@ -108,7 +108,9 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs]
 /// Intended for a text child, see [ezButton] for widget child
 Widget ezTextButton(void Function() action, void Function() longAction, String text,
-    [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
+    [TextStyle? textStyle,
+    ButtonStyle? androidStyle,
+    CupertinoElevatedButtonData? iosStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
 
@@ -116,12 +118,16 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
-      color: color,
-      child: Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+      child: Text(text, style: textStyle),
 
-      // Android config
-      material: (context, platform) => MaterialElevatedButtonData(style: buttonStyle),
+      // Platform specific overwrites
+      material: (context, platform) => (androidStyle == null)
+          ? MaterialElevatedButtonData(style: androidButton())
+          : MaterialElevatedButtonData(style: androidButton().merge(androidStyle)),
+      cupertino: (context, platform) => CupertinoElevatedButtonData(
+        color: color,
+        padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+      ),
     ),
   );
 }
