@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Creates a tool for updating the value of [toControl]
+/// The [ColorSetting] title is the passed [message] and is paired with a
+/// preview of the starting color ([toControl]) which, on click, opens a [colorPicker]
 class ColorSetting extends StatefulWidget {
   const ColorSetting({
     Key? key,
@@ -24,15 +27,11 @@ class _ColorSettingState extends State<ColorSetting> {
   // Initialize state
 
   late Color currColor = Color(AppConfig.prefs[widget.toControl]);
-
-  // Gather theme data
   late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
-  // Define interactions
-
-  // Edit button onPressed: update the color to whatever the user chooses
+  /// Opens a [colorPicker] for updating [currColor]
   void changeColor() {
     colorPicker(
       context,
@@ -59,7 +58,8 @@ class _ColorSettingState extends State<ColorSetting> {
     );
   }
 
-  // Edit button onLongPress: reset the color to the app default
+  /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
+  /// A preview of the reset color is shown
   void reset() {
     Color resetColor = Color(AppConfig.defaults[widget.toControl]);
 
@@ -100,7 +100,6 @@ class _ColorSettingState extends State<ColorSetting> {
   Widget build(BuildContext context) {
     double padding = AppConfig.prefs[paddingKey];
 
-    // Color setting UI
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -118,6 +117,7 @@ class _ColorSettingState extends State<ColorSetting> {
 
         // Color preview/edit button
         GestureDetector(
+          onLongPress: reset,
           child: PlatformIconButton(
             color: currColor,
             onPressed: changeColor,
@@ -127,7 +127,6 @@ class _ColorSettingState extends State<ColorSetting> {
               size: 37.5,
             ),
           ),
-          onLongPress: reset,
         ),
       ],
     );

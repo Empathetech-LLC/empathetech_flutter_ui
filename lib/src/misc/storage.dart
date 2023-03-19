@@ -10,17 +10,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-/// Show custom color picker dialog
+/// Show color picker dialog, built from [flutter_colorpicker]
 void colorPicker(
     BuildContext context,
     Color startColor,
-
-    /// The starting color
     void Function(Color chosenColor) onColorChange,
     void Function() apply,
     void Function() cancel) {
-  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-
   ezDialog(
     context,
     'Pick a color!',
@@ -31,7 +27,7 @@ void colorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
         ),
-        Container(height: dialogSpacer),
+        Container(height: AppConfig.prefs[dialogSpacingKey]),
 
         // Apply
         ezYesNoCol(
@@ -46,7 +42,7 @@ void colorPicker(
   );
 }
 
-// Returns an image from a path, handling the image type
+/// [Image] wrapper for handling handling [AssetImage] vs [FileImage]
 Image buildImage(String path, bool isAsset, [BoxFit? fit]) {
   if (isAsset) {
     return Image(
@@ -61,7 +57,7 @@ Image buildImage(String path, bool isAsset, [BoxFit? fit]) {
   }
 }
 
-// Ditto but returns an image provider
+/// [ImageProvider] wrapper for handling handling [AssetImage] vs [FileImage]
 ImageProvider provideImage(String path, bool isAsset) {
   if (isAsset) {
     return AssetImage(path);
@@ -70,7 +66,7 @@ ImageProvider provideImage(String path, bool isAsset) {
   }
 }
 
-// Saves the passed image to the passed path
+/// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<bool> changeImage(
     BuildContext context, String prefsPath, ImageSource source) async {
   // Load image picker and save the result

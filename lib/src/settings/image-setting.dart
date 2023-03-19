@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Creates a tool for updating the image at [prefsKey]'s path
+/// Take in the [isAssetImage] bool so an image preview can be built
 class ImageSetting extends StatefulWidget {
   const ImageSetting({
     Key? key,
@@ -28,15 +30,13 @@ class ImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<ImageSetting> {
   // Initialize state
 
-  // Gather theme data
+  late String currPath = widget.prefsKey;
+
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-  late String currPath = widget.prefsKey;
-
-  // Define interactions
-
-  // Top-level button onPressed: display the image source/update options
+  /// Opens an [ezDialog] for choosing the [ImageSource] for updating [prefsKey]
+  /// Selection is sent to [changeImage]
   void chooseImage() {
     ezDialog(
       context,
@@ -127,7 +127,11 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // Title on the left
           Text(widget.title, style: getTextStyle(imageSettingStyleKey)),
+
+          // Preview on the right
+          // 16:9 for backgrounds, 1:1 for the rest
           SizedBox(
             height: widget.prefsKey == backImageKey ? 160 : 75,
             width: widget.prefsKey == backImageKey ? 90 : 75,

@@ -5,6 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+/// Creates a tool for updating the app's font
 class FontFamilySetting extends StatefulWidget {
   const FontFamilySetting({Key? key}) : super(key: key);
 
@@ -15,32 +16,27 @@ class FontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<FontFamilySetting> {
   // Initialize state
 
-  // Gather theme data
   late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
   late String currFontFamily = AppConfig.prefs[fontFamilyKey];
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  // Define interactions
-
-  // onPressed method for font picker button
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezTextButton]s
   void chooseGoogleFont() {
     ezDialog(
       context,
-
-      // Title
       'Choose a font',
-
-      // Children
       Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+        // Map myGoogleFonts to...
         children: myGoogleFonts
             .map(
               (String font) => Column(
                 children: [
-                  // Button with the title of the font in that font's style
+                  // ...a selectable button (title == font name)
                   ezTextButton(
                     () {
                       AppConfig.preferences.setString(fontFamilyKey, font);
@@ -63,8 +59,6 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       ),
     );
   }
-
-  // Draw state
 
   @override
   Widget build(BuildContext context) {

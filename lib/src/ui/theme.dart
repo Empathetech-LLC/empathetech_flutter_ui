@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Android (Material) [ThemeData] built from [AppConfig.prefs]
 MaterialAppData androidAppTheme() {
-  // Gather theme data
   Color themeColor = AppConfig.prefs[themeColorKey];
   Color themeTextColor = AppConfig.prefs[themeTextColorKey];
   Color buttonColor = AppConfig.prefs[buttonColorKey];
@@ -57,6 +57,7 @@ MaterialAppData androidAppTheme() {
   );
 }
 
+/// iOS (Cupertino) app data built from [AppConfig.prefs]
 CupertinoAppData iosAppTheme() {
   return CupertinoAppData();
 }

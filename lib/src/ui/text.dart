@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-// Local style keys
+// Supported text types
 
 const String defaultStyleKey = 'defaultStyle';
 const String titleStyleKey = 'titleStyle';
@@ -21,8 +21,8 @@ const String fontSettingStyleKey = 'fontSettingStyle';
 const String sliderSettingStyleKey = 'sliderSettingStyle';
 const String errorStyleKey = 'errorStyle';
 
+/// Returns the [textType] style, built from the current [AppConfig.prefs] values
 TextStyle getTextStyle(String textType) {
-  // Gather theme data
   late String currFontFamily =
       googleStyleAlias(AppConfig.prefs[fontFamilyKey]).fontFamily!;
 
@@ -95,7 +95,7 @@ TextStyle getTextStyle(String textType) {
   }
 }
 
-// Google style keys
+// Supported Google fonts
 
 const String soraKey = 'Sora';
 const String hahmletKey = 'Hahmlet';
@@ -141,7 +141,7 @@ const List<String> myGoogleFonts = [
   oldStandardKey,
 ];
 
-// Google Getter
+/// Returns the [GoogleFonts] styling for [fontName]
 TextStyle googleStyleAlias(String fontName) {
   switch (fontName) {
     case soraKey:

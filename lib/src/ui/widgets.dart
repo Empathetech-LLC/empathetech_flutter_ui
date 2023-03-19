@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Standard text box
+/// Text that values its personal space
 Widget paddedText(String text, [TextStyle? style, TextAlign? alignment]) {
   return Padding(
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
@@ -12,7 +12,8 @@ Widget paddedText(String text, [TextStyle? style, TextAlign? alignment]) {
   );
 }
 
-// Standard title card
+/// Say it loud, say it proud
+/// Background and text colors are built from [AppConfig.prefs] theme values
 Widget titleCard(String title) {
   return Card(
     color: Color(AppConfig.prefs[themeColorKey]),
@@ -20,7 +21,8 @@ Widget titleCard(String title) {
   );
 }
 
-// The word loading with an elipses built from the passed image
+/// 'Loading...' text but the elipsis is built from the passed [Image] (gifs recommended)
+/// The text is "naked"; wrap in a container if necessary
 Widget loadingMessage(BuildContext context, Image image) {
   TextStyle style = getTextStyle(titleStyleKey);
 
@@ -45,7 +47,9 @@ Widget loadingMessage(BuildContext context, Image image) {
   );
 }
 
-// Custom title card designed for grabbing attention and displaying a warning
+/// [titleCard] designed to grab attention for warnings...
+/// [Icon] 'WARNING' [Icon]
+/// 'Your message here'
 Widget warningCard(BuildContext context, String content) {
   TextStyle titleStyle = getTextStyle(titleStyleKey);
   TextStyle contentStyle = getTextStyle(dialogContentStyleKey);
@@ -81,7 +85,8 @@ Widget warningCard(BuildContext context, String content) {
   );
 }
 
-// Platform elevated button wrapper
+/// Style a [PlatformElevatedButton] from [AppConfig.prefs]
+/// Intended for a widget child, see [ezTextButton] for text child
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? buttonStyle]) {
   // Gather theme data
@@ -100,7 +105,8 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
   );
 }
 
-// Platform elevated button wrapper, only takes text as a body
+/// Style a [PlatformElevatedButton] from [AppConfig.prefs]
+/// Intended for a text child, see [ezButton] for widget child
 Widget ezTextButton(void Function() action, void Function() longAction, String text,
     [TextStyle? textStyle, ButtonStyle? buttonStyle]) {
   // Gather theme data
@@ -120,7 +126,8 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
   );
 }
 
-// Platform icon button wrapper
+/// Style a [PlatformIconButton] from [AppConfig.prefs]
+/// See [ezTextIconButton] for adding a message
 Widget ezIconButton(void Function() action, void Function() longAction, Icon icon) {
   return GestureDetector(
     child: PlatformIconButton(
@@ -131,7 +138,8 @@ Widget ezIconButton(void Function() action, void Function() longAction, Icon ico
   );
 }
 
-// Platform elevated button wrapper that requires an icon
+/// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
+/// behavior of [ElevatedButton.icon]
 Widget ezTextIconButton(
     void Function() action, void Function() longAction, String text, Icon icon,
     [TextStyle? textStyle]) {
@@ -158,7 +166,7 @@ Widget ezTextIconButton(
   );
 }
 
-// Saves time on standardizing the dialog's padding
+/// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
 void ezDialog(BuildContext context, String? title, Widget build) {
   // Gather theme data
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
@@ -194,7 +202,8 @@ void ezDialog(BuildContext context, String? title, Widget build) {
   );
 }
 
-// Saves time on creating scroll views
+/// Styles a [SingleChildScrollView] from [AppConfig.prefs]
+/// Dynamically switches between row/col based on [direction]
 Widget ezScrollView(List<Widget> children,
     [MainAxisSize axisSize = MainAxisSize.min,
     MainAxisAlignment axisAlign = MainAxisAlignment.spaceEvenly,
@@ -216,7 +225,8 @@ Widget ezScrollView(List<Widget> children,
   );
 }
 
-// Ditto
+/// Styles a centered [SingleChildScrollView] from [AppConfig.prefs]
+/// Dynamically switches between row/col based on [direction]
 Widget ezCenterScroll(List<Widget> children,
     [MainAxisSize axisSize = MainAxisSize.min,
     MainAxisAlignment axisAlign = MainAxisAlignment.spaceEvenly,
@@ -240,7 +250,7 @@ Widget ezCenterScroll(List<Widget> children,
   );
 }
 
-// Dynamically styled dropdown list
+/// Styles a [ExpansionTile] from [AppConfig.prefs]
 Widget ezList(String title, List<Widget> body, [bool open = false]) {
   TextStyle titleStyle = getTextStyle(titleStyleKey);
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
@@ -264,7 +274,7 @@ Widget ezList(String title, List<Widget> body, [bool open = false]) {
   );
 }
 
-// Form field wrapper
+/// Styles a [PlatformTextFormField] from [AppConfig.prefs]
 Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
     [bool? private,
     Iterable<String>? autofillHints,
@@ -291,7 +301,7 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
   );
 }
 
-// Wrapper for quickly making confirm/deny button in a column
+/// Builds a pair of customizable [ezTextIconButton]s for yes/no in a column
 Widget ezYesNoCol(BuildContext context, void Function() onConfirm, void Function() onDeny,
     [String confirmMsg = 'Yes',
     String denyMsg = 'No',
@@ -317,7 +327,7 @@ Widget ezYesNoCol(BuildContext context, void Function() onConfirm, void Function
   );
 }
 
-// Wrapper for quickly making confirm/deny button in a row
+/// Builds a pair of customizable [ezTextIconButton]s for yes/no in a row
 Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function() onDeny,
     [String confirmMsg = 'Yes',
     String denyMsg = 'No',
@@ -343,7 +353,7 @@ Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function
   );
 }
 
-// Platform switch wrapper
+/// Styles a [PlatformSwitch] from [AppConfig.prefs]
 Widget ezSwitch(BuildContext context, bool value, void Function(bool)? onChanged) {
   return PlatformSwitch(
     value: value,

@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ValueSetting extends StatefulWidget {
-  const ValueSetting({
+/// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
+/// Optionally provide a list of [preview] widgets for illustrating live changes to the user
+class SliderSetting extends StatefulWidget {
+  const SliderSetting({
     Key? key,
     required this.prefsKey,
     required this.title,
@@ -25,20 +27,21 @@ class ValueSetting extends StatefulWidget {
   final List<Widget>? preview;
 
   @override
-  _ValueSettingState createState() => _ValueSettingState();
+  _SliderSettingState createState() => _SliderSettingState();
 }
 
-class _ValueSettingState extends State<ValueSetting> {
+class _SliderSettingState extends State<SliderSetting> {
   // Initialize state
 
   late double currValue = AppConfig.prefs[widget.prefsKey];
   late double defaultValue = AppConfig.defaults[widget.prefsKey];
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  // Draw state
-
-  // Return the widget build for the current value type
+  // Return the preview widget(s) for prefsKey
+  // Checks the user provided value first, then returns a pre-built
+  // (or blank for the forgotten settings)
   List<Widget> preview() {
+    // User provided
     if (widget.preview != null) return widget.preview!;
 
     switch (widget.prefsKey) {
@@ -97,13 +100,13 @@ class _ValueSettingState extends State<ValueSetting> {
           Container(height: buttonSpacer),
         ];
 
-      // Default
       default:
         return [Container(height: buttonSpacer)];
     }
   }
 
-  // Build the list of widgets to draw based on the value type
+  /// Assemble the final list of widgets to build for [_SliderSettingState]
+  /// [widget.title] + [preview] + [PlatformSlider] + reset [ezTextIconButton]
   List<Widget> buildList() {
     List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyleKey))];
 
@@ -154,7 +157,6 @@ class _ValueSettingState extends State<ValueSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // Font setting UI
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -5,18 +5,19 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
 
-// Foreground action
+/// Foreground [NotificationResponse]/action
 void notifAction(NotificationResponse notificationResponse) {}
 
-// Background action
-@pragma('vm:entry-point') // == top-level function
+/// Background [NotificationResponse]/action
+/// Must be a top-level function
+@pragma('vm:entry-point')
 void backgroundNotifAction(NotificationResponse notificationResponse) {}
 
-// Initialization settings
+// Android setup
+
 const AndroidInitializationSettings androidInitSettings =
     AndroidInitializationSettings('@mipmap/ic_launcher');
 
-// Notification details
 const androidNotifDetails = AndroidNotificationDetails(
   'local',
   'local',
@@ -25,18 +26,21 @@ const androidNotifDetails = AndroidNotificationDetails(
   playSound: true,
 );
 
-// Initialization settings
+// iOS setup
+
 final DarwinInitializationSettings iosInitSettings = DarwinInitializationSettings();
 
-// Notification details
 const iosNotifDetails = DarwinNotificationDetails(
   presentAlert: true,
   presentBadge: true,
   presentSound: true,
 );
 
+/// Setup a simple push notification manager/service
+/// Built from [flutter_local_notifications]
 class NotificationService {
   // Build app settings
+
   final appInitSettings = InitializationSettings(
     android: androidInitSettings,
     iOS: iosInitSettings,
@@ -48,6 +52,10 @@ class NotificationService {
   );
 
   // Initialize plugin
+
+  /// Initialize the [NotificationService]
+  /// Load platform specific settings
+  /// Define [NotificationResponse] actions
   Future<void> init() async {
     await notifsPlugin.initialize(
       appInitSettings,
@@ -56,6 +64,7 @@ class NotificationService {
     );
 
     // Request permissions
+
     await notifsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
@@ -70,7 +79,7 @@ class NotificationService {
         );
   }
 
-  // Display notification
+  /// Display notification
   Future<void> show(int id, String? title, String? body, String? payload) async {
     await notifsPlugin.show(
       id,

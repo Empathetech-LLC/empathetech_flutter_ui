@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Constants
+
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
 const String backColorKey = 'appBackgroundColor';
@@ -18,6 +20,9 @@ const String paddingKey = 'padding';
 const String fontFamilyKey = 'fontFamily';
 const String fontSizeKey = 'fontSize';
 
+/// Static object for managing a dynamic && user customizable UI
+/// Tracks the apps [FocusManager] for keyboard management
+/// Setting are tracked with [shared_preferences]
 class AppConfig {
   static late FocusManager focus;
   static late SharedPreferences preferences;
@@ -38,7 +43,8 @@ class AppConfig {
     fontSizeKey: 24.0,
   };
 
-  // Populate prefs, overwriting defaults whenever a user value is found
+  /// Populate [AppConfig.prefs], overwriting defaults whenever a user value is found
+  /// Optionally expand the user customizable values with [customDefaults]
   static void init([Map<String, dynamic>? customDefaults]) {
     // Load any custom defaults
     if (customDefaults != null) defaults.addAll(customDefaults);
