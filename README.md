@@ -1,17 +1,20 @@
 # EFUI
 #### aka Empathetech Flutter UI aka empathetech_flutter_ui
 
+### TL;DR;
+
+EFUI is a library/package for fast, high quality UI development.
+
+"High quality" in this case == 
+ - user accessible
+ - user customizable
+ - dynamic design to match different OS types
+
 ## Table of Contents
 
 * [Installation](#Installation)
 * [Contributing](#Contributing)
 * [License](#License)
-
-### TL;DR;
-
-EFUI is a made/used by one, shared to all Flutter library for fast, high quality UI development. 
-
-"High quality" in this case == user accessible and customizable UI that automatically adapts to the platform (OS) that it's running on.
 
 # Installation
 
