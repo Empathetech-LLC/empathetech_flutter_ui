@@ -62,11 +62,19 @@ class _SliderSettingState extends State<SliderSetting> {
           Container(height: buttonSpacer),
         ];
 
-      // Button size
+      // Button height
       case SettingType.buttonHeight:
         return [
           Container(height: buttonSpacer),
-          ezTextButton(() {}, () {}, 'Preview: $currValue'),
+          ezTextButton(
+            () {},
+            () {},
+            'Preview: $currValue',
+            null,
+            ElevatedButton.styleFrom(
+              fixedSize: Size(screenWidth(context), currValue),
+            ),
+          ),
           Container(height: buttonSpacer),
         ];
 
