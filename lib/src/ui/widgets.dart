@@ -164,30 +164,26 @@ Widget ezTextIconButton(
 
   return GestureDetector(
     onLongPress: longAction,
-    child: Container(
-      width: buttonTextSize * 2,
-      height: buttonTextSize * 2,
-      child: PlatformElevatedButton(
-        onPressed: action,
-        color: color,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Icon
-            Icon(
-              icon,
-              color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
-              size: buttonTextSize,
-            ),
-            Container(width: padding),
+    child: PlatformElevatedButton(
+      onPressed: action,
+      color: color,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // Icon
+          Icon(
+            icon,
+            color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
+            size: buttonTextSize,
+          ),
+          Container(width: padding),
 
-            // Text
-            Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
-          ],
-        ),
-        padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+          // Text
+          Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+        ],
       ),
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
     ),
   );
 }
