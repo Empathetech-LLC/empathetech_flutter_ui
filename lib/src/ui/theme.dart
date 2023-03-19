@@ -8,10 +8,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Android (Material) [ThemeData] built from [AppConfig.prefs]
 MaterialAppData androidAppTheme() {
-  Color themeColor = AppConfig.prefs[themeColorKey];
-  Color themeTextColor = AppConfig.prefs[themeTextColorKey];
-  Color buttonColor = AppConfig.prefs[buttonColorKey];
-  Color buttonTextColor = AppConfig.prefs[buttonTextColorKey];
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
   TextStyle dialogTitleText = getTextStyle(dialogTitleStyleKey);
   TextStyle dialogContentText = getTextStyle(dialogContentStyleKey);
