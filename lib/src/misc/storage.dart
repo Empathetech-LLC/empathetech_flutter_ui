@@ -10,12 +10,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-//// Colors ////
-
-// Show custom color picker dialog
+/// Show custom color picker dialog
 void colorPicker(
     BuildContext context,
     Color startColor,
+
+    /// The starting color
     void Function(Color chosenColor) onColorChange,
     void Function() apply,
     void Function() cancel) {
@@ -45,8 +45,6 @@ void colorPicker(
     ),
   );
 }
-
-//// Images ////
 
 // Returns an image from a path, handling the image type
 Image buildImage(String path, bool isAsset, [BoxFit? fit]) {
