@@ -146,7 +146,7 @@ class _SliderSettingState extends State<SliderSetting> {
         },
         () {},
         'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
-        Icon(PlatformIcons(context).refresh),
+        PlatformIcons(context).refresh,
       ),
       Container(height: buttonSpacer),
     ]);

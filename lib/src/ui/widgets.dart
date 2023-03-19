@@ -128,10 +128,10 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
 
 /// Style a [PlatformIconButton] from [AppConfig.prefs]
 /// See [ezTextIconButton] for adding a message
-Widget ezIconButton(void Function() action, void Function() longAction, Icon icon) {
+Widget ezIconButton(void Function() action, void Function() longAction, IconData icon) {
   return GestureDetector(
     child: PlatformIconButton(
-      icon: icon,
+      icon: Icon(icon, color: Color(AppConfig.prefs[buttonTextColorKey])),
       onPressed: action,
     ),
     onLongPress: longAction,
@@ -141,7 +141,7 @@ Widget ezIconButton(void Function() action, void Function() longAction, Icon ico
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
 /// behavior of [ElevatedButton.icon]
 Widget ezTextIconButton(
-    void Function() action, void Function() longAction, String text, Icon icon,
+    void Function() action, void Function() longAction, String text, IconData icon,
     [TextStyle? textStyle]) {
   // Gather theme data
   Color color = Color(AppConfig.prefs[buttonColorKey]);
@@ -156,7 +156,7 @@ Widget ezTextIconButton(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          icon,
+          Icon(icon, color: Color(AppConfig.prefs[buttonTextColorKey])),
           Container(width: padding),
           Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
         ],
@@ -305,11 +305,11 @@ Widget ezForm(Key? key, TextEditingController? controller, String? hintText,
 Widget ezYesNoCol(BuildContext context, void Function() onConfirm, void Function() onDeny,
     [String confirmMsg = 'Yes',
     String denyMsg = 'No',
-    Icon? customConfirm,
-    Icon? customDeny]) {
+    IconData? customConfirm,
+    IconData? customDeny]) {
   // Gather theme data
-  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+  IconData confirmIcon = customConfirm ?? PlatformIcons(context).checkMark;
+  IconData denyIcon = customConfirm ?? PlatformIcons(context).clear;
 
   return Column(
     mainAxisSize: MainAxisSize.min,
@@ -331,11 +331,11 @@ Widget ezYesNoCol(BuildContext context, void Function() onConfirm, void Function
 Widget ezYesNoRow(BuildContext context, void Function() onConfirm, void Function() onDeny,
     [String confirmMsg = 'Yes',
     String denyMsg = 'No',
-    Icon? customConfirm,
-    Icon? customDeny]) {
+    IconData? customConfirm,
+    IconData? customDeny]) {
   // Gather theme data
-  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+  IconData confirmIcon = customConfirm ?? PlatformIcons(context).checkMark;
+  IconData denyIcon = customConfirm ?? PlatformIcons(context).clear;
 
   return Row(
     mainAxisSize: MainAxisSize.min,

@@ -63,7 +63,7 @@ class _ImageSettingState extends State<ImageSetting> {
             },
             () {},
             'File',
-            Icon(PlatformIcons(context).folder),
+            PlatformIcons(context).folder,
           ),
           Container(height: buttonSpacer),
 
@@ -80,7 +80,7 @@ class _ImageSettingState extends State<ImageSetting> {
             },
             () {},
             'Camera',
-            Icon(PlatformIcons(context).photoCamera),
+            PlatformIcons(context).photoCamera,
           ),
           Container(height: buttonSpacer),
 
@@ -95,7 +95,7 @@ class _ImageSettingState extends State<ImageSetting> {
             },
             () {},
             'Reset',
-            Icon(PlatformIcons(context).refresh),
+            PlatformIcons(context).refresh,
           ),
           Container(height: buttonSpacer),
 
@@ -110,7 +110,7 @@ class _ImageSettingState extends State<ImageSetting> {
             },
             () {},
             'Clear',
-            Icon(PlatformIcons(context).clear),
+            PlatformIcons(context).clear,
           ),
           Container(height: buttonSpacer),
         ],
