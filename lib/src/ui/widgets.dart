@@ -128,13 +128,28 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
 
 /// Style a [PlatformIconButton] from [AppConfig.prefs]
 /// See [ezTextIconButton] for adding a message
-Widget ezIconButton(void Function() action, void Function() longAction, IconData icon) {
+Widget ezIconButton(void Function() action, void Function() longAction, IconData icon,
+    [Color? buttonColor, Color? iconColor]) {
+  double buttonTextSize = getTextStyle(buttonStyleKey).fontSize ?? 24.0;
+
   return GestureDetector(
-    child: PlatformIconButton(
-      icon: Icon(icon, color: Color(AppConfig.prefs[buttonTextColorKey])),
-      onPressed: action,
-    ),
     onLongPress: longAction,
+    child: Container(
+      width: buttonTextSize * 2,
+      height: buttonTextSize * 2,
+      decoration: BoxDecoration(
+        color: buttonColor ?? Color(AppConfig.prefs[buttonColor]),
+        shape: BoxShape.circle,
+      ),
+      child: PlatformIconButton(
+        icon: Icon(
+          icon,
+          color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
+          size: buttonTextSize,
+        ),
+        onPressed: action,
+      ),
+    ),
   );
 }
 
@@ -142,26 +157,37 @@ Widget ezIconButton(void Function() action, void Function() longAction, IconData
 /// behavior of [ElevatedButton.icon]
 Widget ezTextIconButton(
     void Function() action, void Function() longAction, String text, IconData icon,
-    [TextStyle? textStyle]) {
-  // Gather theme data
+    [TextStyle? textStyle, Color? buttonColor, Color? iconColor]) {
   Color color = Color(AppConfig.prefs[buttonColorKey]);
   double padding = AppConfig.prefs[paddingKey];
+  double buttonTextSize = getTextStyle(buttonStyleKey).fontSize ?? 24.0;
 
   return GestureDetector(
     onLongPress: longAction,
-    child: PlatformElevatedButton(
-      onPressed: action,
-      color: color,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Icon(icon, color: Color(AppConfig.prefs[buttonTextColorKey])),
-          Container(width: padding),
-          Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
-        ],
+    child: Container(
+      width: buttonTextSize * 2,
+      height: buttonTextSize * 2,
+      child: PlatformElevatedButton(
+        onPressed: action,
+        color: color,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Icon
+            Icon(
+              icon,
+              color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
+              size: buttonTextSize,
+            ),
+            Container(width: padding),
+
+            // Text
+            Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+          ],
+        ),
+        padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
       ),
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
     ),
   );
 }
