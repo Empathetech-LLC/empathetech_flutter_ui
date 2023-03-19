@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-//// Shared
-
 final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
 
 // Foreground action
@@ -13,8 +11,6 @@ void notifAction(NotificationResponse notificationResponse) {}
 // Background action
 @pragma('vm:entry-point') // == top-level function
 void backgroundNotifAction(NotificationResponse notificationResponse) {}
-
-//// Android
 
 // Initialization settings
 const AndroidInitializationSettings androidInitSettings =
@@ -28,8 +24,6 @@ const androidNotifDetails = AndroidNotificationDetails(
   priority: Priority.high,
   playSound: true,
 );
-
-//// iOS
 
 // Initialization settings
 final DarwinInitializationSettings iosInitSettings = DarwinInitializationSettings();

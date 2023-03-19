@@ -26,7 +26,7 @@ class ImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<ImageSetting> {
-  //// Initialize state
+  // Initialize state
 
   // Gather theme data
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
@@ -34,7 +34,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
   late String currPath = widget.prefsKey;
 
-  //// Define interaction methods
+  // Define interactions
 
   // Top-level button onPressed: display the image source/update options
   void chooseImage() {

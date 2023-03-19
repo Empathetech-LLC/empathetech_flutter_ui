@@ -29,13 +29,13 @@ class ValueSetting extends StatefulWidget {
 }
 
 class _ValueSettingState extends State<ValueSetting> {
-  //// Initialize state
+  // Initialize state
 
   late double currValue = AppConfig.prefs[widget.prefsKey];
   late double defaultValue = AppConfig.defaults[widget.prefsKey];
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  //// Draw state
+  // Draw state
 
   // Return the widget build for the current value type
   List<Widget> preview() {

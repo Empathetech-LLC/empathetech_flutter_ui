@@ -21,7 +21,7 @@ class ColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<ColorSetting> {
-  //// Initialize state
+  // Initialize state
 
   late Color currColor = Color(AppConfig.prefs[widget.toControl]);
 
@@ -30,7 +30,7 @@ class _ColorSettingState extends State<ColorSetting> {
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
-  //// Define interaction methods
+  // Define interactions
 
   // Edit button onPressed: update the color to whatever the user chooses
   void changeColor() {

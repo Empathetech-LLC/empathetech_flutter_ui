@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-//// Static widgets
-
 // Standard text box
 Widget paddedText(String text, [TextStyle? style, TextAlign? alignment]) {
   return Padding(
@@ -82,8 +80,6 @@ Widget warningCard(BuildContext context, String content) {
     ),
   );
 }
-
-//// Interactive widgets
 
 // Platform elevated button wrapper
 Widget ezButton(void Function() action, void Function() longAction, Widget body,

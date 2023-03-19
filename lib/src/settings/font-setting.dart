@@ -13,7 +13,7 @@ class FontFamilySetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<FontFamilySetting> {
-  //// Initialize state
+  // Initialize state
 
   // Gather theme data
   late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
@@ -22,7 +22,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  //// Define interaction methods
+  // Define interactions
 
   // onPressed method for font picker button
   void chooseGoogleFont() {
@@ -64,7 +64,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
     );
   }
 
-  //// Draw state
+  // Draw state
 
   @override
   Widget build(BuildContext context) {
