@@ -21,11 +21,6 @@ EFUI is a made/used by one, shared to all Flutter library for fast, high quality
 
 [Smoke Signal](https://github.com/Empathetech-LLC/smoke_signal)
 
-### AI Generated Usage tips
-#### (that I proofread)
-
-
-
 # Contributing
 
 As of right now, this is a made for one, shared to all style project. So, if you're a consumer and notice a bug please do leave an issue/comment. If it's extra features you desire, I recommend making your own fork. Thanks for stopping by!
