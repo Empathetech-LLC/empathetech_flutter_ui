@@ -27,16 +27,12 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
     ezDialog(
       context,
       'Choose a font',
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-        // Map myGoogleFonts to...
-        children: myGoogleFonts
+      ezScrollView(
+        myGoogleFonts
             .map(
               (String font) => Column(
                 children: [
-                  // ...a selectable button (title == font name)
+                  // Map font to a selectable button (title == name)
                   ezTextButton(
                     () {
                       AppConfig.preferences.setString(fontFamilyKey, font);
