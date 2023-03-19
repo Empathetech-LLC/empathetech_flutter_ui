@@ -1,7 +1,7 @@
 # EFUI
 #### aka Empathetech Flutter UI aka empathetech_flutter_ui
 
-## ToC
+## Table of Contents
 
 * [Installation](#Installation)
 * [Contributing](#Contributing)
