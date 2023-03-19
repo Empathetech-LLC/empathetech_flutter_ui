@@ -118,7 +118,7 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
-      child: Text(text, style: textStyle),
+      child: Text(text, style: textStyle, textAlign: TextAlign.center),
 
       // Platform specific overwrites
       material: (context, platform) => (androidStyle == null)
