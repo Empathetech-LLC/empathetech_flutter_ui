@@ -38,6 +38,16 @@ MaterialAppData androidAppTheme() {
         unselectedIconTheme: IconThemeData(color: themeTextColor),
       ),
 
+      // Text
+      textTheme: defaultTextTheme(),
+      primaryTextTheme: defaultTextTheme(),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: themeTextColor,
+        selectionColor: themeColor,
+        selectionHandleColor: buttonColor,
+      ),
+      hintColor: themeTextColor,
+
       // Icons
       iconTheme: IconThemeData(color: themeTextColor),
 
@@ -52,6 +62,15 @@ MaterialAppData androidAppTheme() {
         inactiveTickMarkColor: themeTextColor,
         valueIndicatorTextStyle: dialogContentText,
         overlayShape: SliderComponentShape.noOverlay,
+      ),
+
+      // Dialogs
+      dialogTheme: DialogTheme(
+        backgroundColor: themeColor,
+        iconColor: themeTextColor,
+        alignment: Alignment.center,
+        titleTextStyle: dialogTitleText,
+        contentTextStyle: dialogContentText,
       ),
     ),
   );
