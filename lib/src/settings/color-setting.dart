@@ -98,34 +98,27 @@ class _ColorSettingState extends State<ColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    double padding = AppConfig.prefs[paddingKey];
-
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        PlatformTextButton(
-          padding: EdgeInsets.all(padding),
-          color: themeTextColor,
-          child: Text(
-            widget.message,
-            style: getTextStyle(colorSettingStyleKey),
-            textAlign: TextAlign.center,
-          ),
+        ezTextButton(
+          () {},
+          () {},
+          widget.message,
+          getTextStyle(colorSettingStyleKey),
         ),
 
         // Color preview/edit button
         GestureDetector(
           onLongPress: reset,
-          child: PlatformIconButton(
-            color: currColor,
-            onPressed: changeColor,
-            icon: Icon(
-              PlatformIcons(context).edit,
-              color: getContrastColor(currColor),
-              size: 37.5,
-            ),
+          child: ezIconButton(
+            changeColor,
+            reset,
+            PlatformIcons(context).edit,
+            currColor,
+            getContrastColor(currColor),
           ),
         ),
       ],
