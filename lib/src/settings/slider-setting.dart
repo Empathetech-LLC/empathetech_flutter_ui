@@ -6,25 +6,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Enumerator for selecting the type of setting that is being updated
+/// This will determine the preview [Widget]s
+enum SettingType {
+  fontSize,
+  buttonHeight,
+  buttonSpacing,
+  dialogSpacing,
+}
+
 /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
-/// Optionally provide a list of [preview] widgets for illustrating live changes to the user
+/// Use the [preview] widgets for illustrating live changes to the user
 class SliderSetting extends StatefulWidget {
   const SliderSetting({
     Key? key,
     required this.prefsKey,
+    required this.type,
     required this.title,
     required this.min,
     required this.max,
     required this.steps,
-    this.preview,
   }) : super(key: key);
 
   final String prefsKey;
+  final SettingType type;
   final String title;
   final double min;
   final double max;
   final int steps;
-  final List<Widget>? preview;
 
   @override
   _SliderSettingState createState() => _SliderSettingState();
@@ -37,29 +46,32 @@ class _SliderSettingState extends State<SliderSetting> {
   late double defaultValue = AppConfig.defaults[widget.prefsKey];
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  // Return the preview widget(s) for prefsKey
-  // Checks the user provided value first, then returns a pre-built
-  // (or blank for the forgotten settings)
+  /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> preview() {
-    // User provided
-    if (widget.preview != null) return widget.preview!;
-
-    switch (widget.prefsKey) {
+    switch (widget.type) {
       // Font size
-      case fontSizeKey:
+      case SettingType.fontSize:
         return [
           Container(height: buttonSpacer),
           ezTextButton(
             () {},
             () {},
             'Preview: $currValue',
-            TextStyle(fontSize: currValue),
+            getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
           ),
           Container(height: buttonSpacer),
         ];
 
-      // Button && signal spacing
-      case buttonSpacingKey:
+      // Button size
+      case SettingType.buttonHeight:
+        return [
+          Container(height: buttonSpacer),
+          ezTextButton(() {}, () {}, 'Preview: $currValue'),
+          Container(height: buttonSpacer),
+        ];
+
+      // Button spacing
+      case SettingType.buttonSpacing:
         return [
           ezCenterScroll(
             [
@@ -73,7 +85,7 @@ class _SliderSettingState extends State<SliderSetting> {
         ];
 
       // Dialog spacing
-      case dialogSpacingKey:
+      case SettingType.dialogSpacing:
         return [
           Container(height: buttonSpacer),
           ezTextButton(
