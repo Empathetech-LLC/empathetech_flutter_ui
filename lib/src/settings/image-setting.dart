@@ -14,12 +14,14 @@ class ImageSetting extends StatefulWidget {
     Key? key,
     required this.prefsKey,
     required this.isAssetImage,
+    required this.fullscreen,
     required this.title,
     required this.credits,
   }) : super(key: key);
 
   final String prefsKey;
   final bool isAssetImage;
+  final bool fullscreen;
   final String title;
   final String credits;
 
@@ -133,8 +135,8 @@ class _ImageSettingState extends State<ImageSetting> {
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest
           SizedBox(
-            height: widget.prefsKey == backImageKey ? 160 : 75,
-            width: widget.prefsKey == backImageKey ? 90 : 75,
+            height: widget.fullscreen ? 160 : 75,
+            width: widget.fullscreen ? 90 : 75,
             child: currPath == noImageKey
                 ? Icon(PlatformIcons(context).clear)
                 : buildImage(currPath, widget.isAssetImage, BoxFit.fill),
