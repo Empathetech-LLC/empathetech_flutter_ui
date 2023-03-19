@@ -21,5 +21,5 @@ dependencies:
   # Community
   email_validator: ^2.1.17
   flutter_local_notifications: ^13.0.0
-  flutter_platform_widgets: ^3.0.0
+  flutter_platform_widgets: ^3.2.0
   flutter_colorpicker: ^1.0.3
