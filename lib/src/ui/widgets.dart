@@ -130,24 +130,25 @@ Widget ezTextButton(void Function() action, void Function() longAction, String t
 /// See [ezTextIconButton] for adding a message
 Widget ezIconButton(void Function() action, void Function() longAction, IconData icon,
     [Color? buttonColor, Color? iconColor]) {
+  double padding = AppConfig.prefs[paddingKey];
   double buttonTextSize = getTextStyle(buttonStyleKey).fontSize ?? 24.0;
 
   return GestureDetector(
     onLongPress: longAction,
     child: Container(
-      width: buttonTextSize * 2,
-      height: buttonTextSize * 2,
+      width: buttonTextSize * 2 + padding,
+      height: buttonTextSize * 2 + padding,
       decoration: BoxDecoration(
         color: buttonColor ?? Color(AppConfig.prefs[buttonColor]),
         shape: BoxShape.circle,
       ),
       child: PlatformIconButton(
+        onPressed: action,
         icon: Icon(
           icon,
           color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
           size: buttonTextSize,
         ),
-        onPressed: action,
       ),
     ),
   );
