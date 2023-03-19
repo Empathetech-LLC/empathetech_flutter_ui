@@ -4,9 +4,10 @@ export 'src/misc/helpers.dart';
 export 'src/misc/storage.dart';
 export 'src/notifications/notifications.dart';
 export 'src/settings/app-config.dart';
+export 'src/ui/cupertino.dart';
+export 'src/ui/material.dart';
 export 'src/ui/scaffolds.dart';
 export 'src/ui/text.dart';
-export 'src/ui/theme.dart';
 export 'src/ui/widgets.dart';
 
 export 'src/settings/color-setting.dart';
