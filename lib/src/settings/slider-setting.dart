@@ -66,25 +66,35 @@ class _SliderSettingState extends State<SliderSetting> {
 
       // Margin
       case SettingType.margin:
+        double marginScale = 90.0 / screenWidth(context);
+        double liveMargin = currValue * marginScale;
+
         return [
           Container(height: buttonSpacer),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              paddedText('Preview: $currValue', getTextStyle(dialogContentStyleKey)),
+              paddedText(
+                'Preview (to scale):\n$currValue',
+                getTextStyle(dialogContentStyleKey),
+                TextAlign.center,
+              ),
               Container(
-                height: 160,
-                width: 90,
+                height: 160.0,
+                width: 90.0,
                 color: Color(AppConfig.prefs[themeTextColorKey]),
-                margin: EdgeInsets.all(currValue),
-                child: Container(color: Color(AppConfig.prefs[themeColorKey])),
+                child: Container(
+                  color: Color(AppConfig.prefs[themeColorKey]),
+                  margin: EdgeInsets.all(liveMargin),
+                ),
               ),
             ],
           ),
           Container(height: buttonSpacer),
         ];
 
+      // Padding
       case SettingType.padding:
         return [
           Container(height: buttonSpacer),
