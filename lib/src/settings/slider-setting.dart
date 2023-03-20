@@ -10,6 +10,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// This will determine the preview [Widget]s
 enum SettingType {
   fontSize,
+  margin,
+  padding,
   buttonHeight,
   buttonSpacing,
   dialogSpacing,
@@ -58,6 +60,40 @@ class _SliderSettingState extends State<SliderSetting> {
             () {},
             'Preview: $currValue',
             getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
+          ),
+          Container(height: buttonSpacer),
+        ];
+
+      // Margin
+      case SettingType.margin:
+        return [
+          Container(height: buttonSpacer),
+          paddedText('Preview: $currValue', getTextStyle(dialogContentStyleKey)),
+          Container(
+            height: 160,
+            width: 90,
+            margin: EdgeInsets.all(currValue),
+            child: Container(
+              child: buildImage(
+                AppConfig.prefs[backImageKey],
+                AppConfig.prefs[backImageKey],
+              ),
+            ),
+          ),
+          Container(height: buttonSpacer),
+        ];
+
+      case SettingType.padding:
+        return [
+          Container(height: buttonSpacer),
+          ezTextButton(
+            () {},
+            () {},
+            'Preview: $currValue',
+            null,
+            androidButton().copyWith(
+              padding: MaterialStatePropertyAll(EdgeInsets.all(currValue)),
+            ),
           ),
           Container(height: buttonSpacer),
         ];
