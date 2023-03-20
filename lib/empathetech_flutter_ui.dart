@@ -1,16 +1,15 @@
 library empathetech_flutter_ui;
 
-export 'src/misc/helpers.dart';
-export 'src/misc/storage.dart';
-export 'src/notifications/notifications.dart';
-export 'src/settings/app-config.dart';
-export 'src/ui/cupertino.dart';
-export 'src/ui/material.dart';
-export 'src/ui/scaffolds.dart';
-export 'src/ui/text.dart';
-export 'src/ui/widgets.dart';
-
-export 'src/settings/color-setting.dart';
-export 'src/settings/font-setting.dart';
-export 'src/settings/image-setting.dart';
-export 'src/settings/slider-setting.dart';
+export 'src/helpers.dart';
+export 'src/storage.dart';
+export 'src/notifications.dart';
+export 'src/app-config.dart';
+export 'src/cupertino.dart';
+export 'src/material.dart';
+export 'src/scaffolds.dart';
+export 'src/text.dart';
+export 'src/widgets.dart';
+export 'src/color-setting.dart';
+export 'src/font-setting.dart';
+export 'src/image-setting.dart';
+export 'src/slider-setting.dart';

@@ -98,13 +98,16 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.padding:
         return [
           Container(height: buttonSpacer),
-          ezTextButton(
+          ezButton(
             () {},
             () {},
-            'Preview: $currValue',
-            null,
-            androidButton().copyWith(
-              padding: MaterialStatePropertyAll(EdgeInsets.all(currValue)),
+            Padding(
+              padding: EdgeInsets.all(currValue),
+              child: Text(
+                'Preview: $currValue',
+                style: getTextStyle(buttonStyleKey),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           Container(height: buttonSpacer),
