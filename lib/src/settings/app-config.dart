@@ -30,11 +30,11 @@ class AppConfig {
 
   static Map<String, dynamic> defaults = {
     backImageKey: null,
-    backColorKey: 0xE6A520DA, // Empathetech purple
+    backColorKey: 0xFF141414, // Almost black
     themeColorKey: 0xFF141414, // Almost black
-    themeTextColorKey: 0xFFFFFFFF, // White
-    buttonColorKey: 0xE6DAA520, // Empathetech gold
-    buttonTextColorKey: 0xFF000000, // Black
+    themeTextColorKey: 0xFFFFFFFF, // White text
+    buttonColorKey: 0xE620DAA5, // Empathetech eucalyptus
+    buttonTextColorKey: 0xFF000000, // Black text
     buttonSpacingKey: 35.0,
     dialogSpacingKey: 20.0,
     marginKey: 15.0,
