@@ -62,6 +62,10 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        // Title
+        paddedText('Font family', getTextStyle(subTitleStyleKey)),
+        Container(height: buttonSpacer),
+
         // Font picker
         ezTextButton(
           chooseGoogleFont,
