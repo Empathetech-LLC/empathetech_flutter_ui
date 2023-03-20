@@ -70,9 +70,9 @@ Widget warningCard(BuildContext context, String content) {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(PlatformIcons(context).error, color: Colors.amber),
+              Icon(Icons.warning, color: Colors.amber),
               Text('WARNING', style: titleStyle),
-              Icon(PlatformIcons(context).error, color: Colors.amber),
+              Icon(Icons.warning, color: Colors.amber),
             ],
           ),
           Container(height: padding),
