@@ -68,17 +68,19 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.margin:
         return [
           Container(height: buttonSpacer),
-          paddedText('Preview: $currValue', getTextStyle(dialogContentStyleKey)),
-          Container(
-            height: 160,
-            width: 90,
-            margin: EdgeInsets.all(currValue),
-            child: Container(
-              child: buildImage(
-                AppConfig.prefs[backImageKey],
-                AppConfig.prefs[backImageKey],
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              paddedText('Preview: $currValue', getTextStyle(dialogContentStyleKey)),
+              Container(
+                height: 160,
+                width: 90,
+                color: Color(AppConfig.prefs[themeTextColorKey]),
+                margin: EdgeInsets.all(currValue),
+                child: Container(color: Color(AppConfig.prefs[themeColorKey])),
               ),
-            ),
+            ],
           ),
           Container(height: buttonSpacer),
         ];
