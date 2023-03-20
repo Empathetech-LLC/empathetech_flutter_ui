@@ -17,6 +17,11 @@ double screenHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
+/// More readable than MediaQuery.of(context).size
+Size screenSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
+
 /// Returns the RGB invert of the passed color
 Color invertColor(Color toInvert) {
   final r = 255 - toInvert.red;
