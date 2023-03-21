@@ -6,7 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Styles a [PlatformSwitch] from [AppConfig.prefs]
+Widget ezSwitch(BuildContext context, bool value, void Function(bool)? onChanged) {
+  return PlatformSwitch(
+    value: value,
+    onChanged: onChanged,
+    activeColor: Color(AppConfig.prefs[buttonColorKey]),
+  );
+}
+
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs]
+/// If provided, [customStyle] will be merged with [materialButton]
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? customStyle]) {
   // Build button style(s)
@@ -19,7 +29,7 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
       onPressed: action,
       child: body,
 
-      // Android config
+      // Styling
       material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
       cupertino: (context, platform) => m2cButton(baseStyle),
     ),
@@ -28,38 +38,73 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
 
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
 /// behavior of [ElevatedButton.icon]
-
-/// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
-/// behavior of [ElevatedButton.icon]
-Widget ezTextIconButton(
-    void Function() action, void Function() longAction, String text, IconData icon,
-    [TextStyle? textStyle, Color? buttonColor, Color? iconColor]) {
-  Color color = Color(AppConfig.prefs[buttonColorKey]);
-  double padding = AppConfig.prefs[paddingKey];
-  double buttonTextSize = getTextStyle(buttonStyleKey).fontSize ?? 24.0;
+/// If provided, [customStyle] will be merged with [materialButton]
+Widget ezIconButton(
+    void Function() action, void Function() longAction, Icon icon, Widget body,
+    [ButtonStyle? customStyle]) {
+  ButtonStyle baseStyle =
+      customStyle == null ? materialButton() : materialButton().merge(customStyle);
 
   return GestureDetector(
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
-      color: color,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Icon
-          Icon(
-            icon,
-            color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
-            size: buttonTextSize,
-          ),
-          Container(width: padding),
-
-          // Text
-          Text(text, style: textStyle ?? getTextStyle(buttonStyleKey)),
+          icon,
+          Container(width: AppConfig.prefs[paddingKey]),
+          body,
         ],
       ),
+
+      // Styling
       padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+      material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
+      cupertino: (context, platform) => m2cButton(baseStyle),
     ),
   );
+}
+
+/// Builds a pair of customizable [ezTextIconButton]s for confirming and/or denying things
+Widget ezYesNo(
+    BuildContext context, void Function() onConfirm, void Function() onDeny, Axis axis,
+    [String confirmMsg = 'Yes',
+    String denyMsg = 'No',
+    Icon? customConfirm,
+    Icon? customDeny]) {
+  // Gather theme data
+  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+
+  return axis == Axis.vertical
+      ? Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Confirm
+            ezIconButton(onConfirm, () {}, confirmIcon, Text(confirmMsg)),
+
+            // Spacer
+            Container(height: AppConfig.prefs[buttonSpacingKey]),
+
+            // Deny
+            ezIconButton(onDeny, () {}, denyIcon, Text(denyMsg)),
+          ],
+        )
+      : Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Confirm
+            ezIconButton(onConfirm, () {}, confirmIcon, Text(confirmMsg)),
+
+            // Spacer
+            Container(width: AppConfig.prefs[paddingKey]),
+
+            // Deny
+            ezIconButton(onDeny, () {}, denyIcon, Text(denyMsg)),
+          ],
+        );
 }
