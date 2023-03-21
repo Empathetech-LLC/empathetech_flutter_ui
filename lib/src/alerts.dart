@@ -4,7 +4,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
