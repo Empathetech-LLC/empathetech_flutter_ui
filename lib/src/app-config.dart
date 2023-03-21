@@ -26,6 +26,7 @@ class AppConfig {
   static late FocusManager focus;
   static late SharedPreferences preferences;
   static late Map<String, dynamic> prefs;
+  static late List<String> assets;
 
   static Map<String, dynamic> defaults = {
     backImageKey: null,
@@ -44,7 +45,13 @@ class AppConfig {
 
   /// Populate [AppConfig.prefs], overwriting defaults whenever a user value is found
   /// Optionally expand the user customizable values with [customDefaults]
-  static void init([Map<String, dynamic>? customDefaults]) {
+  static void init({
+    required List<String> assetPaths,
+    Map<String, dynamic>? customDefaults,
+  }) {
+    // Load asset paths
+    assets = assetPaths;
+
     // Load any custom defaults
     if (customDefaults != null) defaults.addAll(customDefaults);
 

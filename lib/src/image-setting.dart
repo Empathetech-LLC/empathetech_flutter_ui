@@ -8,19 +8,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Creates a tool for updating the image at [prefsKey]'s path
-/// Take in the [isAssetImage] bool so an image preview can be built
+/// Take in the [isAsset] bool so an image preview can be built
 class ImageSetting extends StatefulWidget {
   const ImageSetting({
     Key? key,
     required this.prefsKey,
-    required this.isAssetImage,
     required this.fullscreen,
     required this.title,
     required this.credits,
   }) : super(key: key);
 
   final String prefsKey;
-  final bool isAssetImage;
   final bool fullscreen;
   final String title;
   final String credits;
@@ -136,7 +134,6 @@ class _ImageSettingState extends State<ImageSetting> {
                 ? Icon(PlatformIcons(context).clear)
                 : buildImage(
                     path: currPath,
-                    isAsset: widget.isAssetImage,
                     fit: BoxFit.fill,
                   ),
           ),
