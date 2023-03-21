@@ -38,15 +38,21 @@ Widget ezForm({
     decoration: BoxDecoration(border: Border.all(color: buttonColor)),
     child: PlatformTextFormField(
       key: key,
-      cursorColor: themeTextColor,
       controller: controller,
       textAlign: TextAlign.center,
-      style: getTextStyle(dialogContentStyleKey),
       obscureText: private,
+
+      // Hint
       hintText: hintText,
       autofillHints: autofillHints,
+
+      // Validating
       validator: validator,
       autovalidateMode: autovalidateMode,
+
+      // Styling
+      style: getTextStyle(dialogContentStyleKey),
+      cursorColor: themeTextColor,
     ),
   );
 }
