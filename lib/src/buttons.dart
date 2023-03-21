@@ -40,6 +40,7 @@ Widget ezButton({
       foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
       textStyle: customStyle.textStyle ?? baseStyle.textStyle,
       padding: customStyle.padding ?? baseStyle.padding,
+      side: customStyle.side ?? baseStyle.side,
       shape: customStyle.shape ?? baseStyle.shape,
     );
     baseStyle = baseStyle.merge(customStyle);
@@ -79,6 +80,7 @@ Widget ezIconButton({
       foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
       textStyle: customStyle.textStyle ?? baseStyle.textStyle,
       padding: customStyle.padding ?? baseStyle.padding,
+      side: customStyle.side ?? baseStyle.side,
       shape: customStyle.shape ?? baseStyle.shape,
     );
     baseStyle = baseStyle.merge(customStyle);
