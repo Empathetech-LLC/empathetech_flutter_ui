@@ -80,7 +80,6 @@ TextStyle getTextStyle(String textType) {
 
   late double currSize = AppConfig.prefs[fontSizeKey];
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
