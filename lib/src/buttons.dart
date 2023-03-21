@@ -25,10 +25,27 @@ Widget ezButton({
   required Widget body,
   ButtonStyle? customStyle,
 }) {
-  // Build button style(s)
-  ButtonStyle baseStyle =
-      customStyle == null ? materialButton() : materialButton().merge(customStyle);
+  // Build button style
+  ButtonStyle baseStyle;
 
+  (body is Icon)
+      ? baseStyle = materialButton(shape: CircleBorder())
+      : baseStyle = materialButton();
+
+  // Overwrite any fields from base style found in custom style
+  // Then merge any fields unique to custom style
+  if (customStyle != null) {
+    baseStyle = baseStyle.copyWith(
+      backgroundColor: customStyle.backgroundColor ?? baseStyle.backgroundColor,
+      foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
+      textStyle: customStyle.textStyle ?? baseStyle.textStyle,
+      padding: customStyle.padding ?? baseStyle.padding,
+      shape: customStyle.shape ?? baseStyle.shape,
+    );
+    baseStyle = baseStyle.merge(customStyle);
+  }
+
+  // Return the button
   return GestureDetector(
     onLongPress: longAction,
     child: PlatformElevatedButton(
@@ -36,16 +53,7 @@ Widget ezButton({
       child: body,
 
       // Styling
-      material: (context, platform) => body is Icon
-          // When the child is just an icon, make the button circular
-          ? MaterialElevatedButtonData(
-              style: baseStyle.merge(
-                ButtonStyle(
-                  shape: MaterialStateProperty.all<CircleBorder>(CircleBorder()),
-                ),
-              ),
-            )
-          : MaterialElevatedButtonData(style: baseStyle),
+      material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
       cupertino: (context, platform) => m2cButton(baseStyle),
     ),
   );
@@ -61,8 +69,20 @@ Widget ezIconButton({
   required Widget body,
   ButtonStyle? customStyle,
 }) {
-  ButtonStyle baseStyle =
-      customStyle == null ? materialButton() : materialButton().merge(customStyle);
+  ButtonStyle baseStyle = materialButton();
+
+  // Overwrite any fields from base style found in custom style
+  // Then merge any fields unique to custom style
+  if (customStyle != null) {
+    baseStyle = baseStyle.copyWith(
+      backgroundColor: customStyle.backgroundColor ?? baseStyle.backgroundColor,
+      foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
+      textStyle: customStyle.textStyle ?? baseStyle.textStyle,
+      padding: customStyle.padding ?? baseStyle.padding,
+      shape: customStyle.shape ?? baseStyle.shape,
+    );
+    baseStyle = baseStyle.merge(customStyle);
+  }
 
   return GestureDetector(
     onLongPress: longAction,
