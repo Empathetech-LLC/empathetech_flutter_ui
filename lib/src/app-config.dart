@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Constants/keys
 
+const String appTitleKey = 'appTitle';
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
 const String backColorKey = 'appBackgroundColor';
@@ -29,6 +30,7 @@ class AppConfig {
   static late Map<String, dynamic> prefs;
 
   static Map<String, dynamic> defaults = {
+    appTitleKey: 'EFUI',
     backImageKey: null,
     backColorKey: 0xFF141414, // Almost black
     themeColorKey: 0xFF141414, // Almost black
