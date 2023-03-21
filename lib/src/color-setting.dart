@@ -95,7 +95,6 @@ class _ColorSettingState extends State<ColorSetting> {
         // Color label
         ezButton(
           action: () {},
-          longAction: () {},
           body: Text(widget.message, style: getTextStyle(colorSettingStyleKey)),
         ),
 
