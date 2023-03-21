@@ -1,11 +1,58 @@
 library empathetech_flutter_ui;
 
-import 'app-config.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Local style keys
+// Custom wrappers
+
+/// Text that values its personal space
+Widget paddedText(
+  String text, {
+  TextStyle? style,
+  TextAlign? alignment,
+}) {
+  return Padding(
+    padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    child: Text(text, style: style, textAlign: alignment),
+  );
+}
+
+/// Styles a [PlatformTextFormField] from [AppConfig.prefs]
+Widget ezForm({
+  required Key? key,
+  required TextEditingController? controller,
+  required String? hintText,
+  bool private = false,
+  Iterable<String>? autofillHints,
+  String? Function(String?)? validator,
+  AutovalidateMode? autovalidateMode,
+}) {
+  // Gather theme data
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  return Container(
+    decoration: BoxDecoration(border: Border.all(color: buttonColor)),
+    child: PlatformTextFormField(
+      key: key,
+      cursorColor: themeTextColor,
+      controller: controller,
+      textAlign: TextAlign.center,
+      style: getTextStyle(dialogContentStyleKey),
+      obscureText: private,
+      hintText: hintText,
+      autofillHints: autofillHints,
+      validator: validator,
+      autovalidateMode: autovalidateMode,
+    ),
+  );
+}
+
+// Local text type(s)
 
 const String defaultStyleKey = 'defaultStyle';
 const String titleStyleKey = 'titleStyle';
@@ -19,8 +66,8 @@ const String fontSettingStyleKey = 'fontSettingStyle';
 const String sliderSettingStyleKey = 'sliderSettingStyle';
 const String errorStyleKey = 'errorStyle';
 
+/// Returns the [textType] style, built from the current [AppConfig.prefs] values
 TextStyle getTextStyle(String textType) {
-  // Gather theme data
   late String currFontFamily =
       googleStyleAlias(AppConfig.prefs[fontFamilyKey]).fontFamily!;
 
@@ -93,7 +140,31 @@ TextStyle getTextStyle(String textType) {
   }
 }
 
-// Google style keys
+// Local text theme(s)
+
+TextTheme defaultTextTheme() {
+  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+
+  return TextTheme(
+    labelLarge: defaultTextStyle,
+    bodyLarge: defaultTextStyle,
+    titleLarge: defaultTextStyle,
+    displayLarge: defaultTextStyle,
+    headlineLarge: defaultTextStyle,
+    labelMedium: defaultTextStyle,
+    bodyMedium: defaultTextStyle,
+    titleMedium: defaultTextStyle,
+    displayMedium: defaultTextStyle,
+    headlineMedium: defaultTextStyle,
+    labelSmall: defaultTextStyle,
+    bodySmall: defaultTextStyle,
+    titleSmall: defaultTextStyle,
+    displaySmall: defaultTextStyle,
+    headlineSmall: defaultTextStyle,
+  );
+}
+
+// Supported Google font(s)
 
 const String soraKey = 'Sora';
 const String hahmletKey = 'Hahmlet';
@@ -139,7 +210,7 @@ const List<String> myGoogleFonts = [
   oldStandardKey,
 ];
 
-// Google Getter
+/// Returns the [GoogleFonts] styling for [fontName]
 TextStyle googleStyleAlias(String fontName) {
   switch (fontName) {
     case soraKey:

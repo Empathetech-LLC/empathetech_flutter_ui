@@ -1,85 +1,96 @@
 library empathetech_flutter_ui;
 
-import 'helpers.dart';
-import 'app-config.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Standard full screen scaffold
-Widget standardScaffold(
-    BuildContext context,
-    String title,
-    Widget body,
-    DecorationImage? backgroundImage,
-    Color backgroundColor,
-    Drawer? androidHamburger,
-    CupertinoNavigationBar? iosNavBar) {
-  double margin = AppConfig.prefs[marginKey];
-
-  // Gesture detector makes it so keyboards close on screen tap
+/// Builds a [PlatformScaffold] from the passed values that will
+/// automatically update alongside [AppConfig]
+Widget ezScaffold({
+  required BuildContext context,
+  required String title,
+  required Widget body,
+  required DecorationImage? backgroundImage,
+  required Color backgroundColor,
+  required MaterialScaffoldData scaffoldConfig,
+}) {
   return GestureDetector(
+    // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
+
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: PlatformText(title)),
+      appBar: PlatformAppBar(title: Text(title)),
+
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          image: backgroundImage,
-        ),
 
-        // Wrapping the passed body in a margin'd container means UI code can always...
-        // ...use the full context width && have consistent margins
-        child: Container(
-          child: body,
-          margin: EdgeInsets.all(margin),
-        ),
+        // Background
+        decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+
+        // Build space
+        child: Container(child: body, margin: EdgeInsets.all(AppConfig.prefs[marginKey])),
       ),
-      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
-      cupertino: (context, platform) =>
-          CupertinoPageScaffoldData(navigationBar: iosNavBar),
+
+      // Platform specific configurations
+      material: (context, platform) => scaffoldConfig,
+      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
     ),
   );
 }
 
-// Nav screen: Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body,
-    Drawer? androidHamburger, CupertinoNavigationBar? iosNavBar, PlatformNavBar navBar) {
-  // Gesture detector makes it so keyboards close on screen tap
+/// Builds a [PlatformScaffold] with a [BottomNavigationBar]/[CupertinoTabBar]
+/// from the passed values that will automatically update alongside [AppConfig]
+Widget ezNavScaffold({
+  required BuildContext context,
+  required String title,
+  required Widget body,
+  required int? index,
+  required void Function(int)? onChanged,
+  required List<BottomNavigationBarItem>? items,
+  required MaterialScaffoldData scaffoldConfig,
+}) {
   return GestureDetector(
+    // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
+
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: PlatformText(title)),
+      appBar: PlatformAppBar(title: Text(title)),
+
       body: body,
-      material: (context, platform) => MaterialScaffoldData(endDrawer: androidHamburger),
-      cupertino: (context, platform) =>
-          CupertinoPageScaffoldData(navigationBar: iosNavBar),
-      bottomNavBar: navBar,
+
+      bottomNavBar: PlatformNavBar(
+        currentIndex: index,
+        itemChanged: onChanged,
+        items: items,
+      ),
+
+      // Platform specific configurations
+      material: (context, platform) => scaffoldConfig,
+      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
     ),
   );
 }
 
-// Nav screen: Inner screen
-Widget navWindow(BuildContext context, Widget body, DecorationImage? backgroundImage,
-    Color backgroundColor) {
+/// Builds the "main screen" for and pages built with [ezNavScaffold]
+Widget navWindow({
+  required BuildContext context,
+  required Widget body,
+  required DecorationImage? backgroundImage,
+  required Color backgroundColor,
+}) {
   double margin = AppConfig.prefs[marginKey];
 
   return Container(
     height: screenHeight(context),
     width: screenWidth(context),
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      image: backgroundImage,
-    ),
 
-    // Wrapping the passed body in a margin'd container means UI code can always...
-    // ...use the full context width && have consistent margins
-    child: Container(
-      child: body,
-      margin: EdgeInsets.all(margin),
-    ),
+    // Background
+    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+
+    // Build space
+    child: Container(child: body, margin: EdgeInsets.all(margin)),
   );
 }

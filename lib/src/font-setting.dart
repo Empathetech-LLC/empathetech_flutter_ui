@@ -1,12 +1,12 @@
 library empathetech_flutter_ui;
 
-import '../app-config.dart';
-import '../text.dart';
-import '../../empathetech_flutter_ui.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Creates a tool for updating the app's font
 class FontFamilySetting extends StatefulWidget {
   const FontFamilySetting({Key? key}) : super(key: key);
 
@@ -15,58 +15,43 @@ class FontFamilySetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<FontFamilySetting> {
-  //// Initialize state
+  // Initialize state
 
-  // Gather theme data
   late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
   late String currFontFamily = AppConfig.prefs[fontFamilyKey];
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  //// Define interaction methods
-
-  // onPressed method for font picker button
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezTextButton]s
   void chooseGoogleFont() {
     ezDialog(
-      context,
-
-      // Title
-      'Choose a font',
-
-      // Children
-      myGoogleFonts
-          .map(
-            (String font) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Button with the title of the font in that font's style
-                ezButton(
-                  () {
-                    AppConfig.preferences.setString(fontFamilyKey, font);
-                    setState(() {
-                      currFontFamily = googleStyleAlias(font).fontFamily!;
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  () {},
-                  PlatformText(
-                    font,
-                    textAlign: TextAlign.center,
-                    style: googleStyleAlias(font),
+      context: context,
+      title: 'Choose a font',
+      content: ezScrollView(
+        children: myGoogleFonts
+            .map(
+              (String font) => Column(
+                children: [
+                  // Map font to a selectable button (title == name)
+                  ezButton(
+                    action: () {
+                      AppConfig.preferences.setString(fontFamilyKey, font);
+                      setState(() {
+                        currFontFamily = googleStyleAlias(font).fontFamily!;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                    body: Text(font, style: googleStyleAlias(font)),
                   ),
-                ),
-                Container(
-                  height: buttonSpacer,
-                ),
-              ],
-            ),
-          )
-          .toList(),
+                  Container(height: buttonSpacer),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
-
-  //// Draw state
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +59,15 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        // Title
+        paddedText('Font family', style: getTextStyle(subTitleStyleKey)),
+        Container(height: buttonSpacer),
+
         // Font picker
         ezButton(
-          chooseGoogleFont,
-          () {},
-          PlatformText(
+          action: chooseGoogleFont,
+          body: Text(
             'Choose font:\n$currFontFamily',
-            textAlign: TextAlign.center,
-            maxLines: 2,
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
               fontFamily: currFontFamily,
@@ -93,17 +79,14 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
 
         // Font reset
         ezButton(
-          () {
+          action: () {
             AppConfig.preferences.remove(fontFamilyKey);
             setState(() {
               currFontFamily = defaultFontFamily;
             });
           },
-          () {},
-          PlatformText(
+          body: Text(
             'Reset font\n($defaultFontFamily)',
-            textAlign: TextAlign.center,
-            maxLines: 2,
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
               fontFamily: defaultFontFamily,

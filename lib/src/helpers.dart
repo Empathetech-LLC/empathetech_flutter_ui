@@ -1,21 +1,27 @@
 library empathetech_flutter_ui;
 
-import '../empathetech_flutter_ui.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'dart:developer';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Get screen width
+/// More readable than MediaQuery.of(context).size.width
 double screenWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
 }
 
-// Get screen height
+/// More readable than MediaQuery.of(context).size.height
 double screenHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-// Get the opposite of the passed color
+/// More readable than MediaQuery.of(context).size
+Size screenSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
+
+/// Returns the RGB invert of the passed color
 Color invertColor(Color toInvert) {
   final r = 255 - toInvert.red;
   final g = 255 - toInvert.green;
@@ -24,7 +30,8 @@ Color invertColor(Color toInvert) {
   return Color.fromARGB((toInvert.opacity * 255).round(), r, g, b);
 }
 
-// Returns whether text with a background of the passed color should be black or white
+/// Returns black or white based on which should be more readable
+/// for text with the passed background color
 Color getContrastColor(Color background) {
   final r = background.red;
   final g = background.green;
@@ -33,8 +40,6 @@ Color getContrastColor(Color background) {
   return (((r * 0.299) + (g * 0.587) + (b * 0.114)) >= 150) ? Colors.black : Colors.white;
 }
 
-// Log the passed message and display an alert dialog for the user
-void popNLog(BuildContext context, String message) {
-  log(message);
-  ezDialog(context, 'Attention:', [paddedText(message)]);
-}
+/// Do you have a void [Function] as a parameter that you want to be optional?
+/// Then do nothing!
+void doNothing() {}
