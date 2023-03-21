@@ -5,6 +5,24 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+PlatformApp ezApp({
+  required String? initialRoute,
+  required Map<String, Widget Function(BuildContext)>? routes,
+}) {
+  return PlatformApp(
+    debugShowCheckedModeBanner: false,
+    title: AppConfig.prefs[appTitleKey],
+
+    // Routing
+    initialRoute: initialRoute,
+    routes: routes,
+
+    // Styling
+    material: (context, platform) => materialAppTheme(),
+    cupertino: (context, platform) => cupertinoAppTheme(),
+  );
+}
+
 /// Material (Android) [ThemeData] built from [AppConfig.prefs]
 MaterialAppData materialAppTheme() {
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
@@ -76,7 +94,7 @@ MaterialAppData materialAppTheme() {
 }
 
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
-CupertinoAppData m2cApp(MaterialAppData from) {
+CupertinoAppData cupertinoAppTheme() {
   return CupertinoAppData();
 }
 
