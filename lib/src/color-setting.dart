@@ -62,7 +62,14 @@ class _ColorSettingState extends State<ColorSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Color preview
-          Container(width: 75, height: 75, color: resetColor),
+          Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: resetColor,
+              border: Border.all(color: getContrastColor(resetColor)),
+            ),
+          ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           ezYesNo(
