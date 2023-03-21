@@ -113,6 +113,7 @@ Widget ezYesNo({
   required void Function() onConfirm,
   required void Function() onDeny,
   required Axis axis,
+  double? spacer,
   String confirmMsg = 'Yes',
   String denyMsg = 'No',
   Icon? customConfirm,
@@ -121,6 +122,8 @@ Widget ezYesNo({
   // Gather theme data
   Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
   Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
+
+  double spacing = (spacer == null) ? AppConfig.prefs[buttonSpacingKey] : spacer;
 
   return axis == Axis.vertical
       ? Column(
@@ -134,7 +137,7 @@ Widget ezYesNo({
               body: Text(confirmMsg),
             ),
 
-            Container(height: AppConfig.prefs[buttonSpacingKey]),
+            Container(height: spacing),
 
             // Deny
             ezIconButton(
@@ -155,7 +158,7 @@ Widget ezYesNo({
               body: Text(confirmMsg),
             ),
 
-            Container(width: AppConfig.prefs[paddingKey]),
+            Container(width: spacing),
 
             // Deny
             ezIconButton(
