@@ -7,6 +7,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Material (Android) [ThemeData] built from [AppConfig.prefs]
 MaterialAppData materialAppTheme() {
+  // Gather theme data
+
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
@@ -14,6 +16,8 @@ MaterialAppData materialAppTheme() {
 
   TextStyle dialogTitleText = getTextStyle(dialogTitleStyleKey);
   TextStyle dialogContentText = getTextStyle(dialogContentStyleKey);
+
+  // Build theme
 
   return MaterialAppData(
     theme: ThemeData(
@@ -77,7 +81,13 @@ MaterialAppData materialAppTheme() {
 
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
 CupertinoAppData cupertinoAppTheme() {
-  return CupertinoAppData();
+  // Gather theme data
+
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+
+  // Build theme
+
+  return CupertinoAppData(color: themeColor);
 }
 
 /// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
