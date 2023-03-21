@@ -5,6 +5,52 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+// Custom wrappers
+
+/// Text that values its personal space
+Widget paddedText(
+  String text, {
+  TextStyle? style,
+  TextAlign? alignment,
+}) {
+  return Padding(
+    padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    child: Text(text, style: style, textAlign: alignment),
+  );
+}
+
+/// Styles a [PlatformTextFormField] from [AppConfig.prefs]
+Widget ezForm({
+  required Key? key,
+  required TextEditingController? controller,
+  required String? hintText,
+  bool private = false,
+  Iterable<String>? autofillHints,
+  String? Function(String?)? validator,
+  AutovalidateMode? autovalidateMode,
+}) {
+  // Gather theme data
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  return Container(
+    decoration: BoxDecoration(border: Border.all(color: buttonColor)),
+    child: PlatformTextFormField(
+      key: key,
+      cursorColor: themeTextColor,
+      controller: controller,
+      textAlign: TextAlign.center,
+      style: getTextStyle(dialogContentStyleKey),
+      obscureText: private,
+      hintText: hintText,
+      autofillHints: autofillHints,
+      validator: validator,
+      autovalidateMode: autovalidateMode,
+    ),
+  );
+}
 
 // Local text type(s)
 

@@ -2,7 +2,6 @@ library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -39,10 +38,4 @@ Color getContrastColor(Color background) {
   final b = background.blue;
 
   return (((r * 0.299) + (g * 0.587) + (b * 0.114)) >= 150) ? Colors.black : Colors.white;
-}
-
-/// Log the passed message and display an alert dialog for the user
-void popNLog(BuildContext context, String message) {
-  log(message);
-  ezDialog(context, 'Attention:', paddedText(message));
 }
