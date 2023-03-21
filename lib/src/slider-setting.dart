@@ -55,7 +55,7 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            action: () {},
+            action: doNothing,
             body: Text(
               'Preview: $currValue',
               style: getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
@@ -99,7 +99,7 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            action: () {},
+            action: doNothing,
             body: Padding(
               padding: EdgeInsets.all(currValue),
               child: Text(
@@ -117,7 +117,7 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            action: () {},
+            action: doNothing,
             body: Text('Preview $currValue'),
             customStyle: ElevatedButton.styleFrom(
               fixedSize: Size(screenWidth(context), currValue),
@@ -132,9 +132,9 @@ class _SliderSettingState extends State<SliderSetting> {
           ezScrollView(
             children: [
               SizedBox(height: currValue),
-              ezButton(action: () {}, body: Text('Preview $currValue')),
+              ezButton(action: doNothing, body: Text('Preview $currValue')),
               SizedBox(height: currValue),
-              ezButton(action: () {}, body: Text('Preview $currValue')),
+              ezButton(action: doNothing, body: Text('Preview $currValue')),
               SizedBox(height: currValue),
             ],
             centered: true,
@@ -154,11 +154,11 @@ class _SliderSettingState extends State<SliderSetting> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Button 1
-                  ezButton(action: () {}, body: Text('Preview $currValue')),
+                  ezButton(action: doNothing, body: Text('Preview $currValue')),
                   Container(height: currValue),
 
                   // Button 2
-                  ezButton(action: () {}, body: Text('Preview $currValue')),
+                  ezButton(action: doNothing, body: Text('Preview $currValue')),
                   Container(height: currValue),
                 ],
               ),
