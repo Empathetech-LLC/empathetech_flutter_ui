@@ -32,7 +32,7 @@ class ImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<ImageSetting> {
   // Initialize state
 
-  late String currPath = widget.prefsKey;
+  late String currPath = AppConfig.prefs[widget.prefsKey];
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
