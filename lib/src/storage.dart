@@ -11,12 +11,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 /// Show color picker dialog, built from [flutter_colorpicker]
-void colorPicker(
-    BuildContext context,
-    Color startColor,
-    void Function(Color chosenColor) onColorChange,
-    void Function() apply,
-    void Function() cancel) {
+void ezColorPicker({
+  required BuildContext context,
+  required Color startColor,
+  required void Function(Color chosenColor) onColorChange,
+  required void Function() apply,
+  required void Function() cancel,
+}) {
   ezDialog(
     context,
     'Pick a color!',
@@ -31,12 +32,12 @@ void colorPicker(
 
         // Apply
         ezYesNo(
-          context,
-          apply,
-          cancel,
-          Axis.vertical,
-          'Apply',
-          'Cancel',
+          context: context,
+          onConfirm: apply,
+          onDeny: cancel,
+          axis: Axis.vertical,
+          confirmMsg: 'Apply',
+          denyMsg: 'Cancel',
         ),
       ],
     ),
@@ -44,7 +45,11 @@ void colorPicker(
 }
 
 /// [Image] wrapper for handling handling [AssetImage] vs [FileImage]
-Image buildImage(String path, bool isAsset, [BoxFit? fit]) {
+Image buildImage({
+  required String path,
+  required bool isAsset,
+  BoxFit? fit,
+}) {
   if (isAsset) {
     return Image(
       image: AssetImage(path),
@@ -59,7 +64,10 @@ Image buildImage(String path, bool isAsset, [BoxFit? fit]) {
 }
 
 /// [ImageProvider] wrapper for handling handling [AssetImage] vs [FileImage]
-ImageProvider provideImage(String path, bool isAsset) {
+ImageProvider provideImage({
+  required String path,
+  required bool isAsset,
+}) {
   if (isAsset) {
     return AssetImage(path);
   } else {
@@ -68,8 +76,11 @@ ImageProvider provideImage(String path, bool isAsset) {
 }
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<bool> changeImage(
-    BuildContext context, String prefsPath, ImageSource source) async {
+Future<bool> changeImage({
+  required BuildContext context,
+  required String prefsPath,
+  required ImageSource source,
+}) async {
   // Load image picker and save the result
   try {
     XFile? picked = await ImagePicker().pickImage(source: source);
@@ -78,12 +89,12 @@ Future<bool> changeImage(
       return false;
     }
 
-    // Build path
+    // Build the path
     Directory directory = await getApplicationDocumentsDirectory();
     String imageName = basename(picked.path);
     final image = File('${directory.path}/$imageName');
 
-    // Save new image
+    // Save the new image
     File(picked.path).copy(image.path);
     AppConfig.preferences.setString(prefsPath, image.path);
     return true;

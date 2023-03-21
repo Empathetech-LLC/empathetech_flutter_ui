@@ -7,7 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [PlatformSwitch] from [AppConfig.prefs]
-Widget ezSwitch(BuildContext context, bool value, void Function(bool)? onChanged) {
+Widget ezSwitch({
+  required bool value,
+  required void Function(bool)? onChanged,
+}) {
   return PlatformSwitch(
     value: value,
     onChanged: onChanged,
@@ -15,10 +18,14 @@ Widget ezSwitch(BuildContext context, bool value, void Function(bool)? onChanged
   );
 }
 
-/// Style a [PlatformElevatedButton] from [AppConfig.prefs]
+/// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
 /// If provided, [customStyle] will be merged with [materialButton]
-Widget ezButton(void Function() action, void Function() longAction, Widget body,
-    [ButtonStyle? customStyle]) {
+Widget ezButton({
+  required void Function() action,
+  required void Function() longAction,
+  required Widget body,
+  ButtonStyle? customStyle,
+}) {
   // Build button style(s)
   ButtonStyle baseStyle =
       customStyle == null ? materialButton() : materialButton().merge(customStyle);
@@ -39,9 +46,13 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
 /// behavior of [ElevatedButton.icon]
 /// If provided, [customStyle] will be merged with [materialButton]
-Widget ezIconButton(
-    void Function() action, void Function() longAction, Icon icon, Widget body,
-    [ButtonStyle? customStyle]) {
+Widget ezIconButton({
+  required void Function() action,
+  required void Function() longAction,
+  required Icon icon,
+  required Widget body,
+  ButtonStyle? customStyle,
+}) {
   ButtonStyle baseStyle =
       customStyle == null ? materialButton() : materialButton().merge(customStyle);
 
@@ -60,7 +71,6 @@ Widget ezIconButton(
       ),
 
       // Styling
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
       material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
       cupertino: (context, platform) => m2cButton(baseStyle),
     ),
@@ -68,12 +78,16 @@ Widget ezIconButton(
 }
 
 /// Builds a pair of customizable [ezTextIconButton]s for confirming and/or denying things
-Widget ezYesNo(
-    BuildContext context, void Function() onConfirm, void Function() onDeny, Axis axis,
-    [String confirmMsg = 'Yes',
-    String denyMsg = 'No',
-    Icon? customConfirm,
-    Icon? customDeny]) {
+Widget ezYesNo({
+  required BuildContext context,
+  required void Function() onConfirm,
+  required void Function() onDeny,
+  required Axis axis,
+  String confirmMsg = 'Yes',
+  String denyMsg = 'No',
+  Icon? customConfirm,
+  Icon? customDeny,
+}) {
   // Gather theme data
   Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
   Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
@@ -84,13 +98,22 @@ Widget ezYesNo(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Confirm
-            ezIconButton(onConfirm, () {}, confirmIcon, Text(confirmMsg)),
+            ezIconButton(
+              action: onConfirm,
+              longAction: () {},
+              icon: confirmIcon,
+              body: Text(confirmMsg),
+            ),
 
-            // Spacer
             Container(height: AppConfig.prefs[buttonSpacingKey]),
 
             // Deny
-            ezIconButton(onDeny, () {}, denyIcon, Text(denyMsg)),
+            ezIconButton(
+              action: onDeny,
+              longAction: () {},
+              icon: denyIcon,
+              body: Text(denyMsg),
+            ),
           ],
         )
       : Row(
@@ -98,13 +121,22 @@ Widget ezYesNo(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Confirm
-            ezIconButton(onConfirm, () {}, confirmIcon, Text(confirmMsg)),
+            ezIconButton(
+              action: onConfirm,
+              longAction: () {},
+              icon: confirmIcon,
+              body: Text(confirmMsg),
+            ),
 
-            // Spacer
             Container(width: AppConfig.prefs[paddingKey]),
 
             // Deny
-            ezIconButton(onDeny, () {}, denyIcon, Text(denyMsg)),
+            ezIconButton(
+              action: onDeny,
+              longAction: () {},
+              icon: denyIcon,
+              body: Text(denyMsg),
+            ),
           ],
         );
 }

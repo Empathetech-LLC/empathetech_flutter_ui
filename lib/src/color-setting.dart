@@ -24,37 +24,29 @@ class ColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<ColorSetting> {
-  // Initialize state
+  // Gather theme data
 
   late Color currColor = Color(AppConfig.prefs[widget.toControl]);
   late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
-  /// Opens a [colorPicker] for updating [currColor]
+  /// Opens an [ezColorPicker] for updating [currColor]
   void changeColor() {
-    colorPicker(
-      context,
-
-      // Starting color
-      currColor,
-
-      // onColorChange
-      (chosenColor) {
+    ezColorPicker(
+      context: context,
+      startColor: currColor,
+      onColorChange: (chosenColor) {
         setState(() {
           currColor = chosenColor;
         });
       },
-
-      // Apply
-      () {
+      apply: () {
         // Update the users setting
         AppConfig.preferences.setInt(widget.toControl, currColor.value);
         Navigator.of(context).pop();
       },
-
-      // Cancel
-      () => Navigator.of(context).pop(),
+      cancel: () => Navigator.of(context).pop(),
     );
   }
 
@@ -65,7 +57,11 @@ class _ColorSettingState extends State<ColorSetting> {
 
     ezDialog(
       context,
+
+      // Title
       'Reset to...',
+
+      // Body
       Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -75,10 +71,8 @@ class _ColorSettingState extends State<ColorSetting> {
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           ezYesNo(
-            context,
-            // On yes
-            () {
-              // Remove the users setting
+            context: context,
+            onConfirm: () {
               AppConfig.preferences.remove(widget.toControl);
 
               setState(() {
@@ -87,10 +81,8 @@ class _ColorSettingState extends State<ColorSetting> {
 
               Navigator.of(context).pop();
             },
-
-            // On no
-            () => Navigator.of(context).pop(),
-            Axis.horizontal,
+            onDeny: () => Navigator.of(context).pop(),
+            axis: Axis.horizontal,
           ),
         ],
       ),
