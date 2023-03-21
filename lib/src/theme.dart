@@ -100,10 +100,10 @@ ButtonStyle materialButton({OutlinedBorder? shape}) {
 /// Cupertino (iOS) [ElevatedButton] data built [from] the passed in Material [ButtonStyle]
 CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
   return CupertinoElevatedButtonData(
-    color: from.backgroundColor is Color
+    color: (from.backgroundColor is Color)
         ? from.backgroundColor as Color
-        : AppConfig.prefs[buttonColorKey],
-    padding: from.padding is EdgeInsetsGeometry
+        : Color(AppConfig.prefs[buttonColorKey]),
+    padding: (from.padding is EdgeInsetsGeometry)
         ? from.padding as EdgeInsetsGeometry
         : EdgeInsets.all(AppConfig.prefs[paddingKey]),
   );
