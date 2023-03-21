@@ -1,10 +1,33 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Constants/keys
+/// [PlatformApp] wrapper using [empathetech_flutter_ui] styling
+PlatformApp ezApp({
+  required String appTitle,
+  required String? initialRoute,
+  required Map<String, Widget Function(BuildContext)>? routes,
+}) {
+  return PlatformApp(
+    debugShowCheckedModeBanner: false,
+    title: appTitle,
+
+    // Routing
+    initialRoute: initialRoute,
+    routes: routes,
+
+    // Styling
+    material: (context, platform) => materialAppTheme(),
+    cupertino: (context, platform) => cupertinoAppTheme(),
+  );
+}
+
+// AppConfig constants/keys
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
 const String backColorKey = 'appBackgroundColor';
