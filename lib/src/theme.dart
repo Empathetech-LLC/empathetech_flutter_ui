@@ -3,10 +3,11 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Android (Material) [ThemeData] built from [AppConfig.prefs]
-MaterialAppData androidAppTheme() {
+/// Material (Android) [ThemeData] built from [AppConfig.prefs]
+MaterialAppData materialAppTheme() {
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
@@ -75,12 +76,16 @@ MaterialAppData androidAppTheme() {
   );
 }
 
-/// Android (Material) elevated button theme built from [AppConfig.prefs]
-ButtonStyle androidButton() {
+/// Material (Android) [ElevatedButton] theme built from [AppConfig.prefs]
+ButtonStyle materialButton() {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
     foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
     textStyle: getTextStyle(buttonStyleKey),
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
   );
+}
+
+CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
+  return CupertinoElevatedButtonData();
 }
