@@ -41,78 +41,69 @@ class _ImageSettingState extends State<ImageSetting> {
   /// Selection is sent to [changeImage]
   void chooseImage() {
     ezDialog(
-      context,
-
-      // Title
-      'Update background',
-
-      // Body
-
-      Column(
+      context: context,
+      title: 'Update background',
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
           ezIconButton(
-            () async {
+            action: () async {
               await changeImage(
-                context,
-                widget.prefsKey,
-                ImageSource.gallery,
+                context: context,
+                prefsPath: widget.prefsKey,
+                source: ImageSource.gallery,
               );
 
               Navigator.of(context).pop();
             },
-            () {},
-            Icon(PlatformIcons(context).folder),
-            Text('File'),
+            icon: Icon(PlatformIcons(context).folder),
+            body: Text('File'),
           ),
           Container(height: buttonSpacer),
 
           // From camera
           ezIconButton(
-            () async {
+            action: () async {
               await changeImage(
-                context,
-                widget.prefsKey,
-                ImageSource.camera,
+                context: context,
+                prefsPath: widget.prefsKey,
+                source: ImageSource.camera,
               );
 
               Navigator.of(context).pop();
             },
-            () {},
-            Icon(PlatformIcons(context).photoCamera),
-            Text('Camera'),
+            icon: Icon(PlatformIcons(context).photoCamera),
+            body: Text('Camera'),
           ),
           Container(height: buttonSpacer),
 
           // Reset
           ezIconButton(
-            () {
+            action: () {
               AppConfig.preferences.remove(widget.prefsKey);
               setState(() {
                 currPath = AppConfig.defaults[widget.prefsKey];
               });
               Navigator.of(context).pop();
             },
-            () {},
-            Icon(PlatformIcons(context).refresh),
-            Text('Reset'),
+            icon: Icon(PlatformIcons(context).refresh),
+            body: Text('Reset'),
           ),
           Container(height: buttonSpacer),
 
           // Clear
           ezIconButton(
-            () {
+            action: () {
               AppConfig.preferences.setString(widget.prefsKey, noImageKey);
               setState(() {
                 currPath = noImageKey;
               });
               Navigator.of(context).pop();
             },
-            () {},
-            Icon(PlatformIcons(context).clear),
-            Text('Clear'),
+            icon: Icon(PlatformIcons(context).clear),
+            body: Text('Clear'),
           ),
           Container(height: buttonSpacer),
         ],
@@ -123,9 +114,13 @@ class _ImageSettingState extends State<ImageSetting> {
   @override
   Widget build(BuildContext context) {
     return ezButton(
-      chooseImage,
-      () => ezDialog(context, 'Credit to:', paddedText(widget.credits)),
-      Row(
+      action: chooseImage,
+      longAction: () => ezDialog(
+        context: context,
+        title: 'Credit to:',
+        content: paddedText(widget.credits),
+      ),
+      body: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -139,7 +134,11 @@ class _ImageSettingState extends State<ImageSetting> {
             width: widget.fullscreen ? 90 : 75,
             child: currPath == noImageKey
                 ? Icon(PlatformIcons(context).clear)
-                : buildImage(currPath, widget.isAssetImage, BoxFit.fill),
+                : buildImage(
+                    path: currPath,
+                    isAsset: widget.isAssetImage,
+                    fit: BoxFit.fill,
+                  ),
           ),
         ],
       ),

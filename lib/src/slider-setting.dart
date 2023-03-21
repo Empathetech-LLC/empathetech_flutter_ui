@@ -56,9 +56,8 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            () {},
-            () {},
-            Text(
+            action: () {},
+            body: Text(
               'Preview: $currValue',
               style: getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
             ),
@@ -79,8 +78,8 @@ class _SliderSettingState extends State<SliderSetting> {
             children: [
               paddedText(
                 'Preview (to scale):\n$currValue',
-                getTextStyle(dialogContentStyleKey),
-                TextAlign.center,
+                style: getTextStyle(dialogContentStyleKey),
+                alignment: TextAlign.center,
               ),
               Container(
                 height: 160.0,
@@ -101,9 +100,8 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            () {},
-            () {},
-            Padding(
+            action: () {},
+            body: Padding(
               padding: EdgeInsets.all(currValue),
               child: Text(
                 'Preview: $currValue',
@@ -120,10 +118,9 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            () {},
-            () {},
-            Text('Preview $currValue'),
-            ElevatedButton.styleFrom(
+            action: () {},
+            body: Text('Preview $currValue'),
+            customStyle: ElevatedButton.styleFrom(
               fixedSize: Size(screenWidth(context), currValue),
             ),
           ),
@@ -133,14 +130,15 @@ class _SliderSettingState extends State<SliderSetting> {
       // Button spacing
       case SettingType.buttonSpacing:
         return [
-          ezCenterScroll(
-            [
+          ezScrollView(
+            children: [
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezButton(action: () {}, body: Text('Preview $currValue')),
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezButton(action: () {}, body: Text('Preview $currValue')),
               SizedBox(height: currValue),
             ],
+            centered: true,
           ),
         ];
 
@@ -149,25 +147,24 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           Container(height: buttonSpacer),
           ezButton(
-            () => ezDialog(
-              context,
-              'Space preview',
-              Column(
+            action: () => ezDialog(
+              context: context,
+              title: 'Space preview',
+              content: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Button 1
-                  ezButton(() {}, () {}, Text('Preview $currValue')),
+                  ezButton(action: () {}, body: Text('Preview $currValue')),
                   Container(height: currValue),
 
                   // Button 2
-                  ezButton(() {}, () {}, Text('Preview $currValue')),
+                  ezButton(action: () {}, body: Text('Preview $currValue')),
                   Container(height: currValue),
                 ],
               ),
             ),
-            () {},
-            Text('Press me'),
+            body: Text('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -210,15 +207,14 @@ class _SliderSettingState extends State<SliderSetting> {
 
       // Reset button
       ezIconButton(
-        () {
+        action: () {
           AppConfig.preferences.remove(widget.prefsKey);
           setState(() {
             currValue = AppConfig.defaults[widget.prefsKey];
           });
         },
-        () {},
-        Icon(PlatformIcons(context).refresh),
-        Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
+        icon: Icon(PlatformIcons(context).refresh),
+        body: Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
       ),
       Container(height: buttonSpacer),
     ]);

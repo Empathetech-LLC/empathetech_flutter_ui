@@ -19,10 +19,10 @@ void ezColorPicker({
   required void Function() cancel,
 }) {
   ezDialog(
-    context,
-    'Pick a color!',
-    ezScrollView(
-      [
+    context: context,
+    title: 'Pick a color!',
+    content: ezScrollView(
+      children: [
         // Main event
         ColorPicker(
           pickerColor: startColor,
