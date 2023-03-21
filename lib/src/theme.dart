@@ -76,6 +76,16 @@ MaterialAppData materialAppTheme() {
   );
 }
 
+/// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
+CupertinoAppData m2cApp(MaterialAppData from) {
+  return CupertinoAppData();
+}
+
+/// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
+CupertinoPageScaffoldData m2cScaffold(MaterialScaffoldData from) {
+  return CupertinoPageScaffoldData();
+}
+
 /// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
 ButtonStyle materialButton() {
   return ElevatedButton.styleFrom(
@@ -86,7 +96,7 @@ ButtonStyle materialButton() {
   );
 }
 
-/// Cupertino (iOS) [ElevatedButton] daata built [from] the passed in Material [ButtonStyle]
+/// Cupertino (iOS) [ElevatedButton] data built [from] the passed in Material [ButtonStyle]
 CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
   return CupertinoElevatedButtonData(
     color: from.backgroundColor is Color

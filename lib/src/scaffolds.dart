@@ -8,20 +8,21 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Builds a [PlatformScaffold] from the passed values that will
 /// automatically update alongside [AppConfig]
-Widget ezScaffold(
-    BuildContext context,
-    String title,
-    Widget body,
-    DecorationImage? backgroundImage,
-    Color backgroundColor,
-    MaterialScaffoldData androidConfig,
-    CupertinoPageScaffoldData iosConfig) {
+Widget ezScaffold({
+  required BuildContext context,
+  required String title,
+  required Widget body,
+  required DecorationImage? backgroundImage,
+  required Color backgroundColor,
+  required MaterialScaffoldData scaffoldConfig,
+}) {
   return GestureDetector(
     // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
 
     child: PlatformScaffold(
       appBar: PlatformAppBar(title: Text(title)),
+
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -34,23 +35,23 @@ Widget ezScaffold(
       ),
 
       // Platform specific configurations
-      material: (context, platform) => androidConfig,
-      cupertino: (context, platform) => iosConfig,
+      material: (context, platform) => scaffoldConfig,
+      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
     ),
   );
 }
 
 /// Builds a [PlatformScaffold] with a [BottomNavigationBar]/[CupertinoTabBar]
 /// from the passed values that will automatically update alongside [AppConfig]
-Widget ezNavScaffold(
-    BuildContext context,
-    String title,
-    Widget body,
-    int? index,
-    void Function(int)? onChanged,
-    List<BottomNavigationBarItem>? items,
-    MaterialScaffoldData androidConfig,
-    CupertinoPageScaffoldData iosConfig) {
+Widget ezNavScaffold({
+  required BuildContext context,
+  required String title,
+  required Widget body,
+  required int? index,
+  required void Function(int)? onChanged,
+  required List<BottomNavigationBarItem>? items,
+  required MaterialScaffoldData scaffoldConfig,
+}) {
   return GestureDetector(
     // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
@@ -64,22 +65,22 @@ Widget ezNavScaffold(
         currentIndex: index,
         itemChanged: onChanged,
         items: items,
-
-        // Platform specific configurations
-        material: (context, platform) => MaterialNavBarData(),
-        cupertino: (context, platform) => CupertinoTabBarData(),
       ),
 
       // Platform specific configurations
-      material: (context, platform) => androidConfig,
-      cupertino: (context, platform) => iosConfig,
+      material: (context, platform) => scaffoldConfig,
+      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
     ),
   );
 }
 
 /// Builds the "main screen" for and pages built with [ezNavScaffold]
-Widget navWindow(BuildContext context, Widget body, DecorationImage? backgroundImage,
-    Color backgroundColor) {
+Widget navWindow({
+  required BuildContext context,
+  required Widget body,
+  required DecorationImage? backgroundImage,
+  required Color backgroundColor,
+}) {
   double margin = AppConfig.prefs[marginKey];
 
   return Container(
