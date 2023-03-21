@@ -26,28 +26,25 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezTextButton]s
   void chooseGoogleFont() {
     ezDialog(
-      context,
-      'Choose a font',
-      ezScrollView(
-        myGoogleFonts
+      context: context,
+      title: 'Choose a font',
+      content: ezScrollView(
+        children: myGoogleFonts
             .map(
               (String font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
                   ezButton(
-                    () {
+                    action: () {
                       AppConfig.preferences.setString(fontFamilyKey, font);
                       setState(() {
                         currFontFamily = googleStyleAlias(font).fontFamily!;
                       });
                       Navigator.of(context).pop();
                     },
-                    () {},
-                    Text(font, style: googleStyleAlias(font)),
+                    body: Text(font, style: googleStyleAlias(font)),
                   ),
-                  Container(
-                    height: buttonSpacer,
-                  ),
+                  Container(height: buttonSpacer),
                 ],
               ),
             )
@@ -63,14 +60,13 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        paddedText('Font family', getTextStyle(subTitleStyleKey)),
+        paddedText('Font family', style: getTextStyle(subTitleStyleKey)),
         Container(height: buttonSpacer),
 
         // Font picker
         ezButton(
-          chooseGoogleFont,
-          () {},
-          Text(
+          action: chooseGoogleFont,
+          body: Text(
             'Choose font:\n$currFontFamily',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
@@ -83,14 +79,13 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
 
         // Font reset
         ezButton(
-          () {
+          action: () {
             AppConfig.preferences.remove(fontFamilyKey);
             setState(() {
               currFontFamily = defaultFontFamily;
             });
           },
-          () {},
-          Text(
+          body: Text(
             'Reset font\n($defaultFontFamily)',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
