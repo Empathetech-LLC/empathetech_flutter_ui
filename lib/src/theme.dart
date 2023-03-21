@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 PlatformApp ezApp({
+  required String appTitle,
   required String? initialRoute,
   required Map<String, Widget Function(BuildContext)>? routes,
 }) {
   return PlatformApp(
     debugShowCheckedModeBanner: false,
-    title: AppConfig.prefs[appTitleKey],
+    title: appTitle,
 
     // Routing
     initialRoute: initialRoute,
