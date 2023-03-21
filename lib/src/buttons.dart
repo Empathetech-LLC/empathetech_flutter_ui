@@ -36,7 +36,16 @@ Widget ezButton({
       child: body,
 
       // Styling
-      material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
+      material: (context, platform) => body is Icon
+          // When the child is just an icon, make the button circular
+          ? MaterialElevatedButtonData(
+              style: baseStyle.merge(
+                ButtonStyle(
+                  shape: MaterialStateProperty.all<CircleBorder>(CircleBorder()),
+                ),
+              ),
+            )
+          : MaterialElevatedButtonData(style: baseStyle),
       cupertino: (context, platform) => m2cButton(baseStyle),
     ),
   );
