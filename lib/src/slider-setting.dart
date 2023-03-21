@@ -174,7 +174,7 @@ class _SliderSettingState extends State<SliderSetting> {
   }
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
-  /// [widget.title] + [preview] + [PlatformSlider] + reset [ezTextIconButton]
+  /// [widget.title] + [preview] + [PlatformSlider] + reset [ezIconButton]
   List<Widget> buildList() {
     List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyleKey))];
 

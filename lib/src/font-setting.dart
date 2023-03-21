@@ -22,7 +22,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezTextButton]s
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezButton]s
   void chooseGoogleFont() {
     ezDialog(
       context: context,

@@ -76,7 +76,7 @@ Widget ezIconButton({
   );
 }
 
-/// Builds a pair of customizable [ezTextIconButton]s for confirming and/or denying things
+/// Builds a pair of customizable [ezIconButton]s for confirming and/or denying things
 Widget ezYesNo({
   required BuildContext context,
   required void Function() onConfirm,
