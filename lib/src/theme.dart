@@ -105,12 +105,13 @@ CupertinoPageScaffoldData m2cScaffold(MaterialScaffoldData from) {
 }
 
 /// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
-ButtonStyle materialButton() {
+ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
     foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
     textStyle: getTextStyle(buttonStyleKey),
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    shape: shape,
   );
 }
 
