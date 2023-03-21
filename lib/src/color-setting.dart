@@ -112,12 +112,11 @@ class _ColorSettingState extends State<ColorSetting> {
         // Color preview/edit button
         GestureDetector(
           onLongPress: reset,
-          child: ezIconButton(
+          child: ezButton(
             changeColor,
             reset,
-            PlatformIcons(context).edit,
-            currColor,
-            getContrastColor(currColor),
+            Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+            ElevatedButton.styleFrom(backgroundColor: currColor),
           ),
         ),
       ],

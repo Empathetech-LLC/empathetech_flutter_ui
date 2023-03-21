@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs]
-/// Intended for a widget child, see [ezTextButton] for text child
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? customStyle]) {
   // Build button style(s)
@@ -27,33 +26,8 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
   );
 }
 
-/// Style a [PlatformIconButton] from [AppConfig.prefs]
-/// See [ezTextIconButton] for adding a message
-Widget ezIconButton(void Function() action, void Function() longAction, IconData icon,
-    [Color? buttonColor, Color? iconColor]) {
-  double padding = AppConfig.prefs[paddingKey];
-  double buttonTextSize = getTextStyle(buttonStyleKey).fontSize ?? 24.0;
-
-  return GestureDetector(
-    onLongPress: longAction,
-    child: Container(
-      width: buttonTextSize * 2 + padding,
-      height: buttonTextSize * 2 + padding,
-      decoration: BoxDecoration(
-          color: buttonColor ?? Color(AppConfig.prefs[buttonColor]),
-          shape: BoxShape.circle,
-          border: Border.all(color: Color(AppConfig.prefs[buttonColorKey]))),
-      child: PlatformIconButton(
-        onPressed: action,
-        icon: Icon(
-          icon,
-          color: iconColor ?? Color(AppConfig.prefs[buttonTextColorKey]),
-          size: buttonTextSize,
-        ),
-      ),
-    ),
-  );
-}
+/// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
+/// behavior of [ElevatedButton.icon]
 
 /// Style a [PlatformElevatedButton] from [AppConfig.prefs] that mimics the original
 /// behavior of [ElevatedButton.icon]
