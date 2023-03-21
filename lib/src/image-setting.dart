@@ -53,7 +53,7 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
-          ezTextIconButton(
+          ezIconButton(
             () async {
               await changeImage(
                 context,
@@ -64,13 +64,13 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             () {},
-            'File',
-            PlatformIcons(context).folder,
+            Icon(PlatformIcons(context).folder),
+            Text('File'),
           ),
           Container(height: buttonSpacer),
 
           // From camera
-          ezTextIconButton(
+          ezIconButton(
             () async {
               await changeImage(
                 context,
@@ -81,13 +81,13 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             () {},
-            'Camera',
-            PlatformIcons(context).photoCamera,
+            Icon(PlatformIcons(context).photoCamera),
+            Text('Camera'),
           ),
           Container(height: buttonSpacer),
 
           // Reset
-          ezTextIconButton(
+          ezIconButton(
             () {
               AppConfig.preferences.remove(widget.prefsKey);
               setState(() {
@@ -96,13 +96,13 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             () {},
-            'Reset',
-            PlatformIcons(context).refresh,
+            Icon(PlatformIcons(context).refresh),
+            Text('Reset'),
           ),
           Container(height: buttonSpacer),
 
           // Clear
-          ezTextIconButton(
+          ezIconButton(
             () {
               AppConfig.preferences.setString(widget.prefsKey, noImageKey);
               setState(() {
@@ -111,8 +111,8 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             () {},
-            'Clear',
-            PlatformIcons(context).clear,
+            Icon(PlatformIcons(context).clear),
+            Text('Clear'),
           ),
           Container(height: buttonSpacer),
         ],

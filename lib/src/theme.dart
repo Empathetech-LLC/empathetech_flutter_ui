@@ -76,7 +76,7 @@ MaterialAppData materialAppTheme() {
   );
 }
 
-/// Material (Android) [ElevatedButton] theme built from [AppConfig.prefs]
+/// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
 ButtonStyle materialButton() {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
@@ -86,6 +86,14 @@ ButtonStyle materialButton() {
   );
 }
 
+/// Cupertino (iOS) [ElevatedButton] daata built [from] the passed in Material [ButtonStyle]
 CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
-  return CupertinoElevatedButtonData();
+  return CupertinoElevatedButtonData(
+    color: from.backgroundColor is Color
+        ? from.backgroundColor as Color
+        : AppConfig.prefs[buttonColorKey],
+    padding: from.padding is EdgeInsetsGeometry
+        ? from.padding as EdgeInsetsGeometry
+        : EdgeInsets.all(AppConfig.prefs[paddingKey]),
+  );
 }

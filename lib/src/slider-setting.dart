@@ -209,7 +209,7 @@ class _SliderSettingState extends State<SliderSetting> {
       Container(height: buttonSpacer),
 
       // Reset button
-      ezTextIconButton(
+      ezIconButton(
         () {
           AppConfig.preferences.remove(widget.prefsKey);
           setState(() {
@@ -217,8 +217,8 @@ class _SliderSettingState extends State<SliderSetting> {
           });
         },
         () {},
-        'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
-        PlatformIcons(context).refresh,
+        Icon(PlatformIcons(context).refresh),
+        Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
       ),
       Container(height: buttonSpacer),
     ]);

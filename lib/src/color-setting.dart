@@ -74,7 +74,7 @@ class _ColorSettingState extends State<ColorSetting> {
           Container(width: 75, height: 75, color: resetColor),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-          ezYesNoRow(
+          ezYesNo(
             context,
             // On yes
             () {
@@ -90,6 +90,7 @@ class _ColorSettingState extends State<ColorSetting> {
 
             // On no
             () => Navigator.of(context).pop(),
+            Axis.horizontal,
           ),
         ],
       ),

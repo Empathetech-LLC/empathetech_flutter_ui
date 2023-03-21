@@ -30,10 +30,11 @@ void colorPicker(
         Container(height: AppConfig.prefs[dialogSpacingKey]),
 
         // Apply
-        ezYesNoCol(
+        ezYesNo(
           context,
           apply,
           cancel,
+          Axis.vertical,
           'Apply',
           'Cancel',
         ),
