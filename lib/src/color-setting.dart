@@ -92,19 +92,16 @@ class _ColorSettingState extends State<ColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        ezButton(
-          action: () {},
-          body: Text(widget.message, style: getTextStyle(colorSettingStyleKey)),
-        ),
+        paddedText(widget.message, style: getTextStyle(dialogTitleStyleKey)),
 
         // Color preview/edit button
-        GestureDetector(
-          onLongPress: reset,
-          child: ezButton(
-            action: changeColor,
-            longAction: reset,
-            body: Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
-            customStyle: ElevatedButton.styleFrom(backgroundColor: currColor),
+        ezButton(
+          action: changeColor,
+          longAction: reset,
+          body: Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+          customStyle: ElevatedButton.styleFrom(
+            backgroundColor: currColor,
+            padding: EdgeInsets.all(AppConfig.prefs[paddingKey] * 2),
           ),
         ),
       ],
