@@ -108,6 +108,7 @@ class _SliderSettingState extends State<SliderSetting> {
                 textAlign: TextAlign.center,
               ),
             ),
+            customStyle: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
           ),
           Container(height: buttonSpacer),
         ];
