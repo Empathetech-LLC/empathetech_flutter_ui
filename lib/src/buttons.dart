@@ -22,34 +22,7 @@ Widget ezButton(void Function() action, void Function() longAction, Widget body,
 
       // Android config
       material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
-      cupertino: (context, platform) => CupertinoElevatedButtonData(m2cButton(baseStyle)),
-    ),
-  );
-}
-
-/// Style a [PlatformElevatedButton] from [AppConfig.prefs]
-/// Intended for a text child, see [ezButton] for widget child
-Widget ezTextButton(void Function() action, void Function() longAction, String text,
-    [TextStyle? textStyle,
-    ButtonStyle? androidStyle,
-    CupertinoElevatedButtonData? iosStyle]) {
-  // Gather theme data
-  Color color = Color(AppConfig.prefs[buttonColorKey]);
-
-  return GestureDetector(
-    onLongPress: longAction,
-    child: PlatformElevatedButton(
-      onPressed: action,
-      child: Text(text, style: textStyle, textAlign: TextAlign.center),
-
-      // Platform specific overwrites
-      material: (context, platform) => (androidStyle == null)
-          ? MaterialElevatedButtonData(style: androidButton())
-          : MaterialElevatedButtonData(style: androidButton().merge(androidStyle)),
-      cupertino: (context, platform) => CupertinoElevatedButtonData(
-        color: color,
-        padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-      ),
+      cupertino: (context, platform) => m2cButton(baseStyle),
     ),
   );
 }

@@ -55,11 +55,13 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.fontSize:
         return [
           Container(height: buttonSpacer),
-          ezTextButton(
+          ezButton(
             () {},
             () {},
-            'Preview: $currValue',
-            getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
+            Text(
+              'Preview: $currValue',
+              style: getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
+            ),
           ),
           Container(height: buttonSpacer),
         ];
@@ -117,11 +119,10 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.buttonHeight:
         return [
           Container(height: buttonSpacer),
-          ezTextButton(
+          ezButton(
             () {},
             () {},
-            'Preview: $currValue',
-            null,
+            Text('Preview $currValue'),
             ElevatedButton.styleFrom(
               fixedSize: Size(screenWidth(context), currValue),
             ),
@@ -135,9 +136,9 @@ class _SliderSettingState extends State<SliderSetting> {
           ezCenterScroll(
             [
               SizedBox(height: currValue),
-              ezTextButton(() {}, () {}, 'Preview $currValue'),
+              ezButton(() {}, () {}, Text('Preview $currValue')),
               SizedBox(height: currValue),
-              ezTextButton(() {}, () {}, 'Preview $currValue'),
+              ezButton(() {}, () {}, Text('Preview $currValue')),
               SizedBox(height: currValue),
             ],
           ),
@@ -147,7 +148,7 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.dialogSpacing:
         return [
           Container(height: buttonSpacer),
-          ezTextButton(
+          ezButton(
             () => ezDialog(
               context,
               'Space preview',
@@ -156,17 +157,17 @@ class _SliderSettingState extends State<SliderSetting> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Button 1
-                  ezTextButton(() {}, () {}, 'Preview: $currValue'),
+                  ezButton(() {}, () {}, Text('Preview $currValue')),
                   Container(height: currValue),
 
                   // Button 2
-                  ezTextButton(() {}, () {}, 'Preview: $currValue'),
+                  ezButton(() {}, () {}, Text('Preview $currValue')),
                   Container(height: currValue),
                 ],
               ),
             ),
             () {},
-            'Press me',
+            Text('Press me'),
           ),
           Container(height: buttonSpacer),
         ];

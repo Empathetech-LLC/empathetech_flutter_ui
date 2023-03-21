@@ -34,7 +34,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
               (String font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
-                  ezTextButton(
+                  ezButton(
                     () {
                       AppConfig.preferences.setString(fontFamilyKey, font);
                       setState(() {
@@ -43,8 +43,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                       Navigator.of(context).pop();
                     },
                     () {},
-                    font,
-                    googleStyleAlias(font),
+                    Text(font, style: googleStyleAlias(font)),
                   ),
                   Container(
                     height: buttonSpacer,
@@ -68,20 +67,22 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
         Container(height: buttonSpacer),
 
         // Font picker
-        ezTextButton(
+        ezButton(
           chooseGoogleFont,
           () {},
-          'Choose font:\n$currFontFamily',
-          TextStyle(
-            fontSize: buttonTextStyle.fontSize,
-            fontFamily: currFontFamily,
-            color: buttonTextStyle.color,
+          Text(
+            'Choose font:\n$currFontFamily',
+            style: TextStyle(
+              fontSize: buttonTextStyle.fontSize,
+              fontFamily: currFontFamily,
+              color: buttonTextStyle.color,
+            ),
           ),
         ),
         Container(height: buttonSpacer),
 
         // Font reset
-        ezTextButton(
+        ezButton(
           () {
             AppConfig.preferences.remove(fontFamilyKey);
             setState(() {
@@ -89,11 +90,13 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
             });
           },
           () {},
-          'Reset font\n($defaultFontFamily)',
-          TextStyle(
-            fontSize: buttonTextStyle.fontSize,
-            fontFamily: defaultFontFamily,
-            color: buttonTextStyle.color,
+          Text(
+            'Reset font\n($defaultFontFamily)',
+            style: TextStyle(
+              fontSize: buttonTextStyle.fontSize,
+              fontFamily: defaultFontFamily,
+              color: buttonTextStyle.color,
+            ),
           ),
         ),
       ],
