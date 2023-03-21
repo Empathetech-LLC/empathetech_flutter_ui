@@ -7,7 +7,7 @@ export 'src/app-config.dart';
 export 'src/theme.dart';
 export 'src/scaffolds.dart';
 export 'src/text.dart';
-export 'src/widgets.dart';
+export 'src/views.dart';
 export 'src/buttons.dart';
 export 'src/color-setting.dart';
 export 'src/font-setting.dart';
