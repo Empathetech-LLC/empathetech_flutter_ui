@@ -28,7 +28,7 @@ Widget ezForm({
   bool private = false,
   Iterable<String>? autofillHints,
   String? Function(String?)? validator,
-  AutovalidateMode? autovalidateMode,
+  AutovalidateMode? autoValidateMode,
 }) {
   // Gather theme data
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
@@ -46,7 +46,7 @@ Widget ezForm({
       hintText: hintText,
       autofillHints: autofillHints,
       validator: validator,
-      autovalidateMode: autovalidateMode,
+      autovalidateMode: autoValidateMode,
     ),
   );
 }
