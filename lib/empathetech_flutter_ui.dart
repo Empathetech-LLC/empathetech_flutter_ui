@@ -1,6 +1,7 @@
 library empathetech_flutter_ui;
 
 export 'src/helpers.dart';
+export 'src/alerts.dart';
 export 'src/storage.dart';
 export 'src/notifications.dart';
 export 'src/app-config.dart';
