@@ -36,23 +36,25 @@ Widget ezForm({
 
   return Container(
     decoration: BoxDecoration(border: Border.all(color: buttonColor)),
-    child: PlatformTextFormField(
+    child: Form(
       key: key,
-      controller: controller,
-      textAlign: TextAlign.center,
-      obscureText: private,
+      child: PlatformTextFormField(
+        controller: controller,
+        textAlign: TextAlign.center,
+        obscureText: private,
 
-      // Hint
-      hintText: hintText,
-      autofillHints: autofillHints,
+        // Hint
+        hintText: hintText,
+        autofillHints: autofillHints,
 
-      // Validating
-      validator: validator,
-      autovalidateMode: autovalidateMode,
+        // Validating
+        validator: validator,
+        autovalidateMode: autovalidateMode,
 
-      // Styling
-      style: getTextStyle(dialogContentStyleKey),
-      cursorColor: themeTextColor,
+        // Styling
+        style: getTextStyle(dialogContentStyleKey),
+        cursorColor: themeTextColor,
+      ),
     ),
   );
 }
