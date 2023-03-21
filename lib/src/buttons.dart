@@ -90,6 +90,9 @@ Widget ezIconButton({
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
+      color: (baseStyle.backgroundColor is Color)
+          ? baseStyle.backgroundColor as Color
+          : Color(AppConfig.prefs[buttonColorKey]),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
