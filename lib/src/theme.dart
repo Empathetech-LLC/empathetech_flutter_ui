@@ -111,6 +111,7 @@ ButtonStyle materialButton({OutlinedBorder? shape}) {
     foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
     textStyle: getTextStyle(buttonStyleKey),
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    side: BorderSide(color: Color(AppConfig.prefs[buttonColorKey])),
     shape: shape,
   );
 }
