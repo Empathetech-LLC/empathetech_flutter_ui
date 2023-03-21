@@ -52,7 +52,10 @@ class _ColorSettingState extends State<ColorSetting> {
   /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
   /// A preview of the reset color is shown
   void reset() {
+    // Gather theme data
+
     Color resetColor = Color(AppConfig.defaults[widget.toControl]);
+    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     ezDialog(
       context: context,
@@ -70,7 +73,7 @@ class _ColorSettingState extends State<ColorSetting> {
               border: Border.all(color: getContrastColor(resetColor)),
             ),
           ),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+          Container(height: dialogSpacer),
 
           ezYesNo(
             context: context,
@@ -86,6 +89,7 @@ class _ColorSettingState extends State<ColorSetting> {
             },
             onDeny: () => Navigator.of(context).pop(),
             axis: Axis.horizontal,
+            spacer: dialogSpacer,
           ),
         ],
       ),
