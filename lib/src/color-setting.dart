@@ -56,13 +56,9 @@ class _ColorSettingState extends State<ColorSetting> {
     Color resetColor = Color(AppConfig.defaults[widget.toControl]);
 
     ezDialog(
-      context,
-
-      // Title
-      'Reset to...',
-
-      // Body
-      Column(
+      context: context,
+      title: 'Reset to...',
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -73,6 +69,7 @@ class _ColorSettingState extends State<ColorSetting> {
           ezYesNo(
             context: context,
             onConfirm: () {
+              // Remove the user's setting and reset the current state
               AppConfig.preferences.remove(widget.toControl);
 
               setState(() {
@@ -97,19 +94,19 @@ class _ColorSettingState extends State<ColorSetting> {
       children: [
         // Color label
         ezButton(
-          () {},
-          () {},
-          Text(widget.message, style: getTextStyle(colorSettingStyleKey)),
+          action: () {},
+          longAction: () {},
+          body: Text(widget.message, style: getTextStyle(colorSettingStyleKey)),
         ),
 
         // Color preview/edit button
         GestureDetector(
           onLongPress: reset,
           child: ezButton(
-            changeColor,
-            reset,
-            Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
-            ElevatedButton.styleFrom(backgroundColor: currColor),
+            action: changeColor,
+            longAction: reset,
+            body: Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+            customStyle: ElevatedButton.styleFrom(backgroundColor: currColor),
           ),
         ),
       ],
