@@ -126,7 +126,11 @@ void ezDialog({
         titlePadding: title == null
             ? EdgeInsets.zero
             : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        contentPadding: EdgeInsets.only(
+          bottom: dialogSpacer,
+          left: padding,
+          right: padding,
+        ),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(),
     ),
