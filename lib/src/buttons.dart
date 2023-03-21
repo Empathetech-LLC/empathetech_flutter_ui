@@ -22,7 +22,7 @@ Widget ezSwitch({
 /// If provided, [customStyle] will be merged with [materialButton]
 Widget ezButton({
   required void Function() action,
-  required void Function() longAction,
+  void Function() longAction = doNothing,
   required Widget body,
   ButtonStyle? customStyle,
 }) {
@@ -48,7 +48,7 @@ Widget ezButton({
 /// If provided, [customStyle] will be merged with [materialButton]
 Widget ezIconButton({
   required void Function() action,
-  required void Function() longAction,
+  void Function() longAction = doNothing,
   required Icon icon,
   required Widget body,
   ButtonStyle? customStyle,
@@ -90,7 +90,7 @@ Widget ezYesNo({
 }) {
   // Gather theme data
   Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customConfirm ?? Icon(PlatformIcons(context).clear);
+  Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
 
   return axis == Axis.vertical
       ? Column(
@@ -100,7 +100,6 @@ Widget ezYesNo({
             // Confirm
             ezIconButton(
               action: onConfirm,
-              longAction: () {},
               icon: confirmIcon,
               body: Text(confirmMsg),
             ),
@@ -110,7 +109,6 @@ Widget ezYesNo({
             // Deny
             ezIconButton(
               action: onDeny,
-              longAction: () {},
               icon: denyIcon,
               body: Text(denyMsg),
             ),
@@ -123,7 +121,6 @@ Widget ezYesNo({
             // Confirm
             ezIconButton(
               action: onConfirm,
-              longAction: () {},
               icon: confirmIcon,
               body: Text(confirmMsg),
             ),
@@ -133,10 +130,25 @@ Widget ezYesNo({
             // Deny
             ezIconButton(
               action: onDeny,
-              longAction: () {},
               icon: denyIcon,
               body: Text(denyMsg),
             ),
           ],
         );
+}
+
+/// Quickly build a customizable "Cancel" [ezIconButton]
+Widget ezCancel({
+  required BuildContext context,
+  required void Function() onCancel,
+  String cancelMsg = 'Cancel',
+  Icon? customIcon,
+}) {
+  Icon icon = customIcon ?? Icon(PlatformIcons(context).clear);
+
+  return ezIconButton(
+    action: onCancel,
+    icon: icon,
+    body: Text(cancelMsg),
+  );
 }
