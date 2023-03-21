@@ -122,20 +122,14 @@ TextStyle getTextStyle(String textType) {
       );
 
     case buttonStyleKey:
-    case imageSettingStyleKey:
+    case colorSettingStyleKey:
     case fontSettingStyleKey:
+    case imageSettingStyleKey:
     case sliderSettingStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize,
         color: buttonTextColor,
-      );
-
-    case colorSettingStyleKey:
-      return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize,
-        color: themeColor,
       );
 
     case errorStyleKey:
