@@ -14,7 +14,6 @@ EFUI is a library/package for fast, high quality UI development.
 
 * [Installation](#installation)
 * [Contributing](#contributing)
-* [Comments](#comment-on-comments)
 * [License](#license)
 
 # Installation
@@ -24,16 +23,6 @@ EFUI is a library/package for fast, high quality UI development.
 ## Example Usage
 
 [Smoke Signal](https://github.com/Empathetech-LLC/smoke_signal)
-
-# Comment on comments
-
-Because Material and Cupertino styling is very different, there is a handfull of code that may seem redundant. It probably isn't. The purposefully redundant code will be joined by
-
-```dart
-// ios backup
-```
-
-For example, it takes a lot of checks to have [ezButton](file:///lib/src/buttons.dart#ezButton) instantly create fraternal twins!
 
 # Contributing
 
