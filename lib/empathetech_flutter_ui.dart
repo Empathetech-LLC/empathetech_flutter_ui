@@ -7,6 +7,7 @@ export 'src/notifications.dart';
 export 'src/app-config.dart';
 export 'src/theme.dart';
 export 'src/scaffolds.dart';
+export 'src/drawers.dart';
 export 'src/text.dart';
 export 'src/views.dart';
 export 'src/buttons.dart';
