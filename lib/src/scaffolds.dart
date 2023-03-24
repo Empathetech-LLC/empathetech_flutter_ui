@@ -6,15 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Builds a [PlatformScaffold] from the passed values that will
-/// automatically update alongside [AppConfig]
+/// Builds a [PlatformScaffold] styled from [AppConfig.prefs]
+/// [drawerHeader] and [drawerBody] are used to build an end [Drawer] for [Material]
+/// and a [CupertinoActionSheet] for Cupertino
 Widget ezScaffold({
   required BuildContext context,
   required String title,
-  required Widget body,
   required DecorationImage? backgroundImage,
   required Color backgroundColor,
-  required MaterialScaffoldData materialConfig,
+  required Widget body,
+  Widget? drawerHeader,
+  List<Widget>? drawerBody,
+  Widget? fab,
 }) {
   return GestureDetector(
     // Close open keyboard(s) on tap
@@ -35,8 +38,30 @@ Widget ezScaffold({
       ),
 
       // Platform specific configurations
-      material: (context, platform) => materialConfig,
-      cupertino: (context, platform) => m2cScaffold(context, materialConfig, title),
+      material: (context, platform) => MaterialScaffoldData(
+        endDrawer: ezDrawer(
+          context: context,
+          platform: platform,
+          header: drawerHeader,
+          body: drawerBody,
+        ),
+        floatingActionButton: fab,
+      ),
+      cupertino: (context, platform) => CupertinoPageScaffoldData(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(
+            title,
+            style: getTextStyle(titleStyleKey),
+            textAlign: TextAlign.center,
+          ),
+          trailing: ezDrawer(
+            context: context,
+            platform: platform,
+            header: drawerHeader,
+            body: drawerBody,
+          ),
+        ),
+      ),
     ),
   );
 }
@@ -50,7 +75,9 @@ Widget ezNavScaffold({
   required int? index,
   required void Function(int)? onChanged,
   required List<BottomNavigationBarItem>? items,
-  required MaterialScaffoldData materialConfig,
+  Widget? drawerHeader,
+  List<Widget>? drawerBody,
+  Widget? fab,
 }) {
   return GestureDetector(
     // Close open keyboard(s) on tap
@@ -68,8 +95,31 @@ Widget ezNavScaffold({
       ),
 
       // Platform specific configurations
-      material: (context, platform) => materialConfig,
-      cupertino: (context, platform) => m2cScaffold(context, materialConfig, title),
+      // Platform specific configurations
+      material: (context, platform) => MaterialScaffoldData(
+        endDrawer: ezDrawer(
+          context: context,
+          platform: platform,
+          header: drawerHeader,
+          body: drawerBody,
+        ),
+        floatingActionButton: fab,
+      ),
+      cupertino: (context, platform) => CupertinoPageScaffoldData(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(
+            title,
+            style: getTextStyle(titleStyleKey),
+            textAlign: TextAlign.center,
+          ),
+          trailing: ezDrawer(
+            context: context,
+            platform: platform,
+            header: drawerHeader,
+            body: drawerBody,
+          ),
+        ),
+      ),
     ),
   );
 }
