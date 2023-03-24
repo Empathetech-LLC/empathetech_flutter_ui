@@ -3,12 +3,11 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Material (Android) [ThemeData] built from [AppConfig.prefs]
 MaterialAppData materialAppTheme() {
-  // Gather theme data
-
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
@@ -16,8 +15,6 @@ MaterialAppData materialAppTheme() {
 
   TextStyle dialogTitleText = getTextStyle(dialogTitleStyleKey);
   TextStyle dialogContentText = getTextStyle(dialogContentStyleKey);
-
-  // Build theme
 
   return MaterialAppData(
     theme: ThemeData(
@@ -42,8 +39,8 @@ MaterialAppData materialAppTheme() {
       ),
 
       // Text
-      textTheme: defaultTextTheme(),
-      primaryTextTheme: defaultTextTheme(),
+      textTheme: materialTextTheme(),
+      primaryTextTheme: materialTextTheme(),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: themeTextColor,
         selectionColor: themeColor,
@@ -81,18 +78,52 @@ MaterialAppData materialAppTheme() {
 
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
 CupertinoAppData cupertinoAppTheme() {
-  // Gather theme data
-
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  // Build theme
+  return CupertinoAppData(
+    color: themeColor,
+    theme: CupertinoThemeData(
+      primaryColor: themeColor,
+      primaryContrastingColor: themeTextColor,
+      textTheme: cupertinoTextTheme(),
+    ),
+  );
+}
 
-  return CupertinoAppData(color: themeColor);
+/// Creates a [CupertinoActionSheet] from a Material UI [Drawer]
+void _showCupertinoActionSheet(BuildContext context, Drawer from) {
+  showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext context) => CupertinoActionSheet(
+      title: from.child,
+      cancelButton: ezCancel(
+        context: context,
+        onCancel: () => Navigator.of(context).pop(),
+      ),
+    ),
+  );
 }
 
 /// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
-CupertinoPageScaffoldData m2cScaffold(MaterialScaffoldData from) {
-  return CupertinoPageScaffoldData();
+CupertinoPageScaffoldData m2cScaffold(BuildContext context, MaterialScaffoldData from) {
+  // Convert endDrawer if present
+  Widget? topRight;
+
+  if (from.endDrawer != null) {
+    Drawer toConvert = from.endDrawer as Drawer;
+
+    topRight = GestureDetector(
+      onTap: () => _showCupertinoActionSheet(context, toConvert),
+      child: Icon(CupertinoIcons.line_horizontal_3),
+    );
+  }
+
+  return CupertinoPageScaffoldData(
+    navigationBar: CupertinoNavigationBar(
+      trailing: topRight,
+    ),
+  );
 }
 
 /// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
