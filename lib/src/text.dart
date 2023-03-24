@@ -1,6 +1,7 @@
 library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +10,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 // Custom wrappers
 
 /// Text that values its personal space
+/// And requires a [TextStyle], for wide [TargetPlatform] support
 Widget paddedText(
   String text, {
-  TextStyle? style,
+  required TextStyle style,
   TextAlign? alignment,
 }) {
   return Padding(
@@ -142,7 +144,10 @@ TextStyle getTextStyle(String textType) {
 
 // Local text theme(s)
 
-TextTheme defaultTextTheme() {
+/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [AppConfig]
+TextTheme materialTextTheme() {
   TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
 
   return TextTheme(
@@ -164,7 +169,27 @@ TextTheme defaultTextTheme() {
   );
 }
 
-// Supported Google font(s)
+/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [AppConfig]
+CupertinoTextThemeData cupertinoTextTheme() {
+  Color textColor = Color(AppConfig.prefs[themeTextColorKey]);
+  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+
+  return CupertinoTextThemeData(
+    primaryColor: textColor,
+    textStyle: defaultTextStyle,
+    actionTextStyle: defaultTextStyle,
+    tabLabelTextStyle: defaultTextStyle,
+    navTitleTextStyle: defaultTextStyle,
+    navLargeTitleTextStyle: defaultTextStyle,
+    navActionTextStyle: defaultTextStyle,
+    pickerTextStyle: defaultTextStyle,
+    dateTimePickerTextStyle: defaultTextStyle,
+  );
+}
+
+// Saved/supported Google Fonts
 
 const String soraKey = 'Sora';
 const String hahmletKey = 'Hahmlet';
@@ -187,6 +212,7 @@ const String latoKey = 'Lato';
 const String antonKey = 'Anton';
 const String oldStandardKey = 'Old Standard TT';
 
+/// List of [GoogleFonts] (https://fonts.google.com/) EFUI has saved
 const List<String> myGoogleFonts = [
   soraKey,
   hahmletKey,
@@ -210,7 +236,7 @@ const List<String> myGoogleFonts = [
   oldStandardKey,
 ];
 
-/// Returns the [GoogleFonts] styling for [fontName]
+/// Returns the [TextStyle] of the [GoogleFonts] matching [fontName]
 TextStyle googleStyleAlias(String fontName) {
   switch (fontName) {
     case soraKey:
