@@ -14,7 +14,7 @@ Widget ezScaffold({
   required Widget body,
   required DecorationImage? backgroundImage,
   required Color backgroundColor,
-  required MaterialScaffoldData scaffoldConfig,
+  required MaterialScaffoldData materialConfig,
 }) {
   return GestureDetector(
     // Close open keyboard(s) on tap
@@ -35,8 +35,8 @@ Widget ezScaffold({
       ),
 
       // Platform specific configurations
-      material: (context, platform) => scaffoldConfig,
-      cupertino: (context, platform) => m2cScaffold(context, scaffoldConfig),
+      material: (context, platform) => materialConfig,
+      cupertino: (context, platform) => m2cScaffold(context, materialConfig, title),
     ),
   );
 }
@@ -50,7 +50,7 @@ Widget ezNavScaffold({
   required int? index,
   required void Function(int)? onChanged,
   required List<BottomNavigationBarItem>? items,
-  required MaterialScaffoldData scaffoldConfig,
+  required MaterialScaffoldData materialConfig,
 }) {
   return GestureDetector(
     // Close open keyboard(s) on tap
@@ -68,8 +68,8 @@ Widget ezNavScaffold({
       ),
 
       // Platform specific configurations
-      material: (context, platform) => scaffoldConfig,
-      cupertino: (context, platform) => m2cScaffold(context, scaffoldConfig),
+      material: (context, platform) => materialConfig,
+      cupertino: (context, platform) => m2cScaffold(context, materialConfig, title),
     ),
   );
 }

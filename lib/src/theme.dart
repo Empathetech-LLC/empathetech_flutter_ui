@@ -92,7 +92,10 @@ CupertinoAppData cupertinoAppTheme() {
 }
 
 /// Creates a [CupertinoActionSheet] from a Material UI [Drawer]
-void _showCupertinoActionSheet(BuildContext context, Drawer from) {
+void _showCupertinoActionSheet(
+  BuildContext context,
+  Drawer from,
+) {
   showCupertinoModalPopup(
     context: context,
     builder: (BuildContext context) => CupertinoActionSheet(
@@ -106,7 +109,11 @@ void _showCupertinoActionSheet(BuildContext context, Drawer from) {
 }
 
 /// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
-CupertinoPageScaffoldData m2cScaffold(BuildContext context, MaterialScaffoldData from) {
+CupertinoPageScaffoldData m2cScaffold(
+  BuildContext context,
+  MaterialScaffoldData from,
+  String title,
+) {
   // Convert endDrawer if present
   Widget? topRight;
 
@@ -123,7 +130,19 @@ CupertinoPageScaffoldData m2cScaffold(BuildContext context, MaterialScaffoldData
   }
 
   return CupertinoPageScaffoldData(
-    navigationBar: CupertinoNavigationBar(trailing: topRight),
+    navigationBar: CupertinoNavigationBar(
+      leading: Navigator.canPop(context)
+          ? CupertinoNavigationBarBackButton(
+              onPressed: () => Navigator.pop(context),
+            )
+          : null,
+      middle: Text(
+        title,
+        style: getTextStyle(titleStyleKey),
+        textAlign: TextAlign.center,
+      ),
+      trailing: topRight,
+    ),
   );
 }
 
