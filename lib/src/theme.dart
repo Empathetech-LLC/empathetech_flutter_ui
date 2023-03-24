@@ -120,9 +120,7 @@ CupertinoPageScaffoldData m2cScaffold(BuildContext context, MaterialScaffoldData
   }
 
   return CupertinoPageScaffoldData(
-    navigationBar: CupertinoNavigationBar(
-      trailing: topRight,
-    ),
+    navigationBar: CupertinoNavigationBar(trailing: topRight),
   );
 }
 
