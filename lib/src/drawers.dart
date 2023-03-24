@@ -6,6 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Converts a [List] of [Widget]s to a [List] of [CupertinoActionSheetAction]s
+/// Removes any child-less [Container]s (i.e. spacers)
+List<CupertinoActionSheetAction> buttons2Actions(List<Widget> children) {
+  List<CupertinoActionSheetAction> toReturn = [];
+
+  children.forEach((widget) {
+    switch (widget.runtimeType) {
+      case Container:
+        Container cast = widget as Container;
+        if (cast.child != null)
+          toReturn.add(
+            CupertinoActionSheetAction(
+              onPressed: doNothing,
+              child: widget,
+            ),
+          );
+        break;
+
+      default:
+        toReturn.add(
+          CupertinoActionSheetAction(
+            onPressed: doNothing,
+            child: widget,
+          ),
+        );
+    }
+  });
+
+  return toReturn;
+}
+
 /// Builds a [PlatformTarget] dynamic end [Drawer]
 /// Cupertino retuins a [CupertinoActionSheet] for [showCupertinoModalPopup]
 Widget? ezDrawer({
@@ -26,7 +57,7 @@ Widget? ezDrawer({
         context: context,
         builder: (BuildContext context) => CupertinoActionSheet(
           title: header,
-          actions: body,
+          actions: buttons2Actions(body),
         ),
       ),
       child: Icon(
