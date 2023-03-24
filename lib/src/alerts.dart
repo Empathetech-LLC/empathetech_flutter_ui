@@ -15,7 +15,7 @@ void popNLog(
   ezDialog(
     context: context,
     title: 'Attention:',
-    content: paddedText(message),
+    content: paddedText(message, style: getTextStyle(dialogContentStyleKey)),
   );
 }
 
@@ -66,7 +66,7 @@ Widget loadingMessage({
 ///        [content]
 Widget warningCard({
   required BuildContext context,
-  required String content,
+  required String warning,
 }) {
   // Gather theme data
 
@@ -97,7 +97,7 @@ Widget warningCard({
           Container(height: padding),
 
           // Label
-          Text(content, style: contentStyle, textAlign: TextAlign.center),
+          Text(warning, style: contentStyle, textAlign: TextAlign.center),
         ],
       ),
     ),
@@ -111,13 +111,21 @@ void ezDialog({
   String? title,
 }) {
   // Gather theme data
+
+  TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
   showPlatformDialog(
     context: context,
     builder: (context) => PlatformAlertDialog(
-      title: title == null ? null : Text(title, textAlign: TextAlign.center),
+      title: title == null
+          ? null
+          : Text(
+              title,
+              style: dialogTitleStyle,
+              textAlign: TextAlign.center,
+            ),
       content: content,
 
       // Styling

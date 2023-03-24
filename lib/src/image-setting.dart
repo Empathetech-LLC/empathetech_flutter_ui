@@ -31,7 +31,7 @@ class _ImageSettingState extends State<ImageSetting> {
   // Initialize state
 
   late String currPath = AppConfig.prefs[widget.prefsKey];
-
+  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
@@ -57,7 +57,7 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             icon: Icon(PlatformIcons(context).folder),
-            body: Text('File'),
+            message: 'File',
           ),
           Container(height: buttonSpacer),
 
@@ -73,7 +73,7 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             icon: Icon(PlatformIcons(context).photoCamera),
-            body: Text('Camera'),
+            message: 'Camera',
           ),
           Container(height: buttonSpacer),
 
@@ -87,7 +87,7 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             icon: Icon(PlatformIcons(context).refresh),
-            body: Text('Reset'),
+            message: 'Reset',
           ),
           Container(height: buttonSpacer),
 
@@ -101,7 +101,7 @@ class _ImageSettingState extends State<ImageSetting> {
               Navigator.of(context).pop();
             },
             icon: Icon(PlatformIcons(context).clear),
-            body: Text('Clear'),
+            message: 'Clear',
           ),
           Container(height: buttonSpacer),
         ],
@@ -116,7 +116,7 @@ class _ImageSettingState extends State<ImageSetting> {
       longAction: () => ezDialog(
         context: context,
         title: 'Credit to:',
-        content: paddedText(widget.credits),
+        content: paddedText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

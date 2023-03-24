@@ -25,25 +25,43 @@ Widget ezButton({
   required Widget body,
   ButtonStyle? customStyle,
 }) {
-  // Build button style
-  ButtonStyle baseStyle;
+  // Preliminary styling based on the body Widget
 
-  (body is Icon)
-      ? baseStyle = materialButton(shape: CircleBorder())
-      : baseStyle = materialButton();
+  ButtonStyle ezButtonStyle = materialButton();
 
-  // Overwrite any fields from base style found in custom style
-  // Then merge any fields unique to custom style
+  switch (body.runtimeType) {
+    case Icon:
+      // Icon buttons should be circular
+      ezButtonStyle = materialButton(shape: CircleBorder());
+      break;
+
+    case Text:
+      // Text styling works differently in Material and Cupertino
+      // so a little redundancy goes a long way
+      Text cast = body as Text;
+      if (cast.style == null) {
+        body = Text(
+          cast.data ?? 'Lorem ipsum',
+          style: getTextStyle(buttonStyleKey),
+          textAlign: cast.textAlign,
+        );
+      }
+      break;
+  }
+
+  // Build the button style, using copyWith and merge to create a custom replaceAll()
+  // style function if custom style is not null
+
   if (customStyle != null) {
-    baseStyle = baseStyle.copyWith(
-      backgroundColor: customStyle.backgroundColor ?? baseStyle.backgroundColor,
-      foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
-      textStyle: customStyle.textStyle ?? baseStyle.textStyle,
-      padding: customStyle.padding ?? baseStyle.padding,
-      side: customStyle.side ?? baseStyle.side,
-      shape: customStyle.shape ?? baseStyle.shape,
+    ezButtonStyle = ezButtonStyle.copyWith(
+      backgroundColor: customStyle.backgroundColor ?? ezButtonStyle.backgroundColor,
+      foregroundColor: customStyle.foregroundColor ?? ezButtonStyle.foregroundColor,
+      textStyle: customStyle.textStyle ?? ezButtonStyle.textStyle,
+      padding: customStyle.padding ?? ezButtonStyle.padding,
+      side: customStyle.side ?? ezButtonStyle.side,
+      shape: customStyle.shape ?? ezButtonStyle.shape,
     );
-    baseStyle = baseStyle.merge(customStyle);
+    ezButtonStyle = ezButtonStyle.merge(customStyle);
   }
 
   // Return the button
@@ -51,11 +69,15 @@ Widget ezButton({
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
+
+      color: (ezButtonStyle.backgroundColor is Color)
+          ? ezButtonStyle.backgroundColor as Color
+          : Color(AppConfig.prefs[buttonColorKey]),
       child: body,
 
       // Styling
-      material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
-      cupertino: (context, platform) => m2cButton(baseStyle),
+      material: (context, platform) => MaterialElevatedButtonData(style: ezButtonStyle),
+      cupertino: (context, platform) => m2cButton(ezButtonStyle),
     ),
   );
 }
@@ -67,31 +89,36 @@ Widget ezIconButton({
   required void Function() action,
   void Function() longAction = doNothing,
   required Icon icon,
-  required Widget body,
-  ButtonStyle? customStyle,
+  required String message,
+  TextStyle? customTextStyle,
+  ButtonStyle? customButonStyle,
 }) {
-  ButtonStyle baseStyle = materialButton();
+  ButtonStyle ezButtonStyle = materialButton();
+  TextStyle ezTextStyle =
+      (customTextStyle == null) ? getTextStyle(buttonStyleKey) : customTextStyle;
 
-  // Overwrite any fields from base style found in custom style
-  // Then merge any fields unique to custom style
-  if (customStyle != null) {
-    baseStyle = baseStyle.copyWith(
-      backgroundColor: customStyle.backgroundColor ?? baseStyle.backgroundColor,
-      foregroundColor: customStyle.foregroundColor ?? baseStyle.foregroundColor,
-      textStyle: customStyle.textStyle ?? baseStyle.textStyle,
-      padding: customStyle.padding ?? baseStyle.padding,
-      side: customStyle.side ?? baseStyle.side,
-      shape: customStyle.shape ?? baseStyle.shape,
+  // Build the button style, using copyWith and merge to create a custom replaceAll()
+  // style function if custom style is not null
+
+  if (customButonStyle != null) {
+    ezButtonStyle = ezButtonStyle.copyWith(
+      backgroundColor: customButonStyle.backgroundColor ?? ezButtonStyle.backgroundColor,
+      foregroundColor: customButonStyle.foregroundColor ?? ezButtonStyle.foregroundColor,
+      textStyle: customButonStyle.textStyle ?? ezButtonStyle.textStyle,
+      padding: customButonStyle.padding ?? ezButtonStyle.padding,
+      side: customButonStyle.side ?? ezButtonStyle.side,
+      shape: customButonStyle.shape ?? ezButtonStyle.shape,
     );
-    baseStyle = baseStyle.merge(customStyle);
+    ezButtonStyle = ezButtonStyle.merge(customButonStyle);
   }
 
   return GestureDetector(
     onLongPress: longAction,
     child: PlatformElevatedButton(
       onPressed: action,
-      color: (baseStyle.backgroundColor is Color)
-          ? baseStyle.backgroundColor as Color
+
+      color: (ezButtonStyle.backgroundColor is Color)
+          ? ezButtonStyle.backgroundColor as Color
           : Color(AppConfig.prefs[buttonColorKey]),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -99,13 +126,13 @@ Widget ezIconButton({
         children: [
           icon,
           Container(width: AppConfig.prefs[paddingKey]),
-          body,
+          Text(message, style: ezTextStyle, textAlign: TextAlign.center),
         ],
       ),
 
       // Styling
-      material: (context, platform) => MaterialElevatedButtonData(style: baseStyle),
-      cupertino: (context, platform) => m2cButton(baseStyle),
+      material: (context, platform) => MaterialElevatedButtonData(style: ezButtonStyle),
+      cupertino: (context, platform) => m2cButton(ezButtonStyle),
     ),
   );
 }
@@ -123,9 +150,9 @@ Widget ezYesNo({
   Icon? customDeny,
 }) {
   // Gather theme data
+
   Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
   Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
-
   double spacing = (spacer == null) ? AppConfig.prefs[buttonSpacingKey] : spacer;
 
   return axis == Axis.vertical
@@ -133,42 +160,18 @@ Widget ezYesNo({
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Confirm
-            ezIconButton(
-              action: onConfirm,
-              icon: confirmIcon,
-              body: Text(confirmMsg),
-            ),
-
+            ezIconButton(action: onConfirm, icon: confirmIcon, message: confirmMsg),
             Container(height: spacing),
-
-            // Deny
-            ezIconButton(
-              action: onDeny,
-              icon: denyIcon,
-              body: Text(denyMsg),
-            ),
+            ezIconButton(action: onDeny, icon: denyIcon, message: denyMsg),
           ],
         )
       : Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Confirm
-            ezIconButton(
-              action: onConfirm,
-              icon: confirmIcon,
-              body: Text(confirmMsg),
-            ),
-
+            ezIconButton(action: onConfirm, icon: confirmIcon, message: confirmMsg),
             Container(width: spacing),
-
-            // Deny
-            ezIconButton(
-              action: onDeny,
-              icon: denyIcon,
-              body: Text(denyMsg),
-            ),
+            ezIconButton(action: onDeny, icon: denyIcon, message: denyMsg),
           ],
         );
 }
@@ -181,10 +184,5 @@ Widget ezCancel({
   Icon? customIcon,
 }) {
   Icon icon = customIcon ?? Icon(PlatformIcons(context).clear);
-
-  return ezIconButton(
-    action: onCancel,
-    icon: icon,
-    body: Text(cancelMsg),
-  );
+  return ezIconButton(action: onCancel, icon: icon, message: cancelMsg);
 }

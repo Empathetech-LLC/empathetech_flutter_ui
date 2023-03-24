@@ -43,6 +43,7 @@ class SliderSetting extends StatefulWidget {
 class _SliderSettingState extends State<SliderSetting> {
   // Initialize state
 
+  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double currValue = AppConfig.prefs[widget.prefsKey];
   late double defaultValue = AppConfig.defaults[widget.prefsKey];
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
@@ -58,7 +59,7 @@ class _SliderSettingState extends State<SliderSetting> {
             action: doNothing,
             body: Text(
               'Preview: $currValue',
-              style: getTextStyle(buttonStyleKey).copyWith(fontSize: currValue),
+              style: buttonTextStyle.copyWith(fontSize: currValue),
             ),
           ),
           Container(height: buttonSpacer),
@@ -104,7 +105,7 @@ class _SliderSettingState extends State<SliderSetting> {
               padding: EdgeInsets.all(currValue),
               child: Text(
                 'Preview: $currValue',
-                style: getTextStyle(buttonStyleKey),
+                style: buttonTextStyle,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -119,7 +120,7 @@ class _SliderSettingState extends State<SliderSetting> {
           Container(height: buttonSpacer),
           ezButton(
             action: doNothing,
-            body: Text('Preview $currValue'),
+            body: Text('Preview $currValue', style: buttonTextStyle),
             customStyle: ElevatedButton.styleFrom(
               fixedSize: Size(screenWidth(context), currValue),
             ),
@@ -133,9 +134,15 @@ class _SliderSettingState extends State<SliderSetting> {
           ezScrollView(
             children: [
               SizedBox(height: currValue),
-              ezButton(action: doNothing, body: Text('Preview $currValue')),
+              ezButton(
+                action: doNothing,
+                body: Text('Preview $currValue', style: buttonTextStyle),
+              ),
               SizedBox(height: currValue),
-              ezButton(action: doNothing, body: Text('Preview $currValue')),
+              ezButton(
+                action: doNothing,
+                body: Text('Preview $currValue', style: buttonTextStyle),
+              ),
               SizedBox(height: currValue),
             ],
             centered: true,
@@ -155,16 +162,22 @@ class _SliderSettingState extends State<SliderSetting> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Button 1
-                  ezButton(action: doNothing, body: Text('Preview $currValue')),
+                  ezButton(
+                    action: doNothing,
+                    body: Text('Preview $currValue', style: buttonTextStyle),
+                  ),
                   Container(height: currValue),
 
                   // Button 2
-                  ezButton(action: doNothing, body: Text('Preview $currValue')),
+                  ezButton(
+                    action: doNothing,
+                    body: Text('Preview $currValue', style: buttonTextStyle),
+                  ),
                   Container(height: currValue),
                 ],
               ),
             ),
-            body: Text('Press me'),
+            body: Text('Press me', style: buttonTextStyle),
           ),
           Container(height: buttonSpacer),
         ];
@@ -214,7 +227,7 @@ class _SliderSettingState extends State<SliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        body: Text('Reset: ' + AppConfig.defaults[widget.prefsKey].toString()),
+        message: 'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
       ),
       Container(height: buttonSpacer),
     ]);

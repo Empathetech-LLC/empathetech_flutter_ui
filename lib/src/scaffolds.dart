@@ -21,7 +21,7 @@ Widget ezScaffold({
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
 
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(title)),
+      appBar: PlatformAppBar(title: Text(title, style: getTextStyle(titleStyleKey))),
 
       body: Container(
         width: screenWidth(context),
@@ -36,7 +36,7 @@ Widget ezScaffold({
 
       // Platform specific configurations
       material: (context, platform) => scaffoldConfig,
-      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
+      cupertino: (context, platform) => m2cScaffold(context, scaffoldConfig),
     ),
   );
 }
@@ -57,7 +57,7 @@ Widget ezNavScaffold({
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
 
     child: PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(title)),
+      appBar: PlatformAppBar(title: Text(title, style: getTextStyle(titleStyleKey))),
 
       body: body,
 
@@ -69,7 +69,7 @@ Widget ezNavScaffold({
 
       // Platform specific configurations
       material: (context, platform) => scaffoldConfig,
-      cupertino: (context, platform) => m2cScaffold(scaffoldConfig),
+      cupertino: (context, platform) => m2cScaffold(context, scaffoldConfig),
     ),
   );
 }
