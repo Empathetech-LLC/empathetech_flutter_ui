@@ -133,12 +133,6 @@ CupertinoPageScaffoldData m2cScaffold(
 
   return CupertinoPageScaffoldData(
     navigationBar: CupertinoNavigationBar(
-      leading: Navigator.canPop(context)
-          ? CupertinoNavigationBarBackButton(
-              onPressed: () => Navigator.of(context).pop(),
-              color: themeTextColor,
-            )
-          : null,
       middle: Text(
         title,
         style: getTextStyle(titleStyleKey),
