@@ -91,58 +91,6 @@ CupertinoAppData cupertinoAppTheme() {
   );
 }
 
-/// Creates a [CupertinoActionSheet] from a Material UI [Drawer]
-void _showCupertinoActionSheet(
-  BuildContext context,
-  Drawer from,
-) {
-  showCupertinoModalPopup(
-    context: context,
-    builder: (BuildContext context) => CupertinoActionSheet(
-      title: from.child,
-      cancelButton: ezCancel(
-        context: context,
-        onCancel: () => Navigator.of(context).pop(),
-      ),
-    ),
-  );
-}
-
-/// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
-CupertinoPageScaffoldData m2cScaffold(
-  BuildContext context,
-  MaterialScaffoldData from,
-  String title,
-) {
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-
-  // Convert endDrawer if present
-  Widget? topRight;
-
-  if (from.endDrawer != null) {
-    Drawer toConvert = from.endDrawer as Drawer;
-
-    topRight = GestureDetector(
-      onTap: () => _showCupertinoActionSheet(context, toConvert),
-      child: Icon(
-        CupertinoIcons.line_horizontal_3,
-        color: themeTextColor,
-      ),
-    );
-  }
-
-  return CupertinoPageScaffoldData(
-    navigationBar: CupertinoNavigationBar(
-      middle: Text(
-        title,
-        style: getTextStyle(titleStyleKey),
-        textAlign: TextAlign.center,
-      ),
-      trailing: topRight,
-    ),
-  );
-}
-
 /// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
 ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
