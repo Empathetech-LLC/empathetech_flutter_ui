@@ -56,7 +56,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).folder),
+            icon: ezIcon(PlatformIcons(context).folder),
             message: 'File',
           ),
           Container(height: buttonSpacer),
@@ -72,7 +72,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).photoCamera),
+            icon: ezIcon(PlatformIcons(context).photoCamera),
             message: 'Camera',
           ),
           Container(height: buttonSpacer),
@@ -86,7 +86,7 @@ class _ImageSettingState extends State<ImageSetting> {
               });
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).refresh),
+            icon: ezIcon(PlatformIcons(context).refresh),
             message: 'Reset',
           ),
           Container(height: buttonSpacer),
@@ -100,7 +100,7 @@ class _ImageSettingState extends State<ImageSetting> {
               });
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).clear),
+            icon: ezIcon(PlatformIcons(context).clear),
             message: 'Clear',
           ),
           Container(height: buttonSpacer),
@@ -131,7 +131,7 @@ class _ImageSettingState extends State<ImageSetting> {
             height: widget.fullscreen ? 160 : 75,
             width: widget.fullscreen ? 90 : 75,
             child: currPath == noImageKey
-                ? Icon(PlatformIcons(context).clear)
+                ? ezIcon(PlatformIcons(context).clear)
                 : buildImage(
                     path: currPath,
                     fit: BoxFit.fill,

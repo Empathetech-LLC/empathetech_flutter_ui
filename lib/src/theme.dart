@@ -115,7 +115,10 @@ CupertinoPageScaffoldData m2cScaffold(BuildContext context, MaterialScaffoldData
 
     topRight = GestureDetector(
       onTap: () => _showCupertinoActionSheet(context, toConvert),
-      child: Icon(CupertinoIcons.line_horizontal_3),
+      child: Icon(
+        CupertinoIcons.line_horizontal_3,
+        color: Color(AppConfig.prefs[themeTextColorKey]),
+      ),
     );
   }
 

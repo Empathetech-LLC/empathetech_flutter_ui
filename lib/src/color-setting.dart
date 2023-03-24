@@ -109,7 +109,7 @@ class _ColorSettingState extends State<ColorSetting> {
         ezButton(
           action: changeColor,
           longAction: reset,
-          body: Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+          body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
           customStyle: ElevatedButton.styleFrom(
             backgroundColor: currColor,
             padding: EdgeInsets.all(AppConfig.prefs[paddingKey] * 2),

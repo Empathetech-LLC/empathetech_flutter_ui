@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [PlatformSwitch] from [AppConfig.prefs]
-Widget ezSwitch({
+PlatformSwitch ezSwitch({
   required bool value,
   required void Function(bool)? onChanged,
 }) {
@@ -14,6 +14,19 @@ Widget ezSwitch({
     value: value,
     onChanged: onChanged,
     activeColor: Color(AppConfig.prefs[buttonColorKey]),
+  );
+}
+
+/// Styles an [Icon] from [AppConfig.prefs]
+Icon ezIcon(
+  IconData icon, {
+  Color? color,
+  double? size,
+}) {
+  return Icon(
+    icon,
+    color: color ?? Color(AppConfig.prefs[buttonTextColorKey]),
+    size: size,
   );
 }
 
@@ -151,8 +164,8 @@ Widget ezYesNo({
 }) {
   // Gather theme data
 
-  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
+  Icon confirmIcon = customConfirm ?? ezIcon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customDeny ?? ezIcon(PlatformIcons(context).clear);
   double spacing = (spacer == null) ? AppConfig.prefs[buttonSpacingKey] : spacer;
 
   return axis == Axis.vertical
@@ -183,6 +196,6 @@ Widget ezCancel({
   String cancelMsg = 'Cancel',
   Icon? customIcon,
 }) {
-  Icon icon = customIcon ?? Icon(PlatformIcons(context).clear);
+  Icon icon = customIcon ?? ezIcon(PlatformIcons(context).clear);
   return ezIconButton(action: onCancel, icon: icon, message: cancelMsg);
 }
