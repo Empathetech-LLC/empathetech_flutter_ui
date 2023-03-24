@@ -114,6 +114,8 @@ CupertinoPageScaffoldData m2cScaffold(
   MaterialScaffoldData from,
   String title,
 ) {
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
   // Convert endDrawer if present
   Widget? topRight;
 
@@ -124,7 +126,7 @@ CupertinoPageScaffoldData m2cScaffold(
       onTap: () => _showCupertinoActionSheet(context, toConvert),
       child: Icon(
         CupertinoIcons.line_horizontal_3,
-        color: Color(AppConfig.prefs[themeTextColorKey]),
+        color: themeTextColor,
       ),
     );
   }
@@ -133,7 +135,8 @@ CupertinoPageScaffoldData m2cScaffold(
     navigationBar: CupertinoNavigationBar(
       leading: Navigator.canPop(context)
           ? CupertinoNavigationBarBackButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.of(context).pop(),
+              color: themeTextColor,
             )
           : null,
       middle: Text(
