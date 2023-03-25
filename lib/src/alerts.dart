@@ -121,7 +121,7 @@ void ezDialog({
     builder: (context) => PlatformAlertDialog(
       title: title == null
           ? null
-          : ezText(
+          : Text(
               title,
               style: dialogTitleStyle,
               textAlign: TextAlign.center,
@@ -141,6 +141,16 @@ void ezDialog({
         ),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
+        title: title == null
+            ? null
+            : Container(
+                padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
+                child: Text(
+                  title,
+                  style: dialogTitleStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
         actions: [
           GestureDetector(
             onTap: () => Navigator.of(context).pop(),
