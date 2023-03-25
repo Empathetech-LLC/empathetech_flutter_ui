@@ -90,10 +90,16 @@ class EZButton extends StatelessWidget {
   }
 
   /// Builds a [CupertinoActionSheetAction] from this button's values
-  CupertinoActionSheetAction toAction() {
-    return CupertinoActionSheetAction(
-      onPressed: this.action,
-      child: this.body,
+  Widget toAction() {
+    return GestureDetector(
+      onLongPress: this.longAction,
+      child: CupertinoActionSheetAction(
+        onPressed: this.action,
+        child: DefaultTextStyle.merge(
+          style: getTextStyle(dialogContentStyleKey),
+          child: this.body,
+        ),
+      ),
     );
   }
 
