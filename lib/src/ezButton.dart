@@ -48,6 +48,7 @@ class EZButton extends StatelessWidget {
     switch (this.body.runtimeType) {
       case Text:
         Text cast = this.body as Text;
+
         if (cast.style == null) {
           return Text(
             cast.data ?? 'Lorem ipsum',
@@ -91,14 +92,57 @@ class EZButton extends StatelessWidget {
 
   /// Builds a [CupertinoActionSheetAction] from this button's values
   Widget toAction() {
+    /// Merge each child widget with the dialog content [TextStyle]
+    Widget buildChild() {
+      switch (this.body.runtimeType) {
+        case Row:
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: (this.body as Row).children.map(
+              (widget) {
+                switch (widget.runtimeType) {
+                  case Text:
+                    return Text(
+                      (widget as Text).data ?? 'Lorem ipsum',
+                      style: getTextStyle(dialogContentStyleKey),
+                      textAlign: TextAlign.center,
+                    );
+                  case Icon:
+                    return Icon(
+                      (widget as Icon).icon,
+                      color: Color(AppConfig.prefs[themeTextColorKey]),
+                    );
+                  default:
+                    return widget;
+                }
+              },
+            ).toList(),
+          );
+
+        case Text:
+          return Text(
+            (this.body as Text).data ?? 'Lorem ipsum',
+            style: getTextStyle(dialogContentStyleKey),
+            textAlign: TextAlign.center,
+          );
+
+        case Icon:
+          return Icon(
+            (this.body as Icon).icon,
+            color: Color(AppConfig.prefs[themeTextColorKey]),
+          );
+
+        default:
+          return this.body;
+      }
+    }
+
     return GestureDetector(
       onLongPress: this.longAction,
       child: CupertinoActionSheetAction(
         onPressed: this.action,
-        child: DefaultTextStyle.merge(
-          style: getTextStyle(dialogContentStyleKey),
-          child: this.body,
-        ),
+        child: buildChild(),
       ),
     );
   }
