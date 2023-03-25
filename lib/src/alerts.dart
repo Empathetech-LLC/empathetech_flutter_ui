@@ -15,7 +15,7 @@ void popNLog(
   ezDialog(
     context: context,
     title: 'Attention:',
-    content: paddedText(message, style: getTextStyle(dialogContentStyleKey)),
+    content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
   );
 }
 
@@ -26,7 +26,7 @@ Widget titleCard(
 ) {
   return Card(
     color: Color(AppConfig.prefs[themeColorKey]),
-    child: paddedText(title, style: getTextStyle(titleStyleKey)),
+    child: ezText(title, style: getTextStyle(titleStyleKey)),
   );
 }
 

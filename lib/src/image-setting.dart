@@ -116,7 +116,7 @@ class _ImageSettingState extends State<ImageSetting> {
       longAction: () => ezDialog(
         context: context,
         title: 'Credit to:',
-        content: paddedText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
+        content: ezText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

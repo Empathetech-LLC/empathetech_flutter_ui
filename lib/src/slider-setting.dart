@@ -76,7 +76,7 @@ class _SliderSettingState extends State<SliderSetting> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              paddedText(
+              ezText(
                 'Preview (to scale):\n$currValue',
                 style: getTextStyle(dialogContentStyleKey),
                 alignment: TextAlign.center,

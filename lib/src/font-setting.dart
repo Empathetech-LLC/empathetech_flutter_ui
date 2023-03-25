@@ -59,7 +59,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        paddedText('Font family', style: getTextStyle(subTitleStyleKey)),
+        ezText('Font family', style: getTextStyle(subTitleStyleKey)),
         Container(height: buttonSpacer),
 
         // Font picker

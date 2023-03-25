@@ -103,7 +103,7 @@ class _ColorSettingState extends State<ColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        paddedText(widget.message, style: getTextStyle(dialogTitleStyleKey)),
+        ezText(widget.message, style: getTextStyle(dialogTitleStyleKey)),
 
         // Color preview/edit button
         ezButton(

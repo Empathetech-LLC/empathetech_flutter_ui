@@ -11,7 +11,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Text that values its personal space
 /// And requires a [TextStyle], for wide [TargetPlatform] support
-Widget paddedText(
+Widget ezText(
   String text, {
   required TextStyle style,
   TextAlign? alignment,
@@ -19,6 +19,19 @@ Widget paddedText(
   return Padding(
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
     child: Text(text, style: style, textAlign: alignment),
+  );
+}
+
+/// Styles an [Icon] from [AppConfig.prefs]
+Icon ezIcon(
+  IconData icon, {
+  Color? color,
+  double? size,
+}) {
+  return Icon(
+    icon,
+    color: color ?? Color(AppConfig.prefs[buttonTextColorKey]),
+    size: size,
   );
 }
 
