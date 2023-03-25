@@ -92,6 +92,10 @@ Widget ezNavScaffold({
   List<Widget>? drawerBody,
   Widget? fab,
 }) {
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+
   return GestureDetector(
     // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
@@ -103,6 +107,15 @@ Widget ezNavScaffold({
         currentIndex: index,
         itemChanged: onChanged,
         items: items,
+
+        // Platform specific configurations
+        material: (context, platform) => MaterialNavBarData(
+          backgroundColor: themeColor,
+          selectedItemColor: buttonColor,
+          selectedIconTheme: IconThemeData(color: buttonColor),
+          unselectedItemColor: themeTextColor,
+          unselectedIconTheme: IconThemeData(color: themeTextColor),
+        ),
       ),
 
       // Platform specific configurations
