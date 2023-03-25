@@ -121,7 +121,7 @@ void ezDialog({
     builder: (context) => PlatformAlertDialog(
       title: title == null
           ? null
-          : Text(
+          : ezText(
               title,
               style: dialogTitleStyle,
               textAlign: TextAlign.center,
@@ -147,7 +147,7 @@ void ezDialog({
             child: ezText(
               'Close',
               style: getTextStyle(dialogContentStyleKey),
-              alignment: TextAlign.center,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

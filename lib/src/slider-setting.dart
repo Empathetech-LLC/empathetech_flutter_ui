@@ -79,7 +79,7 @@ class _SliderSettingState extends State<SliderSetting> {
               ezText(
                 'Preview (to scale):\n$currValue',
                 style: getTextStyle(dialogContentStyleKey),
-                alignment: TextAlign.center,
+                textAlign: TextAlign.center,
               ),
               Container(
                 height: 160.0,

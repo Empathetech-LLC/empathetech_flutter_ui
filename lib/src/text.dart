@@ -12,11 +12,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 Widget ezText(
   String text, {
   required TextStyle style,
-  TextAlign? alignment,
+  TextAlign? textAlign,
 }) {
   return Padding(
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-    child: Text(text, style: style, textAlign: alignment),
+    child: Text(text, style: style, textAlign: textAlign),
   );
 }
 
