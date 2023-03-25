@@ -19,6 +19,17 @@ Widget ezScaffold({
   List<Widget>? drawerBody,
   Widget? fab,
 }) {
+  Widget baseBody = Container(
+    width: screenWidth(context),
+    height: screenHeight(context),
+
+    // Background
+    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+
+    // Build space
+    child: Container(child: body, margin: EdgeInsets.all(AppConfig.prefs[marginKey])),
+  );
+
   return GestureDetector(
     // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
@@ -26,19 +37,9 @@ Widget ezScaffold({
     child: PlatformScaffold(
       appBar: PlatformAppBar(title: Text(title, style: getTextStyle(titleStyleKey))),
 
-      body: Container(
-        width: screenWidth(context),
-        height: screenHeight(context),
-
-        // Background
-        decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
-
-        // Build space
-        child: Container(child: body, margin: EdgeInsets.all(AppConfig.prefs[marginKey])),
-      ),
-
       // Platform specific configurations
       material: (context, platform) => MaterialScaffoldData(
+        body: baseBody,
         endDrawer: ezDrawer(
           context: context,
           platform: platform,
@@ -48,6 +49,18 @@ Widget ezScaffold({
         floatingActionButton: fab,
       ),
       cupertino: (context, platform) => CupertinoPageScaffoldData(
+        body: (fab != null)
+            ? Stack(
+                children: [
+                  baseBody,
+                  Positioned(
+                    bottom: 32.0,
+                    right: 32.0,
+                    child: fab,
+                  ),
+                ],
+              )
+            : baseBody,
         navigationBar: CupertinoNavigationBar(
           middle: Text(
             title,
@@ -86,8 +99,6 @@ Widget ezNavScaffold({
     child: PlatformScaffold(
       appBar: PlatformAppBar(title: Text(title, style: getTextStyle(titleStyleKey))),
 
-      body: body,
-
       bottomNavBar: PlatformNavBar(
         currentIndex: index,
         itemChanged: onChanged,
@@ -95,8 +106,8 @@ Widget ezNavScaffold({
       ),
 
       // Platform specific configurations
-      // Platform specific configurations
       material: (context, platform) => MaterialScaffoldData(
+        body: body,
         endDrawer: ezDrawer(
           context: context,
           platform: platform,
@@ -106,6 +117,18 @@ Widget ezNavScaffold({
         floatingActionButton: fab,
       ),
       cupertino: (context, platform) => CupertinoPageScaffoldData(
+        body: (fab != null)
+            ? Stack(
+                children: [
+                  body,
+                  Positioned(
+                    bottom: 32.0,
+                    right: 32.0,
+                    child: fab,
+                  ),
+                ],
+              )
+            : body,
         navigationBar: CupertinoNavigationBar(
           middle: Text(
             title,
