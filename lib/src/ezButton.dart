@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
@@ -41,26 +42,35 @@ class EZButton extends StatelessWidget {
           ],
         );
 
+  /// Text styling works differently in Material and Cupertino
+  /// so a little redundancy goes a long way
+  Widget _buildBody() {
+    switch (this.body.runtimeType) {
+      case Text:
+        Text cast = this.body as Text;
+        if (cast.style == null) {
+          return Text(
+            cast.data ?? 'Lorem ipsum',
+            style: getTextStyle(buttonStyleKey),
+            textAlign: cast.textAlign,
+          );
+        } else {
+          return this.body;
+        }
+
+      default:
+        return this.body;
+    }
+  }
+
+  /// Mimics a [ButtonStyle] replaceAll() style function
+  /// Replace and merge values in [materialButton] with values in [customStyle]
   ButtonStyle _buildStyle() {
     ButtonStyle style = materialButton();
 
     switch (this.body.runtimeType) {
       case Icon:
-        // Icon buttons should be circular
         style = materialButton(shape: CircleBorder());
-        break;
-
-      case Text:
-        // Text styling works differently in Material and Cupertino
-        // so a little redundancy goes a long way
-        Text cast = this.body as Text;
-        if (cast.style == null) {
-          this.body = Text(
-            cast.data ?? 'Lorem ipsum',
-            style: getTextStyle(buttonStyleKey),
-            textAlign: cast.textAlign,
-          );
-        }
         break;
     }
 
@@ -79,20 +89,29 @@ class EZButton extends StatelessWidget {
     return style;
   }
 
+  /// Builds a [CupertinoActionSheetAction] from this button's values
+  CupertinoActionSheetAction toAction() {
+    return CupertinoActionSheetAction(
+      onPressed: this.action,
+      child: this.body,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    ButtonStyle ezButtonStyle = _buildStyle();
+    Widget ezBody = _buildBody();
+    ButtonStyle ezStyle = _buildStyle();
 
     return GestureDetector(
       onLongPress: longAction,
       child: PlatformElevatedButton(
         onPressed: action,
-        color: (ezButtonStyle.backgroundColor is Color)
-            ? ezButtonStyle.backgroundColor as Color
+        color: (ezStyle.backgroundColor is Color)
+            ? ezStyle.backgroundColor as Color
             : Color(AppConfig.prefs[buttonColorKey]),
-        child: body,
-        material: (context, platform) => MaterialElevatedButtonData(style: ezButtonStyle),
-        cupertino: (context, platform) => m2cButton(ezButtonStyle),
+        child: ezBody,
+        material: (context, platform) => MaterialElevatedButtonData(style: ezStyle),
+        cupertino: (context, platform) => m2cButton(ezStyle),
       ),
     );
   }
