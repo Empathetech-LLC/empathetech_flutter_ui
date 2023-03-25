@@ -8,20 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// [PlatformApp] wrapper using [empathetech_flutter_ui] styling
-PlatformApp ezApp({
-  required String appTitle,
-  required String? initialRoute,
-  required Map<String, Widget Function(BuildContext)>? routes,
-}) {
+PlatformApp ezApp({required String appTitle, required Widget homeScreen}) {
   return PlatformApp(
     debugShowCheckedModeBanner: false,
     title: appTitle,
-
-    // Routing
-    initialRoute: initialRoute,
-    routes: routes,
-
-    // Styling
+    home: homeScreen,
     material: (context, platform) => materialAppTheme(),
     cupertino: (context, platform) => cupertinoAppTheme(),
   );
