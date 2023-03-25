@@ -47,10 +47,38 @@ void popScreen(BuildContext context) {
 }
 
 /// More readable than [Navigator] spelled out
+void popUntilScreen({
+  required BuildContext context,
+  required Widget screen,
+}) {
+  Navigator.of(context).popUntil((route) {
+    if (route.settings.name == screen.key.toString()) {
+      return true;
+    }
+    return false;
+  });
+}
+
+/// More readable than [Navigator] spelled out
 void pushScreen({
   required BuildContext context,
   required Widget screen,
 }) {
+  Navigator.of(context).push(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
+}
+
+/// More readable than [Navigator] spelled out
+void popAndPushScreen({
+  required BuildContext context,
+  required Widget screen,
+}) {
+  Navigator.of(context).pop();
+
   Navigator.of(context).push(
     platformPageRoute(
       context: context,
