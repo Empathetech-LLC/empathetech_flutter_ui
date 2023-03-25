@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Custom wrappers
-
 /// Text that values its personal space
 /// And requires a [TextStyle], for wide [TargetPlatform] support
 Widget ezText(
@@ -73,8 +71,6 @@ Widget ezForm({
     ),
   );
 }
-
-// Local text type(s)
 
 const String defaultStyleKey = 'defaultStyle';
 const String titleStyleKey = 'titleStyle';
