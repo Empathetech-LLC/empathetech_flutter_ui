@@ -109,6 +109,7 @@ void ezDialog({
   required BuildContext context,
   required Widget content,
   String? title,
+  bool needsClose = true,
 }) {
   // Gather theme data
 
@@ -151,16 +152,18 @@ void ezDialog({
                   textAlign: TextAlign.center,
                 ),
               ),
-        actions: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: ezText(
-              'Close',
-              style: getTextStyle(dialogContentStyleKey),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
+        actions: (needsClose)
+            ? [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: ezText(
+                    'Close',
+                    style: getTextStyle(dialogContentStyleKey),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]
+            : [],
       ),
     ),
   );
