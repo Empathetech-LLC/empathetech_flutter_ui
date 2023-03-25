@@ -112,5 +112,6 @@ CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
     padding: (from.padding is EdgeInsetsGeometry)
         ? from.padding as EdgeInsetsGeometry
         : EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    borderRadius: (from.shape != null) ? BorderRadius.circular(30.0) : null,
   );
 }
