@@ -46,7 +46,7 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
-          ezIconButton(
+          EZButton.icon(
             action: () async {
               await changeImage(
                 context: context,
@@ -62,7 +62,7 @@ class _ImageSettingState extends State<ImageSetting> {
           Container(height: buttonSpacer),
 
           // From camera
-          ezIconButton(
+          EZButton.icon(
             action: () async {
               await changeImage(
                 context: context,
@@ -78,7 +78,7 @@ class _ImageSettingState extends State<ImageSetting> {
           Container(height: buttonSpacer),
 
           // Reset
-          ezIconButton(
+          EZButton.icon(
             action: () {
               AppConfig.preferences.remove(widget.prefsKey);
               setState(() {
@@ -92,7 +92,7 @@ class _ImageSettingState extends State<ImageSetting> {
           Container(height: buttonSpacer),
 
           // Clear
-          ezIconButton(
+          EZButton.icon(
             action: () {
               AppConfig.preferences.setString(widget.prefsKey, noImageKey);
               setState(() {
@@ -111,7 +111,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ezButton(
+    return EZButton(
       action: chooseImage,
       longAction: () => ezDialog(
         context: context,

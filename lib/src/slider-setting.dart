@@ -55,7 +55,7 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.fontSize:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          EZButton(
             action: doNothing,
             body: Text(
               'Preview: $currValue',
@@ -99,7 +99,7 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.padding:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          EZButton(
             action: doNothing,
             body: Padding(
               padding: EdgeInsets.all(currValue),
@@ -118,7 +118,7 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.buttonHeight:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          EZButton(
             action: doNothing,
             body: Text('Preview $currValue', style: buttonTextStyle),
             customStyle: ElevatedButton.styleFrom(
@@ -134,12 +134,12 @@ class _SliderSettingState extends State<SliderSetting> {
           ezScrollView(
             children: [
               SizedBox(height: currValue),
-              ezButton(
+              EZButton(
                 action: doNothing,
                 body: Text('Preview $currValue', style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
-              ezButton(
+              EZButton(
                 action: doNothing,
                 body: Text('Preview $currValue', style: buttonTextStyle),
               ),
@@ -153,7 +153,7 @@ class _SliderSettingState extends State<SliderSetting> {
       case SettingType.dialogSpacing:
         return [
           Container(height: buttonSpacer),
-          ezButton(
+          EZButton(
             action: () => ezDialog(
               context: context,
               title: 'Space preview',
@@ -162,14 +162,14 @@ class _SliderSettingState extends State<SliderSetting> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Button 1
-                  ezButton(
+                  EZButton(
                     action: doNothing,
                     body: Text('Preview $currValue', style: buttonTextStyle),
                   ),
                   Container(height: currValue),
 
                   // Button 2
-                  ezButton(
+                  EZButton(
                     action: doNothing,
                     body: Text('Preview $currValue', style: buttonTextStyle),
                   ),
@@ -188,7 +188,7 @@ class _SliderSettingState extends State<SliderSetting> {
   }
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
-  /// [widget.title] + [preview] + [PlatformSlider] + reset [ezIconButton]
+  /// [widget.title] + [preview] + [PlatformSlider] + reset [EZButton.icon]
   List<Widget> buildList() {
     List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyleKey))];
 
@@ -219,7 +219,7 @@ class _SliderSettingState extends State<SliderSetting> {
       Container(height: buttonSpacer),
 
       // Reset button
-      ezIconButton(
+      EZButton.icon(
         action: () {
           AppConfig.preferences.remove(widget.prefsKey);
           setState(() {

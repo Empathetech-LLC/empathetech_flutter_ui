@@ -106,7 +106,7 @@ class _ColorSettingState extends State<ColorSetting> {
         ezText(widget.message, style: getTextStyle(dialogTitleStyleKey)),
 
         // Color preview/edit button
-        ezButton(
+        EZButton(
           action: changeColor,
           longAction: reset,
           body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),

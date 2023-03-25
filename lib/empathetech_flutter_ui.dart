@@ -9,7 +9,7 @@ export 'src/theme.dart';
 export 'src/scaffolds.dart';
 export 'src/drawers.dart';
 export 'src/text.dart';
-export 'src/ezButton.dart';
+export 'src/EZButton.dart';
 export 'src/views.dart';
 export 'src/toggles.dart';
 export 'src/color-setting.dart';
