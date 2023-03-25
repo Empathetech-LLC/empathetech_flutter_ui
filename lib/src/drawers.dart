@@ -8,8 +8,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Converts a [List] of [Widget]s to a [List] of [CupertinoActionSheetAction]s
 /// Removes any child-less [Container]s (i.e. spacers)
-List<CupertinoActionSheetAction> drawer2ActionSheet(List<Widget> children) {
-  List<CupertinoActionSheetAction> toReturn = [];
+List<Widget> drawer2ActionSheet(List<Widget> children) {
+  List<Widget> toReturn = [];
 
   children.forEach((widget) {
     switch (widget.runtimeType) {
