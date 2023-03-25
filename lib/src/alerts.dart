@@ -140,7 +140,18 @@ void ezDialog({
           right: padding,
         ),
       ),
-      cupertino: (context, platform) => CupertinoAlertDialogData(),
+      cupertino: (context, platform) => CupertinoAlertDialogData(
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: ezText(
+              'Close',
+              style: getTextStyle(dialogContentStyleKey),
+              alignment: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
