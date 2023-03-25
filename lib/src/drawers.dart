@@ -14,8 +14,7 @@ List<Widget> drawer2ActionSheet(List<Widget> children) {
   children.forEach((widget) {
     switch (widget.runtimeType) {
       case Container:
-        Container cast = widget as Container;
-        if (cast.child != null)
+        if ((widget as Container).child != null)
           toReturn.add(
             CupertinoActionSheetAction(
               onPressed: doNothing,
@@ -25,8 +24,7 @@ List<Widget> drawer2ActionSheet(List<Widget> children) {
         break;
 
       case EZButton:
-        EZButton cast = widget as EZButton;
-        toReturn.add(cast.toAction());
+        toReturn.add((widget as EZButton).toAction());
         break;
 
       default:
