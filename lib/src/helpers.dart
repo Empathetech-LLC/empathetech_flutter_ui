@@ -44,21 +44,24 @@ Color getContrastColor(Color background) {
 void doNothing() {}
 
 /// More readable than Navigator.of(context).pop()
-void popScreen(BuildContext context) {
-  Navigator.of(context).pop();
+void popScreen(
+  BuildContext context, {
+  bool success = false,
+}) {
+  return Navigator.of(context).pop(success);
 }
 
 /// More readable than [Navigator] spelled out
 void popUntilHome(BuildContext context) {
-  Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }
 
 /// More readable than [Navigator] spelled out
-void pushScreen({
+Future<bool> pushScreen({
   required BuildContext context,
   required Widget screen,
-}) {
-  Navigator.of(context).push(
+}) async {
+  return await Navigator.of(context).push(
     platformPageRoute(
       context: context,
       builder: (context) => screen,
@@ -67,13 +70,13 @@ void pushScreen({
 }
 
 /// More readable than [Navigator] spelled out
-void popAndPushScreen({
+Future<bool> popAndPushScreen({
   required BuildContext context,
   required Widget screen,
-}) {
+}) async {
   Navigator.of(context).pop();
 
-  Navigator.of(context).push(
+  return await Navigator.of(context).push(
     platformPageRoute(
       context: context,
       builder: (context) => screen,
@@ -82,11 +85,11 @@ void popAndPushScreen({
 }
 
 /// More readable than [Navigator] spelled out
-void replaceScreen({
+Future<bool> replaceScreen({
   required BuildContext context,
   required Widget screen,
-}) {
-  Navigator.of(context).pushReplacement(
+}) async {
+  return await Navigator.of(context).pushReplacement(
     platformPageRoute(
       context: context,
       builder: (context) => screen,
