@@ -62,11 +62,12 @@ Future<bool> pushScreen({
   required Widget screen,
 }) async {
   return await Navigator.of(context).push(
-    platformPageRoute(
-      context: context,
-      builder: (context) => screen,
-    ),
-  );
+        platformPageRoute(
+          context: context,
+          builder: (context) => screen,
+        ),
+      ) ??
+      false;
 }
 
 /// More readable than [Navigator] spelled out
@@ -77,11 +78,12 @@ Future<bool> popAndPushScreen({
   Navigator.of(context).pop();
 
   return await Navigator.of(context).push(
-    platformPageRoute(
-      context: context,
-      builder: (context) => screen,
-    ),
-  );
+        platformPageRoute(
+          context: context,
+          builder: (context) => screen,
+        ),
+      ) ??
+      false;
 }
 
 /// More readable than [Navigator] spelled out
@@ -90,9 +92,10 @@ Future<bool> replaceScreen({
   required Widget screen,
 }) async {
   return await Navigator.of(context).pushReplacement(
-    platformPageRoute(
-      context: context,
-      builder: (context) => screen,
-    ),
-  );
+        platformPageRoute(
+          context: context,
+          builder: (context) => screen,
+        ),
+      ) ??
+      false;
 }
