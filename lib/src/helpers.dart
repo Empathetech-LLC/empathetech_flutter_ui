@@ -1,5 +1,7 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -47,16 +49,8 @@ void popScreen(BuildContext context) {
 }
 
 /// More readable than [Navigator] spelled out
-void popUntilScreen({
-  required BuildContext context,
-  required Widget screen,
-}) {
-  Navigator.of(context).popUntil((route) {
-    if (route.settings.name == screen.key.toString()) {
-      return true;
-    }
-    return false;
-  });
+void popUntilHome(BuildContext context) {
+  Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }
 
 /// More readable than [Navigator] spelled out
