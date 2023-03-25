@@ -1,6 +1,7 @@
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// More readable than MediaQuery.of(context).size.width
 double screenWidth(BuildContext context) {
@@ -39,3 +40,28 @@ Color getContrastColor(Color background) {
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!
 void doNothing() {}
+
+/// More readable than Navigator.of(context).pop()
+void popScreen(BuildContext context) {
+  Navigator.of(context).pop();
+}
+
+/// More readable than [Navigator] spelled out
+void pushScreen(BuildContext context, Widget screen) {
+  Navigator.of(context).push(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
+}
+
+/// More readable than [Navigator] spelled out
+void replaceScreen(BuildContext context, Widget screen) {
+  Navigator.of(context).pushReplacement(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
+}
