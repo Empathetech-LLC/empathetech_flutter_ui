@@ -47,7 +47,10 @@ void popScreen(BuildContext context) {
 }
 
 /// More readable than [Navigator] spelled out
-void pushScreen(BuildContext context, Widget screen) {
+void pushScreen({
+  required BuildContext context,
+  required Widget screen,
+}) {
   Navigator.of(context).push(
     platformPageRoute(
       context: context,
@@ -57,7 +60,10 @@ void pushScreen(BuildContext context, Widget screen) {
 }
 
 /// More readable than [Navigator] spelled out
-void replaceScreen(BuildContext context, Widget screen) {
+void replaceScreen({
+  required BuildContext context,
+  required Widget screen,
+}) {
   Navigator.of(context).pushReplacement(
     platformPageRoute(
       context: context,
