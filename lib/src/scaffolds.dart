@@ -19,6 +19,8 @@ Widget ezScaffold({
   List<Widget>? drawerBody,
   Widget? fab,
 }) {
+  double margin = AppConfig.prefs[marginKey];
+
   Widget baseBody = Container(
     width: screenWidth(context),
     height: screenHeight(context),
@@ -54,8 +56,8 @@ Widget ezScaffold({
                 children: [
                   baseBody,
                   Positioned(
-                    bottom: 32.0,
-                    right: 32.0,
+                    bottom: 16.0 + margin,
+                    right: 16.0 + margin,
                     child: fab,
                   ),
                 ],
@@ -96,6 +98,8 @@ Widget ezNavScaffold({
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
+  double margin = AppConfig.prefs[marginKey];
+
   return GestureDetector(
     // Close open keyboard(s) on tap
     onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
@@ -135,8 +139,8 @@ Widget ezNavScaffold({
                 children: [
                   body,
                   Positioned(
-                    bottom: 32.0,
-                    right: 32.0,
+                    bottom: 16.0 + margin,
+                    right: 16.0 + margin,
                     child: fab,
                   ),
                 ],
