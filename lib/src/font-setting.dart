@@ -60,7 +60,6 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       children: [
         // Title
         ezText('Font family', style: getTextStyle(subTitleStyleKey)),
-        Container(height: buttonSpacer),
 
         // Font picker
         EZButton(
