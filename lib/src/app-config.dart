@@ -42,24 +42,24 @@ const String fontSizeKey = 'fontSize';
 /// Tracks the apps [FocusManager] for keyboard management
 /// Setting are tracked with [shared_preferences]
 class AppConfig {
-  static late FocusManager focus;
+  static late List<String> assets;
   static late SharedPreferences preferences;
   static late Map<String, dynamic> prefs;
-  static late List<String> assets;
+  static late FocusManager focus;
 
   static Map<String, dynamic> defaults = {
-    backImageKey: null,
     backColorKey: 0xFF141414, // Almost black
     themeColorKey: 0xFF141414, // Almost black
     themeTextColorKey: 0xFFFFFFFF, // White text
     buttonColorKey: 0xE620DAA5, // Empathetech eucalyptus
     buttonTextColorKey: 0xFF000000, // Black text
+    backImageKey: null,
     buttonSpacingKey: 35.0,
     dialogSpacingKey: 20.0,
     marginKey: 15.0,
     paddingKey: 12.5,
-    fontFamilyKey: 'Roboto',
     fontSizeKey: 24.0,
+    fontFamilyKey: 'Roboto',
   };
 
   /// Populate [AppConfig.prefs], overwriting defaults whenever a user value is found
@@ -74,16 +74,14 @@ class AppConfig {
     // Load any custom defaults
     if (customDefaults != null) defaults.addAll(customDefaults);
 
-    // Start prefs with a deep copy of defaults
+    // Start prefs from a deep copy of all defaults
     prefs = new Map.from(defaults);
 
-    // Find all the keys that have been overwritten
-    List<String> toOverwrite =
-        preferences.getKeys().toSet().intersection(defaults.keys.toSet()).toList();
+    // Load the keys that have been overwritten
+    List<String> overwritten = preferences.getKeys().toList();
 
-    // Load the changes
-    toOverwrite.forEach((key) {
-      dynamic value = defaults[key];
+    overwritten.forEach((key) {
+      dynamic value = prefs[key];
       dynamic userPref;
 
       if (value is int) {
