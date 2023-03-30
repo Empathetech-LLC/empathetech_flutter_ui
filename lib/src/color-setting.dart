@@ -13,10 +13,12 @@ class ColorSetting extends StatefulWidget {
     Key? key,
     required this.toControl,
     required this.message,
+    this.textBackground,
   }) : super(key: key);
 
   final String toControl;
   final String message;
+  final int? textBackground;
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -31,7 +33,7 @@ class _ColorSettingState extends State<ColorSetting> {
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   /// Opens an [ezColorPicker] for updating [currColor]
-  void changeColor() {
+  void openColorPicker() {
     ezColorPicker(
       context: context,
       startColor: currColor,
@@ -47,6 +49,60 @@ class _ColorSettingState extends State<ColorSetting> {
       },
       cancel: () => Navigator.of(context).pop(),
     );
+  }
+
+  /// Opens an [ezColorPicker] for updating [currColor]
+  /// If a [textBackground] is provided, it will be used to generate a recommended color pair
+  void changeColor() {
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+    double dialogSpcaer = AppConfig.prefs[dialogSpacingKey];
+
+    if (widget.textBackground != null) {
+      int background = widget.textBackground as int;
+      int recommended = getContrastColor(Color(background)).value;
+
+      ezDialog(
+        context: context,
+        title: 'Use recommended?',
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Recommended preview
+            Container(
+              width: 75,
+              height: 75,
+              decoration: BoxDecoration(
+                color: Color(recommended),
+                border: Border.all(color: Color(background)),
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            ezYesNo(
+              context: context,
+              onConfirm: () {
+                popScreen(context);
+                AppConfig.preferences.setInt(widget.toControl, recommended);
+                setState(() {
+                  currColor = Color(recommended);
+                });
+              },
+              onDeny: () {
+                popScreen(context);
+                openColorPicker();
+              },
+              customDeny: Icon(PlatformIcons(context).edit),
+              denyMsg: 'Pick custom',
+              axis: Axis.vertical,
+              spacer: dialogSpcaer,
+            ),
+          ],
+        ),
+      );
+    } else {
+      openColorPicker();
+    }
   }
 
   /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
