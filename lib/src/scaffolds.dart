@@ -12,7 +12,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 Widget ezScaffold({
   required BuildContext context,
   required String title,
-  required DecorationImage? backgroundImage,
+  DecorationImage? backgroundImage,
   required Color backgroundColor,
   required Widget body,
   Widget? drawerHeader,
