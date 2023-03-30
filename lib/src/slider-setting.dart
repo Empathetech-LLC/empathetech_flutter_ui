@@ -54,11 +54,10 @@ class _SliderSettingState extends State<SliderSetting> {
       // Font size
       case SettingType.fontSize:
         return [
-          Container(height: buttonSpacer),
           EZButton(
             action: doNothing,
             body: Text(
-              'Preview: $currValue',
+              'Currently: $currValue',
               style: buttonTextStyle.copyWith(fontSize: currValue),
             ),
           ),
@@ -71,13 +70,12 @@ class _SliderSettingState extends State<SliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
-          Container(height: buttonSpacer),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ezText(
-                'Preview (to scale):\n$currValue',
+                'Currently:\n$currValue\n\n(to scale)',
                 style: getTextStyle(dialogContentStyleKey),
                 textAlign: TextAlign.center,
               ),
@@ -98,13 +96,12 @@ class _SliderSettingState extends State<SliderSetting> {
       // Padding
       case SettingType.padding:
         return [
-          Container(height: buttonSpacer),
           EZButton(
             action: doNothing,
             body: Padding(
               padding: EdgeInsets.all(currValue),
               child: Text(
-                'Preview: $currValue',
+                'Currently: $currValue',
                 style: buttonTextStyle,
                 textAlign: TextAlign.center,
               ),
@@ -114,34 +111,19 @@ class _SliderSettingState extends State<SliderSetting> {
           Container(height: buttonSpacer),
         ];
 
-      // Button height
-      case SettingType.buttonHeight:
-        return [
-          Container(height: buttonSpacer),
-          EZButton(
-            action: doNothing,
-            body: Text('Preview $currValue', style: buttonTextStyle),
-            customStyle: ElevatedButton.styleFrom(
-              fixedSize: Size(screenWidth(context), currValue),
-            ),
-          ),
-          Container(height: buttonSpacer),
-        ];
-
       // Button spacing
       case SettingType.buttonSpacing:
         return [
           ezScrollView(
             children: [
-              SizedBox(height: currValue),
               EZButton(
                 action: doNothing,
-                body: Text('Preview $currValue', style: buttonTextStyle),
+                body: Text('Currently: $currValue', style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
               EZButton(
                 action: doNothing,
-                body: Text('Preview $currValue', style: buttonTextStyle),
+                body: Text('Currently: $currValue', style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
             ],
@@ -149,10 +131,22 @@ class _SliderSettingState extends State<SliderSetting> {
           ),
         ];
 
+      // Button height
+      case SettingType.buttonHeight:
+        return [
+          EZButton(
+            action: doNothing,
+            body: Text('Currently: $currValue', style: buttonTextStyle),
+            customStyle: ElevatedButton.styleFrom(
+              fixedSize: Size(screenWidth(context), currValue),
+            ),
+          ),
+          Container(height: buttonSpacer),
+        ];
+
       // Dialog spacing
       case SettingType.dialogSpacing:
         return [
-          Container(height: buttonSpacer),
           EZButton(
             action: () => ezDialog(
               context: context,
@@ -164,14 +158,14 @@ class _SliderSettingState extends State<SliderSetting> {
                   // Button 1
                   EZButton(
                     action: doNothing,
-                    body: Text('Preview $currValue', style: buttonTextStyle),
+                    body: Text('Currently: $currValue', style: buttonTextStyle),
                   ),
                   Container(height: currValue),
 
                   // Button 2
                   EZButton(
                     action: doNothing,
-                    body: Text('Preview $currValue', style: buttonTextStyle),
+                    body: Text('Currently: $currValue', style: buttonTextStyle),
                   ),
                   Container(height: currValue),
                 ],
@@ -190,7 +184,7 @@ class _SliderSettingState extends State<SliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [preview] + [PlatformSlider] + reset [EZButton.icon]
   List<Widget> buildList() {
-    List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyleKey))];
+    List<Widget> toReturn = [ezText(widget.title, style: getTextStyle(subTitleStyleKey))];
 
     toReturn.addAll(preview());
 
@@ -229,7 +223,6 @@ class _SliderSettingState extends State<SliderSetting> {
         icon: ezIcon(PlatformIcons(context).refresh),
         message: 'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
       ),
-      Container(height: buttonSpacer),
     ]);
 
     // Build time!
