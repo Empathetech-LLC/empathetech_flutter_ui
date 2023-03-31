@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3] - 2023-03-31
+### Updated
+- Alerts to Future
+
 ## [1.1.2] - 2023-03-31
 ### Updated
 - ez scaffold, fixed warning
