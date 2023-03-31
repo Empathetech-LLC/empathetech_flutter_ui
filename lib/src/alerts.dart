@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
-void popNLog(
+Future<bool> popNLog(
   BuildContext context,
   String message,
-) {
+) async {
   log(message);
-  ezDialog(
+  return await ezDialog(
     context: context,
     title: 'Attention:',
     content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
@@ -105,19 +105,19 @@ Widget warningCard({
 }
 
 /// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
-void ezDialog({
+Future<bool> ezDialog({
   required BuildContext context,
   required Widget content,
   String? title,
   bool needsClose = true,
-}) {
+}) async {
   // Gather theme data
 
   TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
-  showPlatformDialog(
+  return await showPlatformDialog(
     context: context,
     builder: (context) => PlatformAlertDialog(
       title: title == null
