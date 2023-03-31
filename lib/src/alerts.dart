@@ -118,53 +118,54 @@ Future<bool> ezDialog({
   double padding = AppConfig.prefs[paddingKey];
 
   return await showPlatformDialog(
-    context: context,
-    builder: (context) => PlatformAlertDialog(
-      title: title == null
-          ? null
-          : Text(
-              title,
-              style: dialogTitleStyle,
-              textAlign: TextAlign.center,
-            ),
-      content: content,
-
-      // Styling
-      material: (context, platform) => MaterialAlertDialogData(
-        insetPadding: EdgeInsets.all(padding),
-        titlePadding: title == null
-            ? EdgeInsets.zero
-            : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        contentPadding: EdgeInsets.only(
-          bottom: dialogSpacer,
-          left: padding,
-          right: padding,
-        ),
-      ),
-      cupertino: (context, platform) => CupertinoAlertDialogData(
-        title: title == null
-            ? null
-            : Container(
-                padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
-                child: Text(
+        context: context,
+        builder: (context) => PlatformAlertDialog(
+          title: title == null
+              ? null
+              : Text(
                   title,
                   style: dialogTitleStyle,
                   textAlign: TextAlign.center,
                 ),
-              ),
-        actions: (needsClose)
-            ? [
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: ezText(
-                    'Close',
-                    style: getTextStyle(dialogContentStyleKey),
-                    textAlign: TextAlign.center,
+          content: content,
+
+          // Styling
+          material: (context, platform) => MaterialAlertDialogData(
+            insetPadding: EdgeInsets.all(padding),
+            titlePadding: title == null
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+            contentPadding: EdgeInsets.only(
+              bottom: dialogSpacer,
+              left: padding,
+              right: padding,
+            ),
+          ),
+          cupertino: (context, platform) => CupertinoAlertDialogData(
+            title: title == null
+                ? null
+                : Container(
+                    padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
+                    child: Text(
+                      title,
+                      style: dialogTitleStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ]
-            : [],
-      ),
-    ),
-  );
+            actions: (needsClose)
+                ? [
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: ezText(
+                        'Close',
+                        style: getTextStyle(dialogContentStyleKey),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ]
+                : [],
+          ),
+        ),
+      ) ??
+      false;
 }
