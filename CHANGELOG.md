@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3] - 2023-03-31
+### Updated
+- Alerts to Future
+- Context to non-named param
+
 ## [1.1.2] - 2023-03-31
 ### Updated
 - ez scaffold, fixed warning

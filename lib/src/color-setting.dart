@@ -35,7 +35,7 @@ class _ColorSettingState extends State<ColorSetting> {
   /// Opens an [ezColorPicker] for updating [currColor]
   void openColorPicker() {
     ezColorPicker(
-      context: context,
+      context,
       startColor: currColor,
       onColorChange: (chosenColor) {
         setState(() {
@@ -62,7 +62,7 @@ class _ColorSettingState extends State<ColorSetting> {
       int recommended = getContrastColor(Color(background)).value;
 
       ezDialog(
-        context: context,
+        context,
         title: 'Use recommended?',
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -80,7 +80,7 @@ class _ColorSettingState extends State<ColorSetting> {
             Container(height: buttonSpacer),
 
             ezYesNo(
-              context: context,
+              context,
               onConfirm: () {
                 popScreen(context);
                 AppConfig.preferences.setInt(widget.toControl, recommended);
@@ -114,7 +114,7 @@ class _ColorSettingState extends State<ColorSetting> {
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     ezDialog(
-      context: context,
+      context,
       title: 'Reset to...',
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -132,7 +132,7 @@ class _ColorSettingState extends State<ColorSetting> {
           Container(height: dialogSpacer),
 
           ezYesNo(
-            context: context,
+            context,
             onConfirm: () {
               // Remove the user's setting and reset the current state
               AppConfig.preferences.remove(widget.toControl);

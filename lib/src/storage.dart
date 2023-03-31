@@ -11,15 +11,15 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 /// Show color picker dialog, built from [flutter_colorpicker]
-void ezColorPicker({
-  required BuildContext context,
+void ezColorPicker(
+  BuildContext context, {
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
   required void Function() apply,
   required void Function() cancel,
 }) {
   ezDialog(
-    context: context,
+    context,
     title: 'Pick a color!',
     content: ezScrollView(
       children: [
@@ -32,7 +32,7 @@ void ezColorPicker({
 
         // Apply
         ezYesNo(
-          context: context,
+          context,
           onConfirm: apply,
           onDeny: cancel,
           axis: Axis.vertical,
@@ -87,8 +87,8 @@ DecorationImage? buildDecoration(String? path) {
 }
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<bool> changeImage({
-  required BuildContext context,
+Future<bool> changeImage(
+  BuildContext context, {
   required String prefsPath,
   required ImageSource source,
 }) async {

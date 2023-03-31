@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
-void popNLog(
+Future<bool> popNLog(
   BuildContext context,
   String message,
-) {
+) async {
   log(message);
-  ezDialog(
-    context: context,
+  return await ezDialog(
+    context,
     title: 'Attention:',
     content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
   );
@@ -32,8 +32,8 @@ Widget titleCard(
 
 /// 'Loading...' text but the elipsis is built from the passed [image] (gifs recommended)
 /// The text is "naked"; wrap in a container if necessary
-Widget loadingMessage({
-  required BuildContext context,
+Widget loadingMessage(
+  BuildContext context, {
   required Image image,
 }) {
   // Gather theme data
@@ -64,8 +64,8 @@ Widget loadingMessage({
 /// [titleCard] designed to grab attention for warnings...
 /// [Icon] 'WARNING' [Icon]
 ///        [content]
-Widget warningCard({
-  required BuildContext context,
+Widget warningCard(
+  BuildContext context, {
   required String warning,
 }) {
   // Gather theme data
@@ -105,66 +105,67 @@ Widget warningCard({
 }
 
 /// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
-void ezDialog({
-  required BuildContext context,
+Future<bool> ezDialog(
+  BuildContext context, {
   required Widget content,
   String? title,
   bool needsClose = true,
-}) {
+}) async {
   // Gather theme data
 
   TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
-  showPlatformDialog(
-    context: context,
-    builder: (context) => PlatformAlertDialog(
-      title: title == null
-          ? null
-          : Text(
-              title,
-              style: dialogTitleStyle,
-              textAlign: TextAlign.center,
-            ),
-      content: content,
-
-      // Styling
-      material: (context, platform) => MaterialAlertDialogData(
-        insetPadding: EdgeInsets.all(padding),
-        titlePadding: title == null
-            ? EdgeInsets.zero
-            : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        contentPadding: EdgeInsets.only(
-          bottom: dialogSpacer,
-          left: padding,
-          right: padding,
-        ),
-      ),
-      cupertino: (context, platform) => CupertinoAlertDialogData(
-        title: title == null
-            ? null
-            : Container(
-                padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
-                child: Text(
+  return await showPlatformDialog(
+        context: context,
+        builder: (context) => PlatformAlertDialog(
+          title: title == null
+              ? null
+              : Text(
                   title,
                   style: dialogTitleStyle,
                   textAlign: TextAlign.center,
                 ),
-              ),
-        actions: (needsClose)
-            ? [
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: ezText(
-                    'Close',
-                    style: getTextStyle(dialogContentStyleKey),
-                    textAlign: TextAlign.center,
+          content: content,
+
+          // Styling
+          material: (context, platform) => MaterialAlertDialogData(
+            insetPadding: EdgeInsets.all(padding),
+            titlePadding: title == null
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+            contentPadding: EdgeInsets.only(
+              bottom: dialogSpacer,
+              left: padding,
+              right: padding,
+            ),
+          ),
+          cupertino: (context, platform) => CupertinoAlertDialogData(
+            title: title == null
+                ? null
+                : Container(
+                    padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
+                    child: Text(
+                      title,
+                      style: dialogTitleStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ]
-            : [],
-      ),
-    ),
-  );
+            actions: (needsClose)
+                ? [
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: ezText(
+                        'Close',
+                        style: getTextStyle(dialogContentStyleKey),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ]
+                : [],
+          ),
+        ),
+      ) ??
+      false;
 }

@@ -39,7 +39,7 @@ class _ImageSettingState extends State<ImageSetting> {
   /// Selection is sent to [changeImage]
   void chooseImage() {
     ezDialog(
-      context: context,
+      context,
       title: 'Update background',
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ class _ImageSettingState extends State<ImageSetting> {
           EZButton.icon(
             action: () async {
               await changeImage(
-                context: context,
+                context,
                 prefsPath: widget.prefsKey,
                 source: ImageSource.gallery,
               );
@@ -65,7 +65,7 @@ class _ImageSettingState extends State<ImageSetting> {
           EZButton.icon(
             action: () async {
               await changeImage(
-                context: context,
+                context,
                 prefsPath: widget.prefsKey,
                 source: ImageSource.camera,
               );
@@ -114,7 +114,7 @@ class _ImageSettingState extends State<ImageSetting> {
     return EZButton(
       action: chooseImage,
       longAction: () => ezDialog(
-        context: context,
+        context,
         title: 'Credit to:',
         content: ezText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
       ),
