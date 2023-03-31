@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.4] - 2023-03-31
+### Fixed
+- File name bugs... as it turns out OS X is case-aware, but not sensitive
+  - Which is ridiculous
+
 ## [1.1.3] - 2023-03-31
 ### Updated
 - Alerts to Future
