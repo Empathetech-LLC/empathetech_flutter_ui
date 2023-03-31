@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2023-03-31
+### Updated
+- ez scaffold, fixed warning
+- imports
+
 ## [1.1.1] - 2023-03-31
 ### Updated
 - ez scaffold to a class
