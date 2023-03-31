@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.1] - 2023-03-XX
+## [1.1.1] - 2023-03-31
+### Updated
+- ez scaffold to a class
+- variable names for readability
+- ez button to a class
+- all setting.dart files
+- text forms
+
+### Added
+- ez text
+- automatic end drawer conversion
+- Navigator helper functions
 
 ## [1.1.0] - 2023-03-15
 ### Updated
