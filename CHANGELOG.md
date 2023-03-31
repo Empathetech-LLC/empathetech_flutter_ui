@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.5] - 2023-XX-XX
+### Added
+- Flutter analyze GitHub Action
+
 ## [1.1.4] - 2023-03-31
 ### Fixed
 - File name bugs... as it turns out OS X is case-aware, but not sensitive
