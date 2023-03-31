@@ -6,7 +6,7 @@ export 'src/storage.dart';
 export 'src/notifications.dart';
 export 'src/app-config.dart';
 export 'src/theme.dart';
-export 'src/scaffolds.dart';
+export 'src/EZScaffold.dart';
 export 'src/drawers.dart';
 export 'src/text.dart';
 export 'src/EZButton.dart';

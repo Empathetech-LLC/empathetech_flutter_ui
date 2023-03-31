@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
-/// If provided, [customStyle] will be merged with [materialButton]
 class EZButton extends StatelessWidget {
   final VoidCallback action;
   final VoidCallback longAction;
   final Widget body;
   final ButtonStyle? customStyle;
 
+  /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
+  /// If provided, [customStyle] will be merged with [materialButton]
   EZButton({
     required this.action,
     this.longAction = doNothing,
@@ -21,6 +21,9 @@ class EZButton extends StatelessWidget {
     this.customStyle,
   });
 
+  /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
+  /// This constructor behaves like the Material [ElevatedButton.icon]
+  /// If provided, [customStyle] will be merged with [materialButton]
   EZButton.icon({
     required this.action,
     this.longAction = doNothing,
