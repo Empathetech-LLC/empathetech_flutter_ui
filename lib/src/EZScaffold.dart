@@ -60,12 +60,6 @@ class EZScaffold extends StatelessWidget {
         backgroundColor = Color(AppConfig.prefs[themeColorKey]),
         assert(index != null && onChanged != null);
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-
-  late double margin = AppConfig.prefs[marginKey];
-
   // Returns the appropriate body widget based on consturctor variables
   Widget buildBody(BuildContext context, ScaffoldType type) {
     switch (type) {
@@ -78,7 +72,10 @@ class EZScaffold extends StatelessWidget {
           decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
 
           // Build space
-          child: Container(child: body, margin: EdgeInsets.all(margin)),
+          child: Container(
+            child: body,
+            margin: EdgeInsets.all(AppConfig.prefs[marginKey]),
+          ),
         );
       case ScaffoldType.nav:
         return body;
@@ -87,6 +84,12 @@ class EZScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+    late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+    late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+
+    late double margin = AppConfig.prefs[marginKey];
+
     return GestureDetector(
       // Close open keyboard(s) on tap
       onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
