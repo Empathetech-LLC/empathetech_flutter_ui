@@ -45,8 +45,8 @@ class EZScaffold extends StatelessWidget {
   /// Builds a [PlatformScaffold] with a [BottomNavigationBar]/[CupertinoTabBar]
   /// from the passed values that will automatically update alongside [AppConfig]
   /// use [navWindow] for the [body]
-  EZScaffold.nav({
-    required BuildContext context,
+  EZScaffold.nav(
+    BuildContext context, {
     required this.title,
     required this.body,
     required this.index,
@@ -100,7 +100,7 @@ class EZScaffold extends StatelessWidget {
           title: Text(title, style: getTextStyle(titleStyleKey)),
           cupertino: (context, platform) => CupertinoNavigationBarData(
             trailing: ezDrawer(
-              context: context,
+              context,
               platform: platform,
               header: drawerHeader,
               body: drawerBody,
@@ -112,7 +112,7 @@ class EZScaffold extends StatelessWidget {
         material: (context, platform) => MaterialScaffoldData(
           body: buildBody(context, _type),
           endDrawer: ezDrawer(
-            context: context,
+            context,
             platform: platform,
             header: drawerHeader,
             body: drawerBody,
@@ -163,8 +163,8 @@ class EZScaffold extends StatelessWidget {
 }
 
 /// Builds the "main screen" for and pages built with [EZScaffold.nav]
-Widget navWindow({
-  required BuildContext context,
+Widget navWindow(
+  BuildContext context, {
   required Widget body,
   required DecorationImage? backgroundImage,
   required Color backgroundColor,

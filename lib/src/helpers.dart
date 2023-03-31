@@ -52,13 +52,16 @@ void popScreen(
 }
 
 /// More readable than [Navigator] spelled out
-void popUntilHome(BuildContext context) {
+void popUntilHome(
+  BuildContext context, {
+  bool success = false,
+}) {
   return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }
 
 /// More readable than [Navigator] spelled out
-Future<bool> pushScreen({
-  required BuildContext context,
+Future<bool> pushScreen(
+  BuildContext context, {
   required Widget screen,
 }) async {
   return await Navigator.of(context).push(
@@ -71,8 +74,8 @@ Future<bool> pushScreen({
 }
 
 /// More readable than [Navigator] spelled out
-Future<bool> popAndPushScreen({
-  required BuildContext context,
+Future<bool> popAndPushScreen(
+  BuildContext context, {
   required Widget screen,
 }) async {
   Navigator.of(context).pop();
@@ -87,8 +90,8 @@ Future<bool> popAndPushScreen({
 }
 
 /// More readable than [Navigator] spelled out
-Future<bool> replaceScreen({
-  required BuildContext context,
+Future<bool> replaceScreen(
+  BuildContext context, {
   required Widget screen,
 }) async {
   return await Navigator.of(context).pushReplacement(

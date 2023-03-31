@@ -149,7 +149,7 @@ class _SliderSettingState extends State<SliderSetting> {
         return [
           EZButton(
             action: () => ezDialog(
-              context: context,
+              context,
               title: 'Space preview',
               content: Column(
                 mainAxisSize: MainAxisSize.min,

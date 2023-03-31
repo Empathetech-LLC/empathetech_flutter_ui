@@ -25,7 +25,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
   void chooseGoogleFont() {
     ezDialog(
-      context: context,
+      context,
       title: 'Choose a font',
       content: ezScrollView(
         children: myGoogleFonts

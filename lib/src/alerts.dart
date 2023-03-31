@@ -13,7 +13,7 @@ Future<bool> popNLog(
 ) async {
   log(message);
   return await ezDialog(
-    context: context,
+    context,
     title: 'Attention:',
     content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
   );
@@ -32,8 +32,8 @@ Widget titleCard(
 
 /// 'Loading...' text but the elipsis is built from the passed [image] (gifs recommended)
 /// The text is "naked"; wrap in a container if necessary
-Widget loadingMessage({
-  required BuildContext context,
+Widget loadingMessage(
+  BuildContext context, {
   required Image image,
 }) {
   // Gather theme data
@@ -64,8 +64,8 @@ Widget loadingMessage({
 /// [titleCard] designed to grab attention for warnings...
 /// [Icon] 'WARNING' [Icon]
 ///        [content]
-Widget warningCard({
-  required BuildContext context,
+Widget warningCard(
+  BuildContext context, {
   required String warning,
 }) {
   // Gather theme data
@@ -105,8 +105,8 @@ Widget warningCard({
 }
 
 /// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
-Future<bool> ezDialog({
-  required BuildContext context,
+Future<bool> ezDialog(
+  BuildContext context, {
   required Widget content,
   String? title,
   bool needsClose = true,

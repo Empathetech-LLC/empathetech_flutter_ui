@@ -18,8 +18,8 @@ PlatformSwitch ezSwitch({
 }
 
 /// Builds a pair of customizable [EZButton.icon]s for confirming and/or denying things
-Widget ezYesNo({
-  required BuildContext context,
+Widget ezYesNo(
+  BuildContext context, {
   required void Function() onConfirm,
   required void Function() onDeny,
   required Axis axis,
@@ -57,8 +57,8 @@ Widget ezYesNo({
 }
 
 /// Quickly build a customizable "Cancel" [EZButton.icon]
-Widget ezCancel({
-  required BuildContext context,
+Widget ezCancel(
+  BuildContext context, {
   required void Function() onCancel,
   String cancelMsg = 'Cancel',
   Icon? customIcon,
