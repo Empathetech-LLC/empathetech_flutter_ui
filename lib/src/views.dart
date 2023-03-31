@@ -3,16 +3,14 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [SingleChildScrollView] from [AppConfig.prefs]
 /// Dynamically switches between row/col based on [direction]
 Widget ezScrollView({
   required List<Widget> children,
   bool centered = false,
-  MainAxisSize axisSize = MainAxisSize.min,
-  MainAxisAlignment axisAlign = MainAxisAlignment.spaceEvenly,
+  MainAxisSize mainAxisSize = MainAxisSize.min,
+  MainAxisAlignment mainAxisAlignment = MainAxisAlignment.spaceEvenly,
   Axis direction = Axis.vertical,
 }) {
   SingleChildScrollView core = SingleChildScrollView(
@@ -20,13 +18,13 @@ Widget ezScrollView({
     scrollDirection: direction,
     child: direction == Axis.vertical
         ? Column(
-            mainAxisSize: axisSize,
-            mainAxisAlignment: axisAlign,
+            mainAxisSize: mainAxisSize,
+            mainAxisAlignment: mainAxisAlignment,
             children: children,
           )
         : Row(
-            mainAxisSize: axisSize,
-            mainAxisAlignment: axisAlign,
+            mainAxisSize: mainAxisSize,
+            mainAxisAlignment: mainAxisAlignment,
             children: children,
           ),
   );

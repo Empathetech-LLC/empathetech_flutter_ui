@@ -8,19 +8,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Creates a tool for updating the image at [prefsKey]'s path
-/// Take in the [isAssetImage] bool so an image preview can be built
+/// Take in the [isAsset] bool so an image preview can be built
 class ImageSetting extends StatefulWidget {
   const ImageSetting({
     Key? key,
     required this.prefsKey,
-    required this.isAssetImage,
     required this.fullscreen,
     required this.title,
     required this.credits,
   }) : super(key: key);
 
   final String prefsKey;
-  final bool isAssetImage;
   final bool fullscreen;
   final String title;
   final String credits;
@@ -32,8 +30,8 @@ class ImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<ImageSetting> {
   // Initialize state
 
-  late String currPath = widget.prefsKey;
-
+  late String currPath = AppConfig.prefs[widget.prefsKey];
+  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
@@ -48,7 +46,7 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
-          ezIconButton(
+          EZButton.icon(
             action: () async {
               await changeImage(
                 context: context,
@@ -58,13 +56,13 @@ class _ImageSettingState extends State<ImageSetting> {
 
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).folder),
-            body: Text('File'),
+            icon: ezIcon(PlatformIcons(context).folder),
+            message: 'File',
           ),
           Container(height: buttonSpacer),
 
           // From camera
-          ezIconButton(
+          EZButton.icon(
             action: () async {
               await changeImage(
                 context: context,
@@ -74,13 +72,13 @@ class _ImageSettingState extends State<ImageSetting> {
 
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).photoCamera),
-            body: Text('Camera'),
+            icon: ezIcon(PlatformIcons(context).photoCamera),
+            message: 'Camera',
           ),
           Container(height: buttonSpacer),
 
           // Reset
-          ezIconButton(
+          EZButton.icon(
             action: () {
               AppConfig.preferences.remove(widget.prefsKey);
               setState(() {
@@ -88,13 +86,13 @@ class _ImageSettingState extends State<ImageSetting> {
               });
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).refresh),
-            body: Text('Reset'),
+            icon: ezIcon(PlatformIcons(context).refresh),
+            message: 'Reset',
           ),
           Container(height: buttonSpacer),
 
           // Clear
-          ezIconButton(
+          EZButton.icon(
             action: () {
               AppConfig.preferences.setString(widget.prefsKey, noImageKey);
               setState(() {
@@ -102,8 +100,8 @@ class _ImageSettingState extends State<ImageSetting> {
               });
               Navigator.of(context).pop();
             },
-            icon: Icon(PlatformIcons(context).clear),
-            body: Text('Clear'),
+            icon: ezIcon(PlatformIcons(context).clear),
+            message: 'Clear',
           ),
           Container(height: buttonSpacer),
         ],
@@ -113,12 +111,12 @@ class _ImageSettingState extends State<ImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ezButton(
+    return EZButton(
       action: chooseImage,
       longAction: () => ezDialog(
         context: context,
         title: 'Credit to:',
-        content: paddedText(widget.credits),
+        content: ezText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
@@ -133,10 +131,9 @@ class _ImageSettingState extends State<ImageSetting> {
             height: widget.fullscreen ? 160 : 75,
             width: widget.fullscreen ? 90 : 75,
             child: currPath == noImageKey
-                ? Icon(PlatformIcons(context).clear)
+                ? ezIcon(PlatformIcons(context).clear)
                 : buildImage(
                     path: currPath,
-                    isAsset: widget.isAssetImage,
                     fit: BoxFit.fill,
                   ),
           ),

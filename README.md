@@ -12,9 +12,9 @@ EFUI is a library/package for fast, high quality UI development.
 
 ## Table of Contents
 
-* [Installation](#Installation)
-* [Contributing](#Contributing)
-* [License](#License)
+* [Installation](#installation)
+* [Contributing](#contributing)
+* [License](#license)
 
 # Installation
 

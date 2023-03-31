@@ -39,8 +39,8 @@ MaterialAppData materialAppTheme() {
       ),
 
       // Text
-      textTheme: defaultTextTheme(),
-      primaryTextTheme: defaultTextTheme(),
+      textTheme: materialTextTheme(),
+      primaryTextTheme: materialTextTheme(),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: themeTextColor,
         selectionColor: themeColor,
@@ -77,33 +77,41 @@ MaterialAppData materialAppTheme() {
 }
 
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
-CupertinoAppData m2cApp(MaterialAppData from) {
-  return CupertinoAppData();
-}
+CupertinoAppData cupertinoAppTheme() {
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-/// Cupertino (iOS) [Scaffold] data built [from] the passed in [MaterialScaffoldData]
-CupertinoPageScaffoldData m2cScaffold(MaterialScaffoldData from) {
-  return CupertinoPageScaffoldData();
+  return CupertinoAppData(
+    color: themeColor,
+    theme: CupertinoThemeData(
+      primaryColor: themeColor,
+      primaryContrastingColor: themeTextColor,
+      textTheme: cupertinoTextTheme(),
+    ),
+  );
 }
 
 /// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
-ButtonStyle materialButton() {
+ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
     foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
     textStyle: getTextStyle(buttonStyleKey),
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    side: BorderSide(color: Color(AppConfig.prefs[buttonColorKey])),
+    shape: shape,
   );
 }
 
 /// Cupertino (iOS) [ElevatedButton] data built [from] the passed in Material [ButtonStyle]
 CupertinoElevatedButtonData m2cButton(ButtonStyle from) {
   return CupertinoElevatedButtonData(
-    color: from.backgroundColor is Color
+    color: (from.backgroundColor is Color)
         ? from.backgroundColor as Color
-        : AppConfig.prefs[buttonColorKey],
-    padding: from.padding is EdgeInsetsGeometry
+        : Color(AppConfig.prefs[buttonColorKey]),
+    padding: (from.padding is EdgeInsetsGeometry)
         ? from.padding as EdgeInsetsGeometry
         : EdgeInsets.all(AppConfig.prefs[paddingKey]),
+    borderRadius: (from.shape != null) ? BorderRadius.circular(30.0) : null,
   );
 }

@@ -1,23 +1,35 @@
 library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// Custom wrappers
-
 /// Text that values its personal space
-Widget paddedText(
+/// And requires a [TextStyle], for wide [TargetPlatform] support
+Widget ezText(
   String text, {
-  TextStyle? style,
-  TextAlign? alignment,
+  required TextStyle style,
+  TextAlign? textAlign,
 }) {
   return Padding(
     padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-    child: Text(text, style: style, textAlign: alignment),
+    child: Text(text, style: style, textAlign: textAlign),
+  );
+}
+
+/// Styles an [Icon] from [AppConfig.prefs]
+Icon ezIcon(
+  IconData icon, {
+  Color? color,
+  double? size,
+}) {
+  return Icon(
+    icon,
+    color: color ?? Color(AppConfig.prefs[buttonTextColorKey]),
+    size: size,
   );
 }
 
@@ -37,22 +49,28 @@ Widget ezForm({
 
   return Container(
     decoration: BoxDecoration(border: Border.all(color: buttonColor)),
-    child: PlatformTextFormField(
+    child: Form(
       key: key,
-      cursorColor: themeTextColor,
-      controller: controller,
-      textAlign: TextAlign.center,
-      style: getTextStyle(dialogContentStyleKey),
-      obscureText: private,
-      hintText: hintText,
-      autofillHints: autofillHints,
-      validator: validator,
-      autovalidateMode: autovalidateMode,
+      child: PlatformTextFormField(
+        controller: controller,
+        textAlign: TextAlign.center,
+        obscureText: private,
+
+        // Hint
+        hintText: hintText,
+        autofillHints: autofillHints,
+
+        // Validating
+        validator: validator,
+        autovalidateMode: autovalidateMode,
+
+        // Styling
+        style: getTextStyle(dialogContentStyleKey),
+        cursorColor: themeTextColor,
+      ),
     ),
   );
 }
-
-// Local text type(s)
 
 const String defaultStyleKey = 'defaultStyle';
 const String titleStyleKey = 'titleStyle';
@@ -73,7 +91,6 @@ TextStyle getTextStyle(String textType) {
 
   late double currSize = AppConfig.prefs[fontSizeKey];
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
@@ -115,20 +132,14 @@ TextStyle getTextStyle(String textType) {
       );
 
     case buttonStyleKey:
-    case imageSettingStyleKey:
+    case colorSettingStyleKey:
     case fontSettingStyleKey:
+    case imageSettingStyleKey:
     case sliderSettingStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize,
         color: buttonTextColor,
-      );
-
-    case colorSettingStyleKey:
-      return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize,
-        color: themeColor,
       );
 
     case errorStyleKey:
@@ -142,7 +153,10 @@ TextStyle getTextStyle(String textType) {
 
 // Local text theme(s)
 
-TextTheme defaultTextTheme() {
+/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [AppConfig]
+TextTheme materialTextTheme() {
   TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
 
   return TextTheme(
@@ -164,7 +178,27 @@ TextTheme defaultTextTheme() {
   );
 }
 
-// Supported Google font(s)
+/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [AppConfig]
+CupertinoTextThemeData cupertinoTextTheme() {
+  Color textColor = Color(AppConfig.prefs[themeTextColorKey]);
+  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+
+  return CupertinoTextThemeData(
+    primaryColor: textColor,
+    textStyle: defaultTextStyle,
+    actionTextStyle: defaultTextStyle,
+    tabLabelTextStyle: defaultTextStyle,
+    navTitleTextStyle: defaultTextStyle,
+    navLargeTitleTextStyle: defaultTextStyle,
+    navActionTextStyle: defaultTextStyle,
+    pickerTextStyle: defaultTextStyle,
+    dateTimePickerTextStyle: defaultTextStyle,
+  );
+}
+
+// Saved/supported Google Fonts
 
 const String soraKey = 'Sora';
 const String hahmletKey = 'Hahmlet';
@@ -187,6 +221,7 @@ const String latoKey = 'Lato';
 const String antonKey = 'Anton';
 const String oldStandardKey = 'Old Standard TT';
 
+/// List of [GoogleFonts] (https://fonts.google.com/) EFUI has saved
 const List<String> myGoogleFonts = [
   soraKey,
   hahmletKey,
@@ -210,7 +245,7 @@ const List<String> myGoogleFonts = [
   oldStandardKey,
 ];
 
-/// Returns the [GoogleFonts] styling for [fontName]
+/// Returns the [TextStyle] of the [GoogleFonts] matching [fontName]
 TextStyle googleStyleAlias(String fontName) {
   switch (fontName) {
     case soraKey:

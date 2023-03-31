@@ -4,7 +4,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
@@ -16,7 +15,7 @@ void popNLog(
   ezDialog(
     context: context,
     title: 'Attention:',
-    content: paddedText(message),
+    content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
   );
 }
 
@@ -27,7 +26,7 @@ Widget titleCard(
 ) {
   return Card(
     color: Color(AppConfig.prefs[themeColorKey]),
-    child: paddedText(title, style: getTextStyle(titleStyleKey)),
+    child: ezText(title, style: getTextStyle(titleStyleKey)),
   );
 }
 
@@ -67,7 +66,7 @@ Widget loadingMessage({
 ///        [content]
 Widget warningCard({
   required BuildContext context,
-  required String content,
+  required String warning,
 }) {
   // Gather theme data
 
@@ -90,15 +89,15 @@ Widget warningCard({
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.warning, color: Colors.amber),
+              ezIcon(Icons.warning, color: Colors.amber),
               Text('WARNING', style: titleStyle),
-              Icon(Icons.warning, color: Colors.amber),
+              ezIcon(Icons.warning, color: Colors.amber),
             ],
           ),
           Container(height: padding),
 
           // Label
-          Text(content, style: contentStyle, textAlign: TextAlign.center),
+          Text(warning, style: contentStyle, textAlign: TextAlign.center),
         ],
       ),
     ),
@@ -110,15 +109,24 @@ void ezDialog({
   required BuildContext context,
   required Widget content,
   String? title,
+  bool needsClose = true,
 }) {
   // Gather theme data
+
+  TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
   showPlatformDialog(
     context: context,
     builder: (context) => PlatformAlertDialog(
-      title: title == null ? null : Text(title, textAlign: TextAlign.center),
+      title: title == null
+          ? null
+          : Text(
+              title,
+              style: dialogTitleStyle,
+              textAlign: TextAlign.center,
+            ),
       content: content,
 
       // Styling
@@ -127,9 +135,36 @@ void ezDialog({
         titlePadding: title == null
             ? EdgeInsets.zero
             : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        contentPadding: EdgeInsets.only(
+          bottom: dialogSpacer,
+          left: padding,
+          right: padding,
+        ),
       ),
-      cupertino: (context, platform) => CupertinoAlertDialogData(),
+      cupertino: (context, platform) => CupertinoAlertDialogData(
+        title: title == null
+            ? null
+            : Container(
+                padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
+                child: Text(
+                  title,
+                  style: dialogTitleStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+        actions: (needsClose)
+            ? [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: ezText(
+                    'Close',
+                    style: getTextStyle(dialogContentStyleKey),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]
+            : [],
+      ),
     ),
   );
 }

@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Creates a tool for updating the value of [toControl]
@@ -14,10 +13,12 @@ class ColorSetting extends StatefulWidget {
     Key? key,
     required this.toControl,
     required this.message,
+    this.textBackground,
   }) : super(key: key);
 
   final String toControl;
   final String message;
+  final int? textBackground;
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -32,7 +33,7 @@ class _ColorSettingState extends State<ColorSetting> {
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   /// Opens an [ezColorPicker] for updating [currColor]
-  void changeColor() {
+  void openColorPicker() {
     ezColorPicker(
       context: context,
       startColor: currColor,
@@ -50,10 +51,67 @@ class _ColorSettingState extends State<ColorSetting> {
     );
   }
 
+  /// Opens an [ezColorPicker] for updating [currColor]
+  /// If a [textBackground] is provided, it will be used to generate a recommended color pair
+  void changeColor() {
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+    double dialogSpcaer = AppConfig.prefs[dialogSpacingKey];
+
+    if (widget.textBackground != null) {
+      int background = widget.textBackground as int;
+      int recommended = getContrastColor(Color(background)).value;
+
+      ezDialog(
+        context: context,
+        title: 'Use recommended?',
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Recommended preview
+            Container(
+              width: 75,
+              height: 75,
+              decoration: BoxDecoration(
+                color: Color(recommended),
+                border: Border.all(color: Color(background)),
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            ezYesNo(
+              context: context,
+              onConfirm: () {
+                popScreen(context);
+                AppConfig.preferences.setInt(widget.toControl, recommended);
+                setState(() {
+                  currColor = Color(recommended);
+                });
+              },
+              onDeny: () {
+                popScreen(context);
+                openColorPicker();
+              },
+              customDeny: Icon(PlatformIcons(context).edit),
+              denyMsg: 'Pick custom',
+              axis: Axis.vertical,
+              spacer: dialogSpcaer,
+            ),
+          ],
+        ),
+      );
+    } else {
+      openColorPicker();
+    }
+  }
+
   /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
   /// A preview of the reset color is shown
   void reset() {
+    // Gather theme data
+
     Color resetColor = Color(AppConfig.defaults[widget.toControl]);
+    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     ezDialog(
       context: context,
@@ -63,8 +121,15 @@ class _ColorSettingState extends State<ColorSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Color preview
-          Container(width: 75, height: 75, color: resetColor),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+          Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: resetColor,
+              border: Border.all(color: getContrastColor(resetColor)),
+            ),
+          ),
+          Container(height: dialogSpacer),
 
           ezYesNo(
             context: context,
@@ -80,6 +145,7 @@ class _ColorSettingState extends State<ColorSetting> {
             },
             onDeny: () => Navigator.of(context).pop(),
             axis: Axis.horizontal,
+            spacer: dialogSpacer,
           ),
         ],
       ),
@@ -93,19 +159,20 @@ class _ColorSettingState extends State<ColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        ezButton(
-          action: () {},
-          body: Text(widget.message, style: getTextStyle(colorSettingStyleKey)),
+        ezText(
+          widget.message,
+          style: getTextStyle(dialogTitleStyleKey),
+          textAlign: TextAlign.center,
         ),
 
         // Color preview/edit button
-        GestureDetector(
-          onLongPress: reset,
-          child: ezButton(
-            action: changeColor,
-            longAction: reset,
-            body: Icon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
-            customStyle: ElevatedButton.styleFrom(backgroundColor: currColor),
+        EZButton(
+          action: changeColor,
+          longAction: reset,
+          body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+          customStyle: ElevatedButton.styleFrom(
+            backgroundColor: currColor,
+            padding: EdgeInsets.all(AppConfig.prefs[paddingKey] * 2),
           ),
         ),
       ],

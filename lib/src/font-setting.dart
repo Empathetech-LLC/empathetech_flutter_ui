@@ -4,7 +4,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Creates a tool for updating the app's font
 class FontFamilySetting extends StatefulWidget {
@@ -23,7 +22,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [ezTextButton]s
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
   void chooseGoogleFont() {
     ezDialog(
       context: context,
@@ -34,7 +33,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
               (String font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
-                  ezButton(
+                  EZButton(
                     action: () {
                       AppConfig.preferences.setString(fontFamilyKey, font);
                       setState(() {
@@ -60,11 +59,10 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        paddedText('Font family', style: getTextStyle(subTitleStyleKey)),
-        Container(height: buttonSpacer),
+        ezText('Font family', style: getTextStyle(subTitleStyleKey)),
 
         // Font picker
-        ezButton(
+        EZButton(
           action: chooseGoogleFont,
           body: Text(
             'Choose font:\n$currFontFamily',
@@ -73,12 +71,13 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
               fontFamily: currFontFamily,
               color: buttonTextStyle.color,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
         Container(height: buttonSpacer),
 
         // Font reset
-        ezButton(
+        EZButton(
           action: () {
             AppConfig.preferences.remove(fontFamilyKey);
             setState(() {
@@ -92,6 +91,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
               fontFamily: defaultFontFamily,
               color: buttonTextStyle.color,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
       ],
