@@ -76,6 +76,14 @@ class NotificationService {
           sound: true,
           critical: false,
         );
+
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        await notifsPlugin.getNotificationAppLaunchDetails();
+    if (notificationAppLaunchDetails?.didNotificationLaunchApp == true &&
+        notificationAppLaunchDetails?.notificationResponse != null) {
+      backgroundNotifAction(
+          notificationAppLaunchDetails!.notificationResponse!); // handle / navigate
+    }
   }
 
   /// Display notification
