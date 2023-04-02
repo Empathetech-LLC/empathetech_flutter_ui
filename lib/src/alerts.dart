@@ -30,7 +30,7 @@ Widget titleCard(
   );
 }
 
-/// 'Loading...' text but the elipsis is built from the passed [image] (gifs recommended)
+/// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
 /// The text is "naked"; wrap in a container if necessary
 Widget loadingMessage(
   BuildContext context, {
