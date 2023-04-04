@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-/// Show color picker dialog, built from [flutter_colorpicker]
+/// Show color picker dialog, built from flutter_colorpicker
 void ezColorPicker(
   BuildContext context, {
   required Color startColor,
@@ -45,25 +45,61 @@ void ezColorPicker(
 }
 
 /// Returns whether the passed [path] refers to one of the stored [AppConfig.assets]
-bool isAsset(String? path) {
-  return AppConfig.assets.contains(path);
+bool isAsset(String? pathKey) {
+  return AppConfig.assets.contains(pathKey);
 }
 
 /// [Image] wrapper for handling handling [AssetImage] vs [FileImage]
+/// By default, simply providing [pathKey] will return the image found at [AppConfig.prefs] value's path
+/// If the image path is not expected to be in [AppConfig.prefs], provide a [AppConfig.assets] path via [backup]
+/// as the fallback for a [AppConfig.preferences] getString on [pathKey]
 Image buildImage({
-  required String path,
+  required String pathKey,
   BoxFit? fit,
+  String? backup,
 }) {
+  String path;
+
+  if (backup == null) {
+    path = AppConfig.prefs[pathKey];
+  } else {
+    path = AppConfig.preferences.getString(pathKey) ?? backup;
+  }
+
   if (isAsset(path)) {
     return Image(
       image: AssetImage(path),
       fit: fit,
     );
   } else {
-    return Image(
-      image: FileImage(File(path)),
-      fit: fit,
-    );
+    try {
+      return Image(
+        image: FileImage(File(path)),
+        fit: fit,
+      );
+    } on FileSystemException catch (_) {
+      // File not found error - wipe the setting and return the/a backup image
+      AppConfig.preferences.remove(pathKey);
+
+      try {
+        if (backup != null) {
+          return Image(
+            image: AssetImage(backup),
+            fit: fit,
+          );
+        }
+      } catch (_) {
+        // If something goes wrong here too, just return the silly bird
+        doNothing();
+      }
+
+      // Silly bird just in case there are cascading errors
+      return Image(
+        image: NetworkImage(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        fit: fit,
+      );
+    }
   }
 }
 
