@@ -60,7 +60,7 @@ class EZScaffold extends StatelessWidget {
         backgroundColor = Color(AppConfig.prefs[themeColorKey]),
         assert(index != null && onChanged != null);
 
-  // Returns the appropriate body widget based on consturctor variables
+  // Returns the appropriate body widget based on constructor variables
   Widget buildBody(BuildContext context, ScaffoldType type) {
     switch (type) {
       case ScaffoldType.standard:
