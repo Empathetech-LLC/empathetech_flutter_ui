@@ -13,10 +13,20 @@ Widget ezText(
   String text, {
   required TextStyle style,
   TextAlign? textAlign,
+  Color background = Colors.transparent,
 }) {
+  double padding = AppConfig.prefs[paddingKey] / 2.0;
+
   return Padding(
-    padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-    child: Text(text, style: style, textAlign: textAlign),
+    padding: EdgeInsets.all(padding),
+    child: Container(
+      decoration: BoxDecoration(
+        color: background.withOpacity(background.opacity * 0.75),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      padding: EdgeInsets.all(padding),
+      child: Text(text, style: style, textAlign: textAlign),
+    ),
   );
 }
 
