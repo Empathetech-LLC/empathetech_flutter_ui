@@ -30,7 +30,7 @@ class ImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<ImageSetting> {
   // Initialize state
 
-  late String currPath = AppConfig.prefs[widget.prefsKey];
+  late String currPath = widget.prefsKey;
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
@@ -82,7 +82,8 @@ class _ImageSettingState extends State<ImageSetting> {
             action: () {
               AppConfig.preferences.remove(widget.prefsKey);
               setState(() {
-                currPath = AppConfig.defaults[widget.prefsKey];
+                AppConfig.prefs[widget.prefsKey] = AppConfig.defaults[widget.prefsKey];
+                currPath = widget.prefsKey;
               });
               Navigator.of(context).pop();
             },
@@ -133,7 +134,7 @@ class _ImageSettingState extends State<ImageSetting> {
             child: currPath == noImageKey
                 ? ezIcon(PlatformIcons(context).clear)
                 : buildImage(
-                    path: currPath,
+                    pathKey: currPath,
                     fit: BoxFit.fill,
                   ),
           ),
