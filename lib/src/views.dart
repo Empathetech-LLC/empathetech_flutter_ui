@@ -3,6 +3,8 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [SingleChildScrollView] from [AppConfig.prefs]
 /// Dynamically switches between row/col based on [direction]
@@ -32,36 +34,36 @@ Widget ezScrollView({
   return centered ? Center(child: core) : core;
 }
 
-/// Styles a [ExpansionTile] from [AppConfig.prefs]
-Widget ezList({
+/// Wraps [PlatformListTile]s in an [ezScrollView] with a [title]
+/// Optionally provide a height limit, 1/3 [screenHeight] will be used as default
+/// Optionally provide a [trailingAction] if an action button is paired with the list
+Widget ezList(
+  BuildContext context, {
   required String title,
-  required List<Widget> body,
-  bool open = false,
+  required List<Widget> items,
+  double? customHeight,
+  Widget? trailingAction,
 }) {
-  TextStyle titleStyle = getTextStyle(titleStyleKey);
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  TextStyle titleStyle = getTextStyle(titleStyleKey);
 
-  double padding = AppConfig.prefs[paddingKey];
+  List<Widget> children = [
+    Text(title, style: titleStyle),
+    ezScrollView(children: items),
+  ];
 
-  return ExpansionTile(
-    title: Text(title, style: titleStyle),
-    children: body,
-    initiallyExpanded: open,
-    onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
+  if (trailingAction != null) children.add(trailingAction);
 
-    // Padding
-    tilePadding: EdgeInsets.all(padding),
-    childrenPadding: EdgeInsets.all(padding),
-
-    // Collapsed theme
-    collapsedBackgroundColor: themeColor,
-    collapsedTextColor: themeTextColor,
-    collapsedIconColor: themeTextColor,
-
-    // Open theme
-    backgroundColor: themeColor,
-    textColor: themeTextColor,
-    iconColor: themeTextColor,
+  return Container(
+    width: screenWidth(context),
+    height: customHeight ?? screenHeight(context) / 3.0,
+    decoration: BoxDecoration(
+      color: themeColor.withOpacity(themeColor.opacity * 0.75),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: children,
+    ),
   );
 }
