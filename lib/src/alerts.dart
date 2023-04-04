@@ -41,7 +41,7 @@ Widget loadingMessage(
   TextStyle style = getTextStyle(titleStyleKey);
 
   double imageSize = style.fontSize!;
-  SizedBox elipsis = SizedBox(height: imageSize, width: imageSize, child: image);
+  SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
 
   return Container(
     child: Center(
@@ -50,11 +50,11 @@ Widget loadingMessage(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text('Loading ', style: style),
-          elipsis,
+          ellipsis,
           Text(' ', style: style),
-          elipsis,
+          ellipsis,
           Text(' ', style: style),
-          elipsis,
+          ellipsis,
         ],
       ),
     ),
