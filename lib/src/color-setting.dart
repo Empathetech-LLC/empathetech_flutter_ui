@@ -33,8 +33,9 @@ class _ColorSettingState extends State<ColorSetting> {
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   /// Opens an [ezColorPicker] for updating [currColor]
-  void openColorPicker() {
-    ezColorPicker(
+  /// Returns the [Color.value] of what was chosen (null otherwise)
+  Future<dynamic> openColorPicker() {
+    return ezColorPicker(
       context,
       startColor: currColor,
       onColorChange: (chosenColor) {
@@ -45,7 +46,7 @@ class _ColorSettingState extends State<ColorSetting> {
       apply: () {
         // Update the users setting
         AppConfig.preferences.setInt(widget.toControl, currColor.value);
-        popScreen(context);
+        popScreen(context, pass: currColor.value);
       },
       cancel: () => popScreen(context),
     );
@@ -53,7 +54,8 @@ class _ColorSettingState extends State<ColorSetting> {
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// If a [textBackground] is provided, it will be used to generate a recommended color pair
-  void changeColor() {
+  /// Returns the [Color.value] of what was chosen (null otherwise)
+  Future<dynamic> changeColor() {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
@@ -61,7 +63,7 @@ class _ColorSettingState extends State<ColorSetting> {
       int background = widget.textBackground as int;
       int recommended = getContrastColor(Color(background)).value;
 
-      ezDialog(
+      return ezDialog(
         context,
         title: 'Use recommended?',
         content: [
@@ -79,15 +81,15 @@ class _ColorSettingState extends State<ColorSetting> {
           ezYesNo(
             context,
             onConfirm: () {
-              popScreen(context);
               AppConfig.preferences.setInt(widget.toControl, recommended);
               setState(() {
                 currColor = Color(recommended);
               });
+              popScreen(context, pass: recommended);
             },
-            onDeny: () {
-              popScreen(context);
-              openColorPicker();
+            onDeny: () async {
+              dynamic chosen = await openColorPicker();
+              popScreen(context, pass: chosen);
             },
             customDeny: Icon(PlatformIcons(context).edit),
             denyMsg: 'Pick custom',
@@ -95,21 +97,21 @@ class _ColorSettingState extends State<ColorSetting> {
             spacer: dialogSpacer,
           ),
         ],
+        needsClose: false,
       );
     } else {
-      openColorPicker();
+      return openColorPicker();
     }
   }
 
   /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
   /// A preview of the reset color is shown
-  void reset() {
-    // Gather theme data
-
+  /// Returns the [Color.value] of the "reset color" from [AppConfig.defaults] (null otherwise)
+  Future<dynamic> reset() {
     Color resetColor = Color(AppConfig.defaults[widget.toControl]);
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    ezDialog(
+    return ezDialog(
       context,
       title: 'Reset to...',
       content: [
@@ -134,13 +136,14 @@ class _ColorSettingState extends State<ColorSetting> {
               currColor = resetColor;
             });
 
-            popScreen(context);
+            popScreen(context, pass: resetColor);
           },
           onDeny: () => popScreen(context),
           axis: Axis.horizontal,
           spacer: dialogSpacer,
         ),
       ],
+      needsClose: false,
     );
   }
 

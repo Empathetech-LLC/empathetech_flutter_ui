@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
-Future<bool> logAlert(
+/// Should always return null via [popScreen]
+Future<dynamic> logAlert(
   BuildContext context,
   String message,
 ) async {
   log(message);
-  return await ezDialog(
+  return ezDialog(
     context,
     title: 'Attention:',
     content: [ezText(message, style: getTextStyle(dialogContentStyleKey))],
@@ -178,5 +179,5 @@ Future<dynamic> ezDialog(
           ),
         ),
       ) ??
-      false;
+      null;
 }

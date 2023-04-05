@@ -10,26 +10,23 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-/// Show color picker dialog, built from flutter_colorpicker
-void ezColorPicker(
+/// Wrap a flutter_colorpicker in an [ezDialog]
+Future<dynamic> ezColorPicker(
   BuildContext context, {
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
   required void Function() apply,
   required void Function() cancel,
 }) {
-  ezDialog(
+  return ezDialog(
     context,
     title: 'Pick a color!',
     content: [
-      // Main event
       ColorPicker(
         pickerColor: startColor,
         onColorChanged: onColorChange,
       ),
       Container(height: AppConfig.prefs[dialogSpacingKey]),
-
-      // Apply
       ezYesNo(
         context,
         onConfirm: apply,
@@ -39,6 +36,7 @@ void ezColorPicker(
         denyMsg: 'Cancel',
       ),
     ],
+    needsClose: false,
   );
 }
 

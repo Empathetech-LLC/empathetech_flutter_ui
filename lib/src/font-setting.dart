@@ -23,8 +23,9 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
-  void chooseGoogleFont() {
-    ezDialog(
+  /// Returns the chosen font's name
+  Future<dynamic> chooseGoogleFont() {
+    return ezDialog(
       context,
       title: 'Choose a font',
       content: myGoogleFonts
@@ -38,7 +39,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                     setState(() {
                       currFontFamily = googleStyleAlias(font).fontFamily!;
                     });
-                    popScreen(context);
+                    popScreen(context, pass: font);
                   },
                   body: Text(font, style: googleStyleAlias(font)),
                 ),
