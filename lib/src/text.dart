@@ -55,10 +55,13 @@ Widget ezForm({
 }) {
   // Gather theme data
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   return Container(
-    decoration: BoxDecoration(border: Border.all(color: buttonColor)),
+    decoration: BoxDecoration(
+        border: Border.all(color: buttonColor),
+        color: themeColor.withOpacity(themeColor.opacity * 0.75)),
     child: Form(
       key: key,
       child: PlatformTextFormField(
