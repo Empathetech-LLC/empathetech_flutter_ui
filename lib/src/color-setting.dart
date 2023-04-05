@@ -45,9 +45,9 @@ class _ColorSettingState extends State<ColorSetting> {
       apply: () {
         // Update the users setting
         AppConfig.preferences.setInt(widget.toControl, currColor.value);
-        Navigator.of(context).pop();
+        popScreen(context);
       },
-      cancel: () => Navigator.of(context).pop(),
+      cancel: () => popScreen(context),
     );
   }
 
@@ -134,9 +134,9 @@ class _ColorSettingState extends State<ColorSetting> {
               currColor = resetColor;
             });
 
-            Navigator.of(context).pop();
+            popScreen(context);
           },
-          onDeny: () => Navigator.of(context).pop(),
+          onDeny: () => popScreen(context),
           axis: Axis.horizontal,
           spacer: dialogSpacer,
         ),

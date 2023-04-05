@@ -166,7 +166,7 @@ Future<bool> ezDialog(
             actions: (needsClose)
                 ? [
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () => popScreen(context),
                       child: ezText(
                         'Close',
                         style: getTextStyle(dialogContentStyleKey),

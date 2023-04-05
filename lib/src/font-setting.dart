@@ -38,7 +38,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                     setState(() {
                       currFontFamily = googleStyleAlias(font).fontFamily!;
                     });
-                    Navigator.of(context).pop();
+                    popScreen(context);
                   },
                   body: Text(font, style: googleStyleAlias(font)),
                 ),
