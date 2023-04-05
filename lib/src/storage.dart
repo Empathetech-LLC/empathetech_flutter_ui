@@ -121,7 +121,7 @@ DecorationImage? buildDecoration(String? path) {
 }
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<bool> changeImage(
+Future<String?> changeImage(
   BuildContext context, {
   required String prefsPath,
   required ImageSource source,
@@ -131,7 +131,7 @@ Future<bool> changeImage(
     XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
       logAlert(context, 'Failed to retrieve image');
-      return false;
+      return null;
     }
 
     // Build the path
@@ -142,10 +142,10 @@ Future<bool> changeImage(
     // Save the new image
     File(picked.path).copy(image.path);
     AppConfig.preferences.setString(prefsPath, image.path);
-    return true;
+    return image.path;
   } on Exception catch (e) {
     String errorMsg = 'Failed to update image:\n$e';
     logAlert(context, errorMsg);
-    return false;
+    return null;
   }
 }
