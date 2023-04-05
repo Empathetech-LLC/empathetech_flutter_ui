@@ -55,7 +55,7 @@ class _ColorSettingState extends State<ColorSetting> {
   /// If a [textBackground] is provided, it will be used to generate a recommended color pair
   void changeColor() {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-    double dialogSpcaer = AppConfig.prefs[dialogSpacingKey];
+    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     if (widget.textBackground != null) {
       int background = widget.textBackground as int;
@@ -92,7 +92,7 @@ class _ColorSettingState extends State<ColorSetting> {
             customDeny: Icon(PlatformIcons(context).edit),
             denyMsg: 'Pick custom',
             axis: Axis.vertical,
-            spacer: dialogSpcaer,
+            spacer: dialogSpacer,
           ),
         ],
       );
@@ -155,6 +155,7 @@ class _ColorSettingState extends State<ColorSetting> {
           widget.message,
           style: getTextStyle(dialogTitleStyleKey),
           textAlign: TextAlign.center,
+          background: Color(AppConfig.prefs[themeColorKey]),
         ),
 
         // Color preview/edit button
