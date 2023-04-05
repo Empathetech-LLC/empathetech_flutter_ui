@@ -56,10 +56,10 @@ Image buildImage({
 }) {
   String path;
 
-  if (backup == null) {
-    path = AppConfig.prefs[pathKey];
-  } else {
+  if (backup is String) {
     path = AppConfig.preferences.getString(pathKey) ?? backup;
+  } else {
+    path = AppConfig.prefs[pathKey];
   }
 
   if (isAsset(path)) {
