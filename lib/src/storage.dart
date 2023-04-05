@@ -41,8 +41,8 @@ Future<dynamic> ezColorPicker(
 }
 
 /// Returns whether the passed [path] refers to one of the stored [AppConfig.assets]
-bool isAsset(String? pathKey) {
-  return AppConfig.assets.contains(pathKey);
+bool isAsset(String? path) {
+  return AppConfig.assets.contains(path);
 }
 
 /// [Image] wrapper for handling handling [AssetImage] vs [FileImage]
@@ -99,23 +99,21 @@ Image buildImage({
   }
 }
 
-/// [ImageProvider] wrapper for handling handling [AssetImage] vs [FileImage]
-ImageProvider provideImage({required String path}) {
-  if (isAsset(path)) {
-    return AssetImage(path);
-  } else {
-    return FileImage(File(path));
-  }
-}
-
-/// [DecorationImage] wrapper for setting the background image in [ezScaffold]s and the like
+/// [DecorationImage] wrapper for setting the background image in [EZScaffold]s and the like
 DecorationImage? buildDecoration(String? path) {
-  return (path == null || path == noImageKey)
-      ? null
-      : DecorationImage(
-          image: provideImage(path: path),
-          fit: BoxFit.fill,
-        );
+  if (path == null || path == noImageKey) {
+    return null;
+  } else if (isAsset(path)) {
+    return DecorationImage(
+      image: AssetImage(path),
+      fit: BoxFit.fill,
+    );
+  } else {
+    return DecorationImage(
+      image: FileImage(File(path)),
+      fit: BoxFit.fill,
+    );
+  }
 }
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
