@@ -105,7 +105,7 @@ Widget warningCard(
 }
 
 /// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
-Future<bool> ezDialog(
+Future<dynamic> ezDialog(
   BuildContext context, {
   required List<Widget> content,
   String? title,
