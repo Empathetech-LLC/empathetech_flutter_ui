@@ -43,24 +43,8 @@ Color getContrastColor(Color background) {
 /// Then do nothing!
 void doNothing() {}
 
-/// More readable than Navigator.of(context).pop()
-void popScreen(
-  BuildContext context, {
-  bool success = false,
-}) {
-  return Navigator.of(context).pop(success);
-}
-
 /// More readable than [Navigator] spelled out
-void popUntilHome(
-  BuildContext context, {
-  bool success = false,
-}) {
-  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-}
-
-/// More readable than [Navigator] spelled out
-Future<bool> pushScreen(
+Future<dynamic> pushScreen(
   BuildContext context, {
   required Widget screen,
 }) async {
@@ -70,11 +54,19 @@ Future<bool> pushScreen(
           builder: (context) => screen,
         ),
       ) ??
-      false;
+      null;
+}
+
+/// More readable than Navigator.of(context).pop()
+void popScreen(
+  BuildContext context, {
+  dynamic pass,
+}) {
+  return Navigator.of(context).pop(pass);
 }
 
 /// More readable than [Navigator] spelled out
-Future<bool> popAndPushScreen(
+Future<dynamic> popAndPushScreen(
   BuildContext context, {
   required Widget screen,
 }) async {
@@ -86,11 +78,11 @@ Future<bool> popAndPushScreen(
           builder: (context) => screen,
         ),
       ) ??
-      false;
+      null;
 }
 
 /// More readable than [Navigator] spelled out
-Future<bool> replaceScreen(
+Future<dynamic> replaceScreen(
   BuildContext context, {
   required Widget screen,
 }) async {
@@ -100,5 +92,10 @@ Future<bool> replaceScreen(
           builder: (context) => screen,
         ),
       ) ??
-      false;
+      null;
+}
+
+/// More readable than [Navigator] spelled out
+void popUntilHome(BuildContext context) {
+  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }
