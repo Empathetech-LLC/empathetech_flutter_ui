@@ -31,7 +31,8 @@ class ImageSetting extends StatefulWidget {
 
 class _ImageSettingState extends State<ImageSetting> {
   late String title = widget.title;
-  late String currPath = widget.prefsKey;
+  late String currPathKey = widget.prefsKey;
+  String? updatedPath;
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
 
@@ -107,7 +108,7 @@ class _ImageSettingState extends State<ImageSetting> {
             cleanup();
 
             AppConfig.preferences.setString(widget.prefsKey, noImageKey);
-            popScreen(context, pass: noImageKey);
+            popScreen(context);
           },
           message: 'Clear',
           icon: ezIcon(PlatformIcons(context).clear),
@@ -124,7 +125,7 @@ class _ImageSettingState extends State<ImageSetting> {
         dynamic newPath = await chooseImage();
         if (newPath is String)
           setState(() {
-            currPath = newPath;
+            updatedPath = newPath;
           });
       },
       longAction: () => ezDialog(
@@ -144,9 +145,13 @@ class _ImageSettingState extends State<ImageSetting> {
           SizedBox(
             height: widget.fullscreen ? 160 : 75,
             width: widget.fullscreen ? 90 : 75,
-            child: currPath == noImageKey
+            child: currPathKey == noImageKey
                 ? ezIcon(PlatformIcons(context).clear)
-                : buildImage(pathKey: currPath, fit: BoxFit.fill),
+                : buildImage(
+                    pathKey: currPathKey,
+                    fit: BoxFit.fill,
+                    backup: updatedPath,
+                  ),
           ),
         ],
       ),
