@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
-Future<bool> popNLog(
+Future<bool> logAlert(
   BuildContext context,
   String message,
 ) async {

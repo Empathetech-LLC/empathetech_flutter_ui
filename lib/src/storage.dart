@@ -130,7 +130,7 @@ Future<bool> changeImage(
   try {
     XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
-      popNLog(context, 'Failed to retrieve image');
+      logAlert(context, 'Failed to retrieve image');
       return false;
     }
 
@@ -145,7 +145,7 @@ Future<bool> changeImage(
     return true;
   } on Exception catch (e) {
     String errorMsg = 'Failed to update image:\n$e';
-    popNLog(context, errorMsg);
+    logAlert(context, errorMsg);
     return false;
   }
 }
