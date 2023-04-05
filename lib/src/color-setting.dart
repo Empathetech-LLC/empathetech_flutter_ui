@@ -64,41 +64,37 @@ class _ColorSettingState extends State<ColorSetting> {
       ezDialog(
         context,
         title: 'Use recommended?',
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Recommended preview
-            Container(
-              width: 75,
-              height: 75,
-              decoration: BoxDecoration(
-                color: Color(recommended),
-                border: Border.all(color: Color(background)),
-              ),
+        content: [
+          // Recommended preview
+          Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: Color(recommended),
+              border: Border.all(color: Color(background)),
             ),
-            Container(height: buttonSpacer),
+          ),
+          Container(height: buttonSpacer),
 
-            ezYesNo(
-              context,
-              onConfirm: () {
-                popScreen(context);
-                AppConfig.preferences.setInt(widget.toControl, recommended);
-                setState(() {
-                  currColor = Color(recommended);
-                });
-              },
-              onDeny: () {
-                popScreen(context);
-                openColorPicker();
-              },
-              customDeny: Icon(PlatformIcons(context).edit),
-              denyMsg: 'Pick custom',
-              axis: Axis.vertical,
-              spacer: dialogSpcaer,
-            ),
-          ],
-        ),
+          ezYesNo(
+            context,
+            onConfirm: () {
+              popScreen(context);
+              AppConfig.preferences.setInt(widget.toControl, recommended);
+              setState(() {
+                currColor = Color(recommended);
+              });
+            },
+            onDeny: () {
+              popScreen(context);
+              openColorPicker();
+            },
+            customDeny: Icon(PlatformIcons(context).edit),
+            denyMsg: 'Pick custom',
+            axis: Axis.vertical,
+            spacer: dialogSpcaer,
+          ),
+        ],
       );
     } else {
       openColorPicker();
@@ -116,39 +112,35 @@ class _ColorSettingState extends State<ColorSetting> {
     ezDialog(
       context,
       title: 'Reset to...',
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Color preview
-          Container(
-            width: 75,
-            height: 75,
-            decoration: BoxDecoration(
-              color: resetColor,
-              border: Border.all(color: getContrastColor(resetColor)),
-            ),
+      content: [
+        // Color preview
+        Container(
+          width: 75,
+          height: 75,
+          decoration: BoxDecoration(
+            color: resetColor,
+            border: Border.all(color: getContrastColor(resetColor)),
           ),
-          Container(height: dialogSpacer),
+        ),
+        Container(height: dialogSpacer),
 
-          ezYesNo(
-            context,
-            onConfirm: () {
-              // Remove the user's setting and reset the current state
-              AppConfig.preferences.remove(widget.toControl);
+        ezYesNo(
+          context,
+          onConfirm: () {
+            // Remove the user's setting and reset the current state
+            AppConfig.preferences.remove(widget.toControl);
 
-              setState(() {
-                currColor = resetColor;
-              });
+            setState(() {
+              currColor = resetColor;
+            });
 
-              Navigator.of(context).pop();
-            },
-            onDeny: () => Navigator.of(context).pop(),
-            axis: Axis.horizontal,
-            spacer: dialogSpacer,
-          ),
-        ],
-      ),
+            Navigator.of(context).pop();
+          },
+          onDeny: () => Navigator.of(context).pop(),
+          axis: Axis.horizontal,
+          spacer: dialogSpacer,
+        ),
+      ],
     );
   }
 

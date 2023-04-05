@@ -15,7 +15,7 @@ Future<bool> popNLog(
   return await ezDialog(
     context,
     title: 'Attention:',
-    content: ezText(message, style: getTextStyle(dialogContentStyleKey)),
+    content: [ezText(message, style: getTextStyle(dialogContentStyleKey))],
   );
 }
 
@@ -107,7 +107,7 @@ Widget warningCard(
 /// Styles a [PlatformAlertDialog] from [AppConfig.prefs]
 Future<bool> ezDialog(
   BuildContext context, {
-  required Widget content,
+  required List<Widget> content,
   String? title,
   bool needsClose = true,
 }) async {
@@ -120,28 +120,34 @@ Future<bool> ezDialog(
   return await showPlatformDialog(
         context: context,
         builder: (context) => PlatformAlertDialog(
-          title: title == null
-              ? null
-              : Text(
-                  title,
-                  style: dialogTitleStyle,
-                  textAlign: TextAlign.center,
-                ),
-          content: content,
-
-          // Styling
+          // Material (Android)
           material: (context, platform) => MaterialAlertDialogData(
             insetPadding: EdgeInsets.all(padding),
+
+            // Title
+            title: title == null
+                ? null
+                : Text(
+                    title,
+                    style: dialogTitleStyle,
+                    textAlign: TextAlign.center,
+                  ),
             titlePadding: title == null
                 ? EdgeInsets.zero
                 : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+
+            // Content
+            content: ezScrollView(children: content),
             contentPadding: EdgeInsets.only(
               bottom: dialogSpacer,
               left: padding,
               right: padding,
             ),
           ),
+
+          // Cupertino (iOS)
           cupertino: (context, platform) => CupertinoAlertDialogData(
+            // Title
             title: title == null
                 ? null
                 : Container(
@@ -152,6 +158,11 @@ Future<bool> ezDialog(
                       textAlign: TextAlign.center,
                     ),
                   ),
+
+            // Content
+            content: ezScrollView(
+                children:
+                    (needsClose) ? content : [...content, Container(height: padding)]),
             actions: (needsClose)
                 ? [
                     GestureDetector(

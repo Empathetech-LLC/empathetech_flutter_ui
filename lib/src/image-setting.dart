@@ -41,72 +41,68 @@ class _ImageSettingState extends State<ImageSetting> {
     ezDialog(
       context,
       title: 'Update background',
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // From file
-          EZButton.icon(
-            action: () async {
-              await changeImage(
-                context,
-                prefsPath: widget.prefsKey,
-                source: ImageSource.gallery,
-              );
+      content: [
+        // From file
+        EZButton.icon(
+          action: () async {
+            await changeImage(
+              context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.gallery,
+            );
 
-              Navigator.of(context).pop();
-            },
-            icon: ezIcon(PlatformIcons(context).folder),
-            message: 'File',
-          ),
-          Container(height: buttonSpacer),
+            Navigator.of(context).pop();
+          },
+          icon: ezIcon(PlatformIcons(context).folder),
+          message: 'File',
+        ),
+        Container(height: buttonSpacer),
 
-          // From camera
-          EZButton.icon(
-            action: () async {
-              await changeImage(
-                context,
-                prefsPath: widget.prefsKey,
-                source: ImageSource.camera,
-              );
+        // From camera
+        EZButton.icon(
+          action: () async {
+            await changeImage(
+              context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.camera,
+            );
 
-              Navigator.of(context).pop();
-            },
-            icon: ezIcon(PlatformIcons(context).photoCamera),
-            message: 'Camera',
-          ),
-          Container(height: buttonSpacer),
+            Navigator.of(context).pop();
+          },
+          icon: ezIcon(PlatformIcons(context).photoCamera),
+          message: 'Camera',
+        ),
+        Container(height: buttonSpacer),
 
-          // Reset
-          EZButton.icon(
-            action: () {
-              AppConfig.preferences.remove(widget.prefsKey);
-              setState(() {
-                AppConfig.prefs[widget.prefsKey] = AppConfig.defaults[widget.prefsKey];
-                currPath = widget.prefsKey;
-              });
-              Navigator.of(context).pop();
-            },
-            icon: ezIcon(PlatformIcons(context).refresh),
-            message: 'Reset',
-          ),
-          Container(height: buttonSpacer),
+        // Reset
+        EZButton.icon(
+          action: () {
+            AppConfig.preferences.remove(widget.prefsKey);
+            setState(() {
+              AppConfig.prefs[widget.prefsKey] = AppConfig.defaults[widget.prefsKey];
+              currPath = widget.prefsKey;
+            });
+            Navigator.of(context).pop();
+          },
+          icon: ezIcon(PlatformIcons(context).refresh),
+          message: 'Reset',
+        ),
+        Container(height: buttonSpacer),
 
-          // Clear
-          EZButton.icon(
-            action: () {
-              AppConfig.preferences.setString(widget.prefsKey, noImageKey);
-              setState(() {
-                currPath = noImageKey;
-              });
-              Navigator.of(context).pop();
-            },
-            icon: ezIcon(PlatformIcons(context).clear),
-            message: 'Clear',
-          ),
-          Container(height: buttonSpacer),
-        ],
-      ),
+        // Clear
+        EZButton.icon(
+          action: () {
+            AppConfig.preferences.setString(widget.prefsKey, noImageKey);
+            setState(() {
+              currPath = noImageKey;
+            });
+            Navigator.of(context).pop();
+          },
+          icon: ezIcon(PlatformIcons(context).clear),
+          message: 'Clear',
+        ),
+        Container(height: buttonSpacer),
+      ],
     );
   }
 
@@ -117,7 +113,7 @@ class _ImageSettingState extends State<ImageSetting> {
       longAction: () => ezDialog(
         context,
         title: 'Credit to:',
-        content: ezText(widget.credits, style: getTextStyle(dialogContentStyleKey)),
+        content: [ezText(widget.credits, style: getTextStyle(dialogContentStyleKey))],
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

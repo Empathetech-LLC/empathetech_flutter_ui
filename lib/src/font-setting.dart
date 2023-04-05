@@ -27,28 +27,26 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
     ezDialog(
       context,
       title: 'Choose a font',
-      content: ezScrollView(
-        children: myGoogleFonts
-            .map(
-              (String font) => Column(
-                children: [
-                  // Map font to a selectable button (title == name)
-                  EZButton(
-                    action: () {
-                      AppConfig.preferences.setString(fontFamilyKey, font);
-                      setState(() {
-                        currFontFamily = googleStyleAlias(font).fontFamily!;
-                      });
-                      Navigator.of(context).pop();
-                    },
-                    body: Text(font, style: googleStyleAlias(font)),
-                  ),
-                  Container(height: buttonSpacer),
-                ],
-              ),
-            )
-            .toList(),
-      ),
+      content: myGoogleFonts
+          .map(
+            (String font) => Column(
+              children: [
+                // Map font to a selectable button (title == name)
+                EZButton(
+                  action: () {
+                    AppConfig.preferences.setString(fontFamilyKey, font);
+                    setState(() {
+                      currFontFamily = googleStyleAlias(font).fontFamily!;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  body: Text(font, style: googleStyleAlias(font)),
+                ),
+                Container(height: buttonSpacer),
+              ],
+            ),
+          )
+          .toList(),
     );
   }
 

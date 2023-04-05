@@ -151,25 +151,21 @@ class _SliderSettingState extends State<SliderSetting> {
             action: () => ezDialog(
               context,
               title: 'Space preview',
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Button 1
-                  EZButton(
-                    action: doNothing,
-                    body: Text('Currently: $currValue', style: buttonTextStyle),
-                  ),
-                  Container(height: currValue),
+              content: [
+                // Button 1
+                EZButton(
+                  action: doNothing,
+                  body: Text('Currently: $currValue', style: buttonTextStyle),
+                ),
+                Container(height: currValue),
 
-                  // Button 2
-                  EZButton(
-                    action: doNothing,
-                    body: Text('Currently: $currValue', style: buttonTextStyle),
-                  ),
-                  Container(height: currValue),
-                ],
-              ),
+                // Button 2
+                EZButton(
+                  action: doNothing,
+                  body: Text('Currently: $currValue', style: buttonTextStyle),
+                ),
+                Container(height: currValue),
+              ],
             ),
             body: Text('Press me', style: buttonTextStyle),
           ),

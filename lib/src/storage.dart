@@ -21,26 +21,24 @@ void ezColorPicker(
   ezDialog(
     context,
     title: 'Pick a color!',
-    content: ezScrollView(
-      children: [
-        // Main event
-        ColorPicker(
-          pickerColor: startColor,
-          onColorChanged: onColorChange,
-        ),
-        Container(height: AppConfig.prefs[dialogSpacingKey]),
+    content: [
+      // Main event
+      ColorPicker(
+        pickerColor: startColor,
+        onColorChanged: onColorChange,
+      ),
+      Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-        // Apply
-        ezYesNo(
-          context,
-          onConfirm: apply,
-          onDeny: cancel,
-          axis: Axis.vertical,
-          confirmMsg: 'Apply',
-          denyMsg: 'Cancel',
-        ),
-      ],
-    ),
+      // Apply
+      ezYesNo(
+        context,
+        onConfirm: apply,
+        onDeny: cancel,
+        axis: Axis.vertical,
+        confirmMsg: 'Apply',
+        denyMsg: 'Cancel',
+      ),
+    ],
   );
 }
 
