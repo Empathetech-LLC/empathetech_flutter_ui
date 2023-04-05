@@ -41,12 +41,13 @@ class SliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<SliderSetting> {
-  // Initialize state
-
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+
   late double currValue = AppConfig.prefs[widget.prefsKey];
   late double defaultValue = AppConfig.defaults[widget.prefsKey];
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> preview() {
@@ -187,10 +188,12 @@ class _SliderSettingState extends State<SliderSetting> {
     toReturn.addAll([
       // Value slider
       PlatformSlider(
+        // Function
         value: currValue,
+
         min: widget.min,
         max: widget.max,
-        divisions: widget.steps,
+
         onChanged: (double value) {
           // Just update the on screen value while sliding around
           setState(() {
@@ -205,6 +208,11 @@ class _SliderSettingState extends State<SliderSetting> {
             AppConfig.preferences.setDouble(widget.prefsKey, value);
           }
         },
+
+        // Form
+        divisions: widget.steps,
+        thumbColor: buttonColor,
+        activeColor: buttonColor,
       ),
       Container(height: buttonSpacer),
 
