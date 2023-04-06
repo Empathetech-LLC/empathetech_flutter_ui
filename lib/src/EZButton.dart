@@ -159,9 +159,6 @@ class EZButton extends StatelessWidget {
       onLongPress: longAction,
       child: PlatformElevatedButton(
         onPressed: action,
-        color: (ezStyle.backgroundColor is Color)
-            ? ezStyle.backgroundColor as Color
-            : Color(AppConfig.prefs[buttonColorKey]),
         child: ezBody,
         material: (context, platform) => MaterialElevatedButtonData(style: ezStyle),
         cupertino: (context, platform) => m2cButton(ezStyle),
