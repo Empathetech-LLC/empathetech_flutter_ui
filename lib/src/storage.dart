@@ -49,7 +49,7 @@ bool isAsset(String? path) {
 /// By default, simply providing [pathKey] will return the image found at [AppConfig.prefs] value's path
 /// If the image path is not expected to be in [AppConfig.prefs], provide a [AppConfig.assets] path via [backup]
 /// as the fallback for a [AppConfig.preferences] getString on [pathKey]
-Image buildImage({
+Image ezImage({
   required String pathKey,
   BoxFit? fit,
   String? backup,
@@ -85,11 +85,39 @@ Image buildImage({
           );
         }
       } catch (_) {
-        // If something goes wrong here too, just return the silly bird
+        // Continue on to default case
         doNothing();
       }
 
-      // Silly bird just in case there are cascading errors
+      // Default case, stock owl
+      return Image(
+        image: NetworkImage(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        fit: fit,
+      );
+    }
+  }
+}
+
+/// Simpler implementation of ezImage
+/// Only call with [path] being the literal asset/file path
+Image buildImage({
+  required String path,
+  BoxFit? fit,
+}) {
+  if (isAsset(path)) {
+    return Image(
+      image: AssetImage(path),
+      fit: fit,
+    );
+  } else {
+    try {
+      return Image(
+        image: FileImage(File(path)),
+        fit: fit,
+      );
+    } on FileSystemException catch (_) {
+      // Something went wrong, return stock owl
       return Image(
         image: NetworkImage(
             'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
