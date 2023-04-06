@@ -11,23 +11,28 @@ class EZButton extends StatelessWidget {
   final VoidCallback longAction;
   final Widget body;
   final ButtonStyle? customStyle;
+  final bool forceMaterial;
 
   /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
   /// If provided, [customStyle] will be merged with [materialButton]
+  /// Optionally provide [forceMaterial] to escape the walled garden
   EZButton({
     required this.action,
     this.longAction = doNothing,
     required this.body,
     this.customStyle,
+    this.forceMaterial = false,
   });
 
   /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
   /// This constructor behaves like the Material [ElevatedButton.icon]
   /// If provided, [customStyle] will be merged with [materialButton]
+  /// Optionally provide [forceMaterial] to escape the walled garden
   EZButton.icon({
     required this.action,
     this.longAction = doNothing,
     this.customStyle,
+    this.forceMaterial = false,
     required Icon icon,
     required String message,
     TextStyle? customTextStyle,
@@ -158,24 +163,31 @@ class EZButton extends StatelessWidget {
     Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
         Color(AppConfig.prefs[buttonColorKey]);
 
-    return GestureDetector(
-      onLongPress: longAction,
-      child: PlatformElevatedButton(
-        onPressed: action,
-        color: resolvedColor,
+    return (forceMaterial)
+        ? ElevatedButton(
+            onPressed: action,
+            onLongPress: longAction,
+            child: ezBody,
+            style: ezStyle,
+          )
+        : GestureDetector(
+            onLongPress: longAction,
+            child: PlatformElevatedButton(
+              onPressed: action,
+              color: resolvedColor,
 
-        // Android config
-        material: (context, platform) => MaterialElevatedButtonData(
-          child: ezBody,
-          style: ezStyle,
-        ),
+              // Android config
+              material: (context, platform) => MaterialElevatedButtonData(
+                child: ezBody,
+                style: ezStyle,
+              ),
 
-        // iOS config
-        cupertino: (context, platform) => m2cButton(
-          child: ezBody,
-          materialBase: ezStyle,
-        ),
-      ),
-    );
+              // iOS config
+              cupertino: (context, platform) => m2cButton(
+                child: ezBody,
+                materialBase: ezStyle,
+              ),
+            ),
+          );
   }
 }
