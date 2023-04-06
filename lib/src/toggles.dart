@@ -33,7 +33,7 @@ Widget ezYesNo(
 
   Icon confirmIcon = customConfirm ?? ezIcon(PlatformIcons(context).checkMark);
   Icon denyIcon = customDeny ?? ezIcon(PlatformIcons(context).clear);
-  double spacing = (spacer == null) ? AppConfig.prefs[buttonSpacingKey] : spacer;
+  double spacing = (spacer is double) ? spacer : AppConfig.prefs[buttonSpacingKey];
 
   return axis == Axis.vertical
       ? Column(
