@@ -198,6 +198,9 @@ Future<dynamic> ezColorPicker(
       ColorPicker(
         pickerColor: startColor,
         onColorChanged: onColorChange,
+        // ignore: deprecated_member_use
+        labelTextStyle: getTextStyle(dialogContentStyleKey),
+        // above is required for iOS
       ),
       Container(height: AppConfig.prefs[dialogSpacingKey]),
       ezYesNo(
