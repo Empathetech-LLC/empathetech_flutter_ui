@@ -42,7 +42,7 @@ List<Widget> drawer2ActionSheet(List<Widget> children) {
 }
 
 /// Builds a [PlatformTarget] dynamic end [Drawer]
-/// Cupertino retuins a [CupertinoActionSheet] for [showCupertinoModalPopup]
+/// Cupertino returns a [CupertinoActionSheet] for [showCupertinoModalPopup]
 Widget? ezDrawer(
   BuildContext context, {
   required PlatformTarget platform,
