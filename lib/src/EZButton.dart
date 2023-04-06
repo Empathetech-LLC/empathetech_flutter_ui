@@ -155,10 +155,14 @@ class EZButton extends StatelessWidget {
     Widget ezBody = _buildBody();
     ButtonStyle ezStyle = _buildStyle();
 
+    Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
+        Color(AppConfig.prefs[buttonColorKey]);
+
     return GestureDetector(
       onLongPress: longAction,
       child: PlatformElevatedButton(
         onPressed: action,
+        color: resolvedColor,
         child: ezBody,
         material: (context, platform) => MaterialElevatedButtonData(style: ezStyle),
         cupertino: (context, platform) => m2cButton(ezStyle),
