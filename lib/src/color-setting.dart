@@ -170,6 +170,7 @@ class _ColorSettingState extends State<ColorSetting> {
             backgroundColor: currColor,
             padding: EdgeInsets.all(AppConfig.prefs[paddingKey] * 2),
           ),
+          forceMaterial: true,
         ),
       ],
     );
