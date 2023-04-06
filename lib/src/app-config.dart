@@ -8,16 +8,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// [PlatformApp] wrapper using [empathetech_flutter_ui] styling
-PlatformApp ezApp({
+PlatformProvider ezApp(
+  BuildContext context, {
   required String appTitle,
   required Map<String, Widget Function(BuildContext)> routes,
 }) {
-  return PlatformApp(
-    debugShowCheckedModeBanner: false,
-    title: appTitle,
-    routes: routes,
-    material: (context, platform) => materialAppTheme(),
-    cupertino: (context, platform) => cupertinoAppTheme(),
+  return PlatformProvider(
+    builder: (context) => PlatformApp(
+      debugShowCheckedModeBanner: false,
+      title: appTitle,
+      routes: routes,
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+      ],
+      material: (context, platform) => materialAppTheme(),
+      cupertino: (context, platform) => cupertinoAppTheme(),
+    ),
+    settings: PlatformSettingsData(iosUsesMaterialWidgets: true),
   );
 }
 
