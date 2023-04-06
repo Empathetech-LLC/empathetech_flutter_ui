@@ -163,9 +163,18 @@ class EZButton extends StatelessWidget {
       child: PlatformElevatedButton(
         onPressed: action,
         color: resolvedColor,
-        child: ezBody,
-        material: (context, platform) => MaterialElevatedButtonData(style: ezStyle),
-        cupertino: (context, platform) => m2cButton(ezStyle),
+
+        // Android config
+        material: (context, platform) => MaterialElevatedButtonData(
+          child: ezBody,
+          style: ezStyle,
+        ),
+
+        // iOS config
+        cupertino: (context, platform) => m2cButton(
+          child: ezBody,
+          materialBase: ezStyle,
+        ),
       ),
     );
   }
