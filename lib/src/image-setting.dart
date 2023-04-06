@@ -32,7 +32,7 @@ class ImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<ImageSetting> {
   late String title = widget.title;
   late String currPathKey = widget.prefsKey;
-  String? updatedPath;
+  String? updatedPath; // Only used when the user makes a change
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
 
@@ -147,11 +147,16 @@ class _ImageSettingState extends State<ImageSetting> {
             width: widget.fullscreen ? 90 : 75,
             child: currPathKey == noImageKey
                 ? ezIcon(PlatformIcons(context).clear)
-                : buildImage(
-                    pathKey: currPathKey,
-                    fit: BoxFit.fill,
-                    backup: updatedPath,
-                  ),
+                : (updatedPath is String)
+                    ? buildImage(
+                        path: updatedPath as String,
+                        fit: BoxFit.fill,
+                      )
+                    : ezImage(
+                        pathKey: currPathKey,
+                        fit: BoxFit.fill,
+                        backup: updatedPath,
+                      ),
           ),
         ],
       ),
