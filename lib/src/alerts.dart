@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an alert dialog for the user
@@ -180,4 +181,34 @@ Future<dynamic> ezDialog(
         ),
       ) ??
       null;
+}
+
+/// Wrap a flutter_colorpicker in an [ezDialog]
+Future<dynamic> ezColorPicker(
+  BuildContext context, {
+  required Color startColor,
+  required void Function(Color chosenColor) onColorChange,
+  required void Function() apply,
+  required void Function() cancel,
+}) {
+  return ezDialog(
+    context,
+    title: 'Pick a color!',
+    content: [
+      ColorPicker(
+        pickerColor: startColor,
+        onColorChanged: onColorChange,
+      ),
+      Container(height: AppConfig.prefs[dialogSpacingKey]),
+      ezYesNo(
+        context,
+        onConfirm: apply,
+        onDeny: cancel,
+        axis: Axis.vertical,
+        confirmMsg: 'Apply',
+        denyMsg: 'Cancel',
+      ),
+    ],
+    needsClose: false,
+  );
 }

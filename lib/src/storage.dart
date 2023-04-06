@@ -8,37 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-
-/// Wrap a flutter_colorpicker in an [ezDialog]
-Future<dynamic> ezColorPicker(
-  BuildContext context, {
-  required Color startColor,
-  required void Function(Color chosenColor) onColorChange,
-  required void Function() apply,
-  required void Function() cancel,
-}) {
-  return ezDialog(
-    context,
-    title: 'Pick a color!',
-    content: [
-      ColorPicker(
-        pickerColor: startColor,
-        onColorChanged: onColorChange,
-      ),
-      Container(height: AppConfig.prefs[dialogSpacingKey]),
-      ezYesNo(
-        context,
-        onConfirm: apply,
-        onDeny: cancel,
-        axis: Axis.vertical,
-        confirmMsg: 'Apply',
-        denyMsg: 'Cancel',
-      ),
-    ],
-    needsClose: false,
-  );
-}
 
 /// Returns whether the passed [path] refers to one of the stored [AppConfig.assets]
 bool isAsset(String? path) {
