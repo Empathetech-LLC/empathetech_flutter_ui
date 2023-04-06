@@ -126,13 +126,13 @@ Future<dynamic> ezDialog(
             insetPadding: EdgeInsets.all(padding),
 
             // Title
-            title: title == null
-                ? null
-                : Text(
+            title: (title is String)
+                ? Text(
                     title,
                     style: dialogTitleStyle,
                     textAlign: TextAlign.center,
-                  ),
+                  )
+                : title,
             titlePadding: title == null
                 ? EdgeInsets.zero
                 : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
@@ -149,16 +149,16 @@ Future<dynamic> ezDialog(
           // Cupertino (iOS)
           cupertino: (context, platform) => CupertinoAlertDialogData(
             // Title
-            title: title == null
-                ? null
-                : Container(
+            title: (title is String)
+                ? Container(
                     padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
                     child: Text(
                       title,
                       style: dialogTitleStyle,
                       textAlign: TextAlign.center,
                     ),
-                  ),
+                  )
+                : title,
 
             // Content
             content: ezScrollView(
