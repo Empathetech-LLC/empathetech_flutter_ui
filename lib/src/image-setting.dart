@@ -108,7 +108,7 @@ class _ImageSettingState extends State<ImageSetting> {
             cleanup();
 
             AppConfig.preferences.setString(widget.prefsKey, noImageKey);
-            popScreen(context);
+            popScreen(context, pass: noImageKey);
           },
           message: 'Clear',
           icon: ezIcon(PlatformIcons(context).clear),
@@ -145,13 +145,15 @@ class _ImageSettingState extends State<ImageSetting> {
           SizedBox(
             height: widget.fullscreen ? 160 : 75,
             width: widget.fullscreen ? 90 : 75,
-            child: currPathKey == noImageKey
-                ? ezIcon(PlatformIcons(context).clear)
-                : (updatedPath is String)
-                    ? buildImage(
+            child: (updatedPath is String) // user made a change
+                ? (updatedPath == noImageKey)
+                    ? ezIcon(PlatformIcons(context).clear)
+                    : buildImage(
                         path: updatedPath as String,
                         fit: BoxFit.fill,
                       )
+                : (currPathKey == noImageKey) // using app's current state
+                    ? ezIcon(PlatformIcons(context).clear)
                     : ezImage(
                         pathKey: currPathKey,
                         fit: BoxFit.fill,
