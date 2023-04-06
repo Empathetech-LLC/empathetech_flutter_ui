@@ -91,7 +91,7 @@ class _ColorSettingState extends State<ColorSetting> {
               dynamic chosen = await openColorPicker();
               popScreen(context, pass: chosen);
             },
-            customDeny: Icon(PlatformIcons(context).edit),
+            customDeny: ezIcon(PlatformIcons(context).edit),
             denyMsg: 'Pick custom',
             axis: Axis.vertical,
             spacer: dialogSpacer,
