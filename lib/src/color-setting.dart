@@ -99,7 +99,7 @@ class _ColorSettingState extends State<ColorSetting> {
             spacer: dialogSpacer,
           ),
         ],
-        needsClose: false,
+        needsClose: true,
       );
     } else {
       return openColorPicker();
