@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [1.1.5] - 2023-XX-XX
 ### Added
 - Flutter analyze GitHub Action
+- Donations section to README
 
 ## [1.1.4] - 2023-03-31
 ### Fixed
