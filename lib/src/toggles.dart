@@ -17,6 +17,18 @@ PlatformSwitch ezSwitch({
   );
 }
 
+/// Styles a [Checkbox] from [AppConfig.prefs]
+Widget ezCheckBox({
+  required bool value,
+  required void Function(bool?)? onChanged,
+}) {
+  return Checkbox(
+    value: value,
+    onChanged: onChanged,
+    activeColor: Color(AppConfig.prefs[buttonColorKey]),
+  );
+}
+
 /// Builds a pair of customizable [EZButton.icon]s for confirming and/or denying things
 Widget ezYesNo(
   BuildContext context, {
