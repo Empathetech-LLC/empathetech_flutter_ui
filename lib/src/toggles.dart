@@ -25,7 +25,16 @@ Widget ezCheckBox({
   return Checkbox(
     value: value,
     onChanged: onChanged,
-    activeColor: Color(AppConfig.prefs[buttonColorKey]),
+    checkColor: Color(AppConfig.prefs[buttonTextColorKey]),
+    fillColor: MaterialStateProperty.resolveWith(
+      (states) {
+        if (states.contains(MaterialState.selected)) {
+          return Color(AppConfig.prefs[buttonColorKey]);
+        } else {
+          return Color(AppConfig.prefs[themeTextColorKey]);
+        }
+      },
+    ),
   );
 }
 
