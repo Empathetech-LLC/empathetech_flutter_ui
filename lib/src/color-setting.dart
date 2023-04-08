@@ -13,12 +13,12 @@ class ColorSetting extends StatefulWidget {
     Key? key,
     required this.toControl,
     required this.message,
-    this.textBackground,
+    this.textBackgroundKey,
   }) : super(key: key);
 
   final String toControl;
   final String message;
-  final int? textBackground;
+  final String? textBackgroundKey;
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -59,9 +59,11 @@ class _ColorSettingState extends State<ColorSetting> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    if (widget.textBackground != null) {
-      int background = widget.textBackground as int;
-      int recommended = getContrastColor(Color(background)).value;
+    if (widget.textBackgroundKey != null) {
+      String pathKey = widget.textBackgroundKey as String;
+      Color backgroundColor =
+          Color(AppConfig.preferences.getInt(pathKey) ?? AppConfig.prefs[pathKey]);
+      int recommended = getContrastColor(backgroundColor).value;
 
       return ezDialog(
         context,
@@ -73,7 +75,7 @@ class _ColorSettingState extends State<ColorSetting> {
             height: 75,
             decoration: BoxDecoration(
               color: Color(recommended),
-              border: Border.all(color: Color(background)),
+              border: Border.all(color: backgroundColor),
             ),
           ),
           Container(height: buttonSpacer),
