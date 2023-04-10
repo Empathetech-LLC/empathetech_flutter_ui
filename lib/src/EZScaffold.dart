@@ -13,7 +13,7 @@ enum ScaffoldType {
 }
 
 class EZScaffold extends StatelessWidget {
-  final String title;
+  final Widget title;
   final DecorationImage? backgroundImage;
   final Color backgroundColor;
   final Widget body;
@@ -97,7 +97,7 @@ class EZScaffold extends StatelessWidget {
       child: PlatformScaffold(
         // App bar
         appBar: PlatformAppBar(
-          title: Text(title, style: getTextStyle(titleStyleKey)),
+          title: title,
           cupertino: (context, platform) => CupertinoNavigationBarData(
             trailing: ezDrawer(
               context,
