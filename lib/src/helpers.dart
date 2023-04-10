@@ -47,14 +47,13 @@ void doNothing() {}
 Future<dynamic> pushScreen(
   BuildContext context, {
   required Widget screen,
-}) async {
-  return await Navigator.of(context).push(
-        platformPageRoute(
-          context: context,
-          builder: (context) => screen,
-        ),
-      ) ??
-      null;
+}) {
+  return Navigator.of(context).push(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
 }
 
 /// More readable than Navigator.of(context).pop()
@@ -69,30 +68,28 @@ void popScreen(
 Future<dynamic> popAndPushScreen(
   BuildContext context, {
   required Widget screen,
-}) async {
+}) {
   Navigator.of(context).pop();
 
-  return await Navigator.of(context).push(
-        platformPageRoute(
-          context: context,
-          builder: (context) => screen,
-        ),
-      ) ??
-      null;
+  return Navigator.of(context).push(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
 }
 
 /// More readable than [Navigator] spelled out
 Future<dynamic> replaceScreen(
   BuildContext context, {
   required Widget screen,
-}) async {
-  return await Navigator.of(context).pushReplacement(
-        platformPageRoute(
-          context: context,
-          builder: (context) => screen,
-        ),
-      ) ??
-      null;
+}) {
+  return Navigator.of(context).pushReplacement(
+    platformPageRoute(
+      context: context,
+      builder: (context) => screen,
+    ),
+  );
 }
 
 /// More readable than [Navigator] spelled out
