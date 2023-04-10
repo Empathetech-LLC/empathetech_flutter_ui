@@ -13,8 +13,8 @@ enum ScaffoldType {
 }
 
 class EZScaffold extends StatelessWidget {
-  final Widget title;
   final Widget? leading;
+  final Widget title;
   final List<Widget>? trailingActions;
   final bool? automaticallyImplyLeading;
   final DecorationImage? backgroundImage;
@@ -32,8 +32,8 @@ class EZScaffold extends StatelessWidget {
   /// [drawerHeader] and [drawerBody] are used to build an end [Drawer] for [Material]
   /// and a [CupertinoActionSheet] for Cupertino
   EZScaffold({
-    required this.title,
     this.leading,
+    required this.title,
     this.trailingActions,
     this.automaticallyImplyLeading,
     this.backgroundImage,
@@ -53,8 +53,8 @@ class EZScaffold extends StatelessWidget {
   /// use [navWindow] for the [body]
   EZScaffold.nav(
     BuildContext context, {
-    required this.title,
     this.leading,
+    required this.title,
     this.trailingActions,
     this.automaticallyImplyLeading,
     required this.body,
