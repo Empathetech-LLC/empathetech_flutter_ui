@@ -17,7 +17,7 @@ Widget ezText(
   required TextStyle style,
   TextAlign? textAlign,
   Color background = Colors.transparent,
-  Future<dynamic>? navTo,
+  VoidCallback? navTo,
 }) {
   double padding = AppConfig.prefs[paddingKey] / 2.0;
 
@@ -35,7 +35,7 @@ Widget ezText(
 
   return (navTo != null)
       ? GestureDetector(
-          onTap: () => navTo,
+          onTap: navTo,
           child: textBody,
         )
       : textBody;
