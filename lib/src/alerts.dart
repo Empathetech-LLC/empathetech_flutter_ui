@@ -134,17 +134,11 @@ Future<dynamic> ezDialog(
                 textAlign: TextAlign.center,
               )
             : title,
-        titlePadding: title == null
-            ? EdgeInsets.zero
-            : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        titlePadding: EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
 
         // Content
         content: ezScrollView(children: content),
-        contentPadding: EdgeInsets.only(
-          bottom: dialogSpacer,
-          left: padding,
-          right: padding,
-        ),
+        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
 
       // Cupertino (iOS)
