@@ -12,7 +12,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 Future<dynamic> logAlert(
   BuildContext context,
   String message,
-) async {
+) {
   log(message);
   return ezDialog(
     context,
@@ -112,75 +112,73 @@ Future<dynamic> ezDialog(
   required List<Widget> content,
   String? title,
   bool needsClose = true,
-}) async {
+}) {
   // Gather theme data
 
   TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
   double padding = AppConfig.prefs[paddingKey];
 
-  return await showPlatformDialog(
-        context: context,
-        builder: (context) => PlatformAlertDialog(
-          // Material (Android)
-          material: (context, platform) => MaterialAlertDialogData(
-            insetPadding: EdgeInsets.all(padding),
+  return showPlatformDialog(
+    context: context,
+    builder: (context) => PlatformAlertDialog(
+      // Material (Android)
+      material: (context, platform) => MaterialAlertDialogData(
+        insetPadding: EdgeInsets.all(padding),
 
-            // Title
-            title: (title is String)
-                ? Text(
-                    title,
-                    style: dialogTitleStyle,
-                    textAlign: TextAlign.center,
-                  )
-                : title,
-            titlePadding: title == null
-                ? EdgeInsets.zero
-                : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        // Title
+        title: (title is String)
+            ? Text(
+                title,
+                style: dialogTitleStyle,
+                textAlign: TextAlign.center,
+              )
+            : title,
+        titlePadding: title == null
+            ? EdgeInsets.zero
+            : EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
 
-            // Content
-            content: ezScrollView(children: content),
-            contentPadding: EdgeInsets.only(
-              bottom: dialogSpacer,
-              left: padding,
-              right: padding,
-            ),
-          ),
-
-          // Cupertino (iOS)
-          cupertino: (context, platform) => CupertinoAlertDialogData(
-            // Title
-            title: (title is String)
-                ? Container(
-                    padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
-                    child: Text(
-                      title,
-                      style: dialogTitleStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                : title,
-
-            // Content
-            content: ezScrollView(
-                children:
-                    (needsClose) ? content : [...content, Container(height: padding)]),
-            actions: (needsClose)
-                ? [
-                    GestureDetector(
-                      onTap: () => popScreen(context),
-                      child: ezText(
-                        'Close',
-                        style: getTextStyle(dialogContentStyleKey),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ]
-                : [],
-          ),
+        // Content
+        content: ezScrollView(children: content),
+        contentPadding: EdgeInsets.only(
+          bottom: dialogSpacer,
+          left: padding,
+          right: padding,
         ),
-      ) ??
-      null;
+      ),
+
+      // Cupertino (iOS)
+      cupertino: (context, platform) => CupertinoAlertDialogData(
+        // Title
+        title: (title is String)
+            ? Container(
+                padding: EdgeInsets.only(bottom: AppConfig.prefs[dialogSpacingKey]),
+                child: Text(
+                  title,
+                  style: dialogTitleStyle,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : title,
+
+        // Content
+        content: ezScrollView(
+            children: (needsClose) ? content : [...content, Container(height: padding)]),
+        actions: (needsClose)
+            ? [
+                GestureDetector(
+                  onTap: () => popScreen(context),
+                  child: ezText(
+                    'Close',
+                    style: getTextStyle(dialogContentStyleKey),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]
+            : [],
+      ),
+    ),
+  );
 }
 
 /// Wrap a flutter_colorpicker in an [ezDialog]
