@@ -36,23 +36,14 @@ Widget ezScrollView({
 
 /// Wraps [PlatformListTile]s in an [ezScrollView] with a [title]
 /// Optionally provide a height limit, 1/3 [screenHeight] will be used as default
-/// Optionally provide a [trailingAction] if an action button is paired with the list
-Widget ezList(
+Widget ezTileList(
   BuildContext context, {
   required String title,
-  required List<Widget> items,
+  required List<PlatformListTile> items,
   double? customHeight,
-  Widget? trailingAction,
 }) {
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   TextStyle titleStyle = getTextStyle(titleStyleKey);
-
-  List<Widget> children = [
-    Text(title, style: titleStyle),
-    ezScrollView(children: items),
-  ];
-
-  if (trailingAction != null) children.add(trailingAction);
 
   return Container(
     width: screenWidth(context),
@@ -63,7 +54,17 @@ Widget ezList(
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: children,
+      children: [
+        Text(title, style: titleStyle),
+        ezScrollView(children: items),
+      ],
     ),
   );
+}
+
+Widget ezDropList(
+  BuildContext context, {
+  required String title,
+}) {
+  return Container();
 }
