@@ -55,7 +55,7 @@ class NotificationService {
   /// Initialize the [NotificationService]
   /// Load platform specific settings
   /// Define [NotificationResponse] actions
-  Future<void> init() async {
+  void init() async {
     await notifsPlugin.initialize(
       appInitSettings,
       onDidReceiveNotificationResponse: notifAction,
@@ -87,8 +87,12 @@ class NotificationService {
   }
 
   /// Display notification
-  Future<void> show(int id, String? title, String? body, String? payload) async {
-    await notifsPlugin.show(
+  Future<void> show({
+    required int id,
+    required String? title,
+    required String? body,
+  }) {
+    return notifsPlugin.show(
       id,
       title,
       body,

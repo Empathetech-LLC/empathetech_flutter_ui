@@ -53,7 +53,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
   /// Opens an [ezDialog] for choosing the [ImageSource] for updating [prefsKey]
   /// Selection is sent to [changeImage]
-  Future<dynamic> chooseImage() async {
+  Future<dynamic> chooseImage() {
     List<Widget> options = [
       // From file
       EZButton.icon(
@@ -89,7 +89,7 @@ class _ImageSettingState extends State<ImageSetting> {
 
       // Reset
       EZButton.icon(
-        action: () async {
+        action: () {
           cleanup();
 
           AppConfig.preferences.remove(widget.prefsKey);
@@ -104,7 +104,7 @@ class _ImageSettingState extends State<ImageSetting> {
       options.addAll([
         Container(height: buttonSpacer),
         EZButton.icon(
-          action: () async {
+          action: () {
             cleanup();
 
             AppConfig.preferences.setString(widget.prefsKey, noImageKey);
