@@ -17,11 +17,10 @@ Widget ezText(
   required TextStyle style,
   TextAlign? textAlign,
   Color background = Colors.transparent,
-  VoidCallback? navTo,
 }) {
   double padding = AppConfig.prefs[paddingKey] / 2.0;
 
-  Widget textBody = Padding(
+  return Padding(
     padding: EdgeInsets.all(padding),
     child: Container(
       decoration: BoxDecoration(
@@ -32,13 +31,6 @@ Widget ezText(
       child: Text(text, style: style, textAlign: textAlign),
     ),
   );
-
-  return (navTo != null)
-      ? GestureDetector(
-          onTap: navTo,
-          child: textBody,
-        )
-      : textBody;
 }
 
 /// Styles an [Icon] from [AppConfig.prefs]
@@ -146,6 +138,7 @@ TextStyle getTextStyle(String textType) {
         fontFamily: currFontFamily,
         fontSize: currSize * 1.25,
         color: themeTextColor,
+        decoration: TextDecoration.underline,
       );
 
     case dialogContentStyleKey:
@@ -171,6 +164,7 @@ TextStyle getTextStyle(String textType) {
       return TextStyle(
         fontSize: 48,
         color: Colors.red,
+        fontWeight: FontWeight.bold,
       );
   }
 }
