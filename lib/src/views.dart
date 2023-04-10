@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [SingleChildScrollView] from [AppConfig.prefs]
@@ -74,17 +73,22 @@ Widget ezDropList({
   double padding = AppConfig.prefs[paddingKey];
 
   return ExpansionTile(
-    tilePadding: EdgeInsets.all(padding),
-    childrenPadding: EdgeInsets.only(left: padding, right: padding),
-    collapsedBackgroundColor: themeColor,
-    collapsedTextColor: themeTextColor,
-    collapsedIconColor: themeTextColor,
-    backgroundColor: themeColor,
-    textColor: themeTextColor,
-    iconColor: themeTextColor,
+    // Title
     title: Text(title, style: titleStyle),
+    tilePadding: EdgeInsets.all(padding),
+
+    // Body
     children: body,
+    childrenPadding: EdgeInsets.only(left: padding, right: padding),
     initiallyExpanded: open,
     onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
+
+    // Theme
+    backgroundColor: themeColor,
+    collapsedBackgroundColor: themeColor,
+    textColor: themeTextColor,
+    collapsedTextColor: themeTextColor,
+    iconColor: themeTextColor,
+    collapsedIconColor: themeTextColor,
   );
 }
