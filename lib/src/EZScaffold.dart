@@ -14,6 +14,8 @@ enum ScaffoldType {
 
 class EZScaffold extends StatelessWidget {
   final Widget title;
+  final Widget? leading;
+  final List<Widget>? trailingActions;
   final bool? automaticallyImplyLeading;
   final DecorationImage? backgroundImage;
   final Color backgroundColor;
@@ -31,6 +33,8 @@ class EZScaffold extends StatelessWidget {
   /// and a [CupertinoActionSheet] for Cupertino
   EZScaffold({
     required this.title,
+    this.leading,
+    this.trailingActions,
     this.automaticallyImplyLeading,
     this.backgroundImage,
     required this.backgroundColor,
@@ -50,6 +54,8 @@ class EZScaffold extends StatelessWidget {
   EZScaffold.nav(
     BuildContext context, {
     required this.title,
+    this.leading,
+    this.trailingActions,
     this.automaticallyImplyLeading,
     required this.body,
     required this.index,
@@ -101,6 +107,8 @@ class EZScaffold extends StatelessWidget {
         // App bar
         appBar: PlatformAppBar(
           title: title,
+          leading: leading,
+          trailingActions: trailingActions,
           automaticallyImplyLeading: automaticallyImplyLeading,
           cupertino: (context, platform) => CupertinoNavigationBarData(
             trailing: ezDrawer(
