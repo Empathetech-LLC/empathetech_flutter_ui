@@ -62,9 +62,29 @@ Widget ezTileList(
   );
 }
 
-Widget ezDropList(
-  BuildContext context, {
+Widget ezDropList({
   required String title,
+  required List<Widget> body,
+  bool open = false,
 }) {
-  return Container();
+  TextStyle titleStyle = getTextStyle(titleStyleKey);
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  double padding = AppConfig.prefs[paddingKey];
+
+  return ExpansionTile(
+    tilePadding: EdgeInsets.all(padding),
+    childrenPadding: EdgeInsets.only(left: padding, right: padding),
+    collapsedBackgroundColor: themeColor,
+    collapsedTextColor: themeTextColor,
+    collapsedIconColor: themeTextColor,
+    backgroundColor: themeColor,
+    textColor: themeTextColor,
+    iconColor: themeTextColor,
+    title: Text(title, style: titleStyle),
+    children: body,
+    initiallyExpanded: open,
+    onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
+  );
 }
