@@ -87,3 +87,50 @@ Widget ezCancel(
   Icon icon = customIcon ?? ezIcon(PlatformIcons(context).clear);
   return EZButton.icon(action: onCancel, icon: icon, message: cancelMsg);
 }
+
+/// Styles an [ExpansionTile] with [AppConfig.prefs]
+Widget ezDropList({
+  required String title,
+  required List<Widget> body,
+  bool open = false,
+}) {
+  TextStyle titleStyle = getTextStyle(titleStyleKey);
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  double padding = AppConfig.prefs[paddingKey];
+
+  return ExpansionTile(
+    // Title
+    title: Text(title, style: titleStyle),
+    tilePadding: EdgeInsets.all(padding),
+
+    // Body
+    children: body,
+    childrenPadding: EdgeInsets.only(left: padding, right: padding),
+    initiallyExpanded: open,
+    onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
+
+    // Theme
+    backgroundColor: themeColor,
+    collapsedBackgroundColor: themeColor,
+    textColor: themeTextColor,
+    collapsedTextColor: themeTextColor,
+    iconColor: themeTextColor,
+    collapsedIconColor: themeTextColor,
+  );
+}
+
+/// Styles a [PopupMenuButton] with [AppConfig.prefs]
+Widget ezPopup({
+  required String title,
+  required List<PopupMenuItem> body,
+}) {
+  return PopupMenuButton(
+    itemBuilder: (BuildContext context) => body,
+    child: Padding(
+      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+      child: Text(title, style: getTextStyle(titleStyleKey)),
+    ),
+  );
+}
