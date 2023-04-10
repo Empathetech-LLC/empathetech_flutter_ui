@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -73,10 +74,22 @@ class AppConfig {
 
   /// Populate [AppConfig.prefs], overwriting defaults whenever a user value is found
   /// Optionally expand the user customizable values with [customDefaults]
-  static void init({
+  static Future<void> init({
     required List<String> assetPaths,
     Map<String, dynamic>? customDefaults,
-  }) {
+    List<DeviceOrientation>? orientations,
+  }) async {
+    List<DeviceOrientation> allOptions = [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ];
+    SystemChrome.setPreferredOrientations(orientations ?? allOptions);
+
+    focus = FocusManager.instance;
+    preferences = await SharedPreferences.getInstance();
+
     // Load asset paths
     assets = assetPaths;
 
