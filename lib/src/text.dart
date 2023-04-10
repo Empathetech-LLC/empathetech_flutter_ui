@@ -9,12 +9,15 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Text that values its personal space
 /// And requires a [TextStyle], for wide [TargetPlatform] support
+/// Optionally provide [textAlign]
+/// Optionally overwrite the transparent [background] color
+/// Optionally provide a [navTo] function (ie: [pushScreen]) to make the text an internal link
 Widget ezText(
   String text, {
   required TextStyle style,
   TextAlign? textAlign,
   Color background = Colors.transparent,
-  void Function()? clickable,
+  Future<dynamic>? navTo,
 }) {
   double padding = AppConfig.prefs[paddingKey] / 2.0;
 
@@ -30,9 +33,9 @@ Widget ezText(
     ),
   );
 
-  return (clickable != null)
+  return (navTo != null)
       ? GestureDetector(
-          onTap: clickable,
+          onTap: () => navTo,
           child: textBody,
         )
       : textBody;
