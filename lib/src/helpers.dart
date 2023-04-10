@@ -43,6 +43,22 @@ Color getContrastColor(Color background) {
 /// Then do nothing!
 void doNothing() {}
 
+/// Quick [MouseRegion] && [GestureDetector] combo
+Widget ezClickable({
+  required Widget child,
+  void Function()? onTap,
+  void Function()? onLongPress,
+}) {
+  return MouseRegion(
+    cursor: SystemMouseCursors.click,
+    child: GestureDetector(
+      onTap: onTap,
+      onLongPress: onLongPress,
+      child: child,
+    ),
+  );
+}
+
 /// More readable than [Navigator] spelled out
 Future<dynamic> pushScreen(
   BuildContext context, {
