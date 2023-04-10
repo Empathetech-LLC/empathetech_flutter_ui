@@ -74,7 +74,7 @@ class AppConfig {
 
   /// Populate [AppConfig.prefs], overwriting defaults whenever a user value is found
   /// Optionally expand the user customizable values with [customDefaults]
-  static Future<void> init({
+  static void init({
     required List<String> assetPaths,
     Map<String, dynamic>? customDefaults,
     List<DeviceOrientation>? orientations,
