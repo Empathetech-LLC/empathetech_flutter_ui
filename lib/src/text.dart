@@ -14,10 +14,11 @@ Widget ezText(
   required TextStyle style,
   TextAlign? textAlign,
   Color background = Colors.transparent,
+  void Function()? clickable,
 }) {
   double padding = AppConfig.prefs[paddingKey] / 2.0;
 
-  return Padding(
+  Widget textBody = Padding(
     padding: EdgeInsets.all(padding),
     child: Container(
       decoration: BoxDecoration(
@@ -28,6 +29,13 @@ Widget ezText(
       child: Text(text, style: style, textAlign: textAlign),
     ),
   );
+
+  return (clickable != null)
+      ? GestureDetector(
+          onTap: clickable,
+          child: textBody,
+        )
+      : textBody;
 }
 
 /// Styles an [Icon] from [AppConfig.prefs]
