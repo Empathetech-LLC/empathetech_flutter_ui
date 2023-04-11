@@ -11,10 +11,7 @@ class EzAppBar extends PlatformAppBar {
   final bool? automaticallyImplyLeading;
   final Widget? leading;
   final Widget title;
-  final List<Widget>? trailingActions;
-  final EzDrawer? endDrawer;
-  final MaterialAppBarData? materialData;
-  final CupertinoNavigationBarData? cupertinoData;
+  final Widget? trailing;
 
   /// Styles a [PlatformAppBar] with [EzConfig.prefs]
   EzAppBar({
@@ -23,26 +20,20 @@ class EzAppBar extends PlatformAppBar {
     this.automaticallyImplyLeading,
     this.leading,
     required this.title,
-    this.trailingActions,
-    this.endDrawer,
-    this.materialData,
-    this.cupertinoData,
+    this.trailing,
   }) : super(
           // Widgets
           automaticallyImplyLeading: automaticallyImplyLeading,
           leading: leading,
           title: title,
-          trailingActions: trailingActions,
 
           // Color
           backgroundColor: Color(EzConfig.prefs[themeColorKey]),
 
           // Platform configs
-          material: (context, platform) => materialData ?? MaterialAppBarData(),
-          cupertino: (context, platform) =>
-              cupertinoData ??
-              CupertinoNavigationBarData(
-                trailing: endDrawer,
-              ),
+          // Material is handled in EzScaffold.dart
+          cupertino: (context, platform) => CupertinoNavigationBarData(
+            trailing: trailing,
+          ),
         );
 }

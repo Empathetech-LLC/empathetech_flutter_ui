@@ -17,8 +17,6 @@ class EzScaffold extends StatelessWidget {
   final Key? widgetKey;
   final BoxDecoration background;
   final PlatformAppBar appBar;
-  final EzDrawer? drawer;
-  final EzDrawer? endDrawer;
   final Widget body;
   final Widget? fab;
   final int? index;
@@ -33,8 +31,6 @@ class EzScaffold extends StatelessWidget {
     this.widgetKey,
     required this.background,
     required this.appBar,
-    this.drawer,
-    this.endDrawer,
     required this.body,
     this.fab,
     this.index,
@@ -49,8 +45,6 @@ class EzScaffold extends StatelessWidget {
     this.widgetKey,
     required this.background,
     required this.appBar,
-    this.drawer,
-    this.endDrawer,
     required this.body,
     this.fab,
     required this.index,
@@ -65,8 +59,6 @@ class EzScaffold extends StatelessWidget {
     this.widgetKey,
     required this.background,
     required this.appBar,
-    this.drawer,
-    this.endDrawer,
     required this.body,
     this.fab,
     this.index,
@@ -95,8 +87,6 @@ class EzScaffold extends StatelessWidget {
             decoration: background,
             child: SafeArea(child: body),
           ),
-          drawer: drawer,
-          endDrawer: endDrawer,
           floatingActionButton: fab,
         ),
         cupertino: (context, platform) => CupertinoPageScaffoldData(
