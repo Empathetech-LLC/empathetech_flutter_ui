@@ -11,3 +11,4 @@ export 'EzImageSetting.dart';
 export 'EzNotifications.dart';
 export 'EzScaffold.dart';
 export 'EzSliderSetting.dart';
+export 'EzWebScaffold.dart';
