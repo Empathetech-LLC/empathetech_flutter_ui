@@ -54,8 +54,8 @@ Color getContrastColor(Color background) {
 }
 
 /// More readable than [Navigator] spelled out
-Future<dynamic> pushScreen(
-  BuildContext context, {
+Future<dynamic> pushScreen({
+  required BuildContext context,
   required Widget screen,
 }) {
   return Navigator.of(context).push(
@@ -67,16 +67,16 @@ Future<dynamic> pushScreen(
 }
 
 /// More readable than Navigator.of(context).pop()
-void popScreen(
-  BuildContext context, {
+void popScreen({
+  required BuildContext context,
   dynamic pass,
 }) {
   return Navigator.of(context).pop(pass);
 }
 
 /// More readable than [Navigator] spelled out
-Future<dynamic> popAndPushScreen(
-  BuildContext context, {
+Future<dynamic> popAndPushScreen({
+  required BuildContext context,
   required Widget screen,
 }) {
   Navigator.of(context).pop();
@@ -90,8 +90,8 @@ Future<dynamic> popAndPushScreen(
 }
 
 /// More readable than [Navigator] spelled out
-Future<dynamic> replaceScreen(
-  BuildContext context, {
+Future<dynamic> replaceScreen({
+  required BuildContext context,
   required Widget screen,
 }) {
   return Navigator.of(context).pushReplacement(

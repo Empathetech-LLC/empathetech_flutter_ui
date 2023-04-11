@@ -114,8 +114,8 @@ DecorationImage? buildDecoration(String? path) {
 }
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<String?> changeImage(
-  BuildContext context, {
+Future<String?> changeImage({
+  required BuildContext context,
   required String prefsPath,
   required ImageSource source,
 }) async {

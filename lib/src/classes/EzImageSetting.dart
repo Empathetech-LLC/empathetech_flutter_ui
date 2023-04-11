@@ -59,12 +59,12 @@ class _ImageSettingState extends State<EzImageSetting> {
       EZButton.icon(
         action: () async {
           String? changed = await changeImage(
-            context,
+            context: context,
             prefsPath: widget.prefsKey,
             source: ImageSource.gallery,
           );
 
-          popScreen(context, pass: changed);
+          popScreen(context: context, pass: changed);
         },
         message: 'File',
         icon: ezIcon(PlatformIcons(context).folder),
@@ -75,12 +75,12 @@ class _ImageSettingState extends State<EzImageSetting> {
       EZButton.icon(
         action: () async {
           String? changed = await changeImage(
-            context,
+            context: context,
             prefsPath: widget.prefsKey,
             source: ImageSource.camera,
           );
 
-          popScreen(context, pass: changed);
+          popScreen(context: context, pass: changed);
         },
         message: 'Camera',
         icon: ezIcon(PlatformIcons(context).photoCamera),
@@ -93,7 +93,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           _cleanup();
 
           EzConfig.preferences.remove(widget.prefsKey);
-          popScreen(context, pass: EzConfig.defaults[widget.prefsKey]);
+          popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
         message: 'Reset',
         icon: ezIcon(PlatformIcons(context).refresh),
@@ -108,14 +108,14 @@ class _ImageSettingState extends State<EzImageSetting> {
             _cleanup();
 
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
-            popScreen(context, pass: noImageKey);
+            popScreen(context: context, pass: noImageKey);
           },
           message: 'Clear',
           icon: ezIcon(PlatformIcons(context).clear),
         ),
       ]);
 
-    return ezDialog(context, title: 'Update $title', content: options);
+    return ezDialog(context: context, title: 'Update $title', content: options);
   }
 
   @override
@@ -129,7 +129,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           });
       },
       longAction: () => ezDialog(
-        context,
+        context: context,
         title: 'Credit to:',
         content: [ezText(widget.credits, style: getTextStyle(dialogContentStyleKey))],
       ),

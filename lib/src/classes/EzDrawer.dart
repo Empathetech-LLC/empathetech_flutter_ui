@@ -10,7 +10,6 @@ class EzDrawer extends StatelessWidget {
   final Key? key;
   final double? elevation;
   final String? semanticLabel;
-  final PlatformTarget platform;
   final Widget header;
   final List<Widget> body;
   final bool forceMaterial;
@@ -23,7 +22,6 @@ class EzDrawer extends StatelessWidget {
     this.key,
     this.elevation,
     this.semanticLabel,
-    required this.platform,
     required this.header,
     required this.body,
     this.forceMaterial = false,
@@ -81,7 +79,7 @@ class EzDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     if (forceMaterial) {
       return _materialWidget();
-    } else if (platform == PlatformTarget.iOS || platform == PlatformTarget.macOS) {
+    } else if (isCupertino(context)) {
       return GestureDetector(
         onTap: () => showCupertinoModalPopup(
           context: context,

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 /// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
 /// The text is "naked"; wrap in a container if necessary
-Widget loadingMessage(
-  BuildContext context, {
+Widget loadingMessage({
+  required BuildContext context,
   required Image image,
 }) {
   // Gather theme data
@@ -39,8 +39,8 @@ Widget loadingMessage(
 /// [titleCard] designed to grab attention for warnings...
 /// [Icon] 'WARNING' [Icon]
 ///        [content]
-Widget warningCard(
-  BuildContext context, {
+Widget warningCard({
+  required BuildContext context,
   required String warning,
 }) {
   Color iconColor = Color(EzConfig.prefs[alertColorKey]);
@@ -87,7 +87,7 @@ Future<dynamic> logAlert(
 ) {
   log(message);
   return ezDialog(
-    context,
+    context: context,
     title: 'Attention:',
     content: [ezText(message, style: getTextStyle(dialogContentStyleKey))],
   );

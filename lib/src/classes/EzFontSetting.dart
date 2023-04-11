@@ -24,7 +24,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
     return ezDialog(
-      context,
+      context: context,
       title: 'Choose a font',
       content: myGoogleFonts
           .map(
@@ -37,7 +37,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
                     setState(() {
                       currFontFamily = googleStyleAlias(font).fontFamily!;
                     });
-                    popScreen(context, pass: font);
+                    popScreen(context: context, pass: font);
                   },
                   body: Text(font, style: googleStyleAlias(font)),
                 ),

@@ -150,7 +150,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           EZButton(
             action: () => ezDialog(
-              context,
+              context: context,
               title: 'Space preview',
               content: [
                 // Button 1

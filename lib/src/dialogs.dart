@@ -7,8 +7,8 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Styles a [PlatformAlertDialog] from [EzConfig.prefs]
-Future<dynamic> ezDialog(
-  BuildContext context, {
+Future<dynamic> ezDialog({
+  required BuildContext context,
   required List<Widget> content,
   String? title,
   bool needsClose = true,
@@ -18,11 +18,11 @@ Future<dynamic> ezDialog(
   double padding = EzConfig.prefs[paddingKey];
 
   // Builds the title widget based on platform (Cupertino needs extra padding)
-  Widget? _title(PlatformTarget platform) {
+  Widget? _title() {
     if (title == null) {
       return null;
     } else {
-      if (platform == PlatformTarget.iOS || platform == PlatformTarget.macOS) {
+      if (isCupertino(context)) {
         return Container(
           padding: EdgeInsets.only(bottom: EzConfig.prefs[dialogSpacingKey]),
           child: Text(
@@ -49,7 +49,7 @@ Future<dynamic> ezDialog(
         insetPadding: EdgeInsets.all(padding),
 
         // Title
-        title: _title(platform),
+        title: _title(),
         titlePadding: EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
 
         // Content
@@ -60,7 +60,7 @@ Future<dynamic> ezDialog(
       // Cupertino (iOS)
       cupertino: (context, platform) => CupertinoAlertDialogData(
         // Title
-        title: _title(platform),
+        title: _title(),
 
         // Content
         content: ezScrollView(
@@ -68,7 +68,7 @@ Future<dynamic> ezDialog(
         actions: (needsClose)
             ? [
                 GestureDetector(
-                  onTap: () => popScreen(context),
+                  onTap: () => popScreen(context: context),
                   child: ezText(
                     'Close',
                     style: getTextStyle(dialogContentStyleKey),
@@ -83,15 +83,15 @@ Future<dynamic> ezDialog(
 }
 
 /// Wrap a [ColorPicker] in an [ezDialog]
-Future<dynamic> ezColorPicker(
-  BuildContext context, {
+Future<dynamic> ezColorPicker({
+  required BuildContext context,
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
   required void Function() apply,
   required void Function() cancel,
 }) {
   return ezDialog(
-    context,
+    context: context,
     title: 'Pick a color!',
     content: [
       ColorPicker(
@@ -103,7 +103,7 @@ Future<dynamic> ezColorPicker(
       ),
       Container(height: EzConfig.prefs[dialogSpacingKey]),
       ezYesNo(
-        context,
+        context: context,
         onConfirm: apply,
         onDeny: cancel,
         axis: Axis.vertical,

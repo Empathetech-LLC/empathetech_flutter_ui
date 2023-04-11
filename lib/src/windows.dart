@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Builds the "main screen" for pages built with [EzScaffold.standard]
-Widget standardWindow(
-  BuildContext context, {
-  required Color backgroundColor,
+Widget standardWindow({
+  required BuildContext context,
   DecorationImage? backgroundImage,
   required Widget body,
 }) {
@@ -17,7 +16,7 @@ Widget standardWindow(
     height: screenHeight(context),
 
     // Background
-    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+    decoration: BoxDecoration(image: backgroundImage),
 
     // Build space
     child: Container(
@@ -28,11 +27,10 @@ Widget standardWindow(
 }
 
 /// Builds the "main screen" for pages built with [EzScaffold.nav]
-Widget navWindow(
-  BuildContext context, {
+Widget navWindow({
+  required BuildContext context,
   required Widget body,
   required DecorationImage? backgroundImage,
-  required Color backgroundColor,
 }) {
   double margin = EzConfig.prefs[marginKey];
 
@@ -41,7 +39,7 @@ Widget navWindow(
     width: screenWidth(context),
 
     // Background
-    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+    decoration: BoxDecoration(image: backgroundImage),
 
     // Build space
     child: Container(child: body, margin: EdgeInsets.all(margin)),
@@ -49,8 +47,8 @@ Widget navWindow(
 }
 
 /// Builds the "main screen" for pages built with [EzScaffold.web]
-Widget webWindow(
-  BuildContext context, {
+Widget webWindow({
+  required BuildContext context,
   required Color backgroundColor,
   DecorationImage? backgroundImage,
   required Widget body,

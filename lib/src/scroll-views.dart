@@ -35,8 +35,8 @@ Widget ezScrollView({
 
 /// Wraps [PlatformListTile]s in an [ezScrollView] with a [title]
 /// Optionally provide a height limit, 1/3 [screenHeight] will be used as default
-Widget ezTileList(
-  BuildContext context, {
+Widget ezTileList({
+  required BuildContext context,
   required String title,
   required List<PlatformListTile> items,
   double? customHeight,
