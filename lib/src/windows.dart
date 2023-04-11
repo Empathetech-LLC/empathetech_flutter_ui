@@ -2,13 +2,14 @@ library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Builds the "main screen" for pages built with [EzScaffold.standard]
 Widget standardWindow({
   required BuildContext context,
-  DecorationImage? backgroundImage,
+  BoxDecoration? background,
   required Widget body,
 }) {
   return Container(
@@ -16,7 +17,7 @@ Widget standardWindow({
     height: screenHeight(context),
 
     // Background
-    decoration: BoxDecoration(image: backgroundImage),
+    decoration: background,
 
     // Build space
     child: Container(
@@ -30,7 +31,7 @@ Widget standardWindow({
 Widget navWindow({
   required BuildContext context,
   required Widget body,
-  required DecorationImage? backgroundImage,
+  BoxDecoration? background,
 }) {
   double margin = EzConfig.prefs[marginKey];
 
@@ -39,7 +40,7 @@ Widget navWindow({
     width: screenWidth(context),
 
     // Background
-    decoration: BoxDecoration(image: backgroundImage),
+    decoration: background,
 
     // Build space
     child: Container(child: body, margin: EdgeInsets.all(margin)),
@@ -50,7 +51,7 @@ Widget navWindow({
 Widget webWindow({
   required BuildContext context,
   required Color backgroundColor,
-  DecorationImage? backgroundImage,
+  BoxDecoration? background,
   required Widget body,
 }) {
   return Container(
@@ -58,12 +59,56 @@ Widget webWindow({
     height: screenHeight(context),
 
     // Background
-    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
+    decoration: background,
 
     // Build space
     child: Container(
       child: body,
       margin: EdgeInsets.all(EzConfig.prefs[marginKey]),
+    ),
+  );
+}
+
+BoxDecoration? imageBackground(String? path) {
+  if (path == null || path == noImageKey) {
+    return null;
+  } else if (isAsset(path)) {
+    return BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(path),
+        fit: BoxFit.fill,
+      ),
+    );
+  } else {
+    return BoxDecoration(
+      image: DecorationImage(
+        image: FileImage(File(path)),
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+}
+
+/// Build a solid color background from [colorKey]s [EzConfig.prefs] value
+BoxDecoration colorBackground({
+  required String colorKey,
+}) {
+  return BoxDecoration(color: EzConfig.prefs[colorKey]);
+}
+
+/// Quickly build a color gradient background
+BoxDecoration gradientBackground({
+  required List<Color> colors,
+  Alignment begin = Alignment.topCenter,
+  Alignment end = Alignment.bottomCenter,
+  List<double>? stops,
+}) {
+  return BoxDecoration(
+    gradient: LinearGradient(
+      begin: begin,
+      end: end,
+      colors: colors,
+      stops: stops,
     ),
   );
 }

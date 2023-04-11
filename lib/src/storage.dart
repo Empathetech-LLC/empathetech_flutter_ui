@@ -96,23 +96,6 @@ Image buildImage({
   }
 }
 
-/// [DecorationImage] wrapper for setting the background image in [EzScaffold]s and the like
-DecorationImage? buildDecoration(String? path) {
-  if (path == null || path == noImageKey) {
-    return null;
-  } else if (isAsset(path)) {
-    return DecorationImage(
-      image: AssetImage(path),
-      fit: BoxFit.fill,
-    );
-  } else {
-    return DecorationImage(
-      image: FileImage(File(path)),
-      fit: BoxFit.fill,
-    );
-  }
-}
-
 /// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<String?> changeImage({
   required BuildContext context,
