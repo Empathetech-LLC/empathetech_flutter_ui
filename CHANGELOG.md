@@ -2,10 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.5] - 2023-XX-XX
+## [2.0.0] - 2023-04-XX
 ### Added
 - Flutter analyze GitHub Action
 - Donations section to README
+
+### Changed
+- Most of everything, lots of breaking changes
+  - Hence 2.0.0
 
 ## [1.1.4] - 2023-03-31
 ### Fixed
