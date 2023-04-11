@@ -15,7 +15,7 @@ enum ScaffoldType {
 class EzScaffold extends StatelessWidget {
   final Key? key;
   final Key? widgetKey;
-  final Color backgroundColor;
+  final BoxDecoration backgroundDecoration;
   final PlatformAppBar appBar;
   final EzDrawer? drawer;
   final EzDrawer? endDrawer;
@@ -31,7 +31,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold({
     this.key,
     this.widgetKey,
-    required this.backgroundColor,
+    required this.backgroundDecoration,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -47,7 +47,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold.nav({
     this.key,
     this.widgetKey,
-    required this.backgroundColor,
+    required this.backgroundDecoration,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -63,7 +63,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold.web({
     this.key,
     this.widgetKey,
-    required this.backgroundColor,
+    required this.backgroundDecoration,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -88,29 +88,34 @@ class EzScaffold extends StatelessWidget {
 
       child: PlatformScaffold(
         appBar: appBar,
-        backgroundColor: backgroundColor,
 
         // Body
         material: (context, platform) => MaterialScaffoldData(
-          body: SafeArea(child: body),
+          body: Container(
+            decoration: backgroundDecoration,
+            child: SafeArea(child: body),
+          ),
           drawer: drawer,
           endDrawer: endDrawer,
           floatingActionButton: fab,
         ),
         cupertino: (context, platform) => CupertinoPageScaffoldData(
-          body: SafeArea(
-            child: (fab == null)
-                ? body
-                : Stack(
-                    children: [
-                      body,
-                      Positioned(
-                        bottom: 16.0 + margin,
-                        right: 16.0 + margin,
-                        child: fab ?? Container(),
-                      ),
-                    ],
-                  ),
+          body: Container(
+            decoration: backgroundDecoration,
+            child: SafeArea(
+              child: (fab == null)
+                  ? body
+                  : Stack(
+                      children: [
+                        body,
+                        Positioned(
+                          bottom: 16.0 + margin,
+                          right: 16.0 + margin,
+                          child: fab ?? Container(),
+                        ),
+                      ],
+                    ),
+            ),
           ),
         ),
 
