@@ -16,7 +16,7 @@ class EzScaffold extends StatelessWidget {
   final Key? key;
   final Key? widgetKey;
   final BoxDecoration background;
-  final PlatformAppBar appBar;
+  final EzAppBar appBar;
   final Widget body;
   final Widget? fab;
   final int? index;
@@ -83,6 +83,7 @@ class EzScaffold extends StatelessWidget {
 
         // Body
         material: (context, platform) => MaterialScaffoldData(
+          endDrawer: (appBar.trailing is EzDrawer) ? appBar.trailing : null,
           body: Container(
             decoration: background,
             child: SafeArea(child: body),
