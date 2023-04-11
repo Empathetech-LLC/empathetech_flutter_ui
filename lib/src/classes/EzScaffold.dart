@@ -5,13 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Enumerator for selecting the type of Scaffold that is being built
-enum ScaffoldType {
-  standard,
-  nav,
-  web,
-}
-
 class EzScaffold extends StatelessWidget {
   final Key? key;
   final Key? widgetKey;
@@ -51,20 +44,6 @@ class EzScaffold extends StatelessWidget {
     required this.items,
     required this.onChanged,
   }) : assert(index != null && onChanged != null && items != null);
-
-  /// [EzScaffold] designed for use on web
-  /// It's recommended to use [webWindow] for the [body]
-  EzScaffold.web({
-    this.key,
-    this.widgetKey,
-    required this.background,
-    required this.appBar,
-    required this.body,
-    this.fab,
-    this.index,
-    this.onChanged,
-    this.items,
-  });
 
   @override
   Widget build(BuildContext context) {
