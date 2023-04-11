@@ -65,13 +65,14 @@ class EzDrawer extends StatelessWidget {
   Drawer _materialWidget() {
     Color themeColor = Color(EzConfig.prefs[themeColorKey]);
 
-    body.insert(0, DrawerHeader(child: header));
     return Drawer(
       key: key,
       elevation: elevation,
       semanticLabel: semanticLabel,
       backgroundColor: themeColor,
-      child: ezScrollView(children: body),
+      child: ezScrollView(
+        children: [DrawerHeader(child: header), ...body],
+      ),
     );
   }
 
