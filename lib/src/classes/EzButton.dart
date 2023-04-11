@@ -98,12 +98,48 @@ class EZButton extends StatelessWidget {
     return style;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    Widget ezBody = _buildBody();
+    ButtonStyle ezStyle = _buildStyle();
+
+    Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
+        Color(AppConfig.prefs[buttonColorKey]);
+
+    return (forceMaterial)
+        ? ElevatedButton(
+            onPressed: action,
+            onLongPress: longAction,
+            child: ezBody,
+            style: ezStyle,
+          )
+        : GestureDetector(
+            onLongPress: longAction,
+            child: PlatformElevatedButton(
+              onPressed: action,
+              color: resolvedColor,
+
+              // Android config
+              material: (context, platform) => MaterialElevatedButtonData(
+                child: ezBody,
+                style: ezStyle,
+              ),
+
+              // iOS config
+              cupertino: (context, platform) => m2cButton(
+                child: ezBody,
+                materialBase: ezStyle,
+              ),
+            ),
+          );
+  }
+
   /// Builds a [CupertinoActionSheetAction] from this button's values
   CupertinoActionSheetAction toAction() {
     /// Merge each child widget with the dialog content [TextStyle]
     Widget buildChild() {
       switch (this.body.runtimeType) {
-        case Row:
+        case Row: // aka EzButton.icon
           return Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -153,41 +189,5 @@ class EZButton extends StatelessWidget {
         child: buildChild(),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Widget ezBody = _buildBody();
-    ButtonStyle ezStyle = _buildStyle();
-
-    Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
-        Color(AppConfig.prefs[buttonColorKey]);
-
-    return (forceMaterial)
-        ? ElevatedButton(
-            onPressed: action,
-            onLongPress: longAction,
-            child: ezBody,
-            style: ezStyle,
-          )
-        : GestureDetector(
-            onLongPress: longAction,
-            child: PlatformElevatedButton(
-              onPressed: action,
-              color: resolvedColor,
-
-              // Android config
-              material: (context, platform) => MaterialElevatedButtonData(
-                child: ezBody,
-                style: ezStyle,
-              ),
-
-              // iOS config
-              cupertino: (context, platform) => m2cButton(
-                child: ezBody,
-                materialBase: ezStyle,
-              ),
-            ),
-          );
   }
 }
