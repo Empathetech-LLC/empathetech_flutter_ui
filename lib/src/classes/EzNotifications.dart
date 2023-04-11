@@ -37,7 +37,7 @@ const iosNotifDetails = DarwinNotificationDetails(
 
 /// Setup a simple push notification manager/service
 /// Built from [flutter_local_notifications]
-class NotificationService {
+class EzNotifications {
   // Build app settings
 
   final appInitSettings = InitializationSettings(

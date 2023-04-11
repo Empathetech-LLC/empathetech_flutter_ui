@@ -16,7 +16,7 @@ class EzAppBar extends StatelessWidget {
   final MaterialAppBarData? materialData;
   final CupertinoNavigationBarData? cupertinoData;
 
-  /// Styles a [PlatformAppBar] with [AppConfig.prefs]
+  /// Styles a [PlatformAppBar] with [EzConfig.prefs]
   EzAppBar({
     this.key,
     this.widgetKey,
@@ -39,7 +39,7 @@ class EzAppBar extends StatelessWidget {
       trailingActions: trailingActions,
 
       // Color
-      backgroundColor: Color(AppConfig.prefs[themeColorKey]),
+      backgroundColor: Color(EzConfig.prefs[themeColorKey]),
 
       // Platform configs
       material: (context, platform) => materialData ?? MaterialAppBarData(),

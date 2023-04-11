@@ -6,12 +6,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Material (Android) [ThemeData] built from [AppConfig.prefs]
+const String homeRoute = '/';
+
+class EzApp extends PlatformProvider {
+  final String appTitle;
+  final Map<String, Widget Function(BuildContext)> routes;
+
+  /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
+  EzApp({
+    required this.appTitle,
+    required this.routes,
+  }) : super(
+          builder: (context) => PlatformApp(
+            debugShowCheckedModeBanner: false,
+            title: appTitle,
+            routes: routes,
+            localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+              DefaultMaterialLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+              DefaultCupertinoLocalizations.delegate,
+            ],
+            material: (context, platform) => materialAppTheme(),
+            cupertino: (context, platform) => cupertinoAppTheme(),
+          ),
+          settings: PlatformSettingsData(iosUsesMaterialWidgets: true),
+        );
+}
+
+/// Material (Android) [ThemeData] built from [EzConfig.prefs]
 MaterialAppData materialAppTheme() {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-  Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
+  Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
   TextStyle dialogTitleText = getTextStyle(dialogTitleStyleKey);
   TextStyle dialogContentText = getTextStyle(dialogContentStyleKey);
@@ -78,8 +105,8 @@ MaterialAppData materialAppTheme() {
 
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
 CupertinoAppData cupertinoAppTheme() {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
   return CupertinoAppData(
     color: themeColor,
@@ -88,36 +115,5 @@ CupertinoAppData cupertinoAppTheme() {
       primaryContrastingColor: themeTextColor,
       textTheme: cupertinoTextTheme(),
     ),
-  );
-}
-
-/// Material (Android) [ElevatedButton] style built from [AppConfig.prefs]
-ButtonStyle materialButton({OutlinedBorder? shape}) {
-  return ElevatedButton.styleFrom(
-    backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
-    foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
-    textStyle: getTextStyle(buttonStyleKey),
-    padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-    side: BorderSide(color: Color(AppConfig.prefs[buttonColorKey])),
-    shape: shape,
-  );
-}
-
-/// Cupertino (iOS) [ElevatedButton] data built [from] the passed in Material [ButtonStyle]
-CupertinoElevatedButtonData m2cButton({
-  required ButtonStyle materialBase,
-  required Widget child,
-}) {
-  Color resolvedColor = materialBase.backgroundColor!.resolve({MaterialState.pressed}) ??
-      Color(AppConfig.prefs[buttonColorKey]);
-
-  EdgeInsetsGeometry padding = materialBase.padding!.resolve({MaterialState.pressed}) ??
-      EdgeInsets.all(AppConfig.prefs[paddingKey]);
-
-  return CupertinoElevatedButtonData(
-    child: child,
-    color: resolvedColor,
-    padding: padding,
-    borderRadius: (materialBase.shape != null) ? BorderRadius.circular(30.0) : null,
   );
 }

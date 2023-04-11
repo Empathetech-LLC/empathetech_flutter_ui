@@ -5,11 +5,12 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Creates a tool for updating the value of [toControl]
-/// The [ColorSetting] title is the passed [message] and is paired with a
-/// preview of the starting color ([toControl]) which, on click, opens a [colorPicker]
-class ColorSetting extends StatefulWidget {
-  const ColorSetting({
+class EzColorSetting extends StatefulWidget {
+  /// Creates a tool for updating the value of [toControl]
+  /// The [EzColorSetting] title is the passed [message] and is paired with a
+  /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
+  /// If a [textBackgroundKey] is provided, it will be used to generate a recommended color pair
+  const EzColorSetting({
     Key? key,
     required this.toControl,
     required this.message,
@@ -24,17 +25,15 @@ class ColorSetting extends StatefulWidget {
   _ColorSettingState createState() => _ColorSettingState();
 }
 
-class _ColorSettingState extends State<ColorSetting> {
-  // Gather theme data
-
-  late Color currColor = Color(AppConfig.prefs[widget.toControl]);
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+class _ColorSettingState extends State<EzColorSetting> {
+  late Color currColor = Color(EzConfig.prefs[widget.toControl]);
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color.value] of what was chosen (null otherwise)
-  Future<dynamic> openColorPicker() {
+  Future<dynamic> _openColorPicker() {
     return ezColorPicker(
       context,
       startColor: currColor,
@@ -45,7 +44,7 @@ class _ColorSettingState extends State<ColorSetting> {
       },
       apply: () {
         // Update the users setting
-        AppConfig.preferences.setInt(widget.toControl, currColor.value);
+        EzConfig.preferences.setInt(widget.toControl, currColor.value);
         popScreen(context, pass: currColor.value);
       },
       cancel: () => popScreen(context),
@@ -53,16 +52,15 @@ class _ColorSettingState extends State<ColorSetting> {
   }
 
   /// Opens an [ezColorPicker] for updating [currColor]
-  /// If a [textBackground] is provided, it will be used to generate a recommended color pair
   /// Returns the [Color.value] of what was chosen (null otherwise)
-  Future<dynamic> changeColor() {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  Future<dynamic> _changeColor() {
+    double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     if (widget.textBackgroundKey != null) {
       String pathKey = widget.textBackgroundKey as String;
       Color backgroundColor =
-          Color(AppConfig.preferences.getInt(pathKey) ?? AppConfig.prefs[pathKey]);
+          Color(EzConfig.preferences.getInt(pathKey) ?? EzConfig.prefs[pathKey]);
       int recommended = getContrastColor(backgroundColor).value;
 
       return ezDialog(
@@ -83,14 +81,14 @@ class _ColorSettingState extends State<ColorSetting> {
           ezYesNo(
             context,
             onConfirm: () {
-              AppConfig.preferences.setInt(widget.toControl, recommended);
+              EzConfig.preferences.setInt(widget.toControl, recommended);
               setState(() {
                 currColor = Color(recommended);
               });
               popScreen(context, pass: recommended);
             },
             onDeny: () async {
-              dynamic chosen = await openColorPicker();
+              dynamic chosen = await _openColorPicker();
               popScreen(context, pass: chosen);
             },
             customDeny: ezIcon(PlatformIcons(context).edit),
@@ -102,16 +100,16 @@ class _ColorSettingState extends State<ColorSetting> {
         needsClose: true,
       );
     } else {
-      return openColorPicker();
+      return _openColorPicker();
     }
   }
 
-  /// Opens an [ezDialog] for confirming a reset to [widget.toControl]'s value in [AppConfig.defaults]
+  /// Opens an [ezDialog] for confirming a reset to [toControl]'s value in [EzConfig.defaults]
   /// A preview of the reset color is shown
-  /// Returns the [Color.value] of the "reset color" from [AppConfig.defaults] (null otherwise)
-  Future<dynamic> reset() {
-    Color resetColor = Color(AppConfig.defaults[widget.toControl]);
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  /// Returns the [Color.value] of the "reset color" from [EzConfig.defaults] (null otherwise)
+  Future<dynamic> _reset() {
+    Color resetColor = Color(EzConfig.defaults[widget.toControl]);
+    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     return ezDialog(
       context,
@@ -132,7 +130,7 @@ class _ColorSettingState extends State<ColorSetting> {
           context,
           onConfirm: () {
             // Remove the user's setting and reset the current state
-            AppConfig.preferences.remove(widget.toControl);
+            EzConfig.preferences.remove(widget.toControl);
 
             setState(() {
               currColor = resetColor;
@@ -160,17 +158,17 @@ class _ColorSettingState extends State<ColorSetting> {
           widget.message,
           style: getTextStyle(dialogTitleStyleKey),
           textAlign: TextAlign.center,
-          background: Color(AppConfig.prefs[themeColorKey]),
+          background: Color(EzConfig.prefs[themeColorKey]),
         ),
 
         // Color preview/edit button
         EZButton(
-          action: changeColor,
-          longAction: reset,
+          action: _changeColor,
+          longAction: _reset,
           body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
           customStyle: ElevatedButton.styleFrom(
             backgroundColor: currColor,
-            padding: EdgeInsets.all(AppConfig.prefs[paddingKey] * 2),
+            padding: EdgeInsets.all(EzConfig.prefs[paddingKey] * 2),
           ),
           forceMaterial: true,
         ),

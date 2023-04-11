@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting the type of Scaffold that is being built
@@ -13,148 +12,114 @@ enum ScaffoldType {
   web,
 }
 
-class EZScaffold extends StatelessWidget {
-  final bool? automaticallyImplyLeading;
-  final Widget? leading;
-  final Widget title;
-  final List<Widget>? trailingActions;
-  final DecorationImage? backgroundImage;
+class EzScaffold extends StatelessWidget {
+  final Key? key;
+  final Key? widgetKey;
   final Color backgroundColor;
+  final PlatformAppBar appBar;
+  final EzDrawer? drawer;
+  final EzDrawer? endDrawer;
   final Widget body;
-  final Widget? drawerHeader;
-  final List<Widget>? drawerBody;
   final Widget? fab;
   final int? index;
-  final void Function(int)? onChanged;
   final List<BottomNavigationBarItem>? items;
-  final ScaffoldType _type;
+  final void Function(int)? onChanged;
 
-  /// Builds a [PlatformScaffold] styled from [AppConfig.prefs]
-  /// [drawerHeader] and [drawerBody] are used to build an end [Drawer] for [Material]
-  /// and a [CupertinoActionSheet] for Cupertino
-  EZScaffold({
-    this.leading,
-    required this.title,
-    this.trailingActions,
-    this.automaticallyImplyLeading,
-    this.backgroundImage,
+  /// Standardizes building a [PlatformScaffold] styled from [EzConfig.prefs]
+  /// Handling platform differences, like [floatingActionButton]s on iOS
+  /// It's recommended to use [standardWindow] for the [body]
+  EzScaffold({
+    this.key,
+    this.widgetKey,
     required this.backgroundColor,
+    required this.appBar,
+    this.drawer,
+    this.endDrawer,
     required this.body,
-    this.drawerHeader,
-    this.drawerBody,
+    this.fab,
+    this.index,
+    this.items,
+    this.onChanged,
+  }) : assert(index == null && onChanged == null && items == null);
+
+  /// [EzScaffold] with a [PlatformNavBar]
+  /// It's recommended to use [navWindow] for the [body]
+  EzScaffold.nav({
+    this.key,
+    this.widgetKey,
+    required this.backgroundColor,
+    required this.appBar,
+    this.drawer,
+    this.endDrawer,
+    required this.body,
+    this.fab,
+    required this.index,
+    required this.items,
+    required this.onChanged,
+  }) : assert(index != null && onChanged != null && items != null);
+
+  /// [EzScaffold] designed for use on web
+  /// It's recommended to use [webWindow] for the [body]
+  EzScaffold.web({
+    this.key,
+    this.widgetKey,
+    required this.backgroundColor,
+    required this.appBar,
+    this.drawer,
+    this.endDrawer,
+    required this.body,
     this.fab,
     this.index,
     this.onChanged,
     this.items,
-  })  : _type = ScaffoldType.standard,
-        assert(index == null || onChanged != null);
-
-  /// Builds a [PlatformScaffold] with a [BottomNavigationBar]/[CupertinoTabBar]
-  /// from the passed values that will automatically update alongside [AppConfig]
-  /// use [navWindow] for the [body]
-  EZScaffold.nav(
-    BuildContext context, {
-    this.leading,
-    required this.title,
-    this.trailingActions,
-    this.automaticallyImplyLeading,
-    required this.body,
-    required this.index,
-    required this.onChanged,
-    required this.items,
-    this.drawerHeader,
-    this.drawerBody,
-    this.fab,
-    this.backgroundImage,
-  })  : _type = ScaffoldType.nav,
-        backgroundColor = Color(AppConfig.prefs[themeColorKey]),
-        assert(index != null && onChanged != null);
-
-  // Returns the appropriate body widget based on constructor variables
-  Widget buildBody(BuildContext context, ScaffoldType type) {
-    switch (type) {
-      case ScaffoldType.standard:
-        return Container(
-          width: screenWidth(context),
-          height: screenHeight(context),
-
-          // Background
-          decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
-
-          // Build space
-          child: Container(
-            child: body,
-            margin: EdgeInsets.all(AppConfig.prefs[marginKey]),
-          ),
-        );
-      case ScaffoldType.nav:
-        return body;
-    }
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
-    late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-    late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-    late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+    late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+    late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+    late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
-    late double margin = AppConfig.prefs[marginKey];
+    late double margin = EzConfig.prefs[marginKey];
 
     return GestureDetector(
       // Close open keyboard(s) on tap
-      onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
+      onTap: () => EzConfig.focus.primaryFocus?.unfocus(),
 
       child: PlatformScaffold(
-        // App bar
-        appBar: PlatformAppBar(
-          title: title,
-          leading: leading,
-          trailingActions: trailingActions,
-          automaticallyImplyLeading: automaticallyImplyLeading,
-          cupertino: (context, platform) => CupertinoNavigationBarData(
-            trailing: ezDrawer(
-              context,
-              platform: platform,
-              header: drawerHeader,
-              body: drawerBody,
-            ),
-          ),
-        ),
+        appBar: appBar,
+        backgroundColor: backgroundColor,
 
         // Body
         material: (context, platform) => MaterialScaffoldData(
-          body: buildBody(context, _type),
-          endDrawer: ezDrawer(
-            context,
-            platform: platform,
-            header: drawerHeader,
-            body: drawerBody,
-          ),
+          body: SafeArea(child: body),
+          drawer: drawer,
+          endDrawer: endDrawer,
           floatingActionButton: fab,
         ),
         cupertino: (context, platform) => CupertinoPageScaffoldData(
           body: SafeArea(
-            child: (fab != null)
-                ? Stack(
+            child: (fab == null)
+                ? body
+                : Stack(
                     children: [
-                      buildBody(context, _type),
+                      body,
                       Positioned(
                         bottom: 16.0 + margin,
                         right: 16.0 + margin,
                         child: fab ?? Container(),
                       ),
                     ],
-                  )
-                : buildBody(context, _type),
+                  ),
           ),
         ),
 
         // Nav bar
-        bottomNavBar: index != null && onChanged != null && items != null
+        bottomNavBar: (index != null && onChanged != null && items != null)
             ? PlatformNavBar(
-                currentIndex: index!,
-                itemChanged: onChanged!,
-                items: items!,
+                currentIndex: index,
+                itemChanged: onChanged,
+                items: items,
 
                 // Platform specific configurations
                 material: (context, platform) => MaterialNavBarData(
@@ -173,25 +138,4 @@ class EZScaffold extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Builds the "main screen" for and pages built with [EZScaffold.nav]
-Widget navWindow(
-  BuildContext context, {
-  required Widget body,
-  required DecorationImage? backgroundImage,
-  required Color backgroundColor,
-}) {
-  double margin = AppConfig.prefs[marginKey];
-
-  return Container(
-    height: screenHeight(context),
-    width: screenWidth(context),
-
-    // Background
-    decoration: BoxDecoration(color: backgroundColor, image: backgroundImage),
-
-    // Build space
-    child: Container(child: body, margin: EdgeInsets.all(margin)),
-  );
 }

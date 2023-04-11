@@ -13,7 +13,7 @@ class EZButton extends StatelessWidget {
   final ButtonStyle? customStyle;
   final bool forceMaterial;
 
-  /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
+  /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
   EZButton({
@@ -24,7 +24,7 @@ class EZButton extends StatelessWidget {
     this.forceMaterial = false,
   });
 
-  /// Styles a [PlatformElevatedButton] from [AppConfig.prefs]
+  /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]
   /// This constructor behaves like the Material [ElevatedButton.icon]
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
@@ -41,7 +41,7 @@ class EZButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             icon,
-            Container(width: AppConfig.prefs[paddingKey]),
+            Container(width: EzConfig.prefs[paddingKey]),
             Text(
               message,
               style: customTextStyle ?? getTextStyle(buttonStyleKey),
@@ -104,7 +104,7 @@ class EZButton extends StatelessWidget {
     ButtonStyle ezStyle = _buildStyle();
 
     Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
-        Color(AppConfig.prefs[buttonColorKey]);
+        Color(EzConfig.prefs[buttonColorKey]);
 
     return (forceMaterial)
         ? ElevatedButton(
@@ -155,7 +155,7 @@ class EZButton extends StatelessWidget {
                   case Icon:
                     return Icon(
                       (widget as Icon).icon,
-                      color: Color(AppConfig.prefs[themeTextColorKey]),
+                      color: Color(EzConfig.prefs[themeTextColorKey]),
                     );
                   default:
                     return widget;
@@ -174,7 +174,7 @@ class EZButton extends StatelessWidget {
         case Icon:
           return Icon(
             (this.body as Icon).icon,
-            color: Color(AppConfig.prefs[themeTextColorKey]),
+            color: Color(EzConfig.prefs[themeTextColorKey]),
           );
 
         default:
@@ -190,4 +190,35 @@ class EZButton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Material (Android) [ElevatedButton] style built from [EzConfig.prefs]
+ButtonStyle materialButton({OutlinedBorder? shape}) {
+  return ElevatedButton.styleFrom(
+    backgroundColor: Color(EzConfig.prefs[buttonColorKey]),
+    foregroundColor: Color(EzConfig.prefs[buttonTextColorKey]),
+    textStyle: getTextStyle(buttonStyleKey),
+    padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
+    side: BorderSide(color: Color(EzConfig.prefs[buttonColorKey])),
+    shape: shape,
+  );
+}
+
+/// Cupertino (iOS) [ElevatedButton] data built [from] the passed in Material [ButtonStyle]
+CupertinoElevatedButtonData m2cButton({
+  required ButtonStyle materialBase,
+  required Widget child,
+}) {
+  Color resolvedColor = materialBase.backgroundColor!.resolve({MaterialState.pressed}) ??
+      Color(EzConfig.prefs[buttonColorKey]);
+
+  EdgeInsetsGeometry padding = materialBase.padding!.resolve({MaterialState.pressed}) ??
+      EdgeInsets.all(EzConfig.prefs[paddingKey]);
+
+  return CupertinoElevatedButtonData(
+    child: child,
+    color: resolvedColor,
+    padding: padding,
+    borderRadius: (materialBase.shape != null) ? BorderRadius.circular(30.0) : null,
+  );
 }

@@ -5,7 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Styles a [PlatformSwitch] from [AppConfig.prefs]
+/// Styles a [PlatformSwitch] from [EzConfig.prefs]
 PlatformSwitch ezSwitch({
   required bool value,
   required void Function(bool)? onChanged,
@@ -13,11 +13,11 @@ PlatformSwitch ezSwitch({
   return PlatformSwitch(
     value: value,
     onChanged: onChanged,
-    activeColor: Color(AppConfig.prefs[buttonColorKey]),
+    activeColor: Color(EzConfig.prefs[buttonColorKey]),
   );
 }
 
-/// Styles a [Checkbox] from [AppConfig.prefs]
+/// Styles a [Checkbox] from [EzConfig.prefs]
 Widget ezCheckBox({
   required bool value,
   required void Function(bool?)? onChanged,
@@ -25,13 +25,13 @@ Widget ezCheckBox({
   return Checkbox(
     value: value,
     onChanged: onChanged,
-    checkColor: Color(AppConfig.prefs[buttonTextColorKey]),
+    checkColor: Color(EzConfig.prefs[buttonTextColorKey]),
     fillColor: MaterialStateProperty.resolveWith(
       (states) {
         if (states.contains(MaterialState.selected)) {
-          return Color(AppConfig.prefs[buttonColorKey]);
+          return Color(EzConfig.prefs[buttonColorKey]);
         } else {
-          return Color(AppConfig.prefs[themeTextColorKey]);
+          return Color(EzConfig.prefs[themeTextColorKey]);
         }
       },
     ),
@@ -54,7 +54,7 @@ Widget ezYesNo(
 
   Icon confirmIcon = customConfirm ?? ezIcon(PlatformIcons(context).checkMark);
   Icon denyIcon = customDeny ?? ezIcon(PlatformIcons(context).clear);
-  double spacing = (spacer is double) ? spacer : AppConfig.prefs[buttonSpacingKey];
+  double spacing = (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
 
   return axis == Axis.vertical
       ? Column(
@@ -88,17 +88,17 @@ Widget ezCancel(
   return EZButton.icon(action: onCancel, icon: icon, message: cancelMsg);
 }
 
-/// Styles an [ExpansionTile] with [AppConfig.prefs]
+/// Styles an [ExpansionTile] with [EzConfig.prefs]
 Widget ezDropList({
   required String title,
   required List<Widget> body,
   bool open = false,
 }) {
   TextStyle titleStyle = getTextStyle(titleStyleKey);
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
-  double padding = AppConfig.prefs[paddingKey];
+  double padding = EzConfig.prefs[paddingKey];
 
   return ExpansionTile(
     // Title
@@ -109,7 +109,7 @@ Widget ezDropList({
     children: body,
     childrenPadding: EdgeInsets.only(left: padding, right: padding),
     initiallyExpanded: open,
-    onExpansionChanged: (bool open) => AppConfig.focus.primaryFocus?.unfocus(),
+    onExpansionChanged: (bool open) => EzConfig.focus.primaryFocus?.unfocus(),
 
     // Theme
     backgroundColor: themeColor,
@@ -118,19 +118,5 @@ Widget ezDropList({
     collapsedTextColor: themeTextColor,
     iconColor: themeTextColor,
     collapsedIconColor: themeTextColor,
-  );
-}
-
-/// Styles a [PopupMenuButton] with [AppConfig.prefs]
-Widget ezPopup({
-  required String title,
-  required List<PopupMenuItem> body,
-}) {
-  return PopupMenuButton(
-    itemBuilder: (BuildContext context) => body,
-    child: Padding(
-      padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-      child: Text(title, style: getTextStyle(titleStyleKey)),
-    ),
   );
 }

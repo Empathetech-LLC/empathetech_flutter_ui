@@ -16,10 +16,10 @@ enum SettingType {
   dialogSpacing,
 }
 
-/// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
-/// Use the [preview] widgets for illustrating live changes to the user
-class SliderSetting extends StatefulWidget {
-  const SliderSetting({
+class EzSliderSetting extends StatefulWidget {
+  /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
+  /// Use the [type] enum for generating the appropriate preview [Widget]s
+  const EzSliderSetting({
     Key? key,
     required this.prefsKey,
     required this.type,
@@ -40,17 +40,17 @@ class SliderSetting extends StatefulWidget {
   _SliderSettingState createState() => _SliderSettingState();
 }
 
-class _SliderSettingState extends State<SliderSetting> {
+class _SliderSettingState extends State<EzSliderSetting> {
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
 
-  late double currValue = AppConfig.prefs[widget.prefsKey];
-  late double defaultValue = AppConfig.defaults[widget.prefsKey];
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double currValue = EzConfig.prefs[widget.prefsKey];
+  late double defaultValue = EzConfig.defaults[widget.prefsKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   /// Return the preview [Widget]s for the passed [SettingType]
-  List<Widget> preview() {
+  List<Widget> _buildPreview() {
     switch (widget.type) {
       // Font size
       case SettingType.fontSize:
@@ -83,9 +83,9 @@ class _SliderSettingState extends State<SliderSetting> {
               Container(
                 height: 160.0,
                 width: 90.0,
-                color: Color(AppConfig.prefs[themeTextColorKey]),
+                color: Color(EzConfig.prefs[themeTextColorKey]),
                 child: Container(
-                  color: Color(AppConfig.prefs[themeColorKey]),
+                  color: Color(EzConfig.prefs[themeColorKey]),
                   margin: EdgeInsets.all(liveMargin),
                 ),
               ),
@@ -183,7 +183,7 @@ class _SliderSettingState extends State<SliderSetting> {
   List<Widget> buildList() {
     List<Widget> toReturn = [ezText(widget.title, style: getTextStyle(subTitleStyleKey))];
 
-    toReturn.addAll(preview());
+    toReturn.addAll(_buildPreview());
 
     toReturn.addAll([
       // Value slider
@@ -203,9 +203,9 @@ class _SliderSettingState extends State<SliderSetting> {
         onChangeEnd: (double value) {
           // When finished, write the result
           if (value == defaultValue) {
-            AppConfig.preferences.remove(widget.prefsKey);
+            EzConfig.preferences.remove(widget.prefsKey);
           } else {
-            AppConfig.preferences.setDouble(widget.prefsKey, value);
+            EzConfig.preferences.setDouble(widget.prefsKey, value);
           }
         },
 
@@ -219,13 +219,13 @@ class _SliderSettingState extends State<SliderSetting> {
       // Reset button
       EZButton.icon(
         action: () {
-          AppConfig.preferences.remove(widget.prefsKey);
+          EzConfig.preferences.remove(widget.prefsKey);
           setState(() {
-            currValue = AppConfig.defaults[widget.prefsKey];
+            currValue = EzConfig.defaults[widget.prefsKey];
           });
         },
         icon: ezIcon(PlatformIcons(context).refresh),
-        message: 'Reset: ' + AppConfig.defaults[widget.prefsKey].toString(),
+        message: 'Reset: ' + EzConfig.defaults[widget.prefsKey].toString(),
       ),
     ]);
 

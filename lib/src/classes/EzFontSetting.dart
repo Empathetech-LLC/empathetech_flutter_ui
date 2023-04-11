@@ -5,26 +5,24 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-/// Creates a tool for updating the app's font
-class FontFamilySetting extends StatefulWidget {
-  const FontFamilySetting({Key? key}) : super(key: key);
+class EzFontSetting extends StatefulWidget {
+  /// Creates a tool for updating the app's font
+  const EzFontSetting({Key? key}) : super(key: key);
 
   @override
   _FontFamilySettingState createState() => _FontFamilySettingState();
 }
 
-class _FontFamilySettingState extends State<FontFamilySetting> {
-  // Initialize state
-
-  late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
-  late String currFontFamily = AppConfig.prefs[fontFamilyKey];
+class _FontFamilySettingState extends State<EzFontSetting> {
+  late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
+  late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
   /// Returns the chosen font's name
-  Future<dynamic> chooseGoogleFont() {
+  Future<dynamic> _chooseGoogleFont() {
     return ezDialog(
       context,
       title: 'Choose a font',
@@ -35,7 +33,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                 // Map font to a selectable button (title == name)
                 EZButton(
                   action: () {
-                    AppConfig.preferences.setString(fontFamilyKey, font);
+                    EzConfig.preferences.setString(fontFamilyKey, font);
                     setState(() {
                       currFontFamily = googleStyleAlias(font).fontFamily!;
                     });
@@ -62,7 +60,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
 
         // Font picker
         EZButton(
-          action: chooseGoogleFont,
+          action: _chooseGoogleFont,
           body: Text(
             'Choose font:\n$currFontFamily',
             style: TextStyle(
@@ -78,7 +76,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
         // Font reset
         EZButton(
           action: () {
-            AppConfig.preferences.remove(fontFamilyKey);
+            EzConfig.preferences.remove(fontFamilyKey);
             setState(() {
               currFontFamily = defaultFontFamily;
             });

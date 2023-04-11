@@ -5,7 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Styles a [SingleChildScrollView] from [AppConfig.prefs]
+/// Styles a [SingleChildScrollView] from [EzConfig.prefs]
 /// Dynamically switches between row/col based on [direction]
 Widget ezScrollView({
   required List<Widget> children,
@@ -41,7 +41,7 @@ Widget ezTileList(
   required List<PlatformListTile> items,
   double? customHeight,
 }) {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
   TextStyle titleStyle = getTextStyle(titleStyleKey);
 
   return Container(

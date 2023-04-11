@@ -9,15 +9,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// Returns whether the passed [path] refers to one of the stored [AppConfig.assets]
+/// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
 bool isAsset(String? path) {
-  return AppConfig.assets.contains(path);
+  return EzConfig.assets.contains(path);
 }
 
 /// [Image] wrapper for handling handling [AssetImage] vs [FileImage]
-/// By default, simply providing [pathKey] will return the image found at [AppConfig.prefs] value's path
-/// If the image path is not expected to be in [AppConfig.prefs], provide a [AppConfig.assets] path via [backup]
-/// as the fallback for a [AppConfig.preferences] getString on [pathKey]
+/// By default, simply providing [pathKey] will return the image found at [EzConfig.prefs] value's path
+/// If the image path is not expected to be in [EzConfig.prefs], provide a [EzConfig.assets] path via [backup]
+/// as the fallback for a [EzConfig.preferences] getString on [pathKey]
 Image ezImage({
   required String pathKey,
   BoxFit? fit,
@@ -26,9 +26,9 @@ Image ezImage({
   String path;
 
   if (backup is String) {
-    path = AppConfig.preferences.getString(pathKey) ?? backup;
+    path = EzConfig.preferences.getString(pathKey) ?? backup;
   } else {
-    path = AppConfig.prefs[pathKey];
+    path = EzConfig.prefs[pathKey];
   }
 
   if (isAsset(path)) {
@@ -44,7 +44,7 @@ Image ezImage({
       );
     } on FileSystemException catch (_) {
       // File not found error - wipe the setting and return the/a backup image
-      AppConfig.preferences.remove(pathKey);
+      EzConfig.preferences.remove(pathKey);
 
       try {
         if (backup != null) {
@@ -68,7 +68,7 @@ Image ezImage({
   }
 }
 
-/// Simpler implementation of ezImage
+/// Simpler implementation of [ezImage]
 /// Only call with [path] being the literal asset/file path
 Image buildImage({
   required String path,
@@ -96,7 +96,7 @@ Image buildImage({
   }
 }
 
-/// [DecorationImage] wrapper for setting the background image in [EZScaffold]s and the like
+/// [DecorationImage] wrapper for setting the background image in [EzScaffold]s and the like
 DecorationImage? buildDecoration(String? path) {
   if (path == null || path == noImageKey) {
     return null;
@@ -134,7 +134,7 @@ Future<String?> changeImage(
 
     // Save the new image
     File(picked.path).copy(image.path);
-    AppConfig.preferences.setString(prefsPath, image.path);
+    EzConfig.preferences.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
     String errorMsg = 'Failed to update image:\n$e';
