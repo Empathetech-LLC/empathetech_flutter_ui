@@ -15,7 +15,7 @@ enum ScaffoldType {
 class EzScaffold extends StatelessWidget {
   final Key? key;
   final Key? widgetKey;
-  final BoxDecoration backgroundDecoration;
+  final BoxDecoration background;
   final PlatformAppBar appBar;
   final EzDrawer? drawer;
   final EzDrawer? endDrawer;
@@ -31,7 +31,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold({
     this.key,
     this.widgetKey,
-    required this.backgroundDecoration,
+    required this.background,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -47,7 +47,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold.nav({
     this.key,
     this.widgetKey,
-    required this.backgroundDecoration,
+    required this.background,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -63,7 +63,7 @@ class EzScaffold extends StatelessWidget {
   EzScaffold.web({
     this.key,
     this.widgetKey,
-    required this.backgroundDecoration,
+    required this.background,
     required this.appBar,
     this.drawer,
     this.endDrawer,
@@ -92,7 +92,7 @@ class EzScaffold extends StatelessWidget {
         // Body
         material: (context, platform) => MaterialScaffoldData(
           body: Container(
-            decoration: backgroundDecoration,
+            decoration: background,
             child: SafeArea(child: body),
           ),
           drawer: drawer,
@@ -101,7 +101,7 @@ class EzScaffold extends StatelessWidget {
         ),
         cupertino: (context, platform) => CupertinoPageScaffoldData(
           body: Container(
-            decoration: backgroundDecoration,
+            decoration: background,
             child: SafeArea(
               child: (fab == null)
                   ? body
