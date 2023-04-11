@@ -99,7 +99,7 @@ class EZButton extends StatelessWidget {
   }
 
   /// Builds a [CupertinoActionSheetAction] from this button's values
-  Widget toAction() {
+  CupertinoActionSheetAction toAction() {
     /// Merge each child widget with the dialog content [TextStyle]
     Widget buildChild() {
       switch (this.body.runtimeType) {
@@ -146,10 +146,10 @@ class EZButton extends StatelessWidget {
       }
     }
 
-    return GestureDetector(
-      onLongPress: this.longAction,
-      child: CupertinoActionSheetAction(
-        onPressed: this.action,
+    return CupertinoActionSheetAction(
+      onPressed: this.action,
+      child: GestureDetector(
+        onLongPress: this.longAction,
         child: buildChild(),
       ),
     );

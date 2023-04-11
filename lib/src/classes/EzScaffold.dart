@@ -10,13 +10,14 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 enum ScaffoldType {
   standard,
   nav,
+  web,
 }
 
 class EZScaffold extends StatelessWidget {
+  final bool? automaticallyImplyLeading;
   final Widget? leading;
   final Widget title;
   final List<Widget>? trailingActions;
-  final bool? automaticallyImplyLeading;
   final DecorationImage? backgroundImage;
   final Color backgroundColor;
   final Widget body;
