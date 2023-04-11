@@ -93,7 +93,7 @@ BoxDecoration? imageBackground(String? path) {
 BoxDecoration colorBackground({
   required String colorKey,
 }) {
-  return BoxDecoration(color: EzConfig.prefs[colorKey]);
+  return BoxDecoration(color: Color(EzConfig.prefs[colorKey]));
 }
 
 /// Quickly build a color gradient background
