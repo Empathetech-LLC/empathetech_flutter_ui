@@ -30,25 +30,55 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool show = false;
 
   late double margin = EzConfig.prefs[dialogSpacingKey];
+  late double iconSize = buildTextStyle(style: dialogContentStyleKey).fontSize ?? margin;
 
   late Color showing = widget.iconColor;
   late Color hiding = (widget.alwaysOn != null)
       ? widget.iconColor.withOpacity(widget.alwaysOn as double)
       : Colors.transparent;
 
+  void _playVideo() {
+    widget.controller.play();
+  }
+
+  void _pauseVideo() {
+    widget.controller.pause();
+  }
+
+  void _muteVideo() {
+    widget.controller.setVolume(0.0);
+  }
+
+  void _unMuteVideo() {
+    widget.controller.setVolume(1.0);
+  }
+
+  void _replayVideo() {
+    widget.controller.seekTo(Duration.zero);
+    widget.controller.setVolume(1.0);
+    widget.controller.play();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onHover: (_) {
+      onEnter: (_) {
         setState(() {
           show = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          show = false;
         });
       },
       child: Stack(
         children: [
           AspectRatio(
             aspectRatio: widget.controller.value.aspectRatio,
-            child: VideoPlayer(widget.controller),
+            child: FittedBox(
+              child: VideoPlayer(widget.controller),
+            ),
           ),
           Positioned(
             bottom: margin,
@@ -61,27 +91,17 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ezClickable(
                   child: ezIcon(
                     (widget.controller.value.isPlaying)
-                        ? PlatformIcons(context).playArrow
-                        : PlatformIcons(context).pause,
+                        ? PlatformIcons(context).pause
+                        : PlatformIcons(context).playArrow,
                     color: (show) ? showing : hiding,
                   ),
                   onTap: () {
                     if (widget.controller.value.position >=
                         widget.controller.value.duration) {
                       // Video has ended, replay
-                      setState(() {
-                        widget.controller.seekTo(Duration.zero);
-                        widget.controller.setVolume(1.0);
-                        widget.controller.play();
-                      });
+                      _replayVideo();
                     } else {
-                      (widget.controller.value.isPlaying)
-                          ? setState(() {
-                              widget.controller.pause();
-                            })
-                          : setState(() {
-                              widget.controller.play();
-                            });
+                      (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
                     }
                   },
                 ),
@@ -90,21 +110,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 // Volume
                 ezClickable(
                   child: ezIcon(
-                    (widget.controller.value.volume >= 0.0)
+                    (widget.controller.value.volume == 0.0)
                         ? PlatformIcons(context).volumeMute
-                        : PlatformIcons(context).volumeOff,
+                        : PlatformIcons(context).volumeUp,
                     color: (show) ? showing : hiding,
                   ),
                   onTap: () {
-                    (widget.controller.value.volume >= 0.0)
-                        ? setState(() {
-                            widget.controller.setVolume(0.0);
-                          })
-                        : setState(() {
-                            widget.controller.setVolume(1.0);
-                          });
+                    (widget.controller.value.volume == 0.0)
+                        ? _unMuteVideo()
+                        : _muteVideo();
                   },
                 ),
+                Container(width: margin),
 
                 // Replay
                 ezClickable(
@@ -113,11 +130,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     color: (show) ? showing : hiding,
                   ),
                   onTap: () {
-                    setState(() {
-                      widget.controller.seekTo(Duration.zero);
-                      widget.controller.setVolume(1.0);
-                      widget.controller.play();
-                    });
+                    _replayVideo();
                   },
                 ),
               ],
