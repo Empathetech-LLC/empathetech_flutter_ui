@@ -5,6 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Empathetech triadic colors
+
+const Color EmpathEucalyptus = Color(0xFF20DAA5);
+const Color EmpathPurple = Color(0xFFA520DA);
+const Color EmpathGoldenrod = Color(0xFFDAA520);
+
+// Preference keys
+
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
 const String backColorKey = 'appBackgroundColor';
