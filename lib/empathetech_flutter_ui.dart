@@ -11,5 +11,4 @@ export 'src/storage.dart';
 export 'src/text-styling.dart';
 export 'src/text-widgets.dart';
 export 'src/toggles.dart';
-export 'src/video.dart';
 export 'src/windows.dart';
