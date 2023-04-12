@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
@@ -51,6 +52,21 @@ Color getContrastColor(Color background) {
   final b = background.blue;
 
   return (((r * 0.299) + (g * 0.587) + (b * 0.114)) >= 150) ? Colors.black : Colors.white;
+}
+
+/// No need to import [launchUrl] if you've already imported EFUI
+Future<bool> openLink(
+  Uri url, {
+  LaunchMode mode = LaunchMode.platformDefault,
+  WebViewConfiguration webViewConfiguration = const WebViewConfiguration(),
+  String? webOnlyWindowName,
+}) {
+  return launchUrl(
+    url,
+    mode: mode,
+    webViewConfiguration: webViewConfiguration,
+    webOnlyWindowName: webOnlyWindowName,
+  );
 }
 
 /// More readable than [Navigator] spelled out
