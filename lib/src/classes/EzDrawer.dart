@@ -43,8 +43,8 @@ class EzDrawer extends StatelessWidget {
             );
           break;
 
-        case EZButton:
-          actions.add((widget as EZButton).toAction());
+        case EzButton:
+          actions.add((widget as EzButton).toAction());
           break;
 
         default:

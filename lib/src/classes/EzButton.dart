@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EZButton extends StatelessWidget {
+class EzButton extends StatelessWidget {
   final VoidCallback action;
   final VoidCallback longAction;
   final Widget body;
@@ -16,7 +16,7 @@ class EZButton extends StatelessWidget {
   /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
-  EZButton({
+  EzButton({
     required this.action,
     this.longAction = doNothing,
     required this.body,
@@ -28,7 +28,7 @@ class EZButton extends StatelessWidget {
   /// This constructor behaves like the Material [ElevatedButton.icon]
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
-  EZButton.icon({
+  EzButton.icon({
     required this.action,
     this.longAction = doNothing,
     this.customStyle,

@@ -38,7 +38,7 @@ Widget ezCheckBox({
   );
 }
 
-/// Builds a pair of customizable [EZButton.icon]s for confirming and/or denying things
+/// Builds a pair of customizable [EzButton.icon]s for confirming and/or denying things
 Widget ezYesNo({
   required BuildContext context,
   required void Function() onConfirm,
@@ -61,23 +61,23 @@ Widget ezYesNo({
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            EZButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
             Container(height: spacing),
-            EZButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
           ],
         )
       : Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            EZButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
             Container(width: spacing),
-            EZButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
           ],
         );
 }
 
-/// Quickly build a customizable "Cancel" [EZButton.icon]
+/// Quickly build a customizable "Cancel" [EzButton.icon]
 Widget ezCancel({
   required BuildContext context,
   required void Function() onCancel,
@@ -85,7 +85,7 @@ Widget ezCancel({
   Icon? customIcon,
 }) {
   Icon icon = customIcon ?? ezIcon(PlatformIcons(context).clear);
-  return EZButton.icon(action: onCancel, icon: icon, message: cancelMsg);
+  return EzButton.icon(action: onCancel, icon: icon, message: cancelMsg);
 }
 
 /// Styles an [ExpansionTile] with [EzConfig.prefs]

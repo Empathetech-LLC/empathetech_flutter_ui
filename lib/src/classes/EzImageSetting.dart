@@ -56,7 +56,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<dynamic> _chooseImage() {
     List<Widget> options = [
       // From file
-      EZButton.icon(
+      EzButton.icon(
         action: () async {
           String? changed = await changeImage(
             context: context,
@@ -72,7 +72,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       Container(height: buttonSpacer),
 
       // From camera
-      EZButton.icon(
+      EzButton.icon(
         action: () async {
           String? changed = await changeImage(
             context: context,
@@ -88,7 +88,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       Container(height: buttonSpacer),
 
       // Reset
-      EZButton.icon(
+      EzButton.icon(
         action: () {
           _cleanup();
 
@@ -103,7 +103,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (widget.allowClear)
       options.addAll([
         Container(height: buttonSpacer),
-        EZButton.icon(
+        EzButton.icon(
           action: () {
             _cleanup();
 
@@ -120,7 +120,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EZButton(
+    return EzButton(
       action: () async {
         dynamic newPath = await _chooseImage();
         if (newPath is String)

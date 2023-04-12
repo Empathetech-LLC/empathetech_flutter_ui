@@ -162,7 +162,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         ),
 
         // Color preview/edit button
-        EZButton(
+        EzButton(
           action: _changeColor,
           longAction: _reset,
           body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),

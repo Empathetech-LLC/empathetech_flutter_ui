@@ -20,7 +20,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
     return ezDialog(
@@ -31,7 +31,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             (String font) => Column(
               children: [
                 // Map font to a selectable button (title == name)
-                EZButton(
+                EzButton(
                   action: () {
                     EzConfig.preferences.setString(fontFamilyKey, font);
                     setState(() {
@@ -59,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
         ezText('Font family', style: buildTextStyle(style: subTitleStyleKey)),
 
         // Font picker
-        EZButton(
+        EzButton(
           action: _chooseGoogleFont,
           body: Text(
             'Choose font:\n$currFontFamily',
@@ -74,7 +74,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
         Container(height: buttonSpacer),
 
         // Font reset
-        EZButton(
+        EzButton(
           action: () {
             EzConfig.preferences.remove(fontFamilyKey);
             setState(() {
