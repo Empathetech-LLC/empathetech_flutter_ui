@@ -40,8 +40,8 @@ MaterialAppData materialAppTheme() {
   Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
   Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
-  TextStyle dialogTitleText = getTextStyle(dialogTitleStyleKey);
-  TextStyle dialogContentText = getTextStyle(dialogContentStyleKey);
+  TextStyle dialogTitleText = buildTextStyle(style: dialogTitleStyleKey);
+  TextStyle dialogContentText = buildTextStyle(style: dialogContentStyleKey);
 
   return MaterialAppData(
     theme: ThemeData(
@@ -52,7 +52,7 @@ MaterialAppData materialAppTheme() {
         backgroundColor: themeColor,
         centerTitle: true,
         iconTheme: IconThemeData(color: themeTextColor),
-        titleTextStyle: getTextStyle(titleStyleKey),
+        titleTextStyle: buildTextStyle(style: titleStyleKey),
       ),
 
       // Nav bar

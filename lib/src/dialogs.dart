@@ -13,7 +13,7 @@ Future<dynamic> ezDialog({
   String? title,
   bool needsClose = true,
 }) {
-  TextStyle dialogTitleStyle = getTextStyle(dialogTitleStyleKey);
+  TextStyle dialogTitleStyle = buildTextStyle(style: dialogTitleStyleKey);
   double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
   double padding = EzConfig.prefs[paddingKey];
 
@@ -71,7 +71,7 @@ Future<dynamic> ezDialog({
                   onTap: () => popScreen(context: context),
                   child: ezText(
                     'Close',
-                    style: getTextStyle(dialogContentStyleKey),
+                    style: buildTextStyle(style: dialogContentStyleKey),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -98,7 +98,7 @@ Future<dynamic> ezColorPicker({
         pickerColor: startColor,
         onColorChanged: onColorChange,
         // ignore: deprecated_member_use
-        labelTextStyle: getTextStyle(dialogContentStyleKey),
+        labelTextStyle: buildTextStyle(style: dialogContentStyleKey),
         // above is required for iOS
       ),
       Container(height: EzConfig.prefs[dialogSpacingKey]),

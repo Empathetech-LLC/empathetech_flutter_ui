@@ -44,7 +44,7 @@ class EZButton extends StatelessWidget {
             Container(width: EzConfig.prefs[paddingKey]),
             Text(
               message,
-              style: customTextStyle ?? getTextStyle(buttonStyleKey),
+              style: customTextStyle ?? buildTextStyle(style: buttonStyleKey),
               textAlign: TextAlign.center,
             ),
           ],
@@ -60,7 +60,7 @@ class EZButton extends StatelessWidget {
         if (cast.style == null) {
           return Text(
             cast.data ?? 'Lorem ipsum',
-            style: getTextStyle(buttonStyleKey),
+            style: buildTextStyle(style: buttonStyleKey),
             textAlign: cast.textAlign,
           );
         } else {
@@ -149,7 +149,7 @@ class EZButton extends StatelessWidget {
                   case Text:
                     return Text(
                       (widget as Text).data ?? 'Lorem ipsum',
-                      style: getTextStyle(dialogContentStyleKey),
+                      style: buildTextStyle(style: dialogContentStyleKey),
                       textAlign: TextAlign.center,
                     );
                   case Icon:
@@ -167,7 +167,7 @@ class EZButton extends StatelessWidget {
         case Text:
           return Text(
             (this.body as Text).data ?? 'Lorem ipsum',
-            style: getTextStyle(dialogContentStyleKey),
+            style: buildTextStyle(style: dialogContentStyleKey),
             textAlign: TextAlign.center,
           );
 
@@ -197,7 +197,7 @@ ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(EzConfig.prefs[buttonColorKey]),
     foregroundColor: Color(EzConfig.prefs[buttonTextColorKey]),
-    textStyle: getTextStyle(buttonStyleKey),
+    textStyle: buildTextStyle(style: buttonStyleKey),
     padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
     side: BorderSide(color: Color(EzConfig.prefs[buttonColorKey])),
     shape: shape,

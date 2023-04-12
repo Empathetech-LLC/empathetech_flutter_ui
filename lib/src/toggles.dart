@@ -94,7 +94,7 @@ Widget ezDropList({
   required List<Widget> body,
   bool open = false,
 }) {
-  TextStyle titleStyle = getTextStyle(titleStyleKey);
+  TextStyle titleStyle = buildTextStyle(style: titleStyleKey);
   Color themeColor = Color(EzConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 

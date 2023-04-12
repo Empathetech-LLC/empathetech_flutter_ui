@@ -17,7 +17,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
   late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
@@ -56,7 +56,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        ezText('Font family', style: getTextStyle(subTitleStyleKey)),
+        ezText('Font family', style: buildTextStyle(style: subTitleStyleKey)),
 
         // Font picker
         EZButton(

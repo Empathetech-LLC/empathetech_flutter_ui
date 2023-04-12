@@ -156,7 +156,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color label
         ezText(
           widget.message,
-          style: getTextStyle(dialogTitleStyleKey),
+          style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,
           background: Color(EzConfig.prefs[themeColorKey]),
         ),

@@ -41,7 +41,7 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
 
   late double currValue = EzConfig.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
@@ -77,7 +77,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ezText(
                 'Currently:\n$currValue\n\n(to scale)',
-                style: getTextStyle(dialogContentStyleKey),
+                style: buildTextStyle(style: dialogContentStyleKey),
                 textAlign: TextAlign.center,
               ),
               Container(
@@ -181,7 +181,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [preview] + [PlatformSlider] + reset [EZButton.icon]
   List<Widget> buildList() {
-    List<Widget> toReturn = [ezText(widget.title, style: getTextStyle(subTitleStyleKey))];
+    List<Widget> toReturn = [
+      ezText(widget.title, style: buildTextStyle(style: subTitleStyleKey))
+    ];
 
     toReturn.addAll(_buildPreview());
 

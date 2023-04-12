@@ -51,7 +51,7 @@ Widget titleCard(
 ) {
   return Card(
     color: Color(EzConfig.prefs[themeColorKey]),
-    child: ezText(title, style: getTextStyle(titleStyleKey)),
+    child: ezText(title, style: buildTextStyle(style: titleStyleKey)),
   );
 }
 
@@ -90,7 +90,7 @@ Widget ezForm({
         autovalidateMode: autovalidateMode,
 
         // Styling
-        style: getTextStyle(dialogContentStyleKey),
+        style: buildTextStyle(style: dialogContentStyleKey),
         cursorColor: themeTextColor,
       ),
     ),

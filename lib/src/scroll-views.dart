@@ -42,7 +42,7 @@ Widget ezTileList({
   double? customHeight,
 }) {
   Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-  TextStyle titleStyle = getTextStyle(titleStyleKey);
+  TextStyle titleStyle = buildTextStyle(style: titleStyleKey);
 
   return Container(
     width: screenWidth(context),

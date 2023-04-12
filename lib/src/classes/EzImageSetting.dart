@@ -34,7 +34,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String currPathKey = widget.prefsKey;
   String? updatedPath; // Only used when the user makes a change
 
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
@@ -131,14 +131,16 @@ class _ImageSettingState extends State<EzImageSetting> {
       longAction: () => ezDialog(
         context: context,
         title: 'Credit to:',
-        content: [ezText(widget.credits, style: getTextStyle(dialogContentStyleKey))],
+        content: [
+          ezText(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
+        ],
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          Text(title, style: getTextStyle(imageSettingStyleKey)),
+          Text(title, style: buildTextStyle(style: imageSettingStyleKey)),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest

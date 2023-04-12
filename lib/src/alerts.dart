@@ -13,7 +13,7 @@ Widget loadingMessage({
 }) {
   // Gather theme data
 
-  TextStyle style = getTextStyle(titleStyleKey);
+  TextStyle style = buildTextStyle(style: titleStyleKey);
 
   double imageSize = style.fontSize!;
   SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
@@ -45,8 +45,8 @@ Widget warningCard({
 }) {
   Color iconColor = Color(EzConfig.prefs[alertColorKey]);
 
-  TextStyle titleStyle = getTextStyle(titleStyleKey);
-  TextStyle contentStyle = getTextStyle(dialogContentStyleKey);
+  TextStyle titleStyle = buildTextStyle(style: titleStyleKey);
+  TextStyle contentStyle = buildTextStyle(style: dialogContentStyleKey);
 
   double padding = EzConfig.prefs[paddingKey];
 
@@ -89,6 +89,6 @@ Future<dynamic> logAlert(
   return ezDialog(
     context: context,
     title: 'Attention:',
-    content: [ezText(message, style: getTextStyle(dialogContentStyleKey))],
+    content: [ezText(message, style: buildTextStyle(style: dialogContentStyleKey))],
   );
 }

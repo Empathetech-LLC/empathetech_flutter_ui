@@ -128,6 +128,7 @@ TextStyle googleStyleAlias(String fontName) {
 // Keys for building the text styles in-app
 
 const String defaultStyleKey = 'defaultStyle';
+const String headerStyleKey = 'headerStyle';
 const String titleStyleKey = 'titleStyle';
 const String subTitleStyleKey = 'subTitleStyle';
 const String dialogTitleStyleKey = 'dialogTitleStyle';
@@ -139,52 +140,67 @@ const String fontSettingStyleKey = 'fontSettingStyle';
 const String sliderSettingStyleKey = 'sliderSettingStyle';
 const String errorStyleKey = 'errorStyle';
 
-/// Returns the [textType] style, built from the current [EzConfig.prefs] values
-TextStyle getTextStyle(String textType) {
+/// Returns the [style] style, built from the current [EzConfig.prefs] values
+TextStyle buildTextStyle({
+  required String style,
+  Color? color,
+  TextDecoration? decoration,
+  FontWeight? fontWeight,
+}) {
   late String currFontFamily =
       googleStyleAlias(EzConfig.prefs[fontFamilyKey]).fontFamily!;
 
   late double currSize = EzConfig.prefs[fontSizeKey];
 
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
   late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
-  switch (textType) {
-    case defaultStyleKey:
+  switch (style) {
+    case headerStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
-        fontSize: currSize,
-        color: themeTextColor,
+        fontSize: currSize * 2.0,
+        color: color ?? themeColor,
+        decoration: decoration,
+        fontWeight: fontWeight ?? FontWeight.bold,
       );
 
     case titleStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize * 1.5,
-        color: themeTextColor,
+        color: color ?? themeTextColor,
+        decoration: decoration,
+        fontWeight: fontWeight,
       );
 
     case subTitleStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize * 1.25,
-        color: themeTextColor,
-        decoration: TextDecoration.underline,
+        color: color ?? themeTextColor,
+        decoration: decoration ?? TextDecoration.underline,
+        fontWeight: fontWeight,
       );
 
     case dialogTitleStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize * 1.25,
-        color: themeTextColor,
-        decoration: TextDecoration.underline,
+        color: color ?? themeTextColor,
+        decoration: decoration ?? TextDecoration.underline,
+        fontWeight: fontWeight,
       );
 
+    case defaultStyleKey:
     case dialogContentStyleKey:
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize,
-        color: themeTextColor,
+        color: color ?? themeTextColor,
+        decoration: decoration,
+        fontWeight: fontWeight,
       );
 
     case buttonStyleKey:
@@ -195,7 +211,9 @@ TextStyle getTextStyle(String textType) {
       return TextStyle(
         fontFamily: currFontFamily,
         fontSize: currSize,
-        color: buttonTextColor,
+        color: color ?? buttonTextColor,
+        decoration: decoration,
+        fontWeight: fontWeight,
       );
 
     case errorStyleKey:
@@ -208,11 +226,11 @@ TextStyle getTextStyle(String textType) {
   }
 }
 
-/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// Sets all [TextStyle]s to the default case from [buildTextStyle]
 /// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
 /// [Widget] styling matches that of [EzConfig]
 TextTheme materialTextTheme() {
-  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
 
   return TextTheme(
     labelLarge: defaultTextStyle,
@@ -233,12 +251,12 @@ TextTheme materialTextTheme() {
   );
 }
 
-/// Sets all [TextStyle]s to the default case from [getTextStyle]
+/// Sets all [TextStyle]s to the default case from [buildTextStyle]
 /// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
 /// [Widget] styling matches that of [EzConfig]
 CupertinoTextThemeData cupertinoTextTheme() {
   Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
-  TextStyle defaultTextStyle = getTextStyle(defaultStyleKey);
+  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
 
   return CupertinoTextThemeData(
     primaryColor: textColor,
