@@ -1,6 +1,7 @@
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Quick [MouseRegion] && [GestureDetector] combo
 Widget ezClickable({
@@ -15,5 +16,15 @@ Widget ezClickable({
       onLongPress: onLongPress,
       child: child,
     ),
+  );
+}
+
+Widget ezLink({
+  required Uri url,
+  required Widget child,
+}) {
+  return ezClickable(
+    onTap: () => launchUrl(url),
+    child: child,
   );
 }
