@@ -67,7 +67,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           popScreen(context: context, pass: changed);
         },
         message: 'File',
-        icon: ezIcon(PlatformIcons(context).folder),
+        icon: EzIcon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
 
@@ -83,7 +83,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           popScreen(context: context, pass: changed);
         },
         message: 'Camera',
-        icon: ezIcon(PlatformIcons(context).photoCamera),
+        icon: EzIcon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
 
@@ -96,7 +96,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
         message: 'Reset',
-        icon: ezIcon(PlatformIcons(context).refresh),
+        icon: EzIcon(PlatformIcons(context).refresh),
       ),
     ];
 
@@ -111,7 +111,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             popScreen(context: context, pass: noImageKey);
           },
           message: 'Clear',
-          icon: ezIcon(PlatformIcons(context).clear),
+          icon: EzIcon(PlatformIcons(context).clear),
         ),
       ]);
 
@@ -149,13 +149,13 @@ class _ImageSettingState extends State<EzImageSetting> {
             width: widget.fullscreen ? 90 : 75,
             child: (updatedPath is String) // user made a change
                 ? (updatedPath == noImageKey)
-                    ? ezIcon(PlatformIcons(context).clear)
+                    ? EzIcon(PlatformIcons(context).clear)
                     : buildImage(
                         path: updatedPath as String,
                         fit: BoxFit.fill,
                       )
                 : (currPathKey == noImageKey) // using app's current state
-                    ? ezIcon(PlatformIcons(context).clear)
+                    ? EzIcon(PlatformIcons(context).clear)
                     : ezImage(
                         pathKey: currPathKey,
                         fit: BoxFit.fill,

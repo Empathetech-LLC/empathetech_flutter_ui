@@ -52,8 +52,8 @@ Widget ezYesNo({
 }) {
   // Gather theme data
 
-  Icon confirmIcon = customConfirm ?? ezIcon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customDeny ?? ezIcon(PlatformIcons(context).clear);
+  Icon confirmIcon = customConfirm ?? EzIcon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customDeny ?? EzIcon(PlatformIcons(context).clear);
   double spacing = (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
 
   return axis == Axis.vertical
@@ -84,7 +84,7 @@ Widget ezCancel({
   String cancelMsg = 'Cancel',
   Icon? customIcon,
 }) {
-  Icon icon = customIcon ?? ezIcon(PlatformIcons(context).clear);
+  Icon icon = customIcon ?? EzIcon(PlatformIcons(context).clear);
   return EzButton.icon(action: onCancel, icon: icon, message: cancelMsg);
 }
 

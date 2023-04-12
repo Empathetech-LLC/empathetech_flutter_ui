@@ -5,19 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Styles an [Icon] from [EzConfig.prefs]
-Icon ezIcon(
-  IconData icon, {
-  Color? color,
-  double? size,
-}) {
-  return Icon(
-    icon,
-    color: color ?? Color(EzConfig.prefs[buttonTextColorKey]),
-    size: size,
-  );
-}
-
 /// Text that values its personal space
 /// And requires a [TextStyle], for wide [TargetPlatform] support
 /// Optionally provide [textAlign]

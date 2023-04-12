@@ -64,9 +64,9 @@ Widget warningCard({
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ezIcon(Icons.warning, color: iconColor),
+              EzIcon(Icons.warning, color: iconColor),
               Text('WARNING', style: titleStyle),
-              ezIcon(Icons.warning, color: iconColor),
+              EzIcon(Icons.warning, color: iconColor),
             ],
           ),
           Container(height: padding),

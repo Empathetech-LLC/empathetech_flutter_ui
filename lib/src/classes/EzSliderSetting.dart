@@ -226,7 +226,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             currValue = EzConfig.defaults[widget.prefsKey];
           });
         },
-        icon: ezIcon(PlatformIcons(context).refresh),
+        icon: EzIcon(PlatformIcons(context).refresh),
         message: 'Reset: ' + EzConfig.defaults[widget.prefsKey].toString(),
       ),
     ]);

@@ -117,7 +117,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               children: [
                 // Play/pause
                 ezClickable(
-                  child: ezIcon(
+                  child: EzIcon(
                     (widget.controller.value.isPlaying)
                         ? PlatformIcons(context).pause
                         : PlatformIcons(context).playArrow,
@@ -137,7 +137,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                 // Volume
                 ezClickable(
-                  child: ezIcon(
+                  child: EzIcon(
                     (widget.controller.value.volume == 0.0)
                         ? PlatformIcons(context).volumeMute
                         : PlatformIcons(context).volumeUp,
@@ -153,7 +153,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                 // Replay
                 ezClickable(
-                  child: ezIcon(
+                  child: EzIcon(
                     PlatformIcons(context).refresh,
                     color: (show) ? showing : hiding,
                   ),

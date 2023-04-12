@@ -91,7 +91,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               dynamic chosen = await _openColorPicker();
               popScreen(context: context, pass: chosen);
             },
-            customDeny: ezIcon(PlatformIcons(context).edit),
+            customDeny: EzIcon(PlatformIcons(context).edit),
             denyMsg: 'Pick custom',
             axis: Axis.vertical,
             spacer: dialogSpacer,
@@ -165,7 +165,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         EzButton(
           action: _changeColor,
           longAction: _reset,
-          body: ezIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+          body: EzIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
           customStyle: ElevatedButton.styleFrom(
             backgroundColor: currColor,
             padding: EdgeInsets.all(EzConfig.prefs[paddingKey] * 2),
