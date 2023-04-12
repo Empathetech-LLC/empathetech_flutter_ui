@@ -9,27 +9,39 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 const String homeRoute = '/';
 
 class EzApp extends PlatformProvider {
-  final String appTitle;
+  final String title;
   final Map<String, Widget Function(BuildContext)> routes;
+  final bool debugShowCheckedModeBanner;
+  final MaterialAppData Function(BuildContext, PlatformTarget)? material;
+  final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
+  final PlatformSettingsData? settings;
 
   /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
+  /// Optionally enable [debugShowCheckedModeBanner]
+  /// Optionally override [materialAppTheme] with [material]
+  /// Optionally override [cupertinoAppTheme] with [cupertino]
+  /// Optionally override [settings] default of iosUsesMaterialWidgets: true
   EzApp({
-    required this.appTitle,
+    required this.title,
     required this.routes,
+    this.debugShowCheckedModeBanner = false,
+    this.material,
+    this.cupertino,
+    this.settings,
   }) : super(
           builder: (context) => PlatformApp(
-            debugShowCheckedModeBanner: false,
-            title: appTitle,
+            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+            title: title,
             routes: routes,
             localizationsDelegates: <LocalizationsDelegate<dynamic>>[
               DefaultMaterialLocalizations.delegate,
               DefaultWidgetsLocalizations.delegate,
               DefaultCupertinoLocalizations.delegate,
             ],
-            material: (context, platform) => materialAppTheme(),
-            cupertino: (context, platform) => cupertinoAppTheme(),
+            material: material ?? (context, platform) => materialAppTheme(),
+            cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
           ),
-          settings: PlatformSettingsData(iosUsesMaterialWidgets: true),
+          settings: settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
         );
 }
 
