@@ -18,6 +18,7 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.11
   video_player: ^2.6.1
+  url_launcher: ^6.1.10
 
   # Community
   flutter_local_notifications: ^13.0.0
