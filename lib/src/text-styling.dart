@@ -140,67 +140,156 @@ const String fontSettingStyleKey = 'fontSettingStyle';
 const String sliderSettingStyleKey = 'sliderSettingStyle';
 const String errorStyleKey = 'errorStyle';
 
-/// Returns the [style] style, built from the current [EzConfig.prefs] values
+/// Maintains some prebuilt [TextStyle]s styled from [EzConfig]
+/// Optionally overwrite any values
 TextStyle buildTextStyle({
+  bool inherit = true,
   required String style,
   Color? color,
-  TextDecoration? decoration,
+  Color? backgroundColor,
+  double? fontSize,
   FontWeight? fontWeight,
+  FontStyle? fontStyle,
+  double? letterSpacing,
+  double? wordSpacing,
+  TextBaseline? textBaseline,
+  double? height,
+  TextLeadingDistribution? leadingDistribution,
+  Locale? locale,
+  Paint? foreground,
+  Paint? background,
+  List<Shadow>? shadows,
+  TextDecoration? decoration,
+  Color? decorationColor,
+  TextDecorationStyle? decorationStyle,
+  double? decorationThickness,
+  String? debugLabel,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
+  String? package,
+  TextOverflow? overflow,
 }) {
   late String currFontFamily =
       googleStyleAlias(EzConfig.prefs[fontFamilyKey]).fontFamily!;
 
   late double currSize = EzConfig.prefs[fontSizeKey];
 
-  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
   late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
   switch (style) {
     case headerStyleKey:
       return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize * 2.0,
-        color: color ?? themeColor,
-        decoration: decoration,
+        inherit: inherit,
+        fontFamily: fontFamily ?? currFontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
+        fontSize: fontSize ?? currSize * 2.0,
+        color: color ?? themeTextColor,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight ?? FontWeight.bold,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        overflow: overflow,
       );
 
     case titleStyleKey:
       return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize * 1.5,
+        inherit: inherit,
+        fontFamily: fontFamily ?? currFontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
+        fontSize: fontSize ?? currSize * 1.5,
         color: color ?? themeTextColor,
-        decoration: decoration,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        overflow: overflow,
       );
 
     case subTitleStyleKey:
-      return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize * 1.25,
-        color: color ?? themeTextColor,
-        decoration: decoration ?? TextDecoration.underline,
-        fontWeight: fontWeight,
-      );
-
     case dialogTitleStyleKey:
       return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize * 1.25,
+        inherit: inherit,
+        fontFamily: fontFamily ?? currFontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
+        fontSize: fontSize ?? currSize * 1.25,
         color: color ?? themeTextColor,
-        decoration: decoration ?? TextDecoration.underline,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        decoration: decoration ?? TextDecoration.underline,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        overflow: overflow,
       );
 
     case defaultStyleKey:
     case dialogContentStyleKey:
       return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize,
+        inherit: inherit,
+        fontFamily: fontFamily ?? currFontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
+        fontSize: fontSize ?? currSize,
         color: color ?? themeTextColor,
-        decoration: decoration,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        overflow: overflow,
       );
 
     case buttonStyleKey:
@@ -209,11 +298,30 @@ TextStyle buildTextStyle({
     case imageSettingStyleKey:
     case sliderSettingStyleKey:
       return TextStyle(
-        fontFamily: currFontFamily,
-        fontSize: currSize,
+        inherit: inherit,
+        fontFamily: fontFamily ?? currFontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
+        fontSize: fontSize ?? currSize,
         color: color ?? buttonTextColor,
-        decoration: decoration,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        shadows: shadows,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        overflow: overflow,
       );
 
     case errorStyleKey:
