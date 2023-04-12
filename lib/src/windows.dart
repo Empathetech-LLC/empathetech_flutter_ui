@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+/* For Scaffolds, not the Operating System! */
+
 /// Builds the "main screen" for pages built with [EzScaffold.standard]
 Widget standardWindow({
   required BuildContext context,
