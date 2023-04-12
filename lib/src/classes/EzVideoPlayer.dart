@@ -39,24 +39,29 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   void _playVideo() {
     widget.controller.play();
+    setState(() {});
   }
 
   void _pauseVideo() {
     widget.controller.pause();
+    setState(() {});
   }
 
   void _muteVideo() {
     widget.controller.setVolume(0.0);
+    setState(() {});
   }
 
   void _unMuteVideo() {
     widget.controller.setVolume(1.0);
+    setState(() {});
   }
 
   void _replayVideo() {
     widget.controller.seekTo(Duration.zero);
     widget.controller.setVolume(1.0);
     widget.controller.play();
+    setState(() {});
   }
 
   @override
@@ -76,9 +81,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         children: [
           AspectRatio(
             aspectRatio: widget.controller.value.aspectRatio,
-            child: FittedBox(
-              child: VideoPlayer(widget.controller),
-            ),
+            child: VideoPlayer(widget.controller),
           ),
           Positioned(
             bottom: margin,
