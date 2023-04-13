@@ -9,35 +9,124 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 const String homeRoute = '/';
 
 class EzApp extends PlatformProvider {
+  final Key? key;
+  final Key? widgetKey;
+  final GlobalKey<NavigatorState>? navigatorKey;
+  final Widget? home;
   final String title;
   final Map<String, Widget Function(BuildContext)> routes;
-  final bool debugShowCheckedModeBanner;
+  final String? initialRoute;
+  final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
+  final Route<dynamic>? Function(RouteSettings)? onUnknownRoute;
+  final List<NavigatorObserver>? navigatorObservers;
+  final String Function(BuildContext)? onGenerateTitle;
+  final Color? color;
+  final Locale? locale;
+
+  /// Default ->
+  /// <LocalizationsDelegate<dynamic>>[
+  ///   DefaultMaterialLocalizations.delegate,
+  ///   DefaultWidgetsLocalizations.delegate,
+  ///   DefaultCupertinoLocalizations.delegate,
+  /// ],
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  final Locale? Function(List<Locale>?, Iterable<Locale>)? localeListResolutionCallback;
+  final Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback;
+  final Iterable<Locale>? supportedLocales;
+  final bool? showPerformanceOverlay;
+  final bool? checkerboardRasterCacheImages;
+  final bool? checkerboardOffscreenLayers;
+  final bool? showSemanticsDebugger;
+
+  /// Default false
+  final bool? debugShowCheckedModeBanner;
+
+  final Map<LogicalKeySet, Intent>? shortcuts;
+  final Map<Type, Action<Intent>>? actions;
+  final List<Route<dynamic>> Function(String)? onGenerateInitialRoutes;
+  final String? restorationScopeId;
+  final ScrollBehavior? scrollBehavior;
+  final bool? useInheritedMediaQuery;
+
+  /// Default [materialAppTheme]
   final MaterialAppData Function(BuildContext, PlatformTarget)? material;
+
+  /// Default [cupertinoAppTheme]
   final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
+
+  /// Default -> PlatformSettingsData(iosUsesMaterialWidgets: true)
   final PlatformSettingsData? settings;
 
   /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
-  /// Optionally enable [debugShowCheckedModeBanner]
-  /// Optionally override [materialAppTheme] with [material]
-  /// Optionally override [cupertinoAppTheme] with [cupertino]
-  /// Optionally override [settings] default of iosUsesMaterialWidgets: true
+  /// Optionally overwrite all fields from [PlatformApp]
   EzApp({
+    this.key,
+    this.widgetKey,
+    this.navigatorKey,
+    this.home,
     required this.title,
     required this.routes,
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
+    this.navigatorObservers,
+    this.onGenerateTitle,
+    this.color,
+    this.locale,
+    this.localizationsDelegates,
+    this.localeListResolutionCallback,
+    this.localeResolutionCallback,
+    this.supportedLocales,
+    this.showPerformanceOverlay,
+    this.checkerboardRasterCacheImages,
+    this.checkerboardOffscreenLayers,
+    this.showSemanticsDebugger,
     this.debugShowCheckedModeBanner = false,
+    this.shortcuts,
+    this.actions,
+    this.onGenerateInitialRoutes,
+    this.restorationScopeId,
+    this.scrollBehavior,
+    this.useInheritedMediaQuery,
     this.material,
     this.cupertino,
     this.settings,
   }) : super(
           builder: (context) => PlatformApp(
-            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+            key: key,
+            widgetKey: widgetKey,
+            navigatorKey: navigatorKey,
+            home: home,
             title: title,
             routes: routes,
-            localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-              DefaultMaterialLocalizations.delegate,
-              DefaultWidgetsLocalizations.delegate,
-              DefaultCupertinoLocalizations.delegate,
-            ],
+            initialRoute: initialRoute,
+            onGenerateRoute: onGenerateRoute,
+            onUnknownRoute: onUnknownRoute,
+            navigatorObservers: navigatorObservers,
+            onGenerateTitle: onGenerateTitle,
+            color: color,
+            locale: locale,
+            localizationsDelegates: localizationsDelegates ??
+                <LocalizationsDelegate<dynamic>>[
+                  DefaultMaterialLocalizations.delegate,
+                  DefaultWidgetsLocalizations.delegate,
+                  DefaultCupertinoLocalizations.delegate,
+                ],
+            localeListResolutionCallback: localeListResolutionCallback,
+            localeResolutionCallback: localeResolutionCallback,
+            supportedLocales: supportedLocales,
+            showPerformanceOverlay: showPerformanceOverlay,
+            checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+            checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+            showSemanticsDebugger: showSemanticsDebugger,
+            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+            shortcuts: shortcuts,
+            actions: actions,
+            onGenerateInitialRoutes: onGenerateInitialRoutes,
+            restorationScopeId: restorationScopeId,
+            scrollBehavior: scrollBehavior,
+            useInheritedMediaQuery: useInheritedMediaQuery,
             material: material ?? (context, platform) => materialAppTheme(),
             cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
           ),
