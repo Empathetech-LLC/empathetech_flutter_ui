@@ -7,16 +7,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzButton extends StatelessWidget {
+  final Key? key;
   final VoidCallback action;
+
+  /// Default -> [doNothing]
   final VoidCallback longAction;
+
   final Widget body;
   final ButtonStyle? customStyle;
+
+  /// Default -> false
   final bool forceMaterial;
 
   /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
   EzButton({
+    this.key,
     required this.action,
     this.longAction = doNothing,
     required this.body,
@@ -29,6 +36,7 @@ class EzButton extends StatelessWidget {
   /// If provided, [customStyle] will be merged with [materialButton]
   /// Optionally provide [forceMaterial] to escape the walled garden
   EzButton.icon({
+    this.key,
     required this.action,
     this.longAction = doNothing,
     this.customStyle,
@@ -111,6 +119,7 @@ class EzButton extends StatelessWidget {
 
     return (forceMaterial)
         ? ElevatedButton(
+            key: key,
             onPressed: action,
             onLongPress: longAction,
             child: ezBody,
@@ -119,6 +128,7 @@ class EzButton extends StatelessWidget {
         : GestureDetector(
             onLongPress: longAction,
             child: PlatformElevatedButton(
+              key: key,
               onPressed: action,
               color: resolvedColor,
 
