@@ -6,12 +6,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-enum ImageType {
-  asset,
-  network,
-  file,
-}
-
 class EzImage extends Image {
   final Key? key;
   final String prefsKey;
@@ -55,7 +49,7 @@ class EzImage extends Image {
   /// [FilterQuality.low]
   final FilterQuality filterQuality;
 
-  /// [Image] wrapper for quickly handling [ImageType]
+  /// [Image] COMMENT ME
   EzImage({
     this.key,
     required this.prefsKey,
@@ -77,9 +71,30 @@ class EzImage extends Image {
     this.gaplessPlayback = false,
     this.isAntiAlias = false,
     this.filterQuality = FilterQuality.low,
-  });
+  }) : super(
+          image: _selectImageProvider(prefsKey),
+          key: key,
+          frameBuilder: frameBuilder,
+          loadingBuilder: loadingBuilder,
+          errorBuilder: errorBuilder,
+          semanticLabel: semanticLabel,
+          excludeFromSemantics: excludeFromSemantics,
+          width: width,
+          height: height,
+          color: color,
+          opacity: opacity,
+          colorBlendMode: colorBlendMode,
+          fit: fit,
+          alignment: alignment,
+          repeat: repeat,
+          centerSlice: centerSlice,
+          matchTextDirection: matchTextDirection,
+          gaplessPlayback: gaplessPlayback,
+          isAntiAlias: isAntiAlias,
+          filterQuality: filterQuality,
+        );
 
-  ImageProvider _selectImageProvider(String pathKey) {
+  static ImageProvider _selectImageProvider(String pathKey) {
     String path;
 
     if (backup is String) {
@@ -111,31 +126,5 @@ class EzImage extends Image {
             'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg');
       }
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Image(
-      image: _selectImageProvider(prefsKey),
-      key: key,
-      frameBuilder: frameBuilder,
-      loadingBuilder: loadingBuilder,
-      errorBuilder: errorBuilder,
-      semanticLabel: semanticLabel,
-      excludeFromSemantics: excludeFromSemantics,
-      width: width,
-      height: height,
-      color: color,
-      opacity: opacity,
-      colorBlendMode: colorBlendMode,
-      fit: fit,
-      alignment: alignment,
-      repeat: repeat,
-      centerSlice: centerSlice,
-      matchTextDirection: matchTextDirection,
-      gaplessPlayback: gaplessPlayback,
-      isAntiAlias: isAntiAlias,
-      filterQuality: filterQuality,
-    );
   }
 }

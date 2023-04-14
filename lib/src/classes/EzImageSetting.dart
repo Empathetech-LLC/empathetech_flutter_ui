@@ -10,7 +10,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
   /// Creates a tool for updating the image at [prefsKey]'s path
-  const EzImageSetting({
+  EzImageSetting({
     Key? key,
     required this.prefsKey,
     required this.fullscreen,
@@ -147,7 +147,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             textAlign: TextAlign.center,
           ),
           contents: [
-            ezText(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
+            Text(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
           ],
         ),
       ),

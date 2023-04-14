@@ -18,7 +18,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Optionally provide [autoLoop] if you want the video to loop upon completion
   /// Otherwise, the video will automatically pause on the last frame
   /// Videos begin muted, but the volume will be raised to full upon replay
-  const EzVideoPlayer({
+  EzVideoPlayer({
     Key? key,
     required this.controller,
     required this.iconColor,

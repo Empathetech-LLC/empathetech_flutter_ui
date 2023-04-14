@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 class EzFontSetting extends StatefulWidget {
   /// Creates a tool for updating the app's font
-  const EzFontSetting({Key? key}) : super(key: key);
+  EzFontSetting({Key? key}) : super(key: key);
 
   @override
   _FontFamilySettingState createState() => _FontFamilySettingState();
@@ -62,7 +62,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        ezText('Font family', style: buildTextStyle(style: subTitleStyleKey)),
+        Text('Font family', style: buildTextStyle(style: subTitleStyleKey)),
 
         // Font picker
         EzButton(

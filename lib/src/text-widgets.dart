@@ -5,32 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Text that values its personal space
-/// And requires a [TextStyle], for wide [TargetPlatform] support
-/// Optionally provide [textAlign]
-/// Optionally overwrite the transparent [background] color
-/// Optionally provide a [navTo] function (ie: [pushScreen]) to make the text an internal link
-Widget ezText(
-  String text, {
-  required TextStyle style,
-  TextAlign? textAlign,
-  Color background = Colors.transparent,
-}) {
-  double padding = EzConfig.prefs[paddingKey] / 2.0;
-
-  return Padding(
-    padding: EdgeInsets.all(padding),
-    child: Container(
-      decoration: BoxDecoration(
-        color: background.withOpacity(background.opacity * 0.75),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      padding: EdgeInsets.all(padding),
-      child: Text(text, style: style, textAlign: textAlign),
-    ),
-  );
-}
-
 /// Styles a [PlatformTextFormField] from [EzConfig.prefs]
 Widget ezForm({
   required Key? key,

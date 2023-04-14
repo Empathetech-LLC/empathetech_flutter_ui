@@ -19,7 +19,7 @@ enum SettingType {
 class EzSliderSetting extends StatefulWidget {
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
-  const EzSliderSetting({
+  EzSliderSetting({
     Key? key,
     required this.prefsKey,
     required this.type,
@@ -75,7 +75,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ezText(
+              Text(
                 'Currently:\n$currValue\n\n(to scale)',
                 style: buildTextStyle(style: dialogContentStyleKey),
                 textAlign: TextAlign.center,
@@ -188,7 +188,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// [widget.title] + [preview] + [PlatformSlider] + reset [EzButton.icon]
   List<Widget> buildList() {
     List<Widget> toReturn = [
-      ezText(widget.title, style: buildTextStyle(style: subTitleStyleKey))
+      Text(widget.title, style: buildTextStyle(style: subTitleStyleKey))
     ];
 
     toReturn.addAll(_buildPreview());

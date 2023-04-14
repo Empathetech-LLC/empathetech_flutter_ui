@@ -21,7 +21,7 @@ Future<dynamic> logAlert(
         textAlign: TextAlign.center,
       ),
       contents: [
-        ezText(message, style: buildTextStyle(style: dialogContentStyleKey)),
+        Text(message, style: buildTextStyle(style: dialogContentStyleKey)),
       ],
     ),
   );

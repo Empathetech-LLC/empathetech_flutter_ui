@@ -10,7 +10,7 @@ class EzColorSetting extends StatefulWidget {
   /// The [EzColorSetting] title is the passed [message] and is paired with a
   /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
   /// If a [textBackgroundKey] is provided, it will be used to generate a recommended color pair
-  const EzColorSetting({
+  EzColorSetting({
     Key? key,
     required this.toControl,
     required this.message,
@@ -166,11 +166,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        ezText(
+        Text(
           widget.message,
           style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,
-          background: Color(EzConfig.prefs[themeColorKey]),
         ),
 
         // Color preview/edit button
