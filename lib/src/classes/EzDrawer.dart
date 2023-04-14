@@ -19,8 +19,7 @@ class EzDrawer extends StatelessWidget {
   final Widget header;
   final List<Widget> body;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool forceMaterial;
 
   /// Builds a [PlatformTarget] dynamic [Drawer] from [EzConfig.prefs]
