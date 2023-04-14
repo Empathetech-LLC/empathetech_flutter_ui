@@ -9,6 +9,7 @@ export 'EzDrawer.dart';
 export 'EzFontSetting.dart';
 export 'EzIcon.dart';
 export 'EzImageSetting.dart';
+export 'EzNavBar.dart';
 export 'EzNotifications.dart';
 export 'EzScaffold.dart';
 export 'EzSliderSetting.dart';
