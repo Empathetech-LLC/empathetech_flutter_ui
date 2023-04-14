@@ -125,5 +125,5 @@ Future<dynamic> replaceScreen({
 
 /// More readable than [Navigator] spelled out
 void popUntilHome(BuildContext context) {
-  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+  return Navigator.of(context).popUntil(ModalRoute.withName('/'));
 }
