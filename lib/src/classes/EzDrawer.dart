@@ -9,7 +9,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzDrawer extends StatelessWidget {
   final Key? key;
 
-  /// Default -> [EzConfig] themeColorKey
+  /// Default:
+  /// [EzConfig] -> themeColorKey
   final Color? backgroundColor;
 
   final double? elevation;
@@ -18,7 +19,8 @@ class EzDrawer extends StatelessWidget {
   final Widget header;
   final List<Widget> body;
 
-  /// Default -> false
+  /// Default:
+  /// false
   final bool forceMaterial;
 
   /// Builds a [PlatformTarget] dynamic [Drawer] from [EzConfig.prefs]

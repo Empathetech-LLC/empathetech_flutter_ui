@@ -10,7 +10,8 @@ class EzAppBar extends PlatformAppBar {
   final Key? widgetKey;
   final Widget title;
 
-  /// Default -> [EzConfig] themeColorKey
+  /// Default:
+  /// [EzConfig] -> themeColorKey
   final Color? backgroundColor;
 
   final Widget? leading;

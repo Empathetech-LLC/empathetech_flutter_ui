@@ -23,7 +23,7 @@ class EzApp extends PlatformProvider {
   final Color? color;
   final Locale? locale;
 
-  /// Default ->
+  /// Default:
   /// <LocalizationsDelegate<dynamic>>[
   ///   DefaultMaterialLocalizations.delegate,
   ///   DefaultWidgetsLocalizations.delegate,
@@ -55,7 +55,8 @@ class EzApp extends PlatformProvider {
   /// Default [cupertinoAppTheme]
   final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
 
-  /// Default -> PlatformSettingsData(iosUsesMaterialWidgets: true)
+  /// Default:
+  /// PlatformSettingsData(iosUsesMaterialWidgets: true)
   final PlatformSettingsData? settings;
 
   /// Quickly setup a [PlatformProvider] to pair with [EzConfig]

@@ -10,13 +10,15 @@ class EzButton extends StatelessWidget {
   final Key? key;
   final VoidCallback action;
 
-  /// Default -> [doNothing]
+  /// Default:
+  /// [doNothing]
   final VoidCallback longAction;
 
   final Widget body;
   final ButtonStyle? customStyle;
 
-  /// Default -> false
+  /// Default:
+  /// false
   final bool forceMaterial;
 
   /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]
