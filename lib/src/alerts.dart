@@ -71,8 +71,9 @@ Card warningCard({
 }
 
 /// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
-/// The text is "naked"; wrap in a container if necessary
-Widget loadingMessage({
+/// [Row] of [Text] wrapped in a [Center]
+/// Make this the child of your own background [Widget] if necessary
+Center loadingMessage({
   required BuildContext context,
   required Image image,
 }) {
@@ -83,20 +84,18 @@ Widget loadingMessage({
   double imageSize = style.fontSize!;
   SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
 
-  return Container(
-    child: Center(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('Loading ', style: style),
-          ellipsis,
-          Text(' ', style: style),
-          ellipsis,
-          Text(' ', style: style),
-          ellipsis,
-        ],
-      ),
+  return Center(
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text('Loading ', style: style),
+        ellipsis,
+        Text(' ', style: style),
+        ellipsis,
+        Text(' ', style: style),
+        ellipsis,
+      ],
     ),
   );
 }
