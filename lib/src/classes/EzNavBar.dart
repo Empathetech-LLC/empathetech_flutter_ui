@@ -19,7 +19,7 @@ class EzNavBar extends PlatformNavBar {
   final MaterialNavBarData Function(BuildContext, PlatformTarget)? material;
   final CupertinoTabBarData Function(BuildContext, PlatformTarget)? cupertino;
 
-  /// Styles a [PlatformAppBar] with [EzConfig.prefs]
+  /// Styles a [PlatformNavBar] with [EzConfig.prefs]
   EzNavBar({
     this.key,
     this.widgetKey,
