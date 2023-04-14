@@ -166,17 +166,10 @@ class _ImageSettingState extends State<EzImageSetting> {
             child: (updatedPath is String) // user made a change
                 ? (updatedPath == noImageKey)
                     ? EzIcon(PlatformIcons(context).clear)
-                    : buildImage(
-                        path: updatedPath as String,
-                        fit: BoxFit.fill,
-                      )
+                    : Image(image: AssetImage(updatedPath as String))
                 : (currPathKey == noImageKey) // using app's current state
                     ? EzIcon(PlatformIcons(context).clear)
-                    : ezImage(
-                        pathKey: currPathKey,
-                        fit: BoxFit.fill,
-                        backup: updatedPath,
-                      ),
+                    : EzImage(prefsKey: currPathKey),
           ),
         ],
       ),
