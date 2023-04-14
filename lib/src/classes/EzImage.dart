@@ -72,7 +72,7 @@ class EzImage extends Image {
     this.isAntiAlias = false,
     this.filterQuality = FilterQuality.low,
   }) : super(
-          image: _selectImageProvider(prefsKey),
+          image: getProvider(prefsKey),
           key: key,
           frameBuilder: frameBuilder,
           loadingBuilder: loadingBuilder,
@@ -94,7 +94,11 @@ class EzImage extends Image {
           filterQuality: filterQuality,
         );
 
-  static ImageProvider _selectImageProvider(String prefsKey) {
+  /// Automatically handles [AssetImage] vs [FileImage]
+  /// Technically supports [NetworkImage], but at this time it isn't recommended
+  /// Will use [EzConfig.preferences] as a backup if [EzConfig.prefs] fails
+  /// In a total failure event, a stock owl image will be shown
+  static ImageProvider getProvider(String prefsKey) {
     // Something went wrong, return watchful owl
     String errorURL =
         'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
