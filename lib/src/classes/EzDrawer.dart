@@ -10,7 +10,7 @@ class EzDrawer extends StatelessWidget {
   final Key? key;
 
   /// Default:
-  /// [EzConfig] -> themeColorKey
+  /// [EzConfig.prefs] -> themeColorKey
   final Color? backgroundColor;
 
   final double? elevation;
