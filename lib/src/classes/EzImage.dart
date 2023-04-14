@@ -5,7 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class EzImage extends Image {
   final Key? key;
@@ -119,7 +118,7 @@ class EzImage extends Image {
         EzConfig.preferences.remove(prefsKey);
 
         // Default case, stock owl
-        return CachedNetworkImageProvider(path);
+        return NetworkImage(path);
       }
     }
   }
