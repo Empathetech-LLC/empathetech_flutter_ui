@@ -13,6 +13,7 @@ export 'EzImageSetting.dart';
 export 'EzNavBar.dart';
 export 'EzNotifications.dart';
 export 'EzScaffold.dart';
+export 'EzScrollView.dart';
 export 'EzSliderSetting.dart';
 export 'EzVideoPlayer.dart';
 export 'EzWebScaffold.dart';
