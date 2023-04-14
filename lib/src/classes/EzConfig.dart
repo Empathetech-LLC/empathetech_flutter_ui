@@ -5,32 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Empathetech triadic colors
-
-const Color EmpathEucalyptus = Color(0xFF20DAA5);
-const Color EmpathPurple = Color(0xFFA520DA);
-const Color EmpathGoldenrod = Color(0xFFDAA520);
-
-// Preference keys
-
-const String backImageKey = 'backImage';
-const String noImageKey = 'noImage';
-const String backColorKey = 'appBackgroundColor';
-const String themeColorKey = 'themeColor';
-const String themeTextColorKey = 'themeTextColor';
-const String buttonColorKey = 'buttonColor';
-const String buttonTextColorKey = 'buttonTextColor';
-const String alertColorKey = 'alertColor';
-const String buttonSpacingKey = 'buttonSpacing';
-const String dialogSpacingKey = 'dialogSpacing';
-const String marginKey = 'margin';
-const String paddingKey = 'padding';
-const String fontFamilyKey = 'fontFamily';
-const String fontSizeKey = 'fontSize';
-
 /// Static object for managing a dynamic && user customizable UI
 /// Tracks the apps [FocusManager] for keyboard management
-/// Setting are tracked with [shared_preferences]
+/// Setting are tracked with shared_preferences
 class EzConfig {
   static late List<String> assets;
   static late SharedPreferences preferences;
@@ -103,3 +80,20 @@ class EzConfig {
     });
   }
 }
+
+// Preference keys
+
+const String backImageKey = 'backImage';
+const String noImageKey = 'noImage';
+const String backColorKey = 'appBackgroundColor';
+const String themeColorKey = 'themeColor';
+const String themeTextColorKey = 'themeTextColor';
+const String buttonColorKey = 'buttonColor';
+const String buttonTextColorKey = 'buttonTextColor';
+const String alertColorKey = 'alertColor';
+const String buttonSpacingKey = 'buttonSpacing';
+const String dialogSpacingKey = 'dialogSpacing';
+const String marginKey = 'margin';
+const String paddingKey = 'padding';
+const String fontFamilyKey = 'fontFamily';
+const String fontSizeKey = 'fontSize';
