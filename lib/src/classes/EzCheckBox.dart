@@ -10,8 +10,7 @@ class EzCheckBox extends Checkbox {
   final Key? key;
   final bool? value;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool tristate;
 
   final void Function(bool?)? onChanged;
@@ -20,14 +19,14 @@ class EzCheckBox extends Checkbox {
 
   /// Default:
   /// MaterialStateProperty.resolveWith(
-  //   (states) {
-  //     if (states.contains(MaterialState.selected)) {
-  //       return Color(EzConfig.prefs[buttonColorKey]);
-  //     } else {
-  //       return Color(EzConfig.prefs[themeTextColorKey]);
-  //     }
-  //   },
-  // )
+  ///   (states) {
+  ///     if (states.contains(MaterialState.selected)) {
+  ///       return Color(EzConfig.prefs[buttonColorKey]);
+  ///     } else {
+  ///       return Color(EzConfig.prefs[themeTextColorKey]);
+  ///     }
+  ///   },
+  /// )
   final MaterialStateProperty<Color?>? fillColor;
 
   /// Default:
@@ -42,15 +41,13 @@ class EzCheckBox extends Checkbox {
   final VisualDensity? visualDensity;
   final FocusNode? focusNode;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool autofocus;
 
   final OutlinedBorder? shape;
   final BorderSide? side;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool isError;
 
   /// Styles a [Checkbox] with [EzConfig.prefs]

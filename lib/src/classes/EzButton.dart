@@ -17,8 +17,7 @@ class EzButton extends StatelessWidget {
   final Widget body;
   final ButtonStyle? customStyle;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool forceMaterial;
 
   /// Styles a [PlatformElevatedButton] from [EzConfig.prefs]

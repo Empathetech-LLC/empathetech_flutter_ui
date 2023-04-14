@@ -14,8 +14,7 @@ class EzScaffold extends PlatformScaffold {
   final Widget? fab;
   final PlatformNavBar? bottomNavBar;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool iosContentPadding;
 
   // Default -> false

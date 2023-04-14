@@ -25,26 +25,21 @@ class EzWebScaffold extends Scaffold {
   final BoxDecoration background;
   final bool? resizeToAvoidBottomInset;
 
-  /// Default:
-  /// true
+  /// Default: true
   final bool primary;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool extendBody;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool extendBodyBehindAppBar;
   final Color? drawerScrimColor;
   final double? drawerEdgeDragWidth;
 
-  /// Default:
-  /// true
+  /// Default: true
   final bool drawerEnableOpenDragGesture;
 
-  /// Default:
-  /// true
+  /// Default: true
   final bool endDrawerEnableOpenDragGesture;
   final String? restorationId;
 
