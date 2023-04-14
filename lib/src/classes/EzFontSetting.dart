@@ -40,11 +40,11 @@ class _FontFamilySettingState extends State<EzFontSetting> {
                     action: () {
                       EzConfig.preferences.setString(fontFamilyKey, font);
                       setState(() {
-                        currFontFamily = googleStyleAlias(font).fontFamily!;
+                        currFontFamily = gStyle(font).fontFamily!;
                       });
                       popScreen(context: context, pass: font);
                     },
-                    body: Text(font, style: googleStyleAlias(font)),
+                    body: Text(font, style: gStyle(font)),
                   ),
                   Container(height: buttonSpacer),
                 ],
