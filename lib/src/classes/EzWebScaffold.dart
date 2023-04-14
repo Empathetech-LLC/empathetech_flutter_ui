@@ -44,7 +44,7 @@ class EzWebScaffold extends Scaffold {
   final String? restorationId;
 
   /// Standardizes building a [Scaffold] styled from [EzConfig.prefs]
-  /// It's recommended to use [standardWindow] for the [body]
+  /// It's recommended to use [standardView] for the [body]
   EzWebScaffold({
     this.key,
     required this.appBar,
