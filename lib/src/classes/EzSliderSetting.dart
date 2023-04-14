@@ -115,7 +115,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SettingType.buttonSpacing:
         return [
-          ezScrollView(
+          EzScrollView(
             children: [
               EzButton(
                 action: doNothing,

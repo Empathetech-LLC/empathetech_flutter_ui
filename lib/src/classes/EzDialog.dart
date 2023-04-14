@@ -50,7 +50,7 @@ class EzDialog extends PlatformAlertDialog {
         titlePadding: EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
 
         // Content
-        content: content ?? ezScrollView(children: contents),
+        content: content ?? EzScrollView(children: contents),
         contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
 
@@ -61,7 +61,7 @@ class EzDialog extends PlatformAlertDialog {
 
         // Content
         content: content ??
-            ezScrollView(
+            EzScrollView(
                 children:
                     (needsClose) ? contents : [...contents, Container(height: padding)]),
         actions: (needsClose)

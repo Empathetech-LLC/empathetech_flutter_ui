@@ -81,7 +81,7 @@ class EzDrawer extends StatelessWidget {
       backgroundColor: themeColor,
       elevation: elevation,
       shape: shape,
-      child: ezScrollView(
+      child: EzScrollView(
         children: [DrawerHeader(child: header), ...body],
       ),
       semanticLabel: semanticLabel,
