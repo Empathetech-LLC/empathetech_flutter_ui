@@ -6,45 +6,101 @@ import 'package:flutter/material.dart';
 
 class EzWebScaffold extends Scaffold {
   final Key? key;
-  final BoxDecoration background;
   final PreferredSizeWidget appBar;
-  final Widget? drawer;
-  final Widget? endDrawer;
   final Widget body;
-  final Widget? fab;
-  final int? index;
-  final List<BottomNavigationBarItem>? items;
-  final void Function(int)? onChanged;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final FloatingActionButtonAnimator? floatingActionButtonAnimator;
+  final List<Widget>? persistentFooterButtons;
+
+  /// Default:
+  /// AlignmentDirectional.centerEnd
+  final AlignmentDirectional persistentFooterAlignment;
+  final Widget? drawer;
+  final void Function(bool)? onDrawerChanged;
+  final Widget? endDrawer;
+  final void Function(bool)? onEndDrawerChanged;
+  final Widget? bottomNavigationBar;
+  final Widget? bottomSheet;
+  final BoxDecoration background;
+  final bool? resizeToAvoidBottomInset;
+
+  /// Default:
+  /// true
+  final bool primary;
+
+  /// Default:
+  /// false
+  final bool extendBody;
+
+  /// Default:
+  /// false
+  final bool extendBodyBehindAppBar;
+  final Color? drawerScrimColor;
+  final double? drawerEdgeDragWidth;
+
+  /// Default:
+  /// true
+  final bool drawerEnableOpenDragGesture;
+
+  /// Default:
+  /// true
+  final bool endDrawerEnableOpenDragGesture;
+  final String? restorationId;
 
   /// Standardizes building a [Scaffold] styled from [EzConfig.prefs]
   /// It's recommended to use [standardWindow] for the [body]
   EzWebScaffold({
     this.key,
     required this.appBar,
-    this.drawer,
-    this.endDrawer,
-    required this.background,
     required this.body,
-    this.fab,
-    this.index,
-    this.items,
-    this.onChanged,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator,
+    this.persistentFooterButtons,
+    this.persistentFooterAlignment = AlignmentDirectional.centerEnd,
+    this.drawer,
+    this.onDrawerChanged,
+    this.endDrawer,
+    this.onEndDrawerChanged,
+    this.bottomNavigationBar,
+    this.bottomSheet,
+    required this.background,
+    this.resizeToAvoidBottomInset,
+    this.primary = true,
+    this.extendBody = false,
+    this.extendBodyBehindAppBar = false,
+    this.drawerScrimColor,
+    this.drawerEdgeDragWidth,
+    this.drawerEnableOpenDragGesture = true,
+    this.endDrawerEnableOpenDragGesture = true,
+    this.restorationId,
   }) : super(
           key: key,
           appBar: appBar,
           drawer: drawer,
+          onDrawerChanged: onDrawerChanged,
           endDrawer: endDrawer,
+          onEndDrawerChanged: onEndDrawerChanged,
           body: Container(
             decoration: background,
             child: body,
           ),
-          floatingActionButton: fab,
-          bottomNavigationBar: (index != null && items != null && onChanged != null)
-              ? BottomNavigationBar(
-                  currentIndex: index,
-                  items: items,
-                  onTap: onChanged,
-                )
-              : null,
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
+          floatingActionButtonAnimator: floatingActionButtonAnimator,
+          bottomNavigationBar: bottomNavigationBar,
+          bottomSheet: bottomSheet,
+          persistentFooterButtons: persistentFooterButtons,
+          persistentFooterAlignment: persistentFooterAlignment,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          primary: primary,
+          extendBody: extendBody,
+          extendBodyBehindAppBar: extendBodyBehindAppBar,
+          drawerScrimColor: drawerScrimColor,
+          drawerEdgeDragWidth: drawerEdgeDragWidth,
+          drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
+          endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
+          restorationId: restorationId,
         );
 }
