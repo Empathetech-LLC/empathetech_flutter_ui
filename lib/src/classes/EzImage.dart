@@ -5,6 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EzImage extends Image {
   final Key? key;
@@ -14,9 +15,9 @@ class EzImage extends Image {
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
   final String? semanticLabel;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool excludeFromSemantics;
+
   final double? width;
   final double? height;
   final Color? color;
@@ -24,32 +25,31 @@ class EzImage extends Image {
   final BlendMode? colorBlendMode;
   final BoxFit? fit;
 
-  /// Default:
-  /// [Alignment.center]
+  /// Default: [Alignment.center]
   final AlignmentGeometry alignment;
 
-  /// Default:
-  /// [ImageRepeat.noRepeat]
+  /// Default: [ImageRepeat.noRepeat]
   final ImageRepeat repeat;
+
   final Rect? centerSlice;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool matchTextDirection;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool gaplessPlayback;
 
-  /// Default:
-  /// false
+  /// Default: false
   final bool isAntiAlias;
 
-  /// Default:
-  /// [FilterQuality.low]
+  /// Default: [FilterQuality.low]
   final FilterQuality filterQuality;
 
-  /// [Image] COMMENT ME
+  /// Quickly build an [Image] whose path is stored in [EzConfig.prefs]
+  /// Automatically handles [AssetImage] vs [FileImage]
+  /// Technically supports [NetworkImage], but at this time it isn't recommended
+  /// Will use [EzConfig.preferences] as a backup if [EzConfig.prefs] fails
+  /// In a total failure event, a stock owl image will be shown
   EzImage({
     this.key,
     required this.prefsKey,
@@ -94,14 +94,16 @@ class EzImage extends Image {
           filterQuality: filterQuality,
         );
 
-  static ImageProvider _selectImageProvider(String pathKey) {
-    String path;
+  static ImageProvider _selectImageProvider(String prefsKey) {
+    // Something went wrong, return watchful owl
+    String errorURL =
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-    if (backup is String) {
-      path = EzConfig.preferences.getString(pathKey) ?? backup;
-    } else {
-      path = EzConfig.prefs[pathKey];
-    }
+    dynamic prefsValue = EzConfig.prefs[prefsKey];
+
+    String path = (prefsValue is String)
+        ? prefsValue
+        : (EzConfig.preferences.getString(prefsKey) ?? errorURL);
 
     if (isAsset(path)) {
       return AssetImage(path);
@@ -110,20 +112,10 @@ class EzImage extends Image {
         return FileImage(File(path));
       } on FileSystemException catch (_) {
         // File not found error - wipe the setting and return the/a backup image
-        EzConfig.preferences.remove(pathKey);
-
-        try {
-          if (backup != null) {
-            return AssetImage(backup);
-          }
-        } catch (_) {
-          // Continue on to default case
-          doNothing();
-        }
+        EzConfig.preferences.remove(prefsKey);
 
         // Default case, stock owl
-        return NetworkImage(
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg');
+        return CachedNetworkImageProvider(path);
       }
     }
   }
