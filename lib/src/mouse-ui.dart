@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Quick [MouseRegion] && [GestureDetector] combo
-Widget ezClickable({
+MouseRegion ezClickable({
   required Widget child,
   void Function()? onTap,
   void Function()? onLongPress,
@@ -19,7 +19,8 @@ Widget ezClickable({
   );
 }
 
-Widget ezLink({
+/// [ezClickable] that opens a [url] in a new page
+MouseRegion ezLink({
   required Uri url,
   required Widget child,
 }) {
