@@ -5,41 +5,32 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 
-/// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
-/// The text is "naked"; wrap in a container if necessary
-Widget loadingMessage({
-  required BuildContext context,
-  required Image image,
-}) {
-  // Gather theme data
-
-  TextStyle style = buildTextStyle(style: titleStyleKey);
-
-  double imageSize = style.fontSize!;
-  SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
-
-  return Container(
-    child: Center(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('Loading ', style: style),
-          ellipsis,
-          Text(' ', style: style),
-          ellipsis,
-          Text(' ', style: style),
-          ellipsis,
-        ],
+/// Log the passed message and display an [EzDialog] for the user
+/// Should always return null via [popScreen]
+Future<dynamic> logAlert(
+  BuildContext context,
+  String message,
+) {
+  log(message);
+  return openDialog(
+    context: context,
+    dialog: EzDialog(
+      title: Text(
+        'Attention:',
+        style: buildTextStyle(style: dialogTitleStyleKey),
+        textAlign: TextAlign.center,
       ),
+      contents: [
+        ezText(message, style: buildTextStyle(style: dialogContentStyleKey)),
+      ],
     ),
   );
 }
 
-/// [titleCard] designed to grab attention for warnings...
+/// [Card] designed to grab attention for warnings...
 /// [Icon] 'WARNING' [Icon]
 ///        [content]
-Widget warningCard({
+Card warningCard({
   required BuildContext context,
   required String warning,
 }) {
@@ -79,24 +70,33 @@ Widget warningCard({
   );
 }
 
-/// Log the passed message and display an alert dialog for the user
-/// Should always return null via [popScreen]
-Future<dynamic> logAlert(
-  BuildContext context,
-  String message,
-) {
-  log(message);
-  return openDialog(
-    context: context,
-    dialog: EzDialog(
-      title: Text(
-        'Attention:',
-        style: buildTextStyle(style: dialogTitleStyleKey),
-        textAlign: TextAlign.center,
+/// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
+/// The text is "naked"; wrap in a container if necessary
+Widget loadingMessage({
+  required BuildContext context,
+  required Image image,
+}) {
+  // Gather theme data
+
+  TextStyle style = buildTextStyle(style: titleStyleKey);
+
+  double imageSize = style.fontSize!;
+  SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
+
+  return Container(
+    child: Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('Loading ', style: style),
+          ellipsis,
+          Text(' ', style: style),
+          ellipsis,
+          Text(' ', style: style),
+          ellipsis,
+        ],
       ),
-      contents: [
-        ezText(message, style: buildTextStyle(style: dialogContentStyleKey)),
-      ],
     ),
   );
 }
