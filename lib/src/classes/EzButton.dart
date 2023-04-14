@@ -237,3 +237,42 @@ CupertinoElevatedButtonData m2cButton({
     borderRadius: (materialBase.shape != null) ? BorderRadius.circular(30.0) : null,
   );
 }
+
+/// Builds a pair of customizable [EzButton.icon]s for confirming and/or denying things
+Widget ezYesNo({
+  required BuildContext context,
+  required void Function() onConfirm,
+  required void Function() onDeny,
+  required Axis axis,
+  double? spacer,
+  String confirmMsg = 'Yes',
+  String denyMsg = 'No',
+  Icon? customConfirm,
+  Icon? customDeny,
+}) {
+  // Gather theme data
+
+  Icon confirmIcon = customConfirm ?? EzIcon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customDeny ?? EzIcon(PlatformIcons(context).clear);
+  double spacing = (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
+
+  return axis == Axis.vertical
+      ? Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            Container(height: spacing),
+            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+          ],
+        )
+      : Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            Container(width: spacing),
+            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+          ],
+        );
+}
