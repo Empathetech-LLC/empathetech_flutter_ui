@@ -63,41 +63,47 @@ class _ColorSettingState extends State<EzColorSetting> {
           Color(EzConfig.preferences.getInt(pathKey) ?? EzConfig.prefs[pathKey]);
       int recommended = getContrastColor(backgroundColor).value;
 
-      return ezDialog(
+      return openDialog(
         context: context,
-        title: 'Use recommended?',
-        content: [
-          // Recommended preview
-          Container(
-            width: 75,
-            height: 75,
-            decoration: BoxDecoration(
-              color: Color(recommended),
-              border: Border.all(color: backgroundColor),
+        dialog: EzDialog(
+          title: Text(
+            'Use recommended?',
+            style: buildTextStyle(style: dialogTitleStyleKey),
+            textAlign: TextAlign.center,
+          ),
+          contents: [
+            // Recommended preview
+            Container(
+              width: 75,
+              height: 75,
+              decoration: BoxDecoration(
+                color: Color(recommended),
+                border: Border.all(color: backgroundColor),
+              ),
             ),
-          ),
-          Container(height: buttonSpacer),
+            Container(height: buttonSpacer),
 
-          ezYesNo(
-            context: context,
-            onConfirm: () {
-              EzConfig.preferences.setInt(widget.toControl, recommended);
-              setState(() {
-                currColor = Color(recommended);
-              });
-              popScreen(context: context, pass: recommended);
-            },
-            onDeny: () async {
-              dynamic chosen = await _openColorPicker();
-              popScreen(context: context, pass: chosen);
-            },
-            customDeny: EzIcon(PlatformIcons(context).edit),
-            denyMsg: 'Pick custom',
-            axis: Axis.vertical,
-            spacer: dialogSpacer,
-          ),
-        ],
-        needsClose: true,
+            ezYesNo(
+              context: context,
+              onConfirm: () {
+                EzConfig.preferences.setInt(widget.toControl, recommended);
+                setState(() {
+                  currColor = Color(recommended);
+                });
+                popScreen(context: context, pass: recommended);
+              },
+              onDeny: () async {
+                dynamic chosen = await _openColorPicker();
+                popScreen(context: context, pass: chosen);
+              },
+              customDeny: EzIcon(PlatformIcons(context).edit),
+              denyMsg: 'Pick custom',
+              axis: Axis.vertical,
+              spacer: dialogSpacer,
+            ),
+          ],
+          needsClose: true,
+        ),
       );
     } else {
       return _openColorPicker();
@@ -111,39 +117,45 @@ class _ColorSettingState extends State<EzColorSetting> {
     Color resetColor = Color(EzConfig.defaults[widget.toControl]);
     double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-    return ezDialog(
+    return openDialog(
       context: context,
-      title: 'Reset to...',
-      content: [
-        // Color preview
-        Container(
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            color: resetColor,
-            border: Border.all(color: getContrastColor(resetColor)),
+      dialog: EzDialog(
+        title: Text(
+          'Reset to...',
+          style: buildTextStyle(style: dialogTitleStyleKey),
+          textAlign: TextAlign.center,
+        ),
+        contents: [
+          // Color preview
+          Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: resetColor,
+              border: Border.all(color: getContrastColor(resetColor)),
+            ),
           ),
-        ),
-        Container(height: dialogSpacer),
+          Container(height: dialogSpacer),
 
-        ezYesNo(
-          context: context,
-          onConfirm: () {
-            // Remove the user's setting and reset the current state
-            EzConfig.preferences.remove(widget.toControl);
+          ezYesNo(
+            context: context,
+            onConfirm: () {
+              // Remove the user's setting and reset the current state
+              EzConfig.preferences.remove(widget.toControl);
 
-            setState(() {
-              currColor = resetColor;
-            });
+              setState(() {
+                currColor = resetColor;
+              });
 
-            popScreen(context: context, pass: resetColor);
-          },
-          onDeny: () => popScreen(context: context),
-          axis: Axis.horizontal,
-          spacer: dialogSpacer,
-        ),
-      ],
-      needsClose: false,
+              popScreen(context: context, pass: resetColor);
+            },
+            onDeny: () => popScreen(context: context),
+            axis: Axis.horizontal,
+            spacer: dialogSpacer,
+          ),
+        ],
+        needsClose: false,
+      ),
     );
   }
 

@@ -86,9 +86,17 @@ Future<dynamic> logAlert(
   String message,
 ) {
   log(message);
-  return ezDialog(
+  return openDialog(
     context: context,
-    title: 'Attention:',
-    content: [ezText(message, style: buildTextStyle(style: dialogContentStyleKey))],
+    dialog: EzDialog(
+      title: Text(
+        'Attention:',
+        style: buildTextStyle(style: dialogTitleStyleKey),
+        textAlign: TextAlign.center,
+      ),
+      contents: [
+        ezText(message, style: buildTextStyle(style: dialogContentStyleKey)),
+      ],
+    ),
   );
 }

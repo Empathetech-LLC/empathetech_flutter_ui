@@ -149,24 +149,30 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.dialogSpacing:
         return [
           EzButton(
-            action: () => ezDialog(
+            action: () => openDialog(
               context: context,
-              title: 'Space preview',
-              content: [
-                // Button 1
-                EzButton(
-                  action: doNothing,
-                  body: Text('Currently: $currValue', style: buttonTextStyle),
+              dialog: EzDialog(
+                title: Text(
+                  'Space preview',
+                  style: buildTextStyle(style: dialogTitleStyleKey),
+                  textAlign: TextAlign.center,
                 ),
-                Container(height: currValue),
+                contents: [
+                  // Button 1
+                  EzButton(
+                    action: doNothing,
+                    body: Text('Currently: $currValue', style: buttonTextStyle),
+                  ),
+                  Container(height: currValue),
 
-                // Button 2
-                EzButton(
-                  action: doNothing,
-                  body: Text('Currently: $currValue', style: buttonTextStyle),
-                ),
-                Container(height: currValue),
-              ],
+                  // Button 2
+                  EzButton(
+                    action: doNothing,
+                    body: Text('Currently: $currValue', style: buttonTextStyle),
+                  ),
+                  Container(height: currValue),
+                ],
+              ),
             ),
             body: Text('Press me', style: buttonTextStyle),
           ),

@@ -6,83 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Styles a [PlatformAlertDialog] from [EzConfig.prefs]
-Future<dynamic> ezDialog({
+/// Little more concise/readable
+Future<dynamic> openDialog({
   required BuildContext context,
-  required List<Widget> content,
-  String? title,
-  bool needsClose = true,
+  required EzDialog dialog,
 }) {
-  TextStyle dialogTitleStyle = buildTextStyle(style: dialogTitleStyleKey);
-  double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
-  double padding = EzConfig.prefs[paddingKey];
-
-  // Builds the title widget based on platform (Cupertino needs extra padding)
-  Widget? _title() {
-    if (title == null) {
-      return null;
-    } else {
-      if (isCupertino(context)) {
-        return Container(
-          padding: EdgeInsets.only(bottom: EzConfig.prefs[dialogSpacingKey]),
-          child: Text(
-            title,
-            style: dialogTitleStyle,
-            textAlign: TextAlign.center,
-          ),
-        );
-      } else {
-        return Text(
-          title,
-          style: dialogTitleStyle,
-          textAlign: TextAlign.center,
-        );
-      }
-    }
-  }
-
   return showPlatformDialog(
     context: context,
-    builder: (context) => PlatformAlertDialog(
-      // Material (Android)
-      material: (context, platform) => MaterialAlertDialogData(
-        insetPadding: EdgeInsets.all(padding),
-
-        // Title
-        title: _title(),
-        titlePadding: EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
-
-        // Content
-        content: ezScrollView(children: content),
-        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
-      ),
-
-      // Cupertino (iOS)
-      cupertino: (context, platform) => CupertinoAlertDialogData(
-        // Title
-        title: _title(),
-
-        // Content
-        content: ezScrollView(
-            children: (needsClose) ? content : [...content, Container(height: padding)]),
-        actions: (needsClose)
-            ? [
-                GestureDetector(
-                  onTap: () => popScreen(context: context),
-                  child: ezText(
-                    'Close',
-                    style: buildTextStyle(style: dialogContentStyleKey),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ]
-            : [],
-      ),
-    ),
+    builder: (context) => dialog,
   );
 }
 
-/// Wrap a [ColorPicker] in an [ezDialog]
+/// Wrap a [ColorPicker] in an [EzDialog]
 Future<dynamic> ezColorPicker({
   required BuildContext context,
   required Color startColor,
@@ -90,27 +25,33 @@ Future<dynamic> ezColorPicker({
   required void Function() apply,
   required void Function() cancel,
 }) {
-  return ezDialog(
+  return openDialog(
     context: context,
-    title: 'Pick a color!',
-    content: [
-      ColorPicker(
-        pickerColor: startColor,
-        onColorChanged: onColorChange,
-        // ignore: deprecated_member_use
-        labelTextStyle: buildTextStyle(style: dialogContentStyleKey),
-        // above is required for iOS
+    dialog: EzDialog(
+      title: Text(
+        'Pick a color!',
+        style: buildTextStyle(style: dialogTitleStyleKey),
+        textAlign: TextAlign.center,
       ),
-      Container(height: EzConfig.prefs[dialogSpacingKey]),
-      ezYesNo(
-        context: context,
-        onConfirm: apply,
-        onDeny: cancel,
-        axis: Axis.vertical,
-        confirmMsg: 'Apply',
-        denyMsg: 'Cancel',
-      ),
-    ],
-    needsClose: false,
+      contents: [
+        ColorPicker(
+          pickerColor: startColor,
+          onColorChanged: onColorChange,
+          // ignore: deprecated_member_use
+          labelTextStyle: buildTextStyle(style: dialogContentStyleKey),
+          // above is required for iOS
+        ),
+        Container(height: EzConfig.prefs[dialogSpacingKey]),
+        ezYesNo(
+          context: context,
+          onConfirm: apply,
+          onDeny: cancel,
+          axis: Axis.vertical,
+          confirmMsg: 'Apply',
+          denyMsg: 'Cancel',
+        ),
+      ],
+      needsClose: false,
+    ),
   );
 }

@@ -115,7 +115,17 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ]);
 
-    return ezDialog(context: context, title: 'Update $title', content: options);
+    return openDialog(
+      context: context,
+      dialog: EzDialog(
+        title: Text(
+          'Update $title',
+          style: buildTextStyle(style: dialogTitleStyleKey),
+          textAlign: TextAlign.center,
+        ),
+        contents: options,
+      ),
+    );
   }
 
   @override
@@ -128,12 +138,18 @@ class _ImageSettingState extends State<EzImageSetting> {
             updatedPath = newPath;
           });
       },
-      longAction: () => ezDialog(
+      longAction: () => openDialog(
         context: context,
-        title: 'Credit to:',
-        content: [
-          ezText(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
-        ],
+        dialog: EzDialog(
+          title: Text(
+            'Credit to:',
+            style: buildTextStyle(style: dialogTitleStyleKey),
+            textAlign: TextAlign.center,
+          ),
+          contents: [
+            ezText(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
+          ],
+        ),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

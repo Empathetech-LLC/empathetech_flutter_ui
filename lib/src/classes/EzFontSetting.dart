@@ -23,29 +23,35 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
-    return ezDialog(
+    return openDialog(
       context: context,
-      title: 'Choose a font',
-      content: myGoogleFonts
-          .map(
-            (String font) => Column(
-              children: [
-                // Map font to a selectable button (title == name)
-                EzButton(
-                  action: () {
-                    EzConfig.preferences.setString(fontFamilyKey, font);
-                    setState(() {
-                      currFontFamily = googleStyleAlias(font).fontFamily!;
-                    });
-                    popScreen(context: context, pass: font);
-                  },
-                  body: Text(font, style: googleStyleAlias(font)),
-                ),
-                Container(height: buttonSpacer),
-              ],
-            ),
-          )
-          .toList(),
+      dialog: EzDialog(
+        title: Text(
+          'Choose a font',
+          style: buildTextStyle(style: dialogTitleStyleKey),
+          textAlign: TextAlign.center,
+        ),
+        contents: myGoogleFonts
+            .map(
+              (String font) => Column(
+                children: [
+                  // Map font to a selectable button (title == name)
+                  EzButton(
+                    action: () {
+                      EzConfig.preferences.setString(fontFamilyKey, font);
+                      setState(() {
+                        currFontFamily = googleStyleAlias(font).fontFamily!;
+                      });
+                      popScreen(context: context, pass: font);
+                    },
+                    body: Text(font, style: googleStyleAlias(font)),
+                  ),
+                  Container(height: buttonSpacer),
+                ],
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 

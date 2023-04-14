@@ -5,6 +5,7 @@ export 'EzAppBar.dart';
 export 'EzButton.dart';
 export 'EzColorSetting.dart';
 export 'EzConfig.dart';
+export 'EzDialog.dart';
 export 'EzDrawer.dart';
 export 'EzFontSetting.dart';
 export 'EzIcon.dart';
