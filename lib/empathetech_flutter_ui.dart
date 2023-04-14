@@ -10,3 +10,4 @@ export 'src/helpers.dart';
 export 'src/mouse-ui.dart';
 export 'src/scaffold-views.dart';
 export 'src/storage.dart';
+export 'src/text-styling.dart';
