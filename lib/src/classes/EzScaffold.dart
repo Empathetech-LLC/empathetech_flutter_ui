@@ -23,7 +23,7 @@ class EzScaffold extends PlatformScaffold {
 
   /// Standardizes building a [PlatformScaffold] styled from [EzConfig.prefs]
   /// Handling platform differences, like [floatingActionButton]s on iOS
-  /// See [standardWindow] and [navWindow] for [body] recommendations
+  /// See [standardView] and [navWindow] for [body] recommendations
   EzScaffold({
     this.key,
     this.widgetKey,
