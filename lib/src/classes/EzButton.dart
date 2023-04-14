@@ -45,21 +45,18 @@ class EzButton extends StatelessWidget {
     required Icon icon,
     required String message,
     TextStyle? customTextStyle,
-  }) : this.body = Padding(
-          padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              icon,
-              Container(width: EzConfig.prefs[paddingKey]),
-              Text(
-                message,
-                style: customTextStyle ?? buildTextStyle(style: buttonStyleKey),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+  }) : this.body = Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            icon,
+            Container(width: EzConfig.prefs[paddingKey]),
+            Text(
+              message,
+              style: customTextStyle ?? buildTextStyle(style: buttonStyleKey),
+              textAlign: TextAlign.center,
+            ),
+          ],
         );
 
   /// Text styling works differently in Material and Cupertino
@@ -112,7 +109,10 @@ class EzButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget ezBody = _buildBody();
+    Widget ezBody = Padding(
+      padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
+      child: _buildBody(),
+    );
     ButtonStyle ezStyle = _buildStyle();
 
     Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
