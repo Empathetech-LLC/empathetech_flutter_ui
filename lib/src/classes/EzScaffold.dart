@@ -5,7 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzScaffold extends StatelessWidget {
+class EzScaffold extends PlatformScaffold {
   final Key? key;
   final Key? widgetKey;
   final BoxDecoration background;
@@ -42,37 +42,38 @@ class EzScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     late double margin = EzConfig.prefs[marginKey];
 
-    return GestureDetector(
-      // Close open keyboard(s) on tap
-      onTap: () => EzConfig.focus.primaryFocus?.unfocus(),
+    return PlatformScaffold(
+      appBar: appBar,
+      bottomNavBar: bottomNavBar,
+      iosContentPadding: iosContentPadding,
+      iosContentBottomPadding: iosContentBottomPadding,
+      cupertinoTabChildBuilder: cupertinoTabChildBuilder,
 
-      child: PlatformScaffold(
-        appBar: appBar,
-        bottomNavBar: bottomNavBar,
-        iosContentPadding: iosContentPadding,
-        iosContentBottomPadding: iosContentBottomPadding,
-        cupertinoTabChildBuilder: cupertinoTabChildBuilder,
+      // Remainder: body, fab && background
+      // Differs based on platform
 
-        // Remainder: body, fab && background
-        // Differs based on platform
+      // Material/Android
+      material: (context, platform) => MaterialScaffoldData(
+        // Get Material end drawer (aka trailing widget) form the appBar
+        // This is why we must use an EzAppBar
+        endDrawer: (appBar.trailing is EzDrawer) ? appBar.trailing : null,
 
-        // Material/Android
-        material: (context, platform) => MaterialScaffoldData(
-          // Get Material end drawer (aka trailing widget) form the appBar
-          // This is why we must use an EzAppBar
-          endDrawer: (appBar.trailing is EzDrawer) ? appBar.trailing : null,
-
-          // Decoration in the background, draw everything to the safe area
-          body: Container(
+        // Decoration in the background, draw everything to the safe area
+        body: GestureDetector(
+          onTap: closeFocus,
+          child: Container(
             decoration: background,
             child: SafeArea(child: body),
           ),
-          floatingActionButton: fab,
         ),
+        floatingActionButton: fab,
+      ),
 
-        // Cupertino/iOS
-        cupertino: (context, platform) => CupertinoPageScaffoldData(
-          body: Container(
+      // Cupertino/iOS
+      cupertino: (context, platform) => CupertinoPageScaffoldData(
+        body: GestureDetector(
+          onTap: closeFocus,
+          child: Container(
             // Decoration in the background, draw everything to the safe area
             decoration: background,
             child: SafeArea(
