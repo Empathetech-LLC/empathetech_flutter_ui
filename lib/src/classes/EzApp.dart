@@ -203,6 +203,31 @@ MaterialAppData materialAppTheme() {
   );
 }
 
+/// Sets all [TextStyle]s to the default case from [buildTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [EzConfig]
+TextTheme materialTextTheme() {
+  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
+
+  return TextTheme(
+    labelLarge: defaultTextStyle,
+    bodyLarge: defaultTextStyle,
+    titleLarge: defaultTextStyle,
+    displayLarge: defaultTextStyle,
+    headlineLarge: defaultTextStyle,
+    labelMedium: defaultTextStyle,
+    bodyMedium: defaultTextStyle,
+    titleMedium: defaultTextStyle,
+    displayMedium: defaultTextStyle,
+    headlineMedium: defaultTextStyle,
+    labelSmall: defaultTextStyle,
+    bodySmall: defaultTextStyle,
+    titleSmall: defaultTextStyle,
+    displaySmall: defaultTextStyle,
+    headlineSmall: defaultTextStyle,
+  );
+}
+
 /// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
 CupertinoAppData cupertinoAppTheme() {
   Color themeColor = Color(EzConfig.prefs[themeColorKey]);
@@ -215,5 +240,25 @@ CupertinoAppData cupertinoAppTheme() {
       primaryContrastingColor: themeTextColor,
       textTheme: cupertinoTextTheme(),
     ),
+  );
+}
+
+/// Sets all [TextStyle]s to the default case from [buildTextStyle]
+/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
+/// [Widget] styling matches that of [EzConfig]
+CupertinoTextThemeData cupertinoTextTheme() {
+  Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
+  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
+
+  return CupertinoTextThemeData(
+    primaryColor: textColor,
+    textStyle: defaultTextStyle,
+    actionTextStyle: defaultTextStyle,
+    tabLabelTextStyle: defaultTextStyle,
+    navTitleTextStyle: defaultTextStyle,
+    navLargeTitleTextStyle: defaultTextStyle,
+    navActionTextStyle: defaultTextStyle,
+    pickerTextStyle: defaultTextStyle,
+    dateTimePickerTextStyle: defaultTextStyle,
   );
 }

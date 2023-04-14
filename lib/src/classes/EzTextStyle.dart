@@ -5,19 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-const String defaultStyleKey = 'defaultStyle';
-const String headerStyleKey = 'headerStyle';
-const String titleStyleKey = 'titleStyle';
-const String subTitleStyleKey = 'subTitleStyle';
-const String dialogTitleStyleKey = 'dialogTitleStyle';
-const String buttonStyleKey = 'buttonStyle';
-const String dialogContentStyleKey = 'dialogContentStyle';
-const String colorSettingStyleKey = 'colorSettingStyle';
-const String imageSettingStyleKey = 'imageSettingStyle';
-const String fontSettingStyleKey = 'fontSettingStyle';
-const String sliderSettingStyleKey = 'sliderSettingStyle';
-const String errorStyleKey = 'errorStyle';
-
 /// Maintains some prebuilt [TextStyle]s styled from [EzConfig]
 /// Optionally overwrite any values
 TextStyle buildTextStyle({
@@ -211,47 +198,15 @@ TextStyle buildTextStyle({
   }
 }
 
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
-TextTheme materialTextTheme() {
-  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
-
-  return TextTheme(
-    labelLarge: defaultTextStyle,
-    bodyLarge: defaultTextStyle,
-    titleLarge: defaultTextStyle,
-    displayLarge: defaultTextStyle,
-    headlineLarge: defaultTextStyle,
-    labelMedium: defaultTextStyle,
-    bodyMedium: defaultTextStyle,
-    titleMedium: defaultTextStyle,
-    displayMedium: defaultTextStyle,
-    headlineMedium: defaultTextStyle,
-    labelSmall: defaultTextStyle,
-    bodySmall: defaultTextStyle,
-    titleSmall: defaultTextStyle,
-    displaySmall: defaultTextStyle,
-    headlineSmall: defaultTextStyle,
-  );
-}
-
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
-CupertinoTextThemeData cupertinoTextTheme() {
-  Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
-  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
-
-  return CupertinoTextThemeData(
-    primaryColor: textColor,
-    textStyle: defaultTextStyle,
-    actionTextStyle: defaultTextStyle,
-    tabLabelTextStyle: defaultTextStyle,
-    navTitleTextStyle: defaultTextStyle,
-    navLargeTitleTextStyle: defaultTextStyle,
-    navActionTextStyle: defaultTextStyle,
-    pickerTextStyle: defaultTextStyle,
-    dateTimePickerTextStyle: defaultTextStyle,
-  );
-}
+const String defaultStyleKey = 'defaultStyle';
+const String headerStyleKey = 'headerStyle';
+const String titleStyleKey = 'titleStyle';
+const String subTitleStyleKey = 'subTitleStyle';
+const String dialogTitleStyleKey = 'dialogTitleStyle';
+const String buttonStyleKey = 'buttonStyle';
+const String dialogContentStyleKey = 'dialogContentStyle';
+const String colorSettingStyleKey = 'colorSettingStyle';
+const String imageSettingStyleKey = 'imageSettingStyle';
+const String fontSettingStyleKey = 'fontSettingStyle';
+const String sliderSettingStyleKey = 'sliderSettingStyle';
+const String errorStyleKey = 'errorStyle';
