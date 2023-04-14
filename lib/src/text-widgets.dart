@@ -31,17 +31,6 @@ Widget ezText(
   );
 }
 
-/// Say it loud, say it proud
-/// Background and text colors are built from [EzConfig.prefs] theme values
-Widget titleCard(
-  String title,
-) {
-  return Card(
-    color: Color(EzConfig.prefs[themeColorKey]),
-    child: ezText(title, style: buildTextStyle(style: titleStyleKey)),
-  );
-}
-
 /// Styles a [PlatformTextFormField] from [EzConfig.prefs]
 Widget ezForm({
   required Key? key,
