@@ -12,13 +12,19 @@ class EzScaffold extends StatelessWidget {
   final EzAppBar appBar;
   final Widget body;
   final Widget? fab;
-  final int? index;
-  final List<BottomNavigationBarItem>? items;
-  final void Function(int)? onChanged;
+  final PlatformNavBar? bottomNavBar;
+
+  /// Default:
+  /// false
+  final bool iosContentPadding;
+
+  // Default -> false
+  final bool iosContentBottomPadding;
+  final Widget Function(BuildContext, int)? cupertinoTabChildBuilder;
 
   /// Standardizes building a [PlatformScaffold] styled from [EzConfig.prefs]
   /// Handling platform differences, like [floatingActionButton]s on iOS
-  /// It's recommended to use [standardWindow] for the [body]
+  /// See [standardWindow] and [navWindow] for [body] recommendations
   EzScaffold({
     this.key,
     this.widgetKey,
@@ -26,31 +32,14 @@ class EzScaffold extends StatelessWidget {
     required this.appBar,
     required this.body,
     this.fab,
-    this.index,
-    this.items,
-    this.onChanged,
-  }) : assert(index == null && onChanged == null && items == null);
-
-  /// [EzScaffold] with a [PlatformNavBar]
-  /// It's recommended to use [navWindow] for the [body]
-  EzScaffold.nav({
-    this.key,
-    this.widgetKey,
-    required this.background,
-    required this.appBar,
-    required this.body,
-    this.fab,
-    required this.index,
-    required this.items,
-    required this.onChanged,
-  }) : assert(index != null && onChanged != null && items != null);
+    this.bottomNavBar,
+    this.iosContentPadding = false,
+    this.iosContentBottomPadding = false,
+    this.cupertinoTabChildBuilder,
+  });
 
   @override
   Widget build(BuildContext context) {
-    late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-    late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-    late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
-
     late double margin = EzConfig.prefs[marginKey];
 
     return GestureDetector(
@@ -59,22 +48,37 @@ class EzScaffold extends StatelessWidget {
 
       child: PlatformScaffold(
         appBar: appBar,
+        bottomNavBar: bottomNavBar,
+        iosContentPadding: iosContentPadding,
+        iosContentBottomPadding: iosContentBottomPadding,
+        cupertinoTabChildBuilder: cupertinoTabChildBuilder,
 
-        // Body
+        // Remainder: body, fab && background
+        // Differs based on platform
+
+        // Material/Android
         material: (context, platform) => MaterialScaffoldData(
+          // Get Material end drawer (aka trailing widget) form the appBar
+          // This is why we must use an EzAppBar
           endDrawer: (appBar.trailing is EzDrawer) ? appBar.trailing : null,
+
+          // Decoration in the background, draw everything to the safe area
           body: Container(
             decoration: background,
             child: SafeArea(child: body),
           ),
           floatingActionButton: fab,
         ),
+
+        // Cupertino/iOS
         cupertino: (context, platform) => CupertinoPageScaffoldData(
           body: Container(
+            // Decoration in the background, draw everything to the safe area
             decoration: background,
             child: SafeArea(
               child: (fab == null)
                   ? body
+                  // Manually draw floating action buttons on iOS
                   : Stack(
                       children: [
                         body,
@@ -88,28 +92,6 @@ class EzScaffold extends StatelessWidget {
             ),
           ),
         ),
-
-        // Nav bar
-        bottomNavBar: (index != null && onChanged != null && items != null)
-            ? PlatformNavBar(
-                currentIndex: index,
-                itemChanged: onChanged,
-                items: items,
-
-                // Platform specific configurations
-                material: (context, platform) => MaterialNavBarData(
-                  backgroundColor: themeColor,
-                  selectedItemColor: buttonColor,
-                  selectedIconTheme: IconThemeData(color: buttonColor),
-                  unselectedItemColor: themeTextColor,
-                  unselectedIconTheme: IconThemeData(color: themeTextColor),
-                ),
-                cupertino: (context, platform) => CupertinoTabBarData(
-                  backgroundColor: themeColor,
-                  activeColor: buttonColor,
-                ),
-              )
-            : null,
       ),
     );
   }
