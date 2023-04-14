@@ -4,9 +4,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Builds the "main screen" for pages built with [EzScaffold.standard]
-Widget standardView({
+/// Builds the "main screen" for pages built with [EzScaffold]
+Container standardView({
   required BuildContext context,
   BoxDecoration? background,
   required Widget body,
@@ -26,8 +27,8 @@ Widget standardView({
   );
 }
 
-/// Builds the "main screen" for pages built with [EzScaffold.nav]
-Widget navView({
+/// Builds the "main screen" for pages built with [EzScaffold] that use a [PlatformNavBar]
+Container navView({
   required BuildContext context,
   required Widget body,
   BoxDecoration? background,
@@ -46,8 +47,8 @@ Widget navView({
   );
 }
 
-/// Builds the "main screen" for pages built with [EzScaffold.web]
-Widget webView({
+/// Builds the "main screen" for pages built with [EzWebScaffold]
+Container webView({
   required BuildContext context,
   required Color backgroundColor,
   BoxDecoration? background,
