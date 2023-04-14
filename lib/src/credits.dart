@@ -15,6 +15,9 @@ const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
 /// Where the magic happens
 const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
 
+/// If you need to reach out
+const String EmpathetechSupport = 'support@empathetech.net';
+
 // Empathetech triadic colors
 
 const Color EmpathEucalyptus = Color(0xFF20DAA5);
