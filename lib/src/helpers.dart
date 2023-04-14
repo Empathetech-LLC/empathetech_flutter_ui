@@ -10,6 +10,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// Then do nothing!
 void doNothing() {}
 
+/// More readable than EzConfig.focus.primaryFocus?.unfocus()
+void closeFocus() {
+  EzConfig.focus.primaryFocus?.unfocus();
+}
+
 /// More readable than MediaQuery.of(context).size.width
 double screenWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
