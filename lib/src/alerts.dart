@@ -15,13 +15,13 @@ Future<dynamic> logAlert(
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: EzText(
+      title: EzText.simple(
         'Attention:',
         style: buildTextStyle(style: dialogTitleStyleKey),
         textAlign: TextAlign.center,
       ),
       contents: [
-        EzText(message, style: buildTextStyle(style: dialogContentStyleKey)),
+        EzText.simple(message, style: buildTextStyle(style: dialogContentStyleKey)),
       ],
     ),
   );
@@ -56,14 +56,18 @@ Card warningCard({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               EzIcon(Icons.warning, color: iconColor),
-              EzText('WARNING', style: titleStyle),
+              EzText.simple('WARNING', style: titleStyle),
               EzIcon(Icons.warning, color: iconColor),
             ],
           ),
           Container(height: padding),
 
           // Label
-          EzText(warning, style: contentStyle, textAlign: TextAlign.center),
+          EzText.simple(
+            warning,
+            style: contentStyle,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     ),
@@ -89,11 +93,11 @@ Center loadingMessage({
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        EzText('Loading ', style: style),
+        EzText.simple('Loading ', style: style),
         ellipsis,
-        EzText(' ', style: style),
+        EzText.simple(' ', style: style),
         ellipsis,
-        EzText(' ', style: style),
+        EzText.simple(' ', style: style),
         ellipsis,
       ],
     ),

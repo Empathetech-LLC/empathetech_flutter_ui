@@ -1,9 +1,14 @@
 library empathetech_flutter_ui;
 
-import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class EzText extends StatelessWidget {
-  final String data;
+import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+
+const String linkInsert = '_LINK_';
+
+class EzText extends SelectableText {
+  final TextSpan textSpan;
   final Key? key;
   final FocusNode? focusNode;
   final TextStyle? style;
@@ -40,10 +45,40 @@ class EzText extends StatelessWidget {
   final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// Just [SelectableText] for now
-  /// Maybe more one day
+  /// Get an appropriate [MainAxisAlignment] for a [Row] from the passed [TextAlign]
+  MainAxisAlignment matchMainAlign(TextAlign pair) {
+    switch (pair) {
+      case TextAlign.left:
+      case TextAlign.start:
+        return MainAxisAlignment.start;
+      case TextAlign.right:
+      case TextAlign.end:
+        return MainAxisAlignment.end;
+      case TextAlign.center:
+        return MainAxisAlignment.center;
+      case TextAlign.justify:
+        return MainAxisAlignment.spaceEvenly;
+    }
+  }
+
+  /// Get an appropriate [CrossAxisAlignment] for a [Row] from the passed [TextAlign]
+  CrossAxisAlignment matchCrossAlign(TextAlign pair) {
+    switch (pair) {
+      case TextAlign.left:
+      case TextAlign.start:
+        return CrossAxisAlignment.start;
+      case TextAlign.right:
+      case TextAlign.end:
+        return CrossAxisAlignment.end;
+      case TextAlign.center:
+      default:
+        return CrossAxisAlignment.center;
+    }
+  }
+
+  /// Builds a [SelectableText.rich] with styling from [EzConfig]
   EzText(
-    this.data, {
+    this.textSpan, {
     this.key,
     this.focusNode,
     this.style,
@@ -68,36 +103,271 @@ class EzText extends StatelessWidget {
     this.textWidthBasis,
     this.onSelectionChanged,
     this.magnifierConfiguration,
-  });
+  }) : super.rich(
+          textSpan,
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
 
-  @override
-  Widget build(BuildContext context) {
-    return SelectableText(
-      data,
-      key: key,
-      focusNode: focusNode,
-      style: style,
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
-      showCursor: showCursor,
-      autofocus: autofocus,
-      minLines: minLines,
-      maxLines: maxLines,
-      cursorWidth: cursorWidth,
-      cursorHeight: cursorHeight,
-      cursorRadius: cursorRadius,
-      cursorColor: cursorColor,
-      enableInteractiveSelection: enableInteractiveSelection,
-      selectionControls: selectionControls,
-      onTap: onTap,
-      scrollPhysics: scrollPhysics,
-      semanticsLabel: semanticsLabel,
-      textHeightBehavior: textHeightBehavior,
-      textWidthBasis: textWidthBasis,
-      onSelectionChanged: onSelectionChanged,
-      magnifierConfiguration: magnifierConfiguration,
-    );
+  /// Builds a [SelectableText.rich] with styling from [EzConfig]
+  /// A simple [TextSpan] will be created from [text]
+  EzText.simple(
+    String text, {
+    Key? key,
+    FocusNode? focusNode,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    double? textScaleFactor,
+    bool showCursor = false,
+    bool autofocus = false,
+    int? minLines,
+    int? maxLines,
+    double cursorWidth = 2.0,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    bool enableInteractiveSelection = true,
+    TextSelectionControls? selectionControls,
+    void Function()? onTap,
+    ScrollPhysics? scrollPhysics,
+    String? semanticsLabel,
+    TextHeightBehavior? textHeightBehavior,
+    TextWidthBasis? textWidthBasis,
+    void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged,
+    TextMagnifierConfiguration? magnifierConfiguration,
+  }) : this(
+          TextSpan(text: text),
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
+
+  /// Builds a [SelectableText.rich] with styling from [EzConfig]
+  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to [openLink]
+  /// The provided [url]
+  EzText.link({
+    required String text,
+    required Uri url,
+    Key? key,
+    FocusNode? focusNode,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    double? textScaleFactor,
+    bool showCursor = false,
+    bool autofocus = false,
+    int? minLines,
+    int? maxLines,
+    double cursorWidth = 2.0,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    bool enableInteractiveSelection = true,
+    TextSelectionControls? selectionControls,
+    void Function()? onTap,
+    ScrollPhysics? scrollPhysics,
+    String? semanticsLabel,
+    TextHeightBehavior? textHeightBehavior,
+    TextWidthBasis? textWidthBasis,
+    void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged,
+    TextMagnifierConfiguration? magnifierConfiguration,
+  }) : this(
+          TextSpan(
+            text: text,
+            recognizer: TapGestureRecognizer()..onTap = () => openLink(url),
+          ),
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
+
+  /// Provide text [base] that has [linkInsert]s everywhere a link should be inserted
+  /// Provide a [String]->[Uri] list of [links] for each [linkInsert] replacement
+  /// Changes will be made in order
+  /// Returns the generated [TextSpan] with standard text using [style]
+  /// And the links using [linkStyle]
+  static TextSpan insertLinks({
+    required String base,
+    required List<Map<String, Uri>> links,
+    required TextAlign textAlign,
+    required TextStyle style,
+    required TextStyle linkStyle,
+  }) {
+    List<TextSpan> textSpans = [];
+    int currentIndex = 0;
+    String linkInsert = "[linkInsert]";
+
+    links.forEach((linkMap) {
+      linkMap.forEach((text, url) {
+        int linkPosition = base.indexOf(linkInsert, currentIndex);
+        if (linkPosition == -1) return;
+
+        // Add text before the link
+        textSpans.add(
+          TextSpan(
+            text: base.substring(currentIndex, linkPosition).trim(),
+            style: style,
+          ),
+        );
+
+        // Add the link
+        textSpans.add(
+          TextSpan(
+            text: text,
+            style: linkStyle,
+            recognizer: TapGestureRecognizer()..onTap = () => openLink(url),
+          ),
+        );
+
+        currentIndex = linkPosition + linkInsert.length;
+      });
+    });
+
+    // Add the remaining text after the last link
+    if (currentIndex < base.length) {
+      textSpans.add(
+        TextSpan(
+          text: base.substring(currentIndex).trim(),
+          style: style,
+        ),
+      );
+    }
+
+    return TextSpan(children: textSpans);
   }
+
+  /// Builds a [SelectableText.rich] with styling from [EzConfig]
+  /// Provide text [base] that has [linkInsert]s everywhere a link should be inserted
+  /// Provide a [String]->[Uri] list of [links] for each [linkInsert] replacement
+  /// Changes will be made in order
+  /// Returns the generated [TextSpan] with standard text using [style]
+  /// And the links using [linkStyle]
+  EzText.links({
+    required String base,
+    required List<Map<String, Uri>> links,
+    required TextAlign textAlign,
+    required TextStyle style,
+    required TextStyle linkStyle,
+    Key? key,
+    FocusNode? focusNode,
+    StrutStyle? strutStyle,
+    TextDirection? textDirection,
+    double? textScaleFactor,
+    bool showCursor = false,
+    bool autofocus = false,
+    int? minLines,
+    int? maxLines,
+    double cursorWidth = 2.0,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    bool enableInteractiveSelection = true,
+    TextSelectionControls? selectionControls,
+    void Function()? onTap,
+    ScrollPhysics? scrollPhysics,
+    String? semanticsLabel,
+    TextHeightBehavior? textHeightBehavior,
+    TextWidthBasis? textWidthBasis,
+    void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged,
+    TextMagnifierConfiguration? magnifierConfiguration,
+  }) : this(
+          insertLinks(
+            base: base,
+            links: links,
+            textAlign: textAlign,
+            style: style,
+            linkStyle: linkStyle,
+          ),
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
 }
