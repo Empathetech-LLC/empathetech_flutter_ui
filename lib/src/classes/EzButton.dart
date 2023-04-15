@@ -53,7 +53,7 @@ class EzButton extends StatelessWidget {
             Container(width: EzConfig.prefs[paddingKey]),
             EzText.simple(
               message,
-              style: customTextStyle ?? buildTextStyle(style: buttonStyleKey),
+              style: customTextStyle ?? buildTextStyle(styleKey: buttonStyleKey),
               textAlign: TextAlign.center,
             ),
           ],
@@ -69,7 +69,7 @@ class EzButton extends StatelessWidget {
         if (cast.style == null) {
           return EzText.simple(
             cast.data ?? 'Lorem ipsum',
-            style: buildTextStyle(style: buttonStyleKey),
+            style: buildTextStyle(styleKey: buttonStyleKey),
             textAlign: cast.textAlign,
           );
         } else {
@@ -163,7 +163,7 @@ class EzButton extends StatelessWidget {
                   case Text:
                     return EzText.simple(
                       (widget as Text).data ?? 'Lorem ipsum',
-                      style: buildTextStyle(style: dialogContentStyleKey),
+                      style: buildTextStyle(styleKey: dialogContentStyleKey),
                       textAlign: TextAlign.center,
                     );
                   case Icon:
@@ -181,7 +181,7 @@ class EzButton extends StatelessWidget {
         case Text:
           return EzText.simple(
             (this.body as Text).data ?? 'Lorem ipsum',
-            style: buildTextStyle(style: dialogContentStyleKey),
+            style: buildTextStyle(styleKey: dialogContentStyleKey),
             textAlign: TextAlign.center,
           );
 
@@ -211,7 +211,7 @@ ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(EzConfig.prefs[buttonColorKey]),
     foregroundColor: Color(EzConfig.prefs[buttonTextColorKey]),
-    textStyle: buildTextStyle(style: buttonStyleKey),
+    textStyle: buildTextStyle(styleKey: buttonStyleKey),
     padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
     side: BorderSide(color: Color(EzConfig.prefs[buttonColorKey])),
     shape: shape,

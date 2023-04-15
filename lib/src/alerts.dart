@@ -17,11 +17,11 @@ Future<dynamic> logAlert(
     dialog: EzDialog(
       title: EzText.simple(
         'Attention:',
-        style: buildTextStyle(style: dialogTitleStyleKey),
+        style: buildTextStyle(styleKey: dialogTitleStyleKey),
         textAlign: TextAlign.center,
       ),
       contents: [
-        EzText.simple(message, style: buildTextStyle(style: dialogContentStyleKey)),
+        EzText.simple(message, style: buildTextStyle(styleKey: dialogContentStyleKey)),
       ],
     ),
   );
@@ -36,8 +36,8 @@ Card warningCard({
 }) {
   Color iconColor = Color(EzConfig.prefs[alertColorKey]);
 
-  TextStyle titleStyle = buildTextStyle(style: titleStyleKey);
-  TextStyle contentStyle = buildTextStyle(style: dialogContentStyleKey);
+  TextStyle titleStyle = buildTextStyle(styleKey: titleStyleKey);
+  TextStyle contentStyle = buildTextStyle(styleKey: dialogContentStyleKey);
 
   double padding = EzConfig.prefs[paddingKey];
 
@@ -83,7 +83,7 @@ Center loadingMessage({
 }) {
   // Gather theme data
 
-  TextStyle style = buildTextStyle(style: titleStyleKey);
+  TextStyle style = buildTextStyle(styleKey: titleStyleKey);
 
   double imageSize = style.fontSize!;
   SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);

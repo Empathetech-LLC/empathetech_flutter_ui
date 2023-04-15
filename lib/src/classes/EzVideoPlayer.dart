@@ -36,7 +36,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool show = false;
 
   late double margin = EzConfig.prefs[dialogSpacingKey];
-  late double iconSize = buildTextStyle(style: dialogContentStyleKey).fontSize ?? margin;
+  late double iconSize =
+      buildTextStyle(styleKey: dialogContentStyleKey).fontSize ?? margin;
 
   late Color showing = widget.iconColor;
   late Color hiding = (widget.alwaysOn != null)

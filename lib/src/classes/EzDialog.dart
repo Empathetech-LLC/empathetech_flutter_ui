@@ -70,7 +70,7 @@ class EzDialog extends PlatformAlertDialog {
                   onTap: () => popScreen(context: context),
                   child: EzText.simple(
                     'Close',
-                    style: buildTextStyle(style: dialogContentStyleKey),
+                    style: buildTextStyle(styleKey: dialogContentStyleKey),
                     textAlign: TextAlign.center,
                   ),
                 ),

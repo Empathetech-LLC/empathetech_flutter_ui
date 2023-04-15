@@ -140,8 +140,8 @@ MaterialAppData materialAppTheme() {
   Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
   Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
-  TextStyle dialogTitleText = buildTextStyle(style: dialogTitleStyleKey);
-  TextStyle dialogContentText = buildTextStyle(style: dialogContentStyleKey);
+  TextStyle dialogTitleText = buildTextStyle(styleKey: dialogTitleStyleKey);
+  TextStyle dialogContentText = buildTextStyle(styleKey: dialogContentStyleKey);
 
   return MaterialAppData(
     theme: ThemeData(
@@ -152,7 +152,7 @@ MaterialAppData materialAppTheme() {
         backgroundColor: themeColor,
         centerTitle: true,
         iconTheme: IconThemeData(color: themeTextColor),
-        titleTextStyle: buildTextStyle(style: titleStyleKey),
+        titleTextStyle: buildTextStyle(styleKey: titleStyleKey),
       ),
 
       // Nav bar
@@ -207,7 +207,7 @@ MaterialAppData materialAppTheme() {
 /// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
 /// [Widget] styling matches that of [EzConfig]
 TextTheme materialTextTheme() {
-  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
+  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
 
   return TextTheme(
     labelLarge: defaultTextStyle,
@@ -248,7 +248,7 @@ CupertinoAppData cupertinoAppTheme() {
 /// [Widget] styling matches that of [EzConfig]
 CupertinoTextThemeData cupertinoTextTheme() {
   Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
-  TextStyle defaultTextStyle = buildTextStyle(style: defaultStyleKey);
+  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
 
   return CupertinoTextThemeData(
     primaryColor: textColor,

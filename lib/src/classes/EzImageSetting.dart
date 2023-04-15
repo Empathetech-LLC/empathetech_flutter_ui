@@ -34,7 +34,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String currPathKey = widget.prefsKey;
   String? updatedPath; // Only used when the user makes a change
 
-  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
@@ -120,7 +120,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       dialog: EzDialog(
         title: EzText.simple(
           'Update $title',
-          style: buildTextStyle(style: dialogTitleStyleKey),
+          style: buildTextStyle(styleKey: dialogTitleStyleKey),
           textAlign: TextAlign.center,
         ),
         contents: options,
@@ -143,13 +143,13 @@ class _ImageSettingState extends State<EzImageSetting> {
         dialog: EzDialog(
           title: EzText.simple(
             'Credit to:',
-            style: buildTextStyle(style: dialogTitleStyleKey),
+            style: buildTextStyle(styleKey: dialogTitleStyleKey),
             textAlign: TextAlign.center,
           ),
           contents: [
             EzText.simple(
               widget.credits,
-              style: buildTextStyle(style: dialogContentStyleKey),
+              style: buildTextStyle(styleKey: dialogContentStyleKey),
             )
           ],
         ),
@@ -161,7 +161,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           // Title on the left
           EzText.simple(
             title,
-            style: buildTextStyle(style: imageSettingStyleKey),
+            style: buildTextStyle(styleKey: imageSettingStyleKey),
           ),
 
           // Preview on the right

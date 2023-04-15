@@ -144,7 +144,7 @@ class EzFormField extends StatelessWidget {
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
         textInputAction: textInputAction,
-        style: style ?? buildTextStyle(style: dialogContentStyleKey),
+        style: style ?? buildTextStyle(styleKey: dialogContentStyleKey),
         strutStyle: strutStyle,
         textAlign: textAlign,
         textAlignVertical: textAlignVertical,

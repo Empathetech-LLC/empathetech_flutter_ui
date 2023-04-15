@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// Optionally overwrite any values
 TextStyle buildTextStyle({
   bool inherit = true,
-  required String style,
+  required String styleKey,
   Color? color,
   Color? backgroundColor,
   double? fontSize,
@@ -40,7 +40,7 @@ TextStyle buildTextStyle({
   late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
   late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
-  switch (style) {
+  switch (styleKey) {
     case headerStyleKey:
       return TextStyle(
         inherit: inherit,

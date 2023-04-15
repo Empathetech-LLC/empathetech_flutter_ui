@@ -30,7 +30,7 @@ Future<dynamic> ezColorPicker({
     dialog: EzDialog(
       title: EzText.simple(
         'Pick a color!',
-        style: buildTextStyle(style: dialogTitleStyleKey),
+        style: buildTextStyle(styleKey: dialogTitleStyleKey),
         textAlign: TextAlign.center,
       ),
       contents: [
@@ -38,7 +38,7 @@ Future<dynamic> ezColorPicker({
           pickerColor: startColor,
           onColorChanged: onColorChange,
           // ignore: deprecated_member_use
-          labelTextStyle: buildTextStyle(style: dialogContentStyleKey),
+          labelTextStyle: buildTextStyle(styleKey: dialogContentStyleKey),
           // above is required for iOS
         ),
         Container(height: EzConfig.prefs[dialogSpacingKey]),
