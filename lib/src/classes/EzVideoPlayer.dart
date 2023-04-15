@@ -116,7 +116,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Play/pause
-                ezClickable(
+                EzMouseDetector(
                   child: EzIcon(
                     (widget.controller.value.isPlaying)
                         ? PlatformIcons(context).pause
@@ -136,7 +136,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 Container(width: margin),
 
                 // Volume
-                ezClickable(
+                EzMouseDetector(
                   child: EzIcon(
                     (widget.controller.value.volume == 0.0)
                         ? PlatformIcons(context).volumeMute
@@ -152,7 +152,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 Container(width: margin),
 
                 // Replay
-                ezClickable(
+                EzMouseDetector(
                   child: EzIcon(
                     PlatformIcons(context).refresh,
                     color: (show) ? showing : hiding,
