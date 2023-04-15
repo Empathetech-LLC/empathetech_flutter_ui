@@ -61,12 +61,9 @@ Container webView({
     decoration: background,
 
     // Build space
-    child: GestureDetector(
-      onTap: closeFocus,
-      child: Container(
-        child: body,
-        margin: EdgeInsets.all(EzConfig.prefs[marginKey]),
-      ),
+    child: Container(
+      child: body,
+      margin: EdgeInsets.all(EzConfig.prefs[marginKey]),
     ),
   );
 }
