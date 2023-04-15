@@ -36,6 +36,12 @@ class EzScrollView extends SingleChildScrollView {
   /// [MainAxisAlignment.spaceEvenly]
   final MainAxisAlignment mainAxisAlignment;
 
+  final TextDirection? textDirection;
+  final TextBaseline? textBaseline;
+
+  /// Default: [VerticalDirection.down]
+  final VerticalDirection verticalDirection;
+
   /// Styles a [SingleChildScrollView] from [EzConfig.prefs]
   /// Dynamically switches between row/col based on [direction]
   /// Uses a [children] list rather than [child] Widget
@@ -56,6 +62,9 @@ class EzScrollView extends SingleChildScrollView {
     this.centered = false,
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.textDirection,
+    this.textBaseline,
+    this.verticalDirection = VerticalDirection.down,
   });
 
   /// Get a matching [CrossAxisAlignment] from the current [mainAxisAlignment]
@@ -77,12 +86,18 @@ class EzScrollView extends SingleChildScrollView {
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
             crossAxisAlignment: matchCrossAxis(),
+            textDirection: textDirection,
+            textBaseline: textBaseline,
+            verticalDirection: verticalDirection,
             children: children,
           )
         : Row(
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
             crossAxisAlignment: matchCrossAxis(),
+            textDirection: textDirection,
+            textBaseline: textBaseline,
+            verticalDirection: verticalDirection,
             children: children,
           );
   }
