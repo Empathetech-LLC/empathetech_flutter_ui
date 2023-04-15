@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 const String linkInsert = '_LINK_';
 
@@ -42,14 +43,14 @@ CrossAxisAlignment matchCrossAlign(TextAlign pair) {
 /// Provide a [String]->[Uri] list of [links] for each [linkInsert]
 /// Changes will be made in order
 /// A Row containing all of the [EzText] and [ezClickable] children will be returned
-Wrap insertLinks({
+Widget insertLinks({
   required String base,
   required List<Map<String, Uri>> links,
   required TextAlign textAlign,
   required TextStyle style,
   required TextStyle linkStyle,
 }) {
-  List<Widget> children = [];
+  List<TextSpan> textSpans = [];
   int currentIndex = 0;
 
   links.forEach((linkMap) {
@@ -58,19 +59,19 @@ Wrap insertLinks({
       if (linkPosition == -1) return;
 
       // Add text before the link
-      children.add(
-        EzText(
-          base.substring(currentIndex, linkPosition).trim(),
+      textSpans.add(
+        TextSpan(
+          text: base.substring(currentIndex, linkPosition).trim(),
           style: style,
-          textAlign: textAlign,
         ),
       );
 
       // Add the link
-      children.add(
-        ezClickable(
-          onTap: () => openLink(url),
-          child: EzText(text, style: linkStyle),
+      textSpans.add(
+        TextSpan(
+          text: text,
+          style: linkStyle,
+          recognizer: TapGestureRecognizer()..onTap = () => openLink(url),
         ),
       );
 
@@ -80,14 +81,18 @@ Wrap insertLinks({
 
   // Add the remaining text after the last link
   if (currentIndex < base.length) {
-    children.add(
-      EzText(
-        base.substring(currentIndex).trim(),
+    textSpans.add(
+      TextSpan(
+        text: base.substring(currentIndex).trim(),
         style: style,
-        textAlign: textAlign,
       ),
     );
   }
 
-  return Wrap(children: children);
+  return RichText(
+    text: TextSpan(
+      children: textSpans,
+    ),
+    textAlign: textAlign,
+  );
 }
