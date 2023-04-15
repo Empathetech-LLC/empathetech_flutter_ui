@@ -51,7 +51,7 @@ class EzButton extends StatelessWidget {
           children: [
             icon,
             Container(width: EzConfig.prefs[paddingKey]),
-            Text(
+            EzText(
               message,
               style: customTextStyle ?? buildTextStyle(style: buttonStyleKey),
               textAlign: TextAlign.center,
@@ -67,7 +67,7 @@ class EzButton extends StatelessWidget {
         Text cast = this.body as Text;
 
         if (cast.style == null) {
-          return Text(
+          return EzText(
             cast.data ?? 'Lorem ipsum',
             style: buildTextStyle(style: buttonStyleKey),
             textAlign: cast.textAlign,
@@ -161,7 +161,7 @@ class EzButton extends StatelessWidget {
               (widget) {
                 switch (widget.runtimeType) {
                   case Text:
-                    return Text(
+                    return EzText(
                       (widget as Text).data ?? 'Lorem ipsum',
                       style: buildTextStyle(style: dialogContentStyleKey),
                       textAlign: TextAlign.center,
@@ -179,7 +179,7 @@ class EzButton extends StatelessWidget {
           );
 
         case Text:
-          return Text(
+          return EzText(
             (this.body as Text).data ?? 'Lorem ipsum',
             style: buildTextStyle(style: dialogContentStyleKey),
             textAlign: TextAlign.center,

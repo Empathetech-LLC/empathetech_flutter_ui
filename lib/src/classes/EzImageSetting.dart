@@ -118,7 +118,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: Text(
+        title: EzText(
           'Update $title',
           style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,
@@ -141,13 +141,13 @@ class _ImageSettingState extends State<EzImageSetting> {
       longAction: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: Text(
+          title: EzText(
             'Credit to:',
             style: buildTextStyle(style: dialogTitleStyleKey),
             textAlign: TextAlign.center,
           ),
           contents: [
-            Text(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
+            EzText(widget.credits, style: buildTextStyle(style: dialogContentStyleKey))
           ],
         ),
       ),
@@ -156,7 +156,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          Text(title, style: buildTextStyle(style: imageSettingStyleKey)),
+          EzText(title, style: buildTextStyle(style: imageSettingStyleKey)),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest

@@ -14,7 +14,6 @@ class EzText extends StatelessWidget {
   /// Default: [FlexFit.loose]
   final FlexFit fit;
 
-  final Widget child;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
@@ -29,13 +28,12 @@ class EzText extends StatelessWidget {
   final TextHeightBehavior? textHeightBehavior;
   final Color? selectionColor;
 
-  /// Wrap [Text] in a [Flexible] with some defaults from [EzConfig]
+  /// Wrap [EzText] in a [Flexible] with some defaults from [EzConfig]
   EzText(
     this.text, {
     this.key,
     this.flex = 1,
     this.fit = FlexFit.loose,
-    required this.child,
     this.style,
     this.strutStyle,
     this.textAlign,

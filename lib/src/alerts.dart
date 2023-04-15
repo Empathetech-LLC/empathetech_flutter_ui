@@ -15,13 +15,13 @@ Future<dynamic> logAlert(
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: Text(
+      title: EzText(
         'Attention:',
         style: buildTextStyle(style: dialogTitleStyleKey),
         textAlign: TextAlign.center,
       ),
       contents: [
-        Text(message, style: buildTextStyle(style: dialogContentStyleKey)),
+        EzText(message, style: buildTextStyle(style: dialogContentStyleKey)),
       ],
     ),
   );
@@ -56,14 +56,14 @@ Card warningCard({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               EzIcon(Icons.warning, color: iconColor),
-              Text('WARNING', style: titleStyle),
+              EzText('WARNING', style: titleStyle),
               EzIcon(Icons.warning, color: iconColor),
             ],
           ),
           Container(height: padding),
 
           // Label
-          Text(warning, style: contentStyle, textAlign: TextAlign.center),
+          EzText(warning, style: contentStyle, textAlign: TextAlign.center),
         ],
       ),
     ),
@@ -71,7 +71,7 @@ Card warningCard({
 }
 
 /// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
-/// [Row] of [Text] wrapped in a [Center]
+/// [Row] of [EzText] wrapped in a [Center]
 /// Make this the child of your own background [Widget] if necessary
 Center loadingMessage({
   required BuildContext context,
@@ -89,11 +89,11 @@ Center loadingMessage({
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text('Loading ', style: style),
+        EzText('Loading ', style: style),
         ellipsis,
-        Text(' ', style: style),
+        EzText(' ', style: style),
         ellipsis,
-        Text(' ', style: style),
+        EzText(' ', style: style),
         ellipsis,
       ],
     ),

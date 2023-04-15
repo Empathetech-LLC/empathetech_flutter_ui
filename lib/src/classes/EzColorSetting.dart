@@ -66,7 +66,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return openDialog(
         context: context,
         dialog: EzDialog(
-          title: Text(
+          title: EzText(
             'Use recommended?',
             style: buildTextStyle(style: dialogTitleStyleKey),
             textAlign: TextAlign.center,
@@ -120,7 +120,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: Text(
+        title: EzText(
           'Reset to...',
           style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,
@@ -166,7 +166,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Color label
-        Text(
+        EzText(
           widget.message,
           style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,

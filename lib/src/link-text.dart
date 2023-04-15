@@ -28,7 +28,7 @@ MainAxisAlignment matchTextAlign(TextAlign pair) {
 /// Provide text [base] that has [linkInsert]s everywhere a link should be inserted
 /// Provide a [String]->[Uri] list of [links] for each [linkInsert]
 /// Changes will be made in order
-/// A Row containing all of the [Text] and [ezClickable] children will be returned
+/// A Row containing all of the [EzText] and [ezClickable] children will be returned
 Row insertLinks({
   required String base,
   required List<Map<String, Uri>> links,
@@ -46,12 +46,10 @@ Row insertLinks({
 
       // Add text before the link
       children.add(
-        Flexible(
-          child: Text(
-            base.substring(currentIndex, linkPosition),
-            style: style,
-            textAlign: textAlign,
-          ),
+        EzText(
+          base.substring(currentIndex, linkPosition),
+          style: style,
+          textAlign: textAlign,
         ),
       );
 
@@ -59,7 +57,7 @@ Row insertLinks({
       children.add(
         ezClickable(
           onTap: () => openLink(url),
-          child: Flexible(child: Text(text, style: linkStyle)),
+          child: EzText(text, style: linkStyle),
         ),
       );
 
@@ -70,12 +68,10 @@ Row insertLinks({
   // Add the remaining text after the last link
   if (currentIndex < base.length) {
     children.add(
-      Flexible(
-        child: Text(
-          base.substring(currentIndex),
-          style: style,
-          textAlign: textAlign,
-        ),
+      EzText(
+        base.substring(currentIndex),
+        style: style,
+        textAlign: textAlign,
       ),
     );
   }

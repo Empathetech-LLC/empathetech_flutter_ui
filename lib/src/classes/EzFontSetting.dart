@@ -26,7 +26,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: Text(
+        title: EzText(
           'Choose a font',
           style: buildTextStyle(style: dialogTitleStyleKey),
           textAlign: TextAlign.center,
@@ -44,7 +44,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
                       });
                       popScreen(context: context, pass: font);
                     },
-                    body: Text(font, style: gStyle(font)),
+                    body: EzText(font, style: gStyle(font)),
                   ),
                   Container(height: buttonSpacer),
                 ],
@@ -62,12 +62,12 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        Text('Font family', style: buildTextStyle(style: subTitleStyleKey)),
+        EzText('Font family', style: buildTextStyle(style: subTitleStyleKey)),
 
         // Font picker
         EzButton(
           action: _chooseGoogleFont,
-          body: Text(
+          body: EzText(
             'Choose font:\n$currFontFamily',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
@@ -87,7 +87,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
               currFontFamily = defaultFontFamily;
             });
           },
-          body: Text(
+          body: EzText(
             'Reset font\n($defaultFontFamily)',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
