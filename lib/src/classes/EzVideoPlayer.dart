@@ -79,7 +79,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   /// Prevents a visually bug that occurs when a video is considered completed
   void _videoListener() {
     if (widget.controller.value.isPlaying &&
-        widget.controller.value.position >= widget.controller.value.duration) {
+        widget.controller.value.position >=
+            widget.controller.value.duration - Duration(microseconds: 1)) {
       _pauseVideo();
     }
   }
