@@ -58,19 +58,38 @@ class EzScrollView extends SingleChildScrollView {
     this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    Widget core = scrollDirection == Axis.vertical
+  /// Get a matching [CrossAxisAlignment] from the current [mainAxisAlignment]
+  CrossAxisAlignment matchCrossAxis() {
+    switch (mainAxisAlignment) {
+      case MainAxisAlignment.start:
+        return CrossAxisAlignment.start;
+      case MainAxisAlignment.end:
+        return CrossAxisAlignment.end;
+      case MainAxisAlignment.center:
+      default:
+        return CrossAxisAlignment.center;
+    }
+  }
+
+  Widget _buildCore() {
+    return (scrollDirection == Axis.vertical)
         ? Column(
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: matchCrossAxis(),
             children: children,
           )
         : Row(
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: matchCrossAxis(),
             children: children,
           );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget core = _buildCore();
 
     return SingleChildScrollView(
       key: key,
