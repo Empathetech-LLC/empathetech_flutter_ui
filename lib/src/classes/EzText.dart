@@ -40,9 +40,8 @@ class EzText extends StatelessWidget {
   final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// Just [SelectableText] right now
-  /// Used to be more
-  /// Might be again one day
+  /// Just [SelectableText] for now
+  /// Maybe more one day
   EzText(
     this.data, {
     this.key,
