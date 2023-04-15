@@ -30,8 +30,8 @@ Container standardView({
 /// Builds the "main screen" for pages built with [EzScaffold] that use a [PlatformNavBar]
 Container navView({
   required BuildContext context,
-  required Widget body,
   BoxDecoration? background,
+  required Widget body,
 }) {
   double margin = EzConfig.prefs[marginKey];
 
@@ -50,7 +50,6 @@ Container navView({
 /// Builds the "main screen" for pages built with [EzWebScaffold]
 Container webView({
   required BuildContext context,
-  required Color backgroundColor,
   BoxDecoration? background,
   required Widget body,
 }) {
