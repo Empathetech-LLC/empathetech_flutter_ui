@@ -11,6 +11,7 @@ class EzVideoPlayer extends StatefulWidget {
   final Color iconColor;
   final double? alwaysOn;
   final bool autoLoop;
+  final bool startMuted;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio], the recommended parent for [VideoPlayer]s
   /// Optionally provide an opacity value with [alwaysOn] if you want the buttons to persist
@@ -24,6 +25,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.iconColor,
     this.alwaysOn,
     this.autoLoop = false,
+    this.startMuted = true,
   }) : super(key: key);
 
   @override
@@ -42,30 +44,35 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       : Colors.transparent;
 
   void _playVideo() {
-    widget.controller.play();
-    setState(() {});
+    setState(() {
+      widget.controller.play();
+    });
   }
 
   void _pauseVideo() {
-    widget.controller.pause();
-    setState(() {});
+    setState(() {
+      widget.controller.pause();
+    });
   }
 
   void _muteVideo() {
-    widget.controller.setVolume(0.0);
-    setState(() {});
+    setState(() {
+      widget.controller.setVolume(0.0);
+    });
   }
 
   void _unMuteVideo() {
-    widget.controller.setVolume(1.0);
-    setState(() {});
+    setState(() {
+      widget.controller.setVolume(1.0);
+    });
   }
 
   void _replayVideo() {
-    widget.controller.seekTo(Duration.zero);
-    widget.controller.setVolume(1.0);
-    widget.controller.play();
-    setState(() {});
+    setState(() {
+      widget.controller.seekTo(Duration.zero);
+      widget.controller.setVolume(1.0);
+      widget.controller.play();
+    });
   }
 
   /// Automatically pauses the video on the final frame
@@ -86,6 +93,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     } else {
       widget.controller.setLooping(false);
       widget.controller.addListener(_videoListener);
+    }
+
+    if (widget.startMuted) {
+      widget.controller.setVolume(0.0);
+    } else {
+      widget.controller.setVolume(1.0);
     }
   }
 
