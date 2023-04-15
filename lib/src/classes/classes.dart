@@ -14,6 +14,7 @@ export 'EzFormField.dart';
 export 'EzIcon.dart';
 export 'EzImage.dart';
 export 'EzImageSetting.dart';
+export 'EzMouseDetector.dart';
 export 'EzNavBar.dart';
 export 'EzNotifications.dart';
 export 'EzScaffold.dart';
