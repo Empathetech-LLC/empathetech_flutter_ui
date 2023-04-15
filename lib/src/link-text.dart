@@ -60,7 +60,7 @@ Wrap insertLinks({
       // Add text before the link
       children.add(
         EzText(
-          base.substring(currentIndex, linkPosition),
+          base.substring(currentIndex, linkPosition).trim(),
           style: style,
           textAlign: textAlign,
         ),
@@ -82,7 +82,7 @@ Wrap insertLinks({
   if (currentIndex < base.length) {
     children.add(
       EzText(
-        base.substring(currentIndex),
+        base.substring(currentIndex).trim(),
         style: style,
         textAlign: textAlign,
       ),
