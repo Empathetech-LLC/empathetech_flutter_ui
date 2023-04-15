@@ -7,20 +7,33 @@ import 'package:flutter/material.dart';
 const String linkInsert = '_LINK_';
 
 /// Get an appropriate [MainAxisAlignment] for a [Row] from the passed [TextAlign]
-MainAxisAlignment matchTextAlign(TextAlign pair) {
+MainAxisAlignment matchMainAlign(TextAlign pair) {
   switch (pair) {
     case TextAlign.left:
+    case TextAlign.start:
       return MainAxisAlignment.start;
     case TextAlign.right:
+    case TextAlign.end:
       return MainAxisAlignment.end;
     case TextAlign.center:
       return MainAxisAlignment.center;
     case TextAlign.justify:
       return MainAxisAlignment.spaceEvenly;
+  }
+}
+
+/// Get an appropriate [CrossAxisAlignment] for a [Row] from the passed [TextAlign]
+CrossAxisAlignment matchCrossAlign(TextAlign pair) {
+  switch (pair) {
+    case TextAlign.left:
     case TextAlign.start:
-      return MainAxisAlignment.start;
+      return CrossAxisAlignment.start;
+    case TextAlign.right:
     case TextAlign.end:
-      return MainAxisAlignment.end;
+      return CrossAxisAlignment.end;
+    case TextAlign.center:
+    default:
+      return CrossAxisAlignment.center;
   }
 }
 
@@ -78,7 +91,8 @@ Row insertLinks({
 
   return Row(
     mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: matchTextAlign(textAlign),
+    mainAxisAlignment: matchMainAlign(textAlign),
+    crossAxisAlignment: matchCrossAlign(textAlign),
     children: children,
   );
 }
