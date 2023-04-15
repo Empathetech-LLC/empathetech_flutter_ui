@@ -323,7 +323,6 @@ class EzText extends SelectableText {
   }) {
     List<TextSpan> textSpans = [];
     int currentIndex = 0;
-    String linkInsert = "[linkInsert]";
 
     links.forEach((linkMap) {
       linkMap.forEach((text, url) {
@@ -333,7 +332,7 @@ class EzText extends SelectableText {
         // Add text before the link
         textSpans.add(
           TextSpan(
-            text: base.substring(currentIndex, linkPosition).trim(),
+            text: base.substring(currentIndex, linkPosition),
             style: style,
           ),
         );
@@ -355,7 +354,7 @@ class EzText extends SelectableText {
     if (currentIndex < base.length) {
       textSpans.add(
         TextSpan(
-          text: base.substring(currentIndex).trim(),
+          text: base.substring(currentIndex),
           style: style,
         ),
       );
