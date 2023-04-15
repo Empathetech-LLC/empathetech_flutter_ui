@@ -42,7 +42,7 @@ CrossAxisAlignment matchCrossAlign(TextAlign pair) {
 /// Provide a [String]->[Uri] list of [links] for each [linkInsert]
 /// Changes will be made in order
 /// A Row containing all of the [EzText] and [ezClickable] children will be returned
-Row insertLinks({
+Wrap insertLinks({
   required String base,
   required List<Map<String, Uri>> links,
   required TextAlign textAlign,
@@ -89,10 +89,5 @@ Row insertLinks({
     );
   }
 
-  return Row(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: matchMainAlign(textAlign),
-    crossAxisAlignment: matchCrossAlign(textAlign),
-    children: children,
-  );
+  return Wrap(children: children);
 }
