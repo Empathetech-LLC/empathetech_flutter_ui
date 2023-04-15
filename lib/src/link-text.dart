@@ -46,10 +46,12 @@ Row insertLinks({
 
       // Add text before the link
       children.add(
-        Text(
-          base.substring(currentIndex, linkPosition),
-          style: style,
-          textAlign: textAlign,
+        Flexible(
+          child: Text(
+            base.substring(currentIndex, linkPosition),
+            style: style,
+            textAlign: textAlign,
+          ),
         ),
       );
 
@@ -57,7 +59,7 @@ Row insertLinks({
       children.add(
         ezClickable(
           onTap: () => openLink(url),
-          child: Text(text, style: linkStyle),
+          child: Flexible(child: Text(text, style: linkStyle)),
         ),
       );
 
@@ -68,16 +70,18 @@ Row insertLinks({
   // Add the remaining text after the last link
   if (currentIndex < base.length) {
     children.add(
-      Text(
-        base.substring(currentIndex),
-        style: style,
-        textAlign: textAlign,
+      Flexible(
+        child: Text(
+          base.substring(currentIndex),
+          style: style,
+          textAlign: textAlign,
+        ),
       ),
     );
   }
 
   return Row(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: matchTextAlign(textAlign),
     children: children,
   );
