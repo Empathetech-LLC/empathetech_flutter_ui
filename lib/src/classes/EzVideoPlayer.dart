@@ -75,32 +75,17 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     });
   }
 
-  /// Automatically pauses the video on the final frame
-  /// Prevents a visually bug that occurs when a video is considered completed
-  void _videoListener() {
-    if (widget.controller.value.isPlaying &&
-        widget.controller.value.position >=
-            widget.controller.value.duration - Duration(microseconds: 1)) {
-      _pauseVideo();
-    }
-  }
-
   @override
   void initState() {
     super.initState();
 
-    if (widget.autoLoop) {
-      widget.controller.setLooping(true);
-    } else {
-      widget.controller.setLooping(false);
-      widget.controller.addListener(_videoListener);
-    }
+    (widget.autoLoop)
+        ? widget.controller.setLooping(true)
+        : widget.controller.setLooping(false);
 
-    if (widget.startMuted) {
-      widget.controller.setVolume(0.0);
-    } else {
-      widget.controller.setVolume(1.0);
-    }
+    (widget.startMuted)
+        ? widget.controller.setVolume(0.0)
+        : widget.controller.setVolume(1.0);
   }
 
   @override
@@ -181,11 +166,5 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    if (!widget.autoLoop) widget.controller.removeListener(_videoListener);
-    super.dispose();
   }
 }
