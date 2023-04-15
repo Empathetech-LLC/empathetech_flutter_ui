@@ -1,74 +1,104 @@
 library empathetech_flutter_ui;
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 
 class EzText extends StatelessWidget {
-  final String text;
+  final String data;
   final Key? key;
-
-  /// Default: 1
-  final int flex;
-
-  /// Default: [FlexFit.loose]
-  final FlexFit fit;
-
+  final FocusNode? focusNode;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
-  final Locale? locale;
-  final bool? softWrap;
-  final TextOverflow? overflow;
   final double? textScaleFactor;
-  final int? maxLines;
-  final String? semanticsLabel;
-  final TextWidthBasis? textWidthBasis;
-  final TextHeightBehavior? textHeightBehavior;
-  final Color? selectionColor;
 
-  /// Just [Text] right now
+  /// Default: false
+  final bool showCursor;
+
+  /// Default: false
+  final bool autofocus;
+
+  final int? minLines;
+  final int? maxLines;
+
+  /// Default: 2.0
+  final double cursorWidth;
+
+  final double? cursorHeight;
+  final Radius? cursorRadius;
+  final Color? cursorColor;
+
+  /// Default: true
+  final bool enableInteractiveSelection;
+
+  final TextSelectionControls? selectionControls;
+  final void Function()? onTap;
+  final ScrollPhysics? scrollPhysics;
+  final String? semanticsLabel;
+  final TextHeightBehavior? textHeightBehavior;
+  final TextWidthBasis? textWidthBasis;
+  final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
+  final TextMagnifierConfiguration? magnifierConfiguration;
+
+  /// Just [SelectableText] right now
   /// Used to be more
   /// Might be again one day
   EzText(
-    this.text, {
+    this.data, {
     this.key,
-    this.flex = 1,
-    this.fit = FlexFit.loose,
+    this.focusNode,
     this.style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
-    this.locale,
-    this.softWrap,
-    this.overflow,
     this.textScaleFactor,
+    this.showCursor = false,
+    this.autofocus = false,
+    this.minLines,
     this.maxLines,
+    this.cursorWidth = 2.0,
+    this.cursorHeight,
+    this.cursorRadius,
+    this.cursorColor,
+    this.enableInteractiveSelection = true,
+    this.selectionControls,
+    this.onTap,
+    this.scrollPhysics,
     this.semanticsLabel,
-    this.textWidthBasis,
     this.textHeightBehavior,
-    this.selectionColor,
+    this.textWidthBasis,
+    this.onSelectionChanged,
+    this.magnifierConfiguration,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
+    return SelectableText(
+      data,
       key: key,
+      focusNode: focusNode,
       style: style,
       strutStyle: strutStyle,
       textAlign: textAlign,
       textDirection: textDirection,
-      locale: locale,
-      softWrap: softWrap,
-      overflow: overflow,
       textScaleFactor: textScaleFactor,
+      showCursor: showCursor,
+      autofocus: autofocus,
+      minLines: minLines,
       maxLines: maxLines,
+      cursorWidth: cursorWidth,
+      cursorHeight: cursorHeight,
+      cursorRadius: cursorRadius,
+      cursorColor: cursorColor,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectionControls: selectionControls,
+      onTap: onTap,
+      scrollPhysics: scrollPhysics,
       semanticsLabel: semanticsLabel,
-      textWidthBasis: textWidthBasis,
       textHeightBehavior: textHeightBehavior,
-      selectionColor: selectionColor,
+      textWidthBasis: textWidthBasis,
+      onSelectionChanged: onSelectionChanged,
+      magnifierConfiguration: magnifierConfiguration,
     );
   }
 }
