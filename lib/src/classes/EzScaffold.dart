@@ -58,24 +58,21 @@ class EzScaffold extends PlatformScaffold {
         endDrawer: (appBar.trailing is EzDrawer) ? appBar.trailing : null,
 
         // Decoration in the background, draw everything to the safe area
-        body: GestureDetector(
-          onTap: closeFocus,
-          child: Container(
-            decoration: background,
-            child: SafeArea(child: body),
-          ),
+        body: Container(
+          decoration: background,
+          child: GestureDetector(onTap: closeFocus, child: body),
         ),
         floatingActionButton: fab,
       ),
 
       // Cupertino/iOS
       cupertino: (context, platform) => CupertinoPageScaffoldData(
-        body: GestureDetector(
-          onTap: closeFocus,
-          child: Container(
-            // Decoration in the background, draw everything to the safe area
-            decoration: background,
-            child: SafeArea(
+        // Decoration in the background, draw everything to the safe area
+        body: Container(
+          decoration: background,
+          child: SafeArea(
+            child: GestureDetector(
+              onTap: closeFocus,
               child: (fab == null)
                   ? body
                   // Manually draw floating action buttons on iOS
