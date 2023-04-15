@@ -188,9 +188,70 @@ class EzText extends SelectableText {
         );
 
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
-  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to [openLink]
+  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to run [action]
   /// The provided [url]
   EzText.link({
+    required String text,
+    required void Function() action,
+    Key? key,
+    FocusNode? focusNode,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    double? textScaleFactor,
+    bool showCursor = false,
+    bool autofocus = false,
+    int? minLines,
+    int? maxLines,
+    double cursorWidth = 2.0,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    bool enableInteractiveSelection = true,
+    TextSelectionControls? selectionControls,
+    void Function()? onTap,
+    ScrollPhysics? scrollPhysics,
+    String? semanticsLabel,
+    TextHeightBehavior? textHeightBehavior,
+    TextWidthBasis? textWidthBasis,
+    void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged,
+    TextMagnifierConfiguration? magnifierConfiguration,
+  }) : this(
+          TextSpan(
+            text: text,
+            recognizer: TapGestureRecognizer()..onTap = action,
+          ),
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
+
+  /// Builds a [SelectableText.rich] with styling from [EzConfig]
+  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to [openLink]
+  /// The provided [url]
+  EzText.webLink({
     required String text,
     required Uri url,
     Key? key,
@@ -309,7 +370,7 @@ class EzText extends SelectableText {
   /// Changes will be made in order
   /// Returns the generated [TextSpan] with standard text using [style]
   /// And the links using [linkStyle]
-  EzText.links({
+  EzText.webLinks({
     required String base,
     required List<Map<String, Uri>> links,
     required TextAlign textAlign,
