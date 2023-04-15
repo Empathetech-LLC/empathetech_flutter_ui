@@ -168,11 +168,7 @@ MaterialAppData materialAppTheme() {
       // Text
       textTheme: materialTextTheme(),
       primaryTextTheme: materialTextTheme(),
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: themeTextColor,
-        selectionColor: themeColor,
-        selectionHandleColor: buttonColor,
-      ),
+
       hintColor: themeTextColor,
 
       // Icons
