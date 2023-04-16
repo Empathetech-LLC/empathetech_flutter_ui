@@ -188,6 +188,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     return controls;
   }
 
+  late double cutoff = buildTextStyle(styleKey: buttonStyleKey).fontSize! * 2.5;
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -214,12 +216,27 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             ),
           ),
 
+          // Tap-to-pause
+          Positioned(
+            bottom: cutoff,
+            left: 0,
+            top: 0,
+            width: screenWidth(context),
+            child: EzMouseDetector(
+                child: Container(
+                  color: Colors.transparent,
+                ),
+                onTap: () {
+                  (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+                }),
+          ),
+
           // Controls
           Positioned(
             bottom: 0,
             left: 0,
             width: screenWidth(context),
-            height: buildTextStyle(styleKey: buttonStyleKey).fontSize! * 2.0,
+            height: cutoff,
             child: Container(
               decoration: widget.controlsBackground,
               child: Row(
