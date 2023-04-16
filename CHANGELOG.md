@@ -2,14 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.0.0] - 2023-04-XX
+## [2.0.0] - 2023-04-16
 ### Added
 - Flutter analyze GitHub Action
 - Donations section to README
+- Web UI
+  - Special shout out to EzWebPlayer.dart
 
 ### Changed
 - Most of everything, lots of breaking changes
   - Hence 2.0.0
+  - Most wrappers are now a classes, extending the top level Widget
 
 ## [1.1.4] - 2023-03-31
 ### Fixed
@@ -48,7 +51,7 @@ All notable changes to this project will be documented in this file.
   - Material first, Cupertino is built from what is found
   - Also streamlined some of the custom widgets via new enum parameters
 - Commenting and documentation
-  - Shoutout to ChatGPT for making this a lot faster than solo-developing (at time of writing)
+  - Shout out to ChatGPT for making this a lot faster than solo-developing (at time of writing)
 
 ## [1.0.4] - 2023-03-14
 ### Updated
