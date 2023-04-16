@@ -42,11 +42,11 @@ class EzVideoPlayer extends StatefulWidget {
   final double startingVolume;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio], the recommended parent for [VideoPlayer]s
-  /// Optionally provide an opacity value with [alwaysOn] if you want the buttons to persist
-  /// Otherwise, the buttons will be transparent until the user hovers over the [VideoPlayer]
+  /// Also supports tap-to-pause on the main window via [EzMouseDetector]
+  /// The visibility of each button can be controlled with [ButtonVis]
+  /// Optionally provide a [BoxDecoration] background for the controls region
   /// Optionally provide [autoLoop] if you want the video to loop upon completion
   /// Otherwise, the video will automatically pause on the last frame
-  /// Videos begin muted, but the volume will be raised to full upon replay
   EzVideoPlayer({
     Key? key,
     this.width,
@@ -116,11 +116,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   void initState() {
     super.initState();
 
-    (widget.autoLoop)
-        ? widget.controller.setLooping(true)
-        : widget.controller.setLooping(false);
-
     widget.controller.setVolume(widget.startingVolume);
+    widget.controller.setLooping(widget.autoLoop);
   }
 
   List<Widget> _buildControls() {
