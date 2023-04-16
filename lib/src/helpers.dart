@@ -3,7 +3,9 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
@@ -71,6 +73,25 @@ Future<bool> openLink(
     mode: mode,
     webViewConfiguration: webViewConfiguration,
     webOnlyWindowName: webOnlyWindowName,
+  );
+}
+
+/// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
+Future<bool?> copyToClipboard(
+  String string, {
+  ToastGravity? gravity,
+  String? webPosition,
+}) async {
+  await Clipboard.setData(ClipboardData(text: string));
+  return Fluttertoast.showToast(
+    msg: 'Copied to clipboard',
+    toastLength: Toast.LENGTH_SHORT,
+    fontSize: buildTextStyle(styleKey: dialogContentStyleKey).fontSize,
+    gravity: gravity ?? ToastGravity.TOP_RIGHT,
+    backgroundColor: Color(EzConfig.prefs[backColorKey]),
+    textColor: Color(EzConfig.prefs[themeColorKey]),
+    webBgColor: EzConfig.prefs[backColorKey].toString(),
+    webPosition: webPosition ?? 'right',
   );
 }
 
