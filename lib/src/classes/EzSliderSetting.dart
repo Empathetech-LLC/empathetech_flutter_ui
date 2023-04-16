@@ -128,7 +128,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ),
               SizedBox(height: currValue),
             ],
-            centered: true,
           ),
         ];
 

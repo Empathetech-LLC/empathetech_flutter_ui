@@ -11,30 +11,27 @@ class EzScrollView extends SingleChildScrollView {
   final EdgeInsetsGeometry? padding;
   final bool? primary;
 
-  /// Default:
-  /// [BouncingScrollPhysics]
+  /// Default: [BouncingScrollPhysics]
   final ScrollPhysics? physics;
   final ScrollController? controller;
   final Widget? child;
   final List<Widget> children;
 
-  /// Default:
-  /// [Clip.hardEdge]
+  /// Default: [Clip.hardEdge]
   final Clip clipBehavior;
   final String? restorationId;
 
-  /// Default:
-  /// [ScrollViewKeyboardDismissBehavior.manual]
+  /// Default: [ScrollViewKeyboardDismissBehavior.manual]
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
-  final bool centered;
 
-  /// Default:
-  /// [MainAxisSize.min]
+  /// Default: [MainAxisSize.min]
   final MainAxisSize mainAxisSize;
 
-  /// Default:
-  /// [MainAxisAlignment.spaceEvenly]
+  /// Default: [MainAxisAlignment.spaceEvenly]
   final MainAxisAlignment mainAxisAlignment;
+
+  /// Default: [CrossAxisAlignment.center]
+  final CrossAxisAlignment crossAxisAlignment;
 
   final TextDirection? textDirection;
   final TextBaseline? textBaseline;
@@ -59,33 +56,20 @@ class EzScrollView extends SingleChildScrollView {
     this.clipBehavior = Clip.hardEdge,
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
-    this.centered = false,
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.textDirection,
     this.textBaseline,
     this.verticalDirection = VerticalDirection.down,
   });
-
-  /// Get a matching [CrossAxisAlignment] from the current [mainAxisAlignment]
-  CrossAxisAlignment matchCrossAxis() {
-    switch (mainAxisAlignment) {
-      case MainAxisAlignment.start:
-        return CrossAxisAlignment.start;
-      case MainAxisAlignment.end:
-        return CrossAxisAlignment.end;
-      case MainAxisAlignment.center:
-      default:
-        return CrossAxisAlignment.center;
-    }
-  }
 
   Widget _buildCore() {
     return (scrollDirection == Axis.vertical)
         ? Column(
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: matchCrossAxis(),
+            crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
             textBaseline: textBaseline,
             verticalDirection: verticalDirection,
@@ -94,7 +78,7 @@ class EzScrollView extends SingleChildScrollView {
         : Row(
             mainAxisSize: mainAxisSize,
             mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: matchCrossAxis(),
+            crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
             textBaseline: textBaseline,
             verticalDirection: verticalDirection,
@@ -114,7 +98,7 @@ class EzScrollView extends SingleChildScrollView {
       primary: primary,
       physics: physics ?? BouncingScrollPhysics(),
       controller: controller,
-      child: child ?? (centered ? Center(child: core) : core),
+      child: child ?? core,
       clipBehavior: clipBehavior,
       restorationId: restorationId,
       keyboardDismissBehavior: keyboardDismissBehavior,
