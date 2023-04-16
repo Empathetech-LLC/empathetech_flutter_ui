@@ -20,8 +20,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: 0.0
   final double hiddenOpacity;
 
-  /// Default: [Colors.transparent]
-  final Color controlsBackground;
+  /// Default:
+  /// const BoxDecoration(color: [Colors.transparent])
+  final Decoration controlsBackground;
 
   /// Default: [ButtonVis.auto]
   final ButtonVis playVis;
@@ -49,7 +50,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.controller,
     required this.iconColor,
     this.hiddenOpacity = 0.0,
-    this.controlsBackground = Colors.transparent,
+    this.controlsBackground = const BoxDecoration(color: Colors.transparent),
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
@@ -220,7 +221,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             width: screenWidth(context),
             height: buildTextStyle(styleKey: buttonStyleKey).fontSize! * 2.0,
             child: Container(
-              color: widget.controlsBackground,
+              decoration: widget.controlsBackground,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
