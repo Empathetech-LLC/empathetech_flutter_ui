@@ -1,0 +1,18 @@
+name: Run Flutter analyze on code prior to publishing
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Engage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+      - run: flutter pub get
+      - name: Analyze Dart
+        uses: zgosalvez/github-actions-analyze-dart@v2

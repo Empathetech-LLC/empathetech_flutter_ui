@@ -5,43 +5,45 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-/// Creates a tool for updating the app's font
-class FontFamilySetting extends StatefulWidget {
-  const FontFamilySetting({Key? key}) : super(key: key);
+class EzFontSetting extends StatefulWidget {
+  /// Creates a tool for updating the app's font
+  EzFontSetting({Key? key}) : super(key: key);
 
   @override
   _FontFamilySettingState createState() => _FontFamilySettingState();
 }
 
-class _FontFamilySettingState extends State<FontFamilySetting> {
-  // Initialize state
+class _FontFamilySettingState extends State<EzFontSetting> {
+  late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
+  late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
-  late String defaultFontFamily = AppConfig.defaults[fontFamilyKey];
-  late String currFontFamily = AppConfig.prefs[fontFamilyKey];
+  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-
-  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EZButton]s
-  void chooseGoogleFont() {
-    ezDialog(
-      context,
-      title: 'Choose a font',
-      content: ezScrollView(
-        children: myGoogleFonts
+  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
+  /// Returns the chosen font's name
+  Future<dynamic> _chooseGoogleFont() {
+    return openDialog(
+      context: context,
+      dialog: EzDialog(
+        title: EzText.simple(
+          'Choose a font',
+          style: buildTextStyle(styleKey: dialogTitleStyleKey),
+        ),
+        contents: myGoogleFonts
             .map(
               (String font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
-                  EZButton(
+                  EzButton(
                     action: () {
-                      AppConfig.preferences.setString(fontFamilyKey, font);
+                      EzConfig.preferences.setString(fontFamilyKey, font);
                       setState(() {
-                        currFontFamily = googleStyleAlias(font).fontFamily!;
+                        currFontFamily = gStyle(font).fontFamily!;
                       });
-                      Navigator.of(context).pop();
+                      popScreen(context: context, pass: font);
                     },
-                    body: Text(font, style: googleStyleAlias(font)),
+                    body: EzText.simple(font, style: gStyle(font)),
                   ),
                   Container(height: buttonSpacer),
                 ],
@@ -59,39 +61,37 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        ezText('Font family', style: getTextStyle(subTitleStyleKey)),
+        EzText.simple('Font family', style: buildTextStyle(styleKey: subTitleStyleKey)),
 
         // Font picker
-        EZButton(
-          action: chooseGoogleFont,
-          body: Text(
+        EzButton(
+          action: _chooseGoogleFont,
+          body: EzText.simple(
             'Choose font:\n$currFontFamily',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
               fontFamily: currFontFamily,
               color: buttonTextStyle.color,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
         Container(height: buttonSpacer),
 
         // Font reset
-        EZButton(
+        EzButton(
           action: () {
-            AppConfig.preferences.remove(fontFamilyKey);
+            EzConfig.preferences.remove(fontFamilyKey);
             setState(() {
               currFontFamily = defaultFontFamily;
             });
           },
-          body: Text(
+          body: EzText.simple(
             'Reset font\n($defaultFontFamily)',
             style: TextStyle(
               fontSize: buttonTextStyle.fontSize,
               fontFamily: defaultFontFamily,
               color: buttonTextStyle.color,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ],

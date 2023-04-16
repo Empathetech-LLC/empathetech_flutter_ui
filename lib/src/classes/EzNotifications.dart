@@ -37,7 +37,7 @@ const iosNotifDetails = DarwinNotificationDetails(
 
 /// Setup a simple push notification manager/service
 /// Built from [flutter_local_notifications]
-class NotificationService {
+class EzNotifications {
   // Build app settings
 
   final appInitSettings = InitializationSettings(
@@ -55,7 +55,7 @@ class NotificationService {
   /// Initialize the [NotificationService]
   /// Load platform specific settings
   /// Define [NotificationResponse] actions
-  Future<void> init() async {
+  void init() async {
     await notifsPlugin.initialize(
       appInitSettings,
       onDidReceiveNotificationResponse: notifAction,
@@ -76,11 +76,23 @@ class NotificationService {
           sound: true,
           critical: false,
         );
+
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        await notifsPlugin.getNotificationAppLaunchDetails();
+    if (notificationAppLaunchDetails?.didNotificationLaunchApp == true &&
+        notificationAppLaunchDetails?.notificationResponse != null) {
+      backgroundNotifAction(
+          notificationAppLaunchDetails!.notificationResponse!); // handle / navigate
+    }
   }
 
   /// Display notification
-  Future<void> show(int id, String? title, String? body, String? payload) async {
-    await notifsPlugin.show(
+  Future<void> show({
+    required int id,
+    required String? title,
+    required String? body,
+  }) {
+    return notifsPlugin.show(
       id,
       title,
       body,
