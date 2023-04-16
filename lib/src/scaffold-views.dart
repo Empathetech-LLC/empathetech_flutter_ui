@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Builds the "main screen" for pages built with [EzScaffold]
-Container standardView({
+Container ezView({
   required BuildContext context,
   BoxDecoration? background,
   required Widget body,
@@ -28,7 +28,7 @@ Container standardView({
 }
 
 /// Builds the "main screen" for pages built with [EzScaffold] that use a [PlatformNavBar]
-Container navView({
+Container ezNavView({
   required BuildContext context,
   BoxDecoration? background,
   required Widget body,
@@ -48,7 +48,7 @@ Container navView({
 }
 
 /// Builds the "main screen" for pages built with [EzWebScaffold]
-Container webView({
+Container ezWebView({
   required BuildContext context,
   BoxDecoration? background,
   required Widget body,
