@@ -291,6 +291,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  mailto:
+    dependency: "direct main"
+    description:
+      name: mailto
+      sha256: f8c5ce39e0eaa94a856795b2855af7f66aac37f7c3b70ac5c26ab00b94685445
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   material_color_utilities:
     dependency: transitive
     description:
