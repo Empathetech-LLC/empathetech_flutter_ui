@@ -60,7 +60,6 @@ Color getContrastColor(Color background) {
 }
 
 /// No need to import [launchUrl] if you've already imported EFUI
-/// Only intend for use on web
 Future<bool> openLink(
   Uri url, {
   LaunchMode mode = LaunchMode.platformDefault,
