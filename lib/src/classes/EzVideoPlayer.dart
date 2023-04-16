@@ -15,6 +15,8 @@ enum ButtonVis {
 
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
+  final double? width;
+  final double? height;
   final Color iconColor;
 
   /// Default: 0.0
@@ -47,6 +49,8 @@ class EzVideoPlayer extends StatefulWidget {
   /// Videos begin muted, but the volume will be raised to full upon replay
   EzVideoPlayer({
     Key? key,
+    this.width,
+    this.height,
     required this.controller,
     required this.iconColor,
     this.hiddenOpacity = 0.0,
@@ -203,50 +207,54 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           show = false;
         });
       },
-      child: Stack(
-        children: [
-          // Video
-          GestureDetector(
-            onTap: () {
-              (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
-            },
-            child: AspectRatio(
-              aspectRatio: widget.controller.value.aspectRatio,
-              child: VideoPlayer(widget.controller),
-            ),
-          ),
-
-          // Tap-to-pause
-          Positioned(
-            bottom: cutoff,
-            left: 0,
-            top: 0,
-            width: screenWidth(context),
-            child: EzMouseDetector(
-                child: Container(
-                  color: Colors.transparent,
-                ),
-                onTap: () {
-                  (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
-                }),
-          ),
-
-          // Controls
-          Positioned(
-            bottom: 0,
-            left: 0,
-            width: screenWidth(context),
-            height: cutoff,
-            child: Container(
-              decoration: widget.controlsBackground,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: _buildControls(),
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        child: Stack(
+          children: [
+            // Video
+            GestureDetector(
+              onTap: () {
+                (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+              },
+              child: AspectRatio(
+                aspectRatio: widget.controller.value.aspectRatio,
+                child: VideoPlayer(widget.controller),
               ),
             ),
-          ),
-        ],
+
+            // Tap-to-pause
+            Positioned(
+              bottom: cutoff,
+              left: 0,
+              top: 0,
+              width: screenWidth(context),
+              child: EzMouseDetector(
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                  onTap: () {
+                    (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+                  }),
+            ),
+
+            // Controls
+            Positioned(
+              bottom: 0,
+              left: 0,
+              width: screenWidth(context),
+              height: cutoff,
+              child: Container(
+                decoration: widget.controlsBackground,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: _buildControls(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
