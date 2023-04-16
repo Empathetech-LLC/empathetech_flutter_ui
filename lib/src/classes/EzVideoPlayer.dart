@@ -38,7 +38,12 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: 1.0
   final double? replayVolume;
 
+  /// Default: true
+  final bool autoPlay;
+
+  /// Default: false
   final bool autoLoop;
+
   final double startingVolume;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio], the recommended parent for [VideoPlayer]s
@@ -59,6 +64,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
     this.replayVolume = 1.0,
+    this.autoPlay = true,
     this.autoLoop = false,
     this.startingVolume = 0.0,
   }) : super(key: key);
@@ -118,6 +124,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
     widget.controller.setVolume(widget.startingVolume);
     widget.controller.setLooping(widget.autoLoop);
+    if (widget.autoPlay) widget.controller.play();
   }
 
   List<Widget> _buildControls() {
