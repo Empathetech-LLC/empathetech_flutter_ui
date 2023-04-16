@@ -45,37 +45,6 @@ class EzText extends SelectableText {
   final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// Get an appropriate [MainAxisAlignment] for a [Row] from the passed [TextAlign]
-  MainAxisAlignment matchMainAlign(TextAlign pair) {
-    switch (pair) {
-      case TextAlign.left:
-      case TextAlign.start:
-        return MainAxisAlignment.start;
-      case TextAlign.right:
-      case TextAlign.end:
-        return MainAxisAlignment.end;
-      case TextAlign.center:
-        return MainAxisAlignment.center;
-      case TextAlign.justify:
-        return MainAxisAlignment.spaceEvenly;
-    }
-  }
-
-  /// Get an appropriate [CrossAxisAlignment] for a [Row] from the passed [TextAlign]
-  CrossAxisAlignment matchCrossAlign(TextAlign pair) {
-    switch (pair) {
-      case TextAlign.left:
-      case TextAlign.start:
-        return CrossAxisAlignment.start;
-      case TextAlign.right:
-      case TextAlign.end:
-        return CrossAxisAlignment.end;
-      case TextAlign.center:
-      default:
-        return CrossAxisAlignment.center;
-    }
-  }
-
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
   EzText(
     this.textSpan, {
@@ -83,7 +52,7 @@ class EzText extends SelectableText {
     this.focusNode,
     this.style,
     this.strutStyle,
-    this.textAlign,
+    this.textAlign = TextAlign.center,
     this.textDirection,
     this.textScaleFactor,
     this.showCursor = false,
@@ -139,7 +108,7 @@ class EzText extends SelectableText {
     FocusNode? focusNode,
     TextStyle? style,
     StrutStyle? strutStyle,
-    TextAlign? textAlign,
+    TextAlign? textAlign = TextAlign.center,
     TextDirection? textDirection,
     double? textScaleFactor,
     bool showCursor = false,
@@ -197,7 +166,7 @@ class EzText extends SelectableText {
     FocusNode? focusNode,
     TextStyle? style,
     StrutStyle? strutStyle,
-    TextAlign? textAlign,
+    TextAlign? textAlign = TextAlign.center,
     TextDirection? textDirection,
     double? textScaleFactor,
     bool showCursor = false,
@@ -258,7 +227,7 @@ class EzText extends SelectableText {
     FocusNode? focusNode,
     TextStyle? style,
     StrutStyle? strutStyle,
-    TextAlign? textAlign,
+    TextAlign? textAlign = TextAlign.center,
     TextDirection? textDirection,
     double? textScaleFactor,
     bool showCursor = false,
