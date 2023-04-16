@@ -286,7 +286,7 @@ class EzText extends SelectableText {
   static TextSpan insertLinks({
     required String base,
     required List<Map<String, Uri>> links,
-    required TextAlign textAlign,
+    TextAlign textAlign = TextAlign.center,
     required TextStyle style,
     required TextStyle linkStyle,
   }) {
@@ -341,7 +341,7 @@ class EzText extends SelectableText {
   EzText.webLinks({
     required String base,
     required List<Map<String, Uri>> links,
-    required TextAlign textAlign,
+    TextAlign textAlign = TextAlign.center,
     required TextStyle style,
     required TextStyle linkStyle,
     Key? key,

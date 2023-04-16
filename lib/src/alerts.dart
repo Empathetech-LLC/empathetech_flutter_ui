@@ -18,7 +18,6 @@ Future<dynamic> logAlert(
       title: EzText.simple(
         'Attention:',
         style: buildTextStyle(styleKey: dialogTitleStyleKey),
-        textAlign: TextAlign.center,
       ),
       contents: [
         EzText.simple(message, style: buildTextStyle(styleKey: dialogContentStyleKey)),
@@ -66,7 +65,6 @@ Card warningCard({
           EzText.simple(
             warning,
             style: contentStyle,
-            textAlign: TextAlign.center,
           ),
         ],
       ),

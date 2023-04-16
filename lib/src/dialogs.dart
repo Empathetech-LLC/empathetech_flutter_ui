@@ -31,7 +31,6 @@ Future<dynamic> ezColorPicker({
       title: EzText.simple(
         'Pick a color!',
         style: buildTextStyle(styleKey: dialogTitleStyleKey),
-        textAlign: TextAlign.center,
       ),
       contents: [
         ColorPicker(

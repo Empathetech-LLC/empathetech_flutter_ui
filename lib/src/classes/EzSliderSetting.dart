@@ -78,7 +78,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzText.simple(
                 'Currently:\n$currValue\n\n(to scale)',
                 style: buildTextStyle(styleKey: dialogContentStyleKey),
-                textAlign: TextAlign.center,
               ),
               Container(
                 height: 160.0,
@@ -104,7 +103,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
               child: EzText.simple(
                 'Currently: $currValue',
                 style: buttonTextStyle,
-                textAlign: TextAlign.center,
               ),
             ),
             customStyle: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
@@ -154,7 +152,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 title: EzText.simple(
                   'Space preview',
                   style: buildTextStyle(styleKey: dialogTitleStyleKey),
-                  textAlign: TextAlign.center,
                 ),
                 contents: [
                   // Button 1

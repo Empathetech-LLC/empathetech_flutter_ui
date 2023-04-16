@@ -54,7 +54,6 @@ class EzButton extends StatelessWidget {
             EzText.simple(
               message,
               style: customTextStyle ?? buildTextStyle(styleKey: buttonStyleKey),
-              textAlign: TextAlign.center,
             ),
           ],
         );
@@ -164,7 +163,6 @@ class EzButton extends StatelessWidget {
                     return EzText.simple(
                       (widget as Text).data ?? 'Lorem ipsum',
                       style: buildTextStyle(styleKey: dialogContentStyleKey),
-                      textAlign: TextAlign.center,
                     );
                   case Icon:
                     return Icon(
@@ -182,7 +180,6 @@ class EzButton extends StatelessWidget {
           return EzText.simple(
             (this.body as Text).data ?? 'Lorem ipsum',
             style: buildTextStyle(styleKey: dialogContentStyleKey),
-            textAlign: TextAlign.center,
           );
 
         case Icon:

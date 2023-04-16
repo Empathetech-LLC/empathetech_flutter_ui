@@ -29,7 +29,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
         title: EzText.simple(
           'Choose a font',
           style: buildTextStyle(styleKey: dialogTitleStyleKey),
-          textAlign: TextAlign.center,
         ),
         contents: myGoogleFonts
             .map(
@@ -74,7 +73,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
               fontFamily: currFontFamily,
               color: buttonTextStyle.color,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
         Container(height: buttonSpacer),
@@ -94,7 +92,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
               fontFamily: defaultFontFamily,
               color: buttonTextStyle.color,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ],

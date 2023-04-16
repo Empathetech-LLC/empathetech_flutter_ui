@@ -71,7 +71,6 @@ class EzDialog extends PlatformAlertDialog {
                   child: EzText.simple(
                     'Close',
                     style: buildTextStyle(styleKey: dialogContentStyleKey),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ]

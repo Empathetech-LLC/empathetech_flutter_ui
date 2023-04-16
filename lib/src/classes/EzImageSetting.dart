@@ -121,7 +121,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         title: EzText.simple(
           'Update $title',
           style: buildTextStyle(styleKey: dialogTitleStyleKey),
-          textAlign: TextAlign.center,
         ),
         contents: options,
       ),
@@ -144,7 +143,6 @@ class _ImageSettingState extends State<EzImageSetting> {
           title: EzText.simple(
             'Credit to:',
             style: buildTextStyle(styleKey: dialogTitleStyleKey),
-            textAlign: TextAlign.center,
           ),
           contents: [
             EzText.simple(

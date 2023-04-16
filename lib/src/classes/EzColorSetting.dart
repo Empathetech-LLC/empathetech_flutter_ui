@@ -69,7 +69,6 @@ class _ColorSettingState extends State<EzColorSetting> {
           title: EzText.simple(
             'Use recommended?',
             style: buildTextStyle(styleKey: dialogTitleStyleKey),
-            textAlign: TextAlign.center,
           ),
           contents: [
             // Recommended preview
@@ -123,7 +122,6 @@ class _ColorSettingState extends State<EzColorSetting> {
         title: EzText.simple(
           'Reset to...',
           style: buildTextStyle(styleKey: dialogTitleStyleKey),
-          textAlign: TextAlign.center,
         ),
         contents: [
           // Color preview
@@ -169,7 +167,6 @@ class _ColorSettingState extends State<EzColorSetting> {
         EzText.simple(
           widget.message,
           style: buildTextStyle(styleKey: dialogTitleStyleKey),
-          textAlign: TextAlign.center,
         ),
 
         // Color preview/edit button
