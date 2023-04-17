@@ -6,9 +6,10 @@
 EFUI is a library/package for fast, high quality UI development.
 
 "High quality" in this case == 
+ - fully responsive
  - user accessible
  - user customizable
- - dynamic design to match different OS types
+ - dynamically styled to match OS convention
 
 ## Table of Contents
 
