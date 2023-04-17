@@ -87,6 +87,7 @@ class EzButton extends StatelessWidget {
 
     switch (this.body.runtimeType) {
       case Icon:
+      case EzIcon:
         style = materialButton(shape: CircleBorder());
         break;
     }
