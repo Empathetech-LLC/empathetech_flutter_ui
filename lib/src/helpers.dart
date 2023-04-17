@@ -148,3 +148,16 @@ Future<dynamic> replaceScreen({
 void popUntilHome(BuildContext context) {
   return Navigator.of(context).popUntil(ModalRoute.withName('/'));
 }
+
+/// For web use, set the tab's title
+void setPageTitle({
+  required BuildContext context,
+  required String title,
+}) {
+  SystemChrome.setApplicationSwitcherDescription(
+    ApplicationSwitcherDescription(
+      label: title,
+      primaryColor: EzConfig.prefs[themeTextColorKey],
+    ),
+  );
+}
