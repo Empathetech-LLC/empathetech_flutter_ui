@@ -127,6 +127,17 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.autoPlay) widget.controller.play();
   }
 
+  Color _buildColor(ButtonVis visibility) {
+    switch (visibility) {
+      case ButtonVis.alwaysOff:
+        return Colors.transparent;
+      case ButtonVis.alwaysOn:
+        return showing;
+      case ButtonVis.auto:
+        return (!widget.controller.value.isPlaying || show) ? showing : hiding;
+    }
+  }
+
   List<Widget> _buildControls() {
     List<Widget> controls = [Container(width: margin)];
 
@@ -138,11 +149,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             (widget.controller.value.isPlaying)
                 ? PlatformIcons(context).pause
                 : PlatformIcons(context).playArrow,
-            color: (widget.playVis == ButtonVis.alwaysOn)
-                ? showing
-                : (show)
-                    ? showing
-                    : hiding,
+            color: _buildColor(widget.playVis),
           ),
           onTap: () {
             if (widget.controller.value.position >= widget.controller.value.duration) {
@@ -164,11 +171,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             (widget.controller.value.volume == 0.0)
                 ? PlatformIcons(context).volumeMute
                 : PlatformIcons(context).volumeUp,
-            color: (widget.volumeVis == ButtonVis.alwaysOn)
-                ? showing
-                : (show)
-                    ? showing
-                    : hiding,
+            color: _buildColor(widget.volumeVis),
           ),
           onTap: () {
             (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
@@ -183,11 +186,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         EzMouseDetector(
           child: EzIcon(
             PlatformIcons(context).refresh,
-            color: (widget.replayVis == ButtonVis.alwaysOn)
-                ? showing
-                : (show)
-                    ? showing
-                    : hiding,
+            color: _buildColor(widget.replayVis),
           ),
           onTap: _replayVideo,
         ),
