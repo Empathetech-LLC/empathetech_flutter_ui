@@ -50,8 +50,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// Also supports tap-to-pause on the main window via [EzMouseDetector]
   /// The visibility of each button can be controlled with [ButtonVis]
   /// Optionally provide a [BoxDecoration] background for the controls region
-  /// Optionally provide [autoLoop] if you want the video to loop upon completion
-  /// Otherwise, the video will automatically pause on the last frame
+  /// The video will begin muted unless [startingVolume] is specified
+  /// Only the [height] can set via [EzVideoPlayer]
+  /// The width will respond to the parent container
   EzVideoPlayer({
     Key? key,
     this.width,
@@ -76,9 +77,9 @@ class EzVideoPlayer extends StatefulWidget {
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool show = false;
 
-  late double margin = EzConfig.prefs[dialogSpacingKey];
-  late double iconSize =
-      buildTextStyle(styleKey: dialogContentStyleKey).fontSize ?? margin;
+  late double margin = EzConfig.prefs[marginKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double? iconSize = buildTextStyle(styleKey: dialogContentStyleKey).fontSize;
 
   late Color showing = widget.iconColor;
   late Color hiding = widget.iconColor.withOpacity(widget.hiddenOpacity);
@@ -160,7 +161,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             }
           },
         ),
-        Container(width: margin),
+        Container(width: buttonSpacer),
       ]);
 
     // Volume
@@ -177,7 +178,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
           },
         ),
-        Container(width: margin),
+        Container(width: buttonSpacer),
       ]);
 
     // Replay
@@ -195,10 +196,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     return controls;
   }
 
-  late double cutoff = buildTextStyle(styleKey: buttonStyleKey).fontSize! * 2.5;
-
   @override
   Widget build(BuildContext context) {
+    double aspectRatio = widget.controller.value.aspectRatio;
+    double cutoff = buildTextStyle(styleKey: buttonStyleKey).fontSize! * 3.0;
+
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -221,7 +223,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
               },
               child: AspectRatio(
-                aspectRatio: widget.controller.value.aspectRatio,
+                aspectRatio: aspectRatio,
                 child: VideoPlayer(widget.controller),
               ),
             ),
