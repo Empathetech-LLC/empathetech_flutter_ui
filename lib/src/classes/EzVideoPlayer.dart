@@ -33,8 +33,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: [ButtonVis.auto]
   final ButtonVis replayVis;
 
-  /// Default: 1.0
-  final double? replayVolume;
+  /// Default: [ButtonVis.alwaysOff]
+  /// [ButtonVis.alwaysOn] isn't recommended for slider
+  final ButtonVis sliderVis;
 
   /// Default: true
   final bool autoPlay;
@@ -66,7 +67,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
-    this.replayVolume = 1.0,
+    this.sliderVis = ButtonVis.alwaysOff,
     this.autoPlay = true,
     this.autoLoop = false,
     this.startingVolume = 0.0,
@@ -80,6 +81,9 @@ class EzVideoPlayer extends StatefulWidget {
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool show = false;
+  double? savedVolume;
+
+  double _currentPosition = 0.0;
 
   late double margin = EzConfig.prefs[marginKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
@@ -102,25 +106,38 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   void _muteVideo() {
     setState(() {
+      savedVolume = widget.controller.value.volume;
       widget.controller.setVolume(0.0);
     });
   }
 
   void _unMuteVideo() {
     setState(() {
-      widget.controller.setVolume(1.0);
+      widget.controller.setVolume(savedVolume ?? 1.0);
     });
   }
 
   void _replayVideo() {
     setState(() {
+      widget.controller.pause();
       widget.controller.seekTo(Duration.zero);
-
-      if (widget.replayVolume != null)
-        widget.controller.setVolume(widget.replayVolume as double);
-
       widget.controller.play();
     });
+  }
+
+  /// Get the percent of the total video that is complete from the passed [Duration]
+  double _percentComplete(Duration position) {
+    return (position.isNegative || position.inMilliseconds == 0)
+        ? 0
+        : position.inMilliseconds / widget.controller.value.duration.inMilliseconds;
+  }
+
+  /// Get the [Duration] value that corresponds to the passed [completion] percentage
+  Duration _findPoint(double completion) {
+    return Duration(
+      milliseconds:
+          (widget.controller.value.duration.inMilliseconds * completion).round(),
+    );
   }
 
   @override
@@ -130,6 +147,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     widget.controller.setVolume(widget.startingVolume);
     widget.controller.setLooping(widget.autoLoop);
     if (widget.autoPlay) widget.controller.play();
+
+    widget.controller.addListener(() {
+      setState(() {
+        _currentPosition = _percentComplete(widget.controller.value.position);
+      });
+    });
   }
 
   Color _buildColor(ButtonVis visibility) {
@@ -143,8 +166,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     }
   }
 
-  List<Widget> _buildControls() {
-    List<Widget> controls = [Container(width: margin)];
+  List<Widget> _buildButtons({
+    required double buttonSize,
+    required SliderThemeData videoSliderTheme,
+  }) {
+    List<Widget> controls = [];
 
     // Play/pause
     if (widget.playVis != ButtonVis.alwaysOff)
@@ -155,6 +181,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ? PlatformIcons(context).pause
                 : PlatformIcons(context).playArrow,
             color: _buildColor(widget.playVis),
+            size: buttonSize,
           ),
           onTap: () {
             if (widget.controller.value.position >= widget.controller.value.duration) {
@@ -171,16 +198,36 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Volume
     if (widget.volumeVis != ButtonVis.alwaysOff)
       controls.addAll([
+        // Mute button
         EzMouseDetector(
           child: EzIcon(
             (widget.controller.value.volume == 0.0)
                 ? PlatformIcons(context).volumeMute
                 : PlatformIcons(context).volumeUp,
             color: _buildColor(widget.volumeVis),
+            size: buttonSize,
           ),
           onTap: () {
             (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
           },
+        ),
+        Container(width: EzConfig.prefs[paddingKey]),
+
+        // Value slider
+        Container(
+          height: buttonSize,
+          width: buttonSize * 4,
+          child: SliderTheme(
+            data: videoSliderTheme,
+            child: Slider(
+              value: widget.controller.value.volume,
+              onChanged: (double value) {
+                setState(() {
+                  widget.controller.setVolume(value);
+                });
+              },
+            ),
+          ),
         ),
         Container(width: buttonSpacer),
       ]);
@@ -192,9 +239,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           child: EzIcon(
             PlatformIcons(context).refresh,
             color: _buildColor(widget.replayVis),
+            size: buttonSize,
           ),
           onTap: _replayVideo,
         ),
+        Container(width: buttonSpacer),
       ]);
 
     return controls;
@@ -203,7 +252,25 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     double aspectRatio = widget.controller.value.aspectRatio;
-    double cutoff = buildTextStyle(styleKey: buttonStyleKey).fontSize! * 3.0;
+    double buttonSize = buildTextStyle(styleKey: buttonStyleKey).fontSize!;
+    double cutoff = buttonSize * 4;
+
+    Color sliderColor = _buildColor(widget.sliderVis);
+
+    SliderThemeData videoSliderTheme = SliderThemeData(
+      thumbShape:
+          (sliderColor == Colors.transparent) ? SliderComponentShape.noThumb : null,
+      overlayShape: SliderComponentShape.noOverlay,
+      trackShape: VideoSliderTrack(),
+      activeTrackColor: sliderColor,
+      disabledActiveTrackColor: Colors.transparent,
+      secondaryActiveTrackColor: sliderColor,
+      disabledSecondaryActiveTrackColor: Colors.transparent,
+      thumbColor: sliderColor,
+      disabledThumbColor: Colors.transparent,
+      inactiveTrackColor: sliderColor,
+      disabledInactiveTrackColor: Colors.transparent,
+    );
 
     return MouseRegion(
       onEnter: (_) {
@@ -232,7 +299,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 bottom: cutoff,
                 left: 0,
                 top: 0,
-                width: screenWidth(context),
+                width: widthOf(context),
                 child: EzMouseDetector(
                     child: Container(
                       color: Colors.transparent,
@@ -245,15 +312,43 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               // Controls
               Positioned(
                 bottom: 0,
-                left: 0,
-                width: screenWidth(context),
+                left: margin,
+                right: margin,
                 height: cutoff,
                 child: Container(
                   decoration: widget.controlsBackground,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: _buildControls(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Time seeker
+                      SliderTheme(
+                        data: videoSliderTheme,
+                        child: Slider(
+                          value: _currentPosition,
+                          onChangeStart: (_) => _pauseVideo,
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentPosition = value;
+                              widget.controller.seekTo(_findPoint(value));
+                            });
+                          },
+                          onChangeEnd: (_) => _playVideo(),
+                        ),
+                      ),
+
+                      // Buttons
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _buildButtons(
+                          buttonSize: buttonSize,
+                          videoSliderTheme: videoSliderTheme,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -262,5 +357,22 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ),
       ),
     );
+  }
+}
+
+class VideoSliderTrack extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final trackHeight = sliderTheme.trackHeight;
+    final trackLeft = offset.dx;
+    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
+    final trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }
