@@ -43,7 +43,7 @@ Card warningCard({
   return Card(
     color: Color(EzConfig.prefs[themeColorKey]),
     child: Container(
-      width: screenWidth(context),
+      width: widthOf(context),
       padding: EdgeInsets.all(padding),
       child: Column(
         mainAxisSize: MainAxisSize.max,

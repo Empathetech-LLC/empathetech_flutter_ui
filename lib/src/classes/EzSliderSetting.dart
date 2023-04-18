@@ -67,7 +67,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
       // Margin
       case SettingType.margin:
-        double marginScale = 90.0 / screenWidth(context);
+        double marginScale = 90.0 / widthOf(context);
         double liveMargin = currValue * marginScale;
 
         return [
@@ -136,7 +136,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             action: doNothing,
             body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
             customStyle: ElevatedButton.styleFrom(
-              fixedSize: Size(screenWidth(context), currValue),
+              fixedSize: Size(widthOf(context), currValue),
             ),
           ),
           Container(height: buttonSpacer),

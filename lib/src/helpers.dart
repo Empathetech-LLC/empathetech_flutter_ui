@@ -18,12 +18,12 @@ void closeFocus() {
 }
 
 /// More readable than MediaQuery.of(context).size.width
-double screenWidth(BuildContext context) {
+double widthOf(BuildContext context) {
   return MediaQuery.of(context).size.width;
 }
 
 /// More readable than MediaQuery.of(context).size.height
-double screenHeight(BuildContext context) {
+double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 

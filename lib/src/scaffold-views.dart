@@ -13,8 +13,8 @@ Container ezView({
   required Widget body,
 }) {
   return Container(
-    width: screenWidth(context),
-    height: screenHeight(context),
+    width: widthOf(context),
+    height: heightOf(context),
 
     // Background
     decoration: background,
@@ -36,8 +36,8 @@ Container ezNavView({
   double margin = EzConfig.prefs[marginKey];
 
   return Container(
-    height: screenHeight(context),
-    width: screenWidth(context),
+    height: heightOf(context),
+    width: widthOf(context),
 
     // Background
     decoration: background,
@@ -54,8 +54,8 @@ Container ezWebView({
   required Widget body,
 }) {
   return Container(
-    width: screenWidth(context),
-    height: screenHeight(context),
+    width: widthOf(context),
+    height: heightOf(context),
 
     // Background
     decoration: background,
