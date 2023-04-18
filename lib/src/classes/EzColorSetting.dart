@@ -159,9 +159,10 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return EzScrollView(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      scrollDirection: Axis.horizontal,
       children: [
         // Color label
         EzText.simple(
