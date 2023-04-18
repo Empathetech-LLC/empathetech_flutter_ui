@@ -28,7 +28,7 @@ double heightOf(BuildContext context) {
 }
 
 /// More readable than MediaQuery.of(context).size
-Size screenSize(BuildContext context) {
+Size sizeOf(BuildContext context) {
   return MediaQuery.of(context).size;
 }
 
