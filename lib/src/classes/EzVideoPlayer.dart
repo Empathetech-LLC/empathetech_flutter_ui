@@ -15,8 +15,6 @@ enum ButtonVis {
 
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
-  final double? width;
-  final double? height;
   final Color iconColor;
 
   /// Default: 0.0
@@ -44,19 +42,23 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: false
   final bool autoLoop;
 
+  /// Default: 0.0
   final double startingVolume;
+
+  /// Default: 0.0
+  final double maxWidth;
+
+  /// Default: 0.0
+  final double maxHeight;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio], the recommended parent for [VideoPlayer]s
   /// Also supports tap-to-pause on the main window via [EzMouseDetector]
   /// The visibility of each button can be controlled with [ButtonVis]
   /// Optionally provide a [BoxDecoration] background for the controls region
   /// The video will begin muted unless [startingVolume] is specified
-  /// Only the [height] can set via [EzVideoPlayer]
-  /// The width will respond to the parent container
+  /// Optionally provide [maxWidth] and [maxHeight] to shape the video
   EzVideoPlayer({
     Key? key,
-    this.width,
-    this.height,
     required this.controller,
     required this.iconColor,
     this.hiddenOpacity = 0.0,
@@ -68,6 +70,8 @@ class EzVideoPlayer extends StatefulWidget {
     this.autoPlay = true,
     this.autoLoop = false,
     this.startingVolume = 0.0,
+    this.maxWidth = double.infinity,
+    this.maxHeight = double.infinity,
   }) : super(key: key);
 
   @override
@@ -212,53 +216,49 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           show = false;
         });
       },
-      child: Container(
-        width: widget.width,
-        height: widget.height,
-        child: Stack(
-          children: [
-            // Video
-            GestureDetector(
-              onTap: () {
-                (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
-              },
-              child: AspectRatio(
-                aspectRatio: aspectRatio,
-                child: VideoPlayer(widget.controller),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: widget.maxWidth,
+          maxHeight: widget.maxHeight,
+        ),
+        child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: Stack(
+            children: [
+              VideoPlayer(widget.controller),
+
+              // Tap-to-pause
+              Positioned(
+                bottom: cutoff,
+                left: 0,
+                top: 0,
+                width: screenWidth(context),
+                child: EzMouseDetector(
+                    child: Container(
+                      color: Colors.transparent,
+                    ),
+                    onTap: () {
+                      (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+                    }),
               ),
-            ),
 
-            // Tap-to-pause
-            Positioned(
-              bottom: cutoff,
-              left: 0,
-              top: 0,
-              width: screenWidth(context),
-              child: EzMouseDetector(
-                  child: Container(
-                    color: Colors.transparent,
+              // Controls
+              Positioned(
+                bottom: 0,
+                left: 0,
+                width: screenWidth(context),
+                height: cutoff,
+                child: Container(
+                  decoration: widget.controlsBackground,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: _buildControls(),
                   ),
-                  onTap: () {
-                    (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
-                  }),
-            ),
-
-            // Controls
-            Positioned(
-              bottom: 0,
-              left: 0,
-              width: screenWidth(context),
-              height: cutoff,
-              child: Container(
-                decoration: widget.controlsBackground,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: _buildControls(),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
