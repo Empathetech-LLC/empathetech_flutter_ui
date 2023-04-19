@@ -118,7 +118,7 @@ class EzApp extends PlatformApp {
           restorationScopeId: restorationScopeId,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          material: material ?? (context, platform) => materialAppTheme(),
-          cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
+          material: material ?? (context, platform) => EzMaterialTheme(),
+          cupertino: cupertino ?? (context, platform) => EzCupertinoTheme(),
         );
 }
