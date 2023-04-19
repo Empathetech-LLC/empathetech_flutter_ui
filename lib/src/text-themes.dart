@@ -5,47 +5,101 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
+/// Overrides defaults with [EzConfig]
 TextTheme materialTextTheme() {
-  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
+  double fontScalar = EzConfig.prefs[fontScalarKey];
 
   return TextTheme(
-    labelLarge: defaultTextStyle,
-    bodyLarge: defaultTextStyle,
-    titleLarge: defaultTextStyle,
-    displayLarge: defaultTextStyle,
-    headlineLarge: defaultTextStyle,
-    labelMedium: defaultTextStyle,
-    bodyMedium: defaultTextStyle,
-    titleMedium: defaultTextStyle,
-    displayMedium: defaultTextStyle,
-    headlineMedium: defaultTextStyle,
-    labelSmall: defaultTextStyle,
-    bodySmall: defaultTextStyle,
-    titleSmall: defaultTextStyle,
-    displaySmall: defaultTextStyle,
-    headlineSmall: defaultTextStyle,
+    // Displays
+    displayLarge: EzTextStyle(
+      fontSize: 58 * fontScalar,
+      fontWeight: FontWeight.bold,
+    ),
+    displayMedium: EzTextStyle(
+      fontSize: 46 * fontScalar,
+      fontWeight: FontWeight.bold,
+    ),
+    displaySmall: EzTextStyle(
+      fontSize: 36 * fontScalar,
+      fontWeight: FontWeight.bold,
+    ),
+
+    // Headlines
+    headlineLarge: EzTextStyle(
+      fontSize: 32,
+      decoration: TextDecoration.underline,
+    ),
+    headlineMedium: EzTextStyle(
+      fontSize: 28,
+      decoration: TextDecoration.underline,
+    ),
+    headlineSmall: EzTextStyle(
+      fontSize: 24,
+      decoration: TextDecoration.underline,
+    ),
+
+    // Titles
+    titleLarge: EzTextStyle(fontSize: 22),
+    titleMedium: EzTextStyle(fontSize: 16),
+    titleSmall: EzTextStyle(fontSize: 14),
+
+    // Labels
+    labelLarge: EzTextStyle(
+      fontSize: 14,
+      decoration: TextDecoration.underline,
+    ),
+    labelMedium: EzTextStyle(
+      fontSize: 12,
+      decoration: TextDecoration.underline,
+    ),
+    labelSmall: EzTextStyle(
+      fontSize: 10,
+      decoration: TextDecoration.underline,
+    ),
+
+    // Body
+    bodyLarge: EzTextStyle(fontSize: 16),
+    bodyMedium: EzTextStyle(fontSize: 14),
+    bodySmall: EzTextStyle(fontSize: 12),
   );
 }
 
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
+/// Overrides defaults with [EzConfig]
 CupertinoTextThemeData cupertinoTextTheme() {
-  Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
-  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
-
   return CupertinoTextThemeData(
-    primaryColor: textColor,
-    textStyle: defaultTextStyle,
-    actionTextStyle: defaultTextStyle,
-    tabLabelTextStyle: defaultTextStyle,
-    navTitleTextStyle: defaultTextStyle,
-    navLargeTitleTextStyle: defaultTextStyle,
-    navActionTextStyle: defaultTextStyle,
-    pickerTextStyle: defaultTextStyle,
-    dateTimePickerTextStyle: defaultTextStyle,
+    primaryColor: Color(EzConfig.prefs[themeTextColorKey]),
+
+    // bodyLarge
+    textStyle: EzTextStyle(fontSize: 16),
+
+    // labelLarge
+    actionTextStyle: EzTextStyle(
+      fontSize: 14,
+      decoration: TextDecoration.underline,
+    ),
+
+    // labelLarge
+    tabLabelTextStyle: EzTextStyle(
+      fontSize: 14,
+      decoration: TextDecoration.underline,
+    ),
+
+    // titleMedium
+    navTitleTextStyle: EzTextStyle(fontSize: 16),
+
+    // titleLarge
+    navLargeTitleTextStyle: EzTextStyle(fontSize: 22),
+
+    // labelLarge
+    navActionTextStyle: EzTextStyle(
+      fontSize: 14,
+      decoration: TextDecoration.underline,
+    ),
+
+    // bodyLarge
+    pickerTextStyle: EzTextStyle(fontSize: 16),
+
+    // bodyLarge
+    dateTimePickerTextStyle: EzTextStyle(fontSize: 16),
   );
 }
