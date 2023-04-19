@@ -36,7 +36,7 @@ class EzAppBar extends PlatformAppBar {
           widgetKey: widgetKey,
 
           title: title,
-          backgroundColor: backgroundColor ?? Color(EzConfig.prefs[themeColorKey]),
+          backgroundColor: backgroundColor,
           leading: leading,
 
           // Only set trailing actions if trailing is a List
