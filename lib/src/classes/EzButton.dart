@@ -171,7 +171,7 @@ class EzButton extends StatelessWidget {
                   case Icon:
                     return Icon(
                       (widget as Icon).icon,
-                      color: Color(EzConfig.prefs[themeTextColorKey]),
+                      color: Colors.white,
                     );
                   default:
                     return widget;
@@ -189,7 +189,7 @@ class EzButton extends StatelessWidget {
         case Icon:
           return Icon(
             (this.body as Icon).icon,
-            color: Color(EzConfig.prefs[themeTextColorKey]),
+            color: Colors.white,
           );
 
         default:
