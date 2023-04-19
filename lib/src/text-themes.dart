@@ -64,24 +64,6 @@ TextTheme materialTextTheme() {
   );
 }
 
-enum MaterialStyles {
-  displayLarge,
-  displayMedium,
-  displaySmall,
-  headlineLarge,
-  headlineMedium,
-  headlineSmall,
-  titleLarge,
-  titleMedium,
-  titleSmall,
-  labelLarge,
-  labelMedium,
-  labelSmall,
-  bodyLarge,
-  bodyMedium,
-  bodySmall,
-}
-
 /// Overrides defaults with [EzConfig]
 CupertinoTextThemeData cupertinoTextTheme() {
   return CupertinoTextThemeData(
@@ -120,6 +102,24 @@ CupertinoTextThemeData cupertinoTextTheme() {
     // bodyLarge
     dateTimePickerTextStyle: EzTextStyle(fontSize: 16),
   );
+}
+
+enum MaterialStyles {
+  displayLarge,
+  displayMedium,
+  displaySmall,
+  headlineLarge,
+  headlineMedium,
+  headlineSmall,
+  titleLarge,
+  titleMedium,
+  titleSmall,
+  labelLarge,
+  labelMedium,
+  labelSmall,
+  bodyLarge,
+  bodyMedium,
+  bodySmall,
 }
 
 /// More readable than Theme.of(context).textTheme.
