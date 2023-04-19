@@ -54,7 +54,7 @@ class EzApp extends PlatformApp {
   final CupertinoAppData? cupertinoData;
 
   /// Quickly setup a [PlatformApp] that uses [EzConfig] themes
-  /// via [EzMaterialAppData] -> [EzThemeData]
+  /// via [EzMaterialAppData] -> [ezThemeData]
   /// && [EzCupertinoAppData] -> [EzCupertinoThemeData]
   EzApp({
     this.key,
