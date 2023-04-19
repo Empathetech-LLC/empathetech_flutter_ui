@@ -15,19 +15,29 @@ class EzConfig {
   static late FocusManager focus;
 
   static Map<String, dynamic> defaults = {
-    backColorKey: 0xFF141414, // Almost black
-    themeColorKey: 0xFF141414, // Almost black
-    themeTextColorKey: 0xFFFFFFFF, // White text
-    buttonColorKey: 0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
-    buttonTextColorKey: 0xFF000000, // Black text
-    alertColorKey: 0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
-    backImageKey: null,
-    buttonSpacingKey: 35.0,
-    dialogSpacingKey: 20.0,
+    // Shared
     marginKey: 15.0,
     paddingKey: 12.5,
     fontFamilyKey: 'Roboto',
     fontScalarKey: 1,
+    alertColorKey: 0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
+    buttonColorKey: 0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
+    buttonTextColorKey: 0xFF000000, // Black text
+    buttonSpacingKey: 35.0,
+    dialogSpacingKey: 20.0,
+    paragraphSpacingKey: 50,
+
+    // Light theme
+    lightBackgroundImage: null,
+    lightBackgroundColorKey: 0xFFEBEBEB, // Almost white
+    lightThemeColorKey: 0xFFEBEBEB, // Almost white
+    lightThemeTextColorKey: 0xFF000000, // Black text
+
+    // Dark theme
+    darkBackgroundImage: null,
+    darkBackgroundColorKey: 0xFF141414, // Almost black
+    darkThemeColorKey: 0xFF141414, // Almost black
+    darkThemeTextColorKey: 0xFFFFFFFF, // White text
   };
 
   /// Populate [EzConfig.prefs], overwriting defaults whenever a user value is found
@@ -83,20 +93,34 @@ class EzConfig {
 
 // Preference keys //
 
-const String backImageKey = 'backImage';
-const String noImageKey = 'noImage';
+// Shared
 
-const String backColorKey = 'appBackgroundColor';
-const String themeColorKey = 'themeColor';
-const String themeTextColorKey = 'themeTextColor';
-const String buttonColorKey = 'buttonColor';
-const String buttonTextColorKey = 'buttonTextColor';
-const String alertColorKey = 'alertColor';
+const String noBackgroundImage = 'noImage';
 
-const String buttonSpacingKey = 'buttonSpacing';
-const String dialogSpacingKey = 'dialogSpacing';
 const String marginKey = 'margin';
 const String paddingKey = 'padding';
 
 const String fontFamilyKey = 'fontFamily';
 const String fontScalarKey = 'fontScalar';
+
+const String alertColorKey = 'alertColor';
+const String buttonColorKey = 'buttonColor';
+const String buttonTextColorKey = 'buttonTextColor';
+
+const String buttonSpacingKey = 'buttonSpacing';
+const String dialogSpacingKey = 'dialogSpacing';
+const String paragraphSpacingKey = 'paragraphSpacing';
+
+// Theme dependent
+
+// Light
+const String lightBackgroundImage = 'lightBackImage';
+const String lightBackgroundColorKey = 'lightBackgroundColor';
+const String lightThemeColorKey = 'lightThemeColor';
+const String lightThemeTextColorKey = 'lightThemeTextColor';
+
+// Dark
+const String darkBackgroundImage = 'darkBackImage';
+const String darkBackgroundColorKey = 'darkBackgroundColor';
+const String darkThemeColorKey = 'darkThemeColor';
+const String darkThemeTextColorKey = 'darkThemeTextColor';
