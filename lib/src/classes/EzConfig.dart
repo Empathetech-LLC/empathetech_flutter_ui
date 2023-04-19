@@ -26,8 +26,8 @@ class EzConfig {
     dialogSpacingKey: 20.0,
     marginKey: 15.0,
     paddingKey: 12.5,
-    fontSizeKey: 24.0,
     fontFamilyKey: 'Roboto',
+    fontScalarKey: 1,
   };
 
   /// Populate [EzConfig.prefs], overwriting defaults whenever a user value is found
@@ -83,19 +83,20 @@ class EzConfig {
 
 // Preference keys //
 
-// UI
-
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
+
 const String backColorKey = 'appBackgroundColor';
 const String themeColorKey = 'themeColor';
 const String themeTextColorKey = 'themeTextColor';
 const String buttonColorKey = 'buttonColor';
 const String buttonTextColorKey = 'buttonTextColor';
 const String alertColorKey = 'alertColor';
+
 const String buttonSpacingKey = 'buttonSpacing';
 const String dialogSpacingKey = 'dialogSpacing';
 const String marginKey = 'margin';
 const String paddingKey = 'padding';
+
 const String fontFamilyKey = 'fontFamily';
-const String fontSizeKey = 'fontSize';
+const String fontScalarKey = 'fontScalar';
