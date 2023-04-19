@@ -7,16 +7,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzApp extends PlatformProvider {
-  final Key? key;
-  final Key? widgetKey;
+  // PlatformProvider parameters //
+
+  final TargetPlatform? initialPlatform;
+
+  /// Default: PlatformSettingsData(iosUsesMaterialWidgets: true)
+  final PlatformSettingsData? settings;
+
+  final Key? providerKey;
+  final Key? providerWidgetKey;
+
+  // PlatformApp parameters //
+
+  final Key? appKey;
+  final Key? appWidgetKey;
   final GlobalKey<NavigatorState>? navigatorKey;
   final Widget? home;
-  final String title;
-  final Map<String, Widget Function(BuildContext)> routes;
+  final Map<String, Widget Function(BuildContext)>? routes;
   final String? initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Route<dynamic>? Function(RouteSettings)? onUnknownRoute;
   final List<NavigatorObserver>? navigatorObservers;
+  final String? title;
   final String Function(BuildContext)? onGenerateTitle;
   final Color? color;
   final Locale? locale;
@@ -53,15 +65,14 @@ class EzApp extends PlatformProvider {
   /// Default [cupertinoAppTheme]
   final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
 
-  /// Default:
-  /// PlatformSettingsData(iosUsesMaterialWidgets: true)
-  final PlatformSettingsData? settings;
-
   /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
   /// Optionally overwrite all fields from [PlatformApp]
   EzApp({
-    this.key,
-    this.widgetKey,
+    this.appKey,
+    this.appWidgetKey,
+    this.initialPlatform,
+    this.providerKey,
+    this.providerWidgetKey,
     this.navigatorKey,
     this.home,
     required this.title,
@@ -73,7 +84,11 @@ class EzApp extends PlatformProvider {
     this.onGenerateTitle,
     this.color,
     this.locale,
-    this.localizationsDelegates,
+    this.localizationsDelegates = const <LocalizationsDelegate<dynamic>>[
+      DefaultMaterialLocalizations.delegate,
+      DefaultWidgetsLocalizations.delegate,
+      DefaultCupertinoLocalizations.delegate,
+    ],
     this.localeListResolutionCallback,
     this.localeResolutionCallback,
     this.supportedLocales,
@@ -92,26 +107,24 @@ class EzApp extends PlatformProvider {
     this.cupertino,
     this.settings,
   }) : super(
+          key: providerKey,
+          initialPlatform: initialPlatform,
+          settings: settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
           builder: (context) => PlatformApp(
-            key: key,
-            widgetKey: widgetKey,
+            key: appKey,
+            widgetKey: appWidgetKey,
             navigatorKey: navigatorKey,
             home: home,
-            title: title,
             routes: routes,
             initialRoute: initialRoute,
             onGenerateRoute: onGenerateRoute,
             onUnknownRoute: onUnknownRoute,
             navigatorObservers: navigatorObservers,
+            title: title,
             onGenerateTitle: onGenerateTitle,
             color: color,
             locale: locale,
-            localizationsDelegates: localizationsDelegates ??
-                <LocalizationsDelegate<dynamic>>[
-                  DefaultMaterialLocalizations.delegate,
-                  DefaultWidgetsLocalizations.delegate,
-                  DefaultCupertinoLocalizations.delegate,
-                ],
+            localizationsDelegates: localizationsDelegates,
             localeListResolutionCallback: localeListResolutionCallback,
             localeResolutionCallback: localeResolutionCallback,
             supportedLocales: supportedLocales,
@@ -129,136 +142,5 @@ class EzApp extends PlatformProvider {
             material: material ?? (context, platform) => materialAppTheme(),
             cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
           ),
-          settings: settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
         );
-}
-
-/// Material (Android) [ThemeData] built from [EzConfig.prefs]
-MaterialAppData materialAppTheme() {
-  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
-  Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
-
-  TextStyle dialogTitleText = buildTextStyle(styleKey: dialogTitleStyleKey);
-  TextStyle dialogContentText = buildTextStyle(styleKey: dialogContentStyleKey);
-
-  return MaterialAppData(
-    theme: ThemeData(
-      primaryColor: themeColor,
-
-      // App bar
-      appBarTheme: AppBarTheme(
-        backgroundColor: themeColor,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: themeTextColor),
-        titleTextStyle: buildTextStyle(styleKey: titleStyleKey),
-      ),
-
-      // Nav bar
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: themeColor,
-        selectedItemColor: buttonColor,
-        selectedIconTheme: IconThemeData(color: buttonColor),
-        unselectedItemColor: themeTextColor,
-        unselectedIconTheme: IconThemeData(color: themeTextColor),
-      ),
-
-      // Text
-      textTheme: materialTextTheme(),
-      primaryTextTheme: materialTextTheme(),
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: themeTextColor,
-        selectionColor: buttonColor.withOpacity(0.5),
-        selectionHandleColor: buttonColor,
-      ),
-      hintColor: themeTextColor,
-
-      // Icons
-      iconTheme: IconThemeData(color: themeTextColor),
-
-      // Sliders
-      sliderTheme: SliderThemeData(
-        thumbColor: buttonColor,
-        disabledThumbColor: themeColor,
-        overlayColor: buttonColor,
-        activeTrackColor: buttonColor,
-        activeTickMarkColor: buttonTextColor,
-        inactiveTrackColor: themeColor,
-        inactiveTickMarkColor: themeTextColor,
-        valueIndicatorTextStyle: dialogContentText,
-        overlayShape: SliderComponentShape.noOverlay,
-      ),
-
-      // Dialogs
-      dialogTheme: DialogTheme(
-        backgroundColor: themeColor,
-        iconColor: themeTextColor,
-        alignment: Alignment.center,
-        titleTextStyle: dialogTitleText,
-        contentTextStyle: dialogContentText,
-      ),
-    ),
-  );
-}
-
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
-TextTheme materialTextTheme() {
-  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
-
-  return TextTheme(
-    labelLarge: defaultTextStyle,
-    bodyLarge: defaultTextStyle,
-    titleLarge: defaultTextStyle,
-    displayLarge: defaultTextStyle,
-    headlineLarge: defaultTextStyle,
-    labelMedium: defaultTextStyle,
-    bodyMedium: defaultTextStyle,
-    titleMedium: defaultTextStyle,
-    displayMedium: defaultTextStyle,
-    headlineMedium: defaultTextStyle,
-    labelSmall: defaultTextStyle,
-    bodySmall: defaultTextStyle,
-    titleSmall: defaultTextStyle,
-    displaySmall: defaultTextStyle,
-    headlineSmall: defaultTextStyle,
-  );
-}
-
-/// (iOS) [CupertinoAppData] data built [from] the passed in [MaterialAppData]
-CupertinoAppData cupertinoAppTheme() {
-  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-
-  return CupertinoAppData(
-    color: themeColor,
-    theme: CupertinoThemeData(
-      primaryColor: themeColor,
-      primaryContrastingColor: themeTextColor,
-      textTheme: cupertinoTextTheme(),
-    ),
-  );
-}
-
-/// Sets all [TextStyle]s to the default case from [buildTextStyle]
-/// [TextStyle]s are overwritten throughout EFUI, this serves as redundancy to insure third-party
-/// [Widget] styling matches that of [EzConfig]
-CupertinoTextThemeData cupertinoTextTheme() {
-  Color textColor = Color(EzConfig.prefs[themeTextColorKey]);
-  TextStyle defaultTextStyle = buildTextStyle(styleKey: defaultStyleKey);
-
-  return CupertinoTextThemeData(
-    primaryColor: textColor,
-    textStyle: defaultTextStyle,
-    actionTextStyle: defaultTextStyle,
-    tabLabelTextStyle: defaultTextStyle,
-    navTitleTextStyle: defaultTextStyle,
-    navLargeTitleTextStyle: defaultTextStyle,
-    navActionTextStyle: defaultTextStyle,
-    pickerTextStyle: defaultTextStyle,
-    dateTimePickerTextStyle: defaultTextStyle,
-  );
 }
