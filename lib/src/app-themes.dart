@@ -13,9 +13,6 @@ MaterialAppData materialAppTheme() {
   Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
   Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
-  TextStyle dialogTitleText = buildTextStyle(styleKey: dialogTitleStyleKey);
-  TextStyle dialogContentText = buildTextStyle(styleKey: dialogContentStyleKey);
-
   return MaterialAppData(
     theme: ThemeData(
       primaryColor: themeColor,
@@ -25,7 +22,6 @@ MaterialAppData materialAppTheme() {
         backgroundColor: themeColor,
         centerTitle: true,
         iconTheme: IconThemeData(color: themeTextColor),
-        titleTextStyle: buildTextStyle(styleKey: titleStyleKey),
       ),
 
       // Nav bar
@@ -60,7 +56,6 @@ MaterialAppData materialAppTheme() {
         activeTickMarkColor: buttonTextColor,
         inactiveTrackColor: themeColor,
         inactiveTickMarkColor: themeTextColor,
-        valueIndicatorTextStyle: dialogContentText,
         overlayShape: SliderComponentShape.noOverlay,
       ),
 
@@ -69,8 +64,6 @@ MaterialAppData materialAppTheme() {
         backgroundColor: themeColor,
         iconColor: themeTextColor,
         alignment: Alignment.center,
-        titleTextStyle: dialogTitleText,
-        contentTextStyle: dialogContentText,
       ),
     ),
   );

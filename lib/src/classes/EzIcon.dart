@@ -21,7 +21,7 @@ class EzIcon extends Icon {
   }) : super(
           icon,
           key: key,
-          size: size ?? buildTextStyle(styleKey: buttonStyleKey).fontSize,
+          size: size,
           fill: fill,
           weight: weight,
           grade: grade,

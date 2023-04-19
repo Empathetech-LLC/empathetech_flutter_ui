@@ -1,124 +1,139 @@
 library empathetech_flutter_ui;
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// All the [GoogleFonts] currently supported
+enum EzFonts {
+  sora,
+  hahmlet,
+  jetbrainsMono,
+  andadaPro,
+  epilogue,
+  inter,
+  encodeSans,
+  manrope,
+  lora,
+  bioRhyme,
+  playfairDisplay,
+  archivo,
+  roboto,
+  cormorant,
+  spectral,
+  raleway,
+  workSans,
+  lato,
+  anton,
+  oldStandard,
+}
+
 /// Returns the [TextStyle] of the [GoogleFonts] matching [fontName]
-TextStyle gStyle(String fontName) {
+TextStyle gStyle(EzFonts fontName) {
   switch (fontName) {
-    case soraKey:
+    case EzFonts.sora:
       return GoogleFonts.sora();
 
-    case hahmletKey:
+    case EzFonts.hahmlet:
       return GoogleFonts.hahmlet();
 
-    case jetbrainsMonoKey:
+    case EzFonts.jetbrainsMono:
       return GoogleFonts.jetBrainsMono();
 
-    case andadaProKey:
+    case EzFonts.andadaPro:
       return GoogleFonts.andadaPro();
 
-    case epilogueKey:
+    case EzFonts.epilogue:
       return GoogleFonts.epilogue();
 
-    case interKey:
+    case EzFonts.inter:
       return GoogleFonts.inter();
 
-    case encodeSansKey:
+    case EzFonts.encodeSans:
       return GoogleFonts.encodeSans();
 
-    case manropeKey:
+    case EzFonts.manrope:
       return GoogleFonts.manrope();
 
-    case loraKey:
+    case EzFonts.lora:
       return GoogleFonts.lora();
 
-    case bioRhymeKey:
+    case EzFonts.bioRhyme:
       return GoogleFonts.bioRhyme();
 
-    case playfairDisplayKey:
+    case EzFonts.playfairDisplay:
       return GoogleFonts.playfairDisplay();
 
-    case archivoKey:
+    case EzFonts.archivo:
       return GoogleFonts.archivo();
 
-    case robotoKey:
-      return GoogleFonts.roboto();
-
-    case cormorantKey:
+    case EzFonts.cormorant:
       return GoogleFonts.cormorant();
 
-    case spectralKey:
+    case EzFonts.spectral:
       return GoogleFonts.spectral();
 
-    case ralewayKey:
+    case EzFonts.raleway:
       return GoogleFonts.raleway();
 
-    case workSansKey:
+    case EzFonts.workSans:
       return GoogleFonts.workSans();
 
-    case latoKey:
+    case EzFonts.lato:
       return GoogleFonts.lato();
 
-    case antonKey:
+    case EzFonts.anton:
       return GoogleFonts.anton();
 
-    case oldStandardKey:
+    case EzFonts.oldStandard:
       return GoogleFonts.oldStandardTt();
 
-    case errorStyleKey:
-    default:
-      return TextStyle(
-        fontSize: 48,
-        color: Colors.red,
-      );
+    case EzFonts.roboto:
+      return GoogleFonts.roboto();
   }
 }
 
-const String soraKey = 'Sora';
-const String hahmletKey = 'Hahmlet';
-const String jetbrainsMonoKey = 'JetBrains Mono';
-const String andadaProKey = 'Andada Pro';
-const String epilogueKey = 'Epilogue';
-const String interKey = 'Inter';
-const String encodeSansKey = 'Encode Sans';
-const String manropeKey = 'Manrope';
-const String loraKey = 'Lora';
-const String bioRhymeKey = 'BioRhyme';
-const String playfairDisplayKey = 'Playfair Display';
-const String archivoKey = 'Archivo';
-const String robotoKey = 'Roboto';
-const String cormorantKey = 'Cormorant';
-const String spectralKey = 'Spectral';
-const String ralewayKey = 'Raleway';
-const String workSansKey = 'Work Sans';
-const String latoKey = 'Lato';
-const String antonKey = 'Anton';
-const String oldStandardKey = 'Old Standard TT';
-
-/// List of [GoogleFonts] (https://fonts.google.com/) EFUI has saved
-/// Used in [EzFontSetting] to build each [EzButton]
-const List<String> myGoogleFonts = [
-  soraKey,
-  hahmletKey,
-  jetbrainsMonoKey,
-  andadaProKey,
-  epilogueKey,
-  interKey,
-  encodeSansKey,
-  manropeKey,
-  loraKey,
-  bioRhymeKey,
-  playfairDisplayKey,
-  archivoKey,
-  robotoKey,
-  cormorantKey,
-  spectralKey,
-  ralewayKey,
-  workSansKey,
-  latoKey,
-  antonKey,
-  oldStandardKey,
-];
+/// Returns the [String]-ified name of the [GoogleFonts] matching [fontName]
+String gStyleName(EzFonts fontName) {
+  switch (fontName) {
+    case EzFonts.sora:
+      return 'Sora';
+    case EzFonts.hahmlet:
+      return 'Hahmlet';
+    case EzFonts.jetbrainsMono:
+      return 'JetBrains Mono';
+    case EzFonts.andadaPro:
+      return 'Andada Pro';
+    case EzFonts.epilogue:
+      return 'Epilogue';
+    case EzFonts.inter:
+      return 'Inter';
+    case EzFonts.encodeSans:
+      return 'Encode Sans';
+    case EzFonts.manrope:
+      return 'Manrope';
+    case EzFonts.lora:
+      return 'Lora';
+    case EzFonts.bioRhyme:
+      return 'BioRhyme';
+    case EzFonts.playfairDisplay:
+      return 'Playfair Display';
+    case EzFonts.archivo:
+      return 'Archivo';
+    case EzFonts.roboto:
+      return 'Roboto';
+    case EzFonts.cormorant:
+      return 'Cormorant';
+    case EzFonts.spectral:
+      return 'Spectral';
+    case EzFonts.raleway:
+      return 'Raleway';
+    case EzFonts.workSans:
+      return 'Work Sans';
+    case EzFonts.lato:
+      return 'Lato';
+    case EzFonts.anton:
+      return 'Anton';
+    case EzFonts.oldStandard:
+      return 'Old Standard TT';
+  }
+}

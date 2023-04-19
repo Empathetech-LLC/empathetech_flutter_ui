@@ -81,13 +81,19 @@ class EzVideoPlayer extends StatefulWidget {
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool show = false;
-  double? savedVolume;
 
+  double? savedVolume;
   double _currentPosition = 0.0;
+
+  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
+
+  late double aspectRatio = widget.controller.value.aspectRatio;
 
   late double margin = EzConfig.prefs[marginKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double? iconSize = buildTextStyle(styleKey: dialogContentStyleKey).fontSize;
+  late double? iconSize = buttonTextStyle.fontSize!;
+  late double buttonSize = buttonTextStyle.fontSize!;
+  late double cutoff = buttonSize * 4;
 
   late Color showing = widget.iconColor;
   late Color hiding = widget.iconColor.withOpacity(widget.hiddenOpacity);
@@ -260,10 +266,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    double aspectRatio = widget.controller.value.aspectRatio;
-    double buttonSize = buildTextStyle(styleKey: buttonStyleKey).fontSize!;
-    double cutoff = buttonSize * 4;
-
     Color sliderColor = _buildColor(widget.sliderVis);
 
     SliderThemeData videoSliderTheme = SliderThemeData(

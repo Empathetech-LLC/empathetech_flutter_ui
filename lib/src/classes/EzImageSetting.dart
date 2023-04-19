@@ -34,7 +34,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String currPathKey = widget.prefsKey;
   String? updatedPath; // Only used when the user makes a change
 
-  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
+  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
+  late TextStyle dialogTitleStyle = ezTextStyle(context, MaterialStyles.titleSmall);
+  late TextStyle dialogContentStyle = ezTextStyle(context, MaterialStyles.bodyMedium);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
@@ -57,6 +59,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     List<Widget> options = [
       // From file
       EzButton.icon(
+        context: context,
         action: () async {
           String? changed = await changeImage(
             context: context,
@@ -73,6 +76,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
       // From camera
       EzButton.icon(
+        context: context,
         action: () async {
           String? changed = await changeImage(
             context: context,
@@ -89,6 +93,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
       // Reset
       EzButton.icon(
+        context: context,
         action: () {
           _cleanup();
 
@@ -104,6 +109,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       options.addAll([
         Container(height: buttonSpacer),
         EzButton.icon(
+          context: context,
           action: () {
             _cleanup();
 
@@ -120,7 +126,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       dialog: EzDialog(
         title: EzText.simple(
           'Update $title',
-          style: buildTextStyle(styleKey: dialogTitleStyleKey),
+          style: dialogTitleStyle,
         ),
         contents: options,
       ),
@@ -130,6 +136,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return EzButton(
+      context: context,
       action: () async {
         dynamic newPath = await _chooseImage();
         if (newPath is String)
@@ -142,12 +149,12 @@ class _ImageSettingState extends State<EzImageSetting> {
         dialog: EzDialog(
           title: EzText.simple(
             'Credit to:',
-            style: buildTextStyle(styleKey: dialogTitleStyleKey),
+            style: dialogTitleStyle,
           ),
           contents: [
             EzText.simple(
               widget.credits,
-              style: buildTextStyle(styleKey: dialogContentStyleKey),
+              style: dialogContentStyle,
             )
           ],
         ),
@@ -159,7 +166,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           // Title on the left
           EzText.simple(
             title,
-            style: buildTextStyle(styleKey: imageSettingStyleKey),
+            style: ezTextStyle(context, MaterialStyles.bodyLarge),
           ),
 
           // Preview on the right

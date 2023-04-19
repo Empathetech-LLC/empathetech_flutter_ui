@@ -41,7 +41,9 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
+  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
+  late TextStyle dialogTitleStyle = ezTextStyle(context, MaterialStyles.titleSmall);
+  late TextStyle dialogContentStyle = ezTextStyle(context, MaterialStyles.bodyMedium);
 
   late double currValue = EzConfig.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
@@ -56,6 +58,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.fontSize:
         return [
           EzButton(
+            context: context,
             action: doNothing,
             body: EzText.simple(
               'Currently: $currValue',
@@ -77,7 +80,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               EzText.simple(
                 'Currently:\n$currValue\n\n(to scale)',
-                style: buildTextStyle(styleKey: dialogContentStyleKey),
+                style: dialogContentStyle,
               ),
               Container(
                 height: 160.0,
@@ -97,6 +100,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.padding:
         return [
           EzButton(
+            context: context,
             action: doNothing,
             body: Padding(
               padding: EdgeInsets.all(currValue),
@@ -116,11 +120,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzScrollView(
             children: [
               EzButton(
+                context: context,
                 action: doNothing,
                 body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
               EzButton(
+                context: context,
                 action: doNothing,
                 body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
               ),
@@ -133,6 +139,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.buttonHeight:
         return [
           EzButton(
+            context: context,
             action: doNothing,
             body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
             customStyle: ElevatedButton.styleFrom(
@@ -146,16 +153,18 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.dialogSpacing:
         return [
           EzButton(
+            context: context,
             action: () => openDialog(
               context: context,
               dialog: EzDialog(
                 title: EzText.simple(
                   'Space preview',
-                  style: buildTextStyle(styleKey: dialogTitleStyleKey),
+                  style: dialogTitleStyle,
                 ),
                 contents: [
                   // Button 1
                   EzButton(
+                    context: context,
                     action: doNothing,
                     body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
                   ),
@@ -163,6 +172,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
                   // Button 2
                   EzButton(
+                    context: context,
                     action: doNothing,
                     body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
                   ),
@@ -186,7 +196,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
     List<Widget> toReturn = [
       EzText.simple(
         widget.title,
-        style: buildTextStyle(styleKey: subTitleStyleKey),
+        style: ezTextStyle(context, MaterialStyles.headlineSmall),
       )
     ];
 
@@ -225,6 +235,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
       // Reset button
       EzButton.icon(
+        context: context,
         action: () {
           EzConfig.preferences.remove(widget.prefsKey);
           setState(() {

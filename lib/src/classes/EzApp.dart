@@ -53,8 +53,7 @@ class EzApp extends PlatformApp {
   /// Default [cupertinoAppTheme]
   final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
 
-  /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
-  /// Optionally overwrite all fields from [PlatformApp]
+  /// Quickly setup a [PlatformApp] that uses [EzConfig]
   EzApp({
     this.key,
     this.widgetKey,

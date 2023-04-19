@@ -77,8 +77,9 @@ Future<bool> openLink(
 }
 
 /// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
-Future<bool?> copyToClipboard(
-  String string, {
+Future<bool?> copyToClipboard({
+  required BuildContext context,
+  required String string,
   ToastGravity? gravity,
   String? webPosition,
 }) async {
@@ -86,7 +87,7 @@ Future<bool?> copyToClipboard(
   return Fluttertoast.showToast(
     msg: 'Copied to clipboard',
     toastLength: Toast.LENGTH_SHORT,
-    fontSize: buildTextStyle(styleKey: dialogContentStyleKey).fontSize,
+    fontSize: Theme.of(context).textTheme.labelLarge!.fontSize,
     gravity: gravity ?? ToastGravity.TOP_RIGHT,
     backgroundColor: Color(EzConfig.prefs[backColorKey]),
     textColor: Color(EzConfig.prefs[themeColorKey]),

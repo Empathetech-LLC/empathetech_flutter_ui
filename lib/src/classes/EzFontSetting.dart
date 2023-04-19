@@ -17,7 +17,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
   late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
-  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
+  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
@@ -28,22 +28,23 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       dialog: EzDialog(
         title: EzText.simple(
           'Choose a font',
-          style: buildTextStyle(styleKey: dialogTitleStyleKey),
+          style: ezTextStyle(context, MaterialStyles.titleSmall),
         ),
-        contents: myGoogleFonts
+        contents: EzFonts.values
             .map(
-              (String font) => Column(
+              (EzFonts font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
                   EzButton(
+                    context: context,
                     action: () {
-                      EzConfig.preferences.setString(fontFamilyKey, font);
+                      EzConfig.preferences.setString(fontFamilyKey, gStyleName(font));
                       setState(() {
                         currFontFamily = gStyle(font).fontFamily!;
                       });
                       popScreen(context: context, pass: font);
                     },
-                    body: EzText.simple(font, style: gStyle(font)),
+                    body: EzText.simple(gStyleName(font), style: gStyle(font)),
                   ),
                   Container(height: buttonSpacer),
                 ],
@@ -61,10 +62,12 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        EzText.simple('Font family', style: buildTextStyle(styleKey: subTitleStyleKey)),
+        EzText.simple('Font family',
+            style: ezTextStyle(context, MaterialStyles.titleMedium)),
 
         // Font picker
         EzButton(
+          context: context,
           action: _chooseGoogleFont,
           body: EzText.simple(
             'Choose font:\n$currFontFamily',
@@ -79,6 +82,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
         // Font reset
         EzButton(
+          context: context,
           action: () {
             EzConfig.preferences.remove(fontFamilyKey);
             setState(() {

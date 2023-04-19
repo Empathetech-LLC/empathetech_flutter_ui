@@ -8,6 +8,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzButton extends StatelessWidget {
   final Key? key;
+  final BuildContext context;
   final VoidCallback action;
 
   /// Default:
@@ -25,6 +26,7 @@ class EzButton extends StatelessWidget {
   /// Optionally provide [forceMaterial] to escape the walled garden
   EzButton({
     this.key,
+    required this.context,
     required this.action,
     this.longAction = doNothing,
     required this.body,
@@ -38,6 +40,7 @@ class EzButton extends StatelessWidget {
   /// Optionally provide [forceMaterial] to escape the walled garden
   EzButton.icon({
     this.key,
+    required this.context,
     required this.action,
     this.longAction = doNothing,
     this.customStyle,
@@ -53,7 +56,7 @@ class EzButton extends StatelessWidget {
             Container(width: EzConfig.prefs[paddingKey]),
             EzText.simple(
               message,
-              style: customTextStyle ?? buildTextStyle(styleKey: buttonStyleKey),
+              style: ezTextStyle(context, MaterialStyles.bodyMedium),
             ),
           ],
         );
@@ -68,7 +71,7 @@ class EzButton extends StatelessWidget {
         if (cast.style == null) {
           return EzText.simple(
             cast.data ?? 'Lorem ipsum',
-            style: buildTextStyle(styleKey: buttonStyleKey),
+            style: ezTextStyle(context, MaterialStyles.bodyMedium),
             textAlign: cast.textAlign,
           );
         } else {
@@ -163,7 +166,7 @@ class EzButton extends StatelessWidget {
                   case Text:
                     return EzText.simple(
                       (widget as Text).data ?? 'Lorem ipsum',
-                      style: buildTextStyle(styleKey: dialogContentStyleKey),
+                      style: ezTextStyle(context, MaterialStyles.bodyMedium),
                     );
                   case Icon:
                     return Icon(
@@ -180,7 +183,7 @@ class EzButton extends StatelessWidget {
         case Text:
           return EzText.simple(
             (this.body as Text).data ?? 'Lorem ipsum',
-            style: buildTextStyle(styleKey: dialogContentStyleKey),
+            style: ezTextStyle(context, MaterialStyles.bodyMedium),
           );
 
         case Icon:
@@ -209,7 +212,6 @@ ButtonStyle materialButton({OutlinedBorder? shape}) {
   return ElevatedButton.styleFrom(
     backgroundColor: Color(EzConfig.prefs[buttonColorKey]),
     foregroundColor: Color(EzConfig.prefs[buttonTextColorKey]),
-    textStyle: buildTextStyle(styleKey: buttonStyleKey),
     padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
     side: BorderSide(color: Color(EzConfig.prefs[buttonColorKey])),
     shape: shape,
@@ -258,18 +260,38 @@ Widget ezYesNo({
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            EzButton.icon(
+              context: context,
+              action: onConfirm,
+              icon: confirmIcon,
+              message: confirmMsg,
+            ),
             Container(height: spacing),
-            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+            EzButton.icon(
+              context: context,
+              action: onDeny,
+              icon: denyIcon,
+              message: denyMsg,
+            ),
           ],
         )
       : Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            EzButton.icon(action: onConfirm, icon: confirmIcon, message: confirmMsg),
+            EzButton.icon(
+              context: context,
+              action: onConfirm,
+              icon: confirmIcon,
+              message: confirmMsg,
+            ),
             Container(width: spacing),
-            EzButton.icon(action: onDeny, icon: denyIcon, message: denyMsg),
+            EzButton.icon(
+              context: context,
+              action: onDeny,
+              icon: denyIcon,
+              message: denyMsg,
+            ),
           ],
         );
 }

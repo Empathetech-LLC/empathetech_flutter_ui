@@ -68,7 +68,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         dialog: EzDialog(
           title: EzText.simple(
             'Use recommended?',
-            style: buildTextStyle(styleKey: dialogTitleStyleKey),
+            style: ezTextStyle(context, MaterialStyles.titleSmall),
           ),
           contents: [
             // Recommended preview
@@ -121,7 +121,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       dialog: EzDialog(
         title: EzText.simple(
           'Reset to...',
-          style: buildTextStyle(styleKey: dialogTitleStyleKey),
+          style: ezTextStyle(context, MaterialStyles.titleSmall),
         ),
         contents: [
           // Color preview
@@ -167,11 +167,12 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color label
         EzText.simple(
           widget.message,
-          style: buildTextStyle(styleKey: dialogTitleStyleKey),
+          style: ezTextStyle(context, MaterialStyles.bodyLarge),
         ),
 
         // Color preview/edit button
         EzButton(
+          context: context,
           action: _changeColor,
           longAction: _reset,
           body: EzIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
