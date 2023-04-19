@@ -10,5 +10,4 @@ export 'src/google-fonts.dart';
 export 'src/helpers.dart';
 export 'src/scaffold-views.dart';
 export 'src/storage.dart';
-export 'src/text-styles.dart';
 export 'src/text-themes.dart';
