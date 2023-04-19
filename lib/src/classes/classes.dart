@@ -1,6 +1,7 @@
 library empathetech_flutter_ui;
 
 export 'EzApp.dart';
+export 'EzAppProvider.dart';
 export 'EzAppBar.dart';
 export 'EzButton.dart';
 export 'EzCheckBox.dart';

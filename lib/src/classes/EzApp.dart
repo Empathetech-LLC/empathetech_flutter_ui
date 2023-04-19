@@ -6,21 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzApp extends PlatformProvider {
-  // PlatformProvider parameters //
-
-  final TargetPlatform? initialPlatform;
-
-  /// Default: PlatformSettingsData(iosUsesMaterialWidgets: true)
-  final PlatformSettingsData? settings;
-
-  final Key? providerKey;
-  final Key? providerWidgetKey;
-
-  // PlatformApp parameters //
-
-  final Key? appKey;
-  final Key? appWidgetKey;
+class EzApp extends PlatformApp {
+  final Key? key;
+  final Key? widgetKey;
   final GlobalKey<NavigatorState>? navigatorKey;
   final Widget? home;
   final Map<String, Widget Function(BuildContext)>? routes;
@@ -68,11 +56,8 @@ class EzApp extends PlatformProvider {
   /// Quickly setup a [PlatformProvider] to pair with [EzConfig]
   /// Optionally overwrite all fields from [PlatformApp]
   EzApp({
-    this.appKey,
-    this.appWidgetKey,
-    this.initialPlatform,
-    this.providerKey,
-    this.providerWidgetKey,
+    this.key,
+    this.widgetKey,
     this.navigatorKey,
     this.home,
     required this.title,
@@ -105,42 +90,36 @@ class EzApp extends PlatformProvider {
     this.useInheritedMediaQuery,
     this.material,
     this.cupertino,
-    this.settings,
   }) : super(
-          key: providerKey,
-          initialPlatform: initialPlatform,
-          settings: settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
-          builder: (context) => PlatformApp(
-            key: appKey,
-            widgetKey: appWidgetKey,
-            navigatorKey: navigatorKey,
-            home: home,
-            routes: routes,
-            initialRoute: initialRoute,
-            onGenerateRoute: onGenerateRoute,
-            onUnknownRoute: onUnknownRoute,
-            navigatorObservers: navigatorObservers,
-            title: title,
-            onGenerateTitle: onGenerateTitle,
-            color: color,
-            locale: locale,
-            localizationsDelegates: localizationsDelegates,
-            localeListResolutionCallback: localeListResolutionCallback,
-            localeResolutionCallback: localeResolutionCallback,
-            supportedLocales: supportedLocales,
-            showPerformanceOverlay: showPerformanceOverlay,
-            checkerboardRasterCacheImages: checkerboardRasterCacheImages,
-            checkerboardOffscreenLayers: checkerboardOffscreenLayers,
-            showSemanticsDebugger: showSemanticsDebugger,
-            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-            shortcuts: shortcuts,
-            actions: actions,
-            onGenerateInitialRoutes: onGenerateInitialRoutes,
-            restorationScopeId: restorationScopeId,
-            scrollBehavior: scrollBehavior,
-            useInheritedMediaQuery: useInheritedMediaQuery,
-            material: material ?? (context, platform) => materialAppTheme(),
-            cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
-          ),
+          key: key,
+          widgetKey: widgetKey,
+          navigatorKey: navigatorKey,
+          home: home,
+          routes: routes,
+          initialRoute: initialRoute,
+          onGenerateRoute: onGenerateRoute,
+          onUnknownRoute: onUnknownRoute,
+          navigatorObservers: navigatorObservers,
+          title: title,
+          onGenerateTitle: onGenerateTitle,
+          color: color,
+          locale: locale,
+          localizationsDelegates: localizationsDelegates,
+          localeListResolutionCallback: localeListResolutionCallback,
+          localeResolutionCallback: localeResolutionCallback,
+          supportedLocales: supportedLocales,
+          showPerformanceOverlay: showPerformanceOverlay,
+          checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+          showSemanticsDebugger: showSemanticsDebugger,
+          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+          shortcuts: shortcuts,
+          actions: actions,
+          onGenerateInitialRoutes: onGenerateInitialRoutes,
+          restorationScopeId: restorationScopeId,
+          scrollBehavior: scrollBehavior,
+          useInheritedMediaQuery: useInheritedMediaQuery,
+          material: material ?? (context, platform) => materialAppTheme(),
+          cupertino: cupertino ?? (context, platform) => cupertinoAppTheme(),
         );
 }
