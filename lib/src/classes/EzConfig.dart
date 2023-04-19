@@ -81,7 +81,9 @@ class EzConfig {
   }
 }
 
-// Preference keys
+// Preference keys //
+
+// UI
 
 const String backImageKey = 'backImage';
 const String noImageKey = 'noImage';
@@ -97,3 +99,18 @@ const String marginKey = 'margin';
 const String paddingKey = 'padding';
 const String fontFamilyKey = 'fontFamily';
 const String fontSizeKey = 'fontSize';
+
+// Text Styling
+
+const String defaultStyleKey = 'defaultStyle';
+const String headerStyleKey = 'headerStyle';
+const String titleStyleKey = 'titleStyle';
+const String subTitleStyleKey = 'subTitleStyle';
+const String dialogTitleStyleKey = 'dialogTitleStyle';
+const String buttonStyleKey = 'buttonStyle';
+const String dialogContentStyleKey = 'dialogContentStyle';
+const String colorSettingStyleKey = 'colorSettingStyle';
+const String imageSettingStyleKey = 'imageSettingStyle';
+const String fontSettingStyleKey = 'fontSettingStyle';
+const String sliderSettingStyleKey = 'sliderSettingStyle';
+const String errorStyleKey = 'errorStyle';
