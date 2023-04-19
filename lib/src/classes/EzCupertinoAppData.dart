@@ -5,8 +5,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzCupertinoTheme extends CupertinoAppData {
-  EzCupertinoTheme({
+class EzCupertinoAppData extends CupertinoAppData {
+  /// [CupertinoAppData] wrapper that uses [EzCupertinoThemeData] by default
+  EzCupertinoAppData({
     Key? widgetKey,
     GlobalKey<NavigatorState>? navigatorKey,
     Widget? home,
@@ -61,17 +62,6 @@ class EzCupertinoTheme extends CupertinoAppData {
           debugShowCheckedModeBanner: debugShowCheckedModeBanner,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          theme: theme ?? _buildCupertinoThemeData(),
+          theme: theme ?? EzCupertinoThemeData(),
         );
-
-  static CupertinoThemeData _buildCupertinoThemeData() {
-    Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-    Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-
-    return CupertinoThemeData(
-      primaryColor: themeColor,
-      primaryContrastingColor: themeTextColor,
-      textTheme: cupertinoTextTheme(),
-    );
-  }
 }

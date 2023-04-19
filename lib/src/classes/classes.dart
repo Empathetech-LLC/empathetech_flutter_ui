@@ -1,13 +1,14 @@
 library empathetech_flutter_ui;
 
 export 'EzApp.dart';
-export 'EzAppProvider.dart';
 export 'EzAppBar.dart';
+export 'EzAppProvider.dart';
 export 'EzButton.dart';
 export 'EzCheckBox.dart';
 export 'EzColorSetting.dart';
 export 'EzConfig.dart';
-export 'EzCupertinoTheme.dart';
+export 'EzCupertinoAppData.dart';
+export 'EzCupertinoThemeData.dart';
 export 'EzDialog.dart';
 export 'EzDrawer.dart';
 export 'EzExpansion.dart';
@@ -16,7 +17,7 @@ export 'EzFormField.dart';
 export 'EzIcon.dart';
 export 'EzImage.dart';
 export 'EzImageSetting.dart';
-export 'EzMaterialTheme.dart';
+export 'EzMaterialAppData.dart';
 export 'EzMouseDetector.dart';
 export 'EzNavBar.dart';
 export 'EzNotifications.dart';

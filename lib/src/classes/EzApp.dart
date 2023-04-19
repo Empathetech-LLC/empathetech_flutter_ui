@@ -37,7 +37,7 @@ class EzApp extends PlatformApp {
   final bool? checkerboardOffscreenLayers;
   final bool? showSemanticsDebugger;
 
-  /// Default false
+  /// Default: false
   final bool? debugShowCheckedModeBanner;
 
   final Map<LogicalKeySet, Intent>? shortcuts;
@@ -47,13 +47,15 @@ class EzApp extends PlatformApp {
   final ScrollBehavior? scrollBehavior;
   final bool? useInheritedMediaQuery;
 
-  /// Default [materialAppTheme]
-  final MaterialAppData Function(BuildContext, PlatformTarget)? material;
+  /// Default: [EzMaterialAppData]
+  final MaterialAppData? materialData;
 
-  /// Default [cupertinoAppTheme]
-  final CupertinoAppData Function(BuildContext, PlatformTarget)? cupertino;
+  /// Default: [EzCupertinoAppData]
+  final CupertinoAppData? cupertinoData;
 
-  /// Quickly setup a [PlatformApp] that uses [EzConfig]
+  /// Quickly setup a [PlatformApp] that uses [EzConfig] themes
+  /// via [EzMaterialAppData] -> [EzThemeData]
+  /// && [EzCupertinoAppData] -> [EzCupertinoThemeData]
   EzApp({
     this.key,
     this.widgetKey,
@@ -87,8 +89,8 @@ class EzApp extends PlatformApp {
     this.restorationScopeId,
     this.scrollBehavior,
     this.useInheritedMediaQuery,
-    this.material,
-    this.cupertino,
+    this.materialData,
+    this.cupertinoData,
   }) : super(
           key: key,
           widgetKey: widgetKey,
@@ -118,7 +120,7 @@ class EzApp extends PlatformApp {
           restorationScopeId: restorationScopeId,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          material: material ?? (context, platform) => EzMaterialTheme(),
-          cupertino: cupertino ?? (context, platform) => EzCupertinoTheme(),
+          material: (context, platform) => materialData ?? EzMaterialAppData(),
+          cupertino: (context, platform) => cupertinoData ?? EzCupertinoAppData(),
         );
 }

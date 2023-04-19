@@ -10,3 +10,4 @@ export 'src/helpers.dart';
 export 'src/scaffold-views.dart';
 export 'src/storage.dart';
 export 'src/text-themes.dart';
+export 'src/theme-data.dart';

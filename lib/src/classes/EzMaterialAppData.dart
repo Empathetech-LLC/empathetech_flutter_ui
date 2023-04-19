@@ -5,8 +5,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzMaterialTheme extends MaterialAppData {
-  EzMaterialTheme({
+class EzMaterialAppData extends MaterialAppData {
+  /// [MaterialAppData] wrapper that uses handles switching between
+  /// [ezLightThemeData] && [ezDarkThemeData]
+  EzMaterialAppData({
     Key? widgetKey,
     GlobalKey<NavigatorState>? navigatorKey,
     Widget? home,
@@ -69,72 +71,12 @@ class EzMaterialTheme extends MaterialAppData {
           restorationScopeId: restorationScopeId,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          theme: theme ?? _buildThemeData(),
+          theme: theme ?? ezLightThemeData(),
           debugShowMaterialGrid: debugShowMaterialGrid,
-          darkTheme: darkTheme,
-          themeMode: themeMode,
+          darkTheme: darkTheme ?? ezDarkThemeData(),
+          themeMode: themeMode ?? ThemeMode.system,
           scaffoldMessengerKey: scaffoldMessengerKey,
           themeAnimationCurve: themeAnimationCurve,
           themeAnimationDuration: themeAnimationDuration,
         );
-
-  static ThemeData _buildThemeData() {
-    Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-    Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-    Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
-    Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
-
-    return ThemeData(
-      primaryColor: themeColor,
-
-      // App bar
-      appBarTheme: AppBarTheme(
-        backgroundColor: themeColor,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: themeTextColor),
-      ),
-
-      // Nav bar
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: themeColor,
-        selectedItemColor: buttonColor,
-        selectedIconTheme: IconThemeData(color: buttonColor),
-        unselectedItemColor: themeTextColor,
-        unselectedIconTheme: IconThemeData(color: themeTextColor),
-      ),
-
-      // Text
-      textTheme: materialTextTheme(),
-      primaryTextTheme: materialTextTheme(),
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: themeTextColor,
-        selectionColor: buttonColor.withOpacity(0.5),
-        selectionHandleColor: buttonColor,
-      ),
-      hintColor: themeTextColor,
-
-      // Icons
-      iconTheme: IconThemeData(color: themeTextColor),
-
-      // Sliders
-      sliderTheme: SliderThemeData(
-        thumbColor: buttonColor,
-        disabledThumbColor: themeColor,
-        overlayColor: buttonColor,
-        activeTrackColor: buttonColor,
-        activeTickMarkColor: buttonTextColor,
-        inactiveTrackColor: themeColor,
-        inactiveTickMarkColor: themeTextColor,
-        overlayShape: SliderComponentShape.noOverlay,
-      ),
-
-      // Dialogs
-      dialogTheme: DialogTheme(
-        backgroundColor: themeColor,
-        iconColor: themeTextColor,
-        alignment: Alignment.center,
-      ),
-    );
-  }
 }
