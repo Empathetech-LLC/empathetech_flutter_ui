@@ -145,14 +145,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     super.initState();
 
     widget.controller.setVolume(widget.startingVolume);
-    widget.controller.setLooping(widget.autoLoop);
-    if (widget.autoPlay) widget.controller.play();
+
+    // It seems that when autoLoop is false, the asset can sometimes be unloaded
+    // Personally, (autoLoop == false) != (being able to play again at all == false)
+    // Se we add this workaround
+    widget.controller.setLooping(true);
 
     widget.controller.addListener(() {
       setState(() {
         _currentPosition = _percentComplete(widget.controller.value.position);
+
+        if (!widget.autoLoop && _currentPosition >= 0.99) {
+          _pauseVideo();
+        }
       });
     });
+
+    if (widget.autoPlay) widget.controller.play();
   }
 
   Color _buildColor(ButtonVis visibility) {
@@ -334,7 +343,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               widget.controller.seekTo(_findPoint(value));
                             });
                           },
-                          onChangeEnd: (_) => _playVideo(),
                         ),
                       ),
 
