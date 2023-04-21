@@ -1,9 +1,13 @@
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+enum Hand {
+  right,
+  left,
+}
 
 /// Static object for managing a dynamic && user customizable UI
 /// Tracks the apps [FocusManager] for keyboard management
@@ -13,6 +17,8 @@ class EzConfig {
   static late SharedPreferences preferences;
   static late Map<String, dynamic> prefs;
   static late FocusManager focus;
+  static late bool lightTheme;
+  static late Hand dominantSide;
 
   static Map<String, dynamic> defaults = {
     // Shared
@@ -20,9 +26,13 @@ class EzConfig {
     paddingKey: 12.5,
     fontFamilyKey: 'Roboto',
     fontScalarKey: 1,
-    alertColorKey: 0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
-    buttonColorKey: 0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
-    buttonTextColorKey: 0xFF000000, // Black text
+    alertColorKey:
+        0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
+    lightButtonColorKey:
+        0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
+    lightButtonTextColorKey: 0xFF000000, // Black text
+    darkButtonColorKey: 0xE620DAA5, // Same as light
+    darkButtonTextColorKey: 0xFF000000, // Ditto
     buttonSpacingKey: 35.0,
     dialogSpacingKey: 20.0,
     paragraphSpacingKey: 50,
@@ -88,6 +98,15 @@ class EzConfig {
 
       if (userPref != null) prefs[key] = userPref;
     });
+
+    // Set the theme
+    lightTheme = preferences.getBool(isLightKey) ??
+        (ThemeMode.system == ThemeMode.light);
+
+    bool? isLefty = preferences.getBool(isLeftyKey);
+
+    dominantSide =
+        (isLefty == null || isLefty == false) ? Hand.right : Hand.left;
   }
 }
 
@@ -104,8 +123,6 @@ const String fontFamilyKey = 'fontFamily';
 const String fontScalarKey = 'fontScalar';
 
 const String alertColorKey = 'alertColor';
-const String buttonColorKey = 'buttonColor';
-const String buttonTextColorKey = 'buttonTextColor';
 
 const String buttonSpacingKey = 'buttonSpacing';
 const String dialogSpacingKey = 'dialogSpacing';
@@ -114,6 +131,9 @@ const String paragraphSpacingKey = 'paragraphSpacing';
 // Theme dependent
 
 // Light
+const String isLightKey = 'isLight';
+const String isLeftyKey = 'isLefty';
+
 const String lightBackgroundImage = 'lightBackImage';
 const String lightBackgroundColorKey = 'lightBackgroundColor';
 const String lightThemeColorKey = 'lightThemeColor';
@@ -124,3 +144,9 @@ const String darkBackgroundImage = 'darkBackImage';
 const String darkBackgroundColorKey = 'darkBackgroundColor';
 const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
+
+const String lightButtonColorKey = 'lightButtonColor';
+const String darkButtonColorKey = 'darkButtonColor';
+
+const String lightButtonTextColorKey = 'lightButtonTextColor';
+const String darkButtonTextColorKey = 'darkButtonTextColor';
