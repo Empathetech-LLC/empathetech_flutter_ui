@@ -56,7 +56,7 @@ class EzApp extends PlatformApp {
 
   /// Quickly setup a [PlatformApp] that uses [EzConfig] themes
   /// via [EzMaterialAppData] -> [ezThemeData]
-  /// && [EzCupertinoAppData] -> [EzCupertinoThemeData]
+  /// && [EzCupertinoAppData] -> [ezCupertinoThemeData]
   EzApp({
     this.key,
     this.widgetKey,
