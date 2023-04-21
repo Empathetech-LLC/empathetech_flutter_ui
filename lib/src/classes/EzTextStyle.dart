@@ -36,7 +36,7 @@ class EzTextStyle extends TextStyle {
     TextOverflow? overflow,
   }) : super(
           inherit: inherit,
-          color: color ?? Color(EzConfig.prefs[themeTextColorKey]),
+          color: color,
           backgroundColor: backgroundColor,
           fontSize: fontSize,
           fontWeight: fontWeight,
@@ -57,7 +57,8 @@ class EzTextStyle extends TextStyle {
           decorationStyle: decorationStyle,
           decorationThickness: decorationThickness,
           debugLabel: debugLabel,
-          fontFamily: fontFamily ?? gStyle(EzConfig.prefs[fontFamilyKey]).fontFamily,
+          fontFamily:
+              fontFamily ?? gStyle(EzConfig.prefs[fontFamilyKey]).fontFamily,
           fontFamilyFallback: fontFamilyFallback,
           package: package,
           overflow: overflow,
