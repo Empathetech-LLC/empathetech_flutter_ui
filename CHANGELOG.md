@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2023-04-XX
+### Changed
+- Everything. Again.
+  - I like big updates and I cannot lie.
+
 ## [2.0.0] - 2023-04-16
 ### Added
 - Flutter analyze GitHub Action
