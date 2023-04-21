@@ -32,13 +32,9 @@ Card warningCard({
 }) {
   Color iconColor = Color(EzConfig.prefs[alertColorKey]);
 
-  TextStyle titleStyle = ezTextStyle(context, MaterialStyles.titleMedium);
-  TextStyle contentStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
-
   double padding = EzConfig.prefs[paddingKey];
 
   return Card(
-    color: Color(EzConfig.prefs[themeColorKey]),
     child: Container(
       width: widthOf(context),
       padding: EdgeInsets.all(padding),
@@ -51,51 +47,17 @@ Card warningCard({
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              EzIcon(Icons.warning, color: iconColor),
-              EzText.simple('WARNING', style: titleStyle),
-              EzIcon(Icons.warning, color: iconColor),
+              Icon(Icons.warning, color: iconColor),
+              EzText.simple('WARNING'),
+              Icon(Icons.warning, color: iconColor),
             ],
           ),
           Container(height: padding),
 
           // Label
-          EzText.simple(
-            warning,
-            style: contentStyle,
-          ),
+          EzText.simple(warning),
         ],
       ),
-    ),
-  );
-}
-
-/// 'Loading...' text but the ellipsis is built from the passed [image] (.gif recommended)
-/// [Row] of [EzText] wrapped in a [Center]
-/// Make this the child of your own background [Widget] if necessary
-Center loadingMessage({
-  required BuildContext context,
-  required Image image,
-}) {
-  // Gather theme data
-
-  TextStyle style = ezTextStyle(context, MaterialStyles.titleMedium);
-
-  double imageSize = style.fontSize!;
-  SizedBox ellipsis =
-      SizedBox(height: imageSize, width: imageSize, child: image);
-
-  return Center(
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        EzText.simple('Loading ', style: style),
-        ellipsis,
-        EzText.simple(' ', style: style),
-        ellipsis,
-        EzText.simple(' ', style: style),
-        ellipsis,
-      ],
     ),
   );
 }
