@@ -28,17 +28,11 @@ Future<dynamic> ezColorPicker({
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: EzText.simple(
-        'Pick a color!',
-        style: ezTextStyle(context, MaterialStyles.titleSmall),
-      ),
+      title: EzText.simple('Pick a color!'),
       contents: [
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
-          // ignore: deprecated_member_use
-          labelTextStyle: ezTextStyle(context, MaterialStyles.bodyMedium),
-          // above is required for iOS
         ),
         Container(height: EzConfig.prefs[dialogSpacingKey]),
         ezYesNo(
