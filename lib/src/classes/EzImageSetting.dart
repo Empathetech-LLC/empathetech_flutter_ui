@@ -9,6 +9,23 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
+  /// [EzConfig.prefs] key whose path value is being updated
+  final String prefsKey;
+
+  /// Whether the image is intended for fullscreen use
+  /// For example: [lightBackgroundImageKey]
+  final bool fullscreen;
+
+  /// [String] to display on the [EzButton]
+  final String title;
+
+  /// Who made this/where'd ya get it?
+  /// Credits [String] will be displayed via [EzDialog] when holding the [EzButton]
+  final String credits;
+
+  /// Effectively whether the image is nullable
+  final bool allowClear;
+
   /// Creates a tool for updating the image at [prefsKey]'s path
   EzImageSetting({
     Key? key,
@@ -18,12 +35,6 @@ class EzImageSetting extends StatefulWidget {
     required this.credits,
     required this.allowClear,
   }) : super(key: key);
-
-  final String prefsKey;
-  final bool fullscreen;
-  final String title;
-  final String credits;
-  final bool allowClear;
 
   @override
   _ImageSettingState createState() => _ImageSettingState();
@@ -49,7 +60,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [ezDialog] for choosing the [ImageSource] for updating the prefsKey
+  /// Opens an [EzDialog] for choosing the [ImageSource] for updating the prefsKey
   /// Selection is sent to [changeImage]
   Future<dynamic> _chooseImage() {
     List<Widget> options = [
@@ -125,6 +136,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return EzButton(
+      // Choose image
       onPressed: () async {
         dynamic newPath = await _chooseImage();
         if (newPath is String)
@@ -132,6 +144,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             updatedPath = newPath;
           });
       },
+
+      // Show credits
       onLongPress: () => openDialog(
         context: context,
         dialog: EzDialog(
@@ -139,6 +153,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           contents: [EzText.simple(widget.credits)],
         ),
       ),
+
+      // UI
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
