@@ -14,6 +14,7 @@ class EzScrollView extends SingleChildScrollView {
 
   /// Default: [BouncingScrollPhysics]
   final ScrollPhysics? physics;
+
   final ScrollController? controller;
   final Widget? child;
 
@@ -46,9 +47,8 @@ class EzScrollView extends SingleChildScrollView {
   final List<Widget> children;
 
   /// Styles a [SingleChildScrollView] from [EzConfig.prefs]
-  /// Dynamically switches between row/col based on [direction]
-  /// Uses a [children] list rather than [child] Widget
-  /// Optionally overwrite with -> child: child && children: []
+  /// Dynamically switches between row/col based on [scrollDirection]
+  /// Prefers the [children] list rather than [child] Widget
   EzScrollView({
     // SingleChildScrollView
     this.key,
@@ -56,7 +56,7 @@ class EzScrollView extends SingleChildScrollView {
     this.reverse = false,
     this.padding,
     this.primary,
-    this.physics,
+    this.physics = const BouncingScrollPhysics(),
     this.controller,
     this.child,
     this.clipBehavior = Clip.hardEdge,
@@ -106,7 +106,7 @@ class EzScrollView extends SingleChildScrollView {
       reverse: reverse,
       padding: padding,
       primary: primary,
-      physics: physics ?? BouncingScrollPhysics(),
+      physics: physics,
       controller: controller,
       child: child ?? core,
       dragStartBehavior: dragStartBehavior,
