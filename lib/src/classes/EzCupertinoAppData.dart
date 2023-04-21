@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzCupertinoAppData extends CupertinoAppData {
@@ -33,6 +34,11 @@ class EzCupertinoAppData extends CupertinoAppData {
   final bool? debugShowCheckedModeBanner;
   final ScrollBehavior? scrollBehavior;
   final bool? useInheritedMediaQuery;
+
+  /// Default:
+  /// ezCupertinoThemeData(
+  ///   light: (EzConfig.themeMode == ThemeMode.light),
+  /// )
   final CupertinoThemeData? theme;
 
   /// [CupertinoAppData] wrapper that uses [ezCupertinoThemeData] by default
@@ -91,6 +97,9 @@ class EzCupertinoAppData extends CupertinoAppData {
           debugShowCheckedModeBanner: debugShowCheckedModeBanner,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          theme: theme ?? ezCupertinoThemeData(light: EzConfig.lightTheme),
+          theme: theme ??
+              ezCupertinoThemeData(
+                light: (EzConfig.themeMode == ThemeMode.light),
+              ),
         );
 }
