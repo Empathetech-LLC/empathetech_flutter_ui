@@ -17,6 +17,24 @@ enum SettingType {
 }
 
 class EzSliderSetting extends StatefulWidget {
+  /// The [EzConfig.prefs] key whose value is being updated
+  final String prefsKey;
+
+  /// Custom enum for determining the preview widget's required
+  final SettingType type;
+
+  /// [String] that will be displayed above the [Slider]
+  final String title;
+
+  /// Smallest value that can be set
+  final double min;
+
+  /// Largest value that can be set
+  final double max;
+
+  /// Number of divisions between [min] and [max]
+  final int steps;
+
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
   EzSliderSetting({
@@ -28,13 +46,6 @@ class EzSliderSetting extends StatefulWidget {
     required this.max,
     required this.steps,
   }) : super(key: key);
-
-  final String prefsKey;
-  final SettingType type;
-  final String title;
-  final double min;
-  final double max;
-  final int steps;
 
   @override
   _SliderSettingState createState() => _SliderSettingState();
@@ -161,7 +172,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   }
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
-  /// [widget.title] + [preview] + [PlatformSlider] + reset [EzButton.icon]
+  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzButton.icon]
   List<Widget> buildList() {
     List<Widget> toReturn = [EzText.simple(widget.title)];
 
