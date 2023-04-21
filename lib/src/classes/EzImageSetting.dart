@@ -64,7 +64,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text('File'),
+        label: EzText.simple('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
@@ -80,7 +80,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text('Camera'),
+        label: EzText.simple('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
@@ -93,7 +93,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           EzConfig.preferences.remove(widget.prefsKey);
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
-        label: Text('Reset'),
+        label: EzText.simple('Reset'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -108,7 +108,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
             popScreen(context: context, pass: noImageKey);
           },
-          label: Text('Clear'),
+          label: EzText.simple('Clear'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);

@@ -205,7 +205,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
+        label: EzText.simple(
+            'Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
     ]);
 

@@ -40,14 +40,14 @@ Future<dynamic> ezColorPicker({
         // Apply
         EzButton(
           onPressed: apply,
-          child: Text('Apply'),
+          child: EzText.simple('Apply'),
         ),
         Container(height: EzConfig.prefs[dialogSpacingKey]),
 
         // Cancel
         EzButton(
           onPressed: cancel,
-          child: Text('Cancel'),
+          child: EzText.simple('Cancel'),
         ),
       ],
       needsClose: false,

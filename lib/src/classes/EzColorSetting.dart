@@ -6,11 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
+  /// [EzConfig.prefs] key whose value will be updated
   final String toControl;
+
+  /// Label [String] to display with on the [EzButton]
   final String message;
+
+  /// Optional [EzConfig.prefs] key of whatever will be this colors background
+  /// In the event that [toControl] is a [Text]colorKey
   final String? textBackgroundKey;
 
-  /// Creates a tool for updating the value of [toControl]
+  /// Creates a tool for updating the value of [toControl] in [EzConfig.prefs]
   /// The [EzColorSetting] title is the passed [message] and is paired with a
   /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
   /// If a [textBackgroundKey] is provided, it will be used to generate a recommended color pair
@@ -35,12 +41,13 @@ class _ColorSettingState extends State<EzColorSetting> {
       context: context,
       startColor: currColor,
       onColorChange: (chosenColor) {
+        // Update currColor
         setState(() {
           currColor = chosenColor;
         });
       },
       apply: () {
-        // Update the users setting
+        // Update the user's setting
         EzConfig.preferences.setInt(widget.toControl, currColor.value);
         popScreen(context: context, pass: currColor.value);
       },
@@ -52,12 +59,13 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Returns the [Color.value] of what was chosen (null otherwise)
   Future<dynamic> _changeColor() {
     double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     if (widget.textBackgroundKey != null) {
       String pathKey = widget.textBackgroundKey as String;
+
       Color backgroundColor = Color(
           EzConfig.preferences.getInt(pathKey) ?? EzConfig.prefs[pathKey]);
+
       int recommended = getContrastColor(backgroundColor).value;
 
       return openDialog(
@@ -85,7 +93,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 });
                 popScreen(context: context, pass: recommended);
               },
-              label: Text('Yes'),
+              label: EzText.simple('Yes'),
               icon: Icon(PlatformIcons(context).checkMark),
             ),
             Container(height: buttonSpacer),
@@ -97,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 popScreen(context: context, pass: chosen);
               },
               icon: Icon(PlatformIcons(context).edit),
-              label: Text('Use custom'),
+              label: EzText.simple('Use custom'),
             ),
           ],
           needsClose: true,
@@ -143,7 +151,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               popScreen(context: context, pass: resetColor);
             },
-            label: Text('Yes'),
+            label: EzText.simple('Yes'),
             icon: Icon(PlatformIcons(context).checkMark),
           ),
           Container(height: dialogSpacer),
@@ -152,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           EzButton.icon(
             onPressed: () => popScreen(context: context),
             icon: Icon(PlatformIcons(context).edit),
-            label: Text('Use custom'),
+            label: EzText.simple('Use custom'),
           ),
         ],
         needsClose: false,
