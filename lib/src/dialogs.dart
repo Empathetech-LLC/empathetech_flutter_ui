@@ -30,18 +30,24 @@ Future<dynamic> ezColorPicker({
     dialog: EzDialog(
       title: EzText.simple('Pick a color!'),
       contents: [
+        // Color picker
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
         ),
         Container(height: EzConfig.prefs[dialogSpacingKey]),
-        ezYesNo(
-          context: context,
-          onConfirm: apply,
-          onDeny: cancel,
-          axis: Axis.vertical,
-          confirmMsg: 'Apply',
-          denyMsg: 'Cancel',
+
+        // Apply
+        EzButton(
+          onPressed: apply,
+          child: Text('Apply'),
+        ),
+        Container(height: EzConfig.prefs[dialogSpacingKey]),
+
+        // Cancel
+        EzButton(
+          onPressed: cancel,
+          child: Text('Cancel'),
         ),
       ],
       needsClose: false,
