@@ -4,19 +4,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzMouseDetector extends MouseRegion {
+  final Key? key;
+
+  /// Actually:
+  /// GestureDetector(
+  ///   onTap: onTap,
+  ///   onLongPress: onLongPress,
+  ///   onDoubleTap: onDoubleTap,
+  ///   child: child,
+  /// )
+  final Widget child;
+
+  final void Function(PointerEnterEvent)? onEnter;
+  final void Function(PointerExitEvent)? onExit;
+  final void Function(PointerHoverEvent)? onHover;
+
+  /// Default: [SystemMouseCursors.click]
+  final MouseCursor cursor;
+
+  /// Default: true
+  final bool opaque;
+
+  /// Default: [HitTestBehavior.deferToChild]
+  final HitTestBehavior hitTestBehavior;
+
+  final void Function()? onTap;
+  final void Function()? onLongPress;
+  final void Function()? onDoubleTap;
+
   /// Quick [MouseRegion] && [GestureDetector] combo
   EzMouseDetector({
-    Key? key,
-    required Widget child,
-    void Function(PointerEnterEvent)? onEnter,
-    void Function(PointerExitEvent)? onExit,
-    void Function(PointerHoverEvent)? onHover,
-    MouseCursor cursor = SystemMouseCursors.click,
-    bool opaque = true,
-    HitTestBehavior? hitTestBehavior,
-    void Function()? onTap,
-    void Function()? onLongPress,
-    void Function()? onDoubleTap,
+    this.key,
+    required this.child,
+    this.onEnter,
+    this.onExit,
+    this.onHover,
+    this.cursor = SystemMouseCursors.click,
+    this.opaque = true,
+    this.hitTestBehavior = HitTestBehavior.deferToChild,
+    this.onTap,
+    this.onLongPress,
+    this.onDoubleTap,
   }) : super(
           key: key,
           child: GestureDetector(
@@ -30,6 +58,6 @@ class EzMouseDetector extends MouseRegion {
           onHover: onHover,
           cursor: cursor,
           opaque: opaque,
-          hitTestBehavior: hitTestBehavior ?? HitTestBehavior.deferToChild,
+          hitTestBehavior: hitTestBehavior,
         );
 }
