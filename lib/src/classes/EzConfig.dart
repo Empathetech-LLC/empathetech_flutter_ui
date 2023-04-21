@@ -14,40 +14,46 @@ enum Hand {
 /// Setting are tracked with shared_preferences
 class EzConfig {
   static late List<String> assets;
+
   static late SharedPreferences preferences;
   static late Map<String, dynamic> prefs;
+
   static late FocusManager focus;
+
   static late bool lightTheme;
   static late Hand dominantSide;
 
   static Map<String, dynamic> defaults = {
-    // Shared
+    // Shared //
     marginKey: 15.0,
     paddingKey: 12.5,
+
     fontFamilyKey: 'Roboto',
     fontScalarKey: 1,
+
     alertColorKey:
         0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
     lightButtonColorKey:
         0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
     lightButtonTextColorKey: 0xFF000000, // Black text
-    darkButtonColorKey: 0xE620DAA5, // Same as light
-    darkButtonTextColorKey: 0xFF000000, // Ditto
+    darkButtonColorKey: 0xE620DAA5, // Same as light by default
+    darkButtonTextColorKey: 0xFF000000,
+
     buttonSpacingKey: 35.0,
     dialogSpacingKey: 20.0,
     paragraphSpacingKey: 50,
 
-    // Light theme
+    // Light theme //
     lightBackgroundImage: null,
     lightBackgroundColorKey: 0xFFEBEBEB, // Almost white
-    lightThemeColorKey: 0xFFEBEBEB, // Almost white
-    lightThemeTextColorKey: 0xFF000000, // Black text
+    lightThemeColorKey: 0xFFEBEBEB,
+    lightThemeTextColorKey: 0xFF000000, // Black
 
-    // Dark theme
+    // Dark theme //
     darkBackgroundImage: null,
     darkBackgroundColorKey: 0xFF141414, // Almost black
-    darkThemeColorKey: 0xFF141414, // Almost black
-    darkThemeTextColorKey: 0xFFFFFFFF, // White text
+    darkThemeColorKey: 0xFF141414,
+    darkThemeTextColorKey: 0xFFFFFFFF, // White
   };
 
   /// Populate [EzConfig.prefs], overwriting defaults whenever a user value is found
@@ -57,19 +63,10 @@ class EzConfig {
     Map<String, dynamic>? customDefaults,
     List<DeviceOrientation>? orientations,
   }) async {
-    List<DeviceOrientation> allOptions = [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ];
-    SystemChrome.setPreferredOrientations(orientations ?? allOptions);
-
-    focus = FocusManager.instance;
-    preferences = await SharedPreferences.getInstance();
-
-    // Load asset paths
+    // Initialize storage //
     assets = assetPaths;
+
+    preferences = await SharedPreferences.getInstance();
 
     // Load any custom defaults
     if (customDefaults != null) defaults.addAll(customDefaults);
@@ -99,7 +96,18 @@ class EzConfig {
       if (userPref != null) prefs[key] = userPref;
     });
 
-    // Set the theme
+    // Initialize screen //
+    List<DeviceOrientation> allOptions = [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ];
+    SystemChrome.setPreferredOrientations(orientations ?? allOptions);
+
+    focus = FocusManager.instance;
+
+    // Initialize theme //
     lightTheme = preferences.getBool(isLightKey) ??
         (ThemeMode.system == ThemeMode.light);
 
@@ -113,6 +121,8 @@ class EzConfig {
 // Preference keys //
 
 // Shared
+const String isLightKey = 'isLight';
+const String isLeftyKey = 'isLefty';
 
 const String noImageKey = 'noImage';
 
@@ -128,25 +138,18 @@ const String buttonSpacingKey = 'buttonSpacing';
 const String dialogSpacingKey = 'dialogSpacing';
 const String paragraphSpacingKey = 'paragraphSpacing';
 
-// Theme dependent
-
-// Light
-const String isLightKey = 'isLight';
-const String isLeftyKey = 'isLefty';
-
+// Light theme
 const String lightBackgroundImage = 'lightBackImage';
 const String lightBackgroundColorKey = 'lightBackgroundColor';
 const String lightThemeColorKey = 'lightThemeColor';
 const String lightThemeTextColorKey = 'lightThemeTextColor';
+const String lightButtonColorKey = 'lightButtonColor';
+const String lightButtonTextColorKey = 'lightButtonTextColor';
 
-// Dark
+// Dark theme
 const String darkBackgroundImage = 'darkBackImage';
 const String darkBackgroundColorKey = 'darkBackgroundColor';
 const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
-
-const String lightButtonColorKey = 'lightButtonColor';
 const String darkButtonColorKey = 'darkButtonColor';
-
-const String lightButtonTextColorKey = 'lightButtonTextColor';
 const String darkButtonTextColorKey = 'darkButtonTextColor';
