@@ -114,7 +114,7 @@ class EzConfig {
 
 // Shared
 
-const String noBackgroundImage = 'noImage';
+const String noImageKey = 'noImage';
 
 const String marginKey = 'margin';
 const String paddingKey = 'padding';

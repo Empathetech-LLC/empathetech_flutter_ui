@@ -27,9 +27,6 @@ class EzColorSetting extends StatefulWidget {
 
 class _ColorSettingState extends State<EzColorSetting> {
   late Color currColor = Color(EzConfig.prefs[widget.toControl]);
-  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color.value] of what was chosen (null otherwise)
@@ -79,23 +76,28 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
             Container(height: buttonSpacer),
 
-            ezYesNo(
-              context: context,
-              onConfirm: () {
+            // Yes
+            EzButton.icon(
+              onPressed: () {
                 EzConfig.preferences.setInt(widget.toControl, recommended);
                 setState(() {
                   currColor = Color(recommended);
                 });
                 popScreen(context: context, pass: recommended);
               },
-              onDeny: () async {
+              label: Text('Yes'),
+              icon: Icon(PlatformIcons(context).checkMark),
+            ),
+            Container(height: buttonSpacer),
+
+            // No
+            EzButton.icon(
+              onPressed: () async {
                 dynamic chosen = await _openColorPicker();
                 popScreen(context: context, pass: chosen);
               },
-              customDeny: EzIcon(PlatformIcons(context).edit),
-              denyMsg: 'Pick custom',
-              axis: Axis.vertical,
-              spacer: dialogSpacer,
+              icon: Icon(PlatformIcons(context).edit),
+              label: Text('Use custom'),
             ),
           ],
           needsClose: true,
@@ -129,9 +131,9 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           Container(height: dialogSpacer),
 
-          ezYesNo(
-            context: context,
-            onConfirm: () {
+          // Yes
+          EzButton.icon(
+            onPressed: () {
               // Remove the user's setting and reset the current state
               EzConfig.preferences.remove(widget.toControl);
 
@@ -141,9 +143,16 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               popScreen(context: context, pass: resetColor);
             },
-            onDeny: () => popScreen(context: context),
-            axis: Axis.horizontal,
-            spacer: dialogSpacer,
+            label: Text('Yes'),
+            icon: Icon(PlatformIcons(context).checkMark),
+          ),
+          Container(height: dialogSpacer),
+
+          // No
+          EzButton.icon(
+            onPressed: () => popScreen(context: context),
+            icon: Icon(PlatformIcons(context).edit),
+            label: Text('Use custom'),
           ),
         ],
         needsClose: false,
@@ -163,16 +172,14 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         // Color preview/edit button
         EzButton(
-          context: context,
-          action: _changeColor,
-          longAction: _reset,
-          body: EzIcon(PlatformIcons(context).edit,
+          onPressed: _changeColor,
+          onLongPress: _reset,
+          child: Icon(PlatformIcons(context).edit,
               color: getContrastColor(currColor)),
-          customStyle: ElevatedButton.styleFrom(
+          style: ElevatedButton.styleFrom(
             backgroundColor: currColor,
             padding: EdgeInsets.all(EzConfig.prefs[paddingKey] * 2),
           ),
-          forceMaterial: true,
         ),
       ],
     );

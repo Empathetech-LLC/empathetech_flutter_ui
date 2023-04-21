@@ -17,8 +17,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
   late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
-  late TextStyle buttonTextStyle =
-      ezTextStyle(context, MaterialStyles.bodyLarge);
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
@@ -27,18 +25,14 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText.simple(
-          'Choose a font',
-          style: ezTextStyle(context, MaterialStyles.titleSmall),
-        ),
+        title: EzText.simple('Choose a font'),
         contents: EzFonts.values
             .map(
               (EzFonts font) => Column(
                 children: [
                   // Map font to a selectable button (title == name)
                   EzButton(
-                    context: context,
-                    action: () {
+                    onPressed: () {
                       EzConfig.preferences
                           .setString(fontFamilyKey, gStyleName(font));
                       setState(() {
@@ -46,7 +40,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
                       });
                       popScreen(context: context, pass: font);
                     },
-                    body: EzText.simple(gStyleName(font), style: gStyle(font)),
+                    child: EzText.simple(gStyleName(font), style: gStyle(font)),
                   ),
                   Container(height: buttonSpacer),
                 ],
@@ -64,40 +58,29 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        EzText.simple('Font family',
-            style: ezTextStyle(context, MaterialStyles.titleMedium)),
+        EzText.simple('Font family'),
 
         // Font picker
         EzButton(
-          context: context,
-          action: _chooseGoogleFont,
-          body: EzText.simple(
+          onPressed: _chooseGoogleFont,
+          child: EzText.simple(
             'Choose font:\n$currFontFamily',
-            style: TextStyle(
-              fontSize: buttonTextStyle.fontSize,
-              fontFamily: currFontFamily,
-              color: buttonTextStyle.color,
-            ),
+            style: TextStyle(fontFamily: currFontFamily),
           ),
         ),
         Container(height: buttonSpacer),
 
         // Font reset
         EzButton(
-          context: context,
-          action: () {
+          onPressed: () {
             EzConfig.preferences.remove(fontFamilyKey);
             setState(() {
               currFontFamily = defaultFontFamily;
             });
           },
-          body: EzText.simple(
+          child: EzText.simple(
             'Reset font\n($defaultFontFamily)',
-            style: TextStyle(
-              fontSize: buttonTextStyle.fontSize,
-              fontFamily: defaultFontFamily,
-              color: buttonTextStyle.color,
-            ),
+            style: TextStyle(fontFamily: defaultFontFamily),
           ),
         ),
       ],

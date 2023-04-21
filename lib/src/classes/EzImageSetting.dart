@@ -34,13 +34,6 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String currPathKey = widget.prefsKey;
   String? updatedPath; // Only used when the user makes a change
 
-  late TextStyle buttonTextStyle =
-      ezTextStyle(context, MaterialStyles.bodyLarge);
-  late TextStyle dialogTitleStyle =
-      ezTextStyle(context, MaterialStyles.titleSmall);
-  late TextStyle dialogContentStyle =
-      ezTextStyle(context, MaterialStyles.bodyMedium);
-
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
@@ -62,8 +55,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     List<Widget> options = [
       // From file
       EzButton.icon(
-        context: context,
-        action: () async {
+        onPressed: () async {
           String? changed = await changeImage(
             context: context,
             prefsPath: widget.prefsKey,
@@ -72,15 +64,14 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        message: 'File',
-        icon: EzIcon(PlatformIcons(context).folder),
+        label: Text('File'),
+        icon: Icon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
 
       // From camera
       EzButton.icon(
-        context: context,
-        action: () async {
+        onPressed: () async {
           String? changed = await changeImage(
             context: context,
             prefsPath: widget.prefsKey,
@@ -89,22 +80,21 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        message: 'Camera',
-        icon: EzIcon(PlatformIcons(context).photoCamera),
+        label: Text('Camera'),
+        icon: Icon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
 
       // Reset
       EzButton.icon(
-        context: context,
-        action: () {
+        onPressed: () {
           _cleanup();
 
           EzConfig.preferences.remove(widget.prefsKey);
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
-        message: 'Reset',
-        icon: EzIcon(PlatformIcons(context).refresh),
+        label: Text('Reset'),
+        icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
 
@@ -112,25 +102,21 @@ class _ImageSettingState extends State<EzImageSetting> {
       options.addAll([
         Container(height: buttonSpacer),
         EzButton.icon(
-          context: context,
-          action: () {
+          onPressed: () {
             _cleanup();
 
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
             popScreen(context: context, pass: noImageKey);
           },
-          message: 'Clear',
-          icon: EzIcon(PlatformIcons(context).clear),
+          label: Text('Clear'),
+          icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
 
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText.simple(
-          'Update $title',
-          style: dialogTitleStyle,
-        ),
+        title: EzText.simple('Update $title'),
         contents: options,
       ),
     );
@@ -139,38 +125,26 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return EzButton(
-      context: context,
-      action: () async {
+      onPressed: () async {
         dynamic newPath = await _chooseImage();
         if (newPath is String)
           setState(() {
             updatedPath = newPath;
           });
       },
-      longAction: () => openDialog(
+      onLongPress: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText.simple(
-            'Credit to:',
-            style: dialogTitleStyle,
-          ),
-          contents: [
-            EzText.simple(
-              widget.credits,
-              style: dialogContentStyle,
-            )
-          ],
+          title: EzText.simple('Credit to:'),
+          contents: [EzText.simple(widget.credits)],
         ),
       ),
-      body: Row(
+      child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          EzText.simple(
-            title,
-            style: ezTextStyle(context, MaterialStyles.bodyLarge),
-          ),
+          EzText.simple(title),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest
@@ -179,10 +153,10 @@ class _ImageSettingState extends State<EzImageSetting> {
             width: widget.fullscreen ? 90 : 75,
             child: (updatedPath is String) // user made a change
                 ? (updatedPath == noImageKey)
-                    ? EzIcon(PlatformIcons(context).clear)
+                    ? Icon(PlatformIcons(context).clear)
                     : Image(image: AssetImage(updatedPath as String))
                 : (currPathKey == noImageKey) // using app's current state
-                    ? EzIcon(PlatformIcons(context).clear)
+                    ? Icon(PlatformIcons(context).clear)
                     : EzImage(prefsKey: currPathKey),
           ),
         ],
