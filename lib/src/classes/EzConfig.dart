@@ -10,8 +10,10 @@ enum Hand {
 }
 
 /// Static object for managing a dynamic && user customizable UI
-/// Tracks the apps [FocusManager] for keyboard management
+/// Tracks the apps image [assets] for ease of development
 /// Setting are tracked with shared_preferences
+/// Tracks the apps [FocusManager] for keyboard management
+/// Maintains [lightTheme] and [dominantSide] trackers for integrating user accessibility
 class EzConfig {
   static late List<String> assets;
 
