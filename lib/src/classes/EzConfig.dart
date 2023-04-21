@@ -26,8 +26,8 @@ class EzConfig {
   /// Used to close active dialogs
   static late FocusManager focus;
 
-  /// Whether the light theme should be used
-  static late bool lightTheme;
+  /// [ThemeMode.system] wrapper that allows for overwrite
+  static late ThemeMode themeMode;
 
   /// What side of the screen touch points should be on
   static late Hand dominantSide;
@@ -117,8 +117,12 @@ class EzConfig {
     focus = FocusManager.instance;
 
     // Initialize theme //
-    lightTheme = preferences.getBool(isLightKey) ??
-        (ThemeMode.system == ThemeMode.light);
+    bool? isLight = preferences.getBool(isLightKey);
+    themeMode = (isLight == null)
+        ? ThemeMode.system
+        : (isLight)
+            ? ThemeMode.light
+            : ThemeMode.dark;
 
     bool? isLefty = preferences.getBool(isLeftyKey);
 
