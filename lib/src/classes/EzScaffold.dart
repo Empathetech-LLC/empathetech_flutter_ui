@@ -7,22 +7,35 @@ import 'package:flutter/material.dart';
 class EzScaffold extends Scaffold {
   final Key? key;
   final PreferredSizeWidget appBar;
+
+  /// Actually:
+  /// Container(
+  ///   decoration: background,
+  ///   child: GestureDetector(
+  ///     onTap: closeFocus,
+  ///     child: body,
+  ///   ),
+  /// )
   final Widget body;
+
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
   final List<Widget>? persistentFooterButtons;
 
-  /// Default:
-  /// AlignmentDirectional.centerEnd
+  /// Default: [AlignmentDirectional.centerEnd]
   final AlignmentDirectional persistentFooterAlignment;
+
   final Widget? drawer;
   final void Function(bool)? onDrawerChanged;
   final Widget? endDrawer;
   final void Function(bool)? onEndDrawerChanged;
   final Widget? bottomNavigationBar;
   final Widget? bottomSheet;
+
+  /// [BoxDecoration] for the [Container] used in the [body] wrapper
   final BoxDecoration background;
+
   final bool? resizeToAvoidBottomInset;
 
   /// Default: true
@@ -33,6 +46,7 @@ class EzScaffold extends Scaffold {
 
   /// Default: false
   final bool extendBodyBehindAppBar;
+
   final Color? drawerScrimColor;
   final double? drawerEdgeDragWidth;
 
@@ -41,10 +55,13 @@ class EzScaffold extends Scaffold {
 
   /// Default: true
   final bool endDrawerEnableOpenDragGesture;
+
   final String? restorationId;
 
   /// Standardizes building a [Scaffold] styled from [EzConfig.prefs]
-  /// It's recommended to use [ezView] for the [body]
+  /// It's recommended to use [EzView] for the [body]
+  /// Whatever [body] is provided, it will be wrapped in a [GestureDetector]
+  /// Which will [closeFocus] on tap
   EzScaffold({
     this.key,
     required this.appBar,
