@@ -91,11 +91,16 @@ ThemeData ezThemeData({
 }) {
   Color themeColor =
       Color(EzConfig.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
-  Color themeTextColor =
-      Color(EzConfig.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
+  Color themeTextColor = Color(
+      EzConfig.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
 
-  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
-  Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
+  Color backgroundColor = Color(
+      EzConfig.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
+
+  Color buttonColor =
+      Color(EzConfig.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
+  Color buttonTextColor = Color(
+      EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
   return ThemeData(
     applyElevationOverlayColor: applyElevationOverlayColor,
@@ -110,37 +115,36 @@ ThemeData ezThemeData({
     useMaterial3: useMaterial3,
     visualDensity: visualDensity,
     brightness: brightness,
-    canvasColor: canvasColor,
-    cardColor: cardColor,
+    canvasColor: canvasColor ?? backgroundColor,
+    cardColor: cardColor ?? themeColor,
     colorScheme: colorScheme,
     colorSchemeSeed: colorSchemeSeed,
     dialogBackgroundColor: dialogBackgroundColor ?? themeColor,
     disabledColor: disabledColor,
-    dividerColor: dividerColor,
+    dividerColor: dividerColor ?? themeTextColor,
     focusColor: focusColor,
-    highlightColor: highlightColor,
-    hintColor: hintColor,
+    highlightColor: highlightColor ?? buttonColor,
+    hintColor: hintColor ?? themeTextColor,
     hoverColor: hoverColor,
-    indicatorColor: indicatorColor,
+    indicatorColor: indicatorColor ?? buttonColor,
     primaryColor: primaryColor ?? themeColor,
     primarySwatch: primarySwatch,
-    scaffoldBackgroundColor: scaffoldBackgroundColor,
+    scaffoldBackgroundColor: scaffoldBackgroundColor ?? backgroundColor,
     secondaryHeaderColor: secondaryHeaderColor,
     shadowColor: shadowColor,
     splashColor: splashColor,
     unselectedWidgetColor: unselectedWidgetColor,
-    fontFamily: fontFamily,
+    fontFamily: fontFamily ?? gStyle(EzConfig.prefs[fontFamilyKey]).fontFamily,
     fontFamilyFallback: fontFamilyFallback,
     package: package,
     iconTheme: iconTheme ?? IconThemeData(color: themeTextColor),
     primaryIconTheme: primaryIconTheme ?? IconThemeData(color: themeTextColor),
-    primaryTextTheme: primaryTextTheme ?? materialTextTheme(),
-    textTheme: textTheme ?? materialTextTheme(),
+    primaryTextTheme: primaryTextTheme ?? materialTextTheme(themeTextColor),
+    textTheme: textTheme ?? materialTextTheme(themeTextColor),
     typography: typography,
     appBarTheme: appBarTheme ??
         AppBarTheme(
           backgroundColor: themeColor,
-          centerTitle: true,
           iconTheme: IconThemeData(color: themeTextColor),
         ),
     badgeTheme: badgeTheme,
@@ -159,7 +163,19 @@ ThemeData ezThemeData({
     buttonBarTheme: buttonBarTheme,
     buttonTheme: buttonTheme,
     cardTheme: cardTheme,
-    checkboxTheme: checkboxTheme,
+    checkboxTheme: checkboxTheme ??
+        CheckboxThemeData(
+          fillColor: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.selected)) {
+                return buttonColor;
+              } else {
+                return themeTextColor;
+              }
+            },
+          ),
+          checkColor: MaterialStateProperty.all(buttonColor),
+        ),
     chipTheme: chipTheme,
     dataTableTheme: dataTableTheme,
     dialogTheme: dialogTheme ??
@@ -207,5 +223,32 @@ ThemeData ezThemeData({
     timePickerTheme: timePickerTheme,
     toggleButtonsTheme: toggleButtonsTheme,
     tooltipTheme: tooltipTheme,
+  );
+}
+
+CupertinoThemeData ezCupertinoThemeData({
+  required bool light,
+  Brightness? brightness,
+  Color? primaryColor,
+  Color? primaryContrastingColor,
+  CupertinoTextThemeData? textTheme,
+  Color? barBackgroundColor,
+  Color? scaffoldBackgroundColor,
+}) {
+  Color themeColor =
+      Color(EzConfig.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
+  Color themeTextColor = Color(
+      EzConfig.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
+
+  Color backgroundColor = Color(
+      EzConfig.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
+
+  return CupertinoThemeData(
+    brightness: brightness,
+    primaryColor: primaryColor ?? themeColor,
+    primaryContrastingColor: primaryContrastingColor ?? themeTextColor,
+    textTheme: textTheme ?? cupertinoTextTheme(themeTextColor),
+    barBackgroundColor: barBackgroundColor ?? backgroundColor,
+    scaffoldBackgroundColor: scaffoldBackgroundColor ?? backgroundColor,
   );
 }
