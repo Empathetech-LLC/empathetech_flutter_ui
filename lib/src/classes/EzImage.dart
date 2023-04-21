@@ -8,7 +8,10 @@ import 'package:flutter/cupertino.dart';
 
 class EzImage extends Image {
   final Key? key;
+
+  /// [EzConfig.prefs] key that contains the path to the image you wish to load
   final String prefsKey;
+
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;

@@ -8,7 +8,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDrawer extends StatelessWidget {
   final Key? key;
+
+  /// Used directly when [isCupertino]
+  /// Wrapped in a [DrawerHeader] when [isMaterial]
   final Widget? header;
+
   final List<Widget> body;
 
   /// Default: false
