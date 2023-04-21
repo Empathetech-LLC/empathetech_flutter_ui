@@ -53,13 +53,13 @@ class EzConfig {
     paragraphSpacingKey: 50,
 
     // Light theme //
-    lightBackgroundImage: null,
+    lightBackgroundImageKey: null,
     lightBackgroundColorKey: 0xFFEBEBEB, // Almost white
     lightThemeColorKey: 0xFFEBEBEB,
     lightThemeTextColorKey: 0xFF000000, // Black
 
     // Dark theme //
-    darkBackgroundImage: null,
+    darkBackgroundImageKey: null,
     darkBackgroundColorKey: 0xFF141414, // Almost black
     darkThemeColorKey: 0xFF141414,
     darkThemeTextColorKey: 0xFFFFFFFF, // White
@@ -148,7 +148,7 @@ const String dialogSpacingKey = 'dialogSpacing';
 const String paragraphSpacingKey = 'paragraphSpacing';
 
 // Light theme
-const String lightBackgroundImage = 'lightBackImage';
+const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String lightBackgroundColorKey = 'lightBackgroundColor';
 const String lightThemeColorKey = 'lightThemeColor';
 const String lightThemeTextColorKey = 'lightThemeTextColor';
@@ -156,7 +156,7 @@ const String lightButtonColorKey = 'lightButtonColor';
 const String lightButtonTextColorKey = 'lightButtonTextColor';
 
 // Dark theme
-const String darkBackgroundImage = 'darkBackImage';
+const String darkBackgroundImageKey = 'darkBackgroundImage';
 const String darkBackgroundColorKey = 'darkBackgroundColor';
 const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
