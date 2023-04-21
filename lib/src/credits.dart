@@ -16,7 +16,8 @@ const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
 const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
 
 /// One of us, one of us, one of us!
-const String EmpathetechFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
+const String EmpathetechFoldingTeam =
+    'https://stats.foldingathome.org/team/1063265';
 
 /// If you need to reach out
 const String EmpathetechSupport = 'support@empathetech.net';

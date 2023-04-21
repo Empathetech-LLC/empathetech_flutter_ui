@@ -15,15 +15,9 @@ Future<dynamic> logAlert(
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: EzText.simple(
-        'Attention:',
-        style: ezTextStyle(context, MaterialStyles.titleSmall),
-      ),
+      title: EzText.simple('Attention:'),
       contents: [
-        EzText.simple(
-          message,
-          style: ezTextStyle(context, MaterialStyles.bodyMedium),
-        ),
+        EzText.simple(message),
       ],
     ),
   );
@@ -87,7 +81,8 @@ Center loadingMessage({
   TextStyle style = ezTextStyle(context, MaterialStyles.titleMedium);
 
   double imageSize = style.fontSize!;
-  SizedBox ellipsis = SizedBox(height: imageSize, width: imageSize, child: image);
+  SizedBox ellipsis =
+      SizedBox(height: imageSize, width: imageSize, child: image);
 
   return Center(
     child: Row(

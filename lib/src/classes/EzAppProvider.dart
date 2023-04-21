@@ -24,7 +24,8 @@ class EzAppProvider extends PlatformProvider {
   }) : super(
           key: key,
           initialPlatform: initialPlatform,
-          settings: settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
+          settings:
+              settings ?? PlatformSettingsData(iosUsesMaterialWidgets: true),
           builder: (context) => app,
         );
 }

@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzCupertinoAppData extends CupertinoAppData {
-  /// [CupertinoAppData] wrapper that uses [EzCupertinoThemeData] by default
+  /// [CupertinoAppData] wrapper that uses [ezCupertinoThemeData] by default
   EzCupertinoAppData({
     Key? widgetKey,
     GlobalKey<NavigatorState>? navigatorKey,
@@ -24,7 +24,8 @@ class EzCupertinoAppData extends CupertinoAppData {
     Map<Type, Action<Intent>>? actions,
     List<Route<dynamic>> Function(String)? onGenerateInitialRoutes,
     Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
-    Locale? Function(List<Locale>?, Iterable<Locale>)? localeListResolutionCallback,
+    Locale? Function(List<Locale>?, Iterable<Locale>)?
+        localeListResolutionCallback,
     Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback,
     Iterable<Locale>? supportedLocales,
     bool? showPerformanceOverlay,
@@ -62,6 +63,6 @@ class EzCupertinoAppData extends CupertinoAppData {
           debugShowCheckedModeBanner: debugShowCheckedModeBanner,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          theme: theme ?? EzCupertinoThemeData(),
+          theme: theme ?? ezCupertinoThemeData(light: EzConfig.lightTheme),
         );
 }

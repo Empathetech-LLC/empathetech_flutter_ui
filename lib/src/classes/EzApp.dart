@@ -29,7 +29,8 @@ class EzApp extends PlatformApp {
   /// ],
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
-  final Locale? Function(List<Locale>?, Iterable<Locale>)? localeListResolutionCallback;
+  final Locale? Function(List<Locale>?, Iterable<Locale>)?
+      localeListResolutionCallback;
   final Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback;
   final Iterable<Locale>? supportedLocales;
   final bool? showPerformanceOverlay;
@@ -121,6 +122,7 @@ class EzApp extends PlatformApp {
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
           material: (context, platform) => materialData ?? EzMaterialAppData(),
-          cupertino: (context, platform) => cupertinoData ?? EzCupertinoAppData(),
+          cupertino: (context, platform) =>
+              cupertinoData ?? EzCupertinoAppData(),
         );
 }

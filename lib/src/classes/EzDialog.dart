@@ -12,8 +12,10 @@ class EzDialog extends PlatformAlertDialog {
   final Widget? content;
   final List<Widget> contents;
   final Widget? title;
-  final MaterialAlertDialogData Function(BuildContext, PlatformTarget)? material;
-  final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)? cupertino;
+  final MaterialAlertDialogData Function(BuildContext, PlatformTarget)?
+      material;
+  final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)?
+      cupertino;
 
   /// Default: false
   final bool needsClose;
@@ -47,11 +49,13 @@ class EzDialog extends PlatformAlertDialog {
 
         // Title
         title: title,
-        titlePadding: EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
+        titlePadding:
+            EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
 
         // Content
         content: content ?? EzScrollView(children: contents),
-        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+        contentPadding:
+            EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
 
       // Cupertino (iOS)
@@ -62,16 +66,14 @@ class EzDialog extends PlatformAlertDialog {
         // Content
         content: content ??
             EzScrollView(
-                children:
-                    (needsClose) ? contents : [...contents, Container(height: padding)]),
+                children: (needsClose)
+                    ? contents
+                    : [...contents, Container(height: padding)]),
         actions: (needsClose)
             ? [
                 GestureDetector(
                   onTap: () => popScreen(context: context),
-                  child: EzText.simple(
-                    'Close',
-                    style: ezTextStyle(context, MaterialStyles.bodyMedium),
-                  ),
+                  child: EzText.simple('Close'),
                 ),
               ]
             : [],

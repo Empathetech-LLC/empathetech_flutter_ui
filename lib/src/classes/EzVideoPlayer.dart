@@ -85,7 +85,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double? savedVolume;
   double _currentPosition = 0.0;
 
-  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
+  late TextStyle buttonTextStyle =
+      ezTextStyle(context, MaterialStyles.bodyLarge);
 
   late double aspectRatio = widget.controller.value.aspectRatio;
 
@@ -135,14 +136,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double _percentComplete(Duration position) {
     return (position.isNegative || position.inMilliseconds == 0)
         ? 0
-        : position.inMilliseconds / widget.controller.value.duration.inMilliseconds;
+        : position.inMilliseconds /
+            widget.controller.value.duration.inMilliseconds;
   }
 
   /// Get the [Duration] value that corresponds to the passed [completion] percentage
   Duration _findPoint(double completion) {
     return Duration(
       milliseconds:
-          (widget.controller.value.duration.inMilliseconds * completion).round(),
+          (widget.controller.value.duration.inMilliseconds * completion)
+              .round(),
     );
   }
 
@@ -199,11 +202,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             size: buttonSize,
           ),
           onTap: () {
-            if (widget.controller.value.position >= widget.controller.value.duration) {
+            if (widget.controller.value.position >=
+                widget.controller.value.duration) {
               // Video has ended, replay
               _replayVideo();
             } else {
-              (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+              (widget.controller.value.isPlaying)
+                  ? _pauseVideo()
+                  : _playVideo();
             }
           },
         ),
@@ -223,7 +229,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             size: buttonSize,
           ),
           onTap: () {
-            (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
+            (widget.controller.value.volume == 0.0)
+                ? _unMuteVideo()
+                : _muteVideo();
           },
         ),
         Container(width: EzConfig.prefs[paddingKey]),
@@ -269,8 +277,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     Color sliderColor = _buildColor(widget.sliderVis);
 
     SliderThemeData videoSliderTheme = SliderThemeData(
-      thumbShape:
-          (sliderColor == Colors.transparent) ? SliderComponentShape.noThumb : null,
+      thumbShape: (sliderColor == Colors.transparent)
+          ? SliderComponentShape.noThumb
+          : null,
       overlayShape: SliderComponentShape.noOverlay,
       trackShape: VideoSliderTrack(),
       activeTrackColor: sliderColor,
@@ -316,7 +325,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       color: Colors.transparent,
                     ),
                     onTap: () {
-                      (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+                      (widget.controller.value.isPlaying)
+                          ? _pauseVideo()
+                          : _playVideo();
                     }),
               ),
 

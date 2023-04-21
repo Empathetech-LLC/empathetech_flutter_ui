@@ -42,7 +42,8 @@ class EzText extends SelectableText {
   final String? semanticsLabel;
   final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
-  final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
+  final void Function(TextSelection, SelectionChangedCause?)?
+      onSelectionChanged;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
@@ -158,7 +159,6 @@ class EzText extends SelectableText {
 
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
   /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to run [action]
-  /// The provided [url]
   EzText.link({
     required String text,
     required void Function() action,
@@ -218,8 +218,7 @@ class EzText extends SelectableText {
         );
 
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
-  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to [openLink]
-  /// The provided [url]
+  /// A [TextSpan] will be made from [text] and given a [TapGestureRecognizer] to [openLink] the provided [url]
   EzText.webLink({
     required String text,
     required Uri url,

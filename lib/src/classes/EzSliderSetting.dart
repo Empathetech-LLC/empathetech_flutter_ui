@@ -41,9 +41,12 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
-  late TextStyle dialogTitleStyle = ezTextStyle(context, MaterialStyles.titleSmall);
-  late TextStyle dialogContentStyle = ezTextStyle(context, MaterialStyles.bodyMedium);
+  late TextStyle buttonTextStyle =
+      ezTextStyle(context, MaterialStyles.bodyLarge);
+  late TextStyle dialogTitleStyle =
+      ezTextStyle(context, MaterialStyles.titleSmall);
+  late TextStyle dialogContentStyle =
+      ezTextStyle(context, MaterialStyles.bodyMedium);
 
   late double currValue = EzConfig.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
@@ -122,13 +125,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzButton(
                 context: context,
                 action: doNothing,
-                body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
+                body: EzText.simple('Currently: $currValue',
+                    style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
               EzButton(
                 context: context,
                 action: doNothing,
-                body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
+                body: EzText.simple('Currently: $currValue',
+                    style: buttonTextStyle),
               ),
               SizedBox(height: currValue),
             ],
@@ -141,7 +146,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzButton(
             context: context,
             action: doNothing,
-            body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
+            body:
+                EzText.simple('Currently: $currValue', style: buttonTextStyle),
             customStyle: ElevatedButton.styleFrom(
               fixedSize: Size(widthOf(context), currValue),
             ),
@@ -166,7 +172,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
                   EzButton(
                     context: context,
                     action: doNothing,
-                    body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
+                    body: EzText.simple('Currently: $currValue',
+                        style: buttonTextStyle),
                   ),
                   Container(height: currValue),
 
@@ -174,7 +181,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
                   EzButton(
                     context: context,
                     action: doNothing,
-                    body: EzText.simple('Currently: $currValue', style: buttonTextStyle),
+                    body: EzText.simple('Currently: $currValue',
+                        style: buttonTextStyle),
                   ),
                   Container(height: currValue),
                 ],

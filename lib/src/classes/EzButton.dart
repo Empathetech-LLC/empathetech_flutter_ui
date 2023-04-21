@@ -54,10 +54,7 @@ class EzButton extends StatelessWidget {
           children: [
             icon,
             Container(width: EzConfig.prefs[paddingKey]),
-            EzText.simple(
-              message,
-              style: ezTextStyle(context, MaterialStyles.bodyMedium),
-            ),
+            EzText.simple(message),
           ],
         );
 
@@ -71,7 +68,6 @@ class EzButton extends StatelessWidget {
         if (cast.style == null) {
           return EzText.simple(
             cast.data ?? 'Lorem ipsum',
-            style: ezTextStyle(context, MaterialStyles.bodyMedium),
             textAlign: cast.textAlign,
           );
         } else {
@@ -90,7 +86,6 @@ class EzButton extends StatelessWidget {
 
     switch (this.body.runtimeType) {
       case Icon:
-      case EzIcon:
         style = materialButton(shape: CircleBorder());
         break;
     }
@@ -118,8 +113,9 @@ class EzButton extends StatelessWidget {
     );
     ButtonStyle ezStyle = _buildStyle();
 
-    Color resolvedColor = ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
-        Color(EzConfig.prefs[buttonColorKey]);
+    Color resolvedColor =
+        ezStyle.backgroundColor!.resolve({MaterialState.pressed}) ??
+            Color(EzConfig.prefs[buttonColorKey]);
 
     return (forceMaterial)
         ? ElevatedButton(
@@ -165,9 +161,7 @@ class EzButton extends StatelessWidget {
                 switch (widget.runtimeType) {
                   case Text:
                     return EzText.simple(
-                      (widget as Text).data ?? 'Lorem ipsum',
-                      style: ezTextStyle(context, MaterialStyles.bodyMedium),
-                    );
+                        (widget as Text).data ?? 'Lorem ipsum');
                   case Icon:
                     return Icon(
                       (widget as Icon).icon,
@@ -181,10 +175,7 @@ class EzButton extends StatelessWidget {
           );
 
         case Text:
-          return EzText.simple(
-            (this.body as Text).data ?? 'Lorem ipsum',
-            style: ezTextStyle(context, MaterialStyles.bodyMedium),
-          );
+          return EzText.simple((this.body as Text).data ?? 'Lorem ipsum');
 
         case Icon:
           return Icon(
@@ -223,17 +214,20 @@ CupertinoElevatedButtonData m2cButton({
   required ButtonStyle materialBase,
   required Widget child,
 }) {
-  Color resolvedColor = materialBase.backgroundColor!.resolve({MaterialState.pressed}) ??
-      Color(EzConfig.prefs[buttonColorKey]);
+  Color resolvedColor =
+      materialBase.backgroundColor!.resolve({MaterialState.pressed}) ??
+          Color(EzConfig.prefs[buttonColorKey]);
 
-  EdgeInsetsGeometry padding = materialBase.padding!.resolve({MaterialState.pressed}) ??
-      EdgeInsets.all(EzConfig.prefs[paddingKey]);
+  EdgeInsetsGeometry padding =
+      materialBase.padding!.resolve({MaterialState.pressed}) ??
+          EdgeInsets.all(EzConfig.prefs[paddingKey]);
 
   return CupertinoElevatedButtonData(
     child: child,
     color: resolvedColor,
     padding: padding,
-    borderRadius: (materialBase.shape != null) ? BorderRadius.circular(30.0) : null,
+    borderRadius:
+        (materialBase.shape != null) ? BorderRadius.circular(30.0) : null,
   );
 }
 
@@ -251,9 +245,10 @@ Widget ezYesNo({
 }) {
   // Gather theme data
 
-  Icon confirmIcon = customConfirm ?? EzIcon(PlatformIcons(context).checkMark);
-  Icon denyIcon = customDeny ?? EzIcon(PlatformIcons(context).clear);
-  double spacing = (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
+  Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
+  Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
+  double spacing =
+      (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
 
   return axis == Axis.vertical
       ? Column(

@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
+  final String toControl;
+  final String message;
+  final String? textBackgroundKey;
+
   /// Creates a tool for updating the value of [toControl]
   /// The [EzColorSetting] title is the passed [message] and is paired with a
   /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
@@ -16,10 +20,6 @@ class EzColorSetting extends StatefulWidget {
     required this.message,
     this.textBackgroundKey,
   }) : super(key: key);
-
-  final String toControl;
-  final String message;
-  final String? textBackgroundKey;
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -59,17 +59,14 @@ class _ColorSettingState extends State<EzColorSetting> {
 
     if (widget.textBackgroundKey != null) {
       String pathKey = widget.textBackgroundKey as String;
-      Color backgroundColor =
-          Color(EzConfig.preferences.getInt(pathKey) ?? EzConfig.prefs[pathKey]);
+      Color backgroundColor = Color(
+          EzConfig.preferences.getInt(pathKey) ?? EzConfig.prefs[pathKey]);
       int recommended = getContrastColor(backgroundColor).value;
 
       return openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText.simple(
-            'Use recommended?',
-            style: ezTextStyle(context, MaterialStyles.titleSmall),
-          ),
+          title: EzText.simple('Use recommended?'),
           contents: [
             // Recommended preview
             Container(
@@ -119,10 +116,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText.simple(
-          'Reset to...',
-          style: ezTextStyle(context, MaterialStyles.titleSmall),
-        ),
+        title: EzText.simple('Reset to...'),
         contents: [
           // Color preview
           Container(
@@ -165,17 +159,15 @@ class _ColorSettingState extends State<EzColorSetting> {
       scrollDirection: Axis.horizontal,
       children: [
         // Color label
-        EzText.simple(
-          widget.message,
-          style: ezTextStyle(context, MaterialStyles.bodyLarge),
-        ),
+        EzText.simple(widget.message),
 
         // Color preview/edit button
         EzButton(
           context: context,
           action: _changeColor,
           longAction: _reset,
-          body: EzIcon(PlatformIcons(context).edit, color: getContrastColor(currColor)),
+          body: EzIcon(PlatformIcons(context).edit,
+              color: getContrastColor(currColor)),
           customStyle: ElevatedButton.styleFrom(
             backgroundColor: currColor,
             padding: EdgeInsets.all(EzConfig.prefs[paddingKey] * 2),

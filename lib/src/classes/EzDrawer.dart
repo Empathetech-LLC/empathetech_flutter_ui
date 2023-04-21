@@ -15,7 +15,6 @@ class EzDrawer extends StatelessWidget {
   /// Default: false
   final bool forceMaterial;
 
-  /// Default: [EzConfig.prefs] -> themeColorKey
   final Color? backgroundColor;
 
   final Color? shadowColor;
@@ -45,11 +44,9 @@ class EzDrawer extends StatelessWidget {
 
   /// Material (Android) body
   Drawer _materialWidget() {
-    Color themeColor = backgroundColor ?? Color(EzConfig.prefs[themeColorKey]);
-
     return Drawer(
       key: key,
-      backgroundColor: themeColor,
+      backgroundColor: backgroundColor,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
       elevation: elevation,
@@ -101,10 +98,7 @@ class EzDrawer extends StatelessWidget {
           actions: actions,
         ),
       ),
-      child: Icon(
-        CupertinoIcons.line_horizontal_3,
-        color: Color(EzConfig.prefs[themeTextColorKey]),
-      ),
+      child: Icon(CupertinoIcons.line_horizontal_3),
     );
   }
 

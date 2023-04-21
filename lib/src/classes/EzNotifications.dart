@@ -2,7 +2,8 @@ library empathetech_flutter_ui;
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin notifsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 /// Foreground [NotificationResponse]/action
 void notifAction(NotificationResponse notificationResponse) {}
@@ -27,7 +28,8 @@ const androidNotifDetails = AndroidNotificationDetails(
 
 // iOS setup
 
-final DarwinInitializationSettings iosInitSettings = DarwinInitializationSettings();
+final DarwinInitializationSettings iosInitSettings =
+    DarwinInitializationSettings();
 
 const iosNotifDetails = DarwinNotificationDetails(
   presentAlert: true,
@@ -65,11 +67,13 @@ class EzNotifications {
     // Request permissions
 
     await notifsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
 
     await notifsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
           alert: true,
           badge: true,
@@ -81,8 +85,8 @@ class EzNotifications {
         await notifsPlugin.getNotificationAppLaunchDetails();
     if (notificationAppLaunchDetails?.didNotificationLaunchApp == true &&
         notificationAppLaunchDetails?.notificationResponse != null) {
-      backgroundNotifAction(
-          notificationAppLaunchDetails!.notificationResponse!); // handle / navigate
+      backgroundNotifAction(notificationAppLaunchDetails!
+          .notificationResponse!); // handle / navigate
     }
   }
 

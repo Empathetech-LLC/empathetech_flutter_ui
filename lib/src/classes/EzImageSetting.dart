@@ -34,9 +34,12 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String currPathKey = widget.prefsKey;
   String? updatedPath; // Only used when the user makes a change
 
-  late TextStyle buttonTextStyle = ezTextStyle(context, MaterialStyles.bodyLarge);
-  late TextStyle dialogTitleStyle = ezTextStyle(context, MaterialStyles.titleSmall);
-  late TextStyle dialogContentStyle = ezTextStyle(context, MaterialStyles.bodyMedium);
+  late TextStyle buttonTextStyle =
+      ezTextStyle(context, MaterialStyles.bodyLarge);
+  late TextStyle dialogTitleStyle =
+      ezTextStyle(context, MaterialStyles.titleSmall);
+  late TextStyle dialogContentStyle =
+      ezTextStyle(context, MaterialStyles.bodyMedium);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];

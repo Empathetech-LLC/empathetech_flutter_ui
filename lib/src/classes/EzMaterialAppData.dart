@@ -7,7 +7,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzMaterialAppData extends MaterialAppData {
   /// [MaterialAppData] wrapper that uses handles switching between
-  /// [ezLightThemeData] && [ezDarkThemeData]
+  /// [ezThemeData] light && dark
   EzMaterialAppData({
     Key? widgetKey,
     GlobalKey<NavigatorState>? navigatorKey,
@@ -22,7 +22,8 @@ class EzMaterialAppData extends MaterialAppData {
     Color? color,
     Locale? locale,
     Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
-    Locale? Function(List<Locale>?, Iterable<Locale>)? localeListResolutionCallback,
+    Locale? Function(List<Locale>?, Iterable<Locale>)?
+        localeListResolutionCallback,
     Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback,
     Iterable<Locale>? supportedLocales,
     bool? showPerformanceOverlay,
@@ -71,9 +72,9 @@ class EzMaterialAppData extends MaterialAppData {
           restorationScopeId: restorationScopeId,
           scrollBehavior: scrollBehavior,
           useInheritedMediaQuery: useInheritedMediaQuery,
-          theme: theme ?? ezLightThemeData(),
+          theme: theme ?? ezThemeData(light: true),
           debugShowMaterialGrid: debugShowMaterialGrid,
-          darkTheme: darkTheme ?? ezDarkThemeData(),
+          darkTheme: darkTheme ?? ezThemeData(light: false),
           themeMode: themeMode ?? ThemeMode.system,
           scaffoldMessengerKey: scaffoldMessengerKey,
           themeAnimationCurve: themeAnimationCurve,
