@@ -8,7 +8,6 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDrawer extends StatelessWidget {
   final Key? key;
-
   final Widget? header;
   final List<Widget> body;
 
@@ -16,7 +15,6 @@ class EzDrawer extends StatelessWidget {
   final bool forceMaterial;
 
   final Color? backgroundColor;
-
   final Color? shadowColor;
   final Color? surfaceTintColor;
   final double? elevation;
