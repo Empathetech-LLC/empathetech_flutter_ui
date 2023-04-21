@@ -15,14 +15,21 @@ enum Hand {
 /// Tracks the apps [FocusManager] for keyboard management
 /// Maintains [lightTheme] and [dominantSide] trackers for integrating user accessibility
 class EzConfig {
+  /// [AssetImage] paths for this app
   static late List<String> assets;
 
   static late SharedPreferences preferences;
+
+  /// Top-level [EzConfig.preferences]
   static late Map<String, dynamic> prefs;
 
+  /// Used to close active dialogs
   static late FocusManager focus;
 
+  /// Whether the light theme should be used
   static late bool lightTheme;
+
+  /// What side of the screen touch points should be on
   static late Hand dominantSide;
 
   static Map<String, dynamic> defaults = {
