@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class EzFontSetting extends StatefulWidget {
-  /// Creates a tool for updating the app's font
+  /// Standardized tool for updating the [fontFamilyKey] in [EzConfig.prefs]
+  /// [EzFontSetting] options are built from [EzFonts]
   EzFontSetting({Key? key}) : super(key: key);
 
   @override
@@ -19,7 +20,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  /// Builds an [ezDialog] from mapping [myGoogleFonts] to a list of [EzButton]s
+  /// Builds an [EzDialog] from mapping [EzFonts] to a list of [EzButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
     return openDialog(
