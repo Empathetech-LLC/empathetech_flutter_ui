@@ -21,9 +21,7 @@ class EzDialog extends PlatformAlertDialog {
   final bool needsClose;
 
   /// Styles a [PlatformAlertDialog] with [EzConfig]
-  /// Uses a [contents] list rather than [content] Widget
-  /// Optionally overwrite with -> content: content && contents: []
-  /// Optionally overwrite any original parameters
+  /// Prefers a [contents] list rather than [content] Widget
   /// Optionally remove the "Close" action on iOS with [needsClose]
   EzDialog({
     this.key,
