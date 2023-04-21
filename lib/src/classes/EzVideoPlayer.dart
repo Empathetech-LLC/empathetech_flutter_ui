@@ -85,16 +85,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double? savedVolume;
   double _currentPosition = 0.0;
 
-  late TextStyle buttonTextStyle =
-      ezTextStyle(context, MaterialStyles.bodyLarge);
-
   late double aspectRatio = widget.controller.value.aspectRatio;
 
   late double margin = EzConfig.prefs[marginKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double? iconSize = buttonTextStyle.fontSize!;
-  late double buttonSize = buttonTextStyle.fontSize!;
-  late double cutoff = buttonSize * 4;
 
   late Color showing = widget.iconColor;
   late Color hiding = widget.iconColor.withOpacity(widget.hiddenOpacity);
@@ -184,22 +178,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     }
   }
 
-  List<Widget> _buildButtons({
-    required double buttonSize,
-    required SliderThemeData videoSliderTheme,
-  }) {
+  List<Widget> _buildButtons({required SliderThemeData videoSliderTheme}) {
     List<Widget> controls = [];
 
     // Play/pause
     if (widget.playVis != ButtonVis.alwaysOff)
       controls.addAll([
         EzMouseDetector(
-          child: EzIcon(
+          child: Icon(
             (widget.controller.value.isPlaying)
                 ? PlatformIcons(context).pause
                 : PlatformIcons(context).playArrow,
             color: _buildColor(widget.playVis),
-            size: buttonSize,
           ),
           onTap: () {
             if (widget.controller.value.position >=
@@ -221,12 +211,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       controls.addAll([
         // Mute button
         EzMouseDetector(
-          child: EzIcon(
+          child: Icon(
             (widget.controller.value.volume == 0.0)
                 ? PlatformIcons(context).volumeMute
                 : PlatformIcons(context).volumeUp,
             color: _buildColor(widget.volumeVis),
-            size: buttonSize,
           ),
           onTap: () {
             (widget.controller.value.volume == 0.0)
@@ -238,8 +227,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
         // Value slider
         Container(
-          height: buttonSize,
-          width: buttonSize * 4,
           child: SliderTheme(
             data: videoSliderTheme,
             child: Slider(
@@ -259,11 +246,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.replayVis != ButtonVis.alwaysOff)
       controls.addAll([
         EzMouseDetector(
-          child: EzIcon(
-            PlatformIcons(context).refresh,
-            color: _buildColor(widget.replayVis),
-            size: buttonSize,
-          ),
+          child: Icon(PlatformIcons(context).refresh,
+              color: _buildColor(widget.replayVis)),
           onTap: _replayVideo,
         ),
         Container(width: buttonSpacer),
@@ -316,7 +300,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
               // Tap-to-pause
               Positioned(
-                bottom: cutoff,
+                bottom: heightOf(context) * 0.1,
                 left: 0,
                 top: 0,
                 width: widthOf(context),
@@ -336,7 +320,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 bottom: 0,
                 left: margin,
                 right: margin,
-                height: cutoff,
+                height: heightOf(context) * 0.1,
                 child: Container(
                   decoration: widget.controlsBackground,
                   child: Column(
@@ -364,10 +348,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _buildButtons(
-                          buttonSize: buttonSize,
-                          videoSliderTheme: videoSliderTheme,
-                        ),
+                        children:
+                            _buildButtons(videoSliderTheme: videoSliderTheme),
                       ),
                     ],
                   ),
