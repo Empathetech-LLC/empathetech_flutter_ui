@@ -41,18 +41,9 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  late TextStyle buttonTextStyle =
-      ezTextStyle(context, MaterialStyles.bodyLarge);
-  late TextStyle dialogTitleStyle =
-      ezTextStyle(context, MaterialStyles.titleSmall);
-  late TextStyle dialogContentStyle =
-      ezTextStyle(context, MaterialStyles.bodyMedium);
-
   late double currValue = EzConfig.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-
-  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview() {
@@ -61,12 +52,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.fontSize:
         return [
           EzButton(
-            context: context,
-            action: doNothing,
-            body: EzText.simple(
-              'Currently: $currValue',
-              style: buttonTextStyle.copyWith(fontSize: currValue),
-            ),
+            onPressed: doNothing,
+            child: EzText.simple('Currently: $currValue'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -81,18 +68,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              EzText.simple(
-                'Currently:\n$currValue\n\n(to scale)',
-                style: dialogContentStyle,
-              ),
+              EzText.simple('Currently:\n$currValue\n\n(to scale)'),
               Container(
                 height: 160.0,
                 width: 90.0,
-                color: Color(EzConfig.prefs[themeTextColorKey]),
-                child: Container(
-                  color: Color(EzConfig.prefs[themeColorKey]),
-                  margin: EdgeInsets.all(liveMargin),
-                ),
+                child: Container(margin: EdgeInsets.all(liveMargin)),
               ),
             ],
           ),
@@ -103,16 +83,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.padding:
         return [
           EzButton(
-            context: context,
-            action: doNothing,
-            body: Padding(
+            onPressed: doNothing,
+            child: Padding(
               padding: EdgeInsets.all(currValue),
-              child: EzText.simple(
-                'Currently: $currValue',
-                style: buttonTextStyle,
-              ),
+              child: EzText.simple('Currently: $currValue'),
             ),
-            customStyle: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+            style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
           ),
           Container(height: buttonSpacer),
         ];
@@ -123,17 +99,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzScrollView(
             children: [
               EzButton(
-                context: context,
-                action: doNothing,
-                body: EzText.simple('Currently: $currValue',
-                    style: buttonTextStyle),
+                onPressed: doNothing,
+                child: EzText.simple('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
               EzButton(
-                context: context,
-                action: doNothing,
-                body: EzText.simple('Currently: $currValue',
-                    style: buttonTextStyle),
+                onPressed: doNothing,
+                child: EzText.simple('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
             ],
@@ -144,11 +116,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.buttonHeight:
         return [
           EzButton(
-            context: context,
-            action: doNothing,
-            body:
-                EzText.simple('Currently: $currValue', style: buttonTextStyle),
-            customStyle: ElevatedButton.styleFrom(
+            onPressed: doNothing,
+            child: EzText.simple('Currently: $currValue'),
+            style: ElevatedButton.styleFrom(
               fixedSize: Size(widthOf(context), currValue),
             ),
           ),
@@ -159,36 +129,28 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.dialogSpacing:
         return [
           EzButton(
-            context: context,
-            action: () => openDialog(
+            onPressed: () => openDialog(
               context: context,
               dialog: EzDialog(
-                title: EzText.simple(
-                  'Space preview',
-                  style: dialogTitleStyle,
-                ),
+                title: EzText.simple('Space preview'),
                 contents: [
                   // Button 1
                   EzButton(
-                    context: context,
-                    action: doNothing,
-                    body: EzText.simple('Currently: $currValue',
-                        style: buttonTextStyle),
+                    onPressed: doNothing,
+                    child: EzText.simple('Currently: $currValue'),
                   ),
                   Container(height: currValue),
 
                   // Button 2
                   EzButton(
-                    context: context,
-                    action: doNothing,
-                    body: EzText.simple('Currently: $currValue',
-                        style: buttonTextStyle),
+                    onPressed: doNothing,
+                    child: EzText.simple('Currently: $currValue'),
                   ),
                   Container(height: currValue),
                 ],
               ),
             ),
-            body: EzText.simple('Press me', style: buttonTextStyle),
+            child: EzText.simple('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -201,12 +163,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [preview] + [PlatformSlider] + reset [EzButton.icon]
   List<Widget> buildList() {
-    List<Widget> toReturn = [
-      EzText.simple(
-        widget.title,
-        style: ezTextStyle(context, MaterialStyles.headlineSmall),
-      )
-    ];
+    List<Widget> toReturn = [EzText.simple(widget.title)];
 
     toReturn.addAll(_buildPreview());
 
@@ -236,22 +193,19 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
         // Form
         divisions: widget.steps,
-        thumbColor: buttonColor,
-        activeColor: buttonColor,
       ),
       Container(height: buttonSpacer),
 
       // Reset button
       EzButton.icon(
-        context: context,
-        action: () {
+        onPressed: () {
           EzConfig.preferences.remove(widget.prefsKey);
           setState(() {
             currValue = EzConfig.defaults[widget.prefsKey];
           });
         },
-        icon: EzIcon(PlatformIcons(context).refresh),
-        message: 'Reset: ' + EzConfig.defaults[widget.prefsKey].toString(),
+        icon: Icon(PlatformIcons(context).refresh),
+        label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
     ]);
 
