@@ -13,7 +13,7 @@ enum Hand {
 /// Tracks the apps image [assets] for ease of development
 /// Setting are tracked with shared_preferences
 /// Tracks the apps [FocusManager] for keyboard management
-/// Maintains [lightTheme] and [dominantSide] trackers for integrating user accessibility
+/// Maintains [themeMode] and [dominantSide] trackers for integrating user accessibility
 class EzConfig {
   /// [AssetImage] paths for this app
   static late List<String> assets;
