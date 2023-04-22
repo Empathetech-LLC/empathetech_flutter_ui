@@ -10,7 +10,10 @@ class EzDialog extends PlatformAlertDialog {
   final Key? widgetKey;
   final List<Widget>? actions;
   final Widget? content;
-  final List<Widget> contents;
+
+  /// Used in an [EzScrollView]
+  final List<Widget>? contents;
+
   final Widget? title;
   final MaterialAlertDialogData Function(BuildContext, PlatformTarget)?
       material;
@@ -21,19 +24,22 @@ class EzDialog extends PlatformAlertDialog {
   final bool needsClose;
 
   /// Styles a [PlatformAlertDialog] with [EzConfig]
-  /// Prefers a [contents] list rather than [content] Widget
-  /// Optionally remove the "Close" action on iOS with [needsClose]
+  /// Adds an optional [contents] parameter to provide instead of the traditional [content]
+  /// If provided, [contents] will be used in an [EzScrollView]
+  /// Only one option can be provided
+  /// Optionally remove the "Close" action on iOS via [needsClose]
   EzDialog({
     this.key,
     this.widgetKey,
     this.actions,
     this.content,
-    required this.contents,
+    this.contents,
     this.title,
     this.cupertino,
     this.material,
     this.needsClose = true,
-  });
+  }) : assert(content == null || contents == null,
+            'Either content or contents must be provided, not both.');
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +57,7 @@ class EzDialog extends PlatformAlertDialog {
             EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
 
         // Content
-        content: content ?? EzScrollView(children: contents),
+        content: content ?? EzScrollView(children: contents!),
         contentPadding:
             EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
@@ -65,8 +71,8 @@ class EzDialog extends PlatformAlertDialog {
         content: content ??
             EzScrollView(
                 children: (needsClose)
-                    ? contents
-                    : [...contents, Container(height: padding)]),
+                    ? contents!
+                    : [...contents!, Container(height: padding)]),
         actions: (needsClose)
             ? [
                 GestureDetector(
