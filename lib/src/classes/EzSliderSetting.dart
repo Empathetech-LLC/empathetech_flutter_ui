@@ -75,9 +75,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
-          Row(
+          EzScrollView(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            scrollDirection: Axis.horizontal,
             children: [
               EzText.simple('Currently:\n$currValue\n\n(to scale)'),
               Container(
@@ -227,7 +228,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return EzScrollView(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: buildList(),
