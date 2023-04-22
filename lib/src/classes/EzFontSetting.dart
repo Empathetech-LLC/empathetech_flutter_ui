@@ -23,38 +23,37 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   /// Builds an [EzDialog] from mapping [EzFonts] to a list of [EzButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
+    List<Widget> buttons = [];
+
+    EzFonts.values.forEach((font) {
+      buttons.addAll([
+        // Map font to a selectable button (title == name)
+        EzButton(
+          onPressed: () {
+            EzConfig.preferences.setString(fontFamilyKey, gStyleName(font));
+            setState(() {
+              currFontFamily = gStyle(font).fontFamily!;
+            });
+            popScreen(context: context, pass: font);
+          },
+          child: EzText.simple(gStyleName(font), style: gStyle(font)),
+        ),
+        Container(height: buttonSpacer),
+      ]);
+    });
+
     return openDialog(
       context: context,
       dialog: EzDialog(
         title: EzText.simple('Choose a font'),
-        contents: EzFonts.values
-            .map(
-              (EzFonts font) => Column(
-                children: [
-                  // Map font to a selectable button (title == name)
-                  EzButton(
-                    onPressed: () {
-                      EzConfig.preferences
-                          .setString(fontFamilyKey, gStyleName(font));
-                      setState(() {
-                        currFontFamily = gStyle(font).fontFamily!;
-                      });
-                      popScreen(context: context, pass: font);
-                    },
-                    child: EzText.simple(gStyleName(font), style: gStyle(font)),
-                  ),
-                  Container(height: buttonSpacer),
-                ],
-              ),
-            )
-            .toList(),
+        contents: buttons,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return EzScrollView(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
