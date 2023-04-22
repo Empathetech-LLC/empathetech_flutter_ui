@@ -116,7 +116,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [ezDialog] for confirming a reset to [toControl]'s value in [EzConfig.defaults]
+  /// Opens an [EzDialog] for confirming a reset to [toControl]'s value in [EzConfig.defaults]
   /// A preview of the reset color is shown
   /// Returns the [Color.value] of the "reset color" from [EzConfig.defaults] (null otherwise)
   Future<dynamic> _reset() {
