@@ -11,13 +11,23 @@ class EzView extends Container {
   final EdgeInsetsGeometry? padding;
   final Decoration? decoration;
   final Decoration? foregroundDecoration;
+
+  /// Default: [widthOf] context
   final double? width;
+
+  /// Default: [heightOf] context
   final double? height;
+
   final BoxConstraints? constraints;
+
+  /// Default: [EdgeInsets.all] -> [EzConfig.prefs] -> [marginKey]
   final EdgeInsetsGeometry? margin;
+
   final Matrix4? transform;
   final AlignmentGeometry? transformAlignment;
   final Widget child;
+
+  /// Default: [Clip.none]
   final Clip clipBehavior;
 
   /// [Container] wrapper that defaults to max size with a margin from [EzConfig]
