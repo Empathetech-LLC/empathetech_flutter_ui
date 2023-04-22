@@ -124,10 +124,10 @@ class EzConfig {
             ? ThemeMode.light
             : ThemeMode.dark;
 
-    bool? isLefty = preferences.getBool(isLeftyKey);
+    bool? isRight = preferences.getBool(isRightKey);
 
     dominantSide =
-        (isLefty == null || isLefty == false) ? Hand.right : Hand.left;
+        (isRight == null || isRight == true) ? Hand.right : Hand.left;
   }
 }
 
@@ -135,7 +135,7 @@ class EzConfig {
 
 // Shared
 const String isLightKey = 'isLight';
-const String isLeftyKey = 'isLefty';
+const String isRightKey = 'isRight';
 
 const String noImageKey = 'noImage';
 
