@@ -8,6 +8,13 @@ import 'package:flutter/gestures.dart';
 class EzScrollView extends SingleChildScrollView {
   final Key? key;
   final Axis scrollDirection;
+
+  /// Only useful when [scrollDirection] is [Axis.horizontal]
+  /// Will reverse the contents of the [EzScrollView] when [EzConfig.dominantSide]
+  /// is set to [Hand.left] and [reverseHands] is true
+  /// Default: false
+  final bool reverseHands;
+
   final bool reverse;
   final EdgeInsetsGeometry? padding;
   final bool? primary;
@@ -53,6 +60,7 @@ class EzScrollView extends SingleChildScrollView {
     // SingleChildScrollView
     this.key,
     this.scrollDirection = Axis.vertical,
+    this.reverseHands = false,
     this.reverse = false,
     this.padding,
     this.primary,
@@ -85,15 +93,25 @@ class EzScrollView extends SingleChildScrollView {
             verticalDirection: verticalDirection,
             children: children,
           )
-        : Row(
-            mainAxisSize: mainAxisSize,
-            mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            textBaseline: textBaseline,
-            verticalDirection: verticalDirection,
-            children: children,
-          );
+        : (reverseHands && EzConfig.dominantSide == Hand.left)
+            ? Row(
+                mainAxisSize: mainAxisSize,
+                mainAxisAlignment: mainAxisAlignment,
+                crossAxisAlignment: crossAxisAlignment,
+                textDirection: textDirection,
+                textBaseline: textBaseline,
+                verticalDirection: verticalDirection,
+                children: children.reversed.toList(),
+              )
+            : Row(
+                mainAxisSize: mainAxisSize,
+                mainAxisAlignment: mainAxisAlignment,
+                crossAxisAlignment: crossAxisAlignment,
+                textDirection: textDirection,
+                textBaseline: textBaseline,
+                verticalDirection: verticalDirection,
+                children: children,
+              );
   }
 
   @override
