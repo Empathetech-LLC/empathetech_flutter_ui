@@ -14,6 +14,9 @@ class EzShiftingAppBar extends AppBar {
   /// Pass in from [PreferredSize] parent
   final double height;
 
+  /// The point at [width] value where the UI should shift
+  final double threshold;
+
   /// Whether the UI should reverse for an [EzConfig.dominantSide] config of [Hand.left]
   /// Default: true
   final bool reverseHands;
