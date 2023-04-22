@@ -15,44 +15,55 @@ enum ButtonVis {
 
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
+
+  /// [Color] shared by all icons/buttons
   final Color iconColor;
 
+  /// [Color.withOpacity] value that should be used when the player is not in focus
   /// Default: 0.0
   final double hiddenOpacity;
 
-  /// Default:
-  /// const BoxDecoration(color: [Colors.transparent])
+  /// [Container] decoration for the region behind the controls
+  /// Default: [BoxDecoration] -> color: [Colors.transparent]
   final Decoration controlsBackground;
 
+  /// [ButtonVis] for the play/pause buttons
   /// Default: [ButtonVis.auto]
   final ButtonVis playVis;
 
+  /// [ButtonVis] for the volume slider
   /// Default: [ButtonVis.auto]
   final ButtonVis volumeVis;
 
+  /// [ButtonVis] for the replay button
   /// Default: [ButtonVis.auto]
   final ButtonVis replayVis;
 
+  /// [ButtonVis] for the time slider
   /// Default: [ButtonVis.alwaysOff]
-  /// [ButtonVis.alwaysOn] isn't recommended for slider
   final ButtonVis sliderVis;
 
+  /// Whether the video should play on init
   /// Default: true
   final bool autoPlay;
 
+  /// Whether the video should replay upon completion
   /// Default: false
   final bool autoLoop;
 
+  /// What volume the video should start with
   /// Default: 0.0
   final double startingVolume;
 
-  /// Default: 0.0
+  /// [BoxConstraints] maximum width for the play area
+  /// Default: [double.infinity]
   final double maxWidth;
 
-  /// Default: 0.0
+  /// [BoxConstraints] maximum height for the play area
+  /// Default: [double.infinity]
   final double maxHeight;
 
-  /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio], the recommended parent for [VideoPlayer]s
+  /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio] for the [controller]
   /// Also supports tap-to-pause on the main window via [EzMouseDetector]
   /// The visibility of each button can be controlled with [ButtonVis]
   /// Optionally provide a [BoxDecoration] background for the controls region
@@ -364,6 +375,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 }
 
 class VideoSliderTrack extends RoundedRectSliderTrackShape {
+  /// Builds a custom slider track with no padding
   @override
   Rect getPreferredRect({
     required RenderBox parentBox,
