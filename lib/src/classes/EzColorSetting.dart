@@ -174,6 +174,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       scrollDirection: Axis.horizontal,
+      reverseHands: true,
       children: [
         // Color label
         EzText.simple(widget.message),
