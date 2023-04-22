@@ -27,6 +27,11 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: [BoxDecoration] -> color: [Colors.transparent]
   final Decoration controlsBackground;
 
+  /// Whether the position of the button controls should be swapped when
+  /// [EzConfig.dominantSide] is set to [Hand.left]
+  /// Default: true
+  final bool reverseHands;
+
   /// [ButtonVis] for the play/pause buttons
   /// Default: [ButtonVis.auto]
   final ButtonVis playVis;
@@ -75,6 +80,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.iconColor,
     this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
+    this.reverseHands = true,
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
