@@ -17,7 +17,6 @@ export 'EzMouseDetector.dart';
 export 'EzNotifications.dart';
 export 'EzScaffold.dart';
 export 'EzScrollView.dart';
-export 'EzShiftingAppBar.dart';
 export 'EzSliderSetting.dart';
 export 'EzText.dart';
 export 'EzTextStyle.dart';
