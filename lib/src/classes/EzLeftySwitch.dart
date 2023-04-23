@@ -25,7 +25,7 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
       String message = isRight ? 'Right handed' : 'Left handed';
 
       buttons.addAll([
-        EzText(message),
+        ezText(message),
         Container(width: buttonSpacer),
         PlatformSwitch(
           value: isRight,

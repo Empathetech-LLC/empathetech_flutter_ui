@@ -15,7 +15,6 @@ export 'EzNotifications.dart';
 export 'EzRichText.dart';
 export 'EzScrollView.dart';
 export 'EzSliderSetting.dart';
-export 'EzText.dart';
 export 'EzTextStyle.dart';
 export 'EzThemeModeSwitch.dart';
 export 'EzVideoPlayer.dart';

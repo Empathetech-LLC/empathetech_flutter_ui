@@ -5,6 +5,13 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
+EzRichText ezText(
+  String text, {
+  TextStyle? style,
+}) {
+  return EzRichText(TextSpan(text: text), style: style);
+}
+
 class EzRichText extends SelectableText {
   final TextSpan textSpan;
   final Key? key;

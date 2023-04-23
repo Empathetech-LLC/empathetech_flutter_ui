@@ -28,7 +28,7 @@ Future<dynamic> ezColorPicker({
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: EzText('Pick a color!'),
+      title: ezText('Pick a color!'),
       contents: [
         // Color picker
         ColorPicker(
@@ -40,14 +40,14 @@ Future<dynamic> ezColorPicker({
         // Apply
         EzButton(
           onPressed: apply,
-          child: EzText('Apply'),
+          child: ezText('Apply'),
         ),
         Container(height: EzConfig.prefs[dialogSpacingKey]),
 
         // Cancel
         EzButton(
           onPressed: cancel,
-          child: EzText('Cancel'),
+          child: ezText('Cancel'),
         ),
       ],
       needsClose: false,

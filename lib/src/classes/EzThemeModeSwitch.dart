@@ -23,7 +23,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     List<Widget> _buildButtons() {
       // Use system theme?
       List<Widget> buttons = [
-        EzText('Use system setting?'),
+        ezText('Use system setting?'),
         Container(width: buttonSpacer),
         Checkbox(
           value: useSystem,
@@ -53,7 +53,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         String message = (isLight) ? 'Light' : 'Dark';
 
         buttons.addAll([
-          EzText(message),
+          ezText(message),
           Container(width: buttonSpacer),
           PlatformSwitch(
             value: isLight,

@@ -75,7 +75,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: EzText('File'),
+        label: ezText('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
@@ -91,7 +91,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: EzText('Camera'),
+        label: ezText('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
@@ -104,7 +104,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           EzConfig.preferences.remove(widget.prefsKey);
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
-        label: EzText('Reset'),
+        label: ezText('Reset'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -119,7 +119,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
             popScreen(context: context, pass: noImageKey);
           },
-          label: EzText('Clear'),
+          label: ezText('Clear'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -127,7 +127,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText('Update $title'),
+        title: ezText('Update $title'),
         contents: options,
       ),
     );
@@ -149,8 +149,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       onLongPress: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText('Credit to:'),
-          contents: [EzText(widget.credits)],
+          title: ezText('Credit to:'),
+          contents: [ezText(widget.credits)],
         ),
       ),
 
@@ -160,7 +160,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          EzText(title),
+          ezText(title),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest

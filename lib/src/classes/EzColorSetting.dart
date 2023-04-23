@@ -71,7 +71,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText('Use recommended?'),
+          title: ezText('Use recommended?'),
           contents: [
             // Recommended preview
             Container(
@@ -93,7 +93,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 });
                 popScreen(context: context, pass: recommended);
               },
-              label: EzText('Yes'),
+              label: ezText('Yes'),
               icon: Icon(PlatformIcons(context).checkMark),
             ),
             Container(height: buttonSpacer),
@@ -105,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 popScreen(context: context, pass: chosen);
               },
               icon: Icon(PlatformIcons(context).edit),
-              label: EzText('Use custom'),
+              label: ezText('Use custom'),
             ),
           ],
           needsClose: true,
@@ -126,7 +126,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText('Reset to...'),
+        title: ezText('Reset to...'),
         contents: [
           // Color preview
           Container(
@@ -151,7 +151,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               popScreen(context: context, pass: resetColor);
             },
-            label: EzText('Yes'),
+            label: ezText('Yes'),
             icon: Icon(PlatformIcons(context).checkMark),
           ),
           Container(height: dialogSpacer),
@@ -160,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           EzButton.icon(
             onPressed: () => popScreen(context: context),
             icon: Icon(PlatformIcons(context).edit),
-            label: EzText('Use custom'),
+            label: ezText('Use custom'),
           ),
         ],
         needsClose: false,
@@ -177,7 +177,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       reverseHands: true,
       children: [
         // Color label
-        EzText(widget.message),
+        ezText(widget.message),
 
         // Color preview/edit button
         EzButton(
