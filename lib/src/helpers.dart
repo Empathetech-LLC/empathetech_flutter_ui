@@ -15,6 +15,11 @@ void closeFocus() {
   EzConfig.focus.primaryFocus?.unfocus();
 }
 
+/// More readable than Theme.of(context).brightness == Brightness.light
+bool isLightTheme(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.light;
+}
+
 /// More readable than MediaQuery.of(context).size.width
 double widthOf(BuildContext context) {
   return MediaQuery.of(context).size.width;
