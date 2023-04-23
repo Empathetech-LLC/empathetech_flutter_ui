@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
   /// Standardized tool for optionally overwriting [ThemeMode.system] via [EzConfig]
@@ -14,68 +13,54 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  bool useSystem = true;
+  ThemeMode _currentThemeMode = EzConfig.themeMode;
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+    List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
+      return [
+        DropdownMenuItem<ThemeMode>(
+          child: ezText('System'),
+          value: ThemeMode.system,
+        ),
+        DropdownMenuItem<ThemeMode>(
+          child: ezText('Light'),
+          value: ThemeMode.light,
+        ),
+        DropdownMenuItem<ThemeMode>(
+          child: ezText('Dark'),
+          value: ThemeMode.dark,
+        ),
+      ];
+    }
 
-    List<Widget> _buildButtons() {
-      // Use system theme?
-      List<Widget> buttons = [
-        ezText('Use system setting?'),
-        Container(width: buttonSpacer),
-        Checkbox(
-          value: useSystem,
-          onChanged: (bool? changedTo) {
-            if (changedTo == true) {
-              EzConfig.preferences.remove(isLightKey);
+    return EzScrollView(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      scrollDirection: Axis.horizontal,
+      reverseHands: true,
+      children: [
+        ezText('Theme mode'),
+        DropdownButton<ThemeMode>(
+          value: _currentThemeMode,
+          items: _themeModeItems(),
+          onChanged: (ThemeMode? newThemeMode) {
+            if (newThemeMode != null) {
+              if (newThemeMode == ThemeMode.system) {
+                EzConfig.preferences.remove(isLightKey);
+              } else {
+                bool isLight = newThemeMode == ThemeMode.light;
+                EzConfig.preferences.setBool(isLightKey, isLight);
+              }
+
               setState(() {
-                useSystem = true;
-              });
-            } else {
-              bool isLight = (ThemeMode.system == ThemeMode.light);
-
-              EzConfig.preferences.setBool(isLightKey, isLight);
-
-              setState(() {
-                useSystem = false;
-                EzConfig.themeMode = ThemeMode.system;
+                _currentThemeMode = newThemeMode;
+                EzConfig.themeMode = newThemeMode;
               });
             }
           },
         ),
-      ];
-
-      // Light/dark switch
-      if (!useSystem) {
-        bool isLight = (EzConfig.themeMode == ThemeMode.light);
-        String message = (isLight) ? 'Light' : 'Dark';
-
-        buttons.addAll([
-          ezText(message),
-          Container(width: buttonSpacer),
-          PlatformSwitch(
-            value: isLight,
-            onChanged: (bool on) {
-              EzConfig.preferences.setBool(isLightKey, on);
-
-              setState(() {
-                EzConfig.themeMode = (on) ? ThemeMode.light : ThemeMode.dark;
-              });
-            },
-          )
-        ]);
-      }
-      return buttons;
-    }
-
-    return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      scrollDirection: Axis.horizontal,
-      reverseHands: true,
-      children: _buildButtons(),
+      ],
     );
   }
 }
