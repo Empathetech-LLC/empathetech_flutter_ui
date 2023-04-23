@@ -1,5 +1,7 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,7 +39,7 @@ class EzConfig {
     marginKey: 15.0,
     paddingKey: 12.5,
 
-    fontFamilyKey: 'Roboto',
+    fontFamilyKey: roboto,
     fontScalarKey: 1,
 
     alertColorKey:

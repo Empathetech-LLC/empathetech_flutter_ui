@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 class EzFontSetting extends StatefulWidget {
   /// Standardized tool for updating the [fontFamilyKey] in [EzConfig.prefs]
-  /// [EzFontSetting] options are built from [EzFonts]
+  /// [EzFontSetting] options are built from [googleStyles]
   EzFontSetting({Key? key}) : super(key: key);
 
   @override
@@ -20,23 +20,23 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  /// Builds an [EzDialog] from mapping [EzFonts] to a list of [EzButton]s
+  /// Builds an [EzDialog] from mapping [googleStyles] to a list of [EzButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
     List<Widget> buttons = [];
 
-    EzFonts.values.forEach((font) {
+    googleStyles.forEach((String font, TextStyle style) {
       buttons.addAll([
         // Map font to a selectable button (title == name)
         EzButton(
           onPressed: () {
-            EzConfig.preferences.setString(fontFamilyKey, gStyleName(font));
+            EzConfig.preferences.setString(fontFamilyKey, font);
             setState(() {
-              currFontFamily = gStyle(font).fontFamily!;
+              currFontFamily = style.fontFamily!;
             });
             popScreen(context: context, pass: font);
           },
-          child: EzText.simple(gStyleName(font), style: gStyle(font)),
+          child: EzText.simple(font, style: style),
         ),
         Container(height: buttonSpacer),
       ]);

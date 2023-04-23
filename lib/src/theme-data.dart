@@ -135,7 +135,8 @@ ThemeData ezThemeData({
     shadowColor: shadowColor,
     splashColor: splashColor,
     unselectedWidgetColor: unselectedWidgetColor,
-    fontFamily: fontFamily ?? gStyle(EzConfig.prefs[fontFamilyKey]).fontFamily,
+    fontFamily:
+        fontFamily ?? googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
     fontFamilyFallback: fontFamilyFallback,
     package: package,
     iconTheme: iconTheme ?? IconThemeData(color: themeTextColor),

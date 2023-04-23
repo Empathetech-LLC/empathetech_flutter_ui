@@ -35,7 +35,7 @@ class EzTextStyle extends TextStyle {
   final double? decorationThickness;
   final String? debugLabel;
 
-  /// Default: [gStyle] -> [EzConfig.prefs] -> [fontFamilyKey].fontFamily
+  /// Default: [googleStyles] -> [EzConfig.prefs] -> [fontFamilyKey].fontFamily
   final String? fontFamily;
 
   final List<String>? fontFamilyFallback;
@@ -94,8 +94,8 @@ class EzTextStyle extends TextStyle {
           decorationStyle: decorationStyle,
           decorationThickness: decorationThickness,
           debugLabel: debugLabel,
-          fontFamily:
-              fontFamily ?? gStyle(EzConfig.prefs[fontFamilyKey]).fontFamily,
+          fontFamily: fontFamily ??
+              googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
           fontFamilyFallback: fontFamilyFallback,
           package: package,
           overflow: overflow,
