@@ -34,7 +34,7 @@ class EzScaffold extends Scaffold {
   final Widget? bottomSheet;
 
   /// [BoxDecoration] for the [Container] used in the [body] wrapper
-  final BoxDecoration background;
+  final BoxDecoration? decoration;
 
   final bool? resizeToAvoidBottomInset;
 
@@ -77,7 +77,7 @@ class EzScaffold extends Scaffold {
     this.onEndDrawerChanged,
     this.bottomNavigationBar,
     this.bottomSheet,
-    required this.background,
+    this.decoration,
     this.resizeToAvoidBottomInset,
     this.primary = true,
     this.extendBody = false,
@@ -95,7 +95,7 @@ class EzScaffold extends Scaffold {
           endDrawer: endDrawer,
           onEndDrawerChanged: onEndDrawerChanged,
           body: Container(
-            decoration: background,
+            decoration: decoration,
             child: GestureDetector(
               onTap: closeFocus,
               child: body,
