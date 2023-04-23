@@ -48,6 +48,10 @@ class EzVideoPlayer extends StatefulWidget {
   /// Default: [ButtonVis.alwaysOff]
   final ButtonVis sliderVis;
 
+  /// Whether buttons set to [ButtonVis.auto] should always show when the video is paused
+  /// Default: false
+  final bool showOnPause;
+
   /// Whether the video should play on init
   /// Default: true
   final bool autoPlay;
@@ -85,6 +89,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
     this.sliderVis = ButtonVis.alwaysOff,
+    this.showOnPause = false,
     this.autoPlay = true,
     this.autoLoop = false,
     this.startingVolume = 0.0,
@@ -191,7 +196,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case ButtonVis.alwaysOn:
         return showing;
       case ButtonVis.auto:
-        return (!widget.controller.value.isPlaying || show) ? showing : hiding;
+        return (show)
+            ? showing
+            : (widget.showOnPause && !widget.controller.value.isPlaying)
+                ? showing
+                : hiding;
     }
   }
 
