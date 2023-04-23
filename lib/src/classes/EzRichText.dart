@@ -1,4 +1,3 @@
-
 library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -101,7 +100,7 @@ class EzRichText extends SelectableText {
         );
 
   /// Quickly build a [TextSpan] with a [TapGestureRecognizer] to run [action]
-  TextSpan link({
+  static TextSpan link({
     required String text,
     required void Function() action,
     TextStyle? style,
@@ -126,7 +125,7 @@ class EzRichText extends SelectableText {
   }
 
   /// Quickly build a [TextSpan] with a [TapGestureRecognizer] to [openLink] the [url]
-  TextSpan webLink({
+  static TextSpan webLink({
     required String text,
     required Uri url,
     TextStyle? style,
