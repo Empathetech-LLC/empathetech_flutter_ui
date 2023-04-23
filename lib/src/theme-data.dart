@@ -146,7 +146,8 @@ ThemeData ezThemeData({
     typography: typography,
     appBarTheme: appBarTheme ??
         AppBarTheme(
-          backgroundColor: themeColor,
+          color: Colors.red,
+          foregroundColor: Colors.red,
           iconTheme: IconThemeData(color: themeTextColor),
         ),
     badgeTheme: badgeTheme,
