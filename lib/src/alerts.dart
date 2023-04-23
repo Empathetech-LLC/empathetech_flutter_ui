@@ -15,9 +15,9 @@ Future<dynamic> logAlert(
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: EzText.simple('Attention:'),
+      title: EzText('Attention:'),
       contents: [
-        EzText.simple(message),
+        EzText(message),
       ],
     ),
   );
@@ -48,14 +48,14 @@ Card warningCard({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(Icons.warning, color: iconColor),
-              EzText.simple('WARNING'),
+              EzText('WARNING'),
               Icon(Icons.warning, color: iconColor),
             ],
           ),
           Container(height: padding),
 
           // Label
-          EzText.simple(warning),
+          EzText(warning),
         ],
       ),
     ),

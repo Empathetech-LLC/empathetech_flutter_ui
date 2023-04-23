@@ -77,7 +77,7 @@ class EzDialog extends PlatformAlertDialog {
             ? [
                 GestureDetector(
                   onTap: () => popScreen(context: context),
-                  child: EzText.simple('Close'),
+                  child: EzText('Close'),
                 ),
               ]
             : [],

@@ -64,7 +64,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           EzButton(
             onPressed: doNothing,
-            child: EzText.simple('Currently: $currValue'),
+            child: EzText('Currently: $currValue'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -80,7 +80,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             scrollDirection: Axis.horizontal,
             children: [
-              EzText.simple('Currently:\n$currValue\n\n(to scale)'),
+              EzText('Currently:\n$currValue\n\n(to scale)'),
               Container(
                 height: 160.0,
                 width: 90.0,
@@ -98,7 +98,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             onPressed: doNothing,
             child: Padding(
               padding: EdgeInsets.all(currValue),
-              child: EzText.simple('Currently: $currValue'),
+              child: EzText('Currently: $currValue'),
             ),
             style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
           ),
@@ -112,12 +112,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               EzButton(
                 onPressed: doNothing,
-                child: EzText.simple('Currently: $currValue'),
+                child: EzText('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
               EzButton(
                 onPressed: doNothing,
-                child: EzText.simple('Currently: $currValue'),
+                child: EzText('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
             ],
@@ -129,7 +129,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           EzButton(
             onPressed: doNothing,
-            child: EzText.simple('Currently: $currValue'),
+            child: EzText('Currently: $currValue'),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(widthOf(context), currValue),
             ),
@@ -144,25 +144,25 @@ class _SliderSettingState extends State<EzSliderSetting> {
             onPressed: () => openDialog(
               context: context,
               dialog: EzDialog(
-                title: EzText.simple('Space preview'),
+                title: EzText('Space preview'),
                 contents: [
                   // Button 1
                   EzButton(
                     onPressed: doNothing,
-                    child: EzText.simple('Currently: $currValue'),
+                    child: EzText('Currently: $currValue'),
                   ),
                   Container(height: currValue),
 
                   // Button 2
                   EzButton(
                     onPressed: doNothing,
-                    child: EzText.simple('Currently: $currValue'),
+                    child: EzText('Currently: $currValue'),
                   ),
                   Container(height: currValue),
                 ],
               ),
             ),
-            child: EzText.simple('Press me'),
+            child: EzText('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -175,7 +175,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzButton.icon]
   List<Widget> buildList() {
-    List<Widget> toReturn = [EzText.simple(widget.title)];
+    List<Widget> toReturn = [EzText(widget.title)];
 
     toReturn.addAll(_buildPreview());
 
@@ -217,8 +217,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: EzText.simple(
-            'Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
+        label:
+            EzText('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
     ]);
 

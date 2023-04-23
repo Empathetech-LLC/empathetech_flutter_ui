@@ -75,7 +75,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: EzText.simple('File'),
+        label: EzText('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
@@ -91,7 +91,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: EzText.simple('Camera'),
+        label: EzText('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
@@ -104,7 +104,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           EzConfig.preferences.remove(widget.prefsKey);
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
-        label: EzText.simple('Reset'),
+        label: EzText('Reset'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -119,7 +119,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
             popScreen(context: context, pass: noImageKey);
           },
-          label: EzText.simple('Clear'),
+          label: EzText('Clear'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -127,7 +127,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText.simple('Update $title'),
+        title: EzText('Update $title'),
         contents: options,
       ),
     );
@@ -149,8 +149,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       onLongPress: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText.simple('Credit to:'),
-          contents: [EzText.simple(widget.credits)],
+          title: EzText('Credit to:'),
+          contents: [EzText(widget.credits)],
         ),
       ),
 
@@ -160,7 +160,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          EzText.simple(title),
+          EzText(title),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest

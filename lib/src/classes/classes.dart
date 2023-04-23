@@ -19,6 +19,7 @@ export 'EzScaffold.dart';
 export 'EzScrollView.dart';
 export 'EzSliderSetting.dart';
 export 'EzText.dart';
+export 'EzTextSpan.dart';
 export 'EzTextStyle.dart';
 export 'EzThemeModeSwitch.dart';
 export 'EzVideoPlayer.dart';
