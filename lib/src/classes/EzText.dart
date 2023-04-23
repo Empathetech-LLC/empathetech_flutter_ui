@@ -286,8 +286,8 @@ class EzText extends SelectableText {
     required String base,
     required List<Map<String, Uri>> links,
     TextAlign textAlign = TextAlign.center,
-    required TextStyle style,
-    required TextStyle linkStyle,
+    TextStyle? textStyle,
+    TextStyle? linkStyle,
   }) {
     List<TextSpan> textSpans = [];
     int currentIndex = 0;
@@ -301,7 +301,7 @@ class EzText extends SelectableText {
         textSpans.add(
           TextSpan(
             text: base.substring(currentIndex, linkPosition),
-            style: style,
+            style: textStyle,
           ),
         );
 
@@ -323,7 +323,7 @@ class EzText extends SelectableText {
       textSpans.add(
         TextSpan(
           text: base.substring(currentIndex),
-          style: style,
+          style: textStyle,
         ),
       );
     }
@@ -341,8 +341,8 @@ class EzText extends SelectableText {
     required String base,
     required List<Map<String, Uri>> links,
     TextAlign textAlign = TextAlign.center,
-    required TextStyle style,
-    required TextStyle linkStyle,
+    TextStyle? style,
+    TextStyle? linkStyle,
     Key? key,
     FocusNode? focusNode,
     StrutStyle? strutStyle,
@@ -370,7 +370,7 @@ class EzText extends SelectableText {
             base: base,
             links: links,
             textAlign: textAlign,
-            style: style,
+            textStyle: style,
             linkStyle: linkStyle,
           ),
           key: key,
