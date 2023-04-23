@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
@@ -16,8 +17,10 @@ void closeFocus() {
 }
 
 /// More readable than Theme.of(context).brightness == Brightness.light
-bool isLightTheme(BuildContext context) {
-  return Theme.of(context).brightness == Brightness.light;
+bool isLightTheme() {
+  var brightness =
+      SchedulerBinding.instance.platformDispatcher.platformBrightness;
+  return brightness == Brightness.light;
 }
 
 /// More readable than MediaQuery.of(context).size.width
