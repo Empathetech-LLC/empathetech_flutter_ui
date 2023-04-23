@@ -1,3 +1,4 @@
+
 library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -5,7 +6,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzTextSpan extends SelectableText {
+class EzRichText extends SelectableText {
   final TextSpan textSpan;
   final Key? key;
   final FocusNode? focusNode;
@@ -45,7 +46,7 @@ class EzTextSpan extends SelectableText {
   final TextMagnifierConfiguration? magnifierConfiguration;
 
   /// Builds a [SelectableText.rich] with styling from [EzConfig]
-  EzTextSpan(
+  EzRichText(
     this.textSpan, {
     this.key,
     this.focusNode,
