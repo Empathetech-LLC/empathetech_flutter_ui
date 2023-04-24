@@ -76,6 +76,7 @@ ThemeData ezThemeData({required bool light}) {
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
         textStyle: buttonTextStyle,
+        alignment: Alignment.center,
         padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
       ),
     ),
