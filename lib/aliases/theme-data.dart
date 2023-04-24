@@ -20,7 +20,7 @@ ThemeData ezThemeData({required bool light}) {
   Color buttonTextColor = Color(
       EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  TextStyle headlineLargeStyle = headlineLarge(themeTextColor);
+  TextStyle headlineLargeStyle = buildHeadlineLarge(themeTextColor);
   IconThemeData headlineLargeIcons = IconThemeData(
     color: themeTextColor,
     size: headlineLargeStyle.fontSize,
