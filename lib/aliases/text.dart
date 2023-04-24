@@ -5,21 +5,80 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
+/// Simplified alias for [SelectableText]
+/// Defaults to [enableInteractiveSelection] && [TextAlign.center]
 SelectableText ezText(
   String text, {
   TextStyle? style,
+  TextAlign? textAlign = TextAlign.center,
+  TextDirection? textDirection,
+  double? textScaleFactor,
+  int? minLines,
+  int? maxLines,
+  bool enableInteractiveSelection = true,
+  TextSelectionControls? selectionControls,
+  void Function()? onTap,
 }) {
-  return SelectableText.rich(TextSpan(text: text), style: style);
+  return SelectableText(
+    text,
+    style: style,
+    textAlign: textAlign,
+    textDirection: textDirection,
+    textScaleFactor: textScaleFactor,
+    minLines: minLines,
+    maxLines: maxLines,
+    enableInteractiveSelection: enableInteractiveSelection,
+    selectionControls: selectionControls,
+    onTap: onTap,
+  );
 }
 
-SelectableText ezTextSpan({
-  TextSpan? span,
-  List<InlineSpan>? children,
+/// Simplified alias for [SelectableText.rich]
+/// Defaults to [enableInteractiveSelection] && [TextAlign.center]
+SelectableText ezRichText(
+  TextSpan span, {
   TextStyle? style,
+  TextAlign? textAlign = TextAlign.center,
+  TextDirection? textDirection,
+  double? textScaleFactor,
+  int? minLines,
+  int? maxLines,
+  bool enableInteractiveSelection = true,
+  TextSelectionControls? selectionControls,
+  void Function()? onTap,
 }) {
   return SelectableText.rich(
-    span ?? TextSpan(children: children),
+    span,
     style: style,
+    textAlign: textAlign,
+    textDirection: textDirection,
+    textScaleFactor: textScaleFactor,
+    minLines: minLines,
+    maxLines: maxLines,
+    enableInteractiveSelection: enableInteractiveSelection,
+    selectionControls: selectionControls,
+    onTap: onTap,
+  );
+}
+
+/// Simplified alias for [TextSpan]
+TextSpan ezTextSpan({
+  String? text,
+  List<InlineSpan>? children,
+  TextStyle? style,
+  GestureRecognizer? recognizer,
+  MouseCursor? mouseCursor,
+  void Function(PointerEnterEvent)? onEnter,
+  void Function(PointerExitEvent)? onExit,
+}) {
+  return TextSpan(
+    text: text,
+    children: children,
+    style: style,
+    recognizer: recognizer,
+    mouseCursor: mouseCursor,
+    onEnter: onEnter,
+    onExit: onExit,
   );
 }
 
@@ -31,20 +90,14 @@ TextSpan ezLink({
   MouseCursor? mouseCursor,
   void Function(PointerEnterEvent)? onEnter,
   void Function(PointerExitEvent)? onExit,
-  String? semanticsLabel,
-  Locale? locale,
-  bool? spellOut,
 }) {
-  return TextSpan(
+  return ezTextSpan(
     text: text,
     recognizer: TapGestureRecognizer()..onTap = action,
     style: style,
     mouseCursor: mouseCursor,
     onEnter: onEnter,
     onExit: onExit,
-    semanticsLabel: semanticsLabel,
-    locale: locale,
-    spellOut: spellOut,
   );
 }
 
@@ -56,19 +109,13 @@ TextSpan ezWebLink({
   MouseCursor? mouseCursor,
   void Function(PointerEnterEvent)? onEnter,
   void Function(PointerExitEvent)? onExit,
-  String? semanticsLabel,
-  Locale? locale,
-  bool? spellOut,
 }) {
-  return TextSpan(
+  return ezTextSpan(
     text: text,
     recognizer: TapGestureRecognizer()..onTap = () => openLink(url),
     style: style,
     mouseCursor: mouseCursor,
     onEnter: onEnter,
     onExit: onExit,
-    semanticsLabel: semanticsLabel,
-    locale: locale,
-    spellOut: spellOut,
   );
 }
