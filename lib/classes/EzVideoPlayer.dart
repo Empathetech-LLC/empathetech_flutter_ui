@@ -63,7 +63,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
-    this.sliderVis = ButtonVis.alwaysOff,
+    this.sliderVis = ButtonVis.auto,
     this.showOnPause = false,
     this.autoPlay = true,
     this.autoLoop = false,
