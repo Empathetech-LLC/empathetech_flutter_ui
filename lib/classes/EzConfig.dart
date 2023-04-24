@@ -36,7 +36,8 @@ class EzConfig {
   /// [ThemeMode.system] wrapper that allows for overwrite
   static late ThemeMode themeMode;
 
-  /// []
+  /// Keeps track of the app-wide text scalar
+  static double fontScalar = 1.0;
 
   /// What side of the screen touch points should be on
   static late Hand dominantSide;
@@ -47,7 +48,6 @@ class EzConfig {
     paddingKey: 12.5,
 
     fontFamilyKey: roboto,
-    fontScalarKey: 1,
 
     alertColorKey:
         0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
@@ -126,6 +126,7 @@ class EzConfig {
     focus = FocusManager.instance;
 
     // Initialize theme //
+
     bool? isLight = preferences.getBool(isLightKey);
     themeMode = (isLight == null)
         ? ThemeMode.system
@@ -137,6 +138,9 @@ class EzConfig {
 
     dominantSide =
         (isRight == null || isRight == true) ? Hand.right : Hand.left;
+
+    double? storedScalar = preferences.getDouble(fontScalarKey);
+    if (storedScalar != null) EzConfig.fontScalar = storedScalar;
   }
 }
 
