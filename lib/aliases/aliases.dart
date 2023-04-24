@@ -5,5 +5,5 @@ export 'dialogs.dart';
 export 'google-fonts.dart';
 export 'media-queries.dart';
 export 'navigators.dart';
-export 'text-themes.dart';
+export 'text-data.dart';
 export 'theme-data.dart';
