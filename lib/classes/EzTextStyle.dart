@@ -46,7 +46,7 @@ class EzTextStyle extends TextStyle {
     this.wordSpacing = 1.375,
     this.textBaseline,
     this.height = 1.625,
-    this.leadingDistribution,
+    this.leadingDistribution = TextLeadingDistribution.even,
     this.locale,
     this.foreground,
     this.background,
