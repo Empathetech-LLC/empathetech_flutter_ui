@@ -3,8 +3,21 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+
+SelectableText ezText(
+  String text, {
+  TextStyle? style,
+}) {
+  return SelectableText.rich(TextSpan(text: text), style: style);
+}
+
+SelectableText ezTextSpan(
+  TextSpan text, {
+  TextStyle? style,
+}) {
+  return SelectableText.rich(text, style: style);
+}
 
 /// Quickly build a [TextSpan] with a [TapGestureRecognizer] to run [action]
 TextSpan link({

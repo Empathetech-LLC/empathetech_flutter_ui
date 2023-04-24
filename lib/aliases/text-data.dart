@@ -5,13 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-SelectableText ezText(
-  String text, {
-  TextStyle? style,
-}) {
-  return SelectableText.rich(TextSpan(text: text), style: style);
-}
-
 TextStyle displayLarge(Color color) {
   return EzTextStyle(
     fontSize: 58 * EzConfig.fontScalar,
