@@ -28,6 +28,8 @@ ThemeData ezThemeData({required bool light}) {
     size: appBarTextStyle.fontSize,
   );
 
+  TextStyle buttonTextStyle = buildBodyMedium(buttonTextColor);
+
   return ThemeData(
     // General colors
     dividerColor: themeTextColor,
@@ -63,6 +65,15 @@ ThemeData ezThemeData({required bool light}) {
       selectedIconTheme: IconThemeData(color: buttonColor),
       unselectedItemColor: themeTextColor,
       unselectedIconTheme: IconThemeData(color: themeTextColor),
+    ),
+
+    // Buttons
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: buttonColor,
+        textStyle: buttonTextStyle,
+        padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
+      ),
     ),
 
     // Checkbox
