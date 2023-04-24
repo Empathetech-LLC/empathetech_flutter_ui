@@ -12,15 +12,19 @@ SelectableText ezText(
   return SelectableText.rich(TextSpan(text: text), style: style);
 }
 
-SelectableText ezTextSpan(
-  TextSpan text, {
+SelectableText ezTextSpan({
+  TextSpan? span,
+  List<InlineSpan>? children,
   TextStyle? style,
 }) {
-  return SelectableText.rich(text, style: style);
+  return SelectableText.rich(
+    span ?? TextSpan(children: children),
+    style: style,
+  );
 }
 
 /// Quickly build a [TextSpan] with a [TapGestureRecognizer] to run [action]
-TextSpan link({
+TextSpan ezLink({
   required String text,
   required void Function() action,
   TextStyle? style,
@@ -45,7 +49,7 @@ TextSpan link({
 }
 
 /// Quickly build a [TextSpan] with a [TapGestureRecognizer] to [openLink] the [url]
-TextSpan webLink({
+TextSpan ezWebLink({
   required String text,
   required Uri url,
   TextStyle? style,
