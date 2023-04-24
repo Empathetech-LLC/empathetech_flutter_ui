@@ -53,8 +53,8 @@ class EzConfig {
         0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
     lightButtonColorKey:
         0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
-    lightButtonTextColorKey: 0xFF000000, // Black text
-    darkButtonColorKey: 0xE620DAA5, // Same as light by default
+    lightButtonTextColorKey: 0xFF000000, // Black
+    darkButtonColorKey: 0xE620DAA5,
     darkButtonTextColorKey: 0xFF000000,
 
     buttonSpacingKey: 35.0,
@@ -64,14 +64,16 @@ class EzConfig {
     // Light theme //
     lightBackgroundImageKey: null,
     lightBackgroundColorKey: 0xFFF5F5F5, // Almost white
+    lightBackgroundTextColorKey: 0xFF000000,
     lightThemeColorKey: 0xFFFFFFFF, // White
-    lightThemeTextColorKey: 0xFF000000, // Black
+    lightThemeTextColorKey: 0xFF000000,
 
     // Dark theme //
     darkBackgroundImageKey: null,
     darkBackgroundColorKey: 0xFF0A0A0A, // Almost black
+    darkBackgroundTextColorKey: 0xFFFFFFFF,
     darkThemeColorKey: 0xFF000000, // Black
-    darkThemeTextColorKey: 0xFFFFFFFF, // White
+    darkThemeTextColorKey: 0xFFFFFFFF,
   };
 
   /// Populate [EzConfig.prefs], overwriting defaults whenever a user value is found
@@ -167,6 +169,7 @@ const String paragraphSpacingKey = 'paragraphSpacing';
 // Light theme
 const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String lightBackgroundColorKey = 'lightBackgroundColor';
+const String lightBackgroundTextColorKey = 'lightBackgroundTextColor';
 const String lightThemeColorKey = 'lightThemeColor';
 const String lightThemeTextColorKey = 'lightThemeTextColor';
 const String lightButtonColorKey = 'lightButtonColor';
@@ -175,6 +178,7 @@ const String lightButtonTextColorKey = 'lightButtonTextColor';
 // Dark theme
 const String darkBackgroundImageKey = 'darkBackgroundImage';
 const String darkBackgroundColorKey = 'darkBackgroundColor';
+const String darkBackgroundTextColorKey = 'darkBackgroundTextColor';
 const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
 const String darkButtonColorKey = 'darkButtonColor';
