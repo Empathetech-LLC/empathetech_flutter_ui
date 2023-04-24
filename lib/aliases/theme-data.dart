@@ -14,16 +14,18 @@ ThemeData ezThemeData({required bool light}) {
 
   Color backgroundColor = Color(
       EzConfig.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
+  Color backgroundTextColor = Color(EzConfig
+      .prefs[light ? lightBackgroundTextColorKey : darkBackgroundTextColorKey]);
 
   Color buttonColor =
       Color(EzConfig.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
   Color buttonTextColor = Color(
       EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  TextStyle headlineLargeStyle = buildHeadlineLarge(themeTextColor);
-  IconThemeData headlineLargeIcons = IconThemeData(
+  TextStyle appBarTextStyle = buildHeadlineLarge(themeTextColor);
+  IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
-    size: headlineLargeStyle.fontSize,
+    size: appBarTextStyle.fontSize,
   );
 
   return ThemeData(
@@ -39,15 +41,15 @@ ThemeData ezThemeData({required bool light}) {
     fontFamily: googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
     iconTheme: IconThemeData(color: themeTextColor),
     primaryIconTheme: IconThemeData(color: themeTextColor),
-    primaryTextTheme: materialTextTheme(themeTextColor),
-    textTheme: materialTextTheme(themeTextColor),
+    primaryTextTheme: materialTextTheme(backgroundTextColor),
+    textTheme: materialTextTheme(backgroundTextColor),
 
     // AppBar
     appBarTheme: AppBarTheme(
       color: themeColor,
-      iconTheme: headlineLargeIcons,
-      actionsIconTheme: headlineLargeIcons,
-      titleTextStyle: headlineLargeStyle,
+      iconTheme: appBarIconData,
+      actionsIconTheme: appBarIconData,
+      titleTextStyle: appBarTextStyle,
     ),
 
     // Drawer
