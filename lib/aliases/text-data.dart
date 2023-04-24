@@ -5,6 +5,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+// Default sizes taken from
+// https://api.flutter.dev/flutter/material/TextTheme-class.html
+
 TextStyle buildDisplayLarge(Color color) {
   return EzTextStyle(
     fontSize: 58 * EzConfig.fontScalar,
