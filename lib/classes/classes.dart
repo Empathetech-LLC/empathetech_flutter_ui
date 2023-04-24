@@ -1,4 +1,3 @@
-
 library empathetech_flutter_ui;
 
 export 'EzButton.dart';
@@ -12,7 +11,6 @@ export 'EzImageSetting.dart';
 export 'EzLeftySwitch.dart';
 export 'EzMouseDetector.dart';
 export 'EzNotifications.dart';
-export 'EzRichText.dart';
 export 'EzScrollView.dart';
 export 'EzSliderSetting.dart';
 export 'EzTextStyle.dart';
