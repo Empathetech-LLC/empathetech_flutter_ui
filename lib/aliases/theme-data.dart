@@ -22,13 +22,17 @@ ThemeData ezThemeData({required bool light}) {
   Color buttonTextColor = Color(
       EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  TextStyle appBarTextStyle = buildHeadlineLarge(themeTextColor);
+  TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
     size: appBarTextStyle.fontSize,
   );
 
-  TextStyle buttonTextStyle = buildBodyMedium(buttonTextColor);
+  TextStyle buttonTextStyle = buildHeadlineMedium(buttonTextColor);
+  IconThemeData buttonIconData = IconThemeData(
+    color: buttonTextColor,
+    size: buttonTextStyle.fontSize,
+  );
 
   return ThemeData(
     // General colors
@@ -41,8 +45,8 @@ ThemeData ezThemeData({required bool light}) {
 
     // Text && icons
     fontFamily: googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
-    iconTheme: IconThemeData(color: themeTextColor),
-    primaryIconTheme: IconThemeData(color: themeTextColor),
+    iconTheme: buttonIconData,
+    primaryIconTheme: buttonIconData,
     primaryTextTheme: materialTextTheme(backgroundTextColor),
     textTheme: materialTextTheme(backgroundTextColor),
 
