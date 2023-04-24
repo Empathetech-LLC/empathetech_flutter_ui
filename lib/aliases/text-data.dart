@@ -5,129 +5,189 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-TextStyle displayLarge(Color color) {
+TextStyle buildDisplayLarge(Color color) {
   return EzTextStyle(
     fontSize: 58 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle displayMedium(Color color) {
+TextStyle? displayLarge(BuildContext context) {
+  return Theme.of(context).textTheme.displayLarge;
+}
+
+TextStyle buildDisplayMedium(Color color) {
   return EzTextStyle(
     fontSize: 46 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle displaySmall(Color color) {
+TextStyle? displayMedium(BuildContext context) {
+  return Theme.of(context).textTheme.displayMedium;
+}
+
+TextStyle buildDisplaySmall(Color color) {
   return EzTextStyle(
     fontSize: 36 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle headlineLarge(Color color) {
+TextStyle? displaySmall(BuildContext context) {
+  return Theme.of(context).textTheme.displaySmall;
+}
+
+TextStyle buildHeadlineLarge(Color color) {
   return EzTextStyle(
     fontSize: 32 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle headlineMedium(Color color) {
+TextStyle? headlineLarge(BuildContext context) {
+  return Theme.of(context).textTheme.headlineLarge;
+}
+
+TextStyle buildHeadlineMedium(Color color) {
   return EzTextStyle(
     fontSize: 28 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle headlineSmall(Color color) {
+TextStyle? headlineMedium(BuildContext context) {
+  return Theme.of(context).textTheme.headlineMedium;
+}
+
+TextStyle buildHeadlineSmall(Color color) {
   return EzTextStyle(
     fontSize: 24 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle titleLarge(Color color) {
+TextStyle? headlineSmall(BuildContext context) {
+  return Theme.of(context).textTheme.headlineSmall;
+}
+
+TextStyle buildTitleLarge(Color color) {
   return EzTextStyle(
     fontSize: 22 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle titleMedium(Color color) {
+TextStyle? titleLarge(BuildContext context) {
+  return Theme.of(context).textTheme.titleLarge;
+}
+
+TextStyle buildTitleMedium(Color color) {
   return EzTextStyle(
     fontSize: 16 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle titleSmall(Color color) {
+TextStyle? titleMedium(BuildContext context) {
+  return Theme.of(context).textTheme.titleMedium;
+}
+
+TextStyle buildTitleSmall(Color color) {
   return EzTextStyle(
     fontSize: 14 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle labelLarge(Color color) {
+TextStyle? titleSmall(BuildContext context) {
+  return Theme.of(context).textTheme.titleSmall;
+}
+
+TextStyle buildLabelLarge(Color color) {
   return EzTextStyle(
     fontSize: 14 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle labelMedium(Color color) {
+TextStyle? labelLarge(BuildContext context) {
+  return Theme.of(context).textTheme.labelLarge;
+}
+
+TextStyle buildLabelMedium(Color color) {
   return EzTextStyle(
     fontSize: 12 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle labelSmall(Color color) {
+TextStyle? labelMedium(BuildContext context) {
+  return Theme.of(context).textTheme.labelMedium;
+}
+
+TextStyle buildLabelSmall(Color color) {
   return EzTextStyle(
     fontSize: 10 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle bodyLarge(Color color) {
+TextStyle? labelSmall(BuildContext context) {
+  return Theme.of(context).textTheme.labelSmall;
+}
+
+TextStyle buildBodyLarge(Color color) {
   return EzTextStyle(
     fontSize: 16 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle bodyMedium(Color color) {
+TextStyle? bodyLarge(BuildContext context) {
+  return Theme.of(context).textTheme.bodyLarge;
+}
+
+TextStyle buildBodyMedium(Color color) {
   return EzTextStyle(
     fontSize: 14 * EzConfig.fontScalar,
     color: color,
   );
 }
 
-EzTextStyle bodySmall(Color color) {
+TextStyle? bodyMedium(BuildContext context) {
+  return Theme.of(context).textTheme.bodyMedium;
+}
+
+TextStyle buildBodySmall(Color color) {
   return EzTextStyle(
     fontSize: 12 * EzConfig.fontScalar,
     color: color,
   );
 }
 
+TextStyle? bodySmall(BuildContext context) {
+  return Theme.of(context).textTheme.bodySmall;
+}
+
 /// Overrides defaults with [EzConfig]
 TextTheme materialTextTheme(Color color) {
   return TextTheme(
-    displayLarge: displayLarge(color),
-    displayMedium: displayMedium(color),
-    displaySmall: displaySmall(color),
-    headlineLarge: headlineLarge(color),
-    headlineMedium: headlineMedium(color),
-    headlineSmall: headlineSmall(color),
-    titleLarge: titleLarge(color),
-    titleMedium: titleMedium(color),
-    titleSmall: titleSmall(color),
-    labelLarge: labelLarge(color),
-    labelMedium: labelMedium(color),
-    labelSmall: labelSmall(color),
-    bodyLarge: bodyLarge(color),
-    bodyMedium: bodyMedium(color),
-    bodySmall: bodySmall(color),
+    displayLarge: buildDisplayLarge(color),
+    displayMedium: buildDisplayMedium(color),
+    displaySmall: buildDisplaySmall(color),
+    headlineLarge: buildHeadlineLarge(color),
+    headlineMedium: buildHeadlineMedium(color),
+    headlineSmall: buildHeadlineSmall(color),
+    titleLarge: buildTitleLarge(color),
+    titleMedium: buildTitleMedium(color),
+    titleSmall: buildTitleSmall(color),
+    labelLarge: buildLabelLarge(color),
+    labelMedium: buildLabelMedium(color),
+    labelSmall: buildLabelSmall(color),
+    bodyLarge: buildBodyLarge(color),
+    bodyMedium: buildBodyMedium(color),
+    bodySmall: buildBodySmall(color),
   );
 }
 
@@ -135,13 +195,13 @@ TextTheme materialTextTheme(Color color) {
 CupertinoTextThemeData cupertinoTextTheme(Color color) {
   return CupertinoTextThemeData(
     primaryColor: color,
-    textStyle: bodyLarge(color),
-    actionTextStyle: labelLarge(color),
-    tabLabelTextStyle: labelLarge(color),
-    navTitleTextStyle: titleMedium(color),
-    navLargeTitleTextStyle: titleLarge(color),
-    navActionTextStyle: labelLarge(color),
-    pickerTextStyle: bodyLarge(color),
-    dateTimePickerTextStyle: bodyLarge(color),
+    textStyle: buildBodyLarge(color),
+    actionTextStyle: buildLabelLarge(color),
+    tabLabelTextStyle: buildLabelLarge(color),
+    navTitleTextStyle: buildTitleMedium(color),
+    navLargeTitleTextStyle: buildTitleLarge(color),
+    navActionTextStyle: buildLabelLarge(color),
+    pickerTextStyle: buildBodyLarge(color),
+    dateTimePickerTextStyle: buildBodyLarge(color),
   );
 }
