@@ -16,35 +16,19 @@ class EzImage extends Image {
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
   final String? semanticLabel;
-
-  /// Default: false
   final bool excludeFromSemantics;
-
   final double? width;
   final double? height;
   final Color? color;
   final Animation<double>? opacity;
   final BlendMode? colorBlendMode;
   final BoxFit? fit;
-
-  /// Default: [Alignment.center]
   final AlignmentGeometry alignment;
-
-  /// Default: [ImageRepeat.noRepeat]
   final ImageRepeat repeat;
-
   final Rect? centerSlice;
-
-  /// Default: false
   final bool matchTextDirection;
-
-  /// Default: false
   final bool gaplessPlayback;
-
-  /// Default: false
   final bool isAntiAlias;
-
-  /// Default: [FilterQuality.low]
   final FilterQuality filterQuality;
 
   /// Quickly build an [Image] whose path is stored in [EzConfig.prefs]

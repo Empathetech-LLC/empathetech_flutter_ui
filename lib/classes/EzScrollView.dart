@@ -12,45 +12,23 @@ class EzScrollView extends SingleChildScrollView {
   /// Only useful when [scrollDirection] is [Axis.horizontal]
   /// Will reverse the contents of the [EzScrollView] when [EzConfig.dominantSide]
   /// is set to [Hand.left] and [reverseHands] is true
-  /// Default: false
   final bool reverseHands;
-
   final bool reverse;
   final EdgeInsetsGeometry? padding;
   final bool? primary;
-
-  /// Default: [BouncingScrollPhysics]
   final ScrollPhysics? physics;
-
   final ScrollController? controller;
   final Widget? child;
-
-  /// Default: [Clip.hardEdge]
   final Clip clipBehavior;
-
-  /// Default: [DragStartBehavior.start]
   final DragStartBehavior dragStartBehavior;
-
   final String? restorationId;
-
-  /// Default: [ScrollViewKeyboardDismissBehavior.manual]
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
-
-  /// Default: [MainAxisSize.min]
   final MainAxisSize mainAxisSize;
-
-  /// Default: [MainAxisAlignment.spaceEvenly]
   final MainAxisAlignment mainAxisAlignment;
-
-  /// Default: [CrossAxisAlignment.center]
   final CrossAxisAlignment crossAxisAlignment;
-
   final TextDirection? textDirection;
   final TextBaseline? textBaseline;
-
-  /// Default: [VerticalDirection.down]
   final VerticalDirection verticalDirection;
-
   final List<Widget> children;
 
   /// Styles a [SingleChildScrollView] from [EzConfig.prefs]

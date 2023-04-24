@@ -13,15 +13,9 @@ class EzTextStyle extends TextStyle {
   final FontWeight? fontWeight;
   final FontStyle? fontStyle;
   final double? letterSpacing;
-
-  /// Default: 1.25
   final double wordSpacing;
-
   final TextBaseline? textBaseline;
-
-  /// Default: 1.5
   final double height;
-
   final TextLeadingDistribution? leadingDistribution;
   final Locale? locale;
   final Paint? foreground;
@@ -48,10 +42,10 @@ class EzTextStyle extends TextStyle {
     this.fontSize,
     this.fontWeight,
     this.fontStyle,
-    this.letterSpacing,
-    this.wordSpacing = 1.25,
+    this.letterSpacing = 1.125,
+    this.wordSpacing = 1.375,
     this.textBaseline,
-    this.height = 1.5,
+    this.height = 1.625,
     this.leadingDistribution,
     this.locale,
     this.foreground,

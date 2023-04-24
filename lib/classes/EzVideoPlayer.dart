@@ -20,56 +20,31 @@ class EzVideoPlayer extends StatefulWidget {
   final Color iconColor;
 
   /// [Color.withOpacity] value that should be used when the player is not in focus
-  /// Default: 0.0
   final double hiddenOpacity;
 
   /// [Container] decoration for the region behind the controls
-  /// Default: [BoxDecoration] -> color: [Colors.transparent]
   final Decoration controlsBackground;
 
   /// Whether the position of the button controls should be swapped when
   /// [EzConfig.dominantSide] is set to [Hand.left]
-  /// Default: true
   final bool reverseHands;
 
-  /// [ButtonVis] for the play/pause buttons
-  /// Default: [ButtonVis.auto]
   final ButtonVis playVis;
-
-  /// [ButtonVis] for the volume slider
-  /// Default: [ButtonVis.auto]
   final ButtonVis volumeVis;
-
-  /// [ButtonVis] for the replay button
-  /// Default: [ButtonVis.auto]
   final ButtonVis replayVis;
-
-  /// [ButtonVis] for the time slider
-  /// Default: [ButtonVis.alwaysOff]
   final ButtonVis sliderVis;
 
   /// Whether buttons set to [ButtonVis.auto] should always show when the video is paused
-  /// Default: false
   final bool showOnPause;
 
-  /// Whether the video should play on init
-  /// Default: true
   final bool autoPlay;
-
-  /// Whether the video should replay upon completion
-  /// Default: false
   final bool autoLoop;
-
-  /// What volume the video should start with
-  /// Default: 0.0
   final double startingVolume;
 
   /// [BoxConstraints] maximum width for the play area
-  /// Default: [double.infinity]
   final double maxWidth;
 
   /// [BoxConstraints] maximum height for the play area
-  /// Default: [double.infinity]
   final double maxHeight;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio] for the [controller]

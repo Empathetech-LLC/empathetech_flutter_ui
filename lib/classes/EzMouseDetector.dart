@@ -18,16 +18,9 @@ class EzMouseDetector extends MouseRegion {
   final void Function(PointerEnterEvent)? onEnter;
   final void Function(PointerExitEvent)? onExit;
   final void Function(PointerHoverEvent)? onHover;
-
-  /// Default: [SystemMouseCursors.click]
   final MouseCursor cursor;
-
-  /// Default: true
   final bool opaque;
-
-  /// Default: [HitTestBehavior.deferToChild]
   final HitTestBehavior hitTestBehavior;
-
   final void Function()? onTap;
   final void Function()? onLongPress;
   final void Function()? onDoubleTap;

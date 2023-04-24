@@ -13,11 +13,7 @@ class EzButton extends StatelessWidget {
   final void Function(bool)? onFocusChange;
   final ButtonStyle? style;
   final FocusNode? focusNode;
-
-  /// Default: false
   final bool autofocus;
-
-  /// Default = [Clip.none]
   final Clip clipBehavior;
 
   final MaterialStatesController? statesController;

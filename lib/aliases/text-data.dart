@@ -9,7 +9,6 @@ TextStyle displayLarge(Color color) {
   return EzTextStyle(
     fontSize: 58 * EzConfig.fontScalar,
     color: color,
-    fontWeight: FontWeight.bold,
   );
 }
 
@@ -17,7 +16,6 @@ EzTextStyle displayMedium(Color color) {
   return EzTextStyle(
     fontSize: 46 * EzConfig.fontScalar,
     color: color,
-    fontWeight: FontWeight.bold,
   );
 }
 
@@ -25,7 +23,6 @@ EzTextStyle displaySmall(Color color) {
   return EzTextStyle(
     fontSize: 36 * EzConfig.fontScalar,
     color: color,
-    fontWeight: FontWeight.bold,
   );
 }
 
@@ -33,7 +30,6 @@ EzTextStyle headlineLarge(Color color) {
   return EzTextStyle(
     fontSize: 32 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 
@@ -41,7 +37,6 @@ EzTextStyle headlineMedium(Color color) {
   return EzTextStyle(
     fontSize: 28 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 
@@ -49,7 +44,6 @@ EzTextStyle headlineSmall(Color color) {
   return EzTextStyle(
     fontSize: 24 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 
@@ -78,7 +72,6 @@ EzTextStyle labelLarge(Color color) {
   return EzTextStyle(
     fontSize: 14 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 
@@ -86,7 +79,6 @@ EzTextStyle labelMedium(Color color) {
   return EzTextStyle(
     fontSize: 12 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 
@@ -94,7 +86,6 @@ EzTextStyle labelSmall(Color color) {
   return EzTextStyle(
     fontSize: 10 * EzConfig.fontScalar,
     color: color,
-    decoration: TextDecoration.underline,
   );
 }
 

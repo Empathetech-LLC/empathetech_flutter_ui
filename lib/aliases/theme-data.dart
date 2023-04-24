@@ -1,4 +1,3 @@
-
 library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -21,22 +20,40 @@ ThemeData ezThemeData({required bool light}) {
   Color buttonTextColor = Color(
       EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
+  TextStyle headlineLargeStyle = headlineLarge(themeTextColor);
+  IconThemeData headlineLargeIcons = IconThemeData(
+    color: themeTextColor,
+    size: headlineLargeStyle.fontSize,
+  );
+
   return ThemeData(
+    // General colors
     dividerColor: themeTextColor,
     highlightColor: buttonColor,
     hintColor: themeTextColor,
     indicatorColor: buttonColor,
     primaryColor: themeColor,
     scaffoldBackgroundColor: backgroundColor,
+
+    // Text && icons
     fontFamily: googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
     iconTheme: IconThemeData(color: themeTextColor),
     primaryIconTheme: IconThemeData(color: themeTextColor),
     primaryTextTheme: materialTextTheme(themeTextColor),
     textTheme: materialTextTheme(themeTextColor),
+
+    // AppBar
     appBarTheme: AppBarTheme(
       color: themeColor,
-      iconTheme: IconThemeData(color: themeTextColor),
+      iconTheme: headlineLargeIcons,
+      actionsIconTheme: headlineLargeIcons,
+      titleTextStyle: headlineLargeStyle,
     ),
+
+    // Drawer
+    drawerTheme: DrawerThemeData(backgroundColor: themeColor),
+
+    // Bottom navigation
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       backgroundColor: themeColor,
@@ -45,6 +62,8 @@ ThemeData ezThemeData({required bool light}) {
       unselectedItemColor: themeTextColor,
       unselectedIconTheme: IconThemeData(color: themeTextColor),
     ),
+
+    // Checkbox
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -57,11 +76,15 @@ ThemeData ezThemeData({required bool light}) {
       ),
       checkColor: MaterialStateProperty.all(buttonColor),
     ),
+
+    // Dialogs
     dialogTheme: DialogTheme(
       backgroundColor: themeColor,
       iconColor: themeTextColor,
       alignment: Alignment.center,
     ),
+
+    // Sliders
     sliderTheme: SliderThemeData(
       thumbColor: buttonColor,
       disabledThumbColor: themeColor,

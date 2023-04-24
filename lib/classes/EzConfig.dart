@@ -63,14 +63,14 @@ class EzConfig {
 
     // Light theme //
     lightBackgroundImageKey: null,
-    lightBackgroundColorKey: 0xFFEBEBEB, // Almost white
-    lightThemeColorKey: 0xFFEBEBEB,
+    lightBackgroundColorKey: 0xFFF5F5F5, // Almost white
+    lightThemeColorKey: 0xFFFFFFFF, // White
     lightThemeTextColorKey: 0xFF000000, // Black
 
     // Dark theme //
     darkBackgroundImageKey: null,
-    darkBackgroundColorKey: 0xFF141414, // Almost black
-    darkThemeColorKey: 0xFF141414,
+    darkBackgroundColorKey: 0xFF0A0A0A, // Almost black
+    darkThemeColorKey: 0xFF000000, // Black
     darkThemeTextColorKey: 0xFFFFFFFF, // White
   };
 

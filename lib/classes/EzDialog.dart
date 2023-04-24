@@ -19,8 +19,6 @@ class EzDialog extends PlatformAlertDialog {
       material;
   final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)?
       cupertino;
-
-  /// Default: false
   final bool needsClose;
 
   /// Styles a [PlatformAlertDialog] with [EzConfig]

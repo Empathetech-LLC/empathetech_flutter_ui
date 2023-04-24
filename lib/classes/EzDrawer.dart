@@ -14,10 +14,7 @@ class EzDrawer extends StatelessWidget {
   final Widget? header;
 
   final List<Widget> body;
-
-  /// Default: false
   final bool forceMaterial;
-
   final Color? backgroundColor;
   final Color? shadowColor;
   final Color? surfaceTintColor;
