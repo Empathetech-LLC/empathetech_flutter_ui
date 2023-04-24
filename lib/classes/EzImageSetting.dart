@@ -16,11 +16,11 @@ class EzImageSetting extends StatefulWidget {
   /// For example: [lightBackgroundImageKey]
   final bool fullscreen;
 
-  /// [String] to display on the [EzButton]
+  /// [String] to display on the [ElevatedButton]
   final String title;
 
   /// Who made this/where'd ya get it?
-  /// Credits [String] will be displayed via [EzDialog] when holding the [EzButton]
+  /// Credits [String] will be displayed via [EzDialog] when holding the [ElevatedButton]
   final String credits;
 
   /// Effectively whether the image is nullable
@@ -65,7 +65,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<dynamic> _chooseImage() {
     List<Widget> options = [
       // From file
-      EzButton.icon(
+      ElevatedButton.icon(
         onPressed: () async {
           String? changed = await changeImage(
             context: context,
@@ -81,7 +81,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       Container(height: buttonSpacer),
 
       // From camera
-      EzButton.icon(
+      ElevatedButton.icon(
         onPressed: () async {
           String? changed = await changeImage(
             context: context,
@@ -97,7 +97,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       Container(height: buttonSpacer),
 
       // Reset
-      EzButton.icon(
+      ElevatedButton.icon(
         onPressed: () {
           _cleanup();
 
@@ -112,7 +112,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (widget.allowClear)
       options.addAll([
         Container(height: buttonSpacer),
-        EzButton.icon(
+        ElevatedButton.icon(
           onPressed: () {
             _cleanup();
 
@@ -135,7 +135,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EzButton(
+    return ElevatedButton(
       // Choose image
       onPressed: () async {
         dynamic newPath = await _chooseImage();

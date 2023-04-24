@@ -9,7 +9,7 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig.prefs] key whose value will be updated
   final String toControl;
 
-  /// Label [String] to display with on the [EzButton]
+  /// Label [String] to display with on the [ElevatedButton]
   final String message;
 
   /// Optional [EzConfig.prefs] key of whatever will be this colors background
@@ -85,7 +85,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             Container(height: buttonSpacer),
 
             // Yes
-            EzButton.icon(
+            ElevatedButton.icon(
               onPressed: () {
                 EzConfig.preferences.setInt(widget.toControl, recommended);
                 setState(() {
@@ -99,7 +99,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             Container(height: buttonSpacer),
 
             // No
-            EzButton.icon(
+            ElevatedButton.icon(
               onPressed: () async {
                 dynamic chosen = await _openColorPicker();
                 popScreen(context: context, pass: chosen);
@@ -140,7 +140,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           Container(height: dialogSpacer),
 
           // Yes
-          EzButton.icon(
+          ElevatedButton.icon(
             onPressed: () {
               // Remove the user's setting and reset the current state
               EzConfig.preferences.remove(widget.toControl);
@@ -157,7 +157,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           Container(height: dialogSpacer),
 
           // No
-          EzButton.icon(
+          ElevatedButton.icon(
             onPressed: () => popScreen(context: context),
             icon: Icon(PlatformIcons(context).edit),
             label: ezText('Use custom'),
@@ -180,7 +180,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         ezText(widget.message),
 
         // Color preview/edit button
-        EzButton(
+        ElevatedButton(
           onPressed: _changeColor,
           onLongPress: _reset,
           child: Icon(PlatformIcons(context).edit,
