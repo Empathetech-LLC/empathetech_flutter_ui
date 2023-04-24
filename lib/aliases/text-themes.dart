@@ -5,146 +5,152 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-/// Overrides defaults with [EzConfig]
-TextTheme materialTextTheme(Color color) {
-  double fontScalar = EzConfig.prefs[fontScalarKey];
+TextStyle displayLarge(Color color) {
+  return EzTextStyle(
+    fontSize: 58 * EzConfig.fontScalar,
+    color: color,
+    fontWeight: FontWeight.bold,
+  );
+}
 
-  return TextTheme(
-    // Displays
-    displayLarge: EzTextStyle(
-      fontSize: 58 * fontScalar,
-      color: color,
-      fontWeight: FontWeight.bold,
-    ),
-    displayMedium: EzTextStyle(
-      fontSize: 46 * fontScalar,
-      color: color,
-      fontWeight: FontWeight.bold,
-    ),
-    displaySmall: EzTextStyle(
-      fontSize: 36 * fontScalar,
-      color: color,
-      fontWeight: FontWeight.bold,
-    ),
+EzTextStyle displayMedium(Color color) {
+  return EzTextStyle(
+    fontSize: 46 * EzConfig.fontScalar,
+    color: color,
+    fontWeight: FontWeight.bold,
+  );
+}
 
-    // Headlines
-    headlineLarge: EzTextStyle(
-      fontSize: 32,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
-    headlineMedium: EzTextStyle(
-      fontSize: 28,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
-    headlineSmall: EzTextStyle(
-      fontSize: 24,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
+EzTextStyle displaySmall(Color color) {
+  return EzTextStyle(
+    fontSize: 36 * EzConfig.fontScalar,
+    color: color,
+    fontWeight: FontWeight.bold,
+  );
+}
 
-    // Titles
-    titleLarge: EzTextStyle(
-      fontSize: 22,
-      color: color,
-    ),
-    titleMedium: EzTextStyle(
-      fontSize: 16,
-      color: color,
-    ),
-    titleSmall: EzTextStyle(
-      fontSize: 14,
-      color: color,
-    ),
+EzTextStyle headlineLarge(Color color) {
+  return EzTextStyle(
+    fontSize: 32 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
 
-    // Labels
-    labelLarge: EzTextStyle(
-      fontSize: 14,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
-    labelMedium: EzTextStyle(
-      fontSize: 12,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
-    labelSmall: EzTextStyle(
-      fontSize: 10,
-      color: color,
-      decoration: TextDecoration.underline,
-    ),
+EzTextStyle headlineMedium(Color color) {
+  return EzTextStyle(
+    fontSize: 28 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
 
-    // Body
-    bodyLarge: EzTextStyle(
-      fontSize: 16,
-      color: color,
-    ),
-    bodyMedium: EzTextStyle(
-      fontSize: 14,
-      color: color,
-    ),
-    bodySmall: EzTextStyle(
-      fontSize: 12,
-      color: color,
-    ),
+EzTextStyle headlineSmall(Color color) {
+  return EzTextStyle(
+    fontSize: 24 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
+
+EzTextStyle titleLarge(Color color) {
+  return EzTextStyle(
+    fontSize: 22 * EzConfig.fontScalar,
+    color: color,
+  );
+}
+
+EzTextStyle titleMedium(Color color) {
+  return EzTextStyle(
+    fontSize: 16 * EzConfig.fontScalar,
+    color: color,
+  );
+}
+
+EzTextStyle titleSmall(Color color) {
+  return EzTextStyle(
+    fontSize: 14 * EzConfig.fontScalar,
+    color: color,
+  );
+}
+
+EzTextStyle labelLarge(Color color) {
+  return EzTextStyle(
+    fontSize: 14 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
+
+EzTextStyle labelMedium(Color color) {
+  return EzTextStyle(
+    fontSize: 12 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
+
+EzTextStyle labelSmall(Color color) {
+  return EzTextStyle(
+    fontSize: 10 * EzConfig.fontScalar,
+    color: color,
+    decoration: TextDecoration.underline,
+  );
+}
+
+EzTextStyle bodyLarge(Color color) {
+  return EzTextStyle(
+    fontSize: 16 * EzConfig.fontScalar,
+    color: color,
+  );
+}
+
+EzTextStyle bodyMedium(Color color) {
+  return EzTextStyle(
+    fontSize: 14 * EzConfig.fontScalar,
+    color: color,
+  );
+}
+
+EzTextStyle bodySmall(Color color) {
+  return EzTextStyle(
+    fontSize: 12 * EzConfig.fontScalar,
+    color: color,
   );
 }
 
 /// Overrides defaults with [EzConfig]
-CupertinoTextThemeData cupertinoTextTheme(Color primaryColor) {
+TextTheme materialTextTheme(Color color) {
+  return TextTheme(
+    displayLarge: displayLarge(color),
+    displayMedium: displayMedium(color),
+    displaySmall: displaySmall(color),
+    headlineLarge: headlineLarge(color),
+    headlineMedium: headlineMedium(color),
+    headlineSmall: headlineSmall(color),
+    titleLarge: titleLarge(color),
+    titleMedium: titleMedium(color),
+    titleSmall: titleSmall(color),
+    labelLarge: labelLarge(color),
+    labelMedium: labelMedium(color),
+    labelSmall: labelSmall(color),
+    bodyLarge: bodyLarge(color),
+    bodyMedium: bodyMedium(color),
+    bodySmall: bodySmall(color),
+  );
+}
+
+/// Overrides defaults with [EzConfig]
+CupertinoTextThemeData cupertinoTextTheme(Color color) {
   return CupertinoTextThemeData(
-    primaryColor: primaryColor,
-
-    // bodyLarge
-    textStyle: EzTextStyle(
-      fontSize: 16,
-      color: primaryColor,
-    ),
-
-    // labelLarge
-    actionTextStyle: EzTextStyle(
-      fontSize: 14,
-      color: primaryColor,
-      decoration: TextDecoration.underline,
-    ),
-
-    // labelLarge
-    tabLabelTextStyle: EzTextStyle(
-      fontSize: 14,
-      color: primaryColor,
-      decoration: TextDecoration.underline,
-    ),
-
-    // titleMedium
-    navTitleTextStyle: EzTextStyle(
-      fontSize: 16,
-      color: primaryColor,
-    ),
-
-    // titleLarge
-    navLargeTitleTextStyle: EzTextStyle(
-      fontSize: 22,
-      color: primaryColor,
-    ),
-
-    // labelLarge
-    navActionTextStyle: EzTextStyle(
-      fontSize: 14,
-      color: primaryColor,
-      decoration: TextDecoration.underline,
-    ),
-
-    // bodyLarge
-    pickerTextStyle: EzTextStyle(
-      fontSize: 16,
-      color: primaryColor,
-    ),
-
-    // bodyLarge
-    dateTimePickerTextStyle: EzTextStyle(
-      fontSize: 16,
-      color: primaryColor,
-    ),
+    primaryColor: color,
+    textStyle: bodyLarge(color),
+    actionTextStyle: labelLarge(color),
+    tabLabelTextStyle: labelLarge(color),
+    navTitleTextStyle: titleMedium(color),
+    navLargeTitleTextStyle: titleLarge(color),
+    navActionTextStyle: labelLarge(color),
+    pickerTextStyle: bodyLarge(color),
+    dateTimePickerTextStyle: bodyLarge(color),
   );
 }
