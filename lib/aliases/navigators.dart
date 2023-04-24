@@ -17,7 +17,7 @@ Future<dynamic> pushScreen({
   );
 }
 
-/// More readable than Navigator.of(context).pop()
+/// Alias for Navigator.of(context).pop()
 void popScreen({
   required BuildContext context,
   dynamic pass,
@@ -25,7 +25,7 @@ void popScreen({
   return Navigator.of(context).pop(pass);
 }
 
-/// More readable than [Navigator] spelled out
+/// More readable than [Navigator] function spelled out
 Future<dynamic> popAndPushScreen({
   required BuildContext context,
   required Widget screen,
@@ -40,7 +40,7 @@ Future<dynamic> popAndPushScreen({
   );
 }
 
-/// More readable than [Navigator] spelled out
+/// More readable than [Navigator] function spelled out
 Future<dynamic> replaceScreen({
   required BuildContext context,
   required Widget screen,
@@ -53,12 +53,14 @@ Future<dynamic> replaceScreen({
   );
 }
 
-/// More readable than [Navigator] spelled out
+/// More readable than [Navigator] function spelled out
+/// Runs pop until '/' route
 void popUntilHome(BuildContext context) {
   return Navigator.of(context).popUntil(ModalRoute.withName('/'));
 }
 
 /// No need to import [launchUrl] if you've already imported EFUI
+/// Defaults to web config, can be overridden with base parameters
 Future<bool> openLink(
   Uri url, {
   LaunchMode mode = LaunchMode.platformDefault,

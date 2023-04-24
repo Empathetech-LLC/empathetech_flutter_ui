@@ -1,42 +1,12 @@
 library empathetech_flutter_ui;
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!
 void doNothing() {}
-
-/// More readable than EzConfig.focus.primaryFocus?.unfocus()
-void closeFocus() {
-  EzConfig.focus.primaryFocus?.unfocus();
-}
-
-/// More readable than Theme.of(context).brightness == Brightness.light
-bool isLightTheme() {
-  var brightness =
-      SchedulerBinding.instance.platformDispatcher.platformBrightness;
-  return brightness == Brightness.light;
-}
-
-/// More readable than MediaQuery.of(context).size.width
-double widthOf(BuildContext context) {
-  return MediaQuery.of(context).size.width;
-}
-
-/// More readable than MediaQuery.of(context).size.height
-double heightOf(BuildContext context) {
-  return MediaQuery.of(context).size.height;
-}
-
-/// More readable than MediaQuery.of(context).size
-Size sizeOf(BuildContext context) {
-  return MediaQuery.of(context).size;
-}
 
 /// For web use, set the tab's title
 void setPageTitle({

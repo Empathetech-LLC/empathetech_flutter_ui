@@ -11,6 +11,11 @@ enum Hand {
   left,
 }
 
+/// Alias for [EzConfig.focus] -> unfocus()
+void closeFocus() {
+  EzConfig.focus.primaryFocus?.unfocus();
+}
+
 /// Static object for managing a dynamic && user customizable UI
 /// Tracks the apps image [assets] for ease of development
 /// Setting are tracked with shared_preferences
@@ -30,6 +35,8 @@ class EzConfig {
 
   /// [ThemeMode.system] wrapper that allows for overwrite
   static late ThemeMode themeMode;
+
+  /// []
 
   /// What side of the screen touch points should be on
   static late Hand dominantSide;
