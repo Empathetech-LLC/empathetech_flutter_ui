@@ -1,5 +1,6 @@
 library empathetech_flutter_ui;
 
+export 'EzButton.dart';
 export 'EzColorSetting.dart';
 export 'EzConfig.dart';
 export 'EzDialog.dart';
