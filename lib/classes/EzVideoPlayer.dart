@@ -85,7 +85,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late double aspectRatio = widget.controller.value.aspectRatio;
 
   late double margin = EzConfig.prefs[marginKey];
+  late double padding = EzConfig.prefs[paddingKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double buttonSize = buttonSpacer;
 
   late Color showing = widget.iconColor;
   late Color hiding = widget.iconColor.withOpacity(widget.hiddenOpacity);
@@ -191,17 +193,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ? PlatformIcons(context).pause
                 : PlatformIcons(context).playArrow,
             color: _buildColor(widget.playVis),
+            size: buttonSize,
           ),
           onTap: () {
-            if (widget.controller.value.position >=
-                widget.controller.value.duration) {
-              // Video has ended, replay
-              _replayVideo();
-            } else {
-              (widget.controller.value.isPlaying)
-                  ? _pauseVideo()
-                  : _playVideo();
-            }
+            (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
           },
         ),
         Container(width: buttonSpacer),
@@ -217,6 +212,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ? PlatformIcons(context).volumeMute
                 : PlatformIcons(context).volumeUp,
             color: _buildColor(widget.volumeVis),
+            size: buttonSize,
           ),
           onTap: () {
             (widget.controller.value.volume == 0.0)
@@ -224,20 +220,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 : _muteVideo();
           },
         ),
-        Container(width: EzConfig.prefs[paddingKey]),
+        Container(width: padding),
 
         // Value slider
-        Container(
-          child: SliderTheme(
-            data: videoSliderTheme,
-            child: Slider(
-              value: widget.controller.value.volume,
-              onChanged: (double value) {
-                setState(() {
-                  widget.controller.setVolume(value);
-                });
-              },
-            ),
+        SliderTheme(
+          data: videoSliderTheme,
+          child: Slider(
+            value: widget.controller.value.volume,
+            onChanged: (double value) {
+              setState(() {
+                widget.controller.setVolume(value);
+              });
+            },
           ),
         ),
         Container(width: buttonSpacer),
@@ -247,8 +241,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.replayVis != ButtonVis.alwaysOff)
       controls.addAll([
         EzMouseDetector(
-          child: Icon(PlatformIcons(context).refresh,
-              color: _buildColor(widget.replayVis)),
+          child: Icon(
+            PlatformIcons(context).refresh,
+            color: _buildColor(widget.replayVis),
+            size: buttonSize,
+          ),
           onTap: _replayVideo,
         ),
         Container(width: buttonSpacer),
