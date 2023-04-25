@@ -7,7 +7,6 @@ export 'EzFontSetting.dart';
 export 'EzImage.dart';
 export 'EzImageSetting.dart';
 export 'EzLeftySwitch.dart';
-export 'EzMouseDetector.dart';
 export 'EzNotifications.dart';
 export 'EzScrollView.dart';
 export 'EzSliderSetting.dart';

@@ -182,7 +182,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Play/pause
     if (widget.playVis != ButtonVis.alwaysOff)
       controls.addAll([
-        EzMouseDetector(
+        GestureDetector(
           child: Icon(
             (widget.controller.value.isPlaying)
                 ? PlatformIcons(context).pause
@@ -201,7 +201,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.volumeVis != ButtonVis.alwaysOff)
       controls.addAll([
         // Mute button
-        EzMouseDetector(
+        GestureDetector(
           child: Icon(
             (widget.controller.value.volume == 0.0)
                 ? PlatformIcons(context).volumeMute
@@ -239,7 +239,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Replay
     if (widget.replayVis != ButtonVis.alwaysOff)
       controls.addAll([
-        EzMouseDetector(
+        GestureDetector(
           child: Icon(
             PlatformIcons(context).refresh,
             color: _buildColor(widget.replayVis),
@@ -284,6 +284,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           show = false;
         });
       },
+      cursor: SystemMouseCursors.click,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: widget.maxWidth,
@@ -301,7 +302,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 left: 0,
                 top: 0,
                 width: widthOf(context),
-                child: EzMouseDetector(
+                child: GestureDetector(
                     child: Container(
                       color: Colors.transparent,
                     ),
