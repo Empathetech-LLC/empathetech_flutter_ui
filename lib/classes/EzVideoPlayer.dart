@@ -25,10 +25,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Container] decoration for the region behind the controls
   final Decoration controlsBackground;
 
-  /// Whether the position of the button controls should be swapped when
-  /// [EzConfig.dominantSide] is set to [Hand.left]
-  final bool reverseHands;
-
   final ButtonVis playVis;
   final ButtonVis volumeVis;
   final ButtonVis replayVis;
@@ -59,7 +55,6 @@ class EzVideoPlayer extends StatefulWidget {
     required this.iconColor,
     this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
-    this.reverseHands = true,
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.replayVis = ButtonVis.auto,
@@ -223,15 +218,19 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         Container(width: padding),
 
         // Value slider
-        SliderTheme(
-          data: videoSliderTheme,
-          child: Slider(
-            value: widget.controller.value.volume,
-            onChanged: (double value) {
-              setState(() {
-                widget.controller.setVolume(value);
-              });
-            },
+        Container(
+          height: buttonSize,
+          width: buttonSize * 3.0,
+          child: SliderTheme(
+            data: videoSliderTheme,
+            child: Slider(
+              value: widget.controller.value.volume,
+              onChanged: (double value) {
+                setState(() {
+                  widget.controller.setVolume(value);
+                });
+              },
+            ),
           ),
         ),
         Container(width: buttonSpacer),
