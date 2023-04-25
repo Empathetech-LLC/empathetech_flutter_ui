@@ -20,7 +20,7 @@ class EzMouseDetector extends MouseRegion {
   final void Function(PointerHoverEvent)? onHover;
   final MouseCursor cursor;
   final bool opaque;
-  final HitTestBehavior hitTestBehavior;
+  final HitTestBehavior? hitTestBehavior;
   final void Function()? onTap;
   final void Function()? onLongPress;
   final void Function()? onDoubleTap;
@@ -34,7 +34,7 @@ class EzMouseDetector extends MouseRegion {
     this.onHover,
     this.cursor = SystemMouseCursors.click,
     this.opaque = true,
-    this.hitTestBehavior = HitTestBehavior.deferToChild,
+    this.hitTestBehavior,
     this.onTap,
     this.onLongPress,
     this.onDoubleTap,
