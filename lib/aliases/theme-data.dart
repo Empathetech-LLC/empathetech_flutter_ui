@@ -28,16 +28,16 @@ ThemeData ezThemeData({required bool light}) {
     size: appBarTextStyle.fontSize,
   );
 
-  TextStyle buttonTextStyle = buildHeadlineMedium(buttonTextColor);
+  TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
   IconThemeData buttonIconData = IconThemeData(
     color: buttonTextColor,
     size: buttonTextStyle.fontSize,
   );
 
-  TextStyle pageSelection = buildHeadlineMedium(backgroundTextColor);
+  TextStyle pageSelection = buildTitleMedium(backgroundTextColor);
 
-  TextStyle dialogTitleStyle = buildTitleMedium(themeTextColor);
-  TextStyle dialogContentStyle = buildLabelMedium(themeTextColor);
+  TextStyle dialogTitleStyle = buildHeadlineSmall(themeTextColor);
+  TextStyle dialogContentStyle = buildTitleMedium(themeTextColor);
 
   return ThemeData(
     brightness: light ? Brightness.light : Brightness.dark,
