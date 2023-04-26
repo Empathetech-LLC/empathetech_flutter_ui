@@ -35,7 +35,11 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             });
             popScreen(context: context, pass: font);
           },
-          child: Text(font, style: style),
+          child: Text(
+            font,
+            style: style,
+            textAlign: TextAlign.center,
+          ),
         ),
         Container(height: buttonSpacer),
       ]);
@@ -65,6 +69,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           child: Text(
             'Choose font:\n$currFontFamily',
             style: TextStyle(fontFamily: currFontFamily),
+            textAlign: TextAlign.center,
           ),
         ),
         Container(height: buttonSpacer),
@@ -80,6 +85,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           child: Text(
             'Reset font\n($defaultFontFamily)',
             style: TextStyle(fontFamily: defaultFontFamily),
+            textAlign: TextAlign.center,
           ),
         ),
       ],
