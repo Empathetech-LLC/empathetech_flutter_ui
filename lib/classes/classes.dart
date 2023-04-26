@@ -14,3 +14,4 @@ export 'EzTextStyle.dart';
 export 'EzThemeModeSwitch.dart';
 export 'EzVideoPlayer.dart';
 export 'EzView.dart';
+export 'EzYesNo.dart';
