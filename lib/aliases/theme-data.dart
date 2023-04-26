@@ -127,7 +127,7 @@ ThemeData ezThemeData({required bool light}) {
 /// [CupertinoThemeData] using [EzConfig] values
 CupertinoThemeData ezCupertinoThemeData({required ThemeMode themeMode}) {
   bool light = (themeMode == ThemeMode.system)
-      ? true
+      ? false // meaning: not supported. needs fixing!
       : (themeMode == ThemeMode.light)
           ? true
           : false;
