@@ -64,7 +64,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           ElevatedButton(
             onPressed: doNothing,
-            child: ezText('Currently: $currValue'),
+            child: Text('Currently: $currValue'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -98,7 +98,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             onPressed: doNothing,
             child: Padding(
               padding: EdgeInsets.all(currValue),
-              child: ezText('Currently: $currValue'),
+              child: Text('Currently: $currValue'),
             ),
             style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
           ),
@@ -112,12 +112,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: ezText('Currently: $currValue'),
+                child: Text('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: ezText('Currently: $currValue'),
+                child: Text('Currently: $currValue'),
               ),
               SizedBox(height: currValue),
             ],
@@ -129,7 +129,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           ElevatedButton(
             onPressed: doNothing,
-            child: ezText('Currently: $currValue'),
+            child: Text('Currently: $currValue'),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(widthOf(context), currValue),
             ),
@@ -162,7 +162,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 ],
               ),
             ),
-            child: ezText('Press me'),
+            child: Text('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -217,8 +217,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label:
-            ezText('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
+        label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
     ]);
 

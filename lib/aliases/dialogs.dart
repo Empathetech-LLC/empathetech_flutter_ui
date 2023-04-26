@@ -35,19 +35,14 @@ Future<dynamic> ezColorPicker({
           pickerColor: startColor,
           onColorChanged: onColorChange,
         ),
-        Container(height: EzConfig.prefs[dialogSpacingKey]),
+        Container(height: EzConfig.prefs[buttonSpacingKey]),
 
-        // Apply
-        ElevatedButton(
-          onPressed: apply,
-          child: ezText('Apply'),
-        ),
-        Container(height: EzConfig.prefs[dialogSpacingKey]),
-
-        // Cancel
-        ElevatedButton(
-          onPressed: cancel,
-          child: ezText('Cancel'),
+        // Apply/cancel
+        EzYesNo(
+          onConfirm: apply,
+          confirmMsg: 'Apply',
+          onDeny: cancel,
+          denyMsg: 'Cancel',
         ),
       ],
       needsClose: false,

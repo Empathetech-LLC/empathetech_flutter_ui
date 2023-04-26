@@ -34,6 +34,8 @@ ThemeData ezThemeData({required bool light}) {
     size: buttonTextStyle.fontSize,
   );
 
+  TextStyle pageSelection = buildHeadlineMedium(backgroundTextColor);
+
   return ThemeData(
     // General colors
     dividerColor: themeTextColor,
@@ -78,6 +80,11 @@ ThemeData ezThemeData({required bool light}) {
         textStyle: buttonTextStyle,
         padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
       ),
+    ),
+
+    // Dropdown Menu
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: pageSelection,
     ),
 
     // Checkbox

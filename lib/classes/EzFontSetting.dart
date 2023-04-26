@@ -36,7 +36,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             });
             popScreen(context: context, pass: font);
           },
-          child: ezText(font, style: style),
+          child: Text(font, style: style),
         ),
         Container(height: buttonSpacer),
       ]);
@@ -63,7 +63,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
         // Font picker
         ElevatedButton(
           onPressed: _chooseGoogleFont,
-          child: ezText(
+          child: Text(
             'Choose font:\n$currFontFamily',
             style: TextStyle(fontFamily: currFontFamily),
           ),
@@ -78,7 +78,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
               currFontFamily = defaultFontFamily;
             });
           },
-          child: ezText(
+          child: Text(
             'Reset font\n($defaultFontFamily)',
             style: TextStyle(fontFamily: defaultFontFamily),
           ),

@@ -13,36 +13,39 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  ThemeMode _currentThemeMode = EzConfig.themeMode;
+  late TextStyle? style = headlineMedium(context);
+
+  List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
+    return [
+      DropdownMenuItem<ThemeMode>(
+        child: Text('System'),
+        value: ThemeMode.system,
+      ),
+      DropdownMenuItem<ThemeMode>(
+        child: Text('Light'),
+        value: ThemeMode.light,
+      ),
+      DropdownMenuItem<ThemeMode>(
+        child: Text('Dark'),
+        value: ThemeMode.dark,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
-      return [
-        DropdownMenuItem<ThemeMode>(
-          child: ezText('System'),
-          value: ThemeMode.system,
-        ),
-        DropdownMenuItem<ThemeMode>(
-          child: ezText('Light'),
-          value: ThemeMode.light,
-        ),
-        DropdownMenuItem<ThemeMode>(
-          child: ezText('Dark'),
-          value: ThemeMode.dark,
-        ),
-      ];
-    }
-
     return EzScrollView(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       scrollDirection: Axis.horizontal,
-      reverseHands: true,
       children: [
-        ezText('Theme mode'),
+        // Label
+        ezText('Theme mode', style: style),
+        Container(width: EzConfig.prefs[buttonSpacingKey]),
+
+        // Button
         DropdownButton<ThemeMode>(
-          value: _currentThemeMode,
+          value: EzConfig.themeMode,
           items: _themeModeItems(),
           onChanged: (ThemeMode? newThemeMode) {
             if (newThemeMode != null) {
@@ -54,7 +57,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               }
 
               setState(() {
-                _currentThemeMode = newThemeMode;
                 EzConfig.themeMode = newThemeMode;
               });
             }

@@ -4,7 +4,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -75,7 +74,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: ezText('File'),
+        label: Text('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
       Container(height: buttonSpacer),
@@ -91,7 +90,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: ezText('Camera'),
+        label: Text('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       Container(height: buttonSpacer),
@@ -104,7 +103,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           EzConfig.preferences.remove(widget.prefsKey);
           popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
         },
-        label: ezText('Reset'),
+        label: Text('Reset'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -119,7 +118,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             EzConfig.preferences.setString(widget.prefsKey, noImageKey);
             popScreen(context: context, pass: noImageKey);
           },
-          label: ezText('Clear'),
+          label: Text('Clear'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -160,7 +159,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          ezText(title),
+          Text(title),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest

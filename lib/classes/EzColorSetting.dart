@@ -114,7 +114,6 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Returns the [Color.value] of the "reset color" from [EzConfig.defaults] (null otherwise)
   Future<dynamic> _reset() {
     Color resetColor = Color(EzConfig.defaults[widget.toControl]);
-    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     return openDialog(
       context: context,
@@ -130,11 +129,10 @@ class _ColorSettingState extends State<EzColorSetting> {
               border: Border.all(color: getContrastColor(resetColor)),
             ),
           ),
-          Container(height: dialogSpacer),
+          Container(height: EzConfig.prefs[buttonSpacingKey]),
 
-          // Yes
-          ElevatedButton.icon(
-            onPressed: () {
+          EzYesNo(
+            onConfirm: () {
               // Remove the user's setting and reset the current state
               EzConfig.preferences.remove(widget.toControl);
 
@@ -144,16 +142,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               popScreen(context: context, pass: resetColor);
             },
-            label: ezText('Yes'),
-            icon: Icon(PlatformIcons(context).checkMark),
-          ),
-          Container(height: dialogSpacer),
-
-          // No
-          ElevatedButton.icon(
-            onPressed: () => popScreen(context: context),
-            icon: Icon(PlatformIcons(context).edit),
-            label: ezText('Use custom'),
+            onDeny: () => popScreen(context: context),
+            denyMsg: 'Use custom',
+            denyIcon: Icon(PlatformIcons(context).edit),
           ),
         ],
         needsClose: false,
