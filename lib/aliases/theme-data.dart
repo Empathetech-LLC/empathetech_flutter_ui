@@ -36,6 +36,9 @@ ThemeData ezThemeData({required bool light}) {
 
   TextStyle pageSelection = buildHeadlineMedium(backgroundTextColor);
 
+  TextStyle dialogTitleStyle = buildTitleMedium(themeTextColor);
+  TextStyle dialogContentStyle = buildLabelMedium(themeTextColor);
+
   return ThemeData(
     brightness: light ? Brightness.light : Brightness.dark,
 
@@ -78,8 +81,10 @@ ThemeData ezThemeData({required bool light}) {
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor,
         textStyle: buttonTextStyle,
+        backgroundColor: buttonColor,
+        shadowColor: buttonColor,
+        side: BorderSide(color: buttonColor),
         padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
       ),
     ),
@@ -105,7 +110,9 @@ ThemeData ezThemeData({required bool light}) {
 
     // Dialogs
     dialogTheme: DialogTheme(
+      titleTextStyle: dialogTitleStyle,
       backgroundColor: themeColor,
+      contentTextStyle: dialogContentStyle,
       iconColor: themeTextColor,
       alignment: Alignment.center,
     ),
