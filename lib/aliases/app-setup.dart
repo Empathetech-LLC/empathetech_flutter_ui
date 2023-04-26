@@ -39,8 +39,6 @@ MaterialAppData ezMaterialAppData() {
 /// Quickly setup a standard [CupertinoAppData]
 CupertinoAppData ezCupertinoAppData() {
   return CupertinoAppData(
-    theme: ezCupertinoThemeData(
-      light: (EzConfig.themeMode == ThemeMode.light),
-    ),
+    theme: ezCupertinoThemeData(themeMode: EzConfig.themeMode),
   );
 }
