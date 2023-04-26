@@ -15,7 +15,7 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   ThemeMode _currMode = EzConfig.themeMode;
 
-  late TextStyle? style = headlineMedium(context);
+  late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
     return [

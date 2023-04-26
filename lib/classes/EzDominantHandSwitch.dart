@@ -15,7 +15,7 @@ class EzLeftySwitch extends StatefulWidget {
 class _LeftySwitchState extends State<EzLeftySwitch> {
   Hand _currSide = EzConfig.dominantSide;
 
-  late TextStyle? style = headlineMedium(context);
+  late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   List<DropdownMenuItem<Hand>> _handOptions() {
     return [
