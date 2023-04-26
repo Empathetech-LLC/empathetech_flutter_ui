@@ -43,7 +43,6 @@ ThemeData ezThemeData({required bool light}) {
     brightness: light ? Brightness.light : Brightness.dark,
 
     // General colors
-    dividerColor: themeTextColor,
     highlightColor: buttonColor,
     hintColor: themeTextColor,
     indicatorColor: buttonColor,
