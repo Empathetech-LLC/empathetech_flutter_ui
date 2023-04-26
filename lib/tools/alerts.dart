@@ -29,6 +29,7 @@ Future<dynamic> logAlert(
 Card warningCard({
   required BuildContext context,
   required String warning,
+  TextStyle? style,
 }) {
   Color iconColor = Color(EzConfig.prefs[alertColorKey]);
 
@@ -36,26 +37,42 @@ Card warningCard({
 
   return Card(
     child: Container(
-      width: widthOf(context),
       padding: EdgeInsets.all(padding),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Title
           Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.warning, color: iconColor),
-              ezText('WARNING'),
-              Icon(Icons.warning, color: iconColor),
+              // Thing1
+              Icon(
+                Icons.warning,
+                color: iconColor,
+                size: style?.fontSize,
+              ),
+              Container(width: padding),
+
+              ezText(
+                'WARNING',
+                style: style,
+              ),
+              Container(width: padding),
+
+              // Thing 2
+              Icon(
+                Icons.warning,
+                color: iconColor,
+                size: style?.fontSize,
+              ),
             ],
           ),
           Container(height: padding),
 
           // Label
-          ezText(warning),
+          ezText(warning, style: style),
         ],
       ),
     ),

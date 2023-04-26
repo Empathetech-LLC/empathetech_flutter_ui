@@ -13,6 +13,8 @@ class EzLeftySwitch extends StatefulWidget {
 }
 
 class _LeftySwitchState extends State<EzLeftySwitch> {
+  Hand _currSide = EzConfig.dominantSide;
+
   late TextStyle? style = headlineMedium(context);
 
   List<DropdownMenuItem<Hand>> _handOptions() {
@@ -41,15 +43,25 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
 
         // Button
         DropdownButton<Hand>(
-          value: EzConfig.dominantSide,
+          value: _currSide,
           items: _handOptions(),
           onChanged: (Hand? newDominantSide) {
+            // Right
             if (newDominantSide == Hand.right) {
-              EzConfig.dominantSide = Hand.right;
               EzConfig.preferences.remove(isRightKey);
-            } else if (newDominantSide == Hand.left) {
-              EzConfig.dominantSide = Hand.left;
+              setState(() {
+                _currSide = Hand.right;
+                EzConfig.dominantSide = Hand.right;
+              });
+            }
+
+            // Left
+            else if (newDominantSide == Hand.left) {
               EzConfig.preferences.setBool(isRightKey, false);
+              setState(() {
+                _currSide = Hand.left;
+                EzConfig.dominantSide = Hand.left;
+              });
             }
           },
         ),

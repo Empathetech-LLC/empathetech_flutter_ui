@@ -13,6 +13,8 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
+  ThemeMode _currMode = EzConfig.themeMode;
+
   late TextStyle? style = headlineMedium(context);
 
   List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
@@ -45,18 +47,34 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
         // Button
         DropdownButton<ThemeMode>(
-            value: EzConfig.themeMode,
+            value: _currMode,
             items: _themeModeItems(),
             onChanged: (ThemeMode? newThemeMode) {
+              // System
               if (newThemeMode == ThemeMode.system) {
                 EzConfig.preferences.remove(isLightKey);
-                EzConfig.themeMode = ThemeMode.system;
-              } else if (newThemeMode == ThemeMode.light) {
+                setState(() {
+                  EzConfig.themeMode = ThemeMode.system;
+                  _currMode = ThemeMode.system;
+                });
+              }
+
+              // Light
+              else if (newThemeMode == ThemeMode.light) {
                 EzConfig.preferences.setBool(isLightKey, true);
-                EzConfig.themeMode = ThemeMode.light;
-              } else if (newThemeMode == ThemeMode.dark) {
+                setState(() {
+                  EzConfig.themeMode = ThemeMode.light;
+                  _currMode = ThemeMode.light;
+                });
+              }
+
+              // Dark
+              else if (newThemeMode == ThemeMode.dark) {
                 EzConfig.preferences.setBool(isLightKey, false);
-                EzConfig.themeMode = ThemeMode.dark;
+                setState(() {
+                  EzConfig.themeMode = ThemeMode.dark;
+                  _currMode = ThemeMode.dark;
+                });
               }
             }),
       ],
