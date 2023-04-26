@@ -81,6 +81,7 @@ ThemeData ezThemeData({required bool light}) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: buttonTextStyle,
+        alignment: Alignment.center,
         backgroundColor: buttonColor,
         shadowColor: buttonColor,
         side: BorderSide(color: buttonColor),
