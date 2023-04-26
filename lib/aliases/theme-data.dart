@@ -37,6 +37,8 @@ ThemeData ezThemeData({required bool light}) {
   TextStyle pageSelection = buildHeadlineMedium(backgroundTextColor);
 
   return ThemeData(
+    brightness: light ? Brightness.light : Brightness.dark,
+
     // General colors
     dividerColor: themeTextColor,
     highlightColor: buttonColor,
@@ -123,7 +125,13 @@ ThemeData ezThemeData({required bool light}) {
 }
 
 /// [CupertinoThemeData] using [EzConfig] values
-CupertinoThemeData ezCupertinoThemeData({required bool light}) {
+CupertinoThemeData ezCupertinoThemeData({required ThemeMode themeMode}) {
+  bool light = (themeMode == ThemeMode.system)
+      ? true
+      : (themeMode == ThemeMode.light)
+          ? true
+          : false;
+
   Color themeColor =
       Color(EzConfig.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
   Color themeTextColor = Color(
@@ -133,6 +141,7 @@ CupertinoThemeData ezCupertinoThemeData({required bool light}) {
       EzConfig.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
 
   return CupertinoThemeData(
+    brightness: light ? Brightness.light : Brightness.dark,
     primaryColor: themeColor,
     primaryContrastingColor: themeTextColor,
     textTheme: cupertinoTextTheme(themeTextColor),
