@@ -34,6 +34,7 @@ Future<dynamic> ezColorPicker({
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
+          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
         ),
         Container(height: EzConfig.prefs[buttonSpacingKey]),
 
