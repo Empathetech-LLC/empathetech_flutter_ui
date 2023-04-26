@@ -161,7 +161,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       reverseHands: true,
       children: [
         // Color label
-        ezText(widget.message),
+        ezText(widget.message, style: titleMedium(context)),
 
         Container(width: EzConfig.prefs[buttonSpacingKey]),
 
