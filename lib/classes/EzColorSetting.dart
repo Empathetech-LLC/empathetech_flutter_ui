@@ -155,13 +155,15 @@ class _ColorSettingState extends State<EzColorSetting> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       scrollDirection: Axis.horizontal,
       reverseHands: true,
       children: [
         // Color label
         ezText(widget.message),
+
+        Container(width: EzConfig.prefs[buttonSpacingKey]),
 
         // Color preview/edit button
         ElevatedButton(
@@ -172,6 +174,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           style: ElevatedButton.styleFrom(
             backgroundColor: currColor,
             padding: EdgeInsets.all(EzConfig.prefs[paddingKey] * 2),
+            shape: CircleBorder(),
           ),
         ),
       ],
