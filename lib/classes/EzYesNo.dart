@@ -12,8 +12,8 @@ class EzYesNo extends StatelessWidget {
   final double? spacer;
   final String confirmMsg;
   final String denyMsg;
-  final Icon? customConfirm;
-  final Icon? customDeny;
+  final Icon? confirmIcon;
+  final Icon? denyIcon;
 
   EzYesNo({
     required this.onConfirm,
@@ -22,14 +22,15 @@ class EzYesNo extends StatelessWidget {
     this.spacer,
     this.confirmMsg = 'Yes',
     this.denyMsg = 'No',
-    this.customConfirm,
-    this.customDeny,
+    this.confirmIcon,
+    this.denyIcon,
   });
 
   @override
   Widget build(BuildContext context) {
-    Icon confirmIcon = customConfirm ?? Icon(PlatformIcons(context).checkMark);
-    Icon denyIcon = customDeny ?? Icon(PlatformIcons(context).clear);
+    Icon confirm = confirmIcon ?? Icon(PlatformIcons(context).checkMark);
+    Icon deny = denyIcon ?? Icon(PlatformIcons(context).clear);
+
     double spacing =
         (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
 
@@ -38,15 +39,18 @@ class EzYesNo extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Yes
               ElevatedButton.icon(
                 onPressed: onConfirm,
-                icon: confirmIcon,
+                icon: confirm,
                 label: Text(confirmMsg),
               ),
               Container(height: spacing),
+
+              // No
               ElevatedButton.icon(
                 onPressed: onDeny,
-                icon: denyIcon,
+                icon: deny,
                 label: Text(denyMsg),
               ),
             ],
@@ -55,13 +59,20 @@ class EzYesNo extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Yes
               ElevatedButton.icon(
-                  onPressed: onConfirm,
-                  icon: confirmIcon,
-                  label: Text(confirmMsg)),
+                onPressed: onConfirm,
+                icon: confirm,
+                label: Text(confirmMsg),
+              ),
               Container(width: spacing),
+
+              // No
               ElevatedButton.icon(
-                  onPressed: onDeny, icon: denyIcon, label: Text(denyMsg)),
+                onPressed: onDeny,
+                icon: deny,
+                label: Text(denyMsg),
+              ),
             ],
           );
   }
