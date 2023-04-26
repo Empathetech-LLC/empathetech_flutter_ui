@@ -84,28 +84,21 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
             Container(height: buttonSpacer),
 
-            // Yes
-            ElevatedButton.icon(
-              onPressed: () {
+            // Confirm/deny
+            EzYesNo(
+              onConfirm: () {
                 EzConfig.preferences.setInt(widget.toControl, recommended);
                 setState(() {
                   currColor = Color(recommended);
                 });
                 popScreen(context: context, pass: recommended);
               },
-              label: ezText('Yes'),
-              icon: Icon(PlatformIcons(context).checkMark),
-            ),
-            Container(height: buttonSpacer),
-
-            // No
-            ElevatedButton.icon(
-              onPressed: () async {
+              onDeny: () async {
                 dynamic chosen = await _openColorPicker();
                 popScreen(context: context, pass: chosen);
               },
-              icon: Icon(PlatformIcons(context).edit),
-              label: ezText('Use custom'),
+              denyIcon: Icon(PlatformIcons(context).edit),
+              denyMsg: 'Use custom',
             ),
           ],
           needsClose: true,
