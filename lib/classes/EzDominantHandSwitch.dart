@@ -44,11 +44,12 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
           value: EzConfig.dominantSide,
           items: _handOptions(),
           onChanged: (Hand? newDominantSide) {
-            if (newDominantSide != null) {
-              setState(() {
-                EzConfig.dominantSide =
-                    (newDominantSide == Hand.right) ? Hand.right : Hand.left;
-              });
+            if (newDominantSide == Hand.right) {
+              EzConfig.dominantSide = Hand.right;
+              EzConfig.preferences.remove(isRightKey);
+            } else if (newDominantSide == Hand.left) {
+              EzConfig.dominantSide = Hand.left;
+              EzConfig.preferences.setBool(isRightKey, false);
             }
           },
         ),

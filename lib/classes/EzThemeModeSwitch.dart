@@ -45,23 +45,20 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
         // Button
         DropdownButton<ThemeMode>(
-          value: EzConfig.themeMode,
-          items: _themeModeItems(),
-          onChanged: (ThemeMode? newThemeMode) {
-            if (newThemeMode != null) {
+            value: EzConfig.themeMode,
+            items: _themeModeItems(),
+            onChanged: (ThemeMode? newThemeMode) {
               if (newThemeMode == ThemeMode.system) {
                 EzConfig.preferences.remove(isLightKey);
-              } else {
-                bool isLight = newThemeMode == ThemeMode.light;
-                EzConfig.preferences.setBool(isLightKey, isLight);
+                EzConfig.themeMode = ThemeMode.system;
+              } else if (newThemeMode == ThemeMode.light) {
+                EzConfig.preferences.setBool(isLightKey, true);
+                EzConfig.themeMode = ThemeMode.light;
+              } else if (newThemeMode == ThemeMode.dark) {
+                EzConfig.preferences.setBool(isLightKey, false);
+                EzConfig.themeMode = ThemeMode.dark;
               }
-
-              setState(() {
-                EzConfig.themeMode = newThemeMode;
-              });
-            }
-          },
-        ),
+            }),
       ],
     );
   }
