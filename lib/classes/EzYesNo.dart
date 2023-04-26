@@ -18,7 +18,7 @@ class EzYesNo extends StatelessWidget {
   EzYesNo({
     required this.onConfirm,
     required this.onDeny,
-    required this.axis,
+    this.axis = Axis.vertical,
     this.spacer,
     this.confirmMsg = 'Yes',
     this.denyMsg = 'No',
