@@ -85,7 +85,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late double buttonSize = buttonSpacer;
 
   late Color showing = widget.iconColor;
-  late Color hiding = widget.iconColor.withOpacity(widget.hiddenOpacity);
+  late Color hiding = widget.hiddenOpacity == 0.0
+      ? Colors.transparent
+      : widget.iconColor.withOpacity(widget.hiddenOpacity);
 
   void _playVideo() {
     setState(() {
@@ -176,7 +178,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     }
   }
 
-  List<Widget> _buildButtons({required SliderThemeData videoSliderTheme}) {
+  List<Widget> _buildButtons(SliderThemeData sliderTheme) {
     List<Widget> controls = [];
 
     // Play/pause
@@ -222,7 +224,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           height: buttonSize,
           width: buttonSize * 3.0,
           child: SliderTheme(
-            data: videoSliderTheme,
+            data: sliderTheme,
             child: Slider(
               value: widget.controller.value.volume,
               onChanged: (double value) {
@@ -257,21 +259,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Widget build(BuildContext context) {
     Color sliderColor = _buildColor(widget.sliderVis);
 
-    SliderThemeData videoSliderTheme = SliderThemeData(
-      thumbShape: (sliderColor == Colors.transparent)
-          ? SliderComponentShape.noThumb
-          : null,
-      overlayShape: SliderComponentShape.noOverlay,
-      trackShape: VideoSliderTrack(),
-      activeTrackColor: sliderColor,
-      disabledActiveTrackColor: Colors.transparent,
-      secondaryActiveTrackColor: sliderColor,
-      disabledSecondaryActiveTrackColor: Colors.transparent,
-      thumbColor: sliderColor,
-      disabledThumbColor: Colors.transparent,
-      inactiveTrackColor: sliderColor,
-      disabledInactiveTrackColor: Colors.transparent,
-    );
+    SliderThemeData videoSliderTheme = Theme.of(context).sliderTheme.copyWith(
+          thumbShape: (sliderColor == Colors.transparent)
+              ? SliderComponentShape.noThumb
+              : null,
+          activeTrackColor: sliderColor,
+          thumbColor: sliderColor,
+          trackShape: VideoSliderTrack(),
+        );
 
     return MouseRegion(
       onEnter: (_) {
@@ -346,8 +341,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            _buildButtons(videoSliderTheme: videoSliderTheme),
+                        children: _buildButtons(videoSliderTheme),
                       ),
                     ],
                   ),
