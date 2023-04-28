@@ -11,6 +11,7 @@ ThemeData ezThemeData({required bool light}) {
       Color(EzConfig.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
   Color themeTextColor = Color(
       EzConfig.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
+  Color unSelectedThemeTextColor = blendColors(themeColor, themeTextColor);
 
   Color backgroundColor = Color(
       EzConfig.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
@@ -23,6 +24,7 @@ ThemeData ezThemeData({required bool light}) {
       EzConfig.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
   TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
+  TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
   IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
     size: appBarTextStyle.fontSize,
@@ -62,6 +64,14 @@ ThemeData ezThemeData({required bool light}) {
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
       titleTextStyle: appBarTextStyle,
+    ),
+
+    // TabBar
+    tabBarTheme: TabBarTheme(
+      labelStyle: tabBarTextStyle,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(
+        color: unSelectedThemeTextColor,
+      ),
     ),
 
     // Drawer
