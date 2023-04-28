@@ -129,14 +129,20 @@ ThemeData ezThemeData({required bool light}) {
 
     // Sliders
     sliderTheme: SliderThemeData(
-      thumbColor: buttonColor,
-      disabledThumbColor: themeColor,
-      overlayColor: buttonColor,
-      activeTrackColor: buttonColor,
-      activeTickMarkColor: buttonTextColor,
-      inactiveTrackColor: themeColor,
-      inactiveTickMarkColor: themeTextColor,
       overlayShape: SliderComponentShape.noOverlay,
+      overlayColor: Colors.transparent,
+      thumbColor: buttonColor,
+      activeTrackColor: buttonColor,
+      valueIndicatorColor: buttonColor,
+      activeTickMarkColor: buttonTextColor,
+      disabledThumbColor: Colors.transparent,
+      disabledActiveTrackColor: Colors.transparent,
+      disabledInactiveTrackColor: Colors.transparent,
+      disabledActiveTickMarkColor: Colors.transparent,
+      disabledInactiveTickMarkColor: Colors.transparent,
+      disabledSecondaryActiveTrackColor: Colors.transparent,
+      inactiveTrackColor: Colors.transparent,
+      inactiveTickMarkColor: Colors.transparent,
     ),
   );
 }
