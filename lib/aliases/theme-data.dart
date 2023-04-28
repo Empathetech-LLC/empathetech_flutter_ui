@@ -69,9 +69,11 @@ ThemeData ezThemeData({required bool light}) {
     // TabBar
     tabBarTheme: TabBarTheme(
       labelStyle: tabBarTextStyle,
+      labelColor: themeTextColor,
       unselectedLabelStyle: tabBarTextStyle.copyWith(
         color: unSelectedThemeTextColor,
       ),
+      unselectedLabelColor: unSelectedThemeTextColor,
     ),
 
     // Drawer
