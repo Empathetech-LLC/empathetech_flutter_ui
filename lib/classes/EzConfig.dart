@@ -37,7 +37,7 @@ class EzConfig {
   static late ThemeMode themeMode;
 
   /// Keeps track of the app-wide text scalar
-  static double fontScalar = 1.0;
+  static late double fontScalar;
 
   /// What side of the screen touch points should be on
   static late Hand dominantSide;
@@ -48,6 +48,7 @@ class EzConfig {
     paddingKey: 12.5,
 
     fontFamilyKey: roboto,
+    fontScalarKey: 1.0,
 
     alertColorKey:
         0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
@@ -141,8 +142,8 @@ class EzConfig {
     dominantSide =
         (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
-    double? storedScalar = preferences.getDouble(fontScalarKey);
-    if (storedScalar != null) EzConfig.fontScalar = storedScalar;
+    // Redundant fontScalar for theming
+    fontScalar = EzConfig.prefs[fontScalarKey];
   }
 }
 
