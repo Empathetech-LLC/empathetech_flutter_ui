@@ -126,6 +126,20 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: buttonSpacer),
         ];
 
+      // Button height
+      case SettingType.buttonHeight:
+        return [
+          // Live preview && label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text('Currently: $currValue'),
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(widthOf(context), currValue),
+            ),
+          ),
+          Container(height: buttonSpacer),
+        ];
+
       // Button spacing
       case SettingType.buttonSpacing:
         return [
@@ -141,23 +155,23 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 onPressed: doNothing,
                 child: Text('Currently: $currValue'),
               ),
-              SizedBox(height: currValue),
+              SizedBox(height: buttonSpacer),
             ],
           ),
         ];
 
-      // Button height
-      case SettingType.buttonHeight:
+      // Paragraph spacing
+      case SettingType.paragraphSpacing:
         return [
           // Live preview && label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text('Currently: $currValue'),
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(widthOf(context), currValue),
-            ),
+          EzScrollView(
+            children: [
+              ezText('Currently: $currValue', style: descriptorStyle),
+              SizedBox(height: currValue),
+              ezText('Currently: $currValue', style: descriptorStyle),
+              SizedBox(height: buttonSpacer),
+            ],
           ),
-          Container(height: buttonSpacer),
         ];
 
       default:
