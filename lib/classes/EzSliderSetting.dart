@@ -54,7 +54,10 @@ class EzSliderSetting extends StatefulWidget {
 class _SliderSettingState extends State<EzSliderSetting> {
   late double currValue = EzConfig.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
+
+  late double padding = EzConfig.prefs[paddingKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double paragraphSpacer = EzConfig.prefs[paragraphSpacingKey];
 
   late TextStyle? titleStyle = headlineSmall(context);
   late TextStyle? descriptorStyle = titleMedium(context);
@@ -65,6 +68,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Font size
       case SettingType.fontSize:
         return [
+          // Title padding
+          Container(height: padding),
+
+          // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
             child: Text('Currently: $currValue'),
@@ -78,19 +85,30 @@ class _SliderSettingState extends State<EzSliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
+          // Title padding
+          Container(height: padding),
+
           EzScrollView(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             scrollDirection: Axis.horizontal,
             children: [
+              // Live label
               ezText(
                 'Currently:\n$currValue\n\n(to scale)',
                 style: descriptorStyle,
               ),
+              Container(width: paragraphSpacer),
+
+              // Live preview
               Container(
+                color: Theme.of(context).appBarTheme.backgroundColor,
                 height: 160.0,
                 width: 90.0,
-                child: Container(margin: EdgeInsets.all(liveMargin)),
+                child: Container(
+                  color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                  margin: EdgeInsets.all(liveMargin),
+                ),
               ),
             ],
           ),
@@ -100,13 +118,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SettingType.padding:
         return [
+          // Title padding && live preview
+          Container(height: currValue),
+
+          // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Padding(
-              padding: EdgeInsets.all(currValue),
-              child: Text('Currently: $currValue'),
-            ),
-            style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+            child: Text('Currently: $currValue'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -114,6 +132,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SettingType.buttonSpacing:
         return [
+          // Title padding
+          Container(height: padding),
+
+          // Live preview && label
           EzScrollView(
             children: [
               ElevatedButton(
@@ -133,6 +155,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button height
       case SettingType.buttonHeight:
         return [
+          // Title padding
+          Container(height: padding),
+
+          // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
             child: Text('Currently: $currValue'),
@@ -146,9 +172,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Dialog spacing
       case SettingType.dialogSpacing:
         return [
+          // Title padding
+          Container(height: padding),
+
+          // Open-able preview
           ElevatedButton(
             onPressed: () => openDialog(
               context: context,
+              // Live preview && labels
               dialog: EzDialog(
                 title: ezText('Space preview'),
                 contents: [
@@ -189,7 +220,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Value slider
       ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: widthOf(context) * (2 / 3),
+          maxWidth: 700, // Chosen via visual inspection
         ),
         child: PlatformSlider(
           // Function
