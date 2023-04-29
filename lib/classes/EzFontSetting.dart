@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class EzFontSetting extends StatefulWidget {
   /// Standardized tool for updating the [fontFamilyKey] in [EzConfig.prefs]
@@ -39,7 +40,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             popScreen(context: context, pass: font);
           },
           child: Text(
-            font,
+            (font == defaultFontFamily) ? '$font* (Default)' : font,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -64,27 +65,12 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Font picker
-        ElevatedButton(
+        ElevatedButton.icon(
           onPressed: _chooseGoogleFont,
-          child: Text(
-            'Choose font:\n$currFontFamily',
+          icon: Icon(LineIcons.font),
+          label: Text(
+            'Font Family',
             style: TextStyle(fontFamily: currFontFamily),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Container(height: buttonSpacer),
-
-        // Font resetter
-        ElevatedButton(
-          onPressed: () {
-            EzConfig.preferences.remove(fontFamilyKey);
-            setState(() {
-              currFontFamily = defaultFontFamily;
-            });
-          },
-          child: Text(
-            'Reset font\n($defaultFontFamily)',
-            style: TextStyle(fontFamily: defaultFontFamily),
             textAlign: TextAlign.center,
           ),
         ),
