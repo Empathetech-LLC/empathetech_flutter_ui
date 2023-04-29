@@ -22,23 +22,10 @@ PlatformApp ezApp({
     title: title,
     debugShowCheckedModeBanner: false,
     routes: {'/': (context) => homeScreenWidget},
-    material: (context, platform) => ezMaterialAppData(),
-    cupertino: (context, platform) => ezCupertinoAppData(),
-  );
-}
-
-/// Quickly setup a standard [MaterialAppData]
-MaterialAppData ezMaterialAppData() {
-  return MaterialAppData(
-    theme: ezThemeData(light: true),
-    darkTheme: ezThemeData(light: false),
-    themeMode: EzConfig.themeMode,
-  );
-}
-
-/// Quickly setup a standard [CupertinoAppData]
-CupertinoAppData ezCupertinoAppData() {
-  return CupertinoAppData(
-    theme: ezCupertinoThemeData(themeMode: EzConfig.themeMode),
+    material: (context, platform) => MaterialAppData(
+      theme: ezLightThemeData(),
+      darkTheme: ezDarkThemeData(),
+      themeMode: EzConfig.themeMode,
+    ),
   );
 }
