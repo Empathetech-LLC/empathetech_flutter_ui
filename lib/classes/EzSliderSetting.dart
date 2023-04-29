@@ -8,7 +8,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// Enumerator for selecting the type of setting that is being updated
 /// This will determine the preview [Widget]s
 enum SettingType {
-  fontSize,
+  fontScalar,
   margin,
   padding,
   buttonHeight,
@@ -66,15 +66,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
   List<Widget> _buildPreview() {
     switch (widget.type) {
       // Font size
-      case SettingType.fontSize:
+      case SettingType.fontScalar:
         return [
           // Title padding
           Container(height: padding),
 
           // Live preview && label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text('Currently: $currValue'),
+          ezText(
+            'Currently: $currValue',
+            style: descriptorStyle?.copyWith(fontSize: currValue),
           ),
           Container(height: buttonSpacer),
         ];
