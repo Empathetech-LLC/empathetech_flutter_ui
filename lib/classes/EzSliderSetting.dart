@@ -56,6 +56,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
+  late TextStyle? titleStyle = headlineSmall(context);
+  late TextStyle? descriptorStyle = titleMedium(context);
+
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview() {
     switch (widget.type) {
@@ -80,7 +83,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             scrollDirection: Axis.horizontal,
             children: [
-              ezText('Currently:\n$currValue\n\n(to scale)'),
+              ezText(
+                'Currently:\n$currValue\n\n(to scale)',
+                style: descriptorStyle,
+              ),
               Container(
                 height: 160.0,
                 width: 90.0,
@@ -149,14 +155,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
                   // Button 1
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: ezText('Currently: $currValue'),
+                    child: Text('Currently: $currValue'),
                   ),
                   Container(height: currValue),
 
                   // Button 2
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: ezText('Currently: $currValue'),
+                    child: Text('Currently: $currValue'),
                   ),
                   Container(height: currValue),
                 ],
@@ -175,7 +181,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
   List<Widget> buildList() {
-    List<Widget> toReturn = [ezText(widget.title)];
+    List<Widget> toReturn = [ezText(widget.title, style: titleStyle)];
 
     toReturn.addAll(_buildPreview());
 
