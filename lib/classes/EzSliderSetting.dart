@@ -115,13 +115,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SettingType.padding:
         return [
-          // Title padding && live preview
+          // Live label && live preview
+          ezText('Currently:', style: titleStyle),
           Container(height: currValue),
 
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: $currValue'),
+            child: Text(currValue.toString()),
           ),
           Container(height: buttonSpacer),
         ];
