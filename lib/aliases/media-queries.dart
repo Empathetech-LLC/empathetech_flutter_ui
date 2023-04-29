@@ -1,13 +1,11 @@
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 /// Return whether the current theme is under a "Light" config
-bool isLightTheme() {
-  var brightness =
-      SchedulerBinding.instance.platformDispatcher.platformBrightness;
-  return brightness == Brightness.light;
+bool isLightTheme(BuildContext context) {
+  Brightness? brightness = MediaQuery.maybeOf(context)?.platformBrightness;
+  return (brightness == null) ? true : brightness == Brightness.light;
 }
 
 /// More readable than MediaQuery.of(context).size.width
