@@ -57,6 +57,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double defaultValue = EzConfig.defaults[widget.prefsKey];
 
   late double padding = EzConfig.prefs[paddingKey];
+  late double margin = EzConfig.prefs[marginKey];
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
   late double paragraphSpacer = EzConfig.prefs[paragraphSpacingKey];
 
@@ -69,6 +70,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Font size
       case SettingType.fontScalar:
         return [
+          // Title padding
+          Container(height: padding),
+
           // Live preview && label
           ezText(
             'Currently: $currValue',
@@ -85,6 +89,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
+          // Title padding
+          Container(height: padding),
+
           EzScrollView(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -115,14 +122,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SettingType.padding:
         return [
-          // Live label && live preview
-          ezText('Currently:', style: titleStyle),
+          // Live preview
           Container(height: currValue),
 
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(currValue.toString()),
+            child: Text('Currently: $currValue'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -130,6 +136,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button height
       case SettingType.buttonHeight:
         return [
+          // Title padding
+          Container(height: padding),
+
           // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
@@ -144,6 +153,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SettingType.buttonSpacing:
         return [
+          // Title padding
+          Container(height: padding),
+
           // Live preview && label
           EzScrollView(
             children: [
@@ -164,6 +176,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Paragraph spacing
       case SettingType.paragraphSpacing:
         return [
+          // Title padding
+          Container(height: padding),
+
           // Live preview && label
           EzScrollView(
             children: [
@@ -182,8 +197,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> _buildView() {
-    List<Widget> toReturn = [Container(height: paragraphSpacer)];
+  List<Widget> _buildView(StateSetter modalSheetSetState) {
+    List<Widget> toReturn = [
+      Container(height: margin),
+      ezText(widget.title, style: titleStyle),
+    ];
 
     toReturn.addAll(_buildPreview());
 
@@ -202,7 +220,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
           onChanged: (double value) {
             // Just update the on screen value while sliding around
-            setState(() {
+            modalSheetSetState(() {
               currValue = value;
             });
           },
@@ -225,14 +243,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
       ElevatedButton.icon(
         onPressed: () {
           EzConfig.preferences.remove(widget.prefsKey);
-          setState(() {
+          modalSheetSetState(() {
             currValue = EzConfig.defaults[widget.prefsKey];
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
         label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
-      Container(height: paragraphSpacer),
+      Container(height: margin),
     ]);
 
     // Build time!
@@ -260,9 +278,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
     return ElevatedButton.icon(
       onPressed: () => showPlatformModalSheet(
         context: context,
-        builder: (context) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: _buildView(),
+        builder: (context) => StatefulBuilder(
+          builder: (BuildContext context, StateSetter modalSheetSetState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _buildView(modalSheetSetState),
+            );
+          },
         ),
       ),
       icon: _buildIcon(),
