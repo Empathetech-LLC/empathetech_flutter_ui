@@ -18,6 +18,9 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   late String currFontFamily = EzConfig.prefs[fontFamilyKey];
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double padding = EzConfig.prefs[paddingKey];
+
+  late TextStyle? titleTextStyle = headlineSmall(context);
 
   /// Builds an [EzDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
   /// Returns the chosen font's name
@@ -61,7 +64,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Title
-        ezText('Font family'),
+        ezText('Font family', style: titleTextStyle),
+        Container(height: padding),
 
         // Font picker
         ElevatedButton(
