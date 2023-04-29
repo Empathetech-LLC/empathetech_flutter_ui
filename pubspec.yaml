@@ -25,6 +25,7 @@ dependencies:
   flutter_platform_widgets: ^3.2.0
   flutter_colorpicker: ^1.0.3
   fluttertoast: ^8.2.1
+  line_icons: ^2.0.1
 
 dev_dependencies:
   dependency_validator: ^3.0.0
