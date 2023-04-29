@@ -264,6 +264,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               ? SliderComponentShape.noThumb
               : null,
           activeTrackColor: sliderColor,
+          inactiveTrackColor: sliderColor,
           thumbColor: sliderColor,
           trackShape: VideoSliderTrack(),
         );
