@@ -187,31 +187,37 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
     toReturn.addAll([
       // Value slider
-      PlatformSlider(
-        // Function
-        value: currValue,
+      ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: widthOf(context) * (2 / 3),
+        ),
+        child: PlatformSlider(
+          // Function
+          value: currValue,
 
-        min: widget.min,
-        max: widget.max,
+          min: widget.min,
+          max: widget.max,
 
-        onChanged: (double value) {
-          // Just update the on screen value while sliding around
-          setState(() {
-            currValue = value;
-          });
-        },
-        onChangeEnd: (double value) {
-          // When finished, write the result
-          if (value == defaultValue) {
-            EzConfig.preferences.remove(widget.prefsKey);
-          } else {
-            EzConfig.preferences.setDouble(widget.prefsKey, value);
-          }
-        },
+          onChanged: (double value) {
+            // Just update the on screen value while sliding around
+            setState(() {
+              currValue = value;
+            });
+          },
+          onChangeEnd: (double value) {
+            // When finished, write the result
+            if (value == defaultValue) {
+              EzConfig.preferences.remove(widget.prefsKey);
+            } else {
+              EzConfig.preferences.setDouble(widget.prefsKey, value);
+            }
+          },
 
-        // Form
-        divisions: widget.steps,
+          // Form
+          divisions: widget.steps,
+        ),
       ),
+
       Container(height: buttonSpacer),
 
       // Reset button
