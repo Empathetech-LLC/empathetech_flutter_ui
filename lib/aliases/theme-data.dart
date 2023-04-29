@@ -143,8 +143,8 @@ ThemeData ezThemeData({required bool light}) {
       disabledActiveTickMarkColor: Colors.transparent,
       disabledInactiveTickMarkColor: Colors.transparent,
       disabledSecondaryActiveTrackColor: Colors.transparent,
-      inactiveTrackColor: Colors.transparent,
-      inactiveTickMarkColor: Colors.transparent,
+      inactiveTrackColor: unSelectedThemeTextColor,
+      inactiveTickMarkColor: themeTextColor,
     ),
   );
 }
