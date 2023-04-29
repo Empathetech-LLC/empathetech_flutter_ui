@@ -63,10 +63,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // Title
-        ezText('Font family', style: titleTextStyle),
-        Container(height: padding),
-
         // Font picker
         ElevatedButton(
           onPressed: _chooseGoogleFont,
@@ -78,7 +74,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
         ),
         Container(height: buttonSpacer),
 
-        // Font reset
+        // Font resetter
         ElevatedButton(
           onPressed: () {
             EzConfig.preferences.remove(fontFamilyKey);
