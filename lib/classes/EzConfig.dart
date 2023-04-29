@@ -58,8 +58,7 @@ class EzConfig {
     darkButtonColorKey: 0xE620DAA5,
     darkButtonTextColorKey: 0xFF000000,
 
-    buttonSpacingKey: 35.0,
-    dialogSpacingKey: 20.0,
+    buttonSpacingKey: 30.0,
     paragraphSpacingKey: 50,
 
     // Light theme //
@@ -164,7 +163,6 @@ const String fontScalarKey = 'fontScalar';
 const String alertColorKey = 'alertColor';
 
 const String buttonSpacingKey = 'buttonSpacing';
-const String dialogSpacingKey = 'dialogSpacing';
 const String paragraphSpacingKey = 'paragraphSpacing';
 
 // Light theme

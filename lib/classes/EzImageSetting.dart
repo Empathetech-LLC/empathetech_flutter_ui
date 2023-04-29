@@ -45,7 +45,6 @@ class _ImageSettingState extends State<EzImageSetting> {
   String? updatedPath; // Only used when the user makes a change
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
   /// Cleanup any custom files
   void _cleanup() async {

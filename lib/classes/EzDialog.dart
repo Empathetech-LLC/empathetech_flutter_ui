@@ -41,7 +41,6 @@ class EzDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
     double padding = EzConfig.prefs[paddingKey];
 
     return PlatformAlertDialog(
@@ -52,12 +51,12 @@ class EzDialog extends PlatformAlertDialog {
         // Title
         title: title,
         titlePadding:
-            EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
+            EdgeInsets.only(top: padding, left: padding, right: padding),
 
         // Content
         content: content ?? EzScrollView(children: contents!),
         contentPadding:
-            EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
+            EdgeInsets.symmetric(vertical: padding, horizontal: padding),
       ),
 
       // Cupertino (iOS)

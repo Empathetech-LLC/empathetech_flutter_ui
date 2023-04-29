@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting the type of setting that is being updated
@@ -13,7 +14,7 @@ enum SettingType {
   padding,
   buttonHeight,
   buttonSpacing,
-  dialogSpacing,
+  paragraphSpacing,
 }
 
 class EzSliderSetting extends StatefulWidget {
@@ -68,9 +69,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Font size
       case SettingType.fontScalar:
         return [
-          // Title padding
-          Container(height: padding),
-
           // Live preview && label
           ezText(
             'Currently: $currValue',
@@ -87,9 +85,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
-          // Title padding
-          Container(height: padding),
-
           EzScrollView(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -134,9 +129,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SettingType.buttonSpacing:
         return [
-          // Title padding
-          Container(height: padding),
-
           // Live preview && label
           EzScrollView(
             children: [
@@ -157,9 +149,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button height
       case SettingType.buttonHeight:
         return [
-          // Title padding
-          Container(height: padding),
-
           // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
@@ -171,41 +160,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: buttonSpacer),
         ];
 
-      // Dialog spacing
-      case SettingType.dialogSpacing:
-        return [
-          // Title padding
-          Container(height: padding),
-
-          // Open-able preview
-          ElevatedButton(
-            onPressed: () => openDialog(
-              context: context,
-              // Live preview && labels
-              dialog: EzDialog(
-                title: ezText('Space preview'),
-                contents: [
-                  // Button 1
-                  ElevatedButton(
-                    onPressed: doNothing,
-                    child: Text('Currently: $currValue'),
-                  ),
-                  Container(height: currValue),
-
-                  // Button 2
-                  ElevatedButton(
-                    onPressed: doNothing,
-                    child: Text('Currently: $currValue'),
-                  ),
-                  Container(height: currValue),
-                ],
-              ),
-            ),
-            child: Text('Press me'),
-          ),
-          Container(height: buttonSpacer),
-        ];
-
       default:
         return [Container(height: buttonSpacer)];
     }
@@ -213,8 +167,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> buildList() {
-    List<Widget> toReturn = [ezText(widget.title, style: titleStyle)];
+  List<Widget> _buildView() {
+    List<Widget> toReturn = [Container(height: paragraphSpacer)];
 
     toReturn.addAll(_buildPreview());
 
@@ -250,7 +204,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           divisions: widget.steps,
         ),
       ),
-
       Container(height: buttonSpacer),
 
       // Reset button
@@ -264,18 +217,41 @@ class _SliderSettingState extends State<EzSliderSetting> {
         icon: Icon(PlatformIcons(context).refresh),
         label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
       ),
+      Container(height: paragraphSpacer),
     ]);
 
     // Build time!
     return toReturn;
   }
 
+  Icon _buildIcon() {
+    switch (widget.type) {
+      case SettingType.fontScalar:
+        return Icon(LineIcons.textHeight);
+      case SettingType.margin:
+        return Icon(Icons.margin);
+      case SettingType.padding:
+        return Icon(Icons.padding);
+      case SettingType.buttonHeight:
+        return Icon(Icons.height);
+      case SettingType.buttonSpacing:
+      case SettingType.paragraphSpacing:
+        return Icon(Icons.space_bar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: buildList(),
+    return ElevatedButton.icon(
+      onPressed: () => showPlatformModalSheet(
+        context: context,
+        builder: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: _buildView(),
+        ),
+      ),
+      icon: _buildIcon(),
+      label: Text(widget.title),
     );
   }
 }
