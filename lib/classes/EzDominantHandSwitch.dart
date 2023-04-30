@@ -38,7 +38,7 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
       scrollDirection: Axis.horizontal,
       children: [
         // Label
-        ezText('Dominant hand', style: style),
+        EzSelectableText('Dominant hand', style: style),
         Container(width: EzConfig.prefs[buttonSpacingKey]),
 
         // Button

@@ -42,7 +42,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       scrollDirection: Axis.horizontal,
       children: [
         // Label
-        ezText('Theme mode', style: style),
+        EzSelectableText('Theme mode', style: style),
         Container(width: EzConfig.prefs[buttonSpacingKey]),
 
         // Button

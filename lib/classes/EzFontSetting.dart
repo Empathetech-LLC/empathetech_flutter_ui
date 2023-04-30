@@ -52,7 +52,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: ezText('Choose a font'),
+        title: EzSelectableText('Choose a font'),
         contents: buttons,
       ),
     );

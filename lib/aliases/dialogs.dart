@@ -28,7 +28,7 @@ Future<dynamic> ezColorPicker({
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: ezText('Pick a color!'),
+      title: EzSelectableText('Pick a color!'),
       contents: [
         // Color picker
         ColorPicker(

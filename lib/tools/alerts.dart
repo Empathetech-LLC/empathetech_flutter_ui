@@ -15,9 +15,9 @@ Future<dynamic> logAlert(
   return openDialog(
     context: context,
     dialog: EzDialog(
-      title: ezText('Attention:'),
+      title: EzSelectableText('Attention:'),
       contents: [
-        ezText(message),
+        EzSelectableText(message),
       ],
     ),
   );
@@ -55,7 +55,7 @@ Card warningCard({
               ),
               Container(width: padding),
 
-              ezText(
+              EzSelectableText(
                 'WARNING',
                 style: style,
               ),
@@ -72,7 +72,7 @@ Card warningCard({
           Container(height: padding),
 
           // Label
-          ezText(warning, style: style),
+          EzSelectableText(warning, style: style),
         ],
       ),
     ),

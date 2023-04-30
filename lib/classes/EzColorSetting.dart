@@ -71,7 +71,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return openDialog(
         context: context,
         dialog: EzDialog(
-          title: ezText('Use recommended?'),
+          title: EzSelectableText('Use recommended?'),
           contents: [
             // Recommended preview
             Container(
@@ -118,7 +118,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: ezText('Reset to...'),
+        title: EzSelectableText('Reset to...'),
         contents: [
           // Color preview
           Container(
@@ -161,7 +161,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       reverseHands: true,
       children: [
         // Color label
-        ezText(widget.message, style: titleMedium(context)),
+        EzSelectableText(widget.message, style: titleMedium(context)),
 
         Container(width: EzConfig.prefs[buttonSpacingKey]),
 

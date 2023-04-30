@@ -74,7 +74,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: padding),
 
           // Live preview && label
-          ezText(
+          EzSelectableText(
             'Currently: $currValue',
             style: descriptorStyle?.copyWith(
               fontSize: descriptorStyle!.fontSize! * currValue,
@@ -98,7 +98,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             scrollDirection: Axis.horizontal,
             children: [
               // Live label
-              ezText(
+              EzSelectableText(
                 'Currently:\n$currValue\n\n(to scale)',
                 style: descriptorStyle,
               ),
@@ -182,9 +182,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live preview && label
           EzScrollView(
             children: [
-              ezText('Currently: $currValue', style: descriptorStyle),
+              EzSelectableText('Currently: $currValue', style: descriptorStyle),
               SizedBox(height: currValue),
-              ezText('Currently: $currValue', style: descriptorStyle),
+              EzSelectableText('Currently: $currValue', style: descriptorStyle),
               SizedBox(height: buttonSpacer),
             ],
           ),
@@ -200,7 +200,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   List<Widget> _buildView(StateSetter modalSheetSetState) {
     List<Widget> toReturn = [
       Container(height: margin),
-      ezText(widget.title, style: titleStyle),
+      EzSelectableText(widget.title, style: titleStyle),
     ];
 
     toReturn.addAll(_buildPreview());

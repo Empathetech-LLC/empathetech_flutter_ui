@@ -5,34 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-/// Simplified alias for [SelectableText]
-/// Defaults to [enableInteractiveSelection] && [TextAlign.center]
-SelectableText ezText(
-  String text, {
-  TextStyle? style,
-  TextAlign? textAlign = TextAlign.center,
-  TextDirection? textDirection,
-  double? textScaleFactor,
-  int? minLines,
-  int? maxLines,
-  bool enableInteractiveSelection = true,
-  TextSelectionControls? selectionControls,
-  void Function()? onTap,
-}) {
-  return SelectableText(
-    text,
-    style: style,
-    textAlign: textAlign,
-    textDirection: textDirection,
-    textScaleFactor: textScaleFactor,
-    minLines: minLines,
-    maxLines: maxLines,
-    enableInteractiveSelection: enableInteractiveSelection,
-    selectionControls: selectionControls,
-    onTap: onTap,
-  );
-}
-
 /// Simplified alias for [SelectableText.rich]
 /// Defaults to [enableInteractiveSelection] && [TextAlign.center]
 SelectableText ezRichText(

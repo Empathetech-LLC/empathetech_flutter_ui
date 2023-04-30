@@ -125,7 +125,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: ezText('Update $title'),
+        title: EzSelectableText('Update $title'),
         contents: options,
       ),
     );
@@ -147,8 +147,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       onLongPress: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: ezText('Credit to:'),
-          contents: [ezText(widget.credits)],
+          title: EzSelectableText('Credit to:'),
+          contents: [EzSelectableText(widget.credits)],
         ),
       ),
 

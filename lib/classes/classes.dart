@@ -9,6 +9,7 @@ export 'EzImage.dart';
 export 'EzImageSetting.dart';
 export 'EzNotifications.dart';
 export 'EzScrollView.dart';
+export 'EzSelectableText.dart';
 export 'EzSliderSetting.dart';
 export 'EzTextStyle.dart';
 export 'EzThemeModeSwitch.dart';
