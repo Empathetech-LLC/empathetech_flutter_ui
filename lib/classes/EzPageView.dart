@@ -39,7 +39,7 @@ class EzPageView extends SingleChildScrollView {
 
     // Column
     this.columnKey,
-    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.textDirection,
