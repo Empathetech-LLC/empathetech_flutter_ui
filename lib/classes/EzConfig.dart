@@ -53,9 +53,9 @@ class EzConfig {
     alertColorKey:
         0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
     lightButtonColorKey:
-        0xE620DAA5, // Eucalyptus (one of Empathetech's triadic colors)
+        0xFF20DAA5, // Eucalyptus (one of Empathetech's triadic colors)
     lightButtonTextColorKey: 0xFF000000, // Black
-    darkButtonColorKey: 0xE620DAA5,
+    darkButtonColorKey: 0xFF20DAA5,
     darkButtonTextColorKey: 0xFF000000,
 
     buttonSpacingKey: 30.0,
