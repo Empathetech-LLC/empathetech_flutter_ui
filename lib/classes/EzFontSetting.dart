@@ -61,8 +61,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Font picker
         ElevatedButton.icon(

@@ -93,8 +93,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: padding),
 
           EzScrollView(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             scrollDirection: Axis.horizontal,
             children: [
               // Live label

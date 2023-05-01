@@ -155,8 +155,6 @@ class _ColorSettingState extends State<EzColorSetting> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       scrollDirection: Axis.horizontal,
       reverseHands: true,
       children: [

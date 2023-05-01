@@ -33,8 +33,6 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       scrollDirection: Axis.horizontal,
       children: [
         // Label

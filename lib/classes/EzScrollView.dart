@@ -51,8 +51,8 @@ class EzScrollView extends SingleChildScrollView {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
     // Row/Column
-    this.mainAxisSize = MainAxisSize.min,
-    this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.mainAxisSize = MainAxisSize.max,
+    this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.textDirection,
     this.textBaseline,
