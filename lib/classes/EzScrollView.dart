@@ -10,9 +10,9 @@ class EzScrollView extends SingleChildScrollView {
   final Axis scrollDirection;
 
   /// Only useful when [scrollDirection] is [Axis.horizontal]
-  /// Will reverse the contents of the [EzScrollView] when [EzConfig.dominantSide]
-  /// is set to [Hand.left] and [reverseHands] is true
+  /// Is passed to the [SingleChildScrollView]s [EzRow]
   final bool reverseHands;
+
   final bool reverse;
   final EdgeInsetsGeometry? padding;
   final bool? primary;
@@ -31,9 +31,11 @@ class EzScrollView extends SingleChildScrollView {
   final VerticalDirection verticalDirection;
   final List<Widget> children;
 
-  /// Styles a [SingleChildScrollView] from [EzConfig.prefs]
-  /// Dynamically switches between row/col based on [scrollDirection]
+  /// [SingleChildScrollView] wrapper
   /// Prefers the [children] list rather than [child] Widget
+  /// Behaves like a standard wrapper if [child] is provided
+  /// If [children] are provided...
+  /// Dynamically switches the child widget between an [EzRow] and [Column] based on [scrollDirection]
   EzScrollView({
     // SingleChildScrollView
     this.key,
@@ -50,7 +52,7 @@ class EzScrollView extends SingleChildScrollView {
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
-    // Row/Column
+    // EzRow/Column
     this.mainAxisSize = MainAxisSize.max,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
@@ -71,25 +73,16 @@ class EzScrollView extends SingleChildScrollView {
             verticalDirection: verticalDirection,
             children: children,
           )
-        : (reverseHands && EzConfig.dominantSide == Hand.left)
-            ? Row(
-                mainAxisSize: mainAxisSize,
-                mainAxisAlignment: mainAxisAlignment,
-                crossAxisAlignment: crossAxisAlignment,
-                textDirection: textDirection,
-                textBaseline: textBaseline,
-                verticalDirection: verticalDirection,
-                children: children.reversed.toList(),
-              )
-            : Row(
-                mainAxisSize: mainAxisSize,
-                mainAxisAlignment: mainAxisAlignment,
-                crossAxisAlignment: crossAxisAlignment,
-                textDirection: textDirection,
-                textBaseline: textBaseline,
-                verticalDirection: verticalDirection,
-                children: children,
-              );
+        : EzRow(
+            mainAxisSize: mainAxisSize,
+            mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: crossAxisAlignment,
+            textDirection: textDirection,
+            textBaseline: textBaseline,
+            verticalDirection: verticalDirection,
+            children: children,
+            reverseHands: reverseHands,
+          );
   }
 
   @override

@@ -92,8 +92,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Title padding
           Container(height: padding),
 
-          EzScrollView(
-            scrollDirection: Axis.horizontal,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Live label
               EzSelectableText(
@@ -155,7 +156,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: padding),
 
           // Live preview && label
-          EzScrollView(
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: doNothing,
@@ -178,7 +181,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Container(height: padding),
 
           // Live preview && label
-          EzScrollView(
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               EzSelectableText('Currently: $currValue', style: descriptorStyle),
               SizedBox(height: currValue),

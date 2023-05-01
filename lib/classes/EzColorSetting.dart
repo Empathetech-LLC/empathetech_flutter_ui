@@ -154,9 +154,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
-      reverseHands: true,
+    return EzRow(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
         EzSelectableText(widget.message, style: titleMedium(context)),

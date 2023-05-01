@@ -36,8 +36,9 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
+    return EzRow(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
         EzSelectableText('Theme mode', style: style),

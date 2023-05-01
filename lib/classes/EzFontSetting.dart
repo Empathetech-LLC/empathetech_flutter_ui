@@ -60,19 +60,14 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      children: [
-        // Font picker
-        ElevatedButton.icon(
-          onPressed: _chooseGoogleFont,
-          icon: Icon(LineIcons.font),
-          label: Text(
-            'Font Family',
-            style: TextStyle(fontFamily: currFontFamily),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
+    return ElevatedButton.icon(
+      onPressed: _chooseGoogleFont,
+      icon: Icon(LineIcons.font),
+      label: Text(
+        'Font Family',
+        style: TextStyle(fontFamily: currFontFamily),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

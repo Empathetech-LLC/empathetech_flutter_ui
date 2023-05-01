@@ -32,8 +32,7 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
+    return EzRow(
       children: [
         // Label
         EzSelectableText('Dominant hand', style: style),

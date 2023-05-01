@@ -8,6 +8,8 @@ export 'EzFontSetting.dart';
 export 'EzImage.dart';
 export 'EzImageSetting.dart';
 export 'EzNotifications.dart';
+export 'EzPageView.dart';
+export 'EzRow.dart';
 export 'EzScrollView.dart';
 export 'EzSelectableText.dart';
 export 'EzSliderSetting.dart';
