@@ -51,6 +51,9 @@ ThemeData ezLightThemeData() {
     primaryTextTheme: materialTextTheme(backgroundTextColor),
     textTheme: materialTextTheme(backgroundTextColor),
 
+    // Transitions
+    pageTransitionsTheme: EzTransitions(),
+
     // AppBar
     appBarTheme: AppBarTheme(
       color: themeColor,
