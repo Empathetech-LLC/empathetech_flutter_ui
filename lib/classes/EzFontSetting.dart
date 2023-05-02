@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontSetting extends StatefulWidget {
   /// Standardized tool for updating the [fontFamilyKey] in [EzConfig.prefs]
@@ -49,9 +50,9 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       ]);
     });
 
-    return openDialog(
+    return showPlatformDialog(
       context: context,
-      dialog: EzDialog(
+      builder: (context) => EzDialog(
         title: EzSelectableText('Choose a font'),
         contents: buttons,
       ),

@@ -21,9 +21,3 @@ const String EmpathetechFoldingTeam =
 
 /// If you need to reach out
 const String EmpathetechSupport = 'support@empathetech.net';
-
-// Empathetech triadic colors
-
-const Color EmpathEucalyptus = Color(0xFF20DAA5);
-const Color EmpathPurple = Color(0xFFA520DA);
-const Color EmpathGoldenrod = Color(0xFFDAA520);

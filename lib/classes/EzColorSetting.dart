@@ -68,9 +68,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       int recommended = getContrastColor(backgroundColor).value;
 
-      return openDialog(
+      return showPlatformDialog(
         context: context,
-        dialog: EzDialog(
+        builder: (context) => EzDialog(
           title: EzSelectableText('Use recommended?'),
           contents: [
             // Recommended preview
@@ -115,9 +115,9 @@ class _ColorSettingState extends State<EzColorSetting> {
   Future<dynamic> _reset() {
     Color resetColor = Color(EzConfig.defaults[widget.toControl]);
 
-    return openDialog(
+    return showPlatformDialog(
       context: context,
-      dialog: EzDialog(
+      builder: (context) => EzDialog(
         title: EzSelectableText('Reset to...'),
         contents: [
           // Color preview

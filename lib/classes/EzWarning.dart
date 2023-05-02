@@ -2,26 +2,8 @@ library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
-
-/// Log the passed message and display an [EzDialog] for the user
-/// Should always return null via [popScreen]
-Future<dynamic> logAlert(
-  BuildContext context,
-  String message,
-) {
-  log(message);
-  return openDialog(
-    context: context,
-    dialog: EzDialog(
-      title: EzSelectableText('Attention:'),
-      contents: [
-        EzSelectableText(message),
-      ],
-    ),
-  );
-}
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// [Card] designed to grab attention for warnings...
 /// [Icon] 'WARNING' [Icon]

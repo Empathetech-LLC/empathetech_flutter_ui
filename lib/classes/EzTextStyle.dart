@@ -35,7 +35,7 @@ class EzTextStyle extends TextStyle {
 
   /// Setup a [TextStyle] using the [fontFamilyKey] from [EzConfig.prefs]
   /// And some custom spacing defaults for readability
-  EzTextStyle({
+  const EzTextStyle({
     this.inherit = true,
     this.color,
     this.backgroundColor,
@@ -84,7 +84,7 @@ class EzTextStyle extends TextStyle {
           decorationStyle: decorationStyle,
           decorationThickness: decorationThickness,
           debugLabel: debugLabel,
-          fontFamily: googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
+          fontFamily: EzConfig.prefs,
           fontFamilyFallback: fontFamilyFallback,
           package: package,
           overflow: overflow,

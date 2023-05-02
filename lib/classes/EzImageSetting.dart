@@ -122,9 +122,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ]);
 
-    return openDialog(
+    return showPlatformDialog(
       context: context,
-      dialog: EzDialog(
+      builder: (context) => EzDialog(
         title: EzSelectableText('Update $title'),
         contents: options,
       ),
@@ -144,9 +144,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       },
 
       // Show credits
-      onLongPress: () => openDialog(
+      onLongPress: () => showPlatformDialog(
         context: context,
-        dialog: EzDialog(
+        builder: (context) => EzDialog(
           title: EzSelectableText('Credit to:'),
           contents: [EzSelectableText(widget.credits)],
         ),

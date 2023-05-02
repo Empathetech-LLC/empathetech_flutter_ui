@@ -11,23 +11,17 @@ enum Hand {
   left,
 }
 
-/// Alias for [EzConfig.focus] -> unfocus()
-void closeFocus() {
-  EzConfig.focus.primaryFocus?.unfocus();
-}
-
 /// Static object for managing a responsive && user customizable UI
 class EzConfig {
   /// [AssetImage] paths for this app
-  static late List<String> assets;
+  final List<String> assets;
 
-  static late SharedPreferences preferences;
+  static String fontFamily = roboto;
+
+  static final SharedPreferences preferences;
 
   /// Top-level [EzConfig.preferences]
   static late Map<String, dynamic> prefs;
-
-  /// Used to close active dialogs
-  static late FocusManager focus;
 
   /// [ThemeMode.system] wrapper that allows for overwrite
   static late ThemeMode themeMode;
@@ -37,6 +31,11 @@ class EzConfig {
 
   /// What side of the screen touch points should be on
   static late Hand dominantSide;
+
+  /// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
+  static bool isAsset(String? path) {
+    return assets.contains(path);
+  }
 
   static Map<String, dynamic> defaults = {
     // Shared //
@@ -140,6 +139,8 @@ class EzConfig {
     // Redundant fontScalar for theming
     fontScalar = EzConfig.prefs[fontScalarKey];
   }
+
+  const EzConfig();
 }
 
 // Preference keys //

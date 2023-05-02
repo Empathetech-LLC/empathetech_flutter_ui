@@ -2,6 +2,12 @@ library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
 
+// Empathetech's colors //
+
+const Color EmpathEucalyptus = Color(0xFF20DAA5);
+const Color EmpathPurple = Color(0xFFA520DA);
+const Color EmpathGoldenrod = Color(0xFFDAA520);
+
 /// Returns the RGB invert of the passed color
 Color invertColor(Color toInvert) {
   final r = 255 - toInvert.red;

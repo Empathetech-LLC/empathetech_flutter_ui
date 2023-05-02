@@ -9,11 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
-bool isAsset(String? path) {
-  return EzConfig.assets.contains(path);
-}
-
 /// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<String?> changeImage({
   required BuildContext context,

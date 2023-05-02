@@ -2,18 +2,26 @@ library empathetech_flutter_ui;
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Little more concise/readable
-Future<dynamic> openDialog({
-  required BuildContext context,
-  required EzDialog dialog,
-}) {
+/// Log the passed message and display an [EzDialog] for the user
+/// Should always return null via [popScreen]
+Future<dynamic> logAlert(
+  BuildContext context,
+  String message,
+) {
+  log(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => dialog,
+    builder: (context) => EzDialog(
+      title: EzSelectableText('Attention:'),
+      contents: [
+        EzSelectableText(message),
+      ],
+    ),
   );
 }
 
@@ -25,9 +33,9 @@ Future<dynamic> ezColorPicker({
   required void Function() apply,
   required void Function() cancel,
 }) {
-  return openDialog(
+  return showPlatformDialog(
     context: context,
-    dialog: EzDialog(
+    builder: (context) => EzDialog(
       title: EzSelectableText('Pick a color!'),
       contents: [
         // Color picker
