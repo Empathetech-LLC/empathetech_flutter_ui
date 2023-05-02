@@ -14,7 +14,7 @@ class EzView extends Container {
   final double? width;
   final double? height;
   final BoxConstraints? constraints;
-  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry margin;
   final Matrix4? transform;
   final AlignmentGeometry? transformAlignment;
   final Widget child;
@@ -27,34 +27,27 @@ class EzView extends Container {
     this.padding,
     this.decoration,
     this.foregroundDecoration,
-    this.width,
-    this.height,
+    this.width = double.infinity,
+    this.height = double.infinity,
     this.constraints,
-    this.margin,
+    this.margin = const EdgeInsets.all(EzConfig.margin),
     this.transform,
     this.transformAlignment,
     required this.child,
     this.clipBehavior = Clip.none,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    double ezMargin = EzConfig.prefs[marginKey];
-
-    return Container(
-      key: key,
-      alignment: alignment,
-      padding: padding,
-      decoration: decoration,
-      foregroundDecoration: foregroundDecoration,
-      width: width ?? widthOf(context),
-      height: height ?? heightOf(context),
-      constraints: constraints,
-      margin: margin ?? EdgeInsets.all(ezMargin),
-      transform: transform,
-      transformAlignment: transformAlignment,
-      child: child,
-      clipBehavior: clipBehavior,
-    );
-  }
+  }) : super(
+          key: key,
+          alignment: alignment,
+          padding: padding,
+          decoration: decoration,
+          foregroundDecoration: foregroundDecoration,
+          width: width,
+          height: height,
+          constraints: constraints,
+          margin: margin,
+          transform: transform,
+          transformAlignment: transformAlignment,
+          child: child,
+          clipBehavior: clipBehavior,
+        );
 }
