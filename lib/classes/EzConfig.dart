@@ -16,11 +16,7 @@ void closeFocus() {
   EzConfig.focus.primaryFocus?.unfocus();
 }
 
-/// Static object for managing a dynamic && user customizable UI
-/// Tracks the apps image [assets] for ease of development
-/// Setting are tracked with shared_preferences
-/// Tracks the apps [FocusManager] for keyboard management
-/// Maintains [themeMode] and [dominantSide] trackers for integrating user accessibility
+/// Static object for managing a responsive && user customizable UI
 class EzConfig {
   /// [AssetImage] paths for this app
   static late List<String> assets;
