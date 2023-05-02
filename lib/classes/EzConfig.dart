@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Hand {
@@ -11,171 +10,148 @@ enum Hand {
   left,
 }
 
-/// Static object for managing a responsive && user customizable UI
+/// Empathetech's defaults for [EzConfig]
+const Map<String, dynamic> defaultConfig = {
+  // App-wide //
+  marginKey: 15.0,
+  paddingKey: 12.5,
+
+  buttonSpacingKey: 30.0,
+  paragraphSpacingKey: 50.0,
+
+  fontFamilyKey: roboto,
+
+  alertColorKey: 0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
+
+  lightButtonColorKey:
+      0xFF20DAA5, // Eucalyptus (one of Empathetech's triadic colors)
+  lightButtonTextColorKey: 0xFF000000, // Black
+  darkButtonColorKey: 0xFF20DAA5,
+  darkButtonTextColorKey: 0xFF000000,
+
+  // Light theme //
+  lightBackgroundImageKey: null,
+  lightBackgroundColorKey: 0xFFF5F5F5, // Almost white
+  lightBackgroundTextColorKey: 0xFF000000,
+  lightThemeColorKey: 0xFFFFFFFF, // White
+  lightThemeTextColorKey: 0xFF000000,
+
+  // Dark theme //
+  darkBackgroundImageKey: null,
+  darkBackgroundColorKey: 0xFF0A0A0A, // Almost black
+  darkBackgroundTextColorKey: 0xFFFFFFFF,
+  darkThemeColorKey: 0xFF000000, // Black
+  darkThemeTextColorKey: 0xFFFFFFFF,
+};
+
+/// Singleton class for managing a responsive and user-customizable UI
 class EzConfig {
   /// [AssetImage] paths for this app
   final List<String> assets;
 
-  static String fontFamily = roboto;
+  final SharedPreferences preferences;
 
-  static final SharedPreferences preferences;
+  /// [defaultConfig] merged with init's customDefaults
+  final Map<String, dynamic> defaults;
 
-  /// Top-level [EzConfig.preferences]
-  static late Map<String, dynamic> prefs;
+  /// Top-level [preferences]
+  final Map<String, dynamic> prefs;
 
   /// [ThemeMode.system] wrapper that allows for overwrite
-  static late ThemeMode themeMode;
+  final ThemeMode themeMode;
 
-  /// Keeps track of the app-wide text scalar
-  static late double fontScalar;
+  final double margin;
+  final double padding;
+  final String? fontFamily;
 
   /// What side of the screen touch points should be on
-  static late Hand dominantSide;
+  final Hand dominantSide;
 
-  /// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
-  static bool isAsset(String? path) {
-    return assets.contains(path);
-  }
+  // Singleton instance
+  static EzConfig? _instance;
 
-  static Map<String, dynamic> defaults = {
-    // Shared //
-    marginKey: 15.0,
-    paddingKey: 12.5,
+  // Private constructor
+  const EzConfig._({
+    required this.assets,
+    required this.preferences,
+    required this.defaults,
+    required this.prefs,
+    required this.themeMode,
+    required this.margin,
+    required this.padding,
+    this.fontFamily,
+    required this.dominantSide,
+  });
 
-    fontFamilyKey: roboto,
-    fontScalarKey: 1.0,
-
-    alertColorKey:
-        0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
-    lightButtonColorKey:
-        0xFF20DAA5, // Eucalyptus (one of Empathetech's triadic colors)
-    lightButtonTextColorKey: 0xFF000000, // Black
-    darkButtonColorKey: 0xFF20DAA5,
-    darkButtonTextColorKey: 0xFF000000,
-
-    buttonSpacingKey: 30.0,
-    paragraphSpacingKey: 50,
-
-    // Light theme //
-    lightBackgroundImageKey: null,
-    lightBackgroundColorKey: 0xFFF5F5F5, // Almost white
-    lightBackgroundTextColorKey: 0xFF000000,
-    lightThemeColorKey: 0xFFFFFFFF, // White
-    lightThemeTextColorKey: 0xFF000000,
-
-    // Dark theme //
-    darkBackgroundImageKey: null,
-    darkBackgroundColorKey: 0xFF0A0A0A, // Almost black
-    darkBackgroundTextColorKey: 0xFFFFFFFF,
-    darkThemeColorKey: 0xFF000000, // Black
-    darkThemeTextColorKey: 0xFFFFFFFF,
-  };
-
-  /// Populate [EzConfig.prefs], overwriting defaults whenever a user value is found
-  /// Optionally expand the user customizable values with [customDefaults]
-  static void init({
+  // Factory constructor
+  factory EzConfig({
     required List<String> assetPaths,
+    required SharedPreferences preferences,
     Map<String, dynamic>? customDefaults,
-    List<DeviceOrientation>? orientations,
-  }) async {
-    // Initialize storage //
-    assets = assetPaths;
+  }) {
+    if (_instance == null) {
+      // Load any custom defaults
+      Map<String, dynamic> baseCopy = Map.from(defaultConfig);
+      if (customDefaults != null) baseCopy.addAll(customDefaults);
 
-    preferences = await SharedPreferences.getInstance();
+      // Start prefs from a deep copy of all defaults
+      Map<String, dynamic> prefs = new Map.from(baseCopy);
 
-    // Load any custom defaults
-    if (customDefaults != null) defaults.addAll(customDefaults);
+      // Load the keys that have been overwritten
+      List<String> overwritten = preferences.getKeys().toList();
 
-    // Start prefs from a deep copy of all defaults
-    prefs = new Map.from(defaults);
+      overwritten.forEach((key) {
+        dynamic value = prefs[key];
+        dynamic userPref;
 
-    // Load the keys that have been overwritten
-    List<String> overwritten = preferences.getKeys().toList();
+        if (value is int) {
+          userPref = preferences.getInt(key);
+        } else if (value is bool) {
+          userPref = preferences.getBool(key);
+        } else if (value is double) {
+          userPref = preferences.getDouble(key);
+        } else if (value is String) {
+          userPref = preferences.getString(key);
+        } else if (value is List<String>) {
+          userPref = preferences.getStringList(key);
+        }
 
-    overwritten.forEach((key) {
-      dynamic value = prefs[key];
-      dynamic userPref;
+        if (userPref != null) prefs[key] = userPref;
+      });
 
-      if (value is int) {
-        userPref = preferences.getInt(key);
-      } else if (value is bool) {
-        userPref = preferences.getBool(key);
-      } else if (value is double) {
-        userPref = preferences.getDouble(key);
-      } else if (value is String) {
-        userPref = preferences.getString(key);
-      } else if (value is List<String>) {
-        userPref = preferences.getStringList(key);
-      }
+      // Load theme setting
+      bool? isLight = preferences.getBool(isLightKey);
+      final ThemeMode themeMode = (isLight == null)
+          ? ThemeMode.system
+          : (isLight)
+              ? ThemeMode.light
+              : ThemeMode.dark;
 
-      if (userPref != null) prefs[key] = userPref;
-    });
+      // Load hand setting
+      bool? isRight = preferences.getBool(isRightKey);
+      final Hand dominantSide =
+          (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
-    // Initialize screen //
-    List<DeviceOrientation> allOptions = [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ];
-    SystemChrome.setPreferredOrientations(orientations ?? allOptions);
-
-    focus = FocusManager.instance;
-
-    // Initialize theme //
-
-    bool? isLight = preferences.getBool(isLightKey);
-    themeMode = (isLight == null)
-        ? ThemeMode.system
-        : (isLight)
-            ? ThemeMode.light
-            : ThemeMode.dark;
-
-    bool? isRight = preferences.getBool(isRightKey);
-
-    dominantSide =
-        (isRight == null || isRight == true) ? Hand.right : Hand.left;
-
-    // Redundant fontScalar for theming
-    fontScalar = EzConfig.prefs[fontScalarKey];
+      _instance = EzConfig._(
+        assets: assetPaths,
+        preferences: preferences,
+        defaults: baseCopy,
+        prefs: prefs,
+        themeMode: themeMode,
+        margin: prefs[marginKey],
+        padding: prefs[paddingKey],
+        fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
+        dominantSide: dominantSide,
+      );
+    }
+    return _instance!;
   }
 
-  const EzConfig();
+  // Get instance
+  static EzConfig get instance {
+    if (_instance == null) {
+      throw Exception("EzConfig has not been initialized!");
+    }
+    return _instance!;
+  }
 }
-
-// Preference keys //
-
-// Shared
-const String isLightKey = 'isLight';
-const String isRightKey = 'isRight';
-
-const String noImageKey = 'noImage';
-
-const String marginKey = 'margin';
-const String paddingKey = 'padding';
-
-const String fontFamilyKey = 'fontFamily';
-const String fontScalarKey = 'fontScalar';
-
-const String alertColorKey = 'alertColor';
-
-const String buttonSpacingKey = 'buttonSpacing';
-const String paragraphSpacingKey = 'paragraphSpacing';
-
-// Light theme
-const String lightBackgroundImageKey = 'lightBackgroundImage';
-const String lightBackgroundColorKey = 'lightBackgroundColor';
-const String lightBackgroundTextColorKey = 'lightBackgroundTextColor';
-const String lightThemeColorKey = 'lightThemeColor';
-const String lightThemeTextColorKey = 'lightThemeTextColor';
-const String lightButtonColorKey = 'lightButtonColor';
-const String lightButtonTextColorKey = 'lightButtonTextColor';
-
-// Dark theme
-const String darkBackgroundImageKey = 'darkBackgroundImage';
-const String darkBackgroundColorKey = 'darkBackgroundColor';
-const String darkBackgroundTextColorKey = 'darkBackgroundTextColor';
-const String darkThemeColorKey = 'darkThemeColor';
-const String darkThemeTextColorKey = 'darkThemeTextColor';
-const String darkButtonColorKey = 'darkButtonColor';
-const String darkButtonTextColorKey = 'darkButtonTextColor';

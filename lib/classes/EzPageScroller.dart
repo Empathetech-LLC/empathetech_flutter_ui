@@ -3,7 +3,7 @@ library empathetech_flutter_ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzPageView extends SingleChildScrollView {
+class EzPageScroller extends SingleChildScrollView {
   // SingleChildScrollView
   final Key? viewKey;
   final EdgeInsetsGeometry? padding;
@@ -26,7 +26,7 @@ class EzPageView extends SingleChildScrollView {
 
   /// Wraps a vertical [SingleChildScrollView] Widget with a [Column] child that holds [children]
   /// The vertical view is wrapped in a horizontal [SingleChildScrollView] to allow for bi-directional scrolling
-  EzPageView({
+  const EzPageScroller({
     // SingleChildScrollView
     this.viewKey,
     this.padding,

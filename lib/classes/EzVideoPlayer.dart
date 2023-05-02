@@ -49,7 +49,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Optionally provide a [BoxDecoration] background for the controls region
   /// The video will begin muted unless [startingVolume] is specified
   /// Optionally provide [maxWidth] and [maxHeight] to shape the video
-  EzVideoPlayer({
+  const EzVideoPlayer({
     Key? key,
     required this.controller,
     required this.iconColor,
@@ -79,10 +79,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   late double aspectRatio = widget.controller.value.aspectRatio;
 
-  late double margin = EzConfig.prefs[marginKey];
-  late double padding = EzConfig.prefs[paddingKey];
-  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double buttonSize = buttonSpacer;
+  final double margin = EzConfig.instance.prefs[marginKey];
+  final double padding = EzConfig.instance.prefs[paddingKey];
+  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   late Color showing = widget.iconColor;
   late Color hiding = widget.hiddenOpacity == 0.0
@@ -179,6 +178,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   }
 
   List<Widget> _buildButtons(SliderThemeData sliderTheme) {
+    final buttonSize = buttonSpacer;
+
     List<Widget> controls = [];
 
     // Play/pause
@@ -196,7 +197,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
           },
         ),
-        Container(width: buttonSpacer),
+        EzSpacer.row(buttonSpacer),
       ]);
 
     // Volume
@@ -217,7 +218,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 : _muteVideo();
           },
         ),
-        Container(width: padding),
+        EzSpacer.row(padding),
 
         // Value slider
         Container(
@@ -235,7 +236,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             ),
           ),
         ),
-        Container(width: buttonSpacer),
+        EzSpacer.row(buttonSpacer),
       ]);
 
     // Replay
@@ -249,7 +250,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           ),
           onTap: _replayVideo,
         ),
-        Container(width: buttonSpacer),
+        EzSpacer.row(buttonSpacer),
       ]);
 
     return controls;
@@ -259,15 +260,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Widget build(BuildContext context) {
     Color sliderColor = _buildColor(widget.sliderVis);
 
-    SliderThemeData videoSliderTheme = Theme.of(context).sliderTheme.copyWith(
-          thumbShape: (sliderColor == Colors.transparent)
-              ? SliderComponentShape.noThumb
-              : null,
-          activeTrackColor: sliderColor,
-          inactiveTrackColor: sliderColor,
-          thumbColor: sliderColor,
-          trackShape: VideoSliderTrack(),
-        );
+    final SliderThemeData videoSliderTheme =
+        Theme.of(context).sliderTheme.copyWith(
+              thumbShape: (sliderColor == Colors.transparent)
+                  ? SliderComponentShape.noThumb
+                  : null,
+              activeTrackColor: sliderColor,
+              inactiveTrackColor: sliderColor,
+              thumbColor: sliderColor,
+              trackShape: VideoSliderTrack(),
+            );
 
     return MouseRegion(
       onEnter: (_) {

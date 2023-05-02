@@ -4,38 +4,44 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Material [ThemeData] using [EzConfig] values
-ThemeData ezDarkThemeData() {
-  Color themeColor = Color(EzConfig.prefs[darkThemeColorKey]);
-  Color themeTextColor = Color(EzConfig.prefs[darkThemeTextColorKey]);
-  Color unSelectedThemeTextColor = blendColors(themeColor, themeTextColor);
+ThemeData ezThemeData({required bool light}) {
+  final Color themeColor = Color(
+      EzConfig.instance.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
+  final Color themeTextColor = Color(EzConfig
+      .instance.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
+  final Color unSelectedThemeTextColor =
+      EzColorBlend(themeColor, themeTextColor);
 
-  Color backgroundColor = Color(EzConfig.prefs[darkBackgroundColorKey]);
-  Color backgroundTextColor = Color(EzConfig.prefs[darkBackgroundTextColorKey]);
+  final Color backgroundColor = Color(EzConfig.instance
+      .prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
+  final Color backgroundTextColor = Color(EzConfig.instance
+      .prefs[light ? lightBackgroundTextColorKey : darkBackgroundTextColorKey]);
 
-  Color buttonColor = Color(EzConfig.prefs[darkButtonColorKey]);
-  Color buttonTextColor = Color(EzConfig.prefs[darkButtonTextColorKey]);
+  final Color buttonColor = Color(EzConfig
+      .instance.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
+  final Color buttonTextColor = Color(EzConfig.instance
+      .prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
-  TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
-  IconThemeData appBarIconData = IconThemeData(
+  final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
+  final TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
+  final IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
     size: appBarTextStyle.fontSize,
   );
 
-  TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
-  IconThemeData buttonIconData = IconThemeData(
+  final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
+  final IconThemeData buttonIconData = IconThemeData(
     color: buttonTextColor,
     size: buttonTextStyle.fontSize,
   );
 
-  TextStyle pageSelection = buildTitleMedium(backgroundTextColor);
+  final TextStyle pageSelection = buildTitleMedium(backgroundTextColor);
 
-  TextStyle dialogTitleStyle = buildHeadlineSmall(themeTextColor);
-  TextStyle dialogContentStyle = buildTitleMedium(themeTextColor);
+  final TextStyle dialogTitleStyle = buildHeadlineSmall(themeTextColor);
+  final TextStyle dialogContentStyle = buildTitleMedium(themeTextColor);
 
   return ThemeData(
-    brightness: Brightness.dark,
+    brightness: light ? Brightness.light : Brightness.dark,
 
     // General colors
     highlightColor: buttonColor,
@@ -45,11 +51,15 @@ ThemeData ezDarkThemeData() {
     scaffoldBackgroundColor: backgroundColor,
 
     // Text && icons
-    fontFamily: googleStyles[(EzConfig.prefs[fontFamilyKey])]?.fontFamily,
+    fontFamily:
+        googleStyles[(EzConfig.instance.prefs[fontFamilyKey])]?.fontFamily,
     iconTheme: buttonIconData,
     primaryIconTheme: buttonIconData,
     primaryTextTheme: EzTextTheme(color: backgroundTextColor),
     textTheme: EzTextTheme(color: backgroundTextColor),
+
+    // Transitions
+    pageTransitionsTheme: EzTransitions(),
 
     // AppBar
     appBarTheme: AppBarTheme(
@@ -90,7 +100,7 @@ ThemeData ezDarkThemeData() {
         backgroundColor: buttonColor,
         shadowColor: buttonColor,
         side: BorderSide(color: buttonColor),
-        padding: EdgeInsets.all(EzConfig.prefs[paddingKey]),
+        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
       ),
     ),
 

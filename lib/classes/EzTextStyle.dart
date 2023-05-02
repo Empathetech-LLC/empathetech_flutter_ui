@@ -28,12 +28,12 @@ class EzTextStyle extends TextStyle {
   final TextDecorationStyle? decorationStyle;
   final double? decorationThickness;
   final String? debugLabel;
-
+  final String? fontFamily;
   final List<String>? fontFamilyFallback;
   final String? package;
   final TextOverflow? overflow;
 
-  /// Setup a [TextStyle] using the [fontFamilyKey] from [EzConfig.prefs]
+  /// Setup a [TextStyle] using the [fontFamilyKey] from [EzConfig]
   /// And some custom spacing defaults for readability
   const EzTextStyle({
     this.inherit = true,
@@ -58,6 +58,7 @@ class EzTextStyle extends TextStyle {
     this.decorationStyle,
     this.decorationThickness,
     this.debugLabel,
+    this.fontFamily,
     this.fontFamilyFallback,
     this.package,
     this.overflow,
@@ -84,7 +85,7 @@ class EzTextStyle extends TextStyle {
           decorationStyle: decorationStyle,
           decorationThickness: decorationThickness,
           debugLabel: debugLabel,
-          fontFamily: EzConfig.prefs,
+          fontFamily: fontFamily,
           fontFamilyFallback: fontFamilyFallback,
           package: package,
           overflow: overflow,

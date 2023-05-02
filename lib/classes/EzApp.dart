@@ -18,9 +18,9 @@ class EzApp extends PlatformApp {
           debugShowCheckedModeBanner: false,
           routes: {'/': (context) => homeScreenWidget},
           material: (context, platform) => MaterialAppData(
-            theme: ezLightThemeData(),
-            darkTheme: ezDarkThemeData(),
-            themeMode: EzConfig.themeMode,
+            theme: ezThemeData(light: true),
+            darkTheme: ezThemeData(light: false),
+            themeMode: EzConfig.instance.themeMode,
           ),
         );
 }

@@ -1,5 +1,7 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,6 +34,11 @@ double heightOf(BuildContext context) {
 /// More readable than MediaQuery.of(context).size
 Size sizeOf(BuildContext context) {
   return MediaQuery.of(context).size;
+}
+
+/// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
+bool isAsset(String? path) {
+  return EzConfig.instance.assets.contains(path);
 }
 
 /// For web use, set the tab's title

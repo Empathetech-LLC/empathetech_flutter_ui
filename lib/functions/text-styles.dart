@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 // https://api.flutter.dev/flutter/material/TextTheme-class.html
 
 TextStyle buildDisplayLarge(Color color) {
-  return const EzTextStyle(fontSize: 58, color: color);
+  return EzTextStyle(
+    fontSize: 58,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? displayLarge(BuildContext context) {
@@ -16,7 +20,11 @@ TextStyle? displayLarge(BuildContext context) {
 }
 
 TextStyle buildDisplayMedium(Color color) {
-  return EzTextStyle(fontSize: 46, color: color);
+  return EzTextStyle(
+    fontSize: 46,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? displayMedium(BuildContext context) {
@@ -24,7 +32,11 @@ TextStyle? displayMedium(BuildContext context) {
 }
 
 TextStyle buildDisplaySmall(Color color) {
-  return EzTextStyle(fontSize: 36, color: color);
+  return EzTextStyle(
+    fontSize: 36,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? displaySmall(BuildContext context) {
@@ -32,7 +44,11 @@ TextStyle? displaySmall(BuildContext context) {
 }
 
 TextStyle buildHeadlineLarge(Color color) {
-  return EzTextStyle(fontSize: 32, color: color);
+  return EzTextStyle(
+    fontSize: 32,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? headlineLarge(BuildContext context) {
@@ -40,7 +56,11 @@ TextStyle? headlineLarge(BuildContext context) {
 }
 
 TextStyle buildHeadlineMedium(Color color) {
-  return EzTextStyle(fontSize: 28, color: color);
+  return EzTextStyle(
+    fontSize: 28,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? headlineMedium(BuildContext context) {
@@ -48,7 +68,11 @@ TextStyle? headlineMedium(BuildContext context) {
 }
 
 TextStyle buildHeadlineSmall(Color color) {
-  return EzTextStyle(fontSize: 24, color: color);
+  return EzTextStyle(
+    fontSize: 24,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? headlineSmall(BuildContext context) {
@@ -56,7 +80,11 @@ TextStyle? headlineSmall(BuildContext context) {
 }
 
 TextStyle buildTitleLarge(Color color) {
-  return EzTextStyle(fontSize: 22, color: color);
+  return EzTextStyle(
+    fontSize: 22,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? titleLarge(BuildContext context) {
@@ -64,7 +92,11 @@ TextStyle? titleLarge(BuildContext context) {
 }
 
 TextStyle buildTitleMedium(Color color) {
-  return EzTextStyle(fontSize: 16, color: color);
+  return EzTextStyle(
+    fontSize: 16,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? titleMedium(BuildContext context) {
@@ -72,7 +104,11 @@ TextStyle? titleMedium(BuildContext context) {
 }
 
 TextStyle buildTitleSmall(Color color) {
-  return EzTextStyle(fontSize: 14, color: color);
+  return EzTextStyle(
+    fontSize: 14,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? titleSmall(BuildContext context) {
@@ -80,7 +116,11 @@ TextStyle? titleSmall(BuildContext context) {
 }
 
 TextStyle buildLabelLarge(Color color) {
-  return EzTextStyle(fontSize: 14, color: color);
+  return EzTextStyle(
+    fontSize: 14,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? labelLarge(BuildContext context) {
@@ -88,7 +128,11 @@ TextStyle? labelLarge(BuildContext context) {
 }
 
 TextStyle buildLabelMedium(Color color) {
-  return EzTextStyle(fontSize: 12, color: color);
+  return EzTextStyle(
+    fontSize: 12,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? labelMedium(BuildContext context) {
@@ -96,7 +140,11 @@ TextStyle? labelMedium(BuildContext context) {
 }
 
 TextStyle buildLabelSmall(Color color) {
-  return EzTextStyle(fontSize: 10, color: color);
+  return EzTextStyle(
+    fontSize: 10,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? labelSmall(BuildContext context) {
@@ -104,7 +152,11 @@ TextStyle? labelSmall(BuildContext context) {
 }
 
 TextStyle buildBodyLarge(Color color) {
-  return EzTextStyle(fontSize: 16, color: color);
+  return EzTextStyle(
+    fontSize: 16,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? bodyLarge(BuildContext context) {
@@ -112,7 +164,11 @@ TextStyle? bodyLarge(BuildContext context) {
 }
 
 TextStyle buildBodyMedium(Color color) {
-  return EzTextStyle(fontSize: 14, color: color);
+  return EzTextStyle(
+    fontSize: 14,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? bodyMedium(BuildContext context) {
@@ -120,7 +176,11 @@ TextStyle? bodyMedium(BuildContext context) {
 }
 
 TextStyle buildBodySmall(Color color) {
-  return EzTextStyle(fontSize: 12, color: color);
+  return EzTextStyle(
+    fontSize: 12,
+    color: color,
+    fontFamily: EzConfig.instance.fontFamily,
+  );
 }
 
 TextStyle? bodySmall(BuildContext context) {

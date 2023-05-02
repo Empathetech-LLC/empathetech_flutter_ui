@@ -14,7 +14,7 @@ class EzView extends Container {
   final double? width;
   final double? height;
   final BoxConstraints? constraints;
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
   final Matrix4? transform;
   final AlignmentGeometry? transformAlignment;
   final Widget child;
@@ -30,7 +30,7 @@ class EzView extends Container {
     this.width = double.infinity,
     this.height = double.infinity,
     this.constraints,
-    this.margin = const EdgeInsets.all(EzConfig.margin),
+    this.margin,
     this.transform,
     this.transformAlignment,
     required this.child,
@@ -44,7 +44,7 @@ class EzView extends Container {
           width: width,
           height: height,
           constraints: constraints,
-          margin: margin,
+          margin: margin ?? EdgeInsets.all(EzConfig.instance.margin),
           transform: transform,
           transformAlignment: transformAlignment,
           child: child,

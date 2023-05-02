@@ -13,7 +13,7 @@ void notifAction(NotificationResponse notificationResponse) {}
 @pragma('vm:entry-point')
 void backgroundNotifAction(NotificationResponse notificationResponse) {}
 
-// Android setup
+// Android setup //
 
 const AndroidInitializationSettings androidInitSettings =
     AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -26,7 +26,7 @@ const androidNotifDetails = AndroidNotificationDetails(
   playSound: true,
 );
 
-// iOS setup
+// iOS setup //
 
 final DarwinInitializationSettings iosInitSettings =
     DarwinInitializationSettings();
@@ -40,7 +40,7 @@ const iosNotifDetails = DarwinNotificationDetails(
 /// Setup a simple push notification manager/service
 /// Built from [flutter_local_notifications]
 class EzNotifications {
-  // Build app settings
+  // Build app settings //
 
   final appInitSettings = InitializationSettings(
     android: androidInitSettings,
@@ -52,9 +52,8 @@ class EzNotifications {
     iOS: iosNotifDetails,
   );
 
-  // Initialize plugin
+  // Initialize plugin //
 
-  /// Initialize the [NotificationService]
   /// Load platform specific settings
   /// Define [NotificationResponse] actions
   void init() async {
@@ -64,7 +63,7 @@ class EzNotifications {
       onDidReceiveBackgroundNotificationResponse: backgroundNotifAction,
     );
 
-    // Request permissions
+    // Request permissions //
 
     await notifsPlugin
         .resolvePlatformSpecificImplementation<

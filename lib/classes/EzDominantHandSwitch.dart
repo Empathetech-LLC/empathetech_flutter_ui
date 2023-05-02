@@ -5,20 +5,23 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzLeftySwitch extends StatefulWidget {
-  /// Standardized tool for updating [EzConfig.dominantSide]
-  EzLeftySwitch({Key? key}) : super(key: key);
+  /// Standardized tool for updating [EzConfig] dominantSide
+  const EzLeftySwitch({Key? key}) : super(key: key);
 
   @override
   _LeftySwitchState createState() => _LeftySwitchState();
 }
 
 class _LeftySwitchState extends State<EzLeftySwitch> {
-  Hand _currSide = EzConfig.dominantSide;
+  Hand _currSide = EzConfig.instance.dominantSide;
 
   late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
-  List<DropdownMenuItem<Hand>> _handOptions() {
-    return [
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
+  @override
+  Widget build(BuildContext context) {
+    const List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
         child: Text('Right'),
         value: Hand.right,
@@ -28,41 +31,44 @@ class _LeftySwitchState extends State<EzLeftySwitch> {
         value: Hand.left,
       ),
     ];
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return EzRow(
-      children: [
-        // Label
-        EzSelectableText('Dominant hand', style: style),
-        Container(width: EzConfig.prefs[buttonSpacingKey]),
+    List<Widget> _children = [
+      // Label
+      EzSelectableText('Dominant hand', style: style),
+      EzSpacer.row(space),
 
-        // Button
-        DropdownButton<Hand>(
-          value: _currSide,
-          items: _handOptions(),
-          onChanged: (Hand? newDominantSide) {
-            // Right
-            if (newDominantSide == Hand.right) {
-              EzConfig.preferences.remove(isRightKey);
+      // Button
+      DropdownButton<Hand>(
+        value: _currSide,
+        items: items,
+        onChanged: (Hand? newDominantSide) {
+          switch (newDominantSide) {
+            case Hand.right:
+              EzConfig.instance.preferences.remove(isRightKey);
               setState(() {
                 _currSide = Hand.right;
-                EzConfig.dominantSide = Hand.right;
               });
-            }
+              break;
 
-            // Left
-            else if (newDominantSide == Hand.left) {
-              EzConfig.preferences.setBool(isRightKey, false);
+            case Hand.left:
+              EzConfig.instance.preferences.setBool(isRightKey, false);
               setState(() {
                 _currSide = Hand.left;
-                EzConfig.dominantSide = Hand.left;
               });
-            }
-          },
-        ),
-      ],
+              break;
+
+            default:
+              break;
+          }
+        },
+      ),
+    ];
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:
+          (_currSide == Hand.right) ? _children : _children.reversed.toList(),
     );
   }
 }

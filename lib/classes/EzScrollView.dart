@@ -36,7 +36,7 @@ class EzScrollView extends SingleChildScrollView {
   /// Behaves like a standard wrapper if [child] is provided
   /// If [children] are provided...
   /// Dynamically switches the child widget between an [EzRow] and [Column] based on [scrollDirection]
-  EzScrollView({
+  const EzScrollView({
     // SingleChildScrollView
     this.key,
     this.scrollDirection = Axis.vertical,

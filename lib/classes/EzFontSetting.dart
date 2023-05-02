@@ -7,54 +7,60 @@ import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontSetting extends StatefulWidget {
-  /// Standardized tool for updating the [fontFamilyKey] in [EzConfig.prefs]
+  /// Standardized tool for updating the [fontFamilyKey] in [EzConfig]
   /// [EzFontSetting] options are built from [googleStyles]
-  EzFontSetting({Key? key}) : super(key: key);
+  const EzFontSetting({Key? key}) : super(key: key);
 
   @override
   _FontFamilySettingState createState() => _FontFamilySettingState();
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
-  late String defaultFontFamily = EzConfig.defaults[fontFamilyKey];
-  late String currFontFamily = EzConfig.prefs[fontFamilyKey];
+  final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
+  String currFontFamily = EzConfig.instance.prefs[fontFamilyKey];
 
-  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double padding = EzConfig.prefs[paddingKey];
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final double padding = EzConfig.instance.prefs[paddingKey];
 
   late TextStyle? titleTextStyle = headlineSmall(context);
 
   /// Builds an [EzDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
-    List<Widget> buttons = [];
+    List<ListTile> tiles = [];
 
     googleStyles.forEach((String font, TextStyle style) {
-      buttons.addAll([
+      tiles.add(
         // Map font to a selectable button (title == name)
-        ElevatedButton(
-          onPressed: () {
-            EzConfig.preferences.setString(fontFamilyKey, font);
+        ListTile(
+          onTap: () {
+            EzConfig.instance.preferences.setString(fontFamilyKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });
             popScreen(context: context, pass: font);
           },
-          child: Text(
+          title: Text(
             (font == defaultFontFamily) ? '$font* (Default)' : font,
             style: style,
             textAlign: TextAlign.center,
           ),
         ),
-        Container(height: buttonSpacer),
-      ]);
+      );
     });
 
     return showPlatformDialog(
       context: context,
       builder: (context) => EzDialog(
         title: EzSelectableText('Choose a font'),
-        contents: buttons,
+        content: ListView.separated(
+          itemCount: tiles.length,
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+          itemBuilder: (BuildContext context, int index) {
+            return tiles[index];
+          },
+        ),
       ),
     );
   }
@@ -63,7 +69,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: _chooseGoogleFont,
-      icon: Icon(LineIcons.font),
+      icon: const Icon(LineIcons.font),
       label: Text(
         'Font Family',
         style: TextStyle(fontFamily: currFontFamily),

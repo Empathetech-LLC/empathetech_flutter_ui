@@ -1,7 +1,5 @@
 library empathetech_flutter_ui;
 
-import 'package:flutter/material.dart';
-
 /// If you want to show some love
 const String EmpathetechPayPal =
     'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';

@@ -15,7 +15,7 @@ class EzRow extends Row {
   final List<Widget> children;
   final bool reverseHands;
 
-  /// [Row] wrapper that automatically supports [EzConfig.dominantSide]
+  /// [Row] wrapper that automatically supports [EzConfig.instance.dominantSide]
   /// Can be disabled via setting [reverseHands] to false
   EzRow({
     this.key,
@@ -35,8 +35,9 @@ class EzRow extends Row {
           textDirection: textDirection,
           verticalDirection: verticalDirection,
           textBaseline: textBaseline,
-          children: (reverseHands && EzConfig.dominantSide == Hand.left)
-              ? children.reversed.toList()
-              : children,
+          children:
+              (reverseHands && EzConfig.instance.dominantSide == Hand.left)
+                  ? children.reversed.toList()
+                  : children,
         );
 }

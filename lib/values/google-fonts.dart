@@ -1,4 +1,3 @@
-
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ const String anton = 'Anton';
 const String oldStandard = 'Old Standard TT';
 
 /// All the [GoogleFonts] currently supported
-Map<String, TextStyle> googleStyles = {
+final Map<String, TextStyle> googleStyles = {
   sora: GoogleFonts.sora(),
   hahmlet: GoogleFonts.hahmlet(),
   jetBrainsMono: GoogleFonts.jetBrainsMono(),

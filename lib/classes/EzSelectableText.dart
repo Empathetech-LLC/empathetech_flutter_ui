@@ -37,7 +37,7 @@ class EzSelectableText extends SelectableText {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  EzSelectableText(
+  const EzSelectableText(
     this.data, {
     this.key,
     this.focusNode,
@@ -97,7 +97,7 @@ class EzSelectableText extends SelectableText {
           magnifierConfiguration: magnifierConfiguration,
         );
 
-  EzSelectableText.rich(
+  const EzSelectableText.rich(
     TextSpan textSpan, {
     this.key,
     this.focusNode,

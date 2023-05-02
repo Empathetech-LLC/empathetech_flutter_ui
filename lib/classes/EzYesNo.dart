@@ -15,7 +15,7 @@ class EzYesNo extends StatelessWidget {
   final Icon? confirmIcon;
   final Icon? denyIcon;
 
-  EzYesNo({
+  const EzYesNo({
     required this.onConfirm,
     required this.onDeny,
     this.axis = Axis.vertical,
@@ -28,16 +28,15 @@ class EzYesNo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Icon confirm = confirmIcon ?? Icon(PlatformIcons(context).checkMark);
-    Icon deny = denyIcon ?? Icon(PlatformIcons(context).clear);
+    final Icon confirm = confirmIcon ?? Icon(PlatformIcons(context).checkMark);
+    final Icon deny = denyIcon ?? Icon(PlatformIcons(context).clear);
 
-    double spacing =
-        (spacer is double) ? spacer : EzConfig.prefs[buttonSpacingKey];
+    final double space =
+        (spacer is double) ? spacer : EzConfig.instance.prefs[buttonSpacingKey];
 
     return axis == Axis.vertical
         ? Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // Yes
               ElevatedButton.icon(
@@ -45,7 +44,7 @@ class EzYesNo extends StatelessWidget {
                 icon: confirm,
                 label: Text(confirmMsg),
               ),
-              Container(height: spacing),
+              EzSpacer(space),
 
               // No
               ElevatedButton.icon(
@@ -57,7 +56,6 @@ class EzYesNo extends StatelessWidget {
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // Yes
               ElevatedButton.icon(
@@ -65,7 +63,7 @@ class EzYesNo extends StatelessWidget {
                 icon: confirm,
                 label: Text(confirmMsg),
               ),
-              Container(width: spacing),
+              EzSpacer.row(space),
 
               // No
               ElevatedButton.icon(

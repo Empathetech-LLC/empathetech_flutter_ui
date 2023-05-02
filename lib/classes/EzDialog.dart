@@ -41,7 +41,7 @@ class EzDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    double padding = EzConfig.prefs[paddingKey];
+    final double padding = EzConfig.instance.prefs[paddingKey];
 
     return PlatformAlertDialog(
       // Material (Android)
@@ -50,13 +50,20 @@ class EzDialog extends PlatformAlertDialog {
 
         // Title
         title: title,
-        titlePadding:
-            EdgeInsets.only(top: padding, left: padding, right: padding),
+
+        titlePadding: EdgeInsets.only(
+          top: padding,
+          left: padding,
+          right: padding,
+        ),
 
         // Content
         content: content ?? EzScrollView(children: contents!),
-        contentPadding:
-            EdgeInsets.symmetric(vertical: padding, horizontal: padding),
+
+        contentPadding: EdgeInsets.symmetric(
+          vertical: padding,
+          horizontal: padding,
+        ),
       ),
 
       // Cupertino (iOS)
@@ -67,9 +74,12 @@ class EzDialog extends PlatformAlertDialog {
         // Content
         content: content ??
             EzScrollView(
-                children: (needsClose)
-                    ? contents!
-                    : [...contents!, Container(height: padding)]),
+              children: (needsClose)
+                  ? contents!
+                  : [...contents!, Container(height: padding)],
+            ),
+
+        // Actions (2 close || ! 2 close)
         actions: (needsClose)
             ? [
                 GestureDetector(

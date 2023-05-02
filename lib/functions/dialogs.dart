@@ -33,6 +33,8 @@ Future<dynamic> ezColorPicker({
   required void Function() apply,
   required void Function() cancel,
 }) {
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
   return showPlatformDialog(
     context: context,
     builder: (context) => EzDialog(
@@ -44,7 +46,7 @@ Future<dynamic> ezColorPicker({
           onColorChanged: onColorChange,
           labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
         ),
-        Container(height: EzConfig.prefs[buttonSpacingKey]),
+        EzSpacer(space),
 
         // Apply/cancel
         EzYesNo(

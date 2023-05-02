@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class EzTextTheme extends TextTheme {
   final Color color;
 
-  const EzTextTheme({
+  EzTextTheme({
     required this.color,
   }) : super(
           displayLarge: buildDisplayLarge(color),

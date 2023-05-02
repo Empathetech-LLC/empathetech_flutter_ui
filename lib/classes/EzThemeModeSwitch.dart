@@ -13,12 +13,15 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  ThemeMode _currMode = EzConfig.themeMode;
+  ThemeMode _currMode = EzConfig.instance.themeMode;
 
   late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
-  List<DropdownMenuItem<ThemeMode>> _themeModeItems() {
-    return [
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
+  @override
+  Widget build(BuildContext context) {
+    const List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
         child: Text('System'),
         value: ThemeMode.system,
@@ -32,50 +35,47 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         value: ThemeMode.dark,
       ),
     ];
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return EzRow(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
         EzSelectableText('Theme mode', style: style),
-        Container(width: EzConfig.prefs[buttonSpacingKey]),
+        EzSpacer.row(space),
 
         // Button
         DropdownButton<ThemeMode>(
-            value: _currMode,
-            items: _themeModeItems(),
-            onChanged: (ThemeMode? newThemeMode) {
-              // System
-              if (newThemeMode == ThemeMode.system) {
-                EzConfig.preferences.remove(isLightKey);
+          value: _currMode,
+          items: items,
+          onChanged: (ThemeMode? newThemeMode) {
+            switch (newThemeMode) {
+              case ThemeMode.system:
+                EzConfig.instance.preferences.remove(isLightKey);
                 setState(() {
-                  EzConfig.themeMode = ThemeMode.system;
                   _currMode = ThemeMode.system;
                 });
-              }
+                break;
 
-              // Light
-              else if (newThemeMode == ThemeMode.light) {
-                EzConfig.preferences.setBool(isLightKey, true);
+              case ThemeMode.light:
+                EzConfig.instance.preferences.remove(isLightKey);
                 setState(() {
-                  EzConfig.themeMode = ThemeMode.light;
-                  _currMode = ThemeMode.light;
+                  _currMode = ThemeMode.system;
                 });
-              }
+                break;
 
-              // Dark
-              else if (newThemeMode == ThemeMode.dark) {
-                EzConfig.preferences.setBool(isLightKey, false);
+              case ThemeMode.dark:
+                EzConfig.instance.preferences.setBool(isLightKey, false);
                 setState(() {
-                  EzConfig.themeMode = ThemeMode.dark;
                   _currMode = ThemeMode.dark;
                 });
-              }
-            }),
+                break;
+
+              default:
+                break;
+            }
+          },
+        ),
       ],
     );
   }

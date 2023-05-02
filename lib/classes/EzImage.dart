@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 class EzImage extends Image {
   final Key? key;
 
-  /// [EzConfig.prefs] key that contains the path to the image you wish to load
+  /// [EzConfig] key that contains the path to the image you wish to load
   final String prefsKey;
 
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
@@ -31,11 +31,10 @@ class EzImage extends Image {
   final bool isAntiAlias;
   final FilterQuality filterQuality;
 
-  /// Quickly build an [Image] whose path is stored in [EzConfig.prefs]
-  /// Automatically handles [AssetImage] vs [FileImage]
-  /// Technically supports [NetworkImage], but at this time it isn't recommended
-  /// Will use [EzConfig.preferences] as a backup if [EzConfig.prefs] fails
-  /// In a total failure event, a stock owl image will be shown
+  /// [Image] wrapper for when [prefsKey] can resolve to either an
+  /// [AssetImage] or [FileImage]
+  /// If the [ImageProvider] is known, it is preferred to called the standard
+  /// const [Image] constructor
   EzImage({
     this.key,
     required this.prefsKey,
@@ -82,18 +81,18 @@ class EzImage extends Image {
 
   /// Automatically handles [AssetImage] vs [FileImage]
   /// Technically supports [NetworkImage], but at this time it isn't recommended
-  /// Will use [EzConfig.preferences] as a backup if [EzConfig.prefs] fails
+  /// Will use [EzConfig] preferences as a backup if the [EzConfig] prefs call fails
   /// In a total failure event, a stock owl image will be shown
   static ImageProvider getProvider(String prefsKey) {
     // Something went wrong, return watchful owl
-    String errorURL =
+    const String errorURL =
         'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-    dynamic prefsValue = EzConfig.prefs[prefsKey];
+    dynamic prefsValue = EzConfig.instance.prefs[prefsKey];
 
-    String path = (prefsValue is String)
+    final String path = (prefsValue is String)
         ? prefsValue
-        : (EzConfig.preferences.getString(prefsKey) ?? errorURL);
+        : (EzConfig.instance.preferences.getString(prefsKey) ?? errorURL);
 
     if (isAsset(path)) {
       return AssetImage(path);
@@ -102,7 +101,7 @@ class EzImage extends Image {
         return FileImage(File(path));
       } on FileSystemException catch (_) {
         // File not found error - wipe the setting and return the/a backup image
-        EzConfig.preferences.remove(prefsKey);
+        EzConfig.instance.preferences.remove(prefsKey);
 
         // Default case, stock owl
         return NetworkImage(path);

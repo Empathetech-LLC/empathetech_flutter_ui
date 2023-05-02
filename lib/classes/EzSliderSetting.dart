@@ -18,7 +18,7 @@ enum SettingType {
 }
 
 class EzSliderSetting extends StatefulWidget {
-  /// The [EzConfig.prefs] key whose value is being updated
+  /// The [EzConfig] key whose value is being updated
   final String prefsKey;
 
   /// Custom enum for determining the preview widget's required
@@ -38,7 +38,7 @@ class EzSliderSetting extends StatefulWidget {
 
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
-  EzSliderSetting({
+  const EzSliderSetting({
     Key? key,
     required this.prefsKey,
     required this.type,
@@ -53,13 +53,13 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  late double currValue = EzConfig.prefs[widget.prefsKey];
-  late double defaultValue = EzConfig.defaults[widget.prefsKey];
+  late double currValue = EzConfig.instance.prefs[widget.prefsKey];
+  late double defaultValue = EzConfig.instance.defaults[widget.prefsKey];
 
-  late double padding = EzConfig.prefs[paddingKey];
-  late double margin = EzConfig.prefs[marginKey];
-  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
-  late double paragraphSpacer = EzConfig.prefs[paragraphSpacingKey];
+  late double padding = EzConfig.instance.prefs[paddingKey];
+  late double margin = EzConfig.instance.prefs[marginKey];
+  late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  late double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
 
   late TextStyle? titleStyle = headlineSmall(context);
   late TextStyle? descriptorStyle = titleMedium(context);
@@ -230,9 +230,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
           onChangeEnd: (double value) {
             // When finished, write the result
             if (value == defaultValue) {
-              EzConfig.preferences.remove(widget.prefsKey);
+              EzConfig.instance.preferences.remove(widget.prefsKey);
             } else {
-              EzConfig.preferences.setDouble(widget.prefsKey, value);
+              EzConfig.instance.preferences.setDouble(widget.prefsKey, value);
             }
           },
 
@@ -245,13 +245,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       ElevatedButton.icon(
         onPressed: () {
-          EzConfig.preferences.remove(widget.prefsKey);
+          EzConfig.instance.preferences.remove(widget.prefsKey);
           modalSheetSetState(() {
-            currValue = EzConfig.defaults[widget.prefsKey];
+            currValue = EzConfig.instance.defaults[widget.prefsKey];
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text('Reset: ' + EzConfig.defaults[widget.prefsKey].toString()),
+        label: Text(
+            'Reset: ' + EzConfig.instance.defaults[widget.prefsKey].toString()),
       ),
       Container(height: margin),
     ]);

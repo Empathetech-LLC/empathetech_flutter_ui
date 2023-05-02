@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
-  /// [EzConfig.prefs] key whose path value is being updated
+  /// [EzConfig] key whose path value is being updated
   final String prefsKey;
 
   /// Whether the image is intended for fullscreen use
@@ -26,7 +26,7 @@ class EzImageSetting extends StatefulWidget {
   final bool allowClear;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
-  EzImageSetting({
+  const EzImageSetting({
     Key? key,
     required this.prefsKey,
     required this.fullscreen,
@@ -42,9 +42,10 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   late String title = widget.title;
   late String currPathKey = widget.prefsKey;
+
   String? updatedPath; // Only used when the user makes a change
 
-  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
   /// Cleanup any custom files
   void _cleanup() async {
@@ -73,10 +74,10 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text('File'),
+        label: const Text('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
-      Container(height: buttonSpacer),
+      EzSpacer(space),
 
       // From camera
       ElevatedButton.icon(
@@ -89,35 +90,43 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text('Camera'),
+        label: const Text('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
-      Container(height: buttonSpacer),
+      EzSpacer(space),
 
       // Reset
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
 
-          EzConfig.preferences.remove(widget.prefsKey);
-          popScreen(context: context, pass: EzConfig.defaults[widget.prefsKey]);
+          EzConfig.instance.preferences.remove(widget.prefsKey);
+
+          popScreen(
+            context: context,
+            pass: EzConfig.instance.defaults[widget.prefsKey],
+          );
         },
-        label: Text('Reset'),
+        label: const Text('Reset'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
 
     if (widget.allowClear)
       options.addAll([
-        Container(height: buttonSpacer),
+        EzSpacer(space),
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
 
-            EzConfig.preferences.setString(widget.prefsKey, noImageKey);
+            EzConfig.instance.preferences.setString(
+              widget.prefsKey,
+              noImageKey,
+            );
+
             popScreen(context: context, pass: noImageKey);
           },
-          label: Text('Clear'),
+          label: const Text('Clear'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -147,7 +156,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       onLongPress: () => showPlatformDialog(
         context: context,
         builder: (context) => EzDialog(
-          title: EzSelectableText('Credit to:'),
+          title: const EzSelectableText('Credit to:'),
           contents: [EzSelectableText(widget.credits)],
         ),
       ),
