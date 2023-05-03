@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
+  final Key? key;
+
   /// [EzConfig] key whose value will be updated
   final String toControl;
 
@@ -21,7 +23,7 @@ class EzColorSetting extends StatefulWidget {
   /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
   /// If a [textBackgroundKey] is provided, it will be used to generate a recommended color pair
   const EzColorSetting({
-    Key? key,
+    this.key,
     required this.toControl,
     required this.message,
     this.textBackgroundKey,
