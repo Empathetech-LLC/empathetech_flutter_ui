@@ -51,8 +51,7 @@ ThemeData ezThemeData({required bool light}) {
     scaffoldBackgroundColor: backgroundColor,
 
     // Text && icons
-    fontFamily:
-        googleStyles[(EzConfig.instance.prefs[fontFamilyKey])]?.fontFamily,
+    fontFamily: EzConfig.instance.fontFamily,
     iconTheme: buttonIconData,
     primaryIconTheme: buttonIconData,
     primaryTextTheme: EzTextTheme(color: backgroundTextColor),

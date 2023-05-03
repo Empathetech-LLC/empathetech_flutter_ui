@@ -5,7 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class EzView extends StatelessWidget {
+class EzScreen extends StatelessWidget {
   final Key? key;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? padding;
@@ -22,7 +22,7 @@ class EzView extends StatelessWidget {
   final Clip clipBehavior;
 
   /// [Container] wrapper that defaults to max size with a margin from [EzConfig]
-  const EzView({
+  const EzScreen({
     // Container
     this.key,
     this.alignment,
@@ -43,7 +43,7 @@ class EzView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EdgeInsetsGeometry screenMargin =
-        margin ?? EdgeInsets.all(EzConfig.instance.margin);
+        margin ?? EdgeInsets.all(EzConfig.instance.prefs[marginKey]);
 
     return Container(
       key: key,

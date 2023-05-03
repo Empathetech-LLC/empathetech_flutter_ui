@@ -16,11 +16,12 @@ class EzFontSetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
-  final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
-  String currFontFamily = EzConfig.instance.prefs[fontFamilyKey];
+  String? currFontFamily = EzConfig.instance.fontFamily;
 
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
+
   final double padding = EzConfig.instance.prefs[paddingKey];
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
   late TextStyle? titleTextStyle = headlineSmall(context);
 

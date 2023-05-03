@@ -57,12 +57,11 @@ class EzConfig {
   /// Top-level [preferences]
   final Map<String, dynamic> prefs;
 
+  /// Current [googleStyles] for the app to use
+  final String? fontFamily;
+
   /// [ThemeMode.system] wrapper that allows for overwrite
   final ThemeMode themeMode;
-
-  final double margin;
-  final double padding;
-  final String? fontFamily;
 
   /// What side of the screen touch points should be on
   final Hand dominantSide;
@@ -77,8 +76,6 @@ class EzConfig {
     required this.defaults,
     required this.prefs,
     required this.themeMode,
-    required this.margin,
-    required this.padding,
     this.fontFamily,
     required this.dominantSide,
   });
@@ -137,10 +134,8 @@ class EzConfig {
         preferences: preferences,
         defaults: baseCopy,
         prefs: prefs,
-        themeMode: themeMode,
-        margin: prefs[marginKey],
-        padding: prefs[paddingKey],
         fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
+        themeMode: themeMode,
         dominantSide: dominantSide,
       );
     }

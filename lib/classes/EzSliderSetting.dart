@@ -56,8 +56,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double currValue = EzConfig.instance.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.instance.defaults[widget.prefsKey];
 
-  late double padding = EzConfig.instance.prefs[paddingKey];
   late double margin = EzConfig.instance.prefs[marginKey];
+  late double padding = EzConfig.instance.prefs[paddingKey];
   late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
 

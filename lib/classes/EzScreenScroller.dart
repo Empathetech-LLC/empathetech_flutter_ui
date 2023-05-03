@@ -3,7 +3,7 @@ library empathetech_flutter_ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzPageScroller extends SingleChildScrollView {
+class EzScreenScroller extends SingleChildScrollView {
   final EdgeInsetsGeometry? padding;
   final bool? primary;
   final ScrollPhysics? physics;
@@ -11,10 +11,11 @@ class EzPageScroller extends SingleChildScrollView {
   final Clip clipBehavior;
   final String? restorationId;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final Widget child;
 
   /// [SingleChildScrollView] inside another [SingleChildScrollView]
   /// [Axis.horizontal] then [Axis.vertical]
-  const EzPageScroller({
+  const EzScreenScroller({
     this.padding,
     this.primary,
     this.physics,
@@ -22,6 +23,7 @@ class EzPageScroller extends SingleChildScrollView {
     this.clipBehavior = Clip.hardEdge,
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    required this.child,
   });
 
   @override
