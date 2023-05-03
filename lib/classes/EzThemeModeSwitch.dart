@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
   /// Standardized tool for optionally overwriting [ThemeMode.system] via [EzConfig]
-  EzThemeModeSwitch({Key? key}) : super(key: key);
+  const EzThemeModeSwitch({Key? key}) : super(key: key);
 
   @override
   _ThemeModeSwitchState createState() => _ThemeModeSwitchState();
