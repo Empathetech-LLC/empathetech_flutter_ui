@@ -2,12 +2,12 @@ library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
 
-class EzSpacer extends Container {
+class EzSpacer extends SizedBox {
   final double space;
 
   /// [Container] with height [space] for creating space in a [Column]
-  EzSpacer(this.space) : super(height: space);
+  const EzSpacer(this.space) : super(height: space);
 
   /// [Container] with height [space] for creating space in a [Row]
-  EzSpacer.row(this.space) : super(width: space);
+  const EzSpacer.row(this.space) : super(width: space);
 }
