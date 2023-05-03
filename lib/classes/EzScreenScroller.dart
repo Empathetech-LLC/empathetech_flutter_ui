@@ -1,52 +1,54 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzScreenScroller extends SingleChildScrollView {
-  final EdgeInsetsGeometry? padding;
-  final bool? primary;
-  final ScrollPhysics? physics;
-  final DragStartBehavior dragStartBehavior;
+  final Key? key;
+  final ScrollPhysics physics;
   final Clip clipBehavior;
-  final String? restorationId;
+  final DragStartBehavior dragStartBehavior;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
-  final Widget child;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
+  final List<Widget> children;
 
-  /// [SingleChildScrollView] inside another [SingleChildScrollView]
-  /// [Axis.horizontal] then [Axis.vertical]
+  /// Wraps a vertical [EzScrollView] in a horizontal [SingleChildScrollView]
   const EzScreenScroller({
-    this.padding,
-    this.primary,
-    this.physics,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.key,
+    this.physics = const BouncingScrollPhysics(),
     this.clipBehavior = Clip.hardEdge,
-    this.restorationId,
+    this.dragStartBehavior = DragStartBehavior.start,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
-    required this.child,
-  });
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    required this.children,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: padding,
-      primary: primary,
-      physics: physics,
-      dragStartBehavior: dragStartBehavior,
-      clipBehavior: clipBehavior,
-      restorationId: restorationId,
-      keyboardDismissBehavior: keyboardDismissBehavior,
       scrollDirection: Axis.horizontal,
-      child: SingleChildScrollView(
-        padding: padding,
-        primary: primary,
-        physics: physics,
-        dragStartBehavior: dragStartBehavior,
-        clipBehavior: clipBehavior,
-        restorationId: restorationId,
-        keyboardDismissBehavior: keyboardDismissBehavior,
+      reverse: false,
+      physics: physics,
+      clipBehavior: clipBehavior,
+      dragStartBehavior: dragStartBehavior,
+      keyboardDismissBehavior: keyboardDismissBehavior,
+      child: EzScrollView(
         scrollDirection: Axis.vertical,
-        child: child,
+        reverseHands: false,
+        reverse: false,
+        physics: physics,
+        clipBehavior: clipBehavior,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        verticalDirection: VerticalDirection.down,
+        children: children,
       ),
     );
   }
