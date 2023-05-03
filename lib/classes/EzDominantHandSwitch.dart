@@ -4,15 +4,15 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzLeftySwitch extends StatefulWidget {
+class EzDominantHandSwitch extends StatefulWidget {
   /// Standardized tool for updating [EzConfig] dominantSide
-  const EzLeftySwitch({Key? key}) : super(key: key);
+  const EzDominantHandSwitch({Key? key}) : super(key: key);
 
   @override
-  _LeftySwitchState createState() => _LeftySwitchState();
+  _HandSwitchState createState() => _HandSwitchState();
 }
 
-class _LeftySwitchState extends State<EzLeftySwitch> {
+class _HandSwitchState extends State<EzDominantHandSwitch> {
   Hand _currSide = EzConfig.instance.dominantSide;
 
   late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
