@@ -1,7 +1,7 @@
 library empathetech_flutter_ui;
 
 // Classes
-export 'classes/Eb2Casa.dart';
+export 'classes/EB2CASA.dart';
 export 'classes/EzApp.dart';
 export 'classes/EzAppProvider.dart';
 export 'classes/EzColors.dart';

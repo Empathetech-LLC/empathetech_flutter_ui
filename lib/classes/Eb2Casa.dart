@@ -3,11 +3,11 @@ library empathetech_flutter_ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class Eb2Casa extends CupertinoActionSheetAction {
+class EB2CASA extends CupertinoActionSheetAction {
   final ElevatedButton from;
 
   /// Quickly convert an [ElevatedButton] into a [CupertinoActionSheetAction]
-  Eb2Casa({required this.from})
+  EB2CASA({required this.from})
       : super(
           onPressed: from.onPressed ?? () {},
           child: GestureDetector(
