@@ -76,9 +76,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live preview && label
           EzSelectableText(
             'Currently: $currValue',
-            style: descriptorStyle?.copyWith(
-              fontSize: descriptorStyle!.fontSize! * currValue,
-            ),
+            style: descriptorStyle,
+            textScaleFactor: currValue,
           ),
           Container(height: buttonSpacer),
         ];
