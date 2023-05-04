@@ -21,27 +21,26 @@ const Map<String, dynamic> defaultConfig = {
 
   fontFamilyKey: roboto,
 
-  alertColorKey: 0xFFDAA520, // Goldenrod (one of Empathetech's triadic colors)
+  alertColorKey: EmpathGoldenrodHex,
 
-  lightButtonColorKey:
-      0xFF20DAA5, // Eucalyptus (one of Empathetech's triadic colors)
-  lightButtonTextColorKey: 0xFF000000, // Black
-  darkButtonColorKey: 0xFF20DAA5,
-  darkButtonTextColorKey: 0xFF000000,
+  lightButtonColorKey: EmpathEucalyptusHex,
+  lightButtonTextColorKey: blackHex,
+  darkButtonColorKey: EmpathEucalyptusHex,
+  darkButtonTextColorKey: blackHex,
 
   // Light theme //
   lightBackgroundImageKey: null,
-  lightBackgroundColorKey: 0xFFF5F5F5, // Almost white
-  lightBackgroundTextColorKey: 0xFF000000,
-  lightThemeColorKey: 0xFFFFFFFF, // White
-  lightThemeTextColorKey: 0xFF000000,
+  lightBackgroundColorKey: offWhiteHex,
+  lightBackgroundTextColorKey: blackHex,
+  lightThemeColorKey: whiteHex,
+  lightThemeTextColorKey: blackHex,
 
   // Dark theme //
   darkBackgroundImageKey: null,
-  darkBackgroundColorKey: 0xFF0A0A0A, // Almost black
-  darkBackgroundTextColorKey: 0xFFFFFFFF,
-  darkThemeColorKey: 0xFF000000, // Black
-  darkThemeTextColorKey: 0xFFFFFFFF,
+  darkBackgroundColorKey: offBlackHex,
+  darkBackgroundTextColorKey: whiteHex,
+  darkThemeColorKey: blackHex,
+  darkThemeTextColorKey: whiteHex,
 };
 
 /// Singleton class for managing a responsive and user-customizable UI
