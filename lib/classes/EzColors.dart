@@ -1,5 +1,7 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 
 class EzInvertedColor extends Color {
@@ -25,8 +27,8 @@ class EzContrastColor extends Color {
                     (background.green * 0.587) +
                     (background.blue * 0.114)) >=
                 150)
-            ? 0xFFFFFFFF
-            : 0xFF000000);
+            ? whiteHex
+            : blackHex);
 }
 
 class EzColorBlend extends Color {
