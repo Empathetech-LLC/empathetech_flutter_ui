@@ -29,7 +29,7 @@ class EzScrollView extends SingleChildScrollView {
   final TextDirection? textDirection;
   final TextBaseline? textBaseline;
   final VerticalDirection verticalDirection;
-  final List<Widget> children;
+  final List<Widget>? children;
 
   /// [SingleChildScrollView] wrapper
   /// Prefers the [children] list rather than [child] Widget
@@ -59,8 +59,8 @@ class EzScrollView extends SingleChildScrollView {
     this.textDirection,
     this.textBaseline,
     this.verticalDirection = VerticalDirection.down,
-    required this.children,
-  });
+    this.children,
+  }) : assert(child != null || children != null);
 
   Widget _buildCore() {
     return (scrollDirection == Axis.vertical)
@@ -71,7 +71,7 @@ class EzScrollView extends SingleChildScrollView {
             textDirection: textDirection,
             textBaseline: textBaseline,
             verticalDirection: verticalDirection,
-            children: children,
+            children: children!,
           )
         : EzRow(
             mainAxisSize: mainAxisSize,
@@ -80,7 +80,7 @@ class EzScrollView extends SingleChildScrollView {
             textDirection: textDirection,
             textBaseline: textBaseline,
             verticalDirection: verticalDirection,
-            children: children,
+            children: children!,
             reverseHands: reverseHands,
           );
   }
