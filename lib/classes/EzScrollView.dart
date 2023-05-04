@@ -87,8 +87,6 @@ class EzScrollView extends SingleChildScrollView {
 
   @override
   Widget build(BuildContext context) {
-    Widget core = _buildCore();
-
     return SingleChildScrollView(
       key: key,
       scrollDirection: scrollDirection,
@@ -97,7 +95,7 @@ class EzScrollView extends SingleChildScrollView {
       primary: primary,
       physics: physics,
       controller: controller,
-      child: child ?? core,
+      child: child ?? _buildCore(),
       dragStartBehavior: dragStartBehavior,
       clipBehavior: clipBehavior,
       restorationId: restorationId,
