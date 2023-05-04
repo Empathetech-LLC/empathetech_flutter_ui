@@ -29,23 +29,26 @@ class EzScreenScroller extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      key: key,
-      scrollDirection: Axis.horizontal,
-      primary: false,
-      reverseHands: false,
-      reverse: false,
-      physics: physics,
-      clipBehavior: clipBehavior,
-      dragStartBehavior: dragStartBehavior,
-      keyboardDismissBehavior: keyboardDismissBehavior,
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: mainAxisAlignment,
-      crossAxisAlignment: crossAxisAlignment,
-      verticalDirection: VerticalDirection.down,
+    Alignment _copyAlign() {
+      switch (mainAxisAlignment) {
+        case MainAxisAlignment.start:
+          return Alignment.topLeft;
+        case MainAxisAlignment.end:
+          return Alignment.topRight;
+        case MainAxisAlignment.center:
+        case MainAxisAlignment.spaceBetween:
+        case MainAxisAlignment.spaceAround:
+        case MainAxisAlignment.spaceEvenly:
+          return Alignment.topCenter;
+      }
+    }
+
+    return Align(
+      alignment: _copyAlign(),
       child: EzScrollView(
-        scrollDirection: Axis.vertical,
-        primary: true,
+        key: key,
+        scrollDirection: Axis.horizontal,
+        primary: false,
         reverseHands: false,
         reverse: false,
         physics: physics,
@@ -56,7 +59,21 @@ class EzScreenScroller extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
         verticalDirection: VerticalDirection.down,
-        children: children,
+        child: EzScrollView(
+          scrollDirection: Axis.vertical,
+          primary: true,
+          reverseHands: false,
+          reverse: false,
+          physics: physics,
+          clipBehavior: clipBehavior,
+          dragStartBehavior: dragStartBehavior,
+          keyboardDismissBehavior: keyboardDismissBehavior,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: mainAxisAlignment,
+          crossAxisAlignment: crossAxisAlignment,
+          verticalDirection: VerticalDirection.down,
+          children: children,
+        ),
       ),
     );
   }
