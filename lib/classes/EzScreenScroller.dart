@@ -22,7 +22,7 @@ class EzScreenScroller extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.dragStartBehavior = DragStartBehavior.start,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
-    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     required this.children,
   });
