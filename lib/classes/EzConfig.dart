@@ -149,3 +149,9 @@ class EzConfig {
     return _instance!;
   }
 }
+
+class EzThemeTracker {
+  /// Set in the initial route
+  /// Whether [EzConfig.themeMode] is/contains [Brightness.light]
+  static late final bool light;
+}

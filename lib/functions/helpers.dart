@@ -15,12 +15,6 @@ void closeKeyboard(BuildContext context) {
   FocusScope.of(context).unfocus();
 }
 
-/// Return whether the current theme is under a "Light" config
-bool isLightTheme(BuildContext context) {
-  Brightness? brightness = MediaQuery.maybeOf(context)?.platformBrightness;
-  return (brightness == null) ? true : brightness == Brightness.light;
-}
-
 /// More readable than MediaQuery.of(context).size.width
 double widthOf(BuildContext context) {
   return MediaQuery.of(context).size.width;
