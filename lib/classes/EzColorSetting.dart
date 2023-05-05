@@ -78,7 +78,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzDialog(
-          title: EzSelectableText('Use recommended?'),
+          title: const EzSelectableText('Use recommended?'),
           contents: [
             // Recommended preview
             Container(
@@ -130,7 +130,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzDialog(
-        title: EzSelectableText('Reset to...'),
+        title: const EzSelectableText('Reset to...'),
         contents: [
           // Color preview
           Container(

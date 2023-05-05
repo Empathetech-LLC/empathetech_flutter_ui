@@ -53,7 +53,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzDialog(
-        title: EzSelectableText('Choose a font'),
+        title: const EzSelectableText('Choose a font'),
         content: ListView.separated(
           itemCount: tiles.length,
           separatorBuilder: (BuildContext context, int index) =>

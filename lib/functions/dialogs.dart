@@ -17,7 +17,7 @@ Future<dynamic> logAlert(
   return showPlatformDialog(
     context: context,
     builder: (context) => EzDialog(
-      title: EzSelectableText('Attention:'),
+      title: const EzSelectableText('Attention:'),
       contents: [
         EzSelectableText(message),
       ],
@@ -38,7 +38,7 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzDialog(
-      title: EzSelectableText('Pick a color!'),
+      title: const EzSelectableText('Pick a color!'),
       contents: [
         // Color picker
         ColorPicker(
