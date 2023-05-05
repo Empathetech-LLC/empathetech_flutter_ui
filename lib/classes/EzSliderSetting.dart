@@ -71,7 +71,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.fontScalar:
         return [
           // Title padding
-          Container(height: padding),
+          EzSpacer(padding),
 
           // Live preview && label
           EzSelectableText(
@@ -89,7 +89,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
         return [
           // Title padding
-          Container(height: padding),
+          EzSpacer(padding),
 
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -121,7 +121,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.padding:
         return [
           // Live preview
-          Container(height: currValue),
+          EzSpacer(currValue),
 
           // Live label
           ElevatedButton(
@@ -135,7 +135,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.buttonHeight:
         return [
           // Title padding
-          Container(height: padding),
+          EzSpacer(padding),
 
           // Live preview && label
           ElevatedButton(
@@ -152,7 +152,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.buttonSpacing:
         return [
           // Title padding
-          Container(height: padding),
+          EzSpacer(padding),
 
           // Live preview && label
           Column(
@@ -177,7 +177,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.paragraphSpacing:
         return [
           // Title padding
-          Container(height: padding),
+          EzSpacer(padding),
 
           // Live preview && label
           Column(
@@ -201,7 +201,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
   List<Widget> _buildView(StateSetter modalSheetSetState) {
     List<Widget> toReturn = [
-      Container(height: margin),
+      EzSpacer(margin),
       EzSelectableText(widget.title, style: titleStyle),
     ];
 
@@ -253,7 +253,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         label: Text(
             'Reset: ' + EzConfig.instance.defaults[widget.prefsKey].toString()),
       ),
-      Container(height: margin),
+      EzSpacer(margin),
     ]);
 
     // Build time!

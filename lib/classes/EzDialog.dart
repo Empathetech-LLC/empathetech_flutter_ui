@@ -74,9 +74,8 @@ class EzDialog extends PlatformAlertDialog {
         // Content
         content: content ??
             EzScrollView(
-              children: (needsClose)
-                  ? contents!
-                  : [...contents!, Container(height: padding)],
+              children:
+                  (needsClose) ? contents! : [...contents!, EzSpacer(padding)],
             ),
 
         // Actions (2 close || ! 2 close)
