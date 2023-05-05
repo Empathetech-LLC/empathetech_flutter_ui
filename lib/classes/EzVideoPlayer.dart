@@ -49,7 +49,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Optionally provide a [BoxDecoration] background for the controls region
   /// The video will begin muted unless [startingVolume] is specified
   /// Optionally provide [maxWidth] and [maxHeight] to shape the video
-  const EzVideoPlayer({
+  EzVideoPlayer({
     Key? key,
     required this.controller,
     required this.iconColor,
