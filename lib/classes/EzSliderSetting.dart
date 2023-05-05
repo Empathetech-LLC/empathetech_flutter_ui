@@ -79,7 +79,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             style: descriptorStyle,
             textScaleFactor: currValue,
           ),
-          Container(height: buttonSpacer),
+          EzSpacer(buttonSpacer),
         ];
 
       // Margin
@@ -100,7 +100,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 'Currently:\n$currValue\n\n(to scale)',
                 style: descriptorStyle,
               ),
-              Container(width: paragraphSpacer),
+              EzSpacer.row(paragraphSpacer),
 
               // Live preview
               Container(
@@ -114,7 +114,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ),
             ],
           ),
-          Container(height: buttonSpacer),
+          EzSpacer(buttonSpacer),
         ];
 
       // Padding
@@ -128,7 +128,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             onPressed: doNothing,
             child: Text('Currently: $currValue'),
           ),
-          Container(height: buttonSpacer),
+          EzSpacer(buttonSpacer),
         ];
 
       // Button height
@@ -145,7 +145,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               fixedSize: Size(widthOf(context), currValue),
             ),
           ),
-          Container(height: buttonSpacer),
+          EzSpacer(buttonSpacer),
         ];
 
       // Button spacing
@@ -193,7 +193,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         ];
 
       default:
-        return [Container(height: buttonSpacer)];
+        return [EzSpacer(buttonSpacer)];
     }
   }
 
@@ -239,7 +239,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           divisions: widget.steps,
         ),
       ),
-      Container(height: buttonSpacer),
+      EzSpacer(buttonSpacer),
 
       // Reset button
       ElevatedButton.icon(
