@@ -44,7 +44,7 @@ class EzVideoPlayer extends StatefulWidget {
   final double maxHeight;
 
   /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio] for the [controller]
-  /// Also supports tap-to-pause on the main window via [EzMouseDetector]
+  /// Also supports tap-to-pause on the main window via [MouseRegion]
   /// The visibility of each button can be controlled with [ButtonVis]
   /// Optionally provide a [BoxDecoration] background for the controls region
   /// The video will begin muted unless [startingVolume] is specified
@@ -77,14 +77,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double? savedVolume;
   double _currentPosition = 0.0;
 
-  late double aspectRatio = widget.controller.value.aspectRatio;
-
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  late final buttonSize = buttonSpacer;
 
-  late Color showing = widget.iconColor;
-  late Color hiding = widget.hiddenOpacity == 0.0
+  late final Color showing = widget.iconColor;
+  late final Color hiding = widget.hiddenOpacity == 0.0
       ? Colors.transparent
       : widget.iconColor.withOpacity(widget.hiddenOpacity);
 
@@ -178,8 +177,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   }
 
   List<Widget> _buildButtons(SliderThemeData sliderTheme) {
-    final buttonSize = buttonSpacer;
-
     List<Widget> controls = [];
 
     // Play/pause
@@ -258,18 +255,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    double aspectRatio = widget.controller.value.aspectRatio;
+
     Color sliderColor = _buildColor(widget.sliderVis);
 
-    final SliderThemeData videoSliderTheme =
-        Theme.of(context).sliderTheme.copyWith(
-              thumbShape: (sliderColor == Colors.transparent)
-                  ? SliderComponentShape.noThumb
-                  : null,
-              activeTrackColor: sliderColor,
-              inactiveTrackColor: sliderColor,
-              thumbColor: sliderColor,
-              trackShape: VideoSliderTrack(),
-            );
+    SliderThemeData videoSliderTheme = Theme.of(context).sliderTheme.copyWith(
+          thumbShape: (sliderColor == Colors.transparent)
+              ? SliderComponentShape.noThumb
+              : null,
+          activeTrackColor: sliderColor,
+          inactiveTrackColor: sliderColor,
+          thumbColor: sliderColor,
+        );
 
     return MouseRegion(
       onEnter: (_) {
@@ -299,7 +296,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 bottom: heightOf(context) * 0.1,
                 left: 0,
                 top: 0,
-                width: widthOf(context),
+                width: double.infinity,
                 child: GestureDetector(
                     child: Container(
                       color: Colors.transparent,
@@ -355,23 +352,5 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ),
       ),
     );
-  }
-}
-
-class VideoSliderTrack extends RoundedRectSliderTrackShape {
-  /// Builds a custom slider track with no padding
-  @override
-  Rect getPreferredRect({
-    required RenderBox parentBox,
-    Offset offset = Offset.zero,
-    required SliderThemeData sliderTheme,
-    bool isEnabled = false,
-    bool isDiscrete = false,
-  }) {
-    final trackHeight = sliderTheme.trackHeight;
-    final trackLeft = offset.dx;
-    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
-    final trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }
