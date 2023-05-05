@@ -142,7 +142,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             onPressed: doNothing,
             child: Text('Currently: $currValue'),
             style: ElevatedButton.styleFrom(
-              fixedSize: Size(widthOf(context), currValue),
+              fixedSize: Size(double.infinity, currValue),
             ),
           ),
           EzSpacer(buttonSpacer),
