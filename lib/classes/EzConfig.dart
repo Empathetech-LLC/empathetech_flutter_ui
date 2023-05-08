@@ -59,27 +59,23 @@ class EzConfig {
   /// Current [googleStyles] for the app to use
   final String? fontFamily;
 
-  /// [ThemeMode.system] wrapper that allows for overwrite
-  final ThemeMode themeMode;
-
   /// What side of the screen touch points should be on
   final Hand dominantSide;
 
-  // Singleton instance
+  /// Singleton instance
   static EzConfig? _instance;
 
-  // Private constructor
+  /// Private constructor
   const EzConfig._({
     required this.assets,
     required this.preferences,
     required this.defaults,
     required this.prefs,
-    required this.themeMode,
     this.fontFamily,
     required this.dominantSide,
   });
 
-  // Factory constructor
+  /// Factory constructor
   factory EzConfig({
     required List<String> assetPaths,
     required SharedPreferences preferences,
@@ -115,14 +111,6 @@ class EzConfig {
         if (userPref != null) prefs[key] = userPref;
       });
 
-      // Load theme setting
-      bool? isLight = preferences.getBool(isLightKey);
-      final ThemeMode themeMode = (isLight == null)
-          ? ThemeMode.system
-          : (isLight)
-              ? ThemeMode.light
-              : ThemeMode.dark;
-
       // Load hand setting
       bool? isRight = preferences.getBool(isRightKey);
       final Hand dominantSide =
@@ -134,24 +122,17 @@ class EzConfig {
         defaults: baseCopy,
         prefs: prefs,
         fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
-        themeMode: themeMode,
         dominantSide: dominantSide,
       );
     }
     return _instance!;
   }
 
-  // Get instance
+  /// Get instance
   static EzConfig get instance {
     if (_instance == null) {
       throw Exception("EzConfig has not been initialized!");
     }
     return _instance!;
   }
-}
-
-class EzThemeTracker {
-  /// Set in the initial route
-  /// Whether [EzConfig.themeMode] is/contains [Brightness.light]
-  static late final bool light;
 }
