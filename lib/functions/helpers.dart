@@ -35,6 +35,16 @@ bool isAsset(String? path) {
   return EzConfig.instance.assets.contains(path);
 }
 
+/// Returns the button color of the current theme
+/// Useful for making things clickable
+Color? getThemeButtonColor(BuildContext context) {
+  return Theme.of(context)
+      .elevatedButtonTheme
+      .style
+      ?.backgroundColor
+      ?.resolve(MaterialState.values.toSet());
+}
+
 /// For web use, set the tab's title
 void setPageTitle({
   required BuildContext context,
