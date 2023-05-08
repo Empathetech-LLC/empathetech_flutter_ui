@@ -1,7 +1,6 @@
 library empathetech_flutter_ui;
 
 // App-wide
-const String isLightKey = 'isLight';
 const String isRightKey = 'isRight';
 
 const String noImageKey = 'noImage';

@@ -3,6 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
   /// Standardized tool for optionally overwriting [ThemeMode.system] via [EzConfig]
@@ -13,26 +14,36 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  ThemeMode _currMode = EzConfig.instance.themeMode;
-
-  late TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
+  late final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
+  late AdaptiveThemeMode? _currMode;
+
+  void _getTheme() async {
+    _currMode = await AdaptiveTheme.getThemeMode();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    const List<DropdownMenuItem<ThemeMode>> items = [
-      DropdownMenuItem<ThemeMode>(
+    const List<DropdownMenuItem<AdaptiveThemeMode>> items = [
+      DropdownMenuItem<AdaptiveThemeMode>(
         child: Text('System'),
-        value: ThemeMode.system,
+        value: AdaptiveThemeMode.system,
       ),
-      DropdownMenuItem<ThemeMode>(
+      DropdownMenuItem<AdaptiveThemeMode>(
         child: Text('Light'),
-        value: ThemeMode.light,
+        value: AdaptiveThemeMode.light,
       ),
-      DropdownMenuItem<ThemeMode>(
+      DropdownMenuItem<AdaptiveThemeMode>(
         child: Text('Dark'),
-        value: ThemeMode.dark,
+        value: AdaptiveThemeMode.dark,
       ),
     ];
 
@@ -45,30 +56,21 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         EzSpacer.row(space),
 
         // Button
-        DropdownButton<ThemeMode>(
+        DropdownButton<AdaptiveThemeMode>(
           value: _currMode,
           items: items,
-          onChanged: (ThemeMode? newThemeMode) {
+          onChanged: (AdaptiveThemeMode? newThemeMode) {
             switch (newThemeMode) {
-              case ThemeMode.system:
-                EzConfig.instance.preferences.remove(isLightKey);
-                setState(() {
-                  _currMode = ThemeMode.system;
-                });
+              case AdaptiveThemeMode.system:
+                AdaptiveTheme.of(context).setSystem();
                 break;
 
-              case ThemeMode.light:
-                EzConfig.instance.preferences.remove(isLightKey);
-                setState(() {
-                  _currMode = ThemeMode.system;
-                });
+              case AdaptiveThemeMode.light:
+                AdaptiveTheme.of(context).setLight();
                 break;
 
-              case ThemeMode.dark:
-                EzConfig.instance.preferences.setBool(isLightKey, false);
-                setState(() {
-                  _currMode = ThemeMode.dark;
-                });
+              case AdaptiveThemeMode.dark:
+                AdaptiveTheme.of(context).setDark();
                 break;
 
               default:
