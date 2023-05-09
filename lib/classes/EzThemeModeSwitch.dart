@@ -3,7 +3,7 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
   /// Standardized tool for optionally overwriting [ThemeMode.system] via [EzConfig]
@@ -14,36 +14,32 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  late final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
+  late ThemeMode? _currMode;
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
-  late AdaptiveThemeMode? _currMode;
-
-  void _getTheme() async {
-    _currMode = await AdaptiveTheme.getThemeMode();
-  }
+  late final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   @override
   void initState() {
     super.initState();
-    _getTheme();
+    _currMode = PlatformTheme.of(context)?.themeMode;
   }
 
   @override
   Widget build(BuildContext context) {
-    const List<DropdownMenuItem<AdaptiveThemeMode>> items = [
-      DropdownMenuItem<AdaptiveThemeMode>(
+    const List<DropdownMenuItem<ThemeMode>> items = [
+      DropdownMenuItem<ThemeMode>(
         child: Text('System'),
-        value: AdaptiveThemeMode.system,
+        value: ThemeMode.system,
       ),
-      DropdownMenuItem<AdaptiveThemeMode>(
+      DropdownMenuItem<ThemeMode>(
         child: Text('Light'),
-        value: AdaptiveThemeMode.light,
+        value: ThemeMode.light,
       ),
-      DropdownMenuItem<AdaptiveThemeMode>(
+      DropdownMenuItem<ThemeMode>(
         child: Text('Dark'),
-        value: AdaptiveThemeMode.dark,
+        value: ThemeMode.dark,
       ),
     ];
 
@@ -56,21 +52,24 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         EzSpacer.row(space),
 
         // Button
-        DropdownButton<AdaptiveThemeMode>(
+        DropdownButton<ThemeMode>(
           value: _currMode,
           items: items,
-          onChanged: (AdaptiveThemeMode? newThemeMode) {
+          onChanged: (ThemeMode? newThemeMode) {
             switch (newThemeMode) {
-              case AdaptiveThemeMode.system:
-                AdaptiveTheme.of(context).setSystem();
+              case ThemeMode.system:
+                PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                EzConfig.instance.preferences.remove(isLightKey);
                 break;
 
-              case AdaptiveThemeMode.light:
-                AdaptiveTheme.of(context).setLight();
+              case ThemeMode.light:
+                PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                EzConfig.instance.preferences.setBool(isLightKey, true);
                 break;
 
-              case AdaptiveThemeMode.dark:
-                AdaptiveTheme.of(context).setDark();
+              case ThemeMode.dark:
+                PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                EzConfig.instance.preferences.setBool(isLightKey, false);
                 break;
 
               default:

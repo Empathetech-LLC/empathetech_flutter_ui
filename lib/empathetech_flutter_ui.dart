@@ -3,7 +3,6 @@ library empathetech_flutter_ui;
 // Classes
 export 'classes/EB2CASA.dart';
 export 'classes/EzApp.dart';
-export 'classes/EzAppProvider.dart';
 export 'classes/EzColors.dart';
 export 'classes/EzColorSetting.dart';
 export 'classes/EzConfig.dart';
