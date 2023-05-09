@@ -43,17 +43,18 @@ const Map<String, dynamic> defaultConfig = {
   darkThemeTextColorKey: whiteHex,
 };
 
-/// Singleton class for managing a responsive and user-customizable UI
+/// Singleton class for managing user customization
 class EzConfig {
   /// [AssetImage] paths for this app
   final List<String> assets;
 
+  /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// [defaultConfig] merged with init's customDefaults
+  /// [defaultConfig] merged with the constructor provided custom defaults
   final Map<String, dynamic> defaults;
 
-  /// Top-level [preferences]
+  /// Live values in use => [defaults] merged with [preferences] storage
   final Map<String, dynamic> prefs;
 
   /// Current [googleStyles] for the app to use
@@ -62,10 +63,11 @@ class EzConfig {
   /// What side of the screen touch points should be on
   final Hand dominantSide;
 
-  /// Singleton instance
+  /// Private single instance
+  /// The factory constructor + singleton combo requires an internally mutable [instance]
   static EzConfig? _instance;
 
-  /// Private constructor
+  /// Private/internal/finalization constructor
   const EzConfig._({
     required this.assets,
     required this.preferences,
@@ -75,7 +77,7 @@ class EzConfig {
     required this.dominantSide,
   });
 
-  /// Factory constructor
+  /// Factory/external/initialization constructor
   factory EzConfig({
     required List<String> assetPaths,
     required SharedPreferences preferences,
@@ -83,29 +85,37 @@ class EzConfig {
   }) {
     if (_instance == null) {
       // Load any custom defaults
-      Map<String, dynamic> baseCopy = Map.from(defaultConfig);
-      if (customDefaults != null) baseCopy.addAll(customDefaults);
+      Map<String, dynamic> mergedDefaults = new Map.from(defaultConfig);
+      if (customDefaults != null) mergedDefaults.addAll(customDefaults);
 
-      // Start prefs from a deep copy of all defaults
-      Map<String, dynamic> prefs = new Map.from(baseCopy);
+      Map<String, dynamic> prefs = new Map.from(mergedDefaults);
 
       // Load the keys that have been overwritten
-      List<String> overwritten = preferences.getKeys().toList();
+      List<String> overwritten =
+          prefs.keys.toSet().intersection(preferences.getKeys()).toList();
 
       overwritten.forEach((key) {
         dynamic value = prefs[key];
         dynamic userPref;
 
-        if (value is int) {
-          userPref = preferences.getInt(key);
-        } else if (value is bool) {
-          userPref = preferences.getBool(key);
-        } else if (value is double) {
-          userPref = preferences.getDouble(key);
-        } else if (value is String) {
-          userPref = preferences.getString(key);
-        } else if (value is List<String>) {
-          userPref = preferences.getStringList(key);
+        switch (value.runtimeType) {
+          case int:
+            userPref = preferences.getInt(key);
+            break;
+          case bool:
+            userPref = preferences.getBool(key);
+            break;
+          case double:
+            userPref = preferences.getDouble(key);
+            break;
+          case String:
+            userPref = preferences.getString(key);
+            break;
+          case List<String>:
+            userPref = preferences.getStringList(key);
+            break;
+          default:
+            break;
         }
 
         if (userPref != null) prefs[key] = userPref;
@@ -119,16 +129,17 @@ class EzConfig {
       _instance = EzConfig._(
         assets: assetPaths,
         preferences: preferences,
-        defaults: baseCopy,
+        defaults: mergedDefaults,
         prefs: prefs,
         fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
         dominantSide: dominantSide,
       );
     }
+
     return _instance!;
   }
 
-  /// Get instance
+  /// Getter
   static EzConfig get instance {
     if (_instance == null) {
       throw Exception("EzConfig has not been initialized!");
