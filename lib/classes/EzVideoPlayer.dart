@@ -295,7 +295,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
             // Tap-to-pause
             Positioned(
-              bottom: heightOf(context) * 0.1,
+              bottom: buttonSize * 3,
               left: 0,
               top: 0,
               width: double.infinity,
@@ -315,7 +315,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               bottom: 0,
               left: margin,
               right: margin,
-              height: heightOf(context) * 0.1,
+              height: buttonSize * 3,
               child: Container(
                 decoration: widget.controlsBackground,
                 child: Column(
