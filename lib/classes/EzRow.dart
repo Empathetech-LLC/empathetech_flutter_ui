@@ -4,7 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzRow extends Row {
+class EzRow extends StatelessWidget {
   final Key? key;
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
@@ -27,17 +27,26 @@ class EzRow extends Row {
     this.textBaseline,
     required this.children,
     this.reverseHands = true,
-  }) : super(
-          key: key,
-          mainAxisAlignment: mainAxisAlignment,
-          mainAxisSize: mainAxisSize,
-          crossAxisAlignment: crossAxisAlignment,
-          textDirection: textDirection,
-          verticalDirection: verticalDirection,
-          textBaseline: textBaseline,
-          children:
-              (reverseHands && EzConfig.instance.dominantSide == Hand.left)
-                  ? children.reversed.toList()
-                  : children,
-        );
+  }) : super(key: key);
+
+  List<Widget> _getList() {
+    if (reverseHands && EzConfig.instance.dominantSide == Hand.left) {
+      return children.reversed.toList();
+    } else {
+      return children;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
+      children: _getList(),
+    );
+  }
 }
