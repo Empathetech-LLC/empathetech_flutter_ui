@@ -64,12 +64,13 @@ class EzApp extends StatelessWidget {
         cupertinoLightTheme: cupertinoLight,
         cupertinoDarkTheme: cupertinoDark,
         builder: (context) => PlatformApp(
+          title: title,
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             DefaultMaterialLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate,
           ],
-          title: title,
           home: homeScreenWidget,
         ),
       ),
