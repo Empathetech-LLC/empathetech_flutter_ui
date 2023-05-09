@@ -58,18 +58,27 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           onChanged: (ThemeMode? newThemeMode) {
             switch (newThemeMode) {
               case ThemeMode.system:
-                PlatformTheme.of(context)!.themeMode = ThemeMode.system;
                 EzConfig.instance.preferences.remove(isLightKey);
+                setState(() {
+                  _currMode = ThemeMode.system;
+                  PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                });
                 break;
 
               case ThemeMode.light:
-                PlatformTheme.of(context)!.themeMode = ThemeMode.light;
                 EzConfig.instance.preferences.setBool(isLightKey, true);
+                setState(() {
+                  _currMode = ThemeMode.light;
+                  PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                });
                 break;
 
               case ThemeMode.dark:
-                PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
                 EzConfig.instance.preferences.setBool(isLightKey, false);
+                setState(() {
+                  _currMode = ThemeMode.dark;
+                  PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                });
                 break;
 
               default:
