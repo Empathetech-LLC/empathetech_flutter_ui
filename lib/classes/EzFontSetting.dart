@@ -19,49 +19,39 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   String? currFontFamily = EzConfig.instance.fontFamily;
 
   final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
-
-  final double padding = EzConfig.instance.prefs[paddingKey];
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
-
-  late TextStyle? titleTextStyle = headlineSmall(context);
 
   /// Builds an [EzDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont() {
-    List<ListTile> tiles = [];
+    List<Widget> buttons = [];
 
     googleStyles.forEach((String font, TextStyle style) {
-      tiles.add(
+      buttons.addAll([
         // Map font to a selectable button (title == name)
-        ListTile(
-          onTap: () {
+        ElevatedButton(
+          onPressed: () {
             EzConfig.instance.preferences.setString(fontFamilyKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });
             popScreen(context: context, pass: font);
           },
-          title: Text(
+          child: Text(
             (font == defaultFontFamily) ? '$font* (Default)' : font,
             style: style,
             textAlign: TextAlign.center,
           ),
         ),
-      );
+        EzSpacer(space),
+      ]);
     });
 
     return showPlatformDialog(
       context: context,
       builder: (context) => EzDialog(
         title: const EzSelectableText('Choose a font'),
-        content: ListView.separated(
-          itemCount: tiles.length,
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-          itemBuilder: (BuildContext context, int index) {
-            return tiles[index];
-          },
-        ),
+        contents: buttons,
       ),
     );
   }
