@@ -186,6 +186,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           child: Icon(
             PlatformIcons(context).edit,
             color: EzContrastColor(currColor),
+            size: diameter / 2,
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: MaterialStatePropertyAll(currColor),
