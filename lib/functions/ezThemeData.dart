@@ -23,6 +23,7 @@ ThemeData ezThemeData({required bool light}) {
       .prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
   final double margin = EzConfig.instance.prefs[marginKey];
+  final double padding = EzConfig.instance.prefs[paddingKey];
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
@@ -77,7 +78,7 @@ ThemeData ezThemeData({required bool light}) {
 
     // Cards
     cardTheme: CardTheme(
-      color: light ? Colors.white : offBlack,
+      color: backgroundColor,
       margin: EdgeInsets.all(margin),
     ),
 
@@ -111,12 +112,25 @@ ThemeData ezThemeData({required bool light}) {
       alignment: Alignment.center,
     ),
 
+    // Divider
+    dividerColor: Colors.transparent,
+
     // Drawer
     drawerTheme: DrawerThemeData(backgroundColor: themeColor),
 
     // Dropdown Menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: pageSelection,
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.all(padding),
+        fillColor: backgroundColor,
+        iconColor: backgroundTextColor,
+        prefixIconColor: backgroundTextColor,
+        suffixIconColor: backgroundTextColor,
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: MaterialStatePropertyAll(backgroundColor),
+      ),
     ),
 
     // Sliders
