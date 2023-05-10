@@ -22,6 +22,8 @@ ThemeData ezThemeData({required bool light}) {
   final Color buttonTextColor = Color(EzConfig.instance
       .prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
+  final double margin = EzConfig.instance.prefs[marginKey];
+
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
   final IconThemeData appBarIconData = IconThemeData(
@@ -43,23 +45,6 @@ ThemeData ezThemeData({required bool light}) {
   return ThemeData(
     brightness: light ? Brightness.light : Brightness.dark,
 
-    // General colors
-    highlightColor: buttonColor,
-    hintColor: themeTextColor,
-    indicatorColor: buttonColor,
-    primaryColor: themeColor,
-    scaffoldBackgroundColor: backgroundColor,
-
-    // Text && icons
-    fontFamily: EzConfig.instance.fontFamily,
-    iconTheme: buttonIconData,
-    primaryIconTheme: buttonIconData,
-    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
-    textTheme: EzTextTheme(color: backgroundTextColor),
-
-    // Transitions
-    pageTransitionsTheme: EzTransitions(),
-
     // AppBar
     appBarTheme: AppBarTheme(
       color: themeColor,
@@ -67,19 +52,6 @@ ThemeData ezThemeData({required bool light}) {
       actionsIconTheme: appBarIconData,
       titleTextStyle: appBarTextStyle,
     ),
-
-    // TabBar
-    tabBarTheme: TabBarTheme(
-      labelStyle: tabBarTextStyle,
-      labelColor: themeTextColor,
-      unselectedLabelStyle: tabBarTextStyle.copyWith(
-        color: unSelectedThemeTextColor,
-      ),
-      unselectedLabelColor: unSelectedThemeTextColor,
-    ),
-
-    // Drawer
-    drawerTheme: DrawerThemeData(backgroundColor: themeColor),
 
     // Bottom navigation
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -103,9 +75,10 @@ ThemeData ezThemeData({required bool light}) {
       ),
     ),
 
-    // Dropdown Menu
-    dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: pageSelection,
+    // Cards
+    cardTheme: CardTheme(
+      color: light ? Colors.white : offBlack,
+      margin: EdgeInsets.all(margin),
     ),
 
     // Checkbox
@@ -122,6 +95,13 @@ ThemeData ezThemeData({required bool light}) {
       checkColor: MaterialStateProperty.all(buttonColor),
     ),
 
+    // Colors
+    highlightColor: buttonColor,
+    hintColor: themeTextColor,
+    indicatorColor: buttonColor,
+    primaryColor: themeColor,
+    scaffoldBackgroundColor: backgroundColor,
+
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: dialogTitleStyle,
@@ -129,6 +109,14 @@ ThemeData ezThemeData({required bool light}) {
       contentTextStyle: dialogContentStyle,
       iconColor: themeTextColor,
       alignment: Alignment.center,
+    ),
+
+    // Drawer
+    drawerTheme: DrawerThemeData(backgroundColor: themeColor),
+
+    // Dropdown Menu
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: pageSelection,
     ),
 
     // Sliders
@@ -148,5 +136,25 @@ ThemeData ezThemeData({required bool light}) {
       inactiveTrackColor: unSelectedThemeTextColor,
       inactiveTickMarkColor: themeTextColor,
     ),
+
+    // TabBar
+    tabBarTheme: TabBarTheme(
+      labelStyle: tabBarTextStyle,
+      labelColor: themeTextColor,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(
+        color: unSelectedThemeTextColor,
+      ),
+      unselectedLabelColor: unSelectedThemeTextColor,
+    ),
+
+    // Text && icons
+    fontFamily: EzConfig.instance.fontFamily,
+    iconTheme: buttonIconData,
+    primaryIconTheme: buttonIconData,
+    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
+    textTheme: EzTextTheme(color: backgroundTextColor),
+
+    // Transitions
+    pageTransitionsTheme: EzTransitions(),
   );
 }
