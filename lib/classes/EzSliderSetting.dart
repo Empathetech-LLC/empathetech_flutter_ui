@@ -3,16 +3,16 @@ library empathetech_flutter_ui;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting the type of setting that is being updated
 /// This will determine the preview [Widget]s
 enum SettingType {
-  margin,
-  padding,
   buttonHeight,
   buttonSpacing,
+  circleSize,
+  margin,
+  padding,
   paragraphSpacing,
 }
 
@@ -66,55 +66,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview() {
     switch (widget.type) {
-      // Margin
-      case SettingType.margin:
-        double marginScale = 90.0 / widthOf(context);
-        double liveMargin = currValue * marginScale;
-
-        return [
-          // Title padding
-          EzSpacer(padding),
-
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Live label
-              EzSelectableText(
-                'Currently:\n$currValue\n\n(to scale)',
-                style: descriptorStyle,
-              ),
-              EzSpacer.row(paragraphSpacer),
-
-              // Live preview
-              Container(
-                color: Theme.of(context).appBarTheme.backgroundColor,
-                height: 160.0,
-                width: 90.0,
-                child: Container(
-                  color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-                  margin: EdgeInsets.all(liveMargin),
-                ),
-              ),
-            ],
-          ),
-          EzSpacer(buttonSpacer),
-        ];
-
-      // Padding
-      case SettingType.padding:
-        return [
-          // Live preview
-          EzSpacer(currValue),
-
-          // Live label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text('Currently: $currValue'),
-          ),
-          EzSpacer(buttonSpacer),
-        ];
-
       // Button height
       case SettingType.buttonHeight:
         return [
@@ -157,6 +108,76 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
         ];
 
+      // Circle size
+      case SettingType.circleSize:
+        return [
+          // Title padding
+          EzSpacer(padding),
+
+          // Live preview && label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text(
+              currValue.toString(),
+            ),
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  shape: MaterialStatePropertyAll(const CircleBorder()),
+                  fixedSize: MaterialStatePropertyAll(
+                    Size(currValue, currValue),
+                  ),
+                ),
+          ),
+        ];
+
+      // Margin
+      case SettingType.margin:
+        double marginScale = 90.0 / widthOf(context);
+        double liveMargin = currValue * marginScale;
+
+        return [
+          // Title padding
+          EzSpacer(padding),
+
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Live label
+              EzSelectableText(
+                'Currently:\n$currValue\n\n(to scale)',
+                style: descriptorStyle,
+              ),
+              EzSpacer.row(paragraphSpacer),
+
+              // Live preview
+              Container(
+                color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                height: 160.0,
+                width: 90.0,
+                child: Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  margin: EdgeInsets.all(liveMargin),
+                ),
+              ),
+            ],
+          ),
+          EzSpacer(buttonSpacer),
+        ];
+
+      // Padding
+      case SettingType.padding:
+        return [
+          // Live preview
+          EzSpacer(currValue),
+
+          // Live label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text('Currently: $currValue'),
+          ),
+          EzSpacer(buttonSpacer),
+        ];
+
       // Paragraph spacing
       case SettingType.paragraphSpacing:
         return [
@@ -175,9 +196,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
             ],
           ),
         ];
-
-      default:
-        return [EzSpacer(buttonSpacer)];
     }
   }
 
@@ -246,13 +264,21 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   Icon _buildIcon() {
     switch (widget.type) {
-      case SettingType.margin:
-        return const Icon(Icons.margin);
-      case SettingType.padding:
-        return const Icon(Icons.padding);
       case SettingType.buttonHeight:
         return const Icon(Icons.height);
+
       case SettingType.buttonSpacing:
+        return const Icon(Icons.space_bar);
+
+      case SettingType.circleSize:
+        return const Icon(Icons.circle);
+
+      case SettingType.margin:
+        return const Icon(Icons.margin);
+
+      case SettingType.padding:
+        return const Icon(Icons.padding);
+
       case SettingType.paragraphSpacing:
         return const Icon(Icons.space_bar);
     }
@@ -265,12 +291,34 @@ class _SliderSettingState extends State<EzSliderSetting> {
         context: context,
         builder: (context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter modalSheetSetState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: _buildView(modalSheetSetState),
+            return Stack(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildView(modalSheetSetState),
+                ),
+                Positioned(
+                  top: margin,
+                  right: margin,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () => popScreen(context: context),
+                      child: Text(
+                        'X',
+                        style: descriptorStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             );
           },
         ),
+        material: MaterialModalSheetData(
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        ),
+        cupertino: CupertinoModalSheetData(),
       ),
       icon: _buildIcon(),
       label: Text(widget.title),
