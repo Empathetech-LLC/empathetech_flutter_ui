@@ -60,8 +60,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
 
-  late TextStyle? titleStyle = headlineSmall(context);
-  late TextStyle? descriptorStyle = titleMedium(context);
+  late TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview() {
@@ -98,12 +97,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 onPressed: doNothing,
                 child: Text('Currently: $currValue'),
               ),
-              SizedBox(height: currValue),
+              EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text('Currently: $currValue'),
               ),
-              SizedBox(height: buttonSpacer),
+              EzSpacer(buttonSpacer),
             ],
           ),
         ];
@@ -127,6 +126,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                   ),
                 ),
           ),
+          EzSpacer(buttonSpacer),
         ];
 
       // Margin
@@ -145,7 +145,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
               // Live label
               EzSelectableText(
                 'Currently:\n$currValue\n\n(to scale)',
-                style: descriptorStyle,
+                style: style,
+                textScaleFactor: 0.75,
               ),
               EzSpacer.row(paragraphSpacer),
 
@@ -189,9 +190,20 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              EzSelectableText('Currently: $currValue', style: descriptorStyle),
+              // Thing 1
+              EzSelectableText(
+                'Currently: $currValue',
+                style: style,
+                textScaleFactor: 0.75,
+              ),
               SizedBox(height: currValue),
-              EzSelectableText('Currently: $currValue', style: descriptorStyle),
+
+              // Thing 2
+              EzSelectableText(
+                'Currently: $currValue',
+                style: style,
+                textScaleFactor: 0.75,
+              ),
               SizedBox(height: buttonSpacer),
             ],
           ),
@@ -204,7 +216,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   List<Widget> _buildView(StateSetter modalSheetSetState) {
     List<Widget> toReturn = [
       EzSpacer(margin),
-      EzSelectableText(widget.title, style: titleStyle),
+      EzSelectableText(widget.title, style: style),
     ];
 
     toReturn.addAll(_buildPreview());
@@ -304,10 +316,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
                       onTap: () => popScreen(context: context),
-                      child: Text(
-                        'X',
-                        style: descriptorStyle,
-                      ),
+                      child: Text('X', style: style),
                     ),
                   ),
                 ),
