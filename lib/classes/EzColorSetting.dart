@@ -190,7 +190,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: MaterialStatePropertyAll(currColor),
-                shape: MaterialStatePropertyAll(CircleBorder()),
+                shape: MaterialStatePropertyAll(const CircleBorder()),
                 fixedSize: MaterialStatePropertyAll(Size(diameter, diameter)),
               ),
         ),
