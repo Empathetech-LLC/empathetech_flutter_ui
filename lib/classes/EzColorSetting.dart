@@ -164,16 +164,19 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
+  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
+  late final TextStyle? style = titleMedium(context);
+  final double diameter = EzConfig.instance.prefs[circleDiameterKey];
+
   @override
   Widget build(BuildContext context) {
-    final double space = EzConfig.instance.prefs[buttonSpacingKey];
-
     return EzRow(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        EzSelectableText(widget.message, style: titleMedium(context)),
+        EzSelectableText(widget.message, style: style),
         EzSpacer.row(space),
 
         // Color preview/edit button
@@ -187,6 +190,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: MaterialStatePropertyAll(currColor),
                 shape: MaterialStatePropertyAll(CircleBorder()),
+                fixedSize: MaterialStatePropertyAll(Size(diameter, diameter)),
               ),
         ),
       ],

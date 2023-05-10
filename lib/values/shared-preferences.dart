@@ -16,6 +16,8 @@ const String alertColorKey = 'alertColor';
 const String buttonSpacingKey = 'buttonSpacing';
 const String paragraphSpacingKey = 'paragraphSpacing';
 
+const String circleDiameterKey = 'circleDiameter';
+
 // Light theme
 const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String lightBackgroundColorKey = 'lightBackgroundColor';
