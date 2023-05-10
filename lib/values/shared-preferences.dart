@@ -10,7 +10,6 @@ const String marginKey = 'margin';
 const String paddingKey = 'padding';
 
 const String fontFamilyKey = 'fontFamily';
-const String fontScalarKey = 'fontScalar';
 
 const String alertColorKey = 'alertColor';
 

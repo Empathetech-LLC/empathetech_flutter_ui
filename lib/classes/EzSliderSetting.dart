@@ -9,7 +9,6 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// Enumerator for selecting the type of setting that is being updated
 /// This will determine the preview [Widget]s
 enum SettingType {
-  fontScalar,
   margin,
   padding,
   buttonHeight,
@@ -67,21 +66,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview() {
     switch (widget.type) {
-      // Font size
-      case SettingType.fontScalar:
-        return [
-          // Title padding
-          EzSpacer(padding),
-
-          // Live preview && label
-          EzSelectableText(
-            'Currently: $currValue',
-            style: descriptorStyle,
-            textScaleFactor: currValue,
-          ),
-          EzSpacer(buttonSpacer),
-        ];
-
       // Margin
       case SettingType.margin:
         double marginScale = 90.0 / widthOf(context);
@@ -262,17 +246,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   Icon _buildIcon() {
     switch (widget.type) {
-      case SettingType.fontScalar:
-        return Icon(LineIcons.textHeight);
       case SettingType.margin:
-        return Icon(Icons.margin);
+        return const Icon(Icons.margin);
       case SettingType.padding:
-        return Icon(Icons.padding);
+        return const Icon(Icons.padding);
       case SettingType.buttonHeight:
-        return Icon(Icons.height);
+        return const Icon(Icons.height);
       case SettingType.buttonSpacing:
       case SettingType.paragraphSpacing:
-        return Icon(Icons.space_bar);
+        return const Icon(Icons.space_bar);
     }
   }
 
