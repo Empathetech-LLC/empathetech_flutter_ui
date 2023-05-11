@@ -25,11 +25,6 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// More readable than MediaQuery.of(context).size
-Size sizeOf(BuildContext context) {
-  return MediaQuery.of(context).size;
-}
-
 /// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
 bool isAsset(String? path) {
   return EzConfig.instance.assets.contains(path);
