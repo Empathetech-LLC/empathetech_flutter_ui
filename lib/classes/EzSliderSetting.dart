@@ -146,7 +146,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzSelectableText(
                 'Currently:\n$currValue\n\n(to scale)',
                 style: style,
-                textScaleFactor: 0.75,
+                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
               EzSpacer.row(paragraphSpacer),
 
@@ -194,7 +194,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzSelectableText(
                 'Currently: $currValue',
                 style: style,
-                textScaleFactor: 0.75,
+                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
               SizedBox(height: currValue),
 
@@ -202,7 +202,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzSelectableText(
                 'Currently: $currValue',
                 style: style,
-                textScaleFactor: 0.75,
+                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
               SizedBox(height: buttonSpacer),
             ],
