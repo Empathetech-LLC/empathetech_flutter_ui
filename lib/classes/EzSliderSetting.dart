@@ -304,9 +304,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
         builder: (context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter modalSheetSetState) {
             return Stack(
+              alignment: Alignment.topCenter,
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: _buildView(modalSheetSetState),
                 ),
                 Positioned(
