@@ -144,7 +144,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Live label
               EzSelectableText(
-                'Currently:\n$currValue\n\n(to scale)',
+                'Currently: $currValue\n(to scale)',
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
