@@ -266,88 +266,85 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           thumbColor: sliderColor,
         );
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: widget.maxWidth,
-        maxHeight: widget.maxHeight,
-      ),
-      child: AspectRatio(
-        aspectRatio: widget.controller.value.aspectRatio,
-        child: Stack(
-          children: [
-            VideoPlayer(widget.controller),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) {
+        setState(() {
+          show = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          show = false;
+        });
+      },
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: widget.maxWidth,
+          maxHeight: widget.maxHeight,
+        ),
+        child: AspectRatio(
+          aspectRatio: widget.controller.value.aspectRatio,
+          child: Stack(
+            children: [
+              VideoPlayer(widget.controller),
 
-            Positioned.fill(
-              child: MouseRegion(
-                onEnter: (_) {
-                  setState(() {
-                    show = true;
-                  });
-                },
-                onExit: (_) {
-                  setState(() {
-                    show = false;
-                  });
-                },
-                cursor: SystemMouseCursors.click,
+              // Tap-to-pause
+              Positioned(
+                top: 0,
+                bottom: buttonSize * 3,
+                left: 0,
+                right: 0,
+                child: GestureDetector(
+                    child: Container(color: Colors.transparent),
+                    onTap: () {
+                      (widget.controller.value.isPlaying)
+                          ? _pauseVideo()
+                          : _playVideo();
+                    }),
               ),
-            ),
 
-            // Tap-to-pause
-            Positioned(
-              top: 0,
-              bottom: buttonSize * 3,
-              left: 0,
-              right: 0,
-              child: GestureDetector(
-                  child: Container(color: Colors.transparent),
-                  onTap: () {
-                    (widget.controller.value.isPlaying)
-                        ? _pauseVideo()
-                        : _playVideo();
-                  }),
-            ),
-
-            // Controls
-            Positioned(
-              top: buttonSize * 3,
-              bottom: 0,
-              left: margin,
-              right: margin,
-              child: Container(
-                decoration: widget.controlsBackground,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Time seeker
-                    SliderTheme(
-                      data: videoSliderTheme,
-                      child: Slider(
-                        value: _currentPosition,
-                        onChangeStart: (_) => _pauseVideo,
-                        onChanged: (double value) {
-                          setState(() {
-                            _currentPosition = value;
-                            widget.controller.seekTo(_findPoint(value));
-                          });
-                        },
+              // Controls
+              Positioned(
+                top: buttonSize * 3,
+                bottom: 0,
+                left: margin,
+                right: margin,
+                child: Container(
+                  decoration: widget.controlsBackground,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Time seeker
+                      SliderTheme(
+                        data: videoSliderTheme,
+                        child: Slider(
+                          value: _currentPosition,
+                          onChangeStart: (_) => _pauseVideo,
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentPosition = value;
+                              widget.controller.seekTo(_findPoint(value));
+                            });
+                          },
+                        ),
                       ),
-                    ),
 
-                    // Buttons
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _buildButtons(videoSliderTheme),
-                    ),
-                  ],
+                      // Buttons
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _buildButtons(videoSliderTheme),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
