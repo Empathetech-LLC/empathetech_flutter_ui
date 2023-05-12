@@ -27,6 +27,7 @@ class EzVideoPlayer extends StatefulWidget {
 
   final ButtonVis playVis;
   final ButtonVis volumeVis;
+  final bool variableVolume;
   final ButtonVis replayVis;
   final ButtonVis sliderVis;
 
@@ -57,6 +58,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
+    this.variableVolume = true,
     this.replayVis = ButtonVis.auto,
     this.sliderVis = ButtonVis.auto,
     this.showOnPause = false,
@@ -180,7 +182,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     List<Widget> controls = [];
 
     // Play/pause
-    if (widget.playVis != ButtonVis.alwaysOff)
+    if (widget.playVis != ButtonVis.alwaysOff) {
       controls.addAll([
         GestureDetector(
           child: Icon(
@@ -196,9 +198,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ),
         EzSpacer.row(buttonSpacer),
       ]);
+    }
 
     // Volume
-    if (widget.volumeVis != ButtonVis.alwaysOff)
+    if (widget.volumeVis != ButtonVis.alwaysOff) {
       controls.addAll([
         // Mute button
         GestureDetector(
@@ -215,8 +218,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 : _muteVideo();
           },
         ),
-        EzSpacer.row(padding),
+        (widget.variableVolume)
+            ? EzSpacer.row(padding)
+            : EzSpacer.row(buttonSpacer),
+      ]);
+    }
 
+    if (widget.volumeVis != ButtonVis.alwaysOff && widget.variableVolume) {
+      controls.addAll([
         // Value slider
         Container(
           height: buttonSize,
@@ -235,9 +244,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ),
         EzSpacer.row(buttonSpacer),
       ]);
+    }
 
     // Replay
-    if (widget.replayVis != ButtonVis.alwaysOff)
+    if (widget.replayVis != ButtonVis.alwaysOff) {
       controls.addAll([
         GestureDetector(
           child: Icon(
@@ -249,6 +259,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         ),
         EzSpacer.row(buttonSpacer),
       ]);
+    }
 
     return controls;
   }
@@ -306,7 +317,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
               // Controls
               Positioned(
-                top: buttonSize * 3,
+                height: buttonSize * 3,
                 bottom: 0,
                 left: margin,
                 right: margin,
