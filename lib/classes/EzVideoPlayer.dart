@@ -329,19 +329,21 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Time seeker
-                      SliderTheme(
-                        data: videoSliderTheme,
-                        child: Slider(
-                          value: _currentPosition,
-                          onChangeStart: (_) => _pauseVideo,
-                          onChanged: (double value) {
-                            setState(() {
-                              _currentPosition = value;
-                              widget.controller.seekTo(_findPoint(value));
-                            });
-                          },
-                        ),
-                      ),
+                      (widget.sliderVis != ButtonVis.alwaysOff)
+                          ? SliderTheme(
+                              data: videoSliderTheme,
+                              child: Slider(
+                                value: _currentPosition,
+                                onChangeStart: (_) => _pauseVideo,
+                                onChanged: (double value) {
+                                  setState(() {
+                                    _currentPosition = value;
+                                    widget.controller.seekTo(_findPoint(value));
+                                  });
+                                },
+                              ),
+                            )
+                          : EzSpacer(buttonSize),
 
                       // Buttons
                       Row(
