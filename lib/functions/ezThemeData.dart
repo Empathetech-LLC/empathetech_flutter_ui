@@ -5,6 +5,8 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 ThemeData ezThemeData({required bool light}) {
+  final Brightness brightness = light ? Brightness.light : Brightness.dark;
+
   final Color themeColor = Color(
       EzConfig.instance.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
   final Color themeTextColor = Color(EzConfig
@@ -21,6 +23,11 @@ ThemeData ezThemeData({required bool light}) {
       .instance.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
   final Color buttonTextColor = Color(EzConfig.instance
       .prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
+
+  final Color accentColor = Color(EzConfig
+      .instance.prefs[light ? lightAccentColorKey : darkAccentColorKey]);
+  final Color accentTextColor = Color(EzConfig.instance
+      .prefs[light ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
@@ -44,7 +51,7 @@ ThemeData ezThemeData({required bool light}) {
   final TextStyle dialogContentStyle = buildTitleMedium(themeTextColor);
 
   return ThemeData(
-    brightness: light ? Brightness.light : Brightness.dark,
+    brightness: brightness,
 
     // AppBar
     appBarTheme: AppBarTheme(
@@ -97,6 +104,19 @@ ThemeData ezThemeData({required bool light}) {
     ),
 
     // Colors
+    colorScheme: ColorScheme(
+      brightness: brightness,
+      primary: buttonColor,
+      onPrimary: buttonTextColor,
+      secondary: accentColor,
+      onSecondary: accentTextColor,
+      background: themeColor,
+      onBackground: themeTextColor,
+      surface: backgroundColor,
+      onSurface: backgroundTextColor,
+      error: Colors.red,
+      onError: Colors.black,
+    ),
     dividerColor: Colors.transparent,
     highlightColor: buttonColor,
     hintColor: themeTextColor,
