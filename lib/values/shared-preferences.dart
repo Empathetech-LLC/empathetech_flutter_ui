@@ -26,6 +26,8 @@ const String lightThemeColorKey = 'lightThemeColor';
 const String lightThemeTextColorKey = 'lightThemeTextColor';
 const String lightButtonColorKey = 'lightButtonColor';
 const String lightButtonTextColorKey = 'lightButtonTextColor';
+const String lightAccentColorKey = 'lightAccentColor';
+const String lightAccentTextColorKey = 'lightAccentTextColor';
 
 // Dark theme
 const String darkBackgroundImageKey = 'darkBackgroundImage';
@@ -35,3 +37,5 @@ const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
 const String darkButtonColorKey = 'darkButtonColor';
 const String darkButtonTextColorKey = 'darkButtonTextColor';
+const String darkAccentColorKey = 'darkAccentColor';
+const String darkAccentTextColorKey = 'darkAccentTextColor';
