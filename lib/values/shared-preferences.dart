@@ -11,8 +11,6 @@ const String paddingKey = 'padding';
 
 const String fontFamilyKey = 'fontFamily';
 
-const String alertColorKey = 'alertColor';
-
 const String buttonSpacingKey = 'buttonSpacing';
 const String paragraphSpacingKey = 'paragraphSpacing';
 

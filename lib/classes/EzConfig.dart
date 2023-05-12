@@ -23,26 +23,33 @@ const Map<String, dynamic> defaultConfig = {
 
   fontFamilyKey: roboto,
 
-  alertColorKey: EmpathGoldenrodHex,
-
-  lightButtonColorKey: EmpathEucalyptusHex,
-  lightButtonTextColorKey: blackHex,
-  darkButtonColorKey: EmpathEucalyptusHex,
-  darkButtonTextColorKey: blackHex,
-
   // Light theme //
-  lightBackgroundImageKey: null,
-  lightBackgroundColorKey: offWhiteHex,
-  lightBackgroundTextColorKey: blackHex,
   lightThemeColorKey: whiteHex,
   lightThemeTextColorKey: blackHex,
 
+  lightBackgroundImageKey: null,
+  lightBackgroundColorKey: offWhiteHex,
+  lightBackgroundTextColorKey: blackHex,
+
+  lightButtonColorKey: EmpathEucalyptusHex,
+  lightButtonTextColorKey: blackHex,
+
+  lightAccentColorKey: EmpathGoldenrodHex,
+  lightAccentTextColorKey: whiteHex,
+
   // Dark theme //
+  darkThemeColorKey: blackHex,
+  darkThemeTextColorKey: whiteHex,
+
   darkBackgroundImageKey: null,
   darkBackgroundColorKey: offBlackHex,
   darkBackgroundTextColorKey: whiteHex,
-  darkThemeColorKey: blackHex,
-  darkThemeTextColorKey: whiteHex,
+
+  darkButtonColorKey: EmpathEucalyptusHex,
+  darkButtonTextColorKey: blackHex,
+
+  darkAccentColorKey: EmpathGoldenrodHex,
+  darkAccentTextColorKey: whiteHex,
 };
 
 /// Singleton class for managing user customization

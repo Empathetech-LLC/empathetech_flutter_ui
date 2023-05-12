@@ -20,7 +20,7 @@ class EzWarning extends Card {
 
   @override
   Widget build(BuildContext context) {
-    final Color iconColor = Color(EzConfig.instance.prefs[alertColorKey]);
+    final Color? iconColor = Theme.of(context).colorScheme.secondary;
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
