@@ -97,6 +97,7 @@ ThemeData ezThemeData({required bool light}) {
     ),
 
     // Colors
+    dividerColor: Colors.transparent,
     highlightColor: buttonColor,
     hintColor: themeTextColor,
     indicatorColor: buttonColor,
@@ -111,9 +112,6 @@ ThemeData ezThemeData({required bool light}) {
       iconColor: themeTextColor,
       alignment: Alignment.center,
     ),
-
-    // Divider
-    dividerColor: Colors.transparent,
 
     // Drawer
     drawerTheme: DrawerThemeData(backgroundColor: themeColor),
@@ -163,10 +161,10 @@ ThemeData ezThemeData({required bool light}) {
 
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
+    textTheme: EzTextTheme(color: backgroundTextColor),
+    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
     iconTheme: buttonIconData,
     primaryIconTheme: buttonIconData,
-    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
-    textTheme: EzTextTheme(color: backgroundTextColor),
 
     // Transitions
     pageTransitionsTheme: EzTransitions(),
