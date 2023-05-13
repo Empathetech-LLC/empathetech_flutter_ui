@@ -74,7 +74,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: $currValue'),
+            child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(double.infinity, currValue),
             ),
@@ -95,12 +95,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: $currValue'),
+                child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: $currValue'),
+                child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
               ),
               EzSpacer(buttonSpacer),
             ],
@@ -117,7 +117,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ElevatedButton(
             onPressed: doNothing,
             child: Text(
-              currValue.toString(),
+              currValue.toStringAsFixed(2),
             ),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   shape: MaterialStatePropertyAll(const CircleBorder()),
@@ -144,7 +144,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Live label
               EzSelectableText(
-                'Currently: $currValue\n(to scale)',
+                'Currently: ${currValue.toStringAsFixed(2)}\n(to scale)',
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
@@ -174,7 +174,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: $currValue'),
+            child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -192,7 +192,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               EzSelectableText(
-                'Currently: $currValue',
+                'Currently: ${currValue.toStringAsFixed(2)}',
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
@@ -200,7 +200,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
               // Thing 2
               EzSelectableText(
-                'Currently: $currValue',
+                'Currently: ${currValue.toStringAsFixed(2)}',
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
