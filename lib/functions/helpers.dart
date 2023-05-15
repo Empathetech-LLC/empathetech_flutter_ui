@@ -25,6 +25,23 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
+/// Returns the soon-to-be rendered size of text via a [TextPainter]
+/// [scalar] should be the value from MediaQuery.of(context).textScaleFactor
+Size measureText({
+  required String text,
+  required double scalar,
+  required TextStyle? style,
+}) {
+  final TextPainter textPainter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textScaleFactor: scalar,
+    textDirection: TextDirection.ltr,
+  )..layout();
+
+  return textPainter.size;
+}
+
 /// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
 bool isAsset(String? path) {
   return EzConfig.instance.assets.contains(path);
