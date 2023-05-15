@@ -15,6 +15,7 @@ export 'classes/EzLink.dart';
 export 'classes/EzTextTheme.dart';
 export 'classes/EzNotifications.dart';
 export 'classes/EzRow.dart';
+export 'classes/EzRowCol.dart';
 export 'classes/EzScreen.dart';
 export 'classes/EzScreenScroller.dart';
 export 'classes/EzScrollView.dart';
