@@ -19,7 +19,7 @@ const Map<String, dynamic> defaultConfig = {
   buttonSpacingKey: 30.0,
   paragraphSpacingKey: 50.0,
 
-  circleDiameterKey: 60.0,
+  circleDiameterKey: 40.0,
 
   fontFamilyKey: roboto,
 
