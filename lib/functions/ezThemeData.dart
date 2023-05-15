@@ -32,8 +32,8 @@ ThemeData ezThemeData({required bool light}) {
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
 
-  final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
-  final TextStyle tabBarTextStyle = buildHeadlineSmall(themeTextColor);
+  final TextStyle appBarTextStyle = buildHeadlineSmall(themeTextColor);
+  final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
   final IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
     size: appBarTextStyle.fontSize,
@@ -47,8 +47,8 @@ ThemeData ezThemeData({required bool light}) {
 
   final TextStyle pageSelection = buildTitleMedium(backgroundTextColor);
 
-  final TextStyle dialogTitleStyle = buildHeadlineSmall(themeTextColor);
-  final TextStyle dialogContentStyle = buildTitleMedium(themeTextColor);
+  final TextStyle dialogTitleStyle = buildTitleMedium(themeTextColor);
+  final TextStyle dialogContentStyle = buildBodyMedium(themeTextColor);
 
   return ThemeData(
     brightness: brightness,
