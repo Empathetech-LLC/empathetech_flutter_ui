@@ -4,12 +4,12 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// Default sizes taken from
+// Default sizes are based on
 // https://api.flutter.dev/flutter/material/TextTheme-class.html
 
 TextStyle buildDisplayLarge(Color color) {
   return EzTextStyle(
-    fontSize: 58,
+    fontSize: 56,
     color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
@@ -93,7 +93,7 @@ TextStyle? titleLarge(BuildContext context) {
 
 TextStyle buildTitleMedium(Color color) {
   return EzTextStyle(
-    fontSize: 16,
+    fontSize: 18,
     color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
