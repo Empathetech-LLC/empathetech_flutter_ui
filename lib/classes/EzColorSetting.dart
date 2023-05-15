@@ -166,7 +166,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
-  late final TextStyle? style = titleMedium(context);
+  late final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
   final double diameter = EzConfig.instance.prefs[circleDiameterKey];
 
   @override
