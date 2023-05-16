@@ -82,7 +82,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  late final buttonSize = buttonSpacer;
+  final double buttonSize = EzConfig.instance.prefs[circleDiameterKey] / 2;
 
   late final Color showing = widget.iconColor;
   late final Color hiding = widget.hiddenOpacity == 0.0
