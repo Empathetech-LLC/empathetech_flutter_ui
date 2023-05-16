@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.1] - 2023-05-16
+### Updated
+- EzSpacer, added a .swap constructor for space constrained screens
+
 ## [3.0.0] - 2023-05-16
 ### Changed
 - Everything. Again.
