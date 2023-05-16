@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.0] - 2023-04-XX
+## [3.0.0] - 2023-05-16
 ### Changed
 - Everything. Again.
   - I like big updates and I cannot lie.
