@@ -16,5 +16,5 @@ const int offWhiteHex = 0xFFF5F5F5;
 const Color offWhite = Color(offWhiteHex);
 
 const int blackHex = 0xFF000000;
-const int offBlackHex = 0xFF0A0A0A;
+const int offBlackHex = 0xFF191919;
 const Color offBlack = Color(offBlackHex);
