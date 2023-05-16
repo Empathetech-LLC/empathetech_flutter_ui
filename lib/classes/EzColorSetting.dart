@@ -183,10 +183,12 @@ class _ColorSettingState extends State<EzColorSetting> {
         ElevatedButton(
           onPressed: _changeColor,
           onLongPress: _reset,
-          child: Icon(
-            PlatformIcons(context).edit,
-            color: EzContrastColor(currColor),
-            size: diameter * 0.4,
+          child: Center(
+            child: Icon(
+              PlatformIcons(context).edit,
+              color: EzContrastColor(currColor),
+              size: diameter / 2,
+            ),
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 backgroundColor: MaterialStatePropertyAll(currColor),
