@@ -1,6 +1,6 @@
 name: empathetech_flutter_ui
 description: A Flutter package for fast, high quality UI development
-version: 2.0.0
+version: 3.0.0
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
@@ -21,10 +21,11 @@ dependencies:
   url_launcher: ^6.1.10
 
   # Community
-  flutter_local_notifications: ^13.0.0
-  flutter_platform_widgets: ^3.2.0
+  flutter_local_notifications: ^14.0.0+1
+  flutter_platform_widgets: ^3.3.2
   flutter_colorpicker: ^1.0.3
   fluttertoast: ^8.2.1
+  line_icons: ^2.0.1
 
 dev_dependencies:
   dependency_validator: ^3.0.0
