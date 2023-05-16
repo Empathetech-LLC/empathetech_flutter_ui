@@ -44,7 +44,12 @@ Future<dynamic> ezColorPicker({
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
+          // ignore: deprecated_member_use
           labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+
+          // Above is necessary for Cupertino
+          // It is deprecated, but it points to an also deprecated solution
+          // ...ain't broke...
         ),
         EzSpacer(space),
 
