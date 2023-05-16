@@ -62,29 +62,13 @@ void setPageTitle({
 }
 
 /// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
-Future<bool?> copyToClipboard({
-  required String string,
-  Toast? toastLength,
-  int timeInSecForIosWeb = 1,
-  double? fontSize,
-  ToastGravity? gravity,
-  Color? backgroundColor,
-  Color? textColor,
-  bool webShowClose = false,
-  dynamic webBgColor = "linear-gradient(to right, #000000, #000000)",
-  dynamic webPosition = "right",
-}) async {
+Future<bool?> copyToClipboard({required String string}) async {
   await Clipboard.setData(ClipboardData(text: string));
   return Fluttertoast.showToast(
     msg: 'Copied to clipboard',
     toastLength: Toast.LENGTH_SHORT,
-    timeInSecForIosWeb: timeInSecForIosWeb,
-    fontSize: fontSize,
-    gravity: gravity,
-    backgroundColor: backgroundColor,
-    textColor: textColor,
-    webShowClose: webShowClose,
-    webBgColor: webBgColor,
-    webPosition: webPosition,
+    backgroundColor: Colors.black,
+    fontSize: 18,
+    textColor: Colors.white,
   );
 }
