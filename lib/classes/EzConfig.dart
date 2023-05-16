@@ -19,7 +19,7 @@ const Map<String, dynamic> defaultConfig = {
   buttonSpacingKey: 30.0,
   paragraphSpacingKey: 50.0,
 
-  circleDiameterKey: 40.0,
+  circleDiameterKey: 50.0,
 
   fontFamilyKey: roboto,
 
@@ -31,8 +31,8 @@ const Map<String, dynamic> defaultConfig = {
   lightBackgroundColorKey: offWhiteHex,
   lightBackgroundTextColorKey: blackHex,
 
-  lightButtonColorKey: EmpathEucalyptusHex,
-  lightButtonTextColorKey: blackHex,
+  lightButtonColorKey: EmpathPurpleHex,
+  lightButtonTextColorKey: whiteHex,
 
   lightAccentColorKey: EmpathGoldenrodHex,
   lightAccentTextColorKey: whiteHex,
