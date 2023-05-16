@@ -87,6 +87,7 @@ ThemeData ezThemeData({required bool light}) {
     cardTheme: CardTheme(
       color: backgroundColor,
       margin: EdgeInsets.all(margin),
+      shadowColor: accentColor,
     ),
 
     // Checkbox
