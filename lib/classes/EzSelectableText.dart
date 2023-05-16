@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-/// [SelectableText] wrapper with customized defaults
 class EzSelectableText extends SelectableText {
   final String? data;
   final Key? key;
@@ -37,6 +36,7 @@ class EzSelectableText extends SelectableText {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
+  /// [SelectableText] wrapper with customized defaults
   const EzSelectableText(
     this.data, {
     this.key,
@@ -97,6 +97,7 @@ class EzSelectableText extends SelectableText {
           magnifierConfiguration: magnifierConfiguration,
         );
 
+  /// [SelectableText.rich] wrapper with customized defaults
   const EzSelectableText.rich(
     TextSpan textSpan, {
     this.key,
