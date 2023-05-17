@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 class EzSpacer extends SizedBox {
   final double space;
 
-  /// [Container] with height [space] for creating space in a [Column]
+  /// [SizedBox] with height [space] for creating space in a [Column]
   const EzSpacer(this.space) : super(height: space);
 
-  /// [Container] with height [space] for creating space in a [Row]
+  /// [SizedBox] with width [space] for creating space in a [Row]
   const EzSpacer.row(this.space) : super(width: space);
+
+  /// [SizedBox] with height or width [space] based on [limitedSpace]
+  EzSpacer.swap(this.space, {required bool limitedSpace})
+      : super(
+          height: limitedSpace ? space : null,
+          width: limitedSpace ? null : space,
+        );
 }
