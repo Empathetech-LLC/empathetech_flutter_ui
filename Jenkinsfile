@@ -24,9 +24,15 @@ node('00-flutter') {
             println "Validating:\n\t${trackedFiles}"
 
             // Gather the names of all files that have been updated
-            sh "git fetch origin ${baseBranch}:${baseBranch} ${env.BRANCH_NAME}:${env.BRANCH_NAME}"
-            def updatedFiles = sh(script: "git diff --name-only ${env.BRANCH_NAME} ${baseBranch}", returnStdout: true).trim().split("\n")
+            if (env.CHANGE_ID) {
+              // If "this" a PR
+              sh "git fetch origin ${baseBranch}:${baseBranch} refs/pull/${env.CHANGE_ID}/head:PR-${env.CHANGE_ID}"
+            } else {
+              // If "this" regular branch
+              sh "git fetch origin ${baseBranch}:${baseBranch} ${env.BRANCH_NAME}:${env.BRANCH_NAME}"
+            }
 
+            def updatedFiles = sh(script: "git diff --name-only ${env.BRANCH_NAME} ${baseBranch}", returnStdout: true).trim().split("\n")
             println "Updated files:\n$updatedFiles"
 
             trackedFiles.each { curr_file ->
