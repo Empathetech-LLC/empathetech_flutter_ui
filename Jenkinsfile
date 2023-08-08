@@ -122,11 +122,12 @@ node('00-flutter') {
           def changelog = readFile('CHANGELOG.md').split("\n")
 
           // Define pattern to match version header
-          def versionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
+          def versionPattern = ~/## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/
+          def currentVersionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
 
           // Find start and end lines for the version's section
-          def startIndex = changelog.findIndexOf { it == versionPattern }
-          def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ /## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/ }
+          def startIndex = changelog.findIndexOf { it ==~ currentVersionPattern }
+          def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ versionPattern }
 
           if (endIndex == -1) endIndex = changelog.size()
 
