@@ -79,6 +79,8 @@ node('00-flutter') {
           if (!outdated.contains('direct dependencies: all up-to-date')) {
             println outdated
             input message: 'Some packages are outdated. Do you want to continue?', ok: 'Continue'
+          } else {
+            println "All direct dependencies are up to date!"
           }
         }
       }
@@ -90,6 +92,8 @@ node('00-flutter') {
           if (!analysis.contains('No issues found!')) {
             println analysis
             input message: 'Flutter analysis found issues. Do you want to continue?', ok: 'Continue'
+          } else {
+            println "No issues found! Good job!"
           }
         }
       }
