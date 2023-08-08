@@ -4,6 +4,8 @@ node('00-flutter') {
       checkout scm
     }
 
+    def baseBranch = 'main' // CPP (Copy/Paste Point)
+
     if (env.BRANCH_NAME != 'main') {
       // Validate that all of the repos versioning trackers have been updated, and that they match
       stage('Validate versioning') {
@@ -11,8 +13,7 @@ node('00-flutter') {
           script {
             //// Initialize consts & trackers
 
-            def versionRegex = "[0-9]+.[0-9]+.[0-9]+" // CPP (Copy/Paste Point)
-            def baseBranch = 'main' // CPP
+            def versionRegex = "[0-9]+.[0-9]+.[0-9]+" // CPP
             def trackedFiles = ['APP_VERSION','CHANGELOG.md','pubspec.yaml'] // CPP
 
             def versions = new HashSet()
@@ -100,29 +101,34 @@ node('00-flutter') {
     }
 
     if (env.BRANCH_NAME == 'main') {
-      stage('Create Git release') {
-        // Fail if a tag already exists
-        if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
-          error("ERROR: Current commit already has a git tag")
+      withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
+        stage('Create Git release') {
+          sh "git fetch origin ${baseBranch}:${baseBranch}"
+          sh "git checkout ${baseBranch}"
+
+          // Fail if a tag already exists
+          if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
+            error("ERROR: Current commit already has a git tag")
+          }
+
+          // Gather release information
+          def version = readFile('APP_VERSION').trim()
+          def changelog = readFile('CHANGELOG.md').split("\n")
+
+          // Define pattern to match version header
+          def versionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
+
+          // Find start and end lines for the version's section
+          def startIndex = changelog.findIndexOf { it == versionPattern }
+          def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ /## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/ }
+
+          if (endIndex == -1) endIndex = changelog.size()
+
+          // Extract the section
+          def notes = changelog[startIndex..(endIndex - 1)].join("\n")
+
+          sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
         }
-
-        // Gather release information
-        def version = readFile('APP_VERSION').trim()
-        def changelog = readFile('CHANGELOG.md').split("\n")
-
-        // Define pattern to match version header
-        def versionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
-
-        // Find start and end lines for the version's section
-        def startIndex = changelog.findIndexOf { it == versionPattern }
-        def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ /## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/ }
-
-        if (endIndex == -1) endIndex = changelog.size()
-
-        // Extract the section
-        def notes = changelog[startIndex..(endIndex - 1)].join("\n")
-
-        sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
       }
     }
 
