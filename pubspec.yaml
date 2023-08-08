@@ -12,16 +12,16 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  google_fonts: ^4.0.3
+  google_fonts: ^5.1.0
   shared_preferences: ^2.0.15
-  image_picker: ^0.8.5+3
+  image_picker: ^1.0.2
   path: ^1.8.2
   path_provider: ^2.0.11
   video_player: ^2.6.1
   url_launcher: ^6.1.10
 
   # Community
-  flutter_local_notifications: ^14.0.0+1
+  flutter_local_notifications: ^15.1.0+1
   flutter_platform_widgets: ^3.3.2
   flutter_colorpicker: ^1.0.3
   fluttertoast: ^8.2.1
