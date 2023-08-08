@@ -2,15 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.2] - 2023-08-08
+### Added
+- Jenkins automation
+
+### Removed
+- GitHub Actions
+
+### Updated
+- Exports file (fixed name typo)
+
 ## [3.0.1] - 2023-05-16
 ### Updated
 - EzSpacer, added a .swap constructor for space constrained screens
 - Default styling: paragraph spacing, card accent color
 
 ## [3.0.0] - 2023-05-16
-### Changed
-- Everything. Again.
-  - I like big updates and I cannot lie.
+### Updated
+- Everything
 
 ## [2.0.0] - 2023-04-16
 ### Added
@@ -19,15 +28,14 @@ All notable changes to this project will be documented in this file.
 - Web UI
   - Special shout out to EzWebPlayer.dart
 
-### Changed
+### Updated
 - Most of everything, lots of breaking changes
   - Hence 2.0.0
   - Most wrappers are now a classes, extending the top level Widget
 
 ## [1.1.4] - 2023-03-31
 ### Fixed
-- File name bugs... as it turns out OS X is case-aware, but not sensitive
-  - Which is ridiculous
+- File name bugs... turns out OSX is case-aware, but not case-sensitive
 
 ## [1.1.3] - 2023-03-31
 ### Updated

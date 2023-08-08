@@ -1,7 +1,7 @@
 library empathetech_flutter_ui;
 
 // Classes
-export 'classes/EB2CASA.dart';
+export 'classes/Eb2Casa.dart';
 export 'classes/EzApp.dart';
 export 'classes/EzColors.dart';
 export 'classes/EzColorSetting.dart';
@@ -12,7 +12,6 @@ export 'classes/EzFontSetting.dart';
 export 'classes/EzImage.dart';
 export 'classes/EzImageSetting.dart';
 export 'classes/EzLink.dart';
-export 'classes/EzTextTheme.dart';
 export 'classes/EzNotifications.dart';
 export 'classes/EzRow.dart';
 export 'classes/EzRowCol.dart';
@@ -23,6 +22,7 @@ export 'classes/EzSelectableText.dart';
 export 'classes/EzSliderSetting.dart';
 export 'classes/EzSpacer.dart';
 export 'classes/EzTextStyle.dart';
+export 'classes/EzTextTheme.dart';
 export 'classes/EzThemeModeSwitch.dart';
 export 'classes/EzTransitions.dart';
 export 'classes/EzVideoPlayer.dart';
