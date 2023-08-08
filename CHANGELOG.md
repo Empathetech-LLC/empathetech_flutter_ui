@@ -5,7 +5,6 @@ All notable changes to this project will be documented in this file.
 ## [3.0.3] - 2023-08-08
 ### Updated
 - Git release stage in Jenkinsfile
-  - 3.0.2's release did not complete successfully, but 3.0.3 has no code changes
 
 ## [3.0.2] - 2023-08-08
 ### Added
