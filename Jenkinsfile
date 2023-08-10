@@ -106,7 +106,7 @@ node('00-flutter') {
       }
     }
 
-    //if (env.BRANCH_NAME == 'main') {
+    if (env.BRANCH_NAME == 'main') {
       withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
         withEnv(["GH_TOKEN=$GIT_PASSWORD"]) {
           stage('Create Git release') {
@@ -139,7 +139,7 @@ node('00-flutter') {
           }
         }
       }
-    //}
+    }
 
   } catch (Exception e) {
     currentBuild.result = 'FAILURE'
