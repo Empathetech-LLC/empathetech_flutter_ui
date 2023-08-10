@@ -108,7 +108,7 @@ node('00-flutter') {
 
     //if (env.BRANCH_NAME == 'main') {
       withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
-        withEnv(["GH_TOKEN=$GIT_ASKPASS"]) {
+        withEnv(["GH_TOKEN=$GIT_PASSWORD"]) {
           stage('Create Git release') {
             sh "git fetch origin ${baseBranch}:${baseBranch}"
             sh "git checkout ${baseBranch}"
