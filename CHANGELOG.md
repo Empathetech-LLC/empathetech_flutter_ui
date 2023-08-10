@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [3.0.3] - 2023-08-08
 ### Updated
-- Git release stage in Jenkinsfile
+- Jenkins pipeline
 
 ## [3.0.2] - 2023-08-08
 ### Added
