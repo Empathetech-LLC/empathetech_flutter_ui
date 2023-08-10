@@ -137,7 +137,6 @@ node('00-flutter') {
           // Extract the section
           def notes = changelog[startIndex..(endIndex - 1)].join("\n")
 
-          sh 'gh auth login'
           sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
         }
       }
