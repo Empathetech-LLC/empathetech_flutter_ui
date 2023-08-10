@@ -110,7 +110,7 @@ node('00-flutter') {
       // Do a publication dry run
       stage('Dart publish dry-run') {
         script {
-          def results = sh(script: 'dart pub publish --dry-run', returnStdout: true).trim()
+          def results = sh(script: 'dart pub publish --dry-run 2>&1', returnStdout: true).trim()
           println results
           
           if (!results.contains('Package has 0 warnings')) {
