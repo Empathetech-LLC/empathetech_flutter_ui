@@ -108,36 +108,35 @@ node('00-flutter') {
 
     //if (env.BRANCH_NAME == 'main') {
       withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
-        environment {
-          GH_TOKEN = GIT_ASKPASS
-        }
-        stage('Create Git release') {
-          sh "git fetch origin ${baseBranch}:${baseBranch}"
-          sh "git checkout ${baseBranch}"
+        withEnv(["GH_TOKEN=$GIT_ASKPASS"]) {
+          stage('Create Git release') {
+            sh "git fetch origin ${baseBranch}:${baseBranch}"
+            sh "git checkout ${baseBranch}"
 
-          // Fail if a tag already exists
-          if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
-            error("ERROR: Current commit already has a git tag")
+            // Fail if a tag already exists
+            if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
+              error("ERROR: Current commit already has a git tag")
+            }
+
+            // Gather release information
+            def version = readFile('APP_VERSION').trim()
+            def changelog = readFile('CHANGELOG.md').split("\n")
+
+            // Define pattern to match version header
+            def versionPattern = ~/## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/
+            def currentVersionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
+
+            // Find start and end lines for the version's section
+            def startIndex = changelog.findIndexOf { it ==~ currentVersionPattern }
+            def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ versionPattern }
+
+            if (endIndex == -1) endIndex = changelog.size()
+
+            // Extract the section
+            def notes = changelog[startIndex..(endIndex - 1)].join("\n")
+
+            sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
           }
-
-          // Gather release information
-          def version = readFile('APP_VERSION').trim()
-          def changelog = readFile('CHANGELOG.md').split("\n")
-
-          // Define pattern to match version header
-          def versionPattern = ~/## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/
-          def currentVersionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
-
-          // Find start and end lines for the version's section
-          def startIndex = changelog.findIndexOf { it ==~ currentVersionPattern }
-          def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ versionPattern }
-
-          if (endIndex == -1) endIndex = changelog.size()
-
-          // Extract the section
-          def notes = changelog[startIndex..(endIndex - 1)].join("\n")
-
-          sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
         }
       }
     //}
