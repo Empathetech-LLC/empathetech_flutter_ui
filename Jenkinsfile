@@ -110,8 +110,8 @@ node('00-flutter') {
         script {
           def results = sh(script: 'dart pub publish --dry-run', returnStdout: true).trim()
           if (!results.contains('Package has 0 warnings')) {
-            println analysis
-            input message: 'Flutter analysis found issues. Do you want to continue?', ok: 'Continue'
+            println results
+            input message: 'Dart publish found issues. Do you want to continue?', ok: 'Continue'
           } else {
             println "No issues found! Good job!"
           }
