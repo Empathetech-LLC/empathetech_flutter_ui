@@ -107,7 +107,7 @@ node('00-flutter') {
     }
 
     //if (env.BRANCH_NAME == 'main') {
-      withCredentials([gitUsernamePassword(credentialsId: 'git-pat', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_TOKEN')]) {
+      withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
         stage('Create Git release') {
           sh "git fetch origin ${baseBranch}:${baseBranch}"
           sh "git checkout ${baseBranch}"
@@ -134,7 +134,7 @@ node('00-flutter') {
           // Extract the section
           def notes = changelog[startIndex..(endIndex - 1)].join("\n")
 
-          sh 'export GH_TOKEN=$GIT_TOKEN'
+          sh 'export GH_TOKEN=$GIT_ASKPASS'
           sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
         }
       }
