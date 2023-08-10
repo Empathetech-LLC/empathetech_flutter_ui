@@ -83,8 +83,9 @@ node('00-flutter') {
       stage('Validate Flutter Dependencies') {
         script {
           def outdated = sh(script: 'flutter pub outdated', returnStdout: true).trim()
+          println outdated
+
           if (!outdated.contains('direct dependencies: all up-to-date')) {
-            println outdated
             input message: 'Some packages are outdated. Do you want to continue?', ok: 'Continue'
           } else {
             println "All direct dependencies are up to date!"
@@ -96,8 +97,9 @@ node('00-flutter') {
       stage('Flutter Package Analysis') {
         script {
           def analysis = sh(script: 'flutter analyze', returnStdout: true).trim()
+          println analysis
+
           if (!analysis.contains('No issues found!')) {
-            println analysis
             input message: 'Flutter analysis found issues. Do you want to continue?', ok: 'Continue'
           } else {
             println "No issues found! Good job!"
@@ -109,8 +111,9 @@ node('00-flutter') {
       stage('Dart publish dry-run') {
         script {
           def results = sh(script: 'dart pub publish --dry-run', returnStdout: true).trim()
+          println results
+          
           if (!results.contains('Package has 0 warnings')) {
-            println results
             input message: 'Dart publish found issues. Do you want to continue?', ok: 'Continue'
           } else {
             println "No issues found! Good job!"
