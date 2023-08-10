@@ -83,8 +83,9 @@ node('00-flutter') {
       stage('Validate Flutter Dependencies') {
         script {
           def outdated = sh(script: 'flutter pub outdated', returnStdout: true).trim()
+          println outdated
+
           if (!outdated.contains('direct dependencies: all up-to-date')) {
-            println outdated
             input message: 'Some packages are outdated. Do you want to continue?', ok: 'Continue'
           } else {
             println "All direct dependencies are up to date!"
@@ -96,9 +97,24 @@ node('00-flutter') {
       stage('Flutter Package Analysis') {
         script {
           def analysis = sh(script: 'flutter analyze', returnStdout: true).trim()
+          println analysis
+
           if (!analysis.contains('No issues found!')) {
-            println analysis
             input message: 'Flutter analysis found issues. Do you want to continue?', ok: 'Continue'
+          } else {
+            println "No issues found! Good job!"
+          }
+        }
+      }
+
+      // Do a publication dry run
+      stage('Dart publish dry-run') {
+        script {
+          def results = sh(script: 'dart pub publish --dry-run 2>&1', returnStdout: true).trim()
+          println results
+          
+          if (!results.contains('Package has 0 warnings')) {
+            input message: 'Dart publish found issues. Do you want to continue?', ok: 'Continue'
           } else {
             println "No issues found! Good job!"
           }
@@ -108,32 +124,35 @@ node('00-flutter') {
 
     if (env.BRANCH_NAME == 'main') {
       withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
-        stage('Create Git release') {
-          sh "git fetch origin ${baseBranch}:${baseBranch}"
-          sh "git checkout ${baseBranch}"
+        withEnv(["GH_TOKEN=$GIT_PASSWORD"]) {
+          stage('Create Git release') {
+            sh "git fetch origin ${baseBranch}:${baseBranch}"
+            sh "git checkout ${baseBranch}"
 
-          // Fail if a tag already exists
-          if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
-            error("ERROR: Current commit already has a git tag")
+            // Fail if a tag already exists
+            if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
+              error("ERROR: Current commit already has a git tag")
+            }
+
+            // Gather release information
+            def version = readFile('APP_VERSION').trim()
+            def changelog = readFile('CHANGELOG.md').split("\n")
+
+            // Define pattern to match version header
+            def versionPattern = ~/## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/
+            def currentVersionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
+
+            // Find start and end lines for the version's section
+            def startIndex = changelog.findIndexOf { it ==~ currentVersionPattern }
+            def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ versionPattern }
+
+            if (endIndex == -1) endIndex = changelog.size()
+
+            // Extract the section
+            def notes = changelog[startIndex..(endIndex - 1)].join("\n")
+
+            sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
           }
-
-          // Gather release information
-          def version = readFile('APP_VERSION').trim()
-          def changelog = readFile('CHANGELOG.md').split("\n")
-
-          // Define pattern to match version header
-          def versionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
-
-          // Find start and end lines for the version's section
-          def startIndex = changelog.findIndexOf { it == versionPattern }
-          def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ /## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/ }
-
-          if (endIndex == -1) endIndex = changelog.size()
-
-          // Extract the section
-          def notes = changelog[startIndex..(endIndex - 1)].join("\n")
-
-          sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
         }
       }
     }
