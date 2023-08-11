@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.4] - 2023-08-11
+## [3.1.0] - 2023-08-11
 ### Updated
 - Spacer settings previews
 - EzLink && EzWebLink
 - Image wrappers to require semantics for enforcing accessibility
+  - Minor breaking change, hence the middle integer update
 
 ### Added
 - Button alignment options to the video player
