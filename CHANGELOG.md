@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Spacer settings previews
 - EzLink && EzWebLink
+  - Simplified creation and requiring semantics
 - Image wrappers to require semantics for enforcing accessibility
-  - Minor breaking change, hence the middle integer update
+- Semantics updates create minor breaks, hence the middle integer update
 
 ### Added
 - Button alignment options to the video player
