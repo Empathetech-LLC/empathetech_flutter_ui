@@ -144,7 +144,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Live label
               EzSelectableText(
-                'Currently: ${currValue.truncate()}\n(to scale)',
+                'Currently: ${currValue.toStringAsFixed(2)}\n(to scale)',
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
@@ -174,7 +174,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: ${currValue.truncate()}'),
+            child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
           ),
           EzSpacer(buttonSpacer),
         ];
