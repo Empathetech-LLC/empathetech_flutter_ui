@@ -16,6 +16,9 @@ enum ButtonVis {
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
 
+  /// [String] description for the video to appear in accessibilty [Semantics]
+  final String semantics;
+
   /// [Color] shared by all icons/buttons
   final Color iconColor;
 
@@ -56,6 +59,7 @@ class EzVideoPlayer extends StatefulWidget {
   const EzVideoPlayer({
     Key? key,
     required this.controller,
+    required this.semantics,
     required this.iconColor,
     this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
@@ -302,7 +306,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           aspectRatio: widget.controller.value.aspectRatio,
           child: Stack(
             children: [
-              VideoPlayer(widget.controller),
+              Semantics(
+                label: widget.semantics,
+                child: VideoPlayer(widget.controller),
+              ),
 
               // Tap-to-pause
               Positioned(
