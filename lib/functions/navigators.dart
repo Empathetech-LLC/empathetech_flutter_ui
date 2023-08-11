@@ -1,7 +1,6 @@
 library empathetech_flutter_ui;
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// More readable than [Navigator] spelled out
@@ -57,20 +56,4 @@ Future<dynamic> replaceScreen({
 /// Runs pop until '/' route
 void popUntilHome(BuildContext context) {
   return Navigator.of(context).popUntil(ModalRoute.withName('/'));
-}
-
-/// No need to import [launchUrl] if you've already imported EFUI
-/// Defaults to web config, can be overridden with base parameters
-Future<bool> openLink(
-  Uri url, {
-  LaunchMode mode = LaunchMode.platformDefault,
-  WebViewConfiguration webViewConfiguration = const WebViewConfiguration(),
-  String? webOnlyWindowName,
-}) {
-  return launchUrl(
-    url,
-    mode: mode,
-    webViewConfiguration: webViewConfiguration,
-    webOnlyWindowName: webOnlyWindowName,
-  );
 }
