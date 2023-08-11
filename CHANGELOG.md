@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Spacer settings previews
 - EzLink && EzWebLink
+- Image wrappers to require semantics for enforcing accessibility
 
 ### Added
 - Button alignment options to the video player
