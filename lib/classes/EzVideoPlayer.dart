@@ -25,6 +25,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Container] decoration for the region behind the controls
   final Decoration controlsBackground;
 
+  /// [MainAxisAlignment] for where the controls should appear
+  final MainAxisAlignment controlsAlignment;
+
   final ButtonVis playVis;
   final ButtonVis volumeVis;
   final bool variableVolume;
@@ -56,6 +59,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.iconColor,
     this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
+    this.controlsAlignment = MainAxisAlignment.center,
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.variableVolume = true,
@@ -348,7 +352,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       // Buttons
                       Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: widget.controlsAlignment,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: _buildButtons(videoSliderTheme),
                       ),
