@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [3.0.4] - 2023-08-11
 ### Updated
 - Spacer settings previews
-- Screen cretion strategy
-- Custom link classes
+- EzLink && EzWebLink
 
 ### Added
 - Button alignment options to the video player
+- Click and drag to EzScreen
 
 ## [3.0.3] - 2023-08-08
 ### Updated
