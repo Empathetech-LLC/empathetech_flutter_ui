@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class EzImage extends Image {
+class EzStoredImage extends Image {
   final Key? key;
 
   /// [EzConfig] key that contains the path to the image you wish to load
@@ -35,7 +35,7 @@ class EzImage extends Image {
   /// [AssetImage] or [FileImage]
   /// If the [ImageProvider] is known, it is preferred to called the standard
   /// const [Image] constructor
-  EzImage({
+  EzStoredImage({
     this.key,
     required this.prefsKey,
     this.frameBuilder,

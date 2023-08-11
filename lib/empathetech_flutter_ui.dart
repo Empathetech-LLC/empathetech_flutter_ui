@@ -9,7 +9,7 @@ export 'classes/EzConfig.dart';
 export 'classes/EzDialog.dart';
 export 'classes/EzDominantHandSwitch.dart';
 export 'classes/EzFontSetting.dart';
-export 'classes/EzImage.dart';
+export 'classes/EzStoredImage.dart';
 export 'classes/EzImageSetting.dart';
 export 'classes/EzLink.dart';
 export 'classes/EzNotifications.dart';

@@ -180,7 +180,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     : Image(image: AssetImage(updatedPath as String))
                 : (currPathKey == noImageKey) // using app's current state
                     ? Icon(PlatformIcons(context).clear)
-                    : EzImage(prefsKey: currPathKey),
+                    : EzStoredImage(prefsKey: currPathKey),
           ),
         ],
       ),
