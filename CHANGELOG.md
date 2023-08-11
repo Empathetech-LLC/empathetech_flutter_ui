@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.4] - 2023-08-11
+### Updated
+- Stuff && things
+
 ## [3.0.3] - 2023-08-08
 ### Updated
 - Jenkins pipeline
