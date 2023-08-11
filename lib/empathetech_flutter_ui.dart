@@ -10,6 +10,7 @@ export 'classes/EzDialog.dart';
 export 'classes/EzDominantHandSwitch.dart';
 export 'classes/EzFontSetting.dart';
 export 'classes/EzStoredImage.dart';
+export 'classes/EzImage.dart';
 export 'classes/EzImageSetting.dart';
 export 'classes/EzLink.dart';
 export 'classes/EzNotifications.dart';
