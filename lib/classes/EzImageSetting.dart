@@ -181,7 +181,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             child: (updatedPath is String) // user made a change
                 ? (updatedPath == noImageKey)
                     ? Icon(PlatformIcons(context).clear)
-                    : Image(
+                    : EzImage(
                         image: AssetImage(updatedPath as String),
                         semanticLabel: widget.semantics,
                       )
@@ -189,7 +189,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ? Icon(PlatformIcons(context).clear)
                     : EzStoredImage(
                         prefsKey: currPathKey,
-                        label: widget.semantics,
+                        semanticLabel: widget.semantics,
                       ),
           ),
         ],
