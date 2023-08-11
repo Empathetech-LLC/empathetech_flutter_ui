@@ -1,27 +1,20 @@
 library empathetech_flutter_ui;
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzLink extends TextSpan {
-  /// Use with [EzLink.onTap] to setup a quick link text span
-  const EzLink({
+  /// Creates a [TextSpan] with an internal link via [TapGestureRecognizer]
+  /// See [EzWebLink] for making extertnal links
+  EzLink({
     required String text,
-    required GestureRecognizer recognizer,
+    required Function()? action,
     TextStyle? style,
-    MouseCursor? mouseCursor,
-    void Function(PointerEnterEvent)? onEnter,
-    void Function(PointerExitEvent)? onExit,
   }) : super(
           text: text,
-          recognizer: recognizer,
+          recognizer: new TapGestureRecognizer()..onTap = action,
           style: style,
-          mouseCursor: mouseCursor,
-          onEnter: onEnter,
-          onExit: onExit,
         );
-
-  static GestureRecognizer onTap({required void Function() action}) {
-    return TapGestureRecognizer()..onTap = action;
-  }
 }
