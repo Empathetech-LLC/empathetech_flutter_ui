@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Button alignment options to the video player
 - Click and drag to EzScreen
+- Router options for EzApp
 
 ## [3.0.3] - 2023-08-08
 ### Updated
