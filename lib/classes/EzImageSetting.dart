@@ -11,6 +11,9 @@ class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose path value is being updated
   final String prefsKey;
 
+  /// [String] label for the [Image.semanticsLabel]
+  final String semantics;
+
   /// Whether the image is intended for fullscreen use
   /// For example: [lightBackgroundImageKey]
   final bool fullscreen;
@@ -28,6 +31,7 @@ class EzImageSetting extends StatefulWidget {
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
+    required this.semantics,
     required this.prefsKey,
     required this.fullscreen,
     required this.title,
@@ -177,10 +181,16 @@ class _ImageSettingState extends State<EzImageSetting> {
             child: (updatedPath is String) // user made a change
                 ? (updatedPath == noImageKey)
                     ? Icon(PlatformIcons(context).clear)
-                    : Image(image: AssetImage(updatedPath as String))
+                    : EzImage(
+                        image: AssetImage(updatedPath as String),
+                        semanticLabel: widget.semantics,
+                      )
                 : (currPathKey == noImageKey) // using app's current state
                     ? Icon(PlatformIcons(context).clear)
-                    : EzImage(prefsKey: currPathKey),
+                    : EzStoredImage(
+                        prefsKey: currPathKey,
+                        semanticLabel: widget.semantics,
+                      ),
           ),
         ],
       ),

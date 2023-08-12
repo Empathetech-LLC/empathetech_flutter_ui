@@ -84,11 +84,16 @@ node('00-flutter') {
         script {
           def outdated = sh(script: 'flutter pub outdated', returnStdout: true).trim()
           println outdated
-
+        
           if (!outdated.contains('direct dependencies: all up-to-date')) {
             input message: 'Some packages are outdated. Do you want to continue?', ok: 'Continue'
-          } else {
-            println "All direct dependencies are up to date!"
+          }
+
+          def validate = sh(script: 'dart run dependency_validator', returnStdout: true).trim()
+          println validate
+        
+          if (!validate.contains('No dependency issues found')) {
+            input message: 'Dependency validator found issues. Do you want to continue?', ok: 'Continue'
           }
         }
       }

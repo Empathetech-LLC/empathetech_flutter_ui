@@ -16,6 +16,9 @@ enum ButtonVis {
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
 
+  /// [String] description for the video to appear in accessibilty [Semantics]
+  final String semantics;
+
   /// [Color] shared by all icons/buttons
   final Color iconColor;
 
@@ -24,6 +27,9 @@ class EzVideoPlayer extends StatefulWidget {
 
   /// [Container] decoration for the region behind the controls
   final Decoration controlsBackground;
+
+  /// [MainAxisAlignment] for where the controls should appear
+  final MainAxisAlignment controlsAlignment;
 
   final ButtonVis playVis;
   final ButtonVis volumeVis;
@@ -53,9 +59,11 @@ class EzVideoPlayer extends StatefulWidget {
   const EzVideoPlayer({
     Key? key,
     required this.controller,
+    required this.semantics,
     required this.iconColor,
     this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
+    this.controlsAlignment = MainAxisAlignment.center,
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.variableVolume = true,
@@ -298,7 +306,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           aspectRatio: widget.controller.value.aspectRatio,
           child: Stack(
             children: [
-              VideoPlayer(widget.controller),
+              Semantics(
+                label: widget.semantics,
+                child: VideoPlayer(widget.controller),
+              ),
 
               // Tap-to-pause
               Positioned(
@@ -348,7 +359,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       // Buttons
                       Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: widget.controlsAlignment,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: _buildButtons(videoSliderTheme),
                       ),

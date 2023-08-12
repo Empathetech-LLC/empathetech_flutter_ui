@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2023-08-11
+### Updated
+- Spacer settings previews
+- EzLink && EzWebLink
+  - Simplified creation and requiring semantics
+- Image wrappers to require semantics for enforcing accessibility
+- Semantics updates create minor breaks, hence the middle integer update
+
+### Added
+- Button alignment options to the video player
+- Click and drag to EzScreen
+- Router options for EzApp
+
 ## [3.0.3] - 2023-08-08
 ### Updated
 - Jenkins pipeline

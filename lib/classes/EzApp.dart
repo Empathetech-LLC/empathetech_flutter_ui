@@ -4,19 +4,24 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzApp extends StatelessWidget {
   final Key? key;
   final String title;
-  final Widget homeScreenWidget;
+  final Widget? homeScreenWidget;
+  final GoRouter? routerConfig;
 
-  /// [PlatformApp] wrapper with [EzConfig] theming
+  /// [PlatformProvider] wrapper with [EzConfig] theming
+  /// Either provide a [homeScreenWidget] for traditional navigation
+  /// or a [routerConfig] to enable deep linking
   EzApp({
     this.key,
     required this.title,
-    required this.homeScreenWidget,
-  }) : super(key: key);
+    this.homeScreenWidget,
+    this.routerConfig,
+  }) : assert(routerConfig != null || homeScreenWidget != null);
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,7 @@ class EzApp extends StatelessWidget {
     );
 
     return PlatformProvider(
+      key: key,
       settings: PlatformSettingsData(iosUsesMaterialWidgets: true),
       builder: (context) => PlatformTheme(
         themeMode: initialTheme,
@@ -63,16 +69,17 @@ class EzApp extends StatelessWidget {
         materialDarkTheme: materialDark,
         cupertinoLightTheme: cupertinoLight,
         cupertinoDarkTheme: cupertinoDark,
-        builder: (context) => PlatformApp(
-          title: title,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-            DefaultMaterialLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-            DefaultCupertinoLocalizations.delegate,
-          ],
-          home: homeScreenWidget,
-        ),
+        builder: (context) => (routerConfig == null)
+            ? PlatformApp(
+                debugShowCheckedModeBanner: false,
+                title: title,
+                home: homeScreenWidget,
+              )
+            : PlatformApp.router(
+                debugShowCheckedModeBanner: false,
+                title: title,
+                routerConfig: routerConfig,
+              ),
       ),
     );
   }
