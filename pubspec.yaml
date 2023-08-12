@@ -29,4 +29,4 @@ dependencies:
   line_icons: ^2.0.1
 
 dev_dependencies:
-  dependency_validator: ^3.0.0
+  dependency_validator: ^3.2.2
