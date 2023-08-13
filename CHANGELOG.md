@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2023-08-XX
+### Updated
+- Jenkinsfile checks
+
 ## [3.1.0] - 2023-08-11
 ### Updated
 - Spacer settings previews
