@@ -47,28 +47,20 @@ class EzScreen extends StatelessWidget {
     final EdgeInsetsGeometry screenMargin =
         margin ?? EdgeInsets.all(EzConfig.instance.prefs[marginKey]);
 
-    return GestureDetector(
-      onPanUpdate: (details) {
-        // "Swipe" right
-        if (details.delta.dx > 0) {
-          popScreen(context: context);
-        }
-      },
-      child: Container(
-        key: key,
-        alignment: alignment,
-        padding: padding,
-        decoration: decoration,
-        foregroundDecoration: foregroundDecoration,
-        width: width,
-        height: height,
-        constraints: constraints,
-        margin: screenMargin,
-        transform: transform,
-        transformAlignment: transformAlignment,
-        child: child,
-        clipBehavior: clipBehavior,
-      ),
+    return Container(
+      key: key,
+      alignment: alignment,
+      padding: padding,
+      decoration: decoration,
+      foregroundDecoration: foregroundDecoration,
+      width: width,
+      height: height,
+      constraints: constraints,
+      margin: screenMargin,
+      transform: transform,
+      transformAlignment: transformAlignment,
+      child: child,
+      clipBehavior: clipBehavior,
     );
   }
 }
