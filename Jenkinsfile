@@ -85,7 +85,9 @@ node('00-flutter') {
         script {
           def allPaths = sh(script: "grep 'path:' pubspec.yaml", returnStdout: true).trim().split("\n")
           allPaths.each { path ->
-            if (!path.startsWith('#')) { error('Some packages are being built locally. Update all to remote to continue.') }
+            if (!path.contains('^') && !path.startsWith('#')) { 
+              error('Some packages are being built locally. Update all to remote to continue.')
+            }
           }
           
           def outdated = sh(script: 'flutter pub outdated', returnStdout: true).trim()
