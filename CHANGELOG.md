@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.1.1] - 2023-08-XX
+## [3.1.1] - 2023-08-15
 ### Updated
 - Jenkinsfile checks
+
+### Fixed
+- Pan update listener on EzScreen caused bugs. Gone for now.
 
 ## [3.1.0] - 2023-08-11
 ### Updated
