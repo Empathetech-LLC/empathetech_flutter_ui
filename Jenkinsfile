@@ -5,8 +5,9 @@ node('00-flutter') {
     }
 
     def baseBranch = 'main' // CPP (Copy/Paste Point)
+    def currentVersion = readFile('APP_VERSION').trim()
 
-    if (env.BRANCH_NAME != 'main') {
+    if (env.BRANCH_NAME != baseBranch) {
       // Validate that all of the repos versioning trackers have been updated, and that they match
       stage('Validate versioning') {
         withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
@@ -82,6 +83,13 @@ node('00-flutter') {
       // Validate all the flutter packages are on their latest version
       stage('Validate Flutter Dependencies') {
         script {
+          def allPaths = sh(script: "grep 'path:' pubspec.yaml", returnStdout: true).trim().split("\n")
+          allPaths.each { path ->
+            if (!path.contains('^') && !path.startsWith('#')) { 
+              error('Some packages are being built locally. Update all to remote to continue.')
+            }
+          }
+          
           def outdated = sh(script: 'flutter pub outdated', returnStdout: true).trim()
           println outdated
         
@@ -127,7 +135,7 @@ node('00-flutter') {
       }
     }
 
-    if (env.BRANCH_NAME == 'main') {
+    if (env.BRANCH_NAME == baseBranch) {
       withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
         withEnv(["GH_TOKEN=$GIT_PASSWORD"]) {
           stage('Create Git release') {
@@ -139,15 +147,15 @@ node('00-flutter') {
               error("ERROR: Current commit already has a git tag")
             }
 
-            // Gather release information
-            def version = readFile('APP_VERSION').trim()
+            ////  Gather CHANGELOG notes for PRs' bodies
+            
             def changelog = readFile('CHANGELOG.md').split("\n")
 
             // Define pattern to match version header
             def versionPattern = ~/## \[\d+\.\d+\.\d+\] - \d{4}-\d{2}-\d{2}/
-            def currentVersionPattern = ~/## \[${version}\] - \d{4}-\d{2}-\d{2}/
+            def currentVersionPattern = ~/## \[${currentVersion}\] - \d{4}-\d{2}-\d{2}/
 
-            // Find start and end lines for the version's section
+            // Find start and end lines for the current version's section
             def startIndex = changelog.findIndexOf { it ==~ currentVersionPattern }
             def endIndex = changelog.findIndexOf(startIndex + 1) { it ==~ versionPattern }
 
@@ -156,7 +164,7 @@ node('00-flutter') {
             // Extract the section
             def notes = changelog[startIndex..(endIndex - 1)].join("\n")
 
-            sh "gh release create \"${version}\" -t \"${version}\" -n \"${notes}\""
+            sh "gh release create \"${currentVersion}\" -t \"${currentVersion}\" -n \"${notes}\""
           }
         }
       }
