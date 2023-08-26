@@ -13,7 +13,7 @@ class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose path value is being updated
   final String prefsKey;
 
-  /// [String] label for the [Image.semanticsLabel]
+  /// [String] label for the [Image.semanticLabel]
   final String semantics;
 
   /// Whether the image is intended for fullscreen use

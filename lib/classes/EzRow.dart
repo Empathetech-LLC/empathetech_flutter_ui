@@ -17,7 +17,7 @@ class EzRow extends StatelessWidget {
   final List<Widget> children;
   final bool reverseHands;
 
-  /// [Row] wrapper that automatically supports [EzConfig.instance.dominantSide]
+  /// [Row] wrapper that automatically supports [EzConfig.dominantSide]
   /// Can be disabled via setting [reverseHands] to false
   EzRow({
     this.key,
