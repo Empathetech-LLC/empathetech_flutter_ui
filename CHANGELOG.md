@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.2] - 2023-08-26
+### Updated
+- Documentation
+- Package description
+- README
+
+### Added
+- Dart docs dev dependency and checks in Jenkinsfile
+
 ## [3.1.1] - 2023-08-15
 ### Updated
 - Jenkinsfile checks

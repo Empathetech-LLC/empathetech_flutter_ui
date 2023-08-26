@@ -117,6 +117,15 @@ node('00-flutter') {
           } else {
             println "No issues found! Good job!"
           }
+
+          def docs = sh(script: 'dart doc . 2>&1', returnStdout: true).trim()
+          println docs
+
+          if (!docs.contains('0 errors')) {
+            input message: 'Dart doc found errors. Do you want to continue?', ok: 'Continue'
+          } else {
+            println "No errors found! Good job!"
+          }
         }
       }
 

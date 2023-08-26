@@ -1,6 +1,6 @@
 name: empathetech_flutter_ui
-description: A Flutter package for fast, high quality UI development
-version: 3.1.1
+description: EFUI makes building accessible and user customizable UIs EZ. So everyone can enjoy your great idea!
+version: 3.1.2
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
@@ -30,3 +30,4 @@ dependencies:
 
 dev_dependencies:
   dependency_validator: ^3.2.2
+  dartdoc: ^6.3.0

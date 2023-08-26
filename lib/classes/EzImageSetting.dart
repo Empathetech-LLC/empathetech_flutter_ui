@@ -1,4 +1,6 @@
-library empathetech_flutter_ui;
+/// empathetech_flutter_ui
+/// Copyright (c) 2023 Empathetech LLC. All rights reserved.
+/// See LICENSE for distribution and usage details.
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -11,7 +13,7 @@ class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose path value is being updated
   final String prefsKey;
 
-  /// [String] label for the [Image.semanticsLabel]
+  /// [String] label for the [Image.semanticLabel]
   final String semantics;
 
   /// Whether the image is intended for fullscreen use
