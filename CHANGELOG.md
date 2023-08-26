@@ -2,12 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.2.0] - 2023-08-XX
+## [3.1.2] - 2023-08-25
 ### Updated
-- Implemented Flutter performance [best practices](https://docs.flutter.dev/perf/best-practices)
-- Implemented Flutter accessibility [best practices](https://docs.flutter.dev/ui/accessibility-and-localization/accessibility)
 - Documentation
-- Package description and example for pub score
+- Package description
+- README
+
+### Added
+- Dart docs dev dependency and checks in Jenkinsfile
 
 ## [3.1.1] - 2023-08-15
 ### Updated
