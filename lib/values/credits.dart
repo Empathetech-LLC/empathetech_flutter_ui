@@ -19,5 +19,8 @@ const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
 const String EmpathetechFoldingTeam =
     'https://stats.foldingathome.org/team/1063265';
 
+/// One of us, one of us, one of us!
+const String EmpathetechCommunityContact = 'community@empathetech.net';
+
 /// If you need to reach out
 const String EmpathetechSupport = 'support@empathetech.net';
