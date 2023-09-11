@@ -101,7 +101,7 @@ Have fun!""",
           ],
         ),
       ),
-      fab: const BackFAB(),
+      fab: null,
     );
   }
 }

@@ -24,7 +24,7 @@ class LayoutSize extends InheritedWidget {
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
   final Widget body;
-  final Widget fab;
+  final Widget? fab;
 
   const ExampleScaffold({
     this.key,
@@ -107,7 +107,7 @@ class _SmallBuild extends StatelessWidget {
   final double toolbarHeight;
   final TitleBar titleBar;
   final Widget body;
-  final Widget fab;
+  final Widget? fab;
 
   /// [ExampleScaffold] for when there is limited screen space
   /// Has a mobile-like layout
@@ -165,7 +165,7 @@ class _LargeBuild extends StatelessWidget {
   final double toolbarHeight;
   final TitleBar titleBar;
   final Widget body;
-  final Widget fab;
+  final Widget? fab;
 
   /// [ExampleScaffold] for when there is ample screen space
   /// Has a traditional footer-less web page layout
