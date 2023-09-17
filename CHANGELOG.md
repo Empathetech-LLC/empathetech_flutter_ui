@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2023-09-XX
+### Updated
+- File structure
+
 ## [3.1.2] - 2023-08-26
 ### Updated
 - Documentation
