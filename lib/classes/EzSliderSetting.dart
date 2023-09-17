@@ -322,7 +322,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
                       onTap: () => popScreen(context: context),
-                      child: Text('X', style: style),
+                      child: Icon(PlatformIcons(context).checkMark),
                     ),
                   ),
                 ),
