@@ -92,13 +92,17 @@ class EzApp extends StatelessWidget {
 
     return PlatformProvider(
       key: key,
-      settings: PlatformSettingsData(iosUsesMaterialWidgets: true),
+      settings: PlatformSettingsData(
+        iosUsesMaterialWidgets: true,
+        iosUseZeroPaddingForAppbarPlatformIcon: true,
+      ),
       builder: (context) => PlatformTheme(
         themeMode: initialTheme,
         materialLightTheme: materialLight,
         materialDarkTheme: materialDark,
         cupertinoLightTheme: cupertinoLight,
         cupertinoDarkTheme: cupertinoDark,
+        matchCupertinoSystemChromeBrightness: true,
         builder: (context) => (routerConfig == null)
             ? PlatformApp(
                 debugShowCheckedModeBanner: false,
