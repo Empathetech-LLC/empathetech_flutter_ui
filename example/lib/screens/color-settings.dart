@@ -33,15 +33,28 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String themeProfile = isLight ? 'Light' : 'Dark';
+
     return ExampleScaffold(
       body: EzScreen(
         child: EzScrollView(
           children: [
             // Title
-            EzSelectableText('Make it yours!', style: headlineSmall(context)),
-            EzSpacer(paragraphSpacer),
+            EzSelectableText(
+              'Make it yours!',
+              style: headlineSmall(context),
+            ),
+            EzSpacer(0.5 * paragraphSpacer),
 
-            // Settings
+            EzSelectableText(
+              'Editing: $themeProfile theme',
+              style: titleSmall(context),
+            ),
+            EzSpacer(1.5 * paragraphSpacer),
+
+            // Settings //
+
+            // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
             EzScrollView(
               scrollDirection: Axis.horizontal,
               mainAxisSize: MainAxisSize.min,
@@ -135,7 +148,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 ],
               ),
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(2 * paragraphSpacer),
+
+            // Note
+            EzSelectableText(
+              "NOTE: The top bar's theme colors are (intentionally) reversed!",
+              style: titleSmall(context),
+            ),
+            EzSpacer(paragraphSpacer),
           ],
         ),
       ),
