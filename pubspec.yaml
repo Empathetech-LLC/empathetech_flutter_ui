@@ -31,3 +31,5 @@ dependencies:
 dev_dependencies:
   dependency_validator: ^3.2.2
   dartdoc: ^6.3.0
+
+flutter:
