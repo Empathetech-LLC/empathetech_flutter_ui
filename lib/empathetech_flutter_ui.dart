@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+/// EFUI makes building accessible and user customizable UIs EZ. So anyone can enjoy your great idea!
 library empathetech_flutter_ui;
 
 import 'dart:io';
@@ -27,41 +28,46 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-part 'src/colors.dart';
-part 'src/credits.dart';
-part 'src/dialogs.dart';
-part 'src/Eb2Casa.dart';
-part 'src/EzApp.dart';
-part 'src/EzColors.dart';
-part 'src/EzColorSetting.dart';
-part 'src/EzConfig.dart';
-part 'src/EzDialog.dart';
-part 'src/EzDominantHandSwitch.dart';
-part 'src/EzFontSetting.dart';
-part 'src/EzImage.dart';
-part 'src/EzImageSetting.dart';
-part 'src/EzLink.dart';
-part 'src/EzNotifications.dart';
-part 'src/EzRow.dart';
-part 'src/EzRowCol.dart';
-part 'src/EzScreen.dart';
-part 'src/EzScrollView.dart';
-part 'src/EzSelectableText.dart';
-part 'src/EzSliderSetting.dart';
-part 'src/EzSpacer.dart';
-part 'src/EzStoredImage.dart';
-part 'src/EzTextStyle.dart';
-part 'src/EzTextTheme.dart';
-part 'src/ezThemeData.dart';
-part 'src/EzThemeModeSwitch.dart';
-part 'src/EzTransitions.dart';
-part 'src/EzVideoPlayer.dart';
-part 'src/EzWarning.dart';
-part 'src/EzWebLink.dart';
-part 'src/EzYesNo.dart';
-part 'src/googleFonts.dart';
-part 'src/helpers.dart';
-part 'src/navigators.dart';
-part 'src/sharedPreferences.dart';
-part 'src/storage.dart';
-part 'src/textStyles.dart';
+// Classes
+part 'classes/Eb2Casa.dart';
+part 'classes/EzApp.dart';
+part 'classes/EzColors.dart';
+part 'classes/EzColorSetting.dart';
+part 'classes/EzConfig.dart';
+part 'classes/EzDialog.dart';
+part 'classes/EzDominantHandSwitch.dart';
+part 'classes/EzFontSetting.dart';
+part 'classes/EzImage.dart';
+part 'classes/EzImageSetting.dart';
+part 'classes/EzLink.dart';
+part 'classes/EzNotifications.dart';
+part 'classes/EzRow.dart';
+part 'classes/EzRowCol.dart';
+part 'classes/EzScreen.dart';
+part 'classes/EzScrollView.dart';
+part 'classes/EzSelectableText.dart';
+part 'classes/EzSliderSetting.dart';
+part 'classes/EzSpacer.dart';
+part 'classes/EzStoredImage.dart';
+part 'classes/EzTextStyle.dart';
+part 'classes/EzTextTheme.dart';
+part 'classes/EzThemeModeSwitch.dart';
+part 'classes/EzTransitions.dart';
+part 'classes/EzVideoPlayer.dart';
+part 'classes/EzWarning.dart';
+part 'classes/EzWebLink.dart';
+part 'classes/EzYesNo.dart';
+
+// Functions
+part 'functions/dialogs.dart';
+part 'functions/ezThemeData.dart';
+part 'functions/helpers.dart';
+part 'functions/navigators.dart';
+part 'functions/storage.dart';
+part 'functions/textStyles.dart';
+
+// Constants
+part 'consts/colors.dart';
+part 'consts/credits.dart';
+part 'consts/googleFonts.dart';
+part 'consts/sharedPreferences.dart';
