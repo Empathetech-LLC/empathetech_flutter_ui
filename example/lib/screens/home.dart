@@ -48,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
             // Functionality disclaimer
             EzWarning(
               warning: 'ATTENTION',
-              message: """Each button will preview it\'s settting
-Reload this (or any) page for the changes to take full effect
+              message: """Each button will preview it\'s changes
+Reload this (or any) page for them to take full effect!
 Have fun!""",
               style: headlineSmall(context),
             ),
