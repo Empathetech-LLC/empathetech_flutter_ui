@@ -152,8 +152,9 @@ node('00-flutter') {
             sh "git checkout ${baseBranch}"
 
             // Fail if a tag already exists
-            if (sh(script: 'git describe --exact-match HEAD', returnStatus: true) == 0) {
-              error("ERROR: Current commit already has a git tag")
+            def releaseCheck = sh(script: 'git describe --exact-match HEAD 2>&1', returnStdout: true).trim()
+            if (!releaseCheck.contains('no tag')) {
+              error("ERROR: Current commit already has a tag")
             }
 
             ////  Gather CHANGELOG notes for PRs' bodies
