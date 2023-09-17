@@ -8,6 +8,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzInvertedColor extends Color {
+  /// The mathematical opposite of this color will be returned
   final Color toInvert;
 
   /// Returns the RGB invert of the passed color
@@ -21,6 +22,7 @@ class EzInvertedColor extends Color {
 }
 
 class EzContrastColor extends Color {
+  /// The base color beneath your text
   final Color background;
 
   /// Returns the guesstimated most readable text color (black/white) for [background]
@@ -35,10 +37,13 @@ class EzContrastColor extends Color {
 }
 
 class EzColorBlend extends Color {
+  /// First color to be mixed
   final Color color1;
+
+  /// Second color to be mixed
   final Color color2;
 
-  /// Returns the RGB invert of the passed color
+  /// Returns the mathematical average of [color1] and [color2]
   EzColorBlend(this.color1, this.color2)
       : super.fromARGB(
           ((color1.opacity + color2.opacity) / 2 * 255).round(),
