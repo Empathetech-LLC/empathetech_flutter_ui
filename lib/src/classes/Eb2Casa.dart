@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class EB2CASA extends CupertinoActionSheetAction {
+  /// [ElevatedButton] that is being converted
   final ElevatedButton from;
 
   /// Quickly convert an [ElevatedButton] into a [CupertinoActionSheetAction]
