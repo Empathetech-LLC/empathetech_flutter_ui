@@ -58,9 +58,11 @@ class ETechDotNet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EzApp(
-      title: 'EFUI example',
-      routerConfig: _router,
+    return EzAppProvider(
+      app: EzApp(
+        title: 'EFUI example',
+        routerConfig: _router,
+      ),
     );
   }
 }
