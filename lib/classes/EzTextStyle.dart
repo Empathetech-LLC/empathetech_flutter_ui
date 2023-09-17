@@ -3,7 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class EzTextStyle extends TextStyle {
   final bool inherit;

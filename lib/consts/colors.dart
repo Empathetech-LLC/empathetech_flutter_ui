@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:flutter/material.dart';
 
 const int EmpathEucalyptusHex = 0xFF20DAA5;
 const Color EmpathEucalyptus = Color(EmpathEucalyptusHex);

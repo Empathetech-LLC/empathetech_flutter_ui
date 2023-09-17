@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'package:flutter/material.dart';
 
 // Default sizes are based on
 // https://api.flutter.dev/flutter/material/TextTheme-class.html

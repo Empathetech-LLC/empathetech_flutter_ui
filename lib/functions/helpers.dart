@@ -3,7 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!

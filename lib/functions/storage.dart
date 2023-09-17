@@ -3,7 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<String?> changeImage({

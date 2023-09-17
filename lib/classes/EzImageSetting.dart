@@ -3,7 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose path value is being updated

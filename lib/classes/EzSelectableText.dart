@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'dart:ui';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 
 class EzSelectableText extends SelectableText {
   final String? data;

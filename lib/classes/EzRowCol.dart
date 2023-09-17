@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:flutter/material.dart';
 
 class EzRowCol extends StatelessWidget {
   final Key? key;

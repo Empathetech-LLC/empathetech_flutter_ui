@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
-
 // App-wide //
 
 const String isLightKey = 'isLight';

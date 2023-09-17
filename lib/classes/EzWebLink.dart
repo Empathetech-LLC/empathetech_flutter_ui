@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EzWebLink extends TextSpan {
   /// Creates a [TextSpan] with an external link via [TapGestureRecognizer] && [launchUrl]

@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final FlutterLocalNotificationsPlugin notifsPlugin =
     FlutterLocalNotificationsPlugin();

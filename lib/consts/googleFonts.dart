@@ -3,7 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const String sora = 'Sora';
 const String hahmlet = 'Hahmlet';

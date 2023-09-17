@@ -3,7 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontSetting extends StatefulWidget {
   /// Standardized tool for updating the [fontFamilyKey] in [EzConfig]

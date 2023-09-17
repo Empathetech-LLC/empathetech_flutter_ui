@@ -3,7 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-part of empathetech_flutter_ui;
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'dart:io';
+import 'package:flutter/material.dart';
 
 class EzStoredImage extends Image {
   final Key? key;
