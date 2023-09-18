@@ -28,7 +28,7 @@ class TitleBar extends StatelessWidget {
 
     total += measureText(
       text: 'Have fun!',
-      scalar: scalar,
+      scalar: scalar, // Tracks user changes to zoom, text scaling, etc
       style: style,
     ).width;
 
