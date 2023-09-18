@@ -67,6 +67,10 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define builds //
 
+    /* These aren't actually different in the example app
+     * But they can be in yours!
+     */
+
     final _SmallBuild smallBuild = _SmallBuild(
       leftHandedUser: leftHandedUser,
       toolbarHeight: toolbarHeight,
