@@ -131,13 +131,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 ],
               ),
             ),
-            EzSpacer(2 * paragraphSpacer),
-
-            // Note
-            EzSelectableText(
-              "NOTE: The top bar's theme colors are (intentionally) reversed!",
-              style: titleSmall(context),
-            ),
             EzSpacer(paragraphSpacer),
           ],
         ),
