@@ -4,24 +4,37 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/semantics.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  // Most apps need this
+  // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize EzConfig
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  EzConfig(assetPaths: [], preferences: prefs);
 
-  // Set device orientations
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  EzConfig(
+    assetPaths: [],
+    preferences: prefs,
+    customDefaults: {},
+  );
+
+  // Set device orientation(s)
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    // DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
 
   runApp(const ETechDotNet());
-  SemanticsBinding.instance.ensureSemantics();
 }
 
+// Initialize a path based router for web apps
+// Or any other app that you want to enable deep linking
+// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: <RouteBase>[
