@@ -3,6 +3,7 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -57,8 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
             // Functionality disclaimer
             EzWarning(
               warning: 'ATTENTION',
-              message: """Each button will preview it\'s changes
-Reload any page for your changes to take full effect!
+              message: kIsWeb
+                  ? """Each button will preview it\'s changes
+Reload the page for your changes to take full effect!
+Have fun!"""
+                  : """Each button will preview it\'s changes
+Restart the app for your changes to take full effect!
 Have fun!""",
               style: headlineSmall(context),
             ),
