@@ -5,12 +5,20 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class LayoutSize extends InheritedWidget {
+  /// true == small screen
+  /// false == large screen
   final bool isLimited;
 
+  /// [Scaffold] to be displayed
+  final Widget child;
+
+  /// Wrapper object for responding to screen space changes
+  /// Currently uses the bool [isLimited] for switching between a small and large build
+  /// Could be expanded limitlessly by replacing [isLimited] with a custom enum
   const LayoutSize({
     Key? key,
-    required Widget child,
     required this.isLimited,
+    required this.child,
   }) : super(key: key, child: child);
 
   static LayoutSize? of(BuildContext context) {
@@ -38,31 +46,14 @@ class ExampleScaffold extends StatelessWidget {
 
     final bool leftHandedUser = EzConfig.instance.dominantSide == Hand.left;
 
-    // Reverse the colors of the app bar to highlight it
-    final Color appBarColor = Theme.of(context).colorScheme.onBackground;
-    final Color appBarTextColor = Theme.of(context).colorScheme.background;
-
-    final TextStyle appBarTextStyle = buildHeadlineSmall(appBarTextColor);
+    final TextStyle? appBarTextStyle = Theme.of(context).appBarTheme.titleTextStyle;
     final double textScalar = MediaQuery.of(context).textScaleFactor;
-
-    final double iconSize = appBarTextStyle.fontSize!;
-    final IconThemeData appBarIconData = IconThemeData(
-      color: appBarTextColor,
-      size: iconSize,
-    );
-
-    final AppBarTheme appBarTheme = AppBarTheme(
-      color: appBarColor,
-      iconTheme: appBarIconData,
-      actionsIconTheme: appBarIconData,
-      titleTextStyle: appBarTextStyle,
-    );
 
     final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-    // Set toolbar height to equal space above and below text links
+    // Set toolbar height to a value that creates equal space above and below the text links
     final double toolbarHeight =
-        appBarTextStyle.fontSize! * MediaQuery.of(context).textScaleFactor * 3;
+        appBarTextStyle!.fontSize! * MediaQuery.of(context).textScaleFactor * 3;
 
     // Define shared widget(s) //
 
@@ -74,10 +65,9 @@ class ExampleScaffold extends StatelessWidget {
 
     final double threshold = titleBar.width;
 
-    // Return build(s) //
+    // Define builds //
 
     final _SmallBuild smallBuild = _SmallBuild(
-      appBarTheme: appBarTheme,
       leftHandedUser: leftHandedUser,
       toolbarHeight: toolbarHeight,
       titleBar: titleBar,
@@ -86,13 +76,14 @@ class ExampleScaffold extends StatelessWidget {
     );
 
     final _LargeBuild largeBuild = _LargeBuild(
-      appBarTheme: appBarTheme,
       leftHandedUser: leftHandedUser,
       toolbarHeight: toolbarHeight,
       titleBar: titleBar,
       body: body,
       fab: fab,
     );
+
+    // Build //
 
     return (widthOf(context) <= threshold)
         ? LayoutSize(isLimited: true, child: smallBuild)
@@ -102,7 +93,6 @@ class ExampleScaffold extends StatelessWidget {
 
 class _SmallBuild extends StatelessWidget {
   final double width = double.infinity;
-  final AppBarTheme appBarTheme;
   final bool leftHandedUser;
   final double toolbarHeight;
   final TitleBar titleBar;
@@ -112,7 +102,6 @@ class _SmallBuild extends StatelessWidget {
   /// [ExampleScaffold] for when there is limited screen space
   /// Has a mobile-like layout
   const _SmallBuild({
-    required this.appBarTheme,
     required this.leftHandedUser,
     required this.toolbarHeight,
     required this.titleBar,
@@ -125,24 +114,16 @@ class _SmallBuild extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(width, toolbarHeight),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            appBarTheme: appBarTheme,
-            tabBarTheme: Theme.of(context)
-                .tabBarTheme
-                .copyWith(labelColor: appBarTheme.titleTextStyle?.color),
-          ),
-          child: AppBar(
-            toolbarHeight: toolbarHeight,
+        child: AppBar(
+          toolbarHeight: toolbarHeight,
 
-            // Leading
-            automaticallyImplyLeading: (leftHandedUser) ? true : false,
+          // Leading
+          automaticallyImplyLeading: (leftHandedUser) ? true : false,
 
-            // Title
-            title: titleBar,
-            titleSpacing: 0,
-            centerTitle: true,
-          ),
+          // Title
+          title: titleBar,
+          titleSpacing: 0,
+          centerTitle: true,
         ),
       ),
 
@@ -160,7 +141,6 @@ class _SmallBuild extends StatelessWidget {
 
 class _LargeBuild extends StatelessWidget {
   final double width = double.infinity;
-  final AppBarTheme appBarTheme;
   final bool leftHandedUser;
   final double toolbarHeight;
   final TitleBar titleBar;
@@ -168,9 +148,8 @@ class _LargeBuild extends StatelessWidget {
   final Widget? fab;
 
   /// [ExampleScaffold] for when there is ample screen space
-  /// Has a traditional footer-less web page layout
+  /// Has a desktop-like layout
   const _LargeBuild({
-    required this.appBarTheme,
     required this.leftHandedUser,
     required this.toolbarHeight,
     required this.titleBar,
@@ -183,24 +162,16 @@ class _LargeBuild extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(width, toolbarHeight),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            appBarTheme: appBarTheme,
-            tabBarTheme: Theme.of(context)
-                .tabBarTheme
-                .copyWith(labelColor: appBarTheme.titleTextStyle?.color),
-          ),
-          child: AppBar(
-            toolbarHeight: toolbarHeight,
+        child: AppBar(
+          toolbarHeight: toolbarHeight,
 
-            // Leading
-            automaticallyImplyLeading: (leftHandedUser) ? true : false,
+          // Leading
+          automaticallyImplyLeading: (leftHandedUser) ? true : false,
 
-            // Title
-            title: titleBar,
-            titleSpacing: 0,
-            centerTitle: true,
-          ),
+          // Title
+          title: titleBar,
+          titleSpacing: 0,
+          centerTitle: true,
         ),
       ),
 
