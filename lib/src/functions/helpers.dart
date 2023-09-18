@@ -54,13 +54,9 @@ bool isAsset(String? path) {
 void setPageTitle({
   required BuildContext context,
   required String title,
-  int? primaryColor,
 }) {
   SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(
-      label: title,
-      primaryColor: primaryColor,
-    ),
+    ApplicationSwitcherDescription(label: title),
   );
 }
 
