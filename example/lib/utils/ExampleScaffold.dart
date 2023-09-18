@@ -122,7 +122,7 @@ class _SmallBuild extends StatelessWidget {
           toolbarHeight: toolbarHeight,
 
           // Leading
-          automaticallyImplyLeading: (leftHandedUser) ? true : false,
+          automaticallyImplyLeading: (leftHandedUser) ? false : true,
 
           // Title
           title: titleBar,
@@ -130,7 +130,7 @@ class _SmallBuild extends StatelessWidget {
           centerTitle: true,
 
           // Actions (aka trailing)
-          actions: (leftHandedUser) ? null : [EzBackAction()],
+          actions: (leftHandedUser) ? [EzBackAction()] : null,
         ),
       ),
 
@@ -173,7 +173,7 @@ class _LargeBuild extends StatelessWidget {
           toolbarHeight: toolbarHeight,
 
           // Leading
-          automaticallyImplyLeading: (leftHandedUser) ? true : false,
+          automaticallyImplyLeading: (leftHandedUser) ? false : true,
 
           // Title
           title: titleBar,
@@ -181,7 +181,7 @@ class _LargeBuild extends StatelessWidget {
           centerTitle: true,
 
           // Actions (aka trailing)
-          actions: (leftHandedUser) ? null : [EzBackAction()],
+          actions: (leftHandedUser) ? [EzBackAction()] : null,
         ),
       ),
 
