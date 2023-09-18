@@ -194,7 +194,7 @@ class _LargeBuild extends StatelessWidget {
             toolbarHeight: toolbarHeight,
 
             // Leading
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: (leftHandedUser) ? true : false,
 
             // Title
             title: titleBar,
@@ -203,8 +203,6 @@ class _LargeBuild extends StatelessWidget {
           ),
         ),
       ),
-      drawer: null,
-      endDrawer: null,
 
       // Body
       body: body,
