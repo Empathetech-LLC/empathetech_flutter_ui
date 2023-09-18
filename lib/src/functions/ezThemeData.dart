@@ -10,27 +10,26 @@ import 'package:flutter/material.dart';
 ThemeData ezThemeData({required bool light}) {
   final Brightness brightness = light ? Brightness.light : Brightness.dark;
 
-  final Color themeColor = Color(
-      EzConfig.instance.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
-  final Color themeTextColor = Color(EzConfig
-      .instance.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
-  final Color unSelectedThemeTextColor =
-      EzColorBlend(themeColor, themeTextColor);
+  final Color themeColor =
+      Color(EzConfig.instance.prefs[light ? lightThemeColorKey : darkThemeColorKey]);
+  final Color themeTextColor =
+      Color(EzConfig.instance.prefs[light ? lightThemeTextColorKey : darkThemeTextColorKey]);
+  final Color unSelectedThemeTextColor = EzColorBlend(themeColor, themeTextColor);
 
-  final Color backgroundColor = Color(EzConfig.instance
-      .prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
-  final Color backgroundTextColor = Color(EzConfig.instance
-      .prefs[light ? lightBackgroundTextColorKey : darkBackgroundTextColorKey]);
+  final Color backgroundColor =
+      Color(EzConfig.instance.prefs[light ? lightBackgroundColorKey : darkBackgroundColorKey]);
+  final Color backgroundTextColor = Color(
+      EzConfig.instance.prefs[light ? lightBackgroundTextColorKey : darkBackgroundTextColorKey]);
 
-  final Color buttonColor = Color(EzConfig
-      .instance.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
-  final Color buttonTextColor = Color(EzConfig.instance
-      .prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
+  final Color buttonColor =
+      Color(EzConfig.instance.prefs[light ? lightButtonColorKey : darkButtonColorKey]);
+  final Color buttonTextColor =
+      Color(EzConfig.instance.prefs[light ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  final Color accentColor = Color(EzConfig
-      .instance.prefs[light ? lightAccentColorKey : darkAccentColorKey]);
-  final Color accentTextColor = Color(EzConfig.instance
-      .prefs[light ? lightAccentTextColorKey : darkAccentTextColorKey]);
+  final Color accentColor =
+      Color(EzConfig.instance.prefs[light ? lightAccentColorKey : darkAccentColorKey]);
+  final Color accentTextColor =
+      Color(EzConfig.instance.prefs[light ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
