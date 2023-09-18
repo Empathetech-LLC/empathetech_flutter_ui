@@ -19,16 +19,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Custom EFUI function that sets the tab title for web apps
     setPageTitle(context: context, title: 'Settings');
   }
 
   // Gather theme data //
 
+  // Style settings can be taken directly from EzConfig
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
 
+  // Color settings should be taken from the current context's theme
+  // This way, if/when the theme changes in the backend, the frontend colors will actually respond
+  // See 'empathetech_flutter_ui/lib/src/functions/ezThemeData.dart' for the color mappings
   late final Color? buttonColor = Theme.of(context).highlightColor;
 
+  // Text styles should also be taken from the current context
+  // This way, the app will respond properly to text size changes (page zoom, text scaling, etc)
+  // See 'empathetech_flutter_ui/lib/src/functions/textStyles.dart' for the style mappings
   late final TextStyle? resetLinkStyle =
       titleLarge(context)?.copyWith(decoration: TextDecoration.underline);
   late final TextStyle? labelStyle = labelLarge(context);
@@ -97,7 +106,7 @@ Have fun!""",
                 ),
               ),
             ),
-            EzSpacer(3 * paragraphSpacer),
+            EzSpacer(paragraphSpacer),
           ],
         ),
       ),
