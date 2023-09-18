@@ -23,6 +23,8 @@ class TitleBar extends StatelessWidget {
     required this.spacer,
   }) : super(key: key);
 
+  /// The current horizontal space that the [TitleBar] needs
+  /// Helpful for layout calculations
   double get width {
     double total = spacer;
 
