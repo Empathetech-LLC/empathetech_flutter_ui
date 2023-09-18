@@ -128,6 +128,9 @@ class _SmallBuild extends StatelessWidget {
           title: titleBar,
           titleSpacing: 0,
           centerTitle: true,
+
+          // Actions (aka trailing)
+          actions: (leftHandedUser) ? null : [EzBackAction()],
         ),
       ),
 
@@ -176,6 +179,9 @@ class _LargeBuild extends StatelessWidget {
           title: titleBar,
           titleSpacing: 0,
           centerTitle: true,
+
+          // Actions (aka trailing)
+          actions: (leftHandedUser) ? null : [EzBackAction()],
         ),
       ),
 
