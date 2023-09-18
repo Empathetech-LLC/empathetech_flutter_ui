@@ -135,7 +135,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           ],
         ),
       ),
-      fab: const BackFAB(),
+      fab: null,
     );
   }
 }

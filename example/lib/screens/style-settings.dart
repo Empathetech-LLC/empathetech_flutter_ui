@@ -99,7 +99,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
           ],
         ),
       ),
-      fab: const BackFAB(),
+      fab: null,
     );
   }
 }
