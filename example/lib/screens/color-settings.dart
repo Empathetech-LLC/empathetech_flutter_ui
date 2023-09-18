@@ -39,18 +39,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: [
-            // Title
-            EzSelectableText(
-              'Make it yours!',
-              style: headlineSmall(context),
-            ),
-            EzSpacer(0.5 * paragraphSpacer),
-
+            // Current theme mode reminder
             EzSelectableText(
               'Editing: $themeProfile theme',
               style: titleSmall(context),
             ),
-            EzSpacer(1.5 * paragraphSpacer),
+            EzSpacer(paragraphSpacer),
 
             // Settings //
 

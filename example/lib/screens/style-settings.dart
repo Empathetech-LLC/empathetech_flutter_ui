@@ -34,10 +34,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: [
-            // Title
-            EzSelectableText('Make it yours!', style: headlineSmall(context)),
-            EzSpacer(paragraphSpacer),
-
             // Font
             const EzFontSetting(),
             EzSpacer(buttonSpacer),
