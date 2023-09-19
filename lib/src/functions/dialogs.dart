@@ -39,7 +39,7 @@ Future<dynamic> ezColorPicker({
   final String confirmMsg = 'Apply';
   final String denyMsg = 'Cancel';
 
-  TextStyle? contentStyle = Theme.of(context).dialogTheme.contentTextStyle;
+  final TextStyle? contentStyle = Theme.of(context).dialogTheme.contentTextStyle;
 
   return showPlatformDialog(
     context: context,
