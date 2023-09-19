@@ -89,12 +89,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         ),
 
         // Content
-        content: EzScrollView(
-          children: [
-            ...contents!,
-            EzSpacer(padding), // Ditto for contentPadding
-          ],
-        ),
+        content: EzScrollView(children: contents),
 
         // Actions
         actions: cupertinoActions == null
