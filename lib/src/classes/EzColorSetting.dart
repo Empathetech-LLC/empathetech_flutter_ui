@@ -117,7 +117,6 @@ class _ColorSettingState extends State<EzColorSetting> {
             onConfirm: onConfirm,
             onDeny: onDeny,
             denyMsg: denyMsg,
-            textStyle: Theme.of(context).dialogTheme.contentTextStyle,
             confirmIsDestructive: true,
           ),
           needsClose: true,
@@ -166,11 +165,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
         ],
         materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
-        cupertinoActions: ezCupertinoActions(
-          onConfirm: onConfirm,
-          onDeny: onDeny,
-          textStyle: Theme.of(context).dialogTheme.contentTextStyle,
-        ),
+        cupertinoActions: ezCupertinoActions(onConfirm: onConfirm, onDeny: onDeny),
         needsClose: false,
       ),
     );
