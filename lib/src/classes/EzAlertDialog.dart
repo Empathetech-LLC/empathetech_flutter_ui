@@ -97,7 +97,11 @@ class EzAlertDialog extends PlatformAlertDialog {
         ),
 
         // Actions
-        actions: cupertinoActions == null ? [_closeAction] : [...cupertinoActions!, _closeAction],
+        actions: cupertinoActions == null
+            ? [_closeAction]
+            : (needsClose)
+                ? [...cupertinoActions!, _closeAction]
+                : cupertinoActions,
       ),
     );
   }
