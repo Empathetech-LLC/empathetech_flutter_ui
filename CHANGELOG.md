@@ -5,15 +5,16 @@ All notable changes to this project will be documented in this file.
 ## [3.2.0] - 2023-09-XX
 ### Updated
 - File structure
-- App creation
-  - Split EzApp into EzApp and EzAppProvider
+- Split EzApp into EzApp and EzAppProvider
 - Pre-existing release check in the Jenkinsfile
 - README
+- EzDialog -> EzAlertDialog
+- Project line length to 99
 
 ### Added
 - Example app
-  - Used this to verify EFUI on all platforms! Android, iOS, Linux, MacOS, Web, and Windows!
 - More comments
+- EzBackAction class
 
 ## [3.1.2] - 2023-08-26
 ### Updated
