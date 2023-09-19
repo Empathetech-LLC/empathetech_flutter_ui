@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // See 'empathetech_flutter_ui/lib/src/functions/textStyles.dart' for the style mappings
   late final TextStyle? resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
+  late final TextStyle? dialogContentStyle = Theme.of(context).dialogTheme.contentTextStyle;
 
   // Build page //
 
@@ -108,6 +109,7 @@ Have fun!""",
                   cupertinoActions: ezCupertinoActions(
                     onConfirm: onConfirm,
                     onDeny: onDeny,
+                    textStyle: dialogContentStyle,
                     confirmIsDestructive: true,
                     denyIsDefault: true,
                   ),
