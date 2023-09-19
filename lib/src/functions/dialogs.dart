@@ -67,7 +67,6 @@ Future<dynamic> ezColorPicker({
         onDeny: onDeny,
         confirmMsg: confirmMsg,
         denyMsg: denyMsg,
-        textStyle: contentStyle,
         confirmIsDestructive: true,
       ),
       needsClose: false,
