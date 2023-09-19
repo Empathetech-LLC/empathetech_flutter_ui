@@ -115,6 +115,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           cupertinoActions: ezCupertinoActions(
             onConfirm: onConfirm,
+            confirmIsDestructive: true,
             onDeny: onDeny,
             denyMsg: denyMsg,
           ),
