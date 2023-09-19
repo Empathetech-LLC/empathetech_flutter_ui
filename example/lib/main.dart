@@ -39,22 +39,22 @@ final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: <RouteBase>[
     GoRoute(
-      name: 'home',
-      path: '/',
+      name: homeRoute,
+      path: homeRoute,
       builder: (BuildContext context, GoRouterState state) {
         return const HomeScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          name: 'color-settings',
-          path: 'color-settings',
+          name: colorSettingsRoute,
+          path: colorSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const ColorSettingsScreen();
           },
         ),
         GoRoute(
-          name: 'style-settings',
-          path: 'style-settings',
+          name: styleSettingsRoute,
+          path: styleSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const StyleSettingsScreen();
           },
