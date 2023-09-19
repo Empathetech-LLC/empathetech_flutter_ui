@@ -51,31 +51,47 @@ class _ColorSettingState extends State<EzColorSetting> {
           currColor = chosenColor;
         });
       },
-      apply: () {
+      onConfirm: () {
         // Update the user's setting
         EzConfig.instance.preferences.setInt(widget.toControl, currColor.value);
         popScreen(context: context, pass: currColor.value);
       },
-      cancel: () => popScreen(context: context),
+      onDeny: () => popScreen(context: context),
     );
   }
 
   /// Opens an [EzAlertDialog] for the user to choose their next action
   /// Returns the [Color.value] of what was chosen (null if none)
   Future<dynamic> _changeColor(BuildContext context) {
-    final double space = EzConfig.instance.prefs[buttonSpacingKey];
-
     if (widget.textBackgroundKey != null) {
       // Color is a text color
-      // Provide the user with the recommended contrast color based on the
-      // Passed background color key
 
+      // Find the recommended contrast color for the background //
       final String pathKey = widget.textBackgroundKey as String;
 
       Color backgroundColor =
           Color(EzConfig.instance.preferences.getInt(pathKey) ?? EzConfig.instance.prefs[pathKey]);
 
       int recommended = EzContrastColor(backgroundColor).value;
+
+      // Define action button parameters //
+      const String confirmMsg = 'Yes';
+      const String denyMsg = 'Use custom';
+
+      final Icon denyIcon = Icon(PlatformIcons(context).edit);
+
+      final void Function() onConfirm = () {
+        EzConfig.instance.preferences.setInt(widget.toControl, recommended);
+        setState(() {
+          currColor = Color(recommended);
+        });
+        popScreen(context: context, pass: recommended);
+      };
+
+      void Function() onDeny = () async {
+        dynamic chosen = await _openColorPicker(context);
+        popScreen(context: context, pass: chosen);
+      };
 
       return showPlatformDialog(
         context: context,
@@ -91,31 +107,25 @@ class _ColorSettingState extends State<EzColorSetting> {
                 border: Border.all(color: backgroundColor),
               ),
             ),
-            EzSpacer(space),
-
-            // Confirm/deny
-            EzYesNo(
-              onConfirm: () {
-                EzConfig.instance.preferences.setInt(widget.toControl, recommended);
-                setState(() {
-                  currColor = Color(recommended);
-                });
-                popScreen(context: context, pass: recommended);
-              },
-              onDeny: () async {
-                dynamic chosen = await _openColorPicker(context);
-                popScreen(context: context, pass: chosen);
-              },
-              denyIcon: Icon(PlatformIcons(context).edit),
-              denyMsg: 'Use custom',
-            ),
           ],
+          materialActions: ezMaterialActions(
+            onConfirm: onConfirm,
+            onDeny: onDeny,
+            confirmMsg: confirmMsg,
+            denyMsg: denyMsg,
+            denyIcon: denyIcon,
+          ),
+          cupertinoActions: ezCupertinoActions(
+            onConfirm: onConfirm,
+            onDeny: onDeny,
+            confirmMsg: confirmMsg,
+            denyMsg: denyMsg,
+          ),
           needsClose: true,
         ),
       );
     } else {
-      // Non-text color, simply return color picker
-
+      // This is a background color, simply return color picker
       return _openColorPicker(context);
     }
   }
@@ -125,7 +135,23 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Returns the [Color.value] of the "reset color" from [EzConfig.instance.defaults] (null otherwise)
   Future<dynamic> _reset(BuildContext context) {
     final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
-    final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
+    // Define action button parameters //
+    const String confirmMsg = 'Yes';
+    const String denyMsg = 'No';
+
+    final void Function() onConfirm = () {
+      // Remove the user's setting and reset the current state
+      EzConfig.instance.preferences.remove(widget.toControl);
+
+      setState(() {
+        currColor = resetColor;
+      });
+
+      popScreen(context: context, pass: resetColor);
+    };
+
+    void Function() onDeny = () => popScreen(context: context);
 
     return showPlatformDialog(
       context: context,
@@ -141,24 +167,19 @@ class _ColorSettingState extends State<EzColorSetting> {
               border: Border.all(color: EzContrastColor(resetColor)),
             ),
           ),
-          EzSpacer(space),
-
-          EzYesNo(
-            onConfirm: () {
-              // Remove the user's setting and reset the current state
-              EzConfig.instance.preferences.remove(widget.toControl);
-
-              setState(() {
-                currColor = resetColor;
-              });
-
-              popScreen(context: context, pass: resetColor);
-            },
-            onDeny: () => popScreen(context: context),
-            denyMsg: 'Use custom',
-            denyIcon: Icon(PlatformIcons(context).edit),
-          ),
         ],
+        materialActions: ezMaterialActions(
+          onConfirm: onConfirm,
+          onDeny: onDeny,
+          confirmMsg: confirmMsg,
+          denyMsg: denyMsg,
+        ),
+        cupertinoActions: ezCupertinoActions(
+          onConfirm: onConfirm,
+          onDeny: onDeny,
+          confirmMsg: confirmMsg,
+          denyMsg: denyMsg,
+        ),
         needsClose: false,
       ),
     );
