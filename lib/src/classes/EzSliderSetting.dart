@@ -303,37 +303,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 
-    final Color? textColor = Theme.of(context).appBarTheme.titleTextStyle?.color;
-
     return ElevatedButton.icon(
       onPressed: () => showModalBottomSheet(
         context: context,
         builder: (context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter modalSheetSetState) {
-            return Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _buildView(modalSheetSetState, context, style),
-                ),
-                Positioned(
-                  top: margin,
-                  right: margin,
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: () => popScreen(context: context),
-                      child: Icon(
-                        PlatformIcons(context).checkMark,
-                        color: textColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: _buildView(modalSheetSetState, context, style),
             );
           },
         ),
