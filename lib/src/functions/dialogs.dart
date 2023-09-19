@@ -54,6 +54,8 @@ Future<dynamic> ezColorPicker({
           // ignore: deprecated_member_use
           labelTextStyle: contentStyle,
           // Necessary for Cupertino
+
+          portraitOnly: true,
         ),
       ],
       materialActions: ezMaterialActions(
