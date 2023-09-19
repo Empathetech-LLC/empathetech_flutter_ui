@@ -16,7 +16,7 @@ enum SettingType {
   circleSize,
   margin,
   padding,
-  paragraphSpacing,
+  textSpacing,
 }
 
 class EzSliderSetting extends StatefulWidget {
@@ -61,7 +61,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double margin = EzConfig.instance.prefs[marginKey];
   late double padding = EzConfig.instance.prefs[paddingKey];
   late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  late double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
+  late double textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
@@ -148,7 +148,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 style: style,
                 textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
               ),
-              EzSpacer.row(paragraphSpacer),
+              EzSpacer.row(textSpacer),
 
               // Live preview
               Container(
@@ -179,8 +179,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(buttonSpacer),
         ];
 
-      // Paragraph spacing
-      case SettingType.paragraphSpacing:
+      // Text spacing
+      case SettingType.textSpacing:
         return [
           // Title padding
           EzSpacer(padding),
@@ -294,7 +294,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       case SettingType.padding:
         return const Icon(Icons.padding);
 
-      case SettingType.paragraphSpacing:
+      case SettingType.textSpacing:
         return const Icon(Icons.space_bar);
     }
   }

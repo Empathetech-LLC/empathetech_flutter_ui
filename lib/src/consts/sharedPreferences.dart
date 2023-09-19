@@ -16,7 +16,7 @@ const String paddingKey = 'padding';
 const String fontFamilyKey = 'fontFamily';
 
 const String buttonSpacingKey = 'buttonSpacing';
-const String paragraphSpacingKey = 'paragraphSpacing';
+const String textSpacingKey = 'textSpacing';
 
 const String circleDiameterKey = 'circleDiameter';
 

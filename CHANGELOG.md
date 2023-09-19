@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - README
 - EzDialog -> EzAlertDialog
 - Project line length to 99
+- Paragraph -> text
 
 ### Added
 - Example app

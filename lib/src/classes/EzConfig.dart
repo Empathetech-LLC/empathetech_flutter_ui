@@ -20,7 +20,7 @@ const Map<String, dynamic> defaultConfig = {
   paddingKey: 12.5,
 
   buttonSpacingKey: 30.0,
-  paragraphSpacingKey: 35.0,
+  textSpacingKey: 35.0,
 
   circleDiameterKey: 45.0,
 

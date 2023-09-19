@@ -25,7 +25,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
+  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double diameter = EzConfig.instance.prefs[circleDiameterKey];
 
@@ -44,7 +44,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               'Editing: $themeProfile theme',
               style: titleSmall(context),
             ),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
 
             // Settings //
 
@@ -125,7 +125,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 ],
               ),
             ),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
           ],
         ),
       ),

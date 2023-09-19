@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Style settings can be taken directly from EzConfig
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
+  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Color settings should be taken from the current context's theme
   // This way, if/when the theme changes in the backend, the frontend colors will actually respond
@@ -76,7 +76,7 @@ Restart the app for your changes to take full effect!
 Have fun!""",
               style: headlineSmall(context),
             ),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
 
             // Theme mode switch
             const EzThemeModeSwitch(),
@@ -84,7 +84,7 @@ Have fun!""",
 
             // Dominant hand switch
             const EzDominantHandSwitch(),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
 
             // Color settings
             ElevatedButton(
@@ -98,7 +98,7 @@ Have fun!""",
               onPressed: () => context.goNamed(styleSettingsRoute),
               child: const Text('Styling'),
             ),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
 
             // Reset button
             EzSelectableText(
@@ -120,7 +120,7 @@ Have fun!""",
                 ),
               ),
             ),
-            EzSpacer(paragraphSpacer),
+            EzSpacer(textSpacer),
           ],
         ),
       ),

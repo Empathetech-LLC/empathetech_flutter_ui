@@ -22,7 +22,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Gather theme data //
 
-  final double paragraphSpacer = EzConfig.instance.prefs[paragraphSpacingKey];
+  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double diameter = EzConfig.instance.prefs[circleDiameterKey];
 
@@ -82,11 +82,11 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             ),
             EzSpacer(buttonSpacer),
 
-            // Paragraph spacing
+            // Text spacing
             const EzSliderSetting(
-              prefsKey: paragraphSpacingKey,
-              type: SettingType.paragraphSpacing,
-              title: 'Paragraph spacing',
+              prefsKey: textSpacingKey,
+              type: SettingType.textSpacing,
+              title: 'Text spacing',
               min: 10.0,
               max: 100.0,
               steps: 18,
