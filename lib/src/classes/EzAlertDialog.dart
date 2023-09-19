@@ -73,7 +73,11 @@ class EzAlertDialog extends PlatformAlertDialog {
         // Content
         content: materialActions == null
             ? EzScrollView(children: contents)
-            : EzScrollView(children: [...contents!, ...materialActions!]),
+            : EzScrollView(children: [
+                ...contents!,
+                EzSpacer(padding),
+                ...materialActions!,
+              ]),
 
         contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
       ),
