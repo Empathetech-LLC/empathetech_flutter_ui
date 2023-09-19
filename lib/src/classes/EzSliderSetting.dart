@@ -123,8 +123,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   shape: MaterialStatePropertyAll(const CircleBorder()),
                   padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                  fixedSize:
-                      MaterialStatePropertyAll(Size(currValue, currValue)),
+                  fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
                 ),
           ),
           EzSpacer(buttonSpacer),
@@ -269,8 +268,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text(
-            'Reset: ' + EzConfig.instance.defaults[widget.prefsKey].toString()),
+        label: Text('Reset: ' + EzConfig.instance.defaults[widget.prefsKey].toString()),
       ),
       EzSpacer(margin),
     ]);
@@ -305,8 +303,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 
+    final Color? textColor = Theme.of(context).appBarTheme.titleTextStyle?.color;
+
     return ElevatedButton.icon(
-      onPressed: () => showPlatformModalSheet(
+      onPressed: () => showModalBottomSheet(
         context: context,
         builder: (context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter modalSheetSetState) {
@@ -328,8 +328,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                       onTap: () => popScreen(context: context),
                       child: Icon(
                         PlatformIcons(context).checkMark,
-                        color:
-                            Theme.of(context).appBarTheme.titleTextStyle?.color,
+                        color: textColor,
                       ),
                     ),
                   ),
@@ -338,10 +337,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
             );
           },
         ),
-        material: MaterialModalSheetData(
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        ),
-        cupertino: CupertinoModalSheetData(),
       ),
       icon: _buildIcon(),
       label: Text(widget.title),
