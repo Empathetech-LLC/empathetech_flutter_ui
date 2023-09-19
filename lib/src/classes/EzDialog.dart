@@ -5,7 +5,6 @@
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -19,10 +18,8 @@ class EzDialog extends PlatformAlertDialog {
   final List<Widget>? contents;
 
   final Widget? title;
-  final MaterialAlertDialogData Function(BuildContext, PlatformTarget)?
-      material;
-  final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)?
-      cupertino;
+  final MaterialAlertDialogData Function(BuildContext, PlatformTarget)? material;
+  final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)? cupertino;
   final bool needsClose;
 
   /// Styles a [PlatformAlertDialog] with [EzConfig]
@@ -78,17 +75,16 @@ class EzDialog extends PlatformAlertDialog {
         // Content
         content: content ??
             EzScrollView(
-              children:
-                  (needsClose) ? contents! : [...contents!, EzSpacer(padding)],
+              children: (needsClose) ? contents! : [...contents!, EzSpacer(padding)],
             ),
 
         // Actions (2 close || ! 2 close)
         actions: (needsClose)
             ? [
-                GestureDetector(
-                  onTap: () => popScreen(context: context),
-                  child: Text('Close'),
-                ),
+                CupertinoDialogAction(
+                  onPressed: () => popScreen(context: context),
+                  child: const Text('Close'),
+                )
               ]
             : [],
       ),
