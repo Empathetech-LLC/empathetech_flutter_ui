@@ -41,12 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // This way, the app will respond properly to text size changes (page zoom, text scaling, etc)
   // See 'empathetech_flutter_ui/lib/src/functions/textStyles.dart' for the style mappings
   late final TextStyle? resetLinkStyle =
-      titleLarge(context)?.copyWith(decoration: TextDecoration.underline);
-  late final TextStyle? labelStyle = labelLarge(context);
-  late final TextStyle? labelLinkStyle = labelStyle?.copyWith(
-    color: buttonColor,
-    decoration: TextDecoration.underline,
-  );
+      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
   // Build page //
 
