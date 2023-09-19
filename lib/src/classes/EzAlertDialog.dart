@@ -11,85 +11,93 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzAlertDialog extends PlatformAlertDialog {
   final Key? key;
   final Key? widgetKey;
-  final List<Widget>? actions;
-  final Widget? content;
 
-  /// Used in an [EzScrollView]
+  /// Dialog's title
+  final Widget? title;
+
+  /// Dialog's main content
   final List<Widget>? contents;
 
-  final Widget? title;
-  final MaterialAlertDialogData Function(BuildContext, PlatformTarget)? material;
-  final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)? cupertino;
+  /// Material 'action' [Widget]s to be displayed below [contents]
+  /// Will be appended to [contents] in the Material world
+  /// Prevents redundancy in the Cupertino world
+  /// Pairs best with [EzYesNo] for quickly creating platform native alerts
+  final List<Widget>? materialActions;
+
+  /// [CupertinoDialogAction]s to be displayed below [contents]
+  /// Directly used for the [actions] param in the Cupertino world
+  /// Pairs best with [EzYesNo] for quickly creating platform native alerts
+  final List<CupertinoDialogAction>? cupertinoActions;
+
+  /// Cupertino alerts aren't dismissable by tapping outside the renderbox
+  /// Set [needsClose] to true if a default 'Close' [CupertinoDialogAction] is needed
   final bool needsClose;
 
-  /// [PlatformAlertDialog] wrapper that
-  /// Adds an optional [contents] parameter to provide instead of the traditional [content]
-  /// If provided, [contents] will be used in an [EzScrollView]
-  /// Only one option can be provided
-  /// Optionally remove the "Close" action on iOS via [needsClose]
+  /// [PlatformAlertDialog] wrapper that automatically styles Material and Cupertino dialogs
+  /// Replaced the original [content] parameter with [contents]
+  /// [contents] will be displayed in an [EzScrollView]
+  /// [materialActions] are appended to [contents] in the Material world
+  /// [cupertinoActions] are directly used in the Cupertino world
+  /// The split prevents redundancy for the users at render time
   EzAlertDialog({
     this.key,
     this.widgetKey,
-    this.actions,
-    this.content,
-    this.contents,
-    this.title,
-    this.cupertino,
-    this.material,
+    required this.title,
+    required this.contents,
+    this.materialActions,
+    this.cupertinoActions,
     this.needsClose = true,
-  }) : assert(content == null || contents == null,
-            'Either content or contents must be provided, not both.');
+  });
+
+  final double padding = EzConfig.instance.prefs[paddingKey];
 
   @override
   Widget build(BuildContext context) {
-    final double padding = EzConfig.instance.prefs[paddingKey];
+    CupertinoDialogAction _closeAction = CupertinoDialogAction(
+      onPressed: () => popScreen(context: context),
+      child: const Text('Close'),
+    );
 
     return PlatformAlertDialog(
-      // Material (Android)
+      // Material //
+
       material: (context, platform) => MaterialAlertDialogData(
         insetPadding: EdgeInsets.all(padding),
 
         // Title
         title: title,
 
-        titlePadding: EdgeInsets.only(
-          top: padding,
-          left: padding,
-          right: padding,
-        ),
+        // Bottom titlePadding comes from vertical contentPadding
+        titlePadding: EdgeInsets.only(top: padding, left: padding, right: padding),
 
         // Content
-        content: content ?? EzScrollView(children: contents!),
+        content: materialActions == null
+            ? EzScrollView(children: contents)
+            : EzScrollView(children: [...contents!, ...materialActions!]),
 
-        contentPadding: EdgeInsets.symmetric(
-          vertical: padding,
-          horizontal: padding,
-        ),
+        contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
       ),
 
-      // Cupertino (iOS)
+      // Cupertino //
+
       cupertino: (context, platform) => CupertinoAlertDialogData(
         // Title
         title: Padding(
+          // No titlePadding equivalent, have to do it manually
           padding: EdgeInsets.only(bottom: padding),
           child: title,
         ),
 
         // Content
-        content: content ??
-            EzScrollView(
-              children: (needsClose) ? contents! : [...contents!, EzSpacer(padding)],
-            ),
+        content: EzScrollView(
+          children: [
+            ...contents!,
+            EzSpacer(padding), // Ditto for contentPadding
+          ],
+        ),
 
-        // Actions (2 close || ! 2 close)
-        actions: (needsClose)
-            ? [
-                CupertinoDialogAction(
-                  onPressed: () => popScreen(context: context),
-                  child: const Text('Close'),
-                )
-              ]
-            : [],
+        // Actions
+        actions: cupertinoActions == null ? [_closeAction] : [...cupertinoActions!, _closeAction],
       ),
     );
   }
