@@ -33,10 +33,11 @@ Future<dynamic> ezColorPicker({
   required BuildContext context,
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
-  required void Function() apply,
-  required void Function() cancel,
+  required void Function() onConfirm,
+  required void Function() onDeny,
 }) {
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final String confirmMsg = 'Apply';
+  final String denyMsg = 'Cancel';
 
   return showPlatformDialog(
     context: context,
@@ -47,23 +48,25 @@ Future<dynamic> ezColorPicker({
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
+
           // ignore: deprecated_member_use
           labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
-
-          // Above is necessary for Cupertino
-          // It is deprecated, but it points to an also deprecated solution
-          // ...ain't broke...
-        ),
-        EzSpacer(space),
-
-        // Apply/cancel
-        EzYesNo(
-          onConfirm: apply,
-          confirmMsg: 'Apply',
-          onDeny: cancel,
-          denyMsg: 'Cancel',
+          // Necessary for Cupertino
         ),
       ],
+      materialActions: ezMaterialActions(
+        onConfirm: onConfirm,
+        onDeny: onDeny,
+        confirmMsg: confirmMsg,
+        denyMsg: denyMsg,
+      ),
+      cupertinoActions: ezCupertinoActions(
+        onConfirm: onConfirm,
+        onDeny: onDeny,
+        confirmMsg: confirmMsg,
+        denyMsg: denyMsg,
+        confirmIsDestructive: true,
+      ),
       needsClose: false,
     ),
   );
