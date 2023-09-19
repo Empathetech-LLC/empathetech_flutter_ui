@@ -36,10 +36,10 @@ export 'src/classes/EzTransitions.dart';
 export 'src/classes/EzVideoPlayer.dart';
 export 'src/classes/EzWarning.dart';
 export 'src/classes/EzWebLink.dart';
-export 'src/classes/EzYesNo.dart';
 
 // Functions
 export 'src/functions/dialogs.dart';
+export 'src/functions/ezAlertActions.dart';
 export 'src/functions/ezThemeData.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/navigators.dart';
