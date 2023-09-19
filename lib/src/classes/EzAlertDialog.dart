@@ -8,7 +8,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzDialog extends PlatformAlertDialog {
+class EzAlertDialog extends PlatformAlertDialog {
   final Key? key;
   final Key? widgetKey;
   final List<Widget>? actions;
@@ -22,12 +22,12 @@ class EzDialog extends PlatformAlertDialog {
   final CupertinoAlertDialogData Function(BuildContext, PlatformTarget)? cupertino;
   final bool needsClose;
 
-  /// Styles a [PlatformAlertDialog] with [EzConfig]
+  /// [PlatformAlertDialog] wrapper that
   /// Adds an optional [contents] parameter to provide instead of the traditional [content]
   /// If provided, [contents] will be used in an [EzScrollView]
   /// Only one option can be provided
   /// Optionally remove the "Close" action on iOS via [needsClose]
-  EzDialog({
+  EzAlertDialog({
     this.key,
     this.widgetKey,
     this.actions,
@@ -70,7 +70,10 @@ class EzDialog extends PlatformAlertDialog {
       // Cupertino (iOS)
       cupertino: (context, platform) => CupertinoAlertDialogData(
         // Title
-        title: title,
+        title: Padding(
+          padding: EdgeInsets.only(bottom: padding),
+          child: title,
+        ),
 
         // Content
         content: content ??

@@ -60,7 +60,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
-  /// Opens an [EzDialog] for the user to choose their next action
+  /// Opens an [EzAlertDialog] for the user to choose their next action
   /// Returns the [Color.value] of what was chosen (null if none)
   Future<dynamic> _changeColor(BuildContext context) {
     final double space = EzConfig.instance.prefs[buttonSpacingKey];
@@ -79,7 +79,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       return showPlatformDialog(
         context: context,
-        builder: (context) => EzDialog(
+        builder: (context) => EzAlertDialog(
           title: const EzSelectableText('Use recommended?'),
           contents: [
             // Recommended preview
@@ -120,7 +120,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzDialog] for confirming a reset to [toControl]'s value in [EzConfig.instance.defaults]
+  /// Opens an [EzAlertDialog] for confirming a reset to [toControl]'s value in [EzConfig.instance.defaults]
   /// A preview of the reset color is shown
   /// Returns the [Color.value] of the "reset color" from [EzConfig.instance.defaults] (null otherwise)
   Future<dynamic> _reset(BuildContext context) {
@@ -129,7 +129,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzDialog(
+      builder: (context) => EzAlertDialog(
         title: const EzSelectableText('Reset to...'),
         contents: [
           // Color preview

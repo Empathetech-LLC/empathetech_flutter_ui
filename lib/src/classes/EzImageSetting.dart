@@ -25,7 +25,7 @@ class EzImageSetting extends StatefulWidget {
   final String title;
 
   /// Who made this/where'd ya get it?
-  /// Credits [String] will be displayed via [EzDialog] when holding the [ElevatedButton]
+  /// Credits [String] will be displayed via [EzAlertDialog] when holding the [ElevatedButton]
   final String credits;
 
   /// Effectively whether the image is nullable
@@ -66,7 +66,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [EzDialog] for choosing the [ImageSource] for updating the prefsKey
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating the prefsKey
   /// Selection is sent to [changeImage]
   Future<dynamic> _chooseImage(BuildContext context) {
     List<Widget> options = [
@@ -140,7 +140,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzDialog(
+      builder: (context) => EzAlertDialog(
         title: EzSelectableText('Update $title'),
         contents: options,
       ),
@@ -162,7 +162,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       // Show credits
       onLongPress: () => showPlatformDialog(
         context: context,
-        builder: (context) => EzDialog(
+        builder: (context) => EzAlertDialog(
           title: const EzSelectableText('Credit to:'),
           contents: [EzSelectableText(widget.credits)],
         ),

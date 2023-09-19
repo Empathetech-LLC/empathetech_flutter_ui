@@ -24,7 +24,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
-  /// Builds an [EzDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
+  /// Builds an [EzAlertDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
   /// Returns the chosen font's name
   Future<dynamic> _chooseGoogleFont(BuildContext context) {
     List<Widget> buttons = [];
@@ -52,7 +52,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzDialog(
+      builder: (context) => EzAlertDialog(
         title: const EzSelectableText('Choose a font'),
         contents: buttons,
       ),

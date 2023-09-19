@@ -14,7 +14,7 @@ export 'src/classes/EzBackAction.dart';
 export 'src/classes/EzColors.dart';
 export 'src/classes/EzColorSetting.dart';
 export 'src/classes/EzConfig.dart';
-export 'src/classes/EzDialog.dart';
+export 'src/classes/EzAlertDialog.dart';
 export 'src/classes/EzDominantHandSwitch.dart';
 export 'src/classes/EzFontSetting.dart';
 export 'src/classes/EzImage.dart';

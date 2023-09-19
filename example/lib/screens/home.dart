@@ -98,7 +98,7 @@ Have fun!""",
               style: resetLinkStyle,
               onTap: () => showPlatformDialog(
                 context: context,
-                builder: (context) => EzDialog(
+                builder: (context) => EzAlertDialog(
                   title: const EzSelectableText('Reset all settings?'),
                   contents: [
                     EzYesNo(

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Log the passed message and display an [EzDialog] for the user
+/// Log the passed message and display an [EzAlertDialog] for the user
 /// Should always return null via [popScreen]
 Future<dynamic> logAlert(
   BuildContext context,
@@ -19,7 +19,7 @@ Future<dynamic> logAlert(
   log(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzDialog(
+    builder: (context) => EzAlertDialog(
       title: const EzSelectableText('Attention:'),
       contents: [
         EzSelectableText(message),
@@ -28,7 +28,7 @@ Future<dynamic> logAlert(
   );
 }
 
-/// Wrap a [ColorPicker] in an [EzDialog]
+/// Wrap a [ColorPicker] in an [EzAlertDialog]
 Future<dynamic> ezColorPicker({
   required BuildContext context,
   required Color startColor,
@@ -40,7 +40,7 @@ Future<dynamic> ezColorPicker({
 
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzDialog(
+    builder: (context) => EzAlertDialog(
       title: const EzSelectableText('Pick a color!'),
       contents: [
         // Color picker
