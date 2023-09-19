@@ -50,6 +50,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
   required void Function() onDeny,
   String confirmMsg = 'Yes',
   String denyMsg = 'No',
+  required TextStyle? textStyle,
   bool confirmIsDefault = false,
   bool denyIsDefault = false,
   bool confirmIsDestructive = false,
@@ -60,6 +61,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     CupertinoDialogAction(
       onPressed: onConfirm,
       child: Text(confirmMsg),
+      textStyle: textStyle,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -68,6 +70,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     CupertinoDialogAction(
       onPressed: onDeny,
       child: Text(denyMsg),
+      textStyle: textStyle,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),

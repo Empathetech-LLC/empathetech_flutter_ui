@@ -39,6 +39,8 @@ Future<dynamic> ezColorPicker({
   final String confirmMsg = 'Apply';
   final String denyMsg = 'Cancel';
 
+  TextStyle? contentStyle = Theme.of(context).dialogTheme.contentTextStyle;
+
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
@@ -50,7 +52,7 @@ Future<dynamic> ezColorPicker({
           onColorChanged: onColorChange,
 
           // ignore: deprecated_member_use
-          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+          labelTextStyle: contentStyle,
           // Necessary for Cupertino
         ),
       ],
@@ -65,6 +67,7 @@ Future<dynamic> ezColorPicker({
         onDeny: onDeny,
         confirmMsg: confirmMsg,
         denyMsg: denyMsg,
+        textStyle: contentStyle,
         confirmIsDestructive: true,
       ),
       needsClose: false,
