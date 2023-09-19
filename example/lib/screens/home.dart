@@ -52,6 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Define reset button parameters //
+    final void Function() onConfirm = () {
+      EzConfig.instance.preferences.clear();
+      popScreen(context: context, pass: true);
+    };
+
+    final void Function() onDeny = () => popScreen(context: context);
+
     return ExampleScaffold(
       body: EzScreen(
         child: EzScrollView(
@@ -100,15 +108,9 @@ Have fun!""",
                 context: context,
                 builder: (context) => EzAlertDialog(
                   title: const EzSelectableText('Reset all settings?'),
-                  contents: [
-                    EzYesNo(
-                      onConfirm: () {
-                        EzConfig.instance.preferences.clear();
-                        popScreen(context: context, pass: true);
-                      },
-                      onDeny: () => popScreen(context: context),
-                    ),
-                  ],
+                  contents: [const Text('Cannot be undone')],
+                  materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
+                  cupertinoActions: ezCupertinoActions(onConfirm: onConfirm, onDeny: onDeny),
                   needsClose: false,
                 ),
               ),
