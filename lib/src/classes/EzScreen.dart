@@ -24,8 +24,6 @@ class EzScreen extends StatelessWidget {
   final Clip clipBehavior;
 
   /// [Container] wrapper that defaults to max size with a margin from [EzConfig]
-  /// The [Container] is also wrapped in a [GestureDetector] for faking trackpad support
-  /// Flutter has no easy way of implementing trackpad swipes, so a click and drag to the right will pop the stack
   const EzScreen({
     // Container
     this.key,
