@@ -47,7 +47,7 @@ ThemeData ezThemeData({required bool light}) {
     size: buttonTextStyle.fontSize,
   );
 
-  final TextStyle pageSelection = buildBodyLarge(backgroundTextColor);
+  final TextStyle pageTextStyle = buildBodyLarge(backgroundTextColor);
 
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
@@ -141,7 +141,7 @@ ThemeData ezThemeData({required bool light}) {
 
     // Dropdown Menu
     dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: pageSelection,
+      textStyle: pageTextStyle,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.all(padding),
         fillColor: backgroundColor,
