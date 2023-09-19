@@ -75,7 +75,6 @@ class _ColorSettingState extends State<EzColorSetting> {
       int recommended = EzContrastColor(backgroundColor).value;
 
       // Define action button parameters //
-      const String confirmMsg = 'Yes';
       const String denyMsg = 'Use custom';
 
       final Icon denyIcon = Icon(PlatformIcons(context).edit);
@@ -111,14 +110,12 @@ class _ColorSettingState extends State<EzColorSetting> {
           materialActions: ezMaterialActions(
             onConfirm: onConfirm,
             onDeny: onDeny,
-            confirmMsg: confirmMsg,
             denyMsg: denyMsg,
             denyIcon: denyIcon,
           ),
           cupertinoActions: ezCupertinoActions(
             onConfirm: onConfirm,
             onDeny: onDeny,
-            confirmMsg: confirmMsg,
             denyMsg: denyMsg,
           ),
           needsClose: true,
@@ -137,8 +134,6 @@ class _ColorSettingState extends State<EzColorSetting> {
     final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
 
     // Define action button parameters //
-    const String confirmMsg = 'Yes';
-    const String denyMsg = 'No';
 
     final void Function() onConfirm = () {
       // Remove the user's setting and reset the current state
@@ -151,7 +146,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       popScreen(context: context, pass: resetColor);
     };
 
-    void Function() onDeny = () => popScreen(context: context);
+    final void Function() onDeny = () => popScreen(context: context);
 
     return showPlatformDialog(
       context: context,
@@ -168,18 +163,8 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
           ),
         ],
-        materialActions: ezMaterialActions(
-          onConfirm: onConfirm,
-          onDeny: onDeny,
-          confirmMsg: confirmMsg,
-          denyMsg: denyMsg,
-        ),
-        cupertinoActions: ezCupertinoActions(
-          onConfirm: onConfirm,
-          onDeny: onDeny,
-          confirmMsg: confirmMsg,
-          denyMsg: denyMsg,
-        ),
+        materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
+        cupertinoActions: ezCupertinoActions(onConfirm: onConfirm, onDeny: onDeny),
         needsClose: false,
       ),
     );
