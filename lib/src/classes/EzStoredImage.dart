@@ -85,8 +85,7 @@ class EzStoredImage extends Image {
 /// In a total failure event, a stock owl image will be shown
 ImageProvider getProvider(String prefsKey) {
   // Something went wrong, return watchful owl
-  const String errorURL =
-      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
+  const String errorURL = 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
   dynamic prefsValue = EzConfig.instance.prefs[prefsKey];
 

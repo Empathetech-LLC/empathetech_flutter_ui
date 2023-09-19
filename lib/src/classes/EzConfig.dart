@@ -103,8 +103,7 @@ class EzConfig {
       Map<String, dynamic> prefs = new Map.from(mergedDefaults);
 
       // Load the keys that have been overwritten
-      List<String> overwritten =
-          prefs.keys.toSet().intersection(preferences.getKeys()).toList();
+      List<String> overwritten = prefs.keys.toSet().intersection(preferences.getKeys()).toList();
 
       overwritten.forEach((key) {
         dynamic value = prefs[key];
@@ -135,8 +134,7 @@ class EzConfig {
 
       // Load hand setting
       bool? isRight = preferences.getBool(isRightKey);
-      final Hand dominantSide =
-          (isRight == null || isRight == true) ? Hand.right : Hand.left;
+      final Hand dominantSide = (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
       _instance = EzConfig._(
         assets: assetPaths,

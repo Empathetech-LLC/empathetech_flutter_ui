@@ -71,8 +71,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          (_currSide == Hand.right) ? _children : _children.reversed.toList(),
+      children: (_currSide == Hand.right) ? _children : _children.reversed.toList(),
     );
   }
 }

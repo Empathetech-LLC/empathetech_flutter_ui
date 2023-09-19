@@ -72,9 +72,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       final String pathKey = widget.textBackgroundKey as String;
 
-      Color backgroundColor = Color(
-          EzConfig.instance.preferences.getInt(pathKey) ??
-              EzConfig.instance.prefs[pathKey]);
+      Color backgroundColor =
+          Color(EzConfig.instance.preferences.getInt(pathKey) ?? EzConfig.instance.prefs[pathKey]);
 
       int recommended = EzContrastColor(backgroundColor).value;
 
@@ -97,8 +96,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             // Confirm/deny
             EzYesNo(
               onConfirm: () {
-                EzConfig.instance.preferences
-                    .setInt(widget.toControl, recommended);
+                EzConfig.instance.preferences.setInt(widget.toControl, recommended);
                 setState(() {
                   currColor = Color(recommended);
                 });
@@ -126,8 +124,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// A preview of the reset color is shown
   /// Returns the [Color.value] of the "reset color" from [EzConfig.instance.defaults] (null otherwise)
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor =
-        Color(EzConfig.instance.defaults[widget.toControl]);
+    final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
     final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
     return showPlatformDialog(

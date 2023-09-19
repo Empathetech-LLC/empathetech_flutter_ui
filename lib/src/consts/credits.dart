@@ -4,8 +4,7 @@
  */
 
 /// If you want to show some love
-const String EmpathetechPayPal =
-    'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
+const String EmpathetechPayPal = 'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
 
 /// If you want to show some love
 const String EmpathetechVenmo = 'https://venmo.com/empathetech-llc';
@@ -17,8 +16,7 @@ const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
 const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
 
 /// One of us, one of us, one of us!
-const String EmpathetechFoldingTeam =
-    'https://stats.foldingathome.org/team/1063265';
+const String EmpathetechFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
 /// One of us, one of us, one of us!
 const String EmpathetechCommunityContact = 'community@empathetech.net';

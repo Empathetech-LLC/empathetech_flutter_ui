@@ -34,8 +34,7 @@ class EzYesNo extends StatelessWidget {
     final Icon confirm = confirmIcon ?? Icon(PlatformIcons(context).checkMark);
     final Icon deny = denyIcon ?? Icon(PlatformIcons(context).clear);
 
-    final double space =
-        (spacer is double) ? spacer : EzConfig.instance.prefs[buttonSpacingKey];
+    final double space = (spacer is double) ? spacer : EzConfig.instance.prefs[buttonSpacingKey];
 
     return axis == Axis.vertical
         ? Column(

@@ -51,8 +51,7 @@ class EzAppProvider extends StatelessWidget {
     // Cupertino Dark requires some customization
     // Guide taken from...
     // https://github.com/stryder-dev/flutter_platform_widgets/wiki/Theming
-    const darkDefaultCupertinoTheme =
-        CupertinoThemeData(brightness: Brightness.dark);
+    const darkDefaultCupertinoTheme = CupertinoThemeData(brightness: Brightness.dark);
 
     final CupertinoThemeData cupertinoDark = MaterialBasedCupertinoThemeData(
       materialTheme: materialDark.copyWith(
@@ -60,11 +59,9 @@ class EzAppProvider extends StatelessWidget {
           brightness: Brightness.dark,
           barBackgroundColor: darkDefaultCupertinoTheme.barBackgroundColor,
           textTheme: CupertinoTextThemeData(
-            navActionTextStyle: darkDefaultCupertinoTheme
-                .textTheme.navActionTextStyle
+            navActionTextStyle: darkDefaultCupertinoTheme.textTheme.navActionTextStyle
                 .copyWith(color: const Color(0xF0F9F9F9)),
-            navLargeTitleTextStyle: darkDefaultCupertinoTheme
-                .textTheme.navLargeTitleTextStyle
+            navLargeTitleTextStyle: darkDefaultCupertinoTheme.textTheme.navLargeTitleTextStyle
                 .copyWith(color: const Color(0xF0F9F9F9)),
           ),
         ),
