@@ -1,4 +1,5 @@
 import '../utils/utils.dart';
+import '../screens/screens.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -79,14 +80,14 @@ Have fun!""",
 
             // Color settings
             ElevatedButton(
-              onPressed: () => context.goNamed('color-settings'),
+              onPressed: () => context.goNamed(colorSettingsRoute),
               child: const Text('Colors'),
             ),
             EzSpacer(buttonSpacer),
 
             // Style settings
             ElevatedButton(
-              onPressed: () => context.goNamed('style-settings'),
+              onPressed: () => context.goNamed(styleSettingsRoute),
               child: const Text('Styling'),
             ),
             EzSpacer(paragraphSpacer),

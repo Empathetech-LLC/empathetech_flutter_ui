@@ -1,3 +1,5 @@
+import '../screens/screens.dart';
+
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -43,7 +45,7 @@ class TitleBar extends StatelessWidget {
       EzLink(
         text: 'Have fun!',
         style: style,
-        action: () => context.goNamed('settings'),
+        action: () => context.goNamed(homeRoute),
         semanticsLabel: 'Return to the home screen',
       ),
     );
