@@ -14,8 +14,8 @@ import 'package:flutter/cupertino.dart';
 List<Widget>? ezMaterialActions({
   required void Function() onConfirm,
   required void Function() onDeny,
-  required String confirmMsg,
-  required String denyMsg,
+  String confirmMsg = 'Yes',
+  String denyMsg = 'No',
   Icon? confirmIcon,
   Icon? denyIcon,
 }) {
@@ -48,8 +48,8 @@ List<Widget>? ezMaterialActions({
 List<CupertinoDialogAction>? ezCupertinoActions({
   required void Function() onConfirm,
   required void Function() onDeny,
-  required String confirmMsg,
-  required String denyMsg,
+  String confirmMsg = 'Yes',
+  String denyMsg = 'No',
   bool confirmIsDefault = false,
   bool denyIsDefault = false,
   bool confirmIsDestructive = false,
