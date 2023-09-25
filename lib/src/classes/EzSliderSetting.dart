@@ -19,6 +19,25 @@ enum SettingType {
   textSpacing,
 }
 
+extension SettingLabel on SettingType {
+  String get label {
+    switch (this) {
+      case SettingType.buttonHeight:
+        return "button height.";
+      case SettingType.buttonSpacing:
+        return "button spacing.";
+      case SettingType.circleSize:
+        return "circle button size.";
+      case SettingType.margin:
+        return "margin. Margin is the amount of empty space between the edge of a container (like the app window) and it's contents.";
+      case SettingType.padding:
+        return "padding. Padding is the distance between grouped objects. A title and it's description, for example.";
+      case SettingType.textSpacing:
+        return "text spacing.";
+    }
+  }
+}
+
 class EzSliderSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String prefsKey;
@@ -303,22 +322,28 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 
-    return ElevatedButton.icon(
-      onPressed: () => showModalBottomSheet(
-        context: context,
-        builder: (context) => StatefulBuilder(
-          builder: (BuildContext context, StateSetter modalSheetSetState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: _buildView(modalSheetSetState, context, style),
-            );
-          },
+    return Semantics(
+      button: true,
+      hint: "Customize the app's " + widget.type.label,
+      child: ExcludeSemantics(
+        child: ElevatedButton.icon(
+          onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (context) => StatefulBuilder(
+              builder: (BuildContext context, StateSetter modalSheetSetState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: _buildView(modalSheetSetState, context, style),
+                );
+              },
+            ),
+          ),
+          icon: _buildIcon(),
+          label: Text(widget.title),
         ),
       ),
-      icon: _buildIcon(),
-      label: Text(widget.title),
     );
   }
 }

@@ -98,25 +98,30 @@ Have fun!""",
             EzSpacer(textSpacer),
 
             // Reset button
-            EzSelectableText(
-              'Reset all',
-              style: resetLinkStyle,
-              onTap: () => showPlatformDialog(
-                context: context,
-                builder: (context) => EzAlertDialog(
-                  title: const EzSelectableText('Reset all settings?'),
-                  contents: [const Text('Cannot be undone')],
-                  materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
-                  cupertinoActions: ezCupertinoActions(
-                    onConfirm: onConfirm,
-                    onDeny: onDeny,
-                    confirmIsDestructive: true,
-                    denyIsDefault: true,
+            Semantics(
+              button: true,
+              hint: 'Reset all custom settings',
+              child: ExcludeSemantics(
+                child: EzSelectableText(
+                  'Reset all',
+                  style: resetLinkStyle,
+                  onTap: () => showPlatformDialog(
+                    context: context,
+                    builder: (context) => EzAlertDialog(
+                      title: const EzSelectableText('Reset all settings?'),
+                      contents: [const Text('Cannot be undone')],
+                      materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
+                      cupertinoActions: ezCupertinoActions(
+                        onConfirm: onConfirm,
+                        onDeny: onDeny,
+                        confirmIsDestructive: true,
+                        denyIsDefault: true,
+                      ),
+                      needsClose: false,
+                    ),
                   ),
-                  needsClose: false,
                 ),
               ),
-              semanticsLabel: 'Activate to reset all custom settings',
             ),
             EzSpacer(textSpacer),
           ],
