@@ -25,14 +25,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     DropdownMenuItem<Hand>(
       child: Semantics(
         hint: 'Touch points will favor the right side of the screen',
-        child: Text('Right'),
+        child: ExcludeSemantics(child: Text('Right')),
       ),
       value: Hand.right,
     ),
     DropdownMenuItem<Hand>(
       child: Semantics(
         hint: 'Touch points will favor the left side of the screen',
-        child: Text('Left'),
+        child: ExcludeSemantics(child: Text('Left')),
       ),
       value: Hand.left,
     ),
@@ -44,17 +44,17 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     List<Widget> _children = [
       // Label
-      Semantics(
-        label: 'Set your dominant hand',
-        readOnly: true,
-        child: EzSelectableText('Dominant hand', style: style),
+      EzSelectableText(
+        'Dominant hand',
+        style: style,
+        semanticsLabel: 'Set your dominant hand',
       ),
 
       EzSpacer.row(space),
 
       // Button
       Semantics(
-        hint: 'Open to choose left or right',
+        hint: 'Open to choose left or right. Currently set to:',
         child: DropdownButton<Hand>(
           value: _currSide,
           items: items,

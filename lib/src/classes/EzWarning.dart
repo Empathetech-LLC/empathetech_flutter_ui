@@ -51,6 +51,7 @@ class EzWarning extends Card {
                   Semantics(
                     button: false,
                     readOnly: true,
+                    label: 'Important message below',
                     child: EzSelectableText(
                       warning,
                       style: style,

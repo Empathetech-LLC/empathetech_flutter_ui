@@ -24,21 +24,21 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Copy the devices theme mode',
-        child: Text('System'),
+        child: ExcludeSemantics(child: Text('System')),
       ),
       value: ThemeMode.system,
     ),
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Always use the light theme',
-        child: Text('Light'),
+        child: ExcludeSemantics(child: Text('Light')),
       ),
       value: ThemeMode.light,
     ),
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Always use the dark theme',
-        child: Text('Dark'),
+        child: ExcludeSemantics(child: Text('Dark')),
       ),
       value: ThemeMode.dark,
     ),
@@ -54,16 +54,17 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        Semantics(
-          label: 'Select theme mode',
-          readOnly: true,
-          child: EzSelectableText('Theme mode', style: style),
+        EzSelectableText(
+          'Theme mode',
+          style: style,
+          semanticsLabel: 'Select theme mode',
         ),
+
         EzSpacer.row(space),
 
         // Button
         Semantics(
-          hint: 'Open to select a theme mode',
+          hint: 'Open to select a theme mode. Currently set to:',
           child: DropdownButton<ThemeMode>(
             value: _currMode,
             items: items,
