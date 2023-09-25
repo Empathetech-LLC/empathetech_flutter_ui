@@ -124,11 +124,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: widget.type.name + ' is currently set to ' + displayValue,
+            label: '${widget.type.name} is currently set to $displayValue',
             child: ExcludeSemantics(
               child: ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: ' + displayValue),
+                child: Text('Currently: $displayValue'),
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(double.infinity, currValue),
                 ),
@@ -148,7 +148,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: widget.type.name + ' is currently set to ' + displayValue,
+            label: '${widget.type.name} is currently set to $displayValue',
             child: ExcludeSemantics(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -156,12 +156,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 children: [
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: Text('Currently: ' + displayValue),
+                    child: Text('Currently: $displayValue'),
                   ),
                   EzSpacer(currValue),
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: Text('Currently: ' + displayValue),
+                    child: Text('Currently: $displayValue'),
                   ),
                   EzSpacer(buttonSpacer),
                 ],
@@ -180,7 +180,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: widget.type.name + ' is currently set to ' + displayValue,
+            label: '${widget.type.name} is currently set to $displayValue',
             child: ExcludeSemantics(
               child: ElevatedButton(
                 onPressed: doNothing,
@@ -212,7 +212,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Live label
-              EzSelectableText('Currently: ' + displayValue, style: style),
+              EzSelectableText('Currently: $displayValue', style: style),
               EzSpacer.row(textSpacer),
 
               // Live preview
@@ -239,7 +239,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: ' + displayValue),
+            child: Text('Currently: $displayValue'),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -256,11 +256,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Thing 1
-              EzSelectableText('Currently: ' + displayValue, style: style),
+              EzSelectableText('Currently: $displayValue', style: style),
               SizedBox(height: currValue),
 
               // Thing 2
-              EzSelectableText('Currently: ' + displayValue, style: style),
+              EzSelectableText('Currently: $displayValue', style: style),
               SizedBox(height: buttonSpacer),
             ],
           ),
@@ -320,7 +320,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: 'Reset ' + widget.type.name + ' to ' + defaultValue.toStringAsFixed(widget.decimals),
+        hint: 'Reset ${widget.type.name} to ${defaultValue.toStringAsFixed(widget.decimals)}',
         child: ExcludeSemantics(
           child: ElevatedButton.icon(
             onPressed: () {
@@ -330,7 +330,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text('Reset: ' + defaultValue.toStringAsFixed(widget.decimals)),
+            label: Text('Reset: ${defaultValue.toStringAsFixed(widget.decimals)}'),
           ),
         ),
       ),
