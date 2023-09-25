@@ -288,13 +288,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
         constraints: BoxConstraints(
           maxWidth: 700, // Chosen via visual inspection
         ),
-        child: PlatformSlider(
-          // Function
+        child: Slider(
+          // Values
           value: currValue,
-
           min: widget.min,
           max: widget.max,
+          divisions: widget.steps,
 
+          // Functions
           onChanged: (double value) {
             // Just update the on screen value while sliding around
             modalSheetSetState(() {
@@ -310,25 +311,27 @@ class _SliderSettingState extends State<EzSliderSetting> {
             }
           },
 
-          // Form
-          divisions: widget.steps,
+          // Sementics
+          semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
         ),
       ),
       EzSpacer(buttonSpacer),
 
       // Reset button
-      ElevatedButton.icon(
-        onPressed: () {
-          EzConfig.instance.preferences.remove(widget.prefsKey);
-          modalSheetSetState(() {
-            currValue = EzConfig.instance.defaults[widget.prefsKey];
-          });
-        },
-        icon: Icon(PlatformIcons(context).refresh),
-        label: Text(
-          'Reset: ' +
-              (EzConfig.instance.defaults[widget.prefsKey] as double)
-                  .toStringAsFixed(widget.decimals),
+      Semantics(
+        button: true,
+        hint: 'Reset ' + widget.type.name + ' to ' + defaultValue.toStringAsFixed(widget.decimals),
+        child: ExcludeSemantics(
+          child: ElevatedButton.icon(
+            onPressed: () {
+              EzConfig.instance.preferences.remove(widget.prefsKey);
+              modalSheetSetState(() {
+                currValue = defaultValue;
+              });
+            },
+            icon: Icon(PlatformIcons(context).refresh),
+            label: Text('Reset: ' + defaultValue.toStringAsFixed(widget.decimals)),
+          ),
         ),
       ),
       EzSpacer(margin),
