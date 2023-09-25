@@ -35,36 +35,50 @@ class EzWarning extends Card {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Title
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Thing1
-                Icon(
-                  Icons.warning,
-                  color: iconColor,
-                  size: style?.fontSize,
-                ),
-                EzSpacer.row(padding),
+            MergeSemantics(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Thing1
+                  Icon(
+                    Icons.warning,
+                    color: iconColor,
+                    size: style?.fontSize,
+                  ),
+                  EzSpacer.row(padding),
 
-                EzSelectableText(
-                  warning,
-                  style: style,
-                ),
-                EzSpacer.row(padding),
+                  Semantics(
+                    button: false,
+                    readOnly: true,
+                    child: EzSelectableText(
+                      warning,
+                      style: style,
+                    ),
+                  ),
 
-                // Thing 2
-                Icon(
-                  Icons.warning,
-                  color: iconColor,
-                  size: style?.fontSize,
-                ),
-              ],
+                  EzSpacer.row(padding),
+
+                  // Thing 2
+                  Icon(
+                    Icons.warning,
+                    color: iconColor,
+                    size: style?.fontSize,
+                  ),
+                ],
+              ),
             ),
             EzSpacer(padding),
 
             // Label
-            EzSelectableText(message, style: style),
+            Semantics(
+              button: false,
+              readOnly: true,
+              child: EzSelectableText(
+                message,
+                style: style,
+              ),
+            ),
           ],
         ),
       ),
