@@ -186,7 +186,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         EzSelectableText(
           widget.message,
           style: style,
-          semanticsLabel: 'Customize the ' + widget.message + ' color',
+          semanticsLabel: 'Customize the ${widget.message} color',
         ),
         EzSpacer.row(space),
 

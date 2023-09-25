@@ -30,7 +30,7 @@ class EzWarning extends StatelessWidget {
     return Semantics(
       button: false,
       readOnly: true,
-      label: warning + ', ' + message,
+      label: '$warning, $message',
       child: ExcludeSemantics(
         child: Card(
           child: Container(
