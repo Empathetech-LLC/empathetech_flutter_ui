@@ -41,11 +41,16 @@ class TitleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzSelectableText title = EzSelectableText.rich(
-      EzLink(
-        text: 'Have fun!',
-        style: style,
-        action: () => context.goNamed(homeRoute),
+    final Widget title = Semantics(
+      header: true,
+      button: true,
+      hint: 'Return to the home screen',
+      child: EzSelectableText.rich(
+        EzLink(
+          text: 'EFUI',
+          style: style,
+          action: () => context.goNamed(homeRoute),
+        ),
       ),
     );
 
