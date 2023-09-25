@@ -37,34 +37,42 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     List<Widget> _children = [
       // Label
-      EzSelectableText('Dominant hand', style: style),
+      Semantics(
+        label: 'Select you dominant hand',
+        readOnly: true,
+        child: EzSelectableText('Dominant hand', style: style),
+      ),
+
       EzSpacer.row(space),
 
       // Button
-      DropdownButton<Hand>(
-        value: _currSide,
-        items: items,
-        dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-        onChanged: (Hand? newDominantSide) {
-          switch (newDominantSide) {
-            case Hand.right:
-              EzConfig.instance.preferences.remove(isRightKey);
-              setState(() {
-                _currSide = Hand.right;
-              });
-              break;
+      Semantics(
+        hint: 'Tap to set left or right',
+        child: DropdownButton<Hand>(
+          value: _currSide,
+          items: items,
+          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+          onChanged: (Hand? newDominantSide) {
+            switch (newDominantSide) {
+              case Hand.right:
+                EzConfig.instance.preferences.remove(isRightKey);
+                setState(() {
+                  _currSide = Hand.right;
+                });
+                break;
 
-            case Hand.left:
-              EzConfig.instance.preferences.setBool(isRightKey, false);
-              setState(() {
-                _currSide = Hand.left;
-              });
-              break;
+              case Hand.left:
+                EzConfig.instance.preferences.setBool(isRightKey, false);
+                setState(() {
+                  _currSide = Hand.left;
+                });
+                break;
 
-            default:
-              break;
-          }
-        },
+              default:
+                break;
+            }
+          },
+        ),
       ),
     ];
 

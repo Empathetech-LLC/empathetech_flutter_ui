@@ -44,44 +44,51 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        EzSelectableText('Theme mode', style: style),
+        Semantics(
+          label: 'Select theme mode',
+          readOnly: true,
+          child: EzSelectableText('Theme mode', style: style),
+        ),
         EzSpacer.row(space),
 
         // Button
-        DropdownButton<ThemeMode>(
-          value: _currMode,
-          items: items,
-          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-          onChanged: (ThemeMode? newThemeMode) {
-            switch (newThemeMode) {
-              case ThemeMode.system:
-                EzConfig.instance.preferences.remove(isLightKey);
-                setState(() {
-                  _currMode = ThemeMode.system;
-                  PlatformTheme.of(context)!.themeMode = ThemeMode.system;
-                });
-                break;
+        Semantics(
+          hint: 'Tap to select a theme mode',
+          child: DropdownButton<ThemeMode>(
+            value: _currMode,
+            items: items,
+            dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+            onChanged: (ThemeMode? newThemeMode) {
+              switch (newThemeMode) {
+                case ThemeMode.system:
+                  EzConfig.instance.preferences.remove(isLightKey);
+                  setState(() {
+                    _currMode = ThemeMode.system;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                  });
+                  break;
 
-              case ThemeMode.light:
-                EzConfig.instance.preferences.setBool(isLightKey, true);
-                setState(() {
-                  _currMode = ThemeMode.light;
-                  PlatformTheme.of(context)!.themeMode = ThemeMode.light;
-                });
-                break;
+                case ThemeMode.light:
+                  EzConfig.instance.preferences.setBool(isLightKey, true);
+                  setState(() {
+                    _currMode = ThemeMode.light;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                  });
+                  break;
 
-              case ThemeMode.dark:
-                EzConfig.instance.preferences.setBool(isLightKey, false);
-                setState(() {
-                  _currMode = ThemeMode.dark;
-                  PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
-                });
-                break;
+                case ThemeMode.dark:
+                  EzConfig.instance.preferences.setBool(isLightKey, false);
+                  setState(() {
+                    _currMode = ThemeMode.dark;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                  });
+                  break;
 
-              default:
-                break;
-            }
-          },
+                default:
+                  break;
+              }
+            },
+          ),
         ),
       ],
     );
