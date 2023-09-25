@@ -53,7 +53,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
         // Button
         Semantics(
-          hint: 'Tap to select a theme mode',
+          hint: 'Open to select a theme mode',
           child: DropdownButton<ThemeMode>(
             value: _currMode,
             items: items,

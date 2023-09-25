@@ -47,7 +47,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
       // Button
       Semantics(
-        hint: 'Tap to set left or right',
+        hint: 'Open to choose left or right',
         child: DropdownButton<Hand>(
           value: _currSide,
           items: items,
