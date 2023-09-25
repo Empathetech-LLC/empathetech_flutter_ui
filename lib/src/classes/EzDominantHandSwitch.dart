@@ -25,14 +25,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     DropdownMenuItem<Hand>(
       child: Semantics(
         hint: 'Touch points will favor the right side of the screen',
-        child: ExcludeSemantics(child: Text('Right')),
+        child: ExcludeSemantics(child: const Text('Right')),
       ),
       value: Hand.right,
     ),
     DropdownMenuItem<Hand>(
       child: Semantics(
         hint: 'Touch points will favor the left side of the screen',
-        child: ExcludeSemantics(child: Text('Left')),
+        child: ExcludeSemantics(child: const Text('Left')),
       ),
       value: Hand.left,
     ),

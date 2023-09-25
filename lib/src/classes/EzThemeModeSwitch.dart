@@ -24,21 +24,21 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Copy the devices theme mode',
-        child: ExcludeSemantics(child: Text('System')),
+        child: ExcludeSemantics(child: const Text('System')),
       ),
       value: ThemeMode.system,
     ),
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Always use the light theme',
-        child: ExcludeSemantics(child: Text('Light')),
+        child: ExcludeSemantics(child: const Text('Light')),
       ),
       value: ThemeMode.light,
     ),
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Always use the dark theme',
-        child: ExcludeSemantics(child: Text('Dark')),
+        child: ExcludeSemantics(child: const Text('Dark')),
       ),
       value: ThemeMode.dark,
     ),
