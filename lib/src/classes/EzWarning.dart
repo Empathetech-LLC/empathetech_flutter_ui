@@ -7,7 +7,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzWarning extends Card {
+class EzWarning extends StatelessWidget {
   final String warning;
   final String message;
   final TextStyle? style;
@@ -27,60 +27,49 @@ class EzWarning extends Card {
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(padding),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Title
-            MergeSemantics(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Thing1
-                  Icon(
-                    Icons.warning,
-                    color: iconColor,
-                    size: style?.fontSize,
-                  ),
-                  EzSpacer.row(padding),
-
-                  Semantics(
-                    button: false,
-                    readOnly: true,
-                    label: 'Important message below',
-                    child: EzSelectableText(
-                      warning,
-                      style: style,
+    return Semantics(
+      button: false,
+      readOnly: true,
+      label: warning + ', ' + message,
+      child: MergeSemantics(
+        child: Card(
+          child: Container(
+            padding: EdgeInsets.all(padding),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Title
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Thing1
+                    Icon(
+                      Icons.warning,
+                      color: iconColor,
+                      size: style?.fontSize,
                     ),
-                  ),
+                    EzSpacer.row(padding),
 
-                  EzSpacer.row(padding),
+                    ExcludeSemantics(child: EzSelectableText(warning, style: style)),
+                    EzSpacer.row(padding),
 
-                  // Thing 2
-                  Icon(
-                    Icons.warning,
-                    color: iconColor,
-                    size: style?.fontSize,
-                  ),
-                ],
-              ),
+                    // Thing 2
+                    Icon(
+                      Icons.warning,
+                      color: iconColor,
+                      size: style?.fontSize,
+                    ),
+                  ],
+                ),
+                EzSpacer(padding),
+
+                // Label
+                ExcludeSemantics(child: EzSelectableText(message, style: style)),
+              ],
             ),
-            EzSpacer(padding),
-
-            // Label
-            Semantics(
-              button: false,
-              readOnly: true,
-              child: EzSelectableText(
-                message,
-                style: style,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

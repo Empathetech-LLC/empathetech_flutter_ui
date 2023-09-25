@@ -183,26 +183,33 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        EzSelectableText(widget.message, style: style),
+        EzSelectableText(
+          widget.message,
+          style: style,
+          semanticsLabel: 'Customize the ' + widget.message + ' color',
+        ),
         EzSpacer.row(space),
 
         // Color preview/edit button
-        ElevatedButton(
-          onPressed: () => _changeColor(context),
-          onLongPress: () => _reset(context),
-          child: Center(
-            child: Icon(
-              PlatformIcons(context).edit,
-              color: EzContrastColor(currColor),
-              size: diameter / 2,
-            ),
-          ),
-          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                backgroundColor: MaterialStatePropertyAll(currColor),
-                shape: MaterialStatePropertyAll(const CircleBorder()),
-                padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                fixedSize: MaterialStatePropertyAll(Size(diameter, diameter)),
+        Semantics(
+          hint: 'Open a color picker',
+          child: ElevatedButton(
+            onPressed: () => _changeColor(context),
+            onLongPress: () => _reset(context),
+            child: Center(
+              child: Icon(
+                PlatformIcons(context).edit,
+                color: EzContrastColor(currColor),
+                size: diameter / 2,
               ),
+            ),
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  backgroundColor: MaterialStatePropertyAll(currColor),
+                  shape: MaterialStatePropertyAll(const CircleBorder()),
+                  padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                  fixedSize: MaterialStatePropertyAll(Size(diameter, diameter)),
+                ),
+          ),
         ),
       ],
     );

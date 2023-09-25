@@ -71,16 +71,23 @@ Have fun!""",
             EzSpacer(textSpacer),
 
             // Color settings
-            ElevatedButton(
-              onPressed: () => context.goNamed(colorSettingsRoute),
-              child: const Text('Colors'),
+            Semantics(
+              hint: 'Open the color settings',
+              child: ElevatedButton(
+                onPressed: () => context.goNamed(colorSettingsRoute),
+                child: ExcludeSemantics(child: const Text('Colors')),
+              ),
             ),
+
             EzSpacer(buttonSpacer),
 
             // Style settings
-            ElevatedButton(
-              onPressed: () => context.goNamed(styleSettingsRoute),
-              child: const Text('Styling'),
+            Semantics(
+              hint: 'Open the styling settings',
+              child: ElevatedButton(
+                onPressed: () => context.goNamed(styleSettingsRoute),
+                child: ExcludeSemantics(child: const Text('Styling')),
+              ),
             ),
             EzSpacer(textSpacer),
 
