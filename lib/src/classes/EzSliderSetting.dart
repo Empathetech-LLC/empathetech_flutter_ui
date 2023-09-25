@@ -213,8 +213,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Live label
-              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
-                  style: style),
+              EzSelectableText(
+                'Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                style: style,
+                semanticsLabel:
+                    '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
+              ),
               EzSpacer.row(textSpacer),
 
               // Live preview
@@ -239,9 +243,17 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(currValue),
 
           // Live label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+          Semantics(
+            button: false,
+            readOnly: true,
+            label:
+                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
+            child: ExcludeSemantics(
+              child: ElevatedButton(
+                onPressed: doNothing,
+                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+              ),
+            ),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -253,20 +265,28 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Thing 1
-              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
-                  style: style),
-              SizedBox(height: currValue),
+          Semantics(
+            button: false,
+            readOnly: true,
+            label:
+                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
+            child: ExcludeSemantics(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Thing 1
+                  EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                      style: style),
+                  SizedBox(height: currValue),
 
-              // Thing 2
-              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
-                  style: style),
-              SizedBox(height: buttonSpacer),
-            ],
+                  // Thing 2
+                  EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                      style: style),
+                  SizedBox(height: buttonSpacer),
+                ],
+              ),
+            ),
           ),
         ];
     }
