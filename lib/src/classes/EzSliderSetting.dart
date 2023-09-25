@@ -104,8 +104,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double currValue = EzConfig.instance.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.instance.defaults[widget.prefsKey];
 
-  late String displayValue = currValue.toStringAsFixed(widget.decimals);
-
   late double margin = EzConfig.instance.prefs[marginKey];
   late double padding = EzConfig.instance.prefs[paddingKey];
   late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
@@ -124,11 +122,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: '${widget.type.name} is currently set to $displayValue',
+            label:
+                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
             child: ExcludeSemantics(
               child: ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: $displayValue'),
+                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(double.infinity, currValue),
                 ),
@@ -148,7 +147,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: '${widget.type.name} is currently set to $displayValue',
+            label:
+                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
             child: ExcludeSemantics(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -156,12 +156,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 children: [
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: Text('Currently: $displayValue'),
+                    child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
                   ),
                   EzSpacer(currValue),
                   ElevatedButton(
                     onPressed: doNothing,
-                    child: Text('Currently: $displayValue'),
+                    child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
                   ),
                   EzSpacer(buttonSpacer),
                 ],
@@ -180,7 +180,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Semantics(
             button: false,
             readOnly: true,
-            label: '${widget.type.name} is currently set to $displayValue',
+            label:
+                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
             child: ExcludeSemantics(
               child: ElevatedButton(
                 onPressed: doNothing,
@@ -212,7 +213,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Live label
-              EzSelectableText('Currently: $displayValue', style: style),
+              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                  style: style),
               EzSpacer.row(textSpacer),
 
               // Live preview
@@ -239,7 +241,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: $displayValue'),
+            child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -256,11 +258,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Thing 1
-              EzSelectableText('Currently: $displayValue', style: style),
+              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                  style: style),
               SizedBox(height: currValue),
 
               // Thing 2
-              EzSelectableText('Currently: $displayValue', style: style),
+              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                  style: style),
               SizedBox(height: buttonSpacer),
             ],
           ),
