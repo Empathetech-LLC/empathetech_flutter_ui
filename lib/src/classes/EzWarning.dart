@@ -31,7 +31,7 @@ class EzWarning extends StatelessWidget {
       button: false,
       readOnly: true,
       label: warning + ', ' + message,
-      child: MergeSemantics(
+      child: ExcludeSemantics(
         child: Card(
           child: Container(
             padding: EdgeInsets.all(padding),
@@ -52,7 +52,7 @@ class EzWarning extends StatelessWidget {
                     ),
                     EzSpacer.row(padding),
 
-                    ExcludeSemantics(child: EzSelectableText(warning, style: style)),
+                    EzSelectableText(warning, style: style),
                     EzSpacer.row(padding),
 
                     // Thing 2
@@ -66,7 +66,7 @@ class EzWarning extends StatelessWidget {
                 EzSpacer(padding),
 
                 // Label
-                ExcludeSemantics(child: EzSelectableText(message, style: style)),
+                EzSelectableText(message, style: style),
               ],
             ),
           ),

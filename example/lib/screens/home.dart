@@ -72,10 +72,13 @@ Have fun!""",
 
             // Color settings
             Semantics(
+              button: true,
               hint: 'Open the color settings',
-              child: ElevatedButton(
-                onPressed: () => context.goNamed(colorSettingsRoute),
-                child: ExcludeSemantics(child: const Text('Colors')),
+              child: ExcludeSemantics(
+                child: ElevatedButton(
+                  onPressed: () => context.goNamed(colorSettingsRoute),
+                  child: const Text('Colors'),
+                ),
               ),
             ),
 
@@ -83,10 +86,13 @@ Have fun!""",
 
             // Style settings
             Semantics(
+              button: true,
               hint: 'Open the styling settings',
-              child: ElevatedButton(
-                onPressed: () => context.goNamed(styleSettingsRoute),
-                child: ExcludeSemantics(child: const Text('Styling')),
+              child: ExcludeSemantics(
+                child: ElevatedButton(
+                  onPressed: () => context.goNamed(styleSettingsRoute),
+                  child: const Text('Styling'),
+                ),
               ),
             ),
             EzSpacer(textSpacer),
@@ -110,6 +116,7 @@ Have fun!""",
                   needsClose: false,
                 ),
               ),
+              semanticsLabel: 'Activate to reset all custom settings',
             ),
             EzSpacer(textSpacer),
           ],
