@@ -20,25 +20,32 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
+  // At the time of writing, Semantics does not have a const constructor
+  final List<DropdownMenuItem<Hand>> items = [
+    DropdownMenuItem<Hand>(
+      child: Semantics(
+        hint: 'Touch points will favor the right side of the screen',
+        child: Text('Right'),
+      ),
+      value: Hand.right,
+    ),
+    DropdownMenuItem<Hand>(
+      child: Semantics(
+        hint: 'Touch points will favor the left side of the screen',
+        child: Text('Left'),
+      ),
+      value: Hand.left,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
-    const List<DropdownMenuItem<Hand>> items = [
-      DropdownMenuItem<Hand>(
-        child: Text('Right'),
-        value: Hand.right,
-      ),
-      DropdownMenuItem<Hand>(
-        child: Text('Left'),
-        value: Hand.left,
-      ),
-    ];
-
     List<Widget> _children = [
       // Label
       Semantics(
-        label: 'Select you dominant hand',
+        label: 'Set your dominant hand',
         readOnly: true,
         child: EzSelectableText('Dominant hand', style: style),
       ),
