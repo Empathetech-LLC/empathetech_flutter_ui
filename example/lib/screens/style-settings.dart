@@ -46,6 +46,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               min: 5.0,
               max: 50.0,
               steps: 18,
+              decimals: 1,
             ),
             EzSpacer(buttonSpacer),
 
@@ -57,6 +58,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               min: 0.0,
               max: 50.0,
               steps: 20,
+              decimals: 1,
             ),
             EzSpacer(buttonSpacer),
 
@@ -68,6 +70,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               min: 30,
               max: 100,
               steps: 14,
+              decimals: 0,
             ),
             EzSpacer(buttonSpacer),
 
@@ -79,6 +82,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               min: 10.0,
               max: 100.0,
               steps: 18,
+              decimals: 0,
             ),
             EzSpacer(buttonSpacer),
 
@@ -90,6 +94,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               min: 10.0,
               max: 100.0,
               steps: 18,
+              decimals: 0,
             ),
             EzSpacer(buttonSpacer),
           ],
