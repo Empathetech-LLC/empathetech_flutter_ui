@@ -19,6 +19,27 @@ enum SettingType {
   textSpacing,
 }
 
+/// Enumerator extension for getting the proper [String] name for [EzSliderSetting.type]
+extension SettingName on SettingType {
+  String get name {
+    switch (this) {
+      case SettingType.buttonHeight:
+        return "button height";
+      case SettingType.buttonSpacing:
+        return "button spacing";
+      case SettingType.circleSize:
+        return "circle button size";
+      case SettingType.margin:
+        return "margin";
+      case SettingType.padding:
+        return "padding";
+      case SettingType.textSpacing:
+        return "text spacing.";
+    }
+  }
+}
+
+/// Enumerator extension for getting the proper [Semantics] label for [EzSliderSetting.type]
 extension SettingLabel on SettingType {
   String get label {
     switch (this) {
@@ -57,6 +78,9 @@ class EzSliderSetting extends StatefulWidget {
   /// Number of divisions between [min] and [max]
   final int steps;
 
+  /// Number of significant figures to display AFTER the decimal point
+  final int decimals;
+
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
   const EzSliderSetting({
@@ -67,6 +91,7 @@ class EzSliderSetting extends StatefulWidget {
     required this.min,
     required this.max,
     required this.steps,
+    required this.decimals,
   }) : super(key: key);
 
   @override
@@ -74,8 +99,12 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
+  // Gather values //
+
   late double currValue = EzConfig.instance.prefs[widget.prefsKey];
   late double defaultValue = EzConfig.instance.defaults[widget.prefsKey];
+
+  late String displayValue = currValue.toStringAsFixed(widget.decimals);
 
   late double margin = EzConfig.instance.prefs[marginKey];
   late double padding = EzConfig.instance.prefs[paddingKey];
@@ -92,11 +121,18 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text('Currently: ${currValue.truncate()}'),
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(double.infinity, currValue),
+          Semantics(
+            button: false,
+            readOnly: true,
+            label: widget.type.name + ' is currently set to ' + displayValue,
+            child: ExcludeSemantics(
+              child: ElevatedButton(
+                onPressed: doNothing,
+                child: Text('Currently: ' + displayValue),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(double.infinity, currValue),
+                ),
+              ),
             ),
           ),
           EzSpacer(buttonSpacer),
@@ -109,21 +145,28 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text('Currently: ${currValue.truncate()}'),
+          Semantics(
+            button: false,
+            readOnly: true,
+            label: widget.type.name + ' is currently set to ' + displayValue,
+            child: ExcludeSemantics(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: doNothing,
+                    child: Text('Currently: ' + displayValue),
+                  ),
+                  EzSpacer(currValue),
+                  ElevatedButton(
+                    onPressed: doNothing,
+                    child: Text('Currently: ' + displayValue),
+                  ),
+                  EzSpacer(buttonSpacer),
+                ],
               ),
-              EzSpacer(currValue),
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text('Currently: ${currValue.truncate()}'),
-              ),
-              EzSpacer(buttonSpacer),
-            ],
+            ),
           ),
         ];
 
@@ -134,16 +177,23 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(
-              currValue.truncate().toString(),
-            ),
-            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  shape: MaterialStatePropertyAll(const CircleBorder()),
-                  padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                  fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
+          Semantics(
+            button: false,
+            readOnly: true,
+            label: widget.type.name + ' is currently set to ' + displayValue,
+            child: ExcludeSemantics(
+              child: ElevatedButton(
+                onPressed: doNothing,
+                child: Text(
+                  currValue.toStringAsFixed(widget.decimals),
                 ),
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      shape: MaterialStatePropertyAll(const CircleBorder()),
+                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
+                    ),
+              ),
+            ),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -162,11 +212,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Live label
-              EzSelectableText(
-                'Currently: ${currValue.toStringAsFixed(2)}\n(to scale)',
-                style: style,
-                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
-              ),
+              EzSelectableText('Currently: ' + displayValue, style: style),
               EzSpacer.row(textSpacer),
 
               // Live preview
@@ -193,7 +239,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: ${currValue.toStringAsFixed(2)}'),
+            child: Text('Currently: ' + displayValue),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -210,19 +256,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Thing 1
-              EzSelectableText(
-                'Currently: ${currValue.truncate()}',
-                style: style,
-                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
-              ),
+              EzSelectableText('Currently: ' + displayValue, style: style),
               SizedBox(height: currValue),
 
               // Thing 2
-              EzSelectableText(
-                'Currently: ${currValue.truncate()}',
-                style: style,
-                textScaleFactor: MediaQuery.of(context).textScaleFactor * 0.8,
-              ),
+              EzSelectableText('Currently: ' + displayValue, style: style),
               SizedBox(height: buttonSpacer),
             ],
           ),
@@ -287,7 +325,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text('Reset: ' + EzConfig.instance.defaults[widget.prefsKey].toString()),
+        label: Text(
+          'Reset: ' +
+              (EzConfig.instance.defaults[widget.prefsKey] as double)
+                  .toStringAsFixed(widget.decimals),
+        ),
       ),
       EzSpacer(margin),
     ]);
