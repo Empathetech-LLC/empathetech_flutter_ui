@@ -19,25 +19,35 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
+  // At the time of writing, Semantics does not have a const constructor
+  final List<DropdownMenuItem<ThemeMode>> items = [
+    DropdownMenuItem<ThemeMode>(
+      child: Semantics(
+        hint: 'Copy the devices theme mode',
+        child: Text('System'),
+      ),
+      value: ThemeMode.system,
+    ),
+    DropdownMenuItem<ThemeMode>(
+      child: Semantics(
+        hint: 'Always use the light theme',
+        child: Text('Light'),
+      ),
+      value: ThemeMode.light,
+    ),
+    DropdownMenuItem<ThemeMode>(
+      child: Semantics(
+        hint: 'Always use the dark theme',
+        child: Text('Dark'),
+      ),
+      value: ThemeMode.dark,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     ThemeMode? _currMode = PlatformTheme.of(context)?.themeMode;
     final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
-    const List<DropdownMenuItem<ThemeMode>> items = [
-      DropdownMenuItem<ThemeMode>(
-        child: Text('System'),
-        value: ThemeMode.system,
-      ),
-      DropdownMenuItem<ThemeMode>(
-        child: Text('Light'),
-        value: ThemeMode.light,
-      ),
-      DropdownMenuItem<ThemeMode>(
-        child: Text('Dark'),
-        value: ThemeMode.dark,
-      ),
-    ];
 
     return EzRow(
       mainAxisSize: MainAxisSize.min,
