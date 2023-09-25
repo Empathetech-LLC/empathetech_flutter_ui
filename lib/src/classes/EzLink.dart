@@ -9,16 +9,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzLink extends TextSpan {
+  /// Link message
+  final String text;
+
+  /// Link action
+  final void Function()? action;
+
+  /// Link style
+  final TextStyle? style;
+
+  /// Hint for accessibility tools
+  /// Where does this link go?
+  final String? semanticsLabel;
+
   /// Creates a [TextSpan] with an internal link via [TapGestureRecognizer]
   /// See [EzWebLink] for making extertnal links
-
   EzLink({
-    required String text,
-    required Function()? action,
-    TextStyle? style,
+    required this.text,
+    required this.action,
+    this.style,
+    required this.semanticsLabel,
   }) : super(
           text: text,
           recognizer: new TapGestureRecognizer()..onTap = action,
           style: style,
+          semanticsLabel: semanticsLabel,
         );
 }
