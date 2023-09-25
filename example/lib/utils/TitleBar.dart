@@ -46,7 +46,6 @@ class TitleBar extends StatelessWidget {
         text: 'Have fun!',
         style: style,
         action: () => context.goNamed(homeRoute),
-        semanticsLabel: 'Return to the home screen',
       ),
     );
 
