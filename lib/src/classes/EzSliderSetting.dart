@@ -114,29 +114,21 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          Semantics(
-            button: false,
-            readOnly: true,
-            label:
-                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
-            child: ExcludeSemantics(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: doNothing,
-                    child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
-                  ),
-                  EzSpacer(currValue),
-                  ElevatedButton(
-                    onPressed: doNothing,
-                    child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
-                  ),
-                  EzSpacer(buttonSpacer),
-                ],
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
               ),
-            ),
+              EzSpacer(currValue),
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+              ),
+              EzSpacer(buttonSpacer),
+            ],
           ),
         ];
 
@@ -145,26 +137,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return [
           // Title padding
           EzSpacer(padding),
-
-          // Live preview && label
-          Semantics(
-            button: false,
-            readOnly: true,
-            label:
-                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
-            child: ExcludeSemantics(
-              child: ElevatedButton(
-                onPressed: doNothing,
-                child: Text(
-                  currValue.toStringAsFixed(widget.decimals),
-                ),
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                      shape: MaterialStatePropertyAll(const CircleBorder()),
-                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                      fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
-                    ),
-              ),
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text(
+              currValue.toStringAsFixed(widget.decimals),
             ),
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  shape: MaterialStatePropertyAll(const CircleBorder()),
+                  padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                  fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
+                ),
           ),
           EzSpacer(buttonSpacer),
         ];
@@ -178,20 +160,19 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Title padding
           EzSpacer(padding),
 
+          // Live preview && label
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Live label
+              // Label
               EzSelectableText(
                 'Currently: ${currValue.toStringAsFixed(widget.decimals)}',
                 style: style,
-                semanticsLabel:
-                    '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
               ),
               EzSpacer.row(textSpacer),
 
-              // Live preview
+              // Preview
               Container(
                 color: Theme.of(context).appBarTheme.titleTextStyle?.color,
                 height: 160.0,
@@ -209,22 +190,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SettingType.padding:
         return [
-          // Live preview
+          // Title padding && live preview
           EzSpacer(currValue),
 
           // Live label
-          Semantics(
-            button: false,
-            readOnly: true,
-            label:
-                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
-            child: ExcludeSemantics(
-              child: ElevatedButton(
-                onPressed: doNothing,
-                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
-              ),
-            ),
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
           ),
+
           EzSpacer(buttonSpacer),
         ];
 
@@ -235,28 +209,20 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(padding),
 
           // Live preview && label
-          Semantics(
-            button: false,
-            readOnly: true,
-            label:
-                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
-            child: ExcludeSemantics(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Thing 1
-                  EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
-                      style: style),
-                  SizedBox(height: currValue),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Thing 1
+              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                  style: style),
+              SizedBox(height: currValue),
 
-                  // Thing 2
-                  EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
-                      style: style),
-                  SizedBox(height: buttonSpacer),
-                ],
-              ),
-            ),
+              // Thing 2
+              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                  style: style),
+              SizedBox(height: buttonSpacer),
+            ],
           ),
         ];
     }
@@ -264,32 +230,49 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> _buildView(
+  List<Widget> _buildSheet(
     StateSetter modalSheetSetState,
     BuildContext context,
     TextStyle? style,
   ) {
+    // Gather preview widgets//
+
     List<Widget> toReturn = [
-      EzSpacer(margin),
-      EzSelectableText(widget.title, style: style),
+      Semantics(
+        button: false,
+        readOnly: true,
+        label:
+            '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
+        child: ExcludeSemantics(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EzSpacer(margin),
+              EzSelectableText(widget.title, style: style),
+              ..._buildPreview(context, style),
+            ],
+          ),
+        ),
+      ),
     ];
 
-    toReturn.addAll(_buildPreview(context, style));
+    // Add slider && reset button //
 
     toReturn.addAll([
-      // Value slider
+      // Slider
       ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: 700, // Chosen via visual inspection
         ),
         child: Slider(
-          // Values
+          // Slider values
           value: currValue,
           min: widget.min,
           max: widget.max,
           divisions: widget.steps,
 
-          // Functions
+          // Slider functions
           onChanged: (double value) {
             // Just update the on screen value while sliding around
             modalSheetSetState(() {
@@ -305,7 +288,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             }
           },
 
-          // Sementics
+          // Slider sementics
           semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
         ),
       ),
@@ -365,9 +348,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               builder: (BuildContext context, StateSetter modalSheetSetState) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _buildView(modalSheetSetState, context, style),
+                  children: _buildSheet(modalSheetSetState, context, style),
                 );
               },
             ),
