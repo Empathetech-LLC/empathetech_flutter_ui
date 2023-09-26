@@ -41,9 +41,9 @@ extension SettingLabel on SettingType {
   String get label {
     switch (this) {
       case SettingType.margin:
-        return "margin. Margin is the amount of empty space between the edge of a container (like the app window) and it's contents.";
+        return "margin. Margin is the distance between the edge of a view and its contents. The app window or a dialog pop up, for example.";
       case SettingType.padding:
-        return "padding. Padding is the distance between grouped objects. A title and it's description, for example.";
+        return "padding. Padding is the distance between paired items. A title and its description or a button and its label, for example.";
       case SettingType.circleSize:
         return "circle button size.";
       case SettingType.buttonSpacing:
