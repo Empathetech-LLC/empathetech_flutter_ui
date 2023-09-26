@@ -29,7 +29,7 @@ void main() async {
     DeviceOrientation.landscapeRight,
   ]);
 
-  runApp(const ETechDotNet());
+  runApp(const EFUIExample());
 }
 
 // Initialize a path based router for web apps
@@ -64,10 +64,10 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class ETechDotNet extends StatelessWidget {
+class EFUIExample extends StatelessWidget {
   final Key? key;
 
-  const ETechDotNet({this.key}) : super(key: key);
+  const EFUIExample({this.key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
