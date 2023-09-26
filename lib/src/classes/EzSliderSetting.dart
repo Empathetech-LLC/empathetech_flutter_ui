@@ -11,11 +11,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// Enumerator for selecting the type of setting that is being updated
 /// This will determine the preview [Widget]s
 enum SettingType {
-  buttonHeight,
-  buttonSpacing,
-  circleSize,
   margin,
   padding,
+  circleSize,
+  buttonSpacing,
   textSpacing,
 }
 
@@ -23,16 +22,14 @@ enum SettingType {
 extension SettingName on SettingType {
   String get name {
     switch (this) {
-      case SettingType.buttonHeight:
-        return "button height";
-      case SettingType.buttonSpacing:
-        return "button spacing";
-      case SettingType.circleSize:
-        return "circle button size";
       case SettingType.margin:
         return "margin";
       case SettingType.padding:
         return "padding";
+      case SettingType.circleSize:
+        return "circle button size";
+      case SettingType.buttonSpacing:
+        return "button spacing";
       case SettingType.textSpacing:
         return "text spacing.";
     }
@@ -43,16 +40,14 @@ extension SettingName on SettingType {
 extension SettingLabel on SettingType {
   String get label {
     switch (this) {
-      case SettingType.buttonHeight:
-        return "button height.";
-      case SettingType.buttonSpacing:
-        return "button spacing.";
-      case SettingType.circleSize:
-        return "circle button size.";
       case SettingType.margin:
         return "margin. Margin is the amount of empty space between the edge of a container (like the app window) and it's contents.";
       case SettingType.padding:
         return "padding. Padding is the distance between grouped objects. A title and it's description, for example.";
+      case SettingType.circleSize:
+        return "circle button size.";
+      case SettingType.buttonSpacing:
+        return "button spacing.";
       case SettingType.textSpacing:
         return "text spacing.";
     }
@@ -112,31 +107,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Return the preview [Widget]s for the passed [SettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
     switch (widget.type) {
-      // Button height
-      case SettingType.buttonHeight:
-        return [
-          // Title padding
-          EzSpacer(padding),
-
-          // Live preview && label
-          Semantics(
-            button: false,
-            readOnly: true,
-            label:
-                '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
-            child: ExcludeSemantics(
-              child: ElevatedButton(
-                onPressed: doNothing,
-                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(double.infinity, currValue),
-                ),
-              ),
-            ),
-          ),
-          EzSpacer(buttonSpacer),
-        ];
-
       // Button spacing
       case SettingType.buttonSpacing:
         return [
@@ -367,21 +337,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   Icon _buildIcon() {
     switch (widget.type) {
-      case SettingType.buttonHeight:
-        return const Icon(Icons.height);
-
-      case SettingType.buttonSpacing:
-        return const Icon(Icons.space_bar);
-
-      case SettingType.circleSize:
-        return const Icon(Icons.circle);
-
       case SettingType.margin:
         return const Icon(Icons.margin);
-
       case SettingType.padding:
         return const Icon(Icons.padding);
-
+      case SettingType.circleSize:
+        return const Icon(Icons.circle);
+      case SettingType.buttonSpacing:
+        return const Icon(Icons.space_bar);
       case SettingType.textSpacing:
         return const Icon(Icons.space_bar);
     }
