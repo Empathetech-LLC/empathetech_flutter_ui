@@ -120,7 +120,6 @@ class _SmallBuild extends StatelessWidget {
         preferredSize: Size(width, toolbarHeight),
         child: AppBar(
           toolbarHeight: toolbarHeight,
-          excludeHeaderSemantics: true,
 
           // Leading
           automaticallyImplyLeading: (leftHandedUser) ? false : true,
@@ -172,7 +171,6 @@ class _LargeBuild extends StatelessWidget {
         preferredSize: Size(width, toolbarHeight),
         child: AppBar(
           toolbarHeight: toolbarHeight,
-          excludeHeaderSemantics: true,
 
           // Leading
           automaticallyImplyLeading: (leftHandedUser) ? false : true,
