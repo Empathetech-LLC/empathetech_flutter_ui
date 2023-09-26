@@ -190,13 +190,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SettingType.padding:
         return [
-          // Title padding && live preview
+          // Title padding && live preview part 1
           EzSpacer(currValue),
 
-          // Live label
+          // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
             child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                ),
           ),
 
           EzSpacer(buttonSpacer),
