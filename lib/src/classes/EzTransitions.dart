@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 /// Disables transitions if [kIsWeb]
-/// source:
-/// https://medium.com/flutter/improving-perceived-performance-with-image-placeholders-precaching-and-disabled-navigation-6b3601087a2b
+/// Source => https://medium.com/flutter/improving-perceived-performance-with-image-placeholders-precaching-and-disabled-navigation-6b3601087a2b
 class EzTransitions extends PageTransitionsTheme {
   @override
   Widget buildTransitions<T>(

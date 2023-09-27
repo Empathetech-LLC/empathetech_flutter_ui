@@ -50,7 +50,7 @@ bool isAsset(String? path) {
   return EzConfig.instance.assets.contains(path);
 }
 
-/// For web use, set the tab's title
+/// For web apps, set the tab's title
 void setPageTitle({
   required BuildContext context,
   required String title,
