@@ -9,10 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
-  /// Inherited from [PlatformAlertDialog]
   final Key? key;
-
-  /// Inherited from [PlatformAlertDialog]
   final Key? widgetKey;
 
   /// Dialog's title

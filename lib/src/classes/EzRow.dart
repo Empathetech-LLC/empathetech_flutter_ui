@@ -8,7 +8,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRow extends StatelessWidget {
-  /// Inherited from [Row]
   final Key? key;
 
   /// Inherited from [Row]
