@@ -16,10 +16,10 @@ class EzConfig {
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// [defaultConfig] merged with the constructor provided custom defaults
+  /// The factory constructor will merge [defaultConfig] with any provided customDefaults
   final Map<String, dynamic> defaults;
 
-  /// Live values in use => [defaults] merged with [preferences] storage
+  /// Live values in use => [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
   /// Current [googleStyles] for the app to use
@@ -28,11 +28,11 @@ class EzConfig {
   /// What side of the screen touch points should be on
   final Hand dominantHand;
 
-  /// Private single instance
+  /// Private instance
   /// The factory constructor + singleton combo requires an internally mutable [instance]
   static EzConfig? _instance;
 
-  /// Private/internal/finalization constructor
+  /// Private/internal constructor
   const EzConfig._({
     required this.assets,
     required this.preferences,
@@ -42,12 +42,13 @@ class EzConfig {
     required this.dominantHand,
   });
 
-  /// Factory/external/initialization constructor
+  /// Factory/external constructor
+  ///
+  /// [assetPaths] => provide your [AssetImage] paths for this app
+  /// [preferences] => provide a [SharedPreferences] instance
+  /// [customDefaults] => provide your brand colors, custom styling, etc
   factory EzConfig({
-    /// [AssetImage] paths for this app
     required List<String> assetPaths,
-
-    /// [SharedPreferences] instance
     required SharedPreferences preferences,
     Map<String, dynamic>? customDefaults,
   }) {
