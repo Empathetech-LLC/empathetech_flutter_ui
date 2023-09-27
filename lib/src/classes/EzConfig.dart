@@ -8,53 +8,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum Hand {
-  right,
-  left,
-}
-
-/// Empathetech's defaults for [EzConfig]
-const Map<String, dynamic> defaultConfig = {
-  // App-wide //
-  marginKey: 15.0,
-  paddingKey: 12.5,
-
-  buttonSpacingKey: 30.0,
-  textSpacingKey: 35.0,
-
-  circleDiameterKey: 45.0,
-
-  fontFamilyKey: roboto,
-
-  // Light theme //
-  lightThemeColorKey: whiteHex,
-  lightThemeTextColorKey: blackHex,
-
-  lightBackgroundImageKey: null,
-  lightBackgroundColorKey: offWhiteHex,
-  lightBackgroundTextColorKey: blackHex,
-
-  lightButtonColorKey: EmpathPurpleHex,
-  lightButtonTextColorKey: whiteHex,
-
-  lightAccentColorKey: EmpathGoldenrodHex,
-  lightAccentTextColorKey: whiteHex,
-
-  // Dark theme //
-  darkThemeColorKey: blackHex,
-  darkThemeTextColorKey: whiteHex,
-
-  darkBackgroundImageKey: null,
-  darkBackgroundColorKey: offBlackHex,
-  darkBackgroundTextColorKey: whiteHex,
-
-  darkButtonColorKey: EmpathEucalyptusHex,
-  darkButtonTextColorKey: blackHex,
-
-  darkAccentColorKey: EmpathGoldenrodHex,
-  darkAccentTextColorKey: whiteHex,
-};
-
 /// Singleton class for managing user customization
 class EzConfig {
   /// [AssetImage] paths for this app
@@ -73,7 +26,7 @@ class EzConfig {
   final String? fontFamily;
 
   /// What side of the screen touch points should be on
-  final Hand dominantSide;
+  final Hand dominantHand;
 
   /// Private single instance
   /// The factory constructor + singleton combo requires an internally mutable [instance]
@@ -86,12 +39,15 @@ class EzConfig {
     required this.defaults,
     required this.prefs,
     this.fontFamily,
-    required this.dominantSide,
+    required this.dominantHand,
   });
 
   /// Factory/external/initialization constructor
   factory EzConfig({
+    /// [AssetImage] paths for this app
     required List<String> assetPaths,
+
+    /// [SharedPreferences] instance
     required SharedPreferences preferences,
     Map<String, dynamic>? customDefaults,
   }) {
@@ -134,7 +90,7 @@ class EzConfig {
 
       // Load hand setting
       bool? isRight = preferences.getBool(isRightKey);
-      final Hand dominantSide = (isRight == null || isRight == true) ? Hand.right : Hand.left;
+      final Hand dominantHand = (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
       _instance = EzConfig._(
         assets: assetPaths,
@@ -142,7 +98,7 @@ class EzConfig {
         defaults: mergedDefaults,
         prefs: prefs,
         fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
-        dominantSide: dominantSide,
+        dominantHand: dominantHand,
       );
     }
 
