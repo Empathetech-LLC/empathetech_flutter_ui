@@ -16,12 +16,12 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig(
-    /// your [AssetImage] paths for this app
+    // your image paths for this app
     assetPaths: [],
 
     preferences: prefs,
 
-    /// your brand colors, custom styling, etc
+    // your brand colors, custom styling, etc
     customDefaults: {},
   );
 
