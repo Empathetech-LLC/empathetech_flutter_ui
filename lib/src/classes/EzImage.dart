@@ -11,7 +11,10 @@ class EzImage extends Image {
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
+
+  /// Message for screen readers to output
   final String semanticLabel;
+
   final double? width;
   final double? height;
   final Color? color;
@@ -26,7 +29,7 @@ class EzImage extends Image {
   final bool isAntiAlias;
   final FilterQuality filterQuality;
 
-  /// [Image] that requires a [semanticLabel] for encforcing accessibility
+  /// [Image] wrapper that makes [semanticLabel] required
   EzImage({
     this.key,
     required this.image,

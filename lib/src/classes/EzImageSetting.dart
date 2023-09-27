@@ -10,15 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+// EzImageSetting has not yet been verified with TalkBack or VoiceOver //
+
 class EzImageSetting extends StatefulWidget {
-  /// [EzConfig] key whose path value is being updated
+  /// [EzConfig.instance] key whose value is being updated
   final String prefsKey;
 
   /// [String] label for the [Image.semanticLabel]
   final String semantics;
 
   /// Whether the image is intended for fullscreen use
-  /// For example: [lightBackgroundImageKey]
   final bool fullscreen;
 
   /// [String] to display on the [ElevatedButton]
@@ -47,12 +48,15 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
+  // Gather theme data //
   late String title = widget.title;
   late String currPathKey = widget.prefsKey;
 
   String? updatedPath; // Only used when the user makes a change
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
+
+  // Define functions //
 
   /// Cleanup any custom files
   void _cleanup() async {
@@ -146,6 +150,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
     );
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
