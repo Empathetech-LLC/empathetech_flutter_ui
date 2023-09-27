@@ -44,7 +44,6 @@ export 'src/functions/ezThemeData.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/storage.dart';
-export 'src/functions/textStyles.dart';
 
 // Constants
 export 'src/consts/colors.dart';
