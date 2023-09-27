@@ -40,7 +40,7 @@ For those starting out, here are some videos you might find helpful (unafilliate
 ## Setup
 *All code below was adapted from the [example app](example/lib/main.dart)*
 
-First, in main, initialize [EzConfig](lib/classes/EzConfig.dart)
+First, in main, initialize [EzConfig](lib/src/classes/EzConfig.dart)
 
 ```Dart
 void main() async {
@@ -49,8 +49,12 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig(
+    /// your [AssetImage] paths for this app
     assetPaths: [],
+
     preferences: prefs,
+
+    /// your brand colors, custom styling, etc
     customDefaults: {},
   );
   
@@ -64,14 +68,9 @@ void main() async {
 }
 ```
 
-then, create an [EzApp](lib/classes/EzApp.dart)
+then, use an [EzAppProvider](/lib/src/classes/EzAppProvider.dart) in your build (which pairs well with an [EzApp](lib/src/classes/EzApp.dart))
 
 ```Dart
-final GoRouter _router = GoRouter(
-  initialLocation: '/',
-  routes: ...
-);
-
 class EFUIExample extends StatelessWidget {
   final Key? key;
 
@@ -82,7 +81,7 @@ class EFUIExample extends StatelessWidget {
     return EzAppProvider(
       app: EzApp(
         title: 'EFUI example',
-        routerConfig: _router,
+        routerConfig: GoRouter(initialLocation: '/', routes: ...),
       ),
     );
   }
@@ -94,23 +93,23 @@ class EFUIExample extends StatelessWidget {
 
 ## How it works
 
-When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/functions/ezThemeData.dart), starting with the [defaults]() gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
+When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/src/functions/ezThemeData.dart), starting with the [defaults](/lib/src/consts/defaultConfig.dart) gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
 
 In the code, `EzConfig` has a globally accessible instance that can be used to query the live configuration.
 
 Then, in conjunction with the custom widgets below, `EzConfig` enables user customization
 
-* [EzThemeModeSwitch](lib/classes/EzThemeModeSwitch.dart): A toggle for users to switch between light, dark, or system theming.
-* [EzDominantHandSwitch](lib/classes/EzDominantHandSwitch.dart): Moves common touch points to benefit lefty's when they want it!
-* [EzColorSetting](lib/classes/EzColorSetting.dart): A user-friendly color picker to update theme colors.
-* [EzFontSetting](lib/classes/EzFontSetting.dart): An interface for users to select their preferred font from a predefined list.
-* [EzSliderSetting](lib/classes/EzSliderSetting.dart): A versatile slider widget for numerical customizations of many kinds (margin, padding, spacing, etc).
-* [EzImageSetting](lib/classes/EzImageSetting.dart): A user-friendly image uploader to update app assets.
+* [EzThemeModeSwitch](lib/src/classes/EzThemeModeSwitch.dart): A toggle for users to switch between light, dark, or system theming.
+* [EzDominantHandSwitch](lib/src/classes/EzDominantHandSwitch.dart): Moves common touch points to benefit lefty's when they want it!
+* [EzColorSetting](lib/src/classes/EzColorSetting.dart): A user-friendly color picker to update theme colors.
+* [EzFontSetting](lib/src/classes/EzFontSetting.dart): An interface for users to select their preferred font from a predefined list.
+* [EzSliderSetting](lib/src/classes/EzSliderSetting.dart): A versatile slider widget for numerical customizations of many kinds (margin, padding, spacing, etc).
+* [EzImageSetting](lib/src/classes/EzImageSetting.dart): A user-friendly image uploader to update app assets.
   * Not shown in the example app
 
 #### [See them in action](https://www.empathetech.net/#/settings)
 
-There's lots of other cool stuff in EFUI, like [EzRowCol](lib/classes/EzRowCol.dart), [EzNotifications](lib/classes/EzNotifications.dart), and [EzVideoPlayer](lib/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
+There's lots of other cool stuff in EFUI, like [EzRowCol](lib/src/classes/EzRowCol.dart), [EzNotifications](lib/src/classes/EzNotifications.dart), and [EzVideoPlayer](lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
 
 **P.S.** 
 
