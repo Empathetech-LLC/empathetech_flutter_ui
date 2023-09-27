@@ -8,17 +8,35 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRow extends StatelessWidget {
+  /// Inherited from [Row]
   final Key? key;
+
+  /// Inherited from [Row]
   final MainAxisAlignment mainAxisAlignment;
+
+  /// Inherited from [Row]
   final MainAxisSize mainAxisSize;
+
+  /// Inherited from [Row]
   final CrossAxisAlignment crossAxisAlignment;
+
+  /// Inherited from [Row]
   final TextDirection? textDirection;
+
+  /// Inherited from [Row]
   final VerticalDirection verticalDirection;
+
+  /// Inherited from [Row]
   final TextBaseline? textBaseline;
+
+  /// Inherited from [Row]
   final List<Widget> children;
+
+  /// Whether [children] should be
+  /// If true, [children] will be reversed when [EzConfig.instance]s  is [Hand.left]
   final bool reverseHands;
 
-  /// [Row] wrapper that automatically supports [EzConfig.dominantSide]
+  /// [Row] wrapper that automatically supports [EzConfig.dominantHand]
   /// Can be disabled via setting [reverseHands] to false
   EzRow({
     this.key,
@@ -33,7 +51,7 @@ class EzRow extends StatelessWidget {
   }) : super(key: key);
 
   List<Widget> _getList() {
-    if (reverseHands && EzConfig.instance.dominantSide == Hand.left) {
+    if (reverseHands && EzConfig.instance.dominantHand == Hand.left) {
       return children.reversed.toList();
     } else {
       return children;
@@ -43,6 +61,7 @@ class EzRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: key,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
