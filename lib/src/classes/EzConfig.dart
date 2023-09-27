@@ -53,15 +53,19 @@ class EzConfig {
     Map<String, dynamic>? customDefaults,
   }) {
     if (_instance == null) {
-      // Load any custom defaults
+      // Load custom defaults //
+
       Map<String, dynamic> mergedDefaults = new Map.from(defaultConfig);
       if (customDefaults != null) mergedDefaults.addAll(customDefaults);
 
+      // Load user preferences //
+
       Map<String, dynamic> prefs = new Map.from(mergedDefaults);
 
-      // Load the keys that have been overwritten
+      // Find the keys that have been used
       List<String> overwritten = prefs.keys.toSet().intersection(preferences.getKeys()).toList();
 
+      // Overwrite the relevant values
       overwritten.forEach((key) {
         dynamic value = prefs[key];
         dynamic userPref;
@@ -93,6 +97,7 @@ class EzConfig {
       bool? isRight = preferences.getBool(isRightKey);
       final Hand dominantHand = (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
+      // Create the instance
       _instance = EzConfig._(
         assets: assetPaths,
         preferences: preferences,
