@@ -9,36 +9,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
+  /// Inherited from [PlatformAlertDialog]
   final Key? key;
+
+  /// Inherited from [PlatformAlertDialog]
   final Key? widgetKey;
 
   /// Dialog's title
   final Widget? title;
 
   /// Dialog's main content
+  /// Replaces [PlatformAlertDialog.content] with an [EzScrollView] as [contents] for the [EzScrollView.children]
   final List<Widget>? contents;
 
-  /// Material 'action' [Widget]s to be displayed below [contents]
+  /// Material "action" [Widget]s to be displayed below [contents]
   /// Will be appended to [contents] in the Material world
   /// Prevents redundancy in the Cupertino world
-  /// Pairs best with [EzYesNo] for quickly creating platform native alerts
+  /// Pairs best with [ezMaterialActions]
   final List<Widget>? materialActions;
 
   /// [CupertinoDialogAction]s to be displayed below [contents]
-  /// Directly used for the [actions] param in the Cupertino world
-  /// Pairs best with [EzYesNo] for quickly creating platform native alerts
+  /// Directly used for [CupertinoAlertDialogData.actions]
+  /// Pairs best with [ezCupertinoActions]
   final List<CupertinoDialogAction>? cupertinoActions;
 
   /// Cupertino alerts aren't dismissable by tapping outside the renderbox
-  /// Set [needsClose] to true if a default 'Close' [CupertinoDialogAction] is needed
+  /// Set [needsClose] to true if a default "Close" [CupertinoDialogAction] is needed
   final bool needsClose;
 
   /// [PlatformAlertDialog] wrapper that automatically styles Material and Cupertino dialogs
   /// Replaced the original [content] parameter with [contents]
   /// [contents] will be displayed in an [EzScrollView]
   /// [materialActions] are appended to [contents] in the Material world
-  /// [cupertinoActions] are directly used in the Cupertino world
-  /// The split prevents redundancy for the users at render time
+  /// [cupertinoActions] are directly used for [CupertinoAlertDialogData.actions]
+  /// The split prevents redundancy for users
   EzAlertDialog({
     this.key,
     this.widgetKey,
@@ -59,8 +63,8 @@ class EzAlertDialog extends PlatformAlertDialog {
     );
 
     return PlatformAlertDialog(
-      // Material //
-
+      key: key,
+      widgetKey: widgetKey,
       material: (context, platform) => MaterialAlertDialogData(
         insetPadding: EdgeInsets.all(padding),
 
@@ -81,9 +85,6 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
       ),
-
-      // Cupertino //
-
       cupertino: (context, platform) => CupertinoAlertDialogData(
         // Title
         title: Padding(
