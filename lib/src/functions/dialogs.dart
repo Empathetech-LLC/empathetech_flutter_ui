@@ -10,20 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Log the passed message and display an [EzAlertDialog] for the user
-/// Should always return null via [popScreen]
-Future<dynamic> logAlert(
-  BuildContext context,
-  String message,
-) {
+/// Log the passed message and display an [EzAlertDialog] to notify the user
+Future<dynamic> logAlert({
+  required BuildContext context,
+  String alert = 'Attention',
+  required String message,
+}) {
   log(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzAlertDialog(
-      title: const EzSelectableText('Attention:'),
-      contents: [
-        EzSelectableText(message),
-      ],
+    builder: (context) => Semantics(
+      button: false,
+      readOnly: true,
+      child: ExcludeSemantics(
+        child: EzAlertDialog(
+          title: EzSelectableText(alert),
+          contents: [EzSelectableText(message)],
+        ),
+      ),
     ),
   );
 }
@@ -31,20 +35,20 @@ Future<dynamic> logAlert(
 /// Wrap a [ColorPicker] in an [EzAlertDialog]
 Future<dynamic> ezColorPicker({
   required BuildContext context,
+  String title = 'Pick a color!',
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
+  String confirmMsg = 'Apply',
   required void Function() onConfirm,
+  String denyMsg = 'Cancel',
   required void Function() onDeny,
 }) {
-  final String confirmMsg = 'Apply';
-  final String denyMsg = 'Cancel';
-
   final TextStyle? contentStyle = Theme.of(context).dialogTheme.contentTextStyle;
 
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: const EzSelectableText('Pick a color!'),
+      title: EzSelectableText(title),
       contents: [
         // Color picker
         ColorPicker(
