@@ -5,7 +5,7 @@
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-/// Empathetech's defaults for [EzConfig]
+/// Empathetech's default/base theme configuration
 const Map<String, dynamic> defaultConfig = {
   // App-wide //
   marginKey: 15.0,
