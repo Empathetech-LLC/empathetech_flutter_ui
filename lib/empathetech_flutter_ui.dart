@@ -49,5 +49,10 @@ export 'src/functions/textStyles.dart';
 // Constants
 export 'src/consts/colors.dart';
 export 'src/consts/credits.dart';
+export 'src/consts/defaultConfig.dart';
 export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
+
+// Enums
+export 'src/enums/dominantHand.dart';
+export 'src/enums/sliderSettings.dart';
