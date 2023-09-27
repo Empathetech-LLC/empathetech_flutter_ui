@@ -5,7 +5,12 @@
 
 /// Enumerator for controlling the visability of disappearing buttons
 enum ButtonVis {
+  /// Never show
   alwaysOff,
+
+  /// Always show
   alwaysOn,
+
+  /// Show when the window is active
   auto,
 }

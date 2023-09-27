@@ -12,7 +12,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
 
-  /// [String] description for the video to appear in accessibilty [Semantics]
+  /// [String] description for screen readers
   final String semantics;
 
   /// [Color] shared by all icons/buttons
@@ -21,19 +21,29 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Color.withOpacity] value that should be used when the player is not in focus
   final double hiddenOpacity;
 
-  /// [Container] decoration for the region behind the controls
+  /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
 
   /// [MainAxisAlignment] for where the controls should appear
   final MainAxisAlignment controlsAlignment;
 
+  /// Play button visability
   final ButtonVis playVis;
+
+  /// Volume button visability
   final ButtonVis volumeVis;
+
+  /// Whether a volume slider is available
+  /// If false, the volume will switch between [startingVolume] and off
   final bool variableVolume;
+
+  /// Replay button visability
   final ButtonVis replayVis;
+
+  /// Time/progress slider visability
   final ButtonVis sliderVis;
 
-  /// Whether buttons set to [ButtonVis.auto] should always show when the video is paused
+  /// Whether buttons set to [ButtonVis.auto] should show when the video is paused
   final bool showOnPause;
 
   final bool autoPlay;
@@ -46,7 +56,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// [BoxConstraints] maximum height for the play area
   final double maxHeight;
 
-  /// [Stack]s play, mute, and replay buttons on top of an [AspectRatio] for the [controller]
+  /// [Stack]s control buttons on top of an [AspectRatio] for the [controller]
   /// Also supports tap-to-pause on the main window via [MouseRegion]
   /// The visibility of each button can be controlled with [ButtonVis]
   /// Optionally provide a [BoxDecoration] background for the controls region
@@ -78,6 +88,7 @@ class EzVideoPlayer extends StatefulWidget {
 }
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
+  // Gather theme data //
   bool show = false;
 
   double? savedVolume;
@@ -89,9 +100,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final double buttonSize = EzConfig.instance.prefs[circleDiameterKey] / 2;
 
   late final Color showing = widget.iconColor;
-  late final Color hiding = widget.hiddenOpacity == 0.0
+  late final Color hiding = (widget.hiddenOpacity == 0.0)
       ? Colors.transparent
       : widget.iconColor.withOpacity(widget.hiddenOpacity);
+
+  // Define functions //
 
   void _playVideo() {
     setState(() {
@@ -140,6 +153,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     );
   }
 
+  // Initialize the video //
+
   @override
   void initState() {
     super.initState();
@@ -163,6 +178,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
     if (widget.autoPlay) widget.controller.play();
   }
+
+  // Define the buttons //
 
   Color _buildColor(ButtonVis visibility) {
     switch (visibility) {
@@ -207,7 +224,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Volume
     if (widget.volumeVis != ButtonVis.alwaysOff) {
       controls.addAll([
-        // Mute button
+        // Base button
         GestureDetector(
           child: Icon(
             (widget.controller.value.volume == 0.0)
@@ -263,6 +280,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
     return controls;
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
