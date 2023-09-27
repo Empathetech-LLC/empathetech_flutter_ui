@@ -21,7 +21,7 @@ Future<String?> changeImage({
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
-      logAlert(context, 'Failed to retrieve image');
+      logAlert(context: context, message: 'Failed to retrieve image');
       return null;
     }
 
@@ -36,7 +36,7 @@ Future<String?> changeImage({
     return image.path;
   } on Exception catch (e) {
     final String errorMsg = 'Failed to update image:\n$e';
-    logAlert(context, errorMsg);
+    logAlert(context: context, message: errorMsg);
     return null;
   }
 }
