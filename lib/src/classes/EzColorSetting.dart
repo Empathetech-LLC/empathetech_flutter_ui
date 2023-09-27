@@ -11,20 +11,21 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzColorSetting extends StatefulWidget {
   final Key? key;
 
-  /// [EzConfig] key whose value will be updated
+  /// [EzConfig.instance] key whose value will be updated
   final String toControl;
 
-  /// Label [String] to display with on the [ElevatedButton]
+  /// [String] to display alongside the [ElevatedButton] which opens an [ezColorPicker]
+  /// [message] will be on the left when [EzConfig.dominantHand] is [Hand.right], and vice versa
   final String message;
 
-  /// Optional [EzConfig] key of whatever will be this colors background
-  /// In the event that [toControl] is a [Text]colorKey
+  /// Optional [EzConfig.instance] key that controls the background color...
+  /// in the event [toControl] is a [Text]colorKey
   final String? textBackgroundKey;
 
   /// Creates a tool for updating the value of [toControl] in [EzConfig]
-  /// The [EzColorSetting] title is the passed [message] and is paired with a
-  /// preview of the starting color ([toControl]) which, on click, opens an [ezColorPicker]
-  /// If a [textBackgroundKey] is provided, it will be used to generate a recommended color pair
+  /// If [toControl] is a [Text]colorKey, provide [textBackgroundKey]
+  /// [textBackgroundKey]s current [Color] in [EzConfig.instance] will be used to generate a recommended color (based on readability)
+  /// The user will still be given the option to fully customize the [Color]
   const EzColorSetting({
     this.key,
     required this.toControl,
