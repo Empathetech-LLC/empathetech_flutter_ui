@@ -135,6 +135,13 @@ But you don't have to wait for us! You can make a fork and start your personal c
 
 Also, if you build something with EFUI, let us know! We'd love to have a third-party section under [usage](#usage)
 
+### Planned features
+#### That we could use some help with!
+
+- An Ez solution to [internationalization](https://docs.flutter.dev/ui/accessibility-and-localization/internationalization)
+- More EzWidgets with required and/or preconfigured semantics
+- Querying [GoogleFonts](https://pub.dev/packages/google_fonts) rather than relying on a predetermined [list](/lib/src/consts/googleFonts.dart)
+
 ## Money
 
 Many thanks for any and all donations! We're happy to have helped!
