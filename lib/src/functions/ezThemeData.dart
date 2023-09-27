@@ -8,6 +8,8 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 ThemeData ezThemeData({required bool light}) {
+  // Gather values from EzConfig //
+
   final Brightness brightness = light ? Brightness.light : Brightness.dark;
 
   final Color themeColor =
@@ -51,6 +53,8 @@ ThemeData ezThemeData({required bool light}) {
 
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
+
+  // Build the ThemeData //
 
   return ThemeData(
     brightness: brightness,
