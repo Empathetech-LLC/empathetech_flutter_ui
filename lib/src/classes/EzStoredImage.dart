@@ -11,13 +11,16 @@ import 'package:flutter/material.dart';
 class EzStoredImage extends Image {
   final Key? key;
 
-  /// [EzConfig] key that contains the path to the image you wish to load
+  /// [EzConfig.instance] key whose value is the path to your stored image
   final String prefsKey;
 
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
+
+  /// Message for screen readers to output
   final String semanticLabel;
+
   final double? width;
   final double? height;
   final Color? color;
@@ -33,7 +36,7 @@ class EzStoredImage extends Image {
   final FilterQuality filterQuality;
 
   /// [Image] wrapper for when [prefsKey] can resolve to either an [AssetImage] or [FileImage]
-  /// If the [ImageProvider] is known, it is preferred to called the standard const [Image] constructor
+  /// If the [ImageProvider] is known, it is preferred to called the standard const [EzImage] constructor
   /// Also requires a [semanticLabel] for encforcing accessibility
   EzStoredImage({
     this.key,
@@ -80,11 +83,9 @@ class EzStoredImage extends Image {
 }
 
 /// Automatically handles [AssetImage] vs [FileImage]
-/// Technically supports [NetworkImage], but at this time it isn't recommended
-/// Will use [EzConfig] preferences as a backup if the [EzConfig] prefs call fails
-/// In a total failure event, a stock owl image will be shown
+/// In the event of a failure, a stock owl image will be shown
 ImageProvider getProvider(String prefsKey) {
-  // Something went wrong, return watchful owl
+  // If something goes wrong, return a watchful owl
   const String errorURL = 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
   dynamic prefsValue = EzConfig.instance.prefs[prefsKey];
