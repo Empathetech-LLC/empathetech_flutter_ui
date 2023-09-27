@@ -129,9 +129,8 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for confirming a reset to [toControl]'s value in [EzConfig.instance.defaults]
+  /// Opens an [EzAlertDialog] for confirming a reset to [toControl]'s value in [defaultConfig]
   /// A preview of the reset color is shown
-  /// Returns the [Color.value] of the "reset color" from [EzConfig.instance.defaults] (null otherwise)
   Future<dynamic> _reset(BuildContext context) {
     final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
 
