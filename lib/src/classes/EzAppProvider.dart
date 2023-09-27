@@ -15,7 +15,7 @@ class EzAppProvider extends StatelessWidget {
   final TargetPlatform? initialPlatform;
 
   /// App to be provided
-  /// Shout-out [EzApp]!
+  /// Pairs best with [EzApp]
   final PlatformApp app;
 
   /// [PlatformProvider] wrapper with [EzConfig] theming
@@ -27,7 +27,7 @@ class EzAppProvider extends StatelessWidget {
     required this.app,
   });
 
-  // Gateher theme data //
+  // Gather theme data //
 
   final bool? savedLight = EzConfig.instance.preferences.getBool(isLightKey);
 
