@@ -9,30 +9,16 @@ import 'package:flutter/material.dart';
 
 class EzRow extends StatelessWidget {
   final Key? key;
-
-  /// Inherited from [Row]
   final MainAxisAlignment mainAxisAlignment;
-
-  /// Inherited from [Row]
   final MainAxisSize mainAxisSize;
-
-  /// Inherited from [Row]
   final CrossAxisAlignment crossAxisAlignment;
-
-  /// Inherited from [Row]
   final TextDirection? textDirection;
-
-  /// Inherited from [Row]
   final VerticalDirection verticalDirection;
-
-  /// Inherited from [Row]
   final TextBaseline? textBaseline;
-
-  /// Inherited from [Row]
   final List<Widget> children;
 
-  /// Whether [children] should be
-  /// If true, [children] will be reversed when [EzConfig.instance]s  is [Hand.left]
+  /// Whether this should respond to [EzConfig.dominantHand] changes
+  /// If true, [children] will be reversed when [EzConfig.dominantHand] is [Hand.left]
   final bool reverseHands;
 
   /// [Row] wrapper that automatically supports [EzConfig.dominantHand]
@@ -49,6 +35,7 @@ class EzRow extends StatelessWidget {
     this.reverseHands = true,
   }) : super(key: key);
 
+  /// Reverses [children] when [reverseHands] is true and [EzConfig.dominantHand] is [Hand.left]
   List<Widget> _getList() {
     if (reverseHands && EzConfig.instance.dominantHand == Hand.left) {
       return children.reversed.toList();
