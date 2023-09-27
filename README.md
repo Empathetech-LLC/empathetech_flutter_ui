@@ -7,7 +7,7 @@ Apps built with EFUI will be:
   - Manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - User customizable
   - Users can/will have control over colors, fonts, spacing, and so much more
-- Dynamically styled to match OS convention (Apple ecosystem apps will feel native)
+- Dynamically styled to match OS convention (Apple ecosystem apps will feel more native)
   - [Shoutout](#flutter-oss)
 - Responsive to screen size
 
@@ -25,7 +25,7 @@ Last and DEFINITELY NOT least, thanks to Flutter, fully cross platform! EFUI wor
 
 If you're new to Flutter: welcome! The EFUI example app is full of comments to help you on your path.
 
-If not, installation instructions can be found on [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
+Otherwise, installation instructions can be found on [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
 
 ## Beginner tutorials
 
@@ -94,9 +94,11 @@ class EFUIExample extends StatelessWidget {
 
 ## How it works
 
-When an `EzApp` starts, `EzConfig` is used to generate the app's [theme data](lib/functions/ezThemeData.dart) based on user settings stored via [shared preferences](https://pub.dev/packages/shared_preferences).
+When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/functions/ezThemeData.dart), starting with the [defaults]() gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
 
-In conjunction with the custom widgets below, `EzConfig` enables user customization
+In the code, `EzConfig` has a globally accessible instance that can be used to query the live configuration.
+
+Then, in conjunction with the custom widgets below, `EzConfig` enables user customization
 
 * [EzThemeModeSwitch](lib/classes/EzThemeModeSwitch.dart): A toggle for users to switch between light, dark, or system theming.
 * [EzDominantHandSwitch](lib/classes/EzDominantHandSwitch.dart): Moves common touch points to benefit lefty's when they want it!
@@ -110,7 +112,7 @@ In conjunction with the custom widgets below, `EzConfig` enables user customizat
 
 There's lots of other cool stuff in EFUI, like [EzRowCol](lib/classes/EzRowCol.dart), [EzNotifications](lib/classes/EzNotifications.dart), and [EzVideoPlayer](lib/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
 
-**P.S.** In the code, `EzConfig` has a globally accessible instance that can be used to query the live configuration.
+**P.S.** 
 
 ## See the example
 
