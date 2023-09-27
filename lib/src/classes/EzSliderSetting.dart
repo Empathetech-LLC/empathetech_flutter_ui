@@ -12,10 +12,10 @@ class EzSliderSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String prefsKey;
 
-  /// Custom enum for determining the preview widget's required
+  /// enum for determining the preview Widget(s) required
   final SettingType type;
 
-  /// [String] that will be displayed above the [Slider]
+  /// [String] that will be displayed at the top of the [BottomSheet]
   final String title;
 
   /// Smallest value that can be set
@@ -58,7 +58,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late double textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
-  /// Return the preview [Widget]s for the passed [SettingType]
+  // Define build functions //
+
+  /// Return the preview Widget(s) for the passed [SettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
     switch (widget.type) {
       // Button spacing
@@ -271,10 +273,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       EzSpacer(margin),
     ]);
 
-    // Build time!
     return toReturn;
   }
 
+  /// Return the button [Icon] for the passed [SettingType]
   Icon _buildIcon() {
     switch (widget.type) {
       case SettingType.margin:
@@ -289,6 +291,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
         return const Icon(Icons.space_bar);
     }
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
