@@ -55,9 +55,7 @@ void setPageTitle({
   required BuildContext context,
   required String title,
 }) {
-  SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(label: title),
-  );
+  SystemChrome.setApplicationSwitcherDescription(ApplicationSwitcherDescription(label: title));
 }
 
 /// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
