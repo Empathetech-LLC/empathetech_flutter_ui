@@ -30,7 +30,7 @@ class EzImage extends Image {
   final FilterQuality filterQuality;
 
   /// [Image] wrapper that makes [semanticLabel] required
-  EzImage({
+  const EzImage({
     this.key,
     required this.image,
     this.frameBuilder,
