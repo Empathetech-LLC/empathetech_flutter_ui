@@ -14,9 +14,12 @@ class EzRowCol extends StatelessWidget {
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
   final List<Widget> children;
+
+  /// Whether the [Row] should switch to a [Column]
   final bool limitedSpace;
 
   /// [Row] that will switch to a [Column] if there's [limitedSpace]
+  /// Alignment, size, and direction values will be shared
   EzRowCol({
     this.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
