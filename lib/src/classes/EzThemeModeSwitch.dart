@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
-  /// Standardized tool for optionally overwriting [ThemeMode.system] via [EzConfig]
+  /// Standardized tool for changing the [ThemeMode]
   const EzThemeModeSwitch({Key? key}) : super(key: key);
 
   @override
@@ -19,7 +19,6 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
-  // At the time of writing, Semantics does not have a const constructor
   final List<DropdownMenuItem<ThemeMode>> items = [
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
@@ -59,7 +58,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           style: style,
           semanticsLabel: 'Select theme mode',
         ),
-
         EzSpacer.row(space),
 
         // Button
