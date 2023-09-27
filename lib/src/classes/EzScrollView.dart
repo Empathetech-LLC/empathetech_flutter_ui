@@ -32,15 +32,19 @@ class EzScrollView extends SingleChildScrollView {
   final TextDirection? textDirection;
   final TextBaseline? textBaseline;
   final VerticalDirection verticalDirection;
+
+  /// Replacement to original [child] parameter
+  /// [children] will be placed into an [EzRow] or [Column] based on [scrollDirection]
   final List<Widget>? children;
 
   /// [SingleChildScrollView] wrapper
   /// Prefers the [children] list rather than [child] Widget
-  /// Behaves like a standard wrapper if [child] is provided
-  /// If [children] are provided...
-  /// Dynamically switches the child widget between an [EzRow] and [Column] based on [scrollDirection]
+  /// Behaves like a standard [SingleChildScrollView] if [child] is provided
+  /// If [children] are provided the original child parameter will be an [EzRow] or [Column] based on [scrollDirection]
+  /// Parameters from both [SingleChildScrollView] and [EzRow]/[Column] are supported
   const EzScrollView({
-    // SingleChildScrollView
+    // SingleChildScrollView parameters //
+
     this.key,
     this.scrollDirection = Axis.vertical,
     this.reverseHands = false,
@@ -55,7 +59,8 @@ class EzScrollView extends SingleChildScrollView {
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
-    // EzRow/Column
+    // EzRow/Column parameters //
+
     this.mainAxisSize = MainAxisSize.max,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
