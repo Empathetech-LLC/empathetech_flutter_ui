@@ -87,7 +87,7 @@ class ExampleScaffold extends StatelessWidget {
       fab: fab,
     );
 
-    // Build //
+    // Return the build //
 
     return (widthOf(context) <= threshold)
         ? LayoutSize(isLimited: true, child: smallBuild)

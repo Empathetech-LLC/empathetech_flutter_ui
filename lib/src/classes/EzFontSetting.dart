@@ -19,19 +19,23 @@ class EzFontSetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
+  // Gather theme data //
+
   String? currFontFamily = EzConfig.instance.fontFamily;
 
   final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
-  /// Builds an [EzAlertDialog] from mapping [googleStyles] to a list of [ElevatedButton]s
-  /// Returns the chosen font's name
+  // Define functions //
+
+  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
   Future<dynamic> _chooseGoogleFont(BuildContext context) {
     List<Widget> buttons = [];
 
     googleStyles.forEach((String font, TextStyle style) {
       buttons.addAll([
         // Map font to a selectable button (title == name)
+        // Marks the default font with "* (Default)"
         ElevatedButton(
           onPressed: () {
             EzConfig.instance.preferences.setString(fontFamilyKey, font);
@@ -58,6 +62,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       ),
     );
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {

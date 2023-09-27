@@ -50,7 +50,7 @@ class TitleBar extends StatelessWidget {
       ),
     );
 
-    // Return build //
+    // Return the build //
 
     return Row(
       mainAxisSize: MainAxisSize.min,

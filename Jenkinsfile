@@ -12,7 +12,7 @@ node('00-flutter') {
       stage('Validate versioning') {
         withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
           script {
-            //// Initialize consts & trackers
+            // Initialize consts & trackers //
 
             def versionRegex = "[0-9]+.[0-9]+.[0-9]+" // CPP
             def trackedFiles = ['APP_VERSION','CHANGELOG.md','pubspec.yaml'] // CPP
@@ -20,7 +20,7 @@ node('00-flutter') {
             def versions = new HashSet()
             def result = 0
             
-            //// Check for updates from base branch
+            // Check for updates from base branch //
 
             println "Validating:\n\t${trackedFiles}"
 
@@ -60,7 +60,7 @@ node('00-flutter') {
               }
             }
 
-            //// Check for matching versions
+            // Check for matching versions //
 
             println "\n${versions.size()} version(s) found:\n\t${versions}"
 
@@ -69,7 +69,7 @@ node('00-flutter') {
               result = -1
             }
 
-            //// Return result
+            // Return result //
 
             if(result != 0) {
               error("Errors found, read above log")
@@ -157,7 +157,7 @@ node('00-flutter') {
               error("ERROR: Current commit already has a tag")
             }
 
-            ////  Gather CHANGELOG notes for PRs' bodies
+            // Gather CHANGELOG notes for PRs' bodies //
             
             def changelog = readFile('CHANGELOG.md').split("\n")
 
