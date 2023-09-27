@@ -17,7 +17,6 @@ class EzWebLink extends TextSpan {
   /// Unfortunately, the context (right-click) menu will not work as expected here
   /// Current theory: the [TextSpan] clobbers it, but...
   /// Empathetech chose to prioritize selectable text >> context menus
-
   EzWebLink({
     required String text,
     required Uri url,

@@ -34,8 +34,7 @@ class EzTextStyle extends TextStyle {
   final String? package;
   final TextOverflow? overflow;
 
-  /// Setup a [TextStyle] using the [fontFamilyKey] from [EzConfig]
-  /// And some custom spacing defaults for readability
+  /// [TextStyle] wrapper with some custom defaults for readability
   const EzTextStyle({
     this.inherit = true,
     this.color,

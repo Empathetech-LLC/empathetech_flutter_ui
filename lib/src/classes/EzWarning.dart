@@ -8,8 +8,12 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzWarning extends StatelessWidget {
+  /// Short header [String] to grab the user's attention
   final String warning;
+
+  /// Body of the [EzWarning]
   final String message;
+
   final TextStyle? style;
 
   /// [Card] wrapper designed to grab attention for warnings...
