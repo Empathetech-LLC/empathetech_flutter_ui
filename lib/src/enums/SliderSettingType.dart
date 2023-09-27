@@ -52,3 +52,21 @@ extension SettingLabel on SliderSettingType {
     }
   }
 }
+
+/// Enumerator extension for getting the proper button [Icon] for [EzSliderSetting.type]
+extension SettingIcon on SliderSettingType {
+  Icon get icon {
+    switch (this) {
+      case SliderSettingType.margin:
+        return const Icon(Icons.margin);
+      case SliderSettingType.padding:
+        return const Icon(Icons.padding);
+      case SliderSettingType.circleSize:
+        return const Icon(Icons.circle);
+      case SliderSettingType.buttonSpacing:
+        return const Icon(Icons.space_bar);
+      case SliderSettingType.textSpacing:
+        return const Icon(Icons.space_bar);
+    }
+  }
+}

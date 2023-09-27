@@ -276,22 +276,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
     return toReturn;
   }
 
-  /// Return the button [Icon] for the passed [SliderSettingType]
-  Icon _buildIcon() {
-    switch (widget.type) {
-      case SliderSettingType.margin:
-        return const Icon(Icons.margin);
-      case SliderSettingType.padding:
-        return const Icon(Icons.padding);
-      case SliderSettingType.circleSize:
-        return const Icon(Icons.circle);
-      case SliderSettingType.buttonSpacing:
-        return const Icon(Icons.space_bar);
-      case SliderSettingType.textSpacing:
-        return const Icon(Icons.space_bar);
-    }
-  }
-
   // Return the build //
 
   @override
@@ -314,7 +298,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               },
             ),
           ),
-          icon: _buildIcon(),
+          icon: widget.type.icon,
           label: Text(widget.title),
         ),
       ),
