@@ -41,7 +41,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Margin
             const EzSliderSetting(
               prefsKey: marginKey,
-              type: SettingType.margin,
+              type: SliderSettingType.margin,
               title: 'Margin',
               min: 5.0,
               max: 50.0,
@@ -53,7 +53,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Padding
             const EzSliderSetting(
               prefsKey: paddingKey,
-              type: SettingType.padding,
+              type: SliderSettingType.padding,
               title: 'Padding',
               min: 0.0,
               max: 50.0,
@@ -65,7 +65,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Circle button size
             const EzSliderSetting(
               prefsKey: circleDiameterKey,
-              type: SettingType.circleSize,
+              type: SliderSettingType.circleSize,
               title: 'Circle button size',
               min: 30,
               max: 100,
@@ -77,7 +77,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Button spacing
             const EzSliderSetting(
               prefsKey: buttonSpacingKey,
-              type: SettingType.buttonSpacing,
+              type: SliderSettingType.buttonSpacing,
               title: 'Button spacing',
               min: 10.0,
               max: 100.0,
@@ -89,7 +89,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Text spacing
             const EzSliderSetting(
               prefsKey: textSpacingKey,
-              type: SettingType.textSpacing,
+              type: SliderSettingType.textSpacing,
               title: 'Text spacing',
               min: 10.0,
               max: 100.0,

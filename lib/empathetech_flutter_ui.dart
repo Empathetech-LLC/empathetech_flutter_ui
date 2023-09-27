@@ -53,5 +53,5 @@ export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
 
 // Enums
-export 'src/enums/dominantHand.dart';
-export 'src/enums/sliderSettings.dart';
+export 'src/enums/Hand.dart';
+export 'src/enums/SliderSettingType.dart';

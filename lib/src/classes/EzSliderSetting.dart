@@ -13,7 +13,7 @@ class EzSliderSetting extends StatefulWidget {
   final String prefsKey;
 
   /// enum for determining the preview Widget(s) required
-  final SettingType type;
+  final SliderSettingType type;
 
   /// [String] that will be displayed at the top of the [BottomSheet]
   final String title;
@@ -60,11 +60,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   // Define build functions //
 
-  /// Return the preview Widget(s) for the passed [SettingType]
+  /// Return the preview Widget(s) for the passed [SliderSettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
     switch (widget.type) {
       // Button spacing
-      case SettingType.buttonSpacing:
+      case SliderSettingType.buttonSpacing:
         return [
           // Title padding
           EzSpacer(padding),
@@ -89,7 +89,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         ];
 
       // Circle size
-      case SettingType.circleSize:
+      case SliderSettingType.circleSize:
         return [
           // Title padding
           EzSpacer(padding),
@@ -108,7 +108,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         ];
 
       // Margin
-      case SettingType.margin:
+      case SliderSettingType.margin:
         double marginScale = 90.0 / widthOf(context);
         double liveMargin = currValue * marginScale;
 
@@ -144,7 +144,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         ];
 
       // Padding
-      case SettingType.padding:
+      case SliderSettingType.padding:
         return [
           // Title padding && live preview part 1
           EzSpacer(currValue),
@@ -162,7 +162,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         ];
 
       // Text spacing
-      case SettingType.textSpacing:
+      case SliderSettingType.textSpacing:
         return [
           // Title padding
           EzSpacer(padding),
@@ -276,18 +276,18 @@ class _SliderSettingState extends State<EzSliderSetting> {
     return toReturn;
   }
 
-  /// Return the button [Icon] for the passed [SettingType]
+  /// Return the button [Icon] for the passed [SliderSettingType]
   Icon _buildIcon() {
     switch (widget.type) {
-      case SettingType.margin:
+      case SliderSettingType.margin:
         return const Icon(Icons.margin);
-      case SettingType.padding:
+      case SliderSettingType.padding:
         return const Icon(Icons.padding);
-      case SettingType.circleSize:
+      case SliderSettingType.circleSize:
         return const Icon(Icons.circle);
-      case SettingType.buttonSpacing:
+      case SliderSettingType.buttonSpacing:
         return const Icon(Icons.space_bar);
-      case SettingType.textSpacing:
+      case SliderSettingType.textSpacing:
         return const Icon(Icons.space_bar);
     }
   }
