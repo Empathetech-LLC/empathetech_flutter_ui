@@ -9,13 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// [EzVideoPlayer] control buttons visibility state
-enum ButtonVis {
-  alwaysOff,
-  alwaysOn,
-  auto,
-}
-
 class EzVideoPlayer extends StatefulWidget {
   final VideoPlayerController controller;
 
