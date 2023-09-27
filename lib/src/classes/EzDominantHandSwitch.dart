@@ -8,7 +8,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
-  /// Standardized tool for updating [EzConfig] dominantSide
+  /// Standardized tool for updating [EzConfig] dominantHand
   const EzDominantHandSwitch({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
-  Hand _currSide = EzConfig.instance.dominantSide;
+  Hand _currSide = EzConfig.instance.dominantHand;
 
   final double space = EzConfig.instance.prefs[buttonSpacingKey];
 
@@ -59,8 +59,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
           value: _currSide,
           items: items,
           dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-          onChanged: (Hand? newDominantSide) {
-            switch (newDominantSide) {
+          onChanged: (Hand? newDominantHand) {
+            switch (newDominantHand) {
               case Hand.right:
                 EzConfig.instance.preferences.remove(isRightKey);
                 setState(() {

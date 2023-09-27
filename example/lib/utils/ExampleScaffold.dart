@@ -44,7 +44,7 @@ class ExampleScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final bool leftHandedUser = EzConfig.instance.dominantSide == Hand.left;
+    final bool leftHandedUser = EzConfig.instance.dominantHand == Hand.left;
 
     final TextStyle? appBarTextStyle = Theme.of(context).appBarTheme.titleTextStyle;
     final double textScalar = MediaQuery.of(context).textScaleFactor;
