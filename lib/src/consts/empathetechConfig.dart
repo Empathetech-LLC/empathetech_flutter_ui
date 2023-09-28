@@ -5,8 +5,31 @@
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-/// Empathetech's default/base theme configuration
-const Map<String, dynamic> defaultConfig = {
+import 'package:flutter/material.dart';
+
+// Define brand Colors //
+
+const int EmpathEucalyptusHex = 0xFF20DAA5;
+const Color EmpathEucalyptus = Color(EmpathEucalyptusHex);
+
+const int EmpathPurpleHex = 0xFFA520DA;
+const Color EmpathPurple = Color(EmpathPurpleHex);
+
+const int EmpathGoldenrodHex = 0xFFDAA520;
+const Color EmpathGoldenrod = Color(EmpathGoldenrodHex);
+
+const int whiteHex = 0xFFFFFFFF;
+const int offWhiteHex = 0xFFF5F5F5;
+const Color offWhite = Color(offWhiteHex);
+
+const int blackHex = 0xFF000000;
+const int offBlackHex = 0xFF191919;
+const Color offBlack = Color(offBlackHex);
+
+// Define EzConfig base ///
+
+/// Empathetech's base theme configuration for [EzConfig]
+const Map<String, dynamic> empathetechConfig = {
   // App-wide //
   marginKey: 15.0,
   paddingKey: 12.5,
