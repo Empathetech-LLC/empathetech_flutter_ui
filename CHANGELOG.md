@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 - Project line length to 99
 - Renamed ParagraphSpacing to TextSpacing
 - Semantics
+- Parameters (minor breaks)
+  - Updated EzColorSetting.message to EzColorSetting.name
 
 ### Added
 - Example app
