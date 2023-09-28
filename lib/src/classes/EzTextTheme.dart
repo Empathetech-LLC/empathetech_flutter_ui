@@ -10,9 +10,8 @@ import 'package:flutter/material.dart';
 class EzTextTheme extends TextTheme {
   final Color color;
 
-  EzTextTheme({
-    required this.color,
-  }) : super(
+  EzTextTheme({required this.color})
+      : super(
           displayLarge: buildDisplayLarge(color),
           displayMedium: buildDisplayMedium(color),
           displaySmall: buildDisplaySmall(color),
@@ -31,8 +30,8 @@ class EzTextTheme extends TextTheme {
         );
 }
 
-// Default sizes are based on
-// https://api.flutter.dev/flutter/material/TextTheme-class.html
+// Build functions //
+// Sizes taken from https://api.flutter.dev/flutter/material/TextTheme-class.html
 
 TextStyle buildDisplayLarge(Color color) {
   return EzTextStyle(
