@@ -55,74 +55,97 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               primary: false,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Theme colors //
+                children: isLight
+                    ? // Editing light theme //
+                    [
+                        // Theme colors
+                        const EzColorSetting(toControl: lightThemeColorKey, name: 'Theme'),
+                        EzSpacer(buttonSpacer),
 
-                  // Base
-                  EzColorSetting(
-                    toControl: isLight ? lightThemeColorKey : darkThemeColorKey,
-                    name: 'Theme',
-                  ),
-                  EzSpacer(buttonSpacer),
+                        const EzColorSetting(
+                          toControl: lightThemeTextColorKey,
+                          name: 'Theme text',
+                          textBackgroundKey: lightThemeColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
 
-                  // Text
-                  EzColorSetting(
-                    toControl: isLight ? lightThemeTextColorKey : darkThemeTextColorKey,
-                    name: 'Theme text',
-                    textBackgroundKey: isLight ? lightThemeColorKey : darkThemeColorKey,
-                  ),
-                  EzSpacer(buttonSpacer),
+                        // Page colors
+                        const EzColorSetting(toControl: lightBackgroundColorKey, name: 'Page'),
+                        EzSpacer(buttonSpacer),
 
-                  // Page colors //
+                        const EzColorSetting(
+                          toControl: lightBackgroundTextColorKey,
+                          name: 'Page text',
+                          textBackgroundKey: lightBackgroundColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
 
-                  // Base
-                  EzColorSetting(
-                    toControl: isLight ? lightBackgroundColorKey : darkBackgroundColorKey,
-                    name: 'Page',
-                  ),
-                  EzSpacer(buttonSpacer),
+                        // Button colors
+                        const EzColorSetting(toControl: lightButtonColorKey, name: 'Buttons'),
+                        EzSpacer(buttonSpacer),
 
-                  // Text
-                  EzColorSetting(
-                    toControl: isLight ? lightBackgroundTextColorKey : darkBackgroundTextColorKey,
-                    name: 'Page text',
-                    textBackgroundKey: isLight ? lightBackgroundColorKey : darkBackgroundColorKey,
-                  ),
-                  EzSpacer(buttonSpacer),
+                        const EzColorSetting(
+                          toControl: lightButtonTextColorKey,
+                          name: 'Button text',
+                          textBackgroundKey: lightButtonColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
 
-                  // Button colors //
+                        // Accent colors
+                        const EzColorSetting(toControl: lightAccentColorKey, name: 'Accent'),
+                        EzSpacer(buttonSpacer),
 
-                  // Base
-                  EzColorSetting(
-                    toControl: isLight ? lightButtonColorKey : darkButtonColorKey,
-                    name: 'Buttons',
-                  ),
-                  EzSpacer(buttonSpacer),
+                        const EzColorSetting(
+                          toControl: lightAccentTextColorKey,
+                          name: 'Accent text',
+                          textBackgroundKey: lightAccentColorKey,
+                        ),
+                      ]
+                    : // Editing dark theme //
+                    [
+                        // Theme colors
+                        const EzColorSetting(toControl: darkThemeColorKey, name: 'Theme'),
+                        EzSpacer(buttonSpacer),
 
-                  // Text
-                  EzColorSetting(
-                    toControl: isLight ? lightButtonTextColorKey : darkButtonTextColorKey,
-                    name: 'Button text',
-                    textBackgroundKey: isLight ? lightButtonColorKey : darkButtonColorKey,
-                  ),
-                  EzSpacer(buttonSpacer),
+                        const EzColorSetting(
+                          toControl: darkThemeTextColorKey,
+                          name: 'Theme text',
+                          textBackgroundKey: darkThemeColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
 
-                  // Accent colors //
+                        // Page colors
+                        const EzColorSetting(toControl: darkBackgroundColorKey, name: 'Page'),
+                        EzSpacer(buttonSpacer),
 
-                  // Base
-                  EzColorSetting(
-                    toControl: isLight ? lightAccentColorKey : darkAccentColorKey,
-                    name: 'Accent',
-                  ),
-                  EzSpacer(buttonSpacer),
+                        const EzColorSetting(
+                          toControl: darkBackgroundTextColorKey,
+                          name: 'Page text',
+                          textBackgroundKey: darkBackgroundColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
 
-                  // Text
-                  EzColorSetting(
-                    toControl: isLight ? lightAccentTextColorKey : darkAccentTextColorKey,
-                    name: 'Accent text',
-                    textBackgroundKey: isLight ? lightAccentColorKey : darkAccentColorKey,
-                  ),
-                ],
+                        // Button colors
+                        const EzColorSetting(toControl: darkButtonColorKey, name: 'Buttons'),
+                        EzSpacer(buttonSpacer),
+
+                        const EzColorSetting(
+                          toControl: darkButtonTextColorKey,
+                          name: 'Button text',
+                          textBackgroundKey: darkButtonColorKey,
+                        ),
+                        EzSpacer(buttonSpacer),
+
+                        // Accent colors
+                        const EzColorSetting(toControl: darkAccentColorKey, name: 'Accent'),
+                        EzSpacer(buttonSpacer),
+
+                        const EzColorSetting(
+                          toControl: darkAccentTextColorKey,
+                          name: 'Accent text',
+                          textBackgroundKey: darkAccentColorKey,
+                        ),
+                      ],
               ),
             ),
             EzSpacer(textSpacer),
