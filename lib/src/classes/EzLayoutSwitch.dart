@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 
-class LayoutSize extends InheritedWidget {
+class EzLayoutSwitch extends InheritedWidget {
   /// true == small/mobile screen
   /// false == large/tablet/desktop screen
   final bool isLimited;
@@ -17,16 +17,16 @@ class LayoutSize extends InheritedWidget {
   /// Enables real-time responses to screen space changes
   /// Currently uses the bool [isLimited] for switching between a small and large build
   /// Could be expanded limitlessly by replacing [isLimited] with a custom enum
-  const LayoutSize({
+  const EzLayoutSwitch({
     Key? key,
     required this.isLimited,
     required this.child,
   }) : super(key: key, child: child);
 
-  static LayoutSize? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<LayoutSize>();
+  static EzLayoutSwitch? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<EzLayoutSwitch>();
   }
 
   @override
-  bool updateShouldNotify(LayoutSize old) => isLimited != old.isLimited;
+  bool updateShouldNotify(EzLayoutSwitch old) => isLimited != old.isLimited;
 }
