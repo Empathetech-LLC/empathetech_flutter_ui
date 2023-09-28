@@ -16,7 +16,7 @@ class EzConfig {
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// The factory constructor will merge [defaultConfig] with any provided customDefaults
+  /// The factory constructor will merge [empathetechConfig] with any provided customDefaults
   final Map<String, dynamic> defaults;
 
   /// Live values in use => [defaults] merged with user [preferences]
@@ -55,7 +55,7 @@ class EzConfig {
     if (_instance == null) {
       // Load custom defaults //
 
-      Map<String, dynamic> mergedDefaults = new Map.from(defaultConfig);
+      Map<String, dynamic> mergedDefaults = new Map.from(empathetechConfig);
       if (customDefaults != null) mergedDefaults.addAll(customDefaults);
 
       // Load user preferences //
