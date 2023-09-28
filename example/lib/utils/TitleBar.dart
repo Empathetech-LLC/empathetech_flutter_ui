@@ -26,7 +26,7 @@ class TitleBar extends StatelessWidget {
   static const String _title = 'EFUI';
 
   /// The live horizontal space that the [TitleBar] needs
-  /// Helpful for layout calculations
+  /// Helpful for potential [EzLayoutSwitch] calculations
   double get width {
     double total = spacer;
 
