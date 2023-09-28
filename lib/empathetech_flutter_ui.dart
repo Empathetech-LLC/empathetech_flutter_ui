@@ -38,22 +38,21 @@ export 'src/classes/EzVideoPlayer.dart';
 export 'src/classes/EzWarning.dart';
 export 'src/classes/EzWebLink.dart';
 
-// Functions
-export 'src/functions/dialogs.dart';
-export 'src/functions/ezAlertActions.dart';
-export 'src/functions/ezThemeData.dart';
-export 'src/functions/helpers.dart';
-export 'src/functions/navigators.dart';
-export 'src/functions/storage.dart';
-
 // Constants
-export 'src/consts/colors.dart';
 export 'src/consts/credits.dart';
-export 'src/consts/defaultConfig.dart';
+export 'src/consts/empathetechConfig.dart';
 export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
+export 'src/consts/themeData.dart';
 
 // Enums
 export 'src/enums/ButtonVis.dart';
 export 'src/enums/Hand.dart';
 export 'src/enums/SliderSettingType.dart';
+
+// Functions
+export 'src/functions/dialogs.dart';
+export 'src/functions/ezAlertActions.dart';
+export 'src/functions/helpers.dart';
+export 'src/functions/navigators.dart';
+export 'src/functions/storage.dart';
