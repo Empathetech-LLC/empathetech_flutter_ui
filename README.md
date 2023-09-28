@@ -93,7 +93,7 @@ class EFUIExample extends StatelessWidget {
 
 ## How it works
 
-When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/src/functions/ezThemeData.dart), starting with the [defaults](/lib/src/consts/defaultConfig.dart) gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
+When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/src/functions/ezThemeData.dart), starting with the [defaults](/lib/src/consts/empathetechConfig.dart) gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
 
 In the code, `EzConfig` has a globally accessible instance that can be used to query the live configuration.
 
