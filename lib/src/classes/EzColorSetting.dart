@@ -14,9 +14,9 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig.instance] key whose value will be updated
   final String toControl;
 
-  /// [String] to display alongside the [ElevatedButton] which opens an [ezColorPicker]
-  /// [message] will be on the left when [EzConfig.dominantHand] is [Hand.right], and vice versa
-  final String message;
+  /// User-friendly name of the color whose value will be updated
+  /// [name] will be on the left when [EzConfig.dominantHand] is [Hand.right], and vice versa
+  final String name;
 
   /// Optional [EzConfig.instance] key that controls the background color...
   /// in the event [toControl] is a [Text]colorKey
@@ -29,7 +29,7 @@ class EzColorSetting extends StatefulWidget {
   const EzColorSetting({
     this.key,
     required this.toControl,
-    required this.message,
+    required this.name,
     this.textBackgroundKey,
   }) : super(key: key);
 
@@ -129,7 +129,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for confirming a reset to [toControl]'s value in [defaultConfig]
+  /// Opens an [EzAlertDialog] for confirming a reset to [widget.toControl]'s value in [defaultConfig]
   /// A preview of the reset color is shown
   Future<dynamic> _reset(BuildContext context) {
     final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
@@ -184,16 +184,17 @@ class _ColorSettingState extends State<EzColorSetting> {
       children: [
         // Color label
         EzSelectableText(
-          widget.message,
+          widget.name,
           style: style,
-          semanticsLabel: 'Customize the ${widget.message} color',
+          semanticsLabel: "Customize the ${widget.name} color.",
         ),
         EzSpacer.row(space),
 
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: 'Open a color picker',
+          hint:
+              "Activate to open a color picker for ${widget.name}. Long press to reset ${widget.name}.",
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
