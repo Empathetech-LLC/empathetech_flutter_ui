@@ -38,8 +38,7 @@ const iosNotifDetails = DarwinNotificationDetails(
   presentSound: true,
 );
 
-/// Setup a simple push notification manager/service
-/// Built from [flutter_local_notifications]
+/// Setup a simple push notification manager/service via [FlutterLocalNotificationsPlugin]
 class EzNotifications {
   // Build app settings //
 
