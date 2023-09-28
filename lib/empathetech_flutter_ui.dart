@@ -19,6 +19,7 @@ export 'src/classes/EzDominantHandSwitch.dart';
 export 'src/classes/EzFontSetting.dart';
 export 'src/classes/EzImage.dart';
 export 'src/classes/EzImageSetting.dart';
+export 'src/classes/EzLayoutSwitch.dart';
 export 'src/classes/EzLink.dart';
 export 'src/classes/EzNotifications.dart';
 export 'src/classes/EzRow.dart';
