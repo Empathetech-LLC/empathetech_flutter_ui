@@ -129,7 +129,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           ],
         ),
       ),
-      fab: null,
     );
   }
 }

@@ -100,7 +100,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
           ],
         ),
       ),
-      fab: null,
     );
   }
 }
