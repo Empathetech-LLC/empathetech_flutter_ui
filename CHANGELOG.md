@@ -6,16 +6,19 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - File structure
 - Split EzApp into EzApp and EzAppProvider
+- Split enums into their own folder
 - Pre-existing release check in the Jenkinsfile
 - README
-- EzDialog -> EzAlertDialog
+- Renamed EzDialog to EzAlertDialog
 - Project line length to 99
-- Paragraph -> text
+- Renamed ParagraphSpacing to TextSpacing
+- Semantics
 
 ### Added
 - Example app
 - More comments
 - EzBackAction class
+- EzLayoutSwitch
 
 ## [3.1.2] - 2023-08-26
 ### Updated
