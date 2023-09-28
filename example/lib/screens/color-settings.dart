@@ -61,14 +61,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Base
                   EzColorSetting(
                     toControl: isLight ? lightThemeColorKey : darkThemeColorKey,
-                    message: 'Theme',
+                    name: 'Theme',
                   ),
                   EzSpacer(buttonSpacer),
 
                   // Text
                   EzColorSetting(
                     toControl: isLight ? lightThemeTextColorKey : darkThemeTextColorKey,
-                    message: 'Theme text',
+                    name: 'Theme text',
                     textBackgroundKey: isLight ? lightThemeColorKey : darkThemeColorKey,
                   ),
                   EzSpacer(buttonSpacer),
@@ -78,14 +78,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Base
                   EzColorSetting(
                     toControl: isLight ? lightBackgroundColorKey : darkBackgroundColorKey,
-                    message: 'Page',
+                    name: 'Page',
                   ),
                   EzSpacer(buttonSpacer),
 
                   // Text
                   EzColorSetting(
                     toControl: isLight ? lightBackgroundTextColorKey : darkBackgroundTextColorKey,
-                    message: 'Page text',
+                    name: 'Page text',
                     textBackgroundKey: isLight ? lightBackgroundColorKey : darkBackgroundColorKey,
                   ),
                   EzSpacer(buttonSpacer),
@@ -95,14 +95,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Base
                   EzColorSetting(
                     toControl: isLight ? lightButtonColorKey : darkButtonColorKey,
-                    message: 'Buttons',
+                    name: 'Buttons',
                   ),
                   EzSpacer(buttonSpacer),
 
                   // Text
                   EzColorSetting(
                     toControl: isLight ? lightButtonTextColorKey : darkButtonTextColorKey,
-                    message: 'Button text',
+                    name: 'Button text',
                     textBackgroundKey: isLight ? lightButtonColorKey : darkButtonColorKey,
                   ),
                   EzSpacer(buttonSpacer),
@@ -112,14 +112,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Base
                   EzColorSetting(
                     toControl: isLight ? lightAccentColorKey : darkAccentColorKey,
-                    message: 'Accent',
+                    name: 'Accent',
                   ),
                   EzSpacer(buttonSpacer),
 
                   // Text
                   EzColorSetting(
                     toControl: isLight ? lightAccentTextColorKey : darkAccentTextColorKey,
-                    message: 'Accent text',
+                    name: 'Accent text',
                     textBackgroundKey: isLight ? lightAccentColorKey : darkAccentColorKey,
                   ),
                 ],
