@@ -22,6 +22,7 @@ export 'src/classes/EzImageSetting.dart';
 export 'src/classes/EzLayoutSwitch.dart';
 export 'src/classes/EzLink.dart';
 export 'src/classes/EzNotifications.dart';
+export 'src/classes/EzResetButton.dart';
 export 'src/classes/EzRow.dart';
 export 'src/classes/EzRowCol.dart';
 export 'src/classes/EzScreen.dart';
