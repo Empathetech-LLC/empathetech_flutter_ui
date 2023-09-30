@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
 - Spacer settings previews
 - EzLink && EzWebLink
   - Simplified creation and requiring semantics
-- Image wrappers to require semantics for enforcing accessibility
+- Image wrappers to require semantics for screen readers
 - Semantics updates create minor breaks, hence the middle integer update
 
 ### Added

@@ -18,11 +18,12 @@ class EzLink extends TextSpan {
   /// Link style
   final TextStyle? style;
 
-  /// Hint for accessibility tools
+  /// Hint for screen readers
   /// Where does this link go?
   final String? semanticsLabel;
 
   /// Creates a [TextSpan] with an internal link via [TapGestureRecognizer]
+  /// Requires a [semanticsLabel] for screen readers
   /// See [EzWebLink] for making extertnal links
   EzLink({
     required this.text,

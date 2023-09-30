@@ -37,7 +37,7 @@ class EzStoredImage extends Image {
 
   /// [Image] wrapper for when [prefsKey] can resolve to either an [AssetImage] or [FileImage]
   /// If the [ImageProvider] is known, it is preferred to called the standard const [EzImage] constructor
-  /// Also requires a [semanticLabel] for encforcing accessibility
+  /// Also requires a [semanticLabel] for screen readers
   EzStoredImage({
     this.key,
     required this.prefsKey,
