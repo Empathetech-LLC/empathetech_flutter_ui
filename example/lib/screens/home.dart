@@ -32,8 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextStyle? resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
-  // Build page //
-
   @override
   Widget build(BuildContext context) {
     // Define reset button parameters //
@@ -43,6 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
     };
 
     final void Function() onDeny = () => popScreen(context: context);
+
+    // Return the Build //
 
     return ExampleScaffold(
       body: EzScreen(
