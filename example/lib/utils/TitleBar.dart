@@ -25,27 +25,12 @@ class TitleBar extends StatelessWidget {
 
   static const String _title = 'EFUI';
 
-  /// The live horizontal space that the [TitleBar] needs
-  /// Helpful for potential [EzLayoutSwitch] calculations
-  double get width {
-    double total = spacer;
-
-    total += measureText(
-      text: _title,
-      scalar: scalar,
-      style: style,
-    ).width;
-
-    return total + spacer;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        EzSpacer.row(spacer),
         EzSelectableText.rich(
           EzLink(
             text: _title,
@@ -54,7 +39,6 @@ class TitleBar extends StatelessWidget {
             semanticsLabel: 'Return to the home screen',
           ),
         ),
-        EzSpacer.row(spacer),
       ],
     );
   }
