@@ -40,6 +40,7 @@ class ExampleScaffold extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, toolbarHeight),
         child: AppBar(
+          excludeHeaderSemantics: true,
           toolbarHeight: toolbarHeight,
 
           // Leading
