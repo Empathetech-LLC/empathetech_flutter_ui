@@ -72,7 +72,6 @@ Have fun!""",
                 ),
               ),
             ),
-
             EzSpacer(buttonSpacer),
 
             // Style settings
