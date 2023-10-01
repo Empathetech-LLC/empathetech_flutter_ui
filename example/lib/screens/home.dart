@@ -43,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
             EzWarning(
               warning: 'ATTENTION',
               message: kIsWeb
-                  ? """Each button will preview it\'s changes
+                  ? """Each button will preview it's changes
 Reload the page for your changes to take full effect!
 Have fun!"""
-                  : """Each button will preview it\'s changes
+                  : """Each button will preview it's changes
 Restart the app for your changes to take full effect!
 Have fun!""",
               style: headlineSmall(context),
