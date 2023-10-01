@@ -1,5 +1,5 @@
+import './screens.dart';
 import '../utils/utils.dart';
-import '../screens/screens.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
