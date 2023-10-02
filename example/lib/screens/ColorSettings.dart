@@ -27,13 +27,16 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double diameter = EzConfig.instance.prefs[circleDiameterKey];
+
+  late final TextStyle? resetLinkStyle =
+      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
   // Build page //
 
   @override
   Widget build(BuildContext context) {
     final String themeProfile = isLight ? 'Light' : 'Dark';
+    final String resetMessage = "Reset all $themeProfile colors?";
 
     return ExampleScaffold(
       body: EzScreen(
@@ -70,13 +73,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(buttonSpacer),
 
                         // Page colors
-                        const EzColorSetting(toControl: lightBackgroundColorKey, name: 'Page'),
+                        const EzColorSetting(toControl: lightPageColorKey, name: 'Page'),
                         EzSpacer(buttonSpacer),
 
                         const EzColorSetting(
-                          toControl: lightBackgroundTextColorKey,
+                          toControl: lightPageTextColorKey,
                           name: 'Page text',
-                          textBackgroundKey: lightBackgroundColorKey,
+                          textBackgroundKey: lightPageColorKey,
                         ),
                         EzSpacer(buttonSpacer),
 
@@ -115,13 +118,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(buttonSpacer),
 
                         // Page colors
-                        const EzColorSetting(toControl: darkBackgroundColorKey, name: 'Page'),
+                        const EzColorSetting(toControl: darkPageColorKey, name: 'Page'),
                         EzSpacer(buttonSpacer),
 
                         const EzColorSetting(
-                          toControl: darkBackgroundTextColorKey,
+                          toControl: darkPageTextColorKey,
                           name: 'Page text',
-                          textBackgroundKey: darkBackgroundColorKey,
+                          textBackgroundKey: darkPageColorKey,
                         ),
                         EzSpacer(buttonSpacer),
 
@@ -147,6 +150,36 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         ),
                       ],
               ),
+            ),
+            EzSpacer(buttonSpacer),
+
+            // Local reset "all"
+            EzResetButton(
+              context: context,
+              hint: resetMessage,
+              style: resetLinkStyle,
+              dialogTitle: resetMessage,
+              onConfirm: () {
+                if (isLight) {
+                  EzConfig.instance.preferences.remove(lightThemeColorKey);
+                  EzConfig.instance.preferences.remove(lightThemeTextColorKey);
+                  EzConfig.instance.preferences.remove(lightPageColorKey);
+                  EzConfig.instance.preferences.remove(lightPageTextColorKey);
+                  EzConfig.instance.preferences.remove(lightButtonColorKey);
+                  EzConfig.instance.preferences.remove(lightButtonTextColorKey);
+                  EzConfig.instance.preferences.remove(lightAccentColorKey);
+                  EzConfig.instance.preferences.remove(lightAccentTextColorKey);
+                } else {
+                  EzConfig.instance.preferences.remove(darkThemeColorKey);
+                  EzConfig.instance.preferences.remove(darkThemeTextColorKey);
+                  EzConfig.instance.preferences.remove(darkPageColorKey);
+                  EzConfig.instance.preferences.remove(darkPageTextColorKey);
+                  EzConfig.instance.preferences.remove(darkButtonColorKey);
+                  EzConfig.instance.preferences.remove(darkButtonTextColorKey);
+                  EzConfig.instance.preferences.remove(darkAccentColorKey);
+                  EzConfig.instance.preferences.remove(darkAccentTextColorKey);
+                }
+              },
             ),
             EzSpacer(textSpacer),
           ],
