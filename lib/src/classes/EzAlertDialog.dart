@@ -50,10 +50,10 @@ class EzAlertDialog extends PlatformAlertDialog {
     this.needsClose = true,
   });
 
-  final double _padding = EzConfig.instance.prefs[paddingKey];
-
   @override
   Widget build(BuildContext context) {
+    final double padding = EzConfig.instance.prefs[paddingKey];
+
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
       child: const Text('Close'),
@@ -63,30 +63,30 @@ class EzAlertDialog extends PlatformAlertDialog {
       key: key,
       widgetKey: widgetKey,
       material: (context, platform) => MaterialAlertDialogData(
-        insetPadding: EdgeInsets.all(_padding),
+        insetPadding: EdgeInsets.all(padding),
 
         // Title
         title: title,
 
         // Bottom titlePadding comes from vertical contentPadding
-        titlePadding: EdgeInsets.only(top: _padding, left: _padding, right: _padding),
+        titlePadding: EdgeInsets.only(top: padding, left: padding, right: padding),
 
         // Content
         content: materialActions == null
             ? EzScrollView(children: contents)
             : EzScrollView(children: [
                 ...contents!,
-                EzSpacer(_padding),
+                EzSpacer(padding),
                 ...materialActions!,
               ]),
 
-        contentPadding: EdgeInsets.symmetric(vertical: _padding, horizontal: _padding),
+        contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
         // Title
         title: Padding(
           // No titlePadding equivalent, have to do it manually
-          padding: EdgeInsets.only(bottom: _padding),
+          padding: EdgeInsets.only(bottom: padding),
           child: title,
         ),
 
