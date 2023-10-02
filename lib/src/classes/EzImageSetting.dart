@@ -71,8 +71,10 @@ class _ImageSettingState extends State<EzImageSetting> {
   /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating the prefsKey
   /// Selection is sent to [changeImage]
   Future<dynamic> _chooseImage(BuildContext context) {
+    // Build the dialog opitions //
+
     List<Widget> options = [
-      // From file
+      // Chose from file
       ElevatedButton.icon(
         onPressed: () async {
           String? changed = await changeImage(
@@ -88,7 +90,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
       EzSpacer(_buttonSpacer),
 
-      // From camera
+      // Chose from camera
       ElevatedButton.icon(
         onPressed: () async {
           String? changed = await changeImage(
@@ -104,7 +106,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
       EzSpacer(_buttonSpacer),
 
-      // Reset
+      // Reset image
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
@@ -121,6 +123,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
     ];
 
+    // Clear image (optional)
     if (widget.allowClear)
       options.addAll([
         EzSpacer(_buttonSpacer),
@@ -140,6 +143,8 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ]);
 
+    // Return the dialog //
+
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
@@ -154,7 +159,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      // Choose image
+      // On pressed -> choose image
       onPressed: () async {
         dynamic newPath = await _chooseImage(context);
         if (newPath is String)
@@ -163,7 +168,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           });
       },
 
-      // Show credits
+      // On long press -> show credits
       onLongPress: () => showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
@@ -172,7 +177,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ),
 
-      // UI
+      // Button body
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -182,22 +187,33 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest
-          SizedBox(
-            height: widget.fullscreen ? 160 : 75,
-            width: widget.fullscreen ? 90 : 75,
-            child: (_updatedPath is String) // user made a change
-                ? (_updatedPath == noImageKey)
-                    ? Icon(PlatformIcons(context).clear)
-                    : EzImage(
-                        image: AssetImage(_updatedPath as String),
-                        semanticLabel: widget.semantics,
-                      )
-                : (widget.prefsKey == noImageKey) // using app's current state
-                    ? Icon(PlatformIcons(context).clear)
-                    : EzStoredImage(
-                        prefsKey: widget.prefsKey,
-                        semanticLabel: widget.semantics,
-                      ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              width: 1,
+            )),
+            child: SizedBox(
+              height: widget.fullscreen ? 160 : 75,
+              width: widget.fullscreen ? 90 : 75,
+              child: (_updatedPath is String)
+                  ? // user made a change
+                  (_updatedPath == noImageKey)
+                      ? // user cleared the image
+                      Icon(PlatformIcons(context).clear)
+                      : // user set a custom image
+                      EzImage(
+                          image: AssetImage(_updatedPath as String),
+                          semanticLabel: widget.semantics,
+                        )
+                  : // user has not made a change
+                  (EzConfig.instance.prefs[widget.prefsKey] == null ||
+                          EzConfig.instance.prefs[widget.prefsKey] == noImageKey)
+                      ? // there is no current image
+                      Icon(PlatformIcons(context).clear)
+                      : // there is an image stored
+                      EzStoredImage(prefsKey: widget.prefsKey, semanticLabel: widget.semantics),
+            ),
           ),
         ],
       ),
