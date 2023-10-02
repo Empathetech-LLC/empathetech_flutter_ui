@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
@@ -27,24 +28,36 @@ class EzResetButton extends StatelessWidget {
   /// [EzAlertDialog.contents] that shows on click
   final String dialogContents;
 
-  /// Standardized clickable text "button" for clearing all user settings
+  /// What happens when the user choses to reset
+  /// Defaults to clearing user [SharedPreferences]
+  final void Function()? onConfirm;
+
+  /// What happens when the user choses not to reset
+  /// Defaults to [popScreen]
+  final void Function()? onDeny;
+
+  /// Standardized clickable text "button" for clearing user settings (aka resetting the apps')
   const EzResetButton({
     required this.context,
     this.message = 'Reset all',
-    this.style,
     this.hint = 'Reset all custom settings',
+    this.style,
     this.dialogTitle = 'Reset all settings?',
     this.dialogContents = 'Cannot be undone',
+    this.onConfirm,
+    this.onDeny,
   });
 
   @override
   Widget build(BuildContext context) {
-    final void Function() onConfirm = () {
-      EzConfig.instance.preferences.clear();
-      popScreen(context: context, pass: true);
-    };
+    final void Function() _onConfirm = (onConfirm == null)
+        ? () {
+            EzConfig.instance.preferences.clear();
+            popScreen(context: context, pass: true);
+          }
+        : onConfirm!;
 
-    final void Function() onDeny = () => popScreen(context: context);
+    final void Function() _onDeny = (onDeny == null) ? () => popScreen(context: context) : onDeny!;
 
     return Semantics(
       button: true,
@@ -58,10 +71,10 @@ class EzResetButton extends StatelessWidget {
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(dialogTitle),
               contents: [EzSelectableText(dialogContents)],
-              materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
+              materialActions: ezMaterialActions(onConfirm: _onConfirm, onDeny: _onDeny),
               cupertinoActions: ezCupertinoActions(
-                onConfirm: onConfirm,
-                onDeny: onDeny,
+                onConfirm: _onConfirm,
+                onDeny: _onDeny,
                 confirmIsDestructive: true,
                 denyIsDefault: true,
               ),
