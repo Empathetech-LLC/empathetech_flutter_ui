@@ -3,6 +3,7 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettingsScreen extends StatefulWidget {
@@ -36,7 +37,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final String themeProfile = isLight ? 'light' : 'dark';
-    final String resetMessage = "Reset all $themeProfile theme colors?";
+    final String resetTitle = "Reset all $themeProfile theme colors?";
+    final String resetMessage = kIsWeb
+        ? "Cannot be undone\nChanges take effect on page reload"
+        : "Cannot be undone\nChanges take effect on app restart";
 
     return ExampleScaffold(
       body: EzScreen(
@@ -158,7 +162,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               context: context,
               hint: resetMessage,
               style: resetLinkStyle,
-              dialogTitle: resetMessage,
+              dialogTitle: resetTitle,
+              dialogContents: resetMessage,
               onConfirm: () {
                 if (isLight) {
                   EzConfig.instance.preferences.remove(lightThemeColorKey);
@@ -179,6 +184,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   EzConfig.instance.preferences.remove(darkAccentColorKey);
                   EzConfig.instance.preferences.remove(darkAccentTextColorKey);
                 }
+
                 popScreen(context: context, pass: true);
               },
             ),

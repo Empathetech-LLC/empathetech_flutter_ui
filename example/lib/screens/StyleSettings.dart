@@ -3,6 +3,7 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class StyleSettingsScreen extends StatefulWidget {
   const StyleSettingsScreen({Key? key}) : super(key: key);
@@ -32,7 +33,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const String resetMessage = "Reset all style settings?";
+    const String resetTitle = "Reset all style settings?";
+    final String resetMessage = kIsWeb
+        ? "Cannot be undone\nChanges take effect on page reload"
+        : "Cannot be undone\nChanges take effect on app restart";
 
     return ExampleScaffold(
       body: EzScreen(
@@ -107,7 +111,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               context: context,
               hint: resetMessage,
               style: resetLinkStyle,
-              dialogTitle: resetMessage,
+              dialogTitle: resetTitle,
+              dialogContents: resetMessage,
               onConfirm: () {
                 EzConfig.instance.preferences.remove(fontFamilyKey);
                 EzConfig.instance.preferences.remove(marginKey);
@@ -115,6 +120,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
                 EzConfig.instance.preferences.remove(circleDiameterKey);
                 EzConfig.instance.preferences.remove(buttonSpacingKey);
                 EzConfig.instance.preferences.remove(textSpacingKey);
+
                 popScreen(context: context, pass: true);
               },
             ),

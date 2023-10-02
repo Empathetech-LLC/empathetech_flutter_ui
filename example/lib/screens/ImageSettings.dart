@@ -3,6 +3,7 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
@@ -36,7 +37,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final String themeProfile = isLight ? 'light' : 'dark';
-    final String resetMessage = "Reset all $themeProfile theme images?";
+    final String resetTitle = "Reset all $themeProfile theme images?";
+    final String resetMessage = kIsWeb
+        ? "Cannot be undone\nChanges take effect on page reload"
+        : "Cannot be undone\nChanges take effect on app restart";
 
     return ExampleScaffold(
       body: EzScreen(
@@ -93,13 +97,15 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               context: context,
               hint: resetMessage,
               style: resetLinkStyle,
-              dialogTitle: resetMessage,
+              dialogTitle: resetTitle,
+              dialogContents: resetMessage,
               onConfirm: () {
                 if (isLight) {
                   EzConfig.instance.preferences.remove(lightPageImageKey);
                 } else {
                   EzConfig.instance.preferences.remove(darkPageImageKey);
                 }
+
                 popScreen(context: context, pass: true);
               },
             ),
