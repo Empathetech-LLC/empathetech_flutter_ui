@@ -43,28 +43,28 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         : "Cannot be undone\nChanges take effect on app restart";
 
     return ExampleScaffold(
-      body: EzScreen(
-        child: EzScrollView(
-          children: [
-            // Current theme mode reminder
-            EzSelectableText(
-              'Editing: $themeProfile theme',
-              style: titleSmall(context),
-            ),
-            EzSpacer(textSpacer),
+      body: isLight
+          ? EzScreen(
+              decorationImageKey: lightPageImageKey,
+              child: EzScrollView(
+                children: [
+                  // Current theme mode reminder
+                  EzSelectableText(
+                    'Editing: $themeProfile theme',
+                    style: titleSmall(context),
+                  ),
+                  EzSpacer(textSpacer),
 
-            // Settings //
+                  // Settings //
 
-            // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-            EzScrollView(
-              scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
-              primary: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: isLight
-                    ? // Editing light theme //
-                    [
+                  // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
+                  EzScrollView(
+                    scrollDirection: Axis.horizontal,
+                    mainAxisSize: MainAxisSize.min,
+                    primary: false,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                         // Theme colors
                         const EzColorSetting(toControl: lightThemeColorKey, name: 'Theme'),
                         EzSpacer(buttonSpacer),
@@ -107,9 +107,56 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                           name: 'Accent text',
                           textBackgroundKey: lightAccentColorKey,
                         ),
-                      ]
-                    : // Editing dark theme //
-                    [
+                      ],
+                    ),
+                  ),
+                  EzSpacer(buttonSpacer),
+
+                  // Local reset "all"
+                  EzResetButton(
+                    context: context,
+                    hint: resetMessage,
+                    style: resetLinkStyle,
+                    dialogTitle: resetTitle,
+                    dialogContents: resetMessage,
+                    onConfirm: () {
+                      EzConfig.instance.preferences.remove(lightThemeColorKey);
+                      EzConfig.instance.preferences.remove(lightThemeTextColorKey);
+                      EzConfig.instance.preferences.remove(lightPageColorKey);
+                      EzConfig.instance.preferences.remove(lightPageTextColorKey);
+                      EzConfig.instance.preferences.remove(lightButtonColorKey);
+                      EzConfig.instance.preferences.remove(lightButtonTextColorKey);
+                      EzConfig.instance.preferences.remove(lightAccentColorKey);
+                      EzConfig.instance.preferences.remove(lightAccentTextColorKey);
+
+                      popScreen(context: context, pass: true);
+                    },
+                  ),
+                  EzSpacer(textSpacer),
+                ],
+              ),
+            )
+          : EzScreen(
+              decorationImageKey: darkPageImageKey,
+              child: EzScrollView(
+                children: [
+                  // Current theme mode reminder
+                  EzSelectableText(
+                    'Editing: $themeProfile theme',
+                    style: titleSmall(context),
+                  ),
+                  EzSpacer(textSpacer),
+
+                  // Settings //
+
+                  // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
+                  EzScrollView(
+                    scrollDirection: Axis.horizontal,
+                    mainAxisSize: MainAxisSize.min,
+                    primary: false,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                         // Theme colors
                         const EzColorSetting(toControl: darkThemeColorKey, name: 'Theme'),
                         EzSpacer(buttonSpacer),
@@ -153,45 +200,34 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                           textBackgroundKey: darkAccentColorKey,
                         ),
                       ],
+                    ),
+                  ),
+                  EzSpacer(buttonSpacer),
+
+                  // Local reset "all"
+                  EzResetButton(
+                    context: context,
+                    hint: resetMessage,
+                    style: resetLinkStyle,
+                    dialogTitle: resetTitle,
+                    dialogContents: resetMessage,
+                    onConfirm: () {
+                      EzConfig.instance.preferences.remove(darkThemeColorKey);
+                      EzConfig.instance.preferences.remove(darkThemeTextColorKey);
+                      EzConfig.instance.preferences.remove(darkPageColorKey);
+                      EzConfig.instance.preferences.remove(darkPageTextColorKey);
+                      EzConfig.instance.preferences.remove(darkButtonColorKey);
+                      EzConfig.instance.preferences.remove(darkButtonTextColorKey);
+                      EzConfig.instance.preferences.remove(darkAccentColorKey);
+                      EzConfig.instance.preferences.remove(darkAccentTextColorKey);
+
+                      popScreen(context: context, pass: true);
+                    },
+                  ),
+                  EzSpacer(textSpacer),
+                ],
               ),
             ),
-            EzSpacer(buttonSpacer),
-
-            // Local reset "all"
-            EzResetButton(
-              context: context,
-              hint: resetMessage,
-              style: resetLinkStyle,
-              dialogTitle: resetTitle,
-              dialogContents: resetMessage,
-              onConfirm: () {
-                if (isLight) {
-                  EzConfig.instance.preferences.remove(lightThemeColorKey);
-                  EzConfig.instance.preferences.remove(lightThemeTextColorKey);
-                  EzConfig.instance.preferences.remove(lightPageColorKey);
-                  EzConfig.instance.preferences.remove(lightPageTextColorKey);
-                  EzConfig.instance.preferences.remove(lightButtonColorKey);
-                  EzConfig.instance.preferences.remove(lightButtonTextColorKey);
-                  EzConfig.instance.preferences.remove(lightAccentColorKey);
-                  EzConfig.instance.preferences.remove(lightAccentTextColorKey);
-                } else {
-                  EzConfig.instance.preferences.remove(darkThemeColorKey);
-                  EzConfig.instance.preferences.remove(darkThemeTextColorKey);
-                  EzConfig.instance.preferences.remove(darkPageColorKey);
-                  EzConfig.instance.preferences.remove(darkPageTextColorKey);
-                  EzConfig.instance.preferences.remove(darkButtonColorKey);
-                  EzConfig.instance.preferences.remove(darkButtonTextColorKey);
-                  EzConfig.instance.preferences.remove(darkAccentColorKey);
-                  EzConfig.instance.preferences.remove(darkAccentTextColorKey);
-                }
-
-                popScreen(context: context, pass: true);
-              },
-            ),
-            EzSpacer(textSpacer),
-          ],
-        ),
-      ),
     );
   }
 }
