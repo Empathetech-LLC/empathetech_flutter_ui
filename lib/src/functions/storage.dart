@@ -12,7 +12,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Can this [path] build an [AssetImage]?
-bool isPathAsset(String? path) {}
+bool isPathAsset(String? path) {
+  return EzConfig.instance.assets.contains(path);
+}
 
 /// Does the value at the end of this [key]'s [EzConfig.instance] tunnel lead to an [AssetImage] path?
 bool isKeyAsset(String? key) {
