@@ -1,13 +1,13 @@
 // Exports //
 
-export 'home.dart';
-
-export 'color-settings.dart';
-export 'style-settings.dart';
+export 'ColorSettings.dart';
+export 'Home.dart';
+export 'ImageSettings.dart';
+export 'StyleSettings.dart';
 
 // Route names //
 
-const String homeRoute = '/';
-
 const String colorSettingsRoute = 'color-settings';
+const String homeRoute = '/';
+const String imageSettingsRoute = 'image-settings';
 const String styleSettingsRoute = 'style-settings';
