@@ -21,7 +21,7 @@ class EzFontSetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather theme data //
 
-  String? _currFontFamily = EzConfig.instance.fontFamily;
+  String? currFontFamily = EzConfig.instance.fontFamily;
 
   final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
@@ -40,7 +40,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           onPressed: () {
             EzConfig.instance.preferences.setString(fontFamilyKey, font);
             setState(() {
-              _currFontFamily = style.fontFamily!;
+              currFontFamily = style.fontFamily!;
             });
             popScreen(context: context, pass: font);
           },
@@ -76,7 +76,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           icon: const Icon(LineIcons.font),
           label: Text(
             'Text font',
-            style: TextStyle(fontFamily: _currFontFamily),
+            style: TextStyle(fontFamily: currFontFamily),
             textAlign: TextAlign.center,
           ),
         ),
