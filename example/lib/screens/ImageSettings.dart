@@ -57,34 +57,35 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               mainAxisSize: MainAxisSize.min,
               primary: false,
               child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: isLight
-                      ? // Editing light theme //
-                      [
-                          // Page
-                          const EzImageSetting(
-                            prefsKey: lightPageImageKey,
-                            title: 'Page',
-                            allowClear: true,
-                            fullscreen: true,
-                            credits: 'Wherever you got it!',
-                            semantics: 'Page background image',
-                          ),
-                          EzSpacer(buttonSpacer),
-                        ]
-                      : // Editing dark theme //
-                      [
-                          // Page
-                          const EzImageSetting(
-                            prefsKey: darkPageImageKey,
-                            title: 'Page',
-                            allowClear: true,
-                            fullscreen: true,
-                            credits: 'Wherever you got it!',
-                            semantics: 'Page background image',
-                          ),
-                          EzSpacer(buttonSpacer),
-                        ]),
+                mainAxisSize: MainAxisSize.min,
+                children: isLight
+                    ? // Editing light theme //
+                    [
+                        // Page
+                        const EzImageSetting(
+                          prefsKey: lightPageImageKey,
+                          title: 'Page',
+                          allowClear: true,
+                          fullscreen: true,
+                          credits: 'Wherever you got it!',
+                          semantics: 'Page background image',
+                        ),
+                        EzSpacer(buttonSpacer),
+                      ]
+                    : // Editing dark theme //
+                    [
+                        // Page
+                        const EzImageSetting(
+                          prefsKey: darkPageImageKey,
+                          title: 'Page',
+                          allowClear: true,
+                          fullscreen: true,
+                          credits: 'Wherever you got it!',
+                          semantics: 'Page background image',
+                        ),
+                        EzSpacer(buttonSpacer),
+                      ],
+              ),
             ),
 
             // Local reset "all"
