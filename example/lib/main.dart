@@ -50,6 +50,13 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
+          name: styleSettingsRoute,
+          path: styleSettingsRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const StyleSettingsScreen();
+          },
+        ),
+        GoRoute(
           name: colorSettingsRoute,
           path: colorSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
@@ -57,10 +64,10 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          name: styleSettingsRoute,
-          path: styleSettingsRoute,
+          name: imageSettingsRoute,
+          path: imageSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const StyleSettingsScreen();
+            return const ImageSettingsScreen();
           },
         ),
       ],
