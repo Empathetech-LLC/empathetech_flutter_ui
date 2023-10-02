@@ -7,13 +7,13 @@
 library empathetech_flutter_ui;
 
 // Classes
+export 'src/classes/EzAlertDialog.dart';
 export 'src/classes/EzApp.dart';
 export 'src/classes/EzAppProvider.dart';
 export 'src/classes/EzBackAction.dart';
 export 'src/classes/EzColors.dart';
 export 'src/classes/EzColorSetting.dart';
 export 'src/classes/EzConfig.dart';
-export 'src/classes/EzAlertDialog.dart';
 export 'src/classes/EzDominantHandSwitch.dart';
 export 'src/classes/EzFontSetting.dart';
 export 'src/classes/EzImage.dart';
@@ -40,9 +40,9 @@ export 'src/classes/EzWebLink.dart';
 // Constants
 export 'src/consts/credits.dart';
 export 'src/consts/empathetechConfig.dart';
+export 'src/consts/empathetechThemeData.dart';
 export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
-export 'src/consts/themeData.dart';
 
 // Enums
 export 'src/enums/ButtonVis.dart';
