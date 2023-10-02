@@ -61,6 +61,19 @@ Have fun!""",
             const EzDominantHandSwitch(),
             EzSpacer(textSpacer),
 
+            // Style settings
+            Semantics(
+              button: true,
+              hint: 'Open the styling settings',
+              child: ExcludeSemantics(
+                child: ElevatedButton(
+                  onPressed: () => context.goNamed(styleSettingsRoute),
+                  child: const Text('Styling'),
+                ),
+              ),
+            ),
+            EzSpacer(textSpacer),
+
             // Color settings
             Semantics(
               button: true,
@@ -74,18 +87,18 @@ Have fun!""",
             ),
             EzSpacer(buttonSpacer),
 
-            // Style settings
+            // Image settings
             Semantics(
               button: true,
-              hint: 'Open the styling settings',
+              hint: 'Open the image settings',
               child: ExcludeSemantics(
                 child: ElevatedButton(
-                  onPressed: () => context.goNamed(styleSettingsRoute),
-                  child: const Text('Styling'),
+                  onPressed: () => context.goNamed(imageSettingsRoute),
+                  child: const Text('Images'),
                 ),
               ),
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(buttonSpacer),
 
             // Reset button
             EzResetButton(context: context, style: resetLinkStyle),
