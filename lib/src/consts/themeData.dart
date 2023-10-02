@@ -16,8 +16,8 @@ ThemeData empathetechLightTheme() {
   final Color themeTextColor = Color(EzConfig.instance.prefs[lightThemeTextColorKey]);
   final Color unSelectedThemeTextColor = EzColorBlend(themeColor, themeTextColor);
 
-  final Color backgroundColor = Color(EzConfig.instance.prefs[lightBackgroundColorKey]);
-  final Color backgroundTextColor = Color(EzConfig.instance.prefs[lightBackgroundTextColorKey]);
+  final Color pageColor = Color(EzConfig.instance.prefs[lightPageColorKey]);
+  final Color pageTextColor = Color(EzConfig.instance.prefs[lightPageTextColorKey]);
 
   final Color buttonColor = Color(EzConfig.instance.prefs[lightButtonColorKey]);
   final Color buttonTextColor = Color(EzConfig.instance.prefs[lightButtonTextColorKey]);
@@ -41,7 +41,7 @@ ThemeData empathetechLightTheme() {
     size: buttonTextStyle.fontSize,
   );
 
-  final TextStyle pageTextStyle = buildBodyLarge(backgroundTextColor);
+  final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
 
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
@@ -83,7 +83,7 @@ ThemeData empathetechLightTheme() {
 
     // Cards
     cardTheme: CardTheme(
-      color: backgroundColor,
+      color: pageColor,
       margin: EdgeInsets.all(margin),
       shadowColor: accentColor,
     ),
@@ -111,8 +111,8 @@ ThemeData empathetechLightTheme() {
       onSecondary: accentTextColor,
       background: themeColor,
       onBackground: themeTextColor,
-      surface: backgroundColor,
-      onSurface: backgroundTextColor,
+      surface: pageColor,
+      onSurface: pageTextColor,
       error: Colors.red,
       onError: Colors.black,
     ),
@@ -121,7 +121,7 @@ ThemeData empathetechLightTheme() {
     hintColor: themeTextColor,
     indicatorColor: buttonColor,
     primaryColor: themeColor,
-    scaffoldBackgroundColor: backgroundColor,
+    scaffoldBackgroundColor: pageColor,
 
     // Dialogs
     dialogTheme: DialogTheme(
@@ -140,14 +140,12 @@ ThemeData empathetechLightTheme() {
       textStyle: pageTextStyle,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.all(padding),
-        fillColor: backgroundColor,
-        iconColor: backgroundTextColor,
-        prefixIconColor: backgroundTextColor,
-        suffixIconColor: backgroundTextColor,
+        fillColor: pageColor,
+        iconColor: pageTextColor,
+        prefixIconColor: pageTextColor,
+        suffixIconColor: pageTextColor,
       ),
-      menuStyle: MenuStyle(
-        backgroundColor: MaterialStatePropertyAll(backgroundColor),
-      ),
+      menuStyle: MenuStyle(backgroundColor: MaterialStatePropertyAll(pageColor)),
     ),
 
     // Sliders
@@ -180,8 +178,8 @@ ThemeData empathetechLightTheme() {
 
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
-    textTheme: EzTextTheme(color: backgroundTextColor),
-    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
+    textTheme: EzTextTheme(color: pageTextColor),
+    primaryTextTheme: EzTextTheme(color: pageTextColor),
     iconTheme: buttonIconData,
     primaryIconTheme: buttonIconData,
 
@@ -199,8 +197,8 @@ ThemeData empathetechDarkTheme() {
   final Color themeTextColor = Color(EzConfig.instance.prefs[darkThemeTextColorKey]);
   final Color unSelectedThemeTextColor = EzColorBlend(themeColor, themeTextColor);
 
-  final Color backgroundColor = Color(EzConfig.instance.prefs[darkBackgroundColorKey]);
-  final Color backgroundTextColor = Color(EzConfig.instance.prefs[darkBackgroundTextColorKey]);
+  final Color pageColor = Color(EzConfig.instance.prefs[darkPageColorKey]);
+  final Color pageTextColor = Color(EzConfig.instance.prefs[darkPageTextColorKey]);
 
   final Color buttonColor = Color(EzConfig.instance.prefs[darkButtonColorKey]);
   final Color buttonTextColor = Color(EzConfig.instance.prefs[darkButtonTextColorKey]);
@@ -224,7 +222,7 @@ ThemeData empathetechDarkTheme() {
     size: buttonTextStyle.fontSize,
   );
 
-  final TextStyle pageTextStyle = buildBodyLarge(backgroundTextColor);
+  final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
 
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
@@ -266,7 +264,7 @@ ThemeData empathetechDarkTheme() {
 
     // Cards
     cardTheme: CardTheme(
-      color: backgroundColor,
+      color: pageColor,
       margin: EdgeInsets.all(margin),
       shadowColor: accentColor,
     ),
@@ -294,8 +292,8 @@ ThemeData empathetechDarkTheme() {
       onSecondary: accentTextColor,
       background: themeColor,
       onBackground: themeTextColor,
-      surface: backgroundColor,
-      onSurface: backgroundTextColor,
+      surface: pageColor,
+      onSurface: pageTextColor,
       error: Colors.red,
       onError: Colors.black,
     ),
@@ -304,7 +302,7 @@ ThemeData empathetechDarkTheme() {
     hintColor: themeTextColor,
     indicatorColor: buttonColor,
     primaryColor: themeColor,
-    scaffoldBackgroundColor: backgroundColor,
+    scaffoldBackgroundColor: pageColor,
 
     // Dialogs
     dialogTheme: DialogTheme(
@@ -323,14 +321,12 @@ ThemeData empathetechDarkTheme() {
       textStyle: pageTextStyle,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.all(padding),
-        fillColor: backgroundColor,
-        iconColor: backgroundTextColor,
-        prefixIconColor: backgroundTextColor,
-        suffixIconColor: backgroundTextColor,
+        fillColor: pageColor,
+        iconColor: pageTextColor,
+        prefixIconColor: pageTextColor,
+        suffixIconColor: pageTextColor,
       ),
-      menuStyle: MenuStyle(
-        backgroundColor: MaterialStatePropertyAll(backgroundColor),
-      ),
+      menuStyle: MenuStyle(backgroundColor: MaterialStatePropertyAll(pageColor)),
     ),
 
     // Sliders
@@ -363,8 +359,8 @@ ThemeData empathetechDarkTheme() {
 
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
-    textTheme: EzTextTheme(color: backgroundTextColor),
-    primaryTextTheme: EzTextTheme(color: backgroundTextColor),
+    textTheme: EzTextTheme(color: pageTextColor),
+    primaryTextTheme: EzTextTheme(color: pageTextColor),
     iconTheme: buttonIconData,
     primaryIconTheme: buttonIconData,
 

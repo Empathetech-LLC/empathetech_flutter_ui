@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Lots of references to "default" were updated to "empathetech"
 - Parameters (minor breaks)
   - Updated EzColorSetting.message to EzColorSetting.name
+  - Updated BackgroundColor -> PageColor
 
 ### Added
 - Example app

@@ -45,9 +45,9 @@ const Map<String, dynamic> empathetechConfig = {
   lightThemeColorKey: whiteHex,
   lightThemeTextColorKey: blackHex,
 
-  lightBackgroundImageKey: null,
-  lightBackgroundColorKey: offWhiteHex,
-  lightBackgroundTextColorKey: blackHex,
+  lightPageImageKey: null,
+  lightPageColorKey: offWhiteHex,
+  lightPageTextColorKey: blackHex,
 
   lightButtonColorKey: EmpathPurpleHex,
   lightButtonTextColorKey: whiteHex,
@@ -59,9 +59,9 @@ const Map<String, dynamic> empathetechConfig = {
   darkThemeColorKey: blackHex,
   darkThemeTextColorKey: whiteHex,
 
-  darkBackgroundImageKey: null,
-  darkBackgroundColorKey: offBlackHex,
-  darkBackgroundTextColorKey: whiteHex,
+  darkPageImageKey: null,
+  darkPageColorKey: offBlackHex,
+  darkPageTextColorKey: whiteHex,
 
   darkButtonColorKey: EmpathEucalyptusHex,
   darkButtonTextColorKey: blackHex,

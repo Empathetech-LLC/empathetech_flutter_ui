@@ -23,9 +23,9 @@ const String circleDiameterKey = 'circleDiameter';
 // Theme specific //
 
 // Light theme
-const String lightBackgroundImageKey = 'lightBackgroundImage';
-const String lightBackgroundColorKey = 'lightBackgroundColor';
-const String lightBackgroundTextColorKey = 'lightBackgroundTextColor';
+const String lightPageImageKey = 'lightPageImage';
+const String lightPageColorKey = 'lightPageColor';
+const String lightPageTextColorKey = 'lightPageTextColor';
 const String lightThemeColorKey = 'lightThemeColor';
 const String lightThemeTextColorKey = 'lightThemeTextColor';
 const String lightButtonColorKey = 'lightButtonColor';
@@ -34,9 +34,9 @@ const String lightAccentColorKey = 'lightAccentColor';
 const String lightAccentTextColorKey = 'lightAccentTextColor';
 
 // Dark theme
-const String darkBackgroundImageKey = 'darkBackgroundImage';
-const String darkBackgroundColorKey = 'darkBackgroundColor';
-const String darkBackgroundTextColorKey = 'darkBackgroundTextColor';
+const String darkPageImageKey = 'darkPageImage';
+const String darkPageColorKey = 'darkPageColor';
+const String darkPageTextColorKey = 'darkPageTextColor';
 const String darkThemeColorKey = 'darkThemeColor';
 const String darkThemeTextColorKey = 'darkThemeTextColor';
 const String darkButtonColorKey = 'darkButtonColor';
