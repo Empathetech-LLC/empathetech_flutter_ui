@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.2.0] - 2023-09-XX
+## [3.2.0] - 2023-10-XX
 ### Updated
 - File structure
 - Split EzApp into EzApp and EzAppProvider
@@ -10,9 +10,11 @@ All notable changes to this project will be documented in this file.
 - Pre-existing release check in the Jenkinsfile
 - README
 - Renamed EzDialog to EzAlertDialog
+  - Removed EzYesNo and created ezAlertActions
 - Project line length to 99
 - Renamed ParagraphSpacing to TextSpacing
 - Semantics
+- Lots of references to "default" were updated to "empathetech"
 - Parameters (minor breaks)
   - Updated EzColorSetting.message to EzColorSetting.name
 
@@ -21,6 +23,11 @@ All notable changes to this project will be documented in this file.
 - More comments
 - EzBackAction class
 - EzLayoutSwitch
+
+### Removed
+- Unused and/or unverified classes
+  - EzNotifications (will return)
+  - Eb2Casa
 
 ## [3.1.2] - 2023-08-26
 ### Updated
