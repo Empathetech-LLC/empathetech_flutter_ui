@@ -307,10 +307,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         });
       },
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: widget.maxWidth,
-          maxHeight: widget.maxHeight,
-        ),
+        constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),
         child: AspectRatio(
           aspectRatio: widget.controller.value.aspectRatio,
           child: Stack(
