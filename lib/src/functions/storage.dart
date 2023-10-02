@@ -11,6 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// Can this [path] build an [AssetImage]?
+bool isPathAsset(String? path) {}
+
+/// Does the value at the end of this [key]'s [EzConfig.instance] tunnel lead to an [AssetImage] path?
+bool isKeyAsset(String? key) {
+  return isPathAsset(EzConfig.instance.prefs[key]);
+}
+
 /// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<String?> changeImage({
   required BuildContext context,
