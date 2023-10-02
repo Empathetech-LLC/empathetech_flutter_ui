@@ -7,7 +7,6 @@
 library empathetech_flutter_ui;
 
 // Classes
-export 'src/classes/Eb2Casa.dart';
 export 'src/classes/EzApp.dart';
 export 'src/classes/EzAppProvider.dart';
 export 'src/classes/EzBackAction.dart';
@@ -21,7 +20,6 @@ export 'src/classes/EzImage.dart';
 export 'src/classes/EzImageSetting.dart';
 export 'src/classes/EzLayoutSwitch.dart';
 export 'src/classes/EzLink.dart';
-export 'src/classes/EzNotifications.dart';
 export 'src/classes/EzResetButton.dart';
 export 'src/classes/EzRow.dart';
 export 'src/classes/EzRowCol.dart';
