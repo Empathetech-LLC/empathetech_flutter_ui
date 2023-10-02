@@ -36,7 +36,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Page
             const EzImageSetting(
-              prefsKey: backImageKey,
+              prefsKey: pageImageKey,
               title: 'Page',
               allowClear: true,
               fullscreen: true,

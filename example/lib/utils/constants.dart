@@ -1,5 +1,5 @@
 const String pageImageKey = 'pageImage';
 
-final Map<String, dynamic> customDefaults = {
+final Map<String, dynamic> exampleDefaults = {
   pageImageKey: null,
 };
