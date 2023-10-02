@@ -24,12 +24,16 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double diameter = EzConfig.instance.prefs[circleDiameterKey];
+
+  late final TextStyle? resetLinkStyle =
+      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
   // Build page //
 
   @override
   Widget build(BuildContext context) {
+    const String resetMessage = "Reset all style settings?";
+
     return ExampleScaffold(
       body: EzScreen(
         child: EzScrollView(
@@ -97,6 +101,23 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               decimals: 0,
             ),
             EzSpacer(buttonSpacer),
+
+            // Local reset "all"
+            EzResetButton(
+              context: context,
+              hint: resetMessage,
+              style: resetLinkStyle,
+              dialogTitle: resetMessage,
+              onConfirm: () {
+                EzConfig.instance.preferences.remove(fontFamilyKey);
+                EzConfig.instance.preferences.remove(marginKey);
+                EzConfig.instance.preferences.remove(paddingKey);
+                EzConfig.instance.preferences.remove(circleDiameterKey);
+                EzConfig.instance.preferences.remove(buttonSpacingKey);
+                EzConfig.instance.preferences.remove(textSpacingKey);
+              },
+            ),
+            EzSpacer(textSpacer),
           ],
         ),
       ),
