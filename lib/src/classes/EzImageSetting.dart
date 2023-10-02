@@ -88,7 +88,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: const Text('File'),
+        label: const Text('Frome file'),
         icon: Icon(PlatformIcons(context).folder),
       ),
       EzSpacer(_buttonSpacer),
@@ -104,7 +104,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: const Text('Camera'),
+        label: const Text('From camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       EzSpacer(_buttonSpacer),
@@ -121,7 +121,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             pass: EzConfig.instance.defaults[widget.prefsKey],
           );
         },
-        label: const Text('Reset'),
+        label: const Text('Reset it'),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -141,7 +141,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, pass: noImageKey);
           },
-          label: const Text('Clear'),
+          label: const Text('Clear it'),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -151,7 +151,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText("Update ${widget.title}"),
+        title: EzSelectableText("How should the ${widget.title} image be updated?"),
         contents: options,
       ),
     );
