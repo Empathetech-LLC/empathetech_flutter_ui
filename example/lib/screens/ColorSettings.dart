@@ -35,8 +35,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String themeProfile = isLight ? 'Light' : 'Dark';
-    final String resetMessage = "Reset all $themeProfile colors?";
+    final String themeProfile = isLight ? 'light' : 'dark';
+    final String resetMessage = "Reset all $themeProfile theme colors?";
 
     return ExampleScaffold(
       body: EzScreen(

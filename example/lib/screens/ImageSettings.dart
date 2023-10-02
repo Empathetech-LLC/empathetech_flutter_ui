@@ -35,8 +35,8 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String themeProfile = isLight ? 'Light' : 'Dark';
-    final String resetMessage = "Reset all $themeProfile images?";
+    final String themeProfile = isLight ? 'light' : 'dark';
+    final String resetMessage = "Reset all $themeProfile theme images?";
 
     return ExampleScaffold(
       body: EzScreen(
