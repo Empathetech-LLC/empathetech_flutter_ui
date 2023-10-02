@@ -211,10 +211,15 @@ class _ImageSettingState extends State<EzImageSetting> {
                           ? // user cleared the image
                           Icon(PlatformIcons(context).clear)
                           : // user set a custom image
-                          EzImage(
-                              image: AssetImage(_updatedPath as String),
-                              semanticLabel: widget.semantics,
-                            )
+                          isAsset(_updatedPath)
+                              ? EzImage(
+                                  image: AssetImage(_updatedPath!),
+                                  semanticLabel: widget.semantics,
+                                )
+                              : EzImage(
+                                  image: FileImage(File(_updatedPath!)),
+                                  semanticLabel: widget.semantics,
+                                )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
                               EzConfig.instance.prefs[widget.prefsKey] == noImageKey)
