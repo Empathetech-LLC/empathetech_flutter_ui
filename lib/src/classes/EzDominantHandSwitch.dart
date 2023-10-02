@@ -16,11 +16,15 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
+  // Gather theme data //
   Hand _currSide = EzConfig.instance.dominantHand;
 
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
 
-  final List<DropdownMenuItem<Hand>> items = [
+  // Define the list items //
+
+  final List<DropdownMenuItem<Hand>> _items = [
     DropdownMenuItem<Hand>(
       child: Semantics(
         hint: 'Touch points will favor the right side of the screen',
@@ -37,26 +41,26 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     ),
   ];
 
+  // Return the build
+
   @override
   Widget build(BuildContext context) {
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
       EzSelectableText(
         'Dominant hand',
-        style: style,
+        style: _style,
         semanticsLabel: 'Set your dominant hand',
       ),
-      EzSpacer.row(space),
+      EzSpacer.row(_buttonSpacer),
 
       // Button
       Semantics(
         hint: 'Open to choose left or right. Currently set to:',
         child: DropdownButton<Hand>(
           value: _currSide,
-          items: items,
+          items: _items,
           dropdownColor: Theme.of(context).scaffoldBackgroundColor,
           onChanged: (Hand? newDominantHand) {
             switch (newDominantHand) {

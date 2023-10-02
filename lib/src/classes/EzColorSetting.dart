@@ -38,7 +38,16 @@ class EzColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
+  // Gather theme data //
+
   late Color currColor = Color(EzConfig.instance.prefs[widget.toControl]);
+
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _diameter = EzConfig.instance.prefs[circleDiameterKey];
+
+  late final TextStyle? _labelStyle = Theme.of(context).dropdownMenuTheme.textStyle;
+
+  // Define button functions //
 
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color.value] of what was chosen (null otherwise)
@@ -171,13 +180,10 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
-  final double diameter = EzConfig.instance.prefs[circleDiameterKey];
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
     return EzRow(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -185,10 +191,10 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color label
         EzSelectableText(
           widget.name,
-          style: style,
+          style: _labelStyle,
           semanticsLabel: "Customize the ${widget.name} color.",
         ),
-        EzSpacer.row(space),
+        EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button
         Semantics(
@@ -203,14 +209,14 @@ class _ColorSettingState extends State<EzColorSetting> {
                 child: Icon(
                   PlatformIcons(context).edit,
                   color: EzContrastColor(currColor),
-                  size: diameter / 2,
+                  size: _diameter / 2,
                 ),
               ),
               style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                     backgroundColor: MaterialStatePropertyAll(currColor),
                     shape: MaterialStatePropertyAll(const CircleBorder()),
                     padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                    fixedSize: MaterialStatePropertyAll(Size(diameter, diameter)),
+                    fixedSize: MaterialStatePropertyAll(Size(_diameter, _diameter)),
                   ),
             ),
           ),

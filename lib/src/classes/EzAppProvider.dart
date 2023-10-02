@@ -29,21 +29,21 @@ class EzAppProvider extends StatelessWidget {
 
   // Gather theme data //
 
-  final bool? savedLight = EzConfig.instance.preferences.getBool(isLightKey);
+  final bool? _savedLight = EzConfig.instance.preferences.getBool(isLightKey);
 
   final ThemeData materialLight = empathetechLightTheme();
   final ThemeData materialDark = empathetechDarkTheme();
 
+  late final ThemeMode _initialTheme = (_savedLight == null)
+      ? ThemeMode.system
+      : (_savedLight == true)
+          ? ThemeMode.light
+          : ThemeMode.dark;
+
+  // Return the build //
+
   @override
   Widget build(BuildContext context) {
-    // Build theme //
-
-    final ThemeMode initialTheme = (savedLight == null)
-        ? ThemeMode.system
-        : (savedLight == true)
-            ? ThemeMode.light
-            : ThemeMode.dark;
-
     return PlatformProvider(
       key: key,
       settings: PlatformSettingsData(
@@ -51,7 +51,7 @@ class EzAppProvider extends StatelessWidget {
         iosUseZeroPaddingForAppbarPlatformIcon: true,
       ),
       builder: (context) => PlatformTheme(
-        themeMode: initialTheme,
+        themeMode: _initialTheme,
         materialLightTheme: materialLight,
         materialDarkTheme: materialDark,
         cupertinoLightTheme: MaterialBasedCupertinoThemeData(materialTheme: materialLight),

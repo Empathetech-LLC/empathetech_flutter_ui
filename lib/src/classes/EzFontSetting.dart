@@ -21,12 +21,12 @@ class EzFontSetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather theme data //
 
-  String? currFontFamily = EzConfig.instance.fontFamily;
+  String? _currFontFamily = EzConfig.instance.fontFamily;
 
-  final String defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-  // Define functions //
+  // Define button functions //
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
   Future<dynamic> _chooseGoogleFont(BuildContext context) {
@@ -40,17 +40,17 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           onPressed: () {
             EzConfig.instance.preferences.setString(fontFamilyKey, font);
             setState(() {
-              currFontFamily = style.fontFamily!;
+              _currFontFamily = style.fontFamily!;
             });
             popScreen(context: context, pass: font);
           },
           child: Text(
-            (font == defaultFontFamily) ? '$font* (Default)' : font,
+            (font == _defaultFontFamily) ? '$font* (Default)' : font,
             style: style,
             textAlign: TextAlign.center,
           ),
         ),
-        EzSpacer(space),
+        EzSpacer(_buttonSpacer),
       ]);
     });
 
@@ -76,7 +76,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           icon: const Icon(LineIcons.font),
           label: Text(
             'Text font',
-            style: TextStyle(fontFamily: currFontFamily),
+            style: TextStyle(fontFamily: _currFontFamily),
             textAlign: TextAlign.center,
           ),
         ),

@@ -53,21 +53,25 @@ class EzConfig {
     Map<String, dynamic>? customDefaults,
   }) {
     if (_instance == null) {
-      // Load custom defaults //
+      // Build EzConfig.defaults //
 
-      Map<String, dynamic> mergedDefaults = new Map.from(empathetechConfig);
-      if (customDefaults != null) mergedDefaults.addAll(customDefaults);
+      // Start with Emapthetech's config
+      Map<String, dynamic> _defaults = new Map.from(empathetechConfig);
 
-      // Load user preferences //
+      // Merge custom defaults
+      if (customDefaults != null) _defaults.addAll(customDefaults);
 
-      Map<String, dynamic> prefs = new Map.from(mergedDefaults);
+      // Build EzConfig.prefs //
 
-      // Find the keys that have been used
-      List<String> overwritten = prefs.keys.toSet().intersection(preferences.getKeys()).toList();
+      // Start with the newly merged defaults
+      Map<String, dynamic> _prefs = new Map.from(_defaults);
 
-      // Overwrite the relevant values
+      // Find the keys that users have overwritten
+      List<String> overwritten = _prefs.keys.toSet().intersection(preferences.getKeys()).toList();
+
+      // Get the updated values
       overwritten.forEach((key) {
-        dynamic value = prefs[key];
+        dynamic value = _prefs[key];
         dynamic userPref;
 
         switch (value.runtimeType) {
@@ -90,21 +94,23 @@ class EzConfig {
             break;
         }
 
-        if (userPref != null) prefs[key] = userPref;
+        if (userPref != null) _prefs[key] = userPref;
       });
 
-      // Load hand setting
-      bool? isRight = preferences.getBool(isRightKey);
-      final Hand dominantHand = (isRight == null || isRight == true) ? Hand.right : Hand.left;
+      // Build EzConfig.hand //
 
-      // Create the instance
+      bool? isRight = preferences.getBool(isRightKey);
+      final Hand _dominantHand = (isRight == null || isRight == true) ? Hand.right : Hand.left;
+
+      // Build the EzConfig instance //
+
       _instance = EzConfig._(
         assets: assetPaths,
         preferences: preferences,
-        defaults: mergedDefaults,
-        prefs: prefs,
-        fontFamily: googleStyles[(prefs[fontFamilyKey])]?.fontFamily,
-        dominantHand: dominantHand,
+        defaults: _defaults,
+        prefs: _prefs,
+        fontFamily: googleStyles[(_prefs[fontFamilyKey])]?.fontFamily,
+        dominantHand: _dominantHand,
       );
     }
 

@@ -16,31 +16,31 @@ class EzImageSetting extends StatefulWidget {
   /// [EzConfig.instance] key whose value is being updated
   final String prefsKey;
 
-  /// [String] label for the [Image.semanticLabel]
-  final String semantics;
+  /// [String] to display on the [ElevatedButton]
+  final String title;
+
+  /// Effectively whether the image is nullable
+  final bool allowClear;
 
   /// Whether the image is intended for fullscreen use
   final bool fullscreen;
-
-  /// [String] to display on the [ElevatedButton]
-  final String title;
 
   /// Who made this/where'd ya get it?
   /// Credits [String] will be displayed via [EzAlertDialog] when holding the [ElevatedButton]
   final String credits;
 
-  /// Effectively whether the image is nullable
-  final bool allowClear;
+  /// [String] label for the [Image.semanticLabel]
+  final String semantics;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
-    required this.semantics,
     required this.prefsKey,
-    required this.fullscreen,
     required this.title,
-    required this.credits,
     required this.allowClear,
+    required this.fullscreen,
+    required this.credits,
+    required this.semantics,
   }) : super(key: key);
 
   @override
@@ -49,14 +49,12 @@ class EzImageSetting extends StatefulWidget {
 
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather theme data //
-  late String title = widget.title;
-  late String currPathKey = widget.prefsKey;
 
-  String? updatedPath; // Only used when the user makes a change
+  String? _updatedPath;
 
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-  // Define functions //
+  // Define button functions //
 
   /// Cleanup any custom files
   void _cleanup() async {
@@ -88,7 +86,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: const Text('File'),
         icon: Icon(PlatformIcons(context).folder),
       ),
-      EzSpacer(space),
+      EzSpacer(_buttonSpacer),
 
       // From camera
       ElevatedButton.icon(
@@ -104,7 +102,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: const Text('Camera'),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
-      EzSpacer(space),
+      EzSpacer(_buttonSpacer),
 
       // Reset
       ElevatedButton.icon(
@@ -125,7 +123,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (widget.allowClear)
       options.addAll([
-        EzSpacer(space),
+        EzSpacer(_buttonSpacer),
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
@@ -145,7 +143,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText('Update $title'),
+        title: EzSelectableText("Update ${widget.title}"),
         contents: options,
       ),
     );
@@ -161,7 +159,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         dynamic newPath = await _chooseImage(context);
         if (newPath is String)
           setState(() {
-            updatedPath = newPath;
+            _updatedPath = newPath;
           });
       },
 
@@ -180,24 +178,24 @@ class _ImageSettingState extends State<EzImageSetting> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Title on the left
-          Text(title),
+          Text(widget.title),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest
           SizedBox(
             height: widget.fullscreen ? 160 : 75,
             width: widget.fullscreen ? 90 : 75,
-            child: (updatedPath is String) // user made a change
-                ? (updatedPath == noImageKey)
+            child: (_updatedPath is String) // user made a change
+                ? (_updatedPath == noImageKey)
                     ? Icon(PlatformIcons(context).clear)
                     : EzImage(
-                        image: AssetImage(updatedPath as String),
+                        image: AssetImage(_updatedPath as String),
                         semanticLabel: widget.semantics,
                       )
-                : (currPathKey == noImageKey) // using app's current state
+                : (widget.prefsKey == noImageKey) // using app's current state
                     ? Icon(PlatformIcons(context).clear)
                     : EzStoredImage(
-                        prefsKey: currPathKey,
+                        prefsKey: widget.prefsKey,
                         semanticLabel: widget.semantics,
                       ),
           ),
