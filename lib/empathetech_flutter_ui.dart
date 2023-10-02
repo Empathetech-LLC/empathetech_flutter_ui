@@ -28,7 +28,6 @@ export 'src/classes/EzScrollView.dart';
 export 'src/classes/EzSelectableText.dart';
 export 'src/classes/EzSliderSetting.dart';
 export 'src/classes/EzSpacer.dart';
-export 'src/classes/EzStoredImage.dart';
 export 'src/classes/EzTextStyle.dart';
 export 'src/classes/EzTextTheme.dart';
 export 'src/classes/EzThemeModeSwitch.dart';
