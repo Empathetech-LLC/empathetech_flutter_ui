@@ -52,6 +52,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   String? _updatedPath;
 
+  final double _padding = EzConfig.instance.prefs[paddingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Define button functions //
@@ -184,6 +185,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         children: [
           // Title on the left
           Text(widget.title),
+          EzSpacer.row(_padding),
 
           // Preview on the right
           // 16:9 for backgrounds, 1:1 for the rest
