@@ -179,6 +179,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   EzConfig.instance.preferences.remove(darkAccentColorKey);
                   EzConfig.instance.preferences.remove(darkAccentTextColorKey);
                 }
+                popScreen(context: context, pass: true);
               },
             ),
             EzSpacer(textSpacer),

@@ -115,6 +115,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
                 EzConfig.instance.preferences.remove(circleDiameterKey);
                 EzConfig.instance.preferences.remove(buttonSpacingKey);
                 EzConfig.instance.preferences.remove(textSpacingKey);
+                popScreen(context: context, pass: true);
               },
             ),
             EzSpacer(textSpacer),

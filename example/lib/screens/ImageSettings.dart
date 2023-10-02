@@ -100,6 +100,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                 } else {
                   EzConfig.instance.preferences.remove(darkPageImageKey);
                 }
+                popScreen(context: context, pass: true);
               },
             ),
             EzSpacer(textSpacer),
