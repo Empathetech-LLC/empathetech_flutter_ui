@@ -7,7 +7,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
+// Class definition //
+
 class EzTextTheme extends TextTheme {
+  /// Text [Color]
   final Color color;
 
   EzTextTheme({required this.color})
@@ -30,7 +33,8 @@ class EzTextTheme extends TextTheme {
         );
 }
 
-// Build functions //
+// Build && getter functions //
+
 // Sizes taken from https://api.flutter.dev/flutter/material/TextTheme-class.html
 
 TextStyle buildDisplayLarge(Color color) {
