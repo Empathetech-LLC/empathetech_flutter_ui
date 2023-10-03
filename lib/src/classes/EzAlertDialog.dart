@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
@@ -56,7 +57,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: const Text('Close'),
+      child: Text(AppLocalizations.of(context)!.close),
     );
 
     return PlatformAlertDialog(
