@@ -134,10 +134,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () {
             _cleanup();
 
-            EzConfig.instance.preferences.setString(
-              widget.prefsKey,
-              noImageKey,
-            );
+            EzConfig.instance.preferences.setString(widget.prefsKey, noImageKey);
 
             popScreen(context: context, pass: noImageKey);
           },
@@ -211,23 +208,18 @@ class _ImageSettingState extends State<EzImageSetting> {
                           ? // user cleared the image
                           Icon(PlatformIcons(context).clear)
                           : // user set a custom image
-                          isAsset(_updatedPath)
-                              ? EzImage(
-                                  image: AssetImage(_updatedPath!),
-                                  semanticLabel: widget.semantics,
-                                )
-                              : EzImage(
-                                  image: FileImage(File(_updatedPath!)),
-                                  semanticLabel: widget.semantics,
-                                )
+                          EzImage(
+                              image: provideStoredImage(_updatedPath!),
+                              semanticLabel: widget.semantics,
+                            )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
                               EzConfig.instance.prefs[widget.prefsKey] == noImageKey)
                           ? // there is no current image
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored
-                          EzStoredImage(
-                              prefsKey: widget.prefsKey,
+                          EzImage(
+                              image: provideStoredImage(EzConfig.instance.prefs[widget.prefsKey]),
                               semanticLabel: widget.semantics,
                             ),
                 ),
