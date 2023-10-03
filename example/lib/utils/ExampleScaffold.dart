@@ -20,7 +20,7 @@ class ExampleScaffold extends StatelessWidget {
     final TextStyle? appBarTextStyle = Theme.of(context).appBarTheme.titleTextStyle;
     final double textScalar = MediaQuery.of(context).textScaleFactor;
 
-    final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+    final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
     final double toolbarHeight =
         appBarTextStyle!.fontSize! * MediaQuery.of(context).textScaleFactor * 2;
@@ -30,7 +30,7 @@ class ExampleScaffold extends StatelessWidget {
     final TitleBar titleBar = TitleBar(
       style: appBarTextStyle,
       scalar: textScalar,
-      spacer: buttonSpacer,
+      spacer: _buttonSpacer,
     );
 
     // Return the build //

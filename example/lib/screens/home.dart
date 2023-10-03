@@ -26,12 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Gather theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
-  late final TextStyle? resetLinkStyle =
+  late final TextStyle? _resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
   // Return the Build //
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Functionality disclaimer
@@ -55,15 +55,15 @@ Restart the app for your changes to take full effect!
 Have fun!""",
               style: headlineSmall(context),
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
 
             // Theme mode switch
             const EzThemeModeSwitch(),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Dominant hand switch
             const EzDominantHandSwitch(),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
 
             // Style settings
             Semantics(
@@ -76,7 +76,7 @@ Have fun!""",
                 ),
               ),
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
 
             // Color settings
             Semantics(
@@ -89,7 +89,7 @@ Have fun!""",
                 ),
               ),
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Image settings
             Semantics(
@@ -102,11 +102,11 @@ Have fun!""",
                 ),
               ),
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Reset button
-            EzResetButton(context: context, style: resetLinkStyle),
-            EzSpacer(textSpacer),
+            EzResetButton(context: context, style: _resetLinkStyle),
+            EzSpacer(_textSpacer),
           ],
         ),
       ),

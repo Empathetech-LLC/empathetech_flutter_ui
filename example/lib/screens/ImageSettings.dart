@@ -24,34 +24,34 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   // Gather theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late final String _themeProfile = _isLight ? 'light' : 'dark';
 
-  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
-  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  late final String _resetTitle = "Reset all $_themeProfile theme images?";
+  final String _resetMessage = kIsWeb
+      ? "Cannot be undone\nChanges take effect on page reload"
+      : "Cannot be undone\nChanges take effect on app restart";
 
-  late final TextStyle? resetLinkStyle =
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+
+  late final TextStyle? _resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
-  // Build page //
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final String themeProfile = isLight ? 'light' : 'dark';
-    final String resetTitle = "Reset all $themeProfile theme images?";
-    final String resetMessage = kIsWeb
-        ? "Cannot be undone\nChanges take effect on page reload"
-        : "Cannot be undone\nChanges take effect on app restart";
-
     return ExampleScaffold(
       body: EzScreen(
         child: EzScrollView(
           children: [
             // Current theme mode reminder
             EzSelectableText(
-              'Editing: $themeProfile theme',
+              'Editing: $_themeProfile theme',
               style: titleSmall(context),
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
 
             // Settings //
 
@@ -62,7 +62,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               primary: false,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: isLight
+                children: _isLight
                     ? // Editing light theme //
                     [
                         // Page
@@ -74,7 +74,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           credits: 'Wherever you got it!',
                           semantics: 'Page background image',
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
                       ]
                     : // Editing dark theme //
                     [
@@ -87,7 +87,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           credits: 'Wherever you got it!',
                           semantics: 'Page background image',
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
                       ],
               ),
             ),
@@ -95,12 +95,12 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             // Local reset "all"
             EzResetButton(
               context: context,
-              hint: resetMessage,
-              style: resetLinkStyle,
-              dialogTitle: resetTitle,
-              dialogContents: resetMessage,
+              hint: _resetMessage,
+              style: _resetLinkStyle,
+              dialogTitle: _resetTitle,
+              dialogContents: _resetMessage,
               onConfirm: () {
-                if (isLight) {
+                if (_isLight) {
                   EzConfig.instance.preferences.remove(lightPageImageKey);
                 } else {
                   EzConfig.instance.preferences.remove(darkPageImageKey);
@@ -109,7 +109,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                 popScreen(context: context, pass: true);
               },
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
           ],
         ),
       ),

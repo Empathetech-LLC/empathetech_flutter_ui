@@ -23,28 +23,28 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Gather theme data //
 
-  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
-  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-  late final TextStyle? resetLinkStyle =
+  final String resetTitle = "Reset all style settings?";
+  final String resetMessage = kIsWeb
+      ? "Cannot be undone\nChanges take effect on page reload"
+      : "Cannot be undone\nChanges take effect on app restart";
+
+  late final TextStyle? _resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
-  // Build page //
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    const String resetTitle = "Reset all style settings?";
-    final String resetMessage = kIsWeb
-        ? "Cannot be undone\nChanges take effect on page reload"
-        : "Cannot be undone\nChanges take effect on app restart";
-
     return ExampleScaffold(
       body: EzScreen(
         child: EzScrollView(
           children: [
             // Font
             const EzFontSetting(),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Margin
             const EzSliderSetting(
@@ -56,7 +56,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 1,
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Padding
             const EzSliderSetting(
@@ -68,7 +68,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 20,
               decimals: 1,
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Circle button size
             const EzSliderSetting(
@@ -80,7 +80,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 14,
               decimals: 0,
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Button spacing
             const EzSliderSetting(
@@ -92,7 +92,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Text spacing
             const EzSliderSetting(
@@ -104,13 +104,13 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Local reset "all"
             EzResetButton(
               context: context,
               hint: resetMessage,
-              style: resetLinkStyle,
+              style: _resetLinkStyle,
               dialogTitle: resetTitle,
               dialogContents: resetMessage,
               onConfirm: () {
@@ -124,7 +124,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
                 popScreen(context: context, pass: true);
               },
             ),
-            EzSpacer(textSpacer),
+            EzSpacer(_textSpacer),
           ],
         ),
       ),

@@ -24,36 +24,37 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Gather theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late final String _themeProfile = _isLight ? 'light' : 'dark';
 
-  final double textSpacer = EzConfig.instance.prefs[textSpacingKey];
-  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  // Define local reset button's messages
+  late final String _resetTitle = "Reset all $_themeProfile theme colors?";
+  final String _resetMessage = kIsWeb
+      ? "Cannot be undone\nChanges take effect on page reload"
+      : "Cannot be undone\nChanges take effect on app restart";
 
   late final TextStyle? resetLinkStyle =
       bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
 
-  // Build page //
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final String themeProfile = isLight ? 'light' : 'dark';
-    final String resetTitle = "Reset all $themeProfile theme colors?";
-    final String resetMessage = kIsWeb
-        ? "Cannot be undone\nChanges take effect on page reload"
-        : "Cannot be undone\nChanges take effect on app restart";
-
     return ExampleScaffold(
-      body: isLight
+      body: _isLight
           ? EzScreen(
               decorationImageKey: lightPageImageKey,
               child: EzScrollView(
                 children: [
                   // Current theme mode reminder
                   EzSelectableText(
-                    'Editing: $themeProfile theme',
+                    'Editing: $_themeProfile theme',
                     style: titleSmall(context),
                   ),
-                  EzSpacer(textSpacer),
+                  EzSpacer(_textSpacer),
 
                   // Settings //
 
@@ -67,40 +68,40 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       children: [
                         // Theme colors
                         const EzColorSetting(toControl: lightThemeColorKey, name: 'Theme'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: lightThemeTextColorKey,
                           name: 'Theme text',
                           textBackgroundKey: lightThemeColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Page colors
                         const EzColorSetting(toControl: lightPageColorKey, name: 'Page'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: lightPageTextColorKey,
                           name: 'Page text',
                           textBackgroundKey: lightPageColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Button colors
                         const EzColorSetting(toControl: lightButtonColorKey, name: 'Buttons'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: lightButtonTextColorKey,
                           name: 'Button text',
                           textBackgroundKey: lightButtonColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Accent colors
                         const EzColorSetting(toControl: lightAccentColorKey, name: 'Accent'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: lightAccentTextColorKey,
@@ -110,15 +111,15 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       ],
                     ),
                   ),
-                  EzSpacer(buttonSpacer),
+                  EzSpacer(_buttonSpacer),
 
                   // Local reset "all"
                   EzResetButton(
                     context: context,
-                    hint: resetMessage,
+                    hint: _resetMessage,
                     style: resetLinkStyle,
-                    dialogTitle: resetTitle,
-                    dialogContents: resetMessage,
+                    dialogTitle: _resetTitle,
+                    dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(lightThemeColorKey);
                       EzConfig.instance.preferences.remove(lightThemeTextColorKey);
@@ -132,7 +133,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       popScreen(context: context, pass: true);
                     },
                   ),
-                  EzSpacer(textSpacer),
+                  EzSpacer(_textSpacer),
                 ],
               ),
             )
@@ -142,10 +143,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Current theme mode reminder
                   EzSelectableText(
-                    'Editing: $themeProfile theme',
+                    'Editing: $_themeProfile theme',
                     style: titleSmall(context),
                   ),
-                  EzSpacer(textSpacer),
+                  EzSpacer(_textSpacer),
 
                   // Settings //
 
@@ -159,40 +160,40 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       children: [
                         // Theme colors
                         const EzColorSetting(toControl: darkThemeColorKey, name: 'Theme'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: darkThemeTextColorKey,
                           name: 'Theme text',
                           textBackgroundKey: darkThemeColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Page colors
                         const EzColorSetting(toControl: darkPageColorKey, name: 'Page'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: darkPageTextColorKey,
                           name: 'Page text',
                           textBackgroundKey: darkPageColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Button colors
                         const EzColorSetting(toControl: darkButtonColorKey, name: 'Buttons'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: darkButtonTextColorKey,
                           name: 'Button text',
                           textBackgroundKey: darkButtonColorKey,
                         ),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         // Accent colors
                         const EzColorSetting(toControl: darkAccentColorKey, name: 'Accent'),
-                        EzSpacer(buttonSpacer),
+                        EzSpacer(_buttonSpacer),
 
                         const EzColorSetting(
                           toControl: darkAccentTextColorKey,
@@ -202,15 +203,15 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       ],
                     ),
                   ),
-                  EzSpacer(buttonSpacer),
+                  EzSpacer(_buttonSpacer),
 
                   // Local reset "all"
                   EzResetButton(
                     context: context,
-                    hint: resetMessage,
+                    hint: _resetMessage,
                     style: resetLinkStyle,
-                    dialogTitle: resetTitle,
-                    dialogContents: resetMessage,
+                    dialogTitle: _resetTitle,
+                    dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(darkThemeColorKey);
                       EzConfig.instance.preferences.remove(darkThemeTextColorKey);
@@ -224,7 +225,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       popScreen(context: context, pass: true);
                     },
                   ),
-                  EzSpacer(textSpacer),
+                  EzSpacer(_textSpacer),
                 ],
               ),
             ),
