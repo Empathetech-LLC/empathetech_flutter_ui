@@ -21,6 +21,7 @@ class EzRowCol extends StatelessWidget {
   final bool limitedSpace;
 
   /// Whether the [EzRow] should reverse its [children] when [EzConfig.dominantHand] is [Hand.left]
+  /// Defaults to false; not many use cases where both transformations will be wanted
   final bool reverseHands;
 
   /// [EzRow] that will switch to a [Column] if there's [limitedSpace]
