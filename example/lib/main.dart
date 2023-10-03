@@ -38,8 +38,8 @@ void main() async {
   runApp(const EFUIExample());
 }
 
-// Initialize a path based router for web apps
-// Or any other app that you want to enable deep linking
+// Initialize a path based router for web-enabled apps
+// Or any other app that requires deep linking
 // https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter _router = GoRouter(
   initialLocation: homeRoute,
