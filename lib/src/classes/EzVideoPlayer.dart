@@ -94,13 +94,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double? savedVolume;
   double _currentPosition = 0.0;
 
-  final double margin = EzConfig.instance.prefs[marginKey];
-  final double padding = EzConfig.instance.prefs[paddingKey];
-  final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double buttonSize = EzConfig.instance.prefs[circleDiameterKey] / 2;
+  final double _margin = EzConfig.instance.prefs[marginKey];
+  final double _padding = EzConfig.instance.prefs[paddingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSize = EzConfig.instance.prefs[circleDiameterKey] / 2;
 
-  late final Color showing = widget.iconColor;
-  late final Color hiding = (widget.hiddenOpacity == 0.0)
+  late final Color _showing = widget.iconColor;
+  late final Color _hiding = (widget.hiddenOpacity == 0.0)
       ? Colors.transparent
       : widget.iconColor.withOpacity(widget.hiddenOpacity);
 
@@ -186,13 +186,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case ButtonVis.alwaysOff:
         return Colors.transparent;
       case ButtonVis.alwaysOn:
-        return showing;
+        return _showing;
       case ButtonVis.auto:
         return (show)
-            ? showing
+            ? _showing
             : (widget.showOnPause && !widget.controller.value.isPlaying)
-                ? showing
-                : hiding;
+                ? _showing
+                : _hiding;
     }
   }
 
@@ -211,13 +211,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ? PlatformIcons(context).pause
                 : PlatformIcons(context).playArrow,
             color: _buildColor(widget.playVis),
-            size: buttonSize,
+            size: _buttonSize,
           ),
           onTap: () {
             (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
           },
         ),
-        EzSpacer.row(buttonSpacer),
+        EzSpacer.row(_buttonSpacer),
       ]);
     }
 
@@ -231,13 +231,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ? PlatformIcons(context).volumeMute
                 : PlatformIcons(context).volumeUp,
             color: _buildColor(widget.volumeVis),
-            size: buttonSize,
+            size: _buttonSize,
           ),
           onTap: () {
             (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
           },
         ),
-        (widget.variableVolume) ? EzSpacer.row(padding) : EzSpacer.row(buttonSpacer),
+        (widget.variableVolume) ? EzSpacer.row(_padding) : EzSpacer.row(_buttonSpacer),
       ]);
     }
 
@@ -245,8 +245,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       controls.addAll([
         // Value slider
         Container(
-          height: buttonSize,
-          width: buttonSize * 3.0,
+          height: _buttonSize,
+          width: _buttonSize * 3.0,
           child: SliderTheme(
             data: sliderTheme,
             child: Slider(
@@ -259,7 +259,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             ),
           ),
         ),
-        EzSpacer.row(buttonSpacer),
+        EzSpacer.row(_buttonSpacer),
       ]);
     }
 
@@ -270,11 +270,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           child: Icon(
             PlatformIcons(context).refresh,
             color: _buildColor(widget.replayVis),
-            size: buttonSize,
+            size: _buttonSize,
           ),
           onTap: _replayVideo,
         ),
-        EzSpacer.row(buttonSpacer),
+        EzSpacer.row(_buttonSpacer),
       ]);
     }
 
@@ -320,7 +320,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               // Tap-to-pause
               Positioned(
                 top: 0,
-                bottom: buttonSize * 3,
+                bottom: _buttonSize * 3,
                 left: 0,
                 right: 0,
                 child: GestureDetector(
@@ -332,10 +332,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
               // Controls
               Positioned(
-                height: buttonSize * 3,
+                height: _buttonSize * 3,
                 bottom: 0,
-                left: margin,
-                right: margin,
+                left: _margin,
+                right: _margin,
                 child: Container(
                   decoration: widget.controlsBackground,
                   child: Column(
@@ -358,7 +358,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 },
                               ),
                             )
-                          : EzSpacer(buttonSize),
+                          : EzSpacer(_buttonSize),
 
                       // Buttons
                       Row(
