@@ -49,9 +49,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               decorationImageKey: lightPageImageKey,
               child: EzScrollView(
                 children: [
-                  // Current theme mode reminder
+                  // Editing reminders
                   EzSelectableText(
-                    'Editing: $_themeProfile theme',
+                    """Editing: $_themeProfile theme
+Long press buttons to reset individually""",
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
