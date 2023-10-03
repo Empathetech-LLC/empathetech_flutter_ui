@@ -6,5 +6,12 @@
   "useRecommended": "¿Usar recomendado?",
   "resetTo": "Restablecer a...",
   "colorSettingLabelSemantics": "Personalizar el color de {name}.",
-  "colorSettingButtonSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}."
+  "colorSettingButtonSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}.",
+  "right": "Derecha",
+  "rightHandHint": "Los puntos táctiles favorecerán el lado derecho de la pantalla",
+  "left": "Izquierda",
+  "leftHandHint": "Los puntos táctiles favorecerán el lado izquierdo de la pantalla",
+  "dominantHand": "Mano dominante",
+  "handSettingLabelSemantics": "Establece tu mano dominante",
+  "handSettingButtonSemantics": "Abrir para elegir izquierda o derecha. Actualmente configurado en:"
 }

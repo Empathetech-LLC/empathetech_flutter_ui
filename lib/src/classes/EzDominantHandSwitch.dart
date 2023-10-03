@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
   /// Standardized tool for updating [EzConfig] dominantHand
@@ -22,45 +23,45 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
 
-  // Define the list items //
-
-  final List<DropdownMenuItem<Hand>> _items = [
-    DropdownMenuItem<Hand>(
-      child: Semantics(
-        hint: 'Touch points will favor the right side of the screen',
-        child: ExcludeSemantics(child: const Text('Right')),
-      ),
-      value: Hand.right,
-    ),
-    DropdownMenuItem<Hand>(
-      child: Semantics(
-        hint: 'Touch points will favor the left side of the screen',
-        child: ExcludeSemantics(child: const Text('Left')),
-      ),
-      value: Hand.left,
-    ),
-  ];
-
-  // Return the build
-
   @override
   Widget build(BuildContext context) {
+    // Define the list items //
+
+    final List<DropdownMenuItem<Hand>> items = [
+      DropdownMenuItem<Hand>(
+        child: Semantics(
+          hint: AppLocalizations.of(context)!.rightHandHint,
+          child: ExcludeSemantics(child: Text(AppLocalizations.of(context)!.right)),
+        ),
+        value: Hand.right,
+      ),
+      DropdownMenuItem<Hand>(
+        child: Semantics(
+          hint: AppLocalizations.of(context)!.leftHandHint,
+          child: ExcludeSemantics(child: Text(AppLocalizations.of(context)!.left)),
+        ),
+        value: Hand.left,
+      ),
+    ];
+
+    // Return the build //
+
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
       EzSelectableText(
-        'Dominant hand',
+        AppLocalizations.of(context)!.dominantHand,
         style: _style,
-        semanticsLabel: 'Set your dominant hand',
+        semanticsLabel: AppLocalizations.of(context)!.handSettingLabelSemantics,
       ),
       EzSpacer.row(_buttonSpacer),
 
       // Button
       Semantics(
-        hint: 'Open to choose left or right. Currently set to:',
+        hint: AppLocalizations.of(context)!.handSettingButtonSemantics,
         child: DropdownButton<Hand>(
           value: _currSide,
-          items: _items,
+          items: items,
           dropdownColor: Theme.of(context).scaffoldBackgroundColor,
           onChanged: (Hand? newDominantHand) {
             switch (newDominantHand) {
