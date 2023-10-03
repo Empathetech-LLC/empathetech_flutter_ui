@@ -15,10 +15,6 @@ class EzResetButton extends StatelessWidget {
   /// Functionality call-out for the user
   final String message;
 
-  /// [message] style
-  /// Recommended to use something underlined
-  final TextStyle? style;
-
   /// [Semantics] message for screen readers
   final String hint;
 
@@ -36,12 +32,12 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [popScreen]
   final void Function()? onDeny;
 
-  /// Standardized clickable text "button" for clearing user settings (aka resetting the apps')
+  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
+  /// Colors are reversed to stand out
   const EzResetButton({
     required this.context,
     this.message = 'Reset all',
     this.hint = 'Reset all custom settings',
-    this.style,
     this.dialogTitle = 'Reset all settings?',
     this.dialogContents = 'Cannot be undone',
     this.onConfirm,
@@ -50,6 +46,20 @@ class EzResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Gather theme data //
+
+    final ElevatedButtonThemeData baseButtonTheme = Theme.of(context).elevatedButtonTheme;
+    final TextStyle baseButtonTextStyle = baseButtonTheme.style!.textStyle!.resolve({})!;
+
+    final ButtonStyle resetButtonTheme = baseButtonTheme.style!.copyWith(
+      backgroundColor: MaterialStatePropertyAll(baseButtonTextStyle.color!),
+      textStyle: MaterialStatePropertyAll(baseButtonTextStyle.copyWith(
+        color: baseButtonTheme.style!.backgroundColor!.resolve({}),
+      )),
+    );
+
+    // Define the button functions //
+
     final void Function() _onConfirm = (onConfirm == null)
         ? () {
             EzConfig.instance.preferences.clear();
@@ -59,14 +69,17 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onDeny = (onDeny == null) ? () => popScreen(context: context) : onDeny!;
 
+    // Return the build //
+
     return Semantics(
       button: true,
       hint: hint,
       child: ExcludeSemantics(
-        child: EzSelectableText(
-          message,
-          style: style,
-          onTap: () => showPlatformDialog(
+        child: ElevatedButton.icon(
+          icon: Icon(PlatformIcons(context).refresh),
+          label: Text(message),
+          style: resetButtonTheme,
+          onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(dialogTitle),
