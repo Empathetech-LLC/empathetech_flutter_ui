@@ -35,9 +35,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-  late final TextStyle? _resetLinkStyle =
-      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
-
   // Return the build //
 
   @override
@@ -96,7 +93,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             EzResetButton(
               context: context,
               hint: _resetMessage,
-              style: _resetLinkStyle,
               dialogTitle: _resetTitle,
               dialogContents: _resetMessage,
               onConfirm: () {

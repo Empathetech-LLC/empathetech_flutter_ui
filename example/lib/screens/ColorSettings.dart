@@ -33,9 +33,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       ? "Cannot be undone\nChanges take effect on page reload"
       : "Cannot be undone\nChanges take effect on app restart";
 
-  late final TextStyle? resetLinkStyle =
-      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
-
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
@@ -118,7 +115,6 @@ Long press buttons to reset individually""",
                   EzResetButton(
                     context: context,
                     hint: _resetMessage,
-                    style: resetLinkStyle,
                     dialogTitle: _resetTitle,
                     dialogContents: _resetMessage,
                     onConfirm: () {
@@ -210,7 +206,6 @@ Long press buttons to reset individually""",
                   EzResetButton(
                     context: context,
                     hint: _resetMessage,
-                    style: resetLinkStyle,
                     dialogTitle: _resetTitle,
                     dialogContents: _resetMessage,
                     onConfirm: () {

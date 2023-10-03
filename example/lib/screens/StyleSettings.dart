@@ -31,9 +31,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
       ? "Cannot be undone\nChanges take effect on page reload"
       : "Cannot be undone\nChanges take effect on app restart";
 
-  late final TextStyle? _resetLinkStyle =
-      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
-
   // Return the build //
 
   @override
@@ -110,7 +107,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzResetButton(
               context: context,
               hint: resetMessage,
-              style: _resetLinkStyle,
               dialogTitle: resetTitle,
               dialogContents: resetMessage,
               onConfirm: () {

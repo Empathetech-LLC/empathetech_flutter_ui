@@ -31,9 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
-  late final TextStyle? _resetLinkStyle =
-      bodyLarge(context)?.copyWith(decoration: TextDecoration.underline);
-
   // Return the Build //
 
   @override
@@ -105,7 +102,7 @@ Have fun!""",
             EzSpacer(_buttonSpacer),
 
             // Reset button
-            EzResetButton(context: context, style: _resetLinkStyle),
+            EzResetButton(context: context),
             EzSpacer(_textSpacer),
           ],
         ),
