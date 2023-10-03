@@ -8,6 +8,5 @@ export 'StyleSettings.dart';
 // Route names //
 
 const String colorSettingsRoute = 'color-settings';
-const String homeRoute = '/';
 const String imageSettingsRoute = 'image-settings';
 const String styleSettingsRoute = 'style-settings';
