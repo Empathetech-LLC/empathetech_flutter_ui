@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 
 class EzRowCol extends StatelessWidget {
@@ -18,7 +20,10 @@ class EzRowCol extends StatelessWidget {
   /// Whether the [Row] should switch to a [Column]
   final bool limitedSpace;
 
-  /// [Row] that will switch to a [Column] if there's [limitedSpace]
+  /// Whether the [EzRow] should reverse its [children] when [EzConfig.dominantHand] is [Hand.left]
+  final bool reverseHands;
+
+  /// [EzRow] that will switch to a [Column] if there's [limitedSpace]
   /// Alignment, size, and direction values will be shared
   EzRowCol({
     this.key,
@@ -30,6 +35,7 @@ class EzRowCol extends StatelessWidget {
     this.textBaseline,
     required this.children,
     this.limitedSpace = false,
+    this.reverseHands = false,
   }) : super(key: key);
 
   @override
@@ -44,7 +50,7 @@ class EzRowCol extends StatelessWidget {
             textBaseline: textBaseline,
             children: children,
           )
-        : Row(
+        : EzRow(
             mainAxisAlignment: mainAxisAlignment,
             mainAxisSize: mainAxisSize,
             crossAxisAlignment: crossAxisAlignment,
@@ -52,6 +58,7 @@ class EzRowCol extends StatelessWidget {
             verticalDirection: verticalDirection,
             textBaseline: textBaseline,
             children: children,
+            reverseHands: reverseHands,
           );
   }
 }
