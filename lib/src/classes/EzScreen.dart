@@ -57,7 +57,7 @@ class EzScreen extends StatelessWidget {
   DecorationImage? _buildDecoration(String? path) {
     return (path == null || path == noImageKey)
         ? null
-        : isAsset(path)
+        : isPathAsset(path)
             ? DecorationImage(
                 image: AssetImage(path),
                 fit: BoxFit.fill,

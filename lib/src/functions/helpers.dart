@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -43,11 +41,6 @@ Size measureText({
   )..layout();
 
   return textPainter.size;
-}
-
-/// Returns whether the passed [path] refers to one of the stored [EzConfig.assets]
-bool isAsset(String? path) {
-  return EzConfig.instance.assets.contains(path);
 }
 
 /// For web apps, set the tab's title

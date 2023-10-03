@@ -61,7 +61,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Cleanup any custom files
   void _cleanup() async {
-    if (!isAsset(widget.prefsKey)) {
+    if (!isKeyAsset(widget.prefsKey)) {
       try {
         File toDelete = File(widget.prefsKey);
         await toDelete.delete();
