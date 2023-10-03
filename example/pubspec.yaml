@@ -18,5 +18,5 @@ dependencies:
    path: ../
 
 flutter:
-  uses-material-design: true
   generate: true
+  uses-material-design: true
