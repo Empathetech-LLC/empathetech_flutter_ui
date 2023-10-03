@@ -48,7 +48,7 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  // Gather values //
+  // Gather theme data //
 
   late double currValue = EzConfig.instance.prefs[widget.prefsKey];
   late double _defaultValue = EzConfig.instance.defaults[widget.prefsKey];
@@ -57,6 +57,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double _padding = EzConfig.instance.prefs[paddingKey];
   late double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+
+  late final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 
   // Define build functions //
 
@@ -280,8 +282,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
-
     return Semantics(
       button: true,
       hint: "Customize the app's " + widget.type.label,
