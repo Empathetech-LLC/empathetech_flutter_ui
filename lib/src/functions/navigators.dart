@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -58,5 +60,5 @@ Future<dynamic> replaceScreen({
 /// More readable than [Navigator] function spelled out
 /// Runs pop until '/' route
 void popUntilHome(BuildContext context) {
-  return Navigator.of(context).popUntil(ModalRoute.withName('/'));
+  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }

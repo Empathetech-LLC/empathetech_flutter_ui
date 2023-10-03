@@ -5,6 +5,8 @@
 
 // App-wide //
 
+const String homeRoute = '/';
+
 const String isLightKey = 'isLight';
 const String isRightKey = 'isRight';
 
