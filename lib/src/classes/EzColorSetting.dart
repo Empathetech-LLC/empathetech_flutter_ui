@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -85,7 +86,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       int recommended = EzContrastColor(backgroundColor).value;
 
       // Define action button parameters //
-      const String denyMsg = 'Use custom';
+      final String denyMsg = AppLocalizations.of(context)!.useCustom;
 
       final Icon denyIcon = Icon(PlatformIcons(context).edit);
 
@@ -105,7 +106,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: const EzSelectableText('Use recommended?'),
+          title: EzSelectableText(AppLocalizations.of(context)!.useRecommended),
           contents: [
             // Recommended preview
             Container(
@@ -161,7 +162,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: const EzSelectableText('Reset to...'),
+        title: EzSelectableText(AppLocalizations.of(context)!.resetTo),
         contents: [
           // Color preview
           Container(
@@ -192,15 +193,14 @@ class _ColorSettingState extends State<EzColorSetting> {
         EzSelectableText(
           widget.name,
           style: _labelStyle,
-          semanticsLabel: "Customize the ${widget.name} color.",
+          semanticsLabel: AppLocalizations.of(context)!.colorSettingLabelSemantics(widget.name),
         ),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button
         Semantics(
           button: true,
-          hint:
-              "Activate to open a color picker for ${widget.name}. Long press to reset ${widget.name}.",
+          hint: AppLocalizations.of(context)!.colorSettingButtonSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
