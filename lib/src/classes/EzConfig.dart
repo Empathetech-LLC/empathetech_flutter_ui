@@ -87,7 +87,7 @@ class EzConfig {
           case String:
             userPref = preferences.getString(key);
             break;
-          case List<String>:
+          case const (List<String>):
             userPref = preferences.getStringList(key);
             break;
           default:
