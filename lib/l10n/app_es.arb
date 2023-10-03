@@ -2,6 +2,7 @@
   "@@locale" : "es",
   "close": "Cerrar",
   "cancel": "Cancelar",
+  "warning": "ADVERTENCIA",
   "useCustom": "Usar personalizado",
   "useRecommended": "¿Usar recomendado?",
   "resetTo": "Restablecer a...",

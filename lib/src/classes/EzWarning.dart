@@ -6,10 +6,11 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EzWarning extends StatelessWidget {
   /// Short header [String] to grab the user's attention
-  final String warning;
+  final String? warning;
 
   /// Body of the [EzWarning]
   final String message;
@@ -20,7 +21,7 @@ class EzWarning extends StatelessWidget {
   ///  (!) [warning] (!)
   ///      [message]
   const EzWarning({
-    this.warning = 'WARNING',
+    this.warning,
     required this.message,
     this.style,
   });
@@ -31,10 +32,12 @@ class EzWarning extends StatelessWidget {
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
+    final String _warning = warning ?? AppLocalizations.of(context)!.warning;
+
     return Semantics(
       button: false,
       readOnly: true,
-      label: '$warning, $message',
+      label: '$_warning, $message',
       child: ExcludeSemantics(
         child: Card(
           child: Container(
