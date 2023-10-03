@@ -21,6 +21,15 @@ bool isKeyAsset(String? key) {
   return isPathAsset(EzConfig.instance.prefs[key]);
 }
 
+/// Given the [path] to either an [AssetImage] or [FileImage] this function will provide the rest
+ImageProvider provideStoredImage(String path) {
+  if (isPathAsset(path)) {
+    return AssetImage(path);
+  } else {
+    return FileImage(File(path));
+  }
+}
+
 /// Overwrite the [Image] stored in [prefsPath] from [source]
 Future<String?> changeImage({
   required BuildContext context,
