@@ -23,7 +23,7 @@ class TitleBar extends StatelessWidget {
     required this.spacer,
   }) : super(key: key);
 
-  static const String _title = 'EFUI';
+  final String _title = 'EFUI';
 
   @override
   Widget build(BuildContext context) {
