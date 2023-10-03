@@ -42,5 +42,10 @@
 	<string>This app requires access to the photo library to allow you to select photos.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera to allow you to take photos.</string>
+	<key>CFBundleLocalizations</key>
+  <array>
+  	<string>en</string>
+    <string>es</string>
+  </array>
 </dict>
 </plist>
