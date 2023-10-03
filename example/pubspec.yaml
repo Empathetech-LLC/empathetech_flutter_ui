@@ -1,5 +1,5 @@
 name: example
-description: An example app to showcase Empathetech's Flutter UI
+description: "An example app to show off EFUI. It is a screen reader compliant and internationalized (currently: English and Spanish) user customization sandbox."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -22,3 +22,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
