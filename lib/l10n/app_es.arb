@@ -1,5 +1,10 @@
 {
   "@@locale" : "es",
   "close": "Cerrar",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "useCustom": "Usar personalizado",
+  "useRecommended": "¿Usar recomendado?",
+  "resetTo": "Restablecer a...",
+  "colorSettingLabelSemantics": "Personalizar el color de {name}.",
+  "colorSettingButtonSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}."
 }
