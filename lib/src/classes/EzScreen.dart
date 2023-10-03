@@ -78,8 +78,8 @@ class EzScreen extends StatelessWidget {
       alignment: alignment,
       padding: padding,
       decoration: decorationImageKey == null
-          ? BoxDecoration(image: _buildDecoration(EzConfig.instance.prefs[decorationImageKey]))
-          : decoration,
+          ? decoration
+          : BoxDecoration(image: _buildDecoration(EzConfig.instance.prefs[decorationImageKey])),
       foregroundDecoration: foregroundDecoration,
       width: width,
       height: height,
