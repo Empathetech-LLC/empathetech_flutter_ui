@@ -17,9 +17,7 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
-
-  final List<DropdownMenuItem<ThemeMode>> items = [
+  final List<DropdownMenuItem<ThemeMode>> _items = [
     DropdownMenuItem<ThemeMode>(
       child: Semantics(
         hint: 'Copy the devices theme mode',
@@ -45,7 +43,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeMode? _currMode = PlatformTheme.of(context)?.themeMode;
+    ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
     final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
     return EzRow(
@@ -58,21 +56,21 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           style: style,
           semanticsLabel: 'Select theme mode',
         ),
-        EzSpacer.row(space),
+        EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
           hint: 'Open to select a theme mode. Currently set to:',
           child: DropdownButton<ThemeMode>(
-            value: _currMode,
-            items: items,
+            value: currMode,
+            items: _items,
             dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             onChanged: (ThemeMode? newThemeMode) {
               switch (newThemeMode) {
                 case ThemeMode.system:
                   EzConfig.instance.preferences.remove(isLightKey);
                   setState(() {
-                    _currMode = ThemeMode.system;
+                    currMode = ThemeMode.system;
                     PlatformTheme.of(context)!.themeMode = ThemeMode.system;
                   });
                   break;
@@ -80,7 +78,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                 case ThemeMode.light:
                   EzConfig.instance.preferences.setBool(isLightKey, true);
                   setState(() {
-                    _currMode = ThemeMode.light;
+                    currMode = ThemeMode.light;
                     PlatformTheme.of(context)!.themeMode = ThemeMode.light;
                   });
                   break;
@@ -88,7 +86,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                 case ThemeMode.dark:
                   EzConfig.instance.preferences.setBool(isLightKey, false);
                   setState(() {
-                    _currMode = ThemeMode.dark;
+                    currMode = ThemeMode.dark;
                     PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
                   });
                   break;
