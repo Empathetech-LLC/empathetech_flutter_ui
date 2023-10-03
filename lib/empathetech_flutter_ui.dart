@@ -8,7 +8,6 @@ library empathetech_flutter_ui;
 
 // Classes
 export 'src/classes/EzAlertDialog.dart';
-export 'src/classes/EzApp.dart';
 export 'src/classes/EzAppProvider.dart';
 export 'src/classes/EzBackAction.dart';
 export 'src/classes/EzColors.dart';

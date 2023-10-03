@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [4.0.0] - 2023-10-XX
 ### Updated
 - File structure
-- Split EzApp into EzApp and EzAppProvider
+- Split Removed EzApp and made EzAppProvider
 - Split enums into their own folder
 - Pre-existing release check in the Jenkinsfile
 - README

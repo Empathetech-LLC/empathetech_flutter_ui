@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() async {
   // Most apps need this
@@ -83,8 +85,18 @@ class EFUIExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
-      app: EzApp(
+      app: PlatformApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'EFUI example',
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('es'), // Spanish
+        ],
         routerConfig: _router,
       ),
     );

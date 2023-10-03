@@ -14,13 +14,9 @@ class EzAppProvider extends StatelessWidget {
   /// Optionally provide a starting platform (Material/Cupertino)
   final TargetPlatform? initialPlatform;
 
-  /// App to be provided
-  /// Pairs best with [EzApp]
   final PlatformApp app;
 
   /// [PlatformProvider] wrapper with [EzConfig] theming
-  /// It's recommended to provide an [EzApp] for [app]
-  /// But any [PlatformApp] will work
   EzAppProvider({
     this.key,
     this.initialPlatform,
