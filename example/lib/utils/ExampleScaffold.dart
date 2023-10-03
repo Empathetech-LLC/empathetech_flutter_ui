@@ -17,20 +17,19 @@ class ExampleScaffold extends StatelessWidget {
 
     final bool leftHandedUser = EzConfig.instance.dominantHand == Hand.left;
 
+    final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+
     final TextStyle? appBarTextStyle = Theme.of(context).appBarTheme.titleTextStyle;
+
     final double textScalar = MediaQuery.of(context).textScaleFactor;
-
-    final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-
-    final double toolbarHeight =
-        appBarTextStyle!.fontSize! * MediaQuery.of(context).textScaleFactor * 2;
+    final double toolbarHeight = appBarTextStyle!.fontSize! * textScalar * 2;
 
     // Define AppBar widget(s) //
 
     final TitleBar titleBar = TitleBar(
       style: appBarTextStyle,
       scalar: textScalar,
-      spacer: _buttonSpacer,
+      spacer: buttonSpacer,
     );
 
     // Return the build //
