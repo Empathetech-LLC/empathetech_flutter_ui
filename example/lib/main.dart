@@ -87,7 +87,7 @@ class EFUIExample extends StatelessWidget {
     return EzAppProvider(
       app: PlatformApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'EFUI example',
+        title: 'Empathetic Flutter UI',
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
