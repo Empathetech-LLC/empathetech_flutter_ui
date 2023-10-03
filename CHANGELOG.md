@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.2.0] - 2023-10-XX
+## [4.0.0] - 2023-10-XX
 ### Updated
 - File structure
 - Split EzApp into EzApp and EzAppProvider
@@ -24,6 +24,8 @@ All notable changes to this project will be documented in this file.
 - More comments
 - EzBackAction class
 - EzLayoutSwitch
+- EzLocalizations
+  - The example app is en español!
 
 ### Removed
 - Unused and/or unverified classes
