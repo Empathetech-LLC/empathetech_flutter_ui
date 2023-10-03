@@ -14,5 +14,9 @@
   "leftHandHint": "Touch points will favor the left side of the screen",
   "dominantHand": "Dominant hand",
   "handSettingLabelSemantics": "Set your dominant hand",
-  "handSettingButtonSemantics": "Open to choose left or right. Currently set to:"
+  "handSettingButtonSemantics": "Open to choose left or right. Currently set to:",
+  "defaultTag": "{font}* (default)",
+  "chooseFont": "Choose a font",
+  "fontSettingLabel": "Customize the app's text font",
+  "fontSettingSemantics": "Text font"
 }

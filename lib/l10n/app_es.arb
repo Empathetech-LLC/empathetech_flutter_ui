@@ -14,5 +14,9 @@
   "leftHandHint": "Los puntos táctiles favorecerán el lado izquierdo de la pantalla",
   "dominantHand": "Mano dominante",
   "handSettingLabelSemantics": "Establece tu mano dominante",
-  "handSettingButtonSemantics": "Abrir para elegir izquierda o derecha. Actualmente configurado en:"
+  "handSettingButtonSemantics": "Abrir para elegir izquierda o derecha. Actualmente configurado en:",
+  "defaultTag": "{font}* (por defecto)",
+  "chooseFont": "Selecciona una fuente",
+  "fontSettingLabel": "Personaliza la fuente de texto de la aplicación",
+  "fontSettingSemantics": "Fuente de texto"
 }
