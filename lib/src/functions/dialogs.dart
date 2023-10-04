@@ -7,13 +7,14 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an [EzAlertDialog] to notify the user
 Future<dynamic> logAlert({
   required BuildContext context,
-  String alert = 'Attention',
+  String? alert,
   required String message,
 }) {
   log(message);
@@ -24,7 +25,7 @@ Future<dynamic> logAlert({
       readOnly: true,
       child: ExcludeSemantics(
         child: EzAlertDialog(
-          title: EzSelectableText(alert),
+          title: EzSelectableText(alert ?? AppLocalizations.of(context)!.attention),
           contents: [EzSelectableText(message)],
         ),
       ),
@@ -35,18 +36,18 @@ Future<dynamic> logAlert({
 /// Wrap a [ColorPicker] in an [EzAlertDialog]
 Future<dynamic> ezColorPicker({
   required BuildContext context,
-  String title = 'Pick a color!',
+  String? title,
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
-  String confirmMsg = 'Apply',
+  String? confirmMsg,
   required void Function() onConfirm,
-  String denyMsg = 'Cancel',
+  String? denyMsg,
   required void Function() onDeny,
 }) {
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzSelectableText(title),
+      title: EzSelectableText(title ?? AppLocalizations.of(context)!.pickAColor),
       contents: [
         // Color picker
         ColorPicker(
@@ -63,14 +64,14 @@ Future<dynamic> ezColorPicker({
       materialActions: ezMaterialActions(
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg,
-        denyMsg: denyMsg,
+        confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,
+        denyMsg: denyMsg ?? AppLocalizations.of(context)!.cancel,
       ),
       cupertinoActions: ezCupertinoActions(
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg,
-        denyMsg: denyMsg,
+        confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,
+        denyMsg: denyMsg ?? AppLocalizations.of(context)!.cancel,
         confirmIsDestructive: true,
       ),
       needsClose: false,
