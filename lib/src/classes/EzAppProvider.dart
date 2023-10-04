@@ -27,8 +27,8 @@ class EzAppProvider extends StatelessWidget {
 
   final bool? _savedLight = EzConfig.instance.preferences.getBool(isLightKey);
 
-  final ThemeData materialLight = empathetechLightTheme();
-  final ThemeData materialDark = empathetechDarkTheme();
+  final ThemeData materialLight = empathetechThemeData(lightTheme: true);
+  final ThemeData materialDark = empathetechThemeData(lightTheme: false);
 
   late final ThemeMode _initialTheme = (_savedLight == null)
       ? ThemeMode.system
