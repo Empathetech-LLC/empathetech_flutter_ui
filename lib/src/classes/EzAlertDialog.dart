@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -12,21 +13,17 @@ class EzAlertDialog extends PlatformAlertDialog {
   final Key? key;
   final Key? widgetKey;
 
-  /// Dialog's title
+  /// Dialog's [title]
   final Widget? title;
 
-  /// Dialog's main content
-  /// Replaces [PlatformAlertDialog.content] with an [EzScrollView] as [contents] for the [EzScrollView.children]
-  final List<Widget>? contents;
+  /// Dialog's main [content]
+  final Widget? content;
 
-  /// Material "action" [Widget]s to be displayed below [contents]
-  /// Will be appended to [contents] in the Material world
-  /// Prevents redundancy in the Cupertino world
+  /// [AlertDialog.actions]s to be displayed below the [content]
   /// Pairs best with [ezMaterialActions]
   final List<Widget>? materialActions;
 
-  /// [CupertinoDialogAction]s to be displayed below [contents]
-  /// Directly used for [CupertinoAlertDialogData.actions]
+  /// [CupertinoAlertDialogData.actions]s to be displayed below the [content]
   /// Pairs best with [ezCupertinoActions]
   final List<CupertinoDialogAction>? cupertinoActions;
 
@@ -34,17 +31,12 @@ class EzAlertDialog extends PlatformAlertDialog {
   /// Set [needsClose] to true if a default "Close" [CupertinoDialogAction] is needed
   final bool needsClose;
 
-  /// [PlatformAlertDialog] wrapper that automatically styles Material and Cupertino dialogs
-  /// Replaced the original [content] parameter with [contents]
-  /// [contents] will be displayed in an [EzScrollView]
-  /// [materialActions] are appended to [contents] in the Material world
-  /// [cupertinoActions] are directly used for [CupertinoAlertDialogData.actions]
-  /// The split prevents redundancy for users
+  /// [PlatformAlertDialog] wrapper with [EzConfig] styling
   EzAlertDialog({
     this.key,
     this.widgetKey,
     required this.title,
-    required this.contents,
+    required this.content,
     this.materialActions,
     this.cupertinoActions,
     this.needsClose = true,
@@ -65,35 +57,21 @@ class EzAlertDialog extends PlatformAlertDialog {
       material: (context, platform) => MaterialAlertDialogData(
         insetPadding: EdgeInsets.all(padding),
 
-        // Title
         title: title,
-
         // Bottom titlePadding comes from vertical contentPadding
         titlePadding: EdgeInsets.only(top: padding, left: padding, right: padding),
 
-        // Content
-        content: materialActions == null
-            ? EzScrollView(children: contents)
-            : EzScrollView(children: [
-                ...contents!,
-                EzSpacer(padding),
-                ...materialActions!,
-              ]),
-
+        content: content,
         contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
+        actions: materialActions,
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
-        // Title
         title: Padding(
           // No titlePadding equivalent, have to do it manually
           padding: EdgeInsets.only(bottom: padding),
           child: title,
         ),
-
-        // Content
-        content: EzScrollView(children: contents),
-
-        // Actions
+        content: content,
         actions: cupertinoActions == null
             ? [_closeAction]
             : (needsClose)
