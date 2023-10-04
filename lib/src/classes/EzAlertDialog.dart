@@ -3,8 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
-import '../../l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
