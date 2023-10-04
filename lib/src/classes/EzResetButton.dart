@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -73,20 +72,20 @@ class EzResetButton extends StatelessWidget {
 
     return Semantics(
       button: true,
-      hint: hint ?? AppLocalizations.of(context)!.resetButtonHint,
+      hint: hint ?? EFUILocalizations.of(context)!.resetButtonHint,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           icon: Icon(PlatformIcons(context).refresh),
-          label: Text(message ?? AppLocalizations.of(context)!.resetAll),
+          label: Text(message ?? EFUILocalizations.of(context)!.resetAll),
           style: resetButtonTheme,
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(
-                  dialogTitle ?? AppLocalizations.of(context)!.resetButtonDialogTitle),
+                  dialogTitle ?? EFUILocalizations.of(context)!.resetButtonDialogTitle),
               contents: [
                 EzSelectableText(
-                    dialogContents ?? AppLocalizations.of(context)!.resetButtonDialogContents)
+                    dialogContents ?? EFUILocalizations.of(context)!.resetButtonDialogContents)
               ],
               materialActions: ezMaterialActions(
                 context: context,

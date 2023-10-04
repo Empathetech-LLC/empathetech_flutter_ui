@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -29,15 +28,15 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context)!.system),
+        child: Text(EFUILocalizations.of(context)!.system),
         value: ThemeMode.system,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context)!.light),
+        child: Text(EFUILocalizations.of(context)!.light),
         value: ThemeMode.light,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context)!.dark),
+        child: Text(EFUILocalizations.of(context)!.dark),
         value: ThemeMode.dark,
       ),
     ];
@@ -49,12 +48,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        EzSelectableText(AppLocalizations.of(context)!.themeMode, style: style),
+        EzSelectableText(EFUILocalizations.of(context)!.themeMode, style: style),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
-          hint: AppLocalizations.of(context)!.themeSwitchSemantics,
+          hint: EFUILocalizations.of(context)!.themeSwitchSemantics,
           child: DropdownButton<ThemeMode>(
             value: currMode,
             items: items,

@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -79,13 +78,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(AppLocalizations.of(context)!.currently +
+                child: Text(EFUILocalizations.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(AppLocalizations.of(context)!.currently +
+                child: Text(EFUILocalizations.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(_buttonSpacer),
@@ -128,7 +127,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               EzSelectableText(
-                AppLocalizations.of(context)!.currently +
+                EFUILocalizations.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
               ),
@@ -158,7 +157,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(AppLocalizations.of(context)!.currently +
+            child: Text(EFUILocalizations.of(context)!.currently +
                 currValue.toStringAsFixed(widget.decimals)),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -181,14 +180,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               EzSelectableText(
-                  AppLocalizations.of(context)!.currently +
+                  EFUILocalizations.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: currValue),
 
               // Thing 2
               EzSelectableText(
-                  AppLocalizations.of(context)!.currently +
+                  EFUILocalizations.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: _buttonSpacer),
@@ -211,7 +210,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label: AppLocalizations.of(context)!.nameSetToValue(
+        label: EFUILocalizations.of(context)!.nameSetToValue(
           getSettingName(context, widget.type),
           currValue.toStringAsFixed(widget.decimals),
         ),
@@ -269,7 +268,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: AppLocalizations.of(context)!.resetNameToValue(
+        hint: EFUILocalizations.of(context)!.resetNameToValue(
           getSettingName(context, widget.type),
           _defaultValue.toStringAsFixed(widget.decimals),
         ),
@@ -282,7 +281,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text(AppLocalizations.of(context)!.reset +
+            label: Text(EFUILocalizations.of(context)!.reset +
                 _defaultValue.toStringAsFixed(widget.decimals)),
           ),
         ),

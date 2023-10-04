@@ -4,22 +4,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_localizations_en.dart' deferred as app_localizations_en;
-import 'app_localizations_es.dart' deferred as app_localizations_es;
+import 'efui_localizations_en.dart' deferred as efui_localizations_en;
+import 'efui_localizations_es.dart' deferred as efui_localizations_es;
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of EFUILocalizations
+/// returned by `EFUILocalizations.of(context)`.
 ///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// Applications need to include `EFUILocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_localizations.dart';
+/// import 'l10n/efui_localizations.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
+///   localizationsDelegates: EFUILocalizations.localizationsDelegates,
+///   supportedLocales: EFUILocalizations.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -56,20 +56,20 @@ import 'app_localizations_es.dart' deferred as app_localizations_es;
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// be consistent with the languages listed in the EFUILocalizations.supportedLocales
 /// property.
-abstract class AppLocalizations {
-  AppLocalizations(String locale)
+abstract class EFUILocalizations {
+  EFUILocalizations(String locale)
       : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static EFUILocalizations? of(BuildContext context) {
+    return Localizations.of<EFUILocalizations>(context, EFUILocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<EFUILocalizations> delegate =
+      _EFUILocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -384,13 +384,13 @@ abstract class AppLocalizations {
   String failedImageSet(Object error);
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class _EFUILocalizationsDelegate
+    extends LocalizationsDelegate<EFUILocalizations> {
+  const _EFUILocalizationsDelegate();
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return lookupAppLocalizations(locale);
+  Future<EFUILocalizations> load(Locale locale) {
+    return lookupEFUILocalizations(locale);
   }
 
   @override
@@ -398,24 +398,24 @@ class _AppLocalizationsDelegate
       <String>['en', 'es'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_EFUILocalizationsDelegate old) => false;
 }
 
-Future<AppLocalizations> lookupAppLocalizations(Locale locale) {
+Future<EFUILocalizations> lookupEFUILocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return app_localizations_en
+      return efui_localizations_en
           .loadLibrary()
-          .then((dynamic _) => app_localizations_en.AppLocalizationsEn());
+          .then((dynamic _) => efui_localizations_en.EFUILocalizationsEn());
     case 'es':
-      return app_localizations_es
+      return efui_localizations_es
           .loadLibrary()
-          .then((dynamic _) => app_localizations_es.AppLocalizationsEs());
+          .then((dynamic _) => efui_localizations_es.EFUILocalizationsEs());
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'EFUILocalizations.delegate failed to load unsupported locale "$locale". This is likely '
       'an issue with the localizations generation tool. Please file an issue '
       'on GitHub with a reproducible sample app and the gen-l10n configuration '
       'that was used.');

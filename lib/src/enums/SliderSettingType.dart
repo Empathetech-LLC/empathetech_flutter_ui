@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -22,15 +21,15 @@ enum SliderSettingType {
 String getSettingName(BuildContext context, SliderSettingType settingType) {
   switch (settingType) {
     case SliderSettingType.margin:
-      return AppLocalizations.of(context)!.margin;
+      return EFUILocalizations.of(context)!.margin;
     case SliderSettingType.padding:
-      return AppLocalizations.of(context)!.padding;
+      return EFUILocalizations.of(context)!.padding;
     case SliderSettingType.circleSize:
-      return AppLocalizations.of(context)!.circleSize;
+      return EFUILocalizations.of(context)!.circleSize;
     case SliderSettingType.buttonSpacing:
-      return AppLocalizations.of(context)!.buttonSpacing;
+      return EFUILocalizations.of(context)!.buttonSpacing;
     case SliderSettingType.textSpacing:
-      return AppLocalizations.of(context)!.textSpacing;
+      return EFUILocalizations.of(context)!.textSpacing;
     default:
       throw Exception("Invalid SliderSettingType: $settingType");
   }

@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ List<Widget>? ezMaterialActions({
     ElevatedButton.icon(
       onPressed: onConfirm,
       icon: confirmIcon ?? const Icon(Icons.check),
-      label: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
+      label: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
     ),
     EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
@@ -34,7 +33,7 @@ List<Widget>? ezMaterialActions({
     ElevatedButton.icon(
       onPressed: onDeny,
       icon: denyIcon ?? const Icon(Icons.clear),
-      label: Text(denyMsg ?? AppLocalizations.of(context)!.no),
+      label: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
     ),
   ];
 }
@@ -57,7 +56,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -65,7 +64,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg ?? AppLocalizations.of(context)!.no),
+      child: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),

@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
+import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,7 +57,7 @@ void setPageTitle({
 Future<bool?> copyToClipboard({required BuildContext context, required String string}) async {
   await Clipboard.setData(ClipboardData(text: string));
   return Fluttertoast.showToast(
-    msg: AppLocalizations.of(context)!.clipCopy,
+    msg: EFUILocalizations.of(context)!.clipCopy,
     toastLength: Toast.LENGTH_SHORT,
     backgroundColor: Colors.black,
     fontSize: 18,

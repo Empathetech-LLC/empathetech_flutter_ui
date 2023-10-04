@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             popScreen(context: context, pass: font);
           },
           child: Text(
-            (font == _defaultFontFamily) ? AppLocalizations.of(context)!.defaultTag(font) : font,
+            (font == _defaultFontFamily) ? EFUILocalizations.of(context)!.defaultTag(font) : font,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -58,7 +57,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText(AppLocalizations.of(context)!.chooseFont),
+        title: EzSelectableText(EFUILocalizations.of(context)!.chooseFont),
         contents: buttons,
       ),
     );
@@ -72,7 +71,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       onPressed: () => _chooseGoogleFont(context),
       icon: const Icon(LineIcons.font),
       label: Text(
-        AppLocalizations.of(context)!.fontSettingLabel,
+        EFUILocalizations.of(context)!.fontSettingLabel,
         style: TextStyle(fontFamily: currFontFamily),
         textAlign: TextAlign.center,
       ),

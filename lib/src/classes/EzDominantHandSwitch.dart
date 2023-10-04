@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -29,11 +28,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(AppLocalizations.of(context)!.right),
+        child: Text(EFUILocalizations.of(context)!.right),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(AppLocalizations.of(context)!.left),
+        child: Text(EFUILocalizations.of(context)!.left),
         value: Hand.left,
       ),
     ];
@@ -43,12 +42,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      EzSelectableText(AppLocalizations.of(context)!.dominantHand, style: _style),
+      EzSelectableText(EFUILocalizations.of(context)!.dominantHand, style: _style),
       EzSpacer.row(_buttonSpacer),
 
       // Button
       Semantics(
-        hint: AppLocalizations.of(context)!.handSettingSemantics,
+        hint: EFUILocalizations.of(context)!.handSettingSemantics,
         child: DropdownButton<Hand>(
           value: _currSide,
           items: items,

@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../l10n/app_localizations.dart';
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -57,7 +56,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: Text(AppLocalizations.of(context)!.close),
+      child: Text(EFUILocalizations.of(context)!.close),
     );
 
     return PlatformAlertDialog(
