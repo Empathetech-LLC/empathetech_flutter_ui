@@ -62,14 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: const Text('Styling'),
+              child: Text(AppLocalizations.of(context)!.styling),
             ),
             EzSpacer(_textSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: const Text('Colors'),
+              child: Text(AppLocalizations.of(context)!.colors),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: const Text('Images'),
+              child: Text(AppLocalizations.of(context)!.images),
             ),
             EzSpacer(_buttonSpacer),
 

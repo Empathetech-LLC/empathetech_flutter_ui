@@ -27,5 +27,12 @@
   "padding": "relleno",
   "circleSize": "tamaño del botón circular",
   "buttonSpacing": "espaciado de botones",
-  "textSpacing": "espaciado de texto"
+  "textSpacing": "espaciado de texto",
+  "settings": "Configuraciones",
+  "attention": "ATENCIÓN",
+  "resetWarning": "Cada botón mostrará una vista previa de sus cambios\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
+  "resetWarningWeb": "Cada botón mostrará una vista previa de sus cambios\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
+  "styling": "Estilización",
+  "colors": "Colores",
+  "images": "Imágenes"
 }
