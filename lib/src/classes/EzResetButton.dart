@@ -88,8 +88,13 @@ class EzResetButton extends StatelessWidget {
                 EzSelectableText(
                     dialogContents ?? AppLocalizations.of(context)!.resetButtonDialogContents)
               ],
-              materialActions: ezMaterialActions(onConfirm: _onConfirm, onDeny: _onDeny),
+              materialActions: ezMaterialActions(
+                context: context,
+                onConfirm: _onConfirm,
+                onDeny: _onDeny,
+              ),
               cupertinoActions: ezCupertinoActions(
+                context: context,
                 onConfirm: _onConfirm,
                 onDeny: _onDeny,
                 confirmIsDestructive: true,

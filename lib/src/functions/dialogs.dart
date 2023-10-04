@@ -62,12 +62,14 @@ Future<dynamic> ezColorPicker({
         ),
       ],
       materialActions: ezMaterialActions(
+        context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
         confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,
         denyMsg: denyMsg ?? AppLocalizations.of(context)!.cancel,
       ),
       cupertinoActions: ezCupertinoActions(
+        context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
         confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,

@@ -119,12 +119,14 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
           ],
           materialActions: ezMaterialActions(
+            context: context,
             onConfirm: onConfirm,
             onDeny: onDeny,
             denyMsg: denyMsg,
             denyIcon: denyIcon,
           ),
           cupertinoActions: ezCupertinoActions(
+            context: context,
             onConfirm: onConfirm,
             onDeny: onDeny,
             denyMsg: denyMsg,
@@ -174,8 +176,16 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
           ),
         ],
-        materialActions: ezMaterialActions(onConfirm: onConfirm, onDeny: onDeny),
-        cupertinoActions: ezCupertinoActions(onConfirm: onConfirm, onDeny: onDeny),
+        materialActions: ezMaterialActions(
+          context: context,
+          onConfirm: onConfirm,
+          onDeny: onDeny,
+        ),
+        cupertinoActions: ezCupertinoActions(
+          context: context,
+          onConfirm: onConfirm,
+          onDeny: onDeny,
+        ),
         needsClose: false,
       ),
     );
