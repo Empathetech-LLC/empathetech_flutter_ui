@@ -53,3 +53,6 @@ export 'src/functions/ezAlertActions.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/storage.dart';
+
+// l10n
+export 'src/l10n/app_localizations.dart';
