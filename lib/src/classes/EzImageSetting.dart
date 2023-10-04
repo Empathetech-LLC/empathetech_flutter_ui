@@ -8,6 +8,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // EzImageSetting has not yet been verified with TalkBack or VoiceOver //
@@ -29,11 +30,6 @@ class EzImageSetting extends StatefulWidget {
   /// Credits [String] will be displayed via [EzAlertDialog] when holding the [ElevatedButton]
   final String credits;
 
-  /// [String] label for the screen readers
-  /// The button hint will readout "Update the [semantics]"
-  /// [semantics] will also be used for the image's [Image.semanticLabel]
-  final String semantics;
-
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
@@ -42,7 +38,6 @@ class EzImageSetting extends StatefulWidget {
     required this.allowClear,
     required this.fullscreen,
     required this.credits,
-    required this.semantics,
   }) : super(key: key);
 
   @override
@@ -88,7 +83,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: const Text('Frome file'),
+        label: Text(AppLocalizations.of(context)!.fromFile),
         icon: Icon(PlatformIcons(context).folder),
       ),
       EzSpacer(_buttonSpacer),
@@ -104,7 +99,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: const Text('From camera'),
+        label: Text(AppLocalizations.of(context)!.fromCamera),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       EzSpacer(_buttonSpacer),
@@ -121,7 +116,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             pass: EzConfig.instance.defaults[widget.prefsKey],
           );
         },
-        label: const Text('Reset it'),
+        label: Text(AppLocalizations.of(context)!.resetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -138,7 +133,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, pass: noImageKey);
           },
-          label: const Text('Clear it'),
+          label: Text(AppLocalizations.of(context)!.clearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -148,7 +143,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText("How should the ${widget.title} image be updated?"),
+        title: EzSelectableText(
+          AppLocalizations.of(context)!.imageSettingDialogTitle(widget.title),
+        ),
         contents: options,
       ),
     );
@@ -160,7 +157,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: "Update the ${widget.semantics}",
+      hint: AppLocalizations.of(context)!.imageSettingHint(widget.title),
       child: ExcludeSemantics(
         child: ElevatedButton(
           // On pressed -> choose image
@@ -176,7 +173,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: const EzSelectableText('Credit to:'),
+              title: EzSelectableText(AppLocalizations.of(context)!.creditTo),
               contents: [EzSelectableText(widget.credits)],
             ),
           ),
@@ -210,7 +207,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // user set a custom image
                           EzImage(
                               image: provideStoredImage(_updatedPath!),
-                              semanticLabel: widget.semantics,
+                              semanticLabel: widget.title + AppLocalizations.of(context)!.image,
                             )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
@@ -220,7 +217,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // there is an image stored
                           EzImage(
                               image: provideStoredImage(EzConfig.instance.prefs[widget.prefsKey]),
-                              semanticLabel: widget.semantics,
+                              semanticLabel: widget.title + AppLocalizations.of(context)!.image,
                             ),
                 ),
               ),
