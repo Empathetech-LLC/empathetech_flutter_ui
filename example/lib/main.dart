@@ -94,10 +94,11 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Supported languages
-        supportedLocales: AppLocalizations.supportedLocales,
+        supportedLocales: AppLocalizations.supportedLocales + EFUILocalizations.supportedLocales,
 
         // Language handlers
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates:
+            AppLocalizations.localizationsDelegates + EFUILocalizations.localizationsDelegates,
 
         // Internationalized apps need to use onGenerateTitle >> title
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
