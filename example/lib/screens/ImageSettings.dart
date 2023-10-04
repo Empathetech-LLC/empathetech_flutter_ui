@@ -69,7 +69,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           allowClear: true,
                           fullscreen: true,
                           credits: 'Wherever you got it!',
-                          semantics: 'Page background image',
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -82,7 +81,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           allowClear: true,
                           fullscreen: true,
                           credits: 'Wherever you got it!',
-                          semantics: 'Page background image',
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
