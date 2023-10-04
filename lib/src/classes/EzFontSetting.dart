@@ -68,19 +68,13 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      hint: AppLocalizations.of(context)!.fontSettingSemantics,
-      child: ExcludeSemantics(
-        child: ElevatedButton.icon(
-          onPressed: () => _chooseGoogleFont(context),
-          icon: const Icon(LineIcons.font),
-          label: Text(
-            AppLocalizations.of(context)!.fontSettingLabel,
-            style: TextStyle(fontFamily: currFontFamily),
-            textAlign: TextAlign.center,
-          ),
-        ),
+    return ElevatedButton.icon(
+      onPressed: () => _chooseGoogleFont(context),
+      icon: const Icon(LineIcons.font),
+      label: Text(
+        AppLocalizations.of(context)!.fontSettingLabel,
+        style: TextStyle(fontFamily: currFontFamily),
+        textAlign: TextAlign.center,
       ),
     );
   }

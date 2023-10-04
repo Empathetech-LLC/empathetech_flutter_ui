@@ -29,17 +29,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Semantics(
-          hint: AppLocalizations.of(context)!.rightHandHint,
-          child: ExcludeSemantics(child: Text(AppLocalizations.of(context)!.right)),
-        ),
+        child: Text(AppLocalizations.of(context)!.right),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Semantics(
-          hint: AppLocalizations.of(context)!.leftHandHint,
-          child: ExcludeSemantics(child: Text(AppLocalizations.of(context)!.left)),
-        ),
+        child: Text(AppLocalizations.of(context)!.left),
         value: Hand.left,
       ),
     ];
