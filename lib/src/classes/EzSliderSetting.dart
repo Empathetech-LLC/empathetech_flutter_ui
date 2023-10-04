@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzSliderSetting extends StatefulWidget {
@@ -78,12 +79,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+                child: Text(AppLocalizations.of(context)!.currently +
+                    currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+                child: Text(AppLocalizations.of(context)!.currently +
+                    currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(_buttonSpacer),
             ],
@@ -125,7 +128,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               EzSelectableText(
-                'Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+                AppLocalizations.of(context)!.currently +
+                    currValue.toStringAsFixed(widget.decimals),
                 style: style,
               ),
               EzSpacer.row(_textSpacer),
@@ -154,7 +158,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
-            child: Text('Currently: ${currValue.toStringAsFixed(widget.decimals)}'),
+            child: Text(AppLocalizations.of(context)!.currently +
+                currValue.toStringAsFixed(widget.decimals)),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
                 ),
@@ -175,12 +180,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Thing 1
-              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+              EzSelectableText(
+                  AppLocalizations.of(context)!.currently +
+                      currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: currValue),
 
               // Thing 2
-              EzSelectableText('Currently: ${currValue.toStringAsFixed(widget.decimals)}',
+              EzSelectableText(
+                  AppLocalizations.of(context)!.currently +
+                      currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: _buttonSpacer),
             ],
@@ -202,8 +211,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label:
-            '${widget.type.name} is currently set to ${currValue.toStringAsFixed(widget.decimals)}',
+        label: AppLocalizations.of(context)!
+            .nameSetToValue(widget.type.name, currValue.toStringAsFixed(widget.decimals)),
         child: ExcludeSemantics(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -258,7 +267,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: 'Reset ${widget.type.name} to ${_defaultValue.toStringAsFixed(widget.decimals)}',
+        hint: AppLocalizations.of(context)!
+            .resetNameToValue(widget.type.name, _defaultValue.toStringAsFixed(widget.decimals)),
         child: ExcludeSemantics(
           child: ElevatedButton.icon(
             onPressed: () {
@@ -268,7 +278,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text('Reset: ${_defaultValue.toStringAsFixed(widget.decimals)}'),
+            label: Text(AppLocalizations.of(context)!.reset +
+                _defaultValue.toStringAsFixed(widget.decimals)),
           ),
         ),
       ),
@@ -284,7 +295,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: "Customize the app's " + widget.type.label,
+      hint: AppLocalizations.of(context)!.customizeTheApp(widget.type.label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => showModalBottomSheet(
