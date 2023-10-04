@@ -32,7 +32,7 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [popScreen]
   final void Function()? onDeny;
 
-  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
+  /// Standardized [TextButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   const EzResetButton({
     required this.context,
@@ -46,18 +46,6 @@ class EzResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
-
-    final ElevatedButtonThemeData baseButtonTheme = Theme.of(context).elevatedButtonTheme;
-    final TextStyle baseButtonTextStyle = baseButtonTheme.style!.textStyle!.resolve({})!;
-
-    final ButtonStyle resetButtonTheme = baseButtonTheme.style!.copyWith(
-      backgroundColor: MaterialStatePropertyAll(baseButtonTextStyle.color!),
-      textStyle: MaterialStatePropertyAll(baseButtonTextStyle.copyWith(
-        color: baseButtonTheme.style!.backgroundColor!.resolve({}),
-      )),
-    );
-
     // Define the button functions //
 
     final void Function() _onConfirm = onConfirm ??
@@ -74,10 +62,9 @@ class EzResetButton extends StatelessWidget {
       button: true,
       hint: hint ?? EFUILocalizations.of(context)!.resetButtonHint,
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: TextButton.icon(
           icon: Icon(PlatformIcons(context).refresh),
           label: Text(message ?? EFUILocalizations.of(context)!.resetAll),
-          style: resetButtonTheme,
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
