@@ -35,24 +35,6 @@ extension SettingName on SliderSettingType {
   }
 }
 
-/// Enumerator extension for getting the proper [Semantics] label for [EzSliderSetting.type]
-extension SettingLabel on SliderSettingType {
-  String get label {
-    switch (this) {
-      case SliderSettingType.margin:
-        return "margin. Margin is the distance between the edge of a view and its contents. The app window or a dialog pop up, for example.";
-      case SliderSettingType.padding:
-        return "padding. Padding is the distance between paired items. A title and its description or a button and its label, for example.";
-      case SliderSettingType.circleSize:
-        return "circle button size.";
-      case SliderSettingType.buttonSpacing:
-        return "button spacing.";
-      case SliderSettingType.textSpacing:
-        return "text spacing.";
-    }
-  }
-}
-
 /// Enumerator extension for getting the proper button [Icon] for [EzSliderSetting.type]
 extension SettingIcon on SliderSettingType {
   Icon get icon {
