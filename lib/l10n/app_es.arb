@@ -18,5 +18,10 @@
   "defaultTag": "{font}* (por defecto)",
   "chooseFont": "Selecciona una fuente",
   "fontSettingLabel": "Personaliza la fuente de texto de la aplicación",
-  "fontSettingSemantics": "Fuente de texto"
+  "fontSettingSemantics": "Fuente de texto",
+  "ezImage": "blah",
+  "ezResetLabel": "Restablecer todo",
+  "ezResetHint": "Restablecer todas las configuraciones personalizadas",
+  "ezResetDialogTitle": "¿Restablecer todas las configuraciones?",
+  "ezResetDialogContents": "No se puede deshacer"
 }

@@ -7,22 +7,23 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
   final BuildContext context;
 
   /// Functionality call-out for the user
-  final String message;
+  final String? message;
 
   /// [Semantics] message for screen readers
-  final String hint;
+  final String? hint;
 
   /// [EzAlertDialog.title] that shows on click
-  final String dialogTitle;
+  final String? dialogTitle;
 
   /// [EzAlertDialog.contents] that shows on click
-  final String dialogContents;
+  final String? dialogContents;
 
   /// What happens when the user choses to reset
   /// Defaults to clearing user [SharedPreferences]
@@ -36,10 +37,10 @@ class EzResetButton extends StatelessWidget {
   /// Colors are reversed to stand out
   const EzResetButton({
     required this.context,
-    this.message = 'Reset all',
-    this.hint = 'Reset all custom settings',
-    this.dialogTitle = 'Reset all settings?',
-    this.dialogContents = 'Cannot be undone',
+    this.message,
+    this.hint,
+    this.dialogTitle,
+    this.dialogContents,
     this.onConfirm,
     this.onDeny,
   });
@@ -60,30 +61,33 @@ class EzResetButton extends StatelessWidget {
 
     // Define the button functions //
 
-    final void Function() _onConfirm = (onConfirm == null)
-        ? () {
-            EzConfig.instance.preferences.clear();
-            popScreen(context: context, pass: true);
-          }
-        : onConfirm!;
+    final void Function() _onConfirm = onConfirm ??
+        () {
+          EzConfig.instance.preferences.clear();
+          popScreen(context: context, pass: true);
+        };
 
-    final void Function() _onDeny = (onDeny == null) ? () => popScreen(context: context) : onDeny!;
+    final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
     // Return the build //
 
     return Semantics(
       button: true,
-      hint: hint,
+      hint: hint ?? AppLocalizations.of(context)!.ezResetHint,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           icon: Icon(PlatformIcons(context).refresh),
-          label: Text(message),
+          label: Text(message ?? AppLocalizations.of(context)!.ezResetLabel),
           style: resetButtonTheme,
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzSelectableText(dialogTitle),
-              contents: [EzSelectableText(dialogContents)],
+              title: EzSelectableText(
+                  dialogTitle ?? AppLocalizations.of(context)!.ezResetDialogTitle),
+              contents: [
+                EzSelectableText(
+                    dialogContents ?? AppLocalizations.of(context)!.ezResetDialogContents)
+              ],
               materialActions: ezMaterialActions(onConfirm: _onConfirm, onDeny: _onDeny),
               cupertinoActions: ezCupertinoActions(
                 onConfirm: _onConfirm,

@@ -18,5 +18,10 @@
   "defaultTag": "{font}* (default)",
   "chooseFont": "Choose a font",
   "fontSettingLabel": "Customize the app's text font",
-  "fontSettingSemantics": "Text font"
+  "fontSettingSemantics": "Text font",
+  "ezImage": "blah",
+  "ezResetLabel": "Reset all",
+  "ezResetHint": "Reset all custom settings",
+  "ezResetDialogTitle": "Reset all settings?",
+  "ezResetDialogContents": "Cannot be undone"
 }
