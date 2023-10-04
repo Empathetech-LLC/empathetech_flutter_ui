@@ -10,6 +10,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Can this [path] build an [AssetImage]?
 bool isPathAsset(String? path) {
@@ -40,7 +41,10 @@ Future<String?> changeImage({
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
-      logAlert(context: context, message: 'Failed to retrieve image');
+      logAlert(
+        context: context,
+        message: AppLocalizations.of(context)!.failedImageGet,
+      );
       return null;
     }
 
@@ -54,7 +58,7 @@ Future<String?> changeImage({
     EzConfig.instance.preferences.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = 'Failed to update image:\n$e';
+    final String errorMsg = AppLocalizations.of(context)!.failedImageSet(e.toString());
     logAlert(context: context, message: errorMsg);
     return null;
   }
