@@ -47,7 +47,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: AppLocalizations.of(context)!.margin,
+              title: EFUILocalizations.of(context)!.margin,
               min: 5.0,
               max: 50.0,
               steps: 18,
@@ -59,7 +59,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: AppLocalizations.of(context)!.padding,
+              title: EFUILocalizations.of(context)!.padding,
               min: 0.0,
               max: 50.0,
               steps: 20,
@@ -71,7 +71,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: circleDiameterKey,
               type: SliderSettingType.circleSize,
-              title: AppLocalizations.of(context)!.circleSize,
+              title: EFUILocalizations.of(context)!.circleSize,
               min: 30,
               max: 100,
               steps: 14,
@@ -83,7 +83,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: AppLocalizations.of(context)!.buttonSpacing,
+              title: EFUILocalizations.of(context)!.buttonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -95,7 +95,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: AppLocalizations.of(context)!.textSpacing,
+              title: EFUILocalizations.of(context)!.textSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,

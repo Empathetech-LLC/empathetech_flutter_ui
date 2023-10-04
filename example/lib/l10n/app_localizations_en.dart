@@ -11,12 +11,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeLinkHint => 'Return to the home screen';
 
   @override
-  String get light => 'light';
-
-  @override
-  String get dark => 'dark';
-
-  @override
   String editingTheme(Object themeType) {
     return 'Editing: $themeType theme';
   }
@@ -82,21 +76,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resetAllStyle => 'Reset all style settings?';
-
-  @override
-  String get margin => 'margin';
-
-  @override
-  String get padding => 'padding';
-
-  @override
-  String get circleSize => 'circle button size';
-
-  @override
-  String get buttonSpacing => 'button spacing';
-
-  @override
-  String get textSpacing => 'text spacing';
 
   @override
   String get settings => 'Settings';

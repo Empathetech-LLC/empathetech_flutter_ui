@@ -11,12 +11,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeLinkHint => 'Regresar a la pantalla principal';
 
   @override
-  String get light => 'claro';
-
-  @override
-  String get dark => 'oscuro';
-
-  @override
   String editingTheme(Object themeType) {
     return 'Editando: tema $themeType';
   }
@@ -83,21 +77,6 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get resetAllStyle =>
       '¿Restablecer todas las configuraciones de estilo?';
-
-  @override
-  String get margin => 'margen';
-
-  @override
-  String get padding => 'relleno';
-
-  @override
-  String get circleSize => 'tamaño del botón circular';
-
-  @override
-  String get buttonSpacing => 'espaciado de botones';
-
-  @override
-  String get textSpacing => 'espaciado de texto';
 
   @override
   String get settings => 'Configuraciones';

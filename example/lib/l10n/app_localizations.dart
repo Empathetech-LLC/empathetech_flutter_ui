@@ -107,18 +107,6 @@ abstract class AppLocalizations {
   /// **'Return to the home screen'**
   String get homeLinkHint;
 
-  /// No description provided for @light.
-  ///
-  /// In en, this message translates to:
-  /// **'light'**
-  String get light;
-
-  /// No description provided for @dark.
-  ///
-  /// In en, this message translates to:
-  /// **'dark'**
-  String get dark;
-
   /// No description provided for @editingTheme.
   ///
   /// In en, this message translates to:
@@ -232,36 +220,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset all style settings?'**
   String get resetAllStyle;
-
-  /// No description provided for @margin.
-  ///
-  /// In en, this message translates to:
-  /// **'margin'**
-  String get margin;
-
-  /// No description provided for @padding.
-  ///
-  /// In en, this message translates to:
-  /// **'padding'**
-  String get padding;
-
-  /// No description provided for @circleSize.
-  ///
-  /// In en, this message translates to:
-  /// **'circle button size'**
-  String get circleSize;
-
-  /// No description provided for @buttonSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'button spacing'**
-  String get buttonSpacing;
-
-  /// No description provided for @textSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'text spacing'**
-  String get textSpacing;
 
   /// No description provided for @settings.
   ///

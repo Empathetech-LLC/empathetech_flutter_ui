@@ -115,7 +115,7 @@ class EFUILocalizationsEs extends EFUILocalizations {
 
   @override
   String resetNameToValue(Object name, Object value) {
-    return 'restablecer $name a $value';
+    return 'Restablecer $name a $value';
   }
 
   @override
@@ -135,19 +135,19 @@ class EFUILocalizationsEs extends EFUILocalizations {
       'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
 
   @override
-  String get margin => 'margen';
+  String get margin => 'Margen';
 
   @override
-  String get padding => 'relleno';
+  String get padding => 'Relleno';
 
   @override
-  String get circleSize => 'tamaño del botón circular';
+  String get circleSize => 'Tamaño del botón circular';
 
   @override
-  String get buttonSpacing => 'espaciado de botones';
+  String get buttonSpacing => 'Espaciado de botones';
 
   @override
-  String get textSpacing => 'espaciado de texto';
+  String get textSpacing => 'Espaciado de texto';
 
   @override
   String get attention => 'Atención';

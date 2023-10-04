@@ -27,7 +27,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? AppLocalizations.of(context)!.light : AppLocalizations.of(context)!.dark;
+      _isLight ? EFUILocalizations.of(context)!.light : EFUILocalizations.of(context)!.dark;
 
   // Define local reset button's messages
   late final String _resetTitle = AppLocalizations.of(context)!.resetAllColors(_themeProfile);

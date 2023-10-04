@@ -27,7 +27,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? AppLocalizations.of(context)!.light : AppLocalizations.of(context)!.dark;
+      _isLight ? EFUILocalizations.of(context)!.light : EFUILocalizations.of(context)!.dark;
 
   late final String _resetTitle = AppLocalizations.of(context)!.resetAllImages(_themeProfile);
   late final String _resetMessage = kIsWeb

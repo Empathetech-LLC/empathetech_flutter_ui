@@ -290,7 +290,7 @@ abstract class EFUILocalizations {
   /// No description provided for @resetNameToValue.
   ///
   /// In en, this message translates to:
-  /// **'reset {name} to {value}'**
+  /// **'Reset {name} to {value}'**
   String resetNameToValue(Object name, Object value);
 
   /// No description provided for @system.
@@ -326,31 +326,31 @@ abstract class EFUILocalizations {
   /// No description provided for @margin.
   ///
   /// In en, this message translates to:
-  /// **'margin'**
+  /// **'Margin'**
   String get margin;
 
   /// No description provided for @padding.
   ///
   /// In en, this message translates to:
-  /// **'padding'**
+  /// **'Padding'**
   String get padding;
 
   /// No description provided for @circleSize.
   ///
   /// In en, this message translates to:
-  /// **'circle button size'**
+  /// **'Circle button size'**
   String get circleSize;
 
   /// No description provided for @buttonSpacing.
   ///
   /// In en, this message translates to:
-  /// **'button spacing'**
+  /// **'Button spacing'**
   String get buttonSpacing;
 
   /// No description provided for @textSpacing.
   ///
   /// In en, this message translates to:
-  /// **'text spacing'**
+  /// **'Text spacing'**
   String get textSpacing;
 
   /// No description provided for @attention.
