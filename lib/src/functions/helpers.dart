@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!
@@ -52,10 +53,10 @@ void setPageTitle({
 }
 
 /// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
-Future<bool?> copyToClipboard({required String string}) async {
+Future<bool?> copyToClipboard({required BuildContext context, required String string}) async {
   await Clipboard.setData(ClipboardData(text: string));
   return Fluttertoast.showToast(
-    msg: 'Copied to clipboard',
+    msg: AppLocalizations.of(context)!.clipCopy,
     toastLength: Toast.LENGTH_SHORT,
     backgroundColor: Colors.black,
     fontSize: 18,
