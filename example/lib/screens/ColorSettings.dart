@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettingsScreen extends StatefulWidget {
@@ -19,19 +20,20 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: 'Color settings');
+    setPageTitle(context: context, title: AppLocalizations.of(context)!.colorSettings);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
-  late final String _themeProfile = _isLight ? 'light' : 'dark';
+  late final String _themeProfile =
+      _isLight ? AppLocalizations.of(context)!.light : AppLocalizations.of(context)!.dark;
 
   // Define local reset button's messages
-  late final String _resetTitle = "Reset all $_themeProfile theme colors?";
-  final String _resetMessage = kIsWeb
-      ? "Cannot be undone\nChanges take effect on page reload"
-      : "Cannot be undone\nChanges take effect on app restart";
+  late final String _resetTitle = AppLocalizations.of(context)!.resetAllColors(_themeProfile);
+  late final String _resetMessage = kIsWeb
+      ? AppLocalizations.of(context)!.resetAllWarningWeb
+      : AppLocalizations.of(context)!.resetAllWarning;
 
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
@@ -48,8 +50,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzSelectableText(
-                    """Editing: $_themeProfile theme
-Long press buttons to reset individually""",
+                    AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
@@ -65,45 +66,57 @@ Long press buttons to reset individually""",
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // Theme colors
-                        const EzColorSetting(toControl: lightThemeColorKey, name: 'Theme'),
+                        EzColorSetting(
+                          toControl: lightThemeColorKey,
+                          name: AppLocalizations.of(context)!.theme,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: lightThemeTextColorKey,
-                          name: 'Theme text',
+                          name: AppLocalizations.of(context)!.themeText,
                           textBackgroundKey: lightThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Page colors
-                        const EzColorSetting(toControl: lightPageColorKey, name: 'Page'),
+                        EzColorSetting(
+                          toControl: lightPageColorKey,
+                          name: AppLocalizations.of(context)!.page,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: lightPageTextColorKey,
-                          name: 'Page text',
+                          name: AppLocalizations.of(context)!.pageText,
                           textBackgroundKey: lightPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Button colors
-                        const EzColorSetting(toControl: lightButtonColorKey, name: 'Buttons'),
+                        EzColorSetting(
+                          toControl: lightButtonColorKey,
+                          name: AppLocalizations.of(context)!.buttons,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: lightButtonTextColorKey,
-                          name: 'Button text',
+                          name: AppLocalizations.of(context)!.buttonText,
                           textBackgroundKey: lightButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Accent colors
-                        const EzColorSetting(toControl: lightAccentColorKey, name: 'Accent'),
+                        EzColorSetting(
+                          toControl: lightAccentColorKey,
+                          name: AppLocalizations.of(context)!.accent,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: lightAccentTextColorKey,
-                          name: 'Accent text',
+                          name: AppLocalizations.of(context)!.accentText,
                           textBackgroundKey: lightAccentColorKey,
                         ),
                       ],
@@ -138,9 +151,9 @@ Long press buttons to reset individually""",
               decorationImageKey: darkPageImageKey,
               child: EzScrollView(
                 children: [
-                  // Current theme mode reminder
+                  // Editing reminders
                   EzSelectableText(
-                    'Editing: $_themeProfile theme',
+                    AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
@@ -156,45 +169,57 @@ Long press buttons to reset individually""",
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // Theme colors
-                        const EzColorSetting(toControl: darkThemeColorKey, name: 'Theme'),
+                        EzColorSetting(
+                          toControl: darkThemeColorKey,
+                          name: AppLocalizations.of(context)!.theme,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: darkThemeTextColorKey,
-                          name: 'Theme text',
+                          name: AppLocalizations.of(context)!.themeText,
                           textBackgroundKey: darkThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Page colors
-                        const EzColorSetting(toControl: darkPageColorKey, name: 'Page'),
+                        EzColorSetting(
+                          toControl: darkPageColorKey,
+                          name: AppLocalizations.of(context)!.page,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: darkPageTextColorKey,
-                          name: 'Page text',
+                          name: AppLocalizations.of(context)!.pageText,
                           textBackgroundKey: darkPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Button colors
-                        const EzColorSetting(toControl: darkButtonColorKey, name: 'Buttons'),
+                        EzColorSetting(
+                          toControl: darkButtonColorKey,
+                          name: AppLocalizations.of(context)!.buttons,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: darkButtonTextColorKey,
-                          name: 'Button text',
+                          name: AppLocalizations.of(context)!.buttonText,
                           textBackgroundKey: darkButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Accent colors
-                        const EzColorSetting(toControl: darkAccentColorKey, name: 'Accent'),
+                        EzColorSetting(
+                          toControl: darkAccentColorKey,
+                          name: AppLocalizations.of(context)!.accent,
+                        ),
                         EzSpacer(_buttonSpacer),
 
-                        const EzColorSetting(
+                        EzColorSetting(
                           toControl: darkAccentTextColorKey,
-                          name: 'Accent text',
+                          name: AppLocalizations.of(context)!.accentText,
                           textBackgroundKey: darkAccentColorKey,
                         ),
                       ],

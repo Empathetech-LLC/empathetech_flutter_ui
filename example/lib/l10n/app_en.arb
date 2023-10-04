@@ -10,5 +10,15 @@
   "imageSettings": "Image settings",
   "resetAllImages": "Reset all {themeType} theme images?",
   "page": "Page",
-  "yourSourceCredit": "Wherever you got it!"
+  "yourSourceCredit": "Wherever you got it!",
+  "colorSettings": "Color settings",
+  "resetAllColors": "Reset all {themeType} theme colors?",
+  "editingThemeColors": "Editing: {themeType} theme\nLong press buttons to reset individually",
+  "theme": "Theme",
+  "themeText": "Theme text",
+  "pageText": "Page text",
+  "buttons": "Buttons",
+  "buttonText": "Buttons text",
+  "accent": "Accent",
+  "accentText": "Accent text"
 }

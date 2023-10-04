@@ -10,5 +10,15 @@
   "imageSettings": "Configuraciones de imagen",
   "resetAllImages": "¿Restablecer todas las imágenes del tema {themeType}?",
   "page": "Página",
-  "yourSourceCredit": "¡De donde lo obtuviste!"
+  "yourSourceCredit": "¡De donde lo obtuviste!",
+  "colorSettings": "Configuraciones de color",
+  "resetAllColors": "¿Restablecer todos los colores del tema {themeType}?",
+  "editingThemeColors": "Editando: colores del tema {themeType}\nMantén presionados los botones para restablecer individualmente",
+  "theme": "Tema",
+  "themeText": "Texto del tema",
+  "pageText": "Texto de la página",
+  "buttons": "Botones",
+  "buttonText": "Texto de los botones",
+  "accent": "Acento",
+  "accentText": "Texto de acento"
 }
