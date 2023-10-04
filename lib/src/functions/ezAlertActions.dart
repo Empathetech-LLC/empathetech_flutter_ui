@@ -7,37 +7,34 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Pairs with [EzAlertDialog]
 /// Quickly creates Material 'action' buttons for the dialog
 /// All required parameters are identical to [ezCupertinoActions]
 List<Widget>? ezMaterialActions({
+  required BuildContext context,
   required void Function() onConfirm,
   required void Function() onDeny,
-  String confirmMsg = 'Yes',
-  String denyMsg = 'No',
+  String? confirmMsg,
+  String? denyMsg,
   Icon? confirmIcon,
   Icon? denyIcon,
 }) {
-  final Icon confirm = confirmIcon ?? const Icon(Icons.check);
-  final Icon deny = denyIcon ?? const Icon(Icons.clear);
-
-  final double space = EzConfig.instance.prefs[buttonSpacingKey];
-
   return [
     // Confirm
     ElevatedButton.icon(
       onPressed: onConfirm,
-      icon: confirm,
-      label: Text(confirmMsg),
+      icon: confirmIcon ?? const Icon(Icons.check),
+      label: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
     ),
-    EzSpacer(space),
+    EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
     // Deny
     ElevatedButton.icon(
       onPressed: onDeny,
-      icon: deny,
-      label: Text(denyMsg),
+      icon: denyIcon ?? const Icon(Icons.clear),
+      label: Text(denyMsg ?? AppLocalizations.of(context)!.no),
     ),
   ];
 }
@@ -46,10 +43,11 @@ List<Widget>? ezMaterialActions({
 /// Quickly creates [CupertinoDialogAction]s
 /// All required parameters are identical to [ezMaterialActions]
 List<CupertinoDialogAction>? ezCupertinoActions({
+  required BuildContext context,
   required void Function() onConfirm,
   required void Function() onDeny,
-  String confirmMsg = 'Yes',
-  String denyMsg = 'No',
+  String? confirmMsg,
+  String? denyMsg,
   bool confirmIsDefault = false,
   bool denyIsDefault = false,
   bool confirmIsDestructive = false,
@@ -59,7 +57,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg),
+      child: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -67,7 +65,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg),
+      child: Text(denyMsg ?? AppLocalizations.of(context)!.no),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),
