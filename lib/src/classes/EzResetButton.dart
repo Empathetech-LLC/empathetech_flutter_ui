@@ -69,11 +69,11 @@ class EzResetButton extends StatelessWidget {
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(
-                  dialogTitle ?? EFUILocalizations.of(context)!.resetButtonDialogTitle),
-              contents: [
-                EzSelectableText(
-                    dialogContents ?? EFUILocalizations.of(context)!.resetButtonDialogContents)
-              ],
+                dialogTitle ?? EFUILocalizations.of(context)!.resetButtonDialogTitle,
+              ),
+              content: EzSelectableText(
+                dialogContents ?? EFUILocalizations.of(context)!.resetButtonDialogContents,
+              ),
               materialActions: ezMaterialActions(
                 context: context,
                 onConfirm: _onConfirm,

@@ -145,7 +145,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         title: EzSelectableText(
           EFUILocalizations.of(context)!.imageSettingDialogTitle(widget.title),
         ),
-        contents: options,
+        content: EzScrollView(children: options),
       ),
     );
   }
@@ -173,7 +173,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(EFUILocalizations.of(context)!.creditTo),
-              contents: [EzSelectableText(widget.credits)],
+              content: EzSelectableText(widget.credits),
             ),
           ),
 

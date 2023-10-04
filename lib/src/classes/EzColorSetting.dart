@@ -87,8 +87,6 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Define action button parameters //
       final String denyMsg = EFUILocalizations.of(context)!.useCustom;
 
-      final Icon denyIcon = Icon(PlatformIcons(context).edit);
-
       final void Function() onConfirm = () {
         EzConfig.instance.preferences.setInt(widget.toControl, recommended);
         setState(() {
@@ -106,23 +104,20 @@ class _ColorSettingState extends State<EzColorSetting> {
         context: context,
         builder: (context) => EzAlertDialog(
           title: EzSelectableText(EFUILocalizations.of(context)!.useRecommended),
-          contents: [
-            // Recommended preview
-            Container(
-              width: 75,
-              height: 75,
-              decoration: BoxDecoration(
-                color: Color(recommended),
-                border: Border.all(color: backgroundColor),
-              ),
+          content: Container(
+            // Recommended color preview
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: Color(recommended),
+              border: Border.all(color: backgroundColor),
             ),
-          ],
+          ),
           materialActions: ezMaterialActions(
             context: context,
             onConfirm: onConfirm,
             onDeny: onDeny,
             denyMsg: denyMsg,
-            denyIcon: denyIcon,
           ),
           cupertinoActions: ezCupertinoActions(
             context: context,
@@ -131,7 +126,6 @@ class _ColorSettingState extends State<EzColorSetting> {
             denyMsg: denyMsg,
             confirmIsDestructive: true,
           ),
-          needsClose: true,
         ),
       );
     } else {
@@ -164,17 +158,15 @@ class _ColorSettingState extends State<EzColorSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: EzSelectableText(EFUILocalizations.of(context)!.resetTo),
-        contents: [
-          // Color preview
-          Container(
-            width: 75,
-            height: 75,
-            decoration: BoxDecoration(
-              color: resetColor,
-              border: Border.all(color: EzContrastColor(resetColor)),
-            ),
+        content: Container(
+          // Reset color preview
+          width: 75,
+          height: 75,
+          decoration: BoxDecoration(
+            color: resetColor,
+            border: Border.all(color: EzContrastColor(resetColor)),
           ),
-        ],
+        ),
         materialActions: ezMaterialActions(
           context: context,
           onConfirm: onConfirm,

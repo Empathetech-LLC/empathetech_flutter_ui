@@ -58,7 +58,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: EzSelectableText(EFUILocalizations.of(context)!.chooseFont),
-        contents: buttons,
+        content: EzScrollView(children: buttons),
       ),
     );
   }
