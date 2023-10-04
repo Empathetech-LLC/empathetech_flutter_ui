@@ -1,4 +1,14 @@
 {
   "@@locale" : "es",
-  "appTitle" : "Empático Flutter UI"
+  "appTitle" : "Empático Flutter UI",
+  "homeLinkHint": "Regresar a la pantalla principal",
+  "light": "claro",
+  "dark": "oscuro",
+  "editingTheme": "Editando: tema {themeType}",
+  "resetAllWarning": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
+  "resetAllWarningWeb": "No se puede deshacer\nLos cambios tendrán efecto al recargar la página",
+  "imageSettings": "Configuraciones de imagen",
+  "resetAllImages": "¿Restablecer todas las imágenes del tema {themeType}?",
+  "page": "Página",
+  "yourSourceCredit": "¡De donde lo obtuviste!"
 }

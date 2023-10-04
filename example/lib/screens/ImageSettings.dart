@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
@@ -19,18 +20,19 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: 'Image settings');
+    setPageTitle(context: context, title: AppLocalizations.of(context)!.imageSettings);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
-  late final String _themeProfile = _isLight ? 'light' : 'dark';
+  late final String _themeProfile =
+      _isLight ? AppLocalizations.of(context)!.light : AppLocalizations.of(context)!.dark;
 
-  late final String _resetTitle = "Reset all $_themeProfile theme images?";
-  final String _resetMessage = kIsWeb
-      ? "Cannot be undone\nChanges take effect on page reload"
-      : "Cannot be undone\nChanges take effect on app restart";
+  late final String _resetTitle = AppLocalizations.of(context)!.resetAllImages(_themeProfile);
+  late final String _resetMessage = kIsWeb
+      ? AppLocalizations.of(context)!.resetAllWarningWeb
+      : AppLocalizations.of(context)!.resetAllWarning;
 
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
@@ -45,7 +47,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             EzSelectableText(
-              'Editing: $_themeProfile theme',
+              AppLocalizations.of(context)!.editingTheme(_themeProfile),
               style: titleSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -63,24 +65,24 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                     ? // Editing light theme //
                     [
                         // Page
-                        const EzImageSetting(
+                        EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: 'Page',
+                          title: AppLocalizations.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: 'Wherever you got it!',
+                          credits: AppLocalizations.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
                     : // Editing dark theme //
                     [
                         // Page
-                        const EzImageSetting(
+                        EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: 'Page',
+                          title: AppLocalizations.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: 'Wherever you got it!',
+                          credits: AppLocalizations.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
