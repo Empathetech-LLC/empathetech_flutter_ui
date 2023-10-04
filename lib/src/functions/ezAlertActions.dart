@@ -3,11 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
+import '../../l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Pairs with [EzAlertDialog]
 /// Quickly creates Material 'action' buttons for the dialog
@@ -26,7 +26,7 @@ List<Widget>? ezMaterialActions({
     ElevatedButton.icon(
       onPressed: onConfirm,
       icon: confirmIcon ?? const Icon(Icons.check),
-      label: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
+      label: Text(confirmMsg ?? AppLocalizations.of(context).yes),
     ),
     EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
@@ -34,7 +34,7 @@ List<Widget>? ezMaterialActions({
     ElevatedButton.icon(
       onPressed: onDeny,
       icon: denyIcon ?? const Icon(Icons.clear),
-      label: Text(denyMsg ?? AppLocalizations.of(context)!.no),
+      label: Text(denyMsg ?? AppLocalizations.of(context).no),
     ),
   ];
 }
@@ -57,7 +57,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? AppLocalizations.of(context)!.yes),
+      child: Text(confirmMsg ?? AppLocalizations.of(context).yes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -65,7 +65,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg ?? AppLocalizations.of(context)!.no),
+      child: Text(denyMsg ?? AppLocalizations.of(context).no),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),

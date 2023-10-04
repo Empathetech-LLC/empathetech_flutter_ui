@@ -3,11 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
+import '../../l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
@@ -73,20 +73,20 @@ class EzResetButton extends StatelessWidget {
 
     return Semantics(
       button: true,
-      hint: hint ?? AppLocalizations.of(context)!.resetButtonHint,
+      hint: hint ?? AppLocalizations.of(context).resetButtonHint,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           icon: Icon(PlatformIcons(context).refresh),
-          label: Text(message ?? AppLocalizations.of(context)!.resetAll),
+          label: Text(message ?? AppLocalizations.of(context).resetAll),
           style: resetButtonTheme,
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(
-                  dialogTitle ?? AppLocalizations.of(context)!.resetButtonDialogTitle),
+                  dialogTitle ?? AppLocalizations.of(context).resetButtonDialogTitle),
               contents: [
                 EzSelectableText(
-                    dialogContents ?? AppLocalizations.of(context)!.resetButtonDialogContents)
+                    dialogContents ?? AppLocalizations.of(context).resetButtonDialogContents)
               ],
               materialActions: ezMaterialActions(
                 context: context,

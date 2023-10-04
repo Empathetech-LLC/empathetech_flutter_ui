@@ -3,10 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
+import '../../l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EzWarning extends StatelessWidget {
   /// Short header [String] to grab the user's attention
@@ -32,7 +32,7 @@ class EzWarning extends StatelessWidget {
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
-    final String _warning = warning ?? AppLocalizations.of(context)!.warning;
+    final String _warning = warning ?? AppLocalizations.of(context).warning;
 
     return Semantics(
       button: false,

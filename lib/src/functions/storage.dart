@@ -3,14 +3,14 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
+import '../../l10n/app_localizations.dart';
 
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Can this [path] build an [AssetImage]?
 bool isPathAsset(String? path) {
@@ -43,7 +43,7 @@ Future<String?> changeImage({
     if (picked == null) {
       logAlert(
         context: context,
-        message: AppLocalizations.of(context)!.failedImageGet,
+        message: AppLocalizations.of(context).failedImageGet,
       );
       return null;
     }
@@ -58,7 +58,7 @@ Future<String?> changeImage({
     EzConfig.instance.preferences.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = AppLocalizations.of(context)!.failedImageSet(e.toString());
+    final String errorMsg = AppLocalizations.of(context).failedImageSet(e.toString());
     logAlert(context: context, message: errorMsg);
     return null;
   }

@@ -1,12 +1,12 @@
 import './screens.dart';
 import '../utils/utils.dart';
+import '../l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.settings);
+    setPageTitle(context: context, title: AppLocalizations.of(context).settings);
   }
 
   // Gather theme data //
@@ -43,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Functionality disclaimer
             EzWarning(
-              warning: AppLocalizations.of(context)!.attention,
+              warning: AppLocalizations.of(context).attention,
               message: kIsWeb
-                  ? AppLocalizations.of(context)!.resetWarning
-                  : AppLocalizations.of(context)!.resetWarningWeb,
+                  ? AppLocalizations.of(context).resetWarning
+                  : AppLocalizations.of(context).resetWarningWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -62,14 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.styling),
+              child: Text(AppLocalizations.of(context).styling),
             ),
             EzSpacer(_textSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.colors),
+              child: Text(AppLocalizations.of(context).colors),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.images),
+              child: Text(AppLocalizations.of(context).images),
             ),
             EzSpacer(_buttonSpacer),
 

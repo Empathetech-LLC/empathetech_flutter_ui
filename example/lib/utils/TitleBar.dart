@@ -1,8 +1,9 @@
+import '../l10n/app_localizations.dart';
+
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TitleBar extends StatelessWidget {
   final GlobalKey? key;
@@ -35,7 +36,7 @@ class TitleBar extends StatelessWidget {
             text: _title,
             style: style,
             action: () => context.goNamed(homeRoute),
-            semanticsLabel: AppLocalizations.of(context)!.homeLinkHint,
+            semanticsLabel: AppLocalizations.of(context).homeLinkHint,
           ),
         ),
       ],

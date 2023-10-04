@@ -1,4 +1,5 @@
 import 'screens/screens.dart';
+import 'l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() async {
@@ -100,7 +100,7 @@ class EFUIExample extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
 
         // Internationalized apps need to use onGenerateTitle >> title
-        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
 
         routerConfig: _router,
       ),

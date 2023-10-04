@@ -3,10 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../l10n/app_localizations.dart';
+
+import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -86,7 +87,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       int recommended = EzContrastColor(backgroundColor).value;
 
       // Define action button parameters //
-      final String denyMsg = AppLocalizations.of(context)!.useCustom;
+      final String denyMsg = AppLocalizations.of(context).useCustom;
 
       final Icon denyIcon = Icon(PlatformIcons(context).edit);
 
@@ -106,7 +107,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzSelectableText(AppLocalizations.of(context)!.useRecommended),
+          title: EzSelectableText(AppLocalizations.of(context).useRecommended),
           contents: [
             // Recommended preview
             Container(
@@ -164,7 +165,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText(AppLocalizations.of(context)!.resetTo),
+        title: EzSelectableText(AppLocalizations.of(context).resetTo),
         contents: [
           // Color preview
           Container(
@@ -206,7 +207,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: AppLocalizations.of(context)!.colorSettingSemantics(widget.name),
+          hint: AppLocalizations.of(context).colorSettingSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
