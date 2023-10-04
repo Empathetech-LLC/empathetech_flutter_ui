@@ -6,6 +6,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: 'Settings');
+    setPageTitle(context: context, title: AppLocalizations.of(context)!.settings);
   }
 
   // Gather theme data //
@@ -42,14 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Functionality disclaimer
             EzWarning(
-              warning: 'ATTENTION',
+              warning: AppLocalizations.of(context)!.attention,
               message: kIsWeb
-                  ? """Each button will preview it's changes
-Reload the page for your changes to take full effect!
-Have fun!"""
-                  : """Each button will preview it's changes
-Restart the app for your changes to take full effect!
-Have fun!""",
+                  ? AppLocalizations.of(context)!.resetWarning
+                  : AppLocalizations.of(context)!.resetWarningWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -63,41 +60,24 @@ Have fun!""",
             EzSpacer(_textSpacer),
 
             // Style settings
-            Semantics(
-              button: true,
-              hint: 'Open the styling settings',
-              child: ExcludeSemantics(
-                child: ElevatedButton(
-                  onPressed: () => context.goNamed(styleSettingsRoute),
-                  child: const Text('Styling'),
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () => context.goNamed(styleSettingsRoute),
+              child: const Text('Styling'),
             ),
             EzSpacer(_textSpacer),
 
             // Color settings
-            Semantics(
-              button: true,
-              hint: 'Open the color settings',
-              child: ExcludeSemantics(
-                child: ElevatedButton(
-                  onPressed: () => context.goNamed(colorSettingsRoute),
-                  child: const Text('Colors'),
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () => context.goNamed(colorSettingsRoute),
+              child: const Text('Colors'),
             ),
             EzSpacer(_buttonSpacer),
 
             // Image settings
-            Semantics(
-              button: true,
-              hint: 'Open the image settings',
-              child: ExcludeSemantics(
-                child: ElevatedButton(
-                  onPressed: () => context.goNamed(imageSettingsRoute),
-                  child: const Text('Images'),
-                ),
-              ),
+
+            ElevatedButton(
+              onPressed: () => context.goNamed(imageSettingsRoute),
+              child: const Text('Images'),
             ),
             EzSpacer(_buttonSpacer),
 

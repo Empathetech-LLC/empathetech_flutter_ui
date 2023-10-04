@@ -27,5 +27,9 @@
   "padding": "padding",
   "circleSize": "circle button size",
   "buttonSpacing": "button spacing",
-  "textSpacing": "text spacing"
+  "textSpacing": "text spacing",
+  "settings": "Settings",
+  "attention": "ATTENTION",
+  "resetWarning": "Each button will preview it's changes\nReload the page for your changes to take full effect!\nHave fun!",
+  "resetWarningWeb": "Each button will preview it's changes\nRestart the app for your changes to take full effect!\nHave fun!"
 }
