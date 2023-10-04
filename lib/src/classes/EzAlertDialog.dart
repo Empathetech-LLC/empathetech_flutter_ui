@@ -57,7 +57,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: Text(AppLocalizations.of(context).close),
+      child: Text(AppLocalizations.of(context)!.close),
     );
 
     return PlatformAlertDialog(

@@ -100,7 +100,7 @@ class EFUIExample extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
 
         // Internationalized apps need to use onGenerateTitle >> title
-        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
 
         routerConfig: _router,
       ),

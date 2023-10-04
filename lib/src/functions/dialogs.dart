@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzSelectableText(alert ?? AppLocalizations.of(context).attention),
+      title: EzSelectableText(alert ?? AppLocalizations.of(context)!.attention),
       contents: [EzSelectableText(message)],
     ),
   );
@@ -41,7 +41,7 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzSelectableText(title ?? AppLocalizations.of(context).pickAColor),
+      title: EzSelectableText(title ?? AppLocalizations.of(context)!.pickAColor),
       contents: [
         // Color picker
         ColorPicker(
@@ -59,15 +59,15 @@ Future<dynamic> ezColorPicker({
         context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg ?? AppLocalizations.of(context).apply,
-        denyMsg: denyMsg ?? AppLocalizations.of(context).cancel,
+        confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,
+        denyMsg: denyMsg ?? AppLocalizations.of(context)!.cancel,
       ),
       cupertinoActions: ezCupertinoActions(
         context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg ?? AppLocalizations.of(context).apply,
-        denyMsg: denyMsg ?? AppLocalizations.of(context).cancel,
+        confirmMsg: confirmMsg ?? AppLocalizations.of(context)!.apply,
+        denyMsg: denyMsg ?? AppLocalizations.of(context)!.cancel,
         confirmIsDestructive: true,
       ),
       needsClose: false,

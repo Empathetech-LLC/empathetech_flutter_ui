@@ -43,7 +43,7 @@ Future<String?> changeImage({
     if (picked == null) {
       logAlert(
         context: context,
-        message: AppLocalizations.of(context).failedImageGet,
+        message: AppLocalizations.of(context)!.failedImageGet,
       );
       return null;
     }
@@ -58,7 +58,7 @@ Future<String?> changeImage({
     EzConfig.instance.preferences.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = AppLocalizations.of(context).failedImageSet(e.toString());
+    final String errorMsg = AppLocalizations.of(context)!.failedImageSet(e.toString());
     logAlert(context: context, message: errorMsg);
     return null;
   }

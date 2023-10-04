@@ -36,7 +36,7 @@ class TitleBar extends StatelessWidget {
             text: _title,
             style: style,
             action: () => context.goNamed(homeRoute),
-            semanticsLabel: AppLocalizations.of(context).homeLinkHint,
+            semanticsLabel: AppLocalizations.of(context)!.homeLinkHint,
           ),
         ),
       ],

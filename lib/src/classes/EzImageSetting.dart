@@ -83,7 +83,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(AppLocalizations.of(context).fromFile),
+        label: Text(AppLocalizations.of(context)!.fromFile),
         icon: Icon(PlatformIcons(context).folder),
       ),
       EzSpacer(_buttonSpacer),
@@ -99,7 +99,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(AppLocalizations.of(context).fromCamera),
+        label: Text(AppLocalizations.of(context)!.fromCamera),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       EzSpacer(_buttonSpacer),
@@ -116,7 +116,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             pass: EzConfig.instance.defaults[widget.prefsKey],
           );
         },
-        label: Text(AppLocalizations.of(context).resetIt),
+        label: Text(AppLocalizations.of(context)!.resetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -133,7 +133,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, pass: noImageKey);
           },
-          label: Text(AppLocalizations.of(context).clearIt),
+          label: Text(AppLocalizations.of(context)!.clearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -144,7 +144,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: EzSelectableText(
-          AppLocalizations.of(context).imageSettingDialogTitle(widget.title),
+          AppLocalizations.of(context)!.imageSettingDialogTitle(widget.title),
         ),
         contents: options,
       ),
@@ -157,7 +157,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: AppLocalizations.of(context).imageSettingHint(widget.title),
+      hint: AppLocalizations.of(context)!.imageSettingHint(widget.title),
       child: ExcludeSemantics(
         child: ElevatedButton(
           // On pressed -> choose image
@@ -173,7 +173,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzSelectableText(AppLocalizations.of(context).creditTo),
+              title: EzSelectableText(AppLocalizations.of(context)!.creditTo),
               contents: [EzSelectableText(widget.credits)],
             ),
           ),
@@ -207,7 +207,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // user set a custom image
                           EzImage(
                               image: provideStoredImage(_updatedPath!),
-                              semanticLabel: widget.title + AppLocalizations.of(context).image,
+                              semanticLabel: widget.title + AppLocalizations.of(context)!.image,
                             )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
@@ -217,7 +217,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // there is an image stored
                           EzImage(
                               image: provideStoredImage(EzConfig.instance.prefs[widget.prefsKey]),
-                              semanticLabel: widget.title + AppLocalizations.of(context).image,
+                              semanticLabel: widget.title + AppLocalizations.of(context)!.image,
                             ),
                 ),
               ),

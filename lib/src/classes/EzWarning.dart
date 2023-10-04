@@ -32,7 +32,7 @@ class EzWarning extends StatelessWidget {
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
-    final String _warning = warning ?? AppLocalizations.of(context).warning;
+    final String _warning = warning ?? AppLocalizations.of(context)!.warning;
 
     return Semantics(
       button: false,

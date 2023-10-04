@@ -29,15 +29,15 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context).system),
+        child: Text(AppLocalizations.of(context)!.system),
         value: ThemeMode.system,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context).light),
+        child: Text(AppLocalizations.of(context)!.light),
         value: ThemeMode.light,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(AppLocalizations.of(context).dark),
+        child: Text(AppLocalizations.of(context)!.dark),
         value: ThemeMode.dark,
       ),
     ];
@@ -49,12 +49,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        EzSelectableText(AppLocalizations.of(context).themeMode, style: style),
+        EzSelectableText(AppLocalizations.of(context)!.themeMode, style: style),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
-          hint: AppLocalizations.of(context).themeSwitchSemantics,
+          hint: AppLocalizations.of(context)!.themeSwitchSemantics,
           child: DropdownButton<ThemeMode>(
             value: currMode,
             items: items,
