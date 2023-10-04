@@ -17,36 +17,36 @@ ThemeData empathetechThemeData({required bool lightTheme}) {
 
   final Color themeColor =
       Color(EzConfig.instance.prefs[lightTheme ? lightThemeColorKey : darkThemeColorKey]);
-  final Color pageColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
-  final Color buttonColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightButtonColorKey : darkButtonColorKey]);
-  final Color accentColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightAccentColorKey : darkAccentColorKey]);
-
   final Color themeTextColor =
       Color(EzConfig.instance.prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
   final Color unSelectedThemeTextColor = EzColorBlend(themeColor, themeTextColor);
+
+  final Color pageColor =
+      Color(EzConfig.instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
   final Color pageTextColor =
       Color(EzConfig.instance.prefs[lightTheme ? lightPageTextColorKey : darkPageTextColorKey]);
-  final Color elevatedButtonTextColor = Color(
-      EzConfig.instance.prefs[lightTheme ? lightButtonTextColorKey : darkButtonTextColorKey]);
-  final Color textButtonTextColor =
+
+  final Color buttonColor =
       Color(EzConfig.instance.prefs[lightTheme ? lightButtonColorKey : darkButtonColorKey]);
+  final Color buttonTextColor = Color(
+      EzConfig.instance.prefs[lightTheme ? lightButtonTextColorKey : darkButtonTextColorKey]);
+
+  final Color accentColor =
+      Color(EzConfig.instance.prefs[lightTheme ? lightAccentColorKey : darkAccentColorKey]);
   final Color accentTextColor = Color(
       EzConfig.instance.prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
   final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
-  final TextStyle elevatedButtonTextStyle = buildTitleMedium(elevatedButtonTextColor);
-  final TextStyle textButtonTextStyle = buildTitleMedium(textButtonTextColor);
+  final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
+  final TextStyle textButtonTextStyle = buildTitleMedium(buttonColor);
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
 
   final IconThemeData iconData = IconThemeData(
-    color: elevatedButtonTextColor,
-    size: elevatedButtonTextStyle.fontSize,
+    color: buttonTextColor,
+    size: buttonTextStyle.fontSize,
   );
   final IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
@@ -79,7 +79,7 @@ ThemeData empathetechThemeData({required bool lightTheme}) {
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: elevatedButtonTextStyle,
+        textStyle: buttonTextStyle,
         alignment: Alignment.center,
         backgroundColor: buttonColor,
         shadowColor: buttonColor,
@@ -121,7 +121,7 @@ ThemeData empathetechThemeData({required bool lightTheme}) {
     colorScheme: ColorScheme(
       brightness: brightness,
       primary: buttonColor,
-      onPrimary: elevatedButtonTextColor,
+      onPrimary: buttonTextColor,
       secondary: accentColor,
       onSecondary: accentTextColor,
       background: themeColor,
@@ -170,7 +170,7 @@ ThemeData empathetechThemeData({required bool lightTheme}) {
       thumbColor: buttonColor,
       activeTrackColor: buttonColor,
       valueIndicatorColor: buttonColor,
-      activeTickMarkColor: elevatedButtonTextColor,
+      activeTickMarkColor: buttonTextColor,
       disabledThumbColor: Colors.transparent,
       disabledActiveTrackColor: Colors.transparent,
       disabledInactiveTrackColor: Colors.transparent,
