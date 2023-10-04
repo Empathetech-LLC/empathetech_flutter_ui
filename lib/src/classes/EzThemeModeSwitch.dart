@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
@@ -17,34 +18,31 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  final List<DropdownMenuItem<ThemeMode>> _items = [
-    DropdownMenuItem<ThemeMode>(
-      child: Semantics(
-        hint: 'Copy the devices theme mode',
-        child: ExcludeSemantics(child: const Text('System')),
-      ),
-      value: ThemeMode.system,
-    ),
-    DropdownMenuItem<ThemeMode>(
-      child: Semantics(
-        hint: 'Always use the light theme',
-        child: ExcludeSemantics(child: const Text('Light')),
-      ),
-      value: ThemeMode.light,
-    ),
-    DropdownMenuItem<ThemeMode>(
-      child: Semantics(
-        hint: 'Always use the dark theme',
-        child: ExcludeSemantics(child: const Text('Dark')),
-      ),
-      value: ThemeMode.dark,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    // Gather theme data //
+
     ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
     final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
+
+    // Define the items //
+
+    final List<DropdownMenuItem<ThemeMode>> items = [
+      DropdownMenuItem<ThemeMode>(
+        child: Text(AppLocalizations.of(context)!.system),
+        value: ThemeMode.system,
+      ),
+      DropdownMenuItem<ThemeMode>(
+        child: Text(AppLocalizations.of(context)!.light),
+        value: ThemeMode.light,
+      ),
+      DropdownMenuItem<ThemeMode>(
+        child: Text(AppLocalizations.of(context)!.dark),
+        value: ThemeMode.dark,
+      ),
+    ];
+
+    // Return the build //
 
     return EzRow(
       mainAxisSize: MainAxisSize.min,
@@ -52,18 +50,18 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       children: [
         // Label
         EzSelectableText(
-          'Theme mode',
+          AppLocalizations.of(context)!.themeMode,
           style: style,
-          semanticsLabel: 'Select theme mode',
+          semanticsLabel: AppLocalizations.of(context)!.themeSwitchLabelSemantics,
         ),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
-          hint: 'Open to select a theme mode. Currently set to:',
+          hint: AppLocalizations.of(context)!.themeSwitchButtonSemantics,
           child: DropdownButton<ThemeMode>(
             value: currMode,
-            items: _items,
+            items: items,
             dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             onChanged: (ThemeMode? newThemeMode) {
               switch (newThemeMode) {
