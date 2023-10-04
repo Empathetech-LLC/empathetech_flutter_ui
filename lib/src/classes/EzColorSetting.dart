@@ -200,17 +200,13 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        EzSelectableText(
-          widget.name,
-          style: _labelStyle,
-          semanticsLabel: AppLocalizations.of(context)!.colorSettingLabelSemantics(widget.name),
-        ),
+        EzSelectableText(widget.name, style: _labelStyle),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: AppLocalizations.of(context)!.colorSettingButtonSemantics(widget.name),
+          hint: AppLocalizations.of(context)!.colorSettingSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),

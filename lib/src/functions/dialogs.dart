@@ -20,15 +20,9 @@ Future<dynamic> logAlert({
   log(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => Semantics(
-      button: false,
-      readOnly: true,
-      child: ExcludeSemantics(
-        child: EzAlertDialog(
-          title: EzSelectableText(alert ?? AppLocalizations.of(context)!.attention),
-          contents: [EzSelectableText(message)],
-        ),
-      ),
+    builder: (context) => EzAlertDialog(
+      title: EzSelectableText(alert ?? AppLocalizations.of(context)!.attention),
+      contents: [EzSelectableText(message)],
     ),
   );
 }

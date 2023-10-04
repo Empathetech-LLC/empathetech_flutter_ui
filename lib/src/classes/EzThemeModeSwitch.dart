@@ -49,16 +49,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        EzSelectableText(
-          AppLocalizations.of(context)!.themeMode,
-          style: style,
-          semanticsLabel: AppLocalizations.of(context)!.themeSwitchLabelSemantics,
-        ),
+        EzSelectableText(AppLocalizations.of(context)!.themeMode, style: style),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
-          hint: AppLocalizations.of(context)!.themeSwitchButtonSemantics,
+          hint: AppLocalizations.of(context)!.themeSwitchSemantics,
           child: DropdownButton<ThemeMode>(
             value: currMode,
             items: items,

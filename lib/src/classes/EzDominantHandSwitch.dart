@@ -43,16 +43,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      EzSelectableText(
-        AppLocalizations.of(context)!.dominantHand,
-        style: _style,
-        semanticsLabel: AppLocalizations.of(context)!.handSettingLabelSemantics,
-      ),
+      EzSelectableText(AppLocalizations.of(context)!.dominantHand, style: _style),
       EzSpacer.row(_buttonSpacer),
 
       // Button
       Semantics(
-        hint: AppLocalizations.of(context)!.handSettingButtonSemantics,
+        hint: AppLocalizations.of(context)!.handSettingSemantics,
         child: DropdownButton<Hand>(
           value: _currSide,
           items: items,

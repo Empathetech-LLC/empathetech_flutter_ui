@@ -299,7 +299,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: AppLocalizations.of(context)!.customizeTheApp(getSettingName(context, widget.type)),
+      hint: getSettingName(context, widget.type),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => showModalBottomSheet(
