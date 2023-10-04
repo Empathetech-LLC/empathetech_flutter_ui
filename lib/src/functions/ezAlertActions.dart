@@ -17,23 +17,19 @@ List<Widget>? ezMaterialActions({
   required void Function() onDeny,
   String? confirmMsg,
   String? denyMsg,
-  Icon? confirmIcon,
-  Icon? denyIcon,
 }) {
   return [
     // Confirm
-    ElevatedButton.icon(
+    TextButton(
       onPressed: onConfirm,
-      icon: confirmIcon ?? const Icon(Icons.check),
-      label: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
     ),
     EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
     // Deny
-    ElevatedButton.icon(
+    TextButton(
       onPressed: onDeny,
-      icon: denyIcon ?? const Icon(Icons.clear),
-      label: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
+      child: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
     ),
   ];
 }
