@@ -5,6 +5,5 @@ use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/l10n
 synthetic-package: false
 required-resource-attributes: false
-nullable-getter: false
 format: true
 suppress-warnings: false
