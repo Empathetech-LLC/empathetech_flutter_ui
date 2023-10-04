@@ -35,7 +35,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       ? AppLocalizations.of(context)!.resetAllWarningWeb
       : AppLocalizations.of(context)!.resetAllWarning;
 
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Return the build //
@@ -53,7 +52,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
-                  EzSpacer(_textSpacer),
+                  EzSpacer(_buttonSpacer),
 
                   // Settings //
 
@@ -143,7 +142,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       popScreen(context: context, pass: true);
                     },
                   ),
-                  EzSpacer(_textSpacer),
+                  EzSpacer(_buttonSpacer),
                 ],
               ),
             )
@@ -156,7 +155,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
-                  EzSpacer(_textSpacer),
+                  EzSpacer(_buttonSpacer),
 
                   // Settings //
 
@@ -246,7 +245,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       popScreen(context: context, pass: true);
                     },
                   ),
-                  EzSpacer(_textSpacer),
+                  EzSpacer(_buttonSpacer),
                 ],
               ),
             ),

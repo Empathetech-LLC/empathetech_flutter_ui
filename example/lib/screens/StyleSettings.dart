@@ -24,7 +24,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Gather theme data //
 
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   late final String _resetTitle = AppLocalizations.of(context)!.resetAllStyle;
@@ -121,7 +120,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
                 popScreen(context: context, pass: true);
               },
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
           ],
         ),
       ),

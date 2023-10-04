@@ -34,7 +34,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       ? AppLocalizations.of(context)!.resetAllWarningWeb
       : AppLocalizations.of(context)!.resetAllWarning;
 
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Return the build //
@@ -50,7 +49,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               AppLocalizations.of(context)!.editingTheme(_themeProfile),
               style: titleSmall(context),
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Settings //
 
@@ -105,7 +104,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                 popScreen(context: context, pass: true);
               },
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
           ],
         ),
       ),

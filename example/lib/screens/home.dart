@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the Build //
 
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : AppLocalizations.of(context)!.resetWarningWeb,
               style: headlineSmall(context),
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Theme mode switch
             const EzThemeModeSwitch(),
@@ -57,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Dominant hand switch
             const EzDominantHandSwitch(),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
               child: Text(AppLocalizations.of(context)!.styling),
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Color settings
             ElevatedButton(
@@ -83,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Reset button
             EzResetButton(context: context),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
           ],
         ),
       ),
