@@ -20,5 +20,12 @@
   "buttons": "Botones",
   "buttonText": "Texto de los botones",
   "accent": "Acento",
-  "accentText": "Texto de acento"
+  "accentText": "Texto de acento",
+  "styleSettings": "Configuraciones de estilo",
+  "resetAllStyle": "¿Restablecer todas las configuraciones de estilo?",
+  "margin": "margen",
+  "padding": "relleno",
+  "circleSize": "tamaño del botón circular",
+  "buttonSpacing": "espaciado de botones",
+  "textSpacing": "espaciado de texto"
 }

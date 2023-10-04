@@ -20,5 +20,12 @@
   "buttons": "Buttons",
   "buttonText": "Buttons text",
   "accent": "Accent",
-  "accentText": "Accent text"
+  "accentText": "Accent text",
+  "styleSettings": "Style settings",
+  "resetAllStyle": "Reset all style settings?",
+  "margin": "margin",
+  "padding": "padding",
+  "circleSize": "circle button size",
+  "buttonSpacing": "button spacing",
+  "textSpacing": "text spacing"
 }

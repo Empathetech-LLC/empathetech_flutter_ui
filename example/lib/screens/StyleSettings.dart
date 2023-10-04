@@ -4,6 +4,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StyleSettingsScreen extends StatefulWidget {
   const StyleSettingsScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: 'Style settings');
+    setPageTitle(context: context, title: AppLocalizations.of(context)!.styleSettings);
   }
 
   // Gather theme data //
@@ -26,10 +27,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-  final String resetTitle = "Reset all style settings?";
-  final String resetMessage = kIsWeb
-      ? "Cannot be undone\nChanges take effect on page reload"
-      : "Cannot be undone\nChanges take effect on app restart";
+  late final String _resetTitle = AppLocalizations.of(context)!.resetAllStyle;
+  late final String _resetMessage = kIsWeb
+      ? AppLocalizations.of(context)!.resetAllWarningWeb
+      : AppLocalizations.of(context)!.resetAllWarning;
 
   // Return the build //
 
@@ -44,10 +45,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSpacer(_buttonSpacer),
 
             // Margin
-            const EzSliderSetting(
+            EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: 'Margin',
+              title: AppLocalizations.of(context)!.margin,
               min: 5.0,
               max: 50.0,
               steps: 18,
@@ -56,10 +57,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSpacer(_buttonSpacer),
 
             // Padding
-            const EzSliderSetting(
+            EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: 'Padding',
+              title: AppLocalizations.of(context)!.padding,
               min: 0.0,
               max: 50.0,
               steps: 20,
@@ -68,10 +69,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSpacer(_buttonSpacer),
 
             // Circle button size
-            const EzSliderSetting(
+            EzSliderSetting(
               prefsKey: circleDiameterKey,
               type: SliderSettingType.circleSize,
-              title: 'Circle button size',
+              title: AppLocalizations.of(context)!.circleSize,
               min: 30,
               max: 100,
               steps: 14,
@@ -80,10 +81,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSpacer(_buttonSpacer),
 
             // Button spacing
-            const EzSliderSetting(
+            EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: 'Button spacing',
+              title: AppLocalizations.of(context)!.buttonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -92,10 +93,10 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSpacer(_buttonSpacer),
 
             // Text spacing
-            const EzSliderSetting(
+            EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: 'Text spacing',
+              title: AppLocalizations.of(context)!.textSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -106,9 +107,9 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Local reset "all"
             EzResetButton(
               context: context,
-              hint: resetMessage,
-              dialogTitle: resetTitle,
-              dialogContents: resetMessage,
+              hint: _resetMessage,
+              dialogTitle: _resetTitle,
+              dialogContents: _resetMessage,
               onConfirm: () {
                 EzConfig.instance.preferences.remove(fontFamilyKey);
                 EzConfig.instance.preferences.remove(marginKey);
