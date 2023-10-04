@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() async {
@@ -15,16 +14,19 @@ void main() async {
   // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize EzConfig
+  // Initialize EzConfig //
+
+  // Get a SharedPreferences instance to... share
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
+  // Spin up the theme factory!
   EzConfig(
-    // your image paths for this app
+    // Paths to any locally stored images the app uses
     assetPaths: [],
 
     preferences: prefs,
 
-    // your brand colors, custom styling, etc
+    // You brand colors, custom styling, etc
     customDefaults: {},
   );
 
@@ -36,6 +38,7 @@ void main() async {
     DeviceOrientation.landscapeRight,
   ]);
 
+  // Run the app!
   runApp(const EFUIExample());
 }
 
@@ -87,18 +90,18 @@ class EFUIExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return EzAppProvider(
       app: PlatformApp.router(
+        // Production ready!
         debugShowCheckedModeBanner: false,
-        title: AppLocalizations.of(context)!.appTitle,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          Locale('en'), // English
-          Locale('es'), // Spanish
-        ],
+
+        // Supported languages
+        supportedLocales: AppLocalizations.supportedLocales,
+
+        // Language handlers
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+
+        // Internationalized apps need to use onGenerateTitle >> title
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+
         routerConfig: _router,
       ),
     );
