@@ -211,8 +211,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label: AppLocalizations.of(context)!
-            .nameSetToValue(widget.type.name, currValue.toStringAsFixed(widget.decimals)),
+        label: AppLocalizations.of(context)!.nameSetToValue(
+          getSettingName(context, widget.type),
+          currValue.toStringAsFixed(widget.decimals),
+        ),
         child: ExcludeSemantics(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -267,8 +269,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: AppLocalizations.of(context)!
-            .resetNameToValue(widget.type.name, _defaultValue.toStringAsFixed(widget.decimals)),
+        hint: AppLocalizations.of(context)!.resetNameToValue(
+          getSettingName(context, widget.type),
+          _defaultValue.toStringAsFixed(widget.decimals),
+        ),
         child: ExcludeSemantics(
           child: ElevatedButton.icon(
             onPressed: () {
@@ -295,7 +299,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: AppLocalizations.of(context)!.customizeTheApp(widget.type.name),
+      hint: AppLocalizations.of(context)!.customizeTheApp(getSettingName(context, widget.type)),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => showModalBottomSheet(

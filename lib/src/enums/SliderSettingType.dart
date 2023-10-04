@@ -6,6 +6,7 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Enumerator for selecting the type of setting that is being updated
 /// This will determine the preview [Widget]s
@@ -17,21 +18,21 @@ enum SliderSettingType {
   textSpacing,
 }
 
-/// Enumerator extension for getting the proper [String] name for [EzSliderSetting.type]
-extension SettingName on SliderSettingType {
-  String get name {
-    switch (this) {
-      case SliderSettingType.margin:
-        return "margin";
-      case SliderSettingType.padding:
-        return "padding";
-      case SliderSettingType.circleSize:
-        return "circle button size";
-      case SliderSettingType.buttonSpacing:
-        return "button spacing";
-      case SliderSettingType.textSpacing:
-        return "text spacing.";
-    }
+/// Get the proper [String] name for [EzSliderSetting.type]
+String getSettingName(BuildContext context, SliderSettingType settingType) {
+  switch (settingType) {
+    case SliderSettingType.margin:
+      return AppLocalizations.of(context)!.margin;
+    case SliderSettingType.padding:
+      return AppLocalizations.of(context)!.padding;
+    case SliderSettingType.circleSize:
+      return AppLocalizations.of(context)!.circleSize;
+    case SliderSettingType.buttonSpacing:
+      return AppLocalizations.of(context)!.buttonSpacing;
+    case SliderSettingType.textSpacing:
+      return AppLocalizations.of(context)!.textSpacing;
+    default:
+      throw Exception("Invalid SliderSettingType: $settingType");
   }
 }
 
