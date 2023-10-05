@@ -10,25 +10,23 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
   final Key? key;
-
-  /// Optionally provide a starting platform (Material/Cupertino)
+  final PlatformSettingsData? settings;
+  final Widget Function(BuildContext)? builder;
   final TargetPlatform? initialPlatform;
-
   final PlatformApp app;
 
-  /// [PlatformProvider] wrapper with [EzConfig] theming
+  /// [PlatformProvider] wrapper with [empathetechThemeData] defaults
   EzAppProvider({
     this.key,
+    this.settings,
+    this.builder,
     this.initialPlatform,
     required this.app,
   });
 
-  // Gather theme data //
+  // Gather default (optional) theme data //
 
-  final bool? _savedLight = EzConfig.instance.preferences.getBool(isLightKey);
-
-  final ThemeData materialLight = empathetechThemeData(lightTheme: true);
-  final ThemeData materialDark = empathetechThemeData(lightTheme: false);
+  late final bool? _savedLight = EzConfig.instance.preferences.getBool(isLightKey);
 
   late final ThemeMode _initialTheme = (_savedLight == null)
       ? ThemeMode.system
@@ -36,25 +34,31 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.light
           : ThemeMode.dark;
 
+  late final ThemeData _materialLight = empathetechThemeData(lightTheme: true);
+  late final ThemeData _materialDark = empathetechThemeData(lightTheme: false);
+
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return PlatformProvider(
       key: key,
-      settings: PlatformSettingsData(
-        iosUsesMaterialWidgets: true,
-        iosUseZeroPaddingForAppbarPlatformIcon: true,
-      ),
-      builder: (context) => PlatformTheme(
-        themeMode: _initialTheme,
-        materialLightTheme: materialLight,
-        materialDarkTheme: materialDark,
-        cupertinoLightTheme: MaterialBasedCupertinoThemeData(materialTheme: materialLight),
-        cupertinoDarkTheme: MaterialBasedCupertinoThemeData(materialTheme: materialDark),
-        matchCupertinoSystemChromeBrightness: true,
-        builder: (context) => app,
-      ),
+      settings: settings ??
+          PlatformSettingsData(
+            iosUsesMaterialWidgets: true,
+            iosUseZeroPaddingForAppbarPlatformIcon: true,
+          ),
+      builder: builder ??
+          (context) => PlatformTheme(
+                builder: (context) => app,
+                themeMode: _initialTheme,
+                materialLightTheme: _materialLight,
+                materialDarkTheme: _materialDark,
+                cupertinoLightTheme:
+                    MaterialBasedCupertinoThemeData(materialTheme: _materialLight),
+                cupertinoDarkTheme: MaterialBasedCupertinoThemeData(materialTheme: _materialDark),
+                matchCupertinoSystemChromeBrightness: true,
+              ),
       initialPlatform: initialPlatform,
     );
   }
