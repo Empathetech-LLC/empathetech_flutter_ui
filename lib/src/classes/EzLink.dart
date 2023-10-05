@@ -23,13 +23,12 @@ class EzLink extends TextSpan {
   final String? semanticsLabel;
 
   /// Creates a [TextSpan] with an internal link via [TapGestureRecognizer]
-  /// Requires a [semanticsLabel] for screen readers
   /// See [EzWebLink] for making extertnal links
   EzLink({
     required this.text,
     required this.action,
     this.style,
-    required this.semanticsLabel,
+    this.semanticsLabel,
   }) : super(
           text: text,
           recognizer: new TapGestureRecognizer()..onTap = action,
