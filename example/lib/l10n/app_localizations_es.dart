@@ -5,7 +5,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Empático Flutter UI';
+  String get appTitle => 'Empática Flutter UI';
 
   @override
   String get homeLinkHint => 'Regresar a la pantalla principal';

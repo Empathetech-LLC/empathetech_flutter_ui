@@ -1,6 +1,6 @@
 {
   "@@locale" : "es",
-  "appTitle" : "Empático Flutter UI",
+  "appTitle" : "Empática Flutter UI",
   "homeLinkHint": "Regresar a la pantalla principal",
   "editingTheme": "Editando: tema {themeType}",
   "resetAllWarning": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
