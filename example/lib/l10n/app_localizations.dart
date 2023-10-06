@@ -95,12 +95,6 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
-  /// No description provided for @appTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Empathetic Flutter UI'**
-  String get appTitle;
-
   /// No description provided for @homeLinkHint.
   ///
   /// In en, this message translates to:

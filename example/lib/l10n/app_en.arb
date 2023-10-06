@@ -1,6 +1,5 @@
 {
   "@@locale" : "en",
-  "appTitle" : "Empathetic Flutter UI",
   "homeLinkHint": "Return to the home screen",
   "editingTheme": "Editing: {themeType} theme",
   "resetAllWarning": "Cannot be undone\nChanges take effect on app restart",

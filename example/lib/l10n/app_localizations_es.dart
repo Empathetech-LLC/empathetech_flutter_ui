@@ -5,9 +5,6 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Empática Flutter UI';
-
-  @override
   String get homeLinkHint => 'Regresar a la pantalla principal';
 
   @override
@@ -17,11 +14,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get resetAllWarning =>
-      'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
+      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
 
   @override
   String get resetAllWarningWeb =>
-      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
+      'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
 
   @override
   String get imageSettings => 'Configuraciones de imagen';
