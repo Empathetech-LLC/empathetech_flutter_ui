@@ -229,7 +229,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Local reset "all"
                   EzResetButton(
                     context: context,
-                    hint: _resetMessage,
+                    hint: _resetTitle,
                     dialogTitle: _resetTitle,
                     dialogContents: _resetMessage,
                     onConfirm: () {
