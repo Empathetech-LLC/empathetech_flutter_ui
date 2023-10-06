@@ -4,12 +4,12 @@ EFUI is a holistic foundation for digital accessibility.
 
 EFUI provides a starter kit for every aspect of digital accessibility:
 - **Platform availability**
-  - Thanks to Flutter, EFUI is fully cross platform! EFUI can make apps for Android, iOs, iPadOS, MacOS (via iPadOS), Windows, Linux, and Web!
-    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), your apps will gracefully adapt to Cupertino (Apple) and Material (Android & Beyond) styling
+  - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOs, Linux, MacOS, Windows and Web!
+    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
 - **Screen reader compliance**
   - The [example app](./example/lib/screens/) and all [custom widgets](./lib/src/classes/) have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables developers to expose any aspect of their app's theme to the user.
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any aspect of your app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
   - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization layed out, the only work left are the translations themselves.
@@ -18,25 +18,36 @@ EFUI provides a starter kit for every aspect of digital accessibility:
   - [Readers](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
   - [Visual learners](https://www.empathetech.net/#/contribute)
 
-<br>Apps built with EFUI can truly reach any audience. Let's make the internet a more accessible place together!
+<br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a more accessible place together!
 
 ## Table of Contents
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Demo](#demo)
 * [Contributing](#contributing)
 * [License](#license)
 * [Credits](#credits)
 
 # Installation
 
-If you're new to Flutter: welcome! The [example app](./example/lib/) is full of comments to help you on your path.
+In your app's base directory, run
 
-If you've Fluttered before, head on over to [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
+```bash
+flutter pub add empathetech_flutter_ui
+```
+
+And add the following import to any files that use EFUI's library!
+
+```Dart
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+```
 
 ## Beginner tutorials
 
-For those starting out, here are some videos you might find helpful (unafilliated!)
+If you're new to Flutter: welcome! The [example app](./example/lib/) is full of comments to help you on your path.
+
+Here are some (unafilliated!) videos you might also find helpful.
 
 - [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
 - [First app codelab](https://www.youtube.com/watch?v=8sAyPDLorek)
@@ -46,16 +57,30 @@ For those starting out, here are some videos you might find helpful (unafilliate
 
 ## TL;DR
 
-For my Flutter veterans...
-1. Check out [EzConfig](./lib/src/classes/EzConfig.dart) to see how EFUI builds the theme, and how you can merge your custom defaults
-2. Use [EzAppProvider](./lib/src/classes/EzAppProvider.dart)
-3. a)  Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app<br>b) Rename Home.dart to Settings.dart (dev preference) and create a link to it in your app
+1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your `void main()` to setup the user customizable [theme data](./lib/src/functions/ezThemeData.dart)
+2. Use [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+3. a) Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app and<br>b) Rename `Home.dart` to `Settings.dart` (personal preference) and add a route to it in your app
 4. Enjoy
 
 ## Setup
-*All code below was adapted from the [example app](./example/lib/main.dart)*
 
-First, in main, initialize [EzConfig](./lib/src/classes/EzConfig.dart)
+### Step 1
+
+In your [main.dart](./example/lib/main.dart) add any imports you're missing
+
+```Dart
+import 'l10n/app_localizations.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+```
+
+And initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your  `void main()` Function.
 
 ```Dart
 void main() async {
@@ -64,12 +89,12 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig(
-    /// your [AssetImage] paths for this app
+    // Paths to any locally stored images the app uses
     assetPaths: [],
 
     preferences: prefs,
 
-    /// your brand colors, custom styling, etc
+    // Your brand colors, custom styling, etc
     customDefaults: {},
   );
   
@@ -83,7 +108,11 @@ void main() async {
 }
 ```
 
-then, use an [EzAppProvider](/lib/src/classes/EzAppProvider.dart) in your build (which pairs well with an [EzApp](lib/src/classes/EzApp.dart))
+[EzConfig](./lib/src/classes/EzConfig.dart) starts with [Empathetech's config](./lib/src/consts/empathetechConfig.dart) to make sure everything is populated. Then it merges in your custom data and the user's [preferences](https://pub.dev/packages/shared_preferences). The [finalized](https://flutterbyexample.com/lesson/const-and-final-variables) instance is then used to create a finalized [theme data](./lib/src/functions/ezThemeData.dart)
+
+### Step 2
+
+In [main.dart](./example/lib/main.dart), use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class EFUIExample extends StatelessWidget {
@@ -94,25 +123,29 @@ class EFUIExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
-      app: EzApp(
-        title: 'EFUI example',
-        routerConfig: GoRouter(initialLocation: '/', routes: ...),
+      app: PlatformApp.router(
+        debugShowCheckedModeBanner: false,
+
+        // Supported languages
+        supportedLocales: AppLocalizations.supportedLocales + EFUILocalizations.supportedLocales,
+
+        // Language handlers
+        localizationsDelegates:
+            AppLocalizations.localizationsDelegates + EFUILocalizations.localizationsDelegates,
+
+        title: "Emapathetech Flutter UI",
+        routerConfig: _router,
       ),
     );
   }
 }
-
 ```
 
-### It's that Ez!
+### Step 3
 
-## How it works
+Copy the [settings sandbox](#demo)!
 
-When an `EzApp` starts, `EzConfig` generates the app's [theme data](lib/src/functions/ezThemeData.dart), starting with the [defaults](/lib/src/consts/empathetechConfig.dart) gathers the user's [preferences](https://pub.dev/packages/shared_preferences) and .
-
-In the code, `EzConfig` has a globally accessible instance that can be used to query the live configuration.
-
-Then, in conjunction with the custom widgets below, `EzConfig` enables user customization
+These screens neatly organize all the custom widgets that enable
 
 * [EzThemeModeSwitch](lib/src/classes/EzThemeModeSwitch.dart): A toggle for users to switch between light, dark, or system theming.
 * [EzDominantHandSwitch](lib/src/classes/EzDominantHandSwitch.dart): Moves common touch points to benefit lefty's when they want it!
@@ -120,13 +153,20 @@ Then, in conjunction with the custom widgets below, `EzConfig` enables user cust
 * [EzFontSetting](lib/src/classes/EzFontSetting.dart): An interface for users to select their preferred font from a predefined list.
 * [EzSliderSetting](lib/src/classes/EzSliderSetting.dart): A versatile slider widget for numerical customizations of many kinds (margin, padding, spacing, etc).
 * [EzImageSetting](lib/src/classes/EzImageSetting.dart): A user-friendly image uploader to update app assets.
-  * Not shown in the example app
 
 #### [See them in action](https://www.empathetech.net/#/settings)
 
+By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) is exposed. 
+
+### Step 4
+
+Enjoy!
+
+**It's that Ez!**
+
 There's lots of other cool stuff in EFUI, like [EzRowCol](lib/src/classes/EzRowCol.dart), [EzNotifications](lib/src/classes/EzNotifications.dart), and [EzVideoPlayer](lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
 
-**P.S.** 
+# Demo
 
 ## See the example
 
