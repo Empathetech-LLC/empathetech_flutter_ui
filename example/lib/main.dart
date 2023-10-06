@@ -26,7 +26,7 @@ void main() async {
 
     preferences: prefs,
 
-    // You brand colors, custom styling, etc
+    // Your brand colors, custom styling, etc
     customDefaults: {},
   );
 
