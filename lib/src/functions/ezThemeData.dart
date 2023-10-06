@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-ThemeData empathetechThemeData({required bool lightTheme}) {
+ThemeData ezThemeData({required bool lightTheme}) {
   // Gather values from EzConfig //
 
   final Brightness brightness = lightTheme ? Brightness.light : Brightness.dark;

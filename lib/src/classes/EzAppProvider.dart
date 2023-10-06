@@ -15,7 +15,7 @@ class EzAppProvider extends StatelessWidget {
   final TargetPlatform? initialPlatform;
   final PlatformApp app;
 
-  /// [PlatformProvider] wrapper with [empathetechThemeData] defaults
+  /// [PlatformProvider] wrapper with [ezThemeData] defaults
   EzAppProvider({
     this.key,
     this.settings,
@@ -34,8 +34,8 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.light
           : ThemeMode.dark;
 
-  late final ThemeData _materialLight = empathetechThemeData(lightTheme: true);
-  late final ThemeData _materialDark = empathetechThemeData(lightTheme: false);
+  late final ThemeData _materialLight = ezThemeData(lightTheme: true);
+  late final ThemeData _materialDark = ezThemeData(lightTheme: false);
 
   // Return the build //
 

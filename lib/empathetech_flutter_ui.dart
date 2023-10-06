@@ -48,8 +48,8 @@ export 'src/enums/SliderSettingType.dart';
 
 // Functions
 export 'src/functions/dialogs.dart';
-export 'src/functions/empathetechThemeData.dart';
 export 'src/functions/ezAlertActions.dart';
+export 'src/functions/ezThemeData.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/storage.dart';
