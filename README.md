@@ -2,37 +2,23 @@
 
 EFUI is a holistic foundation for digital accessibility.
 
-EFUI :
-- **User-Centric Accessibilities**
-  - Verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios), with enhanced custom semantics for a clearer user understanding.
-- **Rich Customization Capabilities**
-  - Users revel in the freedom to modify theme colors, styles, and imagery, making your app a canvas for their expressions.
-- **Dynamic Styling & Platform Awareness**
-  - Thanks to the integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), your app gracefully adapts to Material or Cupertino aesthetics matching the native OS convention.
-- **Responsive Design**
-  - A consistent user experience across various screen sizes, tested and affirmed across all seven Flutter platforms.
-- **Internationalization Ready**
-  - A foundation set for language translations, kicking off with Spanish, making your app globally amiable.
-- **Copy-Paste Ready Settings Segment**
-  - The example app is crafted to be a robust settings section of "your" next app, ready to be integrated with a simple copy/paste. 
+EFUI provides a starter kit for every aspect of digital accessibility:
+- **Platform availability**
+  - Thanks to Flutter, EFUI is fully cross platform! EFUI can make apps for Android, iOs, iPadOS, MacOS (via iPadOS), Windows, Linux, and Web!
+    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), your apps will gracefully adapt to Cupertino (Apple) and Material (Android & Beyond) styling
+- **Screen reader compliance**
+  - The [example app](./example/) and all custom widgets have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+- **User customization**
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables developers to expose any aspect of their app's theme to the user.
+    - Users can have full control of theme colors, fonts, styling, spacing, and images.
+- **Internationalization**
+  - The [example app](./example/) and all custom widgets have been translated into Spanish. With the infrastructure for internationalization layed out, the only work left are the translations themselves.
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, say that. EFUIs translations started with A.H.I. and ended with [H.I.](LINK_HERE)
+- **Responsive design**
+  - [Readers](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+  - [Visual learners](https://www.empathetech.net/#/contribute)
 
-The journey of crafting accessible and highly customizable apps is simplified, yet enriched with EFUI. A testament to what’s achievable when user-centric design meets developer-friendly implementation.
-
-## Table of Contents
-
-
-EFUI provides a rock-solid foundation for building user accessible apps.
-
-EFUI is a starter kit for every aspect of digital accessibility...
-- User accessible
-  - Manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
-- User customizable
-  - Users can/will have control over colors, fonts, spacing, and so much more
-- Dynamically styled to match OS convention (Apple ecosystem apps will feel more native)
-  - [Shoutout](#flutter-oss)
-- Responsive to screen size
-
-Last and DEFINITELY NOT least, thanks to Flutter, fully cross platform! EFUI works seamlessly across Android, iOs, iPadOS, MacOS (via iPadOS), Windows, Linux, and Web!
+<br>Apps built with EFUI can truly reach any audience. Let's make the internet a more accessible place together!
 
 ## Table of Contents
 
@@ -44,19 +30,27 @@ Last and DEFINITELY NOT least, thanks to Flutter, fully cross platform! EFUI wor
 
 # Installation
 
-If you're new to Flutter: welcome! The EFUI example app is full of comments to help you on your path.
+If you're new to Flutter: welcome! The [example app](./example/) is full of comments to help you on your path.
 
-Otherwise, installation instructions can be found on [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
+If you've Fluttered before, head on over to [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
 
 ## Beginner tutorials
 
-For those starting out, here are some videos you might find helpful (unafilliated)
+For those starting out, here are some videos you might find helpful (unafilliated!)
 
 - [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
 - [First app codelab](https://www.youtube.com/watch?v=8sAyPDLorek)
 - [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
 
 # Usage
+
+## TL;DR
+
+For my Flutter veterans...
+1. Check out [EzConfig](./lib/src/classes/EzConfig.dart) to see how EFUI builds the theme, and how you can merge your custom defaults
+2. Use [EzAppProvider](./lib/src/classes/EzAppProvider.dart)
+3. a)  Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app<br>b) Rename Home.dart to Settings.dart (dev preference) and create a link to it in your app
+4. Enjoy
 
 ## Setup
 *All code below was adapted from the [example app](example/lib/main.dart)*
