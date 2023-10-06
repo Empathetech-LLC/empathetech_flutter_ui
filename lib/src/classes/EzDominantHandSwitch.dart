@@ -17,9 +17,7 @@ class EzDominantHandSwitch extends StatefulWidget {
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather theme data //
-  Hand _currSide = EzConfig.instance.dominantHand;
-
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  Hand currSide = EzConfig.instance.dominantHand;
   late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   @override
@@ -43,13 +41,13 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     List<Widget> _children = [
       // Label
       EzSelectableText(EFUILocalizations.of(context)!.dominantHand, style: _style),
-      EzSpacer.row(_buttonSpacer),
+      EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button
       Semantics(
         hint: EFUILocalizations.of(context)!.handSettingSemantics,
         child: DropdownButton<Hand>(
-          value: _currSide,
+          value: currSide,
           items: items,
           dropdownColor: Theme.of(context).scaffoldBackgroundColor,
           onChanged: (Hand? newDominantHand) {
@@ -57,14 +55,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
               case Hand.right:
                 EzConfig.instance.preferences.remove(isRightKey);
                 setState(() {
-                  _currSide = Hand.right;
+                  currSide = Hand.right;
                 });
                 break;
 
               case Hand.left:
                 EzConfig.instance.preferences.setBool(isRightKey, false);
                 setState(() {
-                  _currSide = Hand.left;
+                  currSide = Hand.left;
                 });
                 break;
 
@@ -79,7 +77,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: (_currSide == Hand.right) ? _children : _children.reversed.toList(),
+      children: (currSide == Hand.right) ? _children : _children.reversed.toList(),
     );
   }
 }
