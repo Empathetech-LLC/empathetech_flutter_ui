@@ -38,7 +38,6 @@ export 'src/classes/EzWebLink.dart';
 // Constants
 export 'src/consts/credits.dart';
 export 'src/consts/empathetechConfig.dart';
-export 'src/consts/empathetechThemeData.dart';
 export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
 
@@ -49,6 +48,7 @@ export 'src/enums/SliderSettingType.dart';
 
 // Functions
 export 'src/functions/dialogs.dart';
+export 'src/functions/empathetechThemeData.dart';
 export 'src/functions/ezAlertActions.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/navigators.dart';
