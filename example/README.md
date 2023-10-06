@@ -1,3 +1,3 @@
 # EFUI example
 
-Clone/copy the example to interact with the customization UX!
+See the source [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme)
