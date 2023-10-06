@@ -1,8 +1,9 @@
-import 'utils.dart';
+import '../l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
@@ -17,19 +18,20 @@ class ExampleScaffold extends StatelessWidget {
 
     final bool leftHandedUser = EzConfig.instance.dominantHand == Hand.left;
 
-    final double buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-
-    final TextStyle? appBarTextStyle = Theme.of(context).appBarTheme.titleTextStyle;
+    final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 
     final double textScalar = MediaQuery.of(context).textScaleFactor;
-    final double toolbarHeight = appBarTextStyle!.fontSize! * textScalar * 2;
+    final double toolbarHeight = titleStyle!.fontSize! * textScalar * 2;
 
     // Define AppBar widget(s) //
 
-    final TitleBar titleBar = TitleBar(
-      style: appBarTextStyle,
-      scalar: textScalar,
-      spacer: buttonSpacer,
+    final Widget appBar = EzSelectableText.rich(
+      EzLink(
+        text: 'EFUI',
+        style: titleStyle,
+        action: () => context.goNamed(homeRoute),
+        semanticsLabel: AppLocalizations.of(context)!.homeLinkHint,
+      ),
     );
 
     // Return the build //
@@ -46,7 +48,7 @@ class ExampleScaffold extends StatelessWidget {
           automaticallyImplyLeading: (leftHandedUser) ? false : true,
 
           // Title
-          title: titleBar,
+          title: appBar,
           titleSpacing: 0,
           centerTitle: true,
 

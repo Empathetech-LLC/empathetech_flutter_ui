@@ -1,8 +1,29 @@
 # Empathetech Flutter UI <br><br> Build apps for anyone
 
-EFUI provides a rock-solid foundation for building apps in Flutter.
+EFUI is a holistic foundation for digital accessibility.
 
-Apps built with EFUI will be:
+EFUI :
+- **User-Centric Accessibilities**
+  - Verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios), with enhanced custom semantics for a clearer user understanding.
+- **Rich Customization Capabilities**
+  - Users revel in the freedom to modify theme colors, styles, and imagery, making your app a canvas for their expressions.
+- **Dynamic Styling & Platform Awareness**
+  - Thanks to the integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), your app gracefully adapts to Material or Cupertino aesthetics matching the native OS convention.
+- **Responsive Design**
+  - A consistent user experience across various screen sizes, tested and affirmed across all seven Flutter platforms.
+- **Internationalization Ready**
+  - A foundation set for language translations, kicking off with Spanish, making your app globally amiable.
+- **Copy-Paste Ready Settings Segment**
+  - The example app is crafted to be a robust settings section of "your" next app, ready to be integrated with a simple copy/paste. 
+
+The journey of crafting accessible and highly customizable apps is simplified, yet enriched with EFUI. A testament to what’s achievable when user-centric design meets developer-friendly implementation.
+
+## Table of Contents
+
+
+EFUI provides a rock-solid foundation for building user accessible apps.
+
+EFUI is a starter kit for every aspect of digital accessibility...
 - User accessible
   - Manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - User customizable
