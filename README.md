@@ -7,12 +7,12 @@ EFUI provides a starter kit for every aspect of digital accessibility:
   - Thanks to Flutter, EFUI is fully cross platform! EFUI can make apps for Android, iOs, iPadOS, MacOS (via iPadOS), Windows, Linux, and Web!
     - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), your apps will gracefully adapt to Cupertino (Apple) and Material (Android & Beyond) styling
 - **Screen reader compliance**
-  - The [example app](./example/) and all custom widgets have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+  - The [example app](./example/lib/screens/) and all [custom widgets](./lib/src/classes/) have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
   - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables developers to expose any aspect of their app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
-  - The [example app](./example/) and all custom widgets have been translated into Spanish. With the infrastructure for internationalization layed out, the only work left are the translations themselves.
+  - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization layed out, the only work left are the translations themselves.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, say that. EFUIs translations started with A.H.I. and ended with [H.I.](LINK_HERE)
 - **Responsive design**
   - [Readers](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
@@ -30,7 +30,7 @@ EFUI provides a starter kit for every aspect of digital accessibility:
 
 # Installation
 
-If you're new to Flutter: welcome! The [example app](./example/) is full of comments to help you on your path.
+If you're new to Flutter: welcome! The [example app](./example/lib/) is full of comments to help you on your path.
 
 If you've Fluttered before, head on over to [pub.dev](https://pub.dev/packages/empathetech_flutter_ui/install)
 
@@ -53,9 +53,9 @@ For my Flutter veterans...
 4. Enjoy
 
 ## Setup
-*All code below was adapted from the [example app](example/lib/main.dart)*
+*All code below was adapted from the [example app](./example/lib/main.dart)*
 
-First, in main, initialize [EzConfig](lib/src/classes/EzConfig.dart)
+First, in main, initialize [EzConfig](./lib/src/classes/EzConfig.dart)
 
 ```Dart
 void main() async {
