@@ -228,7 +228,7 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Platform availability
 
-Video
+Pictures
 
 ### Screen reader compliance
 
@@ -236,11 +236,11 @@ Video
 
 ### User customization
 
-Video
+Pictures
 
 ### Internationalization
 
-Video
+Pictures
 
 ### Responsive design
 
@@ -253,18 +253,17 @@ Video
 
 # Contributing
 
+## The vibes!
+
+If you build something with EFUI, let us know! We'd love to have a third-party [Demo](#demo) section
+
 ## Time
 
-Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor.
-
-But you don't have to wait for us! You can make a fork and start your personal changes at any time.
-
-Also, if you build something with EFUI, let us know! We'd love to have a third-party section under [usage](#usage)
+Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor. Emapthetech LLC doesn't tend to run out of ideas, only time! Here are a few current...
 
 ### Planned features
-#### That we could use some help with!
 
-- An Ez solution to [internationalization](https://docs.flutter.dev/ui/accessibility-and-localization/internationalization)
+- More languages! If you speak English and a currently unsupported language, please reach out!
 - More EzWidgets with required and/or preconfigured semantics
 - Querying [GoogleFonts](https://pub.dev/packages/google_fonts) rather than relying on a predetermined [list](/lib/src/consts/googleFonts.dart)
 
@@ -282,7 +281,7 @@ Many thanks for any and all donations! We're happy to have helped!
 
 ### Cash App
 
-[$empathetech](https://cash.app/$empathetech)
+`$`[empathetech](https://cash.app/$empathetech)
 
 # License
 
@@ -290,15 +289,18 @@ Many thanks for any and all donations! We're happy to have helped!
 
 # Credits
 
+## Translations
+
+Thank you to [blah](LINK_HERE) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
+
 ## Flutter OSS
 
 EFUI would not be as awesome as it is without these other awesome community projects...
 
 * [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
-  * OS awareness package!
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
 * [Flutter Local Notifications](https://pub.dev/packages/flutter_local_notifications)
 * [Line Icons](https://pub.dev/packages/line_icons)
 * [Flutter Toast](https://pub.dev/packages/fluttertoast)
 
-And, of course, all the awesome Google devs.
+And, of course, all the awesome Flutter (Google) devs.
