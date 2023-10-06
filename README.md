@@ -45,7 +45,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 ## Beginner tutorials
 
-If you're new to Flutter: welcome! The [example app](./example/lib/) is full of comments to help you on your path.
+If you're new to Flutter: welcome! The example app is full of comments to help you on your path.
 
 Here are some (unafilliated!) videos you might also find helpful.
 
@@ -57,16 +57,16 @@ Here are some (unafilliated!) videos you might also find helpful.
 
 ## TL;DR
 
-1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your `void main()` to setup the user customizable [theme data](./lib/src/functions/ezThemeData.dart)
-2. Use [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
-3. a) Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app and<br>b) Rename `Home.dart` to `Settings.dart` (personal preference) and add a route to it in your app
+1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your `void main()` to setup the user customizable [ezThemeData](./lib/src/functions/ezThemeData.dart)
+2. Use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>OR use `ezThemeData` in your existing provider/app
+3. a) Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app and<br>b) Rename `Home.dart` to `Settings.dart` (personal preference) and update your routes
 4. Enjoy
 
 ## Setup
 
 ### Step 1
 
-In your [main.dart](./example/lib/main.dart) add any imports you're missing
+In your [main.dart](./example/lib/main.dart) add any imports you're missing...
 
 ```Dart
 import 'l10n/app_localizations.dart';
@@ -80,7 +80,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 ```
 
-And initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your  `void main()` Function.
+...and initialize `EzConfig` in your  `void main()` Function.
 
 ```Dart
 void main() async {
@@ -108,11 +108,13 @@ void main() async {
 }
 ```
 
-[EzConfig](./lib/src/classes/EzConfig.dart) starts with [Empathetech's config](./lib/src/consts/empathetechConfig.dart) to make sure everything is populated. Then it merges in your custom data and the user's [preferences](https://pub.dev/packages/shared_preferences). The [finalized](https://flutterbyexample.com/lesson/const-and-final-variables) instance is then used to create a finalized [theme data](./lib/src/functions/ezThemeData.dart)
+#### How it works
+
+`EzConfig` gathers all the values for `ezThemeData` and creates an instance for effeciently getting and setting those values in app.<br><br>`EzConfig` starts with [Empathetech's config](./lib/src/consts/empathetechConfig.dart) to make sure every key has a value. Then it merges in your custom data and the user's current [preferences](https://pub.dev/packages/shared_preferences). The [finalized](https://flutterbyexample.com/lesson/const-and-final-variables) instance is then used to populate `ezThemeData`.
 
 ### Step 2
 
-In [main.dart](./example/lib/main.dart), use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+In `main.dart`, use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class EFUIExample extends StatelessWidget {
@@ -141,43 +143,113 @@ class EFUIExample extends StatelessWidget {
 }
 ```
 
+#### How it works
+
+[EzAppProvider](./lib/src/classes/EzAppProvider.dart) is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
+
+You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect. `EzAppProvider` and [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets) are recommendations not requirements.
+
 ### Step 3
 
-Copy the [settings sandbox](#demo)!
+#### Copy the [settings sandbox](#demo)!
 
-These screens neatly organize all the custom widgets that enable
+The example app is built to be a drop-in solution for your app's settings section.
 
-* [EzThemeModeSwitch](lib/src/classes/EzThemeModeSwitch.dart): A toggle for users to switch between light, dark, or system theming.
-* [EzDominantHandSwitch](lib/src/classes/EzDominantHandSwitch.dart): Moves common touch points to benefit lefty's when they want it!
-* [EzColorSetting](lib/src/classes/EzColorSetting.dart): A user-friendly color picker to update theme colors.
-* [EzFontSetting](lib/src/classes/EzFontSetting.dart): An interface for users to select their preferred font from a predefined list.
-* [EzSliderSetting](lib/src/classes/EzSliderSetting.dart): A versatile slider widget for numerical customizations of many kinds (margin, padding, spacing, etc).
-* [EzImageSetting](lib/src/classes/EzImageSetting.dart): A user-friendly image uploader to update app assets.
+Copy/paste all the [screen](./example/lib/screens/) files, [.arb](./example/lib/l10n/) language files, and routes from `main.dart` (aka below)
 
-#### [See them in action](https://www.empathetech.net/#/settings)
+```Dart
+// Initialize a path based router for web-enabled apps
+// Or any other app that requires deep linking
+// https://docs.flutter.dev/ui/navigation/deep-linking
+final GoRouter _router = GoRouter(
+  initialLocation: homeRoute,
+  routes: <RouteBase>[
+    GoRoute(
+      name: homeRoute,
+      path: homeRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomeScreen();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          name: styleSettingsRoute,
+          path: styleSettingsRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const StyleSettingsScreen();
+          },
+        ),
+        GoRoute(
+          name: colorSettingsRoute,
+          path: colorSettingsRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const ColorSettingsScreen();
+          },
+        ),
+        GoRoute(
+          name: imageSettingsRoute,
+          path: imageSettingsRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const ImageSettingsScreen();
+          },
+        ),
+      ],
+    ),
+  ],
+);
+```
 
-By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) is exposed. 
+Rename the (just copied) `Home.dart` and `HomeScreen()` to something more appropriate, like `Settings.dart` and `SettingsScreen()`, create a link to it in your app, and boom!
+
+**It's that Ez!**
+
+#### How it works
+
+The example app's screens neatly organize all the custom widgets that enable EFUI's user customization!
+
+* [EzThemeModeSwitch](./lib/src/classes/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzDominantHandSwitch](./lib/src/classes/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzColorSetting](./lib/src/classes/EzColorSetting.dart): A color picker for updating theme colors.
+* [EzFontSetting](./lib/src/classes/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
+* [EzSliderSetting](./lib/src/classes/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzImageSetting](./lib/src/classes/EzImageSetting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/EzResetButton.dart): A text button for resetting groups of preferences.
+
+By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
 
 ### Step 4
 
 Enjoy!
 
-**It's that Ez!**
-
-There's lots of other cool stuff in EFUI, like [EzRowCol](lib/src/classes/EzRowCol.dart), [EzNotifications](lib/src/classes/EzNotifications.dart), and [EzVideoPlayer](lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
+There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRowCol.dart), [EzLayoutSwitch](./lib/src/classes/EzLayoutSwitch.dart), and [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
 
 # Demo
 
-## See the example
+## From the example
 
-Vibez
+### Platform availability
 
-Vidyas
+Video
 
-## See it live
+### Screen reader compliance
 
-* [Company site](https://www.empathetech.net/)
-  * [Code](https://github.com/Empathetech-LLC/dotnet-public)
+Video
+
+### User customization
+
+Video
+
+### Internationalization
+
+Video
+
+### Responsive design
+
+Video
+
+## Live
+
+* [Company site](https://www.empathetech.net/#/settings)
+  * [Source code](https://github.com/Empathetech-LLC/dotnet-public)
 
 # Contributing
 
