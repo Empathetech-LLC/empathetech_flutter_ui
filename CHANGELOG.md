@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.0.0] - 2023-10-XX
+## [4.0.0] - 2023-10-07
 ### Updated
 - File structure
 - Removed EzApp and made EzAppProvider
