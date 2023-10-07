@@ -168,7 +168,7 @@ packages:
     source: hosted
     version: "8.2.2"
   go_router:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: go_router
       sha256: a07c781bf55bf11ae85133338e4850f0b4e33e261c44a66c750fc707d65d8393

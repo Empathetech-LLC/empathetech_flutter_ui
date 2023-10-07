@@ -17,6 +17,8 @@ dependencies:
   empathetech_flutter_ui:
    path: ../
 
+  go_router: ^11.1.2
+
 flutter:
   generate: true
   uses-material-design: true
