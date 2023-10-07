@@ -1,0 +1,24 @@
+name: example
+description: "An example app to show off EFUI. It is a screen reader compliant and internationalized (currently: English and Spanish) user customization sandbox."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+
+  empathetech_flutter_ui:
+   path: ../
+
+  go_router: ^11.1.2
+
+flutter:
+  generate: true
+  uses-material-design: true

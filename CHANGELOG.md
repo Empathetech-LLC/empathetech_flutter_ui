@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.0] - 2023-10-07
+### Updated
+- File structure
+- Removed EzApp and made EzAppProvider
+- Split enums into their own folder
+- Pre-existing release check in the Jenkinsfile
+- README
+  - Alot
+- Renamed EzDialog to EzAlertDialog
+  - Removed EzYesNo and created ezAlertActions
+- Project line length to 99
+- Semantics
+  - Alot
+- Many references to "default" were updated to "empathetech"
+- Parameters (minor breaks)
+  - Renamed EzColorSetting.message to EzColorSetting.name
+  - Renamed BackgroundColor -> PageColor
+  - Renamed ParagraphSpacing to TextSpacing
+
+### Added
+- Example app
+- Español (and localizations infrastructure)
+- More comments
+- EzBackAction
+- EzLayoutSwitch
+- EzResetButton
+
+### Removed
+- Unused and/or unverified classes
+  - EzNotifications (will return)
+  - Eb2Casa
+
 ## [3.1.2] - 2023-08-26
 ### Updated
 - Documentation
@@ -23,7 +55,7 @@ All notable changes to this project will be documented in this file.
 - Spacer settings previews
 - EzLink && EzWebLink
   - Simplified creation and requiring semantics
-- Image wrappers to require semantics for enforcing accessibility
+- Image wrappers to require semantics for screen readers
 - Semantics updates create minor breaks, hence the middle integer update
 
 ### Added
