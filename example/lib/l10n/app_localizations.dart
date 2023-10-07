@@ -34,7 +34,7 @@ import 'app_localizations_es.dart' deferred as app_localizations_es;
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
-///   intl: any # Use the pinned version from flutter_localizations
+///   intl: ^0.18.1 # Use the pinned version from flutter_localizations
 ///
 ///   # Rest of dependencies
 /// ```
