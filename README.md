@@ -243,7 +243,9 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Screen reader compliance
 
-<video controls width="350"><source src="./assets/videos/en-voice-over.mp4" type="video/mp4">English iOS Voice Over demo</video>
+<video width="350" controls aria-label="iOS voice over demo">
+  <source src="./assets/videos/en-voice-over.mp4" type="video/mp4">
+</video>
 
 ### User customization
 
