@@ -78,13 +78,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILocalizations.of(context)!.currently +
+                child: Text(EFUIPhrases.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILocalizations.of(context)!.currently +
+                child: Text(EFUIPhrases.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(_buttonSpacer),
@@ -105,7 +105,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   shape: MaterialStatePropertyAll(const CircleBorder()),
                   padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                  fixedSize: MaterialStatePropertyAll(Size(currValue, currValue)),
+                  fixedSize: MaterialStatePropertyAll(
+                    Size(currValue, currValue),
+                  ),
                 ),
           ),
           EzSpacer(_buttonSpacer),
@@ -127,7 +129,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               EzSelectableText(
-                EFUILocalizations.of(context)!.currently +
+                EFUIPhrases.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
               ),
@@ -157,7 +159,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(EFUILocalizations.of(context)!.currently +
+            child: Text(EFUIPhrases.of(context)!.currently +
                 currValue.toStringAsFixed(widget.decimals)),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -180,14 +182,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               EzSelectableText(
-                  EFUILocalizations.of(context)!.currently +
+                  EFUIPhrases.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: currValue),
 
               // Thing 2
               EzSelectableText(
-                  EFUILocalizations.of(context)!.currently +
+                  EFUIPhrases.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: _buttonSpacer),
@@ -210,7 +212,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label: EFUILocalizations.of(context)!.nameSetToValue(
+        label: EFUIPhrases.of(context)!.nameSetToValue(
           getSettingName(context, widget.type),
           currValue.toStringAsFixed(widget.decimals),
         ),
@@ -260,7 +262,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           },
 
           // Slider sementics
-          semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
+          semanticFormatterCallback: (double value) =>
+              value.toStringAsFixed(widget.decimals),
         ),
       ),
       EzSpacer(_buttonSpacer),
@@ -268,7 +271,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: EFUILocalizations.of(context)!.resetNameToValue(
+        hint: EFUIPhrases.of(context)!.resetNameToValue(
           getSettingName(context, widget.type),
           _defaultValue.toStringAsFixed(widget.decimals),
         ),
@@ -281,7 +284,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text(EFUILocalizations.of(context)!.reset +
+            label: Text(EFUIPhrases.of(context)!.reset +
                 _defaultValue.toStringAsFixed(widget.decimals)),
           ),
         ),

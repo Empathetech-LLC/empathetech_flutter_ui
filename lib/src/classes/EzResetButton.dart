@@ -60,19 +60,20 @@ class EzResetButton extends StatelessWidget {
 
     return Semantics(
       button: true,
-      hint: hint ?? EFUILocalizations.of(context)!.resetButtonHint,
+      hint: hint ?? EFUIPhrases.of(context)!.resetButtonHint,
       child: ExcludeSemantics(
         child: TextButton.icon(
           icon: Icon(PlatformIcons(context).refresh),
-          label: Text(message ?? EFUILocalizations.of(context)!.resetAll),
+          label: Text(message ?? EFUIPhrases.of(context)!.resetAll),
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzSelectableText(
-                dialogTitle ?? EFUILocalizations.of(context)!.resetButtonDialogTitle,
+                dialogTitle ?? EFUIPhrases.of(context)!.resetButtonDialogTitle,
               ),
               content: EzSelectableText(
-                dialogContents ?? EFUILocalizations.of(context)!.resetButtonDialogContents,
+                dialogContents ??
+                    EFUIPhrases.of(context)!.resetButtonDialogContents,
               ),
               materialActions: ezMaterialActions(
                 context: context,

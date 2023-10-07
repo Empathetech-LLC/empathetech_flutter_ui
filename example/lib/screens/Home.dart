@@ -1,6 +1,5 @@
 import './screens.dart';
 import '../utils/utils.dart';
-import '../l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -22,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.settings);
+    setPageTitle(context: context, title: Phrases.of(context)!.settings);
   }
 
   // Gather theme data //
@@ -42,10 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Functionality disclaimer
             EzWarning(
-              warning: AppLocalizations.of(context)!.attention,
+              warning: Phrases.of(context)!.attention,
               message: kIsWeb
-                  ? AppLocalizations.of(context)!.resetWarning
-                  : AppLocalizations.of(context)!.resetWarningWeb,
+                  ? Phrases.of(context)!.resetWarning
+                  : Phrases.of(context)!.resetWarningWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_buttonSpacer),
@@ -61,14 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.styling),
+              child: Text(Phrases.of(context)!.styling),
             ),
             EzSpacer(_buttonSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.colors),
+              child: Text(Phrases.of(context)!.colors),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -76,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(AppLocalizations.of(context)!.images),
+              child: Text(Phrases.of(context)!.images),
             ),
             EzSpacer(_buttonSpacer),
 

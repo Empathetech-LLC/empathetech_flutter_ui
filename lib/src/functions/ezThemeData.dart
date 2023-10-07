@@ -15,26 +15,27 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
 
-  final Color themeColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightThemeColorKey : darkThemeColorKey]);
-  final Color themeTextColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
-  final Color unSelectedThemeTextColor = EzColorBlend(themeColor, themeTextColor);
+  final Color themeColor = Color(EzConfig
+      .instance.prefs[lightTheme ? lightThemeColorKey : darkThemeColorKey]);
+  final Color themeTextColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
+  final Color unSelectedThemeTextColor =
+      EzColorBlend(themeColor, themeTextColor);
 
-  final Color pageColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
-  final Color pageTextColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightPageTextColorKey : darkPageTextColorKey]);
+  final Color pageColor = Color(EzConfig
+      .instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
+  final Color pageTextColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightPageTextColorKey : darkPageTextColorKey]);
 
-  final Color buttonColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightButtonColorKey : darkButtonColorKey]);
-  final Color buttonTextColor = Color(
-      EzConfig.instance.prefs[lightTheme ? lightButtonTextColorKey : darkButtonTextColorKey]);
+  final Color buttonColor = Color(EzConfig
+      .instance.prefs[lightTheme ? lightButtonColorKey : darkButtonColorKey]);
+  final Color buttonTextColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightButtonTextColorKey : darkButtonTextColorKey]);
 
-  final Color accentColor =
-      Color(EzConfig.instance.prefs[lightTheme ? lightAccentColorKey : darkAccentColorKey]);
-  final Color accentTextColor = Color(
-      EzConfig.instance.prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
+  final Color accentColor = Color(EzConfig
+      .instance.prefs[lightTheme ? lightAccentColorKey : darkAccentColorKey]);
+  final Color accentTextColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
@@ -160,7 +161,9 @@ ThemeData ezThemeData({required bool lightTheme}) {
         prefixIconColor: pageTextColor,
         suffixIconColor: pageTextColor,
       ),
-      menuStyle: MenuStyle(backgroundColor: MaterialStatePropertyAll(pageColor)),
+      menuStyle: MenuStyle(
+        backgroundColor: MaterialStatePropertyAll(pageColor),
+      ),
     ),
 
     // Sliders

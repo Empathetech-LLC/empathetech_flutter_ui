@@ -13,7 +13,7 @@ EFUI provides a starter kit for every aspect of digital accessibility:
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
   - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](http://www.linkedin.com/in/mauro-ramirez-rivas)
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](https://www.linkedin.com/in/mauro-ramirez-rivas)
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
   - Checkout the [demo](#responsive-design) to see it in action
@@ -69,7 +69,8 @@ Here are some (unaffilliated!) videos you might also find helpful.
 In your [main.dart](./example/lib/main.dart) add any imports you're missing...
 
 ```Dart
-import 'l10n/app_localizations.dart';
+import 'utils/utils.dart';
+import 'screens/screens.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -129,11 +130,11 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Supported languages
-        supportedLocales: AppLocalizations.supportedLocales + EFUILocalizations.supportedLocales,
+        supportedLocales: Phrases.supportedLocales + EFUIPhrases.supportedLocales,
 
         // Language handlers
         localizationsDelegates:
-            AppLocalizations.localizationsDelegates + EFUILocalizations.localizationsDelegates,
+            Phrases.localizationsDelegates + EFUIPhrases.localizationsDelegates,
 
         title: "Emapathetech Flutter UI",
         routerConfig: _router,
@@ -317,7 +318,7 @@ Many thanks for any and all donations! We're happy to have helped!
 
 ## Translations
 
-Thank you to [M Ramirez](http://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
+Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
 
 ## Flutter OSS
 
@@ -325,7 +326,6 @@ EFUI wouldn't be as awesome as it is without these other awesome community proje
 
 * [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
-* [Flutter Local Notifications](https://pub.dev/packages/flutter_local_notifications)
 * [Line Icons](https://pub.dev/packages/line_icons)
 * [Flutter Toast](https://pub.dev/packages/fluttertoast)
 

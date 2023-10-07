@@ -45,7 +45,9 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             popScreen(context: context, pass: font);
           },
           child: Text(
-            (font == _defaultFontFamily) ? EFUILocalizations.of(context)!.defaultTag(font) : font,
+            (font == _defaultFontFamily)
+                ? EFUIPhrases.of(context)!.defaultTag(font)
+                : font,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -57,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText(EFUILocalizations.of(context)!.chooseFont),
+        title: EzSelectableText(EFUIPhrases.of(context)!.chooseFont),
         content: EzScrollView(children: buttons),
       ),
     );
@@ -71,7 +73,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       onPressed: () => _chooseGoogleFont(context),
       icon: const Icon(LineIcons.font),
       label: Text(
-        EFUILocalizations.of(context)!.fontSettingLabel,
+        EFUIPhrases.of(context)!.fontSettingLabel,
         style: TextStyle(fontFamily: currFontFamily),
         textAlign: TextAlign.center,
       ),

@@ -50,14 +50,16 @@ void setPageTitle({
   required BuildContext context,
   required String title,
 }) {
-  SystemChrome.setApplicationSwitcherDescription(ApplicationSwitcherDescription(label: title));
+  SystemChrome.setApplicationSwitcherDescription(
+      ApplicationSwitcherDescription(label: title));
 }
 
 /// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
-Future<bool?> copyToClipboard({required BuildContext context, required String string}) async {
+Future<bool?> copyToClipboard(
+    {required BuildContext context, required String string}) async {
   await Clipboard.setData(ClipboardData(text: string));
   return Fluttertoast.showToast(
-    msg: EFUILocalizations.of(context)!.clipCopy,
+    msg: EFUIPhrases.of(context)!.clipCopy,
     toastLength: Toast.LENGTH_SHORT,
     backgroundColor: Colors.black,
     fontSize: 18,

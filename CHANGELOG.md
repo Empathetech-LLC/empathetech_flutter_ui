@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.1.0] - 2023-10-07
+### Updated
+- `Create git release` section of Jenkinsfile
+- Reverted the line length to 80
+- Fixed http links in README
+- Renamed EFUILocalizations to EFUIPhrases and AppLocalizations to Phrases
+  - Minor breaking changes
+
 ## [4.0.0] - 2023-10-07
 ### Updated
 - File structure

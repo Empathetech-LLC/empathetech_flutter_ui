@@ -1,8 +1,8 @@
-import 'app_localizations.dart';
+import 'app_phrases.dart';
 
 /// The translations for Spanish Castilian (`es`).
-class AppLocalizationsEs extends AppLocalizations {
-  AppLocalizationsEs([String locale = 'es']) : super(locale);
+class PhrasesEs extends Phrases {
+  PhrasesEs([String locale = 'es']) : super(locale);
 
   @override
   String get homeLinkHint => 'Regresar a la pantalla principal';

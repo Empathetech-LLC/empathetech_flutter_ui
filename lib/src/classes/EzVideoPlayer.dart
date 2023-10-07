@@ -143,13 +143,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   double _percentComplete(Duration position) {
     return (position.isNegative || position.inMilliseconds == 0)
         ? 0
-        : position.inMilliseconds / widget.controller.value.duration.inMilliseconds;
+        : position.inMilliseconds /
+            widget.controller.value.duration.inMilliseconds;
   }
 
   /// Get the [Duration] value that corresponds to the passed [completion] percentage
   Duration _findPoint(double completion) {
     return Duration(
-      milliseconds: (widget.controller.value.duration.inMilliseconds * completion).round(),
+      milliseconds:
+          (widget.controller.value.duration.inMilliseconds * completion)
+              .round(),
     );
   }
 
@@ -234,10 +237,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
             size: _buttonSize,
           ),
           onTap: () {
-            (widget.controller.value.volume == 0.0) ? _unMuteVideo() : _muteVideo();
+            (widget.controller.value.volume == 0.0)
+                ? _unMuteVideo()
+                : _muteVideo();
           },
         ),
-        (widget.variableVolume) ? EzSpacer.row(_padding) : EzSpacer.row(_buttonSpacer),
+        (widget.variableVolume)
+            ? EzSpacer.row(_padding)
+            : EzSpacer.row(_buttonSpacer),
       ]);
     }
 
@@ -288,7 +295,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     Color sliderColor = _buildColor(widget.sliderVis);
 
     SliderThemeData videoSliderTheme = Theme.of(context).sliderTheme.copyWith(
-          thumbShape: (sliderColor == Colors.transparent) ? SliderComponentShape.noThumb : null,
+          thumbShape: (sliderColor == Colors.transparent)
+              ? SliderComponentShape.noThumb
+              : null,
           activeTrackColor: sliderColor,
           inactiveTrackColor: sliderColor,
           thumbColor: sliderColor,
@@ -307,7 +316,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         });
       },
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),
+        constraints: BoxConstraints(
+          maxWidth: widget.maxWidth,
+          maxHeight: widget.maxHeight,
+        ),
         child: AspectRatio(
           aspectRatio: widget.controller.value.aspectRatio,
           child: Stack(
@@ -326,7 +338,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 child: GestureDetector(
                     child: Container(color: Colors.transparent),
                     onTap: () {
-                      (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
+                      (widget.controller.value.isPlaying)
+                          ? _pauseVideo()
+                          : _playVideo();
                     }),
               ),
 

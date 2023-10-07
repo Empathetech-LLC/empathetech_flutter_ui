@@ -28,11 +28,12 @@ class EzContrastColor extends Color {
   /// Returns the guesstimated most readable text color (black/white) for [background]
   /// Formula credit: https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
   EzContrastColor(this.background)
-      : super(
-            (((background.red * 0.299) + (background.green * 0.587) + (background.blue * 0.114)) >=
-                    150)
-                ? blackHex
-                : whiteHex);
+      : super((((background.red * 0.299) +
+                    (background.green * 0.587) +
+                    (background.blue * 0.114)) >=
+                150)
+            ? blackHex
+            : whiteHex);
 }
 
 class EzColorBlend extends Color {
