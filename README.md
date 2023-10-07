@@ -15,8 +15,8 @@ EFUI provides a starter kit for every aspect of digital accessibility:
   - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](http://www.linkedin.com/in/mauro-ramirez-rivas)
 - **Responsive design**
-  - [Readers](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-  - [Visual learners](https://www.empathetech.net/#/contribute)
+  - [Meaning](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+  - Checkout the [demo](#demo) to see it in action
 
 <br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a more accessible place together!
 
@@ -228,7 +228,9 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Platform availability
 
-Pictures
+![Home page on Android](./assets/images/home-android.png)![Home page on iOS](./assets/images/home-ios.png)
+![Home page on Linux](./assets/images/home-linux.png)![Home page on macOS](./assets/images/home-macos.png)![Home page on Windows](./assets/images/home-windows.png)
+![Home page on Web](./assets/images/home-web.png)
 
 ### Screen reader compliance
 
@@ -236,15 +238,16 @@ Video
 
 ### User customization
 
-Pictures
+![Core settings example](./assets/images/home-ios.png)![Style settings example](./assets/images/style-settings-ios.png)![Color settings example](./assets/images/color-settings-ios.png)![Image settings example](./assets/images/image-settings-ios.png)
+![Font picker preview](./assets/images/font-picker-ios.png)![Margin setting preview](./assets/images/margin-setting-ios.png)![Cicle setting preview](./assets/images/circle-setting-ios.png)![Color picker preview](./assets/images/color-picker-ios.png)![Update image preview](./assets/images/update-image-ios.png)
 
 ### Internationalization
 
-Pictures
+![Core settings in Spanish](./assets/images/es-home-ios.png)![Style settings in Spanish](./assets/images/es-style-settings-ios.png)![Color settings in Spanish](./assets/images/es-color-settings-ios.png)![Image settings in Spanish](./assets/images/es-image-settings-ios.png)
 
 ### Responsive design
 
-Video
+Checkout the link to our site below. If you're using a monitor, play around with the window size! Using a phone or tablet? Rotate your device!
 
 ## Live
 
@@ -281,7 +284,7 @@ Many thanks for any and all donations! We're happy to have helped!
 
 ### Cash App
 
-`$`[empathetech](https://cash.app/$empathetech)
+[$empathetech](https://cash.app/$empathetech)
 
 # License
 
