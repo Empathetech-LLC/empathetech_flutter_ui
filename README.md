@@ -69,7 +69,8 @@ Here are some (unaffilliated!) videos you might also find helpful.
 In your [main.dart](./example/lib/main.dart) add any imports you're missing...
 
 ```Dart
-import 'l10n/app_localizations.dart';
+import 'utils/utils.dart';
+import 'screens/screens.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -325,7 +326,6 @@ EFUI wouldn't be as awesome as it is without these other awesome community proje
 
 * [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
-* [Flutter Local Notifications](https://pub.dev/packages/flutter_local_notifications)
 * [Line Icons](https://pub.dev/packages/line_icons)
 * [Flutter Toast](https://pub.dev/packages/fluttertoast)
 
