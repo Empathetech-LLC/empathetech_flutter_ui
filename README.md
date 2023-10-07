@@ -243,9 +243,7 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Screen reader compliance
 
-| English | Español |
-|---|---|
-| <video controls width="350"><source src="./assets/videos/es-voice-over.mp4" type="video/mp4">Spanish iOS Voice Over demo not supported by your browser.</video> | <video controls width="350"><source src="./assets/videos/en-voice-over.mp4" type="video/mp4">English iOS Voice Over demo not supported by your browser.</video> |
+<video controls width="350"><source src="./assets/videos/en-voice-over.mp4" type="video/mp4">English iOS Voice Over demo</video>
 
 ### User customization
 
@@ -260,6 +258,8 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 | | | | |
 |---|---|---|---|
 | <img src="./assets/images/es-home-ios.png" alt="Core settings in Spanish" width="250"/> | <img src="./assets/images/es-style-settings-ios.png" alt="Style settings in Spanish" width="250"/> | <img src="./assets/images/es-color-settings-ios.png" alt="Color settings in Spanish" width="250"/> | <img src="./assets/images/es-image-settings-ios.png" alt="Image settings in Spanish" width="250"/> |
+
+**Screen reader semantics are also internationalized!**
 
 ### Responsive design
 
