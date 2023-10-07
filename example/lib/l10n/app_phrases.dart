@@ -4,22 +4,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_localizations_en.dart' deferred as app_localizations_en;
-import 'app_localizations_es.dart' deferred as app_localizations_es;
+import 'app_phrases_en.dart' deferred as app_phrases_en;
+import 'app_phrases_es.dart' deferred as app_phrases_es;
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of Phrases
+/// returned by `Phrases.of(context)`.
 ///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// Applications need to include `Phrases.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_localizations.dart';
+/// import 'l10n/app_phrases.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
+///   localizationsDelegates: Phrases.localizationsDelegates,
+///   supportedLocales: Phrases.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -34,7 +34,7 @@ import 'app_localizations_es.dart' deferred as app_localizations_es;
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
-///   intl: ^0.18.1 # Use the pinned version from flutter_localizations
+///   intl: any # Use the pinned version from flutter_localizations
 ///
 ///   # Rest of dependencies
 /// ```
@@ -56,20 +56,19 @@ import 'app_localizations_es.dart' deferred as app_localizations_es;
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// be consistent with the languages listed in the Phrases.supportedLocales
 /// property.
-abstract class AppLocalizations {
-  AppLocalizations(String locale)
+abstract class Phrases {
+  Phrases(String locale)
       : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static Phrases? of(BuildContext context) {
+    return Localizations.of<Phrases>(context, Phrases);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<Phrases> delegate = _PhrasesDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -258,13 +257,12 @@ abstract class AppLocalizations {
   String get images;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class _PhrasesDelegate extends LocalizationsDelegate<Phrases> {
+  const _PhrasesDelegate();
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return lookupAppLocalizations(locale);
+  Future<Phrases> load(Locale locale) {
+    return lookupPhrases(locale);
   }
 
   @override
@@ -272,24 +270,24 @@ class _AppLocalizationsDelegate
       <String>['en', 'es'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_PhrasesDelegate old) => false;
 }
 
-Future<AppLocalizations> lookupAppLocalizations(Locale locale) {
+Future<Phrases> lookupPhrases(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return app_localizations_en
+      return app_phrases_en
           .loadLibrary()
-          .then((dynamic _) => app_localizations_en.AppLocalizationsEn());
+          .then((dynamic _) => app_phrases_en.PhrasesEn());
     case 'es':
-      return app_localizations_es
+      return app_phrases_es
           .loadLibrary()
-          .then((dynamic _) => app_localizations_es.AppLocalizationsEs());
+          .then((dynamic _) => app_phrases_es.PhrasesEs());
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'Phrases.delegate failed to load unsupported locale "$locale". This is likely '
       'an issue with the localizations generation tool. Please file an issue '
       'on GitHub with a reproducible sample app and the gen-l10n configuration '
       'that was used.');

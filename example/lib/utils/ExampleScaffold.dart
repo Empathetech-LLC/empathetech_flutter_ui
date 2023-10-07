@@ -1,4 +1,4 @@
-import '../l10n/app_localizations.dart';
+import './utils.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -30,7 +30,7 @@ class ExampleScaffold extends StatelessWidget {
         text: 'EFUI',
         style: titleStyle,
         action: () => context.goNamed(homeRoute),
-        semanticsLabel: AppLocalizations.of(context)!.homeLinkHint,
+        semanticsLabel: Phrases.of(context)!.homeLinkHint,
       ),
     );
 

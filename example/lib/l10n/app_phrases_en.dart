@@ -1,8 +1,8 @@
-import 'app_localizations.dart';
+import 'app_phrases.dart';
 
 /// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+class PhrasesEn extends Phrases {
+  PhrasesEn([String locale = 'en']) : super(locale);
 
   @override
   String get homeLinkHint => 'Return to the home screen';

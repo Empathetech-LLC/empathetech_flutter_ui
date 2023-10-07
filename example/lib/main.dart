@@ -1,5 +1,5 @@
+import 'utils/utils.dart';
 import 'screens/screens.dart';
-import 'l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -95,11 +95,11 @@ class EFUIExample extends StatelessWidget {
 
         // Supported languages
         supportedLocales:
-            AppLocalizations.supportedLocales + EFUIPhrases.supportedLocales,
+            Phrases.supportedLocales + EFUIPhrases.supportedLocales,
 
         // Language handlers
-        localizationsDelegates: AppLocalizations.localizationsDelegates +
-            EFUIPhrases.localizationsDelegates,
+        localizationsDelegates:
+            Phrases.localizationsDelegates + EFUIPhrases.localizationsDelegates,
 
         title: "Emapathetech Flutter UI",
         routerConfig: _router,

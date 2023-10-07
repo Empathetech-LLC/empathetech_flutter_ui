@@ -1,5 +1,4 @@
 import '../utils/utils.dart';
-import '../l10n/app_localizations.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -20,8 +19,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(
-        context: context, title: AppLocalizations.of(context)!.imageSettings);
+    setPageTitle(context: context, title: Phrases.of(context)!.imageSettings);
   }
 
   // Gather theme data //
@@ -31,11 +29,11 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
 
   late final String _resetTitle =
-      AppLocalizations.of(context)!.resetAllImages(_themeProfile);
+      Phrases.of(context)!.resetAllImages(_themeProfile);
 
   late final String _resetMessage = kIsWeb
-      ? AppLocalizations.of(context)!.resetAllWarningWeb
-      : AppLocalizations.of(context)!.resetAllWarning;
+      ? Phrases.of(context)!.resetAllWarningWeb
+      : Phrases.of(context)!.resetAllWarning;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
@@ -49,7 +47,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             EzSelectableText(
-              AppLocalizations.of(context)!.editingTheme(_themeProfile),
+              Phrases.of(context)!.editingTheme(_themeProfile),
               style: titleSmall(context),
             ),
             EzSpacer(_buttonSpacer),
@@ -69,11 +67,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: AppLocalizations.of(context)!.page,
+                          title: Phrases.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits:
-                              AppLocalizations.of(context)!.yourSourceCredit,
+                          credits: Phrases.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -82,11 +79,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: AppLocalizations.of(context)!.page,
+                          title: Phrases.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits:
-                              AppLocalizations.of(context)!.yourSourceCredit,
+                          credits: Phrases.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
