@@ -22,8 +22,8 @@
   "resetAllStyle": "¿Restablecer todas las configuraciones de estilo?",
   "settings": "Configuraciones",
   "attention": "ATENCIÓN",
-  "resetWarning": "Cada botón mostrará una vista previa de sus cambios\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
-  "resetWarningWeb": "Cada botón mostrará una vista previa de sus cambios\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
+  "resetWarning": "Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
+  "resetWarningWeb": "Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "styling": "Estilización",
   "colors": "Colores",
   "images": "Imágenes"

@@ -83,11 +83,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get resetWarning =>
-      'Cada botón mostrará una vista previa de sus cambios\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
   String get resetWarningWeb =>
-      'Cada botón mostrará una vista previa de sus cambios\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
   String get styling => 'Estilización';

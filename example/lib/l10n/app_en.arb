@@ -22,8 +22,8 @@
   "resetAllStyle": "Reset all style settings?",
   "settings": "Settings",
   "attention": "ATTENTION",
-  "resetWarning": "Each button will preview it's changes\nReload the page for your changes to take full effect!\nHave fun!",
-  "resetWarningWeb": "Each button will preview it's changes\nRestart the app for your changes to take full effect!\nHave fun!",
+  "resetWarning": "Each button will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
+  "resetWarningWeb": "Each button will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
   "styling": "Styling",
   "colors": "Colors",
   "images": "Images"

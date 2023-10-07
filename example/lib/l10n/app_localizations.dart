@@ -230,13 +230,13 @@ abstract class AppLocalizations {
   /// No description provided for @resetWarning.
   ///
   /// In en, this message translates to:
-  /// **'Each button will preview it\'s changes\nReload the page for your changes to take full effect!\nHave fun!'**
+  /// **'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!'**
   String get resetWarning;
 
   /// No description provided for @resetWarningWeb.
   ///
   /// In en, this message translates to:
-  /// **'Each button will preview it\'s changes\nRestart the app for your changes to take full effect!\nHave fun!'**
+  /// **'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
   String get resetWarningWeb;
 
   /// No description provided for @styling.
