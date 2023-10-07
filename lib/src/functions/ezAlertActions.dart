@@ -22,14 +22,14 @@ List<Widget>? ezMaterialActions({
     // Confirm
     TextButton(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUIPhrases.of(context)!.yes),
     ),
     EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
     // Deny
     TextButton(
       onPressed: onDeny,
-      child: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
+      child: Text(denyMsg ?? EFUIPhrases.of(context)!.no),
     ),
   ];
 }
@@ -52,7 +52,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILocalizations.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUIPhrases.of(context)!.yes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -60,7 +60,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg ?? EFUILocalizations.of(context)!.no),
+      child: Text(denyMsg ?? EFUIPhrases.of(context)!.no),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),

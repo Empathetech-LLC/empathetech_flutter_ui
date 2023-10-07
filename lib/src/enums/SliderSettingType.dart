@@ -21,15 +21,15 @@ enum SliderSettingType {
 String getSettingName(BuildContext context, SliderSettingType settingType) {
   switch (settingType) {
     case SliderSettingType.margin:
-      return EFUILocalizations.of(context)!.margin;
+      return EFUIPhrases.of(context)!.margin;
     case SliderSettingType.padding:
-      return EFUILocalizations.of(context)!.padding;
+      return EFUIPhrases.of(context)!.padding;
     case SliderSettingType.circleSize:
-      return EFUILocalizations.of(context)!.circleSize;
+      return EFUIPhrases.of(context)!.circleSize;
     case SliderSettingType.buttonSpacing:
-      return EFUILocalizations.of(context)!.buttonSpacing;
+      return EFUIPhrases.of(context)!.buttonSpacing;
     case SliderSettingType.textSpacing:
-      return EFUILocalizations.of(context)!.textSpacing;
+      return EFUIPhrases.of(context)!.textSpacing;
     default:
       throw Exception("Invalid SliderSettingType: $settingType");
   }

@@ -34,7 +34,8 @@ class EzSelectableText extends SelectableText {
   final String? semanticsLabel;
   final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
-  final void Function(TextSelection, SelectionChangedCause?)? onSelectionChanged;
+  final void Function(TextSelection, SelectionChangedCause?)?
+      onSelectionChanged;
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 

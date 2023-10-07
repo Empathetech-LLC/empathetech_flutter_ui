@@ -82,7 +82,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILocalizations.of(context)!.fromFile),
+        label: Text(EFUIPhrases.of(context)!.fromFile),
         icon: Icon(PlatformIcons(context).folder),
       ),
       EzSpacer(_buttonSpacer),
@@ -98,7 +98,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILocalizations.of(context)!.fromCamera),
+        label: Text(EFUIPhrases.of(context)!.fromCamera),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       EzSpacer(_buttonSpacer),
@@ -115,7 +115,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             pass: EzConfig.instance.defaults[widget.prefsKey],
           );
         },
-        label: Text(EFUILocalizations.of(context)!.resetIt),
+        label: Text(EFUIPhrases.of(context)!.resetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -128,11 +128,12 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () {
             _cleanup();
 
-            EzConfig.instance.preferences.setString(widget.prefsKey, noImageKey);
+            EzConfig.instance.preferences
+                .setString(widget.prefsKey, noImageKey);
 
             popScreen(context: context, pass: noImageKey);
           },
-          label: Text(EFUILocalizations.of(context)!.clearIt),
+          label: Text(EFUIPhrases.of(context)!.clearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -143,7 +144,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: EzSelectableText(
-          EFUILocalizations.of(context)!.imageSettingDialogTitle(widget.title),
+          EFUIPhrases.of(context)!.imageSettingDialogTitle(widget.title),
         ),
         content: EzScrollView(children: options),
       ),
@@ -156,7 +157,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILocalizations.of(context)!.imageSettingHint(widget.title),
+      hint: EFUIPhrases.of(context)!.imageSettingHint(widget.title),
       child: ExcludeSemantics(
         child: ElevatedButton(
           // On pressed -> choose image
@@ -172,7 +173,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzSelectableText(EFUILocalizations.of(context)!.creditTo),
+              title: EzSelectableText(EFUIPhrases.of(context)!.creditTo),
               content: EzSelectableText(widget.credits),
             ),
           ),
@@ -206,17 +207,22 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // user set a custom image
                           EzImage(
                               image: provideStoredImage(_updatedPath!),
-                              semanticLabel: widget.title + EFUILocalizations.of(context)!.image,
+                              semanticLabel:
+                                  widget.title + EFUIPhrases.of(context)!.image,
                             )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
-                              EzConfig.instance.prefs[widget.prefsKey] == noImageKey)
+                              EzConfig.instance.prefs[widget.prefsKey] ==
+                                  noImageKey)
                           ? // there is no current image
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored
                           EzImage(
-                              image: provideStoredImage(EzConfig.instance.prefs[widget.prefsKey]),
-                              semanticLabel: widget.title + EFUILocalizations.of(context)!.image,
+                              image: provideStoredImage(
+                                EzConfig.instance.prefs[widget.prefsKey],
+                              ),
+                              semanticLabel:
+                                  widget.title + EFUIPhrases.of(context)!.image,
                             ),
                 ),
               ),

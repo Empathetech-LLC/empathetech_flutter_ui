@@ -45,7 +45,8 @@ class _ColorSettingState extends State<EzColorSetting> {
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _diameter = EzConfig.instance.prefs[circleDiameterKey];
 
-  late final TextStyle? _labelStyle = Theme.of(context).dropdownMenuTheme.textStyle;
+  late final TextStyle? _labelStyle =
+      Theme.of(context).dropdownMenuTheme.textStyle;
 
   // Define button functions //
 
@@ -79,13 +80,14 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Find the recommended contrast color for the background //
       final String pathKey = widget.textBackgroundKey as String;
 
-      Color backgroundColor =
-          Color(EzConfig.instance.preferences.getInt(pathKey) ?? EzConfig.instance.prefs[pathKey]);
+      Color backgroundColor = Color(
+          EzConfig.instance.preferences.getInt(pathKey) ??
+              EzConfig.instance.prefs[pathKey]);
 
       int recommended = EzContrastColor(backgroundColor).value;
 
       // Define action button parameters //
-      final String denyMsg = EFUILocalizations.of(context)!.useCustom;
+      final String denyMsg = EFUIPhrases.of(context)!.useCustom;
 
       final void Function() onConfirm = () {
         EzConfig.instance.preferences.setInt(widget.toControl, recommended);
@@ -103,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzSelectableText(EFUILocalizations.of(context)!.useRecommended),
+          title: EzSelectableText(EFUIPhrases.of(context)!.useRecommended),
           content: Container(
             // Recommended color preview
             width: 75,
@@ -137,7 +139,8 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for confirming a reset to [widget.toControl]'s value in [empathetechConfig]
   /// A preview of the reset color is shown
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor = Color(EzConfig.instance.defaults[widget.toControl]);
+    final Color resetColor =
+        Color(EzConfig.instance.defaults[widget.toControl]);
 
     // Define action button parameters //
 
@@ -157,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzSelectableText(EFUILocalizations.of(context)!.resetTo),
+        title: EzSelectableText(EFUIPhrases.of(context)!.resetTo),
         content: Container(
           // Reset color preview
           width: 75,
@@ -197,7 +200,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: EFUILocalizations.of(context)!.colorSettingSemantics(widget.name),
+          hint: EFUIPhrases.of(context)!.colorSettingSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
@@ -213,7 +216,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                     backgroundColor: MaterialStatePropertyAll(currColor),
                     shape: MaterialStatePropertyAll(const CircleBorder()),
                     padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                    fixedSize: MaterialStatePropertyAll(Size(_diameter, _diameter)),
+                    fixedSize:
+                        MaterialStatePropertyAll(Size(_diameter, _diameter)),
                   ),
             ),
           ),

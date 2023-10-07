@@ -20,17 +20,22 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.colorSettings);
+    setPageTitle(
+      context: context,
+      title: AppLocalizations.of(context)!.colorSettings,
+    );
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILocalizations.of(context)!.light : EFUILocalizations.of(context)!.dark;
+      _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
 
   // Define local reset button's messages
-  late final String _resetTitle = AppLocalizations.of(context)!.resetAllColors(_themeProfile);
+  late final String _resetTitle =
+      AppLocalizations.of(context)!.resetAllColors(_themeProfile);
+
   late final String _resetMessage = kIsWeb
       ? AppLocalizations.of(context)!.resetAllWarningWeb
       : AppLocalizations.of(context)!.resetAllWarning;
@@ -49,7 +54,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzSelectableText(
-                    AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
+                    AppLocalizations.of(context)!
+                        .editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -131,13 +137,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(lightThemeColorKey);
-                      EzConfig.instance.preferences.remove(lightThemeTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(lightThemeTextColorKey);
                       EzConfig.instance.preferences.remove(lightPageColorKey);
-                      EzConfig.instance.preferences.remove(lightPageTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(lightPageTextColorKey);
                       EzConfig.instance.preferences.remove(lightButtonColorKey);
-                      EzConfig.instance.preferences.remove(lightButtonTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(lightButtonTextColorKey);
                       EzConfig.instance.preferences.remove(lightAccentColorKey);
-                      EzConfig.instance.preferences.remove(lightAccentTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(lightAccentTextColorKey);
 
                       popScreen(context: context, pass: true);
                     },
@@ -152,7 +162,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzSelectableText(
-                    AppLocalizations.of(context)!.editingThemeColors(_themeProfile),
+                    AppLocalizations.of(context)!
+                        .editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -234,13 +245,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(darkThemeColorKey);
-                      EzConfig.instance.preferences.remove(darkThemeTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(darkThemeTextColorKey);
                       EzConfig.instance.preferences.remove(darkPageColorKey);
-                      EzConfig.instance.preferences.remove(darkPageTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(darkPageTextColorKey);
                       EzConfig.instance.preferences.remove(darkButtonColorKey);
-                      EzConfig.instance.preferences.remove(darkButtonTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(darkButtonTextColorKey);
                       EzConfig.instance.preferences.remove(darkAccentColorKey);
-                      EzConfig.instance.preferences.remove(darkAccentTextColorKey);
+                      EzConfig.instance.preferences
+                          .remove(darkAccentTextColorKey);
 
                       popScreen(context: context, pass: true);
                     },

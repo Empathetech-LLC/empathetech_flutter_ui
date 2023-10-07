@@ -20,16 +20,19 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.imageSettings);
+    setPageTitle(
+        context: context, title: AppLocalizations.of(context)!.imageSettings);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILocalizations.of(context)!.light : EFUILocalizations.of(context)!.dark;
+      _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
 
-  late final String _resetTitle = AppLocalizations.of(context)!.resetAllImages(_themeProfile);
+  late final String _resetTitle =
+      AppLocalizations.of(context)!.resetAllImages(_themeProfile);
+
   late final String _resetMessage = kIsWeb
       ? AppLocalizations.of(context)!.resetAllWarningWeb
       : AppLocalizations.of(context)!.resetAllWarning;
@@ -69,7 +72,8 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           title: AppLocalizations.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: AppLocalizations.of(context)!.yourSourceCredit,
+                          credits:
+                              AppLocalizations.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -81,7 +85,8 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           title: AppLocalizations.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: AppLocalizations.of(context)!.yourSourceCredit,
+                          credits:
+                              AppLocalizations.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],

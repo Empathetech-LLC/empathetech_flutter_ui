@@ -19,7 +19,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.styleSettings);
+    setPageTitle(
+        context: context, title: AppLocalizations.of(context)!.styleSettings);
   }
 
   // Gather theme data //
@@ -47,7 +48,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: EFUILocalizations.of(context)!.margin,
+              title: EFUIPhrases.of(context)!.margin,
               min: 5.0,
               max: 50.0,
               steps: 18,
@@ -59,7 +60,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: EFUILocalizations.of(context)!.padding,
+              title: EFUIPhrases.of(context)!.padding,
               min: 0.0,
               max: 50.0,
               steps: 20,
@@ -71,7 +72,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: circleDiameterKey,
               type: SliderSettingType.circleSize,
-              title: EFUILocalizations.of(context)!.circleSize,
+              title: EFUIPhrases.of(context)!.circleSize,
               min: 30,
               max: 100,
               steps: 14,
@@ -83,7 +84,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: EFUILocalizations.of(context)!.buttonSpacing,
+              title: EFUIPhrases.of(context)!.buttonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -95,7 +96,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: EFUILocalizations.of(context)!.textSpacing,
+              title: EFUIPhrases.of(context)!.textSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,

@@ -22,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: AppLocalizations.of(context)!.settings);
+    setPageTitle(
+        context: context, title: AppLocalizations.of(context)!.settings);
   }
 
   // Gather theme data //

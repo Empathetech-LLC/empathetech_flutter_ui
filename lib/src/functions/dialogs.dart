@@ -20,7 +20,7 @@ Future<dynamic> logAlert({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzSelectableText(alert ?? EFUILocalizations.of(context)!.attention),
+      title: EzSelectableText(alert ?? EFUIPhrases.of(context)!.attention),
       content: EzSelectableText(message),
     ),
   );
@@ -40,7 +40,9 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzSelectableText(title ?? EFUILocalizations.of(context)!.pickAColor),
+      title: EzSelectableText(
+        title ?? EFUIPhrases.of(context)!.pickAColor,
+      ),
       content: ColorPicker(
         pickerColor: startColor,
         onColorChanged: onColorChange,
@@ -55,15 +57,15 @@ Future<dynamic> ezColorPicker({
         context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg ?? EFUILocalizations.of(context)!.apply,
-        denyMsg: denyMsg ?? EFUILocalizations.of(context)!.cancel,
+        confirmMsg: confirmMsg ?? EFUIPhrases.of(context)!.apply,
+        denyMsg: denyMsg ?? EFUIPhrases.of(context)!.cancel,
       ),
       cupertinoActions: ezCupertinoActions(
         context: context,
         onConfirm: onConfirm,
         onDeny: onDeny,
-        confirmMsg: confirmMsg ?? EFUILocalizations.of(context)!.apply,
-        denyMsg: denyMsg ?? EFUILocalizations.of(context)!.cancel,
+        confirmMsg: confirmMsg ?? EFUIPhrases.of(context)!.apply,
+        denyMsg: denyMsg ?? EFUIPhrases.of(context)!.cancel,
         confirmIsDestructive: true,
       ),
       needsClose: false,

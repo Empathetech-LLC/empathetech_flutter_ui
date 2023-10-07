@@ -48,7 +48,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: Text(EFUILocalizations.of(context)!.close),
+      child: Text(EFUIPhrases.of(context)!.close),
     );
 
     return PlatformAlertDialog(
@@ -59,10 +59,12 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         title: title,
         // Bottom titlePadding comes from vertical contentPadding
-        titlePadding: EdgeInsets.only(top: padding, left: padding, right: padding),
+        titlePadding:
+            EdgeInsets.only(top: padding, left: padding, right: padding),
 
         content: content,
-        contentPadding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
+        contentPadding:
+            EdgeInsets.symmetric(vertical: padding, horizontal: padding),
         actions: materialActions,
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(

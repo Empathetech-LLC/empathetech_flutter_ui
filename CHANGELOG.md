@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.0.1] - 2023-10-XX
+## [4.1.0] - 2023-10-XX
 ### Updated
 - Create git release section of Jenkinsfile
+- Reverted line length
+- Fixed README links
+- EFUIPhrases to EFUIPhrases and AppLocalizations to Phrases
+  - Minor breaking change
 
 ## [4.0.0] - 2023-10-07
 ### Updated

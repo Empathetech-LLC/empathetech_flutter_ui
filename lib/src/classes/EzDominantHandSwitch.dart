@@ -26,11 +26,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(EFUILocalizations.of(context)!.right),
+        child: Text(EFUIPhrases.of(context)!.right),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(EFUILocalizations.of(context)!.left),
+        child: Text(EFUIPhrases.of(context)!.left),
         value: Hand.left,
       ),
     ];
@@ -40,12 +40,15 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      EzSelectableText(EFUILocalizations.of(context)!.dominantHand, style: _style),
+      EzSelectableText(
+        EFUIPhrases.of(context)!.dominantHand,
+        style: _style,
+      ),
       EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button
       Semantics(
-        hint: EFUILocalizations.of(context)!.handSettingSemantics,
+        hint: EFUIPhrases.of(context)!.handSettingSemantics,
         child: DropdownButton<Hand>(
           value: currSide,
           items: items,
@@ -77,7 +80,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: (currSide == Hand.right) ? _children : _children.reversed.toList(),
+      children:
+          (currSide == Hand.right) ? _children : _children.reversed.toList(),
     );
   }
 }

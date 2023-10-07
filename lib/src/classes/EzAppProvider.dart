@@ -26,7 +26,8 @@ class EzAppProvider extends StatelessWidget {
 
   // Gather default (optional) theme data //
 
-  late final bool? _savedLight = EzConfig.instance.preferences.getBool(isLightKey);
+  late final bool? _savedLight =
+      EzConfig.instance.preferences.getBool(isLightKey);
 
   late final ThemeMode _initialTheme = (_savedLight == null)
       ? ThemeMode.system
@@ -54,9 +55,12 @@ class EzAppProvider extends StatelessWidget {
                 themeMode: _initialTheme,
                 materialLightTheme: _materialLight,
                 materialDarkTheme: _materialDark,
-                cupertinoLightTheme:
-                    MaterialBasedCupertinoThemeData(materialTheme: _materialLight),
-                cupertinoDarkTheme: MaterialBasedCupertinoThemeData(materialTheme: _materialDark),
+                cupertinoLightTheme: MaterialBasedCupertinoThemeData(
+                  materialTheme: _materialLight,
+                ),
+                cupertinoDarkTheme: MaterialBasedCupertinoThemeData(
+                  materialTheme: _materialDark,
+                ),
                 matchCupertinoSystemChromeBrightness: true,
               ),
       initialPlatform: initialPlatform,

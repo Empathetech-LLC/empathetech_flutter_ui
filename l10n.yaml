@@ -1,8 +1,8 @@
 arb-dir: lib/src/l10n
 output-dir: lib/src/l10n
 template-arb-file: efui_en.arb
-output-localization-file: efui_localizations.dart
-output-class: EFUILocalizations
+output-localization-file: efui_phrases.dart
+output-class: EFUIPhrases
 use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/src/l10n
 synthetic-package: false

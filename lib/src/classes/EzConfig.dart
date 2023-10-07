@@ -67,7 +67,8 @@ class EzConfig {
       Map<String, dynamic> _prefs = new Map.from(_defaults);
 
       // Find the keys that users have overwritten
-      List<String> overwritten = _prefs.keys.toSet().intersection(preferences.getKeys()).toList();
+      List<String> overwritten =
+          _prefs.keys.toSet().intersection(preferences.getKeys()).toList();
 
       // Get the updated values
       overwritten.forEach((key) {
@@ -100,7 +101,8 @@ class EzConfig {
       // Build EzConfig.hand //
 
       bool? isRight = preferences.getBool(isRightKey);
-      final Hand _dominantHand = (isRight == null || isRight == true) ? Hand.right : Hand.left;
+      final Hand _dominantHand =
+          (isRight == null || isRight == true) ? Hand.right : Hand.left;
 
       // Build the EzConfig instance //
 

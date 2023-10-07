@@ -1,8 +1,8 @@
-import 'efui_localizations.dart';
+import 'efui_phrases.dart';
 
 /// The translations for English (`en`).
-class EFUILocalizationsEn extends EFUILocalizations {
-  EFUILocalizationsEn([String locale = 'en']) : super(locale);
+class EFUIPhrasesEn extends EFUIPhrases {
+  EFUIPhrasesEn([String locale = 'en']) : super(locale);
 
   @override
   String get close => 'Close';
