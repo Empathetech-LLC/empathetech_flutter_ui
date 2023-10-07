@@ -228,22 +228,45 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Platform availability
 
-![Home page on Android](./assets/images/home-android.png)![Home page on iOS](./assets/images/home-ios.png)
-![Home page on Linux](./assets/images/home-linux.png)![Home page on macOS](./assets/images/home-macos.png)![Home page on Windows](./assets/images/home-windows.png)
-![Home page on Web](./assets/images/home-web.png)
+<img src="./assets/images/home-android.png" alt="Home page on Android" width="250"/>
+<img src="./assets/images/home-ios.png" alt="Home page on iOS" width="250"/>
+<br>
+<img src="./assets/images/home-linux.png" alt="Home page on Linux" width="500"/>
+<img src="./assets/images/home-macos.png" alt="Home page on macOS" width="500"/>
+<img src="./assets/images/home-windows.png" alt="Home page on Windows" width="500"/>
+<br>
+<img src="./assets/images/home-web.png" alt="Home page on Web" width="500"/>
 
 ### Screen reader compliance
 
-Video
+<video controls width="350">
+    <source src="./assets/videos/es-voice-over.mp4" type="video/mp4">
+    Spanish iOS Voice Over demo not supported by your browser.
+</video>
+<video controls width="350">
+    <source src="./assets/videos/en-voice-over.mp4" type="video/mp4">
+    English iOS Voice Over demo not supported by your browser.
+</video>
 
 ### User customization
 
-![Core settings example](./assets/images/home-ios.png)![Style settings example](./assets/images/style-settings-ios.png)![Color settings example](./assets/images/color-settings-ios.png)![Image settings example](./assets/images/image-settings-ios.png)
-![Font picker preview](./assets/images/font-picker-ios.png)![Margin setting preview](./assets/images/margin-setting-ios.png)![Cicle setting preview](./assets/images/circle-setting-ios.png)![Color picker preview](./assets/images/color-picker-ios.png)![Update image preview](./assets/images/update-image-ios.png)
+<img src="./assets/images/home-ios.png" alt="Core settings example" width="250"/>
+<img src="./assets/images/style-settings-ios.png" alt="Style settings example" width="250"/>
+<img src="./assets/images/color-settings-ios.png" alt="Color settings example" width="250"/>
+<img src="./assets/images/image-settings-ios.png" alt="Image settings example" width="250"/>
+<br>
+<img src="./assets/images/font-picker-ios.png" alt="Font picker preview" width="250"/>
+<img src="./assets/images/margin-setting-ios.png" alt="Margin setting preview" width="250"/>
+<img src="./assets/images/circle-setting-ios.png" alt="Circle setting preview" width="250"/>
+<img src="./assets/images/color-picker-ios.png" alt="Color picker preview" width="250"/>
+<img src="./assets/images/update-image-ios.png" alt="Update image preview" width="250"/>
 
 ### Internationalization
 
-![Core settings in Spanish](./assets/images/es-home-ios.png)![Style settings in Spanish](./assets/images/es-style-settings-ios.png)![Color settings in Spanish](./assets/images/es-color-settings-ios.png)![Image settings in Spanish](./assets/images/es-image-settings-ios.png)
+<img src="./assets/images/es-home-ios.png" alt="Core settings in Spanish" width="250"/>
+<img src="./assets/images/es-style-settings-ios.png" alt="Style settings in Spanish" width="250"/>
+<img src="./assets/images/es-color-settings-ios.png" alt="Color settings in Spanish" width="250"/>
+<img src="./assets/images/es-image-settings-ios.png" alt="Image settings in Spanish" width="250"/>
 
 ### Responsive design
 
