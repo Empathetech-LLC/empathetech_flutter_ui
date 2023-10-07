@@ -1,4 +1,4 @@
-import 'app_phrases.dart';
+import 'phrases.dart';
 
 /// The translations for English (`en`).
 class PhrasesEn extends Phrases {

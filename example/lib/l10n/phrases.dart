@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_phrases_en.dart' deferred as app_phrases_en;
-import 'app_phrases_es.dart' deferred as app_phrases_es;
+import 'phrases_en.dart' deferred as phrases_en;
+import 'phrases_es.dart' deferred as phrases_es;
 
 /// Callers can lookup localized strings with an instance of Phrases
 /// returned by `Phrases.of(context)`.
@@ -15,7 +15,7 @@ import 'app_phrases_es.dart' deferred as app_phrases_es;
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_phrases.dart';
+/// import 'l10n/phrases.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: Phrases.localizationsDelegates,
@@ -277,13 +277,13 @@ Future<Phrases> lookupPhrases(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return app_phrases_en
+      return phrases_en
           .loadLibrary()
-          .then((dynamic _) => app_phrases_en.PhrasesEn());
+          .then((dynamic _) => phrases_en.PhrasesEn());
     case 'es':
-      return app_phrases_es
+      return phrases_es
           .loadLibrary()
-          .then((dynamic _) => app_phrases_es.PhrasesEs());
+          .then((dynamic _) => phrases_es.PhrasesEs());
   }
 
   throw FlutterError(
