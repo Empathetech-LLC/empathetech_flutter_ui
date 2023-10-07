@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.1.1] - 2023-10-08
+### Updated
+- Asset file extensions
+  - [It worked on my machine](https://discussions.apple.com/thread/251191099)
+
 ## [4.1.0] - 2023-10-07
 ### Updated
 - `Create git release` section of Jenkinsfile
