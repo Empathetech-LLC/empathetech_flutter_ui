@@ -1,6 +1,6 @@
 arb-dir: lib/src/l10n
 output-dir: lib/src/l10n
-template-arb-file: efui_en.arb
+template-arb-file: efui_phrases_en.arb
 output-localization-file: efui_phrases.dart
 output-class: EFUIPhrases
 use-deferred-loading: true

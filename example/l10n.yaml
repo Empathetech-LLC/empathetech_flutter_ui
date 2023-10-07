@@ -1,7 +1,7 @@
 arb-dir: lib/l10n
 output-dir: lib/l10n
-template-arb-file: app_en.arb
-output-localization-file: app_phrases.dart
+template-arb-file: phrases_en.arb
+output-localization-file: phrases.dart
 output-class: Phrases
 use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/l10n

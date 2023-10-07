@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Asset file extensions
   - [It worked on my machine](https://discussions.apple.com/thread/251191099)
+- l10n file names for consistency
+  - NOT a breaking change
 
 ## [4.1.0] - 2023-10-07
 ### Updated
