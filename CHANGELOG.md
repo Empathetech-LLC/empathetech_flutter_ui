@@ -5,27 +5,29 @@ All notable changes to this project will be documented in this file.
 ## [4.0.0] - 2023-10-XX
 ### Updated
 - File structure
-- Split Removed EzApp and made EzAppProvider
+- Removed EzApp and made EzAppProvider
 - Split enums into their own folder
 - Pre-existing release check in the Jenkinsfile
 - README
+  - Alot
 - Renamed EzDialog to EzAlertDialog
   - Removed EzYesNo and created ezAlertActions
 - Project line length to 99
-- Renamed ParagraphSpacing to TextSpacing
 - Semantics
-- Lots of references to "default" were updated to "empathetech"
+  - Alot
+- Many references to "default" were updated to "empathetech"
 - Parameters (minor breaks)
-  - Updated EzColorSetting.message to EzColorSetting.name
-  - Updated BackgroundColor -> PageColor
+  - Renamed EzColorSetting.message to EzColorSetting.name
+  - Renamed BackgroundColor -> PageColor
+  - Renamed ParagraphSpacing to TextSpacing
 
 ### Added
 - Example app
+- Español (and localizations infrastructure)
 - More comments
-- EzBackAction class
+- EzBackAction
 - EzLayoutSwitch
-- EzLocalizations
-  - The example app is en español!
+- EzResetButton
 
 ### Removed
 - Unused and/or unverified classes
