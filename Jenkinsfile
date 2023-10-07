@@ -152,7 +152,6 @@ node('00-flutter') {
             sh "git checkout ${baseBranch}"
 
             // Fail if a tag already exists
-            // This returns a failure which stops the pipeline. But, I consider that failure expected and successful. FIX IT!
             def releaseCheck = sh(script: 'git describe --exact-match HEAD 2>&1', returnStdout: true).trim()
             if (!releaseCheck.contains('no tag')) {
               error("ERROR: Current commit already has a tag")
