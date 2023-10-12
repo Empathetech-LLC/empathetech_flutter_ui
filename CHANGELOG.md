@@ -2,10 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.1.2] - 2023-10-XX
+## [4.2.0] - 2023-10-XX
 ### Updated
 - README asset organization
 - Moved consts/credits to consts/empathetechConfig
+
+### Removed
+- copy to clipboard function && flutter toast package
+  - Minor breaking change
 
 ## [4.1.1] - 2023-10-08
 ### Updated
