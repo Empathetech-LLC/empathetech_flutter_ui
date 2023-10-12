@@ -36,7 +36,6 @@ export 'src/classes/EzWarning.dart';
 export 'src/classes/EzWebLink.dart';
 
 // Constants
-export 'src/consts/credits.dart';
 export 'src/consts/empathetechConfig.dart';
 export 'src/consts/googleFonts.dart';
 export 'src/consts/sharedPreferences.dart';
