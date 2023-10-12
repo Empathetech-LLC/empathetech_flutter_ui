@@ -13,7 +13,7 @@ EFUI provides a starter kit for every aspect of digital accessibility:
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
   - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](https://www.linkedin.com/in/mauro-ramirez-rivas)
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
   - Checkout the [demo](#responsive-design) to see it in action
