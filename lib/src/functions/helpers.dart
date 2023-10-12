@@ -3,11 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!
@@ -52,17 +49,4 @@ void setPageTitle({
 }) {
   SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(label: title));
-}
-
-/// Copy [string] to [ClipboardData] and show a [Fluttertoast] for the user
-Future<bool?> copyToClipboard(
-    {required BuildContext context, required String string}) async {
-  await Clipboard.setData(ClipboardData(text: string));
-  return Fluttertoast.showToast(
-    msg: EFUIPhrases.of(context)!.clipCopy,
-    toastLength: Toast.LENGTH_SHORT,
-    backgroundColor: Colors.black,
-    fontSize: 18,
-    textColor: Colors.white,
-  );
 }
