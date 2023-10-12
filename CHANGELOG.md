@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [4.1.2] - 2023-10-XX
 ### Updated
 - README asset organization
+- Moved consts/credits to consts/empathetechConfig
 
 ## [4.1.1] - 2023-10-08
 ### Updated
