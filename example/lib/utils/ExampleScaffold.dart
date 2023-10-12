@@ -25,8 +25,8 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define AppBar widget(s) //
 
-    final Widget appBar = EzSelectableText.rich(
-      EzLink(
+    final Widget appBar = EzRichText(
+      textSpan: EzLink(
         text: 'EFUI',
         style: titleStyle,
         action: () => context.goNamed(homeRoute),

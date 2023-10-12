@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - README asset organization
 - Moved consts/credits to consts/empathetechConfig
+- EzSeletableText -> EzRichText
+  - minor breaking change
 
 ### Removed
 - copy to clipboard function && flutter toast package

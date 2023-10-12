@@ -52,8 +52,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               child: EzScrollView(
                 children: [
                   // Editing reminders
-                  EzSelectableText(
-                    Phrases.of(context)!.editingThemeColors(_themeProfile),
+                  EzRichText(
+                    text:
+                        Phrases.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -159,8 +160,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               child: EzScrollView(
                 children: [
                   // Editing reminders
-                  EzSelectableText(
-                    Phrases.of(context)!.editingThemeColors(_themeProfile),
+                  EzRichText(
+                    text:
+                        Phrases.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
