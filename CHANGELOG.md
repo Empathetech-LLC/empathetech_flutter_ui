@@ -6,11 +6,13 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - README asset organization
 - Moved consts/credits to consts/empathetechConfig
-- EzSeletableText -> EzRichText
-  - minor breaking change
+- Updated all text Widgets
+  - EzSelectableText -> EzText, EzRichText, EzTextBlock
+  - Updated params for EzLink and EzWebLink
+  - All have minor breaking changes
 
 ### Removed
-- copy to clipboard function && flutter toast package
+- Copy to clipboard function && flutter toast package
   - Minor breaking change
 
 ## [4.1.1] - 2023-10-08
