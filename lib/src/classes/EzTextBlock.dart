@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
 
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
