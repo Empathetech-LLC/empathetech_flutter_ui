@@ -143,8 +143,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzRichText(
-          text: EFUIPhrases.of(context)!.imageSettingDialogTitle(widget.title),
+        title: EzText(
+          EFUIPhrases.of(context)!.imageSettingDialogTitle(widget.title),
         ),
         content: EzScrollView(children: options),
       ),
@@ -173,8 +173,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzRichText(text: EFUIPhrases.of(context)!.creditTo),
-              content: EzRichText(text: widget.credits),
+              title: EzText(EFUIPhrases.of(context)!.creditTo),
+              content: EzText(widget.credits),
             ),
           ),
 

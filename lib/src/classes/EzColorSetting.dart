@@ -105,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzRichText(text: EFUIPhrases.of(context)!.useRecommended),
+          title: EzText(EFUIPhrases.of(context)!.useRecommended),
           content: Container(
             // Recommended color preview
             width: 75,
@@ -160,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzRichText(text: EFUIPhrases.of(context)!.resetTo),
+        title: EzText(EFUIPhrases.of(context)!.resetTo),
         content: Container(
           // Reset color preview
           width: 75,
@@ -194,7 +194,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        EzRichText(text: widget.name, style: _labelStyle),
+        EzText(widget.name, style: _labelStyle),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button

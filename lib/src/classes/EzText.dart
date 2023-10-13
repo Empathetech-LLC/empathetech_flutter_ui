@@ -3,14 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class EzRichTextBlock extends StatelessWidget {
-  final List<InlineSpan> children;
+class EzText extends SelectableText {
+  final String text;
   final Key? key;
   final FocusNode? focusNode;
   final TextStyle? style;
@@ -33,6 +31,7 @@ class EzRichTextBlock extends StatelessWidget {
   final TextSelectionControls? selectionControls;
   final void Function()? onTap;
   final ScrollPhysics scrollPhysics;
+  final String? semanticsLabel;
   final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
   final void Function(TextSelection, SelectionChangedCause?)?
@@ -40,10 +39,9 @@ class EzRichTextBlock extends StatelessWidget {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// [SelectableText.rich] wrapper with customized defaults and preconfigured [Semantics]
-  /// Only accepts a [List] of [InlineSpan] to differentiate from [EzRichText]
-  const EzRichTextBlock(
-    this.children, {
+  /// [SelectableText] wrapper with customized defaults
+  const EzText(
+    this.text, {
     this.key,
     this.focusNode,
     this.style,
@@ -66,43 +64,39 @@ class EzRichTextBlock extends StatelessWidget {
     this.selectionControls,
     this.onTap,
     this.scrollPhysics = const NeverScrollableScrollPhysics(),
+    this.semanticsLabel,
     this.textHeightBehavior,
     this.textWidthBasis,
     this.onSelectionChanged,
     this.contextMenuBuilder,
     this.magnifierConfiguration,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SelectableText.rich(
-      TextSpan(children: children),
-      key: key,
-      focusNode: focusNode,
-      style: style,
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
-      showCursor: showCursor,
-      autofocus: autofocus,
-      minLines: minLines,
-      maxLines: maxLines,
-      cursorWidth: cursorWidth,
-      cursorHeight: cursorHeight,
-      cursorRadius: cursorRadius,
-      cursorColor: cursorColor,
-      selectionHeightStyle: selectionHeightStyle,
-      dragStartBehavior: dragStartBehavior,
-      enableInteractiveSelection: enableInteractiveSelection,
-      selectionControls: selectionControls,
-      onTap: onTap,
-      scrollPhysics: scrollPhysics,
-      semanticsLabel: 'FIX ME',
-      textHeightBehavior: textHeightBehavior,
-      textWidthBasis: textWidthBasis,
-      onSelectionChanged: onSelectionChanged,
-      magnifierConfiguration: magnifierConfiguration,
-    );
-  }
+  }) : super(
+          text,
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          selectionHeightStyle: selectionHeightStyle,
+          dragStartBehavior: dragStartBehavior,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
+        );
 }

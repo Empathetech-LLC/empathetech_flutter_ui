@@ -128,8 +128,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Label
-              EzRichText(
-                text: EFUIPhrases.of(context)!.currently +
+              EzText(
+                EFUIPhrases.of(context)!.currently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
               ),
@@ -181,15 +181,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Thing 1
-              EzRichText(
-                  text: EFUIPhrases.of(context)!.currently +
+              EzText(
+                  EFUIPhrases.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: currValue),
 
               // Thing 2
-              EzRichText(
-                  text: EFUIPhrases.of(context)!.currently +
+              EzText(
+                  EFUIPhrases.of(context)!.currently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: _buttonSpacer),
@@ -222,7 +222,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               EzSpacer(_margin),
-              EzRichText(text: widget.title, style: style),
+              EzText(widget.title, style: style),
               ..._buildPreview(context, style),
             ],
           ),

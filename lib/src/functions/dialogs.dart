@@ -20,8 +20,8 @@ Future<dynamic> logAlert({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzRichText(text: alert ?? EFUIPhrases.of(context)!.attention),
-      content: EzRichText(text: message),
+      title: EzText(alert ?? EFUIPhrases.of(context)!.attention),
+      content: EzText(message),
     ),
   );
 }
@@ -40,8 +40,8 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzRichText(
-        text: title ?? EFUIPhrases.of(context)!.pickAColor,
+      title: EzText(
+        title ?? EFUIPhrases.of(context)!.pickAColor,
       ),
       content: ColorPicker(
         pickerColor: startColor,

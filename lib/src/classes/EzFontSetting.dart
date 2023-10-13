@@ -59,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzRichText(text: EFUIPhrases.of(context)!.chooseFont),
+        title: EzText(EFUIPhrases.of(context)!.chooseFont),
         content: EzScrollView(children: buttons),
       ),
     );

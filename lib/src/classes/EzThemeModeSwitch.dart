@@ -48,8 +48,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        EzRichText(
-          text: EFUIPhrases.of(context)!.themeMode,
+        EzText(
+          EFUIPhrases.of(context)!.themeMode,
           style: style,
         ),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),

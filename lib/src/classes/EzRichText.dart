@@ -7,9 +7,8 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class EzRichText extends StatelessWidget {
-  final String? text;
-  final TextSpan? textSpan;
+class EzRichText extends SelectableText {
+  final TextSpan textSpan;
   final Key? key;
   final FocusNode? focusNode;
   final TextStyle? style;
@@ -40,12 +39,11 @@ class EzRichText extends StatelessWidget {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// [SelectableText] wrapper with customized defaults
+  /// [SelectableText.rich] wrapper with customized defaults
   /// Takes in either [text] (originally [SelectableText.data])
   /// or [textSpan] for a [SelectableText.rich] Widget
-  const EzRichText({
-    this.text,
-    this.textSpan,
+  const EzRichText(
+    this.textSpan, {
     this.key,
     this.focusNode,
     this.style,
@@ -74,72 +72,33 @@ class EzRichText extends StatelessWidget {
     this.onSelectionChanged,
     this.contextMenuBuilder,
     this.magnifierConfiguration,
-  }) : assert(
-          (text != null || textSpan != null) &&
-              !(text != null && textSpan != null),
-          'Either text or textSpan must be provided, but not both.',
+  }) : super.rich(
+          textSpan,
+          key: key,
+          focusNode: focusNode,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          textScaleFactor: textScaleFactor,
+          showCursor: showCursor,
+          autofocus: autofocus,
+          minLines: minLines,
+          maxLines: maxLines,
+          cursorWidth: cursorWidth,
+          cursorHeight: cursorHeight,
+          cursorRadius: cursorRadius,
+          cursorColor: cursorColor,
+          selectionHeightStyle: selectionHeightStyle,
+          dragStartBehavior: dragStartBehavior,
+          enableInteractiveSelection: enableInteractiveSelection,
+          selectionControls: selectionControls,
+          onTap: onTap,
+          scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
+          textHeightBehavior: textHeightBehavior,
+          textWidthBasis: textWidthBasis,
+          onSelectionChanged: onSelectionChanged,
+          magnifierConfiguration: magnifierConfiguration,
         );
-
-  @override
-  Widget build(BuildContext context) {
-    return (text == null)
-        ? SelectableText.rich(
-            textSpan!,
-            key: key,
-            focusNode: focusNode,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            textScaleFactor: textScaleFactor,
-            showCursor: showCursor,
-            autofocus: autofocus,
-            minLines: minLines,
-            maxLines: maxLines,
-            cursorWidth: cursorWidth,
-            cursorHeight: cursorHeight,
-            cursorRadius: cursorRadius,
-            cursorColor: cursorColor,
-            selectionHeightStyle: selectionHeightStyle,
-            dragStartBehavior: dragStartBehavior,
-            enableInteractiveSelection: enableInteractiveSelection,
-            selectionControls: selectionControls,
-            onTap: onTap,
-            scrollPhysics: scrollPhysics,
-            semanticsLabel: semanticsLabel,
-            textHeightBehavior: textHeightBehavior,
-            textWidthBasis: textWidthBasis,
-            onSelectionChanged: onSelectionChanged,
-            magnifierConfiguration: magnifierConfiguration,
-          )
-        : SelectableText(
-            text!,
-            key: key,
-            focusNode: focusNode,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            textScaleFactor: textScaleFactor,
-            showCursor: showCursor,
-            autofocus: autofocus,
-            minLines: minLines,
-            maxLines: maxLines,
-            cursorWidth: cursorWidth,
-            cursorHeight: cursorHeight,
-            cursorRadius: cursorRadius,
-            cursorColor: cursorColor,
-            selectionHeightStyle: selectionHeightStyle,
-            dragStartBehavior: dragStartBehavior,
-            enableInteractiveSelection: enableInteractiveSelection,
-            selectionControls: selectionControls,
-            onTap: onTap,
-            scrollPhysics: scrollPhysics,
-            semanticsLabel: semanticsLabel,
-            textHeightBehavior: textHeightBehavior,
-            textWidthBasis: textWidthBasis,
-            onSelectionChanged: onSelectionChanged,
-            magnifierConfiguration: magnifierConfiguration,
-          );
-  }
 }
