@@ -75,12 +75,12 @@ class EzTextBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextSpan happyFamily = TextSpan(children: children);
-
     return Semantics(
-      label: happyFamily.toPlainText(),
+      label: children
+          .map((child) => child is TextSpan ? child.text : '')
+          .join(" "),
       child: SelectableText.rich(
-        happyFamily,
+        TextSpan(children: children),
         key: key,
         focusNode: focusNode,
         style: style,
