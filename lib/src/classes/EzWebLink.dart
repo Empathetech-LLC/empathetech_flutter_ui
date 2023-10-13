@@ -23,16 +23,12 @@ class EzWebLink extends TextSpan {
   /// Where does this link go?
   final String? semanticsLabel;
 
-  /// Creates a [TextSpan] with an external link via [TapGestureRecognizer] && [launchUrl]
-  /// Requires a [semanticsLabel] for screen readers
+  /// [TextSpan] wrapper that creates an external link to [url]
+  /// Uses [launchUrl] with a [TapGestureRecognizer]
+  /// Requires [semanticsLabel] for screen readers
   /// See [EzLink] for making internal links
-  ///
-  /// --- WARNING! ---
-  /// Unfortunately, the context (right-click) menu will not work as expected here
-  /// Current theory: the [TextSpan] clobbers it, but...
-  /// Empathetech chose to prioritize selectable text >> context menus
-  EzWebLink({
-    required this.text,
+  EzWebLink(
+    this.text, {
     required this.url,
     this.style,
     required this.semanticsLabel,
