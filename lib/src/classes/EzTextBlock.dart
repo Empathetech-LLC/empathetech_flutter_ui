@@ -9,7 +9,7 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class EzRichTextBlock extends StatelessWidget {
+class EzTextBlock extends StatelessWidget {
   final List<InlineSpan> children;
   final Key? key;
   final FocusNode? focusNode;
@@ -42,7 +42,7 @@ class EzRichTextBlock extends StatelessWidget {
 
   /// [SelectableText.rich] wrapper with customized defaults and preconfigured [Semantics]
   /// Only accepts a [List] of [InlineSpan] to differentiate from [EzRichText]
-  const EzRichTextBlock(
+  const EzTextBlock(
     this.children, {
     this.key,
     this.focusNode,
