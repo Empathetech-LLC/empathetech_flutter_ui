@@ -42,6 +42,10 @@ class EzTextBlock extends StatelessWidget {
 
   /// [SelectableText.rich] wrapper with customized defaults and preconfigured [Semantics]
   /// Only accepts a [List] of [InlineSpan] to differentiate from [EzRichText]
+  /// For proper [Semantics] behavior, please include
+  ///   semanticsLabel: null,
+  ///   spellOut: false,
+  /// for all plain text [InlineSpan]
   const EzTextBlock(
     this.children, {
     this.key,
