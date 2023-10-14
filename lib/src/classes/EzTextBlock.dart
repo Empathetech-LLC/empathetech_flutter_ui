@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
-
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -41,11 +39,7 @@ class EzTextBlock extends StatelessWidget {
   final TextMagnifierConfiguration? magnifierConfiguration;
 
   /// [SelectableText.rich] wrapper with customized defaults and preconfigured [Semantics]
-  /// Only accepts a [List] of [InlineSpan] to differentiate from [EzRichText]
-  /// For proper [Semantics] behavior, please include
-  ///   semanticsLabel: null,
-  ///   spellOut: false,
-  /// for all plain text [InlineSpan]
+  /// For ideal behavior, please provide [EzPlainText]s rather than [TextSpan]s
   const EzTextBlock(
     this.children, {
     this.key,
@@ -77,12 +71,29 @@ class EzTextBlock extends StatelessWidget {
     this.magnifierConfiguration,
   });
 
+  String _buildSemantics() {
+    StringBuffer message = StringBuffer("");
+
+    for (InlineSpan child in children) {
+      switch (child.runtimeType) {
+        case TextSpan:
+          message.writeAll([(child as TextSpan).text, " "]);
+          break;
+        case EzPlainText:
+          message.writeAll([(child as EzPlainText).text, " "]);
+          break;
+        default:
+          break;
+      }
+    }
+
+    return message.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: children
-          .map((child) => child is TextSpan ? child.text : '')
-          .join(" "),
+      label: _buildSemantics(),
       child: SelectableText.rich(
         TextSpan(children: children),
         key: key,
@@ -114,4 +125,24 @@ class EzTextBlock extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Custom [WidgetSpan] to pair with [EzTextBlock]
+/// Helps automtically configure good [Semantics]
+class EzPlainText extends WidgetSpan {
+  final String text;
+  final TextStyle? style;
+  final PlaceholderAlignment alignment;
+  final TextBaseline? baseline;
+
+  EzPlainText(
+    this.text, {
+    this.style,
+    this.alignment = PlaceholderAlignment.bottom,
+    this.baseline,
+  }) : super(
+          child: ExcludeSemantics(child: Text(text, style: style)),
+          alignment: alignment,
+          baseline: baseline,
+        );
 }
