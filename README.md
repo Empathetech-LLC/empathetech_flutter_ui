@@ -221,7 +221,7 @@ By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) 
 
 Enjoy!
 
-There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRowCol.dart), [EzLayoutSwitch](./lib/src/classes/EzLayoutSwitch.dart), and [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
+There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRowCol.dart), [EzSwapScaffold](./lib/src/classes/EzSwapScaffold.dart), and [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
 
 # Demo
 
