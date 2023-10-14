@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +143,7 @@ class EzPlainText extends WidgetSpan {
     this.alignment = PlaceholderAlignment.bottom,
     this.baseline,
   }) : super(
-          child: ExcludeSemantics(child: Text(text, style: style)),
+          child: ExcludeSemantics(child: EzText(text, style: style)),
           alignment: alignment,
           baseline: baseline,
         );
