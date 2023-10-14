@@ -17,9 +17,7 @@ export 'src/classes/EzDominantHandSwitch.dart';
 export 'src/classes/EzFontSetting.dart';
 export 'src/classes/EzImage.dart';
 export 'src/classes/EzImageSetting.dart';
-export 'src/classes/EzLink.dart';
 export 'src/classes/EzResetButton.dart';
-export 'src/classes/EzRichText.dart';
 export 'src/classes/EzRow.dart';
 export 'src/classes/EzRowCol.dart';
 export 'src/classes/EzScreen.dart';
@@ -28,14 +26,12 @@ export 'src/classes/EzSliderSetting.dart';
 export 'src/classes/EzSpacer.dart';
 export 'src/classes/EzSwapScaffold.dart';
 export 'src/classes/EzText.dart';
-export 'src/classes/EzTextBlock.dart';
 export 'src/classes/EzTextStyle.dart';
 export 'src/classes/EzTextTheme.dart';
 export 'src/classes/EzThemeModeSwitch.dart';
 export 'src/classes/EzTransitions.dart';
 export 'src/classes/EzVideoPlayer.dart';
 export 'src/classes/EzWarning.dart';
-export 'src/classes/EzWebLink.dart';
 
 // Constants
 export 'src/consts/empathetechConfig.dart';

@@ -221,7 +221,17 @@ By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) 
 
 Enjoy!
 
-There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRowCol.dart), [EzSwapScaffold](./lib/src/classes/EzSwapScaffold.dart), and [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
+EFUI's platform availability and user customization is "set it and forget it". But, as you grow your apps, the other three pillars require continuous development.
+
+Thankfully, EFUI's got you covered there too!
+
+The library is full of custom widgets to aid in developing responsive and screen readable UIs, like...
+* [EzSwapScaffold](./lib/src/classes/EzSwapScaffold.dart): Enalbes live switches between layouts based on available space
+* [EzRowCol](./lib/src/classes/EzRowCol.dart): Enables live switches between horizontal and vertical layouts; uses same trigger as EzSwapScaffold
+* [EzText](./lib/src/classes/EzText.dart): A series of wrapper classes with custom semantics handlers
+* [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart): A highly customizable video player
+
+and even more! We'll let you
 
 # Demo
 
