@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-// App-wide //
+// App-wide SharedPreferences keys //
 
 const String homeRoute = '/';
 
@@ -22,7 +22,7 @@ const String textSpacingKey = 'textSpacing';
 
 const String circleDiameterKey = 'circleDiameter';
 
-// Theme specific //
+// Theme specific keys //
 
 // Light theme
 const String lightPageImageKey = 'lightPageImage';

@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -84,7 +84,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           EzConfig.instance.preferences.getInt(pathKey) ??
               EzConfig.instance.prefs[pathKey]);
 
-      int recommended = EzContrastColor(backgroundColor).value;
+      int recommended = getTextColor(backgroundColor).value;
 
       // Define action button parameters //
       final String denyMsg = EFUIPhrases.of(context)!.useCustom;
@@ -167,7 +167,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           height: 75,
           decoration: BoxDecoration(
             color: resetColor,
-            border: Border.all(color: EzContrastColor(resetColor)),
+            border: Border.all(color: getTextColor(resetColor)),
           ),
         ),
         materialActions: ezMaterialActions(
@@ -208,7 +208,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               child: Center(
                 child: Icon(
                   PlatformIcons(context).edit,
-                  color: EzContrastColor(currColor),
+                  color: getTextColor(currColor),
                   size: _diameter / 2,
                 ),
               ),

@@ -20,7 +20,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color themeTextColor = Color(EzConfig.instance
       .prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
   final Color unSelectedThemeTextColor =
-      EzColorBlend(themeColor, themeTextColor);
+      blendColors(themeColor, themeTextColor);
 
   final Color pageColor = Color(EzConfig
       .instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
   - Split EzSelectableText into EzText, EzRichText, EzTextBlock
   - Updated params for EzLink and EzWebLink
   - All have minor breaking changes
+- EzColors from classes to functions
+  - Minor breaking change
 
 ### Removed
 - Copy to clipboard function && flutter toast package
