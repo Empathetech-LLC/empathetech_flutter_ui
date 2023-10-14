@@ -9,6 +9,7 @@ library empathetech_flutter_ui;
 // Classes
 export 'src/classes/responsive/EzRow.dart';
 export 'src/classes/responsive/EzRowCol.dart';
+export 'src/classes/responsive/EzSpacer.dart';
 export 'src/classes/responsive/EzSwapScaffold.dart';
 
 export 'src/classes/settings/EzColorSetting.dart';
@@ -35,7 +36,6 @@ export 'src/classes/EzConfig.dart';
 export 'src/classes/EzImage.dart';
 export 'src/classes/EzScreen.dart';
 export 'src/classes/EzScrollView.dart';
-export 'src/classes/EzSpacer.dart';
 export 'src/classes/EzTransitions.dart';
 export 'src/classes/EzVideoPlayer.dart';
 export 'src/classes/EzWarning.dart';
