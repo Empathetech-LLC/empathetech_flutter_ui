@@ -17,14 +17,11 @@ class EzRowCol extends StatelessWidget {
   final TextBaseline? textBaseline;
   final List<Widget> children;
 
-  /// Whether the [Row] should switch to a [Column]
-  final bool limitedSpace;
-
   /// Whether the [EzRow] should reverse its [children] when [EzConfig.dominantHand] is [Hand.left]
   /// Defaults to false; not many use cases where both transformations will be wanted
   final bool reverseHands;
 
-  /// [EzRow] that will switch to a [Column] if there's [limitedSpace]
+  /// [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
   /// Alignment, size, and direction values will be shared
   EzRowCol({
     this.key,
@@ -35,12 +32,12 @@ class EzRowCol extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline,
     required this.children,
-    this.limitedSpace = false,
     this.reverseHands = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
     return limitedSpace
         ? Column(
             mainAxisAlignment: mainAxisAlignment,

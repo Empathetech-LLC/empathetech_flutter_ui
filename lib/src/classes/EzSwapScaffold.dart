@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class _EzLayoutSwitch extends InheritedWidget {
+class ScreenSpace extends InheritedWidget {
   /// true == small/mobile screen
   /// false == large/tablet/desktop screen
   final bool isLimited;
@@ -19,14 +19,18 @@ class _EzLayoutSwitch extends InheritedWidget {
   /// Enables real-time responses to screen space changes
   /// Currently uses the bool [isLimited] for switching between a small and large build
   /// Could be expanded limitlessly by replacing [isLimited] with a custom enum
-  const _EzLayoutSwitch({
+  const ScreenSpace({
     Key? key,
     required this.isLimited,
     required this.child,
   }) : super(key: key, child: child);
 
+  static ScreenSpace? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ScreenSpace>();
+  }
+
   @override
-  bool updateShouldNotify(_EzLayoutSwitch old) => isLimited != old.isLimited;
+  bool updateShouldNotify(ScreenSpace old) => isLimited != old.isLimited;
 }
 
 class EzSwapScaffold extends StatelessWidget {
@@ -55,7 +59,7 @@ class EzSwapScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (widthOf(context) <= threshold)
-        ? _EzLayoutSwitch(isLimited: true, child: small)
-        : _EzLayoutSwitch(isLimited: false, child: large);
+        ? ScreenSpace(isLimited: true, child: small)
+        : ScreenSpace(isLimited: false, child: large);
   }
 }

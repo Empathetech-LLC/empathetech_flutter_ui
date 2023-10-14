@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 
 class EzSpacer extends SizedBox {
@@ -14,10 +16,14 @@ class EzSpacer extends SizedBox {
   /// [SizedBox] with width [space] for creating space in a [Row]
   const EzSpacer.row(this.space) : super(width: space);
 
-  /// [SizedBox] with height or width [space] based on [limitedSpace]
-  EzSpacer.swap(this.space, {required bool limitedSpace})
-      : super(
-          height: limitedSpace ? space : null,
-          width: limitedSpace ? null : space,
-        );
+  /// [EzSpacer.row], that swaps to a default [EzSpacer] when [ScreenSpace.isLimited]
+  factory EzSpacer.swap(BuildContext context, double space) {
+    bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
+
+    if (limitedSpace) {
+      return EzSpacer(space);
+    } else {
+      return EzSpacer.row(space);
+    }
+  }
 }
