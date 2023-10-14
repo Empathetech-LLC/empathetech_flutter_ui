@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
   - All have minor breaking changes
 - EzColors from classes to functions
   - Minor breaking change
+- File organization
 
 ### Removed
 - Copy to clipboard function && flutter toast package
