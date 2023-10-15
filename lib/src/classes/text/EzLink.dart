@@ -5,10 +5,9 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class EzLink extends TextSpan {
+class EzLink extends WidgetSpan {
   /// Link message
   final String text;
 
@@ -22,17 +21,27 @@ class EzLink extends TextSpan {
   /// What does this link do?
   final String? semanticsLabel;
 
-  /// [TextSpan] wrapper that creates an internal [action] link via [TapGestureRecognizer]
+  final PlaceholderAlignment alignment;
+  final TextBaseline? baseline;
+
+  /// Custom [WidgetSpan] to pair with [EzTextBlock]
+  /// Creates an internal [action] link via [EzText.onTap]
   /// See [EzWebLink] for making extertnal links
   EzLink(
     this.text, {
     required this.action,
     this.style,
     this.semanticsLabel,
+    this.alignment = PlaceholderAlignment.middle,
+    this.baseline,
   }) : super(
-          text: text,
-          recognizer: new TapGestureRecognizer()..onTap = action,
-          style: style,
-          semanticsLabel: semanticsLabel,
+          child: EzText(
+            text,
+            style: style,
+            onTap: action,
+            semanticsLabel: semanticsLabel,
+          ),
+          alignment: alignment,
+          baseline: baseline,
         );
 }

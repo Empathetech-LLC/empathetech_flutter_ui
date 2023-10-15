@@ -3,11 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/gestures.dart';
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EzWebLink extends TextSpan {
+class EzWebLink extends WidgetSpan {
   /// Link message
   final String text;
 
@@ -21,8 +22,11 @@ class EzWebLink extends TextSpan {
   /// Where does this link go?
   final String? semanticsLabel;
 
-  /// [TextSpan] wrapper that creates an external link to [url]
-  /// Uses [launchUrl] with a [TapGestureRecognizer]
+  final PlaceholderAlignment alignment;
+  final TextBaseline? baseline;
+
+  /// Custom [WidgetSpan] to pair with [EzTextBlock]
+  /// Creates an external link to [url] via [launchUrl] and [EzText.onTap]
   /// Requires [semanticsLabel] for screen readers
   /// See [EzLink] for making internal links
   EzWebLink(
@@ -30,10 +34,16 @@ class EzWebLink extends TextSpan {
     required this.url,
     this.style,
     required this.semanticsLabel,
+    this.alignment = PlaceholderAlignment.middle,
+    this.baseline,
   }) : super(
-          text: text,
-          recognizer: new TapGestureRecognizer()..onTap = () => launchUrl(url),
-          style: style,
-          semanticsLabel: semanticsLabel,
+          child: EzText(
+            text,
+            style: style,
+            onTap: () => launchUrl(url),
+            semanticsLabel: semanticsLabel,
+          ),
+          alignment: alignment,
+          baseline: baseline,
         );
 }
