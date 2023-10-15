@@ -207,31 +207,31 @@ Rename the (just copied) `Home.dart` and `HomeScreen()` to something more approp
 
 The example app's screens neatly organize all the custom widgets that enable EFUI's user customization!
 
-* [EzThemeModeSwitch](./lib/src/classes/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
-* [EzDominantHandSwitch](./lib/src/classes/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzColorSetting](./lib/src/classes/EzColorSetting.dart): A color picker for updating theme colors.
-* [EzFontSetting](./lib/src/classes/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
-* [EzSliderSetting](./lib/src/classes/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
-* [EzImageSetting](./lib/src/classes/EzImageSetting.dart): An image uploader for updating app assets.
-* [EzResetButton](./lib/src/classes/EzResetButton.dart): A text button for resetting groups of preferences.
+* [EzThemeModeSwitch](./lib/src/classes/settings/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzDominantHandSwitch](./lib/src/classes/settings/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzColorSetting](./lib/src/classes/settings/EzColorSetting.dart): A color picker for updating theme colors.
+* [EzFontSetting](./lib/src/classes/settings/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
+* [EzSliderSetting](./lib/src/classes/settings/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzImageSetting](./lib/src/classes/settings/EzImageSetting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/settings/EzResetButton.dart): A text button for resetting groups of preferences.
 
-By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
+By default, every base [theme setting](./lib/src/consts/keys.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
 
 ### Step 4
 
-Enjoy!
+**Enjoy!**
 
-EFUI's platform availability and user customization is "set it and forget it". But, as you grow your apps, the other three pillars require continuous development.
+The pillars of platform availability and user customization are "set it and forget it"; bar any external libraries that break things.
 
-Thankfully, EFUI's got you covered there too!
+But, as you grow your apps, the other three pillars require continuous development.
 
-The library is full of custom widgets to aid in developing responsive and screen readable UIs, like...
-* [EzSwapScaffold](./lib/src/classes/EzSwapScaffold.dart): Enalbes live switches between layouts based on available space
-* [EzRowCol](./lib/src/classes/EzRowCol.dart): Enables live switches between horizontal and vertical layouts; uses same trigger as EzSwapScaffold
-* [EzText](./lib/src/classes/EzText.dart): A series of wrapper classes with custom semantics handlers
+EFUI's got you covered there too! The library is full of custom widgets to aid in developing responsive and screen readable UIs, like...
+* [EzSwapScaffold](./lib/src/classes/responsive/EzSwapScaffold.dart): Enalbes live Scaffold swaps based on available space (Mobile vs Tablet && Desktop)
+* [EzRowCol](./lib/src/classes/responsive/EzRowCol.dart): Enables live horizontal and vertical layout swaps; uses the same trigger as `EzSwapScaffold`
+* [EzTexts](./lib/src/classes/text/): A series of wrapper classes with custom semantics handlers
 * [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart): A highly customizable video player
 
-and even more! We'll let you
+and even more! This should be plenty to get your started (and avoid overload). The code has been organized to aid in exploration!
 
 # Demo
 
@@ -330,7 +330,5 @@ EFUI wouldn't be as awesome as it is without these other awesome community proje
 
 * [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
-* [Line Icons](https://pub.dev/packages/line_icons)
-* [Flutter Toast](https://pub.dev/packages/fluttertoast)
 
 And, of course, all the awesome Flutter (Google) devs.
