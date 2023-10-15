@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - README asset organization
 - Moved consts/credits to consts/empathetechConfig
 - Updated all text Widgets
-  - Split EzSelectableText into EzText, EzRichText, EzTextBlock
+  - Split EzSelectableText into EzText, EzPlainText, EzTextBlock
   - Updated params for EzLink and EzWebLink
   - All have minor breaking changes
 - EzColors from classes to functions

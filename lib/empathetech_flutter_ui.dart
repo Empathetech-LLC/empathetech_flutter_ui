@@ -22,7 +22,6 @@ export 'src/classes/settings/EzThemeModeSwitch.dart';
 
 export 'src/classes/text/EzLink.dart';
 export 'src/classes/text/EzPlainText.dart';
-export 'src/classes/text/EzRichText.dart';
 export 'src/classes/text/EzText.dart';
 export 'src/classes/text/EzTextBlock.dart';
 export 'src/classes/text/EzTextStyle.dart';
