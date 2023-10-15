@@ -40,8 +40,6 @@ class EzRichText extends SelectableText {
   final TextMagnifierConfiguration? magnifierConfiguration;
 
   /// [SelectableText.rich] wrapper with customized defaults
-  /// Takes in either [text] (originally [SelectableText.data])
-  /// or [textSpan] for a [SelectableText.rich] Widget
   const EzRichText(
     this.textSpan, {
     this.key,
