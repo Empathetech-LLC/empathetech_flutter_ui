@@ -18,7 +18,7 @@ class EzPlainText extends WidgetSpan {
   EzPlainText(
     this.text, {
     this.style,
-    this.alignment = PlaceholderAlignment.bottom,
+    this.alignment = PlaceholderAlignment.middle,
     this.baseline,
   }) : super(
           child: ExcludeSemantics(child: EzText(text, style: style)),
