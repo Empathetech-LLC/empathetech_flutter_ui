@@ -37,6 +37,8 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color accentTextColor = Color(EzConfig.instance
       .prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
+  final TextTheme textTheme = ezTextTheme(pageTextColor);
+
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
   final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
@@ -196,8 +198,8 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
-    textTheme: EzTextTheme(color: pageTextColor),
-    primaryTextTheme: EzTextTheme(color: pageTextColor),
+    textTheme: textTheme,
+    primaryTextTheme: textTheme,
     iconTheme: iconData,
     primaryIconTheme: iconData,
 

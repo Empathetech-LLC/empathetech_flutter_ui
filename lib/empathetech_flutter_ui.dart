@@ -26,7 +26,6 @@ export 'src/classes/text/EzRichText.dart';
 export 'src/classes/text/EzText.dart';
 export 'src/classes/text/EzTextBlock.dart';
 export 'src/classes/text/EzTextStyle.dart';
-export 'src/classes/text/EzTextTheme.dart';
 export 'src/classes/text/EzWebLink.dart';
 
 export 'src/classes/EzAlertDialog.dart';
