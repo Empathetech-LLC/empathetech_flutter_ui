@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // Set page/tab title //
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     setPageTitle(context, Phrases.of(context)!.settings);
   }
 

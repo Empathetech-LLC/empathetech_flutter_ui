@@ -17,8 +17,8 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Set page/tab title //
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     setPageTitle(context, Phrases.of(context)!.imageSettings);
   }
 
