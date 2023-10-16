@@ -19,7 +19,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: Phrases.of(context)!.imageSettings);
+    setPageTitle(context, Phrases.of(context)!.imageSettings);
   }
 
   // Gather theme data //

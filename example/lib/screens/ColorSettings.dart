@@ -19,10 +19,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(
-      context: context,
-      title: Phrases.of(context)!.colorSettings,
-    );
+    setPageTitle(context, Phrases.of(context)!.colorSettings);
   }
 
   // Gather theme data //

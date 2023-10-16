@@ -18,7 +18,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    setPageTitle(context: context, title: Phrases.of(context)!.styleSettings);
+    setPageTitle(context, Phrases.of(context)!.styleSettings);
   }
 
   // Gather theme data //
