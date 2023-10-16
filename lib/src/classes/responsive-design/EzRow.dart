@@ -19,6 +19,7 @@ class EzRow extends StatelessWidget {
 
   /// Whether this should respond to [EzConfig.dominantHand] changes
   /// If true, [children] will be reversed when [EzConfig.dominantHand] is [Hand.left]
+  /// If false, this will be have like a normal [Row]
   final bool reverseHands;
 
   /// [Row] wrapper that automatically supports [EzConfig.dominantHand]
