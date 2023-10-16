@@ -20,10 +20,6 @@ class EzSpacer extends SizedBox {
   factory EzSpacer.swap(BuildContext context, double space) {
     bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
 
-    if (limitedSpace) {
-      return EzSpacer(space);
-    } else {
-      return EzSpacer.row(space);
-    }
+    return limitedSpace ? EzSpacer(space) : EzSpacer.row(space);
   }
 }
