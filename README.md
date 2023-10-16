@@ -7,12 +7,12 @@ EFUI provides a starter kit for every aspect of digital accessibility:
   - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOS, Linux, MacOS, Windows and Web!
     - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
 - **Screen reader compliance**
-  - The [example app](./example/lib/screens/) and all [custom widgets](./lib/src/classes/) have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+  - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
   - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any aspect of your app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
-  - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
+  - All [custom widgets](./lib/src/l10n/) and the[example app](./example/lib/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
@@ -57,8 +57,8 @@ Here are some (unaffilliated!) videos you might also find helpful.
 
 ## TL;DR
 
-1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your `void main()` to setup the user customizable [ezThemeData](./lib/src/functions/ezThemeData.dart)
-2. Use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>OR use `ezThemeData` in your existing provider/app
+1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in your `void main()` to setup the user customizable [ezThemeData](./lib/src/functions/ezThemeData.dart)
+2. Use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>OR use `ezThemeData` in your existing provider/app
 3. a) Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app and<br>b) Rename `Home.dart` to `Settings.dart` (personal preference) and update your routes
 4. Enjoy
 
@@ -115,7 +115,7 @@ void main() async {
 
 ### Step 2
 
-In `main.dart`, use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+In `main.dart`, use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class EFUIExample extends StatelessWidget {
@@ -146,7 +146,7 @@ class EFUIExample extends StatelessWidget {
 
 #### How it works
 
-[EzAppProvider](./lib/src/classes/EzAppProvider.dart) is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
+[EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
 
 You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect. `EzAppProvider` and [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets) are recommendations not requirements.
 
@@ -207,13 +207,13 @@ Rename the (just copied) `Home.dart` and `HomeScreen()` to something more approp
 
 The example app's screens neatly organize all the custom widgets that enable EFUI's user customization!
 
-* [EzThemeModeSwitch](./lib/src/classes/settings/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
-* [EzDominantHandSwitch](./lib/src/classes/settings/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzColorSetting](./lib/src/classes/settings/EzColorSetting.dart): A color picker for updating theme colors.
-* [EzFontSetting](./lib/src/classes/settings/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
-* [EzSliderSetting](./lib/src/classes/settings/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
-* [EzImageSetting](./lib/src/classes/settings/EzImageSetting.dart): An image uploader for updating app assets.
-* [EzResetButton](./lib/src/classes/settings/EzResetButton.dart): A text button for resetting groups of preferences.
+* [EzThemeModeSwitch](./lib/src/classes/user-customization/settings/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzDominantHandSwitch](./lib/src/classes/user-customization/settings/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzColorSetting](./lib/src/classes/user-customization/settings/EzColorSetting.dart): A color picker for updating theme colors.
+* [EzFontSetting](./lib/src/classes/user-customization/settings/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
+* [EzSliderSetting](./lib/src/classes/user-customization/settings/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzImageSetting](./lib/src/classes/user-customization/settings/EzImageSetting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/user-customization/settings/EzResetButton.dart): A text button for resetting groups of preferences.
 
 By default, every base [theme setting](./lib/src/consts/keys.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
 
@@ -223,15 +223,15 @@ By default, every base [theme setting](./lib/src/consts/keys.dart) is exposed. A
 
 The pillars of platform availability and user customization are "set it and forget it"; bar any external libraries that break things.
 
-But, as you grow your apps, the other three pillars require continuous development.
+But, as you grow your apps, the other pillars require continuous development.
 
-EFUI's got you covered there too! The library is full of custom widgets to aid in developing responsive and screen readable UIs, like...
-* [EzSwapScaffold](./lib/src/classes/responsive/EzSwapScaffold.dart): Enalbes live Scaffold swaps based on available space (Mobile vs Tablet && Desktop)
-* [EzRowCol](./lib/src/classes/responsive/EzRowCol.dart): Enables live horizontal and vertical layout swaps; uses the same trigger as `EzSwapScaffold`
-* [EzTexts](./lib/src/classes/text/): A series of wrapper classes with custom semantics handlers
-* [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart): A highly customizable video player
+EFUI's got you covered there too! Check out the...
+* [Responsive Widgets](./lib/src/classes/responsive-design/): A collection of custom classes that aid in building responsive UI/UX
+* [Semantics Widgets](./lib/src/classes/screen-readers/): A collection of custom classes that streamline defining screen reader semantics
 
-and even more! This should be plenty to get your started (and avoid overload). The code has been organized to aid in exploration!
+and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
+
+But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
 
 # Demo
 
