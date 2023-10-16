@@ -43,7 +43,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
   final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
   final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
-  final TextStyle textButtonTextStyle = buildTitleMedium(buttonColor);
+  final TextStyle reverseButtonTextStyle = buildTitleMedium(buttonColor);
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
 
@@ -91,11 +91,36 @@ ThemeData ezThemeData({required bool lightTheme}) {
       ),
     ),
 
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: buttonTextStyle.fontSize,
+        alignment: Alignment.center,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        side: null,
+        padding: EdgeInsets.zero,
+      ),
+    ),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: TextButton.styleFrom(
+        textStyle: reverseButtonTextStyle,
+        alignment: Alignment.center,
+        backgroundColor: Colors.transparent,
+        shadowColor: buttonColor,
+        side: BorderSide(color: buttonColor),
+        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+      ),
+    ),
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: textButtonTextStyle,
+        textStyle: buttonTextStyle,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        side: null,
+        padding: EdgeInsets.zero,
       ),
     ),
 
