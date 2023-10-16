@@ -101,3 +101,12 @@ const String EmpathetechVenmo = 'https://venmo.com/empathetech-llc';
 
 /// If you want to show some love
 const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
+
+/// If you want to show some love
+const String EmpathetechPatreon = "https://patreon.com/EmpathetechLLC";
+
+/// If you want to show some love
+const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
+
+/// If you want to show some love
+const String EmpathetechKofi = "https://ko-fi.com/empathetech";

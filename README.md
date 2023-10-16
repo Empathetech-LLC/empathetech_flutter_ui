@@ -314,6 +314,18 @@ Many thanks for any and all donations! We're happy to have helped!
 
 [$empathetech](https://cash.app/$empathetech)
 
+### Patreon
+
+[EmpathetechLLC](https://patreon.com/EmpathetechLLC)
+
+### Buy Me a Coffee
+
+[empathetech](https://www.buymeacoffee.com/empathetech)
+
+### Ko-fi
+
+[empathetech](https://ko-fi.com/empathetech)
+
 # License
 
 [GNU GPLv3](LICENSE)
