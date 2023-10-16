@@ -15,11 +15,21 @@ class EzSpacer extends SizedBox {
 
   /// [SizedBox] with width [space] for creating space in a [Row]
   const EzSpacer.row(this.space) : super(width: space);
+}
 
-  /// [EzSpacer.row], that swaps to a default [EzSpacer] when [ScreenSpace.isLimited]
-  factory EzSpacer.swap(BuildContext context, double space) {
+class EzSwapSpacer extends StatelessWidget {
+  final double space;
+
+  /// Mimics [EzSpacer.row] by default
+  /// Swaps to [EzSpacer] when [ScreenSpace.isLimited]
+  EzSwapSpacer(this.space);
+
+  @override
+  Widget build(BuildContext context) {
     bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
 
-    return limitedSpace ? EzSpacer(space) : EzSpacer.row(space);
+    return ExcludeSemantics(
+      child: limitedSpace ? EzSpacer(space) : EzSpacer.row(space),
+    );
   }
 }
