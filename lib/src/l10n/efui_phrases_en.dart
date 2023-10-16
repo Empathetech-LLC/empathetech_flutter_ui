@@ -163,4 +163,7 @@ class EFUIPhrasesEn extends EFUIPhrases {
   String failedImageSet(Object error) {
     return 'Failed to update image:\n$error';
   }
+
+  @override
+  String get autoPlayDisabled => 'Auto-play videos are disabled.';
 }

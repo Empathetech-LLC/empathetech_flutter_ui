@@ -382,6 +382,12 @@ abstract class EFUIPhrases {
   /// In en, this message translates to:
   /// **'Failed to update image:\n{error}'**
   String failedImageSet(Object error);
+
+  /// No description provided for @autoPlayDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-play videos are disabled.'**
+  String get autoPlayDisabled;
 }
 
 class _EFUIPhrasesDelegate extends LocalizationsDelegate<EFUIPhrases> {

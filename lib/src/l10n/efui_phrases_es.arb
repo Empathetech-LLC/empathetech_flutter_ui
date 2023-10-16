@@ -47,5 +47,6 @@
   "pickAColor": "¡Selecciona un color!",
   "clipCopy": "Copiado al portapapeles",
   "failedImageGet": "No se pudo recuperar la imagen",
-  "failedImageSet": "No se pudo actualizar la imagen:\n{error}"
+  "failedImageSet": "No se pudo actualizar la imagen:\n{error}",
+  "autoPlayDisabled": "Los videos con reproducción automática están desactivados."
 }

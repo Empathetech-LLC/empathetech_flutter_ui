@@ -47,5 +47,6 @@
   "pickAColor": "Pick a color!",
   "clipCopy": "Copied to clipboard",
   "failedImageGet": "Failed to retrieve image",
-  "failedImageSet": "Failed to update image:\n{error}"
+  "failedImageSet": "Failed to update image:\n{error}",
+  "autoPlayDisabled": "Auto-play videos are disabled."
 }

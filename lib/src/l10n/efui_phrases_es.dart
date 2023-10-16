@@ -165,4 +165,8 @@ class EFUIPhrasesEs extends EFUIPhrases {
   String failedImageSet(Object error) {
     return 'No se pudo actualizar la imagen:\n$error';
   }
+
+  @override
+  String get autoPlayDisabled =>
+      'Los videos con reproducción automática están desactivados.';
 }
