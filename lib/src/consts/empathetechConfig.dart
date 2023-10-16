@@ -72,6 +72,26 @@ const Map<String, dynamic> empathetechConfig = {
 
 // Define public links //
 
+/// One of us, one of us, one of us!
+const String EmpathetechCommunityContact = 'community@empathetech.net';
+
+/// If you need to reach out
+const String EmpathetechSupport = 'support@empathetech.net';
+
+/// See what we're up to!
+const String EmpathetechLinkedIn =
+    "https://linkedin.com/company/empathetech-llc";
+
+/// See what we're up to!
+const String EmpathetechMastodon = "https://mastodon.social/@empathetech";
+
+/// Where the magic happens
+const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
+
+/// One of us, one of us, one of us!
+const String EmpathetechFoldingTeam =
+    'https://stats.foldingathome.org/team/1063265';
+
 /// If you want to show some love
 const String EmpathetechPayPal =
     'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
@@ -81,16 +101,3 @@ const String EmpathetechVenmo = 'https://venmo.com/empathetech-llc';
 
 /// If you want to show some love
 const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
-
-/// Where the magic happens
-const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
-
-/// One of us, one of us, one of us!
-const String EmpathetechFoldingTeam =
-    'https://stats.foldingathome.org/team/1063265';
-
-/// One of us, one of us, one of us!
-const String EmpathetechCommunityContact = 'community@empathetech.net';
-
-/// If you need to reach out
-const String EmpathetechSupport = 'support@empathetech.net';
