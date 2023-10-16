@@ -46,9 +46,8 @@ class EzSwapScaffold extends StatelessWidget {
   final double threshold;
 
   /// Enables real-time responses to screen space changes
-  /// Swapping between a [small] and [large] build
-  /// [small] when [widthOf] the [BuildContext] is less than [threshold]
-  /// [large] when [widthOf] the [BuildContext] is more than [threshold]
+  /// [small] when [widthOf] the [BuildContext] is less than || equal to [threshold]
+  /// [large] when [widthOf] the [BuildContext] is greater than [threshold]
   const EzSwapScaffold({
     this.key,
     required this.small,
