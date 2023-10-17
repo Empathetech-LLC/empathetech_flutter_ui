@@ -207,13 +207,13 @@ Rename the (just copied) `Home.dart` and `HomeScreen()` to something more approp
 
 The example app's screens neatly organize all the custom widgets that enable EFUI's user customization!
 
-* [EzThemeModeSwitch](./lib/src/classes/user-customization/settings/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
-* [EzDominantHandSwitch](./lib/src/classes/user-customization/settings/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzColorSetting](./lib/src/classes/user-customization/settings/EzColorSetting.dart): A color picker for updating theme colors.
-* [EzFontSetting](./lib/src/classes/user-customization/settings/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
-* [EzSliderSetting](./lib/src/classes/user-customization/settings/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
-* [EzImageSetting](./lib/src/classes/user-customization/settings/EzImageSetting.dart): An image uploader for updating app assets.
-* [EzResetButton](./lib/src/classes/user-customization/settings/EzResetButton.dart): A text button for resetting groups of preferences.
+* [EzThemeModeSwitch](./lib/src/classes/user-customization/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzDominantHandSwitch](./lib/src/classes/user-customization/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzColorSetting](./lib/src/classes/user-customization/EzColorSetting.dart): A color picker for updating theme colors.
+* [EzFontSetting](./lib/src/classes/user-customization/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
+* [EzSliderSetting](./lib/src/classes/user-customization/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzImageSetting](./lib/src/classes/user-customization/EzImageSetting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/user-customization/EzResetButton.dart): A text button for resetting groups of preferences.
 
 By default, every base [theme setting](./lib/src/consts/keys.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
 

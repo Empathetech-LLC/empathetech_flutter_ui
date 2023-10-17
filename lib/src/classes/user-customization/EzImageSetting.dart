@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../../empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
