@@ -37,6 +37,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       : Phrases.of(context)!.resetAllWarning;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
@@ -53,7 +54,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     Phrases.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
-                  EzSpacer(_buttonSpacer),
+                  EzSpacer(_textSpacer),
 
                   // Settings //
 

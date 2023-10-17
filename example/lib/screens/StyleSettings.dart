@@ -23,6 +23,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Gather theme data //
 
+  final double _margin = EzConfig.instance.prefs[marginKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   late final String _resetTitle = Phrases.of(context)!.resetAllStyle;
@@ -39,6 +40,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
         child: EzScrollView(
           children: [
             // Font
+            EzSpacer(_buttonSpacer > _margin ? _buttonSpacer - _margin : 0),
             const EzFontSetting(),
             EzSpacer(_buttonSpacer),
 

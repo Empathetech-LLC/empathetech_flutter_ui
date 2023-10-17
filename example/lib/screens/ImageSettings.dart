@@ -36,6 +36,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       : Phrases.of(context)!.resetAllWarning;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
@@ -50,7 +51,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               Phrases.of(context)!.editingTheme(_themeProfile),
               style: titleSmall(context),
             ),
-            EzSpacer(_buttonSpacer),
+            EzSpacer(_textSpacer),
 
             // Settings //
 
