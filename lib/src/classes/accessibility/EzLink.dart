@@ -38,7 +38,7 @@ class EzLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      button: true,
+      link: true,
       hint: semanticsLabel,
       child: ExcludeSemantics(
         child: TextButton(
