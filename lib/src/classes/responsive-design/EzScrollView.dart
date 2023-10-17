@@ -38,10 +38,10 @@ class EzScrollView extends SingleChildScrollView {
   final List<Widget>? children;
 
   /// [SingleChildScrollView] wrapper
-  /// Prefers the [children] list rather than [child] Widget
-  /// Behaves like a standard [SingleChildScrollView] if [child] is provided
   /// If [children] are provided the original child parameter will be an [EzRow] or [Column] based on [scrollDirection]
+  /// Behaves like a standard [SingleChildScrollView] if [child] is provided
   /// Parameters from both [SingleChildScrollView] and [EzRow]/[Column] are supported
+  /// [reverseHands] will only work if [children] are provided
   const EzScrollView({
     // SingleChildScrollView parameters //
 
