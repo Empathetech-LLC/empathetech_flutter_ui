@@ -12,7 +12,7 @@ EFUI provides a starter kit for every aspect of digital accessibility:
   - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any aspect of your app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
-  - All [custom widgets](./lib/src/l10n/) and the[example app](./example/lib/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
+  - All [custom widgets](./lib/src/l10n/) and the [example app](./example/lib/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
@@ -146,7 +146,7 @@ class EFUIExample extends StatelessWidget {
 
 #### How it works
 
-[EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
+`EzAppProvider` is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
 
 You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect. `EzAppProvider` and [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets) are recommendations not requirements.
 
@@ -226,8 +226,8 @@ The pillars of platform availability and user customization are "set it and forg
 But, as you grow your apps, the other pillars require continuous development.
 
 EFUI's got you covered there too! Check out the...
-* [Responsive Widgets](./lib/src/classes/responsive-design/): A collection of custom classes that aid in building responsive UI/UX
-* [Semantics Widgets](./lib/src/classes/accessibility/): A collection of custom classes that streamline defining screen reader semantics
+* [Responsive Widgets](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
+* [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or widgets that adapt to accessibilty flags, like `EzDominantHandSwitch` 
 
 and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
 
