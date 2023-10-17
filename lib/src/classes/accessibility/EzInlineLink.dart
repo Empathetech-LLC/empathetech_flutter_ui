@@ -11,38 +11,40 @@ class EzInlineLink extends TextSpan {
   final String text;
   final void Function()? onTap;
   final Uri? url;
+  final String? semanticsLabel;
+  final bool? spellOut;
+  final Locale? locale;
   final TextStyle? style;
   final MouseCursor mouseCursor;
   final void Function(PointerEnterEvent)? onEnter;
   final void Function(PointerExitEvent)? onExit;
-  final String? semanticsLabel;
-  final Locale? locale;
-  final bool? spellOut;
 
-  /// [TextSpan] wrapper
+  /// [TextSpan] wrapper that opens either an internal link via [onTap]
+  /// Or an external link to [url]
+  /// Requires [semanticsLabel] for screen readers
   EzInlineLink(
     this.text, {
     this.onTap,
     this.url,
+    required this.semanticsLabel,
+    this.spellOut,
+    this.locale,
     this.style,
-    this.mouseCursor = SystemMouseCursors.contextMenu,
+    this.mouseCursor = SystemMouseCursors.click,
     this.onEnter,
     this.onExit,
-    this.semanticsLabel,
-    this.locale,
-    this.spellOut,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
           text: text,
-          style: style,
           recognizer: TapGestureRecognizer()
             ..onTap = () => onTap ?? launchUrl(url!),
+          semanticsLabel: semanticsLabel,
+          spellOut: spellOut,
+          locale: locale,
+          style: style,
           mouseCursor: mouseCursor,
           onEnter: onEnter,
           onExit: onExit,
-          semanticsLabel: semanticsLabel,
-          locale: locale,
-          spellOut: spellOut,
         );
 }

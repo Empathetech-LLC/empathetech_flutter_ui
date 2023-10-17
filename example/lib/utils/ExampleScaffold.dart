@@ -25,15 +25,11 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define AppBar widget(s) //
 
-    final Widget titleLink = Semantics(
-      button: true,
-      hint: Phrases.of(context)!.homeLinkHint,
-      child: ExcludeSemantics(
-        child: TextButton(
-          onPressed: () => context.goNamed(homeRoute),
-          child: Text('EFUI', style: titleStyle),
-        ),
-      ),
+    final EzLink titleLink = EzLink(
+      'EFUI',
+      onTap: () => context.goNamed(homeRoute),
+      semanticsLabel: Phrases.of(context)!.homeLinkHint,
+      style: titleStyle,
     );
 
     // Return the build //
