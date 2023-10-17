@@ -10,12 +10,13 @@ library empathetech_flutter_ui;
 
 // Accessibility
 export 'src/classes/accessibility/EzImage.dart';
+export 'src/classes/accessibility/EzInlineLink.dart';
 export 'src/classes/accessibility/EzLink.dart';
+export 'src/classes/accessibility/EzRichText.dart';
 export 'src/classes/accessibility/EzRow.dart';
 export 'src/classes/accessibility/EzText.dart';
 export 'src/classes/accessibility/EzTextStyle.dart';
 export 'src/classes/accessibility/EzWarning.dart';
-export 'src/classes/accessibility/EzWebLink.dart';
 
 // Responsive design
 export 'src/classes/responsive-design/EzRowCol.dart';

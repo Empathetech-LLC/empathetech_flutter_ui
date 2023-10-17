@@ -6,13 +6,17 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EzLink extends EzText {
   /// Link message
   final String text;
 
-  /// Link's purpose
+  /// Internal link destination
   final void Function()? onTap;
+
+  /// External link destination
+  final Uri? url;
 
   /// Link style
   final TextStyle? style;
@@ -21,17 +25,21 @@ class EzLink extends EzText {
   /// What does this link do?
   final String? semanticsLabel;
 
-  /// [EzText] wrapper that opens an internal link via [onTap]
-  /// See [EzWebLink] for making external links
+  /// [EzText] wrapper that opens either an internal link via [onTap]
+  /// Or an external link to [url]
+  /// Requires [semanticsLabel] for screen readers
   EzLink(
     this.text, {
+    this.onTap,
+    this.url,
     this.style,
     this.semanticsLabel,
-    required this.onTap,
-  }) : super(
+  })  : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.'),
+        super(
           text,
           style: style,
           semanticsLabel: semanticsLabel,
-          onTap: onTap,
+          onTap: onTap ?? () => launchUrl(url!),
         );
 }
