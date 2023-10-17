@@ -32,10 +32,10 @@ const Color offBlack = Color(offBlackHex);
 const Map<String, dynamic> empathetechConfig = {
   // App-wide //
   marginKey: 15.0,
-  paddingKey: 12.5,
+  paddingKey: 15.0,
 
   buttonSpacingKey: 30.0,
-  textSpacingKey: 35.0,
+  textSpacingKey: 60.0,
 
   circleDiameterKey: 45.0,
 
