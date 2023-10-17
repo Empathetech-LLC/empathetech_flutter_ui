@@ -69,9 +69,8 @@ class EzScrollView extends SingleChildScrollView {
     this.verticalDirection = VerticalDirection.down,
     this.children,
   }) : assert(
-          (child != null || children != null) &&
-              !(child != null && children != null),
-          'Either decoration or decorationImageKey must be provided, but not both.',
+          (child == null) != (children == null),
+          'Either child or children should be provided, but not both.',
         );
 
   Widget _buildCore() {

@@ -50,8 +50,8 @@ class EzScreen extends StatelessWidget {
     required this.child,
     this.clipBehavior = Clip.none,
   }) : assert(
-          !(decoration != null && decorationImageKey != null),
-          'Either decoration or decorationImageKey can be provided, but not both.',
+          (decoration == null) != (decorationImageKey == null),
+          'Either decoration or decorationImageKey should be provided, but not both.',
         );
 
   DecorationImage? _buildDecoration(String? path) {
