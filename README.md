@@ -227,7 +227,7 @@ But, as you grow your apps, the other pillars require continuous development.
 
 EFUI's got you covered there too! Check out the...
 * [Responsive Widgets](./lib/src/classes/responsive-design/): A collection of custom classes that aid in building responsive UI/UX
-* [Semantics Widgets](./lib/src/classes/screen-readers/): A collection of custom classes that streamline defining screen reader semantics
+* [Semantics Widgets](./lib/src/classes/accessibility/): A collection of custom classes that streamline defining screen reader semantics
 
 and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
 

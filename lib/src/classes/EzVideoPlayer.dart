@@ -81,7 +81,8 @@ class EzVideoPlayer extends StatefulWidget {
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather theme data //
   bool show = false;
-  bool disabled = false;
+  bool checkedAutoPlay = false;
+  bool autoPlayDisabled = false;
 
   double? savedVolume;
   double _currentPosition = 0.0;
@@ -281,9 +282,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       widget.controller.play();
 
       Future.delayed(Duration(milliseconds: 250), () {
-        if (!widget.controller.value.isPlaying) {
+        if (!checkedAutoPlay && !widget.controller.value.isPlaying) {
           setState(() {
-            disabled = true;
+            checkedAutoPlay = true;
+            autoPlayDisabled = true;
+          });
+        } else {
+          setState(() {
+            checkedAutoPlay = true;
           });
         }
       });
@@ -305,7 +311,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           thumbColor: sliderColor,
         );
 
-    return disabled
+    return autoPlayDisabled
         ? EzWarning(message: EFUIPhrases.of(context)!.autoPlayDisabled)
         : MouseRegion(
             cursor: SystemMouseCursors.click,

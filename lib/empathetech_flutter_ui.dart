@@ -8,19 +8,21 @@ library empathetech_flutter_ui;
 
 // Classes //
 
+// Accessibility
+export 'src/classes/accessibility/EzImage.dart';
+export 'src/classes/accessibility/EzLink.dart';
+export 'src/classes/accessibility/EzRow.dart';
+export 'src/classes/accessibility/EzText.dart';
+export 'src/classes/accessibility/EzTextStyle.dart';
+export 'src/classes/accessibility/EzWarning.dart';
+export 'src/classes/accessibility/EzWebLink.dart';
+
 // Responsive design
 export 'src/classes/responsive-design/EzRowCol.dart';
 export 'src/classes/responsive-design/EzScrollView.dart';
 export 'src/classes/responsive-design/EzSpacer.dart';
 export 'src/classes/responsive-design/EzSwapScaffold.dart';
 export 'src/classes/responsive-design/EzTransitions.dart';
-
-// Screen readers
-export 'src/classes/screen-readers/EzImage.dart';
-export 'src/classes/screen-readers/EzLink.dart';
-export 'src/classes/screen-readers/EzText.dart';
-export 'src/classes/screen-readers/EzWarning.dart';
-export 'src/classes/screen-readers/EzWebLink.dart';
 
 // User-customization
 export 'src/classes/user-customization/EzAppProvider.dart';
@@ -35,10 +37,8 @@ export 'src/classes/user-customization/EzThemeModeSwitch.dart';
 
 // General
 export 'src/classes/EzAlertDialog.dart';
-export 'src/classes/EzRow.dart';
 export 'src/classes/EzBackAction.dart';
 export 'src/classes/EzScreen.dart';
-export 'src/classes/EzTextStyle.dart';
 export 'src/classes/EzVideoPlayer.dart';
 
 // Constants //
