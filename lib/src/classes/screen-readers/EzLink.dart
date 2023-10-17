@@ -7,12 +7,12 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzLink extends WidgetSpan {
+class EzLink extends EzText {
   /// Link message
   final String text;
 
   /// Link's purpose
-  final void Function()? action;
+  final void Function()? onTap;
 
   /// Link style
   final TextStyle? style;
@@ -21,27 +21,17 @@ class EzLink extends WidgetSpan {
   /// What does this link do?
   final String? semanticsLabel;
 
-  final PlaceholderAlignment alignment;
-  final TextBaseline? baseline;
-
-  /// Custom [WidgetSpan] to pair with [EzTextBlock]
-  /// Creates an internal [action] link via [EzText.onTap]
-  /// See [EzWebLink] for making extertnal links
+  /// [EzText] wrapper that opens an internal link via [onTap]
+  /// See [EzWebLink] for making external links
   EzLink(
     this.text, {
-    required this.action,
     this.style,
     this.semanticsLabel,
-    this.alignment = PlaceholderAlignment.middle,
-    this.baseline,
+    required this.onTap,
   }) : super(
-          child: EzText(
-            text,
-            style: style,
-            onTap: action,
-            semanticsLabel: semanticsLabel,
-          ),
-          alignment: alignment,
-          baseline: baseline,
+          text,
+          style: style,
+          semanticsLabel: semanticsLabel,
+          onTap: onTap,
         );
 }
