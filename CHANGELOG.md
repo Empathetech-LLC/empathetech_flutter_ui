@@ -4,15 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [4.2.0] - 2023-10-XX
 ### Updated
+- File organization
 - README asset organization
+- Comments
 - Moved consts/credits to consts/empathetechConfig
 - Updated all text Widgets
-  - Split EzSelectableText into EzText, EzPlainText, EzTextBlock
-  - Updated params for EzLink and EzWebLink
-  - All have minor breaking changes
+  - Minor breaking changes
 - EzColors from classes to functions
   - Minor breaking change
-- File organization
+- Repsonsive widgets make limited space checks themselves
+  - Minor breaking upgrade
 
 ### Removed
 - Copy to clipboard function && flutter toast package
