@@ -333,47 +333,53 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
     return autoPlayDisabled
         ? EzWarning(message: EFUILang.of(context)!.gAutoPlayDisabled)
-        : MouseRegion(
-            cursor: SystemMouseCursors.click,
-            onEnter: (_) {
-              setState(() {
-                show = true;
-              });
-            },
-            onExit: (_) {
-              setState(() {
-                show = false;
-              });
-            },
-            child: AspectRatio(
-              aspectRatio: widget.controller.value.aspectRatio,
+        : Semantics(
+            label: widget.semantics,
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_) {
+                setState(() {
+                  show = true;
+                });
+              },
+              onExit: (_) {
+                setState(() {
+                  show = false;
+                });
+              },
               child: Stack(
                 children: [
                   // Video
-                  Semantics(
-                    label: widget.semantics,
-                    child: VideoPlayer(widget.controller),
+                  ExcludeSemantics(
+                    child: Positioned.fill(
+                      child: AspectRatio(
+                        aspectRatio: widget.controller.value.aspectRatio,
+                        child: VideoPlayer(widget.controller),
+                      ),
+                    ),
                   ),
 
                   // Tap-to-pause
-                  Positioned(
-                    top: 0,
-                    bottom: _buttonSize * 3,
-                    left: 0,
-                    right: 0,
-                    child: GestureDetector(
-                        child: Container(color: Colors.transparent),
-                        onTap: () {
-                          (widget.controller.value.isPlaying)
-                              ? _pauseVideo()
-                              : _playVideo();
-                        }),
+                  ExcludeSemantics(
+                    child: Positioned(
+                      top: 0,
+                      bottom: _buttonSize * 3 + _margin,
+                      left: 0,
+                      right: 0,
+                      child: GestureDetector(
+                          child: Container(color: Colors.transparent),
+                          onTap: () {
+                            (widget.controller.value.isPlaying)
+                                ? _pauseVideo()
+                                : _playVideo();
+                          }),
+                    ),
                   ),
 
                   // Controls
                   Positioned(
                     height: _buttonSize * 3,
-                    bottom: 0,
+                    bottom: _margin,
                     left: _margin,
                     right: _margin,
                     child: Container(
@@ -402,7 +408,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               : EzSpacer(_buttonSize),
 
                           // Buttons
-                          Row(
+                          EzScrollView(
+                            scrollDirection: Axis.horizontal,
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: widget.controlsAlignment,
                             crossAxisAlignment: CrossAxisAlignment.start,
