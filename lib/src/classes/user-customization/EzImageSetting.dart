@@ -82,7 +82,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILang.of(context)!.is_FromFile),
+        label: Text(EFUILang.of(context)!.isFromFile),
         icon: Icon(PlatformIcons(context).folder),
       ),
       EzSpacer(_buttonSpacer),
@@ -98,7 +98,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILang.of(context)!.is_FromCamera),
+        label: Text(EFUILang.of(context)!.isFromCamera),
         icon: Icon(PlatformIcons(context).photoCamera),
       ),
       EzSpacer(_buttonSpacer),
@@ -115,7 +115,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             pass: EzConfig.instance.defaults[widget.prefsKey],
           );
         },
-        label: Text(EFUILang.of(context)!.is_ResetIt),
+        label: Text(EFUILang.of(context)!.isResetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ];
@@ -133,7 +133,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, pass: noImageKey);
           },
-          label: Text(EFUILang.of(context)!.is_ClearIt),
+          label: Text(EFUILang.of(context)!.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -144,7 +144,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: EzText(
-          EFUILang.of(context)!.is_DialogTitle(widget.title),
+          EFUILang.of(context)!.isDialogTitle(widget.title),
         ),
         content: EzScrollView(children: options),
       ),
@@ -157,7 +157,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.is_ButtonHint(widget.title),
+      hint: EFUILang.of(context)!.isButtonHint(widget.title),
       child: ExcludeSemantics(
         child: ElevatedButton(
           // On pressed -> choose image
@@ -173,7 +173,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzText(EFUILang.of(context)!.is_CreditTo),
+              title: EzText(EFUILang.of(context)!.isCreditTo),
               content: EzText(widget.credits),
             ),
           ),
@@ -208,7 +208,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           EzImage(
                               image: provideStoredImage(_updatedPath!),
                               semanticLabel:
-                                  widget.title + EFUILang.of(context)!.is_Image,
+                                  widget.title + EFUILang.of(context)!.isImage,
                             )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
@@ -222,7 +222,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                                 EzConfig.instance.prefs[widget.prefsKey],
                               ),
                               semanticLabel:
-                                  widget.title + EFUILang.of(context)!.is_Image,
+                                  widget.title + EFUILang.of(context)!.isImage,
                             ),
                 ),
               ),

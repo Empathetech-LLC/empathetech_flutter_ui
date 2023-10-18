@@ -46,7 +46,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           },
           child: Text(
             (font == _defaultFontFamily)
-                ? EFUILang.of(context)!.sts_DefaultFont(font)
+                ? EFUILang.of(context)!.stsDefaultFont(font)
                 : font,
             style: style,
             textAlign: TextAlign.center,
@@ -59,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.sts_chooseFont),
+        title: EzText(EFUILang.of(context)!.stschooseFont),
         content: EzScrollView(children: buttons),
       ),
     );
@@ -73,7 +73,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       onPressed: () => _chooseGoogleFont(context),
       icon: const Icon(LineIcons.font),
       label: Text(
-        EFUILang.of(context)!.sts_TextFont,
+        EFUILang.of(context)!.stsTextFont,
         style: TextStyle(fontFamily: currFontFamily),
         textAlign: TextAlign.center,
       ),

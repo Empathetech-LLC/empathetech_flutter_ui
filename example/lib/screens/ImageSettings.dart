@@ -18,17 +18,17 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.is_PageTitle);
+    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.g_Light : EFUILang.of(context)!.g_Dark;
+      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
 
   late final String _resetTitle =
-      EFUILang.of(context)!.is_ResetAll(_themeProfile);
+      EFUILang.of(context)!.isResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -43,7 +43,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             EzText(
-              EFUILang.of(context)!.d_EditingTheme(_themeProfile),
+              EFUILang.of(context)!.dEditingTheme(_themeProfile),
               style: titleSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -63,10 +63,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: EFUILang.of(context)!.g_Page,
+                          title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.is_Source,
+                          credits: EFUILang.of(context)!.isSource,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -75,10 +75,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: EFUILang.of(context)!.g_Page,
+                          title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.is_Source,
+                          credits: EFUILang.of(context)!.isSource,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],

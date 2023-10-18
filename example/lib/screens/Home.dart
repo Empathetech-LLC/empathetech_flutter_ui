@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.ss_PageTitle);
+    setPageTitle(context, EFUILang.of(context)!.ssPageTitle);
   }
 
   // Gather theme data //
@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
             // Functionality disclaimer
             EzWarning(
               message: kIsWeb
-                  ? EFUILang.of(context)!.d_ResetAllWarn
-                  : EFUILang.of(context)!.d_ResetAllWarnWeb,
+                  ? EFUILang.of(context)!.dResetAllWarn
+                  : EFUILang.of(context)!.dResetAllWarnWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_buttonSpacer),
@@ -59,14 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(EFUILang.of(context)!.hs_Style),
+              child: Text(EFUILang.of(context)!.hsStyle),
             ),
             EzSpacer(_buttonSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: Text(EFUILang.of(context)!.hs_Colors),
+              child: Text(EFUILang.of(context)!.hsColors),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(EFUILang.of(context)!.hs_Images),
+              child: Text(EFUILang.of(context)!.hsImages),
             ),
             EzSpacer(_buttonSpacer),
 

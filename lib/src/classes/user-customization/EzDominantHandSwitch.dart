@@ -26,11 +26,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(EFUILang.of(context)!.g_Right),
+        child: Text(EFUILang.of(context)!.gRight),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(EFUILang.of(context)!.g_Left),
+        child: Text(EFUILang.of(context)!.gLeft),
         value: Hand.left,
       ),
     ];
@@ -41,14 +41,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     List<Widget> _children = [
       // Label
       EzText(
-        EFUILang.of(context)!.hs_DominantHand,
+        EFUILang.of(context)!.hsDominantHand,
         style: _style,
       ),
       EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button
       Semantics(
-        hint: EFUILang.of(context)!.hs_HandSemantics,
+        hint: EFUILang.of(context)!.hsHandSemantics,
         child: DropdownButton<Hand>(
           value: currSide,
           items: items,

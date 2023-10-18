@@ -1,14 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-/* We use the following convention: scope_CamelName
- * g == global
- * d == default
- * hs == home screen
- * ss == settings screen
- * sss == style settings screen
- * cs == color settings screen
- * is == image settings screen
- */
-
 import 'efui_lang.dart';
 
 /// The translations for Spanish Castilian (`es`).
@@ -16,248 +5,247 @@ class EFUILangEs extends EFUILang {
   EFUILangEs([String locale = 'es']) : super(locale);
 
   @override
-  String get g_Yes => 'Sí';
+  String get gYes => 'Sí';
 
   @override
-  String get g_No => 'No';
+  String get gNo => 'No';
 
   @override
-  String get g_Right => 'Derecha';
+  String get gRight => 'Derecha';
 
   @override
-  String get g_Left => 'Izquierda';
+  String get gLeft => 'Izquierda';
 
   @override
-  String get g_Apply => 'Aplicar';
+  String get gApply => 'Aplicar';
 
   @override
-  String get g_Cancel => 'Cancelar';
+  String get gCancel => 'Cancelar';
 
   @override
-  String get g_Close => 'Cerrar';
+  String get gClose => 'Cerrar';
 
   @override
-  String get g_System => 'Sistema';
+  String get gSystem => 'Sistema';
 
   @override
-  String get g_Light => 'Claro';
+  String get gLight => 'Ligero';
 
   @override
-  String get g_Dark => 'Oscuro';
+  String get gDark => 'Oscuro';
 
   @override
-  String get g_Page => 'Página';
+  String get gPage => 'Página';
 
   @override
-  String get g_autoPlayDisabled =>
-      'Los videos con reproducción automática están desactivados.';
+  String get gAutoPlayDisabled =>
+      'La reproducción automática de videos está desactivada.';
 
   @override
-  String get d_HomeHint => 'Regresar a la pantalla principal';
+  String get dHomeHint => 'Regresar a la pantalla principal';
 
   @override
-  String get d_ResetAll => 'Restablecer todo';
+  String get dResetAll => 'Restablecer todo';
 
   @override
-  String get d_ResetDialogTitle => '¿Restablecer todas las configuraciones?';
+  String get dResetDialogTitle => '¿Restablecer todas las configuraciones?';
 
   @override
-  String get d_ResetDialogContent => 'No se puede deshacer';
+  String get dResetDialogContent => 'No se puede deshacer';
 
   @override
-  String get d_Attention => 'Atención';
+  String get dAttention => 'Atención';
 
   @override
-  String get d_ResetAllWarn =>
-      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
-
-  @override
-  String get d_ResetAllWarnWeb =>
+  String get dResetAllWarn =>
       'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
 
   @override
-  String d_EditingTheme(Object themeType) {
+  String get dResetAllWarnWeb =>
+      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
+
+  @override
+  String dEditingTheme(Object themeType) {
     return 'Editando: tema $themeType';
   }
 
   @override
-  String get hs_ThemeMode => 'Modo de tema';
+  String get hsThemeMode => 'Modo de tema';
 
   @override
-  String get hs_ThemeSemantics =>
+  String get hsThemeSemantics =>
       'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
 
   @override
-  String get hs_DominantHand => 'Mano dominante';
+  String get hsDominantHand => 'Mano dominante';
 
   @override
-  String get hs_HandSemantics =>
+  String get hsHandSemantics =>
       'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
 
   @override
-  String get hs_Style => 'Estilo';
+  String get hsStyle => 'Estilo';
 
   @override
-  String get hs_Colors => 'Colores';
+  String get hsColors => 'Colores';
 
   @override
-  String get hs_Images => 'Imágenes';
+  String get hsImages => 'Imágenes';
 
   @override
-  String get ss_PageTitle => 'Configuraciones';
+  String get ssPageTitle => 'Configuraciones';
 
   @override
-  String get ss_SettingsGuide =>
+  String get ssSettingsGuide =>
       'Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
-  String get ss_SettingsGuideWeb =>
+  String get ssSettingsGuideWeb =>
       'Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
-  String get sts_PageTitle => 'Configuraciones de estilo';
+  String get stsPageTitle => 'Configuraciones de estilo';
 
   @override
-  String get sts_TextFont => 'Fuente de texto';
+  String get stsTextFont => 'Fuente de texto';
 
   @override
-  String get sts_chooseFont => 'Selecciona una fuente';
+  String get stschooseFont => 'Selecciona una fuente';
 
   @override
-  String sts_DefaultFont(Object font) {
+  String stsDefaultFont(Object font) {
     return '$font* (por defecto)';
   }
 
   @override
-  String get sts_Margin => 'Margen';
+  String get stsMargin => 'Margen';
 
   @override
-  String get sts_Padding => 'Relleno';
+  String get stsPadding => 'Relleno';
 
   @override
-  String get sts_CircleSize => 'Tamaño del botón circular';
+  String get stsCircleSize => 'Tamaño del botón circular';
 
   @override
-  String get sts_ButtonSpacing => 'Espaciado de botones';
+  String get stsButtonSpacing => 'Espaciado de botones';
 
   @override
-  String get sts_TextSpacing => 'Espaciado de texto';
+  String get stsTextSpacing => 'Espaciado de texto';
 
   @override
-  String get sts_Currently => 'Actualmente: ';
+  String get stsCurrently => 'Actualmente: ';
 
   @override
-  String sts_SetToValue(Object name, Object value) {
+  String stsSetToValue(Object name, Object value) {
     return '$name está configurado actualmente en $value';
   }
 
   @override
-  String get sts_Reset => 'Restablecer: ';
+  String get stsReset => 'Restablecer: ';
 
   @override
-  String sts_ResetToValue(Object name, Object value) {
+  String stsResetToValue(Object name, Object value) {
     return 'Restablecer $name a $value';
   }
 
   @override
-  String get sts_ResetAll =>
-      '¿Restablecer todas las configuraciones de estilo?';
+  String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
 
   @override
-  String get cs_PageTitle => 'Configuraciones de color';
+  String get csPageTitle => 'Configuraciones de color';
 
   @override
-  String cs_EditingTheme(Object themeType) {
+  String csEditingTheme(Object themeType) {
     return 'Editando: colores del tema $themeType\nMantén presionados los botones para restablecer individualmente';
   }
 
   @override
-  String get cs_PickerTitle => '¡Selecciona un color!';
+  String get csPickerTitle => '¡Selecciona un color!';
 
   @override
-  String cs_PickerSemantics(Object name) {
+  String csPickerSemantics(Object name) {
     return 'Activar para abrir el selector de color para $name. Mantenga presionado para restablecer $name.';
   }
 
   @override
-  String get cs_ResetTo => 'Restablecer a...';
+  String get csResetTo => 'Restablecer a...';
 
   @override
-  String get cs_Theme => 'Tema';
+  String get csTheme => 'Tema';
 
   @override
-  String get cs_ThemeText => 'Texto del tema';
+  String get csThemeText => 'Texto del tema';
 
   @override
-  String get cs_Recommended => '¿Usar recomendado?';
+  String get csRecommended => '¿Usar recomendado?';
 
   @override
-  String get cs_UseCustom => 'Usar personalizado';
+  String get csUseCustom => 'Usar personalizado';
 
   @override
-  String get cs_PageText => 'Texto de la página';
+  String get csPageText => 'Texto de la página';
 
   @override
-  String get cs_Buttons => 'Botones';
+  String get csButtons => 'Botones';
 
   @override
-  String get cs_ButtonText => 'Texto de los botones';
+  String get csButtonText => 'Texto de los botones';
 
   @override
-  String get cs_Accent => 'Acento';
+  String get csAccent => 'Acento';
 
   @override
-  String get cs_AccentText => 'Texto de acento';
+  String get csAccentText => 'Texto de acento';
 
   @override
-  String cs_ResetAll(Object themeType) {
+  String csResetAll(Object themeType) {
     return '¿Restablecer todos los colores del tema $themeType?';
   }
 
   @override
-  String get is_PageTitle => 'Configuraciones de imagen';
+  String get isPageTitle => 'Configuraciones de imagen';
 
   @override
-  String get is_Image => 'imagen';
+  String get isImage => 'imagen';
 
   @override
-  String is_ButtonHint(Object title) {
+  String isButtonHint(Object title) {
     return 'Actualizar la imagen de $title';
   }
 
   @override
-  String is_DialogTitle(Object title) {
+  String isDialogTitle(Object title) {
     return '¿Cómo se debe actualizar la imagen de $title?';
   }
 
   @override
-  String get is_FromFile => 'Desde archivo';
+  String get isFromFile => 'Desde archivo';
 
   @override
-  String get is_FromCamera => 'Desde cámara';
+  String get isFromCamera => 'Desde cámara';
 
   @override
-  String get is_GetFailed => 'No se pudo recuperar la imagen';
+  String get isGetFailed => 'Error al recuperar la imagen';
 
   @override
-  String is_SetFailed(Object error) {
-    return 'No se pudo actualizar la imagen:\n$error';
+  String isSetFailed(Object error) {
+    return 'Error al actualizar la imagen:\n$error';
   }
 
   @override
-  String get is_ResetIt => 'Restablécelo';
+  String get isResetIt => 'Restablécelo';
 
   @override
-  String get is_ClearIt => 'Borrarlo';
+  String get isClearIt => 'Borrarlo';
 
   @override
-  String get is_CreditTo => 'Crédito a:';
+  String get isCreditTo => 'Crédito a:';
 
   @override
-  String get is_Source => '¡De donde lo obtuviste!';
+  String get isSource => '¡De donde lo obtuviste!';
 
   @override
-  String is_ResetAll(Object themeType) {
+  String isResetAll(Object themeType) {
     return '¿Restablecer todas las imágenes del tema $themeType?';
   }
 }

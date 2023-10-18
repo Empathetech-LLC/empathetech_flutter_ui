@@ -17,7 +17,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.sts_PageTitle);
+    setPageTitle(context, EFUILang.of(context)!.stsPageTitle);
   }
 
   // Gather theme data //
@@ -42,7 +42,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: EFUILang.of(context)!.sts_Margin,
+              title: EFUILang.of(context)!.stsMargin,
               min: 5.0,
               max: 50.0,
               steps: 18,
@@ -54,7 +54,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: EFUILang.of(context)!.sts_Padding,
+              title: EFUILang.of(context)!.stsPadding,
               min: 0.0,
               max: 50.0,
               steps: 20,
@@ -66,7 +66,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: circleDiameterKey,
               type: SliderSettingType.circleSize,
-              title: EFUILang.of(context)!.sts_CircleSize,
+              title: EFUILang.of(context)!.stsCircleSize,
               min: 30,
               max: 100,
               steps: 14,
@@ -78,7 +78,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.sts_ButtonSpacing,
+              title: EFUILang.of(context)!.stsButtonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -90,7 +90,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: EFUILang.of(context)!.sts_TextSpacing,
+              title: EFUILang.of(context)!.stsTextSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -101,8 +101,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Local reset "all"
             EzResetButton(
               context: context,
-              hint: EFUILang.of(context)!.sts_ResetAll,
-              dialogTitle: EFUILang.of(context)!.sts_ResetAll,
+              hint: EFUILang.of(context)!.stsResetAll,
+              dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
                 EzConfig.instance.preferences.remove(fontFamilyKey);
                 EzConfig.instance.preferences.remove(marginKey);

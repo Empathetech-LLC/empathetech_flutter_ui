@@ -78,13 +78,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.sts_Currently +
+                child: Text(EFUILang.of(context)!.stsCurrently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.sts_Currently +
+                child: Text(EFUILang.of(context)!.stsCurrently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(_buttonSpacer),
@@ -129,7 +129,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               EzText(
-                EFUILang.of(context)!.sts_Currently +
+                EFUILang.of(context)!.stsCurrently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
               ),
@@ -159,7 +159,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.sts_Currently +
+            child: Text(EFUILang.of(context)!.stsCurrently +
                 currValue.toStringAsFixed(widget.decimals)),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -182,14 +182,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               EzText(
-                  EFUILang.of(context)!.sts_Currently +
+                  EFUILang.of(context)!.stsCurrently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: currValue),
 
               // Thing 2
               EzText(
-                  EFUILang.of(context)!.sts_Currently +
+                  EFUILang.of(context)!.stsCurrently +
                       currValue.toStringAsFixed(widget.decimals),
                   style: style),
               SizedBox(height: _buttonSpacer),
@@ -212,7 +212,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label: EFUILang.of(context)!.sts_SetToValue(
+        label: EFUILang.of(context)!.stsSetToValue(
           getSettingName(context, widget.type),
           currValue.toStringAsFixed(widget.decimals),
         ),
@@ -271,7 +271,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: EFUILang.of(context)!.sts_ResetToValue(
+        hint: EFUILang.of(context)!.stsResetToValue(
           getSettingName(context, widget.type),
           _defaultValue.toStringAsFixed(widget.decimals),
         ),
@@ -284,7 +284,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text(EFUILang.of(context)!.sts_Reset +
+            label: Text(EFUILang.of(context)!.stsReset +
                 _defaultValue.toStringAsFixed(widget.decimals)),
           ),
         ),

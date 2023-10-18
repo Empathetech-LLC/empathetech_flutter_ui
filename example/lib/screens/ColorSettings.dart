@@ -18,18 +18,18 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.cs_PageTitle);
+    setPageTitle(context, EFUILang.of(context)!.csPageTitle);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.g_Light : EFUILang.of(context)!.g_Dark;
+      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
 
   // Define local reset button's messages
   late final String _resetTitle =
-      EFUILang.of(context)!.cs_ResetAll(_themeProfile);
+      EFUILang.of(context)!.csResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -46,7 +46,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    EFUILang.of(context)!.cs_EditingTheme(_themeProfile),
+                    EFUILang.of(context)!.csEditingTheme(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
@@ -64,13 +64,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: lightThemeColorKey,
-                          name: EFUILang.of(context)!.cs_Theme,
+                          name: EFUILang.of(context)!.csTheme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightThemeTextColorKey,
-                          name: EFUILang.of(context)!.cs_ThemeText,
+                          name: EFUILang.of(context)!.csThemeText,
                           textBackgroundKey: lightThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -78,13 +78,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: lightPageColorKey,
-                          name: EFUILang.of(context)!.g_Page,
+                          name: EFUILang.of(context)!.gPage,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightPageTextColorKey,
-                          name: EFUILang.of(context)!.cs_PageText,
+                          name: EFUILang.of(context)!.csPageText,
                           textBackgroundKey: lightPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -92,13 +92,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: lightButtonColorKey,
-                          name: EFUILang.of(context)!.cs_Buttons,
+                          name: EFUILang.of(context)!.csButtons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightButtonTextColorKey,
-                          name: EFUILang.of(context)!.cs_ButtonText,
+                          name: EFUILang.of(context)!.csButtonText,
                           textBackgroundKey: lightButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -106,13 +106,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: lightAccentColorKey,
-                          name: EFUILang.of(context)!.cs_Accent,
+                          name: EFUILang.of(context)!.csAccent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightAccentTextColorKey,
-                          name: EFUILang.of(context)!.cs_AccentText,
+                          name: EFUILang.of(context)!.csAccentText,
                           textBackgroundKey: lightAccentColorKey,
                         ),
                       ],
@@ -152,7 +152,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    EFUILang.of(context)!.cs_EditingTheme(_themeProfile),
+                    EFUILang.of(context)!.csEditingTheme(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -170,13 +170,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: darkThemeColorKey,
-                          name: EFUILang.of(context)!.cs_Theme,
+                          name: EFUILang.of(context)!.csTheme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkThemeTextColorKey,
-                          name: EFUILang.of(context)!.cs_ThemeText,
+                          name: EFUILang.of(context)!.csThemeText,
                           textBackgroundKey: darkThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -184,13 +184,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: darkPageColorKey,
-                          name: EFUILang.of(context)!.g_Page,
+                          name: EFUILang.of(context)!.gPage,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkPageTextColorKey,
-                          name: EFUILang.of(context)!.cs_PageText,
+                          name: EFUILang.of(context)!.csPageText,
                           textBackgroundKey: darkPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -198,13 +198,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: darkButtonColorKey,
-                          name: EFUILang.of(context)!.cs_Buttons,
+                          name: EFUILang.of(context)!.csButtons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkButtonTextColorKey,
-                          name: EFUILang.of(context)!.cs_ButtonText,
+                          name: EFUILang.of(context)!.csButtonText,
                           textBackgroundKey: darkButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -212,13 +212,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: darkAccentColorKey,
-                          name: EFUILang.of(context)!.cs_Accent,
+                          name: EFUILang.of(context)!.csAccent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkAccentTextColorKey,
-                          name: EFUILang.of(context)!.cs_AccentText,
+                          name: EFUILang.of(context)!.csAccentText,
                           textBackgroundKey: darkAccentColorKey,
                         ),
                       ],
