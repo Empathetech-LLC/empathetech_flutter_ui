@@ -1,3 +1,14 @@
+// ignore_for_file: non_constant_identifier_names
+/* We use the following convention: scope_CamelName
+ * g == global
+ * d == default
+ * hs == home screen
+ * ss == settings screen
+ * sss == style settings screen
+ * cs == color settings screen
+ * is == image settings screen
+ */
+
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
@@ -153,6 +164,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Dark'**
   String get g_Dark;
+
+  /// No description provided for @g_Page.
+  ///
+  /// In en, this message translates to:
+  /// **'Page'**
+  String get g_Page;
 
   /// No description provided for @g_autoPlayDisabled.
   ///
@@ -405,12 +422,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Use custom'**
   String get cs_UseCustom;
-
-  /// No description provided for @g_Page.
-  ///
-  /// In en, this message translates to:
-  /// **'Page'**
-  String get g_Page;
 
   /// No description provided for @cs_PageText.
   ///

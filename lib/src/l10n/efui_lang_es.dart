@@ -1,3 +1,14 @@
+// ignore_for_file: non_constant_identifier_names
+/* We use the following convention: scope_CamelName
+ * g == global
+ * d == default
+ * hs == home screen
+ * ss == settings screen
+ * sss == style settings screen
+ * cs == color settings screen
+ * is == image settings screen
+ */
+
 import 'efui_lang.dart';
 
 /// The translations for Spanish Castilian (`es`).
@@ -33,6 +44,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get g_Dark => 'Oscuro';
+
+  @override
+  String get g_Page => 'Página';
 
   @override
   String get g_autoPlayDisabled =>
@@ -179,9 +193,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get cs_UseCustom => 'Usar personalizado';
-
-  @override
-  String get g_Page => 'Página';
 
   @override
   String get cs_PageText => 'Texto de la página';
