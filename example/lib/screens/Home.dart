@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => context.goNamed(imageSettingsRoute),
               child: Text(EFUILang.of(context)!.isPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            EzSpacer(2 * _buttonSpacer),
 
             // Reset button
             EzResetButton(context: context),
