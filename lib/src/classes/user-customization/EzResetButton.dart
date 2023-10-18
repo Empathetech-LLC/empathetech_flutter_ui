@@ -58,7 +58,7 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return TextButton.icon(
+    return OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
       label: Text(message ?? EFUILang.of(context)!.dResetAll),
       onPressed: () => showPlatformDialog(
