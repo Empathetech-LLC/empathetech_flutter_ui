@@ -38,6 +38,18 @@ class EFUILangEs extends EFUILang {
   String get gPage => 'Página';
 
   @override
+  String get gPlay => 'Reproducir';
+
+  @override
+  String get gPause => 'Pausar';
+
+  @override
+  String get gMute => 'Silenciar';
+
+  @override
+  String get gReplay => 'Repetir';
+
+  @override
   String get gAutoPlayDisabled =>
       'La reproducción automática de videos está desactivada.';
 

@@ -12,6 +12,10 @@
   "gLight": "Ligero",
   "gDark": "Oscuro",
   "gPage": "Página",
+  "gPlay": "Reproducir",
+  "gPause": "Pausar",
+  "gMute": "Silenciar",
+  "gReplay": "Repetir",
   "gAutoPlayDisabled": "La reproducción automática de videos está desactivada.",
 
   "dHomeHint": "Regresar a la pantalla principal",

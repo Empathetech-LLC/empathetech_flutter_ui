@@ -175,15 +175,26 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Play/pause
     if (widget.playVis != ButtonVis.alwaysOff) {
       controls.addAll([
-        IconButton(
-          icon: Icon((widget.controller.value.isPlaying)
-              ? PlatformIcons(context).pause
-              : PlatformIcons(context).playArrow),
-          onPressed: () {
-            (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
-          },
-          color: _buildColor(widget.playVis),
-          iconSize: _buttonSize,
+        Semantics(
+          button: true,
+          hint: widget.controller.value.isPlaying
+              ? EFUILang.of(context)!.gPause
+              : EFUILang.of(context)!.gPlay,
+          child: ExcludeSemantics(
+            child: IconButton(
+              icon: Icon((widget.controller.value.isPlaying)
+                  ? PlatformIcons(context).pause
+                  : PlatformIcons(context).playArrow),
+              onPressed: () {
+                (widget.controller.value.isPlaying)
+                    ? _pauseVideo()
+                    : _playVideo();
+              },
+              color: _buildColor(widget.playVis),
+              iconSize: _buttonSize,
+              padding: EdgeInsets.zero,
+            ),
+          ),
         ),
         EzSpacer.row(_buttonSpacer),
       ]);
@@ -193,17 +204,24 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.volumeVis != ButtonVis.alwaysOff) {
       controls.addAll([
         // Base button
-        IconButton(
-          icon: Icon((widget.controller.value.volume == 0.0)
-              ? PlatformIcons(context).volumeMute
-              : PlatformIcons(context).volumeUp),
-          onPressed: () {
-            (widget.controller.value.volume == 0.0)
-                ? _unMuteVideo()
-                : _muteVideo();
-          },
-          color: _buildColor(widget.volumeVis),
-          iconSize: _buttonSize,
+        Semantics(
+          button: true,
+          hint: EFUILang.of(context)!.gMute,
+          child: ExcludeSemantics(
+            child: IconButton(
+              icon: Icon((widget.controller.value.volume == 0.0)
+                  ? PlatformIcons(context).volumeMute
+                  : PlatformIcons(context).volumeUp),
+              onPressed: () {
+                (widget.controller.value.volume == 0.0)
+                    ? _unMuteVideo()
+                    : _muteVideo();
+              },
+              color: _buildColor(widget.volumeVis),
+              iconSize: _buttonSize,
+              padding: EdgeInsets.zero,
+            ),
+          ),
         ),
 
         (widget.variableVolume)
@@ -237,11 +255,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Replay
     if (widget.replayVis != ButtonVis.alwaysOff) {
       controls.addAll([
-        IconButton(
-          icon: Icon(PlatformIcons(context).refresh),
-          onPressed: _replayVideo,
-          color: _buildColor(widget.replayVis),
-          iconSize: _buttonSize,
+        Semantics(
+          button: true,
+          hint: EFUILang.of(context)!.gReplay,
+          child: ExcludeSemantics(
+            child: IconButton(
+              icon: Icon(PlatformIcons(context).refresh),
+              onPressed: _replayVideo,
+              color: _buildColor(widget.replayVis),
+              iconSize: _buttonSize,
+              padding: EdgeInsets.zero,
+            ),
+          ),
         ),
         EzSpacer.row(_buttonSpacer),
       ]);

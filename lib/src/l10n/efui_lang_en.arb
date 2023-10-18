@@ -12,6 +12,10 @@
   "gLight": "Light",
   "gDark": "Dark",
   "gPage": "Page",
+  "gPlay": "Play",
+  "gPause": "Pause",
+  "gMute": "Mute",
+  "gReplay": "Replay",
   "gAutoPlayDisabled": "Auto-play videos are disabled.",
 
   "dHomeHint": "Return to the home screen",

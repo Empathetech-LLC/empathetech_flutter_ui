@@ -38,6 +38,18 @@ class EFUILangEn extends EFUILang {
   String get gPage => 'Page';
 
   @override
+  String get gPlay => 'Play';
+
+  @override
+  String get gPause => 'Pause';
+
+  @override
+  String get gMute => 'Mute';
+
+  @override
+  String get gReplay => 'Replay';
+
+  @override
   String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
 
   @override
