@@ -96,12 +96,11 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(_buttonSpacer),
+            EzSpacer(2 * _buttonSpacer),
 
             // Local reset "all"
             EzResetButton(
               context: context,
-              hint: EFUILang.of(context)!.stsResetAll,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
                 EzConfig.instance.preferences.remove(fontFamilyKey);

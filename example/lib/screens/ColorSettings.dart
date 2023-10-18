@@ -118,7 +118,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       ],
                     ),
                   ),
-                  EzSpacer(_buttonSpacer),
+                  EzSpacer(2 * _buttonSpacer),
 
                   // Local reset "all"
                   EzResetButton(
@@ -224,7 +224,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       ],
                     ),
                   ),
-                  EzSpacer(_buttonSpacer),
+                  EzSpacer(2 * _buttonSpacer),
 
                   // Local reset "all"
                   EzResetButton(
