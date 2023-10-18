@@ -56,9 +56,8 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
-    // Return the build //
-
-    return OutlinedButton.icon(
+    // Define the build //
+    final OutlinedButton resetButton = OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
       label: Text(message ?? EFUILang.of(context)!.dResetAll),
       onPressed: () => showPlatformDialog(
@@ -86,5 +85,15 @@ class EzResetButton extends StatelessWidget {
         ),
       ),
     );
+
+    // Return the build //
+
+    return (hint == null)
+        ? resetButton
+        : Semantics(
+            button: true,
+            hint: hint,
+            child: ExcludeSemantics(child: resetButton),
+          );
   }
 }
