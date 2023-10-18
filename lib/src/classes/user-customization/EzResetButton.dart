@@ -58,38 +58,31 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return Semantics(
-      button: true,
-      hint: hint ?? EFUILang.of(context)!.resetButtonHint,
-      child: ExcludeSemantics(
-        child: TextButton.icon(
-          icon: Icon(PlatformIcons(context).refresh),
-          label: Text(message ?? EFUILang.of(context)!.resetAll),
-          onPressed: () => showPlatformDialog(
-            context: context,
-            builder: (context) => EzAlertDialog(
-              title: EzText(
-                dialogTitle ?? EFUILang.of(context)!.resetButtonDialogTitle,
-              ),
-              content: EzText(
-                dialogContents ??
-                    EFUILang.of(context)!.resetButtonDialogContents,
-              ),
-              materialActions: ezMaterialActions(
-                context: context,
-                onConfirm: _onConfirm,
-                onDeny: _onDeny,
-              ),
-              cupertinoActions: ezCupertinoActions(
-                context: context,
-                onConfirm: _onConfirm,
-                onDeny: _onDeny,
-                confirmIsDestructive: true,
-                denyIsDefault: true,
-              ),
-              needsClose: false,
-            ),
+    return TextButton.icon(
+      icon: Icon(PlatformIcons(context).refresh),
+      label: Text(message ?? EFUILang.of(context)!.d_ResetAll),
+      onPressed: () => showPlatformDialog(
+        context: context,
+        builder: (context) => EzAlertDialog(
+          title: EzText(
+            dialogTitle ?? EFUILang.of(context)!.d_ResetDialogTitle,
           ),
+          content: EzText(
+            dialogContents ?? EFUILang.of(context)!.d_ResetDialogContent,
+          ),
+          materialActions: ezMaterialActions(
+            context: context,
+            onConfirm: _onConfirm,
+            onDeny: _onDeny,
+          ),
+          cupertinoActions: ezCupertinoActions(
+            context: context,
+            onConfirm: _onConfirm,
+            onDeny: _onDeny,
+            confirmIsDestructive: true,
+            denyIsDefault: true,
+          ),
+          needsClose: false,
         ),
       ),
     );

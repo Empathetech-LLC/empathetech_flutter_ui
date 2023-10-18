@@ -94,299 +94,437 @@ abstract class EFUILang {
     Locale('es')
   ];
 
-  /// No description provided for @close.
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get close;
-
-  /// No description provided for @apply.
-  ///
-  /// In en, this message translates to:
-  /// **'Apply'**
-  String get apply;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @yes.
+  /// No description provided for @g_Yes.
   ///
   /// In en, this message translates to:
   /// **'Yes'**
-  String get yes;
+  String get g_Yes;
 
-  /// No description provided for @no.
+  /// No description provided for @g_No.
   ///
   /// In en, this message translates to:
   /// **'No'**
-  String get no;
+  String get g_No;
 
-  /// No description provided for @warning.
-  ///
-  /// In en, this message translates to:
-  /// **'WARNING'**
-  String get warning;
-
-  /// No description provided for @useCustom.
-  ///
-  /// In en, this message translates to:
-  /// **'Use custom'**
-  String get useCustom;
-
-  /// No description provided for @useRecommended.
-  ///
-  /// In en, this message translates to:
-  /// **'Use recommended?'**
-  String get useRecommended;
-
-  /// No description provided for @resetTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get resetTo;
-
-  /// No description provided for @colorSettingSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Activate to open a color picker for {name}. Long press to reset {name}.'**
-  String colorSettingSemantics(Object name);
-
-  /// No description provided for @right.
+  /// No description provided for @g_Right.
   ///
   /// In en, this message translates to:
   /// **'Right'**
-  String get right;
+  String get g_Right;
 
-  /// No description provided for @left.
+  /// No description provided for @g_Left.
   ///
   /// In en, this message translates to:
   /// **'Left'**
-  String get left;
+  String get g_Left;
 
-  /// No description provided for @dominantHand.
+  /// No description provided for @g_Apply.
   ///
   /// In en, this message translates to:
-  /// **'Dominant hand'**
-  String get dominantHand;
+  /// **'Apply'**
+  String get g_Apply;
 
-  /// No description provided for @handSettingSemantics.
+  /// No description provided for @g_Cancel.
   ///
   /// In en, this message translates to:
-  /// **'Open to choose left or right. Currently set to:'**
-  String get handSettingSemantics;
+  /// **'Cancel'**
+  String get g_Cancel;
 
-  /// No description provided for @defaultTag.
+  /// No description provided for @g_Close.
   ///
   /// In en, this message translates to:
-  /// **'{font}* (default)'**
-  String defaultTag(Object font);
+  /// **'Close'**
+  String get g_Close;
 
-  /// No description provided for @chooseFont.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose a font'**
-  String get chooseFont;
-
-  /// No description provided for @fontSettingLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Text font'**
-  String get fontSettingLabel;
-
-  /// No description provided for @fromFile.
-  ///
-  /// In en, this message translates to:
-  /// **'From file'**
-  String get fromFile;
-
-  /// No description provided for @fromCamera.
-  ///
-  /// In en, this message translates to:
-  /// **'From camera'**
-  String get fromCamera;
-
-  /// No description provided for @resetIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset it'**
-  String get resetIt;
-
-  /// No description provided for @clearIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear it'**
-  String get clearIt;
-
-  /// No description provided for @imageSettingDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How should the {title} image be updated?'**
-  String imageSettingDialogTitle(Object title);
-
-  /// No description provided for @imageSettingHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Update the {title} image'**
-  String imageSettingHint(Object title);
-
-  /// No description provided for @creditTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit to:'**
-  String get creditTo;
-
-  /// No description provided for @image.
-  ///
-  /// In en, this message translates to:
-  /// **'image'**
-  String get image;
-
-  /// No description provided for @resetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all'**
-  String get resetAll;
-
-  /// No description provided for @resetButtonHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all custom settings'**
-  String get resetButtonHint;
-
-  /// No description provided for @resetButtonDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all settings?'**
-  String get resetButtonDialogTitle;
-
-  /// No description provided for @resetButtonDialogContents.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone'**
-  String get resetButtonDialogContents;
-
-  /// No description provided for @currently.
-  ///
-  /// In en, this message translates to:
-  /// **'Currently: '**
-  String get currently;
-
-  /// No description provided for @nameSetToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} is currently set to {value}'**
-  String nameSetToValue(Object name, Object value);
-
-  /// No description provided for @reset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset: '**
-  String get reset;
-
-  /// No description provided for @resetNameToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset {name} to {value}'**
-  String resetNameToValue(Object name, Object value);
-
-  /// No description provided for @system.
+  /// No description provided for @g_System.
   ///
   /// In en, this message translates to:
   /// **'System'**
-  String get system;
+  String get g_System;
 
-  /// No description provided for @light.
+  /// No description provided for @g_Light.
   ///
   /// In en, this message translates to:
   /// **'Light'**
-  String get light;
+  String get g_Light;
 
-  /// No description provided for @dark.
+  /// No description provided for @g_Dark.
   ///
   /// In en, this message translates to:
   /// **'Dark'**
-  String get dark;
+  String get g_Dark;
 
-  /// No description provided for @themeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get themeMode;
-
-  /// No description provided for @themeSwitchSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Open to select a theme mode. Currently set to:'**
-  String get themeSwitchSemantics;
-
-  /// No description provided for @margin.
-  ///
-  /// In en, this message translates to:
-  /// **'Margin'**
-  String get margin;
-
-  /// No description provided for @padding.
-  ///
-  /// In en, this message translates to:
-  /// **'Padding'**
-  String get padding;
-
-  /// No description provided for @circleSize.
-  ///
-  /// In en, this message translates to:
-  /// **'Circle button size'**
-  String get circleSize;
-
-  /// No description provided for @buttonSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get buttonSpacing;
-
-  /// No description provided for @textSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get textSpacing;
-
-  /// No description provided for @attention.
-  ///
-  /// In en, this message translates to:
-  /// **'Attention'**
-  String get attention;
-
-  /// No description provided for @pickAColor.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a color!'**
-  String get pickAColor;
-
-  /// No description provided for @clipCopy.
-  ///
-  /// In en, this message translates to:
-  /// **'Copied to clipboard'**
-  String get clipCopy;
-
-  /// No description provided for @failedImageGet.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to retrieve image'**
-  String get failedImageGet;
-
-  /// No description provided for @failedImageSet.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to update image:\n{error}'**
-  String failedImageSet(Object error);
-
-  /// No description provided for @autoPlayDisabled.
+  /// No description provided for @g_autoPlayDisabled.
   ///
   /// In en, this message translates to:
   /// **'Auto-play videos are disabled.'**
-  String get autoPlayDisabled;
+  String get g_autoPlayDisabled;
+
+  /// No description provided for @d_HomeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to the home screen'**
+  String get d_HomeHint;
+
+  /// No description provided for @d_ResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all'**
+  String get d_ResetAll;
+
+  /// No description provided for @d_ResetDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all settings?'**
+  String get d_ResetDialogTitle;
+
+  /// No description provided for @d_ResetDialogContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be undone'**
+  String get d_ResetDialogContent;
+
+  /// No description provided for @d_Attention.
+  ///
+  /// In en, this message translates to:
+  /// **'Attention'**
+  String get d_Attention;
+
+  /// No description provided for @d_ResetAllWarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be undone\nChanges take effect on app restart'**
+  String get d_ResetAllWarn;
+
+  /// No description provided for @d_ResetAllWarnWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be undone\nChanges take effect on page reload'**
+  String get d_ResetAllWarnWeb;
+
+  /// No description provided for @d_EditingTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: {themeType} theme'**
+  String d_EditingTheme(Object themeType);
+
+  /// No description provided for @hs_ThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode'**
+  String get hs_ThemeMode;
+
+  /// No description provided for @hs_ThemeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to select a theme mode. Currently set to:'**
+  String get hs_ThemeSemantics;
+
+  /// No description provided for @hs_DominantHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominant hand'**
+  String get hs_DominantHand;
+
+  /// No description provided for @hs_HandSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to choose left or right. Currently set to:'**
+  String get hs_HandSemantics;
+
+  /// No description provided for @hs_Style.
+  ///
+  /// In en, this message translates to:
+  /// **'Style'**
+  String get hs_Style;
+
+  /// No description provided for @hs_Colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors'**
+  String get hs_Colors;
+
+  /// No description provided for @hs_Images.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get hs_Images;
+
+  /// No description provided for @ss_PageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get ss_PageTitle;
+
+  /// No description provided for @ss_SettingsGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!'**
+  String get ss_SettingsGuide;
+
+  /// No description provided for @ss_SettingsGuideWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
+  String get ss_SettingsGuideWeb;
+
+  /// No description provided for @sts_PageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Style settings'**
+  String get sts_PageTitle;
+
+  /// No description provided for @sts_TextFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Text font'**
+  String get sts_TextFont;
+
+  /// No description provided for @sts_chooseFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a font'**
+  String get sts_chooseFont;
+
+  /// No description provided for @sts_DefaultFont.
+  ///
+  /// In en, this message translates to:
+  /// **'{font}* (default)'**
+  String sts_DefaultFont(Object font);
+
+  /// No description provided for @sts_Margin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get sts_Margin;
+
+  /// No description provided for @sts_Padding.
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get sts_Padding;
+
+  /// No description provided for @sts_CircleSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle button size'**
+  String get sts_CircleSize;
+
+  /// No description provided for @sts_ButtonSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Button spacing'**
+  String get sts_ButtonSpacing;
+
+  /// No description provided for @sts_TextSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Text spacing'**
+  String get sts_TextSpacing;
+
+  /// No description provided for @sts_Currently.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently: '**
+  String get sts_Currently;
+
+  /// No description provided for @sts_SetToValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is currently set to {value}'**
+  String sts_SetToValue(Object name, Object value);
+
+  /// No description provided for @sts_Reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset: '**
+  String get sts_Reset;
+
+  /// No description provided for @sts_ResetToValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {name} to {value}'**
+  String sts_ResetToValue(Object name, Object value);
+
+  /// No description provided for @sts_ResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all style settings?'**
+  String get sts_ResetAll;
+
+  /// No description provided for @cs_PageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Color settings'**
+  String get cs_PageTitle;
+
+  /// No description provided for @cs_EditingTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: {themeType} theme\nLong press buttons to reset individually'**
+  String cs_EditingTheme(Object themeType);
+
+  /// No description provided for @cs_PickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color!'**
+  String get cs_PickerTitle;
+
+  /// No description provided for @cs_PickerSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to open a color picker for {name}. Long press to reset {name}.'**
+  String cs_PickerSemantics(Object name);
+
+  /// No description provided for @cs_ResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to...'**
+  String get cs_ResetTo;
+
+  /// No description provided for @cs_Theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get cs_Theme;
+
+  /// No description provided for @cs_ThemeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme text'**
+  String get cs_ThemeText;
+
+  /// No description provided for @cs_Recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Use recommended?'**
+  String get cs_Recommended;
+
+  /// No description provided for @cs_UseCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Use custom'**
+  String get cs_UseCustom;
+
+  /// No description provided for @g_Page.
+  ///
+  /// In en, this message translates to:
+  /// **'Page'**
+  String get g_Page;
+
+  /// No description provided for @cs_PageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Page text'**
+  String get cs_PageText;
+
+  /// No description provided for @cs_Buttons.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons'**
+  String get cs_Buttons;
+
+  /// No description provided for @cs_ButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons text'**
+  String get cs_ButtonText;
+
+  /// No description provided for @cs_Accent.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent'**
+  String get cs_Accent;
+
+  /// No description provided for @cs_AccentText.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent text'**
+  String get cs_AccentText;
+
+  /// No description provided for @cs_ResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String cs_ResetAll(Object themeType);
+
+  /// No description provided for @is_PageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Image settings'**
+  String get is_PageTitle;
+
+  /// No description provided for @is_Image.
+  ///
+  /// In en, this message translates to:
+  /// **'image'**
+  String get is_Image;
+
+  /// No description provided for @is_ButtonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the {title} image'**
+  String is_ButtonHint(Object title);
+
+  /// No description provided for @is_DialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How should the {title} image be updated?'**
+  String is_DialogTitle(Object title);
+
+  /// No description provided for @is_FromFile.
+  ///
+  /// In en, this message translates to:
+  /// **'From file'**
+  String get is_FromFile;
+
+  /// No description provided for @is_FromCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'From camera'**
+  String get is_FromCamera;
+
+  /// No description provided for @is_GetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to retrieve image'**
+  String get is_GetFailed;
+
+  /// No description provided for @is_SetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update image:\n{error}'**
+  String is_SetFailed(Object error);
+
+  /// No description provided for @is_ResetIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset it'**
+  String get is_ResetIt;
+
+  /// No description provided for @is_ClearIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear it'**
+  String get is_ClearIt;
+
+  /// No description provided for @is_CreditTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit to:'**
+  String get is_CreditTo;
+
+  /// No description provided for @is_Source.
+  ///
+  /// In en, this message translates to:
+  /// **'Wherever you got it!'**
+  String get is_Source;
+
+  /// No description provided for @is_ResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme images?'**
+  String is_ResetAll(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

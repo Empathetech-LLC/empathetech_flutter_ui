@@ -3,7 +3,6 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class StyleSettingsScreen extends StatefulWidget {
   const StyleSettingsScreen({Key? key}) : super(key: key);
@@ -18,18 +17,13 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, Lang.of(context)!.styleSettings);
+    setPageTitle(context, EFUILang.of(context)!.sts_PageTitle);
   }
 
   // Gather theme data //
 
   final double _margin = EzConfig.instance.prefs[marginKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-
-  late final String _resetTitle = Lang.of(context)!.resetAllStyle;
-  late final String _resetMessage = kIsWeb
-      ? Lang.of(context)!.resetAllWarningWeb
-      : Lang.of(context)!.resetAllWarning;
 
   // Return the build //
 
@@ -48,7 +42,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: EFUILang.of(context)!.margin,
+              title: EFUILang.of(context)!.sts_Margin,
               min: 5.0,
               max: 50.0,
               steps: 18,
@@ -60,7 +54,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: EFUILang.of(context)!.padding,
+              title: EFUILang.of(context)!.sts_Padding,
               min: 0.0,
               max: 50.0,
               steps: 20,
@@ -72,7 +66,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: circleDiameterKey,
               type: SliderSettingType.circleSize,
-              title: EFUILang.of(context)!.circleSize,
+              title: EFUILang.of(context)!.sts_CircleSize,
               min: 30,
               max: 100,
               steps: 14,
@@ -84,7 +78,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.buttonSpacing,
+              title: EFUILang.of(context)!.sts_ButtonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -96,7 +90,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: EFUILang.of(context)!.textSpacing,
+              title: EFUILang.of(context)!.sts_TextSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -107,9 +101,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Local reset "all"
             EzResetButton(
               context: context,
-              hint: _resetTitle,
-              dialogTitle: _resetTitle,
-              dialogContents: _resetMessage,
+              hint: EFUILang.of(context)!.sts_ResetAll,
+              dialogTitle: EFUILang.of(context)!.sts_ResetAll,
               onConfirm: () {
                 EzConfig.instance.preferences.remove(fontFamilyKey);
                 EzConfig.instance.preferences.remove(marginKey);

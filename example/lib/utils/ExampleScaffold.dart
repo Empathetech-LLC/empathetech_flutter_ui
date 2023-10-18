@@ -1,5 +1,3 @@
-import './utils.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -28,7 +26,7 @@ class ExampleScaffold extends StatelessWidget {
     final EzLink titleLink = EzLink(
       'EFUI',
       onTap: () => context.goNamed(homeRoute),
-      semanticsLabel: Lang.of(context)!.homeLinkHint,
+      semanticsLabel: EFUILang.of(context)!.d_HomeHint,
       style: titleStyle,
     );
 

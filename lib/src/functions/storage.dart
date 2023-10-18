@@ -42,7 +42,7 @@ Future<String?> changeImage({
     if (picked == null) {
       logAlert(
         context: context,
-        message: EFUILang.of(context)!.failedImageGet,
+        message: EFUILang.of(context)!.is_GetFailed,
       );
       return null;
     }
@@ -57,7 +57,7 @@ Future<String?> changeImage({
     EzConfig.instance.preferences.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = EFUILang.of(context)!.failedImageSet(e.toString());
+    final String errorMsg = EFUILang.of(context)!.is_SetFailed(e.toString());
     logAlert(context: context, message: errorMsg);
     return null;
   }

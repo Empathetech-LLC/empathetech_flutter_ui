@@ -3,7 +3,6 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
@@ -19,21 +18,17 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, Lang.of(context)!.imageSettings);
+    setPageTitle(context, EFUILang.of(context)!.is_PageTitle);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.light : EFUILang.of(context)!.dark;
+      _isLight ? EFUILang.of(context)!.g_Light : EFUILang.of(context)!.g_Dark;
 
   late final String _resetTitle =
-      Lang.of(context)!.resetAllImages(_themeProfile);
-
-  late final String _resetMessage = kIsWeb
-      ? Lang.of(context)!.resetAllWarningWeb
-      : Lang.of(context)!.resetAllWarning;
+      EFUILang.of(context)!.is_ResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -48,7 +43,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             EzText(
-              Lang.of(context)!.editingTheme(_themeProfile),
+              EFUILang.of(context)!.d_EditingTheme(_themeProfile),
               style: titleSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -68,10 +63,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: Lang.of(context)!.page,
+                          title: EFUILang.of(context)!.g_Page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Lang.of(context)!.yourSourceCredit,
+                          credits: EFUILang.of(context)!.is_Source,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -80,10 +75,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: Lang.of(context)!.page,
+                          title: EFUILang.of(context)!.g_Page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Lang.of(context)!.yourSourceCredit,
+                          credits: EFUILang.of(context)!.is_Source,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
@@ -95,7 +90,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               context: context,
               hint: _resetTitle,
               dialogTitle: _resetTitle,
-              dialogContents: _resetMessage,
               onConfirm: () {
                 if (_isLight) {
                   EzConfig.instance.preferences.remove(lightPageImageKey);

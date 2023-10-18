@@ -87,7 +87,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       int recommended = getTextColor(backgroundColor).value;
 
       // Define action button parameters //
-      final String denyMsg = EFUILang.of(context)!.useCustom;
+      final String denyMsg = EFUILang.of(context)!.cs_UseCustom;
 
       final void Function() onConfirm = () {
         EzConfig.instance.preferences.setInt(widget.toControl, recommended);
@@ -105,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzText(EFUILang.of(context)!.useRecommended),
+          title: EzText(EFUILang.of(context)!.cs_Recommended),
           content: Container(
             // Recommended color preview
             width: 75,
@@ -136,7 +136,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for confirming a reset to [widget.toControl]'s value in [empathetechConfig]
+  /// Opens an [EzAlertDialog] for confirming a reset to [toControl]'s value in [empathetechConfig]
   /// A preview of the reset color is shown
   Future<dynamic> _reset(BuildContext context) {
     final Color resetColor =
@@ -160,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.resetTo),
+        title: EzText(EFUILang.of(context)!.cs_ResetTo),
         content: Container(
           // Reset color preview
           width: 75,
@@ -200,7 +200,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: EFUILang.of(context)!.colorSettingSemantics(widget.name),
+          hint: EFUILang.of(context)!.cs_PickerSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),

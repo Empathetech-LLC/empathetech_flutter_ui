@@ -48,7 +48,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: Text(EFUILang.of(context)!.close),
+      child: Text(EFUILang.of(context)!.g_Close),
     );
 
     return PlatformAlertDialog(
@@ -98,14 +98,14 @@ List<Widget>? ezMaterialActions({
     // Confirm
     TextButton(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUILang.of(context)!.g_Yes),
     ),
     EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
     // Deny
     TextButton(
       onPressed: onDeny,
-      child: Text(denyMsg ?? EFUILang.of(context)!.no),
+      child: Text(denyMsg ?? EFUILang.of(context)!.g_No),
     ),
   ];
 }
@@ -128,7 +128,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.yes),
+      child: Text(confirmMsg ?? EFUILang.of(context)!.g_Yes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
     ),
@@ -136,7 +136,7 @@ List<CupertinoDialogAction>? ezCupertinoActions({
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg ?? EFUILang.of(context)!.no),
+      child: Text(denyMsg ?? EFUILang.of(context)!.g_No),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
     ),

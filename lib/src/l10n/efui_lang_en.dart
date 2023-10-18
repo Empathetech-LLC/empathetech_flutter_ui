@@ -5,165 +5,246 @@ class EFUILangEn extends EFUILang {
   EFUILangEn([String locale = 'en']) : super(locale);
 
   @override
-  String get close => 'Close';
+  String get g_Yes => 'Yes';
 
   @override
-  String get apply => 'Apply';
+  String get g_No => 'No';
 
   @override
-  String get cancel => 'Cancel';
+  String get g_Right => 'Right';
 
   @override
-  String get yes => 'Yes';
+  String get g_Left => 'Left';
 
   @override
-  String get no => 'No';
+  String get g_Apply => 'Apply';
 
   @override
-  String get warning => 'WARNING';
+  String get g_Cancel => 'Cancel';
 
   @override
-  String get useCustom => 'Use custom';
+  String get g_Close => 'Close';
 
   @override
-  String get useRecommended => 'Use recommended?';
+  String get g_System => 'System';
 
   @override
-  String get resetTo => 'Reset to...';
+  String get g_Light => 'Light';
 
   @override
-  String colorSettingSemantics(Object name) {
-    return 'Activate to open a color picker for $name. Long press to reset $name.';
+  String get g_Dark => 'Dark';
+
+  @override
+  String get g_autoPlayDisabled => 'Auto-play videos are disabled.';
+
+  @override
+  String get d_HomeHint => 'Return to the home screen';
+
+  @override
+  String get d_ResetAll => 'Reset all';
+
+  @override
+  String get d_ResetDialogTitle => 'Reset all settings?';
+
+  @override
+  String get d_ResetDialogContent => 'Cannot be undone';
+
+  @override
+  String get d_Attention => 'Attention';
+
+  @override
+  String get d_ResetAllWarn =>
+      'Cannot be undone\nChanges take effect on app restart';
+
+  @override
+  String get d_ResetAllWarnWeb =>
+      'Cannot be undone\nChanges take effect on page reload';
+
+  @override
+  String d_EditingTheme(Object themeType) {
+    return 'Editing: $themeType theme';
   }
 
   @override
-  String get right => 'Right';
+  String get hs_ThemeMode => 'Theme mode';
 
   @override
-  String get left => 'Left';
+  String get hs_ThemeSemantics =>
+      'Open to select a theme mode. Currently set to:';
 
   @override
-  String get dominantHand => 'Dominant hand';
+  String get hs_DominantHand => 'Dominant hand';
 
   @override
-  String get handSettingSemantics =>
+  String get hs_HandSemantics =>
       'Open to choose left or right. Currently set to:';
 
   @override
-  String defaultTag(Object font) {
+  String get hs_Style => 'Style';
+
+  @override
+  String get hs_Colors => 'Colors';
+
+  @override
+  String get hs_Images => 'Images';
+
+  @override
+  String get ss_PageTitle => 'Settings';
+
+  @override
+  String get ss_SettingsGuide =>
+      'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!';
+
+  @override
+  String get ss_SettingsGuideWeb =>
+      'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
+
+  @override
+  String get sts_PageTitle => 'Style settings';
+
+  @override
+  String get sts_TextFont => 'Text font';
+
+  @override
+  String get sts_chooseFont => 'Choose a font';
+
+  @override
+  String sts_DefaultFont(Object font) {
     return '$font* (default)';
   }
 
   @override
-  String get chooseFont => 'Choose a font';
+  String get sts_Margin => 'Margin';
 
   @override
-  String get fontSettingLabel => 'Text font';
+  String get sts_Padding => 'Padding';
 
   @override
-  String get fromFile => 'From file';
+  String get sts_CircleSize => 'Circle button size';
 
   @override
-  String get fromCamera => 'From camera';
+  String get sts_ButtonSpacing => 'Button spacing';
 
   @override
-  String get resetIt => 'Reset it';
+  String get sts_TextSpacing => 'Text spacing';
 
   @override
-  String get clearIt => 'Clear it';
+  String get sts_Currently => 'Currently: ';
 
   @override
-  String imageSettingDialogTitle(Object title) {
-    return 'How should the $title image be updated?';
-  }
-
-  @override
-  String imageSettingHint(Object title) {
-    return 'Update the $title image';
-  }
-
-  @override
-  String get creditTo => 'Credit to:';
-
-  @override
-  String get image => 'image';
-
-  @override
-  String get resetAll => 'Reset all';
-
-  @override
-  String get resetButtonHint => 'Reset all custom settings';
-
-  @override
-  String get resetButtonDialogTitle => 'Reset all settings?';
-
-  @override
-  String get resetButtonDialogContents => 'Cannot be undone';
-
-  @override
-  String get currently => 'Currently: ';
-
-  @override
-  String nameSetToValue(Object name, Object value) {
+  String sts_SetToValue(Object name, Object value) {
     return '$name is currently set to $value';
   }
 
   @override
-  String get reset => 'Reset: ';
+  String get sts_Reset => 'Reset: ';
 
   @override
-  String resetNameToValue(Object name, Object value) {
+  String sts_ResetToValue(Object name, Object value) {
     return 'Reset $name to $value';
   }
 
   @override
-  String get system => 'System';
+  String get sts_ResetAll => 'Reset all style settings?';
 
   @override
-  String get light => 'Light';
+  String get cs_PageTitle => 'Color settings';
 
   @override
-  String get dark => 'Dark';
+  String cs_EditingTheme(Object themeType) {
+    return 'Editing: $themeType theme\nLong press buttons to reset individually';
+  }
 
   @override
-  String get themeMode => 'Theme mode';
+  String get cs_PickerTitle => 'Pick a color!';
 
   @override
-  String get themeSwitchSemantics =>
-      'Open to select a theme mode. Currently set to:';
+  String cs_PickerSemantics(Object name) {
+    return 'Activate to open a color picker for $name. Long press to reset $name.';
+  }
 
   @override
-  String get margin => 'Margin';
+  String get cs_ResetTo => 'Reset to...';
 
   @override
-  String get padding => 'Padding';
+  String get cs_Theme => 'Theme';
 
   @override
-  String get circleSize => 'Circle button size';
+  String get cs_ThemeText => 'Theme text';
 
   @override
-  String get buttonSpacing => 'Button spacing';
+  String get cs_Recommended => 'Use recommended?';
 
   @override
-  String get textSpacing => 'Text spacing';
+  String get cs_UseCustom => 'Use custom';
 
   @override
-  String get attention => 'Attention';
+  String get g_Page => 'Page';
 
   @override
-  String get pickAColor => 'Pick a color!';
+  String get cs_PageText => 'Page text';
 
   @override
-  String get clipCopy => 'Copied to clipboard';
+  String get cs_Buttons => 'Buttons';
 
   @override
-  String get failedImageGet => 'Failed to retrieve image';
+  String get cs_ButtonText => 'Buttons text';
 
   @override
-  String failedImageSet(Object error) {
+  String get cs_Accent => 'Accent';
+
+  @override
+  String get cs_AccentText => 'Accent text';
+
+  @override
+  String cs_ResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get is_PageTitle => 'Image settings';
+
+  @override
+  String get is_Image => 'image';
+
+  @override
+  String is_ButtonHint(Object title) {
+    return 'Update the $title image';
+  }
+
+  @override
+  String is_DialogTitle(Object title) {
+    return 'How should the $title image be updated?';
+  }
+
+  @override
+  String get is_FromFile => 'From file';
+
+  @override
+  String get is_FromCamera => 'From camera';
+
+  @override
+  String get is_GetFailed => 'Failed to retrieve image';
+
+  @override
+  String is_SetFailed(Object error) {
     return 'Failed to update image:\n$error';
   }
 
   @override
-  String get autoPlayDisabled => 'Auto-play videos are disabled.';
+  String get is_ResetIt => 'Reset it';
+
+  @override
+  String get is_ClearIt => 'Clear it';
+
+  @override
+  String get is_CreditTo => 'Credit to:';
+
+  @override
+  String get is_Source => 'Wherever you got it!';
+
+  @override
+  String is_ResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
 }

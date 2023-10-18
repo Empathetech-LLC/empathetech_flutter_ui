@@ -3,7 +3,6 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettingsScreen extends StatefulWidget {
@@ -19,22 +18,18 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, Lang.of(context)!.colorSettings);
+    setPageTitle(context, EFUILang.of(context)!.cs_PageTitle);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.light : EFUILang.of(context)!.dark;
+      _isLight ? EFUILang.of(context)!.g_Light : EFUILang.of(context)!.g_Dark;
 
   // Define local reset button's messages
   late final String _resetTitle =
-      Lang.of(context)!.resetAllColors(_themeProfile);
-
-  late final String _resetMessage = kIsWeb
-      ? Lang.of(context)!.resetAllWarningWeb
-      : Lang.of(context)!.resetAllWarning;
+      EFUILang.of(context)!.cs_ResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -51,7 +46,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    Lang.of(context)!.editingThemeColors(_themeProfile),
+                    EFUILang.of(context)!.cs_EditingTheme(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
@@ -69,13 +64,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: lightThemeColorKey,
-                          name: Lang.of(context)!.theme,
+                          name: EFUILang.of(context)!.cs_Theme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightThemeTextColorKey,
-                          name: Lang.of(context)!.themeText,
+                          name: EFUILang.of(context)!.cs_ThemeText,
                           textBackgroundKey: lightThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -83,13 +78,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: lightPageColorKey,
-                          name: Lang.of(context)!.page,
+                          name: EFUILang.of(context)!.g_Page,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightPageTextColorKey,
-                          name: Lang.of(context)!.pageText,
+                          name: EFUILang.of(context)!.cs_PageText,
                           textBackgroundKey: lightPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -97,13 +92,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: lightButtonColorKey,
-                          name: Lang.of(context)!.buttons,
+                          name: EFUILang.of(context)!.cs_Buttons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightButtonTextColorKey,
-                          name: Lang.of(context)!.buttonText,
+                          name: EFUILang.of(context)!.cs_ButtonText,
                           textBackgroundKey: lightButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -111,13 +106,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: lightAccentColorKey,
-                          name: Lang.of(context)!.accent,
+                          name: EFUILang.of(context)!.cs_Accent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightAccentTextColorKey,
-                          name: Lang.of(context)!.accentText,
+                          name: EFUILang.of(context)!.cs_AccentText,
                           textBackgroundKey: lightAccentColorKey,
                         ),
                       ],
@@ -128,9 +123,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   // Local reset "all"
                   EzResetButton(
                     context: context,
-                    hint: _resetMessage,
+                    hint: _resetTitle,
                     dialogTitle: _resetTitle,
-                    dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(lightThemeColorKey);
                       EzConfig.instance.preferences
@@ -158,7 +152,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    Lang.of(context)!.editingThemeColors(_themeProfile),
+                    EFUILang.of(context)!.cs_EditingTheme(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -176,13 +170,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: darkThemeColorKey,
-                          name: Lang.of(context)!.theme,
+                          name: EFUILang.of(context)!.cs_Theme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkThemeTextColorKey,
-                          name: Lang.of(context)!.themeText,
+                          name: EFUILang.of(context)!.cs_ThemeText,
                           textBackgroundKey: darkThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -190,13 +184,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: darkPageColorKey,
-                          name: Lang.of(context)!.page,
+                          name: EFUILang.of(context)!.g_Page,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkPageTextColorKey,
-                          name: Lang.of(context)!.pageText,
+                          name: EFUILang.of(context)!.cs_PageText,
                           textBackgroundKey: darkPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -204,13 +198,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: darkButtonColorKey,
-                          name: Lang.of(context)!.buttons,
+                          name: EFUILang.of(context)!.cs_Buttons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkButtonTextColorKey,
-                          name: Lang.of(context)!.buttonText,
+                          name: EFUILang.of(context)!.cs_ButtonText,
                           textBackgroundKey: darkButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -218,13 +212,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: darkAccentColorKey,
-                          name: Lang.of(context)!.accent,
+                          name: EFUILang.of(context)!.cs_Accent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkAccentTextColorKey,
-                          name: Lang.of(context)!.accentText,
+                          name: EFUILang.of(context)!.cs_AccentText,
                           textBackgroundKey: darkAccentColorKey,
                         ),
                       ],
@@ -237,7 +231,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     context: context,
                     hint: _resetTitle,
                     dialogTitle: _resetTitle,
-                    dialogContents: _resetMessage,
                     onConfirm: () {
                       EzConfig.instance.preferences.remove(darkThemeColorKey);
                       EzConfig.instance.preferences
