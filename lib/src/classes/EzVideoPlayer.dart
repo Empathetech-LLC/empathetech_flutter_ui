@@ -175,17 +175,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Play/pause
     if (widget.playVis != ButtonVis.alwaysOff) {
       controls.addAll([
-        GestureDetector(
-          child: Icon(
-            (widget.controller.value.isPlaying)
-                ? PlatformIcons(context).pause
-                : PlatformIcons(context).playArrow,
-            color: _buildColor(widget.playVis),
-            size: _buttonSize,
-          ),
-          onTap: () {
+        IconButton(
+          icon: Icon((widget.controller.value.isPlaying)
+              ? PlatformIcons(context).pause
+              : PlatformIcons(context).playArrow),
+          onPressed: () {
             (widget.controller.value.isPlaying) ? _pauseVideo() : _playVideo();
           },
+          color: _buildColor(widget.playVis),
+          iconSize: _buttonSize,
         ),
         EzSpacer.row(_buttonSpacer),
       ]);
@@ -195,20 +193,19 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.volumeVis != ButtonVis.alwaysOff) {
       controls.addAll([
         // Base button
-        GestureDetector(
-          child: Icon(
-            (widget.controller.value.volume == 0.0)
-                ? PlatformIcons(context).volumeMute
-                : PlatformIcons(context).volumeUp,
-            color: _buildColor(widget.volumeVis),
-            size: _buttonSize,
-          ),
-          onTap: () {
+        IconButton(
+          icon: Icon((widget.controller.value.volume == 0.0)
+              ? PlatformIcons(context).volumeMute
+              : PlatformIcons(context).volumeUp),
+          onPressed: () {
             (widget.controller.value.volume == 0.0)
                 ? _unMuteVideo()
                 : _muteVideo();
           },
+          color: _buildColor(widget.volumeVis),
+          iconSize: _buttonSize,
         ),
+
         (widget.variableVolume)
             ? EzSpacer.row(_padding)
             : EzSpacer.row(_buttonSpacer),
@@ -240,13 +237,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Replay
     if (widget.replayVis != ButtonVis.alwaysOff) {
       controls.addAll([
-        GestureDetector(
-          child: Icon(
-            PlatformIcons(context).refresh,
-            color: _buildColor(widget.replayVis),
-            size: _buttonSize,
-          ),
-          onTap: _replayVideo,
+        IconButton(
+          icon: Icon(PlatformIcons(context).refresh),
+          onPressed: _replayVideo,
+          color: _buildColor(widget.replayVis),
+          iconSize: _buttonSize,
         ),
         EzSpacer.row(_buttonSpacer),
       ]);
