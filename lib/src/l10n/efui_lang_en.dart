@@ -83,15 +83,6 @@ class EFUILangEn extends EFUILang {
       'Open to choose left or right. Currently set to:';
 
   @override
-  String get hsStyle => 'Style';
-
-  @override
-  String get hsColors => 'Colors';
-
-  @override
-  String get hsImages => 'Images';
-
-  @override
   String get ssPageTitle => 'Settings';
 
   @override

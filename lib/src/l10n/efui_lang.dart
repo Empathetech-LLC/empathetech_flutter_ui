@@ -238,24 +238,6 @@ abstract class EFUILang {
   /// **'Open to choose left or right. Currently set to:'**
   String get hsHandSemantics;
 
-  /// No description provided for @hsStyle.
-  ///
-  /// In en, this message translates to:
-  /// **'Style'**
-  String get hsStyle;
-
-  /// No description provided for @hsColors.
-  ///
-  /// In en, this message translates to:
-  /// **'Colors'**
-  String get hsColors;
-
-  /// No description provided for @hsImages.
-  ///
-  /// In en, this message translates to:
-  /// **'Images'**
-  String get hsImages;
-
   /// No description provided for @ssPageTitle.
   ///
   /// In en, this message translates to:

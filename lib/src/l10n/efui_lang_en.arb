@@ -27,9 +27,6 @@
   "hsThemeSemantics": "Open to select a theme mode. Currently set to:",
   "hsDominantHand": "Dominant hand",
   "hsHandSemantics": "Open to choose left or right. Currently set to:",
-  "hsStyle": "Style",
-  "hsColors": "Colors",
-  "hsImages": "Images",
 
   "ssPageTitle": "Settings",
   "ssSettingsGuide": "Each button will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",

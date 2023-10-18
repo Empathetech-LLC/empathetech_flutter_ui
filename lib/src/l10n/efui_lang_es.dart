@@ -84,15 +84,6 @@ class EFUILangEs extends EFUILang {
       'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
 
   @override
-  String get hsStyle => 'Estilo';
-
-  @override
-  String get hsColors => 'Colores';
-
-  @override
-  String get hsImages => 'Imágenes';
-
-  @override
   String get ssPageTitle => 'Configuraciones';
 
   @override
