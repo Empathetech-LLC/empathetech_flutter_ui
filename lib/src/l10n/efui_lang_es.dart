@@ -1,8 +1,8 @@
-import 'efui_phrases.dart';
+import 'efui_lang.dart';
 
 /// The translations for Spanish Castilian (`es`).
-class EFUIPhrasesEs extends EFUIPhrases {
-  EFUIPhrasesEs([String locale = 'es']) : super(locale);
+class EFUILangEs extends EFUILang {
+  EFUILangEs([String locale = 'es']) : super(locale);
 
   @override
   String get close => 'Cerrar';

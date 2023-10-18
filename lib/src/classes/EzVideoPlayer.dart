@@ -312,7 +312,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         );
 
     return autoPlayDisabled
-        ? EzWarning(message: EFUIPhrases.of(context)!.autoPlayDisabled)
+        ? EzWarning(message: EFUILang.of(context)!.autoPlayDisabled)
         : MouseRegion(
             cursor: SystemMouseCursors.click,
             onEnter: (_) {

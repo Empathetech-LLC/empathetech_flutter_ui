@@ -4,22 +4,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'efui_phrases_en.dart' deferred as efui_phrases_en;
-import 'efui_phrases_es.dart' deferred as efui_phrases_es;
+import 'efui_lang_en.dart' deferred as efui_lang_en;
+import 'efui_lang_es.dart' deferred as efui_lang_es;
 
-/// Callers can lookup localized strings with an instance of EFUIPhrases
-/// returned by `EFUIPhrases.of(context)`.
+/// Callers can lookup localized strings with an instance of EFUILang
+/// returned by `EFUILang.of(context)`.
 ///
-/// Applications need to include `EFUIPhrases.delegate()` in their app's
+/// Applications need to include `EFUILang.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/efui_phrases.dart';
+/// import 'l10n/efui_lang.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: EFUIPhrases.localizationsDelegates,
-///   supportedLocales: EFUIPhrases.supportedLocales,
+///   localizationsDelegates: EFUILang.localizationsDelegates,
+///   supportedLocales: EFUILang.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -56,20 +56,19 @@ import 'efui_phrases_es.dart' deferred as efui_phrases_es;
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the EFUIPhrases.supportedLocales
+/// be consistent with the languages listed in the EFUILang.supportedLocales
 /// property.
-abstract class EFUIPhrases {
-  EFUIPhrases(String locale)
+abstract class EFUILang {
+  EFUILang(String locale)
       : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static EFUIPhrases? of(BuildContext context) {
-    return Localizations.of<EFUIPhrases>(context, EFUIPhrases);
+  static EFUILang? of(BuildContext context) {
+    return Localizations.of<EFUILang>(context, EFUILang);
   }
 
-  static const LocalizationsDelegate<EFUIPhrases> delegate =
-      _EFUIPhrasesDelegate();
+  static const LocalizationsDelegate<EFUILang> delegate = _EFUILangDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -390,12 +389,12 @@ abstract class EFUIPhrases {
   String get autoPlayDisabled;
 }
 
-class _EFUIPhrasesDelegate extends LocalizationsDelegate<EFUIPhrases> {
-  const _EFUIPhrasesDelegate();
+class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
+  const _EFUILangDelegate();
 
   @override
-  Future<EFUIPhrases> load(Locale locale) {
-    return lookupEFUIPhrases(locale);
+  Future<EFUILang> load(Locale locale) {
+    return lookupEFUILang(locale);
   }
 
   @override
@@ -403,24 +402,24 @@ class _EFUIPhrasesDelegate extends LocalizationsDelegate<EFUIPhrases> {
       <String>['en', 'es'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_EFUIPhrasesDelegate old) => false;
+  bool shouldReload(_EFUILangDelegate old) => false;
 }
 
-Future<EFUIPhrases> lookupEFUIPhrases(Locale locale) {
+Future<EFUILang> lookupEFUILang(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return efui_phrases_en
+      return efui_lang_en
           .loadLibrary()
-          .then((dynamic _) => efui_phrases_en.EFUIPhrasesEn());
+          .then((dynamic _) => efui_lang_en.EFUILangEn());
     case 'es':
-      return efui_phrases_es
+      return efui_lang_es
           .loadLibrary()
-          .then((dynamic _) => efui_phrases_es.EFUIPhrasesEs());
+          .then((dynamic _) => efui_lang_es.EFUILangEs());
   }
 
   throw FlutterError(
-      'EFUIPhrases.delegate failed to load unsupported locale "$locale". This is likely '
+      'EFUILang.delegate failed to load unsupported locale "$locale". This is likely '
       'an issue with the localizations generation tool. Please file an issue '
       'on GitHub with a reproducible sample app and the gen-l10n configuration '
       'that was used.');

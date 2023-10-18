@@ -28,7 +28,7 @@ class ExampleScaffold extends StatelessWidget {
     final EzLink titleLink = EzLink(
       'EFUI',
       onTap: () => context.goNamed(homeRoute),
-      semanticsLabel: Phrases.of(context)!.homeLinkHint,
+      semanticsLabel: Lang.of(context)!.homeLinkHint,
       style: titleStyle,
     );
 

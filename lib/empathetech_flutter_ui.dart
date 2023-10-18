@@ -66,4 +66,4 @@ export 'src/functions/text.dart';
 
 // l10n //
 
-export 'src/l10n/efui_phrases.dart';
+export 'src/l10n/efui_lang.dart';

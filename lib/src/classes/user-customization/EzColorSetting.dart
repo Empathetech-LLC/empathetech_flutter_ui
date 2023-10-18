@@ -87,7 +87,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       int recommended = getTextColor(backgroundColor).value;
 
       // Define action button parameters //
-      final String denyMsg = EFUIPhrases.of(context)!.useCustom;
+      final String denyMsg = EFUILang.of(context)!.useCustom;
 
       final void Function() onConfirm = () {
         EzConfig.instance.preferences.setInt(widget.toControl, recommended);
@@ -105,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzText(EFUIPhrases.of(context)!.useRecommended),
+          title: EzText(EFUILang.of(context)!.useRecommended),
           content: Container(
             // Recommended color preview
             width: 75,
@@ -160,7 +160,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUIPhrases.of(context)!.resetTo),
+        title: EzText(EFUILang.of(context)!.resetTo),
         content: Container(
           // Reset color preview
           width: 75,
@@ -200,7 +200,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: EFUIPhrases.of(context)!.colorSettingSemantics(widget.name),
+          hint: EFUILang.of(context)!.colorSettingSemantics(widget.name),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),

@@ -19,22 +19,22 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, Phrases.of(context)!.colorSettings);
+    setPageTitle(context, Lang.of(context)!.colorSettings);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
+      _isLight ? EFUILang.of(context)!.light : EFUILang.of(context)!.dark;
 
   // Define local reset button's messages
   late final String _resetTitle =
-      Phrases.of(context)!.resetAllColors(_themeProfile);
+      Lang.of(context)!.resetAllColors(_themeProfile);
 
   late final String _resetMessage = kIsWeb
-      ? Phrases.of(context)!.resetAllWarningWeb
-      : Phrases.of(context)!.resetAllWarning;
+      ? Lang.of(context)!.resetAllWarningWeb
+      : Lang.of(context)!.resetAllWarning;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -51,7 +51,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    Phrases.of(context)!.editingThemeColors(_themeProfile),
+                    Lang.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_textSpacer),
@@ -69,13 +69,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: lightThemeColorKey,
-                          name: Phrases.of(context)!.theme,
+                          name: Lang.of(context)!.theme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightThemeTextColorKey,
-                          name: Phrases.of(context)!.themeText,
+                          name: Lang.of(context)!.themeText,
                           textBackgroundKey: lightThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -83,13 +83,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: lightPageColorKey,
-                          name: Phrases.of(context)!.page,
+                          name: Lang.of(context)!.page,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightPageTextColorKey,
-                          name: Phrases.of(context)!.pageText,
+                          name: Lang.of(context)!.pageText,
                           textBackgroundKey: lightPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -97,13 +97,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: lightButtonColorKey,
-                          name: Phrases.of(context)!.buttons,
+                          name: Lang.of(context)!.buttons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightButtonTextColorKey,
-                          name: Phrases.of(context)!.buttonText,
+                          name: Lang.of(context)!.buttonText,
                           textBackgroundKey: lightButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -111,13 +111,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: lightAccentColorKey,
-                          name: Phrases.of(context)!.accent,
+                          name: Lang.of(context)!.accent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: lightAccentTextColorKey,
-                          name: Phrases.of(context)!.accentText,
+                          name: Lang.of(context)!.accentText,
                           textBackgroundKey: lightAccentColorKey,
                         ),
                       ],
@@ -158,7 +158,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 children: [
                   // Editing reminders
                   EzText(
-                    Phrases.of(context)!.editingThemeColors(_themeProfile),
+                    Lang.of(context)!.editingThemeColors(_themeProfile),
                     style: titleSmall(context),
                   ),
                   EzSpacer(_buttonSpacer),
@@ -176,13 +176,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Theme colors
                         EzColorSetting(
                           toControl: darkThemeColorKey,
-                          name: Phrases.of(context)!.theme,
+                          name: Lang.of(context)!.theme,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkThemeTextColorKey,
-                          name: Phrases.of(context)!.themeText,
+                          name: Lang.of(context)!.themeText,
                           textBackgroundKey: darkThemeColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -190,13 +190,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Page colors
                         EzColorSetting(
                           toControl: darkPageColorKey,
-                          name: Phrases.of(context)!.page,
+                          name: Lang.of(context)!.page,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkPageTextColorKey,
-                          name: Phrases.of(context)!.pageText,
+                          name: Lang.of(context)!.pageText,
                           textBackgroundKey: darkPageColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -204,13 +204,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Button colors
                         EzColorSetting(
                           toControl: darkButtonColorKey,
-                          name: Phrases.of(context)!.buttons,
+                          name: Lang.of(context)!.buttons,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkButtonTextColorKey,
-                          name: Phrases.of(context)!.buttonText,
+                          name: Lang.of(context)!.buttonText,
                           textBackgroundKey: darkButtonColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -218,13 +218,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Accent colors
                         EzColorSetting(
                           toControl: darkAccentColorKey,
-                          name: Phrases.of(context)!.accent,
+                          name: Lang.of(context)!.accent,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         EzColorSetting(
                           toControl: darkAccentTextColorKey,
-                          name: Phrases.of(context)!.accentText,
+                          name: Lang.of(context)!.accentText,
                           textBackgroundKey: darkAccentColorKey,
                         ),
                       ],

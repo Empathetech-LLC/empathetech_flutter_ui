@@ -1,8 +1,8 @@
-import 'phrases.dart';
+import 'lang.dart';
 
 /// The translations for English (`en`).
-class PhrasesEn extends Phrases {
-  PhrasesEn([String locale = 'en']) : super(locale);
+class LangEn extends Lang {
+  LangEn([String locale = 'en']) : super(locale);
 
   @override
   String get homeLinkHint => 'Return to the home screen';

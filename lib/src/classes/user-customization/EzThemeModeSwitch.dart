@@ -28,15 +28,15 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUIPhrases.of(context)!.system),
+        child: Text(EFUILang.of(context)!.system),
         value: ThemeMode.system,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUIPhrases.of(context)!.light),
+        child: Text(EFUILang.of(context)!.light),
         value: ThemeMode.light,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUIPhrases.of(context)!.dark),
+        child: Text(EFUILang.of(context)!.dark),
         value: ThemeMode.dark,
       ),
     ];
@@ -49,14 +49,14 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       children: [
         // Label
         EzText(
-          EFUIPhrases.of(context)!.themeMode,
+          EFUILang.of(context)!.themeMode,
           style: style,
         ),
         EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
         // Button
         Semantics(
-          hint: EFUIPhrases.of(context)!.themeSwitchSemantics,
+          hint: EFUILang.of(context)!.themeSwitchSemantics,
           child: DropdownButton<ThemeMode>(
             value: currMode,
             items: items,

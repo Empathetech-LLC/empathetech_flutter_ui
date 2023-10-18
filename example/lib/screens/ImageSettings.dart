@@ -19,21 +19,21 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, Phrases.of(context)!.imageSettings);
+    setPageTitle(context, Lang.of(context)!.imageSettings);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
+      _isLight ? EFUILang.of(context)!.light : EFUILang.of(context)!.dark;
 
   late final String _resetTitle =
-      Phrases.of(context)!.resetAllImages(_themeProfile);
+      Lang.of(context)!.resetAllImages(_themeProfile);
 
   late final String _resetMessage = kIsWeb
-      ? Phrases.of(context)!.resetAllWarningWeb
-      : Phrases.of(context)!.resetAllWarning;
+      ? Lang.of(context)!.resetAllWarningWeb
+      : Lang.of(context)!.resetAllWarning;
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
@@ -48,7 +48,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             EzText(
-              Phrases.of(context)!.editingTheme(_themeProfile),
+              Lang.of(context)!.editingTheme(_themeProfile),
               style: titleSmall(context),
             ),
             EzSpacer(_textSpacer),
@@ -68,10 +68,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: Phrases.of(context)!.page,
+                          title: Lang.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Phrases.of(context)!.yourSourceCredit,
+                          credits: Lang.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -80,10 +80,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: Phrases.of(context)!.page,
+                          title: Lang.of(context)!.page,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Phrases.of(context)!.yourSourceCredit,
+                          credits: Lang.of(context)!.yourSourceCredit,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
