@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
             // Functionality disclaimer
             EzWarning(
               message: kIsWeb
-                  ? EFUILang.of(context)!.dResetAllWarn
-                  : EFUILang.of(context)!.dResetAllWarnWeb,
+                  ? EFUILang.of(context)!.ssSettingsGuide
+                  : EFUILang.of(context)!.ssSettingsGuideWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_buttonSpacer),
@@ -59,14 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(EFUILang.of(context)!.hsStyle),
+              child: Text(EFUILang.of(context)!.stsPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: Text(EFUILang.of(context)!.hsColors),
+              child: Text(EFUILang.of(context)!.csPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(EFUILang.of(context)!.hsImages),
+              child: Text(EFUILang.of(context)!.isPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
