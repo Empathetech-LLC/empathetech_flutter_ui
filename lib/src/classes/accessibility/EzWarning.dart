@@ -31,7 +31,8 @@ class EzWarning extends StatelessWidget {
 
     final double padding = EzConfig.instance.prefs[paddingKey];
 
-    final String _warning = warning ?? EFUILang.of(context)!.d_Attention;
+    final String _warning =
+        warning ?? EFUILang.of(context)!.d_Attention.toUpperCase();
 
     return Semantics(
       button: false,
