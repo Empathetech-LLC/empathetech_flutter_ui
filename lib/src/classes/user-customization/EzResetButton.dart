@@ -12,17 +12,21 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzResetButton extends StatelessWidget {
   final BuildContext context;
 
-  /// Functionality call-out for the user
-  final String? message;
+  /// Button label
+  /// Defaults to [EFUILang.dResetAll]
+  final String? label;
 
   /// [Semantics] message for screen readers
+  /// Defaults to [dialogTitle]
   final String? hint;
 
   /// [EzAlertDialog.title] that shows on click
+  /// Defaults to [EFUILang.dResetDialogTitle]
   final String? dialogTitle;
 
-  /// [EzAlertDialog.contents] that shows on click
-  final String? dialogContents;
+  /// [EzAlertDialog.content] that shows on click
+  /// Defaults to [EFUILang.dResetDialogContent]
+  final String? dialogContent;
 
   /// What happens when the user choses to reset
   /// Defaults to clearing user [SharedPreferences]
@@ -36,10 +40,10 @@ class EzResetButton extends StatelessWidget {
   /// Colors are reversed to stand out
   const EzResetButton({
     required this.context,
-    this.message,
+    this.label,
     this.hint,
     this.dialogTitle,
-    this.dialogContents,
+    this.dialogContent,
     this.onConfirm,
     this.onDeny,
   });
@@ -57,17 +61,18 @@ class EzResetButton extends StatelessWidget {
     final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
     // Define the build //
+    final String _dialogTitle =
+        dialogTitle ?? EFUILang.of(context)!.dResetDialogTitle;
+
     final OutlinedButton resetButton = OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
-      label: Text(message ?? EFUILang.of(context)!.dResetAll),
+      label: Text(label ?? EFUILang.of(context)!.dResetAll),
       onPressed: () => showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzText(
-            dialogTitle ?? EFUILang.of(context)!.dResetDialogTitle,
-          ),
+          title: EzText(_dialogTitle),
           content: EzText(
-            dialogContents ?? EFUILang.of(context)!.dResetDialogContent,
+            dialogContent ?? EFUILang.of(context)!.dResetDialogContent,
           ),
           materialActions: ezMaterialActions(
             context: context,
@@ -88,12 +93,10 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return (hint == null)
-        ? resetButton
-        : Semantics(
-            button: true,
-            hint: hint,
-            child: ExcludeSemantics(child: resetButton),
-          );
+    return Semantics(
+      button: true,
+      hint: hint ?? _dialogTitle,
+      child: ExcludeSemantics(child: resetButton),
+    );
   }
 }

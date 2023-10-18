@@ -213,7 +213,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         button: false,
         readOnly: true,
         label: EFUILang.of(context)!.stsSetToValue(
-          getSettingName(context, widget.type),
+          sstName(context, widget.type),
           currValue.toStringAsFixed(widget.decimals),
         ),
         child: ExcludeSemantics(
@@ -272,7 +272,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: true,
         hint: EFUILang.of(context)!.stsResetToValue(
-          getSettingName(context, widget.type),
+          sstName(context, widget.type),
           _defaultValue.toStringAsFixed(widget.decimals),
         ),
         child: ExcludeSemantics(
@@ -301,7 +301,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: getSettingName(context, widget.type),
+      hint: sstName(context, widget.type),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => showModalBottomSheet(

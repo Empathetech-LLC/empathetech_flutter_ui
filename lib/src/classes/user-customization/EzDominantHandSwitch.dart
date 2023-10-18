@@ -17,6 +17,7 @@ class EzDominantHandSwitch extends StatefulWidget {
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather theme data //
+
   Hand currSide = EzConfig.instance.dominantHand;
   late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
 
@@ -26,11 +27,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(EFUILang.of(context)!.gRight),
+        child: Text(handName(context, Hand.right)),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(EFUILang.of(context)!.gLeft),
+        child: Text(handName(context, Hand.left)),
         value: Hand.left,
       ),
     ];
@@ -40,39 +41,40 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      EzText(
-        EFUILang.of(context)!.hsDominantHand,
-        style: _style,
-      ),
+      EzText(EFUILang.of(context)!.hsDominantHand, style: _style),
       EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button
       Semantics(
-        hint: EFUILang.of(context)!.hsHandSemantics,
-        child: DropdownButton<Hand>(
-          value: currSide,
-          items: items,
-          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-          onChanged: (Hand? newDominantHand) {
-            switch (newDominantHand) {
-              case Hand.right:
-                EzConfig.instance.preferences.remove(isRightKey);
-                setState(() {
-                  currSide = Hand.right;
-                });
-                break;
+        button: true,
+        hint:
+            "${EFUILang.of(context)!.hsHandSemantics} ${handName(context, currSide)}",
+        child: ExcludeSemantics(
+          child: DropdownButton<Hand>(
+            value: currSide,
+            items: items,
+            dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+            onChanged: (Hand? newDominantHand) {
+              switch (newDominantHand) {
+                case Hand.right:
+                  EzConfig.instance.preferences.remove(isRightKey);
+                  setState(() {
+                    currSide = Hand.right;
+                  });
+                  break;
 
-              case Hand.left:
-                EzConfig.instance.preferences.setBool(isRightKey, false);
-                setState(() {
-                  currSide = Hand.left;
-                });
-                break;
+                case Hand.left:
+                  EzConfig.instance.preferences.setBool(isRightKey, false);
+                  setState(() {
+                    currSide = Hand.left;
+                  });
+                  break;
 
-              default:
-                break;
-            }
-          },
+                default:
+                  break;
+              }
+            },
+          ),
         ),
       ),
     ];
