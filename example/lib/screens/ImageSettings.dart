@@ -68,7 +68,19 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(_buttonSpacer),
+                        EzSpacer(2 * _buttonSpacer),
+
+                        // Local reset "all"
+                        EzResetButton(
+                          context: context,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.instance.preferences
+                                .remove(lightPageImageKey);
+
+                            popScreen(context: context, pass: true);
+                          },
+                        ),
                       ]
                     : // Editing dark theme //
                     [
@@ -80,26 +92,23 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(_buttonSpacer),
+                        EzSpacer(2 * _buttonSpacer),
+
+                        // Local reset "all"
+                        EzResetButton(
+                          context: context,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.instance.preferences
+                                .remove(darkPageImageKey);
+
+                            popScreen(context: context, pass: true);
+                          },
+                        ),
                       ],
               ),
             ),
 
-            // Local reset "all"
-            EzResetButton(
-              context: context,
-              hint: _resetTitle,
-              dialogTitle: _resetTitle,
-              onConfirm: () {
-                if (_isLight) {
-                  EzConfig.instance.preferences.remove(lightPageImageKey);
-                } else {
-                  EzConfig.instance.preferences.remove(darkPageImageKey);
-                }
-
-                popScreen(context: context, pass: true);
-              },
-            ),
             EzSpacer(_buttonSpacer),
           ],
         ),
