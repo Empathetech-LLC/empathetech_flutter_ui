@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [4.2.0] - 2023-10-XX
 ### Updated
-- File organization
+- File organization for navigability
 - README asset organization
 - Comments
 - Moved consts/credits to consts/empathetechConfig
@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
   - Minor breaking change
 - Repsonsive widgets make limited space checks themselves
   - Minor breaking upgrade
+- Renamed Phrases && EFUIPhrases to Lang && EFUILange
+  - Minor breaking change
 
 ### Removed
 - Copy to clipboard function && flutter toast package
