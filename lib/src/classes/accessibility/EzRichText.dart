@@ -3,11 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class EzRichText extends SelectableText {
+class EzRichText extends StatelessWidget {
   final List<InlineSpan> children;
   final Key? key;
   final FocusNode? focusNode;
@@ -39,7 +41,9 @@ class EzRichText extends SelectableText {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// [SelectableText] wrapper with customized defaults
+  /// [TextSpan] wrapper with customized defaults and preconfigured [Semantics]
+  /// Recommended to use [EzPlainText] rather than [TextSpan]
+  /// Also see [EzInlineLink]
   EzRichText(
     this.children, {
     this.key,
@@ -70,33 +74,66 @@ class EzRichText extends SelectableText {
     this.onSelectionChanged,
     this.contextMenuBuilder,
     this.magnifierConfiguration,
-  }) : super.rich(
-          TextSpan(children: children),
-          key: key,
-          focusNode: focusNode,
-          style: style,
-          strutStyle: strutStyle,
-          textAlign: textAlign,
-          textDirection: textDirection,
-          textScaleFactor: textScaleFactor,
-          showCursor: showCursor,
-          autofocus: autofocus,
-          minLines: minLines,
-          maxLines: maxLines,
-          cursorWidth: cursorWidth,
-          cursorHeight: cursorHeight,
-          cursorRadius: cursorRadius,
-          cursorColor: cursorColor,
-          selectionHeightStyle: selectionHeightStyle,
-          dragStartBehavior: dragStartBehavior,
-          enableInteractiveSelection: enableInteractiveSelection,
-          selectionControls: selectionControls,
-          onTap: onTap,
-          scrollPhysics: scrollPhysics,
-          semanticsLabel: semanticsLabel,
-          textHeightBehavior: textHeightBehavior,
-          textWidthBasis: textWidthBasis,
-          onSelectionChanged: onSelectionChanged,
-          magnifierConfiguration: magnifierConfiguration,
-        );
+  });
+
+  String _buildSemantics() {
+    StringBuffer message = StringBuffer("");
+
+    for (InlineSpan child in children) {
+      switch (child.runtimeType) {
+        case TextSpan:
+          TextSpan textChild = child as TextSpan;
+          message.writeAll([textChild.semanticsLabel ?? textChild.text, " "]);
+          break;
+        case EzPlainText:
+          EzPlainText textChild = child as EzPlainText;
+          message.writeAll([textChild.semanticsLabel ?? textChild.text, " "]);
+          break;
+        case EzInlineLink:
+          EzInlineLink linkChild = child as EzInlineLink;
+          message.writeAll([linkChild.text, " "]);
+          break;
+        default:
+          break;
+      }
+    }
+
+    return message.toString();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: _buildSemantics(),
+      child: SelectableText.rich(
+        TextSpan(children: children),
+        key: key,
+        focusNode: focusNode,
+        style: style,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        textScaleFactor: textScaleFactor,
+        showCursor: showCursor,
+        autofocus: autofocus,
+        minLines: minLines,
+        maxLines: maxLines,
+        cursorWidth: cursorWidth,
+        cursorHeight: cursorHeight,
+        cursorRadius: cursorRadius,
+        cursorColor: cursorColor,
+        selectionHeightStyle: selectionHeightStyle,
+        dragStartBehavior: dragStartBehavior,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectionControls: selectionControls,
+        onTap: onTap,
+        scrollPhysics: scrollPhysics,
+        semanticsLabel: semanticsLabel,
+        textHeightBehavior: textHeightBehavior,
+        textWidthBasis: textWidthBasis,
+        onSelectionChanged: onSelectionChanged,
+        magnifierConfiguration: magnifierConfiguration,
+      ),
+    );
+  }
 }

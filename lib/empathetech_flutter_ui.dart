@@ -12,6 +12,7 @@ library empathetech_flutter_ui;
 export 'src/classes/accessibility/EzImage.dart';
 export 'src/classes/accessibility/EzInlineLink.dart';
 export 'src/classes/accessibility/EzLink.dart';
+export 'src/classes/accessibility/EzPlainText.dart';
 export 'src/classes/accessibility/EzRichText.dart';
 export 'src/classes/accessibility/EzRow.dart';
 export 'src/classes/accessibility/EzText.dart';
