@@ -355,12 +355,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     VideoPlayer(widget.controller),
 
                     // Tap-to-pause
-                    ExcludeSemantics(
-                      child: Positioned(
-                        top: 0,
-                        bottom: _margin + _buttonSize * 4,
-                        left: 0,
-                        right: 0,
+                    Positioned(
+                      top: 0,
+                      bottom: _margin + _buttonSize * 4,
+                      left: 0,
+                      right: 0,
+                      child: ExcludeSemantics(
                         child: GestureDetector(
                             child: Container(color: Colors.transparent),
                             onTap: () {
