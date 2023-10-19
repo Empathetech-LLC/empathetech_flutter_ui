@@ -2,14 +2,14 @@
 
 EFUI is a holistic foundation for digital accessibility.
 
-EFUI provides a starter kit for every aspect of digital accessibility:
+EFUI provides a starter kit for every pillar of digital accessibility:
 - **Platform availability**
   - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOS, Linux, MacOS, Windows and Web!
     - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_Widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
 - **Screen reader compliance**
   - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any aspect of your app's theme to the user.
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any piece of your app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
   - All of EFUI's [external text](./lib/src/l10n/) has been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
