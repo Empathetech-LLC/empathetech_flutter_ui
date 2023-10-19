@@ -36,7 +36,7 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [popScreen]
   final void Function()? onDeny;
 
-  /// Standardized [TextButton] for clearing user settings (aka resetting the apps')
+  /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   const EzResetButton({
     required this.context,
