@@ -103,7 +103,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: TextButton.styleFrom(
+      style: OutlinedButton.styleFrom(
         textStyle: reverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
