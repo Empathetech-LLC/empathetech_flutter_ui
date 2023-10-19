@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -162,7 +161,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case ButtonVis.alwaysOn:
         return _showing;
       case ButtonVis.auto:
-        return (show || Platform.isAndroid || Platform.isIOS)
+        return (show)
             ? _showing
             : (widget.showOnPause && !widget.controller.value.isPlaying)
                 ? _showing
