@@ -24,7 +24,7 @@ class EzAppProvider extends StatelessWidget {
     required this.app,
   });
 
-  // Gather default (optional) theme data //
+  // Gather theme data //
 
   late final bool? _savedLight =
       EzConfig.instance.preferences.getBool(isLightKey);
