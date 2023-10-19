@@ -91,17 +91,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
       ),
     ),
 
-    iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        iconSize: buttonTextStyle.fontSize,
-        alignment: Alignment.center,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        side: null,
-        padding: EdgeInsets.zero,
-      ),
-    ),
-
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         textStyle: reverseButtonTextStyle,
@@ -115,11 +104,22 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: buttonTextStyle,
+        textStyle: reverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         foregroundColor: Colors.transparent,
+        side: null,
+        padding: EdgeInsets.zero,
+      ),
+    ),
+
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: buttonTextStyle.fontSize,
+        alignment: Alignment.center,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         side: null,
         padding: EdgeInsets.zero,
       ),
