@@ -28,7 +28,7 @@ dependencies:
   line_icons: ^2.0.1
 
 dev_dependencies:
-  go_router: ^11.1.2
+  go_router: ^12.0.0
   dependency_validator: ^3.2.2
   dartdoc: ^6.3.0
 
