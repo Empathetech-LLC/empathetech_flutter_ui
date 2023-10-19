@@ -19,14 +19,14 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Color] shared by all icons/buttons
   final Color iconColor;
 
-  /// [Color.withOpacity] value that should be used when the player is not in focus
-  final double hiddenOpacity;
-
   /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
 
-  /// [MainAxisAlignment] for where the controls should appear
-  final MainAxisAlignment controlsAlignment;
+  /// [MainAxisAlignment] for the controls
+  final MainAxisAlignment controlsMainAxis;
+
+  /// [CrossAxisAlignment] for the controls
+  final CrossAxisAlignment controlsCrossAxis;
 
   /// Play button visability
   final ButtonVis playVis;
@@ -35,7 +35,6 @@ class EzVideoPlayer extends StatefulWidget {
   final ButtonVis volumeVis;
 
   /// Whether a volume slider is available
-  /// If false, the volume will switch between [startingVolume] and off
   final bool variableVolume;
 
   /// Replay button visability
@@ -47,8 +46,13 @@ class EzVideoPlayer extends StatefulWidget {
   /// Whether buttons set to [ButtonVis.auto] should show when the video is paused
   final bool showOnPause;
 
+  /// Whether the video should begin at page load
   final bool autoPlay;
+
+  /// Whether the video should play again (or pause) when complete
   final bool autoLoop;
+
+  /// Volume the video should begin at
   final double startingVolume;
 
   /// [Stack]s control buttons on top of an [AspectRatio] for the [controller]
@@ -62,9 +66,9 @@ class EzVideoPlayer extends StatefulWidget {
     required this.controller,
     required this.semantics,
     required this.iconColor,
-    this.hiddenOpacity = 0.0,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
-    this.controlsAlignment = MainAxisAlignment.center,
+    this.controlsMainAxis = MainAxisAlignment.spaceEvenly,
+    this.controlsCrossAxis = CrossAxisAlignment.center,
     this.playVis = ButtonVis.auto,
     this.volumeVis = ButtonVis.auto,
     this.variableVolume = true,
@@ -95,9 +99,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final double _buttonSize = EzConfig.instance.prefs[circleDiameterKey] / 2;
 
   late final Color _showing = widget.iconColor;
-  late final Color _hiding = (widget.hiddenOpacity == 0.0)
-      ? Colors.transparent
-      : widget.iconColor.withOpacity(widget.hiddenOpacity);
+  late final Color _hiding = Colors.transparent;
 
   // Define the functions //
 
@@ -357,7 +359,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     ExcludeSemantics(
                       child: Positioned(
                         top: 0,
-                        bottom: _buttonSize * 3,
+                        bottom: _margin + _buttonSize * 4,
                         left: 0,
                         right: 0,
                         child: GestureDetector(
@@ -372,40 +374,45 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                     // Controls
                     Positioned(
-                      height: _buttonSize * 3,
-                      bottom: 0,
+                      height: _buttonSize * 4,
+                      bottom: _margin,
                       left: _margin,
                       right: _margin,
                       child: Container(
                         decoration: widget.controlsBackground,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: widget.controlsMainAxis,
+                          crossAxisAlignment: widget.controlsCrossAxis,
                           children: [
                             // Time seeker
-                            (widget.sliderVis != ButtonVis.alwaysOff)
-                                ? SliderTheme(
-                                    data: videoSliderTheme,
-                                    child: Slider(
-                                      value: _currentPosition,
-                                      onChangeStart: (_) => _pauseVideo,
-                                      onChanged: (double value) {
-                                        setState(() {
-                                          _currentPosition = value;
-                                          widget.controller
-                                              .seekTo(_findPoint(value));
-                                        });
-                                      },
-                                    ),
-                                  )
-                                : EzSpacer(_buttonSize),
+                            Container(
+                              height: _buttonSize,
+                              width: double.infinity,
+                              child: (widget.sliderVis != ButtonVis.alwaysOff)
+                                  ? SliderTheme(
+                                      data: videoSliderTheme,
+                                      child: Slider(
+                                        value: _currentPosition,
+                                        onChangeStart: (_) => _pauseVideo,
+                                        onChanged: (double value) {
+                                          setState(() {
+                                            _currentPosition = value;
+                                            widget.controller
+                                                .seekTo(_findPoint(value));
+                                          });
+                                        },
+                                      ),
+                                    )
+                                  : SizedBox.shrink(),
+                            ),
 
                             // Buttons
-                            Row(
+                            EzScrollView(
+                              scrollDirection: Axis.horizontal,
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: widget.controlsAlignment,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: widget.controlsMainAxis,
+                              crossAxisAlignment: widget.controlsCrossAxis,
                               children:
                                   _buildButtons(videoSliderTheme, context),
                             ),
