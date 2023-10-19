@@ -108,7 +108,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
         side: null,
         padding: EdgeInsets.zero,
       ),
