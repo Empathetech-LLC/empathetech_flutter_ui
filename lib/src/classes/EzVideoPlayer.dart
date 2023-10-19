@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -53,6 +54,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Stack]s control buttons on top of an [AspectRatio] for the [controller]
   /// Also supports tap-to-pause on the main window via [MouseRegion]
   /// The visibility of each button can be controlled with [ButtonVis]
+  /// On mobile, [ButtonVis.auto] gets overidden to [ButtonVis.alwaysOn]
   /// Optionally provide a [BoxDecoration] background for the controls region
   /// The video will begin muted unless [startingVolume] is specified
   const EzVideoPlayer({
@@ -158,7 +160,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case ButtonVis.alwaysOn:
         return _showing;
       case ButtonVis.auto:
-        return (show)
+        return (show || Platform.isAndroid || Platform.isIOS)
             ? _showing
             : (widget.showOnPause && !widget.controller.value.isPlaying)
                 ? _showing
@@ -192,7 +194,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               },
               color: _buildColor(widget.playVis),
               iconSize: _buttonSize,
-              padding: EdgeInsets.zero,
             ),
           ),
         ),
@@ -219,7 +220,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               },
               color: _buildColor(widget.volumeVis),
               iconSize: _buttonSize,
-              padding: EdgeInsets.zero,
             ),
           ),
         ),
@@ -264,7 +264,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               onPressed: _replayVideo,
               color: _buildColor(widget.replayVis),
               iconSize: _buttonSize,
-              padding: EdgeInsets.zero,
             ),
           ),
         ),
@@ -347,79 +346,75 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   show = false;
                 });
               },
-              child: Stack(
-                children: [
-                  // Video
-                  ExcludeSemantics(
-                    child: Positioned.fill(
-                      child: AspectRatio(
-                        aspectRatio: widget.controller.value.aspectRatio,
-                        child: VideoPlayer(widget.controller),
+              child: AspectRatio(
+                aspectRatio: widget.controller.value.aspectRatio,
+                child: Stack(
+                  children: [
+                    // Video
+                    VideoPlayer(widget.controller),
+
+                    // Tap-to-pause
+                    ExcludeSemantics(
+                      child: Positioned(
+                        top: 0,
+                        bottom: _buttonSize * 3,
+                        left: 0,
+                        right: 0,
+                        child: GestureDetector(
+                            child: Container(color: Colors.transparent),
+                            onTap: () {
+                              (widget.controller.value.isPlaying)
+                                  ? _pauseVideo()
+                                  : _playVideo();
+                            }),
                       ),
                     ),
-                  ),
 
-                  // Tap-to-pause
-                  ExcludeSemantics(
-                    child: Positioned(
-                      top: 0,
-                      bottom: _buttonSize * 3 + _margin,
-                      left: 0,
-                      right: 0,
-                      child: GestureDetector(
-                          child: Container(color: Colors.transparent),
-                          onTap: () {
-                            (widget.controller.value.isPlaying)
-                                ? _pauseVideo()
-                                : _playVideo();
-                          }),
-                    ),
-                  ),
+                    // Controls
+                    Positioned(
+                      height: _buttonSize * 3,
+                      bottom: 0,
+                      left: _margin,
+                      right: _margin,
+                      child: Container(
+                        decoration: widget.controlsBackground,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Time seeker
+                            (widget.sliderVis != ButtonVis.alwaysOff)
+                                ? SliderTheme(
+                                    data: videoSliderTheme,
+                                    child: Slider(
+                                      value: _currentPosition,
+                                      onChangeStart: (_) => _pauseVideo,
+                                      onChanged: (double value) {
+                                        setState(() {
+                                          _currentPosition = value;
+                                          widget.controller
+                                              .seekTo(_findPoint(value));
+                                        });
+                                      },
+                                    ),
+                                  )
+                                : EzSpacer(_buttonSize),
 
-                  // Controls
-                  Positioned(
-                    height: _buttonSize * 3,
-                    bottom: _margin,
-                    left: _margin,
-                    right: _margin,
-                    child: Container(
-                      decoration: widget.controlsBackground,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Time seeker
-                          (widget.sliderVis != ButtonVis.alwaysOff)
-                              ? SliderTheme(
-                                  data: videoSliderTheme,
-                                  child: Slider(
-                                    value: _currentPosition,
-                                    onChangeStart: (_) => _pauseVideo,
-                                    onChanged: (double value) {
-                                      setState(() {
-                                        _currentPosition = value;
-                                        widget.controller
-                                            .seekTo(_findPoint(value));
-                                      });
-                                    },
-                                  ),
-                                )
-                              : EzSpacer(_buttonSize),
-
-                          // Buttons
-                          EzScrollView(
-                            scrollDirection: Axis.horizontal,
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: widget.controlsAlignment,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _buildButtons(videoSliderTheme, context),
-                          ),
-                        ],
+                            // Buttons
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: widget.controlsAlignment,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  _buildButtons(videoSliderTheme, context),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
