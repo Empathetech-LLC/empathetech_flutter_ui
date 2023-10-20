@@ -10,28 +10,29 @@ class EzLink extends StatelessWidget {
   /// Link message
   final String text;
 
+  final TextStyle? style;
+  final TextAlign? textAlign;
+
+  /// Hint for screen readers
+  /// What does this link do?
+  final String? semanticsLabel;
+
   /// Internal link destination
   final void Function()? onTap;
 
   /// External link destination
   final Uri? url;
 
-  /// Hint for screen readers
-  /// What does this link do?
-  final String? semanticsLabel;
-
-  /// Link style
-  final TextStyle? style;
-
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
   EzLink(
     this.text, {
+    this.style,
+    this.textAlign,
+    required this.semanticsLabel,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
-    this.style,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -42,7 +43,7 @@ class EzLink extends StatelessWidget {
       hint: semanticsLabel,
       child: ExcludeSemantics(
         child: TextButton(
-          child: Text(text, style: style),
+          child: Text(text, style: style, textAlign: textAlign),
           onPressed: onTap ?? () => launchUrl(url!),
         ),
       ),
