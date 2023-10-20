@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,12 +31,19 @@ class EzInlineLink extends WidgetSpan {
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
-          child: EzText(
-            text,
-            style: style,
-            textAlign: textAlign,
-            onTap: onTap ?? () => launchUrl(url!),
-            semanticsLabel: semanticsLabel,
+          child: Semantics(
+            link: true,
+            hint: semanticsLabel,
+            child: ExcludeSemantics(
+              child: TextButton(
+                child: Text(
+                  text,
+                  style: style,
+                  textAlign: textAlign,
+                ),
+                onPressed: onTap ?? () => launchUrl(url!),
+              ),
+            ),
           ),
           alignment: alignment,
           baseline: basline,
