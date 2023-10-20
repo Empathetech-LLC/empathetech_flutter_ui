@@ -73,10 +73,13 @@ const Map<String, dynamic> empathetechConfig = {
 // Define public links //
 
 /// One of us, one of us, one of us!
-const String EmpathetechCommunityContact = 'community@empathetech.net';
+const String EmpathetechCommunity = 'community@empathetech.net';
 
-/// If you need to reach out
+/// If you need a hand
 const String EmpathetechSupport = 'support@empathetech.net';
+
+/// If you need two hands
+const String EmpathetechAdmin = 'admin@empathetech.net';
 
 /// See what we're up to!
 const String EmpathetechLinkedIn =
