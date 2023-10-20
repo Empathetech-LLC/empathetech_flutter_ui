@@ -25,11 +25,12 @@ class EzPlainText extends WidgetSpan {
     this.basline,
   }) : super(
           child: ExcludeSemantics(
-              child: EzText(
-            text,
-            style: style,
-            textAlign: textAlign,
-          )),
+            child: EzText(
+              text,
+              style: style,
+              textAlign: textAlign,
+            ),
+          ),
           alignment: alignment,
           baseline: basline,
         );
