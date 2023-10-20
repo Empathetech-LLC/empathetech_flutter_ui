@@ -106,6 +106,25 @@ node('00-flutter') {
         }
       }
 
+      // Validate all the locales are up to date
+      stage('Validate l10n') {
+        script {
+          def translated = sh(script: 'flutter gen-l10n', returnStdout: true).trim()
+          println translated
+
+          // Check for changes after running 'flutter gen-l10n'
+          def changes = sh(script: 'git diff --name-only', returnStdout: true).trim()
+
+          if (changes) {
+            error('New locales were generated. The PR is not up to date; please run flutter gen-l10n, commit, and push the changes.')
+          }
+        
+          if (translated.contains('untranslated')) {
+            input message: 'Some phrases are untranslated. Do you want to continue?', ok: 'Continue'
+          }
+        }
+      }
+
       // Run flutter package analysis
       stage('Flutter Package Analysis') {
         script {
