@@ -11,12 +11,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EzInlineLink extends TextSpan {
   final String text;
+  final TextStyle? style;
   final void Function()? onTap;
   final Uri? url;
   final String? semanticsLabel;
   final bool? spellOut;
   final Locale? locale;
-  final TextStyle? style;
   final MouseCursor mouseCursor;
   final void Function(PointerEnterEvent)? onEnter;
   final void Function(PointerExitEvent)? onExit;
@@ -26,12 +26,12 @@ class EzInlineLink extends TextSpan {
   /// Pairs well with [EzRichText]
   EzInlineLink(
     this.text, {
+    this.style,
     this.onTap,
     this.url,
     required this.semanticsLabel,
     this.spellOut,
     this.locale,
-    this.style,
     this.mouseCursor = SystemMouseCursors.click,
     this.onEnter,
     this.onExit,
