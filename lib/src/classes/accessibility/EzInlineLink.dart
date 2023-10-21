@@ -34,12 +34,12 @@ class EzInlineLink extends TextSpan {
         super(
           text: text,
           style: style,
+          semanticsLabel: semanticsLabel,
           recognizer: new TapGestureRecognizer()
             ..onTap = onTap ?? () => launchUrl(url!),
           mouseCursor: SystemMouseCursors.click,
           onEnter: onEnter,
           onExit: onExit,
-          semanticsLabel: semanticsLabel,
           spellOut: spellOut,
         );
 }
