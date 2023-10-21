@@ -31,9 +31,7 @@ class EzRichText extends StatelessWidget {
   final DragStartBehavior dragStartBehavior;
   final bool enableInteractiveSelection;
   final TextSelectionControls? selectionControls;
-  final void Function()? onTap;
   final ScrollPhysics scrollPhysics;
-  final String? semanticsLabel;
   final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
   final void Function(TextSelection, SelectionChangedCause?)?
@@ -66,9 +64,7 @@ class EzRichText extends StatelessWidget {
     this.dragStartBehavior = DragStartBehavior.start,
     this.enableInteractiveSelection = true,
     this.selectionControls,
-    this.onTap,
     this.scrollPhysics = const NeverScrollableScrollPhysics(),
-    this.semanticsLabel,
     this.textHeightBehavior,
     this.textWidthBasis,
     this.onSelectionChanged,
@@ -126,9 +122,7 @@ class EzRichText extends StatelessWidget {
         dragStartBehavior: dragStartBehavior,
         enableInteractiveSelection: enableInteractiveSelection,
         selectionControls: selectionControls,
-        onTap: onTap,
         scrollPhysics: scrollPhysics,
-        semanticsLabel: semanticsLabel,
         textHeightBehavior: textHeightBehavior,
         textWidthBasis: textWidthBasis,
         onSelectionChanged: onSelectionChanged,

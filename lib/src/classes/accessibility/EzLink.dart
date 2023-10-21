@@ -3,10 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EzLink extends StatelessWidget {
+class EzLink extends EzText {
   /// Link message
   final String text;
 
@@ -33,20 +35,14 @@ class EzLink extends StatelessWidget {
     required this.semanticsLabel,
     this.onTap,
     this.url,
-  }) : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.');
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      link: true,
-      hint: semanticsLabel,
-      child: ExcludeSemantics(
-        child: TextButton(
-          child: Text(text, style: style, textAlign: textAlign),
-          onPressed: onTap ?? () => launchUrl(url!),
-        ),
-      ),
-    );
-  }
+  })  : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.'),
+        super(
+          text,
+          style: style,
+          textAlign: textAlign,
+          semanticsLabel: semanticsLabel,
+          onTap: onTap ?? () => launchUrl(url!),
+          showCursor: true,
+        );
 }

@@ -3,44 +3,43 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EzInlineLink extends WidgetSpan {
+class EzInlineLink extends TextSpan {
   final String text;
   final TextStyle? style;
-  final TextAlign? textAlign;
   final String? semanticsLabel;
   final void Function()? onTap;
   final Uri? url;
-  final PlaceholderAlignment alignment;
-  final TextBaseline? basline;
+  final void Function(PointerEnterEvent)? onEnter;
+  final void Function(PointerExitEvent)? onExit;
+  final bool spellOut;
 
-  /// [WidgetSpan] wrapper that either opens an internal link via [onTap]
+  /// [TextSpan] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
   EzInlineLink(
     this.text, {
     this.style,
-    this.textAlign,
     required this.semanticsLabel,
     this.onTap,
     this.url,
-    this.alignment = PlaceholderAlignment.middle,
-    this.basline,
+    this.onEnter,
+    this.onExit,
+    this.spellOut = false,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
-          child: EzLink(
-            text,
-            style: style,
-            textAlign: textAlign,
-            semanticsLabel: semanticsLabel,
-            onTap: onTap,
-            url: url,
-          ),
-          alignment: alignment,
-          baseline: basline,
+          text: text,
+          style: style,
+          recognizer: new TapGestureRecognizer()
+            ..onTap = onTap ?? () => launchUrl(url!),
+          mouseCursor: SystemMouseCursors.click,
+          onEnter: onEnter,
+          onExit: onExit,
+          semanticsLabel: semanticsLabel,
+          spellOut: spellOut,
         );
 }
