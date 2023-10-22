@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.1] - 2023-10-22
+### Updated
+- Jenkinsfile checks
+
 ## [4.2.0] - 2023-10-22
 ### Updated
 - File organization for navigability
