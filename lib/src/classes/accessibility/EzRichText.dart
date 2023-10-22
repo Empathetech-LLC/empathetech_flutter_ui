@@ -83,7 +83,7 @@ class EzRichText extends StatelessWidget {
           break;
         case EzPlainText:
           EzPlainText textChild = child as EzPlainText;
-          message.writeAll([textChild.semanticsLabel ?? textChild.text, " "]);
+          message.writeAll([textChild.semantics ?? textChild.text, " "]);
           break;
         case EzInlineLink:
           EzInlineLink linkChild = child as EzInlineLink;

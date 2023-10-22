@@ -139,7 +139,7 @@ abstract class EFUILang {
   /// No description provided for @gContinue.
   ///
   /// In en, this message translates to:
-  /// **'Conitnue'**
+  /// **'Continue'**
   String get gContinue;
 
   /// No description provided for @gSystem.

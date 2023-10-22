@@ -26,7 +26,7 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String get gContinue => 'Conitnue';
+  String get gContinue => 'Continue';
 
   @override
   String get gSystem => 'System';
