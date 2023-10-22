@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.2.0] - 2023-10-XX
+## [4.2.0] - 2023-10-22
 ### Updated
 - File organization for navigability
 - README asset organization
