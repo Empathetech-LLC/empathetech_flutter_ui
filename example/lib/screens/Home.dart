@@ -19,9 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
   // Set page/tab title //
 
   @override
-  void initState() {
-    super.initState();
-    setPageTitle(context: context, title: Phrases.of(context)!.settings);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(context, EFUILang.of(context)!.ssPageTitle);
   }
 
   // Gather theme data //
@@ -41,10 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Functionality disclaimer
             EzWarning(
-              warning: Phrases.of(context)!.attention,
               message: kIsWeb
-                  ? Phrases.of(context)!.resetWarning
-                  : Phrases.of(context)!.resetWarningWeb,
+                  ? EFUILang.of(context)!.ssSettingsGuide
+                  : EFUILang.of(context)!.ssSettingsGuideWeb,
               style: headlineSmall(context),
             ),
             EzSpacer(_buttonSpacer),
@@ -60,14 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(Phrases.of(context)!.styling),
+              child: Text(EFUILang.of(context)!.stsPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
-              child: Text(Phrases.of(context)!.colors),
+              child: Text(EFUILang.of(context)!.csPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -75,9 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(Phrases.of(context)!.images),
+              child: Text(EFUILang.of(context)!.isPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            EzSpacer(2 * _buttonSpacer),
 
             // Reset button
             EzResetButton(context: context),

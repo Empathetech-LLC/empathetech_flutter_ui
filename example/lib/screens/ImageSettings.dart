@@ -3,7 +3,6 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
@@ -17,25 +16,22 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Set page/tab title //
 
   @override
-  void initState() {
-    super.initState();
-    setPageTitle(context: context, title: Phrases.of(context)!.imageSettings);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
   }
 
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile =
-      _isLight ? EFUIPhrases.of(context)!.light : EFUIPhrases.of(context)!.dark;
+      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
 
   late final String _resetTitle =
-      Phrases.of(context)!.resetAllImages(_themeProfile);
-
-  late final String _resetMessage = kIsWeb
-      ? Phrases.of(context)!.resetAllWarningWeb
-      : Phrases.of(context)!.resetAllWarning;
+      EFUILang.of(context)!.isResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
@@ -46,11 +42,11 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
         child: EzScrollView(
           children: [
             // Current theme mode reminder
-            EzSelectableText(
-              Phrases.of(context)!.editingTheme(_themeProfile),
+            EzText(
+              EFUILang.of(context)!.dEditingTheme(_themeProfile),
               style: titleSmall(context),
             ),
-            EzSpacer(_buttonSpacer),
+            EzSpacer(_textSpacer),
 
             // Settings //
 
@@ -67,44 +63,52 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: Phrases.of(context)!.page,
+                          title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Phrases.of(context)!.yourSourceCredit,
+                          credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(_buttonSpacer),
+                        EzSpacer(2 * _buttonSpacer),
+
+                        // Local reset "all"
+                        EzResetButton(
+                          context: context,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.instance.preferences
+                                .remove(lightPageImageKey);
+
+                            popScreen(context: context, pass: true);
+                          },
+                        ),
                       ]
                     : // Editing dark theme //
                     [
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: Phrases.of(context)!.page,
+                          title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
-                          credits: Phrases.of(context)!.yourSourceCredit,
+                          credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(_buttonSpacer),
+                        EzSpacer(2 * _buttonSpacer),
+
+                        // Local reset "all"
+                        EzResetButton(
+                          context: context,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.instance.preferences
+                                .remove(darkPageImageKey);
+
+                            popScreen(context: context, pass: true);
+                          },
+                        ),
                       ],
               ),
             ),
 
-            // Local reset "all"
-            EzResetButton(
-              context: context,
-              hint: _resetTitle,
-              dialogTitle: _resetTitle,
-              dialogContents: _resetMessage,
-              onConfirm: () {
-                if (_isLight) {
-                  EzConfig.instance.preferences.remove(lightPageImageKey);
-                } else {
-                  EzConfig.instance.preferences.remove(darkPageImageKey);
-                }
-
-                popScreen(context: context, pass: true);
-              },
-            ),
             EzSpacer(_buttonSpacer),
           ],
         ),

@@ -48,7 +48,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
-      child: Text(EFUIPhrases.of(context)!.close),
+      child: Text(EFUILang.of(context)!.gClose),
     );
 
     return PlatformAlertDialog(
@@ -82,4 +82,63 @@ class EzAlertDialog extends PlatformAlertDialog {
       ),
     );
   }
+}
+
+/// Pairs with [EzAlertDialog]
+/// Quickly creates Material 'action' buttons for the dialog
+/// All required parameters are identical to [ezCupertinoActions]
+List<Widget>? ezMaterialActions({
+  required BuildContext context,
+  required void Function() onConfirm,
+  required void Function() onDeny,
+  String? confirmMsg,
+  String? denyMsg,
+}) {
+  return [
+    // Confirm
+    TextButton(
+      onPressed: onConfirm,
+      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
+    ),
+    EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
+
+    // Deny
+    TextButton(
+      onPressed: onDeny,
+      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
+    ),
+  ];
+}
+
+/// Pairs with [EzAlertDialog]
+/// Quickly creates [CupertinoDialogAction]s
+/// All required parameters are identical to [ezMaterialActions]
+List<CupertinoDialogAction>? ezCupertinoActions({
+  required BuildContext context,
+  required void Function() onConfirm,
+  required void Function() onDeny,
+  String? confirmMsg,
+  String? denyMsg,
+  bool confirmIsDefault = false,
+  bool denyIsDefault = false,
+  bool confirmIsDestructive = false,
+  bool denyIsDestructive = false,
+}) {
+  return [
+    // Confirm
+    CupertinoDialogAction(
+      onPressed: onConfirm,
+      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
+      isDefaultAction: confirmIsDefault,
+      isDestructiveAction: confirmIsDestructive,
+    ),
+
+    // Deny
+    CupertinoDialogAction(
+      onPressed: onDeny,
+      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
+      isDefaultAction: denyIsDefault,
+      isDestructiveAction: denyIsDestructive,
+    ),
+  ];
 }

@@ -18,20 +18,18 @@ enum SliderSettingType {
 }
 
 /// Get the proper [String] name for [EzSliderSetting.type]
-String getSettingName(BuildContext context, SliderSettingType settingType) {
+String sstName(BuildContext context, SliderSettingType settingType) {
   switch (settingType) {
     case SliderSettingType.margin:
-      return EFUIPhrases.of(context)!.margin;
+      return EFUILang.of(context)!.stsMargin;
     case SliderSettingType.padding:
-      return EFUIPhrases.of(context)!.padding;
+      return EFUILang.of(context)!.stsPadding;
     case SliderSettingType.circleSize:
-      return EFUIPhrases.of(context)!.circleSize;
+      return EFUILang.of(context)!.stsCircleSize;
     case SliderSettingType.buttonSpacing:
-      return EFUIPhrases.of(context)!.buttonSpacing;
+      return EFUILang.of(context)!.stsButtonSpacing;
     case SliderSettingType.textSpacing:
-      return EFUIPhrases.of(context)!.textSpacing;
-    default:
-      throw Exception("Invalid SliderSettingType: $settingType");
+      return EFUILang.of(context)!.stsTextSpacing;
   }
 }
 

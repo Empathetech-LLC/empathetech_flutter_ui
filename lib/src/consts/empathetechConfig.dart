@@ -32,10 +32,10 @@ const Color offBlack = Color(offBlackHex);
 const Map<String, dynamic> empathetechConfig = {
   // App-wide //
   marginKey: 15.0,
-  paddingKey: 12.5,
+  paddingKey: 15.0,
 
   buttonSpacingKey: 30.0,
-  textSpacingKey: 35.0,
+  textSpacingKey: 60.0,
 
   circleDiameterKey: 45.0,
 
@@ -69,3 +69,47 @@ const Map<String, dynamic> empathetechConfig = {
   darkAccentColorKey: EmpathGoldenrodHex,
   darkAccentTextColorKey: whiteHex,
 };
+
+// Define public links //
+
+/// One of us, one of us, one of us!
+const String EmpathetechCommunity = 'community@empathetech.net';
+
+/// If you need a hand
+const String EmpathetechSupport = 'support@empathetech.net';
+
+/// If you need two hands
+const String EmpathetechAdmin = 'admin@empathetech.net';
+
+/// See what we're up to!
+const String EmpathetechLinkedIn =
+    "https://linkedin.com/company/empathetech-llc";
+
+/// See what we're up to!
+const String EmpathetechMastodon = "https://mastodon.social/@empathetech";
+
+/// Where the magic happens
+const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
+
+/// One of us, one of us, one of us!
+const String EmpathetechFoldingTeam =
+    'https://stats.foldingathome.org/team/1063265';
+
+/// If you want to show some love
+const String EmpathetechPayPal =
+    'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
+
+/// If you want to show some love
+const String EmpathetechVenmo = 'https://venmo.com/empathetech-llc';
+
+/// If you want to show some love
+const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
+
+/// If you want to show some love
+const String EmpathetechPatreon = "https://patreon.com/EmpathetechLLC";
+
+/// If you want to show some love
+const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
+
+/// If you want to show some love
+const String EmpathetechKofi = "https://ko-fi.com/empathetech";

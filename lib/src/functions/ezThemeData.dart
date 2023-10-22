@@ -20,7 +20,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color themeTextColor = Color(EzConfig.instance
       .prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
   final Color unSelectedThemeTextColor =
-      EzColorBlend(themeColor, themeTextColor);
+      blendColors(themeColor, themeTextColor);
 
   final Color pageColor = Color(EzConfig
       .instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
@@ -37,11 +37,13 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color accentTextColor = Color(EzConfig.instance
       .prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
 
+  final TextTheme textTheme = ezTextTheme(pageTextColor);
+
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
   final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
   final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
-  final TextStyle textButtonTextStyle = buildTitleMedium(buttonColor);
+  final TextStyle reverseButtonTextStyle = buildTitleMedium(buttonColor);
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
 
@@ -89,11 +91,36 @@ ThemeData ezThemeData({required bool lightTheme}) {
       ),
     ),
 
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        textStyle: reverseButtonTextStyle,
+        alignment: Alignment.center,
+        backgroundColor: Colors.transparent,
+        shadowColor: buttonColor,
+        side: BorderSide(color: buttonColor),
+        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+      ),
+    ),
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: textButtonTextStyle,
+        textStyle: reverseButtonTextStyle,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        side: null,
+        padding: EdgeInsets.zero,
+      ),
+    ),
+
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: buttonTextStyle.fontSize,
+        alignment: Alignment.center,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        side: null,
+        padding: EdgeInsets.zero,
       ),
     ),
 
@@ -196,8 +223,8 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
-    textTheme: EzTextTheme(color: pageTextColor),
-    primaryTextTheme: EzTextTheme(color: pageTextColor),
+    textTheme: textTheme,
+    primaryTextTheme: textTheme,
     iconTheme: iconData,
     primaryIconTheme: iconData,
 

@@ -1,5 +1,3 @@
-import './utils.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -25,13 +23,11 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define AppBar widget(s) //
 
-    final Widget appBar = EzSelectableText.rich(
-      EzLink(
-        text: 'EFUI',
-        style: titleStyle,
-        action: () => context.goNamed(homeRoute),
-        semanticsLabel: Phrases.of(context)!.homeLinkHint,
-      ),
+    final EzLink titleLink = EzLink(
+      'EFUI',
+      style: titleStyle,
+      semanticsLabel: EFUILang.of(context)!.dHomeHint,
+      onTap: () => context.goNamed(homeRoute),
     );
 
     // Return the build //
@@ -48,7 +44,7 @@ class ExampleScaffold extends StatelessWidget {
           automaticallyImplyLeading: (leftHandedUser) ? false : true,
 
           // Title
-          title: appBar,
+          title: titleLink,
           titleSpacing: 0,
           centerTitle: true,
 

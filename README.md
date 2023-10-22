@@ -2,18 +2,18 @@
 
 EFUI is a holistic foundation for digital accessibility.
 
-EFUI provides a starter kit for every aspect of digital accessibility:
+EFUI provides a starter kit for every pillar of digital accessibility:
 - **Platform availability**
   - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOS, Linux, MacOS, Windows and Web!
-    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
+    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_Widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
 - **Screen reader compliance**
-  - The [example app](./example/lib/screens/) and all [custom widgets](./lib/src/classes/) have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+  - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any aspect of your app's theme to the user.
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any piece of your app's theme to the user.
     - Users can have full control of theme colors, fonts, styling, spacing, and images.
 - **Internationalization**
-  - The [example app](./example/lib/l10n/) and all [custom widgets](./lib/src/l10n/) have been translated into Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are A.H.I. generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](https://www.linkedin.com/in/mauro-ramirez-rivas)
+  - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
   - Checkout the [demo](#responsive-design) to see it in action
@@ -57,9 +57,9 @@ Here are some (unaffilliated!) videos you might also find helpful.
 
 ## TL;DR
 
-1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/EzConfig.dart) in your `void main()` to setup the user customizable [ezThemeData](./lib/src/functions/ezThemeData.dart)
-2. Use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>OR use `ezThemeData` in your existing provider/app
-3. a) Copy/paste all example app [screens](./example/lib/screens/) and [.arbs](./example/lib/l10n/) to your app and<br>b) Rename `Home.dart` to `Settings.dart` (personal preference) and update your routes
+1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in your `void main()`
+2. Use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformApp-class.html)<br>OR use [ezThemeData](./lib/src/functions/ezThemeData.dart) in your existing provider/app<br>OR use `EzConfig.instance` data to build your theme
+3. Migrate all example app [screens](./example/lib/screens/) to your project
 4. Enjoy
 
 ## Setup
@@ -78,7 +78,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_platform_Widgets/flutter_platform_Widgets.dart';
 ```
 
 ...and initialize `EzConfig` in your `void main()` Function.
@@ -111,11 +111,13 @@ void main() async {
 
 #### How it works
 
-`EzConfig` gathers all the values for `ezThemeData` and creates an instance for efficiently getting and setting those values in app.<br><br>`EzConfig` starts with [Empathetech's config](./lib/src/consts/empathetechConfig.dart) to make sure every key has a value. Then it merges in your custom data and the user's current [preferences](https://pub.dev/packages/shared_preferences). The [finalized](https://flutterbyexample.com/lesson/const-and-final-variables) instance is then used to populate `ezThemeData`.
+`EzConfig` gathers all the theme data for our apps. It starts with [Empathetech's config](./lib/src/consts/empathetechConfig.dart) to make sure every key has a value, then it merges in your `customDefaults` and the user's saved [preferences](https://pub.dev/packages/shared_preferences).
+
+Once complete, EzConfig stores the gathered data in a globally accessible [finalized](https://flutterbyexample.com/lesson/const-and-final-variables) instance.
 
 ### Step 2
 
-In `main.dart`, use an [EzAppProvider](./lib/src/classes/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+In `main.dart`, use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformApp-class.html)
 
 ```Dart
 class EFUIExample extends StatelessWidget {
@@ -130,11 +132,11 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Supported languages
-        supportedLocales: Phrases.supportedLocales + EFUIPhrases.supportedLocales,
+        supportedLocales: Lang.supportedLocales + EFUILang.supportedLocales,
 
         // Language handlers
         localizationsDelegates:
-            Phrases.localizationsDelegates + EFUIPhrases.localizationsDelegates,
+            Lang.localizationsDelegates + EFUILang.localizationsDelegates,
 
         title: "Emapathetech Flutter UI",
         routerConfig: _router,
@@ -146,9 +148,11 @@ class EFUIExample extends StatelessWidget {
 
 #### How it works
 
-[EzAppProvider](./lib/src/classes/EzAppProvider.dart) is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformProvider-class.html) wrapper that uses `ezThemeData` by default, setup for Cupertino and Material.
+`EzAppProvider` is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformProvider-class.html) wrapper that uses [ezThemeData](./lib/src/functions/ezThemeData.dart) by default.
 
-You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect. `EzAppProvider` and [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets) are recommendations not requirements.
+You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect.
+
+Or, with quite a bit more effort, you can even build your own fully custom base theme with `EzConfig.instance` data.
 
 ### Step 3
 
@@ -156,7 +160,7 @@ You are more than welcome to use your own app/app provider with `ezThemeData` fo
 
 The example app is built to be a drop-in solution for your app's settings section.
 
-Copy/paste all the [screen](./example/lib/screens/) files, [.arb](./example/lib/l10n/) language files, and routes from `main.dart` (aka below)
+Copy/paste all the [screen files](./example/lib/screens/) and routes from `main.dart` (below)
 
 ```Dart
 // Initialize a path based router for web-enabled apps
@@ -199,29 +203,39 @@ final GoRouter _router = GoRouter(
 );
 ```
 
-Rename the (just copied) `Home.dart` and `HomeScreen()` to something more appropriate, like `Settings.dart` and `SettingsScreen()`, create a link to it in your app, and boom!
+Rename the (just copied) `Home.dart` file and `HomeScreen()` class to something more appropriate; like `Settings.dart` and `SettingsScreen()`. Then, create a link to `SettingsScreen` in your app, and boom!
 
 **It's that Ez!**
 
 #### How it works
 
-The example app's screens neatly organize all the custom widgets that enable EFUI's user customization!
+The example app's screens neatly organize all the custom Widgets that enable EFUI's user customization!
 
-* [EzThemeModeSwitch](./lib/src/classes/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
-* [EzDominantHandSwitch](./lib/src/classes/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzColorSetting](./lib/src/classes/EzColorSetting.dart): A color picker for updating theme colors.
-* [EzFontSetting](./lib/src/classes/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
-* [EzSliderSetting](./lib/src/classes/EzSliderSetting.dart): A versatile slider widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
-* [EzImageSetting](./lib/src/classes/EzImageSetting.dart): An image uploader for updating app assets.
-* [EzResetButton](./lib/src/classes/EzResetButton.dart): A text button for resetting groups of preferences.
+* [EzThemeModeSwitch](./lib/src/classes/user-customization/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzDominantHandSwitch](./lib/src/classes/user-customization/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzColorSetting](./lib/src/classes/user-customization/EzColorSetting.dart): A color picker for updating theme colors.
+* [EzFontSetting](./lib/src/classes/user-customization/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
+* [EzSliderSetting](./lib/src/classes/user-customization/EzSliderSetting.dart): A versatile slider Widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzImageSetting](./lib/src/classes/user-customization/EzImageSetting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/user-customization/EzResetButton.dart): A text button for resetting groups of preferences.
 
-By default, every base [theme setting](./lib/src/consts/sharedPreferences.dart) is exposed. Any keys provided to `customDefaults` can be updated with these `EzSetting`s. If there are any theme values you wish to stay constant, simply remove the paired `EzSetting`.
+By default, every base [theme setting](./lib/src/consts/keys.dart) is exposed. Any keys provided to `customDefaults` can be updated with these Widgets. If there are any theme values you wish to stay constant, simply remove the paired setting Widget.
 
 ### Step 4
 
-Enjoy!
+**Enjoy!**
 
-There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRowCol.dart), [EzLayoutSwitch](./lib/src/classes/EzLayoutSwitch.dart), and [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)! We think `EzConfig` will hook you in enough to want to explore the rest!
+The pillars of platform availability and user customization are "set it and forget it"; bar any external libraries that break things.
+
+But, as you grow your apps, the other pillars require continuous development.
+
+Thankfully, EFUI's got you covered there too! Check out the...
+* [Responsive Widgets](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
+* [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or Widgets that adapt to accessibilty flags, like `EzDominantHandSwitch` 
+
+and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
+
+But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
 
 # Demo
 
@@ -229,45 +243,39 @@ There's lots of other cool stuff in EFUI, like [EzRowCol](./lib/src/classes/EzRo
 
 ### Platform availability
 
-<img src="./assets/images/home-android.png" alt="Home page on Android" width="250"/>
-<img src="./assets/images/home-ios.png" alt="Home page on iOS" width="250"/>
-<br>
-<img src="./assets/images/home-linux.png" alt="Home page on Linux" width="500"/>
-<img src="./assets/images/home-macos.png" alt="Home page on macOS" width="500"/>
-<img src="./assets/images/home-windows.png" alt="Home page on Windows" width="500"/>
-<br>
-<img src="./assets/images/home-web.png" alt="Home page on Web" width="500"/>
+| Android | iOS |
+|---|---|
+| <img src="./assets/images/home-android.png" alt="Home page on Android" width="250"/> | <img src="./assets/images/home-ios.png" alt="Home page on iOS" width="250"/> |
+
+| Linux | MacOS | Windows |
+|---|---|---|
+| <img src="./assets/images/home-linux.png" alt="Home page on Linux" width="500"/> | <img src="./assets/images/home-macos.png" alt="Home page on macOS" width="500"/> | <img src="./assets/images/home-windows.png" alt="Home page on Windows" width="500"/> |
+
+| Web |
+|---|
+| <img src="./assets/images/home-web.png" alt="Home page on Web" width="500"/> |
 
 ### Screen reader compliance
 
-<video controls width="350">
-    <source src="./assets/videos/es-voice-over.mp4" type="video/mp4">
-    Spanish iOS Voice Over demo not supported by your browser.
-</video>
-<video controls width="350">
-    <source src="./assets/videos/en-voice-over.mp4" type="video/mp4">
-    English iOS Voice Over demo not supported by your browser.
+<video width="350" controls aria-label="iOS voice over demo">
+  <source src="./assets/videos/en-voice-over.mp4" type="video/mp4">
 </video>
 
 ### User customization
 
-<img src="./assets/images/home-ios.png" alt="Core settings example" width="250"/>
-<img src="./assets/images/style-settings-ios.png" alt="Style settings example" width="250"/>
-<img src="./assets/images/color-settings-ios.png" alt="Color settings example" width="250"/>
-<img src="./assets/images/image-settings-ios.png" alt="Image settings example" width="250"/>
-<br>
-<img src="./assets/images/font-picker-ios.png" alt="Font picker preview" width="250"/>
-<img src="./assets/images/margin-setting-ios.png" alt="Margin setting preview" width="250"/>
-<img src="./assets/images/circle-setting-ios.png" alt="Circle setting preview" width="250"/>
-<img src="./assets/images/color-picker-ios.png" alt="Color picker preview" width="250"/>
-<img src="./assets/images/update-image-ios.png" alt="Update image preview" width="250"/>
+| | | |
+|---|---|---|
+| <img src="./assets/images/home-ios.png" alt="Core settings example" width="250"/> | <img src="./assets/images/style-settings-ios.png" alt="Style settings example" width="250"/> | <img src="./assets/images/color-settings-ios.png" alt="Color settings example" width="250"/> |
+| <img src="./assets/images/image-settings-ios.png" alt="Image settings example" width="250"/> | <img src="./assets/images/font-picker-ios.png" alt="Font picker preview" width="250"/> | <img src="./assets/images/margin-setting-ios.png" alt="Margin setting preview" width="250"/> |
+| <img src="./assets/images/circle-setting-ios.png" alt="Circle setting preview" width="250"/> | <img src="./assets/images/color-picker-ios.png" alt="Color picker preview" width="250"/> | <img src="./assets/images/update-image-ios.png" alt="Update image preview" width="250"/> |
 
 ### Internationalization
 
-<img src="./assets/images/es-home-ios.png" alt="Core settings in Spanish" width="250"/>
-<img src="./assets/images/es-style-settings-ios.png" alt="Style settings in Spanish" width="250"/>
-<img src="./assets/images/es-color-settings-ios.png" alt="Color settings in Spanish" width="250"/>
-<img src="./assets/images/es-image-settings-ios.png" alt="Image settings in Spanish" width="250"/>
+| | | | |
+|---|---|---|---|
+| <img src="./assets/images/es-home-ios.png" alt="Core settings in Spanish" width="250"/> | <img src="./assets/images/es-style-settings-ios.png" alt="Style settings in Spanish" width="250"/> | <img src="./assets/images/es-color-settings-ios.png" alt="Color settings in Spanish" width="250"/> | <img src="./assets/images/es-image-settings-ios.png" alt="Image settings in Spanish" width="250"/> |
+
+**Screen reader semantics are also internationalized!**
 
 ### Responsive design
 
@@ -292,7 +300,7 @@ Please reach out to the [community](mailto:community@empathetech.net?subject=Bec
 
 - More languages! If you speak English and a currently unsupported language, please reach out!
 - More EzWidgets with required and/or preconfigured semantics
-- Querying [GoogleFonts](https://pub.dev/packages/google_fonts) rather than relying on a predetermined [list](/lib/src/consts/googleFonts.dart)
+- Querying [GoogleFonts](https://pub.dev/packages/google_fonts) rather than relying on a predetermined [list](./lib/src/consts/googleFonts.dart)
 
 ## Money
 
@@ -302,13 +310,15 @@ Many thanks for any and all donations! We're happy to have helped!
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
 
-### Venmo
+### [Venmo](https://venmo.com/empathetech-llc)
 
-[@empathetech-llc](https://venmo.com/empathetech-llc)
+### [Cash App](https://cash.app/$empathetech)
 
-### Cash App
+### [Ko-fi](https://ko-fi.com/empathetech)
 
-[$empathetech](https://cash.app/$empathetech)
+### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
+
+### [Patreon](https://patreon.com/EmpathetechLLC)
 
 # License
 
@@ -324,9 +334,7 @@ Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for ve
 
 EFUI wouldn't be as awesome as it is without these other awesome community projects...
 
-* [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
+* [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_Widgets)
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
-* [Line Icons](https://pub.dev/packages/line_icons)
-* [Flutter Toast](https://pub.dev/packages/fluttertoast)
 
 And, of course, all the awesome Flutter (Google) devs.

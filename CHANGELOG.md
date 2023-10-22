@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.0] - 2023-10-22
+### Updated
+- File organization for navigability
+- README asset organization
+- Comments
+- Moved consts/credits to consts/empathetechConfig
+- Updated all text Widgets
+  - Minor breaking changes
+- EzColors from classes to functions
+  - Minor breaking change
+- Repsonsive widgets make limited space checks themselves
+  - Minor breaking upgrade
+- Renamed Phrases && EFUIPhrases to Lang && EFUILange
+  - Minor breaking change
+
+### Removed
+- Copy to clipboard function && flutter toast package
+  - Minor breaking change
+
+### Added
+- EzSwapScaffold
+
 ## [4.1.1] - 2023-10-08
 ### Updated
 - Asset file extensions
