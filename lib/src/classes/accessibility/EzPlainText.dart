@@ -9,18 +9,20 @@ import 'package:flutter/material.dart';
 
 class EzPlainText extends TextSpan {
   final String text;
+  final BuildContext context;
   final TextStyle? style;
   final String? semanticsLabel;
 
   /// [TextSpan] wrapper with modified [Semantics] for use in [EzRichText]
   EzPlainText(
     this.text, {
+    required this.context,
     this.style,
     this.semanticsLabel,
   }) : super(
           text: text,
           style: style,
-          semanticsLabel: null,
+          semanticsLabel: EFUILang.of(context)!.gContinue,
           spellOut: false,
         );
 }

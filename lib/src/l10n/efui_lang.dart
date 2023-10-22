@@ -136,6 +136,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Conitnue'**
+  String get gContinue;
+
   /// No description provided for @gSystem.
   ///
   /// In en, this message translates to:
