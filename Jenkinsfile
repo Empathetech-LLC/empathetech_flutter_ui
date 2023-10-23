@@ -83,7 +83,7 @@ node('00-flutter') {
       // Validate all the flutter packages are on their latest version
       stage('Validate Flutter Dependencies') {
         script {
-          def allPaths = sh(script: "grep -E '\s+path:' pubspec.yaml", returnStdout: true).trim().split("\n")
+          def allPaths = sh(script: "grep -E '\\s+path:' pubspec.yaml", returnStdout: true).trim().split("\n")
           allPaths.each { path ->
             if (!path.contains('^') && !path.startsWith('#')) { 
               error('Some packages are being built locally. Update all to remote to continue.')
