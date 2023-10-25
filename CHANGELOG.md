@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.2.1] - 2023-10-22
+## [4.2.1] - 2023-10-25
 ### Updated
 - Jenkinsfile checks
 - Icon buttons
