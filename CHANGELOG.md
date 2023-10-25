@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.1] - 2023-10-25
+### Updated
+- Jenkinsfile checks
+- Icon buttons
+  - There is an issue with icon buttons on iOS browsers, so icons have been removed when (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) for now
+
 ## [4.2.0] - 2023-10-22
 ### Updated
 - File organization for navigability

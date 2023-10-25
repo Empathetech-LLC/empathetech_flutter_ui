@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -69,14 +70,24 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () => _chooseGoogleFont(context),
-      icon: const Icon(LineIcons.font),
-      label: Text(
-        EFUILang.of(context)!.stsTextFont,
-        style: TextStyle(fontFamily: currFontFamily),
-        textAlign: TextAlign.center,
-      ),
-    );
+    // At the time of writing, there is a visual bug with [ElevatedButton.icon] on iOS browsers
+    return (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
+        ? ElevatedButton(
+            onPressed: () => _chooseGoogleFont(context),
+            child: Text(
+              EFUILang.of(context)!.stsTextFont,
+              style: TextStyle(fontFamily: currFontFamily),
+              textAlign: TextAlign.center,
+            ),
+          )
+        : ElevatedButton.icon(
+            onPressed: () => _chooseGoogleFont(context),
+            icon: const Icon(LineIcons.font),
+            label: Text(
+              EFUILang.of(context)!.stsTextFont,
+              style: TextStyle(fontFamily: currFontFamily),
+              textAlign: TextAlign.center,
+            ),
+          );
   }
 }
