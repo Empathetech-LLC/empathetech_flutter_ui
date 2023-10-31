@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.0] - 2023-10-31
+### Removed
+- EzVideoPlayer
+  - Moved to `efui_video_player` package
+
 ## [4.2.1] - 2023-10-25
 ### Updated
 - Jenkinsfile checks
