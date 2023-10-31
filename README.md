@@ -310,7 +310,7 @@ Many thanks for any and all donations! We're happy to have helped!
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
 
-### [Venmo](https://venmo.com/empathetech-llc)
+### [Venmo](https://venmo.com/empathetech)
 
 ### [Cash App](https://cash.app/$empathetech)
 
@@ -318,7 +318,7 @@ Many thanks for any and all donations! We're happy to have helped!
 
 ### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
 
-### [Patreon](https://patreon.com/EmpathetechLLC)
+### [Patreon](https://patreon.com/empathetech)
 
 # License
 

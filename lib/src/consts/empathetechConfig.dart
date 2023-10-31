@@ -100,13 +100,13 @@ const String EmpathetechPayPal =
     'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
 
 /// If you want to show some love
-const String EmpathetechVenmo = 'https://venmo.com/empathetech-llc';
+const String EmpathetechVenmo = 'https://venmo.com/empathetech';
 
 /// If you want to show some love
 const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
 
 /// If you want to show some love
-const String EmpathetechPatreon = "https://patreon.com/EmpathetechLLC";
+const String EmpathetechPatreon = "https://patreon.com/empathetech";
 
 /// If you want to show some love
 const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
