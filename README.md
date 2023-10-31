@@ -314,11 +314,11 @@ Many thanks for any and all donations! We're happy to have helped!
 
 ### [Cash App](https://cash.app/$empathetech)
 
-### [Ko-fi](https://ko-fi.com/empathetech)
+### [Patreon](https://patreon.com/empathetech)
 
 ### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
 
-### [Patreon](https://patreon.com/empathetech)
+### [Ko-fi](https://ko-fi.com/empathetech)
 
 # License
 
