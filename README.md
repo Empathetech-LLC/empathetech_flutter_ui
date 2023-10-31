@@ -233,7 +233,7 @@ Thankfully, EFUI's got you covered there too! Check out the...
 * [Responsive Widgets](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
 * [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or Widgets that adapt to accessibilty flags, like `EzDominantHandSwitch` 
 
-and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
+and even extension packages, like [efui_video_player](https://github.com/Empathetech-LLC/efui_video_player)!
 
 But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
 
