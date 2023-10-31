@@ -41,7 +41,6 @@ export 'src/classes/user-customization/EzThemeModeSwitch.dart';
 export 'src/classes/EzAlertDialog.dart';
 export 'src/classes/EzBackAction.dart';
 export 'src/classes/EzScreen.dart';
-export 'src/classes/EzVideoPlayer.dart';
 
 // Constants //
 
