@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.1] - 2023-11-XX
+### Updated
+- Jenkins checks
+
 ## [4.3.0] - 2023-10-31
 ### Removed
 - EzVideoPlayer
