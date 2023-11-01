@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 - EzVideoPlayer
   - Moved to `efui_video_player` package
 
+### Updated
+- Funding config
+
 ## [4.2.1] - 2023-10-25
 ### Updated
 - Jenkinsfile checks
