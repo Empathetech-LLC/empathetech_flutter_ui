@@ -233,7 +233,7 @@ Thankfully, EFUI's got you covered there too! Check out the...
 * [Responsive Widgets](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
 * [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or Widgets that adapt to accessibilty flags, like `EzDominantHandSwitch` 
 
-and even more helpful Widgets, like [EzVideoPlayer](./lib/src/classes/EzVideoPlayer.dart)!
+and even extension packages, like [efui_video_player](https://github.com/Empathetech-LLC/efui_video_player)!
 
 But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
 
@@ -310,15 +310,15 @@ Many thanks for any and all donations! We're happy to have helped!
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
 
-### [Venmo](https://venmo.com/empathetech-llc)
+### [Venmo](https://venmo.com/empathetech)
 
 ### [Cash App](https://cash.app/$empathetech)
 
-### [Ko-fi](https://ko-fi.com/empathetech)
+### [Patreon](https://patreon.com/empathetech)
 
 ### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
 
-### [Patreon](https://patreon.com/EmpathetechLLC)
+### [Ko-fi](https://ko-fi.com/empathetech)
 
 # License
 
