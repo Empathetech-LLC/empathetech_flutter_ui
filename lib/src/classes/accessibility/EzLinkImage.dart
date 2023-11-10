@@ -34,7 +34,7 @@ class EzLinkImage extends StatelessWidget {
   final bool isAntiAlias;
   final FilterQuality filterQuality;
 
-  /// [Image] wrapper that makes [semanticLabel] required
+  /// [Image] wrapper that makes [semanticLabel] required and uses [launchUrl] to launch [url]
   const EzLinkImage({
     this.key,
     required this.url,
