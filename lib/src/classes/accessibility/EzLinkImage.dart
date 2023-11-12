@@ -60,30 +60,36 @@ class EzLinkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      key: key,
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () => launchUrl(Uri.parse(url)),
-        child: Image(
-          image: image,
-          frameBuilder: frameBuilder,
-          loadingBuilder: loadingBuilder,
-          errorBuilder: errorBuilder,
-          semanticLabel: semanticLabel,
-          width: width,
-          height: height,
-          color: color,
-          opacity: opacity,
-          colorBlendMode: colorBlendMode,
-          fit: fit,
-          alignment: alignment,
-          repeat: repeat,
-          centerSlice: centerSlice,
-          matchTextDirection: matchTextDirection,
-          gaplessPlayback: gaplessPlayback,
-          isAntiAlias: isAntiAlias,
-          filterQuality: filterQuality,
+    return Semantics(
+      image: true,
+      link: true,
+      hint: semanticLabel,
+      child: ExcludeSemantics(
+        child: MouseRegion(
+          key: key,
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => launchUrl(Uri.parse(url)),
+            child: Image(
+              image: image,
+              frameBuilder: frameBuilder,
+              loadingBuilder: loadingBuilder,
+              errorBuilder: errorBuilder,
+              width: width,
+              height: height,
+              color: color,
+              opacity: opacity,
+              colorBlendMode: colorBlendMode,
+              fit: fit,
+              alignment: alignment,
+              repeat: repeat,
+              centerSlice: centerSlice,
+              matchTextDirection: matchTextDirection,
+              gaplessPlayback: gaplessPlayback,
+              isAntiAlias: isAntiAlias,
+              filterQuality: filterQuality,
+            ),
+          ),
         ),
       ),
     );
