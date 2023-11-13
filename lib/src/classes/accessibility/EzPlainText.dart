@@ -15,19 +15,16 @@ class EzPlainText extends TextSpan {
   /// Message that [EzRichText] will use for the full-block read
   final String? semantics;
 
-  final String? semanticsLabel;
-
   /// [TextSpan] wrapper with custom [semantics] for use in [EzRichText]
   EzPlainText(
     this.text, {
     required this.context,
     this.style,
     this.semantics,
-    this.semanticsLabel,
   }) : super(
           text: text,
           style: style,
-          semanticsLabel: semanticsLabel ?? EFUILang.of(context)!.gContinue,
+          semanticsLabel: EFUILang.of(context)!.gContinue,
           spellOut: false,
         );
 }
