@@ -140,7 +140,7 @@ node('00-flutter') {
           def docs = sh(script: 'dart doc . 2>&1', returnStdout: true).trim()
           println docs
 
-          if (!docs.contains('0 errors')) {
+          if (!(docs.contains('0 errors') || docs.contains('no issues found'))) {
             input message: 'Dart doc found errors. Do you want to continue?', ok: 'Continue'
           } else {
             println "No errors found! Good job!"
@@ -172,7 +172,7 @@ node('00-flutter') {
 
             // Fail if a tag already exists
             def releaseCheck = sh(script: 'git describe --exact-match HEAD 2>&1 || true', returnStdout: true).trim()
-            if (!releaseCheck.contains('no tag')) {
+            if (!(releaseCheck.contains('no tag') || releaseCheck.contains('No names'))) {
               error("ERROR: Current commit already has a tag")
             }
 
