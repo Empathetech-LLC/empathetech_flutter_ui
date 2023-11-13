@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.3.1] - 2023-11-10
+## [4.3.1] - 2023-11-12
 ### Updated
 - Jenkins checks
+- Platform widgets
 
 ### Added
 - EzLinkImage
