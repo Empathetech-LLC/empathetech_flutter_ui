@@ -124,14 +124,12 @@ class _ImageSettingState extends State<EzImageSetting> {
                   return EzAlertDialog(
                     title: EzText(EFUILang.of(context)!.isEnterURL),
                     contents: [
-                      TextFormField(
+                      PlatformTextFormField(
                         onChanged: (value) {
                           url = value;
                         },
-                        decoration: InputDecoration(
-                          labelText: 'Enter URL',
-                          hintText: 'https://example.com/image.jpg',
-                        ),
+                        hintText: 'https://example.com/image.jpg',
+                        style: Theme.of(context).dialogTheme.contentTextStyle,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty || !isUrl(value)) {
@@ -140,13 +138,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                           return null;
                         },
                       ),
-                      if (isUrl(url))
-                        EzImage(
-                          image: NetworkImage(url),
-                          width: widget.fullscreen ? 160 : 75,
-                          height: widget.fullscreen ? 160 : 75,
-                          semanticLabel: EFUILang.of(context)!.isNetworkPreview,
-                        ),
                     ],
                     materialActions: ezMaterialActions(
                       context: context,
