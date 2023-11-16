@@ -39,7 +39,7 @@
 
   "stsPageTitle": "Style settings",
   "stsTextFont": "Text font",
-  "stschooseFont": "Choose a font",
+  "stsChooseFont": "Choose a font",
   "stsDefaultFont": "{font}* (default)",
   "stsMargin": "Margin",
   "stsPadding": "Padding",
@@ -74,6 +74,7 @@
   "isDialogTitle": "How should the {title} image be updated?",
   "isFromFile": "From file",
   "isFromCamera": "From camera",
+  "isFromNetwork": "From URL",
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
   "isResetIt": "Reset it",

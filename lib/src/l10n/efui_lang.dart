@@ -298,11 +298,11 @@ abstract class EFUILang {
   /// **'Text font'**
   String get stsTextFont;
 
-  /// No description provided for @stschooseFont.
+  /// No description provided for @stsChooseFont.
   ///
   /// In en, this message translates to:
   /// **'Choose a font'**
-  String get stschooseFont;
+  String get stsChooseFont;
 
   /// No description provided for @stsDefaultFont.
   ///
@@ -495,6 +495,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'From camera'**
   String get isFromCamera;
+
+  /// No description provided for @isFromNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'From URL'**
+  String get isFromNetwork;
 
   /// No description provided for @isGetFailed.
   ///
