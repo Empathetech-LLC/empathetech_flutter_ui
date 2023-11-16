@@ -123,7 +123,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 builder: (context, setState) {
                   return EzAlertDialog(
                     title: EzText(EFUILang.of(context)!.isEnterURL),
-                    content: EzScrollView(children: [
+                    contents: [
                       TextFormField(
                         onChanged: (value) {
                           url = value;
@@ -147,7 +147,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           height: widget.fullscreen ? 160 : 75,
                           semanticLabel: EFUILang.of(context)!.isNetworkPreview,
                         ),
-                    ]),
+                    ],
                     materialActions: ezMaterialActions(
                       context: context,
                       onConfirm: () {
@@ -220,10 +220,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(
-          EFUILang.of(context)!.isDialogTitle(widget.title),
-        ),
-        content: EzScrollView(children: options),
+        title: EzText(EFUILang.of(context)!.isDialogTitle(widget.title)),
+        contents: options,
       ),
     );
   }
@@ -253,7 +251,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzText(EFUILang.of(context)!.isCreditTo),
-              content: EzScrollView(child: EzText(widget.credits)),
+              contents: [EzText(widget.credits)],
             ),
           ),
 

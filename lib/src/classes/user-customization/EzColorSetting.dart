@@ -107,8 +107,8 @@ class _ColorSettingState extends State<EzColorSetting> {
         builder: (context) => EzAlertDialog(
           title: EzText(EFUILang.of(context)!.csRecommended),
           // Recommended color preview
-          content: EzScrollView(
-            child: Container(
+          contents: [
+            Container(
               width: 75,
               height: 75,
               decoration: BoxDecoration(
@@ -116,7 +116,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 border: Border.all(color: backgroundColor),
               ),
             ),
-          ),
+          ],
           materialActions: ezMaterialActions(
             context: context,
             onConfirm: onConfirm,
@@ -164,8 +164,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       builder: (context) => EzAlertDialog(
         title: EzText(EFUILang.of(context)!.csResetTo),
         // Reset color preview
-        content: EzScrollView(
-          child: Container(
+        contents: [
+          Container(
             width: 75,
             height: 75,
             decoration: BoxDecoration(
@@ -173,7 +173,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               border: Border.all(color: getTextColor(resetColor)),
             ),
           ),
-        ),
+        ],
         materialActions: ezMaterialActions(
           context: context,
           onConfirm: onConfirm,

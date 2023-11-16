@@ -71,11 +71,9 @@ class EzResetButton extends StatelessWidget {
         context: context,
         builder: (context) => EzAlertDialog(
           title: EzText(_dialogTitle),
-          content: EzScrollView(
-            child: EzText(
-              dialogContent ?? EFUILang.of(context)!.dResetDialogContent,
-            ),
-          ),
+          contents: [
+            EzText(dialogContent ?? EFUILang.of(context)!.dResetDialogContent),
+          ],
           materialActions: ezMaterialActions(
             context: context,
             onConfirm: _onConfirm,

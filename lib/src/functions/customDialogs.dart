@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
     context: context,
     builder: (context) => EzAlertDialog(
       title: EzText(alert ?? EFUILang.of(context)!.dAttention),
-      content: EzScrollView(child: EzText(message)),
+      contents: [EzText(message)],
     ),
   );
 }
@@ -43,8 +43,8 @@ Future<dynamic> ezColorPicker({
       title: EzText(
         title ?? EFUILang.of(context)!.csPickerTitle,
       ),
-      content: EzScrollView(
-        child: ColorPicker(
+      contents: [
+        ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
 
@@ -54,7 +54,7 @@ Future<dynamic> ezColorPicker({
 
           portraitOnly: true,
         ),
-      ),
+      ],
       materialActions: ezMaterialActions(
         context: context,
         onConfirm: onConfirm,
