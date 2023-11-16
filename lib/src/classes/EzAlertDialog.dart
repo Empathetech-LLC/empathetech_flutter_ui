@@ -75,8 +75,8 @@ class EzAlertDialog extends PlatformAlertDialog {
         actionsPadding: EdgeInsets.all(padding),
 
         // General
-        iconPadding: EdgeInsets.zero,
-        buttonPadding: EdgeInsets.zero,
+        iconPadding: EdgeInsets.all(padding),
+        buttonPadding: EdgeInsets.all(padding),
         insetPadding: EdgeInsets.all(padding),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
