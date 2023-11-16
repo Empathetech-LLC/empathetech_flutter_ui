@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
     context: context,
     builder: (context) => EzAlertDialog(
       title: EzText(alert ?? EFUILang.of(context)!.dAttention),
-      content: EzText(message),
+      content: EzScrollView(child: EzText(message)),
     ),
   );
 }
@@ -43,7 +43,7 @@ Future<dynamic> ezColorPicker({
       title: EzText(
         title ?? EFUILang.of(context)!.csPickerTitle,
       ),
-      content: Container(
+      content: EzScrollView(
         child: ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
