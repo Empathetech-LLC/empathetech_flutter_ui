@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [4.3.3] - 2023-11-16
 ### Updated
 - Color picker
+- EzImageSetting
 
 ## [4.3.2] - 2023-11-12
 ### Updated
