@@ -502,6 +502,12 @@ abstract class EFUILang {
   /// **'From URL'**
   String get isFromNetwork;
 
+  /// No description provided for @isEnterURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter URL'**
+  String get isEnterURL;
+
   /// No description provided for @isGetFailed.
   ///
   /// In en, this message translates to:

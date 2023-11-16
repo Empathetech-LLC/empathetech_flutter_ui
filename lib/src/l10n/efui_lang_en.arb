@@ -75,6 +75,7 @@
   "isFromFile": "From file",
   "isFromCamera": "From camera",
   "isFromNetwork": "From URL",
+  "isEnterURL": "Enter URL",
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
   "isResetIt": "Reset it",

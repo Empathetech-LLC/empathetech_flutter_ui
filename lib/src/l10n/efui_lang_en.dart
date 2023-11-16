@@ -233,6 +233,9 @@ class EFUILangEn extends EFUILang {
   String get isFromNetwork => 'From URL';
 
   @override
+  String get isEnterURL => 'Enter URL';
+
+  @override
   String get isGetFailed => 'Failed to retrieve image';
 
   @override
