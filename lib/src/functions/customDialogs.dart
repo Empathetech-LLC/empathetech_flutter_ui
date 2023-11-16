@@ -43,15 +43,17 @@ Future<dynamic> ezColorPicker({
       title: EzText(
         title ?? EFUILang.of(context)!.csPickerTitle,
       ),
-      content: ColorPicker(
-        pickerColor: startColor,
-        onColorChanged: onColorChange,
+      content: Container(
+        child: ColorPicker(
+          pickerColor: startColor,
+          onColorChanged: onColorChange,
 
-        // ignore: deprecated_member_use
-        labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
-        // Necessary for Cupertino
+          // ignore: deprecated_member_use
+          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+          // Necessary for Cupertino
 
-        portraitOnly: true,
+          portraitOnly: true,
+        ),
       ),
       materialActions: ezMaterialActions(
         context: context,
