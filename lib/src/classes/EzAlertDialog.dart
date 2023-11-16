@@ -55,22 +55,27 @@ class EzAlertDialog extends PlatformAlertDialog {
       key: key,
       widgetKey: widgetKey,
       material: (context, platform) => MaterialAlertDialogData(
-        insetPadding: EdgeInsets.all(padding),
-
+        // Title
         title: title,
-        // Bottom titlePadding comes from vertical contentPadding
-        titlePadding:
-            EdgeInsets.only(top: padding, left: padding, right: padding),
+        titlePadding: EdgeInsets.all(padding),
 
+        // Content
         content: content,
-        contentPadding:
-            EdgeInsets.symmetric(vertical: padding, horizontal: padding),
+        contentPadding: EdgeInsets.all(padding),
+
+        // Actions
         actions: materialActions,
+        actionsPadding: EdgeInsets.all(padding),
+
+        // General
+        iconPadding: EdgeInsets.zero,
+        buttonPadding: EdgeInsets.zero,
+        insetPadding: EdgeInsets.all(padding),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
         title: Padding(
           // No titlePadding equivalent, have to do it manually
-          padding: EdgeInsets.only(bottom: padding),
+          padding: EdgeInsets.all(padding),
           child: title,
         ),
         content: content,
