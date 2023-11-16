@@ -11,7 +11,7 @@ class EzLinkImage extends StatelessWidget {
   final ImageProvider<Object> image;
 
   /// Message for screen readers
-  final String semanticsLabel;
+  final String semanticLabel;
 
   /// Destination function
   final void Function()? onTap;
@@ -42,7 +42,7 @@ class EzLinkImage extends StatelessWidget {
   const EzLinkImage({
     this.key,
     required this.image,
-    required this.semanticsLabel,
+    required this.semanticLabel,
     this.onTap,
     this.url,
     this.frameBuilder,
@@ -69,7 +69,7 @@ class EzLinkImage extends StatelessWidget {
     return Semantics(
       image: true,
       link: true,
-      hint: semanticsLabel,
+      hint: semanticLabel,
       child: ExcludeSemantics(
         child: MouseRegion(
           key: key,
