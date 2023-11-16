@@ -16,27 +16,31 @@ class EzAlertDialog extends PlatformAlertDialog {
   /// Dialog's [title]
   final Widget? title;
 
-  /// Dialog's main [content]
-  final Widget? content;
+  /// Dialog's main [content] to be wrapped in an [EzScrollView]
+  final List<Widget> contents;
 
-  /// [AlertDialog.actions]s to be displayed below the [content]
+  /// Passed the [EzScrollView] wrapper around [contents]
+  final bool reverseHands;
+
+  /// [AlertDialog.actions]s to be displayed below the [contents]
   /// Pairs best with [ezMaterialActions]
   final List<Widget>? materialActions;
 
-  /// [CupertinoAlertDialogData.actions]s to be displayed below the [content]
+  /// [CupertinoAlertDialogData.actions]s to be displayed below the [contents]
   /// Pairs best with [ezCupertinoActions]
   final List<CupertinoDialogAction>? cupertinoActions;
 
-  /// Cupertino alerts aren't dismissable by tapping outside the renderbox
+  /// Cupertino alerts aren't dismissible by tapping outside the dialog
   /// Set [needsClose] to true if a default "Close" [CupertinoDialogAction] is needed
   final bool needsClose;
 
-  /// [PlatformAlertDialog] wrapper with [EzConfig] styling
+  /// [PlatformAlertDialog] wrapper with custom styling
   EzAlertDialog({
     this.key,
     this.widgetKey,
     required this.title,
-    required this.content,
+    required this.contents,
+    this.reverseHands = false,
     this.materialActions,
     this.cupertinoActions,
     this.needsClose = true,
@@ -60,7 +64,10 @@ class EzAlertDialog extends PlatformAlertDialog {
         titlePadding: EdgeInsets.all(padding),
 
         // Content
-        content: content,
+        content: EzScrollView(
+          children: contents,
+          reverseHands: reverseHands,
+        ),
         contentPadding: EdgeInsets.all(padding),
 
         // Actions
@@ -78,7 +85,10 @@ class EzAlertDialog extends PlatformAlertDialog {
           padding: EdgeInsets.all(padding),
           child: title,
         ),
-        content: content,
+        content: EzScrollView(
+          children: contents,
+          reverseHands: reverseHands,
+        ),
         actions: cupertinoActions == null
             ? [_closeAction]
             : (needsClose)
