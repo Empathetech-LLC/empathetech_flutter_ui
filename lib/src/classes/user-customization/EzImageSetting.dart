@@ -300,7 +300,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                           : // there is an image stored
                           EzImage(
                               image: provideImage(
-                                  EzConfig.instance.prefs[widget.prefsKey]),
+                                EzConfig.instance.prefs[widget.prefsKey],
+                              ),
                               semanticLabel:
                                   widget.title + EFUILang.of(context)!.isImage,
                             ),
