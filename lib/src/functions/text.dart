@@ -8,6 +8,11 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Returns whether the passed [text] follows a URL pattern
+bool isUrl(String text) {
+  return Uri.parse(text).host.isNotEmpty;
+}
+
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
 /// [scalar] should be the value from MediaQuery.of(context).textScaleFactor
 Size measureText(

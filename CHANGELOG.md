@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.3] - 2023-11-16
+### Updated
+- Color picker
+- EzImageSetting
+- EzAlertDialog
+  - Minor breaking change
+
 ## [4.3.2] - 2023-11-12
 ### Updated
 - EzPlainText
@@ -38,9 +45,9 @@ All notable changes to this project will be documented in this file.
   - Minor breaking changes
 - EzColors from classes to functions
   - Minor breaking change
-- Repsonsive widgets make limited space checks themselves
+- Responsive widgets make limited space checks themselves
   - Minor breaking upgrade
-- Renamed Phrases && EFUIPhrases to Lang && EFUILange
+- Renamed Phrases && EFUIPhrases to Lang && EFUILang
   - Minor breaking change
 
 ### Removed
@@ -72,12 +79,12 @@ All notable changes to this project will be documented in this file.
 - Split enums into their own folder
 - Pre-existing release check in the Jenkinsfile
 - README
-  - Alot
+  - A ot
 - Renamed EzDialog to EzAlertDialog
   - Removed EzYesNo and created ezAlertActions
 - Project line length to 99
 - Semantics
-  - Alot
+  - A lot
 - Many references to "default" were updated to "empathetech"
 - Parameters (minor breaks)
   - Renamed EzColorSetting.message to EzColorSetting.name

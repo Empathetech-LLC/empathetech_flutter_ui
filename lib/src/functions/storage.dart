@@ -18,13 +18,15 @@ bool isPathAsset(String? path) {
 
 /// Does the value at the end of this [key]'s [EzConfig.instance] tunnel lead to an [AssetImage] path?
 bool isKeyAsset(String? key) {
-  return isPathAsset(EzConfig.instance.prefs[key]);
+  return EzConfig.instance.assets.contains(EzConfig.instance.prefs[key]);
 }
 
-/// Given the [path] to either an [AssetImage] or [FileImage] this function will provide the rest
-ImageProvider provideStoredImage(String path) {
+/// Provide the [path] to an [Image] and we'll handle the rest
+ImageProvider provideImage(String path) {
   if (isPathAsset(path)) {
     return AssetImage(path);
+  } else if (isUrl(path)) {
+    return NetworkImage(path);
   } else {
     return FileImage(File(path));
   }

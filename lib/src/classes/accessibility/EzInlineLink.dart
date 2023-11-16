@@ -10,9 +10,16 @@ import 'package:url_launcher/url_launcher.dart';
 class EzInlineLink extends TextSpan {
   final String text;
   final TextStyle? style;
-  final String? semanticsLabel;
+
+  /// Message for screen readers
+  final String semanticsLabel;
+
+  /// Destination function
   final void Function()? onTap;
+
+  /// Destination URL
   final Uri? url;
+
   final void Function(PointerEnterEvent)? onEnter;
   final void Function(PointerExitEvent)? onExit;
   final bool spellOut;

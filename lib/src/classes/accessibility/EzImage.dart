@@ -12,7 +12,7 @@ class EzImage extends Image {
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
 
-  /// Message for screen readers to output
+  /// Message for screen readers
   final String semanticLabel;
 
   final double? width;

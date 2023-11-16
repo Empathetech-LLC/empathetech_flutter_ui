@@ -55,7 +55,7 @@ class EzConfig {
     if (_instance == null) {
       // Build EzConfig.defaults //
 
-      // Start with Emapthetech's config
+      // Start with Empathetech's config
       Map<String, dynamic> _defaults = new Map.from(empathetechConfig);
 
       // Merge custom defaults

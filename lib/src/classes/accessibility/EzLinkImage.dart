@@ -8,18 +8,20 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EzLinkImage extends StatelessWidget {
   final Key? key;
+  final ImageProvider<Object> image;
+
+  /// Message for screen readers
+  final String semanticLabel;
+
+  /// Destination function
+  final void Function()? onTap;
 
   /// Destination URL
-  final String url;
+  final Uri? url;
 
-  final ImageProvider<Object> image;
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
-
-  /// Message for screen readers to output
-  final String semanticLabel;
-
   final double? width;
   final double? height;
   final Color? color;
@@ -34,15 +36,18 @@ class EzLinkImage extends StatelessWidget {
   final bool isAntiAlias;
   final FilterQuality filterQuality;
 
-  /// [Image] wrapper that makes [semanticLabel] required and uses [launchUrl] to launch [url]
+  /// [Image] wrapper that either opens an internal link via [onTap]
+  /// Or an external link to [url]
+  /// Requires [semanticsLabel] for screen readers
   const EzLinkImage({
     this.key,
-    required this.url,
     required this.image,
+    required this.semanticLabel,
+    this.onTap,
+    this.url,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
-    required this.semanticLabel,
     this.width,
     this.height,
     this.color,
@@ -56,7 +61,8 @@ class EzLinkImage extends StatelessWidget {
     this.gaplessPlayback = false,
     this.isAntiAlias = false,
     this.filterQuality = FilterQuality.low,
-  });
+  }) : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.');
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +75,7 @@ class EzLinkImage extends StatelessWidget {
           key: key,
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-            onTap: () => launchUrl(Uri.parse(url)),
+            onTap: onTap ?? () => launchUrl(url!),
             child: Image(
               image: image,
               frameBuilder: frameBuilder,

@@ -7,6 +7,7 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -25,8 +26,8 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the image is intended for fullscreen use
   final bool fullscreen;
 
-  /// Who made this/where'd ya get it?
-  /// Credits [String] will be displayed via [EzAlertDialog] when holding the [ElevatedButton]
+  /// Who made this/where did it come from?
+  /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String credits;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
@@ -65,45 +66,116 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating the prefsKey
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
   /// Selection is sent to [changeImage]
   Future<dynamic> _chooseImage(BuildContext context) {
-    // Build the dialog opitions //
+    // Build the dialog options //
 
-    List<Widget> options = [
-      // Chose from file
+    List<Widget> options = [];
+
+    // From file && camera rely on path provider, which isn't supported by Flutter Web
+    if (!kIsWeb) {
+      options.addAll([
+        // From file
+        ElevatedButton.icon(
+          onPressed: () async {
+            String? changed = await changeImage(
+              context: context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.gallery,
+            );
+
+            popScreen(context: context, pass: changed);
+          },
+          label: Text(EFUILang.of(context)!.isFromFile),
+          icon: Icon(PlatformIcons(context).folder),
+        ),
+        EzSpacer(_buttonSpacer),
+
+        // From camera
+        ElevatedButton.icon(
+          onPressed: () async {
+            String? changed = await changeImage(
+              context: context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.camera,
+            );
+
+            popScreen(context: context, pass: changed);
+          },
+          label: Text(EFUILang.of(context)!.isFromCamera),
+          icon: Icon(PlatformIcons(context).photoCamera),
+        ),
+        EzSpacer(_buttonSpacer),
+      ]);
+    }
+
+    // From network && reset work everywhere
+    options.addAll([
+      // From network
       ElevatedButton.icon(
         onPressed: () async {
-          String? changed = await changeImage(
+          String changed = await showPlatformDialog(
             context: context,
-            prefsPath: widget.prefsKey,
-            source: ImageSource.gallery,
+            builder: (context) {
+              String url = '';
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return EzAlertDialog(
+                    title: EzText(EFUILang.of(context)!.isEnterURL),
+                    contents: [
+                      PlatformTextFormField(
+                        onChanged: (value) {
+                          url = value;
+                        },
+                        hintText: 'https://example.com/image.jpg',
+                        style: Theme.of(context).dialogTheme.contentTextStyle,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.isEmpty || !isUrl(value)) {
+                            return 'Enter a valid URL';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                    materialActions: ezMaterialActions(
+                      context: context,
+                      onConfirm: () {
+                        EzConfig.instance.preferences
+                            .setString(widget.prefsKey, url);
+                        popScreen(context: context, pass: url);
+                      },
+                      confirmMsg: EFUILang.of(context)!.gApply,
+                      onDeny: () => popScreen(context: context, pass: null),
+                      denyMsg: EFUILang.of(context)!.gCancel,
+                    ),
+                    cupertinoActions: ezCupertinoActions(
+                      context: context,
+                      onConfirm: () {
+                        EzConfig.instance.preferences
+                            .setString(widget.prefsKey, url);
+                        popScreen(context: context, pass: url);
+                      },
+                      confirmMsg: EFUILang.of(context)!.gApply,
+                      onDeny: () => popScreen(context: context, pass: null),
+                      denyMsg: EFUILang.of(context)!.gCancel,
+                    ),
+                    needsClose: false,
+                  );
+                },
+              );
+            },
           );
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILang.of(context)!.isFromFile),
-        icon: Icon(PlatformIcons(context).folder),
+        label: Text(EFUILang.of(context)!.isFromNetwork),
+        icon: const Icon(Icons.computer_outlined),
       ),
       EzSpacer(_buttonSpacer),
 
-      // Chose from camera
-      ElevatedButton.icon(
-        onPressed: () async {
-          String? changed = await changeImage(
-            context: context,
-            prefsPath: widget.prefsKey,
-            source: ImageSource.camera,
-          );
-
-          popScreen(context: context, pass: changed);
-        },
-        label: Text(EFUILang.of(context)!.isFromCamera),
-        icon: Icon(PlatformIcons(context).photoCamera),
-      ),
-      EzSpacer(_buttonSpacer),
-
-      // Reset image
+      // Reset
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
@@ -118,9 +190,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: Text(EFUILang.of(context)!.isResetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
-    ];
+    ]);
 
-    // Clear image (optional)
+    // Clear (optional)
     if (widget.allowClear)
       options.addAll([
         EzSpacer(_buttonSpacer),
@@ -143,10 +215,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(
-          EFUILang.of(context)!.isDialogTitle(widget.title),
-        ),
-        content: EzScrollView(children: options),
+        title: EzText(EFUILang.of(context)!.isDialogTitle(widget.title)),
+        contents: options,
       ),
     );
   }
@@ -163,10 +233,12 @@ class _ImageSettingState extends State<EzImageSetting> {
           // On pressed -> choose image
           onPressed: () async {
             dynamic newPath = await _chooseImage(context);
-            if (newPath is String)
+
+            if (newPath is String) {
               setState(() {
                 _updatedPath = newPath;
               });
+            }
           },
 
           // On long press -> show credits
@@ -174,7 +246,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzText(EFUILang.of(context)!.isCreditTo),
-              content: EzText(widget.credits),
+              contents: [EzText(widget.credits)],
             ),
           ),
 
@@ -197,8 +269,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ),
                 ),
                 child: SizedBox(
-                  height: widget.fullscreen ? 160 : 75,
                   width: widget.fullscreen ? 90 : 75,
+                  height: widget.fullscreen ? 160 : 75,
                   child: (_updatedPath is String)
                       ? // user made a change
                       (_updatedPath == noImageKey)
@@ -206,7 +278,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           Icon(PlatformIcons(context).clear)
                           : // user set a custom image
                           EzImage(
-                              image: provideStoredImage(_updatedPath!),
+                              image: provideImage(_updatedPath!),
                               semanticLabel:
                                   widget.title + EFUILang.of(context)!.isImage,
                             )
@@ -218,7 +290,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored
                           EzImage(
-                              image: provideStoredImage(
+                              image: provideImage(
                                 EzConfig.instance.prefs[widget.prefsKey],
                               ),
                               semanticLabel:

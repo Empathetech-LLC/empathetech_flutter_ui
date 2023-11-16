@@ -39,7 +39,7 @@
 
   "stsPageTitle": "Configuraciones de estilo",
   "stsTextFont": "Fuente de texto",
-  "stschooseFont": "Selecciona una fuente",
+  "stsChooseFont": "Selecciona una fuente",
   "stsDefaultFont": "{font}* (por defecto)",
   "stsMargin": "Margen",
   "stsPadding": "Relleno",
@@ -74,6 +74,9 @@
   "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
   "isFromFile": "Desde archivo",
   "isFromCamera": "Desde cámara",
+  "isFromNetwork": "Ingrese URL",
+  "isEnterURL": "Desde URL",
+  "isNetworkPreview": "Vista previa de tu imagen seleccionada",
   "isGetFailed": "Error al recuperar la imagen",
   "isSetFailed": "Error al actualizar la imagen:\n{error}",
   "isResetIt": "Restablécelo",

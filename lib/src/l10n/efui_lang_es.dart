@@ -116,7 +116,7 @@ class EFUILangEs extends EFUILang {
   String get stsTextFont => 'Fuente de texto';
 
   @override
-  String get stschooseFont => 'Selecciona una fuente';
+  String get stsChooseFont => 'Selecciona una fuente';
 
   @override
   String stsDefaultFont(Object font) {
@@ -229,6 +229,15 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get isFromCamera => 'Desde cámara';
+
+  @override
+  String get isFromNetwork => 'Ingrese URL';
+
+  @override
+  String get isEnterURL => 'Desde URL';
+
+  @override
+  String get isNetworkPreview => 'Vista previa de tu imagen seleccionada';
 
   @override
   String get isGetFailed => 'Error al recuperar la imagen';

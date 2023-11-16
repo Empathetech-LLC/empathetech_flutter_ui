@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
     context: context,
     builder: (context) => EzAlertDialog(
       title: EzText(alert ?? EFUILang.of(context)!.dAttention),
-      content: EzText(message),
+      contents: [EzText(message)],
     ),
   );
 }
@@ -43,16 +43,18 @@ Future<dynamic> ezColorPicker({
       title: EzText(
         title ?? EFUILang.of(context)!.csPickerTitle,
       ),
-      content: ColorPicker(
-        pickerColor: startColor,
-        onColorChanged: onColorChange,
+      contents: [
+        ColorPicker(
+          pickerColor: startColor,
+          onColorChanged: onColorChange,
 
-        // ignore: deprecated_member_use
-        labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
-        // Necessary for Cupertino
+          // ignore: deprecated_member_use
+          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+          // Necessary for Cupertino
 
-        portraitOnly: true,
-      ),
+          portraitOnly: true,
+        ),
+      ],
       materialActions: ezMaterialActions(
         context: context,
         onConfirm: onConfirm,
