@@ -12,9 +12,23 @@ class EzLink extends SelectableText {
   /// Link message
   final String text;
 
+  final TextStyle? style;
+
+  /// Message for screen readers
+  final String semanticsLabel;
+
+  /// Destination function
+  final void Function()? onTap;
+
+  /// Destination URL
+  final Uri? url;
+
+  final void Function(PointerEnterEvent)? onEnter;
+  final void Function(PointerExitEvent)? onExit;
+  final bool spellOut;
+
   final Key? key;
   final FocusNode? focusNode;
-  final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
@@ -32,37 +46,28 @@ class EzLink extends SelectableText {
   final DragStartBehavior dragStartBehavior;
   final bool enableInteractiveSelection;
   final TextSelectionControls? selectionControls;
-
-  /// Internal link destination
-  final void Function()? onTap;
-
-  /// External link destination
-  final Uri? url;
-
   final ScrollPhysics scrollPhysics;
-
-  /// Hint for screen readers
-  /// What does this link do?
-  final String? semanticsLabel;
-
   final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
   final void Function(TextSelection, SelectionChangedCause?)?
       onSelectionChanged;
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
-  final void Function(PointerEnterEvent)? onEnter;
-  final void Function(PointerExitEvent)? onExit;
-  final bool spellOut;
 
   /// [SelectableText.rich] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
   EzLink(
     this.text, {
+    this.style,
+    required this.semanticsLabel,
+    this.onTap,
+    this.url,
+    this.onEnter,
+    this.onExit,
+    this.spellOut = false,
     this.key,
     this.focusNode,
-    this.style,
     this.strutStyle,
     this.textAlign = TextAlign.center,
     this.textDirection,
@@ -80,18 +85,12 @@ class EzLink extends SelectableText {
     this.dragStartBehavior = DragStartBehavior.start,
     this.enableInteractiveSelection = true,
     this.selectionControls,
-    this.onTap,
-    this.url,
     this.scrollPhysics = const NeverScrollableScrollPhysics(),
-    this.semanticsLabel,
     this.textHeightBehavior,
     this.textWidthBasis,
     this.onSelectionChanged,
     this.contextMenuBuilder,
     this.magnifierConfiguration,
-    this.onEnter,
-    this.onExit,
-    this.spellOut = false,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super.rich(
