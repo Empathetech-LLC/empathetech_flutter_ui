@@ -115,10 +115,62 @@ class _ImageSettingState extends State<EzImageSetting> {
       // From network
       ElevatedButton.icon(
         onPressed: () async {
-          String? changed = await changeImage(
+          String changed = await showPlatformDialog(
             context: context,
-            prefsPath: widget.prefsKey,
-            source: ImageSource.network,
+            builder: (context) {
+              String url = '';
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return EzAlertDialog(
+                    title: EzText(EFUILang.of(context)!.isEnterURL),
+                    content: EzScrollView(children: [
+                      TextFormField(
+                        onChanged: (value) {
+                          url = value;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Enter URL',
+                          hintText: 'https://example.com/image.jpg',
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value == null || value.isEmpty || !isUrl(value)) {
+                            return 'Enter a valid URL';
+                          }
+                          return null;
+                        },
+                      ),
+                      if (isUrl(url))
+                        EzImage(
+                          image: NetworkImage(url),
+                          width: widget.fullscreen ? 160 : 75,
+                          height: widget.fullscreen ? 160 : 75,
+                          semanticLabel: EFUILang.of(context)!.isNetworkPreview,
+                        ),
+                    ]),
+                    materialActions: ezMaterialActions(
+                      context: context,
+                      onConfirm: () {
+                        EzConfig.instance.preferences
+                            .setString(widget.prefsKey, url);
+                        popScreen(context: context, pass: url);
+                      },
+                      onDeny: () => popScreen(context: context, pass: null),
+                    ),
+                    cupertinoActions: ezCupertinoActions(
+                      context: context,
+                      onConfirm: () {
+                        EzConfig.instance.preferences
+                            .setString(widget.prefsKey, url);
+                        popScreen(context: context, pass: url);
+                      },
+                      onDeny: () => popScreen(context: context, pass: null),
+                    ),
+                    needsClose: false,
+                  );
+                },
+              );
+            },
           );
 
           popScreen(context: context, pass: changed);
@@ -188,10 +240,12 @@ class _ImageSettingState extends State<EzImageSetting> {
           // On pressed -> choose image
           onPressed: () async {
             dynamic newPath = await _chooseImage(context);
-            if (newPath is String)
+
+            if (newPath is String) {
               setState(() {
                 _updatedPath = newPath;
               });
+            }
           },
 
           // On long press -> show credits
@@ -199,7 +253,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             context: context,
             builder: (context) => EzAlertDialog(
               title: EzText(EFUILang.of(context)!.isCreditTo),
-              content: EzText(widget.credits),
+              content: EzScrollView(child: EzText(widget.credits)),
             ),
           ),
 
@@ -222,8 +276,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ),
                 ),
                 child: SizedBox(
-                  height: widget.fullscreen ? 160 : 75,
                   width: widget.fullscreen ? 90 : 75,
+                  height: widget.fullscreen ? 160 : 75,
                   child: (_updatedPath is String)
                       ? // user made a change
                       (_updatedPath == noImageKey)
@@ -231,7 +285,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           Icon(PlatformIcons(context).clear)
                           : // user set a custom image
                           EzImage(
-                              image: provideStoredImage(_updatedPath!),
+                              image: provideImage(_updatedPath!),
                               semanticLabel:
                                   widget.title + EFUILang.of(context)!.isImage,
                             )
@@ -243,9 +297,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored
                           EzImage(
-                              image: provideStoredImage(
-                                EzConfig.instance.prefs[widget.prefsKey],
-                              ),
+                              image: provideImage(
+                                  EzConfig.instance.prefs[widget.prefsKey]),
                               semanticLabel:
                                   widget.title + EFUILang.of(context)!.isImage,
                             ),
