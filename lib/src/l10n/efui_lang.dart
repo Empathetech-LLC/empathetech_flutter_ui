@@ -508,11 +508,11 @@ abstract class EFUILang {
   /// **'Enter URL'**
   String get isEnterURL;
 
-  /// No description provided for @isNewtorkPreview.
+  /// No description provided for @isNetworkPreview.
   ///
   /// In en, this message translates to:
   /// **'Preview of your chosen image'**
-  String get isNewtorkPreview;
+  String get isNetworkPreview;
 
   /// No description provided for @isGetFailed.
   ///
