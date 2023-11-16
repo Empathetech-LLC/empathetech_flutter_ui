@@ -47,8 +47,8 @@ class EzScreen extends StatelessWidget {
     this.transformAlignment,
     required this.child,
   }) : assert(
-          ((decoration == null) != (decorationImageKey == null)),
-          'Either decoration or decorationImageKey should be provided, but not both.',
+          (!(decoration != null && decorationImageKey != null)),
+          'Either decoration or decorationImageKey can be provided, but not both.',
         );
 
   @override
