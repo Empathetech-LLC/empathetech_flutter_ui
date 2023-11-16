@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.3] - 2023-11-16
+### Updated
+- Color picker
+
 ## [4.3.2] - 2023-11-12
 ### Updated
 - EzPlainText
