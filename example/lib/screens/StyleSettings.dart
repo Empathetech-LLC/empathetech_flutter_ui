@@ -3,6 +3,7 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class StyleSettingsScreen extends StatefulWidget {
   const StyleSettingsScreen({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Gather theme data //
 
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+
   final double _margin = EzConfig.instance.prefs[marginKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
@@ -31,6 +34,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
+        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Font
