@@ -7,6 +7,7 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -25,8 +26,8 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the image is intended for fullscreen use
   final bool fullscreen;
 
-  /// Who made this/where'd ya get it?
-  /// Credits [String] will be displayed via [EzAlertDialog] when holding the [ElevatedButton]
+  /// Who made this/where did it come from?
+  /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String credits;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
@@ -65,45 +66,69 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating the prefsKey
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
   /// Selection is sent to [changeImage]
   Future<dynamic> _chooseImage(BuildContext context) {
-    // Build the dialog opitions //
+    // Build the dialog options //
 
-    List<Widget> options = [
-      // Chose from file
+    List<Widget> options = [];
+
+    // From file && camera rely on path provider, which isn't supported by Flutter Web
+    if (!kIsWeb) {
+      options.addAll([
+        // From file
+        ElevatedButton.icon(
+          onPressed: () async {
+            String? changed = await changeImage(
+              context: context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.gallery,
+            );
+
+            popScreen(context: context, pass: changed);
+          },
+          label: Text(EFUILang.of(context)!.isFromFile),
+          icon: Icon(PlatformIcons(context).folder),
+        ),
+        EzSpacer(_buttonSpacer),
+
+        // From camera
+        ElevatedButton.icon(
+          onPressed: () async {
+            String? changed = await changeImage(
+              context: context,
+              prefsPath: widget.prefsKey,
+              source: ImageSource.camera,
+            );
+
+            popScreen(context: context, pass: changed);
+          },
+          label: Text(EFUILang.of(context)!.isFromCamera),
+          icon: Icon(PlatformIcons(context).photoCamera),
+        ),
+        EzSpacer(_buttonSpacer),
+      ]);
+    }
+
+    // From network && reset work everywhere
+    options.addAll([
+      // From network
       ElevatedButton.icon(
         onPressed: () async {
           String? changed = await changeImage(
             context: context,
             prefsPath: widget.prefsKey,
-            source: ImageSource.gallery,
+            source: ImageSource.network,
           );
 
           popScreen(context: context, pass: changed);
         },
-        label: Text(EFUILang.of(context)!.isFromFile),
-        icon: Icon(PlatformIcons(context).folder),
+        label: Text(EFUILang.of(context)!.isFromNetwork),
+        icon: const Icon(Icons.computer_outlined),
       ),
       EzSpacer(_buttonSpacer),
 
-      // Chose from camera
-      ElevatedButton.icon(
-        onPressed: () async {
-          String? changed = await changeImage(
-            context: context,
-            prefsPath: widget.prefsKey,
-            source: ImageSource.camera,
-          );
-
-          popScreen(context: context, pass: changed);
-        },
-        label: Text(EFUILang.of(context)!.isFromCamera),
-        icon: Icon(PlatformIcons(context).photoCamera),
-      ),
-      EzSpacer(_buttonSpacer),
-
-      // Reset image
+      // Reset
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
@@ -118,9 +143,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: Text(EFUILang.of(context)!.isResetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
-    ];
+    ]);
 
-    // Clear image (optional)
+    // Clear (optional)
     if (widget.allowClear)
       options.addAll([
         EzSpacer(_buttonSpacer),
