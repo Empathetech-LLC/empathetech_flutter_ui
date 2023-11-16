@@ -155,7 +155,9 @@ class _ImageSettingState extends State<EzImageSetting> {
                             .setString(widget.prefsKey, url);
                         popScreen(context: context, pass: url);
                       },
+                      confirmMsg: EFUILang.of(context)!.gApply,
                       onDeny: () => popScreen(context: context, pass: null),
+                      denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     cupertinoActions: ezCupertinoActions(
                       context: context,
@@ -164,7 +166,9 @@ class _ImageSettingState extends State<EzImageSetting> {
                             .setString(widget.prefsKey, url);
                         popScreen(context: context, pass: url);
                       },
+                      confirmMsg: EFUILang.of(context)!.gApply,
                       onDeny: () => popScreen(context: context, pass: null),
+                      denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     needsClose: false,
                   );
