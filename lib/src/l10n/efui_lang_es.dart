@@ -237,6 +237,9 @@ class EFUILangEs extends EFUILang {
   String get isEnterURL => 'Desde URL';
 
   @override
+  String get isNewtorkPreview => 'Vista previa de tu imagen seleccionada';
+
+  @override
   String get isGetFailed => 'Error al recuperar la imagen';
 
   @override

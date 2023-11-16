@@ -76,6 +76,7 @@
   "isFromCamera": "From camera",
   "isFromNetwork": "From URL",
   "isEnterURL": "Enter URL",
+  "isNewtorkPreview": "Preview of your chosen image",
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
   "isResetIt": "Reset it",

@@ -508,6 +508,12 @@ abstract class EFUILang {
   /// **'Enter URL'**
   String get isEnterURL;
 
+  /// No description provided for @isNewtorkPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview of your chosen image'**
+  String get isNewtorkPreview;
+
   /// No description provided for @isGetFailed.
   ///
   /// In en, this message translates to:

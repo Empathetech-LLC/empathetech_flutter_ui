@@ -236,6 +236,9 @@ class EFUILangEn extends EFUILang {
   String get isEnterURL => 'Enter URL';
 
   @override
+  String get isNewtorkPreview => 'Preview of your chosen image';
+
+  @override
   String get isGetFailed => 'Failed to retrieve image';
 
   @override
