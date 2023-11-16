@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Color picker
 - EzImageSetting
 - EzAlertDialog
+  - Minor breaking change
 
 ## [4.3.2] - 2023-11-12
 ### Updated
