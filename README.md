@@ -138,7 +138,7 @@ class EFUIExample extends StatelessWidget {
         localizationsDelegates:
             Lang.localizationsDelegates + EFUILang.localizationsDelegates,
 
-        title: "Emapathetech Flutter UI",
+        title: "Empathetech Flutter UI",
         routerConfig: _router,
       ),
     );
@@ -296,7 +296,7 @@ If you build something with EFUI, let us know! We'd love to have a third-party l
 
 ## Time
 
-Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor. Emapthetech LLC doesn't tend to run out of ideas, only time! Here are a few current...
+Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor. Empathetech LLC doesn't tend to run out of ideas, only time! Here are a few current...
 
 ### Planned features
 
