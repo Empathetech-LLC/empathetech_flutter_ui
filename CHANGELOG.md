@@ -2,10 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.3.4] - 2023-11-17
+## [4.4.0] - 2023-11-17
 ### Updated
 - ezThemeData variable names
 - EzAlertDialog spacing
+- Packages
+  - Minor breaking change (SDK range update)
 
 ## [4.3.3] - 2023-11-16
 ### Updated
