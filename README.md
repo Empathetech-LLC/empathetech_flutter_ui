@@ -241,6 +241,8 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 ## From the example
 
+*NOTE: These screenshots were taken before Flutter's latest release. The functionality is identical, but the styling has changed.*
+
 ### Platform availability
 
 | Android | iOS |
