@@ -98,7 +98,7 @@ class EFUIExample extends StatelessWidget {
         // Language handlers
         localizationsDelegates: EFUILang.localizationsDelegates,
 
-        title: "Emapathetech Flutter UI",
+        title: "Empathetech Flutter UI",
         routerConfig: _router,
       ),
     );
