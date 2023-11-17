@@ -2,12 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.4] - 2023-11-17
+### Updated
+- ezThemeData variable names
+- EzAlertDialog spacing
+
 ## [4.3.3] - 2023-11-16
 ### Updated
-- Color picker
-- EzImageSetting
-- EzAlertDialog
+- EzImageSetting options
+  - Updated usability on Web
+- EzAlertDialog parameters
   - Minor breaking change
+  - Fixed visual bug with ColorPicker
 
 ## [4.3.2] - 2023-11-12
 ### Updated
