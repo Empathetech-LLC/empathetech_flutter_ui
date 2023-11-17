@@ -41,9 +41,12 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
+
   final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
+
   final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
-  final TextStyle reverseButtonTextStyle = buildTitleMedium(buttonColor);
+  final TextStyle inverseButtonTextStyle = buildTitleMedium(buttonColor);
+
   final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
   final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
 
@@ -51,6 +54,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
     color: buttonTextColor,
     size: buttonTextStyle.fontSize,
   );
+
   final IconThemeData appBarIconData = IconThemeData(
     color: themeTextColor,
     size: appBarTextStyle.fontSize,
@@ -93,7 +97,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        textStyle: reverseButtonTextStyle,
+        textStyle: inverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: buttonColor,
@@ -104,7 +108,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: reverseButtonTextStyle,
+        textStyle: inverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -157,7 +161,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
       surface: pageColor,
       onSurface: pageTextColor,
       error: Colors.red,
-      onError: Colors.black,
+      onError: Colors.white,
     ),
     dividerColor: Colors.transparent,
     highlightColor: buttonColor,
