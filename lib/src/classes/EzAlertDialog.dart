@@ -115,7 +115,6 @@ List<Widget>? ezMaterialActions({
       onPressed: onConfirm,
       child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
-    EzSpacer(EzConfig.instance.prefs[buttonSpacingKey]),
 
     // Deny
     TextButton(
