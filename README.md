@@ -231,7 +231,7 @@ But, as you grow your apps, the other pillars require continuous development.
 
 Thankfully, EFUI's got you covered there too! Check out the...
 * [Responsive Widgets](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
-* [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or Widgets that adapt to accessibilty flags, like `EzDominantHandSwitch` 
+* [Accessibility Widgets](./lib/src/classes/accessibility/): Widgets with streamlined semantics and/or Widgets that adapt to accessibility flags, like `EzDominantHandSwitch` 
 
 and even extension packages, like [efui_video_player](https://github.com/Empathetech-LLC/efui_video_player)!
 
@@ -241,7 +241,7 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 ## From the example
 
-*NOTE: These screenshots were taken before Flutter's latest release. The functionality is identical, but the styling has changed.*
+*NOTE: These screenshots were taken before Flutter's switch to Material 3. The functionality is identical, but the styling has changed.*
 
 ### Platform availability
 
