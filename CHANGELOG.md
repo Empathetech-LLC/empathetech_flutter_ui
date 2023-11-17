@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - EzAlertDialog spacing
 - Packages
   - Minor breaking change (SDK range update)
+  - Restored iOS web icons
 
 ## [4.3.3] - 2023-11-16
 ### Updated

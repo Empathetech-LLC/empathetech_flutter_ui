@@ -70,24 +70,14 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // At the time of writing, there is a visual bug with [ElevatedButton.icon] on iOS browsers
-    return (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
-        ? ElevatedButton(
-            onPressed: () => _chooseGoogleFont(context),
-            child: Text(
-              EFUILang.of(context)!.stsTextFont,
-              style: TextStyle(fontFamily: currFontFamily),
-              textAlign: TextAlign.center,
-            ),
-          )
-        : ElevatedButton.icon(
-            onPressed: () => _chooseGoogleFont(context),
-            icon: const Icon(LineIcons.font),
-            label: Text(
-              EFUILang.of(context)!.stsTextFont,
-              style: TextStyle(fontFamily: currFontFamily),
-              textAlign: TextAlign.center,
-            ),
-          );
+    return ElevatedButton.icon(
+      onPressed: () => _chooseGoogleFont(context),
+      icon: const Icon(LineIcons.font),
+      label: Text(
+        EFUILang.of(context)!.stsTextFont,
+        style: TextStyle(fontFamily: currFontFamily),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }

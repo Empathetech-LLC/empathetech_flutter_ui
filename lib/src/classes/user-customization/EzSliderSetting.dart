@@ -304,40 +304,21 @@ class _SliderSettingState extends State<EzSliderSetting> {
       button: true,
       hint: sstName(context, widget.type),
       child: ExcludeSemantics(
-        child: (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
-            ? ElevatedButton(
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder:
-                        (BuildContext context, StateSetter modalSheetSetState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _buildSheet(modalSheetSetState, context, style),
-                      );
-                    },
-                  ),
-                ),
-                child: Text(widget.title),
-              )
-            : ElevatedButton.icon(
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder:
-                        (BuildContext context, StateSetter modalSheetSetState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _buildSheet(modalSheetSetState, context, style),
-                      );
-                    },
-                  ),
-                ),
-                icon: widget.type.icon,
-                label: Text(widget.title),
-              ),
+        child: ElevatedButton.icon(
+          onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (context) => StatefulBuilder(
+              builder: (BuildContext context, StateSetter modalSheetSetState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildSheet(modalSheetSetState, context, style),
+                );
+              },
+            ),
+          ),
+          icon: widget.type.icon,
+          label: Text(widget.title),
+        ),
       ),
     );
   }
