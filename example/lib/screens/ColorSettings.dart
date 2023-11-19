@@ -41,7 +41,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     return ExampleScaffold(
       body: _isLight
           ? EzScreen(
-              decorationImageKey: lightPageImageKey,
+              decorationImageKey: lightPageImage,
               child: EzScrollView(
                 children: [
                   // Editing reminders
@@ -61,60 +61,114 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Theme colors
+                        // Primary
                         EzColorSetting(
-                          toControl: lightThemeColorKey,
+                          updating: [
+                            lightPrimaryColor,
+                            lightPrimaryContainerColor,
+                          ],
                           name: EFUILang.of(context)!.csTheme,
                         ),
                         EzSpacer(_buttonSpacer),
-
                         EzColorSetting(
-                          toControl: lightThemeTextColorKey,
+                          updating: [
+                            lightOnPrimaryColor,
+                            lightOnPrimaryContainerColor,
+                          ],
                           name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: lightThemeColorKey,
+                          textBackgroundKey: lightPrimaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Page colors
+                        // Secondary
                         EzColorSetting(
-                          toControl: lightPageColorKey,
-                          name: EFUILang.of(context)!.gPage,
+                          updating: [
+                            lightSecondaryColor,
+                            lightSecondaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            lightOnSecondaryColor,
+                            lightOnSecondaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightSecondaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Tertiary
                         EzColorSetting(
-                          toControl: lightPageTextColorKey,
-                          name: EFUILang.of(context)!.csPageText,
-                          textBackgroundKey: lightPageColorKey,
+                          updating: [
+                            lightTertiaryColor,
+                            lightTertiaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            lightOnTertiaryColor,
+                            lightOnTertiaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightTertiaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Button colors
+                        // Error
                         EzColorSetting(
-                          toControl: lightButtonColorKey,
-                          name: EFUILang.of(context)!.csButtons,
+                          updating: [
+                            lightErrorColor,
+                            lightErrorContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            lightOnErrorColor,
+                            lightOnErrorContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightErrorColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Background
                         EzColorSetting(
-                          toControl: lightButtonTextColorKey,
-                          name: EFUILang.of(context)!.csButtonText,
-                          textBackgroundKey: lightButtonColorKey,
+                          update: lightBackgroundColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: lightOnBackgroundColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightBackgroundColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Accent colors
+                        // Surface
                         EzColorSetting(
-                          toControl: lightAccentColorKey,
-                          name: EFUILang.of(context)!.csAccent,
+                          update: lightSurfaceColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: lightOnSurfaceColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightSurfaceColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Outline
                         EzColorSetting(
-                          toControl: lightAccentTextColorKey,
-                          name: EFUILang.of(context)!.csAccentText,
-                          textBackgroundKey: lightAccentColorKey,
+                          update: lightOutlineColor,
+                          name: EFUILang.of(context)!.csTheme,
                         ),
+                        EzSpacer(_buttonSpacer),
                       ],
                     ),
                   ),
@@ -126,18 +180,29 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     hint: _resetTitle,
                     dialogTitle: _resetTitle,
                     onConfirm: () {
-                      EzConfig.instance.preferences.remove(lightThemeColorKey);
-                      EzConfig.instance.preferences
-                          .remove(lightThemeTextColorKey);
-                      EzConfig.instance.preferences.remove(lightPageColorKey);
-                      EzConfig.instance.preferences
-                          .remove(lightPageTextColorKey);
-                      EzConfig.instance.preferences.remove(lightButtonColorKey);
-                      EzConfig.instance.preferences
-                          .remove(lightButtonTextColorKey);
-                      EzConfig.instance.preferences.remove(lightAccentColorKey);
-                      EzConfig.instance.preferences
-                          .remove(lightAccentTextColorKey);
+                      removeAllKeys([
+                        lightPrimaryColor,
+                        lightOnPrimaryColor,
+                        lightPrimaryContainerColor,
+                        lightOnPrimaryContainerColor,
+                        lightSecondaryColor,
+                        lightOnSecondaryColor,
+                        lightSecondaryContainerColor,
+                        lightOnSecondaryContainerColor,
+                        lightTertiaryColor,
+                        lightOnTertiaryColor,
+                        lightTertiaryContainerColor,
+                        lightOnTertiaryContainerColor,
+                        lightErrorColor,
+                        lightOnErrorColor,
+                        lightErrorContainerColor,
+                        lightOnErrorContainerColor,
+                        lightBackgroundColor,
+                        lightOnBackgroundColor,
+                        lightSurfaceColor,
+                        lightOnSurfaceColor,
+                        lightOutlineColor,
+                      ]);
 
                       popScreen(context: context, pass: true);
                     },
@@ -147,7 +212,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               ),
             )
           : EzScreen(
-              decorationImageKey: darkPageImageKey,
+              decorationImageKey: darkPageImage,
               child: EzScrollView(
                 children: [
                   // Editing reminders
@@ -167,60 +232,114 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Theme colors
+                        // Primary
                         EzColorSetting(
-                          toControl: darkThemeColorKey,
+                          updating: [
+                            darkPrimaryColor,
+                            darkPrimaryContainerColor,
+                          ],
                           name: EFUILang.of(context)!.csTheme,
                         ),
                         EzSpacer(_buttonSpacer),
-
                         EzColorSetting(
-                          toControl: darkThemeTextColorKey,
+                          updating: [
+                            darkOnPrimaryColor,
+                            darkOnPrimaryContainerColor,
+                          ],
                           name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: darkThemeColorKey,
+                          textBackgroundKey: darkPrimaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Page colors
+                        // Secondary
                         EzColorSetting(
-                          toControl: darkPageColorKey,
-                          name: EFUILang.of(context)!.gPage,
+                          updating: [
+                            darkSecondaryColor,
+                            darkSecondaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            darkOnSecondaryColor,
+                            darkOnSecondaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkSecondaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Tertiary
                         EzColorSetting(
-                          toControl: darkPageTextColorKey,
-                          name: EFUILang.of(context)!.csPageText,
-                          textBackgroundKey: darkPageColorKey,
+                          updating: [
+                            darkTertiaryColor,
+                            darkTertiaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            darkOnTertiaryColor,
+                            darkOnTertiaryContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkTertiaryColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Button colors
+                        // Error
                         EzColorSetting(
-                          toControl: darkButtonColorKey,
-                          name: EFUILang.of(context)!.csButtons,
+                          updating: [
+                            darkErrorColor,
+                            darkErrorContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          updating: [
+                            darkOnErrorColor,
+                            darkOnErrorContainerColor,
+                          ],
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkErrorColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Background
                         EzColorSetting(
-                          toControl: darkButtonTextColorKey,
-                          name: EFUILang.of(context)!.csButtonText,
-                          textBackgroundKey: darkButtonColorKey,
+                          update: darkBackgroundColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: darkOnBackgroundColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkBackgroundColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Accent colors
+                        // Surface
                         EzColorSetting(
-                          toControl: darkAccentColorKey,
-                          name: EFUILang.of(context)!.csAccent,
+                          update: darkSurfaceColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: darkOnSurfaceColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkSurfaceColor,
                         ),
                         EzSpacer(_buttonSpacer),
 
+                        // Outline
                         EzColorSetting(
-                          toControl: darkAccentTextColorKey,
-                          name: EFUILang.of(context)!.csAccentText,
-                          textBackgroundKey: darkAccentColorKey,
+                          update: darkOutlineColor,
+                          name: EFUILang.of(context)!.csTheme,
                         ),
+                        EzSpacer(_buttonSpacer),
                       ],
                     ),
                   ),
@@ -232,18 +351,29 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     hint: _resetTitle,
                     dialogTitle: _resetTitle,
                     onConfirm: () {
-                      EzConfig.instance.preferences.remove(darkThemeColorKey);
-                      EzConfig.instance.preferences
-                          .remove(darkThemeTextColorKey);
-                      EzConfig.instance.preferences.remove(darkPageColorKey);
-                      EzConfig.instance.preferences
-                          .remove(darkPageTextColorKey);
-                      EzConfig.instance.preferences.remove(darkButtonColorKey);
-                      EzConfig.instance.preferences
-                          .remove(darkButtonTextColorKey);
-                      EzConfig.instance.preferences.remove(darkAccentColorKey);
-                      EzConfig.instance.preferences
-                          .remove(darkAccentTextColorKey);
+                      removeAllKeys([
+                        darkPrimaryColor,
+                        darkOnPrimaryColor,
+                        darkPrimaryContainerColor,
+                        darkOnPrimaryContainerColor,
+                        darkSecondaryColor,
+                        darkOnSecondaryColor,
+                        darkSecondaryContainerColor,
+                        darkOnSecondaryContainerColor,
+                        darkTertiaryColor,
+                        darkOnTertiaryColor,
+                        darkTertiaryContainerColor,
+                        darkOnTertiaryContainerColor,
+                        darkErrorColor,
+                        darkOnErrorColor,
+                        darkErrorContainerColor,
+                        darkOnErrorContainerColor,
+                        darkBackgroundColor,
+                        darkOnBackgroundColor,
+                        darkSurfaceColor,
+                        darkOnSurfaceColor,
+                        darkOutlineColor,
+                      ]);
 
                       popScreen(context: context, pass: true);
                     },
