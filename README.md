@@ -336,7 +336,7 @@ Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for ve
 
 EFUI wouldn't be as awesome as it is without these other awesome community projects...
 
-* [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_Widgets)
+* [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
 * [Flutter Colorpicker](https://pub.dev/packages/flutter_colorpicker)
 
 And, of course, all the awesome Flutter (Google) devs.
