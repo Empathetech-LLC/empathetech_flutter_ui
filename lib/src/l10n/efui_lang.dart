@@ -400,6 +400,90 @@ abstract class EFUILang {
   /// **'Reset to...'**
   String get csResetTo;
 
+  /// No description provided for @csResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String csResetAll(Object themeType);
+
+  /// No description provided for @csBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get csBackground;
+
+  /// No description provided for @csOnBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background text'**
+  String get csOnBackground;
+
+  /// No description provided for @csSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface'**
+  String get csSurface;
+
+  /// No description provided for @csOnSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface text'**
+  String get csOnSurface;
+
+  /// No description provided for @csPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get csPrimary;
+
+  /// No description provided for @csOnPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary text'**
+  String get csOnPrimary;
+
+  /// No description provided for @csSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get csSecondary;
+
+  /// No description provided for @csOnSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary text'**
+  String get csOnSecondary;
+
+  /// No description provided for @csTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary'**
+  String get csTertiary;
+
+  /// No description provided for @csOnTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary text'**
+  String get csOnTertiary;
+
+  /// No description provided for @csError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get csError;
+
+  /// No description provided for @csOnError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error text'**
+  String get csOnError;
+
+  /// No description provided for @csOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get csOutline;
+
   /// No description provided for @csTheme.
   ///
   /// In en, this message translates to:
@@ -453,12 +537,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Accent text'**
   String get csAccentText;
-
-  /// No description provided for @csResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
 
   /// No description provided for @isPageTitle.
   ///

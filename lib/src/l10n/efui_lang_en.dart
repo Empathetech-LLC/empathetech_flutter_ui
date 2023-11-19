@@ -176,6 +176,50 @@ class EFUILangEn extends EFUILang {
   String get csResetTo => 'Reset to...';
 
   @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get csBackground => 'Background';
+
+  @override
+  String get csOnBackground => 'Background text';
+
+  @override
+  String get csSurface => 'Surface';
+
+  @override
+  String get csOnSurface => 'Surface text';
+
+  @override
+  String get csPrimary => 'Primary';
+
+  @override
+  String get csOnPrimary => 'Primary text';
+
+  @override
+  String get csSecondary => 'Secondary';
+
+  @override
+  String get csOnSecondary => 'Secondary text';
+
+  @override
+  String get csTertiary => 'Tertiary';
+
+  @override
+  String get csOnTertiary => 'Tertiary text';
+
+  @override
+  String get csError => 'Error';
+
+  @override
+  String get csOnError => 'Error text';
+
+  @override
+  String get csOutline => 'Outline';
+
+  @override
   String get csTheme => 'Theme';
 
   @override
@@ -201,11 +245,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get csAccentText => 'Accent text';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
 
   @override
   String get isPageTitle => 'Image settings';
