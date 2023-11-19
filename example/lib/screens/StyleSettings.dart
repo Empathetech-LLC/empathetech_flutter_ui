@@ -34,7 +34,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: _isLight ? lightPageImage : darkPageImage,
         child: EzScrollView(
           children: [
             // Font

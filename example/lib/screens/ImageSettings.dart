@@ -39,7 +39,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: _isLight ? lightPageImage : darkPageImage,
         child: EzScrollView(
           children: [
             // Current theme mode reminder
@@ -63,7 +63,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                     [
                         // Page
                         EzImageSetting(
-                          prefsKey: lightPageImageKey,
+                          prefsKey: lightPageImage,
                           title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
@@ -77,7 +77,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           dialogTitle: _resetTitle,
                           onConfirm: () {
                             EzConfig.instance.preferences
-                                .remove(lightPageImageKey);
+                                .remove(lightPageImage);
 
                             popScreen(context: context, pass: true);
                           },
@@ -87,7 +87,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                     [
                         // Page
                         EzImageSetting(
-                          prefsKey: darkPageImageKey,
+                          prefsKey: darkPageImage,
                           title: EFUILang.of(context)!.gPage,
                           allowClear: true,
                           fullscreen: true,
@@ -100,8 +100,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           context: context,
                           dialogTitle: _resetTitle,
                           onConfirm: () {
-                            EzConfig.instance.preferences
-                                .remove(darkPageImageKey);
+                            EzConfig.instance.preferences.remove(darkPageImage);
 
                             popScreen(context: context, pass: true);
                           },

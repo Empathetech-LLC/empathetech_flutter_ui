@@ -37,17 +37,21 @@ const Color greyPoint = Color(greyPointHex);
 /// Empathetech's base theme configuration for [EzConfig]
 const Map<String, dynamic> empathetechConfig = {
   // Styling
+
   fontFamilyKey: roboto,
 
   marginKey: 15.0,
   paddingKey: 15.0,
 
+  circleDiameterKey: 45.0,
+
   buttonSpacingKey: 30.0,
   textSpacingKey: 60.0,
 
-  circleDiameterKey: 45.0,
+  // Colors
 
-  // Light colors
+  // Light
+
   lightPrimaryColor: EmpathPurpleHex,
   lightOnPrimaryColor: whiteHex,
   lightPrimaryContainerColor: EmpathPurpleHex,
@@ -75,7 +79,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   lightOutlineColor: greyPointHex,
 
-  // Dark colors
+  // Dark
 
   darkPrimaryColor: EmpathEucalyptusHex,
   darkOnPrimaryColor: blackHex,
@@ -103,6 +107,10 @@ const Map<String, dynamic> empathetechConfig = {
   darkOnSurfaceColor: whiteHex,
 
   darkOutlineColor: greyPointHex,
+
+  // Images
+  lightPageImage: noImageKey,
+  darkPageImage: noImageKey,
 };
 
 // Public links //
