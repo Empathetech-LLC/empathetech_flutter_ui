@@ -9,54 +9,54 @@ import 'package:flutter/material.dart';
 
 class EzRowCol extends StatelessWidget {
   final Key? key;
-  final MainAxisAlignment mainAxisAlignment;
-  final MainAxisSize mainAxisSize;
-  final CrossAxisAlignment crossAxisAlignment;
-  final TextDirection? textDirection;
-  final VerticalDirection verticalDirection;
-  final TextBaseline? textBaseline;
-  final List<Widget> children;
+  final Widget row;
+  final Column col;
 
-  /// Whether the [EzRow] should reverse its [children] when [EzConfig.dominantHand] is [Hand.left]
-  /// Defaults to false; not many use cases where both transformations will be wanted
-  final bool reverseHands;
-
-  /// [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
-  /// Alignment, size, and direction values will be shared
+  /// [Row] or [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
   EzRowCol({
     this.key,
-    this.mainAxisAlignment = MainAxisAlignment.start,
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
-    this.textDirection,
-    this.verticalDirection = VerticalDirection.down,
-    this.textBaseline,
-    required this.children,
-    this.reverseHands = false,
-  }) : super(key: key);
+    required this.row,
+    required this.col,
+  })  : assert(row.runtimeType == Row || row.runtimeType == EzRow,
+            'row Widget can only be a Row or EzRow'),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
-    return limitedSpace
-        ? Column(
-            mainAxisAlignment: mainAxisAlignment,
-            mainAxisSize: mainAxisSize,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            verticalDirection: verticalDirection,
-            textBaseline: textBaseline,
-            children: children,
-          )
-        : EzRow(
-            mainAxisAlignment: mainAxisAlignment,
-            mainAxisSize: mainAxisSize,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            verticalDirection: verticalDirection,
-            textBaseline: textBaseline,
-            children: children,
-            reverseHands: reverseHands,
-          );
+    return limitedSpace ? row : col;
   }
+
+  /// [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
+  /// Alignment, size, and direction values will be shared (symmetric)
+  EzRowCol.sym({
+    this.key,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    required List<Widget> children,
+    bool reverseHands = false,
+  })  : row = EzRow(
+          mainAxisAlignment: mainAxisAlignment,
+          mainAxisSize: mainAxisSize,
+          crossAxisAlignment: crossAxisAlignment,
+          textDirection: textDirection,
+          verticalDirection: verticalDirection,
+          textBaseline: textBaseline,
+          children: children,
+          reverseHands: reverseHands,
+        ),
+        col = Column(
+          mainAxisAlignment: mainAxisAlignment,
+          mainAxisSize: mainAxisSize,
+          crossAxisAlignment: crossAxisAlignment,
+          textDirection: textDirection,
+          verticalDirection: verticalDirection,
+          textBaseline: textBaseline,
+          children: children,
+        ),
+        super(key: key);
 }
