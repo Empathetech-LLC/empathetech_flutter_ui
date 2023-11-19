@@ -25,7 +25,6 @@ export 'src/classes/responsive-design/EzRowCol.dart';
 export 'src/classes/responsive-design/EzScrollView.dart';
 export 'src/classes/responsive-design/EzSpacer.dart';
 export 'src/classes/responsive-design/EzSwapScaffold.dart';
-export 'src/classes/responsive-design/EzTransitions.dart';
 
 // User-customization
 export 'src/classes/user-customization/EzAppProvider.dart';
