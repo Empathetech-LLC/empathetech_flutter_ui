@@ -43,7 +43,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
         child: EzScrollView(
           children: [
             // Current theme mode reminder
-            EzText(
+            Text(
               EFUILang.of(context)!.dEditingTheme(_themeProfile),
               style: titleSmall(context),
             ),

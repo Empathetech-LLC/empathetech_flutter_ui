@@ -41,7 +41,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      EzText(EFUILang.of(context)!.hsDominantHand, style: _style),
+      Text(EFUILang.of(context)!.hsDominantHand, style: _style),
       EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button

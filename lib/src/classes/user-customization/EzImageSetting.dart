@@ -122,7 +122,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               return StatefulBuilder(
                 builder: (context, setState) {
                   return EzAlertDialog(
-                    title: EzText(EFUILang.of(context)!.isEnterURL),
+                    title: Text(EFUILang.of(context)!.isEnterURL),
                     contents: [
                       PlatformTextFormField(
                         onChanged: (value) {
@@ -215,7 +215,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.isDialogTitle(widget.title)),
+        title: Text(EFUILang.of(context)!.isDialogTitle(widget.title)),
         contents: options,
       ),
     );
@@ -245,8 +245,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: EzText(EFUILang.of(context)!.isCreditTo),
-              contents: [EzText(widget.credits)],
+              title: Text(EFUILang.of(context)!.isCreditTo),
+              contents: [Text(widget.credits)],
             ),
           ),
 

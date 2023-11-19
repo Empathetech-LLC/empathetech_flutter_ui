@@ -59,7 +59,7 @@ class EzWarning extends StatelessWidget {
                     ),
                     EzSpacer.row(padding),
 
-                    EzText(_warning, style: style),
+                    Text(_warning, style: style),
                     EzSpacer.row(padding),
 
                     // Thing 2
@@ -73,7 +73,7 @@ class EzWarning extends StatelessWidget {
                 EzSpacer(padding),
 
                 // Label
-                EzText(message, style: style),
+                Text(message, style: style),
               ],
             ),
           ),

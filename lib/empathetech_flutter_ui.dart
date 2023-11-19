@@ -16,8 +16,6 @@ export 'src/classes/accessibility/EzLinkImage.dart';
 export 'src/classes/accessibility/EzPlainText.dart';
 export 'src/classes/accessibility/EzRichText.dart';
 export 'src/classes/accessibility/EzRow.dart';
-export 'src/classes/accessibility/EzText.dart';
-export 'src/classes/accessibility/EzTextStyle.dart';
 export 'src/classes/accessibility/EzWarning.dart';
 
 // Responsive design

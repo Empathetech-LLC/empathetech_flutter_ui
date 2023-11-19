@@ -105,7 +105,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzText(EFUILang.of(context)!.csRecommended),
+          title: Text(EFUILang.of(context)!.csRecommended),
           // Recommended color preview
           contents: [
             Container(
@@ -162,7 +162,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.csResetTo),
+        title: Text(EFUILang.of(context)!.csResetTo),
         // Reset color preview
         contents: [
           Container(
@@ -198,7 +198,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        EzText(widget.name, style: _labelStyle),
+        Text(widget.name, style: _labelStyle),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button
