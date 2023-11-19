@@ -10,6 +10,14 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// Custom implementation of a removeAll() style method for [SharedPreferences]
+void removeAllKeys(List<String> keys) {
+  for (String key in keys) {
+    EzConfig.instance.preferences.remove(key);
+  }
+}
 
 /// Can this [path] build an [AssetImage]?
 bool isPathAsset(String? path) {
