@@ -40,18 +40,11 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (context) => EzAlertDialog(
-      title: EzText(
-        title ?? EFUILang.of(context)!.csPickerTitle,
-      ),
+      title: EzText(title ?? EFUILang.of(context)!.csPickerTitle),
       contents: [
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,
-
-          // ignore: deprecated_member_use
-          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
-          // Necessary for Cupertino
-
           portraitOnly: true,
         ),
       ],
