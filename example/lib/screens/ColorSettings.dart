@@ -61,6 +61,32 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Background
+                        EzColorSetting(
+                          update: lightBackgroundColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: lightOnBackgroundColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightBackgroundColor,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
+                        // Surface
+                        EzColorSetting(
+                          update: lightSurfaceColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: lightOnSurfaceColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: lightSurfaceColor,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
                         // Primary
                         EzColorSetting(
                           updating: [
@@ -137,32 +163,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Background
-                        EzColorSetting(
-                          update: lightBackgroundColor,
-                          name: EFUILang.of(context)!.csTheme,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: lightOnBackgroundColor,
-                          name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: lightBackgroundColor,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Surface
-                        EzColorSetting(
-                          update: lightSurfaceColor,
-                          name: EFUILang.of(context)!.csTheme,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: lightOnSurfaceColor,
-                          name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: lightSurfaceColor,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
                         // Outline
                         EzColorSetting(
                           update: lightOutlineColor,
@@ -181,6 +181,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     dialogTitle: _resetTitle,
                     onConfirm: () {
                       removeAllKeys([
+                        lightBackgroundColor,
+                        lightOnBackgroundColor,
+                        lightSurfaceColor,
+                        lightOnSurfaceColor,
                         lightPrimaryColor,
                         lightOnPrimaryColor,
                         lightPrimaryContainerColor,
@@ -197,10 +201,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         lightOnErrorColor,
                         lightErrorContainerColor,
                         lightOnErrorContainerColor,
-                        lightBackgroundColor,
-                        lightOnBackgroundColor,
-                        lightSurfaceColor,
-                        lightOnSurfaceColor,
                         lightOutlineColor,
                       ]);
 
@@ -232,6 +232,32 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Background
+                        EzColorSetting(
+                          update: darkBackgroundColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: darkOnBackgroundColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkBackgroundColor,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
+                        // Surface
+                        EzColorSetting(
+                          update: darkSurfaceColor,
+                          name: EFUILang.of(context)!.csTheme,
+                        ),
+                        EzSpacer(_buttonSpacer),
+                        EzColorSetting(
+                          update: darkOnSurfaceColor,
+                          name: EFUILang.of(context)!.csThemeText,
+                          textBackgroundKey: darkSurfaceColor,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
                         // Primary
                         EzColorSetting(
                           updating: [
@@ -308,32 +334,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         ),
                         EzSpacer(_buttonSpacer),
 
-                        // Background
-                        EzColorSetting(
-                          update: darkBackgroundColor,
-                          name: EFUILang.of(context)!.csTheme,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: darkOnBackgroundColor,
-                          name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: darkBackgroundColor,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Surface
-                        EzColorSetting(
-                          update: darkSurfaceColor,
-                          name: EFUILang.of(context)!.csTheme,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: darkOnSurfaceColor,
-                          name: EFUILang.of(context)!.csThemeText,
-                          textBackgroundKey: darkSurfaceColor,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
                         // Outline
                         EzColorSetting(
                           update: darkOutlineColor,
@@ -352,6 +352,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     dialogTitle: _resetTitle,
                     onConfirm: () {
                       removeAllKeys([
+                        darkBackgroundColor,
+                        darkOnBackgroundColor,
+                        darkSurfaceColor,
+                        darkOnSurfaceColor,
                         darkPrimaryColor,
                         darkOnPrimaryColor,
                         darkPrimaryContainerColor,
@@ -368,10 +372,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         darkOnErrorColor,
                         darkErrorContainerColor,
                         darkOnErrorContainerColor,
-                        darkBackgroundColor,
-                        darkOnBackgroundColor,
-                        darkSurfaceColor,
-                        darkOnSurfaceColor,
                         darkOutlineColor,
                       ]);
 
