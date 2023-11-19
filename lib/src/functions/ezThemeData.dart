@@ -15,100 +15,77 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
 
-  final Color themeColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightThemeColorKey : darkThemeColorKey]);
-  final Color themeTextColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightThemeTextColorKey : darkThemeTextColorKey]);
-  final Color unSelectedThemeTextColor =
-      blendColors(themeColor, themeTextColor);
+  final Color primaryColor = EzConfig
+      .instance.prefs[lightTheme ? lightPrimaryColor : darkPrimaryColor];
+  final Color onPrimaryColor = EzConfig
+      .instance.prefs[lightTheme ? lightOnPrimaryColor : darkOnPrimaryColor];
+  final Color primaryContainerColor = EzConfig.instance.prefs[
+      lightTheme ? lightPrimaryContainerColor : darkPrimaryContainerColor];
+  final Color onPrimaryContainerColor = EzConfig.instance.prefs[
+      lightTheme ? lightOnPrimaryContainerColor : darkOnPrimaryContainerColor];
 
-  final Color pageColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightPageColorKey : darkPageColorKey]);
-  final Color pageTextColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightPageTextColorKey : darkPageTextColorKey]);
+  final Color secondaryColor = EzConfig
+      .instance.prefs[lightTheme ? lightSecondaryColor : darkSecondaryColor];
+  final Color onSecondaryColor = EzConfig.instance
+      .prefs[lightTheme ? lightOnSecondaryColor : darkOnSecondaryColor];
+  final Color secondaryContainerColor = EzConfig.instance.prefs[
+      lightTheme ? lightSecondaryContainerColor : darkSecondaryContainerColor];
+  final Color onSecondaryContainerColor = EzConfig.instance.prefs[lightTheme
+      ? lightOnSecondaryContainerColor
+      : darkOnSecondaryContainerColor];
 
-  final Color buttonColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightButtonColorKey : darkButtonColorKey]);
-  final Color buttonTextColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightButtonTextColorKey : darkButtonTextColorKey]);
+  final Color tertiaryColor = EzConfig
+      .instance.prefs[lightTheme ? lightTertiaryColor : darkTertiaryColor];
+  final Color onTertiaryColor = EzConfig
+      .instance.prefs[lightTheme ? lightOnTertiaryColor : darkOnTertiaryColor];
+  final Color tertiaryContainerColor = EzConfig.instance.prefs[
+      lightTheme ? lightTertiaryContainerColor : darkTertiaryContainerColor];
+  final Color onTertiaryContainerColor = EzConfig.instance.prefs[lightTheme
+      ? lightOnTertiaryContainerColor
+      : darkOnTertiaryContainerColor];
 
-  final Color accentColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightAccentColorKey : darkAccentColorKey]);
-  final Color accentTextColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightAccentTextColorKey : darkAccentTextColorKey]);
+  final Color errorColor =
+      EzConfig.instance.prefs[lightTheme ? lightErrorColor : darkErrorColor];
+  final Color onErrorColor = EzConfig
+      .instance.prefs[lightTheme ? lightOnErrorColor : darkOnErrorColor];
+  final Color errorContainerColor = EzConfig.instance
+      .prefs[lightTheme ? lightErrorContainerColor : darkErrorContainerColor];
+  final Color onErrorContainerColor = EzConfig.instance.prefs[
+      lightTheme ? lightOnErrorContainerColor : darkOnErrorContainerColor];
 
-  final TextTheme textTheme = ezTextTheme(pageTextColor);
+  final Color backgroundColor = EzConfig
+      .instance.prefs[lightTheme ? lightBackgroundColor : darkBackgroundColor];
+  final Color onBackgroundColor = EzConfig.instance
+      .prefs[lightTheme ? lightOnBackgroundColor : darkOnBackgroundColor];
+  final Color surfaceColor = EzConfig
+      .instance.prefs[lightTheme ? lightSurfaceColor : darkSurfaceColor];
+  final Color onSurfaceColor = EzConfig
+      .instance.prefs[lightTheme ? lightOnSurfaceColor : darkOnSurfaceColor];
 
-  final TextStyle appBarTextStyle = buildHeadlineMedium(themeTextColor);
-  final TextStyle tabBarTextStyle = buildTitleLarge(themeTextColor);
-
-  final TextStyle pageTextStyle = buildBodyLarge(pageTextColor);
-
-  final TextStyle buttonTextStyle = buildTitleMedium(buttonTextColor);
-  final TextStyle inverseButtonTextStyle = buildTitleMedium(buttonColor);
-
-  final TextStyle dialogTitleStyle = buildTitleLarge(themeTextColor);
-  final TextStyle dialogContentStyle = buildBodyLarge(themeTextColor);
-
-  final IconThemeData iconData = IconThemeData(
-    color: buttonTextColor,
-    size: buttonTextStyle.fontSize,
-  );
-
-  final IconThemeData appBarIconData = IconThemeData(
-    color: themeTextColor,
-    size: appBarTextStyle.fontSize,
-  );
+  final Color outlineColor = EzConfig
+      .instance.prefs[lightTheme ? lightOutlineColor : darkOutlineColor];
 
   // Build the ThemeData //
 
   return ThemeData(
-    brightness: brightness,
-
-    // AppBar
-    appBarTheme: AppBarTheme(
-      color: themeColor,
-      iconTheme: appBarIconData,
-      actionsIconTheme: appBarIconData,
-      titleTextStyle: appBarTextStyle,
-    ),
-
-    // Bottom navigation
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: themeColor,
-      selectedItemColor: buttonColor,
-      selectedIconTheme: IconThemeData(color: buttonColor),
-      unselectedItemColor: themeTextColor,
-      unselectedIconTheme: IconThemeData(color: themeTextColor),
-    ),
-
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: buttonTextStyle,
         alignment: Alignment.center,
-        backgroundColor: buttonColor,
-        shadowColor: buttonColor,
-        side: BorderSide(color: buttonColor),
-        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+        padding: EdgeInsets.all(padding),
       ),
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        textStyle: inverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
-        shadowColor: buttonColor,
-        side: BorderSide(color: buttonColor),
-        padding: EdgeInsets.all(EzConfig.instance.prefs[paddingKey]),
+        padding: EdgeInsets.all(padding),
       ),
     ),
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: inverseButtonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -119,7 +96,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        iconSize: buttonTextStyle.fontSize,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -129,110 +105,36 @@ ThemeData ezThemeData({required bool lightTheme}) {
     ),
 
     // Cards
-    cardTheme: CardTheme(
-      color: pageColor,
-      margin: EdgeInsets.all(margin),
-      shadowColor: accentColor,
-    ),
-
-    // Checkbox
-    checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.resolveWith(
-        (states) {
-          if (states.contains(MaterialState.selected)) {
-            return buttonColor;
-          } else {
-            return themeTextColor;
-          }
-        },
-      ),
-      checkColor: MaterialStateProperty.all(buttonColor),
-    ),
+    cardTheme: CardTheme(margin: EdgeInsets.all(margin)),
 
     // Colors
+    brightness: brightness,
     colorScheme: ColorScheme(
       brightness: brightness,
-      primary: buttonColor,
-      onPrimary: buttonTextColor,
-      secondary: accentColor,
-      onSecondary: accentTextColor,
-      background: themeColor,
-      onBackground: themeTextColor,
-      surface: pageColor,
-      onSurface: pageTextColor,
-      error: Colors.red,
-      onError: Colors.white,
-    ),
-    dividerColor: Colors.transparent,
-    highlightColor: buttonColor,
-    hintColor: themeTextColor,
-    indicatorColor: buttonColor,
-    primaryColor: themeColor,
-    scaffoldBackgroundColor: pageColor,
-
-    // Dialogs
-    dialogTheme: DialogTheme(
-      titleTextStyle: dialogTitleStyle,
-      backgroundColor: themeColor,
-      contentTextStyle: dialogContentStyle,
-      iconColor: themeTextColor,
-      alignment: Alignment.center,
+      primary: primaryColor,
+      onPrimary: onPrimaryColor,
+      primaryContainer: primaryContainerColor,
+      onPrimaryContainer: onPrimaryContainerColor,
+      secondary: secondaryColor,
+      onSecondary: onSecondaryColor,
+      secondaryContainer: secondaryContainerColor,
+      onSecondaryContainer: onSecondaryContainerColor,
+      tertiary: tertiaryColor,
+      onTertiary: onTertiaryColor,
+      tertiaryContainer: tertiaryContainerColor,
+      onTertiaryContainer: onTertiaryContainerColor,
+      error: errorColor,
+      onError: onErrorColor,
+      errorContainer: errorContainerColor,
+      onErrorContainer: onErrorContainerColor,
+      background: backgroundColor,
+      onBackground: onBackgroundColor,
+      surface: surfaceColor,
+      onSurface: onSurfaceColor,
+      outline: outlineColor,
     ),
 
-    // Drawer
-    drawerTheme: DrawerThemeData(backgroundColor: themeColor),
-
-    // Dropdown Menu
-    dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: pageTextStyle,
-      inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(padding),
-        fillColor: pageColor,
-        iconColor: pageTextColor,
-        prefixIconColor: pageTextColor,
-        suffixIconColor: pageTextColor,
-      ),
-      menuStyle: MenuStyle(
-        backgroundColor: MaterialStatePropertyAll(pageColor),
-      ),
-    ),
-
-    // Sliders
-    sliderTheme: SliderThemeData(
-      overlayShape: SliderComponentShape.noOverlay,
-      overlayColor: Colors.transparent,
-      thumbColor: buttonColor,
-      activeTrackColor: buttonColor,
-      valueIndicatorColor: buttonColor,
-      activeTickMarkColor: buttonTextColor,
-      disabledThumbColor: Colors.transparent,
-      disabledActiveTrackColor: Colors.transparent,
-      disabledInactiveTrackColor: Colors.transparent,
-      disabledActiveTickMarkColor: Colors.transparent,
-      disabledInactiveTickMarkColor: Colors.transparent,
-      disabledSecondaryActiveTrackColor: Colors.transparent,
-      inactiveTrackColor: unSelectedThemeTextColor,
-      inactiveTickMarkColor: themeTextColor,
-    ),
-
-    // TabBar
-    tabBarTheme: TabBarTheme(
-      labelStyle: tabBarTextStyle,
-      labelColor: themeTextColor,
-      unselectedLabelStyle: tabBarTextStyle.copyWith(
-        color: unSelectedThemeTextColor,
-      ),
-      unselectedLabelColor: unSelectedThemeTextColor,
-    ),
-
-    // Text && icons
+    // Font
     fontFamily: EzConfig.instance.fontFamily,
-    textTheme: textTheme,
-    primaryTextTheme: textTheme,
-    iconTheme: iconData,
-    primaryIconTheme: iconData,
-
-    // Transitions
-    pageTransitionsTheme: EzTransitions(),
   );
 }
