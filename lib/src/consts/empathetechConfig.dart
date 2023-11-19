@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// Define brand Colors //
+// Brand Colors //
 
 const int EmpathEucalyptusHex = 0xFF20DAA5;
 const Color EmpathEucalyptus = Color(EmpathEucalyptusHex);
@@ -18,6 +18,9 @@ const Color EmpathPurple = Color(EmpathPurpleHex);
 const int EmpathGoldenrodHex = 0xFFDAA520;
 const Color EmpathGoldenrod = Color(EmpathGoldenrodHex);
 
+const int EmpathErrorRedHex = 0xFFDA2035;
+const Color EmpathErrorRed = Color(EmpathErrorRedHex);
+
 const int whiteHex = 0xFFFFFFFF;
 const int offWhiteHex = 0xFFF5F5F5;
 const Color offWhite = Color(offWhiteHex);
@@ -26,11 +29,16 @@ const int blackHex = 0xFF000000;
 const int offBlackHex = 0xFF191919;
 const Color offBlack = Color(offBlackHex);
 
-// Define EzConfig base ///
+const int greyPointHex = 0xFF878787;
+const Color greyPoint = Color(greyPointHex);
+
+// EzConfig base ///
 
 /// Empathetech's base theme configuration for [EzConfig]
 const Map<String, dynamic> empathetechConfig = {
-  // App-wide //
+  // Styling
+  fontFamilyKey: roboto,
+
   marginKey: 15.0,
   paddingKey: 15.0,
 
@@ -39,38 +47,65 @@ const Map<String, dynamic> empathetechConfig = {
 
   circleDiameterKey: 45.0,
 
-  fontFamilyKey: roboto,
+  // Light colors
+  lightPrimaryColor: EmpathPurpleHex,
+  lightOnPrimaryColor: whiteHex,
+  lightPrimaryContainerColor: EmpathPurpleHex,
+  lightOnPrimaryContainerColor: whiteHex,
 
-  // Light theme //
-  lightThemeColorKey: whiteHex,
-  lightThemeTextColorKey: blackHex,
+  lightSecondaryColor: EmpathGoldenrodHex,
+  lightOnSecondaryColor: blackHex,
+  lightSecondaryContainerColor: EmpathGoldenrodHex,
+  lightOnSecondaryContainerColor: blackHex,
 
-  lightPageImageKey: noImageKey,
-  lightPageColorKey: offWhiteHex,
-  lightPageTextColorKey: blackHex,
+  lightTertiaryColor: EmpathEucalyptusHex,
+  lightOnTertiaryColor: blackHex,
+  lightTertiaryContainerColor: EmpathEucalyptusHex,
+  lightOnTertiaryContainerColor: blackHex,
 
-  lightButtonColorKey: EmpathPurpleHex,
-  lightButtonTextColorKey: whiteHex,
+  lightErrorColor: EmpathErrorRedHex,
+  lightOnErrorColor: whiteHex,
+  lightErrorContainerColor: EmpathErrorRedHex,
+  lightOnErrorContainerColor: whiteHex,
 
-  lightAccentColorKey: EmpathGoldenrodHex,
-  lightAccentTextColorKey: whiteHex,
+  lightBackgroundColor: offWhiteHex,
+  lightOnBackgroundColor: blackHex,
+  lightSurfaceColor: whiteHex,
+  lightOnSurfaceColor: blackHex,
 
-  // Dark theme //
-  darkThemeColorKey: blackHex,
-  darkThemeTextColorKey: whiteHex,
+  lightOutlineColor: greyPointHex,
 
-  darkPageImageKey: noImageKey,
-  darkPageColorKey: offBlackHex,
-  darkPageTextColorKey: whiteHex,
+  // Dark colors
 
-  darkButtonColorKey: EmpathEucalyptusHex,
-  darkButtonTextColorKey: blackHex,
+  darkPrimaryColor: EmpathEucalyptusHex,
+  darkOnPrimaryColor: blackHex,
+  darkPrimaryContainerColor: EmpathEucalyptus,
+  darkOnPrimaryContainerColor: blackHex,
 
-  darkAccentColorKey: EmpathGoldenrodHex,
-  darkAccentTextColorKey: whiteHex,
+  darkSecondaryColor: EmpathGoldenrodHex,
+  darkOnSecondaryColor: blackHex,
+  darkSecondaryContainerColor: EmpathGoldenrodHex,
+  darkOnSecondaryContainerColor: blackHex,
+
+  darkTertiaryColor: EmpathPurpleHex,
+  darkOnTertiaryColor: whiteHex,
+  darkTertiaryContainerColor: EmpathPurpleHex,
+  darkOnTertiaryContainerColor: whiteHex,
+
+  darkErrorColor: EmpathErrorRedHex,
+  darkOnErrorColor: whiteHex,
+  darkErrorContainerColor: EmpathErrorRedHex,
+  darkOnErrorContainerColor: whiteHex,
+
+  darkBackgroundColor: blackHex,
+  darkOnBackgroundColor: whiteHex,
+  darkSurfaceColor: offBlackHex,
+  darkOnSurfaceColor: whiteHex,
+
+  darkOutlineColor: greyPointHex,
 };
 
-// Define public links //
+// Public links //
 
 /// One of us, one of us, one of us!
 const String EmpathetechCommunity = 'community@empathetech.net';
