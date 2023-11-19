@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// Enumerator for controlling the visability of disappearing buttons
+/// Enumerator for controlling the visibility of disappearing buttons
 enum ButtonVis {
   /// Never show
   alwaysOff,

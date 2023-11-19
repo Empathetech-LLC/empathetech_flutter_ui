@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzSliderSetting extends StatefulWidget {
@@ -262,7 +261,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             }
           },
 
-          // Slider sementics
+          // Slider semantics
           semanticFormatterCallback: (double value) =>
               value.toStringAsFixed(widget.decimals),
         ),

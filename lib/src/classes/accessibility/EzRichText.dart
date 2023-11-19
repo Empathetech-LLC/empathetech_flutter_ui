@@ -39,7 +39,7 @@ class EzRichText extends StatelessWidget {
   final EditableTextContextMenuBuilder? contextMenuBuilder;
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  /// [TextSpan] wrapper with customized defaults and preconfigured [Semantics]
+  /// [TextSpan] wrapper with customized defaults and pre-configured [Semantics]
   /// Recommended to use [EzPlainText] rather than [TextSpan]
   /// Also see [EzInlineLink]
   EzRichText(
