@@ -19,10 +19,10 @@ const String fontFamilyKey = 'fontFamily';
 const String marginKey = 'margin';
 const String paddingKey = 'padding';
 
+const String circleDiameterKey = 'circleDiameter';
+
 const String buttonSpacingKey = 'buttonSpacing';
 const String textSpacingKey = 'textSpacing';
-
-const String circleDiameterKey = 'circleDiameter';
 
 // Colors //
 
@@ -87,3 +87,6 @@ const String darkOutlineColor = 'darkOutlineColor';
 // Images //
 
 const String noImageKey = 'noImage';
+
+const String lightPageImage = 'lightPageImage';
+const String darkPageImage = 'darkPageImage';
