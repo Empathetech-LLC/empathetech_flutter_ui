@@ -56,7 +56,8 @@ class EzScreen extends StatelessWidget {
     final EdgeInsetsGeometry _margin =
         margin ?? EdgeInsets.all(EzConfig.instance.prefs[marginKey]);
 
-    final Decoration? _decoration = (decorationImageKey == null)
+    final Decoration? _decoration = (decorationImageKey == null ||
+            decorationImageKey == noImageKey)
         ? decoration
         : BoxDecoration(
             image: DecorationImage(
