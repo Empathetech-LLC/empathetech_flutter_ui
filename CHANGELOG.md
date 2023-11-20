@@ -2,12 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.4.0] - 2023-11-17
+## [5.0.0] - 2023-11-XX
 ### Updated
-- ezThemeData variable names
 - EzAlertDialog spacing
-- Packages
-  - Minor breaking change (SDK range update)
+- To Material 3
+  - ezThemeData
   - Restored iOS web icons
 
 ## [4.3.3] - 2023-11-16
