@@ -16,56 +16,61 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final double padding = EzConfig.instance.prefs[paddingKey];
 
   final Color primaryColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightPrimaryColor : darkPrimaryColor]);
-  final Color onPrimaryColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightOnPrimaryColor : darkOnPrimaryColor]);
-  final Color primaryContainerColor = Color(EzConfig.instance.prefs[
-      lightTheme ? lightPrimaryContainerColor : darkPrimaryContainerColor]);
-  final Color onPrimaryContainerColor = Color(EzConfig.instance.prefs[
-      lightTheme ? lightOnPrimaryContainerColor : darkOnPrimaryContainerColor]);
+      .instance.prefs[lightTheme ? lightPrimaryColorKey : darkPrimaryColorKey]);
+  final Color onPrimaryColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightOnPrimaryColorKey : darkOnPrimaryColorKey]);
+  final Color primaryContainerColor = Color(EzConfig.instance.prefs[lightTheme
+      ? lightPrimaryContainerColorKey
+      : darkPrimaryContainerColorKey]);
+  final Color onPrimaryContainerColor = Color(EzConfig.instance.prefs[lightTheme
+      ? lightOnPrimaryContainerColorKey
+      : darkOnPrimaryContainerColorKey]);
 
-  final Color secondaryColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightSecondaryColor : darkSecondaryColor]);
+  final Color secondaryColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightSecondaryColorKey : darkSecondaryColorKey]);
   final Color onSecondaryColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightOnSecondaryColor : darkOnSecondaryColor]);
-  final Color secondaryContainerColor = Color(EzConfig.instance.prefs[
-      lightTheme ? lightSecondaryContainerColor : darkSecondaryContainerColor]);
+      .prefs[lightTheme ? lightOnSecondaryColorKey : darkOnSecondaryColorKey]);
+  final Color secondaryContainerColor = Color(EzConfig.instance.prefs[lightTheme
+      ? lightSecondaryContainerColorKey
+      : darkSecondaryContainerColorKey]);
   final Color onSecondaryContainerColor = Color(EzConfig.instance.prefs[
       lightTheme
-          ? lightOnSecondaryContainerColor
-          : darkOnSecondaryContainerColor]);
+          ? lightOnSecondaryContainerColorKey
+          : darkOnSecondaryContainerColorKey]);
 
-  final Color tertiaryColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightTertiaryColor : darkTertiaryColor]);
-  final Color onTertiaryColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightOnTertiaryColor : darkOnTertiaryColor]);
-  final Color tertiaryContainerColor = Color(EzConfig.instance.prefs[
-      lightTheme ? lightTertiaryContainerColor : darkTertiaryContainerColor]);
+  final Color tertiaryColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightTertiaryColorKey : darkTertiaryColorKey]);
+  final Color onTertiaryColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightOnTertiaryColorKey : darkOnTertiaryColorKey]);
+  final Color tertiaryContainerColor = Color(EzConfig.instance.prefs[lightTheme
+      ? lightTertiaryContainerColorKey
+      : darkTertiaryContainerColorKey]);
   final Color onTertiaryContainerColor = Color(EzConfig.instance.prefs[
       lightTheme
-          ? lightOnTertiaryContainerColor
-          : darkOnTertiaryContainerColor]);
+          ? lightOnTertiaryContainerColorKey
+          : darkOnTertiaryContainerColorKey]);
 
-  final Color errorColor = Color(
-      EzConfig.instance.prefs[lightTheme ? lightErrorColor : darkErrorColor]);
+  final Color errorColor = Color(EzConfig
+      .instance.prefs[lightTheme ? lightErrorColorKey : darkErrorColorKey]);
   final Color onErrorColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightOnErrorColor : darkOnErrorColor]);
-  final Color errorContainerColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightErrorContainerColor : darkErrorContainerColor]);
-  final Color onErrorContainerColor = Color(EzConfig.instance.prefs[
-      lightTheme ? lightOnErrorContainerColor : darkOnErrorContainerColor]);
+      .instance.prefs[lightTheme ? lightOnErrorColorKey : darkOnErrorColorKey]);
+  final Color errorContainerColor = Color(EzConfig.instance.prefs[
+      lightTheme ? lightErrorContainerColorKey : darkErrorContainerColorKey]);
+  final Color onErrorContainerColor = Color(EzConfig.instance.prefs[lightTheme
+      ? lightOnErrorContainerColorKey
+      : darkOnErrorContainerColorKey]);
 
-  final Color backgroundColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightBackgroundColor : darkBackgroundColor]);
-  final Color onBackgroundColor = Color(EzConfig.instance
-      .prefs[lightTheme ? lightOnBackgroundColor : darkOnBackgroundColor]);
+  final Color backgroundColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightBackgroundColorKey : darkBackgroundColorKey]);
+  final Color onBackgroundColor = Color(EzConfig.instance.prefs[
+      lightTheme ? lightOnBackgroundColorKey : darkOnBackgroundColorKey]);
   final Color surfaceColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightSurfaceColor : darkSurfaceColor]);
-  final Color onSurfaceColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightOnSurfaceColor : darkOnSurfaceColor]);
+      .instance.prefs[lightTheme ? lightSurfaceColorKey : darkSurfaceColorKey]);
+  final Color onSurfaceColor = Color(EzConfig.instance
+      .prefs[lightTheme ? lightOnSurfaceColorKey : darkOnSurfaceColorKey]);
 
   final Color outlineColor = Color(EzConfig
-      .instance.prefs[lightTheme ? lightOutlineColor : darkOutlineColor]);
+      .instance.prefs[lightTheme ? lightOutlineColorKey : darkOutlineColorKey]);
 
   // Build the ThemeData //
 

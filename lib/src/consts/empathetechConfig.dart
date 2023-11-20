@@ -52,65 +52,65 @@ const Map<String, dynamic> empathetechConfig = {
 
   // Light
 
-  lightPrimaryColor: EmpathPurpleHex,
-  lightOnPrimaryColor: whiteHex,
-  lightPrimaryContainerColor: EmpathPurpleHex,
-  lightOnPrimaryContainerColor: whiteHex,
+  lightPrimaryColorKey: EmpathPurpleHex,
+  lightOnPrimaryColorKey: whiteHex,
+  lightPrimaryContainerColorKey: EmpathPurpleHex,
+  lightOnPrimaryContainerColorKey: whiteHex,
 
-  lightSecondaryColor: EmpathGoldenrodHex,
-  lightOnSecondaryColor: blackHex,
-  lightSecondaryContainerColor: EmpathGoldenrodHex,
-  lightOnSecondaryContainerColor: blackHex,
+  lightSecondaryColorKey: EmpathGoldenrodHex,
+  lightOnSecondaryColorKey: blackHex,
+  lightSecondaryContainerColorKey: EmpathGoldenrodHex,
+  lightOnSecondaryContainerColorKey: blackHex,
 
-  lightTertiaryColor: EmpathEucalyptusHex,
-  lightOnTertiaryColor: blackHex,
-  lightTertiaryContainerColor: EmpathEucalyptusHex,
-  lightOnTertiaryContainerColor: blackHex,
+  lightTertiaryColorKey: EmpathEucalyptusHex,
+  lightOnTertiaryColorKey: blackHex,
+  lightTertiaryContainerColorKey: EmpathEucalyptusHex,
+  lightOnTertiaryContainerColorKey: blackHex,
 
-  lightErrorColor: EmpathErrorRedHex,
-  lightOnErrorColor: whiteHex,
-  lightErrorContainerColor: EmpathErrorRedHex,
-  lightOnErrorContainerColor: whiteHex,
+  lightErrorColorKey: EmpathErrorRedHex,
+  lightOnErrorColorKey: whiteHex,
+  lightErrorContainerColorKey: EmpathErrorRedHex,
+  lightOnErrorContainerColorKey: whiteHex,
 
-  lightBackgroundColor: offWhiteHex,
-  lightOnBackgroundColor: blackHex,
-  lightSurfaceColor: whiteHex,
-  lightOnSurfaceColor: blackHex,
+  lightBackgroundColorKey: offWhiteHex,
+  lightOnBackgroundColorKey: blackHex,
+  lightSurfaceColorKey: whiteHex,
+  lightOnSurfaceColorKey: blackHex,
 
-  lightOutlineColor: greyPointHex,
+  lightOutlineColorKey: greyPointHex,
 
   // Dark
 
-  darkPrimaryColor: EmpathEucalyptusHex,
-  darkOnPrimaryColor: blackHex,
-  darkPrimaryContainerColor: EmpathEucalyptus,
-  darkOnPrimaryContainerColor: blackHex,
+  darkPrimaryColorKey: EmpathEucalyptusHex,
+  darkOnPrimaryColorKey: blackHex,
+  darkPrimaryContainerColorKey: EmpathEucalyptus,
+  darkOnPrimaryContainerColorKey: blackHex,
 
-  darkSecondaryColor: EmpathGoldenrodHex,
-  darkOnSecondaryColor: blackHex,
-  darkSecondaryContainerColor: EmpathGoldenrodHex,
-  darkOnSecondaryContainerColor: blackHex,
+  darkSecondaryColorKey: EmpathGoldenrodHex,
+  darkOnSecondaryColorKey: blackHex,
+  darkSecondaryContainerColorKey: EmpathGoldenrodHex,
+  darkOnSecondaryContainerColorKey: blackHex,
 
-  darkTertiaryColor: EmpathPurpleHex,
-  darkOnTertiaryColor: whiteHex,
-  darkTertiaryContainerColor: EmpathPurpleHex,
-  darkOnTertiaryContainerColor: whiteHex,
+  darkTertiaryColorKey: EmpathPurpleHex,
+  darkOnTertiaryColorKey: whiteHex,
+  darkTertiaryContainerColorKey: EmpathPurpleHex,
+  darkOnTertiaryContainerColorKey: whiteHex,
 
-  darkErrorColor: EmpathErrorRedHex,
-  darkOnErrorColor: whiteHex,
-  darkErrorContainerColor: EmpathErrorRedHex,
-  darkOnErrorContainerColor: whiteHex,
+  darkErrorColorKey: EmpathErrorRedHex,
+  darkOnErrorColorKey: whiteHex,
+  darkErrorContainerColorKey: EmpathErrorRedHex,
+  darkOnErrorContainerColorKey: whiteHex,
 
-  darkBackgroundColor: blackHex,
-  darkOnBackgroundColor: whiteHex,
-  darkSurfaceColor: offBlackHex,
-  darkOnSurfaceColor: whiteHex,
+  darkBackgroundColorKey: blackHex,
+  darkOnBackgroundColorKey: whiteHex,
+  darkSurfaceColorKey: offBlackHex,
+  darkOnSurfaceColorKey: whiteHex,
 
-  darkOutlineColor: greyPointHex,
+  darkOutlineColorKey: greyPointHex,
 
   // Images
-  lightPageImage: noImageKey,
-  darkPageImage: noImageKey,
+  lightPageImageKey: noImageKey,
+  darkPageImageKey: noImageKey,
 };
 
 // Public links //

@@ -28,65 +28,66 @@ const String textSpacingKey = 'textSpacing';
 
 // Light
 
-const String lightPrimaryColor = 'lightPrimaryColor';
-const String lightOnPrimaryColor = 'lightOnPrimaryColor';
-const String lightPrimaryContainerColor = 'lightPrimaryContainerColor';
-const String lightOnPrimaryContainerColor = 'lightOnPrimaryContainerColor';
+const String lightPrimaryColorKey = 'lightPrimaryColor';
+const String lightOnPrimaryColorKey = 'lightOnPrimaryColor';
+const String lightPrimaryContainerColorKey = 'lightPrimaryContainerColor';
+const String lightOnPrimaryContainerColorKey = 'lightOnPrimaryContainerColor';
 
-const String lightSecondaryColor = 'lightSecondaryColor';
-const String lightOnSecondaryColor = 'lightOnSecondaryColor';
-const String lightSecondaryContainerColor = 'lightSecondaryContainerColor';
-const String lightOnSecondaryContainerColor = 'lightOnSecondaryContainerColor';
+const String lightSecondaryColorKey = 'lightSecondaryColor';
+const String lightOnSecondaryColorKey = 'lightOnSecondaryColor';
+const String lightSecondaryContainerColorKey = 'lightSecondaryContainerColor';
+const String lightOnSecondaryContainerColorKey =
+    'lightOnSecondaryContainerColor';
 
-const String lightTertiaryColor = 'lightTertiaryColor';
-const String lightOnTertiaryColor = 'lightOnTertiaryColor';
-const String lightTertiaryContainerColor = 'lightTertiaryContainerColor';
-const String lightOnTertiaryContainerColor = 'lightOnTertiaryContainerColor';
+const String lightTertiaryColorKey = 'lightTertiaryColor';
+const String lightOnTertiaryColorKey = 'lightOnTertiaryColor';
+const String lightTertiaryContainerColorKey = 'lightTertiaryContainerColor';
+const String lightOnTertiaryContainerColorKey = 'lightOnTertiaryContainerColor';
 
-const String lightErrorColor = 'lightErrorColor';
-const String lightOnErrorColor = 'lightOnErrorColor';
-const String lightErrorContainerColor = 'lightErrorContainerColor';
-const String lightOnErrorContainerColor = 'lightOnErrorContainerColor';
+const String lightErrorColorKey = 'lightErrorColor';
+const String lightOnErrorColorKey = 'lightOnErrorColor';
+const String lightErrorContainerColorKey = 'lightErrorContainerColor';
+const String lightOnErrorContainerColorKey = 'lightOnErrorContainerColor';
 
-const String lightBackgroundColor = 'lightBackgroundColor';
-const String lightOnBackgroundColor = 'lightOnBackgroundColor';
-const String lightSurfaceColor = 'lightSurfaceColor';
-const String lightOnSurfaceColor = 'lightOnSurfaceColor';
+const String lightBackgroundColorKey = 'lightBackgroundColor';
+const String lightOnBackgroundColorKey = 'lightOnBackgroundColor';
+const String lightSurfaceColorKey = 'lightSurfaceColor';
+const String lightOnSurfaceColorKey = 'lightOnSurfaceColor';
 
-const String lightOutlineColor = 'lightOutlineColor';
+const String lightOutlineColorKey = 'lightOutlineColor';
 
 // Dark
 
-const String darkPrimaryColor = 'darkPrimaryColor';
-const String darkOnPrimaryColor = 'darkOnPrimaryColor';
-const String darkPrimaryContainerColor = 'darkPrimaryContainerColor';
-const String darkOnPrimaryContainerColor = 'darkOnPrimaryContainerColor';
+const String darkPrimaryColorKey = 'darkPrimaryColor';
+const String darkOnPrimaryColorKey = 'darkOnPrimaryColor';
+const String darkPrimaryContainerColorKey = 'darkPrimaryContainerColor';
+const String darkOnPrimaryContainerColorKey = 'darkOnPrimaryContainerColor';
 
-const String darkSecondaryColor = 'darkSecondaryColor';
-const String darkOnSecondaryColor = 'darkOnSecondaryColor';
-const String darkSecondaryContainerColor = 'darkSecondaryContainerColor';
-const String darkOnSecondaryContainerColor = 'darkOnSecondaryContainerColor';
+const String darkSecondaryColorKey = 'darkSecondaryColor';
+const String darkOnSecondaryColorKey = 'darkOnSecondaryColor';
+const String darkSecondaryContainerColorKey = 'darkSecondaryContainerColor';
+const String darkOnSecondaryContainerColorKey = 'darkOnSecondaryContainerColor';
 
-const String darkTertiaryColor = 'darkTertiaryColor';
-const String darkOnTertiaryColor = 'darkOnTertiaryColor';
-const String darkTertiaryContainerColor = 'darkTertiaryContainerColor';
-const String darkOnTertiaryContainerColor = 'darkOnTertiaryContainerColor';
+const String darkTertiaryColorKey = 'darkTertiaryColor';
+const String darkOnTertiaryColorKey = 'darkOnTertiaryColor';
+const String darkTertiaryContainerColorKey = 'darkTertiaryContainerColor';
+const String darkOnTertiaryContainerColorKey = 'darkOnTertiaryContainerColor';
 
-const String darkErrorColor = 'darkErrorColor';
-const String darkOnErrorColor = 'darkOnErrorColor';
-const String darkErrorContainerColor = 'darkErrorContainerColor';
-const String darkOnErrorContainerColor = 'darkOnErrorContainerColor';
+const String darkErrorColorKey = 'darkErrorColor';
+const String darkOnErrorColorKey = 'darkOnErrorColor';
+const String darkErrorContainerColorKey = 'darkErrorContainerColor';
+const String darkOnErrorContainerColorKey = 'darkOnErrorContainerColor';
 
-const String darkBackgroundColor = 'darkBackgroundColor';
-const String darkOnBackgroundColor = 'darkOnBackgroundColor';
-const String darkSurfaceColor = 'darkSurfaceColor';
-const String darkOnSurfaceColor = 'darkOnSurfaceColor';
+const String darkBackgroundColorKey = 'darkBackgroundColor';
+const String darkOnBackgroundColorKey = 'darkOnBackgroundColor';
+const String darkSurfaceColorKey = 'darkSurfaceColor';
+const String darkOnSurfaceColorKey = 'darkOnSurfaceColor';
 
-const String darkOutlineColor = 'darkOutlineColor';
+const String darkOutlineColorKey = 'darkOutlineColor';
 
 // Images //
 
 const String noImageKey = 'noImage';
 
-const String lightPageImage = 'lightPageImage';
-const String darkPageImage = 'darkPageImage';
+const String lightPageImageKey = 'lightPageImage';
+const String darkPageImageKey = 'darkPageImage';
