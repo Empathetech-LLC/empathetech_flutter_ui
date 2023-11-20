@@ -12,9 +12,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
   final Brightness brightness = lightTheme ? Brightness.light : Brightness.dark;
 
-  final double margin = EzConfig.instance.prefs[marginKey];
-  final double padding = EzConfig.instance.prefs[paddingKey];
-
   final Color primaryColor = Color(EzConfig
       .instance.prefs[lightTheme ? lightPrimaryColorKey : darkPrimaryColorKey]);
   final Color onPrimaryColor = Color(EzConfig.instance
@@ -72,9 +69,45 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color outlineColor = Color(EzConfig
       .instance.prefs[lightTheme ? lightOutlineColorKey : darkOutlineColorKey]);
 
+  final TextTheme textTheme = ezTextTheme(onPrimaryColor);
+
+  final double margin = EzConfig.instance.prefs[marginKey];
+  final double padding = EzConfig.instance.prefs[paddingKey];
+
   // Build the ThemeData //
 
   return ThemeData(
+    // Colors
+    brightness: brightness,
+    colorScheme: ColorScheme(
+      brightness: brightness,
+      primary: primaryColor,
+      onPrimary: onPrimaryColor,
+      primaryContainer: primaryContainerColor,
+      onPrimaryContainer: onPrimaryContainerColor,
+      secondary: secondaryColor,
+      onSecondary: onSecondaryColor,
+      secondaryContainer: secondaryContainerColor,
+      onSecondaryContainer: onSecondaryContainerColor,
+      tertiary: tertiaryColor,
+      onTertiary: onTertiaryColor,
+      tertiaryContainer: tertiaryContainerColor,
+      onTertiaryContainer: onTertiaryContainerColor,
+      error: errorColor,
+      onError: onErrorColor,
+      errorContainer: errorContainerColor,
+      onErrorContainer: onErrorContainerColor,
+      background: backgroundColor,
+      onBackground: onBackgroundColor,
+      surface: surfaceColor,
+      onSurface: onSurfaceColor,
+      outline: outlineColor,
+    ),
+
+    // Text
+    fontFamily: EzConfig.instance.fontFamily,
+    textTheme: textTheme,
+
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -113,35 +146,5 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     // Cards
     cardTheme: CardTheme(margin: EdgeInsets.all(margin)),
-
-    // Colors
-    brightness: brightness,
-    colorScheme: ColorScheme(
-      brightness: brightness,
-      primary: primaryColor,
-      onPrimary: onPrimaryColor,
-      primaryContainer: primaryContainerColor,
-      onPrimaryContainer: onPrimaryContainerColor,
-      secondary: secondaryColor,
-      onSecondary: onSecondaryColor,
-      secondaryContainer: secondaryContainerColor,
-      onSecondaryContainer: onSecondaryContainerColor,
-      tertiary: tertiaryColor,
-      onTertiary: onTertiaryColor,
-      tertiaryContainer: tertiaryContainerColor,
-      onTertiaryContainer: onTertiaryContainerColor,
-      error: errorColor,
-      onError: onErrorColor,
-      errorContainer: errorContainerColor,
-      onErrorContainer: onErrorContainerColor,
-      background: backgroundColor,
-      onBackground: onBackgroundColor,
-      surface: surfaceColor,
-      onSurface: onSurfaceColor,
-      outline: outlineColor,
-    ),
-
-    // Font
-    fontFamily: EzConfig.instance.fontFamily,
   );
 }
