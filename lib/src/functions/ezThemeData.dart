@@ -74,6 +74,23 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
 
+  final TextStyle appBarTextStyle = buildHeadlineMedium(onBackgroundColor);
+  final TextStyle tabBarTextStyle = buildTitleLarge(onBackgroundColor);
+  final TextStyle buttonTextStyle = buildTitleMedium(onPrimaryColor);
+  final TextStyle dialogTitleStyle = buildTitleLarge(onBackgroundColor);
+  final TextStyle dialogContentStyle = buildBodyLarge(onBackgroundColor);
+
+  final IconThemeData iconData = IconThemeData(
+    color: buttonTextStyle.color,
+    size: buttonTextStyle.fontSize,
+  );
+  final IconThemeData appBarIconData = IconThemeData(
+    color: appBarTextStyle.color,
+    size: appBarTextStyle.fontSize,
+  );
+
+  final Color unselectedColor = blendColors(backgroundColor, onBackgroundColor);
+
   // Build the ThemeData //
 
   return ThemeData(
@@ -104,13 +121,37 @@ ThemeData ezThemeData({required bool lightTheme}) {
       outline: outlineColor,
     ),
 
-    // Text
+    // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
     textTheme: textTheme,
+    iconTheme: iconData,
+
+    // AppBar
+    appBarTheme: AppBarTheme(
+      iconTheme: appBarIconData,
+      actionsIconTheme: appBarIconData,
+      titleTextStyle: appBarTextStyle,
+    ),
+
+    // Bottom navigation
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: primaryColor,
+      selectedIconTheme: IconThemeData(
+        color: primaryColor,
+        size: buttonTextStyle.fontSize,
+      ),
+      unselectedItemColor: onPrimaryColor,
+      unselectedIconTheme: IconThemeData(
+        color: onPrimaryColor,
+        size: buttonTextStyle.fontSize,
+      ),
+    ),
 
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        textStyle: buttonTextStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
       ),
@@ -118,6 +159,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        textStyle: buttonTextStyle,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         padding: EdgeInsets.all(padding),
@@ -126,6 +168,10 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        textStyle: TextStyle(
+          color: primaryColor,
+          fontSize: buttonTextStyle.fontSize,
+        ),
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -136,6 +182,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
+        iconSize: buttonTextStyle.fontSize,
         alignment: Alignment.center,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -146,5 +193,20 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     // Cards
     cardTheme: CardTheme(margin: EdgeInsets.all(margin)),
+
+    // Dialogs
+    dialogTheme: DialogTheme(
+      titleTextStyle: dialogTitleStyle,
+      contentTextStyle: dialogContentStyle,
+      alignment: Alignment.center,
+    ),
+
+    // TabBar
+    tabBarTheme: TabBarTheme(
+      labelColor: onBackgroundColor,
+      labelStyle: tabBarTextStyle,
+      unselectedLabelColor: unselectedColor,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(color: unselectedColor),
+    ),
   );
 }
