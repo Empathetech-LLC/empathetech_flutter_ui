@@ -61,6 +61,8 @@ export 'src/functions/ezThemeData.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/storage.dart';
 export 'src/functions/text.dart';
+export 'src/functions/textStyle.dart';
+export 'src/functions/textTheme.dart';
 
 // l10n //
 
