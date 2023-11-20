@@ -83,7 +83,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   darkPrimaryColorKey: EmpathEucalyptusHex,
   darkOnPrimaryColorKey: blackHex,
-  darkPrimaryContainerColorKey: EmpathEucalyptus,
+  darkPrimaryContainerColorKey: EmpathEucalyptusHex,
   darkOnPrimaryContainerColorKey: blackHex,
 
   darkSecondaryColorKey: EmpathGoldenrodHex,
