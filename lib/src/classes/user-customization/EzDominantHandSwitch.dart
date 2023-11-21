@@ -19,19 +19,26 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather theme data //
 
   Hand currSide = EzConfig.instance.dominantHand;
-  late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
 
   @override
   Widget build(BuildContext context) {
     // Define the list items //
 
+    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
+
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(handName(context, Hand.right)),
+        child: Text(
+          handName(context, Hand.right),
+          style: style,
+        ),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(handName(context, Hand.left)),
+        child: Text(
+          handName(context, Hand.left),
+          style: style,
+        ),
         value: Hand.left,
       ),
     ];
@@ -41,7 +48,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      Text(EFUILang.of(context)!.hsDominantHand, style: _style),
+      Text(EFUILang.of(context)!.hsDominantHand, style: style),
       EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
 
       // Button
