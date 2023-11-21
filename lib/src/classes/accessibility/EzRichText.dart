@@ -17,7 +17,7 @@ class EzRichText extends StatelessWidget {
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
-  final double? textScaleFactor;
+  final TextScaler? textScaler;
   final bool showCursor;
   final bool autofocus;
   final int? minLines;
@@ -50,7 +50,7 @@ class EzRichText extends StatelessWidget {
     this.strutStyle,
     this.textAlign = TextAlign.center,
     this.textDirection,
-    this.textScaleFactor,
+    this.textScaler,
     this.showCursor = false,
     this.autofocus = false,
     this.minLines,
@@ -99,35 +99,34 @@ class EzRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      label: _buildSemantics(),
-      child: SelectableText.rich(
-        TextSpan(children: children),
-        key: key,
-        focusNode: focusNode,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        textScaleFactor: textScaleFactor,
-        showCursor: showCursor,
-        autofocus: autofocus,
-        minLines: minLines,
-        maxLines: maxLines,
-        cursorWidth: cursorWidth,
-        cursorHeight: cursorHeight,
-        cursorRadius: cursorRadius,
-        cursorColor: cursorColor,
-        selectionHeightStyle: selectionHeightStyle,
-        dragStartBehavior: dragStartBehavior,
-        enableInteractiveSelection: enableInteractiveSelection,
-        selectionControls: selectionControls,
-        scrollPhysics: scrollPhysics,
-        textHeightBehavior: textHeightBehavior,
-        textWidthBasis: textWidthBasis,
-        onSelectionChanged: onSelectionChanged,
-        magnifierConfiguration: magnifierConfiguration,
-      ),
+    return SelectableText.rich(
+      TextSpan(children: children),
+      key: key,
+      focusNode: focusNode,
+      style: style,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      textScaler: textScaler,
+      showCursor: showCursor,
+      autofocus: autofocus,
+      minLines: minLines,
+      maxLines: maxLines,
+      cursorWidth: cursorWidth,
+      cursorHeight: cursorHeight,
+      cursorRadius: cursorRadius,
+      cursorColor: cursorColor,
+      selectionHeightStyle: selectionHeightStyle,
+      dragStartBehavior: dragStartBehavior,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectionControls: selectionControls,
+      onTap: null,
+      scrollPhysics: scrollPhysics,
+      semanticsLabel: _buildSemantics(),
+      textHeightBehavior: textHeightBehavior,
+      textWidthBasis: textWidthBasis,
+      onSelectionChanged: onSelectionChanged,
+      magnifierConfiguration: magnifierConfiguration,
     );
   }
 }

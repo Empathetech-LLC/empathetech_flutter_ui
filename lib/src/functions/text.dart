@@ -12,16 +12,16 @@ bool isUrl(String text) {
 }
 
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
-/// [scalar] should be the value from MediaQuery.of(context).textScaleFactor
+/// [scaler] should be the value from MediaQuery.textScalerOf(context)
 Size measureText(
   text, {
-  required double scalar,
+  required TextScaler scaler,
   required TextStyle? style,
 }) {
   final TextPainter textPainter = TextPainter(
     text: TextSpan(text: text, style: style),
     maxLines: 1,
-    textScaleFactor: scalar,
+    textScaler: scaler,
     textDirection: TextDirection.ltr,
   )..layout();
 

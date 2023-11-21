@@ -23,16 +23,12 @@ class EzLink extends SelectableText {
   /// Destination URL
   final Uri? url;
 
-  final void Function(PointerEnterEvent)? onEnter;
-  final void Function(PointerExitEvent)? onExit;
-  final bool spellOut;
-
   final Key? key;
   final FocusNode? focusNode;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
-  final double? textScaleFactor;
+  final TextScaler? textScaler;
   final bool showCursor;
   final bool autofocus;
   final int? minLines;
@@ -63,15 +59,12 @@ class EzLink extends SelectableText {
     required this.semanticsLabel,
     this.onTap,
     this.url,
-    this.onEnter,
-    this.onExit,
-    this.spellOut = false,
     this.key,
     this.focusNode,
     this.strutStyle,
     this.textAlign = TextAlign.center,
     this.textDirection,
-    this.textScaleFactor,
+    this.textScaler,
     this.showCursor = false,
     this.autofocus = false,
     this.minLines,
@@ -97,20 +90,15 @@ class EzLink extends SelectableText {
           TextSpan(
             text: text,
             style: style,
-            semanticsLabel: semanticsLabel,
-            recognizer: new TapGestureRecognizer()
-              ..onTap = onTap ?? () => launchUrl(url!),
             mouseCursor: SystemMouseCursors.click,
-            onEnter: onEnter,
-            onExit: onExit,
-            spellOut: spellOut,
           ),
           key: key,
           focusNode: focusNode,
+          style: style,
           strutStyle: strutStyle,
           textAlign: textAlign,
           textDirection: textDirection,
-          textScaleFactor: textScaleFactor,
+          textScaler: textScaler,
           showCursor: showCursor,
           autofocus: autofocus,
           minLines: minLines,
@@ -123,7 +111,9 @@ class EzLink extends SelectableText {
           dragStartBehavior: dragStartBehavior,
           enableInteractiveSelection: enableInteractiveSelection,
           selectionControls: selectionControls,
+          onTap: onTap ?? () => launchUrl(url!),
           scrollPhysics: scrollPhysics,
+          semanticsLabel: semanticsLabel,
           textHeightBehavior: textHeightBehavior,
           textWidthBasis: textWidthBasis,
           onSelectionChanged: onSelectionChanged,

@@ -18,8 +18,8 @@ class ExampleScaffold extends StatelessWidget {
 
     final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 
-    final double textScalar = MediaQuery.of(context).textScaleFactor;
-    final double toolbarHeight = titleStyle!.fontSize! * textScalar * 2;
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+    final double toolbarHeight = textScaler.scale(titleStyle!.fontSize!) * 2;
 
     // Define AppBar widget(s) //
 
