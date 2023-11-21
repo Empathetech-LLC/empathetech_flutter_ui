@@ -44,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
               message: kIsWeb
                   ? EFUILang.of(context)!.ssSettingsGuide
                   : EFUILang.of(context)!.ssSettingsGuideWeb,
-              style: headlineSmall(context),
+              style: headlineSmall(context)?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
             EzSpacer(_buttonSpacer),
 
