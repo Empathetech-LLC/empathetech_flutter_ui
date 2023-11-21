@@ -71,7 +71,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
   final TextTheme textTheme = ezTextTheme(onPrimaryColor);
 
-  final double margin = EzConfig.instance.prefs[marginKey];
   final double padding = EzConfig.instance.prefs[paddingKey];
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(onBackgroundColor);
