@@ -76,7 +76,9 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(onBackgroundColor);
   final TextStyle tabBarTextStyle = buildTitleLarge(onBackgroundColor);
+  final TextStyle pageTextStyle = buildBodyLarge(onBackgroundColor);
   final TextStyle buttonTextStyle = buildTitleMedium(onPrimaryColor);
+  final TextStyle textButtonStyle = buildTitleMedium(primaryColor);
   final TextStyle dialogTitleStyle = buildTitleLarge(onBackgroundColor);
   final TextStyle dialogContentStyle = buildBodyLarge(onBackgroundColor);
 
@@ -151,54 +153,72 @@ ThemeData ezThemeData({required bool lightTheme}) {
     // Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        backgroundColor: primaryColor,
+        shadowColor: primaryColor,
+        foregroundColor: onPrimaryColor,
         textStyle: buttonTextStyle,
-        alignment: Alignment.center,
+        side: BorderSide(color: primaryColor),
         padding: EdgeInsets.all(padding),
+        alignment: Alignment.center,
       ),
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        textStyle: buttonTextStyle,
-        alignment: Alignment.center,
         backgroundColor: Colors.transparent,
+        shadowColor: primaryColor,
+        foregroundColor: primaryColor,
+        textStyle: textButtonStyle,
+        side: BorderSide(color: primaryColor),
         padding: EdgeInsets.all(padding),
+        alignment: Alignment.center,
       ),
     ),
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: TextStyle(
-          color: primaryColor,
-          fontSize: buttonTextStyle.fontSize,
-        ),
-        alignment: Alignment.center,
         backgroundColor: Colors.transparent,
+        foregroundColor: primaryColor,
         shadowColor: Colors.transparent,
+        textStyle: textButtonStyle,
         side: null,
         padding: EdgeInsets.zero,
+        alignment: Alignment.center,
       ),
     ),
 
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        iconSize: buttonTextStyle.fontSize,
-        alignment: Alignment.center,
         backgroundColor: Colors.transparent,
+        foregroundColor: onSurfaceColor,
         shadowColor: Colors.transparent,
+        iconSize: buttonTextStyle.fontSize,
         side: null,
         padding: EdgeInsets.zero,
+        alignment: Alignment.center,
       ),
     ),
-
-    // Cards
-    cardTheme: CardTheme(margin: EdgeInsets.all(margin)),
 
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: dialogTitleStyle,
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,
+    ),
+
+    // Dropdown menu
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: pageTextStyle,
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.all(padding),
+        fillColor: primaryColor,
+        iconColor: onPrimaryColor,
+        prefixIconColor: onPrimaryColor,
+        suffixIconColor: onPrimaryColor,
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: MaterialStatePropertyAll(primaryColor),
+      ),
     ),
 
     // TabBar
