@@ -74,6 +74,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   lightBackgroundColorKey: offWhiteHex,
   lightOnBackgroundColorKey: blackHex,
+
   lightSurfaceColorKey: whiteHex,
   lightOnSurfaceColorKey: blackHex,
 
@@ -101,9 +102,10 @@ const Map<String, dynamic> empathetechConfig = {
   darkErrorContainerColorKey: EmpathErrorRedHex,
   darkOnErrorContainerColorKey: whiteHex,
 
-  darkBackgroundColorKey: blackHex,
+  darkBackgroundColorKey: offBlackHex,
   darkOnBackgroundColorKey: whiteHex,
-  darkSurfaceColorKey: offBlackHex,
+
+  darkSurfaceColorKey: blackHex,
   darkOnSurfaceColorKey: whiteHex,
 
   darkOutlineColorKey: greyPointHex,
