@@ -255,7 +255,11 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        Text(widget.label, style: _labelStyle),
+        SelectableText(
+          widget.label,
+          style: _labelStyle,
+          textAlign: TextAlign.center,
+        ),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button

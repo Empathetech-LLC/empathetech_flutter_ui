@@ -132,6 +132,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 EFUILang.of(context)!.stsCurrently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
+                textAlign: TextAlign.center,
               ),
               EzSpacer.row(_textSpacer),
 
@@ -182,16 +183,20 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               Text(
-                  EFUILang.of(context)!.stsCurrently +
-                      currValue.toStringAsFixed(widget.decimals),
-                  style: style),
+                EFUILang.of(context)!.stsCurrently +
+                    currValue.toStringAsFixed(widget.decimals),
+                style: style,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: currValue),
 
               // Thing 2
               Text(
-                  EFUILang.of(context)!.stsCurrently +
-                      currValue.toStringAsFixed(widget.decimals),
-                  style: style),
+                EFUILang.of(context)!.stsCurrently +
+                    currValue.toStringAsFixed(widget.decimals),
+                style: style,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: _buttonSpacer),
             ],
           ),
@@ -222,7 +227,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               EzSpacer(_margin),
-              Text(widget.title, style: style),
+              Text(
+                widget.title,
+                style: style,
+                textAlign: TextAlign.center,
+              ),
               ..._buildPreview(context, style),
             ],
           ),
