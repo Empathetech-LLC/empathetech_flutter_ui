@@ -39,349 +39,309 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      body: _isLight
-          ? EzScreen(
-              decorationImageKey: lightPageImageKey,
-              child: EzScrollView(
-                children: [
-                  // Editing reminders
-                  Text(
-                    EFUILang.of(context)!.csEditingTheme(_themeProfile),
-                    style: titleSmall(context),
-                  ),
-                  EzSpacer(_textSpacer),
+      body: EzScreen(
+        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        child: EzScrollView(children: [
+          // Editing reminders
+          Text(
+            EFUILang.of(context)!.csEditingTheme(_themeProfile),
+            style: titleSmall(context),
+            textAlign: TextAlign.center,
+          ),
+          EzSpacer(_textSpacer),
 
-                  // Settings //
+          // Settings //
 
-                  // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-                  EzScrollView(
-                    scrollDirection: Axis.horizontal,
-                    mainAxisSize: MainAxisSize.min,
-                    primary: false,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Background
-                        EzColorSetting(
-                          update: lightBackgroundColorKey,
-                          label: EFUILang.of(context)!.csBackground,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: lightOnBackgroundColorKey,
-                          label: EFUILang.of(context)!.csOnBackground,
-                          textBackgroundKey: lightBackgroundColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Surface
-                        EzColorSetting(
-                          update: lightSurfaceColorKey,
-                          label: EFUILang.of(context)!.csSurface,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: lightOnSurfaceColorKey,
-                          label: EFUILang.of(context)!.csOnSurface,
-                          textBackgroundKey: lightSurfaceColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Primary
-                        EzColorSetting(
-                          updating: [
-                            lightPrimaryColorKey,
-                            lightPrimaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csPrimary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            lightOnPrimaryColorKey,
-                            lightOnPrimaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnPrimary,
-                          textBackgroundKey: lightPrimaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Secondary
-                        EzColorSetting(
-                          updating: [
-                            lightSecondaryColorKey,
-                            lightSecondaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csSecondary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            lightOnSecondaryColorKey,
-                            lightOnSecondaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnSecondary,
-                          textBackgroundKey: lightSecondaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Tertiary
-                        EzColorSetting(
-                          updating: [
-                            lightTertiaryColorKey,
-                            lightTertiaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csTertiary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            lightOnTertiaryColorKey,
-                            lightOnTertiaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnTertiary,
-                          textBackgroundKey: lightTertiaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Error
-                        EzColorSetting(
-                          updating: [
-                            lightErrorColorKey,
-                            lightErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csError,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            lightOnErrorColorKey,
-                            lightOnErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnError,
-                          textBackgroundKey: lightErrorColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Outline
-                        EzColorSetting(
-                          update: lightOutlineColorKey,
-                          label: EFUILang.of(context)!.csOutline,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                      ],
+          // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            mainAxisSize: MainAxisSize.min,
+            primary: false,
+            children: _isLight
+                ? [
+                    // Background
+                    EzColorSetting(
+                      update: lightBackgroundColorKey,
+                      label: EFUILang.of(context)!.csBackground,
                     ),
-                  ),
-                  EzSpacer(2 * _buttonSpacer),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      update: lightOnBackgroundColorKey,
+                      label: EFUILang.of(context)!.csOnBackground,
+                      textBackgroundKey: lightBackgroundColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
 
-                  // Local reset "all"
-                  EzResetButton(
-                    context: context,
-                    hint: _resetTitle,
-                    dialogTitle: _resetTitle,
-                    onConfirm: () {
-                      removeAllKeys([
-                        lightBackgroundColorKey,
-                        lightOnBackgroundColorKey,
-                        lightSurfaceColorKey,
-                        lightOnSurfaceColorKey,
+                    // Surface
+                    EzColorSetting(
+                      update: lightSurfaceColorKey,
+                      label: EFUILang.of(context)!.csSurface,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      update: lightOnSurfaceColorKey,
+                      label: EFUILang.of(context)!.csOnSurface,
+                      textBackgroundKey: lightSurfaceColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Primary
+                    EzColorSetting(
+                      updating: [
                         lightPrimaryColorKey,
-                        lightOnPrimaryColorKey,
                         lightPrimaryContainerColorKey,
-                        lightOnPrimaryContainerColorKey,
-                        lightSecondaryColorKey,
-                        lightOnSecondaryColorKey,
-                        lightSecondaryContainerColorKey,
-                        lightOnSecondaryContainerColorKey,
-                        lightTertiaryColorKey,
-                        lightOnTertiaryColorKey,
-                        lightTertiaryContainerColorKey,
-                        lightOnTertiaryContainerColorKey,
-                        lightErrorColorKey,
-                        lightOnErrorColorKey,
-                        lightErrorContainerColorKey,
-                        lightOnErrorContainerColorKey,
-                        lightOutlineColorKey,
-                      ]);
-
-                      popScreen(context: context, pass: true);
-                    },
-                  ),
-                  EzSpacer(_buttonSpacer),
-                ],
-              ),
-            )
-          : EzScreen(
-              decorationImageKey: darkPageImageKey,
-              child: EzScrollView(
-                children: [
-                  // Editing reminders
-                  Text(
-                    EFUILang.of(context)!.csEditingTheme(_themeProfile),
-                    style: titleSmall(context),
-                  ),
-                  EzSpacer(_buttonSpacer),
-
-                  // Settings //
-
-                  // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-                  EzScrollView(
-                    scrollDirection: Axis.horizontal,
-                    mainAxisSize: MainAxisSize.min,
-                    primary: false,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Background
-                        EzColorSetting(
-                          update: darkBackgroundColorKey,
-                          label: EFUILang.of(context)!.csBackground,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: darkOnBackgroundColorKey,
-                          label: EFUILang.of(context)!.csOnBackground,
-                          textBackgroundKey: darkBackgroundColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Surface
-                        EzColorSetting(
-                          update: darkSurfaceColorKey,
-                          label: EFUILang.of(context)!.csSurface,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          update: darkOnSurfaceColorKey,
-                          label: EFUILang.of(context)!.csOnSurface,
-                          textBackgroundKey: darkSurfaceColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Primary
-                        EzColorSetting(
-                          updating: [
-                            darkPrimaryColorKey,
-                            darkPrimaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csPrimary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            darkOnPrimaryColorKey,
-                            darkOnPrimaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnPrimary,
-                          textBackgroundKey: darkPrimaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Secondary
-                        EzColorSetting(
-                          updating: [
-                            darkSecondaryColorKey,
-                            darkSecondaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csSecondary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            darkOnSecondaryColorKey,
-                            darkOnSecondaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnSecondary,
-                          textBackgroundKey: darkSecondaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Tertiary
-                        EzColorSetting(
-                          updating: [
-                            darkTertiaryColorKey,
-                            darkTertiaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csTertiary,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            darkOnTertiaryColorKey,
-                            darkOnTertiaryContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnTertiary,
-                          textBackgroundKey: darkTertiaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Error
-                        EzColorSetting(
-                          updating: [
-                            darkErrorColorKey,
-                            darkErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csError,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            darkOnErrorColorKey,
-                            darkOnErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnError,
-                          textBackgroundKey: darkErrorColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Outline
-                        EzColorSetting(
-                          update: darkOutlineColorKey,
-                          label: EFUILang.of(context)!.csOutline,
-                        ),
-                        EzSpacer(_buttonSpacer),
                       ],
+                      label: EFUILang.of(context)!.csPrimary,
                     ),
-                  ),
-                  EzSpacer(2 * _buttonSpacer),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        lightOnPrimaryColorKey,
+                        lightOnPrimaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnPrimary,
+                      textBackgroundKey: lightPrimaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
 
-                  // Local reset "all"
-                  EzResetButton(
-                    context: context,
-                    hint: _resetTitle,
-                    dialogTitle: _resetTitle,
-                    onConfirm: () {
-                      removeAllKeys([
-                        darkBackgroundColorKey,
-                        darkOnBackgroundColorKey,
-                        darkSurfaceColorKey,
-                        darkOnSurfaceColorKey,
+                    // Secondary
+                    EzColorSetting(
+                      updating: [
+                        lightSecondaryColorKey,
+                        lightSecondaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csSecondary,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        lightOnSecondaryColorKey,
+                        lightOnSecondaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnSecondary,
+                      textBackgroundKey: lightSecondaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Tertiary
+                    EzColorSetting(
+                      updating: [
+                        lightTertiaryColorKey,
+                        lightTertiaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csTertiary,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        lightOnTertiaryColorKey,
+                        lightOnTertiaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnTertiary,
+                      textBackgroundKey: lightTertiaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Error
+                    EzColorSetting(
+                      updating: [
+                        lightErrorColorKey,
+                        lightErrorContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csError,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        lightOnErrorColorKey,
+                        lightOnErrorContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnError,
+                      textBackgroundKey: lightErrorColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Outline
+                    EzColorSetting(
+                      update: lightOutlineColorKey,
+                      label: EFUILang.of(context)!.csOutline,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                  ]
+                : [
+                    // Background
+                    EzColorSetting(
+                      update: darkBackgroundColorKey,
+                      label: EFUILang.of(context)!.csBackground,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      update: darkOnBackgroundColorKey,
+                      label: EFUILang.of(context)!.csOnBackground,
+                      textBackgroundKey: darkBackgroundColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Surface
+                    EzColorSetting(
+                      update: darkSurfaceColorKey,
+                      label: EFUILang.of(context)!.csSurface,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      update: darkOnSurfaceColorKey,
+                      label: EFUILang.of(context)!.csOnSurface,
+                      textBackgroundKey: darkSurfaceColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Primary
+                    EzColorSetting(
+                      updating: [
                         darkPrimaryColorKey,
-                        darkOnPrimaryColorKey,
                         darkPrimaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csPrimary,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        darkOnPrimaryColorKey,
                         darkOnPrimaryContainerColorKey,
-                        darkSecondaryColorKey,
-                        darkOnSecondaryColorKey,
-                        darkSecondaryContainerColorKey,
-                        darkOnSecondaryContainerColorKey,
-                        darkTertiaryColorKey,
-                        darkOnTertiaryColorKey,
-                        darkTertiaryContainerColorKey,
-                        darkOnTertiaryContainerColorKey,
-                        darkErrorColorKey,
-                        darkOnErrorColorKey,
-                        darkErrorContainerColorKey,
-                        darkOnErrorContainerColorKey,
-                        darkOutlineColorKey,
-                      ]);
+                      ],
+                      label: EFUILang.of(context)!.csOnPrimary,
+                      textBackgroundKey: darkPrimaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
 
-                      popScreen(context: context, pass: true);
-                    },
-                  ),
-                  EzSpacer(_buttonSpacer),
-                ],
-              ),
-            ),
+                    // Secondary
+                    EzColorSetting(
+                      updating: [
+                        darkSecondaryColorKey,
+                        darkSecondaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csSecondary,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        darkOnSecondaryColorKey,
+                        darkOnSecondaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnSecondary,
+                      textBackgroundKey: darkSecondaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Tertiary
+                    EzColorSetting(
+                      updating: [
+                        darkTertiaryColorKey,
+                        darkTertiaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csTertiary,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        darkOnTertiaryColorKey,
+                        darkOnTertiaryContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnTertiary,
+                      textBackgroundKey: darkTertiaryColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Error
+                    EzColorSetting(
+                      updating: [
+                        darkErrorColorKey,
+                        darkErrorContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csError,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                    EzColorSetting(
+                      updating: [
+                        darkOnErrorColorKey,
+                        darkOnErrorContainerColorKey,
+                      ],
+                      label: EFUILang.of(context)!.csOnError,
+                      textBackgroundKey: darkErrorColorKey,
+                    ),
+                    EzSpacer(_buttonSpacer),
+
+                    // Outline
+                    EzColorSetting(
+                      update: darkOutlineColorKey,
+                      label: EFUILang.of(context)!.csOutline,
+                    ),
+                    EzSpacer(_buttonSpacer),
+                  ],
+          ),
+
+          EzSpacer(2 * _buttonSpacer),
+
+          // Local reset "all"
+          EzResetButton(
+            context: context,
+            hint: _resetTitle,
+            dialogTitle: _resetTitle,
+            onConfirm: () {
+              removeAllKeys(_isLight
+                  ? [
+                      lightBackgroundColorKey,
+                      lightOnBackgroundColorKey,
+                      lightSurfaceColorKey,
+                      lightOnSurfaceColorKey,
+                      lightPrimaryColorKey,
+                      lightOnPrimaryColorKey,
+                      lightPrimaryContainerColorKey,
+                      lightOnPrimaryContainerColorKey,
+                      lightSecondaryColorKey,
+                      lightOnSecondaryColorKey,
+                      lightSecondaryContainerColorKey,
+                      lightOnSecondaryContainerColorKey,
+                      lightTertiaryColorKey,
+                      lightOnTertiaryColorKey,
+                      lightTertiaryContainerColorKey,
+                      lightOnTertiaryContainerColorKey,
+                      lightErrorColorKey,
+                      lightOnErrorColorKey,
+                      lightErrorContainerColorKey,
+                      lightOnErrorContainerColorKey,
+                      lightOutlineColorKey,
+                    ]
+                  : [
+                      darkBackgroundColorKey,
+                      darkOnBackgroundColorKey,
+                      darkSurfaceColorKey,
+                      darkOnSurfaceColorKey,
+                      darkPrimaryColorKey,
+                      darkOnPrimaryColorKey,
+                      darkPrimaryContainerColorKey,
+                      darkOnPrimaryContainerColorKey,
+                      darkSecondaryColorKey,
+                      darkOnSecondaryColorKey,
+                      darkSecondaryContainerColorKey,
+                      darkOnSecondaryContainerColorKey,
+                      darkTertiaryColorKey,
+                      darkOnTertiaryColorKey,
+                      darkTertiaryContainerColorKey,
+                      darkOnTertiaryContainerColorKey,
+                      darkErrorColorKey,
+                      darkOnErrorColorKey,
+                      darkErrorContainerColorKey,
+                      darkOnErrorContainerColorKey,
+                      darkOutlineColorKey,
+                    ]);
+
+              popScreen(context: context, pass: true);
+            },
+          ),
+          EzSpacer(_buttonSpacer),
+        ]),
+      ),
     );
   }
 }
