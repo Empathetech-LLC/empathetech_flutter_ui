@@ -6,14 +6,13 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - EzAlertDialog spacing
 - To Material 3
-  - Large updates ezThemeData
+  - Large updates to keys, empathetechConfig, and ezThemeData,
   - Restored iOS web icons
   - Updated textScaleFactor to textScaler
 
 ### Removed
 - EzText
 - EzTextStyle
-- EzTransitions
 
 ## [4.3.3] - 2023-11-16
 ### Updated
