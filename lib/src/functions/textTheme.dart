@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 
 /// Creates a [TextTheme] with [color] and sizes from...
@@ -32,6 +34,7 @@ TextStyle buildDisplayLarge(Color color) {
   return TextStyle(
     fontSize: 57,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -40,6 +43,7 @@ TextStyle buildDisplayMedium(Color color) {
   return TextStyle(
     fontSize: 45,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -48,6 +52,7 @@ TextStyle buildDisplaySmall(Color color) {
   return TextStyle(
     fontSize: 36,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -56,6 +61,7 @@ TextStyle buildHeadlineLarge(Color color) {
   return TextStyle(
     fontSize: 32,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -64,6 +70,7 @@ TextStyle buildHeadlineMedium(Color color) {
   return TextStyle(
     fontSize: 28,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -72,6 +79,7 @@ TextStyle buildHeadlineSmall(Color color) {
   return TextStyle(
     fontSize: 24,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -80,6 +88,7 @@ TextStyle buildTitleLarge(Color color) {
   return TextStyle(
     fontSize: 22,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -88,6 +97,7 @@ TextStyle buildTitleMedium(Color color) {
   return TextStyle(
     fontSize: 16,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -96,6 +106,7 @@ TextStyle buildTitleSmall(Color color) {
   return TextStyle(
     fontSize: 14,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -104,6 +115,7 @@ TextStyle buildLabelLarge(Color color) {
   return TextStyle(
     fontSize: 14,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -112,6 +124,7 @@ TextStyle buildLabelMedium(Color color) {
   return TextStyle(
     fontSize: 12,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -120,6 +133,7 @@ TextStyle buildLabelSmall(Color color) {
   return TextStyle(
     fontSize: 11,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -128,6 +142,7 @@ TextStyle buildBodyLarge(Color color) {
   return TextStyle(
     fontSize: 16,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -136,6 +151,7 @@ TextStyle buildBodyMedium(Color color) {
   return TextStyle(
     fontSize: 14,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
@@ -144,5 +160,6 @@ TextStyle buildBodySmall(Color color) {
   return TextStyle(
     fontSize: 12,
     color: color,
+    fontFamily: EzConfig.instance.fontFamily,
   );
 }
