@@ -250,6 +250,15 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
           ),
 
+          // Set custom style
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                shape: MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+              ),
+
           // Button body
           child: Row(
             mainAxisSize: MainAxisSize.max,
