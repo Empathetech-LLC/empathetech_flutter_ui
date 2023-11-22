@@ -86,15 +86,12 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             ),
             EzSpacer(2 * _buttonSpacer),
 
-            // Local reset "all"
+            // Local reset all
             EzResetButton(
               context: context,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeAllKeys(
-                  _isLight ? [lightPageImageKey] : [darkPageImageKey],
-                );
-
+                removeAllKeys(_isLight ? lightImageKeys : darkImageKeys);
                 popScreen(context: context, pass: true);
               },
             ),

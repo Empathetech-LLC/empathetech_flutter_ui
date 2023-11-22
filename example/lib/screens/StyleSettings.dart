@@ -102,18 +102,12 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             ),
             EzSpacer(2 * _buttonSpacer),
 
-            // Local reset "all"
+            // Local reset all
             EzResetButton(
               context: context,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
-                EzConfig.instance.preferences.remove(fontFamilyKey);
-                EzConfig.instance.preferences.remove(marginKey);
-                EzConfig.instance.preferences.remove(paddingKey);
-                EzConfig.instance.preferences.remove(circleDiameterKey);
-                EzConfig.instance.preferences.remove(buttonSpacingKey);
-                EzConfig.instance.preferences.remove(textSpacingKey);
-
+                removeAllKeys(stylingKeys);
                 popScreen(context: context, pass: true);
               },
             ),
