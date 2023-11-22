@@ -69,8 +69,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final Color outlineColor = Color(EzConfig
       .instance.prefs[lightTheme ? lightOutlineColorKey : darkOutlineColorKey]);
 
-  final TextTheme textTheme = ezTextTheme(onPrimaryColor);
-
   final double padding = EzConfig.instance.prefs[paddingKey];
 
   final TextStyle appBarTextStyle = buildHeadlineMedium(onBackgroundColor);
@@ -81,6 +79,8 @@ ThemeData ezThemeData({required bool lightTheme}) {
   final TextStyle dialogTitleStyle = buildTitleLarge(onBackgroundColor);
   final TextStyle dialogContentStyle = buildBodyLarge(onBackgroundColor);
 
+  final TextTheme textTheme = ezTextTheme(onBackgroundColor);
+
   final IconThemeData iconData = IconThemeData(
     color: buttonTextStyle.color,
     size: buttonTextStyle.fontSize,
@@ -89,8 +89,6 @@ ThemeData ezThemeData({required bool lightTheme}) {
     color: appBarTextStyle.color,
     size: appBarTextStyle.fontSize,
   );
-
-  final Color unselectedColor = blendColors(backgroundColor, onBackgroundColor);
 
   // Build the ThemeData //
 
@@ -125,7 +123,12 @@ ThemeData ezThemeData({required bool lightTheme}) {
     // Text && icons
     fontFamily: EzConfig.instance.fontFamily,
     textTheme: textTheme,
+    primaryTextTheme: textTheme,
     iconTheme: iconData,
+    primaryIconTheme: iconData,
+
+    // Animations
+    pageTransitionsTheme: EzTransitions(),
 
     // AppBar
     appBarTheme: AppBarTheme(
@@ -198,6 +201,27 @@ ThemeData ezThemeData({required bool lightTheme}) {
       ),
     ),
 
+    // Cards
+    cardTheme: CardTheme(
+      color: surfaceColor,
+      shadowColor: secondaryColor,
+      margin: EdgeInsets.zero,
+    ),
+
+    // Checkbox
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return primaryColor;
+          } else {
+            return onBackgroundColor;
+          }
+        },
+      ),
+      checkColor: MaterialStateProperty.all(primaryColor),
+    ),
+
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: dialogTitleStyle,
@@ -220,12 +244,30 @@ ThemeData ezThemeData({required bool lightTheme}) {
       ),
     ),
 
+    // Sliders
+    sliderTheme: SliderThemeData(
+      overlayShape: SliderComponentShape.noOverlay,
+      overlayColor: Colors.transparent,
+      thumbColor: primaryColor,
+      activeTrackColor: primaryColor,
+      valueIndicatorColor: primaryColor,
+      activeTickMarkColor: onPrimaryColor,
+      disabledThumbColor: Colors.transparent,
+      disabledActiveTrackColor: Colors.transparent,
+      disabledInactiveTrackColor: Colors.transparent,
+      disabledActiveTickMarkColor: Colors.transparent,
+      disabledInactiveTickMarkColor: Colors.transparent,
+      disabledSecondaryActiveTrackColor: Colors.transparent,
+      inactiveTrackColor: outlineColor,
+      inactiveTickMarkColor: onBackgroundColor,
+    ),
+
     // TabBar
     tabBarTheme: TabBarTheme(
       labelColor: onBackgroundColor,
       labelStyle: tabBarTextStyle,
-      unselectedLabelColor: unselectedColor,
-      unselectedLabelStyle: tabBarTextStyle.copyWith(color: unselectedColor),
+      unselectedLabelColor: outlineColor,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(color: outlineColor),
     ),
   );
 }
