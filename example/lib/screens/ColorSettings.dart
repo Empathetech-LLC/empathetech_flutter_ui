@@ -64,12 +64,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Background
                         EzColorSetting(
                           update: lightBackgroundColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
                           update: lightOnBackgroundColorKey,
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnBackground,
                           textBackgroundKey: lightBackgroundColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -77,12 +77,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Surface
                         EzColorSetting(
                           update: lightSurfaceColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
                           update: lightOnSurfaceColorKey,
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnSurface,
                           textBackgroundKey: lightSurfaceColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -93,7 +93,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightPrimaryColorKey,
                             lightPrimaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csPrimary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -101,7 +101,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightOnPrimaryColorKey,
                             lightOnPrimaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnPrimary,
                           textBackgroundKey: lightPrimaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -112,7 +112,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightSecondaryColorKey,
                             lightSecondaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csSecondary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -120,7 +120,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightOnSecondaryColorKey,
                             lightOnSecondaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnSecondary,
                           textBackgroundKey: lightSecondaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -131,7 +131,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightTertiaryColorKey,
                             lightTertiaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csTertiary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -139,7 +139,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightOnTertiaryColorKey,
                             lightOnTertiaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnTertiary,
                           textBackgroundKey: lightTertiaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -150,7 +150,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightErrorColorKey,
                             lightErrorContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csError,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -158,7 +158,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             lightOnErrorColorKey,
                             lightOnErrorContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnError,
                           textBackgroundKey: lightErrorColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -166,7 +166,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Outline
                         EzColorSetting(
                           update: lightOutlineColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csOutline,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
@@ -235,12 +235,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Background
                         EzColorSetting(
                           update: darkBackgroundColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
                           update: darkOnBackgroundColorKey,
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnBackground,
                           textBackgroundKey: darkBackgroundColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -248,12 +248,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Surface
                         EzColorSetting(
                           update: darkSurfaceColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
                           update: darkOnSurfaceColorKey,
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnSurface,
                           textBackgroundKey: darkSurfaceColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -264,7 +264,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkPrimaryColorKey,
                             darkPrimaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csPrimary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -272,7 +272,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkOnPrimaryColorKey,
                             darkOnPrimaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnPrimary,
                           textBackgroundKey: darkPrimaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -283,7 +283,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkSecondaryColorKey,
                             darkSecondaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csSecondary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -291,7 +291,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkOnSecondaryColorKey,
                             darkOnSecondaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnSecondary,
                           textBackgroundKey: darkSecondaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -302,7 +302,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkTertiaryColorKey,
                             darkTertiaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csTertiary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -310,7 +310,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkOnTertiaryColorKey,
                             darkOnTertiaryContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnTertiary,
                           textBackgroundKey: darkTertiaryColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -321,7 +321,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkErrorColorKey,
                             darkErrorContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csError,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
@@ -329,7 +329,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                             darkOnErrorColorKey,
                             darkOnErrorContainerColorKey,
                           ],
-                          name: EFUILang.of(context)!.csThemeText,
+                          name: EFUILang.of(context)!.csOnError,
                           textBackgroundKey: darkErrorColorKey,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -337,7 +337,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         // Outline
                         EzColorSetting(
                           update: darkOutlineColorKey,
-                          name: EFUILang.of(context)!.csTheme,
+                          name: EFUILang.of(context)!.csOutline,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
