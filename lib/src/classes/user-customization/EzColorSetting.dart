@@ -21,8 +21,8 @@ class EzColorSetting extends StatefulWidget {
   /// Provide [updating] or [update]
   final List<String>? updating;
 
-  /// User-friendly [name] of the color whose value will be updated
-  final String name;
+  /// User-friendly [label] of the color whose value will be updated
+  final String label;
 
   /// Optional [EzConfig.instance] key that controls the background color when [updating] text colors
   final String? textBackgroundKey;
@@ -33,13 +33,15 @@ class EzColorSetting extends StatefulWidget {
   final String? autoUpdateTextKey;
 
   /// Creates a tool for [updating] color values in [EzConfig]
-  /// If [updating] a TextColor, provide [textBackgroundKey]
+  /// If [update] or [updating] are text Colors, provide [textBackgroundKey]
   /// [textBackgroundKey]s [EzConfig.instance] value will be used to generate a recommendation via [getTextColor]
+  /// If [update] or [updating] are surface Colors, optionally provide [autoUpdateTextKey]
+  /// If provided, when the base color is updated, [autoUpdateTextKey] will be set via [getTextColor]
   const EzColorSetting({
     this.key,
     this.update,
     this.updating,
-    required this.name,
+    required this.label,
     this.textBackgroundKey,
     this.autoUpdateTextKey,
   })  : assert(
@@ -246,13 +248,13 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        Text(widget.name, style: _labelStyle),
+        Text(widget.label, style: _labelStyle),
         EzSpacer.row(_buttonSpacer),
 
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: EFUILang.of(context)!.csPickerSemantics(widget.name),
+          hint: EFUILang.of(context)!.csPickerSemantics(widget.label),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
