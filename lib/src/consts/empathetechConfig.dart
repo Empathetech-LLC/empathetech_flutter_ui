@@ -29,7 +29,7 @@ const int blackHex = 0xFF000000;
 const int offBlackHex = 0xFF191919;
 const Color offBlack = Color(offBlackHex);
 
-const int greyPointHex = 0xFF878787;
+const int greyPointHex = 0xFF808080;
 const Color greyPoint = Color(greyPointHex);
 
 // EzConfig base ///
