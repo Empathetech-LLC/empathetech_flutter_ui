@@ -28,17 +28,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
-        child: Text(
-          handName(context, Hand.right),
-          style: style,
-        ),
+        child: Text(handName(context, Hand.right)),
         value: Hand.right,
       ),
       DropdownMenuItem<Hand>(
-        child: Text(
-          handName(context, Hand.left),
-          style: style,
-        ),
+        child: Text(handName(context, Hand.left)),
         value: Hand.left,
       ),
     ];
