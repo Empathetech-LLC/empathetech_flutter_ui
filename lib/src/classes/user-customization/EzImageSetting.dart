@@ -122,7 +122,10 @@ class _ImageSettingState extends State<EzImageSetting> {
               return StatefulBuilder(
                 builder: (context, setState) {
                   return EzAlertDialog(
-                    title: Text(EFUILang.of(context)!.isEnterURL),
+                    title: Text(
+                      EFUILang.of(context)!.isEnterURL,
+                      textAlign: TextAlign.center,
+                    ),
                     contents: [
                       PlatformTextFormField(
                         onChanged: (value) {
@@ -215,7 +218,10 @@ class _ImageSettingState extends State<EzImageSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: Text(EFUILang.of(context)!.isDialogTitle(widget.title)),
+        title: Text(
+          EFUILang.of(context)!.isDialogTitle(widget.title),
+          textAlign: TextAlign.center,
+        ),
         contents: options,
       ),
     );
@@ -245,8 +251,16 @@ class _ImageSettingState extends State<EzImageSetting> {
           onLongPress: () => showPlatformDialog(
             context: context,
             builder: (context) => EzAlertDialog(
-              title: Text(EFUILang.of(context)!.isCreditTo),
-              contents: [Text(widget.credits)],
+              title: Text(
+                EFUILang.of(context)!.isCreditTo,
+                textAlign: TextAlign.center,
+              ),
+              contents: [
+                SelectableText(
+                  widget.credits,
+                  textAlign: TextAlign.center,
+                )
+              ],
             ),
           ),
 

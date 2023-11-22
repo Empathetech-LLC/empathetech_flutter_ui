@@ -70,9 +70,15 @@ class EzResetButton extends StatelessWidget {
       onPressed: () => showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: Text(_dialogTitle),
+          title: Text(
+            _dialogTitle,
+            textAlign: TextAlign.center,
+          ),
           contents: [
-            Text(dialogContent ?? EFUILang.of(context)!.dResetDialogContent),
+            Text(
+              dialogContent ?? EFUILang.of(context)!.dResetDialogContent,
+              textAlign: TextAlign.center,
+            ),
           ],
           materialActions: ezMaterialActions(
             context: context,

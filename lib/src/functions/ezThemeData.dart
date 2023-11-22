@@ -205,6 +205,7 @@ ThemeData ezThemeData({required bool lightTheme}) {
     // Cards
     cardTheme: CardTheme(
       color: surfaceColor,
+      surfaceTintColor: null,
       shadowColor: secondaryColor,
       margin: EdgeInsets.zero,
     ),
@@ -226,8 +227,9 @@ ThemeData ezThemeData({required bool lightTheme}) {
     // Dialogs
     dialogTheme: DialogTheme(
       backgroundColor: surfaceColor,
-      iconColor: onSurfaceColor,
+      surfaceTintColor: null,
       shadowColor: secondaryColor,
+      iconColor: onSurfaceColor,
       titleTextStyle: dialogTitleStyle,
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,

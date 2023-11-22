@@ -77,7 +77,7 @@ class EzWarning extends StatelessWidget {
                 EzSpacer(padding),
 
                 // Label
-                Text(
+                SelectableText(
                   message,
                   style: style,
                   textAlign: TextAlign.center,

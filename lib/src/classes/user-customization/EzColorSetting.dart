@@ -150,7 +150,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: Text(EFUILang.of(context)!.csRecommended),
+          title: Text(
+            EFUILang.of(context)!.csRecommended,
+            textAlign: TextAlign.center,
+          ),
           // Recommended color preview
           contents: [
             Container(
@@ -213,7 +216,10 @@ class _ColorSettingState extends State<EzColorSetting> {
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: Text(EFUILang.of(context)!.csResetTo),
+        title: Text(
+          EFUILang.of(context)!.csResetTo,
+          textAlign: TextAlign.center,
+        ),
         // Reset color preview
         contents: [
           Container(
