@@ -30,6 +30,7 @@ class EzColorSetting extends StatefulWidget {
   /// Optional [EzConfig.instance] key that controls the text color, assuming [update] or [updating] are surface keys
   /// If provided, when the base color is updated, [autoUpdateTextKey] will be set via [getTextColor]
   /// And/or will reset alongside the base color
+  /// Note: if you have another [EzColorSetting] tracking the same key, the auto update will NOT visually update the other button
   final String? autoUpdateTextKey;
 
   /// Creates a tool for [updating] color values in [EzConfig]
