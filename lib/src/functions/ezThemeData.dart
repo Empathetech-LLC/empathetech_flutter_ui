@@ -140,12 +140,13 @@ ThemeData ezThemeData({required bool lightTheme}) {
     // Bottom navigation
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
+      backgroundColor: surfaceColor,
       selectedItemColor: primaryColor,
       selectedIconTheme: IconThemeData(
         color: primaryColor,
         size: buttonTextStyle.fontSize,
       ),
-      unselectedItemColor: onPrimaryColor,
+      unselectedItemColor: onSurfaceColor,
       unselectedIconTheme: IconThemeData(
         color: onPrimaryColor,
         size: buttonTextStyle.fontSize,
@@ -224,10 +225,16 @@ ThemeData ezThemeData({required bool lightTheme}) {
 
     // Dialogs
     dialogTheme: DialogTheme(
+      backgroundColor: surfaceColor,
+      iconColor: onSurfaceColor,
+      shadowColor: secondaryColor,
       titleTextStyle: dialogTitleStyle,
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,
     ),
+
+    // Drawer
+    drawerTheme: DrawerThemeData(backgroundColor: surfaceColor),
 
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
