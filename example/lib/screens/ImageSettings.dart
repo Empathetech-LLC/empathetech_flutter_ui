@@ -46,6 +46,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             Text(
               EFUILang.of(context)!.dEditingTheme(_themeProfile),
               style: titleSmall(context),
+              textAlign: TextAlign.center,
             ),
             EzSpacer(_textSpacer),
 
