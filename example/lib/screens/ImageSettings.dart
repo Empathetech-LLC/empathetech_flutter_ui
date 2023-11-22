@@ -70,19 +70,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(2 * _buttonSpacer),
-
-                        // Local reset "all"
-                        EzResetButton(
-                          context: context,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.instance.preferences
-                                .remove(lightPageImageKey);
-
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
                       ]
                     : // Editing dark theme //
                     [
@@ -94,23 +81,23 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
                         ),
-                        EzSpacer(2 * _buttonSpacer),
-
-                        // Local reset "all"
-                        EzResetButton(
-                          context: context,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.instance.preferences
-                                .remove(darkPageImageKey);
-
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
                       ],
               ),
             ),
+            EzSpacer(2 * _buttonSpacer),
 
+            // Local reset "all"
+            EzResetButton(
+              context: context,
+              dialogTitle: _resetTitle,
+              onConfirm: () {
+                removeAllKeys(
+                  _isLight ? [lightPageImageKey] : [darkPageImageKey],
+                );
+
+                popScreen(context: context, pass: true);
+              },
+            ),
             EzSpacer(_buttonSpacer),
           ],
         ),
