@@ -27,6 +27,11 @@ class EzColorSetting extends StatefulWidget {
   /// Optional [EzConfig.instance] key that controls the background color when [updating] text colors
   final String? textBackgroundKey;
 
+  /// Optional [EzConfig.instance] key that controls the text color, assuming [update] or [updating] are surface keys
+  /// If provided, when the base color is updated, [autoUpdateTextKey] will be set via [getTextColor]
+  /// And/or will reset alongside the base color
+  final String? autoUpdateTextKey;
+
   /// Creates a tool for [updating] color values in [EzConfig]
   /// If [updating] a TextColor, provide [textBackgroundKey]
   /// [textBackgroundKey]s [EzConfig.instance] value will be used to generate a recommendation via [getTextColor]
@@ -36,8 +41,12 @@ class EzColorSetting extends StatefulWidget {
     this.updating,
     required this.name,
     this.textBackgroundKey,
-  })  : assert((update == null) != (updating == null || updating.length == 0),
-            'Either update or updating should be provided, but not both'),
+    this.autoUpdateTextKey,
+  })  : assert(
+          (update == null) != (updating == null || updating.length == 0) &&
+              (!(textBackgroundKey != null && autoUpdateTextKey != null)),
+          'Either update or updating should be provided, but not both\nEither decoration or decorationImageKey can be provided, but not both.',
+        ),
         super(key: key);
 
   @override
@@ -79,6 +88,11 @@ class _ColorSettingState extends State<EzColorSetting> {
           }
         } else {
           EzConfig.instance.preferences.setInt(widget.update!, currColor.value);
+        }
+
+        if (widget.autoUpdateTextKey != null) {
+          EzConfig.instance.preferences
+              .setInt(widget.autoUpdateTextKey!, getTextColor(currColor).value);
         }
 
         popScreen(context: context, pass: currColor.value);
@@ -178,6 +192,10 @@ class _ColorSettingState extends State<EzColorSetting> {
         }
       } else {
         EzConfig.instance.preferences.remove(widget.update!);
+      }
+
+      if (widget.autoUpdateTextKey != null) {
+        EzConfig.instance.preferences.remove(widget.autoUpdateTextKey!);
       }
 
       setState(() {
