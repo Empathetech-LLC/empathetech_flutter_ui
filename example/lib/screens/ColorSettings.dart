@@ -64,12 +64,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     ? [
                         // Background
                         EzColorSetting(
-                          update: lightBackgroundColorKey,
+                          updating: [lightBackgroundColorKey],
                           label: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          update: lightOnBackgroundColorKey,
+                          updating: [lightOnBackgroundColorKey],
                           label: EFUILang.of(context)!.csOnBackground,
                           textBackgroundKey: lightBackgroundColorKey,
                         ),
@@ -77,12 +77,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
                         // Surface
                         EzColorSetting(
-                          update: lightSurfaceColorKey,
+                          updating: [lightSurfaceColorKey],
                           label: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          update: lightOnSurfaceColorKey,
+                          updating: [lightOnSurfaceColorKey],
                           label: EFUILang.of(context)!.csOnSurface,
                           textBackgroundKey: lightSurfaceColorKey,
                         ),
@@ -166,7 +166,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
                         // Outline
                         EzColorSetting(
-                          update: lightOutlineColorKey,
+                          updating: [lightOutlineColorKey],
                           label: EFUILang.of(context)!.csOutline,
                         ),
                         EzSpacer(_buttonSpacer),
@@ -174,12 +174,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     : [
                         // Background
                         EzColorSetting(
-                          update: darkBackgroundColorKey,
+                          updating: [darkBackgroundColorKey],
                           label: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          update: darkOnBackgroundColorKey,
+                          updating: [darkOnBackgroundColorKey],
                           label: EFUILang.of(context)!.csOnBackground,
                           textBackgroundKey: darkBackgroundColorKey,
                         ),
@@ -187,12 +187,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
                         // Surface
                         EzColorSetting(
-                          update: darkSurfaceColorKey,
+                          updating: [darkSurfaceColorKey],
                           label: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          update: darkOnSurfaceColorKey,
+                          updating: [darkOnSurfaceColorKey],
                           label: EFUILang.of(context)!.csOnSurface,
                           textBackgroundKey: darkSurfaceColorKey,
                         ),
@@ -276,7 +276,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
                         // Outline
                         EzColorSetting(
-                          update: darkOutlineColorKey,
+                          updating: [darkOutlineColorKey],
                           label: EFUILang.of(context)!.csOutline,
                         ),
                         EzSpacer(_buttonSpacer),
