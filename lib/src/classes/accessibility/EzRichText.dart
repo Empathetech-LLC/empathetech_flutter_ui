@@ -48,7 +48,7 @@ class EzRichText extends StatelessWidget {
     this.focusNode,
     this.style,
     this.strutStyle,
-    this.textAlign = TextAlign.center,
+    this.textAlign,
     this.textDirection,
     this.textScaler,
     this.showCursor = false,
