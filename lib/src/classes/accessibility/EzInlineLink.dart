@@ -20,8 +20,10 @@ class EzInlineLink extends TextSpan {
   /// Destination URL
   final Uri? url;
 
+  final MouseCursor mouseCursor;
   final void Function(PointerEnterEvent)? onEnter;
   final void Function(PointerExitEvent)? onExit;
+  final Locale? locale;
   final bool spellOut;
 
   /// [TextSpan] wrapper that either opens an internal link via [onTap]
@@ -33,8 +35,10 @@ class EzInlineLink extends TextSpan {
     required this.semanticsLabel,
     this.onTap,
     this.url,
+    this.mouseCursor = SystemMouseCursors.click,
     this.onEnter,
     this.onExit,
+    this.locale,
     this.spellOut = false,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -44,9 +48,10 @@ class EzInlineLink extends TextSpan {
           semanticsLabel: semanticsLabel,
           recognizer: new TapGestureRecognizer()
             ..onTap = onTap ?? () => launchUrl(url!),
-          mouseCursor: SystemMouseCursors.click,
+          mouseCursor: mouseCursor,
           onEnter: onEnter,
           onExit: onExit,
+          locale: locale,
           spellOut: spellOut,
         );
 }
