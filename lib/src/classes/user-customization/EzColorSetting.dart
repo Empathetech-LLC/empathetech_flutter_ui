@@ -11,44 +11,41 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzColorSetting extends StatefulWidget {
   final Key? key;
 
-  /// [EzConfig.instance] key whose value will be updated
-  /// Provide [update] or [updating]
-  final String? update;
-
   /// [EzConfig.instance] keys whose values will be updated
   /// Only provide keys whose values should always be identical
-  /// [EzColorSetting] is lazy and will only use the first value for generating previews
-  /// Provide [updating] or [update]
-  final List<String>? updating;
+  /// [EzColorSetting] is lazy and will use the first value for generating previews
+  final List<String> updating;
 
-  /// User-friendly [label] of the color whose value will be updated
+  /// User-friendly [label] for the color whose value will be updated
   final String label;
 
   /// Optional [EzConfig.instance] key that controls the background color when [updating] text colors
+  /// This will update the user's prompt, first asking if they would like to use the color from [getTextColor]
+  /// Or provide a custom color
   final String? textBackgroundKey;
 
-  /// Optional [EzConfig.instance] key that controls the text color, assuming [update] or [updating] are surface keys
-  /// If provided, when the base color is updated, [autoUpdateTextKey] will be set via [getTextColor]
-  /// And/or will reset alongside the base color
-  /// Note: if you have another [EzColorSetting] tracking the same key, the auto update will NOT visually update the other button
-  final String? autoUpdateTextKey;
+  /// Optional [EzConfig.instance] keys that should be automatically changed based on what we're [updating]
+  /// If provided, when the base color(s) update, [autoUpdatingTextKeys] will be set via [getTextColor]
+  /// And/or reset alongside the base color
+  final List<String>? autoUpdatingTextKeys;
 
   /// Creates a tool for [updating] color values in [EzConfig]
-  /// If [update] or [updating] are text Colors, provide [textBackgroundKey]
+  /// If [updating] text colors, provide the [textBackgroundKey]
   /// [textBackgroundKey]s [EzConfig.instance] value will be used to generate a recommendation via [getTextColor]
-  /// If [update] or [updating] are surface Colors, optionally provide [autoUpdateTextKey]
-  /// If provided, when the base color is updated, [autoUpdateTextKey] will be set via [getTextColor]
+  /// If [updating] are surface colors (logically, not Material-y), optionally provide [autoUpdatingTextKeys]
+  /// When provided, and the base color is updated, [autoUpdatingTextKeys] will be set via [getTextColor]
   const EzColorSetting({
     this.key,
-    this.update,
-    this.updating,
+    required this.updating,
     required this.label,
     this.textBackgroundKey,
-    this.autoUpdateTextKey,
+    this.autoUpdatingTextKeys,
   })  : assert(
-          (update == null) != (updating == null || updating.length == 0) &&
-              (!(textBackgroundKey != null && autoUpdateTextKey != null)),
-          'Either update or updating should be provided, but not both\nEither decoration or decorationImageKey can be provided, but not both.',
+          (!((textBackgroundKey != null && textBackgroundKey.length != 0) &&
+                  (autoUpdatingTextKeys != null &&
+                      autoUpdatingTextKeys.length != 0)) &&
+              updating.length != 0),
+          'Provided lists cannot be empty and either textBackgroundKey or autoUpdatingTextKeys can be provided, but not both.',
         ),
         super(key: key);
 
@@ -59,9 +56,7 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather theme data //
 
-  late Color currColor = (widget.update == null)
-      ? Color(EzConfig.instance.prefs[widget.updating![0]])
-      : Color(EzConfig.instance.prefs[widget.update]);
+  late Color currColor = Color(EzConfig.instance.prefs[widget.updating[0]]);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   final double _diameter = EzConfig.instance.prefs[circleDiameterKey];
@@ -85,17 +80,15 @@ class _ColorSettingState extends State<EzColorSetting> {
       },
       onConfirm: () {
         // Update the user's setting
-        if (widget.update == null) {
-          for (String key in widget.updating!) {
-            EzConfig.instance.preferences.setInt(key, currColor.value);
-          }
-        } else {
-          EzConfig.instance.preferences.setInt(widget.update!, currColor.value);
+        for (String key in widget.updating) {
+          EzConfig.instance.preferences.setInt(key, currColor.value);
         }
 
-        if (widget.autoUpdateTextKey != null) {
-          EzConfig.instance.preferences
-              .setInt(widget.autoUpdateTextKey!, getTextColor(currColor).value);
+        if (widget.autoUpdatingTextKeys != null) {
+          for (String key in widget.autoUpdatingTextKeys!) {
+            EzConfig.instance.preferences
+                .setInt(key, getTextColor(currColor).value);
+          }
         }
 
         popScreen(context: context, pass: currColor.value);
@@ -127,12 +120,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       final void Function() onConfirm = () {
         // Update the user's setting
-        if (widget.update == null) {
-          for (String key in widget.updating!) {
-            EzConfig.instance.preferences.setInt(key, recommended);
-          }
-        } else {
-          EzConfig.instance.preferences.setInt(widget.update!, recommended);
+        for (String key in widget.updating) {
+          EzConfig.instance.preferences.setInt(key, recommended);
         }
 
         setState(() {
@@ -183,25 +172,25 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for confirming a reset to [update]'s value in [empathetechConfig]
-  /// A preview of the reset color is shown
+  /// Opens an [EzAlertDialog] for resetting the color(s) to default
+  /// A preview of the reset color is shown, taken from the first in the list
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor = Color(EzConfig.instance.defaults[widget.update]);
+    final Color resetColor =
+        Color(EzConfig.instance.defaults[widget.updating[0]]);
 
     // Define action button parameters //
 
     final void Function() onConfirm = () {
       // Remove the user's setting and reset the current state
-      if (widget.update == null) {
-        for (String key in widget.updating!) {
-          EzConfig.instance.preferences.remove(key);
-        }
-      } else {
-        EzConfig.instance.preferences.remove(widget.update!);
+
+      for (String key in widget.updating) {
+        EzConfig.instance.preferences.remove(key);
       }
 
-      if (widget.autoUpdateTextKey != null) {
-        EzConfig.instance.preferences.remove(widget.autoUpdateTextKey!);
+      if (widget.autoUpdatingTextKeys != null) {
+        for (String key in widget.autoUpdatingTextKeys!) {
+          EzConfig.instance.preferences.remove(key);
+        }
       }
 
       setState(() {
