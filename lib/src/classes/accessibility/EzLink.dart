@@ -62,7 +62,7 @@ class EzLink extends SelectableText {
     this.key,
     this.focusNode,
     this.strutStyle,
-    this.textAlign = TextAlign.center,
+    this.textAlign,
     this.textDirection,
     this.textScaler,
     this.showCursor = false,
