@@ -91,6 +91,8 @@ class EzLink extends SelectableText {
             text: text,
             style: style,
             mouseCursor: SystemMouseCursors.click,
+            recognizer: TapGestureRecognizer()
+              ..onTap = onTap ?? () => launchUrl(url!),
           ),
           key: key,
           focusNode: focusNode,
@@ -111,7 +113,7 @@ class EzLink extends SelectableText {
           dragStartBehavior: dragStartBehavior,
           enableInteractiveSelection: enableInteractiveSelection,
           selectionControls: selectionControls,
-          onTap: onTap ?? () => launchUrl(url!),
+          onTap: null,
           scrollPhysics: scrollPhysics,
           semanticsLabel: semanticsLabel,
           textHeightBehavior: textHeightBehavior,
