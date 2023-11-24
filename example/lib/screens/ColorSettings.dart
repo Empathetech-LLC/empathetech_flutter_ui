@@ -44,7 +44,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         child: EzScrollView(
           children: [
             // Editing reminders
-            Text(
+            SelectableText(
               EFUILang.of(context)!.csEditingTheme(_themeProfile),
               style: titleSmall(context),
               textAlign: TextAlign.center,
