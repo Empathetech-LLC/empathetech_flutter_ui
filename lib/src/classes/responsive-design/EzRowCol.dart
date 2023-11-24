@@ -24,7 +24,7 @@ class EzRowCol extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
-    return limitedSpace ? row : col;
+    return limitedSpace ? col : row;
   }
 
   /// [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
