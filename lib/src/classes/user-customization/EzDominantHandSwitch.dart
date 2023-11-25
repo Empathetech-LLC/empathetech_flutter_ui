@@ -42,7 +42,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define the build contents locally so it can be reversed in real-time alongside user selections
     List<Widget> _children = [
       // Label
-      SelectableText(
+      Text(
         EFUILang.of(context)!.hsDominantHand,
         style: style,
         textAlign: TextAlign.center,

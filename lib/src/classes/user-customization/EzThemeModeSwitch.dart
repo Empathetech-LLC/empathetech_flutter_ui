@@ -61,7 +61,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Label
-        SelectableText(
+        Text(
           EFUILang.of(context)!.hsThemeMode,
           style: style,
           textAlign: TextAlign.center,

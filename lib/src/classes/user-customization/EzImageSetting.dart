@@ -256,7 +256,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 textAlign: TextAlign.center,
               ),
               contents: [
-                SelectableText(
+                Text(
                   widget.credits,
                   textAlign: TextAlign.center,
                 )

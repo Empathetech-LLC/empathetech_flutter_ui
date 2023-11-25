@@ -244,7 +244,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Color label
-        SelectableText(
+        Text(
           widget.label,
           style: _labelStyle,
           textAlign: TextAlign.center,

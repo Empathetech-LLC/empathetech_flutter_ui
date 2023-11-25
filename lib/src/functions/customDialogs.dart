@@ -25,7 +25,7 @@ Future<dynamic> logAlert({
         textAlign: TextAlign.center,
       ),
       contents: [
-        SelectableText(
+        Text(
           message,
           textAlign: TextAlign.center,
         )
