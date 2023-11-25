@@ -33,30 +33,32 @@ class ExampleScaffold extends StatelessWidget {
 
     // Return the build //
 
-    return Scaffold(
-      // AppBar
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, toolbarHeight),
-        child: AppBar(
-          excludeHeaderSemantics: true,
-          toolbarHeight: toolbarHeight,
+    return SelectionArea(
+      child: Scaffold(
+        // AppBar
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, toolbarHeight),
+          child: AppBar(
+            excludeHeaderSemantics: true,
+            toolbarHeight: toolbarHeight,
 
-          // Leading
-          automaticallyImplyLeading: (leftHandedUser) ? false : true,
+            // Leading
+            automaticallyImplyLeading: (leftHandedUser) ? false : true,
 
-          // Title
-          title: titleLink,
-          titleSpacing: 0,
-          centerTitle: true,
+            // Title
+            title: titleLink,
+            titleSpacing: 0,
+            centerTitle: true,
 
-          // Actions (aka trailing)
-          actions: (leftHandedUser) ? [EzBackAction()] : null,
+            // Actions (aka trailing)
+            actions: (leftHandedUser) ? [EzBackAction()] : null,
+          ),
         ),
-      ),
 
-      // Body
-      body: body,
-      floatingActionButton: null,
+        // Body
+        body: body,
+        floatingActionButton: null,
+      ),
     );
   }
 }
