@@ -5,71 +5,32 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class EzRichText extends StatelessWidget {
   final List<InlineSpan> children;
   final Key? key;
-  final FocusNode? focusNode;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
   final TextScaler? textScaler;
-  final bool showCursor;
-  final bool autofocus;
-  final int? minLines;
   final int? maxLines;
-  final double cursorWidth;
-  final double? cursorHeight;
-  final Radius? cursorRadius;
-  final Color? cursorColor;
-  final BoxHeightStyle selectionHeightStyle;
-  final BoxWidthStyle selectionWidthStyle;
-  final DragStartBehavior dragStartBehavior;
-  final bool enableInteractiveSelection;
-  final TextSelectionControls? selectionControls;
-  final ScrollPhysics scrollPhysics;
-  final TextHeightBehavior? textHeightBehavior;
   final TextWidthBasis? textWidthBasis;
-  final void Function(TextSelection, SelectionChangedCause?)?
-      onSelectionChanged;
-  final EditableTextContextMenuBuilder? contextMenuBuilder;
-  final TextMagnifierConfiguration? magnifierConfiguration;
+  final TextHeightBehavior? textHeightBehavior;
 
-  /// [TextSpan] wrapper with customized defaults and pre-configured [Semantics]
-  /// Recommended to use [EzPlainText] rather than [TextSpan]
-  /// Also see [EzInlineLink]
+  /// [Text.rich] wrapper with customized defaults and pre-configured [Semantics]
   EzRichText(
     this.children, {
     this.key,
-    this.focusNode,
     this.style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
     this.textScaler,
-    this.showCursor = false,
-    this.autofocus = false,
-    this.minLines,
     this.maxLines,
-    this.cursorWidth = 2.0,
-    this.cursorHeight,
-    this.cursorRadius,
-    this.cursorColor,
-    this.selectionHeightStyle = BoxHeightStyle.tight,
-    this.selectionWidthStyle = BoxWidthStyle.tight,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.enableInteractiveSelection = true,
-    this.selectionControls,
-    this.scrollPhysics = const NeverScrollableScrollPhysics(),
-    this.textHeightBehavior,
     this.textWidthBasis,
-    this.onSelectionChanged,
-    this.contextMenuBuilder,
-    this.magnifierConfiguration,
+    this.textHeightBehavior,
   });
 
   String _buildSemantics() {
@@ -99,34 +60,18 @@ class EzRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText.rich(
+    return Text.rich(
       TextSpan(children: children),
       key: key,
-      focusNode: focusNode,
       style: style,
       strutStyle: strutStyle,
       textAlign: textAlign,
       textDirection: textDirection,
       textScaler: textScaler,
-      showCursor: showCursor,
-      autofocus: autofocus,
-      minLines: minLines,
       maxLines: maxLines,
-      cursorWidth: cursorWidth,
-      cursorHeight: cursorHeight,
-      cursorRadius: cursorRadius,
-      cursorColor: cursorColor,
-      selectionHeightStyle: selectionHeightStyle,
-      dragStartBehavior: dragStartBehavior,
-      enableInteractiveSelection: enableInteractiveSelection,
-      selectionControls: selectionControls,
-      onTap: null,
-      scrollPhysics: scrollPhysics,
       semanticsLabel: _buildSemantics(),
-      textHeightBehavior: textHeightBehavior,
       textWidthBasis: textWidthBasis,
-      onSelectionChanged: onSelectionChanged,
-      magnifierConfiguration: magnifierConfiguration,
+      textHeightBehavior: textHeightBehavior,
     );
   }
 }
