@@ -52,19 +52,23 @@ class EzLink extends StatelessWidget {
       link: true,
       hint: semanticsLabel,
       child: ExcludeSemantics(
-        child: GestureDetector(
-          onTap: onTap ?? () => launchUrl(url!),
-          child: Text(
-            text,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            textScaler: textScaler,
-            maxLines: maxLines,
-            semanticsLabel: null,
-            textWidthBasis: textWidthBasis,
-            textHeightBehavior: textHeightBehavior,
+        child: MouseRegion(
+          key: key,
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: onTap ?? () => launchUrl(url!),
+            child: Text(
+              text,
+              style: style,
+              strutStyle: strutStyle,
+              textAlign: textAlign,
+              textDirection: textDirection,
+              textScaler: textScaler,
+              maxLines: maxLines,
+              semanticsLabel: null,
+              textWidthBasis: textWidthBasis,
+              textHeightBehavior: textHeightBehavior,
+            ),
           ),
         ),
       ),
