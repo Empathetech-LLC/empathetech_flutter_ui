@@ -32,89 +32,6 @@ const Color offBlack = Color(offBlackHex);
 const int greyPointHex = 0xFF808080;
 const Color greyPoint = Color(greyPointHex);
 
-// EzConfig base ///
-
-/// Empathetech's base theme configuration for [EzConfig]
-const Map<String, dynamic> empathetechConfig = {
-  // Styling
-
-  fontFamilyKey: roboto,
-
-  marginKey: 15.0,
-  paddingKey: 15.0,
-
-  circleDiameterKey: 45.0,
-
-  buttonSpacingKey: 30.0,
-  textSpacingKey: 60.0,
-
-  // Colors
-
-  // Light
-
-  lightPrimaryColorKey: EmpathPurpleHex,
-  lightOnPrimaryColorKey: whiteHex,
-  lightPrimaryContainerColorKey: EmpathPurpleHex,
-  lightOnPrimaryContainerColorKey: whiteHex,
-
-  lightSecondaryColorKey: EmpathGoldenrodHex,
-  lightOnSecondaryColorKey: blackHex,
-  lightSecondaryContainerColorKey: EmpathGoldenrodHex,
-  lightOnSecondaryContainerColorKey: blackHex,
-
-  lightTertiaryColorKey: EmpathEucalyptusHex,
-  lightOnTertiaryColorKey: blackHex,
-  lightTertiaryContainerColorKey: EmpathEucalyptusHex,
-  lightOnTertiaryContainerColorKey: blackHex,
-
-  lightErrorColorKey: EmpathErrorRedHex,
-  lightOnErrorColorKey: whiteHex,
-  lightErrorContainerColorKey: EmpathErrorRedHex,
-  lightOnErrorContainerColorKey: whiteHex,
-
-  lightBackgroundColorKey: offWhiteHex,
-  lightOnBackgroundColorKey: blackHex,
-
-  lightSurfaceColorKey: whiteHex,
-  lightOnSurfaceColorKey: blackHex,
-
-  lightOutlineColorKey: greyPointHex,
-
-  // Dark
-
-  darkPrimaryColorKey: EmpathEucalyptusHex,
-  darkOnPrimaryColorKey: blackHex,
-  darkPrimaryContainerColorKey: EmpathEucalyptusHex,
-  darkOnPrimaryContainerColorKey: blackHex,
-
-  darkSecondaryColorKey: EmpathGoldenrodHex,
-  darkOnSecondaryColorKey: blackHex,
-  darkSecondaryContainerColorKey: EmpathGoldenrodHex,
-  darkOnSecondaryContainerColorKey: blackHex,
-
-  darkTertiaryColorKey: EmpathPurpleHex,
-  darkOnTertiaryColorKey: whiteHex,
-  darkTertiaryContainerColorKey: EmpathPurpleHex,
-  darkOnTertiaryContainerColorKey: whiteHex,
-
-  darkErrorColorKey: EmpathErrorRedHex,
-  darkOnErrorColorKey: whiteHex,
-  darkErrorContainerColorKey: EmpathErrorRedHex,
-  darkOnErrorContainerColorKey: whiteHex,
-
-  darkBackgroundColorKey: offBlackHex,
-  darkOnBackgroundColorKey: whiteHex,
-
-  darkSurfaceColorKey: blackHex,
-  darkOnSurfaceColorKey: whiteHex,
-
-  darkOutlineColorKey: greyPointHex,
-
-  // Images
-  lightPageImageKey: noImageKey,
-  darkPageImageKey: noImageKey,
-};
-
 // Public links //
 
 /// One of us, one of us, one of us!
@@ -158,3 +75,96 @@ const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
 
 /// If you want to show some love
 const String EmpathetechKofi = "https://ko-fi.com/empathetech";
+
+// EzConfig ///
+
+/// Empathetech's default configuration for [EzConfig]
+const Map<String, dynamic> empathetechConfig = {
+  // Global settings
+
+  localeKey: ["en", "US"],
+
+  // Image settings
+
+  lightPageImageKey: noImageKey,
+  darkPageImageKey: noImageKey,
+
+  // Color settings
+
+  // isLightKey == null => ThemeMode == System
+
+  // Light
+  lightBackgroundColorKey: offWhiteHex,
+  lightOnBackgroundColorKey: blackHex,
+
+  lightSurfaceColorKey: whiteHex,
+  lightOnSurfaceColorKey: blackHex,
+
+  lightPrimaryColorKey: EmpathPurpleHex,
+  lightOnPrimaryColorKey: whiteHex,
+  lightPrimaryContainerColorKey: EmpathPurpleHex,
+  lightOnPrimaryContainerColorKey: whiteHex,
+
+  lightSecondaryColorKey: EmpathGoldenrodHex,
+  lightOnSecondaryColorKey: blackHex,
+  lightSecondaryContainerColorKey: EmpathGoldenrodHex,
+  lightOnSecondaryContainerColorKey: blackHex,
+
+  lightTertiaryColorKey: EmpathEucalyptusHex,
+  lightOnTertiaryColorKey: blackHex,
+  lightTertiaryContainerColorKey: EmpathEucalyptusHex,
+  lightOnTertiaryContainerColorKey: blackHex,
+
+  lightErrorColorKey: EmpathErrorRedHex,
+  lightOnErrorColorKey: whiteHex,
+  lightErrorContainerColorKey: EmpathErrorRedHex,
+  lightOnErrorContainerColorKey: whiteHex,
+
+  lightOutlineColorKey: greyPointHex,
+
+  // Dark
+  darkBackgroundColorKey: offBlackHex,
+  darkOnBackgroundColorKey: whiteHex,
+
+  darkSurfaceColorKey: blackHex,
+  darkOnSurfaceColorKey: whiteHex,
+
+  darkPrimaryColorKey: EmpathEucalyptusHex,
+  darkOnPrimaryColorKey: blackHex,
+  darkPrimaryContainerColorKey: EmpathEucalyptusHex,
+  darkOnPrimaryContainerColorKey: blackHex,
+
+  darkSecondaryColorKey: EmpathGoldenrodHex,
+  darkOnSecondaryColorKey: blackHex,
+  darkSecondaryContainerColorKey: EmpathGoldenrodHex,
+  darkOnSecondaryContainerColorKey: blackHex,
+
+  darkTertiaryColorKey: EmpathPurpleHex,
+  darkOnTertiaryColorKey: whiteHex,
+  darkTertiaryContainerColorKey: EmpathPurpleHex,
+  darkOnTertiaryContainerColorKey: whiteHex,
+
+  darkErrorColorKey: EmpathErrorRedHex,
+  darkOnErrorColorKey: whiteHex,
+  darkErrorContainerColorKey: EmpathErrorRedHex,
+  darkOnErrorContainerColorKey: whiteHex,
+
+  darkOutlineColorKey: greyPointHex,
+
+  // Layout settings
+
+  isRightKey: true,
+
+  marginKey: 15.0,
+
+  textSpacingKey: 60.0,
+  buttonSpacingKey: 30.0,
+
+  // Style settings
+
+  fontFamilyKey: roboto,
+
+  paddingKey: 15.0,
+
+  circleDiameterKey: 45.0,
+};
