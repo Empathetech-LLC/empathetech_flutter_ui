@@ -62,7 +62,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       children: [
         // Label
         Text(
-          EFUILang.of(context)!.hsThemeMode,
+          EFUILang.of(context)!.csThemeMode,
           style: style,
           textAlign: TextAlign.center,
         ),
@@ -72,7 +72,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         Semantics(
           button: true,
           hint:
-              "${EFUILang.of(context)!.hsThemeSemantics} ${_getName(currMode)}",
+              "${EFUILang.of(context)!.csThemeSemantics} ${_getName(currMode)}",
           child: ExcludeSemantics(
             child: DropdownButton<ThemeMode>(
               value: currMode,

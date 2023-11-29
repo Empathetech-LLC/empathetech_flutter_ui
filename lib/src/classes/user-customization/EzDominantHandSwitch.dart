@@ -43,7 +43,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     List<Widget> _children = [
       // Label
       Text(
-        EFUILang.of(context)!.hsDominantHand,
+        EFUILang.of(context)!.lsDominantHand,
         style: style,
         textAlign: TextAlign.center,
       ),
@@ -53,7 +53,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       Semantics(
         button: true,
         hint:
-            "${EFUILang.of(context)!.hsHandSemantics} ${handName(context, currSide)}",
+            "${EFUILang.of(context)!.lsHandSemantics} ${handName(context, currSide)}",
         child: ExcludeSemantics(
           child: DropdownButton<Hand>(
             value: currSide,
