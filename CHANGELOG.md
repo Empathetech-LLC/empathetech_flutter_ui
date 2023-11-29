@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file.
   - Large updates to keys, empathetechConfig, and ezThemeData,
   - Restored iOS web icons
   - Updated textScaleFactor to textScaler
+  - Using SelectionArea rather than SelectableText
+- Added EzLocaleSetting
+  - Re-arranged the settings screens
+- Made EzLink a TextButton
+- Expanded EzRowCol
 
 ### Removed
 - EzText
