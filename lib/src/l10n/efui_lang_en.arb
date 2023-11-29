@@ -39,6 +39,7 @@
   "ssSettingsGuide": "Each button will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
   "ssSettingsGuideWeb": "Each button will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
   "ssLanguage": "Language",
+  "ssLangSemantics": "Activate to update the app language",
   "ssResetAll": "Reset all settings?",
 
   "isPageTitle": "Image settings",

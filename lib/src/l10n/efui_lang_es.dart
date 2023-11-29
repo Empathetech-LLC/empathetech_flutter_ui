@@ -109,6 +109,10 @@ class EFUILangEs extends EFUILang {
   String get ssLanguage => 'Idioma';
 
   @override
+  String get ssLangSemantics =>
+      'Activa para actualizar el idioma de la aplicación';
+
+  @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override

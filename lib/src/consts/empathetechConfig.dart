@@ -153,7 +153,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   // Layout settings
 
-  isRightKey: true,
+  // isRightKey == null => Hand == right
 
   marginKey: 15.0,
 

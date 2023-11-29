@@ -280,6 +280,12 @@ abstract class EFUILang {
   /// **'Language'**
   String get ssLanguage;
 
+  /// No description provided for @ssLangSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to update the app language'**
+  String get ssLangSemantics;
+
   /// No description provided for @ssResetAll.
   ///
   /// In en, this message translates to:

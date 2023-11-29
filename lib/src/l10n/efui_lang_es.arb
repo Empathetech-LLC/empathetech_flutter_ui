@@ -39,6 +39,7 @@
   "ssSettingsGuide": "Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "ssSettingsGuideWeb": "Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "ssLanguage": "Idioma",
+  "ssLangSemantics": "Activa para actualizar el idioma de la aplicación",
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
   "isPageTitle": "Configuraciones de imagen",
