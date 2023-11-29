@@ -11,22 +11,22 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gRight => 'Right';
-
-  @override
   String get gLeft => 'Left';
 
   @override
+  String get gRight => 'Right';
+
+  @override
   String get gApply => 'Apply';
+
+  @override
+  String get gContinue => 'Continue';
 
   @override
   String get gCancel => 'Cancel';
 
   @override
   String get gClose => 'Close';
-
-  @override
-  String get gContinue => 'Continue';
 
   @override
   String get gSystem => 'System';
@@ -38,16 +38,10 @@ class EFUILangEn extends EFUILang {
   String get gDark => 'Dark';
 
   @override
-  String get gPage => 'Page';
-
-  @override
   String get gPlay => 'Play';
 
   @override
   String get gPause => 'Pause';
-
-  @override
-  String get gMute => 'Mute';
 
   @override
   String get gReplay => 'Replay';
@@ -56,30 +50,36 @@ class EFUILangEn extends EFUILang {
   String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
 
   @override
-  String get dHomeHint => 'Return to the home screen';
+  String get gMute => 'Mute';
 
   @override
-  String get dResetAll => 'Reset all';
+  String get gPage => 'Page';
 
   @override
-  String get dResetDialogTitle => 'Reset all settings?';
+  String get gHomeHint => 'Return to the home screen';
 
   @override
-  String get dResetDialogContent => 'Cannot be undone';
+  String get gAttention => 'Attention';
 
   @override
-  String get dAttention => 'Attention';
+  String get gResetAll => 'Reset all';
 
   @override
-  String get dResetAllWarn =>
+  String get gResetDialogTitle => 'Reset all settings?';
+
+  @override
+  String get gResetDialogContent => 'Cannot be undone';
+
+  @override
+  String get gResetAllWarn =>
       'Cannot be undone\nChanges take effect on app restart';
 
   @override
-  String get dResetAllWarnWeb =>
+  String get gResetAllWarnWeb =>
       'Cannot be undone\nChanges take effect on page reload';
 
   @override
-  String dEditingTheme(Object themeType) {
+  String gEditingTheme(Object themeType) {
     return 'Editing: $themeType theme';
   }
 

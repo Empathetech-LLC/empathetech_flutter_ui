@@ -106,23 +106,29 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
-  /// No description provided for @gRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Right'**
-  String get gRight;
-
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:
   /// **'Left'**
   String get gLeft;
 
+  /// No description provided for @gRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get gRight;
+
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
   /// **'Apply'**
   String get gApply;
+
+  /// No description provided for @gContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get gContinue;
 
   /// No description provided for @gCancel.
   ///
@@ -135,12 +141,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Close'**
   String get gClose;
-
-  /// No description provided for @gContinue.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue'**
-  String get gContinue;
 
   /// No description provided for @gSystem.
   ///
@@ -160,12 +160,6 @@ abstract class EFUILang {
   /// **'Dark'**
   String get gDark;
 
-  /// No description provided for @gPage.
-  ///
-  /// In en, this message translates to:
-  /// **'Page'**
-  String get gPage;
-
   /// No description provided for @gPlay.
   ///
   /// In en, this message translates to:
@@ -177,12 +171,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Pause'**
   String get gPause;
-
-  /// No description provided for @gMute.
-  ///
-  /// In en, this message translates to:
-  /// **'Mute'**
-  String get gMute;
 
   /// No description provided for @gReplay.
   ///
@@ -196,53 +184,65 @@ abstract class EFUILang {
   /// **'Auto-play videos are disabled.'**
   String get gAutoPlayDisabled;
 
-  /// No description provided for @dHomeHint.
+  /// No description provided for @gMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get gMute;
+
+  /// No description provided for @gPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Page'**
+  String get gPage;
+
+  /// No description provided for @gHomeHint.
   ///
   /// In en, this message translates to:
   /// **'Return to the home screen'**
-  String get dHomeHint;
+  String get gHomeHint;
 
-  /// No description provided for @dResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all'**
-  String get dResetAll;
-
-  /// No description provided for @dResetDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all settings?'**
-  String get dResetDialogTitle;
-
-  /// No description provided for @dResetDialogContent.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone'**
-  String get dResetDialogContent;
-
-  /// No description provided for @dAttention.
+  /// No description provided for @gAttention.
   ///
   /// In en, this message translates to:
   /// **'Attention'**
-  String get dAttention;
+  String get gAttention;
 
-  /// No description provided for @dResetAllWarn.
+  /// No description provided for @gResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all'**
+  String get gResetAll;
+
+  /// No description provided for @gResetDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all settings?'**
+  String get gResetDialogTitle;
+
+  /// No description provided for @gResetDialogContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be undone'**
+  String get gResetDialogContent;
+
+  /// No description provided for @gResetAllWarn.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone\nChanges take effect on app restart'**
-  String get dResetAllWarn;
+  String get gResetAllWarn;
 
-  /// No description provided for @dResetAllWarnWeb.
+  /// No description provided for @gResetAllWarnWeb.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone\nChanges take effect on page reload'**
-  String get dResetAllWarnWeb;
+  String get gResetAllWarnWeb;
 
-  /// No description provided for @dEditingTheme.
+  /// No description provided for @gEditingTheme.
   ///
   /// In en, this message translates to:
   /// **'Editing: {themeType} theme'**
-  String dEditingTheme(Object themeType);
+  String gEditingTheme(Object themeType);
 
   /// No description provided for @hsThemeMode.
   ///

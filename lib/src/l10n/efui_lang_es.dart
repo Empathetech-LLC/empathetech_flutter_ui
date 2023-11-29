@@ -11,22 +11,22 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gRight => 'Derecha';
-
-  @override
   String get gLeft => 'Izquierda';
 
   @override
+  String get gRight => 'Derecha';
+
+  @override
   String get gApply => 'Aplicar';
+
+  @override
+  String get gContinue => 'Continuar';
 
   @override
   String get gCancel => 'Cancelar';
 
   @override
   String get gClose => 'Cerrar';
-
-  @override
-  String get gContinue => 'Continuar';
 
   @override
   String get gSystem => 'Sistema';
@@ -38,16 +38,10 @@ class EFUILangEs extends EFUILang {
   String get gDark => 'Oscuro';
 
   @override
-  String get gPage => 'Página';
-
-  @override
   String get gPlay => 'Reproducir';
 
   @override
   String get gPause => 'Pausar';
-
-  @override
-  String get gMute => 'Silenciar';
 
   @override
   String get gReplay => 'Repetir';
@@ -57,30 +51,36 @@ class EFUILangEs extends EFUILang {
       'La reproducción automática de videos está desactivada.';
 
   @override
-  String get dHomeHint => 'Regresar a la pantalla principal';
+  String get gMute => 'Silenciar';
 
   @override
-  String get dResetAll => 'Restablecer todo';
+  String get gPage => 'Página';
 
   @override
-  String get dResetDialogTitle => '¿Restablecer todas las configuraciones?';
+  String get gHomeHint => 'Regresar a la pantalla principal';
 
   @override
-  String get dResetDialogContent => 'No se puede deshacer';
+  String get gAttention => 'Atención';
 
   @override
-  String get dAttention => 'Atención';
+  String get gResetAll => 'Restablecer todo';
 
   @override
-  String get dResetAllWarn =>
+  String get gResetDialogTitle => '¿Restablecer todas las configuraciones?';
+
+  @override
+  String get gResetDialogContent => 'No se puede deshacer';
+
+  @override
+  String get gResetAllWarn =>
       'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
 
   @override
-  String get dResetAllWarnWeb =>
+  String get gResetAllWarnWeb =>
       'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
 
   @override
-  String dEditingTheme(Object themeType) {
+  String gEditingTheme(Object themeType) {
     return 'Editando: tema $themeType';
   }
 
