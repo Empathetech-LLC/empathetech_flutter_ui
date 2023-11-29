@@ -6,6 +6,8 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:country_flags/country_flags.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzLocaleSetting extends StatefulWidget {
   /// Pass in any custom [supportedLocales]
@@ -23,81 +25,85 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   Locale currLocale = EzConfig.instance.locale;
 
-  @override
-  Widget build(BuildContext context) {
-    // Gather the list items //
+  final double _padding = EzConfig.instance.prefs[paddingKey];
+  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
+  // Gather the list items //
 
+  Widget _flag(Locale locale) {
+    return (locale.countryCode == null)
+        ? CountryFlag.fromLanguageCode(locale.languageCode)
+        : CountryFlag.fromCountryCode(locale.countryCode!);
+  }
+
+  /// Builds an [EzAlertDialog] with [Locale]s mapped to a list of [ElevatedButton]s
+  Future<dynamic> _chooseLocale(BuildContext context) {
     final List<Locale> _locales = (widget.locales == null)
         ? EFUILang.supportedLocales
         : EFUILang.supportedLocales + widget.locales!;
 
-    final List<DropdownMenuItem<Locale>> items = _locales.map((locale) {
-      return DropdownMenuItem<Locale>(
-        child: Text(locale.toString()),
-        value: locale,
-      );
-    }).toList();
+    List<Widget> buttons = [];
 
-    // Return the build //
+    _locales.forEach((Locale locale) {
+      List<String> localeData = [locale.languageCode];
+      locale.countryCode ?? localeData.add(locale.countryCode!);
 
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Label
-        Text(
-          EFUILang.of(context)!.hsLanguage,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
-
-        // Button
-        Semantics(
-          button: true,
-          hint:
-              "${EFUILang.of(context)!.hsThemeSemantics} ${_getName(currMode)}",
-          child: ExcludeSemantics(
-            child: DropdownButton<ThemeMode>(
-              value: currMode,
-              items: items,
-              dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-              onChanged: (ThemeMode? newThemeMode) {
-                switch (newThemeMode) {
-                  case ThemeMode.system:
-                    EzConfig.instance.preferences.remove(isLightKey);
-                    setState(() {
-                      currMode = ThemeMode.system;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.system;
-                    });
-                    break;
-
-                  case ThemeMode.light:
-                    EzConfig.instance.preferences.setBool(isLightKey, true);
-                    setState(() {
-                      currMode = ThemeMode.light;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.light;
-                    });
-                    break;
-
-                  case ThemeMode.dark:
-                    EzConfig.instance.preferences.setBool(isLightKey, false);
-                    setState(() {
-                      currMode = ThemeMode.dark;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
-                    });
-                    break;
-
-                  default:
-                    break;
-                }
-              },
-            ),
+      buttons.addAll([
+        ElevatedButton(
+          onPressed: () {
+            EzConfig.instance.preferences.setStringList(localeKey, localeData);
+            setState(() {
+              currLocale = locale;
+            });
+            popScreen(context: context, pass: locale);
+          },
+          child: EzRow(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _flag(locale),
+              EzSpacer.row(_padding),
+              Text(
+                locale.toString(),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
-      ],
+        EzSpacer(_buttonSpacer),
+      ]);
+    });
+
+    return showPlatformDialog(
+      context: context,
+      builder: (context) => EzAlertDialog(
+        title: Text(
+          EFUILang.of(context)!.ssLanguages,
+          textAlign: TextAlign.center,
+        ),
+        contents: buttons,
+      ),
+    );
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => _chooseLocale(context),
+      child: EzRow(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _flag(currLocale),
+          EzSpacer.row(_padding),
+          Text(
+            EFUILang.of(context)!.ssLanguage,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
