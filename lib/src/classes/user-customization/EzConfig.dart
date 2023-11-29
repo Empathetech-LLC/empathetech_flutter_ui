@@ -10,40 +10,42 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Singleton class for managing user customization
 class EzConfig {
-  /// [AssetImage] paths for this app
-  final List<String> assets;
-
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
+
+  /// [AssetImage] paths for the app
+  final List<String> assets;
 
   /// The factory constructor will merge [empathetechConfig] with any provided customDefaults
   final Map<String, dynamic> defaults;
 
-  /// Live values in use => [defaults] merged with user [preferences]
+  /// Live values in use
+  /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
-  /// Current [googleStyles] for the app to use
+  /// Current locale/language for the app
+  final Locale locale;
+
+  /// Current [googleStyles] family for the app
   final String? fontFamily;
 
   /// What side of the screen touch points should be on
   final Hand dominantHand;
 
   /// Private instance
-  /// The factory constructor + singleton combo requires an internally mutable [instance]
   static EzConfig? _instance;
 
   /// Private/internal constructor
   const EzConfig._({
-    required this.assets,
     required this.preferences,
+    required this.assets,
     required this.defaults,
     required this.prefs,
+    required this.locale,
     this.fontFamily,
     required this.dominantHand,
   });
 
-  /// Factory/external constructor
-  ///
   /// [assetPaths] => provide your [AssetImage] paths for this app
   /// [preferences] => provide a [SharedPreferences] instance
   /// [customDefaults] => provide your brand colors, custom styling, etc
@@ -98,7 +100,12 @@ class EzConfig {
         if (userPref != null) _prefs[key] = userPref;
       });
 
-      // Build EzConfig.hand //
+      // Gather trackers //
+      final List<String> _languageData = _prefs[localeKey].split(',');
+      final Locale _locale = Locale(_languageData[0], _languageData[1]);
+
+      final String? _fontFamily =
+          googleStyles[(_prefs[fontFamilyKey])]?.fontFamily;
 
       bool? isRight = preferences.getBool(isRightKey);
       final Hand _dominantHand =
@@ -111,7 +118,8 @@ class EzConfig {
         preferences: preferences,
         defaults: _defaults,
         prefs: _prefs,
-        fontFamily: googleStyles[(_prefs[fontFamilyKey])]?.fontFamily,
+        locale: _locale,
+        fontFamily: _fontFamily,
         dominantHand: _dominantHand,
       );
     }
