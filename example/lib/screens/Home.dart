@@ -48,18 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             EzSpacer(_buttonSpacer),
 
-            // Theme mode switch
-            const EzThemeModeSwitch(),
+            // Global settings
+            const EzLocaleSetting(),
             EzSpacer(_buttonSpacer),
 
-            // Dominant hand switch
-            const EzDominantHandSwitch(),
-            EzSpacer(_buttonSpacer),
-
-            // Style settings
+            // Image settings
             ElevatedButton(
-              onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(EFUILang.of(context)!.stsPageTitle),
+              onPressed: () => context.goNamed(imageSettingsRoute),
+              child: Text(EFUILang.of(context)!.isPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 
@@ -70,11 +66,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             EzSpacer(_buttonSpacer),
 
-            // Image settings
-
+            // Layout settings
             ElevatedButton(
-              onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(EFUILang.of(context)!.isPageTitle),
+              onPressed: () => context.goNamed(layoutSettingsRoute),
+              child: Text(EFUILang.of(context)!.lsPageTitle),
+            ),
+            EzSpacer(_buttonSpacer),
+
+            // Style settings
+            ElevatedButton(
+              onPressed: () => context.goNamed(styleSettingsRoute),
+              child: Text(EFUILang.of(context)!.stsPageTitle),
             ),
             EzSpacer(2 * _buttonSpacer),
 
