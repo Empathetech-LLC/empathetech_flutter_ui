@@ -42,18 +42,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             const EzFontSetting(),
             EzSpacer(_buttonSpacer),
 
-            // Margin
-            EzSliderSetting(
-              prefsKey: marginKey,
-              type: SliderSettingType.margin,
-              title: EFUILang.of(context)!.lsMargin,
-              min: 5.0,
-              max: 50.0,
-              steps: 18,
-              decimals: 1,
-            ),
-            EzSpacer(_buttonSpacer),
-
             // Padding
             EzSliderSetting(
               prefsKey: paddingKey,
@@ -77,30 +65,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               decimals: 0,
             ),
             EzSpacer(_buttonSpacer),
-
-            // Button spacing
-            EzSliderSetting(
-              prefsKey: buttonSpacingKey,
-              type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.lsButtonSpacing,
-              min: 10.0,
-              max: 100.0,
-              steps: 18,
-              decimals: 0,
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Text spacing
-            EzSliderSetting(
-              prefsKey: textSpacingKey,
-              type: SliderSettingType.textSpacing,
-              title: EFUILang.of(context)!.lsTextSpacing,
-              min: 10.0,
-              max: 100.0,
-              steps: 18,
-              decimals: 0,
-            ),
-            EzSpacer(2 * _buttonSpacer),
 
             // Local reset all
             EzResetButton(

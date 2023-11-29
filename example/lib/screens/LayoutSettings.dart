@@ -37,9 +37,9 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
-            // Font
+            // Dominant hand
             EzSpacer(_buttonSpacer > _margin ? _buttonSpacer - _margin : 0),
-            const EzFontSetting(),
+            const EzDominantHandSwitch(),
             EzSpacer(_buttonSpacer),
 
             // Margin
@@ -51,42 +51,6 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
               max: 50.0,
               steps: 18,
               decimals: 1,
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Padding
-            EzSliderSetting(
-              prefsKey: paddingKey,
-              type: SliderSettingType.padding,
-              title: EFUILang.of(context)!.stsPadding,
-              min: 0.0,
-              max: 50.0,
-              steps: 20,
-              decimals: 1,
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Circle button size
-            EzSliderSetting(
-              prefsKey: circleDiameterKey,
-              type: SliderSettingType.circleSize,
-              title: EFUILang.of(context)!.stsCircleSize,
-              min: 30,
-              max: 100,
-              steps: 14,
-              decimals: 0,
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Button spacing
-            EzSliderSetting(
-              prefsKey: buttonSpacingKey,
-              type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.lsButtonSpacing,
-              min: 10.0,
-              max: 100.0,
-              steps: 18,
-              decimals: 0,
             ),
             EzSpacer(_buttonSpacer),
 
@@ -102,12 +66,24 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             ),
             EzSpacer(2 * _buttonSpacer),
 
+            // Button spacing
+            EzSliderSetting(
+              prefsKey: buttonSpacingKey,
+              type: SliderSettingType.buttonSpacing,
+              title: EFUILang.of(context)!.lsButtonSpacing,
+              min: 10.0,
+              max: 100.0,
+              steps: 18,
+              decimals: 0,
+            ),
+            EzSpacer(_buttonSpacer),
+
             // Local reset all
             EzResetButton(
               context: context,
-              dialogTitle: EFUILang.of(context)!.stsResetAll,
+              dialogTitle: EFUILang.of(context)!.lsResetAll,
               onConfirm: () {
-                removeAllKeys(styleKeys);
+                removeAllKeys(layoutKeys);
                 popScreen(context: context, pass: true);
               },
             ),
