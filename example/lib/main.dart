@@ -99,11 +99,14 @@ class EFUIExample extends StatelessWidget {
         // Production ready!
         debugShowCheckedModeBanner: false,
 
+        // Language handlers
+        localizationsDelegates: EFUILang.localizationsDelegates,
+
         // Supported languages
         supportedLocales: EFUILang.supportedLocales,
 
-        // Language handlers
-        localizationsDelegates: EFUILang.localizationsDelegates,
+        // Current language
+        locale: EzConfig.instance.locale,
 
         title: "Empathetech Flutter UI",
         routerConfig: _router,
