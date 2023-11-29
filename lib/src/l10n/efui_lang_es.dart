@@ -17,6 +17,12 @@ class EFUILangEs extends EFUILang {
   String get gRight => 'Derecha';
 
   @override
+  String get gHomeHint => 'Regresar a la pantalla principal';
+
+  @override
+  String get gAttention => 'Atención';
+
+  @override
   String get gApply => 'Aplicar';
 
   @override
@@ -29,38 +35,20 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
-  String get gSystem => 'Sistema';
+  String get gCurrently => 'Actualmente: ';
 
   @override
-  String get gLight => 'Ligero';
+  String gSetToValue(Object name, Object value) {
+    return '$name está configurado actualmente en $value';
+  }
 
   @override
-  String get gDark => 'Oscuro';
+  String get gReset => 'Restablecer: ';
 
   @override
-  String get gPlay => 'Reproducir';
-
-  @override
-  String get gPause => 'Pausar';
-
-  @override
-  String get gReplay => 'Repetir';
-
-  @override
-  String get gAutoPlayDisabled =>
-      'La reproducción automática de videos está desactivada.';
-
-  @override
-  String get gMute => 'Silenciar';
-
-  @override
-  String get gPage => 'Página';
-
-  @override
-  String get gHomeHint => 'Regresar a la pantalla principal';
-
-  @override
-  String get gAttention => 'Atención';
+  String gResetToValue(Object name, Object value) {
+    return 'Restablecer $name a $value';
+  }
 
   @override
   String get gResetAll => 'Restablecer todo';
@@ -85,6 +73,31 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get gSystem => 'Sistema';
+
+  @override
+  String get gLight => 'Ligero';
+
+  @override
+  String get gDark => 'Oscuro';
+
+  @override
+  String get gPlay => 'Reproducir';
+
+  @override
+  String get gPause => 'Pausar';
+
+  @override
+  String get gReplay => 'Repetir';
+
+  @override
+  String get gMute => 'Silenciar';
+
+  @override
+  String get gAutoPlayDisabled =>
+      'La reproducción automática de videos está desactivada.';
+
+  @override
   String get ssPageTitle => 'Configuraciones';
 
   @override
@@ -96,7 +109,13 @@ class EFUILangEs extends EFUILang {
       'Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
+  String get ssLanguage => 'Idioma';
+
+  @override
   String get isPageTitle => 'Configuraciones de imagen';
+
+  @override
+  String get isPage => 'Página';
 
   @override
   String get isImage => 'imagen';
@@ -256,6 +275,15 @@ class EFUILangEs extends EFUILang {
       'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
 
   @override
+  String get lsMargin => 'Margen';
+
+  @override
+  String get lsTextSpacing => 'Espaciado de texto';
+
+  @override
+  String get lsButtonSpacing => 'Espaciado de botones';
+
+  @override
   String get stsPageTitle => 'Configuraciones de estilo';
 
   @override
@@ -270,35 +298,10 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get stsMargin => 'Margen';
-
-  @override
   String get stsPadding => 'Relleno';
 
   @override
   String get stsCircleSize => 'Tamaño del botón circular';
-
-  @override
-  String get stsButtonSpacing => 'Espaciado de botones';
-
-  @override
-  String get stsTextSpacing => 'Espaciado de texto';
-
-  @override
-  String get stsCurrently => 'Actualmente: ';
-
-  @override
-  String stsSetToValue(Object name, Object value) {
-    return '$name está configurado actualmente en $value';
-  }
-
-  @override
-  String get stsReset => 'Restablecer: ';
-
-  @override
-  String stsResetToValue(Object name, Object value) {
-    return 'Restablecer $name a $value';
-  }
 
   @override
   String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';

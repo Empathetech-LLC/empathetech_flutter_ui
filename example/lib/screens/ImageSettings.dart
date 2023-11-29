@@ -65,7 +65,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: EFUILang.of(context)!.gPage,
+                          title: EFUILang.of(context)!.isPage,
                           allowClear: true,
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
@@ -76,7 +76,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: EFUILang.of(context)!.gPage,
+                          title: EFUILang.of(context)!.isPage,
                           allowClear: true,
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,

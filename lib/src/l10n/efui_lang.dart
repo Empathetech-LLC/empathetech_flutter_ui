@@ -118,6 +118,18 @@ abstract class EFUILang {
   /// **'Right'**
   String get gRight;
 
+  /// No description provided for @gHomeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to the home screen'**
+  String get gHomeHint;
+
+  /// No description provided for @gAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Attention'**
+  String get gAttention;
+
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
@@ -142,71 +154,29 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gSystem.
+  /// No description provided for @gCurrently.
   ///
   /// In en, this message translates to:
-  /// **'System'**
-  String get gSystem;
+  /// **'Currently: '**
+  String get gCurrently;
 
-  /// No description provided for @gLight.
+  /// No description provided for @gSetToValue.
   ///
   /// In en, this message translates to:
-  /// **'Light'**
-  String get gLight;
+  /// **'{name} is currently set to {value}'**
+  String gSetToValue(Object name, Object value);
 
-  /// No description provided for @gDark.
+  /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
-  /// **'Dark'**
-  String get gDark;
+  /// **'Reset: '**
+  String get gReset;
 
-  /// No description provided for @gPlay.
+  /// No description provided for @gResetToValue.
   ///
   /// In en, this message translates to:
-  /// **'Play'**
-  String get gPlay;
-
-  /// No description provided for @gPause.
-  ///
-  /// In en, this message translates to:
-  /// **'Pause'**
-  String get gPause;
-
-  /// No description provided for @gReplay.
-  ///
-  /// In en, this message translates to:
-  /// **'Replay'**
-  String get gReplay;
-
-  /// No description provided for @gAutoPlayDisabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-play videos are disabled.'**
-  String get gAutoPlayDisabled;
-
-  /// No description provided for @gMute.
-  ///
-  /// In en, this message translates to:
-  /// **'Mute'**
-  String get gMute;
-
-  /// No description provided for @gPage.
-  ///
-  /// In en, this message translates to:
-  /// **'Page'**
-  String get gPage;
-
-  /// No description provided for @gHomeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Return to the home screen'**
-  String get gHomeHint;
-
-  /// No description provided for @gAttention.
-  ///
-  /// In en, this message translates to:
-  /// **'Attention'**
-  String get gAttention;
+  /// **'Reset {name} to {value}'**
+  String gResetToValue(Object name, Object value);
 
   /// No description provided for @gResetAll.
   ///
@@ -244,6 +214,54 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
+  /// No description provided for @gSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get gSystem;
+
+  /// No description provided for @gLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get gLight;
+
+  /// No description provided for @gDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get gDark;
+
+  /// No description provided for @gPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get gPlay;
+
+  /// No description provided for @gPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get gPause;
+
+  /// No description provided for @gReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay'**
+  String get gReplay;
+
+  /// No description provided for @gMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get gMute;
+
+  /// No description provided for @gAutoPlayDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-play videos are disabled.'**
+  String get gAutoPlayDisabled;
+
   /// No description provided for @ssPageTitle.
   ///
   /// In en, this message translates to:
@@ -262,11 +280,23 @@ abstract class EFUILang {
   /// **'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
   String get ssSettingsGuideWeb;
 
+  /// No description provided for @ssLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get ssLanguage;
+
   /// No description provided for @isPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Image settings'**
   String get isPageTitle;
+
+  /// No description provided for @isPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Page'**
+  String get isPage;
 
   /// No description provided for @isImage.
   ///
@@ -550,6 +580,24 @@ abstract class EFUILang {
   /// **'Open to choose left or right. Currently set to:'**
   String get lsHandSemantics;
 
+  /// No description provided for @lsMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get lsMargin;
+
+  /// No description provided for @lsTextSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Text spacing'**
+  String get lsTextSpacing;
+
+  /// No description provided for @lsButtonSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Button spacing'**
+  String get lsButtonSpacing;
+
   /// No description provided for @stsPageTitle.
   ///
   /// In en, this message translates to:
@@ -574,12 +622,6 @@ abstract class EFUILang {
   /// **'{font}* (default)'**
   String stsDefaultFont(Object font);
 
-  /// No description provided for @stsMargin.
-  ///
-  /// In en, this message translates to:
-  /// **'Margin'**
-  String get stsMargin;
-
   /// No description provided for @stsPadding.
   ///
   /// In en, this message translates to:
@@ -591,42 +633,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Circle button size'**
   String get stsCircleSize;
-
-  /// No description provided for @stsButtonSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get stsButtonSpacing;
-
-  /// No description provided for @stsTextSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get stsTextSpacing;
-
-  /// No description provided for @stsCurrently.
-  ///
-  /// In en, this message translates to:
-  /// **'Currently: '**
-  String get stsCurrently;
-
-  /// No description provided for @stsSetToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} is currently set to {value}'**
-  String stsSetToValue(Object name, Object value);
-
-  /// No description provided for @stsReset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset: '**
-  String get stsReset;
-
-  /// No description provided for @stsResetToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset {name} to {value}'**
-  String stsResetToValue(Object name, Object value);
 
   /// No description provided for @stsResetAll.
   ///

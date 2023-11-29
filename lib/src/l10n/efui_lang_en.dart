@@ -17,6 +17,12 @@ class EFUILangEn extends EFUILang {
   String get gRight => 'Right';
 
   @override
+  String get gHomeHint => 'Return to the home screen';
+
+  @override
+  String get gAttention => 'Attention';
+
+  @override
   String get gApply => 'Apply';
 
   @override
@@ -29,37 +35,20 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String get gSystem => 'System';
+  String get gCurrently => 'Currently: ';
 
   @override
-  String get gLight => 'Light';
+  String gSetToValue(Object name, Object value) {
+    return '$name is currently set to $value';
+  }
 
   @override
-  String get gDark => 'Dark';
+  String get gReset => 'Reset: ';
 
   @override
-  String get gPlay => 'Play';
-
-  @override
-  String get gPause => 'Pause';
-
-  @override
-  String get gReplay => 'Replay';
-
-  @override
-  String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
-
-  @override
-  String get gMute => 'Mute';
-
-  @override
-  String get gPage => 'Page';
-
-  @override
-  String get gHomeHint => 'Return to the home screen';
-
-  @override
-  String get gAttention => 'Attention';
+  String gResetToValue(Object name, Object value) {
+    return 'Reset $name to $value';
+  }
 
   @override
   String get gResetAll => 'Reset all';
@@ -84,6 +73,30 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get gSystem => 'System';
+
+  @override
+  String get gLight => 'Light';
+
+  @override
+  String get gDark => 'Dark';
+
+  @override
+  String get gPlay => 'Play';
+
+  @override
+  String get gPause => 'Pause';
+
+  @override
+  String get gReplay => 'Replay';
+
+  @override
+  String get gMute => 'Mute';
+
+  @override
+  String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
+
+  @override
   String get ssPageTitle => 'Settings';
 
   @override
@@ -95,7 +108,13 @@ class EFUILangEn extends EFUILang {
       'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
 
   @override
+  String get ssLanguage => 'Language';
+
+  @override
   String get isPageTitle => 'Image settings';
+
+  @override
+  String get isPage => 'Page';
 
   @override
   String get isImage => 'image';
@@ -255,6 +274,15 @@ class EFUILangEn extends EFUILang {
       'Open to choose left or right. Currently set to:';
 
   @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsTextSpacing => 'Text spacing';
+
+  @override
+  String get lsButtonSpacing => 'Button spacing';
+
+  @override
   String get stsPageTitle => 'Style settings';
 
   @override
@@ -269,35 +297,10 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get stsMargin => 'Margin';
-
-  @override
   String get stsPadding => 'Padding';
 
   @override
   String get stsCircleSize => 'Circle button size';
-
-  @override
-  String get stsButtonSpacing => 'Button spacing';
-
-  @override
-  String get stsTextSpacing => 'Text spacing';
-
-  @override
-  String get stsCurrently => 'Currently: ';
-
-  @override
-  String stsSetToValue(Object name, Object value) {
-    return '$name is currently set to $value';
-  }
-
-  @override
-  String get stsReset => 'Reset: ';
-
-  @override
-  String stsResetToValue(Object name, Object value) {
-    return 'Reset $name to $value';
-  }
 
   @override
   String get stsResetAll => 'Reset all style settings?';

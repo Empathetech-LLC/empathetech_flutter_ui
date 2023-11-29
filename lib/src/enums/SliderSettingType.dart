@@ -21,15 +21,15 @@ enum SliderSettingType {
 String sstName(BuildContext context, SliderSettingType settingType) {
   switch (settingType) {
     case SliderSettingType.margin:
-      return EFUILang.of(context)!.stsMargin;
+      return EFUILang.of(context)!.lsMargin;
     case SliderSettingType.padding:
       return EFUILang.of(context)!.stsPadding;
     case SliderSettingType.circleSize:
       return EFUILang.of(context)!.stsCircleSize;
     case SliderSettingType.buttonSpacing:
-      return EFUILang.of(context)!.stsButtonSpacing;
+      return EFUILang.of(context)!.lsButtonSpacing;
     case SliderSettingType.textSpacing:
-      return EFUILang.of(context)!.stsTextSpacing;
+      return EFUILang.of(context)!.lsTextSpacing;
   }
 }
 

@@ -78,13 +78,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.stsCurrently +
+                child: Text(EFUILang.of(context)!.gCurrently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(currValue),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.stsCurrently +
+                child: Text(EFUILang.of(context)!.gCurrently +
                     currValue.toStringAsFixed(widget.decimals)),
               ),
               EzSpacer(_buttonSpacer),
@@ -129,7 +129,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               Text(
-                EFUILang.of(context)!.stsCurrently +
+                EFUILang.of(context)!.gCurrently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
                 textAlign: TextAlign.center,
@@ -160,7 +160,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Live label && preview part 2
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.stsCurrently +
+            child: Text(EFUILang.of(context)!.gCurrently +
                 currValue.toStringAsFixed(widget.decimals)),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -183,7 +183,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Thing 1
               Text(
-                EFUILang.of(context)!.stsCurrently +
+                EFUILang.of(context)!.gCurrently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
                 textAlign: TextAlign.center,
@@ -192,7 +192,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
               // Thing 2
               Text(
-                EFUILang.of(context)!.stsCurrently +
+                EFUILang.of(context)!.gCurrently +
                     currValue.toStringAsFixed(widget.decimals),
                 style: style,
                 textAlign: TextAlign.center,
@@ -217,7 +217,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       Semantics(
         button: false,
         readOnly: true,
-        label: EFUILang.of(context)!.stsSetToValue(
+        label: EFUILang.of(context)!.gSetToValue(
           sstName(context, widget.type),
           currValue.toStringAsFixed(widget.decimals),
         ),
@@ -280,7 +280,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Reset button
       Semantics(
         button: true,
-        hint: EFUILang.of(context)!.stsResetToValue(
+        hint: EFUILang.of(context)!.gResetToValue(
           sstName(context, widget.type),
           _defaultValue.toStringAsFixed(widget.decimals),
         ),
@@ -293,7 +293,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text(EFUILang.of(context)!.stsReset +
+            label: Text(EFUILang.of(context)!.gReset +
                 _defaultValue.toStringAsFixed(widget.decimals)),
           ),
         ),
