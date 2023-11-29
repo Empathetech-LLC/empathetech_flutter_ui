@@ -154,6 +154,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gDefaultEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'{entry}* (default)'**
+  String gDefaultEntry(Object entry);
+
   /// No description provided for @gCurrently.
   ///
   /// In en, this message translates to:
@@ -285,6 +291,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Activate to update the app language'**
   String get ssLangSemantics;
+
+  /// No description provided for @ssLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get ssLanguages;
 
   /// No description provided for @ssResetAll.
   ///
@@ -628,17 +640,11 @@ abstract class EFUILang {
   /// **'Text font'**
   String get stsTextFont;
 
-  /// No description provided for @stsChooseFont.
+  /// No description provided for @stsFonts.
   ///
   /// In en, this message translates to:
-  /// **'Choose a font'**
-  String get stsChooseFont;
-
-  /// No description provided for @stsDefaultFont.
-  ///
-  /// In en, this message translates to:
-  /// **'{font}* (default)'**
-  String stsDefaultFont(Object font);
+  /// **'Fonts'**
+  String get stsFonts;
 
   /// No description provided for @stsPadding.
   ///

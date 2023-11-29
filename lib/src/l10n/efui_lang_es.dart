@@ -35,6 +35,11 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String gDefaultEntry(Object entry) {
+    return '$entry* (por defecto)';
+  }
+
+  @override
   String get gCurrently => 'Actualmente: ';
 
   @override
@@ -111,6 +116,9 @@ class EFUILangEs extends EFUILang {
   @override
   String get ssLangSemantics =>
       'Activa para actualizar el idioma de la aplicación';
+
+  @override
+  String get ssLanguages => 'Idiomas';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
@@ -300,12 +308,7 @@ class EFUILangEs extends EFUILang {
   String get stsTextFont => 'Fuente de texto';
 
   @override
-  String get stsChooseFont => 'Selecciona una fuente';
-
-  @override
-  String stsDefaultFont(Object font) {
-    return '$font* (por defecto)';
-  }
+  String get stsFonts => 'Fuentes';
 
   @override
   String get stsPadding => 'Relleno';

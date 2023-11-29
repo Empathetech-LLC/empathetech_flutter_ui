@@ -14,6 +14,7 @@
   "gContinue": "Continuar",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
+  "gDefaultEntry": "{entry}* (por defecto)",
 
   "gCurrently": "Actualmente: ",
   "gSetToValue": "{name} está configurado actualmente en {value}",
@@ -40,6 +41,7 @@
   "ssSettingsGuideWeb": "Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "ssLanguage": "Idioma",
   "ssLangSemantics": "Activa para actualizar el idioma de la aplicación",
+  "ssLanguages": "Idiomas",
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
   "isPageTitle": "Configuraciones de imagen",
@@ -101,8 +103,7 @@
 
   "stsPageTitle": "Configuraciones de estilo",
   "stsTextFont": "Fuente de texto",
-  "stsChooseFont": "Selecciona una fuente",
-  "stsDefaultFont": "{font}* (por defecto)",
+  "stsFonts": "Fuentes",
   "stsPadding": "Relleno",
   "stsCircleSize": "Tamaño del botón circular",
   "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"

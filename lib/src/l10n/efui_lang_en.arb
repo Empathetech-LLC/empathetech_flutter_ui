@@ -1,5 +1,5 @@
 {
-  "@@locale" : "en",
+  "@@locale" : "en_US",
 
   "gYes": "Yes",
   "gNo": "No",
@@ -14,6 +14,7 @@
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
+  "gDefaultEntry": "{entry}* (default)",
 
   "gCurrently": "Currently: ",
   "gSetToValue": "{name} is currently set to {value}",
@@ -40,6 +41,7 @@
   "ssSettingsGuideWeb": "Each button will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
   "ssLanguage": "Language",
   "ssLangSemantics": "Activate to update the app language",
+  "ssLanguages": "Languages",
   "ssResetAll": "Reset all settings?",
 
   "isPageTitle": "Image settings",
@@ -101,8 +103,7 @@
 
   "stsPageTitle": "Style settings",
   "stsTextFont": "Text font",
-  "stsChooseFont": "Choose a font",
-  "stsDefaultFont": "{font}* (default)",
+  "stsFonts": "Fonts",
   "stsPadding": "Padding",
   "stsCircleSize": "Circle button size",
   "stsResetAll": "Reset all style settings?"
