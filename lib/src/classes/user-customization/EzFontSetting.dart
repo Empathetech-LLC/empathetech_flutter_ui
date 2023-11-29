@@ -22,8 +22,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather theme data //
 
   String? currFontFamily = EzConfig.instance.fontFamily;
-
   final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
+
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Define button functions //
@@ -34,8 +34,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
     googleStyles.forEach((String font, TextStyle style) {
       buttons.addAll([
-        // Map font to a selectable button (title == name)
-        // Marks the default font with "* (Default)"
         ElevatedButton(
           onPressed: () {
             EzConfig.instance.preferences.setString(fontFamilyKey, font);
@@ -46,7 +44,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           },
           child: Text(
             (font == _defaultFontFamily)
-                ? EFUILang.of(context)!.stsDefaultFont(font)
+                // Marks the default with "* (default)"
+                ? EFUILang.of(context)!.gDefaultEntry(font)
                 : font,
             style: style,
             textAlign: TextAlign.center,
@@ -60,7 +59,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: Text(
-          EFUILang.of(context)!.stsChooseFont,
+          EFUILang.of(context)!.stsFonts,
           textAlign: TextAlign.center,
         ),
         contents: buttons,
