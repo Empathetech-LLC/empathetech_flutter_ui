@@ -47,10 +47,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 If you're new to Flutter: welcome! The example app is full of comments to help you on your path.
 
-Here are some (unaffilliated!) videos you might also find helpful.
+Here are some (unaffiliated!) videos you might also find helpful.
 
 - [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
-- [First app codelab](https://www.youtube.com/watch?v=8sAyPDLorek)
+- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
 - [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
 
 # Usage
