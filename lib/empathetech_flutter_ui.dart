@@ -32,6 +32,7 @@ export 'src/classes/user-customization/EzConfig.dart';
 export 'src/classes/user-customization/EzDominantHandSwitch.dart';
 export 'src/classes/user-customization/EzFontSetting.dart';
 export 'src/classes/user-customization/EzImageSetting.dart';
+export 'src/classes/user-customization/EzLocaleSetting.dart';
 export 'src/classes/user-customization/EzResetButton.dart';
 export 'src/classes/user-customization/EzSliderSetting.dart';
 export 'src/classes/user-customization/EzThemeModeSwitch.dart';
