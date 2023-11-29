@@ -53,7 +53,6 @@ class EzLink extends StatelessWidget {
       hint: semanticsLabel,
       child: ExcludeSemantics(
         child: MouseRegion(
-          key: key,
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: onTap ?? () => launchUrl(url!),
