@@ -13,7 +13,7 @@ class EzResetButton extends StatelessWidget {
   final BuildContext context;
 
   /// Button label
-  /// Defaults to [EFUILang.dResetAll]
+  /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
   /// [Semantics] message for screen readers
@@ -21,11 +21,11 @@ class EzResetButton extends StatelessWidget {
   final String? hint;
 
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.dResetDialogTitle]
+  /// Defaults to [EFUILang.gResetDialogTitle]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.dResetDialogContent]
+  /// Defaults to [EFUILang.gResetDialogContent]
   final String? dialogContent;
 
   /// What happens when the user choses to reset
@@ -62,11 +62,11 @@ class EzResetButton extends StatelessWidget {
 
     // Define the build //
     final String _dialogTitle =
-        dialogTitle ?? EFUILang.of(context)!.dResetDialogTitle;
+        dialogTitle ?? EFUILang.of(context)!.gResetDialogTitle;
 
     final OutlinedButton resetButton = OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? EFUILang.of(context)!.dResetAll),
+      label: Text(label ?? EFUILang.of(context)!.gResetAll),
       onPressed: () => showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
@@ -76,7 +76,7 @@ class EzResetButton extends StatelessWidget {
           ),
           contents: [
             Text(
-              dialogContent ?? EFUILang.of(context)!.dResetDialogContent,
+              dialogContent ?? EFUILang.of(context)!.gResetDialogContent,
               textAlign: TextAlign.center,
             ),
           ],

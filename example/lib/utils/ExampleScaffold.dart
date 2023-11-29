@@ -28,7 +28,7 @@ class ExampleScaffold extends StatelessWidget {
       style: titleStyle,
       textAlign: TextAlign.center,
       onTap: () => context.goNamed(homeRoute),
-      semanticsLabel: EFUILang.of(context)!.dHomeHint,
+      semanticsLabel: EFUILang.of(context)!.gHomeHint,
     );
 
     // Return the build //

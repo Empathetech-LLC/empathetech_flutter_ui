@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
     context: context,
     builder: (context) => EzAlertDialog(
       title: Text(
-        alert ?? EFUILang.of(context)!.dAttention,
+        alert ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
       contents: [

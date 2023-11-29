@@ -44,7 +44,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: [
             // Current theme mode reminder
             Text(
-              EFUILang.of(context)!.dEditingTheme(_themeProfile),
+              EFUILang.of(context)!.gEditingTheme(_themeProfile),
               style: titleSmall(context),
               textAlign: TextAlign.center,
             ),
