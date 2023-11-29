@@ -101,8 +101,9 @@ class EzConfig {
       });
 
       // Gather trackers //
-      final List<String> _languageData = _prefs[localeKey].split(',');
-      final Locale _locale = Locale(_languageData[0], _languageData[1]);
+      final List<String> localeData = _prefs[localeKey];
+      final Locale _locale =
+          Locale(localeData[0], localeData.length > 1 ? localeData[1] : null);
 
       final String? _fontFamily =
           googleStyles[(_prefs[fontFamilyKey])]?.fontFamily;
