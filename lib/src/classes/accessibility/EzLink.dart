@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLink extends StatelessWidget {
+  final Key? key;
+
   /// Link message
   final String text;
 
   final TextStyle? style;
-
-  /// Message for screen readers
-  final String semanticsLabel;
+  final TextAlign? textAlign;
+  final ButtonStyle? buttonStyle;
 
   /// Destination function
   final void Function()? onTap;
@@ -16,32 +17,37 @@ class EzLink extends StatelessWidget {
   /// Destination URL
   final Uri? url;
 
-  final Key? key;
-  final StrutStyle? strutStyle;
-  final TextAlign? textAlign;
-  final TextDirection? textDirection;
-  final TextScaler? textScaler;
-  final int? maxLines;
-  final TextWidthBasis? textWidthBasis;
-  final TextHeightBehavior? textHeightBehavior;
+  final void Function()? onLongPress;
 
-  /// [Text] wrapper that either opens an internal link via [onTap]
+  /// Message for screen readers
+  final String semanticsLabel;
+
+  final void Function(bool)? onHover;
+  final void Function(bool)? onFocusChange;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final Clip clipBehavior;
+  final MaterialStatesController? statesController;
+
+  /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
   EzLink(
     this.text, {
+    this.key,
     this.style,
-    required this.semanticsLabel,
+    this.textAlign,
+    this.buttonStyle,
     this.onTap,
     this.url,
-    this.key,
-    this.strutStyle,
-    this.textAlign,
-    this.textDirection,
-    this.textScaler,
-    this.maxLines,
-    this.textWidthBasis,
-    this.textHeightBehavior,
+    this.onLongPress,
+    required this.semanticsLabel,
+    this.onHover,
+    this.onFocusChange,
+    this.focusNode,
+    this.autofocus = false,
+    this.clipBehavior = Clip.none,
+    this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(key: key);
@@ -52,23 +58,18 @@ class EzLink extends StatelessWidget {
       link: true,
       hint: semanticsLabel,
       child: ExcludeSemantics(
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: onTap ?? () => launchUrl(url!),
-            child: Text(
-              text,
-              style: style,
-              strutStyle: strutStyle,
-              textAlign: textAlign,
-              textDirection: textDirection,
-              textScaler: textScaler,
-              maxLines: maxLines,
-              semanticsLabel: null,
-              textWidthBasis: textWidthBasis,
-              textHeightBehavior: textHeightBehavior,
-            ),
-          ),
+        child: TextButton(
+          onPressed: onTap ?? () => launchUrl(url!),
+          onLongPress: onLongPress,
+          onHover: onHover,
+          onFocusChange: onFocusChange,
+          style: buttonStyle,
+          focusNode: focusNode,
+          autofocus: autofocus,
+          clipBehavior: clipBehavior,
+          statesController: statesController,
+          isSemanticButton: true,
+          child: Text(text, style: style, textAlign: textAlign),
         ),
       ),
     );
