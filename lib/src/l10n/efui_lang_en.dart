@@ -84,20 +84,6 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get hsThemeMode => 'Theme mode';
-
-  @override
-  String get hsThemeSemantics =>
-      'Open to select a theme mode. Currently set to:';
-
-  @override
-  String get hsDominantHand => 'Dominant hand';
-
-  @override
-  String get hsHandSemantics =>
-      'Open to choose left or right. Currently set to:';
-
-  @override
   String get ssPageTitle => 'Settings';
 
   @override
@@ -109,52 +95,67 @@ class EFUILangEn extends EFUILang {
       'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
 
   @override
-  String get stsPageTitle => 'Style settings';
+  String get isPageTitle => 'Image settings';
 
   @override
-  String get stsTextFont => 'Text font';
+  String get isImage => 'image';
 
   @override
-  String get stsChooseFont => 'Choose a font';
-
-  @override
-  String stsDefaultFont(Object font) {
-    return '$font* (default)';
+  String isButtonHint(Object title) {
+    return 'Update the $title image';
   }
 
   @override
-  String get stsMargin => 'Margin';
-
-  @override
-  String get stsPadding => 'Padding';
-
-  @override
-  String get stsCircleSize => 'Circle button size';
-
-  @override
-  String get stsButtonSpacing => 'Button spacing';
-
-  @override
-  String get stsTextSpacing => 'Text spacing';
-
-  @override
-  String get stsCurrently => 'Currently: ';
-
-  @override
-  String stsSetToValue(Object name, Object value) {
-    return '$name is currently set to $value';
+  String isDialogTitle(Object title) {
+    return 'How should the $title image be updated?';
   }
 
   @override
-  String get stsReset => 'Reset: ';
+  String get isFromFile => 'From file';
 
   @override
-  String stsResetToValue(Object name, Object value) {
-    return 'Reset $name to $value';
+  String get isFromCamera => 'From camera';
+
+  @override
+  String get isFromNetwork => 'From URL';
+
+  @override
+  String get isEnterURL => 'Enter URL';
+
+  @override
+  String get isNetworkPreview => 'Preview of your chosen image';
+
+  @override
+  String get isGetFailed => 'Failed to retrieve image';
+
+  @override
+  String isSetFailed(Object error) {
+    return 'Failed to update image:\n$error';
   }
 
   @override
-  String get stsResetAll => 'Reset all style settings?';
+  String get isResetIt => 'Reset it';
+
+  @override
+  String get isClearIt => 'Clear it';
+
+  @override
+  String get isCreditTo => 'Credit to:';
+
+  @override
+  String get isSource => 'Wherever you got it!';
+
+  @override
+  String isResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
+
+  @override
+  String get csThemeMode => 'Theme mode';
+
+  @override
+  String get csThemeSemantics =>
+      'Open to select a theme mode. Currently set to:';
 
   @override
   String get csPageTitle => 'Color settings';
@@ -247,58 +248,57 @@ class EFUILangEn extends EFUILang {
   String get csAccentText => 'Accent text';
 
   @override
-  String get isPageTitle => 'Image settings';
+  String get lsDominantHand => 'Dominant hand';
 
   @override
-  String get isImage => 'image';
+  String get lsHandSemantics =>
+      'Open to choose left or right. Currently set to:';
 
   @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
+  String get stsPageTitle => 'Style settings';
+
+  @override
+  String get stsTextFont => 'Text font';
+
+  @override
+  String get stsChooseFont => 'Choose a font';
+
+  @override
+  String stsDefaultFont(Object font) {
+    return '$font* (default)';
   }
 
   @override
-  String isDialogTitle(Object title) {
-    return 'How should the $title image be updated?';
+  String get stsMargin => 'Margin';
+
+  @override
+  String get stsPadding => 'Padding';
+
+  @override
+  String get stsCircleSize => 'Circle button size';
+
+  @override
+  String get stsButtonSpacing => 'Button spacing';
+
+  @override
+  String get stsTextSpacing => 'Text spacing';
+
+  @override
+  String get stsCurrently => 'Currently: ';
+
+  @override
+  String stsSetToValue(Object name, Object value) {
+    return '$name is currently set to $value';
   }
 
   @override
-  String get isFromFile => 'From file';
+  String get stsReset => 'Reset: ';
 
   @override
-  String get isFromCamera => 'From camera';
-
-  @override
-  String get isFromNetwork => 'From URL';
-
-  @override
-  String get isEnterURL => 'Enter URL';
-
-  @override
-  String get isNetworkPreview => 'Preview of your chosen image';
-
-  @override
-  String get isGetFailed => 'Failed to retrieve image';
-
-  @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
+  String stsResetToValue(Object name, Object value) {
+    return 'Reset $name to $value';
   }
 
   @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isCreditTo => 'Credit to:';
-
-  @override
-  String get isSource => 'Wherever you got it!';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
+  String get stsResetAll => 'Reset all style settings?';
 }

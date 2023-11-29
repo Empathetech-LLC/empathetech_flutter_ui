@@ -244,30 +244,6 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
-  /// No description provided for @hsThemeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get hsThemeMode;
-
-  /// No description provided for @hsThemeSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Open to select a theme mode. Currently set to:'**
-  String get hsThemeSemantics;
-
-  /// No description provided for @hsDominantHand.
-  ///
-  /// In en, this message translates to:
-  /// **'Dominant hand'**
-  String get hsDominantHand;
-
-  /// No description provided for @hsHandSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Open to choose left or right. Currently set to:'**
-  String get hsHandSemantics;
-
   /// No description provided for @ssPageTitle.
   ///
   /// In en, this message translates to:
@@ -286,89 +262,113 @@ abstract class EFUILang {
   /// **'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
   String get ssSettingsGuideWeb;
 
-  /// No description provided for @stsPageTitle.
+  /// No description provided for @isPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Style settings'**
-  String get stsPageTitle;
+  /// **'Image settings'**
+  String get isPageTitle;
 
-  /// No description provided for @stsTextFont.
+  /// No description provided for @isImage.
   ///
   /// In en, this message translates to:
-  /// **'Text font'**
-  String get stsTextFont;
+  /// **'image'**
+  String get isImage;
 
-  /// No description provided for @stsChooseFont.
+  /// No description provided for @isButtonHint.
   ///
   /// In en, this message translates to:
-  /// **'Choose a font'**
-  String get stsChooseFont;
+  /// **'Update the {title} image'**
+  String isButtonHint(Object title);
 
-  /// No description provided for @stsDefaultFont.
+  /// No description provided for @isDialogTitle.
   ///
   /// In en, this message translates to:
-  /// **'{font}* (default)'**
-  String stsDefaultFont(Object font);
+  /// **'How should the {title} image be updated?'**
+  String isDialogTitle(Object title);
 
-  /// No description provided for @stsMargin.
+  /// No description provided for @isFromFile.
   ///
   /// In en, this message translates to:
-  /// **'Margin'**
-  String get stsMargin;
+  /// **'From file'**
+  String get isFromFile;
 
-  /// No description provided for @stsPadding.
+  /// No description provided for @isFromCamera.
   ///
   /// In en, this message translates to:
-  /// **'Padding'**
-  String get stsPadding;
+  /// **'From camera'**
+  String get isFromCamera;
 
-  /// No description provided for @stsCircleSize.
+  /// No description provided for @isFromNetwork.
   ///
   /// In en, this message translates to:
-  /// **'Circle button size'**
-  String get stsCircleSize;
+  /// **'From URL'**
+  String get isFromNetwork;
 
-  /// No description provided for @stsButtonSpacing.
+  /// No description provided for @isEnterURL.
   ///
   /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get stsButtonSpacing;
+  /// **'Enter URL'**
+  String get isEnterURL;
 
-  /// No description provided for @stsTextSpacing.
+  /// No description provided for @isNetworkPreview.
   ///
   /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get stsTextSpacing;
+  /// **'Preview of your chosen image'**
+  String get isNetworkPreview;
 
-  /// No description provided for @stsCurrently.
+  /// No description provided for @isGetFailed.
   ///
   /// In en, this message translates to:
-  /// **'Currently: '**
-  String get stsCurrently;
+  /// **'Failed to retrieve image'**
+  String get isGetFailed;
 
-  /// No description provided for @stsSetToValue.
+  /// No description provided for @isSetFailed.
   ///
   /// In en, this message translates to:
-  /// **'{name} is currently set to {value}'**
-  String stsSetToValue(Object name, Object value);
+  /// **'Failed to update image:\n{error}'**
+  String isSetFailed(Object error);
 
-  /// No description provided for @stsReset.
+  /// No description provided for @isResetIt.
   ///
   /// In en, this message translates to:
-  /// **'Reset: '**
-  String get stsReset;
+  /// **'Reset it'**
+  String get isResetIt;
 
-  /// No description provided for @stsResetToValue.
+  /// No description provided for @isClearIt.
   ///
   /// In en, this message translates to:
-  /// **'Reset {name} to {value}'**
-  String stsResetToValue(Object name, Object value);
+  /// **'Clear it'**
+  String get isClearIt;
 
-  /// No description provided for @stsResetAll.
+  /// No description provided for @isCreditTo.
   ///
   /// In en, this message translates to:
-  /// **'Reset all style settings?'**
-  String get stsResetAll;
+  /// **'Credit to:'**
+  String get isCreditTo;
+
+  /// No description provided for @isSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Wherever you got it!'**
+  String get isSource;
+
+  /// No description provided for @isResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme images?'**
+  String isResetAll(Object themeType);
+
+  /// No description provided for @csThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode'**
+  String get csThemeMode;
+
+  /// No description provided for @csThemeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to select a theme mode. Currently set to:'**
+  String get csThemeSemantics;
 
   /// No description provided for @csPageTitle.
   ///
@@ -538,101 +538,101 @@ abstract class EFUILang {
   /// **'Accent text'**
   String get csAccentText;
 
-  /// No description provided for @isPageTitle.
+  /// No description provided for @lsDominantHand.
   ///
   /// In en, this message translates to:
-  /// **'Image settings'**
-  String get isPageTitle;
+  /// **'Dominant hand'**
+  String get lsDominantHand;
 
-  /// No description provided for @isImage.
+  /// No description provided for @lsHandSemantics.
   ///
   /// In en, this message translates to:
-  /// **'image'**
-  String get isImage;
+  /// **'Open to choose left or right. Currently set to:'**
+  String get lsHandSemantics;
 
-  /// No description provided for @isButtonHint.
+  /// No description provided for @stsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Update the {title} image'**
-  String isButtonHint(Object title);
+  /// **'Style settings'**
+  String get stsPageTitle;
 
-  /// No description provided for @isDialogTitle.
+  /// No description provided for @stsTextFont.
   ///
   /// In en, this message translates to:
-  /// **'How should the {title} image be updated?'**
-  String isDialogTitle(Object title);
+  /// **'Text font'**
+  String get stsTextFont;
 
-  /// No description provided for @isFromFile.
+  /// No description provided for @stsChooseFont.
   ///
   /// In en, this message translates to:
-  /// **'From file'**
-  String get isFromFile;
+  /// **'Choose a font'**
+  String get stsChooseFont;
 
-  /// No description provided for @isFromCamera.
+  /// No description provided for @stsDefaultFont.
   ///
   /// In en, this message translates to:
-  /// **'From camera'**
-  String get isFromCamera;
+  /// **'{font}* (default)'**
+  String stsDefaultFont(Object font);
 
-  /// No description provided for @isFromNetwork.
+  /// No description provided for @stsMargin.
   ///
   /// In en, this message translates to:
-  /// **'From URL'**
-  String get isFromNetwork;
+  /// **'Margin'**
+  String get stsMargin;
 
-  /// No description provided for @isEnterURL.
+  /// No description provided for @stsPadding.
   ///
   /// In en, this message translates to:
-  /// **'Enter URL'**
-  String get isEnterURL;
+  /// **'Padding'**
+  String get stsPadding;
 
-  /// No description provided for @isNetworkPreview.
+  /// No description provided for @stsCircleSize.
   ///
   /// In en, this message translates to:
-  /// **'Preview of your chosen image'**
-  String get isNetworkPreview;
+  /// **'Circle button size'**
+  String get stsCircleSize;
 
-  /// No description provided for @isGetFailed.
+  /// No description provided for @stsButtonSpacing.
   ///
   /// In en, this message translates to:
-  /// **'Failed to retrieve image'**
-  String get isGetFailed;
+  /// **'Button spacing'**
+  String get stsButtonSpacing;
 
-  /// No description provided for @isSetFailed.
+  /// No description provided for @stsTextSpacing.
   ///
   /// In en, this message translates to:
-  /// **'Failed to update image:\n{error}'**
-  String isSetFailed(Object error);
+  /// **'Text spacing'**
+  String get stsTextSpacing;
 
-  /// No description provided for @isResetIt.
+  /// No description provided for @stsCurrently.
   ///
   /// In en, this message translates to:
-  /// **'Reset it'**
-  String get isResetIt;
+  /// **'Currently: '**
+  String get stsCurrently;
 
-  /// No description provided for @isClearIt.
+  /// No description provided for @stsSetToValue.
   ///
   /// In en, this message translates to:
-  /// **'Clear it'**
-  String get isClearIt;
+  /// **'{name} is currently set to {value}'**
+  String stsSetToValue(Object name, Object value);
 
-  /// No description provided for @isCreditTo.
+  /// No description provided for @stsReset.
   ///
   /// In en, this message translates to:
-  /// **'Credit to:'**
-  String get isCreditTo;
+  /// **'Reset: '**
+  String get stsReset;
 
-  /// No description provided for @isSource.
+  /// No description provided for @stsResetToValue.
   ///
   /// In en, this message translates to:
-  /// **'Wherever you got it!'**
-  String get isSource;
+  /// **'Reset {name} to {value}'**
+  String stsResetToValue(Object name, Object value);
 
-  /// No description provided for @isResetAll.
+  /// No description provided for @stsResetAll.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme images?'**
-  String isResetAll(Object themeType);
+  /// **'Reset all style settings?'**
+  String get stsResetAll;
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
