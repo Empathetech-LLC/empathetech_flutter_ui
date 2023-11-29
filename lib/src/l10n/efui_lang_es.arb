@@ -20,10 +20,9 @@
   "gReset": "Restablecer: ",
   "gResetToValue": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
-  "gResetDialogTitle": "¿Restablecer todas las configuraciones?",
-  "gResetDialogContent": "No se puede deshacer",
-  "gResetAllWarn": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
-  "gResetAllWarnWeb": "No se puede deshacer\nLos cambios tendrán efecto al recargar la página",
+  "gResetWarn": "No se puede deshacer",
+  "gResetTip": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
+  "gResetTipWeb": "No se puede deshacer\nLos cambios tendrán efecto al recargar la página",
 
   "gEditingTheme": "Editando: tema {themeType}",
   "gSystem": "Sistema",
@@ -40,6 +39,7 @@
   "ssSettingsGuide": "Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "ssSettingsGuideWeb": "Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
   "ssLanguage": "Idioma",
+  "ssResetAll": "¿Restablecer todas las configuraciones?",
 
   "isPageTitle": "Configuraciones de imagen",
   "isPage": "Página",

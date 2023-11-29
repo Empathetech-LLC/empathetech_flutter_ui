@@ -54,17 +54,14 @@ class EFUILangEs extends EFUILang {
   String get gResetAll => 'Restablecer todo';
 
   @override
-  String get gResetDialogTitle => '¿Restablecer todas las configuraciones?';
+  String get gResetWarn => 'No se puede deshacer';
 
   @override
-  String get gResetDialogContent => 'No se puede deshacer';
-
-  @override
-  String get gResetAllWarn =>
+  String get gResetTip =>
       'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
 
   @override
-  String get gResetAllWarnWeb =>
+  String get gResetTipWeb =>
       'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
 
   @override
@@ -110,6 +107,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssLanguage => 'Idioma';
+
+  @override
+  String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
   String get isPageTitle => 'Configuraciones de imagen';

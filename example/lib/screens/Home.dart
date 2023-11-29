@@ -79,7 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
             EzSpacer(2 * _buttonSpacer),
 
             // Reset button
-            EzResetButton(context: context),
+            EzResetButton(
+              context: context,
+              dialogTitle: EFUILang.of(context)!.ssResetAll,
+            ),
             EzSpacer(_buttonSpacer),
           ],
         ),

@@ -25,7 +25,7 @@ class EzResetButton extends StatelessWidget {
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gResetDialogContent]
+  /// Defaults to [EFUILang.gResetWarn]
   final String? dialogContent;
 
   /// What happens when the user choses to reset
@@ -61,8 +61,7 @@ class EzResetButton extends StatelessWidget {
     final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
     // Define the build //
-    final String _dialogTitle =
-        dialogTitle ?? EFUILang.of(context)!.gResetDialogTitle;
+    final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.gResetAll;
 
     final OutlinedButton resetButton = OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
@@ -76,7 +75,7 @@ class EzResetButton extends StatelessWidget {
           ),
           contents: [
             Text(
-              dialogContent ?? EFUILang.of(context)!.gResetDialogContent,
+              dialogContent ?? EFUILang.of(context)!.gResetWarn,
               textAlign: TextAlign.center,
             ),
           ],

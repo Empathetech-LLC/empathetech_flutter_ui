@@ -20,10 +20,9 @@
   "gReset": "Reset: ",
   "gResetToValue": "Reset {name} to {value}",
   "gResetAll": "Reset all",
-  "gResetDialogTitle": "Reset all settings?",
-  "gResetDialogContent": "Cannot be undone",
-  "gResetAllWarn": "Cannot be undone\nChanges take effect on app restart",
-  "gResetAllWarnWeb": "Cannot be undone\nChanges take effect on page reload",
+  "gResetWarn": "Cannot be undone",
+  "gResetTip": "Cannot be undone\nChanges take effect on app restart",
+  "gResetTipWeb": "Cannot be undone\nChanges take effect on page reload",
 
   "gEditingTheme": "Editing: {themeType} theme",
   "gSystem": "System",
@@ -40,6 +39,7 @@
   "ssSettingsGuide": "Each button will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
   "ssSettingsGuideWeb": "Each button will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
   "ssLanguage": "Language",
+  "ssResetAll": "Reset all settings?",
 
   "isPageTitle": "Image settings",
   "isPage": "Page",

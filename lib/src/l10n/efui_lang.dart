@@ -184,29 +184,23 @@ abstract class EFUILang {
   /// **'Reset all'**
   String get gResetAll;
 
-  /// No description provided for @gResetDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all settings?'**
-  String get gResetDialogTitle;
-
-  /// No description provided for @gResetDialogContent.
+  /// No description provided for @gResetWarn.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone'**
-  String get gResetDialogContent;
+  String get gResetWarn;
 
-  /// No description provided for @gResetAllWarn.
+  /// No description provided for @gResetTip.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone\nChanges take effect on app restart'**
-  String get gResetAllWarn;
+  String get gResetTip;
 
-  /// No description provided for @gResetAllWarnWeb.
+  /// No description provided for @gResetTipWeb.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone\nChanges take effect on page reload'**
-  String get gResetAllWarnWeb;
+  String get gResetTipWeb;
 
   /// No description provided for @gEditingTheme.
   ///
@@ -285,6 +279,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Language'**
   String get ssLanguage;
+
+  /// No description provided for @ssResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all settings?'**
+  String get ssResetAll;
 
   /// No description provided for @isPageTitle.
   ///

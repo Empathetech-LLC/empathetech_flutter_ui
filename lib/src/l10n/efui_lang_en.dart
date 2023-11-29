@@ -54,17 +54,14 @@ class EFUILangEn extends EFUILang {
   String get gResetAll => 'Reset all';
 
   @override
-  String get gResetDialogTitle => 'Reset all settings?';
+  String get gResetWarn => 'Cannot be undone';
 
   @override
-  String get gResetDialogContent => 'Cannot be undone';
-
-  @override
-  String get gResetAllWarn =>
+  String get gResetTip =>
       'Cannot be undone\nChanges take effect on app restart';
 
   @override
-  String get gResetAllWarnWeb =>
+  String get gResetTipWeb =>
       'Cannot be undone\nChanges take effect on page reload';
 
   @override
@@ -109,6 +106,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssLanguage => 'Language';
+
+  @override
+  String get ssResetAll => 'Reset all settings?';
 
   @override
   String get isPageTitle => 'Image settings';
