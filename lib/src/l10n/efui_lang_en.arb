@@ -60,9 +60,9 @@
   "isSource": "Wherever you got it!",
   "isResetAll": "Reset all {themeType} theme images?",
 
+  "csPageTitle": "Color settings",
   "csThemeMode": "Theme mode",
   "csThemeSemantics": "Open to select a theme mode. Currently set to:",
-  "csPageTitle": "Color settings",
   "csEditingTheme": "Editing: {themeType} theme\nLong press buttons to reset individually",
   "csPickerTitle": "Pick a color!",
   "csPickerSemantics": "Activate to open a color picker for {name}. Long press to reset {name}.",
@@ -91,11 +91,13 @@
   "csAccent": "Accent",
   "csAccentText": "Accent text",
 
+  "lsPageTitle": "Layout settings",
   "lsDominantHand": "Dominant hand",
   "lsHandSemantics": "Open to choose left or right. Currently set to:",
   "lsMargin": "Margin",
   "lsTextSpacing": "Text spacing",
   "lsButtonSpacing": "Button spacing",
+  "lsResetAll": "Reset all layout settings?",
 
   "stsPageTitle": "Style settings",
   "stsTextFont": "Text font",

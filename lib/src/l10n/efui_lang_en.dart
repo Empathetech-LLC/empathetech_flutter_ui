@@ -173,14 +173,14 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get csPageTitle => 'Color settings';
+
+  @override
   String get csThemeMode => 'Theme mode';
 
   @override
   String get csThemeSemantics =>
       'Open to select a theme mode. Currently set to:';
-
-  @override
-  String get csPageTitle => 'Color settings';
 
   @override
   String csEditingTheme(Object themeType) {
@@ -270,6 +270,9 @@ class EFUILangEn extends EFUILang {
   String get csAccentText => 'Accent text';
 
   @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
   String get lsDominantHand => 'Dominant hand';
 
   @override
@@ -284,6 +287,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get lsButtonSpacing => 'Button spacing';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 
   @override
   String get stsPageTitle => 'Style settings';

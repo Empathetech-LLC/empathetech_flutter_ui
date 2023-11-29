@@ -175,14 +175,14 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get csPageTitle => 'Configuraciones de color';
+
+  @override
   String get csThemeMode => 'Modo de tema';
 
   @override
   String get csThemeSemantics =>
       'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
-
-  @override
-  String get csPageTitle => 'Configuraciones de color';
 
   @override
   String csEditingTheme(Object themeType) {
@@ -272,6 +272,9 @@ class EFUILangEs extends EFUILang {
   String get csAccentText => 'Texto de acento';
 
   @override
+  String get lsPageTitle => 'Configuraciones de diseño';
+
+  @override
   String get lsDominantHand => 'Mano dominante';
 
   @override
@@ -286,6 +289,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get lsButtonSpacing => 'Espaciado de botones';
+
+  @override
+  String get lsResetAll => '¿Restablecer todas las configuraciones de diseño?';
 
   @override
   String get stsPageTitle => 'Configuraciones de estilo';

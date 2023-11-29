@@ -394,6 +394,12 @@ abstract class EFUILang {
   /// **'Reset all {themeType} theme images?'**
   String isResetAll(Object themeType);
 
+  /// No description provided for @csPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Color settings'**
+  String get csPageTitle;
+
   /// No description provided for @csThemeMode.
   ///
   /// In en, this message translates to:
@@ -405,12 +411,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open to select a theme mode. Currently set to:'**
   String get csThemeSemantics;
-
-  /// No description provided for @csPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Color settings'**
-  String get csPageTitle;
 
   /// No description provided for @csEditingTheme.
   ///
@@ -574,6 +574,12 @@ abstract class EFUILang {
   /// **'Accent text'**
   String get csAccentText;
 
+  /// No description provided for @lsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout settings'**
+  String get lsPageTitle;
+
   /// No description provided for @lsDominantHand.
   ///
   /// In en, this message translates to:
@@ -603,6 +609,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Button spacing'**
   String get lsButtonSpacing;
+
+  /// No description provided for @lsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all layout settings?'**
+  String get lsResetAll;
 
   /// No description provided for @stsPageTitle.
   ///

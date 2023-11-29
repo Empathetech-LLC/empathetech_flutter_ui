@@ -60,9 +60,9 @@
   "isSource": "¡De donde lo obtuviste!",
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
 
+  "csPageTitle": "Configuraciones de color",
   "csThemeMode": "Modo de tema",
   "csThemeSemantics": "Abrir para seleccionar un modo de tema. Actualmente configurado en:",
-  "csPageTitle": "Configuraciones de color",
   "csEditingTheme": "Editando: colores del tema {themeType}\nMantén presionados los botones para restablecer individualmente",
   "csPickerTitle": "¡Selecciona un color!",
   "csPickerSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}.",
@@ -91,11 +91,13 @@
   "csAccent": "Acento",
   "csAccentText": "Texto de acento",
 
+  "lsPageTitle": "Configuraciones de diseño",
   "lsDominantHand": "Mano dominante",
   "lsHandSemantics": "Abrir para elegir izquierda o derecha. Actualmente configurado en:",
   "lsMargin": "Margen",
   "lsTextSpacing": "Espaciado de texto",
   "lsButtonSpacing": "Espaciado de botones",
+  "lsResetAll": "¿Restablecer todas las configuraciones de diseño?",
 
   "stsPageTitle": "Configuraciones de estilo",
   "stsTextFont": "Fuente de texto",
