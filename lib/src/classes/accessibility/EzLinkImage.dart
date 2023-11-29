@@ -61,8 +61,9 @@ class EzLinkImage extends StatelessWidget {
     this.gaplessPlayback = false,
     this.isAntiAlias = false,
     this.filterQuality = FilterQuality.low,
-  }) : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.');
+  })  : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.'),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,6 @@ class EzLinkImage extends StatelessWidget {
       hint: semanticLabel,
       child: ExcludeSemantics(
         child: MouseRegion(
-          key: key,
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: onTap ?? () => launchUrl(url!),
