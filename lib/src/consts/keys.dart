@@ -7,33 +7,29 @@
 
 const String homeRoute = '/';
 
-// Theme //
+// Global settings //
+
+const String localeKey = 'appLocale';
+
+// Image settings //
+
+const String noImageKey = 'noImage';
+
+// Light
+
+const String lightPageImageKey = 'lightPageImage';
+
+const List<String> lightImageKeys = [lightPageImageKey];
+
+// Dark
+
+const String darkPageImageKey = 'darkPageImage';
+
+const List<String> darkImageKeys = [darkPageImageKey];
+
+// Color settings //
 
 const String isLightKey = 'isLight';
-const String isRightKey = 'isRight';
-
-// Styling //
-
-const String fontFamilyKey = 'fontFamily';
-
-const String marginKey = 'margin';
-const String paddingKey = 'padding';
-
-const String circleDiameterKey = 'circleDiameter';
-
-const String buttonSpacingKey = 'buttonSpacing';
-const String textSpacingKey = 'textSpacing';
-
-const List<String> stylingKeys = [
-  fontFamilyKey,
-  marginKey,
-  paddingKey,
-  circleDiameterKey,
-  buttonSpacingKey,
-  textSpacingKey,
-];
-
-// Colors //
 
 // Light
 
@@ -45,26 +41,22 @@ const String lightOnSurfaceColorKey = 'lightOnSurfaceColor';
 
 const String lightPrimaryColorKey = 'lightPrimaryColor';
 const String lightOnPrimaryColorKey = 'lightOnPrimaryColor';
-
 const String lightPrimaryContainerColorKey = 'lightPrimaryContainerColor';
 const String lightOnPrimaryContainerColorKey = 'lightOnPrimaryContainerColor';
 
 const String lightSecondaryColorKey = 'lightSecondaryColor';
 const String lightOnSecondaryColorKey = 'lightOnSecondaryColor';
-
 const String lightSecondaryContainerColorKey = 'lightSecondaryContainerColor';
 const String lightOnSecondaryContainerColorKey =
     'lightOnSecondaryContainerColor';
 
 const String lightTertiaryColorKey = 'lightTertiaryColor';
 const String lightOnTertiaryColorKey = 'lightOnTertiaryColor';
-
 const String lightTertiaryContainerColorKey = 'lightTertiaryContainerColor';
 const String lightOnTertiaryContainerColorKey = 'lightOnTertiaryContainerColor';
 
 const String lightErrorColorKey = 'lightErrorColor';
 const String lightOnErrorColorKey = 'lightOnErrorColor';
-
 const String lightErrorContainerColorKey = 'lightErrorContainerColor';
 const String lightOnErrorContainerColorKey = 'lightOnErrorContainerColor';
 
@@ -104,25 +96,21 @@ const String darkOnSurfaceColorKey = 'darkOnSurfaceColor';
 
 const String darkPrimaryColorKey = 'darkPrimaryColor';
 const String darkOnPrimaryColorKey = 'darkOnPrimaryColor';
-
 const String darkPrimaryContainerColorKey = 'darkPrimaryContainerColor';
 const String darkOnPrimaryContainerColorKey = 'darkOnPrimaryContainerColor';
 
 const String darkSecondaryColorKey = 'darkSecondaryColor';
 const String darkOnSecondaryColorKey = 'darkOnSecondaryColor';
-
 const String darkSecondaryContainerColorKey = 'darkSecondaryContainerColor';
 const String darkOnSecondaryContainerColorKey = 'darkOnSecondaryContainerColor';
 
 const String darkTertiaryColorKey = 'darkTertiaryColor';
 const String darkOnTertiaryColorKey = 'darkOnTertiaryColor';
-
 const String darkTertiaryContainerColorKey = 'darkTertiaryContainerColor';
 const String darkOnTertiaryContainerColorKey = 'darkOnTertiaryContainerColor';
 
 const String darkErrorColorKey = 'darkErrorColor';
 const String darkOnErrorColorKey = 'darkOnErrorColor';
-
 const String darkErrorContainerColorKey = 'darkErrorContainerColor';
 const String darkOnErrorContainerColorKey = 'darkOnErrorContainerColor';
 
@@ -152,18 +140,32 @@ const List<String> darkColorKeys = [
   darkOutlineColorKey,
 ];
 
-// Images //
+// Layout settings //
 
-const String noImageKey = 'noImage';
+const String isRightKey = 'isRight';
 
-// Light
+const String marginKey = 'margin';
 
-const String lightPageImageKey = 'lightPageImage';
+const String textSpacingKey = 'textSpacing';
+const String buttonSpacingKey = 'buttonSpacing';
 
-const List<String> lightImageKeys = [lightPageImageKey];
+const List<String> layoutKeys = [
+  isRightKey,
+  marginKey,
+  textSpacingKey,
+  buttonSpacingKey,
+];
 
-// Dark
+// Style settings //
 
-const String darkPageImageKey = 'darkPageImage';
+const String fontFamilyKey = 'fontFamily';
 
-const List<String> darkImageKeys = [darkPageImageKey];
+const String paddingKey = 'padding';
+
+const String circleDiameterKey = 'circleDiameter';
+
+const List<String> styleKeys = [
+  fontFamilyKey,
+  paddingKey,
+  circleDiameterKey,
+];
