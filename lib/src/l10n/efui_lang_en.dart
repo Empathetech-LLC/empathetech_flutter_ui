@@ -103,11 +103,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!';
+      'Each setting will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
+      'Each setting will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
 
   @override
   String get ssLanguage => 'Language';

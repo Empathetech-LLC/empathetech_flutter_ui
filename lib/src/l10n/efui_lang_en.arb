@@ -37,8 +37,8 @@
   "gAutoPlayDisabled": "Auto-play videos are disabled.",
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Each button will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
-  "ssSettingsGuideWeb": "Each button will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
+  "ssSettingsGuide": "Each setting will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
+  "ssSettingsGuideWeb": "Each setting will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
   "ssLanguage": "Language",
   "ssLangSemantics": "Activate to update the app language",
   "ssLanguages": "Languages",

@@ -104,11 +104,11 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Cada configuración mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Cada configuración mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
 
   @override
   String get ssLanguage => 'Idioma';
