@@ -91,7 +91,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               context: context,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeAllKeys(_isLight ? lightImageKeys : darkImageKeys);
+                removeKeys(_isLight ? lightImageKeys : darkImageKeys);
                 popScreen(context: context, pass: true);
               },
             ),

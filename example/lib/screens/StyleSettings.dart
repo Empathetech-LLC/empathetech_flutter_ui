@@ -71,7 +71,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               context: context,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
-                removeAllKeys(styleKeys);
+                removeKeys(styleKeys);
                 popScreen(context: context, pass: true);
               },
             ),

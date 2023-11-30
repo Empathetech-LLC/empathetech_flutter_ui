@@ -63,7 +63,7 @@ class EzScreen extends StatelessWidget {
 
       final String? imagePath = EzConfig.instance.prefs[decorationImageKey];
 
-      if (imagePath == null || imagePath == noImageKey) {
+      if (imagePath == null || imagePath == noImageValue) {
         return null;
       } else {
         return BoxDecoration(

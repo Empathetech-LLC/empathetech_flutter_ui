@@ -90,8 +90,8 @@ const Map<String, dynamic> empathetechConfig = {
 
   // Image settings
 
-  lightPageImageKey: noImageKey,
-  darkPageImageKey: noImageKey,
+  lightPageImageKey: noImageValue,
+  darkPageImageKey: noImageValue,
 
   // Color settings
 

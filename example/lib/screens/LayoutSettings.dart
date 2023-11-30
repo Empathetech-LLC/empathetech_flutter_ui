@@ -83,7 +83,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
               context: context,
               dialogTitle: EFUILang.of(context)!.lsResetAll,
               onConfirm: () {
-                removeAllKeys(layoutKeys);
+                removeKeys(layoutKeys);
                 popScreen(context: context, pass: true);
               },
             ),

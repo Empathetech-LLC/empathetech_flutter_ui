@@ -292,7 +292,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               hint: _resetTitle,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeAllKeys(_isLight ? lightColorKeys : darkColorKeys);
+                removeKeys(_isLight ? lightColorKeys : darkColorKeys);
                 popScreen(context: context, pass: true);
               },
             ),

@@ -13,10 +13,12 @@ const String isLightKey = 'isLight';
 
 const String localeKey = 'appLocale';
 
+const globalKeys = [isLightKey, localeKey];
+
 // Image settings //
 
 /// Allows for app images whose default is an asset to be "null"
-const String noImageKey = 'noImage';
+const String noImageValue = 'noImage';
 
 // Light
 
@@ -169,4 +171,14 @@ const List<String> styleKeys = [
   fontFamilyKey,
   paddingKey,
   circleDiameterKey,
+];
+
+const List<String> allKeys = [
+  ...globalKeys,
+  ...lightImageKeys,
+  ...darkImageKeys,
+  ...lightColorKeys,
+  ...darkColorKeys,
+  ...layoutKeys,
+  ...styleKeys
 ];

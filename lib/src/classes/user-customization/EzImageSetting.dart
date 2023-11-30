@@ -204,9 +204,9 @@ class _ImageSettingState extends State<EzImageSetting> {
             _cleanup();
 
             EzConfig.instance.preferences
-                .setString(widget.prefsKey, noImageKey);
+                .setString(widget.prefsKey, noImageValue);
 
-            popScreen(context: context, pass: noImageKey);
+            popScreen(context: context, pass: noImageValue);
           },
           label: Text(EFUILang.of(context)!.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
@@ -296,7 +296,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   height: widget.fullscreen ? 160 : 75,
                   child: (_updatedPath is String)
                       ? // user made a change
-                      (_updatedPath == noImageKey)
+                      (_updatedPath == noImageValue)
                           ? // user cleared the image
                           Icon(PlatformIcons(context).clear)
                           : // user set a custom image
@@ -308,7 +308,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
                               EzConfig.instance.prefs[widget.prefsKey] ==
-                                  noImageKey)
+                                  noImageValue)
                           ? // there is no current image
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored

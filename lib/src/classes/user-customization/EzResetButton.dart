@@ -54,7 +54,7 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onConfirm = onConfirm ??
         () {
-          EzConfig.instance.preferences.clear();
+          removeKeys(allKeys);
           popScreen(context: context, pass: true);
         };
 
