@@ -41,15 +41,15 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gSystem, style: style),
+        child: Text(EFUILang.of(context)!.gSystem),
         value: ThemeMode.system,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gLight, style: style),
+        child: Text(EFUILang.of(context)!.gLight),
         value: ThemeMode.light,
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gDark, style: style),
+        child: Text(EFUILang.of(context)!.gDark),
         value: ThemeMode.dark,
       ),
     ];
