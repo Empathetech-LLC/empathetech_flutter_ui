@@ -34,8 +34,8 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.light
           : ThemeMode.dark;
 
-  late final ThemeData _materialLight = ezThemeData(lightTheme: true);
-  late final ThemeData _materialDark = ezThemeData(lightTheme: false);
+  late final ThemeData _materialLight = ezThemeData(Brightness.light);
+  late final ThemeData _materialDark = ezThemeData(Brightness.dark);
 
   // Return the build //
 
