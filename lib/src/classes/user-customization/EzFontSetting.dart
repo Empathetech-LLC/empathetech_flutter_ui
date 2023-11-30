@@ -62,7 +62,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
           EFUILang.of(context)!.stsFonts,
           textAlign: TextAlign.center,
         ),
-        contents: buttons,
+        // Remove the trailing button spacer
+        contents: buttons.sublist(0, buttons.length - 1),
       ),
     );
   }
