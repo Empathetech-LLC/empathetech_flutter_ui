@@ -82,16 +82,16 @@ const String EmpathetechKofi = "https://ko-fi.com/empathetech";
 const Map<String, dynamic> empathetechConfig = {
   // Global settings
 
-  localeKey: ["en", "US"],
+  // localeKey: null => Locale == System
 
   // Image settings
 
-  lightPageImageKey: noImageKey,
-  darkPageImageKey: noImageKey,
+  // lightPageImageKey: null
+  // darkPageImageKey: null
 
   // Color settings
 
-  // isLightKey == null => ThemeMode == System
+  // isLightKey: null => ThemeMode == System
 
   // Light
   lightBackgroundColorKey: offWhiteHex,
@@ -153,7 +153,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   // Layout settings
 
-  // isRightKey == null => Hand == right
+  // isRightKey: null => Hand == right
 
   marginKey: 15.0,
 
