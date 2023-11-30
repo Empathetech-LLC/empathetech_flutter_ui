@@ -33,9 +33,21 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   CountryFlag _flag(Locale? locale) {
     final Locale flagLocale = locale ?? Localizations.localeOf(context);
 
+    final double? flagWidth = Theme.of(context)
+        .elevatedButtonTheme
+        .style
+        ?.textStyle
+        ?.resolve({})?.fontSize;
+
     return (flagLocale.countryCode == null)
-        ? CountryFlag.fromLanguageCode(flagLocale.languageCode)
-        : CountryFlag.fromCountryCode(flagLocale.countryCode!);
+        ? CountryFlag.fromLanguageCode(
+            flagLocale.languageCode,
+            width: flagWidth,
+          )
+        : CountryFlag.fromCountryCode(
+            flagLocale.countryCode!,
+            width: flagWidth,
+          );
   }
 
   /// Builds an [EzAlertDialog] with [Locale]s mapped to a list of [ElevatedButton]s
