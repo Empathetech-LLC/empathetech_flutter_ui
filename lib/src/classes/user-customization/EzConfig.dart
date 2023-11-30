@@ -41,9 +41,9 @@ class EzConfig {
     required this.assets,
     required this.defaults,
     required this.prefs,
-    this.locale,
-    this.fontFamily,
-    this.dominantHand,
+    required this.locale,
+    required this.fontFamily,
+    required this.dominantHand,
   });
 
   /// [assetPaths] => provide your [AssetImage] paths for this app
