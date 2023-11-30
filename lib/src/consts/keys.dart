@@ -13,6 +13,7 @@ const String localeKey = 'appLocale';
 
 // Image settings //
 
+/// Allows for app images whose default is an asset to be "null"
 const String noImageKey = 'noImage';
 
 // Light
