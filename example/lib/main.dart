@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
   // Most apps need this
@@ -100,7 +101,10 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: EFUILang.localizationsDelegates,
+        localizationsDelegates: [
+          LocaleNamesLocalizationsDelegate(),
+          ...EFUILang.localizationsDelegates,
+        ],
 
         // Supported languages
         supportedLocales: EFUILang.supportedLocales,
