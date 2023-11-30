@@ -23,17 +23,19 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather theme data //
 
-  Locale currLocale = EzConfig.instance.locale;
+  Locale? currLocale = EzConfig.instance.locale;
 
   final double _padding = EzConfig.instance.prefs[paddingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Gather the list items //
 
-  Widget _flag(Locale locale) {
-    return (locale.countryCode == null)
-        ? CountryFlag.fromLanguageCode(locale.languageCode)
-        : CountryFlag.fromCountryCode(locale.countryCode!);
+  CountryFlag _flag(Locale? locale) {
+    final Locale flagLocale = locale ?? Localizations.localeOf(context);
+
+    return (flagLocale.countryCode == null)
+        ? CountryFlag.fromLanguageCode(flagLocale.languageCode)
+        : CountryFlag.fromCountryCode(flagLocale.countryCode!);
   }
 
   /// Builds an [EzAlertDialog] with [Locale]s mapped to a list of [ElevatedButton]s
