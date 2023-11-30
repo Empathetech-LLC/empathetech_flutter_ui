@@ -83,6 +83,7 @@ const Map<String, dynamic> empathetechConfig = {
   // Global settings
 
   // localeKey: null => Locale == System
+  // isLightKey: null => ThemeMode == System
 
   // Image settings
 
@@ -90,8 +91,6 @@ const Map<String, dynamic> empathetechConfig = {
   // darkPageImageKey: null
 
   // Color settings
-
-  // isLightKey: null => ThemeMode == System
 
   // Light
   lightBackgroundColorKey: offWhiteHex,
