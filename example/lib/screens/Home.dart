@@ -52,6 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const EzLocaleSetting(),
             EzSpacer(_buttonSpacer),
 
+            const EzThemeModeSwitch(),
+            EzSpacer(_buttonSpacer),
+
             // Image settings
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
