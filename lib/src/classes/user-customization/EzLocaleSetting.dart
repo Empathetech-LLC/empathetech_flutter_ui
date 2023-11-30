@@ -8,6 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
   /// Pass in any custom [supportedLocales]
@@ -81,7 +82,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
               _flag(locale),
               EzSpacer.row(_padding),
               Text(
-                locale.toLanguageTag(),
+                LocaleNames.of(context)!.nameOf(locale.languageCode).toString(),
                 textAlign: TextAlign.center,
               ),
             ],
