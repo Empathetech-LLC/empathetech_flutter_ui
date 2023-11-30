@@ -80,11 +80,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         insetPadding: EdgeInsets.all(padding),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
-        title: Padding(
-          // No titlePadding equivalent, have to do it manually
-          padding: EdgeInsets.all(padding),
-          child: title,
-        ),
+        title: title,
         content: EzScrollView(
           children: contents,
           reverseHands: reverseHands,
