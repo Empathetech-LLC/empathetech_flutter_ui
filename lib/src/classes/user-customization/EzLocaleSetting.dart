@@ -63,7 +63,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
     _locales.forEach((Locale locale) {
       List<String> localeData = [locale.languageCode];
-      locale.countryCode ?? localeData.add(locale.countryCode!);
+      if (locale.countryCode != null) localeData.add(locale.countryCode!);
 
       buttons.addAll([
         ElevatedButton(
@@ -81,7 +81,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
               _flag(locale),
               EzSpacer.row(_padding),
               Text(
-                locale.toString(),
+                locale.toLanguageTag(),
                 textAlign: TextAlign.center,
               ),
             ],
