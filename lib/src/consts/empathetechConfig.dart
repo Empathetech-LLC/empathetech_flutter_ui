@@ -7,74 +7,52 @@ import '../../empathetech_flutter_ui.dart';
 
 /// Empathetech's default configuration for [EzConfig]
 const Map<String, dynamic> empathetechConfig = {
-  // Color settings
+  // Global settings //
+
+  // Image settings //
+
+  // Color settings //
 
   // Light
-  lightBackgroundColorKey: offWhiteHex,
-  lightOnBackgroundColorKey: blackHex,
+  lightBackgroundKey: offWhiteHex,
+  lightOnBackgroundKey: blackHex,
 
-  lightSurfaceColorKey: whiteHex,
-  lightOnSurfaceColorKey: blackHex,
+  lightSurfaceKey: whiteHex,
+  lightOnSurfaceKey: blackHex,
 
-  lightPrimaryColorKey: EmpathPurpleHex,
-  lightOnPrimaryColorKey: whiteHex,
-  lightPrimaryContainerColorKey: EmpathPurpleHex,
-  lightOnPrimaryContainerColorKey: whiteHex,
+  lightPrimaryKey: EmpathPurpleHex,
+  lightOnPrimaryKey: whiteHex,
 
-  lightSecondaryColorKey: EmpathGoldenrodHex,
-  lightOnSecondaryColorKey: blackHex,
-  lightSecondaryContainerColorKey: EmpathGoldenrodHex,
-  lightOnSecondaryContainerColorKey: blackHex,
+  lightSecondaryKey: EmpathGoldenrodHex,
+  lightOnSecondaryKey: blackHex,
 
-  lightTertiaryColorKey: EmpathEucalyptusHex,
-  lightOnTertiaryColorKey: blackHex,
-  lightTertiaryContainerColorKey: EmpathEucalyptusHex,
-  lightOnTertiaryContainerColorKey: blackHex,
-
-  lightErrorColorKey: EmpathErrorRedHex,
-  lightOnErrorColorKey: whiteHex,
-  lightErrorContainerColorKey: EmpathErrorRedHex,
-  lightOnErrorContainerColorKey: whiteHex,
-
-  lightOutlineColorKey: greyPointHex,
+  lightTertiaryKey: EmpathEucalyptusHex,
+  lightOnTertiaryKey: blackHex,
 
   // Dark
-  darkBackgroundColorKey: offBlackHex,
-  darkOnBackgroundColorKey: whiteHex,
+  darkBackgroundKey: offBlackHex,
+  darkOnBackgroundKey: whiteHex,
 
-  darkSurfaceColorKey: blackHex,
-  darkOnSurfaceColorKey: whiteHex,
+  darkSurfaceKey: blackHex,
+  darkOnSurfaceKey: whiteHex,
 
-  darkPrimaryColorKey: EmpathEucalyptusHex,
-  darkOnPrimaryColorKey: blackHex,
-  darkPrimaryContainerColorKey: EmpathEucalyptusHex,
-  darkOnPrimaryContainerColorKey: blackHex,
+  darkPrimaryKey: EmpathEucalyptusHex,
+  darkOnPrimaryKey: blackHex,
 
-  darkSecondaryColorKey: EmpathGoldenrodHex,
-  darkOnSecondaryColorKey: blackHex,
-  darkSecondaryContainerColorKey: EmpathGoldenrodHex,
-  darkOnSecondaryContainerColorKey: blackHex,
+  darkSecondaryKey: EmpathGoldenrodHex,
+  darkOnSecondaryKey: blackHex,
 
-  darkTertiaryColorKey: EmpathPurpleHex,
-  darkOnTertiaryColorKey: whiteHex,
-  darkTertiaryContainerColorKey: EmpathPurpleHex,
-  darkOnTertiaryContainerColorKey: whiteHex,
+  darkTertiaryKey: EmpathPurpleHex,
+  darkOnTertiaryKey: whiteHex,
 
-  darkErrorColorKey: EmpathErrorRedHex,
-  darkOnErrorColorKey: whiteHex,
-  darkErrorContainerColorKey: EmpathErrorRedHex,
-  darkOnErrorContainerColorKey: whiteHex,
-
-  darkOutlineColorKey: greyPointHex,
-
-  // Layout settings
+  // Layout settings //
 
   marginKey: 15.0,
 
   textSpacingKey: 60.0,
   buttonSpacingKey: 30.0,
 
-  // Style settings
+  // Style settings //
 
   fontFamilyKey: roboto,
 
