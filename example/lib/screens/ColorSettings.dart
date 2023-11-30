@@ -64,220 +64,132 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                     ? [
                         // Background
                         EzColorSetting(
-                          updating: [lightBackgroundColorKey],
+                          updating: [lightBackgroundKey],
                           label: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [lightOnBackgroundColorKey],
+                          updating: [lightOnBackgroundKey],
                           label: EFUILang.of(context)!.csOnBackground,
-                          textBackgroundKey: lightBackgroundColorKey,
+                          textBackgroundKey: lightBackgroundKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Surface
                         EzColorSetting(
-                          updating: [lightSurfaceColorKey],
+                          updating: [lightSurfaceKey],
                           label: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [lightOnSurfaceColorKey],
+                          updating: [lightOnSurfaceKey],
                           label: EFUILang.of(context)!.csOnSurface,
-                          textBackgroundKey: lightSurfaceColorKey,
+                          textBackgroundKey: lightSurfaceKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Primary
                         EzColorSetting(
-                          updating: [
-                            lightPrimaryColorKey,
-                            lightPrimaryContainerColorKey,
-                          ],
+                          updating: [lightPrimaryKey],
                           label: EFUILang.of(context)!.csPrimary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            lightOnPrimaryColorKey,
-                            lightOnPrimaryContainerColorKey,
-                          ],
+                          updating: [lightOnPrimaryKey],
                           label: EFUILang.of(context)!.csOnPrimary,
-                          textBackgroundKey: lightPrimaryColorKey,
+                          textBackgroundKey: lightPrimaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Secondary
                         EzColorSetting(
-                          updating: [
-                            lightSecondaryColorKey,
-                            lightSecondaryContainerColorKey,
-                          ],
+                          updating: [lightSecondaryKey],
                           label: EFUILang.of(context)!.csSecondary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            lightOnSecondaryColorKey,
-                            lightOnSecondaryContainerColorKey,
-                          ],
+                          updating: [lightOnSecondaryKey],
                           label: EFUILang.of(context)!.csOnSecondary,
-                          textBackgroundKey: lightSecondaryColorKey,
+                          textBackgroundKey: lightSecondaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Tertiary
                         EzColorSetting(
-                          updating: [
-                            lightTertiaryColorKey,
-                            lightTertiaryContainerColorKey,
-                          ],
+                          updating: [lightTertiaryKey],
                           label: EFUILang.of(context)!.csTertiary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            lightOnTertiaryColorKey,
-                            lightOnTertiaryContainerColorKey,
-                          ],
+                          updating: [lightOnTertiaryKey],
                           label: EFUILang.of(context)!.csOnTertiary,
-                          textBackgroundKey: lightTertiaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Error
-                        EzColorSetting(
-                          updating: [
-                            lightErrorColorKey,
-                            lightErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csError,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            lightOnErrorColorKey,
-                            lightOnErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnError,
-                          textBackgroundKey: lightErrorColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Outline
-                        EzColorSetting(
-                          updating: [lightOutlineColorKey],
-                          label: EFUILang.of(context)!.csOutline,
+                          textBackgroundKey: lightTertiaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
                     : [
                         // Background
                         EzColorSetting(
-                          updating: [darkBackgroundColorKey],
+                          updating: [darkBackgroundKey],
                           label: EFUILang.of(context)!.csBackground,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [darkOnBackgroundColorKey],
+                          updating: [darkOnBackgroundKey],
                           label: EFUILang.of(context)!.csOnBackground,
-                          textBackgroundKey: darkBackgroundColorKey,
+                          textBackgroundKey: darkBackgroundKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Surface
                         EzColorSetting(
-                          updating: [darkSurfaceColorKey],
+                          updating: [darkSurfaceKey],
                           label: EFUILang.of(context)!.csSurface,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [darkOnSurfaceColorKey],
+                          updating: [darkOnSurfaceKey],
                           label: EFUILang.of(context)!.csOnSurface,
-                          textBackgroundKey: darkSurfaceColorKey,
+                          textBackgroundKey: darkSurfaceKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Primary
                         EzColorSetting(
-                          updating: [
-                            darkPrimaryColorKey,
-                            darkPrimaryContainerColorKey,
-                          ],
+                          updating: [darkPrimaryKey],
                           label: EFUILang.of(context)!.csPrimary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            darkOnPrimaryColorKey,
-                            darkOnPrimaryContainerColorKey,
-                          ],
+                          updating: [darkOnPrimaryKey],
                           label: EFUILang.of(context)!.csOnPrimary,
-                          textBackgroundKey: darkPrimaryColorKey,
+                          textBackgroundKey: darkPrimaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Secondary
                         EzColorSetting(
-                          updating: [
-                            darkSecondaryColorKey,
-                            darkSecondaryContainerColorKey,
-                          ],
+                          updating: [darkSecondaryKey],
                           label: EFUILang.of(context)!.csSecondary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            darkOnSecondaryColorKey,
-                            darkOnSecondaryContainerColorKey,
-                          ],
+                          updating: [darkOnSecondaryKey],
                           label: EFUILang.of(context)!.csOnSecondary,
-                          textBackgroundKey: darkSecondaryColorKey,
+                          textBackgroundKey: darkSecondaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
 
                         // Tertiary
                         EzColorSetting(
-                          updating: [
-                            darkTertiaryColorKey,
-                            darkTertiaryContainerColorKey,
-                          ],
+                          updating: [darkTertiaryKey],
                           label: EFUILang.of(context)!.csTertiary,
                         ),
                         EzSpacer(_buttonSpacer),
                         EzColorSetting(
-                          updating: [
-                            darkOnTertiaryColorKey,
-                            darkOnTertiaryContainerColorKey,
-                          ],
+                          updating: [darkOnTertiaryKey],
                           label: EFUILang.of(context)!.csOnTertiary,
-                          textBackgroundKey: darkTertiaryColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Error
-                        EzColorSetting(
-                          updating: [
-                            darkErrorColorKey,
-                            darkErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csError,
-                        ),
-                        EzSpacer(_buttonSpacer),
-                        EzColorSetting(
-                          updating: [
-                            darkOnErrorColorKey,
-                            darkOnErrorContainerColorKey,
-                          ],
-                          label: EFUILang.of(context)!.csOnError,
-                          textBackgroundKey: darkErrorColorKey,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Outline
-                        EzColorSetting(
-                          updating: [darkOutlineColorKey],
-                          label: EFUILang.of(context)!.csOutline,
+                          textBackgroundKey: darkTertiaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
