@@ -84,7 +84,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                       ],
               ),
             ),
-            EzSpacer(2 * _buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Local reset all
             EzResetButton(

@@ -32,7 +32,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       EFUILang.of(context)!.csResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
@@ -49,7 +48,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               style: titleSmall(context),
               textAlign: TextAlign.center,
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Settings //
 
@@ -196,7 +195,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               ),
             ),
 
-            EzSpacer(2 * _buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Local reset all
             EzResetButton(

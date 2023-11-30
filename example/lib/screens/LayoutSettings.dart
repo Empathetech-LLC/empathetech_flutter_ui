@@ -64,7 +64,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(2 * _buttonSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Button spacing
             EzSliderSetting(
