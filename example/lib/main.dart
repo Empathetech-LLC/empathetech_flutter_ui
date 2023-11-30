@@ -21,7 +21,7 @@ void main() async {
   // Spin up the theme factory!
   EzConfig(
     // Paths to any locally stored images the app uses
-    assetPaths: [],
+    assetPaths: {},
 
     preferences: prefs,
 

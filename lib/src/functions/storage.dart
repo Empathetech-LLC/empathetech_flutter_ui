@@ -13,7 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Custom implementation of a removeAll() style method for [SharedPreferences]
-void removeKeys(List<String> keys) {
+void removeKeys(Set<String> keys) {
   for (String key in keys) {
     EzConfig.instance.preferences.remove(key);
   }

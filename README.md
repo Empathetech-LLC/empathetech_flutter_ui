@@ -91,7 +91,7 @@ void main() async {
 
   EzConfig(
     // Paths to any locally stored images the app uses
-    assetPaths: [],
+    assetPaths: {},
 
     preferences: prefs,
 

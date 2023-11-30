@@ -14,7 +14,7 @@ class EzConfig {
   final SharedPreferences preferences;
 
   /// [AssetImage] paths for the app
-  final List<String> assets;
+  final Set<String> assets;
 
   /// The factory constructor will merge [empathetechConfig] with any provided customDefaults
   final Map<String, dynamic> defaults;
@@ -22,6 +22,9 @@ class EzConfig {
   /// Live values in use
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
+
+  /// All [Key]s that can be configured
+  final Set<String> keys;
 
   /// Current locale/language for the app
   final Locale? locale;
@@ -41,6 +44,7 @@ class EzConfig {
     required this.assets,
     required this.defaults,
     required this.prefs,
+    required this.keys,
     required this.locale,
     required this.fontFamily,
     required this.dominantHand,
@@ -50,7 +54,7 @@ class EzConfig {
   /// [preferences] => provide a [SharedPreferences] instance
   /// [customDefaults] => provide your brand colors, custom styling, etc
   factory EzConfig({
-    required List<String> assetPaths,
+    required Set<String> assetPaths,
     required SharedPreferences preferences,
     Map<String, dynamic>? customDefaults,
   }) {
@@ -63,14 +67,18 @@ class EzConfig {
       // Merge custom defaults
       if (customDefaults != null) _defaults.addAll(customDefaults);
 
+      // Build the EzConfig.keys //
+
+      Set<String> _keys = new Set.from(allKeys);
+      if (customDefaults != null) _keys.addAll(customDefaults.keys);
+
       // Build EzConfig.prefs //
 
       // Start with the newly merged defaults
       Map<String, dynamic> _prefs = new Map.from(_defaults);
 
       // Find the keys that users have overwritten
-      List<String> overwritten =
-          _prefs.keys.toSet().intersection(preferences.getKeys()).toList();
+      Set<String> overwritten = preferences.getKeys().intersection(_keys);
 
       // Get the updated values
       overwritten.forEach((key) {
@@ -100,7 +108,7 @@ class EzConfig {
         if (userPref != null) _prefs[key] = userPref;
       });
 
-      // Gather trackers //
+      // Build remaining trackers //
       final List<String>? localeData = preferences.getStringList(localeKey);
       final Locale? _locale = (localeData == null || localeData.isEmpty)
           ? null
@@ -124,6 +132,7 @@ class EzConfig {
         preferences: preferences,
         defaults: _defaults,
         prefs: _prefs,
+        keys: _keys,
         locale: _locale,
         fontFamily: _fontFamily,
         dominantHand: _dominantHand,

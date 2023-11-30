@@ -9,24 +9,32 @@ const String isLightKey = 'isLight';
 
 const String localeKey = 'appLocale';
 
-const globalKeys = [isLightKey, localeKey];
+const Set<String> globalKeys = {isLightKey, localeKey};
 
 // Image settings //
 
 // Light
 
 const String lightPageImageKey = 'lightPageImage';
+const String lightColorSchemeImageKey = 'lightColorSchemeImage';
 
-const List<String> lightImageKeys = [lightPageImageKey];
+const Set<String> lightImageKeys = {
+  lightPageImageKey,
+  lightColorSchemeImageKey,
+};
 
 // Dark
 
 const String darkPageImageKey = 'darkPageImage';
+const String darkColorSchemeImageKey = 'darkColorSchemeImage';
 
-const List<String> darkImageKeys = [darkPageImageKey];
+const Set<String> darkImageKeys = {
+  darkPageImageKey,
+  darkColorSchemeImageKey,
+};
 
 // Color settings //
-// https://m3.material.io/styles/color/roles
+// https://api.flutter.dev/flutter/material/ColorScheme-class.html
 
 // Light
 
@@ -35,105 +43,73 @@ const String lightOnPrimaryKey = 'lightOnPrimary';
 const String lightPrimaryContainerKey = 'lightPrimaryContainer';
 const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
 
-const String lightPrimaryFixedKey = 'lightPrimaryFixed';
-const String lightPrimaryFixedDimKey = 'lightPrimaryFixedDim';
-const String lightOnPrimaryFixedKey = 'lightOnPrimaryFixed';
-const String lightOnPrimaryFixedVariantKey = 'lightOnPrimaryFixedVariant';
-
 const String lightSecondaryKey = 'lightSecondary';
 const String lightOnSecondaryKey = 'lightOnSecondary';
 const String lightSecondaryContainerKey = 'lightSecondaryContainer';
 const String lightOnSecondaryContainerKey = 'lightOnSecondaryContainer';
-
-const String lightSecondaryFixedKey = 'lightSecondaryFixed';
-const String lightSecondaryFixedDimKey = 'lightSecondaryFixedDim';
-const String lightOnSecondaryFixedKey = 'lightOnSecondaryFixed';
-const String lightOnSecondaryFixedVariantKey = 'lightOnSecondaryFixedVariant';
 
 const String lightTertiaryKey = 'lightTertiary';
 const String lightOnTertiaryKey = 'lightOnTertiary';
 const String lightTertiaryContainerKey = 'lightTertiaryContainer';
 const String lightOnTertiaryContainerKey = 'lightOnTertiaryContainer';
 
-const String lightTertiaryFixedKey = 'lightTertiaryFixed';
-const String lightTertiaryFixedDimKey = 'lightTertiaryFixedDim';
-const String lightOnTertiaryFixedKey = 'lightOnTertiaryFixed';
-const String lightOnTertiaryFixedVariantKey = 'lightOnTertiaryFixedVariant';
-
 const String lightErrorKey = 'lightError';
 const String lightOnErrorKey = 'lightOnError';
 const String lightErrorContainerKey = 'lightErrorContainer';
 const String lightOnErrorContainerKey = 'lightOnErrorContainer';
 
-const String lightSurfaceDimKey = 'lightSurfaceDim';
-const String lightSurfaceKey = 'lightSurface';
-const String lightSurfaceBrightKey = 'lightSurfaceBright';
-
-const String lightSurfaceContainerLowestKey = 'lightSurfaceContainerLowest';
-const String lightSurfaceContainerLowKey = 'lightSurfaceContainerLow';
-const String lightSurfaceContainerKey = 'lightSurfaceContainer';
-const String lightSurfaceContainerHighKey = 'lightSurfaceContainerHigh';
-const String lightSurfaceContainerHighestKey = 'lightSurfaceContainerHighest';
-
-const String lightOnSurfaceKey = 'lightOnSurface';
-const String lightOnSurfaceVariantKey = 'lightOnSurfaceVariant';
 const String lightOutlineKey = 'lightOutline';
 const String lightOutlineVariantKey = 'lightOutlineVariant';
 
+const String lightBackgroundKey = 'lightBackground';
+const String lightOnBackgroundKey = 'lightOnBackground';
+
+const String lightSurfaceKey = 'lightSurface';
+const String lightOnSurfaceKey = 'lightOnSurface';
+const String lightSurfaceVariantKey = 'lightSurfaceVariant';
+const String lightOnSurfaceVariantKey = 'lightOnSurfaceVariant';
 const String lightInverseSurfaceKey = 'lightInverseSurface';
-const String lightInverseOnSurfaceKey = 'lightInverseOnSurface';
+const String lightOnInverseSurfaceKey = 'lightOnInverseSurface';
+
 const String lightInversePrimaryKey = 'lightInversePrimary';
 
-const String lightScrimKey = 'lightScrim';
 const String lightShadowKey = 'lightShadow';
+const String lightScrimKey = 'lightScrim';
 
-const List<String> lightKeys = [
+const String lightSurfaceTintKey = 'lightSurfaceTint';
+
+const Set<String> lightColorKeys = {
   lightPrimaryKey,
   lightOnPrimaryKey,
   lightPrimaryContainerKey,
   lightOnPrimaryContainerKey,
-  lightPrimaryFixedKey,
-  lightPrimaryFixedDimKey,
-  lightOnPrimaryFixedKey,
-  lightOnPrimaryFixedVariantKey,
   lightSecondaryKey,
   lightOnSecondaryKey,
   lightSecondaryContainerKey,
   lightOnSecondaryContainerKey,
-  lightSecondaryFixedKey,
-  lightSecondaryFixedDimKey,
-  lightOnSecondaryFixedKey,
-  lightOnSecondaryFixedVariantKey,
   lightTertiaryKey,
   lightOnTertiaryKey,
   lightTertiaryContainerKey,
   lightOnTertiaryContainerKey,
-  lightTertiaryFixedKey,
-  lightTertiaryFixedDimKey,
-  lightOnTertiaryFixedKey,
-  lightOnTertiaryFixedVariantKey,
   lightErrorKey,
   lightOnErrorKey,
   lightErrorContainerKey,
   lightOnErrorContainerKey,
-  lightSurfaceDimKey,
-  lightSurfaceKey,
-  lightSurfaceBrightKey,
-  lightSurfaceContainerLowestKey,
-  lightSurfaceContainerLowKey,
-  lightSurfaceContainerKey,
-  lightSurfaceContainerHighKey,
-  lightSurfaceContainerHighestKey,
-  lightOnSurfaceKey,
-  lightOnSurfaceVariantKey,
   lightOutlineKey,
   lightOutlineVariantKey,
+  lightBackgroundKey,
+  lightOnBackgroundKey,
+  lightSurfaceKey,
+  lightOnSurfaceKey,
+  lightSurfaceVariantKey,
+  lightOnSurfaceVariantKey,
   lightInverseSurfaceKey,
-  lightInverseOnSurfaceKey,
+  lightOnInverseSurfaceKey,
   lightInversePrimaryKey,
   lightScrimKey,
   lightShadowKey,
-];
+  lightSurfaceTintKey,
+};
 
 // Dark
 
@@ -142,105 +118,73 @@ const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
 
-const String darkPrimaryFixedKey = 'darkPrimaryFixed';
-const String darkPrimaryFixedDimKey = 'darkPrimaryFixedDim';
-const String darkOnPrimaryFixedKey = 'darkOnPrimaryFixed';
-const String darkOnPrimaryFixedVariantKey = 'darkOnPrimaryFixedVariant';
-
 const String darkSecondaryKey = 'darkSecondary';
 const String darkOnSecondaryKey = 'darkOnSecondary';
 const String darkSecondaryContainerKey = 'darkSecondaryContainer';
 const String darkOnSecondaryContainerKey = 'darkOnSecondaryContainer';
-
-const String darkSecondaryFixedKey = 'darkSecondaryFixed';
-const String darkSecondaryFixedDimKey = 'darkSecondaryFixedDim';
-const String darkOnSecondaryFixedKey = 'darkOnSecondaryFixed';
-const String darkOnSecondaryFixedVariantKey = 'darkOnSecondaryFixedVariant';
 
 const String darkTertiaryKey = 'darkTertiary';
 const String darkOnTertiaryKey = 'darkOnTertiary';
 const String darkTertiaryContainerKey = 'darkTertiaryContainer';
 const String darkOnTertiaryContainerKey = 'darkOnTertiaryContainer';
 
-const String darkTertiaryFixedKey = 'darkTertiaryFixed';
-const String darkTertiaryFixedDimKey = 'darkTertiaryFixedDim';
-const String darkOnTertiaryFixedKey = 'darkOnTertiaryFixed';
-const String darkOnTertiaryFixedVariantKey = 'darkOnTertiaryFixedVariant';
-
 const String darkErrorKey = 'darkError';
 const String darkOnErrorKey = 'darkOnError';
 const String darkErrorContainerKey = 'darkErrorContainer';
 const String darkOnErrorContainerKey = 'darkOnErrorContainer';
 
-const String darkSurfaceDimKey = 'darkSurfaceDim';
-const String darkSurfaceKey = 'darkSurface';
-const String darkSurfaceBrightKey = 'darkSurfaceBright';
-
-const String darkSurfaceContainerLowestKey = 'darkSurfaceContainerLowest';
-const String darkSurfaceContainerLowKey = 'darkSurfaceContainerLow';
-const String darkSurfaceContainerKey = 'darkSurfaceContainer';
-const String darkSurfaceContainerHighKey = 'darkSurfaceContainerHigh';
-const String darkSurfaceContainerHighestKey = 'darkSurfaceContainerHighest';
-
-const String darkOnSurfaceKey = 'darkOnSurface';
-const String darkOnSurfaceVariantKey = 'darkOnSurfaceVariant';
 const String darkOutlineKey = 'darkOutline';
 const String darkOutlineVariantKey = 'darkOutlineVariant';
 
+const String darkBackgroundKey = 'darkBackground';
+const String darkOnBackgroundKey = 'darkOnBackground';
+
+const String darkSurfaceKey = 'darkSurface';
+const String darkOnSurfaceKey = 'darkOnSurface';
+const String darkSurfaceVariantKey = 'darkSurfaceVariant';
+const String darkOnSurfaceVariantKey = 'darkOnSurfaceVariant';
 const String darkInverseSurfaceKey = 'darkInverseSurface';
-const String darkInverseOnSurfaceKey = 'darkInverseOnSurface';
+const String darkOnInverseSurfaceKey = 'darkOnInverseSurface';
+
 const String darkInversePrimaryKey = 'darkInversePrimary';
 
-const String darkScrimKey = 'darkScrim';
 const String darkShadowKey = 'darkShadow';
+const String darkScrimKey = 'darkScrim';
 
-const List<String> darkKeys = [
+const String darkSurfaceTintKey = 'darkSurfaceTint';
+
+const Set<String> darkColorKeys = {
   darkPrimaryKey,
   darkOnPrimaryKey,
   darkPrimaryContainerKey,
   darkOnPrimaryContainerKey,
-  darkPrimaryFixedKey,
-  darkPrimaryFixedDimKey,
-  darkOnPrimaryFixedKey,
-  darkOnPrimaryFixedVariantKey,
   darkSecondaryKey,
   darkOnSecondaryKey,
   darkSecondaryContainerKey,
   darkOnSecondaryContainerKey,
-  darkSecondaryFixedKey,
-  darkSecondaryFixedDimKey,
-  darkOnSecondaryFixedKey,
-  darkOnSecondaryFixedVariantKey,
   darkTertiaryKey,
   darkOnTertiaryKey,
   darkTertiaryContainerKey,
   darkOnTertiaryContainerKey,
-  darkTertiaryFixedKey,
-  darkTertiaryFixedDimKey,
-  darkOnTertiaryFixedKey,
-  darkOnTertiaryFixedVariantKey,
   darkErrorKey,
   darkOnErrorKey,
   darkErrorContainerKey,
   darkOnErrorContainerKey,
-  darkSurfaceDimKey,
-  darkSurfaceKey,
-  darkSurfaceBrightKey,
-  darkSurfaceContainerLowestKey,
-  darkSurfaceContainerLowKey,
-  darkSurfaceContainerKey,
-  darkSurfaceContainerHighKey,
-  darkSurfaceContainerHighestKey,
-  darkOnSurfaceKey,
-  darkOnSurfaceVariantKey,
   darkOutlineKey,
   darkOutlineVariantKey,
+  darkBackgroundKey,
+  darkOnBackgroundKey,
+  darkSurfaceKey,
+  darkOnSurfaceKey,
+  darkSurfaceVariantKey,
+  darkOnSurfaceVariantKey,
   darkInverseSurfaceKey,
-  darkInverseOnSurfaceKey,
+  darkOnInverseSurfaceKey,
   darkInversePrimaryKey,
   darkScrimKey,
   darkShadowKey,
-];
+  darkSurfaceTintKey,
+};
 
 // Layout settings //
 
@@ -251,12 +195,12 @@ const String marginKey = 'margin';
 const String textSpacingKey = 'textSpacing';
 const String buttonSpacingKey = 'buttonSpacing';
 
-const List<String> layoutKeys = [
+const Set<String> layoutKeys = {
   isRightKey,
   marginKey,
   textSpacingKey,
   buttonSpacingKey,
-];
+};
 
 // Style settings //
 
@@ -266,18 +210,18 @@ const String paddingKey = 'padding';
 
 const String circleDiameterKey = 'circleDiameter';
 
-const List<String> styleKeys = [
+const Set<String> styleKeys = {
   fontFamilyKey,
   paddingKey,
   circleDiameterKey,
-];
+};
 
-const List<String> allKeys = [
+const Set<String> allKeys = {
   ...globalKeys,
   ...lightImageKeys,
   ...darkImageKeys,
-  ...lightKeys,
-  ...darkKeys,
+  ...lightColorKeys,
+  ...darkColorKeys,
   ...layoutKeys,
   ...styleKeys
-];
+};
