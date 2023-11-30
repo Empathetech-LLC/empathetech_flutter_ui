@@ -58,7 +58,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
           child: DropdownButton<Hand>(
             value: currSide,
             items: items,
-            dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             onChanged: (Hand? newDominantHand) {
               switch (newDominantHand) {
                 case Hand.right:

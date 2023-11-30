@@ -77,7 +77,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
             child: DropdownButton<ThemeMode>(
               value: currMode,
               items: items,
-              dropdownColor: Theme.of(context).scaffoldBackgroundColor,
               onChanged: (ThemeMode? newThemeMode) {
                 switch (newThemeMode) {
                   case ThemeMode.system:

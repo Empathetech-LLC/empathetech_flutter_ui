@@ -130,11 +130,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
               // Preview
               Container(
-                color: Theme.of(context).appBarTheme.titleTextStyle?.color,
+                color: Theme.of(context).colorScheme.onBackground,
                 height: previewHeight,
                 width: previewWidth,
                 child: Container(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   margin: EdgeInsets.all(liveMargin),
                 ),
               ),
