@@ -11,6 +11,8 @@ const String homeRoute = '/';
 
 const String localeKey = 'appLocale';
 
+const String isLightKey = 'isLight';
+
 // Image settings //
 
 /// Allows for app images whose default is an asset to be "null"
@@ -29,8 +31,6 @@ const String darkPageImageKey = 'darkPageImage';
 const List<String> darkImageKeys = [darkPageImageKey];
 
 // Color settings //
-
-const String isLightKey = 'isLight';
 
 // Light
 
