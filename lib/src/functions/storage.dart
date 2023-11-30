@@ -14,7 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Custom implementation of a removeAll() style method for [SharedPreferences]
 void removeKeys(Set<String> keys) {
-  for (String key in keys) {
+  for (String key
+      in keys.intersection(EzConfig.instance.preferences.getKeys())) {
     EzConfig.instance.preferences.remove(key);
   }
 }
