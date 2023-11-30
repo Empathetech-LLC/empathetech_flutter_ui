@@ -79,19 +79,17 @@ const String EmpathetechKofi = "https://ko-fi.com/empathetech";
 // EzConfig ///
 
 /// Empathetech's default configuration for [EzConfig]
-/// If you plan to use your own, make sure each key has a value
-/// Even if null
 const Map<String, dynamic> empathetechConfig = {
   // Global settings
 
-  isLightKey: null, // ThemeMode == System
+  // isLightKey: null => ThemeMode == System
 
-  localeKey: null, // Locale == System
+  // localeKey: null => Locale == System
 
   // Image settings
 
-  lightPageImageKey: noImageValue,
-  darkPageImageKey: noImageValue,
+  // lightPageImageKey: null
+  // darkPageImageKey: null
 
   // Color settings
 
@@ -155,7 +153,7 @@ const Map<String, dynamic> empathetechConfig = {
 
   // Layout settings
 
-  isRightKey: true,
+  // isRightKey: null
 
   marginKey: 15.0,
 
