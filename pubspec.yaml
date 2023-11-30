@@ -26,6 +26,7 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   line_icons: ^2.0.1
   country_flags: ^2.2.0
+  flutter_localized_locales: ^2.0.5
 
 dev_dependencies:
   go_router: ^12.0.0
