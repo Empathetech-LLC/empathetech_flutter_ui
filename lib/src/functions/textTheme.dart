@@ -9,157 +9,142 @@ import 'package:flutter/material.dart';
 
 /// Creates a [TextTheme] with [color] and sizes from...
 /// https://api.flutter.dev/flutter/material/TextTheme-class.html
-TextTheme ezTextTheme(Color color) {
+TextTheme ezTextTheme() {
   return TextTheme(
-    displayLarge: buildDisplayLarge(color),
-    displayMedium: buildDisplayMedium(color),
-    displaySmall: buildDisplaySmall(color),
-    headlineLarge: buildHeadlineLarge(color),
-    headlineMedium: buildHeadlineMedium(color),
-    headlineSmall: buildHeadlineSmall(color),
-    titleLarge: buildTitleLarge(color),
-    titleMedium: buildTitleMedium(color),
-    titleSmall: buildTitleSmall(color),
-    labelLarge: buildLabelLarge(color),
-    labelMedium: buildLabelMedium(color),
-    labelSmall: buildLabelSmall(color),
-    bodyLarge: buildBodyLarge(color),
-    bodyMedium: buildBodyMedium(color),
-    bodySmall: buildBodySmall(color),
+    displayLarge: buildDisplayLarge(),
+    displayMedium: buildDisplayMedium(),
+    displaySmall: buildDisplaySmall(),
+    headlineLarge: buildHeadlineLarge(),
+    headlineMedium: buildHeadlineMedium(),
+    headlineSmall: buildHeadlineSmall(),
+    titleLarge: buildTitleLarge(),
+    titleMedium: buildTitleMedium(),
+    titleSmall: buildTitleSmall(),
+    labelLarge: buildLabelLarge(),
+    labelMedium: buildLabelMedium(),
+    labelSmall: buildLabelSmall(),
+    bodyLarge: buildBodyLarge(),
+    bodyMedium: buildBodyMedium(),
+    bodySmall: buildBodySmall(),
   );
 }
 
 /// 57
-TextStyle buildDisplayLarge(Color color) {
+TextStyle buildDisplayLarge() {
   return TextStyle(
     fontSize: 57,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 45
-TextStyle buildDisplayMedium(Color color) {
+TextStyle buildDisplayMedium() {
   return TextStyle(
     fontSize: 45,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 36
-TextStyle buildDisplaySmall(Color color) {
+TextStyle buildDisplaySmall() {
   return TextStyle(
     fontSize: 36,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 32
-TextStyle buildHeadlineLarge(Color color) {
+TextStyle buildHeadlineLarge() {
   return TextStyle(
     fontSize: 32,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 28
-TextStyle buildHeadlineMedium(Color color) {
+TextStyle buildHeadlineMedium() {
   return TextStyle(
     fontSize: 28,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 24
-TextStyle buildHeadlineSmall(Color color) {
+TextStyle buildHeadlineSmall() {
   return TextStyle(
     fontSize: 24,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 22
-TextStyle buildTitleLarge(Color color) {
+TextStyle buildTitleLarge() {
   return TextStyle(
     fontSize: 22,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 16
-TextStyle buildTitleMedium(Color color) {
+TextStyle buildTitleMedium() {
   return TextStyle(
     fontSize: 16,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 14
-TextStyle buildTitleSmall(Color color) {
+TextStyle buildTitleSmall() {
   return TextStyle(
     fontSize: 14,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 14
-TextStyle buildLabelLarge(Color color) {
+TextStyle buildLabelLarge() {
   return TextStyle(
     fontSize: 14,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 12
-TextStyle buildLabelMedium(Color color) {
+TextStyle buildLabelMedium() {
   return TextStyle(
     fontSize: 12,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 11
-TextStyle buildLabelSmall(Color color) {
+TextStyle buildLabelSmall() {
   return TextStyle(
     fontSize: 11,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 16
-TextStyle buildBodyLarge(Color color) {
+TextStyle buildBodyLarge() {
   return TextStyle(
     fontSize: 16,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 14
-TextStyle buildBodyMedium(Color color) {
+TextStyle buildBodyMedium() {
   return TextStyle(
     fontSize: 14,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
 
 /// 12
-TextStyle buildBodySmall(Color color) {
+TextStyle buildBodySmall() {
   return TextStyle(
     fontSize: 12,
-    color: color,
     fontFamily: EzConfig.instance.fontFamily,
   );
 }
