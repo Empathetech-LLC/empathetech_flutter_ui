@@ -44,9 +44,10 @@ export 'src/classes/EzScreen.dart';
 
 // Constants //
 
+export 'src/consts/configKeys.dart';
 export 'src/consts/empathetechConfig.dart';
+export 'src/consts/empathetechValues.dart';
 export 'src/consts/googleFonts.dart';
-export 'src/consts/keys.dart';
 
 // Enums //
 
