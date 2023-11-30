@@ -54,7 +54,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double _defaultValue = EzConfig.instance.defaults[widget.prefsKey];
 
   late double _margin = EzConfig.instance.prefs[marginKey];
-  late double _padding = EzConfig.instance.prefs[paddingKey];
   late double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
   late double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
@@ -68,35 +67,26 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SliderSettingType.buttonSpacing:
         return [
-          // Title padding
-          EzSpacer(_padding),
+          // Live preview 1
+          EzSpacer(currValue),
 
-          // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
-              ),
-              EzSpacer(currValue),
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
-              ),
-              EzSpacer(_buttonSpacer),
-            ],
+          // Live label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text(EFUILang.of(context)!.gCurrently +
+                currValue.toStringAsFixed(widget.decimals)),
           ),
+
+          // Live preview 2
+          EzSpacer(currValue),
         ];
 
       // Circle size
       case SliderSettingType.circleSize:
         return [
-          // Title padding
-          EzSpacer(_padding),
+          EzSpacer(_buttonSpacer),
+
+          // Live preview && label
           ElevatedButton(
             onPressed: doNothing,
             child: Text(
@@ -115,12 +105,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
       // Margin
       case SliderSettingType.margin:
-        double marginScale = 90.0 / widthOf(context);
+        final double previewHeight = 160.0;
+        final double previewWidth = 90.0;
+
+        double marginScale = previewWidth / widthOf(context);
         double liveMargin = currValue * marginScale;
 
         return [
-          // Title padding
-          EzSpacer(_padding),
+          EzSpacer(_buttonSpacer),
 
           // Live preview && label
           Row(
@@ -139,8 +131,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
               // Preview
               Container(
                 color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-                height: 160.0,
-                width: 90.0,
+                height: previewHeight,
+                width: previewWidth,
                 child: Container(
                   color: Theme.of(context).scaffoldBackgroundColor,
                   margin: EdgeInsets.all(liveMargin),
@@ -154,10 +146,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Padding
       case SliderSettingType.padding:
         return [
-          // Title padding && live preview part 1
-          EzSpacer(currValue),
+          EzSpacer(_buttonSpacer),
 
-          // Live label && preview part 2
+          // Live label && preview
           ElevatedButton(
             onPressed: doNothing,
             child: Text(EFUILang.of(context)!.gCurrently +
@@ -173,33 +164,27 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Text spacing
       case SliderSettingType.textSpacing:
         return [
-          // Title padding
-          EzSpacer(_padding),
+          // Preview 1
+          EzSpacer(currValue),
 
-          // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Thing 1
-              Text(
-                EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals),
-                style: style,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: currValue),
-
-              // Thing 2
-              Text(
-                EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals),
-                style: style,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: _buttonSpacer),
-            ],
+          // Label 1
+          Text(
+            EFUILang.of(context)!.gCurrently +
+                currValue.toStringAsFixed(widget.decimals),
+            style: style,
+            textAlign: TextAlign.center,
           ),
+          // Preview 2
+          EzSpacer(currValue),
+
+          // Label 2
+          Text(
+            EFUILang.of(context)!.gCurrently +
+                currValue.toStringAsFixed(widget.decimals),
+            style: style,
+            textAlign: TextAlign.center,
+          ),
+          EzSpacer(_buttonSpacer),
         ];
     }
   }
@@ -298,7 +283,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
         ),
       ),
-      EzSpacer(_margin),
+      EzSpacer(_buttonSpacer),
     ]);
 
     return toReturn;
