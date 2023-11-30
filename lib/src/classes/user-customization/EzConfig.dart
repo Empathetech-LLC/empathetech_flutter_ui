@@ -101,16 +101,16 @@ class EzConfig {
       });
 
       // Gather trackers //
-      final List<String>? localeData = _prefs[localeKey];
+      final List<String>? localeData = preferences.getStringList(localeKey);
       final Locale? _locale = (localeData == null || localeData.isEmpty)
           ? null
           : Locale(localeData[0], localeData.length > 1 ? localeData[1] : null);
 
-      final String? fontData = _prefs[fontFamilyKey];
+      final String? fontData = preferences.getString(fontFamilyKey);
       final String? _fontFamily =
           (fontData == null) ? null : googleStyles[(fontData)]?.fontFamily;
 
-      final bool? isRight = _prefs[isRightKey];
+      final bool? isRight = preferences.getBool(isRightKey);
       final Hand? _dominantHand = (isRight == null)
           ? null
           : isRight
