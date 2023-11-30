@@ -9,9 +9,9 @@ const String homeRoute = '/';
 
 // Global settings //
 
-const String localeKey = 'appLocale';
-
 const String isLightKey = 'isLight';
+
+const String localeKey = 'appLocale';
 
 // Image settings //
 
