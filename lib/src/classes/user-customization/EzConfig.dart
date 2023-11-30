@@ -24,13 +24,13 @@ class EzConfig {
   final Map<String, dynamic> prefs;
 
   /// Current locale/language for the app
-  final Locale locale;
+  final Locale? locale;
 
   /// Current [googleStyles] family for the app
   final String? fontFamily;
 
   /// What side of the screen touch points should be on
-  final Hand dominantHand;
+  final Hand? dominantHand;
 
   /// Private instance
   static EzConfig? _instance;
@@ -41,9 +41,9 @@ class EzConfig {
     required this.assets,
     required this.defaults,
     required this.prefs,
-    required this.locale,
+    this.locale,
     this.fontFamily,
-    required this.dominantHand,
+    this.dominantHand,
   });
 
   /// [assetPaths] => provide your [AssetImage] paths for this app
@@ -101,16 +101,21 @@ class EzConfig {
       });
 
       // Gather trackers //
-      final List<String> localeData = _prefs[localeKey];
-      final Locale _locale =
-          Locale(localeData[0], localeData.length > 1 ? localeData[1] : null);
+      final List<String>? localeData = _prefs[localeKey];
+      final Locale? _locale = (localeData == null || localeData.isEmpty)
+          ? null
+          : Locale(localeData[0], localeData.length > 1 ? localeData[1] : null);
 
+      final String? fontData = _prefs[fontFamilyKey];
       final String? _fontFamily =
-          googleStyles[(_prefs[fontFamilyKey])]?.fontFamily;
+          (fontData == null) ? null : googleStyles[(fontData)]?.fontFamily;
 
-      bool? isRight = preferences.getBool(isRightKey);
-      final Hand _dominantHand =
-          (isRight == null || isRight == true) ? Hand.right : Hand.left;
+      final bool? isRight = _prefs[isRightKey];
+      final Hand? _dominantHand = (isRight == null)
+          ? null
+          : isRight
+              ? Hand.right
+              : Hand.left;
 
       // Build the EzConfig instance //
 
