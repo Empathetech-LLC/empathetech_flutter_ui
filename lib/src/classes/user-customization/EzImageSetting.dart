@@ -30,6 +30,9 @@ class EzImageSetting extends StatefulWidget {
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String credits;
 
+  /// Whether this image should be used for [ColorScheme.fromImageProvider]
+  final bool updateTheme;
+
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
@@ -38,6 +41,7 @@ class EzImageSetting extends StatefulWidget {
     required this.allowClear,
     required this.fullscreen,
     required this.credits,
+    this.updateTheme = false,
   }) : super(key: key);
 
   @override
@@ -48,6 +52,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather theme data //
 
   String? _updatedPath;
+  late bool _updateTheme = widget.updateTheme;
 
   final double _padding = EzConfig.instance.prefs[paddingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
@@ -211,6 +216,23 @@ class _ImageSettingState extends State<EzImageSetting> {
           label: Text(EFUILang.of(context)!.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
+      ]);
+
+    // Update theme (optional)
+    if (widget.updateTheme)
+      options.addAll([
+        EzSpacer(_buttonSpacer),
+        EzRow(children: [
+          Checkbox(
+              value: _updateTheme,
+              onChanged: (value) {
+                setState(() {
+                  _updateTheme = (value == null) ? false : value;
+                });
+              }),
+          EzSpacer.row(_padding),
+          Text(EFUILang.of(context)!.isUseForColors),
+        ])
       ]);
 
     // Return the dialog //
