@@ -172,6 +172,10 @@ class EFUILangEs extends EFUILang {
   String get isClearIt => 'Borrarlo';
 
   @override
+  String get isUseForColors =>
+      '¿Actualizar los colores de la aplicación usando esta imagen?';
+
+  @override
   String get isCreditTo => 'Crédito a:';
 
   @override

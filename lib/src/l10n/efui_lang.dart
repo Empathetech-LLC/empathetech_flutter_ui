@@ -388,6 +388,12 @@ abstract class EFUILang {
   /// **'Clear it'**
   String get isClearIt;
 
+  /// No description provided for @isUseForColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the app colors using this image?'**
+  String get isUseForColors;
+
   /// No description provided for @isCreditTo.
   ///
   /// In en, this message translates to:

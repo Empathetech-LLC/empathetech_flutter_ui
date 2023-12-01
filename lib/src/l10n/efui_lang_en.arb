@@ -58,6 +58,7 @@
   "isSetFailed": "Failed to update image:\n{error}",
   "isResetIt": "Reset it",
   "isClearIt": "Clear it",
+  "isUseForColors": "Update the app colors using this image?",
   "isCreditTo": "Credit to:",
   "isSource": "Wherever you got it!",
   "isResetAll": "Reset all {themeType} theme images?",
