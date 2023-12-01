@@ -72,7 +72,7 @@ ThemeData ezThemeData(Brightness brightness) {
         textStyle: buttonTextStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
-        side: BorderSide(color: colorScheme.primary),
+        side: BorderSide(color: colorScheme.primaryContainer),
       ),
     ),
 
@@ -82,7 +82,7 @@ ThemeData ezThemeData(Brightness brightness) {
         textStyle: textButtonStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
-        side: BorderSide(color: colorScheme.primary),
+        side: BorderSide(color: colorScheme.primaryContainer),
       ),
     ),
 
