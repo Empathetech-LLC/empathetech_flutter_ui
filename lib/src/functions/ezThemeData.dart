@@ -123,7 +123,6 @@ ThemeData ezThemeData(Brightness brightness) {
     cardTheme: CardTheme(
       margin: EdgeInsets.zero,
       color: colorScheme.surface,
-      shadowColor: colorScheme.secondary,
     ),
 
     // Checkbox
