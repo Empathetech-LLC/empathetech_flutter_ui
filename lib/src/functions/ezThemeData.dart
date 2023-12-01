@@ -14,21 +14,31 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double padding = EzConfig.instance.prefs[paddingKey];
 
-  final TextStyle appBarTextStyle = buildHeadlineMedium();
-  final TextStyle tabBarTextStyle = buildTitleLarge();
-  final TextStyle pageTextStyle = buildBodyLarge();
-  final TextStyle buttonTextStyle = buildTitleMedium();
-  final TextStyle textButtonStyle = buildTitleMedium();
-  final TextStyle dialogTitleStyle = buildTitleLarge();
-  final TextStyle dialogContentStyle = buildBodyLarge();
+  final TextStyle appBarTextStyle =
+      buildHeadlineMedium(color: colorScheme.onSurface);
+  final TextStyle tabBarTextStyle =
+      buildTitleLarge(color: colorScheme.onSurface);
+  final TextStyle pageTextStyle =
+      buildBodyLarge(color: colorScheme.onBackground);
+  final TextStyle buttonTextStyle =
+      buildTitleMedium(color: colorScheme.primary);
+  final TextStyle textButtonStyle =
+      buildTitleMedium(color: colorScheme.primary);
+  final TextStyle dialogTitleStyle =
+      buildTitleLarge(color: colorScheme.onSurface);
+  final TextStyle dialogContentStyle =
+      buildBodyLarge(color: colorScheme.onSurface);
 
   final TextTheme textTheme = ezTextTheme();
 
   final IconThemeData iconData = IconThemeData(
     size: buttonTextStyle.fontSize,
+    color: colorScheme.onSurface,
   );
+
   final IconThemeData appBarIconData = IconThemeData(
     size: appBarTextStyle.fontSize,
+    color: colorScheme.onSurface,
   );
 
   // Build the ThemeData //
@@ -50,6 +60,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // AppBar
     appBarTheme: AppBarTheme(
+      color: colorScheme.surface,
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
       titleTextStyle: appBarTextStyle,
@@ -58,12 +69,9 @@ ThemeData ezThemeData(Brightness brightness) {
     // Bottom navigation
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedIconTheme: IconThemeData(
-        size: buttonTextStyle.fontSize,
-      ),
-      unselectedIconTheme: IconThemeData(
-        size: buttonTextStyle.fontSize,
-      ),
+      backgroundColor: colorScheme.surface,
+      selectedIconTheme: iconData,
+      unselectedIconTheme: iconData.copyWith(color: colorScheme.outline),
     ),
 
     // Buttons
@@ -72,57 +80,84 @@ ThemeData ezThemeData(Brightness brightness) {
         textStyle: buttonTextStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
+        backgroundColor: colorScheme.surface,
         side: BorderSide(color: colorScheme.primaryContainer),
+        shadowColor: colorScheme.primaryContainer,
       ),
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        backgroundColor: Colors.transparent,
         textStyle: textButtonStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
+        backgroundColor: Colors.transparent,
         side: BorderSide(color: colorScheme.primaryContainer),
+        shadowColor: colorScheme.primaryContainer,
       ),
     ),
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
         textStyle: textButtonStyle,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
         side: null,
+        shadowColor: Colors.transparent,
       ),
     ),
 
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
         iconSize: buttonTextStyle.fontSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
         side: null,
+        shadowColor: Colors.transparent,
       ),
     ),
 
     // Cards
-    cardTheme: CardTheme(margin: EdgeInsets.zero),
+    cardTheme: CardTheme(
+      margin: EdgeInsets.zero,
+      color: colorScheme.surface,
+      shadowColor: colorScheme.secondary,
+    ),
+
+    // Checkbox
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return colorScheme.primary;
+          } else {
+            return colorScheme.outline;
+          }
+        },
+      ),
+      checkColor: MaterialStateProperty.all(colorScheme.primary),
+    ),
 
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: dialogTitleStyle,
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,
+      backgroundColor: colorScheme.surface,
+      iconColor: colorScheme.onSurface,
     ),
+
+    drawerTheme: DrawerThemeData(backgroundColor: colorScheme.surface),
 
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: pageTextStyle,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.all(padding),
+        fillColor: colorScheme.background,
+        iconColor: colorScheme.onBackground,
       ),
     ),
 
@@ -130,18 +165,27 @@ ThemeData ezThemeData(Brightness brightness) {
     sliderTheme: SliderThemeData(
       overlayShape: SliderComponentShape.noOverlay,
       overlayColor: Colors.transparent,
+      thumbColor: colorScheme.primary,
+      activeTrackColor: colorScheme.primaryContainer,
+      inactiveTrackColor: colorScheme.outline,
+      valueIndicatorColor: colorScheme.primary,
+      activeTickMarkColor: colorScheme.onPrimaryContainer,
+      inactiveTickMarkColor: colorScheme.outlineVariant,
       disabledThumbColor: Colors.transparent,
       disabledActiveTrackColor: Colors.transparent,
       disabledInactiveTrackColor: Colors.transparent,
       disabledActiveTickMarkColor: Colors.transparent,
       disabledInactiveTickMarkColor: Colors.transparent,
-      disabledSecondaryActiveTrackColor: Colors.transparent,
     ),
 
     // TabBar
     tabBarTheme: TabBarTheme(
       labelStyle: tabBarTextStyle,
-      unselectedLabelStyle: tabBarTextStyle,
+      labelColor: colorScheme.onSurface,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(
+        color: colorScheme.outline,
+      ),
+      unselectedLabelColor: colorScheme.outline,
     ),
   );
 }
