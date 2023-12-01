@@ -70,8 +70,9 @@ ThemeData ezThemeData(Brightness brightness) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: buttonTextStyle,
-        padding: EdgeInsets.all(padding),
         alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        side: BorderSide(color: colorScheme.primary),
       ),
     ),
 
@@ -79,8 +80,9 @@ ThemeData ezThemeData(Brightness brightness) {
       style: OutlinedButton.styleFrom(
         backgroundColor: Colors.transparent,
         textStyle: textButtonStyle,
-        padding: EdgeInsets.all(padding),
         alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        side: BorderSide(color: colorScheme.primary),
       ),
     ),
 
@@ -89,9 +91,9 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         textStyle: textButtonStyle,
-        side: null,
-        padding: EdgeInsets.zero,
         alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        side: null,
       ),
     ),
 
@@ -100,9 +102,9 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         iconSize: buttonTextStyle.fontSize,
-        side: null,
-        padding: EdgeInsets.zero,
         alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        side: null,
       ),
     ),
 
