@@ -7,10 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 /// Empathetech's default configuration for [EzConfig]
 const Map<String, dynamic> empathetechConfig = {
-  // Global settings //
-
-  // Image settings //
-
   // Color settings //
 
   // Light
@@ -45,18 +41,13 @@ const Map<String, dynamic> empathetechConfig = {
   darkTertiaryKey: EmpathPurpleHex,
   darkOnTertiaryKey: whiteHex,
 
-  // Layout settings //
-
-  marginKey: 15.0,
-
-  textSpacingKey: 60.0,
-  buttonSpacingKey: 30.0,
-
   // Style settings //
 
   fontFamilyKey: roboto,
 
+  marginKey: 15.0,
   paddingKey: 15.0,
 
-  circleDiameterKey: 45.0,
+  buttonSpacingKey: 30.0,
+  textSpacingKey: 60.0,
 };

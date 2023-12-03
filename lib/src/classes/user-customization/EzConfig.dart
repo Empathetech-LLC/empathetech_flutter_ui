@@ -118,7 +118,7 @@ class EzConfig {
       final String? _fontFamily =
           (fontData == null) ? null : googleStyles[(fontData)]?.fontFamily;
 
-      final bool? isRight = preferences.getBool(isRightKey);
+      final bool? isRight = preferences.getBool(isRightHandKey);
       final Hand? _dominantHand = (isRight == null)
           ? null
           : isRight

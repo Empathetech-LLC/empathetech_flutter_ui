@@ -49,10 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
             EzSpacer(_buttonSpacer),
 
             // Global settings
+            const EzLocaleSetting(),
+            EzSpacer(_buttonSpacer),
+
             const EzThemeModeSwitch(),
             EzSpacer(_buttonSpacer),
 
-            const EzLocaleSetting(),
+            const EzDominantHandSwitch(),
             EzSpacer(_buttonSpacer),
 
             // Image settings
@@ -66,13 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
               child: Text(EFUILang.of(context)!.csPageTitle),
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Layout settings
-            ElevatedButton(
-              onPressed: () => context.goNamed(layoutSettingsRoute),
-              child: Text(EFUILang.of(context)!.lsPageTitle),
             ),
             EzSpacer(_buttonSpacer),
 

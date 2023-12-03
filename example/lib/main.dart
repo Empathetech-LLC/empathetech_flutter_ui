@@ -70,13 +70,6 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          name: layoutSettingsRoute,
-          path: layoutSettingsRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const LayoutSettingsScreen();
-          },
-        ),
-        GoRoute(
           name: styleSettingsRoute,
           path: styleSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {

@@ -5,32 +5,38 @@
 
 // Global settings //
 
-const String isLightKey = 'isLight';
-
 const String localeKey = 'appLocale';
 
-const Set<String> globalKeys = {isLightKey, localeKey};
+const String isLightThemeKey = 'isLightTheme';
+
+const String isRightHandKey = 'isRightHand';
+
+const Set<String> globalKeys = {
+  localeKey,
+  isLightThemeKey,
+  isRightHandKey,
+};
 
 // Image settings //
 
 // Light
 
-const String lightPageImageKey = 'lightPageImage';
 const String lightColorSchemeImageKey = 'lightColorSchemeImage';
+const String lightPageImageKey = 'lightPageImage';
 
 const Set<String> lightImageKeys = {
-  lightPageImageKey,
   lightColorSchemeImageKey,
+  lightPageImageKey,
 };
 
 // Dark
 
-const String darkPageImageKey = 'darkPageImage';
 const String darkColorSchemeImageKey = 'darkColorSchemeImage';
+const String darkPageImageKey = 'darkPageImage';
 
 const Set<String> darkImageKeys = {
-  darkPageImageKey,
   darkColorSchemeImageKey,
+  darkPageImageKey,
 };
 
 // Color settings //
@@ -186,34 +192,22 @@ const Set<String> darkColorKeys = {
   darkSurfaceTintKey,
 };
 
-// Layout settings //
-
-const String isRightKey = 'isRight';
-
-const String marginKey = 'margin';
-
-const String textSpacingKey = 'textSpacing';
-const String buttonSpacingKey = 'buttonSpacing';
-
-const Set<String> layoutKeys = {
-  isRightKey,
-  marginKey,
-  textSpacingKey,
-  buttonSpacingKey,
-};
-
 // Style settings //
 
 const String fontFamilyKey = 'fontFamily';
 
+const String marginKey = 'margin';
 const String paddingKey = 'padding';
 
-const String circleDiameterKey = 'circleDiameter';
+const String buttonSpacingKey = 'buttonSpacing';
+const String textSpacingKey = 'textSpacing';
 
 const Set<String> styleKeys = {
   fontFamilyKey,
+  marginKey,
   paddingKey,
-  circleDiameterKey,
+  buttonSpacingKey,
+  textSpacingKey,
 };
 
 const Set<String> allKeys = {
@@ -222,6 +216,5 @@ const Set<String> allKeys = {
   ...darkImageKeys,
   ...lightColorKeys,
   ...darkColorKeys,
-  ...layoutKeys,
   ...styleKeys
 };

@@ -61,14 +61,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
             onChanged: (Hand? newDominantHand) {
               switch (newDominantHand) {
                 case Hand.right:
-                  EzConfig.instance.preferences.remove(isRightKey);
+                  EzConfig.instance.preferences.remove(isRightHandKey);
                   setState(() {
                     currSide = Hand.right;
                   });
                   break;
 
                 case Hand.left:
-                  EzConfig.instance.preferences.setBool(isRightKey, false);
+                  EzConfig.instance.preferences.setBool(isRightHandKey, false);
                   setState(() {
                     currSide = Hand.left;
                   });
