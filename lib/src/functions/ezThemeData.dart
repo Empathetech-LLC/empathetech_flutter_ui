@@ -125,20 +125,6 @@ ThemeData ezThemeData(Brightness brightness) {
       color: colorScheme.surface,
     ),
 
-    // Checkbox
-    checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.resolveWith(
-        (states) {
-          if (states.contains(MaterialState.selected)) {
-            return colorScheme.primary;
-          } else {
-            return colorScheme.outline;
-          }
-        },
-      ),
-      checkColor: MaterialStateProperty.all(colorScheme.primary),
-    ),
-
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: dialogTitleStyle,
@@ -169,7 +155,7 @@ ThemeData ezThemeData(Brightness brightness) {
       inactiveTrackColor: colorScheme.outline,
       valueIndicatorColor: colorScheme.primary,
       activeTickMarkColor: colorScheme.onPrimaryContainer,
-      inactiveTickMarkColor: colorScheme.outlineVariant,
+      inactiveTickMarkColor: colorScheme.onPrimaryContainer,
       disabledThumbColor: Colors.transparent,
       disabledActiveTrackColor: Colors.transparent,
       disabledInactiveTrackColor: Colors.transparent,
