@@ -64,23 +64,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Return the preview Widget(s) for the passed [SliderSettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
     switch (widget.type) {
-      // Button spacing
-      case SliderSettingType.buttonSpacing:
-        return [
-          // Live preview 1
-          EzSpacer(currValue),
-
-          // Live label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.gCurrently +
-                currValue.toStringAsFixed(widget.decimals)),
-          ),
-
-          // Live preview 2
-          EzSpacer(currValue),
-        ];
-
       // Margin
       case SliderSettingType.margin:
         final double previewHeight = 160.0;
@@ -134,8 +117,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
+                child: Text(EFUILang.of(context)!.gCurrently),
                 style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                       padding:
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -144,8 +126,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzSpacer.row(_buttonSpacer),
               ElevatedButton(
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
+                child: Text(currValue.toStringAsFixed(widget.decimals)),
                 style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                       padding:
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
@@ -156,6 +137,23 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
 
           EzSpacer(_buttonSpacer),
+        ];
+
+      // Button spacing
+      case SliderSettingType.buttonSpacing:
+        return [
+          // Live preview 1
+          EzSpacer(currValue),
+
+          // Live label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text(EFUILang.of(context)!.gCurrently +
+                currValue.toStringAsFixed(widget.decimals)),
+          ),
+
+          // Live preview 2
+          EzSpacer(currValue),
         ];
 
       // Text spacing
@@ -173,15 +171,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
           // Preview 2
           EzSpacer(currValue),
-
-          // Label 2
-          Text(
-            EFUILang.of(context)!.gCurrently +
-                currValue.toStringAsFixed(widget.decimals),
-            style: style,
-            textAlign: TextAlign.center,
-          ),
-          EzSpacer(_buttonSpacer),
         ];
     }
   }
