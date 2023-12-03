@@ -81,28 +81,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(currValue),
         ];
 
-      // Circle size
-      case SliderSettingType.circleSize:
-        return [
-          EzSpacer(_buttonSpacer),
-
-          // Live preview && label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(
-              currValue.toStringAsFixed(widget.decimals),
-            ),
-            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  shape: MaterialStatePropertyAll(const CircleBorder()),
-                  padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                  fixedSize: MaterialStatePropertyAll(
-                    Size(currValue, currValue),
-                  ),
-                ),
-          ),
-          EzSpacer(_buttonSpacer),
-        ];
-
       // Margin
       case SliderSettingType.margin:
         final double previewHeight = 160.0;
@@ -149,13 +127,32 @@ class _SliderSettingState extends State<EzSliderSetting> {
           EzSpacer(_buttonSpacer),
 
           // Live label && preview
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.gCurrently +
-                currValue.toStringAsFixed(widget.decimals)),
-            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
-                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(EFUILang.of(context)!.gCurrently +
+                    currValue.toStringAsFixed(widget.decimals)),
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      padding:
+                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                    ),
+              ),
+              EzSpacer.row(_buttonSpacer),
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(EFUILang.of(context)!.gCurrently +
+                    currValue.toStringAsFixed(widget.decimals)),
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      padding:
+                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      shape: MaterialStatePropertyAll(const CircleBorder()),
+                    ),
+              ),
+            ],
           ),
 
           EzSpacer(_buttonSpacer),
