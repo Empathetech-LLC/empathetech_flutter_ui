@@ -49,13 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
             EzSpacer(_buttonSpacer),
 
             // Global settings
-            const EzLocaleSetting(),
+            const EzDominantHandSwitch(),
             EzSpacer(_buttonSpacer),
 
             const EzThemeModeSwitch(),
             EzSpacer(_buttonSpacer),
 
-            const EzDominantHandSwitch(),
+            const EzLocaleSetting(),
             EzSpacer(_buttonSpacer),
 
             // Image settings

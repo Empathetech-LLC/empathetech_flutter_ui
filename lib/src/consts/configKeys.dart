@@ -5,16 +5,16 @@
 
 // Global settings //
 
-const String localeKey = 'appLocale';
+const String isRightHandKey = 'isRightHand';
 
 const String isLightThemeKey = 'isLightTheme';
 
-const String isRightHandKey = 'isRightHand';
+const String localeKey = 'appLocale';
 
 const Set<String> globalKeys = {
+  isRightHandKey,
   localeKey,
   isLightThemeKey,
-  isRightHandKey,
 };
 
 // Image settings //
