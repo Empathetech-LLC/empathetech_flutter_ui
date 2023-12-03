@@ -658,12 +658,6 @@ abstract class EFUILang {
   /// **'Padding'**
   String get stsPadding;
 
-  /// No description provided for @stsCircleSize.
-  ///
-  /// In en, this message translates to:
-  /// **'Circle button size'**
-  String get stsCircleSize;
-
   /// No description provided for @stsResetAll.
   ///
   /// In en, this message translates to:

@@ -106,6 +106,5 @@
   "stsTextFont": "Text font",
   "stsFonts": "Fonts",
   "stsPadding": "Padding",
-  "stsCircleSize": "Circle button size",
   "stsResetAll": "Reset all style settings?"
 }

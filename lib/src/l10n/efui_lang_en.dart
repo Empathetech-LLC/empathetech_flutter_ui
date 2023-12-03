@@ -315,8 +315,5 @@ class EFUILangEn extends EFUILang {
   String get stsPadding => 'Padding';
 
   @override
-  String get stsCircleSize => 'Circle button size';
-
-  @override
   String get stsResetAll => 'Reset all style settings?';
 }

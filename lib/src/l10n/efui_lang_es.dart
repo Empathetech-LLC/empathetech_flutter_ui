@@ -318,8 +318,5 @@ class EFUILangEs extends EFUILang {
   String get stsPadding => 'Relleno';
 
   @override
-  String get stsCircleSize => 'Tamaño del botón circular';
-
-  @override
   String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
 }

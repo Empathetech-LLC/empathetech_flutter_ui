@@ -106,6 +106,5 @@
   "stsTextFont": "Fuente de texto",
   "stsFonts": "Fuentes",
   "stsPadding": "Relleno",
-  "stsCircleSize": "Tamaño del botón circular",
   "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"
 }

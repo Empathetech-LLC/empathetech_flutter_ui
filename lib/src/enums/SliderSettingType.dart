@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 enum SliderSettingType {
   margin,
   padding,
-  circleSize,
   buttonSpacing,
   textSpacing,
 }
@@ -24,8 +23,6 @@ String sstName(BuildContext context, SliderSettingType settingType) {
       return EFUILang.of(context)!.lsMargin;
     case SliderSettingType.padding:
       return EFUILang.of(context)!.stsPadding;
-    case SliderSettingType.circleSize:
-      return EFUILang.of(context)!.stsCircleSize;
     case SliderSettingType.buttonSpacing:
       return EFUILang.of(context)!.lsButtonSpacing;
     case SliderSettingType.textSpacing:
@@ -41,8 +38,6 @@ extension SettingIcon on SliderSettingType {
         return const Icon(Icons.margin);
       case SliderSettingType.padding:
         return const Icon(Icons.padding);
-      case SliderSettingType.circleSize:
-        return const Icon(Icons.circle);
       case SliderSettingType.buttonSpacing:
         return const Icon(Icons.space_bar);
       case SliderSettingType.textSpacing:
