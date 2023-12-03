@@ -30,8 +30,8 @@ class EzImageSetting extends StatefulWidget {
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String credits;
 
-  /// Whether this image should be used for [ColorScheme.fromImageProvider]
-  final bool updateTheme;
+  /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
+  final Brightness? updateTheme;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
@@ -41,7 +41,7 @@ class EzImageSetting extends StatefulWidget {
     required this.allowClear,
     required this.fullscreen,
     required this.credits,
-    this.updateTheme = false,
+    this.updateTheme,
   }) : super(key: key);
 
   @override
@@ -52,10 +52,18 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather theme data //
 
   String? _updatedPath;
-  late bool _updateTheme = widget.updateTheme;
+  bool? _updateTheme;
 
   final double _padding = EzConfig.instance.prefs[paddingKey];
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setState(() {
+      _updateTheme = (widget.updateTheme != null);
+    });
+  }
 
   // Define button functions //
 
@@ -219,19 +227,24 @@ class _ImageSettingState extends State<EzImageSetting> {
       ]);
 
     // Update theme (optional)
-    if (widget.updateTheme)
+    if (widget.updateTheme != null)
       options.addAll([
         EzSpacer(_buttonSpacer),
         EzRow(children: [
           Checkbox(
               value: _updateTheme,
-              onChanged: (value) {
+              onChanged: (bool? choice) {
                 setState(() {
-                  _updateTheme = (value == null) ? false : value;
+                  _updateTheme = (choice == null) ? false : choice;
                 });
               }),
           EzSpacer.row(_padding),
-          Text(EFUILang.of(context)!.isUseForColors),
+          Flexible(
+            child: Text(
+              EFUILang.of(context)!.isUseForColors,
+              textAlign: TextAlign.center,
+            ),
+          ),
         ])
       ]);
 
@@ -266,6 +279,13 @@ class _ImageSettingState extends State<EzImageSetting> {
               setState(() {
                 _updatedPath = newPath;
               });
+              if (widget.updateTheme != null) {
+                widget.updateTheme == Brightness.light
+                    ? EzConfig.instance.preferences
+                        .setString(lightColorSchemeImageKey, newPath)
+                    : EzConfig.instance.preferences
+                        .setString(darkColorSchemeImageKey, newPath);
+              }
             }
           },
 
