@@ -69,7 +69,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           allowClear: true,
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
-                          updateTheme: true,
+                          updateTheme: Brightness.light,
                         ),
                       ]
                     : // Editing dark theme //
@@ -81,7 +81,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           allowClear: true,
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
-                          updateTheme: true,
+                          updateTheme: Brightness.dark,
                         ),
                       ],
               ),
