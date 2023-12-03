@@ -59,7 +59,6 @@ class _ColorSettingState extends State<EzColorSetting> {
   late Color currColor = Color(EzConfig.instance.prefs[widget.updating[0]]);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _diameter = EzConfig.instance.prefs[circleDiameterKey];
 
   late final TextStyle? _labelStyle =
       Theme.of(context).dropdownMenuTheme.textStyle;
@@ -263,15 +262,11 @@ class _ColorSettingState extends State<EzColorSetting> {
                 child: Icon(
                   PlatformIcons(context).edit,
                   color: getTextColor(currColor),
-                  size: _diameter / 2,
                 ),
               ),
               style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                     backgroundColor: MaterialStatePropertyAll(currColor),
                     shape: MaterialStatePropertyAll(const CircleBorder()),
-                    padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                    fixedSize:
-                        MaterialStatePropertyAll(Size(_diameter, _diameter)),
                   ),
             ),
           ),
