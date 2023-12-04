@@ -83,6 +83,7 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: colorScheme.surface,
         side: BorderSide(color: colorScheme.primaryContainer),
         shadowColor: colorScheme.primaryContainer,
+        surfaceTintColor: Colors.transparent,
       ),
     ),
 
@@ -94,6 +95,7 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: Colors.transparent,
         side: BorderSide(color: colorScheme.primaryContainer),
         shadowColor: colorScheme.primaryContainer,
+        surfaceTintColor: Colors.transparent,
       ),
     ),
 
@@ -105,6 +107,7 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: Colors.transparent,
         side: null,
         shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
       ),
     ),
 
@@ -116,6 +119,7 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: Colors.transparent,
         side: null,
         shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
       ),
     ),
 
@@ -123,6 +127,7 @@ ThemeData ezThemeData(Brightness brightness) {
     cardTheme: CardTheme(
       margin: EdgeInsets.zero,
       color: colorScheme.surface,
+      surfaceTintColor: Colors.transparent,
     ),
 
     // Dialogs
