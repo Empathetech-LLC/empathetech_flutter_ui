@@ -239,6 +239,11 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 # Demo
 
+## Live
+
+* [Company site](https://www.empathetech.net/#/settings)
+  * [Source code](https://github.com/Empathetech-LLC/dotnet-public)
+
 ## From the example
 
 *NOTE: These screenshots were taken before Flutter's switch to Material 3. The functionality is identical, but the styling has changed.*
@@ -281,12 +286,7 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 ### Responsive design
 
-Checkout the link to our site below. If you're using a monitor, play around with the window size! Using a phone or tablet? Rotate your device!
-
-## Live
-
-* [Company site](https://www.empathetech.net/#/settings)
-  * [Source code](https://github.com/Empathetech-LLC/dotnet-public)
+Checkout the link to our site above. If you're using a monitor, play around with the window size! Using a phone or tablet? Rotate your device!
 
 # Contributing
 
