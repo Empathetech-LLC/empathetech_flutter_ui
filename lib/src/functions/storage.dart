@@ -16,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void removeKeys(Set<String> keys) {
   for (String key
       in keys.intersection(EzConfig.instance.preferences.getKeys())) {
-    EzConfig.instance.preferences.remove(key);
+    EzConfig.remove(key);
   }
 }
 

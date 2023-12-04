@@ -235,7 +235,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           onChangeEnd: (double value) {
             // When finished, write the result
             if (value == _defaultValue) {
-              EzConfig.instance.preferences.remove(widget.prefsKey);
+              EzConfig.remove(widget.prefsKey);
             } else {
               EzConfig.instance.preferences.setDouble(widget.prefsKey, value);
             }
@@ -258,7 +258,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         child: ExcludeSemantics(
           child: ElevatedButton.icon(
             onPressed: () {
-              EzConfig.instance.preferences.remove(widget.prefsKey);
+              EzConfig.remove(widget.prefsKey);
               modalSheetSetState(() {
                 currValue = _defaultValue;
               });

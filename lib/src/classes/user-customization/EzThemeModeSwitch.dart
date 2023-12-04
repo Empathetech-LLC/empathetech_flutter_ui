@@ -80,7 +80,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               onChanged: (ThemeMode? newThemeMode) {
                 switch (newThemeMode) {
                   case ThemeMode.system:
-                    EzConfig.instance.preferences.remove(isLightThemeKey);
+                    EzConfig.remove(isLightThemeKey);
                     setState(() {
                       currMode = ThemeMode.system;
                       PlatformTheme.of(context)!.themeMode = ThemeMode.system;

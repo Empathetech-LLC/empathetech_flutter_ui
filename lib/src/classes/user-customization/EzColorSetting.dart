@@ -183,12 +183,12 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Remove the user's setting and reset the current state
 
       for (String key in widget.updating) {
-        EzConfig.instance.preferences.remove(key);
+        EzConfig.remove(key);
       }
 
       if (widget.autoUpdatingTextKeys != null) {
         for (String key in widget.autoUpdatingTextKeys!) {
-          EzConfig.instance.preferences.remove(key);
+          EzConfig.remove(key);
         }
       }
 

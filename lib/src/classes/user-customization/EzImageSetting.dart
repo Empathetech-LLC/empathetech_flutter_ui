@@ -206,7 +206,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         onPressed: () {
           _cleanup();
 
-          EzConfig.instance.preferences.remove(widget.prefsKey);
+          EzConfig.remove(widget.prefsKey);
 
           popScreen(
             context: context,
