@@ -228,11 +228,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                           updateTheme: Brightness.dark,
                           hideThemeMessage: true,
                         ),
-                        EzSpacer(_buttonSpacer),
                       ],
               ),
             ),
-
             EzSpacer(_buttonSpacer),
 
             // Local reset all
