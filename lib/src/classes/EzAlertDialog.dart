@@ -48,7 +48,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    final double padding = EzConfig.instance.prefs[paddingKey];
+    final double padding = EzConfig.get(paddingKey);
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),

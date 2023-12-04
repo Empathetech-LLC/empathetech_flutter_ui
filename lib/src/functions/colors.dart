@@ -41,7 +41,7 @@ Color blendColors(Color color1, Color color2) {
 /// Generate a [ColorScheme] based on values present in [EzConfig]
 ColorScheme ezColorScheme(Brightness brightness) {
   Color? getColor(String key) {
-    final int? value = EzConfig.instance.prefs[key];
+    final int? value = EzConfig.get(key);
 
     return (value == null) ? null : Color(value);
   }

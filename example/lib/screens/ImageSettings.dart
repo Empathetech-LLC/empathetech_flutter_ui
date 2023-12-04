@@ -31,7 +31,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   late final String _resetTitle =
       EFUILang.of(context)!.isResetAll(_themeProfile);
 
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Return the build //
 
@@ -91,7 +91,9 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               context: context,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeKeys(_isLight ? lightImageKeys : darkImageKeys);
+                removeKeys(_isLight
+                    ? lightImageKeys.keys.toSet()
+                    : darkImageKeys.keys.toSet());
                 popScreen(context: context, pass: true);
               },
             ),

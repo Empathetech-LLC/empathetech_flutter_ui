@@ -25,8 +25,8 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _margin = EzConfig.instance.prefs[marginKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _margin = EzConfig.get(marginKey);
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Return the build //
 
@@ -95,7 +95,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               context: context,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
-                removeKeys(styleKeys);
+                removeKeys(styleKeys.keys.toSet());
                 popScreen(context: context, pass: true);
               },
             ),

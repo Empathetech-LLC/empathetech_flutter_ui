@@ -58,7 +58,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   late Color currColor = Color(EzConfig.instance.prefs[widget.updating[0]]);
 
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   late final TextStyle? _labelStyle =
       Theme.of(context).dropdownMenuTheme.textStyle;

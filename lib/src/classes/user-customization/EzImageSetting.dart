@@ -64,8 +64,8 @@ class _ImageSettingState extends State<EzImageSetting> {
   String? _updatedPath;
   bool? _updateTheme;
 
-  final double _padding = EzConfig.instance.prefs[paddingKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _padding = EzConfig.get(paddingKey);
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   @override
   void didChangeDependencies() {

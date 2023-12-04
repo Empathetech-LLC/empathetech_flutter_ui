@@ -34,7 +34,7 @@ TextStyle buildDisplayLarge({Color? color}) {
   return TextStyle(
     fontSize: 57,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -43,7 +43,7 @@ TextStyle buildDisplayMedium({Color? color}) {
   return TextStyle(
     fontSize: 45,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -52,7 +52,7 @@ TextStyle buildDisplaySmall({Color? color}) {
   return TextStyle(
     fontSize: 36,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -61,7 +61,7 @@ TextStyle buildHeadlineLarge({Color? color}) {
   return TextStyle(
     fontSize: 32,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -70,7 +70,7 @@ TextStyle buildHeadlineMedium({Color? color}) {
   return TextStyle(
     fontSize: 28,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -79,7 +79,7 @@ TextStyle buildHeadlineSmall({Color? color}) {
   return TextStyle(
     fontSize: 24,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -88,7 +88,7 @@ TextStyle buildTitleLarge({Color? color}) {
   return TextStyle(
     fontSize: 22,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -97,7 +97,7 @@ TextStyle buildTitleMedium({Color? color}) {
   return TextStyle(
     fontSize: 16,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -106,7 +106,7 @@ TextStyle buildTitleSmall({Color? color}) {
   return TextStyle(
     fontSize: 14,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -115,7 +115,7 @@ TextStyle buildLabelLarge({Color? color}) {
   return TextStyle(
     fontSize: 14,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -124,7 +124,7 @@ TextStyle buildLabelMedium({Color? color}) {
   return TextStyle(
     fontSize: 12,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -133,7 +133,7 @@ TextStyle buildLabelSmall({Color? color}) {
   return TextStyle(
     fontSize: 11,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -142,7 +142,7 @@ TextStyle buildBodyLarge({Color? color}) {
   return TextStyle(
     fontSize: 16,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -151,7 +151,7 @@ TextStyle buildBodyMedium({Color? color}) {
   return TextStyle(
     fontSize: 14,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
@@ -160,6 +160,6 @@ TextStyle buildBodySmall({Color? color}) {
   return TextStyle(
     fontSize: 12,
     color: color,
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }

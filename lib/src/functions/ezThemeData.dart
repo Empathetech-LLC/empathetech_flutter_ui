@@ -12,7 +12,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
 
-  final double padding = EzConfig.instance.prefs[paddingKey];
+  final double padding = EzConfig.get(paddingKey);
 
   final TextStyle appBarTextStyle =
       buildHeadlineMedium(color: colorScheme.onSurface);
@@ -49,7 +49,7 @@ ThemeData ezThemeData(Brightness brightness) {
     colorScheme: colorScheme,
 
     // Text && icons
-    fontFamily: EzConfig.instance.fontFamily,
+    fontFamily: EzConfig.get(fontFamilyKey),
     textTheme: textTheme,
     primaryTextTheme: textTheme,
     iconTheme: iconData,

@@ -61,7 +61,7 @@ class EzScreen extends StatelessWidget {
         return decoration;
       }
 
-      final String? imagePath = EzConfig.instance.prefs[decorationImageKey];
+      final String? imagePath = EzConfig.get(decorationImageKey!);
 
       if (imagePath == null || imagePath == noImageValue) {
         return null;

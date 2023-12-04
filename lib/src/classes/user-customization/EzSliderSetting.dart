@@ -53,9 +53,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late double currValue = EzConfig.instance.prefs[widget.prefsKey];
   late double _defaultValue = EzConfig.instance.defaults[widget.prefsKey];
 
-  late double _margin = EzConfig.instance.prefs[marginKey];
-  late double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  late double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  late double _margin = EzConfig.get(marginKey);
+  late double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  late double _textSpacer = EzConfig.get(textSpacingKey);
 
   late final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
 

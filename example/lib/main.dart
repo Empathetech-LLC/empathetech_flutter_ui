@@ -88,6 +88,8 @@ class EFUIExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String>? localeData = EzConfig.get(localeKey);
+
     return EzAppProvider(
       app: PlatformApp.router(
         // Production ready!
@@ -103,7 +105,12 @@ class EFUIExample extends StatelessWidget {
         supportedLocales: EFUILang.supportedLocales,
 
         // Current language
-        locale: EzConfig.instance.locale,
+        locale: (localeData == null)
+            ? null
+            : Locale(
+                localeData[0],
+                localeData.length > 1 ? localeData[1] : null,
+              ),
 
         title: "Empathetech Flutter UI",
         routerConfig: _router,

@@ -24,10 +24,10 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather theme data //
 
-  Locale? currLocale = EzConfig.instance.locale;
+  late Locale currLocale = Localizations.localeOf(context);
 
-  final double _padding = EzConfig.instance.prefs[paddingKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _padding = EzConfig.get(paddingKey);
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Gather the list items //
 
@@ -109,19 +109,31 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => _chooseLocale(context),
-      child: EzRow(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _flag(currLocale),
-          EzSpacer.row(_padding),
-          Text(
-            EFUILang.of(context)!.ssLanguage,
-            textAlign: TextAlign.center,
+    final String hint = EFUILang.of(context)!.ssLangSemantics;
+    final String setting = EFUILang.of(context)!.gSetToValue(
+      EFUILang.of(context)!.ssLanguage,
+      LocaleNames.of(context)!.nameOf(currLocale.languageCode).toString(),
+    );
+
+    return Semantics(
+      button: true,
+      hint: "$hint. $setting",
+      child: ExcludeSemantics(
+        child: ElevatedButton(
+          onPressed: () => _chooseLocale(context),
+          child: EzRow(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _flag(currLocale),
+              EzSpacer.row(_padding),
+              Text(
+                EFUILang.of(context)!.ssLanguage,
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

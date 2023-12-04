@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Return the Build //
 

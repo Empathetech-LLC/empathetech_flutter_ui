@@ -29,7 +29,7 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color? iconColor = Theme.of(context).colorScheme.secondary;
 
-    final double padding = EzConfig.instance.prefs[paddingKey];
+    final double padding = EzConfig.get(paddingKey);
 
     final String _warning = warning ?? EFUILang.of(context)!.gAttention;
 

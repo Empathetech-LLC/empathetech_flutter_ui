@@ -14,7 +14,7 @@ class ExampleScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final bool leftHandedUser = EzConfig.instance.dominantHand == Hand.left;
+    final bool leftHandedUser = (EzConfig.get(isRightHandKey) == false);
 
     final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 

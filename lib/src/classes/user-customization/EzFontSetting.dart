@@ -21,10 +21,10 @@ class EzFontSetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather theme data //
 
-  String? currFontFamily = EzConfig.instance.fontFamily;
+  String? currFontFamily = EzConfig.get(fontFamilyKey);
   final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
 
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Define button functions //
 

@@ -25,8 +25,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _padding = EzConfig.instance.prefs[paddingKey];
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _padding = EzConfig.get(paddingKey);
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
 
@@ -239,7 +239,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               hint: _resetTitle,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeKeys(_isLight ? lightColorKeys : darkColorKeys);
+                removeKeys(_isLight
+                    ? lightColorKeys.keys.toSet()
+                    : darkColorKeys.keys.toSet());
                 popScreen(context: context, pass: true);
               },
             ),
