@@ -11,10 +11,10 @@ const String isLightThemeKey = 'isLightTheme';
 
 const String localeKey = 'appLocale';
 
-const Set<String> globalKeys = {
-  isRightHandKey,
-  localeKey,
-  isLightThemeKey,
+const Map<String, Type> globalKeys = {
+  isRightHandKey: bool,
+  isLightThemeKey: bool,
+  localeKey: String,
 };
 
 // Image settings //
@@ -24,9 +24,9 @@ const Set<String> globalKeys = {
 const String lightColorSchemeImageKey = 'lightColorSchemeImage';
 const String lightPageImageKey = 'lightPageImage';
 
-const Set<String> lightImageKeys = {
-  lightColorSchemeImageKey,
-  lightPageImageKey,
+const Map<String, Type> lightImageKeys = {
+  lightColorSchemeImageKey: String,
+  lightPageImageKey: String,
 };
 
 // Dark
@@ -34,9 +34,9 @@ const Set<String> lightImageKeys = {
 const String darkColorSchemeImageKey = 'darkColorSchemeImage';
 const String darkPageImageKey = 'darkPageImage';
 
-const Set<String> darkImageKeys = {
-  darkColorSchemeImageKey,
-  darkPageImageKey,
+const Map<String, Type> darkImageKeys = {
+  darkColorSchemeImageKey: String,
+  darkPageImageKey: String,
 };
 
 // Color settings //
@@ -84,37 +84,37 @@ const String lightScrimKey = 'lightScrim';
 
 const String lightSurfaceTintKey = 'lightSurfaceTint';
 
-const Set<String> lightColorKeys = {
-  lightPrimaryKey,
-  lightOnPrimaryKey,
-  lightPrimaryContainerKey,
-  lightOnPrimaryContainerKey,
-  lightSecondaryKey,
-  lightOnSecondaryKey,
-  lightSecondaryContainerKey,
-  lightOnSecondaryContainerKey,
-  lightTertiaryKey,
-  lightOnTertiaryKey,
-  lightTertiaryContainerKey,
-  lightOnTertiaryContainerKey,
-  lightErrorKey,
-  lightOnErrorKey,
-  lightErrorContainerKey,
-  lightOnErrorContainerKey,
-  lightOutlineKey,
-  lightOutlineVariantKey,
-  lightBackgroundKey,
-  lightOnBackgroundKey,
-  lightSurfaceKey,
-  lightOnSurfaceKey,
-  lightSurfaceVariantKey,
-  lightOnSurfaceVariantKey,
-  lightInverseSurfaceKey,
-  lightOnInverseSurfaceKey,
-  lightInversePrimaryKey,
-  lightScrimKey,
-  lightShadowKey,
-  lightSurfaceTintKey,
+const Map<String, Type> lightColorKeys = {
+  lightPrimaryKey: int,
+  lightOnPrimaryKey: int,
+  lightPrimaryContainerKey: int,
+  lightOnPrimaryContainerKey: int,
+  lightSecondaryKey: int,
+  lightOnSecondaryKey: int,
+  lightSecondaryContainerKey: int,
+  lightOnSecondaryContainerKey: int,
+  lightTertiaryKey: int,
+  lightOnTertiaryKey: int,
+  lightTertiaryContainerKey: int,
+  lightOnTertiaryContainerKey: int,
+  lightErrorKey: int,
+  lightOnErrorKey: int,
+  lightErrorContainerKey: int,
+  lightOnErrorContainerKey: int,
+  lightOutlineKey: int,
+  lightOutlineVariantKey: int,
+  lightBackgroundKey: int,
+  lightOnBackgroundKey: int,
+  lightSurfaceKey: int,
+  lightOnSurfaceKey: int,
+  lightSurfaceVariantKey: int,
+  lightOnSurfaceVariantKey: int,
+  lightInverseSurfaceKey: int,
+  lightOnInverseSurfaceKey: int,
+  lightInversePrimaryKey: int,
+  lightScrimKey: int,
+  lightShadowKey: int,
+  lightSurfaceTintKey: int,
 };
 
 // Dark
@@ -159,37 +159,37 @@ const String darkScrimKey = 'darkScrim';
 
 const String darkSurfaceTintKey = 'darkSurfaceTint';
 
-const Set<String> darkColorKeys = {
-  darkPrimaryKey,
-  darkOnPrimaryKey,
-  darkPrimaryContainerKey,
-  darkOnPrimaryContainerKey,
-  darkSecondaryKey,
-  darkOnSecondaryKey,
-  darkSecondaryContainerKey,
-  darkOnSecondaryContainerKey,
-  darkTertiaryKey,
-  darkOnTertiaryKey,
-  darkTertiaryContainerKey,
-  darkOnTertiaryContainerKey,
-  darkErrorKey,
-  darkOnErrorKey,
-  darkErrorContainerKey,
-  darkOnErrorContainerKey,
-  darkOutlineKey,
-  darkOutlineVariantKey,
-  darkBackgroundKey,
-  darkOnBackgroundKey,
-  darkSurfaceKey,
-  darkOnSurfaceKey,
-  darkSurfaceVariantKey,
-  darkOnSurfaceVariantKey,
-  darkInverseSurfaceKey,
-  darkOnInverseSurfaceKey,
-  darkInversePrimaryKey,
-  darkScrimKey,
-  darkShadowKey,
-  darkSurfaceTintKey,
+const Map<String, Type> darkColorKeys = {
+  darkPrimaryKey: int,
+  darkOnPrimaryKey: int,
+  darkPrimaryContainerKey: int,
+  darkOnPrimaryContainerKey: int,
+  darkSecondaryKey: int,
+  darkOnSecondaryKey: int,
+  darkSecondaryContainerKey: int,
+  darkOnSecondaryContainerKey: int,
+  darkTertiaryKey: int,
+  darkOnTertiaryKey: int,
+  darkTertiaryContainerKey: int,
+  darkOnTertiaryContainerKey: int,
+  darkErrorKey: int,
+  darkOnErrorKey: int,
+  darkErrorContainerKey: int,
+  darkOnErrorContainerKey: int,
+  darkOutlineKey: int,
+  darkOutlineVariantKey: int,
+  darkBackgroundKey: int,
+  darkOnBackgroundKey: int,
+  darkSurfaceKey: int,
+  darkOnSurfaceKey: int,
+  darkSurfaceVariantKey: int,
+  darkOnSurfaceVariantKey: int,
+  darkInverseSurfaceKey: int,
+  darkOnInverseSurfaceKey: int,
+  darkInversePrimaryKey: int,
+  darkScrimKey: int,
+  darkShadowKey: int,
+  darkSurfaceTintKey: int,
 };
 
 // Style settings //
@@ -202,15 +202,15 @@ const String paddingKey = 'padding';
 const String buttonSpacingKey = 'buttonSpacing';
 const String textSpacingKey = 'textSpacing';
 
-const Set<String> styleKeys = {
-  fontFamilyKey,
-  marginKey,
-  paddingKey,
-  buttonSpacingKey,
-  textSpacingKey,
+const Map<String, Type> styleKeys = {
+  fontFamilyKey: String,
+  marginKey: int,
+  paddingKey: int,
+  buttonSpacingKey: int,
+  textSpacingKey: int,
 };
 
-const Set<String> allKeys = {
+const Map<String, Type> allKeys = {
   ...globalKeys,
   ...lightImageKeys,
   ...darkImageKeys,
