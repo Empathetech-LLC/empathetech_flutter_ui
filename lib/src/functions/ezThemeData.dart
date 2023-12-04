@@ -61,6 +61,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // AppBar
     appBarTheme: AppBarTheme(
       color: colorScheme.surface,
+      surfaceTintColor: Colors.transparent,
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
       titleTextStyle: appBarTextStyle,
