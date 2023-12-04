@@ -218,9 +218,6 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get csSchemeBase => 'Base del esquema de colores';
-
-  @override
   String get csBackground => 'Fondo';
 
   @override
@@ -233,10 +230,28 @@ class EFUILangEs extends EFUILang {
   String get csOnSurface => 'Texto de la superficie';
 
   @override
+  String get csSurfaceTint => 'Tinte de la superficie';
+
+  @override
+  String get csSurfaceVariant => 'Variante de la superficie';
+
+  @override
+  String get csOnSurfaceVariant => 'Texto de la variante de la superficie';
+
+  @override
+  String get csInverseSurface => 'Superficie inversa';
+
+  @override
+  String get csOnInverseSurface => 'Texto en superficie inversa';
+
+  @override
   String get csPrimary => 'Primario';
 
   @override
   String get csOnPrimary => 'Texto primario';
+
+  @override
+  String get csInversePrimary => 'Primario inverso';
 
   @override
   String get csSecondary => 'Secundario';
@@ -260,10 +275,13 @@ class EFUILangEs extends EFUILang {
   String get csOutline => 'Contorno';
 
   @override
-  String get csTheme => 'Tema';
+  String get csOutlineVariant => 'Variante del contorno';
 
   @override
-  String get csThemeText => 'Texto del tema';
+  String get csScrim => 'Cortinilla';
+
+  @override
+  String get csShadow => 'Sombra';
 
   @override
   String get csRecommended => '¿Usar recomendado?';
@@ -272,19 +290,10 @@ class EFUILangEs extends EFUILang {
   String get csUseCustom => 'Usar personalizado';
 
   @override
-  String get csPageText => 'Texto de la página';
+  String get csOptional => 'Opcional';
 
   @override
-  String get csButtons => 'Botones';
-
-  @override
-  String get csButtonText => 'Texto de los botones';
-
-  @override
-  String get csAccent => 'Acento';
-
-  @override
-  String get csAccentText => 'Texto de acento';
+  String get csSchemeBase => 'Base del esquema de colores';
 
   @override
   String get lsPageTitle => 'Configuraciones de diseño';

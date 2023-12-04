@@ -215,9 +215,6 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get csSchemeBase => 'Color scheme base';
-
-  @override
   String get csBackground => 'Background';
 
   @override
@@ -230,10 +227,28 @@ class EFUILangEn extends EFUILang {
   String get csOnSurface => 'Surface text';
 
   @override
+  String get csSurfaceTint => 'Surface tint';
+
+  @override
+  String get csSurfaceVariant => 'Surface variant';
+
+  @override
+  String get csOnSurfaceVariant => 'Surface variant text';
+
+  @override
+  String get csInverseSurface => 'Inverse surface';
+
+  @override
+  String get csOnInverseSurface => 'Inverse surface text';
+
+  @override
   String get csPrimary => 'Primary';
 
   @override
   String get csOnPrimary => 'Primary text';
+
+  @override
+  String get csInversePrimary => 'Inverse primary';
 
   @override
   String get csSecondary => 'Secondary';
@@ -257,10 +272,13 @@ class EFUILangEn extends EFUILang {
   String get csOutline => 'Outline';
 
   @override
-  String get csTheme => 'Theme';
+  String get csOutlineVariant => 'Outline variant';
 
   @override
-  String get csThemeText => 'Theme text';
+  String get csScrim => 'Scrim';
+
+  @override
+  String get csShadow => 'Shadow';
 
   @override
   String get csRecommended => 'Use recommended?';
@@ -269,19 +287,10 @@ class EFUILangEn extends EFUILang {
   String get csUseCustom => 'Use custom';
 
   @override
-  String get csPageText => 'Page text';
+  String get csOptional => 'Optional';
 
   @override
-  String get csButtons => 'Buttons';
-
-  @override
-  String get csButtonText => 'Buttons text';
-
-  @override
-  String get csAccent => 'Accent';
-
-  @override
-  String get csAccentText => 'Accent text';
+  String get csSchemeBase => 'Color scheme\nbase';
 
   @override
   String get lsPageTitle => 'Layout settings';

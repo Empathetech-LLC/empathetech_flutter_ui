@@ -460,12 +460,6 @@ abstract class EFUILang {
   /// **'Reset all {themeType} theme colors?'**
   String csResetAll(Object themeType);
 
-  /// No description provided for @csSchemeBase.
-  ///
-  /// In en, this message translates to:
-  /// **'Color scheme base'**
-  String get csSchemeBase;
-
   /// No description provided for @csBackground.
   ///
   /// In en, this message translates to:
@@ -490,6 +484,36 @@ abstract class EFUILang {
   /// **'Surface text'**
   String get csOnSurface;
 
+  /// No description provided for @csSurfaceTint.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface tint'**
+  String get csSurfaceTint;
+
+  /// No description provided for @csSurfaceVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface variant'**
+  String get csSurfaceVariant;
+
+  /// No description provided for @csOnSurfaceVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface variant text'**
+  String get csOnSurfaceVariant;
+
+  /// No description provided for @csInverseSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse surface'**
+  String get csInverseSurface;
+
+  /// No description provided for @csOnInverseSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse surface text'**
+  String get csOnInverseSurface;
+
   /// No description provided for @csPrimary.
   ///
   /// In en, this message translates to:
@@ -501,6 +525,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Primary text'**
   String get csOnPrimary;
+
+  /// No description provided for @csInversePrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse primary'**
+  String get csInversePrimary;
 
   /// No description provided for @csSecondary.
   ///
@@ -544,17 +574,23 @@ abstract class EFUILang {
   /// **'Outline'**
   String get csOutline;
 
-  /// No description provided for @csTheme.
+  /// No description provided for @csOutlineVariant.
   ///
   /// In en, this message translates to:
-  /// **'Theme'**
-  String get csTheme;
+  /// **'Outline variant'**
+  String get csOutlineVariant;
 
-  /// No description provided for @csThemeText.
+  /// No description provided for @csScrim.
   ///
   /// In en, this message translates to:
-  /// **'Theme text'**
-  String get csThemeText;
+  /// **'Scrim'**
+  String get csScrim;
+
+  /// No description provided for @csShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadow'**
+  String get csShadow;
 
   /// No description provided for @csRecommended.
   ///
@@ -568,35 +604,17 @@ abstract class EFUILang {
   /// **'Use custom'**
   String get csUseCustom;
 
-  /// No description provided for @csPageText.
+  /// No description provided for @csOptional.
   ///
   /// In en, this message translates to:
-  /// **'Page text'**
-  String get csPageText;
+  /// **'Optional'**
+  String get csOptional;
 
-  /// No description provided for @csButtons.
+  /// No description provided for @csSchemeBase.
   ///
   /// In en, this message translates to:
-  /// **'Buttons'**
-  String get csButtons;
-
-  /// No description provided for @csButtonText.
-  ///
-  /// In en, this message translates to:
-  /// **'Buttons text'**
-  String get csButtonText;
-
-  /// No description provided for @csAccent.
-  ///
-  /// In en, this message translates to:
-  /// **'Accent'**
-  String get csAccent;
-
-  /// No description provided for @csAccentText.
-  ///
-  /// In en, this message translates to:
-  /// **'Accent text'**
-  String get csAccentText;
+  /// **'Color scheme\nbase'**
+  String get csSchemeBase;
 
   /// No description provided for @lsPageTitle.
   ///
