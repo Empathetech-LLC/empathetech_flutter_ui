@@ -30,8 +30,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
 
-  late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
+  late final String _themeProfile = _isLight
+      ? EFUILang.of(context)!.gLight.toLowerCase()
+      : EFUILang.of(context)!.gDark.toLowerCase();
   late final String _resetTitle =
       EFUILang.of(context)!.csResetAll(_themeProfile);
 
@@ -137,11 +138,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(_padding),
                         EzImageSetting(
                           prefsKey: lightColorSchemeImageKey,
-                          title: EFUILang.of(context)!.csSchemeBase,
+                          label:
+                              "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})",
+                          dialogTitle:
+                              "$_themeProfile ${EFUILang.of(context)!.csColorScheme}",
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
                           updateTheme: Brightness.light,
+                          hideThemeMessage: true,
                         ),
                         EzSpacer(_buttonSpacer),
                       ]
@@ -212,19 +216,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(_buttonSpacer),
 
                         // ColorScheme source
-                        Text(
-                          EFUILang.of(context)!.csOptional,
-                          style: _descriptionStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        EzSpacer(_padding),
+
                         EzImageSetting(
                           prefsKey: darkColorSchemeImageKey,
-                          title: EFUILang.of(context)!.csSchemeBase,
+                          label:
+                              "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})",
+                          dialogTitle:
+                              "$_themeProfile ${EFUILang.of(context)!.csColorScheme}",
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
                           updateTheme: Brightness.dark,
+                          hideThemeMessage: true,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
