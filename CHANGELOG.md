@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.0.0] - 2023-11-XX
+## [5.0.0] - 2023-12-04
 ### Updated
 - EzAlertDialog spacing
 - To Material 3
