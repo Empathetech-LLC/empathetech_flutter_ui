@@ -18,7 +18,11 @@ class EzImageSetting extends StatefulWidget {
   final String prefsKey;
 
   /// [String] to display on the [ElevatedButton]
-  final String title;
+  final String label;
+
+  /// Optional [EzAlertDialog] title override
+  /// Will be the same as [label] otherwise
+  final String? dialogTitle;
 
   /// Effectively whether the image is nullable
   final bool allowClear;
@@ -28,20 +32,26 @@ class EzImageSetting extends StatefulWidget {
 
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
-  final String credits;
+  final String? credits;
 
   /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
   final Brightness? updateTheme;
+
+  /// [updateTheme] override
+  /// Mostly for use in a/the color settings screen
+  final bool hideThemeMessage;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
     required this.prefsKey,
-    required this.title,
+    required this.label,
+    this.dialogTitle,
     required this.allowClear,
     required this.fullscreen,
-    required this.credits,
+    this.credits,
     this.updateTheme,
+    this.hideThemeMessage = false,
   }) : super(key: key);
 
   @override
@@ -227,7 +237,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ]);
 
     // Update theme (optional)
-    if (widget.updateTheme != null)
+    if (widget.updateTheme != null && !widget.hideThemeMessage)
       options.addAll([
         EzSpacer(_buttonSpacer),
         EzRow(children: [
@@ -254,7 +264,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       context: context,
       builder: (context) => EzAlertDialog(
         title: Text(
-          EFUILang.of(context)!.isDialogTitle(widget.title),
+          EFUILang.of(context)!
+              .isDialogTitle(widget.dialogTitle ?? widget.label),
           textAlign: TextAlign.center,
         ),
         contents: options,
@@ -268,9 +279,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.isButtonHint(widget.title),
+      hint: EFUILang.of(context)!.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: ElevatedButton(
+        child: TextButton(
           // On pressed -> choose image
           onPressed: () async {
             dynamic newPath = await _chooseImage(context);
@@ -295,24 +306,26 @@ class _ImageSettingState extends State<EzImageSetting> {
           },
 
           // On long press -> show credits
-          onLongPress: () => showPlatformDialog(
-            context: context,
-            builder: (context) => EzAlertDialog(
-              title: Text(
-                EFUILang.of(context)!.isCreditTo,
-                textAlign: TextAlign.center,
-              ),
-              contents: [
-                Text(
-                  widget.credits,
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
+          onLongPress: (widget.credits == null)
+              ? null
+              : () => showPlatformDialog(
+                    context: context,
+                    builder: (context) => EzAlertDialog(
+                      title: Text(
+                        EFUILang.of(context)!.isCreditTo,
+                        textAlign: TextAlign.center,
+                      ),
+                      contents: [
+                        Text(
+                          widget.credits!,
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                  ),
 
           // Set custom style
-          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+          style: Theme.of(context).textButtonTheme.style?.copyWith(
                 shape: MaterialStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
@@ -325,8 +338,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Title on the left
-              Text(widget.title),
+              // Label on the left
+              Text(widget.label, textAlign: TextAlign.center),
               EzSpacer.row(_padding),
 
               // Preview on the right
@@ -334,7 +347,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     width: 1,
                   ),
                 ),
@@ -350,7 +363,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           EzImage(
                               image: provideImage(_updatedPath!),
                               semanticLabel:
-                                  widget.title + EFUILang.of(context)!.isImage,
+                                  widget.label + EFUILang.of(context)!.isImage,
                             )
                       : // user has not made a change
                       (EzConfig.instance.prefs[widget.prefsKey] == null ||
@@ -364,7 +377,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                                 EzConfig.instance.prefs[widget.prefsKey],
                               ),
                               semanticLabel:
-                                  widget.title + EFUILang.of(context)!.isImage,
+                                  widget.label + EFUILang.of(context)!.isImage,
                             ),
                 ),
               ),
