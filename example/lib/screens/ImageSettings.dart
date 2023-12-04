@@ -24,8 +24,9 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
-  late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
+  late final String _themeProfile = _isLight
+      ? EFUILang.of(context)!.gLight.toLowerCase()
+      : EFUILang.of(context)!.gDark.toLowerCase();
 
   late final String _resetTitle =
       EFUILang.of(context)!.isResetAll(_themeProfile);
