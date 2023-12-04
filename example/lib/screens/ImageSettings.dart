@@ -31,7 +31,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       EFUILang.of(context)!.isResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
@@ -48,7 +47,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               style: titleSmall(context),
               textAlign: TextAlign.center,
             ),
-            EzSpacer(_textSpacer),
+            EzSpacer(_buttonSpacer),
 
             // Settings //
 
@@ -65,10 +64,9 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: lightPageImageKey,
-                          title: EFUILang.of(context)!.isPage,
+                          label: EFUILang.of(context)!.isBackground,
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
                           updateTheme: Brightness.light,
                         ),
                       ]
@@ -77,10 +75,9 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                         // Page
                         EzImageSetting(
                           prefsKey: darkPageImageKey,
-                          title: EFUILang.of(context)!.isPage,
+                          label: EFUILang.of(context)!.isBackground,
                           allowClear: true,
                           fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
                           updateTheme: Brightness.dark,
                         ),
                       ],
