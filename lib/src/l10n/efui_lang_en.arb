@@ -45,7 +45,7 @@
   "ssResetAll": "Reset all settings?",
 
   "isPageTitle": "Image settings",
-  "isPage": "Page",
+  "isBackground": "Background",
   "isImage": "image",
   "isButtonHint": "Update the {title} image",
   "isDialogTitle": "How should the {title} image be updated?",
@@ -95,8 +95,9 @@
   "csShadow": "Shadow",
   "csRecommended": "Use recommended?",
   "csUseCustom": "Use custom",
-  "csOptional": "Optional",
-  "csSchemeBase": "Color scheme\nbase",
+  "csSchemeBase": "Build from\nimage",
+  "csOptional": "optional",
+  "csColorScheme": "color scheme",
 
   "lsPageTitle": "Layout settings",
   "lsDominantHand": "Dominant hand",

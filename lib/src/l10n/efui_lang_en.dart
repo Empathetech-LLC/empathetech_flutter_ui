@@ -125,7 +125,7 @@ class EFUILangEn extends EFUILang {
   String get isPageTitle => 'Image settings';
 
   @override
-  String get isPage => 'Page';
+  String get isBackground => 'Background';
 
   @override
   String get isImage => 'image';
@@ -287,10 +287,13 @@ class EFUILangEn extends EFUILang {
   String get csUseCustom => 'Use custom';
 
   @override
-  String get csOptional => 'Optional';
+  String get csSchemeBase => 'Build from\nimage';
 
   @override
-  String get csSchemeBase => 'Color scheme\nbase';
+  String get csOptional => 'optional';
+
+  @override
+  String get csColorScheme => 'color scheme';
 
   @override
   String get lsPageTitle => 'Layout settings';

@@ -310,11 +310,11 @@ abstract class EFUILang {
   /// **'Image settings'**
   String get isPageTitle;
 
-  /// No description provided for @isPage.
+  /// No description provided for @isBackground.
   ///
   /// In en, this message translates to:
-  /// **'Page'**
-  String get isPage;
+  /// **'Background'**
+  String get isBackground;
 
   /// No description provided for @isImage.
   ///
@@ -604,17 +604,23 @@ abstract class EFUILang {
   /// **'Use custom'**
   String get csUseCustom;
 
-  /// No description provided for @csOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Optional'**
-  String get csOptional;
-
   /// No description provided for @csSchemeBase.
   ///
   /// In en, this message translates to:
-  /// **'Color scheme\nbase'**
+  /// **'Build from\nimage'**
   String get csSchemeBase;
+
+  /// No description provided for @csOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get csOptional;
+
+  /// No description provided for @csColorScheme.
+  ///
+  /// In en, this message translates to:
+  /// **'color scheme'**
+  String get csColorScheme;
 
   /// No description provided for @lsPageTitle.
   ///
