@@ -61,6 +61,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: _isLight
                     ? [
+                        // ColorScheme source
+                        EzImageSetting(
+                          prefsKey: lightColorSchemeImageKey,
+                          title: EFUILang.of(context)!.csSchemeBase,
+                          allowClear: true,
+                          fullscreen: true,
+                          credits: EFUILang.of(context)!.isSource,
+                          updateTheme: Brightness.light,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
                         // Background
                         EzColorSetting(
                           updating: [lightBackgroundKey],
@@ -127,6 +138,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(_buttonSpacer),
                       ]
                     : [
+                        // ColorScheme source
+                        EzImageSetting(
+                          prefsKey: darkColorSchemeImageKey,
+                          title: EFUILang.of(context)!.csSchemeBase,
+                          allowClear: true,
+                          fullscreen: true,
+                          credits: EFUILang.of(context)!.isSource,
+                          updateTheme: Brightness.dark,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
                         // Background
                         EzColorSetting(
                           updating: [darkBackgroundKey],

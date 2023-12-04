@@ -460,6 +460,12 @@ abstract class EFUILang {
   /// **'Reset all {themeType} theme colors?'**
   String csResetAll(Object themeType);
 
+  /// No description provided for @csSchemeBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Color scheme base'**
+  String get csSchemeBase;
+
   /// No description provided for @csBackground.
   ///
   /// In en, this message translates to:

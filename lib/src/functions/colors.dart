@@ -116,3 +116,135 @@ ColorScheme ezColorScheme(Brightness brightness) {
           surfaceTint: getColor(darkSurfaceTintKey),
         );
 }
+
+Future<void> storeColorScheme({
+  required Brightness brightness,
+  required String path,
+}) async {
+  final ColorScheme colorScheme = await ColorScheme.fromImageProvider(
+    provider: provideImage(path),
+    brightness: brightness,
+  );
+
+  if (brightness == Brightness.light) {
+    EzConfig.instance.preferences
+        .setInt(lightPrimaryKey, colorScheme.primary.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
+    EzConfig.instance.preferences
+        .setInt(lightPrimaryContainerKey, colorScheme.primaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
+    EzConfig.instance.preferences
+        .setInt(lightSecondaryKey, colorScheme.secondary.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
+    EzConfig.instance.preferences.setInt(
+        lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
+    EzConfig.instance.preferences
+        .setInt(lightTertiaryKey, colorScheme.tertiary.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
+    EzConfig.instance.preferences
+        .setInt(lightTertiaryContainerKey, colorScheme.tertiaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
+    EzConfig.instance.preferences
+        .setInt(lightErrorKey, colorScheme.error.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnErrorKey, colorScheme.onError.value);
+    EzConfig.instance.preferences
+        .setInt(lightErrorContainerKey, colorScheme.errorContainer.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnErrorContainerKey, colorScheme.onErrorContainer.value);
+    EzConfig.instance.preferences
+        .setInt(lightOutlineKey, colorScheme.outline.value);
+    EzConfig.instance.preferences
+        .setInt(lightOutlineVariantKey, colorScheme.outlineVariant.value);
+    EzConfig.instance.preferences
+        .setInt(lightBackgroundKey, colorScheme.background.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnBackgroundKey, colorScheme.onBackground.value);
+    EzConfig.instance.preferences
+        .setInt(lightSurfaceKey, colorScheme.surface.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
+    EzConfig.instance.preferences
+        .setInt(lightSurfaceVariantKey, colorScheme.surfaceVariant.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
+    EzConfig.instance.preferences
+        .setInt(lightInverseSurfaceKey, colorScheme.inverseSurface.value);
+    EzConfig.instance.preferences
+        .setInt(lightOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
+    EzConfig.instance.preferences
+        .setInt(lightInversePrimaryKey, colorScheme.inversePrimary.value);
+    EzConfig.instance.preferences
+        .setInt(lightShadowKey, colorScheme.shadow.value);
+    EzConfig.instance.preferences
+        .setInt(lightScrimKey, colorScheme.scrim.value);
+    EzConfig.instance.preferences
+        .setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
+  } else {
+    EzConfig.instance.preferences
+        .setInt(darkPrimaryKey, colorScheme.primary.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
+    EzConfig.instance.preferences
+        .setInt(darkPrimaryContainerKey, colorScheme.primaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
+    EzConfig.instance.preferences
+        .setInt(darkSecondaryKey, colorScheme.secondary.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
+    EzConfig.instance.preferences.setInt(
+        lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
+    EzConfig.instance.preferences
+        .setInt(darkTertiaryKey, colorScheme.tertiary.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
+    EzConfig.instance.preferences
+        .setInt(darkTertiaryContainerKey, colorScheme.tertiaryContainer.value);
+    EzConfig.instance.preferences.setInt(
+        lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
+    EzConfig.instance.preferences.setInt(darkErrorKey, colorScheme.error.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnErrorKey, colorScheme.onError.value);
+    EzConfig.instance.preferences
+        .setInt(darkErrorContainerKey, colorScheme.errorContainer.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnErrorContainerKey, colorScheme.onErrorContainer.value);
+    EzConfig.instance.preferences
+        .setInt(darkOutlineKey, colorScheme.outline.value);
+    EzConfig.instance.preferences
+        .setInt(darkOutlineVariantKey, colorScheme.outlineVariant.value);
+    EzConfig.instance.preferences
+        .setInt(darkBackgroundKey, colorScheme.background.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnBackgroundKey, colorScheme.onBackground.value);
+    EzConfig.instance.preferences
+        .setInt(darkSurfaceKey, colorScheme.surface.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
+    EzConfig.instance.preferences
+        .setInt(darkSurfaceVariantKey, colorScheme.surfaceVariant.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
+    EzConfig.instance.preferences
+        .setInt(darkInverseSurfaceKey, colorScheme.inverseSurface.value);
+    EzConfig.instance.preferences
+        .setInt(darkOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
+    EzConfig.instance.preferences
+        .setInt(darkInversePrimaryKey, colorScheme.inversePrimary.value);
+    EzConfig.instance.preferences
+        .setInt(darkShadowKey, colorScheme.shadow.value);
+    EzConfig.instance.preferences.setInt(darkScrimKey, colorScheme.scrim.value);
+    EzConfig.instance.preferences
+        .setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
+  }
+}

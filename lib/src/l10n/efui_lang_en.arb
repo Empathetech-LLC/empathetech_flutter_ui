@@ -71,6 +71,7 @@
   "csPickerSemantics": "Activate to open a color picker for {name}. Long press to reset {name}.",
   "csResetTo": "Reset to...",
   "csResetAll": "Reset all {themeType} theme colors?",
+  "csSchemeBase": "Color scheme base",
   "csBackground": "Background",
   "csOnBackground": "Background text",
   "csSurface": "Surface",

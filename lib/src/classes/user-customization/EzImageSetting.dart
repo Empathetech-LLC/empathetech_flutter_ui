@@ -280,6 +280,11 @@ class _ImageSettingState extends State<EzImageSetting> {
                 _updatedPath = newPath;
               });
               if (widget.updateTheme != null) {
+                await storeColorScheme(
+                  brightness: widget.updateTheme!,
+                  path: newPath,
+                );
+
                 widget.updateTheme == Brightness.light
                     ? EzConfig.instance.preferences
                         .setString(lightColorSchemeImageKey, newPath)

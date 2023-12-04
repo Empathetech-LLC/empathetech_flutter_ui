@@ -71,6 +71,7 @@
   "csPickerSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}.",
   "csResetTo": "Restablecer a...",
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
+  "csSchemeBase": "Base del esquema de colores",
   "csBackground": "Fondo",
   "csOnBackground": "Texto del fondo",
   "csSurface": "Superficie",

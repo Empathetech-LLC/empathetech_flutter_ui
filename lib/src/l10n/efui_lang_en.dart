@@ -215,6 +215,9 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get csSchemeBase => 'Color scheme base';
+
+  @override
   String get csBackground => 'Background';
 
   @override
