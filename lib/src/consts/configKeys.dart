@@ -44,7 +44,7 @@ const Map<String, Type> darkImageKeys = {
 
 // Light
 
-const String lightPrimaryKey = 'lightPrimary';
+const String lightPrimaryKey = 'lightPrimary'; // required
 const String lightOnPrimaryKey = 'lightOnPrimary';
 const String lightPrimaryContainerKey = 'lightPrimaryContainer';
 const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
@@ -85,7 +85,7 @@ const String lightScrimKey = 'lightScrim';
 const String lightSurfaceTintKey = 'lightSurfaceTint';
 
 const Map<String, Type> lightColorKeys = {
-  lightPrimaryKey: int,
+  lightPrimaryKey: int, // required
   lightOnPrimaryKey: int,
   lightPrimaryContainerKey: int,
   lightOnPrimaryContainerKey: int,
@@ -119,7 +119,7 @@ const Map<String, Type> lightColorKeys = {
 
 // Dark
 
-const String darkPrimaryKey = 'darkPrimary';
+const String darkPrimaryKey = 'darkPrimary'; // required
 const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
@@ -160,7 +160,7 @@ const String darkScrimKey = 'darkScrim';
 const String darkSurfaceTintKey = 'darkSurfaceTint';
 
 const Map<String, Type> darkColorKeys = {
-  darkPrimaryKey: int,
+  darkPrimaryKey: int, // required
   darkOnPrimaryKey: int,
   darkPrimaryContainerKey: int,
   darkOnPrimaryContainerKey: int,
@@ -196,18 +196,18 @@ const Map<String, Type> darkColorKeys = {
 
 const String fontFamilyKey = 'fontFamily';
 
-const String marginKey = 'margin';
-const String paddingKey = 'padding';
+const String marginKey = 'margin'; // required
+const String paddingKey = 'padding'; // required
 
-const String buttonSpacingKey = 'buttonSpacing';
-const String textSpacingKey = 'textSpacing';
+const String buttonSpacingKey = 'buttonSpacing'; // required
+const String textSpacingKey = 'textSpacing'; // required
 
 const Map<String, Type> styleKeys = {
   fontFamilyKey: String,
-  marginKey: int,
-  paddingKey: int,
-  buttonSpacingKey: int,
-  textSpacingKey: int,
+  marginKey: int, // required
+  paddingKey: int, // required
+  buttonSpacingKey: int, // required
+  textSpacingKey: int, // required
 };
 
 const Map<String, Type> allKeys = {

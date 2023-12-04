@@ -16,7 +16,7 @@ const Map<String, dynamic> empathetechConfig = {
   lightSurfaceKey: whiteHex,
   lightOnSurfaceKey: blackHex,
 
-  lightPrimaryKey: EmpathPurpleHex,
+  lightPrimaryKey: EmpathPurpleHex, // required
   lightOnPrimaryKey: whiteHex,
 
   lightSecondaryKey: EmpathGoldenrodHex,
@@ -32,7 +32,7 @@ const Map<String, dynamic> empathetechConfig = {
   darkSurfaceKey: blackHex,
   darkOnSurfaceKey: whiteHex,
 
-  darkPrimaryKey: EmpathEucalyptusHex,
+  darkPrimaryKey: EmpathEucalyptusHex, // required
   darkOnPrimaryKey: blackHex,
 
   darkSecondaryKey: EmpathGoldenrodHex,
@@ -45,9 +45,9 @@ const Map<String, dynamic> empathetechConfig = {
 
   fontFamilyKey: roboto,
 
-  marginKey: 15.0,
-  paddingKey: 15.0,
+  marginKey: 15.0, // required
+  paddingKey: 15.0, // required
 
-  buttonSpacingKey: 30.0,
-  textSpacingKey: 60.0,
+  buttonSpacingKey: 30.0, // required
+  textSpacingKey: 60.0, // required
 };
