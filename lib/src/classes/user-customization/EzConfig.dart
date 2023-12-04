@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,24 +17,16 @@ class EzConfig {
   /// [AssetImage] paths for the app
   final Set<String> assets;
 
-  /// The factory constructor will merge [empathetechConfig] with any provided customDefaults
+  /// Default config values
+  /// [empathetechConfig] merged with any provided customDefaults
   final Map<String, dynamic> defaults;
+
+  /// All keys (and their value [Type]) in the known EzConfig universe
+  final Map<String, Type> keys;
 
   /// Live values in use
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
-
-  /// All [Key]s that can be configured
-  final Set<String> keys;
-
-  /// Current locale/language for the app
-  final Locale? locale;
-
-  /// Current [googleStyles] family for the app
-  final String? fontFamily;
-
-  /// What side of the screen touch points should be on
-  final Hand? dominantHand;
 
   /// Private instance
   static EzConfig? _instance;
@@ -43,23 +36,20 @@ class EzConfig {
     required this.preferences,
     required this.assets,
     required this.defaults,
-    required this.prefs,
     required this.keys,
-    required this.locale,
-    required this.fontFamily,
-    required this.dominantHand,
+    required this.prefs,
   });
 
-  /// [assetPaths] => provide your [AssetImage] paths for this app
   /// [preferences] => provide a [SharedPreferences] instance
+  /// [assetPaths] => provide your [AssetImage] paths for this app
   /// [customDefaults] => provide your brand colors, custom styling, etc
   factory EzConfig({
-    required Set<String> assetPaths,
     required SharedPreferences preferences,
+    required Set<String> assetPaths,
     Map<String, dynamic>? customDefaults,
   }) {
     if (_instance == null) {
-      // Build EzConfig.defaults //
+      // Build this.defaults //
 
       // Start with Empathetech's config
       Map<String, dynamic> _defaults = new Map.from(empathetechConfig);
@@ -67,25 +57,33 @@ class EzConfig {
       // Merge custom defaults
       if (customDefaults != null) _defaults.addAll(customDefaults);
 
-      // Build the EzConfig.keys //
+      // Build this.keys //
 
-      Set<String> _keys = new Set.from(allKeys);
-      if (customDefaults != null) _keys.addAll(customDefaults.keys);
+      // Start with Empathetech's config
+      Map<String, Type> _keys = new Map.from(allKeys);
 
-      // Build EzConfig.prefs //
+      // Merge custom defaults
+      if (customDefaults != null) {
+        for (var entry in customDefaults.entries) {
+          _keys[entry.key] = entry.value.runtimeType;
+        }
+      }
+
+      // Build this.prefs //
 
       // Start with the newly merged defaults
       Map<String, dynamic> _prefs = new Map.from(_defaults);
 
       // Find the keys that users have overwritten
-      Set<String> overwritten = preferences.getKeys().intersection(_keys);
+      Set<String> overwritten =
+          preferences.getKeys().intersection(_keys.keys.toSet());
 
       // Get the updated values
       overwritten.forEach((key) {
-        dynamic value = _prefs[key];
+        Type? valueType = _keys[key];
         dynamic userPref;
 
-        switch (value.runtimeType) {
+        switch (valueType) {
           case int:
             userPref = preferences.getInt(key);
             break;
@@ -102,28 +100,13 @@ class EzConfig {
             userPref = preferences.getStringList(key);
             break;
           default:
+            log("""Key [$key] has unsupported Type [$valueType]
+Must be one of [int, bool, double, String, List<String>]""");
             break;
         }
 
         if (userPref != null) _prefs[key] = userPref;
       });
-
-      // Build remaining trackers //
-      final List<String>? localeData = preferences.getStringList(localeKey);
-      final Locale? _locale = (localeData == null || localeData.isEmpty)
-          ? null
-          : Locale(localeData[0], localeData.length > 1 ? localeData[1] : null);
-
-      final String? fontData = preferences.getString(fontFamilyKey);
-      final String? _fontFamily =
-          (fontData == null) ? null : googleStyles[(fontData)]?.fontFamily;
-
-      final bool? isRight = preferences.getBool(isRightHandKey);
-      final Hand? _dominantHand = (isRight == null)
-          ? null
-          : isRight
-              ? Hand.right
-              : Hand.left;
 
       // Build the EzConfig instance //
 
@@ -133,20 +116,64 @@ class EzConfig {
         defaults: _defaults,
         prefs: _prefs,
         keys: _keys,
-        locale: _locale,
-        fontFamily: _fontFamily,
-        dominantHand: _dominantHand,
       );
     }
 
     return _instance!;
   }
 
-  /// Getter
+  // No null checks below, for expediency
+  // EFUI won't work at all if EzConfig isn't initialized, so they're moot
+
+  // Getters //
+
+  /// Get the [EzConfig] instance
+  /// EzConfig must be initialized
   static EzConfig get instance {
-    if (_instance == null) {
-      throw Exception("EzConfig has not been initialized!");
-    }
     return _instance!;
+  }
+
+  /// Get the [keys] EzConfig value?
+  /// EzConfig must be initialized
+  static dynamic get(String key) {
+    return _instance!.prefs[key];
+  }
+
+  // Setters //
+
+  /// Set [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> set(String key, dynamic value) async {
+    Type? valueType = _instance!.keys[key];
+    if (valueType == null) {
+      log("""Key [$key] is not in the known EFUI universe
+Please add it to the customDefaults when initializing EzConfig""");
+      return false;
+    }
+
+    switch (valueType) {
+      case int:
+        return await _instance!.preferences.setInt(key, value);
+      case bool:
+        return await _instance!.preferences.setBool(key, value);
+      case double:
+        return await _instance!.preferences.setDouble(key, value);
+      case String:
+        return await _instance!.preferences.setString(key, value);
+      case const (List<String>):
+        return await _instance!.preferences.setStringList(key, value);
+      default:
+        log("""Key [$key] has unsupported Type [$valueType]
+Must be one of [int, bool, double, String, List<String>]""");
+        return false;
+    }
+  }
+
+  // Cleaners //
+
+  /// Remove the custom value for [key]
+  /// EzConfig must be initialized
+  static Future<bool> remove(String key) async {
+    return await _instance!.preferences.remove(key);
   }
 }
