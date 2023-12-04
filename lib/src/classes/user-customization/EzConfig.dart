@@ -127,8 +127,10 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   // Getters //
 
-  /// Get the [EzConfig] instance
-  /// EzConfig must be initialized
+  /// Get the [EzConfig] instance (if initialized)
+  /// This is the lowest level access. It's safe to use as a getter...
+  /// * Only set things if you're sure of what you're doing *
+  /// If unsure, use [EzConfig.set]
   static EzConfig get instance {
     return _instance!;
   }
@@ -137,6 +139,22 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// EzConfig must be initialized
   static dynamic get(String key) {
     return _instance!.prefs[key];
+  }
+
+  /// Wether the [key] contains the value to a recognized [AssetImage] path
+  /// Redundant to [isKeyAsset]
+  static bool keyIsAsset(String key) {
+    if (_instance!.prefs.containsKey(key)) {
+      return false;
+    } else {
+      return _instance!.assets.contains(_instance!.prefs[key]);
+    }
+  }
+
+  /// Wether the [path] leads to a recognized [AssetImage]
+  /// Redundant to [isPathAsset]
+  static bool pathIsAsset(String path) {
+    return _instance!.assets.contains(path);
   }
 
   // Setters //
