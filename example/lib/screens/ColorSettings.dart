@@ -24,14 +24,16 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   // Gather theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
-  late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
-
-  // Define local reset button's messages
-  late final String _resetTitle =
-      EFUILang.of(context)!.csResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double _padding = EzConfig.instance.prefs[paddingKey];
+
+  late final TextStyle? _descriptionStyle = titleSmall(context);
+
+  late final String _themeProfile =
+      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
+  late final String _resetTitle =
+      EFUILang.of(context)!.csResetAll(_themeProfile);
 
   // Return the build //
 
@@ -45,7 +47,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             // Editing reminders
             Text(
               EFUILang.of(context)!.csEditingTheme(_themeProfile),
-              style: titleSmall(context),
+              style: _descriptionStyle,
               textAlign: TextAlign.center,
             ),
             EzSpacer(_buttonSpacer),
@@ -61,17 +63,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: _isLight
                     ? [
-                        // ColorScheme source
-                        EzImageSetting(
-                          prefsKey: lightColorSchemeImageKey,
-                          title: EFUILang.of(context)!.csSchemeBase,
-                          allowClear: true,
-                          fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
-                          updateTheme: Brightness.light,
-                        ),
-                        EzSpacer(_buttonSpacer),
-
                         // Background
                         EzColorSetting(
                           updating: [lightBackgroundKey],
@@ -136,19 +127,25 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                           textBackgroundKey: lightTertiaryKey,
                         ),
                         EzSpacer(_buttonSpacer),
-                      ]
-                    : [
+
                         // ColorScheme source
+                        Text(
+                          EFUILang.of(context)!.csOptional,
+                          style: _descriptionStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                        EzSpacer(_padding),
                         EzImageSetting(
-                          prefsKey: darkColorSchemeImageKey,
+                          prefsKey: lightColorSchemeImageKey,
                           title: EFUILang.of(context)!.csSchemeBase,
                           allowClear: true,
                           fullscreen: true,
                           credits: EFUILang.of(context)!.isSource,
-                          updateTheme: Brightness.dark,
+                          updateTheme: Brightness.light,
                         ),
                         EzSpacer(_buttonSpacer),
-
+                      ]
+                    : [
                         // Background
                         EzColorSetting(
                           updating: [darkBackgroundKey],
@@ -211,6 +208,23 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                           updating: [darkOnTertiaryKey],
                           label: EFUILang.of(context)!.csOnTertiary,
                           textBackgroundKey: darkTertiaryKey,
+                        ),
+                        EzSpacer(_buttonSpacer),
+
+                        // ColorScheme source
+                        Text(
+                          EFUILang.of(context)!.csOptional,
+                          style: _descriptionStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                        EzSpacer(_padding),
+                        EzImageSetting(
+                          prefsKey: darkColorSchemeImageKey,
+                          title: EFUILang.of(context)!.csSchemeBase,
+                          allowClear: true,
+                          fullscreen: true,
+                          credits: EFUILang.of(context)!.isSource,
+                          updateTheme: Brightness.dark,
                         ),
                         EzSpacer(_buttonSpacer),
                       ],
