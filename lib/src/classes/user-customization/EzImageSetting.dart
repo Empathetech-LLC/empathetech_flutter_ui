@@ -14,7 +14,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 // EzImageSetting has not yet been verified with TalkBack or VoiceOver //
 
 class EzImageSetting extends StatefulWidget {
-  /// [EzConfig.instance] key whose value is being updated
+  /// [EzConfig] key whose value is being updated
   final String prefsKey;
 
   /// [String] to display on the [ElevatedButton]
@@ -62,18 +62,10 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather theme data //
 
   String? _updatedPath;
-  bool? _updateTheme;
+  late bool _updateTheme = (widget.updateTheme != null);
 
   final double _padding = EzConfig.get(paddingKey);
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setState(() {
-      _updateTheme = (widget.updateTheme != null);
-    });
-  }
 
   // Define button functions //
 
@@ -203,7 +195,6 @@ class _ImageSettingState extends State<EzImageSetting> {
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
-
           EzConfig.remove(widget.prefsKey);
 
           popScreen(
@@ -223,7 +214,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
-
             EzConfig.setString(widget.prefsKey, noImageValue);
 
             popScreen(context: context, pass: noImageValue);
