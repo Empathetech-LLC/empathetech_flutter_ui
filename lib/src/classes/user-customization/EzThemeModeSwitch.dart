@@ -30,10 +30,11 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     }
   }
 
+  // Gather theme data //
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
-
     ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
     final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
 
@@ -66,7 +67,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           style: style,
           textAlign: TextAlign.center,
         ),
-        EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
+        EzSpacer.row(_buttonSpacer),
 
         // Button
         Semantics(

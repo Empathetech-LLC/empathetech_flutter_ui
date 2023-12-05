@@ -21,6 +21,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   Hand currSide =
       (EzConfig.get(isRightHandKey) == true) ? Hand.right : Hand.left;
 
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
   @override
   Widget build(BuildContext context) {
     // Define the list items //
@@ -48,7 +50,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         style: style,
         textAlign: TextAlign.center,
       ),
-      EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
+      EzSpacer.row(_buttonSpacer),
 
       // Button
       Semantics(

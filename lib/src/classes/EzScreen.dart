@@ -54,7 +54,7 @@ class EzScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EdgeInsetsGeometry _margin =
-        margin ?? EdgeInsets.all(EzConfig.instance.prefs[marginKey]);
+        margin ?? EdgeInsets.all(EzConfig.get(marginKey));
 
     Decoration? buildDecoration() {
       if (decorationImageKey == null) {
@@ -68,7 +68,7 @@ class EzScreen extends StatelessWidget {
       } else {
         return BoxDecoration(
           image: DecorationImage(
-            image: provideImage(EzConfig.instance.prefs[decorationImageKey]),
+            image: provideImage(imagePath),
             fit: BoxFit.fill,
           ),
         );
