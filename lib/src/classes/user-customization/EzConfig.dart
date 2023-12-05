@@ -181,8 +181,7 @@ Must be one of [int, bool, double, String, List<String>]""");
   }
 
   /// Wether the [key] contains the value to a recognized [AssetImage] path
-  /// Redundant to [isKeyAsset]
-  static bool keyIsAsset(String key) {
+  static bool isKeyAsset(String key) {
     if (_instance!.prefs.containsKey(key)) {
       return false;
     } else {
@@ -191,8 +190,7 @@ Must be one of [int, bool, double, String, List<String>]""");
   }
 
   /// Wether the [path] leads to a recognized [AssetImage]
-  /// Redundant to [isPathAsset]
-  static bool pathIsAsset(String path) {
+  static bool isPathAsset(String path) {
     return _instance!.assets.contains(path);
   }
 
@@ -264,5 +262,14 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// EzConfig must be initialized
   static Future<bool> remove(String key) async {
     return await _instance!.preferences.remove(key);
+  }
+
+  static void removeKeys(Set<String> keys) async {
+    final Set<String> updated =
+        keys.intersection(_instance!.preferences.getKeys());
+
+    for (String key in updated) {
+      _instance!.preferences.remove(key);
+    }
   }
 }
