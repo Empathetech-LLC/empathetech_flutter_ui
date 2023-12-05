@@ -6,14 +6,15 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - EzAlertDialog spacing
 - To Material 3
-  - Large updates to keys, empathetechConfig, and ezThemeData,
-  - Restored iOS web icons
+  - Big updates to keys, empathetechConfig, EzConfig, ezThemeData, EzImageSetting, and EzColorSetting
+  - Restored iOS web icons and video
   - Updated textScaleFactor to textScaler
   - Using SelectionArea rather than SelectableText
 - Added EzLocaleSetting
-  - Re-arranged the settings screens
 - Made EzLink a TextButton
 - Expanded EzRowCol
+- Expanded l10n
+- Example app and README with all the new goodies/info
 
 ### Removed
 - EzText
