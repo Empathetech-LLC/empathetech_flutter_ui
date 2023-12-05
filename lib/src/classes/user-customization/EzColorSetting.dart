@@ -56,7 +56,7 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather theme data //
 
-  late Color currColor = Color(EzConfig.instance.prefs[widget.updating[0]]);
+  late Color currColor = Color(EzConfig.get(widget.updating[0]));
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
@@ -109,7 +109,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Find the recommended contrast color for the background
       Color backgroundColor = Color(
           EzConfig.getInt(widget.textBackgroundKey!) ??
-              EzConfig.instance.prefs[widget.textBackgroundKey!]);
+              EzConfig.get(widget.textBackgroundKey!));
 
       int recommended = getTextColor(backgroundColor).value;
 

@@ -361,16 +361,14 @@ class _ImageSettingState extends State<EzImageSetting> {
                                   widget.label + EFUILang.of(context)!.isImage,
                             )
                       : // user has not made a change
-                      (EzConfig.instance.prefs[widget.prefsKey] == null ||
-                              EzConfig.instance.prefs[widget.prefsKey] ==
-                                  noImageValue)
+                      (EzConfig.get(widget.prefsKey) == null ||
+                              EzConfig.get(widget.prefsKey) == noImageValue)
                           ? // there is no current image
                           Icon(PlatformIcons(context).clear)
                           : // there is an image stored
                           EzImage(
-                              image: provideImage(
-                                EzConfig.instance.prefs[widget.prefsKey],
-                              ),
+                              image:
+                                  provideImage(EzConfig.get(widget.prefsKey)),
                               semanticLabel:
                                   widget.label + EFUILang.of(context)!.isImage,
                             ),
