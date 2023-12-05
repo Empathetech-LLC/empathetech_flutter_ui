@@ -91,7 +91,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               context: context,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeKeys(_isLight
+                EzConfig.removeKeys(_isLight
                     ? lightImageKeys.keys.toSet()
                     : darkImageKeys.keys.toSet());
                 popScreen(context: context, pass: true);

@@ -21,7 +21,7 @@ class EzResetButton extends StatelessWidget {
   final String? hint;
 
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.gResetDialogTitle]
+  /// Defaults to [EFUILang.gResetAll]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
@@ -54,7 +54,7 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onConfirm = onConfirm ??
         () {
-          removeKeys(allKeys.keys.toSet());
+          EzConfig.removeKeys(allKeys.keys.toSet());
           popScreen(context: context, pass: true);
         };
 

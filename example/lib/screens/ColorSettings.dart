@@ -239,7 +239,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               hint: _resetTitle,
               dialogTitle: _resetTitle,
               onConfirm: () {
-                removeKeys(_isLight
+                EzConfig.removeKeys(_isLight
                     ? lightColorKeys.keys.toSet()
                     : darkColorKeys.keys.toSet());
                 popScreen(context: context, pass: true);
