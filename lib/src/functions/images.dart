@@ -10,29 +10,10 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-/// Custom implementation of a removeAll() style method for [SharedPreferences]
-void removeKeys(Set<String> keys) {
-  for (String key
-      in keys.intersection(EzConfig.instance.preferences.getKeys())) {
-    EzConfig.remove(key);
-  }
-}
-
-/// Can this [path] build an [AssetImage]?
-bool isPathAsset(String path) {
-  return EzConfig.instance.assets.contains(path);
-}
-
-/// Does the value at the end of this [key]'s [EzConfig.instance] tunnel lead to an [AssetImage] path?
-bool isKeyAsset(String key) {
-  return EzConfig.instance.assets.contains(EzConfig.get(key));
-}
 
 /// Provide the [path] to an [Image] and we'll handle the rest
 ImageProvider provideImage(String path) {
-  if (isPathAsset(path)) {
+  if (EzConfig.isPathAsset(path)) {
     return AssetImage(path);
   } else if (isUrl(path)) {
     return NetworkImage(path);
