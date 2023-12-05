@@ -140,6 +140,13 @@ Must be one of [int, bool, double, String, List<String>]""");
     return _instance!.prefs[key];
   }
 
+  /// Get the [keys] default EzConfig value?
+  /// Fast && reliable
+  /// EzConfig must be initialized
+  static dynamic getDefault(String key) {
+    return _instance!.defaults[key];
+  }
+
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
