@@ -36,7 +36,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       buttons.addAll([
         ElevatedButton(
           onPressed: () {
-            EzConfig.instance.preferences.setString(fontFamilyKey, font);
+            EzConfig.setString(fontFamilyKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });

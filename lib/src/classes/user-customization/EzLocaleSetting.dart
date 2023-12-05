@@ -69,7 +69,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       buttons.addAll([
         ElevatedButton(
           onPressed: () {
-            EzConfig.instance.preferences.setStringList(localeKey, localeData);
+            EzConfig.setStringList(localeKey, localeData);
             setState(() {
               currLocale = locale;
             });

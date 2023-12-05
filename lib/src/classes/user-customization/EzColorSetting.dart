@@ -80,7 +80,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       onConfirm: () {
         // Update the user's setting
         for (String key in widget.updating) {
-          EzConfig.instance.preferences.setInt(key, currColor.value);
+          EzConfig.setInt(key, currColor.value);
         }
 
         if (widget.autoUpdatingTextKeys != null) {
@@ -108,7 +108,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       // Find the recommended contrast color for the background
       Color backgroundColor = Color(
-          EzConfig.instance.preferences.getInt(widget.textBackgroundKey!) ??
+          EzConfig.getInt(widget.textBackgroundKey!) ??
               EzConfig.instance.prefs[widget.textBackgroundKey!]);
 
       int recommended = getTextColor(backgroundColor).value;
@@ -119,7 +119,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       final void Function() onConfirm = () {
         // Update the user's setting
         for (String key in widget.updating) {
-          EzConfig.instance.preferences.setInt(key, recommended);
+          EzConfig.setInt(key, recommended);
         }
 
         setState(() {

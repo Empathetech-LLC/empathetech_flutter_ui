@@ -237,7 +237,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             if (value == _defaultValue) {
               EzConfig.remove(widget.prefsKey);
             } else {
-              EzConfig.instance.preferences.setDouble(widget.prefsKey, value);
+              EzConfig.setDouble(widget.prefsKey, value);
             }
           },
 
