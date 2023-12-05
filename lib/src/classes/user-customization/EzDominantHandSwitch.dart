@@ -19,7 +19,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather theme data //
 
   Hand currSide =
-      (EzConfig.get(isRightHandKey) == true) ? Hand.right : Hand.left;
+      (EzConfig.get(isRightHandKey) == false) ? Hand.left : Hand.right;
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
