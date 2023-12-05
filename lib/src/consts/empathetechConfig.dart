@@ -45,9 +45,9 @@ const Map<String, dynamic> empathetechConfig = {
 
   fontFamilyKey: roboto,
 
-  marginKey: 15.0, // required
-  paddingKey: 15.0, // required
+  marginKey: 20.0, // required
+  paddingKey: 20.0, // required
 
-  buttonSpacingKey: 30.0, // required
-  textSpacingKey: 60.0, // required
+  buttonSpacingKey: 40.0, // required
+  textSpacingKey: 80.0, // required
 };
