@@ -14,7 +14,7 @@ class EzScreen extends StatelessWidget {
   /// Provide [decoration] OR [decorationImageKey]
   final Decoration? decoration;
 
-  /// Optional [EzConfig.instance] key that will be used to create a [DecorationImage] background for the screen
+  /// Optional [EzConfig] key that will be used to create a [DecorationImage] background for the screen
   /// Provide [decorationImageKey] OR [decoration]
   final String? decorationImageKey;
 
