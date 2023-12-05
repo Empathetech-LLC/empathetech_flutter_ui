@@ -26,13 +26,20 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
-  final double _padding = EzConfig.get(paddingKey);
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
 
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
+
+  late final String _fromImageLabel =
+      "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})";
+  late final String _fromImageTitle =
+      "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
+  late final String _fromImageHint =
+      "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
+
   late final String _resetTitle =
       EFUILang.of(context)!.csResetAll(_themeProfile);
 
@@ -130,24 +137,33 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(_buttonSpacer),
 
                         // ColorScheme source
-                        Text(
-                          EFUILang.of(context)!.csOptional,
-                          style: _descriptionStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        EzSpacer(_padding),
-                        EzImageSetting(
-                          prefsKey: lightColorSchemeImageKey,
-                          label:
-                              "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})",
-                          dialogTitle:
-                              "$_themeProfile ${EFUILang.of(context)!.csColorScheme}",
-                          allowClear: true,
-                          fullscreen: true,
-                          updateTheme: Brightness.light,
-                          hideThemeMessage: true,
+                        Semantics(
+                          button: true,
+                          hint: _fromImageHint,
+                          child: ExcludeSemantics(
+                            child: EzImageSetting(
+                              prefsKey: lightColorSchemeImageKey,
+                              label: _fromImageLabel,
+                              dialogTitle: _fromImageTitle,
+                              allowClear: true,
+                              fullscreen: true,
+                              updateTheme: Brightness.light,
+                              hideThemeMessage: true,
+                            ),
+                          ),
                         ),
                         EzSpacer(_buttonSpacer),
+
+                        // Local reset all
+                        EzResetButton(
+                          context: context,
+                          hint: _resetTitle,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.removeKeys(lightColorKeys.keys.toSet());
+                            popScreen(context: context, pass: true);
+                          },
+                        ),
                       ]
                     : [
                         // Background
@@ -216,34 +232,35 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                         EzSpacer(_buttonSpacer),
 
                         // ColorScheme source
+                        Semantics(
+                          button: true,
+                          hint: _fromImageHint,
+                          child: ExcludeSemantics(
+                            child: EzImageSetting(
+                              prefsKey: darkColorSchemeImageKey,
+                              label: _fromImageLabel,
+                              dialogTitle: _fromImageTitle,
+                              allowClear: true,
+                              fullscreen: true,
+                              updateTheme: Brightness.dark,
+                              hideThemeMessage: true,
+                            ),
+                          ),
+                        ),
+                        EzSpacer(_buttonSpacer),
 
-                        EzImageSetting(
-                          prefsKey: darkColorSchemeImageKey,
-                          label:
-                              "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})",
-                          dialogTitle:
-                              "$_themeProfile ${EFUILang.of(context)!.csColorScheme}",
-                          allowClear: true,
-                          fullscreen: true,
-                          updateTheme: Brightness.dark,
-                          hideThemeMessage: true,
+                        // Local reset all
+                        EzResetButton(
+                          context: context,
+                          hint: _resetTitle,
+                          dialogTitle: _resetTitle,
+                          onConfirm: () {
+                            EzConfig.removeKeys(darkColorKeys.keys.toSet());
+                            popScreen(context: context, pass: true);
+                          },
                         ),
                       ],
               ),
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Local reset all
-            EzResetButton(
-              context: context,
-              hint: _resetTitle,
-              dialogTitle: _resetTitle,
-              onConfirm: () {
-                EzConfig.removeKeys(_isLight
-                    ? lightColorKeys.keys.toSet()
-                    : darkColorKeys.keys.toSet());
-                popScreen(context: context, pass: true);
-              },
             ),
             EzSpacer(_buttonSpacer),
           ],
