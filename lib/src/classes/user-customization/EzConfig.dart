@@ -84,11 +84,11 @@ class EzConfig {
         dynamic userPref;
 
         switch (valueType) {
-          case int:
-            userPref = preferences.getInt(key);
-            break;
           case bool:
             userPref = preferences.getBool(key);
+            break;
+          case int:
+            userPref = preferences.getInt(key);
             break;
           case double:
             userPref = preferences.getDouble(key);
@@ -128,17 +128,56 @@ Must be one of [int, bool, double, String, List<String>]""");
   // Getters //
 
   /// Get the [EzConfig] instance (if initialized)
-  /// This is the lowest level access. It's safe to use as a getter...
-  /// * Only set things if you're sure of what you're doing *
-  /// If unsure, use [EzConfig.set]
   static EzConfig get instance {
     return _instance!;
   }
 
   /// Get the [keys] EzConfig value?
+  /// Uses the live values from [prefs]
+  /// Faster but less reliable than the other getters
   /// EzConfig must be initialized
   static dynamic get(String key) {
     return _instance!.prefs[key];
+  }
+
+  /// Get the [keys] EzConfig value
+  /// Uses the value stored in [preferences]
+  /// Slower but more reliable than [EzConfig.get]
+  /// EzConfig must be initialized
+  static bool? getBool(String key) {
+    return _instance!.preferences.getBool(key);
+  }
+
+  /// Get the [keys] EzConfig value
+  /// Uses the value stored in [preferences]
+  /// Slower but more reliable than [EzConfig.get]
+  /// EzConfig must be initialized
+  static int? getInt(String key) {
+    return _instance!.preferences.getInt(key);
+  }
+
+  /// Get the [keys] EzConfig value
+  /// Uses the value stored in [preferences]
+  /// Slower but more reliable than [EzConfig.get]
+  /// EzConfig must be initialized
+  static double? getDouble(String key) {
+    return _instance!.preferences.getDouble(key);
+  }
+
+  /// Get the [keys] EzConfig value
+  /// Uses the value stored in [preferences]
+  /// Slower but more reliable than [EzConfig.get]
+  /// EzConfig must be initialized
+  static String? getString(String key) {
+    return _instance!.preferences.getString(key);
+  }
+
+  /// Get the [keys] EzConfig value
+  /// Uses the value stored in [preferences]
+  /// Slower but more reliable than [EzConfig.get]
+  /// EzConfig must be initialized
+  static List<String>? getStringList(String key) {
+    return _instance!.preferences.getStringList(key);
   }
 
   /// Wether the [key] contains the value to a recognized [AssetImage] path
@@ -159,8 +198,10 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   // Setters //
 
-  /// Set [key] to [value]
-  /// EzConfig must be initialized
+  /// Set [key] to [value] - EzConfig must be initialized
+  /// Handles [Type] checking
+  /// If the [Type] is known, the direct setters are faster
+  /// [EzConfig.setInt], [EzConfig.setBool], [EzConfig.setDouble], [EzConfig.setString], [EzConfig.setStringList]
   static Future<bool> set(String key, dynamic value) async {
     Type? valueType = _instance!.keys[key];
     if (valueType == null) {
@@ -170,10 +211,10 @@ Please add it to the customDefaults when initializing EzConfig""");
     }
 
     switch (valueType) {
-      case int:
-        return await _instance!.preferences.setInt(key, value);
       case bool:
         return await _instance!.preferences.setBool(key, value);
+      case int:
+        return await _instance!.preferences.setInt(key, value);
       case double:
         return await _instance!.preferences.setDouble(key, value);
       case String:
@@ -185,6 +226,36 @@ Please add it to the customDefaults when initializing EzConfig""");
 Must be one of [int, bool, double, String, List<String>]""");
         return false;
     }
+  }
+
+  /// Set the EzConfig [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> setBool(String key, bool value) async {
+    return await _instance!.preferences.setBool(key, value);
+  }
+
+  /// Set the EzConfig [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> setInt(String key, int value) async {
+    return await _instance!.preferences.setInt(key, value);
+  }
+
+  /// Set the EzConfig [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> setDouble(String key, double value) async {
+    return await _instance!.preferences.setDouble(key, value);
+  }
+
+  /// Set the EzConfig [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> setString(String key, String value) async {
+    return await _instance!.preferences.setString(key, value);
+  }
+
+  /// Set the EzConfig [key] to [value]
+  /// EzConfig must be initialized
+  static Future<bool> setStringList(String key, List<String> value) async {
+    return await _instance!.preferences.setStringList(key, value);
   }
 
   // Cleaners //
