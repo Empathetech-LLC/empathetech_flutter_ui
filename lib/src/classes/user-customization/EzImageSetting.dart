@@ -208,7 +208,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(
             context: context,
-            pass: EzConfig.instance.defaults[widget.prefsKey],
+            pass: EzConfig.getDefault(widget.prefsKey),
           );
         },
         label: Text(EFUILang.of(context)!.isResetIt),

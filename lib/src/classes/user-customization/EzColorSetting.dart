@@ -173,8 +173,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for resetting the color(s) to default
   /// A preview of the reset color is shown, taken from the first in the list
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor =
-        Color(EzConfig.instance.defaults[widget.updating[0]]);
+    final Color resetColor = Color(EzConfig.getDefault(widget.updating[0]));
 
     // Define action button parameters //
 

@@ -22,7 +22,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather theme data //
 
   String? currFontFamily = EzConfig.get(fontFamilyKey);
-  final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
+  final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
