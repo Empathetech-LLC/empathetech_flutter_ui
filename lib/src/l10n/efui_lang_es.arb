@@ -95,8 +95,9 @@
   "csShadow": "Sombra",
   "csRecommended": "¿Usar recomendado?",
   "csUseCustom": "Usar personalizado",
-  "csOptional": "opcional",
   "csSchemeBase": "Construir a partir\nde la imagen",
+  "csOptional": "opcional",
+  "csFromImage": "Construye la paleta de colores a partir de una imagen",
   "csColorScheme": "esquema de colores",
 
   "lsPageTitle": "Configuraciones de diseño",

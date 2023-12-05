@@ -296,6 +296,10 @@ class EFUILangEs extends EFUILang {
   String get csOptional => 'opcional';
 
   @override
+  String get csFromImage =>
+      'Construye la paleta de colores a partir de una imagen';
+
+  @override
   String get csColorScheme => 'esquema de colores';
 
   @override

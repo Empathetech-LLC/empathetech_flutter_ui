@@ -616,6 +616,12 @@ abstract class EFUILang {
   /// **'optional'**
   String get csOptional;
 
+  /// No description provided for @csFromImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Build the color scheme from an image'**
+  String get csFromImage;
+
   /// No description provided for @csColorScheme.
   ///
   /// In en, this message translates to:

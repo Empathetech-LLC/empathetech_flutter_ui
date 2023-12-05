@@ -97,6 +97,7 @@
   "csUseCustom": "Use custom",
   "csSchemeBase": "Build from\nimage",
   "csOptional": "optional",
+  "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",
 
   "lsPageTitle": "Layout settings",
