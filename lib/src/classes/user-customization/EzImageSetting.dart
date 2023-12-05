@@ -168,8 +168,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     materialActions: ezMaterialActions(
                       context: context,
                       onConfirm: () {
-                        EzConfig.instance.preferences
-                            .setString(widget.prefsKey, url);
+                        EzConfig.setString(widget.prefsKey, url);
                         popScreen(context: context, pass: url);
                       },
                       confirmMsg: EFUILang.of(context)!.gApply,
@@ -179,8 +178,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     cupertinoActions: ezCupertinoActions(
                       context: context,
                       onConfirm: () {
-                        EzConfig.instance.preferences
-                            .setString(widget.prefsKey, url);
+                        EzConfig.setString(widget.prefsKey, url);
                         popScreen(context: context, pass: url);
                       },
                       confirmMsg: EFUILang.of(context)!.gApply,
@@ -226,8 +224,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () {
             _cleanup();
 
-            EzConfig.instance.preferences
-                .setString(widget.prefsKey, noImageValue);
+            EzConfig.setString(widget.prefsKey, noImageValue);
 
             popScreen(context: context, pass: noImageValue);
           },
@@ -297,10 +294,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                 );
 
                 widget.updateTheme == Brightness.light
-                    ? EzConfig.instance.preferences
-                        .setString(lightColorSchemeImageKey, newPath)
-                    : EzConfig.instance.preferences
-                        .setString(darkColorSchemeImageKey, newPath);
+                    ? EzConfig.setString(lightColorSchemeImageKey, newPath)
+                    : EzConfig.setString(darkColorSchemeImageKey, newPath);
               }
             }
           },

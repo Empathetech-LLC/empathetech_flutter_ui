@@ -85,8 +85,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         if (widget.autoUpdatingTextKeys != null) {
           for (String key in widget.autoUpdatingTextKeys!) {
-            EzConfig.instance.preferences
-                .setInt(key, getTextColor(currColor).value);
+            EzConfig.setInt(key, getTextColor(currColor).value);
           }
         }
 
