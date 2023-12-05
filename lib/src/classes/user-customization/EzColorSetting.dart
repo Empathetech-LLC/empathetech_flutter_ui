@@ -11,41 +11,36 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzColorSetting extends StatefulWidget {
   final Key? key;
 
-  /// [EzConfig.instance] keys whose values will be updated
-  /// Only provide keys whose values should always be identical
-  /// [EzColorSetting] is lazy and will use the first value for generating previews
-  final List<String> updating;
+  /// [EzConfig] key whose [Color.value] will be updated
+  final String setting;
 
   /// User-friendly [label] for the color whose value will be updated
   final String label;
 
-  /// Optional [EzConfig.instance] key that controls the background color when [updating] text colors
+  /// Optional [EzConfig] key that should be automatically changed alongside the base [setting]
+  /// If provided, the [pairedTextSetting] key will be set via [getTextColor]
+  /// And/or reset alongside the base [setting]
+  final String? pairedTextSetting;
+
+  /// Optional [EzConfig] key that controls the background color when [setting] text colors
   /// This will update the user's prompt, first asking if they would like to use the color from [getTextColor]
   /// Or provide a custom color
   final String? textBackgroundKey;
 
-  /// Optional [EzConfig.instance] keys that should be automatically changed based on what we're [updating]
-  /// If provided, when the base color(s) update, [autoUpdatingTextKeys] will be set via [getTextColor]
-  /// And/or reset alongside the base color
-  final List<String>? autoUpdatingTextKeys;
-
-  /// Creates a tool for [updating] color values in [EzConfig]
-  /// If [updating] text colors, provide the [textBackgroundKey]
-  /// [textBackgroundKey]s [EzConfig.instance] value will be used to generate a recommendation via [getTextColor]
-  /// If [updating] are surface colors (logically, not Material-y), optionally provide [autoUpdatingTextKeys]
-  /// When provided, and the base color is updated, [autoUpdatingTextKeys] will be set via [getTextColor]
+  /// Creates a tool for [setting] color values in [EzConfig]
+  /// If [setting] surface colors, optionally provide a [pairedTextSetting]
+  /// When provided, the [pairedTextSetting] key will be set via [getTextColor]
+  /// If [setting] text ("on") colors, provide the [textBackgroundKey]
+  /// [textBackgroundKey]s [EzConfig] value will be used to generate a recommendation via [getTextColor]
   const EzColorSetting({
     this.key,
-    required this.updating,
+    required this.setting,
     required this.label,
+    this.pairedTextSetting,
     this.textBackgroundKey,
-    this.autoUpdatingTextKeys,
   })  : assert(
-          (!((textBackgroundKey != null && textBackgroundKey.length != 0) &&
-                  (autoUpdatingTextKeys != null &&
-                      autoUpdatingTextKeys.length != 0)) &&
-              updating.length != 0),
-          'Provided lists cannot be empty and either textBackgroundKey or autoUpdatingTextKeys can be provided, but not both.',
+          (!(pairedTextSetting != null && textBackgroundKey != null)),
+          'Either pairedTextSetting or textBackgroundKey can be provided, but not both.',
         ),
         super(key: key);
 
@@ -56,7 +51,7 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather theme data //
 
-  late Color currColor = Color(EzConfig.get(widget.updating[0]));
+  late Color currColor = Color(EzConfig.get(widget.setting));
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
@@ -79,14 +74,11 @@ class _ColorSettingState extends State<EzColorSetting> {
       },
       onConfirm: () {
         // Update the user's setting
-        for (String key in widget.updating) {
-          EzConfig.setInt(key, currColor.value);
-        }
+        EzConfig.setInt(widget.setting, currColor.value);
 
-        if (widget.autoUpdatingTextKeys != null) {
-          for (String key in widget.autoUpdatingTextKeys!) {
-            EzConfig.setInt(key, getTextColor(currColor).value);
-          }
+        if (widget.pairedTextSetting != null) {
+          EzConfig.setInt(
+              widget.pairedTextSetting!, getTextColor(currColor).value);
         }
 
         popScreen(context: context, pass: currColor.value);
@@ -107,9 +99,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       // "on" (aka text) color //
 
       // Find the recommended contrast color for the background
-      Color backgroundColor = Color(
-          EzConfig.getInt(widget.textBackgroundKey!) ??
-              EzConfig.get(widget.textBackgroundKey!));
+      Color backgroundColor = Color(EzConfig.get(widget.textBackgroundKey!) ??
+          EzConfig.getInt(widget.textBackgroundKey!));
 
       int recommended = getTextColor(backgroundColor).value;
 
@@ -118,9 +109,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       final void Function() onConfirm = () {
         // Update the user's setting
-        for (String key in widget.updating) {
-          EzConfig.setInt(key, recommended);
-        }
+        EzConfig.setInt(widget.setting, recommended);
 
         setState(() {
           currColor = Color(recommended);
@@ -173,21 +162,16 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for resetting the color(s) to default
   /// A preview of the reset color is shown, taken from the first in the list
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor = Color(EzConfig.getDefault(widget.updating[0]));
+    final Color resetColor = Color(EzConfig.getDefault(widget.setting));
 
     // Define action button parameters //
 
     final void Function() onConfirm = () {
       // Remove the user's setting and reset the current state
+      EzConfig.remove(widget.setting);
 
-      for (String key in widget.updating) {
-        EzConfig.remove(key);
-      }
-
-      if (widget.autoUpdatingTextKeys != null) {
-        for (String key in widget.autoUpdatingTextKeys!) {
-          EzConfig.remove(key);
-        }
+      if (widget.pairedTextSetting != null) {
+        EzConfig.remove(widget.pairedTextSetting!);
       }
 
       setState(() {
