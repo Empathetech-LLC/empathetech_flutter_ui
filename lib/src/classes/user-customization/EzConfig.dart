@@ -127,11 +127,6 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   // Getters //
 
-  /// Get the [EzConfig] instance (if initialized)
-  static EzConfig get instance {
-    return _instance!;
-  }
-
   /// Get the [keys] EzConfig value?
   /// Uses the live values from [prefs]
   /// Faster but less reliable than the other getters
