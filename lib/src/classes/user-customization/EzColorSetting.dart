@@ -14,35 +14,9 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color.value] will be updated
   final String setting;
 
-  /// User-friendly [label] for the color whose value will be updated
-  final String label;
-
-  /// Optional [EzConfig] key that should be automatically changed alongside the base [setting]
-  /// If provided, the [pairedTextSetting] key will be set via [getTextColor]
-  /// And/or reset alongside the base [setting]
-  final String? pairedTextSetting;
-
-  /// Optional [EzConfig] key that controls the background color when [setting] text colors
-  /// This will update the user's prompt, first asking if they would like to use the color from [getTextColor]
-  /// Or provide a custom color
-  final String? textBackgroundKey;
-
-  /// Creates a tool for [setting] color values in [EzConfig]
-  /// If [setting] surface colors, optionally provide a [pairedTextSetting]
-  /// When provided, the [pairedTextSetting] key will be set via [getTextColor]
-  /// If [setting] text ("on") colors, provide the [textBackgroundKey]
-  /// [textBackgroundKey]s [EzConfig] value will be used to generate a recommendation via [getTextColor]
-  const EzColorSetting({
-    this.key,
-    required this.setting,
-    required this.label,
-    this.pairedTextSetting,
-    this.textBackgroundKey,
-  })  : assert(
-          (!(pairedTextSetting != null && textBackgroundKey != null)),
-          'Either pairedTextSetting or textBackgroundKey can be provided, but not both.',
-        ),
-        super(key: key);
+  /// Creates a tool for [setting] ColorScheme values via [EzConfig]
+  /// When [setting] text ("on") colors, the base (no-"on") color will be used to generate a recommendation via [getTextColor]
+  const EzColorSetting({this.key, required this.setting}) : super(key: key);
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -54,6 +28,8 @@ class _ColorSettingState extends State<EzColorSetting> {
   late Color currColor = Color(EzConfig.get(widget.setting));
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
+  late final String _label = getColorName(widget.setting, context);
 
   late final TextStyle? _labelStyle =
       Theme.of(context).dropdownMenuTheme.textStyle;
@@ -76,11 +52,6 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Update the user's setting
         EzConfig.setInt(widget.setting, currColor.value);
 
-        if (widget.pairedTextSetting != null) {
-          EzConfig.setInt(
-              widget.pairedTextSetting!, getTextColor(currColor).value);
-        }
-
         popScreen(context: context, pass: currColor.value);
       },
       onDeny: () => popScreen(context: context),
@@ -90,17 +61,19 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for users to chose how they want to update the color
   /// Returns the [Color.value] of what was chosen (null if none)
   Future<dynamic> _changeColor(BuildContext context) {
-    if (widget.textBackgroundKey == null) {
+    if (!widget.setting.contains(textColorPrefix)) {
       // Base color //
 
       // Just open a color picker
       return _openColorPicker(context);
     } else {
       // "on" (aka text) color //
+      final String backgroundKey =
+          widget.setting.replaceAll(textColorPrefix, "");
 
       // Find the recommended contrast color for the background
-      Color backgroundColor = Color(EzConfig.get(widget.textBackgroundKey!) ??
-          EzConfig.getInt(widget.textBackgroundKey!));
+      Color backgroundColor =
+          Color(EzConfig.get(backgroundKey) ?? EzConfig.getInt(backgroundKey));
 
       int recommended = getTextColor(backgroundColor).value;
 
@@ -170,10 +143,6 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Remove the user's setting and reset the current state
       EzConfig.remove(widget.setting);
 
-      if (widget.pairedTextSetting != null) {
-        EzConfig.remove(widget.pairedTextSetting!);
-      }
-
       setState(() {
         currColor = resetColor;
       });
@@ -226,7 +195,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       children: [
         // Color label
         Text(
-          widget.label,
+          _label,
           style: _labelStyle,
           textAlign: TextAlign.center,
         ),
@@ -235,7 +204,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Color preview/edit button
         Semantics(
           button: true,
-          hint: EFUILang.of(context)!.csPickerSemantics(widget.label),
+          hint: EFUILang.of(context)!.csPickerSemantics(_label),
           child: ExcludeSemantics(
             child: ElevatedButton(
               onPressed: () => _changeColor(context),
