@@ -11,18 +11,6 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gLeft => 'Left';
-
-  @override
-  String get gRight => 'Right';
-
-  @override
-  String get gHomeHint => 'Return to the home screen';
-
-  @override
-  String get gAttention => 'Attention';
-
-  @override
   String get gApply => 'Apply';
 
   @override
@@ -35,12 +23,30 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String gDefaultEntry(Object entry) {
-    return '$entry* (default)';
+  String get gLeft => 'Left';
+
+  @override
+  String get gRight => 'Right';
+
+  @override
+  String get gSystem => 'System';
+
+  @override
+  String get gLight => 'Light';
+
+  @override
+  String get gDark => 'Dark';
+
+  @override
+  String gEditingTheme(Object themeType) {
+    return 'Editing: $themeType theme';
   }
 
   @override
-  String get gCurrently => 'Currently: ';
+  String get gAttention => 'Attention';
+
+  @override
+  String get gCurrently => 'Currently:';
 
   @override
   String gSetToValue(Object name, Object value) {
@@ -48,7 +54,12 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get gReset => 'Reset: ';
+  String gDefaultEntry(Object entry) {
+    return '$entry* (default)';
+  }
+
+  @override
+  String get gReset => 'Reset:';
 
   @override
   String gResetToValue(Object name, Object value) {
@@ -70,33 +81,10 @@ class EFUILangEn extends EFUILang {
       'Cannot be undone\nChanges take effect on page reload';
 
   @override
-  String gEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme';
-  }
+  String get gHomeHint => 'Return to the home screen';
 
   @override
-  String get gSystem => 'System';
-
-  @override
-  String get gLight => 'Light';
-
-  @override
-  String get gDark => 'Dark';
-
-  @override
-  String get gPlay => 'Play';
-
-  @override
-  String get gPause => 'Pause';
-
-  @override
-  String get gReplay => 'Replay';
-
-  @override
-  String get gMute => 'Mute';
-
-  @override
-  String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
+  String get gCreditTo => 'Credit to:';
 
   @override
   String get ssPageTitle => 'Settings';
@@ -113,10 +101,24 @@ class EFUILangEn extends EFUILang {
   String get ssLanguage => 'Language';
 
   @override
+  String get ssLanguages => 'Languages';
+
+  @override
   String get ssLangSemantics => 'Activate to update the app language';
 
   @override
-  String get ssLanguages => 'Languages';
+  String get ssThemeMode => 'Theme mode';
+
+  @override
+  String get ssThemeSemantics =>
+      'Open to select a theme mode. Currently set to:';
+
+  @override
+  String get ssDominantHand => 'Dominant hand';
+
+  @override
+  String get ssHandSemantics =>
+      'Open to choose left or right. Currently set to:';
 
   @override
   String get ssResetAll => 'Reset all settings?';
@@ -150,10 +152,13 @@ class EFUILangEn extends EFUILang {
   String get isFromNetwork => 'From URL';
 
   @override
-  String get isEnterURL => 'Enter URL';
+  String get isResetIt => 'Reset it';
 
   @override
-  String get isNetworkPreview => 'Preview of your chosen image';
+  String get isClearIt => 'Clear it';
+
+  @override
+  String get isEnterURL => 'Enter URL';
 
   @override
   String get isGetFailed => 'Failed to retrieve image';
@@ -164,19 +169,7 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
   String get isUseForColors => 'Update the app colors using this image?';
-
-  @override
-  String get isCreditTo => 'Credit to:';
-
-  @override
-  String get isSource => 'Wherever you got it!';
 
   @override
   String isResetAll(Object themeType) {
@@ -187,24 +180,102 @@ class EFUILangEn extends EFUILang {
   String get csPageTitle => 'Color settings';
 
   @override
-  String get csThemeMode => 'Theme mode';
-
-  @override
-  String get csThemeSemantics =>
-      'Open to select a theme mode. Currently set to:';
-
-  @override
-  String csEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme\nLong press buttons to reset individually';
+  String csPickerSemantics(Object name) {
+    return 'Activate to open a color picker for $name. Long press for more options.';
   }
+
+  @override
+  String get csPrimary => 'Primary';
+
+  @override
+  String get csOnPrimary => 'On Primary';
+
+  @override
+  String get csPrimaryContainer => 'Primary Container';
+
+  @override
+  String get csOnPrimaryContainer => 'On Primary Container';
+
+  @override
+  String get csSecondary => 'Secondary';
+
+  @override
+  String get csOnSecondary => 'On Secondary';
+
+  @override
+  String get csSecondaryContainer => 'Secondary Container';
+
+  @override
+  String get csOnSecondaryContainer => 'On Secondary Container';
+
+  @override
+  String get csTertiary => 'Tertiary';
+
+  @override
+  String get csOnTertiary => 'On Tertiary';
+
+  @override
+  String get csTertiaryContainer => 'Tertiary Container';
+
+  @override
+  String get csOnTertiaryContainer => 'On Tertiary Container';
+
+  @override
+  String get csError => 'Error';
+
+  @override
+  String get csOnError => 'On Error';
+
+  @override
+  String get csErrorContainer => 'Error Container';
+
+  @override
+  String get csOnErrorContainer => 'On Error Container';
+
+  @override
+  String get csOutline => 'Outline';
+
+  @override
+  String get csOutlineVariant => 'Outline Variant';
+
+  @override
+  String get csBackground => 'Background';
+
+  @override
+  String get csOnBackground => 'On Background';
+
+  @override
+  String get csSurface => 'Surface';
+
+  @override
+  String get csOnSurface => 'On Surface';
+
+  @override
+  String get csSurfaceVariant => 'Surface Variant';
+
+  @override
+  String get csOnSurfaceVariant => 'On Surface Variant';
+
+  @override
+  String get csInverseSurface => 'Inverse surface';
+
+  @override
+  String get csOnInverseSurface => 'Inverse On surface';
+
+  @override
+  String get csInversePrimary => 'Inverse primary';
+
+  @override
+  String get csScrim => 'Scrim';
+
+  @override
+  String get csShadow => 'Shadow';
+
+  @override
+  String get csSurfaceTint => 'Surface tint';
 
   @override
   String get csPickerTitle => 'Pick a color!';
-
-  @override
-  String csPickerSemantics(Object name) {
-    return 'Activate to open a color picker for $name. Long press to reset $name.';
-  }
 
   @override
   String get csResetTo => 'Reset to...';
@@ -215,73 +286,7 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get csBackground => 'Background';
-
-  @override
-  String get csOnBackground => 'Background text';
-
-  @override
-  String get csSurface => 'Surface';
-
-  @override
-  String get csOnSurface => 'Surface text';
-
-  @override
-  String get csSurfaceTint => 'Surface tint';
-
-  @override
-  String get csSurfaceVariant => 'Surface variant';
-
-  @override
-  String get csOnSurfaceVariant => 'Surface variant text';
-
-  @override
-  String get csInverseSurface => 'Inverse surface';
-
-  @override
-  String get csOnInverseSurface => 'Inverse surface text';
-
-  @override
-  String get csPrimary => 'Primary';
-
-  @override
-  String get csOnPrimary => 'Primary text';
-
-  @override
-  String get csInversePrimary => 'Inverse primary';
-
-  @override
-  String get csSecondary => 'Secondary';
-
-  @override
-  String get csOnSecondary => 'Secondary text';
-
-  @override
-  String get csTertiary => 'Tertiary';
-
-  @override
-  String get csOnTertiary => 'Tertiary text';
-
-  @override
-  String get csError => 'Error';
-
-  @override
-  String get csOnError => 'Error text';
-
-  @override
-  String get csOutline => 'Outline';
-
-  @override
-  String get csOutlineVariant => 'Outline variant';
-
-  @override
-  String get csScrim => 'Scrim';
-
-  @override
-  String get csShadow => 'Shadow';
-
-  @override
-  String get csRecommended => 'Use recommended?';
+  String get csRecommended => 'Use contrast recommendation?';
 
   @override
   String get csUseCustom => 'Use custom';
@@ -299,28 +304,6 @@ class EFUILangEn extends EFUILang {
   String get csColorScheme => 'color scheme';
 
   @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsDominantHand => 'Dominant hand';
-
-  @override
-  String get lsHandSemantics =>
-      'Open to choose left or right. Currently set to:';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsTextSpacing => 'Text spacing';
-
-  @override
-  String get lsButtonSpacing => 'Button spacing';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
-
-  @override
   String get stsPageTitle => 'Style settings';
 
   @override
@@ -330,7 +313,16 @@ class EFUILangEn extends EFUILang {
   String get stsFonts => 'Fonts';
 
   @override
+  String get stsMargin => 'Margin';
+
+  @override
   String get stsPadding => 'Padding';
+
+  @override
+  String get stsButtonSpacing => 'Button spacing';
+
+  @override
+  String get stsTextSpacing => 'Text spacing';
 
   @override
   String get stsResetAll => 'Reset all style settings?';

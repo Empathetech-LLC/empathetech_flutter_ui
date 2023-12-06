@@ -106,30 +106,6 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
-  /// No description provided for @gLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'Left'**
-  String get gLeft;
-
-  /// No description provided for @gRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Right'**
-  String get gRight;
-
-  /// No description provided for @gHomeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Return to the home screen'**
-  String get gHomeHint;
-
-  /// No description provided for @gAttention.
-  ///
-  /// In en, this message translates to:
-  /// **'Attention'**
-  String get gAttention;
-
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
@@ -154,16 +130,52 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gDefaultEntry.
+  /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:
-  /// **'{entry}* (default)'**
-  String gDefaultEntry(Object entry);
+  /// **'Left'**
+  String get gLeft;
+
+  /// No description provided for @gRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get gRight;
+
+  /// No description provided for @gSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get gSystem;
+
+  /// No description provided for @gLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get gLight;
+
+  /// No description provided for @gDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get gDark;
+
+  /// No description provided for @gEditingTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: {themeType} theme'**
+  String gEditingTheme(Object themeType);
+
+  /// No description provided for @gAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Attention'**
+  String get gAttention;
 
   /// No description provided for @gCurrently.
   ///
   /// In en, this message translates to:
-  /// **'Currently: '**
+  /// **'Currently:'**
   String get gCurrently;
 
   /// No description provided for @gSetToValue.
@@ -172,10 +184,16 @@ abstract class EFUILang {
   /// **'{name} is currently set to {value}'**
   String gSetToValue(Object name, Object value);
 
+  /// No description provided for @gDefaultEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'{entry}* (default)'**
+  String gDefaultEntry(Object entry);
+
   /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset: '**
+  /// **'Reset:'**
   String get gReset;
 
   /// No description provided for @gResetToValue.
@@ -208,59 +226,17 @@ abstract class EFUILang {
   /// **'Cannot be undone\nChanges take effect on page reload'**
   String get gResetTipWeb;
 
-  /// No description provided for @gEditingTheme.
+  /// No description provided for @gHomeHint.
   ///
   /// In en, this message translates to:
-  /// **'Editing: {themeType} theme'**
-  String gEditingTheme(Object themeType);
+  /// **'Return to the home screen'**
+  String get gHomeHint;
 
-  /// No description provided for @gSystem.
+  /// No description provided for @gCreditTo.
   ///
   /// In en, this message translates to:
-  /// **'System'**
-  String get gSystem;
-
-  /// No description provided for @gLight.
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get gLight;
-
-  /// No description provided for @gDark.
-  ///
-  /// In en, this message translates to:
-  /// **'Dark'**
-  String get gDark;
-
-  /// No description provided for @gPlay.
-  ///
-  /// In en, this message translates to:
-  /// **'Play'**
-  String get gPlay;
-
-  /// No description provided for @gPause.
-  ///
-  /// In en, this message translates to:
-  /// **'Pause'**
-  String get gPause;
-
-  /// No description provided for @gReplay.
-  ///
-  /// In en, this message translates to:
-  /// **'Replay'**
-  String get gReplay;
-
-  /// No description provided for @gMute.
-  ///
-  /// In en, this message translates to:
-  /// **'Mute'**
-  String get gMute;
-
-  /// No description provided for @gAutoPlayDisabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-play videos are disabled.'**
-  String get gAutoPlayDisabled;
+  /// **'Credit to:'**
+  String get gCreditTo;
 
   /// No description provided for @ssPageTitle.
   ///
@@ -286,17 +262,41 @@ abstract class EFUILang {
   /// **'Language'**
   String get ssLanguage;
 
+  /// No description provided for @ssLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get ssLanguages;
+
   /// No description provided for @ssLangSemantics.
   ///
   /// In en, this message translates to:
   /// **'Activate to update the app language'**
   String get ssLangSemantics;
 
-  /// No description provided for @ssLanguages.
+  /// No description provided for @ssThemeMode.
   ///
   /// In en, this message translates to:
-  /// **'Languages'**
-  String get ssLanguages;
+  /// **'Theme mode'**
+  String get ssThemeMode;
+
+  /// No description provided for @ssThemeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to select a theme mode. Currently set to:'**
+  String get ssThemeSemantics;
+
+  /// No description provided for @ssDominantHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominant hand'**
+  String get ssDominantHand;
+
+  /// No description provided for @ssHandSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to choose left or right. Currently set to:'**
+  String get ssHandSemantics;
 
   /// No description provided for @ssResetAll.
   ///
@@ -352,17 +352,23 @@ abstract class EFUILang {
   /// **'From URL'**
   String get isFromNetwork;
 
+  /// No description provided for @isResetIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset it'**
+  String get isResetIt;
+
+  /// No description provided for @isClearIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear it'**
+  String get isClearIt;
+
   /// No description provided for @isEnterURL.
   ///
   /// In en, this message translates to:
   /// **'Enter URL'**
   String get isEnterURL;
-
-  /// No description provided for @isNetworkPreview.
-  ///
-  /// In en, this message translates to:
-  /// **'Preview of your chosen image'**
-  String get isNetworkPreview;
 
   /// No description provided for @isGetFailed.
   ///
@@ -376,35 +382,11 @@ abstract class EFUILang {
   /// **'Failed to update image:\n{error}'**
   String isSetFailed(Object error);
 
-  /// No description provided for @isResetIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset it'**
-  String get isResetIt;
-
-  /// No description provided for @isClearIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear it'**
-  String get isClearIt;
-
   /// No description provided for @isUseForColors.
   ///
   /// In en, this message translates to:
   /// **'Update the app colors using this image?'**
   String get isUseForColors;
-
-  /// No description provided for @isCreditTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit to:'**
-  String get isCreditTo;
-
-  /// No description provided for @isSource.
-  ///
-  /// In en, this message translates to:
-  /// **'Wherever you got it!'**
-  String get isSource;
 
   /// No description provided for @isResetAll.
   ///
@@ -418,47 +400,119 @@ abstract class EFUILang {
   /// **'Color settings'**
   String get csPageTitle;
 
-  /// No description provided for @csThemeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get csThemeMode;
-
-  /// No description provided for @csThemeSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Open to select a theme mode. Currently set to:'**
-  String get csThemeSemantics;
-
-  /// No description provided for @csEditingTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: {themeType} theme\nLong press buttons to reset individually'**
-  String csEditingTheme(Object themeType);
-
-  /// No description provided for @csPickerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a color!'**
-  String get csPickerTitle;
-
   /// No description provided for @csPickerSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Activate to open a color picker for {name}. Long press to reset {name}.'**
+  /// **'Activate to open a color picker for {name}. Long press for more options.'**
   String csPickerSemantics(Object name);
 
-  /// No description provided for @csResetTo.
+  /// No description provided for @csPrimary.
   ///
   /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
+  /// **'Primary'**
+  String get csPrimary;
 
-  /// No description provided for @csResetAll.
+  /// No description provided for @csOnPrimary.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
+  /// **'On Primary'**
+  String get csOnPrimary;
+
+  /// No description provided for @csPrimaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Container'**
+  String get csPrimaryContainer;
+
+  /// No description provided for @csOnPrimaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Primary Container'**
+  String get csOnPrimaryContainer;
+
+  /// No description provided for @csSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get csSecondary;
+
+  /// No description provided for @csOnSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'On Secondary'**
+  String get csOnSecondary;
+
+  /// No description provided for @csSecondaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary Container'**
+  String get csSecondaryContainer;
+
+  /// No description provided for @csOnSecondaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Secondary Container'**
+  String get csOnSecondaryContainer;
+
+  /// No description provided for @csTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary'**
+  String get csTertiary;
+
+  /// No description provided for @csOnTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'On Tertiary'**
+  String get csOnTertiary;
+
+  /// No description provided for @csTertiaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary Container'**
+  String get csTertiaryContainer;
+
+  /// No description provided for @csOnTertiaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Tertiary Container'**
+  String get csOnTertiaryContainer;
+
+  /// No description provided for @csError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get csError;
+
+  /// No description provided for @csOnError.
+  ///
+  /// In en, this message translates to:
+  /// **'On Error'**
+  String get csOnError;
+
+  /// No description provided for @csErrorContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Error Container'**
+  String get csErrorContainer;
+
+  /// No description provided for @csOnErrorContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Error Container'**
+  String get csOnErrorContainer;
+
+  /// No description provided for @csOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get csOutline;
+
+  /// No description provided for @csOutlineVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline Variant'**
+  String get csOutlineVariant;
 
   /// No description provided for @csBackground.
   ///
@@ -469,7 +523,7 @@ abstract class EFUILang {
   /// No description provided for @csOnBackground.
   ///
   /// In en, this message translates to:
-  /// **'Background text'**
+  /// **'On Background'**
   String get csOnBackground;
 
   /// No description provided for @csSurface.
@@ -481,25 +535,19 @@ abstract class EFUILang {
   /// No description provided for @csOnSurface.
   ///
   /// In en, this message translates to:
-  /// **'Surface text'**
+  /// **'On Surface'**
   String get csOnSurface;
-
-  /// No description provided for @csSurfaceTint.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface tint'**
-  String get csSurfaceTint;
 
   /// No description provided for @csSurfaceVariant.
   ///
   /// In en, this message translates to:
-  /// **'Surface variant'**
+  /// **'Surface Variant'**
   String get csSurfaceVariant;
 
   /// No description provided for @csOnSurfaceVariant.
   ///
   /// In en, this message translates to:
-  /// **'Surface variant text'**
+  /// **'On Surface Variant'**
   String get csOnSurfaceVariant;
 
   /// No description provided for @csInverseSurface.
@@ -511,74 +559,14 @@ abstract class EFUILang {
   /// No description provided for @csOnInverseSurface.
   ///
   /// In en, this message translates to:
-  /// **'Inverse surface text'**
+  /// **'Inverse On surface'**
   String get csOnInverseSurface;
-
-  /// No description provided for @csPrimary.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary'**
-  String get csPrimary;
-
-  /// No description provided for @csOnPrimary.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary text'**
-  String get csOnPrimary;
 
   /// No description provided for @csInversePrimary.
   ///
   /// In en, this message translates to:
   /// **'Inverse primary'**
   String get csInversePrimary;
-
-  /// No description provided for @csSecondary.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary'**
-  String get csSecondary;
-
-  /// No description provided for @csOnSecondary.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary text'**
-  String get csOnSecondary;
-
-  /// No description provided for @csTertiary.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary'**
-  String get csTertiary;
-
-  /// No description provided for @csOnTertiary.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary text'**
-  String get csOnTertiary;
-
-  /// No description provided for @csError.
-  ///
-  /// In en, this message translates to:
-  /// **'Error'**
-  String get csError;
-
-  /// No description provided for @csOnError.
-  ///
-  /// In en, this message translates to:
-  /// **'Error text'**
-  String get csOnError;
-
-  /// No description provided for @csOutline.
-  ///
-  /// In en, this message translates to:
-  /// **'Outline'**
-  String get csOutline;
-
-  /// No description provided for @csOutlineVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'Outline variant'**
-  String get csOutlineVariant;
 
   /// No description provided for @csScrim.
   ///
@@ -592,10 +580,34 @@ abstract class EFUILang {
   /// **'Shadow'**
   String get csShadow;
 
+  /// No description provided for @csSurfaceTint.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface tint'**
+  String get csSurfaceTint;
+
+  /// No description provided for @csPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color!'**
+  String get csPickerTitle;
+
+  /// No description provided for @csResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to...'**
+  String get csResetTo;
+
+  /// No description provided for @csResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String csResetAll(Object themeType);
+
   /// No description provided for @csRecommended.
   ///
   /// In en, this message translates to:
-  /// **'Use recommended?'**
+  /// **'Use contrast recommendation?'**
   String get csRecommended;
 
   /// No description provided for @csUseCustom.
@@ -628,48 +640,6 @@ abstract class EFUILang {
   /// **'color scheme'**
   String get csColorScheme;
 
-  /// No description provided for @lsPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Layout settings'**
-  String get lsPageTitle;
-
-  /// No description provided for @lsDominantHand.
-  ///
-  /// In en, this message translates to:
-  /// **'Dominant hand'**
-  String get lsDominantHand;
-
-  /// No description provided for @lsHandSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Open to choose left or right. Currently set to:'**
-  String get lsHandSemantics;
-
-  /// No description provided for @lsMargin.
-  ///
-  /// In en, this message translates to:
-  /// **'Margin'**
-  String get lsMargin;
-
-  /// No description provided for @lsTextSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get lsTextSpacing;
-
-  /// No description provided for @lsButtonSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get lsButtonSpacing;
-
-  /// No description provided for @lsResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all layout settings?'**
-  String get lsResetAll;
-
   /// No description provided for @stsPageTitle.
   ///
   /// In en, this message translates to:
@@ -688,11 +658,29 @@ abstract class EFUILang {
   /// **'Fonts'**
   String get stsFonts;
 
+  /// No description provided for @stsMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get stsMargin;
+
   /// No description provided for @stsPadding.
   ///
   /// In en, this message translates to:
   /// **'Padding'**
   String get stsPadding;
+
+  /// No description provided for @stsButtonSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Button spacing'**
+  String get stsButtonSpacing;
+
+  /// No description provided for @stsTextSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Text spacing'**
+  String get stsTextSpacing;
 
   /// No description provided for @stsResetAll.
   ///

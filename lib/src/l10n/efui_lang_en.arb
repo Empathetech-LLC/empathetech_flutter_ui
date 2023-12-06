@@ -1,116 +1,146 @@
 {
   "@@locale" : "en",
 
+
   "gYes": "Yes",
   "gNo": "No",
-
-  "gLeft": "Left",
-  "gRight": "Right",
-
-  "gHomeHint": "Return to the home screen",
-
-  "gAttention": "Attention",
   "gApply": "Apply",
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
-  "gDefaultEntry": "{entry}* (default)",
 
-  "gCurrently": "Currently: ",
+  "gLeft": "Left",
+  "gRight": "Right",
+
+  "gSystem": "System",
+  "gLight": "Light",
+  "gDark": "Dark",
+  "gEditingTheme": "Editing: {themeType} theme",
+
+  "gAttention": "Attention",
+  "gCurrently": "Currently:",
   "gSetToValue": "{name} is currently set to {value}",
-  "gReset": "Reset: ",
+  "gDefaultEntry": "{entry}* (default)",
+  "gReset": "Reset:",
   "gResetToValue": "Reset {name} to {value}",
   "gResetAll": "Reset all",
   "gResetWarn": "Cannot be undone",
   "gResetTip": "Cannot be undone\nChanges take effect on app restart",
   "gResetTipWeb": "Cannot be undone\nChanges take effect on page reload",
 
-  "gEditingTheme": "Editing: {themeType} theme",
-  "gSystem": "System",
-  "gLight": "Light",
-  "gDark": "Dark",
+  "gHomeHint": "Return to the home screen",
+  "gCreditTo": "Credit to:",
 
-  "gPlay": "Play",
-  "gPause": "Pause",
-  "gReplay": "Replay",
-  "gMute": "Mute",
-  "gAutoPlayDisabled": "Auto-play videos are disabled.",
 
   "ssPageTitle": "Settings",
   "ssSettingsGuide": "Each setting will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
   "ssSettingsGuideWeb": "Each setting will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
+
   "ssLanguage": "Language",
-  "ssLangSemantics": "Activate to update the app language",
   "ssLanguages": "Languages",
+  "ssLangSemantics": "Activate to update the app language",
+
+  "ssThemeMode": "Theme mode",
+  "ssThemeSemantics": "Open to select a theme mode. Currently set to:",
+
+  "ssDominantHand": "Dominant hand",
+  "ssHandSemantics": "Open to choose left or right. Currently set to:",
+
   "ssResetAll": "Reset all settings?",
 
+
   "isPageTitle": "Image settings",
+
   "isBackground": "Background",
   "isImage": "image",
+
   "isButtonHint": "Update the {title} image",
   "isDialogTitle": "How should the {title} image be updated?",
   "isFromFile": "From file",
   "isFromCamera": "From camera",
   "isFromNetwork": "From URL",
-  "isEnterURL": "Enter URL",
-  "isNetworkPreview": "Preview of your chosen image",
-  "isGetFailed": "Failed to retrieve image",
-  "isSetFailed": "Failed to update image:\n{error}",
   "isResetIt": "Reset it",
   "isClearIt": "Clear it",
+
+  "isEnterURL": "Enter URL",
+  "isGetFailed": "Failed to retrieve image",
+  "isSetFailed": "Failed to update image:\n{error}",
+  
   "isUseForColors": "Update the app colors using this image?",
-  "isCreditTo": "Credit to:",
-  "isSource": "Wherever you got it!",
+
   "isResetAll": "Reset all {themeType} theme images?",
 
+
   "csPageTitle": "Color settings",
-  "csThemeMode": "Theme mode",
-  "csThemeSemantics": "Open to select a theme mode. Currently set to:",
-  "csEditingTheme": "Editing: {themeType} theme\nLong press buttons to reset individually",
-  "csPickerTitle": "Pick a color!",
-  "csPickerSemantics": "Activate to open a color picker for {name}. Long press to reset {name}.",
-  "csResetTo": "Reset to...",
-  "csResetAll": "Reset all {themeType} theme colors?",
-  "csBackground": "Background",
-  "csOnBackground": "Background text",
-  "csSurface": "Surface",
-  "csOnSurface": "Surface text",
-  "csSurfaceTint": "Surface tint",
-  "csSurfaceVariant": "Surface variant",
-  "csOnSurfaceVariant": "Surface variant text",
-  "csInverseSurface": "Inverse surface",
-  "csOnInverseSurface": "Inverse surface text",
+
+  "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
+  
   "csPrimary": "Primary",
-  "csOnPrimary": "Primary text",
-  "csInversePrimary": "Inverse primary",
+  "csOnPrimary": "On Primary",
+  "csPrimaryContainer": "Primary Container",
+  "csOnPrimaryContainer": "On Primary Container",
+
   "csSecondary": "Secondary",
-  "csOnSecondary": "Secondary text",
+  "csOnSecondary": "On Secondary",
+  "csSecondaryContainer": "Secondary Container",
+  "csOnSecondaryContainer": "On Secondary Container",
+
   "csTertiary": "Tertiary",
-  "csOnTertiary": "Tertiary text",
+  "csOnTertiary": "On Tertiary",
+  "csTertiaryContainer": "Tertiary Container",
+  "csOnTertiaryContainer": "On Tertiary Container",
+
   "csError": "Error",
-  "csOnError": "Error text",
+  "csOnError": "On Error",
+  "csErrorContainer": "Error Container",
+  "csOnErrorContainer": "On Error Container",
+
   "csOutline": "Outline",
-  "csOutlineVariant": "Outline variant",
+  "csOutlineVariant": "Outline Variant",
+
+  "csBackground": "Background",
+  "csOnBackground": "On Background",
+
+  "csSurface": "Surface",
+  "csOnSurface": "On Surface",
+
+  "csSurfaceVariant": "Surface Variant",
+  "csOnSurfaceVariant": "On Surface Variant",
+  
+  "csInverseSurface": "Inverse surface",
+  "csOnInverseSurface": "Inverse On surface",
+
+  "csInversePrimary": "Inverse primary",
+
   "csScrim": "Scrim",
   "csShadow": "Shadow",
-  "csRecommended": "Use recommended?",
+
+  "csSurfaceTint": "Surface tint",
+
+  "csPickerTitle": "Pick a color!",
+
+  "csResetTo": "Reset to...",
+  "csResetAll": "Reset all {themeType} theme colors?",
+
+  "csRecommended": "Use contrast recommendation?",
   "csUseCustom": "Use custom",
+
   "csSchemeBase": "Build from\nimage",
   "csOptional": "optional",
   "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",
-
-  "lsPageTitle": "Layout settings",
-  "lsDominantHand": "Dominant hand",
-  "lsHandSemantics": "Open to choose left or right. Currently set to:",
-  "lsMargin": "Margin",
-  "lsTextSpacing": "Text spacing",
-  "lsButtonSpacing": "Button spacing",
-  "lsResetAll": "Reset all layout settings?",
-
+  
+  
   "stsPageTitle": "Style settings",
+
   "stsTextFont": "Text font",
   "stsFonts": "Fonts",
+
+  "stsMargin": "Margin",
   "stsPadding": "Padding",
+
+  "stsButtonSpacing": "Button spacing",
+  "stsTextSpacing": "Text spacing",
+
   "stsResetAll": "Reset all style settings?"
 }

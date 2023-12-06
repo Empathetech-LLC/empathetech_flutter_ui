@@ -11,18 +11,6 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gLeft => 'Izquierda';
-
-  @override
-  String get gRight => 'Derecha';
-
-  @override
-  String get gHomeHint => 'Regresar a la pantalla principal';
-
-  @override
-  String get gAttention => 'Atención';
-
-  @override
   String get gApply => 'Aplicar';
 
   @override
@@ -35,12 +23,30 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
-  String gDefaultEntry(Object entry) {
-    return '$entry* (por defecto)';
+  String get gLeft => 'Izquierda';
+
+  @override
+  String get gRight => 'Derecha';
+
+  @override
+  String get gSystem => 'Sistema';
+
+  @override
+  String get gLight => 'Ligero';
+
+  @override
+  String get gDark => 'Oscuro';
+
+  @override
+  String gEditingTheme(Object themeType) {
+    return 'Editando: tema $themeType';
   }
 
   @override
-  String get gCurrently => 'Actualmente: ';
+  String get gAttention => 'Atención';
+
+  @override
+  String get gCurrently => 'Actualmente:';
 
   @override
   String gSetToValue(Object name, Object value) {
@@ -48,7 +54,12 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get gReset => 'Restablecer: ';
+  String gDefaultEntry(Object entry) {
+    return '$entry* (por defecto)';
+  }
+
+  @override
+  String get gReset => 'Restablecer:';
 
   @override
   String gResetToValue(Object name, Object value) {
@@ -70,34 +81,10 @@ class EFUILangEs extends EFUILang {
       'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
 
   @override
-  String gEditingTheme(Object themeType) {
-    return 'Editando: tema $themeType';
-  }
+  String get gHomeHint => 'Regresar a la pantalla principal';
 
   @override
-  String get gSystem => 'Sistema';
-
-  @override
-  String get gLight => 'Ligero';
-
-  @override
-  String get gDark => 'Oscuro';
-
-  @override
-  String get gPlay => 'Reproducir';
-
-  @override
-  String get gPause => 'Pausar';
-
-  @override
-  String get gReplay => 'Repetir';
-
-  @override
-  String get gMute => 'Silenciar';
-
-  @override
-  String get gAutoPlayDisabled =>
-      'La reproducción automática de videos está desactivada.';
+  String get gCreditTo => 'Crédito a:';
 
   @override
   String get ssPageTitle => 'Configuraciones';
@@ -114,11 +101,25 @@ class EFUILangEs extends EFUILang {
   String get ssLanguage => 'Idioma';
 
   @override
+  String get ssLanguages => 'Idiomas';
+
+  @override
   String get ssLangSemantics =>
       'Activa para actualizar el idioma de la aplicación';
 
   @override
-  String get ssLanguages => 'Idiomas';
+  String get ssThemeMode => 'Modo de tema';
+
+  @override
+  String get ssThemeSemantics =>
+      'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
+
+  @override
+  String get ssDominantHand => 'Mano dominante';
+
+  @override
+  String get ssHandSemantics =>
+      'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
@@ -152,10 +153,13 @@ class EFUILangEs extends EFUILang {
   String get isFromNetwork => 'Ingrese URL';
 
   @override
-  String get isEnterURL => 'Desde URL';
+  String get isResetIt => 'Restablécelo';
 
   @override
-  String get isNetworkPreview => 'Vista previa de tu imagen seleccionada';
+  String get isClearIt => 'Borrarlo';
+
+  @override
+  String get isEnterURL => 'Desde URL';
 
   @override
   String get isGetFailed => 'Error al recuperar la imagen';
@@ -166,20 +170,8 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get isResetIt => 'Restablécelo';
-
-  @override
-  String get isClearIt => 'Borrarlo';
-
-  @override
   String get isUseForColors =>
       '¿Actualizar los colores de la aplicación usando esta imagen?';
-
-  @override
-  String get isCreditTo => 'Crédito a:';
-
-  @override
-  String get isSource => '¡De donde lo obtuviste!';
 
   @override
   String isResetAll(Object themeType) {
@@ -190,24 +182,102 @@ class EFUILangEs extends EFUILang {
   String get csPageTitle => 'Configuraciones de color';
 
   @override
-  String get csThemeMode => 'Modo de tema';
-
-  @override
-  String get csThemeSemantics =>
-      'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
-
-  @override
-  String csEditingTheme(Object themeType) {
-    return 'Editando: colores del tema $themeType\nMantén presionados los botones para restablecer individualmente';
-  }
-
-  @override
-  String get csPickerTitle => '¡Selecciona un color!';
-
-  @override
   String csPickerSemantics(Object name) {
     return 'Activar para abrir el selector de color para $name. Mantenga presionado para restablecer $name.';
   }
+
+  @override
+  String get csPrimary => 'Primario';
+
+  @override
+  String get csOnPrimary => 'En Primario';
+
+  @override
+  String get csPrimaryContainer => 'Contenedor Primario';
+
+  @override
+  String get csOnPrimaryContainer => 'En Contenedor Primario';
+
+  @override
+  String get csSecondary => 'Secundario';
+
+  @override
+  String get csOnSecondary => 'En Secundario';
+
+  @override
+  String get csSecondaryContainer => 'Contenedor Secundario';
+
+  @override
+  String get csOnSecondaryContainer => 'En Contenedor Secundario';
+
+  @override
+  String get csTertiary => 'Terciario';
+
+  @override
+  String get csOnTertiary => 'En Terciario';
+
+  @override
+  String get csTertiaryContainer => 'Contenedor Terciario';
+
+  @override
+  String get csOnTertiaryContainer => 'En Contenedor Terciario';
+
+  @override
+  String get csError => 'Error';
+
+  @override
+  String get csOnError => 'En Error';
+
+  @override
+  String get csErrorContainer => 'Contenedor de Error';
+
+  @override
+  String get csOnErrorContainer => 'En Contenedor de Error';
+
+  @override
+  String get csOutline => 'Contorno';
+
+  @override
+  String get csOutlineVariant => 'Variante de Contorno';
+
+  @override
+  String get csBackground => 'Fondo';
+
+  @override
+  String get csOnBackground => 'En Fondo';
+
+  @override
+  String get csSurface => 'Superficie';
+
+  @override
+  String get csOnSurface => 'En Superficie';
+
+  @override
+  String get csSurfaceVariant => 'Variante de Superficie';
+
+  @override
+  String get csOnSurfaceVariant => 'En Variante de Superficie';
+
+  @override
+  String get csInverseSurface => 'Superficie Inversa';
+
+  @override
+  String get csOnInverseSurface => 'En Superficie Inversa';
+
+  @override
+  String get csInversePrimary => 'Primario Inverso';
+
+  @override
+  String get csScrim => 'Telón';
+
+  @override
+  String get csShadow => 'Sombra';
+
+  @override
+  String get csSurfaceTint => 'Tinte de Superficie';
+
+  @override
+  String get csPickerTitle => '¡Selecciona un color!';
 
   @override
   String get csResetTo => 'Restablecer a...';
@@ -218,73 +288,7 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get csBackground => 'Fondo';
-
-  @override
-  String get csOnBackground => 'Texto del fondo';
-
-  @override
-  String get csSurface => 'Superficie';
-
-  @override
-  String get csOnSurface => 'Texto de la superficie';
-
-  @override
-  String get csSurfaceTint => 'Tinte de la superficie';
-
-  @override
-  String get csSurfaceVariant => 'Variante de la superficie';
-
-  @override
-  String get csOnSurfaceVariant => 'Texto de la variante de la superficie';
-
-  @override
-  String get csInverseSurface => 'Superficie inversa';
-
-  @override
-  String get csOnInverseSurface => 'Texto en superficie inversa';
-
-  @override
-  String get csPrimary => 'Primario';
-
-  @override
-  String get csOnPrimary => 'Texto primario';
-
-  @override
-  String get csInversePrimary => 'Primario inverso';
-
-  @override
-  String get csSecondary => 'Secundario';
-
-  @override
-  String get csOnSecondary => 'Texto secundario';
-
-  @override
-  String get csTertiary => 'Terciario';
-
-  @override
-  String get csOnTertiary => 'Texto terciario';
-
-  @override
-  String get csError => 'Error';
-
-  @override
-  String get csOnError => 'Texto de error';
-
-  @override
-  String get csOutline => 'Contorno';
-
-  @override
-  String get csOutlineVariant => 'Variante del contorno';
-
-  @override
-  String get csScrim => 'Cortinilla';
-
-  @override
-  String get csShadow => 'Sombra';
-
-  @override
-  String get csRecommended => '¿Usar recomendado?';
+  String get csRecommended => '¿Usar recomendación de contraste?';
 
   @override
   String get csUseCustom => 'Usar personalizado';
@@ -303,28 +307,6 @@ class EFUILangEs extends EFUILang {
   String get csColorScheme => 'esquema de colores';
 
   @override
-  String get lsPageTitle => 'Configuraciones de diseño';
-
-  @override
-  String get lsDominantHand => 'Mano dominante';
-
-  @override
-  String get lsHandSemantics =>
-      'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
-
-  @override
-  String get lsMargin => 'Margen';
-
-  @override
-  String get lsTextSpacing => 'Espaciado de texto';
-
-  @override
-  String get lsButtonSpacing => 'Espaciado de botones';
-
-  @override
-  String get lsResetAll => '¿Restablecer todas las configuraciones de diseño?';
-
-  @override
   String get stsPageTitle => 'Configuraciones de estilo';
 
   @override
@@ -334,7 +316,16 @@ class EFUILangEs extends EFUILang {
   String get stsFonts => 'Fuentes';
 
   @override
+  String get stsMargin => 'Margen';
+
+  @override
   String get stsPadding => 'Relleno';
+
+  @override
+  String get stsButtonSpacing => 'Espaciado de botones';
+
+  @override
+  String get stsTextSpacing => 'Espaciado de texto';
 
   @override
   String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
