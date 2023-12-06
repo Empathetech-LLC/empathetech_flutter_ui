@@ -117,7 +117,7 @@ ColorScheme ezColorScheme(Brightness brightness) {
         );
 }
 
-Future<void> storeColorScheme({
+Future<void> storeImageColorScheme({
   required Brightness brightness,
   required String path,
 }) async {
@@ -206,5 +206,132 @@ Future<void> storeColorScheme({
     EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
     EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
     EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
+  }
+}
+
+String getColorName(String key, BuildContext context) {
+  switch (key) {
+    case lightPrimaryKey:
+    case darkPrimaryKey:
+      return EFUILang.of(context)!.csPrimary;
+
+    case lightOnPrimaryKey:
+    case darkOnPrimaryKey:
+      return EFUILang.of(context)!.csOnPrimary;
+
+    case lightPrimaryContainerKey:
+    case darkPrimaryContainerKey:
+      return EFUILang.of(context)!.csPrimaryContainer;
+
+    case lightOnPrimaryContainerKey:
+    case darkOnPrimaryContainerKey:
+      return EFUILang.of(context)!.csOnPrimaryContainer;
+
+    case lightSecondaryKey:
+    case darkSecondaryKey:
+      return EFUILang.of(context)!.csSecondary;
+
+    case lightOnSecondaryKey:
+    case darkOnSecondaryKey:
+      return EFUILang.of(context)!.csOnSecondary;
+
+    case lightSecondaryContainerKey:
+    case darkSecondaryContainerKey:
+      return EFUILang.of(context)!.csSecondaryContainer;
+
+    case lightOnSecondaryContainerKey:
+    case darkOnSecondaryContainerKey:
+      return EFUILang.of(context)!.csOnSecondaryContainer;
+
+    case lightTertiaryKey:
+    case darkTertiaryKey:
+      return EFUILang.of(context)!.csTertiary;
+
+    case lightOnTertiaryKey:
+    case darkOnTertiaryKey:
+      return EFUILang.of(context)!.csOnTertiary;
+
+    case lightTertiaryContainerKey:
+    case darkTertiaryContainerKey:
+      return EFUILang.of(context)!.csTertiaryContainer;
+
+    case lightOnTertiaryContainerKey:
+    case darkOnTertiaryContainerKey:
+      return EFUILang.of(context)!.csOnTertiaryContainer;
+
+    case lightErrorKey:
+    case darkErrorKey:
+      return EFUILang.of(context)!.csError;
+
+    case lightOnErrorKey:
+    case darkOnErrorKey:
+      return EFUILang.of(context)!.csOnError;
+
+    case lightErrorContainerKey:
+    case darkErrorContainerKey:
+      return EFUILang.of(context)!.csErrorContainer;
+
+    case lightOnErrorContainerKey:
+    case darkOnErrorContainerKey:
+      return EFUILang.of(context)!.csOnErrorContainer;
+
+    case lightOutlineKey:
+    case darkOutlineKey:
+      return EFUILang.of(context)!.csOutline;
+
+    case lightOutlineVariantKey:
+    case darkOutlineVariantKey:
+      return EFUILang.of(context)!.csOutlineVariant;
+
+    case lightBackgroundKey:
+    case darkBackgroundKey:
+      return EFUILang.of(context)!.csBackground;
+
+    case lightOnBackgroundKey:
+    case darkOnBackgroundKey:
+      return EFUILang.of(context)!.csOnBackground;
+
+    case lightSurfaceKey:
+    case darkSurfaceKey:
+      return EFUILang.of(context)!.csSurface;
+
+    case lightOnSurfaceKey:
+    case darkOnSurfaceKey:
+      return EFUILang.of(context)!.csOnSurface;
+
+    case lightSurfaceVariantKey:
+    case darkSurfaceVariantKey:
+      return EFUILang.of(context)!.csSurfaceVariant;
+
+    case lightOnSurfaceVariantKey:
+    case darkOnSurfaceVariantKey:
+      return EFUILang.of(context)!.csOnSurfaceVariant;
+
+    case lightInverseSurfaceKey:
+    case darkInverseSurfaceKey:
+      return EFUILang.of(context)!.csInverseSurface;
+
+    case lightOnInverseSurfaceKey:
+    case darkOnInverseSurfaceKey:
+      return EFUILang.of(context)!.csOnInverseSurface;
+
+    case lightInversePrimaryKey:
+    case darkInversePrimaryKey:
+      return EFUILang.of(context)!.csInversePrimary;
+
+    case lightScrimKey:
+    case darkScrimKey:
+      return EFUILang.of(context)!.csScrim;
+
+    case lightShadowKey:
+    case darkShadowKey:
+      return EFUILang.of(context)!.csShadow;
+
+    case lightSurfaceTintKey:
+    case darkSurfaceTintKey:
+      return EFUILang.of(context)!.csSurfaceTint;
+
+    default:
+      return "null";
   }
 }
