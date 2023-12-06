@@ -272,10 +272,10 @@ const String textSpacingKey = 'textSpacing'; // required
 
 const Map<String, Type> styleKeys = {
   fontFamilyKey: String,
-  marginKey: int, // required
-  paddingKey: int, // required
-  buttonSpacingKey: int, // required
-  textSpacingKey: int, // required
+  marginKey: double, // required
+  paddingKey: double, // required
+  buttonSpacingKey: double, // required
+  textSpacingKey: double, // required
 };
 
 // Global trackers //
