@@ -280,6 +280,8 @@ const Map<String, Type> styleKeys = {
 
 // Global trackers //
 
+const String textColorPrefix = "On";
+
 const Map<String, Type> allKeys = {
   ...globalKeys,
   ...lightImageKeys,
