@@ -48,6 +48,6 @@ const Map<String, dynamic> empathetechConfig = {
   marginKey: 20.0, // required
   paddingKey: 20.0, // required
 
-  buttonSpacingKey: 40.0, // required
-  textSpacingKey: 80.0, // required
+  buttonSpacingKey: 20.0, // required
+  textSpacingKey: 40.0, // required
 };
