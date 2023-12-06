@@ -14,8 +14,9 @@ class EzConfig {
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// [AssetImage] paths for the app
-  final Set<String> assets;
+  /// Asset paths for the app
+  /// Used for [AssetImage] and video checks
+  final Set<String> assetPaths;
 
   /// Default config values
   /// [empathetechConfig] merged with any provided customDefaults
@@ -28,16 +29,21 @@ class EzConfig {
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
+  /// All [Color] keys that are being tracked by the user
+  /// They can be used to populate a dynamic color settings screen
+  final Set<String> userColors;
+
   /// Private instance
   static EzConfig? _instance;
 
   /// Private/internal constructor
   const EzConfig._({
     required this.preferences,
-    required this.assets,
+    required this.assetPaths,
     required this.defaults,
     required this.keys,
     required this.prefs,
+    required this.userColors,
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
@@ -69,14 +75,17 @@ class EzConfig {
         }
       }
 
-      // Build this.prefs //
+      // Build this.prefs (and this.userColors) //
 
       // Start with the newly merged defaults
       Map<String, dynamic> _prefs = new Map.from(_defaults);
 
       // Find the keys that users have overwritten
-      Set<String> overwritten =
+      final Set<String> overwritten =
           preferences.getKeys().intersection(_keys.keys.toSet());
+
+      // Gather the colorKeys that the user is tracking
+      Set<String> _userColors = {};
 
       // Get the updated values
       overwritten.forEach((key) {
@@ -87,18 +96,27 @@ class EzConfig {
           case bool:
             userPref = preferences.getBool(key);
             break;
+
           case int:
             userPref = preferences.getInt(key);
+
+            if (userPref != null && allColors.contains(key)) {
+              _userColors.add(key);
+            }
             break;
+
           case double:
             userPref = preferences.getDouble(key);
             break;
+
           case String:
             userPref = preferences.getString(key);
             break;
+
           case List:
             userPref = preferences.getStringList(key);
             break;
+
           default:
             log("""Key [$key] has unsupported Type [$valueType]
 Must be one of [int, bool, double, String, List<String>]""");
@@ -111,11 +129,12 @@ Must be one of [int, bool, double, String, List<String>]""");
       // Build the EzConfig instance //
 
       _instance = EzConfig._(
-        assets: assetPaths,
+        assetPaths: assetPaths,
         preferences: preferences,
         defaults: _defaults,
         prefs: _prefs,
         keys: _keys,
+        userColors: _userColors,
       );
     }
 
@@ -130,14 +149,17 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value?
   /// Uses the live values from [prefs]
   /// Faster but less reliable than the other getters
-  /// EzConfig must be initialized
   static dynamic get(String key) {
     return _instance!.prefs[key];
   }
 
+  /// All [Color] keys that the user is tracking
+  static Set<String> getUserColors() {
+    return _instance!.userColors;
+  }
+
   /// Get the [keys] default EzConfig value?
   /// Fast && reliable
-  /// EzConfig must be initialized
   static dynamic getDefault(String key) {
     return _instance!.defaults[key];
   }
@@ -145,7 +167,6 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
-  /// EzConfig must be initialized
   static bool? getBool(String key) {
     return _instance!.preferences.getBool(key);
   }
@@ -153,7 +174,6 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
-  /// EzConfig must be initialized
   static int? getInt(String key) {
     return _instance!.preferences.getInt(key);
   }
@@ -161,7 +181,6 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
-  /// EzConfig must be initialized
   static double? getDouble(String key) {
     return _instance!.preferences.getDouble(key);
   }
@@ -169,7 +188,6 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
-  /// EzConfig must be initialized
   static String? getString(String key) {
     return _instance!.preferences.getString(key);
   }
@@ -177,23 +195,22 @@ Must be one of [int, bool, double, String, List<String>]""");
   /// Get the [keys] EzConfig value
   /// Uses the value stored in [preferences]
   /// Slower but more reliable than [EzConfig.get]
-  /// EzConfig must be initialized
   static List<String>? getStringList(String key) {
     return _instance!.preferences.getStringList(key);
   }
 
-  /// Wether the [key] contains the value to a recognized [AssetImage] path
+  /// Wether the [key] contains the value to a recognized asset path
   static bool isKeyAsset(String key) {
     if (_instance!.prefs.containsKey(key)) {
       return false;
     } else {
-      return _instance!.assets.contains(_instance!.prefs[key]);
+      return _instance!.assetPaths.contains(_instance!.prefs[key]);
     }
   }
 
-  /// Wether the [path] leads to a recognized [AssetImage]
+  /// Wether the [path] leads to a recognized asset
   static bool isPathAsset(String path) {
-    return _instance!.assets.contains(path);
+    return _instance!.assetPaths.contains(path);
   }
 
   // Setters //
