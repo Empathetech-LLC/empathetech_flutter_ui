@@ -63,6 +63,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Return the preview Widget(s) for the passed [SliderSettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
+    String currLabel =
+        "${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}";
+
     switch (widget.type) {
       // Margin
       case SliderSettingType.margin:
@@ -82,8 +85,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               // Label
               Text(
-                EFUILang.of(context)!.gCurrently +
-                    currValue.toStringAsFixed(widget.decimals),
+                currLabel,
                 style: style,
                 textAlign: TextAlign.center,
               ),
@@ -142,17 +144,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
       // Button spacing
       case SliderSettingType.buttonSpacing:
         return [
-          // Live preview 1
+          // Preview 1
           EzSpacer(currValue),
 
-          // Live label
+          // Label
           ElevatedButton(
             onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.gCurrently +
-                currValue.toStringAsFixed(widget.decimals)),
+            child: Text(currLabel),
           ),
 
-          // Live preview 2
+          // Preview 2
           EzSpacer(currValue),
         ];
 
@@ -164,11 +165,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
           // Label 1
           Text(
-            EFUILang.of(context)!.gCurrently +
-                currValue.toStringAsFixed(widget.decimals),
+            currLabel,
             style: style,
             textAlign: TextAlign.center,
           ),
+
           // Preview 2
           EzSpacer(currValue),
         ];
@@ -264,8 +265,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
               });
             },
             icon: Icon(PlatformIcons(context).refresh),
-            label: Text(EFUILang.of(context)!.gReset +
-                _defaultValue.toStringAsFixed(widget.decimals)),
+            label: Text(
+              "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
+            ),
           ),
         ),
       ),
