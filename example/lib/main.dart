@@ -96,10 +96,10 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: [
+        localizationsDelegates: {
           LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
-        ],
+        },
 
         // Supported languages
         supportedLocales: EFUILang.supportedLocales,
