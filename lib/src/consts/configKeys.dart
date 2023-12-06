@@ -117,6 +117,40 @@ const Map<String, Type> lightColorKeys = {
   lightSurfaceTintKey: int,
 };
 
+/// Ordered List for populating color setting screen(s)
+const List<String> lightColors = [
+  lightPrimaryKey, // required
+  lightOnPrimaryKey,
+  lightPrimaryContainerKey,
+  lightOnPrimaryContainerKey,
+  lightSecondaryKey,
+  lightOnSecondaryKey,
+  lightSecondaryContainerKey,
+  lightOnSecondaryContainerKey,
+  lightTertiaryKey,
+  lightOnTertiaryKey,
+  lightTertiaryContainerKey,
+  lightOnTertiaryContainerKey,
+  lightErrorKey,
+  lightOnErrorKey,
+  lightErrorContainerKey,
+  lightOnErrorContainerKey,
+  lightOutlineKey,
+  lightOutlineVariantKey,
+  lightBackgroundKey,
+  lightOnBackgroundKey,
+  lightSurfaceKey,
+  lightOnSurfaceKey,
+  lightSurfaceVariantKey,
+  lightOnSurfaceVariantKey,
+  lightInverseSurfaceKey,
+  lightOnInverseSurfaceKey,
+  lightInversePrimaryKey,
+  lightScrimKey,
+  lightShadowKey,
+  lightSurfaceTintKey,
+];
+
 // Dark
 
 const String darkPrimaryKey = 'darkPrimary'; // required
@@ -192,6 +226,40 @@ const Map<String, Type> darkColorKeys = {
   darkSurfaceTintKey: int,
 };
 
+/// Ordered List for populating color setting screen(s)
+const List<String> darkColors = [
+  darkPrimaryKey, // required
+  darkOnPrimaryKey,
+  darkPrimaryContainerKey,
+  darkOnPrimaryContainerKey,
+  darkSecondaryKey,
+  darkOnSecondaryKey,
+  darkSecondaryContainerKey,
+  darkOnSecondaryContainerKey,
+  darkTertiaryKey,
+  darkOnTertiaryKey,
+  darkTertiaryContainerKey,
+  darkOnTertiaryContainerKey,
+  darkErrorKey,
+  darkOnErrorKey,
+  darkErrorContainerKey,
+  darkOnErrorContainerKey,
+  darkOutlineKey,
+  darkOutlineVariantKey,
+  darkBackgroundKey,
+  darkOnBackgroundKey,
+  darkSurfaceKey,
+  darkOnSurfaceKey,
+  darkSurfaceVariantKey,
+  darkOnSurfaceVariantKey,
+  darkInverseSurfaceKey,
+  darkOnInverseSurfaceKey,
+  darkInversePrimaryKey,
+  darkScrimKey,
+  darkShadowKey,
+  darkSurfaceTintKey,
+];
+
 // Style settings //
 
 const String fontFamilyKey = 'fontFamily';
@@ -210,6 +278,8 @@ const Map<String, Type> styleKeys = {
   textSpacingKey: int, // required
 };
 
+// Global trackers //
+
 const Map<String, Type> allKeys = {
   ...globalKeys,
   ...lightImageKeys,
@@ -217,4 +287,9 @@ const Map<String, Type> allKeys = {
   ...lightColorKeys,
   ...darkColorKeys,
   ...styleKeys
+};
+
+const Set<String> allColors = {
+  ...lightColors,
+  ...darkColors,
 };
