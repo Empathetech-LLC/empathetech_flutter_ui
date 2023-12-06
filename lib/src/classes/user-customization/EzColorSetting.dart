@@ -20,6 +20,34 @@ class EzColorSetting extends StatefulWidget {
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
+
+  /// Returns a list of [EzColorSetting]s based on [defaultSet] and the users current [EzConfig.preferences]
+  /// By default, the [EzSpacer] size [spacer] is based on [buttonSpacingKey]
+  static List<Widget> buildDynamicSet({
+    required Set<String> defaultSet,
+    required List<String> fullList,
+    double? spacer,
+  }) {
+    List<Widget> buttons = [];
+
+    final double _spacer = spacer ?? EzConfig.get(buttonSpacingKey);
+
+    final Set<String> toReturn = {
+      ...defaultSet,
+      ...EzConfig.getUserColors(),
+    };
+
+    for (String colorKey in fullList) {
+      if (toReturn.contains(colorKey)) {
+        buttons.addAll([
+          EzColorSetting(setting: colorKey),
+          EzSpacer(_spacer),
+        ]);
+      }
+    }
+
+    return buttons;
+  }
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
