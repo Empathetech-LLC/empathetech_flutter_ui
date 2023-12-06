@@ -15,9 +15,6 @@ class EzSliderSetting extends StatefulWidget {
   /// enum for determining the preview Widget(s) required
   final SliderSettingType type;
 
-  /// [String] that will be displayed at the top of the [BottomSheet]
-  final String title;
-
   /// Smallest value that can be set
   final double min;
 
@@ -36,7 +33,6 @@ class EzSliderSetting extends StatefulWidget {
     Key? key,
     required this.prefsKey,
     required this.type,
-    required this.title,
     required this.min,
     required this.max,
     required this.steps,
@@ -200,7 +196,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               EzSpacer(_margin),
               Text(
-                widget.title,
+                sstName(context, widget.type),
                 style: style,
                 textAlign: TextAlign.center,
               ),
@@ -298,7 +294,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             ),
           ),
           icon: widget.type.icon,
-          label: Text(widget.title),
+          label: Text(sstName(context, widget.type)),
         ),
       ),
     );

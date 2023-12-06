@@ -278,7 +278,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 _updatedPath = newPath;
               });
               if (widget.updateTheme != null) {
-                await storeColorScheme(
+                await storeImageColorScheme(
                   brightness: widget.updateTheme!,
                   path: newPath,
                 );
@@ -297,7 +297,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     context: context,
                     builder: (context) => EzAlertDialog(
                       title: Text(
-                        EFUILang.of(context)!.isCreditTo,
+                        EFUILang.of(context)!.gCreditTo,
                         textAlign: TextAlign.center,
                       ),
                       contents: [

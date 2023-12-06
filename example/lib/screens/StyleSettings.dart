@@ -46,7 +46,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: EFUILang.of(context)!.lsMargin,
               min: 5.0,
               max: 80.0,
               steps: 16,
@@ -58,7 +57,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
-              title: EFUILang.of(context)!.stsPadding,
               min: 5.0,
               max: 80.0,
               steps: 16,
@@ -70,7 +68,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.lsButtonSpacing,
               min: 10.0,
               max: 160.0,
               steps: 16,
@@ -82,7 +79,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: EFUILang.of(context)!.lsTextSpacing,
               min: 10.0,
               max: 160.0,
               steps: 16,
