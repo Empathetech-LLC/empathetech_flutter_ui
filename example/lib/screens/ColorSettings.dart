@@ -49,8 +49,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     lightTertiaryKey,
     lightBackgroundKey,
     lightSurfaceKey,
-    lightShadowKey,
-    lightSurfaceTintKey,
   };
   final Set<String> defaultDarkColors = {
     darkPrimaryKey,
@@ -58,8 +56,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     darkTertiaryKey,
     darkBackgroundKey,
     darkSurfaceKey,
-    darkShadowKey,
-    darkSurfaceTintKey,
   };
 
   // Return the build //
