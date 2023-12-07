@@ -553,19 +553,19 @@ abstract class EFUILang {
   /// No description provided for @csInverseSurface.
   ///
   /// In en, this message translates to:
-  /// **'Inverse surface'**
+  /// **'Inverse Surface'**
   String get csInverseSurface;
 
   /// No description provided for @csOnInverseSurface.
   ///
   /// In en, this message translates to:
-  /// **'Inverse On surface'**
+  /// **'Inverse On Surface'**
   String get csOnInverseSurface;
 
   /// No description provided for @csInversePrimary.
   ///
   /// In en, this message translates to:
-  /// **'Inverse primary'**
+  /// **'Inverse Primary'**
   String get csInversePrimary;
 
   /// No description provided for @csScrim.
@@ -583,7 +583,7 @@ abstract class EFUILang {
   /// No description provided for @csSurfaceTint.
   ///
   /// In en, this message translates to:
-  /// **'Surface tint'**
+  /// **'Surface Tint'**
   String get csSurfaceTint;
 
   /// No description provided for @csPickerTitle.

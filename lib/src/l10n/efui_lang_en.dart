@@ -257,13 +257,13 @@ class EFUILangEn extends EFUILang {
   String get csOnSurfaceVariant => 'On Surface Variant';
 
   @override
-  String get csInverseSurface => 'Inverse surface';
+  String get csInverseSurface => 'Inverse Surface';
 
   @override
-  String get csOnInverseSurface => 'Inverse On surface';
+  String get csOnInverseSurface => 'Inverse On Surface';
 
   @override
-  String get csInversePrimary => 'Inverse primary';
+  String get csInversePrimary => 'Inverse Primary';
 
   @override
   String get csScrim => 'Scrim';
@@ -272,7 +272,7 @@ class EFUILangEn extends EFUILang {
   String get csShadow => 'Shadow';
 
   @override
-  String get csSurfaceTint => 'Surface tint';
+  String get csSurfaceTint => 'Surface Tint';
 
   @override
   String get csPickerTitle => 'Pick a color!';

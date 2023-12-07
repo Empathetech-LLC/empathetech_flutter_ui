@@ -107,15 +107,15 @@
   "csSurfaceVariant": "Surface Variant",
   "csOnSurfaceVariant": "On Surface Variant",
   
-  "csInverseSurface": "Inverse surface",
-  "csOnInverseSurface": "Inverse On surface",
+  "csInverseSurface": "Inverse Surface",
+  "csOnInverseSurface": "Inverse On Surface",
 
-  "csInversePrimary": "Inverse primary",
+  "csInversePrimary": "Inverse Primary",
 
   "csScrim": "Scrim",
   "csShadow": "Shadow",
 
-  "csSurfaceTint": "Surface tint",
+  "csSurfaceTint": "Surface Tint",
 
   "csPickerTitle": "Pick a color!",
 
