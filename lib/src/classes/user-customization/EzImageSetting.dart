@@ -57,7 +57,7 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather theme data //
 
-  String? _updatedPath;
+  late String? currPath = EzConfig.get(widget.prefsKey);
   late bool _updateTheme = (widget.updateTheme != null);
 
   final double _padding = EzConfig.get(paddingKey);
@@ -195,7 +195,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(
             context: context,
-            pass: EzConfig.getDefault(widget.prefsKey),
+            pass: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
           );
         },
         label: Text(EFUILang.of(context)!.isResetIt),
@@ -261,9 +261,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (newPath is String) {
       setState(() {
-        _updatedPath = newPath;
+        currPath = newPath;
       });
-      if (widget.updateTheme != null) {
+      if (widget.updateTheme != null && newPath != noImageValue) {
         await storeImageColorScheme(
           brightness: widget.updateTheme!,
           path: newPath,
@@ -319,31 +319,17 @@ class _ImageSettingState extends State<EzImageSetting> {
               ElevatedButton(
                 onPressed: _activateSetting,
                 onLongPress: _showCredits,
-                child: (_updatedPath is String)
-                    ? // user made a change
-                    (_updatedPath == noImageValue)
-                        ? // user cleared the image
-                        Icon(PlatformIcons(context).clear)
-                        : // user set a custom image
-                        CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            foregroundImage: provideImage(_updatedPath!),
-                            radius: _padding * 2,
-                          )
-                    : // user has not made a change
-                    (EzConfig.get(widget.prefsKey) == null ||
-                            EzConfig.get(widget.prefsKey) == noImageValue)
-                        ? // there is no current image
-                        Icon(PlatformIcons(context).clear)
-                        : // there is an image stored
-                        CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            foregroundImage:
-                                provideImage(EzConfig.get(widget.prefsKey)),
-                            radius: _padding * 2,
-                          ),
+                child: (currPath == null || currPath == noImageValue)
+                    ? Icon(PlatformIcons(context).clear)
+                    : CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        foregroundImage: provideImage(currPath!),
+                        radius: _padding * 2,
+                      ),
                 style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      padding: (currPath == null || currPath == noImageValue)
+                          ? MaterialStatePropertyAll(EdgeInsets.all(_padding))
+                          : MaterialStatePropertyAll(EdgeInsets.zero),
                     ),
               ),
             ],
