@@ -16,7 +16,10 @@ class ExampleScaffold extends StatelessWidget {
 
     final bool leftHandedUser = (EzConfig.get(isRightHandKey) == false);
 
-    final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
+    final TextStyle? titleStyle = Theme.of(context)
+        .appBarTheme
+        .titleTextStyle
+        ?.copyWith(color: Theme.of(context).colorScheme.onSurface);
 
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
     final double toolbarHeight = textScaler.scale(titleStyle!.fontSize!) * 2;
