@@ -18,7 +18,8 @@ class ScreenSpace extends InheritedWidget {
   /// [InheritedWidget] to wrap around your [Scaffold]s
   /// Enables real-time responses to screen space changes
   /// Currently uses the bool [isLimited] for switching between a small and large build
-  /// Could be expanded limitlessly by replacing [isLimited] with a custom enum
+  /// If further customization is desired, check out:
+  /// https://pub.dev/packages/flutter_adaptive_scaffold
   const ScreenSpace({
     Key? key,
     required this.isLimited,
