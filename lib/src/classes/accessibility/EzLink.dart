@@ -9,7 +9,6 @@ class EzLink extends StatelessWidget {
 
   final TextStyle? style;
   final TextAlign? textAlign;
-  final ButtonStyle? buttonStyle;
 
   /// Destination function
   final void Function()? onTap;
@@ -17,36 +16,27 @@ class EzLink extends StatelessWidget {
   /// Destination URL
   final Uri? url;
 
+  /// Optional long press functionality
   final void Function()? onLongPress;
 
   /// Message for screen readers
   final String semanticsLabel;
 
-  final void Function(bool)? onHover;
-  final void Function(bool)? onFocusChange;
-  final FocusNode? focusNode;
-  final bool autofocus;
-  final Clip clipBehavior;
   final MaterialStatesController? statesController;
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
+  /// Automatically colors [text] with [ColorScheme.primary] and adds an [underline] on hover
   EzLink(
     this.text, {
     this.key,
     this.style,
     this.textAlign,
-    this.buttonStyle,
     this.onTap,
     this.url,
     this.onLongPress,
     required this.semanticsLabel,
-    this.onHover,
-    this.onFocusChange,
-    this.focusNode,
-    this.autofocus = false,
-    this.clipBehavior = Clip.none,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -61,15 +51,11 @@ class EzLink extends StatelessWidget {
         child: TextButton(
           onPressed: onTap ?? () => launchUrl(url!),
           onLongPress: onLongPress,
-          onHover: onHover,
-          onFocusChange: onFocusChange,
-          style: buttonStyle,
-          focusNode: focusNode,
-          autofocus: autofocus,
-          clipBehavior: clipBehavior,
+          onHover: _addUnderline,
+          autofocus: false,
+          clipBehavior: Clip.none,
           statesController: statesController,
-          isSemanticButton: true,
-          child: Text(text, style: style, textAlign: textAlign),
+          child: Text(text, style: _style, textAlign: textAlign),
         ),
       ),
     );
