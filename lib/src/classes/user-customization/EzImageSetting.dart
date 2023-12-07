@@ -65,7 +65,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   // Define button functions //
 
-  /// Cleanup any custom files
+  /// Cleanup any custom [File]s
   void _cleanup() async {
     if (!EzConfig.isKeyAsset(widget.prefsKey)) {
       try {
@@ -77,14 +77,11 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
-  /// Selection is sent to [changeImage]
-  Future<dynamic> _chooseImage(BuildContext context) {
-    // Build the dialog options //
-
+  /// Build the list of [ImageSource] options
+  List<Widget> _buildOptions(StateSetter dialogState, BuildContext context) {
     List<Widget> options = [];
 
-    // From file && camera rely on path provider, which isn't supported by Flutter Web
+    // From file && camera rely on path_provider, which isn't supported by Flutter Web
     if (!kIsWeb) {
       options.addAll([
         // From file
@@ -224,38 +221,53 @@ class _ImageSettingState extends State<EzImageSetting> {
       options.addAll([
         EzSpacer(_buttonSpacer),
         EzRow(children: [
-          Checkbox(
-              value: _updateTheme,
-              onChanged: (bool? choice) {
-                setState(() {
-                  _updateTheme = (choice == null) ? false : choice;
-                });
-              }),
-          EzSpacer.row(_padding),
+          // Label
           Flexible(
             child: Text(
               EFUILang.of(context)!.isUseForColors,
               textAlign: TextAlign.center,
             ),
           ),
+          EzSpacer.row(_padding),
+
+          // Check box
+          Checkbox(
+              value: _updateTheme,
+              onChanged: (bool? choice) {
+                setState(() {
+                  dialogState(() {
+                    _updateTheme = (choice == null) ? false : choice;
+                  });
+                });
+              }),
         ])
       ]);
 
-    // Return the dialog //
+    return options;
+  }
 
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
+  /// Returns the path, if any, to the new [Image]
+  Future<dynamic> _chooseImage(BuildContext context) {
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzAlertDialog(
-        title: Text(
-          EFUILang.of(context)!
-              .isDialogTitle(widget.dialogTitle ?? widget.label),
-          textAlign: TextAlign.center,
-        ),
-        contents: options,
+      builder: (context) => StatefulBuilder(
+        builder: (BuildContext context, StateSetter dialogState) {
+          return EzAlertDialog(
+            title: Text(
+              EFUILang.of(context)!
+                  .isDialogTitle(widget.dialogTitle ?? widget.label),
+              textAlign: TextAlign.center,
+            ),
+            contents: _buildOptions(dialogState, context),
+          );
+        },
       ),
     );
   }
 
+  /// First-layer [ElevatedButton.onPressed]
+  /// It the [_chooseImage] dialog and updates the state accordingly
   void _activateSetting() async {
     dynamic newPath = await _chooseImage(context);
 
@@ -276,6 +288,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
+  /// Open an [EzAlertDialog] with the [Image]s source information
   Future<dynamic>? _showCredits() {
     return (widget.credits == null)
         ? null
