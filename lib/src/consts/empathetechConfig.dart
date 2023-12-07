@@ -10,12 +10,6 @@ const Map<String, dynamic> empathetechConfig = {
   // Color settings //
 
   // Light
-  lightBackgroundKey: offWhiteHex,
-  lightOnBackgroundKey: blackHex,
-
-  lightSurfaceKey: whiteHex,
-  lightOnSurfaceKey: blackHex,
-
   lightPrimaryKey: EmpathPurpleHex, // required
   lightOnPrimaryKey: whiteHex,
 
@@ -25,13 +19,15 @@ const Map<String, dynamic> empathetechConfig = {
   lightTertiaryKey: EmpathEucalyptusHex,
   lightOnTertiaryKey: blackHex,
 
+  lightBackgroundKey: offWhiteHex,
+  lightOnBackgroundKey: blackHex,
+
+  lightSurfaceKey: whiteHex,
+  lightOnSurfaceKey: blackHex,
+
+  lightSurfaceTintKey: transparentHex,
+
   // Dark
-  darkBackgroundKey: offBlackHex,
-  darkOnBackgroundKey: whiteHex,
-
-  darkSurfaceKey: blackHex,
-  darkOnSurfaceKey: whiteHex,
-
   darkPrimaryKey: EmpathEucalyptusHex, // required
   darkOnPrimaryKey: blackHex,
 
@@ -40,6 +36,14 @@ const Map<String, dynamic> empathetechConfig = {
 
   darkTertiaryKey: EmpathPurpleHex,
   darkOnTertiaryKey: whiteHex,
+
+  darkBackgroundKey: offBlackHex,
+  darkOnBackgroundKey: whiteHex,
+
+  darkSurfaceKey: blackHex,
+  darkOnSurfaceKey: whiteHex,
+
+  darkSurfaceTintKey: transparentHex,
 
   // Style settings //
 
