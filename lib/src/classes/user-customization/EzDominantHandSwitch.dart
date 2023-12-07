@@ -21,7 +21,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   Hand currSide =
       (EzConfig.get(isRightHandKey) == false) ? Hand.left : Hand.right;
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _padding = EzConfig.get(paddingKey);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         style: style,
         textAlign: TextAlign.center,
       ),
-      EzSpacer.row(_buttonSpacer),
+      EzSpacer.row(_padding),
 
       // Button
       Semantics(
@@ -86,11 +86,18 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       ),
     ];
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          (currSide == Hand.right) ? _children : _children.reversed.toList(),
+    return Container(
+      padding: EdgeInsets.all(_padding),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.circular(_padding * 2),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            (currSide == Hand.right) ? _children : _children.reversed.toList(),
+      ),
     );
   }
 }

@@ -31,7 +31,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   }
 
   // Gather theme data //
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _padding = EzConfig.get(paddingKey);
 
   @override
   Widget build(BuildContext context) {
@@ -57,61 +57,68 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     // Return the build //
 
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Label
-        Text(
-          EFUILang.of(context)!.ssThemeMode,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        EzSpacer.row(_buttonSpacer),
+    return Container(
+      padding: EdgeInsets.all(_padding),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.circular(_padding * 2),
+      ),
+      child: EzRow(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Label
+          Text(
+            EFUILang.of(context)!.ssThemeMode,
+            style: style,
+            textAlign: TextAlign.center,
+          ),
+          EzSpacer.row(_padding),
 
-        // Button
-        Semantics(
-          button: true,
-          hint:
-              "${EFUILang.of(context)!.ssThemeSemantics} ${_getName(currMode)}",
-          child: ExcludeSemantics(
-            child: DropdownButton<ThemeMode>(
-              value: currMode,
-              items: items,
-              onChanged: (ThemeMode? newThemeMode) {
-                switch (newThemeMode) {
-                  case ThemeMode.system:
-                    EzConfig.remove(isLightThemeKey);
-                    setState(() {
-                      currMode = ThemeMode.system;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.system;
-                    });
-                    break;
+          // Button
+          Semantics(
+            button: true,
+            hint:
+                "${EFUILang.of(context)!.ssThemeSemantics} ${_getName(currMode)}",
+            child: ExcludeSemantics(
+              child: DropdownButton<ThemeMode>(
+                value: currMode,
+                items: items,
+                onChanged: (ThemeMode? newThemeMode) {
+                  switch (newThemeMode) {
+                    case ThemeMode.system:
+                      EzConfig.remove(isLightThemeKey);
+                      setState(() {
+                        currMode = ThemeMode.system;
+                        PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                      });
+                      break;
 
-                  case ThemeMode.light:
-                    EzConfig.setBool(isLightThemeKey, true);
-                    setState(() {
-                      currMode = ThemeMode.light;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.light;
-                    });
-                    break;
+                    case ThemeMode.light:
+                      EzConfig.setBool(isLightThemeKey, true);
+                      setState(() {
+                        currMode = ThemeMode.light;
+                        PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                      });
+                      break;
 
-                  case ThemeMode.dark:
-                    EzConfig.setBool(isLightThemeKey, false);
-                    setState(() {
-                      currMode = ThemeMode.dark;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
-                    });
-                    break;
+                    case ThemeMode.dark:
+                      EzConfig.setBool(isLightThemeKey, false);
+                      setState(() {
+                        currMode = ThemeMode.dark;
+                        PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                      });
+                      break;
 
-                  default:
-                    break;
-                }
-              },
+                    default:
+                      break;
+                  }
+                },
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
