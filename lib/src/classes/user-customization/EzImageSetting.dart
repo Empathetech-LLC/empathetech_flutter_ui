@@ -27,9 +27,6 @@ class EzImageSetting extends StatefulWidget {
   /// Effectively whether the image is nullable
   final bool allowClear;
 
-  /// Whether the image is intended for fullscreen use
-  final bool fullscreen;
-
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String? credits;
@@ -48,7 +45,6 @@ class EzImageSetting extends StatefulWidget {
     required this.label,
     this.dialogTitle,
     required this.allowClear,
-    required this.fullscreen,
     this.credits,
     this.updateTheme,
     this.hideThemeMessage = false,
@@ -260,6 +256,46 @@ class _ImageSettingState extends State<EzImageSetting> {
     );
   }
 
+  void _activateSetting() async {
+    dynamic newPath = await _chooseImage(context);
+
+    if (newPath is String) {
+      setState(() {
+        _updatedPath = newPath;
+      });
+      if (widget.updateTheme != null) {
+        await storeImageColorScheme(
+          brightness: widget.updateTheme!,
+          path: newPath,
+        );
+
+        widget.updateTheme == Brightness.light
+            ? EzConfig.setString(lightColorSchemeImageKey, newPath)
+            : EzConfig.setString(darkColorSchemeImageKey, newPath);
+      }
+    }
+  }
+
+  Future<dynamic>? _showCredits() {
+    return (widget.credits == null)
+        ? null
+        : showPlatformDialog(
+            context: context,
+            builder: (context) => EzAlertDialog(
+              title: Text(
+                EFUILang.of(context)!.gCreditTo,
+                textAlign: TextAlign.center,
+              ),
+              contents: [
+                Text(
+                  widget.credits!,
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          );
+  }
+
   // Return the build //
 
   @override
@@ -268,104 +304,53 @@ class _ImageSettingState extends State<EzImageSetting> {
       button: true,
       hint: EFUILang.of(context)!.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: TextButton(
-          // On pressed -> choose image
-          onPressed: () async {
-            dynamic newPath = await _chooseImage(context);
-
-            if (newPath is String) {
-              setState(() {
-                _updatedPath = newPath;
-              });
-              if (widget.updateTheme != null) {
-                await storeImageColorScheme(
-                  brightness: widget.updateTheme!,
-                  path: newPath,
-                );
-
-                widget.updateTheme == Brightness.light
-                    ? EzConfig.setString(lightColorSchemeImageKey, newPath)
-                    : EzConfig.setString(darkColorSchemeImageKey, newPath);
-              }
-            }
-          },
-
-          // On long press -> show credits
-          onLongPress: (widget.credits == null)
-              ? null
-              : () => showPlatformDialog(
-                    context: context,
-                    builder: (context) => EzAlertDialog(
-                      title: Text(
-                        EFUILang.of(context)!.gCreditTo,
-                        textAlign: TextAlign.center,
-                      ),
-                      contents: [
-                        Text(
-                          widget.credits!,
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ),
-
-          // Set custom style
-          style: Theme.of(context).textButtonTheme.style?.copyWith(
-                shape: MaterialStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-              ),
-
-          // Button body
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: ElevatedButton(
+          onPressed: _activateSetting,
+          onLongPress: _showCredits,
+          child: EzRow(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Label on the left
+              // Label
               Text(widget.label, textAlign: TextAlign.center),
               EzSpacer.row(_padding),
 
-              // Preview on the right
-              // 16:9 for backgrounds, 1:1 for the rest
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    width: 1,
-                  ),
-                ),
-                child: SizedBox(
-                  width: widget.fullscreen ? 90 : 75,
-                  height: widget.fullscreen ? 160 : 75,
-                  child: (_updatedPath is String)
-                      ? // user made a change
-                      (_updatedPath == noImageValue)
-                          ? // user cleared the image
-                          Icon(PlatformIcons(context).clear)
-                          : // user set a custom image
-                          EzImage(
-                              image: provideImage(_updatedPath!),
-                              semanticLabel:
-                                  widget.label + EFUILang.of(context)!.isImage,
-                            )
-                      : // user has not made a change
-                      (EzConfig.get(widget.prefsKey) == null ||
-                              EzConfig.get(widget.prefsKey) == noImageValue)
-                          ? // there is no current image
-                          Icon(PlatformIcons(context).clear)
-                          : // there is an image stored
-                          EzImage(
-                              image:
-                                  provideImage(EzConfig.get(widget.prefsKey)),
-                              semanticLabel:
-                                  widget.label + EFUILang.of(context)!.isImage,
-                            ),
-                ),
+              // Preview
+              ElevatedButton(
+                onPressed: _activateSetting,
+                onLongPress: _showCredits,
+                child: (_updatedPath is String)
+                    ? // user made a change
+                    (_updatedPath == noImageValue)
+                        ? // user cleared the image
+                        Icon(PlatformIcons(context).clear)
+                        : // user set a custom image
+                        CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            foregroundImage: provideImage(_updatedPath!),
+                            radius: _padding * 2,
+                          )
+                    : // user has not made a change
+                    (EzConfig.get(widget.prefsKey) == null ||
+                            EzConfig.get(widget.prefsKey) == noImageValue)
+                        ? // there is no current image
+                        Icon(PlatformIcons(context).clear)
+                        : // there is an image stored
+                        CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            foregroundImage:
+                                provideImage(EzConfig.get(widget.prefsKey)),
+                            radius: _padding * 2,
+                          ),
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                    ),
               ),
             ],
           ),
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                padding: MaterialStatePropertyAll(EdgeInsets.all(_padding / 2)),
+              ),
         ),
       ),
     );
