@@ -31,6 +31,8 @@ const int blackHex = 0xFF000000;
 const int offBlackHex = 0xFF191919;
 const Color offBlack = Color(offBlackHex);
 
+const int transparentHex = 0x00000000;
+
 // Public links //
 
 /// One of us, one of us, one of us!
