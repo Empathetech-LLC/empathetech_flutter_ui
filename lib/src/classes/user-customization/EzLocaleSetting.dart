@@ -79,12 +79,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _flag(locale),
-              EzSpacer.row(_padding),
               Text(
                 LocaleNames.of(context)!.nameOf(locale.languageCode).toString(),
                 textAlign: TextAlign.center,
               ),
+              EzSpacer.row(_padding),
+              _flag(locale),
             ],
           ),
         ),
@@ -125,12 +125,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _flag(currLocale),
-              EzSpacer.row(_padding),
               Text(
                 EFUILang.of(context)!.ssLanguage,
                 textAlign: TextAlign.center,
               ),
+              EzSpacer.row(_padding),
+              _flag(currLocale),
             ],
           ),
         ),
