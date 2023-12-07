@@ -78,12 +78,11 @@ class EzScreen extends StatelessWidget {
     return Container(
       key: key,
       alignment: alignment,
-      padding: padding,
+      padding: _margin,
       decoration: buildDecoration(),
       width: width,
       height: height,
       constraints: constraints,
-      margin: _margin,
       transform: transform,
       transformAlignment: transformAlignment,
       child: child,
