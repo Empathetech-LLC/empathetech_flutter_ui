@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 
 class EzScreen extends StatelessWidget {
   final Key? key;
+  final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry? margin;
 
   /// Optional [Decoration] background for the screen
   /// Provide [decoration] OR [decorationImageKey]
@@ -20,32 +22,28 @@ class EzScreen extends StatelessWidget {
 
   final double width;
   final double height;
-  final EdgeInsetsGeometry? margin;
-  final EdgeInsetsGeometry? padding;
   final BoxConstraints? constraints;
-  final Clip clipBehavior;
-  final AlignmentGeometry? alignment;
   final Matrix4? transform;
   final AlignmentGeometry? transformAlignment;
   final Widget child;
+  final Clip clipBehavior;
 
   /// [Container] wrapper that defaults to max size with a margin from [EzConfig]
   /// See [decorationImageKey] for easily setting a background image
   const EzScreen({
     // Container
     this.key,
+    this.alignment,
+    this.margin,
     this.decoration,
     this.decorationImageKey,
     this.width = double.infinity,
     this.height = double.infinity,
-    this.margin,
-    this.padding,
     this.constraints,
-    this.clipBehavior = Clip.none,
-    this.alignment,
     this.transform,
     this.transformAlignment,
     required this.child,
+    this.clipBehavior = Clip.none,
   }) : assert(
           (!(decoration != null && decorationImageKey != null)),
           'Either decoration or decorationImageKey can be provided, but not both.',
