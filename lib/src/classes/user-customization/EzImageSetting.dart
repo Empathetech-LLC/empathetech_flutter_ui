@@ -336,6 +336,9 @@ class _ImageSettingState extends State<EzImageSetting> {
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStatePropertyAll(EdgeInsets.all(_padding / 2)),
+                foregroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.onSurface,
+                ),
               ),
         ),
       ),
