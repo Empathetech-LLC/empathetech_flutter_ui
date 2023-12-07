@@ -175,7 +175,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
   List<Widget> _buildSheet(
-    StateSetter modalSheetSetState,
+    StateSetter modalSheetState,
     BuildContext context,
     TextStyle? style,
   ) {
@@ -225,7 +225,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Slider functions
           onChanged: (double value) {
             // Just update the on screen value while sliding around
-            modalSheetSetState(() {
+            modalSheetState(() {
               currValue = value;
             });
           },
@@ -256,7 +256,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           child: ElevatedButton.icon(
             onPressed: () {
               EzConfig.remove(widget.prefsKey);
-              modalSheetSetState(() {
+              modalSheetState(() {
                 currValue = _defaultValue;
               });
             },
@@ -285,10 +285,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
           onPressed: () => showModalBottomSheet(
             context: context,
             builder: (context) => StatefulBuilder(
-              builder: (BuildContext context, StateSetter modalSheetSetState) {
+              builder: (BuildContext context, StateSetter modalSheetState) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: _buildSheet(modalSheetSetState, context, style),
+                  children: _buildSheet(modalSheetState, context, style),
                 );
               },
             ),
