@@ -67,7 +67,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           prefsKey: lightPageImageKey,
                           label: EFUILang.of(context)!.isBackground,
                           allowClear: true,
-                          fullscreen: true,
                           updateTheme: Brightness.light,
                         ),
                       ]
@@ -78,7 +77,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
                           prefsKey: darkPageImageKey,
                           label: EFUILang.of(context)!.isBackground,
                           allowClear: true,
-                          fullscreen: true,
                           updateTheme: Brightness.dark,
                         ),
                       ],
