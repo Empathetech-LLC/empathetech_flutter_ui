@@ -16,13 +16,18 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double padding = EzConfig.get(paddingKey);
 
-  final TextStyle appBarTextStyle = buildHeadlineMedium();
-  final TextStyle tabBarTextStyle = buildTitleLarge();
-  final TextStyle pageTextStyle = buildBodyLarge();
+  final TextStyle appBarTextStyle =
+      buildHeadlineMedium(color: colorScheme.onSurface);
+  final TextStyle tabBarTextStyle =
+      buildTitleLarge(color: colorScheme.onSurface);
+  final TextStyle pageTextStyle =
+      buildBodyLarge(color: colorScheme.onBackground);
   final TextStyle buttonTextStyle = buildTitleMedium();
   final TextStyle textButtonStyle = buildTitleMedium();
-  final TextStyle dialogTitleStyle = buildTitleLarge();
-  final TextStyle dialogContentStyle = buildBodyLarge();
+  final TextStyle dialogTitleStyle =
+      buildTitleLarge(color: colorScheme.onBackground);
+  final TextStyle dialogContentStyle =
+      buildBodyLarge(color: colorScheme.onBackground);
 
   final TextTheme textTheme = ezTextTheme();
 
