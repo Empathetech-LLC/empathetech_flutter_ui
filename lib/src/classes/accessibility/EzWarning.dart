@@ -40,7 +40,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(padding),
+            padding: EdgeInsets.all(padding / 2),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
