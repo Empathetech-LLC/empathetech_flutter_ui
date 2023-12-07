@@ -256,7 +256,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
-                  EdgeInsets.all(_padding * (2 / 3)),
+                  EdgeInsets.all(_padding / 2),
                 ),
               ),
         ),
