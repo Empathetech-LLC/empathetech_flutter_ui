@@ -60,9 +60,6 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   late final String _label = getColorName(widget.setting, context);
 
-  late final TextStyle? _labelStyle =
-      Theme.of(context).dropdownMenuTheme.textStyle;
-
   // Define button functions //
 
   /// Opens an [ezColorPicker] for updating [currColor]
@@ -232,7 +229,6 @@ class _ColorSettingState extends State<EzColorSetting> {
               // Label
               Text(
                 _label,
-                style: _labelStyle,
                 textAlign: TextAlign.center,
               ),
               EzSpacer.row(_padding),
@@ -257,6 +253,9 @@ class _ColorSettingState extends State<EzColorSetting> {
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(_padding / 2),
+                ),
+                foregroundColor: MaterialStateProperty.all(
+                  Theme.of(context).colorScheme.onSurface,
                 ),
               ),
         ),
