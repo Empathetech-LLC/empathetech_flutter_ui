@@ -54,8 +54,9 @@ class _ColorSettingState extends State<EzColorSetting> {
   // Gather theme data //
 
   late Color currColor = Color(EzConfig.get(widget.setting));
+  late final Color primaryColor = Theme.of(context).colorScheme.primary;
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _padding = EzConfig.get(paddingKey);
 
   late final String _label = getColorName(widget.setting, context);
 
@@ -217,40 +218,47 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Color label
-        Text(
-          _label,
-          style: _labelStyle,
-          textAlign: TextAlign.center,
-        ),
-        EzSpacer.row(_buttonSpacer),
-
-        // Color preview/edit button
-        Semantics(
-          button: true,
-          hint: EFUILang.of(context)!.csPickerSemantics(_label),
-          child: ExcludeSemantics(
-            child: ElevatedButton(
-              onPressed: () => _changeColor(context),
-              onLongPress: () => _reset(context),
-              child: Center(
-                child: Icon(
-                  PlatformIcons(context).edit,
-                  color: getTextColor(currColor),
-                ),
+    return Semantics(
+      button: true,
+      hint: EFUILang.of(context)!.csPickerSemantics(_label),
+      child: ExcludeSemantics(
+        child: ElevatedButton(
+          onPressed: () => _changeColor(context),
+          onLongPress: () => _reset(context),
+          child: EzRow(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Label
+              Text(
+                _label,
+                style: _labelStyle,
+                textAlign: TextAlign.center,
               ),
-              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                    backgroundColor: MaterialStatePropertyAll(currColor),
-                    shape: MaterialStatePropertyAll(const CircleBorder()),
+              EzSpacer.row(_padding),
+
+              // Color preview
+              ElevatedButton(
+                onPressed: () => _changeColor(context),
+                onLongPress: () => _reset(context),
+                child: Center(
+                  child: Icon(
+                    PlatformIcons(context).edit,
+                    color: getTextColor(currColor),
                   ),
-            ),
+                ),
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      backgroundColor: MaterialStatePropertyAll(currColor),
+                      shape: MaterialStatePropertyAll(const CircleBorder()),
+                      side: MaterialStateProperty.all(
+                        BorderSide(color: primaryColor),
+                      ),
+                    ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
