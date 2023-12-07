@@ -33,8 +33,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
 
-  late final String _fromImageLabel =
-      "${EFUILang.of(context)!.csSchemeBase}\n\n(${EFUILang.of(context)!.csOptional})";
+  late final String _fromImageLabel = EFUILang.of(context)!.csSchemeBase;
   late final String _fromImageTitle =
       "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
   late final String _fromImageHint =
