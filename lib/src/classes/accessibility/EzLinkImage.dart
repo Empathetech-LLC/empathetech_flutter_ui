@@ -38,7 +38,7 @@ class EzLinkImage extends StatelessWidget {
 
   /// [Image] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticsLabel] for screen readers
+  /// Requires [semanticLabel] for screen readers
   const EzLinkImage({
     this.key,
     required this.image,
