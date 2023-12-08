@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EzLinkImage extends StatelessWidget {
+class EzLinkImage extends StatefulWidget {
   final Key? key;
   final ImageProvider<Object> image;
 
@@ -18,6 +18,9 @@ class EzLinkImage extends StatelessWidget {
 
   /// Destination URL
   final Uri? url;
+
+  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImage]
+  final List<BoxShadow>? shadows;
 
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
@@ -39,12 +42,16 @@ class EzLinkImage extends StatelessWidget {
   /// [Image] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticLabel] for screen readers
+  /// Automatically draws a [BoxShadow] which mimics button hover based on...
+  /// https://m3.material.io/foundations/interaction/states/state-layers
+  /// Optionally override the [shadows]
   const EzLinkImage({
     this.key,
     required this.image,
     required this.semanticLabel,
     this.onTap,
     this.url,
+    this.shadows,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -66,34 +73,60 @@ class EzLinkImage extends StatelessWidget {
         super(key: key);
 
   @override
+  _EzLinkImageState createState() => _EzLinkImageState();
+}
+
+class _EzLinkImageState extends State<EzLinkImage> {
+  bool _isHovering = false;
+
+  late final Color _hoverColor =
+      Theme.of(context).colorScheme.primary.withOpacity(0.16);
+  late final List<BoxShadow> _shadows =
+      widget.shadows ?? [BoxShadow(color: _hoverColor)];
+
+  void _updateHoverState(bool isHovering) {
+    setState(() {
+      _isHovering = isHovering;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Semantics(
       image: true,
       link: true,
-      hint: semanticLabel,
+      hint: widget.semanticLabel,
       child: ExcludeSemantics(
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
+          onEnter: (_) => _updateHoverState(true),
+          onExit: (_) => _updateHoverState(false),
           child: GestureDetector(
-            onTap: onTap ?? () => launchUrl(url!),
-            child: Image(
-              image: image,
-              frameBuilder: frameBuilder,
-              loadingBuilder: loadingBuilder,
-              errorBuilder: errorBuilder,
-              width: width,
-              height: height,
-              color: color,
-              opacity: opacity,
-              colorBlendMode: colorBlendMode,
-              fit: fit,
-              alignment: alignment,
-              repeat: repeat,
-              centerSlice: centerSlice,
-              matchTextDirection: matchTextDirection,
-              gaplessPlayback: gaplessPlayback,
-              isAntiAlias: isAntiAlias,
-              filterQuality: filterQuality,
+            onTap: widget.onTap ?? () => launchUrl(widget.url!),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: _isHovering ? _shadows : [],
+              ),
+              child: Image(
+                image: widget.image,
+                frameBuilder: widget.frameBuilder,
+                loadingBuilder: widget.loadingBuilder,
+                errorBuilder: widget.errorBuilder,
+                width: widget.width,
+                height: widget.height,
+                color: widget.color,
+                opacity: widget.opacity,
+                colorBlendMode: widget.colorBlendMode,
+                fit: widget.fit,
+                alignment: widget.alignment,
+                repeat: widget.repeat,
+                centerSlice: widget.centerSlice,
+                matchTextDirection: widget.matchTextDirection,
+                gaplessPlayback: widget.gaplessPlayback,
+                isAntiAlias: widget.isAntiAlias,
+                filterQuality: widget.filterQuality,
+              ),
             ),
           ),
         ),
