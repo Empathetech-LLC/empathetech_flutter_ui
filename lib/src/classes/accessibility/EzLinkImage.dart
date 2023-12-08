@@ -77,18 +77,25 @@ class EzLinkImage extends StatefulWidget {
 }
 
 class _EzLinkImageState extends State<EzLinkImage> {
-  bool _isHovering = false;
+  // Gather the theme data //
 
-  late final Color _hoverColor =
+  bool _shadow = false;
+  final FocusNode _focus = FocusNode();
+
+  late final Color _shadowColor =
       Theme.of(context).colorScheme.primary.withOpacity(0.16);
   late final List<BoxShadow> _shadows =
-      widget.shadows ?? [BoxShadow(color: _hoverColor)];
+      widget.shadows ?? [BoxShadow(color: _shadowColor)];
 
-  void _updateHoverState(bool isHovering) {
+  // Define the styling function(s) //
+
+  void _showShadow(bool showIt) {
     setState(() {
-      _isHovering = isHovering;
+      _shadow = showIt;
     });
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -97,35 +104,39 @@ class _EzLinkImageState extends State<EzLinkImage> {
       link: true,
       hint: widget.semanticLabel,
       child: ExcludeSemantics(
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onEnter: (_) => _updateHoverState(true),
-          onExit: (_) => _updateHoverState(false),
-          child: GestureDetector(
-            onTap: widget.onTap ?? () => launchUrl(widget.url!),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: _isHovering ? _shadows : [],
-              ),
-              child: Image(
-                image: widget.image,
-                frameBuilder: widget.frameBuilder,
-                loadingBuilder: widget.loadingBuilder,
-                errorBuilder: widget.errorBuilder,
-                width: widget.width,
-                height: widget.height,
-                color: widget.color,
-                opacity: widget.opacity,
-                colorBlendMode: widget.colorBlendMode,
-                fit: widget.fit,
-                alignment: widget.alignment,
-                repeat: widget.repeat,
-                centerSlice: widget.centerSlice,
-                matchTextDirection: widget.matchTextDirection,
-                gaplessPlayback: widget.gaplessPlayback,
-                isAntiAlias: widget.isAntiAlias,
-                filterQuality: widget.filterQuality,
+        child: Focus(
+          focusNode: _focus,
+          onFocusChange: (hasFocus) => _showShadow(hasFocus),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            onEnter: (_) => _showShadow(true),
+            onExit: (_) => _showShadow(false),
+            child: GestureDetector(
+              onTap: widget.onTap ?? () => launchUrl(widget.url!),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: _shadow ? _shadows : [],
+                ),
+                child: Image(
+                  image: widget.image,
+                  frameBuilder: widget.frameBuilder,
+                  loadingBuilder: widget.loadingBuilder,
+                  errorBuilder: widget.errorBuilder,
+                  width: widget.width,
+                  height: widget.height,
+                  color: widget.color,
+                  opacity: widget.opacity,
+                  colorBlendMode: widget.colorBlendMode,
+                  fit: widget.fit,
+                  alignment: widget.alignment,
+                  repeat: widget.repeat,
+                  centerSlice: widget.centerSlice,
+                  matchTextDirection: widget.matchTextDirection,
+                  gaplessPlayback: widget.gaplessPlayback,
+                  isAntiAlias: widget.isAntiAlias,
+                  filterQuality: widget.filterQuality,
+                ),
               ),
             ),
           ),
