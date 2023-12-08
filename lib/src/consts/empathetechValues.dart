@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 // General //
 
 const String homeRoute = '/';
+const String efui = "Empathetech Flutter UI";
 
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';

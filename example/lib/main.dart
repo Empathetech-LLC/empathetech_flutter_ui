@@ -112,7 +112,7 @@ class EFUIExample extends StatelessWidget {
                 localeData.length > 1 ? localeData[1] : null,
               ),
 
-        title: "Empathetech Flutter UI",
+        title: efui,
         routerConfig: _router,
       ),
     );
