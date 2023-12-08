@@ -3,16 +3,14 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class EzInlineLink extends TextSpan {
+class EzInlineLink extends WidgetSpan {
   final String text;
+  final Key? key;
   final TextStyle? style;
-
-  /// Message for screen readers
-  final String semanticsLabel;
 
   /// Destination function
   final void Function()? onTap;
@@ -20,38 +18,32 @@ class EzInlineLink extends TextSpan {
   /// Destination URL
   final Uri? url;
 
-  final MouseCursor mouseCursor;
-  final void Function(PointerEnterEvent)? onEnter;
-  final void Function(PointerExitEvent)? onExit;
-  final Locale? locale;
-  final bool spellOut;
+  /// Message for screen readers
+  final String semanticsLabel;
 
   /// [TextSpan] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
   EzInlineLink(
     this.text, {
+    this.key,
     this.style,
-    required this.semanticsLabel,
     this.onTap,
     this.url,
-    this.mouseCursor = SystemMouseCursors.click,
-    this.onEnter,
-    this.onExit,
-    this.locale,
-    this.spellOut = false,
+    required this.semanticsLabel,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
-          text: text,
+          child: EzLink(
+            text,
+            key: key,
+            style: style,
+            onTap: onTap,
+            url: url,
+            semanticsLabel: semanticsLabel,
+          ),
+          alignment: PlaceholderAlignment.baseline,
+          baseline: TextBaseline.alphabetic,
           style: style,
-          semanticsLabel: semanticsLabel,
-          recognizer: new TapGestureRecognizer()
-            ..onTap = onTap ?? () => launchUrl(url!),
-          mouseCursor: mouseCursor,
-          onEnter: onEnter,
-          onExit: onExit,
-          locale: locale,
-          spellOut: spellOut,
         );
 }
