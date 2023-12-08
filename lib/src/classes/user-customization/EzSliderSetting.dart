@@ -44,7 +44,7 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
   late double currValue = EzConfig.get(widget.prefsKey);
   late double _defaultValue = EzConfig.getDefault(widget.prefsKey);

@@ -16,7 +16,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Set page/tab title //
+  // Gather the theme data //
+
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
@@ -24,13 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setPageTitle(context, EFUILang.of(context)!.ssPageTitle);
   }
 
-  // Gather theme data //
-
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
-
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
-
-  // Return the Build //
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {

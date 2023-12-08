@@ -13,20 +13,20 @@ class StyleSettingsScreen extends StatefulWidget {
 }
 
 class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
-  // Set page/tab title //
+  // Gather the theme data //
+
+  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double _margin = EzConfig.get(marginKey);
+  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     setPageTitle(context, EFUILang.of(context)!.stsPageTitle);
   }
-
-  // Gather theme data //
-
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
-
-  final double _margin = EzConfig.get(marginKey);
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Return the build //
 

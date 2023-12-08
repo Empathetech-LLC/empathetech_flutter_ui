@@ -51,7 +51,7 @@ class EzColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
   late Color currColor = Color(EzConfig.get(widget.setting));
   late final Color primaryColor = Theme.of(context).colorScheme.primary;

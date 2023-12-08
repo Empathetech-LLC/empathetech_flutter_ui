@@ -13,15 +13,7 @@ class ColorSettingsScreen extends StatefulWidget {
 }
 
 class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
-  // Set page/tab title //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.csPageTitle);
-  }
-
-  // Gather theme data //
+  // Gather the theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
@@ -56,6 +48,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     darkBackgroundKey,
     darkSurfaceKey,
   };
+
+  // Set the page title //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(context, EFUILang.of(context)!.csPageTitle);
+  }
 
   // Return the build //
 

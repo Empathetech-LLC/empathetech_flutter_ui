@@ -19,7 +19,7 @@ class EzFontSetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
   String? currFontFamily = EzConfig.get(fontFamilyKey);
   final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);

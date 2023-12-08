@@ -30,7 +30,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     }
   }
 
-  // Gather theme data //
+  // Gather the theme data //
   final double _padding = EzConfig.get(paddingKey);
 
   @override

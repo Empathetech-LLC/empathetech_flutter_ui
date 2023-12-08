@@ -22,7 +22,7 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
   late Locale currLocale = Localizations.localeOf(context);
 

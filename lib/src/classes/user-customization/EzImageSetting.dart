@@ -55,7 +55,7 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
   late String? currPath = EzConfig.get(widget.prefsKey);
   late bool _updateTheme = (widget.updateTheme != null);

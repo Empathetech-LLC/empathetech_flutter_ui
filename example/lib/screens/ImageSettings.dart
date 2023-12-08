@@ -13,15 +13,7 @@ class ImageSettingsScreen extends StatefulWidget {
 }
 
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
-  // Set page/tab title //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
-  }
-
-  // Gather theme data //
+  // Gather the theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
   late final String _themeProfile = _isLight
@@ -32,6 +24,14 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       EFUILang.of(context)!.isResetAll(_themeProfile);
 
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+
+  // Set the page title //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
+  }
 
   // Return the build //
 

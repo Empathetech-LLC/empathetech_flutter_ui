@@ -12,7 +12,7 @@ class ExampleScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the theme data //
 
     final bool leftHandedUser = (EzConfig.get(isRightHandKey) == false);
 
