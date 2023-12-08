@@ -29,6 +29,7 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color? iconColor = Theme.of(context).colorScheme.secondary;
 
+    final double margin = EzConfig.get(marginKey);
     final double padding = EzConfig.get(paddingKey);
 
     final String _warning = warning ?? EFUILang.of(context)!.gAttention;
@@ -40,7 +41,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(padding / 2),
+            padding: EdgeInsets.all(margin),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
