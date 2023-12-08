@@ -317,36 +317,28 @@ class _ImageSettingState extends State<EzImageSetting> {
       button: true,
       hint: EFUILang.of(context)!.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: ElevatedButton(
+        child: ElevatedButton.icon(
           onPressed: _activateSetting,
           onLongPress: _showCredits,
-          child: EzRow(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Label
-              Text(widget.label, textAlign: TextAlign.center),
-              EzSpacer.row(_padding),
-
-              // Preview
-              ElevatedButton(
-                onPressed: _activateSetting,
-                onLongPress: _showCredits,
-                child: (currPath == null || currPath == noImageValue)
-                    ? Icon(PlatformIcons(context).clear)
-                    : CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        foregroundImage: provideImage(currPath!),
-                        radius: _padding * 2,
-                      ),
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                      padding: (currPath == null || currPath == noImageValue)
-                          ? MaterialStatePropertyAll(EdgeInsets.all(_padding))
-                          : MaterialStatePropertyAll(EdgeInsets.zero),
-                    ),
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
-            ],
+            ),
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: (currPath == null || currPath == noImageValue)
+                  ? Icon(PlatformIcons(context).clear)
+                  : null,
+              foregroundImage: (currPath == null || currPath == noImageValue)
+                  ? null
+                  : provideImage(currPath!),
+              radius: _padding * 2,
+            ),
           ),
+          label: Text(widget.label, textAlign: TextAlign.center),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding:
                     MaterialStatePropertyAll(EdgeInsets.all(_padding * 0.75)),

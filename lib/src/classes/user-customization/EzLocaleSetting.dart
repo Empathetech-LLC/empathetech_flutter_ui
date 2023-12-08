@@ -26,7 +26,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late Locale currLocale = Localizations.localeOf(context);
 
-  final double _padding = EzConfig.get(paddingKey);
   final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
 
   // Gather the list items //
@@ -34,12 +33,13 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   CountryFlag _flag(Locale? locale) {
     final Locale flagLocale = locale ?? Localizations.localeOf(context);
 
-    final double? flagHeight = Theme.of(context)
-        .elevatedButtonTheme
-        .style
-        ?.textStyle
-        ?.resolve({})?.fontSize;
-    final double flagWidth = flagHeight! * 2;
+    final double flagHeight = MediaQuery.textScalerOf(context).scale(
+        Theme.of(context)
+            .elevatedButtonTheme
+            .style!
+            .textStyle!
+            .resolve({})!.fontSize!);
+    final double flagWidth = flagHeight * 2;
 
     return (flagLocale.countryCode == null)
         ? CountryFlag.fromLanguageCode(
@@ -67,7 +67,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       if (locale.countryCode != null) localeData.add(locale.countryCode!);
 
       buttons.addAll([
-        ElevatedButton(
+        ElevatedButton.icon(
           onPressed: () {
             EzConfig.setStringList(localeKey, localeData);
             setState(() {
@@ -75,17 +75,10 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             });
             popScreen(context: context, pass: locale);
           },
-          child: EzRow(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                LocaleNames.of(context)!.nameOf(locale.languageCode).toString(),
-                textAlign: TextAlign.center,
-              ),
-              EzSpacer.row(_padding),
-              _flag(locale),
-            ],
+          icon: _flag(locale),
+          label: Text(
+            LocaleNames.of(context)!.nameOf(locale.languageCode).toString(),
+            textAlign: TextAlign.center,
           ),
         ),
         EzSpacer(_buttonSpacer),
@@ -119,19 +112,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       button: true,
       hint: "$hint. $setting",
       child: ExcludeSemantics(
-        child: ElevatedButton(
+        child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),
-          child: EzRow(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                EFUILang.of(context)!.ssLanguage,
-                textAlign: TextAlign.center,
-              ),
-              EzSpacer.row(_padding),
-              _flag(currLocale),
-            ],
+          icon: _flag(currLocale),
+          label: Text(
+            EFUILang.of(context)!.ssLanguage,
+            textAlign: TextAlign.center,
           ),
         ),
       ),

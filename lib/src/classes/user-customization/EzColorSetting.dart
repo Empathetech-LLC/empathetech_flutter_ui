@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -219,36 +220,24 @@ class _ColorSettingState extends State<EzColorSetting> {
       button: true,
       hint: EFUILang.of(context)!.csPickerSemantics(_label),
       child: ExcludeSemantics(
-        child: ElevatedButton(
+        child: ElevatedButton.icon(
           onPressed: () => _changeColor(context),
           onLongPress: () => _reset(context),
-          child: EzRow(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Label
-              Text(
-                _label,
-                textAlign: TextAlign.center,
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
-              EzSpacer.row(_padding),
-
-              // Color preview
-              ElevatedButton(
-                onPressed: () => _changeColor(context),
-                onLongPress: () => _reset(context),
-                child: Center(
-                  child: Icon(
-                    PlatformIcons(context).edit,
-                    color: getTextColor(currColor),
-                  ),
-                ),
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                      backgroundColor: MaterialStatePropertyAll(currColor),
-                      shape: MaterialStatePropertyAll(const CircleBorder()),
-                    ),
-              ),
-            ],
+            ),
+            child: CircleAvatar(
+              backgroundColor: currColor,
+              radius: _padding * sqrt(2),
+            ),
+          ),
+          label: Text(
+            _label,
+            textAlign: TextAlign.center,
           ),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
