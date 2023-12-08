@@ -21,9 +21,6 @@ class EzLink extends StatefulWidget {
   /// Destination URL
   final Uri? url;
 
-  /// Optional long press functionality
-  final void Function()? onLongPress;
-
   /// Message for screen readers
   final String semanticsLabel;
 
@@ -43,7 +40,6 @@ class EzLink extends StatefulWidget {
     this.textAlign,
     this.onTap,
     this.url,
-    this.onLongPress,
     required this.semanticsLabel,
     this.color,
     this.statesController,
@@ -61,16 +57,11 @@ class _EzLinkState extends State<EzLink> {
     decoration: TextDecoration.none,
   );
 
-  void _addUnderline(bool isHovering) {
-    if (isHovering) {
-      setState(() {
-        _style = _style?.copyWith(decoration: TextDecoration.underline);
-      });
-    } else {
-      setState(() {
-        _style = _style?.copyWith(decoration: TextDecoration.none);
-      });
-    }
+  void _addUnderline(bool addIt) {
+    setState(() {
+      _style = _style?.copyWith(
+          decoration: addIt ? TextDecoration.underline : TextDecoration.none);
+    });
   }
 
   @override
@@ -84,7 +75,7 @@ class _EzLinkState extends State<EzLink> {
           onExit: (_) => _addUnderline(false),
           child: TextButton(
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-            onLongPress: widget.onLongPress,
+            onFocusChange: (hasFocus) => _addUnderline(hasFocus),
             child: Text(
               widget.text,
               style: _style,
