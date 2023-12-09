@@ -14,7 +14,7 @@ const String localeKey = 'appLocale';
 const Map<String, Type> globalKeys = {
   isRightHandKey: bool,
   isLightThemeKey: bool,
-  localeKey: String,
+  localeKey: List<String>,
 };
 
 // Image settings //
