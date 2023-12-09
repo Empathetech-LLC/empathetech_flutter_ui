@@ -113,7 +113,7 @@ class EzConfig {
             userPref = preferences.getString(key);
             break;
 
-          case List:
+          case const (List<String>):
             userPref = preferences.getStringList(key);
             break;
 
@@ -236,7 +236,7 @@ Please add it to the customDefaults when initializing EzConfig""");
         return await _instance!.preferences.setDouble(key, value);
       case String:
         return await _instance!.preferences.setString(key, value);
-      case List:
+      case const (List<String>):
         return await _instance!.preferences.setStringList(key, value);
       default:
         log("""Key [$key] has unsupported Type [$valueType]
