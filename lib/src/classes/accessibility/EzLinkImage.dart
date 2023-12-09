@@ -83,7 +83,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
   final FocusNode _focus = FocusNode();
 
   late final Color _shadowColor =
-      Theme.of(context).colorScheme.primary.withOpacity(0.16);
+      Theme.of(context).colorScheme.primary.withOpacity(0.10);
   late final List<BoxShadow> _shadows =
       widget.shadows ?? [BoxShadow(color: _shadowColor)];
 
