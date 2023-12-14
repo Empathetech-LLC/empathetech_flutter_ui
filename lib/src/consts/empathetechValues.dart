@@ -16,6 +16,8 @@ const String noImageValue = 'noImage';
 // Documentation links //
 
 const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
+const String understandingLayout =
+    'https://m3.material.io/foundations/layout/understanding-layout/spacing';
 
 // Brand Colors //
 

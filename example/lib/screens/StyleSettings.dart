@@ -18,7 +18,12 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
   final double _margin = EzConfig.get(marginKey);
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+
+  late final TextStyle? _descriptionStyle = titleSmall(context);
 
   // Set the page title //
 
@@ -38,9 +43,9 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
         child: EzScrollView(
           children: [
             // Font
-            EzSpacer(_buttonSpacer > _margin ? _buttonSpacer - _margin : 0),
+            EzSpacer(_buttonSpace > _margin ? _buttonSpace - _margin : 0),
             const EzFontSetting(),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Margin
             EzSliderSetting(
@@ -51,7 +56,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 10,
               decimals: 1,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Padding
             EzSliderSetting(
@@ -62,7 +67,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 10,
               decimals: 1,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Button spacing
             EzSliderSetting(
@@ -73,7 +78,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Text spacing
             EzSliderSetting(
@@ -84,7 +89,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
 
             // Local reset all
             EzResetButton(
@@ -95,7 +100,17 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
                 popScreen(context: context, pass: true);
               },
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
+
+            // Help
+            EzLink(
+              EFUILang.of(context)!.gHowToUse,
+              style: _descriptionStyle,
+              textAlign: TextAlign.center,
+              url: Uri.parse(understandingLayout),
+              semanticsLabel: EFUILang.of(context)!.gHowToUseHint,
+            ),
+            _buttonSpacer,
           ],
         ),
       ),
