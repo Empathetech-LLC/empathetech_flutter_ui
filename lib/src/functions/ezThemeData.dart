@@ -77,6 +77,13 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      shape: const CircleBorder(),
+      extendedPadding: EdgeInsets.all(padding),
+    ),
+
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         textStyle: textButtonStyle,
