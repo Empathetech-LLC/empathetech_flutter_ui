@@ -15,7 +15,10 @@
   "gSystem": "System",
   "gLight": "Light",
   "gDark": "Dark",
+
   "gEditingTheme": "Editing: {themeType} theme",
+  "gHowToUse": "How to use this",
+  "gHowToUseHint": "How to use this; activate to open helpful documentation",
 
   "gAttention": "Attention",
   "gCurrently": "Currently:",

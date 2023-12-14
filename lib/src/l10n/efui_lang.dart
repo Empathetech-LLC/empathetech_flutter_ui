@@ -166,6 +166,18 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
+  /// No description provided for @gHowToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use this'**
+  String get gHowToUse;
+
+  /// No description provided for @gHowToUseHint.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use this; activate to open helpful documentation'**
+  String get gHowToUseHint;
+
   /// No description provided for @gAttention.
   ///
   /// In en, this message translates to:
