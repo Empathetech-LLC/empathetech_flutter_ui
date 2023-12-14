@@ -41,14 +41,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final String _resetTitle =
       EFUILang.of(context)!.csResetAll(_themeProfile);
 
-  final Set<String> defaultLightColors = {
+  final Set<String> _defaultLightColors = {
     lightPrimaryKey,
     lightSecondaryKey,
     lightTertiaryKey,
     lightBackgroundKey,
     lightSurfaceKey,
   };
-  final Set<String> defaultDarkColors = {
+  final Set<String> _defaultDarkColors = {
     darkPrimaryKey,
     darkSecondaryKey,
     darkTertiaryKey,
@@ -56,10 +56,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     darkSurfaceKey,
   };
 
-  late final List<Widget> lightButtons = [
+  late final List<Widget> _lightButtons = [
     // Individual settings
     ...EzColorSetting.buildDynamicSet(
-      defaultSet: defaultLightColors,
+      defaultSet: _defaultLightColors,
       fullList: lightColors,
     ),
     _buttonSpacer,
@@ -93,10 +93,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     ),
   ];
 
-  late final List<Widget> darkButtons = [
+  late final List<Widget> _darkButtons = [
     // Individual settings
     ...EzColorSetting.buildDynamicSet(
-      defaultSet: defaultDarkColors,
+      defaultSet: _defaultDarkColors,
       fullList: darkColors,
     ),
     _buttonSpacer,
@@ -147,7 +147,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
-            // Editing reminders
+            // Current theme reminder
             Text(
               EFUILang.of(context)!.gEditingTheme(_themeProfile),
               style: _descriptionStyle,
@@ -156,7 +156,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             _textSpacer,
 
             // Settings
-            ...(_isLight ? lightButtons : darkButtons),
+            ...(_isLight ? _lightButtons : _darkButtons),
             _buttonSeparator,
 
             // Help
