@@ -153,6 +153,17 @@ Must be one of [int, bool, double, String, List<String>]""");
     return _instance!.prefs[key];
   }
 
+  /// Return the user's selected [Locale]?
+  static Locale? getLocale() {
+    final List<String>? localeData = _instance!.prefs[localeKey];
+
+    if (localeData == null) {
+      return null;
+    } else {
+      return Locale(localeData[0], localeData[1]);
+    }
+  }
+
   /// All [Color] keys that the user is tracking
   static Set<String> getUserColors() {
     return _instance!.userColors;
