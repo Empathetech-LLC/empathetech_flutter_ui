@@ -68,11 +68,19 @@ class EzAlertDialog extends PlatformAlertDialog {
           children: contents,
           reverseHands: reverseHands,
         ),
-        contentPadding: EdgeInsets.all(padding),
+        contentPadding: EdgeInsets.only(
+          left: padding,
+          right: padding,
+          bottom: padding,
+        ),
 
         // Actions
         actions: materialActions,
-        actionsPadding: EdgeInsets.all(padding),
+        actionsPadding: EdgeInsets.only(
+          left: padding,
+          right: padding,
+          bottom: padding,
+        ),
 
         // General
         iconPadding: EdgeInsets.all(padding),
