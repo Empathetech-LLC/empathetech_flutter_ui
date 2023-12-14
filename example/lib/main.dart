@@ -88,8 +88,6 @@ class EFUIExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String>? localeData = EzConfig.get(localeKey);
-
     return EzAppProvider(
       app: PlatformApp.router(
         // Production ready!
@@ -105,12 +103,7 @@ class EFUIExample extends StatelessWidget {
         supportedLocales: EFUILang.supportedLocales,
 
         // Current language
-        locale: (localeData == null)
-            ? null
-            : Locale(
-                localeData[0],
-                localeData.length > 1 ? localeData[1] : null,
-              ),
+        locale: EzConfig.getLocale(),
 
         title: efui,
         routerConfig: _router,
