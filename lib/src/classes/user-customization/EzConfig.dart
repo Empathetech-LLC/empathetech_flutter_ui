@@ -160,7 +160,10 @@ Must be one of [int, bool, double, String, List<String>]""");
     if (localeData == null) {
       return null;
     } else {
-      return Locale(localeData[0], localeData[1]);
+      return Locale(
+        localeData[0],
+        (localeData.length > 1) ? localeData[1] : null,
+      );
     }
   }
 
