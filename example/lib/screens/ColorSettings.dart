@@ -17,9 +17,16 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double _textSpace = EzConfig.get(textSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _textSpacer = EzSpacer(_textSpace);
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
+
+  // Define the page content //
 
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
@@ -49,6 +56,80 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     darkSurfaceKey,
   };
 
+  late final List<Widget> lightButtons = [
+    // Individual settings
+    ...EzColorSetting.buildDynamicSet(
+      defaultSet: defaultLightColors,
+      fullList: lightColors,
+    ),
+    _buttonSpacer,
+
+    // ColorScheme source
+    Semantics(
+      button: true,
+      hint: _fromImageHint,
+      child: ExcludeSemantics(
+        child: EzImageSetting(
+          prefsKey: lightColorSchemeImageKey,
+          label: _fromImageLabel,
+          dialogTitle: _fromImageTitle,
+          allowClear: true,
+          updateTheme: Brightness.light,
+          hideThemeMessage: true,
+        ),
+      ),
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      context: context,
+      hint: _resetTitle,
+      dialogTitle: _resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(lightColorKeys.keys.toSet());
+        popScreen(context: context, pass: true);
+      },
+    ),
+  ];
+
+  late final List<Widget> darkButtons = [
+    // Individual settings
+    ...EzColorSetting.buildDynamicSet(
+      defaultSet: defaultDarkColors,
+      fullList: darkColors,
+    ),
+    _buttonSpacer,
+
+    // ColorScheme source
+    Semantics(
+      button: true,
+      hint: _fromImageHint,
+      child: ExcludeSemantics(
+        child: EzImageSetting(
+          prefsKey: darkColorSchemeImageKey,
+          label: _fromImageLabel,
+          dialogTitle: _fromImageTitle,
+          allowClear: true,
+          updateTheme: Brightness.dark,
+          hideThemeMessage: true,
+        ),
+      ),
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      context: context,
+      hint: _resetTitle,
+      dialogTitle: _resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(darkColorKeys.keys.toSet());
+        popScreen(context: context, pass: true);
+      },
+    ),
+  ];
+
   // Set the page title //
 
   @override
@@ -72,91 +153,21 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               style: _descriptionStyle,
               textAlign: TextAlign.center,
             ),
-            EzSpacer(_buttonSpacer),
+            _textSpacer,
 
-            // Settings //
+            // Settings
+            ...(_isLight ? lightButtons : darkButtons),
+            _buttonSeparator,
 
-            // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-            EzScrollView(
-              scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
-              primary: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: _isLight
-                    ? [
-                        // Individual settings
-                        ...EzColorSetting.buildDynamicSet(
-                          defaultSet: defaultLightColors,
-                          fullList: lightColors,
-                        ),
-
-                        // ColorScheme source
-                        Semantics(
-                          button: true,
-                          hint: _fromImageHint,
-                          child: ExcludeSemantics(
-                            child: EzImageSetting(
-                              prefsKey: lightColorSchemeImageKey,
-                              label: _fromImageLabel,
-                              dialogTitle: _fromImageTitle,
-                              allowClear: true,
-                              updateTheme: Brightness.light,
-                              hideThemeMessage: true,
-                            ),
-                          ),
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Local reset all
-                        EzResetButton(
-                          context: context,
-                          hint: _resetTitle,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.removeKeys(lightColorKeys.keys.toSet());
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
-                      ]
-                    : [
-                        // Individual settings
-                        ...EzColorSetting.buildDynamicSet(
-                          defaultSet: defaultDarkColors,
-                          fullList: darkColors,
-                        ),
-
-                        // ColorScheme source
-                        Semantics(
-                          button: true,
-                          hint: _fromImageHint,
-                          child: ExcludeSemantics(
-                            child: EzImageSetting(
-                              prefsKey: darkColorSchemeImageKey,
-                              label: _fromImageLabel,
-                              dialogTitle: _fromImageTitle,
-                              allowClear: true,
-                              updateTheme: Brightness.dark,
-                              hideThemeMessage: true,
-                            ),
-                          ),
-                        ),
-                        EzSpacer(_buttonSpacer),
-
-                        // Local reset all
-                        EzResetButton(
-                          context: context,
-                          hint: _resetTitle,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.removeKeys(darkColorKeys.keys.toSet());
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
-                      ],
-              ),
+            // Help
+            EzLink(
+              EFUILang.of(context)!.gHowToUse,
+              style: _descriptionStyle,
+              textAlign: TextAlign.center,
+              url: Uri.parse(materialColorRoles),
+              semanticsLabel: EFUILang.of(context)!.gHowToUseHint,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
           ],
         ),
       ),
