@@ -20,7 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double _textSpace = EzConfig.get(textSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _textSpacer = EzSpacer(_textSpace);
 
   // Set the page title //
 
@@ -46,45 +51,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   : EFUILang.of(context)!.ssSettingsGuideWeb,
               style: headlineSmall(context),
             ),
-            EzSpacer(_buttonSpacer),
+            _textSpacer,
 
             // Global settings
             const EzDominantHandSwitch(),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             const EzThemeModeSwitch(),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
 
             const EzLocaleSetting(),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Image settings
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
               child: Text(EFUILang.of(context)!.isPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
               child: Text(EFUILang.of(context)!.csPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Style settings
             ElevatedButton(
               onPressed: () => context.goNamed(styleSettingsRoute),
               child: Text(EFUILang.of(context)!.stsPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
 
             // Reset button
             EzResetButton(
               context: context,
               dialogTitle: EFUILang.of(context)!.ssResetAll,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
           ],
         ),
       ),
