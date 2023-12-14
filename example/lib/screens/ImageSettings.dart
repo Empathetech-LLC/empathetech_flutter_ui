@@ -16,6 +16,16 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Gather the theme data //
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double _textSpace = EzConfig.get(textSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _textSpacer = EzSpacer(_textSpace);
+
+  // Define the page content //
+
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
@@ -23,7 +33,47 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   late final String _resetTitle =
       EFUILang.of(context)!.isResetAll(_themeProfile);
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  late final List<Widget> _lightButtons = [
+    // Page
+    EzImageSetting(
+      prefsKey: lightPageImageKey,
+      label: EFUILang.of(context)!.isBackground,
+      allowClear: true,
+      updateTheme: Brightness.light,
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      context: context,
+      dialogTitle: _resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(lightImageKeys.keys.toSet());
+        popScreen(context: context, pass: true);
+      },
+    ),
+  ];
+
+  late final List<Widget> _darkButtons = [
+    // Page
+    EzImageSetting(
+      prefsKey: darkPageImageKey,
+      label: EFUILang.of(context)!.isBackground,
+      allowClear: true,
+      updateTheme: Brightness.dark,
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      context: context,
+      dialogTitle: _resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(darkImageKeys.keys.toSet());
+        popScreen(context: context, pass: true);
+      },
+    ),
+  ];
 
   // Set the page title //
 
@@ -42,60 +92,17 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
-            // Current theme mode reminder
+            // Current theme reminder
             Text(
               EFUILang.of(context)!.gEditingTheme(_themeProfile),
               style: titleSmall(context),
               textAlign: TextAlign.center,
             ),
-            EzSpacer(_buttonSpacer),
+            _textSpacer,
 
-            // Settings //
-
-            // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-            EzScrollView(
-              scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
-              primary: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: _isLight
-                    ? // Editing light theme //
-                    [
-                        // Page
-                        EzImageSetting(
-                          prefsKey: lightPageImageKey,
-                          label: EFUILang.of(context)!.isBackground,
-                          allowClear: true,
-                          updateTheme: Brightness.light,
-                        ),
-                      ]
-                    : // Editing dark theme //
-                    [
-                        // Page
-                        EzImageSetting(
-                          prefsKey: darkPageImageKey,
-                          label: EFUILang.of(context)!.isBackground,
-                          allowClear: true,
-                          updateTheme: Brightness.dark,
-                        ),
-                      ],
-              ),
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Local reset all
-            EzResetButton(
-              context: context,
-              dialogTitle: _resetTitle,
-              onConfirm: () {
-                EzConfig.removeKeys(_isLight
-                    ? lightImageKeys.keys.toSet()
-                    : darkImageKeys.keys.toSet());
-                popScreen(context: context, pass: true);
-              },
-            ),
-            EzSpacer(_buttonSpacer),
+            // Settings
+            ...(_isLight ? _lightButtons : _darkButtons),
+            _buttonSpacer,
           ],
         ),
       ),
