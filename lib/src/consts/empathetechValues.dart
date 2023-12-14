@@ -13,6 +13,10 @@ const String efui = "Empathetech Flutter UI";
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
 
+// Documentation links //
+
+const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
+
 // Brand Colors //
 
 const int EmpathEucalyptusHex = 0xFF20DAA5;
