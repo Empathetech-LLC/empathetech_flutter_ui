@@ -24,7 +24,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   String? currFontFamily = EzConfig.get(fontFamilyKey);
   final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
   // Define button functions //
 
@@ -51,7 +52,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             textAlign: TextAlign.center,
           ),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
       ]);
     });
 
