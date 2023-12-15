@@ -16,8 +16,12 @@ class EzAlertDialog extends PlatformAlertDialog {
   /// Dialog's [title]
   final Widget? title;
 
-  /// Dialog's main [content] to be wrapped in an [EzScrollView]
-  final List<Widget> contents;
+  /// Dialog's main [content]
+  final Widget? content;
+
+  /// Optional [content] override
+  /// Wraps [contents] in an [EzScrollView]
+  final List<Widget>? contents;
 
   /// [AlertDialog.actions]s to be displayed below the [contents]
   /// Pairs best with [ezMaterialActions]
@@ -36,11 +40,15 @@ class EzAlertDialog extends PlatformAlertDialog {
     this.key,
     this.widgetKey,
     required this.title,
-    required this.contents,
+    this.content,
+    this.contents,
     this.materialActions,
     this.cupertinoActions,
     this.needsClose = true,
-  });
+  }) : assert(
+          (content == null) != (contents == null),
+          'Either content or contents should be provided, but not both.',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +68,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         titlePadding: EdgeInsets.all(padding),
 
         // Content
-        content: EzScrollView(children: contents),
+        content: content ?? EzScrollView(children: contents),
         contentPadding: EdgeInsets.only(
           left: padding,
           right: padding,
@@ -86,7 +94,7 @@ class EzAlertDialog extends PlatformAlertDialog {
           padding: EdgeInsets.only(bottom: padding),
           child: title,
         ),
-        content: EzScrollView(children: contents),
+        content: content ?? EzScrollView(children: contents),
         actions: cupertinoActions == null
             ? [_closeAction]
             : (needsClose)
