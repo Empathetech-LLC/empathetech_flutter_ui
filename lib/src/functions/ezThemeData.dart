@@ -129,6 +129,9 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Popup menu
+    popupMenuTheme: PopupMenuThemeData(textStyle: dialogContentStyle),
+
     // TabBar
     tabBarTheme: TabBarTheme(labelStyle: tabBarTextStyle),
   );
