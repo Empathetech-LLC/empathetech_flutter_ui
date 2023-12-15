@@ -17,8 +17,8 @@
   "gDark": "Oscuro",
 
   "gEditingTheme": "Editando: tema {themeType}",
-  "gHowToUse": "Cómo usar esto",
-  "gHowToUseHint": "Cómo usar esto; activar para abrir documentación útil",
+  "gHowThisWorks": "Cómo funciona esto",
+  "gHowThisWorksHint": "Cómo funciona esto; activar para abrir documentación útil",
 
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",

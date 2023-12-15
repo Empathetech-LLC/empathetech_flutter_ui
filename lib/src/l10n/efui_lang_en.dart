@@ -43,11 +43,11 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get gHowToUse => 'How to use this';
+  String get gHowThisWorks => 'How this works';
 
   @override
-  String get gHowToUseHint =>
-      'How to use this; activate to open helpful documentation';
+  String get gHowThisWorksHint =>
+      'How this works; activate to open helpful documentation';
 
   @override
   String get gAttention => 'Attention';
