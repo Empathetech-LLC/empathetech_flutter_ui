@@ -14,6 +14,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
 
+  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
   final TextStyle appBarTextStyle =
@@ -134,5 +135,17 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // TabBar
     tabBarTheme: TabBarTheme(labelStyle: tabBarTextStyle),
+
+    // Tooltip
+    tooltipTheme: TooltipThemeData(
+      margin: EdgeInsets.all(margin),
+      padding: EdgeInsets.all(padding),
+      textStyle: pageTextStyle,
+      textAlign: TextAlign.center,
+      decoration: BoxDecoration(
+        color: colorScheme.background,
+        border: Border.all(color: colorScheme.secondary),
+      ),
+    ),
   );
 }
