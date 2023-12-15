@@ -104,11 +104,11 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
             // Help
             EzLink(
-              EFUILang.of(context)!.gHowToUse,
+              EFUILang.of(context)!.gHowThisWorks,
               style: _descriptionStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
-              semanticsLabel: EFUILang.of(context)!.gHowToUseHint,
+              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
             ),
             _buttonSpacer,
           ],

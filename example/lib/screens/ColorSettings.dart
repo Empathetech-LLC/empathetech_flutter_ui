@@ -161,11 +161,11 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
             // Help
             EzLink(
-              EFUILang.of(context)!.gHowToUse,
+              EFUILang.of(context)!.gHowThisWorks,
               style: _descriptionStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(materialColorRoles),
-              semanticsLabel: EFUILang.of(context)!.gHowToUseHint,
+              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
             ),
             _buttonSpacer,
           ],
