@@ -18,11 +18,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
   final double _buttonSpace = EzConfig.get(buttonSpacingKey);
-  final double _textSpace = EzConfig.get(textSpacingKey);
 
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
-  late final EzSpacer _textSpacer = EzSpacer(_textSpace);
+  late final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
 
