@@ -13,6 +13,10 @@ class EzLink extends StatefulWidget {
   final String text;
 
   final TextStyle? style;
+
+  /// Optional [Color] to overwrite the default [ColorScheme.primary]
+  final Color? color;
+
   final TextAlign? textAlign;
 
   /// Destination function
@@ -24,24 +28,22 @@ class EzLink extends StatefulWidget {
   /// Message for screen readers
   final String semanticsLabel;
 
-  final Color? color;
-
   final MaterialStatesController? statesController;
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticsLabel] for screen readers
-  /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover
+  /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzLink(
     this.text, {
     this.key,
     this.style,
+    this.color,
     this.textAlign,
     this.onTap,
     this.url,
     required this.semanticsLabel,
-    this.color,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -52,15 +54,20 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
+  late final Color _color =
+      widget.color ?? Theme.of(context).colorScheme.primary;
+
   late TextStyle? _style = widget.style?.copyWith(
-    color: widget.color ?? Theme.of(context).colorScheme.primary,
+    color: _color,
+    decorationColor: _color,
     decoration: TextDecoration.none,
   );
 
   void _addUnderline(bool addIt) {
     setState(() {
       _style = _style?.copyWith(
-          decoration: addIt ? TextDecoration.underline : TextDecoration.none);
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
     });
   }
 
@@ -70,17 +77,14 @@ class _EzLinkState extends State<EzLink> {
       link: true,
       hint: widget.semanticsLabel,
       child: ExcludeSemantics(
-        child: MouseRegion(
-          onEnter: (_) => _addUnderline(true),
-          onExit: (_) => _addUnderline(false),
-          child: TextButton(
-            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-            onFocusChange: (hasFocus) => _addUnderline(hasFocus),
-            child: Text(
-              widget.text,
-              style: _style,
-              textAlign: widget.textAlign,
-            ),
+        child: TextButton(
+          onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+          onHover: (isHovering) => _addUnderline(isHovering),
+          onFocusChange: (hasFocus) => _addUnderline(hasFocus),
+          child: Text(
+            widget.text,
+            style: _style,
+            textAlign: widget.textAlign,
           ),
         ),
       ),
