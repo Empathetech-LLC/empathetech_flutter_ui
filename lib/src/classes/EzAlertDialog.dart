@@ -19,9 +19,6 @@ class EzAlertDialog extends PlatformAlertDialog {
   /// Dialog's main [content] to be wrapped in an [EzScrollView]
   final List<Widget> contents;
 
-  /// Passed the [EzScrollView] wrapper around [contents]
-  final bool reverseHands;
-
   /// [AlertDialog.actions]s to be displayed below the [contents]
   /// Pairs best with [ezMaterialActions]
   final List<Widget>? materialActions;
@@ -40,7 +37,6 @@ class EzAlertDialog extends PlatformAlertDialog {
     this.widgetKey,
     required this.title,
     required this.contents,
-    this.reverseHands = false,
     this.materialActions,
     this.cupertinoActions,
     this.needsClose = true,
@@ -64,10 +60,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         titlePadding: EdgeInsets.all(padding),
 
         // Content
-        content: EzScrollView(
-          children: contents,
-          reverseHands: reverseHands,
-        ),
+        content: EzScrollView(children: contents),
         contentPadding: EdgeInsets.only(
           left: padding,
           right: padding,
@@ -93,10 +86,7 @@ class EzAlertDialog extends PlatformAlertDialog {
           padding: EdgeInsets.only(bottom: padding),
           child: title,
         ),
-        content: EzScrollView(
-          children: contents,
-          reverseHands: reverseHands,
-        ),
+        content: EzScrollView(children: contents),
         actions: cupertinoActions == null
             ? [_closeAction]
             : (needsClose)
