@@ -29,10 +29,6 @@ class EzConfig {
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
-  /// All [Color] keys that are being tracked by the user
-  /// They can be used to populate a dynamic color settings screen
-  final Set<String> userColors;
-
   /// Private instance
   static EzConfig? _instance;
 
@@ -43,7 +39,6 @@ class EzConfig {
     required this.defaults,
     required this.keys,
     required this.prefs,
-    required this.userColors,
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
@@ -75,7 +70,7 @@ class EzConfig {
         }
       }
 
-      // Build this.prefs (and this.userColors) //
+      // Build this.prefs //
 
       // Start with the newly merged defaults
       Map<String, dynamic> _prefs = new Map.from(_defaults);
@@ -83,9 +78,6 @@ class EzConfig {
       // Find the keys that users have overwritten
       final Set<String> overwritten =
           preferences.getKeys().intersection(_keys.keys.toSet());
-
-      // Gather the colorKeys that the user is tracking
-      Set<String> _userColors = {};
 
       // Get the updated values
       overwritten.forEach((key) {
@@ -99,10 +91,6 @@ class EzConfig {
 
           case int:
             userPref = preferences.getInt(key);
-
-            if (userPref != null && allColors.contains(key)) {
-              _userColors.add(key);
-            }
             break;
 
           case double:
@@ -134,7 +122,6 @@ Must be one of [int, bool, double, String, List<String>]""");
         defaults: _defaults,
         prefs: _prefs,
         keys: _keys,
-        userColors: _userColors,
       );
     }
 
@@ -146,11 +133,15 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   // Getters //
 
-  /// Get the [keys] EzConfig value?
+  /// Get the [key]s EzConfig value?
   /// Uses the live values from [prefs]
-  /// Faster but less reliable than the other getters
   static dynamic get(String key) {
     return _instance!.prefs[key];
+  }
+
+  /// Get the [key]s default EzConfig value?
+  static dynamic getDefault(String key) {
+    return _instance!.defaults[key];
   }
 
   /// Return the user's selected [Locale]?
@@ -167,48 +158,32 @@ Must be one of [int, bool, double, String, List<String>]""");
     }
   }
 
-  /// All [Color] keys that the user is tracking
-  static Set<String> getUserColors() {
-    return _instance!.userColors;
-  }
-
-  /// Get the [keys] default EzConfig value?
-  /// Fast && reliable
-  static dynamic getDefault(String key) {
-    return _instance!.defaults[key];
-  }
-
-  /// Get the [keys] EzConfig value
+  /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
-  /// Slower but more reliable than [EzConfig.get]
   static bool? getBool(String key) {
     return _instance!.preferences.getBool(key);
   }
 
-  /// Get the [keys] EzConfig value
+  /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
-  /// Slower but more reliable than [EzConfig.get]
   static int? getInt(String key) {
     return _instance!.preferences.getInt(key);
   }
 
-  /// Get the [keys] EzConfig value
+  /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
-  /// Slower but more reliable than [EzConfig.get]
   static double? getDouble(String key) {
     return _instance!.preferences.getDouble(key);
   }
 
-  /// Get the [keys] EzConfig value
+  /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
-  /// Slower but more reliable than [EzConfig.get]
   static String? getString(String key) {
     return _instance!.preferences.getString(key);
   }
 
-  /// Get the [keys] EzConfig value
+  /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
-  /// Slower but more reliable than [EzConfig.get]
   static List<String>? getStringList(String key) {
     return _instance!.preferences.getStringList(key);
   }
@@ -229,74 +204,39 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   // Setters //
 
-  /// Set [key] to [value] - EzConfig must be initialized
-  /// Handles [Type] checking
-  /// If the [Type] is known, the direct setters are faster
-  /// [EzConfig.setInt], [EzConfig.setBool], [EzConfig.setDouble], [EzConfig.setString], [EzConfig.setStringList]
-  static Future<bool> set(String key, dynamic value) async {
-    Type? valueType = _instance!.keys[key];
-    if (valueType == null) {
-      log("""Key [$key] is not in the known EFUI universe
-Please add it to the customDefaults when initializing EzConfig""");
-      return false;
-    }
-
-    switch (valueType) {
-      case bool:
-        return await _instance!.preferences.setBool(key, value);
-      case int:
-        return await _instance!.preferences.setInt(key, value);
-      case double:
-        return await _instance!.preferences.setDouble(key, value);
-      case String:
-        return await _instance!.preferences.setString(key, value);
-      case const (List<String>):
-        return await _instance!.preferences.setStringList(key, value);
-      default:
-        log("""Key [$key] has unsupported Type [$valueType]
-Must be one of [int, bool, double, String, List<String>]""");
-        return false;
-    }
-  }
-
   /// Set the EzConfig [key] to [value]
-  /// EzConfig must be initialized
   static Future<bool> setBool(String key, bool value) async {
     return await _instance!.preferences.setBool(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
-  /// EzConfig must be initialized
   static Future<bool> setInt(String key, int value) async {
     return await _instance!.preferences.setInt(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
-  /// EzConfig must be initialized
   static Future<bool> setDouble(String key, double value) async {
     return await _instance!.preferences.setDouble(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
-  /// EzConfig must be initialized
   static Future<bool> setString(String key, String value) async {
     return await _instance!.preferences.setString(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
-  /// EzConfig must be initialized
   static Future<bool> setStringList(String key, List<String> value) async {
     return await _instance!.preferences.setStringList(key, value);
   }
 
-  // Cleaners //
+  // Removers //
 
   /// Remove the custom value for [key]
-  /// EzConfig must be initialized
   static Future<bool> remove(String key) async {
     return await _instance!.preferences.remove(key);
   }
 
+  /// Remove the [keys] custom values
   static void removeKeys(Set<String> keys) async {
     final Set<String> updated =
         keys.intersection(_instance!.preferences.getKeys());
