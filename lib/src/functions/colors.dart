@@ -17,6 +17,16 @@ Color invertColor(Color toInvert) {
   );
 }
 
+/// Returns the mathematical average of [color1] and [color2]
+Color blendColors(Color color1, Color color2) {
+  return Color.fromARGB(
+    ((color1.opacity + color2.opacity) / 2 * 255).round(),
+    ((color1.red + color2.red) / 2).round(),
+    ((color1.green + color2.green) / 2).round(),
+    ((color1.blue + color2.blue) / 2).round(),
+  );
+}
+
 /// Returns the guesstimated most readable text color (black/white) for [background]
 /// Formula credit: https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
 Color getTextColor(Color background) {
@@ -28,17 +38,7 @@ Color getTextColor(Color background) {
       : whiteHex);
 }
 
-/// Returns the mathematical average of [color1] and [color2]
-Color blendColors(Color color1, Color color2) {
-  return Color.fromARGB(
-    ((color1.opacity + color2.opacity) / 2 * 255).round(),
-    ((color1.red + color2.red) / 2).round(),
-    ((color1.green + color2.green) / 2).round(),
-    ((color1.blue + color2.blue) / 2).round(),
-  );
-}
-
-/// Generate a [ColorScheme] based on values present in [EzConfig]
+/// Generate a [ColorScheme] based on values present in [EzConfig.prefs]
 ColorScheme ezColorScheme(Brightness brightness) {
   Color? getColor(String key) {
     final int? value = EzConfig.get(key);
@@ -117,6 +117,8 @@ ColorScheme ezColorScheme(Brightness brightness) {
         );
 }
 
+/// Generates a [ColorScheme] based on the image found at [path]
+/// Then stores the values in [EzConfig.preferences]
 Future<void> storeImageColorScheme({
   required Brightness brightness,
   required String path,
@@ -209,7 +211,8 @@ Future<void> storeImageColorScheme({
   }
 }
 
-String getColorName(String key, BuildContext context) {
+/// Get the human readable name of a [key]s color
+String getColorName(BuildContext context, String key) {
   switch (key) {
     case lightPrimaryKey:
     case darkPrimaryKey:
@@ -333,5 +336,133 @@ String getColorName(String key, BuildContext context) {
 
     default:
       return "null";
+  }
+}
+
+/// Resolve the color [key] to the live [ColorScheme] value
+Color getLiveColor(BuildContext context, String key) {
+  switch (key) {
+    case lightPrimaryKey:
+    case darkPrimaryKey:
+      return Theme.of(context).colorScheme.primary;
+
+    case lightOnPrimaryKey:
+    case darkOnPrimaryKey:
+      return Theme.of(context).colorScheme.onPrimary;
+
+    case lightPrimaryContainerKey:
+    case darkPrimaryContainerKey:
+      return Theme.of(context).colorScheme.onPrimaryContainer;
+
+    case lightOnPrimaryContainerKey:
+    case darkOnPrimaryContainerKey:
+      return Theme.of(context).colorScheme.onPrimaryContainer;
+
+    case lightSecondaryKey:
+    case darkSecondaryKey:
+      return Theme.of(context).colorScheme.secondary;
+
+    case lightOnSecondaryKey:
+    case darkOnSecondaryKey:
+      return Theme.of(context).colorScheme.onSecondary;
+
+    case lightSecondaryContainerKey:
+    case darkSecondaryContainerKey:
+      return Theme.of(context).colorScheme.secondaryContainer;
+
+    case lightOnSecondaryContainerKey:
+    case darkOnSecondaryContainerKey:
+      return Theme.of(context).colorScheme.onSecondaryContainer;
+
+    case lightTertiaryKey:
+    case darkTertiaryKey:
+      return Theme.of(context).colorScheme.tertiary;
+
+    case lightOnTertiaryKey:
+    case darkOnTertiaryKey:
+      return Theme.of(context).colorScheme.onTertiary;
+
+    case lightTertiaryContainerKey:
+    case darkTertiaryContainerKey:
+      return Theme.of(context).colorScheme.tertiaryContainer;
+
+    case lightOnTertiaryContainerKey:
+    case darkOnTertiaryContainerKey:
+      return Theme.of(context).colorScheme.onTertiaryContainer;
+
+    case lightErrorKey:
+    case darkErrorKey:
+      return Theme.of(context).colorScheme.error;
+
+    case lightOnErrorKey:
+    case darkOnErrorKey:
+      return Theme.of(context).colorScheme.onError;
+
+    case lightErrorContainerKey:
+    case darkErrorContainerKey:
+      return Theme.of(context).colorScheme.errorContainer;
+
+    case lightOnErrorContainerKey:
+    case darkOnErrorContainerKey:
+      return Theme.of(context).colorScheme.onErrorContainer;
+
+    case lightOutlineKey:
+    case darkOutlineKey:
+      return Theme.of(context).colorScheme.outline;
+
+    case lightOutlineVariantKey:
+    case darkOutlineVariantKey:
+      return Theme.of(context).colorScheme.outlineVariant;
+
+    case lightBackgroundKey:
+    case darkBackgroundKey:
+      return Theme.of(context).colorScheme.background;
+
+    case lightOnBackgroundKey:
+    case darkOnBackgroundKey:
+      return Theme.of(context).colorScheme.background;
+
+    case lightSurfaceKey:
+    case darkSurfaceKey:
+      return Theme.of(context).colorScheme.surface;
+
+    case lightOnSurfaceKey:
+    case darkOnSurfaceKey:
+      return Theme.of(context).colorScheme.onSurface;
+
+    case lightSurfaceVariantKey:
+    case darkSurfaceVariantKey:
+      return Theme.of(context).colorScheme.surfaceVariant;
+
+    case lightOnSurfaceVariantKey:
+    case darkOnSurfaceVariantKey:
+      return Theme.of(context).colorScheme.onSurfaceVariant;
+
+    case lightInverseSurfaceKey:
+    case darkInverseSurfaceKey:
+      return Theme.of(context).colorScheme.inverseSurface;
+
+    case lightOnInverseSurfaceKey:
+    case darkOnInverseSurfaceKey:
+      return Theme.of(context).colorScheme.onInverseSurface;
+
+    case lightInversePrimaryKey:
+    case darkInversePrimaryKey:
+      return Theme.of(context).colorScheme.inversePrimary;
+
+    case lightScrimKey:
+    case darkScrimKey:
+      return Theme.of(context).colorScheme.scrim;
+
+    case lightShadowKey:
+    case darkShadowKey:
+      return Theme.of(context).colorScheme.shadow;
+
+    case lightSurfaceTintKey:
+    case darkSurfaceTintKey:
+      return Theme.of(context).colorScheme.surfaceTint;
+
+    default:
+      return Colors.transparent;
   }
 }
