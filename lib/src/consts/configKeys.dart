@@ -11,10 +11,13 @@ const String isLightThemeKey = 'isLightTheme';
 
 const String localeKey = 'appLocale';
 
+const String userColorsKey = 'userColors';
+
 const Map<String, Type> globalKeys = {
   isRightHandKey: bool,
   isLightThemeKey: bool,
   localeKey: List<String>,
+  userColorsKey: List<String>,
 };
 
 // Image settings //
@@ -280,8 +283,6 @@ const Map<String, Type> styleKeys = {
 
 // Global trackers //
 
-const String textColorPrefix = "On";
-
 const Map<String, Type> allKeys = {
   ...globalKeys,
   ...lightImageKeys,
@@ -295,3 +296,5 @@ const Set<String> allColors = {
   ...lightColors,
   ...darkColors,
 };
+
+const String textColorPrefix = "On";
