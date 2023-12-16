@@ -25,20 +25,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final TextStyle? _descriptionStyle = titleSmall(context);
 
-  // Define the page content //
-
-  late final String _themeProfile = _isLight
-      ? EFUILang.of(context)!.gLight.toLowerCase()
-      : EFUILang.of(context)!.gDark.toLowerCase();
-
-  late final String _fromImageLabel = EFUILang.of(context)!.csSchemeBase;
-  late final String _fromImageTitle =
-      "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
-  late final String _fromImageHint =
-      "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
-
-  late final String _resetTitle =
-      EFUILang.of(context)!.csResetAll(_themeProfile);
+  // Define the static page content //
 
   final List<String> _defaultLightColors = [
     lightPrimaryKey,
@@ -47,6 +34,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     lightBackgroundKey,
     lightSurfaceKey,
   ];
+
   final List<String> _defaultDarkColors = [
     darkPrimaryKey,
     darkSecondaryKey,
@@ -55,6 +43,26 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     darkSurfaceKey,
   ];
 
+  late final String _themeProfile = _isLight
+      ? EFUILang.of(context)!.gLight.toLowerCase()
+      : EFUILang.of(context)!.gDark.toLowerCase();
+
+  /// Build from image button label
+  late final String _fromImageLabel = EFUILang.of(context)!.csSchemeBase;
+  late final String _fromImageHint =
+      "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
+
+  /// Build from image button dialog title
+  late final String _fromImageTitle =
+      "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
+
+  /// Reset button dialog title
+  late final String _resetTitle =
+      EFUILang.of(context)!.csResetAll(_themeProfile);
+
+  // Define the dynamic page content //
+
+  /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
   List<Widget> _dynamicColorSettings({
     required List<String> defaultList,
     required List<String> fullList,
@@ -71,80 +79,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
     return toReturn;
   }
-
-  late List<Widget> _lightButtons = [
-    // Individual settings
-    ..._dynamicColorSettings(
-      defaultList: _defaultLightColors,
-      fullList: lightColors,
-    ),
-    _buttonSpacer,
-
-    // ColorScheme source
-    Semantics(
-      button: true,
-      hint: _fromImageHint,
-      child: ExcludeSemantics(
-        child: EzImageSetting(
-          prefsKey: lightColorSchemeImageKey,
-          label: _fromImageLabel,
-          dialogTitle: _fromImageTitle,
-          allowClear: true,
-          updateTheme: Brightness.light,
-          hideThemeMessage: true,
-        ),
-      ),
-    ),
-    _buttonSeparator,
-
-    // Local reset all
-    EzResetButton(
-      context: context,
-      hint: _resetTitle,
-      dialogTitle: _resetTitle,
-      onConfirm: () {
-        EzConfig.removeKeys(lightColorKeys.keys.toSet());
-        popScreen(context: context, pass: true);
-      },
-    ),
-  ];
-
-  late final List<Widget> _darkButtons = [
-    // Individual settings
-    ..._dynamicColorSettings(
-      defaultList: _defaultDarkColors,
-      fullList: darkColors,
-    ),
-    _buttonSpacer,
-
-    // ColorScheme source
-    Semantics(
-      button: true,
-      hint: _fromImageHint,
-      child: ExcludeSemantics(
-        child: EzImageSetting(
-          prefsKey: darkColorSchemeImageKey,
-          label: _fromImageLabel,
-          dialogTitle: _fromImageTitle,
-          allowClear: true,
-          updateTheme: Brightness.dark,
-          hideThemeMessage: true,
-        ),
-      ),
-    ),
-    _buttonSeparator,
-
-    // Local reset all
-    EzResetButton(
-      context: context,
-      hint: _resetTitle,
-      dialogTitle: _resetTitle,
-      onConfirm: () {
-        EzConfig.removeKeys(darkColorKeys.keys.toSet());
-        popScreen(context: context, pass: true);
-      },
-    ),
-  ];
 
   // Set the page title //
 
@@ -171,8 +105,49 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             ),
             _textSpacer,
 
-            // Settings
-            ...(_isLight ? _lightButtons : _darkButtons),
+            // Dynamic settings
+            ...(_isLight
+                ? _dynamicColorSettings(
+                    defaultList: _defaultLightColors,
+                    fullList: lightColors,
+                  )
+                : _dynamicColorSettings(
+                    defaultList: _defaultDarkColors,
+                    fullList: darkColors,
+                  )),
+            _buttonSpacer,
+
+            // Build from image
+            Semantics(
+              button: true,
+              hint: _fromImageHint,
+              child: ExcludeSemantics(
+                child: EzImageSetting(
+                  prefsKey: _isLight
+                      ? lightColorSchemeImageKey
+                      : darkColorSchemeImageKey,
+                  label: _fromImageLabel,
+                  dialogTitle: _fromImageTitle,
+                  allowClear: true,
+                  updateTheme: _isLight ? Brightness.light : Brightness.dark,
+                  hideThemeMessage: true,
+                ),
+              ),
+            ),
+            _buttonSeparator,
+
+            // Local reset all
+            EzResetButton(
+              context: context,
+              hint: _resetTitle,
+              dialogTitle: _resetTitle,
+              onConfirm: () {
+                EzConfig.removeKeys(_isLight
+                    ? lightColorKeys.keys.toSet()
+                    : darkColorKeys.keys.toSet());
+                popScreen(context: context, pass: true);
+              },
+            ),
             _buttonSeparator,
 
             // Help
