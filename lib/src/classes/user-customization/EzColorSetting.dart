@@ -16,39 +16,11 @@ class EzColorSetting extends StatefulWidget {
   final String setting;
 
   /// Creates a tool for [setting] ColorScheme values via [EzConfig]
-  /// When [setting] text ("on") colors, the base (no-"on") color will be used to generate a recommendation via [getTextColor]
+  /// When [setting] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
   const EzColorSetting({this.key, required this.setting}) : super(key: key);
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
-
-  /// Returns a list of [EzColorSetting]s based on [defaultSet] and the users current [EzConfig.preferences]
-  /// By default, the [EzSpacer] size [spacer] is based on [buttonSpacingKey]
-  static List<Widget> buildDynamicSet({
-    required Set<String> defaultSet,
-    required List<String> fullList,
-    double? spacer,
-  }) {
-    List<Widget> buttons = [];
-
-    final double _spacer = spacer ?? EzConfig.get(buttonSpacingKey);
-
-    final Set<String> toReturn = {
-      ...defaultSet,
-      ...EzConfig.getUserColors(),
-    };
-
-    for (String colorKey in fullList) {
-      if (toReturn.contains(colorKey)) {
-        buttons.addAll([
-          EzColorSetting(setting: colorKey),
-          EzSpacer(_spacer),
-        ]);
-      }
-    }
-
-    return buttons;
-  }
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
