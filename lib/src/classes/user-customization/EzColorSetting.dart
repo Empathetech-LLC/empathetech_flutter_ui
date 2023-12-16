@@ -7,6 +7,7 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -26,12 +27,14 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather the theme data //
 
-  late Color currColor = Color(EzConfig.get(widget.setting));
-  late final Color primaryColor = Theme.of(context).colorScheme.primary;
+  late final int? _prefsValue = EzConfig.get(widget.setting);
+  late Color currColor = (_prefsValue == null)
+      ? getLiveColor(context, widget.setting)
+      : Color(_prefsValue);
 
   final double _padding = EzConfig.get(paddingKey);
 
-  late final String _label = getColorName(widget.setting, context);
+  late final String _label = getColorName(context, widget.setting);
 
   // Define button functions //
 
@@ -205,6 +208,9 @@ class _ColorSettingState extends State<EzColorSetting> {
             child: CircleAvatar(
               backgroundColor: currColor,
               radius: _padding * sqrt(2),
+              child: currColor == Colors.transparent
+                  ? const Icon(LineIcons.eyeSlash)
+                  : null,
             ),
           ),
           label: Text(
