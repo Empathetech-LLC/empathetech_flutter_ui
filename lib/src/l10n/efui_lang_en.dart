@@ -285,18 +285,13 @@ class EFUILangEn extends EFUILang {
   String get csPickerTitle => 'Pick a color!';
 
   @override
-  String get csResetTo => 'Reset to...';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
-
-  @override
   String get csRecommended => 'Use contrast recommendation?';
 
   @override
   String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
 
   @override
   String get csSchemeBase => 'Build from\nimage';
@@ -309,6 +304,14 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get csColorScheme => 'color scheme';
+
+  @override
+  String get csResetTo => 'Reset to...';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
 
   @override
   String get stsPageTitle => 'Style settings';

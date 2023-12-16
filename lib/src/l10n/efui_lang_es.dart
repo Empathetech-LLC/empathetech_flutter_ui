@@ -287,18 +287,13 @@ class EFUILangEs extends EFUILang {
   String get csPickerTitle => '¡Selecciona un color!';
 
   @override
-  String get csResetTo => 'Restablecer a...';
-
-  @override
-  String csResetAll(Object themeType) {
-    return '¿Restablecer todos los colores del tema $themeType?';
-  }
-
-  @override
   String get csRecommended => '¿Usar recomendación de contraste?';
 
   @override
   String get csUseCustom => 'Usar personalizado';
+
+  @override
+  String get csAddColor => 'Añadir un color';
 
   @override
   String get csSchemeBase => 'Construir a partir\nde la imagen';
@@ -312,6 +307,14 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get csColorScheme => 'esquema de colores';
+
+  @override
+  String get csResetTo => 'Restablecer a...';
+
+  @override
+  String csResetAll(Object themeType) {
+    return '¿Restablecer todos los colores del tema $themeType?';
+  }
 
   @override
   String get stsPageTitle => 'Configuraciones de estilo';

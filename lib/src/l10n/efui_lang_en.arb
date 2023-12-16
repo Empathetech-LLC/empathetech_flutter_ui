@@ -121,17 +121,18 @@
   "csSurfaceTint": "Surface Tint",
 
   "csPickerTitle": "Pick a color!",
-
-  "csResetTo": "Reset to...",
-  "csResetAll": "Reset all {themeType} theme colors?",
-
   "csRecommended": "Use contrast recommendation?",
   "csUseCustom": "Use custom",
+  
+  "csAddColor": "Add a color",
 
   "csSchemeBase": "Build from\nimage",
   "csOptional": "optional",
   "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",
+
+  "csResetTo": "Reset to...",
+  "csResetAll": "Reset all {themeType} theme colors?",
   
   
   "stsPageTitle": "Style settings",

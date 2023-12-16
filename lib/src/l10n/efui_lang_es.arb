@@ -121,17 +121,18 @@
   "csSurfaceTint": "Tinte de Superficie",
 
   "csPickerTitle": "¡Selecciona un color!",
-
-  "csResetTo": "Restablecer a...",
-  "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
-
   "csRecommended": "¿Usar recomendación de contraste?",
   "csUseCustom": "Usar personalizado",
 
+  "csAddColor": "Añadir un color",
+  
   "csSchemeBase": "Construir a partir\nde la imagen",
   "csOptional": "opcional",
   "csFromImage": "Construye la paleta de colores a partir de una imagen",
   "csColorScheme": "esquema de colores",
+
+  "csResetTo": "Restablecer a...",
+  "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
 
 
   "stsPageTitle": "Configuraciones de estilo",

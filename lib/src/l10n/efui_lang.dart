@@ -604,18 +604,6 @@ abstract class EFUILang {
   /// **'Pick a color!'**
   String get csPickerTitle;
 
-  /// No description provided for @csResetTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
-
-  /// No description provided for @csResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
-
   /// No description provided for @csRecommended.
   ///
   /// In en, this message translates to:
@@ -627,6 +615,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Use custom'**
   String get csUseCustom;
+
+  /// No description provided for @csAddColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a color'**
+  String get csAddColor;
 
   /// No description provided for @csSchemeBase.
   ///
@@ -651,6 +645,18 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'color scheme'**
   String get csColorScheme;
+
+  /// No description provided for @csResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to...'**
+  String get csResetTo;
+
+  /// No description provided for @csResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String csResetAll(Object themeType);
 
   /// No description provided for @stsPageTitle.
   ///
