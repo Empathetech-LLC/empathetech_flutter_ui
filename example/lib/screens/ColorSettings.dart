@@ -40,25 +40,42 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final String _resetTitle =
       EFUILang.of(context)!.csResetAll(_themeProfile);
 
-  final Set<String> _defaultLightColors = {
+  final List<String> _defaultLightColors = [
     lightPrimaryKey,
     lightSecondaryKey,
     lightTertiaryKey,
     lightBackgroundKey,
     lightSurfaceKey,
-  };
-  final Set<String> _defaultDarkColors = {
+  ];
+  final List<String> _defaultDarkColors = [
     darkPrimaryKey,
     darkSecondaryKey,
     darkTertiaryKey,
     darkBackgroundKey,
     darkSurfaceKey,
-  };
+  ];
 
-  late final List<Widget> _lightButtons = [
+  List<Widget> _dynamicColorSettings({
+    required List<String> defaultList,
+    required List<String> fullList,
+  }) {
+    List<Widget> toReturn = [];
+    List<String> toBuild = EzConfig.get(userColorsKey) ?? defaultList;
+
+    for (String key in toBuild) {
+      toReturn.addAll([
+        EzColorSetting(setting: key),
+        _buttonSpacer,
+      ]);
+    }
+
+    return toReturn;
+  }
+
+  late List<Widget> _lightButtons = [
     // Individual settings
-    ...EzColorSetting.buildDynamicSet(
-      defaultSet: _defaultLightColors,
+    ..._dynamicColorSettings(
+      defaultList: _defaultLightColors,
       fullList: lightColors,
     ),
     _buttonSpacer,
@@ -94,8 +111,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final List<Widget> _darkButtons = [
     // Individual settings
-    ...EzColorSetting.buildDynamicSet(
-      defaultSet: _defaultDarkColors,
+    ..._dynamicColorSettings(
+      defaultList: _defaultDarkColors,
       fullList: darkColors,
     ),
     _buttonSpacer,
