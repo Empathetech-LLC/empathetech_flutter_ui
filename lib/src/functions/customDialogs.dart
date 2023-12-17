@@ -13,7 +13,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// Log the passed message and display an [EzAlertDialog] to notify the user
 Future<dynamic> logAlert({
   required BuildContext context,
-  String? alert,
+  String? title,
   required String message,
 }) {
   log(message);
@@ -21,7 +21,7 @@ Future<dynamic> logAlert({
     context: context,
     builder: (context) => EzAlertDialog(
       title: Text(
-        alert ?? EFUILang.of(context)!.gAttention,
+        title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
       contents: [
