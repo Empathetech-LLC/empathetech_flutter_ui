@@ -211,7 +211,10 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Reset to default
               ElevatedButton.icon(
-                onPressed: doNothing,
+                onPressed: () async {
+                  final resetResponse = await _reset(context);
+                  popScreen(context: context, pass: resetResponse);
+                },
                 icon: Icon(PlatformIcons(context).refresh),
                 label: Text("Reset to default"),
               ),
@@ -219,7 +222,15 @@ class _ColorSettingState extends State<EzColorSetting> {
 
               // Set to transparent
               ElevatedButton.icon(
-                onPressed: doNothing,
+                onPressed: () {
+                  final Color clear = Colors.transparent;
+
+                  setState(() {
+                    currColor = clear;
+                    EzConfig.setInt(widget.setting, clear.value);
+                    popScreen(context: context, pass: clear.value);
+                  });
+                },
                 icon: Icon(PlatformIcons(context).eyeSlash),
                 label: Text("Set to transparent"),
               ),
