@@ -15,9 +15,22 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color.value] will be updated
   final String setting;
 
+  /// Optional callback for when the setting is removed, if it is part of a dynamic set/list
+  /// If null, the remove button will not be shown
+  final void Function()? onRemove;
+
+  /// Whether the set to transparent option be shown
+  /// The user can always chose transparency via the color picker
+  final bool allowTransparent;
+
   /// Creates a tool for [setting] ColorScheme values via [EzConfig]
   /// When [setting] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
-  const EzColorSetting({this.key, required this.setting}) : super(key: key);
+  const EzColorSetting({
+    this.key,
+    required this.setting,
+    this.onRemove,
+    this.allowTransparent = true,
+  }) : super(key: key);
 
   @override
   _ColorSettingState createState() => _ColorSettingState();
@@ -189,47 +202,9 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
-  late final List<ElevatedButton> _options = [
-    // Remove from list
-    ElevatedButton.icon(
-      onPressed: doNothing,
-      icon: Icon(PlatformIcons(context).delete),
-      label: Text("Remove from list"),
-    ),
-
-    // Reset to default
-    ElevatedButton.icon(
-      onPressed: () async {
-        final resetResponse = await _reset(context);
-        popScreen(context: context, pass: resetResponse);
-      },
-      icon: Icon(PlatformIcons(context).refresh),
-      label: Text("Reset to default"),
-    ),
-
-    // Set to transparent
-    ElevatedButton.icon(
-      onPressed: () {
-        final Color clear = Colors.transparent;
-
-        setState(() {
-          currColor = clear;
-          EzConfig.setInt(widget.setting, clear.value);
-          popScreen(context: context, pass: clear.value);
-        });
-      },
-      icon: Icon(PlatformIcons(context).eyeSlash),
-      label: Text("Set to transparent"),
-    ),
-  ];
-
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Remove from list, reset to default, and set to transparent
-  Future<dynamic> _optionsDialog(BuildContext context) {
-    List<Widget> contents =
-        _options.expand((option) => [option, _buttonSpacer]).toList();
-    contents.removeLast();
-
+  Future<dynamic> _options(BuildContext context) {
     return showPlatformDialog(
         context: context,
         builder: (context) {
@@ -238,7 +213,44 @@ class _ColorSettingState extends State<EzColorSetting> {
               EFUILang.of(context)!.gOptions,
               textAlign: TextAlign.center,
             ),
-            contents: contents,
+            contents: [
+              // Remove from list
+              if ((widget.onRemove != null)) ...[
+                ElevatedButton.icon(
+                  onPressed: widget.onRemove!,
+                  icon: Icon(PlatformIcons(context).delete),
+                  label: Text("Remove from list"),
+                ),
+                _buttonSpacer,
+              ],
+
+              // Reset to default
+              ElevatedButton.icon(
+                onPressed: () async {
+                  final resetResponse = await _reset(context);
+                  popScreen(context: context, pass: resetResponse);
+                },
+                icon: Icon(PlatformIcons(context).refresh),
+                label: Text("Reset to default"),
+              ),
+              _buttonSpacer,
+
+              // Set to transparent
+              if (widget.allowTransparent)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    final Color clear = Colors.transparent;
+
+                    setState(() {
+                      currColor = clear;
+                      EzConfig.setInt(widget.setting, clear.value);
+                      popScreen(context: context, pass: clear.value);
+                    });
+                  },
+                  icon: Icon(PlatformIcons(context).eyeSlash),
+                  label: Text("Set to transparent"),
+                ),
+            ],
             needsClose: true,
           );
         });
@@ -254,7 +266,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _changeColor(context),
-          onLongPress: () => _optionsDialog(context),
+          onLongPress: () => _options(context),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
