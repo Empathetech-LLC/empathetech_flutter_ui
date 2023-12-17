@@ -27,22 +27,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the static page content //
 
-  final List<String> _defaultLightColors = [
-    lightPrimaryKey,
-    lightSecondaryKey,
-    lightTertiaryKey,
-    lightBackgroundKey,
-    lightSurfaceKey,
-  ];
-
-  final List<String> _defaultDarkColors = [
-    darkPrimaryKey,
-    darkSecondaryKey,
-    darkTertiaryKey,
-    darkBackgroundKey,
-    darkSurfaceKey,
-  ];
-
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
@@ -62,15 +46,30 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the dynamic page content //
 
-  /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
-  List<Widget> _dynamicColorSettings({
-    required List<String> defaultList,
-    required List<String> fullList,
-  }) {
-    List<Widget> toReturn = [];
-    List<String> toBuild = EzConfig.get(userColorsKey) ?? defaultList;
+  late final List<String> _defaultList = _isLight
+      ? [
+          lightPrimaryKey,
+          lightSecondaryKey,
+          lightTertiaryKey,
+          lightBackgroundKey,
+          lightSurfaceKey,
+        ]
+      : [
+          darkPrimaryKey,
+          darkSecondaryKey,
+          darkTertiaryKey,
+          darkBackgroundKey,
+          darkSurfaceKey,
+        ];
 
-    for (String key in toBuild) {
+  late List<String> _currList = EzConfig.get(userColorsKey) ?? _defaultList;
+  late List<String> _fullList = _isLight ? lightColors : darkColors;
+
+  /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
+  List<Widget> _dynamicColorSettings() {
+    List<Widget> toReturn = [];
+
+    for (String key in _currList) {
       toReturn.addAll([
         EzColorSetting(setting: key),
         _buttonSpacer,
@@ -78,6 +77,28 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     }
 
     return toReturn;
+  }
+
+  /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
+  List<Widget> _getUntrackedColors(StateSetter modalSheetState) {
+    return _fullList
+        .where((element) => !_currList.contains(element))
+        .toList()
+        .fold<List<Widget>>([], (accumulator, key) {
+      accumulator.addAll([
+        TextButton(
+          child: Text(key),
+          onPressed: () {
+            setState(() {
+              _currList.add(key);
+            });
+            modalSheetState(() {});
+          },
+        ),
+        _buttonSpacer,
+      ]);
+      return accumulator;
+    });
   }
 
   // Set the page title //
@@ -106,16 +127,26 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             _textSpacer,
 
             // Dynamic settings
-            ...(_isLight
-                ? _dynamicColorSettings(
-                    defaultList: _defaultLightColors,
-                    fullList: lightColors,
-                  )
-                : _dynamicColorSettings(
-                    defaultList: _defaultDarkColors,
-                    fullList: darkColors,
-                  )),
+            ..._dynamicColorSettings(),
             _buttonSpacer,
+
+            // Add a color
+            EzIconLink(
+              icon: Icon(PlatformIcons(context).addCircledOutline),
+              label: EFUILang.of(context)!.csAddColor,
+              textAlign: TextAlign.center,
+              onTap: () => showModalBottomSheet(
+                context: context,
+                builder: (context) => StatefulBuilder(
+                  builder: (BuildContext context, StateSetter modalSheetState) {
+                    return EzScrollView(
+                        children: _getUntrackedColors(modalSheetState));
+                  },
+                ),
+              ),
+              semanticsLabel: EFUILang.of(context)!.csAddColor,
+            ),
+            _buttonSeparator,
 
             // Build from image
             Semantics(
@@ -143,8 +174,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               dialogTitle: _resetTitle,
               onConfirm: () {
                 EzConfig.removeKeys(_isLight
-                    ? lightColorKeys.keys.toSet()
-                    : darkColorKeys.keys.toSet());
+                    ? {...lightColorKeys.keys.toSet(), userColorsKey}
+                    : {...darkColorKeys.keys.toSet(), userColorsKey});
                 popScreen(context: context, pass: true);
               },
             ),
@@ -163,5 +194,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (_currList.isNotEmpty && _currList != _defaultList) {
+      EzConfig.setStringList(userColorsKey, _currList);
+    }
+    super.dispose();
   }
 }
