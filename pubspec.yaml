@@ -24,7 +24,6 @@ dependencies:
   # Community
   flutter_platform_widgets: ^6.0.2
   flutter_colorpicker: ^1.0.3
-  flutter_slidable: ^3.0.1
   flutter_localized_locales: ^2.0.5
   line_icons: ^2.0.1
   country_flags: ^2.2.0
