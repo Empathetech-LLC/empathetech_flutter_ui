@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -33,6 +32,9 @@ class _ColorSettingState extends State<EzColorSetting> {
       : Color(_prefsValue);
 
   final double _padding = EzConfig.get(paddingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
   late final String _label = getColorName(context, widget.setting);
 
@@ -187,6 +189,46 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
+  /// Opens an [EzAlertDialog] with the all optional actions
+  /// Remove from list, reset to default, and set to transparent
+  Future<dynamic> _options(BuildContext context) {
+    return showPlatformDialog(
+        context: context,
+        builder: (context) {
+          return EzAlertDialog(
+            title: Text(
+              EFUILang.of(context)!.gOptions,
+              textAlign: TextAlign.center,
+            ),
+            contents: [
+              // Remove from list
+              ElevatedButton.icon(
+                onPressed: doNothing,
+                icon: Icon(PlatformIcons(context).delete),
+                label: Text("Remove from list"),
+              ),
+              _buttonSpacer,
+
+              // Reset to default
+              ElevatedButton.icon(
+                onPressed: doNothing,
+                icon: Icon(PlatformIcons(context).refresh),
+                label: Text("Reset to default"),
+              ),
+              _buttonSpacer,
+
+              // Set to transparent
+              ElevatedButton.icon(
+                onPressed: doNothing,
+                icon: Icon(PlatformIcons(context).eyeSlash),
+                label: Text("Set to transparent"),
+              ),
+            ],
+            needsClose: true,
+          );
+        });
+  }
+
   // Return the build //
 
   @override
@@ -197,7 +239,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _changeColor(context),
-          onLongPress: () => _reset(context),
+          onLongPress: () => _options(context),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -209,7 +251,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               backgroundColor: currColor,
               radius: _padding * sqrt(2),
               child: currColor == Colors.transparent
-                  ? const Icon(LineIcons.eyeSlash)
+                  ? Icon(PlatformIcons(context).eyeSlash)
                   : null,
             ),
           ),
