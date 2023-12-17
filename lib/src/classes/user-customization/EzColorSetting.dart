@@ -189,9 +189,47 @@ class _ColorSettingState extends State<EzColorSetting> {
     );
   }
 
+  late final List<ElevatedButton> _options = [
+    // Remove from list
+    ElevatedButton.icon(
+      onPressed: doNothing,
+      icon: Icon(PlatformIcons(context).delete),
+      label: Text("Remove from list"),
+    ),
+
+    // Reset to default
+    ElevatedButton.icon(
+      onPressed: () async {
+        final resetResponse = await _reset(context);
+        popScreen(context: context, pass: resetResponse);
+      },
+      icon: Icon(PlatformIcons(context).refresh),
+      label: Text("Reset to default"),
+    ),
+
+    // Set to transparent
+    ElevatedButton.icon(
+      onPressed: () {
+        final Color clear = Colors.transparent;
+
+        setState(() {
+          currColor = clear;
+          EzConfig.setInt(widget.setting, clear.value);
+          popScreen(context: context, pass: clear.value);
+        });
+      },
+      icon: Icon(PlatformIcons(context).eyeSlash),
+      label: Text("Set to transparent"),
+    ),
+  ];
+
   /// Opens an [EzAlertDialog] with the all optional actions
   /// Remove from list, reset to default, and set to transparent
-  Future<dynamic> _options(BuildContext context) {
+  Future<dynamic> _optionsDialog(BuildContext context) {
+    List<Widget> contents =
+        _options.expand((option) => [option, _buttonSpacer]).toList();
+    contents.removeLast();
+
     return showPlatformDialog(
         context: context,
         builder: (context) {
@@ -200,41 +238,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               EFUILang.of(context)!.gOptions,
               textAlign: TextAlign.center,
             ),
-            contents: [
-              // Remove from list
-              ElevatedButton.icon(
-                onPressed: doNothing,
-                icon: Icon(PlatformIcons(context).delete),
-                label: Text("Remove from list"),
-              ),
-              _buttonSpacer,
-
-              // Reset to default
-              ElevatedButton.icon(
-                onPressed: () async {
-                  final resetResponse = await _reset(context);
-                  popScreen(context: context, pass: resetResponse);
-                },
-                icon: Icon(PlatformIcons(context).refresh),
-                label: Text("Reset to default"),
-              ),
-              _buttonSpacer,
-
-              // Set to transparent
-              ElevatedButton.icon(
-                onPressed: () {
-                  final Color clear = Colors.transparent;
-
-                  setState(() {
-                    currColor = clear;
-                    EzConfig.setInt(widget.setting, clear.value);
-                    popScreen(context: context, pass: clear.value);
-                  });
-                },
-                icon: Icon(PlatformIcons(context).eyeSlash),
-                label: Text("Set to transparent"),
-              ),
-            ],
+            contents: contents,
             needsClose: true,
           );
         });
@@ -250,7 +254,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _changeColor(context),
-          onLongPress: () => _options(context),
+          onLongPress: () => _optionsDialog(context),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -266,10 +270,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   : null,
             ),
           ),
-          label: Text(
-            _label,
-            textAlign: TextAlign.center,
-          ),
+          label: Text(_label, textAlign: TextAlign.center),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(_padding * 0.75),
