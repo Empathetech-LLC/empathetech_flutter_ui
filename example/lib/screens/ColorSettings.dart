@@ -2,6 +2,7 @@ import '../utils/utils.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -17,6 +18,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late bool _isLight = !PlatformTheme.of(context)!.isDark;
 
+  final double _padding = EzConfig.get(paddingKey);
   final double _buttonSpace = EzConfig.get(buttonSpacingKey);
 
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
@@ -68,12 +70,28 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
   List<Widget> _dynamicColorSettings() {
     List<Widget> toReturn = [];
+    Set<String> defaultSet = _defaultList.toSet();
 
     for (String key in _currList) {
-      toReturn.addAll([
-        EzColorSetting(setting: key),
-        _buttonSpacer,
-      ]);
+      if (defaultSet.contains(key)) {
+        toReturn.addAll([
+          EzColorSetting(
+            setting: key,
+            allowTransparent: false,
+          ),
+          _buttonSpacer,
+        ]);
+      } else {
+        toReturn.addAll([
+          EzColorSetting(
+            setting: key,
+            onRemove: () => setState(() {
+              _currList.remove(key);
+            }),
+          ),
+          _buttonSpacer,
+        ]);
+      }
     }
 
     return toReturn;
@@ -86,8 +104,28 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         .toList()
         .fold<List<Widget>>([], (accumulator, key) {
       accumulator.addAll([
-        TextButton(
-          child: Text(key),
+        ElevatedButton.icon(
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+            ),
+            child: CircleAvatar(
+              backgroundColor: getLiveColor(context, key),
+              radius: _padding * sqrt(2),
+            ),
+          ),
+          label: Text(getColorName(context, key), textAlign: TextAlign.center),
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                padding: MaterialStateProperty.all(
+                  EdgeInsets.all(_padding * 0.75),
+                ),
+                foregroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
           onPressed: () {
             setState(() {
               _currList.add(key);
