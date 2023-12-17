@@ -51,7 +51,6 @@ export 'src/consts/googleFonts.dart';
 
 // Enums //
 
-export 'src/enums/ButtonVis.dart';
 export 'src/enums/Hand.dart';
 export 'src/enums/SliderSettingType.dart';
 
