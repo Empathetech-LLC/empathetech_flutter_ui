@@ -106,6 +106,12 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
+  /// No description provided for @gOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Options'**
+  String get gOptions;
+
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:

@@ -11,6 +11,9 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gOptions => 'Options';
+
+  @override
   String get gApply => 'Apply';
 
   @override
