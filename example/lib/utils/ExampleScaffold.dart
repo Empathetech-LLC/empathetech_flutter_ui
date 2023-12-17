@@ -14,7 +14,7 @@ class ExampleScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the theme data //
 
-    final bool leftHandedUser = (EzConfig.get(isRightHandKey) == false);
+    final bool isRighty = EzConfig.get(isRightHandKey) ?? true;
 
     final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 
@@ -44,7 +44,7 @@ class ExampleScaffold extends StatelessWidget {
             toolbarHeight: toolbarHeight,
 
             // Leading
-            automaticallyImplyLeading: (leftHandedUser) ? false : true,
+            automaticallyImplyLeading: isRighty ? true : false,
 
             // Title
             title: titleLink,
@@ -52,7 +52,7 @@ class ExampleScaffold extends StatelessWidget {
             centerTitle: true,
 
             // Actions (aka trailing)
-            actions: (leftHandedUser) ? [EzBackAction()] : null,
+            actions: isRighty ? null : [EzBackAction()],
           ),
         ),
 
