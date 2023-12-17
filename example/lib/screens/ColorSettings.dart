@@ -64,8 +64,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           darkSurfaceKey,
         ];
 
-  late List<String> _currList = EzConfig.get(userColorsKey) ?? _defaultList;
-  late List<String> _fullList = _isLight ? lightColors : darkColors;
+  late List<String> _currList =
+      EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
+  late final List<String> _fullList = _isLight ? lightColors : darkColors;
 
   /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
   List<Widget> _dynamicColorSettings() {
@@ -84,11 +85,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       } else {
         toReturn.addAll([
           EzColorSetting(
-            setting: key,
-            onRemove: () => setState(() {
-              _currList.remove(key);
-            }),
-          ),
+              setting: key,
+              onRemove: () {
+                setState(() {
+                  _currList.remove(key);
+                });
+                popScreen(context: context);
+              }),
           _buttonSpacer,
         ]);
       }
@@ -214,6 +217,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 EzConfig.removeKeys(_isLight
                     ? {...lightColorKeys.keys.toSet(), userColorsKey}
                     : {...darkColorKeys.keys.toSet(), userColorsKey});
+                setState(() {
+                  _currList = new List.from(_defaultList);
+                });
                 popScreen(context: context, pass: true);
               },
             ),
