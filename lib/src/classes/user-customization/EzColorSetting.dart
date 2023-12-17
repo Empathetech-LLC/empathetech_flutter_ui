@@ -233,10 +233,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                 icon: Icon(PlatformIcons(context).refresh),
                 label: Text("Reset to default"),
               ),
-              _buttonSpacer,
 
               // Set to transparent
-              if (widget.allowTransparent)
+              if (widget.allowTransparent) ...[
+                _buttonSpacer,
                 ElevatedButton.icon(
                   onPressed: () {
                     final Color clear = Colors.transparent;
@@ -250,6 +250,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   icon: Icon(PlatformIcons(context).eyeSlash),
                   label: Text("Set to transparent"),
                 ),
+              ],
             ],
             needsClose: true,
           );
