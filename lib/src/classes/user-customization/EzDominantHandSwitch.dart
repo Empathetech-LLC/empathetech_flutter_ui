@@ -85,10 +85,9 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     ];
 
     return Container(
-      padding: EdgeInsets.all(_padding),
+      padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(_padding * _padding),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

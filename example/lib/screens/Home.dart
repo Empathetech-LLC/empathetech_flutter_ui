@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
-  late final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   // Set the page title //
 
@@ -50,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : EFUILang.of(context)!.ssSettingsGuideWeb,
               style: headlineSmall(context),
             ),
-            _textSpacer,
+            _buttonSpacer,
 
             // Global settings
             const EzDominantHandSwitch(),
