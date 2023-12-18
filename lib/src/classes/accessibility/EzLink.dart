@@ -26,13 +26,13 @@ class EzLink extends StatefulWidget {
   final Uri? url;
 
   /// Message for screen readers
-  final String semanticsLabel;
+  final String? semanticsLabel;
 
   final MaterialStatesController? statesController;
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticsLabel] for screen readers
+  /// Always has a [semanticsLabel]; if one is not provided, it will default to [text]
   /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzLink(
@@ -43,7 +43,7 @@ class EzLink extends StatefulWidget {
     this.textAlign,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    this.semanticsLabel,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -75,7 +75,7 @@ class _EzLinkState extends State<EzLink> {
   Widget build(BuildContext context) {
     return Semantics(
       link: true,
-      hint: widget.semanticsLabel,
+      hint: widget.semanticsLabel ?? widget.text,
       child: ExcludeSemantics(
         child: TextButton(
           onPressed: widget.onTap ?? () => launchUrl(widget.url!),
@@ -115,13 +115,13 @@ class EzIconLink extends StatefulWidget {
   final Uri? url;
 
   /// Message for screen readers
-  final String semanticsLabel;
+  final String? semanticsLabel;
 
   final MaterialStatesController? statesController;
 
   /// [TextButton.icon] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticsLabel] for screen readers
+  /// Always has a [semanticsLabel]; if one is not provided, it will default to [label]
   /// Automatically colors [label] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzIconLink({
@@ -133,7 +133,7 @@ class EzIconLink extends StatefulWidget {
     this.textAlign,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    this.semanticsLabel,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -165,7 +165,7 @@ class _EzIconLinkState extends State<EzIconLink> {
   Widget build(BuildContext context) {
     return Semantics(
       link: true,
-      hint: widget.semanticsLabel,
+      hint: widget.semanticsLabel ?? widget.label,
       child: ExcludeSemantics(
         child: TextButton.icon(
           onPressed: widget.onTap ?? () => launchUrl(widget.url!),
