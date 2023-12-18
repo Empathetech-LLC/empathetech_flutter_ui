@@ -44,7 +44,7 @@ class EzLinkImage extends StatefulWidget {
   /// Requires [semanticLabel] for screen readers
   /// Automatically draws a [BoxShadow] which mimics button hover based on...
   /// https://m3.material.io/foundations/interaction/states/state-layers
-  /// Optionally override the [shadows]
+  /// The [shadows] can be overridden
   const EzLinkImage({
     this.key,
     required this.image,
@@ -80,12 +80,13 @@ class _EzLinkImageState extends State<EzLinkImage> {
   // Gather the theme data //
 
   bool _shadow = false;
-  final FocusNode _focus = FocusNode();
 
-  late final Color _shadowColor =
-      Theme.of(context).colorScheme.primary.withOpacity(0.10);
-  late final List<BoxShadow> _shadows =
-      widget.shadows ?? [BoxShadow(color: _shadowColor)];
+  late final List<BoxShadow> _shadows = widget.shadows ??
+      [
+        BoxShadow(
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.10),
+        ),
+      ];
 
   // Define the styling function(s) //
 
@@ -105,7 +106,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
       hint: widget.semanticLabel,
       child: ExcludeSemantics(
         child: Focus(
-          focusNode: _focus,
+          focusNode: FocusNode(),
           onFocusChange: (hasFocus) => _showShadow(hasFocus),
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
