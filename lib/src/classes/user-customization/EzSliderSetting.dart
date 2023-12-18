@@ -46,14 +46,11 @@ class EzSliderSetting extends StatefulWidget {
 class _SliderSettingState extends State<EzSliderSetting> {
   // Gather the theme data //
 
+  late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
   late double currValue = EzConfig.get(widget.prefsKey);
-  late double _defaultValue = EzConfig.getDefault(widget.prefsKey);
 
-  late double _margin = EzConfig.get(marginKey);
-  late double _buttonSpacer = EzConfig.get(buttonSpacingKey);
-  late double _textSpacer = EzConfig.get(textSpacingKey);
-
-  late final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
   // Define build functions //
 
@@ -72,7 +69,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         double liveMargin = currValue * marginScale;
 
         return [
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
 
           // Live preview && label
           Row(
@@ -85,7 +82,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 style: style,
                 textAlign: TextAlign.center,
               ),
-              EzSpacer.row(_textSpacer),
+              EzSpacer.row(EzConfig.get(textSpacingKey)),
 
               // Preview
               Container(
@@ -99,13 +96,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ),
             ],
           ),
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
         ];
 
       // Padding
       case SliderSettingType.padding:
         return [
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
 
           // Live label && preview
           Row(
@@ -121,7 +118,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
                     ),
               ),
-              EzSpacer.row(_buttonSpacer),
+              EzSpacer.row(_buttonSpace),
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
@@ -134,7 +131,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             ],
           ),
 
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
         ];
 
       // Button spacing
@@ -174,11 +171,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> _buildSheet(
-    StateSetter modalSheetState,
-    BuildContext context,
-    TextStyle? style,
-  ) {
+  List<Widget> _buildSheet({
+    required BuildContext context,
+    required StateSetter modalSheetState,
+    required TextStyle? style,
+  }) {
     // Gather preview widgets//
 
     List<Widget> toReturn = [
@@ -194,7 +191,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              EzSpacer(_margin),
+              EzSpacer(EzConfig.get(marginKey)),
               Text(
                 sstName(context, widget.type),
                 style: style,
@@ -243,7 +240,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               value.toStringAsFixed(widget.decimals),
         ),
       ),
-      EzSpacer(_buttonSpacer),
+      _buttonSpacer,
 
       // Reset button
       Semantics(
@@ -267,7 +264,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
         ),
       ),
-      EzSpacer(_buttonSpacer),
+      _buttonSpacer,
     ]);
 
     return toReturn;
@@ -288,7 +285,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
               builder: (BuildContext context, StateSetter modalSheetState) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: _buildSheet(modalSheetState, context, style),
+                  children: _buildSheet(
+                    context: context,
+                    modalSheetState: modalSheetState,
+                    style: Theme.of(context).appBarTheme.titleTextStyle,
+                  ),
                 );
               },
             ),
