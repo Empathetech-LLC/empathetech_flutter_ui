@@ -11,10 +11,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
-  /// Pass in any custom [supportedLocales]
+  /// Pass in any custom supported [Locale]s
   final List<Locale>? locales;
 
-  /// Standardized tool for updating [EzConfig] Locale
+  /// Standardized tool for updating the current [Locale]
   const EzLocaleSetting({Key? key, this.locales}) : super(key: key);
 
   @override
@@ -26,12 +26,13 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late Locale currLocale = Localizations.localeOf(context);
 
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
   // Gather the list items //
 
-  CountryFlag _flag(Locale? locale) {
-    final Locale flagLocale = locale ?? Localizations.localeOf(context);
+  CountryFlag _flag(Locale locale) {
+    final Locale flagLocale = locale;
 
     final double flagHeight = MediaQuery.textScalerOf(context).scale(
         Theme.of(context)
@@ -77,11 +78,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           },
           icon: _flag(locale),
           label: Text(
-            LocaleNames.of(context)!.nameOf(locale.languageCode).toString(),
+            LocaleNames.of(context)!.nameOf(locale.languageCode)!,
             textAlign: TextAlign.center,
           ),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
       ]);
     });
 
@@ -105,7 +106,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     final String hint = EFUILang.of(context)!.ssLangSemantics;
     final String setting = EFUILang.of(context)!.gSetToValue(
       EFUILang.of(context)!.ssLanguage,
-      LocaleNames.of(context)!.nameOf(currLocale.languageCode).toString(),
+      LocaleNames.of(context)!.nameOf(currLocale.languageCode)!,
     );
 
     return Semantics(
@@ -115,10 +116,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),
           icon: _flag(currLocale),
-          label: Text(
-            EFUILang.of(context)!.ssLanguage,
-            textAlign: TextAlign.center,
-          ),
+          label: Text(EFUILang.of(context)!.ssLanguage),
         ),
       ),
     );
