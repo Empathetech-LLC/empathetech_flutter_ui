@@ -146,7 +146,12 @@ ThemeData ezThemeData(Brightness brightness) {
     popupMenuTheme: PopupMenuThemeData(textStyle: dialogContentStyle),
 
     // TabBar
-    tabBarTheme: TabBarTheme(labelStyle: tabBarTextStyle),
+    tabBarTheme: TabBarTheme(
+      labelStyle: tabBarTextStyle,
+      unselectedLabelStyle: tabBarTextStyle.copyWith(
+        color: colorScheme.outline,
+      ),
+    ),
 
     // Tooltip
     tooltipTheme: TooltipThemeData(
