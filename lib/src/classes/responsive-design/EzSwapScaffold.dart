@@ -43,7 +43,7 @@ class EzSwapScaffold extends StatelessWidget {
   /// Smaller [Scaffold]; think desktop thoughts
   final Widget large;
 
-  /// The [double] pixel value where the swap should happen
+  /// The [double] value where the swap should happen
   final double threshold;
 
   /// Enables real-time responses to screen space changes
