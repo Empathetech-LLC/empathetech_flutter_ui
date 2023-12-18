@@ -21,8 +21,8 @@ class EzFontSetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather the theme data //
 
-  String? currFontFamily = EzConfig.get(fontFamilyKey);
   final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
+  String? currFontFamily = EzConfig.get(fontFamilyKey);
 
   final double _buttonSpace = EzConfig.get(buttonSpacingKey);
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
@@ -78,7 +78,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       label: Text(
         EFUILang.of(context)!.stsTextFont,
         style: TextStyle(fontFamily: currFontFamily),
-        textAlign: TextAlign.center,
       ),
     );
   }
