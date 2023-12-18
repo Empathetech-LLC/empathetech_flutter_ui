@@ -61,7 +61,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   late bool _updateTheme = (widget.updateTheme != null);
 
   final double _padding = EzConfig.get(paddingKey);
-  final double _buttonSpacer = EzConfig.get(buttonSpacingKey);
+  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
   // Define button functions //
 
@@ -78,7 +80,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Build the list of [ImageSource] options
-  List<Widget> _buildOptions(StateSetter dialogState, BuildContext context) {
+  List<Widget> _sourceOptions(StateSetter dialogState, BuildContext context) {
     List<Widget> options = [];
 
     // From file && camera rely on path_provider, which isn't supported by Flutter Web
@@ -98,7 +100,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           label: Text(EFUILang.of(context)!.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
 
         // From camera
         ElevatedButton.icon(
@@ -114,7 +116,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           label: Text(EFUILang.of(context)!.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
       ]);
     }
 
@@ -129,6 +131,19 @@ class _ImageSettingState extends State<EzImageSetting> {
               String url = '';
               return StatefulBuilder(
                 builder: (context, setState) {
+                  void _onConfirm() {
+                    if (isUrl(url)) {
+                      EzConfig.setString(widget.prefsKey, url);
+                      popScreen(context: context, result: url);
+                    } else {
+                      popScreen(context: context, result: null);
+                    }
+                  }
+
+                  void _onDeny() {
+                    popScreen(context: context, result: null);
+                  }
+
                   return EzAlertDialog(
                     title: Text(
                       EFUILang.of(context)!.isEnterURL,
@@ -152,22 +167,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ],
                     materialActions: ezMaterialActions(
                       context: context,
-                      onConfirm: () {
-                        EzConfig.setString(widget.prefsKey, url);
-                        popScreen(context: context, result: url);
-                      },
+                      onConfirm: _onConfirm,
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, result: null),
+                      onDeny: _onDeny,
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     cupertinoActions: ezCupertinoActions(
                       context: context,
-                      onConfirm: () {
-                        EzConfig.setString(widget.prefsKey, url);
-                        popScreen(context: context, result: url);
-                      },
+                      onConfirm: _onConfirm,
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, result: null),
+                      onDeny: _onDeny,
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     needsClose: false,
@@ -182,7 +191,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: Text(EFUILang.of(context)!.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
       ),
-      EzSpacer(_buttonSpacer),
+      _buttonSpacer,
 
       // Reset
       ElevatedButton.icon(
@@ -203,7 +212,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Clear (optional)
     if (widget.allowClear)
       options.addAll([
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
@@ -219,28 +228,31 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Update theme (optional)
     if (widget.updateTheme != null && !widget.hideThemeMessage)
       options.addAll([
-        EzSpacer(_buttonSpacer),
-        EzRow(children: [
-          // Label
-          Flexible(
-            child: Text(
-              EFUILang.of(context)!.isUseForColors,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          EzSpacer.row(_padding),
+        _buttonSpacer,
+        EzRow(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Label
+              Flexible(
+                child: Text(
+                  EFUILang.of(context)!.isUseForColors,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              EzSpacer.row(_padding),
 
-          // Check box
-          Checkbox(
-              value: _updateTheme,
-              onChanged: (bool? choice) {
-                setState(() {
-                  dialogState(() {
-                    _updateTheme = (choice == null) ? false : choice;
-                  });
-                });
-              }),
-        ])
+              // Check box
+              Checkbox(
+                  value: _updateTheme,
+                  onChanged: (bool? choice) {
+                    setState(() {
+                      dialogState(() {
+                        _updateTheme = (choice == null) ? false : choice;
+                      });
+                    });
+                  }),
+            ])
       ]);
 
     return options;
@@ -259,7 +271,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   .isDialogTitle(widget.dialogTitle ?? widget.label),
               textAlign: TextAlign.center,
             ),
-            contents: _buildOptions(dialogState, context),
+            contents: _sourceOptions(dialogState, context),
           );
         },
       ),
@@ -267,7 +279,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// First-layer [ElevatedButton.onPressed]
-  /// It the [_chooseImage] dialog and updates the state accordingly
+  /// Runs the [_chooseImage] dialog and updates the state accordingly
   void _activateSetting() async {
     dynamic newPath = await _chooseImage(context);
 
