@@ -17,6 +17,11 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
+  // Gather the theme data //
+  final double _padding = EzConfig.get(paddingKey);
+
+  late ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
+
   // Define functions //
   String _getName(ThemeMode? curr) {
     switch (curr) {
@@ -30,14 +35,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     }
   }
 
-  // Gather the theme data //
-  final double _padding = EzConfig.get(paddingKey);
-
   @override
   Widget build(BuildContext context) {
-    ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
     // Define the items //
 
     final List<DropdownMenuItem<ThemeMode>> items = [
@@ -58,10 +57,10 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     // Return the build //
 
     return Container(
-      padding: EdgeInsets.all(_padding * 0.25),
+      padding: EdgeInsets.all(_padding),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(_padding),
+        borderRadius: BorderRadius.circular(_padding * _padding),
       ),
       child: EzRow(
         mainAxisSize: MainAxisSize.min,
@@ -70,7 +69,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           // Label
           Text(
             EFUILang.of(context)!.ssThemeMode,
-            style: style,
+            style: Theme.of(context).dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
           EzSpacer.row(_padding),
