@@ -17,13 +17,11 @@ class EzRow extends StatelessWidget {
   final TextBaseline? textBaseline;
   final List<Widget> children;
 
-  /// Whether this should respond to [EzConfig.dominantHand] changes
-  /// If true, [children] will be reversed when [EzConfig.dominantHand] is [Hand.left]
-  /// If false, this will be have like a normal [Row]
+  /// Whether this should respond to [Hand] changes
+  /// If true, [children] will be reversed when [Hand.left]
   final bool reverseHands;
 
-  /// [Row] wrapper that automatically supports [EzConfig.dominantHand]
-  /// Can be disabled via setting [reverseHands] to false
+  /// [Row] wrapper that automatically supports [Hand] changes via [reverseHands]
   EzRow({
     this.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
@@ -36,7 +34,7 @@ class EzRow extends StatelessWidget {
     this.reverseHands = true,
   }) : super(key: key);
 
-  /// Reverses [children] when [reverseHands] is true and [EzConfig.dominantHand] is [Hand.left]
+  /// Reverses [children] when [reverseHands] is true and [isRightHandKey] is false
   List<Widget> _getList() {
     if (reverseHands && EzConfig.get(isRightHandKey) == false) {
       return children.reversed.toList();
