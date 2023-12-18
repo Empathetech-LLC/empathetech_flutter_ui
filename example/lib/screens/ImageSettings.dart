@@ -21,7 +21,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
-  late final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
+  final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   // Define the page content //
 
