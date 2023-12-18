@@ -22,7 +22,8 @@ class EzPlainText extends TextSpan {
   final Locale? locale;
   final bool spellOut;
 
-  /// [TextSpan] wrapper with custom [semantics] for use in [EzRichText]
+  /// [TextSpan] wrapper with custom [Semantics] for use in [EzRichText]
+  /// Use [semantics] in place of [TextSpan.semanticsLabel]
   EzPlainText(
     this.text, {
     required this.context,
