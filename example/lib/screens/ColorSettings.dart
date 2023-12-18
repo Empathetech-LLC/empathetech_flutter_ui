@@ -68,7 +68,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
   late final List<String> _fullList = _isLight ? lightColors : darkColors;
 
-  /// Return the live [Set] of [EzConfig.prefs] keys that the user is tracking as a [Stream]
+  /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> _dynamicColorSettings() {
     List<Widget> toReturn = [];
     Set<String> defaultSet = _defaultList.toSet();
