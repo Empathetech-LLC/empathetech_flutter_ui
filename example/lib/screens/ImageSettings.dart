@@ -108,7 +108,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           ],
         ),
       ),
-      fab: BackFAB(context: context),
     );
   }
 }

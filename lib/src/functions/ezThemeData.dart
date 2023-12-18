@@ -40,9 +40,11 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final IconThemeData iconData = IconThemeData(
     size: buttonTextStyle.fontSize,
+    color: colorScheme.onSurface,
   );
   final IconThemeData appBarIconData = IconThemeData(
     size: appBarTextStyle.fontSize,
+    color: colorScheme.onSurface,
   );
 
   // Build the ThemeData //
@@ -73,7 +75,9 @@ ThemeData ezThemeData(Brightness brightness) {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: appBarIconData,
-      unselectedIconTheme: appBarIconData,
+      unselectedIconTheme: appBarIconData.copyWith(
+        color: colorScheme.outline,
+      ),
     ),
 
     // Buttons

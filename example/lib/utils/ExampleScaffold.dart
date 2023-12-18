@@ -1,5 +1,6 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class ExampleScaffold extends StatelessWidget {
@@ -21,6 +22,7 @@ class ExampleScaffold extends StatelessWidget {
     // Gather the theme data //
 
     final bool isRighty = EzConfig.get(isRightHandKey) ?? true;
+    log("isRighty: " + isRighty.toString());
 
     final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 
