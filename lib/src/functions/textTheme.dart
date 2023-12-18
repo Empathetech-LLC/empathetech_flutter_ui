@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Creates a [TextTheme] with [color] and sizes from...
+/// Creates a [TextTheme] with sizes from...
 /// https://api.flutter.dev/flutter/material/TextTheme-class.html
 TextTheme ezTextTheme() {
   return TextTheme(
