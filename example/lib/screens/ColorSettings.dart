@@ -271,7 +271,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   EzConfig.setStringList(userColorsKey, sortedList);
                 }
               },
-              semanticsLabel: EFUILang.of(context)!.csAddColor,
             ),
             _buttonSeparator,
 
