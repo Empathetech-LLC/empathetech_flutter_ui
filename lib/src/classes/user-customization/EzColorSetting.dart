@@ -69,7 +69,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Update the user's setting
         EzConfig.setInt(widget.setting, currColor.value);
 
-        popScreen(context: context, pass: currColor.value);
+        popScreen(context: context, result: currColor.value);
       },
       onDeny: () => popScreen(context: context),
     );
@@ -105,12 +105,12 @@ class _ColorSettingState extends State<EzColorSetting> {
           currColor = Color(recommended);
         });
 
-        popScreen(context: context, pass: recommended);
+        popScreen(context: context, result: recommended);
       };
 
       void Function() onDeny = () async {
         dynamic chosen = await _openColorPicker(context);
-        popScreen(context: context, pass: chosen);
+        popScreen(context: context, result: chosen);
       };
 
       return showPlatformDialog(
@@ -164,7 +164,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         currColor = resetColor;
       });
 
-      popScreen(context: context, pass: resetColor);
+      popScreen(context: context, result: resetColor);
     };
 
     final void Function() onDeny = () => popScreen(context: context);
@@ -228,7 +228,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               ElevatedButton.icon(
                 onPressed: () async {
                   final resetResponse = await _reset(context);
-                  popScreen(context: context, pass: resetResponse);
+                  popScreen(context: context, result: resetResponse);
                 },
                 icon: Icon(PlatformIcons(context).refresh),
                 label: Text("Reset to default"),
@@ -244,7 +244,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     setState(() {
                       currColor = clear;
                       EzConfig.setInt(widget.setting, clear.value);
-                      popScreen(context: context, pass: clear.value);
+                      popScreen(context: context, result: clear.value);
                     });
                   },
                   icon: Icon(PlatformIcons(context).eyeSlash),

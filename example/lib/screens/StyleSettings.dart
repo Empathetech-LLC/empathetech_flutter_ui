@@ -30,7 +30,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.stsPageTitle);
+    setPageTitle(EFUILang.of(context)!.stsPageTitle);
   }
 
   // Return the build //
@@ -97,7 +97,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(styleKeys.keys.toSet());
-                popScreen(context: context, pass: true);
+                popScreen(context: context, result: true);
               },
             ),
             _buttonSeparator,

@@ -48,7 +48,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       dialogTitle: _resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(lightImageKeys.keys.toSet());
-        popScreen(context: context, pass: true);
+        popScreen(context: context, result: true);
       },
     ),
   ];
@@ -69,7 +69,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       dialogTitle: _resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(darkImageKeys.keys.toSet());
-        popScreen(context: context, pass: true);
+        popScreen(context: context, result: true);
       },
     ),
   ];
@@ -79,7 +79,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
+    setPageTitle(EFUILang.of(context)!.isPageTitle);
   }
 
   // Return the build //

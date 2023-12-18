@@ -41,7 +41,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             setState(() {
               currFontFamily = style.fontFamily!;
             });
-            popScreen(context: context, pass: font);
+            popScreen(context: context, result: font);
           },
           child: Text(
             (font == _defaultFontFamily)

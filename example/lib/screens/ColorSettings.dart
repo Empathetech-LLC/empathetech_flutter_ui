@@ -147,7 +147,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.csPageTitle);
+    setPageTitle(EFUILang.of(context)!.csPageTitle);
   }
 
   // Return the build //
@@ -220,7 +220,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 setState(() {
                   _currList = new List.from(_defaultList);
                 });
-                popScreen(context: context, pass: true);
+                popScreen(context: context, result: true);
               },
             ),
             _buttonSeparator,

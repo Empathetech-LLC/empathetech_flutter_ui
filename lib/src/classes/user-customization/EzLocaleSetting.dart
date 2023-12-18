@@ -73,7 +73,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             setState(() {
               currLocale = locale;
             });
-            popScreen(context: context, pass: locale);
+            popScreen(context: context, result: locale);
           },
           icon: _flag(locale),
           label: Text(

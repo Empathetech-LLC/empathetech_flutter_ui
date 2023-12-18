@@ -93,7 +93,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            popScreen(context: context, pass: changed);
+            popScreen(context: context, result: changed);
           },
           label: Text(EFUILang.of(context)!.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
@@ -109,7 +109,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            popScreen(context: context, pass: changed);
+            popScreen(context: context, result: changed);
           },
           label: Text(EFUILang.of(context)!.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
@@ -154,20 +154,20 @@ class _ImageSettingState extends State<EzImageSetting> {
                       context: context,
                       onConfirm: () {
                         EzConfig.setString(widget.prefsKey, url);
-                        popScreen(context: context, pass: url);
+                        popScreen(context: context, result: url);
                       },
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, pass: null),
+                      onDeny: () => popScreen(context: context, result: null),
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     cupertinoActions: ezCupertinoActions(
                       context: context,
                       onConfirm: () {
                         EzConfig.setString(widget.prefsKey, url);
-                        popScreen(context: context, pass: url);
+                        popScreen(context: context, result: url);
                       },
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, pass: null),
+                      onDeny: () => popScreen(context: context, result: null),
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     needsClose: false,
@@ -177,7 +177,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           );
 
-          popScreen(context: context, pass: changed);
+          popScreen(context: context, result: changed);
         },
         label: Text(EFUILang.of(context)!.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
@@ -192,7 +192,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(
             context: context,
-            pass: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
+            result: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
           );
         },
         label: Text(EFUILang.of(context)!.isResetIt),
@@ -209,7 +209,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             _cleanup();
             EzConfig.setString(widget.prefsKey, noImageValue);
 
-            popScreen(context: context, pass: noImageValue);
+            popScreen(context: context, result: noImageValue);
           },
           label: Text(EFUILang.of(context)!.isClearIt),
           icon: Icon(PlatformIcons(context).clear),

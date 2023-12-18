@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.ssPageTitle);
+    setPageTitle(EFUILang.of(context)!.ssPageTitle);
   }
 
   // Return the build //
