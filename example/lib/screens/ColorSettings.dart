@@ -147,13 +147,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       if (_defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.addAll([
-          EzColorSetting(setting: key),
+          EzColorSetting(key: ValueKey(key), setting: key),
           _buttonSpacer,
         ]);
       } else {
         toReturn.addAll([
           // Removable buttons
           EzColorSetting(
+              key: ValueKey(key),
               setting: key,
               onRemove: () {
                 setState(() {
@@ -178,6 +179,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         .fold<List<Widget>>([_buttonSpacer], (accumulator, key) {
       accumulator.addAll([
         ElevatedButton.icon(
+          key: ValueKey(key),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
