@@ -27,8 +27,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   Widget build(BuildContext context) {
     // Define the list items //
 
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
         child: Text(handName(context, Hand.right)),
@@ -47,7 +45,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       // Label
       Text(
         EFUILang.of(context)!.ssDominantHand,
-        style: style,
+        style: Theme.of(context).dropdownMenuTheme.textStyle,
         textAlign: TextAlign.center,
       ),
       EzSpacer.row(_padding),
@@ -87,10 +85,10 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     ];
 
     return Container(
-      padding: EdgeInsets.all(_padding * 0.25),
+      padding: EdgeInsets.all(_padding),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(_padding),
+        borderRadius: BorderRadius.circular(_padding * _padding),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
