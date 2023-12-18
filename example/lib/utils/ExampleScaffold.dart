@@ -1,16 +1,17 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
+  final String title;
   final Widget body;
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ExampleScaffold({
     this.key,
+    required this.title,
     required this.body,
     this.fab,
   }) : super(key: key);
@@ -28,15 +29,6 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define AppBar widget(s) //
 
-    final EzLink titleLink = EzLink(
-      'EFUI',
-      style: titleStyle,
-      textAlign: TextAlign.center,
-      onTap: () => context.goNamed(homeRoute),
-      semanticsLabel: EFUILang.of(context)!.gHomeHint,
-      color: Theme.of(context).colorScheme.onSurface,
-    );
-
     // Return the build //
 
     return SelectionArea(
@@ -49,10 +41,10 @@ class ExampleScaffold extends StatelessWidget {
             toolbarHeight: toolbarHeight,
 
             // Leading
-            automaticallyImplyLeading: isRighty ? true : false,
+            automaticallyImplyLeading: isRighty,
 
             // Title
-            title: titleLink,
+            title: Text(title),
             titleSpacing: 0,
             centerTitle: true,
 
