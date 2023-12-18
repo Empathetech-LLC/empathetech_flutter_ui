@@ -44,7 +44,7 @@ class EzConfig {
   /// [preferences] => provide a [SharedPreferences] instance
   /// [assetPaths] => provide your [AssetImage] paths for this app
   /// [customDefaults] => provide your brand colors, custom styling, etc
-  factory EzConfig({
+  factory EzConfig.init({
     required SharedPreferences preferences,
     required Set<String> assetPaths,
     Map<String, dynamic>? customDefaults,
