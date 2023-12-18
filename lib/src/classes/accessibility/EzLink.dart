@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLink extends StatefulWidget {
-  final Key? key;
-
   /// Link message
   final String text;
+
+  final Key? key;
 
   final TextStyle? style;
 
@@ -59,8 +59,8 @@ class _EzLinkState extends State<EzLink> {
 
   late TextStyle? _style = widget.style?.copyWith(
     color: _color,
-    decorationColor: _color,
     decoration: TextDecoration.none,
+    decorationColor: _color,
   );
 
   void _addUnderline(bool addIt) {
@@ -125,9 +125,9 @@ class EzIconLink extends StatefulWidget {
   /// Automatically colors [label] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzIconLink({
+    this.key,
     required this.icon,
     required this.label,
-    this.key,
     this.style,
     this.color,
     this.textAlign,
@@ -149,8 +149,8 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   late TextStyle? _style = widget.style?.copyWith(
     color: _color,
-    decorationColor: _color,
     decoration: TextDecoration.none,
+    decorationColor: _color,
   );
 
   void _addUnderline(bool addIt) {
