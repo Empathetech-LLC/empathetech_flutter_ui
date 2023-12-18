@@ -39,15 +39,15 @@ class EzRichText extends StatelessWidget {
     for (InlineSpan child in children) {
       switch (child.runtimeType) {
         case TextSpan:
-          TextSpan textChild = child as TextSpan;
+          final TextSpan textChild = child as TextSpan;
           message.writeAll([textChild.semanticsLabel ?? textChild.text, " "]);
           break;
         case EzPlainText:
-          EzPlainText textChild = child as EzPlainText;
+          final EzPlainText textChild = child as EzPlainText;
           message.writeAll([textChild.semantics ?? textChild.text, " "]);
           break;
         case EzInlineLink:
-          EzInlineLink linkChild = child as EzInlineLink;
+          final EzInlineLink linkChild = child as EzInlineLink;
           message.writeAll([linkChild.text, " "]);
           break;
         default:
