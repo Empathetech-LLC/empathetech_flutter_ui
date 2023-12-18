@@ -19,9 +19,9 @@ class EzColorSetting extends StatefulWidget {
   /// If null, the remove button will not be shown
   final void Function()? onRemove;
 
-  /// Whether the set to transparent option be shown
+  /// Whether the set to transparent option should be shown
   /// The user can always chose transparency via the color picker
-  final bool allowTransparent;
+  final bool showTransparent;
 
   /// Creates a tool for [setting] ColorScheme values via [EzConfig]
   /// When [setting] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
@@ -29,7 +29,7 @@ class EzColorSetting extends StatefulWidget {
     this.key,
     required this.setting,
     this.onRemove,
-    this.allowTransparent = true,
+    this.showTransparent = true,
   }) : super(key: key);
 
   @override
@@ -89,10 +89,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           widget.setting.replaceAll(textColorPrefix, "");
 
       // Find the recommended contrast color for the background
-      Color backgroundColor =
-          Color(EzConfig.get(backgroundKey) ?? EzConfig.getInt(backgroundKey));
+      final Color backgroundColor = Color(
+          EzConfig.get(backgroundKey) ?? getLiveColor(context, widget.setting));
 
-      int recommended = getTextColor(backgroundColor).value;
+      final int recommended = getTextColor(backgroundColor).value;
 
       // Define action button parameters
       final String denyMsg = EFUILang.of(context)!.csUseCustom;
@@ -235,7 +235,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
 
               // Set to transparent
-              if (widget.allowTransparent) ...[
+              if (widget.showTransparent) ...[
                 _buttonSpacer,
                 ElevatedButton.icon(
                   onPressed: () {
