@@ -283,7 +283,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                   : null,
             ),
           ),
-          label: Text(_label, textAlign: TextAlign.center),
+          label: Text(_label),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(_padding * 0.75),

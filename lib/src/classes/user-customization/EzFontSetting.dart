@@ -49,7 +49,6 @@ class _FontFamilySettingState extends State<EzFontSetting> {
                 ? EFUILang.of(context)!.gDefaultEntry(font)
                 : font,
             style: style,
-            textAlign: TextAlign.center,
           ),
         ),
         _buttonSpacer,
