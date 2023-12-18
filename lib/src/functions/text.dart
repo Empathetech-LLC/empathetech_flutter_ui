@@ -12,16 +12,15 @@ bool isUrl(String text) {
 }
 
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
-/// [scaler] should be the value from MediaQuery.textScalerOf(context)
 Size measureText(
   text, {
-  required TextScaler scaler,
   required TextStyle? style,
+  required BuildContext context,
 }) {
   final TextPainter textPainter = TextPainter(
     text: TextSpan(text: text, style: style),
     maxLines: 1,
-    textScaler: scaler,
+    textScaler: MediaQuery.textScalerOf(context),
     textDirection: TextDirection.ltr,
   )..layout();
 
@@ -29,10 +28,7 @@ Size measureText(
 }
 
 /// For web apps, set the tab's title
-void setPageTitle(
-  BuildContext context,
-  String title,
-) {
+void setPageTitle(String title) {
   SystemChrome.setApplicationSwitcherDescription(
     ApplicationSwitcherDescription(label: title),
   );
