@@ -149,62 +149,68 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for resetting the color(s) to default
-  /// A preview of the reset color is shown, taken from the first in the list
+  /// Opens an [EzAlertDialog] for resetting [widget.setting] to default
+  /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
+  /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> _reset(BuildContext context) {
-    final Color resetColor = Color(EzConfig.getDefault(widget.setting));
+    final int? resetValue = EzConfig.getDefault(widget.setting);
 
-    // Define action button parameters //
-
-    final void Function() onConfirm = () {
-      // Remove the user's setting and reset the current state
+    if (resetValue == null) {
       EzConfig.remove(widget.setting);
+      return Future.value(true);
+    } else {
+      final Color resetColor = Color(resetValue);
 
-      setState(() {
-        currColor = resetColor;
-      });
+      final void Function() onConfirm = () {
+        // Remove the user's setting and reset the current state
+        EzConfig.remove(widget.setting);
 
-      popScreen(context: context, result: resetColor);
-    };
+        setState(() {
+          currColor = resetColor;
+        });
 
-    final void Function() onDeny = () => popScreen(context: context);
+        popScreen(context: context, result: resetColor);
+      };
 
-    return showPlatformDialog(
-      context: context,
-      builder: (context) => EzAlertDialog(
-        title: Text(
-          EFUILang.of(context)!.csResetTo,
-          textAlign: TextAlign.center,
-        ),
-        // Reset color preview
-        contents: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: getTextColor(resetColor)),
-            ),
-            child: CircleAvatar(
-              backgroundColor: resetColor,
-              radius: _padding * 2,
-              child: currColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
-                  : null,
-            ),
+      final void Function() onDeny = () => popScreen(context: context);
+
+      return showPlatformDialog(
+        context: context,
+        builder: (context) => EzAlertDialog(
+          title: Text(
+            EFUILang.of(context)!.csResetTo,
+            textAlign: TextAlign.center,
           ),
-        ],
-        materialActions: ezMaterialActions(
-          context: context,
-          onConfirm: onConfirm,
-          onDeny: onDeny,
+          // Reset color preview
+          contents: [
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: getTextColor(resetColor)),
+              ),
+              child: CircleAvatar(
+                backgroundColor: resetColor,
+                radius: _padding * 2,
+                child: currColor == Colors.transparent
+                    ? Icon(PlatformIcons(context).eyeSlash)
+                    : null,
+              ),
+            ),
+          ],
+          materialActions: ezMaterialActions(
+            context: context,
+            onConfirm: onConfirm,
+            onDeny: onDeny,
+          ),
+          cupertinoActions: ezCupertinoActions(
+            context: context,
+            onConfirm: onConfirm,
+            onDeny: onDeny,
+          ),
+          needsClose: false,
         ),
-        cupertinoActions: ezCupertinoActions(
-          context: context,
-          onConfirm: onConfirm,
-          onDeny: onDeny,
-        ),
-        needsClose: false,
-      ),
-    );
+      );
+    }
   }
 
   /// Opens an [EzAlertDialog] with the all optional actions
