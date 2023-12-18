@@ -628,6 +628,24 @@ abstract class EFUILang {
   /// **'Add a color'**
   String get csAddColor;
 
+  /// No description provided for @csRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get csRemove;
+
+  /// No description provided for @csReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get csReset;
+
+  /// No description provided for @csResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to...'**
+  String get csResetTo;
+
   /// No description provided for @csSchemeBase.
   ///
   /// In en, this message translates to:
@@ -651,12 +669,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'color scheme'**
   String get csColorScheme;
-
-  /// No description provided for @csResetTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
 
   /// No description provided for @csResetAll.
   ///

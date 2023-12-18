@@ -126,13 +126,15 @@
   "csUseCustom": "Usar personalizado",
 
   "csAddColor": "Añadir un color",
+  "csRemove": "Eliminar",
+  "csReset": "Restablecer",
+  "csResetTo": "Restablecer a...",
   
   "csSchemeBase": "Construir a partir\nde la imagen",
   "csOptional": "opcional",
   "csFromImage": "Construye la paleta de colores a partir de una imagen",
   "csColorScheme": "esquema de colores",
 
-  "csResetTo": "Restablecer a...",
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
 
 

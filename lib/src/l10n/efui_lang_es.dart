@@ -299,6 +299,15 @@ class EFUILangEs extends EFUILang {
   String get csAddColor => 'Añadir un color';
 
   @override
+  String get csRemove => 'Eliminar';
+
+  @override
+  String get csReset => 'Restablecer';
+
+  @override
+  String get csResetTo => 'Restablecer a...';
+
+  @override
   String get csSchemeBase => 'Construir a partir\nde la imagen';
 
   @override
@@ -310,9 +319,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get csColorScheme => 'esquema de colores';
-
-  @override
-  String get csResetTo => 'Restablecer a...';
 
   @override
   String csResetAll(Object themeType) {

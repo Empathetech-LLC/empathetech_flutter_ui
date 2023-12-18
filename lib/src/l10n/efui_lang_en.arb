@@ -124,15 +124,17 @@
   "csPickerTitle": "Pick a color!",
   "csRecommended": "Use contrast recommendation?",
   "csUseCustom": "Use custom",
-  
+
   "csAddColor": "Add a color",
+  "csRemove": "Remove",
+  "csReset": "Reset",
+  "csResetTo": "Reset to...",
 
   "csSchemeBase": "Build from\nimage",
   "csOptional": "optional",
   "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",
 
-  "csResetTo": "Reset to...",
   "csResetAll": "Reset all {themeType} theme colors?",
   
   
