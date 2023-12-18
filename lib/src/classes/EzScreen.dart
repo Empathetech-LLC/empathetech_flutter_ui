@@ -56,7 +56,7 @@ class EzScreen extends StatelessWidget {
 
     Decoration? buildDecoration() {
       if (decorationImageKey == null) {
-        return decoration;
+        return null;
       }
 
       final String? imagePath = EzConfig.get(decorationImageKey!);
@@ -77,7 +77,7 @@ class EzScreen extends StatelessWidget {
       key: key,
       alignment: alignment,
       padding: _margin,
-      decoration: buildDecoration(),
+      decoration: decoration ?? buildDecoration(),
       width: width,
       height: height,
       constraints: constraints,
