@@ -44,11 +44,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final String _fromImageTitle =
       "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
 
-  /// Reset button dialog title
-  late final String _resetTitle =
+  late final String _resetDialogTitle =
       EFUILang.of(context)!.csResetAll(_themeProfile);
-
-  // Define the dynamic page content //
 
   late final List<String> _defaultList = _isLight
       ? [
@@ -65,26 +62,97 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           darkBackgroundKey,
           darkSurfaceKey,
         ];
+  late final _defaultSet = _defaultList.toSet();
+  late final List<String> _fullList = _isLight ? lightColors : darkColors;
+
+  /// Return the [List] of [Widget]s that aren't [EzColorSetting]s
+  late final List<Widget> _otherButtons = _isLight
+      ? [
+          Semantics(
+            button: true,
+            hint: _fromImageHint,
+            child: ExcludeSemantics(
+              child: EzImageSetting(
+                prefsKey: lightColorSchemeImageKey,
+                label: _fromImageLabel,
+                dialogTitle: _fromImageTitle,
+                allowClear: true,
+                updateTheme: Brightness.light,
+                hideThemeMessage: true,
+              ),
+            ),
+          ),
+          _buttonSeparator,
+
+          // Local reset all
+          EzResetButton(
+            context: context,
+            hint: _resetDialogTitle,
+            dialogTitle: _resetDialogTitle,
+            onConfirm: () {
+              EzConfig.removeKeys(
+                {...lightColorKeys.keys.toSet(), userColorsKey},
+              );
+              setState(() {
+                _currList = new List.from(_defaultList);
+              });
+              popScreen(context: context, result: true);
+            },
+          ),
+        ]
+      : [
+          Semantics(
+            button: true,
+            hint: _fromImageHint,
+            child: ExcludeSemantics(
+              child: EzImageSetting(
+                prefsKey: darkColorSchemeImageKey,
+                label: _fromImageLabel,
+                dialogTitle: _fromImageTitle,
+                allowClear: true,
+                updateTheme: Brightness.dark,
+                hideThemeMessage: true,
+              ),
+            ),
+          ),
+          _buttonSeparator,
+
+          // Local reset all
+          EzResetButton(
+            context: context,
+            hint: _resetDialogTitle,
+            dialogTitle: _resetDialogTitle,
+            onConfirm: () {
+              EzConfig.removeKeys(
+                {...darkColorKeys.keys.toSet(), userColorsKey},
+              );
+              setState(() {
+                _currList = new List.from(_defaultList);
+              });
+              popScreen(context: context, result: true);
+            },
+          ),
+        ];
+
+  // Define the dynamic page content //
 
   late List<String> _currList =
       EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
-  late final List<String> _fullList = _isLight ? lightColors : darkColors;
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> _dynamicColorSettings() {
     List<Widget> toReturn = [];
-    Set<String> defaultSet = _defaultList.toSet();
 
     for (String key in _currList) {
-      if (defaultSet.contains(key)) {
+      if (_defaultSet.contains(key)) {
+        // Non-removable buttons
         toReturn.addAll([
-          EzColorSetting(
-            setting: key,
-          ),
+          EzColorSetting(setting: key),
           _buttonSpacer,
         ]);
       } else {
         toReturn.addAll([
+          // Removable buttons
           EzColorSetting(
               setting: key,
               onRemove: () {
@@ -180,6 +248,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               label: EFUILang.of(context)!.csAddColor,
               textAlign: TextAlign.center,
               onTap: () async {
+                // Show available color settings
                 await showModalBottomSheet(
                   context: context,
                   builder: (context) => StatefulBuilder(
@@ -191,50 +260,21 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   ),
                 );
 
-                final List<String> sortedList = new List.from(_currList);
-                sortedList.sort(
-                  (a, b) => _fullList.indexOf(a) - _fullList.indexOf(b),
-                );
-                EzConfig.setStringList(userColorsKey, sortedList);
+                // Save the user's changes (if any)
+                if (_currList != _defaultList) {
+                  final List<String> sortedList = new List.from(_currList);
+                  sortedList.sort(
+                    (a, b) => _fullList.indexOf(a) - _fullList.indexOf(b),
+                  );
+                  EzConfig.setStringList(userColorsKey, sortedList);
+                }
               },
               semanticsLabel: EFUILang.of(context)!.csAddColor,
             ),
             _buttonSeparator,
 
             // Build from image
-            Semantics(
-              button: true,
-              hint: _fromImageHint,
-              child: ExcludeSemantics(
-                child: EzImageSetting(
-                  prefsKey: _isLight
-                      ? lightColorSchemeImageKey
-                      : darkColorSchemeImageKey,
-                  label: _fromImageLabel,
-                  dialogTitle: _fromImageTitle,
-                  allowClear: true,
-                  updateTheme: _isLight ? Brightness.light : Brightness.dark,
-                  hideThemeMessage: true,
-                ),
-              ),
-            ),
-            _buttonSeparator,
-
-            // Local reset all
-            EzResetButton(
-              context: context,
-              hint: _resetTitle,
-              dialogTitle: _resetTitle,
-              onConfirm: () {
-                EzConfig.removeKeys(_isLight
-                    ? {...lightColorKeys.keys.toSet(), userColorsKey}
-                    : {...darkColorKeys.keys.toSet(), userColorsKey});
-                setState(() {
-                  _currList = new List.from(_defaultList);
-                });
-                popScreen(context: context, result: true);
-              },
-            ),
+            ..._otherButtons,
             _buttonSeparator,
 
             // Help
