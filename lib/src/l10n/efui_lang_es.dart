@@ -32,6 +32,9 @@ class EFUILangEs extends EFUILang {
   String get gRight => 'Derecha';
 
   @override
+  String get gBack => 'Atrás';
+
+  @override
   String get gSystem => 'Sistema';
 
   @override

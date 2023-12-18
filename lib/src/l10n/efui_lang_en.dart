@@ -32,6 +32,9 @@ class EFUILangEn extends EFUILang {
   String get gRight => 'Right';
 
   @override
+  String get gBack => 'Back';
+
+  @override
   String get gSystem => 'System';
 
   @override

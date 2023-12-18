@@ -148,6 +148,12 @@ abstract class EFUILang {
   /// **'Right'**
   String get gRight;
 
+  /// No description provided for @gBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get gBack;
+
   /// No description provided for @gSystem.
   ///
   /// In en, this message translates to:

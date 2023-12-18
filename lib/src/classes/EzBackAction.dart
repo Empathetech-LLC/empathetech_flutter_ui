@@ -18,6 +18,7 @@ class EzBackAction extends StatelessWidget {
         ? IconButton(
             icon: Icon(PlatformIcons(context).back),
             onPressed: () => popScreen(context: context),
+            tooltip: EFUILang.of(context)!.gBack,
           )
         : SizedBox.shrink();
   }
