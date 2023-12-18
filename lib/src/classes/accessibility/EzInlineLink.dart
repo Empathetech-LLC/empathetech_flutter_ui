@@ -19,18 +19,16 @@ class EzInlineLink extends WidgetSpan {
   final Uri? url;
 
   /// Message for screen readers
-  final String semanticsLabel;
+  final String? semanticsLabel;
 
-  /// [TextSpan] wrapper that either opens an internal link via [onTap]
-  /// Or an external link to [url]
-  /// Requires [semanticsLabel] for screen readers
+  /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
   EzInlineLink(
     this.text, {
     this.key,
     this.style,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    this.semanticsLabel,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
