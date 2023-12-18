@@ -52,7 +52,9 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = EzConfig.get(marginKey);
     final double padding = EzConfig.get(paddingKey);
+    final double buttonSpacing = EzConfig.get(buttonSpacingKey);
 
     CupertinoDialogAction _closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
@@ -69,24 +71,16 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         // Content
         content: content ?? EzScrollView(children: contents),
-        contentPadding: EdgeInsets.only(
-          left: padding,
-          right: padding,
-          bottom: padding,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: padding),
 
         // Actions
         actions: materialActions,
-        actionsPadding: EdgeInsets.only(
-          left: padding,
-          right: padding,
-          bottom: padding,
-        ),
+        actionsPadding: EdgeInsets.all(buttonSpacing),
 
         // General
-        iconPadding: EdgeInsets.all(padding),
-        buttonPadding: EdgeInsets.all(padding),
-        insetPadding: EdgeInsets.all(padding),
+        iconPadding: EdgeInsets.all(buttonSpacing),
+        buttonPadding: EdgeInsets.only(right: buttonSpacing),
+        insetPadding: EdgeInsets.all(margin),
       ),
       cupertino: (context, platform) => CupertinoAlertDialogData(
         title: Padding(
@@ -108,7 +102,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 /// Pairs with [EzAlertDialog]
 /// Quickly creates Material 'action' buttons for the dialog
 /// All required parameters are identical to [ezCupertinoActions]
-List<Widget>? ezMaterialActions({
+List<TextButton> ezMaterialActions({
   required BuildContext context,
   required void Function() onConfirm,
   required void Function() onDeny,
@@ -133,7 +127,7 @@ List<Widget>? ezMaterialActions({
 /// Pairs with [EzAlertDialog]
 /// Quickly creates [CupertinoDialogAction]s
 /// All required parameters are identical to [ezMaterialActions]
-List<CupertinoDialogAction>? ezCupertinoActions({
+List<CupertinoDialogAction> ezCupertinoActions({
   required BuildContext context,
   required void Function() onConfirm,
   required void Function() onDeny,
