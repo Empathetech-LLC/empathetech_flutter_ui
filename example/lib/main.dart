@@ -19,8 +19,8 @@ void main() async {
   // Get a SharedPreferences instance to... share
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Spin up the theme factory!
-  EzConfig(
+  // Make it so
+  EzConfig.init(
     // Paths to any locally stored images the app uses
     assetPaths: {},
 
