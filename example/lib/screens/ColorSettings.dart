@@ -78,7 +78,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         toReturn.addAll([
           EzColorSetting(
             setting: key,
-            allowTransparent: false,
+            showTransparent: false,
           ),
           _buttonSpacer,
         ]);
@@ -90,6 +90,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 setState(() {
                   _currList.remove(key);
                 });
+                EzConfig.setStringList(userColorsKey, _currList);
                 popScreen(context: context);
               }),
           _buttonSpacer,
@@ -134,6 +135,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               _currList.add(key);
             });
             modalSheetState(() {});
+            EzConfig.setStringList(userColorsKey, _currList);
           },
         ),
         _buttonSpacer,
@@ -238,13 +240,5 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    if (_currList.isNotEmpty && _currList != _defaultList) {
-      EzConfig.setStringList(userColorsKey, _currList);
-    }
-    super.dispose();
   }
 }
