@@ -46,12 +46,12 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
         child: EzScrollView(
           children: [
             // Font
-            EzSpacer(_buttonSpace > _margin ? _buttonSpace - _margin : 0),
+            if (_buttonSpace > _margin) EzSpacer(_buttonSpace - _margin),
             const EzFontSetting(),
             _buttonSpacer,
 
             // Margin
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
               min: 0.0,
@@ -62,7 +62,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             _buttonSpacer,
 
             // Padding
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: paddingKey,
               type: SliderSettingType.padding,
               min: 0.0,
@@ -73,7 +73,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             _buttonSpacer,
 
             // Button spacing
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
               min: 10.0,
@@ -84,7 +84,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             _buttonSpacer,
 
             // Text spacing
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
               min: 10.0,
