@@ -120,7 +120,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               radius: _padding * sqrt(2),
             ),
           ),
-          label: Text(getColorName(context, key), textAlign: TextAlign.center),
+          label: Text(getColorName(context, key)),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(_padding * 0.75),
