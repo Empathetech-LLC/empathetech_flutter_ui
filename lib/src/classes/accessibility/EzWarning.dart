@@ -17,7 +17,7 @@ class EzWarning extends StatelessWidget {
   final TextStyle? style;
 
   /// [Card] wrapper designed to grab attention for warnings...
-  ///  (!) [warning] (!)
+  ///  /!\ [warning] /!\
   ///      [message]
   const EzWarning({
     this.warning,
@@ -31,6 +31,8 @@ class EzWarning extends StatelessWidget {
 
     final double margin = EzConfig.get(marginKey);
     final double padding = EzConfig.get(paddingKey);
+
+    final EzSpacer rowPadding = EzSpacer.row(padding);
 
     final String _warning = warning ?? EFUILang.of(context)!.gAttention;
 
@@ -57,14 +59,14 @@ class EzWarning extends StatelessWidget {
                       color: iconColor,
                       size: style?.fontSize,
                     ),
-                    EzSpacer.row(padding),
+                    rowPadding,
 
                     Text(
                       _warning,
                       style: style,
                       textAlign: TextAlign.center,
                     ),
-                    EzSpacer.row(padding),
+                    rowPadding,
 
                     // Thing 2
                     Icon(
