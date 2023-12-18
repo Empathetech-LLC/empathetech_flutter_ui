@@ -78,7 +78,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         toReturn.addAll([
           EzColorSetting(
             setting: key,
-            showTransparent: false,
           ),
           _buttonSpacer,
         ]);
