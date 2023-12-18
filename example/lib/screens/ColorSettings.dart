@@ -135,7 +135,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               _currList.add(key);
             });
             modalSheetState(() {});
-            EzConfig.setStringList(userColorsKey, _currList);
           },
         ),
         _buttonSpacer,
@@ -178,15 +177,24 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               icon: Icon(PlatformIcons(context).addCircledOutline),
               label: EFUILang.of(context)!.csAddColor,
               textAlign: TextAlign.center,
-              onTap: () => showModalBottomSheet(
-                context: context,
-                builder: (context) => StatefulBuilder(
-                  builder: (BuildContext context, StateSetter modalSheetState) {
-                    return EzScrollView(
-                        children: _getUntrackedColors(modalSheetState));
-                  },
-                ),
-              ),
+              onTap: () async {
+                await showModalBottomSheet(
+                  context: context,
+                  builder: (context) => StatefulBuilder(
+                    builder:
+                        (BuildContext context, StateSetter modalSheetState) {
+                      return EzScrollView(
+                          children: _getUntrackedColors(modalSheetState));
+                    },
+                  ),
+                );
+
+                final List<String> sortedList = new List.from(_currList);
+                sortedList.sort(
+                  (a, b) => _fullList.indexOf(a) - _fullList.indexOf(b),
+                );
+                EzConfig.setStringList(userColorsKey, sortedList);
+              },
               semanticsLabel: EFUILang.of(context)!.csAddColor,
             ),
             _buttonSeparator,
