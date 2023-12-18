@@ -60,13 +60,12 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
-    // Define the build //
+    // Define the dialog //
+
     final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.gResetAll;
 
-    final OutlinedButton resetButton = OutlinedButton.icon(
-      icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? EFUILang.of(context)!.gResetAll),
-      onPressed: () => showPlatformDialog(
+    void resetDialog() {
+      showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
           title: Text(
@@ -93,15 +92,21 @@ class EzResetButton extends StatelessWidget {
           ),
           needsClose: false,
         ),
-      ),
-    );
+      );
+    }
 
     // Return the build //
 
     return Semantics(
       button: true,
       hint: hint ?? _dialogTitle,
-      child: ExcludeSemantics(child: resetButton),
+      child: ExcludeSemantics(
+        child: OutlinedButton.icon(
+          icon: Icon(PlatformIcons(context).refresh),
+          label: Text(label ?? EFUILang.of(context)!.gResetAll),
+          onPressed: resetDialog,
+        ),
+      ),
     );
   }
 }
