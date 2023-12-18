@@ -175,7 +175,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     return _fullList
         .where((element) => !_currList.contains(element))
         .toList()
-        .fold<List<Widget>>([], (accumulator, key) {
+        .fold<List<Widget>>([_buttonSpacer], (accumulator, key) {
       accumulator.addAll([
         ElevatedButton.icon(
           icon: Container(
