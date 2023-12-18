@@ -29,6 +29,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the static page content //
 
+  late final String _title = EFUILang.of(context)!.csPageTitle;
+
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
@@ -147,7 +149,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.csPageTitle);
+    setPageTitle(_title);
   }
 
   // Return the build //
@@ -155,6 +157,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
+      title: _title,
       body: EzScreen(
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(

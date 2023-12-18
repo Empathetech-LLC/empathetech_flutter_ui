@@ -27,10 +27,12 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
   // Set the page title //
 
+  late final String _title = EFUILang.of(context)!.stsPageTitle;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.stsPageTitle);
+    setPageTitle(_title);
   }
 
   // Return the build //
@@ -38,6 +40,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
+      title: _title,
       body: EzScreen(
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
