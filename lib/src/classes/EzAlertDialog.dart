@@ -71,14 +71,23 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         // Content
         content: content ?? EzScrollView(children: contents),
-        contentPadding: EdgeInsets.symmetric(horizontal: padding),
+        contentPadding: EdgeInsets.only(
+          left: padding,
+          right: padding,
+          bottom: padding,
+        ),
 
         // Actions
         actions: materialActions,
-        actionsPadding: EdgeInsets.all(buttonSpacing),
+        actionsPadding: EdgeInsets.only(
+          top: (buttonSpacing > padding) ? (buttonSpacing - padding) : 0.0,
+          left: buttonSpacing,
+          right: buttonSpacing,
+          bottom: buttonSpacing,
+        ),
 
         // General
-        iconPadding: EdgeInsets.all(buttonSpacing),
+        iconPadding: EdgeInsets.only(right: buttonSpacing),
         buttonPadding: EdgeInsets.only(right: buttonSpacing),
         insetPadding: EdgeInsets.all(margin),
       ),
