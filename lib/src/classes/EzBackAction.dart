@@ -14,10 +14,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzBackAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Check if there is a Navigator and if it can pop
-    bool canPop = Navigator.canPop(context);
-
-    return canPop
+    return Navigator.canPop(context)
         ? IconButton(
             icon: Icon(PlatformIcons(context).back),
             onPressed: () => popScreen(context: context),
