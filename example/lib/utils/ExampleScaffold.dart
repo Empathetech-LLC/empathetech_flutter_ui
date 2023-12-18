@@ -6,9 +6,14 @@ import 'package:go_router/go_router.dart';
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
   final Widget body;
+  final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
-  const ExampleScaffold({this.key, required this.body}) : super(key: key);
+  const ExampleScaffold({
+    this.key,
+    required this.body,
+    this.fab,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class ExampleScaffold extends StatelessWidget {
 
         // Body
         body: body,
-        floatingActionButton: null,
+        floatingActionButton: fab,
       ),
     );
   }

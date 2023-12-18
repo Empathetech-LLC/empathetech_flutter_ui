@@ -114,6 +114,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
           ],
         ),
       ),
+      fab: BackFAB(context: context),
     );
   }
 }
