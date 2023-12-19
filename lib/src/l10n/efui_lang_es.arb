@@ -63,11 +63,11 @@
   "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
   "isFromFile": "Desde archivo",
   "isFromCamera": "Desde cámara",
-  "isFromNetwork": "Ingrese URL",
+  "isFromNetwork": "Desde URL",
   "isResetIt": "Restablécelo",
   "isClearIt": "Borrarlo",
 
-  "isEnterURL": "Desde URL",
+  "isEnterURL": "Ingrese URL",
   "isGetFailed": "Error al recuperar la imagen",
   "isSetFailed": "Error al actualizar la imagen:\n{error}",
 

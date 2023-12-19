@@ -163,7 +163,7 @@ class EFUILangEs extends EFUILang {
   String get isFromCamera => 'Desde cámara';
 
   @override
-  String get isFromNetwork => 'Ingrese URL';
+  String get isFromNetwork => 'Desde URL';
 
   @override
   String get isResetIt => 'Restablécelo';
@@ -172,7 +172,7 @@ class EFUILangEs extends EFUILang {
   String get isClearIt => 'Borrarlo';
 
   @override
-  String get isEnterURL => 'Desde URL';
+  String get isEnterURL => 'Ingrese URL';
 
   @override
   String get isGetFailed => 'Error al recuperar la imagen';
