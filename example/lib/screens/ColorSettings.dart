@@ -244,11 +244,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             _buttonSpacer,
 
             // Add a color
-            EzIconLink(
+            TextButton.icon(
               icon: Icon(PlatformIcons(context).addCircledOutline),
-              label: EFUILang.of(context)!.csAddColor,
-              textAlign: TextAlign.center,
-              onTap: () async {
+              label: Text(EFUILang.of(context)!.csAddColor),
+              onPressed: () async {
                 // Show available color settings
                 await showModalBottomSheet(
                   context: context,
