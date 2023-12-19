@@ -91,6 +91,7 @@ class _EzLinkState extends State<EzLink> {
         child: ExcludeSemantics(
           child: TextButton(
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+            onLongPress: null,
             onHover: (isHovering) => _addUnderline(isHovering),
             onFocusChange: (hasFocus) => _addUnderline(hasFocus),
             child: Text(
