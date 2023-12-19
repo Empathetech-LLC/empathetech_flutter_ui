@@ -169,46 +169,49 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
   List<Widget> _getUntrackedColors(StateSetter modalSheetState) {
+    final Set<String> _currSet = _currList.toSet();
+
     return _fullList
-        .where((element) => !_currList.contains(element))
-        .map<Widget>((String settingKey) {
-      return Container(
-        padding: EdgeInsets.symmetric(
-          vertical: _buttonSpace / 2,
-          horizontal: _buttonSpace,
-        ),
-        child: ElevatedButton.icon(
-          key: ValueKey(settingKey),
-          icon: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primaryContainer,
-              ),
+        .where((element) => !_currSet.contains(element))
+        .map<Widget>(
+          (String settingKey) => Container(
+            padding: EdgeInsets.symmetric(
+              vertical: _buttonSpace / 2,
+              horizontal: _buttonSpace,
             ),
-            child: CircleAvatar(
-              backgroundColor: getLiveColor(context, settingKey),
-              radius: _padding * sqrt(2),
+            child: ElevatedButton.icon(
+              key: ValueKey(settingKey),
+              icon: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                ),
+                child: CircleAvatar(
+                  backgroundColor: getLiveColor(context, settingKey),
+                  radius: _padding * sqrt(2),
+                ),
+              ),
+              label: Text(getColorName(context, settingKey)),
+              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                    padding: MaterialStateProperty.all(
+                      EdgeInsets.all(_padding * 0.75),
+                    ),
+                    foregroundColor: MaterialStatePropertyAll(
+                      Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+              onPressed: () {
+                setState(() {
+                  _currList.add(settingKey);
+                });
+                modalSheetState(() {});
+              },
             ),
           ),
-          label: Text(getColorName(context, settingKey)),
-          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                padding: MaterialStateProperty.all(
-                  EdgeInsets.all(_padding * 0.75),
-                ),
-                foregroundColor: MaterialStatePropertyAll(
-                  Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-          onPressed: () {
-            setState(() {
-              _currList.add(settingKey);
-            });
-            modalSheetState(() {});
-          },
-        ),
-      );
-    }).toList();
+        )
+        .toList();
   }
 
   // Set the page title //
