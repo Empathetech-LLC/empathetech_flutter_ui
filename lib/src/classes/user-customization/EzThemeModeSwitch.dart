@@ -22,6 +22,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   late ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
 
+  late final String _label = EFUILang.of(context)!.ssThemeMode;
+
   // Define functions //
   String _getName(ThemeMode? curr) {
     switch (curr) {
@@ -67,9 +69,10 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         children: [
           // Label
           Text(
-            EFUILang.of(context)!.ssThemeMode,
+            _label,
             style: Theme.of(context).dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
+            semanticsLabel: EFUILang.of(context)!.gSettingX(_label),
           ),
           EzSpacer.row(_padding),
 

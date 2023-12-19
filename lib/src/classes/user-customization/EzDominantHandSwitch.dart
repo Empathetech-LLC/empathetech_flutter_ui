@@ -23,6 +23,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   final double _padding = EzConfig.get(paddingKey);
 
+  late final String _label = EFUILang.of(context)!.ssDominantHand;
+
   @override
   Widget build(BuildContext context) {
     // Define the list items //
@@ -44,9 +46,10 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     List<Widget> _children = [
       // Label
       Text(
-        EFUILang.of(context)!.ssDominantHand,
+        _label,
         style: Theme.of(context).dropdownMenuTheme.textStyle,
         textAlign: TextAlign.center,
+        semanticsLabel: EFUILang.of(context)!.gSettingX(_label),
       ),
       EzSpacer.row(_padding),
 

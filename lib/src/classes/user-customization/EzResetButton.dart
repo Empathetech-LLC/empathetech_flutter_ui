@@ -16,10 +16,6 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
-  /// [Semantics] message for screen readers
-  /// Defaults to [dialogTitle]
-  final String? hint;
-
   /// [EzAlertDialog.title] that shows on click
   /// Defaults to [EFUILang.gResetAll]
   final String? dialogTitle;
@@ -41,7 +37,6 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton({
     required this.context,
     this.label,
-    this.hint,
     this.dialogTitle,
     this.dialogContent,
     this.onConfirm,
@@ -97,16 +92,10 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return Semantics(
-      button: true,
-      hint: hint ?? _dialogTitle,
-      child: ExcludeSemantics(
-        child: OutlinedButton.icon(
-          icon: Icon(PlatformIcons(context).refresh),
-          label: Text(label ?? EFUILang.of(context)!.gResetAll),
-          onPressed: resetDialog,
-        ),
-      ),
+    return OutlinedButton.icon(
+      icon: Icon(PlatformIcons(context).refresh),
+      label: Text(label ?? EFUILang.of(context)!.gResetAll),
+      onPressed: resetDialog,
     );
   }
 }

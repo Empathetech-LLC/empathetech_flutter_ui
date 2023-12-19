@@ -87,7 +87,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           // Local reset all
           EzResetButton(
             context: context,
-            hint: _resetDialogTitle,
             dialogTitle: _resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(
@@ -120,7 +119,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           // Local reset all
           EzResetButton(
             context: context,
-            hint: _resetDialogTitle,
             dialogTitle: _resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(

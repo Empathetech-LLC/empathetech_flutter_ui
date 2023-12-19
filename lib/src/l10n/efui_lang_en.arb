@@ -10,6 +10,8 @@
   "gCancel": "Cancel",
   "gClose": "Close",
 
+  "gSettingX": "{setting} setting",
+
   "gLeft": "Left",
   "gRight": "Right",
   "gBack": "Back",
@@ -43,13 +45,13 @@
 
   "ssLanguage": "Language",
   "ssLanguages": "Languages",
-  "ssLangSemantics": "Activate to update the app language",
+  "ssLangSemantics": "App language",
 
   "ssThemeMode": "Theme mode",
-  "ssThemeSemantics": "Open to select a theme mode. Currently set to:",
+  "ssThemeSemantics": "Currently set to:",
 
   "ssDominantHand": "Dominant hand",
-  "ssHandSemantics": "Open to choose left or right. Currently set to:",
+  "ssHandSemantics": "Currently set to:",
 
   "ssResetAll": "Reset all settings?",
 

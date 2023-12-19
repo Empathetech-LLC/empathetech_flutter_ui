@@ -136,6 +136,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gSettingX.
+  ///
+  /// In en, this message translates to:
+  /// **'{setting} setting'**
+  String gSettingX(Object setting);
+
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:
@@ -295,7 +301,7 @@ abstract class EFUILang {
   /// No description provided for @ssLangSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Activate to update the app language'**
+  /// **'App language'**
   String get ssLangSemantics;
 
   /// No description provided for @ssThemeMode.
@@ -307,7 +313,7 @@ abstract class EFUILang {
   /// No description provided for @ssThemeSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Open to select a theme mode. Currently set to:'**
+  /// **'Currently set to:'**
   String get ssThemeSemantics;
 
   /// No description provided for @ssDominantHand.
@@ -319,7 +325,7 @@ abstract class EFUILang {
   /// No description provided for @ssHandSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Open to choose left or right. Currently set to:'**
+  /// **'Currently set to:'**
   String get ssHandSemantics;
 
   /// No description provided for @ssResetAll.

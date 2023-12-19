@@ -26,6 +26,11 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String gSettingX(Object setting) {
+    return 'Configuración de $setting';
+  }
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override
@@ -117,22 +122,19 @@ class EFUILangEs extends EFUILang {
   String get ssLanguages => 'Idiomas';
 
   @override
-  String get ssLangSemantics =>
-      'Activa para actualizar el idioma de la aplicación';
+  String get ssLangSemantics => 'Idioma de la aplicación';
 
   @override
   String get ssThemeMode => 'Modo de tema';
 
   @override
-  String get ssThemeSemantics =>
-      'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
+  String get ssThemeSemantics => 'Actualmente configurado en:';
 
   @override
   String get ssDominantHand => 'Mano dominante';
 
   @override
-  String get ssHandSemantics =>
-      'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
+  String get ssHandSemantics => 'Actualmente configurado en:';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';

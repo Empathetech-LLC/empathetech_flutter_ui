@@ -103,15 +103,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final String hint = EFUILang.of(context)!.ssLangSemantics;
-    final String setting = EFUILang.of(context)!.gSetToValue(
-      EFUILang.of(context)!.ssLanguage,
-      LocaleNames.of(context)!.nameOf(currLocale.languageCode)!,
-    );
-
     return Semantics(
       button: true,
-      hint: "$hint. $setting",
+      hint: EFUILang.of(context)!.ssLangSemantics,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),

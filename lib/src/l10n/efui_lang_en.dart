@@ -26,6 +26,11 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
+  String gSettingX(Object setting) {
+    return '$setting setting';
+  }
+
+  @override
   String get gLeft => 'Left';
 
   @override
@@ -117,21 +122,19 @@ class EFUILangEn extends EFUILang {
   String get ssLanguages => 'Languages';
 
   @override
-  String get ssLangSemantics => 'Activate to update the app language';
+  String get ssLangSemantics => 'App language';
 
   @override
   String get ssThemeMode => 'Theme mode';
 
   @override
-  String get ssThemeSemantics =>
-      'Open to select a theme mode. Currently set to:';
+  String get ssThemeSemantics => 'Currently set to:';
 
   @override
   String get ssDominantHand => 'Dominant hand';
 
   @override
-  String get ssHandSemantics =>
-      'Open to choose left or right. Currently set to:';
+  String get ssHandSemantics => 'Currently set to:';
 
   @override
   String get ssResetAll => 'Reset all settings?';
