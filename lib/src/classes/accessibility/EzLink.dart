@@ -26,13 +26,19 @@ class EzLink extends StatefulWidget {
   final Uri? url;
 
   /// Message for screen readers
+  /// Defaults to [text]
   final String? semanticsLabel;
+
+  /// On hover/focus hint
+  /// Defaults to [semanticsLabel] (or [text])
+  final String? tooltip;
 
   final MaterialStatesController? statesController;
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Always has a [semanticsLabel]; if one is not provided, it will default to [text]
+  /// Also has a [tooltip]; if one is not provided, it will default to [semanticsLabel] (or [text])
   /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzLink(
@@ -44,6 +50,7 @@ class EzLink extends StatefulWidget {
     this.onTap,
     this.url,
     this.semanticsLabel,
+    this.tooltip,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -73,109 +80,24 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      link: true,
-      hint: widget.semanticsLabel ?? widget.text,
-      child: ExcludeSemantics(
-        child: TextButton(
-          onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-          onHover: (isHovering) => _addUnderline(isHovering),
-          onFocusChange: (hasFocus) => _addUnderline(hasFocus),
-          child: Text(
-            widget.text,
-            style: _style,
-            textAlign: widget.textAlign,
-          ),
-        ),
-      ),
-    );
-  }
-}
+    final String semantics = widget.semanticsLabel ?? widget.text;
 
-class EzIconLink extends StatefulWidget {
-  final Key? key;
-
-  /// Link icon
-  final Widget icon;
-
-  /// Link message
-  final String label;
-
-  final TextStyle? style;
-
-  /// Optional [Color] to overwrite the default [ColorScheme.primary]
-  final Color? color;
-
-  final TextAlign? textAlign;
-
-  /// Destination function
-  final void Function()? onTap;
-
-  /// Destination URL
-  final Uri? url;
-
-  /// Message for screen readers
-  final String? semanticsLabel;
-
-  final MaterialStatesController? statesController;
-
-  /// [TextButton.icon] wrapper that acts like [Text] and either opens an internal link via [onTap]
-  /// Or an external link to [url]
-  /// Always has a [semanticsLabel]; if one is not provided, it will default to [label]
-  /// Automatically colors [label] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
-  /// The [color] can optionally be overwritten
-  EzIconLink({
-    this.key,
-    required this.icon,
-    required this.label,
-    this.style,
-    this.color,
-    this.textAlign,
-    this.onTap,
-    this.url,
-    this.semanticsLabel,
-    this.statesController,
-  })  : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.'),
-        super(key: key);
-
-  @override
-  _EzIconLinkState createState() => _EzIconLinkState();
-}
-
-class _EzIconLinkState extends State<EzIconLink> {
-  late final Color _color =
-      widget.color ?? Theme.of(context).colorScheme.primary;
-
-  late TextStyle? _style = widget.style?.copyWith(
-    color: _color,
-    decoration: TextDecoration.none,
-    decorationColor: _color,
-  );
-
-  void _addUnderline(bool addIt) {
-    setState(() {
-      _style = _style?.copyWith(
-        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-      );
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      hint: widget.semanticsLabel ?? widget.label,
-      child: ExcludeSemantics(
-        child: TextButton.icon(
-          onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-          onHover: (isHovering) => _addUnderline(isHovering),
-          onFocusChange: (hasFocus) => _addUnderline(hasFocus),
-          icon: widget.icon,
-          label: Text(
-            widget.label,
-            style: _style,
-            textAlign: widget.textAlign,
+    return Tooltip(
+      message: widget.tooltip ?? semantics,
+      excludeFromSemantics: true,
+      child: Semantics(
+        link: true,
+        hint: semantics,
+        child: ExcludeSemantics(
+          child: TextButton(
+            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+            onHover: (isHovering) => _addUnderline(isHovering),
+            onFocusChange: (hasFocus) => _addUnderline(hasFocus),
+            child: Text(
+              widget.text,
+              style: _style,
+              textAlign: widget.textAlign,
+            ),
           ),
         ),
       ),
