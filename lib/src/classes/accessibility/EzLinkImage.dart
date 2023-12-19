@@ -13,6 +13,9 @@ class EzLinkImage extends StatefulWidget {
   /// Message for screen readers
   final String semanticLabel;
 
+  /// Tooltip for on hover/focus
+  final String tooltip;
+
   /// Destination function
   final void Function()? onTap;
 
@@ -49,6 +52,7 @@ class EzLinkImage extends StatefulWidget {
     this.key,
     required this.image,
     required this.semanticLabel,
+    required this.tooltip,
     this.onTap,
     this.url,
     this.shadows,
@@ -100,43 +104,47 @@ class _EzLinkImageState extends State<EzLinkImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      image: true,
-      link: true,
-      hint: widget.semanticLabel,
-      child: ExcludeSemantics(
-        child: Focus(
-          focusNode: FocusNode(),
-          onFocusChange: (hasFocus) => _showShadow(hasFocus),
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            onEnter: (_) => _showShadow(true),
-            onExit: (_) => _showShadow(false),
-            child: GestureDetector(
-              onTap: widget.onTap ?? () => launchUrl(widget.url!),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: _shadow ? _shadows : [],
-                ),
-                child: Image(
-                  image: widget.image,
-                  frameBuilder: widget.frameBuilder,
-                  loadingBuilder: widget.loadingBuilder,
-                  errorBuilder: widget.errorBuilder,
-                  width: widget.width,
-                  height: widget.height,
-                  color: widget.color,
-                  opacity: widget.opacity,
-                  colorBlendMode: widget.colorBlendMode,
-                  fit: widget.fit,
-                  alignment: widget.alignment,
-                  repeat: widget.repeat,
-                  centerSlice: widget.centerSlice,
-                  matchTextDirection: widget.matchTextDirection,
-                  gaplessPlayback: widget.gaplessPlayback,
-                  isAntiAlias: widget.isAntiAlias,
-                  filterQuality: widget.filterQuality,
+    return Tooltip(
+      message: widget.tooltip,
+      excludeFromSemantics: true,
+      child: Semantics(
+        image: true,
+        link: true,
+        hint: widget.semanticLabel,
+        child: ExcludeSemantics(
+          child: Focus(
+            focusNode: FocusNode(),
+            onFocusChange: (hasFocus) => _showShadow(hasFocus),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_) => _showShadow(true),
+              onExit: (_) => _showShadow(false),
+              child: GestureDetector(
+                onTap: widget.onTap ?? () => launchUrl(widget.url!),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: _shadow ? _shadows : [],
+                  ),
+                  child: Image(
+                    image: widget.image,
+                    frameBuilder: widget.frameBuilder,
+                    loadingBuilder: widget.loadingBuilder,
+                    errorBuilder: widget.errorBuilder,
+                    width: widget.width,
+                    height: widget.height,
+                    color: widget.color,
+                    opacity: widget.opacity,
+                    colorBlendMode: widget.colorBlendMode,
+                    fit: widget.fit,
+                    alignment: widget.alignment,
+                    repeat: widget.repeat,
+                    centerSlice: widget.centerSlice,
+                    matchTextDirection: widget.matchTextDirection,
+                    gaplessPlayback: widget.gaplessPlayback,
+                    isAntiAlias: widget.isAntiAlias,
+                    filterQuality: widget.filterQuality,
+                  ),
                 ),
               ),
             ),
