@@ -109,6 +109,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+              tooltip: understandingLayout,
             ),
             _buttonSpacer,
           ],

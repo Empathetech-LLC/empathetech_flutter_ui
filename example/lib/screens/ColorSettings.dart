@@ -283,6 +283,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               textAlign: TextAlign.center,
               url: Uri.parse(materialColorRoles),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+              tooltip: materialColorRoles,
             ),
             _buttonSpacer,
           ],
