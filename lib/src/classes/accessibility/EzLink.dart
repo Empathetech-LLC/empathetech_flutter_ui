@@ -164,7 +164,7 @@ class _EzIconLinkState extends State<EzIconLink> {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      link: true,
+      button: true,
       hint: widget.semanticsLabel ?? widget.label,
       child: ExcludeSemantics(
         child: TextButton.icon(
