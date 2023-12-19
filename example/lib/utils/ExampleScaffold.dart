@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
-  final Widget title;
   final Widget body;
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ExampleScaffold({
     this.key,
-    required this.title,
     required this.body,
     this.fab,
   }) : super(key: key);
@@ -44,7 +42,7 @@ class ExampleScaffold extends StatelessWidget {
             automaticallyImplyLeading: isRighty,
 
             // Title
-            title: title,
+            title: Text(efui, semanticsLabel: efuiFix),
             titleSpacing: 0,
             centerTitle: true,
 

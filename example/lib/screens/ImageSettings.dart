@@ -25,8 +25,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   // Define the page content //
 
-  late final String _title = EFUILang.of(context)!.isPageTitle;
-
   late final String _themeProfile = _isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
@@ -81,7 +79,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(_title);
+    setPageTitle(EFUILang.of(context)!.isPageTitle);
   }
 
   // Return the build //
@@ -89,7 +87,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: Text(_title),
       body: EzScreen(
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
