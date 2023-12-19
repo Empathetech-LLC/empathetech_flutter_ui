@@ -171,11 +171,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   List<Widget> _getUntrackedColors(StateSetter modalSheetState) {
     return _fullList
         .where((element) => !_currList.contains(element))
-        .toList()
-        .fold<List<Widget>>([_buttonSpacer], (accumulator, key) {
-      accumulator.addAll([
-        ElevatedButton.icon(
-          key: ValueKey(key),
+        .map<Widget>((String settingKey) {
+      return Container(
+        padding: EdgeInsets.symmetric(
+          vertical: _buttonSpace / 2,
+          horizontal: _buttonSpace,
+        ),
+        child: ElevatedButton.icon(
+          key: ValueKey(settingKey),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -184,11 +187,11 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               ),
             ),
             child: CircleAvatar(
-              backgroundColor: getLiveColor(context, key),
+              backgroundColor: getLiveColor(context, settingKey),
               radius: _padding * sqrt(2),
             ),
           ),
-          label: Text(getColorName(context, key)),
+          label: Text(getColorName(context, settingKey)),
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(_padding * 0.75),
@@ -199,15 +202,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               ),
           onPressed: () {
             setState(() {
-              _currList.add(key);
+              _currList.add(settingKey);
             });
             modalSheetState(() {});
           },
         ),
-        _buttonSpacer,
-      ]);
-      return accumulator;
-    });
+      );
+    }).toList();
   }
 
   // Set the page title //
