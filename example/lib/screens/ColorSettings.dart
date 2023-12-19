@@ -194,7 +194,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 ),
               ),
               label: Text(getColorName(context, settingKey)),
-              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                     padding: MaterialStateProperty.all(
                       EdgeInsets.all(_padding * 0.75),
                     ),

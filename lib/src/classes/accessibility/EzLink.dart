@@ -44,7 +44,7 @@ class EzLink extends StatefulWidget {
   EzLink(
     this.text, {
     this.key,
-    this.style,
+    required this.style,
     this.color,
     this.textAlign,
     this.onTap,
@@ -64,7 +64,7 @@ class _EzLinkState extends State<EzLink> {
   late final Color _color =
       widget.color ?? Theme.of(context).colorScheme.primary;
 
-  late TextStyle? _style = widget.style?.copyWith(
+  late TextStyle _style = widget.style!.copyWith(
     color: _color,
     decoration: TextDecoration.none,
     decorationColor: _color,
@@ -72,7 +72,7 @@ class _EzLinkState extends State<EzLink> {
 
   void _addUnderline(bool addIt) {
     setState(() {
-      _style = _style?.copyWith(
+      _style = _style.copyWith(
         decoration: addIt ? TextDecoration.underline : TextDecoration.none,
       );
     });

@@ -351,7 +351,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
           ),
           label: Text(widget.label, textAlign: TextAlign.center),
-          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 padding:
                     MaterialStatePropertyAll(EdgeInsets.all(_padding * 0.75)),
                 foregroundColor: MaterialStatePropertyAll(

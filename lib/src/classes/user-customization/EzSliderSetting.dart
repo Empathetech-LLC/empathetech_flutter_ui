@@ -115,7 +115,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text(EFUILang.of(context)!.gCurrently),
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                       padding:
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
                     ),
@@ -124,7 +124,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                       padding:
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
                       shape: MaterialStatePropertyAll(const CircleBorder()),
