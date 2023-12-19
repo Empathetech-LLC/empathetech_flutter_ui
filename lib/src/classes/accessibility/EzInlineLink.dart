@@ -21,6 +21,9 @@ class EzInlineLink extends WidgetSpan {
   /// Message for screen readers
   final String? semanticsLabel;
 
+  /// Optional tooltip override
+  final String? tooltip;
+
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
   EzInlineLink(
     this.text, {
@@ -29,6 +32,7 @@ class EzInlineLink extends WidgetSpan {
     this.onTap,
     this.url,
     this.semanticsLabel,
+    this.tooltip,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
@@ -39,6 +43,7 @@ class EzInlineLink extends WidgetSpan {
             onTap: onTap,
             url: url,
             semanticsLabel: semanticsLabel,
+            tooltip: tooltip,
           ),
           alignment: PlaceholderAlignment.baseline,
           baseline: TextBaseline.alphabetic,
