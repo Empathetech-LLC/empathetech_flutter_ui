@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : EFUILang.of(context)!.ssSettingsGuideWeb,
               style: headlineSmall(context),
             ),
-            _buttonSpacer,
+            _buttonSeparator,
 
             // Global settings
             const EzDominantHandSwitch(),
