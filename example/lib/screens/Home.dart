@@ -18,12 +18,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
 
   // Set the page title //
 
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Functionality disclaimer

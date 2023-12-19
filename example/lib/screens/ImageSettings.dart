@@ -15,22 +15,21 @@ class ImageSettingsScreen extends StatefulWidget {
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Gather the theme data //
 
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
   final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   // Define the page content //
 
-  late final String _themeProfile = _isLight
+  late final String themeProfile = isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
 
-  late final String _resetTitle =
-      EFUILang.of(context)!.isResetAll(_themeProfile);
+  late final String resetTitle = EFUILang.of(context)!.isResetAll(themeProfile);
 
   late final List<Widget> _lightButtons = [
     // Page
@@ -45,7 +44,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     // Local reset all
     EzResetButton(
       context: context,
-      dialogTitle: _resetTitle,
+      dialogTitle: resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(lightImageKeys.keys.toSet());
         popScreen(context: context, result: true);
@@ -66,7 +65,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     // Local reset all
     EzResetButton(
       context: context,
-      dialogTitle: _resetTitle,
+      dialogTitle: resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(darkImageKeys.keys.toSet());
         popScreen(context: context, result: true);
@@ -88,19 +87,19 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Current theme reminder
             Text(
-              EFUILang.of(context)!.gEditingTheme(_themeProfile),
+              EFUILang.of(context)!.gEditingTheme(themeProfile),
               style: titleSmall(context),
               textAlign: TextAlign.center,
             ),
             _textSpacer,
 
             // Settings
-            ...(_isLight ? _lightButtons : _darkButtons),
+            ...(isLight ? _lightButtons : _darkButtons),
             _buttonSpacer,
           ],
         ),

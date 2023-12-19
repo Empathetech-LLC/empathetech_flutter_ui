@@ -15,15 +15,15 @@ class StyleSettingsScreen extends StatefulWidget {
 class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   // Gather the theme data //
 
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _margin = EzConfig.get(marginKey);
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double margin = EzConfig.get(marginKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
 
-  late final TextStyle? _descriptionStyle = titleSmall(context);
+  late final TextStyle? descriptionStyle = titleSmall(context);
 
   // Set the page title //
 
@@ -39,11 +39,11 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Font
-            if (_buttonSpace > _margin) EzSpacer(_buttonSpace - _margin),
+            if (buttonSpace > margin) EzSpacer(buttonSpace - margin),
             const EzFontSetting(),
             _buttonSpacer,
 
@@ -105,7 +105,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Help
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: _descriptionStyle,
+              style: descriptionStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,

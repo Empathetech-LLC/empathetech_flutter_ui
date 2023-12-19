@@ -18,11 +18,9 @@ class EzThemeModeSwitch extends StatefulWidget {
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
-  final double _padding = EzConfig.get(paddingKey);
+  final double padding = EzConfig.get(paddingKey);
 
   late ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
-
-  late final String _label = EFUILang.of(context)!.ssThemeMode;
 
   // Define functions //
   String _getName(ThemeMode? curr) {
@@ -40,6 +38,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   @override
   Widget build(BuildContext context) {
     // Define the items //
+
+    final String label = EFUILang.of(context)!.ssThemeMode;
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
@@ -69,12 +69,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         children: [
           // Label
           Text(
-            _label,
+            label,
             style: Theme.of(context).dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
-            semanticsLabel: EFUILang.of(context)!.gSettingX(_label),
+            semanticsLabel: EFUILang.of(context)!.gSettingX(label),
           ),
-          EzSpacer.row(_padding),
+          EzSpacer.row(padding),
 
           // Button
           Semantics(

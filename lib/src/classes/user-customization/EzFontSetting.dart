@@ -24,8 +24,8 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
   String? currFontFamily = EzConfig.get(fontFamilyKey);
 
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Define button functions //
 

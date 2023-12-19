@@ -39,12 +39,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? getLiveColor(context, widget.setting)
       : Color(_prefsValue);
 
-  final double _padding = EzConfig.get(paddingKey);
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double padding = EzConfig.get(paddingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
-
-  late final String _label = getColorName(context, widget.setting);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Define button functions //
 
@@ -124,7 +122,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
               child: CircleAvatar(
                 backgroundColor: Color(recommended),
-                radius: _padding * 2,
+                radius: padding * 2,
                 child: currColor == Colors.transparent
                     ? Icon(PlatformIcons(context).eyeSlash)
                     : null,
@@ -190,7 +188,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
               child: CircleAvatar(
                 backgroundColor: resetColor,
-                radius: _padding * 2,
+                radius: padding * 2,
                 child: currColor == Colors.transparent
                     ? Icon(PlatformIcons(context).eyeSlash)
                     : null,
@@ -256,9 +254,11 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final String label = getColorName(context, widget.setting);
+
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.csPickerSemantics(_label),
+      hint: EFUILang.of(context)!.csPickerSemantics(label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _changeColor(context),
@@ -272,16 +272,16 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
             child: CircleAvatar(
               backgroundColor: currColor,
-              radius: _padding * sqrt(2),
+              radius: padding * sqrt(2),
               child: currColor == Colors.transparent
                   ? Icon(PlatformIcons(context).eyeSlash)
                   : null,
             ),
           ),
-          label: Text(_label),
+          label: Text(label),
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 padding: MaterialStateProperty.all(
-                  EdgeInsets.all(_padding * 0.75),
+                  EdgeInsets.all(padding * 0.75),
                 ),
                 foregroundColor: MaterialStateProperty.all(
                   Theme.of(context).colorScheme.onSurface,

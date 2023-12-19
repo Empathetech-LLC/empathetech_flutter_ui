@@ -60,10 +60,10 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String? currPath = EzConfig.get(widget.prefsKey);
   late bool _updateTheme = (widget.updateTheme != null);
 
-  final double _padding = EzConfig.get(paddingKey);
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double padding = EzConfig.get(paddingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Define button functions //
 
@@ -240,7 +240,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              EzSpacer.row(_padding),
+              EzSpacer.row(padding),
 
               // Check box
               Checkbox(
@@ -347,13 +347,13 @@ class _ImageSettingState extends State<EzImageSetting> {
               foregroundImage: (currPath == null || currPath == noImageValue)
                   ? null
                   : provideImage(currPath!),
-              radius: _padding * 2,
+              radius: padding * 2,
             ),
           ),
           label: Text(widget.label, textAlign: TextAlign.center),
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 padding:
-                    MaterialStatePropertyAll(EdgeInsets.all(_padding * 0.75)),
+                    MaterialStatePropertyAll(EdgeInsets.all(padding * 0.75)),
                 foregroundColor: MaterialStatePropertyAll(
                   Theme.of(context).colorScheme.onSurface,
                 ),

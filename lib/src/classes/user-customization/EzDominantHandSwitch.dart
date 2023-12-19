@@ -21,13 +21,13 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   final bool _isRighty = EzConfig.get(isRightHandKey) ?? true;
   late Hand currSide = _isRighty ? Hand.right : Hand.left;
 
-  final double _padding = EzConfig.get(paddingKey);
-
-  late final String _label = EFUILang.of(context)!.ssDominantHand;
+  final double padding = EzConfig.get(paddingKey);
 
   @override
   Widget build(BuildContext context) {
-    // Define the list items //
+    // Define the build //
+
+    final String label = EFUILang.of(context)!.ssDominantHand;
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
@@ -40,18 +40,16 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       ),
     ];
 
-    // Return the build //
-
-    // Define the build contents locally so it can be reversed in real-time alongside user selections
-    List<Widget> _children = [
+    // Define children separately to allow for live reversing
+    List<Widget> children = [
       // Label
       Text(
-        _label,
+        label,
         style: Theme.of(context).dropdownMenuTheme.textStyle,
         textAlign: TextAlign.center,
-        semanticsLabel: EFUILang.of(context)!.gSettingX(_label),
+        semanticsLabel: EFUILang.of(context)!.gSettingX(label),
       ),
-      EzSpacer.row(_padding),
+      EzSpacer.row(padding),
 
       // Button
       Semantics(
@@ -96,7 +94,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children:
-            (currSide == Hand.right) ? _children : _children.reversed.toList(),
+            (currSide == Hand.right) ? children : children.reversed.toList(),
       ),
     );
   }

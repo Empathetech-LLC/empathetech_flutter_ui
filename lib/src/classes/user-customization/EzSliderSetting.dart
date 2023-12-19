@@ -49,8 +49,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
   late double currValue = EzConfig.get(widget.prefsKey);
 
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   late final String _label = sstName(context, widget.type);
 
@@ -120,7 +120,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                           MaterialStateProperty.all(EdgeInsets.all(currValue)),
                     ),
               ),
-              EzSpacer.row(_buttonSpace),
+              EzSpacer.row(buttonSpace),
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),

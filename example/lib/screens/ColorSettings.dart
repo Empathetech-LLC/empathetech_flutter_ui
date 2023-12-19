@@ -16,36 +16,36 @@ class ColorSettingsScreen extends StatefulWidget {
 class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   // Gather the theme data //
 
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double _padding = EzConfig.get(paddingKey);
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double padding = EzConfig.get(paddingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * _buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
   final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
-  late final TextStyle? _descriptionStyle = titleSmall(context);
+  late final TextStyle? descriptionStyle = titleSmall(context);
 
   // Define the static page content //
 
-  late final String _themeProfile = _isLight
+  late final String themeProfile = isLight
       ? EFUILang.of(context)!.gLight.toLowerCase()
       : EFUILang.of(context)!.gDark.toLowerCase();
 
   /// Build from image button label
-  late final String _fromImageLabel = EFUILang.of(context)!.csSchemeBase;
-  late final String _fromImageHint =
+  late final String fromImageLabel = EFUILang.of(context)!.csSchemeBase;
+  late final String fromImageHint =
       "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
 
   /// Build from image button dialog title
-  late final String _fromImageTitle =
-      "$_themeProfile ${EFUILang.of(context)!.csColorScheme}";
+  late final String fromImageTitle =
+      "$themeProfile ${EFUILang.of(context)!.csColorScheme}";
 
-  late final String _resetDialogTitle =
-      EFUILang.of(context)!.csResetAll(_themeProfile);
+  late final String resetDialogTitle =
+      EFUILang.of(context)!.csResetAll(themeProfile);
 
-  late final List<String> _defaultList = _isLight
+  late final List<String> _defaultList = isLight
       ? [
           lightPrimaryKey,
           lightSecondaryKey,
@@ -61,19 +61,19 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           darkSurfaceKey,
         ];
   late final _defaultSet = _defaultList.toSet();
-  late final List<String> _fullList = _isLight ? lightColors : darkColors;
+  late final List<String> _fullList = isLight ? lightColors : darkColors;
 
   /// Return the [List] of [Widget]s that aren't [EzColorSetting]s
-  late final List<Widget> _otherButtons = _isLight
+  late final List<Widget> _otherButtons = isLight
       ? [
           Semantics(
             button: true,
-            hint: _fromImageHint,
+            hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
                 prefsKey: lightColorSchemeImageKey,
-                label: _fromImageLabel,
-                dialogTitle: _fromImageTitle,
+                label: fromImageLabel,
+                dialogTitle: fromImageTitle,
                 allowClear: true,
                 updateTheme: Brightness.light,
                 hideThemeMessage: true,
@@ -85,13 +85,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           // Local reset all
           EzResetButton(
             context: context,
-            dialogTitle: _resetDialogTitle,
+            dialogTitle: resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(
                 {...lightColorKeys.keys.toSet(), userColorsKey},
               );
               setState(() {
-                _currList = new List.from(_defaultList);
+                currList = new List.from(_defaultList);
               });
               popScreen(context: context, result: true);
             },
@@ -100,12 +100,12 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       : [
           Semantics(
             button: true,
-            hint: _fromImageHint,
+            hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
                 prefsKey: darkColorSchemeImageKey,
-                label: _fromImageLabel,
-                dialogTitle: _fromImageTitle,
+                label: fromImageLabel,
+                dialogTitle: fromImageTitle,
                 allowClear: true,
                 updateTheme: Brightness.dark,
                 hideThemeMessage: true,
@@ -117,13 +117,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           // Local reset all
           EzResetButton(
             context: context,
-            dialogTitle: _resetDialogTitle,
+            dialogTitle: resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(
                 {...darkColorKeys.keys.toSet(), userColorsKey},
               );
               setState(() {
-                _currList = new List.from(_defaultList);
+                currList = new List.from(_defaultList);
               });
               popScreen(context: context, result: true);
             },
@@ -132,14 +132,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the dynamic page content //
 
-  late List<String> _currList =
+  late List<String> currList =
       EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> _dynamicColorSettings() {
     List<Widget> toReturn = [];
 
-    for (String key in _currList) {
+    for (String key in currList) {
       if (_defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.addAll([
@@ -154,9 +154,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               setting: key,
               onRemove: () {
                 setState(() {
-                  _currList.remove(key);
+                  currList.remove(key);
                 });
-                EzConfig.setStringList(userColorsKey, _currList);
+                EzConfig.setStringList(userColorsKey, currList);
                 popScreen(context: context);
               }),
           _buttonSpacer,
@@ -169,15 +169,15 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
   List<Widget> _getUntrackedColors(StateSetter modalSheetState) {
-    final Set<String> _currSet = _currList.toSet();
+    final Set<String> _currSet = currList.toSet();
 
     return _fullList
         .where((element) => !_currSet.contains(element))
         .map<Widget>(
           (String settingKey) => Container(
             padding: EdgeInsets.symmetric(
-              vertical: _buttonSpace / 2,
-              horizontal: _buttonSpace,
+              vertical: buttonSpace / 2,
+              horizontal: buttonSpace,
             ),
             child: ElevatedButton.icon(
               key: ValueKey(settingKey),
@@ -190,13 +190,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 ),
                 child: CircleAvatar(
                   backgroundColor: getLiveColor(context, settingKey),
-                  radius: _padding * sqrt(2),
+                  radius: padding * sqrt(2),
                 ),
               ),
               label: Text(getColorName(context, settingKey)),
               style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                     padding: MaterialStateProperty.all(
-                      EdgeInsets.all(_padding * 0.75),
+                      EdgeInsets.all(padding * 0.75),
                     ),
                     foregroundColor: MaterialStatePropertyAll(
                       Theme.of(context).colorScheme.onSurface,
@@ -204,7 +204,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   ),
               onPressed: () {
                 setState(() {
-                  _currList.add(settingKey);
+                  currList.add(settingKey);
                 });
                 modalSheetState(() {});
               },
@@ -228,13 +228,13 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Current theme reminder
             Text(
-              EFUILang.of(context)!.gEditingTheme(_themeProfile),
-              style: _descriptionStyle,
+              EFUILang.of(context)!.gEditingTheme(themeProfile),
+              style: descriptionStyle,
               textAlign: TextAlign.center,
             ),
             _textSpacer,
@@ -261,8 +261,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 );
 
                 // Save the user's changes (if any)
-                if (_currList != _defaultList) {
-                  final List<String> sortedList = new List.from(_currList);
+                if (currList != _defaultList) {
+                  final List<String> sortedList = new List.from(currList);
                   sortedList.sort(
                     (a, b) => _fullList.indexOf(a) - _fullList.indexOf(b),
                   );
@@ -279,7 +279,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             // Help
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: _descriptionStyle,
+              style: descriptionStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(materialColorRoles),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,

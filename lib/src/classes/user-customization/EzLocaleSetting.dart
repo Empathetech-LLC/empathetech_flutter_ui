@@ -26,8 +26,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late Locale currLocale = Localizations.localeOf(context);
 
-  final double _buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Gather the list items //
 
