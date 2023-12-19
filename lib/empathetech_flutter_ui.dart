@@ -13,6 +13,7 @@ export 'src/classes/accessibility/EzImage.dart';
 export 'src/classes/accessibility/EzInlineLink.dart';
 export 'src/classes/accessibility/EzLink.dart';
 export 'src/classes/accessibility/EzLinkImage.dart';
+export 'src/classes/accessibility/EzNewLine.dart';
 export 'src/classes/accessibility/EzRow.dart';
 export 'src/classes/accessibility/EzWarning.dart';
 
