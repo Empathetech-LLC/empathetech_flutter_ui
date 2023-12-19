@@ -23,7 +23,7 @@ class ExampleScaffold extends StatelessWidget {
     final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
 
     final TextScaler textScaler = MediaQuery.textScalerOf(context);
-    final double toolbarHeight = textScaler.scale(titleStyle!.fontSize!) * 2;
+    final double toolbarHeight = textScaler.scale(titleStyle!.fontSize!) * 3;
 
     // Define AppBar widget(s) //
 
@@ -40,6 +40,7 @@ class ExampleScaffold extends StatelessWidget {
 
             // Leading
             automaticallyImplyLeading: isRighty,
+            leadingWidth: toolbarHeight,
 
             // Title
             title: Text(efui, semanticsLabel: efuiFix),
