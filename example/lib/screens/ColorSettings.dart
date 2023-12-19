@@ -227,7 +227,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: _title,
+      title: Text(_title),
       body: EzScreen(
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(

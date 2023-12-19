@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: efui,
+      title: Text(efui, semanticsLabel: efuiFix),
       body: EzScreen(
         decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(

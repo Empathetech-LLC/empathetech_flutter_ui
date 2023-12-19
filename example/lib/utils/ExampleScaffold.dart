@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
-  final String title;
+  final Widget title;
   final Widget body;
   final Widget? fab;
 
@@ -44,7 +44,7 @@ class ExampleScaffold extends StatelessWidget {
             automaticallyImplyLeading: isRighty,
 
             // Title
-            title: Text(title),
+            title: title,
             titleSpacing: 0,
             centerTitle: true,
 
