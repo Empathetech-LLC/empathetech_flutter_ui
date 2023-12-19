@@ -163,6 +163,7 @@ ThemeData ezThemeData(Brightness brightness) {
         color: colorScheme.background,
         border: Border.all(color: colorScheme.secondary),
       ),
+      waitDuration: const Duration(seconds: 1),
     ),
   );
 }
