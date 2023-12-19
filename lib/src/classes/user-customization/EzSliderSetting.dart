@@ -52,6 +52,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
   final double _buttonSpace = EzConfig.get(buttonSpacingKey);
   late final EzSpacer _buttonSpacer = EzSpacer(_buttonSpace);
 
+  late final String _label = sstName(context, widget.type);
+
   // Define build functions //
 
   /// Return the preview Widget(s) for the passed [SliderSettingType]
@@ -183,7 +185,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         button: false,
         readOnly: true,
         label: EFUILang.of(context)!.gSetToValue(
-          sstName(context, widget.type),
+          _label,
           currValue.toStringAsFixed(widget.decimals),
         ),
         child: ExcludeSemantics(
@@ -193,7 +195,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
             children: [
               EzSpacer(EzConfig.get(marginKey)),
               Text(
-                sstName(context, widget.type),
+                _label,
                 style: style,
                 textAlign: TextAlign.center,
               ),
@@ -243,25 +245,16 @@ class _SliderSettingState extends State<EzSliderSetting> {
       _buttonSpacer,
 
       // Reset button
-      Semantics(
-        button: true,
-        hint: EFUILang.of(context)!.gResetToValue(
-          sstName(context, widget.type),
-          _defaultValue.toStringAsFixed(widget.decimals),
-        ),
-        child: ExcludeSemantics(
-          child: ElevatedButton.icon(
-            onPressed: () {
-              EzConfig.remove(widget.prefsKey);
-              modalSheetState(() {
-                currValue = _defaultValue;
-              });
-            },
-            icon: Icon(PlatformIcons(context).refresh),
-            label: Text(
-              "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
-            ),
-          ),
+      ElevatedButton.icon(
+        onPressed: () {
+          EzConfig.remove(widget.prefsKey);
+          modalSheetState(() {
+            currValue = _defaultValue;
+          });
+        },
+        icon: Icon(PlatformIcons(context).refresh),
+        label: Text(
+          "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
         ),
       ),
       _buttonSpacer,
@@ -274,30 +267,24 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      hint: sstName(context, widget.type),
-      child: ExcludeSemantics(
-        child: ElevatedButton.icon(
-          onPressed: () => showModalBottomSheet(
-            context: context,
-            builder: (context) => StatefulBuilder(
-              builder: (BuildContext context, StateSetter modalSheetState) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: _buildSheet(
-                    context: context,
-                    modalSheetState: modalSheetState,
-                    style: Theme.of(context).appBarTheme.titleTextStyle,
-                  ),
-                );
-              },
-            ),
-          ),
-          icon: widget.type.icon,
-          label: Text(sstName(context, widget.type)),
+    return ElevatedButton.icon(
+      onPressed: () => showModalBottomSheet(
+        context: context,
+        builder: (context) => StatefulBuilder(
+          builder: (BuildContext context, StateSetter modalSheetState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _buildSheet(
+                context: context,
+                modalSheetState: modalSheetState,
+                style: Theme.of(context).appBarTheme.titleTextStyle,
+              ),
+            );
+          },
         ),
       ),
+      icon: widget.type.icon,
+      label: Text(_label),
     );
   }
 }
