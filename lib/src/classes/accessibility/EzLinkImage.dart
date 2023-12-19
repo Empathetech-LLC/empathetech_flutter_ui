@@ -122,10 +122,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
               child: GestureDetector(
                 onTap: widget.onTap ?? () => launchUrl(widget.url!),
                 child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: _shadow ? _shadows : [],
-                  ),
+                  decoration: BoxDecoration(boxShadow: _shadow ? _shadows : []),
                   child: Image(
                     image: widget.image,
                     frameBuilder: widget.frameBuilder,
