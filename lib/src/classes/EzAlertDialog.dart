@@ -79,12 +79,6 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         // Actions
         actions: materialActions,
-        actionsPadding: EdgeInsets.only(
-          top: (buttonSpacing > padding) ? (buttonSpacing - padding) : 0.0,
-          left: buttonSpacing,
-          right: buttonSpacing,
-          bottom: buttonSpacing,
-        ),
 
         // General
         iconPadding: EdgeInsets.only(right: buttonSpacing),
