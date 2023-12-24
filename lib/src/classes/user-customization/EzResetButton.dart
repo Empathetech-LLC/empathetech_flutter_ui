@@ -10,14 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  final BuildContext context;
-
   /// Button label
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.gResetAll]
+  /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
@@ -35,7 +33,6 @@ class EzResetButton extends StatelessWidget {
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   const EzResetButton({
-    required this.context,
     this.label,
     this.dialogTitle,
     this.dialogContent,
@@ -57,7 +54,7 @@ class EzResetButton extends StatelessWidget {
 
     // Define the dialog //
 
-    final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.gResetAll;
+    final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.ssResetAll;
 
     void resetDialog() {
       showPlatformDialog(
