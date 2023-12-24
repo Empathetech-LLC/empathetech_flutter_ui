@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,27 +15,24 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
 
-  final double margin = EzConfig.get(marginKey);
-  final double padding = EzConfig.get(paddingKey);
-  final double buttonSpacing = EzConfig.get(buttonSpacingKey);
-
   final TextTheme textTheme = ezTextTheme();
 
-  final TextStyle appBarTextStyle = buildHeadlineMedium(
+  final TextStyle appBarTextStyle = buildHeadline(
     color: colorScheme.onSurface,
   );
-  final TextStyle tabBarTextStyle = buildTitleLarge(
+  final TextStyle tabBarTextStyle = buildTitle(
     color: colorScheme.onSurface,
   );
-  final TextStyle pageTextStyle = buildBodyLarge(
+
+  final TextStyle pageTextStyle = buildTitle(
     color: colorScheme.onBackground,
   );
-  final TextStyle buttonTextStyle = buildTitleMedium();
-  final TextStyle textButtonStyle = buildTitleMedium();
-  final TextStyle dialogTitleStyle = buildTitleLarge(
+  final TextStyle buttonTextStyle = buildTitle();
+
+  final TextStyle dialogTitleStyle = buildHeadline(
     color: colorScheme.onBackground,
   );
-  final TextStyle dialogContentStyle = buildBodyLarge(
+  final TextStyle dialogContentStyle = buildTitle(
     color: colorScheme.onBackground,
   );
 
@@ -48,22 +45,31 @@ ThemeData ezThemeData(Brightness brightness) {
     color: colorScheme.onSurface,
   );
 
+  final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
+  final double buttonSpacing = EzConfig.get(buttonSpacingKey);
+
   // Build the ThemeData //
 
   return ThemeData(
-    // Color scheme
+    // Color scheme //
+
     brightness: brightness,
     colorScheme: colorScheme,
 
-    // Typography
+    // Typography //
+
     fontFamily: EzConfig.get(fontFamilyKey),
     textTheme: textTheme,
     primaryTextTheme: textTheme,
     iconTheme: iconData,
     primaryIconTheme: iconData,
 
-    // Page transitions
+    // Transitions //
+
     pageTransitionsTheme: EzTransitions(),
+
+    // Widgets //
 
     // AppBar
     appBarTheme: AppBarTheme(
@@ -72,57 +78,13 @@ ThemeData ezThemeData(Brightness brightness) {
       titleTextStyle: appBarTextStyle,
     ),
 
-    // Bottom navigation bar theme
+    // Bottom navigation bar
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: appBarIconData,
       unselectedIconTheme: appBarIconData.copyWith(
         color: colorScheme.outline,
       ),
-    ),
-
-    // Button themes
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        textStyle: buttonTextStyle,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
-        side: BorderSide(color: colorScheme.primaryContainer),
-      ),
-    ),
-
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        textStyle: textButtonStyle,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
-        backgroundColor: colorScheme.background,
-      ),
-    ),
-
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        textStyle: textButtonStyle,
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
-        side: null,
-      ),
-    ),
-
-    iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        iconSize: buttonTextStyle.fontSize,
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
-        side: null,
-      ),
-    ),
-
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.primary,
-      foregroundColor: colorScheme.onPrimary,
-      extendedPadding: EdgeInsets.all(padding),
-      shape: const CircleBorder(),
     ),
 
     // Cards
@@ -149,11 +111,59 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Elevated button
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        textStyle: buttonTextStyle,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        side: BorderSide(color: colorScheme.primaryContainer),
+      ),
+    ),
+
+    // Floating action button
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      extendedPadding: EdgeInsets.all(padding),
+      shape: const CircleBorder(),
+    ),
+
+    // Icon button
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: buttonTextStyle.fontSize,
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        side: null,
+      ),
+    ),
+
+    // Outlined button
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        textStyle: buttonTextStyle,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        backgroundColor: colorScheme.background,
+      ),
+    ),
+
     // TabBar
     tabBarTheme: TabBarTheme(
       labelStyle: tabBarTextStyle,
       unselectedLabelStyle: tabBarTextStyle.copyWith(
         color: colorScheme.outline,
+      ),
+    ),
+
+    // Text button
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        textStyle: buttonTextStyle,
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        side: null,
       ),
     ),
 
