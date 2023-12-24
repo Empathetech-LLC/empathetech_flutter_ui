@@ -25,6 +25,8 @@ class EzInlineLink extends WidgetSpan {
   final String? tooltip;
 
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
+  /// Seems to prefer Strings of length 5+
+  /// Smaller strings can sometimes have issues with text spacing
   EzInlineLink(
     this.text, {
     this.key,
