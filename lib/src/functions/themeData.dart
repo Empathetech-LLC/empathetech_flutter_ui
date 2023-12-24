@@ -24,15 +24,15 @@ ThemeData ezThemeData(Brightness brightness) {
     color: colorScheme.onSurface,
   );
 
-  final TextStyle pageTextStyle = buildTitle(
+  final TextStyle pageTextStyle = buildBody(
     color: colorScheme.onBackground,
   );
-  final TextStyle buttonTextStyle = buildTitle();
+  final TextStyle buttonTextStyle = buildBody();
 
-  final TextStyle dialogTitleStyle = buildHeadline(
+  final TextStyle dialogTitleStyle = buildTitle(
     color: colorScheme.onBackground,
   );
-  final TextStyle dialogContentStyle = buildTitle(
+  final TextStyle dialogContentStyle = buildBody(
     color: colorScheme.onBackground,
   );
 
@@ -171,7 +171,7 @@ ThemeData ezThemeData(Brightness brightness) {
     tooltipTheme: TooltipThemeData(
       margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-      textStyle: pageTextStyle,
+      textStyle: pageTextStyle.copyWith(color: colorScheme.onSurface),
       textAlign: TextAlign.center,
       decoration: BoxDecoration(
         color: colorScheme.surface,
