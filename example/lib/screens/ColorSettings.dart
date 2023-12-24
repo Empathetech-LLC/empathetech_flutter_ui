@@ -25,7 +25,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
   final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
-  late final TextStyle? descriptionStyle = titleSmall(context);
+  late final TextStyle? labelStyle = getLabel(context);
 
   // Define the static page content //
 
@@ -84,7 +84,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
           // Local reset all
           EzResetButton(
-            context: context,
             dialogTitle: resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(
@@ -116,7 +115,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
           // Local reset all
           EzResetButton(
-            context: context,
             dialogTitle: resetDialogTitle,
             onConfirm: () {
               EzConfig.removeKeys(
@@ -234,7 +232,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             // Current theme reminder
             Text(
               EFUILang.of(context)!.gEditingTheme(themeProfile),
-              style: descriptionStyle,
+              style: labelStyle,
               textAlign: TextAlign.center,
             ),
             _textSpacer,
@@ -279,7 +277,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             // Help
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: descriptionStyle,
+              style: labelStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(materialColorRoles),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,

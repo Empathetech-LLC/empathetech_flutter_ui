@@ -43,7 +43,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
     // Local reset all
     EzResetButton(
-      context: context,
       dialogTitle: resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(lightImageKeys.keys.toSet());
@@ -64,7 +63,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
     // Local reset all
     EzResetButton(
-      context: context,
       dialogTitle: resetTitle,
       onConfirm: () {
         EzConfig.removeKeys(darkImageKeys.keys.toSet());
@@ -93,7 +91,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             // Current theme reminder
             Text(
               EFUILang.of(context)!.gEditingTheme(themeProfile),
-              style: titleSmall(context),
+              style: getLabel(context),
               textAlign: TextAlign.center,
             ),
             _textSpacer,

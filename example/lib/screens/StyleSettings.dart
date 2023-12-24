@@ -23,7 +23,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
 
-  late final TextStyle? descriptionStyle = titleSmall(context);
+  late final TextStyle? labelStyle = getLabel(context);
 
   // Set the page title //
 
@@ -93,7 +93,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
 
             // Local reset all
             EzResetButton(
-              context: context,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(styleKeys.keys.toSet());
@@ -105,7 +104,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Help
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: descriptionStyle,
+              style: labelStyle,
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,

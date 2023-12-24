@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               message: kIsWeb
                   ? EFUILang.of(context)!.ssSettingsGuide
                   : EFUILang.of(context)!.ssSettingsGuideWeb,
-              style: headlineSmall(context),
+              style: getTitle(context),
             ),
             _buttonSeparator,
 
@@ -83,10 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _buttonSeparator,
 
             // Reset button
-            EzResetButton(
-              context: context,
-              dialogTitle: EFUILang.of(context)!.ssResetAll,
-            ),
+            const EzResetButton(),
             _buttonSpacer,
           ],
         ),
