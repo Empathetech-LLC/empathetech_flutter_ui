@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -20,6 +20,6 @@ class EzBackAction extends StatelessWidget {
             onPressed: () => popScreen(context: context),
             tooltip: EFUILang.of(context)!.gBack,
           )
-        : SizedBox.shrink();
+        : const SizedBox.shrink();
   }
 }

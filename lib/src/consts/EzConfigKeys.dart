@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-// Global settings //
+// Global keys //
 
 const String isRightHandKey = 'isRightHand';
 
@@ -20,7 +20,14 @@ const Map<String, Type> globalKeys = {
   userColorsKey: List<String>,
 };
 
-// Image settings //
+// Global values //
+
+const String homeRoute = '/';
+
+/// Allows for app images whose default is an asset to be "null"
+const String noImageValue = 'noImage';
+
+// Image keys //
 
 // Light
 
@@ -263,7 +270,7 @@ const List<String> darkColors = [
   darkSurfaceTintKey,
 ];
 
-// Style settings //
+// Style keys //
 
 const String fontFamilyKey = 'fontFamily';
 
@@ -281,7 +288,7 @@ const Map<String, Type> styleKeys = {
   textSpacingKey: double, // required
 };
 
-// Global trackers //
+// Trackers //
 
 const Map<String, Type> allKeys = {
   ...globalKeys,
