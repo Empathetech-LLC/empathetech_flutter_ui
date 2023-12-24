@@ -11,7 +11,7 @@ import '../../empathetech_flutter_ui.dart';
 // Getters //
 
 /// Returns the [TextTheme.displayLarge] of the current [context]
-TextStyle? display(BuildContext context) {
+TextStyle? getDisplay(BuildContext context) {
   return Theme.of(context).textTheme.displayLarge;
 }
 
