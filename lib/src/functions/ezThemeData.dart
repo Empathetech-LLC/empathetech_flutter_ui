@@ -17,6 +17,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double buttonSpacing = EzConfig.get(buttonSpacingKey);
 
   final TextTheme textTheme = ezTextTheme();
 
@@ -50,18 +51,18 @@ ThemeData ezThemeData(Brightness brightness) {
   // Build the ThemeData //
 
   return ThemeData(
-    // Colors
+    // Color scheme
     brightness: brightness,
     colorScheme: colorScheme,
 
-    // Text && icons
+    // Typography
     fontFamily: EzConfig.get(fontFamilyKey),
     textTheme: textTheme,
     primaryTextTheme: textTheme,
     iconTheme: iconData,
     primaryIconTheme: iconData,
 
-    // Animations
+    // Page transitions
     pageTransitionsTheme: EzTransitions(),
 
     // AppBar
@@ -71,7 +72,7 @@ ThemeData ezThemeData(Brightness brightness) {
       titleTextStyle: appBarTextStyle,
     ),
 
-    // Bottom navigation
+    // Bottom navigation bar theme
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: appBarIconData,
@@ -80,7 +81,7 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
-    // Buttons
+    // Button themes
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: buttonTextStyle,
@@ -88,13 +89,6 @@ ThemeData ezThemeData(Brightness brightness) {
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
       ),
-    ),
-
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.primary,
-      foregroundColor: colorScheme.onPrimary,
-      extendedPadding: EdgeInsets.all(padding),
-      shape: const CircleBorder(),
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -124,6 +118,13 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      extendedPadding: EdgeInsets.all(padding),
+      shape: const CircleBorder(),
+    ),
+
     // Cards
     cardTheme: CardTheme(margin: EdgeInsets.zero),
 
@@ -132,6 +133,12 @@ ThemeData ezThemeData(Brightness brightness) {
       titleTextStyle: dialogTitleStyle,
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,
+      actionsPadding: EdgeInsets.only(
+        top: (buttonSpacing > padding) ? (buttonSpacing - padding) : 0.0,
+        left: buttonSpacing,
+        right: buttonSpacing,
+        bottom: buttonSpacing,
+      ),
     ),
 
     // Dropdown menu
@@ -157,7 +164,7 @@ ThemeData ezThemeData(Brightness brightness) {
       textStyle: pageTextStyle,
       textAlign: TextAlign.center,
       decoration: BoxDecoration(
-        color: colorScheme.background,
+        color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
       ),
       waitDuration: const Duration(seconds: 1),
