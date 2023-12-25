@@ -8,21 +8,23 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzWarning extends StatelessWidget {
-  /// Short header [String] to grab the user's attention
-  final String? warning;
+  /// Warning [String] to grab the user's attention
+  final String? title;
 
-  /// Body of the [EzWarning]
-  final String message;
+  /// What does the user need to know?
+  final String body;
 
-  final TextStyle? style;
+  final TextStyle? titleStyle;
+  final TextStyle? bodyStyle;
 
   /// [Card] wrapper designed to grab attention for warnings...
-  ///  /!\ [warning] /!\
-  ///      [message]
+  ///  /!\ [title] /!\
+  ///      [body]
   const EzWarning({
-    this.warning,
-    required this.message,
-    this.style,
+    this.title,
+    required this.body,
+    this.titleStyle,
+    this.bodyStyle,
   });
 
   @override
@@ -31,12 +33,12 @@ class EzWarning extends StatelessWidget {
 
     final EzSpacer rowPadding = EzSpacer.row(EzConfig.get(paddingKey));
 
-    final String _warning = warning ?? EFUILang.of(context)!.gAttention;
+    final String _title = title ?? EFUILang.of(context)!.gAttention;
 
     return Semantics(
       button: false,
       readOnly: true,
-      label: '$_warning, $message',
+      label: '$_title, $body',
       child: ExcludeSemantics(
         child: Card(
           child: Container(
@@ -54,13 +56,13 @@ class EzWarning extends StatelessWidget {
                     Icon(
                       Icons.warning,
                       color: iconColor,
-                      size: style?.fontSize,
+                      size: titleStyle?.fontSize,
                     ),
                     rowPadding,
 
                     Text(
-                      _warning,
-                      style: style,
+                      _title,
+                      style: titleStyle,
                       textAlign: TextAlign.center,
                     ),
                     rowPadding,
@@ -69,16 +71,16 @@ class EzWarning extends StatelessWidget {
                     Icon(
                       Icons.warning,
                       color: iconColor,
-                      size: style?.fontSize,
+                      size: titleStyle?.fontSize,
                     ),
                   ],
                 ),
-                EzNewLine(style),
+                EzNewLine(bodyStyle, textAlign: TextAlign.center),
 
                 // Label
                 Text(
-                  message,
-                  style: style,
+                  body,
+                  style: bodyStyle,
                   textAlign: TextAlign.center,
                 ),
               ],
