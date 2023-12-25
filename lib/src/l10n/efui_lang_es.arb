@@ -1,7 +1,7 @@
 {
   "@@locale" : "es",
 
-  
+
   "gYes": "Sí",
   "gNo": "No",
   "gOptions": "Opciones",
@@ -26,32 +26,27 @@
 
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
-  "gSetToValue": "{name} está configurado actualmente en {value}",
+  "gSetToValue": "{name} está establecido en {value}",
   "gDefaultEntry": "{entry}* (por defecto)",
   "gReset": "Restablecer:",
   "gResetToValue": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
   "gResetWarn": "No se puede deshacer",
-  "gResetTip": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
-  "gResetTipWeb": "No se puede deshacer\nLos cambios tendrán efecto al recargar la página",
 
-  "gHomeHint": "Regresar a la pantalla principal",
   "gCreditTo": "Crédito a:",
-
 
   "ssPageTitle": "Configuraciones",
   "ssSettingsGuide": "Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga la página para guardar tus cambios.\n\n¡Diviértete!",
-  
+
   "ssThemeMode": "Modo de tema",
   "ssDominantHand": "Mano dominante",
-  
+
   "ssLanguage": "Idioma",
   "ssLanguages": "Idiomas",
   "ssLangSemantics": "Idioma de la aplicación",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
-
 
   "isPageTitle": "Configuraciones de imagen",
 
@@ -63,8 +58,8 @@
   "isFromFile": "Desde archivo",
   "isFromCamera": "Desde cámara",
   "isFromNetwork": "Desde URL",
-  "isResetIt": "Restablécelo",
-  "isClearIt": "Borrarlo",
+  "isResetIt": "Restablecerlo",
+  "isClearIt": "Limpialo",
 
   "isEnterURL": "Ingrese URL",
   "isGetFailed": "Error al recuperar la imagen",
@@ -74,10 +69,9 @@
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
 
-
   "csPageTitle": "Configuraciones de color",
-  
-  "csPickerSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}.",
+
+  "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
 
   "csPrimary": "Primario",
   "csOnPrimary": "En Primario",
@@ -114,7 +108,7 @@
   "csInverseSurface": "Superficie Inversa",
   "csOnInverseSurface": "En Superficie Inversa",
 
-  "csInversePrimary": "Primario Inverso",
+  "csInversePrimary": "Primario Inversa",
 
   "csScrim": "Telón",
   "csShadow": "Sombra",
@@ -129,15 +123,14 @@
   "csRemove": "Eliminar",
   "csReset": "Restablecer",
   "csResetTo": "Restablecer a...",
-  
-  "csSchemeBase": "Construir a partir\nde la imagen",
+
+  "csSchemeBase": "Construir a partir\nde imagen",
   "csOptional": "opcional",
-  "csFromImage": "Construye la paleta de colores a partir de una imagen",
+  "csFromImage": "Construye la esquema de colores a partir de una imagen",
   "csColorScheme": "esquema de colores",
 
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
-
-
+  
   "stsPageTitle": "Configuraciones de estilo",
 
   "stsTextFont": "Fuente de texto",

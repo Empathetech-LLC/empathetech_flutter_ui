@@ -32,10 +32,7 @@
   "gResetToValue": "Reset {name} to {value}",
   "gResetAll": "Reset all",
   "gResetWarn": "Cannot be undone",
-  "gResetTip": "Cannot be undone\nChanges take effect on app restart",
-  "gResetTipWeb": "Cannot be undone\nChanges take effect on page reload",
 
-  "gHomeHint": "Return to the home screen",
   "gCreditTo": "Credit to:",
 
 

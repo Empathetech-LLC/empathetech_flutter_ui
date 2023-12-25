@@ -68,7 +68,7 @@ class EFUILangEs extends EFUILang {
 
   @override
   String gSetToValue(Object name, Object value) {
-    return '$name está configurado actualmente en $value';
+    return '$name está establecido en $value';
   }
 
   @override
@@ -89,17 +89,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gResetWarn => 'No se puede deshacer';
-
-  @override
-  String get gResetTip =>
-      'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
-
-  @override
-  String get gResetTipWeb =>
-      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
-
-  @override
-  String get gHomeHint => 'Regresar a la pantalla principal';
 
   @override
   String get gCreditTo => 'Crédito a:';
@@ -162,10 +151,10 @@ class EFUILangEs extends EFUILang {
   String get isFromNetwork => 'Desde URL';
 
   @override
-  String get isResetIt => 'Restablécelo';
+  String get isResetIt => 'Restablecerlo';
 
   @override
-  String get isClearIt => 'Borrarlo';
+  String get isClearIt => 'Limpialo';
 
   @override
   String get isEnterURL => 'Ingrese URL';
@@ -192,7 +181,7 @@ class EFUILangEs extends EFUILang {
 
   @override
   String csPickerSemantics(Object name) {
-    return 'Activar para abrir el selector de color para $name. Mantenga presionado para restablecer $name.';
+    return 'Activar para abrir un selector de color para $name. Mantenga presionado para más opciones.';
   }
 
   @override
@@ -274,7 +263,7 @@ class EFUILangEs extends EFUILang {
   String get csOnInverseSurface => 'En Superficie Inversa';
 
   @override
-  String get csInversePrimary => 'Primario Inverso';
+  String get csInversePrimary => 'Primario Inversa';
 
   @override
   String get csScrim => 'Telón';
@@ -307,14 +296,14 @@ class EFUILangEs extends EFUILang {
   String get csResetTo => 'Restablecer a...';
 
   @override
-  String get csSchemeBase => 'Construir a partir\nde la imagen';
+  String get csSchemeBase => 'Construir a partir\nde imagen';
 
   @override
   String get csOptional => 'opcional';
 
   @override
   String get csFromImage =>
-      'Construye la paleta de colores a partir de una imagen';
+      'Construye la esquema de colores a partir de una imagen';
 
   @override
   String get csColorScheme => 'esquema de colores';

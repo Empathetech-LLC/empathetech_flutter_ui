@@ -244,24 +244,6 @@ abstract class EFUILang {
   /// **'Cannot be undone'**
   String get gResetWarn;
 
-  /// No description provided for @gResetTip.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone\nChanges take effect on app restart'**
-  String get gResetTip;
-
-  /// No description provided for @gResetTipWeb.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone\nChanges take effect on page reload'**
-  String get gResetTipWeb;
-
-  /// No description provided for @gHomeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Return to the home screen'**
-  String get gHomeHint;
-
   /// No description provided for @gCreditTo.
   ///
   /// In en, this message translates to:

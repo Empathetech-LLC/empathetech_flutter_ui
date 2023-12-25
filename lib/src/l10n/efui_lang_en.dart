@@ -91,17 +91,6 @@ class EFUILangEn extends EFUILang {
   String get gResetWarn => 'Cannot be undone';
 
   @override
-  String get gResetTip =>
-      'Cannot be undone\nChanges take effect on app restart';
-
-  @override
-  String get gResetTipWeb =>
-      'Cannot be undone\nChanges take effect on page reload';
-
-  @override
-  String get gHomeHint => 'Return to the home screen';
-
-  @override
   String get gCreditTo => 'Credit to:';
 
   @override
