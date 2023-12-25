@@ -52,36 +52,29 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       EzSpacer.row(padding),
 
       // Button
-      Semantics(
-        button: true,
-        hint:
-            "${EFUILang.of(context)!.ssHandSemantics} ${handName(context, currSide)}",
-        child: ExcludeSemantics(
-          child: DropdownButton<Hand>(
-            value: currSide,
-            items: items,
-            onChanged: (Hand? newDominantHand) {
-              switch (newDominantHand) {
-                case Hand.right:
-                  setState(() {
-                    currSide = Hand.right;
-                  });
-                  EzConfig.setBool(isRightHandKey, true);
-                  break;
+      DropdownButton<Hand>(
+        value: currSide,
+        items: items,
+        onChanged: (Hand? newDominantHand) {
+          switch (newDominantHand) {
+            case Hand.right:
+              setState(() {
+                currSide = Hand.right;
+              });
+              EzConfig.setBool(isRightHandKey, true);
+              break;
 
-                case Hand.left:
-                  setState(() {
-                    currSide = Hand.left;
-                  });
-                  EzConfig.setBool(isRightHandKey, false);
-                  break;
+            case Hand.left:
+              setState(() {
+                currSide = Hand.left;
+              });
+              EzConfig.setBool(isRightHandKey, false);
+              break;
 
-                default:
-                  break;
-              }
-            },
-          ),
-        ),
+            default:
+              break;
+          }
+        },
       ),
     ];
 
