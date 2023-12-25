@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
+  final String title;
+  final String? titleSemantics;
   final Widget body;
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ExampleScaffold({
     this.key,
+    this.title = efuiL,
+    this.titleSemantics = efuiLFix,
     required this.body,
     this.fab,
   }) : super(key: key);
@@ -43,7 +47,7 @@ class ExampleScaffold extends StatelessWidget {
             leadingWidth: toolbarHeight,
 
             // Title
-            title: Text(efui, semanticsLabel: efuiFix),
+            title: Text(title, semanticsLabel: titleSemantics),
             titleSpacing: 0,
             centerTitle: true,
 
