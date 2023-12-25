@@ -5,8 +5,13 @@
 
 // General //
 
-const String efui = "Empathetech Flutter UI";
-const String efuiFix = "Empathetic Flutter UI";
+/// Short == EFUI
+const String efuiS = "EFUI";
+
+/// Long == Empathetech Flutter UI
+const String efuiL = "Empathetech Flutter UI";
+
+const String efuiLFix = "Empathetic Flutter UI";
 
 // Documentation links //
 
