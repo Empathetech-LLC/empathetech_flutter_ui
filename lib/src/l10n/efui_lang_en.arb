@@ -40,8 +40,8 @@
 
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Each setting will preview it's changes.\nReload the page for your changes to take full effect!\nHave fun!",
-  "ssSettingsGuideWeb": "Each setting will preview it's changes.\nRestart the app for your changes to take full effect!\nHave fun!",
+  "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
+  "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
 
   "ssLanguage": "Language",
   "ssLanguages": "Languages",

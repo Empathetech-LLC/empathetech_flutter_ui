@@ -277,13 +277,13 @@ abstract class EFUILang {
   /// No description provided for @ssSettingsGuide.
   ///
   /// In en, this message translates to:
-  /// **'Each setting will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!'**
+  /// **'Restart the app to save your changes.\n\nHave fun!'**
   String get ssSettingsGuide;
 
   /// No description provided for @ssSettingsGuideWeb.
   ///
   /// In en, this message translates to:
-  /// **'Each setting will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
+  /// **'Reload the page to save your changes.\n\nHave fun!'**
   String get ssSettingsGuideWeb;
 
   /// No description provided for @ssLanguage.
