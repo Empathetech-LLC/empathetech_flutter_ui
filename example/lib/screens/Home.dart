@@ -44,10 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Functionality disclaimer
             EzWarning(
-              message: kIsWeb
+              titleStyle: getTitle(context),
+              bodyStyle: getBody(context),
+              body: kIsWeb
                   ? EFUILang.of(context)!.ssSettingsGuideWeb
                   : EFUILang.of(context)!.ssSettingsGuide,
-              style: getTitle(context),
             ),
             _buttonSeparator,
 
