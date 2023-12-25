@@ -105,7 +105,7 @@ class EFUIExample extends StatelessWidget {
         // Current language
         locale: EzConfig.getLocale(),
 
-        title: efui,
+        title: efuiL,
         routerConfig: _router,
       ),
     );
