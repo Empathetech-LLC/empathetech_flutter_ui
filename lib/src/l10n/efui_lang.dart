@@ -286,6 +286,18 @@ abstract class EFUILang {
   /// **'Reload the page to save your changes.\n\nHave fun!'**
   String get ssSettingsGuideWeb;
 
+  /// No description provided for @ssThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode'**
+  String get ssThemeMode;
+
+  /// No description provided for @ssDominantHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominant hand'**
+  String get ssDominantHand;
+
   /// No description provided for @ssLanguage.
   ///
   /// In en, this message translates to:
@@ -303,30 +315,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'App language'**
   String get ssLangSemantics;
-
-  /// No description provided for @ssThemeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get ssThemeMode;
-
-  /// No description provided for @ssThemeSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Currently set to:'**
-  String get ssThemeSemantics;
-
-  /// No description provided for @ssDominantHand.
-  ///
-  /// In en, this message translates to:
-  /// **'Dominant hand'**
-  String get ssDominantHand;
-
-  /// No description provided for @ssHandSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Currently set to:'**
-  String get ssHandSemantics;
 
   /// No description provided for @ssResetAll.
   ///

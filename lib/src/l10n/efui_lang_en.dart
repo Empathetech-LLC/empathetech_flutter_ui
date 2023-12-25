@@ -116,6 +116,12 @@ class EFUILangEn extends EFUILang {
       'Reload the page to save your changes.\n\nHave fun!';
 
   @override
+  String get ssThemeMode => 'Theme mode';
+
+  @override
+  String get ssDominantHand => 'Dominant hand';
+
+  @override
   String get ssLanguage => 'Language';
 
   @override
@@ -123,18 +129,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssLangSemantics => 'App language';
-
-  @override
-  String get ssThemeMode => 'Theme mode';
-
-  @override
-  String get ssThemeSemantics => 'Currently set to:';
-
-  @override
-  String get ssDominantHand => 'Dominant hand';
-
-  @override
-  String get ssHandSemantics => 'Currently set to:';
 
   @override
   String get ssResetAll => 'Reset all settings?';

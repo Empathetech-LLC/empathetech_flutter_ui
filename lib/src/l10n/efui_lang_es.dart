@@ -116,6 +116,12 @@ class EFUILangEs extends EFUILang {
       'Recarga la página para guardar tus cambios.\n\n¡Diviértete!';
 
   @override
+  String get ssThemeMode => 'Modo de tema';
+
+  @override
+  String get ssDominantHand => 'Mano dominante';
+
+  @override
   String get ssLanguage => 'Idioma';
 
   @override
@@ -123,18 +129,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssLangSemantics => 'Idioma de la aplicación';
-
-  @override
-  String get ssThemeMode => 'Modo de tema';
-
-  @override
-  String get ssThemeSemantics => 'Actualmente configurado en:';
-
-  @override
-  String get ssDominantHand => 'Mano dominante';
-
-  @override
-  String get ssHandSemantics => 'Actualmente configurado en:';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';

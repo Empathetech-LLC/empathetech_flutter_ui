@@ -43,15 +43,12 @@
   "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
   "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
 
+  "ssThemeMode": "Theme mode",
+  "ssDominantHand": "Dominant hand",
+  
   "ssLanguage": "Language",
   "ssLanguages": "Languages",
   "ssLangSemantics": "App language",
-
-  "ssThemeMode": "Theme mode",
-  "ssThemeSemantics": "Currently set to:",
-
-  "ssDominantHand": "Dominant hand",
-  "ssHandSemantics": "Currently set to:",
 
   "ssResetAll": "Reset all settings?",
 
