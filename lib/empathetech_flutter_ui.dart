@@ -28,6 +28,8 @@ export 'src/classes/screen-reader-compliance/EzInlineLink.dart';
 export 'src/classes/screen-reader-compliance/EzLink.dart';
 export 'src/classes/screen-reader-compliance/EzLinkImage.dart';
 export 'src/classes/screen-reader-compliance/EzNewLine.dart';
+export 'src/classes/screen-reader-compliance/EzPlainText.dart';
+export 'src/classes/screen-reader-compliance/EzRichText.dart';
 
 // User customization
 export 'src/classes/user-customization/EzAppProvider.dart';
