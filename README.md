@@ -1,24 +1,24 @@
 # Empathetech Flutter UI <br><br> Build apps for anyone
 
-EFUI is a holistic foundation for digital accessibility.
+EFUI is a starter kit for building apps with a strong foundation in every pillar of digital accessibility:
 
-EFUI provides a starter kit for every pillar of digital accessibility:
 - **Platform availability**
   - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOS, Linux, MacOS, Windows and Web!
     - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_Widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
-- **Screen reader compliance**
+- **Responsive design**
+  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+  - Checkout the [demo](#live) to see it in action
+- **Screen reader support**
   - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.<br>EFUI enables you to expose any piece of your app's theme to the user.
-    - Users can have full control of theme colors, fonts, styling, spacing, and images.
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.
+    - EFUI enables developers to expose full control over theme colors, fonts, styling, spacing, and images to their users.
 - **Internationalization**
   - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
-- **Responsive design**
-  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-  - Checkout the [demo](#responsive-design) to see it in action
 
-<br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a more accessible place together!
+
+<br>When built with EFUI, apps can truly reach any audience. Let's make the internet a more accessible place together!
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ In your app's base directory, run
 flutter pub add empathetech_flutter_ui
 ```
 
-And add the following import to any files that use EFUI's library!
+And add the following import to any files that use EFUI's library
 
 ```Dart
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -47,7 +47,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 If you're new to Flutter: welcome! The example app is full of comments to help you on your path.
 
-Here are some (unaffiliated!) videos you might also find helpful.
+Here are some (unaffiliated) videos you might also find helpful.
 
 - [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
 - [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
@@ -57,31 +57,19 @@ Here are some (unaffiliated!) videos you might also find helpful.
 
 ## TL;DR
 
-1. a) Add any imports you're missing from the header below to your `main.dart` and<br>b) Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in your `void main()`
-2. Use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformApp-class.html)<br>OR use [ezThemeData](./lib/src/functions/ezThemeData.dart) in your existing provider/app<br>OR use `EzConfig.instance` data to build your theme
-3. Migrate all example app [screens](./example/lib/screens/) to your project
-4. Enjoy
+--- Required ---
+1. Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in `void main()`
+2. Use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/ezThemeData.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
+
+--- Recommended ---
+1. Copy all example app [settings screens](./example/lib/screens/) to your project
+2. Enjoy
 
 ## Setup
 
 ### Step 1
 
-In your [main.dart](./example/lib/main.dart) add any imports you're missing...
-
-```Dart
-import 'utils/utils.dart';
-import 'screens/screens.dart';
-
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_platform_Widgets/flutter_platform_Widgets.dart';
-```
-
-...and initialize `EzConfig` in your `void main()` Function.
+Initialize `EzConfig` in `void main()` (in [main.dart](./example/lib/main.dart))
 
 ```Dart
 void main() async {
@@ -262,7 +250,7 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 |---|
 | <img src="./assets/images/home-web.png" alt="Home page on Web" width="500"/> |
 
-### Screen reader compliance
+### Screen reader support
 
 <video width="350" controls aria-label="iOS voice over demo">
   <source src="./assets/videos/en-voice-over.mp4" type="video/mp4">
