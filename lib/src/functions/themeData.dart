@@ -17,10 +17,10 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme();
 
-  final TextStyle appBarTextStyle = buildHeadline(
+  final TextStyle appBarTextStyle = buildTitle(
     color: colorScheme.onSurface,
   );
-  final TextStyle tabBarTextStyle = buildTitle(
+  final TextStyle tabBarTextStyle = buildBody(
     color: colorScheme.onSurface,
   );
 
