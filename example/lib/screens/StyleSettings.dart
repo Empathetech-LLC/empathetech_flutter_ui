@@ -23,8 +23,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
   late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
 
-  late final TextStyle? labelStyle = getLabel(context);
-
   // Set the page title //
 
   @override
@@ -105,7 +103,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
             // Help
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: labelStyle,
+              style: getLabel(context),
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
