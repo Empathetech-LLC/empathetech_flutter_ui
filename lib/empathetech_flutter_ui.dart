@@ -22,14 +22,14 @@ export 'src/classes/responsive-design/EzSpacer.dart';
 export 'src/classes/responsive-design/EzSwapScaffold.dart';
 export 'src/classes/responsive-design/EzTransitions.dart';
 
-// Screen reader compliance
-export 'src/classes/screen-reader-compliance/EzImage.dart';
-export 'src/classes/screen-reader-compliance/EzInlineLink.dart';
-export 'src/classes/screen-reader-compliance/EzLink.dart';
-export 'src/classes/screen-reader-compliance/EzLinkImage.dart';
-export 'src/classes/screen-reader-compliance/EzNewLine.dart';
-export 'src/classes/screen-reader-compliance/EzPlainText.dart';
-export 'src/classes/screen-reader-compliance/EzRichText.dart';
+// Screen reader support
+export 'src/classes/screen-reader-support/EzImage.dart';
+export 'src/classes/screen-reader-support/EzInlineLink.dart';
+export 'src/classes/screen-reader-support/EzLink.dart';
+export 'src/classes/screen-reader-support/EzLinkImage.dart';
+export 'src/classes/screen-reader-support/EzNewLine.dart';
+export 'src/classes/screen-reader-support/EzPlainText.dart';
+export 'src/classes/screen-reader-support/EzRichText.dart';
 
 // User customization
 export 'src/classes/user-customization/EzAppProvider.dart';
