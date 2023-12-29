@@ -171,45 +171,49 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
     return _fullList
         .where((element) => !_currSet.contains(element))
-        .map<Widget>(
-          (String settingKey) => Container(
-            padding: EdgeInsets.symmetric(
-              vertical: buttonSpace / 2,
-              horizontal: buttonSpace,
-            ),
-            child: ElevatedButton.icon(
-              key: ValueKey(settingKey),
-              icon: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                  ),
-                ),
-                child: CircleAvatar(
-                  backgroundColor: getLiveColor(context, settingKey),
-                  radius: padding * sqrt(2),
-                ),
+        .map<Widget>((String settingKey) {
+      final Color liveColor = getLiveColor(context, settingKey);
+
+      return Container(
+        padding: EdgeInsets.symmetric(
+          vertical: buttonSpace / 2,
+          horizontal: buttonSpace,
+        ),
+        child: ElevatedButton.icon(
+          key: ValueKey(settingKey),
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
-              label: Text(getColorName(context, settingKey)),
-              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                    padding: MaterialStateProperty.all(
-                      EdgeInsets.all(padding * 0.75),
-                    ),
-                    foregroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-              onPressed: () {
-                setState(() {
-                  currList.add(settingKey);
-                });
-                modalSheetState(() {});
-              },
+            ),
+            child: CircleAvatar(
+              backgroundColor: liveColor,
+              radius: padding * sqrt(2),
+              child: liveColor == Colors.transparent
+                  ? Icon(PlatformIcons(context).eyeSlash)
+                  : null,
             ),
           ),
-        )
-        .toList();
+          label: Text(getColorName(context, settingKey)),
+          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                padding: MaterialStateProperty.all(
+                  EdgeInsets.all(padding * 0.75),
+                ),
+                foregroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+          onPressed: () {
+            setState(() {
+              currList.add(settingKey);
+            });
+            modalSheetState(() {});
+          },
+        ),
+      );
+    }).toList();
   }
 
   // Set the page title //
