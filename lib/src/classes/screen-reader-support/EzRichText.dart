@@ -26,7 +26,7 @@ class EzRichText extends StatelessWidget {
   final Color? selectionColor;
 
   /// [Text.rich] wrapper with custom [Semantics] behavior
-  /// Recommended to pair with [EzPlainText] and [EzInlineLink]
+  /// Recommended to pair with [EzPlainText] and [EzInlineLink] rather than [TextSpan]s
   EzRichText(
     this.children, {
     this.key,
@@ -54,9 +54,13 @@ class EzRichText extends StatelessWidget {
           TextSpan ogSpan = child as TextSpan;
           label.writeAll([ogSpan.semanticsLabel ?? ogSpan.text, " "]);
           break;
+        case EzPlainText:
+          EzPlainText plainSpan = child as EzPlainText;
+          label.writeAll([plainSpan.semanticsLabel ?? plainSpan.data, " "]);
+          break;
         case EzInlineLink:
           EzInlineLink linkSpan = child as EzInlineLink;
-          label.writeAll([linkSpan.text, " "]);
+          label.writeAll([linkSpan.textFix ?? linkSpan.text, " "]);
           break;
         default:
           break;
