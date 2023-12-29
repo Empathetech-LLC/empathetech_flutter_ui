@@ -17,8 +17,6 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - EzText
-- EzTextStyle
-- EzRichText
 - EzPlainText
 
 ### Added
