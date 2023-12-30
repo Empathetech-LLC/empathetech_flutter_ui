@@ -57,8 +57,7 @@ class EFUILangEs extends EFUILang {
   String get gHowThisWorks => 'Cómo funciona esto';
 
   @override
-  String get gHowThisWorksHint =>
-      'Cómo funciona esto; activar para abrir documentación útil';
+  String get gHowThisWorksHint => 'Activar para abrir documentación útil';
 
   @override
   String get gAttention => 'Atención';

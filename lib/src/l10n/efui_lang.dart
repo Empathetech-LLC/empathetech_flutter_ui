@@ -193,7 +193,7 @@ abstract class EFUILang {
   /// No description provided for @gHowThisWorksHint.
   ///
   /// In en, this message translates to:
-  /// **'How this works; activate to open helpful documentation.'**
+  /// **'Activate to open helpful documentation.'**
   String get gHowThisWorksHint;
 
   /// No description provided for @gAttention.

@@ -22,7 +22,7 @@
 
   "gEditingTheme": "Editing: {themeType} theme",
   "gHowThisWorks": "How this works",
-  "gHowThisWorksHint": "How this works; activate to open helpful documentation.",
+  "gHowThisWorksHint": "Activate to open helpful documentation.",
 
   "gAttention": "Attention",
   "gCurrently": "Currently:",
