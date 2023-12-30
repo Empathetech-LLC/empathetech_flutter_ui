@@ -248,7 +248,7 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 | Android | iOS |
 |---|---|
-| <img src="./assets/home-android.png" alt="Home page on Android" width="250"/> | <img src="./assets/home-ios.png" alt="Home page on iOS" width="250"/> |
+| <img src="./assets/home-android.png" alt="Home page on Android" width="250"/> | <img src="./assets/home-ios.jpeg" alt="Home page on iOS" width="250"/> |
 
 | Linux | MacOS | Windows |
 |---|---|---|
@@ -262,7 +262,7 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 | | | |
 |---|---|---|
-| <img src="./assets/home-ios.png" alt="Core settings example" width="250"/> | <img src="./assets/style-settings-ios.png" alt="Style settings example" width="250"/> | <img src="./assets/color-settings-ios.png" alt="Color settings example" width="250"/> |
+| <img src="./assets/home-ios.jpeg" alt="Core settings example" width="250"/> | <img src="./assets/style-settings-ios.png" alt="Style settings example" width="250"/> | <img src="./assets/color-settings-ios.png" alt="Color settings example" width="250"/> |
 | <img src="./assets/image-settings-ios.png" alt="Image settings example" width="250"/> | <img src="./assets/font-picker-ios.png" alt="Font picker preview" width="250"/> | <img src="./assets/margin-setting-ios.png" alt="Margin setting preview" width="250"/> |
 | <img src="./assets/circle-setting-ios.png" alt="Circle setting preview" width="250"/> | <img src="./assets/color-picker-ios.png" alt="Color picker preview" width="250"/> | <img src="./assets/update-image-ios.png" alt="Update image preview" width="250"/> |
 
