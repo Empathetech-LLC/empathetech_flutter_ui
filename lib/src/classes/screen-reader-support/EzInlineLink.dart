@@ -59,7 +59,7 @@ class EzInlineLink extends WidgetSpan {
             textAlign: textAlign,
             onTap: onTap,
             url: url,
-            semanticsLabel: "$text; $semanticsLabel",
+            semanticsLabel: "${textFix ?? text}; $semanticsLabel",
             tooltip: tooltip,
             statesController: statesController,
           ),
