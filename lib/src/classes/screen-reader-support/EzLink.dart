@@ -26,8 +26,8 @@ class EzLink extends StatefulWidget {
   final Uri? url;
 
   /// Message for screen readers
-  /// Defaults to [text]
-  final String? semanticsLabel;
+  /// Don't repeat [text] here, it is appended automatically
+  final String semanticsLabel;
 
   /// On hover/focus hint
   /// Defaults to [semanticsLabel] (or [text])
@@ -37,8 +37,8 @@ class EzLink extends StatefulWidget {
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a [semanticsLabel]; if one is not provided, it will default to [text]
-  /// Also has a [tooltip]; if one is not provided, it will default to [semanticsLabel] (or [text])
+  /// [semanticsLabel]; is required
+  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]
   /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   EzLink(
@@ -49,7 +49,7 @@ class EzLink extends StatefulWidget {
     this.textAlign,
     this.onTap,
     this.url,
-    this.semanticsLabel,
+    required this.semanticsLabel,
     this.tooltip,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
@@ -80,7 +80,7 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = widget.semanticsLabel ?? widget.text;
+    final String semantics = "${widget.text}; ${widget.semanticsLabel}";
 
     return Tooltip(
       message: widget.tooltip ?? semantics,
