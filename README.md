@@ -69,7 +69,7 @@ Here are some (unaffiliated) videos you might also find helpful.
 
 ### Step 1
 
-Initialize `EzConfig` in `void main()` (in [main.dart](./example/lib/main.dart))
+Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in `void main()`
 
 ```Dart
 void main() async {
@@ -155,7 +155,7 @@ Or, you can even build your own fully custom base theme with `EzConfig` data.
 
 #### Copy the [settings sandbox](#user-customization)!
 
-The example app is built to be a drop-in solution for your apps' settings sections.
+The example app is built to be a drop-in solution for your apps' settings.
 
 Copy/paste all the [screen files](./example/lib/screens/) and routes from `main.dart` (below)
 
