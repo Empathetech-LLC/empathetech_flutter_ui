@@ -262,15 +262,15 @@ But, this should be plenty to get you started (and avoid overload). Once you're 
 
 | | | |
 |---|---|---|
-| <img src="./assets/home-ios.jpeg" alt="Core settings example" width="250"/> | <img src="./assets/style-settings-ios.png" alt="Style settings example" width="250"/> | <img src="./assets/color-settings-ios.png" alt="Color settings example" width="250"/> |
-| <img src="./assets/image-settings-ios.png" alt="Image settings example" width="250"/> | <img src="./assets/font-picker-ios.png" alt="Font picker preview" width="250"/> | <img src="./assets/margin-setting-ios.png" alt="Margin setting preview" width="250"/> |
-| <img src="./assets/circle-setting-ios.png" alt="Circle setting preview" width="250"/> | <img src="./assets/color-picker-ios.png" alt="Color picker preview" width="250"/> | <img src="./assets/update-image-ios.png" alt="Update image preview" width="250"/> |
+| <img src="./assets/home-ios.jpeg" alt="Core settings example" width="250"/> | <img src="./assets/style-settings.png" alt="Style settings example" width="250"/> | <img src="./assets/color-settings.png" alt="Color settings example" width="250"/> |
+| <img src="./assets/image-settings.png" alt="Image settings example" width="250"/> | <img src="./assets/font-picker.png" alt="Font picker preview" width="250"/> | <img src="./assets/margin-setting.png" alt="Margin setting preview" width="250"/> |
+| <img src="./assets/circle-setting.png" alt="Circle setting preview" width="250"/> | <img src="./assets/color-picker.png" alt="Color picker preview" width="250"/> | <img src="./assets/update-image.png" alt="Update image preview" width="250"/> |
 
 ### Internationalization
 
 | | | | |
 |---|---|---|---|
-| <img src="./assets/es-home-ios.png" alt="Core settings in Spanish" width="250"/> | <img src="./assets/es-style-settings-ios.png" alt="Style settings in Spanish" width="250"/> | <img src="./assets/es-color-settings-ios.png" alt="Color settings in Spanish" width="250"/> | <img src="./assets/es-image-settings-ios.png" alt="Image settings in Spanish" width="250"/> |
+| <img src="./assets/es-home-ios.png" alt="Core settings in Spanish" width="250"/> | <img src="./assets/es-style-settings.png" alt="Style settings in Spanish" width="250"/> | <img src="./assets/es-color-settings.png" alt="Color settings in Spanish" width="250"/> | <img src="./assets/es-image-settings.png" alt="Image settings in Spanish" width="250"/> |
 
 **Screen reader semantics are also internationalized!**
 
