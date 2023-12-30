@@ -83,7 +83,7 @@ class _EzLinkState extends State<EzLink> {
     final String semantics = "${widget.text}; ${widget.semanticsLabel}";
 
     return Tooltip(
-      message: widget.tooltip ?? semantics,
+      message: widget.tooltip ?? widget.semanticsLabel,
       excludeFromSemantics: true,
       child: Semantics(
         link: true,
