@@ -38,7 +38,6 @@ class EzInlineLink extends WidgetSpan {
   /// Smaller strings can sometimes have issues with text spacing
   EzInlineLink(
     this.text, {
-    this.textFix,
     this.key,
     this.style,
     this.color,
@@ -46,6 +45,7 @@ class EzInlineLink extends WidgetSpan {
     this.onTap,
     this.url,
     required this.semanticsLabel,
+    this.textFix,
     this.tooltip,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
@@ -59,8 +59,8 @@ class EzInlineLink extends WidgetSpan {
             textAlign: textAlign,
             onTap: onTap,
             url: url,
-            semanticsLabel: "${textFix ?? text}; $semanticsLabel",
-            tooltip: tooltip ?? semanticsLabel,
+            semanticsLabel: semanticsLabel,
+            tooltip: tooltip,
             statesController: statesController,
           ),
           alignment: PlaceholderAlignment.baseline,
