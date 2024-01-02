@@ -56,7 +56,7 @@ class EzRichText extends StatelessWidget {
           break;
         case EzPlainText:
           EzPlainText plainSpan = child as EzPlainText;
-          label.writeAll([plainSpan.semanticsLabel ?? plainSpan.data, " "]);
+          label.writeAll([plainSpan.semanticsLabel ?? plainSpan.text, " "]);
           break;
         case EzInlineLink:
           EzInlineLink linkSpan = child as EzInlineLink;
