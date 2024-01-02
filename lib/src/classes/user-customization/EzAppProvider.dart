@@ -24,10 +24,9 @@ class EzAppProvider extends StatelessWidget {
     required this.app,
   });
 
-  // Gather theme data //
+  // Gather the theme data //
 
-  late final bool? _savedLight =
-      EzConfig.instance.preferences.getBool(isLightKey);
+  late final bool? _savedLight = EzConfig.getBool(isLightThemeKey);
 
   late final ThemeMode _initialTheme = (_savedLight == null)
       ? ThemeMode.system
@@ -35,8 +34,8 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.light
           : ThemeMode.dark;
 
-  late final ThemeData _materialLight = ezThemeData(lightTheme: true);
-  late final ThemeData _materialDark = ezThemeData(lightTheme: false);
+  late final ThemeData _materialLight = ezThemeData(Brightness.light);
+  late final ThemeData _materialDark = ezThemeData(Brightness.dark);
 
   // Return the build //
 

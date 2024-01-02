@@ -2,12 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0] - 2024-01-02
+### Updated
+- To Material 3
+  - Big updates to...
+    - Localizations, configKeys, empathetechConfig, EzConfig, ezThemeData, Color functions, all custom buttons and links
+    - The Example app and README to showcase everything
+  - Restored iOS web icons and video
+  - Updated textScaleFactor to textScaler
+  - Using SelectionArea rather than SelectableText
+    - Updated EzRichText and EzPlainText
+- Made EzLink a TextButton
+  - Made EzInlineLink a WidgetSpan wrapper around EzLink
+- Expanded EzRowCol
+- Updated file organization
+
+### Removed
+- EzText
+
+### Added
+- EzLocaleSetting
+- ColorScheme generation functions
+- Tooltips
+- EzNewLine
+
 ## [4.3.3] - 2023-11-16
 ### Updated
-- Color picker
-- EzImageSetting
-- EzAlertDialog
+- EzImageSetting options
+  - Updated usability on Web
+- EzAlertDialog parameters
   - Minor breaking change
+  - Fixed visual bug with ColorPicker
 
 ## [4.3.2] - 2023-11-12
 ### Updated

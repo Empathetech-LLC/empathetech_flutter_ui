@@ -8,7 +8,15 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// More readable than [Navigator] spelled out
+/// Alias for [Navigator.pop]
+void popScreen({
+  required BuildContext context,
+  dynamic result,
+}) {
+  return Navigator.of(context).pop(result);
+}
+
+/// More readable than [Navigator.push] spelled out
 Future<dynamic> pushScreen({
   required BuildContext context,
   required Widget screen,
@@ -21,15 +29,7 @@ Future<dynamic> pushScreen({
   );
 }
 
-/// Alias for Navigator.of(context).pop()
-void popScreen({
-  required BuildContext context,
-  dynamic pass,
-}) {
-  return Navigator.of(context).pop(pass);
-}
-
-/// More readable than [Navigator] function spelled out
+/// More readable than [Navigator.pop] && [Navigator.push] spelled out
 Future<dynamic> popAndPushScreen({
   required BuildContext context,
   required Widget screen,
@@ -44,7 +44,7 @@ Future<dynamic> popAndPushScreen({
   );
 }
 
-/// More readable than [Navigator] function spelled out
+/// More readable than [Navigator.pushReplacement] spelled out
 Future<dynamic> replaceScreen({
   required BuildContext context,
   required Widget screen,
@@ -58,7 +58,7 @@ Future<dynamic> replaceScreen({
 }
 
 /// More readable than [Navigator] function spelled out
-/// Runs pop until '/' route
+/// Runs [Navigator.popUntil] the [ModalRoute] named [homeRoute]
 void popUntilHome(BuildContext context) {
   return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }

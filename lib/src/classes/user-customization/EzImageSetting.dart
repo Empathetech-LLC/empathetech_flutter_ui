@@ -14,30 +14,40 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 // EzImageSetting has not yet been verified with TalkBack or VoiceOver //
 
 class EzImageSetting extends StatefulWidget {
-  /// [EzConfig.instance] key whose value is being updated
+  /// [EzConfig] key whose value is being updated
   final String prefsKey;
 
   /// [String] to display on the [ElevatedButton]
-  final String title;
+  final String label;
+
+  /// Optional [EzAlertDialog] title override
+  /// Will be the same as [label] otherwise
+  final String? dialogTitle;
 
   /// Effectively whether the image is nullable
   final bool allowClear;
 
-  /// Whether the image is intended for fullscreen use
-  final bool fullscreen;
-
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
-  final String credits;
+  final String? credits;
+
+  /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
+  final Brightness? updateTheme;
+
+  /// [updateTheme] override
+  /// Mostly for use in a/the color settings screen
+  final bool hideThemeMessage;
 
   /// Creates a tool for updating the image at [prefsKey]'s path
   const EzImageSetting({
     Key? key,
     required this.prefsKey,
-    required this.title,
+    required this.label,
+    this.dialogTitle,
     required this.allowClear,
-    required this.fullscreen,
-    required this.credits,
+    this.credits,
+    this.updateTheme,
+    this.hideThemeMessage = false,
   }) : super(key: key);
 
   @override
@@ -45,18 +55,21 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
-  String? _updatedPath;
+  late String? currPath = EzConfig.get(widget.prefsKey);
+  late bool _updateTheme = (widget.updateTheme != null);
 
-  final double _padding = EzConfig.instance.prefs[paddingKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double padding = EzConfig.get(paddingKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Define button functions //
 
-  /// Cleanup any custom files
+  /// Cleanup any custom [File]s
   void _cleanup() async {
-    if (!isKeyAsset(widget.prefsKey)) {
+    if (!EzConfig.isKeyAsset(widget.prefsKey)) {
       try {
         File toDelete = File(widget.prefsKey);
         await toDelete.delete();
@@ -66,14 +79,11 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
-  /// Selection is sent to [changeImage]
-  Future<dynamic> _chooseImage(BuildContext context) {
-    // Build the dialog options //
-
+  /// Build the list of [ImageSource] options
+  List<Widget> _sourceOptions(StateSetter dialogState, BuildContext context) {
     List<Widget> options = [];
 
-    // From file && camera rely on path provider, which isn't supported by Flutter Web
+    // From file && camera rely on path_provider, which isn't supported by Flutter Web
     if (!kIsWeb) {
       options.addAll([
         // From file
@@ -85,12 +95,12 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            popScreen(context: context, pass: changed);
+            popScreen(context: context, result: changed);
           },
           label: Text(EFUILang.of(context)!.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
 
         // From camera
         ElevatedButton.icon(
@@ -101,12 +111,12 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            popScreen(context: context, pass: changed);
+            popScreen(context: context, result: changed);
           },
           label: Text(EFUILang.of(context)!.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
       ]);
     }
 
@@ -121,8 +131,24 @@ class _ImageSettingState extends State<EzImageSetting> {
               String url = '';
               return StatefulBuilder(
                 builder: (context, setState) {
+                  void _onConfirm() {
+                    if (isUrl(url)) {
+                      EzConfig.setString(widget.prefsKey, url);
+                      popScreen(context: context, result: url);
+                    } else {
+                      popScreen(context: context, result: null);
+                    }
+                  }
+
+                  void _onDeny() {
+                    popScreen(context: context, result: null);
+                  }
+
                   return EzAlertDialog(
-                    title: EzText(EFUILang.of(context)!.isEnterURL),
+                    title: Text(
+                      EFUILang.of(context)!.isEnterURL,
+                      textAlign: TextAlign.center,
+                    ),
                     contents: [
                       PlatformTextFormField(
                         onChanged: (value) {
@@ -141,24 +167,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ],
                     materialActions: ezMaterialActions(
                       context: context,
-                      onConfirm: () {
-                        EzConfig.instance.preferences
-                            .setString(widget.prefsKey, url);
-                        popScreen(context: context, pass: url);
-                      },
+                      onConfirm: _onConfirm,
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, pass: null),
+                      onDeny: _onDeny,
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     cupertinoActions: ezCupertinoActions(
                       context: context,
-                      onConfirm: () {
-                        EzConfig.instance.preferences
-                            .setString(widget.prefsKey, url);
-                        popScreen(context: context, pass: url);
-                      },
+                      onConfirm: _onConfirm,
                       confirmMsg: EFUILang.of(context)!.gApply,
-                      onDeny: () => popScreen(context: context, pass: null),
+                      onDeny: _onDeny,
                       denyMsg: EFUILang.of(context)!.gCancel,
                     ),
                     needsClose: false,
@@ -168,23 +186,22 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           );
 
-          popScreen(context: context, pass: changed);
+          popScreen(context: context, result: changed);
         },
         label: Text(EFUILang.of(context)!.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
       ),
-      EzSpacer(_buttonSpacer),
+      _buttonSpacer,
 
       // Reset
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
-
-          EzConfig.instance.preferences.remove(widget.prefsKey);
+          EzConfig.remove(widget.prefsKey);
 
           popScreen(
             context: context,
-            pass: EzConfig.instance.defaults[widget.prefsKey],
+            result: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
           );
         },
         label: Text(EFUILang.of(context)!.isResetIt),
@@ -195,30 +212,113 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Clear (optional)
     if (widget.allowClear)
       options.addAll([
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
+            EzConfig.setString(widget.prefsKey, noImageValue);
 
-            EzConfig.instance.preferences
-                .setString(widget.prefsKey, noImageKey);
-
-            popScreen(context: context, pass: noImageKey);
+            popScreen(context: context, result: noImageValue);
           },
           label: Text(EFUILang.of(context)!.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
 
-    // Return the dialog //
+    // Update theme (optional)
+    if (widget.updateTheme != null && !widget.hideThemeMessage)
+      options.addAll([
+        _buttonSpacer,
+        EzRow(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Label
+              Flexible(
+                child: Text(
+                  EFUILang.of(context)!.isUseForColors,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              EzSpacer.row(padding),
 
+              // Check box
+              Checkbox(
+                  value: _updateTheme,
+                  onChanged: (bool? choice) {
+                    setState(() {
+                      dialogState(() {
+                        _updateTheme = (choice == null) ? false : choice;
+                      });
+                    });
+                  }),
+            ])
+      ]);
+
+    return options;
+  }
+
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
+  /// Returns the path, if any, to the new [Image]
+  Future<dynamic> _chooseImage(BuildContext context) {
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.isDialogTitle(widget.title)),
-        contents: options,
+      builder: (context) => StatefulBuilder(
+        builder: (BuildContext context, StateSetter dialogState) {
+          return EzAlertDialog(
+            title: Text(
+              EFUILang.of(context)!
+                  .isDialogTitle(widget.dialogTitle ?? widget.label),
+              textAlign: TextAlign.center,
+            ),
+            contents: _sourceOptions(dialogState, context),
+          );
+        },
       ),
     );
+  }
+
+  /// First-layer [ElevatedButton.onPressed]
+  /// Runs the [_chooseImage] dialog and updates the state accordingly
+  void _activateSetting() async {
+    dynamic newPath = await _chooseImage(context);
+
+    if (newPath is String) {
+      setState(() {
+        currPath = newPath;
+      });
+      if (widget.updateTheme != null && newPath != noImageValue) {
+        await storeImageColorScheme(
+          brightness: widget.updateTheme!,
+          path: newPath,
+        );
+
+        widget.updateTheme == Brightness.light
+            ? EzConfig.setString(lightColorSchemeImageKey, newPath)
+            : EzConfig.setString(darkColorSchemeImageKey, newPath);
+      }
+    }
+  }
+
+  /// Open an [EzAlertDialog] with the [Image]s source information
+  Future<dynamic>? _showCredits() {
+    return (widget.credits == null)
+        ? null
+        : showPlatformDialog(
+            context: context,
+            builder: (context) => EzAlertDialog(
+              title: Text(
+                EFUILang.of(context)!.gCreditTo,
+                textAlign: TextAlign.center,
+              ),
+              contents: [
+                Text(
+                  widget.credits!,
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          );
   }
 
   // Return the build //
@@ -227,79 +327,37 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.isButtonHint(widget.title),
+      hint: EFUILang.of(context)!.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: ElevatedButton(
-          // On pressed -> choose image
-          onPressed: () async {
-            dynamic newPath = await _chooseImage(context);
-
-            if (newPath is String) {
-              setState(() {
-                _updatedPath = newPath;
-              });
-            }
-          },
-
-          // On long press -> show credits
-          onLongPress: () => showPlatformDialog(
-            context: context,
-            builder: (context) => EzAlertDialog(
-              title: EzText(EFUILang.of(context)!.isCreditTo),
-              contents: [EzText(widget.credits)],
+        child: ElevatedButton.icon(
+          onPressed: _activateSetting,
+          onLongPress: _showCredits,
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+            ),
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: (currPath == null || currPath == noImageValue)
+                  ? Icon(PlatformIcons(context).clear)
+                  : null,
+              foregroundImage: (currPath == null || currPath == noImageValue)
+                  ? null
+                  : provideImage(currPath!),
+              radius: padding * 2,
             ),
           ),
-
-          // Button body
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Title on the left
-              Text(widget.title),
-              EzSpacer.row(_padding),
-
-              // Preview on the right
-              // 16:9 for backgrounds, 1:1 for the rest
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    width: 1,
-                  ),
-                ),
-                child: SizedBox(
-                  width: widget.fullscreen ? 90 : 75,
-                  height: widget.fullscreen ? 160 : 75,
-                  child: (_updatedPath is String)
-                      ? // user made a change
-                      (_updatedPath == noImageKey)
-                          ? // user cleared the image
-                          Icon(PlatformIcons(context).clear)
-                          : // user set a custom image
-                          EzImage(
-                              image: provideImage(_updatedPath!),
-                              semanticLabel:
-                                  widget.title + EFUILang.of(context)!.isImage,
-                            )
-                      : // user has not made a change
-                      (EzConfig.instance.prefs[widget.prefsKey] == null ||
-                              EzConfig.instance.prefs[widget.prefsKey] ==
-                                  noImageKey)
-                          ? // there is no current image
-                          Icon(PlatformIcons(context).clear)
-                          : // there is an image stored
-                          EzImage(
-                              image: provideImage(
-                                EzConfig.instance.prefs[widget.prefsKey],
-                              ),
-                              semanticLabel:
-                                  widget.title + EFUILang.of(context)!.isImage,
-                            ),
+          label: Text(widget.label, textAlign: TextAlign.center),
+          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                padding:
+                    MaterialStatePropertyAll(EdgeInsets.all(padding * 0.75)),
+                foregroundColor: MaterialStatePropertyAll(
+                  Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-            ],
-          ),
         ),
       ),
     );

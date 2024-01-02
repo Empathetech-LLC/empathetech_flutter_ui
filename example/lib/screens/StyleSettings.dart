@@ -13,111 +13,103 @@ class StyleSettingsScreen extends StatefulWidget {
 }
 
 class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
-  // Set page/tab title //
+  // Gather the theme data //
+
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double margin = EzConfig.get(marginKey);
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.stsPageTitle);
+    setPageTitle(EFUILang.of(context)!.stsPageTitle);
   }
-
-  // Gather theme data //
-
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
-
-  final double _margin = EzConfig.instance.prefs[marginKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
+      title: efuiS,
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Font
-            EzSpacer(_buttonSpacer > _margin ? _buttonSpacer - _margin : 0),
+            if (buttonSpace > margin) EzSpacer(buttonSpace - margin),
             const EzFontSetting(),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Margin
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: marginKey,
               type: SliderSettingType.margin,
-              title: EFUILang.of(context)!.stsMargin,
-              min: 5.0,
-              max: 50.0,
-              steps: 18,
-              decimals: 1,
-            ),
-            EzSpacer(_buttonSpacer),
-
-            // Padding
-            EzSliderSetting(
-              prefsKey: paddingKey,
-              type: SliderSettingType.padding,
-              title: EFUILang.of(context)!.stsPadding,
               min: 0.0,
               max: 50.0,
-              steps: 20,
+              steps: 10,
               decimals: 1,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
-            // Circle button size
-            EzSliderSetting(
-              prefsKey: circleDiameterKey,
-              type: SliderSettingType.circleSize,
-              title: EFUILang.of(context)!.stsCircleSize,
-              min: 30,
-              max: 100,
-              steps: 14,
-              decimals: 0,
+            // Padding
+            const EzSliderSetting(
+              prefsKey: paddingKey,
+              type: SliderSettingType.padding,
+              min: 0.0,
+              max: 50.0,
+              steps: 10,
+              decimals: 1,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Button spacing
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: buttonSpacingKey,
               type: SliderSettingType.buttonSpacing,
-              title: EFUILang.of(context)!.stsButtonSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Text spacing
-            EzSliderSetting(
+            const EzSliderSetting(
               prefsKey: textSpacingKey,
               type: SliderSettingType.textSpacing,
-              title: EFUILang.of(context)!.stsTextSpacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
               decimals: 0,
             ),
-            EzSpacer(2 * _buttonSpacer),
+            _buttonSeparator,
 
-            // Local reset "all"
+            // Local reset all
             EzResetButton(
-              context: context,
               dialogTitle: EFUILang.of(context)!.stsResetAll,
               onConfirm: () {
-                EzConfig.instance.preferences.remove(fontFamilyKey);
-                EzConfig.instance.preferences.remove(marginKey);
-                EzConfig.instance.preferences.remove(paddingKey);
-                EzConfig.instance.preferences.remove(circleDiameterKey);
-                EzConfig.instance.preferences.remove(buttonSpacingKey);
-                EzConfig.instance.preferences.remove(textSpacingKey);
-
-                popScreen(context: context, pass: true);
+                EzConfig.removeKeys(styleKeys.keys.toSet());
+                popScreen(context: context, result: true);
               },
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
+
+            // Help
+            EzLink(
+              EFUILang.of(context)!.gHowThisWorks,
+              style: getLabel(context),
+              textAlign: TextAlign.center,
+              url: Uri.parse(understandingLayout),
+              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+              tooltip: understandingLayout,
+            ),
+            _buttonSpacer,
           ],
         ),
       ),

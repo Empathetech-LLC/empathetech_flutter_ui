@@ -17,27 +17,17 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  // Define functions //
-  String _getName(ThemeMode? curr) {
-    switch (curr) {
-      case ThemeMode.light:
-        return EFUILang.of(context)!.gLight;
-      case ThemeMode.dark:
-        return EFUILang.of(context)!.gDark;
-      case ThemeMode.system:
-      default:
-        return EFUILang.of(context)!.gSystem;
-    }
-  }
+  // Gather the theme data //
+
+  final double padding = EzConfig.get(paddingKey);
+
+  late ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Define the build //
 
-    ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
-    final TextStyle? style = Theme.of(context).dropdownMenuTheme.textStyle;
-
-    // Define the items //
+    final String label = EFUILang.of(context)!.ssThemeMode;
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
@@ -56,58 +46,61 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     // Return the build //
 
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Label
-        EzText(EFUILang.of(context)!.hsThemeMode, style: style),
-        EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
-
-        // Button
-        Semantics(
-          button: true,
-          hint:
-              "${EFUILang.of(context)!.hsThemeSemantics} ${_getName(currMode)}",
-          child: ExcludeSemantics(
-            child: DropdownButton<ThemeMode>(
-              value: currMode,
-              items: items,
-              dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-              onChanged: (ThemeMode? newThemeMode) {
-                switch (newThemeMode) {
-                  case ThemeMode.system:
-                    EzConfig.instance.preferences.remove(isLightKey);
-                    setState(() {
-                      currMode = ThemeMode.system;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.system;
-                    });
-                    break;
-
-                  case ThemeMode.light:
-                    EzConfig.instance.preferences.setBool(isLightKey, true);
-                    setState(() {
-                      currMode = ThemeMode.light;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.light;
-                    });
-                    break;
-
-                  case ThemeMode.dark:
-                    EzConfig.instance.preferences.setBool(isLightKey, false);
-                    setState(() {
-                      currMode = ThemeMode.dark;
-                      PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
-                    });
-                    break;
-
-                  default:
-                    break;
-                }
-              },
-            ),
+    return Container(
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+      ),
+      child: EzRow(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Label
+          Text(
+            label,
+            style: Theme.of(context).dropdownMenuTheme.textStyle,
+            textAlign: TextAlign.center,
+            semanticsLabel: EFUILang.of(context)!.gSettingX(label),
           ),
-        ),
-      ],
+          EzSpacer.row(padding),
+
+          // Button
+          DropdownButton<ThemeMode>(
+            value: currMode,
+            items: items,
+            onChanged: (ThemeMode? newThemeMode) {
+              switch (newThemeMode) {
+                case ThemeMode.system:
+                  EzConfig.remove(isLightThemeKey);
+                  setState(() {
+                    currMode = ThemeMode.system;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                  });
+                  break;
+
+                case ThemeMode.light:
+                  EzConfig.setBool(isLightThemeKey, true);
+                  setState(() {
+                    currMode = ThemeMode.light;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                  });
+                  break;
+
+                case ThemeMode.dark:
+                  EzConfig.setBool(isLightThemeKey, false);
+                  setState(() {
+                    currMode = ThemeMode.dark;
+                    PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                  });
+                  break;
+
+                default:
+                  break;
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

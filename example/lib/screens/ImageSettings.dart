@@ -13,104 +13,93 @@ class ImageSettingsScreen extends StatefulWidget {
 }
 
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
-  // Set page/tab title //
+  // Gather the theme data //
+
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+  final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
+
+  // Define the page content //
+
+  late final String themeProfile = isLight
+      ? EFUILang.of(context)!.gLight.toLowerCase()
+      : EFUILang.of(context)!.gDark.toLowerCase();
+
+  late final String resetTitle = EFUILang.of(context)!.isResetAll(themeProfile);
+
+  late final List<Widget> _lightButtons = [
+    // Page
+    EzImageSetting(
+      prefsKey: lightPageImageKey,
+      label: EFUILang.of(context)!.isBackground,
+      allowClear: true,
+      updateTheme: Brightness.light,
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      dialogTitle: resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(lightImageKeys.keys.toSet());
+        popScreen(context: context, result: true);
+      },
+    ),
+  ];
+
+  late final List<Widget> _darkButtons = [
+    // Page
+    EzImageSetting(
+      prefsKey: darkPageImageKey,
+      label: EFUILang.of(context)!.isBackground,
+      allowClear: true,
+      updateTheme: Brightness.dark,
+    ),
+    _buttonSeparator,
+
+    // Local reset all
+    EzResetButton(
+      dialogTitle: resetTitle,
+      onConfirm: () {
+        EzConfig.removeKeys(darkImageKeys.keys.toSet());
+        popScreen(context: context, result: true);
+      },
+    ),
+  ];
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.isPageTitle);
+    setPageTitle(EFUILang.of(context)!.isPageTitle);
   }
-
-  // Gather theme data //
-
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
-  late final String _themeProfile =
-      _isLight ? EFUILang.of(context)!.gLight : EFUILang.of(context)!.gDark;
-
-  late final String _resetTitle =
-      EFUILang.of(context)!.isResetAll(_themeProfile);
-
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  final double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
+      title: efuiS,
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
-            // Current theme mode reminder
-            EzText(
-              EFUILang.of(context)!.dEditingTheme(_themeProfile),
-              style: titleSmall(context),
+            // Current theme reminder
+            Text(
+              EFUILang.of(context)!.gEditingTheme(themeProfile),
+              style: getLabel(context),
+              textAlign: TextAlign.center,
             ),
-            EzSpacer(_textSpacer),
+            _textSpacer,
 
-            // Settings //
-
-            // Nested in a horizontal scroll view in case the screen doesn't have enough horizontal space
-            EzScrollView(
-              scrollDirection: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
-              primary: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: _isLight
-                    ? // Editing light theme //
-                    [
-                        // Page
-                        EzImageSetting(
-                          prefsKey: lightPageImageKey,
-                          title: EFUILang.of(context)!.gPage,
-                          allowClear: true,
-                          fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
-                        ),
-                        EzSpacer(2 * _buttonSpacer),
-
-                        // Local reset "all"
-                        EzResetButton(
-                          context: context,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.instance.preferences
-                                .remove(lightPageImageKey);
-
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
-                      ]
-                    : // Editing dark theme //
-                    [
-                        // Page
-                        EzImageSetting(
-                          prefsKey: darkPageImageKey,
-                          title: EFUILang.of(context)!.gPage,
-                          allowClear: true,
-                          fullscreen: true,
-                          credits: EFUILang.of(context)!.isSource,
-                        ),
-                        EzSpacer(2 * _buttonSpacer),
-
-                        // Local reset "all"
-                        EzResetButton(
-                          context: context,
-                          dialogTitle: _resetTitle,
-                          onConfirm: () {
-                            EzConfig.instance.preferences
-                                .remove(darkPageImageKey);
-
-                            popScreen(context: context, pass: true);
-                          },
-                        ),
-                      ],
-              ),
-            ),
-
-            EzSpacer(_buttonSpacer),
+            // Settings
+            ...(isLight ? _lightButtons : _darkButtons),
+            _buttonSpacer,
           ],
         ),
       ),

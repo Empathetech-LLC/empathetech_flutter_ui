@@ -10,22 +10,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  final BuildContext context;
-
   /// Button label
-  /// Defaults to [EFUILang.dResetAll]
+  /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
-  /// [Semantics] message for screen readers
-  /// Defaults to [dialogTitle]
-  final String? hint;
-
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.dResetDialogTitle]
+  /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.dResetDialogContent]
+  /// Defaults to [EFUILang.gResetWarn]
   final String? dialogContent;
 
   /// What happens when the user choses to reset
@@ -39,9 +33,7 @@ class EzResetButton extends StatelessWidget {
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   const EzResetButton({
-    required this.context,
     this.label,
-    this.hint,
     this.dialogTitle,
     this.dialogContent,
     this.onConfirm,
@@ -54,25 +46,29 @@ class EzResetButton extends StatelessWidget {
 
     final void Function() _onConfirm = onConfirm ??
         () {
-          EzConfig.instance.preferences.clear();
-          popScreen(context: context, pass: true);
+          EzConfig.removeKeys(allKeys.keys.toSet());
+          popScreen(context: context, result: true);
         };
 
     final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
 
-    // Define the build //
-    final String _dialogTitle =
-        dialogTitle ?? EFUILang.of(context)!.dResetDialogTitle;
+    // Define the dialog //
 
-    final OutlinedButton resetButton = OutlinedButton.icon(
-      icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? EFUILang.of(context)!.dResetAll),
-      onPressed: () => showPlatformDialog(
+    final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.ssResetAll;
+
+    void resetDialog() {
+      showPlatformDialog(
         context: context,
         builder: (context) => EzAlertDialog(
-          title: EzText(_dialogTitle),
+          title: Text(
+            _dialogTitle,
+            textAlign: TextAlign.center,
+          ),
           contents: [
-            EzText(dialogContent ?? EFUILang.of(context)!.dResetDialogContent),
+            Text(
+              dialogContent ?? EFUILang.of(context)!.gResetWarn,
+              textAlign: TextAlign.center,
+            ),
           ],
           materialActions: ezMaterialActions(
             context: context,
@@ -88,15 +84,15 @@ class EzResetButton extends StatelessWidget {
           ),
           needsClose: false,
         ),
-      ),
-    );
+      );
+    }
 
     // Return the build //
 
-    return Semantics(
-      button: true,
-      hint: hint ?? _dialogTitle,
-      child: ExcludeSemantics(child: resetButton),
+    return OutlinedButton.icon(
+      icon: Icon(PlatformIcons(context).refresh),
+      label: Text(label ?? EFUILang.of(context)!.gResetAll),
+      onPressed: resetDialog,
     );
   }
 }

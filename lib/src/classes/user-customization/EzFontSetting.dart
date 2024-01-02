@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -20,12 +19,13 @@ class EzFontSetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
-  String? currFontFamily = EzConfig.instance.fontFamily;
+  final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
+  String? currFontFamily = EzConfig.get(fontFamilyKey);
 
-  final String _defaultFontFamily = EzConfig.instance.defaults[fontFamilyKey];
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
   // Define button functions //
 
@@ -35,33 +35,35 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
     googleStyles.forEach((String font, TextStyle style) {
       buttons.addAll([
-        // Map font to a selectable button (title == name)
-        // Marks the default font with "* (Default)"
         ElevatedButton(
           onPressed: () {
-            EzConfig.instance.preferences.setString(fontFamilyKey, font);
+            EzConfig.setString(fontFamilyKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });
-            popScreen(context: context, pass: font);
+            popScreen(context: context, result: font);
           },
           child: Text(
             (font == _defaultFontFamily)
-                ? EFUILang.of(context)!.stsDefaultFont(font)
+                // Marks the default with "* (default)"
+                ? EFUILang.of(context)!.gDefaultEntry(font)
                 : font,
             style: style,
-            textAlign: TextAlign.center,
           ),
         ),
-        EzSpacer(_buttonSpacer),
+        _buttonSpacer,
       ]);
     });
 
     return showPlatformDialog(
       context: context,
       builder: (context) => EzAlertDialog(
-        title: EzText(EFUILang.of(context)!.stsChooseFont),
-        contents: buttons,
+        title: Text(
+          EFUILang.of(context)!.stsFonts,
+          textAlign: TextAlign.center,
+        ),
+        // Remove the trailing button spacer
+        contents: buttons.sublist(0, buttons.length - 1),
       ),
     );
   }
@@ -70,24 +72,13 @@ class _FontFamilySettingState extends State<EzFontSetting> {
 
   @override
   Widget build(BuildContext context) {
-    // At the time of writing, there is a visual bug with [ElevatedButton.icon] on iOS browsers
-    return (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
-        ? ElevatedButton(
-            onPressed: () => _chooseGoogleFont(context),
-            child: Text(
-              EFUILang.of(context)!.stsTextFont,
-              style: TextStyle(fontFamily: currFontFamily),
-              textAlign: TextAlign.center,
-            ),
-          )
-        : ElevatedButton.icon(
-            onPressed: () => _chooseGoogleFont(context),
-            icon: const Icon(LineIcons.font),
-            label: Text(
-              EFUILang.of(context)!.stsTextFont,
-              style: TextStyle(fontFamily: currFontFamily),
-              textAlign: TextAlign.center,
-            ),
-          );
+    return ElevatedButton.icon(
+      onPressed: () => _chooseGoogleFont(context),
+      icon: const Icon(LineIcons.font),
+      label: Text(
+        EFUILang.of(context)!.stsTextFont,
+        style: TextStyle(fontFamily: currFontFamily),
+      ),
+    );
   }
 }

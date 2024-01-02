@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzSliderSetting extends StatefulWidget {
@@ -15,9 +14,6 @@ class EzSliderSetting extends StatefulWidget {
 
   /// enum for determining the preview Widget(s) required
   final SliderSettingType type;
-
-  /// [String] that will be displayed at the top of the [BottomSheet]
-  final String title;
 
   /// Smallest value that can be set
   final double min;
@@ -37,7 +33,6 @@ class EzSliderSetting extends StatefulWidget {
     Key? key,
     required this.prefsKey,
     required this.type,
-    required this.title,
     required this.min,
     required this.max,
     required this.steps,
@@ -49,79 +44,34 @@ class EzSliderSetting extends StatefulWidget {
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
-  // Gather theme data //
+  // Gather the theme data //
 
-  late double currValue = EzConfig.instance.prefs[widget.prefsKey];
-  late double _defaultValue = EzConfig.instance.defaults[widget.prefsKey];
+  late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
+  late double currValue = EzConfig.get(widget.prefsKey);
 
-  late double _margin = EzConfig.instance.prefs[marginKey];
-  late double _padding = EzConfig.instance.prefs[paddingKey];
-  late double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-  late double _textSpacer = EzConfig.instance.prefs[textSpacingKey];
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
 
-  late final TextStyle? style = Theme.of(context).appBarTheme.titleTextStyle;
+  late final String _label = sstName(context, widget.type);
 
   // Define build functions //
 
   /// Return the preview Widget(s) for the passed [SliderSettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
+    String currLabel =
+        "${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}";
+
     switch (widget.type) {
-      // Button spacing
-      case SliderSettingType.buttonSpacing:
-        return [
-          // Title padding
-          EzSpacer(_padding),
-
-          // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.stsCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
-              ),
-              EzSpacer(currValue),
-              ElevatedButton(
-                onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.stsCurrently +
-                    currValue.toStringAsFixed(widget.decimals)),
-              ),
-              EzSpacer(_buttonSpacer),
-            ],
-          ),
-        ];
-
-      // Circle size
-      case SliderSettingType.circleSize:
-        return [
-          // Title padding
-          EzSpacer(_padding),
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(
-              currValue.toStringAsFixed(widget.decimals),
-            ),
-            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  shape: MaterialStatePropertyAll(const CircleBorder()),
-                  padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                  fixedSize: MaterialStatePropertyAll(
-                    Size(currValue, currValue),
-                  ),
-                ),
-          ),
-          EzSpacer(_buttonSpacer),
-        ];
-
       // Margin
       case SliderSettingType.margin:
-        double marginScale = 90.0 / widthOf(context);
+        final double previewHeight = 160.0;
+        final double previewWidth = 90.0;
+
+        double marginScale = previewWidth / widthOf(context);
         double liveMargin = currValue * marginScale;
 
         return [
-          // Title padding
-          EzSpacer(_padding),
+          _buttonSpacer,
 
           // Live preview && label
           Row(
@@ -129,92 +79,113 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Label
-              EzText(
-                EFUILang.of(context)!.stsCurrently +
-                    currValue.toStringAsFixed(widget.decimals),
+              Text(
+                currLabel,
                 style: style,
+                textAlign: TextAlign.center,
               ),
-              EzSpacer.row(_textSpacer),
+              EzSpacer.row(EzConfig.get(textSpacingKey)),
 
               // Preview
               Container(
-                color: Theme.of(context).appBarTheme.titleTextStyle?.color,
-                height: 160.0,
-                width: 90.0,
+                color: Theme.of(context).colorScheme.onBackground,
+                height: previewHeight,
+                width: previewWidth,
                 child: Container(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   margin: EdgeInsets.all(liveMargin),
                 ),
               ),
             ],
           ),
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
         ];
 
       // Padding
       case SliderSettingType.padding:
         return [
-          // Title padding && live preview part 1
-          EzSpacer(currValue),
+          _buttonSpacer,
 
-          // Live label && preview part 2
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(EFUILang.of(context)!.stsCurrently +
-                currValue.toStringAsFixed(widget.decimals)),
-            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
-                ),
+          // Live label && preview
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(EFUILang.of(context)!.gCurrently),
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                      padding:
+                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                    ),
+              ),
+              EzSpacer.row(buttonSpace),
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(currValue.toStringAsFixed(widget.decimals)),
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                      padding:
+                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      shape: MaterialStatePropertyAll(const CircleBorder()),
+                    ),
+              ),
+            ],
           ),
 
-          EzSpacer(_buttonSpacer),
+          _buttonSpacer,
+        ];
+
+      // Button spacing
+      case SliderSettingType.buttonSpacing:
+        return [
+          // Preview 1
+          EzSpacer(currValue),
+
+          // Label
+          ElevatedButton(
+            onPressed: doNothing,
+            child: Text(currLabel),
+          ),
+
+          // Preview 2
+          EzSpacer(currValue),
         ];
 
       // Text spacing
       case SliderSettingType.textSpacing:
         return [
-          // Title padding
-          EzSpacer(_padding),
+          // Preview 1
+          EzSpacer(currValue),
 
-          // Live preview && label
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Thing 1
-              EzText(
-                  EFUILang.of(context)!.stsCurrently +
-                      currValue.toStringAsFixed(widget.decimals),
-                  style: style),
-              SizedBox(height: currValue),
-
-              // Thing 2
-              EzText(
-                  EFUILang.of(context)!.stsCurrently +
-                      currValue.toStringAsFixed(widget.decimals),
-                  style: style),
-              SizedBox(height: _buttonSpacer),
-            ],
+          // Label 1
+          Text(
+            currLabel,
+            style: style,
+            textAlign: TextAlign.center,
           ),
+
+          // Preview 2
+          EzSpacer(currValue),
         ];
     }
   }
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> _buildSheet(
-    StateSetter modalSheetSetState,
-    BuildContext context,
-    TextStyle? style,
-  ) {
+  List<Widget> _buildSheet({
+    required BuildContext context,
+    required StateSetter modalSheetState,
+    required TextStyle? style,
+  }) {
     // Gather preview widgets//
 
     List<Widget> toReturn = [
       Semantics(
         button: false,
         readOnly: true,
-        label: EFUILang.of(context)!.stsSetToValue(
-          sstName(context, widget.type),
+        label: EFUILang.of(context)!.gSetToValue(
+          _label,
           currValue.toStringAsFixed(widget.decimals),
         ),
         child: ExcludeSemantics(
@@ -222,8 +193,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              EzSpacer(_margin),
-              EzText(widget.title, style: style),
+              EzSpacer(EzConfig.get(marginKey)),
+              Text(
+                _label,
+                style: style,
+                textAlign: TextAlign.center,
+              ),
               ..._buildPreview(context, style),
             ],
           ),
@@ -249,48 +224,40 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Slider functions
           onChanged: (double value) {
             // Just update the on screen value while sliding around
-            modalSheetSetState(() {
+            modalSheetState(() {
               currValue = value;
             });
           },
           onChangeEnd: (double value) {
             // When finished, write the result
             if (value == _defaultValue) {
-              EzConfig.instance.preferences.remove(widget.prefsKey);
+              EzConfig.remove(widget.prefsKey);
             } else {
-              EzConfig.instance.preferences.setDouble(widget.prefsKey, value);
+              EzConfig.setDouble(widget.prefsKey, value);
             }
           },
 
-          // Slider sementics
+          // Slider semantics
           semanticFormatterCallback: (double value) =>
               value.toStringAsFixed(widget.decimals),
         ),
       ),
-      EzSpacer(_buttonSpacer),
+      _buttonSpacer,
 
       // Reset button
-      Semantics(
-        button: true,
-        hint: EFUILang.of(context)!.stsResetToValue(
-          sstName(context, widget.type),
-          _defaultValue.toStringAsFixed(widget.decimals),
-        ),
-        child: ExcludeSemantics(
-          child: ElevatedButton.icon(
-            onPressed: () {
-              EzConfig.instance.preferences.remove(widget.prefsKey);
-              modalSheetSetState(() {
-                currValue = _defaultValue;
-              });
-            },
-            icon: Icon(PlatformIcons(context).refresh),
-            label: Text(EFUILang.of(context)!.stsReset +
-                _defaultValue.toStringAsFixed(widget.decimals)),
-          ),
+      ElevatedButton.icon(
+        onPressed: () {
+          EzConfig.remove(widget.prefsKey);
+          modalSheetState(() {
+            currValue = _defaultValue;
+          });
+        },
+        icon: Icon(PlatformIcons(context).refresh),
+        label: Text(
+          "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
         ),
       ),
-      EzSpacer(_margin),
+      _buttonSpacer,
     ]);
 
     return toReturn;
@@ -300,45 +267,24 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      hint: sstName(context, widget.type),
-      child: ExcludeSemantics(
-        child: (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
-            ? ElevatedButton(
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder:
-                        (BuildContext context, StateSetter modalSheetSetState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _buildSheet(modalSheetSetState, context, style),
-                      );
-                    },
-                  ),
-                ),
-                child: Text(widget.title),
-              )
-            : ElevatedButton.icon(
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder:
-                        (BuildContext context, StateSetter modalSheetSetState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _buildSheet(modalSheetSetState, context, style),
-                      );
-                    },
-                  ),
-                ),
-                icon: widget.type.icon,
-                label: Text(widget.title),
+    return ElevatedButton.icon(
+      onPressed: () => showModalBottomSheet(
+        context: context,
+        builder: (context) => StatefulBuilder(
+          builder: (BuildContext context, StateSetter modalSheetState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _buildSheet(
+                context: context,
+                modalSheetState: modalSheetState,
+                style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
+            );
+          },
+        ),
       ),
+      icon: widget.type.icon,
+      label: Text(_label),
     );
   }
 }

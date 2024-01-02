@@ -1,61 +1,65 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ExampleScaffold extends StatelessWidget {
   final Key? key;
+  final String title;
+  final String? titleSemantics;
   final Widget body;
+  final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
-  const ExampleScaffold({this.key, required this.body}) : super(key: key);
+  const ExampleScaffold({
+    this.key,
+    this.title = efuiL,
+    this.titleSemantics = efuiLFix,
+    required this.body,
+    this.fab,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the theme data //
 
-    final bool leftHandedUser = EzConfig.instance.dominantHand == Hand.left;
+    final bool isRighty = EzConfig.get(isRightHandKey) ?? true;
 
-    final TextStyle? titleStyle = Theme.of(context).appBarTheme.titleTextStyle;
+    final TextStyle titleStyle = Theme.of(context).appBarTheme.titleTextStyle!;
 
-    final double textScalar = MediaQuery.of(context).textScaleFactor;
-    final double toolbarHeight = titleStyle!.fontSize! * textScalar * 2;
+    double toolbarHeight =
+        MediaQuery.textScalerOf(context).scale(titleStyle.fontSize!) * 3;
 
     // Define AppBar widget(s) //
 
-    final EzLink titleLink = EzLink(
-      'EFUI',
-      style: titleStyle,
-      semanticsLabel: EFUILang.of(context)!.dHomeHint,
-      onTap: () => context.goNamed(homeRoute),
-    );
-
     // Return the build //
 
-    return Scaffold(
-      // AppBar
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, toolbarHeight),
-        child: AppBar(
-          excludeHeaderSemantics: true,
-          toolbarHeight: toolbarHeight,
+    return SelectionArea(
+      child: Scaffold(
+        // AppBar
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, toolbarHeight),
+          child: AppBar(
+            excludeHeaderSemantics: true,
+            toolbarHeight: toolbarHeight,
 
-          // Leading
-          automaticallyImplyLeading: (leftHandedUser) ? false : true,
+            // Leading
+            automaticallyImplyLeading: isRighty,
+            leadingWidth: toolbarHeight,
 
-          // Title
-          title: titleLink,
-          titleSpacing: 0,
-          centerTitle: true,
+            // Title
+            title: Text(title, semanticsLabel: titleSemantics),
+            titleSpacing: 0,
+            centerTitle: true,
 
-          // Actions (aka trailing)
-          actions: (leftHandedUser) ? [EzBackAction()] : null,
+            // Actions (aka trailing)
+            actions: isRighty ? null : [EzBackAction()],
+          ),
         ),
-      ),
 
-      // Body
-      body: body,
-      floatingActionButton: null,
+        // Body
+        body: body,
+        floatingActionButton: fab,
+      ),
     );
   }
 }

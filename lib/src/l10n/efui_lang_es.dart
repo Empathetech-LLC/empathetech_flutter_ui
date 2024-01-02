@@ -11,13 +11,13 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gRight => 'Derecha';
-
-  @override
-  String get gLeft => 'Izquierda';
+  String get gOptions => 'Opciones';
 
   @override
   String get gApply => 'Aplicar';
+
+  @override
+  String get gContinue => 'Continuar';
 
   @override
   String get gCancel => 'Cancelar';
@@ -26,7 +26,18 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
-  String get gContinue => 'Continuar';
+  String gSettingX(Object setting) {
+    return 'Configuración de $setting';
+  }
+
+  @override
+  String get gLeft => 'Izquierda';
+
+  @override
+  String get gRight => 'Derecha';
+
+  @override
+  String get gBack => 'Atrás';
 
   @override
   String get gSystem => 'Sistema';
@@ -38,178 +49,83 @@ class EFUILangEs extends EFUILang {
   String get gDark => 'Oscuro';
 
   @override
-  String get gPage => 'Página';
-
-  @override
-  String get gPlay => 'Reproducir';
-
-  @override
-  String get gPause => 'Pausar';
-
-  @override
-  String get gMute => 'Silenciar';
-
-  @override
-  String get gReplay => 'Repetir';
-
-  @override
-  String get gAutoPlayDisabled =>
-      'La reproducción automática de videos está desactivada.';
-
-  @override
-  String get dHomeHint => 'Regresar a la pantalla principal';
-
-  @override
-  String get dResetAll => 'Restablecer todo';
-
-  @override
-  String get dResetDialogTitle => '¿Restablecer todas las configuraciones?';
-
-  @override
-  String get dResetDialogContent => 'No se puede deshacer';
-
-  @override
-  String get dAttention => 'Atención';
-
-  @override
-  String get dResetAllWarn =>
-      'No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación';
-
-  @override
-  String get dResetAllWarnWeb =>
-      'No se puede deshacer\nLos cambios tendrán efecto al recargar la página';
-
-  @override
-  String dEditingTheme(Object themeType) {
+  String gEditingTheme(Object themeType) {
     return 'Editando: tema $themeType';
   }
 
   @override
-  String get hsThemeMode => 'Modo de tema';
+  String get gHowThisWorks => 'Cómo funciona esto';
 
   @override
-  String get hsThemeSemantics =>
-      'Abrir para seleccionar un modo de tema. Actualmente configurado en:';
+  String get gHowThisWorksHint => 'Activar para abrir documentación útil';
 
   @override
-  String get hsDominantHand => 'Mano dominante';
+  String get gAttention => 'Atención';
 
   @override
-  String get hsHandSemantics =>
-      'Abrir para elegir izquierda o derecha. Actualmente configurado en:';
+  String get gCurrently => 'Actualmente:';
+
+  @override
+  String gSetToValue(Object name, Object value) {
+    return '$name está establecido en $value';
+  }
+
+  @override
+  String gDefaultEntry(Object entry) {
+    return '$entry* (por defecto)';
+  }
+
+  @override
+  String get gReset => 'Restablecer:';
+
+  @override
+  String gResetToValue(Object name, Object value) {
+    return 'Restablecer $name a $value';
+  }
+
+  @override
+  String get gResetAll => 'Restablecer todo';
+
+  @override
+  String get gResetWarn => 'No se puede deshacer';
+
+  @override
+  String get gCreditTo => 'Crédito a:';
 
   @override
   String get ssPageTitle => 'Configuraciones';
 
   @override
   String get ssSettingsGuide =>
-      'Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!';
+      'Recarga la página para guardar tus cambios.\n\n¡Diviértete!';
 
   @override
-  String get stsPageTitle => 'Configuraciones de estilo';
+  String get ssThemeMode => 'Modo de tema';
 
   @override
-  String get stsTextFont => 'Fuente de texto';
+  String get ssDominantHand => 'Mano dominante';
 
   @override
-  String get stsChooseFont => 'Selecciona una fuente';
+  String get ssLanguage => 'Idioma';
 
   @override
-  String stsDefaultFont(Object font) {
-    return '$font* (por defecto)';
-  }
+  String get ssLanguages => 'Idiomas';
 
   @override
-  String get stsMargin => 'Margen';
+  String get ssLangSemantics => 'Idioma de la aplicación';
 
   @override
-  String get stsPadding => 'Relleno';
-
-  @override
-  String get stsCircleSize => 'Tamaño del botón circular';
-
-  @override
-  String get stsButtonSpacing => 'Espaciado de botones';
-
-  @override
-  String get stsTextSpacing => 'Espaciado de texto';
-
-  @override
-  String get stsCurrently => 'Actualmente: ';
-
-  @override
-  String stsSetToValue(Object name, Object value) {
-    return '$name está configurado actualmente en $value';
-  }
-
-  @override
-  String get stsReset => 'Restablecer: ';
-
-  @override
-  String stsResetToValue(Object name, Object value) {
-    return 'Restablecer $name a $value';
-  }
-
-  @override
-  String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
-
-  @override
-  String get csPageTitle => 'Configuraciones de color';
-
-  @override
-  String csEditingTheme(Object themeType) {
-    return 'Editando: colores del tema $themeType\nMantén presionados los botones para restablecer individualmente';
-  }
-
-  @override
-  String get csPickerTitle => '¡Selecciona un color!';
-
-  @override
-  String csPickerSemantics(Object name) {
-    return 'Activar para abrir el selector de color para $name. Mantenga presionado para restablecer $name.';
-  }
-
-  @override
-  String get csResetTo => 'Restablecer a...';
-
-  @override
-  String get csTheme => 'Tema';
-
-  @override
-  String get csThemeText => 'Texto del tema';
-
-  @override
-  String get csRecommended => '¿Usar recomendado?';
-
-  @override
-  String get csUseCustom => 'Usar personalizado';
-
-  @override
-  String get csPageText => 'Texto de la página';
-
-  @override
-  String get csButtons => 'Botones';
-
-  @override
-  String get csButtonText => 'Texto de los botones';
-
-  @override
-  String get csAccent => 'Acento';
-
-  @override
-  String get csAccentText => 'Texto de acento';
-
-  @override
-  String csResetAll(Object themeType) {
-    return '¿Restablecer todos los colores del tema $themeType?';
-  }
+  String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
   String get isPageTitle => 'Configuraciones de imagen';
+
+  @override
+  String get isBackground => 'Fondo';
 
   @override
   String get isImage => 'imagen';
@@ -231,13 +147,16 @@ class EFUILangEs extends EFUILang {
   String get isFromCamera => 'Desde cámara';
 
   @override
-  String get isFromNetwork => 'Ingrese URL';
+  String get isFromNetwork => 'Desde URL';
 
   @override
-  String get isEnterURL => 'Desde URL';
+  String get isResetIt => 'Restablecerlo';
 
   @override
-  String get isNetworkPreview => 'Vista previa de tu imagen seleccionada';
+  String get isClearIt => 'Limpialo';
+
+  @override
+  String get isEnterURL => 'Ingrese URL';
 
   @override
   String get isGetFailed => 'Error al recuperar la imagen';
@@ -248,19 +167,172 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get isResetIt => 'Restablécelo';
-
-  @override
-  String get isClearIt => 'Borrarlo';
-
-  @override
-  String get isCreditTo => 'Crédito a:';
-
-  @override
-  String get isSource => '¡De donde lo obtuviste!';
+  String get isUseForColors =>
+      '¿Actualizar los colores de la aplicación usando esta imagen?';
 
   @override
   String isResetAll(Object themeType) {
     return '¿Restablecer todas las imágenes del tema $themeType?';
   }
+
+  @override
+  String get csPageTitle => 'Configuraciones de color';
+
+  @override
+  String csPickerSemantics(Object name) {
+    return 'Activar para abrir un selector de color para $name. Mantenga presionado para más opciones.';
+  }
+
+  @override
+  String get csPrimary => 'Primario';
+
+  @override
+  String get csOnPrimary => 'En Primario';
+
+  @override
+  String get csPrimaryContainer => 'Contenedor Primario';
+
+  @override
+  String get csOnPrimaryContainer => 'En Contenedor Primario';
+
+  @override
+  String get csSecondary => 'Secundario';
+
+  @override
+  String get csOnSecondary => 'En Secundario';
+
+  @override
+  String get csSecondaryContainer => 'Contenedor Secundario';
+
+  @override
+  String get csOnSecondaryContainer => 'En Contenedor Secundario';
+
+  @override
+  String get csTertiary => 'Terciario';
+
+  @override
+  String get csOnTertiary => 'En Terciario';
+
+  @override
+  String get csTertiaryContainer => 'Contenedor Terciario';
+
+  @override
+  String get csOnTertiaryContainer => 'En Contenedor Terciario';
+
+  @override
+  String get csError => 'Error';
+
+  @override
+  String get csOnError => 'En Error';
+
+  @override
+  String get csErrorContainer => 'Contenedor de Error';
+
+  @override
+  String get csOnErrorContainer => 'En Contenedor de Error';
+
+  @override
+  String get csOutline => 'Contorno';
+
+  @override
+  String get csOutlineVariant => 'Variante de Contorno';
+
+  @override
+  String get csBackground => 'Fondo';
+
+  @override
+  String get csOnBackground => 'En Fondo';
+
+  @override
+  String get csSurface => 'Superficie';
+
+  @override
+  String get csOnSurface => 'En Superficie';
+
+  @override
+  String get csSurfaceVariant => 'Variante de Superficie';
+
+  @override
+  String get csOnSurfaceVariant => 'En Variante de Superficie';
+
+  @override
+  String get csInverseSurface => 'Superficie Inversa';
+
+  @override
+  String get csOnInverseSurface => 'En Superficie Inversa';
+
+  @override
+  String get csInversePrimary => 'Primario Inversa';
+
+  @override
+  String get csScrim => 'Telón';
+
+  @override
+  String get csShadow => 'Sombra';
+
+  @override
+  String get csSurfaceTint => 'Tinte de Superficie';
+
+  @override
+  String get csPickerTitle => '¡Selecciona un color!';
+
+  @override
+  String get csRecommended => '¿Usar recomendación de contraste?';
+
+  @override
+  String get csUseCustom => 'Usar personalizado';
+
+  @override
+  String get csAddColor => 'Añadir un color';
+
+  @override
+  String get csRemove => 'Eliminar';
+
+  @override
+  String get csReset => 'Restablecer';
+
+  @override
+  String get csResetTo => 'Restablecer a...';
+
+  @override
+  String get csSchemeBase => 'Construir a partir\nde imagen';
+
+  @override
+  String get csOptional => 'opcional';
+
+  @override
+  String get csFromImage =>
+      'Construye la esquema de colores a partir de una imagen';
+
+  @override
+  String get csColorScheme => 'esquema de colores';
+
+  @override
+  String csResetAll(Object themeType) {
+    return '¿Restablecer todos los colores del tema $themeType?';
+  }
+
+  @override
+  String get stsPageTitle => 'Configuraciones de estilo';
+
+  @override
+  String get stsTextFont => 'Fuente de texto';
+
+  @override
+  String get stsFonts => 'Fuentes';
+
+  @override
+  String get stsMargin => 'Margen';
+
+  @override
+  String get stsPadding => 'Relleno';
+
+  @override
+  String get stsButtonSpacing => 'Espaciado de botones';
+
+  @override
+  String get stsTextSpacing => 'Espaciado de texto';
+
+  @override
+  String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
 }

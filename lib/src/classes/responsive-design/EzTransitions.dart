@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-/// Disables transitions if [kIsWeb]
+/// Disables transitions when [kIsWeb]
 /// Source => https://medium.com/flutter/improving-perceived-performance-with-image-placeholders-precaching-and-disabled-navigation-6b3601087a2b
 class EzTransitions extends PageTransitionsTheme {
   @override

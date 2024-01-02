@@ -1,87 +1,146 @@
 {
   "@@locale" : "es",
 
+
   "gYes": "Sí",
   "gNo": "No",
-  "gRight": "Derecha",
-  "gLeft": "Izquierda",
+  "gOptions": "Opciones",
   "gApply": "Aplicar",
+  "gContinue": "Continuar",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
-  "gContinue": "Continuar",
+
+  "gSettingX": "Configuración de {setting}",
+
+  "gLeft": "Izquierda",
+  "gRight": "Derecha",
+  "gBack": "Atrás",
+
   "gSystem": "Sistema",
   "gLight": "Ligero",
   "gDark": "Oscuro",
-  "gPage": "Página",
-  "gPlay": "Reproducir",
-  "gPause": "Pausar",
-  "gMute": "Silenciar",
-  "gReplay": "Repetir",
-  "gAutoPlayDisabled": "La reproducción automática de videos está desactivada.",
 
-  "dHomeHint": "Regresar a la pantalla principal",
-  "dResetAll": "Restablecer todo",
-  "dResetDialogTitle": "¿Restablecer todas las configuraciones?",
-  "dResetDialogContent": "No se puede deshacer",
-  "dAttention": "Atención",
-  "dResetAllWarn": "No se puede deshacer\nLos cambios tendrán efecto al reiniciar la aplicación",
-  "dResetAllWarnWeb": "No se puede deshacer\nLos cambios tendrán efecto al recargar la página",
-  "dEditingTheme": "Editando: tema {themeType}",
+  "gEditingTheme": "Editando: tema {themeType}",
+  "gHowThisWorks": "Cómo funciona esto",
+  "gHowThisWorksHint": "Activar para abrir documentación útil",
 
-  "hsThemeMode": "Modo de tema",
-  "hsThemeSemantics": "Abrir para seleccionar un modo de tema. Actualmente configurado en:",
-  "hsDominantHand": "Mano dominante",
-  "hsHandSemantics": "Abrir para elegir izquierda o derecha. Actualmente configurado en:",
+  "gAttention": "Atención",
+  "gCurrently": "Actualmente:",
+  "gSetToValue": "{name} está establecido en {value}",
+  "gDefaultEntry": "{entry}* (por defecto)",
+  "gReset": "Restablecer:",
+  "gResetToValue": "Restablecer {name} a {value}",
+  "gResetAll": "Restablecer todo",
+  "gResetWarn": "No se puede deshacer",
+
+  "gCreditTo": "Crédito a:",
 
   "ssPageTitle": "Configuraciones",
-  "ssSettingsGuide": "Cada botón mostrará una vista previa de sus cambios.\n¡Recarga la página para que tus cambios surtan efecto por completo!\n¡Diviértete!",
-  "ssSettingsGuideWeb": "Cada botón mostrará una vista previa de sus cambios.\n¡Reinicia la aplicación para que tus cambios surtan efecto por completo!\n¡Diviértete!",
+  "ssSettingsGuide": "Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!",
+  "ssSettingsGuideWeb": "Recarga la página para guardar tus cambios.\n\n¡Diviértete!",
 
-  "stsPageTitle": "Configuraciones de estilo",
-  "stsTextFont": "Fuente de texto",
-  "stsChooseFont": "Selecciona una fuente",
-  "stsDefaultFont": "{font}* (por defecto)",
-  "stsMargin": "Margen",
-  "stsPadding": "Relleno",
-  "stsCircleSize": "Tamaño del botón circular",
-  "stsButtonSpacing": "Espaciado de botones",
-  "stsTextSpacing": "Espaciado de texto",
-  "stsCurrently": "Actualmente: ",
-  "stsSetToValue": "{name} está configurado actualmente en {value}",
-  "stsReset": "Restablecer: ",
-  "stsResetToValue": "Restablecer {name} a {value}",
-  "stsResetAll": "¿Restablecer todas las configuraciones de estilo?",
+  "ssThemeMode": "Modo de tema",
+  "ssDominantHand": "Mano dominante",
 
-  "csPageTitle": "Configuraciones de color",
-  "csEditingTheme": "Editando: colores del tema {themeType}\nMantén presionados los botones para restablecer individualmente",
-  "csPickerTitle": "¡Selecciona un color!",
-  "csPickerSemantics": "Activar para abrir el selector de color para {name}. Mantenga presionado para restablecer {name}.",
-  "csResetTo": "Restablecer a...",
-  "csTheme": "Tema",
-  "csThemeText": "Texto del tema",
-  "csRecommended": "¿Usar recomendado?",
-  "csUseCustom": "Usar personalizado",
-  "csPageText": "Texto de la página",
-  "csButtons": "Botones",
-  "csButtonText": "Texto de los botones",
-  "csAccent": "Acento",
-  "csAccentText": "Texto de acento",
-  "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
+  "ssLanguage": "Idioma",
+  "ssLanguages": "Idiomas",
+  "ssLangSemantics": "Idioma de la aplicación",
+
+  "ssResetAll": "¿Restablecer todas las configuraciones?",
 
   "isPageTitle": "Configuraciones de imagen",
+
+  "isBackground": "Fondo",
   "isImage": "imagen",
+
   "isButtonHint": "Actualizar la imagen de {title}",
   "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
   "isFromFile": "Desde archivo",
   "isFromCamera": "Desde cámara",
-  "isFromNetwork": "Ingrese URL",
-  "isEnterURL": "Desde URL",
-  "isNetworkPreview": "Vista previa de tu imagen seleccionada",
+  "isFromNetwork": "Desde URL",
+  "isResetIt": "Restablecerlo",
+  "isClearIt": "Limpialo",
+
+  "isEnterURL": "Ingrese URL",
   "isGetFailed": "Error al recuperar la imagen",
   "isSetFailed": "Error al actualizar la imagen:\n{error}",
-  "isResetIt": "Restablécelo",
-  "isClearIt": "Borrarlo",
-  "isCreditTo": "Crédito a:",
-  "isSource": "¡De donde lo obtuviste!",
-  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
+
+  "isUseForColors": "¿Actualizar los colores de la aplicación usando esta imagen?",
+
+  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
+
+  "csPageTitle": "Configuraciones de color",
+
+  "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
+
+  "csPrimary": "Primario",
+  "csOnPrimary": "En Primario",
+  "csPrimaryContainer": "Contenedor Primario",
+  "csOnPrimaryContainer": "En Contenedor Primario",
+
+  "csSecondary": "Secundario",
+  "csOnSecondary": "En Secundario",
+  "csSecondaryContainer": "Contenedor Secundario",
+  "csOnSecondaryContainer": "En Contenedor Secundario",
+
+  "csTertiary": "Terciario",
+  "csOnTertiary": "En Terciario",
+  "csTertiaryContainer": "Contenedor Terciario",
+  "csOnTertiaryContainer": "En Contenedor Terciario",
+
+  "csError": "Error",
+  "csOnError": "En Error",
+  "csErrorContainer": "Contenedor de Error",
+  "csOnErrorContainer": "En Contenedor de Error",
+
+  "csOutline": "Contorno",
+  "csOutlineVariant": "Variante de Contorno",
+
+  "csBackground": "Fondo",
+  "csOnBackground": "En Fondo",
+
+  "csSurface": "Superficie",
+  "csOnSurface": "En Superficie",
+
+  "csSurfaceVariant": "Variante de Superficie",
+  "csOnSurfaceVariant": "En Variante de Superficie",
+
+  "csInverseSurface": "Superficie Inversa",
+  "csOnInverseSurface": "En Superficie Inversa",
+
+  "csInversePrimary": "Primario Inversa",
+
+  "csScrim": "Telón",
+  "csShadow": "Sombra",
+
+  "csSurfaceTint": "Tinte de Superficie",
+
+  "csPickerTitle": "¡Selecciona un color!",
+  "csRecommended": "¿Usar recomendación de contraste?",
+  "csUseCustom": "Usar personalizado",
+
+  "csAddColor": "Añadir un color",
+  "csRemove": "Eliminar",
+  "csReset": "Restablecer",
+  "csResetTo": "Restablecer a...",
+
+  "csSchemeBase": "Construir a partir\nde imagen",
+  "csOptional": "opcional",
+  "csFromImage": "Construye la esquema de colores a partir de una imagen",
+  "csColorScheme": "esquema de colores",
+
+  "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
+  
+  "stsPageTitle": "Configuraciones de estilo",
+
+  "stsTextFont": "Fuente de texto",
+  "stsFonts": "Fuentes",
+
+  "stsMargin": "Margen",
+  "stsPadding": "Relleno",
+
+  "stsButtonSpacing": "Espaciado de botones",
+  "stsTextSpacing": "Espaciado de texto",
+
+  "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"
 }

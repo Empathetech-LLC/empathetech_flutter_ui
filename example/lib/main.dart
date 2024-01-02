@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
   // Most apps need this
@@ -18,10 +19,10 @@ void main() async {
   // Get a SharedPreferences instance to... share
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Spin up the theme factory!
-  EzConfig(
+  // Make it so
+  EzConfig.init(
     // Paths to any locally stored images the app uses
-    assetPaths: [],
+    assetPaths: {},
 
     preferences: prefs,
 
@@ -55,10 +56,10 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          name: styleSettingsRoute,
-          path: styleSettingsRoute,
+          name: imageSettingsRoute,
+          path: imageSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const StyleSettingsScreen();
+            return const ImageSettingsScreen();
           },
         ),
         GoRoute(
@@ -69,10 +70,10 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          name: imageSettingsRoute,
-          path: imageSettingsRoute,
+          name: styleSettingsRoute,
+          path: styleSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const ImageSettingsScreen();
+            return const StyleSettingsScreen();
           },
         ),
       ],
@@ -92,13 +93,19 @@ class EFUIExample extends StatelessWidget {
         // Production ready!
         debugShowCheckedModeBanner: false,
 
+        // Language handlers
+        localizationsDelegates: {
+          LocaleNamesLocalizationsDelegate(),
+          ...EFUILang.localizationsDelegates,
+        },
+
         // Supported languages
         supportedLocales: EFUILang.supportedLocales,
 
-        // Language handlers
-        localizationsDelegates: EFUILang.localizationsDelegates,
+        // Current language
+        locale: EzConfig.getLocale(),
 
-        title: "Emapathetech Flutter UI",
+        title: efuiL,
         routerConfig: _router,
       ),
     );

@@ -16,71 +16,76 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Set page/tab title //
+  // Gather the theme data //
+
+  late bool isLight = !PlatformTheme.of(context)!.isDark;
+
+  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+
+  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(context, EFUILang.of(context)!.ssPageTitle);
+    setPageTitle(efuiL);
   }
 
-  // Gather theme data //
-
-  late bool _isLight = !PlatformTheme.of(context)!.isDark;
-
-  final double _buttonSpacer = EzConfig.instance.prefs[buttonSpacingKey];
-
-  // Return the Build //
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: _isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
         child: EzScrollView(
           children: [
             // Functionality disclaimer
             EzWarning(
-              message: kIsWeb
-                  ? EFUILang.of(context)!.ssSettingsGuide
-                  : EFUILang.of(context)!.ssSettingsGuideWeb,
-              style: headlineSmall(context),
+              titleStyle: getTitle(context),
+              bodyStyle: getBody(context),
+              body: kIsWeb
+                  ? EFUILang.of(context)!.ssSettingsGuideWeb
+                  : EFUILang.of(context)!.ssSettingsGuide,
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSeparator,
 
-            // Theme mode switch
-            const EzThemeModeSwitch(),
-            EzSpacer(_buttonSpacer),
-
-            // Dominant hand switch
+            // Global settings
             const EzDominantHandSwitch(),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
-            // Style settings
+            const EzThemeModeSwitch(),
+            _buttonSeparator,
+
+            const EzLocaleSetting(),
+            _buttonSpacer,
+
+            // Image settings
             ElevatedButton(
-              onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(EFUILang.of(context)!.stsPageTitle),
+              onPressed: () => context.goNamed(imageSettingsRoute),
+              child: Text(EFUILang.of(context)!.isPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
               child: Text(EFUILang.of(context)!.csPageTitle),
             ),
-            EzSpacer(_buttonSpacer),
+            _buttonSpacer,
 
-            // Image settings
-
+            // Style settings
             ElevatedButton(
-              onPressed: () => context.goNamed(imageSettingsRoute),
-              child: Text(EFUILang.of(context)!.isPageTitle),
+              onPressed: () => context.goNamed(styleSettingsRoute),
+              child: Text(EFUILang.of(context)!.stsPageTitle),
             ),
-            EzSpacer(2 * _buttonSpacer),
+            _buttonSeparator,
 
             // Reset button
-            EzResetButton(context: context),
-            EzSpacer(_buttonSpacer),
+            const EzResetButton(),
+            _buttonSpacer,
           ],
         ),
       ),

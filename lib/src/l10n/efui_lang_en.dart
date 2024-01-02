@@ -11,13 +11,13 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
-  String get gRight => 'Right';
-
-  @override
-  String get gLeft => 'Left';
+  String get gOptions => 'Options';
 
   @override
   String get gApply => 'Apply';
+
+  @override
+  String get gContinue => 'Continue';
 
   @override
   String get gCancel => 'Cancel';
@@ -26,7 +26,18 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String get gContinue => 'Continue';
+  String gSettingX(Object setting) {
+    return '$setting setting';
+  }
+
+  @override
+  String get gLeft => 'Left';
+
+  @override
+  String get gRight => 'Right';
+
+  @override
+  String get gBack => 'Back';
 
   @override
   String get gSystem => 'System';
@@ -38,177 +49,83 @@ class EFUILangEn extends EFUILang {
   String get gDark => 'Dark';
 
   @override
-  String get gPage => 'Page';
-
-  @override
-  String get gPlay => 'Play';
-
-  @override
-  String get gPause => 'Pause';
-
-  @override
-  String get gMute => 'Mute';
-
-  @override
-  String get gReplay => 'Replay';
-
-  @override
-  String get gAutoPlayDisabled => 'Auto-play videos are disabled.';
-
-  @override
-  String get dHomeHint => 'Return to the home screen';
-
-  @override
-  String get dResetAll => 'Reset all';
-
-  @override
-  String get dResetDialogTitle => 'Reset all settings?';
-
-  @override
-  String get dResetDialogContent => 'Cannot be undone';
-
-  @override
-  String get dAttention => 'Attention';
-
-  @override
-  String get dResetAllWarn =>
-      'Cannot be undone\nChanges take effect on app restart';
-
-  @override
-  String get dResetAllWarnWeb =>
-      'Cannot be undone\nChanges take effect on page reload';
-
-  @override
-  String dEditingTheme(Object themeType) {
+  String gEditingTheme(Object themeType) {
     return 'Editing: $themeType theme';
   }
 
   @override
-  String get hsThemeMode => 'Theme mode';
+  String get gHowThisWorks => 'How this works';
 
   @override
-  String get hsThemeSemantics =>
-      'Open to select a theme mode. Currently set to:';
+  String get gHowThisWorksHint => 'Activate to open helpful documentation';
 
   @override
-  String get hsDominantHand => 'Dominant hand';
+  String get gAttention => 'Attention';
 
   @override
-  String get hsHandSemantics =>
-      'Open to choose left or right. Currently set to:';
+  String get gCurrently => 'Currently:';
+
+  @override
+  String gSetToValue(Object name, Object value) {
+    return '$name is currently set to $value';
+  }
+
+  @override
+  String gDefaultEntry(Object entry) {
+    return '$entry* (default)';
+  }
+
+  @override
+  String get gReset => 'Reset:';
+
+  @override
+  String gResetToValue(Object name, Object value) {
+    return 'Reset $name to $value';
+  }
+
+  @override
+  String get gResetAll => 'Reset all';
+
+  @override
+  String get gResetWarn => 'Cannot be undone';
+
+  @override
+  String get gCreditTo => 'Credit to:';
 
   @override
   String get ssPageTitle => 'Settings';
 
   @override
   String get ssSettingsGuide =>
-      'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!';
+      'Restart the app to save your changes.\n\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!';
+      'Reload the page to save your changes.\n\nHave fun!';
 
   @override
-  String get stsPageTitle => 'Style settings';
+  String get ssThemeMode => 'Theme mode';
 
   @override
-  String get stsTextFont => 'Text font';
+  String get ssDominantHand => 'Dominant hand';
 
   @override
-  String get stsChooseFont => 'Choose a font';
+  String get ssLanguage => 'Language';
 
   @override
-  String stsDefaultFont(Object font) {
-    return '$font* (default)';
-  }
+  String get ssLanguages => 'Languages';
 
   @override
-  String get stsMargin => 'Margin';
+  String get ssLangSemantics => 'App language';
 
   @override
-  String get stsPadding => 'Padding';
-
-  @override
-  String get stsCircleSize => 'Circle button size';
-
-  @override
-  String get stsButtonSpacing => 'Button spacing';
-
-  @override
-  String get stsTextSpacing => 'Text spacing';
-
-  @override
-  String get stsCurrently => 'Currently: ';
-
-  @override
-  String stsSetToValue(Object name, Object value) {
-    return '$name is currently set to $value';
-  }
-
-  @override
-  String get stsReset => 'Reset: ';
-
-  @override
-  String stsResetToValue(Object name, Object value) {
-    return 'Reset $name to $value';
-  }
-
-  @override
-  String get stsResetAll => 'Reset all style settings?';
-
-  @override
-  String get csPageTitle => 'Color settings';
-
-  @override
-  String csEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme\nLong press buttons to reset individually';
-  }
-
-  @override
-  String get csPickerTitle => 'Pick a color!';
-
-  @override
-  String csPickerSemantics(Object name) {
-    return 'Activate to open a color picker for $name. Long press to reset $name.';
-  }
-
-  @override
-  String get csResetTo => 'Reset to...';
-
-  @override
-  String get csTheme => 'Theme';
-
-  @override
-  String get csThemeText => 'Theme text';
-
-  @override
-  String get csRecommended => 'Use recommended?';
-
-  @override
-  String get csUseCustom => 'Use custom';
-
-  @override
-  String get csPageText => 'Page text';
-
-  @override
-  String get csButtons => 'Buttons';
-
-  @override
-  String get csButtonText => 'Buttons text';
-
-  @override
-  String get csAccent => 'Accent';
-
-  @override
-  String get csAccentText => 'Accent text';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
+  String get ssResetAll => 'Reset all settings?';
 
   @override
   String get isPageTitle => 'Image settings';
+
+  @override
+  String get isBackground => 'Background';
 
   @override
   String get isImage => 'image';
@@ -233,10 +150,13 @@ class EFUILangEn extends EFUILang {
   String get isFromNetwork => 'From URL';
 
   @override
-  String get isEnterURL => 'Enter URL';
+  String get isResetIt => 'Reset it';
 
   @override
-  String get isNetworkPreview => 'Preview of your chosen image';
+  String get isClearIt => 'Clear it';
+
+  @override
+  String get isEnterURL => 'Enter URL';
 
   @override
   String get isGetFailed => 'Failed to retrieve image';
@@ -247,19 +167,170 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isCreditTo => 'Credit to:';
-
-  @override
-  String get isSource => 'Wherever you got it!';
+  String get isUseForColors => 'Update the app colors using this image?';
 
   @override
   String isResetAll(Object themeType) {
     return 'Reset all $themeType theme images?';
   }
+
+  @override
+  String get csPageTitle => 'Color settings';
+
+  @override
+  String csPickerSemantics(Object name) {
+    return 'Activate to open a color picker for $name. Long press for more options.';
+  }
+
+  @override
+  String get csPrimary => 'Primary';
+
+  @override
+  String get csOnPrimary => 'On Primary';
+
+  @override
+  String get csPrimaryContainer => 'Primary Container';
+
+  @override
+  String get csOnPrimaryContainer => 'On Primary Container';
+
+  @override
+  String get csSecondary => 'Secondary';
+
+  @override
+  String get csOnSecondary => 'On Secondary';
+
+  @override
+  String get csSecondaryContainer => 'Secondary Container';
+
+  @override
+  String get csOnSecondaryContainer => 'On Secondary Container';
+
+  @override
+  String get csTertiary => 'Tertiary';
+
+  @override
+  String get csOnTertiary => 'On Tertiary';
+
+  @override
+  String get csTertiaryContainer => 'Tertiary Container';
+
+  @override
+  String get csOnTertiaryContainer => 'On Tertiary Container';
+
+  @override
+  String get csError => 'Error';
+
+  @override
+  String get csOnError => 'On Error';
+
+  @override
+  String get csErrorContainer => 'Error Container';
+
+  @override
+  String get csOnErrorContainer => 'On Error Container';
+
+  @override
+  String get csOutline => 'Outline';
+
+  @override
+  String get csOutlineVariant => 'Outline Variant';
+
+  @override
+  String get csBackground => 'Background';
+
+  @override
+  String get csOnBackground => 'On Background';
+
+  @override
+  String get csSurface => 'Surface';
+
+  @override
+  String get csOnSurface => 'On Surface';
+
+  @override
+  String get csSurfaceVariant => 'Surface Variant';
+
+  @override
+  String get csOnSurfaceVariant => 'On Surface Variant';
+
+  @override
+  String get csInverseSurface => 'Inverse Surface';
+
+  @override
+  String get csOnInverseSurface => 'Inverse On Surface';
+
+  @override
+  String get csInversePrimary => 'Inverse Primary';
+
+  @override
+  String get csScrim => 'Scrim';
+
+  @override
+  String get csShadow => 'Shadow';
+
+  @override
+  String get csSurfaceTint => 'Surface Tint';
+
+  @override
+  String get csPickerTitle => 'Pick a color!';
+
+  @override
+  String get csRecommended => 'Use contrast recommendation?';
+
+  @override
+  String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
+
+  @override
+  String get csRemove => 'Remove';
+
+  @override
+  String get csReset => 'Reset';
+
+  @override
+  String get csResetTo => 'Reset to...';
+
+  @override
+  String get csSchemeBase => 'Build from\nimage';
+
+  @override
+  String get csOptional => 'optional';
+
+  @override
+  String get csFromImage => 'Build the color scheme from an image';
+
+  @override
+  String get csColorScheme => 'color scheme';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get stsPageTitle => 'Style settings';
+
+  @override
+  String get stsTextFont => 'Text font';
+
+  @override
+  String get stsFonts => 'Fonts';
+
+  @override
+  String get stsMargin => 'Margin';
+
+  @override
+  String get stsPadding => 'Padding';
+
+  @override
+  String get stsButtonSpacing => 'Button spacing';
+
+  @override
+  String get stsTextSpacing => 'Text spacing';
+
+  @override
+  String get stsResetAll => 'Reset all style settings?';
 }

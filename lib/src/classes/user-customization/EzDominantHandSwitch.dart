@@ -16,14 +16,18 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
-  // Gather theme data //
+  // Gather the theme data //
 
-  Hand currSide = EzConfig.instance.dominantHand;
-  late final TextStyle? _style = Theme.of(context).dropdownMenuTheme.textStyle;
+  final bool _isRighty = EzConfig.get(isRightHandKey) ?? true;
+  late Hand currSide = _isRighty ? Hand.right : Hand.left;
+
+  final double padding = EzConfig.get(paddingKey);
 
   @override
   Widget build(BuildContext context) {
-    // Define the list items //
+    // Define the build //
+
+    final String label = EFUILang.of(context)!.ssDominantHand;
 
     final List<DropdownMenuItem<Hand>> items = [
       DropdownMenuItem<Hand>(
@@ -36,54 +40,55 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       ),
     ];
 
-    // Return the build //
-
-    // Define the build contents locally so it can be reversed in real-time alongside user selections
-    List<Widget> _children = [
+    // Define children separately to allow for live reversing
+    List<Widget> children = [
       // Label
-      EzText(EFUILang.of(context)!.hsDominantHand, style: _style),
-      EzSpacer.row(EzConfig.instance.prefs[buttonSpacingKey]),
+      Text(
+        label,
+        style: Theme.of(context).dropdownMenuTheme.textStyle,
+        textAlign: TextAlign.center,
+        semanticsLabel: EFUILang.of(context)!.gSettingX(label),
+      ),
+      EzSpacer.row(padding),
 
       // Button
-      Semantics(
-        button: true,
-        hint:
-            "${EFUILang.of(context)!.hsHandSemantics} ${handName(context, currSide)}",
-        child: ExcludeSemantics(
-          child: DropdownButton<Hand>(
-            value: currSide,
-            items: items,
-            dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-            onChanged: (Hand? newDominantHand) {
-              switch (newDominantHand) {
-                case Hand.right:
-                  EzConfig.instance.preferences.remove(isRightKey);
-                  setState(() {
-                    currSide = Hand.right;
-                  });
-                  break;
+      DropdownButton<Hand>(
+        value: currSide,
+        items: items,
+        onChanged: (Hand? newDominantHand) {
+          switch (newDominantHand) {
+            case Hand.right:
+              setState(() {
+                currSide = Hand.right;
+              });
+              EzConfig.setBool(isRightHandKey, true);
+              break;
 
-                case Hand.left:
-                  EzConfig.instance.preferences.setBool(isRightKey, false);
-                  setState(() {
-                    currSide = Hand.left;
-                  });
-                  break;
+            case Hand.left:
+              setState(() {
+                currSide = Hand.left;
+              });
+              EzConfig.setBool(isRightHandKey, false);
+              break;
 
-                default:
-                  break;
-              }
-            },
-          ),
-        ),
+            default:
+              break;
+          }
+        },
       ),
     ];
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          (currSide == Hand.right) ? _children : _children.reversed.toList(),
+    return Container(
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            (currSide == Hand.right) ? children : children.reversed.toList(),
+      ),
     );
   }
 }

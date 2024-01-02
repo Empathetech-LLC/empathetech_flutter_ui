@@ -106,23 +106,23 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
-  /// No description provided for @gRight.
+  /// No description provided for @gOptions.
   ///
   /// In en, this message translates to:
-  /// **'Right'**
-  String get gRight;
-
-  /// No description provided for @gLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'Left'**
-  String get gLeft;
+  /// **'Options'**
+  String get gOptions;
 
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
   /// **'Apply'**
   String get gApply;
+
+  /// No description provided for @gContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get gContinue;
 
   /// No description provided for @gCancel.
   ///
@@ -136,11 +136,29 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gContinue.
+  /// No description provided for @gSettingX.
   ///
   /// In en, this message translates to:
-  /// **'Continue'**
-  String get gContinue;
+  /// **'{setting} setting'**
+  String gSettingX(Object setting);
+
+  /// No description provided for @gLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get gLeft;
+
+  /// No description provided for @gRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get gRight;
+
+  /// No description provided for @gBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get gBack;
 
   /// No description provided for @gSystem.
   ///
@@ -160,113 +178,77 @@ abstract class EFUILang {
   /// **'Dark'**
   String get gDark;
 
-  /// No description provided for @gPage.
-  ///
-  /// In en, this message translates to:
-  /// **'Page'**
-  String get gPage;
-
-  /// No description provided for @gPlay.
-  ///
-  /// In en, this message translates to:
-  /// **'Play'**
-  String get gPlay;
-
-  /// No description provided for @gPause.
-  ///
-  /// In en, this message translates to:
-  /// **'Pause'**
-  String get gPause;
-
-  /// No description provided for @gMute.
-  ///
-  /// In en, this message translates to:
-  /// **'Mute'**
-  String get gMute;
-
-  /// No description provided for @gReplay.
-  ///
-  /// In en, this message translates to:
-  /// **'Replay'**
-  String get gReplay;
-
-  /// No description provided for @gAutoPlayDisabled.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-play videos are disabled.'**
-  String get gAutoPlayDisabled;
-
-  /// No description provided for @dHomeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Return to the home screen'**
-  String get dHomeHint;
-
-  /// No description provided for @dResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all'**
-  String get dResetAll;
-
-  /// No description provided for @dResetDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all settings?'**
-  String get dResetDialogTitle;
-
-  /// No description provided for @dResetDialogContent.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone'**
-  String get dResetDialogContent;
-
-  /// No description provided for @dAttention.
-  ///
-  /// In en, this message translates to:
-  /// **'Attention'**
-  String get dAttention;
-
-  /// No description provided for @dResetAllWarn.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone\nChanges take effect on app restart'**
-  String get dResetAllWarn;
-
-  /// No description provided for @dResetAllWarnWeb.
-  ///
-  /// In en, this message translates to:
-  /// **'Cannot be undone\nChanges take effect on page reload'**
-  String get dResetAllWarnWeb;
-
-  /// No description provided for @dEditingTheme.
+  /// No description provided for @gEditingTheme.
   ///
   /// In en, this message translates to:
   /// **'Editing: {themeType} theme'**
-  String dEditingTheme(Object themeType);
+  String gEditingTheme(Object themeType);
 
-  /// No description provided for @hsThemeMode.
+  /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get hsThemeMode;
+  /// **'How this works'**
+  String get gHowThisWorks;
 
-  /// No description provided for @hsThemeSemantics.
+  /// No description provided for @gHowThisWorksHint.
   ///
   /// In en, this message translates to:
-  /// **'Open to select a theme mode. Currently set to:'**
-  String get hsThemeSemantics;
+  /// **'Activate to open helpful documentation'**
+  String get gHowThisWorksHint;
 
-  /// No description provided for @hsDominantHand.
+  /// No description provided for @gAttention.
   ///
   /// In en, this message translates to:
-  /// **'Dominant hand'**
-  String get hsDominantHand;
+  /// **'Attention'**
+  String get gAttention;
 
-  /// No description provided for @hsHandSemantics.
+  /// No description provided for @gCurrently.
   ///
   /// In en, this message translates to:
-  /// **'Open to choose left or right. Currently set to:'**
-  String get hsHandSemantics;
+  /// **'Currently:'**
+  String get gCurrently;
+
+  /// No description provided for @gSetToValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is currently set to {value}'**
+  String gSetToValue(Object name, Object value);
+
+  /// No description provided for @gDefaultEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'{entry}* (default)'**
+  String gDefaultEntry(Object entry);
+
+  /// No description provided for @gReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset:'**
+  String get gReset;
+
+  /// No description provided for @gResetToValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {name} to {value}'**
+  String gResetToValue(Object name, Object value);
+
+  /// No description provided for @gResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all'**
+  String get gResetAll;
+
+  /// No description provided for @gResetWarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be undone'**
+  String get gResetWarn;
+
+  /// No description provided for @gCreditTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit to:'**
+  String get gCreditTo;
 
   /// No description provided for @ssPageTitle.
   ///
@@ -277,194 +259,62 @@ abstract class EFUILang {
   /// No description provided for @ssSettingsGuide.
   ///
   /// In en, this message translates to:
-  /// **'Each button will preview it\'s changes.\nReload the page for your changes to take full effect!\nHave fun!'**
+  /// **'Restart the app to save your changes.\n\nHave fun!'**
   String get ssSettingsGuide;
 
   /// No description provided for @ssSettingsGuideWeb.
   ///
   /// In en, this message translates to:
-  /// **'Each button will preview it\'s changes.\nRestart the app for your changes to take full effect!\nHave fun!'**
+  /// **'Reload the page to save your changes.\n\nHave fun!'**
   String get ssSettingsGuideWeb;
 
-  /// No description provided for @stsPageTitle.
+  /// No description provided for @ssThemeMode.
   ///
   /// In en, this message translates to:
-  /// **'Style settings'**
-  String get stsPageTitle;
+  /// **'Theme mode'**
+  String get ssThemeMode;
 
-  /// No description provided for @stsTextFont.
+  /// No description provided for @ssDominantHand.
   ///
   /// In en, this message translates to:
-  /// **'Text font'**
-  String get stsTextFont;
+  /// **'Dominant hand'**
+  String get ssDominantHand;
 
-  /// No description provided for @stsChooseFont.
+  /// No description provided for @ssLanguage.
   ///
   /// In en, this message translates to:
-  /// **'Choose a font'**
-  String get stsChooseFont;
+  /// **'Language'**
+  String get ssLanguage;
 
-  /// No description provided for @stsDefaultFont.
+  /// No description provided for @ssLanguages.
   ///
   /// In en, this message translates to:
-  /// **'{font}* (default)'**
-  String stsDefaultFont(Object font);
+  /// **'Languages'**
+  String get ssLanguages;
 
-  /// No description provided for @stsMargin.
+  /// No description provided for @ssLangSemantics.
   ///
   /// In en, this message translates to:
-  /// **'Margin'**
-  String get stsMargin;
+  /// **'App language'**
+  String get ssLangSemantics;
 
-  /// No description provided for @stsPadding.
+  /// No description provided for @ssResetAll.
   ///
   /// In en, this message translates to:
-  /// **'Padding'**
-  String get stsPadding;
-
-  /// No description provided for @stsCircleSize.
-  ///
-  /// In en, this message translates to:
-  /// **'Circle button size'**
-  String get stsCircleSize;
-
-  /// No description provided for @stsButtonSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get stsButtonSpacing;
-
-  /// No description provided for @stsTextSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get stsTextSpacing;
-
-  /// No description provided for @stsCurrently.
-  ///
-  /// In en, this message translates to:
-  /// **'Currently: '**
-  String get stsCurrently;
-
-  /// No description provided for @stsSetToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} is currently set to {value}'**
-  String stsSetToValue(Object name, Object value);
-
-  /// No description provided for @stsReset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset: '**
-  String get stsReset;
-
-  /// No description provided for @stsResetToValue.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset {name} to {value}'**
-  String stsResetToValue(Object name, Object value);
-
-  /// No description provided for @stsResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all style settings?'**
-  String get stsResetAll;
-
-  /// No description provided for @csPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Color settings'**
-  String get csPageTitle;
-
-  /// No description provided for @csEditingTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: {themeType} theme\nLong press buttons to reset individually'**
-  String csEditingTheme(Object themeType);
-
-  /// No description provided for @csPickerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a color!'**
-  String get csPickerTitle;
-
-  /// No description provided for @csPickerSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'Activate to open a color picker for {name}. Long press to reset {name}.'**
-  String csPickerSemantics(Object name);
-
-  /// No description provided for @csResetTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
-
-  /// No description provided for @csTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get csTheme;
-
-  /// No description provided for @csThemeText.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme text'**
-  String get csThemeText;
-
-  /// No description provided for @csRecommended.
-  ///
-  /// In en, this message translates to:
-  /// **'Use recommended?'**
-  String get csRecommended;
-
-  /// No description provided for @csUseCustom.
-  ///
-  /// In en, this message translates to:
-  /// **'Use custom'**
-  String get csUseCustom;
-
-  /// No description provided for @csPageText.
-  ///
-  /// In en, this message translates to:
-  /// **'Page text'**
-  String get csPageText;
-
-  /// No description provided for @csButtons.
-  ///
-  /// In en, this message translates to:
-  /// **'Buttons'**
-  String get csButtons;
-
-  /// No description provided for @csButtonText.
-  ///
-  /// In en, this message translates to:
-  /// **'Buttons text'**
-  String get csButtonText;
-
-  /// No description provided for @csAccent.
-  ///
-  /// In en, this message translates to:
-  /// **'Accent'**
-  String get csAccent;
-
-  /// No description provided for @csAccentText.
-  ///
-  /// In en, this message translates to:
-  /// **'Accent text'**
-  String get csAccentText;
-
-  /// No description provided for @csResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
+  /// **'Reset all settings?'**
+  String get ssResetAll;
 
   /// No description provided for @isPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Image settings'**
   String get isPageTitle;
+
+  /// No description provided for @isBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get isBackground;
 
   /// No description provided for @isImage.
   ///
@@ -502,17 +352,23 @@ abstract class EFUILang {
   /// **'From URL'**
   String get isFromNetwork;
 
+  /// No description provided for @isResetIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset it'**
+  String get isResetIt;
+
+  /// No description provided for @isClearIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear it'**
+  String get isClearIt;
+
   /// No description provided for @isEnterURL.
   ///
   /// In en, this message translates to:
   /// **'Enter URL'**
   String get isEnterURL;
-
-  /// No description provided for @isNetworkPreview.
-  ///
-  /// In en, this message translates to:
-  /// **'Preview of your chosen image'**
-  String get isNetworkPreview;
 
   /// No description provided for @isGetFailed.
   ///
@@ -526,35 +382,329 @@ abstract class EFUILang {
   /// **'Failed to update image:\n{error}'**
   String isSetFailed(Object error);
 
-  /// No description provided for @isResetIt.
+  /// No description provided for @isUseForColors.
   ///
   /// In en, this message translates to:
-  /// **'Reset it'**
-  String get isResetIt;
-
-  /// No description provided for @isClearIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear it'**
-  String get isClearIt;
-
-  /// No description provided for @isCreditTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit to:'**
-  String get isCreditTo;
-
-  /// No description provided for @isSource.
-  ///
-  /// In en, this message translates to:
-  /// **'Wherever you got it!'**
-  String get isSource;
+  /// **'Update the app colors using this image?'**
+  String get isUseForColors;
 
   /// No description provided for @isResetAll.
   ///
   /// In en, this message translates to:
   /// **'Reset all {themeType} theme images?'**
   String isResetAll(Object themeType);
+
+  /// No description provided for @csPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Color settings'**
+  String get csPageTitle;
+
+  /// No description provided for @csPickerSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to open a color picker for {name}. Long press for more options.'**
+  String csPickerSemantics(Object name);
+
+  /// No description provided for @csPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get csPrimary;
+
+  /// No description provided for @csOnPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'On Primary'**
+  String get csOnPrimary;
+
+  /// No description provided for @csPrimaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Container'**
+  String get csPrimaryContainer;
+
+  /// No description provided for @csOnPrimaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Primary Container'**
+  String get csOnPrimaryContainer;
+
+  /// No description provided for @csSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get csSecondary;
+
+  /// No description provided for @csOnSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'On Secondary'**
+  String get csOnSecondary;
+
+  /// No description provided for @csSecondaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary Container'**
+  String get csSecondaryContainer;
+
+  /// No description provided for @csOnSecondaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Secondary Container'**
+  String get csOnSecondaryContainer;
+
+  /// No description provided for @csTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary'**
+  String get csTertiary;
+
+  /// No description provided for @csOnTertiary.
+  ///
+  /// In en, this message translates to:
+  /// **'On Tertiary'**
+  String get csOnTertiary;
+
+  /// No description provided for @csTertiaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary Container'**
+  String get csTertiaryContainer;
+
+  /// No description provided for @csOnTertiaryContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Tertiary Container'**
+  String get csOnTertiaryContainer;
+
+  /// No description provided for @csError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get csError;
+
+  /// No description provided for @csOnError.
+  ///
+  /// In en, this message translates to:
+  /// **'On Error'**
+  String get csOnError;
+
+  /// No description provided for @csErrorContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Error Container'**
+  String get csErrorContainer;
+
+  /// No description provided for @csOnErrorContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'On Error Container'**
+  String get csOnErrorContainer;
+
+  /// No description provided for @csOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get csOutline;
+
+  /// No description provided for @csOutlineVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline Variant'**
+  String get csOutlineVariant;
+
+  /// No description provided for @csBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get csBackground;
+
+  /// No description provided for @csOnBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'On Background'**
+  String get csOnBackground;
+
+  /// No description provided for @csSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface'**
+  String get csSurface;
+
+  /// No description provided for @csOnSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'On Surface'**
+  String get csOnSurface;
+
+  /// No description provided for @csSurfaceVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface Variant'**
+  String get csSurfaceVariant;
+
+  /// No description provided for @csOnSurfaceVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'On Surface Variant'**
+  String get csOnSurfaceVariant;
+
+  /// No description provided for @csInverseSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse Surface'**
+  String get csInverseSurface;
+
+  /// No description provided for @csOnInverseSurface.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse On Surface'**
+  String get csOnInverseSurface;
+
+  /// No description provided for @csInversePrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Inverse Primary'**
+  String get csInversePrimary;
+
+  /// No description provided for @csScrim.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrim'**
+  String get csScrim;
+
+  /// No description provided for @csShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadow'**
+  String get csShadow;
+
+  /// No description provided for @csSurfaceTint.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface Tint'**
+  String get csSurfaceTint;
+
+  /// No description provided for @csPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color!'**
+  String get csPickerTitle;
+
+  /// No description provided for @csRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Use contrast recommendation?'**
+  String get csRecommended;
+
+  /// No description provided for @csUseCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Use custom'**
+  String get csUseCustom;
+
+  /// No description provided for @csAddColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a color'**
+  String get csAddColor;
+
+  /// No description provided for @csRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get csRemove;
+
+  /// No description provided for @csReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get csReset;
+
+  /// No description provided for @csResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to...'**
+  String get csResetTo;
+
+  /// No description provided for @csSchemeBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Build from\nimage'**
+  String get csSchemeBase;
+
+  /// No description provided for @csOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get csOptional;
+
+  /// No description provided for @csFromImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Build the color scheme from an image'**
+  String get csFromImage;
+
+  /// No description provided for @csColorScheme.
+  ///
+  /// In en, this message translates to:
+  /// **'color scheme'**
+  String get csColorScheme;
+
+  /// No description provided for @csResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String csResetAll(Object themeType);
+
+  /// No description provided for @stsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Style settings'**
+  String get stsPageTitle;
+
+  /// No description provided for @stsTextFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Text font'**
+  String get stsTextFont;
+
+  /// No description provided for @stsFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Fonts'**
+  String get stsFonts;
+
+  /// No description provided for @stsMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get stsMargin;
+
+  /// No description provided for @stsPadding.
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get stsPadding;
+
+  /// No description provided for @stsButtonSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Button spacing'**
+  String get stsButtonSpacing;
+
+  /// No description provided for @stsTextSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Text spacing'**
+  String get stsTextSpacing;
+
+  /// No description provided for @stsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all style settings?'**
+  String get stsResetAll;
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

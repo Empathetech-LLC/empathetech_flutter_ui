@@ -8,8 +8,18 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzScrollView extends SingleChildScrollView {
+class EzScrollView extends StatelessWidget {
   final Key? key;
+
+  final ScrollController? controller;
+  final bool? thumbVisibility;
+  final bool? trackVisibility;
+  final double? thickness;
+  final Radius? radius;
+  final ScrollNotificationPredicate? notificationPredicate;
+  final bool? interactive;
+  final ScrollbarOrientation? scrollbarOrientation;
+
   final Axis scrollDirection;
 
   /// Only useful when [scrollDirection] is [Axis.horizontal]
@@ -20,7 +30,6 @@ class EzScrollView extends SingleChildScrollView {
   final EdgeInsetsGeometry? padding;
   final bool? primary;
   final ScrollPhysics? physics;
-  final ScrollController? controller;
   final Widget? child;
   final Clip clipBehavior;
   final DragStartBehavior dragStartBehavior;
@@ -37,22 +46,31 @@ class EzScrollView extends SingleChildScrollView {
   /// [children] will be placed into an [EzRow] or [Column] based on [scrollDirection]
   final List<Widget>? children;
 
-  /// [SingleChildScrollView] wrapper
+  /// [SingleChildScrollView] (and [Scrollbar]) wrapper
   /// If [children] are provided the original child parameter will be an [EzRow] or [Column] based on [scrollDirection]
   /// Behaves like a standard [SingleChildScrollView] if [child] is provided
-  /// Parameters from both [SingleChildScrollView] and [EzRow]/[Column] are supported
-  /// [reverseHands] will only work if [children] are provided
+  /// Parameters from [Scrollbar], [SingleChildScrollView] and [EzRow]/[Column] are supported
   const EzScrollView({
+    this.key,
+
+    // Scrollbar parameters //
+    this.controller,
+    this.thumbVisibility,
+    this.trackVisibility,
+    this.thickness,
+    this.radius,
+    this.notificationPredicate,
+    this.interactive,
+    this.scrollbarOrientation,
+
     // SingleChildScrollView parameters //
 
-    this.key,
     this.scrollDirection = Axis.vertical,
     this.reverseHands = false,
     this.reverse = false,
     this.padding,
     this.primary,
     this.physics = const BouncingScrollPhysics(),
-    this.controller,
     this.child,
     this.clipBehavior = Clip.hardEdge,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -68,12 +86,13 @@ class EzScrollView extends SingleChildScrollView {
     this.textBaseline,
     this.verticalDirection = VerticalDirection.down,
     this.children,
-  }) : assert(
+  })  : assert(
           (child == null) != (children == null),
           'Either child or children should be provided, but not both.',
-        );
+        ),
+        super(key: key);
 
-  Widget _buildCore() {
+  Widget _child() {
     return (scrollDirection == Axis.vertical)
         ? Column(
             mainAxisSize: mainAxisSize,
@@ -98,19 +117,28 @@ class EzScrollView extends SingleChildScrollView {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      key: key,
-      scrollDirection: scrollDirection,
-      reverse: reverse,
-      padding: padding,
-      primary: primary,
-      physics: physics,
+    return Scrollbar(
       controller: controller,
-      child: child ?? _buildCore(),
-      dragStartBehavior: dragStartBehavior,
-      clipBehavior: clipBehavior,
-      restorationId: restorationId,
-      keyboardDismissBehavior: keyboardDismissBehavior,
+      thumbVisibility: thumbVisibility,
+      trackVisibility: trackVisibility,
+      thickness: thickness,
+      radius: radius,
+      notificationPredicate: notificationPredicate,
+      interactive: interactive,
+      scrollbarOrientation: scrollbarOrientation,
+      child: SingleChildScrollView(
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        padding: padding,
+        primary: primary,
+        physics: physics,
+        controller: controller,
+        child: child ?? _child(),
+        dragStartBehavior: dragStartBehavior,
+        clipBehavior: clipBehavior,
+        restorationId: restorationId,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+      ),
     );
   }
 }
