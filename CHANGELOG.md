@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.0.0] - 2023-12-29
+## [5.0.0] - 2024-01-02
 ### Updated
 - To Material 3
   - Big updates to...
@@ -11,18 +11,20 @@ All notable changes to this project will be documented in this file.
   - Restored iOS web icons and video
   - Updated textScaleFactor to textScaler
   - Using SelectionArea rather than SelectableText
+    - Updated EzRichText and EzPlainText
 - Made EzLink a TextButton
   - Made EzInlineLink a WidgetSpan wrapper around EzLink
 - Expanded EzRowCol
+- Updated file organization
 
 ### Removed
 - EzText
-- EzPlainText
 
 ### Added
 - EzLocaleSetting
 - ColorScheme generation functions
 - Tooltips
+- EzNewLine
 
 ## [4.3.3] - 2023-11-16
 ### Updated
