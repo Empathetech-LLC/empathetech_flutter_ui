@@ -101,7 +101,7 @@ void main() async {
 
 `EzConfig` gathers and stores the app's theme data.
 
-`EzConfig` starts with [Empathetech's config](./lib/src/consts/EzConfigValues.dart), then merges in your `customDefaults`, and the user's saved [preferences](https://pub.dev/packages/shared_preferences).
+`EzConfig` starts with the [Empathetech config](./lib/src/consts/EzConfigValues.dart), then merges in your `customDefaults`, and the user's saved [preferences](https://pub.dev/packages/shared_preferences).
 
 Once gathered, `EzConfig` stores the data in a Singleton instance for efficient access. `EzConfig` has a series of getter and setter methods for safe interactions with the theme data.
 
