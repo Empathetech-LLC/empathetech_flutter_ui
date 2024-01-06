@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2023 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -51,7 +51,7 @@ const int transparentHex = 0x00000000;
 
 // Brand links //
 
-/// One of us, one of us, one of us!
+/// If you want to lend a hand
 /// community@empathetech.net
 const String EmpathetechCommunity = 'community@empathetech.net';
 
@@ -63,12 +63,16 @@ const String EmpathetechSupport = 'support@empathetech.net';
 /// admin@empathetech.net
 const String EmpathetechAdmin = 'admin@empathetech.net';
 
-/// See what we're up to!
+/// If you want to stay informed
+/// http://eepurl.com/iHe_I2
+const String EmpathetechNewsletter = 'http://eepurl.com/iHe_I2';
+
+/// If you want to get in touch
 /// https://linkedin.com/company/empathetech-llc
 const String EmpathetechLinkedIn =
     "https://linkedin.com/company/empathetech-llc";
 
-/// See what we're up to!
+/// If you want to get in touch
 /// https://mastodon.social/@empathetech
 const String EmpathetechMastodon = "https://mastodon.social/@empathetech";
 

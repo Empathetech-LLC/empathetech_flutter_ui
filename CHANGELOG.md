@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.1] - 2024-01-06
+### Updated
+- Licensing to 2024
+- Set an EzColorSetting bug free
+  - Was preventing the color picker from startting
+- Empathetech links
+
 ## [5.0.0] - 2024-01-02
 ### Updated
 - To Material 3

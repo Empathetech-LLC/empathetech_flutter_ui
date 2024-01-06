@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2023 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -82,8 +82,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           widget.setting.replaceAll(textColorPrefix, "");
 
       // Find the recommended contrast color for the background
-      final Color backgroundColor = Color(
-          EzConfig.get(backgroundKey) ?? getLiveColor(context, widget.setting));
+      final int? backgroundColorValue = EzConfig.get(backgroundKey);
+      final Color backgroundColor = backgroundColorValue == null
+          ? getLiveColor(context, widget.setting)
+          : Color(backgroundColorValue);
 
       final int recommended = getTextColor(backgroundColor).value;
 
