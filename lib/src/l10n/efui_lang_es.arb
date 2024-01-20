@@ -138,9 +138,7 @@
 
   "stsMargin": "Margen",
   "stsPadding": "Relleno",
-
   "stsButtonSpacing": "Espaciado de botones",
-  "stsTextSpacing": "Espaciado de texto",
 
   "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"
 }

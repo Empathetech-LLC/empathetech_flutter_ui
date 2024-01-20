@@ -77,17 +77,6 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 18,
               decimals: 0,
             ),
-            _buttonSpacer,
-
-            // Text spacing
-            const EzSliderSetting(
-              prefsKey: textSpacingKey,
-              type: SliderSettingType.textSpacing,
-              min: 10.0,
-              max: 100.0,
-              steps: 18,
-              decimals: 0,
-            ),
             _buttonSeparator,
 
             // Local reset all

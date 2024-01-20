@@ -142,9 +142,7 @@
 
   "stsMargin": "Margin",
   "stsPadding": "Padding",
-
   "stsButtonSpacing": "Button spacing",
-  "stsTextSpacing": "Text spacing",
 
   "stsResetAll": "Reset all style settings?"
 }

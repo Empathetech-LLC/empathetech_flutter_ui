@@ -278,14 +278,12 @@ const String marginKey = 'margin'; // required
 const String paddingKey = 'padding'; // required
 
 const String buttonSpacingKey = 'buttonSpacing'; // required
-const String textSpacingKey = 'textSpacing'; // required
 
 const Map<String, Type> styleKeys = {
   fontFamilyKey: String,
   marginKey: double, // required
   paddingKey: double, // required
   buttonSpacingKey: double, // required
-  textSpacingKey: double, // required
 };
 
 // Trackers //

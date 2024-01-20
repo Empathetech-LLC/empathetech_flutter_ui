@@ -331,8 +331,5 @@ class EFUILangEs extends EFUILang {
   String get stsButtonSpacing => 'Espaciado de botones';
 
   @override
-  String get stsTextSpacing => 'Espaciado de texto';
-
-  @override
   String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
 }

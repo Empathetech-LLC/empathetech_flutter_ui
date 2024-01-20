@@ -21,7 +21,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
-  final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   // Define the page content //
 
@@ -95,7 +94,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
               style: getLabel(context),
               textAlign: TextAlign.center,
             ),
-            _textSpacer,
+            _buttonSeparator,
 
             // Settings
             ...(isLight ? _lightButtons : _darkButtons),

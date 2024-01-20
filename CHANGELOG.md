@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 - File organization
 - EzAppProvider parameters (non-breaking)
 
+### Removed
+- TextSpacingKey && associated Widgets
+  - EzNewLine is a better strategy
+
 ## [5.0.1] - 2024-01-06
 ### Updated
 - Licensing to 2024

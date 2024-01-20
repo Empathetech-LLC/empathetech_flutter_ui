@@ -13,7 +13,6 @@ enum SliderSettingType {
   margin,
   padding,
   buttonSpacing,
-  textSpacing,
 }
 
 /// Get the proper [String] name for [EzSliderSetting.type]
@@ -25,8 +24,6 @@ String sstName(BuildContext context, SliderSettingType settingType) {
       return EFUILang.of(context)!.stsPadding;
     case SliderSettingType.buttonSpacing:
       return EFUILang.of(context)!.stsButtonSpacing;
-    case SliderSettingType.textSpacing:
-      return EFUILang.of(context)!.stsTextSpacing;
   }
 }
 
@@ -39,8 +36,6 @@ extension SettingIcon on SliderSettingType {
       case SliderSettingType.padding:
         return const Icon(Icons.padding);
       case SliderSettingType.buttonSpacing:
-        return const Icon(Icons.space_bar);
-      case SliderSettingType.textSpacing:
         return const Icon(Icons.space_bar);
     }
   }

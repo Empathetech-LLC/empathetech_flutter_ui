@@ -84,7 +84,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 style: style,
                 textAlign: TextAlign.center,
               ),
-              EzSpacer.row(EzConfig.get(textSpacingKey)),
+              EzSpacer.row(buttonSpace * 2),
 
               // Preview
               Container(
@@ -116,8 +116,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 onPressed: doNothing,
                 child: Text(EFUILang.of(context)!.gCurrently),
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding:
-                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
                     ),
               ),
               EzSpacer.row(buttonSpace),
@@ -125,8 +124,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding:
-                          MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
                       shape: MaterialStatePropertyAll(const CircleBorder()),
                     ),
               ),
@@ -146,23 +144,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ElevatedButton(
             onPressed: doNothing,
             child: Text(currLabel),
-          ),
-
-          // Preview 2
-          EzSpacer(currValue),
-        ];
-
-      // Text spacing
-      case SliderSettingType.textSpacing:
-        return [
-          // Preview 1
-          EzSpacer(currValue),
-
-          // Label 1
-          Text(
-            currLabel,
-            style: style,
-            textAlign: TextAlign.center,
           ),
 
           // Preview 2
@@ -238,8 +219,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           },
 
           // Slider semantics
-          semanticFormatterCallback: (double value) =>
-              value.toStringAsFixed(widget.decimals),
+          semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
         ),
       ),
       _buttonSpacer,

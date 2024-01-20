@@ -23,7 +23,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
-  final EzSpacer _textSpacer = EzSpacer(EzConfig.get(textSpacingKey));
 
   late final TextStyle? labelStyle = getLabel(context);
 
@@ -39,11 +38,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
 
   /// Build from image button dialog title
-  late final String fromImageTitle =
-      "$themeProfile ${EFUILang.of(context)!.csColorScheme}";
+  late final String fromImageTitle = "$themeProfile ${EFUILang.of(context)!.csColorScheme}";
 
-  late final String resetDialogTitle =
-      EFUILang.of(context)!.csResetAll(themeProfile);
+  late final String resetDialogTitle = EFUILang.of(context)!.csResetAll(themeProfile);
 
   late final List<String> _defaultList = isLight
       ? [
@@ -130,8 +127,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the dynamic page content //
 
-  late List<String> currList =
-      EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
+  late List<String> currList = EzConfig.get(userColorsKey) ?? new List.from(_defaultList);
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> _dynamicColorSettings() {
@@ -191,9 +187,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             child: CircleAvatar(
               backgroundColor: liveColor,
               radius: padding * sqrt(2),
-              child: liveColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
-                  : null,
+              child:
+                  liveColor == Colors.transparent ? Icon(PlatformIcons(context).eyeSlash) : null,
             ),
           ),
           label: Text(getColorName(context, settingKey)),
@@ -240,7 +235,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               style: labelStyle,
               textAlign: TextAlign.center,
             ),
-            _textSpacer,
+            _buttonSeparator,
 
             // Dynamic settings
             ..._dynamicColorSettings(),
@@ -255,10 +250,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 await showModalBottomSheet(
                   context: context,
                   builder: (context) => StatefulBuilder(
-                    builder:
-                        (BuildContext context, StateSetter modalSheetState) {
-                      return EzScrollView(
-                          children: _getUntrackedColors(modalSheetState));
+                    builder: (BuildContext context, StateSetter modalSheetState) {
+                      return EzScrollView(children: _getUntrackedColors(modalSheetState));
                     },
                   ),
                 );

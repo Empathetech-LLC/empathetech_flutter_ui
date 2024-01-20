@@ -694,12 +694,6 @@ abstract class EFUILang {
   /// **'Button spacing'**
   String get stsButtonSpacing;
 
-  /// No description provided for @stsTextSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Text spacing'**
-  String get stsTextSpacing;
-
   /// No description provided for @stsResetAll.
   ///
   /// In en, this message translates to:
