@@ -59,7 +59,7 @@ Here are some (unaffiliated) videos you might also find helpful.
 
 --- Required ---
 1. Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in `void main()`
-2. Use [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/themeData.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
+2. Use [EzAppProvider](./lib/src/classes/platform-availability/EzAppProvider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/themeData.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
 
 <br>--- Recommended ---
 1. Copy all example app [settings screens](./example/lib/screens/) to your project
@@ -77,7 +77,7 @@ void main() async {
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  EzConfig(
+  EzConfig.init(
     // Paths to any locally stored images the app uses
     assetPaths: {},
 
@@ -101,13 +101,13 @@ void main() async {
 
 `EzConfig` gathers and stores the app's theme data.
 
-`EzConfig` starts with the [Empathetech config](./lib/src/consts/EzConfigValues.dart), then merges in your `customDefaults`, and the user's saved [preferences](https://pub.dev/packages/shared_preferences).
+`EzConfig` starts with the [Empathetech config](./lib/src/consts/empathetech.dart), then merges in your `customDefaults`, and the user's saved [preferences](https://pub.dev/packages/shared_preferences).
 
 Once gathered, `EzConfig` stores the data in a Singleton instance for efficient access. `EzConfig` has a series of getter and setter methods for safe interactions with the theme data.
 
 ### Step 2
 
-In `main.dart`, use an [EzAppProvider](./lib/src/classes/user-customization/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformApp-class.html)
+In `main.dart`, use an [EzAppProvider](./lib/src/classes/platform-availability/EzAppProvider.dart) to build your [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class EFUIExample extends StatelessWidget {
