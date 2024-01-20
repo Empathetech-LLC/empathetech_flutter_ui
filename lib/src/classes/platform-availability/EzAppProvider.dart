@@ -9,20 +9,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
-  final Key? key;
-  final PlatformSettingsData? settings;
   final Widget Function(BuildContext)? builder;
   final TargetPlatform? initialPlatform;
-  final PlatformApp app;
+  final PlatformSettingsData? settings;
+  final Key? key;
+
+  /// Optionally provide a [PlatformApp] that will be wrapped in the Empathetech theme [builder]
+  final PlatformApp? app;
 
   /// [PlatformProvider] wrapper with [ezThemeData] defaults
   EzAppProvider({
-    this.key,
-    this.settings,
     this.builder,
     this.initialPlatform,
-    required this.app,
-  });
+    this.settings,
+    this.key,
+    this.app,
+  }) : assert(
+          (builder == null) != (app == null),
+          'Either builder or app should be provided, but not both.',
+        );
 
   // Gather the theme data //
 
@@ -42,15 +47,9 @@ class EzAppProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformProvider(
-      key: key,
-      settings: settings ??
-          PlatformSettingsData(
-            iosUsesMaterialWidgets: true,
-            iosUseZeroPaddingForAppbarPlatformIcon: true,
-          ),
       builder: builder ??
           (context) => PlatformTheme(
-                builder: (context) => app,
+                builder: (context) => app!,
                 themeMode: _initialTheme,
                 materialLightTheme: _materialLight,
                 materialDarkTheme: _materialDark,
@@ -63,6 +62,12 @@ class EzAppProvider extends StatelessWidget {
                 matchCupertinoSystemChromeBrightness: true,
               ),
       initialPlatform: initialPlatform,
+      settings: settings ??
+          PlatformSettingsData(
+            iosUsesMaterialWidgets: true,
+            iosUseZeroPaddingForAppbarPlatformIcon: true,
+          ),
+      key: key,
     );
   }
 }
