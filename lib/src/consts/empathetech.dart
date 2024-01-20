@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-// General //
+import '../../empathetech_flutter_ui.dart';
+
+// Brand names //
 
 /// Short == EFUI
 const String efuiS = "EFUI";
@@ -13,15 +15,6 @@ const String efuiL = "Empathetech Flutter UI";
 
 /// Empathetic Flutter UI
 const String efuiLFix = "Empathetic Flutter UI";
-
-// Documentation links //
-
-/// [https://m3.material.io/styles/color/roles]
-const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
-
-/// [https://m3.material.io/foundations/layout/understanding-layout/spacing]
-const String understandingLayout =
-    'https://m3.material.io/foundations/layout/understanding-layout/spacing';
 
 // Brand Colors //
 
@@ -69,8 +62,7 @@ const String EmpathetechNewsletter = 'http://eepurl.com/iHe_I2';
 
 /// If you want to get in touch
 /// https://linkedin.com/company/empathetech-llc
-const String EmpathetechLinkedIn =
-    "https://linkedin.com/company/empathetech-llc";
+const String EmpathetechLinkedIn = "https://linkedin.com/company/empathetech-llc";
 
 /// If you want to get in touch
 /// https://mastodon.social/@empathetech
@@ -82,13 +74,11 @@ const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
 
 /// One of us, one of us, one of us!
 /// https://stats.foldingathome.org/team/1063265
-const String EmpathetechFoldingTeam =
-    'https://stats.foldingathome.org/team/1063265';
+const String EmpathetechFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
 /// If you want to show some love
 /// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
-const String EmpathetechPayPal =
-    'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
+const String EmpathetechPayPal = 'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
 
 /// If you want to show some love
 /// https://venmo.com/empathetech
@@ -109,3 +99,65 @@ const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
 /// If you want to show some love
 /// https://ko-fi.com/empathetech
 const String EmpathetechKofi = "https://ko-fi.com/empathetech";
+
+// Documentation links //
+
+/// [https://m3.material.io/styles/color/roles]
+const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
+
+/// [https://m3.material.io/foundations/layout/understanding-layout/spacing]
+const String understandingLayout =
+    'https://m3.material.io/foundations/layout/understanding-layout/spacing';
+
+// EzConfig base //
+
+/// Empathetech's default configuration for [EzConfig]
+const Map<String, dynamic> empathetechConfig = {
+  // Color settings //
+
+  // Light
+  lightPrimaryKey: EmpathPurpleHex, // required
+  lightOnPrimaryKey: whiteHex,
+
+  lightSecondaryKey: EmpathGoldenrodHex,
+  lightOnSecondaryKey: blackHex,
+
+  lightTertiaryKey: EmpathEucalyptusHex,
+  lightOnTertiaryKey: blackHex,
+
+  lightBackgroundKey: offWhiteHex,
+  lightOnBackgroundKey: blackHex,
+
+  lightSurfaceKey: whiteHex,
+  lightOnSurfaceKey: blackHex,
+
+  lightSurfaceTintKey: transparentHex,
+
+  // Dark
+  darkPrimaryKey: EmpathEucalyptusHex, // required
+  darkOnPrimaryKey: blackHex,
+
+  darkSecondaryKey: EmpathGoldenrodHex,
+  darkOnSecondaryKey: blackHex,
+
+  darkTertiaryKey: EmpathPurpleHex,
+  darkOnTertiaryKey: whiteHex,
+
+  darkBackgroundKey: offBlackHex,
+  darkOnBackgroundKey: whiteHex,
+
+  darkSurfaceKey: blackHex,
+  darkOnSurfaceKey: whiteHex,
+
+  darkSurfaceTintKey: transparentHex,
+
+  // Style settings //
+
+  fontFamilyKey: roboto,
+
+  marginKey: 20.0, // required
+  paddingKey: 20.0, // required
+
+  buttonSpacingKey: 20.0, // required
+  textSpacingKey: 40.0, // required
+};
