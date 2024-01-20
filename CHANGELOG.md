@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0] - 2024-01-20
+### Updated
+- Jenkins pipeline to use external libraries
+- File organization
+- EzAppProvider parameters (non-breaking)
+
 ## [5.0.1] - 2024-01-06
 ### Updated
 - Licensing to 2024
 - Set an EzColorSetting bug free
-  - Was preventing the color picker from startting
+  - Was preventing the color picker from starting
 - Empathetech links
 
 ## [5.0.0] - 2024-01-02
