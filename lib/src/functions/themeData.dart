@@ -47,7 +47,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
-  final double buttonSpacing = EzConfig.get(buttonSpacingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
   // Build the ThemeData //
 
@@ -96,10 +96,10 @@ ThemeData ezThemeData(Brightness brightness) {
       contentTextStyle: dialogContentStyle,
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
-        top: (buttonSpacing > padding) ? (buttonSpacing - padding) : 0.0,
-        left: buttonSpacing,
-        right: buttonSpacing,
-        bottom: buttonSpacing,
+        top: (spacing > padding) ? (spacing - padding) : 0.0,
+        left: spacing,
+        right: spacing,
+        bottom: spacing,
       ),
     ),
 
