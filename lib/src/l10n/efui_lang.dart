@@ -658,47 +658,101 @@ abstract class EFUILang {
   /// **'Reset all {themeType} theme colors?'**
   String csResetAll(Object themeType);
 
-  /// No description provided for @stsPageTitle.
+  /// No description provided for @tsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Style settings'**
-  String get stsPageTitle;
+  /// **'Text settings'**
+  String get tsPageTitle;
 
-  /// No description provided for @stsTextFont.
+  /// No description provided for @tsFontFamily.
   ///
   /// In en, this message translates to:
-  /// **'Text font'**
-  String get stsTextFont;
+  /// **'Font family'**
+  String get tsFontFamily;
 
-  /// No description provided for @stsFonts.
+  /// No description provided for @tsFonts.
   ///
   /// In en, this message translates to:
   /// **'Fonts'**
-  String get stsFonts;
+  String get tsFonts;
 
-  /// No description provided for @stsMargin.
+  /// No description provided for @tsFontSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get tsFontSize;
+
+  /// No description provided for @tsFontWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get tsFontWeight;
+
+  /// No description provided for @tsFontStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Style'**
+  String get tsFontStyle;
+
+  /// No description provided for @tsLetterSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Letter spacing'**
+  String get tsLetterSpacing;
+
+  /// No description provided for @tsWordSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Word spacing'**
+  String get tsWordSpacing;
+
+  /// No description provided for @tsFontHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get tsFontHeight;
+
+  /// No description provided for @tsFontDecoration.
+  ///
+  /// In en, this message translates to:
+  /// **'Decoration'**
+  String get tsFontDecoration;
+
+  /// No description provided for @tsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all text settings?'**
+  String get tsResetAll;
+
+  /// No description provided for @lsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout settings'**
+  String get lsPageTitle;
+
+  /// No description provided for @lsMargin.
   ///
   /// In en, this message translates to:
   /// **'Margin'**
-  String get stsMargin;
+  String get lsMargin;
 
-  /// No description provided for @stsPadding.
+  /// No description provided for @lsPadding.
   ///
   /// In en, this message translates to:
   /// **'Padding'**
-  String get stsPadding;
+  String get lsPadding;
 
-  /// No description provided for @stsButtonSpacing.
+  /// No description provided for @lsSpacing.
   ///
   /// In en, this message translates to:
-  /// **'Button spacing'**
-  String get stsButtonSpacing;
+  /// **'Spacing'**
+  String get lsSpacing;
 
-  /// No description provided for @stsResetAll.
+  /// No description provided for @lsResetAll.
   ///
   /// In en, this message translates to:
-  /// **'Reset all style settings?'**
-  String get stsResetAll;
+  /// **'Reset all layout settings?'**
+  String get lsResetAll;
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

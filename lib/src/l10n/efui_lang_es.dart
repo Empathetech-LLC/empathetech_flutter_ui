@@ -313,23 +313,50 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get stsPageTitle => 'Configuraciones de estilo';
+  String get tsPageTitle => 'Configuraciones de texto';
 
   @override
-  String get stsTextFont => 'Fuente de texto';
+  String get tsFontFamily => 'Familia de fuentes';
 
   @override
-  String get stsFonts => 'Fuentes';
+  String get tsFonts => 'Fuentes';
 
   @override
-  String get stsMargin => 'Margen';
+  String get tsFontSize => 'Tamaño';
 
   @override
-  String get stsPadding => 'Relleno';
+  String get tsFontWeight => 'Peso';
 
   @override
-  String get stsButtonSpacing => 'Espaciado de botones';
+  String get tsFontStyle => 'Estilo';
 
   @override
-  String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
+  String get tsLetterSpacing => 'Espaciado de letras';
+
+  @override
+  String get tsWordSpacing => 'Espaciado de palabras';
+
+  @override
+  String get tsFontHeight => 'Altura';
+
+  @override
+  String get tsFontDecoration => 'Decoración';
+
+  @override
+  String get tsResetAll => '¿Restablecer todas las configuraciones de texto?';
+
+  @override
+  String get lsPageTitle => 'Configuraciones de estilo';
+
+  @override
+  String get lsMargin => 'Margen';
+
+  @override
+  String get lsPadding => 'Relleno';
+
+  @override
+  String get lsSpacing => 'Espaciado';
+
+  @override
+  String get lsResetAll => '¿Restablecer todas las configuraciones de estilo?';
 }

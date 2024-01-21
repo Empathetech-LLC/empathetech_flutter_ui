@@ -35,6 +35,7 @@
 
   "gCreditTo": "Crédito a:",
 
+
   "ssPageTitle": "Configuraciones",
   "ssSettingsGuide": "Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga la página para guardar tus cambios.\n\n¡Diviértete!",
@@ -47,6 +48,7 @@
   "ssLangSemantics": "Idioma de la aplicación",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
+
 
   "isPageTitle": "Configuraciones de imagen",
 
@@ -69,6 +71,7 @@
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
 
+  
   "csPageTitle": "Configuraciones de color",
 
   "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
@@ -130,15 +133,28 @@
   "csColorScheme": "esquema de colores",
 
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
+
+
+  "tsPageTitle": "Configuraciones de texto",
+
+  "tsFontFamily": "Familia de fuentes",
+  "tsFonts": "Fuentes",
+  "tsFontSize": "Tamaño",
+  "tsFontWeight": "Peso",
+  "tsFontStyle": "Estilo",
+  "tsLetterSpacing": "Espaciado de letras",
+  "tsWordSpacing": "Espaciado de palabras",
+  "tsFontHeight": "Altura",
+  "tsFontDecoration": "Decoración",
+
+  "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
+
   
-  "stsPageTitle": "Configuraciones de estilo",
+  "lsPageTitle": "Configuraciones de estilo",
 
-  "stsTextFont": "Fuente de texto",
-  "stsFonts": "Fuentes",
+  "lsMargin": "Margen",
+  "lsPadding": "Relleno",
+  "lsSpacing": "Espaciado",
 
-  "stsMargin": "Margen",
-  "stsPadding": "Relleno",
-  "stsButtonSpacing": "Espaciado de botones",
-
-  "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"
+  "lsResetAll": "¿Restablecer todas las configuraciones de estilo?"
 }

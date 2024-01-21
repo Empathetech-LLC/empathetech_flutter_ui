@@ -311,23 +311,50 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get stsPageTitle => 'Style settings';
+  String get tsPageTitle => 'Text settings';
 
   @override
-  String get stsTextFont => 'Text font';
+  String get tsFontFamily => 'Font family';
 
   @override
-  String get stsFonts => 'Fonts';
+  String get tsFonts => 'Fonts';
 
   @override
-  String get stsMargin => 'Margin';
+  String get tsFontSize => 'Size';
 
   @override
-  String get stsPadding => 'Padding';
+  String get tsFontWeight => 'Weight';
 
   @override
-  String get stsButtonSpacing => 'Button spacing';
+  String get tsFontStyle => 'Style';
 
   @override
-  String get stsResetAll => 'Reset all style settings?';
+  String get tsLetterSpacing => 'Letter spacing';
+
+  @override
+  String get tsWordSpacing => 'Word spacing';
+
+  @override
+  String get tsFontHeight => 'Height';
+
+  @override
+  String get tsFontDecoration => 'Decoration';
+
+  @override
+  String get tsResetAll => 'Reset all text settings?';
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 }

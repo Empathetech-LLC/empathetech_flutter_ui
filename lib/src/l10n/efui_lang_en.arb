@@ -133,16 +133,28 @@
   "csColorScheme": "color scheme",
 
   "csResetAll": "Reset all {themeType} theme colors?",
+
+
+  "tsPageTitle": "Text settings",
+
+  "tsFontFamily": "Font family",
+  "tsFonts": "Fonts",
+  "tsFontSize": "Size",
+  "tsFontWeight": "Weight",
+  "tsFontStyle": "Style",
+  "tsLetterSpacing": "Letter spacing",
+  "tsWordSpacing": "Word spacing",
+  "tsFontHeight": "Height",
+  "tsFontDecoration": "Decoration",
+
+  "tsResetAll": "Reset all text settings?",
   
   
-  "stsPageTitle": "Style settings",
+  "lsPageTitle": "Layout settings",
 
-  "stsTextFont": "Text font",
-  "stsFonts": "Fonts",
+  "lsMargin": "Margin",
+  "lsPadding": "Padding",
+  "lsSpacing": "Spacing",
 
-  "stsMargin": "Margin",
-  "stsPadding": "Padding",
-  "stsButtonSpacing": "Button spacing",
-
-  "stsResetAll": "Reset all style settings?"
+  "lsResetAll": "Reset all layout settings?"
 }
