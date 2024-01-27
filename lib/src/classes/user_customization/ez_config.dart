@@ -53,50 +53,52 @@ class EzConfig {
       // Build this.defaults //
 
       // Start with Empathetech's config
-      Map<String, dynamic> _defaults = new Map.from(empathetechConfig);
+      final Map<String, dynamic> defaults = Map<String, dynamic>.from(empathetechConfig);
 
       // Merge custom defaults
-      if (customDefaults != null) _defaults.addAll(customDefaults);
+      if (customDefaults != null) defaults.addAll(customDefaults);
 
       // Build this.keys //
 
       // Start with Empathetech's config
-      Map<String, Type> _keys = new Map.from(allKeys);
+      final Map<String, Type> keys = Map<String, Type>.from(allKeys);
 
       // Merge custom defaults
       if (customDefaults != null) {
-        for (var entry in customDefaults.entries) {
-          _keys[entry.key] = entry.value.runtimeType;
+        for (final MapEntry<String, dynamic> entry in customDefaults.entries) {
+          keys[entry.key] = entry.value.runtimeType;
         }
       }
 
       // Build this.prefs //
 
       // Start with the newly merged defaults
-      Map<String, dynamic> _prefs = new Map.from(_defaults);
+      final Map<String, dynamic> prefs = Map<String, dynamic>.from(defaults);
 
       // Find the keys that users have overwritten
-      final Set<String> overwritten = preferences.getKeys().intersection(_keys.keys.toSet());
+      final Set<String> overwritten = preferences.getKeys().intersection(keys.keys.toSet());
 
       // Get the updated values
-      overwritten.forEach((key) {
-        Type? valueType = _keys[key];
+      for (final String key in overwritten) {
+        final String noPrefixKey = key.replaceAll(prefixesRegExp, '');
+
+        final Type? valueType = keys[noPrefixKey];
         dynamic userPref;
 
         switch (valueType) {
-          case bool:
+          case const (bool):
             userPref = preferences.getBool(key);
             break;
 
-          case int:
+          case const (int):
             userPref = preferences.getInt(key);
             break;
 
-          case double:
+          case const (double):
             userPref = preferences.getDouble(key);
             break;
 
-          case String:
+          case const (String):
             userPref = preferences.getString(key);
             break;
 
@@ -105,22 +107,22 @@ class EzConfig {
             break;
 
           default:
-            log("""Key [$key] has unsupported Type [$valueType]
-Must be one of [int, bool, double, String, List<String>]""");
+            log('''Key [$key] has unsupported Type [$valueType]
+Must be one of [int, bool, double, String, List<String>]''');
             break;
         }
 
-        if (userPref != null) _prefs[key] = userPref;
-      });
+        if (userPref != null) prefs[key] = userPref;
+      }
 
       // Build the EzConfig instance //
 
       _instance = EzConfig._(
         assetPaths: assetPaths,
         preferences: preferences,
-        defaults: _defaults,
-        prefs: _prefs,
-        keys: _keys,
+        defaults: defaults,
+        prefs: prefs,
+        keys: keys,
       );
     }
 
@@ -239,7 +241,7 @@ Must be one of [int, bool, double, String, List<String>]""");
   static void removeKeys(Set<String> keys) async {
     final Set<String> updated = keys.intersection(_instance!.preferences.getKeys());
 
-    for (String key in updated) {
+    for (final String key in updated) {
       _instance!.preferences.remove(key);
     }
   }

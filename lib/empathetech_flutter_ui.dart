@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// EFUI makes building accessible and user customizable UIs EZ. So anyone can enjoy your great idea!
+/// EFUI makes building user accessible and customizable apps Ez. So everyone can enjoy your great idea!
 library empathetech_flutter_ui;
 
 // Classes //
@@ -37,8 +37,8 @@ export 'src/classes/screen_reader_support/EzRichText.dart';
 
 // User customization
 export 'src/classes/user_customization/color_setting.dart';
-export 'src/classes/user_customization/EzConfig.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
+export 'src/classes/user_customization/ez_config.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';
