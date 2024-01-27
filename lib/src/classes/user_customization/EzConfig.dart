@@ -76,8 +76,7 @@ class EzConfig {
       Map<String, dynamic> _prefs = new Map.from(_defaults);
 
       // Find the keys that users have overwritten
-      final Set<String> overwritten =
-          preferences.getKeys().intersection(_keys.keys.toSet());
+      final Set<String> overwritten = preferences.getKeys().intersection(_keys.keys.toSet());
 
       // Get the updated values
       overwritten.forEach((key) {
@@ -238,8 +237,7 @@ Must be one of [int, bool, double, String, List<String>]""");
 
   /// Remove the [keys] custom values
   static void removeKeys(Set<String> keys) async {
-    final Set<String> updated =
-        keys.intersection(_instance!.preferences.getKeys());
+    final Set<String> updated = keys.intersection(_instance!.preferences.getKeys());
 
     for (String key in updated) {
       _instance!.preferences.remove(key);

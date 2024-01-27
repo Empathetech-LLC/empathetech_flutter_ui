@@ -10,10 +10,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
   /// Standardized tool for changing the [ThemeMode]
-  const EzThemeModeSwitch({Key? key}) : super(key: key);
+  const EzThemeModeSwitch({super.key});
 
   @override
-  _ThemeModeSwitchState createState() => _ThemeModeSwitchState();
+  State<EzThemeModeSwitch> createState() => _ThemeModeSwitchState();
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
@@ -31,16 +31,16 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final List<DropdownMenuItem<ThemeMode>> items = [
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gSystem),
         value: ThemeMode.system,
+        child: Text(EFUILang.of(context)!.gSystem),
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gLight),
         value: ThemeMode.light,
+        child: Text(EFUILang.of(context)!.gLight),
       ),
       DropdownMenuItem<ThemeMode>(
-        child: Text(EFUILang.of(context)!.gDark),
         value: ThemeMode.dark,
+        child: Text(EFUILang.of(context)!.gDark),
       ),
     ];
 

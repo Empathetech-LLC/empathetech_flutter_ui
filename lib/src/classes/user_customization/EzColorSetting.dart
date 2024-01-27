@@ -35,9 +35,8 @@ class _ColorSettingState extends State<EzColorSetting> {
   // Gather the theme data //
 
   late final int? _prefsValue = EzConfig.get(widget.setting);
-  late Color currColor = (_prefsValue == null)
-      ? getLiveColor(context, widget.setting)
-      : Color(_prefsValue);
+  late Color currColor =
+      (_prefsValue == null) ? getLiveColor(context, widget.setting) : Color(_prefsValue);
 
   final double padding = EzConfig.get(paddingKey);
   final double buttonSpace = EzConfig.get(buttonSpacingKey);
@@ -78,8 +77,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       return _openColorPicker(context);
     } else {
       // "on" (aka text) color //
-      final String backgroundKey =
-          widget.setting.replaceAll(textColorPrefix, "");
+      final String backgroundKey = widget.setting.replaceAll(textColorPrefix, "");
 
       // Find the recommended contrast color for the background
       final int? backgroundColorValue = EzConfig.get(backgroundKey);
@@ -125,9 +123,8 @@ class _ColorSettingState extends State<EzColorSetting> {
               child: CircleAvatar(
                 backgroundColor: Color(recommended),
                 radius: padding * 2,
-                child: currColor == Colors.transparent
-                    ? Icon(PlatformIcons(context).eyeSlash)
-                    : null,
+                child:
+                    currColor == Colors.transparent ? Icon(PlatformIcons(context).eyeSlash) : null,
               ),
             ),
           ],
@@ -191,9 +188,8 @@ class _ColorSettingState extends State<EzColorSetting> {
               child: CircleAvatar(
                 backgroundColor: resetColor,
                 radius: padding * 2,
-                child: currColor == Colors.transparent
-                    ? Icon(PlatformIcons(context).eyeSlash)
-                    : null,
+                child:
+                    currColor == Colors.transparent ? Icon(PlatformIcons(context).eyeSlash) : null,
               ),
             ),
           ],
@@ -275,9 +271,8 @@ class _ColorSettingState extends State<EzColorSetting> {
             child: CircleAvatar(
               backgroundColor: currColor,
               radius: padding * sqrt(2),
-              child: currColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
-                  : null,
+              child:
+                  currColor == Colors.transparent ? Icon(PlatformIcons(context).eyeSlash) : null,
             ),
           ),
           label: Text(label),

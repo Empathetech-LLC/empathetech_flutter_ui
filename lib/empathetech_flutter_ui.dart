@@ -17,34 +17,34 @@ export 'src/classes/general/EzTextStyle.dart';
 export 'src/classes/general/EzWarning.dart';
 
 // Platform availability
-export 'src/classes/platform-availability/EzAlertDialog.dart';
-export 'src/classes/platform-availability/EzAppProvider.dart';
+export 'src/classes/platform_availability/EzAlertDialog.dart';
+export 'src/classes/platform_availability/EzAppProvider.dart';
 
 // Responsive design
-export 'src/classes/responsive-design/EzRowCol.dart';
-export 'src/classes/responsive-design/EzScrollView.dart';
-export 'src/classes/responsive-design/EzSwapScaffold.dart';
-export 'src/classes/responsive-design/EzTransitions.dart';
+export 'src/classes/responsive_design/EzRowCol.dart';
+export 'src/classes/responsive_design/EzScrollView.dart';
+export 'src/classes/responsive_design/EzSwapScaffold.dart';
+export 'src/classes/responsive_design/EzTransitions.dart';
 
 // Screen reader support
-export 'src/classes/screen-reader-support/EzImage.dart';
-export 'src/classes/screen-reader-support/EzInlineLink.dart';
-export 'src/classes/screen-reader-support/EzLink.dart';
-export 'src/classes/screen-reader-support/EzLinkImage.dart';
-export 'src/classes/screen-reader-support/EzNewLine.dart';
-export 'src/classes/screen-reader-support/EzPlainText.dart';
-export 'src/classes/screen-reader-support/EzRichText.dart';
+export 'src/classes/screen_reader_support/EzImage.dart';
+export 'src/classes/screen_reader_support/EzInlineLink.dart';
+export 'src/classes/screen_reader_support/EzLink.dart';
+export 'src/classes/screen_reader_support/EzLinkImage.dart';
+export 'src/classes/screen_reader_support/EzNewLine.dart';
+export 'src/classes/screen_reader_support/EzPlainText.dart';
+export 'src/classes/screen_reader_support/EzRichText.dart';
 
 // User customization
-export 'src/classes/user-customization/EzColorSetting.dart';
-export 'src/classes/user-customization/EzConfig.dart';
-export 'src/classes/user-customization/EzDominantHandSwitch.dart';
-export 'src/classes/user-customization/EzFontSetting.dart';
-export 'src/classes/user-customization/EzImageSetting.dart';
-export 'src/classes/user-customization/EzLocaleSetting.dart';
-export 'src/classes/user-customization/EzResetButton.dart';
-export 'src/classes/user-customization/EzSliderSetting.dart';
-export 'src/classes/user-customization/EzThemeModeSwitch.dart';
+export 'src/classes/user_customization/EzColorSetting.dart';
+export 'src/classes/user_customization/EzConfig.dart';
+export 'src/classes/user_customization/EzDominantHandSwitch.dart';
+export 'src/classes/user_customization/EzFontSetting.dart';
+export 'src/classes/user_customization/EzImageSetting.dart';
+export 'src/classes/user_customization/EzLocaleSetting.dart';
+export 'src/classes/user_customization/EzResetButton.dart';
+export 'src/classes/user_customization/slider_setting.dart';
+export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
 

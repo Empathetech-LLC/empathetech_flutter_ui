@@ -30,17 +30,17 @@ class EzSliderSetting extends StatefulWidget {
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
   const EzSliderSetting({
-    Key? key,
+    super.key,
     required this.prefsKey,
     required this.type,
     required this.min,
     required this.max,
     required this.steps,
     required this.decimals,
-  }) : super(key: key);
+  });
 
   @override
-  _SliderSettingState createState() => _SliderSettingState();
+  State<EzSliderSetting> createState() => _SliderSettingState();
 }
 
 class _SliderSettingState extends State<EzSliderSetting> {
@@ -49,8 +49,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
   late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
   late double currValue = EzConfig.get(widget.prefsKey);
 
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  final double space = EzConfig.get(spacingKey);
+  late final EzSpacer _spacer = EzSpacer(space);
 
   late final String _label = sstName(context, widget.type);
 
@@ -58,20 +58,20 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Return the preview Widget(s) for the passed [SliderSettingType]
   List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
-    String currLabel =
-        "${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}";
+    final String currLabel =
+        '${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
 
     switch (widget.type) {
       // Margin
       case SliderSettingType.margin:
-        final double previewHeight = 160.0;
-        final double previewWidth = 90.0;
+        const double previewHeight = 160.0;
+        const double previewWidth = 90.0;
 
-        double marginScale = previewWidth / widthOf(context);
-        double liveMargin = currValue * marginScale;
+        final double marginScale = previewWidth / widthOf(context);
+        final double liveMargin = currValue * marginScale;
 
-        return [
-          _buttonSpacer,
+        return <Widget>[
+          _spacer,
 
           // Live preview && label
           Row(
@@ -84,7 +84,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
                 style: style,
                 textAlign: TextAlign.center,
               ),
-              EzSpacer.row(buttonSpace * 2),
+              EzSpacer.row(space * 2),
 
               // Preview
               Container(
@@ -98,13 +98,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ),
             ],
           ),
-          _buttonSpacer,
+          _spacer,
         ];
 
       // Padding
       case SliderSettingType.padding:
-        return [
-          _buttonSpacer,
+        return <Widget>[
+          _spacer,
 
           // Live label && preview
           Row(
@@ -113,30 +113,30 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton(
+                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                    ),
                 onPressed: doNothing,
                 child: Text(EFUILang.of(context)!.gCurrently),
+              ),
+              EzSpacer.row(space),
+              ElevatedButton(
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                       padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      shape: const MaterialStatePropertyAll(CircleBorder()),
                     ),
-              ),
-              EzSpacer.row(buttonSpace),
-              ElevatedButton(
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
-                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
-                      shape: MaterialStatePropertyAll(const CircleBorder()),
-                    ),
               ),
             ],
           ),
 
-          _buttonSpacer,
+          _spacer,
         ];
 
       // Button spacing
       case SliderSettingType.buttonSpacing:
-        return [
+        return <Widget>[
           // Preview 1
           EzSpacer(currValue),
 
@@ -222,7 +222,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
         ),
       ),
-      _buttonSpacer,
+      _spacer,
 
       // Reset button
       ElevatedButton.icon(
@@ -237,7 +237,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
         ),
       ),
-      _buttonSpacer,
+      _spacer,
     ]);
 
     return toReturn;

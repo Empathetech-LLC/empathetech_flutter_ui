@@ -267,8 +267,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (BuildContext context, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
-              EFUILang.of(context)!
-                  .isDialogTitle(widget.dialogTitle ?? widget.label),
+              EFUILang.of(context)!.isDialogTitle(widget.dialogTitle ?? widget.label),
               textAlign: TextAlign.center,
             ),
             contents: _sourceOptions(dialogState, context),
@@ -344,16 +343,14 @@ class _ImageSettingState extends State<EzImageSetting> {
               child: (currPath == null || currPath == noImageValue)
                   ? Icon(PlatformIcons(context).clear)
                   : null,
-              foregroundImage: (currPath == null || currPath == noImageValue)
-                  ? null
-                  : provideImage(currPath!),
+              foregroundImage:
+                  (currPath == null || currPath == noImageValue) ? null : provideImage(currPath!),
               radius: padding * 2,
             ),
           ),
           label: Text(widget.label, textAlign: TextAlign.center),
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                padding:
-                    MaterialStatePropertyAll(EdgeInsets.all(padding * 0.75)),
+                padding: MaterialStatePropertyAll(EdgeInsets.all(padding * 0.75)),
                 foregroundColor: MaterialStatePropertyAll(
                   Theme.of(context).colorScheme.onSurface,
                 ),
