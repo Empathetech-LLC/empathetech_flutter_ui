@@ -27,7 +27,7 @@ export 'src/classes/responsive_design/EzSwapScaffold.dart';
 export 'src/classes/responsive_design/EzTransitions.dart';
 
 // Screen reader support
-export 'src/classes/screen_reader_support/EzImage.dart';
+export 'src/classes/screen_reader_support/image.dart';
 export 'src/classes/screen_reader_support/EzInlineLink.dart';
 export 'src/classes/screen_reader_support/EzLink.dart';
 export 'src/classes/screen_reader_support/EzLinkImage.dart';
