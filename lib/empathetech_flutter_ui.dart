@@ -41,7 +41,7 @@ export 'src/classes/user_customization/EzConfig.dart';
 export 'src/classes/user_customization/EzDominantHandSwitch.dart';
 export 'src/classes/user_customization/EzFontSetting.dart';
 export 'src/classes/user_customization/EzImageSetting.dart';
-export 'src/classes/user_customization/EzLocaleSetting.dart';
+export 'src/classes/user_customization/locale_setting.dart';
 export 'src/classes/user_customization/reset_button.dart';
 export 'src/classes/user_customization/slider_setting.dart';
 export 'src/classes/user_customization/theme_mode_switch.dart';
@@ -63,7 +63,6 @@ export 'src/functions/aliases.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/images.dart';
-export 'src/functions/navigators.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
