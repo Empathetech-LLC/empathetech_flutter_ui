@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLinkImage extends StatefulWidget {
-  final Key? key;
   final ImageProvider<Object> image;
 
   /// Message for screen readers
@@ -49,7 +48,7 @@ class EzLinkImage extends StatefulWidget {
   /// https://m3.material.io/foundations/interaction/states/state-layers
   /// The [shadows] can be overridden
   const EzLinkImage({
-    this.key,
+    super.key,
     required this.image,
     required this.semanticLabel,
     required this.tooltip,
@@ -72,12 +71,11 @@ class EzLinkImage extends StatefulWidget {
     this.gaplessPlayback = false,
     this.isAntiAlias = false,
     this.filterQuality = FilterQuality.low,
-  })  : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.'),
-        super(key: key);
+  }) : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.');
 
   @override
-  _EzLinkImageState createState() => _EzLinkImageState();
+  State<EzLinkImage> createState() => _EzLinkImageState();
 }
 
 class _EzLinkImageState extends State<EzLinkImage> {
@@ -86,7 +84,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
   bool _shadow = false;
 
   late final List<BoxShadow> _shadows = widget.shadows ??
-      [
+      <BoxShadow>[
         BoxShadow(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.10),
         ),
@@ -114,7 +112,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
-            onFocusChange: (hasFocus) => _showShadow(hasFocus),
+            onFocusChange: (bool hasFocus) => _showShadow(hasFocus),
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               onEnter: (_) => _showShadow(true),
@@ -122,7 +120,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
               child: GestureDetector(
                 onTap: widget.onTap ?? () => launchUrl(widget.url!),
                 child: Container(
-                  decoration: BoxDecoration(boxShadow: _shadow ? _shadows : []),
+                  decoration: BoxDecoration(boxShadow: _shadow ? _shadows : <BoxShadow>[]),
                   child: Image(
                     image: widget.image,
                     frameBuilder: widget.frameBuilder,

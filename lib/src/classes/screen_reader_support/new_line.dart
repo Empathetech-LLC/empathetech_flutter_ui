@@ -14,10 +14,11 @@ class EzNewLine extends StatelessWidget {
   final TextScaler? textScaler;
   final Color? selectionColor;
 
-  /// [Text] wrapper with an empty string for easily creating new lines
-  /// In the passed [style]
+  /// [Text] wrapper with an empty string for easily creating new lines in the passed [style]
+  /// Ignored by semantics tree
   const EzNewLine(
     this.style, {
+    super.key,
     this.textAlign,
     this.textDirection,
     this.softWrap,
@@ -30,7 +31,7 @@ class EzNewLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExcludeSemantics(
       child: Text(
-        "",
+        '',
         style: style,
         textAlign: textAlign,
         textDirection: textDirection,
