@@ -2,15 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.1.0] - 2024-01-20
+## [5.1.0] - 2024-02-XX
 ### Updated
 - Jenkins pipeline to use external libraries
 - File organization
 - EzAppProvider parameters (non-breaking)
+- Lint rules
+  - Audited code according to new rules
+- Color settings config key strategy
 
 ### Removed
 - TextSpacingKey && associated Widgets
   - EzNewLine is a better strategy
+
+### Added
+- Full text theme controls
 
 ## [5.0.1] - 2024-01-06
 ### Updated
