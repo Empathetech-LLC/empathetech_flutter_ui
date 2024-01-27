@@ -15,10 +15,10 @@ class EzLocaleSetting extends StatefulWidget {
   final List<Locale>? locales;
 
   /// Standardized tool for updating the current [Locale]
-  const EzLocaleSetting({Key? key, this.locales}) : super(key: key);
+  const EzLocaleSetting({super.key, this.locales});
 
   @override
-  _LocaleSettingState createState() => _LocaleSettingState();
+  State<EzLocaleSetting> createState() => _LocaleSettingState();
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
@@ -26,16 +26,20 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late Locale currLocale = Localizations.localeOf(context);
 
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
   // Gather the list items //
 
   CountryFlag _flag(Locale locale) {
     final Locale flagLocale = locale;
 
-    final double flagHeight = MediaQuery.textScalerOf(context)
-        .scale(Theme.of(context).elevatedButtonTheme.style!.textStyle!.resolve({})!.fontSize!);
+    final double flagHeight = MediaQuery.textScalerOf(context).scale(
+      Theme.of(context)
+          .elevatedButtonTheme
+          .style!
+          .textStyle!
+          .resolve(<MaterialState>{})!.fontSize!,
+    );
     final double flagWidth = flagHeight * 2;
 
     return (flagLocale.countryCode == null)
@@ -53,24 +57,24 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   /// Builds an [EzAlertDialog] with [Locale]s mapped to a list of [ElevatedButton]s
   Future<dynamic> _chooseLocale(BuildContext context) {
-    final List<Locale> _locales = (widget.locales == null)
+    final List<Locale> locales = (widget.locales == null)
         ? EFUILang.supportedLocales
         : EFUILang.supportedLocales + widget.locales!;
 
-    List<Widget> buttons = [];
+    final List<Widget> buttons = <Widget>[];
 
-    _locales.forEach((Locale locale) {
-      List<String> localeData = [locale.languageCode];
+    for (final Locale locale in locales) {
+      final List<String> localeData = <String>[locale.languageCode];
       if (locale.countryCode != null) localeData.add(locale.countryCode!);
 
-      buttons.addAll([
+      buttons.addAll(<Widget>[
         ElevatedButton.icon(
           onPressed: () {
             EzConfig.setStringList(localeKey, localeData);
             setState(() {
               currLocale = locale;
             });
-            popScreen(context: context, result: locale);
+            Navigator.of(context).pop(locale);
           },
           icon: _flag(locale),
           label: Text(
@@ -78,13 +82,13 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             textAlign: TextAlign.center,
           ),
         ),
-        _buttonSpacer,
+        spacer,
       ]);
-    });
+    }
 
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzAlertDialog(
+      builder: (BuildContext context) => EzAlertDialog(
         title: Text(
           EFUILang.of(context)!.ssLanguages,
           textAlign: TextAlign.center,
