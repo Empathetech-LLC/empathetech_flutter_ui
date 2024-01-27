@@ -62,6 +62,38 @@ class _SliderSettingState extends State<EzSliderSetting> {
         '${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
 
     switch (widget.type) {
+      // Text settings //
+
+      // Font size
+      case SliderSettingType.fontSize:
+        return <Widget>[Container()];
+
+      // Font weight
+      case SliderSettingType.fontWeight:
+        return <Widget>[Container()];
+
+      // Font style
+      case SliderSettingType.fontStyle:
+        return <Widget>[Container()];
+
+      // Letter spacing
+      case SliderSettingType.letterSpacing:
+        return <Widget>[Container()];
+
+      // Word spacing
+      case SliderSettingType.wordSpacing:
+        return <Widget>[Container()];
+
+      // Font height
+      case SliderSettingType.fontHeight:
+        return <Widget>[Container()];
+
+      // Font decoration
+      case SliderSettingType.fontDecoration:
+        return <Widget>[Container()];
+
+      // Layout settings //
+
       // Margin
       case SliderSettingType.margin:
         const double previewHeight = 160.0;
@@ -77,7 +109,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               // Label
               Text(
                 currLabel,
@@ -123,7 +155,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ElevatedButton(
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                       padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
-                      shape: const MaterialStatePropertyAll(CircleBorder()),
+                      shape: const MaterialStatePropertyAll<OutlinedBorder>(CircleBorder()),
                     ),
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
@@ -134,8 +166,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           _spacer,
         ];
 
-      // Button spacing
-      case SliderSettingType.buttonSpacing:
+      // Spacing
+      case SliderSettingType.spacing:
         return <Widget>[
           // Preview 1
           EzSpacer(currValue),
@@ -159,9 +191,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
     required StateSetter modalSheetState,
     required TextStyle? style,
   }) {
-    // Gather preview widgets//
-
-    List<Widget> toReturn = [
+    return <Widget>[
+      // Preview
       Semantics(
         button: false,
         readOnly: true,
@@ -173,7 +204,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               EzSpacer(EzConfig.get(marginKey)),
               Text(
                 _label,
@@ -185,14 +216,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
           ),
         ),
       ),
-    ];
 
-    // Add slider && reset button //
-
-    toReturn.addAll([
       // Slider
       ConstrainedBox(
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           maxWidth: 700, // Chosen via visual inspection
         ),
         child: Slider(
@@ -234,13 +261,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
         },
         icon: Icon(PlatformIcons(context).refresh),
         label: Text(
-          "${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}",
+          '${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}',
         ),
       ),
       _spacer,
-    ]);
-
-    return toReturn;
+    ];
   }
 
   // Return the build //
@@ -250,7 +275,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
     return ElevatedButton.icon(
       onPressed: () => showModalBottomSheet(
         context: context,
-        builder: (context) => StatefulBuilder(
+        builder: (BuildContext context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter modalSheetState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
