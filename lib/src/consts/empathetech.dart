@@ -8,24 +8,24 @@ import '../../empathetech_flutter_ui.dart';
 // Brand names //
 
 /// Short == EFUI
-const String efuiS = "EFUI";
+const String efuiS = 'EFUI';
 
 /// Long == Empathetech Flutter UI
-const String efuiL = "Empathetech Flutter UI";
+const String efuiL = 'Empathetech Flutter UI';
 
 /// Empathetic Flutter UI
-const String efuiLFix = "Empathetic Flutter UI";
+const String efuiLFix = 'Empathetic Flutter UI';
 
 // Brand Colors //
 
 /// 0xFF20DAA5
-const int EmpathEucalyptusHex = 0xFF20DAA5;
+const int empathEucalyptusHex = 0xFF20DAA5;
 
 /// 0xFFA520DA
-const int EmpathPurpleHex = 0xFFA520DA;
+const int empathPurpleHex = 0xFFA520DA;
 
 /// 0xFFDAA520
-const int EmpathGoldenrodHex = 0xFFDAA520;
+const int empathGoldenrodHex = 0xFFDAA520;
 
 /// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
@@ -46,59 +46,59 @@ const int transparentHex = 0x00000000;
 
 /// If you want to lend a hand
 /// community@empathetech.net
-const String EmpathetechCommunity = 'community@empathetech.net';
+const String empathCommunity = 'community@empathetech.net';
 
 /// If you need a hand
 /// support@empathetech.net
-const String EmpathetechSupport = 'support@empathetech.net';
+const String empathSupport = 'support@empathetech.net';
 
 /// If you need two hands
 /// admin@empathetech.net
-const String EmpathetechAdmin = 'admin@empathetech.net';
+const String empathAdmin = 'admin@empathetech.net';
 
 /// If you want to stay informed
 /// http://eepurl.com/iHe_I2
-const String EmpathetechNewsletter = 'http://eepurl.com/iHe_I2';
+const String empathNewsletter = 'http://eepurl.com/iHe_I2';
 
 /// If you want to get in touch
 /// https://linkedin.com/company/empathetech-llc
-const String EmpathetechLinkedIn = "https://linkedin.com/company/empathetech-llc";
+const String empathLinkedIn = 'https://linkedin.com/company/empathetech-llc';
 
 /// If you want to get in touch
 /// https://mastodon.social/@empathetech
-const String EmpathetechMastodon = "https://mastodon.social/@empathetech";
+const String empathMastodon = 'https://mastodon.social/@empathetech';
 
 /// Where the magic happens
 /// https://github.com/Empathetech-LLC
-const String EmpathetechGitHub = 'https://github.com/Empathetech-LLC';
+const String empathGitHub = 'https://github.com/Empathetech-LLC';
 
 /// One of us, one of us, one of us!
 /// https://stats.foldingathome.org/team/1063265
-const String EmpathetechFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
+const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
 /// If you want to show some love
 /// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
-const String EmpathetechPayPal = 'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
+const String empathPayPal = 'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
 
 /// If you want to show some love
 /// https://venmo.com/empathetech
-const String EmpathetechVenmo = 'https://venmo.com/empathetech';
+const String empathVenmo = 'https://venmo.com/empathetech';
 
 /// If you want to show some love
 /// https://cash.app/\$empathetech
-const String EmpathetechCashApp = 'https://cash.app/\$empathetech';
+const String empathCashApp = 'https://cash.app/\$empathetech';
 
 /// If you want to show some love
 /// https://patreon.com/empathetech
-const String EmpathetechPatreon = "https://patreon.com/empathetech";
+const String empathPatreon = 'https://patreon.com/empathetech';
 
 /// If you want to show some love
 /// https://www.buymeacoffee.com/empathetech
-const String EmpathetechCoffee = 'https://www.buymeacoffee.com/empathetech';
+const String empathCoffee = 'https://www.buymeacoffee.com/empathetech';
 
 /// If you want to show some love
 /// https://ko-fi.com/empathetech
-const String EmpathetechKofi = "https://ko-fi.com/empathetech";
+const String empathKofi = 'https://ko-fi.com/empathetech';
 
 // Documentation links //
 
@@ -112,51 +112,83 @@ const String understandingLayout =
 // EzConfig base //
 
 /// Empathetech's default configuration for [EzConfig]
-const Map<String, dynamic> empathetechConfig = {
+const Map<String, dynamic> empathetechConfig = <String, dynamic>{
+  // Text settings //
+
+  '$display$fontFamilyKey': roboto,
+  '$display$fontSizeKey': 57,
+  '$display$fontWeightKey': normalWeight,
+  '$display$fontStyleKey': normalStyle,
+  '$display$letterSpacingKey': 0.0,
+  '$display$wordSpacingKey': 1.0,
+  '$display$fontHeightKey': 1.5,
+  '$display$fontDecorationKey': noDecoration,
+  '$headline$fontFamilyKey': roboto,
+  '$headline$fontSizeKey': 32,
+  '$headline$fontWeightKey': normalWeight,
+  '$headline$fontStyleKey': normalStyle,
+  '$headline$letterSpacingKey': 0.0,
+  '$headline$wordSpacingKey': 1.0,
+  '$headline$fontHeightKey': 1.5,
+  '$headline$fontDecorationKey': noDecoration,
+  '$title$fontFamilyKey': roboto,
+  '$title$fontSizeKey': 22,
+  '$title$fontWeightKey': normalWeight,
+  '$title$fontStyleKey': normalStyle,
+  '$title$letterSpacingKey': 0.0,
+  '$title$wordSpacingKey': 1.0,
+  '$title$fontHeightKey': 1.5,
+  '$title$fontDecorationKey': noDecoration,
+  '$body$fontFamilyKey': roboto,
+  '$body$fontSizeKey': 16,
+  '$body$fontWeightKey': normalWeight,
+  '$body$fontStyleKey': normalStyle,
+  '$body$letterSpacingKey': 0.0,
+  '$body$wordSpacingKey': 1.0,
+  '$body$fontHeightKey': 1.5,
+  '$body$fontDecorationKey': noDecoration,
+  '$label$fontFamilyKey': roboto,
+  '$label$fontSizeKey': 14,
+  '$label$fontWeightKey': normalWeight,
+  '$label$fontStyleKey': normalStyle,
+  '$label$letterSpacingKey': 0.0,
+  '$label$wordSpacingKey': 1.0,
+  '$label$fontHeightKey': 1.5,
+  '$label$fontDecorationKey': noDecoration,
+
+  // No default image settings //
+
   // Color settings //
 
   // Light
-  lightPrimaryKey: EmpathPurpleHex, // required
-  lightOnPrimaryKey: whiteHex,
-
-  lightSecondaryKey: EmpathGoldenrodHex,
-  lightOnSecondaryKey: blackHex,
-
-  lightTertiaryKey: EmpathEucalyptusHex,
-  lightOnTertiaryKey: blackHex,
-
-  lightBackgroundKey: offWhiteHex,
-  lightOnBackgroundKey: blackHex,
-
-  lightSurfaceKey: whiteHex,
-  lightOnSurfaceKey: blackHex,
-
-  lightSurfaceTintKey: transparentHex,
+  '$light$primaryKey': empathPurpleHex, // required
+  '$light$onPrimaryKey': whiteHex,
+  '$light$secondaryKey': empathGoldenrodHex,
+  '$light$onSecondaryKey': blackHex,
+  '$light$tertiaryKey': empathEucalyptusHex,
+  '$light$onTertiaryKey': blackHex,
+  '$light$backgroundKey': offWhiteHex,
+  '$light$onBackgroundKey': blackHex,
+  '$light$surfaceKey': whiteHex,
+  '$light$onSurfaceKey': blackHex,
+  '$light$surfaceTintKey': transparentHex,
 
   // Dark
-  darkPrimaryKey: EmpathEucalyptusHex, // required
-  darkOnPrimaryKey: blackHex,
+  '$dark$primaryKey': empathEucalyptusHex, // required
+  '$dark$onPrimaryKey': blackHex,
+  '$dark$secondaryKey': empathGoldenrodHex,
+  '$dark$onSecondaryKey': blackHex,
+  '$dark$tertiaryKey': empathPurpleHex,
+  '$dark$onTertiaryKey': whiteHex,
+  '$dark$backgroundKey': offBlackHex,
+  '$dark$onBackgroundKey': whiteHex,
+  '$dark$surfaceKey': blackHex,
+  '$dark$onSurfaceKey': whiteHex,
+  '$dark$surfaceTintKey': transparentHex,
 
-  darkSecondaryKey: EmpathGoldenrodHex,
-  darkOnSecondaryKey: blackHex,
-
-  darkTertiaryKey: EmpathPurpleHex,
-  darkOnTertiaryKey: whiteHex,
-
-  darkBackgroundKey: offBlackHex,
-  darkOnBackgroundKey: whiteHex,
-
-  darkSurfaceKey: blackHex,
-  darkOnSurfaceKey: whiteHex,
-
-  darkSurfaceTintKey: transparentHex,
-
-  // Style settings //
-
-  fontFamilyKey: roboto,
+  // Layout settings //
 
   marginKey: 20.0, // required
   paddingKey: 20.0, // required
-
-  buttonSpacingKey: 20.0, // required
+  spacingKey: 20.0, // required
 };
