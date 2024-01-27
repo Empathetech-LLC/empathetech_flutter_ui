@@ -12,10 +12,6 @@ const String noImageValue = 'noImage';
 
 // Key prefixes //
 
-// Theme
-const String light = 'light';
-const String dark = 'dark';
-
 // Text Style
 const String display = 'display';
 const String headline = 'headline';
@@ -23,8 +19,11 @@ const String title = 'title';
 const String body = 'body';
 const String label = 'label';
 
-// Color scheme
-const String textColorPrefix = 'On';
+// Theme
+const String light = 'light';
+const String dark = 'dark';
+
+final RegExp prefixesRegExp = RegExp('^($display|$headline|$title|$body|$label|$light|$dark)');
 
 // Global settings' keys //
 
@@ -94,7 +93,9 @@ const Map<String, Type> imageKeys = <String, Type>{
 
 // Color settings' keys //
 
-const String primaryKey = 'primary'; // required
+const String textColorPrefix = 'On';
+
+const String primaryKey = 'primary';
 const String onPrimaryKey = 'onPrimary';
 const String primaryContainerKey = 'primaryContainer';
 const String onPrimaryContainerKey = 'onPrimaryContainer';
