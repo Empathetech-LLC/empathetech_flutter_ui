@@ -10,8 +10,6 @@ class EzLink extends StatefulWidget {
   /// Link message
   final String text;
 
-  final Key? key;
-
   final TextStyle? style;
 
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
@@ -41,9 +39,9 @@ class EzLink extends StatefulWidget {
   /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]
   /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
-  EzLink(
+  const EzLink(
     this.text, {
-    this.key,
+    super.key,
     required this.style,
     this.color,
     this.textAlign,
@@ -52,17 +50,15 @@ class EzLink extends StatefulWidget {
     required this.semanticsLabel,
     this.tooltip,
     this.statesController,
-  })  : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.'),
-        super(key: key);
+  }) : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.');
 
   @override
-  _EzLinkState createState() => _EzLinkState();
+  State<EzLink> createState() => _EzLinkState();
 }
 
 class _EzLinkState extends State<EzLink> {
-  late final Color _color =
-      widget.color ?? Theme.of(context).colorScheme.primary;
+  late final Color _color = widget.color ?? Theme.of(context).colorScheme.primary;
 
   late TextStyle _style = widget.style!.copyWith(
     color: _color,
@@ -80,7 +76,7 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = "${widget.text}; ${widget.semanticsLabel}";
+    final String semantics = '${widget.text}; ${widget.semanticsLabel}';
 
     return Tooltip(
       message: widget.tooltip ?? widget.semanticsLabel,
@@ -92,8 +88,8 @@ class _EzLinkState extends State<EzLink> {
           child: TextButton(
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
-            onHover: (isHovering) => _addUnderline(isHovering),
-            onFocusChange: (hasFocus) => _addUnderline(hasFocus),
+            onHover: (bool isHovering) => _addUnderline(isHovering),
+            onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
             child: Text(
               widget.text,
               style: _style,

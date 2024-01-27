@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 
 class EzInlineLink extends WidgetSpan {
   final String text;
-
   final Key? key;
-  final TextStyle? style;
   final Color? color;
   final TextAlign? textAlign;
 
@@ -38,14 +36,18 @@ class EzInlineLink extends WidgetSpan {
   /// Smaller strings can sometimes have issues with text spacing
   EzInlineLink(
     this.text, {
+    super.alignment = PlaceholderAlignment.baseline,
+    super.baseline = TextBaseline.alphabetic,
+    super.style,
+
+    // EzLink
     this.key,
-    this.style,
     this.color,
     this.textAlign,
     this.onTap,
     this.url,
     required this.semanticsLabel,
-    this.textFix,
+    this.textFix, // For screen readers, handled by EzRichText
     this.tooltip,
     this.statesController,
   })  : assert((onTap == null) != (url == null),
@@ -63,8 +65,5 @@ class EzInlineLink extends WidgetSpan {
             tooltip: tooltip,
             statesController: statesController,
           ),
-          alignment: PlaceholderAlignment.baseline,
-          baseline: TextBaseline.alphabetic,
-          style: style,
         );
 }

@@ -28,9 +28,9 @@ export 'src/classes/responsive_design/EzTransitions.dart';
 
 // Screen reader support
 export 'src/classes/screen_reader_support/image.dart';
-export 'src/classes/screen_reader_support/EzInlineLink.dart';
-export 'src/classes/screen_reader_support/EzLink.dart';
+export 'src/classes/screen_reader_support/inline_link.dart';
 export 'src/classes/screen_reader_support/link_image.dart';
+export 'src/classes/screen_reader_support/link.dart';
 export 'src/classes/screen_reader_support/new_line.dart';
 export 'src/classes/screen_reader_support/plain_text.dart';
 export 'src/classes/screen_reader_support/rich_text.dart';
