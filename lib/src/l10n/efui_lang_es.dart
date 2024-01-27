@@ -346,7 +346,7 @@ class EFUILangEs extends EFUILang {
   String get tsResetAll => '¿Restablecer todas las configuraciones de texto?';
 
   @override
-  String get lsPageTitle => 'Configuraciones de estilo';
+  String get lsPageTitle => 'Configuraciones de diseño';
 
   @override
   String get lsMargin => 'Margen';
@@ -358,5 +358,5 @@ class EFUILangEs extends EFUILang {
   String get lsSpacing => 'Espaciado';
 
   @override
-  String get lsResetAll => '¿Restablecer todas las configuraciones de estilo?';
+  String get lsResetAll => '¿Restablecer todas las configuraciones de diseño?';
 }

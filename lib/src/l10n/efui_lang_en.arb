@@ -80,42 +80,31 @@
   "csOnPrimary": "On Primary",
   "csPrimaryContainer": "Primary Container",
   "csOnPrimaryContainer": "On Primary Container",
-
   "csSecondary": "Secondary",
   "csOnSecondary": "On Secondary",
   "csSecondaryContainer": "Secondary Container",
   "csOnSecondaryContainer": "On Secondary Container",
-
   "csTertiary": "Tertiary",
   "csOnTertiary": "On Tertiary",
   "csTertiaryContainer": "Tertiary Container",
   "csOnTertiaryContainer": "On Tertiary Container",
-
   "csError": "Error",
   "csOnError": "On Error",
   "csErrorContainer": "Error Container",
   "csOnErrorContainer": "On Error Container",
-
   "csOutline": "Outline",
   "csOutlineVariant": "Outline Variant",
-
   "csBackground": "Background",
   "csOnBackground": "On Background",
-
   "csSurface": "Surface",
   "csOnSurface": "On Surface",
-
   "csSurfaceVariant": "Surface Variant",
   "csOnSurfaceVariant": "On Surface Variant",
-  
   "csInverseSurface": "Inverse Surface",
   "csOnInverseSurface": "Inverse On Surface",
-
   "csInversePrimary": "Inverse Primary",
-
   "csScrim": "Scrim",
   "csShadow": "Shadow",
-
   "csSurfaceTint": "Surface Tint",
 
   "csPickerTitle": "Pick a color!",

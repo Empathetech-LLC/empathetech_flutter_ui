@@ -80,42 +80,31 @@
   "csOnPrimary": "En Primario",
   "csPrimaryContainer": "Contenedor Primario",
   "csOnPrimaryContainer": "En Contenedor Primario",
-
   "csSecondary": "Secundario",
   "csOnSecondary": "En Secundario",
   "csSecondaryContainer": "Contenedor Secundario",
   "csOnSecondaryContainer": "En Contenedor Secundario",
-
   "csTertiary": "Terciario",
   "csOnTertiary": "En Terciario",
   "csTertiaryContainer": "Contenedor Terciario",
   "csOnTertiaryContainer": "En Contenedor Terciario",
-
   "csError": "Error",
   "csOnError": "En Error",
   "csErrorContainer": "Contenedor de Error",
   "csOnErrorContainer": "En Contenedor de Error",
-
   "csOutline": "Contorno",
   "csOutlineVariant": "Variante de Contorno",
-
   "csBackground": "Fondo",
   "csOnBackground": "En Fondo",
-
   "csSurface": "Superficie",
   "csOnSurface": "En Superficie",
-
   "csSurfaceVariant": "Variante de Superficie",
   "csOnSurfaceVariant": "En Variante de Superficie",
-
   "csInverseSurface": "Superficie Inversa",
   "csOnInverseSurface": "En Superficie Inversa",
-
   "csInversePrimary": "Primario Inversa",
-
   "csScrim": "Telón",
   "csShadow": "Sombra",
-
   "csSurfaceTint": "Tinte de Superficie",
 
   "csPickerTitle": "¡Selecciona un color!",
@@ -150,11 +139,11 @@
   "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
 
   
-  "lsPageTitle": "Configuraciones de estilo",
+  "lsPageTitle": "Configuraciones de diseño",
 
   "lsMargin": "Margen",
   "lsPadding": "Relleno",
   "lsSpacing": "Espaciado",
 
-  "lsResetAll": "¿Restablecer todas las configuraciones de estilo?"
+  "lsResetAll": "¿Restablecer todas las configuraciones de diseño?"
 }
