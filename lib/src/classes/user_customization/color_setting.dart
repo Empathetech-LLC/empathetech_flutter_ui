@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
-  final Key? key;
-
   /// [EzConfig] key whose [Color.value] will be updated
   final String setting;
 
@@ -22,13 +20,13 @@ class EzColorSetting extends StatefulWidget {
   /// Creates a tool for [setting] ColorScheme values via [EzConfig]
   /// When [setting] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
   const EzColorSetting({
-    this.key,
+    super.key,
     required this.setting,
     this.onRemove,
-  }) : super(key: key);
+  });
 
   @override
-  _ColorSettingState createState() => _ColorSettingState();
+  State<EzColorSetting> createState() => _ColorSettingState();
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
@@ -39,9 +37,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       (_prefsValue == null) ? getLiveColor(context, widget.setting) : Color(_prefsValue);
 
   final double padding = EzConfig.get(paddingKey);
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
   // Define button functions //
 
@@ -51,7 +48,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     return ezColorPicker(
       context: context,
       startColor: currColor,
-      onColorChange: (chosenColor) {
+      onColorChange: (Color chosenColor) {
         // Update currColor
         setState(() {
           currColor = chosenColor;
@@ -76,8 +73,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Just open a color picker
       return _openColorPicker(context);
     } else {
-      // "on" (aka text) color //
-      final String backgroundKey = widget.setting.replaceAll(textColorPrefix, "");
+      // 'on' (aka text) color //
+      final String backgroundKey = widget.setting.replaceAll(textColorPrefix, '');
 
       // Find the recommended contrast color for the background
       final int? backgroundColorValue = EzConfig.get(backgroundKey);
@@ -90,7 +87,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Define action button parameters
       final String denyMsg = EFUILang.of(context)!.csUseCustom;
 
-      final void Function() onConfirm = () {
+      void onConfirm() {
         // Update the user's setting
         EzConfig.setInt(widget.setting, recommended);
 
@@ -99,22 +96,22 @@ class _ColorSettingState extends State<EzColorSetting> {
         });
 
         popScreen(context: context, result: recommended);
-      };
+      }
 
-      void Function() onDeny = () async {
-        dynamic chosen = await _openColorPicker(context);
+      void onDeny() async {
+        final dynamic chosen = await _openColorPicker(context);
         popScreen(context: context, result: chosen);
-      };
+      }
 
       return showPlatformDialog(
         context: context,
-        builder: (context) => EzAlertDialog(
+        builder: (BuildContext context) => EzAlertDialog(
           title: Text(
             EFUILang.of(context)!.csRecommended,
             textAlign: TextAlign.center,
           ),
           // Recommended color preview
-          contents: [
+          contents: <Widget>[
             Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -154,11 +151,11 @@ class _ColorSettingState extends State<EzColorSetting> {
 
     if (resetValue == null) {
       EzConfig.remove(widget.setting);
-      return Future.value(true);
+      return Future<bool>.value(true);
     } else {
       final Color resetColor = Color(resetValue);
 
-      final void Function() onConfirm = () {
+      void onConfirm() {
         // Remove the user's setting and reset the current state
         EzConfig.remove(widget.setting);
 
@@ -167,19 +164,19 @@ class _ColorSettingState extends State<EzColorSetting> {
         });
 
         popScreen(context: context, result: resetColor);
-      };
+      }
 
-      final void Function() onDeny = () => popScreen(context: context);
+      void onDeny() => popScreen(context: context);
 
       return showPlatformDialog(
         context: context,
-        builder: (context) => EzAlertDialog(
+        builder: (BuildContext context) => EzAlertDialog(
           title: Text(
             EFUILang.of(context)!.csResetTo,
             textAlign: TextAlign.center,
           ),
           // Reset color preview
-          contents: [
+          contents: <Widget>[
             Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -217,25 +214,25 @@ class _ColorSettingState extends State<EzColorSetting> {
     } else {
       return showPlatformDialog(
           context: context,
-          builder: (context) {
+          builder: (BuildContext context) {
             return EzAlertDialog(
               title: Text(
                 EFUILang.of(context)!.gOptions,
                 textAlign: TextAlign.center,
               ),
-              contents: [
+              contents: <Widget>[
                 // Remove from list
                 ElevatedButton.icon(
                   onPressed: widget.onRemove!,
                   icon: Icon(PlatformIcons(context).delete),
                   label: Text(EFUILang.of(context)!.csRemove),
                 ),
-                _buttonSpacer,
+                spacer,
 
                 // Reset to default
                 ElevatedButton.icon(
                   onPressed: () async {
-                    final resetResponse = await _reset(context);
+                    final dynamic resetResponse = await _reset(context);
                     popScreen(context: context, result: resetResponse);
                   },
                   icon: Icon(PlatformIcons(context).refresh),

@@ -36,7 +36,7 @@ export 'src/classes/screen_reader_support/EzPlainText.dart';
 export 'src/classes/screen_reader_support/EzRichText.dart';
 
 // User customization
-export 'src/classes/user_customization/EzColorSetting.dart';
+export 'src/classes/user_customization/color_setting.dart';
 export 'src/classes/user_customization/EzConfig.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
