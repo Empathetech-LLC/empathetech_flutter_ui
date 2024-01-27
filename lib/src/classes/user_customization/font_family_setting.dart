@@ -12,10 +12,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class EzFontSetting extends StatefulWidget {
   /// Standardized tool for updating the [fontFamilyKey] in [EzConfig]
   /// [EzFontSetting] options are built from [googleStyles]
-  const EzFontSetting({Key? key}) : super(key: key);
+  const EzFontSetting({super.key});
 
   @override
-  _FontFamilySettingState createState() => _FontFamilySettingState();
+  State<EzFontSetting> createState() => _FontFamilySettingState();
 }
 
 class _FontFamilySettingState extends State<EzFontSetting> {
@@ -24,17 +24,16 @@ class _FontFamilySettingState extends State<EzFontSetting> {
   final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
   String? currFontFamily = EzConfig.get(fontFamilyKey);
 
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
+  final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
   // Define button functions //
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
   Future<dynamic> _chooseGoogleFont(BuildContext context) {
-    List<Widget> buttons = [];
+    final List<Widget> buttons = <Widget>[];
 
     googleStyles.forEach((String font, TextStyle style) {
-      buttons.addAll([
+      buttons.addAll(<Widget>[
         ElevatedButton(
           onPressed: () {
             EzConfig.setString(fontFamilyKey, font);
@@ -51,15 +50,15 @@ class _FontFamilySettingState extends State<EzFontSetting> {
             style: style,
           ),
         ),
-        _buttonSpacer,
+        spacer,
       ]);
     });
 
     return showPlatformDialog(
       context: context,
-      builder: (context) => EzAlertDialog(
+      builder: (BuildContext context) => EzAlertDialog(
         title: Text(
-          EFUILang.of(context)!.stsFonts,
+          EFUILang.of(context)!.tsFonts,
           textAlign: TextAlign.center,
         ),
         // Remove the trailing button spacer
@@ -76,7 +75,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       onPressed: () => _chooseGoogleFont(context),
       icon: const Icon(LineIcons.font),
       label: Text(
-        EFUILang.of(context)!.stsTextFont,
+        EFUILang.of(context)!.tsFontFamily,
         style: TextStyle(fontFamily: currFontFamily),
       ),
     );
