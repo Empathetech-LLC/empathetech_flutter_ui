@@ -42,14 +42,14 @@ export 'src/classes/user_customization/EzDominantHandSwitch.dart';
 export 'src/classes/user_customization/EzFontSetting.dart';
 export 'src/classes/user_customization/EzImageSetting.dart';
 export 'src/classes/user_customization/EzLocaleSetting.dart';
-export 'src/classes/user_customization/EzResetButton.dart';
+export 'src/classes/user_customization/reset_button.dart';
 export 'src/classes/user_customization/slider_setting.dart';
 export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
 
 export 'src/consts/empathetech.dart';
-export 'src/consts/ez_config_keys.dart';
+export 'src/consts/config_keys.dart';
 export 'src/consts/google_fonts.dart';
 
 // Enums //
