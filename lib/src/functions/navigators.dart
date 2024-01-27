@@ -24,7 +24,7 @@ Future<dynamic> pushScreen({
   return Navigator.of(context).push(
     platformPageRoute(
       context: context,
-      builder: (context) => screen,
+      builder: (BuildContext context) => screen,
     ),
   );
 }
@@ -39,7 +39,7 @@ Future<dynamic> popAndPushScreen({
   return Navigator.of(context).push(
     platformPageRoute(
       context: context,
-      builder: (context) => screen,
+      builder: (BuildContext context) => screen,
     ),
   );
 }
@@ -52,7 +52,7 @@ Future<dynamic> replaceScreen({
   return Navigator.of(context).pushReplacement(
     platformPageRoute(
       context: context,
-      builder: (context) => screen,
+      builder: (BuildContext context) => screen,
     ),
   );
 }

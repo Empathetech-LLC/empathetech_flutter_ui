@@ -19,12 +19,12 @@ Future<dynamic> logAlert({
   log(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzAlertDialog(
+    builder: (BuildContext context) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
-      contents: [
+      contents: <Widget>[
         Text(
           message,
           textAlign: TextAlign.center,
@@ -47,12 +47,12 @@ Future<dynamic> ezColorPicker({
 }) {
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzAlertDialog(
+    builder: (BuildContext context) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.csPickerTitle,
         textAlign: TextAlign.center,
       ),
-      contents: [
+      contents: <Widget>[
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,

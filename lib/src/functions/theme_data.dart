@@ -88,7 +88,7 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Cards
-    cardTheme: CardTheme(margin: EdgeInsets.zero),
+    cardTheme: const CardTheme(margin: EdgeInsets.zero),
 
     // Dialogs
     dialogTheme: DialogTheme(

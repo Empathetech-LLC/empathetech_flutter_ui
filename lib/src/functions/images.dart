@@ -32,25 +32,19 @@ Future<String?> changeImage({
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
-      logAlert(
-        context: context,
-        message: EFUILang.of(context)!.isGetFailed,
-      );
       return null;
     }
 
     // Build the path
     final Directory directory = await getApplicationDocumentsDirectory();
     final String imageName = basename(picked.path);
-    final image = File('${directory.path}/$imageName');
+    final File image = File('${directory.path}/$imageName');
 
     // Save the new image
     File(picked.path).copy(image.path);
     EzConfig.setString(prefsPath, image.path);
     return image.path;
-  } on Exception catch (e) {
-    final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-    logAlert(context: context, message: errorMsg);
+  } on Exception catch (_) {
     return null;
   }
 }

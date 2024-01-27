@@ -125,7 +125,7 @@ bool isUrl(String text) {
 
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
 Size measureText(
-  text, {
+  String text, {
   required TextStyle? style,
   required BuildContext context,
 }) {
