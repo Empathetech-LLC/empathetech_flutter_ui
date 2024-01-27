@@ -39,11 +39,11 @@ export 'src/classes/screen_reader_support/EzRichText.dart';
 export 'src/classes/user_customization/EzColorSetting.dart';
 export 'src/classes/user_customization/EzConfig.dart';
 export 'src/classes/user_customization/EzDominantHandSwitch.dart';
-export 'src/classes/user_customization/EzFontSetting.dart';
+export 'src/classes/user_customization/font_family_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';
 export 'src/classes/user_customization/reset_button.dart';
-export 'src/classes/user_customization/slider_setting.dart';
+export 'src/classes/user_customization/slider_settings.dart';
 export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
