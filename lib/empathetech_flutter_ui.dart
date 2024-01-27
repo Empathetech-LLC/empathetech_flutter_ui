@@ -21,7 +21,7 @@ export 'src/classes/platform_availability/EzAlertDialog.dart';
 export 'src/classes/platform_availability/EzAppProvider.dart';
 
 // Responsive design
-export 'src/classes/responsive_design/EzRowCol.dart';
+export 'src/classes/responsive_design/row_col.dart';
 export 'src/classes/responsive_design/scroll_view.dart';
 export 'src/classes/responsive_design/swap_scaffold.dart';
 export 'src/classes/responsive_design/transitions.dart';
