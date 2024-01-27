@@ -49,13 +49,13 @@ export 'src/classes/user-customization/EzThemeModeSwitch.dart';
 // Constants //
 
 export 'src/consts/empathetech.dart';
-export 'src/consts/EzConfigKeys.dart';
-export 'src/consts/googleFonts.dart';
+export 'src/consts/ez_config_keys.dart';
+export 'src/consts/google_fonts.dart';
 
 // Enums //
 
-export 'src/enums/Hand.dart';
-export 'src/enums/SliderSettingType.dart';
+export 'src/enums/hand.dart';
+export 'src/enums/slider_setting_type.dart';
 
 // Functions //
 
@@ -65,7 +65,7 @@ export 'src/functions/dialogs.dart';
 export 'src/functions/images.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/text.dart';
-export 'src/functions/themeData.dart';
+export 'src/functions/theme_data.dart';
 
 // l10n //
 
