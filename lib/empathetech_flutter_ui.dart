@@ -32,8 +32,8 @@ export 'src/classes/screen_reader_support/EzInlineLink.dart';
 export 'src/classes/screen_reader_support/EzLink.dart';
 export 'src/classes/screen_reader_support/EzLinkImage.dart';
 export 'src/classes/screen_reader_support/EzNewLine.dart';
-export 'src/classes/screen_reader_support/EzPlainText.dart';
-export 'src/classes/screen_reader_support/EzRichText.dart';
+export 'src/classes/screen_reader_support/plain_text.dart';
+export 'src/classes/screen_reader_support/rich_text.dart';
 
 // User customization
 export 'src/classes/user_customization/color_setting.dart';
@@ -48,8 +48,8 @@ export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
 
-export 'src/consts/empathetech.dart';
 export 'src/consts/config_keys.dart';
+export 'src/consts/empathetech.dart';
 export 'src/consts/google_fonts.dart';
 
 // Enums //
