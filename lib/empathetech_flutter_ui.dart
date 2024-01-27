@@ -63,6 +63,7 @@ export 'src/functions/aliases.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/images.dart';
+export 'src/functions/navigators.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
