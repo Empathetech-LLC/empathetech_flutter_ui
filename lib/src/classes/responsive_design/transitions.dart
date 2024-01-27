@@ -11,11 +11,11 @@ import 'package:flutter/foundation.dart';
 class EzTransitions extends PageTransitionsTheme {
   @override
   Widget buildTransitions<T>(
-    route,
-    context,
-    animation,
-    secondaryAnimation,
-    child,
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
   ) {
     if (kIsWeb) {
       return child;
