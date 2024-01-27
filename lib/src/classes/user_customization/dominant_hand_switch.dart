@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
   /// Standardized tool for updating [EzConfig] dominantHand
-  const EzDominantHandSwitch({Key? key}) : super(key: key);
+  const EzDominantHandSwitch({super.key});
 
   @override
-  _HandSwitchState createState() => _HandSwitchState();
+  State<EzDominantHandSwitch> createState() => _HandSwitchState();
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
@@ -29,19 +29,19 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     final String label = EFUILang.of(context)!.ssDominantHand;
 
-    final List<DropdownMenuItem<Hand>> items = [
+    final List<DropdownMenuItem<Hand>> items = <DropdownMenuItem<Hand>>[
       DropdownMenuItem<Hand>(
-        child: Text(handName(context, Hand.right)),
         value: Hand.right,
+        child: Text(handName(context, Hand.right)),
       ),
       DropdownMenuItem<Hand>(
-        child: Text(handName(context, Hand.left)),
         value: Hand.left,
+        child: Text(handName(context, Hand.left)),
       ),
     ];
 
     // Define children separately to allow for live reversing
-    List<Widget> children = [
+    final List<Widget> children = <Widget>[
       // Label
       Text(
         label,
