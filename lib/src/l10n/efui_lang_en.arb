@@ -127,7 +127,6 @@
   "tsPageTitle": "Text settings",
 
   "tsFontFamily": "Font family",
-  "tsFonts": "Fonts",
   "tsFontSize": "Size",
   "tsFontWeight": "Weight",
   "tsFontStyle": "Style",
@@ -135,6 +134,8 @@
   "tsWordSpacing": "Word spacing",
   "tsFontHeight": "Height",
   "tsFontDecoration": "Decoration",
+
+  "tsFonts": "Fonts",
 
   "tsResetAll": "Reset all text settings?",
   

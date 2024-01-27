@@ -317,9 +317,6 @@ class EFUILangEn extends EFUILang {
   String get tsFontFamily => 'Font family';
 
   @override
-  String get tsFonts => 'Fonts';
-
-  @override
   String get tsFontSize => 'Size';
 
   @override
@@ -339,6 +336,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsFontDecoration => 'Decoration';
+
+  @override
+  String get tsFonts => 'Fonts';
 
   @override
   String get tsResetAll => 'Reset all text settings?';

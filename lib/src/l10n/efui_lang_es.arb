@@ -127,7 +127,6 @@
   "tsPageTitle": "Configuraciones de texto",
 
   "tsFontFamily": "Familia de fuentes",
-  "tsFonts": "Fuentes",
   "tsFontSize": "Tamaño",
   "tsFontWeight": "Peso",
   "tsFontStyle": "Estilo",
@@ -135,6 +134,8 @@
   "tsWordSpacing": "Espaciado de palabras",
   "tsFontHeight": "Altura",
   "tsFontDecoration": "Decoración",
+
+  "tsFonts": "Fuentes",
 
   "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
 

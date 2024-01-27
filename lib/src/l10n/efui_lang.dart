@@ -670,12 +670,6 @@ abstract class EFUILang {
   /// **'Font family'**
   String get tsFontFamily;
 
-  /// No description provided for @tsFonts.
-  ///
-  /// In en, this message translates to:
-  /// **'Fonts'**
-  String get tsFonts;
-
   /// No description provided for @tsFontSize.
   ///
   /// In en, this message translates to:
@@ -717,6 +711,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Decoration'**
   String get tsFontDecoration;
+
+  /// No description provided for @tsFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Fonts'**
+  String get tsFonts;
 
   /// No description provided for @tsResetAll.
   ///
