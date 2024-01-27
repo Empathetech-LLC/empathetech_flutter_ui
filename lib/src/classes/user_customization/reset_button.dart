@@ -33,6 +33,7 @@ class EzResetButton extends StatelessWidget {
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   const EzResetButton({
+    super.key,
     this.label,
     this.dialogTitle,
     this.dialogContent,
@@ -44,27 +45,25 @@ class EzResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define the button functions //
 
-    final void Function() _onConfirm = onConfirm ??
+    final void Function() confirm = onConfirm ??
         () {
           EzConfig.removeKeys(allKeys.keys.toSet());
           popScreen(context: context, result: true);
         };
 
-    final void Function() _onDeny = onDeny ?? () => popScreen(context: context);
+    final void Function() deny = onDeny ?? () => popScreen(context: context);
 
     // Define the dialog //
-
-    final String _dialogTitle = dialogTitle ?? EFUILang.of(context)!.ssResetAll;
 
     void resetDialog() {
       showPlatformDialog(
         context: context,
-        builder: (context) => EzAlertDialog(
+        builder: (BuildContext context) => EzAlertDialog(
           title: Text(
-            _dialogTitle,
+            dialogTitle ?? EFUILang.of(context)!.ssResetAll,
             textAlign: TextAlign.center,
           ),
-          contents: [
+          contents: <Widget>[
             Text(
               dialogContent ?? EFUILang.of(context)!.gResetWarn,
               textAlign: TextAlign.center,
@@ -72,13 +71,13 @@ class EzResetButton extends StatelessWidget {
           ],
           materialActions: ezMaterialActions(
             context: context,
-            onConfirm: _onConfirm,
-            onDeny: _onDeny,
+            onConfirm: confirm,
+            onDeny: deny,
           ),
           cupertinoActions: ezCupertinoActions(
             context: context,
-            onConfirm: _onConfirm,
-            onDeny: _onDeny,
+            onConfirm: confirm,
+            onDeny: deny,
             confirmIsDestructive: true,
             denyIsDefault: true,
           ),
