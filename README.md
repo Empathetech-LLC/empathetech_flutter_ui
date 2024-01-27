@@ -209,7 +209,7 @@ Rename the (just copied) `Home.dart` file and `HomeScreen()` class to something 
 The example app's screens neatly organize all the custom Widgets that enable EFUI's user customization!
 
 * [EzDominantHandSwitch](./lib/src/classes/user-customization/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzThemeModeSwitch](./lib/src/classes/user-customization/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theming.
+* [EzThemeModeSwitch](./lib/src/classes/user-customization/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theme.
 * [EzLocaleSetting](./lib/src/classes/user-customization/EzLocaleSetting.dart): A menu for updating the app's language.
 * [EzImageSetting](./lib/src/classes/user-customization/EzImageSetting.dart): An image uploader for updating app assets.
 * [EzColorSetting](./lib/src/classes/user-customization/EzColorSetting.dart): A color picker for updating theme colors.
