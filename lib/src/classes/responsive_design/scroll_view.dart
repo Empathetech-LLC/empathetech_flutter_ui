@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 class EzScrollView extends StatelessWidget {
-  final Key? key;
+  // Scrollbar parameters //
 
   final ScrollController? controller;
   final bool? thumbVisibility;
@@ -19,6 +19,8 @@ class EzScrollView extends StatelessWidget {
   final ScrollNotificationPredicate? notificationPredicate;
   final bool? interactive;
   final ScrollbarOrientation? scrollbarOrientation;
+
+  // SingleChildScrollView parameters //
 
   final Axis scrollDirection;
 
@@ -35,6 +37,9 @@ class EzScrollView extends StatelessWidget {
   final DragStartBehavior dragStartBehavior;
   final String? restorationId;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+
+  // EzRow/Column parameters //
+
   final MainAxisSize mainAxisSize;
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
@@ -51,7 +56,7 @@ class EzScrollView extends StatelessWidget {
   /// Behaves like a standard [SingleChildScrollView] if [child] is provided
   /// Parameters from [Scrollbar], [SingleChildScrollView] and [EzRow]/[Column] are supported
   const EzScrollView({
-    this.key,
+    super.key,
 
     // Scrollbar parameters //
     this.controller,
@@ -86,11 +91,10 @@ class EzScrollView extends StatelessWidget {
     this.textBaseline,
     this.verticalDirection = VerticalDirection.down,
     this.children,
-  })  : assert(
+  }) : assert(
           (child == null) != (children == null),
           'Either child or children should be provided, but not both.',
-        ),
-        super(key: key);
+        );
 
   Widget _child() {
     return (scrollDirection == Axis.vertical)
@@ -99,8 +103,8 @@ class EzScrollView extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment,
             crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
-            textBaseline: textBaseline,
             verticalDirection: verticalDirection,
+            textBaseline: textBaseline,
             children: children!,
           )
         : EzRow(
@@ -108,10 +112,10 @@ class EzScrollView extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment,
             crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
-            textBaseline: textBaseline,
             verticalDirection: verticalDirection,
-            children: children!,
+            textBaseline: textBaseline,
             reverseHands: reverseHands,
+            children: children!,
           );
   }
 
@@ -133,11 +137,11 @@ class EzScrollView extends StatelessWidget {
         primary: primary,
         physics: physics,
         controller: controller,
-        child: child ?? _child(),
         dragStartBehavior: dragStartBehavior,
         clipBehavior: clipBehavior,
         restorationId: restorationId,
         keyboardDismissBehavior: keyboardDismissBehavior,
+        child: child ?? _child(),
       ),
     );
   }

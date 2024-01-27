@@ -22,8 +22,8 @@ export 'src/classes/platform_availability/EzAppProvider.dart';
 
 // Responsive design
 export 'src/classes/responsive_design/EzRowCol.dart';
-export 'src/classes/responsive_design/EzScrollView.dart';
-export 'src/classes/responsive_design/EzSwapScaffold.dart';
+export 'src/classes/responsive_design/scroll_view.dart';
+export 'src/classes/responsive_design/swap_scaffold.dart';
 export 'src/classes/responsive_design/transitions.dart';
 
 // Screen reader support
