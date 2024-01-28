@@ -1,1 +1,1 @@
-export 'ExampleScaffold.dart';
+export 'example_scaffold.dart';

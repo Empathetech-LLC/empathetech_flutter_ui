@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettingsScreen extends StatefulWidget {
-  const ColorSettingsScreen({Key? key}) : super(key: key);
+  const ColorSettingsScreen({super.key});
 
   @override
-  _ColorSettingsScreenState createState() => _ColorSettingsScreenState();
+  State<ColorSettingsScreen> createState() => _ColorSettingsScreenState();
 }
 
 class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
@@ -19,10 +19,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late bool isLight = !PlatformTheme.of(context)!.isDark;
 
   final double padding = EzConfig.get(paddingKey);
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+  late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer separator = EzSpacer(2 * spacing);
 
   late final TextStyle? labelStyle = getLabel(context);
 
@@ -35,22 +35,22 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   /// Build from image button label
   late final String fromImageLabel = EFUILang.of(context)!.csSchemeBase;
   late final String fromImageHint =
-      "${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}";
+      '${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}';
 
   /// Build from image button dialog title
-  late final String fromImageTitle = "$themeProfile ${EFUILang.of(context)!.csColorScheme}";
+  late final String fromImageTitle = '$themeProfile ${EFUILang.of(context)!.csColorScheme}';
 
   late final String resetDialogTitle = EFUILang.of(context)!.csResetAll(themeProfile);
 
   late final List<String> _defaultList = isLight
-      ? [
+      ? <String>[
           lightPrimaryKey,
           lightSecondaryKey,
           lightTertiaryKey,
           lightBackgroundKey,
           lightSurfaceKey,
         ]
-      : [
+      : <String>[
           darkPrimaryKey,
           darkSecondaryKey,
           darkTertiaryKey,

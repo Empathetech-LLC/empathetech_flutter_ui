@@ -1,9 +1,9 @@
 // Exports //
 
-export 'ColorSettings.dart';
-export 'Home.dart';
-export 'ImageSettings.dart';
-export 'StyleSettings.dart';
+export 'color_settings.dart';
+export 'home.dart';
+export 'image_settings.dart';
+export 'stye_settings.dart';
 
 // Route names //
 
