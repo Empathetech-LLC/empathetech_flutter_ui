@@ -12,6 +12,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 /// But is designed for the actions widget
 /// Useful for [Hand.left]
 class EzBackAction extends StatelessWidget {
+  const EzBackAction({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Navigator.canPop(context)

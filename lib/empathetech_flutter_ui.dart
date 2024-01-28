@@ -9,7 +9,7 @@ library empathetech_flutter_ui;
 // Classes //
 
 // General
-export 'src/classes/general/EzBackAction.dart';
+export 'src/classes/general/back_action.dart';
 export 'src/classes/general/row.dart';
 export 'src/classes/general/screen.dart';
 export 'src/classes/general/spacer.dart';
