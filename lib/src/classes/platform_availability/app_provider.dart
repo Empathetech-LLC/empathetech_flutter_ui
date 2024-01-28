@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -12,17 +12,16 @@ class EzAppProvider extends StatelessWidget {
   final Widget Function(BuildContext)? builder;
   final TargetPlatform? initialPlatform;
   final PlatformSettingsData? settings;
-  final Key? key;
 
   /// Optionally provide a [PlatformApp] that will be wrapped in the Empathetech theme [builder]
   final PlatformApp? app;
 
   /// [PlatformProvider] wrapper with [ezThemeData] defaults
   EzAppProvider({
+    super.key,
     this.builder,
     this.initialPlatform,
     this.settings,
-    this.key,
     this.app,
   }) : assert(
           (builder == null) != (app == null),
@@ -48,8 +47,8 @@ class EzAppProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformProvider(
       builder: builder ??
-          (context) => PlatformTheme(
-                builder: (context) => app!,
+          (BuildContext context) => PlatformTheme(
+                builder: (BuildContext context) => app!,
                 themeMode: _initialTheme,
                 materialLightTheme: _materialLight,
                 materialDarkTheme: _materialDark,

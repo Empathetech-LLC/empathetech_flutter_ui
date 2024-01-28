@@ -18,7 +18,7 @@ export 'src/classes/general/EzWarning.dart';
 
 // Platform availability
 export 'src/classes/platform_availability/EzAlertDialog.dart';
-export 'src/classes/platform_availability/EzAppProvider.dart';
+export 'src/classes/platform_availability/app_provider.dart';
 
 // Responsive design
 export 'src/classes/responsive_design/row_col.dart';
