@@ -9,10 +9,10 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -20,10 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+  late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer separator = EzSpacer(2 * spacing);
 
   // Set the page title //
 
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
         child: EzScrollView(
           children: [
             // Functionality disclaimer
@@ -50,42 +50,49 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? EFUILang.of(context)!.ssSettingsGuideWeb
                   : EFUILang.of(context)!.ssSettingsGuide,
             ),
-            _buttonSeparator,
+            separator,
 
             // Global settings
             const EzDominantHandSwitch(),
-            _buttonSpacer,
+            spacer,
 
             const EzThemeModeSwitch(),
-            _buttonSeparator,
+            separator,
 
             const EzLocaleSetting(),
-            _buttonSpacer,
+            spacer,
+
+            // Text settings
+            ElevatedButton(
+              onPressed: () => context.goNamed(textSettingsRoute),
+              child: Text(EFUILang.of(context)!.tsPageTitle),
+            ),
+            spacer,
 
             // Image settings
             ElevatedButton(
               onPressed: () => context.goNamed(imageSettingsRoute),
               child: Text(EFUILang.of(context)!.isPageTitle),
             ),
-            _buttonSpacer,
+            spacer,
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.goNamed(colorSettingsRoute),
               child: Text(EFUILang.of(context)!.csPageTitle),
             ),
-            _buttonSpacer,
+            spacer,
 
-            // Style settings
+            // Layout settings
             ElevatedButton(
-              onPressed: () => context.goNamed(styleSettingsRoute),
-              child: Text(EFUILang.of(context)!.stsPageTitle),
+              onPressed: () => context.goNamed(layoutSettingsRoute),
+              child: Text(EFUILang.of(context)!.lsPageTitle),
             ),
-            _buttonSeparator,
+            separator,
 
             // Reset button
             const EzResetButton(),
-            _buttonSpacer,
+            spacer,
           ],
         ),
       ),

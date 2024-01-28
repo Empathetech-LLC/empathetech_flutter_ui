@@ -5,30 +5,30 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class StyleSettingsScreen extends StatefulWidget {
-  const StyleSettingsScreen({Key? key}) : super(key: key);
+class LayoutSettingsScreen extends StatefulWidget {
+  const LayoutSettingsScreen({super.key});
 
   @override
-  _StyleSettingsScreenState createState() => _StyleSettingsScreenState();
+  State<LayoutSettingsScreen> createState() => _LayoutSettingsScreenState();
 }
 
-class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
+class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
   // Gather the theme data //
 
   late bool isLight = !PlatformTheme.of(context)!.isDark;
 
   final double margin = EzConfig.get(marginKey);
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+  late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer separator = EzSpacer(2 * spacing);
 
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.stsPageTitle);
+    setPageTitle(EFUILang.of(context)!.lsPageTitle);
   }
 
   // Return the build //
@@ -38,13 +38,13 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
         child: EzScrollView(
-          children: [
+          children: <Widget>[
             // Font
-            if (buttonSpace > margin) EzSpacer(buttonSpace - margin),
+            if (spacing > margin) EzSpacer(spacing - margin),
             const EzFontSetting(),
-            _buttonSpacer,
+            spacer,
 
             // Margin
             const EzSliderSetting(
@@ -55,7 +55,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 10,
               decimals: 1,
             ),
-            _buttonSpacer,
+            spacer,
 
             // Padding
             const EzSliderSetting(
@@ -66,28 +66,28 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               steps: 10,
               decimals: 1,
             ),
-            _buttonSpacer,
+            spacer,
 
             // Button spacing
             const EzSliderSetting(
-              prefsKey: buttonSpacingKey,
-              type: SliderSettingType.buttonSpacing,
+              prefsKey: spacingKey,
+              type: SliderSettingType.spacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
               decimals: 0,
             ),
-            _buttonSeparator,
+            separator,
 
             // Local reset all
             EzResetButton(
-              dialogTitle: EFUILang.of(context)!.stsResetAll,
+              dialogTitle: EFUILang.of(context)!.lsResetAll,
               onConfirm: () {
-                EzConfig.removeKeys(styleKeys.keys.toSet());
+                EzConfig.removeKeys(layoutKeys.keys.toSet());
                 popScreen(context: context, result: true);
               },
             ),
-            _buttonSeparator,
+            separator,
 
             // Help
             EzLink(
@@ -98,7 +98,7 @@ class _StyleSettingsScreenState extends State<StyleSettingsScreen> {
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
               tooltip: understandingLayout,
             ),
-            _buttonSpacer,
+            spacer,
           ],
         ),
       ),

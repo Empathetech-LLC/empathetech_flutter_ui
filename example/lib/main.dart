@@ -31,7 +31,7 @@ void main() async {
   );
 
   // Set device orientation(s)
-  SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
     DeviceOrientation.landscapeLeft,
@@ -56,6 +56,13 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
+          name: textSettingsRoute,
+          path: textSettingsRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const TextSettingsScreen();
+          },
+        ),
+        GoRoute(
           name: imageSettingsRoute,
           path: imageSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
@@ -70,10 +77,10 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          name: styleSettingsRoute,
-          path: styleSettingsRoute,
+          name: layoutSettingsRoute,
+          path: layoutSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const StyleSettingsScreen();
+            return const LayoutSettingsScreen();
           },
         ),
       ],
