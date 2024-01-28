@@ -10,6 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
+  @override
+  // ignore: overridden_fields
+  final Widget? title;
+  // vscode is convinced that title is a String? otherwise... the future giveth and the future taketh away
+
   /// Optional [content] override
   /// Wraps [contents] in an [EzScrollView]
   final List<Widget>? contents;
@@ -30,7 +35,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   EzAlertDialog({
     super.key,
     super.widgetKey,
-    super.title,
+    this.title,
     super.content,
     this.contents,
     this.materialActions,
