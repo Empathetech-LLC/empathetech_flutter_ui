@@ -22,12 +22,12 @@ void main() async {
   // Make it so
   EzConfig.init(
     // Paths to any locally stored images the app uses
-    assetPaths: {},
+    assetPaths: <String>{},
 
     preferences: prefs,
 
     // Your brand colors, custom styling, etc
-    customDefaults: {},
+    customDefaults: <String, dynamic>{},
   );
 
   // Set device orientation(s)
@@ -82,9 +82,7 @@ final GoRouter _router = GoRouter(
 );
 
 class EFUIExample extends StatelessWidget {
-  final Key? key;
-
-  const EFUIExample({this.key}) : super(key: key);
+  const EFUIExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +92,7 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: {
+        localizationsDelegates: const <LocalizationsDelegate<dynamic>>{
           LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
         },
