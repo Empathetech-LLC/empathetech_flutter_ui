@@ -10,15 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
-  final Key? key;
-  final Key? widgetKey;
-
-  /// Dialog's [title]
-  final Widget? title;
-
-  /// Dialog's main [content]
-  final Widget? content;
-
   /// Optional [content] override
   /// Wraps [contents] in an [EzScrollView]
   final List<Widget>? contents;
@@ -37,10 +28,10 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   /// [PlatformAlertDialog] wrapper with custom styling
   EzAlertDialog({
-    this.key,
-    this.widgetKey,
-    required this.title,
-    this.content,
+    super.key,
+    super.widgetKey,
+    required super.title,
+    super.content,
     this.contents,
     this.materialActions,
     this.cupertinoActions,
@@ -54,9 +45,9 @@ class EzAlertDialog extends PlatformAlertDialog {
   Widget build(BuildContext context) {
     final double margin = EzConfig.get(marginKey);
     final double padding = EzConfig.get(paddingKey);
-    final double buttonSpacing = EzConfig.get(buttonSpacingKey);
+    final double spacing = EzConfig.get(spacingKey);
 
-    CupertinoDialogAction _closeAction = CupertinoDialogAction(
+    final CupertinoDialogAction closeAction = CupertinoDialogAction(
       onPressed: () => popScreen(context: context),
       child: Text(EFUILang.of(context)!.gClose),
     );
@@ -64,7 +55,7 @@ class EzAlertDialog extends PlatformAlertDialog {
     return PlatformAlertDialog(
       key: key,
       widgetKey: widgetKey,
-      material: (context, platform) => MaterialAlertDialogData(
+      material: (BuildContext context, PlatformTarget platform) => MaterialAlertDialogData(
         // Title
         title: title,
         titlePadding: EdgeInsets.all(padding),
@@ -81,11 +72,11 @@ class EzAlertDialog extends PlatformAlertDialog {
         actions: materialActions,
 
         // General
-        iconPadding: EdgeInsets.only(right: buttonSpacing),
-        buttonPadding: EdgeInsets.only(right: buttonSpacing),
+        iconPadding: EdgeInsets.only(right: spacing),
+        buttonPadding: EdgeInsets.only(right: spacing),
         insetPadding: EdgeInsets.all(margin),
       ),
-      cupertino: (context, platform) => CupertinoAlertDialogData(
+      cupertino: (BuildContext context, PlatformTarget platform) => CupertinoAlertDialogData(
         title: Padding(
           // No titlePadding equivalent, have to do it manually
           padding: EdgeInsets.only(bottom: padding),
@@ -93,9 +84,9 @@ class EzAlertDialog extends PlatformAlertDialog {
         ),
         content: content ?? EzScrollView(children: contents),
         actions: cupertinoActions == null
-            ? [_closeAction]
+            ? <Widget>[closeAction]
             : (needsClose)
-                ? [...cupertinoActions!, _closeAction]
+                ? <Widget>[...cupertinoActions!, closeAction]
                 : cupertinoActions,
       ),
     );
@@ -108,11 +99,11 @@ class EzAlertDialog extends PlatformAlertDialog {
 List<TextButton> ezMaterialActions({
   required BuildContext context,
   required void Function() onConfirm,
-  required void Function() onDeny,
   String? confirmMsg,
+  required void Function() onDeny,
   String? denyMsg,
 }) {
-  return [
+  return <TextButton>[
     // Confirm
     TextButton(
       onPressed: onConfirm,
@@ -133,29 +124,29 @@ List<TextButton> ezMaterialActions({
 List<CupertinoDialogAction> ezCupertinoActions({
   required BuildContext context,
   required void Function() onConfirm,
-  required void Function() onDeny,
   String? confirmMsg,
-  String? denyMsg,
   bool confirmIsDefault = false,
-  bool denyIsDefault = false,
   bool confirmIsDestructive = false,
+  required void Function() onDeny,
+  String? denyMsg,
+  bool denyIsDefault = false,
   bool denyIsDestructive = false,
 }) {
-  return [
+  return <CupertinoDialogAction>[
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
+      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
 
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
-      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
+      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
   ];
 }

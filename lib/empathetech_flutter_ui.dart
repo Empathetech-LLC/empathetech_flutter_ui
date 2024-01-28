@@ -13,11 +13,11 @@ export 'src/classes/general/EzBackAction.dart';
 export 'src/classes/general/EzRow.dart';
 export 'src/classes/general/EzScreen.dart';
 export 'src/classes/general/EzSpacer.dart';
-export 'src/classes/general/EzTextStyle.dart';
-export 'src/classes/general/EzWarning.dart';
+export 'src/classes/general/text_style.dart';
+export 'src/classes/general/warning.dart';
 
 // Platform availability
-export 'src/classes/platform_availability/EzAlertDialog.dart';
+export 'src/classes/platform_availability/alert_dialog.dart';
 export 'src/classes/platform_availability/app_provider.dart';
 
 // Responsive design

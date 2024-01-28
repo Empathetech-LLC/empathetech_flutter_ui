@@ -21,6 +21,7 @@ class EzWarning extends StatelessWidget {
   ///  /!\ [title] /!\
   ///      [body]
   const EzWarning({
+    super.key,
     this.title,
     required this.body,
     this.titleStyle,
@@ -29,16 +30,16 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color? iconColor = Theme.of(context).colorScheme.secondary;
+    final Color iconColor = Theme.of(context).colorScheme.secondary;
+
+    final String warning = title ?? EFUILang.of(context)!.gAttention;
 
     final EzSpacer rowPadding = EzSpacer.row(EzConfig.get(paddingKey));
-
-    final String _title = title ?? EFUILang.of(context)!.gAttention;
 
     return Semantics(
       button: false,
       readOnly: true,
-      label: '$_title, $body',
+      label: '$warning, $body',
       child: ExcludeSemantics(
         child: Card(
           child: Container(
@@ -46,12 +47,12 @@ class EzWarning extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 // Title
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     // Thing1
                     Icon(
                       Icons.warning,
@@ -61,7 +62,7 @@ class EzWarning extends StatelessWidget {
                     rowPadding,
 
                     Text(
-                      _title,
+                      warning,
                       style: titleStyle,
                       textAlign: TextAlign.center,
                     ),
