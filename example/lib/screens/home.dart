@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: EzScreen(
         decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
         child: EzScrollView(
-          children: [
+          children: <Widget>[
             // Functionality disclaimer
             EzWarning(
               titleStyle: getTitle(context),
