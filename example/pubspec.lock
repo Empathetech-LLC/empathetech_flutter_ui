@@ -179,7 +179,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_localized_locales:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_localized_locales
       sha256: "478d10535edf07292e34cb4c757882edeeaf96d5e3dbb04b42733038bd41dd3f"
@@ -187,7 +187,7 @@ packages:
     source: hosted
     version: "2.0.5"
   flutter_platform_widgets:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_platform_widgets
       sha256: "4970c211af1dad0a161e6379d04de2cace80283da0439f2f87d31a541f9b2b84"
@@ -485,7 +485,7 @@ packages:
     source: hosted
     version: "3.7.4"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "81429e4481e1ccfb51ede496e916348668fd0921627779233bd24cc3ff6abd02"

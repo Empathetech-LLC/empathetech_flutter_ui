@@ -29,9 +29,12 @@ dependencies:
   country_flags: ^2.2.0
 
 dev_dependencies:
-  go_router: ^13.0.0
+  # For development/testing
   dependency_validator: ^3.2.2
   dartdoc: ^6.3.0
+
+  # For example app
+  go_router: ^13.0.0
 
   flutter_test:
     sdk: flutter
