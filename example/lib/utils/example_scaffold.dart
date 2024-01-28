@@ -25,7 +25,7 @@ class ExampleScaffold extends StatelessWidget {
 
     final TextStyle titleStyle = Theme.of(context).appBarTheme.titleTextStyle!;
 
-    double toolbarHeight = MediaQuery.textScalerOf(context).scale(titleStyle.fontSize!) * 3;
+    final double toolbarHeight = MediaQuery.textScalerOf(context).scale(titleStyle.fontSize!) * 3;
 
     // Define AppBar widget(s) //
 
@@ -50,7 +50,7 @@ class ExampleScaffold extends StatelessWidget {
             centerTitle: true,
 
             // Actions (aka trailing)
-            actions: isRighty ? null : [EzBackAction()],
+            actions: isRighty ? null : <Widget>[const EzBackAction()],
           ),
         ),
 
