@@ -30,7 +30,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   EzAlertDialog({
     super.key,
     super.widgetKey,
-    required super.title,
+    super.title,
     super.content,
     this.contents,
     this.materialActions,

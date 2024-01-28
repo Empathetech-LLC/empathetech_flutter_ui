@@ -11,10 +11,10 @@ class EzSpacer extends SizedBox {
   final double space;
 
   /// [SizedBox] with height [space] for creating space in a [Column]
-  const EzSpacer(this.space) : super(height: space);
+  const EzSpacer(this.space, {super.key}) : super(height: space);
 
   /// [SizedBox] with width [space] for creating space in a [Row]
-  const EzSpacer.row(this.space) : super(width: space);
+  const EzSpacer.row(this.space, {super.key}) : super(width: space);
 }
 
 class EzSwapSpacer extends StatelessWidget {
@@ -22,11 +22,11 @@ class EzSwapSpacer extends StatelessWidget {
 
   /// Mimics [EzSpacer.row] by default
   /// Swaps to [EzSpacer] when [ScreenSpace.isLimited]
-  EzSwapSpacer(this.space);
+  const EzSwapSpacer(this.space, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
+    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
 
     return ExcludeSemantics(
       child: limitedSpace ? EzSpacer(space) : EzSpacer.row(space),

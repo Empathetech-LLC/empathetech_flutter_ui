@@ -8,34 +8,34 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRow extends StatelessWidget {
-  final Key? key;
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
   final TextDirection? textDirection;
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
-  final List<Widget> children;
 
   /// Whether this should respond to [Hand] changes
   /// If true, [children] will be reversed when [Hand.left]
   final bool reverseHands;
 
+  final List<Widget> children;
+
   /// [Row] wrapper that automatically supports [Hand] changes via [reverseHands]
-  EzRow({
-    this.key,
+  const EzRow({
+    super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.textDirection,
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline,
-    required this.children,
     this.reverseHands = true,
-  }) : super(key: key);
+    required this.children,
+  });
 
   /// Reverses [children] when [reverseHands] is true and [isRightHandKey] is false
-  List<Widget> _getList() {
+  List<Widget> getChildren() {
     if (reverseHands && EzConfig.get(isRightHandKey) == false) {
       return children.reversed.toList();
     } else {
@@ -53,7 +53,7 @@ class EzRow extends StatelessWidget {
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
-      children: _getList(),
+      children: getChildren(),
     );
   }
 }

@@ -10,9 +10,9 @@ library empathetech_flutter_ui;
 
 // General
 export 'src/classes/general/EzBackAction.dart';
-export 'src/classes/general/EzRow.dart';
-export 'src/classes/general/EzScreen.dart';
-export 'src/classes/general/EzSpacer.dart';
+export 'src/classes/general/row.dart';
+export 'src/classes/general/screen.dart';
+export 'src/classes/general/spacer.dart';
 export 'src/classes/general/text_style.dart';
 export 'src/classes/general/warning.dart';
 
@@ -37,8 +37,8 @@ export 'src/classes/screen_reader_support/rich_text.dart';
 
 // User customization
 export 'src/classes/user_customization/color_setting.dart';
+export 'src/classes/user_customization/config.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
-export 'src/classes/user_customization/ez_config.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';

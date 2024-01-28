@@ -8,7 +8,6 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzScreen extends StatelessWidget {
-  final Key? key;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? margin;
 
@@ -25,14 +24,14 @@ class EzScreen extends StatelessWidget {
   final BoxConstraints? constraints;
   final Matrix4? transform;
   final AlignmentGeometry? transformAlignment;
-  final Widget child;
   final Clip clipBehavior;
+  final Widget child;
 
-  /// [Container] wrapper that defaults to max size with a margin from [EzConfig]
+  /// [Container] wrapper that defaults to max size with a "margin" from [EzConfig]
+  /// In this case, the screen's "margin" is the actually the Container's padding
   /// See [decorationImageKey] for easily setting a background image
   const EzScreen({
-    // Container
-    this.key,
+    super.key,
     this.alignment,
     this.margin,
     this.decoration,
@@ -42,8 +41,8 @@ class EzScreen extends StatelessWidget {
     this.constraints,
     this.transform,
     this.transformAlignment,
-    required this.child,
     this.clipBehavior = Clip.none,
+    required this.child,
   }) : assert(
           (!(decoration != null && decorationImageKey != null)),
           'Either decoration or decorationImageKey can be provided, but not both.',
@@ -51,7 +50,7 @@ class EzScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsetsGeometry _margin = margin ?? EdgeInsets.all(EzConfig.get(marginKey));
+    final EdgeInsetsGeometry screenMargin = margin ?? EdgeInsets.all(EzConfig.get(marginKey));
 
     Decoration? buildDecoration() {
       if (decorationImageKey == null) {
@@ -73,17 +72,16 @@ class EzScreen extends StatelessWidget {
     }
 
     return Container(
-      key: key,
       alignment: alignment,
-      padding: _margin,
+      padding: screenMargin,
       decoration: decoration ?? buildDecoration(),
       width: width,
       height: height,
       constraints: constraints,
       transform: transform,
       transformAlignment: transformAlignment,
-      child: child,
       clipBehavior: clipBehavior,
+      child: child,
     );
   }
 }
