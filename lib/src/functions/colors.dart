@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 /// Returns the guesstimated most readable text color (black/white) for [background]
 /// Formula credit: https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
 Color getTextColor(Color background) {
-  return Color(
-      (((background.red * 0.299) + (background.green * 0.587) + (background.blue * 0.114)) >= 150)
-          ? blackHex
-          : whiteHex);
+  return Color((((background.red * 0.299) +
+              (background.green * 0.587) +
+              (background.blue * 0.114)) >=
+          150)
+      ? blackHex
+      : whiteHex);
 }
 
 /// Generate a [ColorScheme] based on values present in [EzConfig.prefs]
@@ -27,8 +29,8 @@ ColorScheme ezColorScheme(Brightness brightness) {
   final String prefix = (brightness == Brightness.light) ? light : dark;
 
   return ColorScheme.fromSeed(
-    seedColor: getColor('$prefix$primaryKey')!,
     brightness: brightness,
+    seedColor: getColor('$prefix$primaryKey')!,
     primary: getColor('$prefix$primaryKey'),
     onPrimary: getColor('$prefix$onPrimaryKey'),
     primaryContainer: getColor('$prefix$primaryContainerKey'),
@@ -77,31 +79,45 @@ Future<void> storeImageColorScheme({
 
   EzConfig.setInt('$prefix$primaryKey', colorScheme.primary.value);
   EzConfig.setInt('$prefix$onPrimaryKey', colorScheme.onPrimary.value);
-  EzConfig.setInt('$prefix$primaryContainerKey', colorScheme.primaryContainer.value);
-  EzConfig.setInt('$prefix$onPrimaryContainerKey', colorScheme.onPrimaryContainer.value);
+  EzConfig.setInt(
+      '$prefix$primaryContainerKey', colorScheme.primaryContainer.value);
+  EzConfig.setInt(
+      '$prefix$onPrimaryContainerKey', colorScheme.onPrimaryContainer.value);
   EzConfig.setInt('$prefix$secondaryKey', colorScheme.secondary.value);
   EzConfig.setInt('$prefix$onSecondaryKey', colorScheme.onSecondary.value);
-  EzConfig.setInt('$prefix$secondaryContainerKey', colorScheme.secondaryContainer.value);
-  EzConfig.setInt('$prefix$onSecondaryContainerKey', colorScheme.onSecondaryContainer.value);
+  EzConfig.setInt(
+      '$prefix$secondaryContainerKey', colorScheme.secondaryContainer.value);
+  EzConfig.setInt('$prefix$onSecondaryContainerKey',
+      colorScheme.onSecondaryContainer.value);
   EzConfig.setInt('$prefix$tertiaryKey', colorScheme.tertiary.value);
   EzConfig.setInt('$prefix$onTertiaryKey', colorScheme.onTertiary.value);
-  EzConfig.setInt('$prefix$tertiaryContainerKey', colorScheme.tertiaryContainer.value);
-  EzConfig.setInt('$prefix$onTertiaryContainerKey', colorScheme.onTertiaryContainer.value);
+  EzConfig.setInt(
+      '$prefix$tertiaryContainerKey', colorScheme.tertiaryContainer.value);
+  EzConfig.setInt(
+      '$prefix$onTertiaryContainerKey', colorScheme.onTertiaryContainer.value);
   EzConfig.setInt('$prefix$errorKey', colorScheme.error.value);
   EzConfig.setInt('$prefix$onErrorKey', colorScheme.onError.value);
-  EzConfig.setInt('$prefix$errorContainerKey', colorScheme.errorContainer.value);
-  EzConfig.setInt('$prefix$onErrorContainerKey', colorScheme.onErrorContainer.value);
+  EzConfig.setInt(
+      '$prefix$errorContainerKey', colorScheme.errorContainer.value);
+  EzConfig.setInt(
+      '$prefix$onErrorContainerKey', colorScheme.onErrorContainer.value);
   EzConfig.setInt('$prefix$outlineKey', colorScheme.outline.value);
-  EzConfig.setInt('$prefix$outlineVariantKey', colorScheme.outlineVariant.value);
+  EzConfig.setInt(
+      '$prefix$outlineVariantKey', colorScheme.outlineVariant.value);
   EzConfig.setInt('$prefix$backgroundKey', colorScheme.background.value);
   EzConfig.setInt('$prefix$onBackgroundKey', colorScheme.onBackground.value);
   EzConfig.setInt('$prefix$surfaceKey', colorScheme.surface.value);
   EzConfig.setInt('$prefix$onSurfaceKey', colorScheme.onSurface.value);
-  EzConfig.setInt('$prefix$surfaceVariantKey', colorScheme.surfaceVariant.value);
-  EzConfig.setInt('$prefix$onSurfaceVariantKey', colorScheme.onSurfaceVariant.value);
-  EzConfig.setInt('$prefix$inverseSurfaceKey', colorScheme.inverseSurface.value);
-  EzConfig.setInt('$prefix$onInverseSurfaceKey', colorScheme.onInverseSurface.value);
-  EzConfig.setInt('$prefix$inversePrimaryKey', colorScheme.inversePrimary.value);
+  EzConfig.setInt(
+      '$prefix$surfaceVariantKey', colorScheme.surfaceVariant.value);
+  EzConfig.setInt(
+      '$prefix$onSurfaceVariantKey', colorScheme.onSurfaceVariant.value);
+  EzConfig.setInt(
+      '$prefix$inverseSurfaceKey', colorScheme.inverseSurface.value);
+  EzConfig.setInt(
+      '$prefix$onInverseSurfaceKey', colorScheme.onInverseSurface.value);
+  EzConfig.setInt(
+      '$prefix$inversePrimaryKey', colorScheme.inversePrimary.value);
   EzConfig.setInt('$prefix$shadowKey', colorScheme.shadow.value);
   EzConfig.setInt('$prefix$scrimKey', colorScheme.scrim.value);
   EzConfig.setInt('$prefix$surfaceTintKey', colorScheme.surfaceTint.value);
@@ -109,6 +125,8 @@ Future<void> storeImageColorScheme({
 
 /// Get the human readable name of a [key]s color
 String getColorName(BuildContext context, String key) {
+  key = key.replaceAll(prefixesRegExp, '');
+
   switch (key) {
     case primaryKey:
       return EFUILang.of(context)!.csPrimary;
@@ -177,6 +195,8 @@ String getColorName(BuildContext context, String key) {
 
 /// Resolve the color [key] to the live [ColorScheme] value
 Color getLiveColor(BuildContext context, String key) {
+  key = key.replaceAll(prefixesRegExp, '');
+
   switch (key) {
     case primaryKey:
       return Theme.of(context).colorScheme.primary;
