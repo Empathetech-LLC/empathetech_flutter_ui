@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
-  const ImageSettingsScreen({Key? key}) : super(key: key);
+  const ImageSettingsScreen({super.key});
 
   @override
-  _ImageSettingsScreenState createState() => _ImageSettingsScreenState();
+  State<ImageSettingsScreen> createState() => _ImageSettingsScreenState();
 }
 
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
@@ -17,10 +17,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   late bool isLight = !PlatformTheme.of(context)!.isDark;
 
-  final double buttonSpace = EzConfig.get(buttonSpacingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer _buttonSpacer = EzSpacer(buttonSpace);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * buttonSpace);
+  late final EzSpacer _buttonSpacer = EzSpacer(spacing);
+  late final EzSpacer _buttonSeparator = EzSpacer(2 * spacing);
 
   // Define the page content //
 
@@ -30,41 +30,32 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   late final String resetTitle = EFUILang.of(context)!.isResetAll(themeProfile);
 
-  late final List<Widget> _lightButtons = [
-    // Page
-    EzImageSetting(
-      prefsKey: lightPageImageKey,
-      label: EFUILang.of(context)!.isBackground,
-      allowClear: true,
-      updateTheme: Brightness.light,
-    ),
+  late final Set<String> resetAllKeys = imageKeys.keys
+      .map((String key) => isLight ? '$light$key' : '$dark$key')
+      .toSet();
+
+  late final List<Widget> settingsButtons = <Widget>[
+    isLight
+        // Page
+        ? EzImageSetting(
+            prefsKey: '$light$pageImageKey',
+            label: EFUILang.of(context)!.isBackground,
+            allowClear: true,
+            updateTheme: Brightness.light,
+          )
+        : EzImageSetting(
+            prefsKey: '$dark$pageImageKey',
+            label: EFUILang.of(context)!.isBackground,
+            allowClear: true,
+            updateTheme: Brightness.dark,
+          ),
     _buttonSeparator,
 
     // Local reset all
     EzResetButton(
       dialogTitle: resetTitle,
       onConfirm: () {
-        EzConfig.removeKeys(lightImageKeys.keys.toSet());
-        popScreen(context: context, result: true);
-      },
-    ),
-  ];
-
-  late final List<Widget> _darkButtons = [
-    // Page
-    EzImageSetting(
-      prefsKey: darkPageImageKey,
-      label: EFUILang.of(context)!.isBackground,
-      allowClear: true,
-      updateTheme: Brightness.dark,
-    ),
-    _buttonSeparator,
-
-    // Local reset all
-    EzResetButton(
-      dialogTitle: resetTitle,
-      onConfirm: () {
-        EzConfig.removeKeys(darkImageKeys.keys.toSet());
+        EzConfig.removeKeys(resetAllKeys);
         popScreen(context: context, result: true);
       },
     ),
@@ -85,9 +76,10 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey: isLight ? lightPageImageKey : darkPageImageKey,
+        decorationImageKey:
+            isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
         child: EzScrollView(
-          children: [
+          children: <Widget>[
             // Current theme reminder
             Text(
               EFUILang.of(context)!.gEditingTheme(themeProfile),
@@ -97,7 +89,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             _buttonSeparator,
 
             // Settings
-            ...(isLight ? _lightButtons : _darkButtons),
+            ...settingsButtons,
             _buttonSpacer,
           ],
         ),
