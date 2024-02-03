@@ -60,7 +60,8 @@ class EzAlertDialog extends PlatformAlertDialog {
     return PlatformAlertDialog(
       key: key,
       widgetKey: widgetKey,
-      material: (BuildContext context, PlatformTarget platform) => MaterialAlertDialogData(
+      material: (BuildContext context, PlatformTarget platform) =>
+          MaterialAlertDialogData(
         // Title
         title: title,
         titlePadding: EdgeInsets.all(padding),
@@ -81,7 +82,8 @@ class EzAlertDialog extends PlatformAlertDialog {
         buttonPadding: EdgeInsets.only(right: spacing),
         insetPadding: EdgeInsets.all(margin),
       ),
-      cupertino: (BuildContext context, PlatformTarget platform) => CupertinoAlertDialogData(
+      cupertino: (BuildContext context, PlatformTarget platform) =>
+          CupertinoAlertDialogData(
         title: Padding(
           // No titlePadding equivalent, have to do it manually
           padding: EdgeInsets.only(bottom: padding),
