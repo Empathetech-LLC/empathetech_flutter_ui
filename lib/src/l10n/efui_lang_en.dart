@@ -2,7 +2,7 @@ import 'efui_lang.dart';
 
 /// The translations for English (`en`).
 class EFUILangEn extends EFUILang {
-  EFUILangEn([String locale = 'en']) : super(locale);
+  EFUILangEn([super.locale = 'en']);
 
   @override
   String get gYes => 'Yes';

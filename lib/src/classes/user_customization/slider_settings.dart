@@ -143,10 +143,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               ElevatedButton(
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
+                      padding: MaterialStateProperty.all(
+                        EdgeInsets.all(currValue),
+                      ),
                     ),
                 onPressed: doNothing,
                 child: Text(EFUILang.of(context)!.gCurrently),
@@ -154,8 +156,12 @@ class _SliderSettingState extends State<EzSliderSetting> {
               EzSpacer.row(space),
               ElevatedButton(
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding: MaterialStateProperty.all(EdgeInsets.all(currValue)),
-                      shape: const MaterialStatePropertyAll<OutlinedBorder>(CircleBorder()),
+                      padding: MaterialStateProperty.all(
+                        EdgeInsets.all(currValue),
+                      ),
+                      shape: const MaterialStatePropertyAll<OutlinedBorder>(
+                        CircleBorder(),
+                      ),
                     ),
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
@@ -246,7 +252,8 @@ class _SliderSettingState extends State<EzSliderSetting> {
           },
 
           // Slider semantics
-          semanticFormatterCallback: (double value) => value.toStringAsFixed(widget.decimals),
+          semanticFormatterCallback: (double value) =>
+              value.toStringAsFixed(widget.decimals),
         ),
       ),
       _spacer,

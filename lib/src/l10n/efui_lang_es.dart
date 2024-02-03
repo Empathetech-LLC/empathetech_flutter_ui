@@ -2,7 +2,7 @@ import 'efui_lang.dart';
 
 /// The translations for Spanish Castilian (`es`).
 class EFUILangEs extends EFUILang {
-  EFUILangEs([String locale = 'es']) : super(locale);
+  EFUILangEs([super.locale = 'es']);
 
   @override
   String get gYes => 'Sí';

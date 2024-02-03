@@ -28,7 +28,7 @@ const String anton = 'Anton';
 const String oldStandard = 'Old Standard TT';
 
 /// All the [GoogleFonts] currently supported
-final Map<String, TextStyle> googleStyles = {
+final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   sora: GoogleFonts.sora(),
   hahmlet: GoogleFonts.hahmlet(),
   jetBrainsMono: GoogleFonts.jetBrainsMono(),

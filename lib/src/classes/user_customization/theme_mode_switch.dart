@@ -29,7 +29,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     final String label = EFUILang.of(context)!.ssThemeMode;
 
-    final List<DropdownMenuItem<ThemeMode>> items = [
+    final List<DropdownMenuItem<ThemeMode>> items =
+        <DropdownMenuItem<ThemeMode>>[
       DropdownMenuItem<ThemeMode>(
         value: ThemeMode.system,
         child: Text(EFUILang.of(context)!.gSystem),
@@ -54,7 +55,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       child: EzRow(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           // Label
           Text(
             label,
