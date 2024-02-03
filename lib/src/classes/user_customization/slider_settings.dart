@@ -192,9 +192,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
 
   /// Assemble the final list of widgets to build for [_SliderSettingState]
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
-  List<Widget> _buildSheet({
+  List<Widget> buildModal({
     required BuildContext context,
-    required StateSetter modalSheetState,
+    required StateSetter setModalState,
     required TextStyle? style,
   }) {
     return <Widget>[
@@ -211,7 +211,6 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              EzSpacer(EzConfig.get(marginKey)),
               Text(
                 _label,
                 style: style,
@@ -238,7 +237,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
           // Slider functions
           onChanged: (double value) {
             // Just update the on screen value while sliding around
-            modalSheetState(() {
+            setModalState(() {
               currValue = value;
             });
           },
@@ -262,7 +261,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
       ElevatedButton.icon(
         onPressed: () {
           EzConfig.remove(widget.prefsKey);
-          modalSheetState(() {
+          setModalState(() {
             currValue = _defaultValue;
           });
         },
@@ -282,13 +281,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
     return ElevatedButton.icon(
       onPressed: () => showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
+        showDragHandle: true,
         builder: (BuildContext context) => StatefulBuilder(
-          builder: (BuildContext context, StateSetter modalSheetState) {
-            return Column(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return EzScrollView(
               mainAxisSize: MainAxisSize.min,
-              children: _buildSheet(
+              children: buildModal(
                 context: context,
-                modalSheetState: modalSheetState,
+                setModalState: setModalState,
                 style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             );
