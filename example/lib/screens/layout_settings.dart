@@ -38,14 +38,11 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
+        decorationImageKey:
+            isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
         child: EzScrollView(
           children: <Widget>[
-            // Font
             if (spacing > margin) EzSpacer(spacing - margin),
-            const EzFontSetting(),
-            spacer,
-
             // Margin
             const EzSliderSetting(
               prefsKey: marginKey,
@@ -68,7 +65,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             ),
             spacer,
 
-            // Button spacing
+            // Spacing
             const EzSliderSetting(
               prefsKey: spacingKey,
               type: SliderSettingType.spacing,
