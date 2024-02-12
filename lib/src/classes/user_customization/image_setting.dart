@@ -268,7 +268,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (BuildContext context, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
-              EFUILang.of(context)!.isDialogTitle(widget.dialogTitle ?? widget.label),
+              EFUILang.of(context)!.isDialogTitle(
+                widget.dialogTitle ?? widget.label,
+              ),
               textAlign: TextAlign.center,
             ),
             contents: _sourceOptions(dialogState, context),
@@ -331,10 +333,12 @@ class _ImageSettingState extends State<EzImageSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                padding:
-                    MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.all(padding * 0.75)),
-                foregroundColor:
-                    MaterialStatePropertyAll<Color>(Theme.of(context).colorScheme.onSurface),
+                padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  EdgeInsets.all(padding * 0.75),
+                ),
+                foregroundColor: MaterialStatePropertyAll<Color>(
+                  Theme.of(context).colorScheme.onSurface,
+                ),
               ),
           onPressed: _activateSetting,
           onLongPress: _showCredits,
@@ -347,8 +351,9 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
             child: CircleAvatar(
               radius: padding * 2,
-              foregroundImage:
-                  (currPath == null || currPath == noImageValue) ? null : provideImage(currPath!),
+              foregroundImage: (currPath == null || currPath == noImageValue)
+                  ? null
+                  : provideImage(currPath!),
               backgroundColor: Colors.transparent,
               child: (currPath == null || currPath == noImageValue)
                   ? Icon(PlatformIcons(context).clear)

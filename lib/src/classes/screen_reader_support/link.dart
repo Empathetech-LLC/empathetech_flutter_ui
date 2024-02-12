@@ -58,7 +58,8 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
-  late final Color _color = widget.color ?? Theme.of(context).colorScheme.primary;
+  late final Color _color =
+      widget.color ?? Theme.of(context).colorScheme.primary;
 
   late TextStyle _style = widget.style!.copyWith(
     color: _color,

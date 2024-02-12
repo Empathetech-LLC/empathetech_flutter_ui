@@ -78,7 +78,8 @@ const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
 /// If you want to show some love
 /// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
-const String empathPayPal = 'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
+const String empathPayPal =
+    'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
 
 /// If you want to show some love
 /// https://venmo.com/empathetech

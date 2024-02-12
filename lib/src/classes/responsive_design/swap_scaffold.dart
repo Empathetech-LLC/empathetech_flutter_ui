@@ -28,7 +28,8 @@ class ScreenSpace extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(ScreenSpace oldWidget) => isLimited != oldWidget.isLimited;
+  bool updateShouldNotify(ScreenSpace oldWidget) =>
+      isLimited != oldWidget.isLimited;
 }
 
 class EzSwapScaffold extends StatelessWidget {

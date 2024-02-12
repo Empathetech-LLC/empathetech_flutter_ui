@@ -23,7 +23,8 @@ const String label = 'label';
 const String light = 'light';
 const String dark = 'dark';
 
-final RegExp prefixesRegExp = RegExp('^($display|$headline|$title|$body|$label|$light|$dark)');
+final RegExp prefixesRegExp =
+    RegExp('^($display|$headline|$title|$body|$label|$light|$dark)');
 
 // Global settings' keys //
 

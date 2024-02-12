@@ -53,7 +53,8 @@ class EzConfig {
       // Build this.defaults //
 
       // Start with Empathetech's config
-      final Map<String, dynamic> defaults = Map<String, dynamic>.from(empathetechConfig);
+      final Map<String, dynamic> defaults =
+          Map<String, dynamic>.from(empathetechConfig);
 
       // Merge custom defaults
       if (customDefaults != null) defaults.addAll(customDefaults);
@@ -76,7 +77,8 @@ class EzConfig {
       final Map<String, dynamic> prefs = Map<String, dynamic>.from(defaults);
 
       // Find the keys that users have overwritten
-      final Set<String> overwritten = preferences.getKeys().intersection(keys.keys.toSet());
+      final Set<String> overwritten =
+          preferences.getKeys().intersection(keys.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
@@ -239,7 +241,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Remove the [keys] custom values
   static void removeKeys(Set<String> keys) async {
-    final Set<String> updated = keys.intersection(_instance!.preferences.getKeys());
+    final Set<String> updated =
+        keys.intersection(_instance!.preferences.getKeys());
 
     for (final String key in updated) {
       _instance!.preferences.remove(key);
