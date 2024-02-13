@@ -2,6 +2,7 @@
   "@@locale" : "es",
 
 
+
   "gYes": "Sí",
   "gNo": "No",
   "gOptions": "Opciones",
@@ -36,6 +37,7 @@
   "gCreditTo": "Crédito a:",
 
 
+
   "ssPageTitle": "Configuraciones",
   "ssSettingsGuide": "Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga la página para guardar tus cambios.\n\n¡Diviértete!",
@@ -50,26 +52,38 @@
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
 
-  "isPageTitle": "Configuraciones de imagen",
 
-  "isBackground": "Fondo",
-  "isImage": "imagen",
+  "tsPageTitle": "Configuraciones de texto",
 
-  "isButtonHint": "Actualizar la imagen de {title}",
-  "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
-  "isFromFile": "Desde archivo",
-  "isFromCamera": "Desde cámara",
-  "isFromNetwork": "Desde URL",
-  "isResetIt": "Restablecerlo",
-  "isClearIt": "Limpialo",
+  "tsFontFamily": "Familia de fuentes",
+  "tsFontSize": "Tamaño",
+  "tsFontWeight": "Peso",
+  "tsFontStyle": "Estilo",
+  "tsLetterSpacing": "Espaciado de letras",
+  "tsWordSpacing": "Espaciado de palabras",
+  "tsFontHeight": "Altura",
+  "tsFontDecoration": "Decoración",
 
-  "isEnterURL": "Ingrese URL",
-  "isGetFailed": "Error al recuperar la imagen",
-  "isSetFailed": "Error al actualizar la imagen:\n{error}",
+  "tsFonts": "Fuentes",
 
-  "isUseForColors": "¿Actualizar los colores de la aplicación usando esta imagen?",
+  "tsDisplayPreview": "¿Se muestra bien esto?",
+  "tsHeadlinePreview": "Los titulares son distintos...",
+  "tsTitlePreview": "¿de los títulos?",
+  "tsBodyPreview": "¿Y el cuerpo? ¿Es fácil de leer?",
+  "tsLabelPreview": "¿Y las etiquetas? ¿No son demasiado grandes ni demasiado pequeñas?",
 
-  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
+  "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
+
+
+  
+  "lsPageTitle": "Configuraciones de diseño",
+
+  "lsMargin": "Margen",
+  "lsPadding": "Relleno",
+  "lsSpacing": "Espaciado",
+
+  "lsResetAll": "¿Restablecer todas las configuraciones de diseño?",
+  
 
   
   "csPageTitle": "Configuraciones de color",
@@ -122,29 +136,27 @@
   "csColorScheme": "esquema de colores",
 
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
-
-
-  "tsPageTitle": "Configuraciones de texto",
-
-  "tsFontFamily": "Familia de fuentes",
-  "tsFontSize": "Tamaño",
-  "tsFontWeight": "Peso",
-  "tsFontStyle": "Estilo",
-  "tsLetterSpacing": "Espaciado de letras",
-  "tsWordSpacing": "Espaciado de palabras",
-  "tsFontHeight": "Altura",
-  "tsFontDecoration": "Decoración",
-
-  "tsFonts": "Fuentes",
-
-  "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
-
   
-  "lsPageTitle": "Configuraciones de diseño",
+  
 
-  "lsMargin": "Margen",
-  "lsPadding": "Relleno",
-  "lsSpacing": "Espaciado",
+  "isPageTitle": "Configuraciones de imagen",
 
-  "lsResetAll": "¿Restablecer todas las configuraciones de diseño?"
+  "isBackground": "Fondo",
+  "isImage": "imagen",
+
+  "isButtonHint": "Actualizar la imagen de {title}",
+  "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
+  "isFromFile": "Desde archivo",
+  "isFromCamera": "Desde cámara",
+  "isFromNetwork": "Desde URL",
+  "isResetIt": "Restablecerlo",
+  "isClearIt": "Limpiarlo",
+
+  "isEnterURL": "Ingrese URL",
+  "isGetFailed": "Error al recuperar la imagen",
+  "isSetFailed": "Error al actualizar la imagen:\n{error}",
+
+  "isUseForColors": "¿Actualizar los colores de la aplicación usando esta imagen?",
+
+  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
 }

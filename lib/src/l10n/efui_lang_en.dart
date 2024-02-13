@@ -2,7 +2,7 @@ import 'efui_lang.dart';
 
 /// The translations for English (`en`).
 class EFUILangEn extends EFUILang {
-  EFUILangEn([super.locale = 'en']);
+  EFUILangEn([String locale = 'en']) : super(locale);
 
   @override
   String get gYes => 'Yes';
@@ -122,57 +122,67 @@ class EFUILangEn extends EFUILang {
   String get ssResetAll => 'Reset all settings?';
 
   @override
-  String get isPageTitle => 'Image settings';
+  String get tsPageTitle => 'Text settings';
 
   @override
-  String get isBackground => 'Background';
+  String get tsFontFamily => 'Font family';
 
   @override
-  String get isImage => 'image';
+  String get tsFontSize => 'Size';
 
   @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
-  }
+  String get tsFontWeight => 'Weight';
 
   @override
-  String isDialogTitle(Object title) {
-    return 'How should the $title image be updated?';
-  }
+  String get tsFontStyle => 'Style';
 
   @override
-  String get isFromFile => 'From file';
+  String get tsLetterSpacing => 'Letter spacing';
 
   @override
-  String get isFromCamera => 'From camera';
+  String get tsWordSpacing => 'Word spacing';
 
   @override
-  String get isFromNetwork => 'From URL';
+  String get tsFontHeight => 'Height';
 
   @override
-  String get isResetIt => 'Reset it';
+  String get tsFontDecoration => 'Decoration';
 
   @override
-  String get isClearIt => 'Clear it';
+  String get tsFonts => 'Fonts';
 
   @override
-  String get isEnterURL => 'Enter URL';
+  String get tsDisplayPreview => 'Does this display well?';
 
   @override
-  String get isGetFailed => 'Failed to retrieve image';
+  String get tsHeadlinePreview => 'Are headlines distinct...';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
+  String get tsTitlePreview => 'from titles?';
 
   @override
-  String get isUseForColors => 'Update the app colors using this image?';
+  String get tsBodyPreview => 'How about the body? Is it easy to ready?';
 
   @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
+  String get tsLabelPreview => 'And the labels? Not too big, not too small?';
+
+  @override
+  String get tsResetAll => 'Reset all text settings?';
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 
   @override
   String get csPageTitle => 'Color settings';
@@ -311,50 +321,55 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get tsPageTitle => 'Text settings';
+  String get isPageTitle => 'Image settings';
 
   @override
-  String get tsFontFamily => 'Font family';
+  String get isBackground => 'Background';
 
   @override
-  String get tsFontSize => 'Size';
+  String get isImage => 'image';
 
   @override
-  String get tsFontWeight => 'Weight';
+  String isButtonHint(Object title) {
+    return 'Update the $title image';
+  }
 
   @override
-  String get tsFontStyle => 'Style';
+  String isDialogTitle(Object title) {
+    return 'How should the $title image be updated?';
+  }
 
   @override
-  String get tsLetterSpacing => 'Letter spacing';
+  String get isFromFile => 'From file';
 
   @override
-  String get tsWordSpacing => 'Word spacing';
+  String get isFromCamera => 'From camera';
 
   @override
-  String get tsFontHeight => 'Height';
+  String get isFromNetwork => 'From URL';
 
   @override
-  String get tsFontDecoration => 'Decoration';
+  String get isResetIt => 'Reset it';
 
   @override
-  String get tsFonts => 'Fonts';
+  String get isClearIt => 'Clear it';
 
   @override
-  String get tsResetAll => 'Reset all text settings?';
+  String get isEnterURL => 'Enter URL';
 
   @override
-  String get lsPageTitle => 'Layout settings';
+  String get isGetFailed => 'Failed to retrieve image';
 
   @override
-  String get lsMargin => 'Margin';
+  String isSetFailed(Object error) {
+    return 'Failed to update image:\n$error';
+  }
 
   @override
-  String get lsPadding => 'Padding';
+  String get isUseForColors => 'Update the app colors using this image?';
 
   @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
+  String isResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
 }

@@ -304,95 +304,131 @@ abstract class EFUILang {
   /// **'Reset all settings?'**
   String get ssResetAll;
 
-  /// No description provided for @isPageTitle.
+  /// No description provided for @tsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Image settings'**
-  String get isPageTitle;
+  /// **'Text settings'**
+  String get tsPageTitle;
 
-  /// No description provided for @isBackground.
+  /// No description provided for @tsFontFamily.
   ///
   /// In en, this message translates to:
-  /// **'Background'**
-  String get isBackground;
+  /// **'Font family'**
+  String get tsFontFamily;
 
-  /// No description provided for @isImage.
+  /// No description provided for @tsFontSize.
   ///
   /// In en, this message translates to:
-  /// **'image'**
-  String get isImage;
+  /// **'Size'**
+  String get tsFontSize;
 
-  /// No description provided for @isButtonHint.
+  /// No description provided for @tsFontWeight.
   ///
   /// In en, this message translates to:
-  /// **'Update the {title} image'**
-  String isButtonHint(Object title);
+  /// **'Weight'**
+  String get tsFontWeight;
 
-  /// No description provided for @isDialogTitle.
+  /// No description provided for @tsFontStyle.
   ///
   /// In en, this message translates to:
-  /// **'How should the {title} image be updated?'**
-  String isDialogTitle(Object title);
+  /// **'Style'**
+  String get tsFontStyle;
 
-  /// No description provided for @isFromFile.
+  /// No description provided for @tsLetterSpacing.
   ///
   /// In en, this message translates to:
-  /// **'From file'**
-  String get isFromFile;
+  /// **'Letter spacing'**
+  String get tsLetterSpacing;
 
-  /// No description provided for @isFromCamera.
+  /// No description provided for @tsWordSpacing.
   ///
   /// In en, this message translates to:
-  /// **'From camera'**
-  String get isFromCamera;
+  /// **'Word spacing'**
+  String get tsWordSpacing;
 
-  /// No description provided for @isFromNetwork.
+  /// No description provided for @tsFontHeight.
   ///
   /// In en, this message translates to:
-  /// **'From URL'**
-  String get isFromNetwork;
+  /// **'Height'**
+  String get tsFontHeight;
 
-  /// No description provided for @isResetIt.
+  /// No description provided for @tsFontDecoration.
   ///
   /// In en, this message translates to:
-  /// **'Reset it'**
-  String get isResetIt;
+  /// **'Decoration'**
+  String get tsFontDecoration;
 
-  /// No description provided for @isClearIt.
+  /// No description provided for @tsFonts.
   ///
   /// In en, this message translates to:
-  /// **'Clear it'**
-  String get isClearIt;
+  /// **'Fonts'**
+  String get tsFonts;
 
-  /// No description provided for @isEnterURL.
+  /// No description provided for @tsDisplayPreview.
   ///
   /// In en, this message translates to:
-  /// **'Enter URL'**
-  String get isEnterURL;
+  /// **'Does this display well?'**
+  String get tsDisplayPreview;
 
-  /// No description provided for @isGetFailed.
+  /// No description provided for @tsHeadlinePreview.
   ///
   /// In en, this message translates to:
-  /// **'Failed to retrieve image'**
-  String get isGetFailed;
+  /// **'Are headlines distinct...'**
+  String get tsHeadlinePreview;
 
-  /// No description provided for @isSetFailed.
+  /// No description provided for @tsTitlePreview.
   ///
   /// In en, this message translates to:
-  /// **'Failed to update image:\n{error}'**
-  String isSetFailed(Object error);
+  /// **'from titles?'**
+  String get tsTitlePreview;
 
-  /// No description provided for @isUseForColors.
+  /// No description provided for @tsBodyPreview.
   ///
   /// In en, this message translates to:
-  /// **'Update the app colors using this image?'**
-  String get isUseForColors;
+  /// **'How about the body? Is it easy to ready?'**
+  String get tsBodyPreview;
 
-  /// No description provided for @isResetAll.
+  /// No description provided for @tsLabelPreview.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme images?'**
-  String isResetAll(Object themeType);
+  /// **'And the labels? Not too big, not too small?'**
+  String get tsLabelPreview;
+
+  /// No description provided for @tsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all text settings?'**
+  String get tsResetAll;
+
+  /// No description provided for @lsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout settings'**
+  String get lsPageTitle;
+
+  /// No description provided for @lsMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get lsMargin;
+
+  /// No description provided for @lsPadding.
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get lsPadding;
+
+  /// No description provided for @lsSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Spacing'**
+  String get lsSpacing;
+
+  /// No description provided for @lsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all layout settings?'**
+  String get lsResetAll;
 
   /// No description provided for @csPageTitle.
   ///
@@ -658,101 +694,95 @@ abstract class EFUILang {
   /// **'Reset all {themeType} theme colors?'**
   String csResetAll(Object themeType);
 
-  /// No description provided for @tsPageTitle.
+  /// No description provided for @isPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Text settings'**
-  String get tsPageTitle;
+  /// **'Image settings'**
+  String get isPageTitle;
 
-  /// No description provided for @tsFontFamily.
+  /// No description provided for @isBackground.
   ///
   /// In en, this message translates to:
-  /// **'Font family'**
-  String get tsFontFamily;
+  /// **'Background'**
+  String get isBackground;
 
-  /// No description provided for @tsFontSize.
+  /// No description provided for @isImage.
   ///
   /// In en, this message translates to:
-  /// **'Size'**
-  String get tsFontSize;
+  /// **'image'**
+  String get isImage;
 
-  /// No description provided for @tsFontWeight.
+  /// No description provided for @isButtonHint.
   ///
   /// In en, this message translates to:
-  /// **'Weight'**
-  String get tsFontWeight;
+  /// **'Update the {title} image'**
+  String isButtonHint(Object title);
 
-  /// No description provided for @tsFontStyle.
+  /// No description provided for @isDialogTitle.
   ///
   /// In en, this message translates to:
-  /// **'Style'**
-  String get tsFontStyle;
+  /// **'How should the {title} image be updated?'**
+  String isDialogTitle(Object title);
 
-  /// No description provided for @tsLetterSpacing.
+  /// No description provided for @isFromFile.
   ///
   /// In en, this message translates to:
-  /// **'Letter spacing'**
-  String get tsLetterSpacing;
+  /// **'From file'**
+  String get isFromFile;
 
-  /// No description provided for @tsWordSpacing.
+  /// No description provided for @isFromCamera.
   ///
   /// In en, this message translates to:
-  /// **'Word spacing'**
-  String get tsWordSpacing;
+  /// **'From camera'**
+  String get isFromCamera;
 
-  /// No description provided for @tsFontHeight.
+  /// No description provided for @isFromNetwork.
   ///
   /// In en, this message translates to:
-  /// **'Height'**
-  String get tsFontHeight;
+  /// **'From URL'**
+  String get isFromNetwork;
 
-  /// No description provided for @tsFontDecoration.
+  /// No description provided for @isResetIt.
   ///
   /// In en, this message translates to:
-  /// **'Decoration'**
-  String get tsFontDecoration;
+  /// **'Reset it'**
+  String get isResetIt;
 
-  /// No description provided for @tsFonts.
+  /// No description provided for @isClearIt.
   ///
   /// In en, this message translates to:
-  /// **'Fonts'**
-  String get tsFonts;
+  /// **'Clear it'**
+  String get isClearIt;
 
-  /// No description provided for @tsResetAll.
+  /// No description provided for @isEnterURL.
   ///
   /// In en, this message translates to:
-  /// **'Reset all text settings?'**
-  String get tsResetAll;
+  /// **'Enter URL'**
+  String get isEnterURL;
 
-  /// No description provided for @lsPageTitle.
+  /// No description provided for @isGetFailed.
   ///
   /// In en, this message translates to:
-  /// **'Layout settings'**
-  String get lsPageTitle;
+  /// **'Failed to retrieve image'**
+  String get isGetFailed;
 
-  /// No description provided for @lsMargin.
+  /// No description provided for @isSetFailed.
   ///
   /// In en, this message translates to:
-  /// **'Margin'**
-  String get lsMargin;
+  /// **'Failed to update image:\n{error}'**
+  String isSetFailed(Object error);
 
-  /// No description provided for @lsPadding.
+  /// No description provided for @isUseForColors.
   ///
   /// In en, this message translates to:
-  /// **'Padding'**
-  String get lsPadding;
+  /// **'Update the app colors using this image?'**
+  String get isUseForColors;
 
-  /// No description provided for @lsSpacing.
+  /// No description provided for @isResetAll.
   ///
   /// In en, this message translates to:
-  /// **'Spacing'**
-  String get lsSpacing;
-
-  /// No description provided for @lsResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all layout settings?'**
-  String get lsResetAll;
+  /// **'Reset all {themeType} theme images?'**
+  String isResetAll(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
