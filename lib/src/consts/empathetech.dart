@@ -139,7 +139,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
   // Title
   titleFontFamilyKey: roboto,
   titleFontSizeKey: 22.0,
-  titleFontWeightKey: normalWeight,
+  titleFontWeightKey: boldWeight,
   titleFontStyleKey: normalStyle,
   titleLetterSpacingKey: 0.0,
   titleWordSpacingKey: 1.0,
