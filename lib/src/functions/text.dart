@@ -37,15 +37,32 @@ TextStyle? getLabel(BuildContext context) {
 
 // Setters //
 
-/// Creates a "large" [TextTheme] with sizes from...
+/// Creates a [TextTheme] with sizes from...
 /// https://m3.material.io/styles/typography/type-scale-tokens
+/// Each variant triplet (large, medium, small) are the same size: large
 TextTheme ezTextTheme() {
+  final TextStyle display = buildDisplay();
+  final TextStyle headline = buildHeadline();
+  final TextStyle title = buildTitle();
+  final TextStyle body = buildBody();
+  final TextStyle label = buildLabel();
+
   return TextTheme(
-    displayLarge: buildDisplay(),
-    headlineLarge: buildHeadline(),
-    titleLarge: buildTitle(),
-    labelLarge: buildLabel(),
-    bodyLarge: buildBody(),
+    displayLarge: display,
+    displayMedium: display,
+    displaySmall: display,
+    headlineLarge: headline,
+    headlineMedium: headline,
+    headlineSmall: headline,
+    titleLarge: title,
+    titleMedium: title,
+    titleSmall: title,
+    bodyLarge: body,
+    bodyMedium: body,
+    bodySmall: body,
+    labelLarge: label,
+    labelMedium: label,
+    labelSmall: label,
   );
 }
 
