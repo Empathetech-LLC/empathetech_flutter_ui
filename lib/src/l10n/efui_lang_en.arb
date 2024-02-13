@@ -2,6 +2,7 @@
   "@@locale" : "en",
 
 
+
   "gYes": "Yes",
   "gNo": "No",
   "gOptions": "Options",
@@ -36,6 +37,7 @@
   "gCreditTo": "Credit to:",
 
 
+
   "ssPageTitle": "Settings",
   "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
   "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
@@ -50,28 +52,40 @@
   "ssResetAll": "Reset all settings?",
 
 
-  "isPageTitle": "Image settings",
 
-  "isBackground": "Background",
-  "isImage": "image",
+  "tsPageTitle": "Text settings",
 
-  "isButtonHint": "Update the {title} image",
-  "isDialogTitle": "How should the {title} image be updated?",
-  "isFromFile": "From file",
-  "isFromCamera": "From camera",
-  "isFromNetwork": "From URL",
-  "isResetIt": "Reset it",
-  "isClearIt": "Clear it",
+  "tsFontFamily": "Font family",
+  "tsFontSize": "Size",
+  "tsFontWeight": "Weight",
+  "tsFontStyle": "Style",
+  "tsLetterSpacing": "Letter spacing",
+  "tsWordSpacing": "Word spacing",
+  "tsFontHeight": "Height",
+  "tsFontDecoration": "Decoration",
 
-  "isEnterURL": "Enter URL",
-  "isGetFailed": "Failed to retrieve image",
-  "isSetFailed": "Failed to update image:\n{error}",
+  "tsFonts": "Fonts",
+
+  "tsDisplayPreview": "Does this display well?",
+  "tsHeadlinePreview": "Are headlines distinct...",
+  "tsTitlePreview": "from titles?",
+  "tsBodyPreview": "How about the body? Is it easy to ready?",
+  "tsLabelPreview": "And the labels? Not too big, not too small?",
+
+  "tsResetAll": "Reset all text settings?",
+
+
+
+  "lsPageTitle": "Layout settings",
+
+  "lsMargin": "Margin",
+  "lsPadding": "Padding",
+  "lsSpacing": "Spacing",
+
+  "lsResetAll": "Reset all layout settings?",
   
-  "isUseForColors": "Update the app colors using this image?",
-
-  "isResetAll": "Reset all {themeType} theme images?",
-
-
+  
+  
   "csPageTitle": "Color settings",
 
   "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
@@ -124,27 +138,25 @@
   "csResetAll": "Reset all {themeType} theme colors?",
 
 
-  "tsPageTitle": "Text settings",
 
-  "tsFontFamily": "Font family",
-  "tsFontSize": "Size",
-  "tsFontWeight": "Weight",
-  "tsFontStyle": "Style",
-  "tsLetterSpacing": "Letter spacing",
-  "tsWordSpacing": "Word spacing",
-  "tsFontHeight": "Height",
-  "tsFontDecoration": "Decoration",
+  "isPageTitle": "Image settings",
 
-  "tsFonts": "Fonts",
+  "isBackground": "Background",
+  "isImage": "image",
 
-  "tsResetAll": "Reset all text settings?",
+  "isButtonHint": "Update the {title} image",
+  "isDialogTitle": "How should the {title} image be updated?",
+  "isFromFile": "From file",
+  "isFromCamera": "From camera",
+  "isFromNetwork": "From URL",
+  "isResetIt": "Reset it",
+  "isClearIt": "Clear it",
+
+  "isEnterURL": "Enter URL",
+  "isGetFailed": "Failed to retrieve image",
+  "isSetFailed": "Failed to update image:\n{error}",
   
-  
-  "lsPageTitle": "Layout settings",
+  "isUseForColors": "Update the app colors using this image?",
 
-  "lsMargin": "Margin",
-  "lsPadding": "Padding",
-  "lsSpacing": "Spacing",
-
-  "lsResetAll": "Reset all layout settings?"
+  "isResetAll": "Reset all {themeType} theme images?"
 }
