@@ -118,7 +118,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Display
   displayFontFamilyKey: roboto,
-  displayFontSizeKey: 57,
+  displayFontSizeKey: 57.0,
   displayFontWeightKey: normalWeight,
   displayFontStyleKey: normalStyle,
   displayLetterSpacingKey: 0.0,
@@ -128,7 +128,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Headline
   headlineFontFamilyKey: roboto,
-  headlineFontSizeKey: 32,
+  headlineFontSizeKey: 32.0,
   headlineFontWeightKey: normalWeight,
   headlineFontStyleKey: normalStyle,
   headlineLetterSpacingKey: 0.0,
@@ -138,7 +138,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Title
   titleFontFamilyKey: roboto,
-  titleFontSizeKey: 22,
+  titleFontSizeKey: 22.0,
   titleFontWeightKey: normalWeight,
   titleFontStyleKey: normalStyle,
   titleLetterSpacingKey: 0.0,
@@ -148,7 +148,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Body
   bodyFontFamilyKey: roboto,
-  bodyFontSizeKey: 16,
+  bodyFontSizeKey: 16.0,
   bodyFontWeightKey: normalWeight,
   bodyFontStyleKey: normalStyle,
   bodyLetterSpacingKey: 0.0,
@@ -158,7 +158,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Label
   labelFontFamilyKey: roboto,
-  labelFontSizeKey: 14,
+  labelFontSizeKey: 14.0,
   labelFontWeightKey: normalWeight,
   labelFontStyleKey: normalStyle,
   labelLetterSpacingKey: 0.0,
