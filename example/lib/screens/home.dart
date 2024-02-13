@@ -69,10 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             spacer,
 
-            // Image settings
+            // Layout settings
             ElevatedButton(
-              onPressed: () => context.go(imageSettingsRoute),
-              child: Text(EFUILang.of(context)!.isPageTitle),
+              onPressed: () => context.go(layoutSettingsRoute),
+              child: Text(EFUILang.of(context)!.lsPageTitle),
             ),
             spacer,
 
@@ -83,10 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             spacer,
 
-            // Layout settings
+            // Image settings
             ElevatedButton(
-              onPressed: () => context.go(layoutSettingsRoute),
-              child: Text(EFUILang.of(context)!.lsPageTitle),
+              onPressed: () => context.go(imageSettingsRoute),
+              child: Text(EFUILang.of(context)!.isPageTitle),
             ),
             separator,
 
