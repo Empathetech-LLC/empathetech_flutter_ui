@@ -27,7 +27,7 @@ void main() async {
     preferences: prefs,
 
     // Your brand colors, custom styling, etc
-    customDefaults: <String, dynamic>{},
+    defaults: empathetechConfig,
   );
 
   // Set device orientation(s)
