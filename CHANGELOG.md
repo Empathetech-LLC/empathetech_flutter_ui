@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 - Lint rules
   - Audited code according to new rules
 - Color settings config key strategy
+- EzConfig.init(customDefaults -> defaults) && no longer using empathetechConfig as a base
+  - Potential (somewhat likely) breaking change
 
 ### Removed
 - TextSpacingKey && associated Widgets
