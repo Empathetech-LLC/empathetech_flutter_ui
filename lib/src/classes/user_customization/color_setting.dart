@@ -33,6 +33,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   // Gather the theme data //
 
   late final int? _prefsValue = EzConfig.get(widget.setting);
+
   late Color currColor = (_prefsValue == null)
       ? getLiveColor(context, widget.setting)
       : Color(_prefsValue);
@@ -57,6 +58,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       },
       onConfirm: () {
         // Update the user's setting
+        debugPrint('Prefs value for ${widget.setting}: $_prefsValue');
+        debugPrint('Setting ${widget.setting} to ${currColor.value}');
         EzConfig.setInt(widget.setting, currColor.value);
 
         popScreen(context: context, result: currColor.value);
