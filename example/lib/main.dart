@@ -42,42 +42,37 @@ void main() async {
   runApp(const EFUIExample());
 }
 
-// Initialize a path based router for web-enabled apps
-// Or any other app that requires deep linking
-// https://docs.flutter.dev/ui/navigation/deep-linking
+/// Initialize a path based router for web-enabled apps
+/// Or any other app that requires deep linking
+/// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter _router = GoRouter(
   initialLocation: homeRoute,
   routes: <RouteBase>[
     GoRoute(
-      name: homeRoute,
       path: homeRoute,
       builder: (BuildContext context, GoRouterState state) {
         return const HomeScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          name: textSettingsRoute,
           path: textSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const TextSettingsScreen();
           },
         ),
         GoRoute(
-          name: imageSettingsRoute,
           path: imageSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const ImageSettingsScreen();
           },
         ),
         GoRoute(
-          name: colorSettingsRoute,
           path: colorSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const ColorSettingsScreen();
           },
         ),
         GoRoute(
-          name: layoutSettingsRoute,
           path: layoutSettingsRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const LayoutSettingsScreen();
