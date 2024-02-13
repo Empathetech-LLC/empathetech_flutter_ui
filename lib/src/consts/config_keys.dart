@@ -6,6 +6,9 @@
 // Global values //
 
 /// '/'
+const String homePath = '/';
+
+/// '/'
 const String homeRoute = '/';
 
 /// Allows for app images whose default is an asset to be "null"
