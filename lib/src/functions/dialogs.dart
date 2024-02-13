@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -16,7 +15,7 @@ Future<dynamic> logAlert({
   String? title,
   required String message,
 }) {
-  log(message);
+  debugPrint(message);
   return showPlatformDialog(
     context: context,
     builder: (BuildContext context) => EzAlertDialog(
