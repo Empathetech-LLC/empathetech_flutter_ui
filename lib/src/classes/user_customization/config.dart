@@ -5,7 +5,6 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,11 +17,10 @@ class EzConfig {
   /// Used for [AssetImage] and video checks
   final Set<String> assetPaths;
 
-  /// Default config values
-  /// [empathetechConfig] merged with any provided customDefaults
+  /// Default config
   final Map<String, dynamic> defaults;
 
-  /// All keys (and their value [Type]) in the known EzConfig universe
+  /// All keys (and their value [Type]) in the known EzConfigverse
   final Map<String, Type> keys;
 
   /// Live values in use
@@ -43,37 +41,26 @@ class EzConfig {
 
   /// [preferences] => provide a [SharedPreferences] instance
   /// [assetPaths] => provide your [AssetImage] paths for this app
-  /// [customDefaults] => provide your brand colors, custom styling, etc
+  /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   factory EzConfig.init({
     required SharedPreferences preferences,
     required Set<String> assetPaths,
-    Map<String, dynamic>? customDefaults,
+    required Map<String, dynamic> defaults,
   }) {
     if (_instance == null) {
-      // Build this.defaults //
-
-      // Start with Empathetech's config
-      final Map<String, dynamic> defaults =
-          Map<String, dynamic>.from(empathetechConfig);
-
-      // Merge custom defaults
-      if (customDefaults != null) defaults.addAll(customDefaults);
-
       // Build this.keys //
 
-      // Start with Empathetech's config
+      // Start with the known EzConfigverse
       final Map<String, Type> keys = Map<String, Type>.from(allKeys);
 
-      // Merge custom defaults
-      if (customDefaults != null) {
-        for (final MapEntry<String, dynamic> entry in customDefaults.entries) {
-          keys[entry.key] = entry.value.runtimeType;
-        }
+      // Merge defaults
+      for (final MapEntry<String, dynamic> entry in defaults.entries) {
+        keys[entry.key] = entry.value.runtimeType;
       }
 
       // Build this.prefs //
 
-      // Start with the newly merged defaults
+      // Start with the defaults
       final Map<String, dynamic> prefs = Map<String, dynamic>.from(defaults);
 
       // Find the keys that users have overwritten
@@ -94,6 +81,7 @@ class EzConfig {
 
           case const (int):
             userPref = preferences.getInt(key);
+            debugPrint('UserPref for $key: $userPref');
             break;
 
           case const (double):
@@ -109,7 +97,7 @@ class EzConfig {
             break;
 
           default:
-            log('''Key [$key] has unsupported Type [$valueType]
+            debugPrint('''Key [$key] has unsupported Type [$valueType]
 Must be one of [int, bool, double, String, List<String>]''');
             break;
         }
