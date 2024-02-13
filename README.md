@@ -84,7 +84,7 @@ void main() async {
     preferences: prefs,
 
     // Your brand colors, custom styling, etc
-    customDefaults: {},
+    defaults: empathetechConfig,
   );
   
   SystemChrome.setPreferredOrientations([
