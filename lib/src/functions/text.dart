@@ -54,12 +54,12 @@ TextStyle buildDisplay({Color? color}) {
   return EzTextStyle(
     fontFamily: EzConfig.get(displayFontFamilyKey),
     fontSize: EzConfig.get(displayFontSizeKey),
-    fontWeight: EzConfig.get(displayFontWeightKey),
-    fontStyle: EzConfig.get(displayFontStyleKey),
+    fontWeight: weightFromName(EzConfig.get(displayFontWeightKey)),
+    fontStyle: styleFromName(EzConfig.get(displayFontStyleKey)),
     letterSpacing: EzConfig.get(displayLetterSpacingKey),
     wordSpacing: EzConfig.get(displayWordSpacingKey),
     height: EzConfig.get(displayFontHeightKey),
-    decoration: EzConfig.get(displayFontDecorationKey),
+    decoration: decorationFromName(EzConfig.get(displayFontDecorationKey)),
     color: color,
   );
 }
@@ -69,12 +69,12 @@ TextStyle buildHeadline({Color? color}) {
   return EzTextStyle(
     fontFamily: EzConfig.get(headlineFontFamilyKey),
     fontSize: EzConfig.get(headlineFontSizeKey),
-    fontWeight: EzConfig.get(headlineFontWeightKey),
-    fontStyle: EzConfig.get(headlineFontStyleKey),
+    fontWeight: weightFromName(EzConfig.get(headlineFontWeightKey)),
+    fontStyle: styleFromName(EzConfig.get(headlineFontStyleKey)),
     letterSpacing: EzConfig.get(headlineLetterSpacingKey),
     wordSpacing: EzConfig.get(headlineWordSpacingKey),
     height: EzConfig.get(headlineFontHeightKey),
-    decoration: EzConfig.get(headlineFontDecorationKey),
+    decoration: decorationFromName(EzConfig.get(headlineFontDecorationKey)),
     color: color,
   );
 }
@@ -84,12 +84,12 @@ TextStyle buildTitle({Color? color}) {
   return EzTextStyle(
     fontFamily: EzConfig.get(titleFontFamilyKey),
     fontSize: EzConfig.get(titleFontSizeKey),
-    fontWeight: EzConfig.get(titleFontWeightKey),
-    fontStyle: EzConfig.get(titleFontStyleKey),
+    fontWeight: weightFromName(EzConfig.get(titleFontWeightKey)),
+    fontStyle: styleFromName(EzConfig.get(titleFontStyleKey)),
     letterSpacing: EzConfig.get(titleLetterSpacingKey),
     wordSpacing: EzConfig.get(titleWordSpacingKey),
     height: EzConfig.get(titleFontHeightKey),
-    decoration: EzConfig.get(titleFontDecorationKey),
+    decoration: decorationFromName(EzConfig.get(titleFontDecorationKey)),
     color: color,
   );
 }
@@ -99,12 +99,12 @@ TextStyle buildBody({Color? color}) {
   return EzTextStyle(
     fontFamily: EzConfig.get(bodyFontFamilyKey),
     fontSize: EzConfig.get(bodyFontSizeKey),
-    fontWeight: EzConfig.get(bodyFontWeightKey),
-    fontStyle: EzConfig.get(bodyFontStyleKey),
+    fontWeight: weightFromName(EzConfig.get(bodyFontWeightKey)),
+    fontStyle: styleFromName(EzConfig.get(bodyFontStyleKey)),
     letterSpacing: EzConfig.get(bodyLetterSpacingKey),
     wordSpacing: EzConfig.get(bodyWordSpacingKey),
     height: EzConfig.get(bodyFontHeightKey),
-    decoration: EzConfig.get(bodyFontDecorationKey),
+    decoration: decorationFromName(EzConfig.get(bodyFontDecorationKey)),
     color: color,
   );
 }
@@ -114,12 +114,12 @@ TextStyle buildLabel({Color? color}) {
   return EzTextStyle(
     fontFamily: EzConfig.get(labelFontFamilyKey),
     fontSize: EzConfig.get(labelFontSizeKey),
-    fontWeight: EzConfig.get(labelFontWeightKey),
-    fontStyle: EzConfig.get(labelFontStyleKey),
+    fontWeight: weightFromName(EzConfig.get(labelFontWeightKey)),
+    fontStyle: styleFromName(EzConfig.get(labelFontStyleKey)),
     letterSpacing: EzConfig.get(labelLetterSpacingKey),
     wordSpacing: EzConfig.get(labelWordSpacingKey),
     height: EzConfig.get(labelFontHeightKey),
-    decoration: EzConfig.get(labelFontDecorationKey),
+    decoration: decorationFromName(EzConfig.get(labelFontDecorationKey)),
     color: color,
   );
 }
@@ -152,4 +152,42 @@ Size measureText(
   )..layout();
 
   return textPainter.size;
+}
+
+/// Returns the [FontWeight] from the passed [name]
+/// [thinWeight], [normalWeight], && [boldWeight]
+FontWeight weightFromName(String name) {
+  switch (name) {
+    case thinWeight:
+      return FontWeight.w100;
+    case boldWeight:
+      return FontWeight.w700;
+    case normalWeight:
+    default:
+      return FontWeight.w400;
+  }
+}
+
+/// Returns the [FontStyle] from the passed [name]
+/// [italicStyle] && [normalStyle]
+FontStyle styleFromName(String name) {
+  switch (name) {
+    case italicStyle:
+      return FontStyle.italic;
+    case normalStyle:
+    default:
+      return FontStyle.normal;
+  }
+}
+
+/// Returns the [TextDecoration] from the passed [name]
+/// [underlineDecoration], && [noDecoration]
+TextDecoration decorationFromName(String name) {
+  switch (name) {
+    case underlineDecoration:
+      return TextDecoration.underline;
+    case noDecoration:
+    default:
+      return TextDecoration.none;
+  }
 }
