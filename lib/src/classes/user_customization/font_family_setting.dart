@@ -21,8 +21,8 @@ class EzFontSetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontSetting> {
   // Gather the theme data //
 
-  final String _defaultFontFamily = EzConfig.getDefault(fontFamilyKey);
-  String? currFontFamily = EzConfig.get(fontFamilyKey);
+  final String _defaultFontFamily = EzConfig.getDefault(headlineFontFamilyKey);
+  String? currFontFamily = EzConfig.get(headlineFontFamilyKey);
 
   final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
@@ -36,7 +36,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       buttons.addAll(<Widget>[
         ElevatedButton(
           onPressed: () {
-            EzConfig.setString(fontFamilyKey, font);
+            EzConfig.setString(headlineFontFamilyKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });
