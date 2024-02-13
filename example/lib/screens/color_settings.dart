@@ -235,6 +235,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                 // Show available color settings
                 await showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
+                  showDragHandle: true,
                   builder: (BuildContext context) => StatefulBuilder(
                     builder:
                         (BuildContext context, StateSetter modalSheetState) {
