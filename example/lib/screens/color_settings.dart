@@ -147,7 +147,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   }
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
-  List<Widget> _getUntrackedColors(StateSetter modalSheetState) {
+  List<Widget> _getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
 
     return fullList
@@ -190,7 +190,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             setState(() {
               currList.add(settingKey);
             });
-            modalSheetState(() {});
+            setModalState(() {});
           },
         ),
       );
@@ -239,10 +239,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   builder: (BuildContext context) => StatefulBuilder(
                     builder: (
                       BuildContext context,
-                      StateSetter modalSheetState,
+                      StateSetter setModalState,
                     ) {
                       return EzScrollView(
-                        children: _getUntrackedColors(modalSheetState),
+                        children: _getUntrackedColors(setModalState),
                       );
                     },
                   ),
