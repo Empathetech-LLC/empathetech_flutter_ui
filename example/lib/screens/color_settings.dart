@@ -16,7 +16,7 @@ class ColorSettingsScreen extends StatefulWidget {
 class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   // Gather the theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -28,9 +28,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   // Define the static page content //
 
-  late final String themeProfile = isLight
-      ? EFUILang.of(context)!.gLight.toLowerCase()
-      : EFUILang.of(context)!.gDark.toLowerCase();
+  late final String themeProfile = isDark
+      ? EFUILang.of(context)!.gDark.toLowerCase()
+      : EFUILang.of(context)!.gLight.toLowerCase();
 
   /// Build from image button label
   late final String fromImageLabel = EFUILang.of(context)!.csSchemeBase;
@@ -44,39 +44,38 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final String resetDialogTitle =
       EFUILang.of(context)!.csResetAll(themeProfile);
 
-  late final List<String> defaultList = isLight
+  late final List<String> defaultList = isDark
       ? <String>[
-          '$light$primaryKey',
-          '$light$secondaryKey',
-          '$light$tertiaryKey',
-          '$light$backgroundKey',
-          '$light$surfaceKey',
+          darkPrimaryKey,
+          darkSecondaryKey,
+          darkTertiaryKey,
+          darkBackgroundKey,
+          darkSurfaceKey,
         ]
       : <String>[
-          '$dark$primaryKey',
-          '$dark$secondaryKey',
-          '$dark$tertiaryKey',
-          '$dark$backgroundKey',
-          '$dark$surfaceKey',
+          lightPrimaryKey,
+          lightSecondaryKey,
+          lightTertiaryKey,
+          lightBackgroundKey,
+          lightSurfaceKey,
         ];
   late final Set<String> defaultSet = defaultList.toSet();
-  late final List<String> fullList = allColors
-      .map((String color) => isLight ? '$light$color' : '$dark$color')
-      .toList();
+
+  late final List<String> fullList = isDark ? darkColors : lightColors;
 
   /// Return the [List] of [Widget]s that aren't [EzColorSetting]s
   late final List<Widget> _otherButtons = <Widget>[
-    isLight
+    isDark
         ? Semantics(
             button: true,
             hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
-                prefsKey: '$light$colorSchemeImageKey',
+                prefsKey: darkColorSchemeImageKey,
                 label: fromImageLabel,
                 dialogTitle: fromImageTitle,
                 allowClear: true,
-                updateTheme: Brightness.light,
+                updateTheme: Brightness.dark,
                 hideThemeMessage: true,
               ),
             ),
@@ -86,11 +85,11 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
-                prefsKey: '$dark$colorSchemeImageKey',
+                prefsKey: lightColorSchemeImageKey,
                 label: fromImageLabel,
                 dialogTitle: fromImageTitle,
                 allowClear: true,
-                updateTheme: Brightness.dark,
+                updateTheme: Brightness.light,
                 hideThemeMessage: true,
               ),
             ),
@@ -213,8 +212,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey:
-            isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
+        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Current theme reminder

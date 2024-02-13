@@ -69,9 +69,7 @@ class EzConfig {
 
       // Get the updated values
       for (final String key in overwritten) {
-        final String noPrefixKey = key.replaceAll(prefixesRegExp, '');
-
-        final Type? valueType = keys[noPrefixKey];
+        final Type? valueType = keys[key];
         dynamic userPref;
 
         switch (valueType) {

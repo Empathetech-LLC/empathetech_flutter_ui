@@ -15,7 +15,7 @@ class ImageSettingsScreen extends StatefulWidget {
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   // Gather the theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double spacing = EzConfig.get(spacingKey);
 
@@ -24,30 +24,26 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
   // Define the page content //
 
-  late final String themeProfile = isLight
-      ? EFUILang.of(context)!.gLight.toLowerCase()
-      : EFUILang.of(context)!.gDark.toLowerCase();
+  late final String themeProfile = isDark
+      ? EFUILang.of(context)!.gDark.toLowerCase()
+      : EFUILang.of(context)!.gLight.toLowerCase();
 
   late final String resetTitle = EFUILang.of(context)!.isResetAll(themeProfile);
 
-  late final Set<String> resetAllKeys = imageKeys.keys
-      .map((String key) => isLight ? '$light$key' : '$dark$key')
-      .toSet();
-
   late final List<Widget> settingsButtons = <Widget>[
-    isLight
+    isDark
         // Page
         ? EzImageSetting(
-            prefsKey: '$light$pageImageKey',
-            label: EFUILang.of(context)!.isBackground,
-            allowClear: true,
-            updateTheme: Brightness.light,
-          )
-        : EzImageSetting(
-            prefsKey: '$dark$pageImageKey',
+            prefsKey: darkPageImageKey,
             label: EFUILang.of(context)!.isBackground,
             allowClear: true,
             updateTheme: Brightness.dark,
+          )
+        : EzImageSetting(
+            prefsKey: lightPageImageKey,
+            label: EFUILang.of(context)!.isBackground,
+            allowClear: true,
+            updateTheme: Brightness.light,
           ),
     _buttonSeparator,
 
@@ -55,7 +51,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     EzResetButton(
       dialogTitle: resetTitle,
       onConfirm: () {
-        EzConfig.removeKeys(resetAllKeys);
+        EzConfig.removeKeys(imageKeys.keys.toSet());
         popScreen(context: context, result: true);
       },
     ),
@@ -76,8 +72,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey:
-            isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
+        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Current theme reminder

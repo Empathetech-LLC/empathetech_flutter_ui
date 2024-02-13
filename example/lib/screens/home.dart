@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double spacing = EzConfig.get(spacingKey);
 
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       body: EzScreen(
-        decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
+        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Functionality disclaimer

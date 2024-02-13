@@ -49,39 +49,78 @@ TextTheme ezTextTheme() {
   );
 }
 
-/// Builds a [TextStyle] w/
-/// [TextStyle.fontFamily] from [fontFamilyKey]
-/// [TextStyle.fontSize] of 57
-/// and [color]
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
 TextStyle buildDisplay({Color? color}) {
   return EzTextStyle(
-    fontFamily: EzConfig.get(fontFamilyKey),
-    fontSize: 57,
+    fontFamily: EzConfig.get(displayFontFamilyKey),
+    fontSize: EzConfig.get(displayFontSizeKey),
+    fontWeight: EzConfig.get(displayFontWeightKey),
+    fontStyle: EzConfig.get(displayFontStyleKey),
+    letterSpacing: EzConfig.get(displayLetterSpacingKey),
+    wordSpacing: EzConfig.get(displayWordSpacingKey),
+    height: EzConfig.get(displayFontHeightKey),
+    decoration: EzConfig.get(displayFontDecorationKey),
     color: color,
   );
 }
 
-/// Builds a [TextStyle] w/
-/// [TextStyle.fontFamily] from [fontFamilyKey]
-/// [TextStyle.fontSize] of 32
-/// and [color]
+/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
 TextStyle buildHeadline({Color? color}) {
   return EzTextStyle(
-    fontSize: 32,
+    fontFamily: EzConfig.get(headlineFontFamilyKey),
+    fontSize: EzConfig.get(headlineFontSizeKey),
+    fontWeight: EzConfig.get(headlineFontWeightKey),
+    fontStyle: EzConfig.get(headlineFontStyleKey),
+    letterSpacing: EzConfig.get(headlineLetterSpacingKey),
+    wordSpacing: EzConfig.get(headlineWordSpacingKey),
+    height: EzConfig.get(headlineFontHeightKey),
+    decoration: EzConfig.get(headlineFontDecorationKey),
     color: color,
-    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 
-/// Builds a [TextStyle] w/
-/// [TextStyle.fontFamily] from [fontFamilyKey]
-/// [TextStyle.fontSize] of 22
-/// and [color]
+/// Builds [TextTheme.titleLarge] w/ values from [EzConfig]
 TextStyle buildTitle({Color? color}) {
   return EzTextStyle(
-    fontSize: 22,
+    fontFamily: EzConfig.get(titleFontFamilyKey),
+    fontSize: EzConfig.get(titleFontSizeKey),
+    fontWeight: EzConfig.get(titleFontWeightKey),
+    fontStyle: EzConfig.get(titleFontStyleKey),
+    letterSpacing: EzConfig.get(titleLetterSpacingKey),
+    wordSpacing: EzConfig.get(titleWordSpacingKey),
+    height: EzConfig.get(titleFontHeightKey),
+    decoration: EzConfig.get(titleFontDecorationKey),
     color: color,
-    fontFamily: EzConfig.get(fontFamilyKey),
+  );
+}
+
+/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
+TextStyle buildBody({Color? color}) {
+  return EzTextStyle(
+    fontFamily: EzConfig.get(bodyFontFamilyKey),
+    fontSize: EzConfig.get(bodyFontSizeKey),
+    fontWeight: EzConfig.get(bodyFontWeightKey),
+    fontStyle: EzConfig.get(bodyFontStyleKey),
+    letterSpacing: EzConfig.get(bodyLetterSpacingKey),
+    wordSpacing: EzConfig.get(bodyWordSpacingKey),
+    height: EzConfig.get(bodyFontHeightKey),
+    decoration: EzConfig.get(bodyFontDecorationKey),
+    color: color,
+  );
+}
+
+/// Builds [TextTheme.labelLarge] w/ values from [EzConfig]
+TextStyle buildLabel({Color? color}) {
+  return EzTextStyle(
+    fontFamily: EzConfig.get(labelFontFamilyKey),
+    fontSize: EzConfig.get(labelFontSizeKey),
+    fontWeight: EzConfig.get(labelFontWeightKey),
+    fontStyle: EzConfig.get(labelFontStyleKey),
+    letterSpacing: EzConfig.get(labelLetterSpacingKey),
+    wordSpacing: EzConfig.get(labelWordSpacingKey),
+    height: EzConfig.get(labelFontHeightKey),
+    decoration: EzConfig.get(labelFontDecorationKey),
+    color: color,
   );
 }
 
@@ -89,30 +128,6 @@ TextStyle buildTitle({Color? color}) {
 void setPageTitle(String title) {
   SystemChrome.setApplicationSwitcherDescription(
     ApplicationSwitcherDescription(label: title),
-  );
-}
-
-/// Builds a [TextStyle] w/
-/// [TextStyle.fontFamily] from [fontFamilyKey]
-/// [TextStyle.fontSize] of 16
-/// and [color]
-TextStyle buildBody({Color? color}) {
-  return EzTextStyle(
-    fontSize: 16,
-    color: color,
-    fontFamily: EzConfig.get(fontFamilyKey),
-  );
-}
-
-/// Builds a [TextStyle] w/
-/// [TextStyle.fontFamily] from [fontFamilyKey]
-/// [TextStyle.fontSize] of 14
-/// and [color]
-TextStyle buildLabel({Color? color}) {
-  return EzTextStyle(
-    fontSize: 14,
-    color: color,
-    fontFamily: EzConfig.get(fontFamilyKey),
   );
 }
 

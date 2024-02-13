@@ -154,13 +154,23 @@ const String underlineDecoration = 'underline';
 
 // Image settings' keys //
 
-const String colorSchemeImageKey = 'colorSchemeImage';
-const String pageImageKey = 'pageImage';
+const String lightColorSchemeImageKey = 'lightColorSchemeImage';
+const String lightPageImageKey = 'lightPageImage';
 
-/// [colorSchemeImageKey], [pageImageKey]
+const String darkColorSchemeImageKey = 'darkColorSchemeImage';
+const String darkPageImageKey = 'darkPageImage';
+
+/// [light, dark]
+///      X
+/// [colorSchemeImageKey, pageImageKey]
 const Map<String, Type> imageKeys = <String, Type>{
-  colorSchemeImageKey: String,
-  pageImageKey: String,
+  // Light theme
+  lightColorSchemeImageKey: String,
+  lightPageImageKey: String,
+
+  // Dark theme
+  darkColorSchemeImageKey: String,
+  darkPageImageKey: String,
 };
 
 // Color settings' keys //
@@ -249,6 +259,7 @@ const String darkScrimKey = 'darkScrim';
 
 const String darkSurfaceTintKey = 'darkSurfaceTint';
 
+/// [light, dark] X all 26 material color scheme keys
 const Map<String, Type> colorKeys = <String, Type>{
   // Light theme
   lightPrimaryKey: int,

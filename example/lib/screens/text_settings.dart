@@ -15,7 +15,7 @@ class TextSettingsScreen extends StatefulWidget {
 class _TextSettingsScreenState extends State<TextSettingsScreen> {
   // Gather the theme data //
 
-  late bool isLight = !PlatformTheme.of(context)!.isDark;
+  late bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -38,7 +38,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
     return ExampleScaffold(
       title: efuiS,
       body: EzScreen(
-        decorationImageKey: isLight ? '$light$pageImageKey' : '$dark$pageImageKey',
+        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Font

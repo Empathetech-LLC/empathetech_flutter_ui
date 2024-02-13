@@ -59,7 +59,6 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Typography //
 
-    fontFamily: EzConfig.get(fontFamilyKey),
     textTheme: textTheme,
     primaryTextTheme: textTheme,
     iconTheme: iconData,

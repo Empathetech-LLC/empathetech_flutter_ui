@@ -296,8 +296,8 @@ class _ImageSettingState extends State<EzImageSetting> {
         );
 
         widget.updateTheme == Brightness.light
-            ? EzConfig.setString('$light$colorSchemeImageKey', newPath)
-            : EzConfig.setString('$dark$colorSchemeImageKey', newPath);
+            ? EzConfig.setString(lightColorSchemeImageKey, newPath)
+            : EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
     }
   }
