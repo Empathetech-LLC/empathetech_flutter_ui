@@ -139,17 +139,13 @@ const Map<String, Type> textStyleKeys = <String, Type>{
 // Text settings' values //
 
 const String thinWeight = 'thin';
-const String extraLightWeight = 'extraLight';
 const String normalWeight = 'normal';
 const String boldWeight = 'bold';
-const String blackWeight = 'black';
 
 const String italicStyle = 'italic';
 const String normalStyle = 'normal';
 
-const String lineThroughDecoration = 'lineThrough';
 const String noDecoration = 'none';
-const String overlineDecoration = 'overline';
 const String underlineDecoration = 'underline';
 
 // Image settings' keys //
