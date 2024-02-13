@@ -81,7 +81,6 @@ class EzConfig {
 
           case const (int):
             userPref = preferences.getInt(key);
-            debugPrint('UserPref for $key: $userPref');
             break;
 
           case const (double):

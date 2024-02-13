@@ -58,8 +58,6 @@ class _ColorSettingState extends State<EzColorSetting> {
       },
       onConfirm: () {
         // Update the user's setting
-        debugPrint('Prefs value for ${widget.setting}: $_prefsValue');
-        debugPrint('Setting ${widget.setting} to ${currColor.value}');
         EzConfig.setInt(widget.setting, currColor.value);
 
         popScreen(context: context, result: currColor.value);
