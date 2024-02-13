@@ -225,7 +225,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
             // Dynamic settings
             ..._dynamicColorSettings(),
-            spacer,
+            spacer, // This makes two, dynamicColorSettings has a trailing spacer too
 
             // Add a color
             TextButton.icon(
