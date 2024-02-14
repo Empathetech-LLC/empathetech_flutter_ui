@@ -316,6 +316,36 @@ abstract class EFUILang {
   /// **'Editing: {style} style'**
   String tsEditingStyle(Object style);
 
+  /// No description provided for @tsDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Display'**
+  String get tsDisplay;
+
+  /// No description provided for @tsHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Headline'**
+  String get tsHeadline;
+
+  /// No description provided for @tsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get tsTitle;
+
+  /// No description provided for @tsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get tsBody;
+
+  /// No description provided for @tsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get tsLabel;
+
   /// No description provided for @tsFontFamily.
   ///
   /// In en, this message translates to:

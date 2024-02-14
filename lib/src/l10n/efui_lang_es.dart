@@ -130,6 +130,21 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get tsDisplay => 'Mostrar';
+
+  @override
+  String get tsHeadline => 'Titular';
+
+  @override
+  String get tsTitle => 'Título';
+
+  @override
+  String get tsBody => 'Cuerpo';
+
+  @override
+  String get tsLabel => 'Etiqueta';
+
+  @override
   String get tsFontFamily => 'Familia de fuentes';
 
   @override

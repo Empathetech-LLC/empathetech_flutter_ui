@@ -130,6 +130,21 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get tsDisplay => 'Display';
+
+  @override
+  String get tsHeadline => 'Headline';
+
+  @override
+  String get tsTitle => 'Title';
+
+  @override
+  String get tsBody => 'Body';
+
+  @override
+  String get tsLabel => 'Label';
+
+  @override
   String get tsFontFamily => 'Font family';
 
   @override

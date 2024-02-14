@@ -55,7 +55,12 @@
 
   "tsPageTitle": "Configuraciones de texto",
 
-  "tsEditingStyle": "Editando: estilo de {style}",
+  "tsEditing": "Editando: ",
+  "tsDisplay": "Mostrar",
+  "tsHeadline": "Titular",
+  "tsTitle": "Título",
+  "tsBody": "Cuerpo",
+  "tsLabel": "Etiqueta",
 
   "tsFontFamily": "Familia de fuentes",
   "tsFontSize": "Tamaño",

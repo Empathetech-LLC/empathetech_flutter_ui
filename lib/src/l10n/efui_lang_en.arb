@@ -55,7 +55,12 @@
 
   "tsPageTitle": "Text settings",
 
-  "tsEditingStyle": "Editing: {style} style",
+  "tsEditing": "Editing: ",
+  "tsDisplay": "Display",
+  "tsHeadline": "Headline",
+  "tsTitle": "Title",
+  "tsBody": "Body",
+  "tsLabel": "Label",
 
   "tsFontFamily": "Font family",
   "tsFontSize": "Size",
