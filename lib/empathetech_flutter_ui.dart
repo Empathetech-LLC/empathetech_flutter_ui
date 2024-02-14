@@ -56,6 +56,7 @@ export 'src/consts/google_fonts.dart';
 
 export 'src/enums/hand.dart';
 export 'src/enums/slider_setting_type.dart';
+export 'src/enums/text_style_type.dart';
 
 // Functions //
 
