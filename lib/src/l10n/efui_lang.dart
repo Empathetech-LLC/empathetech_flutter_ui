@@ -310,6 +310,12 @@ abstract class EFUILang {
   /// **'Text settings'**
   String get tsPageTitle;
 
+  /// No description provided for @tsEditingStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: {style} style'**
+  String tsEditingStyle(Object style);
+
   /// No description provided for @tsFontFamily.
   ///
   /// In en, this message translates to:

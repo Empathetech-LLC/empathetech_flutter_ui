@@ -55,6 +55,8 @@
 
   "tsPageTitle": "Configuraciones de texto",
 
+  "tsEditingStyle": "Editando: estilo de {style}",
+
   "tsFontFamily": "Familia de fuentes",
   "tsFontSize": "Tamaño",
   "tsFontWeight": "Peso",

@@ -125,6 +125,11 @@ class EFUILangEn extends EFUILang {
   String get tsPageTitle => 'Text settings';
 
   @override
+  String tsEditingStyle(Object style) {
+    return 'Editing: $style style';
+  }
+
+  @override
   String get tsFontFamily => 'Font family';
 
   @override
