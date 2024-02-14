@@ -31,6 +31,14 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
     setPageTitle(EFUILang.of(context)!.tsPageTitle);
   }
 
+  // Gather the build data //
+
+  late TextStyle displayStyle = getDisplay(context)!;
+  late TextStyle headlineStyle = getHeadline(context)!;
+  late TextStyle titleStyle = getTitle(context)!;
+  late TextStyle bodyStyle = getBody(context)!;
+  late TextStyle labelStyle = getLabel(context)!;
+
   // Return the build //
 
   @override
@@ -43,6 +51,46 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
           children: <Widget>[
             // Font
             if (spacing > margin) EzSpacer(spacing - margin),
+
+            // Display
+            Text(
+              EFUILang.of(context)!.tsDisplayPreview,
+              style: displayStyle,
+              textAlign: TextAlign.center,
+            ),
+            spacer,
+
+            // Headline
+            Text(
+              EFUILang.of(context)!.tsHeadlinePreview,
+              style: headlineStyle,
+              textAlign: TextAlign.center,
+            ),
+            spacer,
+
+            // Title
+            Text(
+              EFUILang.of(context)!.tsTitlePreview,
+              style: titleStyle,
+              textAlign: TextAlign.center,
+            ),
+            spacer,
+
+            // Body
+            Text(
+              EFUILang.of(context)!.tsBodyPreview,
+              style: bodyStyle,
+              textAlign: TextAlign.center,
+            ),
+            spacer,
+
+            // Label
+            Text(
+              EFUILang.of(context)!.tsLabelPreview,
+              style: labelStyle,
+              textAlign: TextAlign.center,
+            ),
+            separator,
 
             // Local reset all
             EzResetButton(
