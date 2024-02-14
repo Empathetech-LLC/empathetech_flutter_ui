@@ -21,6 +21,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   final double spacing = EzConfig.get(spacingKey);
 
   late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer rowSpacer = EzSpacer.row(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
   // Set the page title //
@@ -32,6 +33,8 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   }
 
   // Gather the build data //
+
+  TextStyleType editing = TextStyleType.display;
 
   late TextStyle displayStyle = getDisplay(context)!;
   late TextStyle headlineStyle = getHeadline(context)!;
@@ -51,6 +54,16 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
           children: <Widget>[
             // Font
             if (spacing > margin) EzSpacer(spacing - margin),
+
+            Row(children: <Widget>[
+              Text(
+                EFUILang.of(context)!.tsEditingStyle(tstName(context, editing)),
+                style: labelStyle,
+                textAlign: TextAlign.center,
+              ),
+              rowSpacer,
+            ]),
+            separator,
 
             // Display
             Text(
