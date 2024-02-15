@@ -16,20 +16,20 @@ const String noImageValue = 'noImage';
 
 // Global settings' keys //
 
-const String isDarkThemeKey = 'isDarkTheme';
+const String isLeftyKey = 'isLefty';
 
-const String userColorsKey = 'userColors';
+const String isDarkThemeKey = 'isDarkTheme';
 
 const String localeKey = 'appLocale';
 
-const String isRightHandKey = 'isRightHand';
+const String userColorsKey = 'userColors';
 
-/// [isDarkThemeKey], [userColorsKey], [localeKey], [isRightHandKey]
+///  [isLeftyKey], [isDarkThemeKey], [localeKey],  [userColorsKey],
 const Map<String, Type> globalKeys = <String, Type>{
+  isLeftyKey: bool,
   isDarkThemeKey: bool,
-  userColorsKey: List<String>,
   localeKey: List<String>,
-  isRightHandKey: bool,
+  userColorsKey: List<String>,
 };
 
 // Text settings' keys //

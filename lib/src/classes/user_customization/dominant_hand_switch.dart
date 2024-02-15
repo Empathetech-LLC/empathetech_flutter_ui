@@ -18,8 +18,8 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
 
-  final bool _isRighty = EzConfig.get(isRightHandKey) ?? true;
-  late Hand currSide = _isRighty ? Hand.right : Hand.left;
+  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  late Hand currSide = isLefty ? Hand.left : Hand.right;
 
   final double padding = EzConfig.get(paddingKey);
 
@@ -61,14 +61,14 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
               setState(() {
                 currSide = Hand.right;
               });
-              EzConfig.setBool(isRightHandKey, true);
+              EzConfig.remove(isLeftyKey);
               break;
 
             case Hand.left:
               setState(() {
                 currSide = Hand.left;
               });
-              EzConfig.setBool(isRightHandKey, false);
+              EzConfig.setBool(isLeftyKey, true);
               break;
 
             default:
