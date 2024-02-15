@@ -42,6 +42,49 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late TextStyle bodyStyle = getBody(context)!;
   late TextStyle labelStyle = getLabel(context)!;
 
+  late final String display = EFUILang.of(context)!.tsDisplay.toLowerCase();
+  late final String headline = EFUILang.of(context)!.tsHeadline.toLowerCase();
+  late final String title = EFUILang.of(context)!.tsTitle.toLowerCase();
+  late final String body = EFUILang.of(context)!.tsBody.toLowerCase();
+  late final String label = EFUILang.of(context)!.tsLabel.toLowerCase();
+
+  late final List<DropdownMenuEntry<TextStyleType>> styleChoices =
+      <DropdownMenuEntry<TextStyleType>>[
+    DropdownMenuEntry<TextStyleType>(
+      value: TextStyleType.display,
+      label: display,
+    ),
+    DropdownMenuEntry<TextStyleType>(
+      value: TextStyleType.headline,
+      label: headline,
+    ),
+    DropdownMenuEntry<TextStyleType>(
+      value: TextStyleType.title,
+      label: title,
+    ),
+    DropdownMenuEntry<TextStyleType>(
+      value: TextStyleType.body,
+      label: body,
+    ),
+    DropdownMenuEntry<TextStyleType>(
+      value: TextStyleType.label,
+      label: label,
+    ),
+  ];
+
+  // Define the setting controllers //
+
+  late Widget familyController = EzFontFamilySetting(
+    styleKey: editing.familyKey,
+  );
+  late Widget sizeController = Container();
+  late Widget weightController = Container();
+  late Widget styleController = Container();
+  late Widget letterSpacingController = Container();
+  late Widget wordSpacingController = Container();
+  late Widget heightController = Container();
+  late Widget decorationController = Container();
+
   // Return the build //
 
   @override
@@ -52,55 +95,171 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
         decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
-            // Font
             if (spacing > margin) EzSpacer(spacing - margin),
 
-            Row(children: <Widget>[
-              Text(
-                EFUILang.of(context)!.tsEditingStyle(tstName(context, editing)),
-                style: labelStyle,
-                textAlign: TextAlign.center,
-              ),
-              rowSpacer,
-            ]),
+            // Style selector
+            EzRow(
+              mainAxisAlignment: MainAxisAlignment.center,
+              reverseHands: true,
+              children: <Widget>[
+                Text(
+                  EFUILang.of(context)!.tsEditing,
+                  style: labelStyle,
+                  textAlign: TextAlign.center,
+                ),
+                rowSpacer,
+                DropdownMenu<TextStyleType>(
+                  initialSelection: editing,
+                  onSelected: (TextStyleType? value) {
+                    if (value != null) {
+                      setState(() {
+                        editing = value;
+                      });
+                    }
+                  },
+                  dropdownMenuEntries: styleChoices,
+                ),
+              ],
+            ),
             separator,
 
-            // Display
-            Text(
-              EFUILang.of(context)!.tsDisplayPreview,
-              style: displayStyle,
+            // Controls
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                familyController,
+                sizeController,
+                weightController,
+                styleController,
+                letterSpacingController,
+                wordSpacingController,
+                heightController,
+                decorationController,
+              ],
+            ),
+            separator,
+
+            // Display preview
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsDisplayP1,
+                  style: displayStyle,
+                ),
+                EzInlineLink(
+                  display,
+                  style: displayStyle,
+                  textAlign: TextAlign.center,
+                  onTap: () => setState(() {
+                    editing = TextStyleType.display;
+                  }),
+                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(display),
+                ),
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsDisplayP2,
+                  style: displayStyle,
+                ),
+              ],
               textAlign: TextAlign.center,
             ),
             spacer,
 
-            // Headline
-            Text(
-              EFUILang.of(context)!.tsHeadlinePreview,
-              style: headlineStyle,
+            // Headline preview
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsHeadlineP1,
+                  style: headlineStyle,
+                ),
+                EzInlineLink(
+                  headline,
+                  style: headlineStyle,
+                  textAlign: TextAlign.center,
+                  onTap: () => setState(() {
+                    editing = TextStyleType.headline;
+                  }),
+                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(headline),
+                ),
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsHeadlineP2,
+                  style: headlineStyle,
+                ),
+              ],
               textAlign: TextAlign.center,
             ),
             spacer,
 
-            // Title
-            Text(
-              EFUILang.of(context)!.tsTitlePreview,
-              style: titleStyle,
+            // Title preview
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsTitleP1,
+                  style: titleStyle,
+                ),
+                EzInlineLink(
+                  title,
+                  style: titleStyle,
+                  textAlign: TextAlign.center,
+                  onTap: () => setState(() {
+                    editing = TextStyleType.title;
+                  }),
+                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(title),
+                ),
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsTitleP2,
+                  style: titleStyle,
+                ),
+              ],
               textAlign: TextAlign.center,
             ),
             spacer,
 
-            // Body
-            Text(
-              EFUILang.of(context)!.tsBodyPreview,
-              style: bodyStyle,
+            // Body preview
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsBodyP1,
+                  style: bodyStyle,
+                ),
+                EzInlineLink(
+                  body,
+                  style: bodyStyle,
+                  textAlign: TextAlign.center,
+                  onTap: () => setState(() {
+                    editing = TextStyleType.body;
+                  }),
+                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(body),
+                ),
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsBodyP2,
+                  style: bodyStyle,
+                ),
+              ],
               textAlign: TextAlign.center,
             ),
             spacer,
 
-            // Label
-            Text(
-              EFUILang.of(context)!.tsLabelPreview,
-              style: labelStyle,
+            // Label preview
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsLabelP1,
+                  style: labelStyle,
+                ),
+                EzInlineLink(
+                  label,
+                  style: labelStyle,
+                  textAlign: TextAlign.center,
+                  onTap: () => setState(() {
+                    editing = TextStyleType.label;
+                  }),
+                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(label),
+                ),
+                EzPlainText(
+                  text: EFUILang.of(context)!.tsLabelP2,
+                  style: labelStyle,
+                ),
+              ],
               textAlign: TextAlign.center,
             ),
             separator,
