@@ -9,20 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzFontSetting extends StatefulWidget {
-  /// Standardized tool for updating the [fontFamilyKey] in [EzConfig]
-  /// [EzFontSetting] options are built from [googleStyles]
-  const EzFontSetting({super.key});
+class EzFontFamilySetting extends StatefulWidget {
+  final String styleKey;
+
+  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [styleKey]
+  /// [EzFontFamilySetting] options are built from [googleStyles]
+  const EzFontFamilySetting({super.key, required this.styleKey});
 
   @override
-  State<EzFontSetting> createState() => _FontFamilySettingState();
+  State<EzFontFamilySetting> createState() => _FontFamilySettingState();
 }
 
-class _FontFamilySettingState extends State<EzFontSetting> {
+class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  final String _defaultFontFamily = EzConfig.getDefault(headlineFontFamilyKey);
-  String? currFontFamily = EzConfig.get(headlineFontFamilyKey);
+  late final String _defaultFontFamily = EzConfig.getDefault(widget.styleKey);
+  late String? currFontFamily = EzConfig.get(widget.styleKey);
 
   final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
@@ -36,7 +38,7 @@ class _FontFamilySettingState extends State<EzFontSetting> {
       buttons.addAll(<Widget>[
         ElevatedButton(
           onPressed: () {
-            EzConfig.setString(headlineFontFamilyKey, font);
+            EzConfig.setString(widget.styleKey, font);
             setState(() {
               currFontFamily = style.fontFamily!;
             });
