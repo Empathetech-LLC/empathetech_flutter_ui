@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
   - Potential (somewhat likely) breaking change
 - Updated isLightThemeKey -> isDarkThemeKey to match PlatformWidgets convention
   - Minor breaking change
+- Similarly, isRightHandKey -> isLefty
 
 ### Removed
 - TextSpacingKey && associated Widgets
