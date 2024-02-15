@@ -125,9 +125,7 @@ class EFUILangEn extends EFUILang {
   String get tsPageTitle => 'Text settings';
 
   @override
-  String tsEditingStyle(Object style) {
-    return 'Editing: $style style';
-  }
+  String get tsEditing => 'Editing: ';
 
   @override
   String get tsDisplay => 'Display';
@@ -143,6 +141,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsLabel => 'Label';
+
+  @override
+  String tsLinkHint(Object style) {
+    return 'Activate to edit $style';
+  }
 
   @override
   String get tsFontFamily => 'Font family';
@@ -172,19 +175,34 @@ class EFUILangEn extends EFUILang {
   String get tsFonts => 'Fonts';
 
   @override
-  String get tsDisplayPreview => 'Does this display well?';
+  String get tsDisplayP1 => 'Does this ';
 
   @override
-  String get tsHeadlinePreview => 'Are headlines distinct...';
+  String get tsDisplayP2 => ' well?';
 
   @override
-  String get tsTitlePreview => 'from titles?';
+  String get tsHeadlineP1 => 'Are ';
 
   @override
-  String get tsBodyPreview => 'How about the body? Is it easy to ready?';
+  String get tsHeadlineP2 => 's distinct...';
 
   @override
-  String get tsLabelPreview => 'And the labels? Not too big, not too small?';
+  String get tsTitleP1 => 'from ';
+
+  @override
+  String get tsTitleP2 => 's?';
+
+  @override
+  String get tsBodyP1 => 'How about the ';
+
+  @override
+  String get tsBodyP2 => '? Is it easy to ready?';
+
+  @override
+  String get tsLabelP1 => 'And the ';
+
+  @override
+  String get tsLabelP2 => 's? Not too big, not too small?';
 
   @override
   String get tsResetAll => 'Reset all text settings?';

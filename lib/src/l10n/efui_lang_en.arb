@@ -61,6 +61,7 @@
   "tsTitle": "Title",
   "tsBody": "Body",
   "tsLabel": "Label",
+  "tsLinkHint": "Activate to edit {style}",
 
   "tsFontFamily": "Font family",
   "tsFontSize": "Size",
@@ -73,11 +74,16 @@
 
   "tsFonts": "Fonts",
 
-  "tsDisplayPreview": "Does this display well?",
-  "tsHeadlinePreview": "Are headlines distinct...",
-  "tsTitlePreview": "from titles?",
-  "tsBodyPreview": "How about the body? Is it easy to ready?",
-  "tsLabelPreview": "And the labels? Not too big, not too small?",
+  "tsDisplayP1": "Does this ",
+  "tsDisplayP2": " well?",
+  "tsHeadlineP1": "Are ",
+  "tsHeadlineP2": "s distinct...",
+  "tsTitleP1": "from ",
+  "tsTitleP2": "s?",
+  "tsBodyP1": "How about the ",
+  "tsBodyP2": "? Is it easy to ready?",
+  "tsLabelP1": "And the ",
+  "tsLabelP2": "s? Not too big, not too small?",
 
   "tsResetAll": "Reset all text settings?",
 

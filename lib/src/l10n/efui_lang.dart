@@ -310,11 +310,11 @@ abstract class EFUILang {
   /// **'Text settings'**
   String get tsPageTitle;
 
-  /// No description provided for @tsEditingStyle.
+  /// No description provided for @tsEditing.
   ///
   /// In en, this message translates to:
-  /// **'Editing: {style} style'**
-  String tsEditingStyle(Object style);
+  /// **'Editing: '**
+  String get tsEditing;
 
   /// No description provided for @tsDisplay.
   ///
@@ -345,6 +345,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Label'**
   String get tsLabel;
+
+  /// No description provided for @tsLinkHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to edit {style}'**
+  String tsLinkHint(Object style);
 
   /// No description provided for @tsFontFamily.
   ///
@@ -400,35 +406,65 @@ abstract class EFUILang {
   /// **'Fonts'**
   String get tsFonts;
 
-  /// No description provided for @tsDisplayPreview.
+  /// No description provided for @tsDisplayP1.
   ///
   /// In en, this message translates to:
-  /// **'Does this display well?'**
-  String get tsDisplayPreview;
+  /// **'Does this '**
+  String get tsDisplayP1;
 
-  /// No description provided for @tsHeadlinePreview.
+  /// No description provided for @tsDisplayP2.
   ///
   /// In en, this message translates to:
-  /// **'Are headlines distinct...'**
-  String get tsHeadlinePreview;
+  /// **' well?'**
+  String get tsDisplayP2;
 
-  /// No description provided for @tsTitlePreview.
+  /// No description provided for @tsHeadlineP1.
   ///
   /// In en, this message translates to:
-  /// **'from titles?'**
-  String get tsTitlePreview;
+  /// **'Are '**
+  String get tsHeadlineP1;
 
-  /// No description provided for @tsBodyPreview.
+  /// No description provided for @tsHeadlineP2.
   ///
   /// In en, this message translates to:
-  /// **'How about the body? Is it easy to ready?'**
-  String get tsBodyPreview;
+  /// **'s distinct...'**
+  String get tsHeadlineP2;
 
-  /// No description provided for @tsLabelPreview.
+  /// No description provided for @tsTitleP1.
   ///
   /// In en, this message translates to:
-  /// **'And the labels? Not too big, not too small?'**
-  String get tsLabelPreview;
+  /// **'from '**
+  String get tsTitleP1;
+
+  /// No description provided for @tsTitleP2.
+  ///
+  /// In en, this message translates to:
+  /// **'s?'**
+  String get tsTitleP2;
+
+  /// No description provided for @tsBodyP1.
+  ///
+  /// In en, this message translates to:
+  /// **'How about the '**
+  String get tsBodyP1;
+
+  /// No description provided for @tsBodyP2.
+  ///
+  /// In en, this message translates to:
+  /// **'? Is it easy to ready?'**
+  String get tsBodyP2;
+
+  /// No description provided for @tsLabelP1.
+  ///
+  /// In en, this message translates to:
+  /// **'And the '**
+  String get tsLabelP1;
+
+  /// No description provided for @tsLabelP2.
+  ///
+  /// In en, this message translates to:
+  /// **'s? Not too big, not too small?'**
+  String get tsLabelP2;
 
   /// No description provided for @tsResetAll.
   ///
