@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - TextSpacingKey && associated Widgets
   - EzNewLine is a better strategy
 - navigators.dart
+- EzTextStyle
 
 ### Added
 - Full text theme controls
