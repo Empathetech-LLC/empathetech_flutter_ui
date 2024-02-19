@@ -31,7 +31,7 @@ dependencies:
 dev_dependencies:
   # For development/testing
   dependency_validator: ^3.2.2
-  dartdoc: ^6.3.0
+  dartdoc: ^8.0.5
 
   # For example app
   go_router: ^13.0.0
