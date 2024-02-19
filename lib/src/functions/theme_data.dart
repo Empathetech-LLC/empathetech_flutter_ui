@@ -163,6 +163,7 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
