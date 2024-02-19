@@ -6,47 +6,38 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String sora = 'Sora';
-const String hahmlet = 'Hahmlet';
-const String jetBrainsMono = 'JetBrains Mono';
-const String andadaPro = 'Andada Pro';
-const String epilogue = 'Epilogue';
-const String inter = 'Inter';
-const String encodeSans = 'Encode Sans';
-const String manrope = 'Manrope';
-const String lora = 'Lora';
-const String bioRhyme = 'BioRhyme';
-const String playfairDisplay = 'Playfair Display';
-const String archivo = 'Archivo';
+// Top 5 Google Fonts according to https://fonts.google.com/analytics
+// Last updated: 02/19/2024
+
 const String roboto = 'Roboto';
-const String cormorant = 'Cormorant';
-const String spectral = 'Spectral';
-const String raleway = 'Raleway';
-const String workSans = 'Work Sans';
+const String openSans = 'Open Sans';
 const String lato = 'Lato';
-const String anton = 'Anton';
-const String oldStandard = 'Old Standard TT';
+const String montserrat = 'Montserrat';
+const String oswald = 'Oswald';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
-  sora: GoogleFonts.sora(),
-  hahmlet: GoogleFonts.hahmlet(),
-  jetBrainsMono: GoogleFonts.jetBrainsMono(),
-  andadaPro: GoogleFonts.andadaPro(),
-  epilogue: GoogleFonts.epilogue(),
-  inter: GoogleFonts.inter(),
-  encodeSans: GoogleFonts.encodeSans(),
-  manrope: GoogleFonts.manrope(),
-  lora: GoogleFonts.lora(),
-  bioRhyme: GoogleFonts.bioRhyme(),
-  playfairDisplay: GoogleFonts.playfairDisplay(),
-  archivo: GoogleFonts.archivo(),
   roboto: GoogleFonts.roboto(),
-  cormorant: GoogleFonts.cormorant(),
-  spectral: GoogleFonts.spectral(),
-  raleway: GoogleFonts.raleway(),
-  workSans: GoogleFonts.workSans(),
+  openSans: GoogleFonts.openSans(),
   lato: GoogleFonts.lato(),
-  anton: GoogleFonts.anton(),
-  oldStandard: GoogleFonts.oldStandardTt(),
+  montserrat: GoogleFonts.montserrat(),
+  oswald: GoogleFonts.oswald(),
 };
+
+/// Pass [starter] to the [textStyle] parameter of [gFont]s [GoogleFonts] match
+TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
+  switch (gFont) {
+    case roboto:
+      return GoogleFonts.roboto(textStyle: starter);
+    case openSans:
+      return GoogleFonts.openSans(textStyle: starter);
+    case lato:
+      return GoogleFonts.lato(textStyle: starter);
+    case montserrat:
+      return GoogleFonts.montserrat(textStyle: starter);
+    case oswald:
+      return GoogleFonts.oswald(textStyle: starter);
+    default:
+      return starter;
+  }
+}
