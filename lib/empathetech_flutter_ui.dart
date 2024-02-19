@@ -13,7 +13,6 @@ export 'src/classes/general/back_action.dart';
 export 'src/classes/general/row.dart';
 export 'src/classes/general/screen.dart';
 export 'src/classes/general/spacer.dart';
-export 'src/classes/general/text_style.dart';
 export 'src/classes/general/warning.dart';
 
 // Platform availability
