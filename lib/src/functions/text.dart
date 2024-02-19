@@ -8,7 +8,68 @@ import 'package:flutter/services.dart';
 
 import '../../empathetech_flutter_ui.dart';
 
+// Helpers //
+
+/// Returns whether the passed [text] follows a URL pattern
+bool isUrl(String text) {
+  return Uri.parse(text).host.isNotEmpty;
+}
+
+/// Returns the soon-to-be rendered size of text via a [TextPainter]
+Size measureText(
+  String text, {
+  required TextStyle? style,
+  required BuildContext context,
+}) {
+  final TextPainter textPainter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textScaler: MediaQuery.textScalerOf(context),
+    textDirection: TextDirection.ltr,
+  )..layout();
+
+  return textPainter.size;
+}
+
 // Getters //
+
+/// Returns the [FontWeight] from the passed [name]
+/// [thinWeight], [normalWeight], && [boldWeight]
+FontWeight weightFromName(String name) {
+  switch (name) {
+    case thinWeight:
+      return FontWeight.w100;
+    case boldWeight:
+      return FontWeight.w700;
+    case normalWeight:
+    default:
+      return FontWeight.w400;
+  }
+}
+
+/// Returns the [FontStyle] from the passed [name]
+/// [italicStyle] && [normalStyle]
+FontStyle styleFromName(String name) {
+  switch (name) {
+    case italicStyle:
+      return FontStyle.italic;
+    case normalStyle:
+    default:
+      return FontStyle.normal;
+  }
+}
+
+/// Returns the [TextDecoration] from the passed [name]
+/// [underlineDecoration], && [noDecoration]
+TextDecoration decorationFromName(String name) {
+  switch (name) {
+    case underlineDecoration:
+      return TextDecoration.underline;
+    case noDecoration:
+    default:
+      return TextDecoration.none;
+  }
+}
 
 /// Returns the [TextTheme.displayLarge] of the current [context]
 TextStyle? getDisplay(BuildContext context) {
@@ -67,9 +128,8 @@ TextTheme ezTextTheme() {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle buildDisplay({Color? color}) {
-  return EzTextStyle(
-    fontFamily: EzConfig.get(displayFontFamilyKey),
+TextStyle buildDisplay() {
+  final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
     fontWeight: weightFromName(EzConfig.get(displayFontWeightKey)),
     fontStyle: styleFromName(EzConfig.get(displayFontStyleKey)),
@@ -77,14 +137,17 @@ TextStyle buildDisplay({Color? color}) {
     wordSpacing: EzConfig.get(displayWordSpacingKey),
     height: EzConfig.get(displayFontHeightKey),
     decoration: decorationFromName(EzConfig.get(displayFontDecorationKey)),
-    color: color,
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.get(displayFontFamilyKey),
   );
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
 TextStyle buildHeadline({Color? color}) {
-  return EzTextStyle(
-    fontFamily: EzConfig.get(headlineFontFamilyKey),
+  final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
     fontWeight: weightFromName(EzConfig.get(headlineFontWeightKey)),
     fontStyle: styleFromName(EzConfig.get(headlineFontStyleKey)),
@@ -94,12 +157,16 @@ TextStyle buildHeadline({Color? color}) {
     decoration: decorationFromName(EzConfig.get(headlineFontDecorationKey)),
     color: color,
   );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.get(headlineFontFamilyKey),
+  );
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig]
 TextStyle buildTitle({Color? color}) {
-  return EzTextStyle(
-    fontFamily: EzConfig.get(titleFontFamilyKey),
+  final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
     fontWeight: weightFromName(EzConfig.get(titleFontWeightKey)),
     fontStyle: styleFromName(EzConfig.get(titleFontStyleKey)),
@@ -109,12 +176,16 @@ TextStyle buildTitle({Color? color}) {
     decoration: decorationFromName(EzConfig.get(titleFontDecorationKey)),
     color: color,
   );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.get(titleFontFamilyKey),
+  );
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
 TextStyle buildBody({Color? color}) {
-  return EzTextStyle(
-    fontFamily: EzConfig.get(bodyFontFamilyKey),
+  final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
     fontWeight: weightFromName(EzConfig.get(bodyFontWeightKey)),
     fontStyle: styleFromName(EzConfig.get(bodyFontStyleKey)),
@@ -124,12 +195,16 @@ TextStyle buildBody({Color? color}) {
     decoration: decorationFromName(EzConfig.get(bodyFontDecorationKey)),
     color: color,
   );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.get(bodyFontFamilyKey),
+  );
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig]
 TextStyle buildLabel({Color? color}) {
-  return EzTextStyle(
-    fontFamily: EzConfig.get(labelFontFamilyKey),
+  final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
     fontWeight: weightFromName(EzConfig.get(labelFontWeightKey)),
     fontStyle: styleFromName(EzConfig.get(labelFontStyleKey)),
@@ -139,6 +214,11 @@ TextStyle buildLabel({Color? color}) {
     decoration: decorationFromName(EzConfig.get(labelFontDecorationKey)),
     color: color,
   );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.get(labelFontFamilyKey),
+  );
 }
 
 /// For web apps, set the tab's title
@@ -146,65 +226,4 @@ void setPageTitle(String title) {
   SystemChrome.setApplicationSwitcherDescription(
     ApplicationSwitcherDescription(label: title),
   );
-}
-
-// Helpers //
-
-/// Returns whether the passed [text] follows a URL pattern
-bool isUrl(String text) {
-  return Uri.parse(text).host.isNotEmpty;
-}
-
-/// Returns the soon-to-be rendered size of text via a [TextPainter]
-Size measureText(
-  String text, {
-  required TextStyle? style,
-  required BuildContext context,
-}) {
-  final TextPainter textPainter = TextPainter(
-    text: TextSpan(text: text, style: style),
-    maxLines: 1,
-    textScaler: MediaQuery.textScalerOf(context),
-    textDirection: TextDirection.ltr,
-  )..layout();
-
-  return textPainter.size;
-}
-
-/// Returns the [FontWeight] from the passed [name]
-/// [thinWeight], [normalWeight], && [boldWeight]
-FontWeight weightFromName(String name) {
-  switch (name) {
-    case thinWeight:
-      return FontWeight.w100;
-    case boldWeight:
-      return FontWeight.w700;
-    case normalWeight:
-    default:
-      return FontWeight.w400;
-  }
-}
-
-/// Returns the [FontStyle] from the passed [name]
-/// [italicStyle] && [normalStyle]
-FontStyle styleFromName(String name) {
-  switch (name) {
-    case italicStyle:
-      return FontStyle.italic;
-    case normalStyle:
-    default:
-      return FontStyle.normal;
-  }
-}
-
-/// Returns the [TextDecoration] from the passed [name]
-/// [underlineDecoration], && [noDecoration]
-TextDecoration decorationFromName(String name) {
-  switch (name) {
-    case underlineDecoration:
-      return TextDecoration.underline;
-    case noDecoration:
-    default:
-      return TextDecoration.none;
-  }
 }
