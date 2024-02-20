@@ -32,8 +32,8 @@ class EzInlineLink extends WidgetSpan {
   final MaterialStatesController? statesController;
 
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
-  /// Seems to prefer Strings of length 5+
-  /// Smaller strings can sometimes have issues with text spacing
+  /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
+  /// 6+ characters usually does the trick
   EzInlineLink(
     this.text, {
     super.alignment = PlaceholderAlignment.baseline,
