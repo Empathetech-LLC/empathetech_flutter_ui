@@ -178,31 +178,43 @@ class EFUILangEn extends EFUILang {
   String get tsDisplayP1 => 'Does this ';
 
   @override
+  String get tsDisplayLink => 'display';
+
+  @override
   String get tsDisplayP2 => ' well?';
 
   @override
   String get tsHeadlineP1 => 'Are ';
 
   @override
-  String get tsHeadlineP2 => 's distinct...';
+  String get tsHeadlineLink => 'headlines';
+
+  @override
+  String get tsHeadlineP2 => ' distinct...';
 
   @override
   String get tsTitleP1 => 'from ';
 
   @override
-  String get tsTitleP2 => 's?';
+  String get tsTitleLink => 'titles?';
 
   @override
-  String get tsBodyP1 => 'How about the ';
+  String get tsBodyP1 => 'How about ';
 
   @override
-  String get tsBodyP2 => '? Is it easy to ready?';
+  String get tsBodyLink => 'the body?';
 
   @override
-  String get tsLabelP1 => 'And the ';
+  String get tsBodyP2 => ' Is it easy to ready?';
 
   @override
-  String get tsLabelP2 => 's? Not too big, not too small?';
+  String get tsLabelP1 => 'And ';
+
+  @override
+  String get tsLabelLink => 'the labels?';
+
+  @override
+  String get tsLabelP2 => ' Not too big, not too small?';
 
   @override
   String get tsResetAll => 'Reset all text settings?';

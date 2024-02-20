@@ -56,11 +56,12 @@
   "tsPageTitle": "Configuraciones de texto",
 
   "tsEditing": "Editando: ",
-  "tsDisplay": "Mostrar",
-  "tsHeadline": "Titular",
+  "tsDisplay": "Presentar",
+  "tsHeadline": "Encabezado",
   "tsTitle": "Título",
   "tsBody": "Cuerpo",
   "tsLabel": "Etiqueta",
+  "tsLinkHint": "Activar para editar {style}",
 
   "tsFontFamily": "Familia de fuentes",
   "tsFontSize": "Tamaño",
@@ -73,11 +74,20 @@
 
   "tsFonts": "Fuentes",
 
-  "tsDisplayPreview": "¿Se muestra bien esto?",
-  "tsHeadlinePreview": "Los titulares son distintos...",
-  "tsTitlePreview": "¿de los títulos?",
-  "tsBodyPreview": "¿Y el cuerpo? ¿Es fácil de leer?",
-  "tsLabelPreview": "¿Y las etiquetas? ¿No son demasiado grandes ni demasiado pequeñas?",
+  "tsDisplayP1": "¿Esto se ",
+  "tsDisplayLink": "presenta",
+  "tsDisplayP2": " bien?",
+  "tsHeadlineP1": "Son los ",
+  "tsHeadlineLink": "encabezados",
+  "tsHeadlineP2": " distintos...",
+  "tsTitleP1": "de los ",
+  "tsTitleLink": "títulos?",
+  "tsBodyP1": "¿Qué tal ",
+  "tsBodyLink": "el cuerpo?",
+  "tsBodyP2": " ¿Es fácil de leer?",
+  "tsLabelP1": "¿Y ",
+  "tsLabelLink": "las etiquetas?",
+  "tsLabelP2": " ¿No demasiado grande ni demasiado pequeño?",
 
   "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
 

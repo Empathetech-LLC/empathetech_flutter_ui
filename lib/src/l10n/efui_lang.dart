@@ -412,6 +412,12 @@ abstract class EFUILang {
   /// **'Does this '**
   String get tsDisplayP1;
 
+  /// No description provided for @tsDisplayLink.
+  ///
+  /// In en, this message translates to:
+  /// **'display'**
+  String get tsDisplayLink;
+
   /// No description provided for @tsDisplayP2.
   ///
   /// In en, this message translates to:
@@ -424,10 +430,16 @@ abstract class EFUILang {
   /// **'Are '**
   String get tsHeadlineP1;
 
+  /// No description provided for @tsHeadlineLink.
+  ///
+  /// In en, this message translates to:
+  /// **'headlines'**
+  String get tsHeadlineLink;
+
   /// No description provided for @tsHeadlineP2.
   ///
   /// In en, this message translates to:
-  /// **'s distinct...'**
+  /// **' distinct...'**
   String get tsHeadlineP2;
 
   /// No description provided for @tsTitleP1.
@@ -436,34 +448,46 @@ abstract class EFUILang {
   /// **'from '**
   String get tsTitleP1;
 
-  /// No description provided for @tsTitleP2.
+  /// No description provided for @tsTitleLink.
   ///
   /// In en, this message translates to:
-  /// **'s?'**
-  String get tsTitleP2;
+  /// **'titles?'**
+  String get tsTitleLink;
 
   /// No description provided for @tsBodyP1.
   ///
   /// In en, this message translates to:
-  /// **'How about the '**
+  /// **'How about '**
   String get tsBodyP1;
+
+  /// No description provided for @tsBodyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'the body?'**
+  String get tsBodyLink;
 
   /// No description provided for @tsBodyP2.
   ///
   /// In en, this message translates to:
-  /// **'? Is it easy to ready?'**
+  /// **' Is it easy to ready?'**
   String get tsBodyP2;
 
   /// No description provided for @tsLabelP1.
   ///
   /// In en, this message translates to:
-  /// **'And the '**
+  /// **'And '**
   String get tsLabelP1;
+
+  /// No description provided for @tsLabelLink.
+  ///
+  /// In en, this message translates to:
+  /// **'the labels?'**
+  String get tsLabelLink;
 
   /// No description provided for @tsLabelP2.
   ///
   /// In en, this message translates to:
-  /// **'s? Not too big, not too small?'**
+  /// **' Not too big, not too small?'**
   String get tsLabelP2;
 
   /// No description provided for @tsResetAll.
