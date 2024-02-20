@@ -150,7 +150,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   List<Widget> _getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
 
-    return fullList
+    final List<Widget> trackers = fullList
         .where((String element) => !currSet.contains(element))
         .map<Widget>((String settingKey) {
       final Color liveColor = getLiveColor(context, settingKey);
@@ -195,6 +195,19 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         ),
       );
     }).toList();
+
+    return <Widget>[
+      // Help
+      EzLink(
+        EFUILang.of(context)!.gHowThisWorks,
+        style: labelStyle,
+        textAlign: TextAlign.center,
+        url: Uri.parse(materialColorRoles),
+        semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+        tooltip: materialColorRoles,
+      ),
+      ...trackers
+    ];
   }
 
   // Set the page title //
@@ -264,17 +277,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
             // Build from image
             ..._otherButtons,
-            separator,
-
-            // Help
-            EzLink(
-              EFUILang.of(context)!.gHowThisWorks,
-              style: labelStyle,
-              textAlign: TextAlign.center,
-              url: Uri.parse(materialColorRoles),
-              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
-              tooltip: materialColorRoles,
-            ),
             spacer,
           ],
         ),
