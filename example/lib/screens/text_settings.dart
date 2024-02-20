@@ -147,7 +147,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: displayStyle,
                 ),
                 EzInlineLink(
-                  display,
+                  EFUILang.of(context)!.tsDisplayLink,
                   style: displayStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
@@ -172,7 +172,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: headlineStyle,
                 ),
                 EzInlineLink(
-                  headline,
+                  EFUILang.of(context)!.tsHeadlineLink,
                   style: headlineStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
@@ -197,17 +197,13 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: titleStyle,
                 ),
                 EzInlineLink(
-                  title,
+                  EFUILang.of(context)!.tsTitleLink,
                   style: titleStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.title;
                   }),
                   semanticsLabel: EFUILang.of(context)!.tsLinkHint(title),
-                ),
-                EzPlainText(
-                  text: EFUILang.of(context)!.tsTitleP2,
-                  style: titleStyle,
                 ),
               ],
               textAlign: TextAlign.center,
@@ -222,7 +218,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: bodyStyle,
                 ),
                 EzInlineLink(
-                  body,
+                  EFUILang.of(context)!.tsBodyLink,
                   style: bodyStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
@@ -247,7 +243,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: labelStyle,
                 ),
                 EzInlineLink(
-                  label,
+                  EFUILang.of(context)!.tsLabelLink,
                   style: labelStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
