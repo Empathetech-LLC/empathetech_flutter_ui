@@ -83,17 +83,6 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
                 popScreen(context: context, result: true);
               },
             ),
-            separator,
-
-            // Help
-            EzLink(
-              EFUILang.of(context)!.gHowThisWorks,
-              style: getLabel(context),
-              textAlign: TextAlign.center,
-              url: Uri.parse(understandingLayout),
-              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
-              tooltip: understandingLayout,
-            ),
             spacer,
           ],
         ),

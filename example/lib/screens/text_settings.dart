@@ -24,14 +24,6 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final EzSpacer rowSpacer = EzSpacer.row(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
-  // Set the page title //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.tsPageTitle);
-  }
-
   // Gather the build data //
 
   TextStyleType editing = TextStyleType.display;
@@ -74,16 +66,32 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
   // Define the setting controllers //
 
-  late Widget familyController = EzFontFamilySetting(
-    styleKey: editing.familyKey,
-  );
-  late Widget sizeController = Container();
-  late Widget weightController = Container();
-  late Widget styleController = Container();
-  late Widget letterSpacingController = Container();
-  late Widget wordSpacingController = Container();
-  late Widget heightController = Container();
-  late Widget decorationController = Container();
+  late final Map<TextStyleType, Widget> familyControllers =
+      <TextStyleType, Widget>{
+    TextStyleType.display: const EzFontFamilySetting(
+      styleKey: displayFontFamilyKey,
+    ),
+    TextStyleType.headline: const EzFontFamilySetting(
+      styleKey: headlineFontFamilyKey,
+    ),
+    TextStyleType.title: const EzFontFamilySetting(
+      styleKey: titleFontFamilyKey,
+    ),
+    TextStyleType.body: const EzFontFamilySetting(
+      styleKey: bodyFontFamilyKey,
+    ),
+    TextStyleType.label: const EzFontFamilySetting(
+      styleKey: labelFontFamilyKey,
+    ),
+  };
+
+// Set the page title //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(EFUILang.of(context)!.tsPageTitle);
+  }
 
   // Return the build //
 
@@ -127,14 +135,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                familyController,
-                sizeController,
-                weightController,
-                styleController,
-                letterSpacingController,
-                wordSpacingController,
-                heightController,
-                decorationController,
+                familyControllers[editing]!,
               ],
             ),
             separator,
