@@ -18,30 +18,34 @@ class EzThemeModeSwitch extends StatefulWidget {
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
+  late final ThemeData theme = Theme.of(context);
+  late final PlatformThemeState platformTheme = PlatformTheme.of(context)!;
+
+  late ThemeMode? currMode = platformTheme.themeMode;
 
   final double padding = EzConfig.get(paddingKey);
 
-  late ThemeMode? currMode = PlatformTheme.of(context)?.themeMode;
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   @override
   Widget build(BuildContext context) {
     // Define the build //
 
-    final String label = EFUILang.of(context)!.ssThemeMode;
+    final String label = l10n.ssThemeMode;
 
-    final List<DropdownMenuItem<ThemeMode>> items =
-        <DropdownMenuItem<ThemeMode>>[
-      DropdownMenuItem<ThemeMode>(
+    final List<DropdownMenuEntry<ThemeMode>> entries =
+        <DropdownMenuEntry<ThemeMode>>[
+      DropdownMenuEntry<ThemeMode>(
         value: ThemeMode.system,
-        child: Text(EFUILang.of(context)!.gSystem),
+        label: l10n.gSystem,
       ),
-      DropdownMenuItem<ThemeMode>(
+      DropdownMenuEntry<ThemeMode>(
         value: ThemeMode.light,
-        child: Text(EFUILang.of(context)!.gLight),
+        label: l10n.gLight,
       ),
-      DropdownMenuItem<ThemeMode>(
+      DropdownMenuEntry<ThemeMode>(
         value: ThemeMode.dark,
-        child: Text(EFUILang.of(context)!.gDark),
+        label: l10n.gDark,
       ),
     ];
 
@@ -50,7 +54,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: theme.colorScheme.background,
       ),
       child: EzRow(
         mainAxisSize: MainAxisSize.min,
@@ -59,17 +63,17 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           // Label
           Text(
             label,
-            style: Theme.of(context).dropdownMenuTheme.textStyle,
+            style: theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
-            semanticsLabel: EFUILang.of(context)!.gSettingX(label),
+            semanticsLabel: l10n.gSettingX(label),
           ),
           EzSpacer.row(padding),
 
           // Button
-          DropdownButton<ThemeMode>(
-            value: currMode,
-            items: items,
-            onChanged: (ThemeMode? newThemeMode) {
+          DropdownMenu<ThemeMode>(
+            initialSelection: currMode,
+            dropdownMenuEntries: entries,
+            onSelected: (ThemeMode? newThemeMode) {
               switch (newThemeMode) {
                 case ThemeMode.system:
                   EzConfig.remove(isDarkThemeKey);

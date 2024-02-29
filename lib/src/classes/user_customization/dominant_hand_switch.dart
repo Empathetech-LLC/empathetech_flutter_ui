@@ -17,26 +17,29 @@ class EzDominantHandSwitch extends StatefulWidget {
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
+  late final ThemeData theme = Theme.of(context);
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
   late Hand currSide = isLefty ? Hand.left : Hand.right;
 
   final double padding = EzConfig.get(paddingKey);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   @override
   Widget build(BuildContext context) {
     // Define the build //
 
-    final String label = EFUILang.of(context)!.ssDominantHand;
+    final String label = l10n.ssDominantHand;
 
-    final List<DropdownMenuItem<Hand>> items = <DropdownMenuItem<Hand>>[
-      DropdownMenuItem<Hand>(
+    final List<DropdownMenuEntry<Hand>> entries = <DropdownMenuEntry<Hand>>[
+      DropdownMenuEntry<Hand>(
         value: Hand.right,
-        child: Text(handName(context, Hand.right)),
+        label: handName(context, Hand.right),
       ),
-      DropdownMenuItem<Hand>(
+      DropdownMenuEntry<Hand>(
         value: Hand.left,
-        child: Text(handName(context, Hand.left)),
+        label: handName(context, Hand.left),
       ),
     ];
 
@@ -45,17 +48,17 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       // Label
       Text(
         label,
-        style: Theme.of(context).dropdownMenuTheme.textStyle,
+        style: theme.dropdownMenuTheme.textStyle,
         textAlign: TextAlign.center,
-        semanticsLabel: EFUILang.of(context)!.gSettingX(label),
+        semanticsLabel: l10n.gSettingX(label),
       ),
       EzSpacer.row(padding),
 
       // Button
-      DropdownButton<Hand>(
-        value: currSide,
-        items: items,
-        onChanged: (Hand? newDominantHand) {
+      DropdownMenu<Hand>(
+        initialSelection: currSide,
+        dropdownMenuEntries: entries,
+        onSelected: (Hand? newDominantHand) {
           switch (newDominantHand) {
             case Hand.right:
               setState(() {
@@ -81,7 +84,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: theme.colorScheme.background,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

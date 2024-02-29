@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final EzSpacer spacer = EzSpacer(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
-  late final EFUILang l10ns = EFUILang.of(context)!;
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Set the page title //
 
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             // Functionality disclaimer
             EzWarning(
-              body: kIsWeb ? l10ns.ssSettingsGuideWeb : l10ns.ssSettingsGuide,
+              body: kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide,
             ),
             separator,
 
@@ -63,28 +63,28 @@ class _HomeScreenState extends State<HomeScreen> {
             // Text settings
             ElevatedButton(
               onPressed: () => context.go(textSettingsRoute),
-              child: Text(l10ns.tsPageTitle),
+              child: Text(l10n.tsPageTitle),
             ),
             spacer,
 
             // Layout settings
             ElevatedButton(
               onPressed: () => context.go(layoutSettingsRoute),
-              child: Text(l10ns.lsPageTitle),
+              child: Text(l10n.lsPageTitle),
             ),
             spacer,
 
             // Color settings
             ElevatedButton(
               onPressed: () => context.go(colorSettingsRoute),
-              child: Text(l10ns.csPageTitle),
+              child: Text(l10n.csPageTitle),
             ),
             spacer,
 
             // Image settings
             ElevatedButton(
               onPressed: () => context.go(imageSettingsRoute),
-              child: Text(l10ns.isPageTitle),
+              child: Text(l10n.isPageTitle),
             ),
             separator,
 
