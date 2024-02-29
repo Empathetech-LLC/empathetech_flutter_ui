@@ -17,31 +17,12 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme();
 
-  final TextStyle appBarTextStyle = buildTitle(
-    color: colorScheme.onSurface,
-  );
-  final TextStyle tabBarTextStyle = buildBody(
-    color: colorScheme.onSurface,
-  );
-
-  final TextStyle pageTextStyle = buildBody(
-    color: colorScheme.onBackground,
-  );
-  final TextStyle buttonTextStyle = buildBody();
-
-  final TextStyle dialogTitleStyle = buildTitle(
-    color: colorScheme.onBackground,
-  );
-  final TextStyle dialogContentStyle = buildBody(
-    color: colorScheme.onBackground,
-  );
-
   final IconThemeData iconData = IconThemeData(
-    size: buttonTextStyle.fontSize,
+    size: textTheme.bodyLarge!.fontSize,
     color: colorScheme.onSurface,
   );
   final IconThemeData appBarIconData = IconThemeData(
-    size: appBarTextStyle.fontSize,
+    size: textTheme.headlineLarge!.fontSize,
     color: colorScheme.onSurface,
   );
 
@@ -74,16 +55,16 @@ ThemeData ezThemeData(Brightness brightness) {
     appBarTheme: AppBarTheme(
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
-      titleTextStyle: appBarTextStyle,
+      titleTextStyle: textTheme.headlineLarge,
+      centerTitle: true,
+      titleSpacing: 0,
     ),
 
     // Bottom navigation bar
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedIconTheme: appBarIconData,
-      unselectedIconTheme: appBarIconData.copyWith(
-        color: colorScheme.outline,
-      ),
+      unselectedIconTheme: appBarIconData,
     ),
 
     // Cards
@@ -91,8 +72,8 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialogs
     dialogTheme: DialogTheme(
-      titleTextStyle: dialogTitleStyle,
-      contentTextStyle: dialogContentStyle,
+      titleTextStyle: textTheme.titleLarge,
+      contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
         top: (spacing > padding) ? (spacing - padding) : 0.0,
@@ -104,7 +85,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: pageTextStyle,
+      textStyle: textTheme.bodyLarge,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.all(padding),
       ),
@@ -113,7 +94,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: buttonTextStyle,
+        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
@@ -131,7 +112,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        iconSize: buttonTextStyle.fontSize,
+        iconSize: textTheme.bodyLarge!.fontSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
@@ -141,7 +122,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Outlined button
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        textStyle: buttonTextStyle,
+        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         backgroundColor: colorScheme.background,
@@ -150,16 +131,14 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // TabBar
     tabBarTheme: TabBarTheme(
-      labelStyle: tabBarTextStyle,
-      unselectedLabelStyle: tabBarTextStyle.copyWith(
-        color: colorScheme.outline,
-      ),
+      labelStyle: textTheme.bodyLarge,
+      unselectedLabelStyle: textTheme.bodyLarge,
     ),
 
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: buttonTextStyle,
+        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
@@ -171,7 +150,7 @@ ThemeData ezThemeData(Brightness brightness) {
     tooltipTheme: TooltipThemeData(
       margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-      textStyle: pageTextStyle.copyWith(color: colorScheme.onSurface),
+      textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
       decoration: BoxDecoration(
         color: colorScheme.surface,

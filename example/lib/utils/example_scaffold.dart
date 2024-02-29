@@ -23,12 +23,9 @@ class ExampleScaffold extends StatelessWidget {
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    final TextStyle titleStyle = Theme.of(context).appBarTheme.titleTextStyle!;
-
-    final double toolbarHeight =
-        MediaQuery.textScalerOf(context).scale(titleStyle.fontSize!) * 3;
-
-    // Define AppBar widget(s) //
+    final double toolbarHeight = MediaQuery.textScalerOf(context)
+            .scale(Theme.of(context).appBarTheme.titleTextStyle!.fontSize!) *
+        3;
 
     // Return the build //
 
@@ -41,16 +38,14 @@ class ExampleScaffold extends StatelessWidget {
             excludeHeaderSemantics: true,
             toolbarHeight: toolbarHeight,
 
-            // Leading
+            // Leading (aka left)
             automaticallyImplyLeading: !isLefty,
             leadingWidth: toolbarHeight,
 
             // Title
             title: Text(title, semanticsLabel: titleSemantics),
-            titleSpacing: 0,
-            centerTitle: true,
 
-            // Actions (aka trailing)
+            // Actions (aka trailing aka right)
             actions: isLefty ? <Widget>[const EzBackAction()] : null,
           ),
         ),

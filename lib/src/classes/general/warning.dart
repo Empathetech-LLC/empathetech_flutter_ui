@@ -11,11 +11,15 @@ class EzWarning extends StatelessWidget {
   /// Warning [String] to grab the user's attention
   final String? title;
 
+  final TextStyle? titleStyle;
+
   /// What does the user need to know?
   final String body;
 
-  final TextStyle? titleStyle;
   final TextStyle? bodyStyle;
+
+  /// Optional icon [Color] override, defaults to [ColorScheme.secondary]
+  final Color? iconColor;
 
   /// [Card] wrapper designed to grab attention for warnings...
   ///  /!\ [title] /!\
@@ -23,18 +27,27 @@ class EzWarning extends StatelessWidget {
   const EzWarning({
     super.key,
     this.title,
-    required this.body,
     this.titleStyle,
+    required this.body,
     this.bodyStyle,
+    this.iconColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Color iconColor = Theme.of(context).colorScheme.secondary;
+    // Gather theme data //
+    final ThemeData theme = Theme.of(context);
 
     final String warning = title ?? EFUILang.of(context)!.gAttention;
 
+    final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
+    final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
+
+    final Color alertColor = iconColor ?? theme.colorScheme.secondary;
+
     final EzSpacer rowPadding = EzSpacer.row(EzConfig.get(paddingKey));
+
+    // Return the build
 
     return Semantics(
       button: false,
@@ -56,14 +69,14 @@ class EzWarning extends StatelessWidget {
                     // Thing1
                     Icon(
                       Icons.warning,
-                      color: iconColor,
-                      size: titleStyle?.fontSize,
+                      color: alertColor,
+                      size: tStyle?.fontSize,
                     ),
                     rowPadding,
 
                     Text(
                       warning,
-                      style: titleStyle,
+                      style: tStyle,
                       textAlign: TextAlign.center,
                     ),
                     rowPadding,
@@ -71,17 +84,17 @@ class EzWarning extends StatelessWidget {
                     // Thing 2
                     Icon(
                       Icons.warning,
-                      color: iconColor,
-                      size: titleStyle?.fontSize,
+                      color: alertColor,
+                      size: tStyle?.fontSize,
                     ),
                   ],
                 ),
-                EzNewLine(bodyStyle, textAlign: TextAlign.center),
+                EzNewLine(bStyle, textAlign: TextAlign.center),
 
                 // Label
                 Text(
                   body,
-                  style: bodyStyle,
+                  style: bStyle,
                   textAlign: TextAlign.center,
                 ),
               ],
