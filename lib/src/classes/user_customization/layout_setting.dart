@@ -8,12 +8,12 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzSliderSetting extends StatefulWidget {
+class EzLayoutSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String prefsKey;
 
   /// enum for determining the preview Widget(s) required
-  final SliderSettingType type;
+  final LayoutSettingType type;
 
   /// Smallest value that can be set
   final double min;
@@ -29,7 +29,7 @@ class EzSliderSetting extends StatefulWidget {
 
   /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
-  const EzSliderSetting({
+  const EzLayoutSetting({
     super.key,
     required this.prefsKey,
     required this.type,
@@ -40,62 +40,37 @@ class EzSliderSetting extends StatefulWidget {
   });
 
   @override
-  State<EzSliderSetting> createState() => _SliderSettingState();
+  State<EzLayoutSetting> createState() => _LayoutSettingState();
 }
 
-class _SliderSettingState extends State<EzSliderSetting> {
+class _LayoutSettingState extends State<EzLayoutSetting> {
   // Gather the theme data //
 
   late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
   late double currValue = EzConfig.get(widget.prefsKey);
 
   final double space = EzConfig.get(spacingKey);
-  late final EzSpacer _spacer = EzSpacer(space);
+  late final EzSpacer spacer = EzSpacer(space);
+  late final EzSpacer rowSpacer = EzSpacer.row(space);
+  late final EzSpacer rowSeparator = EzSpacer.row(2 * space);
 
-  late final String _label = sstName(context, widget.type);
+  late final String label = lstName(context, widget.type);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextStyle? titleStyle = getTitle(context);
+  late final TextStyle? bodyStyle = getBody(context);
 
   // Define build functions //
 
-  /// Return the preview Widget(s) for the passed [SliderSettingType]
-  List<Widget> _buildPreview(BuildContext context, TextStyle? style) {
+  /// Return the preview Widget(s) for the passed [LayoutSettingType]
+  List<Widget> _buildPreview(BuildContext context) {
     final String currLabel =
-        '${EFUILang.of(context)!.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
+        '${l10n.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
 
     switch (widget.type) {
-      // Text settings //
-
-      // Font size
-      case SliderSettingType.fontSize:
-        return <Widget>[Container()];
-
-      // Font weight
-      case SliderSettingType.fontWeight:
-        return <Widget>[Container()];
-
-      // Font style
-      case SliderSettingType.fontStyle:
-        return <Widget>[Container()];
-
-      // Letter spacing
-      case SliderSettingType.letterSpacing:
-        return <Widget>[Container()];
-
-      // Word spacing
-      case SliderSettingType.wordSpacing:
-        return <Widget>[Container()];
-
-      // Font height
-      case SliderSettingType.fontHeight:
-        return <Widget>[Container()];
-
-      // Font decoration
-      case SliderSettingType.fontDecoration:
-        return <Widget>[Container()];
-
-      // Layout settings //
-
       // Margin
-      case SliderSettingType.margin:
+      case LayoutSettingType.margin:
         const double previewHeight = 160.0;
         const double previewWidth = 90.0;
 
@@ -103,7 +78,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
         final double liveMargin = currValue * marginScale;
 
         return <Widget>[
-          _spacer,
+          spacer,
 
           // Live preview && label
           Row(
@@ -113,10 +88,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
               // Label
               Text(
                 currLabel,
-                style: style,
+                style: bodyStyle,
                 textAlign: TextAlign.center,
               ),
-              EzSpacer.row(space * 2),
+              rowSeparator,
 
               // Preview
               Container(
@@ -130,13 +105,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
               ),
             ],
           ),
-          _spacer,
+          spacer,
         ];
 
       // Padding
-      case SliderSettingType.padding:
+      case LayoutSettingType.padding:
         return <Widget>[
-          _spacer,
+          spacer,
 
           // Live label && preview
           Row(
@@ -151,9 +126,9 @@ class _SliderSettingState extends State<EzSliderSetting> {
                       ),
                     ),
                 onPressed: doNothing,
-                child: Text(EFUILang.of(context)!.gCurrently),
+                child: Text(l10n.gCurrently),
               ),
-              EzSpacer.row(space),
+              rowSpacer,
               ElevatedButton(
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                       padding: MaterialStateProperty.all(
@@ -169,11 +144,11 @@ class _SliderSettingState extends State<EzSliderSetting> {
             ],
           ),
 
-          _spacer,
+          spacer,
         ];
 
       // Spacing
-      case SliderSettingType.spacing:
+      case LayoutSettingType.spacing:
         return <Widget>[
           // Preview 1
           EzSpacer(currValue),
@@ -195,15 +170,14 @@ class _SliderSettingState extends State<EzSliderSetting> {
   List<Widget> buildModal({
     required BuildContext context,
     required StateSetter setModalState,
-    required TextStyle? style,
   }) {
     return <Widget>[
       // Preview
       Semantics(
         button: false,
         readOnly: true,
-        label: EFUILang.of(context)!.gSetToValue(
-          _label,
+        label: l10n.gSetToValue(
+          label,
           currValue.toStringAsFixed(widget.decimals),
         ),
         child: ExcludeSemantics(
@@ -211,12 +185,15 @@ class _SliderSettingState extends State<EzSliderSetting> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // Title
               Text(
-                _label,
-                style: style,
+                label,
+                style: titleStyle,
                 textAlign: TextAlign.center,
               ),
-              ..._buildPreview(context, style),
+
+              // Preview
+              ..._buildPreview(context),
             ],
           ),
         ),
@@ -255,7 +232,7 @@ class _SliderSettingState extends State<EzSliderSetting> {
               value.toStringAsFixed(widget.decimals),
         ),
       ),
-      _spacer,
+      spacer,
 
       // Reset button
       ElevatedButton.icon(
@@ -267,10 +244,10 @@ class _SliderSettingState extends State<EzSliderSetting> {
         },
         icon: Icon(PlatformIcons(context).refresh),
         label: Text(
-          '${EFUILang.of(context)!.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}',
+          '${l10n.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}',
         ),
       ),
-      _spacer,
+      spacer,
     ];
   }
 
@@ -290,14 +267,13 @@ class _SliderSettingState extends State<EzSliderSetting> {
               children: buildModal(
                 context: context,
                 setModalState: setModalState,
-                style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             );
           },
         ),
       ),
       icon: widget.type.icon,
-      label: Text(_label),
+      label: Text(label),
     );
   }
 }
