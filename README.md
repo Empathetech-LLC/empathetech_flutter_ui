@@ -214,7 +214,7 @@ The example app's screens neatly organize all the custom Widgets that enable EFU
 * [EzImageSetting](./lib/src/classes/user-customization/EzImageSetting.dart): An image uploader for updating app assets.
 * [EzColorSetting](./lib/src/classes/user-customization/EzColorSetting.dart): A color picker for updating theme colors.
 * [EzFontSetting](./lib/src/classes/user-customization/EzFontSetting.dart): A list of available [Google Fonts](https://pub.dev/packages/google_fonts) for the app to use.
-* [EzSliderSetting](./lib/src/classes/user-customization/EzSliderSetting.dart): A versatile slider Widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
+* [EzLayoutSetting](./lib/src/classes/user-customization/EzLayoutSetting.dart): A versatile slider Widget, with a live preview, for updating numerical theme values (spacing, sizing, etc).
 * [EzResetButton](./lib/src/classes/user-customization/EzResetButton.dart): A text button for resetting groups of preferences.
 
 By default, every base [theme setting](./lib/src/consts/EzConfigKeys.dart) is exposed. Additional keys provided to `customDefaults` can be updated with these Widgets as well!
