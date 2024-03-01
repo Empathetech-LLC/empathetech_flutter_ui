@@ -28,6 +28,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   // Gather the list items //
 
   CountryFlag _flag(Locale locale) {
@@ -90,7 +92,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       context: context,
       builder: (BuildContext context) => EzAlertDialog(
         title: Text(
-          EFUILang.of(context)!.ssLanguages,
+          l10n.ssLanguages,
           textAlign: TextAlign.center,
         ),
         // Remove the trailing button spacer
@@ -105,12 +107,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.ssLangSemantics,
+      hint: l10n.ssLangSemantics,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),
           icon: _flag(currLocale),
-          label: Text(EFUILang.of(context)!.ssLanguage),
+          label: Text(l10n.ssLanguage),
         ),
       ),
     );
