@@ -40,9 +40,9 @@ export 'src/classes/user_customization/config.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
+export 'src/classes/user_customization/layout_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';
 export 'src/classes/user_customization/reset_button.dart';
-export 'src/classes/user_customization/slider_settings.dart';
 export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
@@ -54,7 +54,7 @@ export 'src/consts/google_fonts.dart';
 // Enums //
 
 export 'src/enums/hand.dart';
-export 'src/enums/slider_setting_type.dart';
+export 'src/enums/layout_setting_type.dart';
 export 'src/enums/text_style_type.dart';
 
 // Functions //
