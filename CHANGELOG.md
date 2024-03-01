@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.1.0] - 2024-02-XX
+## [5.1.0] - 2024-03-XX
 ### Updated
 - Jenkins pipeline to use external libraries
 - File organization
@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Updated isLightThemeKey -> isDarkThemeKey to match PlatformWidgets convention
   - Minor breaking change
 - Similarly, isRightHandKey -> isLefty
+- EzSliderSetting -> EzLayoutSetting
 
 ### Removed
 - TextSpacingKey && associated Widgets
