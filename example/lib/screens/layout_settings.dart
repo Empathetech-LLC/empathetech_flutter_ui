@@ -23,12 +23,14 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
   late final EzSpacer spacer = EzSpacer(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.lsPageTitle);
+    setPageTitle(l10n.lsPageTitle);
   }
 
   // Return the build //
@@ -43,9 +45,9 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
           children: <Widget>[
             if (spacing > margin) EzSpacer(spacing - margin),
             // Margin
-            const EzSliderSetting(
+            const EzLayoutSetting(
               prefsKey: marginKey,
-              type: SliderSettingType.margin,
+              type: LayoutSettingType.margin,
               min: 0.0,
               max: 50.0,
               steps: 10,
@@ -54,9 +56,9 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             spacer,
 
             // Padding
-            const EzSliderSetting(
+            const EzLayoutSetting(
               prefsKey: paddingKey,
-              type: SliderSettingType.padding,
+              type: LayoutSettingType.padding,
               min: 0.0,
               max: 50.0,
               steps: 10,
@@ -65,9 +67,9 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             spacer,
 
             // Spacing
-            const EzSliderSetting(
+            const EzLayoutSetting(
               prefsKey: spacingKey,
-              type: SliderSettingType.spacing,
+              type: LayoutSettingType.spacing,
               min: 10.0,
               max: 100.0,
               steps: 18,
@@ -77,7 +79,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
 
             // Local reset all
             EzResetButton(
-              dialogTitle: EFUILang.of(context)!.lsResetAll,
+              dialogTitle: l10n.lsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(layoutKeys.keys.toSet());
                 popScreen(context: context, result: true);
