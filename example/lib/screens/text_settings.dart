@@ -24,6 +24,8 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final EzSpacer rowSpacer = EzSpacer.row(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   // Gather the build data //
 
   TextStyleType editing = TextStyleType.display;
@@ -34,11 +36,11 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late TextStyle bodyStyle = getBody(context)!;
   late TextStyle labelStyle = getLabel(context)!;
 
-  late final String display = EFUILang.of(context)!.tsDisplay.toLowerCase();
-  late final String headline = EFUILang.of(context)!.tsHeadline.toLowerCase();
-  late final String title = EFUILang.of(context)!.tsTitle.toLowerCase();
-  late final String body = EFUILang.of(context)!.tsBody.toLowerCase();
-  late final String label = EFUILang.of(context)!.tsLabel.toLowerCase();
+  late final String display = l10n.tsDisplay.toLowerCase();
+  late final String headline = l10n.tsHeadline.toLowerCase();
+  late final String title = l10n.tsTitle.toLowerCase();
+  late final String body = l10n.tsBody.toLowerCase();
+  late final String label = l10n.tsLabel.toLowerCase();
 
   late final List<DropdownMenuEntry<TextStyleType>> styleChoices =
       <DropdownMenuEntry<TextStyleType>>[
@@ -90,7 +92,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.tsPageTitle);
+    setPageTitle(l10n.tsPageTitle);
   }
 
   // Return the build //
@@ -111,7 +113,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
               reverseHands: true,
               children: <Widget>[
                 Text(
-                  EFUILang.of(context)!.tsEditing,
+                  l10n.tsEditing,
                   style: labelStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -144,20 +146,20 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsDisplayP1,
+                  text: l10n.tsDisplayP1,
                   style: displayStyle,
                 ),
                 EzInlineLink(
-                  EFUILang.of(context)!.tsDisplayLink,
+                  l10n.tsDisplayLink,
                   style: displayStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.display;
                   }),
-                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(display),
+                  semanticsLabel: l10n.tsLinkHint(display),
                 ),
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsDisplayP2,
+                  text: l10n.tsDisplayP2,
                   style: displayStyle,
                 ),
               ],
@@ -169,20 +171,20 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsHeadlineP1,
+                  text: l10n.tsHeadlineP1,
                   style: headlineStyle,
                 ),
                 EzInlineLink(
-                  EFUILang.of(context)!.tsHeadlineLink,
+                  l10n.tsHeadlineLink,
                   style: headlineStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.headline;
                   }),
-                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(headline),
+                  semanticsLabel: l10n.tsLinkHint(headline),
                 ),
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsHeadlineP2,
+                  text: l10n.tsHeadlineP2,
                   style: headlineStyle,
                 ),
               ],
@@ -194,17 +196,17 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsTitleP1,
+                  text: l10n.tsTitleP1,
                   style: titleStyle,
                 ),
                 EzInlineLink(
-                  EFUILang.of(context)!.tsTitleLink,
+                  l10n.tsTitleLink,
                   style: titleStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.title;
                   }),
-                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(title),
+                  semanticsLabel: l10n.tsLinkHint(title),
                 ),
               ],
               textAlign: TextAlign.center,
@@ -215,20 +217,20 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsBodyP1,
+                  text: l10n.tsBodyP1,
                   style: bodyStyle,
                 ),
                 EzInlineLink(
-                  EFUILang.of(context)!.tsBodyLink,
+                  l10n.tsBodyLink,
                   style: bodyStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.body;
                   }),
-                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(body),
+                  semanticsLabel: l10n.tsLinkHint(body),
                 ),
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsBodyP2,
+                  text: l10n.tsBodyP2,
                   style: bodyStyle,
                 ),
               ],
@@ -240,20 +242,20 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsLabelP1,
+                  text: l10n.tsLabelP1,
                   style: labelStyle,
                 ),
                 EzInlineLink(
-                  EFUILang.of(context)!.tsLabelLink,
+                  l10n.tsLabelLink,
                   style: labelStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextStyleType.label;
                   }),
-                  semanticsLabel: EFUILang.of(context)!.tsLinkHint(label),
+                  semanticsLabel: l10n.tsLinkHint(label),
                 ),
                 EzPlainText(
-                  text: EFUILang.of(context)!.tsLabelP2,
+                  text: l10n.tsLabelP2,
                   style: labelStyle,
                 ),
               ],
@@ -263,7 +265,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
             // Local reset all
             EzResetButton(
-              dialogTitle: EFUILang.of(context)!.tsResetAll,
+              dialogTitle: l10n.tsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(textStyleKeys.keys.toSet());
                 popScreen(context: context, result: true);

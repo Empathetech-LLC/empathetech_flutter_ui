@@ -58,11 +58,13 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
   late String? currPath = EzConfig.get(widget.prefsKey);
-  late bool _updateTheme = (widget.updateTheme != null);
+  late bool updateTheme = (widget.updateTheme != null);
 
   final double padding = EzConfig.get(paddingKey);
 
   late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define button functions //
 
@@ -96,7 +98,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, result: changed);
           },
-          label: Text(EFUILang.of(context)!.isFromFile),
+          label: Text(l10n.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
         ),
         spacer,
@@ -112,7 +114,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, result: changed);
           },
-          label: Text(EFUILang.of(context)!.isFromCamera),
+          label: Text(l10n.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
         ),
         spacer,
@@ -145,7 +147,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
                   return EzAlertDialog(
                     title: Text(
-                      EFUILang.of(context)!.isEnterURL,
+                      l10n.isEnterURL,
                       textAlign: TextAlign.center,
                     ),
                     contents: <Widget>[
@@ -167,16 +169,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                     materialActions: ezMaterialActions(
                       context: context,
                       onConfirm: onConfirm,
-                      confirmMsg: EFUILang.of(context)!.gApply,
+                      confirmMsg: l10n.gApply,
                       onDeny: onDeny,
-                      denyMsg: EFUILang.of(context)!.gCancel,
+                      denyMsg: l10n.gCancel,
                     ),
                     cupertinoActions: ezCupertinoActions(
                       context: context,
                       onConfirm: onConfirm,
-                      confirmMsg: EFUILang.of(context)!.gApply,
+                      confirmMsg: l10n.gApply,
                       onDeny: onDeny,
-                      denyMsg: EFUILang.of(context)!.gCancel,
+                      denyMsg: l10n.gCancel,
                     ),
                     needsClose: false,
                   );
@@ -187,7 +189,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           popScreen(context: context, result: changed);
         },
-        label: Text(EFUILang.of(context)!.isFromNetwork),
+        label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
       ),
       spacer,
@@ -203,7 +205,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             result: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
           );
         },
-        label: Text(EFUILang.of(context)!.isResetIt),
+        label: Text(l10n.isResetIt),
         icon: Icon(PlatformIcons(context).refresh),
       ),
     ]);
@@ -219,7 +221,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             popScreen(context: context, result: noImageValue);
           },
-          label: Text(EFUILang.of(context)!.isClearIt),
+          label: Text(l10n.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
         ),
       ]);
@@ -236,7 +238,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               // Label
               Flexible(
                 child: Text(
-                  EFUILang.of(context)!.isUseForColors,
+                  l10n.isUseForColors,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -244,11 +246,11 @@ class _ImageSettingState extends State<EzImageSetting> {
 
               // Check box
               Checkbox(
-                  value: _updateTheme,
+                  value: updateTheme,
                   onChanged: (bool? choice) {
                     setState(() {
                       dialogState(() {
-                        _updateTheme = (choice == null) ? false : choice;
+                        updateTheme = (choice == null) ? false : choice;
                       });
                     });
                   }),
@@ -268,7 +270,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (BuildContext context, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
-              EFUILang.of(context)!.isDialogTitle(
+              l10n.isDialogTitle(
                 widget.dialogTitle ?? widget.label,
               ),
               textAlign: TextAlign.center,
@@ -310,7 +312,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             context: context,
             builder: (BuildContext context) => EzAlertDialog(
               title: Text(
-                EFUILang.of(context)!.gCreditTo,
+                l10n.gCreditTo,
                 textAlign: TextAlign.center,
               ),
               contents: <Widget>[
@@ -329,7 +331,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: EFUILang.of(context)!.isButtonHint(widget.label),
+      hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(

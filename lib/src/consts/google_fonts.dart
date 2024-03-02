@@ -6,37 +6,57 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Top 5 Google Fonts according to https://fonts.google.com/analytics
-// Last updated: 02/19/2024
+// Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
+// Plus some ones I thought were cute
 
-const String roboto = 'Roboto';
+const String andika = 'Andika';
+const String atkinsonHyperlegible = 'Atkinson Hyperlegible';
+const String lexend = 'Lexend';
+const String noto = 'Noto Sans';
 const String openSans = 'Open Sans';
-const String lato = 'Lato';
-const String montserrat = 'Montserrat';
-const String oswald = 'Oswald';
+const String pressStart2P = 'Press Start 2 Play';
+const String readexPro = 'Readex Pro';
+const String roboto = 'Roboto';
+const String shantell = 'Shantell Sans';
+const String sourceCodePro = 'Source Code Pro';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
-  roboto: GoogleFonts.roboto(),
+  andika: GoogleFonts.andika(),
+  atkinsonHyperlegible: GoogleFonts.atkinsonHyperlegible(),
+  lexend: GoogleFonts.lexend(),
+  noto: GoogleFonts.notoSans(),
   openSans: GoogleFonts.openSans(),
-  lato: GoogleFonts.lato(),
-  montserrat: GoogleFonts.montserrat(),
-  oswald: GoogleFonts.oswald(),
+  pressStart2P: GoogleFonts.pressStart2p(),
+  readexPro: GoogleFonts.readexPro(),
+  roboto: GoogleFonts.roboto(),
+  shantell: GoogleFonts.shantellSans(),
+  sourceCodePro: GoogleFonts.sourceCodePro(),
 };
 
-/// Pass [starter] to the [textStyle] parameter of [gFont]s [GoogleFonts] match
+/// Pass [starter] to the [gFont]'s [GoogleFonts.textStyle] param
 TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {
-    case roboto:
-      return GoogleFonts.roboto(textStyle: starter);
+    case andika:
+      return GoogleFonts.andika(textStyle: starter);
+    case atkinsonHyperlegible:
+      return GoogleFonts.atkinsonHyperlegible(textStyle: starter);
+    case lexend:
+      return GoogleFonts.lexend(textStyle: starter);
+    case noto:
+      return GoogleFonts.notoSans(textStyle: starter);
     case openSans:
       return GoogleFonts.openSans(textStyle: starter);
-    case lato:
-      return GoogleFonts.lato(textStyle: starter);
-    case montserrat:
-      return GoogleFonts.montserrat(textStyle: starter);
-    case oswald:
-      return GoogleFonts.oswald(textStyle: starter);
+    case pressStart2P:
+      return GoogleFonts.pressStart2p(textStyle: starter);
+    case readexPro:
+      return GoogleFonts.readexPro(textStyle: starter);
+    case roboto:
+      return GoogleFonts.roboto(textStyle: starter);
+    case shantell:
+      return GoogleFonts.shantellSans(textStyle: starter);
+    case sourceCodePro:
+      return GoogleFonts.sourceCodePro(textStyle: starter);
     default:
       return starter;
   }

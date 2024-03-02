@@ -26,23 +26,21 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final TextStyle? labelStyle = getLabel(context);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   // Define the static page content //
 
-  late final String themeProfile = isDark
-      ? EFUILang.of(context)!.gDark.toLowerCase()
-      : EFUILang.of(context)!.gLight.toLowerCase();
+  late final String themeProfile =
+      isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
   /// Build from image button label
-  late final String fromImageLabel = EFUILang.of(context)!.csSchemeBase;
-  late final String fromImageHint =
-      '${EFUILang.of(context)!.csOptional}: ${EFUILang.of(context)!.csFromImage}';
+  late final String fromImageLabel = l10n.csSchemeBase;
+  late final String fromImageHint = '${l10n.csOptional}: ${l10n.csFromImage}';
 
   /// Build from image button dialog title
-  late final String fromImageTitle =
-      '$themeProfile ${EFUILang.of(context)!.csColorScheme}';
+  late final String fromImageTitle = '$themeProfile ${l10n.csColorScheme}';
 
-  late final String resetDialogTitle =
-      EFUILang.of(context)!.csResetAll(themeProfile);
+  late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
   late final List<String> defaultList = isDark
       ? <String>[
@@ -64,7 +62,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final List<String> fullList = isDark ? darkColors : lightColors;
 
   /// Return the [List] of [Widget]s that aren't [EzColorSetting]s
-  late final List<Widget> _otherButtons = <Widget>[
+  late final List<Widget> otherButtons = <Widget>[
     isDark
         ? Semantics(
             button: true,
@@ -115,7 +113,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
-  List<Widget> _dynamicColorSettings() {
+  List<Widget> dynamicColorSettings() {
     final List<Widget> toReturn = <Widget>[];
 
     for (final String key in currList) {
@@ -147,7 +145,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   }
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
-  List<Widget> _getUntrackedColors(StateSetter setModalState) {
+  List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
 
     final List<Widget> trackers = fullList
@@ -189,6 +187,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           onPressed: () {
             setState(() {
               currList.add(settingKey);
+              currList.sort(
+                (String a, String b) =>
+                    fullList.indexOf(a) - fullList.indexOf(b),
+              );
             });
             setModalState(() {});
           },
@@ -199,11 +201,11 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     return <Widget>[
       // Help
       EzLink(
-        EFUILang.of(context)!.gHowThisWorks,
+        l10n.gHowThisWorks,
         style: labelStyle,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
-        semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+        semanticsLabel: l10n.gHowThisWorksHint,
         tooltip: materialColorRoles,
       ),
       ...trackers
@@ -215,7 +217,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.csPageTitle);
+    setPageTitle(l10n.csPageTitle);
   }
 
   // Return the build //
@@ -230,20 +232,20 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           children: <Widget>[
             // Current theme reminder
             Text(
-              EFUILang.of(context)!.gEditingTheme(themeProfile),
+              l10n.gEditingTheme(themeProfile),
               style: labelStyle,
               textAlign: TextAlign.center,
             ),
             separator,
 
             // Dynamic settings
-            ..._dynamicColorSettings(),
+            ...dynamicColorSettings(),
             spacer, // This makes two, dynamicColorSettings has a trailing spacer too
 
             // Add a color
             TextButton.icon(
               icon: Icon(PlatformIcons(context).addCircledOutline),
-              label: Text(EFUILang.of(context)!.csAddColor),
+              label: Text(l10n.csAddColor),
               onPressed: () async {
                 // Show available color settings
                 await showModalBottomSheet(
@@ -255,28 +257,22 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                       StateSetter setModalState,
                     ) {
                       return EzScrollView(
-                        children: _getUntrackedColors(setModalState),
+                        children: getUntrackedColors(setModalState),
                       );
                     },
                   ),
                 );
 
-                // Save the user's changes (if any)
+                // Save the user's changes
                 if (currList != defaultList) {
-                  final List<String> sortedList = List<String>.from(currList);
-                  // Sort based on the original material order
-                  sortedList.sort(
-                    (String a, String b) =>
-                        fullList.indexOf(a) - fullList.indexOf(b),
-                  );
-                  EzConfig.setStringList(userColorsKey, sortedList);
+                  EzConfig.setStringList(userColorsKey, currList);
                 }
               },
             ),
             separator,
 
             // Build from image
-            ..._otherButtons,
+            ...otherButtons,
             spacer,
           ],
         ),

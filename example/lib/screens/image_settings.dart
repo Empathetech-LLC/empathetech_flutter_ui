@@ -22,26 +22,25 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   late final EzSpacer _buttonSpacer = EzSpacer(spacing);
   late final EzSpacer _buttonSeparator = EzSpacer(2 * spacing);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
+
   // Define the page content //
 
-  late final String themeProfile = isDark
-      ? EFUILang.of(context)!.gDark.toLowerCase()
-      : EFUILang.of(context)!.gLight.toLowerCase();
-
-  late final String resetTitle = EFUILang.of(context)!.isResetAll(themeProfile);
+  late final String themeProfile =
+      isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
   late final List<Widget> settingsButtons = <Widget>[
     isDark
         // Page
         ? EzImageSetting(
             prefsKey: darkPageImageKey,
-            label: EFUILang.of(context)!.isBackground,
+            label: l10n.isBackground,
             allowClear: true,
             updateTheme: Brightness.dark,
           )
         : EzImageSetting(
             prefsKey: lightPageImageKey,
-            label: EFUILang.of(context)!.isBackground,
+            label: l10n.isBackground,
             allowClear: true,
             updateTheme: Brightness.light,
           ),
@@ -49,7 +48,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
 
     // Local reset all
     EzResetButton(
-      dialogTitle: resetTitle,
+      dialogTitle: l10n.isResetAll(themeProfile),
       onConfirm: () {
         EzConfig.removeKeys(imageKeys.keys.toSet());
         popScreen(context: context, result: true);
@@ -62,7 +61,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(EFUILang.of(context)!.isPageTitle);
+    setPageTitle(l10n.isPageTitle);
   }
 
   // Return the build //
@@ -77,7 +76,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
           children: <Widget>[
             // Current theme reminder
             Text(
-              EFUILang.of(context)!.gEditingTheme(themeProfile),
+              l10n.gEditingTheme(themeProfile),
               style: getLabel(context),
               textAlign: TextAlign.center,
             ),
