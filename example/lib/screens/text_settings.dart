@@ -128,6 +128,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     }
                   },
                   dropdownMenuEntries: styleChoices,
+                  textStyle: labelStyle,
                 ),
               ],
             ),
