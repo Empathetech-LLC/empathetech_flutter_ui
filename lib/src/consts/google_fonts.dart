@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 // Plus some ones I thought were cute
 
 const String alexBrush = 'Alex Brush';
-const String andika = 'Andika';
 const String atkinsonHyperlegible = 'Atkinson Hyperlegible';
 const String fingerPaint = 'Finger Paint';
 const String lexend = 'Lexend';
@@ -19,13 +18,11 @@ const String openSans = 'Open Sans';
 const String pressStart2P = 'Press Start 2 Play';
 const String readexPro = 'Readex Pro';
 const String roboto = 'Roboto';
-const String shantell = 'Shantell Sans';
 const String sourceCodePro = 'Source Code Pro';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   alexBrush: GoogleFonts.alexBrush(),
-  andika: GoogleFonts.andika(),
   atkinsonHyperlegible: GoogleFonts.atkinsonHyperlegible(),
   fingerPaint: GoogleFonts.fingerPaint(),
   lexend: GoogleFonts.lexend(),
@@ -34,7 +31,6 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   pressStart2P: GoogleFonts.pressStart2p(),
   readexPro: GoogleFonts.readexPro(),
   roboto: GoogleFonts.roboto(),
-  shantell: GoogleFonts.shantellSans(),
   sourceCodePro: GoogleFonts.sourceCodePro(),
 };
 
@@ -43,8 +39,6 @@ TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {
     case alexBrush:
       return GoogleFonts.alexBrush(textStyle: starter);
-    case andika:
-      return GoogleFonts.andika(textStyle: starter);
     case atkinsonHyperlegible:
       return GoogleFonts.atkinsonHyperlegible(textStyle: starter);
     case fingerPaint:
@@ -61,8 +55,6 @@ TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
       return GoogleFonts.readexPro(textStyle: starter);
     case roboto:
       return GoogleFonts.roboto(textStyle: starter);
-    case shantell:
-      return GoogleFonts.shantellSans(textStyle: starter);
     case sourceCodePro:
       return GoogleFonts.sourceCodePro(textStyle: starter);
     default:
