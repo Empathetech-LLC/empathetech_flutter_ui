@@ -6,8 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
   final String styleKey;
@@ -23,63 +21,43 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  late final String _defaultFontFamily = EzConfig.getDefault(widget.styleKey);
-  late String? currFontFamily = EzConfig.get(widget.styleKey);
-
   final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final String defaultFontFamily = EzConfig.getDefault(widget.styleKey);
+
+  late String? currFontFamily = EzConfig.get(widget.styleKey);
 
   // Define button functions //
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
-  Future<dynamic> _chooseGoogleFont(BuildContext context) {
-    final List<Widget> buttons = <Widget>[];
 
-    googleStyles.forEach((String font, TextStyle style) {
-      buttons.addAll(<Widget>[
-        ElevatedButton(
-          onPressed: () {
-            EzConfig.setString(widget.styleKey, font);
-            setState(() {
-              currFontFamily = style.fontFamily!;
-            });
-            popScreen(context: context, result: font);
-          },
-          child: Text(
-            (font == _defaultFontFamily)
-                // Marks the default with "* (default)"
-                ? EFUILang.of(context)!.gDefaultEntry(font)
-                : font,
-            style: style,
+  late final List<DropdownMenuEntry<String>> entries =
+      googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
+    return DropdownMenuEntry<String>(
+      value: entry.key,
+      label: entry.key,
+      style: Theme.of(context).textButtonTheme.style?.copyWith(
+            textStyle: MaterialStatePropertyAll<TextStyle>(entry.value),
           ),
-        ),
-        spacer,
-      ]);
-    });
-
-    return showPlatformDialog(
-      context: context,
-      builder: (BuildContext context) => EzAlertDialog(
-        title: Text(
-          EFUILang.of(context)!.tsFonts,
-          textAlign: TextAlign.center,
-        ),
-        // Remove the trailing button spacer
-        contents: buttons.sublist(0, buttons.length - 1),
-      ),
     );
-  }
+  }).toList();
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () => _chooseGoogleFont(context),
-      icon: const Icon(LineIcons.font),
-      label: Text(
-        EFUILang.of(context)!.tsFontFamily,
-        style: TextStyle(fontFamily: currFontFamily),
-      ),
+    return DropdownMenu<String>(
+      initialSelection: currFontFamily,
+      dropdownMenuEntries: entries,
+      onSelected: (String? fontFamily) {
+        if (fontFamily == null) return;
+        EzConfig.setString(widget.styleKey, fontFamily);
+        setState(() {
+          currFontFamily = fontFamily;
+        });
+      },
     );
   }
 }
