@@ -9,8 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 // Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
 // Plus some ones I thought were cute
 
+const String alexBrush = 'Alex Brush';
 const String andika = 'Andika';
 const String atkinsonHyperlegible = 'Atkinson Hyperlegible';
+const String fingerPaint = 'Finger Paint';
 const String lexend = 'Lexend';
 const String noto = 'Noto Sans';
 const String openSans = 'Open Sans';
@@ -22,8 +24,10 @@ const String sourceCodePro = 'Source Code Pro';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
+  alexBrush: GoogleFonts.alexBrush(),
   andika: GoogleFonts.andika(),
   atkinsonHyperlegible: GoogleFonts.atkinsonHyperlegible(),
+  fingerPaint: GoogleFonts.fingerPaint(),
   lexend: GoogleFonts.lexend(),
   noto: GoogleFonts.notoSans(),
   openSans: GoogleFonts.openSans(),
@@ -37,10 +41,14 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
 /// Pass [starter] to the [gFont]'s [GoogleFonts.textStyle] param
 TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {
+    case alexBrush:
+      return GoogleFonts.alexBrush(textStyle: starter);
     case andika:
       return GoogleFonts.andika(textStyle: starter);
     case atkinsonHyperlegible:
       return GoogleFonts.atkinsonHyperlegible(textStyle: starter);
+    case fingerPaint:
+      return GoogleFonts.fingerPaint(textStyle: starter);
     case lexend:
       return GoogleFonts.lexend(textStyle: starter);
     case noto:
