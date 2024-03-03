@@ -21,13 +21,12 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
-
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final String defaultFontFamily = EzConfig.getDefault(widget.styleKey);
 
-  late String? currFontFamily = EzConfig.get(widget.styleKey);
+  late String currFontFamily =
+      EzConfig.get(widget.styleKey) ?? EzConfig.getDefault(widget.styleKey);
 
   // Define button functions //
 
@@ -58,6 +57,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
           currFontFamily = fontFamily;
         });
       },
+      textStyle: googleStyles[currFontFamily],
     );
   }
 }
