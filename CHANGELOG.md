@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
   - Minor breaking change
 - Similarly, isRightHandKey -> isLefty
 - EzSliderSetting -> EzLayoutSetting
+- TextStyleType -> TextSettingType
 
 ### Removed
 - TextSpacingKey && associated Widgets
