@@ -29,30 +29,36 @@ class ExampleScaffold extends StatelessWidget {
 
     // Return the build //
 
-    return SelectionArea(
-      child: Scaffold(
-        // AppBar
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, toolbarHeight),
-          child: AppBar(
-            excludeHeaderSemantics: true,
-            toolbarHeight: toolbarHeight,
+    final Scaffold theBuild = Scaffold(
+      // AppBar
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, toolbarHeight),
+        child: AppBar(
+          excludeHeaderSemantics: true,
+          toolbarHeight: toolbarHeight,
 
-            // Leading (aka left)
-            automaticallyImplyLeading: !isLefty,
-            leadingWidth: toolbarHeight,
+          // Leading (aka left)
+          automaticallyImplyLeading: !isLefty,
+          leadingWidth: toolbarHeight,
 
-            // Title
-            title: Text(title, semanticsLabel: titleSemantics),
+          // Title
+          title: Text(title, semanticsLabel: titleSemantics),
 
-            // Actions (aka trailing aka right)
-            actions: isLefty ? <Widget>[const EzBackAction()] : null,
-          ),
+          // Actions (aka trailing aka right)
+          actions: isLefty ? <Widget>[const EzBackAction()] : null,
         ),
+      ),
 
-        // Body
-        body: body,
-        floatingActionButton: fab,
+      // Body
+      body: body,
+      floatingActionButton: fab,
+    );
+
+    return SelectionArea(
+      child: EzSwapScaffold(
+        small: theBuild,
+        large: theBuild,
+        threshold: 700,
       ),
     );
   }
