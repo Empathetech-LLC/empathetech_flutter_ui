@@ -22,13 +22,14 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
   late final EzSpacer spacer = EzSpacer(spacing);
   late final EzSpacer rowSpacer = EzSpacer.row(spacing);
+  late final EzSwapSpacer swapSpacer = EzSwapSpacer(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Gather the build data //
 
-  TextStyleType editing = TextStyleType.display;
+  TextSettingType editing = TextSettingType.display;
 
   late TextStyle displayStyle = getDisplay(context)!;
   late TextStyle headlineStyle = getHeadline(context)!;
@@ -42,48 +43,67 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final String body = l10n.tsBody.toLowerCase();
   late final String label = l10n.tsLabel.toLowerCase();
 
-  late final List<DropdownMenuEntry<TextStyleType>> styleChoices =
-      <DropdownMenuEntry<TextStyleType>>[
-    DropdownMenuEntry<TextStyleType>(
-      value: TextStyleType.display,
+  late final List<DropdownMenuEntry<TextSettingType>> styleChoices =
+      <DropdownMenuEntry<TextSettingType>>[
+    DropdownMenuEntry<TextSettingType>(
+      value: TextSettingType.display,
       label: display,
     ),
-    DropdownMenuEntry<TextStyleType>(
-      value: TextStyleType.headline,
+    DropdownMenuEntry<TextSettingType>(
+      value: TextSettingType.headline,
       label: headline,
     ),
-    DropdownMenuEntry<TextStyleType>(
-      value: TextStyleType.title,
+    DropdownMenuEntry<TextSettingType>(
+      value: TextSettingType.title,
       label: title,
     ),
-    DropdownMenuEntry<TextStyleType>(
-      value: TextStyleType.body,
+    DropdownMenuEntry<TextSettingType>(
+      value: TextSettingType.body,
       label: body,
     ),
-    DropdownMenuEntry<TextStyleType>(
-      value: TextStyleType.label,
+    DropdownMenuEntry<TextSettingType>(
+      value: TextSettingType.label,
       label: label,
     ),
   ];
 
   // Define the setting controllers //
 
-  late final Map<TextStyleType, Widget> familyControllers =
-      <TextStyleType, Widget>{
-    TextStyleType.display: const EzFontFamilySetting(
+  late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
+      <TextSettingType, EzFontFamilySetting>{
+    TextSettingType.display: const EzFontFamilySetting(
       styleKey: displayFontFamilyKey,
     ),
-    TextStyleType.headline: const EzFontFamilySetting(
+    TextSettingType.headline: const EzFontFamilySetting(
       styleKey: headlineFontFamilyKey,
     ),
-    TextStyleType.title: const EzFontFamilySetting(
+    TextSettingType.title: const EzFontFamilySetting(
       styleKey: titleFontFamilyKey,
     ),
-    TextStyleType.body: const EzFontFamilySetting(
+    TextSettingType.body: const EzFontFamilySetting(
       styleKey: bodyFontFamilyKey,
     ),
-    TextStyleType.label: const EzFontFamilySetting(
+    TextSettingType.label: const EzFontFamilySetting(
       styleKey: labelFontFamilyKey,
+    ),
+  };
+
+  late final Map<TextSettingType, EzFontSizeSetting> sizeControllers =
+      <TextSettingType, EzFontSizeSetting>{
+    TextSettingType.display: const EzFontSizeSetting(
+      styleKey: displayFontSizeKey,
+    ),
+    TextSettingType.headline: const EzFontSizeSetting(
+      styleKey: headlineFontSizeKey,
+    ),
+    TextSettingType.title: const EzFontSizeSetting(
+      styleKey: titleFontSizeKey,
+    ),
+    TextSettingType.body: const EzFontSizeSetting(
+      styleKey: bodyFontSizeKey,
+    ),
+    TextSettingType.label: const EzFontSizeSetting(
+      styleKey: labelFontSizeKey,
     ),
   };
 
@@ -118,9 +138,9 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   textAlign: TextAlign.center,
                 ),
                 rowSpacer,
-                DropdownMenu<TextStyleType>(
+                DropdownMenu<TextSettingType>(
                   initialSelection: editing,
-                  onSelected: (TextStyleType? value) {
+                  onSelected: (TextSettingType? value) {
                     if (value != null) {
                       setState(() {
                         editing = value;
@@ -135,11 +155,37 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             separator,
 
             // Controls
-            Row(
+            EzScrollView(
+              scrollDirection: Axis.horizontal,
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                familyControllers[editing]!,
-              ],
+              child: EzRowCol.sym(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      familyControllers[editing]!,
+                      // weightControllers[editing]!
+                      // styleControllers[editing]!
+                      // decorationControllers[editing]!
+                    ],
+                  ),
+                  swapSpacer,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      sizeControllers[editing]!,
+                      // letterSpacingControllers[editing]!
+                      // wordSpacingControllers[editing]!
+                      // heightControllers[editing]!
+                    ],
+                  ),
+                ],
+              ),
             ),
             separator,
 
@@ -155,7 +201,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: displayStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
-                    editing = TextStyleType.display;
+                    editing = TextSettingType.display;
                   }),
                   semanticsLabel: l10n.tsLinkHint(display),
                 ),
@@ -180,7 +226,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: headlineStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
-                    editing = TextStyleType.headline;
+                    editing = TextSettingType.headline;
                   }),
                   semanticsLabel: l10n.tsLinkHint(headline),
                 ),
@@ -205,7 +251,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: titleStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
-                    editing = TextStyleType.title;
+                    editing = TextSettingType.title;
                   }),
                   semanticsLabel: l10n.tsLinkHint(title),
                 ),
@@ -226,7 +272,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: bodyStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
-                    editing = TextStyleType.body;
+                    editing = TextSettingType.body;
                   }),
                   semanticsLabel: l10n.tsLinkHint(body),
                 ),
@@ -251,7 +297,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   style: labelStyle,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
-                    editing = TextStyleType.label;
+                    editing = TextSettingType.label;
                   }),
                   semanticsLabel: l10n.tsLinkHint(label),
                 ),
