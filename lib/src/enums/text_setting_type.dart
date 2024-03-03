@@ -5,125 +5,125 @@
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-enum TextStyleType { display, headline, title, body, label }
+enum TextSettingType { display, headline, title, body, label }
 
-extension Keys on TextStyleType {
+extension Keys on TextSettingType {
   String get familyKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontFamilyKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontFamilyKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontFamilyKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontFamilyKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontFamilyKey;
     }
   }
 
   String get sizeKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontSizeKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontSizeKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontSizeKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontSizeKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontSizeKey;
     }
   }
 
   String get weightKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontWeightKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontWeightKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontWeightKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontWeightKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontWeightKey;
     }
   }
 
   String get styleKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontStyleKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontStyleKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontStyleKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontStyleKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontStyleKey;
     }
   }
 
   String get letterSpacingKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayLetterSpacingKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineLetterSpacingKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleLetterSpacingKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyLetterSpacingKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelLetterSpacingKey;
     }
   }
 
   String get wordSpacingKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayWordSpacingKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineWordSpacingKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleWordSpacingKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyWordSpacingKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelWordSpacingKey;
     }
   }
 
   String get heightKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontHeightKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontHeightKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontHeightKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontHeightKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontHeightKey;
     }
   }
 
   String get decorationKey {
     switch (this) {
-      case TextStyleType.display:
+      case TextSettingType.display:
         return displayFontDecorationKey;
-      case TextStyleType.headline:
+      case TextSettingType.headline:
         return headlineFontDecorationKey;
-      case TextStyleType.title:
+      case TextSettingType.title:
         return titleFontDecorationKey;
-      case TextStyleType.body:
+      case TextSettingType.body:
         return bodyFontDecorationKey;
-      case TextStyleType.label:
+      case TextSettingType.label:
         return labelFontDecorationKey;
     }
   }
