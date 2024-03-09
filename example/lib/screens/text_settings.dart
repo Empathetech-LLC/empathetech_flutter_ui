@@ -72,45 +72,227 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
   // Define the setting controllers //
 
-  late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
-      <TextSettingType, EzFontFamilySetting>{
-    TextSettingType.display: const EzFontFamilySetting(
-      styleKey: displayFontFamilyKey,
+  /// Font family setting(s)
+  late final Map<TextSettingType, EzFontDropdownSetting> familyControllers =
+      <TextSettingType, EzFontDropdownSetting>{
+    TextSettingType.display: const EzFontDropdownSetting(
+      settingKey: displayFontFamilyKey,
+      settingType: FontDropdownType.fontFamily,
     ),
-    TextSettingType.headline: const EzFontFamilySetting(
-      styleKey: headlineFontFamilyKey,
+    TextSettingType.headline: const EzFontDropdownSetting(
+      settingKey: headlineFontFamilyKey,
+      settingType: FontDropdownType.fontFamily,
     ),
-    TextSettingType.title: const EzFontFamilySetting(
-      styleKey: titleFontFamilyKey,
+    TextSettingType.title: const EzFontDropdownSetting(
+      settingKey: titleFontFamilyKey,
+      settingType: FontDropdownType.fontFamily,
     ),
-    TextSettingType.body: const EzFontFamilySetting(
-      styleKey: bodyFontFamilyKey,
+    TextSettingType.body: const EzFontDropdownSetting(
+      settingKey: bodyFontFamilyKey,
+      settingType: FontDropdownType.fontFamily,
     ),
-    TextSettingType.label: const EzFontFamilySetting(
-      styleKey: labelFontFamilyKey,
+    TextSettingType.label: const EzFontDropdownSetting(
+      settingKey: labelFontFamilyKey,
+      settingType: FontDropdownType.fontFamily,
     ),
   };
 
+  /// Font weight setting(s)
+  late final Map<TextSettingType, EzFontDropdownSetting> weightControllers =
+      <TextSettingType, EzFontDropdownSetting>{
+    TextSettingType.display: const EzFontDropdownSetting(
+      settingKey: displayFontWeightKey,
+      settingType: FontDropdownType.fontWeight,
+    ),
+    TextSettingType.headline: const EzFontDropdownSetting(
+      settingKey: headlineFontWeightKey,
+      settingType: FontDropdownType.fontWeight,
+    ),
+    TextSettingType.title: const EzFontDropdownSetting(
+      settingKey: titleFontWeightKey,
+      settingType: FontDropdownType.fontWeight,
+    ),
+    TextSettingType.body: const EzFontDropdownSetting(
+      settingKey: bodyFontWeightKey,
+      settingType: FontDropdownType.fontWeight,
+    ),
+    TextSettingType.label: const EzFontDropdownSetting(
+      settingKey: labelFontWeightKey,
+      settingType: FontDropdownType.fontWeight,
+    ),
+  };
+
+  /// Font style setting(s)
+  late final Map<TextSettingType, EzFontDropdownSetting> styleControllers =
+      <TextSettingType, EzFontDropdownSetting>{
+    TextSettingType.display: const EzFontDropdownSetting(
+      settingKey: displayFontStyleKey,
+      settingType: FontDropdownType.fontStyle,
+    ),
+    TextSettingType.headline: const EzFontDropdownSetting(
+      settingKey: headlineFontStyleKey,
+      settingType: FontDropdownType.fontStyle,
+    ),
+    TextSettingType.title: const EzFontDropdownSetting(
+      settingKey: titleFontStyleKey,
+      settingType: FontDropdownType.fontStyle,
+    ),
+    TextSettingType.body: const EzFontDropdownSetting(
+      settingKey: bodyFontStyleKey,
+      settingType: FontDropdownType.fontStyle,
+    ),
+    TextSettingType.label: const EzFontDropdownSetting(
+      settingKey: labelFontStyleKey,
+      settingType: FontDropdownType.fontStyle,
+    ),
+  };
+
+  /// Font decoration setting(s)
+  late final Map<TextSettingType, EzFontDropdownSetting> decorationControllers =
+      <TextSettingType, EzFontDropdownSetting>{
+    TextSettingType.display: const EzFontDropdownSetting(
+      settingKey: displayFontDecorationKey,
+      settingType: FontDropdownType.fontDecoration,
+    ),
+    TextSettingType.headline: const EzFontDropdownSetting(
+      settingKey: headlineFontDecorationKey,
+      settingType: FontDropdownType.fontDecoration,
+    ),
+    TextSettingType.title: const EzFontDropdownSetting(
+      settingKey: titleFontDecorationKey,
+      settingType: FontDropdownType.fontDecoration,
+    ),
+    TextSettingType.body: const EzFontDropdownSetting(
+      settingKey: bodyFontDecorationKey,
+      settingType: FontDropdownType.fontDecoration,
+    ),
+    TextSettingType.label: const EzFontDropdownSetting(
+      settingKey: labelFontDecorationKey,
+      settingType: FontDropdownType.fontDecoration,
+    ),
+  };
+
+  /// Font size setting(s)
   late final Map<TextSettingType, EzFontIntegerSetting> sizeControllers =
       <TextSettingType, EzFontIntegerSetting>{
     TextSettingType.display: const EzFontIntegerSetting(
-      styleKey: displayFontSizeKey,
+      settingKey: displayFontSizeKey,
+      min: 8,
+      max: 96,
     ),
     TextSettingType.headline: const EzFontIntegerSetting(
-      styleKey: headlineFontSizeKey,
+      settingKey: headlineFontSizeKey,
+      min: 8,
+      max: 96,
     ),
     TextSettingType.title: const EzFontIntegerSetting(
-      styleKey: titleFontSizeKey,
+      settingKey: titleFontSizeKey,
+      min: 8,
+      max: 96,
     ),
     TextSettingType.body: const EzFontIntegerSetting(
-      styleKey: bodyFontSizeKey,
+      settingKey: bodyFontSizeKey,
+      min: 8,
+      max: 96,
     ),
     TextSettingType.label: const EzFontIntegerSetting(
-      styleKey: labelFontSizeKey,
+      settingKey: labelFontSizeKey,
+      min: 8,
+      max: 96,
     ),
   };
 
-// Set the page title //
+  /// Letter spacing setting(s)
+  late final Map<TextSettingType, EzFontDoubleSetting>
+      letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
+    TextSettingType.display: const EzFontDoubleSetting(
+      settingKey: displayLetterSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.headline: const EzFontDoubleSetting(
+      settingKey: headlineLetterSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.title: const EzFontDoubleSetting(
+      settingKey: titleLetterSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.body: const EzFontDoubleSetting(
+      settingKey: bodyLetterSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.label: const EzFontDoubleSetting(
+      settingKey: labelLetterSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+  };
+
+  /// Word spacing setting(s)
+  late final Map<TextSettingType, EzFontDoubleSetting> wordSpacingControllers =
+      <TextSettingType, EzFontDoubleSetting>{
+    TextSettingType.display: const EzFontDoubleSetting(
+      settingKey: displayWordSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.headline: const EzFontDoubleSetting(
+      settingKey: headlineWordSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.title: const EzFontDoubleSetting(
+      settingKey: titleWordSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.body: const EzFontDoubleSetting(
+      settingKey: bodyWordSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+    TextSettingType.label: const EzFontDoubleSetting(
+      settingKey: labelWordSpacingKey,
+      min: -1.0,
+      max: 1.0,
+    ),
+  };
+
+  /// Line height setting(s)
+  late final Map<TextSettingType, EzFontDoubleSetting> lineHeightControllers =
+      <TextSettingType, EzFontDoubleSetting>{
+    TextSettingType.display: const EzFontDoubleSetting(
+      settingKey: displayFontHeightKey,
+      min: 0.0,
+      max: 5.0,
+    ),
+    TextSettingType.headline: const EzFontDoubleSetting(
+      settingKey: headlineFontHeightKey,
+      min: 0.0,
+      max: 5.0,
+    ),
+    TextSettingType.title: const EzFontDoubleSetting(
+      settingKey: titleFontHeightKey,
+      min: 0.0,
+      max: 5.0,
+    ),
+    TextSettingType.body: const EzFontDoubleSetting(
+      settingKey: bodyFontHeightKey,
+      min: 0.0,
+      max: 5.0,
+    ),
+    TextSettingType.label: const EzFontDoubleSetting(
+      settingKey: labelFontHeightKey,
+      min: 0.0,
+      max: 5.0,
+    ),
+  };
+
+  // Set the page title //
 
   @override
   void didChangeDependencies() {
@@ -170,10 +352,10 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      familyControllers[editing]!,
-                      // weightControllers[editing]!
-                      // styleControllers[editing]!
-                      // decorationControllers[editing]!
+                      familyControllers[editing]!, rowSpacer,
+                      // weightControllers[editing]!, rowSpacer,
+                      // styleControllers[editing]!, rowSpacer,
+                      // decorationControllers[editing]!,
                     ],
                   ),
                   swapSpacer,
@@ -182,9 +364,12 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       sizeControllers[editing]!,
-                      // letterSpacingControllers[editing]!
-                      // wordSpacingControllers[editing]!
-                      // heightControllers[editing]!
+                      rowSpacer,
+                      letterSpacingControllers[editing]!,
+                      rowSpacer,
+                      wordSpacingControllers[editing]!,
+                      rowSpacer,
+                      lineHeightControllers[editing]!,
                     ],
                   ),
                 ],
