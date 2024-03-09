@@ -10,11 +10,18 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontIntegerSetting extends StatefulWidget {
-  final String styleKey;
+  final String settingKey;
+  final int min;
+  final int max;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [styleKey]
+  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [settingKey]
   /// [EzFontIntegerSetting] options are built from [googleStyles]
-  const EzFontIntegerSetting({super.key, required this.styleKey});
+  const EzFontIntegerSetting({
+    super.key,
+    required this.settingKey,
+    required this.min,
+    required this.max,
+  });
 
   @override
   State<EzFontIntegerSetting> createState() => _FontIntegerSettingState();
@@ -23,12 +30,10 @@ class EzFontIntegerSetting extends StatefulWidget {
 class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
   // Gather the theme data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
-
-  late int currSize = EzConfig.get(widget.styleKey);
+  late int currValue = EzConfig.get(widget.settingKey);
 
   late final Size sizeLimit = measureText(
-    '96',
+    widget.max.toString(),
     style: getBody(context),
     context: context,
   );
@@ -44,14 +49,15 @@ class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
       ),
       child: PlatformTextFormField(
         keyboardType: TextInputType.number,
-        initialValue: currSize.toString(),
+        initialValue: currValue.toString(),
         onChanged: (String value) {
-          final int intVal = int.tryParse(value)!;
+          final int? intVal = int.tryParse(value);
+          if (intVal == null) return;
 
           setState(() {
-            currSize = intVal;
+            currValue = intVal;
           });
-          EzConfig.setInt(widget.styleKey, intVal);
+          EzConfig.setInt(widget.settingKey, intVal);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String? value) {
@@ -59,8 +65,8 @@ class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
 
           final int? intVal = int.tryParse(value);
 
-          if (intVal == null || intVal < 8 || intVal > 96) {
-            return '8-96';
+          if (intVal == null || intVal < widget.min || intVal > widget.max) {
+            return '${widget.min}-${widget.max}';
           }
 
           return null;
