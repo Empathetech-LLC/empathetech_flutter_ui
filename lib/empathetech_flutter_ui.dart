@@ -38,6 +38,7 @@ export 'src/classes/screen_reader_support/rich_text.dart';
 export 'src/classes/user_customization/color_setting.dart';
 export 'src/classes/user_customization/config.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
+export 'src/classes/user_customization/font_double_setting.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
 export 'src/classes/user_customization/font_integer_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
