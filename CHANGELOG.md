@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
   - EzNewLine is a better strategy
 - navigators.dart
 - EzTextStyle
+- enums dir
+  - Moved code to new homes (Hand -> dominant_hand_switch and such)
 
 ### Added
 - Full text theme controls
