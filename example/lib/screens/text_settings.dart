@@ -5,6 +5,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Enumerator for selecting which [TextStyle] is being updated
+enum TextSettingType { display, headline, title, body, label }
+
 class TextSettingsScreen extends StatefulWidget {
   const TextSettingsScreen({super.key});
 
@@ -88,21 +91,21 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
     ),
   };
 
-  late final Map<TextSettingType, EzFontSizeSetting> sizeControllers =
-      <TextSettingType, EzFontSizeSetting>{
-    TextSettingType.display: const EzFontSizeSetting(
+  late final Map<TextSettingType, EzFontIntegerSetting> sizeControllers =
+      <TextSettingType, EzFontIntegerSetting>{
+    TextSettingType.display: const EzFontIntegerSetting(
       styleKey: displayFontSizeKey,
     ),
-    TextSettingType.headline: const EzFontSizeSetting(
+    TextSettingType.headline: const EzFontIntegerSetting(
       styleKey: headlineFontSizeKey,
     ),
-    TextSettingType.title: const EzFontSizeSetting(
+    TextSettingType.title: const EzFontIntegerSetting(
       styleKey: titleFontSizeKey,
     ),
-    TextSettingType.body: const EzFontSizeSetting(
+    TextSettingType.body: const EzFontIntegerSetting(
       styleKey: bodyFontSizeKey,
     ),
-    TextSettingType.label: const EzFontSizeSetting(
+    TextSettingType.label: const EzFontIntegerSetting(
       styleKey: labelFontSizeKey,
     ),
   };

@@ -39,7 +39,7 @@ export 'src/classes/user_customization/color_setting.dart';
 export 'src/classes/user_customization/config.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
 export 'src/classes/user_customization/font_family_setting.dart';
-export 'src/classes/user_customization/font_size_setting.dart';
+export 'src/classes/user_customization/font_integer_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/layout_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';
@@ -51,12 +51,6 @@ export 'src/classes/user_customization/theme_mode_switch.dart';
 export 'src/consts/config_keys.dart';
 export 'src/consts/empathetech.dart';
 export 'src/consts/google_fonts.dart';
-
-// Enums //
-
-export 'src/enums/hand.dart';
-export 'src/enums/layout_setting_type.dart';
-export 'src/enums/text_setting_type.dart';
 
 // Functions //
 
