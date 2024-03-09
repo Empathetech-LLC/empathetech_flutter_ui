@@ -9,18 +9,18 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontSizeSetting extends StatefulWidget {
+class EzFontIntegerSetting extends StatefulWidget {
   final String styleKey;
 
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [styleKey]
-  /// [EzFontSizeSetting] options are built from [googleStyles]
-  const EzFontSizeSetting({super.key, required this.styleKey});
+  /// [EzFontIntegerSetting] options are built from [googleStyles]
+  const EzFontIntegerSetting({super.key, required this.styleKey});
 
   @override
-  State<EzFontSizeSetting> createState() => _FontSizeSettingState();
+  State<EzFontIntegerSetting> createState() => _FontIntegerSettingState();
 }
 
-class _FontSizeSettingState extends State<EzFontSizeSetting> {
+class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
