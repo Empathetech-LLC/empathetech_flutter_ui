@@ -19,9 +19,7 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
   late final ThemeData theme = Theme.of(context);
-  late final PlatformThemeState platformTheme = PlatformTheme.of(context)!;
-
-  late ThemeMode? currMode = platformTheme.themeMode;
+  late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   final double padding = EzConfig.get(paddingKey);
 
@@ -71,31 +69,28 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
           // Button
           DropdownMenu<ThemeMode>(
-            initialSelection: currMode,
+            initialSelection: platformTheme,
             dropdownMenuEntries: entries,
             onSelected: (ThemeMode? newThemeMode) {
               switch (newThemeMode) {
                 case ThemeMode.system:
                   EzConfig.remove(isDarkThemeKey);
                   setState(() {
-                    currMode = ThemeMode.system;
-                    PlatformTheme.of(context)!.themeMode = ThemeMode.system;
+                    platformTheme = ThemeMode.system;
                   });
                   break;
 
                 case ThemeMode.light:
                   EzConfig.setBool(isDarkThemeKey, false);
                   setState(() {
-                    currMode = ThemeMode.light;
-                    PlatformTheme.of(context)!.themeMode = ThemeMode.light;
+                    platformTheme = ThemeMode.light;
                   });
                   break;
 
                 case ThemeMode.dark:
                   EzConfig.setBool(isDarkThemeKey, true);
                   setState(() {
-                    currMode = ThemeMode.dark;
-                    PlatformTheme.of(context)!.themeMode = ThemeMode.dark;
+                    platformTheme = ThemeMode.dark;
                   });
                   break;
 

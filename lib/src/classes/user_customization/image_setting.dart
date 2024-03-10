@@ -64,6 +64,8 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
+  late final ThemeData theme = Theme.of(context);
+
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define button functions //
@@ -156,7 +158,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                           url = value;
                         },
                         hintText: 'https://example.com/image.jpg',
-                        style: Theme.of(context).dialogTheme.contentTextStyle,
+                        style: theme.dialogTheme.contentTextStyle,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (String? value) {
                           if (value == null || value.isEmpty || !isUrl(value)) {
@@ -334,21 +336,21 @@ class _ImageSettingState extends State<EzImageSetting> {
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
-          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                  EdgeInsets.all(padding * 0.75),
-                ),
-                foregroundColor: MaterialStatePropertyAll<Color>(
-                  Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
+          style: theme.elevatedButtonTheme.style!.copyWith(
+            padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+              EdgeInsets.all(padding * 0.75),
+            ),
+            foregroundColor: MaterialStatePropertyAll<Color>(
+              theme.colorScheme.onSurface,
+            ),
+          ),
           onPressed: _activateSetting,
           onLongPress: _showCredits,
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: theme.colorScheme.primaryContainer,
               ),
             ),
             child: CircleAvatar(

@@ -83,17 +83,19 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final double _defaultValue = EzConfig.getDefault(widget.configKey);
   late double currValue = EzConfig.get(widget.configKey);
 
+  late final String label = lstName(context, widget.type);
+
   final double space = EzConfig.get(spacingKey);
   late final EzSpacer spacer = EzSpacer(space);
   late final EzSpacer rowSpacer = EzSpacer.row(space);
   late final EzSpacer rowSeparator = EzSpacer.row(2 * space);
 
-  late final String label = lstName(context, widget.type);
-
-  late final EFUILang l10n = EFUILang.of(context)!;
-
   late final TextStyle? titleStyle = getTitle(context);
   late final TextStyle? bodyStyle = getBody(context);
+
+  late final ThemeData theme = Theme.of(context);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define build functions //
 
@@ -129,11 +131,11 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
               // Preview
               Container(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: theme.colorScheme.onBackground,
                 height: previewHeight,
                 width: previewWidth,
                 child: Container(
-                  color: Theme.of(context).colorScheme.background,
+                  color: theme.colorScheme.background,
                   margin: EdgeInsets.all(liveMargin),
                 ),
               ),
@@ -154,24 +156,24 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ElevatedButton(
-                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding: MaterialStateProperty.all(
-                        EdgeInsets.all(currValue),
-                      ),
-                    ),
+                style: theme.elevatedButtonTheme.style!.copyWith(
+                  padding: MaterialStateProperty.all(
+                    EdgeInsets.all(currValue),
+                  ),
+                ),
                 onPressed: doNothing,
                 child: Text(l10n.gCurrently),
               ),
               rowSpacer,
               ElevatedButton(
-                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      padding: MaterialStateProperty.all(
-                        EdgeInsets.all(currValue),
-                      ),
-                      shape: const MaterialStatePropertyAll<OutlinedBorder>(
-                        CircleBorder(),
-                      ),
-                    ),
+                style: theme.elevatedButtonTheme.style!.copyWith(
+                  padding: MaterialStateProperty.all(
+                    EdgeInsets.all(currValue),
+                  ),
+                  shape: const MaterialStatePropertyAll<OutlinedBorder>(
+                    CircleBorder(),
+                  ),
+                ),
                 onPressed: doNothing,
                 child: Text(currValue.toStringAsFixed(widget.decimals)),
               ),
