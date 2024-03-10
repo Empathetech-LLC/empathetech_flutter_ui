@@ -10,15 +10,15 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontIntegerSetting extends StatefulWidget {
-  final String settingKey;
+  final String configKey;
   final int min;
   final int max;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [settingKey]
-  /// [EzFontIntegerSetting] options are built from [googleStyles]
+  /// Standardized tool for updating integer [TextStyle] values for the passed [configKey]
+  /// For example: [TextStyle.fontSize]
   const EzFontIntegerSetting({
     super.key,
-    required this.settingKey,
+    required this.configKey,
     required this.min,
     required this.max,
   });
@@ -30,7 +30,7 @@ class EzFontIntegerSetting extends StatefulWidget {
 class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
   // Gather the theme data //
 
-  late int currValue = EzConfig.get(widget.settingKey);
+  late int currValue = EzConfig.get(widget.configKey);
 
   late final Size sizeLimit = measureText(
     widget.max.toString(),
@@ -57,7 +57,7 @@ class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
           setState(() {
             currValue = intVal;
           });
-          EzConfig.setInt(widget.settingKey, intVal);
+          EzConfig.setInt(widget.configKey, intVal);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String? value) {

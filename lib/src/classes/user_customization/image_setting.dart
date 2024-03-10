@@ -15,7 +15,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose value is being updated
-  final String prefsKey;
+  final String configKey;
 
   /// [String] to display on the [ElevatedButton]
   final String label;
@@ -38,10 +38,10 @@ class EzImageSetting extends StatefulWidget {
   /// Mostly for use in a/the color settings screen
   final bool hideThemeMessage;
 
-  /// Creates a tool for updating the image at [prefsKey]'s path
+  /// Creates a tool for updating the image at [configKey]'s path
   const EzImageSetting({
     super.key,
-    required this.prefsKey,
+    required this.configKey,
     required this.label,
     required this.allowClear,
     this.dialogTitle,
@@ -57,7 +57,7 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
-  late String? currPath = EzConfig.get(widget.prefsKey);
+  late String? currPath = EzConfig.get(widget.configKey);
   late bool updateTheme = (widget.updateTheme != null);
 
   final double padding = EzConfig.get(paddingKey);
@@ -70,9 +70,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Cleanup any custom [File]s
   void _cleanup() async {
-    if (!EzConfig.isKeyAsset(widget.prefsKey)) {
+    if (!EzConfig.isKeyAsset(widget.configKey)) {
       try {
-        final File toDelete = File(widget.prefsKey);
+        final File toDelete = File(widget.configKey);
         await toDelete.delete();
       } catch (e) {
         doNothing();
@@ -92,7 +92,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             final String? changed = await changeImage(
               context: context,
-              prefsPath: widget.prefsKey,
+              prefsPath: widget.configKey,
               source: ImageSource.gallery,
             );
 
@@ -108,7 +108,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             final String? changed = await changeImage(
               context: context,
-              prefsPath: widget.prefsKey,
+              prefsPath: widget.configKey,
               source: ImageSource.camera,
             );
 
@@ -134,7 +134,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 builder: (BuildContext context, Function setState) {
                   void onConfirm() {
                     if (isUrl(url)) {
-                      EzConfig.setString(widget.prefsKey, url);
+                      EzConfig.setString(widget.configKey, url);
                       popScreen(context: context, result: url);
                     } else {
                       popScreen(context: context, result: null);
@@ -198,11 +198,11 @@ class _ImageSettingState extends State<EzImageSetting> {
       ElevatedButton.icon(
         onPressed: () {
           _cleanup();
-          EzConfig.remove(widget.prefsKey);
+          EzConfig.remove(widget.configKey);
 
           popScreen(
             context: context,
-            result: EzConfig.getDefault(widget.prefsKey) ?? noImageValue,
+            result: EzConfig.getDefault(widget.configKey) ?? noImageValue,
           );
         },
         label: Text(l10n.isResetIt),
@@ -217,7 +217,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         ElevatedButton.icon(
           onPressed: () {
             _cleanup();
-            EzConfig.setString(widget.prefsKey, noImageValue);
+            EzConfig.setString(widget.configKey, noImageValue);
 
             popScreen(context: context, result: noImageValue);
           },
@@ -261,7 +261,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return options;
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.prefsKey]
+  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.configKey]
   /// Returns the path, if any, to the new [Image]
   Future<dynamic> _chooseImage(BuildContext context) {
     return showPlatformDialog(

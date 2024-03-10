@@ -44,7 +44,7 @@ extension SettingIcon on LayoutSettingType {
 
 class EzLayoutSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
-  final String prefsKey;
+  final String configKey;
 
   /// enum for determining the preview Widget(s) required
   final LayoutSettingType type;
@@ -61,11 +61,11 @@ class EzLayoutSetting extends StatefulWidget {
   /// Number of significant figures to display AFTER the decimal point
   final int decimals;
 
-  /// Creates a tool for updating any [prefsKey] value that would pair well with a [PlatformSlider]
+  /// Creates a tool for updating any [configKey] value that would pair well with a [PlatformSlider]
   /// Use the [type] enum for generating the appropriate preview [Widget]s
   const EzLayoutSetting({
     super.key,
-    required this.prefsKey,
+    required this.configKey,
     required this.type,
     required this.min,
     required this.max,
@@ -80,8 +80,8 @@ class EzLayoutSetting extends StatefulWidget {
 class _LayoutSettingState extends State<EzLayoutSetting> {
   // Gather the theme data //
 
-  late final double _defaultValue = EzConfig.getDefault(widget.prefsKey);
-  late double currValue = EzConfig.get(widget.prefsKey);
+  late final double _defaultValue = EzConfig.getDefault(widget.configKey);
+  late double currValue = EzConfig.get(widget.configKey);
 
   final double space = EzConfig.get(spacingKey);
   late final EzSpacer spacer = EzSpacer(space);
@@ -255,9 +255,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           onChangeEnd: (double value) {
             // When finished, write the result
             if (value == _defaultValue) {
-              EzConfig.remove(widget.prefsKey);
+              EzConfig.remove(widget.configKey);
             } else {
-              EzConfig.setDouble(widget.prefsKey, value);
+              EzConfig.setDouble(widget.configKey, value);
             }
           },
 
@@ -271,7 +271,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       // Reset button
       ElevatedButton.icon(
         onPressed: () {
-          EzConfig.remove(widget.prefsKey);
+          EzConfig.remove(widget.configKey);
           setModalState(() {
             currValue = _defaultValue;
           });

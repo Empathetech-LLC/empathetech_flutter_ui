@@ -10,15 +10,15 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontDoubleSetting extends StatefulWidget {
-  final String settingKey;
+  final String configKey;
   final double min;
   final double max;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [settingKey]
-  /// [EzFontDoubleSetting] options are built from [googleStyles]
+  /// Standardized tool for updating double [TextStyle] values for the passed [configKey]
+  /// For example: [TextStyle.letterSpacing]
   const EzFontDoubleSetting({
     super.key,
-    required this.settingKey,
+    required this.configKey,
     required this.min,
     required this.max,
   });
@@ -30,7 +30,7 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
-  late double currValue = EzConfig.get(widget.settingKey);
+  late double currValue = EzConfig.get(widget.configKey);
 
   late final Size sizeLimit = measureText(
     widget.max.toString(),
@@ -57,7 +57,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
           setState(() {
             currValue = doubleVal;
           });
-          EzConfig.setDouble(widget.settingKey, doubleVal);
+          EzConfig.setDouble(widget.configKey, doubleVal);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String? value) {

@@ -69,7 +69,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
-                prefsKey: darkColorSchemeImageKey,
+                configKey: darkColorSchemeImageKey,
                 label: fromImageLabel,
                 dialogTitle: fromImageTitle,
                 allowClear: true,
@@ -83,7 +83,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
-                prefsKey: lightColorSchemeImageKey,
+                configKey: lightColorSchemeImageKey,
                 label: fromImageLabel,
                 dialogTitle: fromImageTitle,
                 allowClear: true,
@@ -120,7 +120,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
       if (defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.addAll(<Widget>[
-          EzColorSetting(key: ValueKey<String>(key), setting: key),
+          EzColorSetting(key: ValueKey<String>(key), configKey: key),
           spacer,
         ]);
       } else {
@@ -128,7 +128,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           // Removable buttons
           EzColorSetting(
               key: ValueKey<String>(key),
-              setting: key,
+              configKey: key,
               onRemove: () {
                 setState(() {
                   currList.remove(key);
@@ -150,8 +150,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
     final List<Widget> trackers = fullList
         .where((String element) => !currSet.contains(element))
-        .map<Widget>((String settingKey) {
-      final Color liveColor = getLiveColor(context, settingKey);
+        .map<Widget>((String configKeyKey) {
+      final Color liveColor = getLiveColor(context, configKeyKey);
 
       return Container(
         padding: EdgeInsets.symmetric(
@@ -159,7 +159,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           horizontal: spacing,
         ),
         child: ElevatedButton.icon(
-          key: ValueKey<String>(settingKey),
+          key: ValueKey<String>(configKeyKey),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -175,7 +175,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   : null,
             ),
           ),
-          label: Text(getColorName(context, settingKey)),
+          label: Text(getColorName(context, configKeyKey)),
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 padding: MaterialStateProperty.all(
                   EdgeInsets.all(padding * 0.75),
@@ -186,7 +186,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               ),
           onPressed: () {
             setState(() {
-              currList.add(settingKey);
+              currList.add(configKeyKey);
               currList.sort(
                 (String a, String b) =>
                     fullList.indexOf(a) - fullList.indexOf(b),
@@ -238,7 +238,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             ),
             separator,
 
-            // Dynamic settings
+            // Dynamic configKeys
             ...dynamicColorSettings(),
             spacer, // This makes two, dynamicColorSettings has a trailing spacer too
 
@@ -247,7 +247,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               icon: Icon(PlatformIcons(context).addCircledOutline),
               label: Text(l10n.csAddColor),
               onPressed: () async {
-                // Show available color settings
+                // Show available color configKeys
                 await showModalBottomSheet(
                   context: context,
                   showDragHandle: true,

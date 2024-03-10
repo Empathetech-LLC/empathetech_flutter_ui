@@ -33,13 +33,13 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     isDark
         // Page
         ? EzImageSetting(
-            prefsKey: darkPageImageKey,
+            configKey: darkPageImageKey,
             label: l10n.isBackground,
             allowClear: true,
             updateTheme: Brightness.dark,
           )
         : EzImageSetting(
-            prefsKey: lightPageImageKey,
+            configKey: lightPageImageKey,
             label: l10n.isBackground,
             allowClear: true,
             updateTheme: Brightness.light,

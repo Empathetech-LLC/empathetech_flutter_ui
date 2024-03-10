@@ -8,11 +8,11 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
-  final String styleKey;
+  final String configKey;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [styleKey]
+  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
   /// [EzFontFamilySetting] options are built from [googleStyles]
-  const EzFontFamilySetting({super.key, required this.styleKey});
+  const EzFontFamilySetting({super.key, required this.configKey});
 
   @override
   State<EzFontFamilySetting> createState() => _FontFamilySettingState();
@@ -21,12 +21,10 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
-
-  late final String defaultFontFamily = EzConfig.getDefault(widget.styleKey);
+  late final String defaultFontFamily = EzConfig.getDefault(widget.configKey);
 
   late String currFontFamily =
-      EzConfig.get(widget.styleKey) ?? EzConfig.getDefault(widget.styleKey);
+      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
 
   // Define button functions //
 
@@ -52,7 +50,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       dropdownMenuEntries: entries,
       onSelected: (String? fontFamily) {
         if (fontFamily == null) return;
-        EzConfig.setString(widget.styleKey, fontFamily);
+        EzConfig.setString(widget.configKey, fontFamily);
         setState(() {
           currFontFamily = fontFamily;
         });

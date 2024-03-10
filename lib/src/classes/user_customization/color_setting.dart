@@ -11,17 +11,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color.value] will be updated
-  final String setting;
+  final String configKey;
 
-  /// Optional callback for when the setting is removed, if it is part of a dynamic set/list
+  /// Optional callback for when the configKey is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
   final void Function()? onRemove;
 
-  /// Creates a tool for [setting] ColorScheme values via [EzConfig]
-  /// When [setting] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
+  /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
+  /// When [configKey] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
   const EzColorSetting({
     super.key,
-    required this.setting,
+    required this.configKey,
     this.onRemove,
   });
 
@@ -32,10 +32,10 @@ class EzColorSetting extends StatefulWidget {
 class _ColorSettingState extends State<EzColorSetting> {
   // Gather the theme data //
 
-  late final int? _prefsValue = EzConfig.get(widget.setting);
+  late final int? _prefsValue = EzConfig.get(widget.configKey);
 
   late Color currColor = (_prefsValue == null)
-      ? getLiveColor(context, widget.setting)
+      ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
   final double padding = EzConfig.get(paddingKey);
@@ -59,8 +59,8 @@ class _ColorSettingState extends State<EzColorSetting> {
         });
       },
       onConfirm: () {
-        // Update the user's setting
-        EzConfig.setInt(widget.setting, currColor.value);
+        // Update the user's configKey
+        EzConfig.setInt(widget.configKey, currColor.value);
 
         popScreen(context: context, result: currColor.value);
       },
@@ -71,14 +71,14 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for users to chose how they want to update the color
   /// Returns the [Color.value] of what was chosen (null if none)
   Future<dynamic> changeColor(BuildContext context) {
-    if (!widget.setting.contains(textColorPrefix)) {
+    if (!widget.configKey.contains(textColorPrefix)) {
       // Base color //
 
       // Just open a color picker
       return openColorPicker(context);
     } else {
       // 'on' (aka text) color //
-      final String backgroundKey = widget.setting.replaceAll(
+      final String backgroundKey = widget.configKey.replaceAll(
         textColorPrefix,
         '',
       );
@@ -86,7 +86,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Find the recommended contrast color for the background
       final int? backgroundColorValue = EzConfig.get(backgroundKey);
       final Color backgroundColor = backgroundColorValue == null
-          ? getLiveColor(context, widget.setting)
+          ? getLiveColor(context, widget.configKey)
           : Color(backgroundColorValue);
 
       final int recommended = getTextColor(backgroundColor).value;
@@ -95,8 +95,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       final String denyMsg = l10n.csUseCustom;
 
       void onConfirm() {
-        // Update the user's setting
-        EzConfig.setInt(widget.setting, recommended);
+        // Update the user's configKey
+        EzConfig.setInt(widget.configKey, recommended);
 
         setState(() {
           currColor = Color(recommended);
@@ -151,21 +151,21 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for resetting [widget.setting] to default
+  /// Opens an [EzAlertDialog] for reconfigKey [widget.configKey] to default
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset(BuildContext context) {
-    final int? resetValue = EzConfig.getDefault(widget.setting);
+    final int? resetValue = EzConfig.getDefault(widget.configKey);
 
     if (resetValue == null) {
-      EzConfig.remove(widget.setting);
+      EzConfig.remove(widget.configKey);
       return Future<bool>.value(true);
     } else {
       final Color resetColor = Color(resetValue);
 
       void onConfirm() {
-        // Remove the user's setting and reset the current state
-        EzConfig.remove(widget.setting);
+        // Remove the user's configKey and reset the current state
+        EzConfig.remove(widget.configKey);
 
         setState(() {
           currColor = resetColor;
@@ -258,7 +258,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final String label = getColorName(context, widget.setting);
+    final String label = getColorName(context, widget.configKey);
 
     return Semantics(
       button: true,
