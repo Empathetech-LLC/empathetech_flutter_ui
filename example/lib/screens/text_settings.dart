@@ -73,104 +73,30 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   // Define the setting controllers //
 
   /// Font family setting(s)
-  late final Map<TextSettingType, EzFontDropdownSetting> familyControllers =
-      <TextSettingType, EzFontDropdownSetting>{
-    TextSettingType.display: const EzFontDropdownSetting(
-      settingKey: displayFontFamilyKey,
-      settingType: FontDropdownType.fontFamily,
+  late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
+      <TextSettingType, EzFontFamilySetting>{
+    TextSettingType.display: const EzFontFamilySetting(
+      styleKey: displayFontFamilyKey,
     ),
-    TextSettingType.headline: const EzFontDropdownSetting(
-      settingKey: headlineFontFamilyKey,
-      settingType: FontDropdownType.fontFamily,
+    TextSettingType.headline: const EzFontFamilySetting(
+      styleKey: headlineFontFamilyKey,
     ),
-    TextSettingType.title: const EzFontDropdownSetting(
-      settingKey: titleFontFamilyKey,
-      settingType: FontDropdownType.fontFamily,
+    TextSettingType.title: const EzFontFamilySetting(
+      styleKey: titleFontFamilyKey,
     ),
-    TextSettingType.body: const EzFontDropdownSetting(
-      settingKey: bodyFontFamilyKey,
-      settingType: FontDropdownType.fontFamily,
+    TextSettingType.body: const EzFontFamilySetting(
+      styleKey: bodyFontFamilyKey,
     ),
-    TextSettingType.label: const EzFontDropdownSetting(
-      settingKey: labelFontFamilyKey,
-      settingType: FontDropdownType.fontFamily,
+    TextSettingType.label: const EzFontFamilySetting(
+      styleKey: labelFontFamilyKey,
     ),
   };
 
   /// Font weight setting(s)
-  late final Map<TextSettingType, EzFontDropdownSetting> weightControllers =
-      <TextSettingType, EzFontDropdownSetting>{
-    TextSettingType.display: const EzFontDropdownSetting(
-      settingKey: displayFontWeightKey,
-      settingType: FontDropdownType.fontWeight,
-    ),
-    TextSettingType.headline: const EzFontDropdownSetting(
-      settingKey: headlineFontWeightKey,
-      settingType: FontDropdownType.fontWeight,
-    ),
-    TextSettingType.title: const EzFontDropdownSetting(
-      settingKey: titleFontWeightKey,
-      settingType: FontDropdownType.fontWeight,
-    ),
-    TextSettingType.body: const EzFontDropdownSetting(
-      settingKey: bodyFontWeightKey,
-      settingType: FontDropdownType.fontWeight,
-    ),
-    TextSettingType.label: const EzFontDropdownSetting(
-      settingKey: labelFontWeightKey,
-      settingType: FontDropdownType.fontWeight,
-    ),
-  };
 
   /// Font style setting(s)
-  late final Map<TextSettingType, EzFontDropdownSetting> styleControllers =
-      <TextSettingType, EzFontDropdownSetting>{
-    TextSettingType.display: const EzFontDropdownSetting(
-      settingKey: displayFontStyleKey,
-      settingType: FontDropdownType.fontStyle,
-    ),
-    TextSettingType.headline: const EzFontDropdownSetting(
-      settingKey: headlineFontStyleKey,
-      settingType: FontDropdownType.fontStyle,
-    ),
-    TextSettingType.title: const EzFontDropdownSetting(
-      settingKey: titleFontStyleKey,
-      settingType: FontDropdownType.fontStyle,
-    ),
-    TextSettingType.body: const EzFontDropdownSetting(
-      settingKey: bodyFontStyleKey,
-      settingType: FontDropdownType.fontStyle,
-    ),
-    TextSettingType.label: const EzFontDropdownSetting(
-      settingKey: labelFontStyleKey,
-      settingType: FontDropdownType.fontStyle,
-    ),
-  };
 
   /// Font decoration setting(s)
-  late final Map<TextSettingType, EzFontDropdownSetting> decorationControllers =
-      <TextSettingType, EzFontDropdownSetting>{
-    TextSettingType.display: const EzFontDropdownSetting(
-      settingKey: displayFontDecorationKey,
-      settingType: FontDropdownType.fontDecoration,
-    ),
-    TextSettingType.headline: const EzFontDropdownSetting(
-      settingKey: headlineFontDecorationKey,
-      settingType: FontDropdownType.fontDecoration,
-    ),
-    TextSettingType.title: const EzFontDropdownSetting(
-      settingKey: titleFontDecorationKey,
-      settingType: FontDropdownType.fontDecoration,
-    ),
-    TextSettingType.body: const EzFontDropdownSetting(
-      settingKey: bodyFontDecorationKey,
-      settingType: FontDropdownType.fontDecoration,
-    ),
-    TextSettingType.label: const EzFontDropdownSetting(
-      settingKey: labelFontDecorationKey,
-      settingType: FontDropdownType.fontDecoration,
-    ),
-  };
 
   /// Font size setting(s)
   late final Map<TextSettingType, EzFontIntegerSetting> sizeControllers =
