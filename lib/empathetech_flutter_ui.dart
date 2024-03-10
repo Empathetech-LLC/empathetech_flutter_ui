@@ -8,20 +8,23 @@ library empathetech_flutter_ui;
 
 // Classes //
 
-// General
-export 'src/classes/general/back_action.dart';
-export 'src/classes/general/row.dart';
-export 'src/classes/general/screen.dart';
-export 'src/classes/general/spacer.dart';
-export 'src/classes/general/warning.dart';
+// Core
+export 'src/classes/config.dart';
+
+// Helpers
+export 'src/classes/helpers/row.dart';
+export 'src/classes/helpers/screen.dart';
+export 'src/classes/helpers/scroll_view.dart';
+export 'src/classes/helpers/spacer.dart';
+export 'src/classes/helpers/warning.dart';
 
 // Platform availability
 export 'src/classes/platform_availability/alert_dialog.dart';
 export 'src/classes/platform_availability/app_provider.dart';
+export 'src/classes/platform_availability/back_action.dart';
 
 // Responsive design
 export 'src/classes/responsive_design/row_col.dart';
-export 'src/classes/responsive_design/scroll_view.dart';
 export 'src/classes/responsive_design/swap_scaffold.dart';
 export 'src/classes/responsive_design/transitions.dart';
 
@@ -35,12 +38,15 @@ export 'src/classes/screen_reader_support/plain_text.dart';
 export 'src/classes/screen_reader_support/rich_text.dart';
 
 // User customization
+export 'src/classes/user_customization/text_style/bold_setting.dart';
+export 'src/classes/user_customization/text_style/double_setting.dart';
+export 'src/classes/user_customization/text_style/font_family_setting.dart';
+export 'src/classes/user_customization/text_style/integer_setting.dart';
+export 'src/classes/user_customization/text_style/italic_setting.dart';
+export 'src/classes/user_customization/text_style/underline_setting.dart';
+
 export 'src/classes/user_customization/color_setting.dart';
-export 'src/classes/user_customization/config.dart';
 export 'src/classes/user_customization/dominant_hand_switch.dart';
-export 'src/classes/user_customization/font_double_setting.dart';
-export 'src/classes/user_customization/font_family_setting.dart';
-export 'src/classes/user_customization/font_integer_setting.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/layout_setting.dart';
 export 'src/classes/user_customization/locale_setting.dart';

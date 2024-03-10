@@ -3,28 +3,28 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontFamilySetting extends StatefulWidget {
+class EzFontDecorationSetting extends StatefulWidget {
   final String configKey;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
-  /// [EzFontFamilySetting] options are built from [googleStyles]
-  const EzFontFamilySetting({super.key, required this.configKey});
+  /// Standardized tool for updating the [TextStyle.decoration] for the passed [configKey]
+  const EzFontDecorationSetting({super.key, required this.configKey});
 
   @override
-  State<EzFontFamilySetting> createState() => _FontFamilySettingState();
+  State<EzFontDecorationSetting> createState() => _FontDecorationSettingState();
 }
 
-class _FontFamilySettingState extends State<EzFontFamilySetting> {
+class _FontDecorationSettingState extends State<EzFontDecorationSetting> {
   // Gather the theme data //
 
-  late final String defaultFontFamily = EzConfig.getDefault(widget.configKey);
+  late final String defaultFontDecoration =
+      EzConfig.getDefault(widget.configKey);
 
-  late String currFontFamily =
-      EzConfig.get(widget.configKey) ?? defaultFontFamily;
+  late String currFontDecoration =
+      EzConfig.get(widget.configKey) ?? defaultFontDecoration;
 
   // Define button functions //
 
@@ -46,16 +46,16 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<String>(
-      initialSelection: currFontFamily,
+      initialSelection: currFontDecoration,
       dropdownMenuEntries: entries,
       onSelected: (String? fontFamily) {
         if (fontFamily == null) return;
         EzConfig.setString(widget.configKey, fontFamily);
         setState(() {
-          currFontFamily = fontFamily;
+          currFontDecoration = fontFamily;
         });
       },
-      textStyle: googleStyles[currFontFamily],
+      textStyle: googleStyles[currFontDecoration],
     );
   }
 }

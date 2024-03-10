@@ -5,18 +5,18 @@
 
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontIntegerSetting extends StatefulWidget {
+class EzFontDoubleSetting extends StatefulWidget {
   final String configKey;
-  final int min;
-  final int max;
+  final double min;
+  final double max;
 
-  /// Standardized tool for updating integer [TextStyle] values for the passed [configKey]
-  /// For example: [TextStyle.fontSize]
-  const EzFontIntegerSetting({
+  /// Standardized tool for updating double [TextStyle] values for the passed [configKey]
+  /// For example: [TextStyle.letterSpacing]
+  const EzFontDoubleSetting({
     super.key,
     required this.configKey,
     required this.min,
@@ -24,13 +24,13 @@ class EzFontIntegerSetting extends StatefulWidget {
   });
 
   @override
-  State<EzFontIntegerSetting> createState() => _FontIntegerSettingState();
+  State<EzFontDoubleSetting> createState() => _FontDoubleSettingState();
 }
 
-class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
+class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
-  late int currValue = EzConfig.get(widget.configKey);
+  late double currValue = EzConfig.get(widget.configKey);
 
   late final Size sizeLimit = measureText(
     widget.max.toString(),
@@ -51,21 +51,23 @@ class _FontIntegerSettingState extends State<EzFontIntegerSetting> {
         keyboardType: TextInputType.number,
         initialValue: currValue.toString(),
         onChanged: (String value) {
-          final int? intVal = int.tryParse(value);
-          if (intVal == null) return;
+          final double? doubleVal = double.tryParse(value);
+          if (doubleVal == null) return;
 
           setState(() {
-            currValue = intVal;
+            currValue = doubleVal;
           });
-          EzConfig.setInt(widget.configKey, intVal);
+          EzConfig.setDouble(widget.configKey, doubleVal);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String? value) {
           if (value == null) return null;
 
-          final int? intVal = int.tryParse(value);
+          final double? doubleVale = double.tryParse(value);
 
-          if (intVal == null || intVal < widget.min || intVal > widget.max) {
+          if (doubleVale == null ||
+              doubleVale < widget.min ||
+              doubleVale > widget.max) {
             return '${widget.min}-${widget.max}';
           }
 
