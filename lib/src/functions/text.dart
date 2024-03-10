@@ -33,44 +33,6 @@ Size measureText(
 
 // Getters //
 
-/// Returns the [FontWeight] from the passed [name]
-/// [thinWeight], [normalWeight], && [boldWeight]
-FontWeight weightFromName(String name) {
-  switch (name) {
-    case thinWeight:
-      return FontWeight.w100;
-    case boldWeight:
-      return FontWeight.w700;
-    case normalWeight:
-    default:
-      return FontWeight.w400;
-  }
-}
-
-/// Returns the [FontStyle] from the passed [name]
-/// [italicStyle] && [normalStyle]
-FontStyle styleFromName(String name) {
-  switch (name) {
-    case italicStyle:
-      return FontStyle.italic;
-    case normalStyle:
-    default:
-      return FontStyle.normal;
-  }
-}
-
-/// Returns the [TextDecoration] from the passed [name]
-/// [underlineDecoration], && [noDecoration]
-TextDecoration decorationFromName(String name) {
-  switch (name) {
-    case underlineDecoration:
-      return TextDecoration.underline;
-    case noDecoration:
-    default:
-      return TextDecoration.none;
-  }
-}
-
 /// Returns the [TextTheme.displayLarge] of the current [context]
 TextStyle? getDisplay(BuildContext context) {
   return Theme.of(context).textTheme.displayLarge;
@@ -128,15 +90,21 @@ TextTheme ezTextTheme() {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle buildDisplay() {
+TextStyle buildDisplay({Color? color}) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
-    fontWeight: weightFromName(EzConfig.get(displayFontWeightKey)),
-    fontStyle: styleFromName(EzConfig.get(displayFontStyleKey)),
+    fontWeight: EzConfig.get(displayBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.get(displayItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.get(displayUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.get(displayFontHeightKey),
     letterSpacing: EzConfig.get(displayLetterSpacingKey),
     wordSpacing: EzConfig.get(displayWordSpacingKey),
-    height: EzConfig.get(displayFontHeightKey),
-    decoration: decorationFromName(EzConfig.get(displayFontDecorationKey)),
   );
 
   return fuseWithGFont(
@@ -149,13 +117,18 @@ TextStyle buildDisplay() {
 TextStyle buildHeadline({Color? color}) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
-    fontWeight: weightFromName(EzConfig.get(headlineFontWeightKey)),
-    fontStyle: styleFromName(EzConfig.get(headlineFontStyleKey)),
+    fontWeight: EzConfig.get(headlineBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.get(headlineItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.get(headlineUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.get(headlineFontHeightKey),
     letterSpacing: EzConfig.get(headlineLetterSpacingKey),
     wordSpacing: EzConfig.get(headlineWordSpacingKey),
-    height: EzConfig.get(headlineFontHeightKey),
-    decoration: decorationFromName(EzConfig.get(headlineFontDecorationKey)),
-    color: color,
   );
 
   return fuseWithGFont(
@@ -168,13 +141,17 @@ TextStyle buildHeadline({Color? color}) {
 TextStyle buildTitle({Color? color}) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
-    fontWeight: weightFromName(EzConfig.get(titleFontWeightKey)),
-    fontStyle: styleFromName(EzConfig.get(titleFontStyleKey)),
+    fontWeight: EzConfig.get(titleBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle: EzConfig.get(titleItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.get(titleUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.get(titleFontHeightKey),
     letterSpacing: EzConfig.get(titleLetterSpacingKey),
     wordSpacing: EzConfig.get(titleWordSpacingKey),
-    height: EzConfig.get(titleFontHeightKey),
-    decoration: decorationFromName(EzConfig.get(titleFontDecorationKey)),
-    color: color,
   );
 
   return fuseWithGFont(
@@ -187,13 +164,16 @@ TextStyle buildTitle({Color? color}) {
 TextStyle buildBody({Color? color}) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
-    fontWeight: weightFromName(EzConfig.get(bodyFontWeightKey)),
-    fontStyle: styleFromName(EzConfig.get(bodyFontStyleKey)),
+    fontWeight:
+        EzConfig.get(bodyBoldKey) == true ? FontWeight.bold : FontWeight.normal,
+    fontStyle: EzConfig.get(bodyItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.get(bodyUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.get(bodyFontHeightKey),
     letterSpacing: EzConfig.get(bodyLetterSpacingKey),
     wordSpacing: EzConfig.get(bodyWordSpacingKey),
-    height: EzConfig.get(bodyFontHeightKey),
-    decoration: decorationFromName(EzConfig.get(bodyFontDecorationKey)),
-    color: color,
   );
 
   return fuseWithGFont(
@@ -206,13 +186,17 @@ TextStyle buildBody({Color? color}) {
 TextStyle buildLabel({Color? color}) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
-    fontWeight: weightFromName(EzConfig.get(labelFontWeightKey)),
-    fontStyle: styleFromName(EzConfig.get(labelFontStyleKey)),
+    fontWeight: EzConfig.get(labelBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle: EzConfig.get(labelItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.get(labelUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.get(labelFontHeightKey),
     letterSpacing: EzConfig.get(labelLetterSpacingKey),
     wordSpacing: EzConfig.get(labelWordSpacingKey),
-    height: EzConfig.get(labelFontHeightKey),
-    decoration: decorationFromName(EzConfig.get(labelFontDecorationKey)),
-    color: color,
   );
 
   return fuseWithGFont(
