@@ -63,14 +63,9 @@
   "tsLabel": "Etiqueta",
   "tsLinkHint": "Activar para editar {style}",
 
-  "tsFontFamily": "Familia de fuentes",
-  "tsFontSize": "Tamaño",
-  "tsFontWeight": "Peso",
-  "tsFontStyle": "Estilo",
-  "tsLetterSpacing": "Espaciado de letras",
-  "tsWordSpacing": "Espaciado de palabras",
-  "tsFontHeight": "Altura",
-  "tsFontDecoration": "Decoración",
+  "tsBold": "Negrita",
+  "tsItalic": "Itálica",
+  "tsUnderline": "Subrayar",
 
   "tsFonts": "Fuentes",
 

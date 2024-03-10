@@ -352,53 +352,23 @@ abstract class EFUILang {
   /// **'Activate to edit {style}'**
   String tsLinkHint(Object style);
 
-  /// No description provided for @tsFontFamily.
+  /// No description provided for @tsBold.
   ///
   /// In en, this message translates to:
-  /// **'Font family'**
-  String get tsFontFamily;
+  /// **'Bold'**
+  String get tsBold;
 
-  /// No description provided for @tsFontSize.
+  /// No description provided for @tsItalic.
   ///
   /// In en, this message translates to:
-  /// **'Size'**
-  String get tsFontSize;
+  /// **'Italic'**
+  String get tsItalic;
 
-  /// No description provided for @tsFontWeight.
+  /// No description provided for @tsUnderline.
   ///
   /// In en, this message translates to:
-  /// **'Weight'**
-  String get tsFontWeight;
-
-  /// No description provided for @tsFontStyle.
-  ///
-  /// In en, this message translates to:
-  /// **'Style'**
-  String get tsFontStyle;
-
-  /// No description provided for @tsLetterSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Letter spacing'**
-  String get tsLetterSpacing;
-
-  /// No description provided for @tsWordSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Word spacing'**
-  String get tsWordSpacing;
-
-  /// No description provided for @tsFontHeight.
-  ///
-  /// In en, this message translates to:
-  /// **'Height'**
-  String get tsFontHeight;
-
-  /// No description provided for @tsFontDecoration.
-  ///
-  /// In en, this message translates to:
-  /// **'Decoration'**
-  String get tsFontDecoration;
+  /// **'Underline'**
+  String get tsUnderline;
 
   /// No description provided for @tsFonts.
   ///
