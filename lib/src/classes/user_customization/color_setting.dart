@@ -42,6 +42,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
+  late final ThemeData theme = Theme.of(context);
+
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define button functions //
@@ -271,7 +273,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: theme.colorScheme.primaryContainer,
               ),
             ),
             child: CircleAvatar(
@@ -283,14 +285,14 @@ class _ColorSettingState extends State<EzColorSetting> {
             ),
           ),
           label: Text(label),
-          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                padding: MaterialStateProperty.all(
-                  EdgeInsets.all(padding * 0.75),
-                ),
-                foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
+          style: theme.elevatedButtonTheme.style!.copyWith(
+            padding: MaterialStateProperty.all(
+              EdgeInsets.all(padding * 0.75),
+            ),
+            foregroundColor: MaterialStateProperty.all(
+              theme.colorScheme.onSurface,
+            ),
+          ),
         ),
       ),
     );
