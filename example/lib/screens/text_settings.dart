@@ -76,53 +76,107 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
       <TextSettingType, EzFontFamilySetting>{
     TextSettingType.display: const EzFontFamilySetting(
-      styleKey: displayFontFamilyKey,
+      configKey: displayFontFamilyKey,
     ),
     TextSettingType.headline: const EzFontFamilySetting(
-      styleKey: headlineFontFamilyKey,
+      configKey: headlineFontFamilyKey,
     ),
     TextSettingType.title: const EzFontFamilySetting(
-      styleKey: titleFontFamilyKey,
+      configKey: titleFontFamilyKey,
     ),
     TextSettingType.body: const EzFontFamilySetting(
-      styleKey: bodyFontFamilyKey,
+      configKey: bodyFontFamilyKey,
     ),
     TextSettingType.label: const EzFontFamilySetting(
-      styleKey: labelFontFamilyKey,
+      configKey: labelFontFamilyKey,
     ),
   };
 
   /// Font weight setting(s)
+  late final Map<TextSettingType, EzFontWeightSetting> weightControllers =
+      <TextSettingType, EzFontWeightSetting>{
+    TextSettingType.display: const EzFontWeightSetting(
+      configKey: displayFontWeightKey,
+    ),
+    TextSettingType.headline: const EzFontWeightSetting(
+      configKey: headlineFontWeightKey,
+    ),
+    TextSettingType.title: const EzFontWeightSetting(
+      configKey: titleFontWeightKey,
+    ),
+    TextSettingType.body: const EzFontWeightSetting(
+      configKey: bodyFontWeightKey,
+    ),
+    TextSettingType.label: const EzFontWeightSetting(
+      configKey: labelFontWeightKey,
+    ),
+  };
 
   /// Font style setting(s)
+  late final Map<TextSettingType, EzFontStyleSetting> styleControllers =
+      <TextSettingType, EzFontStyleSetting>{
+    TextSettingType.display: const EzFontStyleSetting(
+      configKey: displayFontStyleKey,
+    ),
+    TextSettingType.headline: const EzFontStyleSetting(
+      configKey: headlineFontStyleKey,
+    ),
+    TextSettingType.title: const EzFontStyleSetting(
+      configKey: titleFontStyleKey,
+    ),
+    TextSettingType.body: const EzFontStyleSetting(
+      configKey: bodyFontStyleKey,
+    ),
+    TextSettingType.label: const EzFontStyleSetting(
+      configKey: labelFontStyleKey,
+    ),
+  };
 
   /// Font decoration setting(s)
+  late final Map<TextSettingType, EzFontDecorationSetting>
+      decorationControllers = <TextSettingType, EzFontDecorationSetting>{
+    TextSettingType.display: const EzFontDecorationSetting(
+      configKey: displayFontDecorationKey,
+    ),
+    TextSettingType.headline: const EzFontDecorationSetting(
+      configKey: headlineFontDecorationKey,
+    ),
+    TextSettingType.title: const EzFontDecorationSetting(
+      configKey: titleFontDecorationKey,
+    ),
+    TextSettingType.body: const EzFontDecorationSetting(
+      configKey: bodyFontDecorationKey,
+    ),
+    TextSettingType.label: const EzFontDecorationSetting(
+      configKey: labelFontDecorationKey,
+    ),
+  };
 
   /// Font size setting(s)
   late final Map<TextSettingType, EzFontIntegerSetting> sizeControllers =
       <TextSettingType, EzFontIntegerSetting>{
     TextSettingType.display: const EzFontIntegerSetting(
-      settingKey: displayFontSizeKey,
+      configKey: displayFontSizeKey,
       min: 8,
       max: 96,
     ),
     TextSettingType.headline: const EzFontIntegerSetting(
-      settingKey: headlineFontSizeKey,
+      configKey: headlineFontSizeKey,
       min: 8,
       max: 96,
     ),
     TextSettingType.title: const EzFontIntegerSetting(
-      settingKey: titleFontSizeKey,
+      configKey: titleFontSizeKey,
       min: 8,
       max: 96,
     ),
     TextSettingType.body: const EzFontIntegerSetting(
-      settingKey: bodyFontSizeKey,
+      configKey: bodyFontSizeKey,
       min: 8,
       max: 96,
     ),
     TextSettingType.label: const EzFontIntegerSetting(
-      settingKey: labelFontSizeKey,
+      configKey: labelFontSizeKey,
       min: 8,
       max: 96,
     ),
@@ -132,27 +186,27 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontDoubleSetting>
       letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: const EzFontDoubleSetting(
-      settingKey: displayLetterSpacingKey,
+      configKey: displayLetterSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.headline: const EzFontDoubleSetting(
-      settingKey: headlineLetterSpacingKey,
+      configKey: headlineLetterSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.title: const EzFontDoubleSetting(
-      settingKey: titleLetterSpacingKey,
+      configKey: titleLetterSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.body: const EzFontDoubleSetting(
-      settingKey: bodyLetterSpacingKey,
+      configKey: bodyLetterSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.label: const EzFontDoubleSetting(
-      settingKey: labelLetterSpacingKey,
+      configKey: labelLetterSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
@@ -162,27 +216,27 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontDoubleSetting> wordSpacingControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: const EzFontDoubleSetting(
-      settingKey: displayWordSpacingKey,
+      configKey: displayWordSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.headline: const EzFontDoubleSetting(
-      settingKey: headlineWordSpacingKey,
+      configKey: headlineWordSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.title: const EzFontDoubleSetting(
-      settingKey: titleWordSpacingKey,
+      configKey: titleWordSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.body: const EzFontDoubleSetting(
-      settingKey: bodyWordSpacingKey,
+      configKey: bodyWordSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
     TextSettingType.label: const EzFontDoubleSetting(
-      settingKey: labelWordSpacingKey,
+      configKey: labelWordSpacingKey,
       min: -1.0,
       max: 1.0,
     ),
@@ -192,27 +246,27 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontDoubleSetting> lineHeightControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: const EzFontDoubleSetting(
-      settingKey: displayFontHeightKey,
+      configKey: displayFontHeightKey,
       min: 0.0,
       max: 5.0,
     ),
     TextSettingType.headline: const EzFontDoubleSetting(
-      settingKey: headlineFontHeightKey,
+      configKey: headlineFontHeightKey,
       min: 0.0,
       max: 5.0,
     ),
     TextSettingType.title: const EzFontDoubleSetting(
-      settingKey: titleFontHeightKey,
+      configKey: titleFontHeightKey,
       min: 0.0,
       max: 5.0,
     ),
     TextSettingType.body: const EzFontDoubleSetting(
-      settingKey: bodyFontHeightKey,
+      configKey: bodyFontHeightKey,
       min: 0.0,
       max: 5.0,
     ),
     TextSettingType.label: const EzFontDoubleSetting(
-      settingKey: labelFontHeightKey,
+      configKey: labelFontHeightKey,
       min: 0.0,
       max: 5.0,
     ),
