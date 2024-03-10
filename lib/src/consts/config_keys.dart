@@ -37,52 +37,52 @@ const Map<String, Type> globalKeys = <String, Type>{
 // Display
 const String displayFontFamilyKey = 'displayFontFamily';
 const String displayFontSizeKey = 'displayFontSize';
-const String displayFontWeightKey = 'displayFontWeight';
-const String displayFontStyleKey = 'displayFontStyle';
+const String displayBoldKey = 'displayBolded';
+const String displayItalicsKey = 'displayItalicized';
+const String displayUnderlinedKey = 'displayUnderlined';
+const String displayFontHeightKey = 'displayFontHeight';
 const String displayLetterSpacingKey = 'displayLetterSpacing';
 const String displayWordSpacingKey = 'displayWordSpacing';
-const String displayFontHeightKey = 'displayFontHeight';
-const String displayFontDecorationKey = 'displayFontDecoration';
 
 // Headline
 const String headlineFontFamilyKey = 'headlineFontFamily';
 const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineFontWeightKey = 'headlineFontWeight';
-const String headlineFontStyleKey = 'headlineFontStyle';
+const String headlineBoldKey = 'headlineBolded';
+const String headlineItalicsKey = 'headlineItalicized';
+const String headlineUnderlinedKey = 'headlineUnderlined';
+const String headlineFontHeightKey = 'headlineFontHeight';
 const String headlineLetterSpacingKey = 'headlineLetterSpacing';
 const String headlineWordSpacingKey = 'headlineWordSpacing';
-const String headlineFontHeightKey = 'headlineFontHeight';
-const String headlineFontDecorationKey = 'headlineFontDecoration';
 
 // Title
 const String titleFontFamilyKey = 'titleFontFamily';
 const String titleFontSizeKey = 'titleFontSize';
-const String titleFontWeightKey = 'titleFontWeight';
-const String titleFontStyleKey = 'titleFontStyle';
+const String titleBoldKey = 'titleBolded';
+const String titleItalicsKey = 'titleItalicized';
+const String titleUnderlinedKey = 'titleUnderlined';
+const String titleFontHeightKey = 'titleFontHeight';
 const String titleLetterSpacingKey = 'titleLetterSpacing';
 const String titleWordSpacingKey = 'titleWordSpacing';
-const String titleFontHeightKey = 'titleFontHeight';
-const String titleFontDecorationKey = 'titleFontDecoration';
 
 // Body
 const String bodyFontFamilyKey = 'bodyFontFamily';
 const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyFontWeightKey = 'bodyFontWeight';
-const String bodyFontStyleKey = 'bodyFontStyle';
+const String bodyBoldKey = 'bodyBolded';
+const String bodyItalicsKey = 'bodyItalicized';
+const String bodyUnderlinedKey = 'bodyUnderlined';
+const String bodyFontHeightKey = 'bodyFontHeight';
 const String bodyLetterSpacingKey = 'bodyLetterSpacing';
 const String bodyWordSpacingKey = 'bodyWordSpacing';
-const String bodyFontHeightKey = 'bodyFontHeight';
-const String bodyFontDecorationKey = 'bodyFontDecoration';
 
 // Label
 const String labelFontFamilyKey = 'labelFontFamily';
 const String labelFontSizeKey = 'labelFontSize';
-const String labelFontWeightKey = 'labelFontWeight';
-const String labelFontStyleKey = 'labelFontStyle';
+const String labelBoldKey = 'labelBolded';
+const String labelItalicsKey = 'labelItalicized';
+const String labelUnderlinedKey = 'labelUnderlined';
+const String labelFontHeightKey = 'labelFontHeight';
 const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
-const String labelFontHeightKey = 'labelFontHeight';
-const String labelFontDecorationKey = 'labelFontDecoration';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -91,57 +91,56 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Display
   displayFontFamilyKey: String,
   displayFontSizeKey: double,
-  displayFontWeightKey: String,
-  displayFontStyleKey: String,
+  displayBoldKey: String,
+  displayItalicsKey: String,
   displayLetterSpacingKey: double,
   displayWordSpacingKey: double,
   displayFontHeightKey: double,
-  displayFontDecorationKey: String,
+  displayUnderlinedKey: String,
 
   // Headline
   headlineFontFamilyKey: String,
   headlineFontSizeKey: double,
-  headlineFontWeightKey: String,
-  headlineFontStyleKey: String,
+  headlineBoldKey: String,
+  headlineItalicsKey: String,
   headlineLetterSpacingKey: double,
   headlineWordSpacingKey: double,
   headlineFontHeightKey: double,
-  headlineFontDecorationKey: String,
+  headlineUnderlinedKey: String,
 
   // Title
   titleFontFamilyKey: String,
   titleFontSizeKey: double,
-  titleFontWeightKey: String,
-  titleFontStyleKey: String,
+  titleBoldKey: String,
+  titleItalicsKey: String,
   titleLetterSpacingKey: double,
   titleWordSpacingKey: double,
   titleFontHeightKey: double,
-  titleFontDecorationKey: String,
+  titleUnderlinedKey: String,
 
   // Body
   bodyFontFamilyKey: String,
   bodyFontSizeKey: double,
-  bodyFontWeightKey: String,
-  bodyFontStyleKey: String,
+  bodyBoldKey: String,
+  bodyItalicsKey: String,
   bodyLetterSpacingKey: double,
   bodyWordSpacingKey: double,
   bodyFontHeightKey: double,
-  bodyFontDecorationKey: String,
+  bodyUnderlinedKey: String,
 
   // Label
   labelFontFamilyKey: String,
   labelFontSizeKey: double,
-  labelFontWeightKey: String,
-  labelFontStyleKey: String,
+  labelBoldKey: String,
+  labelItalicsKey: String,
   labelLetterSpacingKey: double,
   labelWordSpacingKey: double,
   labelFontHeightKey: double,
-  labelFontDecorationKey: String,
+  labelUnderlinedKey: String,
 };
 
 // Text settings' values //
 
-const String normal = 'normal';
 const String bold = 'bold';
 const String italic = 'italic';
 const String underlined = 'underlined';
