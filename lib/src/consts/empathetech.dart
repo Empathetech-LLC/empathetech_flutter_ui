@@ -149,7 +149,7 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
   // Body
   bodyFontFamilyKey: roboto,
   bodyFontSizeKey: 16.0,
-  bodyBoldKey: true,
+  bodyBoldKey: false,
   bodyItalicsKey: false,
   bodyUnderlinedKey: false,
   bodyFontHeightKey: 1.5,
