@@ -24,7 +24,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   late final String defaultFontFamily = EzConfig.getDefault(widget.configKey);
 
   late String currFontFamily =
-      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
+      EzConfig.get(widget.configKey) ?? defaultFontFamily;
 
   // Define button functions //
 
