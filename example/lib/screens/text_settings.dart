@@ -96,19 +96,19 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontWeightSetting> weightControllers =
       <TextSettingType, EzFontWeightSetting>{
     TextSettingType.display: const EzFontWeightSetting(
-      configKey: displayFontWeightKey,
+      configKey: displayBoldKey,
     ),
     TextSettingType.headline: const EzFontWeightSetting(
-      configKey: headlineFontWeightKey,
+      configKey: headlineBoldKey,
     ),
     TextSettingType.title: const EzFontWeightSetting(
-      configKey: titleFontWeightKey,
+      configKey: titleBoldKey,
     ),
     TextSettingType.body: const EzFontWeightSetting(
-      configKey: bodyFontWeightKey,
+      configKey: bodyBoldKey,
     ),
     TextSettingType.label: const EzFontWeightSetting(
-      configKey: labelFontWeightKey,
+      configKey: labelBoldKey,
     ),
   };
 
@@ -116,19 +116,19 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontStyleSetting> styleControllers =
       <TextSettingType, EzFontStyleSetting>{
     TextSettingType.display: const EzFontStyleSetting(
-      configKey: displayFontStyleKey,
+      configKey: displayItalicsKey,
     ),
     TextSettingType.headline: const EzFontStyleSetting(
-      configKey: headlineFontStyleKey,
+      configKey: headlineItalicsKey,
     ),
     TextSettingType.title: const EzFontStyleSetting(
-      configKey: titleFontStyleKey,
+      configKey: titleItalicsKey,
     ),
     TextSettingType.body: const EzFontStyleSetting(
-      configKey: bodyFontStyleKey,
+      configKey: bodyItalicsKey,
     ),
     TextSettingType.label: const EzFontStyleSetting(
-      configKey: labelFontStyleKey,
+      configKey: labelItalicsKey,
     ),
   };
 
@@ -136,19 +136,19 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   late final Map<TextSettingType, EzFontDecorationSetting>
       decorationControllers = <TextSettingType, EzFontDecorationSetting>{
     TextSettingType.display: const EzFontDecorationSetting(
-      configKey: displayFontDecorationKey,
+      configKey: displayUnderlinedKey,
     ),
     TextSettingType.headline: const EzFontDecorationSetting(
-      configKey: headlineFontDecorationKey,
+      configKey: headlineUnderlinedKey,
     ),
     TextSettingType.title: const EzFontDecorationSetting(
-      configKey: titleFontDecorationKey,
+      configKey: titleUnderlinedKey,
     ),
     TextSettingType.body: const EzFontDecorationSetting(
-      configKey: bodyFontDecorationKey,
+      configKey: bodyUnderlinedKey,
     ),
     TextSettingType.label: const EzFontDecorationSetting(
-      configKey: labelFontDecorationKey,
+      configKey: labelUnderlinedKey,
     ),
   };
 

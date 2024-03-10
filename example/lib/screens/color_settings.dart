@@ -26,6 +26,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final TextStyle? labelStyle = getLabel(context);
 
+  late final ThemeData theme = Theme.of(context);
+
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the static page content //
@@ -164,7 +166,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: theme.colorScheme.primaryContainer,
               ),
             ),
             child: CircleAvatar(
@@ -176,14 +178,14 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             ),
           ),
           label: Text(getColorName(context, configKeyKey)),
-          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                padding: MaterialStateProperty.all(
-                  EdgeInsets.all(padding * 0.75),
-                ),
-                foregroundColor: MaterialStatePropertyAll<Color?>(
-                  Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
+          style: theme.elevatedButtonTheme.style!.copyWith(
+            padding: MaterialStateProperty.all(
+              EdgeInsets.all(padding * 0.75),
+            ),
+            foregroundColor: MaterialStatePropertyAll<Color?>(
+              theme.colorScheme.onSurface,
+            ),
+          ),
           onPressed: () {
             setState(() {
               currList.add(configKeyKey);
