@@ -7,55 +7,50 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontDecorationSetting extends StatefulWidget {
+class EzUnderlineSetting extends StatefulWidget {
   final String configKey;
 
   /// Standardized tool for updating the [TextStyle.decoration] for the passed [configKey]
-  const EzFontDecorationSetting({super.key, required this.configKey});
+  const EzUnderlineSetting({super.key, required this.configKey});
 
   @override
-  State<EzFontDecorationSetting> createState() => _FontDecorationSettingState();
+  State<EzUnderlineSetting> createState() => _EzUnderlineSettingState();
 }
 
-class _FontDecorationSettingState extends State<EzFontDecorationSetting> {
+class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
   // Gather the theme data //
 
-  late final String defaultFontDecoration =
-      EzConfig.getDefault(widget.configKey);
+  late bool isUnderlined = EzConfig.get(widget.configKey) ?? false;
 
-  late String currFontDecoration =
-      EzConfig.get(widget.configKey) ?? defaultFontDecoration;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-  // Define button functions //
+  // Define the build //
 
-  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
+  void swapState() {
+    setState(() {
+      isUnderlined = !isUnderlined;
+    });
+    EzConfig.setBool(widget.configKey, isUnderlined);
+  }
 
-  late final List<DropdownMenuEntry<String>> entries =
-      googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
-    return DropdownMenuEntry<String>(
-      value: entry.key,
-      label: entry.key,
-      style: Theme.of(context).textButtonTheme.style?.copyWith(
-            textStyle: MaterialStatePropertyAll<TextStyle>(entry.value),
-          ),
-    );
-  }).toList();
+  late final String tooltip = EFUILang.of(context)!.tsUnderline;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: currFontDecoration,
-      dropdownMenuEntries: entries,
-      onSelected: (String? fontFamily) {
-        if (fontFamily == null) return;
-        EzConfig.setString(widget.configKey, fontFamily);
-        setState(() {
-          currFontDecoration = fontFamily;
-        });
-      },
-      textStyle: googleStyles[currFontDecoration],
-    );
+    return isUnderlined
+        ? IconButton(
+            icon: const Icon(Icons.format_underline),
+            color: colorScheme.primary,
+            onPressed: swapState,
+            tooltip: tooltip,
+          )
+        : IconButton(
+            icon: const Icon(Icons.format_underline_outlined),
+            color: colorScheme.outline,
+            onPressed: swapState,
+            tooltip: tooltip,
+          );
   }
 }

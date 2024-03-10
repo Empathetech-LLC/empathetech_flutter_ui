@@ -7,17 +7,17 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontStyleSetting extends StatefulWidget {
+class EzItalicSetting extends StatefulWidget {
   final String configKey;
 
   /// Standardized tool for updating the [TextStyle.fontStyle] for the passed [configKey]
-  const EzFontStyleSetting({super.key, required this.configKey});
+  const EzItalicSetting({super.key, required this.configKey});
 
   @override
-  State<EzFontStyleSetting> createState() => _FontStyleSettingState();
+  State<EzItalicSetting> createState() => _EzItalicSettingState();
 }
 
-class _FontStyleSettingState extends State<EzFontStyleSetting> {
+class _EzItalicSettingState extends State<EzItalicSetting> {
   // Gather the theme data //
 
   late bool isItalic = EzConfig.get(widget.configKey) ?? false;

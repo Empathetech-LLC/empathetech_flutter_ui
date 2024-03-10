@@ -93,61 +93,61 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   };
 
   /// Font weight setting(s)
-  late final Map<TextSettingType, EzFontWeightSetting> weightControllers =
-      <TextSettingType, EzFontWeightSetting>{
-    TextSettingType.display: const EzFontWeightSetting(
+  late final Map<TextSettingType, EzBoldSetting> boldControllers =
+      <TextSettingType, EzBoldSetting>{
+    TextSettingType.display: const EzBoldSetting(
       configKey: displayBoldKey,
     ),
-    TextSettingType.headline: const EzFontWeightSetting(
+    TextSettingType.headline: const EzBoldSetting(
       configKey: headlineBoldKey,
     ),
-    TextSettingType.title: const EzFontWeightSetting(
+    TextSettingType.title: const EzBoldSetting(
       configKey: titleBoldKey,
     ),
-    TextSettingType.body: const EzFontWeightSetting(
+    TextSettingType.body: const EzBoldSetting(
       configKey: bodyBoldKey,
     ),
-    TextSettingType.label: const EzFontWeightSetting(
+    TextSettingType.label: const EzBoldSetting(
       configKey: labelBoldKey,
     ),
   };
 
   /// Font style setting(s)
-  late final Map<TextSettingType, EzFontStyleSetting> styleControllers =
-      <TextSettingType, EzFontStyleSetting>{
-    TextSettingType.display: const EzFontStyleSetting(
+  late final Map<TextSettingType, EzItalicSetting> italicsControllers =
+      <TextSettingType, EzItalicSetting>{
+    TextSettingType.display: const EzItalicSetting(
       configKey: displayItalicsKey,
     ),
-    TextSettingType.headline: const EzFontStyleSetting(
+    TextSettingType.headline: const EzItalicSetting(
       configKey: headlineItalicsKey,
     ),
-    TextSettingType.title: const EzFontStyleSetting(
+    TextSettingType.title: const EzItalicSetting(
       configKey: titleItalicsKey,
     ),
-    TextSettingType.body: const EzFontStyleSetting(
+    TextSettingType.body: const EzItalicSetting(
       configKey: bodyItalicsKey,
     ),
-    TextSettingType.label: const EzFontStyleSetting(
+    TextSettingType.label: const EzItalicSetting(
       configKey: labelItalicsKey,
     ),
   };
 
   /// Font decoration setting(s)
-  late final Map<TextSettingType, EzFontDecorationSetting>
-      decorationControllers = <TextSettingType, EzFontDecorationSetting>{
-    TextSettingType.display: const EzFontDecorationSetting(
+  late final Map<TextSettingType, EzUnderlineSetting> underlineControllers =
+      <TextSettingType, EzUnderlineSetting>{
+    TextSettingType.display: const EzUnderlineSetting(
       configKey: displayUnderlinedKey,
     ),
-    TextSettingType.headline: const EzFontDecorationSetting(
+    TextSettingType.headline: const EzUnderlineSetting(
       configKey: headlineUnderlinedKey,
     ),
-    TextSettingType.title: const EzFontDecorationSetting(
+    TextSettingType.title: const EzUnderlineSetting(
       configKey: titleUnderlinedKey,
     ),
-    TextSettingType.body: const EzFontDecorationSetting(
+    TextSettingType.body: const EzUnderlineSetting(
       configKey: bodyUnderlinedKey,
     ),
-    TextSettingType.label: const EzFontDecorationSetting(
+    TextSettingType.label: const EzUnderlineSetting(
       configKey: labelUnderlinedKey,
     ),
   };
@@ -293,9 +293,8 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             if (spacing > margin) EzSpacer(spacing - margin),
 
             // Style selector
-            EzRow(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              reverseHands: true,
               children: <Widget>[
                 Text(
                   l10n.tsEditing,
@@ -332,10 +331,15 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      familyControllers[editing]!, rowSpacer,
-                      // weightControllers[editing]!, rowSpacer,
-                      // styleControllers[editing]!, rowSpacer,
-                      // decorationControllers[editing]!,
+                      familyControllers[editing]!,
+                      rowSpacer,
+                      sizeControllers[editing]!,
+                      rowSpacer,
+                      boldControllers[editing]!,
+                      rowSpacer,
+                      italicsControllers[editing]!,
+                      rowSpacer,
+                      underlineControllers[editing]!,
                     ],
                   ),
                   swapSpacer,
@@ -343,8 +347,6 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      sizeControllers[editing]!,
-                      rowSpacer,
                       letterSpacingControllers[editing]!,
                       rowSpacer,
                       wordSpacingControllers[editing]!,

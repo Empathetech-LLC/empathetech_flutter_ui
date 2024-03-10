@@ -7,17 +7,17 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzFontWeightSetting extends StatefulWidget {
+class EzBoldSetting extends StatefulWidget {
   final String configKey;
 
   /// Standardized tool for updating the [TextStyle.fontWeight] for the passed [configKey]
-  const EzFontWeightSetting({super.key, required this.configKey});
+  const EzBoldSetting({super.key, required this.configKey});
 
   @override
-  State<EzFontWeightSetting> createState() => _FontWeightSettingState();
+  State<EzBoldSetting> createState() => _EzBoldSettingState();
 }
 
-class _FontWeightSettingState extends State<EzFontWeightSetting> {
+class _EzBoldSettingState extends State<EzBoldSetting> {
   // Gather the theme data //
 
   late bool isBold = EzConfig.get(widget.configKey) ?? false;
