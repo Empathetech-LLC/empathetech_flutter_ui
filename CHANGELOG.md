@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [5.1.0] - 2024-03-XX
+## [6.0.0] - 2024-03-XX
 ### Updated
 - Jenkins pipeline to use external libraries
 - File organization
@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Similarly, isRightHandKey -> isLefty
 - EzSliderSetting -> EzLayoutSetting
 - TextStyleType -> TextSettingType
+- All EzSettings now use `configKey` as the main param
 
 ### Removed
 - TextSpacingKey && associated Widgets
