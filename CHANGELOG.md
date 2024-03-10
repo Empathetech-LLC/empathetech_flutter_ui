@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Full text theme controls
+- Testing
+- An official Google Play release
 
 ## [5.0.1] - 2024-01-06
 ### Updated
