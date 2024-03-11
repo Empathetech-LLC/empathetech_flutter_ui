@@ -3,17 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-// Global values //
-
-/// '/'
-const String homePath = '/';
-
-/// '/'
-const String homeRoute = '/';
-
-/// Allows for app images whose default is an asset to be "null"
-const String noImageValue = 'noImage';
-
 // Global settings' keys //
 
 const String isLeftyKey = 'isLefty';
@@ -165,6 +154,9 @@ const Map<String, Type> imageKeys = <String, Type>{
   darkColorSchemeImageKey: String,
   darkPageImageKey: String,
 };
+
+/// Allows for app images whose default is an asset to be "null"
+const String noImageValue = 'noImage';
 
 // Color settings' keys //
 
