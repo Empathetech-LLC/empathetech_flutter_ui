@@ -29,14 +29,17 @@ dependencies:
   line_icons: ^2.0.1
 
 dev_dependencies:
+  # For example app
+  feedback: ^3.0.1
+  go_router: ^13.0.0
+
   # For development/testing
   dartdoc: ^8.0.5
   dependency_validator: ^3.2.2
   flutter_lints: ^3.0.1
 
-  # For example app
-  feedback: ^3.0.1
-  go_router: ^13.0.0
+  flutter_test:
+    sdk: flutter
 
 flutter:
   generate: true # For l10n
