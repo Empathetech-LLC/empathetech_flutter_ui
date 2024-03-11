@@ -95,7 +95,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "5.1.0"
+    version: "6.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -104,6 +104,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  feedback:
+    dependency: "direct main"
+    description:
+      name: feedback
+      sha256: fe585cb251d08074e25ba8a7f19c58861bda48387855c27ff84d8f8622873de6
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   ffi:
     dependency: transitive
     description:
