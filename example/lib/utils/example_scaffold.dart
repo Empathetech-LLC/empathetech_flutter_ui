@@ -58,7 +58,7 @@ class ExampleScaffold extends StatelessWidget {
       child: EzSwapScaffold(
         small: theBuild,
         large: theBuild,
-        threshold: 700,
+        threshold: smallBreakpoint,
       ),
     );
   }
