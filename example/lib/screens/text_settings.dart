@@ -362,10 +362,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Display preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  text: l10n.tsDisplayP1,
-                  style: displayStyle,
-                ),
+                EzPlainText(text: l10n.tsDisplayP1, style: displayStyle),
                 EzInlineLink(
                   l10n.tsDisplayLink,
                   style: displayStyle,
@@ -375,10 +372,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   }),
                   semanticsLabel: l10n.tsLinkHint(display),
                 ),
-                EzPlainText(
-                  text: l10n.tsDisplayP2,
-                  style: displayStyle,
-                ),
+                EzPlainText(text: l10n.tsDisplayP2, style: displayStyle),
               ],
               textAlign: TextAlign.center,
             ),
@@ -387,10 +381,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Headline preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  text: l10n.tsHeadlineP1,
-                  style: headlineStyle,
-                ),
+                EzPlainText(text: l10n.tsHeadlineP1, style: headlineStyle),
                 EzInlineLink(
                   l10n.tsHeadlineLink,
                   style: headlineStyle,
@@ -400,10 +391,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   }),
                   semanticsLabel: l10n.tsLinkHint(headline),
                 ),
-                EzPlainText(
-                  text: l10n.tsHeadlineP2,
-                  style: headlineStyle,
-                ),
+                EzPlainText(text: l10n.tsHeadlineP2, style: headlineStyle),
               ],
               textAlign: TextAlign.center,
             ),
@@ -412,10 +400,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Title preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  text: l10n.tsTitleP1,
-                  style: titleStyle,
-                ),
+                EzPlainText(text: l10n.tsTitleP1, style: titleStyle),
                 EzInlineLink(
                   l10n.tsTitleLink,
                   style: titleStyle,
@@ -433,10 +418,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Body preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  text: l10n.tsBodyP1,
-                  style: bodyStyle,
-                ),
+                EzPlainText(text: l10n.tsBodyP1, style: bodyStyle),
                 EzInlineLink(
                   l10n.tsBodyLink,
                   style: bodyStyle,
@@ -446,10 +428,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   }),
                   semanticsLabel: l10n.tsLinkHint(body),
                 ),
-                EzPlainText(
-                  text: l10n.tsBodyP2,
-                  style: bodyStyle,
-                ),
+                EzPlainText(text: l10n.tsBodyP2, style: bodyStyle),
               ],
               textAlign: TextAlign.center,
             ),
@@ -458,10 +437,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Label preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                  text: l10n.tsLabelP1,
-                  style: labelStyle,
-                ),
+                EzPlainText(text: l10n.tsLabelP1, style: labelStyle),
                 EzInlineLink(
                   l10n.tsLabelLink,
                   style: labelStyle,
@@ -471,10 +447,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                   }),
                   semanticsLabel: l10n.tsLinkHint(label),
                 ),
-                EzPlainText(
-                  text: l10n.tsLabelP2,
-                  style: labelStyle,
-                ),
+                EzPlainText(text: l10n.tsLabelP2, style: labelStyle),
               ],
               textAlign: TextAlign.center,
             ),
