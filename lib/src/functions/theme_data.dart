@@ -86,9 +86,6 @@ ThemeData ezThemeData(Brightness brightness) {
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: textTheme.bodyLarge,
-      inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(padding),
-      ),
     ),
 
     // Elevated button
