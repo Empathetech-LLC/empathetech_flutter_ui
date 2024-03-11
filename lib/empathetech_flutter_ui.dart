@@ -56,6 +56,7 @@ export 'src/classes/user_customization/theme_mode_switch.dart';
 // Constants //
 
 export 'src/consts/config_keys.dart';
+export 'src/consts/consts.dart';
 export 'src/consts/empathetech.dart';
 export 'src/consts/google_fonts.dart';
 
