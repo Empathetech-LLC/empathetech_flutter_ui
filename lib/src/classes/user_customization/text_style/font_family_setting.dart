@@ -56,6 +56,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
         });
       },
       textStyle: googleStyles[currFontFamily],
+      width: smallBreakpoint / 5,
     );
   }
 }
