@@ -14,6 +14,9 @@ class EzFontDoubleSetting extends StatefulWidget {
   final double min;
   final double max;
 
+  /// Use this to live update the [TextStyle] on your UI
+  final void Function(double) notifierCallback;
+
   /// Standardized tool for updating double [TextStyle] values for the passed [configKey]
   /// For example: [TextStyle.letterSpacing]
   const EzFontDoubleSetting({
@@ -21,6 +24,7 @@ class EzFontDoubleSetting extends StatefulWidget {
     required this.configKey,
     required this.min,
     required this.max,
+    required this.notifierCallback,
   });
 
   @override
@@ -50,12 +54,13 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
       child: PlatformTextFormField(
         keyboardType: TextInputType.number,
         initialValue: currValue.toString(),
-        onChanged: (String value) {
-          final double? doubleVal = double.tryParse(value);
+        onChanged: (String stringVal) {
+          final double? doubleVal = double.tryParse(stringVal);
           if (doubleVal == null) return;
 
           setState(() {
             currValue = doubleVal;
+            widget.notifierCallback(doubleVal);
           });
           EzConfig.setDouble(widget.configKey, doubleVal);
         },
