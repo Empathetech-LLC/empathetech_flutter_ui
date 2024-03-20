@@ -145,6 +145,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: displayProvider.resize,
+      tooltip: l10n.tsFontSize,
+      sizingString: fontSizeSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: const ValueKey<String>(headlineFontSizeKey),
@@ -152,6 +154,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: headlineProvider.resize,
+      tooltip: l10n.tsFontSize,
+      sizingString: fontSizeSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: const ValueKey<String>(titleFontSizeKey),
@@ -159,6 +163,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: titleProvider.resize,
+      tooltip: l10n.tsFontSize,
+      sizingString: fontSizeSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: const ValueKey<String>(bodyFontSizeKey),
@@ -166,6 +172,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: bodyProvider.resize,
+      tooltip: l10n.tsFontSize,
+      sizingString: fontSizeSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: const ValueKey<String>(labelFontSizeKey),
@@ -173,6 +181,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: labelProvider.resize,
+      tooltip: l10n.tsFontSize,
+      sizingString: fontSizeSampleString,
     ),
   };
 
@@ -275,6 +285,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
+      tooltip: l10n.tsLetterSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: const ValueKey<String>(headlineLetterSpacingKey),
@@ -282,6 +294,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
+      tooltip: l10n.tsLetterSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: const ValueKey<String>(titleLetterSpacingKey),
@@ -289,6 +303,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
+      tooltip: l10n.tsLetterSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: const ValueKey<String>(bodyLetterSpacingKey),
@@ -296,6 +312,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
+      tooltip: l10n.tsLetterSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: const ValueKey<String>(labelLetterSpacingKey),
@@ -303,6 +321,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
+      tooltip: l10n.tsLetterSpacing,
+      sizingString: fontSpacingSampleString,
     ),
   };
 
@@ -315,6 +335,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
+      tooltip: l10n.tsWordSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: const ValueKey<String>(headlineWordSpacingKey),
@@ -322,6 +344,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
+      tooltip: l10n.tsWordSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: const ValueKey<String>(titleWordSpacingKey),
@@ -329,6 +353,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
+      tooltip: l10n.tsWordSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: const ValueKey<String>(bodyWordSpacingKey),
@@ -336,6 +362,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
+      tooltip: l10n.tsWordSpacing,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: const ValueKey<String>(labelWordSpacingKey),
@@ -343,6 +371,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
+      tooltip: l10n.tsWordSpacing,
+      sizingString: fontSpacingSampleString,
     ),
   };
 
@@ -355,6 +385,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
+      tooltip: l10n.tsLineHeight,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: const ValueKey<String>(headlineFontHeightKey),
@@ -362,6 +394,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
+      tooltip: l10n.tsLineHeight,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: const ValueKey<String>(titleFontHeightKey),
@@ -369,6 +403,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
+      tooltip: l10n.tsLineHeight,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: const ValueKey<String>(bodyFontHeightKey),
@@ -376,6 +412,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
+      tooltip: l10n.tsLineHeight,
+      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: const ValueKey<String>(labelFontHeightKey),
@@ -383,6 +421,8 @@ class _TextSettingsState extends State<TextSettings> {
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
+      tooltip: l10n.tsLineHeight,
+      sizingString: fontSpacingSampleString,
     ),
   };
 
