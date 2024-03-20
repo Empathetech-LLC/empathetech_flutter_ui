@@ -3,19 +3,48 @@ import '../utils/utils.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum TextSettingType { display, headline, title, body, label }
 
-class TextSettingsScreen extends StatefulWidget {
+class TextSettingsScreen extends StatelessWidget {
   const TextSettingsScreen({super.key});
 
   @override
-  State<TextSettingsScreen> createState() => _TextSettingsScreenState();
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: <ChangeNotifierProvider<dynamic>>[
+        ChangeNotifierProvider<DisplayTextStyleProvider>(
+          create: (_) => DisplayTextStyleProvider(),
+        ),
+        ChangeNotifierProvider<HeadlineTextStyleProvider>(
+          create: (_) => HeadlineTextStyleProvider(),
+        ),
+        ChangeNotifierProvider<TitleTextStyleProvider>(
+          create: (_) => TitleTextStyleProvider(),
+        ),
+        ChangeNotifierProvider<BodyTextStyleProvider>(
+          create: (_) => BodyTextStyleProvider(),
+        ),
+        ChangeNotifierProvider<LabelTextStyleProvider>(
+          create: (_) => LabelTextStyleProvider(),
+        ),
+      ],
+      child: const TextSettings(),
+    );
+  }
 }
 
-class _TextSettingsScreenState extends State<TextSettingsScreen> {
+class TextSettings extends StatefulWidget {
+  const TextSettings({super.key});
+
+  @override
+  State<TextSettings> createState() => _TextSettingsState();
+}
+
+class _TextSettingsState extends State<TextSettings> {
   // Gather the theme data //
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
@@ -34,11 +63,16 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
 
   TextSettingType editing = TextSettingType.display;
 
-  late TextStyle displayStyle = getDisplay(context)!;
-  late TextStyle headlineStyle = getHeadline(context)!;
-  late TextStyle titleStyle = getTitle(context)!;
-  late TextStyle bodyStyle = getBody(context)!;
-  late TextStyle labelStyle = getLabel(context)!;
+  late final DisplayTextStyleProvider displayProvider =
+      Provider.of<DisplayTextStyleProvider>(context);
+  late final HeadlineTextStyleProvider headlineProvider =
+      Provider.of<HeadlineTextStyleProvider>(context);
+  late final TitleTextStyleProvider titleProvider =
+      Provider.of<TitleTextStyleProvider>(context);
+  late final BodyTextStyleProvider bodyProvider =
+      Provider.of<BodyTextStyleProvider>(context);
+  late final LabelTextStyleProvider labelProvider =
+      Provider.of<LabelTextStyleProvider>(context);
 
   late final String display = l10n.tsDisplay.toLowerCase();
   late final String headline = l10n.tsHeadline.toLowerCase();
@@ -75,20 +109,25 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
   /// Font family setting(s)
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
       <TextSettingType, EzFontFamilySetting>{
-    TextSettingType.display: const EzFontFamilySetting(
+    TextSettingType.display: EzFontFamilySetting(
       configKey: displayFontFamilyKey,
+      notifierCallback: displayProvider.fuse,
     ),
-    TextSettingType.headline: const EzFontFamilySetting(
+    TextSettingType.headline: EzFontFamilySetting(
       configKey: headlineFontFamilyKey,
+      notifierCallback: headlineProvider.fuse,
     ),
-    TextSettingType.title: const EzFontFamilySetting(
+    TextSettingType.title: EzFontFamilySetting(
       configKey: titleFontFamilyKey,
+      notifierCallback: titleProvider.fuse,
     ),
-    TextSettingType.body: const EzFontFamilySetting(
+    TextSettingType.body: EzFontFamilySetting(
       configKey: bodyFontFamilyKey,
+      notifierCallback: bodyProvider.fuse,
     ),
-    TextSettingType.label: const EzFontFamilySetting(
+    TextSettingType.label: EzFontFamilySetting(
       configKey: labelFontFamilyKey,
+      notifierCallback: labelProvider.fuse,
     ),
   };
 
@@ -298,7 +337,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
               children: <Widget>[
                 Text(
                   l10n.tsEditing,
-                  style: labelStyle,
+                  style: labelProvider.value,
                   textAlign: TextAlign.center,
                 ),
                 rowSpacer,
@@ -312,7 +351,7 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
                     }
                   },
                   dropdownMenuEntries: styleChoices,
-                  textStyle: labelStyle,
+                  textStyle: labelProvider.value,
                 ),
               ],
             ),
@@ -362,17 +401,23 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Display preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.tsDisplayP1, style: displayStyle),
+                EzPlainText(
+                  text: l10n.tsDisplayP1,
+                  style: displayProvider.value,
+                ),
                 EzInlineLink(
                   l10n.tsDisplayLink,
-                  style: displayStyle,
+                  style: displayProvider.value,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextSettingType.display;
                   }),
                   semanticsLabel: l10n.tsLinkHint(display),
                 ),
-                EzPlainText(text: l10n.tsDisplayP2, style: displayStyle),
+                EzPlainText(
+                  text: l10n.tsDisplayP2,
+                  style: displayProvider.value,
+                ),
               ],
               textAlign: TextAlign.center,
             ),
@@ -381,17 +426,23 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Headline preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.tsHeadlineP1, style: headlineStyle),
+                EzPlainText(
+                  text: l10n.tsHeadlineP1,
+                  style: headlineProvider.value,
+                ),
                 EzInlineLink(
                   l10n.tsHeadlineLink,
-                  style: headlineStyle,
+                  style: headlineProvider.value,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextSettingType.headline;
                   }),
                   semanticsLabel: l10n.tsLinkHint(headline),
                 ),
-                EzPlainText(text: l10n.tsHeadlineP2, style: headlineStyle),
+                EzPlainText(
+                  text: l10n.tsHeadlineP2,
+                  style: headlineProvider.value,
+                ),
               ],
               textAlign: TextAlign.center,
             ),
@@ -400,10 +451,10 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Title preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.tsTitleP1, style: titleStyle),
+                EzPlainText(text: l10n.tsTitleP1, style: titleProvider.value),
                 EzInlineLink(
                   l10n.tsTitleLink,
-                  style: titleStyle,
+                  style: titleProvider.value,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextSettingType.title;
@@ -418,17 +469,17 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Body preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.tsBodyP1, style: bodyStyle),
+                EzPlainText(text: l10n.tsBodyP1, style: bodyProvider.value),
                 EzInlineLink(
                   l10n.tsBodyLink,
-                  style: bodyStyle,
+                  style: bodyProvider.value,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextSettingType.body;
                   }),
                   semanticsLabel: l10n.tsLinkHint(body),
                 ),
-                EzPlainText(text: l10n.tsBodyP2, style: bodyStyle),
+                EzPlainText(text: l10n.tsBodyP2, style: bodyProvider.value),
               ],
               textAlign: TextAlign.center,
             ),
@@ -437,17 +488,17 @@ class _TextSettingsScreenState extends State<TextSettingsScreen> {
             // Label preview
             EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.tsLabelP1, style: labelStyle),
+                EzPlainText(text: l10n.tsLabelP1, style: labelProvider.value),
                 EzInlineLink(
                   l10n.tsLabelLink,
-                  style: labelStyle,
+                  style: labelProvider.value,
                   textAlign: TextAlign.center,
                   onTap: () => setState(() {
                     editing = TextSettingType.label;
                   }),
                   semanticsLabel: l10n.tsLinkHint(label),
                 ),
-                EzPlainText(text: l10n.tsLabelP2, style: labelStyle),
+                EzPlainText(text: l10n.tsLabelP2, style: labelProvider.value),
               ],
               textAlign: TextAlign.center,
             ),
