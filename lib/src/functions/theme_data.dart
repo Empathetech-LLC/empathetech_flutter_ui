@@ -55,7 +55,7 @@ ThemeData ezThemeData(Brightness brightness) {
     appBarTheme: AppBarTheme(
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
-      titleTextStyle: textTheme.headlineLarge!.copyWith(
+      titleTextStyle: textTheme.headlineLarge?.copyWith(
         color: colorScheme.onSurface,
       ),
       centerTitle: true,
@@ -74,8 +74,12 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialogs
     dialogTheme: DialogTheme(
-      titleTextStyle: textTheme.titleLarge,
-      contentTextStyle: textTheme.bodyLarge,
+      titleTextStyle: textTheme.titleLarge?.copyWith(
+        color: colorScheme.onBackground,
+      ),
+      contentTextStyle: textTheme.bodyLarge?.copyWith(
+        color: colorScheme.onBackground,
+      ),
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
         top: (spacing > padding) ? (spacing - padding) : 0.0,
