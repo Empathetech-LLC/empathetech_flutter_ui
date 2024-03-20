@@ -208,6 +208,8 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 const double minFontSize = 8.0;
 const double maxFontSize = 96.0;
 
+const String fontSizeSampleString = '55.55';
+
 const double minFontLetterSpacing = -2.0;
 const double maxFontLetterSpacing = 2.0;
 
@@ -216,3 +218,5 @@ const double maxFontWordSpacing = 5.0;
 
 const double minFontHeight = 1.0;
 const double maxFontHeight = 3.0;
+
+const String fontSpacingSampleString = '-5.55';
