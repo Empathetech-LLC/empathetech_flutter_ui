@@ -148,6 +148,12 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get tsFontFamily => 'Familia de fuentes';
+
+  @override
+  String get tsFontSize => 'Tamaño de fuente';
+
+  @override
   String get tsBold => 'Negrita';
 
   @override
@@ -157,7 +163,13 @@ class EFUILangEs extends EFUILang {
   String get tsUnderline => 'Subrayar';
 
   @override
-  String get tsFonts => 'Fuentes';
+  String get tsLetterSpacing => 'Espaciado de letras';
+
+  @override
+  String get tsWordSpacing => 'Espaciado de palabras';
+
+  @override
+  String get tsLineHeight => 'Altura de línea';
 
   @override
   String get tsDisplayP1 => '¿Esto se ';

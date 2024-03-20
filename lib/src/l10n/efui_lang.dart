@@ -352,6 +352,18 @@ abstract class EFUILang {
   /// **'Activate to edit {style}'**
   String tsLinkHint(Object style);
 
+  /// No description provided for @tsFontFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Font family'**
+  String get tsFontFamily;
+
+  /// No description provided for @tsFontSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get tsFontSize;
+
   /// No description provided for @tsBold.
   ///
   /// In en, this message translates to:
@@ -370,11 +382,23 @@ abstract class EFUILang {
   /// **'Underline'**
   String get tsUnderline;
 
-  /// No description provided for @tsFonts.
+  /// No description provided for @tsLetterSpacing.
   ///
   /// In en, this message translates to:
-  /// **'Fonts'**
-  String get tsFonts;
+  /// **'Letter spacing'**
+  String get tsLetterSpacing;
+
+  /// No description provided for @tsWordSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Word spacing'**
+  String get tsWordSpacing;
+
+  /// No description provided for @tsLineHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Line height'**
+  String get tsLineHeight;
 
   /// No description provided for @tsDisplayP1.
   ///

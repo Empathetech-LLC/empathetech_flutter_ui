@@ -56,18 +56,23 @@
   "tsPageTitle": "Text settings",
 
   "tsEditing": "Editing: ",
+
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
   "tsTitle": "Title",
   "tsBody": "Body",
   "tsLabel": "Label",
+
   "tsLinkHint": "Activate to edit {style}",
 
+  "tsFontFamily": "Font family",
+  "tsFontSize": "Font size",
   "tsBold": "Bold",
   "tsItalic": "Italic",
   "tsUnderline": "Underline",
-
-  "tsFonts": "Fonts",
+  "tsLetterSpacing": "Letter spacing",
+  "tsWordSpacing": "Word spacing",
+  "tsLineHeight": "Line height",
 
   "tsDisplayP1": "Does this ",
   "tsDisplayLink": "display",

@@ -148,6 +148,12 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get tsFontFamily => 'Font family';
+
+  @override
+  String get tsFontSize => 'Font size';
+
+  @override
   String get tsBold => 'Bold';
 
   @override
@@ -157,7 +163,13 @@ class EFUILangEn extends EFUILang {
   String get tsUnderline => 'Underline';
 
   @override
-  String get tsFonts => 'Fonts';
+  String get tsLetterSpacing => 'Letter spacing';
+
+  @override
+  String get tsWordSpacing => 'Word spacing';
+
+  @override
+  String get tsLineHeight => 'Line height';
 
   @override
   String get tsDisplayP1 => 'Does this ';

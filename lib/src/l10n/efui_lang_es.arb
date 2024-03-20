@@ -56,18 +56,23 @@
   "tsPageTitle": "Configuraciones de texto",
 
   "tsEditing": "Editando: ",
+
   "tsDisplay": "Presentar",
   "tsHeadline": "Encabezado",
   "tsTitle": "Título",
   "tsBody": "Cuerpo",
   "tsLabel": "Etiqueta",
+
   "tsLinkHint": "Activar para editar {style}",
 
+  "tsFontFamily": "Familia de fuentes",
+  "tsFontSize": "Tamaño de fuente",
   "tsBold": "Negrita",
   "tsItalic": "Itálica",
   "tsUnderline": "Subrayar",
-
-  "tsFonts": "Fuentes",
+  "tsLetterSpacing": "Espaciado de letras",
+  "tsWordSpacing": "Espaciado de palabras",
+  "tsLineHeight": "Altura de línea",
 
   "tsDisplayP1": "¿Esto se ",
   "tsDisplayLink": "presenta",
