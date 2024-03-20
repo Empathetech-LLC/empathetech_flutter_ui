@@ -41,7 +41,6 @@ export 'src/classes/screen_reader_support/rich_text.dart';
 export 'src/classes/user_customization/text_style/bold_setting.dart';
 export 'src/classes/user_customization/text_style/double_setting.dart';
 export 'src/classes/user_customization/text_style/font_family_setting.dart';
-export 'src/classes/user_customization/text_style/integer_setting.dart';
 export 'src/classes/user_customization/text_style/italic_setting.dart';
 export 'src/classes/user_customization/text_style/providers.dart';
 export 'src/classes/user_customization/text_style/underline_setting.dart';
