@@ -136,32 +136,32 @@ class _TextSettingsState extends State<TextSettings> {
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
       configKey: displayFontSizeKey,
-      min: 8.0,
-      max: 96.0,
+      min: minFontSize,
+      max: maxFontSize,
       notifierCallback: displayProvider.resize,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       configKey: headlineFontSizeKey,
-      min: 8.0,
-      max: 96.0,
+      min: minFontSize,
+      max: maxFontSize,
       notifierCallback: headlineProvider.resize,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       configKey: titleFontSizeKey,
-      min: 8.0,
-      max: 96.0,
+      min: minFontSize,
+      max: maxFontSize,
       notifierCallback: titleProvider.resize,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       configKey: bodyFontSizeKey,
-      min: 8.0,
-      max: 96.0,
+      min: minFontSize,
+      max: maxFontSize,
       notifierCallback: bodyProvider.resize,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       configKey: labelFontSizeKey,
-      min: 8.0,
-      max: 96.0,
+      min: minFontSize,
+      max: maxFontSize,
       notifierCallback: labelProvider.resize,
     ),
   };
@@ -169,60 +169,75 @@ class _TextSettingsState extends State<TextSettings> {
   /// Font weight setting(s)
   late final Map<TextSettingType, EzBoldSetting> boldControllers =
       <TextSettingType, EzBoldSetting>{
-    TextSettingType.display: const EzBoldSetting(
+    TextSettingType.display: EzBoldSetting(
       configKey: displayBoldKey,
+      notifierCallback: displayProvider.bold,
     ),
-    TextSettingType.headline: const EzBoldSetting(
+    TextSettingType.headline: EzBoldSetting(
       configKey: headlineBoldKey,
+      notifierCallback: headlineProvider.bold,
     ),
-    TextSettingType.title: const EzBoldSetting(
+    TextSettingType.title: EzBoldSetting(
       configKey: titleBoldKey,
+      notifierCallback: titleProvider.bold,
     ),
-    TextSettingType.body: const EzBoldSetting(
+    TextSettingType.body: EzBoldSetting(
       configKey: bodyBoldKey,
+      notifierCallback: bodyProvider.bold,
     ),
-    TextSettingType.label: const EzBoldSetting(
+    TextSettingType.label: EzBoldSetting(
       configKey: labelBoldKey,
+      notifierCallback: labelProvider.bold,
     ),
   };
 
   /// Font style setting(s)
   late final Map<TextSettingType, EzItalicSetting> italicsControllers =
       <TextSettingType, EzItalicSetting>{
-    TextSettingType.display: const EzItalicSetting(
+    TextSettingType.display: EzItalicSetting(
       configKey: displayItalicsKey,
+      notifierCallback: displayProvider.italic,
     ),
-    TextSettingType.headline: const EzItalicSetting(
+    TextSettingType.headline: EzItalicSetting(
       configKey: headlineItalicsKey,
+      notifierCallback: headlineProvider.italic,
     ),
-    TextSettingType.title: const EzItalicSetting(
+    TextSettingType.title: EzItalicSetting(
       configKey: titleItalicsKey,
+      notifierCallback: titleProvider.italic,
     ),
-    TextSettingType.body: const EzItalicSetting(
+    TextSettingType.body: EzItalicSetting(
       configKey: bodyItalicsKey,
+      notifierCallback: bodyProvider.italic,
     ),
-    TextSettingType.label: const EzItalicSetting(
+    TextSettingType.label: EzItalicSetting(
       configKey: labelItalicsKey,
+      notifierCallback: labelProvider.italic,
     ),
   };
 
   /// Font decoration setting(s)
   late final Map<TextSettingType, EzUnderlineSetting> underlineControllers =
       <TextSettingType, EzUnderlineSetting>{
-    TextSettingType.display: const EzUnderlineSetting(
+    TextSettingType.display: EzUnderlineSetting(
       configKey: displayUnderlinedKey,
+      notifierCallback: displayProvider.underline,
     ),
-    TextSettingType.headline: const EzUnderlineSetting(
+    TextSettingType.headline: EzUnderlineSetting(
       configKey: headlineUnderlinedKey,
+      notifierCallback: headlineProvider.underline,
     ),
-    TextSettingType.title: const EzUnderlineSetting(
+    TextSettingType.title: EzUnderlineSetting(
       configKey: titleUnderlinedKey,
+      notifierCallback: titleProvider.underline,
     ),
-    TextSettingType.body: const EzUnderlineSetting(
+    TextSettingType.body: EzUnderlineSetting(
       configKey: bodyUnderlinedKey,
+      notifierCallback: bodyProvider.underline,
     ),
-    TextSettingType.label: const EzUnderlineSetting(
+    TextSettingType.label: EzUnderlineSetting(
       configKey: labelUnderlinedKey,
+      notifierCallback: labelProvider.underline,
     ),
   };
 
@@ -231,32 +246,32 @@ class _TextSettingsState extends State<TextSettings> {
       letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
       configKey: displayLetterSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontLetterSpacing,
+      max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       configKey: headlineLetterSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontLetterSpacing,
+      max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       configKey: titleLetterSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontLetterSpacing,
+      max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       configKey: bodyLetterSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontLetterSpacing,
+      max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       configKey: labelLetterSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontLetterSpacing,
+      max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
     ),
   };
@@ -266,32 +281,32 @@ class _TextSettingsState extends State<TextSettings> {
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
       configKey: displayWordSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontWordSpacing,
+      max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       configKey: headlineWordSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontWordSpacing,
+      max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       configKey: titleWordSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontWordSpacing,
+      max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       configKey: bodyWordSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontWordSpacing,
+      max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       configKey: labelWordSpacingKey,
-      min: -1.0,
-      max: 1.0,
+      min: minFontWordSpacing,
+      max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
     ),
   };
@@ -301,32 +316,32 @@ class _TextSettingsState extends State<TextSettings> {
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
       configKey: displayFontHeightKey,
-      min: 0.0,
-      max: 5.0,
+      min: minFontHeight,
+      max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       configKey: headlineFontHeightKey,
-      min: 0.0,
-      max: 5.0,
+      min: minFontHeight,
+      max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       configKey: titleFontHeightKey,
-      min: 0.0,
-      max: 5.0,
+      min: minFontHeight,
+      max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       configKey: bodyFontHeightKey,
-      min: 0.0,
-      max: 5.0,
+      min: minFontHeight,
+      max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       configKey: labelFontHeightKey,
-      min: 0.0,
-      max: 5.0,
+      min: minFontHeight,
+      max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
     ),
   };
