@@ -401,14 +401,19 @@ class _TextSettingsState extends State<TextSettings> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  // Font family
+                  familyControllers[editing]!,
+                  swapSpacer,
+
+                  // Font size
+                  sizeControllers[editing]!,
+                  swapSpacer,
+
+                  // Font weight, style, and decoration
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      familyControllers[editing]!,
-                      rowSpacer,
-                      sizeControllers[editing]!,
-                      rowSpacer,
                       boldControllers[editing]!,
                       rowSpacer,
                       italicsControllers[editing]!,
@@ -417,6 +422,8 @@ class _TextSettingsState extends State<TextSettings> {
                     ],
                   ),
                   swapSpacer,
+
+                  // Letter, word, and line spacing
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
