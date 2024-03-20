@@ -10,9 +10,15 @@ import 'package:flutter/material.dart';
 class EzFontFamilySetting extends StatefulWidget {
   final String configKey;
 
+  final void Function(String) notifierCallback;
+
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
   /// [EzFontFamilySetting] options are built from [googleStyles]
-  const EzFontFamilySetting({super.key, required this.configKey});
+  const EzFontFamilySetting({
+    super.key,
+    required this.configKey,
+    required this.notifierCallback,
+  });
 
   @override
   State<EzFontFamilySetting> createState() => _FontFamilySettingState();
@@ -53,6 +59,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
         EzConfig.setString(widget.configKey, fontFamily);
         setState(() {
           currFontFamily = fontFamily;
+          widget.notifierCallback(fontFamily);
         });
       },
       textStyle: googleStyles[currFontFamily],
