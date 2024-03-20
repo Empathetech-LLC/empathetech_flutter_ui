@@ -12,11 +12,6 @@ class DisplayTextStyleProvider extends ChangeNotifier {
 
   TextStyle get value => _style;
 
-  void set(TextStyle newStyle) {
-    _style = newStyle;
-    notifyListeners();
-  }
-
   /// Run [fuseWithGFont] on the current [TextStyle] with the passed [gFont]
   void fuse(String gFont) {
     _style = fuseWithGFont(starter: _style, gFont: gFont);
@@ -26,6 +21,27 @@ class DisplayTextStyleProvider extends ChangeNotifier {
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontWeight] based on the passed [bold]
+  void bold(bool bold) {
+    _style =
+        _style.copyWith(fontWeight: bold ? FontWeight.bold : FontWeight.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontStyle] based on the passed [italic]
+  void italic(bool italic) {
+    _style = _style.copyWith(
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.decoration] based on the passed [underline]
+  void underline(bool underline) {
+    _style = _style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none);
     notifyListeners();
   }
 
@@ -53,11 +69,6 @@ class HeadlineTextStyleProvider extends ChangeNotifier {
 
   TextStyle get value => _style;
 
-  void set(TextStyle newStyle) {
-    _style = newStyle;
-    notifyListeners();
-  }
-
   /// Run [fuseWithGFont] on the current [TextStyle] with the passed [gFont]
   void fuse(String gFont) {
     _style = fuseWithGFont(starter: _style, gFont: gFont);
@@ -67,6 +78,27 @@ class HeadlineTextStyleProvider extends ChangeNotifier {
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontWeight] based on the passed [bold]
+  void bold(bool bold) {
+    _style =
+        _style.copyWith(fontWeight: bold ? FontWeight.bold : FontWeight.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontStyle] based on the passed [italic]
+  void italic(bool italic) {
+    _style = _style.copyWith(
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.decoration] based on the passed [underline]
+  void underline(bool underline) {
+    _style = _style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none);
     notifyListeners();
   }
 
@@ -94,11 +126,6 @@ class TitleTextStyleProvider extends ChangeNotifier {
 
   TextStyle get value => _style;
 
-  void set(TextStyle newStyle) {
-    _style = newStyle;
-    notifyListeners();
-  }
-
   /// Run [fuseWithGFont] on the current [TextStyle] with the passed [gFont]
   void fuse(String gFont) {
     _style = fuseWithGFont(starter: _style, gFont: gFont);
@@ -108,6 +135,27 @@ class TitleTextStyleProvider extends ChangeNotifier {
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontWeight] based on the passed [bold]
+  void bold(bool bold) {
+    _style =
+        _style.copyWith(fontWeight: bold ? FontWeight.bold : FontWeight.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontStyle] based on the passed [italic]
+  void italic(bool italic) {
+    _style = _style.copyWith(
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.decoration] based on the passed [underline]
+  void underline(bool underline) {
+    _style = _style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none);
     notifyListeners();
   }
 
@@ -135,11 +183,6 @@ class BodyTextStyleProvider extends ChangeNotifier {
 
   TextStyle get value => _style;
 
-  void set(TextStyle newStyle) {
-    _style = newStyle;
-    notifyListeners();
-  }
-
   /// Run [fuseWithGFont] on the current [TextStyle] with the passed [gFont]
   void fuse(String gFont) {
     _style = fuseWithGFont(starter: _style, gFont: gFont);
@@ -149,6 +192,27 @@ class BodyTextStyleProvider extends ChangeNotifier {
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontWeight] based on the passed [bold]
+  void bold(bool bold) {
+    _style =
+        _style.copyWith(fontWeight: bold ? FontWeight.bold : FontWeight.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontStyle] based on the passed [italic]
+  void italic(bool italic) {
+    _style = _style.copyWith(
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.decoration] based on the passed [underline]
+  void underline(bool underline) {
+    _style = _style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none);
     notifyListeners();
   }
 
@@ -176,11 +240,6 @@ class LabelTextStyleProvider extends ChangeNotifier {
 
   TextStyle get value => _style;
 
-  void set(TextStyle newStyle) {
-    _style = newStyle;
-    notifyListeners();
-  }
-
   /// Run [fuseWithGFont] on the current [TextStyle] with the passed [gFont]
   void fuse(String gFont) {
     _style = fuseWithGFont(starter: _style, gFont: gFont);
@@ -190,6 +249,27 @@ class LabelTextStyleProvider extends ChangeNotifier {
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontWeight] based on the passed [bold]
+  void bold(bool bold) {
+    _style =
+        _style.copyWith(fontWeight: bold ? FontWeight.bold : FontWeight.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.fontStyle] based on the passed [italic]
+  void italic(bool italic) {
+    _style = _style.copyWith(
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal);
+    notifyListeners();
+  }
+
+  /// Toggle the [TextStyle.decoration] based on the passed [underline]
+  void underline(bool underline) {
+    _style = _style.copyWith(
+        decoration: underline ? TextDecoration.underline : TextDecoration.none);
     notifyListeners();
   }
 
