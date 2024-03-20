@@ -202,3 +202,17 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
   paddingKey: 20.0, // required
   spacingKey: 20.0, // required
 };
+
+// Recommended setting(s) parameters //
+
+const double minFontSize = 8.0;
+const double maxFontSize = 96.0;
+
+const double minFontLetterSpacing = -2.0;
+const double maxFontLetterSpacing = 2.0;
+
+const double minFontWordSpacing = -5.0;
+const double maxFontWordSpacing = 5.0;
+
+const double minFontHeight = 1.0;
+const double maxFontHeight = 3.0;
