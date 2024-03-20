@@ -10,8 +10,15 @@ import 'package:flutter/material.dart';
 class EzItalicSetting extends StatefulWidget {
   final String configKey;
 
+  /// Use this to live update the [TextStyle] on your UI
+  final void Function(bool italic) notifierCallback;
+
   /// Standardized tool for updating the [TextStyle.fontStyle] for the passed [configKey]
-  const EzItalicSetting({super.key, required this.configKey});
+  const EzItalicSetting({
+    super.key,
+    required this.configKey,
+    required this.notifierCallback,
+  });
 
   @override
   State<EzItalicSetting> createState() => _EzItalicSettingState();
@@ -29,6 +36,7 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
   void swapState() {
     setState(() {
       isItalic = !isItalic;
+      widget.notifierCallback(isItalic);
     });
     EzConfig.setBool(widget.configKey, isItalic);
   }

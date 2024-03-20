@@ -10,8 +10,15 @@ import 'package:flutter/material.dart';
 class EzUnderlineSetting extends StatefulWidget {
   final String configKey;
 
+  /// Use this to live update the [TextStyle] on your UI
+  final void Function(bool underline) notifierCallback;
+
   /// Standardized tool for updating the [TextStyle.decoration] for the passed [configKey]
-  const EzUnderlineSetting({super.key, required this.configKey});
+  const EzUnderlineSetting({
+    super.key,
+    required this.configKey,
+    required this.notifierCallback,
+  });
 
   @override
   State<EzUnderlineSetting> createState() => _EzUnderlineSettingState();
@@ -29,6 +36,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
   void swapState() {
     setState(() {
       isUnderlined = !isUnderlined;
+      widget.notifierCallback(isUnderlined);
     });
     EzConfig.setBool(widget.configKey, isUnderlined);
   }

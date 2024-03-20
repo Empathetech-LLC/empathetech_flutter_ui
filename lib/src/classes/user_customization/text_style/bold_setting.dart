@@ -10,8 +10,15 @@ import 'package:flutter/material.dart';
 class EzBoldSetting extends StatefulWidget {
   final String configKey;
 
+  /// Use this to live update the [TextStyle] on your UI
+  final void Function(bool bold) notifierCallback;
+
   /// Standardized tool for updating the [TextStyle.fontWeight] for the passed [configKey]
-  const EzBoldSetting({super.key, required this.configKey});
+  const EzBoldSetting({
+    super.key,
+    required this.configKey,
+    required this.notifierCallback,
+  });
 
   @override
   State<EzBoldSetting> createState() => _EzBoldSettingState();
@@ -29,6 +36,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
   void swapState() {
     setState(() {
       isBold = !isBold;
+      widget.notifierCallback(isBold);
     });
     EzConfig.setBool(widget.configKey, isBold);
   }
