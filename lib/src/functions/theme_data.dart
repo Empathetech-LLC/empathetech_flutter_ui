@@ -55,7 +55,9 @@ ThemeData ezThemeData(Brightness brightness) {
     appBarTheme: AppBarTheme(
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
-      titleTextStyle: textTheme.headlineLarge,
+      titleTextStyle: textTheme.headlineLarge!.copyWith(
+        color: colorScheme.onSurface,
+      ),
       centerTitle: true,
       titleSpacing: 0,
     ),
