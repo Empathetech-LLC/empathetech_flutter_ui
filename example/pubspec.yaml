@@ -25,6 +25,7 @@ dependencies:
   feedback: ^3.0.1
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^6.0.2
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_lints: ^3.0.1
