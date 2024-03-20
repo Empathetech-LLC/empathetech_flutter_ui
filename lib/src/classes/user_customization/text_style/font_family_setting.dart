@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 class EzFontFamilySetting extends StatefulWidget {
   final String configKey;
 
+  /// Use this to live update the [TextStyle] on your UI
+  /// Recommended to use [fuseWithGFont]
   final void Function(String) notifierCallback;
 
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
