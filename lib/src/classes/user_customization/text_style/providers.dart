@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 abstract class BaseTextStyleProvider extends ChangeNotifier {
   TextStyle _style;
 
-  BaseTextStyleProvider(TextStyle initialStyle) : _style = initialStyle;
+  BaseTextStyleProvider(TextStyle style) : _style = style;
 
   TextStyle get value => _style;
 
