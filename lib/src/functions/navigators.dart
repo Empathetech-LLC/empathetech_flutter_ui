@@ -57,6 +57,21 @@ Future<dynamic> replaceScreen({
   );
 }
 
+/// More readable than [Navigator.popUntil] and [Navigator.push] spelled out
+Future<dynamic> clearStackAndPush({
+  required BuildContext context,
+  required Widget screen,
+}) {
+  Navigator.of(context).popUntil((Route<dynamic> route) => false);
+
+  return Navigator.of(context).push(
+    platformPageRoute(
+      context: context,
+      builder: (BuildContext context) => screen,
+    ),
+  );
+}
+
 /// More readable than [Navigator] function spelled out
 /// Runs [Navigator.popUntil] the [ModalRoute] named [homeRoute]
 void popUntilHome(BuildContext context) {
