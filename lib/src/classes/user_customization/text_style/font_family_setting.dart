@@ -14,12 +14,15 @@ class EzFontFamilySetting extends StatefulWidget {
   /// Recommended to use [fuseWithGFont]
   final void Function(String) notifierCallback;
 
+  final String? tooltip;
+
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
   /// [EzFontFamilySetting] options are built from [googleStyles]
   const EzFontFamilySetting({
     super.key,
     required this.configKey,
     required this.notifierCallback,
+    this.tooltip,
   });
 
   @override
@@ -53,19 +56,22 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: currFontFamily,
-      dropdownMenuEntries: entries,
-      onSelected: (String? fontFamily) {
-        if (fontFamily == null) return;
-        EzConfig.setString(widget.configKey, fontFamily);
-        setState(() {
-          currFontFamily = fontFamily;
-          widget.notifierCallback(fontFamily);
-        });
-      },
-      textStyle: googleStyles[currFontFamily],
-      width: smallBreakpoint / 4,
+    return Tooltip(
+      message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
+      child: DropdownMenu<String>(
+        initialSelection: currFontFamily,
+        dropdownMenuEntries: entries,
+        onSelected: (String? fontFamily) {
+          if (fontFamily == null) return;
+          EzConfig.setString(widget.configKey, fontFamily);
+          setState(() {
+            currFontFamily = fontFamily;
+            widget.notifierCallback(fontFamily);
+          });
+        },
+        textStyle: googleStyles[currFontFamily],
+        width: smallBreakpoint / 4,
+      ),
     );
   }
 }
