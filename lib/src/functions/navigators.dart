@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -70,10 +68,4 @@ Future<dynamic> clearStackAndPush({
       builder: (BuildContext context) => screen,
     ),
   );
-}
-
-/// More readable than [Navigator] function spelled out
-/// Runs [Navigator.popUntil] the [ModalRoute] named [homeRoute]
-void popUntilHome(BuildContext context) {
-  return Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
 }
