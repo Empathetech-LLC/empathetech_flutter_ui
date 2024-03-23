@@ -3,11 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleSetting extends StatefulWidget {
   final String configKey;
@@ -44,22 +43,30 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late double currValue = EzConfig.get(widget.configKey);
 
-  late final Size sizeLimit = measureText(
-    widget.sizingString ?? widget.max.toString(),
-    style: getBody(context),
-    context: context,
-  );
+  late final double padding = EzConfig.get(paddingKey);
+  late final double lineHeight = EzConfig.get(bodyFontHeightKey) ?? 1.5;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle? bodyStyle = Theme.of(context)
+        .textTheme
+        .bodyLarge
+        ?.copyWith(color: Theme.of(context).colorScheme.onBackground);
+
+    final Size sizeLimit = measureText(
+      widget.sizingString ?? widget.max.toString(),
+      style: bodyStyle,
+      context: context,
+    );
+
     return Tooltip(
       message: widget.tooltip,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: sizeLimit.width,
-          maxHeight: sizeLimit.height * 2,
+          maxWidth: sizeLimit.width + padding,
+          maxHeight: sizeLimit.height * lineHeight + padding,
         ),
         child: PlatformTextFormField(
           keyboardType: TextInputType.number,
@@ -88,7 +95,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
             return null;
           },
+          style: bodyStyle,
           textAlign: TextAlign.center,
+          textAlignVertical: TextAlignVertical.bottom,
         ),
       ),
     );
