@@ -63,7 +63,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
             label,
             style: theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
-            semanticsLabel: l10n.gSettingX(label),
           ),
           EzSpacer.row(padding),
 
