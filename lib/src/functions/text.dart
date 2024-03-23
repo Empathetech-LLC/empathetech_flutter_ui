@@ -31,33 +31,6 @@ Size measureText(
   return textPainter.size;
 }
 
-// Getters //
-
-/// Returns the [TextTheme.displayLarge] of the current [context]
-TextStyle? getDisplay(BuildContext context) {
-  return Theme.of(context).textTheme.displayLarge;
-}
-
-/// Returns the [TextTheme.headlineLarge] of the current [context]
-TextStyle? getHeadline(BuildContext context) {
-  return Theme.of(context).textTheme.headlineLarge;
-}
-
-/// Returns the [TextTheme.titleLarge] of the current [context]
-TextStyle? getTitle(BuildContext context) {
-  return Theme.of(context).textTheme.titleLarge;
-}
-
-/// Returns the [TextTheme.bodyLarge] of the current [context]
-TextStyle? getBody(BuildContext context) {
-  return Theme.of(context).textTheme.bodyLarge;
-}
-
-/// Returns the [TextTheme.labelLarge] of the current [context]
-TextStyle? getLabel(BuildContext context) {
-  return Theme.of(context).textTheme.labelLarge;
-}
-
 // Setters //
 
 /// Creates a [TextTheme] with sizes from...
