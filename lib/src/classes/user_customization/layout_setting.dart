@@ -90,10 +90,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final EzSpacer rowSpacer = EzSpacer.row(space);
   late final EzSpacer rowSeparator = EzSpacer.row(2 * space);
 
-  late final TextStyle? titleStyle = getTitle(context);
-  late final TextStyle? bodyStyle = getBody(context);
-
   late final ThemeData theme = Theme.of(context);
+
+  late final TextStyle? titleStyle = theme.textTheme.titleLarge;
+  late final TextStyle? bodyStyle = theme.textTheme.bodyLarge;
 
   late final EFUILang l10n = EFUILang.of(context)!;
 

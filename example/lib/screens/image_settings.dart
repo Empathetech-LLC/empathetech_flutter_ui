@@ -77,7 +77,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             // Current theme reminder
             Text(
               l10n.gEditingTheme(themeProfile),
-              style: getLabel(context),
+              style: Theme.of(context).textTheme.labelLarge,
               textAlign: TextAlign.center,
             ),
             _buttonSeparator,
