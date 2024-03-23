@@ -26,7 +26,6 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^6.0.2
-  line_icons: ^2.0.1
 
 dev_dependencies:
   # For example app
@@ -38,8 +37,8 @@ dev_dependencies:
   dependency_validator: ^3.2.2
   flutter_lints: ^3.0.1
 
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
 
 flutter:
   generate: true # For l10n
