@@ -13,7 +13,7 @@ node('00-flutter') {
       // Validate that all of the repos versioning trackers have been updated, and that they match
       stage('Validate versioning') {
         withCredentials([gitUsernamePassword(credentialsId: 'git-pat')]) {
-          univesalDev.validateVersioning(trackedFiles, env.CHANGE_ID, baseBranch, env.BRANCH_NAME)
+          universalDev.validateVersioning(trackedFiles, env.CHANGE_ID, baseBranch, env.BRANCH_NAME)
         }
       }
 
