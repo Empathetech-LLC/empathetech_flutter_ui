@@ -136,12 +136,6 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gSettingX.
-  ///
-  /// In en, this message translates to:
-  /// **'{setting} setting'**
-  String gSettingX(Object setting);
-
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:
@@ -865,7 +859,7 @@ abstract class EFUILang {
   /// No description provided for @isUseForColors.
   ///
   /// In en, this message translates to:
-  /// **'Update the app colors using this image?'**
+  /// **'Update the app colors using this image'**
   String get isUseForColors;
 
   /// No description provided for @isResetAll.

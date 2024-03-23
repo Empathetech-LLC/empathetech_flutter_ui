@@ -26,11 +26,6 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String gSettingX(Object setting) {
-    return '$setting setting';
-  }
-
-  @override
   String get gLeft => 'Left';
 
   @override
@@ -413,7 +408,7 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get isUseForColors => 'Update the app colors using this image?';
+  String get isUseForColors => 'Update the app colors using this image';
 
   @override
   String isResetAll(Object themeType) {

@@ -11,8 +11,6 @@
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
 
-  "gSettingX": "Configuración de {setting}",
-
   "gLeft": "Izquierda",
   "gRight": "Derecha",
   "gBack": "Atrás",
@@ -173,7 +171,7 @@
   "isGetFailed": "Error al recuperar la imagen",
   "isSetFailed": "Error al actualizar la imagen:\n{error}",
 
-  "isUseForColors": "¿Actualizar los colores de la aplicación usando esta imagen?",
+  "isUseForColors": "Actualizar los colores de la aplicación usando esta imagen",
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
 }
