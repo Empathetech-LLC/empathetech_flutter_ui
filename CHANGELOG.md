@@ -13,15 +13,18 @@ All notable changes to this project will be documented in this file.
   - Potential (somewhat likely) breaking change
 - Updated isLightThemeKey -> isDarkThemeKey to match PlatformWidgets convention
   - Minor breaking change
-- Similarly, isRightHandKey -> isLefty
+  - Similarly, isRightHandKey -> isLefty
 - EzSliderSetting -> EzLayoutSetting
 - TextStyleType -> TextSettingType
 - All EzSettings now use `configKey` as the main param
+  - Minor breaking change
+- The README to match changes
+  - Removed images, live exists 
+    - And will grow soon!
 
 ### Removed
 - TextSpacingKey && associated Widgets
   - EzNewLine is a better strategy
-- navigators.dart
 - EzTextStyle
 - enums dir
   - Moved code to new homes (Hand -> dominant_hand_switch and such)
