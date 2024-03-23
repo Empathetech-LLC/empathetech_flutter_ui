@@ -202,7 +202,7 @@ class EFUILangEn extends EFUILang {
   String get tsBodyLink => 'the body?';
 
   @override
-  String get tsBodyP2 => ' Is it easy to ready?';
+  String get tsBodyP2 => ' Is it easy to read?';
 
   @override
   String get tsLabelP1 => 'And ';

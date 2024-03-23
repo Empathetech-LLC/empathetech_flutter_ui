@@ -463,7 +463,7 @@ abstract class EFUILang {
   /// No description provided for @tsBodyP2.
   ///
   /// In en, this message translates to:
-  /// **' Is it easy to ready?'**
+  /// **' Is it easy to read?'**
   String get tsBodyP2;
 
   /// No description provided for @tsLabelP1.
