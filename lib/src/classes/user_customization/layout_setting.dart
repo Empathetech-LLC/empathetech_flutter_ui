@@ -16,7 +16,7 @@ enum LayoutSettingType {
   spacing,
 }
 
-/// Get the proper [String] name for [EzLayoutSetting.type]
+/// Get the proper [String] name for [LayoutSettingType]
 String lstName(BuildContext context, LayoutSettingType settingType) {
   switch (settingType) {
     case LayoutSettingType.margin:
@@ -61,8 +61,8 @@ class EzLayoutSetting extends StatefulWidget {
   /// Number of significant figures to display AFTER the decimal point
   final int decimals;
 
-  /// Creates a tool for updating any [configKey] value that would pair well with a [PlatformSlider]
-  /// Use the [type] enum for generating the appropriate preview [Widget]s
+  /// Standardized [Widget] for updating layout values in [EzConfig]
+  /// Supports all [LayoutSettingType]s
   const EzLayoutSetting({
     super.key,
     required this.configKey,
@@ -107,12 +107,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     switch (widget.type) {
       // Margin
       case LayoutSettingType.margin:
-        const double previewHeight = 160.0;
-        const double previewWidth = 90.0;
-
-        final double marginScale = previewWidth / widthOf(context);
-        final double liveMargin = currValue * marginScale;
-
         return <Widget>[
           spacer,
 
@@ -132,11 +126,11 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               // Preview
               Container(
                 color: theme.colorScheme.onBackground,
-                height: previewHeight,
-                width: previewWidth,
+                height: heightOf(context) * 0.1,
+                width: widthOf(context) * 0.1,
                 child: Container(
                   color: theme.colorScheme.background,
-                  margin: EdgeInsets.all(liveMargin),
+                  margin: EdgeInsets.all(currValue * 0.1),
                 ),
               ),
             ],
@@ -190,9 +184,21 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           EzSpacer(currValue),
 
           // Label
-          ElevatedButton(
-            onPressed: doNothing,
-            child: Text(currLabel),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(currLabel),
+              ),
+              EzSpacer.row(currValue),
+              ElevatedButton(
+                onPressed: doNothing,
+                child: Text(currLabel),
+              ),
+            ],
           ),
 
           // Preview 2
