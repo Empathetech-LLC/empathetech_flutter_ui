@@ -8,5 +8,12 @@
       "flutterMode": "debug",
       "program": "example/lib/main.dart",
     },
+    {
+      "name": "install-example-app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "example/lib/main.dart",
+    },
   ]
 }
