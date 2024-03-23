@@ -46,7 +46,7 @@ void main() async {
 /// Or any other app that requires deep linking
 /// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter _router = GoRouter(
-  initialLocation: homeRoute,
+  initialLocation: homePath,
   routes: <RouteBase>[
     GoRoute(
       path: homePath,
