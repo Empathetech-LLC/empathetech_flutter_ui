@@ -2,6 +2,7 @@
   "@@locale" : "en",
 
 
+
   "gYes": "Yes",
   "gNo": "No",
   "gOptions": "Options",
@@ -9,8 +10,6 @@
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
-
-  "gSettingX": "{setting} setting",
 
   "gLeft": "Left",
   "gRight": "Right",
@@ -36,6 +35,7 @@
   "gCreditTo": "Credit to:",
 
 
+
   "ssPageTitle": "Settings",
   "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
   "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
@@ -48,6 +48,110 @@
   "ssLangSemantics": "App language",
 
   "ssResetAll": "Reset all settings?",
+
+
+
+  "tsPageTitle": "Text settings",
+
+  "tsEditing": "Editing: ",
+
+  "tsDisplay": "Display",
+  "tsHeadline": "Headline",
+  "tsTitle": "Title",
+  "tsBody": "Body",
+  "tsLabel": "Label",
+
+  "tsLinkHint": "Activate to edit {style}",
+
+  "tsFontFamily": "Font family",
+  "tsFontSize": "Font size",
+  "tsBold": "Bold",
+  "tsItalic": "Italic",
+  "tsUnderline": "Underline",
+  "tsLetterSpacing": "Letter spacing",
+  "tsWordSpacing": "Word spacing",
+  "tsLineHeight": "Line height",
+
+  "tsDisplayP1": "Does this ",
+  "tsDisplayLink": "display",
+  "tsDisplayP2": " well?",
+  "tsHeadlineP1": "Are ",
+  "tsHeadlineLink": "headlines",
+  "tsHeadlineP2": " distinct...",
+  "tsTitleP1": "from ",
+  "tsTitleLink": "titles?",
+  "tsBodyP1": "How about ",
+  "tsBodyLink": "the body?",
+  "tsBodyP2": " Is it easy to read?",
+  "tsLabelP1": "And ",
+  "tsLabelLink": "the labels?",
+  "tsLabelP2": " Not too big, not too small?",
+
+  "tsResetAll": "Reset all text settings?",
+
+
+
+  "lsPageTitle": "Layout settings",
+
+  "lsMargin": "Margin",
+  "lsPadding": "Padding",
+  "lsSpacing": "Spacing",
+
+  "lsResetAll": "Reset all layout settings?",
+  
+  
+  
+  "csPageTitle": "Color settings",
+
+  "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
+  
+  "csPrimary": "Primary",
+  "csOnPrimary": "On Primary",
+  "csPrimaryContainer": "Primary Container",
+  "csOnPrimaryContainer": "On Primary Container",
+  "csSecondary": "Secondary",
+  "csOnSecondary": "On Secondary",
+  "csSecondaryContainer": "Secondary Container",
+  "csOnSecondaryContainer": "On Secondary Container",
+  "csTertiary": "Tertiary",
+  "csOnTertiary": "On Tertiary",
+  "csTertiaryContainer": "Tertiary Container",
+  "csOnTertiaryContainer": "On Tertiary Container",
+  "csError": "Error",
+  "csOnError": "On Error",
+  "csErrorContainer": "Error Container",
+  "csOnErrorContainer": "On Error Container",
+  "csOutline": "Outline",
+  "csOutlineVariant": "Outline Variant",
+  "csBackground": "Background",
+  "csOnBackground": "On Background",
+  "csSurface": "Surface",
+  "csOnSurface": "On Surface",
+  "csSurfaceVariant": "Surface Variant",
+  "csOnSurfaceVariant": "On Surface Variant",
+  "csInverseSurface": "Inverse Surface",
+  "csOnInverseSurface": "Inverse On Surface",
+  "csInversePrimary": "Inverse Primary",
+  "csScrim": "Scrim",
+  "csShadow": "Shadow",
+  "csSurfaceTint": "Surface Tint",
+
+  "csPickerTitle": "Pick a color!",
+  "csRecommended": "Use contrast recommendation?",
+  "csUseCustom": "Use custom",
+
+  "csAddColor": "Add a color",
+  "csRemove": "Remove",
+  "csReset": "Reset",
+  "csResetTo": "Reset to...",
+
+  "csSchemeBase": "Build from\nimage",
+  "csOptional": "optional",
+  "csFromImage": "Build the color scheme from an image",
+  "csColorScheme": "color scheme",
+
+  "csResetAll": "Reset all {themeType} theme colors?",
+
 
 
   "isPageTitle": "Image settings",
@@ -67,84 +171,7 @@
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
   
-  "isUseForColors": "Update the app colors using this image?",
+  "isUseForColors": "Update the app colors using this image",
 
-  "isResetAll": "Reset all {themeType} theme images?",
-
-
-  "csPageTitle": "Color settings",
-
-  "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
-  
-  "csPrimary": "Primary",
-  "csOnPrimary": "On Primary",
-  "csPrimaryContainer": "Primary Container",
-  "csOnPrimaryContainer": "On Primary Container",
-
-  "csSecondary": "Secondary",
-  "csOnSecondary": "On Secondary",
-  "csSecondaryContainer": "Secondary Container",
-  "csOnSecondaryContainer": "On Secondary Container",
-
-  "csTertiary": "Tertiary",
-  "csOnTertiary": "On Tertiary",
-  "csTertiaryContainer": "Tertiary Container",
-  "csOnTertiaryContainer": "On Tertiary Container",
-
-  "csError": "Error",
-  "csOnError": "On Error",
-  "csErrorContainer": "Error Container",
-  "csOnErrorContainer": "On Error Container",
-
-  "csOutline": "Outline",
-  "csOutlineVariant": "Outline Variant",
-
-  "csBackground": "Background",
-  "csOnBackground": "On Background",
-
-  "csSurface": "Surface",
-  "csOnSurface": "On Surface",
-
-  "csSurfaceVariant": "Surface Variant",
-  "csOnSurfaceVariant": "On Surface Variant",
-  
-  "csInverseSurface": "Inverse Surface",
-  "csOnInverseSurface": "Inverse On Surface",
-
-  "csInversePrimary": "Inverse Primary",
-
-  "csScrim": "Scrim",
-  "csShadow": "Shadow",
-
-  "csSurfaceTint": "Surface Tint",
-
-  "csPickerTitle": "Pick a color!",
-  "csRecommended": "Use contrast recommendation?",
-  "csUseCustom": "Use custom",
-
-  "csAddColor": "Add a color",
-  "csRemove": "Remove",
-  "csReset": "Reset",
-  "csResetTo": "Reset to...",
-
-  "csSchemeBase": "Build from\nimage",
-  "csOptional": "optional",
-  "csFromImage": "Build the color scheme from an image",
-  "csColorScheme": "color scheme",
-
-  "csResetAll": "Reset all {themeType} theme colors?",
-  
-  
-  "stsPageTitle": "Style settings",
-
-  "stsTextFont": "Text font",
-  "stsFonts": "Fonts",
-
-  "stsMargin": "Margin",
-  "stsPadding": "Padding",
-
-  "stsButtonSpacing": "Button spacing",
-  "stsTextSpacing": "Text spacing",
-
-  "stsResetAll": "Reset all style settings?"
+  "isResetAll": "Reset all {themeType} theme images?"
 }

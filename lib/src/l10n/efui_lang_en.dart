@@ -26,11 +26,6 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String gSettingX(Object setting) {
-    return '$setting setting';
-  }
-
-  @override
   String get gLeft => 'Left';
 
   @override
@@ -122,57 +117,114 @@ class EFUILangEn extends EFUILang {
   String get ssResetAll => 'Reset all settings?';
 
   @override
-  String get isPageTitle => 'Image settings';
+  String get tsPageTitle => 'Text settings';
 
   @override
-  String get isBackground => 'Background';
+  String get tsEditing => 'Editing: ';
 
   @override
-  String get isImage => 'image';
+  String get tsDisplay => 'Display';
 
   @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
+  String get tsHeadline => 'Headline';
+
+  @override
+  String get tsTitle => 'Title';
+
+  @override
+  String get tsBody => 'Body';
+
+  @override
+  String get tsLabel => 'Label';
+
+  @override
+  String tsLinkHint(Object style) {
+    return 'Activate to edit $style';
   }
 
   @override
-  String isDialogTitle(Object title) {
-    return 'How should the $title image be updated?';
-  }
+  String get tsFontFamily => 'Font family';
 
   @override
-  String get isFromFile => 'From file';
+  String get tsFontSize => 'Font size';
 
   @override
-  String get isFromCamera => 'From camera';
+  String get tsBold => 'Bold';
 
   @override
-  String get isFromNetwork => 'From URL';
+  String get tsItalic => 'Italic';
 
   @override
-  String get isResetIt => 'Reset it';
+  String get tsUnderline => 'Underline';
 
   @override
-  String get isClearIt => 'Clear it';
+  String get tsLetterSpacing => 'Letter spacing';
 
   @override
-  String get isEnterURL => 'Enter URL';
+  String get tsWordSpacing => 'Word spacing';
 
   @override
-  String get isGetFailed => 'Failed to retrieve image';
+  String get tsLineHeight => 'Line height';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
+  String get tsDisplayP1 => 'Does this ';
 
   @override
-  String get isUseForColors => 'Update the app colors using this image?';
+  String get tsDisplayLink => 'display';
 
   @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
+  String get tsDisplayP2 => ' well?';
+
+  @override
+  String get tsHeadlineP1 => 'Are ';
+
+  @override
+  String get tsHeadlineLink => 'headlines';
+
+  @override
+  String get tsHeadlineP2 => ' distinct...';
+
+  @override
+  String get tsTitleP1 => 'from ';
+
+  @override
+  String get tsTitleLink => 'titles?';
+
+  @override
+  String get tsBodyP1 => 'How about ';
+
+  @override
+  String get tsBodyLink => 'the body?';
+
+  @override
+  String get tsBodyP2 => ' Is it easy to read?';
+
+  @override
+  String get tsLabelP1 => 'And ';
+
+  @override
+  String get tsLabelLink => 'the labels?';
+
+  @override
+  String get tsLabelP2 => ' Not too big, not too small?';
+
+  @override
+  String get tsResetAll => 'Reset all text settings?';
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 
   @override
   String get csPageTitle => 'Color settings';
@@ -311,26 +363,55 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get stsPageTitle => 'Style settings';
+  String get isPageTitle => 'Image settings';
 
   @override
-  String get stsTextFont => 'Text font';
+  String get isBackground => 'Background';
 
   @override
-  String get stsFonts => 'Fonts';
+  String get isImage => 'image';
 
   @override
-  String get stsMargin => 'Margin';
+  String isButtonHint(Object title) {
+    return 'Update the $title image';
+  }
 
   @override
-  String get stsPadding => 'Padding';
+  String isDialogTitle(Object title) {
+    return 'How should the $title image be updated?';
+  }
 
   @override
-  String get stsButtonSpacing => 'Button spacing';
+  String get isFromFile => 'From file';
 
   @override
-  String get stsTextSpacing => 'Text spacing';
+  String get isFromCamera => 'From camera';
 
   @override
-  String get stsResetAll => 'Reset all style settings?';
+  String get isFromNetwork => 'From URL';
+
+  @override
+  String get isResetIt => 'Reset it';
+
+  @override
+  String get isClearIt => 'Clear it';
+
+  @override
+  String get isEnterURL => 'Enter URL';
+
+  @override
+  String get isGetFailed => 'Failed to retrieve image';
+
+  @override
+  String isSetFailed(Object error) {
+    return 'Failed to update image:\n$error';
+  }
+
+  @override
+  String get isUseForColors => 'Update the app colors using this image';
+
+  @override
+  String isResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
 }

@@ -1,62 +1,64 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
-/// EFUI makes building accessible and user customizable UIs EZ. So anyone can enjoy your great idea!
+/// EFUI makes building user accessible and customizable apps Ez. So everyone can enjoy your great idea!
 library empathetech_flutter_ui;
 
 // Classes //
 
-// General
-export 'src/classes/general/EzTextStyle.dart';
-export 'src/classes/general/EzWarning.dart';
+// Core
+export 'src/classes/config.dart';
+
+// Helpers
+export 'src/classes/helpers/row.dart';
+export 'src/classes/helpers/screen.dart';
+export 'src/classes/helpers/scroll_view.dart';
+export 'src/classes/helpers/spacer.dart';
+export 'src/classes/helpers/warning.dart';
 
 // Platform availability
-export 'src/classes/platform-availability/EzAlertDialog.dart';
+export 'src/classes/platform_availability/alert_dialog.dart';
+export 'src/classes/platform_availability/app_provider.dart';
+export 'src/classes/platform_availability/back_action.dart';
 
 // Responsive design
-export 'src/classes/responsive-design/EzRowCol.dart';
-export 'src/classes/responsive-design/EzScrollView.dart';
-export 'src/classes/responsive-design/EzSpacer.dart';
-export 'src/classes/responsive-design/EzSwapScaffold.dart';
-export 'src/classes/responsive-design/EzTransitions.dart';
+export 'src/classes/responsive_design/row_col.dart';
+export 'src/classes/responsive_design/swap_scaffold.dart';
+export 'src/classes/responsive_design/transitions.dart';
 
 // Screen reader support
-export 'src/classes/screen-reader-support/EzImage.dart';
-export 'src/classes/screen-reader-support/EzInlineLink.dart';
-export 'src/classes/screen-reader-support/EzLink.dart';
-export 'src/classes/screen-reader-support/EzLinkImage.dart';
-export 'src/classes/screen-reader-support/EzNewLine.dart';
-export 'src/classes/screen-reader-support/EzPlainText.dart';
-export 'src/classes/screen-reader-support/EzRichText.dart';
+export 'src/classes/screen_reader_support/image.dart';
+export 'src/classes/screen_reader_support/inline_link.dart';
+export 'src/classes/screen_reader_support/link_image.dart';
+export 'src/classes/screen_reader_support/link.dart';
+export 'src/classes/screen_reader_support/new_line.dart';
+export 'src/classes/screen_reader_support/plain_text.dart';
+export 'src/classes/screen_reader_support/rich_text.dart';
 
 // User customization
-export 'src/classes/user-customization/EzAppProvider.dart';
-export 'src/classes/user-customization/EzBackAction.dart';
-export 'src/classes/user-customization/EzBackground.dart';
-export 'src/classes/user-customization/EzColorSetting.dart';
-export 'src/classes/user-customization/EzConfig.dart';
-export 'src/classes/user-customization/EzDominantHandSwitch.dart';
-export 'src/classes/user-customization/EzFontSetting.dart';
-export 'src/classes/user-customization/EzImageSetting.dart';
-export 'src/classes/user-customization/EzLocaleSetting.dart';
-export 'src/classes/user-customization/EzResetButton.dart';
-export 'src/classes/user-customization/EzRow.dart';
-export 'src/classes/user-customization/EzSliderSetting.dart';
-export 'src/classes/user-customization/EzThemeModeSwitch.dart';
+export 'src/classes/user_customization/text_style/bold_setting.dart';
+export 'src/classes/user_customization/text_style/double_setting.dart';
+export 'src/classes/user_customization/text_style/font_family_setting.dart';
+export 'src/classes/user_customization/text_style/italic_setting.dart';
+export 'src/classes/user_customization/text_style/providers.dart';
+export 'src/classes/user_customization/text_style/underline_setting.dart';
+
+export 'src/classes/user_customization/color_setting.dart';
+export 'src/classes/user_customization/dominant_hand_switch.dart';
+export 'src/classes/user_customization/image_setting.dart';
+export 'src/classes/user_customization/layout_setting.dart';
+export 'src/classes/user_customization/locale_setting.dart';
+export 'src/classes/user_customization/reset_button.dart';
+export 'src/classes/user_customization/theme_mode_switch.dart';
 
 // Constants //
 
-export 'src/consts/empathetechConsts.dart';
-export 'src/consts/EzConfigKeys.dart';
-export 'src/consts/EzConfigValues.dart';
-export 'src/consts/googleFonts.dart';
-
-// Enums //
-
-export 'src/enums/Hand.dart';
-export 'src/enums/SliderSettingType.dart';
+export 'src/consts/config_keys.dart';
+export 'src/consts/consts.dart';
+export 'src/consts/empathetech.dart';
+export 'src/consts/google_fonts.dart';
 
 // Functions //
 
@@ -66,7 +68,7 @@ export 'src/functions/dialogs.dart';
 export 'src/functions/images.dart';
 export 'src/functions/navigators.dart';
 export 'src/functions/text.dart';
-export 'src/functions/themeData.dart';
+export 'src/functions/theme_data.dart';
 
 // l10n //
 

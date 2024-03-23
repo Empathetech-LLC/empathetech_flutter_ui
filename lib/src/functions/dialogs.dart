@@ -1,11 +1,10 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -16,15 +15,15 @@ Future<dynamic> logAlert({
   String? title,
   required String message,
 }) {
-  log(message);
+  debugPrint(message);
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzAlertDialog(
+    builder: (BuildContext context) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
-      contents: [
+      contents: <Widget>[
         Text(
           message,
           textAlign: TextAlign.center,
@@ -47,12 +46,12 @@ Future<dynamic> ezColorPicker({
 }) {
   return showPlatformDialog(
     context: context,
-    builder: (context) => EzAlertDialog(
+    builder: (BuildContext context) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.csPickerTitle,
         textAlign: TextAlign.center,
       ),
-      contents: [
+      contents: <Widget>[
         ColorPicker(
           pickerColor: startColor,
           onColorChanged: onColorChange,

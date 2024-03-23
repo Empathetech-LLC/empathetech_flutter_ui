@@ -2,6 +2,7 @@
   "@@locale" : "es",
 
 
+
   "gYes": "Sí",
   "gNo": "No",
   "gOptions": "Opciones",
@@ -9,8 +10,6 @@
   "gContinue": "Continuar",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
-
-  "gSettingX": "Configuración de {setting}",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
@@ -35,6 +34,8 @@
 
   "gCreditTo": "Crédito a:",
 
+
+
   "ssPageTitle": "Configuraciones",
   "ssSettingsGuide": "Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga la página para guardar tus cambios.\n\n¡Diviértete!",
@@ -48,27 +49,58 @@
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
-  "isPageTitle": "Configuraciones de imagen",
 
-  "isBackground": "Fondo",
-  "isImage": "imagen",
 
-  "isButtonHint": "Actualizar la imagen de {title}",
-  "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
-  "isFromFile": "Desde archivo",
-  "isFromCamera": "Desde cámara",
-  "isFromNetwork": "Desde URL",
-  "isResetIt": "Restablecerlo",
-  "isClearIt": "Limpialo",
+  "tsPageTitle": "Configuraciones de texto",
 
-  "isEnterURL": "Ingrese URL",
-  "isGetFailed": "Error al recuperar la imagen",
-  "isSetFailed": "Error al actualizar la imagen:\n{error}",
+  "tsEditing": "Editando: ",
 
-  "isUseForColors": "¿Actualizar los colores de la aplicación usando esta imagen?",
+  "tsDisplay": "Presentar",
+  "tsHeadline": "Encabezado",
+  "tsTitle": "Título",
+  "tsBody": "Cuerpo",
+  "tsLabel": "Etiqueta",
 
-  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
+  "tsLinkHint": "Activar para editar {style}",
 
+  "tsFontFamily": "Familia de fuentes",
+  "tsFontSize": "Tamaño de fuente",
+  "tsBold": "Negrita",
+  "tsItalic": "Itálica",
+  "tsUnderline": "Subrayar",
+  "tsLetterSpacing": "Espaciado de letras",
+  "tsWordSpacing": "Espaciado de palabras",
+  "tsLineHeight": "Altura de línea",
+
+  "tsDisplayP1": "¿Esto se ",
+  "tsDisplayLink": "presenta",
+  "tsDisplayP2": " bien?",
+  "tsHeadlineP1": "Son los ",
+  "tsHeadlineLink": "encabezados",
+  "tsHeadlineP2": " distintos...",
+  "tsTitleP1": "de los ",
+  "tsTitleLink": "títulos?",
+  "tsBodyP1": "¿Qué tal ",
+  "tsBodyLink": "el cuerpo?",
+  "tsBodyP2": " ¿Es fácil de leer?",
+  "tsLabelP1": "¿Y ",
+  "tsLabelLink": "las etiquetas?",
+  "tsLabelP2": " ¿No demasiado grande ni demasiado pequeño?",
+
+  "tsResetAll": "¿Restablecer todas las configuraciones de texto?",
+
+
+  
+  "lsPageTitle": "Configuraciones de diseño",
+
+  "lsMargin": "Margen",
+  "lsPadding": "Relleno",
+  "lsSpacing": "Espaciado",
+
+  "lsResetAll": "¿Restablecer todas las configuraciones de diseño?",
+  
+
+  
   "csPageTitle": "Configuraciones de color",
 
   "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
@@ -77,42 +109,31 @@
   "csOnPrimary": "En Primario",
   "csPrimaryContainer": "Contenedor Primario",
   "csOnPrimaryContainer": "En Contenedor Primario",
-
   "csSecondary": "Secundario",
   "csOnSecondary": "En Secundario",
   "csSecondaryContainer": "Contenedor Secundario",
   "csOnSecondaryContainer": "En Contenedor Secundario",
-
   "csTertiary": "Terciario",
   "csOnTertiary": "En Terciario",
   "csTertiaryContainer": "Contenedor Terciario",
   "csOnTertiaryContainer": "En Contenedor Terciario",
-
   "csError": "Error",
   "csOnError": "En Error",
   "csErrorContainer": "Contenedor de Error",
   "csOnErrorContainer": "En Contenedor de Error",
-
   "csOutline": "Contorno",
   "csOutlineVariant": "Variante de Contorno",
-
   "csBackground": "Fondo",
   "csOnBackground": "En Fondo",
-
   "csSurface": "Superficie",
   "csOnSurface": "En Superficie",
-
   "csSurfaceVariant": "Variante de Superficie",
   "csOnSurfaceVariant": "En Variante de Superficie",
-
   "csInverseSurface": "Superficie Inversa",
   "csOnInverseSurface": "En Superficie Inversa",
-
   "csInversePrimary": "Primario Inversa",
-
   "csScrim": "Telón",
   "csShadow": "Sombra",
-
   "csSurfaceTint": "Tinte de Superficie",
 
   "csPickerTitle": "¡Selecciona un color!",
@@ -131,16 +152,26 @@
 
   "csResetAll": "¿Restablecer todos los colores del tema {themeType}?",
   
-  "stsPageTitle": "Configuraciones de estilo",
+  
 
-  "stsTextFont": "Fuente de texto",
-  "stsFonts": "Fuentes",
+  "isPageTitle": "Configuraciones de imagen",
 
-  "stsMargin": "Margen",
-  "stsPadding": "Relleno",
+  "isBackground": "Fondo",
+  "isImage": "imagen",
 
-  "stsButtonSpacing": "Espaciado de botones",
-  "stsTextSpacing": "Espaciado de texto",
+  "isButtonHint": "Actualizar la imagen de {title}",
+  "isDialogTitle": "¿Cómo se debe actualizar la imagen de {title}?",
+  "isFromFile": "Desde archivo",
+  "isFromCamera": "Desde cámara",
+  "isFromNetwork": "Desde URL",
+  "isResetIt": "Restablecerlo",
+  "isClearIt": "Limpiarlo",
 
-  "stsResetAll": "¿Restablecer todas las configuraciones de estilo?"
+  "isEnterURL": "Ingrese URL",
+  "isGetFailed": "Error al recuperar la imagen",
+  "isSetFailed": "Error al actualizar la imagen:\n{error}",
+
+  "isUseForColors": "Actualizar los colores de la aplicación usando esta imagen",
+
+  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
 }

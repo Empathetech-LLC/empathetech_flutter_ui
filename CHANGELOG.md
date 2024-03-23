@@ -2,11 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0] - 2024-03-23
+### Updated
+- Jenkins pipeline to use external libraries
+- File organization
+- EzAppProvider parameters (non-breaking)
+- Lint rules
+  - Audited code according to new rules
+- EzConfig.init(customDefaults -> defaults) && no longer using empathetechConfig as a base
+  - Potential (somewhat likely) breaking change
+- Updated isLightThemeKey -> isDarkThemeKey to match PlatformWidgets convention
+  - Minor breaking change
+  - Similarly, isRightHandKey -> isLefty
+- EzSliderSetting -> EzLayoutSetting
+- TextStyleType -> TextSettingType
+- All EzSettings now use `configKey` as the main param
+  - Minor breaking change
+- The README to match changes
+  - Removed images, live exists 
+    - And will grow soon!
+
+### Removed
+- TextSpacingKey && associated Widgets
+  - EzNewLine is a better strategy
+- EzTextStyle
+- enums dir
+  - Moved code to new homes (Hand -> dominant_hand_switch and such)
+
+### Added
+- Full text theme controls
+
 ## [5.0.1] - 2024-01-06
 ### Updated
 - Licensing to 2024
 - Set an EzColorSetting bug free
-  - Was preventing the color picker from startting
+  - Was preventing the color picker from starting
 - Empathetech links
 
 ## [5.0.0] - 2024-01-02

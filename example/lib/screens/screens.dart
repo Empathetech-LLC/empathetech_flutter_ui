@@ -1,12 +1,33 @@
 // Exports //
 
-export 'ColorSettings.dart';
-export 'Home.dart';
-export 'ImageSettings.dart';
-export 'StyleSettings.dart';
+export 'home.dart';
+export 'text_settings.dart';
+export 'image_settings.dart';
+export 'color_settings.dart';
+export 'layout_settings.dart';
 
 // Route names //
 
-const String colorSettingsRoute = 'color-settings';
-const String imageSettingsRoute = 'image-settings';
-const String styleSettingsRoute = 'style-settings';
+/// 'text-settings'
+const String textSettingsPath = 'text-settings';
+
+/// '/text-settings'
+const String textSettingsRoute = '/text-settings';
+
+/// 'image-settings'
+const String imageSettingsPath = 'image-settings';
+
+/// '/image-settings'
+const String imageSettingsRoute = '/image-settings';
+
+/// 'color-settings'
+const String colorSettingsPath = 'color-settings';
+
+/// '/color-settings'
+const String colorSettingsRoute = '/color-settings';
+
+/// 'layout-settings'
+const String layoutSettingsPath = 'layout-settings';
+
+/// '/layout-settings'
+const String layoutSettingsRoute = '/layout-settings';

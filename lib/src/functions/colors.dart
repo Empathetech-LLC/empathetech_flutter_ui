@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -26,10 +26,10 @@ ColorScheme ezColorScheme(Brightness brightness) {
     return (value == null) ? null : Color(value);
   }
 
-  return brightness == Brightness.light
+  return (brightness == Brightness.light)
       ? ColorScheme.fromSeed(
-          seedColor: getColor(lightPrimaryKey)!,
           brightness: Brightness.light,
+          seedColor: getColor(lightPrimaryKey)!,
           primary: getColor(lightPrimaryKey),
           onPrimary: getColor(lightOnPrimaryKey),
           primaryContainer: getColor(lightPrimaryContainerKey),
@@ -62,8 +62,8 @@ ColorScheme ezColorScheme(Brightness brightness) {
           surfaceTint: getColor(lightSurfaceTintKey),
         )
       : ColorScheme.fromSeed(
-          seedColor: getColor(darkPrimaryKey)!,
           brightness: Brightness.dark,
+          seedColor: getColor(darkPrimaryKey)!,
           primary: getColor(darkPrimaryKey),
           onPrimary: getColor(darkOnPrimaryKey),
           primaryContainer: getColor(darkPrimaryContainerKey),
@@ -100,8 +100,8 @@ ColorScheme ezColorScheme(Brightness brightness) {
 /// Generates a [ColorScheme] based on the image found at [path]
 /// Then stores the values in [EzConfig.preferences]
 Future<void> storeImageColorScheme({
-  required Brightness brightness,
   required String path,
+  required Brightness brightness,
 }) async {
   final ColorScheme colorScheme = await ColorScheme.fromImageProvider(
     provider: provideImage(path),
@@ -154,19 +154,19 @@ Future<void> storeImageColorScheme({
     EzConfig.setInt(
         darkPrimaryContainerKey, colorScheme.primaryContainer.value);
     EzConfig.setInt(
-        lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
+        darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
     EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
     EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
     EzConfig.setInt(
-        lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
+        darkSecondaryContainerKey, colorScheme.secondaryContainer.value);
     EzConfig.setInt(
-        lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
+        darkOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
     EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
     EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
     EzConfig.setInt(
         darkTertiaryContainerKey, colorScheme.tertiaryContainer.value);
     EzConfig.setInt(
-        lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
+        darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
     EzConfig.setInt(darkErrorKey, colorScheme.error.value);
     EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
     EzConfig.setInt(darkErrorContainerKey, colorScheme.errorContainer.value);
@@ -193,255 +193,199 @@ Future<void> storeImageColorScheme({
 
 /// Get the human readable name of a [key]s color
 String getColorName(BuildContext context, String key) {
+  final EFUILang l10n = EFUILang.of(context)!;
+
   switch (key) {
     case lightPrimaryKey:
     case darkPrimaryKey:
-      return EFUILang.of(context)!.csPrimary;
-
+      return l10n.csPrimary;
     case lightOnPrimaryKey:
     case darkOnPrimaryKey:
-      return EFUILang.of(context)!.csOnPrimary;
-
+      return l10n.csOnPrimary;
     case lightPrimaryContainerKey:
     case darkPrimaryContainerKey:
-      return EFUILang.of(context)!.csPrimaryContainer;
-
+      return l10n.csPrimaryContainer;
     case lightOnPrimaryContainerKey:
     case darkOnPrimaryContainerKey:
-      return EFUILang.of(context)!.csOnPrimaryContainer;
-
+      return l10n.csOnPrimaryContainer;
     case lightSecondaryKey:
     case darkSecondaryKey:
-      return EFUILang.of(context)!.csSecondary;
-
+      return l10n.csSecondary;
     case lightOnSecondaryKey:
     case darkOnSecondaryKey:
-      return EFUILang.of(context)!.csOnSecondary;
-
+      return l10n.csOnSecondary;
     case lightSecondaryContainerKey:
     case darkSecondaryContainerKey:
-      return EFUILang.of(context)!.csSecondaryContainer;
-
+      return l10n.csSecondaryContainer;
     case lightOnSecondaryContainerKey:
     case darkOnSecondaryContainerKey:
-      return EFUILang.of(context)!.csOnSecondaryContainer;
-
+      return l10n.csOnSecondaryContainer;
     case lightTertiaryKey:
     case darkTertiaryKey:
-      return EFUILang.of(context)!.csTertiary;
-
+      return l10n.csTertiary;
     case lightOnTertiaryKey:
     case darkOnTertiaryKey:
-      return EFUILang.of(context)!.csOnTertiary;
-
+      return l10n.csOnTertiary;
     case lightTertiaryContainerKey:
     case darkTertiaryContainerKey:
-      return EFUILang.of(context)!.csTertiaryContainer;
-
+      return l10n.csTertiaryContainer;
     case lightOnTertiaryContainerKey:
     case darkOnTertiaryContainerKey:
-      return EFUILang.of(context)!.csOnTertiaryContainer;
-
+      return l10n.csOnTertiaryContainer;
     case lightErrorKey:
     case darkErrorKey:
-      return EFUILang.of(context)!.csError;
-
+      return l10n.csError;
     case lightOnErrorKey:
     case darkOnErrorKey:
-      return EFUILang.of(context)!.csOnError;
-
+      return l10n.csOnError;
     case lightErrorContainerKey:
     case darkErrorContainerKey:
-      return EFUILang.of(context)!.csErrorContainer;
-
+      return l10n.csErrorContainer;
     case lightOnErrorContainerKey:
     case darkOnErrorContainerKey:
-      return EFUILang.of(context)!.csOnErrorContainer;
-
+      return l10n.csOnErrorContainer;
     case lightOutlineKey:
     case darkOutlineKey:
-      return EFUILang.of(context)!.csOutline;
-
+      return l10n.csOutline;
     case lightOutlineVariantKey:
     case darkOutlineVariantKey:
-      return EFUILang.of(context)!.csOutlineVariant;
-
+      return l10n.csOutlineVariant;
     case lightBackgroundKey:
     case darkBackgroundKey:
-      return EFUILang.of(context)!.csBackground;
-
+      return l10n.csBackground;
     case lightOnBackgroundKey:
     case darkOnBackgroundKey:
-      return EFUILang.of(context)!.csOnBackground;
-
+      return l10n.csOnBackground;
     case lightSurfaceKey:
     case darkSurfaceKey:
-      return EFUILang.of(context)!.csSurface;
-
+      return l10n.csSurface;
     case lightOnSurfaceKey:
     case darkOnSurfaceKey:
-      return EFUILang.of(context)!.csOnSurface;
-
+      return l10n.csOnSurface;
     case lightSurfaceVariantKey:
     case darkSurfaceVariantKey:
-      return EFUILang.of(context)!.csSurfaceVariant;
-
+      return l10n.csSurfaceVariant;
     case lightOnSurfaceVariantKey:
     case darkOnSurfaceVariantKey:
-      return EFUILang.of(context)!.csOnSurfaceVariant;
-
+      return l10n.csOnSurfaceVariant;
     case lightInverseSurfaceKey:
     case darkInverseSurfaceKey:
-      return EFUILang.of(context)!.csInverseSurface;
-
+      return l10n.csInverseSurface;
     case lightOnInverseSurfaceKey:
     case darkOnInverseSurfaceKey:
-      return EFUILang.of(context)!.csOnInverseSurface;
-
+      return l10n.csOnInverseSurface;
     case lightInversePrimaryKey:
     case darkInversePrimaryKey:
-      return EFUILang.of(context)!.csInversePrimary;
-
+      return l10n.csInversePrimary;
     case lightScrimKey:
     case darkScrimKey:
-      return EFUILang.of(context)!.csScrim;
-
+      return l10n.csScrim;
     case lightShadowKey:
     case darkShadowKey:
-      return EFUILang.of(context)!.csShadow;
-
+      return l10n.csShadow;
     case lightSurfaceTintKey:
     case darkSurfaceTintKey:
-      return EFUILang.of(context)!.csSurfaceTint;
-
+      return l10n.csSurfaceTint;
     default:
-      return "null";
+      return 'null';
   }
 }
 
 /// Resolve the color [key] to the live [ColorScheme] value
 Color getLiveColor(BuildContext context, String key) {
+  final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
   switch (key) {
     case lightPrimaryKey:
     case darkPrimaryKey:
-      return Theme.of(context).colorScheme.primary;
-
+      return colorScheme.primary;
     case lightOnPrimaryKey:
     case darkOnPrimaryKey:
-      return Theme.of(context).colorScheme.onPrimary;
-
+      return colorScheme.onPrimary;
     case lightPrimaryContainerKey:
     case darkPrimaryContainerKey:
-      return Theme.of(context).colorScheme.onPrimaryContainer;
-
+      return colorScheme.onPrimaryContainer;
     case lightOnPrimaryContainerKey:
     case darkOnPrimaryContainerKey:
-      return Theme.of(context).colorScheme.onPrimaryContainer;
-
+      return colorScheme.onPrimaryContainer;
     case lightSecondaryKey:
     case darkSecondaryKey:
-      return Theme.of(context).colorScheme.secondary;
-
+      return colorScheme.secondary;
     case lightOnSecondaryKey:
     case darkOnSecondaryKey:
-      return Theme.of(context).colorScheme.onSecondary;
-
+      return colorScheme.onSecondary;
     case lightSecondaryContainerKey:
     case darkSecondaryContainerKey:
-      return Theme.of(context).colorScheme.secondaryContainer;
-
+      return colorScheme.secondaryContainer;
     case lightOnSecondaryContainerKey:
     case darkOnSecondaryContainerKey:
-      return Theme.of(context).colorScheme.onSecondaryContainer;
-
+      return colorScheme.onSecondaryContainer;
     case lightTertiaryKey:
     case darkTertiaryKey:
-      return Theme.of(context).colorScheme.tertiary;
-
+      return colorScheme.tertiary;
     case lightOnTertiaryKey:
     case darkOnTertiaryKey:
-      return Theme.of(context).colorScheme.onTertiary;
-
+      return colorScheme.onTertiary;
     case lightTertiaryContainerKey:
     case darkTertiaryContainerKey:
-      return Theme.of(context).colorScheme.tertiaryContainer;
-
+      return colorScheme.tertiaryContainer;
     case lightOnTertiaryContainerKey:
     case darkOnTertiaryContainerKey:
-      return Theme.of(context).colorScheme.onTertiaryContainer;
-
+      return colorScheme.onTertiaryContainer;
     case lightErrorKey:
     case darkErrorKey:
-      return Theme.of(context).colorScheme.error;
-
+      return colorScheme.error;
     case lightOnErrorKey:
     case darkOnErrorKey:
-      return Theme.of(context).colorScheme.onError;
-
+      return colorScheme.onError;
     case lightErrorContainerKey:
     case darkErrorContainerKey:
-      return Theme.of(context).colorScheme.errorContainer;
-
+      return colorScheme.errorContainer;
     case lightOnErrorContainerKey:
     case darkOnErrorContainerKey:
-      return Theme.of(context).colorScheme.onErrorContainer;
-
+      return colorScheme.onErrorContainer;
     case lightOutlineKey:
     case darkOutlineKey:
-      return Theme.of(context).colorScheme.outline;
-
+      return colorScheme.outline;
     case lightOutlineVariantKey:
     case darkOutlineVariantKey:
-      return Theme.of(context).colorScheme.outlineVariant;
-
+      return colorScheme.outlineVariant;
     case lightBackgroundKey:
     case darkBackgroundKey:
-      return Theme.of(context).colorScheme.background;
-
+      return colorScheme.background;
     case lightOnBackgroundKey:
     case darkOnBackgroundKey:
-      return Theme.of(context).colorScheme.background;
-
+      return colorScheme.background;
     case lightSurfaceKey:
     case darkSurfaceKey:
-      return Theme.of(context).colorScheme.surface;
-
+      return colorScheme.surface;
     case lightOnSurfaceKey:
     case darkOnSurfaceKey:
-      return Theme.of(context).colorScheme.onSurface;
-
+      return colorScheme.onSurface;
     case lightSurfaceVariantKey:
     case darkSurfaceVariantKey:
-      return Theme.of(context).colorScheme.surfaceVariant;
-
+      return colorScheme.surfaceVariant;
     case lightOnSurfaceVariantKey:
     case darkOnSurfaceVariantKey:
-      return Theme.of(context).colorScheme.onSurfaceVariant;
-
+      return colorScheme.onSurfaceVariant;
     case lightInverseSurfaceKey:
     case darkInverseSurfaceKey:
-      return Theme.of(context).colorScheme.inverseSurface;
-
+      return colorScheme.inverseSurface;
     case lightOnInverseSurfaceKey:
     case darkOnInverseSurfaceKey:
-      return Theme.of(context).colorScheme.onInverseSurface;
-
+      return colorScheme.onInverseSurface;
     case lightInversePrimaryKey:
     case darkInversePrimaryKey:
-      return Theme.of(context).colorScheme.inversePrimary;
-
+      return colorScheme.inversePrimary;
     case lightScrimKey:
     case darkScrimKey:
-      return Theme.of(context).colorScheme.scrim;
-
+      return colorScheme.scrim;
     case lightShadowKey:
     case darkShadowKey:
-      return Theme.of(context).colorScheme.shadow;
-
+      return colorScheme.shadow;
     case lightSurfaceTintKey:
     case darkSurfaceTintKey:
-      return Theme.of(context).colorScheme.surfaceTint;
-
+      return colorScheme.surfaceTint;
     default:
       return Colors.transparent;
   }

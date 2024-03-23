@@ -26,11 +26,6 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
-  String gSettingX(Object setting) {
-    return 'Configuración de $setting';
-  }
-
-  @override
   String get gLeft => 'Izquierda';
 
   @override
@@ -122,58 +117,114 @@ class EFUILangEs extends EFUILang {
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
-  String get isPageTitle => 'Configuraciones de imagen';
+  String get tsPageTitle => 'Configuraciones de texto';
 
   @override
-  String get isBackground => 'Fondo';
+  String get tsEditing => 'Editando: ';
 
   @override
-  String get isImage => 'imagen';
+  String get tsDisplay => 'Presentar';
 
   @override
-  String isButtonHint(Object title) {
-    return 'Actualizar la imagen de $title';
+  String get tsHeadline => 'Encabezado';
+
+  @override
+  String get tsTitle => 'Título';
+
+  @override
+  String get tsBody => 'Cuerpo';
+
+  @override
+  String get tsLabel => 'Etiqueta';
+
+  @override
+  String tsLinkHint(Object style) {
+    return 'Activar para editar $style';
   }
 
   @override
-  String isDialogTitle(Object title) {
-    return '¿Cómo se debe actualizar la imagen de $title?';
-  }
+  String get tsFontFamily => 'Familia de fuentes';
 
   @override
-  String get isFromFile => 'Desde archivo';
+  String get tsFontSize => 'Tamaño de fuente';
 
   @override
-  String get isFromCamera => 'Desde cámara';
+  String get tsBold => 'Negrita';
 
   @override
-  String get isFromNetwork => 'Desde URL';
+  String get tsItalic => 'Itálica';
 
   @override
-  String get isResetIt => 'Restablecerlo';
+  String get tsUnderline => 'Subrayar';
 
   @override
-  String get isClearIt => 'Limpialo';
+  String get tsLetterSpacing => 'Espaciado de letras';
 
   @override
-  String get isEnterURL => 'Ingrese URL';
+  String get tsWordSpacing => 'Espaciado de palabras';
 
   @override
-  String get isGetFailed => 'Error al recuperar la imagen';
+  String get tsLineHeight => 'Altura de línea';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Error al actualizar la imagen:\n$error';
-  }
+  String get tsDisplayP1 => '¿Esto se ';
 
   @override
-  String get isUseForColors =>
-      '¿Actualizar los colores de la aplicación usando esta imagen?';
+  String get tsDisplayLink => 'presenta';
 
   @override
-  String isResetAll(Object themeType) {
-    return '¿Restablecer todas las imágenes del tema $themeType?';
-  }
+  String get tsDisplayP2 => ' bien?';
+
+  @override
+  String get tsHeadlineP1 => 'Son los ';
+
+  @override
+  String get tsHeadlineLink => 'encabezados';
+
+  @override
+  String get tsHeadlineP2 => ' distintos...';
+
+  @override
+  String get tsTitleP1 => 'de los ';
+
+  @override
+  String get tsTitleLink => 'títulos?';
+
+  @override
+  String get tsBodyP1 => '¿Qué tal ';
+
+  @override
+  String get tsBodyLink => 'el cuerpo?';
+
+  @override
+  String get tsBodyP2 => ' ¿Es fácil de leer?';
+
+  @override
+  String get tsLabelP1 => '¿Y ';
+
+  @override
+  String get tsLabelLink => 'las etiquetas?';
+
+  @override
+  String get tsLabelP2 => ' ¿No demasiado grande ni demasiado pequeño?';
+
+  @override
+  String get tsResetAll => '¿Restablecer todas las configuraciones de texto?';
+
+  @override
+  String get lsPageTitle => 'Configuraciones de diseño';
+
+  @override
+  String get lsMargin => 'Margen';
+
+  @override
+  String get lsPadding => 'Relleno';
+
+  @override
+  String get lsSpacing => 'Espaciado';
+
+  @override
+  String get lsResetAll => '¿Restablecer todas las configuraciones de diseño?';
 
   @override
   String get csPageTitle => 'Configuraciones de color';
@@ -313,26 +364,56 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get stsPageTitle => 'Configuraciones de estilo';
+  String get isPageTitle => 'Configuraciones de imagen';
 
   @override
-  String get stsTextFont => 'Fuente de texto';
+  String get isBackground => 'Fondo';
 
   @override
-  String get stsFonts => 'Fuentes';
+  String get isImage => 'imagen';
 
   @override
-  String get stsMargin => 'Margen';
+  String isButtonHint(Object title) {
+    return 'Actualizar la imagen de $title';
+  }
 
   @override
-  String get stsPadding => 'Relleno';
+  String isDialogTitle(Object title) {
+    return '¿Cómo se debe actualizar la imagen de $title?';
+  }
 
   @override
-  String get stsButtonSpacing => 'Espaciado de botones';
+  String get isFromFile => 'Desde archivo';
 
   @override
-  String get stsTextSpacing => 'Espaciado de texto';
+  String get isFromCamera => 'Desde cámara';
 
   @override
-  String get stsResetAll => '¿Restablecer todas las configuraciones de estilo?';
+  String get isFromNetwork => 'Desde URL';
+
+  @override
+  String get isResetIt => 'Restablecerlo';
+
+  @override
+  String get isClearIt => 'Limpiarlo';
+
+  @override
+  String get isEnterURL => 'Ingrese URL';
+
+  @override
+  String get isGetFailed => 'Error al recuperar la imagen';
+
+  @override
+  String isSetFailed(Object error) {
+    return 'Error al actualizar la imagen:\n$error';
+  }
+
+  @override
+  String get isUseForColors =>
+      'Actualizar los colores de la aplicación usando esta imagen';
+
+  @override
+  String isResetAll(Object themeType) {
+    return '¿Restablecer todas las imágenes del tema $themeType?';
+  }
 }

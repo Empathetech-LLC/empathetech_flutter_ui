@@ -1,6 +1,6 @@
 name: empathetech_flutter_ui
 description: "Build apps for anyone. EFUI makes building user accessible and customizable apps Ez. So everyone can enjoy your great idea!"
-version: 5.0.1
+version: 6.0.0
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
@@ -14,24 +14,31 @@ dependencies:
   intl: ^0.18.1
 
   # Flutter (Google)
-  shared_preferences: ^2.2.1
-  url_launcher: ^6.1.14
   google_fonts: ^6.1.0
   image_picker: ^1.0.4
   path: ^1.8.3
   path_provider: ^2.1.1
+  shared_preferences: ^2.2.1
+  url_launcher: ^6.1.14
 
   # Community
-  flutter_platform_widgets: ^6.0.2
+  country_flags: ^2.2.0
   flutter_colorpicker: ^1.0.3
   flutter_localized_locales: ^2.0.5
-  line_icons: ^2.0.1
-  country_flags: ^2.2.0
+  flutter_platform_widgets: ^6.0.2
 
 dev_dependencies:
+  # For example app
   go_router: ^13.0.0
+  provider: ^6.1.2
+
+  # For development/testing
+  dartdoc: ^8.0.5
   dependency_validator: ^3.2.2
-  dartdoc: ^6.3.0
+  flutter_lints: ^3.0.1
+
+  # flutter_test:
+  #   sdk: flutter
 
 flutter:
-  generate: true
+  generate: true # For l10n

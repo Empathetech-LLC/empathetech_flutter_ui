@@ -22,16 +22,16 @@ void main() async {
   // Make it so
   EzConfig.init(
     // Paths to any locally stored images the app uses
-    assetPaths: {},
+    assetPaths: <String>{},
 
     preferences: prefs,
 
     // Your brand colors, custom styling, etc
-    customDefaults: {},
+    defaults: empathetechConfig,
   );
 
   // Set device orientation(s)
-  SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
     DeviceOrientation.landscapeLeft,
@@ -42,38 +42,40 @@ void main() async {
   runApp(const EFUIExample());
 }
 
-// Initialize a path based router for web-enabled apps
-// Or any other app that requires deep linking
-// https://docs.flutter.dev/ui/navigation/deep-linking
+/// Initialize a path based router for web-enabled apps
+/// Or any other app that requires deep linking
+/// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter _router = GoRouter(
-  initialLocation: homeRoute,
+  initialLocation: homePath,
   routes: <RouteBase>[
     GoRoute(
-      name: homeRoute,
-      path: homeRoute,
+      path: homePath,
       builder: (BuildContext context, GoRouterState state) {
         return const HomeScreen();
       },
       routes: <RouteBase>[
         GoRoute(
-          name: imageSettingsRoute,
-          path: imageSettingsRoute,
+          path: textSettingsPath,
           builder: (BuildContext context, GoRouterState state) {
-            return const ImageSettingsScreen();
+            return const TextSettingsScreen();
           },
         ),
         GoRoute(
-          name: colorSettingsRoute,
-          path: colorSettingsRoute,
+          path: layoutSettingsPath,
+          builder: (BuildContext context, GoRouterState state) {
+            return const LayoutSettingsScreen();
+          },
+        ),
+        GoRoute(
+          path: colorSettingsPath,
           builder: (BuildContext context, GoRouterState state) {
             return const ColorSettingsScreen();
           },
         ),
         GoRoute(
-          name: styleSettingsRoute,
-          path: styleSettingsRoute,
+          path: imageSettingsPath,
           builder: (BuildContext context, GoRouterState state) {
-            return const StyleSettingsScreen();
+            return const ImageSettingsScreen();
           },
         ),
       ],
@@ -82,9 +84,7 @@ final GoRouter _router = GoRouter(
 );
 
 class EFUIExample extends StatelessWidget {
-  final Key? key;
-
-  const EFUIExample({this.key}) : super(key: key);
+  const EFUIExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: {
+        localizationsDelegates: const <LocalizationsDelegate<dynamic>>{
           LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
         },
