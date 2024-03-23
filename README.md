@@ -312,7 +312,6 @@ EFUI wouldn't be as awesome as it is without these other awesome community proje
 * [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
 * [Flutter colorpicker](https://pub.dev/packages/flutter_colorpicker)
 * [provider](https://pub.dev/packages/provider)
-* [Line icons](https://pub.dev/packages/line_icons)
 * [Localized Locales](https://pub.dev/packages/flutter_localized_locales)
 * [Country flags](https://pub.dev/packages/country_flags)
 
