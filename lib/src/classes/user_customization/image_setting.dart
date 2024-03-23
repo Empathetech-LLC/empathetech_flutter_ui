@@ -234,29 +234,31 @@ class _ImageSettingState extends State<EzImageSetting> {
       options.addAll(<Widget>[
         spacer,
         EzRow(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Label
-              Flexible(
-                child: Text(
-                  l10n.isUseForColors,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              EzSpacer.row(padding),
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Check box
+            Checkbox(
+              value: updateTheme,
+              onChanged: (bool? choice) {
+                setState(() {
+                  dialogState(() {
+                    updateTheme = (choice == null) ? false : choice;
+                  });
+                });
+              },
+            ),
+            EzSpacer.row(padding),
 
-              // Check box
-              Checkbox(
-                  value: updateTheme,
-                  onChanged: (bool? choice) {
-                    setState(() {
-                      dialogState(() {
-                        updateTheme = (choice == null) ? false : choice;
-                      });
-                    });
-                  }),
-            ])
+            // Label
+            Flexible(
+              child: Text(
+                l10n.isUseForColors,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        )
       ]);
     }
 

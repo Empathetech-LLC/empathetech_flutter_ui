@@ -97,7 +97,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
           },
           style: bodyStyle,
           textAlign: TextAlign.center,
-          textAlignVertical: TextAlignVertical.bottom,
         ),
       ),
     );
