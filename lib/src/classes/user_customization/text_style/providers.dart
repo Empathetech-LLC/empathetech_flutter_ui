@@ -68,20 +68,45 @@ abstract class BaseTextStyleProvider extends ChangeNotifier {
 
 class DisplayTextStyleProvider extends BaseTextStyleProvider {
   DisplayTextStyleProvider() : super(buildDisplay());
+
+  void reset() {
+    _style = buildDisplay();
+    notifyListeners();
+  }
 }
 
 class HeadlineTextStyleProvider extends BaseTextStyleProvider {
   HeadlineTextStyleProvider() : super(buildHeadline());
+
+  void reset() {
+    _style = buildHeadline();
+    notifyListeners();
+  }
 }
 
 class TitleTextStyleProvider extends BaseTextStyleProvider {
   TitleTextStyleProvider() : super(buildTitle());
+
+  void reset() {
+    _style = buildTitle();
+    notifyListeners();
+  }
 }
 
 class BodyTextStyleProvider extends BaseTextStyleProvider {
   BodyTextStyleProvider() : super(buildBody());
+
+  void reset() {
+    _style = buildBody();
+    notifyListeners();
+  }
 }
 
 class LabelTextStyleProvider extends BaseTextStyleProvider {
   LabelTextStyleProvider() : super(buildLabel());
+
+  void reset() {
+    _style = buildLabel();
+    notifyListeners();
+  }
 }
