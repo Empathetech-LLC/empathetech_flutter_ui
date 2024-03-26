@@ -624,6 +624,14 @@ class _TextSettingsState extends State<TextSettings> {
               dialogTitle: l10n.tsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(textStyleKeys.keys.toSet());
+                displayProvider.reset();
+                headlineProvider.reset();
+                titleProvider.reset();
+                bodyProvider.reset();
+                labelProvider.reset();
+                setState(() {
+                  editing = TextSettingType.display;
+                });
                 popScreen(context: context, result: true);
               },
             ),
