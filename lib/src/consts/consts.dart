@@ -3,8 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// '/'
 const String homePath = '/';
+const String homeRoute = '/';
 
 /// 700
 /// https://pub.dev/packages/flutter_adaptive_scaffold
