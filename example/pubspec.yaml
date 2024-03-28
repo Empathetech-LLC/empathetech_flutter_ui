@@ -1,11 +1,11 @@
 name: example
-description: "An example app to show off EFUI. It is a screen reader compliant and internationalized (currently: English and Spanish) user customization sandbox."
+description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
 publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:

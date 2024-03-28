@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = example
+PRODUCT_NAME = open_ui
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = net.empathetech.example
+PRODUCT_BUNDLE_IDENTIFIER = net.empathetech.open_ui
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022-2024 net.empathetech. All rights reserved.
