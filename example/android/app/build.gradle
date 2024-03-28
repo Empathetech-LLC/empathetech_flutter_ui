@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.empathetech.example"
+    namespace "net.empathetech.example"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -41,7 +41,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.empathetech.example"
+        applicationId "net.empathetech.example"
         minSdkVersion 30
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()

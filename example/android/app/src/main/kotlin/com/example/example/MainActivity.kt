@@ -1,4 +1,4 @@
-package com.empathetech.example
+package net.empathetech.example
 
 import io.flutter.embedding.android.FlutterActivity
 
