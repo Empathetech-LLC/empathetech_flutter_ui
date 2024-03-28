@@ -27,7 +27,9 @@ dependencies:
   provider: ^6.1.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.1
+  flutter_native_splash: ^2.3.2
   
   flutter_test:
     sdk: flutter
@@ -35,3 +37,22 @@ dev_dependencies:
 flutter:
   generate: true # For l10n
   uses-material-design: true
+
+  assets:
+    - assets/dark-logo.png
+
+flutter_launcher_icons:
+  image_path: assets/dark-logo.png
+  adaptive_icon_foreground: assets/dark-logo.png
+  adaptive_icon_background: "#000000"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/dark-logo.png
