@@ -1,18 +1,15 @@
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ExampleScaffold extends StatelessWidget {
-  final String title;
-  final String? titleSemantics;
   final Widget body;
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ExampleScaffold({
     super.key,
-    this.title = efuiL,
-    this.titleSemantics = efuiLFix,
     required this.body,
     this.fab,
   });
@@ -21,10 +18,12 @@ class ExampleScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the theme data //
 
+    const FeedbackButton feedback = FeedbackButton();
+
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
     final Size appBarTextSize = measureText(
-      title,
+      appTitle,
       style: Theme.of(context).appBarTheme.titleTextStyle,
       context: context,
     );
@@ -43,19 +42,17 @@ class ExampleScaffold extends StatelessWidget {
           toolbarHeight: toolbarHeight,
 
           // Leading (aka left)
+          leading: isLefty ? feedback : null,
           automaticallyImplyLeading: !isLefty,
           leadingWidth: toolbarHeight,
 
           // Title
-          title: Text(
-            title,
-            semanticsLabel: titleSemantics,
-            textAlign: TextAlign.center,
-          ),
-          centerTitle: true,
+          title: const Text(appTitle),
 
           // Actions (aka trailing aka right)
-          actions: isLefty ? <Widget>[const EzBackAction()] : null,
+          actions: isLefty
+              ? const <Widget>[EzBackAction()]
+              : const <Widget>[feedback],
         ),
       ),
 
