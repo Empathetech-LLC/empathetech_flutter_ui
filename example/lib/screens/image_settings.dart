@@ -1,8 +1,7 @@
 import '../utils/utils.dart';
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettingsScreen extends StatefulWidget {
@@ -69,7 +68,6 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: efuiS,
       body: EzScreen(
         decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
