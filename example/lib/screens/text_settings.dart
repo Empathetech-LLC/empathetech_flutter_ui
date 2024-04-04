@@ -1,9 +1,8 @@
 import '../utils/utils.dart';
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
@@ -439,7 +438,6 @@ class _TextSettingsState extends State<TextSettings> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: efuiS,
       body: EzScreen(
         decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
