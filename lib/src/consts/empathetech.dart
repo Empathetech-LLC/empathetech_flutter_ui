@@ -5,6 +5,8 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'package:flutter/material.dart';
+
 // Brand names //
 
 /// Short == EFUI
@@ -21,11 +23,20 @@ const String efuiLFix = 'Empathetic Flutter UI';
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
 
+/// 0xFF20DAA5
+const Color empathEucalyptus = Color(empathEucalyptusHex);
+
 /// 0xFFA520DA
 const int empathPurpleHex = 0xFFA520DA;
 
+/// 0xFFA520DA
+const Color empathPurple = Color(empathPurpleHex);
+
 /// 0xFFDAA520
 const int empathGoldenrodHex = 0xFFDAA520;
+
+/// 0xFFDAA520
+const Color empathGoldenrod = Color(empathGoldenrodHex);
 
 /// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
@@ -33,14 +44,23 @@ const int whiteHex = 0xFFFFFFFF;
 /// 0xFFF5F5F5
 const int offWhiteHex = 0xFFF5F5F5;
 
+/// 0xFFF5F5F5
+const Color empathOffWhite = Color(offWhiteHex);
+
 /// 0xFF000000
 const int blackHex = 0xFF000000;
 
 /// 0xFF191919
 const int offBlackHex = 0xFF191919;
 
+/// 0xFF191919
+const Color empathOffBlack = Color(offBlackHex);
+
 /// 0xFF000000
 const int transparentHex = 0x00000000;
+
+/// 0xFF000000
+const Color transparent = Color(transparentHex);
 
 // Brand links //
 
