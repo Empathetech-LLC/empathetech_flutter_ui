@@ -61,6 +61,12 @@ class EzLayoutSetting extends StatefulWidget {
   /// Number of significant figures to display AFTER the decimal point
   final int decimals;
 
+  /// Defaults to [TextTheme.titleLarge]
+  final TextStyle? titleStyle;
+
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? bodyStyle;
+
   /// Standardized [Widget] for updating layout values in [EzConfig]
   /// Supports all [LayoutSettingType]s
   const EzLayoutSetting({
@@ -71,6 +77,8 @@ class EzLayoutSetting extends StatefulWidget {
     required this.max,
     required this.steps,
     required this.decimals,
+    this.titleStyle,
+    this.bodyStyle,
   });
 
   @override
@@ -92,8 +100,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   late final ThemeData theme = Theme.of(context);
 
-  late final TextStyle? titleStyle = theme.textTheme.titleLarge;
-  late final TextStyle? bodyStyle = theme.textTheme.bodyLarge;
+  late final TextStyle? titleStyle =
+      widget.titleStyle ?? theme.textTheme.titleLarge;
+  late final TextStyle? bodyStyle =
+      widget.bodyStyle ?? theme.textTheme.bodyLarge;
 
   late final EFUILang l10n = EFUILang.of(context)!;
 

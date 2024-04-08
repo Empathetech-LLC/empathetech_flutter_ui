@@ -18,6 +18,8 @@ class EzFontDoubleSetting extends StatefulWidget {
 
   final String tooltip;
 
+  final TextStyle? style;
+
   /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size
   /// From the results of [measureText] on [sizingString]
   final String? sizingString;
@@ -31,6 +33,7 @@ class EzFontDoubleSetting extends StatefulWidget {
     required this.max,
     required this.tooltip,
     required this.notifierCallback,
+    this.style,
     this.sizingString,
   });
 
@@ -50,14 +53,15 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? bodyStyle = Theme.of(context)
-        .textTheme
-        .bodyLarge
-        ?.copyWith(color: Theme.of(context).colorScheme.onBackground);
+    final TextStyle? style = widget.style ??
+        Theme.of(context)
+            .textTheme
+            .bodyLarge
+            ?.copyWith(color: Theme.of(context).colorScheme.onBackground);
 
     final Size sizeLimit = measureText(
       widget.sizingString ?? widget.max.toString(),
-      style: bodyStyle,
+      style: style,
       context: context,
     );
 
@@ -95,7 +99,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
             return null;
           },
-          style: bodyStyle,
+          style: style,
           textAlign: TextAlign.center,
         ),
       ),

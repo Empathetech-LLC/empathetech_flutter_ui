@@ -9,8 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
+  /// Defaults to [DropdownMenuThemeData.textStyle]
+  final TextStyle? labelStyle;
+
   /// Standardized tool for changing the [ThemeMode]
-  const EzThemeModeSwitch({super.key});
+  const EzThemeModeSwitch({super.key, this.labelStyle});
 
   @override
   State<EzThemeModeSwitch> createState() => _ThemeModeSwitchState();
@@ -61,7 +64,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           // Label
           Text(
             label,
-            style: theme.dropdownMenuTheme.textStyle,
+            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
           EzSpacer.row(padding),

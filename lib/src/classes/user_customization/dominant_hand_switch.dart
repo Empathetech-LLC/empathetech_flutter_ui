@@ -24,8 +24,11 @@ String handName(BuildContext context, Hand hand) {
 }
 
 class EzDominantHandSwitch extends StatefulWidget {
+  /// Defaults to [DropdownMenuThemeData.textStyle] value from your [ThemeData]
+  final TextStyle? labelStyle;
+
   /// Standardized tool for updating [EzConfig] dominantHand
-  const EzDominantHandSwitch({super.key});
+  const EzDominantHandSwitch({super.key, this.labelStyle});
 
   @override
   State<EzDominantHandSwitch> createState() => _HandSwitchState();
@@ -64,7 +67,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       // Label
       Text(
         label,
-        style: theme.dropdownMenuTheme.textStyle,
+        style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
         textAlign: TextAlign.center,
       ),
       EzSpacer.row(padding),
