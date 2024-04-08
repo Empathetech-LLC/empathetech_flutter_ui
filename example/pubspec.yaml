@@ -41,10 +41,11 @@ flutter:
 
   assets:
     - assets/dark-logo.png
+    - assets/dark-logo-round.png
 
 flutter_launcher_icons:
   image_path: assets/dark-logo.png
-  adaptive_icon_foreground: assets/dark-logo.png
+  adaptive_icon_foreground: assets/dark-logo-round.png
   adaptive_icon_background: "#000000"
   android: true
   ios: true
