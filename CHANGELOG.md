@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [6.1.0] - 2024-04-XX
 ### Updated
+- Comments
 
 ### Added
+- More TextStyle params
 
 ### Removed
+- navigators.dart
 
 ## [6.0.0] - 2024-03-23
 ### Updated
