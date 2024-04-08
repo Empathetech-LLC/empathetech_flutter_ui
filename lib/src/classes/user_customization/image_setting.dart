@@ -39,6 +39,7 @@ class EzImageSetting extends StatefulWidget {
   final bool hideThemeMessage;
 
   /// Creates a tool for updating the image at [configKey]'s path
+  /// [EzImageSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
   const EzImageSetting({
     super.key,
     required this.configKey,
@@ -98,7 +99,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            popScreen(context: context, result: changed);
+            Navigator.of(context).pop(changed);
           },
           label: Text(l10n.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
@@ -114,7 +115,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            popScreen(context: context, result: changed);
+            Navigator.of(context).pop(changed);
           },
           label: Text(l10n.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
@@ -137,14 +138,14 @@ class _ImageSettingState extends State<EzImageSetting> {
                   void onConfirm() {
                     if (isUrl(url)) {
                       EzConfig.setString(widget.configKey, url);
-                      popScreen(context: context, result: url);
+                      Navigator.of(context).pop(url);
                     } else {
-                      popScreen(context: context, result: null);
+                      Navigator.of(context).pop(null);
                     }
                   }
 
                   void onDeny() {
-                    popScreen(context: context, result: null);
+                    Navigator.of(context).pop(null);
                   }
 
                   return EzAlertDialog(
@@ -189,7 +190,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           );
 
-          popScreen(context: context, result: changed);
+          Navigator.of(context).pop(changed);
         },
         label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
@@ -202,9 +203,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           _cleanup();
           EzConfig.remove(widget.configKey);
 
-          popScreen(
-            context: context,
-            result: EzConfig.getDefault(widget.configKey) ?? noImageValue,
+          Navigator.of(context).pop(
+            EzConfig.getDefault(widget.configKey) ?? noImageValue,
           );
         },
         label: Text(l10n.isResetIt),
@@ -220,8 +220,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () {
             _cleanup();
             EzConfig.setString(widget.configKey, noImageValue);
-
-            popScreen(context: context, result: noImageValue);
+            Navigator.of(context).pop(noImageValue);
           },
           label: Text(l10n.isClearIt),
           icon: Icon(PlatformIcons(context).clear),

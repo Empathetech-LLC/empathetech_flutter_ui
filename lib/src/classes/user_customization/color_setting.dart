@@ -13,12 +13,13 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color.value] will be updated
   final String configKey;
 
-  /// Optional callback for when the configKey is removed, if it is part of a dynamic set/list
+  /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
   final void Function()? onRemove;
 
   /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
-  /// When [configKey] text ("on") colors, the base color will be used to generate a recommendation via [getTextColor]
+  /// When [configKey] is a text ("on") color, the base color will be used to generate a recommendation via [getTextColor]
+  /// [EzColorSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
   const EzColorSetting({
     super.key,
     required this.configKey,
@@ -64,9 +65,9 @@ class _ColorSettingState extends State<EzColorSetting> {
         // Update the user's configKey
         EzConfig.setInt(widget.configKey, currColor.value);
 
-        popScreen(context: context, result: currColor.value);
+        Navigator.of(context).pop(currColor.value);
       },
-      onDeny: () => popScreen(context: context),
+      onDeny: () => Navigator.of(context).pop(),
     );
   }
 
@@ -104,12 +105,12 @@ class _ColorSettingState extends State<EzColorSetting> {
           currColor = Color(recommended);
         });
 
-        popScreen(context: context, result: recommended);
+        Navigator.of(context).pop(recommended);
       }
 
       void onDeny() async {
         final dynamic chosen = await openColorPicker(context);
-        popScreen(context: context, result: chosen);
+        Navigator.of(context).pop(chosen);
       }
 
       return showPlatformDialog(
@@ -153,7 +154,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     }
   }
 
-  /// Opens an [EzAlertDialog] for reconfigKey [widget.configKey] to default
+  /// Opens an [EzAlertDialog] for resetting the [widget.configKey] to default
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset(BuildContext context) {
@@ -173,10 +174,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           currColor = resetColor;
         });
 
-        popScreen(context: context, result: resetColor);
+        Navigator.of(context).pop(resetColor);
       }
 
-      void onDeny() => popScreen(context: context);
+      void onDeny() => Navigator.of(context).pop();
 
       return showPlatformDialog(
         context: context,
@@ -244,7 +245,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ElevatedButton.icon(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
-                    popScreen(context: context, result: resetResponse);
+                    Navigator.of(context).pop(resetResponse);
                   },
                   icon: Icon(PlatformIcons(context).refresh),
                   label: Text(l10n.csReset),

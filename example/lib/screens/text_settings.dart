@@ -630,7 +630,7 @@ class _TextSettingsState extends State<TextSettings> {
                 setState(() {
                   editing = TextSettingType.display;
                 });
-                popScreen(context: context, result: true);
+                Navigator.of(context).pop(true);
               },
             ),
             spacer,

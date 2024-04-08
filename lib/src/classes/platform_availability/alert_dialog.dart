@@ -13,7 +13,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   @override
   // ignore: overridden_fields
   final Widget? title;
-  // vscode is convinced that title is a String? otherwise... the future giveth and the future taketh away
+  // vscode is convinced that title is a String? The future giveth and the future taketh away
 
   /// Optional [content] override
   /// Wraps [contents] in an [EzScrollView]
@@ -53,7 +53,7 @@ class EzAlertDialog extends PlatformAlertDialog {
     final double spacing = EzConfig.get(spacingKey);
 
     final CupertinoDialogAction closeAction = CupertinoDialogAction(
-      onPressed: () => popScreen(context: context),
+      onPressed: () => Navigator.of(context).pop(),
       child: Text(EFUILang.of(context)!.gClose),
     );
 

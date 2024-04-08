@@ -32,6 +32,7 @@ class EzResetButton extends StatelessWidget {
 
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
+  /// [EzResetButton] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
   const EzResetButton({
     super.key,
     this.label,
@@ -48,10 +49,10 @@ class EzResetButton extends StatelessWidget {
     final void Function() confirm = onConfirm ??
         () {
           EzConfig.removeKeys(allKeys.keys.toSet());
-          popScreen(context: context, result: true);
+          Navigator.of(context).pop(true);
         };
 
-    final void Function() deny = onDeny ?? () => popScreen(context: context);
+    final void Function() deny = onDeny ?? () => Navigator.of(context).pop();
 
     // Define the dialog //
 

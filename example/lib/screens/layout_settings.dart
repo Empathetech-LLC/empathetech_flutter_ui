@@ -80,7 +80,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
               dialogTitle: l10n.lsResetAll,
               onConfirm: () {
                 EzConfig.removeKeys(layoutKeys.keys.toSet());
-                popScreen(context: context, result: true);
+                Navigator.of(context).pop(true);
               },
             ),
             spacer,

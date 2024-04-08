@@ -103,7 +103,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         setState(() {
           currList = List<String>.from(defaultList);
         });
-        popScreen(context: context, result: true);
+        Navigator.of(context).pop(true);
       },
     ),
   ];
@@ -135,7 +135,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   currList.remove(key);
                 });
                 EzConfig.setStringList(userColorsKey, currList);
-                popScreen(context: context);
+                Navigator.of(context).pop();
               }),
           spacer,
         ]);

@@ -50,7 +50,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
       dialogTitle: l10n.isResetAll(themeProfile),
       onConfirm: () {
         EzConfig.removeKeys(imageKeys.keys.toSet());
-        popScreen(context: context, result: true);
+        Navigator.of(context).pop(true);
       },
     ),
   ];
