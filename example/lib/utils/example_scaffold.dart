@@ -43,7 +43,6 @@ class ExampleScaffold extends StatelessWidget {
 
           // Leading (aka left)
           leading: isLefty ? feedback : null,
-          automaticallyImplyLeading: !isLefty,
           leadingWidth: toolbarHeight,
 
           // Title
