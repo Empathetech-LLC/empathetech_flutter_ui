@@ -31,6 +31,7 @@ export 'src/classes/responsive_design/transitions.dart';
 // Screen reader support
 export 'src/classes/screen_reader_support/image.dart';
 export 'src/classes/screen_reader_support/inline_link.dart';
+export 'src/classes/screen_reader_support/link_image_provider.dart';
 export 'src/classes/screen_reader_support/link_image.dart';
 export 'src/classes/screen_reader_support/link.dart';
 export 'src/classes/screen_reader_support/new_line.dart';

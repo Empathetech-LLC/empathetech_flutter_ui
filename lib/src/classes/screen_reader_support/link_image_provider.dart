@@ -6,8 +6,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EzLinkImage extends StatefulWidget {
-  final Widget image;
+class EzLinkImageProvider extends StatefulWidget {
+  final ImageProvider<Object> image;
 
   /// Message for screen readers
   final String semanticLabel;
@@ -21,16 +21,33 @@ class EzLinkImage extends StatefulWidget {
   /// Destination URL
   final Uri? url;
 
-  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImage]
+  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImageProvider]
   final List<BoxShadow>? shadows;
 
-  /// [Image] wrapper that either opens an internal link via [onTap]
+  final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
+  final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
+  final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final Animation<double>? opacity;
+  final BlendMode? colorBlendMode;
+  final BoxFit? fit;
+  final AlignmentGeometry alignment;
+  final ImageRepeat repeat;
+  final Rect? centerSlice;
+  final bool matchTextDirection;
+  final bool gaplessPlayback;
+  final bool isAntiAlias;
+  final FilterQuality filterQuality;
+
+  /// [ImageProvider] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Requires [semanticLabel] for screen readers
   /// Automatically draws a [BoxShadow] which mimics button hover based on...
   /// https://m3.material.io/foundations/interaction/states/state-layers
   /// The [shadows] can be overridden
-  const EzLinkImage({
+  const EzLinkImageProvider({
     super.key,
     required this.image,
     required this.semanticLabel,
@@ -38,14 +55,30 @@ class EzLinkImage extends StatefulWidget {
     this.onTap,
     this.url,
     this.shadows,
+    this.frameBuilder,
+    this.loadingBuilder,
+    this.errorBuilder,
+    this.width,
+    this.height,
+    this.color,
+    this.opacity,
+    this.colorBlendMode,
+    this.fit,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
+    this.centerSlice,
+    this.matchTextDirection = false,
+    this.gaplessPlayback = false,
+    this.isAntiAlias = false,
+    this.filterQuality = FilterQuality.low,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
   @override
-  State<EzLinkImage> createState() => _EzLinkImageState();
+  State<EzLinkImageProvider> createState() => _EzLinkImageProviderState();
 }
 
-class _EzLinkImageState extends State<EzLinkImage> {
+class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
   // Gather the theme data //
 
   bool _shadow = false;
@@ -90,7 +123,25 @@ class _EzLinkImageState extends State<EzLinkImage> {
                   decoration: BoxDecoration(
                     boxShadow: _shadow ? _shadows : <BoxShadow>[],
                   ),
-                  child: widget.image,
+                  child: Image(
+                    image: widget.image,
+                    frameBuilder: widget.frameBuilder,
+                    loadingBuilder: widget.loadingBuilder,
+                    errorBuilder: widget.errorBuilder,
+                    width: widget.width,
+                    height: widget.height,
+                    color: widget.color,
+                    opacity: widget.opacity,
+                    colorBlendMode: widget.colorBlendMode,
+                    fit: widget.fit,
+                    alignment: widget.alignment,
+                    repeat: widget.repeat,
+                    centerSlice: widget.centerSlice,
+                    matchTextDirection: widget.matchTextDirection,
+                    gaplessPlayback: widget.gaplessPlayback,
+                    isAntiAlias: widget.isAntiAlias,
+                    filterQuality: widget.filterQuality,
+                  ),
                 ),
               ),
             ),

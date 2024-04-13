@@ -5,9 +5,12 @@ All notable changes to this project will be documented in this file.
 ## [6.1.0] - 2024-04-XX
 ### Updated
 - Comments
+- README links
 
 ### Added
 - More TextStyle params
+- Split EzLinkImage 2.0
+  - Existing is now EzLinkImageProvider
 
 ### Removed
 - navigators.dart
