@@ -58,8 +58,8 @@ Here are some (unaffiliated) videos you might also find helpful.
 ## TL;DR
 
 --- Required ---
-1. Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in `void main()`
-2. Use [EzAppProvider](./lib/src/classes/platform-availability/EzAppProvider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/themeData.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
+1. Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
+2. Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/theme_data.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
 
 <br>--- Recommended ---
 3. Copy the [settings sandbox](./example/lib/screens/) to your project
@@ -69,7 +69,7 @@ Here are some (unaffiliated) videos you might also find helpful.
 
 ### Step 1
 
-#### Initialize [EzConfig](./lib/src/classes/user-customization/EzConfig.dart) in `void main()`
+#### Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
 
 ```Dart
 void main() async {
@@ -105,7 +105,7 @@ Once gathered, `EzConfig` stores the data in a Singleton instance for efficient 
 
 ### Step 2
 
-#### Use [EzAppProvider](./lib/src/classes/platform-availability/EzAppProvider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+#### Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class YourApp extends StatelessWidget {
@@ -145,7 +145,7 @@ class YourApp extends StatelessWidget {
 
 #### How it works
 
-`EzAppProvider` is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformProvider-class.html) wrapper that uses [ezThemeData](./lib/src/functions/themeData.dart) by default.
+`EzAppProvider` is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformProvider-class.html) wrapper that uses [ezThemeData](./lib/src/functions/theme_data.dart) by default.
 
 `ezThemeData` sets up the dynamic color scheme and text theme, and updates some touch points to be higher contrast by default.
 
@@ -228,16 +228,16 @@ And boom!
 
 The example app's screens neatly organize all the custom Widgets that enable EFUI's user customization!
 
-* [EzDominantHandSwitch](./lib/src/classes/user-customization/EzDominantHandSwitch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzThemeModeSwitch](./lib/src/classes/user-customization/EzThemeModeSwitch.dart): A toggle for switching between light, dark, and system theme.
-* [EzLocaleSetting](./lib/src/classes/user-customization/EzLocaleSetting.dart): A menu for updating the app's language.
+* [EzDominantHandSwitch](./lib/src/classes/user_customization/dominant_hand_switch.dart): A toggle for switching common touch points to benefit lefties.
+* [EzThemeModeSwitch](./lib/src/classes/user_customization/theme_mode_swtich.dart): A toggle for switching between light, dark, and system theme.
+* [EzLocaleSetting](./lib/src/classes/user_customization/local_setting.dart): A menu for updating the app's language.
 * [TextSettings](./lib/src/classes/user_customization/text_style/): A collection of custom Widgets for controlling an app's TextStyles
-* [EzLayoutSetting](./lib/src/classes/user-customization/EzLayoutSetting.dart): A dynamic slider Widget, with live preview(s), for updating the themes layout (margin, padding, and spacing).
-* [EzColorSetting](./lib/src/classes/user-customization/EzColorSetting.dart): A color picker for updating each entry in an app's ColorScheme.
-* [EzImageSetting](./lib/src/classes/user-customization/EzImageSetting.dart): An image uploader for updating app assets.
-* [EzResetButton](./lib/src/classes/user-customization/EzResetButton.dart): A customizable button for resetting groups of preferences.
+* [EzLayoutSetting](./lib/src/classes/user_customization/layout_setting.dart): A dynamic slider Widget, with live preview(s), for updating the themes layout (margin, padding, and spacing).
+* [EzColorSetting](./lib/src/classes/user_customization/color_setting.dart): A color picker for updating each entry in an app's ColorScheme.
+* [EzImageSetting](./lib/src/classes/user_customization/image_setting.dart): An image uploader for updating app assets.
+* [EzResetButton](./lib/src/classes/user_customization/reset_button.dart): A customizable button for resetting groups of preferences.
 
-By default, every base [theme setting](./lib/src/consts/EzConfigKeys.dart) is exposed. Additional keys provided to `customDefaults` can be updated with these Widgets as well!
+By default, every base [theme setting](./lib/src/consts/config_keys.dart) is exposed. Additional keys provided to `customDefaults` can be updated with these Widgets as well!
 
 If there are any theme values you wish to stay constant, simply remove the paired setting Widget(s).
 
@@ -250,8 +250,8 @@ The pillars of **platform availability** and **user customization** are "set it 
 But, as you grow your apps, the other pillars require continuous development.
 
 Thankfully, EFUI's got you covered there too!
-* [Responsive design](./lib/src/classes/responsive-design/): Widgets that aid in building responsive UI/UXs
-* [Screen reader support](./lib/src/classes/accessibility/): Widgets with streamlined semantics
+* [Responsive design](./lib/src/classes/responsive_design/): Widgets that aid in building responsive UI/UXs
+* [Screen reader support](./lib/src/classes/screen_reader_support/): Widgets with streamlined semantics
 
 But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
 
