@@ -44,7 +44,7 @@ class ExampleScaffold extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
         tooltip: 'Options menu',
       ),
-      menuChildren: const <Widget>[FeedbackButton()],
+      menuChildren: const <Widget>[FeedbackButton(), RepoButton()],
     );
 
     // Return the build //
