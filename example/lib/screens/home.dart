@@ -1,5 +1,5 @@
 import './screens.dart';
-import '../utils/utils.dart';
+import '../widgets/widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
