@@ -146,6 +146,17 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
   }
 
+  /// Return the user's selected [ThemeMode]
+  static ThemeMode getThemeMode() {
+    final bool? isDarkTheme = _instance!.prefs[isDarkThemeKey];
+
+    if (isDarkTheme == null) {
+      return ThemeMode.system;
+    } else {
+      return isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+    }
+  }
+
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static bool? getBool(String key) {
