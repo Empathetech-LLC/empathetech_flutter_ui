@@ -52,6 +52,7 @@ void main() async {
       bottomSheetTextInputStyle: lightFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.grey,
+      colorScheme: const ColorScheme.light(primary: empathGoldenrod),
     ),
     darkTheme: FeedbackThemeData(
       background: Colors.grey,
@@ -61,7 +62,15 @@ void main() async {
       bottomSheetTextInputStyle: darkFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.grey,
+      colorScheme: const ColorScheme.dark(primary: empathGoldenrod),
     ),
+    themeMode: EzConfig.getThemeMode(),
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+      const LocaleNamesLocalizationsDelegate(),
+      ...EFUILang.localizationsDelegates,
+      OpenUIFeedbackLocalizationsDelegate(),
+    ],
+    localeOverride: EzConfig.getLocale(),
     child: const EFUIExample(),
   ));
 }
@@ -118,9 +127,10 @@ class EFUIExample extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>{
-          LocaleNamesLocalizationsDelegate(),
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+          const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
+          OpenUIFeedbackLocalizationsDelegate(),
         },
 
         // Supported languages
