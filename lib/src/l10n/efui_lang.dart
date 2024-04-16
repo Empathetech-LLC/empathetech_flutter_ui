@@ -136,6 +136,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gGiveFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Give feedback'**
+  String get gGiveFeedback;
+
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:

@@ -26,6 +26,9 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
+  String get gGiveFeedback => 'Give feedback';
+
+  @override
   String get gLeft => 'Left';
 
   @override
