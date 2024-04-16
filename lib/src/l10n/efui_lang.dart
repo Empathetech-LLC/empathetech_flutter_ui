@@ -136,6 +136,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gBYO.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your own'**
+  String get gBYO;
+
   /// No description provided for @gGiveFeedback.
   ///
   /// In en, this message translates to:
