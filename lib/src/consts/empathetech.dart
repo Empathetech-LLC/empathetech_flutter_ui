@@ -92,6 +92,11 @@ const String empathMastodon = 'https://mastodon.social/@empathetech';
 /// https://github.com/Empathetech-LLC
 const String empathGitHub = 'https://github.com/Empathetech-LLC';
 
+/// EFUI source
+/// https://github.com/Empathetech-LLC/empathetech_flutter_ui
+const String efuiGitHub =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui';
+
 /// One of us, one of us, one of us!
 /// https://stats.foldingathome.org/team/1063265
 const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
