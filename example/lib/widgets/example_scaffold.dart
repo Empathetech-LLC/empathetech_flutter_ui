@@ -32,7 +32,7 @@ class ExampleScaffold extends StatelessWidget {
 
     // Define custom widgets //
 
-    final MenuAnchor options = MenuAnchor(
+    late final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () {
           if (controller.isOpen) {
@@ -44,7 +44,10 @@ class ExampleScaffold extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
         tooltip: 'Options menu',
       ),
-      menuChildren: const <Widget>[FeedbackButton(), RepoButton()],
+      menuChildren: <Widget>[
+        FeedbackButton(parentContext: context),
+        const RepoButton()
+      ],
     );
 
     // Return the build //

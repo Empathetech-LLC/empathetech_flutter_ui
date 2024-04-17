@@ -3,13 +3,15 @@ import 'package:feedback/feedback.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FeedbackButton extends StatelessWidget {
-  const FeedbackButton({super.key});
+  final BuildContext parentContext;
+
+  const FeedbackButton({super.key, required this.parentContext});
 
   @override
   Widget build(BuildContext context) {
     return MenuItemButton(
       onPressed: () {
-        BetterFeedback.of(context).show((UserFeedback feedback) {
+        BetterFeedback.of(parentContext).show((UserFeedback feedback) {
           // Do something with the feedback
         });
       },
