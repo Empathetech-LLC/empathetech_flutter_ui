@@ -33,7 +33,6 @@ class FeedbackButton extends StatelessWidget {
             subject: 'Open UI feedback',
             text: feedback.text,
           ).then((_) async {
-            await Future<void>.delayed(const Duration(milliseconds: 500));
             scaffoldMessengerKey.currentState?.showMaterialBanner(
               MaterialBanner(
                 content: const Text(
@@ -45,6 +44,7 @@ class FeedbackButton extends StatelessWidget {
                     icon: const Icon(Icons.close_outlined),
                     onPressed: () => scaffoldMessengerKey.currentState
                         ?.hideCurrentMaterialBanner(),
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ],
               ),
