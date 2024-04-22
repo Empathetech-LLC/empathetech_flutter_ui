@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             spacer,
 
             const EzThemeModeSwitch(),
-            separator,
+            spacer,
 
             const EzLocaleSetting(),
             spacer,
