@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -18,6 +20,19 @@ class FeedbackButton extends StatelessWidget {
     return MenuItemButton(
       onPressed: () {
         BetterFeedback.of(parentContext).show((UserFeedback feedback) async {
+          if (kIsWeb) {
+            final Uri mailtoUri = Uri(
+              scheme: 'mailto',
+              path: empathSupport,
+              queryParameters: <String, dynamic>{
+                'subject': 'Open UI feedback',
+                'body': feedback.text,
+              },
+            );
+            await launchUrl(mailtoUri);
+            return;
+          }
+
           late final String screenshotPath;
           try {
             screenshotPath = await writeImageToStorage(feedback.screenshot);
