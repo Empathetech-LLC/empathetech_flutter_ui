@@ -32,6 +32,10 @@ class EFUILangEs extends EFUILang {
   String get gGiveFeedback => 'Dar comentarios';
 
   @override
+  String get gCopiedEmail =>
+      'Correo electrónico de soporte copiado al portapapeles';
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override

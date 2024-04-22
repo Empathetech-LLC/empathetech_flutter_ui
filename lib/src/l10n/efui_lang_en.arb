@@ -10,8 +10,10 @@
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
+
   "gBYO": "Build your own",
   "gGiveFeedback": "Give feedback",
+  "gCopiedEmail": "Support email copied to clipboard",
 
   "gLeft": "Left",
   "gRight": "Right",

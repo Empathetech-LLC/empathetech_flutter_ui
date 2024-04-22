@@ -148,6 +148,12 @@ abstract class EFUILang {
   /// **'Give feedback'**
   String get gGiveFeedback;
 
+  /// No description provided for @gCopiedEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Support email copied to clipboard'**
+  String get gCopiedEmail;
+
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:

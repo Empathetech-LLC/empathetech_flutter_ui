@@ -32,6 +32,9 @@ class EFUILangEn extends EFUILang {
   String get gGiveFeedback => 'Give feedback';
 
   @override
+  String get gCopiedEmail => 'Support email copied to clipboard';
+
+  @override
   String get gLeft => 'Left';
 
   @override

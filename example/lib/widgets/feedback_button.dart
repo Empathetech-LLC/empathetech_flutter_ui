@@ -35,8 +35,8 @@ class FeedbackButton extends StatelessWidget {
           ).then((_) async {
             scaffoldMessengerKey.currentState?.showMaterialBanner(
               MaterialBanner(
-                content: const Text(
-                  'Support email copied to clipboard',
+                content: Text(
+                  EFUILang.of(context)!.gCopiedEmail,
                   textAlign: TextAlign.center,
                 ),
                 actions: <Widget>[
