@@ -78,13 +78,10 @@ class ExampleScaffold extends StatelessWidget {
     );
 
     return SelectionArea(
-      child: ScaffoldMessenger(
-        key: scaffoldMessengerKey,
-        child: EzSwapScaffold(
-          small: theBuild,
-          large: theBuild,
-          threshold: smallBreakpoint,
-        ),
+      child: EzSwapScaffold(
+        small: theBuild,
+        large: theBuild,
+        threshold: smallBreakpoint,
       ),
     );
   }
