@@ -18,11 +18,11 @@ ThemeData ezThemeData(Brightness brightness) {
   final TextTheme textTheme = ezTextTheme();
 
   final IconThemeData iconData = IconThemeData(
-    size: textTheme.bodyLarge!.fontSize,
+    size: textTheme.bodyLarge?.fontSize,
     color: colorScheme.onSurface,
   );
   final IconThemeData appBarIconData = IconThemeData(
-    size: textTheme.headlineLarge!.fontSize,
+    size: textTheme.headlineLarge?.fontSize,
     color: colorScheme.onSurface,
   );
 
@@ -124,7 +124,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        iconSize: textTheme.bodyLarge!.fontSize,
+        iconSize: textTheme.bodyLarge?.fontSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
