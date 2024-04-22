@@ -223,8 +223,8 @@ const Map<String, dynamic> empathetechConfig = <String, dynamic>{
 
   // Layout settings //
 
-  marginKey: 20.0, // required key
-  paddingKey: 20.0, // required key
+  marginKey: 10.0, // required key
+  paddingKey: 15.0, // required key
   spacingKey: 20.0, // required key
 };
 
