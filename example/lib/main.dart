@@ -1,5 +1,6 @@
 import 'screens/screens.dart';
 import 'utils/utils.dart';
+import 'widgets/widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -122,25 +123,28 @@ class EFUIExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
-      app: PlatformApp.router(
-        // Production ready!
-        debugShowCheckedModeBanner: false,
+      app: ScaffoldMessenger(
+        key: scaffoldMessengerKey,
+        child: PlatformApp.router(
+          // Production ready!
+          debugShowCheckedModeBanner: false,
 
-        // Language handlers
-        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
-          const LocaleNamesLocalizationsDelegate(),
-          ...EFUILang.localizationsDelegates,
-          OpenUIFeedbackLocalizationsDelegate(),
-        },
+          // Language handlers
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+            const LocaleNamesLocalizationsDelegate(),
+            ...EFUILang.localizationsDelegates,
+            OpenUIFeedbackLocalizationsDelegate(),
+          },
 
-        // Supported languages
-        supportedLocales: EFUILang.supportedLocales,
+          // Supported languages
+          supportedLocales: EFUILang.supportedLocales,
 
-        // Current language
-        locale: EzConfig.getLocale(),
+          // Current language
+          locale: EzConfig.getLocale(),
 
-        title: appTitle,
-        routerConfig: _router,
+          title: appTitle,
+          routerConfig: _router,
+        ),
       ),
     );
   }
