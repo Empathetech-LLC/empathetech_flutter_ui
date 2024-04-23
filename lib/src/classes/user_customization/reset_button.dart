@@ -73,11 +73,17 @@ class EzResetButton extends StatelessWidget {
               confirm();
               Navigator.of(dialogContext).pop();
             },
-            onDeny: deny,
+            onDeny: () {
+              deny();
+              Navigator.of(dialogContext).pop();
+            },
           ),
           cupertinoActions: ezCupertinoActions(
             context: context,
-            onConfirm: confirm,
+            onConfirm: () {
+              confirm();
+              Navigator.of(dialogContext).pop();
+            },
             onDeny: () {
               deny();
               Navigator.of(dialogContext).pop();
