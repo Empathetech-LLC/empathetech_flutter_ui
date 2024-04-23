@@ -103,7 +103,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
         setState(() {
           currList = List<String>.from(defaultList);
         });
-        Navigator.of(context).pop(true);
       },
     ),
   ];
