@@ -66,39 +66,41 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
     final List<Widget> buttons = <Widget>[];
 
-    for (final Locale locale in locales) {
-      final List<String> localeData = <String>[locale.languageCode];
-      if (locale.countryCode != null) localeData.add(locale.countryCode!);
-
-      buttons.addAll(<Widget>[
-        ElevatedButton.icon(
-          onPressed: () {
-            EzConfig.setStringList(localeKey, localeData);
-            setState(() {
-              currLocale = locale;
-            });
-            Navigator.of(context).pop(locale);
-          },
-          icon: _flag(locale),
-          label: Text(
-            LocaleNames.of(context)!.nameOf(locale.languageCode)!,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        spacer,
-      ]);
-    }
-
     return showPlatformDialog(
       context: context,
-      builder: (BuildContext context) => EzAlertDialog(
-        title: Text(
-          l10n.ssLanguages,
-          textAlign: TextAlign.center,
-        ),
-        // Remove the trailing button spacer
-        contents: buttons.sublist(0, buttons.length - 1),
-      ),
+      builder: (BuildContext dialogContext) {
+        for (final Locale locale in locales) {
+          final List<String> localeData = <String>[locale.languageCode];
+          if (locale.countryCode != null) localeData.add(locale.countryCode!);
+
+          buttons.addAll(<Widget>[
+            ElevatedButton.icon(
+              onPressed: () {
+                EzConfig.setStringList(localeKey, localeData);
+                setState(() {
+                  currLocale = locale;
+                });
+                Navigator.of(dialogContext).pop(locale);
+              },
+              icon: _flag(locale),
+              label: Text(
+                LocaleNames.of(context)!.nameOf(locale.languageCode)!,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            spacer,
+          ]);
+        }
+
+        return EzAlertDialog(
+          title: Text(
+            l10n.ssLanguages,
+            textAlign: TextAlign.center,
+          ),
+          // Remove the trailing button spacer
+          contents: buttons.sublist(0, buttons.length - 1),
+        );
+      },
     );
   }
 

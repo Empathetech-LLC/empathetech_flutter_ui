@@ -166,54 +166,56 @@ class _ColorSettingState extends State<EzColorSetting> {
     } else {
       final Color resetColor = Color(resetValue);
 
-      void onConfirm() {
-        // Remove the user's configKey and reset the current state
-        EzConfig.remove(widget.configKey);
-
-        setState(() {
-          currColor = resetColor;
-        });
-
-        Navigator.of(context).pop(resetColor);
-      }
-
-      void onDeny() => Navigator.of(context).pop();
-
       return showPlatformDialog(
         context: context,
-        builder: (BuildContext context) => EzAlertDialog(
-          title: Text(
-            l10n.csResetTo,
-            textAlign: TextAlign.center,
-          ),
-          // Reset color preview
-          contents: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: getTextColor(resetColor)),
-              ),
-              child: CircleAvatar(
-                backgroundColor: resetColor,
-                radius: padding * 2,
-                child: currColor == Colors.transparent
-                    ? Icon(PlatformIcons(context).eyeSlash)
-                    : null,
-              ),
+        builder: (BuildContext dialogContext) {
+          void onConfirm() {
+            // Remove the user's configKey and reset the current state
+            EzConfig.remove(widget.configKey);
+
+            setState(() {
+              currColor = resetColor;
+            });
+
+            Navigator.of(dialogContext).pop(resetColor);
+          }
+
+          void onDeny() => Navigator.of(dialogContext).pop();
+
+          return EzAlertDialog(
+            title: Text(
+              l10n.csResetTo,
+              textAlign: TextAlign.center,
             ),
-          ],
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-          ),
-          needsClose: false,
-        ),
+            // Reset color preview
+            contents: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: getTextColor(resetColor)),
+                ),
+                child: CircleAvatar(
+                  backgroundColor: resetColor,
+                  radius: padding * 2,
+                  child: currColor == Colors.transparent
+                      ? Icon(PlatformIcons(context).eyeSlash)
+                      : null,
+                ),
+              ),
+            ],
+            materialActions: ezMaterialActions(
+              context: context,
+              onConfirm: onConfirm,
+              onDeny: onDeny,
+            ),
+            cupertinoActions: ezCupertinoActions(
+              context: context,
+              onConfirm: onConfirm,
+              onDeny: onDeny,
+            ),
+            needsClose: false,
+          );
+        },
       );
     }
   }
