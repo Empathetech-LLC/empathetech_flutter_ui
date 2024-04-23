@@ -134,7 +134,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
                   currList.remove(key);
                 });
                 EzConfig.setStringList(userColorsKey, currList);
-                Navigator.of(context).pop();
               }),
           spacer,
         ]);
