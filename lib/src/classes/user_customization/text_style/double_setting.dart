@@ -129,6 +129,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               },
               style: style,
               textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.bottom,
             ),
           ),
           EzSpacer(padding / 5),
