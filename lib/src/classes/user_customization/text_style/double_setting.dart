@@ -16,7 +16,18 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// Use this to live update the [TextStyle] on your UI
   final void Function(double) notifierCallback;
 
+  final IconData icon;
+
   final String tooltip;
+
+  /// Optionally include plus/minus buttons surrounding the [PlatformTextFormField]
+  /// Increments/decrements based on [delta]
+  /// Defaults to [false]
+  final bool plusMinus;
+
+  /// Only relevant if [plusMinus] is [true]
+  /// Defaults to 1.0
+  final double delta;
 
   final TextStyle? style;
 
@@ -31,8 +42,11 @@ class EzFontDoubleSetting extends StatefulWidget {
     required this.configKey,
     required this.min,
     required this.max,
-    required this.tooltip,
     required this.notifierCallback,
+    required this.icon,
+    required this.tooltip,
+    this.plusMinus = false,
+    this.delta = 1.0,
     this.style,
     this.sizingString,
   });
@@ -45,64 +59,120 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
   late double currValue = EzConfig.get(widget.configKey);
+  late final TextEditingController controller = TextEditingController(
+    text: currValue.toString(),
+  );
 
   late final double padding = EzConfig.get(paddingKey);
   late final double lineHeight = EzConfig.get(bodyFontHeightKey) ?? 1.5;
+
+  late final EzSpacer pMSpacer = EzSpacer.row(padding / 4);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextStyle? style = widget.style ??
+      Theme.of(context)
+          .textTheme
+          .bodyLarge
+          ?.copyWith(color: Theme.of(context).colorScheme.onBackground);
+
+  late final Size sizeLimit = measureText(
+    widget.sizingString ?? widget.max.toString(),
+    style: style,
+    context: context,
+  );
+
+  late final double formFieldWidth = sizeLimit.width + padding;
+  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? style = widget.style ??
-        Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(color: Theme.of(context).colorScheme.onBackground);
-
-    final Size sizeLimit = measureText(
-      widget.sizingString ?? widget.max.toString(),
-      style: style,
-      context: context,
-    );
-
-    return Tooltip(
+    final Widget core = Tooltip(
       message: widget.tooltip,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: sizeLimit.width + padding,
-          maxHeight: sizeLimit.height * lineHeight + padding,
-        ),
-        child: PlatformTextFormField(
-          keyboardType: TextInputType.number,
-          initialValue: currValue.toString(),
-          onChanged: (String stringVal) {
-            final double? doubleVal = double.tryParse(stringVal);
-            if (doubleVal == null) return;
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: formFieldWidth,
+              maxHeight: formFieldHeight,
+            ),
+            child: PlatformTextFormField(
+              controller: controller,
+              keyboardType: TextInputType.number,
+              onChanged: (String stringVal) {
+                final double? doubleVal = double.tryParse(stringVal);
+                if (doubleVal == null) return;
 
-            setState(() {
-              currValue = doubleVal;
-              widget.notifierCallback(doubleVal);
-            });
-            EzConfig.setDouble(widget.configKey, doubleVal);
-          },
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (String? value) {
-            if (value == null) return null;
+                setState(() {
+                  currValue = doubleVal;
+                  widget.notifierCallback(doubleVal);
+                });
+                EzConfig.setDouble(widget.configKey, doubleVal);
+              },
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (String? value) {
+                if (value == null) return null;
 
-            final double? doubleVale = double.tryParse(value);
+                final double? doubleVale = double.tryParse(value);
 
-            if (doubleVale == null ||
-                doubleVale < widget.min ||
-                doubleVale > widget.max) {
-              return '${widget.min}-${widget.max}';
-            }
+                if (doubleVale == null ||
+                    doubleVale < widget.min ||
+                    doubleVale > widget.max) {
+                  return '${widget.min}-${widget.max}';
+                }
 
-            return null;
-          },
-          style: style,
-          textAlign: TextAlign.center,
-        ),
+                return null;
+              },
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          EzSpacer(padding / 5),
+          Icon(
+            widget.icon,
+            size: formFieldHeight / 4,
+          ),
+        ],
       ),
     );
+
+    return widget.plusMinus
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(PlatformIcons(context).remove),
+                onPressed: () {
+                  setState(() {
+                    currValue -= widget.delta;
+                    controller.text = currValue.toString();
+                    widget.notifierCallback(currValue);
+                  });
+                  EzConfig.setDouble(widget.configKey, currValue);
+                },
+                tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+              ),
+              pMSpacer,
+              core,
+              pMSpacer,
+              IconButton(
+                icon: Icon(PlatformIcons(context).add),
+                onPressed: () {
+                  setState(() {
+                    currValue += widget.delta;
+                    controller.text = currValue.toString();
+                    widget.notifierCallback(currValue);
+                  });
+                  EzConfig.setDouble(widget.configKey, currValue);
+                },
+                tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+              ),
+            ],
+          )
+        : core;
   }
 }
