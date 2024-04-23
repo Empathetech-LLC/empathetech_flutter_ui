@@ -48,10 +48,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
     // Local reset all
     EzResetButton(
       dialogTitle: l10n.isResetAll(themeProfile),
-      onConfirm: () {
-        EzConfig.removeKeys(imageKeys.keys.toSet());
-        Navigator.of(context).pop(true);
-      },
+      onConfirm: () => EzConfig.removeKeys(imageKeys.keys.toSet()),
     ),
   ];
 

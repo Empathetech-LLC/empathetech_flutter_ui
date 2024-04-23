@@ -78,10 +78,7 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             // Local reset all
             EzResetButton(
               dialogTitle: l10n.lsResetAll,
-              onConfirm: () {
-                EzConfig.removeKeys(layoutKeys.keys.toSet());
-                Navigator.of(context).pop(true);
-              },
+              onConfirm: () => EzConfig.removeKeys(layoutKeys.keys.toSet()),
             ),
             spacer,
           ],

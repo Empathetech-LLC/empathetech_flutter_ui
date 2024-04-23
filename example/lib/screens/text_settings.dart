@@ -655,7 +655,6 @@ class _TextSettingsState extends State<TextSettings> {
                 setState(() {
                   editing = TextSettingType.display;
                 });
-                Navigator.of(context).pop(true);
               },
             ),
             spacer,
