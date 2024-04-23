@@ -46,37 +46,49 @@ Future<dynamic> ezColorPicker({
 }) {
   return showPlatformDialog(
     context: context,
-    builder: (BuildContext context) => EzAlertDialog(
-      title: Text(
-        title ?? EFUILang.of(context)!.csPickerTitle,
-        textAlign: TextAlign.center,
-      ),
-      contents: <Widget>[
-        ColorPicker(
-          pickerColor: startColor,
-          onColorChanged: onColorChange,
-          portraitOnly: true,
+    builder: (BuildContext dialogContext) {
+      void confirm() {
+        onConfirm();
+        Navigator.of(dialogContext).pop();
+      }
 
-          // ignore: deprecated_member_use
-          labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+      void deny() {
+        onDeny();
+        Navigator.of(dialogContext).pop();
+      }
+
+      return EzAlertDialog(
+        title: Text(
+          title ?? EFUILang.of(context)!.csPickerTitle,
+          textAlign: TextAlign.center,
         ),
-      ],
-      materialActions: ezMaterialActions(
-        context: context,
-        onConfirm: onConfirm,
-        onDeny: onDeny,
-        confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-        denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-      ),
-      cupertinoActions: ezCupertinoActions(
-        context: context,
-        onConfirm: onConfirm,
-        onDeny: onDeny,
-        confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-        denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-        confirmIsDestructive: true,
-      ),
-      needsClose: false,
-    ),
+        contents: <Widget>[
+          ColorPicker(
+            pickerColor: startColor,
+            onColorChanged: onColorChange,
+            portraitOnly: true,
+
+            // ignore: deprecated_member_use
+            labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
+          ),
+        ],
+        materialActions: ezMaterialActions(
+          context: context,
+          onConfirm: confirm,
+          onDeny: deny,
+          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
+          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+        ),
+        cupertinoActions: ezCupertinoActions(
+          context: context,
+          onConfirm: confirm,
+          onDeny: deny,
+          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
+          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+          confirmIsDestructive: true,
+        ),
+        needsClose: false,
+      );
+    },
   );
 }
