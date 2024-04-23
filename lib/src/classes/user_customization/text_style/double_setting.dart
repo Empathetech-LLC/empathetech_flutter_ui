@@ -103,7 +103,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             child: PlatformTextFormField(
               controller: controller,
               keyboardType: TextInputType.number,
-              onChanged: (String stringVal) {
+              onFieldSubmitted: (String stringVal) {
                 final double? doubleVal = double.tryParse(stringVal);
                 if (doubleVal == null) return;
 
