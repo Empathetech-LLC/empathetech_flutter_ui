@@ -24,11 +24,11 @@ class EzResetButton extends StatelessWidget {
 
   /// What happens when the user choses to reset
   /// Defaults to clearing user [SharedPreferences]
-  /// DO NOT INCLUDE A POP FUNCTION
+  /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onConfirm;
 
   /// What happens when the user choses not to reset
-  /// DO NOT INCLUDE A POP FUNCTION
+  /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
