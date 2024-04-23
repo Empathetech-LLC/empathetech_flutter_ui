@@ -24,10 +24,11 @@ class EzResetButton extends StatelessWidget {
 
   /// What happens when the user choses to reset
   /// Defaults to clearing user [SharedPreferences]
+  /// DO NOT INCLUDE A POP FUNCTION
   final void Function()? onConfirm;
 
   /// What happens when the user choses not to reset
-  /// Defaults to [popScreen]
+  /// DO NOT INCLUDE A POP FUNCTION
   final void Function()? onDeny;
 
   /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
@@ -45,21 +46,17 @@ class EzResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Define the button functions //
+    final void Function() confirm =
+        onConfirm ?? () => EzConfig.removeKeys(allKeys.keys.toSet());
 
-    final void Function() confirm = onConfirm ??
-        () {
-          EzConfig.removeKeys(allKeys.keys.toSet());
-          Navigator.of(context).pop(true);
-        };
-
-    final void Function() deny = onDeny ?? () => Navigator.of(context).pop();
+    final void Function() deny = onDeny ?? () {};
 
     // Define the dialog //
 
     void resetDialog() {
       showPlatformDialog(
         context: context,
-        builder: (BuildContext context) => EzAlertDialog(
+        builder: (BuildContext dialogContext) => EzAlertDialog(
           title: Text(
             dialogTitle ?? EFUILang.of(context)!.ssResetAll,
             textAlign: TextAlign.center,
@@ -72,13 +69,19 @@ class EzResetButton extends StatelessWidget {
           ],
           materialActions: ezMaterialActions(
             context: context,
-            onConfirm: confirm,
+            onConfirm: () {
+              confirm();
+              Navigator.of(dialogContext).pop();
+            },
             onDeny: deny,
           ),
           cupertinoActions: ezCupertinoActions(
             context: context,
             onConfirm: confirm,
-            onDeny: deny,
+            onDeny: () {
+              deny();
+              Navigator.of(dialogContext).pop();
+            },
             confirmIsDestructive: true,
             denyIsDefault: true,
           ),
