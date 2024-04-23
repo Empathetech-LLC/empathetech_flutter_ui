@@ -177,6 +177,12 @@ class EFUILangEs extends EFUILang {
   String get tsLineHeight => 'Altura de línea';
 
   @override
+  String get tsDecrease => 'Disminuir';
+
+  @override
+  String get tsIncrease => 'Aumentar';
+
+  @override
   String get tsDisplayP1 => '¿Esto se ';
 
   @override

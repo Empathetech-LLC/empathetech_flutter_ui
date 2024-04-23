@@ -75,6 +75,8 @@
   "tsLetterSpacing": "Letter spacing",
   "tsWordSpacing": "Word spacing",
   "tsLineHeight": "Line height",
+  "tsDecrease": "Decrease",
+  "tsIncrease": "Increase",
 
   "tsDisplayP1": "Does this ",
   "tsDisplayLink": "display",
