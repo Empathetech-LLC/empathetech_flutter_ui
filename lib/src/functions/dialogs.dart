@@ -67,9 +67,6 @@ Future<dynamic> ezColorPicker({
             pickerColor: startColor,
             onColorChanged: onColorChange,
             portraitOnly: true,
-
-            // ignore: deprecated_member_use
-            labelTextStyle: Theme.of(context).dialogTheme.contentTextStyle,
           ),
         ],
         materialActions: ezMaterialActions(
