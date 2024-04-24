@@ -33,18 +33,17 @@ class FeedbackButton extends StatelessWidget {
             return;
           }
 
-          late final String screenshotPath;
+          late final XFile screenshot;
           try {
-            screenshotPath = await writeImageToStorage(feedback.screenshot);
+            screenshot = await saveImage(feedback.screenshot);
           } catch (_) {
             return;
           }
 
           await Clipboard.setData(const ClipboardData(text: empathSupport));
 
-          // ignore: deprecated_member_use
-          await Share.shareFiles(
-            <String>[screenshotPath],
+          await Share.shareXFiles(
+            <XFile>[screenshot],
             subject: 'Open UI feedback',
             text: feedback.text,
           ).then((_) async {
@@ -75,13 +74,9 @@ class FeedbackButton extends StatelessWidget {
     );
   }
 
-  /// Taken from the feedback example app
-  /// https://github.com/ueman/feedback/blob/master/feedback/example/lib/main.dart
-  Future<String> writeImageToStorage(Uint8List feedbackScreenshot) async {
+  Future<XFile> saveImage(Uint8List feedbackScreenshot) async {
     final Directory output = await getTemporaryDirectory();
     final String screenshotFilePath = '${output.path}/feedback.png';
-    final File screenshotFile = File(screenshotFilePath);
-    await screenshotFile.writeAsBytes(feedbackScreenshot);
-    return screenshotFilePath;
+    return XFile(screenshotFilePath);
   }
 }
