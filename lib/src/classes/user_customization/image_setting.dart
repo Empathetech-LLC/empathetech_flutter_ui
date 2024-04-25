@@ -158,7 +158,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     contents: <Widget>[
                       PlatformTextFormField(
-                        onChanged: (String value) {
+                        onFieldSubmitted: (String value) {
                           url = value;
                         },
                         hintText: 'https://example.com/image.jpg',
