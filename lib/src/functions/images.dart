@@ -45,7 +45,7 @@ Future<String?> changeImage({
     final File image = File('${directory.path}/$imageName');
 
     // Save the new image
-    File(picked.path).copy(image.path);
+    await File(picked.path).copy(image.path);
     EzConfig.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
