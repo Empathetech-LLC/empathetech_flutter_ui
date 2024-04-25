@@ -123,28 +123,26 @@ class EFUIExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
-      app: ScaffoldMessenger(
-        key: scaffoldMessengerKey,
-        child: PlatformApp.router(
-          // Production ready!
-          debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: scaffoldMessengerKey,
+      app: PlatformApp.router(
+        // Production ready!
+        debugShowCheckedModeBanner: false,
 
-          // Language handlers
-          localizationsDelegates: <LocalizationsDelegate<dynamic>>{
-            const LocaleNamesLocalizationsDelegate(),
-            ...EFUILang.localizationsDelegates,
-            OpenUIFeedbackLocalizationsDelegate(),
-          },
+        // Language handlers
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+          const LocaleNamesLocalizationsDelegate(),
+          ...EFUILang.localizationsDelegates,
+          OpenUIFeedbackLocalizationsDelegate(),
+        },
 
-          // Supported languages
-          supportedLocales: EFUILang.supportedLocales,
+        // Supported languages
+        supportedLocales: EFUILang.supportedLocales,
 
-          // Current language
-          locale: EzConfig.getLocale(),
+        // Current language
+        locale: EzConfig.getLocale(),
 
-          title: appTitle,
-          routerConfig: _router,
-        ),
+        title: appTitle,
+        routerConfig: _router,
       ),
     );
   }

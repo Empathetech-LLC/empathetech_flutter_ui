@@ -9,18 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
+  final Widget app;
+
+  /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
+  /// To enable [SnackBar]s, [MaterialBanner]s, etc.
+  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
+
   final TargetPlatform? initialPlatform;
   final PlatformSettingsData? settings;
-
-  /// Optionally provide a [PlatformApp] that will be wrapped in the Empathetech theme [builder]
-  final Widget app;
 
   /// [PlatformProvider] wrapper with [ezThemeData] defaults
   EzAppProvider({
     super.key,
+    this.scaffoldMessengerKey,
     required this.app,
-    this.settings,
     this.initialPlatform,
+    this.settings,
   });
 
   // Gather the theme data //
@@ -41,8 +45,11 @@ class EzAppProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformProvider(
-      builder: (BuildContext context) => PlatformTheme(
-        builder: (BuildContext context) => app,
+      builder: (_) => PlatformTheme(
+        builder: (_) => ScaffoldMessenger(
+          key: scaffoldMessengerKey,
+          child: app,
+        ),
         themeMode: _initialTheme,
         materialLightTheme: _materialLight,
         materialDarkTheme: _materialDark,
