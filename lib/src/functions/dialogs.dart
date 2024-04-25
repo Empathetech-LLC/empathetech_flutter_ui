@@ -67,6 +67,7 @@ Future<dynamic> ezColorPicker({
             pickerColor: startColor,
             onColorChanged: onColorChange,
             portraitOnly: true,
+            paletteType: PaletteType.hueWheel,
           ),
         ],
         materialActions: ezMaterialActions(
