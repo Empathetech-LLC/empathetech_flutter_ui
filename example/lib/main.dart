@@ -72,7 +72,7 @@ void main() async {
       OpenUIFeedbackLocalizationsDelegate(),
     ],
     localeOverride: EzConfig.getLocale(),
-    child: const EFUIExample(),
+    child: const OpenUI(),
   ));
 }
 
@@ -117,8 +117,8 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class EFUIExample extends StatelessWidget {
-  const EFUIExample({super.key});
+class OpenUI extends StatelessWidget {
+  const OpenUI({super.key});
 
   @override
   Widget build(BuildContext context) {

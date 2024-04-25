@@ -50,17 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
             separator,
 
             // Global settings
-            const EzDominantHandSwitch(),
+            const EzDominantHandSwitch(key: dhSwitchKey),
             spacer,
 
-            const EzThemeModeSwitch(),
+            const EzThemeModeSwitch(key: tmSwitchKey),
             spacer,
 
-            const EzLocaleSetting(),
+            const EzLocaleSetting(key: localeSettingKey),
             spacer,
 
             // Text settings
             ElevatedButton(
+              key: toTextSettingsKey,
               onPressed: () => context.go(textSettingsRoute),
               child: Text(l10n.tsPageTitle),
             ),
@@ -68,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Layout settings
             ElevatedButton(
+              key: toLayoutSettingsKey,
               onPressed: () => context.go(layoutSettingsRoute),
               child: Text(l10n.lsPageTitle),
             ),
@@ -75,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Color settings
             ElevatedButton(
+              key: toColorSettingsKey,
               onPressed: () => context.go(colorSettingsRoute),
               child: Text(l10n.csPageTitle),
             ),
@@ -82,13 +85,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Image settings
             ElevatedButton(
+              key: toImageSettingsKey,
               onPressed: () => context.go(imageSettingsRoute),
               child: Text(l10n.isPageTitle),
             ),
             separator,
 
             // Reset button
-            const EzResetButton(),
+            const EzResetButton(key: resetAllKey),
             spacer,
           ],
         ),
