@@ -45,7 +45,11 @@ class ExampleScaffold extends StatelessWidget {
         tooltip: 'Options menu',
       ),
       menuChildren: <Widget>[
-        FeedbackButton(parentContext: context),
+        FeedbackButton(
+          parentContext: context,
+          l10n: EFUILang.of(context)!,
+          bannerIconColor: Theme.of(context).colorScheme.surface,
+        ),
         const RepoButton()
       ],
     );
