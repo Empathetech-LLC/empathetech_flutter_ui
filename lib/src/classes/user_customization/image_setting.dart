@@ -72,7 +72,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Define button functions //
 
   /// Cleanup any custom [File]s
-  void _cleanup() async {
+  void cleanup() async {
     if (!EzConfig.isKeyAsset(widget.configKey)) {
       try {
         final File toDelete = File(widget.configKey);
@@ -84,7 +84,10 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Build the list of [ImageSource] options
-  List<Widget> _sourceOptions(StateSetter dialogState, BuildContext context) {
+  List<Widget> sourceOptions({
+    required BuildContext dialogContext,
+    required StateSetter dialogState,
+  }) {
     final List<Widget> options = <Widget>[];
 
     // From file && camera rely on path_provider, which isn't supported by Flutter Web
@@ -99,7 +102,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            Navigator.of(context).pop(changed);
+            Navigator.of(dialogContext).pop(changed);
           },
           label: Text(l10n.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
@@ -115,7 +118,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            Navigator.of(context).pop(changed);
+            Navigator.of(dialogContext).pop(changed);
           },
           label: Text(l10n.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
@@ -131,21 +134,21 @@ class _ImageSettingState extends State<EzImageSetting> {
         onPressed: () async {
           final String changed = await showPlatformDialog(
             context: context,
-            builder: (BuildContext context) {
+            builder: (_) {
               String url = '';
               return StatefulBuilder(
-                builder: (BuildContext context, Function setState) {
+                builder: (BuildContext networkDialogContext, _) {
                   void onConfirm() {
                     if (isUrl(url)) {
                       EzConfig.setString(widget.configKey, url);
-                      Navigator.of(context).pop(url);
+                      Navigator.of(networkDialogContext).pop(url);
                     } else {
-                      Navigator.of(context).pop(null);
+                      Navigator.of(networkDialogContext).pop(null);
                     }
                   }
 
                   void onDeny() {
-                    Navigator.of(context).pop(null);
+                    Navigator.of(networkDialogContext).pop(null);
                   }
 
                   return EzAlertDialog(
@@ -190,7 +193,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             },
           );
 
-          Navigator.of(context).pop(changed);
+          Navigator.of(dialogContext).pop(changed);
         },
         label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
@@ -200,10 +203,10 @@ class _ImageSettingState extends State<EzImageSetting> {
       // Reset
       ElevatedButton.icon(
         onPressed: () {
-          _cleanup();
+          cleanup();
           EzConfig.remove(widget.configKey);
 
-          Navigator.of(context).pop(
+          Navigator.of(dialogContext).pop(
             EzConfig.getDefault(widget.configKey) ?? noImageValue,
           );
         },
@@ -218,9 +221,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         spacer,
         ElevatedButton.icon(
           onPressed: () {
-            _cleanup();
+            cleanup();
             EzConfig.setString(widget.configKey, noImageValue);
-            Navigator.of(context).pop(noImageValue);
+            Navigator.of(dialogContext).pop(noImageValue);
           },
           label: Text(l10n.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
@@ -269,8 +272,8 @@ class _ImageSettingState extends State<EzImageSetting> {
   Future<dynamic> _chooseImage(BuildContext context) {
     return showPlatformDialog(
       context: context,
-      builder: (BuildContext context) => StatefulBuilder(
-        builder: (BuildContext context, StateSetter dialogState) {
+      builder: (_) => StatefulBuilder(
+        builder: (BuildContext dialogContext, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
               l10n.isDialogTitle(
@@ -278,7 +281,10 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               textAlign: TextAlign.center,
             ),
-            contents: _sourceOptions(dialogState, context),
+            contents: sourceOptions(
+              dialogContext: dialogContext,
+              dialogState: dialogState,
+            ),
           );
         },
       ),

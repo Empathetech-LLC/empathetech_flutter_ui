@@ -15,6 +15,7 @@ class EzColorSetting extends StatefulWidget {
 
   /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
+  /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onRemove;
 
   /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
@@ -61,13 +62,8 @@ class _ColorSettingState extends State<EzColorSetting> {
           currColor = chosenColor;
         });
       },
-      onConfirm: () {
-        // Update the user's configKey
-        EzConfig.setInt(widget.configKey, currColor.value);
-
-        Navigator.of(context).pop(currColor.value);
-      },
-      onDeny: () => Navigator.of(context).pop(),
+      onConfirm: () => EzConfig.setInt(widget.configKey, currColor.value),
+      onDeny: () {},
     );
   }
 
@@ -97,59 +93,61 @@ class _ColorSettingState extends State<EzColorSetting> {
       // Define action button parameters
       final String denyMsg = l10n.csUseCustom;
 
-      void onConfirm() {
-        // Update the user's configKey
-        EzConfig.setInt(widget.configKey, recommended);
-
-        setState(() {
-          currColor = Color(recommended);
-        });
-
-        Navigator.of(context).pop(recommended);
-      }
-
-      void onDeny() async {
-        final dynamic chosen = await openColorPicker(context);
-        Navigator.of(context).pop(chosen);
-      }
-
       return showPlatformDialog(
         context: context,
-        builder: (BuildContext context) => EzAlertDialog(
-          title: Text(
-            l10n.csRecommended,
-            textAlign: TextAlign.center,
-          ),
-          // Recommended color preview
-          contents: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: backgroundColor),
-              ),
-              child: CircleAvatar(
-                backgroundColor: Color(recommended),
-                radius: padding * 2,
-                child: currColor == Colors.transparent
-                    ? Icon(PlatformIcons(context).eyeSlash)
-                    : null,
-              ),
+        builder: (BuildContext dialogContext) {
+          void onConfirm() {
+            // Update the user's configKey
+            EzConfig.setInt(widget.configKey, recommended);
+
+            setState(() {
+              currColor = Color(recommended);
+            });
+
+            Navigator.of(dialogContext).pop(recommended);
+          }
+
+          void onDeny() async {
+            final dynamic chosen = await openColorPicker(context);
+            Navigator.of(dialogContext).pop(chosen);
+          }
+
+          return EzAlertDialog(
+            title: Text(
+              l10n.csRecommended,
+              textAlign: TextAlign.center,
             ),
-          ],
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-            denyMsg: denyMsg,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-            denyMsg: denyMsg,
-            confirmIsDestructive: true,
-          ),
-        ),
+            // Recommended color preview
+            contents: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: backgroundColor),
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Color(recommended),
+                  radius: padding * 2,
+                  child: currColor == Colors.transparent
+                      ? Icon(PlatformIcons(context).eyeSlash)
+                      : null,
+                ),
+              ),
+            ],
+            materialActions: ezMaterialActions(
+              context: context,
+              onConfirm: onConfirm,
+              onDeny: onDeny,
+              denyMsg: denyMsg,
+            ),
+            cupertinoActions: ezCupertinoActions(
+              context: context,
+              onConfirm: onConfirm,
+              onDeny: onDeny,
+              denyMsg: denyMsg,
+              confirmIsDestructive: true,
+            ),
+          );
+        },
       );
     }
   }
@@ -228,7 +226,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     } else {
       return showPlatformDialog(
           context: context,
-          builder: (BuildContext context) {
+          builder: (BuildContext dialogContext) {
             return EzAlertDialog(
               title: Text(
                 l10n.gOptions,
@@ -237,7 +235,10 @@ class _ColorSettingState extends State<EzColorSetting> {
               contents: <Widget>[
                 // Remove from list
                 ElevatedButton.icon(
-                  onPressed: widget.onRemove!,
+                  onPressed: () {
+                    widget.onRemove!();
+                    Navigator.of(dialogContext).pop();
+                  },
                   icon: Icon(PlatformIcons(context).delete),
                   label: Text(l10n.csRemove),
                 ),
@@ -247,7 +248,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ElevatedButton.icon(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
-                    Navigator.of(context).pop(resetResponse);
+                    Navigator.of(dialogContext).pop(resetResponse);
                   },
                   icon: Icon(PlatformIcons(context).refresh),
                   label: Text(l10n.csReset),
