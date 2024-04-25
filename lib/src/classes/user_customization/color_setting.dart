@@ -53,9 +53,11 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [ezColorPicker] for updating [currColor]
   /// Returns the [Color.value] of what was chosen (null otherwise)
   Future<dynamic> openColorPicker(BuildContext context) {
+    final Color backup = currColor;
+
     return ezColorPicker(
       context: context,
-      startColor: currColor,
+      startColor: backup,
       onColorChange: (Color chosenColor) {
         // Update currColor
         setState(() {
@@ -63,7 +65,11 @@ class _ColorSettingState extends State<EzColorSetting> {
         });
       },
       onConfirm: () => EzConfig.setInt(widget.configKey, currColor.value),
-      onDeny: () {},
+      onDeny: () {
+        setState(() {
+          currColor = backup;
+        });
+      },
     );
   }
 
