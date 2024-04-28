@@ -138,7 +138,7 @@ const String understandingLayout =
 // EzConfig base //
 
 /// Empathetech's default configuration for [EzConfig]
-const Map<String, dynamic> empathetechConfig = <String, dynamic>{
+const Map<String, Object> empathetechConfig = <String, Object>{
   // Text settings //
 
   // Display
