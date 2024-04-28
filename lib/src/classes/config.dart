@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Singleton class for managing user customization
 class EzConfig {
   /// [SharedPreferences] instance
-  final SharedPreferences preferences;
+  final SharedPreferences? preferences;
 
   /// Asset paths for the app
   /// Used for [AssetImage] and video checks
@@ -116,6 +116,34 @@ Must be one of [int, bool, double, String, List<String>]''');
     return _instance!;
   }
 
+  /// [EzConfig] that doesn't require a [SharedPreferences] instance
+  /// Use this for unit testing... if used in a real app, most things will break
+  factory EzConfig.test({required Map<String, dynamic> prefs}) {
+    if (_instance == null) {
+      // Build this.keys //
+
+      // Start with the known EzConfigverse
+      final Map<String, Type> keys = Map<String, Type>.from(allKeys);
+
+      // Merge the prefs
+      for (final MapEntry<String, dynamic> entry in prefs.entries) {
+        keys[entry.key] = entry.value.runtimeType;
+      }
+
+      // Return the EzConfig instance //
+
+      return EzConfig._(
+        assetPaths: <String>{},
+        preferences: null,
+        defaults: prefs,
+        prefs: prefs,
+        keys: keys,
+      );
+    }
+
+    return _instance!;
+  }
+
   // No null checks below, for expediency
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
@@ -160,31 +188,31 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static bool? getBool(String key) {
-    return _instance!.preferences.getBool(key);
+    return _instance!.preferences!.getBool(key);
   }
 
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static int? getInt(String key) {
-    return _instance!.preferences.getInt(key);
+    return _instance!.preferences!.getInt(key);
   }
 
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static double? getDouble(String key) {
-    return _instance!.preferences.getDouble(key);
+    return _instance!.preferences!.getDouble(key);
   }
 
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static String? getString(String key) {
-    return _instance!.preferences.getString(key);
+    return _instance!.preferences!.getString(key);
   }
 
   /// Get the [key]s EzConfig value
   /// Uses the value stored in [preferences]
   static List<String>? getStringList(String key) {
-    return _instance!.preferences.getStringList(key);
+    return _instance!.preferences!.getStringList(key);
   }
 
   /// Wether the [key] contains the value to a recognized asset path
@@ -205,43 +233,43 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Set the EzConfig [key] to [value]
   static Future<bool> setBool(String key, bool value) async {
-    return await _instance!.preferences.setBool(key, value);
+    return await _instance!.preferences!.setBool(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
   static Future<bool> setInt(String key, int value) async {
-    return await _instance!.preferences.setInt(key, value);
+    return await _instance!.preferences!.setInt(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
   static Future<bool> setDouble(String key, double value) async {
-    return await _instance!.preferences.setDouble(key, value);
+    return await _instance!.preferences!.setDouble(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
   static Future<bool> setString(String key, String value) async {
-    return await _instance!.preferences.setString(key, value);
+    return await _instance!.preferences!.setString(key, value);
   }
 
   /// Set the EzConfig [key] to [value]
   static Future<bool> setStringList(String key, List<String> value) async {
-    return await _instance!.preferences.setStringList(key, value);
+    return await _instance!.preferences!.setStringList(key, value);
   }
 
   // Removers //
 
   /// Remove the custom value for [key]
   static Future<bool> remove(String key) async {
-    return await _instance!.preferences.remove(key);
+    return await _instance!.preferences!.remove(key);
   }
 
   /// Remove the [keys] custom values
   static void removeKeys(Set<String> keys) async {
     final Set<String> updated =
-        keys.intersection(_instance!.preferences.getKeys());
+        keys.intersection(_instance!.preferences!.getKeys());
 
     for (final String key in updated) {
-      _instance!.preferences.remove(key);
+      _instance!.preferences!.remove(key);
     }
   }
 }
