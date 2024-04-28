@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - More TextStyle params
 - Split EzLinkImage 2.0
   - Existing is now EzLinkImageProvider
+- Unit testing version of EzConfig
 
 ### Removed
 - navigators.dart
