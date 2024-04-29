@@ -1,6 +1,5 @@
 import 'screens/screens.dart';
 import 'utils/utils.dart';
-import 'widgets/widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -123,7 +122,6 @@ class OpenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
-      scaffoldMessengerKey: scaffoldMessengerKey,
       app: PlatformApp.router(
         // Production ready!
         debugShowCheckedModeBanner: false,

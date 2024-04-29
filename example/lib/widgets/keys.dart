@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Global //
-
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-    GlobalKey<ScaffoldMessengerState>();
-
 // Home screen //
 
 const ValueKey<String> dhSwitchKey = ValueKey<String>('dominantHandSetting');
