@@ -79,7 +79,7 @@ void main() async {
 /// Initialize a path based router for web-enabled apps
 /// Or any other app that requires deep linking
 /// https://docs.flutter.dev/ui/navigation/deep-linking
-final GoRouter _router = GoRouter(
+final GoRouter router = GoRouter(
   initialLocation: homePath,
   routes: <RouteBase>[
     GoRoute(
@@ -142,7 +142,7 @@ class OpenUI extends StatelessWidget {
         locale: EzConfig.getLocale(),
 
         title: appTitle,
-        routerConfig: _router,
+        routerConfig: router,
       ),
     );
   }
