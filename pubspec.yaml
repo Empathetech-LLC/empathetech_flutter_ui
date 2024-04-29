@@ -32,7 +32,7 @@ dev_dependencies:
   feedback: ^3.0.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.2
-  go_router: ^13.0.0
+  go_router: ^14.0.1
   line_icons: ^2.0.3
   provider: ^6.1.2
   share_plus: ^9.0.0
