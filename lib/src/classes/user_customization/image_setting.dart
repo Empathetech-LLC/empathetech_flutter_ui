@@ -300,7 +300,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       setState(() {
         currPath = newPath;
       });
-      if (widget.updateTheme != null && newPath != noImageValue) {
+      if (widget.updateTheme != null &&
+          updateTheme &&
+          newPath != noImageValue) {
         await storeImageColorScheme(
           brightness: widget.updateTheme!,
           path: newPath,
