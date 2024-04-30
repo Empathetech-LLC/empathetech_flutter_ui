@@ -32,9 +32,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera to allow you to take photos.</string>
+	<string>Camera access allows the app to set custom background images and theme data.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library to allow you to select photos.</string>
+	<string>Photo library access allows the app to set custom background images and theme data.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
