@@ -1,5 +1,5 @@
-import 'screens/screens.dart';
-import 'utils/utils.dart';
+import 'screens/export.dart';
+import 'utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

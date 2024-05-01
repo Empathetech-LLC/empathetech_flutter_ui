@@ -1,4 +1,4 @@
-import '../widgets/widgets.dart';
+import '../widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
