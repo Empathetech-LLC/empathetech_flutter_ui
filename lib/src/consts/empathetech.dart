@@ -143,7 +143,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Display
   displayFontFamilyKey: roboto,
-  displayFontSizeKey: 57.0,
+  displayFontSizeKey: 42.0,
   displayBoldKey: false,
   displayItalicsKey: false,
   displayUnderlinedKey: false,
