@@ -97,6 +97,94 @@ ColorScheme ezColorScheme(Brightness brightness) {
         );
 }
 
+/// Store the passed [ColorScheme] in [EzConfig.prefs]
+void storeColorScheme({
+  required ColorScheme colorScheme,
+  required Brightness brightness,
+}) {
+  if (brightness == Brightness.light) {
+    EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
+    EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
+    EzConfig.setInt(
+        lightPrimaryContainerKey, colorScheme.primaryContainer.value);
+    EzConfig.setInt(
+        lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
+    EzConfig.setInt(lightSecondaryKey, colorScheme.secondary.value);
+    EzConfig.setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
+    EzConfig.setInt(
+        lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
+    EzConfig.setInt(
+        lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
+    EzConfig.setInt(lightTertiaryKey, colorScheme.tertiary.value);
+    EzConfig.setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
+    EzConfig.setInt(
+        lightTertiaryContainerKey, colorScheme.tertiaryContainer.value);
+    EzConfig.setInt(
+        lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
+    EzConfig.setInt(lightErrorKey, colorScheme.error.value);
+    EzConfig.setInt(lightOnErrorKey, colorScheme.onError.value);
+    EzConfig.setInt(lightErrorContainerKey, colorScheme.errorContainer.value);
+    EzConfig.setInt(
+        lightOnErrorContainerKey, colorScheme.onErrorContainer.value);
+    EzConfig.setInt(lightOutlineKey, colorScheme.outline.value);
+    EzConfig.setInt(lightOutlineVariantKey, colorScheme.outlineVariant.value);
+    EzConfig.setInt(lightBackgroundKey, colorScheme.background.value);
+    EzConfig.setInt(lightOnBackgroundKey, colorScheme.onBackground.value);
+    EzConfig.setInt(lightSurfaceKey, colorScheme.surface.value);
+    EzConfig.setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
+    EzConfig.setInt(lightSurfaceVariantKey, colorScheme.surfaceVariant.value);
+    EzConfig.setInt(
+        lightOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
+    EzConfig.setInt(lightInverseSurfaceKey, colorScheme.inverseSurface.value);
+    EzConfig.setInt(
+        lightOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
+    EzConfig.setInt(lightInversePrimaryKey, colorScheme.inversePrimary.value);
+    EzConfig.setInt(lightShadowKey, colorScheme.shadow.value);
+    EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
+    EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
+  } else {
+    EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
+    EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
+    EzConfig.setInt(
+        darkPrimaryContainerKey, colorScheme.primaryContainer.value);
+    EzConfig.setInt(
+        darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
+    EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
+    EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
+    EzConfig.setInt(
+        darkSecondaryContainerKey, colorScheme.secondaryContainer.value);
+    EzConfig.setInt(
+        darkOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
+    EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
+    EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
+    EzConfig.setInt(
+        darkTertiaryContainerKey, colorScheme.tertiaryContainer.value);
+    EzConfig.setInt(
+        darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
+    EzConfig.setInt(darkErrorKey, colorScheme.error.value);
+    EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
+    EzConfig.setInt(darkErrorContainerKey, colorScheme.errorContainer.value);
+    EzConfig.setInt(
+        darkOnErrorContainerKey, colorScheme.onErrorContainer.value);
+    EzConfig.setInt(darkOutlineKey, colorScheme.outline.value);
+    EzConfig.setInt(darkOutlineVariantKey, colorScheme.outlineVariant.value);
+    EzConfig.setInt(darkBackgroundKey, colorScheme.background.value);
+    EzConfig.setInt(darkOnBackgroundKey, colorScheme.onBackground.value);
+    EzConfig.setInt(darkSurfaceKey, colorScheme.surface.value);
+    EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
+    EzConfig.setInt(darkSurfaceVariantKey, colorScheme.surfaceVariant.value);
+    EzConfig.setInt(
+        darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
+    EzConfig.setInt(darkInverseSurfaceKey, colorScheme.inverseSurface.value);
+    EzConfig.setInt(
+        darkOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
+    EzConfig.setInt(darkInversePrimaryKey, colorScheme.inversePrimary.value);
+    EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
+    EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
+    EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
+  }
+}
+
 /// Generates a [ColorScheme] based on the image found at [path]
 /// Then stores the values in [EzConfig.preferences]
 Future<void> storeImageColorScheme({
