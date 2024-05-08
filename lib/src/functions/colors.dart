@@ -103,6 +103,8 @@ void storeColorScheme({
   required Brightness brightness,
 }) {
   if (brightness == Brightness.light) {
+    EzConfig.removeKeys(lightColors.toSet());
+
     EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
     EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
     EzConfig.setInt(
@@ -143,6 +145,8 @@ void storeColorScheme({
     EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
     EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
   } else {
+    EzConfig.removeKeys(darkColors.toSet());
+
     EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
     EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
     EzConfig.setInt(
@@ -197,6 +201,8 @@ Future<void> storeImageColorScheme({
   );
 
   if (brightness == Brightness.light) {
+    EzConfig.removeKeys(lightColors.toSet());
+
     EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
     EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
     EzConfig.setInt(
@@ -237,6 +243,8 @@ Future<void> storeImageColorScheme({
     EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
     EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
   } else {
+    EzConfig.removeKeys(darkColors.toSet());
+
     EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
     EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
     EzConfig.setInt(
