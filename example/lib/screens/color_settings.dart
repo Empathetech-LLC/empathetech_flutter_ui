@@ -236,6 +236,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             ),
             separator,
 
+            // High contrast quick setting
+            const EzHighContrastColorsSetting(),
+            separator,
+
             // Dynamic configKeys
             ...dynamicColorSettings(),
             spacer, // This makes two, dynamicColorSettings has a trailing spacer too
