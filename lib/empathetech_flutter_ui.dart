@@ -39,14 +39,16 @@ export 'src/classes/screen_reader_support/plain_text.dart';
 export 'src/classes/screen_reader_support/rich_text.dart';
 
 // User customization
-export 'src/classes/user_customization/text_style/bold_setting.dart';
-export 'src/classes/user_customization/text_style/double_setting.dart';
-export 'src/classes/user_customization/text_style/font_family_setting.dart';
-export 'src/classes/user_customization/text_style/italic_setting.dart';
-export 'src/classes/user_customization/text_style/providers.dart';
-export 'src/classes/user_customization/text_style/underline_setting.dart';
+export 'src/classes/user_customization/color_scheme/color_setting.dart';
+export 'src/classes/user_customization/color_scheme/high_contrast_theme_setting.dart';
 
-export 'src/classes/user_customization/color_setting.dart';
+export 'src/classes/user_customization/text_theme/bold_setting.dart';
+export 'src/classes/user_customization/text_theme/double_setting.dart';
+export 'src/classes/user_customization/text_theme/font_family_setting.dart';
+export 'src/classes/user_customization/text_theme/italic_setting.dart';
+export 'src/classes/user_customization/text_theme/providers.dart';
+export 'src/classes/user_customization/text_theme/underline_setting.dart';
+
 export 'src/classes/user_customization/dominant_hand_switch.dart';
 export 'src/classes/user_customization/image_setting.dart';
 export 'src/classes/user_customization/layout_setting.dart';
