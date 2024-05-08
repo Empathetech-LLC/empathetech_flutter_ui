@@ -111,6 +111,8 @@
 
   "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
 
+  "csHighContrast": "Utilice colores de alto contraste",
+
   "csPrimary": "Primario",
   "csOnPrimary": "En Primario",
   "csPrimaryContainer": "Contenedor Primario",

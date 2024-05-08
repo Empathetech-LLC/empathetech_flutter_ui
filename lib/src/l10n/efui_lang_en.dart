@@ -250,6 +250,9 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get csHighContrast => 'Use high contrast colors';
+
+  @override
   String get csPrimary => 'Primary';
 
   @override

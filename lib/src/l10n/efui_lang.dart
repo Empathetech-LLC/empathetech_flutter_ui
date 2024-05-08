@@ -556,6 +556,12 @@ abstract class EFUILang {
   /// **'Activate to open a color picker for {name}. Long press for more options.'**
   String csPickerSemantics(Object name);
 
+  /// No description provided for @csHighContrast.
+  ///
+  /// In en, this message translates to:
+  /// **'Use high contrast colors'**
+  String get csHighContrast;
+
   /// No description provided for @csPrimary.
   ///
   /// In en, this message translates to:

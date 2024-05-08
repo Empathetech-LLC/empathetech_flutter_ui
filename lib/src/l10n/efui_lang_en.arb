@@ -110,6 +110,8 @@
   "csPageTitle": "Color settings",
 
   "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
+
+  "csHighContrast": "Use high contrast colors",
   
   "csPrimary": "Primary",
   "csOnPrimary": "On Primary",
