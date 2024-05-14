@@ -2,15 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [6.1.0] - 2024-04-XX
+## [7.0.0] - 2024-05-X
 ### Updated
 - Comments
 - README links
+- ColorScheme functionality for Flutter 3.22.X
 
 ### Added
 - More TextStyle params
 - Split EzLinkImage 2.0
   - Existing is now EzLinkImageProvider
+- High contrast color quick setting(s)
 
 ### Removed
 - navigators.dart
