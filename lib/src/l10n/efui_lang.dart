@@ -592,11 +592,11 @@ abstract class EFUILang {
   /// **'Primary fixed'**
   String get csPrimaryFixed;
 
-  /// No description provided for @csPrimaryDim.
+  /// No description provided for @csPrimaryFixedDim.
   ///
   /// In en, this message translates to:
-  /// **'Primary dim'**
-  String get csPrimaryDim;
+  /// **'Primary fixed dim'**
+  String get csPrimaryFixedDim;
 
   /// No description provided for @csOnPrimaryFixed.
   ///
@@ -640,11 +640,11 @@ abstract class EFUILang {
   /// **'Secondary fixed'**
   String get csSecondaryFixed;
 
-  /// No description provided for @csSecondaryDim.
+  /// No description provided for @csSecondaryFixedDim.
   ///
   /// In en, this message translates to:
-  /// **'Secondary dim'**
-  String get csSecondaryDim;
+  /// **'Secondary fixed dim'**
+  String get csSecondaryFixedDim;
 
   /// No description provided for @csOnSecondaryFixed.
   ///
@@ -652,11 +652,11 @@ abstract class EFUILang {
   /// **'On secondary fixed'**
   String get csOnSecondaryFixed;
 
-  /// No description provided for @csSecondaryFixedVariant.
+  /// No description provided for @csOnSecondaryFixedVariant.
   ///
   /// In en, this message translates to:
-  /// **'Secondary fixed variant'**
-  String get csSecondaryFixedVariant;
+  /// **'On secondary fixed variant'**
+  String get csOnSecondaryFixedVariant;
 
   /// No description provided for @csTertiary.
   ///
@@ -688,11 +688,11 @@ abstract class EFUILang {
   /// **'Tertiary fixed'**
   String get csTertiaryFixed;
 
-  /// No description provided for @csTertiaryDim.
+  /// No description provided for @csTertiaryFixedDim.
   ///
   /// In en, this message translates to:
-  /// **'Tertiary dim'**
-  String get csTertiaryDim;
+  /// **'Tertiary fixed dim'**
+  String get csTertiaryFixedDim;
 
   /// No description provided for @csOnTertiaryFixed.
   ///
@@ -700,11 +700,11 @@ abstract class EFUILang {
   /// **'On tertiary fixed'**
   String get csOnTertiaryFixed;
 
-  /// No description provided for @csTertiaryFixedVariant.
+  /// No description provided for @csOnTertiaryFixedVariant.
   ///
   /// In en, this message translates to:
-  /// **'Tertiary fixed variant'**
-  String get csTertiaryFixedVariant;
+  /// **'On tertiary fixed variant'**
+  String get csOnTertiaryFixedVariant;
 
   /// No description provided for @csError.
   ///

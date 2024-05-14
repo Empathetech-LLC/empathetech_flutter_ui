@@ -269,13 +269,13 @@ class EFUILangEs extends EFUILang {
   String get csPrimaryFixed => 'Primario fijo';
 
   @override
-  String get csPrimaryDim => 'Oscuro primario';
+  String get csPrimaryFixedDim => 'Oscuro primario fijo';
 
   @override
   String get csOnPrimaryFixed => 'En primario fijo';
 
   @override
-  String get csOnPrimaryFixedVariant => 'Variante de primario fijo';
+  String get csOnPrimaryFixedVariant => 'En variante de primario fijo';
 
   @override
   String get csSecondary => 'Secundario';
@@ -293,13 +293,13 @@ class EFUILangEs extends EFUILang {
   String get csSecondaryFixed => 'Secundario fijo';
 
   @override
-  String get csSecondaryDim => 'Oscuro secundario';
+  String get csSecondaryFixedDim => 'Oscuro secundario fijo';
 
   @override
   String get csOnSecondaryFixed => 'En secundario fijo';
 
   @override
-  String get csSecondaryFixedVariant => 'Variante de secundario fijo';
+  String get csOnSecondaryFixedVariant => 'En variante de secundario fijo';
 
   @override
   String get csTertiary => 'Terciario';
@@ -317,13 +317,13 @@ class EFUILangEs extends EFUILang {
   String get csTertiaryFixed => 'Terciario fijo';
 
   @override
-  String get csTertiaryDim => 'Oscuro terciario';
+  String get csTertiaryFixedDim => 'Oscuro terciario fijo';
 
   @override
   String get csOnTertiaryFixed => 'En terciario fijo';
 
   @override
-  String get csTertiaryFixedVariant => 'Variante de terciario fijo';
+  String get csOnTertiaryFixedVariant => 'En variante de terciario fijo';
 
   @override
   String get csError => 'Error';

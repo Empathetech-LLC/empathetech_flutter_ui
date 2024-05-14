@@ -268,7 +268,7 @@ class EFUILangEn extends EFUILang {
   String get csPrimaryFixed => 'Primary fixed';
 
   @override
-  String get csPrimaryDim => 'Primary dim';
+  String get csPrimaryFixedDim => 'Primary fixed dim';
 
   @override
   String get csOnPrimaryFixed => 'On primary fixed';
@@ -292,13 +292,13 @@ class EFUILangEn extends EFUILang {
   String get csSecondaryFixed => 'Secondary fixed';
 
   @override
-  String get csSecondaryDim => 'Secondary dim';
+  String get csSecondaryFixedDim => 'Secondary fixed dim';
 
   @override
   String get csOnSecondaryFixed => 'On secondary fixed';
 
   @override
-  String get csSecondaryFixedVariant => 'Secondary fixed variant';
+  String get csOnSecondaryFixedVariant => 'On secondary fixed variant';
 
   @override
   String get csTertiary => 'Tertiary';
@@ -316,13 +316,13 @@ class EFUILangEn extends EFUILang {
   String get csTertiaryFixed => 'Tertiary fixed';
 
   @override
-  String get csTertiaryDim => 'Tertiary dim';
+  String get csTertiaryFixedDim => 'Tertiary fixed dim';
 
   @override
   String get csOnTertiaryFixed => 'On tertiary fixed';
 
   @override
-  String get csTertiaryFixedVariant => 'Tertiary fixed variant';
+  String get csOnTertiaryFixedVariant => 'On tertiary fixed variant';
 
   @override
   String get csError => 'Error';
