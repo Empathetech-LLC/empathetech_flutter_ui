@@ -6,7 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an [EzAlertDialog] to notify the user
@@ -62,13 +62,9 @@ Future<dynamic> ezColorPicker({
           title ?? EFUILang.of(context)!.csPickerTitle,
           textAlign: TextAlign.center,
         ),
-        contents: <Widget>[
-          ColorPicker(
-            pickerColor: startColor,
-            onColorChanged: onColorChange,
-            portraitOnly: true,
-            paletteType: PaletteType.hueWheel,
-          ),
+        contents: const <Widget>[
+          SizedBox.shrink()
+          //ColorPicker(onColorChanged: onColorChange),
         ],
         materialActions: ezMaterialActions(
           context: context,
