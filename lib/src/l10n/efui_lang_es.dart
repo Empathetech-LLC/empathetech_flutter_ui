@@ -257,82 +257,130 @@ class EFUILangEs extends EFUILang {
   String get csPrimary => 'Primario';
 
   @override
-  String get csOnPrimary => 'En Primario';
+  String get csOnPrimary => 'En primario';
 
   @override
-  String get csPrimaryContainer => 'Contenedor Primario';
+  String get csPrimaryContainer => 'Contenedor primario';
 
   @override
-  String get csOnPrimaryContainer => 'En Contenedor Primario';
+  String get csOnPrimaryContainer => 'En contenedor primario';
+
+  @override
+  String get csPrimaryFixed => 'Primario fijo';
+
+  @override
+  String get csPrimaryDim => 'Oscuro primario';
+
+  @override
+  String get csOnPrimaryFixed => 'En primario fijo';
+
+  @override
+  String get csOnPrimaryFixedVariant => 'Variante de primario fijo';
 
   @override
   String get csSecondary => 'Secundario';
 
   @override
-  String get csOnSecondary => 'En Secundario';
+  String get csOnSecondary => 'En secundario';
 
   @override
-  String get csSecondaryContainer => 'Contenedor Secundario';
+  String get csSecondaryContainer => 'Contenedor secundario';
 
   @override
-  String get csOnSecondaryContainer => 'En Contenedor Secundario';
+  String get csOnSecondaryContainer => 'En contenedor secundario';
+
+  @override
+  String get csSecondaryFixed => 'Secundario fijo';
+
+  @override
+  String get csSecondaryDim => 'Oscuro secundario';
+
+  @override
+  String get csOnSecondaryFixed => 'En secundario fijo';
+
+  @override
+  String get csSecondaryFixedVariant => 'Variante de secundario fijo';
 
   @override
   String get csTertiary => 'Terciario';
 
   @override
-  String get csOnTertiary => 'En Terciario';
+  String get csOnTertiary => 'En terciario';
 
   @override
-  String get csTertiaryContainer => 'Contenedor Terciario';
+  String get csTertiaryContainer => 'Contenedor terciario';
 
   @override
-  String get csOnTertiaryContainer => 'En Contenedor Terciario';
+  String get csOnTertiaryContainer => 'En contenedor terciario';
+
+  @override
+  String get csTertiaryFixed => 'Terciario fijo';
+
+  @override
+  String get csTertiaryDim => 'Oscuro terciario';
+
+  @override
+  String get csOnTertiaryFixed => 'En terciario fijo';
+
+  @override
+  String get csTertiaryFixedVariant => 'Variante de terciario fijo';
 
   @override
   String get csError => 'Error';
 
   @override
-  String get csOnError => 'En Error';
+  String get csOnError => 'En error';
 
   @override
-  String get csErrorContainer => 'Contenedor de Error';
+  String get csErrorContainer => 'Contenedor de error';
 
   @override
-  String get csOnErrorContainer => 'En Contenedor de Error';
+  String get csOnErrorContainer => 'En contenedor de error';
 
   @override
   String get csOutline => 'Contorno';
 
   @override
-  String get csOutlineVariant => 'Variante de Contorno';
-
-  @override
-  String get csBackground => 'Fondo';
-
-  @override
-  String get csOnBackground => 'En Fondo';
+  String get csOutlineVariant => 'Variante de contorno';
 
   @override
   String get csSurface => 'Superficie';
 
   @override
-  String get csOnSurface => 'En Superficie';
+  String get csOnSurface => 'En superficie';
 
   @override
-  String get csSurfaceVariant => 'Variante de Superficie';
+  String get csSurfaceDim => 'Superficie oscuro';
 
   @override
-  String get csOnSurfaceVariant => 'En Variante de Superficie';
+  String get csSurfaceBright => 'Superficie brillante';
 
   @override
-  String get csInverseSurface => 'Superficie Inversa';
+  String get csSurfaceContainerLowest => 'Contenedor de superficie más bajo';
 
   @override
-  String get csOnInverseSurface => 'En Superficie Inversa';
+  String get csSurfaceContainerLow => 'Contenedor de superficie bajo';
 
   @override
-  String get csInversePrimary => 'Primario Inversa';
+  String get csSurfaceContainer => 'Contenedor de superficie';
+
+  @override
+  String get csSurfaceContainerHigh => 'Contenedor de superficie alto';
+
+  @override
+  String get csSurfaceContainerHighest => 'Contenedor de superficie más alto';
+
+  @override
+  String get csOnSurfaceVariant => 'En variante de superficie';
+
+  @override
+  String get csInverseSurface => 'Superficie inversa';
+
+  @override
+  String get csOnInverseSurface => 'En superficie inversa';
+
+  @override
+  String get csInversePrimary => 'Primario inversa';
 
   @override
   String get csScrim => 'Telón';
@@ -341,7 +389,7 @@ class EFUILangEs extends EFUILang {
   String get csShadow => 'Sombra';
 
   @override
-  String get csSurfaceTint => 'Tinte de Superficie';
+  String get csSurfaceTint => 'Tinte de superficie';
 
   @override
   String get csPickerTitle => '¡Selecciona un color!';
