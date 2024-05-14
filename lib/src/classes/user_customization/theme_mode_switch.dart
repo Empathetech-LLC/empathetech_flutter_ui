@@ -54,9 +54,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
     return Container(
       padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.background,
-      ),
+      decoration: BoxDecoration(color: theme.colorScheme.surface),
       child: EzRow(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

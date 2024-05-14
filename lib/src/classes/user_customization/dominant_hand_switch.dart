@@ -101,9 +101,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
     return Container(
       padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.background,
-      ),
+      decoration: BoxDecoration(color: theme.colorScheme.surface),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

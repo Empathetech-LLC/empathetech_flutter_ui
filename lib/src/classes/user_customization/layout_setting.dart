@@ -135,11 +135,11 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
               // Preview
               Container(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 height: heightOf(context) * 0.1,
                 width: widthOf(context) * 0.1,
                 child: Container(
-                  color: theme.colorScheme.background,
+                  color: theme.colorScheme.surface,
                   margin: EdgeInsets.all(currValue * 0.1),
                 ),
               ),
