@@ -62,9 +62,20 @@ Future<dynamic> ezColorPicker({
           title ?? EFUILang.of(context)!.csPickerTitle,
           textAlign: TextAlign.center,
         ),
-        contents: const <Widget>[
-          SizedBox.shrink()
-          //ColorPicker(onColorChanged: onColorChange),
+        contents: <Widget>[
+          ColorPicker(
+            color: startColor,
+            onColorChanged: onColorChange,
+            pickersEnabled: const <ColorPickerType, bool>{
+              ColorPickerType.both: false,
+              ColorPickerType.primary: false,
+              ColorPickerType.accent: false,
+              ColorPickerType.bw: false,
+              ColorPickerType.custom: false,
+              ColorPickerType.customSecondary: false,
+              ColorPickerType.wheel: true
+            },
+          ),
         ],
         materialActions: ezMaterialActions(
           context: context,
