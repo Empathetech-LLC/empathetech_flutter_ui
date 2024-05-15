@@ -62,32 +62,16 @@ ThemeData ezThemeData(Brightness brightness) {
       titleSpacing: 0,
     ),
 
-    bannerTheme: MaterialBannerThemeData(
-      backgroundColor: colorScheme.onSurface,
-      surfaceTintColor: Colors.transparent,
-      contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.surface,
-      ),
-      padding: EdgeInsets.all(margin),
-    ),
-
-    // Bottom navigation bar
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      type: BottomNavigationBarType.fixed,
-      selectedIconTheme: appBarIconData,
-      unselectedIconTheme: appBarIconData,
-    ),
-
     // Cards
     cardTheme: const CardTheme(margin: EdgeInsets.zero),
 
     // Dialogs
     dialogTheme: DialogTheme(
       titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onBackground,
+        color: colorScheme.onSurface,
       ),
       contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onBackground,
+        color: colorScheme.onSurface,
       ),
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
