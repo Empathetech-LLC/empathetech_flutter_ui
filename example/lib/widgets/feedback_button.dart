@@ -8,14 +8,10 @@ class FeedbackButton extends StatelessWidget {
   final BuildContext parentContext;
   final EFUILang l10n;
 
-  /// Recommended to provide [ColorScheme].surface
-  final Color bannerIconColor;
-
   const FeedbackButton({
     super.key,
     required this.parentContext,
     required this.l10n,
-    required this.bannerIconColor,
   });
 
   @override

@@ -48,7 +48,6 @@ class ExampleScaffold extends StatelessWidget {
         FeedbackButton(
           parentContext: context,
           l10n: EFUILang.of(context)!,
-          bannerIconColor: Theme.of(context).colorScheme.surface,
         ),
         const RepoButton()
       ],
