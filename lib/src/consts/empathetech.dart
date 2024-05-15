@@ -204,7 +204,6 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   lightOnTertiaryKey: blackHex,
   lightSurfaceKey: whiteHex,
   lightOnSurfaceKey: blackHex,
-  lightSurfaceTintKey: transparentHex,
 
   // Dark
   darkPrimaryKey: empathEucalyptusHex, // required key
@@ -215,7 +214,6 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkOnTertiaryKey: whiteHex,
   darkSurfaceKey: blackHex,
   darkOnSurfaceKey: whiteHex,
-  darkSurfaceTintKey: transparentHex,
 
   // Layout settings //
 
