@@ -161,7 +161,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             children: <Widget>[
               ElevatedButton(
                 style: theme.elevatedButtonTheme.style!.copyWith(
-                  padding: MaterialStateProperty.all(
+                  padding: WidgetStateProperty.all(
                     EdgeInsets.all(currValue),
                   ),
                 ),
@@ -171,10 +171,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               rowSpacer,
               ElevatedButton(
                 style: theme.elevatedButtonTheme.style!.copyWith(
-                  padding: MaterialStateProperty.all(
+                  padding: WidgetStateProperty.all(
                     EdgeInsets.all(currValue),
                   ),
-                  shape: const MaterialStatePropertyAll<OutlinedBorder>(
+                  shape: const WidgetStatePropertyAll<OutlinedBorder>(
                     CircleBorder(),
                   ),
                 ),

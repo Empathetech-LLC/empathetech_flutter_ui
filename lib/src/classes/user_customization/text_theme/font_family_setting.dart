@@ -47,7 +47,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       value: entry.key,
       label: entry.key,
       style: Theme.of(context).textButtonTheme.style?.copyWith(
-            textStyle: MaterialStatePropertyAll<TextStyle>(entry.value),
+            textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
           ),
     );
   }).toList();

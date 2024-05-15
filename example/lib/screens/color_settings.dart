@@ -174,10 +174,10 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           ),
           label: Text(getColorName(context, configKeyKey)),
           style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: MaterialStateProperty.all(
+            padding: WidgetStateProperty.all(
               EdgeInsets.all(padding * 0.75),
             ),
-            foregroundColor: MaterialStatePropertyAll<Color?>(
+            foregroundColor: WidgetStatePropertyAll<Color?>(
               theme.colorScheme.onSurface,
             ),
           ),

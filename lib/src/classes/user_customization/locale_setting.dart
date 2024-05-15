@@ -41,7 +41,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           .elevatedButtonTheme
           .style!
           .textStyle!
-          .resolve(<MaterialState>{})!.fontSize!,
+          .resolve(<WidgetState>{})!.fontSize!,
     );
     final double flagWidth = flagHeight * 2;
 

@@ -31,7 +31,7 @@ class EzLink extends StatefulWidget {
   /// Defaults to [semanticsLabel] (or [text])
   final String? tooltip;
 
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
   /// Or an external link to [url]

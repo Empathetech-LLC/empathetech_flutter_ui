@@ -29,7 +29,7 @@ class EzInlineLink extends WidgetSpan {
   /// Optional tooltip override
   final String? tooltip;
 
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
   /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
