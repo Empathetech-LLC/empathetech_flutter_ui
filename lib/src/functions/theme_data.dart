@@ -37,6 +37,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
+    scaffoldBackgroundColor: colorScheme.inverseSurface,
 
     // Typography //
 
@@ -62,11 +63,18 @@ ThemeData ezThemeData(Brightness brightness) {
       titleSpacing: 0,
     ),
 
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: colorScheme.inverseSurface,
+      modalBackgroundColor: colorScheme.inverseSurface,
+      dragHandleColor: colorScheme.onInverseSurface,
+    ),
+
     // Cards
     cardTheme: const CardTheme(margin: EdgeInsets.zero),
 
     // Dialogs
     dialogTheme: DialogTheme(
+      backgroundColor: colorScheme.inverseSurface,
       titleTextStyle: textTheme.titleLarge?.copyWith(
         color: colorScheme.onSurface,
       ),
@@ -99,8 +107,6 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.primary,
-      foregroundColor: colorScheme.onPrimary,
       extendedPadding: EdgeInsets.all(padding),
       shape: const CircleBorder(),
     ),
@@ -121,7 +127,6 @@ ThemeData ezThemeData(Brightness brightness) {
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
-        backgroundColor: colorScheme.surface,
       ),
     ),
 

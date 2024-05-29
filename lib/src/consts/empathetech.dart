@@ -198,28 +198,86 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Light
   lightPrimaryKey: empathPurpleHex, // required key
   lightOnPrimaryKey: whiteHex,
+  lightOnPrimaryContainerKey: whiteHex,
+  lightOnPrimaryFixedKey: whiteHex,
+  lightOnPrimaryFixedVariantKey: whiteHex,
+
   lightSecondaryKey: empathGoldenrodHex,
   lightOnSecondaryKey: blackHex,
+  lightOnSecondaryContainerKey: blackHex,
+  lightOnSecondaryFixedKey: blackHex,
+  lightOnSecondaryFixedVariantKey: blackHex,
+
   lightTertiaryKey: empathEucalyptusHex,
   lightOnTertiaryKey: blackHex,
+  lightOnTertiaryContainerKey: blackHex,
+  lightOnTertiaryFixedKey: blackHex,
+  lightOnTertiaryFixedVariantKey: blackHex,
+
+  lightErrorKey: whiteHex,
+  lightOnErrorKey: 0xFFFF0000,
+  lightErrorContainerKey: whiteHex,
+  lightOnErrorContainerKey: 0xFFFF0000,
+
   lightSurfaceKey: whiteHex,
   lightOnSurfaceKey: blackHex,
+  lightSurfaceDimKey: whiteHex,
+  lightSurfaceBrightKey: whiteHex,
+  lightSurfaceContainerLowestKey: whiteHex,
+  lightSurfaceContainerLowKey: whiteHex,
+  lightSurfaceContainerKey: whiteHex,
+  lightSurfaceContainerHighKey: whiteHex,
+  lightSurfaceContainerHighestKey: whiteHex,
+  lightOnSurfaceVariantKey: blackHex,
+  lightInverseSurfaceKey: offWhiteHex,
+  lightOnInverseSurfaceKey: blackHex,
+  lightInversePrimaryKey: empathPurpleHex,
+  lightSurfaceTintKey: transparentHex,
 
   // Dark
   darkPrimaryKey: empathEucalyptusHex, // required key
   darkOnPrimaryKey: blackHex,
+  darkOnPrimaryContainerKey: blackHex,
+  darkOnPrimaryFixedKey: blackHex,
+  darkOnPrimaryFixedVariantKey: blackHex,
+
   darkSecondaryKey: empathGoldenrodHex,
   darkOnSecondaryKey: blackHex,
+  darkOnSecondaryContainerKey: blackHex,
+  darkOnSecondaryFixedKey: blackHex,
+  darkOnSecondaryFixedVariantKey: blackHex,
+
   darkTertiaryKey: empathPurpleHex,
   darkOnTertiaryKey: whiteHex,
+  darkOnTertiaryContainerKey: whiteHex,
+  darkOnTertiaryFixedKey: whiteHex,
+  darkOnTertiaryFixedVariantKey: whiteHex,
+
+  darkErrorKey: blackHex,
+  darkOnErrorKey: 0xFFFF0000,
+  darkErrorContainerKey: blackHex,
+  darkOnErrorContainerKey: 0xFFFF0000,
+
   darkSurfaceKey: blackHex,
   darkOnSurfaceKey: whiteHex,
+  darkSurfaceDimKey: blackHex,
+  darkSurfaceBrightKey: blackHex,
+  darkSurfaceContainerLowestKey: blackHex,
+  darkSurfaceContainerLowKey: blackHex,
+  darkSurfaceContainerKey: blackHex,
+  darkSurfaceContainerHighKey: blackHex,
+  darkSurfaceContainerHighestKey: blackHex,
+  darkOnSurfaceVariantKey: whiteHex,
+  darkInverseSurfaceKey: offBlackHex,
+  darkOnInverseSurfaceKey: whiteHex,
+  darkInversePrimaryKey: empathEucalyptusHex,
+  darkSurfaceTintKey: transparentHex,
 
   // Layout settings //
 
-  marginKey: 15.0, // required key
-  paddingKey: 20.0, // required key
-  spacingKey: 25.0, // required key
+  marginKey: 15.0, // recommended key
+  paddingKey: 20.0, // recommended key
+  spacingKey: 25.0, // recommended key
 };
 
 // Recommended setting(s) parameters //
