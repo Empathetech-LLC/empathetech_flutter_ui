@@ -47,6 +47,8 @@ class EzAlertDialog extends PlatformAlertDialog {
     final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
+    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
     return PlatformAlertDialog(
       key: key,
       widgetKey: widgetKey,
@@ -66,6 +68,8 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         // Actions
         actions: materialActions,
+        actionsAlignment:
+            isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
         // General
         iconPadding: EdgeInsets.only(right: spacing),
@@ -105,20 +109,25 @@ List<TextButton> ezMaterialActions({
   String? confirmMsg,
   required void Function() onDeny,
   String? denyMsg,
+  bool reverseHands = true,
 }) {
-  return <TextButton>[
-    // Confirm
-    TextButton(
-      onPressed: onConfirm,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
-    ),
+  final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
 
+  final List<TextButton> actions = <TextButton>[
     // Deny
     TextButton(
       onPressed: onDeny,
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
+
+    // Confirm
+    TextButton(
+      onPressed: onConfirm,
+      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
+    ),
   ];
+
+  return isLefty ? actions.reversed.toList() : actions;
 }
 
 /// Pairs with [EzAlertDialog]
@@ -134,8 +143,11 @@ List<CupertinoDialogAction> ezCupertinoActions({
   String? denyMsg,
   bool denyIsDefault = false,
   bool denyIsDestructive = false,
+  bool reverseHands = true,
 }) {
-  return <CupertinoDialogAction>[
+  final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
+
+  final List<CupertinoDialogAction> actions = <CupertinoDialogAction>[
     // Confirm
     CupertinoDialogAction(
       onPressed: onConfirm,
@@ -152,4 +164,6 @@ List<CupertinoDialogAction> ezCupertinoActions({
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
   ];
+
+  return isLefty ? actions.reversed.toList() : actions;
 }
