@@ -148,20 +148,20 @@ List<CupertinoDialogAction> ezCupertinoActions({
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
 
   final List<CupertinoDialogAction> actions = <CupertinoDialogAction>[
-    // Confirm
-    CupertinoDialogAction(
-      onPressed: onConfirm,
-      isDefaultAction: confirmIsDefault,
-      isDestructiveAction: confirmIsDestructive,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
-    ),
-
     // Deny
     CupertinoDialogAction(
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
+    ),
+
+    // Confirm
+    CupertinoDialogAction(
+      onPressed: onConfirm,
+      isDefaultAction: confirmIsDefault,
+      isDestructiveAction: confirmIsDestructive,
+      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
   ];
 
