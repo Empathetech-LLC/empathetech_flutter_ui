@@ -901,7 +901,7 @@ abstract class EFUILang {
   /// No description provided for @csSchemeBase.
   ///
   /// In en, this message translates to:
-  /// **'Build from\nimage'**
+  /// **'Build scheme\nfrom image'**
   String get csSchemeBase;
 
   /// No description provided for @csOptional.

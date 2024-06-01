@@ -422,7 +422,7 @@ class EFUILangEs extends EFUILang {
   String get csResetTo => 'Restablecer a...';
 
   @override
-  String get csSchemeBase => 'Construir a partir\nde imagen';
+  String get csSchemeBase => 'Construir esquema a partir\nde la imagen';
 
   @override
   String get csOptional => 'opcional';

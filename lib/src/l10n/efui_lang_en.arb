@@ -173,7 +173,7 @@
   "csReset": "Reset",
   "csResetTo": "Reset to...",
 
-  "csSchemeBase": "Build from\nimage",
+  "csSchemeBase": "Build scheme\nfrom image",
   "csOptional": "optional",
   "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",

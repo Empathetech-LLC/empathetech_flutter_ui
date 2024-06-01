@@ -173,7 +173,7 @@
   "csReset": "Restablecer",
   "csResetTo": "Restablecer a...",
 
-  "csSchemeBase": "Construir a partir\nde imagen",
+  "csSchemeBase": "Construir esquema a partir\nde la imagen",
   "csOptional": "opcional",
   "csFromImage": "Construye la esquema de colores a partir de una imagen",
   "csColorScheme": "esquema de colores",
