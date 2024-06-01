@@ -18,49 +18,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
     super.key,
     this.dark = const ColorScheme.highContrastDark(
       // Primary
-      primary: Colors.black,
-      onPrimary: Colors.white,
-      onPrimaryContainer: Colors.white,
-      onPrimaryFixed: Colors.white,
-      onPrimaryFixedVariant: Colors.white,
-
-      // Secondary
-      secondary: Colors.black,
-      onSecondary: Colors.white,
-      onSecondaryContainer: Colors.white,
-      onSecondaryFixed: Colors.white,
-      onSecondaryFixedVariant: Colors.white,
-
-      // Tertiary
-      tertiary: Colors.black,
-      onTertiary: Colors.white,
-      onTertiaryContainer: Colors.white,
-      onTertiaryFixed: Colors.white,
-
-      // Error
-      error: Colors.black,
-      onError: Colors.red,
-      errorContainer: Colors.white,
-      onErrorContainer: Colors.red,
-
-      // Surface
-      surface: Colors.black,
-      onSurface: Colors.white,
-      surfaceDim: Colors.black,
-      surfaceBright: Colors.black,
-      surfaceContainerLowest: Colors.black,
-      surfaceContainerLow: Colors.black,
-      surfaceContainer: Colors.black,
-      surfaceContainerHigh: Colors.black,
-      surfaceContainerHighest: Colors.black,
-      onSurfaceVariant: Colors.white,
-      inverseSurface: empathOffBlack,
-      onInverseSurface: Colors.white,
-      inversePrimary: Colors.black,
-      surfaceTint: Colors.transparent,
-    ),
-    this.light = const ColorScheme.highContrastLight(
-      // Primary
       primary: Colors.white,
       onPrimary: Colors.black,
       onPrimaryContainer: Colors.black,
@@ -79,12 +36,57 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
       onTertiary: Colors.black,
       onTertiaryContainer: Colors.black,
       onTertiaryFixed: Colors.black,
+      onTertiaryFixedVariant: Colors.black,
 
       // Error
-      error: Colors.white,
-      onError: Colors.red,
-      errorContainer: Colors.black,
-      onErrorContainer: Colors.red,
+      error: empathOffBlack,
+      onError: Colors.white,
+      errorContainer: empathOffBlack,
+      onErrorContainer: Colors.white,
+
+      // Surface
+      surface: Colors.black,
+      onSurface: Colors.white,
+      surfaceDim: Colors.black,
+      surfaceBright: Colors.black,
+      surfaceContainerLowest: Colors.black,
+      surfaceContainerLow: Colors.black,
+      surfaceContainer: Colors.black,
+      surfaceContainerHigh: Colors.black,
+      surfaceContainerHighest: Colors.black,
+      onSurfaceVariant: Colors.white,
+      inverseSurface: empathOffBlack,
+      onInverseSurface: Colors.white,
+      inversePrimary: Colors.white,
+      surfaceTint: Colors.transparent,
+    ),
+    this.light = const ColorScheme.highContrastLight(
+      // Primary
+      primary: Colors.black,
+      onPrimary: Colors.white,
+      onPrimaryContainer: Colors.white,
+      onPrimaryFixed: Colors.white,
+      onPrimaryFixedVariant: Colors.white,
+
+      // Secondary
+      secondary: Colors.black,
+      onSecondary: Colors.white,
+      onSecondaryContainer: Colors.white,
+      onSecondaryFixed: Colors.white,
+      onSecondaryFixedVariant: Colors.white,
+
+      // Tertiary
+      tertiary: Colors.black,
+      onTertiary: Colors.white,
+      onTertiaryContainer: Colors.white,
+      onTertiaryFixed: Colors.white,
+      onTertiaryFixedVariant: Colors.white,
+
+      // Error
+      error: empathOffWhite,
+      onError: Colors.black,
+      errorContainer: empathOffWhite,
+      onErrorContainer: Colors.black,
 
       // Surface
       surface: Colors.white,
@@ -97,9 +99,9 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
       surfaceContainerHigh: Colors.white,
       surfaceContainerHighest: Colors.white,
       onSurfaceVariant: Colors.black,
-      inverseSurface: Colors.white,
+      inverseSurface: empathOffWhite,
       onInverseSurface: Colors.black,
-      inversePrimary: Colors.white,
+      inversePrimary: Colors.black,
       surfaceTint: Colors.transparent,
     ),
   });
