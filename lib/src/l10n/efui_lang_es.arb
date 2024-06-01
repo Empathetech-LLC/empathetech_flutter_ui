@@ -109,9 +109,13 @@
   
   "csPageTitle": "Configuraciones de color",
 
+  "csBasic": "Básica",
+  "csAdvanced": "Avanzada",
+
   "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
 
   "csHighContrast": "Utilice colores de alto contraste",
+  "csMonoChrome": "Usar esquema monocromático",
 
   "csPrimary": "Primario",
   "csOnPrimary": "En primario",
