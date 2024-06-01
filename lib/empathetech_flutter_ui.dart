@@ -41,6 +41,7 @@ export 'src/classes/screen_reader_support/rich_text.dart';
 // User customization
 export 'src/classes/user_customization/color_scheme/color_setting.dart';
 export 'src/classes/user_customization/color_scheme/high_contrast_colors_setting.dart';
+export 'src/classes/user_customization/color_scheme/mono_chrome_colors_setting.dart';
 
 export 'src/classes/user_customization/text_theme/bold_setting.dart';
 export 'src/classes/user_customization/text_theme/double_setting.dart';
