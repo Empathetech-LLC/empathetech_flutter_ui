@@ -261,7 +261,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               spacer,
 
               // Mono chrome quick setting
-              const EzHighContrastColorsSetting(),
+              const EzMonoChromeColorsSetting(),
               spacer,
 
               // From image button
