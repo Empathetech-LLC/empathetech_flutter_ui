@@ -368,8 +368,12 @@ class _ImageSettingState extends State<EzImageSetting> {
                   ? null
                   : provideImage(currPath!),
               backgroundColor: Colors.transparent,
+              foregroundColor: theme.colorScheme.onSurface,
               child: (currPath == null || currPath == noImageValue)
-                  ? Icon(PlatformIcons(context).clear)
+                  ? Icon(
+                      PlatformIcons(context).edit,
+                      size: theme.textTheme.titleLarge?.fontSize,
+                    )
                   : null,
             ),
           ),
