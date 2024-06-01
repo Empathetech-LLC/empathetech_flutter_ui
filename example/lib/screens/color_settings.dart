@@ -256,10 +256,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             separator,
 
             if (currentTab == basicSettings) ...<Widget>[
-              // High contrast quick setting
-              const EzHighContrastColorsSetting(),
-              spacer,
-
               // Mono chrome quick setting
               const EzMonoChromeColorsSetting(),
               spacer,
