@@ -29,10 +29,29 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  // Define the static page content //
+  // Define the shared build data //
 
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
+
+  static const String basicSettings = 'basic';
+  static const String advancedSettings = 'advanced';
+
+  String currentTab = basicSettings;
+
+  late final String resetDialogTitle = l10n.csResetAll(themeProfile);
+
+  late final Widget resetButton = EzResetButton(
+    dialogTitle: resetDialogTitle,
+    onConfirm: () {
+      EzConfig.removeKeys(<String>{...fullList, userColorsKey});
+      setState(() {
+        currList = List<String>.from(defaultList);
+      });
+    },
+  );
+
+  // Basic controls  //
 
   /// Build from image button label
   late final String fromImageLabel = l10n.csSchemeBase;
@@ -41,7 +60,37 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   /// Build from image button dialog title
   late final String fromImageTitle = '$themeProfile ${l10n.csColorScheme}';
 
-  late final String resetDialogTitle = l10n.csResetAll(themeProfile);
+  late final Widget fromImageButton = isDark
+      ? Semantics(
+          button: true,
+          hint: fromImageHint,
+          child: ExcludeSemantics(
+            child: EzImageSetting(
+              configKey: darkColorSchemeImageKey,
+              label: fromImageLabel,
+              dialogTitle: fromImageTitle,
+              allowClear: true,
+              updateTheme: Brightness.dark,
+              hideThemeMessage: true,
+            ),
+          ),
+        )
+      : Semantics(
+          button: true,
+          hint: fromImageHint,
+          child: ExcludeSemantics(
+            child: EzImageSetting(
+              configKey: lightColorSchemeImageKey,
+              label: fromImageLabel,
+              dialogTitle: fromImageTitle,
+              allowClear: true,
+              updateTheme: Brightness.light,
+              hideThemeMessage: true,
+            ),
+          ),
+        );
+
+  // Advanced controls //
 
   late final List<String> defaultList = isDark
       ? <String>[
@@ -59,53 +108,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final Set<String> defaultSet = defaultList.toSet();
 
   late final List<String> fullList = isDark ? darkColors : lightColors;
-
-  /// Return the [List] of [Widget]s that aren't [EzColorSetting]s
-  late final List<Widget> otherButtons = <Widget>[
-    isDark
-        ? Semantics(
-            button: true,
-            hint: fromImageHint,
-            child: ExcludeSemantics(
-              child: EzImageSetting(
-                configKey: darkColorSchemeImageKey,
-                label: fromImageLabel,
-                dialogTitle: fromImageTitle,
-                allowClear: true,
-                updateTheme: Brightness.dark,
-                hideThemeMessage: true,
-              ),
-            ),
-          )
-        : Semantics(
-            button: true,
-            hint: fromImageHint,
-            child: ExcludeSemantics(
-              child: EzImageSetting(
-                configKey: lightColorSchemeImageKey,
-                label: fromImageLabel,
-                dialogTitle: fromImageTitle,
-                allowClear: true,
-                updateTheme: Brightness.light,
-                hideThemeMessage: true,
-              ),
-            ),
-          ),
-    separator,
-
-    // Local reset all
-    EzResetButton(
-      dialogTitle: resetDialogTitle,
-      onConfirm: () {
-        EzConfig.removeKeys(<String>{...fullList, userColorsKey});
-        setState(() {
-          currList = List<String>.from(defaultList);
-        });
-      },
-    ),
-  ];
-
-  // Define the dynamic page content //
 
   late List<String> currList =
       EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
@@ -232,47 +234,77 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               style: labelStyle,
               textAlign: TextAlign.center,
             ),
-            separator,
+            spacer,
 
-            // High contrast quick setting
-            const EzHighContrastColorsSetting(),
-            separator,
-
-            // Dynamic configKeys
-            ...dynamicColorSettings(),
-            spacer, // This makes two, dynamicColorSettings has a trailing spacer too
-
-            // Add a color
-            TextButton.icon(
-              icon: Icon(PlatformIcons(context).addCircledOutline),
-              label: Text(l10n.csAddColor),
-              onPressed: () async {
-                // Show available color configKeys
-                await showModalBottomSheet(
-                  context: context,
-                  showDragHandle: true,
-                  builder: (BuildContext context) => StatefulBuilder(
-                    builder: (
-                      BuildContext context,
-                      StateSetter setModalState,
-                    ) {
-                      return EzScrollView(
-                        children: getUntrackedColors(setModalState),
-                      );
-                    },
-                  ),
-                );
-
-                // Save the user's changes
-                if (currList != defaultList) {
-                  EzConfig.setStringList(userColorsKey, currList);
-                }
+            SegmentedButton<String>(
+              segments: <ButtonSegment<String>>[
+                ButtonSegment<String>(
+                  value: basicSettings,
+                  label: Text(l10n.csBasic),
+                ),
+                ButtonSegment<String>(
+                  value: advancedSettings,
+                  label: Text(l10n.csAdvanced),
+                ),
+              ],
+              selected: <String>{currentTab},
+              showSelectedIcon: false,
+              onSelectionChanged: (Set<String> selected) {
+                setState(() => currentTab = selected.first);
               },
             ),
             separator,
 
-            // Build from image
-            ...otherButtons,
+            if (currentTab == basicSettings) ...<Widget>[
+              // High contrast quick setting
+              const EzHighContrastColorsSetting(),
+              spacer,
+
+              // Mono chrome quick setting
+              const EzHighContrastColorsSetting(),
+              spacer,
+
+              // From image button
+              fromImageButton,
+            ],
+
+            if (currentTab == advancedSettings) ...<Widget>[
+              // Dynamic configKeys
+              ...dynamicColorSettings(),
+              spacer, // dynamicColorSettings has a trailing spacer too
+
+              // Add a color
+              TextButton.icon(
+                icon: Icon(PlatformIcons(context).addCircledOutline),
+                label: Text(l10n.csAddColor),
+                onPressed: () async {
+                  // Show available color configKeys
+                  await showModalBottomSheet(
+                    context: context,
+                    showDragHandle: true,
+                    builder: (BuildContext context) => StatefulBuilder(
+                      builder: (
+                        BuildContext context,
+                        StateSetter setModalState,
+                      ) {
+                        return EzScrollView(
+                          children: getUntrackedColors(setModalState),
+                        );
+                      },
+                    ),
+                  );
+
+                  // Save the user's changes
+                  if (currList != defaultList) {
+                    EzConfig.setStringList(userColorsKey, currList);
+                  }
+                },
+              ),
+            ],
+            separator,
+
+            // Reset button
+            resetButton,
             spacer,
           ],
         ),
