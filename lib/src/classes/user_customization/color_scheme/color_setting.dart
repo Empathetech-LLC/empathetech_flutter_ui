@@ -130,13 +130,21 @@ class _ColorSettingState extends State<EzColorSetting> {
                   shape: BoxShape.circle,
                   border: Border.all(color: backgroundColor),
                 ),
-                child: CircleAvatar(
-                  backgroundColor: Color(recommended),
-                  radius: padding * 2,
-                  child: currColor == Colors.transparent
-                      ? Icon(PlatformIcons(context).eyeSlash)
-                      : null,
-                ),
+                child: recommended == transparentHex
+                    ? CircleAvatar(
+                        backgroundColor: theme.colorScheme.surface,
+                        foregroundColor: theme.colorScheme.onSurface,
+                        radius: padding * sqrt(2),
+                        child: Icon(
+                          PlatformIcons(context).eyeSlash,
+                          size: theme.textTheme.titleLarge?.fontSize,
+                        ),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: Color(recommended),
+                        foregroundColor: getTextColor(Color(recommended)),
+                        radius: padding * sqrt(2),
+                      ),
               ),
             ],
             materialActions: ezMaterialActions(
@@ -198,13 +206,21 @@ class _ColorSettingState extends State<EzColorSetting> {
                   shape: BoxShape.circle,
                   border: Border.all(color: getTextColor(resetColor)),
                 ),
-                child: CircleAvatar(
-                  backgroundColor: resetColor,
-                  radius: padding * 2,
-                  child: currColor == Colors.transparent
-                      ? Icon(PlatformIcons(context).eyeSlash)
-                      : null,
-                ),
+                child: resetColor == Colors.transparent
+                    ? CircleAvatar(
+                        backgroundColor: theme.colorScheme.surface,
+                        foregroundColor: theme.colorScheme.onSurface,
+                        radius: padding * sqrt(2),
+                        child: Icon(
+                          PlatformIcons(context).eyeSlash,
+                          size: theme.textTheme.titleLarge?.fontSize,
+                        ),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: resetColor,
+                        foregroundColor: getTextColor(resetColor),
+                        radius: padding * sqrt(2),
+                      ),
               ),
             ],
             materialActions: ezMaterialActions(
@@ -286,13 +302,21 @@ class _ColorSettingState extends State<EzColorSetting> {
                 color: theme.colorScheme.primaryContainer,
               ),
             ),
-            child: CircleAvatar(
-              backgroundColor: currColor,
-              radius: padding * sqrt(2),
-              child: currColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
-                  : null,
-            ),
+            child: currColor == Colors.transparent
+                ? CircleAvatar(
+                    backgroundColor: theme.colorScheme.surface,
+                    foregroundColor: theme.colorScheme.onSurface,
+                    radius: padding * sqrt(2),
+                    child: Icon(
+                      PlatformIcons(context).eyeSlash,
+                      size: theme.textTheme.titleLarge?.fontSize,
+                    ),
+                  )
+                : CircleAvatar(
+                    backgroundColor: currColor,
+                    foregroundColor: getTextColor(currColor),
+                    radius: padding * sqrt(2),
+                  ),
           ),
           label: Text(label),
           style: theme.elevatedButtonTheme.style!.copyWith(
