@@ -130,6 +130,19 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Segmented button
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: SegmentedButton.styleFrom(
+        textStyle: textTheme.bodyLarge,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        selectedBackgroundColor: colorScheme.primary,
+        selectedForegroundColor: colorScheme.onPrimary,
+        disabledBackgroundColor: colorScheme.surface,
+        disabledForegroundColor: colorScheme.onSurface,
+      ),
+    ),
+
     // TabBar
     tabBarTheme: TabBarTheme(
       labelStyle: textTheme.bodyLarge,
