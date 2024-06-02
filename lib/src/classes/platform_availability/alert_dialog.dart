@@ -50,8 +50,6 @@ class EzAlertDialog extends PlatformAlertDialog {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
     return PlatformAlertDialog(
-      key: key,
-      widgetKey: widgetKey,
       material: (BuildContext dialogContext, PlatformTarget platform) =>
           MaterialAlertDialogData(
         // Title
