@@ -39,7 +39,7 @@ dev_dependencies:
 
   # For development/testing
   dartdoc: ^8.0.5
-  dependency_validator: ^3.2.2
+  dependency_validator: ^4.1.0
   flutter_lints: ^4.0.0
 
   flutter_test:
