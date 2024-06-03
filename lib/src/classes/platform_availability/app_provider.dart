@@ -68,7 +68,6 @@ class EzAppProvider extends StatelessWidget {
             legacyIosUsesMaterialWidgets: true,
             iosUseZeroPaddingForAppbarPlatformIcon: true,
           ),
-      key: key,
     );
   }
 }

@@ -75,7 +75,6 @@ class EzRichText extends StatelessWidget {
       label: _semanticsLabel(),
       child: Text.rich(
         TextSpan(children: children),
-        key: key,
         style: style,
         textAlign: textAlign,
         textDirection: textDirection,

@@ -46,7 +46,6 @@ class EzRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      key: key,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
