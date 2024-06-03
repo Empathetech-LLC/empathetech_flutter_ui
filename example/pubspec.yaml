@@ -33,17 +33,32 @@ dev_dependencies:
 
   dependency_validator: ^4.1.0
   flutter_lints: ^4.0.0
-  
   flutter_test:
     sdk: flutter
+  google_fonts: ^6.1.0
 
 flutter:
   generate: true # For l10n
   uses-material-design: true
 
   assets:
-    - assets/dark-logo.png
-    - assets/dark-logo-round.png
+    - assets/
+    - assets/images/
+    - assets/images/dark-logo.png
+    - assets/images/dark-logo-round.png
+    - assets/fonts/
+    - assets/fonts/Roboto-Black.ttf
+    - assets/fonts/Roboto-BlackItalic.ttf
+    - assets/fonts/Roboto-Bold.ttf
+    - assets/fonts/Roboto-BoldItalic.ttf
+    - assets/fonts/Roboto-Italic.ttf
+    - assets/fonts/Roboto-Light.ttf
+    - assets/fonts/Roboto-LightItalic.ttf
+    - assets/fonts/Roboto-Medium.ttf
+    - assets/fonts/Roboto-MediumItalic.ttf
+    - assets/fonts/Roboto-Regular.ttf
+    - assets/fonts/Roboto-Thin.ttf
+    - assets/fonts/Roboto-ThinItalic.ttf
 
 flutter_launcher_icons:
   image_path: assets/dark-logo.png
