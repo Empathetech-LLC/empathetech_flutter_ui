@@ -112,7 +112,7 @@ Once gathered, `EzConfig` stores the data in a Singleton instance for efficient 
 class YourApp extends StatelessWidget {
   final Key? key;
 
-  const YourApp({this.key}) : super(key: key);
+  const YourApp({super.key});
 
   @override
   Widget build(BuildContext context) {
