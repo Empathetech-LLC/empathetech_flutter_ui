@@ -9,25 +9,52 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-void main() {
+void main() async {
   // Setup the test environment //
 
+  debugPrint('Setup start');
+
   TestWidgetsFlutterBinding.ensureInitialized();
-
-  late final EFUILang enText;
-
   setUpAll(() async {
     GoogleFonts.config.allowRuntimeFetching = false;
-    enText = await EFUILang.delegate.load(const Locale('en'));
   });
 
-  testWidgets('Test home screen', (WidgetTester tester) async {
+  final EFUILang enText = await EFUILang.delegate.load(const Locale('en'));
+
+  debugPrint('Setup end');
+
+  testSuite(
+    title: 'Home screen tests: Default config, English',
+    prefs: empathetechConfig,
+    locale: 'en',
+    l10n: enText,
+  );
+
+  final EFUILang esText = await EFUILang.delegate.load(const Locale('es'));
+
+  testSuite(
+    title: 'Home screen tests: Default config, Spanish',
+    prefs: empathetechConfig,
+    locale: 'es',
+    l10n: esText,
+  );
+}
+
+void testSuite({
+  required String title,
+  required Map<String, Object> prefs,
+  required String locale,
+  required EFUILang l10n,
+}) {
+  debugPrint('Starting $title');
+
+  testWidgets(title, (WidgetTester tester) async {
     // Run the tests //
     // Load the app //
 
     final Widget testApp = await testOpenUI(prefs: <String, Object>{
-      ...empathetechConfig,
-      localeKey: <String>['en'],
+      ...prefs,
+      localeKey: <String>[locale],
     });
 
     debugPrint('Loading Open UI');
@@ -44,7 +71,7 @@ void main() {
 
     final Finder textSettingsButton = find.widgetWithText(
       ElevatedButton,
-      enText.tsPageTitle,
+      l10n.tsPageTitle,
     );
 
     expect(textSettingsButton, findsOneWidget);
@@ -55,7 +82,7 @@ void main() {
 
     final Finder layoutSettingsButton = find.widgetWithText(
       ElevatedButton,
-      enText.lsPageTitle,
+      l10n.lsPageTitle,
     );
 
     expect(layoutSettingsButton, findsOneWidget);
@@ -66,7 +93,7 @@ void main() {
 
     final Finder colorSettingsButton = find.widgetWithText(
       ElevatedButton,
-      enText.csPageTitle,
+      l10n.csPageTitle,
     );
 
     expect(colorSettingsButton, findsOneWidget);
@@ -77,7 +104,7 @@ void main() {
 
     final Finder imageSettingsButton = find.widgetWithText(
       ElevatedButton,
-      enText.isPageTitle,
+      l10n.isPageTitle,
     );
 
     expect(imageSettingsButton, findsOneWidget);
@@ -93,8 +120,8 @@ void main() {
     expect(dominantHandButton, findsOneWidget);
     await touch(tester, dominantHandButton);
 
-    final Finder rightButton = find.text(enText.gRight).last;
-    final Finder leftButton = find.text(enText.gLeft).last;
+    final Finder rightButton = find.text(l10n.gRight).last;
+    final Finder leftButton = find.text(l10n.gLeft).last;
 
     expect(rightButton, findsOneWidget);
     expect(leftButton, findsOneWidget);
@@ -129,9 +156,9 @@ void main() {
     expect(themeModeButton, findsOneWidget);
     await touch(tester, themeModeButton);
 
-    final Finder systemButton = find.text(enText.gSystem).last;
-    final Finder darkButton = find.text(enText.gDark).last;
-    final Finder lightButton = find.text(enText.gLight).last;
+    final Finder systemButton = find.text(l10n.gSystem).last;
+    final Finder darkButton = find.text(l10n.gDark).last;
+    final Finder lightButton = find.text(l10n.gLight).last;
 
     expect(systemButton, findsOneWidget);
     expect(darkButton, findsOneWidget);
@@ -176,15 +203,15 @@ void main() {
     expect(resetButton, findsOneWidget);
     await touch(tester, resetButton);
 
-    final Finder noButton = find.text(enText.gNo).last;
-    final Finder yesButton = find.text(enText.gYes).last;
+    final Finder noButton = find.text(l10n.gNo).last;
+    final Finder yesButton = find.text(l10n.gYes).last;
 
     expect(noButton, findsOneWidget);
     expect(yesButton, findsOneWidget);
 
     await tester.tap(yesButton);
     await tester.pumpAndSettle();
-
-    debugPrint('Home screen tests complete');
   });
+
+  debugPrint('$title complete');
 }
