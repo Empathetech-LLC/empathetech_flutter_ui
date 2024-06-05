@@ -46,8 +46,8 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             const EzLayoutSetting(
               configKey: marginKey,
               type: LayoutSettingType.margin,
-              min: 0.0,
-              max: 50.0,
+              min: minMargin,
+              max: maxMargin,
               steps: 10,
               decimals: 1,
             ),
@@ -57,8 +57,8 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             const EzLayoutSetting(
               configKey: paddingKey,
               type: LayoutSettingType.padding,
-              min: 0.0,
-              max: 50.0,
+              min: minPadding,
+              max: maxPadding,
               steps: 10,
               decimals: 1,
             ),
@@ -68,8 +68,8 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
             const EzLayoutSetting(
               configKey: spacingKey,
               type: LayoutSettingType.spacing,
-              min: 10.0,
-              max: 100.0,
+              min: minSpacing,
+              max: maxSpacing,
               steps: 18,
               decimals: 0,
             ),
