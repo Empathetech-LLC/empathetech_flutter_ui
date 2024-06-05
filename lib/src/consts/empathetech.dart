@@ -297,3 +297,12 @@ const double minFontHeight = 1.0;
 const double maxFontHeight = 3.0;
 
 const String fontSpacingSampleString = '-5.55';
+
+const double minMargin = 0.0;
+const double maxMargin = 50.0;
+
+const double minPadding = 0.0;
+const double maxPadding = 50.0;
+
+const double minSpacing = 10.0;
+const double maxSpacing = 100.0;
