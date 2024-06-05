@@ -24,29 +24,22 @@ Future<void> touch(WidgetTester tester, Finder toFind) async {
 
 Widget testOpenUI({
   required String title,
+  required Locale locale,
   TargetPlatform platform = TargetPlatform.android,
 }) =>
     EzAppProvider(
       key: ValueKey<String>(title),
       initialPlatform: platform,
       app: PlatformApp.router(
-        // Production ready!
         debugShowCheckedModeBanner: false,
-
-        // Language handlers
+        title: appTitle,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>{
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
           OpenUIFeedbackLocalizationsDelegate(),
         },
-
-        // Supported languages
         supportedLocales: EFUILang.supportedLocales,
-
-        // Current language
-        locale: EzConfig.getLocale(),
-
-        title: appTitle,
+        locale: locale,
         routerConfig: router,
       ),
     );
