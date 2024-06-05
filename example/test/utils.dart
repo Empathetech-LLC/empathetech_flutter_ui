@@ -10,6 +10,7 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 Future<void> goBack(WidgetTester tester) async {
   final Finder backButton = find.byIcon(Icons.arrow_back);
   expect(backButton, findsOneWidget);
+  await tester.ensureVisible(backButton);
   await tester.tap(backButton);
   await tester.pumpAndSettle();
 }
@@ -22,10 +23,11 @@ Future<void> touch(WidgetTester tester, Finder toFind) async {
 }
 
 Widget testOpenUI({
-  required Map<String, Object> prefs,
+  required String title,
   TargetPlatform platform = TargetPlatform.android,
 }) =>
     EzAppProvider(
+      key: ValueKey<String>(title),
       initialPlatform: platform,
       app: PlatformApp.router(
         // Production ready!
