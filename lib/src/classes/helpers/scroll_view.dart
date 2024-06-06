@@ -7,17 +7,16 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzScrollView extends StatelessWidget {
   // Scrollbar parameters //
 
   final ScrollController? controller;
   final bool? thumbVisibility;
-  final bool? trackVisibility;
   final double? thickness;
   final Radius? radius;
   final ScrollNotificationPredicate? notificationPredicate;
-  final bool? interactive;
   final ScrollbarOrientation? scrollbarOrientation;
 
   // SingleChildScrollView parameters //
@@ -61,11 +60,9 @@ class EzScrollView extends StatelessWidget {
     // Scrollbar parameters //
     this.controller,
     this.thumbVisibility,
-    this.trackVisibility,
     this.thickness,
     this.radius,
     this.notificationPredicate,
-    this.interactive,
     this.scrollbarOrientation,
 
     // SingleChildScrollView parameters //
@@ -121,14 +118,12 @@ class EzScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
+    return PlatformScrollbar(
       controller: controller,
       thumbVisibility: thumbVisibility,
-      trackVisibility: trackVisibility,
       thickness: thickness,
       radius: radius,
       notificationPredicate: notificationPredicate,
-      interactive: interactive,
       scrollbarOrientation: scrollbarOrientation,
       child: SingleChildScrollView(
         scrollDirection: scrollDirection,
