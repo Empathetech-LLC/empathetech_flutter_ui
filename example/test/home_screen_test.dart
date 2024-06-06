@@ -45,6 +45,7 @@ void main() async {
   //// Run the tests ////
 
   // Verify each platform //
+
   const List<TargetPlatform> platforms = <TargetPlatform>[
     TargetPlatform.android,
     TargetPlatform.iOS,
@@ -55,7 +56,7 @@ void main() async {
 
   for (final TargetPlatform platform in platforms) {
     testSuite(
-      title: 'Home screen tests: Default config',
+      title: 'Home screen platform test: ${platform.toString()}',
       locale: english,
       l10n: enText,
       localeNames: enNames,
@@ -66,7 +67,7 @@ void main() async {
   // Verify each language //
   for (int i = 0; i < locales.length; i++) {
     testSuite(
-      title: 'Home screen tests: Default config, ${locales[i].languageCode}',
+      title: 'Home screen language test: ${locales[i].languageCode}',
       locale: locales[i],
       l10n: l10ns[i],
       localeNames: l10nNames[i],
@@ -94,7 +95,7 @@ void main() async {
     // Default config
     testSuite(
       title:
-          'Home screen tests: Default config, ${screenSize.width}x${screenSize.height}',
+          'Home screen layout test: Default config on ${screenSize.width}x${screenSize.height}',
       locale: english,
       l10n: enText,
       localeNames: enNames,
@@ -104,7 +105,7 @@ void main() async {
     // Minimum config
     testSuite(
       title:
-          'Home screen tests: Minimum config, ${screenSize.width}x${screenSize.height}',
+          'Home screen layout test: Minimum config on ${screenSize.width}x${screenSize.height}',
       locale: english,
       l10n: enText,
       localeNames: enNames,
@@ -158,7 +159,7 @@ void main() async {
     // Maximum config
     testSuite(
       title:
-          'Home screen tests: Maximum config, ${screenSize.width}x${screenSize.height}',
+          'Home screen layout test: Maximum config on ${screenSize.width}x${screenSize.height}',
       locale: english,
       l10n: enText,
       localeNames: enNames,
