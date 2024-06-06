@@ -8,12 +8,30 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
-  // Setup the test environment //
+  //// Setup the test environment ////
+
+  // Load contextual data //
 
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() {
     GoogleFonts.config.allowRuntimeFetching = false;
   });
+
+  const Locale english = Locale('en');
+  const Locale spanish = Locale('es');
+  const List<Locale> locales = <Locale>[english, spanish];
+
+  final EFUILang enText = await EFUILang.delegate.load(english);
+  final EFUILang esText = await EFUILang.delegate.load(spanish);
+  final List<EFUILang> l10ns = <EFUILang>[enText, esText];
+
+  final LocaleNames enNames =
+      await const LocaleNamesLocalizationsDelegate().load(english);
+  final LocaleNames esNames =
+      await const LocaleNamesLocalizationsDelegate().load(spanish);
+  final List<LocaleNames> l10nNames = <LocaleNames>[enNames, esNames];
+
+  // Set mock values //
 
   SharedPreferences.setMockInitialValues(empathetechConfig);
   final SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -24,16 +42,9 @@ void main() async {
     defaults: empathetechConfig,
   );
 
-  final EFUILang enText = await EFUILang.delegate.load(const Locale('en'));
-  final LocaleNames enNames =
-      await const LocaleNamesLocalizationsDelegate().load(const Locale('en'));
+  //// Run the tests ////
 
-  final EFUILang esText = await EFUILang.delegate.load(const Locale('es'));
-  final LocaleNames esNames =
-      await const LocaleNamesLocalizationsDelegate().load(const Locale('es'));
-
-  // Run the tests //
-
+  // Verify each platform //
   const List<TargetPlatform> platforms = <TargetPlatform>[
     TargetPlatform.android,
     TargetPlatform.iOS,
@@ -42,162 +53,169 @@ void main() async {
     TargetPlatform.linux,
   ];
 
+  for (final TargetPlatform platform in platforms) {
+    testSuite(
+      title: 'Home screen tests: Default config',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      platform: platform,
+    );
+  }
+
+  // Verify each language //
+  for (int i = 0; i < locales.length; i++) {
+    testSuite(
+      title: 'Home screen tests: Default config, ${locales[i].languageCode}',
+      locale: locales[i],
+      l10n: l10ns[i],
+      localeNames: l10nNames[i],
+      setup: () async {
+        await preferences.setStringList(
+          localeKey,
+          <String>[locales[i].languageCode],
+        );
+      },
+    );
+  }
+
+  // Verify screen size and config smorgasbord //
+
   const List<Size> screenSizes = <Size>[
     Size(375, 667), // Small phone (iPhone SE 3rd gen)
     Size(430, 932), // Large phone (iPhone 14 Pro Max)
     Size(744, 1133), // Small tablet, (iPad Mini 6th gen)
     Size(1024, 1366), // Large tablet, (iPad Pro, 12.9-inch, 6th gen)
     Size(1920, 1080), // Standard desktop monitor (16:9)
-    Size(2560, 1080), // Large desktop monitor (21:9)
+    Size(2560, 1080), // Wide desktop monitor (21:9)
   ];
 
-  for (final TargetPlatform platform in platforms) {
-    for (final Size screenSize in screenSizes) {
-      // Default config
-      testSuite(
-        title: 'Home screen tests: Default config',
-        locale: 'en',
-        l10n: enText,
-        localeNames: enNames,
-        platform: platform,
-        screenSize: screenSize,
-      );
+  for (final Size screenSize in screenSizes) {
+    // Default config
+    testSuite(
+      title:
+          'Home screen tests: Default config, ${screenSize.width}x${screenSize.height}',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      screenSize: screenSize,
+    );
 
-      // Default config, Spanish
-      testSuite(
-        title: 'Home screen tests: Default config, Spanish',
-        locale: 'es',
-        l10n: esText,
-        localeNames: esNames,
-        platform: platform,
-        screenSize: screenSize,
-        setup: () async {
-          await preferences.setStringList(localeKey, <String>['es']);
-        },
-      );
+    // Minimum config
+    testSuite(
+      title:
+          'Home screen tests: Minimum config, ${screenSize.width}x${screenSize.height}',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      screenSize: screenSize,
+      setup: () async {
+        await preferences.remove(localeKey);
 
-      // Minimum config
-      testSuite(
-        title: 'Home screen tests: Minimum config',
-        locale: 'en',
-        l10n: enText,
-        localeNames: enNames,
-        platform: platform,
-        screenSize: screenSize,
-        setup: () async {
-          await preferences.remove(localeKey);
+        // Text settings //
 
-          // Text settings //
+        // Display
+        await preferences.setDouble(displayFontSizeKey, minFontSize);
+        await preferences.setDouble(displayFontHeightKey, minFontHeight);
+        await preferences.setDouble(
+            displayLetterSpacingKey, minFontLetterSpacing);
+        await preferences.setDouble(displayWordSpacingKey, minFontWordSpacing);
 
-          // Display
-          await preferences.setDouble(displayFontSizeKey, minFontSize);
-          await preferences.setDouble(displayFontHeightKey, minFontHeight);
-          await preferences.setDouble(
-              displayLetterSpacingKey, minFontLetterSpacing);
-          await preferences.setDouble(
-              displayWordSpacingKey, minFontWordSpacing);
+        // Headline
+        await preferences.setDouble(headlineFontSizeKey, minFontSize);
+        await preferences.setDouble(headlineFontHeightKey, minFontHeight);
+        await preferences.setDouble(
+            headlineLetterSpacingKey, minFontLetterSpacing);
+        await preferences.setDouble(headlineWordSpacingKey, minFontWordSpacing);
 
-          // Headline
-          await preferences.setDouble(headlineFontSizeKey, minFontSize);
-          await preferences.setDouble(headlineFontHeightKey, minFontHeight);
-          await preferences.setDouble(
-              headlineLetterSpacingKey, minFontLetterSpacing);
-          await preferences.setDouble(
-              headlineWordSpacingKey, minFontWordSpacing);
+        // Title
+        await preferences.setDouble(titleFontSizeKey, minFontSize);
+        await preferences.setDouble(titleFontHeightKey, minFontHeight);
+        await preferences.setDouble(
+            titleLetterSpacingKey, minFontLetterSpacing);
+        await preferences.setDouble(titleWordSpacingKey, minFontWordSpacing);
 
-          // Title
-          await preferences.setDouble(titleFontSizeKey, minFontSize);
-          await preferences.setDouble(titleFontHeightKey, minFontHeight);
-          await preferences.setDouble(
-              titleLetterSpacingKey, minFontLetterSpacing);
-          await preferences.setDouble(titleWordSpacingKey, minFontWordSpacing);
+        // Body
+        await preferences.setDouble(bodyFontSizeKey, minFontSize);
+        await preferences.setDouble(bodyFontHeightKey, minFontHeight);
+        await preferences.setDouble(bodyLetterSpacingKey, minFontLetterSpacing);
+        await preferences.setDouble(bodyWordSpacingKey, minFontWordSpacing);
 
-          // Body
-          await preferences.setDouble(bodyFontSizeKey, minFontSize);
-          await preferences.setDouble(bodyFontHeightKey, minFontHeight);
-          await preferences.setDouble(
-              bodyLetterSpacingKey, minFontLetterSpacing);
-          await preferences.setDouble(bodyWordSpacingKey, minFontWordSpacing);
+        // Label
+        await preferences.setDouble(labelFontSizeKey, minFontSize);
+        await preferences.setDouble(labelFontHeightKey, minFontHeight);
+        await preferences.setDouble(
+            labelLetterSpacingKey, minFontLetterSpacing);
+        await preferences.setDouble(labelWordSpacingKey, minFontWordSpacing);
 
-          // Label
-          await preferences.setDouble(labelFontSizeKey, minFontSize);
-          await preferences.setDouble(labelFontHeightKey, minFontHeight);
-          await preferences.setDouble(
-              labelLetterSpacingKey, minFontLetterSpacing);
-          await preferences.setDouble(labelWordSpacingKey, minFontWordSpacing);
+        // Layout settings //
+        await preferences.setDouble(marginKey, minMargin);
+        await preferences.setDouble(paddingKey, minPadding);
+        await preferences.setDouble(spacingKey, minSpacing);
+      },
+    );
 
-          // Layout settings //
-          await preferences.setDouble(marginKey, minMargin);
-          await preferences.setDouble(paddingKey, minPadding);
-          await preferences.setDouble(spacingKey, minSpacing);
-        },
-      );
+    // Maximum config
+    testSuite(
+      title:
+          'Home screen tests: Maximum config, ${screenSize.width}x${screenSize.height}',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      screenSize: screenSize,
+      setup: () async {
+        // Text settings //
 
-      // Maximum config
-      testSuite(
-        title: 'Home screen tests: Maximum config',
-        locale: 'en',
-        l10n: enText,
-        localeNames: enNames,
-        platform: platform,
-        screenSize: screenSize,
-        setup: () async {
-          // Text settings //
+        // Display
+        await preferences.setDouble(displayFontSizeKey, maxFontSize);
+        await preferences.setDouble(displayFontHeightKey, maxFontHeight);
+        await preferences.setDouble(
+            displayLetterSpacingKey, maxFontLetterSpacing);
+        await preferences.setDouble(displayWordSpacingKey, maxFontWordSpacing);
 
-          // Display
-          await preferences.setDouble(displayFontSizeKey, maxFontSize);
-          await preferences.setDouble(displayFontHeightKey, maxFontHeight);
-          await preferences.setDouble(
-              displayLetterSpacingKey, maxFontLetterSpacing);
-          await preferences.setDouble(
-              displayWordSpacingKey, maxFontWordSpacing);
+        // Headline
+        await preferences.setDouble(headlineFontSizeKey, maxFontSize);
+        await preferences.setDouble(headlineFontHeightKey, maxFontHeight);
+        await preferences.setDouble(
+            headlineLetterSpacingKey, maxFontLetterSpacing);
+        await preferences.setDouble(headlineWordSpacingKey, maxFontWordSpacing);
 
-          // Headline
-          await preferences.setDouble(headlineFontSizeKey, maxFontSize);
-          await preferences.setDouble(headlineFontHeightKey, maxFontHeight);
-          await preferences.setDouble(
-              headlineLetterSpacingKey, maxFontLetterSpacing);
-          await preferences.setDouble(
-              headlineWordSpacingKey, maxFontWordSpacing);
+        // Title
+        await preferences.setDouble(titleFontSizeKey, maxFontSize);
+        await preferences.setDouble(titleFontHeightKey, maxFontHeight);
+        await preferences.setDouble(
+            titleLetterSpacingKey, maxFontLetterSpacing);
+        await preferences.setDouble(titleWordSpacingKey, maxFontWordSpacing);
 
-          // Title
-          await preferences.setDouble(titleFontSizeKey, maxFontSize);
-          await preferences.setDouble(titleFontHeightKey, maxFontHeight);
-          await preferences.setDouble(
-              titleLetterSpacingKey, maxFontLetterSpacing);
-          await preferences.setDouble(titleWordSpacingKey, maxFontWordSpacing);
+        // Body
+        await preferences.setDouble(bodyFontSizeKey, maxFontSize);
+        await preferences.setDouble(bodyFontHeightKey, maxFontHeight);
+        await preferences.setDouble(bodyLetterSpacingKey, maxFontLetterSpacing);
+        await preferences.setDouble(bodyWordSpacingKey, maxFontWordSpacing);
 
-          // Body
-          await preferences.setDouble(bodyFontSizeKey, maxFontSize);
-          await preferences.setDouble(bodyFontHeightKey, maxFontHeight);
-          await preferences.setDouble(
-              bodyLetterSpacingKey, maxFontLetterSpacing);
-          await preferences.setDouble(bodyWordSpacingKey, maxFontWordSpacing);
+        // Label
+        await preferences.setDouble(labelFontSizeKey, maxFontSize);
+        await preferences.setDouble(labelFontHeightKey, maxFontHeight);
+        await preferences.setDouble(
+            labelLetterSpacingKey, maxFontLetterSpacing);
+        await preferences.setDouble(labelWordSpacingKey, maxFontWordSpacing);
 
-          // Label
-          await preferences.setDouble(labelFontSizeKey, maxFontSize);
-          await preferences.setDouble(labelFontHeightKey, maxFontHeight);
-          await preferences.setDouble(
-              labelLetterSpacingKey, maxFontLetterSpacing);
-          await preferences.setDouble(labelWordSpacingKey, maxFontWordSpacing);
-
-          // Layout settings //
-          await preferences.setDouble(marginKey, maxMargin);
-          await preferences.setDouble(paddingKey, maxPadding);
-          await preferences.setDouble(spacingKey, maxSpacing);
-        },
-      );
-    }
+        // Layout settings //
+        await preferences.setDouble(marginKey, maxMargin);
+        await preferences.setDouble(paddingKey, maxPadding);
+        await preferences.setDouble(spacingKey, maxSpacing);
+      },
+    );
   }
 }
 
 void testSuite({
   required String title,
-  required String locale,
+  required Locale locale,
   required EFUILang l10n,
   required LocaleNames localeNames,
-  required TargetPlatform platform,
-  required Size screenSize,
+  TargetPlatform platform = TargetPlatform.android,
+  Size screenSize = const Size(430, 932), // Large phone (iPhone 14 Pro Max)
   Function()? setup,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -213,7 +231,7 @@ void testSuite({
 
       final Widget testApp = testOpenUI(
         title: title,
-        locale: Locale(locale),
+        locale: locale,
         platform: platform,
       );
 
