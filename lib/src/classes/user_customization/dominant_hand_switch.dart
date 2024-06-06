@@ -65,10 +65,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     // Define children separately to allow for live reversing
     final List<Widget> children = <Widget>[
       // Label
-      Text(
-        label,
-        style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-        textAlign: TextAlign.center,
+      Flexible(
+        child: Text(
+          label,
+          style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
       EzSpacer.row(padding),
 

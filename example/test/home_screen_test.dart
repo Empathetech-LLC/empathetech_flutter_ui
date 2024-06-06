@@ -309,7 +309,7 @@ void testSuite({
 
       expect(children[0], isA<DropdownMenu<Hand>>());
       expect(children[1], isA<EzSpacer>());
-      expect(children[2], isA<Text>());
+      expect(children[2], isA<Flexible>());
 
       await touch(tester, dominantHandButton);
 
@@ -319,7 +319,7 @@ void testSuite({
       handButtonsRow = tester.widget(handButtonsRowFinder);
       children = handButtonsRow.children;
 
-      expect(children[0], isA<Text>());
+      expect(children[0], isA<Flexible>());
       expect(children[1], isA<EzSpacer>());
       expect(children[2], isA<DropdownMenu<Hand>>());
 

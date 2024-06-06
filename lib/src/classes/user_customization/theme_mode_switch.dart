@@ -60,10 +60,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Label
-          Text(
-            label,
-            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-            textAlign: TextAlign.center,
+          Flexible(
+            child: Text(
+              label,
+              style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+              textAlign: TextAlign.center,
+            ),
           ),
           EzSpacer.row(padding),
 
