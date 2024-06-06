@@ -143,12 +143,6 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
-    // TabBar
-    tabBarTheme: TabBarTheme(
-      labelStyle: textTheme.bodyLarge,
-      unselectedLabelStyle: textTheme.bodyLarge,
-    ),
-
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
