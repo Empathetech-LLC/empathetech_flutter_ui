@@ -240,7 +240,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Check box
-            Checkbox(
+            PlatformCheckbox(
               value: updateTheme,
               onChanged: (bool? choice) {
                 setState(() {
