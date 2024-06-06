@@ -45,11 +45,16 @@ class EzResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Gather theme data //
+
+    final EFUILang l10n = EFUILang.of(context)!;
+
     // Define the button functions //
+
     final void Function() confirm =
         onConfirm ?? () => EzConfig.removeKeys(allKeys.keys.toSet());
 
-    final void Function() deny = onDeny ?? () {};
+    final void Function() deny = onDeny ?? doNothing;
 
     // Define the dialog //
 
@@ -58,12 +63,12 @@ class EzResetButton extends StatelessWidget {
         context: context,
         builder: (BuildContext dialogContext) => EzAlertDialog(
           title: Text(
-            dialogTitle ?? EFUILang.of(context)!.ssResetAll,
+            dialogTitle ?? l10n.ssResetAll,
             textAlign: TextAlign.center,
           ),
           contents: <Widget>[
             Text(
-              dialogContent ?? EFUILang.of(context)!.gResetWarn,
+              dialogContent ?? l10n.gResetWarn,
               textAlign: TextAlign.center,
             ),
           ],
@@ -100,7 +105,7 @@ class EzResetButton extends StatelessWidget {
 
     return OutlinedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? EFUILang.of(context)!.gResetAll),
+      label: Text(label ?? l10n.gResetAll),
       onPressed: resetDialog,
     );
   }
