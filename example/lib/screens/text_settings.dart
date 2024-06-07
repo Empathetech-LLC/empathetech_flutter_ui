@@ -473,10 +473,12 @@ class _TextSettingsState extends State<TextSettings> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  l10n.tsEditing,
-                  style: labelProvider.value,
-                  textAlign: TextAlign.center,
+                Flexible(
+                  child: Text(
+                    l10n.tsEditing,
+                    style: labelProvider.value,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 rowSpacer,
                 DropdownMenu<TextSettingType>(
