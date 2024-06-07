@@ -52,7 +52,7 @@ class EzWarning extends StatelessWidget {
     return Semantics(
       button: false,
       readOnly: true,
-      label: '$warning, $body',
+      label: '$warning: $body',
       child: ExcludeSemantics(
         child: Card(
           child: Container(
@@ -74,10 +74,12 @@ class EzWarning extends StatelessWidget {
                     ),
                     rowPadding,
 
-                    Text(
-                      warning,
-                      style: tStyle,
-                      textAlign: TextAlign.center,
+                    Flexible(
+                      child: Text(
+                        warning,
+                        style: tStyle,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     rowPadding,
 
