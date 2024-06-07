@@ -1,4 +1,8 @@
+import 'color_settings_screen.dart' as color;
 import 'home_screen.dart' as home;
+import 'image_settings_screen.dart' as image;
+import 'layout_settings_screen.dart' as layout;
+import 'text_settings_screen.dart' as text;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -44,7 +48,13 @@ void main() async {
 
   //// Run the tests ////
 
-  final List<Function> testSuites = <Function>[home.testSuite];
+  final List<Function> testSuites = <Function>[
+    home.testSuite,
+    text.testSuite,
+    layout.testSuite,
+    color.testSuite,
+    image.testSuite,
+  ];
 
   for (final Function testSuite in testSuites) {
     // Test non-default platforms //
