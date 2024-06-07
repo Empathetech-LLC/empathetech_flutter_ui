@@ -21,11 +21,11 @@ void main() async {
   ];
 
   final List<String> screenNames = <String>[
-    'Home screen',
-    'Text settings screen',
-    'Layout settings screen',
-    'Color settings screen',
-    'Image settings screen',
+    home.name,
+    text.name,
+    layout.name,
+    color.name,
+    image.name,
   ];
 
   await runTestSuites(testSuites: testSuites, screenNames: screenNames);
