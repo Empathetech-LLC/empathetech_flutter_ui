@@ -12,6 +12,29 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
+  final List<Function> testSuites = <Function>[
+    home.testSuite,
+    text.testSuite,
+    layout.testSuite,
+    color.testSuite,
+    image.testSuite,
+  ];
+
+  final List<String> screenNames = <String>[
+    'Home screen',
+    'Text settings screen',
+    'Layout settings screen',
+    'Color settings screen',
+    'Image settings screen',
+  ];
+
+  await runTestSuites(testSuites: testSuites, screenNames: screenNames);
+}
+
+Future<void> runTestSuites({
+  required List<Function> testSuites,
+  required List<String> screenNames,
+}) async {
   //// Setup the test environment ////
 
   // Load contextual data //
@@ -47,22 +70,6 @@ void main() async {
   );
 
   //// Run the tests ////
-
-  final List<Function> testSuites = <Function>[
-    home.testSuite,
-    text.testSuite,
-    layout.testSuite,
-    color.testSuite,
-    image.testSuite,
-  ];
-
-  final List<String> screenNames = <String>[
-    'Home screen',
-    'Text settings screen',
-    'Layout settings screen',
-    'Color settings screen',
-    'Image settings screen',
-  ];
 
   for (int i = 0; i < testSuites.length; i++) {
     final Function testSuite = testSuites[i];
