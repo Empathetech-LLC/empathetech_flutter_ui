@@ -126,10 +126,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // Label
-              Text(
-                currLabel,
-                style: bodyStyle,
-                textAlign: TextAlign.center,
+              Flexible(
+                child: Text(
+                  currLabel,
+                  style: bodyStyle,
+                  textAlign: TextAlign.center,
+                ),
               ),
               rowSeparator,
 
@@ -154,10 +156,11 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           spacer,
 
           // Live label && preview
-          Row(
+          EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ElevatedButton(
                 style: theme.elevatedButtonTheme.style!.copyWith(
@@ -194,8 +197,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           EzSpacer(currValue),
 
           // Label
-          Row(
+          EzScrollView(
             mainAxisSize: MainAxisSize.min,
+            scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
