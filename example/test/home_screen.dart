@@ -1,4 +1,4 @@
-import 'open_ui_test.dart';
+import 'open_ui_test.dart' as core;
 import 'utils.dart';
 
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 const String name = 'Home screen';
 
 void main() async {
-  await runTestSuites(
+  await core.runTestSuites(
     testSuites: <Function>[testSuite],
     screenNames: <String>[name],
   );
