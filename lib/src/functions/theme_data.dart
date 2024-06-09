@@ -109,6 +109,8 @@ ThemeData ezThemeData(Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       extendedPadding: EdgeInsets.all(padding),
       shape: const CircleBorder(),
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
     ),
 
     // Icon button
