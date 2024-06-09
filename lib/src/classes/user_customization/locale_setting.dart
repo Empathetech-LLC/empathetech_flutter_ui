@@ -29,7 +29,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late EFUILang l10n = EFUILang.of(context)!;
 
   // Gather the list items //
 
@@ -75,11 +75,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
           buttons.addAll(<Widget>[
             ElevatedButton.icon(
-              onPressed: () {
+              onPressed: () async {
                 EzConfig.setStringList(localeKey, localeData);
-                setState(() {
-                  currLocale = locale;
-                });
+                currLocale = locale;
+                l10n = await EFUILang.delegate.load(locale);
+                setState(() {});
                 Navigator.of(dialogContext).pop(locale);
               },
               icon: _flag(locale),
