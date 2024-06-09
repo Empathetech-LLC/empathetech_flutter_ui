@@ -70,7 +70,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final Color onSurface = Theme.of(context).colorScheme.onSurface;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  late final Color onSurface = colorScheme.onSurface;
   late final TextStyle? style = widget.style ??
       Theme.of(context).textTheme.bodyLarge?.copyWith(color: onSurface);
 
@@ -147,11 +148,15 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).remove,
-                  color: onSurface,
+                  color: (currValue < widget.max)
+                      ? onSurface
+                      : colorScheme.outline,
                 ),
                 onPressed: () {
                   setState(() {
-                    currValue -= widget.delta;
+                    if (currValue > widget.min) {
+                      currValue -= widget.delta;
+                    }
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
                   });
@@ -165,11 +170,15 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).add,
-                  color: onSurface,
+                  color: (currValue < widget.max)
+                      ? onSurface
+                      : colorScheme.outline,
                 ),
                 onPressed: () {
                   setState(() {
-                    currValue += widget.delta;
+                    if (currValue < widget.max) {
+                      currValue += widget.delta;
+                    }
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
                   });
