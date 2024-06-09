@@ -1,17 +1,4 @@
 <!DOCTYPE html><html><head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -30,8 +17,6 @@
   <title>Open UI</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer=""></script>
   <style id="splash-screen-style">
     html {
       height: 100%
@@ -104,5 +89,7 @@
       <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+
   <script src="flutter_bootstrap.js" async></script>
+  
 </body></html>
