@@ -34,11 +34,10 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
   // Define the build //
 
   void swapState() {
-    setState(() {
-      isUnderlined = !isUnderlined;
-      widget.notifierCallback(isUnderlined);
-    });
+    isUnderlined = !isUnderlined;
+    widget.notifierCallback(isUnderlined);
     EzConfig.setBool(widget.configKey, isUnderlined);
+    setState(() {});
   }
 
   late final String tooltip = EFUILang.of(context)!.tsUnderline;

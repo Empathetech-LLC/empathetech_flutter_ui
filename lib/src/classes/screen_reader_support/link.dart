@@ -68,11 +68,10 @@ class _EzLinkState extends State<EzLink> {
   );
 
   void _addUnderline(bool addIt) {
-    setState(() {
-      _style = _style.copyWith(
-        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-      );
-    });
+    _style = _style.copyWith(
+      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+    );
+    setState(() {});
   }
 
   @override

@@ -45,9 +45,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
     dialogTitle: resetDialogTitle,
     onConfirm: () {
       EzConfig.removeKeys(<String>{...fullList, userColorsKey});
-      setState(() {
-        currList = List<String>.from(defaultList);
-      });
+      currList = List<String>.from(defaultList);
+      setState(() {});
     },
   );
 
@@ -130,10 +129,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               key: ValueKey<String>(key),
               configKey: key,
               onRemove: () {
-                setState(() {
-                  currList.remove(key);
-                });
+                currList.remove(key);
                 EzConfig.setStringList(userColorsKey, currList);
+                setState(() {});
               }),
           spacer,
         ]);
@@ -184,13 +182,11 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
             ),
           ),
           onPressed: () {
-            setState(() {
-              currList.add(configKeyKey);
-              currList.sort(
-                (String a, String b) =>
-                    fullList.indexOf(a) - fullList.indexOf(b),
-              );
-            });
+            currList.add(configKeyKey);
+            currList.sort(
+              (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
+            );
+            setState(() {});
             setModalState(() {});
           },
         ),
@@ -250,7 +246,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               selected: <String>{currentTab},
               showSelectedIcon: false,
               onSelectionChanged: (Set<String> selected) {
-                setState(() => currentTab = selected.first);
+                currentTab = selected.first;
+                setState(() {});
               },
             ),
             separator,

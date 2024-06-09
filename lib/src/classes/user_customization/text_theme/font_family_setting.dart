@@ -63,11 +63,10 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
         dropdownMenuEntries: entries,
         onSelected: (String? fontFamily) {
           if (fontFamily == null) return;
+          currFontFamily = fontFamily;
+          widget.notifierCallback(fontFamily);
           EzConfig.setString(widget.configKey, fontFamily);
-          setState(() {
-            currFontFamily = fontFamily;
-            widget.notifierCallback(fontFamily);
-          });
+          setState(() {});
         },
         textStyle: googleStyles[currFontFamily],
         width: smallBreakpoint / 4,

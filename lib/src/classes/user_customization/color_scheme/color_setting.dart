@@ -60,15 +60,13 @@ class _ColorSettingState extends State<EzColorSetting> {
       startColor: backup,
       onColorChange: (Color chosenColor) {
         // Update currColor
-        setState(() {
-          currColor = chosenColor;
-        });
+        currColor = chosenColor;
+        setState(() {});
       },
       onConfirm: () => EzConfig.setInt(widget.configKey, currColor.value),
       onDeny: () {
-        setState(() {
-          currColor = backup;
-        });
+        currColor = backup;
+        setState(() {});
       },
     );
   }
@@ -104,12 +102,9 @@ class _ColorSettingState extends State<EzColorSetting> {
         builder: (BuildContext dialogContext) {
           void onConfirm() {
             // Update the user's configKey
+            currColor = Color(recommended);
             EzConfig.setInt(widget.configKey, recommended);
-
-            setState(() {
-              currColor = Color(recommended);
-            });
-
+            setState(() {});
             Navigator.of(dialogContext).pop(recommended);
           }
 
@@ -183,12 +178,9 @@ class _ColorSettingState extends State<EzColorSetting> {
         builder: (BuildContext dialogContext) {
           void onConfirm() {
             // Remove the user's configKey and reset the current state
+            currColor = resetColor;
             EzConfig.remove(widget.configKey);
-
-            setState(() {
-              currColor = resetColor;
-            });
-
+            setState(() {});
             Navigator.of(dialogContext).pop(resetColor);
           }
 

@@ -485,9 +485,8 @@ class _TextSettingsState extends State<TextSettings> {
                   initialSelection: editing,
                   onSelected: (TextSettingType? value) {
                     if (value != null) {
-                      setState(() {
-                        editing = value;
-                      });
+                      editing = value;
+                      setState(() {});
                     }
                   },
                   dropdownMenuEntries: styleChoices,
@@ -553,9 +552,10 @@ class _TextSettingsState extends State<TextSettings> {
                   l10n.tsDisplayLink,
                   style: displayProvider.value,
                   textAlign: TextAlign.center,
-                  onTap: () => setState(() {
+                  onTap: () {
                     editing = TextSettingType.display;
-                  }),
+                    setState(() {});
+                  },
                   semanticsLabel: l10n.tsLinkHint(display),
                 ),
                 EzPlainText(text: l10n.tsDisplayP2),
@@ -573,9 +573,10 @@ class _TextSettingsState extends State<TextSettings> {
                   l10n.tsHeadlineLink,
                   style: headlineProvider.value,
                   textAlign: TextAlign.center,
-                  onTap: () => setState(() {
+                  onTap: () {
                     editing = TextSettingType.headline;
-                  }),
+                    setState(() {});
+                  },
                   semanticsLabel: l10n.tsLinkHint(headline),
                 ),
                 EzPlainText(text: l10n.tsHeadlineP2),
@@ -593,9 +594,10 @@ class _TextSettingsState extends State<TextSettings> {
                   l10n.tsTitleLink,
                   style: titleProvider.value,
                   textAlign: TextAlign.center,
-                  onTap: () => setState(() {
+                  onTap: () {
                     editing = TextSettingType.title;
-                  }),
+                    setState(() {});
+                  },
                   semanticsLabel: l10n.tsLinkHint(title),
                 ),
               ],
@@ -612,9 +614,10 @@ class _TextSettingsState extends State<TextSettings> {
                   l10n.tsBodyLink,
                   style: bodyProvider.value,
                   textAlign: TextAlign.center,
-                  onTap: () => setState(() {
+                  onTap: () {
                     editing = TextSettingType.body;
-                  }),
+                    setState(() {});
+                  },
                   semanticsLabel: l10n.tsLinkHint(body),
                 ),
                 EzPlainText(text: l10n.tsBodyP2),
@@ -632,9 +635,10 @@ class _TextSettingsState extends State<TextSettings> {
                   l10n.tsLabelLink,
                   style: labelProvider.value,
                   textAlign: TextAlign.center,
-                  onTap: () => setState(() {
+                  onTap: () {
                     editing = TextSettingType.label;
-                  }),
+                    setState(() {});
+                  },
                   semanticsLabel: l10n.tsLinkHint(label),
                 ),
                 EzPlainText(text: l10n.tsLabelP2),
@@ -654,9 +658,8 @@ class _TextSettingsState extends State<TextSettings> {
                 titleProvider.reset();
                 bodyProvider.reset();
                 labelProvider.reset();
-                setState(() {
-                  editing = TextSettingType.display;
-                });
+                editing = TextSettingType.display;
+                setState(() {});
               },
             ),
             spacer,

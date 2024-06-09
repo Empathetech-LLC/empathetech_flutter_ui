@@ -34,11 +34,10 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
   // Define the build //
 
   void swapState() {
-    setState(() {
-      isBold = !isBold;
-      widget.notifierCallback(isBold);
-    });
+    isBold = !isBold;
+    widget.notifierCallback(isBold);
     EzConfig.setBool(widget.configKey, isBold);
+    setState(() {});
   }
 
   late final String tooltip = EFUILang.of(context)!.tsBold;

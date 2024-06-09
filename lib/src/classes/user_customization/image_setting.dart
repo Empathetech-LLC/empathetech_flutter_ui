@@ -243,11 +243,9 @@ class _ImageSettingState extends State<EzImageSetting> {
             Checkbox(
               value: updateTheme,
               onChanged: (bool? choice) {
-                setState(() {
-                  dialogState(() {
-                    updateTheme = (choice == null) ? false : choice;
-                  });
-                });
+                updateTheme = (choice == null) ? false : choice;
+                dialogState(() {});
+                setState(() {});
               },
             ),
             EzSpacer.row(padding),
@@ -297,9 +295,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     final dynamic newPath = await _chooseImage(context);
 
     if (newPath is String) {
-      setState(() {
-        currPath = newPath;
-      });
+      currPath = newPath;
       if (widget.updateTheme != null &&
           updateTheme &&
           newPath != noImageValue) {
@@ -313,6 +309,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             : EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
     }
+    setState(() {});
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information

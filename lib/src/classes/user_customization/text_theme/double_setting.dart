@@ -75,6 +75,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final TextStyle? style = widget.style ??
       Theme.of(context).textTheme.bodyLarge?.copyWith(color: onSurface);
 
+  Key plusKey = UniqueKey();
+  Key minusKey = UniqueKey();
+
   late final Size sizeLimit = measureText(
     widget.sizingString ?? widget.max.toString(),
     style: style,
@@ -106,11 +109,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 final double? doubleVal = double.tryParse(stringVal);
                 if (doubleVal == null) return;
 
-                setState(() {
-                  currValue = doubleVal;
-                  widget.notifierCallback(doubleVal);
-                });
+                currValue = doubleVal;
+                widget.notifierCallback(doubleVal);
                 EzConfig.setDouble(widget.configKey, doubleVal);
+                setState(() {});
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (String? value) {
@@ -146,6 +148,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
+                key: minusKey,
                 icon: Icon(
                   PlatformIcons(context).remove,
                   color: (currValue < widget.max)
@@ -153,14 +156,16 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                       : colorScheme.outline,
                 ),
                 onPressed: () {
-                  setState(() {
-                    if (currValue > widget.min) {
-                      currValue -= widget.delta;
-                    }
+                  if (currValue > widget.min) {
+                    currValue -= widget.delta;
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
-                  });
-                  EzConfig.setDouble(widget.configKey, currValue);
+                    EzConfig.setDouble(widget.configKey, currValue);
+                  } else {
+                    minusKey = UniqueKey();
+                  }
+
+                  setState(() {});
                 },
                 tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
               ),
@@ -168,6 +173,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               core,
               pMSpacer,
               IconButton(
+                key: plusKey,
                 icon: Icon(
                   PlatformIcons(context).add,
                   color: (currValue < widget.max)
@@ -175,14 +181,16 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                       : colorScheme.outline,
                 ),
                 onPressed: () {
-                  setState(() {
-                    if (currValue < widget.max) {
-                      currValue += widget.delta;
-                    }
+                  if (currValue < widget.max) {
+                    currValue += widget.delta;
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
-                  });
-                  EzConfig.setDouble(widget.configKey, currValue);
+                    EzConfig.setDouble(widget.configKey, currValue);
+                  } else {
+                    plusKey = UniqueKey();
+                  }
+
+                  setState(() {});
                 },
                 tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
               ),

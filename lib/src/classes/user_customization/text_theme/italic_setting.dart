@@ -34,11 +34,10 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
   // Define the build //
 
   void swapState() {
-    setState(() {
-      isItalic = !isItalic;
-      widget.notifierCallback(isItalic);
-    });
+    isItalic = !isItalic;
+    widget.notifierCallback(isItalic);
     EzConfig.setBool(widget.configKey, isItalic);
+    setState(() {});
   }
 
   late final String tooltip = EFUILang.of(context)!.tsItalic;
