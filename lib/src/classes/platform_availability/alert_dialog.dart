@@ -142,8 +142,18 @@ List<CupertinoDialogAction> ezCupertinoActions({
   bool denyIsDefault = false,
   bool denyIsDestructive = false,
   bool reverseHands = true,
+  TextStyle? defaultStyle,
+  TextStyle? destructiveStyle,
 }) {
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
+
+  late final ThemeData theme = Theme.of(context);
+
+  final TextStyle? defaultText = defaultStyle ??
+      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface);
+
+  final TextStyle? destructiveText = destructiveStyle ??
+      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
 
   final List<CupertinoDialogAction> actions = <CupertinoDialogAction>[
     // Deny
@@ -151,6 +161,7 @@ List<CupertinoDialogAction> ezCupertinoActions({
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
+      textStyle: denyIsDestructive ? destructiveText : defaultText,
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
 
@@ -159,6 +170,7 @@ List<CupertinoDialogAction> ezCupertinoActions({
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
+      textStyle: confirmIsDestructive ? destructiveText : defaultText,
       child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
   ];
