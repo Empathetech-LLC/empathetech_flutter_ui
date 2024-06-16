@@ -131,70 +131,59 @@ class _ImageSettingState extends State<EzImageSetting> {
     options.addAll(<Widget>[
       // From network
       ElevatedButton.icon(
-        onPressed: () async {
-          final String changed = await showPlatformDialog(
-            context: context,
-            builder: (_) {
-              String url = '';
-              return StatefulBuilder(
-                builder: (BuildContext networkDialogContext, _) {
-                  void onConfirm() {
-                    if (isUrl(url)) {
-                      EzConfig.setString(widget.configKey, url);
-                      Navigator.of(networkDialogContext).pop(url);
-                    } else {
-                      Navigator.of(networkDialogContext).pop(null);
+        onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext networkDialogContext) {
+            final TextEditingController urlText = TextEditingController();
+
+            void onConfirm() {
+              EzConfig.setString(widget.configKey, urlText.text);
+              Navigator.of(networkDialogContext).pop(urlText.text);
+              urlText.dispose();
+            }
+
+            void onDeny() {
+              Navigator.of(networkDialogContext).pop(null);
+              urlText.dispose();
+            }
+
+            return EzAlertDialog(
+              title: Text(
+                l10n.isEnterURL,
+                textAlign: TextAlign.center,
+              ),
+              contents: <Widget>[
+                PlatformTextFormField(
+                  controller: urlText,
+                  hintText: 'https://example.com/image.jpg',
+                  style: theme.dialogTheme.contentTextStyle,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty || !isUrl(value)) {
+                      return 'Enter a valid URL';
                     }
-                  }
-
-                  void onDeny() {
-                    Navigator.of(networkDialogContext).pop(null);
-                  }
-
-                  return EzAlertDialog(
-                    title: Text(
-                      l10n.isEnterURL,
-                      textAlign: TextAlign.center,
-                    ),
-                    contents: <Widget>[
-                      PlatformTextFormField(
-                        onFieldSubmitted: (String value) {
-                          url = value;
-                        },
-                        hintText: 'https://example.com/image.jpg',
-                        style: theme.dialogTheme.contentTextStyle,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (String? value) {
-                          if (value == null || value.isEmpty || !isUrl(value)) {
-                            return 'Enter a valid URL';
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                    materialActions: ezMaterialActions(
-                      context: context,
-                      onConfirm: onConfirm,
-                      confirmMsg: l10n.gApply,
-                      onDeny: onDeny,
-                      denyMsg: l10n.gCancel,
-                    ),
-                    cupertinoActions: ezCupertinoActions(
-                      context: context,
-                      onConfirm: onConfirm,
-                      confirmMsg: l10n.gApply,
-                      onDeny: onDeny,
-                      denyMsg: l10n.gCancel,
-                    ),
-                    needsClose: false,
-                  );
-                },
-              );
-            },
-          );
-
-          Navigator.of(dialogContext).pop(changed);
-        },
+                    return null;
+                  },
+                ),
+              ],
+              materialActions: ezMaterialActions(
+                context: context,
+                onConfirm: onConfirm,
+                confirmMsg: l10n.gApply,
+                onDeny: onDeny,
+                denyMsg: l10n.gCancel,
+              ),
+              cupertinoActions: ezCupertinoActions(
+                context: context,
+                onConfirm: onConfirm,
+                confirmMsg: l10n.gApply,
+                onDeny: onDeny,
+                denyMsg: l10n.gCancel,
+              ),
+              needsClose: false,
+            );
+          },
+        ),
         label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
       ),
@@ -318,7 +307,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         ? null
         : showPlatformDialog(
             context: context,
-            builder: (BuildContext context) => EzAlertDialog(
+            builder: (_) => EzAlertDialog(
               title: Text(
                 l10n.gCreditTo,
                 textAlign: TextAlign.center,
