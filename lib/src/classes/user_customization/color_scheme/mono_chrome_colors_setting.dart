@@ -38,12 +38,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
       onTertiaryFixed: Colors.black,
       onTertiaryFixedVariant: Colors.black,
 
-      // Error
-      error: empathOffBlack,
-      onError: Colors.white,
-      errorContainer: empathOffBlack,
-      onErrorContainer: Colors.white,
-
       // Surface
       surface: Colors.black,
       onSurface: Colors.white,
@@ -81,12 +75,6 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
       onTertiaryContainer: Colors.white,
       onTertiaryFixed: Colors.white,
       onTertiaryFixedVariant: Colors.white,
-
-      // Error
-      error: empathOffWhite,
-      onError: Colors.black,
-      errorContainer: empathOffWhite,
-      onErrorContainer: Colors.black,
 
       // Surface
       surface: Colors.white,

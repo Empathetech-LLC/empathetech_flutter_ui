@@ -214,11 +214,6 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   lightOnTertiaryFixedKey: blackHex,
   lightOnTertiaryFixedVariantKey: blackHex,
 
-  lightErrorKey: whiteHex,
-  lightOnErrorKey: 0xFFFF0000,
-  lightErrorContainerKey: whiteHex,
-  lightOnErrorContainerKey: 0xFFFF0000,
-
   lightSurfaceKey: whiteHex,
   lightOnSurfaceKey: blackHex,
   lightSurfaceDimKey: whiteHex,
@@ -252,11 +247,6 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkOnTertiaryContainerKey: whiteHex,
   darkOnTertiaryFixedKey: whiteHex,
   darkOnTertiaryFixedVariantKey: whiteHex,
-
-  darkErrorKey: blackHex,
-  darkOnErrorKey: 0xFFFF0000,
-  darkErrorContainerKey: blackHex,
-  darkOnErrorContainerKey: 0xFFFF0000,
 
   darkSurfaceKey: blackHex,
   darkOnSurfaceKey: whiteHex,
