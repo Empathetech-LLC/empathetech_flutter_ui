@@ -70,7 +70,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               dialogTitle: fromImageTitle,
               allowClear: true,
               updateTheme: Brightness.dark,
-              hideThemeMessage: true,
             ),
           ),
         )
@@ -84,7 +83,6 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
               dialogTitle: fromImageTitle,
               allowClear: true,
               updateTheme: Brightness.light,
-              hideThemeMessage: true,
             ),
           ),
         );
