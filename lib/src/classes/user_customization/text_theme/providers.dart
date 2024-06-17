@@ -67,46 +67,66 @@ abstract class BaseTextStyleProvider extends ChangeNotifier {
 }
 
 class DisplayTextStyleProvider extends BaseTextStyleProvider {
-  DisplayTextStyleProvider() : super(buildDisplay());
+  final Color? _textColor;
+
+  DisplayTextStyleProvider({Color? color})
+      : _textColor = color,
+        super(buildDisplay(color: color));
 
   void reset() {
-    _style = buildDisplay();
+    _style = buildDisplay(color: _textColor);
     notifyListeners();
   }
 }
 
 class HeadlineTextStyleProvider extends BaseTextStyleProvider {
-  HeadlineTextStyleProvider() : super(buildHeadline());
+  final Color? _textColor;
+
+  HeadlineTextStyleProvider({Color? color})
+      : _textColor = color,
+        super(buildHeadline(color: color));
 
   void reset() {
-    _style = buildHeadline();
+    _style = buildHeadline(color: _textColor);
     notifyListeners();
   }
 }
 
 class TitleTextStyleProvider extends BaseTextStyleProvider {
-  TitleTextStyleProvider() : super(buildTitle());
+  final Color? _textColor;
+
+  TitleTextStyleProvider({Color? color})
+      : _textColor = color,
+        super(buildTitle(color: color));
 
   void reset() {
-    _style = buildTitle();
+    _style = buildTitle(color: _textColor);
     notifyListeners();
   }
 }
 
 class BodyTextStyleProvider extends BaseTextStyleProvider {
-  BodyTextStyleProvider() : super(buildBody());
+  final Color? _textColor;
+
+  BodyTextStyleProvider({Color? color})
+      : _textColor = color,
+        super(buildBody(color: color));
 
   void reset() {
-    _style = buildBody();
+    _style = buildBody(color: _textColor);
     notifyListeners();
   }
 }
 
 class LabelTextStyleProvider extends BaseTextStyleProvider {
-  LabelTextStyleProvider() : super(buildLabel());
+  final Color? _textColor;
+
+  LabelTextStyleProvider({Color? color})
+      : _textColor = color,
+        super(buildLabel(color: color));
 
   void reset() {
-    _style = buildLabel();
+    _style = buildLabel(color: _textColor);
     notifyListeners();
   }
 }

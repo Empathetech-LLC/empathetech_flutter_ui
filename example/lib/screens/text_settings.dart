@@ -13,22 +13,24 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Theme.of(context).colorScheme.onInverseSurface;
+
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
         ChangeNotifierProvider<DisplayTextStyleProvider>(
-          create: (_) => DisplayTextStyleProvider(),
+          create: (_) => DisplayTextStyleProvider(color: textColor),
         ),
         ChangeNotifierProvider<HeadlineTextStyleProvider>(
-          create: (_) => HeadlineTextStyleProvider(),
+          create: (_) => HeadlineTextStyleProvider(color: textColor),
         ),
         ChangeNotifierProvider<TitleTextStyleProvider>(
-          create: (_) => TitleTextStyleProvider(),
+          create: (_) => TitleTextStyleProvider(color: textColor),
         ),
         ChangeNotifierProvider<BodyTextStyleProvider>(
-          create: (_) => BodyTextStyleProvider(),
+          create: (_) => BodyTextStyleProvider(color: textColor),
         ),
         ChangeNotifierProvider<LabelTextStyleProvider>(
-          create: (_) => LabelTextStyleProvider(),
+          create: (_) => LabelTextStyleProvider(color: textColor),
         ),
       ],
       child: const TextSettings(),
