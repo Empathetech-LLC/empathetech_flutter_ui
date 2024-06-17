@@ -22,8 +22,8 @@ ImageProvider provideImage(String path) {
   }
 }
 
-/// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<String?> changeImage({
+/// Save (and/or overwrite) the [Image] stored in [prefsPath] from [source]
+Future<String?> saveImage({
   required BuildContext context,
   required String prefsPath,
   required ImageSource source,
