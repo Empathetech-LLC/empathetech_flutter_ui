@@ -76,10 +76,10 @@ ThemeData ezThemeData(Brightness brightness) {
     dialogTheme: DialogTheme(
       backgroundColor: colorScheme.inverseSurface,
       titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onSurface,
+        color: colorScheme.onInverseSurface,
       ),
       contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onSurface,
+        color: colorScheme.onInverseSurface,
       ),
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
