@@ -34,9 +34,8 @@ class EzImageSetting extends StatefulWidget {
   /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
   final Brightness? updateTheme;
 
-  /// [updateTheme] override
-  /// Mostly for use in a/the color settings screen
-  final bool hideThemeMessage;
+  /// Whether the update theme checkbox && message should be displayed
+  final bool updateThemeOption;
 
   /// Creates a tool for updating the image at [configKey]'s path
   /// [EzImageSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
@@ -48,7 +47,7 @@ class EzImageSetting extends StatefulWidget {
     this.dialogTitle,
     this.credits,
     this.updateTheme,
-    this.hideThemeMessage = false,
+    this.updateThemeOption = true,
   });
 
   @override
@@ -61,12 +60,13 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String? currPath = EzConfig.get(widget.configKey);
   late bool updateTheme = (widget.updateTheme != null);
 
-  final double padding = EzConfig.get(paddingKey);
+  late final TextEditingController urlText = TextEditingController();
+  late final GlobalKey<FormState> urlFormKey = GlobalKey<FormState>();
 
-  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+  final double padding = EzConfig.get(paddingKey);
+  final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
 
   late final ThemeData theme = Theme.of(context);
-
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define button functions //
@@ -96,7 +96,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         // From file
         ElevatedButton.icon(
           onPressed: () async {
-            final String? changed = await changeImage(
+            final String? changed = await saveImage(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.gallery,
@@ -112,7 +112,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         // From camera
         ElevatedButton.icon(
           onPressed: () async {
-            final String? changed = await changeImage(
+            final String? changed = await saveImage(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.camera,
@@ -134,18 +134,17 @@ class _ImageSettingState extends State<EzImageSetting> {
         onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext networkDialogContext) {
-            final TextEditingController urlText = TextEditingController();
+            void onConfirm() async {
+              if (urlFormKey.currentState!.validate()) {
+                final String path = urlText.text;
 
-            void onConfirm() {
-              EzConfig.setString(widget.configKey, urlText.text);
-              Navigator.of(networkDialogContext).pop(urlText.text);
-              urlText.dispose();
+                await EzConfig.setString(widget.configKey, path);
+                Navigator.of(networkDialogContext).pop(path);
+                Navigator.of(dialogContext).pop(path);
+              }
             }
 
-            void onDeny() {
-              Navigator.of(networkDialogContext).pop(null);
-              urlText.dispose();
-            }
+            void onDeny() => Navigator.of(networkDialogContext).pop(null);
 
             return EzAlertDialog(
               title: Text(
@@ -153,17 +152,20 @@ class _ImageSettingState extends State<EzImageSetting> {
                 textAlign: TextAlign.center,
               ),
               contents: <Widget>[
-                PlatformTextFormField(
-                  controller: urlText,
-                  hintText: 'https://example.com/image.jpg',
-                  style: theme.dialogTheme.contentTextStyle,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty || !isUrl(value)) {
-                      return 'Enter a valid URL';
-                    }
-                    return null;
-                  },
+                Form(
+                  key: urlFormKey,
+                  child: PlatformTextFormField(
+                    controller: urlText,
+                    hintText: 'https://example.com/image.jpg',
+                    style: theme.dialogTheme.contentTextStyle,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty || !isUrl(value)) {
+                        return 'Enter a valid URL';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ],
               materialActions: ezMaterialActions(
@@ -221,7 +223,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
 
     // Update theme (optional)
-    if (widget.updateTheme != null && !widget.hideThemeMessage) {
+    if (widget.updateTheme != null && widget.updateThemeOption) {
       options.addAll(<Widget>[
         spacer,
         EzRow(
@@ -263,9 +265,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (BuildContext dialogContext, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
-              l10n.isDialogTitle(
-                widget.dialogTitle ?? widget.label,
-              ),
+              l10n.isDialogTitle(widget.dialogTitle ?? widget.label),
               textAlign: TextAlign.center,
             ),
             contents: sourceOptions(
@@ -297,8 +297,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             ? EzConfig.setString(lightColorSchemeImageKey, newPath)
             : EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
+      setState(() {});
     }
-    setState(() {});
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information
@@ -367,5 +367,11 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    urlText.dispose();
+    super.dispose();
   }
 }
