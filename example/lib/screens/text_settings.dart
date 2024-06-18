@@ -477,7 +477,7 @@ class _TextSettingsState extends State<TextSettings> {
               children: <Widget>[
                 Flexible(
                   child: Text(
-                    l10n.tsEditing,
+                    l10n.gEditing,
                     style: labelProvider.value,
                     textAlign: TextAlign.center,
                   ),
