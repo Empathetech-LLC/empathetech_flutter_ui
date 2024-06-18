@@ -36,25 +36,14 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   CountryFlag _flag(Locale locale) {
     final Locale flagLocale = locale;
 
-    final double flagHeight = MediaQuery.textScalerOf(context).scale(
-      Theme.of(context)
-          .elevatedButtonTheme
-          .style!
-          .textStyle!
-          .resolve(<WidgetState>{})!.fontSize!,
-    );
-    final double flagWidth = flagHeight * 2;
-
     return (flagLocale.countryCode == null)
         ? CountryFlag.fromLanguageCode(
             flagLocale.languageCode,
-            height: flagHeight,
-            width: flagWidth,
+            shape: const Circle(),
           )
         : CountryFlag.fromCountryCode(
             flagLocale.countryCode!,
-            height: flagHeight,
-            width: flagWidth,
+            shape: const Circle(),
           );
   }
 
