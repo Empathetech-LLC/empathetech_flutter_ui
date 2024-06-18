@@ -829,7 +829,7 @@ abstract class EFUILang {
   /// No description provided for @csOnInverseSurface.
   ///
   /// In en, this message translates to:
-  /// **'Inverse on surface'**
+  /// **'On inverse surface'**
   String get csOnInverseSurface;
 
   /// No description provided for @csInversePrimary.

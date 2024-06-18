@@ -385,7 +385,7 @@ class EFUILangEn extends EFUILang {
   String get csInverseSurface => 'Inverse surface';
 
   @override
-  String get csOnInverseSurface => 'Inverse on surface';
+  String get csOnInverseSurface => 'On inverse surface';
 
   @override
   String get csInversePrimary => 'Inverse primary';
