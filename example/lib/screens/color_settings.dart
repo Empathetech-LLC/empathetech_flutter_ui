@@ -98,13 +98,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
           darkPrimaryKey,
           darkSecondaryKey,
           darkTertiaryKey,
+          darkSurfaceContainerKey,
           darkSurfaceKey,
+          darkOnSurfaceKey,
         ]
       : <String>[
           lightPrimaryKey,
           lightSecondaryKey,
           lightTertiaryKey,
+          lightSurfaceContainerKey,
           lightSurfaceKey,
+          lightOnSurfaceKey,
         ];
   late final Set<String> defaultSet = defaultList.toSet();
 
