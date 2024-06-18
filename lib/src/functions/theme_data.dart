@@ -70,7 +70,10 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Cards
-    cardTheme: const CardTheme(margin: EdgeInsets.zero),
+    cardTheme: CardTheme(
+      margin: EdgeInsets.zero,
+      color: colorScheme.surface,
+    ),
 
     // Dialogs
     dialogTheme: DialogTheme(
@@ -100,10 +103,12 @@ ThemeData ezThemeData(Brightness brightness) {
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: textTheme.bodyLarge,
-        alignment: Alignment.center,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.primary,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
+        textStyle: textTheme.bodyLarge,
+        alignment: Alignment.center,
       ),
     ),
 
