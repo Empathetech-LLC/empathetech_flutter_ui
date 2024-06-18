@@ -37,7 +37,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: colorScheme.inverseSurface,
+    scaffoldBackgroundColor: colorScheme.surfaceContainer,
 
     // Typography //
 
@@ -64,9 +64,9 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: colorScheme.inverseSurface,
-      modalBackgroundColor: colorScheme.inverseSurface,
-      dragHandleColor: colorScheme.onInverseSurface,
+      backgroundColor: colorScheme.surfaceContainer,
+      modalBackgroundColor: colorScheme.surfaceContainer,
+      dragHandleColor: colorScheme.onSurface,
     ),
 
     // Cards
@@ -74,12 +74,12 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialogs
     dialogTheme: DialogTheme(
-      backgroundColor: colorScheme.inverseSurface,
+      backgroundColor: colorScheme.surfaceContainer,
       titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onInverseSurface,
+        color: colorScheme.onSurface,
       ),
       contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onInverseSurface,
+        color: colorScheme.onSurface,
       ),
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
@@ -93,7 +93,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onInverseSurface,
+        color: colorScheme.onSurface,
       ),
     ),
 

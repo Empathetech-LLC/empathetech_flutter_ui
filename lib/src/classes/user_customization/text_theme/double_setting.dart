@@ -71,7 +71,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color onBackground = colorScheme.onInverseSurface;
+  late final Color onBackground = colorScheme.onSurface;
   late final TextStyle? style = widget.style ??
       Theme.of(context).textTheme.bodyLarge?.copyWith(color: onBackground);
 

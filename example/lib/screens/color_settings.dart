@@ -26,7 +26,7 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final ThemeData theme = Theme.of(context);
 
   late final TextStyle? labelStyle = theme.textTheme.labelLarge?.copyWith(
-    color: theme.colorScheme.onInverseSurface,
+    color: theme.colorScheme.onSurface,
   );
 
   late final EFUILang l10n = EFUILang.of(context)!;

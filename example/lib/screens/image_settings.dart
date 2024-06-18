@@ -73,7 +73,7 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
             Text(
               l10n.gEditingTheme(themeProfile),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onInverseSurface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
               textAlign: TextAlign.center,
             ),

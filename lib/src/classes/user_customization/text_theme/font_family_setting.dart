@@ -71,7 +71,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
           setState(() {});
         },
         textStyle: googleStyles[currFontFamily]?.copyWith(
-          color: theme.colorScheme.onInverseSurface,
+          color: theme.colorScheme.onSurface,
         ),
         width: smallBreakpoint / 4,
       ),

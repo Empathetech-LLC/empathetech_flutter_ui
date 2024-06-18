@@ -13,7 +13,7 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color textColor = Theme.of(context).colorScheme.onInverseSurface;
+    final Color textColor = Theme.of(context).colorScheme.onSurface;
 
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
