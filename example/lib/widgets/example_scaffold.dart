@@ -49,7 +49,6 @@ class ExampleScaffold extends StatelessWidget {
           parentContext: context,
           l10n: EFUILang.of(context)!,
         ),
-        const RepoButton()
       ],
     );
 
