@@ -136,23 +136,11 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gBYO.
-  ///
-  /// In en, this message translates to:
-  /// **'Build your own'**
-  String get gBYO;
-
   /// No description provided for @gGiveFeedback.
   ///
   /// In en, this message translates to:
   /// **'Give feedback'**
   String get gGiveFeedback;
-
-  /// No description provided for @gCopiedEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Support email copied to clipboard'**
-  String get gCopiedEmail;
 
   /// No description provided for @gLeft.
   ///
@@ -190,6 +178,12 @@ abstract class EFUILang {
   /// **'Dark'**
   String get gDark;
 
+  /// No description provided for @gEditing.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing: '**
+  String get gEditing;
+
   /// No description provided for @gEditingTheme.
   ///
   /// In en, this message translates to:
@@ -223,7 +217,7 @@ abstract class EFUILang {
   /// No description provided for @gSetToValue.
   ///
   /// In en, this message translates to:
-  /// **'{name} is currently set to {value}'**
+  /// **'{name} is set to {value}'**
   String gSetToValue(Object name, Object value);
 
   /// No description provided for @gDefaultEntry.
@@ -321,12 +315,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Text settings'**
   String get tsPageTitle;
-
-  /// No description provided for @tsEditing.
-  ///
-  /// In en, this message translates to:
-  /// **'Editing: '**
-  String get tsEditing;
 
   /// No description provided for @tsDisplay.
   ///

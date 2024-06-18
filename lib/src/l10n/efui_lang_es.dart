@@ -26,14 +26,7 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
-  String get gBYO => 'Construye tu propio';
-
-  @override
   String get gGiveFeedback => 'Dar comentarios';
-
-  @override
-  String get gCopiedEmail =>
-      'Correo electrónico de soporte copiado al portapapeles';
 
   @override
   String get gLeft => 'Izquierda';
@@ -52,6 +45,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gDark => 'Oscuro';
+
+  @override
+  String get gEditing => 'Editando: ';
 
   @override
   String gEditingTheme(Object themeType) {
@@ -128,9 +124,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get tsPageTitle => 'Configuraciones de texto';
-
-  @override
-  String get tsEditing => 'Editando: ';
 
   @override
   String get tsDisplay => 'Presentar';

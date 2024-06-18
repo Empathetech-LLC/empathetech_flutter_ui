@@ -26,13 +26,7 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
-  String get gBYO => 'Build your own';
-
-  @override
   String get gGiveFeedback => 'Give feedback';
-
-  @override
-  String get gCopiedEmail => 'Support email copied to clipboard';
 
   @override
   String get gLeft => 'Left';
@@ -53,6 +47,9 @@ class EFUILangEn extends EFUILang {
   String get gDark => 'Dark';
 
   @override
+  String get gEditing => 'Editing: ';
+
+  @override
   String gEditingTheme(Object themeType) {
     return 'Editing: $themeType theme';
   }
@@ -71,7 +68,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String gSetToValue(Object name, Object value) {
-    return '$name is currently set to $value';
+    return '$name is set to $value';
   }
 
   @override
@@ -127,9 +124,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsPageTitle => 'Text settings';
-
-  @override
-  String get tsEditing => 'Editing: ';
 
   @override
   String get tsDisplay => 'Display';

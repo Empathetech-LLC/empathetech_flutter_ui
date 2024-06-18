@@ -11,9 +11,7 @@
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
 
-  "gBYO": "Construye tu propio",
   "gGiveFeedback": "Dar comentarios",
-  "gCopiedEmail": "Correo electrónico de soporte copiado al portapapeles",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
@@ -23,7 +21,9 @@
   "gLight": "Ligero",
   "gDark": "Oscuro",
 
+  "gEditing": "Editando: ",
   "gEditingTheme": "Editando: tema {themeType}",
+
   "gHowThisWorks": "Cómo funciona esto",
   "gHowThisWorksHint": "Activar para abrir documentación útil",
 
@@ -56,8 +56,6 @@
 
 
   "tsPageTitle": "Configuraciones de texto",
-
-  "tsEditing": "Editando: ",
 
   "tsDisplay": "Presentar",
   "tsHeadline": "Encabezado",

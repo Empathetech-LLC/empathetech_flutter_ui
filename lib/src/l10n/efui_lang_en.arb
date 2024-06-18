@@ -11,9 +11,7 @@
   "gCancel": "Cancel",
   "gClose": "Close",
 
-  "gBYO": "Build your own",
   "gGiveFeedback": "Give feedback",
-  "gCopiedEmail": "Support email copied to clipboard",
 
   "gLeft": "Left",
   "gRight": "Right",
@@ -22,14 +20,15 @@
   "gSystem": "System",
   "gLight": "Light",
   "gDark": "Dark",
-
+  "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
+
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Activate to open helpful documentation",
 
   "gAttention": "Attention",
   "gCurrently": "Currently:",
-  "gSetToValue": "{name} is currently set to {value}",
+  "gSetToValue": "{name} is set to {value}",
   "gDefaultEntry": "{entry}* (default)",
   "gReset": "Reset:",
   "gResetToValue": "Reset {name} to {value}",
@@ -56,8 +55,6 @@
 
 
   "tsPageTitle": "Text settings",
-
-  "tsEditing": "Editing: ",
 
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
