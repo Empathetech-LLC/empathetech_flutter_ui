@@ -22,7 +22,7 @@ dependencies:
   url_launcher: ^6.1.14
 
   # Community
-  country_flags: ^2.2.0
+  country_flags: ^3.0.0
   flex_color_picker: ^3.4.1
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.0
