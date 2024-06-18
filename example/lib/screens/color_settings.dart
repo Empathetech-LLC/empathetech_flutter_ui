@@ -121,26 +121,39 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   List<Widget> dynamicColorSettings() {
     final List<Widget> toReturn = <Widget>[];
 
+    Widget personalSpace(Widget child) {
+      return Padding(
+        padding: EdgeInsets.only(
+          left: spacing / 2,
+          right: spacing / 2,
+          bottom: spacing,
+        ),
+        child: child,
+      );
+    }
+
     for (final String key in currList) {
       if (defaultSet.contains(key)) {
         // Non-removable buttons
-        toReturn.addAll(<Widget>[
-          EzColorSetting(key: ValueKey<String>(key), configKey: key),
-          spacer,
-        ]);
+        toReturn.add(
+          personalSpace(EzColorSetting(
+            key: ValueKey<String>(key),
+            configKey: key,
+          )),
+        );
       } else {
-        toReturn.addAll(<Widget>[
+        toReturn.add(
           // Removable buttons
-          EzColorSetting(
-              key: ValueKey<String>(key),
-              configKey: key,
-              onRemove: () {
-                currList.remove(key);
-                EzConfig.setStringList(userColorsKey, currList);
-                setState(() {});
-              }),
-          spacer,
-        ]);
+          personalSpace(EzColorSetting(
+            key: ValueKey<String>(key),
+            configKey: key,
+            onRemove: () {
+              currList.remove(key);
+              EzConfig.setStringList(userColorsKey, currList);
+              setState(() {});
+            },
+          )),
+        );
       }
     }
 
@@ -269,7 +282,17 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
 
             if (currentTab == advancedSettings) ...<Widget>[
               // Dynamic configKeys
-              ...dynamicColorSettings(),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: widthOf(context) * (2 / 3),
+                ),
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: dynamicColorSettings(),
+                ),
+              ),
               spacer, // dynamicColorSettings has a trailing spacer too
 
               // Add a color
