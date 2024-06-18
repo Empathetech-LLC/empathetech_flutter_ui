@@ -24,10 +24,9 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
   late final ThemeData theme = Theme.of(context);
-  late final Color textColor = theme.colorScheme.onInverseSurface;
 
   late final TextStyle? labelStyle = theme.textTheme.labelLarge?.copyWith(
-    color: textColor,
+    color: theme.colorScheme.onInverseSurface,
   );
 
   late final EFUILang l10n = EFUILang.of(context)!;

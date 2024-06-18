@@ -100,10 +100,14 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   late final ThemeData theme = Theme.of(context);
 
-  late final TextStyle? titleStyle =
-      widget.titleStyle ?? theme.textTheme.titleLarge;
-  late final TextStyle? bodyStyle =
-      widget.bodyStyle ?? theme.textTheme.bodyLarge;
+  late final TextStyle? titleStyle = widget.titleStyle ??
+      theme.textTheme.titleLarge?.copyWith(
+        color: theme.colorScheme.onInverseSurface,
+      );
+  late final TextStyle? bodyStyle = widget.bodyStyle ??
+      theme.textTheme.bodyLarge?.copyWith(
+        color: theme.colorScheme.onInverseSurface,
+      );
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
