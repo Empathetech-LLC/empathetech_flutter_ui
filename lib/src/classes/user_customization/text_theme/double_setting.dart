@@ -71,9 +71,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color onSurface = colorScheme.onSurface;
+  late final Color onBackground = colorScheme.onInverseSurface;
   late final TextStyle? style = widget.style ??
-      Theme.of(context).textTheme.bodyLarge?.copyWith(color: onSurface);
+      Theme.of(context).textTheme.bodyLarge?.copyWith(color: onBackground);
 
   Key plusKey = UniqueKey();
   Key minusKey = UniqueKey();
@@ -137,7 +137,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
           Icon(
             widget.icon,
             size: formFieldHeight / 4,
-            color: onSurface,
+            color: onBackground,
           ),
         ],
       ),
@@ -152,7 +152,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 icon: Icon(
                   PlatformIcons(context).remove,
                   color: (currValue < widget.max)
-                      ? onSurface
+                      ? onBackground
                       : colorScheme.outline,
                 ),
                 onPressed: () {
@@ -177,7 +177,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 icon: Icon(
                   PlatformIcons(context).add,
                   color: (currValue < widget.max)
-                      ? onSurface
+                      ? onBackground
                       : colorScheme.outline,
                 ),
                 onPressed: () {

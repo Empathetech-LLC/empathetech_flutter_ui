@@ -37,6 +37,8 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   late String currFontFamily =
       EzConfig.get(widget.configKey) ?? defaultFontFamily;
 
+  late final ThemeData theme = Theme.of(context);
+
   // Define button functions //
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
@@ -46,9 +48,9 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: entry.key,
-      style: Theme.of(context).textButtonTheme.style?.copyWith(
-            textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
-          ),
+      style: theme.textButtonTheme.style?.copyWith(
+        textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
+      ),
     );
   }).toList();
 
@@ -68,7 +70,9 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
           EzConfig.setString(widget.configKey, fontFamily);
           setState(() {});
         },
-        textStyle: googleStyles[currFontFamily],
+        textStyle: googleStyles[currFontFamily]?.copyWith(
+          color: theme.colorScheme.onInverseSurface,
+        ),
         width: smallBreakpoint / 4,
       ),
     );
