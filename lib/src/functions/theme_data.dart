@@ -152,6 +152,14 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Snackbar
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: colorScheme.surface,
+      contentTextStyle: textTheme.bodyLarge?.copyWith(
+        color: colorScheme.onSurface,
+      ),
+    ),
+
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
