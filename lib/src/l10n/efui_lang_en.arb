@@ -12,6 +12,8 @@
   "gClose": "Close",
 
   "gGiveFeedback": "Give feedback",
+  "gClipboard": "{thing} copied to clipboard",
+  "gSupportEmail": "Support Email",
 
   "gLeft": "Left",
   "gRight": "Right",

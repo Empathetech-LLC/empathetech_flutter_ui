@@ -12,6 +12,8 @@
   "gClose": "Cerrar",
 
   "gGiveFeedback": "Dar comentarios",
+  "gClipboard": "{thing} copiado al portapapeles",
+  "gSupportEmail": "Correo electrónico de soporte",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",

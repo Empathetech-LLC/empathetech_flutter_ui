@@ -29,6 +29,14 @@ class EFUILangEs extends EFUILang {
   String get gGiveFeedback => 'Dar comentarios';
 
   @override
+  String gClipboard(Object thing) {
+    return '$thing copiado al portapapeles';
+  }
+
+  @override
+  String get gSupportEmail => 'Correo electrónico de soporte';
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override
