@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
@@ -22,4 +23,13 @@ double widthOf(BuildContext context) {
 /// More readable than MediaQuery.of(context).size.height
 double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
+}
+
+/// Approximate time it takes the average reader to complete the passage
+/// (reading silently to oneself)
+/// Min 1 second
+Duration readingTime(String passage) {
+  final int words = passage.split(' ').length;
+  final int milliseconds = ((words / 250) * 60 * 100).ceil();
+  return Duration(milliseconds: max(milliseconds, 1000));
 }
