@@ -1,3 +1,5 @@
+import './keys.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
@@ -17,7 +19,16 @@ class FeedbackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MenuItemButton(
-      onPressed: () {
+      onPressed: () async {
+        final String snackBarText = l10n.gClipboard(l10n.gSupportEmail);
+
+        await scaffoldMessengerKey.currentState
+            ?.showSnackBar(SnackBar(
+              content: Text(snackBarText, textAlign: TextAlign.center),
+              duration: readingTime(snackBarText),
+            ))
+            .closed;
+
         BetterFeedback.of(parentContext).show((UserFeedback feedback) async {
           await Clipboard.setData(const ClipboardData(text: empathSupport));
 
