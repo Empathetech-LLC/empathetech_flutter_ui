@@ -12,7 +12,7 @@ class OpenUIEnFeedbackLocalizations extends FeedbackLocalizations {
   String get navigate => 'Interact';
 
   @override
-  String get submitButtonText => 'Submit';
+  String get submitButtonText => 'Share via email';
 }
 
 class OpenUIEsFeedbackLocalizations extends FeedbackLocalizations {
@@ -26,7 +26,7 @@ class OpenUIEsFeedbackLocalizations extends FeedbackLocalizations {
   String get navigate => 'Interactuar';
 
   @override
-  String get submitButtonText => 'Enviar comentarios';
+  String get submitButtonText => 'Compartir por correo electrónico';
 }
 
 class OpenUIFeedbackLocalizationsDelegate
