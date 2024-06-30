@@ -85,6 +85,17 @@ class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
               dialogTitle: l10n.lsResetAll,
               onConfirm: () => EzConfig.removeKeys(layoutKeys.keys.toSet()),
             ),
+            separator,
+
+            // Help
+            EzLink(
+              EFUILang.of(context)!.gHowThisWorks,
+              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+              url: Uri.parse(understandingLayout),
+              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+              tooltip: understandingLayout,
+            ),
             spacer,
           ],
         ),
