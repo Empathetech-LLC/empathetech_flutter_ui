@@ -365,7 +365,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
           ),
           onPressed: inProgress
-              ? null
+              ? doNothing
               : () async {
                   setState(() {
                     inProgress = true;
@@ -375,7 +375,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     inProgress = false;
                   });
                 },
-          onLongPress: inProgress ? null : _showCredits,
+          onLongPress: inProgress ? doNothing : _showCredits,
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -383,23 +383,23 @@ class _ImageSettingState extends State<EzImageSetting> {
                 color: theme.colorScheme.primaryContainer,
               ),
             ),
-            child: inProgress
-                ? const CircularProgressIndicator()
-                : CircleAvatar(
-                    radius: padding * 2,
-                    foregroundImage:
-                        (currPath == null || currPath == noImageValue)
-                            ? null
-                            : provideImage(currPath!),
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: theme.colorScheme.onSurface,
-                    child: (currPath == null || currPath == noImageValue)
-                        ? Icon(
-                            PlatformIcons(context).edit,
-                            size: theme.textTheme.titleLarge?.fontSize,
-                          )
-                        : null,
-                  ),
+            child: CircleAvatar(
+              radius: padding * 2,
+              foregroundImage:
+                  (inProgress || currPath == null || currPath == noImageValue)
+                      ? null
+                      : provideImage(currPath!),
+              backgroundColor: Colors.transparent,
+              foregroundColor: theme.colorScheme.onSurface,
+              child: (currPath == null || currPath == noImageValue)
+                  ? Icon(
+                      PlatformIcons(context).edit,
+                      size: theme.textTheme.titleLarge?.fontSize,
+                    )
+                  : inProgress
+                      ? const CircularProgressIndicator()
+                      : null,
+            ),
           ),
           label: Text(widget.label, textAlign: TextAlign.center),
         ),
