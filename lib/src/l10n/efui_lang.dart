@@ -1006,6 +1006,12 @@ abstract class EFUILang {
   /// **'Failed to update image:\n{error}'**
   String isSetFailed(Object error);
 
+  /// No description provided for @isPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.'**
+  String get isPermission;
+
   /// No description provided for @isUseForColors.
   ///
   /// In en, this message translates to:

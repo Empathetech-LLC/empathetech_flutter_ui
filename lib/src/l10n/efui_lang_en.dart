@@ -485,6 +485,10 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get isPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+
+  @override
   String get isUseForColors => 'Update the app colors using this image';
 
   @override

@@ -198,6 +198,7 @@
   "isEnterURL": "Ingrese URL",
   "isGetFailed": "Error al recuperar la imagen",
   "isSetFailed": "Error al actualizar la imagen:\n{error}",
+  "isPermission": "Algunos sitios no permiten que otros accedan a sus imágenes.\nPruebe con una imagen de otro host.",
 
   "isUseForColors": "Actualizar los colores de la aplicación usando esta imagen",
 

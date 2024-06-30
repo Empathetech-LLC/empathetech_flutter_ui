@@ -486,6 +486,10 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get isPermission =>
+      'Algunos sitios no permiten que otros accedan a sus imágenes.\nPruebe con una imagen de otro host.';
+
+  @override
   String get isUseForColors =>
       'Actualizar los colores de la aplicación usando esta imagen';
 

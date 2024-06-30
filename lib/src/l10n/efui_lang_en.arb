@@ -197,7 +197,8 @@
   "isEnterURL": "Enter URL",
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
-  
+  "isPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
+
   "isUseForColors": "Update the app colors using this image",
 
   "isResetAll": "Reset all {themeType} theme images?"
