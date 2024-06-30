@@ -58,7 +58,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
   late String? currPath = EzConfig.get(widget.configKey);
+
   late bool updateTheme = (widget.updateTheme != null);
+  bool inProgress = false;
 
   late final TextEditingController urlText = TextEditingController();
   late final GlobalKey<FormState> urlFormKey = GlobalKey<FormState>();
@@ -136,11 +138,22 @@ class _ImageSettingState extends State<EzImageSetting> {
           builder: (BuildContext networkDialogContext) {
             void onConfirm() async {
               if (urlFormKey.currentState!.validate()) {
-                final String path = urlText.text;
+                late final NetworkImage image;
 
-                await EzConfig.setString(widget.configKey, path);
-                Navigator.of(networkDialogContext).pop(path);
-                Navigator.of(dialogContext).pop(path);
+                // Verify that the image is accessible
+                try {
+                  image = NetworkImage(urlText.text);
+                } catch (e) {
+                  return logAlert(
+                    context: context,
+                    title: l10n.isGetFailed,
+                    message: '${e.toString()}\n\n${l10n.isPermission}',
+                  );
+                }
+
+                await EzConfig.setString(widget.configKey, image.url);
+                Navigator.of(networkDialogContext).pop(image.url);
+                Navigator.of(dialogContext).pop(image.url);
               }
             }
 
@@ -280,25 +293,37 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// First-layer [ElevatedButton.onPressed]
   /// Runs the [_chooseImage] dialog and updates the state accordingly
-  void _activateSetting() async {
+  Future<bool> _activateSetting() async {
     final dynamic newPath = await _chooseImage(context);
 
     if (newPath is String) {
       currPath = newPath;
+
       if (widget.updateTheme != null &&
           updateTheme &&
           newPath != noImageValue) {
-        await storeImageColorScheme(
+        final String result = await storeImageColorScheme(
           brightness: widget.updateTheme!,
           path: newPath,
         );
+
+        if (result != success) {
+          await logAlert(
+            context: context,
+            title: l10n.isGetFailed,
+            message: '$result\n\n${l10n.isPermission}',
+          );
+          await EzConfig.remove(widget.configKey);
+          return false;
+        }
 
         widget.updateTheme == Brightness.light
             ? EzConfig.setString(lightColorSchemeImageKey, newPath)
             : EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
-      setState(() {});
     }
+
+    return true;
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information
@@ -339,8 +364,18 @@ class _ImageSettingState extends State<EzImageSetting> {
               theme.colorScheme.onSurface,
             ),
           ),
-          onPressed: _activateSetting,
-          onLongPress: _showCredits,
+          onPressed: inProgress
+              ? null
+              : () async {
+                  setState(() {
+                    inProgress = true;
+                  });
+                  await _activateSetting();
+                  setState(() {
+                    inProgress = false;
+                  });
+                },
+          onLongPress: inProgress ? null : _showCredits,
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -348,20 +383,23 @@ class _ImageSettingState extends State<EzImageSetting> {
                 color: theme.colorScheme.primaryContainer,
               ),
             ),
-            child: CircleAvatar(
-              radius: padding * 2,
-              foregroundImage: (currPath == null || currPath == noImageValue)
-                  ? null
-                  : provideImage(currPath!),
-              backgroundColor: Colors.transparent,
-              foregroundColor: theme.colorScheme.onSurface,
-              child: (currPath == null || currPath == noImageValue)
-                  ? Icon(
-                      PlatformIcons(context).edit,
-                      size: theme.textTheme.titleLarge?.fontSize,
-                    )
-                  : null,
-            ),
+            child: inProgress
+                ? const CircularProgressIndicator()
+                : CircleAvatar(
+                    radius: padding * 2,
+                    foregroundImage:
+                        (currPath == null || currPath == noImageValue)
+                            ? null
+                            : provideImage(currPath!),
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: theme.colorScheme.onSurface,
+                    child: (currPath == null || currPath == noImageValue)
+                        ? Icon(
+                            PlatformIcons(context).edit,
+                            size: theme.textTheme.titleLarge?.fontSize,
+                          )
+                        : null,
+                  ),
           ),
           label: Text(widget.label, textAlign: TextAlign.center),
         ),
