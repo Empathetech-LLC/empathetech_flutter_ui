@@ -277,14 +277,20 @@ void storeColorScheme({
 
 /// Generates a [ColorScheme] based on the image found at [path]
 /// Then stores the values in [EzConfig.preferences]
-Future<void> storeImageColorScheme({
+Future<String> storeImageColorScheme({
   required String path,
   required Brightness brightness,
 }) async {
-  final ColorScheme colorScheme = await ColorScheme.fromImageProvider(
-    provider: provideImage(path),
-    brightness: brightness,
-  );
+  late final ColorScheme colorScheme;
+
+  try {
+    colorScheme = await ColorScheme.fromImageProvider(
+      provider: provideImage(path),
+      brightness: brightness,
+    );
+  } catch (e) {
+    return e.toString();
+  }
 
   if (brightness == Brightness.light) {
     EzConfig.removeKeys(lightColors.toSet());
@@ -425,6 +431,8 @@ Future<void> storeImageColorScheme({
     EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
     EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
   }
+
+  return success;
 }
 
 /// Get the human readable name of a [key]s color
