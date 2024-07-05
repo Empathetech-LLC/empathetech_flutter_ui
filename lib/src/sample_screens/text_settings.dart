@@ -19,10 +19,14 @@ class TextSettings extends StatelessWidget {
   /// Light theme value for [EzScreen.decorationImageKey]
   final String? lightBackgroundImageKey;
 
+  /// Whether the [TextStyle] spacing controls should be shown
+  final bool showSpacing;
+
   const TextSettings({
     super.key,
     this.darkBackgroundImageKey,
     this.lightBackgroundImageKey,
+    this.showSpacing = true,
   });
 
   @override
@@ -50,6 +54,7 @@ class TextSettings extends StatelessWidget {
       child: _TextSettings(
         darkBackgroundImageKey: darkBackgroundImageKey,
         lightBackgroundImageKey: lightBackgroundImageKey,
+        showSpacing: showSpacing,
       ),
     );
   }
@@ -58,10 +63,12 @@ class TextSettings extends StatelessWidget {
 class _TextSettings extends StatefulWidget {
   final String? darkBackgroundImageKey;
   final String? lightBackgroundImageKey;
+  final bool showSpacing;
 
   const _TextSettings({
     required this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    required this.lightBackgroundImageKey,
+    required this.showSpacing,
   });
 
   @override
@@ -554,17 +561,18 @@ class _TextSettingsState extends State<_TextSettings> {
                 swapSpacer,
 
                 // Letter, word, and line spacing
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    letterSpacingControllers[editing]!,
-                    rowSpacer,
-                    wordSpacingControllers[editing]!,
-                    rowSpacer,
-                    lineHeightControllers[editing]!,
-                  ],
-                ),
+                if (widget.showSpacing)
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      letterSpacingControllers[editing]!,
+                      rowSpacer,
+                      wordSpacingControllers[editing]!,
+                      rowSpacer,
+                      lineHeightControllers[editing]!,
+                    ],
+                  ),
               ],
             ),
           ),
