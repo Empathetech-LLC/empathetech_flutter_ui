@@ -9,7 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettings extends StatefulWidget {
-  const ImageSettings({super.key});
+  /// Dark theme value for [EzScreen.decorationImageKey]
+  final String? darkBackgroundImageKey;
+
+  /// Light theme value for [EzScreen.decorationImageKey]
+  final String? lightBackgroundImageKey;
+
+  const ImageSettings({
+    super.key,
+    this.lightBackgroundImageKey,
+    this.darkBackgroundImageKey,
+  });
 
   @override
   State<ImageSettings> createState() => _ImageSettingsState();
@@ -69,7 +79,9 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder

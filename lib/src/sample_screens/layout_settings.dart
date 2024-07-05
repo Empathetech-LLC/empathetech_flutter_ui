@@ -9,7 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LayoutSettings extends StatefulWidget {
-  const LayoutSettings({super.key});
+  /// Dark theme value for [EzScreen.decorationImageKey]
+  final String? darkBackgroundImageKey;
+
+  /// Light theme value for [EzScreen.decorationImageKey]
+  final String? lightBackgroundImageKey;
+
+  const LayoutSettings({
+    super.key,
+    this.darkBackgroundImageKey,
+    this.lightBackgroundImageKey,
+  });
 
   @override
   State<LayoutSettings> createState() => _LayoutSettingsState();
@@ -41,7 +51,9 @@ class _LayoutSettingsState extends State<LayoutSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(spacing - margin),

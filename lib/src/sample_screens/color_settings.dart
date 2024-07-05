@@ -10,7 +10,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettings extends StatefulWidget {
-  const ColorSettings({super.key});
+  /// Dark theme value for [EzScreen.decorationImageKey]
+  final String? darkBackgroundImageKey;
+
+  /// Light theme value for [EzScreen.decorationImageKey]
+  final String? lightBackgroundImageKey;
+
+  /// Initial set of color configKeys to display in the advanced settings (light theme)
+  final List<String> lightStarterSet;
+
+  /// Initial set of color configKeys to display in the advanced settings (dark theme)
+  final List<String> darkStarterSet;
+
+  const ColorSettings({
+    super.key,
+    this.darkBackgroundImageKey,
+    this.lightBackgroundImageKey,
+    this.darkStarterSet = const <String>[
+      darkPrimaryKey,
+      darkSecondaryKey,
+      darkTertiaryKey,
+      darkSurfaceContainerKey,
+      darkSurfaceKey,
+      darkOnSurfaceKey,
+    ],
+    this.lightStarterSet = const <String>[
+      lightPrimaryKey,
+      lightSecondaryKey,
+      lightTertiaryKey,
+      lightSurfaceContainerKey,
+      lightSurfaceKey,
+      lightOnSurfaceKey,
+    ],
+  });
 
   @override
   State<ColorSettings> createState() => _ColorSettingsState();
@@ -97,23 +129,9 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   // Advanced controls //
 
-  late final List<String> defaultList = isDark
-      ? <String>[
-          darkPrimaryKey,
-          darkSecondaryKey,
-          darkTertiaryKey,
-          darkSurfaceContainerKey,
-          darkSurfaceKey,
-          darkOnSurfaceKey,
-        ]
-      : <String>[
-          lightPrimaryKey,
-          lightSecondaryKey,
-          lightTertiaryKey,
-          lightSurfaceContainerKey,
-          lightSurfaceKey,
-          lightOnSurfaceKey,
-        ];
+  late final List<String> defaultList =
+      isDark ? widget.darkStarterSet : widget.lightStarterSet;
+
   late final Set<String> defaultSet = defaultList.toSet();
 
   late final List<String> fullList = isDark ? darkColors : lightColors;
@@ -230,7 +248,9 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder

@@ -13,7 +13,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 enum TextSettingType { display, headline, title, body, label }
 
 class TextSettings extends StatelessWidget {
-  const TextSettings({super.key});
+  /// Dark theme value for [EzScreen.decorationImageKey]
+  final String? darkBackgroundImageKey;
+
+  /// Light theme value for [EzScreen.decorationImageKey]
+  final String? lightBackgroundImageKey;
+
+  const TextSettings({
+    super.key,
+    this.darkBackgroundImageKey,
+    this.lightBackgroundImageKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +47,22 @@ class TextSettings extends StatelessWidget {
           create: (_) => LabelTextStyleProvider(color: textColor),
         ),
       ],
-      child: const _TextSettings(),
+      child: _TextSettings(
+        darkBackgroundImageKey: darkBackgroundImageKey,
+        lightBackgroundImageKey: lightBackgroundImageKey,
+      ),
     );
   }
 }
 
 class _TextSettings extends StatefulWidget {
-  const _TextSettings();
+  final String? darkBackgroundImageKey;
+  final String? lightBackgroundImageKey;
+
+  const _TextSettings({
+    required this.darkBackgroundImageKey,
+    this.lightBackgroundImageKey,
+  });
 
   @override
   State<_TextSettings> createState() => _TextSettingsState();
@@ -469,7 +488,9 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(spacing - margin),
