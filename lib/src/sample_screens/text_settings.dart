@@ -554,6 +554,7 @@ class _TextSettingsState extends State<_TextSettings> {
             <InlineSpan>[
               EzPlainText(text: l10n.tsDisplayP1),
               EzInlineLink(
+                key: ValueKey<int>(displayProvider.id),
                 l10n.tsDisplayLink,
                 style: displayProvider.value,
                 textAlign: TextAlign.center,
@@ -575,6 +576,7 @@ class _TextSettingsState extends State<_TextSettings> {
             <InlineSpan>[
               EzPlainText(text: l10n.tsHeadlineP1),
               EzInlineLink(
+                key: ValueKey<int>(headlineProvider.id),
                 l10n.tsHeadlineLink,
                 style: headlineProvider.value,
                 textAlign: TextAlign.center,
@@ -596,6 +598,7 @@ class _TextSettingsState extends State<_TextSettings> {
             <InlineSpan>[
               EzPlainText(text: l10n.tsTitleP1),
               EzInlineLink(
+                key: ValueKey<int>(titleProvider.id),
                 l10n.tsTitleLink,
                 style: titleProvider.value,
                 textAlign: TextAlign.center,
@@ -616,6 +619,7 @@ class _TextSettingsState extends State<_TextSettings> {
             <InlineSpan>[
               EzPlainText(text: l10n.tsBodyP1),
               EzInlineLink(
+                key: ValueKey<int>(bodyProvider.id),
                 l10n.tsBodyLink,
                 style: bodyProvider.value,
                 textAlign: TextAlign.center,
@@ -637,6 +641,7 @@ class _TextSettingsState extends State<_TextSettings> {
             <InlineSpan>[
               EzPlainText(text: l10n.tsLabelP1),
               EzInlineLink(
+                key: ValueKey<int>(labelProvider.id),
                 l10n.tsLabelLink,
                 style: labelProvider.value,
                 textAlign: TextAlign.center,
