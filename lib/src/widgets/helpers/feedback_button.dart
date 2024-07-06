@@ -1,9 +1,7 @@
-/* open_ui
+/* empathetech_flutter_ui
  * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
-
-import './keys.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,11 +11,13 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FeedbackButton extends StatelessWidget {
   final BuildContext parentContext;
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
   final EFUILang l10n;
 
   const FeedbackButton({
     super.key,
     required this.parentContext,
+    required this.scaffoldMessengerKey,
     required this.l10n,
   });
 

@@ -41,6 +41,7 @@ export 'src/sample_screens/text_settings.dart';
 // Widgets //
 
 // Helpers
+export 'src/widgets/helpers/feedback_button.dart';
 export 'src/widgets/helpers/row.dart';
 export 'src/widgets/helpers/screen.dart';
 export 'src/widgets/helpers/scroll_view.dart';
