@@ -21,6 +21,7 @@ export 'src/consts/google_fonts.dart';
 
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
+export 'src/functions/feedback_localizations.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
 export 'src/functions/text.dart';
