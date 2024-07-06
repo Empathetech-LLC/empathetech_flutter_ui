@@ -41,7 +41,7 @@ Widget testOpenUI({
         localizationsDelegates: <LocalizationsDelegate<dynamic>>{
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
-          OpenUIFeedbackLocalizationsDelegate(),
+          EmpathetechFeedbackLocalizationsDelegate(),
         },
         supportedLocales: EFUILang.supportedLocales,
         locale: locale,

@@ -74,7 +74,7 @@ void main() async {
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
       const LocaleNamesLocalizationsDelegate(),
       ...EFUILang.localizationsDelegates,
-      OpenUIFeedbackLocalizationsDelegate(),
+      EmpathetechFeedbackLocalizationsDelegate(),
     ],
     localeOverride: EzConfig.getLocale(),
     child: const OpenUI(),
@@ -137,7 +137,7 @@ class OpenUI extends StatelessWidget {
         localizationsDelegates: <LocalizationsDelegate<dynamic>>{
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
-          OpenUIFeedbackLocalizationsDelegate(),
+          EmpathetechFeedbackLocalizationsDelegate(),
         },
 
         // Supported languages
