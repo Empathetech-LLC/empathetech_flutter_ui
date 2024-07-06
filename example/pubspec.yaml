@@ -1,8 +1,7 @@
 name: example
 description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
+version: 7.0.0-dev.3
 publish_to: 'none'
-
-version: 1.0.1+3
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -10,9 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  empathetech_flutter_ui:
-   path: ../
 
   # Flutter (Google)
   go_router: ^14.0.1
@@ -24,12 +20,15 @@ dependencies:
   flutter_platform_widgets: ^7.0.0
   share_plus: ^9.0.0
 
-dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.2
+  # Empathetech
+  empathetech_flutter_ui:
+   path: ../
 
+dev_dependencies:
   dependency_validator: ^4.1.0
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^4.0.0
+  flutter_native_splash: ^2.3.2
   flutter_test:
     sdk: flutter
   google_fonts: ^6.1.0
@@ -40,9 +39,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/
-    - assets/images/dark-logo.png
-    - assets/images/dark-logo-round.png
     - assets/fonts/
     - assets/fonts/Roboto-Black.ttf
     - assets/fonts/Roboto-BlackItalic.ttf
@@ -56,14 +52,19 @@ flutter:
     - assets/fonts/Roboto-Regular.ttf
     - assets/fonts/Roboto-Thin.ttf
     - assets/fonts/Roboto-ThinItalic.ttf
+    - assets/images/
+    - assets/images/dark-logo.png
+    - assets/images/dark-logo-round.png
 
 flutter_launcher_icons:
-  image_path: assets/dark-logo.png
-  adaptive_icon_foreground: assets/dark-logo-round.png
+  image_path: assets/images/dark-logo.png
+  adaptive_icon_foreground: assets/images/dark-logo-round.png
   adaptive_icon_background: "#000000"
   android: true
   ios: true
   remove_alpha_ios: true
+  web:
+    generate: true
   windows:
     generate: true
   macos:
@@ -71,4 +72,7 @@ flutter_launcher_icons:
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/dark-logo.png
+  image: assets/images/dark-logo.png
+  android: true
+  ios: true
+  web: true
