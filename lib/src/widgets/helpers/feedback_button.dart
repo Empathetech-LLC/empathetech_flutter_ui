@@ -13,12 +13,14 @@ class FeedbackButton extends StatelessWidget {
   final BuildContext parentContext;
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
   final EFUILang l10n;
+  final String supportEmail;
 
   const FeedbackButton({
     super.key,
     required this.parentContext,
     required this.scaffoldMessengerKey,
     required this.l10n,
+    this.supportEmail = empathSupport,
   });
 
   @override
@@ -35,7 +37,7 @@ class FeedbackButton extends StatelessWidget {
             .closed;
 
         BetterFeedback.of(parentContext).show((UserFeedback feedback) async {
-          await Clipboard.setData(const ClipboardData(text: empathSupport));
+          await Clipboard.setData(ClipboardData(text: supportEmail));
 
           await Share.shareXFiles(
             <XFile>[
