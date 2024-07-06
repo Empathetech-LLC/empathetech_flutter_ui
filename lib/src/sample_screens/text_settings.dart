@@ -558,10 +558,10 @@ class _TextSettingsState extends State<_TextSettings> {
                     underlineControllers[editing]!,
                   ],
                 ),
-                swapSpacer,
 
                 // Letter, word, and line spacing
-                if (widget.showSpacing)
+                if (widget.showSpacing) ...<Widget>{
+                  swapSpacer,
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -573,6 +573,7 @@ class _TextSettingsState extends State<_TextSettings> {
                       lineHeightControllers[editing]!,
                     ],
                   ),
+                }
               ],
             ),
           ),
