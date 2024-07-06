@@ -175,7 +175,7 @@ packages:
       path: example
       relative: true
     source: path
-    version: "1.0.1+3"
+    version: "7.0.0-dev.3"
   fake_async:
     dependency: transitive
     description:
