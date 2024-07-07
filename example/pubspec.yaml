@@ -32,6 +32,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   google_fonts: ^6.1.0
+  integration_test:
+    sdk: flutter
 
 flutter:
   generate: true # For l10n
