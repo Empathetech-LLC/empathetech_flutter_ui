@@ -1,3 +1,8 @@
+/* open_ui
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * See LICENSE for distribution and usage details.
+ */
+
 import 'color_settings_screen.dart' as color;
 import 'home_screen.dart' as home;
 import 'image_settings_screen.dart' as image;
