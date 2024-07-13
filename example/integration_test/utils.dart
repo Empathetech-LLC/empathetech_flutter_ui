@@ -30,11 +30,9 @@ Future<void> touch(WidgetTester tester, Finder toFind) async {
 Widget testOpenUI({
   required String title,
   required Locale locale,
-  required TargetPlatform platform,
 }) =>
     EzAppProvider(
       key: ValueKey<String>(title),
-      initialPlatform: platform,
       app: PlatformApp.router(
         debugShowCheckedModeBanner: false,
         title: appTitle,

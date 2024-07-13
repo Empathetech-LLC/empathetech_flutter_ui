@@ -20,7 +20,6 @@ void testSuite({
   required Locale locale,
   required EFUILang l10n,
   required LocaleNames localeNames,
-  TargetPlatform platform = TargetPlatform.android,
   Function? setup,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -30,11 +29,7 @@ void testSuite({
 
       // Load the app //
 
-      final Widget testApp = testOpenUI(
-        title: title,
-        locale: locale,
-        platform: platform,
-      );
+      final Widget testApp = testOpenUI(title: title, locale: locale);
 
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();

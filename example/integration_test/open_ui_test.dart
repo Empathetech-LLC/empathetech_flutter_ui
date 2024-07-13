@@ -79,16 +79,6 @@ Future<void> runTestSuites({
     final Function testSuite = testSuites[i];
     final String screenName = screenNames[i];
 
-    // Test Cupertino //
-
-    testSuite(
-      title: '$screenName platform test: iOS',
-      locale: english,
-      l10n: enText,
-      localeNames: enNames,
-      platform: TargetPlatform.iOS,
-    );
-
     // Test Lefty //
 
     testSuite(
@@ -130,7 +120,7 @@ Future<void> runTestSuites({
       );
     }
 
-    // Test user config(s) //
+    // Test user configs //
 
     // Default config
     testSuite(
@@ -184,6 +174,7 @@ Future<void> runTestSuites({
         await preferences.setDouble(labelWordSpacingKey, minFontWordSpacing);
 
         // Layout settings //
+
         await preferences.setDouble(marginKey, minMargin);
         await preferences.setDouble(paddingKey, minPadding);
         await preferences.setDouble(spacingKey, minSpacing);
@@ -234,6 +225,7 @@ Future<void> runTestSuites({
         await preferences.setDouble(labelWordSpacingKey, maxFontWordSpacing);
 
         // Layout settings //
+
         await preferences.setDouble(marginKey, maxMargin);
         await preferences.setDouble(paddingKey, maxPadding);
         await preferences.setDouble(spacingKey, maxSpacing);
