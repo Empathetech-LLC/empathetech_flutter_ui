@@ -30,7 +30,7 @@ void testSuite({
     testWidgets(title, (WidgetTester tester) async {
       //// Run the tests ////
 
-      setup?.call();
+      await setup?.call();
 
       // Load the app //
 

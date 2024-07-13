@@ -86,7 +86,7 @@ Future<void> runTestSuites({
 
     // Test Lefty //
 
-    testSuite(
+    await testSuite(
       title: '$screenName lefty test',
       locale: english,
       l10n: enText,
@@ -98,7 +98,7 @@ Future<void> runTestSuites({
 
     // Test light theme //
 
-    testSuite(
+    await testSuite(
       title: '$screenName lefty test',
       locale: english,
       l10n: enText,
@@ -111,7 +111,7 @@ Future<void> runTestSuites({
     // Test languages //
 
     for (int i = 1; i < locales.length; i++) {
-      testSuite(
+      await testSuite(
         title: '$screenName language test: ${locales[i].languageCode}',
         locale: locales[i],
         l10n: l10ns[i],
@@ -128,7 +128,7 @@ Future<void> runTestSuites({
     // Test user configs //
 
     // Default config
-    testSuite(
+    await testSuite(
       title: '$screenName layout test: Default config',
       locale: english,
       l10n: enText,
@@ -136,7 +136,7 @@ Future<void> runTestSuites({
     );
 
     // Minimum config
-    testSuite(
+    await testSuite(
       title: '$screenName layout test: Minimum config',
       locale: english,
       l10n: enText,
@@ -187,7 +187,7 @@ Future<void> runTestSuites({
     );
 
     // Maximum config
-    testSuite(
+    await testSuite(
       title: '$screenName layout test: Maximum config',
       locale: english,
       l10n: enText,
