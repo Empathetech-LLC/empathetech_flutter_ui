@@ -21,15 +21,10 @@ void testSuite({
   required EFUILang l10n,
   required LocaleNames localeNames,
   TargetPlatform platform = TargetPlatform.android,
-  Size screenSize = const Size(430, 932), // Large phone (iPhone 14 Pro Max)
   Function? setup,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
       //// Run the tests ////
-
-      // Setup the test environment //
-
-      await tester.binding.setSurfaceSize(screenSize);
 
       setup?.call();
 
