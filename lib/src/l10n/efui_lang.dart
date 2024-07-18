@@ -556,11 +556,11 @@ abstract class EFUILang {
   /// **'Activate to open a color picker for {name}. Long press for more options.'**
   String csPickerSemantics(Object name);
 
-  /// No description provided for @csBasic.
+  /// No description provided for @csQuick.
   ///
   /// In en, this message translates to:
-  /// **'Basic'**
-  String get csBasic;
+  /// **'Quick'**
+  String get csQuick;
 
   /// No description provided for @csAdvanced.
   ///

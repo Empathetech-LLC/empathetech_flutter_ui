@@ -252,7 +252,7 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get csBasic => 'Básica';
+  String get csQuick => 'Rápida';
 
   @override
   String get csAdvanced => 'Avanzada';

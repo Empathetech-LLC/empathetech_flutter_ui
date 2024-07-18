@@ -110,7 +110,7 @@
 
   "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
 
-  "csBasic": "Basic",
+  "csQuick": "Quick",
   "csAdvanced": "Advanced",
 
   "csHighContrast": "Use high contrast colors",
