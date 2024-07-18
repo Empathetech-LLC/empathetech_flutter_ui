@@ -85,16 +85,16 @@ class _TextSettingsState extends State<_TextSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  late final EzSpacer spacer = EzSpacer(spacing);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 
-  static const String basic = 'basic';
+  static const String quick = 'quick';
   static const String advanced = 'advanced';
 
-  String currentTab = basic;
+  String currentTab = quick;
 
   @override
   void didChangeDependencies() {
@@ -118,8 +118,8 @@ class _TextSettingsState extends State<_TextSettings> {
           SegmentedButton<String>(
             segments: <ButtonSegment<String>>[
               ButtonSegment<String>(
-                value: basic,
-                label: Text(l10n.csBasic),
+                value: quick,
+                label: Text(l10n.csQuick),
               ),
               ButtonSegment<String>(
                 value: advanced,
@@ -133,11 +133,11 @@ class _TextSettingsState extends State<_TextSettings> {
               setState(() {});
             },
           ),
-          separator,
+          spacer,
 
           // Settings
-          if (currentTab == basic)
-            const _BasicTextSettings()
+          if (currentTab == quick)
+            const _QuickTextSettings()
           else
             _AdvancedTextSettings(showSpacing: widget.showSpacing),
         ],
@@ -146,19 +146,20 @@ class _TextSettingsState extends State<_TextSettings> {
   }
 }
 
-class _BasicTextSettings extends StatefulWidget {
-  const _BasicTextSettings();
+class _QuickTextSettings extends StatefulWidget {
+  const _QuickTextSettings();
 
   @override
-  State<_BasicTextSettings> createState() => _BasicTextSettingsState();
+  State<_QuickTextSettings> createState() => _QuickTextSettingsState();
 }
 
-class _BasicTextSettingsState extends State<_BasicTextSettings> {
+class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the theme data //
 
   final double spacing = EzConfig.get(spacingKey);
 
   late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSwapSpacer swapSpacer = EzSwapSpacer(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -176,7 +177,13 @@ class _BasicTextSettingsState extends State<_BasicTextSettings> {
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
 
-  // Define the setting controllers //
+  late final Map<String, double> defaultSizes = <String, double>{
+    displayFontSizeKey: EzConfig.getDefault(displayFontSizeKey),
+    headlineFontSizeKey: EzConfig.getDefault(headlineFontSizeKey),
+    titleFontSizeKey: EzConfig.getDefault(titleFontSizeKey),
+    bodyFontSizeKey: EzConfig.getDefault(bodyFontSizeKey),
+    labelFontSizeKey: EzConfig.getDefault(labelFontSizeKey),
+  };
 
   // Return the build //
 
@@ -187,7 +194,81 @@ class _BasicTextSettingsState extends State<_BasicTextSettings> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        // Local reset all
+        EzRow(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            // Font family
+            const SizedBox.shrink(),
+
+            // Font size
+            EzFontDoubleBatchSetting(
+              configKeys: const <String>[
+                displayFontSizeKey,
+                headlineFontSizeKey,
+                titleFontSizeKey,
+                bodyFontSizeKey,
+                labelFontSizeKey
+              ],
+              min: minFontSize,
+              max: maxFontSize,
+              notifierCallback: (double scale) {
+                displayProvider
+                    .resize(defaultSizes[displayFontSizeKey]! * scale);
+                headlineProvider
+                    .resize(defaultSizes[headlineFontSizeKey]! * scale);
+                titleProvider.resize(defaultSizes[titleFontSizeKey]! * scale);
+                bodyProvider.resize(defaultSizes[bodyFontSizeKey]! * scale);
+                labelProvider.resize(defaultSizes[labelFontSizeKey]! * scale);
+              },
+              tooltip: l10n.tsFontSize,
+            ),
+          ],
+        ),
+        separator,
+
+        // Display preview
+        Text(
+          l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
+          textAlign: TextAlign.center,
+          style: displayProvider.value,
+        ),
+        spacer,
+
+        // Headline preview
+        Text(
+          l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
+          textAlign: TextAlign.center,
+          style: headlineProvider.value,
+        ),
+        spacer,
+
+        // Title preview
+        Text(
+          l10n.tsTitleP1 + l10n.tsTitleLink,
+          textAlign: TextAlign.center,
+          style: titleProvider.value,
+        ),
+        spacer,
+
+        // Body preview
+        Text(
+          l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
+          textAlign: TextAlign.center,
+          style: bodyProvider.value,
+        ),
+        spacer,
+
+        // Label preview
+        Text(
+          l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
+          textAlign: TextAlign.center,
+          style: labelProvider.value,
+        ),
+        separator,
+
+        // Reset all
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () {
@@ -654,7 +735,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
           ],
         ),
-        separator,
+        spacer,
 
         // Controls
         EzScrollView(
@@ -816,7 +897,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
         separator,
 
-        // Local reset all
+        // Reset all
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () {
