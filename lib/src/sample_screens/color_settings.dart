@@ -72,10 +72,10 @@ class _ColorSettingsState extends State<ColorSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
-  static const String basicSettings = 'basic';
-  static const String advancedSettings = 'advanced';
+  static const String quick = 'quick';
+  static const String advanced = 'advanced';
 
-  String currentTab = basicSettings;
+  String currentTab = quick;
 
   late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
@@ -88,7 +88,7 @@ class _ColorSettingsState extends State<ColorSettings> {
     },
   );
 
-  // Basic controls  //
+  // Quick controls  //
 
   /// Build from image button label
   late final String fromImageLabel = l10n.csSchemeBase;
@@ -264,11 +264,11 @@ class _ColorSettingsState extends State<ColorSettings> {
           SegmentedButton<String>(
             segments: <ButtonSegment<String>>[
               ButtonSegment<String>(
-                value: basicSettings,
-                label: Text(l10n.csBasic),
+                value: quick,
+                label: Text(l10n.csQuick),
               ),
               ButtonSegment<String>(
-                value: advancedSettings,
+                value: advanced,
                 label: Text(l10n.csAdvanced),
               ),
             ],
@@ -281,7 +281,7 @@ class _ColorSettingsState extends State<ColorSettings> {
           ),
           separator,
 
-          if (currentTab == basicSettings) ...<Widget>[
+          if (currentTab == quick) ...<Widget>[
             // Mono chrome quick setting
             const EzMonoChromeColorsSetting(),
             spacer,
@@ -290,7 +290,7 @@ class _ColorSettingsState extends State<ColorSettings> {
             fromImageButton,
           ],
 
-          if (currentTab == advancedSettings) ...<Widget>[
+          if (currentTab == advanced) ...<Widget>[
             // Dynamic configKeys
             ConstrainedBox(
               constraints: BoxConstraints(
@@ -338,7 +338,7 @@ class _ColorSettingsState extends State<ColorSettings> {
           // Reset button
           resetButton,
 
-          if (currentTab == advancedSettings) ...<Widget>[
+          if (currentTab == advanced) ...<Widget>[
             separator,
             EzLink(
               l10n.gHowThisWorks,
