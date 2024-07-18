@@ -134,6 +134,11 @@ class EFUILangEn extends EFUILang {
   String get tsPageTitle => 'Text settings';
 
   @override
+  String tsBatchOverride(Object setting) {
+    return 'You have already made granular \"$setting\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?';
+  }
+
+  @override
   String get tsDisplay => 'Display';
 
   @override

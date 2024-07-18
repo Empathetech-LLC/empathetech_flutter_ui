@@ -134,6 +134,11 @@ class EFUILangEs extends EFUILang {
   String get tsPageTitle => 'Configuraciones de texto';
 
   @override
+  String tsBatchOverride(Object setting) {
+    return 'Ya realizó cambios granulares de \"$setting\" en la configuración avanzada.\n\n¿Está seguro de que desea anular esos cambios con una actualización por lotes?';
+  }
+
+  @override
   String get tsDisplay => 'Presentar';
 
   @override

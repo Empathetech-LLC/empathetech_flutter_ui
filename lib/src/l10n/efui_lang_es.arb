@@ -59,6 +59,8 @@
 
   "tsPageTitle": "Configuraciones de texto",
 
+  "tsBatchOverride": "Ya realizó cambios granulares de \"{setting}\" en la configuración avanzada.\n\n¿Está seguro de que desea anular esos cambios con una actualización por lotes?",
+
   "tsDisplay": "Presentar",
   "tsHeadline": "Encabezado",
   "tsTitle": "Título",

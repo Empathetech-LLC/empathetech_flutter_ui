@@ -328,6 +328,12 @@ abstract class EFUILang {
   /// **'Text settings'**
   String get tsPageTitle;
 
+  /// No description provided for @tsBatchOverride.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?'**
+  String tsBatchOverride(Object setting);
+
   /// No description provided for @tsDisplay.
   ///
   /// In en, this message translates to:

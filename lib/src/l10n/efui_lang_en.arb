@@ -58,6 +58,8 @@
 
   "tsPageTitle": "Text settings",
 
+  "tsBatchOverride": "You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?",
+
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
   "tsTitle": "Title",
