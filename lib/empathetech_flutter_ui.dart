@@ -75,7 +75,9 @@ export 'src/widgets/user_customization/color_scheme/high_contrast_colors_setting
 export 'src/widgets/user_customization/color_scheme/mono_chrome_colors_setting.dart';
 
 export 'src/widgets/user_customization/text_theme/bold_setting.dart';
+export 'src/widgets/user_customization/text_theme/double_batch_setting.dart';
 export 'src/widgets/user_customization/text_theme/double_setting.dart';
+export 'src/widgets/user_customization/text_theme/font_family_batch_setting.dart';
 export 'src/widgets/user_customization/text_theme/font_family_setting.dart';
 export 'src/widgets/user_customization/text_theme/italic_setting.dart';
 export 'src/widgets/user_customization/text_theme/providers.dart';
