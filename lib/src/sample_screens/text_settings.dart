@@ -204,13 +204,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             // Font size
             EzFontDoubleBatchSetting(
-              configKeys: const <String>[
-                displayFontSizeKey,
-                headlineFontSizeKey,
-                titleFontSizeKey,
-                bodyFontSizeKey,
-                labelFontSizeKey
-              ],
+              keysNDefaults: defaultSizes,
               min: minFontScale,
               max: maxFontScale,
               notifierCallback: (double scale) {
