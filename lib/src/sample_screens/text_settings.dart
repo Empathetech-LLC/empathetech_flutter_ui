@@ -29,6 +29,8 @@ class TextSettings extends StatelessWidget {
     this.showSpacing = true,
   });
 
+  // Set the page title //
+
   @override
   Widget build(BuildContext context) {
     final Color textColor = Theme.of(context).colorScheme.onSurface;
@@ -78,9 +80,145 @@ class _TextSettings extends StatefulWidget {
 class _TextSettingsState extends State<_TextSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
+  late final bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double margin = EzConfig.get(marginKey);
+  final double spacing = EzConfig.get(spacingKey);
+
+  late final EzSpacer separator = EzSpacer(2 * spacing);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  // Define the build data //
+
+  static const String basic = 'basic';
+  static const String advanced = 'advanced';
+
+  String currentTab = basic;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(l10n.tsPageTitle);
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return EzScreen(
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
+      child: EzScrollView(
+        children: <Widget>[
+          if (spacing > margin) EzSpacer(spacing - margin),
+
+          // Mode selector
+          SegmentedButton<String>(
+            segments: <ButtonSegment<String>>[
+              ButtonSegment<String>(
+                value: basic,
+                label: Text(l10n.csBasic),
+              ),
+              ButtonSegment<String>(
+                value: advanced,
+                label: Text(l10n.csAdvanced),
+              ),
+            ],
+            selected: <String>{currentTab},
+            showSelectedIcon: false,
+            onSelectionChanged: (Set<String> selected) {
+              currentTab = selected.first;
+              setState(() {});
+            },
+          ),
+          separator,
+
+          // Settings
+          if (currentTab == basic)
+            const _BasicTextSettings()
+          else
+            _AdvancedTextSettings(showSpacing: widget.showSpacing),
+        ],
+      ),
+    );
+  }
+}
+
+class _BasicTextSettings extends StatefulWidget {
+  const _BasicTextSettings();
+
+  @override
+  State<_BasicTextSettings> createState() => _BasicTextSettingsState();
+}
+
+class _BasicTextSettingsState extends State<_BasicTextSettings> {
+  // Gather the theme data //
+
+  final double spacing = EzConfig.get(spacingKey);
+
+  late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer separator = EzSpacer(2 * spacing);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  // Gather the build data //
+
+  late final DisplayTextStyleProvider displayProvider =
+      Provider.of<DisplayTextStyleProvider>(context);
+  late final HeadlineTextStyleProvider headlineProvider =
+      Provider.of<HeadlineTextStyleProvider>(context);
+  late final TitleTextStyleProvider titleProvider =
+      Provider.of<TitleTextStyleProvider>(context);
+  late final BodyTextStyleProvider bodyProvider =
+      Provider.of<BodyTextStyleProvider>(context);
+  late final LabelTextStyleProvider labelProvider =
+      Provider.of<LabelTextStyleProvider>(context);
+
+  // Define the setting controllers //
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        // Local reset all
+        EzResetButton(
+          dialogTitle: l10n.tsResetAll,
+          onConfirm: () {
+            EzConfig.removeKeys(textStyleKeys.keys.toSet());
+            displayProvider.reset();
+            headlineProvider.reset();
+            titleProvider.reset();
+            bodyProvider.reset();
+            labelProvider.reset();
+
+            setState(() {});
+          },
+        ),
+        spacer,
+      ],
+    );
+  }
+}
+
+class _AdvancedTextSettings extends StatefulWidget {
+  final bool showSpacing;
+
+  const _AdvancedTextSettings({required this.showSpacing});
+
+  @override
+  State<_AdvancedTextSettings> createState() => _AdvancedTextSettingsState();
+}
+
+class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
+  // Gather the theme data //
+
   final double spacing = EzConfig.get(spacingKey);
 
   late final EzSpacer spacer = EzSpacer(spacing);
@@ -482,229 +620,218 @@ class _TextSettingsState extends State<_TextSettings> {
     ),
   };
 
-  // Set the page title //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setPageTitle(l10n.tsPageTitle);
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
-      child: EzScrollView(
-        children: <Widget>[
-          if (spacing > margin) EzSpacer(spacing - margin),
-
-          // Style selector
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Flexible(
-                child: Text(
-                  l10n.gEditing,
-                  style: labelProvider.value,
-                  textAlign: TextAlign.center,
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        // Style selector
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                l10n.gEditing,
+                style: labelProvider.value,
+                textAlign: TextAlign.center,
               ),
-              rowSpacer,
-              DropdownMenu<TextSettingType>(
-                initialSelection: editing,
-                onSelected: (TextSettingType? value) {
-                  if (value != null) {
-                    editing = value;
-                    setState(() {});
-                  }
-                },
-                dropdownMenuEntries: styleChoices,
-                textStyle: labelProvider.value,
-              ),
-            ],
-          ),
-          separator,
+            ),
+            rowSpacer,
+            DropdownMenu<TextSettingType>(
+              initialSelection: editing,
+              onSelected: (TextSettingType? value) {
+                if (value != null) {
+                  editing = value;
+                  setState(() {});
+                }
+              },
+              dropdownMenuEntries: styleChoices,
+              textStyle: labelProvider.value,
+            ),
+          ],
+        ),
+        separator,
 
-          // Controls
-          EzScrollView(
-            scrollDirection: Axis.horizontal,
+        // Controls
+        EzScrollView(
+          scrollDirection: Axis.horizontal,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          child: EzRowCol.sym(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            child: EzRowCol.sym(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // Font family
-                familyControllers[editing]!,
-                swapSpacer,
+            children: <Widget>[
+              // Font family
+              familyControllers[editing]!,
+              swapSpacer,
 
-                // Font size
-                sizeControllers[editing]!,
-                swapSpacer,
+              // Font size
+              sizeControllers[editing]!,
+              swapSpacer,
 
-                // Font weight, style, and decoration
+              // Font weight, style, and decoration
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  boldControllers[editing]!,
+                  rowSpacer,
+                  italicsControllers[editing]!,
+                  rowSpacer,
+                  underlineControllers[editing]!,
+                ],
+              ),
+
+              // Letter, word, and line spacing
+              if (widget.showSpacing) ...<Widget>{
+                swapSpacer,
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    boldControllers[editing]!,
+                    letterSpacingControllers[editing]!,
                     rowSpacer,
-                    italicsControllers[editing]!,
+                    wordSpacingControllers[editing]!,
                     rowSpacer,
-                    underlineControllers[editing]!,
+                    lineHeightControllers[editing]!,
                   ],
                 ),
+              }
+            ],
+          ),
+        ),
+        separator,
 
-                // Letter, word, and line spacing
-                if (widget.showSpacing) ...<Widget>{
-                  swapSpacer,
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      letterSpacingControllers[editing]!,
-                      rowSpacer,
-                      wordSpacingControllers[editing]!,
-                      rowSpacer,
-                      lineHeightControllers[editing]!,
-                    ],
-                  ),
-                }
-              ],
+        // Display preview
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: l10n.tsDisplayP1),
+            EzInlineLink(
+              key: ValueKey<int>(displayProvider.id),
+              l10n.tsDisplayLink,
+              style: displayProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () {
+                editing = TextSettingType.display;
+                setState(() {});
+              },
+              semanticsLabel: l10n.tsLinkHint(display),
             ),
-          ),
-          separator,
+            EzPlainText(text: l10n.tsDisplayP2),
+          ],
+          style: displayProvider.value,
+          textAlign: TextAlign.center,
+        ),
+        spacer,
 
-          // Display preview
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: l10n.tsDisplayP1),
-              EzInlineLink(
-                key: ValueKey<int>(displayProvider.id),
-                l10n.tsDisplayLink,
-                style: displayProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () {
-                  editing = TextSettingType.display;
-                  setState(() {});
-                },
-                semanticsLabel: l10n.tsLinkHint(display),
-              ),
-              EzPlainText(text: l10n.tsDisplayP2),
-            ],
-            style: displayProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          spacer,
+        // Headline preview
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: l10n.tsHeadlineP1),
+            EzInlineLink(
+              key: ValueKey<int>(headlineProvider.id),
+              l10n.tsHeadlineLink,
+              style: headlineProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () {
+                editing = TextSettingType.headline;
+                setState(() {});
+              },
+              semanticsLabel: l10n.tsLinkHint(headline),
+            ),
+            EzPlainText(text: l10n.tsHeadlineP2),
+          ],
+          style: headlineProvider.value,
+          textAlign: TextAlign.center,
+        ),
+        spacer,
 
-          // Headline preview
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: l10n.tsHeadlineP1),
-              EzInlineLink(
-                key: ValueKey<int>(headlineProvider.id),
-                l10n.tsHeadlineLink,
-                style: headlineProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () {
-                  editing = TextSettingType.headline;
-                  setState(() {});
-                },
-                semanticsLabel: l10n.tsLinkHint(headline),
-              ),
-              EzPlainText(text: l10n.tsHeadlineP2),
-            ],
-            style: headlineProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          spacer,
+        // Title preview
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: l10n.tsTitleP1),
+            EzInlineLink(
+              key: ValueKey<int>(titleProvider.id),
+              l10n.tsTitleLink,
+              style: titleProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () {
+                editing = TextSettingType.title;
+                setState(() {});
+              },
+              semanticsLabel: l10n.tsLinkHint(title),
+            ),
+          ],
+          style: titleProvider.value,
+          textAlign: TextAlign.center,
+        ),
+        spacer,
 
-          // Title preview
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: l10n.tsTitleP1),
-              EzInlineLink(
-                key: ValueKey<int>(titleProvider.id),
-                l10n.tsTitleLink,
-                style: titleProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () {
-                  editing = TextSettingType.title;
-                  setState(() {});
-                },
-                semanticsLabel: l10n.tsLinkHint(title),
-              ),
-            ],
-            style: titleProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          spacer,
+        // Body preview
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: l10n.tsBodyP1),
+            EzInlineLink(
+              key: ValueKey<int>(bodyProvider.id),
+              l10n.tsBodyLink,
+              style: bodyProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () {
+                editing = TextSettingType.body;
+                setState(() {});
+              },
+              semanticsLabel: l10n.tsLinkHint(body),
+            ),
+            EzPlainText(text: l10n.tsBodyP2),
+          ],
+          style: bodyProvider.value,
+          textAlign: TextAlign.center,
+        ),
+        spacer,
 
-          // Body preview
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: l10n.tsBodyP1),
-              EzInlineLink(
-                key: ValueKey<int>(bodyProvider.id),
-                l10n.tsBodyLink,
-                style: bodyProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () {
-                  editing = TextSettingType.body;
-                  setState(() {});
-                },
-                semanticsLabel: l10n.tsLinkHint(body),
-              ),
-              EzPlainText(text: l10n.tsBodyP2),
-            ],
-            style: bodyProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          spacer,
+        // Label preview
+        EzRichText(
+          <InlineSpan>[
+            EzPlainText(text: l10n.tsLabelP1),
+            EzInlineLink(
+              key: ValueKey<int>(labelProvider.id),
+              l10n.tsLabelLink,
+              style: labelProvider.value,
+              textAlign: TextAlign.center,
+              onTap: () {
+                editing = TextSettingType.label;
+                setState(() {});
+              },
+              semanticsLabel: l10n.tsLinkHint(label),
+            ),
+            EzPlainText(text: l10n.tsLabelP2),
+          ],
+          style: labelProvider.value,
+          textAlign: TextAlign.center,
+        ),
 
-          // Label preview
-          EzRichText(
-            <InlineSpan>[
-              EzPlainText(text: l10n.tsLabelP1),
-              EzInlineLink(
-                key: ValueKey<int>(labelProvider.id),
-                l10n.tsLabelLink,
-                style: labelProvider.value,
-                textAlign: TextAlign.center,
-                onTap: () {
-                  editing = TextSettingType.label;
-                  setState(() {});
-                },
-                semanticsLabel: l10n.tsLinkHint(label),
-              ),
-              EzPlainText(text: l10n.tsLabelP2),
-            ],
-            style: labelProvider.value,
-            textAlign: TextAlign.center,
-          ),
-          separator,
+        separator,
 
-          // Local reset all
-          EzResetButton(
-            dialogTitle: l10n.tsResetAll,
-            onConfirm: () {
-              EzConfig.removeKeys(textStyleKeys.keys.toSet());
-              displayProvider.reset();
-              headlineProvider.reset();
-              titleProvider.reset();
-              bodyProvider.reset();
-              labelProvider.reset();
-              editing = TextSettingType.display;
-              setState(() {});
-            },
-          ),
-          spacer,
-        ],
-      ),
+        // Local reset all
+        EzResetButton(
+          dialogTitle: l10n.tsResetAll,
+          onConfirm: () {
+            EzConfig.removeKeys(textStyleKeys.keys.toSet());
+            displayProvider.reset();
+            headlineProvider.reset();
+            titleProvider.reset();
+            bodyProvider.reset();
+            labelProvider.reset();
+            editing = TextSettingType.display;
+            setState(() {});
+          },
+        ),
+        spacer,
+      ],
     );
   }
 }
