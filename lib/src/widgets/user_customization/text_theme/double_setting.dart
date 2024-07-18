@@ -75,9 +75,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final TextStyle? style = widget.style ??
       Theme.of(context).textTheme.bodyLarge?.copyWith(color: onBackground);
 
-  Key plusKey = UniqueKey();
-  Key minusKey = UniqueKey();
-
   late final Size sizeLimit = measureText(
     widget.sizingString ?? widget.max.toString(),
     style: style,
@@ -148,7 +145,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
-                key: minusKey,
                 icon: Icon(
                   PlatformIcons(context).remove,
                   color: (currValue < widget.max)
@@ -161,8 +157,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
                     EzConfig.setDouble(widget.configKey, currValue);
-                  } else {
-                    minusKey = UniqueKey();
                   }
 
                   setState(() {});
@@ -173,7 +167,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               core,
               pMSpacer,
               IconButton(
-                key: plusKey,
                 icon: Icon(
                   PlatformIcons(context).add,
                   color: (currValue < widget.max)
@@ -186,10 +179,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                     controller.text = currValue.toString();
                     widget.notifierCallback(currValue);
                     EzConfig.setDouble(widget.configKey, currValue);
-                  } else {
-                    plusKey = UniqueKey();
                   }
-
                   setState(() {});
                 },
                 tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
