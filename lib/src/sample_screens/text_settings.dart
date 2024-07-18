@@ -211,8 +211,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 bodyFontSizeKey,
                 labelFontSizeKey
               ],
-              min: minFontSize,
-              max: maxFontSize,
+              min: minFontScale,
+              max: maxFontScale,
               notifierCallback: (double scale) {
                 displayProvider
                     .resize(defaultSizes[displayFontSizeKey]! * scale);
