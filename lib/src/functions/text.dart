@@ -86,6 +86,31 @@ TextStyle buildDisplay({Color? color}) {
   );
 }
 
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig.defaults]
+TextStyle buildDisplayFromDefaults({Color? color}) {
+  final TextStyle starter = TextStyle(
+    fontSize: EzConfig.getDefault(displayFontSizeKey),
+    fontWeight: EzConfig.getDefault(displayBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle: EzConfig.getDefault(displayItalicsKey) == true
+        ? FontStyle.italic
+        : null,
+    decoration: EzConfig.getDefault(displayUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.getDefault(displayFontHeightKey),
+    letterSpacing: EzConfig.getDefault(displayLetterSpacingKey),
+    wordSpacing: EzConfig.getDefault(displayWordSpacingKey),
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.getDefault(displayFontFamilyKey),
+  );
+}
+
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
 TextStyle buildHeadline({Color? color}) {
   final TextStyle starter = TextStyle(
@@ -107,6 +132,31 @@ TextStyle buildHeadline({Color? color}) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(headlineFontFamilyKey),
+  );
+}
+
+/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
+TextStyle buildHeadlineFromDefaults({Color? color}) {
+  final TextStyle starter = TextStyle(
+    fontSize: EzConfig.getDefault(headlineFontSizeKey),
+    fontWeight: EzConfig.getDefault(headlineBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle: EzConfig.getDefault(headlineItalicsKey) == true
+        ? FontStyle.italic
+        : null,
+    decoration: EzConfig.getDefault(headlineUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.getDefault(headlineFontHeightKey),
+    letterSpacing: EzConfig.getDefault(headlineLetterSpacingKey),
+    wordSpacing: EzConfig.getDefault(headlineWordSpacingKey),
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.getDefault(headlineFontFamilyKey),
   );
 }
 
@@ -133,6 +183,30 @@ TextStyle buildTitle({Color? color}) {
   );
 }
 
+/// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
+TextStyle buildTitleFromDefaults({Color? color}) {
+  final TextStyle starter = TextStyle(
+    fontSize: EzConfig.getDefault(titleFontSizeKey),
+    fontWeight: EzConfig.getDefault(titleBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.getDefault(titleItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.getDefault(titleUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.getDefault(titleFontHeightKey),
+    letterSpacing: EzConfig.getDefault(titleLetterSpacingKey),
+    wordSpacing: EzConfig.getDefault(titleWordSpacingKey),
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.getDefault(titleFontFamilyKey),
+  );
+}
+
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
 TextStyle buildBody({Color? color}) {
   final TextStyle starter = TextStyle(
@@ -152,6 +226,30 @@ TextStyle buildBody({Color? color}) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(bodyFontFamilyKey),
+  );
+}
+
+/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
+TextStyle buildBodyFromDefaults({Color? color}) {
+  final TextStyle starter = TextStyle(
+    fontSize: EzConfig.getDefault(bodyFontSizeKey),
+    fontWeight: EzConfig.getDefault(bodyBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.getDefault(bodyItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.getDefault(bodyUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.getDefault(bodyFontHeightKey),
+    letterSpacing: EzConfig.getDefault(bodyLetterSpacingKey),
+    wordSpacing: EzConfig.getDefault(bodyWordSpacingKey),
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.getDefault(bodyFontFamilyKey),
   );
 }
 
@@ -175,6 +273,30 @@ TextStyle buildLabel({Color? color}) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.get(labelFontFamilyKey),
+  );
+}
+
+/// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
+TextStyle buildLabelFromDefaults({Color? color}) {
+  final TextStyle starter = TextStyle(
+    fontSize: EzConfig.getDefault(labelFontSizeKey),
+    fontWeight: EzConfig.getDefault(labelBoldKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.getDefault(labelItalicsKey) == true ? FontStyle.italic : null,
+    decoration: EzConfig.getDefault(labelUnderlinedKey) == true
+        ? TextDecoration.underline
+        : null,
+    color: color,
+    height: EzConfig.getDefault(labelFontHeightKey),
+    letterSpacing: EzConfig.getDefault(labelLetterSpacingKey),
+    wordSpacing: EzConfig.getDefault(labelWordSpacingKey),
+  );
+
+  return fuseWithGFont(
+    starter: starter,
+    gFont: EzConfig.getDefault(labelFontFamilyKey),
   );
 }
 
