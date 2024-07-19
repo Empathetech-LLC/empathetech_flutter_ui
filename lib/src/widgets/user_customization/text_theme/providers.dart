@@ -90,7 +90,7 @@ class DisplayTextStyleProvider extends BaseTextStyleProvider {
         super(buildDisplay(color: color));
 
   void reset() {
-    _style = buildDisplay(color: _textColor);
+    _style = buildDisplayFromDefaults(color: _textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -104,7 +104,7 @@ class HeadlineTextStyleProvider extends BaseTextStyleProvider {
         super(buildHeadline(color: color));
 
   void reset() {
-    _style = buildHeadline(color: _textColor);
+    _style = buildHeadlineFromDefaults(color: _textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -118,7 +118,7 @@ class TitleTextStyleProvider extends BaseTextStyleProvider {
         super(buildTitle(color: color));
 
   void reset() {
-    _style = buildTitle(color: _textColor);
+    _style = buildTitleFromDefaults(color: _textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -132,7 +132,7 @@ class BodyTextStyleProvider extends BaseTextStyleProvider {
         super(buildBody(color: color));
 
   void reset() {
-    _style = buildBody(color: _textColor);
+    _style = buildBodyFromDefaults(color: _textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -146,7 +146,7 @@ class LabelTextStyleProvider extends BaseTextStyleProvider {
         super(buildLabel(color: color));
 
   void reset() {
-    _style = buildLabel(color: _textColor);
+    _style = buildLabelFromDefaults(color: _textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
