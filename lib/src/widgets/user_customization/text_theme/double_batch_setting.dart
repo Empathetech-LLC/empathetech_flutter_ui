@@ -26,10 +26,6 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
 
   final TextStyle? style;
 
-  /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size
-  /// From the results of [measureText] on [sizingString]
-  final String? sizingString;
-
   /// Standardized tool for batch updating double [TextStyle] values for the passed [keysNDefaults]
   /// The updates will be based on the default from [keysNDefaults] and [delta]
   /// For example: [TextStyle.fontSize]
@@ -42,7 +38,6 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
     required this.tooltip,
     this.delta = 0.1,
     this.style,
-    this.sizingString,
   });
 
   @override
@@ -63,23 +58,15 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
   late final Color onBackground = colorScheme.onSurface;
   late final TextStyle? style = widget.style ??
-      Theme.of(context).textTheme.bodyLarge?.copyWith(color: onBackground);
-
-  late final Size sizeLimit = measureText(
-    widget.sizingString ?? widget.max.toString(),
-    style: style,
-    context: context,
-  );
-
-  late final double formFieldWidth = sizeLimit.width + padding;
-  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
+      Theme.of(context).textTheme.headlineLarge?.copyWith(color: onBackground);
 
   // Define build data //
 
   late final Map<String, double> startingScales = widget.keysNDefaults.map(
-    (String key, double value) {
-      return MapEntry<String, double>(key, EzConfig.getDouble(key)! / value);
-    },
+    (String key, double value) => MapEntry<String, double>(
+      key,
+      (EzConfig.getDouble(key) ?? value) / value,
+    ),
   );
 
   late bool isUniform = startingScales.values
@@ -140,6 +127,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             PlatformIcons(context).remove,
             color:
                 (currScale < widget.max) ? onBackground : colorScheme.outline,
+            size: (style?.fontSize == null) ? null : style!.fontSize! * (2 / 3),
           ),
           onPressed: () async {
             if (!isUniform) {
@@ -176,7 +164,11 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
         pMSpacer,
         Tooltip(
           message: widget.tooltip,
-          child: const Icon(Icons.text_fields_sharp),
+          child: Icon(
+            Icons.text_fields_sharp,
+            color: onBackground,
+            size: style?.fontSize,
+          ),
         ),
         pMSpacer,
 
@@ -186,12 +178,13 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             PlatformIcons(context).add,
             color:
                 (currScale < widget.max) ? onBackground : colorScheme.outline,
+            size: (style?.fontSize == null) ? null : style!.fontSize! * (2 / 3),
           ),
           onPressed: () async {
             if (!isUniform) {
-              final bool confirm = await confirmBatchOverride();
+              final bool override = await confirmBatchOverride();
 
-              if (confirm) {
+              if (override) {
                 isUniform = true;
               } else {
                 return;
