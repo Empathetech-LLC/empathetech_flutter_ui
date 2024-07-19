@@ -177,6 +177,14 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
 
+  late final Map<String, String> defaultFonts = <String, String>{
+    displayFontFamilyKey: EzConfig.getDefault(displayFontFamilyKey),
+    headlineFontFamilyKey: EzConfig.getDefault(headlineFontFamilyKey),
+    titleFontFamilyKey: EzConfig.getDefault(titleFontFamilyKey),
+    bodyFontFamilyKey: EzConfig.getDefault(bodyFontFamilyKey),
+    labelFontFamilyKey: EzConfig.getDefault(labelFontFamilyKey),
+  };
+
   late final Map<String, double> defaultSizes = <String, double>{
     displayFontSizeKey: EzConfig.getDefault(displayFontSizeKey),
     headlineFontSizeKey: EzConfig.getDefault(headlineFontSizeKey),
@@ -200,7 +208,17 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // Font family
-            const SizedBox.shrink(),
+            EzFontFamilyBatchSetting(
+              keysNDefaults: defaultFonts,
+              notifierCallback: (String font) {
+                displayProvider.fuse(font);
+                headlineProvider.fuse(font);
+                titleProvider.fuse(font);
+                bodyProvider.fuse(font);
+                labelProvider.fuse(font);
+              },
+            ),
+            swapSpacer,
 
             // Font size
             EzFontDoubleBatchSetting(
@@ -217,6 +235,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 labelProvider.resize(defaultSizes[labelFontSizeKey]! * scale);
               },
               tooltip: l10n.tsFontSize,
+              style: headlineProvider.value,
             ),
           ],
         ),
