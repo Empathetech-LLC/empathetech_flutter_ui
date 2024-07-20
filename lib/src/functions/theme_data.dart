@@ -105,52 +105,43 @@ ThemeData ezThemeData(Brightness brightness) {
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.primary,
+        backgroundColor: colorScheme.surface,
+        textStyle: textTheme.bodyLarge,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
-        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
       ),
     ),
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      extendedPadding: EdgeInsets.all(padding),
-      shape: const CircleBorder(),
-      backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
+      backgroundColor: colorScheme.primary,
+      shape: const CircleBorder(),
+      extendedPadding: EdgeInsets.all(padding),
     ),
 
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         iconSize: textTheme.bodyLarge?.fontSize,
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
         side: null,
-      ),
-    ),
-
-    // Outlined button
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        textStyle: textTheme.bodyLarge,
+        padding: EdgeInsets.zero,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
       ),
     ),
 
     // Segmented button
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
-        textStyle: textTheme.bodyLarge,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
-        selectedBackgroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
-        disabledBackgroundColor: colorScheme.surface,
+        selectedBackgroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.onSurface,
+        disabledBackgroundColor: colorScheme.surface,
+        textStyle: textTheme.bodyLarge,
+        padding: EdgeInsets.all(padding),
+        alignment: Alignment.center,
       ),
     ),
 
@@ -166,23 +157,23 @@ ThemeData ezThemeData(Brightness brightness) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: textTheme.bodyLarge,
-        alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        alignment: Alignment.center,
       ),
     ),
 
     // Tooltip
     tooltipTheme: TooltipThemeData(
-      margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-      textStyle: textTheme.bodyLarge,
-      textAlign: TextAlign.center,
+      margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
       ),
+      textStyle: textTheme.bodyLarge,
+      textAlign: TextAlign.center,
       waitDuration: const Duration(milliseconds: 750),
     ),
   );
