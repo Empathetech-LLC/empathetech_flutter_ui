@@ -209,6 +209,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(
+              key: UniqueKey(),
               keysNDefaults: defaultFonts,
               notifierCallback: (String font) {
                 displayProvider.fuse(font);
@@ -222,6 +223,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             // Font size
             EzFontDoubleBatchSetting(
+              key: UniqueKey(),
               keysNDefaults: defaultSizes,
               min: minFontScale,
               max: maxFontScale,
@@ -235,7 +237,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 labelProvider.resize(defaultSizes[labelFontSizeKey]! * scale);
               },
               tooltip: l10n.tsFontSize,
-              style: headlineProvider.value,
+              style: bodyProvider.value,
             ),
           ],
         ),
