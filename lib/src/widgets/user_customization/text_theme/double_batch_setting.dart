@@ -22,6 +22,7 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
 
   /// Amount to scale on each click, defaults to 0.1
   /// aka 10%
+  /// Only supports 2 sig figs of precision
   final double delta;
 
   final TextStyle? style;
@@ -118,99 +119,118 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Minus icon
-        IconButton(
-          icon: Icon(
-            PlatformIcons(context).remove,
-            color:
-                (currScale < widget.max) ? onBackground : colorScheme.outline,
-            size: (style?.fontSize == null) ? null : style!.fontSize! * (2 / 3),
+    return Tooltip(
+      message: widget.tooltip,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Minus icon
+              IconButton(
+                icon: Icon(
+                  PlatformIcons(context).remove,
+                  color: (currScale < widget.max)
+                      ? onBackground
+                      : colorScheme.outline,
+                  size: style?.fontSize,
+                ),
+                onPressed: () async {
+                  if (!isUniform) {
+                    final bool confirm = await confirmBatchOverride();
+
+                    if (confirm) {
+                      isUniform = true;
+                    } else {
+                      return;
+                    }
+                  }
+
+                  if (currScale > widget.min) {
+                    final int scale = (currScale * 100).toInt();
+                    final int delta = (widget.delta * 100).toInt();
+                    final int deltaDiff = scale % delta;
+
+                    if (deltaDiff == 0) {
+                      currScale = (scale - delta) / 100;
+                    } else {
+                      currScale = (scale - (delta - deltaDiff)) / 100;
+                    }
+                    widget.notifierCallback(currScale);
+
+                    for (final MapEntry<String, double> entry
+                        in widget.keysNDefaults.entries) {
+                      EzConfig.setDouble(entry.key, entry.value * currScale);
+                    }
+                  }
+
+                  setState(() {});
+                },
+                tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+              ),
+              pMSpacer,
+
+              // Core
+              Text(
+                currScale.toString(),
+                style: style,
+                textAlign: TextAlign.center,
+              ),
+              pMSpacer,
+
+              // Plus icon
+              IconButton(
+                icon: Icon(
+                  PlatformIcons(context).add,
+                  color: (currScale < widget.max)
+                      ? onBackground
+                      : colorScheme.outline,
+                  size: style?.fontSize,
+                ),
+                onPressed: () async {
+                  if (!isUniform) {
+                    final bool override = await confirmBatchOverride();
+
+                    if (override) {
+                      isUniform = true;
+                    } else {
+                      return;
+                    }
+                  }
+
+                  if (currScale < widget.max) {
+                    final int scale = (currScale * 100).toInt();
+                    final int delta = (widget.delta * 100).toInt();
+                    final int deltaDiff = scale % delta;
+
+                    if (deltaDiff == 0) {
+                      currScale = (scale + delta) / 100;
+                    } else {
+                      currScale = (scale + (delta - deltaDiff)) / 100;
+                    }
+                    widget.notifierCallback(currScale);
+
+                    for (final MapEntry<String, double> entry
+                        in widget.keysNDefaults.entries) {
+                      EzConfig.setDouble(entry.key, entry.value * currScale);
+                    }
+                  }
+
+                  setState(() {});
+                },
+                tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+              ),
+            ],
           ),
-          onPressed: () async {
-            if (!isUniform) {
-              final bool confirm = await confirmBatchOverride();
-
-              if (confirm) {
-                isUniform = true;
-              } else {
-                return;
-              }
-            }
-
-            if (currScale > widget.min) {
-              final double deltaDiff = (currScale * 100) % (widget.delta * 100);
-              if (deltaDiff == 0) {
-                currScale -= widget.delta;
-              } else {
-                currScale -= deltaDiff;
-              }
-              widget.notifierCallback(currScale);
-
-              for (final MapEntry<String, double> entry
-                  in widget.keysNDefaults.entries) {
-                EzConfig.setDouble(entry.key, entry.value * currScale);
-              }
-            }
-
-            setState(() {});
-          },
-          tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-        ),
-
-        // Core icon
-        pMSpacer,
-        Tooltip(
-          message: widget.tooltip,
-          child: Icon(
+          Icon(
             Icons.text_fields_sharp,
             color: onBackground,
             size: style?.fontSize,
           ),
-        ),
-        pMSpacer,
-
-        // Plus icon
-        IconButton(
-          icon: Icon(
-            PlatformIcons(context).add,
-            color:
-                (currScale < widget.max) ? onBackground : colorScheme.outline,
-            size: (style?.fontSize == null) ? null : style!.fontSize! * (2 / 3),
-          ),
-          onPressed: () async {
-            if (!isUniform) {
-              final bool override = await confirmBatchOverride();
-
-              if (override) {
-                isUniform = true;
-              } else {
-                return;
-              }
-            }
-
-            if (currScale < widget.max) {
-              final double deltaDiff = (currScale * 100) % (widget.delta * 100);
-              if (deltaDiff == 0) {
-                currScale += widget.delta;
-              } else {
-                currScale += (widget.delta * 100 - deltaDiff);
-              }
-              widget.notifierCallback(currScale);
-
-              for (final MapEntry<String, double> entry
-                  in widget.keysNDefaults.entries) {
-                EzConfig.setDouble(entry.key, entry.value * currScale);
-              }
-            }
-
-            setState(() {});
-          },
-          tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
