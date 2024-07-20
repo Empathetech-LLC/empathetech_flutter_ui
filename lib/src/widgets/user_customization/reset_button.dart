@@ -31,7 +31,7 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [OutlinedButton] for clearing user settings (aka resetting the apps')
+  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
   /// Colors are reversed to stand out
   /// [EzResetButton] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
   const EzResetButton({
@@ -103,7 +103,7 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return OutlinedButton.icon(
+    return ElevatedButton.icon(
       icon: Icon(PlatformIcons(context).refresh),
       label: Text(label ?? l10n.gResetAll),
       onPressed: resetDialog,
