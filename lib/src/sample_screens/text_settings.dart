@@ -209,7 +209,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(
-              key: UniqueKey(),
+              key: ValueKey<int>(bodyProvider.id),
               keysNDefaults: defaultFonts,
               notifierCallback: (String font) {
                 displayProvider.fuse(font);
@@ -218,23 +218,26 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 bodyProvider.fuse(font);
                 labelProvider.fuse(font);
               },
+              baseStyle: bodyProvider.value,
             ),
             swapSpacer,
 
             // Font size
             EzFontDoubleBatchSetting(
-              key: UniqueKey(),
+              key: ValueKey<int>(bodyProvider.id),
               keysNDefaults: defaultSizes,
               min: minFontScale,
               max: maxFontScale,
-              notifierCallback: (double scale) {
-                displayProvider
-                    .resize(defaultSizes[displayFontSizeKey]! * scale);
-                headlineProvider
-                    .resize(defaultSizes[headlineFontSizeKey]! * scale);
-                titleProvider.resize(defaultSizes[titleFontSizeKey]! * scale);
-                bodyProvider.resize(defaultSizes[bodyFontSizeKey]! * scale);
-                labelProvider.resize(defaultSizes[labelFontSizeKey]! * scale);
+              notifierCallback: (bool changed) {
+                if (changed) {
+                  displayProvider
+                      .resize(EzConfig.getDouble(displayFontSizeKey)!);
+                  headlineProvider
+                      .resize(EzConfig.getDouble(headlineFontSizeKey)!);
+                  titleProvider.resize(EzConfig.getDouble(titleFontSizeKey)!);
+                  bodyProvider.resize(EzConfig.getDouble(bodyFontSizeKey)!);
+                  labelProvider.resize(EzConfig.getDouble(labelFontSizeKey)!);
+                }
               },
               tooltip: l10n.tsFontSize,
               style: bodyProvider.value,
