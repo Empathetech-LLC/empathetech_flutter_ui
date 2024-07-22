@@ -138,7 +138,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               textAlignVertical: TextAlignVertical.bottom,
             ),
           ),
-          EzSpacer(padding / 5),
           Icon(
             widget.icon,
             size: formFieldHeight / 4,
