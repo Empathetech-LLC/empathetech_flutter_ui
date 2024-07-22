@@ -37,10 +37,10 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
   // Define the build //
 
-  void swapState() {
+  void swapState() async {
     isItalic = !isItalic;
+    await EzConfig.setBool(widget.configKey, isItalic);
     widget.notifierCallback(isItalic);
-    EzConfig.setBool(widget.configKey, isItalic);
     setState(() {});
   }
 

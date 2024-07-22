@@ -37,10 +37,10 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
   // Define the build //
 
-  void swapState() {
+  void swapState() async {
     isBold = !isBold;
+    await EzConfig.setBool(widget.configKey, isBold);
     widget.notifierCallback(isBold);
-    EzConfig.setBool(widget.configKey, isBold);
     setState(() {});
   }
 

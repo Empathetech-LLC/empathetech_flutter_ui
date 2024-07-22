@@ -37,10 +37,10 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
 
   // Define the build //
 
-  void swapState() {
+  void swapState() async {
     isUnderlined = !isUnderlined;
+    await EzConfig.setBool(widget.configKey, isUnderlined);
     widget.notifierCallback(isUnderlined);
-    EzConfig.setBool(widget.configKey, isUnderlined);
     setState(() {});
   }
 
