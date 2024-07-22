@@ -12,6 +12,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// The [EzConfig] key being edited
   final String configKey;
 
+  final double startingValue;
   final double min;
   final double max;
 
@@ -42,6 +43,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   const EzFontDoubleSetting({
     super.key,
     required this.configKey,
+    required this.startingValue,
     required this.min,
     required this.max,
     required this.notifierCallback,
@@ -88,11 +90,15 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late double currValue =
       EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
 
-  late final TextEditingController controller = TextEditingController(
-    text: currValue.toString(),
-  );
+  final TextEditingController controller = TextEditingController();
 
   // Return the build //
+
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.startingValue.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,13 +116,13 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             child: PlatformTextFormField(
               controller: controller,
               keyboardType: TextInputType.number,
-              onFieldSubmitted: (String stringVal) {
+              onFieldSubmitted: (String stringVal) async {
                 final double? doubleVal = double.tryParse(stringVal);
                 if (doubleVal == null) return;
 
                 currValue = doubleVal;
+                await EzConfig.setDouble(widget.configKey, doubleVal);
                 widget.notifierCallback(doubleVal);
-                EzConfig.setDouble(widget.configKey, doubleVal);
                 setState(() {});
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -151,40 +157,46 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
         ? Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              // Minus icon
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).remove,
-                  color: (currValue < widget.max) ? onBackground : outlineColor,
+                  color: (currValue > widget.min) ? onBackground : outlineColor,
                 ),
-                onPressed: () {
-                  if (currValue > widget.min) {
-                    currValue -= widget.delta;
-                    controller.text = currValue.toString();
-                    widget.notifierCallback(currValue);
-                    EzConfig.setDouble(widget.configKey, currValue);
-                  }
+                onPressed: (currValue > widget.min)
+                    ? () async {
+                        currValue -= widget.delta;
+                        await EzConfig.setDouble(widget.configKey, currValue);
+                        controller.text = currValue.toString();
+                        widget.notifierCallback(currValue);
 
-                  setState(() {});
-                },
+                        setState(() {});
+                      }
+                    : doNothing,
                 tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
               ),
               pMSpacer,
+
+              // Core
               core,
               pMSpacer,
+
+              // Plus icon
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).add,
                   color: (currValue < widget.max) ? onBackground : outlineColor,
                 ),
-                onPressed: () {
-                  if (currValue < widget.max) {
-                    currValue += widget.delta;
-                    controller.text = currValue.toString();
-                    widget.notifierCallback(currValue);
-                    EzConfig.setDouble(widget.configKey, currValue);
-                  }
-                  setState(() {});
-                },
+                onPressed: (currValue < widget.max)
+                    ? () async {
+                        currValue += widget.delta;
+                        await EzConfig.setDouble(widget.configKey, currValue);
+                        controller.text = currValue.toString();
+                        widget.notifierCallback(currValue);
+
+                        setState(() {});
+                      }
+                    : doNothing,
                 tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
               ),
             ],
