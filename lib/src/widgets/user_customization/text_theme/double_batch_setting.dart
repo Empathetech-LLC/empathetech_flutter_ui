@@ -15,14 +15,13 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   final double min;
   final double max;
 
-  /// Use this to live update the [TextStyle] on your UI
-  final void Function(double) notifierCallback;
+  /// Returns whether changes have been made
+  final void Function(bool) notifierCallback;
 
   final String tooltip;
 
   /// Amount to scale on each click, defaults to 0.1
   /// aka 10%
-  /// Only supports 2 sig figs of precision
   final double delta;
 
   final TextStyle? style;
@@ -63,57 +62,25 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   // Define build data //
 
-  late final Map<String, double> startingScales = widget.keysNDefaults.map(
+  late Map<String, double> upperLimits = widget.keysNDefaults.map(
     (String key, double value) => MapEntry<String, double>(
       key,
-      (EzConfig.getDouble(key) ?? value) / value,
+      value * widget.max,
     ),
   );
 
-  late bool isUniform = startingScales.values
-      .every((double scale) => scale == startingScales.values.first);
+  late bool atMax = upperLimits.entries.every((MapEntry<String, double> max) =>
+      max.value == EzConfig.getDouble(max.key));
 
-  late double currScale = isUniform
-      ? startingScales.values.first
-      : startingScales.values.reduce((double a, double b) => a + b) /
-          startingScales.values.length;
+  late Map<String, double> lowerLimits = widget.keysNDefaults.map(
+    (String key, double value) => MapEntry<String, double>(
+      key,
+      value * widget.min,
+    ),
+  );
 
-  // Define custom functions //
-
-  /// Only activated if the user has already edited the text sizes in the advanced settings, and the new scales aren't uniform
-  // Confirm that the user wants to continue with batch editing, which will force uniformity
-  Future<bool> confirmBatchOverride() async {
-    return await showPlatformDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        void onConfirm() => Navigator.of(dialogContext).pop(true);
-
-        void onDeny() => Navigator.of(dialogContext).pop(false);
-
-        return EzAlertDialog(
-          title: Text(
-            l10n.ssLanguages,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            l10n.tsBatchOverride(l10n.tsFontSize),
-            textAlign: TextAlign.center,
-          ),
-          materialActions: ezMaterialActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            onDeny: onDeny,
-          ),
-          needsClose: false,
-        );
-      },
-    );
-  }
+  late bool atMin = lowerLimits.entries.every((MapEntry<String, double> min) =>
+      min.value == EzConfig.getDouble(min.key));
 
   // Return the build //
 
@@ -121,113 +88,88 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: widget.tooltip,
-      child: Column(
+      child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Minus icon
-              IconButton(
-                icon: Icon(
-                  PlatformIcons(context).remove,
-                  color: (currScale < widget.max)
-                      ? onBackground
-                      : colorScheme.outline,
-                  size: style?.fontSize,
-                ),
-                onPressed: () async {
-                  if (!isUniform) {
-                    final bool confirm = await confirmBatchOverride();
+          // Minus icon
+          IconButton(
+            icon: Icon(
+              PlatformIcons(context).remove,
+              color: atMin ? colorScheme.outline : onBackground,
+              size: style?.fontSize,
+            ),
+            onPressed: atMin
+                ? doNothing
+                : () async {
+                    bool somethingChanged = false;
 
-                    if (confirm) {
-                      isUniform = true;
-                    } else {
-                      return;
+                    for (final MapEntry<String, double> limit
+                        in lowerLimits.entries) {
+                      final double currValue = EzConfig.getDouble(limit.key) ??
+                          widget.keysNDefaults[limit.key]!;
+
+                      if (currValue == limit.value) continue;
+
+                      final double newValue = currValue * (1 - widget.delta);
+
+                      if (newValue > limit.value) {
+                        somethingChanged =
+                            await EzConfig.setDouble(limit.key, newValue);
+                      } else {
+                        somethingChanged =
+                            await EzConfig.setDouble(limit.key, limit.value);
+                      }
                     }
-                  }
 
-                  if (currScale > widget.min) {
-                    final int scale = (currScale * 100).toInt();
-                    final int delta = (widget.delta * 100).toInt();
-                    final int deltaDiff = scale % delta;
-
-                    if (deltaDiff == 0) {
-                      currScale = (scale - delta) / 100;
-                    } else {
-                      currScale = (scale - (delta - deltaDiff)) / 100;
-                    }
-                    widget.notifierCallback(currScale);
-
-                    for (final MapEntry<String, double> entry
-                        in widget.keysNDefaults.entries) {
-                      EzConfig.setDouble(entry.key, entry.value * currScale);
-                    }
-                  }
-
-                  setState(() {});
-                },
-                tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-              ),
-              pMSpacer,
-
-              // Core
-              Text(
-                currScale.toString(),
-                style: style,
-                textAlign: TextAlign.center,
-              ),
-              pMSpacer,
-
-              // Plus icon
-              IconButton(
-                icon: Icon(
-                  PlatformIcons(context).add,
-                  color: (currScale < widget.max)
-                      ? onBackground
-                      : colorScheme.outline,
-                  size: style?.fontSize,
-                ),
-                onPressed: () async {
-                  if (!isUniform) {
-                    final bool override = await confirmBatchOverride();
-
-                    if (override) {
-                      isUniform = true;
-                    } else {
-                      return;
-                    }
-                  }
-
-                  if (currScale < widget.max) {
-                    final int scale = (currScale * 100).toInt();
-                    final int delta = (widget.delta * 100).toInt();
-                    final int deltaDiff = scale % delta;
-
-                    if (deltaDiff == 0) {
-                      currScale = (scale + delta) / 100;
-                    } else {
-                      currScale = (scale + (delta - deltaDiff)) / 100;
-                    }
-                    widget.notifierCallback(currScale);
-
-                    for (final MapEntry<String, double> entry
-                        in widget.keysNDefaults.entries) {
-                      EzConfig.setDouble(entry.key, entry.value * currScale);
-                    }
-                  }
-
-                  setState(() {});
-                },
-                tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-              ),
-            ],
+                    setState(() {});
+                    widget.notifierCallback(somethingChanged);
+                  },
+            tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
           ),
+          pMSpacer,
+
+          // Core
           Icon(
             Icons.text_fields_sharp,
             color: onBackground,
             size: style?.fontSize,
+          ),
+          pMSpacer,
+
+          // Plus icon
+          IconButton(
+            icon: Icon(
+              PlatformIcons(context).add,
+              color: atMax ? colorScheme.outline : onBackground,
+              size: style?.fontSize,
+            ),
+            onPressed: atMax
+                ? doNothing
+                : () async {
+                    bool somethingChanged = false;
+
+                    for (final MapEntry<String, double> limit
+                        in upperLimits.entries) {
+                      final double currValue = EzConfig.getDouble(limit.key) ??
+                          widget.keysNDefaults[limit.key]!;
+
+                      if (currValue == limit.value) continue;
+
+                      final double newValue = currValue * (1 + widget.delta);
+
+                      if (newValue < limit.value) {
+                        somethingChanged =
+                            await EzConfig.setDouble(limit.key, newValue);
+                      } else {
+                        somethingChanged =
+                            await EzConfig.setDouble(limit.key, limit.value);
+                      }
+                    }
+
+                    setState(() {});
+                    widget.notifierCallback(somethingChanged);
+                  },
+            tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
           ),
         ],
       ),
