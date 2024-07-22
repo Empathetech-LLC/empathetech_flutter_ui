@@ -177,7 +177,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
 
-  late final Map<String, String> defaultFonts = <String, String>{
+  late final Map<String, String> defaultFontFamilies = <String, String>{
     displayFontFamilyKey: EzConfig.getDefault(displayFontFamilyKey),
     headlineFontFamilyKey: EzConfig.getDefault(headlineFontFamilyKey),
     titleFontFamilyKey: EzConfig.getDefault(titleFontFamilyKey),
@@ -210,7 +210,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             // Font family
             EzFontFamilyBatchSetting(
               key: ValueKey<int>(bodyProvider.id),
-              keysNDefaults: defaultFonts,
+              keysNDefaults: defaultFontFamilies,
               notifierCallback: (String font) {
                 displayProvider.fuse(font);
                 headlineProvider.fuse(font);
@@ -378,29 +378,39 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
       <TextSettingType, EzFontFamilySetting>{
     TextSettingType.display: EzFontFamilySetting(
-      key: const ValueKey<String>(displayFontFamilyKey),
+      key: ValueKey<String>(
+          '$displayFontFamilyKey${displayProvider.id}${bodyProvider.id}'),
       configKey: displayFontFamilyKey,
       notifierCallback: displayProvider.fuse,
+      baseStyle: bodyProvider.value,
     ),
     TextSettingType.headline: EzFontFamilySetting(
-      key: const ValueKey<String>(headlineFontFamilyKey),
+      key: ValueKey<String>(
+          '$headlineFontFamilyKey${headlineProvider.id}${bodyProvider.id}'),
       configKey: headlineFontFamilyKey,
       notifierCallback: headlineProvider.fuse,
+      baseStyle: bodyProvider.value,
     ),
     TextSettingType.title: EzFontFamilySetting(
-      key: const ValueKey<String>(titleFontFamilyKey),
+      key: ValueKey<String>(
+          '$titleFontFamilyKey${titleProvider.id}${bodyProvider.id}'),
       configKey: titleFontFamilyKey,
       notifierCallback: titleProvider.fuse,
+      baseStyle: bodyProvider.value,
     ),
     TextSettingType.body: EzFontFamilySetting(
-      key: const ValueKey<String>(bodyFontFamilyKey),
+      key: ValueKey<String>(
+          '$bodyFontFamilyKey${bodyProvider.id}${bodyProvider.id}'),
       configKey: bodyFontFamilyKey,
       notifierCallback: bodyProvider.fuse,
+      baseStyle: bodyProvider.value,
     ),
     TextSettingType.label: EzFontFamilySetting(
-      key: const ValueKey<String>(labelFontFamilyKey),
+      key: ValueKey<String>(
+          '$labelFontFamilyKey${labelProvider.id}${bodyProvider.id}'),
       configKey: labelFontFamilyKey,
       notifierCallback: labelProvider.fuse,
+      baseStyle: bodyProvider.value,
     ),
   };
 
@@ -408,55 +418,65 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> sizeControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: const ValueKey<String>(displayFontSizeKey),
+      key: ValueKey<String>(
+          '$displayFontSizeKey${displayProvider.id}${bodyProvider.id}'),
       configKey: displayFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: displayProvider.resize,
+      baseStyle: bodyProvider.value,
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
       sizingString: fontSizeSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: const ValueKey<String>(headlineFontSizeKey),
+      key: ValueKey<String>(
+          '$headlineFontSizeKey${headlineProvider.id}${bodyProvider.id}'),
       configKey: headlineFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: headlineProvider.resize,
+      baseStyle: bodyProvider.value,
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
       sizingString: fontSizeSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: const ValueKey<String>(titleFontSizeKey),
+      key: ValueKey<String>(
+          '$titleFontSizeKey${titleProvider.id}${bodyProvider.id}'),
       configKey: titleFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: titleProvider.resize,
+      baseStyle: bodyProvider.value,
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
       sizingString: fontSizeSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: const ValueKey<String>(bodyFontSizeKey),
+      key: ValueKey<String>(
+          '$bodyFontSizeKey${bodyProvider.id}${bodyProvider.id}'),
       configKey: bodyFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: bodyProvider.resize,
+      baseStyle: bodyProvider.value,
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
       sizingString: fontSizeSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: const ValueKey<String>(labelFontSizeKey),
+      key: ValueKey<String>(
+          '$labelFontSizeKey${labelProvider.id}${bodyProvider.id}'),
       configKey: labelFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: labelProvider.resize,
+      baseStyle: bodyProvider.value,
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
@@ -468,29 +488,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzBoldSetting> boldControllers =
       <TextSettingType, EzBoldSetting>{
     TextSettingType.display: EzBoldSetting(
-      key: const ValueKey<String>(displayBoldKey),
+      key: ValueKey<String>('$displayBoldKey${bodyProvider.id}'),
       configKey: displayBoldKey,
       notifierCallback: displayProvider.bold,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzBoldSetting(
-      key: const ValueKey<String>(headlineBoldKey),
+      key: ValueKey<String>('$headlineBoldKey${bodyProvider.id}'),
       configKey: headlineBoldKey,
       notifierCallback: headlineProvider.bold,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzBoldSetting(
-      key: const ValueKey<String>(titleBoldKey),
+      key: ValueKey<String>('$titleBoldKey${bodyProvider.id}'),
       configKey: titleBoldKey,
       notifierCallback: titleProvider.bold,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzBoldSetting(
-      key: const ValueKey<String>(bodyBoldKey),
+      key: ValueKey<String>('$bodyBoldKey${bodyProvider.id}'),
       configKey: bodyBoldKey,
       notifierCallback: bodyProvider.bold,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzBoldSetting(
-      key: const ValueKey<String>(labelBoldKey),
+      key: ValueKey<String>('$labelBoldKey${bodyProvider.id}'),
       configKey: labelBoldKey,
       notifierCallback: labelProvider.bold,
+      size: bodyProvider.value.fontSize,
     ),
   };
 
@@ -498,29 +523,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzItalicSetting> italicsControllers =
       <TextSettingType, EzItalicSetting>{
     TextSettingType.display: EzItalicSetting(
-      key: const ValueKey<String>(displayItalicsKey),
+      key: ValueKey<String>('$displayItalicsKey${bodyProvider.id}'),
       configKey: displayItalicsKey,
       notifierCallback: displayProvider.italic,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzItalicSetting(
-      key: const ValueKey<String>(headlineItalicsKey),
+      key: ValueKey<String>('$headlineItalicsKey${bodyProvider.id}'),
       configKey: headlineItalicsKey,
       notifierCallback: headlineProvider.italic,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzItalicSetting(
-      key: const ValueKey<String>(titleItalicsKey),
+      key: ValueKey<String>('$titleProvider${bodyProvider.id}'),
       configKey: titleItalicsKey,
       notifierCallback: titleProvider.italic,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzItalicSetting(
-      key: const ValueKey<String>(bodyItalicsKey),
+      key: ValueKey<String>('$bodyItalicsKey${bodyProvider.id}'),
       configKey: bodyItalicsKey,
       notifierCallback: bodyProvider.italic,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzItalicSetting(
-      key: const ValueKey<String>(labelItalicsKey),
+      key: ValueKey<String>('$labelItalicsKey${bodyProvider.id}'),
       configKey: labelItalicsKey,
       notifierCallback: labelProvider.italic,
+      size: bodyProvider.value.fontSize,
     ),
   };
 
@@ -528,29 +558,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzUnderlineSetting> underlineControllers =
       <TextSettingType, EzUnderlineSetting>{
     TextSettingType.display: EzUnderlineSetting(
-      key: const ValueKey<String>(displayUnderlinedKey),
+      key: ValueKey<String>('$displayUnderlinedKey${bodyProvider.id}'),
       configKey: displayUnderlinedKey,
       notifierCallback: displayProvider.underline,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzUnderlineSetting(
-      key: const ValueKey<String>(headlineUnderlinedKey),
+      key: ValueKey<String>('$headlineUnderlinedKey${bodyProvider.id}'),
       configKey: headlineUnderlinedKey,
       notifierCallback: headlineProvider.underline,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzUnderlineSetting(
-      key: const ValueKey<String>(titleUnderlinedKey),
+      key: ValueKey<String>('$titleUnderlinedKey${bodyProvider.id}'),
       configKey: titleUnderlinedKey,
       notifierCallback: titleProvider.underline,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzUnderlineSetting(
-      key: const ValueKey<String>(bodyUnderlinedKey),
+      key: ValueKey<String>('$bodyUnderlinedKey${bodyProvider.id}'),
       configKey: bodyUnderlinedKey,
       notifierCallback: bodyProvider.underline,
+      size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzUnderlineSetting(
-      key: const ValueKey<String>(labelUnderlinedKey),
+      key: ValueKey<String>('$labelUnderlinedKey${bodyProvider.id}'),
       configKey: labelUnderlinedKey,
       notifierCallback: labelProvider.underline,
+      size: bodyProvider.value.fontSize,
     ),
   };
 
@@ -558,51 +593,56 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting>
       letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: const ValueKey<String>(displayLetterSpacingKey),
+      key: ValueKey<String>('$displayLetterSpacingKey${bodyProvider.id}'),
       configKey: displayLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: const ValueKey<String>(headlineLetterSpacingKey),
+      key: ValueKey<String>('$headlineLetterSpacingKey${bodyProvider.id}'),
       configKey: headlineLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: const ValueKey<String>(titleLetterSpacingKey),
+      key: ValueKey<String>('$titleLetterSpacingKey${bodyProvider.id}'),
       configKey: titleLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: const ValueKey<String>(bodyLetterSpacingKey),
+      key: ValueKey<String>('$bodyLetterSpacingKey${bodyProvider.id}'),
       configKey: bodyLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: const ValueKey<String>(labelLetterSpacingKey),
+      key: ValueKey<String>('$labelLetterSpacingKey${bodyProvider.id}'),
       configKey: labelLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
       sizingString: fontSpacingSampleString,
@@ -613,51 +653,56 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> wordSpacingControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: const ValueKey<String>(displayWordSpacingKey),
+      key: ValueKey<String>('$displayWordSpacingKey${bodyProvider.id}'),
       configKey: displayWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: const ValueKey<String>(headlineWordSpacingKey),
+      key: ValueKey<String>('$headlineWordSpacingKey${bodyProvider.id}'),
       configKey: headlineWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: const ValueKey<String>(titleWordSpacingKey),
+      key: ValueKey<String>('$titleWordSpacingKey${bodyProvider.id}'),
       configKey: titleWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: const ValueKey<String>(bodyWordSpacingKey),
+      key: ValueKey<String>('$bodyWordSpacingKey${bodyProvider.id}'),
       configKey: bodyWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: const ValueKey<String>(labelWordSpacingKey),
+      key: ValueKey<String>('$labelWordSpacingKey${bodyProvider.id}'),
       configKey: labelWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
+      baseStyle: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
       sizingString: fontSpacingSampleString,
@@ -668,51 +713,56 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> lineHeightControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: const ValueKey<String>(displayFontHeightKey),
+      key: ValueKey<String>('$displayFontHeightKey${bodyProvider.id}'),
       configKey: displayFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
+      baseStyle: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: const ValueKey<String>(headlineFontHeightKey),
+      key: ValueKey<String>('$headlineFontHeightKey${bodyProvider.id}'),
       configKey: headlineFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
+      baseStyle: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: const ValueKey<String>(titleFontHeightKey),
+      key: ValueKey<String>('$titleFontHeightKey${bodyProvider.id}'),
       configKey: titleFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
+      baseStyle: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: const ValueKey<String>(bodyFontHeightKey),
+      key: ValueKey<String>('$bodyFontHeightKey${bodyProvider.id}'),
       configKey: bodyFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
+      baseStyle: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: const ValueKey<String>(labelFontHeightKey),
+      key: ValueKey<String>('$labelFontHeightKey${bodyProvider.id}'),
       configKey: labelFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
+      baseStyle: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
       sizingString: fontSpacingSampleString,
