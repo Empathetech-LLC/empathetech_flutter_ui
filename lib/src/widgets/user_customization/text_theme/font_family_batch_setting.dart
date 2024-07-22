@@ -18,12 +18,16 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 
   final String? tooltip;
 
+  /// Base [TextStyle] to be used for [fuseWithGFont] when selecting font family options
+  final TextStyle baseStyle;
+
   /// Standardized tool for batch updating the [TextStyle.fontFamily] for the passed [keysNDefaults]
   /// [EzFontFamilyBatchSetting] options are built from [googleStyles]
   const EzFontFamilyBatchSetting({
     super.key,
     required this.keysNDefaults,
     required this.notifierCallback,
+    required this.baseStyle,
     this.tooltip,
   });
 
@@ -50,15 +54,16 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late bool isUniform = startingFonts.values
       .every((String font) => font == startingFonts.values.first);
 
-  late String currFont = isUniform
+  late String currFontFamily = isUniform
       ? startingFonts.values.first
-      : mostCommonOrBodyFont(startingFonts.values.toList());
+      : mostCommonFont(startingFonts.values.toList());
 
   // Define button functions //
 
   /// Lazily returns the most common font, or the body font if all are unique
-  String mostCommonOrBodyFont(List<String> fonts) {
-    final String body = EzConfig.getDefault(bodyFontFamilyKey);
+  String mostCommonFont(List<String> fonts) {
+    final String body = EzConfig.get(bodyFontFamilyKey) ??
+        EzConfig.getDefault(bodyFontFamilyKey);
 
     if (fonts.isEmpty) return body;
 
@@ -137,7 +142,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     return Tooltip(
       message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
       child: DropdownMenu<String>(
-        initialSelection: currFont,
+        initialSelection: currFontFamily,
         dropdownMenuEntries: entries,
         onSelected: (String? fontFamily) async {
           if (fontFamily == null) return;
@@ -152,18 +157,21 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             }
           }
 
-          currFont = fontFamily;
-          widget.notifierCallback(fontFamily);
+          currFontFamily = fontFamily;
 
           for (final MapEntry<String, String> entry
               in widget.keysNDefaults.entries) {
             EzConfig.setString(entry.key, fontFamily);
           }
+          widget.notifierCallback(fontFamily);
 
           setState(() {});
         },
-        textStyle: googleStyles[currFont]?.copyWith(
-          color: theme.colorScheme.onSurface,
+        textStyle: fuseWithGFont(
+          starter: widget.baseStyle.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+          gFont: currFontFamily,
         ),
         width: smallBreakpoint / 4,
       ),
