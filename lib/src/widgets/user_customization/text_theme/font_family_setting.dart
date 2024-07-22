@@ -15,6 +15,8 @@ class EzFontFamilySetting extends StatefulWidget {
   final void Function(String) notifierCallback;
 
   final String? tooltip;
+
+  /// Base [TextStyle] to be used for [fuseWithGFont] when selecting font family options
   final TextStyle baseStyle;
 
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
@@ -65,9 +67,12 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
         dropdownMenuEntries: entries,
         onSelected: (String? fontFamily) {
           if (fontFamily == null) return;
+
           currFontFamily = fontFamily;
-          widget.notifierCallback(fontFamily);
+
           EzConfig.setString(widget.configKey, fontFamily);
+          widget.notifierCallback(fontFamily);
+
           setState(() {});
         },
         textStyle: fuseWithGFont(
