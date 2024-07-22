@@ -421,6 +421,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>(
           '$displayFontSizeKey-${displayProvider.id}-${bodyProvider.id}'),
       configKey: displayFontSizeKey,
+      startingValue: displayProvider.value.fontSize!,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: displayProvider.resize,
@@ -434,6 +435,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>(
           '$headlineFontSizeKey-${headlineProvider.id}-${bodyProvider.id}'),
       configKey: headlineFontSizeKey,
+      startingValue: headlineProvider.value.fontSize!,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: headlineProvider.resize,
@@ -447,6 +449,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>(
           '$titleFontSizeKey-${titleProvider.id}-${bodyProvider.id}'),
       configKey: titleFontSizeKey,
+      startingValue: titleProvider.value.fontSize!,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: titleProvider.resize,
@@ -460,6 +463,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>(
           '$bodyFontSizeKey-${bodyProvider.id}-${bodyProvider.id}'),
       configKey: bodyFontSizeKey,
+      startingValue: bodyProvider.value.fontSize!,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: bodyProvider.resize,
@@ -473,6 +477,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>(
           '$labelFontSizeKey-${labelProvider.id}-${bodyProvider.id}'),
       configKey: labelFontSizeKey,
+      startingValue: labelProvider.value.fontSize!,
       min: minFontSize,
       max: maxFontSize,
       notifierCallback: labelProvider.resize,
@@ -595,6 +600,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.display: EzFontDoubleSetting(
       key: ValueKey<String>('$displayLetterSpacingKey-${bodyProvider.id}'),
       configKey: displayLetterSpacingKey,
+      startingValue: displayProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
@@ -606,6 +612,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineLetterSpacingKey-${bodyProvider.id}'),
       configKey: headlineLetterSpacingKey,
+      startingValue: headlineProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
@@ -617,6 +624,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleLetterSpacingKey-${bodyProvider.id}'),
       configKey: titleLetterSpacingKey,
+      startingValue: titleProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
@@ -628,6 +636,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyLetterSpacingKey-${bodyProvider.id}'),
       configKey: bodyLetterSpacingKey,
+      startingValue: bodyProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
@@ -639,6 +648,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelLetterSpacingKey-${bodyProvider.id}'),
       configKey: labelLetterSpacingKey,
+      startingValue: labelProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
@@ -655,6 +665,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.display: EzFontDoubleSetting(
       key: ValueKey<String>('$displayWordSpacingKey-${bodyProvider.id}'),
       configKey: displayWordSpacingKey,
+      startingValue: displayProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
@@ -666,6 +677,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineWordSpacingKey-${bodyProvider.id}'),
       configKey: headlineWordSpacingKey,
+      startingValue: headlineProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
@@ -677,6 +689,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleWordSpacingKey-${bodyProvider.id}'),
       configKey: titleWordSpacingKey,
+      startingValue: titleProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
@@ -688,6 +701,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyWordSpacingKey-${bodyProvider.id}'),
       configKey: bodyWordSpacingKey,
+      startingValue: bodyProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
@@ -699,6 +713,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelWordSpacingKey-${bodyProvider.id}'),
       configKey: labelWordSpacingKey,
+      startingValue: labelProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
@@ -715,6 +730,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.display: EzFontDoubleSetting(
       key: ValueKey<String>('$displayFontHeightKey-${bodyProvider.id}'),
       configKey: displayFontHeightKey,
+      startingValue: displayProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
@@ -726,6 +742,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineFontHeightKey-${bodyProvider.id}'),
       configKey: headlineFontHeightKey,
+      startingValue: headlineProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
@@ -737,6 +754,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleFontHeightKey-${bodyProvider.id}'),
       configKey: titleFontHeightKey,
+      startingValue: titleProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
@@ -748,6 +766,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyFontHeightKey-${bodyProvider.id}'),
       configKey: bodyFontHeightKey,
+      startingValue: bodyProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
@@ -759,6 +778,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelFontHeightKey-${bodyProvider.id}'),
       configKey: labelFontHeightKey,
+      startingValue: labelProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
