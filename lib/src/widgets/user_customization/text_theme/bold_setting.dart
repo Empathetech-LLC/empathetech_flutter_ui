@@ -13,11 +13,15 @@ class EzBoldSetting extends StatefulWidget {
   /// Use this to live update the [TextStyle] on your UI
   final void Function(bool bold) notifierCallback;
 
+  /// Optional iconSize
+  final double? size;
+
   /// Standardized tool for updating the [TextStyle.fontWeight] for the passed [configKey]
   const EzBoldSetting({
     super.key,
     required this.configKey,
     required this.notifierCallback,
+    this.size,
   });
 
   @override
@@ -50,12 +54,14 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         ? IconButton(
             icon: const Icon(Icons.format_bold),
             color: colorScheme.primary,
+            iconSize: widget.size,
             onPressed: swapState,
             tooltip: tooltip,
           )
         : IconButton(
             icon: const Icon(Icons.format_bold_outlined),
             color: colorScheme.outline,
+            iconSize: widget.size,
             onPressed: swapState,
             tooltip: tooltip,
           );

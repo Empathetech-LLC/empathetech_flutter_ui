@@ -13,11 +13,15 @@ class EzUnderlineSetting extends StatefulWidget {
   /// Use this to live update the [TextStyle] on your UI
   final void Function(bool underline) notifierCallback;
 
+  /// Optional iconSize
+  final double? size;
+
   /// Standardized tool for updating the [TextStyle.decoration] for the passed [configKey]
   const EzUnderlineSetting({
     super.key,
     required this.configKey,
     required this.notifierCallback,
+    this.size,
   });
 
   @override
@@ -50,12 +54,14 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
         ? IconButton(
             icon: const Icon(Icons.format_underline),
             color: colorScheme.primary,
+            iconSize: widget.size,
             onPressed: swapState,
             tooltip: tooltip,
           )
         : IconButton(
             icon: const Icon(Icons.format_underline_outlined),
             color: colorScheme.outline,
+            iconSize: widget.size,
             onPressed: swapState,
             tooltip: tooltip,
           );
