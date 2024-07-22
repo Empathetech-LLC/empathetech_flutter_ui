@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
   final String configKey;
+  final String initialValue;
 
   /// Use this to live update the [TextStyle] on your UI
   /// Recommended to use [fuseWithGFont]
@@ -24,6 +25,7 @@ class EzFontFamilySetting extends StatefulWidget {
   const EzFontFamilySetting({
     super.key,
     required this.configKey,
+    required this.initialValue,
     required this.notifierCallback,
     required this.baseStyle,
     this.tooltip,
@@ -36,15 +38,13 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  late String currFontFamily =
-      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
-
   late final ThemeData theme = Theme.of(context);
 
-  // Define button functions //
+  // Define the build data  //
+
+  late String currFontFamily;
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
-
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
@@ -59,18 +59,23 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Return the build //
 
   @override
+  void initState() {
+    super.initState();
+    currFontFamily = googleFontFamilyLookup[widget.initialValue]!;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
       child: DropdownMenu<String>(
         initialSelection: currFontFamily,
         dropdownMenuEntries: entries,
-        onSelected: (String? fontFamily) {
+        onSelected: (String? fontFamily) async {
           if (fontFamily == null) return;
-
           currFontFamily = fontFamily;
 
-          EzConfig.setString(widget.configKey, fontFamily);
+          await EzConfig.setString(widget.configKey, fontFamily);
           widget.notifierCallback(fontFamily);
 
           setState(() {});
