@@ -34,20 +34,6 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   sourceCodePro: GoogleFonts.sourceCodePro(),
 };
 
-/// Map of actual names to local mirrors of all supported [googleStyles]
-final Map<String, String> googleFontFamilyLookup = <String, String>{
-  GoogleFonts.alexBrush().fontFamily!: alexBrush,
-  GoogleFonts.atkinsonHyperlegible().fontFamily!: atkinsonHyperlegible,
-  GoogleFonts.fingerPaint().fontFamily!: fingerPaint,
-  GoogleFonts.lexend().fontFamily!: lexend,
-  GoogleFonts.notoSans().fontFamily!: noto,
-  GoogleFonts.openSans().fontFamily!: openSans,
-  GoogleFonts.pressStart2p().fontFamily!: pressStart2P,
-  GoogleFonts.readexPro().fontFamily!: readexPro,
-  GoogleFonts.roboto().fontFamily!: roboto,
-  GoogleFonts.sourceCodePro().fontFamily!: sourceCodePro,
-};
-
 /// Pass [starter] to the [gFont]'s [GoogleFonts.textStyle] param
 TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {
