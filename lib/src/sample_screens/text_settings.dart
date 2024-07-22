@@ -209,7 +209,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(
-              key: ValueKey<int>(bodyProvider.id),
+              key: ValueKey<String>('batchFontFamily-${bodyProvider.id}'),
               keysNDefaults: defaultFontFamilies,
               notifierCallback: (String font) {
                 displayProvider.fuse(font);
@@ -224,7 +224,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             // Font size
             EzFontDoubleBatchSetting(
-              key: ValueKey<int>(bodyProvider.id),
+              key: ValueKey<String>('batchFontDouble-${bodyProvider.id}'),
               keysNDefaults: defaultSizes,
               min: minFontScale,
               max: maxFontScale,
@@ -379,35 +379,35 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       <TextSettingType, EzFontFamilySetting>{
     TextSettingType.display: EzFontFamilySetting(
       key: ValueKey<String>(
-          '$displayFontFamilyKey${displayProvider.id}${bodyProvider.id}'),
+          '$displayFontFamilyKey-${displayProvider.id}-${bodyProvider.id}'),
       configKey: displayFontFamilyKey,
       notifierCallback: displayProvider.fuse,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.headline: EzFontFamilySetting(
       key: ValueKey<String>(
-          '$headlineFontFamilyKey${headlineProvider.id}${bodyProvider.id}'),
+          '$headlineFontFamilyKey-${headlineProvider.id}-${bodyProvider.id}'),
       configKey: headlineFontFamilyKey,
       notifierCallback: headlineProvider.fuse,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.title: EzFontFamilySetting(
       key: ValueKey<String>(
-          '$titleFontFamilyKey${titleProvider.id}${bodyProvider.id}'),
+          '$titleFontFamilyKey-${titleProvider.id}-${bodyProvider.id}'),
       configKey: titleFontFamilyKey,
       notifierCallback: titleProvider.fuse,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.body: EzFontFamilySetting(
       key: ValueKey<String>(
-          '$bodyFontFamilyKey${bodyProvider.id}${bodyProvider.id}'),
+          '$bodyFontFamilyKey-${bodyProvider.id}-${bodyProvider.id}'),
       configKey: bodyFontFamilyKey,
       notifierCallback: bodyProvider.fuse,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.label: EzFontFamilySetting(
       key: ValueKey<String>(
-          '$labelFontFamilyKey${labelProvider.id}${bodyProvider.id}'),
+          '$labelFontFamilyKey-${labelProvider.id}-${bodyProvider.id}'),
       configKey: labelFontFamilyKey,
       notifierCallback: labelProvider.fuse,
       baseStyle: bodyProvider.value,
@@ -419,7 +419,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
       key: ValueKey<String>(
-          '$displayFontSizeKey${displayProvider.id}${bodyProvider.id}'),
+          '$displayFontSizeKey-${displayProvider.id}-${bodyProvider.id}'),
       configKey: displayFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
@@ -432,7 +432,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>(
-          '$headlineFontSizeKey${headlineProvider.id}${bodyProvider.id}'),
+          '$headlineFontSizeKey-${headlineProvider.id}-${bodyProvider.id}'),
       configKey: headlineFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
@@ -445,7 +445,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>(
-          '$titleFontSizeKey${titleProvider.id}${bodyProvider.id}'),
+          '$titleFontSizeKey-${titleProvider.id}-${bodyProvider.id}'),
       configKey: titleFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
@@ -458,7 +458,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>(
-          '$bodyFontSizeKey${bodyProvider.id}${bodyProvider.id}'),
+          '$bodyFontSizeKey-${bodyProvider.id}-${bodyProvider.id}'),
       configKey: bodyFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
@@ -471,7 +471,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>(
-          '$labelFontSizeKey${labelProvider.id}${bodyProvider.id}'),
+          '$labelFontSizeKey-${labelProvider.id}-${bodyProvider.id}'),
       configKey: labelFontSizeKey,
       min: minFontSize,
       max: maxFontSize,
@@ -488,31 +488,31 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzBoldSetting> boldControllers =
       <TextSettingType, EzBoldSetting>{
     TextSettingType.display: EzBoldSetting(
-      key: ValueKey<String>('$displayBoldKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayBoldKey-${bodyProvider.id}'),
       configKey: displayBoldKey,
       notifierCallback: displayProvider.bold,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzBoldSetting(
-      key: ValueKey<String>('$headlineBoldKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineBoldKey-${bodyProvider.id}'),
       configKey: headlineBoldKey,
       notifierCallback: headlineProvider.bold,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzBoldSetting(
-      key: ValueKey<String>('$titleBoldKey${bodyProvider.id}'),
+      key: ValueKey<String>('$titleBoldKey-${bodyProvider.id}'),
       configKey: titleBoldKey,
       notifierCallback: titleProvider.bold,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzBoldSetting(
-      key: ValueKey<String>('$bodyBoldKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyBoldKey-${bodyProvider.id}'),
       configKey: bodyBoldKey,
       notifierCallback: bodyProvider.bold,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzBoldSetting(
-      key: ValueKey<String>('$labelBoldKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelBoldKey-${bodyProvider.id}'),
       configKey: labelBoldKey,
       notifierCallback: labelProvider.bold,
       size: bodyProvider.value.fontSize,
@@ -523,31 +523,31 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzItalicSetting> italicsControllers =
       <TextSettingType, EzItalicSetting>{
     TextSettingType.display: EzItalicSetting(
-      key: ValueKey<String>('$displayItalicsKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayItalicsKey-${bodyProvider.id}'),
       configKey: displayItalicsKey,
       notifierCallback: displayProvider.italic,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzItalicSetting(
-      key: ValueKey<String>('$headlineItalicsKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineItalicsKey-${bodyProvider.id}'),
       configKey: headlineItalicsKey,
       notifierCallback: headlineProvider.italic,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzItalicSetting(
-      key: ValueKey<String>('$titleProvider${bodyProvider.id}'),
+      key: ValueKey<String>('$titleItalicsKey-${bodyProvider.id}'),
       configKey: titleItalicsKey,
       notifierCallback: titleProvider.italic,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzItalicSetting(
-      key: ValueKey<String>('$bodyItalicsKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyItalicsKey-${bodyProvider.id}'),
       configKey: bodyItalicsKey,
       notifierCallback: bodyProvider.italic,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzItalicSetting(
-      key: ValueKey<String>('$labelItalicsKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelItalicsKey-${bodyProvider.id}'),
       configKey: labelItalicsKey,
       notifierCallback: labelProvider.italic,
       size: bodyProvider.value.fontSize,
@@ -558,31 +558,31 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzUnderlineSetting> underlineControllers =
       <TextSettingType, EzUnderlineSetting>{
     TextSettingType.display: EzUnderlineSetting(
-      key: ValueKey<String>('$displayUnderlinedKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayUnderlinedKey-${bodyProvider.id}'),
       configKey: displayUnderlinedKey,
       notifierCallback: displayProvider.underline,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.headline: EzUnderlineSetting(
-      key: ValueKey<String>('$headlineUnderlinedKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineUnderlinedKey-${bodyProvider.id}'),
       configKey: headlineUnderlinedKey,
       notifierCallback: headlineProvider.underline,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.title: EzUnderlineSetting(
-      key: ValueKey<String>('$titleUnderlinedKey${bodyProvider.id}'),
+      key: ValueKey<String>('$titleUnderlinedKey-${bodyProvider.id}'),
       configKey: titleUnderlinedKey,
       notifierCallback: titleProvider.underline,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.body: EzUnderlineSetting(
-      key: ValueKey<String>('$bodyUnderlinedKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyUnderlinedKey-${bodyProvider.id}'),
       configKey: bodyUnderlinedKey,
       notifierCallback: bodyProvider.underline,
       size: bodyProvider.value.fontSize,
     ),
     TextSettingType.label: EzUnderlineSetting(
-      key: ValueKey<String>('$labelUnderlinedKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelUnderlinedKey-${bodyProvider.id}'),
       configKey: labelUnderlinedKey,
       notifierCallback: labelProvider.underline,
       size: bodyProvider.value.fontSize,
@@ -593,7 +593,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting>
       letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayLetterSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayLetterSpacingKey-${bodyProvider.id}'),
       configKey: displayLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
@@ -604,7 +604,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineLetterSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineLetterSpacingKey-${bodyProvider.id}'),
       configKey: headlineLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
@@ -615,7 +615,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleLetterSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$titleLetterSpacingKey-${bodyProvider.id}'),
       configKey: titleLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
@@ -626,7 +626,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyLetterSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyLetterSpacingKey-${bodyProvider.id}'),
       configKey: bodyLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
@@ -637,7 +637,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelLetterSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelLetterSpacingKey-${bodyProvider.id}'),
       configKey: labelLetterSpacingKey,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
@@ -653,7 +653,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> wordSpacingControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayWordSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayWordSpacingKey-${bodyProvider.id}'),
       configKey: displayWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
@@ -664,7 +664,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineWordSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineWordSpacingKey-${bodyProvider.id}'),
       configKey: headlineWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
@@ -675,7 +675,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleWordSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$titleWordSpacingKey-${bodyProvider.id}'),
       configKey: titleWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
@@ -686,7 +686,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyWordSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyWordSpacingKey-${bodyProvider.id}'),
       configKey: bodyWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
@@ -697,7 +697,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelWordSpacingKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelWordSpacingKey-${bodyProvider.id}'),
       configKey: labelWordSpacingKey,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
@@ -713,7 +713,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> lineHeightControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayFontHeightKey${bodyProvider.id}'),
+      key: ValueKey<String>('$displayFontHeightKey-${bodyProvider.id}'),
       configKey: displayFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
@@ -724,7 +724,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineFontHeightKey${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineFontHeightKey-${bodyProvider.id}'),
       configKey: headlineFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
@@ -735,7 +735,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleFontHeightKey${bodyProvider.id}'),
+      key: ValueKey<String>('$titleFontHeightKey-${bodyProvider.id}'),
       configKey: titleFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
@@ -746,7 +746,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyFontHeightKey${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyFontHeightKey-${bodyProvider.id}'),
       configKey: bodyFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
@@ -757,7 +757,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelFontHeightKey${bodyProvider.id}'),
+      key: ValueKey<String>('$labelFontHeightKey-${bodyProvider.id}'),
       configKey: labelFontHeightKey,
       min: minFontHeight,
       max: maxFontHeight,
