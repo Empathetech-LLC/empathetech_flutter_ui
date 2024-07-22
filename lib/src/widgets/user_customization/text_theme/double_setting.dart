@@ -9,24 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleSetting extends StatefulWidget {
+  /// The [EzConfig] key being edited
   final String configKey;
+
   final double min;
   final double max;
 
   /// Use this to live update the [TextStyle] on your UI
   final void Function(double) notifierCallback;
 
+  /// Label [icon] below the [EzFontDoubleSetting]
   final IconData icon;
 
+  /// Message for the on hover [Tooltip]
   final String tooltip;
 
   /// Optionally include plus/minus buttons surrounding the [PlatformTextFormField]
   /// Increments/decrements based on [delta]
-  /// Defaults to [false]
   final bool plusMinus;
 
-  /// Only relevant if [plusMinus] is [true]
-  /// Defaults to 1.0
+  /// Only relevant if [plusMinus] is true
   final double delta;
 
   final TextStyle? style;
@@ -58,22 +60,19 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
-  late double currValue = EzConfig.get(widget.configKey);
-  late final TextEditingController controller = TextEditingController(
-    text: currValue.toString(),
-  );
+  late final TextStyle? style =
+      (widget.style ?? Theme.of(context).textTheme.bodyLarge)
+          ?.copyWith(color: onBackground);
 
   late final double padding = EzConfig.get(paddingKey);
-  late final double lineHeight = EzConfig.get(bodyFontHeightKey) ?? 1.5;
+  late final double lineHeight = style?.height ?? 1.5;
 
   late final EzSpacer pMSpacer = EzSpacer.row(padding / 4);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color onBackground = colorScheme.onSurface;
-  late final TextStyle? style = widget.style ??
-      Theme.of(context).textTheme.bodyLarge?.copyWith(color: onBackground);
+  late final Color onBackground = Theme.of(context).colorScheme.onSurface;
+  late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
   late final Size sizeLimit = measureText(
     widget.sizingString ?? widget.max.toString(),
@@ -83,6 +82,15 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final double formFieldWidth = sizeLimit.width + padding;
   late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
+
+  // Define the build data //
+
+  late double currValue =
+      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
+
+  late final TextEditingController controller = TextEditingController(
+    text: currValue.toString(),
+  );
 
   // Return the build //
 
@@ -147,9 +155,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).remove,
-                  color: (currValue < widget.max)
-                      ? onBackground
-                      : colorScheme.outline,
+                  color: (currValue < widget.max) ? onBackground : outlineColor,
                 ),
                 onPressed: () {
                   if (currValue > widget.min) {
@@ -169,9 +175,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               IconButton(
                 icon: Icon(
                   PlatformIcons(context).add,
-                  color: (currValue < widget.max)
-                      ? onBackground
-                      : colorScheme.outline,
+                  color: (currValue < widget.max) ? onBackground : outlineColor,
                 ),
                 onPressed: () {
                   if (currValue < widget.max) {

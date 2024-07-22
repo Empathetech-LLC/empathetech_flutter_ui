@@ -18,6 +18,7 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   /// Returns whether changes have been made
   final void Function(bool) notifierCallback;
 
+  /// Message for the on hover [Tooltip]
   final String tooltip;
 
   /// Amount to scale on each click, defaults to 0.1
@@ -27,7 +28,7 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   final TextStyle? style;
 
   /// Standardized tool for batch updating double [TextStyle] values for the passed [keysNDefaults]
-  /// The updates will be based on the default from [keysNDefaults] and [delta]
+  /// The updates will be based on [delta] and limited by [min]/[max] && [keysNDefaults]
   /// For example: [TextStyle.fontSize]
   const EzFontDoubleBatchSetting({
     super.key,
@@ -48,19 +49,18 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
 class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   // Gather the theme data //
 
-  late final double padding = EzConfig.get(paddingKey);
-  late final double lineHeight = EzConfig.get(bodyFontHeightKey) ?? 1.5;
+  late final TextStyle? style =
+      (widget.style ?? Theme.of(context).textTheme.bodyLarge)
+          ?.copyWith(color: onBackground);
 
-  late final EzSpacer pMSpacer = EzSpacer.row(padding / 4);
+  late final EzSpacer pMSpacer = EzSpacer.row(EzConfig.get(paddingKey) / 4);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color onBackground = colorScheme.onSurface;
-  late final TextStyle? style = widget.style ??
-      Theme.of(context).textTheme.headlineLarge?.copyWith(color: onBackground);
+  late final Color onBackground = Theme.of(context).colorScheme.onSurface;
+  late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
-  // Define build data //
+  // Define the build data //
 
   late Map<String, double> upperLimits = widget.keysNDefaults.map(
     (String key, double value) => MapEntry<String, double>(
@@ -95,7 +95,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           IconButton(
             icon: Icon(
               PlatformIcons(context).remove,
-              color: atMin ? colorScheme.outline : onBackground,
+              color: atMin ? outlineColor : onBackground,
               size: style?.fontSize,
             ),
             onPressed: atMin
@@ -140,7 +140,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           IconButton(
             icon: Icon(
               PlatformIcons(context).add,
-              color: atMax ? colorScheme.outline : onBackground,
+              color: atMax ? outlineColor : onBackground,
               size: style?.fontSize,
             ),
             onPressed: atMax
