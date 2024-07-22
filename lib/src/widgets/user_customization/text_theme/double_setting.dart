@@ -12,7 +12,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// The [EzConfig] key being edited
   final String configKey;
 
-  final double startingValue;
+  final double initialValue;
   final double min;
   final double max;
 
@@ -43,7 +43,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   const EzFontDoubleSetting({
     super.key,
     required this.configKey,
-    required this.startingValue,
+    required this.initialValue,
     required this.min,
     required this.max,
     required this.notifierCallback,
@@ -87,9 +87,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   // Define the build data //
 
-  late double currValue =
-      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
-
+  late double currValue;
   final TextEditingController controller = TextEditingController();
 
   // Return the build //
@@ -97,7 +95,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   @override
   void initState() {
     super.initState();
-    controller.text = widget.startingValue.toString();
+    currValue = widget.initialValue;
+    controller.text = currValue.toString();
   }
 
   @override
