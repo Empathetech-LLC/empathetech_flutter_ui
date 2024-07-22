@@ -15,6 +15,7 @@ class EzFontFamilySetting extends StatefulWidget {
   final void Function(String) notifierCallback;
 
   final String? tooltip;
+  final TextStyle baseStyle;
 
   /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
   /// [EzFontFamilySetting] options are built from [googleStyles]
@@ -22,6 +23,7 @@ class EzFontFamilySetting extends StatefulWidget {
     super.key,
     required this.configKey,
     required this.notifierCallback,
+    required this.baseStyle,
     this.tooltip,
   });
 
@@ -32,10 +34,8 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the theme data //
 
-  late final String defaultFontFamily = EzConfig.getDefault(widget.configKey);
-
   late String currFontFamily =
-      EzConfig.get(widget.configKey) ?? defaultFontFamily;
+      EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
 
   late final ThemeData theme = Theme.of(context);
 
@@ -70,8 +70,11 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
           EzConfig.setString(widget.configKey, fontFamily);
           setState(() {});
         },
-        textStyle: googleStyles[currFontFamily]?.copyWith(
-          color: theme.colorScheme.onSurface,
+        textStyle: fuseWithGFont(
+          starter: widget.baseStyle.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+          gFont: currFontFamily,
         ),
         width: smallBreakpoint / 4,
       ),
