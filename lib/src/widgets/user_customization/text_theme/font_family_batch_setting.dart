@@ -14,7 +14,7 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   final String? tooltip;
 
   /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
-  /// Updates all of the font families at once
+  /// Updates all font families at once
   const EzFontFamilyBatchSetting({super.key, this.tooltip});
 
   @override
@@ -91,7 +91,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     }
   }
 
-  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
+  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
