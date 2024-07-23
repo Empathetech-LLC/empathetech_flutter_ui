@@ -31,6 +31,11 @@ Size measureText(
   return textPainter.size;
 }
 
+/// Slits the string on '_' and/or ' ' and returns the first word
+String firstWord(String text) {
+  return text.split(RegExp(r'[_\s]+')).first;
+}
+
 // Setters //
 
 /// Creates a [TextTheme] with sizes from...
