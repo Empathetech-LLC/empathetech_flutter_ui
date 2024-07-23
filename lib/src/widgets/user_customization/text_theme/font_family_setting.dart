@@ -6,27 +6,28 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
+  /// The [EzConfig] key for the [TextStyle.fontFamily] to be updated
   final String configKey;
-  final String initialValue;
 
-  /// Use this to live update the [TextStyle] on your UI
-  /// Recommended to use [fuseWithGFont]
-  final void Function(String) notifierCallback;
+  /// [Provider] tracking the [TextStyle] to be updated
+  /// [EzFontFamilySetting] uses [BaseTextStyleProvider.fuse]
+  final BaseTextStyleProvider provider;
 
   final String? tooltip;
 
-  /// Base [TextStyle] to be used for [fuseWithGFont] when selecting font family options
+  /// Base [TextStyle] for the [DropdownMenu]
+  /// Will be provided to [fuseWithGFont] alongside the current selection
   final TextStyle baseStyle;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey]
+  /// Standardized tool for updating the [TextStyle.fontFamily] for the passed [configKey] and [provider] combo
   /// [EzFontFamilySetting] options are built from [googleStyles]
   const EzFontFamilySetting({
     super.key,
     required this.configKey,
-    required this.initialValue,
-    required this.notifierCallback,
+    required this.provider,
     required this.baseStyle,
     this.tooltip,
   });
@@ -42,14 +43,15 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   // Define the build data  //
 
-  late String currFontFamily;
+  late String currFontFamily = firstWord(
+      widget.provider.value.fontFamily ?? EzConfig.get(widget.configKey));
 
-  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [ElevatedButton]s
+  /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: entry.key,
+      label: googleStyleNames[entry.key]!,
       style: theme.textButtonTheme.style?.copyWith(
         textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
       ),
@@ -57,13 +59,6 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   }).toList();
 
   // Return the build //
-
-  @override
-  void initState() {
-    super.initState();
-    currFontFamily =
-        EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +72,15 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
           currFontFamily = fontFamily;
 
           await EzConfig.setString(widget.configKey, fontFamily);
-          widget.notifierCallback(fontFamily);
+
+          widget.provider.fuse(fontFamily);
 
           setState(() {});
         },
-        textStyle: googleStyles[currFontFamily],
+        textStyle: fuseWithGFont(
+          starter: widget.baseStyle,
+          gFont: currFontFamily,
+        ),
         width: smallBreakpoint / 4,
       ),
     );
