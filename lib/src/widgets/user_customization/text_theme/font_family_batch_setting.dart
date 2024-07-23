@@ -6,30 +6,16 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  /// All [EzConfig] keys being edited paired with their default values
-  final Map<String, String> keysNDefaults;
-
-  /// Use this to live update the [TextStyle] on your UI
-  /// Recommended to use [fuseWithGFont]
-  final void Function(String) notifierCallback;
-
+  /// Optional [Tooltip] message for the [DropdownMenu]
   final String? tooltip;
 
-  /// Base [TextStyle] to be used for [fuseWithGFont] when selecting font family options
-  final TextStyle baseStyle;
-
-  /// Standardized tool for batch updating the [TextStyle.fontFamily] for the passed [keysNDefaults]
-  /// [EzFontFamilyBatchSetting] options are built from [googleStyles]
-  const EzFontFamilyBatchSetting({
-    super.key,
-    required this.keysNDefaults,
-    required this.notifierCallback,
-    required this.baseStyle,
-    this.tooltip,
-  });
+  /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
+  /// Updates all of the font families at once
+  const EzFontFamilyBatchSetting({super.key, this.tooltip});
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -42,21 +28,38 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  late final DisplayTextStyleProvider displayProvider =
+      Provider.of<DisplayTextStyleProvider>(context);
+  late final HeadlineTextStyleProvider headlineProvider =
+      Provider.of<HeadlineTextStyleProvider>(context);
+  late final TitleTextStyleProvider titleProvider =
+      Provider.of<TitleTextStyleProvider>(context);
+  late final BodyTextStyleProvider bodyProvider =
+      Provider.of<BodyTextStyleProvider>(context);
+  late final LabelTextStyleProvider labelProvider =
+      Provider.of<LabelTextStyleProvider>(context);
+
   // Define the build data //
 
-  late final Map<String, String> startingFonts = widget.keysNDefaults.map(
-    (String key, String value) => MapEntry<String, String>(
-      key,
-      EzConfig.get(key) ?? value,
-    ),
-  );
+  late Map<String, String> currFonts = <String, String>{
+    displayFontFamilyKey: firstWord(
+        displayProvider.value.fontFamily ?? EzConfig.get(displayFontFamilyKey)),
+    headlineFontFamilyKey: firstWord(headlineProvider.value.fontFamily ??
+        EzConfig.get(headlineFontFamilyKey)),
+    titleFontFamilyKey: firstWord(
+        titleProvider.value.fontFamily ?? EzConfig.get(titleFontFamilyKey)),
+    bodyFontFamilyKey: firstWord(
+        bodyProvider.value.fontFamily ?? EzConfig.get(bodyFontFamilyKey)),
+    labelFontFamilyKey: firstWord(
+        labelProvider.value.fontFamily ?? EzConfig.get(labelFontFamilyKey)),
+  };
 
-  late bool isUniform = startingFonts.values
-      .every((String font) => font == startingFonts.values.first);
+  late bool isUniform =
+      currFonts.values.every((String font) => font == currFonts.values.first);
 
   late String currFontFamily = isUniform
-      ? startingFonts.values.first
-      : mostCommonFont(startingFonts.values.toList());
+      ? currFonts.values.first
+      : mostCommonFont(currFonts.values.toList());
 
   // Define button functions //
 
@@ -93,7 +96,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: entry.key,
+      label: googleStyleNames[entry.key]!,
       style: theme.textButtonTheme.style?.copyWith(
         textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
       ),
@@ -159,20 +162,19 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
           currFontFamily = fontFamily;
 
-          for (final MapEntry<String, String> entry
-              in widget.keysNDefaults.entries) {
-            EzConfig.setString(entry.key, fontFamily);
+          for (final String key in currFonts.keys) {
+            await EzConfig.setString(key, fontFamily);
           }
-          widget.notifierCallback(fontFamily);
+
+          displayProvider.fuse(fontFamily);
+          headlineProvider.fuse(fontFamily);
+          titleProvider.fuse(fontFamily);
+          bodyProvider.fuse(fontFamily);
+          labelProvider.fuse(fontFamily);
 
           setState(() {});
         },
-        textStyle: fuseWithGFont(
-          starter: widget.baseStyle.copyWith(
-            color: theme.colorScheme.onSurface,
-          ),
-          gFont: currFontFamily,
-        ),
+        textStyle: bodyProvider.value,
         width: smallBreakpoint / 4,
       ),
     );

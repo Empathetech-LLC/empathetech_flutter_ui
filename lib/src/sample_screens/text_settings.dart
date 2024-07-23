@@ -177,22 +177,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
 
-  late final Map<String, String> defaultFontFamilies = <String, String>{
-    displayFontFamilyKey: EzConfig.getDefault(displayFontFamilyKey),
-    headlineFontFamilyKey: EzConfig.getDefault(headlineFontFamilyKey),
-    titleFontFamilyKey: EzConfig.getDefault(titleFontFamilyKey),
-    bodyFontFamilyKey: EzConfig.getDefault(bodyFontFamilyKey),
-    labelFontFamilyKey: EzConfig.getDefault(labelFontFamilyKey),
-  };
-
-  late final Map<String, double> defaultSizes = <String, double>{
-    displayFontSizeKey: EzConfig.getDefault(displayFontSizeKey),
-    headlineFontSizeKey: EzConfig.getDefault(headlineFontSizeKey),
-    titleFontSizeKey: EzConfig.getDefault(titleFontSizeKey),
-    bodyFontSizeKey: EzConfig.getDefault(bodyFontSizeKey),
-    labelFontSizeKey: EzConfig.getDefault(labelFontSizeKey),
-  };
-
   // Return the build //
 
   @override
@@ -208,40 +192,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // Font family
-            EzFontFamilyBatchSetting(
-              key: ValueKey<String>('batchFontFamily-${bodyProvider.id}'),
-              keysNDefaults: defaultFontFamilies,
-              notifierCallback: (String font) {
-                displayProvider.fuse(font);
-                headlineProvider.fuse(font);
-                titleProvider.fuse(font);
-                bodyProvider.fuse(font);
-                labelProvider.fuse(font);
-              },
-              baseStyle: bodyProvider.value,
-            ),
+            EzFontFamilyBatchSetting(key: UniqueKey()),
             swapSpacer,
 
-            // Font size
-            EzFontDoubleBatchSetting(
-              key: ValueKey<String>('batchFontDouble-${bodyProvider.id}'),
-              keysNDefaults: defaultSizes,
-              min: minFontScale,
-              max: maxFontScale,
-              notifierCallback: (bool changed) {
-                if (changed) {
-                  displayProvider
-                      .resize(EzConfig.getDouble(displayFontSizeKey)!);
-                  headlineProvider
-                      .resize(EzConfig.getDouble(headlineFontSizeKey)!);
-                  titleProvider.resize(EzConfig.getDouble(titleFontSizeKey)!);
-                  bodyProvider.resize(EzConfig.getDouble(bodyFontSizeKey)!);
-                  labelProvider.resize(EzConfig.getDouble(labelFontSizeKey)!);
-                }
-              },
-              tooltip: l10n.tsFontSize,
-              style: bodyProvider.value,
-            ),
+            // // Font size
+            // EzFontDoubleBatchSetting(
+            //   key: UniqueKey(),
+            //   min: minFontScale,
+            //   max: maxFontScale,
+            // ),
           ],
         ),
         separator,
@@ -1001,6 +960,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             bodyProvider.reset();
             labelProvider.reset();
             editing = TextSettingType.display;
+
             setState(() {});
           },
         ),

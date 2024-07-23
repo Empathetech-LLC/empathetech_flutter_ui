@@ -61,7 +61,8 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   @override
   void initState() {
     super.initState();
-    currFontFamily = googleFontFamilyLookup[widget.initialValue]!;
+    currFontFamily =
+        EzConfig.get(widget.configKey) ?? EzConfig.getDefault(widget.configKey);
   }
 
   @override
@@ -80,12 +81,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
           setState(() {});
         },
-        textStyle: fuseWithGFont(
-          starter: widget.baseStyle.copyWith(
-            color: theme.colorScheme.onSurface,
-          ),
-          gFont: currFontFamily,
-        ),
+        textStyle: googleStyles[currFontFamily],
         width: smallBreakpoint / 4,
       ),
     );
