@@ -27,8 +27,15 @@ class EzDominantHandSwitch extends StatefulWidget {
   /// Defaults to [DropdownMenuThemeData.textStyle] value from your [ThemeData]
   final TextStyle? labelStyle;
 
+  /// Defaults to [ColorScheme.surfaceContainer]
+  final Color? backgroundColor;
+
   /// Standardized tool for updating [EzConfig] dominantHand
-  const EzDominantHandSwitch({super.key, this.labelStyle});
+  const EzDominantHandSwitch({
+    super.key,
+    this.labelStyle,
+    this.backgroundColor,
+  });
 
   @override
   State<EzDominantHandSwitch> createState() => _HandSwitchState();
@@ -36,72 +43,73 @@ class EzDominantHandSwitch extends StatefulWidget {
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
+
   late final ThemeData theme = Theme.of(context);
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  final double padding = EzConfig.get(paddingKey);
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
   late Hand currSide = isLefty ? Hand.left : Hand.right;
 
-  final double padding = EzConfig.get(paddingKey);
+  // Define the build data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final List<DropdownMenuEntry<Hand>> entries = <DropdownMenuEntry<Hand>>[
+    DropdownMenuEntry<Hand>(
+      value: Hand.right,
+      label: handName(context, Hand.right),
+    ),
+    DropdownMenuEntry<Hand>(
+      value: Hand.left,
+      label: handName(context, Hand.left),
+    ),
+  ];
+
+  /// Define children separately to allow for live reversing
+  late final List<Widget> children = <Widget>[
+    // Label
+    Flexible(
+      child: Text(
+        l10n.ssDominantHand,
+        style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+        textAlign: TextAlign.center,
+      ),
+    ),
+    EzSpacer.row(padding),
+
+    // Button
+    DropdownMenu<Hand>(
+      initialSelection: currSide,
+      dropdownMenuEntries: entries,
+      onSelected: (Hand? newDominantHand) {
+        switch (newDominantHand) {
+          case Hand.right:
+            currSide = Hand.right;
+            EzConfig.remove(isLeftyKey);
+            setState(() {});
+            break;
+
+          case Hand.left:
+            currSide = Hand.left;
+            EzConfig.setBool(isLeftyKey, true);
+            setState(() {});
+            break;
+
+          default:
+            break;
+        }
+      },
+    ),
+  ];
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    // Define the build //
-
-    final String label = l10n.ssDominantHand;
-
-    final List<DropdownMenuEntry<Hand>> entries = <DropdownMenuEntry<Hand>>[
-      DropdownMenuEntry<Hand>(
-        value: Hand.right,
-        label: handName(context, Hand.right),
-      ),
-      DropdownMenuEntry<Hand>(
-        value: Hand.left,
-        label: handName(context, Hand.left),
-      ),
-    ];
-
-    // Define children separately to allow for live reversing
-    final List<Widget> children = <Widget>[
-      // Label
-      Flexible(
-        child: Text(
-          label,
-          style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-          textAlign: TextAlign.center,
-        ),
-      ),
-      EzSpacer.row(padding),
-
-      // Button
-      DropdownMenu<Hand>(
-        initialSelection: currSide,
-        dropdownMenuEntries: entries,
-        onSelected: (Hand? newDominantHand) {
-          switch (newDominantHand) {
-            case Hand.right:
-              currSide = Hand.right;
-              EzConfig.remove(isLeftyKey);
-              setState(() {});
-              break;
-
-            case Hand.left:
-              currSide = Hand.left;
-              EzConfig.setBool(isLeftyKey, true);
-              setState(() {});
-              break;
-
-            default:
-              break;
-          }
-        },
-      ),
-    ];
-
     return Container(
       padding: EdgeInsets.zero,
-      decoration: BoxDecoration(color: theme.colorScheme.surfaceContainer),
+      decoration: BoxDecoration(
+          color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
