@@ -337,43 +337,33 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
       <TextSettingType, EzFontFamilySetting>{
     TextSettingType.display: EzFontFamilySetting(
-      key: ValueKey<String>(
-          '$displayFontFamilyKey-${displayProvider.id}-${bodyProvider.id}'),
+      key: UniqueKey(),
       configKey: displayFontFamilyKey,
-      initialValue: displayProvider.value.fontFamily!,
-      notifierCallback: displayProvider.fuse,
+      provider: displayProvider,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.headline: EzFontFamilySetting(
-      key: ValueKey<String>(
-          '$headlineFontFamilyKey-${headlineProvider.id}-${bodyProvider.id}'),
+      key: UniqueKey(),
       configKey: headlineFontFamilyKey,
-      initialValue: headlineProvider.value.fontFamily!,
-      notifierCallback: headlineProvider.fuse,
+      provider: headlineProvider,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.title: EzFontFamilySetting(
-      key: ValueKey<String>(
-          '$titleFontFamilyKey-${titleProvider.id}-${bodyProvider.id}'),
+      key: UniqueKey(),
       configKey: titleFontFamilyKey,
-      initialValue: titleProvider.value.fontFamily!,
-      notifierCallback: titleProvider.fuse,
+      provider: titleProvider,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.body: EzFontFamilySetting(
-      key: ValueKey<String>(
-          '$bodyFontFamilyKey-${bodyProvider.id}-${bodyProvider.id}'),
+      key: UniqueKey(),
       configKey: bodyFontFamilyKey,
-      initialValue: bodyProvider.value.fontFamily!,
-      notifierCallback: bodyProvider.fuse,
+      provider: bodyProvider,
       baseStyle: bodyProvider.value,
     ),
     TextSettingType.label: EzFontFamilySetting(
-      key: ValueKey<String>(
-          '$labelFontFamilyKey-${labelProvider.id}-${bodyProvider.id}'),
+      key: UniqueKey(),
       configKey: labelFontFamilyKey,
-      initialValue: labelProvider.value.fontFamily!,
-      notifierCallback: labelProvider.fuse,
+      provider: labelProvider,
       baseStyle: bodyProvider.value,
     ),
   };
