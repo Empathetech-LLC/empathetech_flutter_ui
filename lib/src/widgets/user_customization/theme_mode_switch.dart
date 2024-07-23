@@ -12,8 +12,15 @@ class EzThemeModeSwitch extends StatefulWidget {
   /// Defaults to [DropdownMenuThemeData.textStyle]
   final TextStyle? labelStyle;
 
+  /// Defaults to [ColorScheme.surfaceContainer]
+  final Color? backgroundColor;
+
   /// Standardized tool for changing the [ThemeMode]
-  const EzThemeModeSwitch({super.key, this.labelStyle});
+  const EzThemeModeSwitch({
+    super.key,
+    this.labelStyle,
+    this.backgroundColor,
+  });
 
   @override
   State<EzThemeModeSwitch> createState() => _ThemeModeSwitchState();
@@ -21,40 +28,40 @@ class EzThemeModeSwitch extends StatefulWidget {
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
+
   late final ThemeData theme = Theme.of(context);
-  late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   final double padding = EzConfig.get(paddingKey);
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
+
+  // Define the build data //
+
+  late final List<DropdownMenuEntry<ThemeMode>> entries =
+      <DropdownMenuEntry<ThemeMode>>[
+    DropdownMenuEntry<ThemeMode>(
+      value: ThemeMode.system,
+      label: l10n.gSystem,
+    ),
+    DropdownMenuEntry<ThemeMode>(
+      value: ThemeMode.light,
+      label: l10n.gLight,
+    ),
+    DropdownMenuEntry<ThemeMode>(
+      value: ThemeMode.dark,
+      label: l10n.gDark,
+    ),
+  ];
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    // Define the build //
-
-    final String label = l10n.ssThemeMode;
-
-    final List<DropdownMenuEntry<ThemeMode>> entries =
-        <DropdownMenuEntry<ThemeMode>>[
-      DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.system,
-        label: l10n.gSystem,
-      ),
-      DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.light,
-        label: l10n.gLight,
-      ),
-      DropdownMenuEntry<ThemeMode>(
-        value: ThemeMode.dark,
-        label: l10n.gDark,
-      ),
-    ];
-
-    // Return the build //
-
     return Container(
       padding: EdgeInsets.zero,
-      decoration: BoxDecoration(color: theme.colorScheme.surfaceContainer),
+      decoration: BoxDecoration(
+          color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer),
       child: EzRow(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +69,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           // Label
           Flexible(
             child: Text(
-              label,
+              l10n.ssThemeMode,
               style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
               textAlign: TextAlign.center,
             ),
