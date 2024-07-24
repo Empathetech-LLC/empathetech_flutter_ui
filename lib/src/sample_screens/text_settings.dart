@@ -195,12 +195,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             EzFontFamilyBatchSetting(key: UniqueKey()),
             swapSpacer,
 
-            // // Font size
-            // EzFontDoubleBatchSetting(
-            //   key: UniqueKey(),
-            //   min: minFontScale,
-            //   max: maxFontScale,
-            // ),
+            // Font size
+            EzFontDoubleBatchSetting(
+              key: UniqueKey(),
+              min: minFontScale,
+              max: maxFontScale,
+            ),
           ],
         ),
         separator,
