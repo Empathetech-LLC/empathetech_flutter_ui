@@ -10,12 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  /// Optional [Tooltip] message for the [DropdownMenu]
-  final String? tooltip;
-
   /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
   /// Updates all font families at once
-  const EzFontFamilyBatchSetting({super.key, this.tooltip});
+  const EzFontFamilyBatchSetting({super.key});
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -143,7 +140,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
+      message: l10n.tsFontFamily,
       child: DropdownMenu<String>(
         initialSelection: currFontFamily,
         dropdownMenuEntries: entries,
