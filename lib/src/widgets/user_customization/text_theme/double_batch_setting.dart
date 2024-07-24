@@ -6,39 +6,27 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleBatchSetting extends StatefulWidget {
-  /// All [EzConfig] keys being edited paired with their default values
-  final Map<String, double> keysNDefaults;
-
+  /// Maximum scale factor, calculated from each provider's relevant [EzConfig.defaults] value
   final double min;
+
+  /// Minimum scale factor, calculated from each provider's relevant [EzConfig.defaults] value
   final double max;
-
-  /// Returns whether changes have been made
-  final void Function(bool) notifierCallback;
-
-  /// Message for the on hover [Tooltip]
-  final String tooltip;
 
   /// Amount to scale on each click, defaults to 0.1
   /// aka 10%
   final double delta;
 
-  final TextStyle? style;
-
-  /// Standardized tool for batch updating double [TextStyle] values for the passed [keysNDefaults]
-  /// The updates will be based on [delta] and limited by [min]/[max] && [keysNDefaults]
-  /// For example: [TextStyle.fontSize]
+  /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
+  /// Updates all font size at once by [delta] percent, limited by [min] and [max]
   const EzFontDoubleBatchSetting({
     super.key,
-    required this.keysNDefaults,
     required this.min,
     required this.max,
-    required this.notifierCallback,
-    required this.tooltip,
     this.delta = 0.1,
-    this.style,
   });
 
   @override
@@ -49,45 +37,64 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
 class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   // Gather the theme data //
 
-  late final TextStyle? style =
-      (widget.style ?? Theme.of(context).textTheme.bodyLarge)
-          ?.copyWith(color: onBackground);
-
-  late final EzSpacer pMSpacer = EzSpacer.row(EzConfig.get(paddingKey) / 4);
-
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final DisplayTextStyleProvider displayProvider =
+      Provider.of<DisplayTextStyleProvider>(context);
+  late final HeadlineTextStyleProvider headlineProvider =
+      Provider.of<HeadlineTextStyleProvider>(context);
+  late final TitleTextStyleProvider titleProvider =
+      Provider.of<TitleTextStyleProvider>(context);
+  late final BodyTextStyleProvider bodyProvider =
+      Provider.of<BodyTextStyleProvider>(context);
+  late final LabelTextStyleProvider labelProvider =
+      Provider.of<LabelTextStyleProvider>(context);
+
+  late final List<BaseTextStyleProvider> providers = <BaseTextStyleProvider>[
+    displayProvider,
+    headlineProvider,
+    titleProvider,
+    bodyProvider,
+    labelProvider,
+  ];
+
+  late final List<String> keys = <String>[
+    displayFontSizeKey,
+    headlineFontSizeKey,
+    titleFontSizeKey,
+    bodyFontSizeKey,
+    labelFontSizeKey,
+  ];
 
   late final Color onBackground = Theme.of(context).colorScheme.onSurface;
   late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
+  late final EzSpacer pMSpacer = EzSpacer.row(EzConfig.get(paddingKey) / 4);
+
   // Define the build data //
 
-  late Map<String, double> upperLimits = widget.keysNDefaults.map(
-    (String key, double value) => MapEntry<String, double>(
-      key,
-      value * widget.max,
-    ),
+  late final Map<String, double> upperLimits = <String, double>{
+    for (final String key in keys) key: EzConfig.getDefault(key) * widget.max,
+  };
+
+  late bool atMax = upperLimits.entries.every(
+    (MapEntry<String, double> max) => max.value == EzConfig.getDouble(max.key),
   );
 
-  late bool atMax = upperLimits.entries.every((MapEntry<String, double> max) =>
-      max.value == EzConfig.getDouble(max.key));
+  late final Map<String, double> lowerLimits = <String, double>{
+    for (final String key in keys) key: EzConfig.getDefault(key) * widget.min,
+  };
 
-  late Map<String, double> lowerLimits = widget.keysNDefaults.map(
-    (String key, double value) => MapEntry<String, double>(
-      key,
-      value * widget.min,
-    ),
+  late bool atMin = lowerLimits.entries.every(
+    (MapEntry<String, double> min) => min.value == EzConfig.getDouble(min.key),
   );
-
-  late bool atMin = lowerLimits.entries.every((MapEntry<String, double> min) =>
-      min.value == EzConfig.getDouble(min.key));
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: widget.tooltip,
+      message: l10n.tsFontSize,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -96,35 +103,34 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             icon: Icon(
               PlatformIcons(context).remove,
               color: atMin ? outlineColor : onBackground,
-              size: style?.fontSize,
+              size: bodyProvider.value.fontSize,
             ),
             onPressed: atMin
                 ? doNothing
                 : () async {
-                    bool somethingChanged = false;
+                    for (int i = 0; i < providers.length; i++) {
+                      final double currSize =
+                          providers[i].value.fontSize ?? EzConfig.get(keys[i]);
+                      debugPrint('currSize: $currSize');
 
-                    for (final MapEntry<String, double> limit
-                        in lowerLimits.entries) {
-                      final double currValue = EzConfig.getDouble(limit.key) ??
-                          widget.keysNDefaults[limit.key]!;
+                      if (currSize != lowerLimits[keys[i]]) {
+                        final double newSize = currSize * (1 - widget.delta);
+                        debugPrint('newSize: $newSize');
+                        final double sizeLimit = lowerLimits[keys[i]]!;
+                        debugPrint('sizeLimit: $sizeLimit');
 
-                      if (currValue == limit.value) continue;
-
-                      final double newValue = currValue * (1 - widget.delta);
-
-                      if (newValue > limit.value) {
-                        somethingChanged =
-                            await EzConfig.setDouble(limit.key, newValue);
-                      } else {
-                        somethingChanged =
-                            await EzConfig.setDouble(limit.key, limit.value);
+                        if (newSize >= sizeLimit) {
+                          await EzConfig.setDouble(keys[i], newSize);
+                          providers[i].resize(newSize);
+                        } else {
+                          await EzConfig.setDouble(keys[i], sizeLimit);
+                          providers[i].resize(sizeLimit);
+                        }
                       }
                     }
-
                     setState(() {});
-                    widget.notifierCallback(somethingChanged);
                   },
-            tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+            tooltip: '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
           ),
           pMSpacer,
 
@@ -132,7 +138,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           Icon(
             Icons.text_fields_sharp,
             color: onBackground,
-            size: style?.fontSize,
+            size: bodyProvider.value.fontSize,
           ),
           pMSpacer,
 
@@ -141,35 +147,31 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             icon: Icon(
               PlatformIcons(context).add,
               color: atMax ? outlineColor : onBackground,
-              size: style?.fontSize,
+              size: bodyProvider.value.fontSize,
             ),
             onPressed: atMax
                 ? doNothing
                 : () async {
-                    bool somethingChanged = false;
+                    for (int i = 0; i < providers.length; i++) {
+                      final double currSize =
+                          providers[i].value.fontSize ?? EzConfig.get(keys[i]);
 
-                    for (final MapEntry<String, double> limit
-                        in upperLimits.entries) {
-                      final double currValue = EzConfig.getDouble(limit.key) ??
-                          widget.keysNDefaults[limit.key]!;
+                      if (currSize != upperLimits[keys[i]]) {
+                        final double newSize = currSize * (1 + widget.delta);
+                        final double sizeLimit = upperLimits[keys[i]]!;
 
-                      if (currValue == limit.value) continue;
-
-                      final double newValue = currValue * (1 + widget.delta);
-
-                      if (newValue < limit.value) {
-                        somethingChanged =
-                            await EzConfig.setDouble(limit.key, newValue);
-                      } else {
-                        somethingChanged =
-                            await EzConfig.setDouble(limit.key, limit.value);
+                        if (newSize <= sizeLimit) {
+                          await EzConfig.setDouble(keys[i], newSize);
+                          providers[i].resize(newSize);
+                        } else {
+                          await EzConfig.setDouble(keys[i], sizeLimit);
+                          providers[i].resize(sizeLimit);
+                        }
                       }
                     }
-
                     setState(() {});
-                    widget.notifierCallback(somethingChanged);
                   },
-            tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+            tooltip: '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
           ),
         ],
       ),
