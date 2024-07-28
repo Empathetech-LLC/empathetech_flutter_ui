@@ -25,16 +25,11 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final DisplayTextStyleProvider displayProvider =
-      Provider.of<DisplayTextStyleProvider>(context);
-  late final HeadlineTextStyleProvider headlineProvider =
-      Provider.of<HeadlineTextStyleProvider>(context);
-  late final TitleTextStyleProvider titleProvider =
-      Provider.of<TitleTextStyleProvider>(context);
-  late final BodyTextStyleProvider bodyProvider =
-      Provider.of<BodyTextStyleProvider>(context);
-  late final LabelTextStyleProvider labelProvider =
-      Provider.of<LabelTextStyleProvider>(context);
+  late final DisplayTextStyleProvider displayProvider;
+  late final HeadlineTextStyleProvider headlineProvider;
+  late final TitleTextStyleProvider titleProvider;
+  late final BodyTextStyleProvider bodyProvider;
+  late final LabelTextStyleProvider labelProvider;
 
   // Define the build data //
 
@@ -133,6 +128,18 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         );
       },
     );
+  }
+
+  // Initialize the build //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    displayProvider = context.watch<DisplayTextStyleProvider>();
+    headlineProvider = context.watch<HeadlineTextStyleProvider>();
+    titleProvider = context.watch<TitleTextStyleProvider>();
+    bodyProvider = context.watch<BodyTextStyleProvider>();
+    labelProvider = context.watch<LabelTextStyleProvider>();
   }
 
   // Return the build //
