@@ -50,14 +50,6 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
 
-  late final List<BaseTextStyleProvider> providers = <BaseTextStyleProvider>[
-    displayProvider,
-    headlineProvider,
-    titleProvider,
-    bodyProvider,
-    labelProvider,
-  ];
-
   late final List<String> keys = <String>[
     displayFontSizeKey,
     headlineFontSizeKey,
@@ -89,6 +81,25 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
     (MapEntry<String, double> min) => min.value == EzConfig.getDouble(min.key),
   );
 
+  // Define custom functions //
+
+  BaseTextStyleProvider providerFromKey(String key) {
+    switch (key) {
+      case displayFontSizeKey:
+        return displayProvider;
+      case headlineFontSizeKey:
+        return headlineProvider;
+      case titleFontSizeKey:
+        return titleProvider;
+      case bodyFontSizeKey:
+        return bodyProvider;
+      case labelFontSizeKey:
+        return labelProvider;
+      default:
+        throw Exception('Invalid key: $key');
+    }
+  }
+
   // Return the build //
 
   @override
@@ -108,23 +119,23 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             onPressed: atMin
                 ? doNothing
                 : () async {
-                    for (int i = 0; i < providers.length; i++) {
-                      final double currSize =
-                          providers[i].value.fontSize ?? EzConfig.get(keys[i]);
-                      debugPrint('currSize: $currSize');
+                    for (final String key in keys) {
+                      final BaseTextStyleProvider provider =
+                          providerFromKey(key);
 
-                      if (currSize != lowerLimits[keys[i]]) {
+                      final double currSize =
+                          provider.value.fontSize ?? EzConfig.get(key);
+
+                      if (currSize != lowerLimits[key]) {
                         final double newSize = currSize * (1 - widget.delta);
-                        debugPrint('newSize: $newSize');
-                        final double sizeLimit = lowerLimits[keys[i]]!;
-                        debugPrint('sizeLimit: $sizeLimit');
+                        final double sizeLimit = lowerLimits[key]!;
 
                         if (newSize >= sizeLimit) {
-                          await EzConfig.setDouble(keys[i], newSize);
-                          providers[i].resize(newSize);
+                          await EzConfig.setDouble(key, newSize);
+                          provider.resize(newSize);
                         } else {
-                          await EzConfig.setDouble(keys[i], sizeLimit);
-                          providers[i].resize(sizeLimit);
+                          await EzConfig.setDouble(key, sizeLimit);
+                          provider.resize(sizeLimit);
                         }
                       }
                     }
@@ -152,20 +163,23 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
             onPressed: atMax
                 ? doNothing
                 : () async {
-                    for (int i = 0; i < providers.length; i++) {
-                      final double currSize =
-                          providers[i].value.fontSize ?? EzConfig.get(keys[i]);
+                    for (final String key in keys) {
+                      final BaseTextStyleProvider provider =
+                          providerFromKey(key);
 
-                      if (currSize != upperLimits[keys[i]]) {
+                      final double currSize =
+                          provider.value.fontSize ?? EzConfig.get(key);
+
+                      if (currSize != upperLimits[key]) {
                         final double newSize = currSize * (1 + widget.delta);
-                        final double sizeLimit = upperLimits[keys[i]]!;
+                        final double sizeLimit = upperLimits[key]!;
 
                         if (newSize <= sizeLimit) {
-                          await EzConfig.setDouble(keys[i], newSize);
-                          providers[i].resize(newSize);
+                          await EzConfig.setDouble(key, newSize);
+                          provider.resize(newSize);
                         } else {
-                          await EzConfig.setDouble(keys[i], sizeLimit);
-                          providers[i].resize(sizeLimit);
+                          await EzConfig.setDouble(key, sizeLimit);
+                          provider.resize(sizeLimit);
                         }
                       }
                     }
