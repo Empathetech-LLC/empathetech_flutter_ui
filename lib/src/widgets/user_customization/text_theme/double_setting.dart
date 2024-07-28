@@ -101,48 +101,106 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget core = Tooltip(
+    return Tooltip(
       message: widget.tooltip,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: formFieldWidth,
-              maxHeight: formFieldHeight,
-            ),
-            child: PlatformTextFormField(
-              controller: controller,
-              keyboardType: TextInputType.number,
-              onFieldSubmitted: (String stringVal) async {
-                final double? doubleVal = double.tryParse(stringVal);
-                if (doubleVal == null) return;
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Minus
+              if (widget.plusMinus) ...<Widget>{
+                IconButton(
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    color:
+                        (currValue > widget.min) ? onBackground : outlineColor,
+                  ),
+                  onPressed: (currValue > widget.min)
+                      ? () async {
+                          currValue -= widget.delta;
+                          await EzConfig.setDouble(widget.configKey, currValue);
+                          controller.text = currValue.toString();
+                          widget.notifierCallback(currValue);
 
-                currValue = doubleVal;
-                await EzConfig.setDouble(widget.configKey, doubleVal);
-                widget.notifierCallback(doubleVal);
-                setState(() {});
+                          setState(() {});
+                        }
+                      : doNothing,
+                  tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+                  alignment: Alignment.bottomCenter,
+                ),
+                pMSpacer,
               },
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (String? value) {
-                if (value == null) return null;
 
-                final double? doubleVale = double.tryParse(value);
+              // Text field
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: formFieldWidth,
+                  maxHeight: formFieldHeight,
+                ),
+                child: TextFormField(
+                  controller: controller,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  onFieldSubmitted: (String stringVal) async {
+                    final double? doubleVal = double.tryParse(stringVal);
+                    if (doubleVal == null) return;
 
-                if (doubleVale == null ||
-                    doubleVale < widget.min ||
-                    doubleVale > widget.max) {
-                  return '${widget.min}-${widget.max}';
-                }
+                    currValue = doubleVal;
+                    await EzConfig.setDouble(widget.configKey, doubleVal);
+                    widget.notifierCallback(doubleVal);
+                    setState(() {});
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? value) {
+                    if (value == null) return null;
 
-                return null;
-              },
-              style: style,
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.bottom,
-            ),
+                    final double? doubleVale = double.tryParse(value);
+
+                    if (doubleVale == null ||
+                        doubleVale < widget.min ||
+                        doubleVale > widget.max) {
+                      return '${widget.min}-${widget.max}';
+                    }
+
+                    return null;
+                  },
+                  style: style,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.center,
+                ),
+              ),
+
+              if (widget.plusMinus) ...<Widget>{
+                pMSpacer,
+
+                // Plus icon
+                IconButton(
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    color:
+                        (currValue < widget.max) ? onBackground : outlineColor,
+                  ),
+                  onPressed: (currValue < widget.max)
+                      ? () async {
+                          currValue += widget.delta;
+                          await EzConfig.setDouble(widget.configKey, currValue);
+                          controller.text = currValue.toString();
+                          widget.notifierCallback(currValue);
+
+                          setState(() {});
+                        }
+                      : doNothing,
+                  tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+                  alignment: Alignment.bottomCenter,
+                ),
+              }
+            ],
           ),
+          EzSpacer(padding / 8),
+
+          // Label icon
           Icon(
             widget.icon,
             size: formFieldHeight / 4,
@@ -151,55 +209,5 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
         ],
       ),
     );
-
-    return widget.plusMinus
-        ? Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Minus icon
-              IconButton(
-                icon: Icon(
-                  PlatformIcons(context).remove,
-                  color: (currValue > widget.min) ? onBackground : outlineColor,
-                ),
-                onPressed: (currValue > widget.min)
-                    ? () async {
-                        currValue -= widget.delta;
-                        await EzConfig.setDouble(widget.configKey, currValue);
-                        controller.text = currValue.toString();
-                        widget.notifierCallback(currValue);
-
-                        setState(() {});
-                      }
-                    : doNothing,
-                tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-              ),
-              pMSpacer,
-
-              // Core
-              core,
-              pMSpacer,
-
-              // Plus icon
-              IconButton(
-                icon: Icon(
-                  PlatformIcons(context).add,
-                  color: (currValue < widget.max) ? onBackground : outlineColor,
-                ),
-                onPressed: (currValue < widget.max)
-                    ? () async {
-                        currValue += widget.delta;
-                        await EzConfig.setDouble(widget.configKey, currValue);
-                        controller.text = currValue.toString();
-                        widget.notifierCallback(currValue);
-
-                        setState(() {});
-                      }
-                    : doNothing,
-                tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-              ),
-            ],
-          )
-        : core;
   }
 }
