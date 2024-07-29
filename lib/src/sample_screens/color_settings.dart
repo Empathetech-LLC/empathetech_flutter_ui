@@ -66,6 +66,7 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   // Quick
   static const String quick = 'quick';
+
   static const int rMax = 255;
   ValueKey<int> quickKey = ValueKey<int>(Random().nextInt(rMax));
 
@@ -90,8 +91,13 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   late final Widget resetButton = EzResetButton(
     dialogTitle: resetDialogTitle,
-    onConfirm: () {
-      EzConfig.removeKeys(<String>{...fullList, userColorsKey});
+    onConfirm: () async {
+      await EzConfig.removeKeys(<String>{
+        ...fullList,
+        userColorsKey,
+        darkColorSchemeImageKey,
+        lightColorSchemeImageKey,
+      });
       currList = List<String>.from(defaultList);
       quickKey = ValueKey<int>(Random().nextInt(rMax));
       setState(() {});
