@@ -236,12 +236,17 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Remove the [keys] custom values
-  static void removeKeys(Set<String> keys) async {
-    final Set<String> updated =
-        keys.intersection(_instance!.preferences.getKeys());
+  static Future<bool> removeKeys(Set<String> keys) async {
+    bool success = true;
 
-    for (final String key in updated) {
-      _instance!.preferences.remove(key);
+    for (final String key in keys) {
+      final bool remove = await _instance!.preferences.remove(key);
+      if (!remove) {
+        success = false;
+        debugPrint('Failed to remove key [$key]');
+      }
     }
+
+    return success;
   }
 }
