@@ -66,6 +66,8 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   // Quick
   static const String quick = 'quick';
+  static const int rMax = 255;
+  ValueKey<int> quickKey = ValueKey<int>(Random().nextInt(rMax));
 
   // Advanced
   static const String advanced = 'advanced';
@@ -91,6 +93,7 @@ class _ColorSettingsState extends State<ColorSettings> {
     onConfirm: () {
       EzConfig.removeKeys(<String>{...fullList, userColorsKey});
       currList = List<String>.from(defaultList);
+      quickKey = ValueKey<int>(Random().nextInt(rMax));
       setState(() {});
     },
   );
@@ -147,6 +150,7 @@ class _ColorSettingsState extends State<ColorSettings> {
           // Core settings
           if (currentTab == quick)
             _QuickColorSettings(
+              key: quickKey,
               l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
@@ -177,6 +181,7 @@ class _QuickColorSettings extends StatefulWidget {
   final String themeProfile;
 
   const _QuickColorSettings({
+    super.key,
     required this.l10n,
     required this.isDark,
     required this.themeProfile,
@@ -338,7 +343,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
 
-    return fullList
+    final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
         .map<Widget>((String configKeyKey) {
       final Color liveColor = getLiveColor(context, configKeyKey);
@@ -385,6 +390,22 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         ),
       );
     }).toList();
+
+    untrackedColors.insert(
+      0,
+      EzLink(
+        l10n.gHowThisWorks,
+        style: theme.textTheme.labelLarge?.copyWith(
+          color: theme.colorScheme.onSurface,
+        ),
+        textAlign: TextAlign.center,
+        url: Uri.parse(materialColorRoles),
+        semanticsLabel: l10n.gHowThisWorksHint,
+        tooltip: materialColorRoles,
+      ),
+    );
+
+    return untrackedColors;
   }
 
   // Return the build //
@@ -434,19 +455,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               EzConfig.setStringList(userColorsKey, currList);
             }
           },
-        ),
-        separator,
-
-        // How this works link
-        EzLink(
-          l10n.gHowThisWorks,
-          style: theme.textTheme.labelLarge?.copyWith(
-            color: theme.colorScheme.onSurface,
-          ),
-          textAlign: TextAlign.center,
-          url: Uri.parse(materialColorRoles),
-          semanticsLabel: l10n.gHowThisWorksHint,
-          tooltip: materialColorRoles,
         ),
       ],
     );
