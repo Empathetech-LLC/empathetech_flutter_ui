@@ -59,21 +59,28 @@ class _ColorSettingsState extends State<ColorSettings> {
   late final EzSpacer spacer = EzSpacer(spacing);
   late final EzSpacer separator = EzSpacer(2 * spacing);
 
+  late final EFUILang l10n = EFUILang.of(context)!;
   late final ThemeData theme = Theme.of(context);
 
-  late final TextStyle? labelStyle = theme.textTheme.labelLarge?.copyWith(
-    color: theme.colorScheme.onSurface,
-  );
+  // Define the build data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  // Quick
+  static const String quick = 'quick';
 
-  // Define the shared build data //
+  // Advanced
+  static const String advanced = 'advanced';
 
+  late final List<String> defaultList =
+      isDark ? widget.darkStarterSet : widget.lightStarterSet;
+
+  late List<String> currList =
+      EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
+
+  late final List<String> fullList = isDark ? darkColors : lightColors;
+
+  // Shared
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
-
-  static const String quick = 'quick';
-  static const String advanced = 'advanced';
 
   String currentTab = quick;
 
@@ -88,9 +95,110 @@ class _ColorSettingsState extends State<ColorSettings> {
     },
   );
 
-  // Quick controls  //
+  // Set the page title //
 
-  /// Build from image button label
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(l10n.csPageTitle);
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return EzScreen(
+      decorationImageKey: isDark
+          ? widget.darkBackgroundImageKey
+          : widget.lightBackgroundImageKey,
+      child: EzScrollView(
+        children: <Widget>[
+          // Current theme reminder
+          Text(
+            l10n.gEditingTheme(themeProfile),
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onSurface,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          spacer,
+
+          // Mode switch
+          SegmentedButton<String>(
+            segments: <ButtonSegment<String>>[
+              ButtonSegment<String>(
+                value: quick,
+                label: Text(l10n.csQuick),
+              ),
+              ButtonSegment<String>(
+                value: advanced,
+                label: Text(l10n.csAdvanced),
+              ),
+            ],
+            selected: <String>{currentTab},
+            showSelectedIcon: false,
+            onSelectionChanged: (Set<String> selected) {
+              currentTab = selected.first;
+              setState(() {});
+            },
+          ),
+          separator,
+
+          // Core settings
+          if (currentTab == quick)
+            _QuickColorSettings(
+              l10n: l10n,
+              isDark: isDark,
+              themeProfile: themeProfile,
+            )
+          else
+            _AdvancedColorSettings(
+              key: UniqueKey(),
+              defaultList: defaultList,
+              currList: currList,
+              fullList: fullList,
+              theme: theme,
+              l10n: l10n,
+            ),
+          separator,
+
+          // Reset button
+          resetButton,
+          spacer,
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickColorSettings extends StatefulWidget {
+  final EFUILang l10n;
+  final bool isDark;
+  final String themeProfile;
+
+  const _QuickColorSettings({
+    required this.l10n,
+    required this.isDark,
+    required this.themeProfile,
+  });
+
+  @override
+  State<_QuickColorSettings> createState() => _QuickColorSettingsState();
+}
+
+class _QuickColorSettingsState extends State<_QuickColorSettings> {
+  // Make pointers //
+
+  late final EFUILang l10n = widget.l10n;
+  late bool isDark = widget.isDark;
+  late final String themeProfile = widget.themeProfile;
+
+  // Gather the theme data //
+
+  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+
+  // Define custom widgets  //
+
   late final String fromImageLabel = l10n.csSchemeBase;
   late final String fromImageHint = '${l10n.csOptional}: ${l10n.csFromImage}';
 
@@ -127,17 +235,61 @@ class _ColorSettingsState extends State<ColorSettings> {
           ),
         );
 
-  // Advanced controls //
+  // Return the build //
 
-  late final List<String> defaultList =
-      isDark ? widget.darkStarterSet : widget.lightStarterSet;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const EzMonoChromeColorsSetting(),
+        spacer,
+        fromImageButton
+      ],
+    );
+  }
+}
+
+class _AdvancedColorSettings extends StatefulWidget {
+  final List<String> defaultList;
+  final List<String> currList;
+  final List<String> fullList;
+  final ThemeData theme;
+  final EFUILang l10n;
+
+  const _AdvancedColorSettings({
+    super.key,
+    required this.defaultList,
+    required this.currList,
+    required this.fullList,
+    required this.theme,
+    required this.l10n,
+  });
+
+  @override
+  State<_AdvancedColorSettings> createState() => _AdvancedColorSettingsState();
+}
+
+class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
+  // Make pointers //
+
+  late final List<String> defaultList = widget.defaultList;
+  late final List<String> currList = widget.currList;
+  late final List<String> fullList = widget.fullList;
+  late final ThemeData theme = widget.theme;
+  late final EFUILang l10n = widget.l10n;
+
+  // Gather the theme data //
+
+  final double padding = EzConfig.get(paddingKey);
+  final double spacing = EzConfig.get(spacingKey);
+
+  late final EzSpacer spacer = EzSpacer(spacing);
+  late final EzSpacer separator = EzSpacer(2 * spacing);
+
+  // Define custom Widgets //
 
   late final Set<String> defaultSet = defaultList.toSet();
-
-  late final List<String> fullList = isDark ? darkColors : lightColors;
-
-  late List<String> currList =
-      EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> dynamicColorSettings() {
@@ -235,124 +387,68 @@ class _ColorSettingsState extends State<ColorSettings> {
     }).toList();
   }
 
-  // Set the page title //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setPageTitle(l10n.csPageTitle);
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
-      child: EzScrollView(
-        children: <Widget>[
-          // Current theme reminder
-          Text(
-            l10n.gEditingTheme(themeProfile),
-            style: labelStyle,
-            textAlign: TextAlign.center,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // Dynamic color settings
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: widthOf(context) * (2 / 3),
           ),
-          spacer,
-
-          SegmentedButton<String>(
-            segments: <ButtonSegment<String>>[
-              ButtonSegment<String>(
-                value: quick,
-                label: Text(l10n.csQuick),
-              ),
-              ButtonSegment<String>(
-                value: advanced,
-                label: Text(l10n.csAdvanced),
-              ),
-            ],
-            selected: <String>{currentTab},
-            showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) {
-              currentTab = selected.first;
-              setState(() {});
-            },
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            runAlignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: dynamicColorSettings(),
           ),
-          separator,
+        ),
+        spacer,
 
-          if (currentTab == quick) ...<Widget>[
-            // Mono chrome quick setting
-            const EzMonoChromeColorsSetting(),
-            spacer,
-
-            // From image button
-            fromImageButton,
-          ],
-
-          if (currentTab == advanced) ...<Widget>[
-            // Dynamic configKeys
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: widthOf(context) * (2 / 3),
+        // Add a color button
+        TextButton.icon(
+          icon: Icon(PlatformIcons(context).addCircledOutline),
+          label: Text(l10n.csAddColor),
+          onPressed: () async {
+            // Show available color configKeys
+            await showModalBottomSheet(
+              context: context,
+              showDragHandle: true,
+              builder: (BuildContext context) => StatefulBuilder(
+                builder: (
+                  BuildContext context,
+                  StateSetter setModalState,
+                ) {
+                  return EzScrollView(
+                    children: getUntrackedColors(setModalState),
+                  );
+                },
               ),
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: dynamicColorSettings(),
-              ),
-            ),
-            spacer, // dynamicColorSettings has a trailing spacer too
+            );
 
-            // Add a color
-            TextButton.icon(
-              icon: Icon(PlatformIcons(context).addCircledOutline),
-              label: Text(l10n.csAddColor),
-              onPressed: () async {
-                // Show available color configKeys
-                await showModalBottomSheet(
-                  context: context,
-                  showDragHandle: true,
-                  builder: (BuildContext context) => StatefulBuilder(
-                    builder: (
-                      BuildContext context,
-                      StateSetter setModalState,
-                    ) {
-                      return EzScrollView(
-                        children: getUntrackedColors(setModalState),
-                      );
-                    },
-                  ),
-                );
+            // Save the user's changes
+            if (currList != defaultList) {
+              EzConfig.setStringList(userColorsKey, currList);
+            }
+          },
+        ),
+        separator,
 
-                // Save the user's changes
-                if (currList != defaultList) {
-                  EzConfig.setStringList(userColorsKey, currList);
-                }
-              },
-            ),
-          ],
-          separator,
-
-          // Reset button
-          resetButton,
-
-          if (currentTab == advanced) ...<Widget>[
-            separator,
-            EzLink(
-              l10n.gHowThisWorks,
-              style: labelStyle,
-              textAlign: TextAlign.center,
-              url: Uri.parse(materialColorRoles),
-              semanticsLabel: l10n.gHowThisWorksHint,
-              tooltip: materialColorRoles,
-            ),
-          ],
-
-          spacer,
-        ],
-      ),
+        // How this works link
+        EzLink(
+          l10n.gHowThisWorks,
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+          textAlign: TextAlign.center,
+          url: Uri.parse(materialColorRoles),
+          semanticsLabel: l10n.gHowThisWorksHint,
+          tooltip: materialColorRoles,
+        ),
+      ],
     );
   }
 }
