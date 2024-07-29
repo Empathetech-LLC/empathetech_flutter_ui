@@ -51,8 +51,10 @@ class EzResetButton extends StatelessWidget {
 
     // Define the button functions //
 
-    final void Function() confirm =
-        onConfirm ?? () => EzConfig.removeKeys(allKeys.keys.toSet());
+    final void Function() confirm = onConfirm ??
+        () async {
+          await EzConfig.removeKeys(allKeys.keys.toSet());
+        };
 
     final void Function() deny = onDeny ?? doNothing;
 

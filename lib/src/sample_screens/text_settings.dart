@@ -248,8 +248,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         // Reset all
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
-          onConfirm: () {
-            EzConfig.removeKeys(textStyleKeys.keys.toSet());
+          onConfirm: () async {
+            await EzConfig.removeKeys(textStyleKeys.keys.toSet());
             displayProvider.reset();
             headlineProvider.reset();
             titleProvider.reset();
@@ -942,8 +942,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         // Reset all
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
-          onConfirm: () {
-            EzConfig.removeKeys(textStyleKeys.keys.toSet());
+          onConfirm: () async {
+            await EzConfig.removeKeys(textStyleKeys.keys.toSet());
             displayProvider.reset();
             headlineProvider.reset();
             titleProvider.reset();

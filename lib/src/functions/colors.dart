@@ -130,148 +130,168 @@ ColorScheme ezColorScheme(Brightness brightness) {
 }
 
 /// Store the passed [ColorScheme] in [EzConfig.prefs]
-void storeColorScheme({
+Future<void> storeColorScheme({
   required ColorScheme colorScheme,
   required Brightness brightness,
-}) {
+}) async {
   if (brightness == Brightness.light) {
-    EzConfig.removeKeys(lightColors.toSet());
+    await EzConfig.removeKeys(lightColors.toSet());
 
-    EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
-    EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
+    await EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
+    await EzConfig.setInt(
         lightPrimaryContainerKey, colorScheme.primaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
-    EzConfig.setInt(lightPrimaryFixedKey, colorScheme.primaryFixed.value);
-    EzConfig.setInt(lightPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
-    EzConfig.setInt(lightOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightPrimaryFixedKey, colorScheme.primaryFixed.value);
+    await EzConfig.setInt(
+        lightPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
+    await EzConfig.setInt(
+        lightOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
+    await EzConfig.setInt(
         lightOnPrimaryFixedVariantKey, colorScheme.onPrimaryFixedVariant.value);
-    EzConfig.setInt(lightSecondaryKey, colorScheme.secondary.value);
-    EzConfig.setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightSecondaryKey, colorScheme.secondary.value);
+    await EzConfig.setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
+    await EzConfig.setInt(
         lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
-    EzConfig.setInt(lightSecondaryFixedKey, colorScheme.secondaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightSecondaryFixedKey, colorScheme.secondaryFixed.value);
+    await EzConfig.setInt(
         lightSecondaryFixedDimKey, colorScheme.secondaryFixedDim.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSecondaryFixedKey, colorScheme.onSecondaryFixed.value);
-    EzConfig.setInt(lightOnSecondaryFixedVariantKey,
+    await EzConfig.setInt(lightOnSecondaryFixedVariantKey,
         colorScheme.onSecondaryFixedVariant.value);
-    EzConfig.setInt(lightTertiaryKey, colorScheme.tertiary.value);
-    EzConfig.setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightTertiaryKey, colorScheme.tertiary.value);
+    await EzConfig.setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
+    await EzConfig.setInt(
         lightTertiaryContainerKey, colorScheme.tertiaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
-    EzConfig.setInt(lightTertiaryFixedKey, colorScheme.tertiaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightTertiaryFixedKey, colorScheme.tertiaryFixed.value);
+    await EzConfig.setInt(
         lightTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.value);
-    EzConfig.setInt(lightOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
-    EzConfig.setInt(lightOnTertiaryFixedVariantKey,
+    await EzConfig.setInt(
+        lightOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
+    await EzConfig.setInt(lightOnTertiaryFixedVariantKey,
         colorScheme.onTertiaryFixedVariant.value);
-    EzConfig.setInt(lightErrorKey, colorScheme.error.value);
-    EzConfig.setInt(lightOnErrorKey, colorScheme.onError.value);
-    EzConfig.setInt(lightErrorContainerKey, colorScheme.errorContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightErrorKey, colorScheme.error.value);
+    await EzConfig.setInt(lightOnErrorKey, colorScheme.onError.value);
+    await EzConfig.setInt(
+        lightErrorContainerKey, colorScheme.errorContainer.value);
+    await EzConfig.setInt(
         lightOnErrorContainerKey, colorScheme.onErrorContainer.value);
-    EzConfig.setInt(lightOutlineKey, colorScheme.outline.value);
-    EzConfig.setInt(lightOutlineVariantKey, colorScheme.outlineVariant.value);
-    EzConfig.setInt(lightSurfaceKey, colorScheme.surface.value);
-    EzConfig.setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
-    EzConfig.setInt(lightSurfaceDimKey, colorScheme.surfaceDim.value);
-    EzConfig.setInt(lightSurfaceBrightKey, colorScheme.surfaceBright.value);
-    EzConfig.setInt(lightSurfaceContainerLowestKey,
+    await EzConfig.setInt(lightOutlineKey, colorScheme.outline.value);
+    await EzConfig.setInt(
+        lightOutlineVariantKey, colorScheme.outlineVariant.value);
+    await EzConfig.setInt(lightSurfaceKey, colorScheme.surface.value);
+    await EzConfig.setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
+    await EzConfig.setInt(lightSurfaceDimKey, colorScheme.surfaceDim.value);
+    await EzConfig.setInt(
+        lightSurfaceBrightKey, colorScheme.surfaceBright.value);
+    await EzConfig.setInt(lightSurfaceContainerLowestKey,
         colorScheme.surfaceContainerLowest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerLowKey, colorScheme.surfaceContainerLow.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerKey, colorScheme.surfaceContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerHighKey, colorScheme.surfaceContainerHigh.value);
-    EzConfig.setInt(lightSurfaceContainerHighestKey,
+    await EzConfig.setInt(lightSurfaceContainerHighestKey,
         colorScheme.surfaceContainerHighest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
-    EzConfig.setInt(lightInverseSurfaceKey, colorScheme.inverseSurface.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightInverseSurfaceKey, colorScheme.inverseSurface.value);
+    await EzConfig.setInt(
         lightOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
-    EzConfig.setInt(lightInversePrimaryKey, colorScheme.inversePrimary.value);
-    EzConfig.setInt(lightShadowKey, colorScheme.shadow.value);
-    EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
-    EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
+    await EzConfig.setInt(
+        lightInversePrimaryKey, colorScheme.inversePrimary.value);
+    await EzConfig.setInt(lightShadowKey, colorScheme.shadow.value);
+    await EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
+    await EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
   } else {
-    EzConfig.removeKeys(darkColors.toSet());
+    await EzConfig.removeKeys(darkColors.toSet());
 
-    EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
-    EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
+    await EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
+    await EzConfig.setInt(
         darkPrimaryContainerKey, colorScheme.primaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
-    EzConfig.setInt(darkPrimaryFixedKey, colorScheme.primaryFixed.value);
-    EzConfig.setInt(darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
-    EzConfig.setInt(darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkPrimaryFixedKey, colorScheme.primaryFixed.value);
+    await EzConfig.setInt(
+        darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
+    await EzConfig.setInt(
+        darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
+    await EzConfig.setInt(
         darkOnPrimaryFixedVariantKey, colorScheme.onPrimaryFixedVariant.value);
-    EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
-    EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
+    await EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
+    await EzConfig.setInt(
         darkSecondaryContainerKey, colorScheme.secondaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
-    EzConfig.setInt(darkSecondaryFixedKey, colorScheme.secondaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkSecondaryFixedKey, colorScheme.secondaryFixed.value);
+    await EzConfig.setInt(
         darkSecondaryFixedDimKey, colorScheme.secondaryFixedDim.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSecondaryFixedKey, colorScheme.onSecondaryFixed.value);
-    EzConfig.setInt(darkOnSecondaryFixedVariantKey,
+    await EzConfig.setInt(darkOnSecondaryFixedVariantKey,
         colorScheme.onSecondaryFixedVariant.value);
-    EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
-    EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
+    await EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
+    await EzConfig.setInt(
         darkTertiaryContainerKey, colorScheme.tertiaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
-    EzConfig.setInt(darkTertiaryFixedKey, colorScheme.tertiaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkTertiaryFixedKey, colorScheme.tertiaryFixed.value);
+    await EzConfig.setInt(
         darkTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.value);
-    EzConfig.setInt(darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
-    EzConfig.setInt(darkOnTertiaryFixedVariantKey,
+    await EzConfig.setInt(
+        darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
+    await EzConfig.setInt(darkOnTertiaryFixedVariantKey,
         colorScheme.onTertiaryFixedVariant.value);
-    EzConfig.setInt(darkErrorKey, colorScheme.error.value);
-    EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
-    EzConfig.setInt(darkErrorContainerKey, colorScheme.errorContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkErrorKey, colorScheme.error.value);
+    await EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
+    await EzConfig.setInt(
+        darkErrorContainerKey, colorScheme.errorContainer.value);
+    await EzConfig.setInt(
         darkOnErrorContainerKey, colorScheme.onErrorContainer.value);
-    EzConfig.setInt(darkOutlineKey, colorScheme.outline.value);
-    EzConfig.setInt(darkOutlineVariantKey, colorScheme.outlineVariant.value);
-    EzConfig.setInt(darkSurfaceKey, colorScheme.surface.value);
-    EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
-    EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.value);
-    EzConfig.setInt(darkSurfaceBrightKey, colorScheme.surfaceBright.value);
-    EzConfig.setInt(darkSurfaceContainerLowestKey,
+    await EzConfig.setInt(darkOutlineKey, colorScheme.outline.value);
+    await EzConfig.setInt(
+        darkOutlineVariantKey, colorScheme.outlineVariant.value);
+    await EzConfig.setInt(darkSurfaceKey, colorScheme.surface.value);
+    await EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
+    await EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.value);
+    await EzConfig.setInt(
+        darkSurfaceBrightKey, colorScheme.surfaceBright.value);
+    await EzConfig.setInt(darkSurfaceContainerLowestKey,
         colorScheme.surfaceContainerLowest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerLowKey, colorScheme.surfaceContainerLow.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerKey, colorScheme.surfaceContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerHighKey, colorScheme.surfaceContainerHigh.value);
-    EzConfig.setInt(darkSurfaceContainerHighestKey,
+    await EzConfig.setInt(darkSurfaceContainerHighestKey,
         colorScheme.surfaceContainerHighest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
-    EzConfig.setInt(darkInverseSurfaceKey, colorScheme.inverseSurface.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkInverseSurfaceKey, colorScheme.inverseSurface.value);
+    await EzConfig.setInt(
         darkOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
-    EzConfig.setInt(darkInversePrimaryKey, colorScheme.inversePrimary.value);
-    EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
-    EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
-    EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
+    await EzConfig.setInt(
+        darkInversePrimaryKey, colorScheme.inversePrimary.value);
+    await EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
+    await EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
+    await EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
   }
 }
 
@@ -293,143 +313,163 @@ Future<String> storeImageColorScheme({
   }
 
   if (brightness == Brightness.light) {
-    EzConfig.removeKeys(lightColors.toSet());
+    await EzConfig.removeKeys(lightColors.toSet());
 
-    EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
-    EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightPrimaryKey, colorScheme.primary.value);
+    await EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.value);
+    await EzConfig.setInt(
         lightPrimaryContainerKey, colorScheme.primaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
-    EzConfig.setInt(lightPrimaryFixedKey, colorScheme.primaryFixed.value);
-    EzConfig.setInt(lightPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
-    EzConfig.setInt(lightOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightPrimaryFixedKey, colorScheme.primaryFixed.value);
+    await EzConfig.setInt(
+        lightPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
+    await EzConfig.setInt(
+        lightOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
+    await EzConfig.setInt(
         lightOnPrimaryFixedVariantKey, colorScheme.onPrimaryFixedVariant.value);
-    EzConfig.setInt(lightSecondaryKey, colorScheme.secondary.value);
-    EzConfig.setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightSecondaryKey, colorScheme.secondary.value);
+    await EzConfig.setInt(lightOnSecondaryKey, colorScheme.onSecondary.value);
+    await EzConfig.setInt(
         lightSecondaryContainerKey, colorScheme.secondaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
-    EzConfig.setInt(lightSecondaryFixedKey, colorScheme.secondaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightSecondaryFixedKey, colorScheme.secondaryFixed.value);
+    await EzConfig.setInt(
         lightSecondaryFixedDimKey, colorScheme.secondaryFixedDim.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSecondaryFixedKey, colorScheme.onSecondaryFixed.value);
-    EzConfig.setInt(lightOnSecondaryFixedVariantKey,
+    await EzConfig.setInt(lightOnSecondaryFixedVariantKey,
         colorScheme.onSecondaryFixedVariant.value);
-    EzConfig.setInt(lightTertiaryKey, colorScheme.tertiary.value);
-    EzConfig.setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightTertiaryKey, colorScheme.tertiary.value);
+    await EzConfig.setInt(lightOnTertiaryKey, colorScheme.onTertiary.value);
+    await EzConfig.setInt(
         lightTertiaryContainerKey, colorScheme.tertiaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
-    EzConfig.setInt(lightTertiaryFixedKey, colorScheme.tertiaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightTertiaryFixedKey, colorScheme.tertiaryFixed.value);
+    await EzConfig.setInt(
         lightTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.value);
-    EzConfig.setInt(lightOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
-    EzConfig.setInt(lightOnTertiaryFixedVariantKey,
+    await EzConfig.setInt(
+        lightOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
+    await EzConfig.setInt(lightOnTertiaryFixedVariantKey,
         colorScheme.onTertiaryFixedVariant.value);
-    EzConfig.setInt(lightErrorKey, colorScheme.error.value);
-    EzConfig.setInt(lightOnErrorKey, colorScheme.onError.value);
-    EzConfig.setInt(lightErrorContainerKey, colorScheme.errorContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(lightErrorKey, colorScheme.error.value);
+    await EzConfig.setInt(lightOnErrorKey, colorScheme.onError.value);
+    await EzConfig.setInt(
+        lightErrorContainerKey, colorScheme.errorContainer.value);
+    await EzConfig.setInt(
         lightOnErrorContainerKey, colorScheme.onErrorContainer.value);
-    EzConfig.setInt(lightOutlineKey, colorScheme.outline.value);
-    EzConfig.setInt(lightOutlineVariantKey, colorScheme.outlineVariant.value);
-    EzConfig.setInt(lightSurfaceKey, colorScheme.surface.value);
-    EzConfig.setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
-    EzConfig.setInt(lightSurfaceDimKey, colorScheme.surfaceDim.value);
-    EzConfig.setInt(lightSurfaceBrightKey, colorScheme.surfaceBright.value);
-    EzConfig.setInt(lightSurfaceContainerLowestKey,
+    await EzConfig.setInt(lightOutlineKey, colorScheme.outline.value);
+    await EzConfig.setInt(
+        lightOutlineVariantKey, colorScheme.outlineVariant.value);
+    await EzConfig.setInt(lightSurfaceKey, colorScheme.surface.value);
+    await EzConfig.setInt(lightOnSurfaceKey, colorScheme.onSurface.value);
+    await EzConfig.setInt(lightSurfaceDimKey, colorScheme.surfaceDim.value);
+    await EzConfig.setInt(
+        lightSurfaceBrightKey, colorScheme.surfaceBright.value);
+    await EzConfig.setInt(lightSurfaceContainerLowestKey,
         colorScheme.surfaceContainerLowest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerLowKey, colorScheme.surfaceContainerLow.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerKey, colorScheme.surfaceContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightSurfaceContainerHighKey, colorScheme.surfaceContainerHigh.value);
-    EzConfig.setInt(lightSurfaceContainerHighestKey,
+    await EzConfig.setInt(lightSurfaceContainerHighestKey,
         colorScheme.surfaceContainerHighest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         lightOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
-    EzConfig.setInt(lightInverseSurfaceKey, colorScheme.inverseSurface.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        lightInverseSurfaceKey, colorScheme.inverseSurface.value);
+    await EzConfig.setInt(
         lightOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
-    EzConfig.setInt(lightInversePrimaryKey, colorScheme.inversePrimary.value);
-    EzConfig.setInt(lightShadowKey, colorScheme.shadow.value);
-    EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
-    EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
+    await EzConfig.setInt(
+        lightInversePrimaryKey, colorScheme.inversePrimary.value);
+    await EzConfig.setInt(lightShadowKey, colorScheme.shadow.value);
+    await EzConfig.setInt(lightScrimKey, colorScheme.scrim.value);
+    await EzConfig.setInt(lightSurfaceTintKey, colorScheme.surfaceTint.value);
   } else {
-    EzConfig.removeKeys(darkColors.toSet());
+    await EzConfig.removeKeys(darkColors.toSet());
 
-    EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
-    EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkPrimaryKey, colorScheme.primary.value);
+    await EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.value);
+    await EzConfig.setInt(
         darkPrimaryContainerKey, colorScheme.primaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.value);
-    EzConfig.setInt(darkPrimaryFixedKey, colorScheme.primaryFixed.value);
-    EzConfig.setInt(darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
-    EzConfig.setInt(darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkPrimaryFixedKey, colorScheme.primaryFixed.value);
+    await EzConfig.setInt(
+        darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.value);
+    await EzConfig.setInt(
+        darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.value);
+    await EzConfig.setInt(
         darkOnPrimaryFixedVariantKey, colorScheme.onPrimaryFixedVariant.value);
-    EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
-    EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.value);
+    await EzConfig.setInt(darkOnSecondaryKey, colorScheme.onSecondary.value);
+    await EzConfig.setInt(
         darkSecondaryContainerKey, colorScheme.secondaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSecondaryContainerKey, colorScheme.onSecondaryContainer.value);
-    EzConfig.setInt(darkSecondaryFixedKey, colorScheme.secondaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkSecondaryFixedKey, colorScheme.secondaryFixed.value);
+    await EzConfig.setInt(
         darkSecondaryFixedDimKey, colorScheme.secondaryFixedDim.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSecondaryFixedKey, colorScheme.onSecondaryFixed.value);
-    EzConfig.setInt(darkOnSecondaryFixedVariantKey,
+    await EzConfig.setInt(darkOnSecondaryFixedVariantKey,
         colorScheme.onSecondaryFixedVariant.value);
-    EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
-    EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.value);
+    await EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.value);
+    await EzConfig.setInt(
         darkTertiaryContainerKey, colorScheme.tertiaryContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.value);
-    EzConfig.setInt(darkTertiaryFixedKey, colorScheme.tertiaryFixed.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkTertiaryFixedKey, colorScheme.tertiaryFixed.value);
+    await EzConfig.setInt(
         darkTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.value);
-    EzConfig.setInt(darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
-    EzConfig.setInt(darkOnTertiaryFixedVariantKey,
+    await EzConfig.setInt(
+        darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.value);
+    await EzConfig.setInt(darkOnTertiaryFixedVariantKey,
         colorScheme.onTertiaryFixedVariant.value);
-    EzConfig.setInt(darkErrorKey, colorScheme.error.value);
-    EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
-    EzConfig.setInt(darkErrorContainerKey, colorScheme.errorContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(darkErrorKey, colorScheme.error.value);
+    await EzConfig.setInt(darkOnErrorKey, colorScheme.onError.value);
+    await EzConfig.setInt(
+        darkErrorContainerKey, colorScheme.errorContainer.value);
+    await EzConfig.setInt(
         darkOnErrorContainerKey, colorScheme.onErrorContainer.value);
-    EzConfig.setInt(darkOutlineKey, colorScheme.outline.value);
-    EzConfig.setInt(darkOutlineVariantKey, colorScheme.outlineVariant.value);
-    EzConfig.setInt(darkSurfaceKey, colorScheme.surface.value);
-    EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
-    EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.value);
-    EzConfig.setInt(darkSurfaceBrightKey, colorScheme.surfaceBright.value);
-    EzConfig.setInt(darkSurfaceContainerLowestKey,
+    await EzConfig.setInt(darkOutlineKey, colorScheme.outline.value);
+    await EzConfig.setInt(
+        darkOutlineVariantKey, colorScheme.outlineVariant.value);
+    await EzConfig.setInt(darkSurfaceKey, colorScheme.surface.value);
+    await EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.value);
+    await EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.value);
+    await EzConfig.setInt(
+        darkSurfaceBrightKey, colorScheme.surfaceBright.value);
+    await EzConfig.setInt(darkSurfaceContainerLowestKey,
         colorScheme.surfaceContainerLowest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerLowKey, colorScheme.surfaceContainerLow.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerKey, colorScheme.surfaceContainer.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkSurfaceContainerHighKey, colorScheme.surfaceContainerHigh.value);
-    EzConfig.setInt(darkSurfaceContainerHighestKey,
+    await EzConfig.setInt(darkSurfaceContainerHighestKey,
         colorScheme.surfaceContainerHighest.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
         darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.value);
-    EzConfig.setInt(darkInverseSurfaceKey, colorScheme.inverseSurface.value);
-    EzConfig.setInt(
+    await EzConfig.setInt(
+        darkInverseSurfaceKey, colorScheme.inverseSurface.value);
+    await EzConfig.setInt(
         darkOnInverseSurfaceKey, colorScheme.onInverseSurface.value);
-    EzConfig.setInt(darkInversePrimaryKey, colorScheme.inversePrimary.value);
-    EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
-    EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
-    EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
+    await EzConfig.setInt(
+        darkInversePrimaryKey, colorScheme.inversePrimary.value);
+    await EzConfig.setInt(darkShadowKey, colorScheme.shadow.value);
+    await EzConfig.setInt(darkScrimKey, colorScheme.scrim.value);
+    await EzConfig.setInt(darkSurfaceTintKey, colorScheme.surfaceTint.value);
   }
 
   return success;

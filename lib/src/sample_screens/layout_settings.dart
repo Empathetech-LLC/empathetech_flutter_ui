@@ -93,7 +93,9 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           // Local reset all
           EzResetButton(
             dialogTitle: l10n.lsResetAll,
-            onConfirm: () => EzConfig.removeKeys(layoutKeys.keys.toSet()),
+            onConfirm: () async {
+              await EzConfig.removeKeys(layoutKeys.keys.toSet());
+            },
           ),
           separator,
 

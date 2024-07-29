@@ -83,14 +83,14 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
 
     return ElevatedButton.icon(
       onPressed: isDark
-          ? () {
-              storeColorScheme(
+          ? () async {
+              await storeColorScheme(
                 colorScheme: dark,
                 brightness: Brightness.dark,
               );
             }
-          : () {
-              storeColorScheme(
+          : () async {
+              await storeColorScheme(
                 colorScheme: light,
                 brightness: Brightness.light,
               );

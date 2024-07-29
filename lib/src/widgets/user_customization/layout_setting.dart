@@ -278,12 +278,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               currValue = value;
             });
           },
-          onChangeEnd: (double value) {
+          onChangeEnd: (double value) async {
             // When finished, write the result
             if (value == _defaultValue) {
-              EzConfig.remove(widget.configKey);
+              await EzConfig.remove(widget.configKey);
             } else {
-              EzConfig.setDouble(widget.configKey, value);
+              await EzConfig.setDouble(widget.configKey, value);
             }
           },
 
@@ -296,8 +296,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
       // Reset button
       ElevatedButton.icon(
-        onPressed: () {
-          EzConfig.remove(widget.configKey);
+        onPressed: () async {
+          await EzConfig.remove(widget.configKey);
           setModalState(() {
             currValue = _defaultValue;
           });

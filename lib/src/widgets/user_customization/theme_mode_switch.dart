@@ -80,22 +80,22 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           DropdownMenu<ThemeMode>(
             initialSelection: platformTheme,
             dropdownMenuEntries: entries,
-            onSelected: (ThemeMode? newThemeMode) {
+            onSelected: (ThemeMode? newThemeMode) async {
               switch (newThemeMode) {
                 case ThemeMode.system:
-                  EzConfig.remove(isDarkThemeKey);
+                  await EzConfig.remove(isDarkThemeKey);
                   platformTheme = ThemeMode.system;
                   setState(() {});
                   break;
 
                 case ThemeMode.light:
-                  EzConfig.setBool(isDarkThemeKey, false);
+                  await EzConfig.setBool(isDarkThemeKey, false);
                   platformTheme = ThemeMode.light;
                   setState(() {});
                   break;
 
                 case ThemeMode.dark:
-                  EzConfig.setBool(isDarkThemeKey, true);
+                  await EzConfig.setBool(isDarkThemeKey, true);
                   platformTheme = ThemeMode.dark;
                   setState(() {});
                   break;

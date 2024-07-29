@@ -206,9 +206,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
       // Reset
       ElevatedButton.icon(
-        onPressed: () {
+        onPressed: () async {
           cleanup();
-          EzConfig.remove(widget.configKey);
+          await EzConfig.remove(widget.configKey);
 
           Navigator.of(dialogContext).pop(
             EzConfig.getDefault(widget.configKey) ?? noImageValue,
@@ -224,9 +224,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       options.addAll(<Widget>[
         spacer,
         ElevatedButton.icon(
-          onPressed: () {
+          onPressed: () async {
             cleanup();
-            EzConfig.setString(widget.configKey, noImageValue);
+            await EzConfig.setString(widget.configKey, noImageValue);
             Navigator.of(dialogContext).pop(noImageValue);
           },
           label: Text(l10n.isClearIt),
@@ -318,8 +318,8 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
 
         widget.updateTheme == Brightness.light
-            ? EzConfig.setString(lightColorSchemeImageKey, newPath)
-            : EzConfig.setString(darkColorSchemeImageKey, newPath);
+            ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
+            : await EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
     }
 

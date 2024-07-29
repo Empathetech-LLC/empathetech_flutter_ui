@@ -46,7 +46,7 @@ Future<String?> saveImage({
 
     // Save the new image
     await File(picked.path).copy(image.path);
-    EzConfig.setString(prefsPath, image.path);
+    await EzConfig.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
     final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());

@@ -63,7 +63,9 @@ class _ColorSettingState extends State<EzColorSetting> {
         currColor = chosenColor;
         setState(() {});
       },
-      onConfirm: () => EzConfig.setInt(widget.configKey, currColor.value),
+      onConfirm: () async {
+        await EzConfig.setInt(widget.configKey, currColor.value);
+      },
       onDeny: () {
         currColor = backup;
         setState(() {});
@@ -100,10 +102,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       return showPlatformDialog(
         context: context,
         builder: (BuildContext dialogContext) {
-          void onConfirm() {
+          void onConfirm() async {
             // Update the user's configKey
             currColor = Color(recommended);
-            EzConfig.setInt(widget.configKey, recommended);
+            await EzConfig.setInt(widget.configKey, recommended);
             setState(() {});
             Navigator.of(dialogContext).pop(recommended);
           }
@@ -164,22 +166,21 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// Opens an [EzAlertDialog] for resetting the [widget.configKey] to default
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
-  Future<dynamic> reset(BuildContext context) {
+  Future<dynamic> reset(BuildContext context) async {
     final int? resetValue = EzConfig.getDefault(widget.configKey);
 
     if (resetValue == null) {
-      EzConfig.remove(widget.configKey);
-      return Future<bool>.value(true);
+      return EzConfig.remove(widget.configKey);
     } else {
       final Color resetColor = Color(resetValue);
 
       return showPlatformDialog(
         context: context,
         builder: (BuildContext dialogContext) {
-          void onConfirm() {
+          void onConfirm() async {
             // Remove the user's configKey and reset the current state
             currColor = resetColor;
-            EzConfig.remove(widget.configKey);
+            await EzConfig.remove(widget.configKey);
             setState(() {});
             Navigator.of(dialogContext).pop(resetColor);
           }

@@ -332,9 +332,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           personalSpace(EzColorSetting(
             key: ValueKey<String>(key),
             configKey: key,
-            onRemove: () {
+            onRemove: () async {
               currList.remove(key);
-              EzConfig.setStringList(userColorsKey, currList);
+              await EzConfig.setStringList(userColorsKey, currList);
               setState(() {});
             },
           )),
@@ -458,7 +458,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
             // Save the user's changes
             if (currList != defaultList) {
-              EzConfig.setStringList(userColorsKey, currList);
+              await EzConfig.setStringList(userColorsKey, currList);
             }
           },
         ),

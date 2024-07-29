@@ -81,17 +81,17 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     DropdownMenu<Hand>(
       initialSelection: currSide,
       dropdownMenuEntries: entries,
-      onSelected: (Hand? newDominantHand) {
+      onSelected: (Hand? newDominantHand) async {
         switch (newDominantHand) {
           case Hand.right:
             currSide = Hand.right;
-            EzConfig.remove(isLeftyKey);
+            await EzConfig.remove(isLeftyKey);
             setState(() {});
             break;
 
           case Hand.left:
             currSide = Hand.left;
-            EzConfig.setBool(isLeftyKey, true);
+            await EzConfig.setBool(isLeftyKey, true);
             setState(() {});
             break;
 
