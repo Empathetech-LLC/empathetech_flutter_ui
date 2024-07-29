@@ -391,13 +391,13 @@ class _ImageSettingState extends State<EzImageSetting> {
                       : provideImage(currPath!),
               backgroundColor: Colors.transparent,
               foregroundColor: theme.colorScheme.onSurface,
-              child: (currPath == null || currPath == noImageValue)
-                  ? Icon(
-                      PlatformIcons(context).edit,
-                      size: theme.textTheme.titleLarge?.fontSize,
-                    )
-                  : inProgress
-                      ? const CircularProgressIndicator()
+              child: inProgress
+                  ? const CircularProgressIndicator()
+                  : (currPath == null || currPath == noImageValue)
+                      ? Icon(
+                          PlatformIcons(context).edit,
+                          size: theme.textTheme.titleLarge?.fontSize,
+                        )
                       : null,
             ),
           ),
