@@ -69,9 +69,11 @@ class EzAlertDialog extends PlatformAlertDialog {
           ),
 
           // Actions
-          actions: needsClose
-              ? <Widget>[...materialActions!, closeAction]
-              : materialActions,
+          actions: cupertinoActions == null
+              ? <Widget>[closeAction]
+              : needsClose
+                  ? <Widget>[...materialActions!, closeAction]
+                  : materialActions,
           actionsAlignment:
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
