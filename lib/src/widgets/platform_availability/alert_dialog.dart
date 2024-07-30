@@ -22,8 +22,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   /// Pairs best with [ezCupertinoActions]
   final List<CupertinoDialogAction>? cupertinoActions;
 
-  /// Cupertino alerts aren't dismissible by tapping outside the dialog
-  /// Set [needsClose] to true if a default "Close" [CupertinoDialogAction] is needed
+  /// Whether a "Close" action should be included
   final bool needsClose;
 
   /// [PlatformAlertDialog] wrapper with custom styling
@@ -50,30 +49,38 @@ class EzAlertDialog extends PlatformAlertDialog {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
     return PlatformAlertDialog(
-      material: (BuildContext dialogContext, PlatformTarget platform) =>
-          MaterialAlertDialogData(
-        // Title
-        title: title,
-        titlePadding: EdgeInsets.all(padding),
+      material: (BuildContext dialogContext, PlatformTarget platform) {
+        final TextButton closeAction = TextButton(
+          onPressed: () => Navigator.of(dialogContext).pop(),
+          child: Text(EFUILang.of(context)!.gClose),
+        );
 
-        // Content
-        content: content ?? EzScrollView(children: contents),
-        contentPadding: EdgeInsets.only(
-          left: padding,
-          right: padding,
-          bottom: padding,
-        ),
+        return MaterialAlertDialogData(
+          // Title
+          title: title,
+          titlePadding: EdgeInsets.all(padding),
 
-        // Actions
-        actions: materialActions,
-        actionsAlignment:
-            isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+          // Content
+          content: content ?? EzScrollView(children: contents),
+          contentPadding: EdgeInsets.only(
+            left: padding,
+            right: padding,
+            bottom: padding,
+          ),
 
-        // General
-        iconPadding: EdgeInsets.only(right: spacing),
-        buttonPadding: EdgeInsets.only(right: spacing),
-        insetPadding: EdgeInsets.all(margin),
-      ),
+          // Actions
+          actions: needsClose
+              ? <Widget>[...materialActions!, closeAction]
+              : materialActions,
+          actionsAlignment:
+              isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+
+          // General
+          iconPadding: EdgeInsets.only(right: spacing),
+          buttonPadding: EdgeInsets.only(right: spacing),
+          insetPadding: EdgeInsets.all(margin),
+        );
+      },
       cupertino: (BuildContext dialogContext, PlatformTarget platform) {
         final CupertinoDialogAction closeAction = CupertinoDialogAction(
           onPressed: () => Navigator.of(dialogContext).pop(),
@@ -89,7 +96,7 @@ class EzAlertDialog extends PlatformAlertDialog {
           content: content ?? EzScrollView(children: contents),
           actions: cupertinoActions == null
               ? <Widget>[closeAction]
-              : (needsClose)
+              : needsClose
                   ? <Widget>[...cupertinoActions!, closeAction]
                   : cupertinoActions,
         );
