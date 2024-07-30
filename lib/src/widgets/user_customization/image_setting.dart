@@ -150,6 +150,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     message: '${e.toString()}\n\n${l10n.isPermission}',
                   );
                   Navigator.of(networkDialogContext).pop(null);
+                  return;
                 }
 
                 await EzConfig.setString(widget.configKey, image.url);
@@ -309,12 +310,13 @@ class _ImageSettingState extends State<EzImageSetting> {
         );
 
         if (result != success) {
+          await EzConfig.remove(widget.configKey);
+          currPath = null;
           await logAlert(
             context: context,
             title: l10n.isGetFailed,
             message: '$result\n\n${l10n.isPermission}',
           );
-          await EzConfig.remove(widget.configKey);
           return false;
         }
 
