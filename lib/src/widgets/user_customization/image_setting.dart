@@ -144,11 +144,12 @@ class _ImageSettingState extends State<EzImageSetting> {
                 try {
                   image = NetworkImage(urlText.text);
                 } catch (e) {
-                  return logAlert(
+                  await logAlert(
                     context: context,
                     title: l10n.isGetFailed,
                     message: '${e.toString()}\n\n${l10n.isPermission}',
                   );
+                  Navigator.of(networkDialogContext).pop(null);
                 }
 
                 await EzConfig.setString(widget.configKey, image.url);
