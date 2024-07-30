@@ -32,7 +32,7 @@ Future<String?> saveImage({
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) {
-      logAlert(
+      await logAlert(
         context: context,
         message: EFUILang.of(context)!.isGetFailed,
       );
@@ -50,7 +50,7 @@ Future<String?> saveImage({
     return image.path;
   } on Exception catch (e) {
     final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-    logAlert(context: context, message: errorMsg);
+    await logAlert(context: context, message: errorMsg);
     return null;
   }
 }
