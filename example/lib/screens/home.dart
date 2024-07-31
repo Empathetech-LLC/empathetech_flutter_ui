@@ -24,12 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
 
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
-
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   // Set the page title //
 
