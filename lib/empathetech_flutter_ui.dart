@@ -13,8 +13,8 @@ export 'src/config.dart';
 // Constants //
 
 export 'src/consts/config_keys.dart';
+export 'src/consts/config.dart';
 export 'src/consts/consts.dart';
-export 'src/consts/empathetech.dart';
 export 'src/consts/google_fonts.dart';
 
 // Functions //
@@ -45,7 +45,7 @@ export 'src/widgets/helpers/feedback_button.dart';
 export 'src/widgets/helpers/row.dart';
 export 'src/widgets/helpers/screen.dart';
 export 'src/widgets/helpers/scroll_view.dart';
-export 'src/widgets/helpers/spacer.dart';
+export 'src/widgets/helpers/spacers.dart';
 export 'src/widgets/helpers/warning.dart';
 
 // Platform availability
