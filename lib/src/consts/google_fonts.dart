@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
-// Plus some ones I thought were cute
+// Plus some ones we think are cute
 
 const String alexBrush = 'AlexBrush';
 const String atkinsonHyperlegible = 'AtkinsonHyperlegible';
