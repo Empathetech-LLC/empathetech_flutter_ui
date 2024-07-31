@@ -22,7 +22,7 @@ dependencies:
 
   # Empathetech
   empathetech_flutter_ui:
-   path: ../
+    path: ../
 
 dev_dependencies:
   dependency_validator: ^4.1.0
