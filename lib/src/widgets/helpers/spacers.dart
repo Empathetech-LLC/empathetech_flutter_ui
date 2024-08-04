@@ -45,15 +45,15 @@ class EzSwapSpacer extends StatelessWidget {
 
   /// Defaults to [EzSpacer.vertical] => false
   /// When [ScreenSpace.isLimited], it swaps to [EzSpacer.horizontal] => false
-  const EzSwapSpacer(this.space, {super.key});
+  const EzSwapSpacer({super.key, this.space});
 
   @override
   Widget build(BuildContext context) {
     final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
 
     return limitedSpace
-        ? const EzSpacer(horizontal: false)
-        : const EzSpacer(vertical: false);
+        ? EzSpacer(space: space, horizontal: false)
+        : EzSpacer(space: space, vertical: false);
   }
 }
 
