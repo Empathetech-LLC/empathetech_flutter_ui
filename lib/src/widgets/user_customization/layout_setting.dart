@@ -88,8 +88,8 @@ class EzLayoutSetting extends StatefulWidget {
 class _LayoutSettingState extends State<EzLayoutSetting> {
   // Gather the theme data //
 
-  late final double _defaultValue = EzConfig.getDefault(widget.configKey);
   late double currValue = EzConfig.get(widget.configKey);
+  late final double defaultValue = EzConfig.getDefault(widget.configKey);
 
   late final String label = lstName(context, widget.type);
 
@@ -278,12 +278,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             });
           },
           onChangeEnd: (double value) async {
-            // When finished, write the result
-            if (value == _defaultValue) {
-              await EzConfig.remove(widget.configKey);
-            } else {
-              await EzConfig.setDouble(widget.configKey, value);
-            }
+            await EzConfig.setDouble(widget.configKey, value);
           },
 
           // Slider semantics
@@ -298,12 +293,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         onPressed: () async {
           await EzConfig.remove(widget.configKey);
           setModalState(() {
-            currValue = _defaultValue;
+            currValue = defaultValue;
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
         label: Text(
-          '${l10n.gReset} ${_defaultValue.toStringAsFixed(widget.decimals)}',
+          '${l10n.gReset} ${defaultValue.toStringAsFixed(widget.decimals)}',
         ),
       ),
       spacer,
