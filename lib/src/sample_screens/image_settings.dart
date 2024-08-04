@@ -73,13 +73,11 @@ class _ImageSettingsState extends State<ImageSettings> {
               ? EzImageSetting(
                   configKey: darkPageImageKey,
                   label: l10n.isBackground,
-                  allowClear: true,
                   updateTheme: Brightness.dark,
                 )
               : EzImageSetting(
                   configKey: lightPageImageKey,
                   label: l10n.isBackground,
-                  allowClear: true,
                   updateTheme: Brightness.light,
                 ),
           separator,
