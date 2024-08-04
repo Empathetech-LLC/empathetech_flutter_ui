@@ -207,10 +207,10 @@ class _ImageSettingState extends State<EzImageSetting> {
         label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
       ),
-      spacer,
 
       // Reset
-      if (defaultPath != null)
+      if (defaultPath != null) ...<Widget>{
+        spacer,
         ElevatedButton.icon(
           onPressed: () async {
             cleanup();
@@ -220,6 +220,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           label: Text(l10n.isResetIt),
           icon: Icon(PlatformIcons(context).refresh),
         ),
+      }
     ]);
 
     // Clear (optional)
@@ -274,7 +275,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.configKey]
   /// Returns the path, if any, to the new [Image]
-  Future<dynamic> _chooseImage(BuildContext context) {
+  Future<dynamic> chooseImage(BuildContext context) {
     return showPlatformDialog(
       context: context,
       builder: (_) => StatefulBuilder(
@@ -295,9 +296,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// First-layer [ElevatedButton.onPressed]
-  /// Runs the [_chooseImage] dialog and updates the state accordingly
-  Future<bool> _activateSetting() async {
-    final dynamic newPath = await _chooseImage(context);
+  /// Runs the [chooseImage] dialog and updates the state accordingly
+  void activateSetting() async {
+    final dynamic newPath = await chooseImage(context);
 
     if (newPath is String) {
       currPath = newPath;
@@ -305,6 +306,10 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (widget.updateTheme != null &&
           updateTheme &&
           newPath != noImageValue) {
+        setState(() {
+          inProgress = true;
+        });
+
         final String result = await storeImageColorScheme(
           brightness: widget.updateTheme!,
           path: newPath,
@@ -313,25 +318,32 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result != success) {
           await EzConfig.remove(widget.configKey);
           currPath = null;
+
+          setState(() {
+            inProgress = false;
+          });
+
           await logAlert(
             context: context,
             title: l10n.isGetFailed,
             message: '$result\n\n${l10n.isPermission}',
           );
-          return false;
+          return;
         }
 
         widget.updateTheme == Brightness.light
             ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
             : await EzConfig.setString(darkColorSchemeImageKey, newPath);
+
+        setState(() {
+          inProgress = false;
+        });
       }
     }
-
-    return true;
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information
-  Future<dynamic>? _showCredits() {
+  Future<dynamic>? showCredits() {
     return (widget.credits == null)
         ? null
         : showPlatformDialog(
@@ -368,18 +380,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               theme.colorScheme.onSurface,
             ),
           ),
-          onPressed: inProgress
-              ? doNothing
-              : () async {
-                  setState(() {
-                    inProgress = true;
-                  });
-                  await _activateSetting();
-                  setState(() {
-                    inProgress = false;
-                  });
-                },
-          onLongPress: inProgress ? doNothing : _showCredits,
+          onPressed: inProgress ? doNothing : activateSetting,
+          onLongPress: inProgress ? doNothing : showCredits,
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
