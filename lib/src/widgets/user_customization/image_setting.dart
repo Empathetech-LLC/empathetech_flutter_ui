@@ -335,11 +335,12 @@ class _ImageSettingState extends State<EzImageSetting> {
             ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
             : await EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
-
-      setState(() {
-        inProgress = false;
-      });
     }
+
+    // Here to act as a a "default" for clearing and/or resetting the image
+    setState(() {
+      inProgress = false;
+    });
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information
