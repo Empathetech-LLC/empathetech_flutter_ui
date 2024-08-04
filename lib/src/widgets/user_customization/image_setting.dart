@@ -21,6 +21,8 @@ class EzImageSetting extends StatefulWidget {
   final String label;
 
   /// Effectively whether the image is nullable
+  /// Recommended to true
+  /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
   final bool allowClear;
 
   /// Optional [EzAlertDialog] title override
@@ -43,7 +45,7 @@ class EzImageSetting extends StatefulWidget {
     super.key,
     required this.configKey,
     required this.label,
-    required this.allowClear,
+    this.allowClear = true,
     this.dialogTitle,
     this.credits,
     this.updateTheme,
@@ -91,6 +93,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     required StateSetter dialogState,
   }) {
     final List<Widget> options = <Widget>[];
+    final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
     // From file && camera rely on path_provider, which isn't supported by Flutter Web
     if (!kIsWeb) {
@@ -207,18 +210,16 @@ class _ImageSettingState extends State<EzImageSetting> {
       spacer,
 
       // Reset
-      ElevatedButton.icon(
-        onPressed: () async {
-          cleanup();
-          await EzConfig.remove(widget.configKey);
-
-          Navigator.of(dialogContext).pop(
-            EzConfig.getDefault(widget.configKey) ?? noImageValue,
-          );
-        },
-        label: Text(l10n.isResetIt),
-        icon: Icon(PlatformIcons(context).refresh),
-      ),
+      if (defaultPath != null)
+        ElevatedButton.icon(
+          onPressed: () async {
+            cleanup();
+            await EzConfig.remove(widget.configKey);
+            Navigator.of(dialogContext).pop(defaultPath);
+          },
+          label: Text(l10n.isResetIt),
+          icon: Icon(PlatformIcons(context).refresh),
+        ),
     ]);
 
     // Clear (optional)
