@@ -18,6 +18,6 @@ class TextSettingsScreen extends StatefulWidget {
 class _TextSettingsScreenState extends State<TextSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const ExampleScaffold(body: TextSettings());
+    return const OpenUIScaffold(body: TextSettings());
   }
 }

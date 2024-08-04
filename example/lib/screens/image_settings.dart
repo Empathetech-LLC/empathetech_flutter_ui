@@ -18,6 +18,6 @@ class ImageSettingsScreen extends StatefulWidget {
 class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const ExampleScaffold(body: ImageSettings());
+    return const OpenUIScaffold(body: ImageSettings());
   }
 }

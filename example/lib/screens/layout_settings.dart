@@ -18,6 +18,6 @@ class LayoutSettingsScreen extends StatefulWidget {
 class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const ExampleScaffold(body: LayoutSettings());
+    return const OpenUIScaffold(body: LayoutSettings());
   }
 }
