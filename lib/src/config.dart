@@ -158,90 +158,150 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Get the [key]s EzConfig value
-  /// Uses the value stored in [preferences]
+  /// Uses the value stored in [EzConfig.preferences]
   static bool? getBool(String key) {
     return _instance!.preferences.getBool(key);
   }
 
   /// Get the [key]s EzConfig value
-  /// Uses the value stored in [preferences]
+  /// Uses the value stored in [EzConfig.preferences]
   static int? getInt(String key) {
     return _instance!.preferences.getInt(key);
   }
 
   /// Get the [key]s EzConfig value
-  /// Uses the value stored in [preferences]
+  /// Uses the value stored in [EzConfig.preferences]
   static double? getDouble(String key) {
     return _instance!.preferences.getDouble(key);
   }
 
   /// Get the [key]s EzConfig value
-  /// Uses the value stored in [preferences]
+  /// Uses the value stored in [EzConfig.preferences]
   static String? getString(String key) {
     return _instance!.preferences.getString(key);
   }
 
   /// Get the [key]s EzConfig value
-  /// Uses the value stored in [preferences]
+  /// Uses the value stored in [EzConfig.preferences]
   static List<String>? getStringList(String key) {
     return _instance!.preferences.getStringList(key);
   }
 
   /// Wether the [key] contains the value to a recognized asset path
+  /// From the [EzConfig.init] field [assetPaths]
   static bool isKeyAsset(String key) {
-    if (_instance!.prefs.containsKey(key)) {
-      return false;
-    } else {
-      return _instance!.assetPaths.contains(_instance!.prefs[key]);
-    }
+    return _instance!.assetPaths.contains(_instance!.prefs[key]);
   }
 
   /// Wether the [path] leads to a recognized asset
+  /// From the [EzConfig.init] field [assetPaths]
   static bool isPathAsset(String path) {
     return _instance!.assetPaths.contains(path);
   }
 
   // Setters //
 
-  /// Set the EzConfig [key] to [value]
-  static Future<bool> setBool(String key, bool value) async {
-    return await _instance!.preferences.setBool(key, value);
+  /// Set the EzConfig [key] to [value] with type [bool]
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> setBool(
+    String key,
+    bool value, {
+    bool storageOnly = false,
+  }) async {
+    final bool result = await _instance!.preferences.setBool(key, value);
+    if (result && !storageOnly) _instance!.prefs[key] = value;
+    return result;
   }
 
-  /// Set the EzConfig [key] to [value]
-  static Future<bool> setInt(String key, int value) async {
-    return await _instance!.preferences.setInt(key, value);
+  /// Set the EzConfig [key] to [value] with type [int]
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> setInt(
+    String key,
+    int value, {
+    bool storageOnly = false,
+  }) async {
+    final bool result = await _instance!.preferences.setInt(key, value);
+    if (result && !storageOnly) _instance!.prefs[key] = value;
+    return result;
   }
 
-  /// Set the EzConfig [key] to [value]
-  static Future<bool> setDouble(String key, double value) async {
-    return await _instance!.preferences.setDouble(key, value);
+  /// Set the EzConfig [key] to [value] with type [double]
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> setDouble(
+    String key,
+    double value, {
+    bool storageOnly = false,
+  }) async {
+    final bool result = await _instance!.preferences.setDouble(key, value);
+    if (result && !storageOnly) _instance!.prefs[key] = value;
+    return result;
   }
 
-  /// Set the EzConfig [key] to [value]
-  static Future<bool> setString(String key, String value) async {
-    return await _instance!.preferences.setString(key, value);
+  /// Set the EzConfig [key] to [value] with type [String]
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> setString(
+    String key,
+    String value, {
+    bool storageOnly = false,
+  }) async {
+    final bool result = await _instance!.preferences.setString(key, value);
+    if (result && !storageOnly) _instance!.prefs[key] = value;
+    return result;
   }
 
-  /// Set the EzConfig [key] to [value]
-  static Future<bool> setStringList(String key, List<String> value) async {
-    return await _instance!.preferences.setStringList(key, value);
+  /// Set the EzConfig [key] to [value] with type [List]
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> setStringList(
+    String key,
+    List<String> value, {
+    bool storageOnly = false,
+  }) async {
+    final bool result = await _instance!.preferences.setStringList(key, value);
+    if (result && !storageOnly) _instance!.prefs[key] = value;
+    return result;
   }
 
   // Removers //
 
   /// Remove the custom value for [key]
-  static Future<bool> remove(String key) async {
-    return await _instance!.preferences.remove(key);
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> remove(String key, {bool storageOnly = false}) async {
+    final bool result = await _instance!.preferences.remove(key);
+
+    if (result && !storageOnly) {
+      _instance!.defaults.containsKey(key)
+          ? _instance!.prefs[key] = _instance!.defaults[key]
+          : _instance!.prefs.remove(key);
+    }
+
+    return result;
   }
 
   /// Remove the [keys] custom values
-  static Future<bool> removeKeys(Set<String> keys) async {
+  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
+  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  static Future<bool> removeKeys(
+    Set<String> keys, {
+    bool storageOnly = false,
+  }) async {
     bool success = true;
 
     for (final String key in keys) {
       final bool remove = await _instance!.preferences.remove(key);
-      if (!remove) {
+
+      if (remove) {
+        if (!storageOnly) {
+          _instance!.defaults.containsKey(key)
+              ? _instance!.prefs[key] = _instance!.defaults[key]
+              : _instance!.prefs.remove(key);
+        }
+      } else {
         success = false;
         debugPrint('Failed to remove key [$key]');
       }
