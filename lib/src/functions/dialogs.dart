@@ -59,6 +59,8 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (BuildContext dialogContext) {
+      final double spacing = EzConfig.get(spacingKey);
+
       void confirm() {
         onConfirm();
         Navigator.of(dialogContext).pop();
@@ -77,7 +79,11 @@ Future<dynamic> ezColorPicker({
         contents: <Widget>[
           ColorPicker(
             color: startColor,
-            onColorChanged: onColorChange,
+            padding: EdgeInsets.zero,
+            mainAxisSize: MainAxisSize.min,
+            spacing: spacing / 2,
+            runSpacing: spacing / 2,
+            columnSpacing: spacing,
             pickersEnabled: const <ColorPickerType, bool>{
               ColorPickerType.both: false,
               ColorPickerType.primary: false,
@@ -87,6 +93,11 @@ Future<dynamic> ezColorPicker({
               ColorPickerType.customSecondary: false,
               ColorPickerType.wheel: true
             },
+            enableOpacity: true,
+            showColorName: true,
+            showColorCode: true,
+            showRecentColors: true,
+            onColorChanged: onColorChange,
           ),
         ],
         materialActions: ezMaterialActions(
