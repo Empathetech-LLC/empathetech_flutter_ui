@@ -36,6 +36,7 @@ class EzWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Gather theme data //
+
     final ThemeData theme = Theme.of(context);
 
     final String warning = title ?? EFUILang.of(context)!.gAttention;
@@ -45,7 +46,10 @@ class EzWarning extends StatelessWidget {
 
     final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
-    final EzSpacer rowPadding = EzSpacer.row(EzConfig.get(paddingKey));
+    final EzSpacer rowPadding = EzSpacer(
+      space: EzConfig.get(paddingKey),
+      vertical: false,
+    );
 
     // Return the build
 
