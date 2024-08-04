@@ -68,7 +68,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   };
 
   late bool atMax = upperLimits.entries.every(
-    (MapEntry<String, double> max) => max.value == EzConfig.getDouble(max.key),
+    (MapEntry<String, double> max) => max.value == EzConfig.get(max.key),
   );
 
   late final Map<String, double> lowerLimits = <String, double>{
@@ -76,7 +76,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   };
 
   late bool atMin = lowerLimits.entries.every(
-    (MapEntry<String, double> min) => min.value == EzConfig.getDouble(min.key),
+    (MapEntry<String, double> min) => min.value == EzConfig.get(min.key),
   );
 
   // Define custom functions //
