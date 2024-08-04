@@ -18,8 +18,8 @@ bool isUrl(String text) {
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
 Size measureText(
   String text, {
-  required TextStyle? style,
   required BuildContext context,
+  required TextStyle? style,
 }) {
   final TextPainter textPainter = TextPainter(
     text: TextSpan(text: text, style: style),
@@ -31,7 +31,7 @@ Size measureText(
   return textPainter.size;
 }
 
-/// Slits the string on '_' and/or ' ' and returns the first word
+/// Splits the string on '_' and/or ' ' and returns the first word
 String firstWord(String text) {
   return text.split(RegExp(r'[_\s]+')).first;
 }
