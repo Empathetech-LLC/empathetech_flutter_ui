@@ -69,7 +69,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final double padding = EzConfig.get(paddingKey);
   late final double lineHeight = style?.height ?? 1.5;
 
-  late final EzSpacer pMSpacer = EzSpacer.row(padding / 4);
+  late final EzSpacer pMSpacer = EzSpacer(
+    space: padding / 4,
+    vertical: false,
+  );
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -198,7 +201,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               }
             ],
           ),
-          EzSpacer(padding / 8),
+          EzSpacer(space: padding / 8),
 
           // Label icon
           Icon(

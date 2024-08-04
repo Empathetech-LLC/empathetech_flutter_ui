@@ -75,7 +75,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         textAlign: TextAlign.center,
       ),
     ),
-    EzSpacer.row(padding),
+    EzSpacer(space: padding, vertical: false),
 
     // Button
     DropdownMenu<Hand>(

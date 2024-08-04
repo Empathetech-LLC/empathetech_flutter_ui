@@ -93,10 +93,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   late final String label = lstName(context, widget.type);
 
-  final double space = EzConfig.get(spacingKey);
-  late final EzSpacer spacer = EzSpacer(space);
-  late final EzSpacer rowSpacer = EzSpacer.row(space);
-  late final EzSpacer rowSeparator = EzSpacer.row(2 * space);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
+  static const EzSeparator rowSeparator = EzSeparator(vertical: false);
 
   late final ThemeData theme = Theme.of(context);
 
@@ -198,7 +197,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       case LayoutSettingType.spacing:
         return <Widget>[
           // Preview 1
-          EzSpacer(currValue),
+          EzSpacer(space: currValue),
 
           // Label
           EzScrollView(
@@ -211,7 +210,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 onPressed: doNothing,
                 child: Text(currLabel),
               ),
-              EzSpacer.row(currValue),
+              EzSpacer(space: currValue, vertical: false),
               ElevatedButton(
                 onPressed: doNothing,
                 child: Text(currLabel),
@@ -220,7 +219,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           ),
 
           // Preview 2
-          EzSpacer(currValue),
+          EzSpacer(space: currValue),
         ];
     }
   }

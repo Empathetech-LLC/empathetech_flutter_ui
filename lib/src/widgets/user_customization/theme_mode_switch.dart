@@ -32,8 +32,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final double padding = EzConfig.get(paddingKey);
-
   late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   // Define the build data //
@@ -74,7 +72,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               textAlign: TextAlign.center,
             ),
           ),
-          EzSpacer.row(padding),
+          EzSpacer(space: EzConfig.get(paddingKey), vertical: false),
 
           // Button
           DropdownMenu<ThemeMode>(

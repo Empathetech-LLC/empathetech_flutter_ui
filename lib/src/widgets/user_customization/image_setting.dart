@@ -66,7 +66,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   late final GlobalKey<FormState> urlFormKey = GlobalKey<FormState>();
 
   final double padding = EzConfig.get(paddingKey);
-  final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+  static const EzSpacer spacer = EzSpacer();
 
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -254,7 +254,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 setState(() {});
               },
             ),
-            EzSpacer.row(padding),
+            EzSpacer(space: padding, vertical: false),
 
             // Label
             Flexible(

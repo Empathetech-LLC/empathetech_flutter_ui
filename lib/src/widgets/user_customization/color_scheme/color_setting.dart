@@ -42,7 +42,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   final double padding = EzConfig.get(paddingKey);
 
-  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+  static const EzSpacer spacer = EzSpacer();
 
   late final ThemeData theme = Theme.of(context);
 

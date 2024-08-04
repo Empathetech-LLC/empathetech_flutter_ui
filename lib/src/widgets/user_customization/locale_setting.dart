@@ -27,7 +27,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late Locale currLocale = Localizations.localeOf(context);
 
-  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+  static const EzSpacer spacer = EzSpacer();
 
   late EFUILang l10n = EFUILang.of(context)!;
 

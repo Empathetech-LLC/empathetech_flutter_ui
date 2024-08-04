@@ -56,7 +56,10 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   late final Color onBackground = Theme.of(context).colorScheme.onSurface;
   late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
-  late final EzSpacer pMSpacer = EzSpacer.row(EzConfig.get(paddingKey) / 4);
+  late final EzSpacer pMSpacer = EzSpacer(
+    space: EzConfig.get(paddingKey) / 4,
+    vertical: false,
+  );
 
   // Define the build data //
 
