@@ -64,9 +64,6 @@ class _ColorSettingsState extends State<ColorSettings> {
   // Quick
   static const String quick = 'quick';
 
-  static const int rMax = 255;
-  ValueKey<int> quickKey = ValueKey<int>(Random().nextInt(rMax));
-
   // Advanced
   static const String advanced = 'advanced';
 
@@ -96,7 +93,6 @@ class _ColorSettingsState extends State<ColorSettings> {
         lightColorSchemeImageKey,
       });
       currList = List<String>.from(defaultList);
-      quickKey = ValueKey<int>(Random().nextInt(rMax));
       setState(() {});
     },
   );
@@ -153,7 +149,7 @@ class _ColorSettingsState extends State<ColorSettings> {
           // Core settings
           if (currentTab == quick)
             _QuickColorSettings(
-              key: quickKey,
+              key: UniqueKey(),
               l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
