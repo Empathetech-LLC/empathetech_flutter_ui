@@ -149,7 +149,6 @@ class _ColorSettingsState extends State<ColorSettings> {
           // Core settings
           if (currentTab == quick)
             _QuickColorSettings(
-              key: UniqueKey(),
               l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
@@ -180,7 +179,6 @@ class _QuickColorSettings extends StatefulWidget {
   final String themeProfile;
 
   const _QuickColorSettings({
-    super.key,
     required this.l10n,
     required this.isDark,
     required this.themeProfile,
