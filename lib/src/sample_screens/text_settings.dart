@@ -276,6 +276,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
+  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
@@ -797,9 +798,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   boldControllers[editing]!,
-                  spacer,
+                  rowSpacer,
                   italicsControllers[editing]!,
-                  spacer,
+                  rowSpacer,
                   underlineControllers[editing]!,
                 ],
               ),
@@ -812,9 +813,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     letterSpacingControllers[editing]!,
-                    spacer,
+                    rowSpacer,
                     wordSpacingControllers[editing]!,
-                    spacer,
+                    rowSpacer,
                     lineHeightControllers[editing]!,
                   ],
                 ),
