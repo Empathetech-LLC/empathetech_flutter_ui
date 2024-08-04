@@ -85,7 +85,7 @@ class _TextSettingsState extends State<_TextSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer spacer = EzSpacer(spacing);
+  static const EzSpacer spacer = EzSpacer();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -112,7 +112,7 @@ class _TextSettingsState extends State<_TextSettings> {
           : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
-          if (spacing > margin) EzSpacer(spacing - margin),
+          if (spacing > margin) EzSpacer(space: spacing - margin),
 
           // Mode selector
           SegmentedButton<String>(
@@ -156,11 +156,9 @@ class _QuickTextSettings extends StatefulWidget {
 class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the theme data //
 
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSwapSpacer swapSpacer = EzSwapSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSwapSpacer swapSpacer = EzSwapSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -277,12 +275,9 @@ class _AdvancedTextSettings extends StatefulWidget {
 class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   // Gather the theme data //
 
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer rowSpacer = EzSpacer.row(spacing);
-  late final EzSwapSpacer swapSpacer = EzSwapSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSwapSpacer swapSpacer = EzSwapSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -763,7 +758,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 textAlign: TextAlign.center,
               ),
             ),
-            rowSpacer,
+            spacer,
             DropdownMenu<TextSettingType>(
               initialSelection: editing,
               onSelected: (TextSettingType? value) {
@@ -802,9 +797,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   boldControllers[editing]!,
-                  rowSpacer,
+                  spacer,
                   italicsControllers[editing]!,
-                  rowSpacer,
+                  spacer,
                   underlineControllers[editing]!,
                 ],
               ),
@@ -817,9 +812,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     letterSpacingControllers[editing]!,
-                    rowSpacer,
+                    spacer,
                     wordSpacingControllers[editing]!,
-                    rowSpacer,
+                    spacer,
                     lineHeightControllers[editing]!,
                   ],
                 ),

@@ -30,10 +30,8 @@ class _ImageSettingsState extends State<ImageSettings> {
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
 
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer _buttonSpacer = EzSpacer(spacing);
-  late final EzSpacer _buttonSeparator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -41,32 +39,6 @@ class _ImageSettingsState extends State<ImageSettings> {
 
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
-
-  late final List<Widget> settingsButtons = <Widget>[
-    isDark
-        // Page
-        ? EzImageSetting(
-            configKey: darkPageImageKey,
-            label: l10n.isBackground,
-            allowClear: true,
-            updateTheme: Brightness.dark,
-          )
-        : EzImageSetting(
-            configKey: lightPageImageKey,
-            label: l10n.isBackground,
-            allowClear: true,
-            updateTheme: Brightness.light,
-          ),
-    _buttonSeparator,
-
-    // Local reset all
-    EzResetButton(
-      dialogTitle: l10n.isResetAll(themeProfile),
-      onConfirm: () async {
-        await EzConfig.removeKeys(imageKeys.keys.toSet());
-      },
-    ),
-  ];
 
   // Set the page title //
 
@@ -94,11 +66,32 @@ class _ImageSettingsState extends State<ImageSettings> {
                 ),
             textAlign: TextAlign.center,
           ),
-          _buttonSeparator,
+          separator,
 
-          // Settings
-          ...settingsButtons,
-          _buttonSpacer,
+          // Page image setting
+          isDark
+              ? EzImageSetting(
+                  configKey: darkPageImageKey,
+                  label: l10n.isBackground,
+                  allowClear: true,
+                  updateTheme: Brightness.dark,
+                )
+              : EzImageSetting(
+                  configKey: lightPageImageKey,
+                  label: l10n.isBackground,
+                  allowClear: true,
+                  updateTheme: Brightness.light,
+                ),
+          separator,
+
+          // Local reset all
+          EzResetButton(
+            dialogTitle: l10n.isResetAll(themeProfile),
+            onConfirm: () async {
+              await EzConfig.removeKeys(imageKeys.keys.toSet());
+            },
+          ),
+          spacer,
         ],
       ),
     );

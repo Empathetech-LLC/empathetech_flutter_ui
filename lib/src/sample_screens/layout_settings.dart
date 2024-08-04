@@ -33,8 +33,8 @@ class _LayoutSettingsState extends State<LayoutSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -56,7 +56,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           : widget.lightBackgroundImageKey,
       child: EzScrollView(
         children: <Widget>[
-          if (spacing > margin) EzSpacer(spacing - margin),
+          if (spacing > margin) EzSpacer(space: spacing - margin),
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,

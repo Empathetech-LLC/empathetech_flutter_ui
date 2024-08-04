@@ -53,11 +53,8 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
 
-  final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
   late final ThemeData theme = Theme.of(context);
@@ -206,7 +203,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   // Gather the theme data //
 
-  late final EzSpacer spacer = EzSpacer(EzConfig.get(spacingKey));
+  static const EzSpacer spacer = EzSpacer();
 
   // Define custom widgets  //
 
@@ -295,8 +292,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
+  static const EzSpacer spacer = EzSpacer();
 
   // Define custom Widgets //
 
