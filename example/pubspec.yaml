@@ -18,7 +18,6 @@ dependencies:
   feedback: ^3.0.1
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.0
-  share_plus: ^9.0.0
 
   # Empathetech
   empathetech_flutter_ui:
@@ -31,7 +30,6 @@ dev_dependencies:
   flutter_native_splash: ^2.3.2
   flutter_test:
     sdk: flutter
-  google_fonts: ^6.1.0
   integration_test:
     sdk: flutter
 
@@ -55,12 +53,12 @@ flutter:
     - assets/fonts/Roboto-Thin.ttf
     - assets/fonts/Roboto-ThinItalic.ttf
     - assets/images/
-    - assets/images/dark-logo.png
-    - assets/images/dark-logo-round.png
+    - assets/images/settings-sandbox.jpg
+    - assets/images/settings-sandbox-round.png
 
 flutter_launcher_icons:
-  image_path: assets/images/dark-logo.png
-  adaptive_icon_foreground: assets/images/dark-logo-round.png
+  image_path: assets/images/settings-sandbox.jpg
+  adaptive_icon_foreground: assets/images/settings-sandbox-round.png
   adaptive_icon_background: "#000000"
   android: true
   ios: true
@@ -74,7 +72,7 @@ flutter_launcher_icons:
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/images/dark-logo.png
+  image: assets/images/settings-sandbox.jpg
   android: true
   ios: true
   web: true
