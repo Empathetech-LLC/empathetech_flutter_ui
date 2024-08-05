@@ -71,7 +71,7 @@ flutter_launcher_icons:
     generate: true
 
 flutter_native_splash:
-  color: "#C6BAA5"
+  color: "#F5F5F5"
   image: assets/images/settings-sandbox.jpg
   android: true
   ios: true
