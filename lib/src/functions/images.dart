@@ -31,13 +31,7 @@ Future<String?> saveImage({
   // Load image picker and save the result
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
-    if (picked == null) {
-      await logAlert(
-        context: context,
-        message: EFUILang.of(context)!.isGetFailed,
-      );
-      return null;
-    }
+    if (picked == null) return null;
 
     // Build the path
     final Directory directory = await getApplicationDocumentsDirectory();
