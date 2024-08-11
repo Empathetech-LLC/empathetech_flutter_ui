@@ -76,6 +76,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
           // Button
           DropdownMenu<ThemeMode>(
+            enableSearch: false,
             initialSelection: platformTheme,
             dropdownMenuEntries: entries,
             onSelected: (ThemeMode? newThemeMode) async {
