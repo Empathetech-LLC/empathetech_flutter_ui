@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
-  /// Defaults to [DropdownMenuThemeData.textStyle] value from your [ThemeData]
+  /// Defaults to [DropdownMenuThemeData.textStyle]
   final TextStyle? labelStyle;
 
   /// Defaults to [ColorScheme.surfaceContainer]
@@ -48,41 +48,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     ),
   ];
 
-  /// Define children separately to allow for live reversing
-  late final List<Widget> children = <Widget>[
-    // Label
-    Flexible(
-      child: Text(
-        l10n.ssDominantHand,
-        style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-        textAlign: TextAlign.center,
-      ),
-    ),
-    EzSpacer(space: padding, vertical: false),
-
-    // Button
-    DropdownMenu<bool>(
-      enableSearch: false,
-      initialSelection: isLefty,
-      dropdownMenuEntries: entries,
-      onSelected: (bool? makeLeft) async {
-        if (makeLeft == true) {
-          if (!isLefty) {
-            isLefty = true;
-            await EzConfig.setBool(isLeftyKey, true);
-            setState(() {});
-          }
-        } else {
-          if (isLefty) {
-            isLefty = false;
-            await EzConfig.remove(isLeftyKey);
-            setState(() {});
-          }
-        }
-      },
-    ),
-  ];
-
   // Return the build //
 
   @override
@@ -91,10 +56,42 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
           color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer),
-      child: Row(
+      child: EzRow(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: isLefty ? children.reversed.toList() : children,
+        children: <Widget>[
+          // Label
+          Flexible(
+            child: Text(
+              l10n.ssDominantHand,
+              style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          EzSpacer(space: padding, vertical: false),
+
+          // Button
+          DropdownMenu<bool>(
+            enableSearch: false,
+            initialSelection: isLefty,
+            dropdownMenuEntries: entries,
+            onSelected: (bool? makeLeft) async {
+              if (makeLeft == true) {
+                if (!isLefty) {
+                  await EzConfig.setBool(isLeftyKey, true);
+                  isLefty = true;
+                  setState(() {});
+                }
+              } else {
+                if (isLefty) {
+                  await EzConfig.remove(isLeftyKey);
+                  isLefty = false;
+                  setState(() {});
+                }
+              }
+            },
+          ),
+        ],
       ),
     );
   }
