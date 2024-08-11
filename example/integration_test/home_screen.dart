@@ -89,7 +89,7 @@ void testSuite({
 
       // Dominant hand  //
 
-      final Finder dominantHandButton = find.byType(DropdownMenu<Hand>);
+      final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
 
       expect(dominantHandButton, findsOneWidget);
       await touch(tester, dominantHandButton);
@@ -107,7 +107,7 @@ void testSuite({
       Row handButtonsRow = tester.widget(handButtonsRowFinder);
       List<Widget> children = handButtonsRow.children;
 
-      expect(children[0], isA<DropdownMenu<Hand>>());
+      expect(children[0], isA<DropdownMenu<bool>>());
       expect(children[1], isA<EzSpacer>());
       expect(children[2], isA<Flexible>());
 
@@ -121,7 +121,7 @@ void testSuite({
 
       expect(children[0], isA<Flexible>());
       expect(children[1], isA<EzSpacer>());
-      expect(children[2], isA<DropdownMenu<Hand>>());
+      expect(children[2], isA<DropdownMenu<bool>>());
 
       // Theme mode //
 
