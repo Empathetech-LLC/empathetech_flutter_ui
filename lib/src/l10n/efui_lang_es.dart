@@ -1,5 +1,7 @@
 import 'efui_lang.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Spanish Castilian (`es`).
 class EFUILangEs extends EFUILang {
   EFUILangEs([String locale = 'es']) : super(locale);

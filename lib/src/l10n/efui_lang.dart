@@ -7,6 +7,8 @@ import 'package:intl/intl.dart' as intl;
 import 'efui_lang_en.dart' deferred as efui_lang_en;
 import 'efui_lang_es.dart' deferred as efui_lang_es;
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of EFUILang
 /// returned by `EFUILang.of(context)`.
 ///

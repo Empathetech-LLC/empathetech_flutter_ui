@@ -1,5 +1,7 @@
 import 'efui_lang.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class EFUILangEn extends EFUILang {
   EFUILangEn([String locale = 'en']) : super(locale);
