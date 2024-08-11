@@ -7,22 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Enumerator for tracking which (horizontal) side of the screen touch points should be on
-enum Hand {
-  right,
-  left,
-}
-
-/// Get the proper [String] name for [Hand]
-String handName(BuildContext context, Hand hand) {
-  switch (hand) {
-    case Hand.left:
-      return EFUILang.of(context)!.gLeft;
-    case Hand.right:
-      return EFUILang.of(context)!.gRight;
-  }
-}
-
 class EzDominantHandSwitch extends StatefulWidget {
   /// Defaults to [DropdownMenuThemeData.textStyle] value from your [ThemeData]
   final TextStyle? labelStyle;
@@ -49,19 +33,18 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   final double padding = EzConfig.get(paddingKey);
 
-  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-  late Hand currSide = isLefty ? Hand.left : Hand.right;
+  bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
   // Define the build data //
 
-  late final List<DropdownMenuEntry<Hand>> entries = <DropdownMenuEntry<Hand>>[
-    DropdownMenuEntry<Hand>(
-      value: Hand.right,
-      label: handName(context, Hand.right),
+  late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
+    DropdownMenuEntry<bool>(
+      value: false,
+      label: l10n.gRight,
     ),
-    DropdownMenuEntry<Hand>(
-      value: Hand.left,
-      label: handName(context, Hand.left),
+    DropdownMenuEntry<bool>(
+      value: true,
+      label: l10n.gLeft,
     ),
   ];
 
@@ -78,25 +61,23 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     EzSpacer(space: padding, vertical: false),
 
     // Button
-    DropdownMenu<Hand>(
-      initialSelection: currSide,
+    DropdownMenu<bool>(
+      enableSearch: false,
+      initialSelection: isLefty,
       dropdownMenuEntries: entries,
-      onSelected: (Hand? newDominantHand) async {
-        switch (newDominantHand) {
-          case Hand.right:
-            currSide = Hand.right;
-            await EzConfig.remove(isLeftyKey);
-            setState(() {});
-            break;
-
-          case Hand.left:
-            currSide = Hand.left;
+      onSelected: (bool? makeLeft) async {
+        if (makeLeft == true) {
+          if (!isLefty) {
+            isLefty = true;
             await EzConfig.setBool(isLeftyKey, true);
             setState(() {});
-            break;
-
-          default:
-            break;
+          }
+        } else {
+          if (isLefty) {
+            isLefty = false;
+            await EzConfig.remove(isLeftyKey);
+            setState(() {});
+          }
         }
       },
     ),
@@ -113,8 +94,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children:
-            (currSide == Hand.right) ? children : children.reversed.toList(),
+        children: isLefty ? children.reversed.toList() : children,
       ),
     );
   }
