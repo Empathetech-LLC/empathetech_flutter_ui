@@ -25,6 +25,7 @@ class OpenUIScaffold extends StatelessWidget {
     // Gather the theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final EFUILang l10n = EFUILang.of(context)!;
 
     final Size appBarTextSize = measureText(
       appTitle,
@@ -50,10 +51,13 @@ class OpenUIScaffold extends StatelessWidget {
         tooltip: 'Options menu',
       ),
       menuChildren: <Widget>[
+        if (Theme.of(context).platform != TargetPlatform.iOS) ...<Widget>{
+          BYOButton(parentContext: context, l10n: l10n),
+        },
         FeedbackButton(
           parentContext: context,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          l10n: EFUILang.of(context)!,
+          l10n: l10n,
         ),
       ],
     );

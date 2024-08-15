@@ -3,5 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
+export 'byo.dart';
 export 'keys.dart';
 export 'open_ui_scaffold.dart';

@@ -10,16 +10,12 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class BYOButton extends StatelessWidget {
   final BuildContext parentContext;
-  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
   final EFUILang l10n;
-  final String supportEmail;
 
   const BYOButton({
     super.key,
     required this.parentContext,
-    required this.scaffoldMessengerKey,
     required this.l10n,
-    this.supportEmail = empathSupport,
   });
 
   @override
