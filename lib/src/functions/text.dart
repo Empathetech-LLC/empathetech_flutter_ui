@@ -41,12 +41,12 @@ String firstWord(String text) {
 /// Creates a [TextTheme] with sizes from...
 /// https://m3.material.io/styles/typography/type-scale-tokens
 /// Each variant triplet (large, medium, small) are the same size: large
-TextTheme ezTextTheme() {
-  final TextStyle display = buildDisplay();
-  final TextStyle headline = buildHeadline();
-  final TextStyle title = buildTitle();
-  final TextStyle body = buildBody();
-  final TextStyle label = buildLabel();
+TextTheme ezTextTheme(Color? color) {
+  final TextStyle display = buildDisplay(color);
+  final TextStyle headline = buildHeadline(color);
+  final TextStyle title = buildTitle(color);
+  final TextStyle body = buildBody(color);
+  final TextStyle label = buildLabel(color);
 
   return TextTheme(
     displayLarge: display,
@@ -68,7 +68,7 @@ TextTheme ezTextTheme() {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle buildDisplay({Color? color}) {
+TextStyle buildDisplay(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
     fontWeight: EzConfig.get(displayBoldKey) == true
@@ -92,7 +92,7 @@ TextStyle buildDisplay({Color? color}) {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig.defaults]
-TextStyle buildDisplayFromDefaults({Color? color}) {
+TextStyle buildDisplayFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(displayFontSizeKey),
     fontWeight: EzConfig.getDefault(displayBoldKey) == true
@@ -117,7 +117,7 @@ TextStyle buildDisplayFromDefaults({Color? color}) {
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
-TextStyle buildHeadline({Color? color}) {
+TextStyle buildHeadline(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
     fontWeight: EzConfig.get(headlineBoldKey) == true
@@ -141,7 +141,7 @@ TextStyle buildHeadline({Color? color}) {
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
-TextStyle buildHeadlineFromDefaults({Color? color}) {
+TextStyle buildHeadlineFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(headlineFontSizeKey),
     fontWeight: EzConfig.getDefault(headlineBoldKey) == true
@@ -166,7 +166,7 @@ TextStyle buildHeadlineFromDefaults({Color? color}) {
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig]
-TextStyle buildTitle({Color? color}) {
+TextStyle buildTitle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
     fontWeight: EzConfig.get(titleBoldKey) == true
@@ -189,7 +189,7 @@ TextStyle buildTitle({Color? color}) {
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
-TextStyle buildTitleFromDefaults({Color? color}) {
+TextStyle buildTitleFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(titleFontSizeKey),
     fontWeight: EzConfig.getDefault(titleBoldKey) == true
@@ -213,7 +213,7 @@ TextStyle buildTitleFromDefaults({Color? color}) {
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
-TextStyle buildBody({Color? color}) {
+TextStyle buildBody(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
     fontWeight:
@@ -235,7 +235,7 @@ TextStyle buildBody({Color? color}) {
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
-TextStyle buildBodyFromDefaults({Color? color}) {
+TextStyle buildBodyFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(bodyFontSizeKey),
     fontWeight: EzConfig.getDefault(bodyBoldKey) == true
@@ -259,7 +259,7 @@ TextStyle buildBodyFromDefaults({Color? color}) {
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig]
-TextStyle buildLabel({Color? color}) {
+TextStyle buildLabel(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
     fontWeight: EzConfig.get(labelBoldKey) == true
@@ -282,7 +282,7 @@ TextStyle buildLabel({Color? color}) {
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
-TextStyle buildLabelFromDefaults({Color? color}) {
+TextStyle buildLabelFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(labelFontSizeKey),
     fontWeight: EzConfig.getDefault(labelBoldKey) == true

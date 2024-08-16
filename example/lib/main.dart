@@ -45,8 +45,8 @@ void main() async {
     DeviceOrientation.landscapeRight,
   ]);
 
-  late final TextStyle lightFeedbackText = buildBody(color: Colors.black);
-  late final TextStyle darkFeedbackText = buildBody(color: Colors.white);
+  late final TextStyle lightFeedbackText = buildBody(Colors.black);
+  late final TextStyle darkFeedbackText = buildBody(Colors.white);
 
   // Run the app!
   runApp(BetterFeedback(
