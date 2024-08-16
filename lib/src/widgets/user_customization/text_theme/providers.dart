@@ -85,12 +85,12 @@ abstract class BaseTextStyleProvider extends ChangeNotifier {
 class DisplayTextStyleProvider extends BaseTextStyleProvider {
   final Color? _textColor;
 
-  DisplayTextStyleProvider({Color? color})
+  DisplayTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildDisplay(color: color));
+        super(buildDisplay(color));
 
   void reset() {
-    _style = buildDisplayFromDefaults(color: _textColor);
+    _style = buildDisplayFromDefaults(_textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -99,12 +99,12 @@ class DisplayTextStyleProvider extends BaseTextStyleProvider {
 class HeadlineTextStyleProvider extends BaseTextStyleProvider {
   final Color? _textColor;
 
-  HeadlineTextStyleProvider({Color? color})
+  HeadlineTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildHeadline(color: color));
+        super(buildHeadline(color));
 
   void reset() {
-    _style = buildHeadlineFromDefaults(color: _textColor);
+    _style = buildHeadlineFromDefaults(_textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -113,12 +113,12 @@ class HeadlineTextStyleProvider extends BaseTextStyleProvider {
 class TitleTextStyleProvider extends BaseTextStyleProvider {
   final Color? _textColor;
 
-  TitleTextStyleProvider({Color? color})
+  TitleTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildTitle(color: color));
+        super(buildTitle(color));
 
   void reset() {
-    _style = buildTitleFromDefaults(color: _textColor);
+    _style = buildTitleFromDefaults(_textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -127,12 +127,12 @@ class TitleTextStyleProvider extends BaseTextStyleProvider {
 class BodyTextStyleProvider extends BaseTextStyleProvider {
   final Color? _textColor;
 
-  BodyTextStyleProvider({Color? color})
+  BodyTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildBody(color: color));
+        super(buildBody(color));
 
   void reset() {
-    _style = buildBodyFromDefaults(color: _textColor);
+    _style = buildBodyFromDefaults(_textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }
@@ -141,12 +141,12 @@ class BodyTextStyleProvider extends BaseTextStyleProvider {
 class LabelTextStyleProvider extends BaseTextStyleProvider {
   final Color? _textColor;
 
-  LabelTextStyleProvider({Color? color})
+  LabelTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildLabel(color: color));
+        super(buildLabel(color));
 
   void reset() {
-    _style = buildLabelFromDefaults(color: _textColor);
+    _style = buildLabelFromDefaults(_textColor);
     _id = Random().nextInt(_rMax);
     notifyListeners();
   }

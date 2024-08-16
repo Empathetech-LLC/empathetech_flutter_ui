@@ -38,19 +38,19 @@ class TextSettings extends StatelessWidget {
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
         ChangeNotifierProvider<DisplayTextStyleProvider>(
-          create: (_) => DisplayTextStyleProvider(color: textColor),
+          create: (_) => DisplayTextStyleProvider(textColor),
         ),
         ChangeNotifierProvider<HeadlineTextStyleProvider>(
-          create: (_) => HeadlineTextStyleProvider(color: textColor),
+          create: (_) => HeadlineTextStyleProvider(textColor),
         ),
         ChangeNotifierProvider<TitleTextStyleProvider>(
-          create: (_) => TitleTextStyleProvider(color: textColor),
+          create: (_) => TitleTextStyleProvider(textColor),
         ),
         ChangeNotifierProvider<BodyTextStyleProvider>(
-          create: (_) => BodyTextStyleProvider(color: textColor),
+          create: (_) => BodyTextStyleProvider(textColor),
         ),
         ChangeNotifierProvider<LabelTextStyleProvider>(
-          create: (_) => LabelTextStyleProvider(color: textColor),
+          create: (_) => LabelTextStyleProvider(textColor),
         ),
       ],
       child: _TextSettings(
