@@ -63,8 +63,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
   late final TextStyle? style =
-      (widget.style ?? Theme.of(context).textTheme.bodyLarge)
-          ?.copyWith(color: onBackground);
+      widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
   late final double padding = EzConfig.get(paddingKey);
   late final double lineHeight = style?.height ?? 1.5;
