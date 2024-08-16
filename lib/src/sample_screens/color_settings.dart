@@ -118,9 +118,7 @@ class _ColorSettingsState extends State<ColorSettings> {
           // Current theme reminder
           Text(
             l10n.gEditingTheme(themeProfile),
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: theme.colorScheme.onSurface,
-            ),
+            style: theme.textTheme.labelLarge,
             textAlign: TextAlign.center,
           ),
           spacer,
@@ -389,9 +387,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       0,
       EzLink(
         l10n.gHowThisWorks,
-        style: theme.textTheme.labelLarge?.copyWith(
-          color: theme.colorScheme.onSurface,
-        ),
+        style: theme.textTheme.labelLarge,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
         semanticsLabel: l10n.gHowThisWorksHint,

@@ -61,9 +61,7 @@ class _ImageSettingsState extends State<ImageSettings> {
           // Current theme reminder
           Text(
             l10n.gEditingTheme(themeProfile),
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+            style: Theme.of(context).textTheme.labelLarge,
             textAlign: TextAlign.center,
           ),
           separator,

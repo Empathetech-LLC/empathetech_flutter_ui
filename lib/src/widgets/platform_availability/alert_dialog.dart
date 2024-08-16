@@ -158,8 +158,7 @@ List<CupertinoDialogAction> ezCupertinoActions({
 
   late final ThemeData theme = Theme.of(context);
 
-  final TextStyle? defaultText = defaultStyle ??
-      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface);
+  final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
 
   final TextStyle? destructiveText = destructiveStyle ??
       theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);

@@ -15,7 +15,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
 
-  final TextTheme textTheme = ezTextTheme();
+  final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
   final IconThemeData iconData = IconThemeData(
     size: textTheme.bodyLarge?.fontSize,
@@ -58,9 +58,7 @@ ThemeData ezThemeData(Brightness brightness) {
       actionsIconTheme: appBarIconData,
       backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.onSurface,
-      titleTextStyle: textTheme.headlineLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
+      titleTextStyle: textTheme.headlineLarge,
       centerTitle: true,
       titleSpacing: 0,
     ),
@@ -80,12 +78,8 @@ ThemeData ezThemeData(Brightness brightness) {
     // Dialogs
     dialogTheme: DialogTheme(
       backgroundColor: colorScheme.surfaceContainer,
-      titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
-      contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
+      titleTextStyle: textTheme.titleLarge,
+      contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
         top: (spacing > padding) ? (spacing - padding) : 0.0,
@@ -96,11 +90,7 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Dropdown menu
-    dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
-    ),
+    dropdownMenuTheme: DropdownMenuThemeData(textStyle: textTheme.bodyLarge),
 
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -148,9 +138,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Snackbar
     snackBarTheme: SnackBarThemeData(
       backgroundColor: colorScheme.surface,
-      contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
+      contentTextStyle: textTheme.bodyLarge,
     ),
 
     // Text button
