@@ -92,7 +92,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 2,
+      space: (spacing + padding) * 2,
       thickness: 0.75,
     ),
 
