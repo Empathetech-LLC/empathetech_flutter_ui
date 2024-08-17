@@ -65,7 +65,6 @@ export 'src/widgets/screen_reader_support/link_image_provider.dart';
 export 'src/widgets/screen_reader_support/link_image.dart';
 export 'src/widgets/screen_reader_support/link_widget.dart';
 export 'src/widgets/screen_reader_support/link.dart';
-export 'src/widgets/screen_reader_support/new_line.dart';
 export 'src/widgets/screen_reader_support/plain_text.dart';
 export 'src/widgets/screen_reader_support/rich_text.dart';
 

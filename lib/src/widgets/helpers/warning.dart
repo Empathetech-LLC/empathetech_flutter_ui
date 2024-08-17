@@ -95,11 +95,10 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                EzNewLine(bStyle, textAlign: TextAlign.center),
 
                 // Label
                 Text(
-                  body,
+                  '\n$body',
                   style: bStyle,
                   textAlign: TextAlign.center,
                 ),
