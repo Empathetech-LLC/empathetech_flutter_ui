@@ -38,6 +38,7 @@ ThemeData ezThemeData(Brightness brightness) {
     brightness: brightness,
     colorScheme: colorScheme,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
+    dividerColor: colorScheme.secondary,
 
     // Typography //
 
@@ -87,6 +88,12 @@ ThemeData ezThemeData(Brightness brightness) {
         right: spacing,
         bottom: spacing,
       ),
+    ),
+
+    dividerTheme: DividerThemeData(
+      color: colorScheme.secondary,
+      space: spacing * 2,
+      thickness: 0.75,
     ),
 
     // Dropdown menu
