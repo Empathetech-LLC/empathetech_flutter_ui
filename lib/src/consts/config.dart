@@ -167,7 +167,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   titleBoldKey: true,
   titleItalicsKey: false,
   titleUnderlinedKey: false,
-  titleFontHeightKey: 1.5,
+  titleFontHeightKey: 1.75,
   titleLetterSpacingKey: 0.25,
   titleWordSpacingKey: 1.0,
 
