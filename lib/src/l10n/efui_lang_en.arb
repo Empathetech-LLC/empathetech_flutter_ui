@@ -116,6 +116,7 @@
   "csAdvanced": "Advanced",
 
   "csMonoChrome": "Use monochrome scheme",
+  "csHighContrast": "Use high contrast scheme",
   
   "csPrimary": "Primary",
   "csOnPrimary": "On primary",

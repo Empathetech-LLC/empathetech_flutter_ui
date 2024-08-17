@@ -85,11 +85,6 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String gDefaultEntry(Object entry) {
-    return '$entry* (por defecto)';
-  }
-
-  @override
   String get gReset => 'Restablecer:';
 
   @override
@@ -268,10 +263,10 @@ class EFUILangEs extends EFUILang {
   String get csAdvanced => 'Avanzada';
 
   @override
-  String get csHighContrast => 'Utilice colores de alto contraste';
+  String get csMonoChrome => 'Usar esquema monocromático';
 
   @override
-  String get csMonoChrome => 'Usar esquema monocromático';
+  String get csHighContrast => 'Utilice un esquema de alto contraste';
 
   @override
   String get csPrimary => 'Primario';
@@ -412,7 +407,7 @@ class EFUILangEs extends EFUILang {
   String get csSurfaceTint => 'Tinte de superficie';
 
   @override
-  String get csPickerTitle => '¡Selecciona un color!';
+  String get csPickerTitle => 'Selecciona un color';
 
   @override
   String get csRecommended => '¿Usar recomendación de contraste?';

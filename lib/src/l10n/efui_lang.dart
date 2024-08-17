@@ -240,12 +240,6 @@ abstract class EFUILang {
   /// **'{name} is set to {value}'**
   String gSetToValue(Object name, Object value);
 
-  /// No description provided for @gDefaultEntry.
-  ///
-  /// In en, this message translates to:
-  /// **'{entry}* (default)'**
-  String gDefaultEntry(Object entry);
-
   /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
@@ -582,17 +576,17 @@ abstract class EFUILang {
   /// **'Advanced'**
   String get csAdvanced;
 
-  /// No description provided for @csHighContrast.
-  ///
-  /// In en, this message translates to:
-  /// **'Use high contrast colors'**
-  String get csHighContrast;
-
   /// No description provided for @csMonoChrome.
   ///
   /// In en, this message translates to:
   /// **'Use monochrome scheme'**
   String get csMonoChrome;
+
+  /// No description provided for @csHighContrast.
+  ///
+  /// In en, this message translates to:
+  /// **'Use high contrast scheme'**
+  String get csHighContrast;
 
   /// No description provided for @csPrimary.
   ///
@@ -873,7 +867,7 @@ abstract class EFUILang {
   /// No description provided for @csPickerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Pick a color!'**
+  /// **'Pick a color'**
   String get csPickerTitle;
 
   /// No description provided for @csRecommended.
