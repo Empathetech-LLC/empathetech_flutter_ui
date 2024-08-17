@@ -51,9 +51,7 @@ class OpenUIScaffold extends StatelessWidget {
         tooltip: 'Options menu',
       ),
       menuChildren: <Widget>[
-        if (Theme.of(context).platform != TargetPlatform.iOS) ...<Widget>{
-          BYOButton(parentContext: context, l10n: l10n),
-        },
+        BYOButton(parentContext: context, l10n: l10n),
         FeedbackButton(
           parentContext: context,
           scaffoldMessengerKey: scaffoldMessengerKey,
