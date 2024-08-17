@@ -49,7 +49,7 @@ class EzSwapSpacer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
+    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
 
     return limitedSpace
         ? EzSpacer(space: space, horizontal: false)
@@ -95,14 +95,14 @@ class EzSwapSeparator extends StatelessWidget {
 
   /// Defaults to [EzSeparator.vertical] => false
   /// When [ScreenSpace.isLimited], it swaps to [EzSeparator.horizontal] => false
-  const EzSwapSeparator(this.space, {super.key});
+  const EzSwapSeparator({super.key, this.space});
 
   @override
   Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? false;
+    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
 
     return limitedSpace
-        ? const EzSeparator(horizontal: false)
-        : const EzSeparator(vertical: false);
+        ? EzSeparator(space: space, horizontal: false)
+        : EzSeparator(space: space, vertical: false);
   }
 }
