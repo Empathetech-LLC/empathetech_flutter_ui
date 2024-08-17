@@ -32,7 +32,6 @@
   "gAttention": "Attention",
   "gCurrently": "Currently:",
   "gSetToValue": "{name} is set to {value}",
-  "gDefaultEntry": "{entry}* (default)",
   "gReset": "Reset:",
   "gResetToValue": "Reset {name} to {value}",
   "gResetAll": "Reset all",
@@ -116,7 +115,6 @@
   "csQuick": "Quick",
   "csAdvanced": "Advanced",
 
-  "csHighContrast": "Use high contrast colors",
   "csMonoChrome": "Use monochrome scheme",
   
   "csPrimary": "Primary",

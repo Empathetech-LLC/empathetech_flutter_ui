@@ -33,7 +33,6 @@
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
   "gSetToValue": "{name} está establecido en {value}",
-  "gDefaultEntry": "{entry}* (por defecto)",
   "gReset": "Restablecer:",
   "gResetToValue": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
@@ -117,7 +116,6 @@
 
   "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
 
-  "csHighContrast": "Utilice colores de alto contraste",
   "csMonoChrome": "Usar esquema monocromático",
 
   "csPrimary": "Primario",
