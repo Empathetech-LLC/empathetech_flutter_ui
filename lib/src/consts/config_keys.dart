@@ -169,8 +169,8 @@ const String fontSpacingSampleString = '-5.55';
 /// 1.0
 const double minFontHeight = 1.0;
 
-/// 3.0
-const double maxFontHeight = 3.0;
+/// 5.0
+const double maxFontHeight = 5.0;
 
 // Image settings' keys //
 
