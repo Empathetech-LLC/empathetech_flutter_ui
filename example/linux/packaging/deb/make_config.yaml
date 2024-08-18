@@ -9,12 +9,16 @@ priority: optional
 
 section: x11
 
+installed_size: 51200
+
 essential: false
 
 keywords:
   - Open Source
   - Design
   - Accessibility
+
+generic_name: Open UI
 
 categories:
   - Development
