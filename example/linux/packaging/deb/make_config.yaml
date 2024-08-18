@@ -13,6 +13,8 @@ installed_size: 51200
 
 essential: false
 
+icon: assets/images/settings-sandbox-round.png
+
 keywords:
   - Open Source
   - Design
