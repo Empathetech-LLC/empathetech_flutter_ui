@@ -1,0 +1,28 @@
+name: open-ui
+version: 0.1.0
+summary: Built for you, by you
+description: Checkout Open UI, a sandbox app where every aspect of the UI can be controlled by you.
+
+confinement: strict
+base: core22
+grade: stable
+
+slots:
+  dbus-open-ui:
+    interface: dbus
+    name: net.empathetech.open-ui
+
+apps:
+  open-ui:
+    command: open_ui
+    extensions: [gnome]
+    plugs:
+    - network
+    slots:
+      - dbus-open-ui
+
+parts:
+  open-ui:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart
