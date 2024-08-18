@@ -1,0 +1,22 @@
+display_name: Open UI
+package_name: open-ui
+
+maintainer:
+  name: Empathetech LLC
+  email: support@empathetech.net
+
+priority: optional
+
+section: x11
+
+essential: false
+
+keywords:
+  - Open Source
+  - Design
+  - Accessibility
+
+categories:
+  - Development
+
+startup_notify: true
