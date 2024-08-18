@@ -4,7 +4,7 @@ summary: Built for you, by you
 description: Checkout Open UI, a sandbox app where every aspect of the UI can be controlled by you.
 
 confinement: strict
-base: core22
+base: core20
 grade: stable
 
 slots:
