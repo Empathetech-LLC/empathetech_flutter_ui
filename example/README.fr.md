@@ -3,7 +3,9 @@
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.fr.md)
 
-See the source [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme) for a developer guide.
+In French!
+
+See the source [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme)
 
 ## Releases
 
