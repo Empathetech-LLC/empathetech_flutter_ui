@@ -283,7 +283,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
     return Semantics(
       button: true,
-      hint: l10n.csPickerSemantics(label),
+      hint: l10n.csPickerHint(label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => changeColor(context),

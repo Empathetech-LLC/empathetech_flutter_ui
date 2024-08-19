@@ -99,7 +99,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      hint: l10n.ssLangSemantics,
+      hint: l10n.ssLangHint,
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),
