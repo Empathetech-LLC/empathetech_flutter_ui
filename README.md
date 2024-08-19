@@ -3,11 +3,11 @@
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.fr.md)
 
-EFUI is a starter kit for building apps with a strong foundation in every pillar of digital accessibility:
+EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a solid foundation in every aspect of digital accessibility:
 
 - **Platform availability**
-  - Thanks to Flutter, EFUI is fully cross platform! EFUI can build apps for Android, iOS, Linux, MacOS, Windows and Web!
-    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) and Material (Android and beyond) styling
+  - Thanks to Flutter, EFUI is fully cross platform! You can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
+    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) styling
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
   - Checkout the [demo](#live) to see it in action
@@ -15,13 +15,12 @@ EFUI is a starter kit for building apps with a strong foundation in every pillar
   - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
 - **User customization**
   - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.
-    - EFUI enables developers to expose control over app theme, language, typography, layout, color scheme and images to their users.
+    - EFUI exposes every aspect of an app's theme to be controlled by the user.
 - **Internationalization**
-  - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish. With the [infrastructure](./l10n.yaml) for internationalization laid out, the only work left are the translations themselves.
+  - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish and French. Alongside the [infrastructure](./l10n.yaml) for unlimited future translations.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
 
-
-<br>When built with EFUI, apps can truly reach any audience. Let's make the internet a more accessible place together!
+<br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a better place together!
 
 ## Table of Contents
 
