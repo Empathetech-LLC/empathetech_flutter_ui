@@ -1,4 +1,7 @@
 # Empathetech Flutter UI <br><br> Build apps for anyone
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.md)
+[![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.es.md)
+[![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.fr.md)
 
 EFUI is a starter kit for building apps with a strong foundation in every pillar of digital accessibility:
 
