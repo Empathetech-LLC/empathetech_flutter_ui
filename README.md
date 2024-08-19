@@ -64,8 +64,8 @@ Here are some (unaffiliated) videos you might also find helpful.
 2. Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/theme_data.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
 
 <br>--- Recommended ---
-3. Copy the [settings sandbox](./example/lib/screens/) to your project
-4. Enjoy
+1. Copy the [settings sandbox](./example/lib/screens/) to your project
+2. Enjoy
 
 ## Setup
 
@@ -112,8 +112,6 @@ Once gathered, `EzConfig` stores the data in a Singleton instance for efficient 
 
 ```Dart
 class YourApp extends StatelessWidget {
-  final Key? key;
-
   const YourApp({super.key});
 
   @override
@@ -126,20 +124,17 @@ class YourApp extends StatelessWidget {
         localizationsDelegates: {
           LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
-          ...YourAppLang.localizationsDelegates,
+          YourAppFeedbackLocalizationsDelegate,
         },
 
         // Supported languages
-        supportedLocales: {
-          ...EFUILang.supportedLocales,
-          ...YourAppLang.supportedLocales,
-        },
+        supportedLocales: EFUILang.supportedLocales,ß
 
         // Current language
         locale: EzConfig.getLocale(),
 
-        title: YourAppTitle,
-        routerConfig: _yourAppRouter,
+        title: yourAppTitle,
+        routerConfig: yourAppRouter,
       ),
     );
   }
@@ -190,12 +185,6 @@ final GoRouter _yourAppRouter = GoRouter(
               },
             ),
             GoRoute(
-              path: textSettingsPath,
-              builder: (BuildContext context, GoRouterState state) {
-                return const TextSettingsScreen();
-              },
-            ),
-            GoRoute(
               path: layoutSettingsPath,
               builder: (BuildContext context, GoRouterState state) {
                 return const LayoutSettingsScreen();
@@ -225,19 +214,19 @@ And boom!
 
 **It's that Ez!**
 
-*NOTE:* This code snippets assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsScreen()`
+*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsScreen()`
 
 #### How it works
 
 The example app's screens neatly organize all the custom Widgets that enable EFUI's user customization!
 
 * [EzDominantHandSwitch](./lib/src/classes/user_customization/dominant_hand_switch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzThemeModeSwitch](./lib/src/classes/user_customization/theme_mode_swtich.dart): A toggle for switching between light, dark, and system theme.
-* [EzLocaleSetting](./lib/src/classes/user_customization/local_setting.dart): A menu for updating the app's language.
-* [TextSettings](./lib/src/classes/user_customization/text_style/): A collection of custom Widgets for controlling an app's TextStyles
-* [EzLayoutSetting](./lib/src/classes/user_customization/layout_setting.dart): A dynamic slider Widget, with live preview(s), for updating the themes layout (margin, padding, and spacing).
-* [EzColorSetting](./lib/src/classes/user_customization/color_setting.dart): A color picker for updating each entry in an app's ColorScheme.
-* [EzImageSetting](./lib/src/classes/user_customization/image_setting.dart): An image uploader for updating app assets.
+* [EzThemeModeSwitch](./lib/src/classes/user_customization/theme_mode_swtich.dart): A toggle menu for selecting the app's theme: light, dark, system.
+* [EzLocaleSetting](./lib/src/classes/user_customization/local_setting.dart): A menu for updating the app's language. EFUI currently supports English, Spanish, and French.
+* [TextSettings](./lib/src/classes/user_customization/text_style/): A collection of custom Widgets for controlling the app's TextStyles.
+* [EzLayoutSetting](./lib/src/classes/user_customization/layout_setting.dart): A dynamic slider Widget, with live previews, for updating the app's layout: margin, padding, and spacing.
+* [EzColorSetting](./lib/src/classes/user_customization/color_setting.dart): A color picker for updating each entry in the app's ColorScheme.
+* [EzImageSetting](./lib/src/classes/user_customization/image_setting.dart): An image picker for updating app assets.
 * [EzResetButton](./lib/src/classes/user_customization/reset_button.dart): A customizable button for resetting groups of preferences.
 
 By default, every base [theme setting](./lib/src/consts/config_keys.dart) is exposed. Additional keys provided to `customDefaults` can be updated with these Widgets as well!
@@ -253,22 +242,25 @@ The pillars of **platform availability** and **user customization** are "set it 
 But, as you grow your apps, the other pillars require continuous development.
 
 Thankfully, EFUI's got you covered there too!
-* [Responsive design](./lib/src/classes/responsive_design/): Widgets that aid in building responsive UI/UXs
+* [Responsive design](./lib/src/classes/responsive_design/): Widgets that aid in building responsive UI/UX
 * [Screen reader support](./lib/src/classes/screen_reader_support/): Widgets with streamlined semantics
 
-But, this should be plenty to get you started (and avoid overload). Once you're feeling settled, the code has been organized to aid in exploration!
+<br>At the risk of information overload, that should be plenty to get you started. Once you're feeling settled, the repo has been organized to aid in exploration!
 
 # Demo
 
-### [Live](https://www.empathetech.net/#/settings)
-
-*[Source code](https://github.com/Empathetech-LLC/dotnet-public)*
+### [Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)
+### [iOS](https://apps.apple.com/us/app/open-ui/id6499560244)
+### [Linux](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
+### [MacOS](https://apps.apple.com/us/app/open-ui/id6499560244)
+### [Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
+### [Web](https://www.empathetech.net/#/settings)
 
 # Contributing
 
 ## The vibes!
 
-If you build something with EFUI, let us know! We'd love to have a third-party [Demo](#demo) section.
+If you build something with EFUI, let us know!
 
 ## Time
 
@@ -312,18 +304,20 @@ Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for ve
 
 EFUI wouldn't be as awesome as it is without these other awesome community projects...
 
-* [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets)
-* [Flutter colorpicker](https://pub.dev/packages/flutter_colorpicker)
-* [provider](https://pub.dev/packages/provider)
-* [Localized Locales](https://pub.dev/packages/flutter_localized_locales)
 * [Country flags](https://pub.dev/packages/country_flags)
+* [Feedback](https://pub.dev/packages/feedback)
+* [Flex color picker](https://pub.dev/packages/flex_color_picker)
+* [Localized locales](https://pub.dev/packages/flutter_localized_locales)
+* [Flutter platform widgets](https://pub.dev/packages/flutter_platform_widgets)
+* [Provider](https://pub.dev/packages/provider)
+* [Share plus](https://pub.dev/packages/share_plus)
 
 And, of course, all the awesome Flutter devs...
 
-* [Shared preferences](https://pub.dev/packages/shared_preferences)
-* [URL launcher](https://pub.dev/packages/url_launcher)
 * [Google fonts](https://pub.dev/packages/google_fonts)
 * [Image picker](https://pub.dev/packages/image_picker)
 * [go_router](https://pub.dev/packages/go_router)
 * [path](https://pub.dev/packages/path)
 * [path provider](https://pub.dev/packages/path_provider)
+* [Shared preferences](https://pub.dev/packages/shared_preferences)
+* [URL launcher](https://pub.dev/packages/url_launcher)
