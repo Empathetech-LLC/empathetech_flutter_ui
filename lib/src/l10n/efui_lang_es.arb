@@ -51,7 +51,7 @@
 
   "ssLanguage": "Idioma",
   "ssLanguages": "Idiomas",
-  "ssLangSemantics": "Idioma de la aplicación",
+  "ssLangHint": "Idioma de la aplicación",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
@@ -114,7 +114,7 @@
   "csQuick": "Rápida",
   "csAdvanced": "Avanzada",
 
-  "csPickerSemantics": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
+  "csPickerHint": "Activar para abrir un selector de color para {name}. Mantenga presionado para más opciones.",
 
   "csMonoChrome": "Usar esquema monocromático",
   "csHighContrast": "Utilice un esquema de alto contraste",

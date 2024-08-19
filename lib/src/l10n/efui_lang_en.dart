@@ -71,7 +71,7 @@ class EFUILangEn extends EFUILang {
   String get gHowThisWorks => 'How this works';
 
   @override
-  String get gHowThisWorksHint => 'Activate to open helpful documentation';
+  String get gHowThisWorksHint => 'Open helpful documentation';
 
   @override
   String get gAttention => 'Attention';
@@ -125,7 +125,7 @@ class EFUILangEn extends EFUILang {
   String get ssLanguages => 'Languages';
 
   @override
-  String get ssLangSemantics => 'App language';
+  String get ssLangHint => 'App language';
 
   @override
   String get ssResetAll => 'Reset all settings?';
@@ -252,8 +252,8 @@ class EFUILangEn extends EFUILang {
   String get csPageTitle => 'Color settings';
 
   @override
-  String csPickerSemantics(Object name) {
-    return 'Activate to open a color picker for $name. Long press for more options.';
+  String csPickerHint(Object name) {
+    return 'Open a color picker for $name. Long press for more options.';
   }
 
   @override

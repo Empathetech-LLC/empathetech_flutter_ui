@@ -27,7 +27,7 @@
   "gEditingTheme": "Editing: {themeType} theme",
 
   "gHowThisWorks": "How this works",
-  "gHowThisWorksHint": "Activate to open helpful documentation",
+  "gHowThisWorksHint": "Open helpful documentation",
 
   "gAttention": "Attention",
   "gCurrently": "Currently:",
@@ -50,7 +50,7 @@
   
   "ssLanguage": "Language",
   "ssLanguages": "Languages",
-  "ssLangSemantics": "App language",
+  "ssLangHint": "App language",
 
   "ssResetAll": "Reset all settings?",
 
@@ -110,7 +110,7 @@
   
   "csPageTitle": "Color settings",
 
-  "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
+  "csPickerHint": "Open a color picker for {name}. Long press for more options.",
 
   "csQuick": "Quick",
   "csAdvanced": "Advanced",

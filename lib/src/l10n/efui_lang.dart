@@ -219,7 +219,7 @@ abstract class EFUILang {
   /// No description provided for @gHowThisWorksHint.
   ///
   /// In en, this message translates to:
-  /// **'Activate to open helpful documentation'**
+  /// **'Open helpful documentation'**
   String get gHowThisWorksHint;
 
   /// No description provided for @gAttention.
@@ -312,11 +312,11 @@ abstract class EFUILang {
   /// **'Languages'**
   String get ssLanguages;
 
-  /// No description provided for @ssLangSemantics.
+  /// No description provided for @ssLangHint.
   ///
   /// In en, this message translates to:
   /// **'App language'**
-  String get ssLangSemantics;
+  String get ssLangHint;
 
   /// No description provided for @ssResetAll.
   ///
@@ -558,11 +558,11 @@ abstract class EFUILang {
   /// **'Color settings'**
   String get csPageTitle;
 
-  /// No description provided for @csPickerSemantics.
+  /// No description provided for @csPickerHint.
   ///
   /// In en, this message translates to:
-  /// **'Activate to open a color picker for {name}. Long press for more options.'**
-  String csPickerSemantics(Object name);
+  /// **'Open a color picker for {name}. Long press for more options.'**
+  String csPickerHint(Object name);
 
   /// No description provided for @csQuick.
   ///

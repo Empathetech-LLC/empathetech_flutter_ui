@@ -125,7 +125,7 @@ class EFUILangEs extends EFUILang {
   String get ssLanguages => 'Idiomas';
 
   @override
-  String get ssLangSemantics => 'Idioma de la aplicación';
+  String get ssLangHint => 'Idioma de la aplicación';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
@@ -252,7 +252,7 @@ class EFUILangEs extends EFUILang {
   String get csPageTitle => 'Configuraciones de color';
 
   @override
-  String csPickerSemantics(Object name) {
+  String csPickerHint(Object name) {
     return 'Activar para abrir un selector de color para $name. Mantenga presionado para más opciones.';
   }
 
