@@ -1,0 +1,23 @@
+display_name: Open UI
+icon: assets/images/settings-sandbox-round.png
+summary: Checkout Open UI, a sandbox app where every aspect of the UI can be controlled by you.
+group: Applications/Development Tools
+vendor: Empathetech LLC
+packager: Empathetech LLC
+packagerEmail: support@empathetech.net
+license: GPLv3
+url: https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/example
+
+build_arch: x86_64
+
+keywords:
+  - Open Source
+  - Design
+  - Accessibility
+
+generic_name: Open UI
+
+categories:
+  - Development
+
+startup_notify: true
