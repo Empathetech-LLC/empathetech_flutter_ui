@@ -9,6 +9,9 @@ const String homePath = '/';
 /// 'SUCCESS'
 const String success = 'SUCCESS';
 
+/// 255
+const int rMax = 255;
+
 /// 700
 /// https://pub.dev/packages/flutter_adaptive_scaffold
 const double smallBreakpoint = 700.0;
