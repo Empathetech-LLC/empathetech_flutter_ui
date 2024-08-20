@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -29,6 +30,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   // Gather the theme data //
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
+  int keyValue = Random().nextInt(rMax);
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
@@ -69,11 +71,13 @@ class _ImageSettingsState extends State<ImageSettings> {
           // Page image setting
           isDark
               ? EzImageSetting(
+                  key: ValueKey<String>('dark$keyValue'),
                   configKey: darkPageImageKey,
                   label: l10n.isBackground,
                   updateTheme: Brightness.dark,
                 )
               : EzImageSetting(
+                  key: ValueKey<String>('light$keyValue'),
                   configKey: lightPageImageKey,
                   label: l10n.isBackground,
                   updateTheme: Brightness.light,
@@ -85,6 +89,8 @@ class _ImageSettingsState extends State<ImageSettings> {
             dialogTitle: l10n.isResetAll(themeProfile),
             onConfirm: () async {
               await EzConfig.removeKeys(imageKeys.keys.toSet());
+              keyValue = Random().nextInt(rMax);
+              setState(() {});
             },
           ),
           spacer,
