@@ -95,7 +95,8 @@ class _ImageSettingState extends State<EzImageSetting> {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
-    // From file && camera rely on path_provider, which isn't supported by Flutter Web
+    // From file
+    // Doesn't work on web
     if (!kIsWeb) {
       options.addAll(<Widget>[
         // From file
@@ -113,7 +114,13 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: Icon(PlatformIcons(context).folder),
         ),
         spacer,
+      ]);
+    }
 
+    // From camera
+    // Only works on mobile
+    if (Platform.isAndroid || Platform.isIOS) {
+      options.addAll(<Widget>[
         // From camera
         ElevatedButton.icon(
           onPressed: () async {
@@ -132,7 +139,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       ]);
     }
 
-    // From network && reset work everywhere
+    // From network && reset
+    // Works everywhere
     options.addAll(<Widget>[
       // From network
       ElevatedButton.icon(
