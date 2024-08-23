@@ -42,8 +42,8 @@
 
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
+  "ssSettingsGuide": "Restart the app to apply your changes.\n\nHave fun!",
+  "ssSettingsGuideWeb": "Reload the page to apply your changes.\n\nHave fun!",
 
   "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",

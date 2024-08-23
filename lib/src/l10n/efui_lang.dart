@@ -279,13 +279,13 @@ abstract class EFUILang {
   /// No description provided for @ssSettingsGuide.
   ///
   /// In en, this message translates to:
-  /// **'Restart the app to save your changes.\n\nHave fun!'**
+  /// **'Restart the app to apply your changes.\n\nHave fun!'**
   String get ssSettingsGuide;
 
   /// No description provided for @ssSettingsGuideWeb.
   ///
   /// In en, this message translates to:
-  /// **'Reload the page to save your changes.\n\nHave fun!'**
+  /// **'Reload the page to apply your changes.\n\nHave fun!'**
   String get ssSettingsGuideWeb;
 
   /// No description provided for @ssThemeMode.

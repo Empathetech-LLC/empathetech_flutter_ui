@@ -106,11 +106,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Restart the app to save your changes.\n\nHave fun!';
+      'Restart the app to apply your changes.\n\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Reload the page to save your changes.\n\nHave fun!';
+      'Reload the page to apply your changes.\n\nHave fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';
