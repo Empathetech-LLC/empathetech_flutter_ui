@@ -297,25 +297,3 @@ Many thanks for any and all donations!
 ## Translations
 
 Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
-
-## Flutter OSS
-
-EFUI wouldn't be as awesome as it is without these other awesome community projects...
-
-* [Country flags](https://pub.dev/packages/country_flags)
-* [Feedback](https://pub.dev/packages/feedback)
-* [Flex color picker](https://pub.dev/packages/flex_color_picker)
-* [Localized locales](https://pub.dev/packages/flutter_localized_locales)
-* [Flutter platform widgets](https://pub.dev/packages/flutter_platform_widgets)
-* [Provider](https://pub.dev/packages/provider)
-* [Share plus](https://pub.dev/packages/share_plus)
-
-And, of course, all the awesome Flutter devs...
-
-* [Google fonts](https://pub.dev/packages/google_fonts)
-* [Image picker](https://pub.dev/packages/image_picker)
-* [go_router](https://pub.dev/packages/go_router)
-* [path](https://pub.dev/packages/path)
-* [path provider](https://pub.dev/packages/path_provider)
-* [Shared preferences](https://pub.dev/packages/shared_preferences)
-* [URL launcher](https://pub.dev/packages/url_launcher)
