@@ -296,4 +296,4 @@ Many thanks for any and all donations!
 
 ## Translations
 
-Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
+Note to translator: please credit yourself :)
