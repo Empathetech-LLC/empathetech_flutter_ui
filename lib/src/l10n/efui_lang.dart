@@ -6,6 +6,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'efui_lang_en.dart' deferred as efui_lang_en;
 import 'efui_lang_es.dart' deferred as efui_lang_es;
+import 'efui_lang_fr.dart' deferred as efui_lang_fr;
 
 // ignore_for_file: type=lint
 
@@ -93,7 +94,8 @@ abstract class EFUILang {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('es')
+    Locale('es'),
+    Locale('fr')
   ];
 
   /// No description provided for @gYes.
@@ -1043,7 +1045,7 @@ class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+      <String>['en', 'es', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_EFUILangDelegate old) => false;
@@ -1060,6 +1062,10 @@ Future<EFUILang> lookupEFUILang(Locale locale) {
       return efui_lang_es
           .loadLibrary()
           .then((dynamic _) => efui_lang_es.EFUILangEs());
+    case 'fr':
+      return efui_lang_fr
+          .loadLibrary()
+          .then((dynamic _) => efui_lang_fr.EFUILangFr());
   }
 
   throw FlutterError(
