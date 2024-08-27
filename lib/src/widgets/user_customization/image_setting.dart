@@ -59,6 +59,17 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
+  final double padding = EzConfig.get(paddingKey);
+  static const EzSpacer spacer = EzSpacer();
+
+  late final ThemeData theme = Theme.of(context);
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final bool isWeb = kIsWeb;
+  late final TargetPlatform platform = Theme.of(context).platform;
+
+  // Define build data //
+
   late String? currPath = EzConfig.get(widget.configKey);
 
   late bool updateTheme = (widget.updateTheme != null);
@@ -66,12 +77,6 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late final TextEditingController urlText = TextEditingController();
   late final GlobalKey<FormState> urlFormKey = GlobalKey<FormState>();
-
-  final double padding = EzConfig.get(paddingKey);
-  static const EzSpacer spacer = EzSpacer();
-
-  late final ThemeData theme = Theme.of(context);
-  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define button functions //
 
@@ -97,7 +102,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // From file
     // Doesn't work on web
-    if (!kIsWeb) {
+    if (!isWeb) {
       options.addAll(<Widget>[
         // From file
         ElevatedButton.icon(
@@ -119,7 +124,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // From camera
     // Only works on mobile
-    if (Platform.isAndroid || Platform.isIOS) {
+    if (!isWeb &&
+        (platform == TargetPlatform.android ||
+            platform == TargetPlatform.iOS)) {
       options.addAll(<Widget>[
         // From camera
         ElevatedButton.icon(
