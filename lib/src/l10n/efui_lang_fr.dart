@@ -228,7 +228,7 @@ class EFUILangFr extends EFUILang {
   String get tsLabelLink => 'les labels ?';
 
   @override
-  String get tsLabelP2 => 'Ni trop gros, ni trop petit ?';
+  String get tsLabelP2 => ' Ni trop gros, ni trop petit ?';
 
   @override
   String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
