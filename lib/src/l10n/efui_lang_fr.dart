@@ -7,266 +7,267 @@ class EFUILangFr extends EFUILang {
   EFUILangFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get gYes => 'Yes';
+  String get gYes => 'Oui';
 
   @override
-  String get gNo => 'No';
+  String get gNo => 'Non';
 
   @override
-  String get gOptions => 'Options';
+  String get gOptions => 'Paramètres';
 
   @override
-  String get gApply => 'Apply';
+  String get gApply => 'Appliquer';
 
   @override
-  String get gContinue => 'Continue';
+  String get gContinue => 'Continuer';
 
   @override
-  String get gCancel => 'Cancel';
+  String get gCancel => 'Annuler';
 
   @override
-  String get gClose => 'Close';
+  String get gClose => 'Fermer';
 
   @override
-  String get gBYO => 'Build your own';
+  String get gBYO => 'Construisez la vôtre';
 
   @override
-  String get gGiveFeedback => 'Give feedback';
+  String get gGiveFeedback => 'Partager des commentaires';
 
   @override
   String gClipboard(Object thing) {
-    return '$thing copied to clipboard';
+    return '$thing copié dans le presse-papiers';
   }
 
   @override
-  String get gSupportEmail => 'Support Email';
+  String get gSupportEmail => 'E-mail de support';
 
   @override
-  String get gLeft => 'Left';
+  String get gLeft => 'Gauche';
 
   @override
-  String get gRight => 'Right';
+  String get gRight => 'Droite';
 
   @override
-  String get gBack => 'Back';
+  String get gBack => 'Retour';
 
   @override
-  String get gSystem => 'System';
+  String get gSystem => 'Système';
 
   @override
-  String get gLight => 'Light';
+  String get gLight => 'Clair';
 
   @override
-  String get gDark => 'Dark';
+  String get gDark => 'Sombre';
 
   @override
-  String get gEditing => 'Editing: ';
+  String get gEditing => 'Modification : ';
 
   @override
   String gEditingTheme(Object themeType) {
-    return 'Editing: $themeType theme';
+    return 'Modification : Thème $themeType';
   }
 
   @override
-  String get gHowThisWorks => 'How this works';
+  String get gHowThisWorks => 'Comment ça marche';
 
   @override
-  String get gHowThisWorksHint => 'Open helpful documentation';
+  String get gHowThisWorksHint => 'Ouvre la documentation utile';
 
   @override
   String get gAttention => 'Attention';
 
   @override
-  String get gCurrently => 'Currently:';
+  String get gCurrently => 'Actuellement :';
 
   @override
   String gSetToValue(Object name, Object value) {
-    return '$name is set to $value';
+    return '$name est défini sur $value';
   }
 
   @override
-  String get gReset => 'Reset:';
+  String get gReset => 'Réinitialiser :';
 
   @override
   String gResetToValue(Object name, Object value) {
-    return 'Reset $name to $value';
+    return 'Réinitialiser $name à $value';
   }
 
   @override
-  String get gResetAll => 'Reset all';
+  String get gResetAll => 'Tout réinitialiser';
 
   @override
-  String get gResetWarn => 'Cannot be undone';
+  String get gResetWarn => 'Ne peut pas être annulé';
 
   @override
-  String get gCreditTo => 'Credit to:';
+  String get gCreditTo => 'Crédits à :';
 
   @override
-  String get ssPageTitle => 'Settings';
+  String get ssPageTitle => 'Paramètres';
 
   @override
   String get ssSettingsGuide =>
-      'Restart the app to apply your changes.\n\nHave fun!';
+      'Redémarrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Reload the page to apply your changes.\n\nHave fun!';
+      'Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
-  String get ssThemeMode => 'Theme mode';
+  String get ssThemeMode => 'Mode de thème';
 
   @override
-  String get ssDominantHand => 'Dominant hand';
+  String get ssDominantHand => 'Main dominante';
 
   @override
-  String get ssLanguage => 'Language';
+  String get ssLanguage => 'Langue';
 
   @override
-  String get ssLanguages => 'Languages';
+  String get ssLanguages => 'Langues';
 
   @override
-  String get ssLangHint => 'App language';
+  String get ssLangHint => 'Langue de l\'appli';
 
   @override
-  String get ssResetAll => 'Reset all settings?';
+  String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
-  String get tsPageTitle => 'Text settings';
+  String get tsPageTitle => 'Paramètres de texte';
 
   @override
   String tsBatchOverride(Object setting) {
-    return 'You have already made granular \"$setting\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?';
+    return 'Vous avez déjà apporté des modifications à \"$setting\" dans les paramètres avancés.\n\nÊtes-vous sûr de vouloir remplacer ces modifications par une mise à jour de masse ?';
   }
 
   @override
-  String get tsDisplay => 'Display';
+  String get tsDisplay => 'Affichage';
 
   @override
-  String get tsHeadline => 'Headline';
+  String get tsHeadline => 'Gros titre';
 
   @override
-  String get tsTitle => 'Title';
+  String get tsTitle => 'Titre';
 
   @override
-  String get tsBody => 'Body';
+  String get tsBody => 'Corps';
 
   @override
   String get tsLabel => 'Label';
 
   @override
   String tsLinkHint(Object style) {
-    return 'Activate to edit $style';
+    return 'Activer pour modifier $style';
   }
 
   @override
-  String get tsFontFamily => 'Font family';
+  String get tsFontFamily => 'Police de caractères';
 
   @override
-  String get tsFontSize => 'Font size';
+  String get tsFontSize => 'Taille de police';
 
   @override
-  String get tsBold => 'Bold';
+  String get tsBold => 'Gras';
 
   @override
-  String get tsItalic => 'Italic';
+  String get tsItalic => 'Italique';
 
   @override
-  String get tsUnderline => 'Underline';
+  String get tsUnderline => 'Souligné';
 
   @override
-  String get tsLetterSpacing => 'Letter spacing';
+  String get tsLetterSpacing => 'Espacement des lettres';
 
   @override
-  String get tsWordSpacing => 'Word spacing';
+  String get tsWordSpacing => 'Espacement des mots';
 
   @override
-  String get tsLineHeight => 'Line height';
+  String get tsLineHeight => 'Hauteur de ligne';
 
   @override
-  String get tsDecrease => 'Decrease';
+  String get tsDecrease => 'Réduire';
 
   @override
-  String get tsIncrease => 'Increase';
+  String get tsIncrease => 'Augmenter';
 
   @override
-  String get tsDisplayP1 => 'Does this ';
+  String get tsDisplayP1 => 'Est-ce que ça ';
 
   @override
-  String get tsDisplayLink => 'display';
+  String get tsDisplayLink => 's\'affiche';
 
   @override
-  String get tsDisplayP2 => ' well?';
+  String get tsDisplayP2 => ' bien ?';
 
   @override
-  String get tsHeadlineP1 => 'Are ';
+  String get tsHeadlineP1 => 'Est-ce que ';
 
   @override
-  String get tsHeadlineLink => 'headlines';
+  String get tsHeadlineLink => 'les gros titres';
 
   @override
-  String get tsHeadlineP2 => ' distinct...';
+  String get tsHeadlineP2 => ' se différencient...';
 
   @override
-  String get tsTitleP1 => 'from ';
+  String get tsTitleP1 => 'des ';
 
   @override
-  String get tsTitleLink => 'titles?';
+  String get tsTitleLink => 'titres ?';
 
   @override
-  String get tsBodyP1 => 'How about ';
+  String get tsBodyP1 => 'Qu\'en-est\'il ';
 
   @override
-  String get tsBodyLink => 'the body?';
+  String get tsBodyLink => 'du corps ?';
 
   @override
-  String get tsBodyP2 => ' Is it easy to read?';
+  String get tsBodyP2 => ' Est-ce facile à lire ?';
 
   @override
-  String get tsLabelP1 => 'And ';
+  String get tsLabelP1 => 'Et ';
 
   @override
-  String get tsLabelLink => 'the labels?';
+  String get tsLabelLink => 'les labels ?';
 
   @override
-  String get tsLabelP2 => ' Not too big, not too small?';
+  String get tsLabelP2 => 'Ni trop gros, ni trop petit ?';
 
   @override
-  String get tsResetAll => 'Reset all text settings?';
+  String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
 
   @override
-  String get lsPageTitle => 'Layout settings';
+  String get lsPageTitle => 'Paramètres de mise en page';
 
   @override
-  String get lsMargin => 'Margin';
+  String get lsMargin => 'Marge extérieure';
 
   @override
-  String get lsPadding => 'Padding';
+  String get lsPadding => 'Marge intérieure';
 
   @override
-  String get lsSpacing => 'Spacing';
+  String get lsSpacing => 'Espacement';
 
   @override
-  String get lsResetAll => 'Reset all layout settings?';
+  String get lsResetAll =>
+      'Réinitialiser tous les paramètres de mise en page ?';
 
   @override
-  String get csPageTitle => 'Color settings';
+  String get csPageTitle => 'Paramètres de couleur';
 
   @override
   String csPickerHint(Object name) {
-    return 'Open a color picker for $name. Long press for more options.';
+    return 'Ouvre un sélecteur de couleurs pour $name. Appuyer longuement pour plus d\'options.';
   }
 
   @override
-  String get csQuick => 'Quick';
+  String get csQuick => 'Rapide';
 
   @override
-  String get csAdvanced => 'Advanced';
+  String get csAdvanced => 'Avancé';
 
   @override
-  String get csMonoChrome => 'Use monochrome scheme';
+  String get csMonoChrome => 'Utiliser un schéma monochrome';
 
   @override
-  String get csHighContrast => 'Use high contrast scheme';
+  String get csHighContrast => 'Utiliser un schéma à contraste élevé';
 
   @override
   String get csPrimary => 'Primary';
@@ -407,97 +408,99 @@ class EFUILangFr extends EFUILang {
   String get csSurfaceTint => 'Surface tint';
 
   @override
-  String get csPickerTitle => 'Pick a color';
+  String get csPickerTitle => 'Choisissez une couleur';
 
   @override
-  String get csRecommended => 'Use contrast recommendation?';
+  String get csRecommended => 'Utiliser la recommandation de contraste ?';
 
   @override
-  String get csUseCustom => 'Use custom';
+  String get csUseCustom => 'Utiliser personnalisé';
 
   @override
-  String get csAddColor => 'Add a color';
+  String get csAddColor => 'Ajouter une couleur';
 
   @override
-  String get csRemove => 'Remove';
+  String get csRemove => 'Retirer';
 
   @override
-  String get csReset => 'Reset';
+  String get csReset => 'Réinitialiser';
 
   @override
-  String get csResetTo => 'Reset to...';
+  String get csResetTo => 'Réinitialiser à...';
 
   @override
-  String get csSchemeBase => 'Build scheme\nfrom image';
+  String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
 
   @override
-  String get csOptional => 'optional';
+  String get csOptional => 'optionnel';
 
   @override
-  String get csFromImage => 'Build the color scheme from an image';
+  String get csFromImage =>
+      'Construire le schéma de couleurs à partir d\'une image';
 
   @override
-  String get csColorScheme => 'color scheme';
+  String get csColorScheme => 'schéma de couleurs';
 
   @override
   String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
+    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
   }
 
   @override
-  String get isPageTitle => 'Image settings';
+  String get isPageTitle => 'Paramètres d\'image';
 
   @override
-  String get isBackground => 'Background';
+  String get isBackground => 'Arrière-plan';
 
   @override
   String get isImage => 'image';
 
   @override
   String isButtonHint(Object title) {
-    return 'Update the $title image';
+    return 'Mettre à jour l\'image $title';
   }
 
   @override
   String isDialogTitle(Object title) {
-    return 'How should the $title image be updated?';
+    return 'Comment l’image $title doit-elle être mise à jour ?';
   }
 
   @override
-  String get isFromFile => 'From file';
+  String get isFromFile => 'Depuis un fichier';
 
   @override
-  String get isFromCamera => 'From camera';
+  String get isFromCamera => 'Depuis la caméra';
 
   @override
-  String get isFromNetwork => 'From URL';
+  String get isFromNetwork => 'Depuis une URL';
 
   @override
-  String get isResetIt => 'Reset it';
+  String get isResetIt => 'Réinitialiser';
 
   @override
-  String get isClearIt => 'Clear it';
+  String get isClearIt => 'Effacer';
 
   @override
-  String get isEnterURL => 'Enter URL';
+  String get isEnterURL => 'Entrer l\'URL';
 
   @override
-  String get isGetFailed => 'Failed to retrieve image';
+  String get isGetFailed => 'Impossible de récupérer l\'image';
 
   @override
   String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
+    return 'Échec de la mise à jour de l\'image :\n$error';
   }
 
   @override
   String get isPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+      'Certains sites ne permettent pas à d\'autres d\'accéder à leurs images.\nEssayez une image provenant d\'un autre hébergeur.';
 
   @override
-  String get isUseForColors => 'Update the app colors using this image';
+  String get isUseForColors =>
+      'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
 
   @override
   String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
+    return 'Réinitialiser toutes les images du thème $themeType ?';
   }
 }
