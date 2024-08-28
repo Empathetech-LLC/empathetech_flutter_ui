@@ -3,4 +3,5 @@
  * See LICENSE for distribution and usage details.
  */
 
+/// Open UI
 const String appTitle = 'Open UI';
