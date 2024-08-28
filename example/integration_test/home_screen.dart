@@ -77,7 +77,7 @@ void testSuite({
       await tester.tap(leftButton);
       await tester.pumpAndSettle();
 
-      // Verify the row's children reversed
+      // Verify lefty layout
       final Finder handButtonsRowFinder = find.byType(Row).at(1);
       Row handButtonsRow = tester.widget(handButtonsRowFinder);
       List<Widget> children = handButtonsRow.children;
@@ -92,7 +92,7 @@ void testSuite({
       await tester.tap(rightButton);
       await tester.pumpAndSettle();
 
-      // Verify the row's children reset
+      // Verify righty layout
       handButtonsRow = tester.widget(handButtonsRowFinder);
       children = handButtonsRow.children;
 
@@ -200,4 +200,23 @@ void testSuite({
       // Activate reset button
       await tester.tap(yesButton);
       await tester.pumpAndSettle();
+
+      // Options menu //
+
+      final Finder optionsMenu = find.byType(MenuAnchor);
+
+      // Verify the button exists
+      expect(optionsMenu, findsOneWidget);
+      await touch(tester: tester, finder: optionsMenu);
+
+      // Verify the options appear
+      final Finder byoButton = find.text(l10n.gBYO).last;
+      final Finder feedbackButton = find.text(l10n.gGiveFeedback).last;
+
+      expect(byoButton, findsOneWidget);
+      expect(feedbackButton, findsOneWidget);
+
+      // Verify the menu is dismissible
+      await dismissTap(tester);
+      await touch(tester: tester, finder: optionsMenu);
     });
