@@ -213,7 +213,7 @@ class EFUILangFr extends EFUILang {
   String get tsTitleLink => 'titres ?';
 
   @override
-  String get tsBodyP1 => 'Qu\'en-est\'il ';
+  String get tsBodyP1 => 'Qu\'en est-il ';
 
   @override
   String get tsBodyLink => 'du corps ?';
@@ -228,7 +228,7 @@ class EFUILangFr extends EFUILang {
   String get tsLabelLink => 'les labels ?';
 
   @override
-  String get tsLabelP2 => ' Ni trop gros, ni trop petit ?';
+  String get tsLabelP2 => ' Ni trop gros, ni trop petits ?';
 
   @override
   String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
