@@ -58,18 +58,26 @@ void testSuite({
 
       final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
 
+      // Verify the button exists
       expect(dominantHandButton, findsOneWidget);
       await touch(tester: tester, finder: dominantHandButton);
 
+      // Verify the options appear
       final Finder rightButton = find.text(l10n.gRight).last;
       final Finder leftButton = find.text(l10n.gLeft).last;
 
       expect(rightButton, findsOneWidget);
       expect(leftButton, findsOneWidget);
 
+      // Verify the menu is dismissible
+      await dismissTap(tester);
+      await touch(tester: tester, finder: dominantHandButton);
+
+      // Activate lefty layout
       await tester.tap(leftButton);
       await tester.pumpAndSettle();
 
+      // Verify the row's children reversed
       final Finder handButtonsRowFinder = find.byType(Row).at(1);
       Row handButtonsRow = tester.widget(handButtonsRowFinder);
       List<Widget> children = handButtonsRow.children;
@@ -78,11 +86,13 @@ void testSuite({
       expect(children[1], isA<EzSpacer>());
       expect(children[2], isA<Flexible>());
 
+      // Activate righty layout
       await touch(tester: tester, finder: dominantHandButton);
 
       await tester.tap(rightButton);
       await tester.pumpAndSettle();
 
+      // Verify the row's children reset
       handButtonsRow = tester.widget(handButtonsRowFinder);
       children = handButtonsRow.children;
 
@@ -94,46 +104,73 @@ void testSuite({
 
       final Finder themeModeButton = find.byType(DropdownMenu<ThemeMode>);
 
+      // Verify the button exists
       expect(themeModeButton, findsOneWidget);
       await touch(tester: tester, finder: themeModeButton);
 
+      // Verify the options appear
       final Finder systemButton = find.text(l10n.gSystem).last;
-      final Finder darkButton = find.text(l10n.gDark).last;
       final Finder lightButton = find.text(l10n.gLight).last;
+      final Finder darkButton = find.text(l10n.gDark).last;
 
       expect(systemButton, findsOneWidget);
-      expect(darkButton, findsOneWidget);
       expect(lightButton, findsOneWidget);
+      expect(darkButton, findsOneWidget);
 
-      await tester.tap(systemButton);
+      // Verify the menu is dismissible
+      await dismissTap(tester);
+      await touch(tester: tester, finder: themeModeButton);
+
+      // Activate light theme
+      await tester.tap(lightButton);
       await tester.pumpAndSettle();
 
+      // Activate dark theme
       await touch(tester: tester, finder: themeModeButton);
       await tester.tap(darkButton);
       await tester.pumpAndSettle();
 
+      // Activate system theme
       await touch(tester: tester, finder: themeModeButton);
-      await tester.tap(lightButton);
+      await tester.tap(systemButton);
       await tester.pumpAndSettle();
 
       // Language //
 
       final Finder languageButton = find.byType(EzLocaleSetting);
 
+      // Verify the button exists
       expect(languageButton, findsOneWidget);
       await touch(tester: tester, finder: languageButton);
 
+      // Verify the options appear
       final Finder englishButton = find.text(localeNames.nameOf('en')!).last;
       final Finder spanishButton = find.text(localeNames.nameOf('es')!).last;
+      final Finder frenchButton = find.text(localeNames.nameOf('fr')!).last;
+      final Finder closeBUtton = find.text(l10n.gClose).last;
 
       expect(englishButton, findsOneWidget);
       expect(spanishButton, findsOneWidget);
+      expect(frenchButton, findsOneWidget);
+      expect(closeBUtton, findsOneWidget);
 
+      // Verify the menu is dismissible
+      await dismissTap(tester);
+      await touch(tester: tester, finder: languageButton);
+
+      // Activate Spanish localizations
       await tester.tap(spanishButton);
       await tester.pumpAndSettle();
 
       await touch(tester: tester, finder: languageButton);
 
+      // Activate French localizations
+      await tester.tap(frenchButton);
+      await tester.pumpAndSettle();
+
+      await touch(tester: tester, finder: languageButton);
+
+      // Activate English localizations
       await tester.tap(englishButton);
       await tester.pumpAndSettle();
 
@@ -141,15 +178,26 @@ void testSuite({
 
       final Finder resetButton = find.byType(EzResetButton);
 
+      // Verify the button exists
       expect(resetButton, findsOneWidget);
       await touch(tester: tester, finder: resetButton);
 
+      // Verify the options appear
       final Finder noButton = find.text(l10n.gNo).last;
       final Finder yesButton = find.text(l10n.gYes).last;
 
       expect(noButton, findsOneWidget);
       expect(yesButton, findsOneWidget);
 
+      // Verify dismiss options
+      await dismissTap(tester);
+      await touch(tester: tester, finder: resetButton);
+
+      await tester.tap(noButton);
+      await tester.pumpAndSettle();
+      await touch(tester: tester, finder: resetButton);
+
+      // Activate reset button
       await tester.tap(yesButton);
       await tester.pumpAndSettle();
     });
