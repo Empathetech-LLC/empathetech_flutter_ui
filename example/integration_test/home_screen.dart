@@ -9,6 +9,7 @@ import 'utils.dart';
 import 'package:flutter/material.dart';
 import 'package:example/utils/consts.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
@@ -26,6 +27,7 @@ void testSuite({
   required Locale locale,
   required EFUILang l10n,
   required LocaleNames localeNames,
+  required SharedPreferences preferences,
   Function? setup,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -39,6 +41,8 @@ void testSuite({
 
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
+
+      final bool isLefty = preferences.getBool('isLefty') ?? false;
 
       //// Verify text loaded ////
 
@@ -73,32 +77,57 @@ void testSuite({
       await dismissTap(tester);
       await touch(tester: tester, finder: dominantHandButton);
 
-      // Activate lefty layout
-      await tester.tap(leftButton);
-      await tester.pumpAndSettle();
-
-      // Verify lefty layout
       final Finder handButtonsRowFinder = find.byType(Row).at(1);
       Row handButtonsRow = tester.widget(handButtonsRowFinder);
-      List<Widget> children = handButtonsRow.children;
+      List<Widget> handButtonsChildren = handButtonsRow.children;
 
-      expect(children[0], isA<DropdownMenu<bool>>());
-      expect(children[1], isA<EzSpacer>());
-      expect(children[2], isA<Flexible>());
+      if (isLefty) {
+        // Activate righty layout
+        await tester.tap(rightButton);
+        await tester.pumpAndSettle();
 
-      // Activate righty layout
-      await touch(tester: tester, finder: dominantHandButton);
+        // Verify righty layout
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
-      await tester.tap(rightButton);
-      await tester.pumpAndSettle();
+        // Activate lefty layout
+        await touch(tester: tester, finder: dominantHandButton);
 
-      // Verify righty layout
-      handButtonsRow = tester.widget(handButtonsRowFinder);
-      children = handButtonsRow.children;
+        await tester.tap(leftButton);
+        await tester.pumpAndSettle();
 
-      expect(children[0], isA<Flexible>());
-      expect(children[1], isA<EzSpacer>());
-      expect(children[2], isA<DropdownMenu<bool>>());
+        // Verify lefty layout
+        handButtonsRow = tester.widget(handButtonsRowFinder);
+        handButtonsChildren = handButtonsRow.children;
+
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
+      } else {
+        // Activate lefty layout
+        await tester.tap(leftButton);
+        await tester.pumpAndSettle();
+
+        // Verify lefty layout
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
+
+        // Activate righty layout
+        await touch(tester: tester, finder: dominantHandButton);
+
+        await tester.tap(rightButton);
+        await tester.pumpAndSettle();
+
+        // Verify righty layout
+        handButtonsRow = tester.widget(handButtonsRowFinder);
+        handButtonsChildren = handButtonsRow.children;
+
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
+      }
 
       // Theme mode //
 
@@ -107,6 +136,21 @@ void testSuite({
       // Verify the button exists
       expect(themeModeButton, findsOneWidget);
       await touch(tester: tester, finder: themeModeButton);
+
+      // Verify  layout
+      final Finder themeButtonsRowFinder = find.byType(Row).at(2);
+      final Row themeButtonsRow = tester.widget(themeButtonsRowFinder);
+      final List<Widget> themeButtonsChildren = themeButtonsRow.children;
+
+      if (isLefty) {
+        expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>());
+        expect(themeButtonsChildren[1], isA<EzSpacer>());
+        expect(themeButtonsChildren[2], isA<Flexible>());
+      } else {
+        expect(themeButtonsChildren[0], isA<Flexible>());
+        expect(themeButtonsChildren[1], isA<EzSpacer>());
+        expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
+      }
 
       // Verify the options appear
       final Finder systemButton = find.text(l10n.gSystem).last;
@@ -188,6 +232,23 @@ void testSuite({
 
       expect(noButton, findsOneWidget);
       expect(yesButton, findsOneWidget);
+
+      // Verify layout
+      final AlertDialog alertDialog = tester.widget(find.byType(AlertDialog));
+      final List<Widget> actions = alertDialog.actions!;
+      expect(actions.length, 2);
+
+      if (isLefty) {
+        expect(actions[0], isA<TextButton>());
+        expect((actions[0] as TextButton).child!.toString(), l10n.gYes);
+        expect(actions[1], isA<TextButton>());
+        expect((actions[1] as TextButton).child!.toString(), l10n.gNo);
+      } else {
+        expect(actions[0], isA<TextButton>());
+        expect((actions[0] as TextButton).child!.toString(), l10n.gNo);
+        expect(actions[1], isA<TextButton>());
+        expect((actions[1] as TextButton).child!.toString(), l10n.gYes);
+      }
 
       // Verify dismiss options
       await dismissTap(tester);
