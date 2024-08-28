@@ -71,4 +71,5 @@ Future<void> goBack({
 Future<void> dismissTap(WidgetTester tester) async {
   final Size size = tester.view.physicalSize;
   await tester.tapAt(Offset(size.width / 3, 1));
+  await tester.pumpAndSettle();
 }
