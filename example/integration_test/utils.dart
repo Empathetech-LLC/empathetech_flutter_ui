@@ -54,6 +54,7 @@ Future<void> touch({
   await tester.pumpAndSettle();
 }
 
+/// Find and touch the button whose [Tooltip] is [l10n.gBack]
 Future<void> goBack({
   required WidgetTester tester,
   required EFUILang l10n,
@@ -64,4 +65,10 @@ Future<void> goBack({
   await tester.ensureVisible(backButton);
   await tester.tap(backButton);
   await tester.pumpAndSettle();
+}
+
+/// Tap the top of the screen to dismiss a dialog
+Future<void> dismissTap(WidgetTester tester) async {
+  final Size size = tester.view.physicalSize;
+  await tester.tapAt(Offset(size.width / 3, 1));
 }
