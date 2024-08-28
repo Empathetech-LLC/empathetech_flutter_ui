@@ -48,17 +48,21 @@ Future<void> runTestSuites({
 
   const Locale english = Locale('en');
   const Locale spanish = Locale('es');
-  const List<Locale> locales = <Locale>[english, spanish];
+  const Locale french = Locale('fr');
+  const List<Locale> locales = <Locale>[english, spanish, french];
 
   final EFUILang enText = await EFUILang.delegate.load(english);
   final EFUILang esText = await EFUILang.delegate.load(spanish);
-  final List<EFUILang> l10ns = <EFUILang>[enText, esText];
+  final EFUILang frText = await EFUILang.delegate.load(french);
+  final List<EFUILang> l10ns = <EFUILang>[enText, esText, frText];
 
   final LocaleNames enNames =
       await const LocaleNamesLocalizationsDelegate().load(english);
   final LocaleNames esNames =
       await const LocaleNamesLocalizationsDelegate().load(spanish);
-  final List<LocaleNames> l10nNames = <LocaleNames>[enNames, esNames];
+  final LocaleNames frNames =
+      await const LocaleNamesLocalizationsDelegate().load(french);
+  final List<LocaleNames> l10nNames = <LocaleNames>[enNames, esNames, frNames];
 
   // Set mock values //
 
@@ -83,47 +87,6 @@ Future<void> runTestSuites({
   for (int i = 0; i < testSuites.length; i++) {
     final Function testSuite = testSuites[i];
     final String screenName = screenNames[i];
-
-    // Test Lefty //
-
-    await testSuite(
-      title: '$screenName lefty test',
-      locale: english,
-      l10n: enText,
-      localeNames: enNames,
-      setup: () async {
-        await preferences.setBool(isLeftyKey, true);
-      },
-    );
-
-    // Test light theme //
-
-    await testSuite(
-      title: '$screenName lefty test',
-      locale: english,
-      l10n: enText,
-      localeNames: enNames,
-      setup: () async {
-        await preferences.setBool(isDarkThemeKey, false);
-      },
-    );
-
-    // Test languages //
-
-    for (int i = 1; i < locales.length; i++) {
-      await testSuite(
-        title: '$screenName language test: ${locales[i].languageCode}',
-        locale: locales[i],
-        l10n: l10ns[i],
-        localeNames: l10nNames[i],
-        setup: () async {
-          await preferences.setStringList(
-            localeKey,
-            <String>[locales[i].languageCode],
-          );
-        },
-      );
-    }
 
     // Test user configs //
 
@@ -236,5 +199,46 @@ Future<void> runTestSuites({
         await preferences.setDouble(spacingKey, maxSpacing);
       },
     );
+
+    // Test Lefty //
+
+    await testSuite(
+      title: '$screenName lefty test',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      setup: () async {
+        await preferences.setBool(isLeftyKey, true);
+      },
+    );
+
+    // Test light theme //
+
+    await testSuite(
+      title: '$screenName light mode test',
+      locale: english,
+      l10n: enText,
+      localeNames: enNames,
+      setup: () async {
+        await preferences.setBool(isDarkThemeKey, false);
+      },
+    );
+
+    // Test languages //
+
+    for (int i = 1; i < locales.length; i++) {
+      await testSuite(
+        title: '$screenName language test: ${locales[i].languageCode}',
+        locale: locales[i],
+        l10n: l10ns[i],
+        localeNames: l10nNames[i],
+        setup: () async {
+          await preferences.setStringList(
+            localeKey,
+            <String>[locales[i].languageCode],
+          );
+        },
+      );
+    }
   }
 }
