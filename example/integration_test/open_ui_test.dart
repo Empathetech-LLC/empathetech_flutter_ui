@@ -96,6 +96,7 @@ Future<void> runTestSuites({
       locale: english,
       l10n: enText,
       localeNames: enNames,
+      preferences: preferences,
     );
 
     // Minimum config
@@ -104,6 +105,7 @@ Future<void> runTestSuites({
       locale: english,
       l10n: enText,
       localeNames: enNames,
+      preferences: preferences,
       setup: () async {
         // Text settings //
 
@@ -155,6 +157,7 @@ Future<void> runTestSuites({
       locale: english,
       l10n: enText,
       localeNames: enNames,
+      preferences: preferences,
       setup: () async {
         // Text settings //
 
@@ -207,6 +210,7 @@ Future<void> runTestSuites({
       locale: english,
       l10n: enText,
       localeNames: enNames,
+      preferences: preferences,
       setup: () async {
         await preferences.setBool(isLeftyKey, true);
       },
@@ -219,6 +223,7 @@ Future<void> runTestSuites({
       locale: english,
       l10n: enText,
       localeNames: enNames,
+      preferences: preferences,
       setup: () async {
         await preferences.setBool(isDarkThemeKey, false);
       },
@@ -232,6 +237,7 @@ Future<void> runTestSuites({
         locale: locales[i],
         l10n: l10ns[i],
         localeNames: l10nNames[i],
+        preferences: preferences,
         setup: () async {
           await preferences.setStringList(
             localeKey,
