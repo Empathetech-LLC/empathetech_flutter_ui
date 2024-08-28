@@ -61,7 +61,7 @@ flutter:
 flutter_launcher_icons:
   image_path: assets/images/settings-sandbox.jpg
   adaptive_icon_foreground: assets/images/settings-sandbox-round.png
-  adaptive_icon_background: "#000000"
+  adaptive_icon_background: "#F5F5F5"
   android: true
   ios: true
   remove_alpha_ios: true
