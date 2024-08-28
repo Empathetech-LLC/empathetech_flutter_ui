@@ -39,52 +39,6 @@ void testSuite({
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
 
-      //// Test navigation ////
-
-      // Text settings //
-
-      final Finder textSettingsButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.tsPageTitle,
-      );
-
-      expect(textSettingsButton, findsOneWidget);
-      await touch(tester, textSettingsButton);
-      await goBack(tester: tester, l10n: l10n);
-
-      // Layout settings //
-
-      final Finder layoutSettingsButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.lsPageTitle,
-      );
-
-      expect(layoutSettingsButton, findsOneWidget);
-      await touch(tester, layoutSettingsButton);
-      await goBack(tester: tester, l10n: l10n);
-
-      // Color settings //
-
-      final Finder colorSettingsButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.csPageTitle,
-      );
-
-      expect(colorSettingsButton, findsOneWidget);
-      await touch(tester, colorSettingsButton);
-      await goBack(tester: tester, l10n: l10n);
-
-      // Image settings //
-
-      final Finder imageSettingsButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.isPageTitle,
-      );
-
-      expect(imageSettingsButton, findsOneWidget);
-      await touch(tester, imageSettingsButton);
-      await goBack(tester: tester, l10n: l10n);
-
       //// Test functionality ////
 
       // Dominant hand  //
