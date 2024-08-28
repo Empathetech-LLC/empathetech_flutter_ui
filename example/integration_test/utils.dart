@@ -13,25 +13,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
-Future<void> goBack({
-  required WidgetTester tester,
-  required EFUILang l10n,
-}) async {
-  final Finder backButton = find.byTooltip(l10n.gBack);
-  expect(backButton, findsOneWidget);
-
-  await tester.ensureVisible(backButton);
-  await tester.tap(backButton);
-  await tester.pumpAndSettle();
-}
-
-/// Find, touch, and settle a touch-point
-Future<void> touch(WidgetTester tester, Finder toFind) async {
-  await tester.ensureVisible(toFind);
-  await tester.tap(toFind);
-  await tester.pumpAndSettle();
-}
-
 Widget testOpenUI({
   required String title,
   required Locale locale,
@@ -51,3 +32,36 @@ Widget testOpenUI({
         routerConfig: router,
       ),
     );
+
+/// Find text and ensure visibility
+Future<void> validateText({
+  required WidgetTester tester,
+  Matcher matcher = findsOneWidget,
+  required String finder,
+}) async {
+  final Finder textFinder = find.text(finder);
+  expect(textFinder, matcher);
+  await tester.ensureVisible(textFinder);
+}
+
+/// Find, touch, and settle a touch-point
+Future<void> touch({
+  required WidgetTester tester,
+  required Finder finder,
+}) async {
+  await tester.ensureVisible(finder);
+  await tester.tap(finder);
+  await tester.pumpAndSettle();
+}
+
+Future<void> goBack({
+  required WidgetTester tester,
+  required EFUILang l10n,
+}) async {
+  final Finder backButton = find.byTooltip(l10n.gBack);
+  expect(backButton, findsOneWidget);
+
+  await tester.ensureVisible(backButton);
+  await tester.tap(backButton);
+  await tester.pumpAndSettle();
+}
