@@ -7,6 +7,7 @@ import 'open_ui_test.dart' as core;
 import 'utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:example/utils/consts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -41,7 +42,15 @@ void testSuite({
 
       //// Verify text loaded ////
 
+      validateText(tester: tester, finder: appTitle);
       validateText(tester: tester, finder: l10n.gAttention);
+      try {
+        validateText(tester: tester, finder: l10n.ssSettingsGuide);
+      } catch (e) {
+        validateText(tester: tester, finder: l10n.ssSettingsGuideWeb);
+      }
+      validateText(tester: tester, finder: l10n.ssDominantHand);
+      validateText(tester: tester, finder: l10n.ssThemeMode);
 
       //// Test functionality ////
 
