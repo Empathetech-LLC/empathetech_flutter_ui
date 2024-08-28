@@ -47,7 +47,7 @@ void testSuite({
       );
 
       expect(textSettingsButton, findsOneWidget);
-      await touch(tester, textSettingsButton);
+      await touch(tester: tester, finder: textSettingsButton);
       await goBack(tester: tester, l10n: l10n);
 
       //// Test functionality ////

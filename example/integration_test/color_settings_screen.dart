@@ -47,7 +47,7 @@ void testSuite({
       );
 
       expect(colorSettingsButton, findsOneWidget);
-      await touch(tester, colorSettingsButton);
+      await touch(tester: tester, finder: colorSettingsButton);
       await goBack(tester: tester, l10n: l10n);
 
       //// Test functionality ////

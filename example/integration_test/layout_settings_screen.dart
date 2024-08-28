@@ -47,7 +47,7 @@ void testSuite({
       );
 
       expect(layoutSettingsButton, findsOneWidget);
-      await touch(tester, layoutSettingsButton);
+      await touch(tester: tester, finder: layoutSettingsButton);
       await goBack(tester: tester, l10n: l10n);
 
       //// Test functionality ////
