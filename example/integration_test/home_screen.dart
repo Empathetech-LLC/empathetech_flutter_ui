@@ -28,7 +28,7 @@ void testSuite({
   Function? setup,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
-      //// Run the tests ////
+      //// Prep the tests ////
 
       await setup?.call();
 
@@ -39,6 +39,10 @@ void testSuite({
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
 
+      //// Verify text loaded ////
+
+      validateText(tester: tester, finder: l10n.gAttention);
+
       //// Test functionality ////
 
       // Dominant hand  //
@@ -46,7 +50,7 @@ void testSuite({
       final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
 
       expect(dominantHandButton, findsOneWidget);
-      await touch(tester, dominantHandButton);
+      await touch(tester: tester, finder: dominantHandButton);
 
       final Finder rightButton = find.text(l10n.gRight).last;
       final Finder leftButton = find.text(l10n.gLeft).last;
@@ -65,7 +69,7 @@ void testSuite({
       expect(children[1], isA<EzSpacer>());
       expect(children[2], isA<Flexible>());
 
-      await touch(tester, dominantHandButton);
+      await touch(tester: tester, finder: dominantHandButton);
 
       await tester.tap(rightButton);
       await tester.pumpAndSettle();
@@ -82,7 +86,7 @@ void testSuite({
       final Finder themeModeButton = find.byType(DropdownMenu<ThemeMode>);
 
       expect(themeModeButton, findsOneWidget);
-      await touch(tester, themeModeButton);
+      await touch(tester: tester, finder: themeModeButton);
 
       final Finder systemButton = find.text(l10n.gSystem).last;
       final Finder darkButton = find.text(l10n.gDark).last;
@@ -95,11 +99,11 @@ void testSuite({
       await tester.tap(systemButton);
       await tester.pumpAndSettle();
 
-      await touch(tester, themeModeButton);
+      await touch(tester: tester, finder: themeModeButton);
       await tester.tap(darkButton);
       await tester.pumpAndSettle();
 
-      await touch(tester, themeModeButton);
+      await touch(tester: tester, finder: themeModeButton);
       await tester.tap(lightButton);
       await tester.pumpAndSettle();
 
@@ -108,7 +112,7 @@ void testSuite({
       final Finder languageButton = find.byType(EzLocaleSetting);
 
       expect(languageButton, findsOneWidget);
-      await touch(tester, languageButton);
+      await touch(tester: tester, finder: languageButton);
 
       final Finder englishButton = find.text(localeNames.nameOf('en')!).last;
       final Finder spanishButton = find.text(localeNames.nameOf('es')!).last;
@@ -119,7 +123,7 @@ void testSuite({
       await tester.tap(spanishButton);
       await tester.pumpAndSettle();
 
-      await touch(tester, languageButton);
+      await touch(tester: tester, finder: languageButton);
 
       await tester.tap(englishButton);
       await tester.pumpAndSettle();
@@ -129,7 +133,7 @@ void testSuite({
       final Finder resetButton = find.byType(EzResetButton);
 
       expect(resetButton, findsOneWidget);
-      await touch(tester, resetButton);
+      await touch(tester: tester, finder: resetButton);
 
       final Finder noButton = find.text(l10n.gNo).last;
       final Finder yesButton = find.text(l10n.gYes).last;
