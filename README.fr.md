@@ -265,7 +265,7 @@ N'hésitez pas à contacter le contact [communauté](mailto:community@empathetec
 
 ### Translations
 
-Si vous parlez anglais ainsi qu'une une langue actuellement non prise en charge, n'hésitez pas à nous contacter ! Plus on est de fous, plus on rit.
+Si vous parlez anglais ainsi qu'une langue actuellement non prise en charge, n'hésitez pas à nous contacter ! Plus on est de fous, plus on rit.
 
 Si vous parlez anglais et une langue actuellement prise en charge, et que vous constatez une anomalie, n'hésitez pas à nous contacter !
 
