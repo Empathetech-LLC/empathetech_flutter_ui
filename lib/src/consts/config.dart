@@ -102,6 +102,10 @@ const String efuiGitHub =
 const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
 /// If you want to show some love
+/// https://gofund.me/c047d07e
+const String empathGoFundMe = 'https://gofund.me/c047d07e';
+
+/// If you want to show some love
 /// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
 const String empathPayPal =
     'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
