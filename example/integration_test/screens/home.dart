@@ -3,46 +3,30 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'open_ui_test.dart' as core;
-import 'utils.dart';
+import '../utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:example/utils/consts.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
-const String name = 'Home screen';
-
-void main() async {
-  await core.runTestSuites(
-    testSuites: <Function>[testSuite],
-    screenNames: <String>[name],
-  );
-}
+const String name = 'home-screen';
 
 void testSuite({
   required String title,
   required Locale locale,
   required EFUILang l10n,
-  required LocaleNames localeNames,
-  required SharedPreferences preferences,
-  Function? setup,
+  required List<LocaleNames> localeNames,
+  bool isLefty = false,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
-      //// Prep the tests ////
-
-      await setup?.call();
-
       // Load the app //
 
       final Widget testApp = testOpenUI(title: title, locale: locale);
 
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
-
-      final bool isLefty = preferences.getBool('isLefty') ?? false;
 
       //// Verify text loaded ////
 
@@ -188,9 +172,12 @@ void testSuite({
       await touch(tester: tester, finder: languageButton);
 
       // Verify the options appear
-      final Finder englishButton = find.text(localeNames.nameOf('en')!).last;
-      final Finder spanishButton = find.text(localeNames.nameOf('es')!).last;
-      final Finder frenchButton = find.text(localeNames.nameOf('fr')!).last;
+      final Finder englishButton =
+          find.text(localeNames.first.nameOf('en')!).last;
+      final Finder spanishButton =
+          find.text(localeNames.first.nameOf('es')!).last;
+      final Finder frenchButton =
+          find.text(localeNames.first.nameOf('fr')!).last;
       final Finder closeBUtton = find.text(l10n.gClose).last;
 
       expect(englishButton, findsOneWidget);
