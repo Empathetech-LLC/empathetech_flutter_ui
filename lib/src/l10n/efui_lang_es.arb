@@ -60,7 +60,7 @@
 
   "tsBatchOverride": "Ya has realizado cambios de \"{setting}\" granulares en la configuración avanzada.\n\n¿Seguro que quieres anular esos cambios con una actualización por lotes?",
 
-  "tsDisplay": "Pantalla",
+  "tsDisplay": "Despliegue",
   "tsHeadline": "Encabezado",
   "tsTitle": "Título",
   "tsBody": "Cuerpo",
@@ -79,20 +79,20 @@
   "tsDecrease": "Disminuir",
   "tsIncrease": "Aumentar",
 
-  "tsDisplayP1": "¿Se ve ",
-  "tsDisplayLink": "bien",
-  "tsDisplayP2": " esto?",
-  "tsHeadlineP1": "¿Se diferencian ",
-  "tsHeadlineLink": "los encabezados",
-  "tsHeadlineP2": " de...",
-  "tsTitleP1": "los títulos ",
-  "tsTitleLink": "suficientemente?",
-  "tsBodyP1": "¿Y el ",
-  "tsBodyLink": "cuerpo?",
+  "tsDisplayP1": "¿Se ",
+  "tsDisplayLink": "despliegue",
+  "tsDisplayP2": " bien esto?",
+  "tsHeadlineP1": "¿Se diferencian los ",
+  "tsHeadlineLink": "encabezados",
+  "tsHeadlineP2": "...",
+  "tsTitleP1": "de los ",
+  "tsTitleLink": "títulos?",
+  "tsBodyP1": "¿Y ",
+  "tsBodyLink": "el cuerpo?",
   "tsBodyP2": " ¿Se puede leer bien?",
-  "tsLabelP1": "¿Y las etiquetas?",
-  "tsLabelLink": "¿No muy grandes, ",
-  "tsLabelP2": " no muy pequeñas?",
+  "tsLabelP1": "¿Y ",
+  "tsLabelLink": "las etiquetas?",
+  "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
 
   "tsResetAll": "¿Restablecer la configuración del texto?",
 
@@ -104,11 +104,11 @@
   "lsPadding": "Acolchado",
   "lsSpacing": "Espaciado",
 
-  "lsResetAll": "¿Restablecer todos los ajustes del esquema?",
+  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
   
   
   
-  "csPageTitle": "Ajustes de color",
+  "csPageTitle": "Configuración de color",
 
   "csPickerHint": "Abre un selector de color para {name}. Mantén pulsado para ver más opciones.",
 

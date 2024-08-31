@@ -139,7 +139,7 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get tsDisplay => 'Pantalla';
+  String get tsDisplay => 'Despliegue';
 
   @override
   String get tsHeadline => 'Encabezado';
@@ -189,46 +189,46 @@ class EFUILangEs extends EFUILang {
   String get tsIncrease => 'Aumentar';
 
   @override
-  String get tsDisplayP1 => '¿Se ve ';
+  String get tsDisplayP1 => '¿Se ';
 
   @override
-  String get tsDisplayLink => 'bien';
+  String get tsDisplayLink => 'despliegue';
 
   @override
-  String get tsDisplayP2 => ' esto?';
+  String get tsDisplayP2 => ' bien esto?';
 
   @override
-  String get tsHeadlineP1 => '¿Se diferencian ';
+  String get tsHeadlineP1 => '¿Se diferencian los ';
 
   @override
-  String get tsHeadlineLink => 'los encabezados';
+  String get tsHeadlineLink => 'encabezados';
 
   @override
-  String get tsHeadlineP2 => ' de...';
+  String get tsHeadlineP2 => '...';
 
   @override
-  String get tsTitleP1 => 'los títulos ';
+  String get tsTitleP1 => 'de los ';
 
   @override
-  String get tsTitleLink => 'suficientemente?';
+  String get tsTitleLink => 'títulos?';
 
   @override
-  String get tsBodyP1 => '¿Y el ';
+  String get tsBodyP1 => '¿Y ';
 
   @override
-  String get tsBodyLink => 'cuerpo?';
+  String get tsBodyLink => 'el cuerpo?';
 
   @override
   String get tsBodyP2 => ' ¿Se puede leer bien?';
 
   @override
-  String get tsLabelP1 => '¿Y las etiquetas?';
+  String get tsLabelP1 => '¿Y ';
 
   @override
-  String get tsLabelLink => '¿No muy grandes, ';
+  String get tsLabelLink => 'las etiquetas?';
 
   @override
-  String get tsLabelP2 => ' no muy pequeñas?';
+  String get tsLabelP2 => ' ¿No muy grandes, no muy pequeñas?';
 
   @override
   String get tsResetAll => '¿Restablecer la configuración del texto?';
@@ -246,10 +246,10 @@ class EFUILangEs extends EFUILang {
   String get lsSpacing => 'Espaciado';
 
   @override
-  String get lsResetAll => '¿Restablecer todos los ajustes del esquema?';
+  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
 
   @override
-  String get csPageTitle => 'Ajustes de color';
+  String get csPageTitle => 'Configuración de color';
 
   @override
   String csPickerHint(Object name) {
