@@ -48,7 +48,7 @@ class OpenUIScaffold extends StatelessWidget {
           }
         },
         icon: const Icon(Icons.more_vert),
-        tooltip: 'Options menu',
+        tooltip: l10n.gOptions,
       ),
       menuChildren: <Widget>[
         BYOButton(parentContext: context, l10n: l10n),
