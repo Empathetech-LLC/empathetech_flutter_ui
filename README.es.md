@@ -1,61 +1,61 @@
-# Empathetech Flutter UI <br><br> Build apps for anyone
+# Empathetech Flutter UI <br><br> Crea apps para todos
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.md)
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.fr.md)
 
-EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a solid foundation in every aspect of digital accessibility:
+EFUI es un kit de inicio para la creación de aplicaciones de [Flutter](https://flutter.dev/) con una base sólida en todos los aspectos de la accesibilidad digital:
 
-- **Platform availability**
-  - Thanks to Flutter, EFUI is fully cross platform! You can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
-    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) styling
-- **Responsive design**
-  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-  - Checkout the [demo](#live) to see it in action
-- **Screen reader support**
-  - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
-- **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.
-    - EFUI exposes every aspect of an app's theme to be controlled by the user.
-- **Internationalization**
-  - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish and French. Alongside the [infrastructure](./l10n.yaml) for unlimited future translations.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
+- **Disponibilidad de plataforma**
+  - Gracias a Flutter, EFUI es totalmente multiplataforma. ¡Puedes utilizar EFUI para Android, iOS, Linux, MacOS, Windows y Web!
+    - Gracias a la integración con los [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), las aplicaciones creadas con EFUI se adaptarán fácilmente al estilo Cupertino de Apple.
+- **Diseño adaptable**
+  - Aquí está la [definición](https://es.wikipedia.org/wiki/Dise%C3%B1o_web_adaptable)
+  - Echa un vistazo a la [demo](#live) para verlo en acción
+- **Compatible con lectores de pantalla**
+  - Todos los widgets personalizados y la aplicación de ejemplo han sido verificados manualmente con [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) y [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+- **Personalización del usuario**
+  - La única manera de ser realmente accesible para TODOS los clientes, es darles la libertad de elegir.
+    - EFUI permite que todos los aspectos del tema de una aplicación sean controlados por el usuario.
+- **Internacionalización**
+  - Todo el [texto externo](./lib/src/l10n/) de EFUI está disponible en inglés, español y francés. Además, tiene la [infraestructura ](./l10n.yaml) para ilimitadas futuras traducciones.
+    - Momento de lección moral: Recuerda que los LLM son una herramienta de aceleración. Pero para ganar una carrera, no basta con acelerar. Si sus traducciones son autogeneradas, dilo abiertamente. Las traducciones de EFUI empezaron siendo de inteligencia artificial y terminaron siendo de [inteligencia humana](#translations)
 
-<br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a better place together!
+<br>Cuando construyes tus apps con EFUI, puedes llegar verdaderamente a cualquier audiencia. ¡Mejoremos internet juntos!
 
-## Table of Contents
+## Tabla de contenidos
 
-* [Installation](#installation)
-* [Usage](#usage)
+* [Instalación](#installation)
+* [Uso](#usage)
 * [Demo](#demo)
-* [Contributing](#contributing)
-* [License](#license)
-* [Credits](#credits)
+* [Contribuyendo](#contributing)
+* [Licencia](#license)
+* [Créditos](#credits)
 
-# Installation
+# Instalación
 
-In your app's base directory, run
+En el directorio base de tu aplicación, ejecuta
 
 ```bash
 flutter pub add empathetech_flutter_ui
 ```
 
-And add the following import to any files that use EFUI's library
+Y añade la siguiente importación a cualquier archivo que utilice la biblioteca de EFUI
 
 ```Dart
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 ```
 
-## Beginner tutorials
+## Tutoriales para principiantes
 
-If you're new to Flutter: welcome! EFUI is full of comments to help you on your path.
+Si acabas de descubrir Flutter: ¡te damos la bienvenida! EFUI está lleno de comentarios para guiarte.
 
-Here are some (unaffiliated) videos you might also find helpful.
+Aquí tienes algunos vídeos (no afiliados) que podrían resultarte útiles.
 
-- [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
-- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
-- [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
+- [Tutorial para tu primera app](https://www.youtube.com/watch?v=xWV71C2kp38)
+- [Laboratorio de código para tu primera app](https://www.youtube.com/watch?v=8sAyPDLorek)
+- [Usando paquetes externos](https://www.youtube.com/watch?v=WdXcJdhWcEY)
 
-# Usage
+# Uso
 
 ## TL;DR
 
@@ -67,11 +67,11 @@ Here are some (unaffiliated) videos you might also find helpful.
 1. Copy the [settings sandbox](./example/lib/screens/) to your project
 2. Enjoy
 
-## Setup
+## Configuración
 
-### Step 1
+### Paso 1
 
-#### Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
+#### Inicia [EzConfig](./lib/src/classes/config.dart) en `void main()`
 
 ```Dart
 void main() async {
@@ -100,15 +100,15 @@ void main() async {
 }
 ```
 
-#### How it works
+#### Cómo funciona
 
-`EzConfig` gathers and stores the app's theme data, merging your `customDefaults` with the user's saved [preferences](https://pub.dev/packages/shared_preferences).
+`EzConfig` recopila y almacena los datos del tema de la aplicación, fusionando tus `customDefaults` con las [preferencias](https://pub.dev/packages/shared_preferences) guardadas por el usuario.
 
-Once gathered, `EzConfig` stores the data in a Singleton instance for efficient access. `EzConfig` has a series of getter and setter methods for safe interactions with the theme data.
+Una vez recopilados, `EzConfig` almacena los datos en una instancia de Singleton para lograr un acceso eficiente. `EzConfig` tiene una serie de métodos getter y setter para interacciones seguras con los datos del tema.
 
-### Step 2
+### Paso 2
 
-#### Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
+#### Usa [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) para crear una [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
 ```Dart
 class YourApp extends StatelessWidget {
@@ -141,27 +141,27 @@ class YourApp extends StatelessWidget {
 }
 ```
 
-#### How it works
+#### Cómo funciona
 
-`EzAppProvider` is a [PlatformProvider](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformProvider-class.html) wrapper that uses [ezThemeData](./lib/src/functions/theme_data.dart) by default.
+`EzAppProvider` es un envoltorio para el [PlatformApp](https://pub.dev/documentation/flutter_platform_Widgets/latest/flutter_platform_Widgets/PlatformProvider-class.html) que usa [ezThemeData](./lib/src/functions/theme_data.dart) por defecto.
 
-`ezThemeData` sets up the dynamic color scheme and text theme, and updates some touch points to be higher contrast by default.
+`ezThemeData` configura el esquema de color dinámico y el tema de texto, y actualiza algunos puntos táctiles para que tengan un mayor contraste por defecto.
 
-You are more than welcome to use your own app/app provider with `ezThemeData` for the same effect.
+Puedes utilizar tu propia aplicación/proveedor de apps con `ezThemeData` para conseguir el mismo efecto.
 
-Or, you can even build your own fully custom base theme with `EzConfig` data.
+O incluso puedes crear tu propio tema base personalizado con los datos de `EzConfig`.
 
-### Step 3
+### Paso 3
 
-#### Copy the [settings sandbox](./example/lib/screens/) to your project
+#### Copia la [configuración sandbox](./example/lib/screens/) a tu proyecto
 
-The example app is built to be a drop-in solution for your apps' settings.
+La app de ejemplo está diseñada para ser copiada y adaptada a las necesidades de tu propia app.
 
-Copy/paste all the [screen files](./example/lib/screens/) and make paths to them in your apps' routes.
+Copia/pega todos los [archivos de pantalla](./ejemplo/lib/screens/) y crea rutas a ellos en tu app.
 
-Example `GoRouter` setup...
+Ejemplo de configuración de `GoRouter` ...
 ```Dart
-/// A path based router for web-enabled apps
+///Enrutador basado en rutas para apps habilitadas para web
 final GoRouter _yourAppRouter = GoRouter(
   initialLocation: homePath,
   routes: <RouteBase>[
@@ -171,7 +171,7 @@ final GoRouter _yourAppRouter = GoRouter(
         return const HomeScreen();
       },
       routes: routes:<RouteBase>[
-        /// ...all of your pre/soon to be existing Routes
+        /// ...todas tus rutas anteriores o futuras
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
@@ -210,42 +210,42 @@ final GoRouter _yourAppRouter = GoRouter(
 );
 ```
 
-And boom!
+¡Y listo!
 
-**It's that Ez!**
+**¡Es así de fácil!**
 
-*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsScreen()`
+*NOTA:* El fragmento de código anterior asume que has renombrado el archivo (recién copiado) `Home.dart` y la clase `HomeScreen()` a `Settings.dart` y `SettingsScreen()`
 
-#### How it works
+#### Cómo funciona
 
-The example app's screens neatly organize all the custom Widgets that enable EFUI's user customization!
+¡Las pantallas de la app de ejemplo organizan todos los widgets que permitan la personalización del usuario de EFUI!
 
-* [EzDominantHandSwitch](./lib/src/classes/user_customization/dominant_hand_switch.dart): A toggle for switching common touch points to benefit lefties.
-* [EzThemeModeSwitch](./lib/src/classes/user_customization/theme_mode_swtich.dart): A toggle menu for selecting the app's theme: light, dark, system.
-* [EzLocaleSetting](./lib/src/classes/user_customization/local_setting.dart): A menu for updating the app's language. EFUI currently supports English, Spanish, and French.
-* [TextSettings](./lib/src/classes/user_customization/text_style/): A collection of custom Widgets for controlling the app's TextStyles.
-* [EzLayoutSetting](./lib/src/classes/user_customization/layout_setting.dart): A dynamic slider Widget, with live previews, for updating the app's layout: margin, padding, and spacing.
-* [EzColorSetting](./lib/src/classes/user_customization/color_setting.dart): A color picker for updating each entry in the app's ColorScheme.
-* [EzImageSetting](./lib/src/classes/user_customization/image_setting.dart): An image picker for updating app assets.
-* [EzResetButton](./lib/src/classes/user_customization/reset_button.dart): A customizable button for resetting groups of preferences.
+* [EzDominantHandSwitch](./lib/src/classes/user_customization/dominant_hand_switch.dart): Una opción para cambiar los puntos de contacto comunes para ayudar a los zurdos.
+* [EzThemeModeSwitch](./lib/src/classes/user_customization/theme_mode_swtich.dart): Un menú para seleccionar el tema de la aplicación: claro, oscuro, sistema.
+* [EzLocaleSetting](./lib/src/classes/user_customization/local_setting.dart): Un menú para actualizar el idioma de la app. EFUI actualmente está en inglés, español y francés.
+* [TextSettings](./lib/src/classes/user_customization/text_style/): Una colección de widgets para controlar los estilos de texto de la app.
+* [EzLayoutSetting](./lib/src/classes/user_customization/layout_setting.dart): Un widget deslizante dinámico con previsualizaciones en vivo, para actualizar el diseño de la app: margen, relleno y espaciado.
+* [EzColorSetting](./lib/src/classes/user_customization/color_setting.dart): Un selector de color para actualizar cada entrada en el esquema de color de la app.
+* [EzImageSetting](./lib/src/classes/user_customization/image_setting.dart): Un selector de imágenes para actualizar los recursos de la app.
+* [EzResetButton](./lib/src/classes/user_customization/reset_button.dart): Un botón personalizable para restablecer grupos de preferencias.
 
-By default, every base [theme setting](./lib/src/consts/config_keys.dart) is exposed. Additional keys provided to `customDefaults` can be updated with these Widgets as well!
+Por defecto, todas las configuraciones del [ajustes del tema básico](./lib/src/consts/config_keys.dart) están disponibles. Podrás acceder a configuraciones adicionales en `customDefaults` ¡y las podrás modificar con esos widgets también!
 
-If there are any theme values you wish to stay constant, simply remove the paired setting Widget(s).
+En caso de que quieras mantener algunos valores del tema constantes, simplemente elimina el/los widget/s de configuración emparejado/s.
 
-### Step 4
+### Paso 4
 
-#### Enjoy!
+#### ¡Disfruta!
 
-The pillars of **platform availability** and **user customization** are "set it and forget it"; bar any external libraries that break things.
+Las bases de la **disponibilidad de la plataforma** y la **personalización del usuario** solo las tienes que configurar una vez y te puedes olvidar de ellas, a no ser que alguna librería externa rompa algo.
 
-But, as you grow your apps, the other pillars require continuous development.
+Pero a medida que tus apps crezcan, otras bases requerirán un desarrollo continuo.
 
-Thankfully, EFUI's got you covered there too!
-* [Responsive design](./lib/src/classes/responsive_design/): Widgets that aid in building responsive UI/UX
-* [Screen reader support](./lib/src/classes/screen_reader_support/): Widgets with streamlined semantics
+¡Por suerte, EFUI te puede ayudar con eso también!
+* [Diseño adaptable](./lib/src/classes/responsive_design/): Widgets que ayudan en la construcción de una UI/UX adaptable
+* [Screen reader support](./lib/src/classes/screen_reader_support/): Widgets con semántica simplificada
 
-<br>At the risk of information overload, that should be plenty to get you started. Once you're feeling settled, the repo has been organized to aid in exploration!
+<br>Sí, es mucha información de golpe, pero con esto ya debería bastar para que empieces. Una vez entiendas todo mejor, ¡hemos organizado el repositorio para ayudarte a explorar!
 
 # Demo
 
@@ -254,25 +254,25 @@ Thankfully, EFUI's got you covered there too!
 ### [Desktop](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
 ### [Web](https://www.empathetech.net/#/settings)
 
-# Contributing
+# Contribuyendo
 
-## The vibes!
+## ¡Buenas ondas!
 
-If you build something with EFUI, let us know!
+Si construyes algo con EFUI, ¡infórmanos!
 
-## Time
+## Tiempo
 
-Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor. There's never a shortage of ideas, only time!
+Ponte en contacto con la [comunidad](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) para colaborar. ¡Nunca faltan ideas, solo tiempo!
 
-### Translations
+### Traducciones
 
-If you speak English and a currently unsupported language, please reach out! The more the merrier.
+Si hablas inglés y un idioma no disponible, ¡no dudes en ponerte en contacto con nosotros! Cuantos más seamos, mejor.
 
-OR: If you speak English and a currently supported language, and see something wrong, please reach out! It takes a village.
+O bien: Si hablas inglés y un idioma soportado actualmente, y ves algo que está mal, ¡ponte en contacto con nosotros! Cooperando, ganamos todos.
 
-## Money
+## Dinero
 
-Many thanks for any and all donations!
+¡Muchas gracias por las donaciones, grandes y pequeñas!
 
 ### Paypal
 
@@ -288,12 +288,12 @@ Many thanks for any and all donations!
 
 ### [Ko-fi](https://ko-fi.com/empathetech)
 
-# License
+# Licencia
 
 [GNU GPLv3](LICENSE)
 
-# Credits
+# Créditos
 
-## Translations
+## Traducciones
 
-Note to translator: please credit yourself :)
+Español: [Sara Herrera](https://www.fiverr.com/saraqua)
