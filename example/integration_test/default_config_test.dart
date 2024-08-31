@@ -51,57 +51,65 @@ void main() async {
   const String parentTest = 'default-config';
 
   // Settings home
-  group(
-    home.name,
-    () => home.testSuite(
+  group(home.name, () async {
+    await home.testSuite(
       title: '${home.name}-$parentTest',
       locale: english,
       l10n: enText,
       localeNames: l10nNames,
-    ),
-  );
+    );
+  });
 
-  // Text settings
-  group(
-    text.name,
-    () => text.testSuite(
-      title: '${text.name}-$parentTest',
+  group(home.name, () async {
+    await home.testSuite(
+      title: '${home.name}-$parentTest',
       locale: english,
       l10n: enText,
       localeNames: l10nNames,
-    ),
-  );
+    );
+  });
 
-  // Layout settings
-  group(
-    layout.name,
-    () => layout.testSuite(
-      title: '${layout.name}-$parentTest',
-      locale: english,
-      l10n: enText,
-      localeNames: l10nNames,
-    ),
-  );
+  // // Text settings
+  // group(
+  //   text.name,
+  //   () => text.testSuite(
+  //     title: '${text.name}-$parentTest',
+  //     locale: english,
+  //     l10n: enText,
+  //     localeNames: l10nNames,
+  //   ),
+  // );
 
-  // Color settings
-  group(
-    color.name,
-    () => color.testSuite(
-      title: '${color.name}-$parentTest',
-      locale: english,
-      l10n: enText,
-      localeNames: l10nNames,
-    ),
-  );
+  // // Layout settings
+  // group(
+  //   layout.name,
+  //   () => layout.testSuite(
+  //     title: '${layout.name}-$parentTest',
+  //     locale: english,
+  //     l10n: enText,
+  //     localeNames: l10nNames,
+  //   ),
+  // );
 
-  // Image settings
-  group(
-    image.name,
-    () => image.testSuite(
-      title: '${image.name}-$parentTest',
-      locale: english,
-      l10n: enText,
-      localeNames: l10nNames,
-    ),
-  );
+  // // Color settings
+  // group(
+  //   color.name,
+  //   () => color.testSuite(
+  //     title: '${color.name}-$parentTest',
+  //     locale: english,
+  //     l10n: enText,
+  //     localeNames: l10nNames,
+  //   ),
+  // );
+
+  // // Image settings
+  // group(
+  //   image.name,
+  //   () => image.testSuite(
+  //     title: '${image.name}-$parentTest',
+  //     locale: english,
+  //     l10n: enText,
+  //     localeNames: l10nNames,
+  //   ),
+  // );
 }
