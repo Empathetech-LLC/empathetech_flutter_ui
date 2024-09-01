@@ -9,6 +9,18 @@
             "state" : "translated",
             "value" : "Camera access allows the app to set custom background images and theme data."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El acceso a la cámara permite a la aplicación establecer imágenes de fondo personalizadas y datos para los temas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accès à l'appareil photo permet à l'application de définir des images d'arrière-plan et des données de thème personnalisées."
+          }
         }
       }
     },
@@ -19,6 +31,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photo library access allows the app to set custom background images and theme data."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El acceso a la galería de fotos permite a la aplicación establecer imágenes de fondo personalizadas y datos para los temas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accès à la galerie permet à l'application de définir des images d'arrière-plan et des données de thème personnalisées."
           }
         }
       }
