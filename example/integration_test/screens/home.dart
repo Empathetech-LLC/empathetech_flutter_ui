@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils.dart';
+import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:example/utils/consts.dart';
