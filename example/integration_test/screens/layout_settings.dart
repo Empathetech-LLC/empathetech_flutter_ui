@@ -39,5 +39,7 @@ void testSuite({
 
       await goBack(tester: tester, l10n: l10n); // Remove me!
 
-      // Test functionality //
+      //// Verify text loaded ////
+
+      //// Test functionality ////
     });
