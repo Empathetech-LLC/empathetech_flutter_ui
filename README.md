@@ -274,6 +274,14 @@ OR: If you speak English and a currently supported language, and see something w
 
 Many thanks for any and all donations!
 
+### [GoFundMe](https://gofund.me/c047d07e)
+
+### [Patreon](https://patreon.com/empathetech)
+
+### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
+
+### [Ko-fi](https://ko-fi.com/empathetech)
+
 ### Paypal
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
@@ -281,12 +289,6 @@ Many thanks for any and all donations!
 ### [Venmo](https://venmo.com/empathetech)
 
 ### [Cash App](https://cash.app/$empathetech)
-
-### [Patreon](https://patreon.com/empathetech)
-
-### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
-
-### [Ko-fi](https://ko-fi.com/empathetech)
 
 # License
 

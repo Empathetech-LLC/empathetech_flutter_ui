@@ -273,6 +273,14 @@ Si vous parlez anglais et une langue actuellement prise en charge, et que vous c
 
 Merci beaucoup pour tous vos dons !
 
+### [GoFundMe](https://gofund.me/c047d07e)
+
+### [Patreon](https://patreon.com/empathetech)
+
+### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
+
+### [Ko-fi](https://ko-fi.com/empathetech)
+
 ### Paypal
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
@@ -280,12 +288,6 @@ Merci beaucoup pour tous vos dons !
 ### [Venmo](https://venmo.com/empathetech)
 
 ### [Cash App](https://cash.app/$empathetech)
-
-### [Patreon](https://patreon.com/empathetech)
-
-### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
-
-### [Ko-fi](https://ko-fi.com/empathetech)
 
 # Licence
 
