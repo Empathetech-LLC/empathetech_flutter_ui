@@ -46,15 +46,15 @@ void testSuite({
 
       //// Verify text loaded ////
 
-      validateText(tester: tester, finder: appTitle);
-      validateText(tester: tester, finder: l10n.gAttention);
+      await validateText(tester: tester, finder: appTitle);
+      await validateText(tester: tester, finder: l10n.gAttention);
       try {
-        validateText(tester: tester, finder: l10n.ssSettingsGuide);
+        await validateText(tester: tester, finder: l10n.ssSettingsGuide);
       } catch (e) {
-        validateText(tester: tester, finder: l10n.ssSettingsGuideWeb);
+        await validateText(tester: tester, finder: l10n.ssSettingsGuideWeb);
       }
-      validateText(tester: tester, finder: l10n.ssDominantHand);
-      validateText(tester: tester, finder: l10n.ssThemeMode);
+      await validateText(tester: tester, finder: l10n.ssDominantHand);
+      await validateText(tester: tester, finder: l10n.ssThemeMode);
 
       //// Test functionality ////
 
