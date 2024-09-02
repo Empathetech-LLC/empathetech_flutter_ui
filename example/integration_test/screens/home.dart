@@ -18,11 +18,27 @@ const String name = 'home-screen';
 void testSuite({
   required String title,
   required Locale locale,
-  required EFUILang l10n,
-  required List<LocaleNames> localeNames,
   bool isLefty = false,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
+      // Load localization(s) //
+
+      final EFUILang l10n = await EFUILang.delegate.load(locale);
+
+      final LocaleNames enNames =
+          await const LocaleNamesLocalizationsDelegate().load(english);
+      final LocaleNames esNames =
+          await const LocaleNamesLocalizationsDelegate().load(spanish);
+      final LocaleNames frNames =
+          await const LocaleNamesLocalizationsDelegate().load(french);
+
+      /// [english, spanish, french]
+      final List<LocaleNames> l10nNames = <LocaleNames>[
+        enNames,
+        esNames,
+        frNames
+      ];
+
       // Load the app //
 
       await tester.pumpWidget(const OpenUI());
@@ -173,11 +189,10 @@ void testSuite({
 
       // Verify the options appear
       final Finder englishButton =
-          find.text(localeNames.first.nameOf('en')!).last;
+          find.text(l10nNames.first.nameOf('en')!).last;
       final Finder spanishButton =
-          find.text(localeNames.first.nameOf('es')!).last;
-      final Finder frenchButton =
-          find.text(localeNames.first.nameOf('fr')!).last;
+          find.text(l10nNames.first.nameOf('es')!).last;
+      final Finder frenchButton = find.text(l10nNames.first.nameOf('fr')!).last;
       final Finder closeBUtton = find.text(l10n.gClose).last;
 
       expect(englishButton, findsOneWidget);
