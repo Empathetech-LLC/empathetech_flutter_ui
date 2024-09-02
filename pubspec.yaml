@@ -34,19 +34,22 @@ dev_dependencies:
   # For example app
   example:
     path: example
+  flutter_driver:
+    sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.2
+  flutter_test:
+    sdk: flutter
   go_router: ^14.0.1
+  integration_test:
+    sdk: flutter
   line_icons: ^2.0.3
 
-  # For development/testing
+  # For development
   dartdoc: ^8.0.5
   dependency_validator: ^4.1.0
   flutter_lints: ^4.0.0
-  flutter_test:
-    sdk: flutter
-  integration_test:
-    sdk: flutter
+  
 
 flutter:
   generate: true # For l10n
