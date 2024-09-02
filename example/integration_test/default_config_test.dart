@@ -18,13 +18,19 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// Setup mock [SharedPreferences]
-  void setMock() {
-    SharedPreferences.setMockInitialValues(empathetechConfig);
-  }
+  SharedPreferences.setMockInitialValues(empathetechConfig);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  group(home.name, () {
-    setUpAll(setMock);
-    home.testSuite(title: '${home.name}-$parentTest', locale: english);
-  });
+  EzConfig.init(
+    assetPaths: <String>{},
+    preferences: prefs,
+    defaults: empathetechConfig,
+  );
+
+  group(
+    parentTest,
+    () {
+      home.testSuite(title: home.name, locale: english);
+    },
+  );
 }
