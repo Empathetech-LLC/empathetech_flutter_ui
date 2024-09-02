@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_driver/driver_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -21,9 +20,6 @@ void main() async {
   // Most apps need this
   // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
-
-  // For integration testing
-  enableFlutterDriverExtension();
 
   // Initialize EzConfig //
 

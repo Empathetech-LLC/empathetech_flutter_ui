@@ -9,8 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_driver:
-    sdk: flutter
 
   # Flutter (Google)
   go_router: ^14.0.1

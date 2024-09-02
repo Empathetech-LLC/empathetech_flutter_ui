@@ -34,8 +34,6 @@ dev_dependencies:
   # For example app
   example:
     path: example
-  flutter_driver:
-    sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.2
   flutter_test:
