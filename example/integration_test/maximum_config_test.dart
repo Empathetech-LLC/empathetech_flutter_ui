@@ -2,3 +2,5 @@
  * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+
+const String parentTest = 'maximum-config';
