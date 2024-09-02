@@ -3,34 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:example/main.dart';
-import 'package:example/utils/export.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_localized_locales/flutter_localized_locales.dart';
-
-Widget testOpenUI({
-  required String title,
-  required Locale locale,
-}) =>
-    EzAppProvider(
-      key: ValueKey<String>(title),
-      app: PlatformApp.router(
-        debugShowCheckedModeBanner: false,
-        title: appTitle,
-        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
-          const LocaleNamesLocalizationsDelegate(),
-          ...EFUILang.localizationsDelegates,
-          EmpathetechFeedbackLocalizationsDelegate(),
-        },
-        supportedLocales: EFUILang.supportedLocales,
-        locale: locale,
-        routerConfig: router,
-      ),
-    );
 
 /// Find text and ensure visibility
 Future<void> validateText({
