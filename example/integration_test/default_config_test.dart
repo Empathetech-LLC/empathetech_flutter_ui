@@ -15,8 +15,8 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 const String parentTest = 'default-config';
 
 void main() async {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   SharedPreferences.setMockInitialValues(empathetechConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
