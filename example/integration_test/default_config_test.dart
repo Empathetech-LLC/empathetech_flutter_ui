@@ -6,7 +6,6 @@
 import 'screens/home.dart' as home;
 import 'utils/export.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,26 +30,16 @@ void main() async {
   final List<LocaleNames> l10nNames = <LocaleNames>[enNames, esNames, frNames];
 
   /// Setup mock [SharedPreferences]
-  Future<bool> initConfig() async {
+  void setMock() {
     SharedPreferences.setMockInitialValues(empathetechConfig);
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-
-    EzConfig.init(
-      preferences: preferences,
-      assetPaths: <String>{},
-      defaults: empathetechConfig,
-    );
-
-    return true;
   }
 
   // Run test suites //
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
 
   group(home.name, () {
-    setUpAll(initConfig);
+    setUpAll(setMock);
     home.testSuite(
       title: '${home.name}-$parentTest',
       locale: english,
