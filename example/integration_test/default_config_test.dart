@@ -15,16 +15,21 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 const String parentTest = 'default-config';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(empathetechConfig);
+  final Map<String, Object> testConfig = <String, Object>{
+    ...empathetechConfig,
+    isDarkThemeKey: true,
+  };
+
+  SharedPreferences.setMockInitialValues(testConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: empathetechConfig,
+    defaults: testConfig,
   );
 
   group(
