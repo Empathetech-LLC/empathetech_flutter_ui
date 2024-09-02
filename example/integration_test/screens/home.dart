@@ -5,8 +5,10 @@
 
 import '../utils/export.dart';
 
-import 'package:flutter/material.dart';
+import 'package:example/main.dart';
 import 'package:example/utils/consts.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -23,9 +25,7 @@ void testSuite({
     testWidgets(title, (WidgetTester tester) async {
       // Load the app //
 
-      final Widget testApp = testOpenUI(title: title, locale: locale);
-
-      await tester.pumpWidget(testApp);
+      await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       //// Verify text loaded ////
