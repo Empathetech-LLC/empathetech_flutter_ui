@@ -18,6 +18,17 @@ Future<void> validateText({
   await tester.ensureVisible(textFinder);
 }
 
+/// Find widget and ensure visibility
+Future<void> validateWidget({
+  required WidgetTester tester,
+  required Type widgetType,
+  Matcher matcher = findsOneWidget,
+}) async {
+  final Finder widgetFinder = find.byType(widgetType);
+  expect(widgetFinder, matcher);
+  await tester.ensureVisible(widgetFinder);
+}
+
 /// Find, touch, and settle a touch-point
 Future<void> touch({
   required WidgetTester tester,
