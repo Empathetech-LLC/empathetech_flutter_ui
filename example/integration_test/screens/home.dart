@@ -57,6 +57,26 @@ void testSuite({
 
       //// Test functionality ////
 
+      // Options menu //
+
+      debugPrint('Testing options menu (OM)');
+      final Finder optionsMenu = find.byType(MenuAnchor);
+
+      debugPrint('Testing OM exists');
+      expect(optionsMenu, findsOneWidget);
+      await touch(tester: tester, finder: optionsMenu);
+
+      debugPrint('Testing OM options appear');
+      final Finder byoButton = find.text(l10n.gBYO).last;
+      final Finder feedbackButton = find.text(l10n.gGiveFeedback).last;
+
+      expect(byoButton, findsOneWidget);
+      expect(feedbackButton, findsOneWidget);
+
+      debugPrint('Testing OM menu is dismissible');
+      await dismissTap(tester);
+      await touch(tester: tester, finder: optionsMenu);
+
       // Dominant hand  //
 
       debugPrint('Testing dominant hand setting (DHS)');
@@ -273,24 +293,4 @@ void testSuite({
       debugPrint('Testing RB functionality');
       await tester.tap(yesButton);
       await tester.pumpAndSettle();
-
-      // Options menu //
-
-      debugPrint('Testing options menu (OM)');
-      final Finder optionsMenu = find.byType(MenuAnchor);
-
-      debugPrint('Testing OM exists');
-      expect(optionsMenu, findsOneWidget);
-      await touch(tester: tester, finder: optionsMenu);
-
-      debugPrint('Testing OM options appear');
-      final Finder byoButton = find.text(l10n.gBYO).last;
-      final Finder feedbackButton = find.text(l10n.gGiveFeedback).last;
-
-      expect(byoButton, findsOneWidget);
-      expect(feedbackButton, findsOneWidget);
-
-      debugPrint('Testing OM menu is dismissible');
-      await dismissTap(tester);
-      await touch(tester: tester, finder: optionsMenu);
     });
