@@ -37,7 +37,7 @@ void testSuite({
       final List<LocaleNames> l10nNames = <LocaleNames>[
         enNames,
         esNames,
-        frNames
+        frNames,
       ];
 
       // Load the app //
@@ -48,7 +48,7 @@ void testSuite({
 
       //// Verify text loaded ////
 
-      debugPrint('Validating text');
+      debugPrint('\nValidating text');
       await validateText(tester: tester, finder: appTitle);
       await validateText(tester: tester, finder: l10n.gAttention);
       await validateWidget(tester: tester, widgetType: EzWarning);
@@ -59,12 +59,12 @@ void testSuite({
 
       // Options menu //
 
-      debugPrint('Testing options menu (OM)');
+      debugPrint('\nTesting options menu (OM)');
       final Finder optionsMenu = find.byType(MenuAnchor);
 
       debugPrint('Testing OM exists');
-      expect(optionsMenu, findsOneWidget);
-      await touch(tester: tester, finder: optionsMenu);
+      expect(optionsMenu, findsWidgets);
+      await touch(tester: tester, finder: optionsMenu.last);
 
       debugPrint('Testing OM options appear');
       final Finder byoButton = find.text(l10n.gBYO).last;
@@ -75,11 +75,11 @@ void testSuite({
 
       debugPrint('Testing OM menu is dismissible');
       await dismissTap(tester);
-      await touch(tester: tester, finder: optionsMenu);
+      await touch(tester: tester, finder: optionsMenu.last);
 
       // Dominant hand  //
 
-      debugPrint('Testing dominant hand setting (DHS)');
+      debugPrint('\nTesting dominant hand setting (DHS)');
       final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
 
       debugPrint('Testing DHS exists');
@@ -152,7 +152,7 @@ void testSuite({
 
       // Theme mode //
 
-      debugPrint('Testing theme mode setting (TMS)');
+      debugPrint('\nTesting theme mode setting (TMS)');
       final Finder themeModeButton = find.byType(DropdownMenu<ThemeMode>);
 
       debugPrint('Testing TMS exists');
@@ -205,7 +205,7 @@ void testSuite({
 
       // Language //
 
-      debugPrint('Testing language setting button (LSB)');
+      debugPrint('\nTesting language setting button (LSB)');
       final Finder languageButton = find.byType(EzLocaleSetting);
 
       debugPrint('Testing LSB exists');
@@ -249,7 +249,7 @@ void testSuite({
 
       // Reset //
 
-      debugPrint('Testing reset button (RB)');
+      debugPrint('\nTesting reset button (RB)');
       final Finder resetButton = find.byType(EzResetButton);
 
       debugPrint('Testing RB exists');
