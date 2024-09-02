@@ -23,6 +23,7 @@ void testSuite({
     testWidgets(title, (WidgetTester tester) async {
       // Load localization(s) //
 
+      debugPrint('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       final LocaleNames enNames =
@@ -41,18 +42,16 @@ void testSuite({
 
       // Load the app //
 
+      debugPrint('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       //// Verify text loaded ////
 
+      debugPrint('Validating text');
       await validateText(tester: tester, finder: appTitle);
       await validateText(tester: tester, finder: l10n.gAttention);
-      try {
-        await validateText(tester: tester, finder: l10n.ssSettingsGuide);
-      } catch (e) {
-        await validateText(tester: tester, finder: l10n.ssSettingsGuideWeb);
-      }
+      await validateWidget(tester: tester, widgetType: EzWarning);
       await validateText(tester: tester, finder: l10n.ssDominantHand);
       await validateText(tester: tester, finder: l10n.ssThemeMode);
 
@@ -60,20 +59,21 @@ void testSuite({
 
       // Dominant hand  //
 
+      debugPrint('Testing dominant hand setting (DHS)');
       final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
 
-      // Verify the button exists
+      debugPrint('Testing DHS exists');
       expect(dominantHandButton, findsOneWidget);
       await touch(tester: tester, finder: dominantHandButton);
 
-      // Verify the options appear
+      debugPrint('Testing DHS options appear');
       final Finder rightButton = find.text(l10n.gRight).last;
       final Finder leftButton = find.text(l10n.gLeft).last;
 
       expect(rightButton, findsOneWidget);
       expect(leftButton, findsOneWidget);
 
-      // Verify the menu is dismissible
+      debugPrint('Testing DHS menu is dismissible');
       await dismissTap(tester);
       await touch(tester: tester, finder: dominantHandButton);
 
@@ -81,6 +81,7 @@ void testSuite({
       Row handButtonsRow = tester.widget(handButtonsRowFinder);
       List<Widget> handButtonsChildren = handButtonsRow.children;
 
+      debugPrint('Testing DHS functionality');
       if (isLefty) {
         // Activate righty layout
         await tester.tap(rightButton);
@@ -131,9 +132,10 @@ void testSuite({
 
       // Theme mode //
 
+      debugPrint('Testing theme mode setting (TMS)');
       final Finder themeModeButton = find.byType(DropdownMenu<ThemeMode>);
 
-      // Verify the button exists
+      debugPrint('Testing TMS exists');
       expect(themeModeButton, findsOneWidget);
       await touch(tester: tester, finder: themeModeButton);
 
@@ -152,7 +154,7 @@ void testSuite({
         expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
       }
 
-      // Verify the options appear
+      debugPrint('Testing TMS options appear');
       final Finder systemButton = find.text(l10n.gSystem).last;
       final Finder lightButton = find.text(l10n.gLight).last;
       final Finder darkButton = find.text(l10n.gDark).last;
@@ -161,9 +163,11 @@ void testSuite({
       expect(lightButton, findsOneWidget);
       expect(darkButton, findsOneWidget);
 
-      // Verify the menu is dismissible
+      debugPrint('Testing TMS menu is dismissible');
       await dismissTap(tester);
       await touch(tester: tester, finder: themeModeButton);
+
+      debugPrint('Testing DHS functionality');
 
       // Activate light theme
       await tester.tap(lightButton);
@@ -181,13 +185,14 @@ void testSuite({
 
       // Language //
 
+      debugPrint('Testing language setting button (LSB)');
       final Finder languageButton = find.byType(EzLocaleSetting);
 
-      // Verify the button exists
+      debugPrint('Testing LSB exists');
       expect(languageButton, findsOneWidget);
       await touch(tester: tester, finder: languageButton);
 
-      // Verify the options appear
+      debugPrint('Testing LSB options appear');
       final Finder englishButton =
           find.text(l10nNames.first.nameOf('en')!).last;
       final Finder spanishButton =
@@ -200,9 +205,11 @@ void testSuite({
       expect(frenchButton, findsOneWidget);
       expect(closeBUtton, findsOneWidget);
 
-      // Verify the menu is dismissible
+      debugPrint('Testing LSB menu is dismissible');
       await dismissTap(tester);
       await touch(tester: tester, finder: languageButton);
+
+      debugPrint('Testing LSB functionality');
 
       // Activate Spanish localizations
       await tester.tap(spanishButton);
@@ -222,13 +229,16 @@ void testSuite({
 
       // Reset //
 
+      debugPrint('Testing reset button (RB)');
       final Finder resetButton = find.byType(EzResetButton);
 
-      // Verify the button exists
+      debugPrint('Testing RB exists');
       expect(resetButton, findsOneWidget);
+
+      debugPrint('Testing RB activation');
       await touch(tester: tester, finder: resetButton);
 
-      // Verify the options appear
+      debugPrint('Testing RB dialog options appear');
       final Finder noButton = find.text(l10n.gNo).last;
       final Finder yesButton = find.text(l10n.gYes).last;
 
@@ -252,7 +262,7 @@ void testSuite({
         expect((actions[1] as TextButton).child!.toString(), l10n.gYes);
       }
 
-      // Verify dismiss options
+      debugPrint('Testing RB dialog dismiss options');
       await dismissTap(tester);
       await touch(tester: tester, finder: resetButton);
 
@@ -260,26 +270,27 @@ void testSuite({
       await tester.pumpAndSettle();
       await touch(tester: tester, finder: resetButton);
 
-      // Activate reset button
+      debugPrint('Testing RB functionality');
       await tester.tap(yesButton);
       await tester.pumpAndSettle();
 
       // Options menu //
 
+      debugPrint('Testing options menu (OM)');
       final Finder optionsMenu = find.byType(MenuAnchor);
 
-      // Verify the button exists
+      debugPrint('Testing OM exists');
       expect(optionsMenu, findsOneWidget);
       await touch(tester: tester, finder: optionsMenu);
 
-      // Verify the options appear
+      debugPrint('Testing OM options appear');
       final Finder byoButton = find.text(l10n.gBYO).last;
       final Finder feedbackButton = find.text(l10n.gGiveFeedback).last;
 
       expect(byoButton, findsOneWidget);
       expect(feedbackButton, findsOneWidget);
 
-      // Verify the menu is dismissible
+      debugPrint('Testing OM menu is dismissible');
       await dismissTap(tester);
       await touch(tester: tester, finder: optionsMenu);
     });
