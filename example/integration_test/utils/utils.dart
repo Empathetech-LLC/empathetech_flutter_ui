@@ -7,13 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+/// Wait for a desired number of [seconds]
+Future<void> pause(int seconds) =>
+    Future<void>.delayed(Duration(seconds: seconds));
+
 /// Find text and ensure visibility
 Future<void> validateText({
   required WidgetTester tester,
   Matcher matcher = findsOneWidget,
-  required String finder,
+  required String text,
 }) async {
-  final Finder textFinder = find.text(finder);
+  final Finder textFinder = find.text(text);
   expect(textFinder, matcher);
   await tester.ensureVisible(textFinder);
 }
