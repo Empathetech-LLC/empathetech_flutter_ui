@@ -15,7 +15,7 @@ const String name = 'text-settings-screen';
 
 void testSuite({
   required String title,
-  required Locale locale,
+  Locale locale = english,
   bool isLefty = false,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -54,4 +54,6 @@ void testSuite({
       );
 
       //// Test functionality ////
+
+      debugPrint('\n\n');
     });

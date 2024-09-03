@@ -15,7 +15,7 @@ const String name = 'color-settings-screen';
 
 void testSuite({
   required String title,
-  required Locale locale,
+  Locale locale = english,
   bool isLefty = false,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -50,4 +50,6 @@ void testSuite({
       await validateText(tester: tester, text: l10n.gEditingTheme(l10n.gDark));
 
       //// Test functionality ////
+
+      debugPrint('\n\n');
     });
