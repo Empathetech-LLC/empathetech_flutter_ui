@@ -112,8 +112,7 @@ void testSuite({
         // Activate righty layout
         await touch(tester, find.byType(DropdownMenu<bool>).last);
 
-        await tester.tapAt(tester.getCenter(find.text(l10n.gRight).last));
-        await tester.pumpAndSettle();
+        await touchAt(tester, find.text(l10n.gRight).last);
 
         // Verify righty layout
         handButtonsChildren =
@@ -146,20 +145,17 @@ void testSuite({
       // Activate light theme
       debugPrint('Light');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await tester.tapAt(tester.getCenter(find.text(l10n.gLight).last));
-      await tester.pumpAndSettle();
+      await touchAt(tester, find.text(l10n.gLight).last);
 
       // Activate system theme
       debugPrint('System');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await tester.tapAt(tester.getCenter(find.text(l10n.gSystem).last));
-      await tester.pumpAndSettle();
+      await touchAt(tester, find.text(l10n.gSystem).last);
 
       // Activate dark theme
       debugPrint('Dark');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await tester.tapAt(tester.getCenter(find.text(l10n.gDark).last));
-      await tester.pumpAndSettle();
+      await touchAt(tester, find.text(l10n.gDark).last);
 
       // Language //
 
@@ -235,13 +231,11 @@ void testSuite({
       }
 
       debugPrint('No');
-      await tester.tapAt(tester.getCenter(find.text(l10n.gNo).last));
-      await tester.pumpAndSettle();
+      await touchAt(tester, find.text(l10n.gNo).last);
 
       debugPrint('Yes');
       await touch(tester, find.byType(EzResetButton));
-      await tester.tapAt(tester.getCenter(find.text(l10n.gYes).last));
-      await tester.pumpAndSettle();
+      await touchAt(tester, find.text(l10n.gYes).last);
 
       // Reset for next test suite  //
 
