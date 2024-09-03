@@ -45,7 +45,10 @@ void testSuite({
       // Verify text loaded //
 
       debugPrint('\nValidating text');
-      await validateText(tester: tester, text: l10n.gEditingTheme(l10n.gDark));
+      await validateText(
+        tester: tester,
+        text: l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+      );
 
       //// Test functionality ////
 
