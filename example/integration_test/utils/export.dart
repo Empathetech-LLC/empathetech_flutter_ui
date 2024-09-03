@@ -3,5 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
+// General //
+
 export 'consts.dart';
 export 'utils.dart';
+
+// Widget tests //
+
+export 'widget_tests/reset_button.dart';

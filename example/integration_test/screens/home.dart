@@ -8,10 +8,7 @@ import '../utils/export.dart';
 import 'package:example/main.dart';
 import 'package:example/utils/consts.dart';
 
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -186,55 +183,12 @@ void testSuite({
 
       // Reset //
 
-      debugPrint('\nTesting reset button (RB)');
-      await touch(tester, find.byType(EzResetButton));
-
-      // Verify layout
-      final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
-
-      late final List<TextButton>? materialActions;
-      late final List<CupertinoDialogAction>? cupertinoActions;
-
-      if (isCupertino) {
-        cupertinoActions =
-            (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-                .cupertinoActions!;
-      } else {
-        materialActions =
-            (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-                .materialActions! as List<TextButton>;
-      }
-
-      if (isCupertino) {
-        final List<CupertinoDialogAction> actions = cupertinoActions!;
-
-        expect(actions.length, 2);
-        if (isLefty) {
-          expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-          expect(actions[1].child.toString(), Text(l10n.gNo).toString());
-        } else {
-          expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-          expect(actions[1].child.toString(), Text(l10n.gYes).toString());
-        }
-      } else {
-        final List<TextButton> actions = materialActions!;
-
-        expect(actions.length, 2);
-        if (isLefty) {
-          expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-          expect(actions[1].child.toString(), Text(l10n.gNo).toString());
-        } else {
-          expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-          expect(actions[1].child.toString(), Text(l10n.gYes).toString());
-        }
-      }
-
-      debugPrint('No');
-      await touchAtText(tester, l10n.gNo);
-
-      debugPrint('Yes');
-      await touch(tester, find.byType(EzResetButton));
-      await touchAtText(tester, l10n.gYes);
+      await testResetButton(
+        tester,
+        type: RBType.all,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
 
       // Reset for next test suite  //
 
