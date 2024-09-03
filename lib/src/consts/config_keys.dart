@@ -136,8 +136,8 @@ const String underlined = 'underlined';
 
 // Text settings' recommended parameters //
 
-/// '-55.55'
-const String sampleString = '-55.55';
+/// '-5.5'
+const String sampleString = '-5.5';
 
 /// 0.5
 const double minFontScale = 0.5;
