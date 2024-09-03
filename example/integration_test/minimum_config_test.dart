@@ -3,4 +3,82 @@
  * See LICENSE for distribution and usage details.
  */
 
-const String parentTest = 'minimum-config';
+import 'screens/home.dart' as home;
+import 'screens/text_settings.dart' as text;
+import 'screens/layout_settings.dart' as layout;
+import 'screens/color_settings.dart' as color;
+import 'screens/image_settings.dart' as image;
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+void main() async {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final Map<String, Object> testConfig = <String, Object>{
+    ...empathetechConfig,
+    isDarkThemeKey: true,
+
+    // Text settings //
+
+    // Display
+    displayFontSizeKey: minFontSize,
+    displayFontHeightKey: minFontHeight,
+    displayLetterSpacingKey: minFontLetterSpacing,
+    displayWordSpacingKey: minFontWordSpacing,
+
+    // Headline
+    headlineFontSizeKey: minFontSize,
+    headlineFontHeightKey: minFontHeight,
+    headlineLetterSpacingKey: minFontLetterSpacing,
+    headlineWordSpacingKey: minFontWordSpacing,
+
+    // Title
+    titleFontSizeKey: minFontSize,
+    titleFontHeightKey: minFontHeight,
+    titleLetterSpacingKey: minFontLetterSpacing,
+    titleWordSpacingKey: minFontWordSpacing,
+
+    // Body
+    bodyFontSizeKey: minFontSize,
+    bodyFontHeightKey: minFontHeight,
+    bodyLetterSpacingKey: minFontLetterSpacing,
+    bodyWordSpacingKey: minFontWordSpacing,
+
+    // Label
+    labelFontSizeKey: minFontSize,
+    labelFontHeightKey: minFontHeight,
+    labelLetterSpacingKey: minFontLetterSpacing,
+    labelWordSpacingKey: minFontWordSpacing,
+
+    // Layout settings //
+
+    marginKey: minMargin,
+    paddingKey: minPadding,
+    spacingKey: minSpacing,
+  };
+
+  SharedPreferences.setMockInitialValues(testConfig);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  EzConfig.init(
+    assetPaths: <String>{},
+    preferences: prefs,
+    defaults: testConfig,
+  );
+
+  group(
+    'minimum-config',
+    () {
+      home.testSuite(title: home.name);
+      text.testSuite(title: text.name);
+      layout.testSuite(title: layout.name);
+      color.testSuite(title: color.name);
+      image.testSuite(title: image.name);
+    },
+  );
+}
