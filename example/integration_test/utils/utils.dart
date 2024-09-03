@@ -34,38 +34,37 @@ Future<void> validateWidget(
 }
 
 /// Find, touch, and settle a touch-point
-Future<void> touch(
-  WidgetTester tester,
-  Finder finder,
-) async {
+Future<void> touch(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
   await tester.tap(finder);
   await tester.pumpAndSettle();
 }
 
 /// Find, touch, and settle a target
-Future<void> touchAt(
-  WidgetTester tester,
-  Finder finder,
-) async {
+Future<void> touchAt(WidgetTester tester, Finder finder) async {
   await tester.tapAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
 /// Find, touch, and settle a text target
-Future<void> touchAtText(
-  WidgetTester tester,
-  String text,
-) async {
+Future<void> touchAtText(WidgetTester tester, String text) async {
   await tester.tapAt(tester.getCenter(find.text(text).last));
   await tester.pumpAndSettle();
 }
 
+/// Given a [Slider] finder,
+/// Slide to the left,
+/// Slide to the right...
+Future<void> chaChaNow(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
+  await tester.drag(finder, const Offset(double.infinity, 0));
+  await tester.pumpAndSettle();
+  await tester.drag(finder, const Offset(double.negativeInfinity, 0));
+  await tester.pumpAndSettle();
+}
+
 /// Find and touch the button whose [Tooltip] is [l10n.gBack]
-Future<void> goBack(
-  WidgetTester tester,
-  EFUILang l10n,
-) async {
+Future<void> goBack(WidgetTester tester, EFUILang l10n) async {
   final Finder backButton = find.byTooltip(l10n.gBack);
 
   await tester.ensureVisible(backButton);
