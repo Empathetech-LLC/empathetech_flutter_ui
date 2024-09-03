@@ -45,17 +45,17 @@ void testSuite({
 
       // Margin //
       debugPrint('\nTesting margin');
-      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.margin));
+      await touch(tester, find.byType(EzLayoutSetting).at(0));
       await dismissTap(tester);
 
       // Padding //
       debugPrint('\nTesting padding');
-      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.padding));
+      await touch(tester, find.byType(EzLayoutSetting).at(1));
       await dismissTap(tester);
 
       // Spacing //
       debugPrint('\nTesting spacing');
-      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.space_bar));
+      await touch(tester, find.byType(EzLayoutSetting).at(2));
       await dismissTap(tester);
 
       // Reset for next test suite  //
