@@ -11,14 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-const String name = 'image-settings-screen';
-
 void testSuite({
-  required String title,
   Locale locale = english,
   bool isLefty = false,
 }) =>
-    testWidgets(title, (WidgetTester tester) async {
+    testWidgets('image-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
       debugPrint('Loading localizations');

@@ -38,11 +38,11 @@ void main() async {
   group(
     'fr-locale',
     () {
-      home.testSuite(title: home.name, locale: french);
-      text.testSuite(title: text.name, locale: french);
-      layout.testSuite(title: layout.name, locale: french);
-      color.testSuite(title: color.name, locale: french);
-      image.testSuite(title: image.name, locale: french);
+      home.testSuite(locale: french);
+      text.testSuite(locale: french);
+      layout.testSuite(locale: french);
+      color.testSuite(locale: french);
+      image.testSuite(locale: french);
     },
   );
 }
