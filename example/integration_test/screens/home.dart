@@ -17,7 +17,7 @@ const String name = 'home-screen';
 
 void testSuite({
   required String title,
-  required Locale locale,
+  Locale locale = english,
   bool isLefty = false,
 }) =>
     testWidgets(title, (WidgetTester tester) async {
@@ -293,4 +293,6 @@ void testSuite({
       // debugPrint('Testing RB functionality');
       // await tester.tap(yesButton);
       // await tester.pumpAndSettle();
+
+      debugPrint('\n\n');
     });
