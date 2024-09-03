@@ -181,7 +181,7 @@ void testSuite({
       await tester.tap(find.text(l10n.gClose).last);
       await tester.pumpAndSettle();
 
-      // Reset //
+      // Reset button //
 
       await testResetButton(
         tester,
