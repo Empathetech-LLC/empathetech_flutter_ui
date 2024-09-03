@@ -37,20 +37,20 @@ void testSuite({
       );
 
       expect(csButton, findsOneWidget);
-      await touch(tester: tester, finder: csButton);
+      await touch(tester, csButton);
 
       // Verify text loaded //
 
       debugPrint('\nValidating text');
       await validateText(
-        tester: tester,
-        text: l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+        tester,
+        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
       //// Test functionality ////
 
       // Reset for next test suite  //
 
-      await goBack(tester: tester, l10n: l10n);
+      await goBack(tester, l10n);
       debugPrint('\nColor settings test suite complete\n');
     });

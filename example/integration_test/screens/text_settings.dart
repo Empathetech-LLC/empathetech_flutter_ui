@@ -37,18 +37,19 @@ void testSuite({
       );
 
       expect(tsButton, findsOneWidget);
-      await touch(tester: tester, finder: tsButton);
+      await touch(tester, tsButton);
 
       // Verify text loaded //
 
       debugPrint('\nValidating text');
       debugPrint(
-          "This will probably be different because it's rich text or whatever");
+        "This will probably be different because it's rich text or whatever",
+      );
 
       //// Test functionality ////
 
       // Reset for next test suite  //
 
-      await goBack(tester: tester, l10n: l10n);
+      await goBack(tester, l10n);
       debugPrint('\nText settings test suite complete\n');
     });

@@ -37,20 +37,20 @@ void testSuite({
       );
 
       expect(isButton, findsOneWidget);
-      await touch(tester: tester, finder: isButton);
+      await touch(tester, isButton);
 
       // Verify text loaded //
 
       debugPrint('\nValidating text');
       await validateText(
-        tester: tester,
-        text: l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+        tester,
+        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
       //// Test functionality ////
 
       // Reset for next test suite  //
 
-      await goBack(tester: tester, l10n: l10n);
+      await goBack(tester, l10n);
       debugPrint('\nImage settings test suite complete\n');
     });

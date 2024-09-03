@@ -37,18 +37,18 @@ void testSuite({
       // Verify text loaded //
 
       debugPrint('\nValidating text');
-      await validateText(tester: tester, text: appTitle);
-      await validateText(tester: tester, text: l10n.gAttention);
-      await validateWidget(tester: tester, widgetType: EzWarning);
-      await validateText(tester: tester, text: l10n.ssDominantHand);
-      await validateText(tester: tester, text: l10n.ssThemeMode);
+      await validateText(tester, appTitle);
+      await validateText(tester, l10n.gAttention);
+      await validateWidget(tester, EzWarning);
+      await validateText(tester, l10n.ssDominantHand);
+      await validateText(tester, l10n.ssThemeMode);
 
       //// Test functionality ////
 
       // Options menu //
 
       debugPrint('\nTesting options menu (OM)');
-      await touch(tester: tester, finder: find.byType(MenuAnchor).last);
+      await touch(tester, find.byType(MenuAnchor).last);
 
       // ToDo: Test options functionality
       expect(find.text(l10n.gBYO).last, findsOneWidget);
@@ -60,18 +60,16 @@ void testSuite({
       // Dominant hand  //
 
       debugPrint('\nTesting dominant hand setting (DHS)');
-      await touch(tester: tester, finder: find.byType(DropdownMenu<bool>).last);
+      await touch(tester, find.byType(DropdownMenu<bool>).last);
 
       if (isLefty) {
         debugPrint('Right hand layout');
 
         // Activate righty layout
-        await tester.tapAt(tester.getCenter(find.text(l10n.gRight).last));
-        await tester.pumpAndSettle();
+        await touchAt(tester, find.text(l10n.gRight).last);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
-
         expect(handButtonsChildren.length, 3);
 
         // Verify righty layout
@@ -82,13 +80,9 @@ void testSuite({
         debugPrint('Left hand layout');
 
         // Activate lefty layout
-        await touch(
-          tester: tester,
-          finder: find.byType(DropdownMenu<bool>).last,
-        );
+        await touch(tester, find.byType(DropdownMenu<bool>).last);
 
-        await tester.tapAt(tester.getCenter(find.text(l10n.gLeft).last));
-        await tester.pumpAndSettle();
+        await touchAt(tester, find.text(l10n.gLeft).last);
 
         // Verify lefty layout
         handButtonsChildren =
@@ -101,8 +95,7 @@ void testSuite({
         debugPrint('Left hand layout');
 
         // Activate lefty layout
-        await tester.tapAt(tester.getCenter(find.text(l10n.gLeft).last));
-        await tester.pumpAndSettle();
+        await touchAt(tester, find.text(l10n.gLeft).last);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -117,10 +110,7 @@ void testSuite({
         debugPrint('Right hand layout');
 
         // Activate righty layout
-        await touch(
-          tester: tester,
-          finder: find.byType(DropdownMenu<bool>).last,
-        );
+        await touch(tester, find.byType(DropdownMenu<bool>).last);
 
         await tester.tapAt(tester.getCenter(find.text(l10n.gRight).last));
         await tester.pumpAndSettle();
@@ -140,7 +130,7 @@ void testSuite({
 
       // Verify  layout
       final List<Widget> themeButtonsChildren =
-          (tester.widget(find.byType(EzRow).at(1)) as EzRow).children;
+          (tester.widget(find.byType(EzRow).at(2)) as EzRow).children;
 
       expect(themeButtonsChildren.length, 3);
       if (isLefty) {
@@ -155,19 +145,19 @@ void testSuite({
 
       // Activate light theme
       debugPrint('Light');
-      await touch(tester: tester, finder: find.byType(DropdownMenu<ThemeMode>));
+      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
       await tester.tapAt(tester.getCenter(find.text(l10n.gLight).last));
       await tester.pumpAndSettle();
 
       // Activate system theme
       debugPrint('System');
-      await touch(tester: tester, finder: find.byType(DropdownMenu<ThemeMode>));
+      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
       await tester.tapAt(tester.getCenter(find.text(l10n.gSystem).last));
       await tester.pumpAndSettle();
 
       // Activate dark theme
       debugPrint('Dark');
-      await touch(tester: tester, finder: find.byType(DropdownMenu<ThemeMode>));
+      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
       await tester.tapAt(tester.getCenter(find.text(l10n.gDark).last));
       await tester.pumpAndSettle();
 
@@ -177,32 +167,32 @@ void testSuite({
 
       // Activate Spanish localizations
       debugPrint('Spanish');
-      await touch(tester: tester, finder: find.byType(EzLocaleSetting));
+      await touch(tester, find.byType(EzLocaleSetting));
       await tester.tap(find.text(l10nNames.nameOf('es')!).last);
       await tester.pumpAndSettle();
 
       // Activate French localizations
       debugPrint('French');
-      await touch(tester: tester, finder: find.byType(EzLocaleSetting));
+      await touch(tester, find.byType(EzLocaleSetting));
       await tester.tap(find.text(l10nNames.nameOf('fr')!).last);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('English');
-      await touch(tester: tester, finder: find.byType(EzLocaleSetting));
+      await touch(tester, find.byType(EzLocaleSetting));
       await tester.tap(find.text(l10nNames.nameOf('en')!).last);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('Close');
-      await touch(tester: tester, finder: find.byType(EzLocaleSetting));
+      await touch(tester, find.byType(EzLocaleSetting));
       await tester.tap(find.text(l10n.gClose).last);
       await tester.pumpAndSettle();
 
       // Reset //
 
       debugPrint('\nTesting reset button (RB)');
-      await touch(tester: tester, finder: find.byType(EzResetButton));
+      await touch(tester, find.byType(EzResetButton));
 
       // Verify layout
       final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
@@ -249,7 +239,7 @@ void testSuite({
       await tester.pumpAndSettle();
 
       debugPrint('Yes');
-      await touch(tester: tester, finder: find.byType(EzResetButton));
+      await touch(tester, find.byType(EzResetButton));
       await tester.tapAt(tester.getCenter(find.text(l10n.gYes).last));
       await tester.pumpAndSettle();
 

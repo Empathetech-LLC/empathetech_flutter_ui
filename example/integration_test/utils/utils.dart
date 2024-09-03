@@ -12,10 +12,10 @@ Future<void> pause(int seconds) =>
     Future<void>.delayed(Duration(seconds: seconds));
 
 /// Find text and ensure visibility
-Future<void> validateText({
-  required WidgetTester tester,
+Future<void> validateText(
+  WidgetTester tester,
+  String text, {
   Matcher matcher = findsOneWidget,
-  required String text,
 }) async {
   final Finder textFinder = find.text(text);
   expect(textFinder, matcher);
@@ -23,9 +23,9 @@ Future<void> validateText({
 }
 
 /// Find widget and ensure visibility
-Future<void> validateWidget({
-  required WidgetTester tester,
-  required Type widgetType,
+Future<void> validateWidget(
+  WidgetTester tester,
+  Type widgetType, {
   Matcher matcher = findsOneWidget,
 }) async {
   final Finder widgetFinder = find.byType(widgetType);
@@ -34,22 +34,30 @@ Future<void> validateWidget({
 }
 
 /// Find, touch, and settle a touch-point
-Future<void> touch({
-  required WidgetTester tester,
-  required Finder finder,
-}) async {
+Future<void> touch(
+  WidgetTester tester,
+  Finder finder,
+) async {
   await tester.ensureVisible(finder);
   await tester.tap(finder);
   await tester.pumpAndSettle();
 }
 
+/// Find, touch, and settle a target
+Future<void> touchAt(
+  WidgetTester tester,
+  Finder finder,
+) async {
+  await tester.tapAt(tester.getCenter(finder));
+  await tester.pumpAndSettle();
+}
+
 /// Find and touch the button whose [Tooltip] is [l10n.gBack]
-Future<void> goBack({
-  required WidgetTester tester,
-  required EFUILang l10n,
-}) async {
+Future<void> goBack(
+  WidgetTester tester,
+  EFUILang l10n,
+) async {
   final Finder backButton = find.byTooltip(l10n.gBack);
-  expect(backButton, findsOneWidget);
 
   await tester.ensureVisible(backButton);
   await tester.tap(backButton);

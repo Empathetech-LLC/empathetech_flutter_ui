@@ -31,26 +31,35 @@ void testSuite({
 
       debugPrint('\nTesting navigation');
 
-      final Finder lsButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.lsPageTitle,
+      await touch(
+        tester,
+        find.widgetWithText(ElevatedButton, l10n.lsPageTitle),
       );
-
-      expect(lsButton, findsOneWidget);
-      await touch(tester: tester, finder: lsButton);
 
       // Verify text loaded //
 
       debugPrint('\nValidating text');
-      await validateText(
-        tester: tester,
-        text: l10n.gHowThisWorks,
-      );
+      await validateText(tester, l10n.gHowThisWorks);
 
       //// Test functionality ////
 
+      // Margin //
+      debugPrint('\nTesting margin');
+      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.margin));
+      await dismissTap(tester);
+
+      // Padding //
+      debugPrint('\nTesting padding');
+      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.padding));
+      await dismissTap(tester);
+
+      // Spacing //
+      debugPrint('\nTesting spacing');
+      await touch(tester, find.widgetWithIcon(ElevatedButton, Icons.space_bar));
+      await dismissTap(tester);
+
       // Reset for next test suite  //
 
-      await goBack(tester: tester, l10n: l10n);
+      await goBack(tester, l10n);
       debugPrint('\nLayout settings test suite complete\n');
     });
