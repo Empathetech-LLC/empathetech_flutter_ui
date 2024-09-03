@@ -52,14 +52,24 @@ Future<void> touchAtText(WidgetTester tester, String text) async {
   await tester.pumpAndSettle();
 }
 
-/// Given a [Slider] finder,
-/// Slide to the left,
-/// Slide to the right...
+/// Take the [finder] and
+/// Slide to the right, then
+/// Slide to the left
 Future<void> chaChaNow(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
-  await tester.drag(finder, const Offset(double.infinity, 0));
+  await tester.timedDrag(
+    finder,
+    const Offset(100, 0),
+    const Duration(milliseconds: 500),
+  );
   await tester.pumpAndSettle();
-  await tester.drag(finder, const Offset(double.negativeInfinity, 0));
+
+  await tester.ensureVisible(finder);
+  await tester.timedDrag(
+    finder,
+    const Offset(-100, 0),
+    const Duration(milliseconds: 500),
+  );
   await tester.pumpAndSettle();
 }
 
