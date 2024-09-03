@@ -547,7 +547,7 @@ const double maxPadding = 50.0;
 const double minSpacing = 10.0;
 
 /// 100.0
-const double maxSpacing = 100.0;
+const double maxSpacing = 75.0;
 
 // Global trackers //
 
