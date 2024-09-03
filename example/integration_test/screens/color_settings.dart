@@ -54,7 +54,6 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      debugPrint('\nColor settings test suite complete');
       await goBack(tester: tester, l10n: l10n);
-      debugPrint('\n\n');
+      debugPrint('\nColor settings test suite complete\n');
     });

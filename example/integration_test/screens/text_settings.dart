@@ -52,7 +52,6 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      debugPrint('\nText settings test suite complete');
       await goBack(tester: tester, l10n: l10n);
-      debugPrint('\n\n');
+      debugPrint('\nText settings test suite complete\n');
     });
