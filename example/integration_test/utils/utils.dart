@@ -52,6 +52,15 @@ Future<void> touchAt(
   await tester.pumpAndSettle();
 }
 
+/// Find, touch, and settle a text target
+Future<void> touchAtText(
+  WidgetTester tester,
+  String text,
+) async {
+  await tester.tapAt(tester.getCenter(find.text(text).last));
+  await tester.pumpAndSettle();
+}
+
 /// Find and touch the button whose [Tooltip] is [l10n.gBack]
 Future<void> goBack(
   WidgetTester tester,
