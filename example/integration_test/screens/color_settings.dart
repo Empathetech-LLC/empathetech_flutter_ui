@@ -41,8 +41,6 @@ void testSuite({
 
       expect(csButton, findsOneWidget);
       await touch(tester: tester, finder: csButton);
-      await goBack(tester: tester, l10n: l10n); // And test going back
-      await touch(tester: tester, finder: csButton);
 
       // Verify text loaded //
 
@@ -51,5 +49,9 @@ void testSuite({
 
       //// Test functionality ////
 
+      // Reset for next test suite  //
+
+      debugPrint('\nColor settings test suite complete');
+      await goBack(tester: tester, l10n: l10n);
       debugPrint('\n\n');
     });

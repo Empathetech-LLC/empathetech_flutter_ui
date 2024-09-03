@@ -294,5 +294,8 @@ void testSuite({
       // await tester.tap(yesButton);
       // await tester.pumpAndSettle();
 
+      // Reset for next test suite  //
+
+      debugPrint('\nSettings home test suite complete');
       debugPrint('\n\n');
     });

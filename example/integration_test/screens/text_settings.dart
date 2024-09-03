@@ -41,8 +41,6 @@ void testSuite({
 
       expect(tsButton, findsOneWidget);
       await touch(tester: tester, finder: tsButton);
-      await goBack(tester: tester, l10n: l10n); // And test going back
-      await touch(tester: tester, finder: tsButton);
 
       // Verify text loaded //
 
@@ -52,5 +50,9 @@ void testSuite({
 
       //// Test functionality ////
 
+      // Reset for next test suite  //
+
+      debugPrint('\nText settings test suite complete');
+      await goBack(tester: tester, l10n: l10n);
       debugPrint('\n\n');
     });
