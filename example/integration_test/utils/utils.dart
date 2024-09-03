@@ -58,7 +58,6 @@ Future<void> goBack({
 
 /// Tap the top of the screen to dismiss a dialog
 Future<void> dismissTap(WidgetTester tester) async {
-  final Size size = tester.view.physicalSize;
-  await tester.tapAt(Offset(size.width / 3, 1));
+  await tester.tapAt(const Offset(1, 1));
   await tester.pumpAndSettle();
 }
