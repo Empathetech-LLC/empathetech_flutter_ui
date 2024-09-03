@@ -36,11 +36,11 @@ void main() async {
   group(
     'default-config',
     () {
-      home.testSuite(title: home.name);
-      text.testSuite(title: text.name);
-      layout.testSuite(title: layout.name);
-      color.testSuite(title: color.name);
-      image.testSuite(title: image.name);
+      home.testSuite();
+      text.testSuite();
+      layout.testSuite();
+      color.testSuite();
+      image.testSuite();
     },
   );
 }
