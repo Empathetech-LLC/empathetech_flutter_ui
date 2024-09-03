@@ -379,7 +379,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
-      sizingString: fontSizeSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>(
@@ -393,7 +392,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
-      sizingString: fontSizeSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>(
@@ -407,7 +405,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
-      sizingString: fontSizeSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>(
@@ -421,7 +418,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
-      sizingString: fontSizeSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>(
@@ -435,7 +431,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       icon: Icons.text_fields_sharp,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
-      sizingString: fontSizeSampleString,
     ),
   };
 
@@ -557,7 +552,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineLetterSpacingKey-${bodyProvider.id}'),
@@ -569,7 +563,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleLetterSpacingKey-${bodyProvider.id}'),
@@ -581,7 +574,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyLetterSpacingKey-${bodyProvider.id}'),
@@ -593,7 +585,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelLetterSpacingKey-${bodyProvider.id}'),
@@ -605,7 +596,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.horizontal_distribute_sharp,
       tooltip: l10n.tsLetterSpacing,
-      sizingString: fontSpacingSampleString,
     ),
   };
 
@@ -622,7 +612,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineWordSpacingKey-${bodyProvider.id}'),
@@ -634,7 +623,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleWordSpacingKey-${bodyProvider.id}'),
@@ -646,7 +634,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyWordSpacingKey-${bodyProvider.id}'),
@@ -658,7 +645,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelWordSpacingKey-${bodyProvider.id}'),
@@ -670,7 +656,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.space_bar_sharp,
       tooltip: l10n.tsWordSpacing,
-      sizingString: fontSpacingSampleString,
     ),
   };
 
@@ -687,7 +672,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
       key: ValueKey<String>('$headlineFontHeightKey-${bodyProvider.id}'),
@@ -699,7 +683,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.title: EzFontDoubleSetting(
       key: ValueKey<String>('$titleFontHeightKey-${bodyProvider.id}'),
@@ -711,7 +694,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.body: EzFontDoubleSetting(
       key: ValueKey<String>('$bodyFontHeightKey-${bodyProvider.id}'),
@@ -723,7 +705,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
-      sizingString: fontSpacingSampleString,
     ),
     TextSettingType.label: EzFontDoubleSetting(
       key: ValueKey<String>('$labelFontHeightKey-${bodyProvider.id}'),
@@ -735,7 +716,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       style: bodyProvider.value,
       icon: Icons.format_line_spacing_sharp,
       tooltip: l10n.tsLineHeight,
-      sizingString: fontSpacingSampleString,
     ),
   };
 
