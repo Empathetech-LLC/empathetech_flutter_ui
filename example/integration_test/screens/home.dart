@@ -66,10 +66,11 @@ void testSuite({
         debugPrint('Right hand layout');
 
         // Activate righty layout
-        await touchAt(tester, find.text(l10n.gRight).last);
+        await touchAtText(tester, l10n.gRight);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
+
         expect(handButtonsChildren.length, 3);
 
         // Verify righty layout
@@ -81,8 +82,7 @@ void testSuite({
 
         // Activate lefty layout
         await touch(tester, find.byType(DropdownMenu<bool>).last);
-
-        await touchAt(tester, find.text(l10n.gLeft).last);
+        await touchAtText(tester, l10n.gLeft);
 
         // Verify lefty layout
         handButtonsChildren =
@@ -95,7 +95,7 @@ void testSuite({
         debugPrint('Left hand layout');
 
         // Activate lefty layout
-        await touchAt(tester, find.text(l10n.gLeft).last);
+        await touchAtText(tester, l10n.gLeft);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -111,8 +111,7 @@ void testSuite({
 
         // Activate righty layout
         await touch(tester, find.byType(DropdownMenu<bool>).last);
-
-        await touchAt(tester, find.text(l10n.gRight).last);
+        await touchAtText(tester, l10n.gRight);
 
         // Verify righty layout
         handButtonsChildren =
@@ -145,17 +144,17 @@ void testSuite({
       // Activate light theme
       debugPrint('Light');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAt(tester, find.text(l10n.gLight).last);
+      await touchAtText(tester, l10n.gLight);
 
       // Activate system theme
       debugPrint('System');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAt(tester, find.text(l10n.gSystem).last);
+      await touchAtText(tester, l10n.gSystem);
 
       // Activate dark theme
       debugPrint('Dark');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAt(tester, find.text(l10n.gDark).last);
+      await touchAtText(tester, l10n.gDark);
 
       // Language //
 
@@ -164,7 +163,7 @@ void testSuite({
       // Activate Spanish localizations
       debugPrint('Spanish');
       await touch(tester, find.byType(EzLocaleSetting));
-      await tester.tap(find.text(l10nNames.nameOf('es')!).last);
+      await tester.tap(find.text(l10nNames.nameOf('es')!).last); // tap at text
       await tester.pumpAndSettle();
 
       // Activate French localizations
@@ -231,11 +230,11 @@ void testSuite({
       }
 
       debugPrint('No');
-      await touchAt(tester, find.text(l10n.gNo).last);
+      await touchAtText(tester, l10n.gNo);
 
       debugPrint('Yes');
       await touch(tester, find.byType(EzResetButton));
-      await touchAt(tester, find.text(l10n.gYes).last);
+      await touchAtText(tester, l10n.gYes);
 
       // Reset for next test suite  //
 
