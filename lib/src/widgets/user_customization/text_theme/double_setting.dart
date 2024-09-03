@@ -34,9 +34,9 @@ class EzFontDoubleSetting extends StatefulWidget {
 
   final TextStyle? style;
 
-  /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size
-  /// From the results of [measureText] on [sizingString]
-  final String? sizingString;
+  /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size using the results of [measureText] on [sizingString]
+  /// Defaults to [sampleString]
+  final String sizingString;
 
   /// Standardized tool for updating double [TextStyle] values for the passed [configKey]
   /// For example: [TextStyle.letterSpacing]
@@ -52,7 +52,7 @@ class EzFontDoubleSetting extends StatefulWidget {
     this.plusMinus = false,
     this.delta = 1.0,
     this.style,
-    this.sizingString,
+    this.sizingString = sampleString,
   });
 
   @override
@@ -79,7 +79,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
   late final Size sizeLimit = measureText(
-    widget.sizingString ?? widget.max.toString(),
+    widget.sizingString,
     style: style,
     context: context,
   );
