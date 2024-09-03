@@ -4,15 +4,16 @@
  */
 
 import 'screens/home.dart' as home;
-import 'utils/export.dart';
+import 'screens/text_settings.dart' as text;
+import 'screens/layout_settings.dart' as layout;
+import 'screens/color_settings.dart' as color;
+import 'screens/image_settings.dart' as image;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-const String parentTest = 'default-config';
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +34,13 @@ void main() async {
   );
 
   group(
-    parentTest,
+    'default-config',
     () {
-      home.testSuite(title: home.name, locale: english);
+      home.testSuite(title: home.name);
+      text.testSuite(title: text.name);
+      layout.testSuite(title: layout.name);
+      color.testSuite(title: color.name);
+      image.testSuite(title: image.name);
     },
   );
 }
