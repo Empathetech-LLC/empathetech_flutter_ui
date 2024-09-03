@@ -136,6 +136,9 @@ const String underlined = 'underlined';
 
 // Text settings' recommended parameters //
 
+/// '-55.55'
+const String sampleString = '-55.55';
+
 /// 0.5
 const double minFontScale = 0.5;
 
@@ -148,29 +151,23 @@ const double minFontSize = 7.0;
 /// 105.0
 const double maxFontSize = 105.0;
 
-/// '55.55'
-const String fontSizeSampleString = '55.55';
-
-/// -2.0
-const double minFontLetterSpacing = -2.0;
-
-/// 2.0
-const double maxFontLetterSpacing = 2.0;
-
-/// -5.0
-const double minFontWordSpacing = -5.0;
-
-/// 5.0
-const double maxFontWordSpacing = 5.0;
-
-/// '-5.55'
-const String fontSpacingSampleString = '-5.55';
+/// -1.0
+const double minFontLetterSpacing = -1.0;
 
 /// 1.0
-const double minFontHeight = 1.0;
+const double maxFontLetterSpacing = 1.0;
+
+/// -3.0
+const double minFontWordSpacing = -3.0;
 
 /// 3.0
-const double maxFontHeight = 3.0;
+const double maxFontWordSpacing = 3.0;
+
+/// 0.5
+const double minFontHeight = 0.5;
+
+/// 2.5
+const double maxFontHeight = 2.5;
 
 // Image settings' keys //
 
@@ -547,7 +544,7 @@ const double maxPadding = 50.0;
 const double minSpacing = 10.0;
 
 /// 100.0
-const double maxSpacing = 75.0;
+const double maxSpacing = 100.0;
 
 // Global trackers //
 
