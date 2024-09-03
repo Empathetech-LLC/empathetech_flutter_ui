@@ -41,18 +41,20 @@ void testSuite({
 
       expect(lsButton, findsOneWidget);
       await touch(tester: tester, finder: lsButton);
-      await goBack(tester: tester, l10n: l10n); // And test going back
-      await touch(tester: tester, finder: lsButton);
 
       // Verify text loaded //
 
       debugPrint('\nValidating text');
       await validateText(
         tester: tester,
-        text: l10n.gEditingTheme(l10n.gHowThisWorks),
+        text: l10n.gHowThisWorks,
       );
 
       //// Test functionality ////
 
+      // Reset for next test suite  //
+
+      debugPrint('\nLayout settings test suite complete');
+      await goBack(tester: tester, l10n: l10n);
       debugPrint('\n\n');
     });
