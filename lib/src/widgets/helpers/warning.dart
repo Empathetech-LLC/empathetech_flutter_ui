@@ -64,9 +64,11 @@ class EzWarning extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 // Title
-                Row(
+                EzScrollView(
+                  scrollDirection: Axis.horizontal,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -78,12 +80,10 @@ class EzWarning extends StatelessWidget {
                     ),
                     rowPadding,
 
-                    Flexible(
-                      child: Text(
-                        warning,
-                        style: tStyle,
-                        textAlign: TextAlign.center,
-                      ),
+                    Text(
+                      warning,
+                      style: tStyle,
+                      textAlign: TextAlign.center,
                     ),
                     rowPadding,
 
