@@ -60,95 +60,87 @@ void testSuite({
       // Options menu //
 
       debugPrint('\nTesting options menu (OM)');
-      final Finder optionsMenu = find.byType(MenuAnchor);
+      await touch(tester: tester, finder: find.byType(MenuAnchor).last);
 
-      debugPrint('Testing OM exists');
-      expect(optionsMenu, findsWidgets);
-      await touch(tester: tester, finder: optionsMenu.last);
+      // ToDo: Test options functionality
+      expect(find.text(l10n.gBYO).last, findsOneWidget);
+      expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 
-      debugPrint('Testing OM options appear');
-      final Finder byoButton = find.text(l10n.gBYO).last;
-      final Finder feedbackButton = find.text(l10n.gGiveFeedback).last;
-
-      expect(byoButton, findsOneWidget);
-      expect(feedbackButton, findsOneWidget);
-
-      debugPrint('Testing OM menu is dismissible');
+      debugPrint('Dismissing OM');
       await dismissTap(tester);
-      await touch(tester: tester, finder: optionsMenu.last);
 
       // Dominant hand  //
 
-      // debugPrint('\nTesting dominant hand setting (DHS)');
-      // final Finder dominantHandButton = find.byType(DropdownMenu<bool>);
+      debugPrint('\nTesting dominant hand setting (DHS)');
+      await touch(tester: tester, finder: find.byType(DropdownMenu<bool>).last);
 
-      // debugPrint('Testing DHS exists');
-      // expect(dominantHandButton, findsOneWidget);
-      // await touch(tester: tester, text: dominantHandButton);
+      if (isLefty) {
+        debugPrint('Verifying DHS right hand layout');
 
-      // debugPrint('Testing DHS options appear');
-      // final Finder rightButton = find.text(l10n.gRight).last;
-      // final Finder leftButton = find.text(l10n.gLeft).last;
+        // Activate righty layout
+        await tester.tapAt(tester.getCenter(find.text(l10n.gRight).last));
+        await tester.pumpAndSettle();
 
-      // expect(rightButton, findsOneWidget);
-      // expect(leftButton, findsOneWidget);
+        List<Widget> handButtonsChildren =
+            (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-      // debugPrint('Testing DHS menu is dismissible');
-      // await dismissTap(tester);
-      // await touch(tester: tester, text: dominantHandButton);
+        // Verify righty layout
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
-      // final Finder handButtonsRowFinder = find.byType(Row).at(1);
-      // Row handButtonsRow = tester.widget(handButtonsRowFinder);
-      // List<Widget> handButtonsChildren = handButtonsRow.children;
+        debugPrint('Verifying DHS left hand layout');
 
-      // debugPrint('Testing DHS functionality');
-      // if (isLefty) {
-      //   // Activate righty layout
-      //   await tester.tap(rightButton);
-      //   await tester.pumpAndSettle();
+        // Activate lefty layout
+        await touch(
+          tester: tester,
+          finder: find.byType(DropdownMenu<bool>).last,
+        );
 
-      //   // Verify righty layout
-      //   expect(handButtonsChildren[0], isA<Flexible>());
-      //   expect(handButtonsChildren[1], isA<EzSpacer>());
-      //   expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
+        await tester.tapAt(tester.getCenter(find.text(l10n.gLeft).last));
+        await tester.pumpAndSettle();
 
-      //   // Activate lefty layout
-      //   await touch(tester: tester, text: dominantHandButton);
+        // Verify lefty layout
+        handButtonsChildren =
+            (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-      //   await tester.tap(leftButton);
-      //   await tester.pumpAndSettle();
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
+      } else {
+        debugPrint('Verifying DHS left hand layout');
 
-      //   // Verify lefty layout
-      //   handButtonsRow = tester.widget(handButtonsRowFinder);
-      //   handButtonsChildren = handButtonsRow.children;
+        // Activate lefty layout
+        await tester.tapAt(tester.getCenter(find.text(l10n.gLeft).last));
+        await tester.pumpAndSettle();
 
-      //   expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
-      //   expect(handButtonsChildren[1], isA<EzSpacer>());
-      //   expect(handButtonsChildren[2], isA<Flexible>());
-      // } else {
-      //   // Activate lefty layout
-      //   await tester.tap(leftButton);
-      //   await tester.pumpAndSettle();
+        List<Widget> handButtonsChildren =
+            (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-      //   // Verify lefty layout
-      //   expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
-      //   expect(handButtonsChildren[1], isA<EzSpacer>());
-      //   expect(handButtonsChildren[2], isA<Flexible>());
+        // Verify lefty layout
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
 
-      //   // Activate righty layout
-      //   await touch(tester: tester, text: dominantHandButton);
+        debugPrint('Verifying DHS right hand layout');
 
-      //   await tester.tap(rightButton);
-      //   await tester.pumpAndSettle();
+        // Activate righty layout
+        await touch(
+          tester: tester,
+          finder: find.byType(DropdownMenu<bool>).last,
+        );
 
-      //   // Verify righty layout
-      //   handButtonsRow = tester.widget(handButtonsRowFinder);
-      //   handButtonsChildren = handButtonsRow.children;
+        await tester.tapAt(tester.getCenter(find.text(l10n.gRight).last));
+        await tester.pumpAndSettle();
 
-      //   expect(handButtonsChildren[0], isA<Flexible>());
-      //   expect(handButtonsChildren[1], isA<EzSpacer>());
-      //   expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
-      // }
+        // Verify righty layout
+        handButtonsChildren =
+            (tester.widget(find.byType(Row).at(1)) as Row).children;
+
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
+      }
 
       // // Theme mode //
 
@@ -296,6 +288,5 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      debugPrint('\nSettings home test suite complete');
-      debugPrint('\n\n');
+      debugPrint('\nSettings home test suite complete\n');
     });
