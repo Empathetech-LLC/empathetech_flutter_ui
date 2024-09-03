@@ -59,10 +59,14 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-          color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer),
-      child: EzRow(
+        color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
+      ),
+      child: EzScrollView(
+        scrollDirection: Axis.horizontal,
+        reverseHands: true,
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Label
           Flexible(

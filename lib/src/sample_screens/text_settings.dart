@@ -184,7 +184,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        EzRow(
+        EzScrollView(
+          scrollDirection: Axis.horizontal,
+          reverseHands: true,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
