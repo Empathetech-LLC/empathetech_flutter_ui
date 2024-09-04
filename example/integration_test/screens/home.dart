@@ -71,9 +71,9 @@ void testSuite({
         expect(handButtonsChildren.length, 3);
 
         // Verify righty layout
-        expect(handButtonsChildren[0], isA<Flexible>);
-        expect(handButtonsChildren[1], isA<EzSpacer>);
-        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>);
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
         debugPrint('Left hand layout');
 
@@ -85,9 +85,9 @@ void testSuite({
         handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>);
-        expect(handButtonsChildren[1], isA<EzSpacer>);
-        expect(handButtonsChildren[2], isA<Flexible>);
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
       } else {
         debugPrint('Left hand layout');
 
@@ -100,9 +100,9 @@ void testSuite({
         expect(handButtonsChildren.length, 3);
 
         // Verify lefty layout
-        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>);
-        expect(handButtonsChildren[1], isA<EzSpacer>);
-        expect(handButtonsChildren[2], isA<Flexible>);
+        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<Flexible>());
 
         debugPrint('Right hand layout');
 
@@ -114,9 +114,9 @@ void testSuite({
         handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-        expect(handButtonsChildren[0], isA<Flexible>);
-        expect(handButtonsChildren[1], isA<EzSpacer>);
-        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>);
+        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[1], isA<EzSpacer>());
+        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
       }
 
       // Theme mode //
@@ -129,13 +129,13 @@ void testSuite({
 
       expect(themeButtonsChildren.length, 3);
       if (isLefty) {
-        expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>);
-        expect(themeButtonsChildren[1], isA<EzSpacer>);
-        expect(themeButtonsChildren[2], isA<Flexible>);
+        expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>());
+        expect(themeButtonsChildren[1], isA<EzSpacer>());
+        expect(themeButtonsChildren[2], isA<Flexible>());
       } else {
-        expect(themeButtonsChildren[0], isA<Flexible>);
-        expect(themeButtonsChildren[1], isA<EzSpacer>);
-        expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>);
+        expect(themeButtonsChildren[0], isA<Flexible>());
+        expect(themeButtonsChildren[1], isA<EzSpacer>());
+        expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
       }
 
       // Activate light theme
