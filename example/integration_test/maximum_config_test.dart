@@ -26,31 +26,31 @@ void main() async {
     // Text settings //
 
     // Display
-    displayFontSizeKey: maxFontSize,
+    displayFontSizeKey: maxDisplay,
     displayFontHeightKey: maxFontHeight,
     displayLetterSpacingKey: maxFontLetterSpacing,
     displayWordSpacingKey: maxFontWordSpacing,
 
     // Headline
-    headlineFontSizeKey: maxFontSize,
+    headlineFontSizeKey: maxHeadline,
     headlineFontHeightKey: maxFontHeight,
     headlineLetterSpacingKey: maxFontLetterSpacing,
     headlineWordSpacingKey: maxFontWordSpacing,
 
     // Title
-    titleFontSizeKey: maxFontSize,
+    titleFontSizeKey: maxTitle,
     titleFontHeightKey: maxFontHeight,
     titleLetterSpacingKey: maxFontLetterSpacing,
     titleWordSpacingKey: maxFontWordSpacing,
 
     // Body
-    bodyFontSizeKey: maxFontSize,
+    bodyFontSizeKey: maxBody,
     bodyFontHeightKey: maxFontHeight,
     bodyLetterSpacingKey: maxFontLetterSpacing,
     bodyWordSpacingKey: maxFontWordSpacing,
 
     // Label
-    labelFontSizeKey: maxFontSize,
+    labelFontSizeKey: maxLabel,
     labelFontHeightKey: maxFontHeight,
     labelLetterSpacingKey: maxFontLetterSpacing,
     labelWordSpacingKey: maxFontWordSpacing,

@@ -26,31 +26,31 @@ void main() async {
     // Text settings //
 
     // Display
-    displayFontSizeKey: minFontSize,
+    displayFontSizeKey: minDisplay,
     displayFontHeightKey: minFontHeight,
     displayLetterSpacingKey: minFontLetterSpacing,
     displayWordSpacingKey: minFontWordSpacing,
 
     // Headline
-    headlineFontSizeKey: minFontSize,
+    headlineFontSizeKey: minHeadline,
     headlineFontHeightKey: minFontHeight,
     headlineLetterSpacingKey: minFontLetterSpacing,
     headlineWordSpacingKey: minFontWordSpacing,
 
     // Title
-    titleFontSizeKey: minFontSize,
+    titleFontSizeKey: minTitle,
     titleFontHeightKey: minFontHeight,
     titleLetterSpacingKey: minFontLetterSpacing,
     titleWordSpacingKey: minFontWordSpacing,
 
     // Body
-    bodyFontSizeKey: minFontSize,
+    bodyFontSizeKey: minBody,
     bodyFontHeightKey: minFontHeight,
     bodyLetterSpacingKey: minFontLetterSpacing,
     bodyWordSpacingKey: minFontWordSpacing,
 
     // Label
-    labelFontSizeKey: minFontSize,
+    labelFontSizeKey: minLabel,
     labelFontHeightKey: minFontHeight,
     labelLetterSpacingKey: minFontLetterSpacing,
     labelWordSpacingKey: minFontWordSpacing,

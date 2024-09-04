@@ -139,17 +139,51 @@ const String underlined = 'underlined';
 /// '-5.5'
 const String sampleString = '-5.5';
 
-/// 0.5
-const double minFontScale = 0.5;
-
-/// 2.5
-const double maxFontScale = 2.5;
-
-/// 7.0
-const double minFontSize = 7.0;
+/// 105.0
+const double maxDisplay = 105.0;
 
 /// 105.0
-const double maxFontSize = 105.0;
+const double minDisplay = 21.0;
+
+/// 80.0
+const double maxHeadline = 80;
+
+/// 16.0
+const double minHeadline = 16;
+
+/// 55.0
+const double maxTitle = 55.0;
+
+/// 11.0
+const double minTitle = 11.0;
+
+/// 40.0
+const double maxBody = 32.0;
+
+/// 8.0
+const double minBody = 8.0;
+
+/// 35.0
+const double maxLabel = 35.0;
+
+/// 7.0
+const double minLabel = 6.0;
+
+const Map<String, double> fontSizeMaxes = <String, double>{
+  displayFontSizeKey: maxDisplay,
+  headlineFontSizeKey: maxHeadline,
+  titleFontSizeKey: maxTitle,
+  bodyFontSizeKey: maxBody,
+  labelFontSizeKey: maxLabel,
+};
+
+const Map<String, double> fontSizeMins = <String, double>{
+  displayFontSizeKey: minDisplay,
+  headlineFontSizeKey: minHeadline,
+  titleFontSizeKey: minTitle,
+  bodyFontSizeKey: minBody,
+  labelFontSizeKey: minLabel,
+};
 
 /// -1.0
 const double minFontLetterSpacing = -1.0;
