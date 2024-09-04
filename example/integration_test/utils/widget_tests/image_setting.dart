@@ -17,39 +17,58 @@ Future<void> testImageSetting(
   WidgetTester tester, {
   required Finder finder,
   required String type,
+  required bool updateCS,
   required EFUILang l10n,
   required bool isLefty,
 }) async {
+  debugPrint('Opening dialog');
   await touch(tester, finder);
 
   debugPrint('Validating text');
   await validateText(tester, l10n.isDialogTitle(type));
-  await validateText(tester, l10n.isUseForColors);
+
+  if (updateCS) {
+    final List<Widget> updateCSWidgets =
+        (tester.widget(find.byType(EzRow).first) as EzRow).children;
+
+    expect(updateCSWidgets.length, 2);
+    if (isLefty) {
+      expect(updateCSWidgets[0], isA<Flexible>);
+      expect(updateCSWidgets[1], isA<Checkbox>);
+    } else {
+      expect(updateCSWidgets[0], isA<Checkbox>);
+      expect(updateCSWidgets[1], isA<Flexible>);
+    }
+
+    await validateText(tester, l10n.isUseForColors);
+  }
 
   debugPrint('Validating platform options');
   if (kIsWeb) {
-    await webTests(tester, finder, l10n, isLefty);
+    await webTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
   } else if (Platform.isIOS || Platform.isAndroid) {
-    await mobileTests(tester, finder, l10n, isLefty);
+    await mobileTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
   } else {
-    await desktopTests(tester, finder, l10n, isLefty);
+    await desktopTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
   }
 }
 
 Future<void> webTests(
-  WidgetTester tester,
-  Finder finder,
-  EFUILang l10n,
-  bool isLefty,
-) async {
+  WidgetTester tester, {
+  required Finder finder,
+  required EFUILang l10n,
+  required bool isLefty,
+}) async {
   debugPrint('Detected web');
 
   debugPrint('From network');
-  await testNetwork(tester, l10n, isLefty, false);
+  await testNetwork(tester, l10n: l10n, isLefty: isLefty, isCupertino: false);
   await touch(tester, finder);
 
+  // ToDo: Reset catch
   debugPrint('Clear');
   await touch(tester, find.byIcon(Icons.clear));
+  expect(tester, find.byIcon(Icons.edit));
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -57,33 +76,46 @@ Future<void> webTests(
 }
 
 Future<void> mobileTests(
-  WidgetTester tester,
-  Finder finder,
-  EFUILang l10n,
-  bool isLefty,
-) async {
+  WidgetTester tester, {
+  required Finder finder,
+  required EFUILang l10n,
+  required bool isLefty,
+}) async {
   debugPrint('Detected mobile');
 
   final bool isCupertino = Platform.isIOS;
   debugPrint(isCupertino ? 'iOS' : 'Android');
 
   debugPrint('From file');
-  await testFile(tester, l10n, isLefty, isCupertino);
+  await testFile(tester,
+      l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
   await touch(tester, finder);
 
   debugPrint('From camera');
-  await testCamera(tester, l10n, isLefty, isCupertino);
+  await testCamera(
+    tester,
+    l10n: l10n,
+    isLefty: isLefty,
+    isCupertino: isCupertino,
+  );
   await touch(tester, finder);
 
   debugPrint('From network');
-  await testNetwork(tester, l10n, isLefty, isCupertino);
+  await testNetwork(
+    tester,
+    l10n: l10n,
+    isLefty: isLefty,
+    isCupertino: isCupertino,
+  );
   await touch(tester, finder);
 
+  // ToDo: Reset catch
   debugPrint('Clear');
   await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
   );
+  expect(tester, find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit));
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -91,29 +123,41 @@ Future<void> mobileTests(
 }
 
 Future<void> desktopTests(
-  WidgetTester tester,
-  Finder finder,
-  EFUILang l10n,
-  bool isLefty,
-) async {
+  WidgetTester tester, {
+  required Finder finder,
+  required EFUILang l10n,
+  required bool isLefty,
+}) async {
   debugPrint('Detected desktop');
 
   final bool isCupertino = Platform.isMacOS;
   debugPrint(isCupertino ? 'Mac' : 'Not Mac');
 
   debugPrint('From file');
-  await testFile(tester, l10n, isLefty, isCupertino);
+  await testFile(
+    tester,
+    l10n: l10n,
+    isLefty: isLefty,
+    isCupertino: isCupertino,
+  );
   await touch(tester, finder);
 
   debugPrint('From network');
-  await testNetwork(tester, l10n, isLefty, isCupertino);
+  await testNetwork(
+    tester,
+    l10n: l10n,
+    isLefty: isLefty,
+    isCupertino: isCupertino,
+  );
   await touch(tester, finder);
 
+  // ToDo: Reset catch
   debugPrint('Clear');
   await touch(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
   );
+  expect(tester, find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit));
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -121,29 +165,29 @@ Future<void> desktopTests(
 }
 
 Future<void> testFile(
-  WidgetTester tester,
-  EFUILang l10n,
-  bool isLefty,
-  bool isCupertino,
-) async {
+  WidgetTester tester, {
+  required EFUILang l10n,
+  required bool isLefty,
+  required bool isCupertino,
+}) async {
   await touchAtText(tester, l10n.gClose);
 }
 
 Future<void> testCamera(
-  WidgetTester tester,
-  EFUILang l10n,
-  bool isLefty,
-  bool isCupertino,
-) async {
+  WidgetTester tester, {
+  required EFUILang l10n,
+  required bool isLefty,
+  required bool isCupertino,
+}) async {
   await touchAtText(tester, l10n.gClose);
 }
 
 Future<void> testNetwork(
-  WidgetTester tester,
-  EFUILang l10n,
-  bool isLefty,
-  bool isCupertino,
-) async {
+  WidgetTester tester, {
+  required EFUILang l10n,
+  required bool isLefty,
+  required bool isCupertino,
+}) async {
   await touch(tester, find.byIcon(Icons.computer_outlined));
 
   debugPrint('Validating text');
