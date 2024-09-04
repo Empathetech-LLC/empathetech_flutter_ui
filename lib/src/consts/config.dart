@@ -151,7 +151,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   displayBoldKey: false,
   displayItalicsKey: false,
   displayUnderlinedKey: false,
-  displayFontHeightKey: 1.75,
+  displayFontHeightKey: 1.5,
   displayLetterSpacingKey: 0.25,
   displayWordSpacingKey: 1.0,
 
@@ -171,7 +171,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   titleBoldKey: true,
   titleItalicsKey: false,
   titleUnderlinedKey: false,
-  titleFontHeightKey: 1.75,
+  titleFontHeightKey: 1.5,
   titleLetterSpacingKey: 0.25,
   titleWordSpacingKey: 1.0,
 
@@ -191,7 +191,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   labelBoldKey: false,
   labelItalicsKey: false,
   labelUnderlinedKey: false,
-  labelFontHeightKey: 1.25,
+  labelFontHeightKey: 1.5,
   labelLetterSpacingKey: 0.25,
   labelWordSpacingKey: 1.0,
 
