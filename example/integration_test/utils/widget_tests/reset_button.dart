@@ -20,7 +20,7 @@ Future<void> testResetButton(
   required EFUILang l10n,
   required bool isLefty,
 }) async {
-  debugPrint('\nTesting reset button (RB)');
+  debugPrint('\nTesting reset button');
   await touch(tester, find.byType(EzResetButton));
 
   debugPrint('Validating text');
