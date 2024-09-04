@@ -46,6 +46,10 @@ void testSuite({
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
+      debugPrint('Monochrome');
+      await touchAtText(tester, l10n.csMonoChrome);
+
+      debugPrint('Color scheme from image');
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
