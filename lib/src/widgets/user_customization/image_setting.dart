@@ -271,7 +271,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                 setState(() {});
               },
             ),
-            EzSpacer(space: padding, vertical: false),
 
             // Label
             Flexible(
