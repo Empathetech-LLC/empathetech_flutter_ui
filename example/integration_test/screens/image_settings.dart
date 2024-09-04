@@ -52,6 +52,7 @@ void testSuite({
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
+        type: l10n.isBackground,
         l10n: l10n,
         isLefty: isLefty,
       );
