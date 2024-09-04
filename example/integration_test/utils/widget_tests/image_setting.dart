@@ -33,11 +33,11 @@ Future<void> testImageSetting(
 
     expect(updateCSWidgets.length, 2);
     if (isLefty) {
-      expect(updateCSWidgets[0], isA<Flexible>);
-      expect(updateCSWidgets[1], isA<Checkbox>);
+      expect(updateCSWidgets[0], isA<Flexible>());
+      expect(updateCSWidgets[1], isA<Checkbox>());
     } else {
-      expect(updateCSWidgets[0], isA<Checkbox>);
-      expect(updateCSWidgets[1], isA<Flexible>);
+      expect(updateCSWidgets[0], isA<Checkbox>());
+      expect(updateCSWidgets[1], isA<Flexible>());
     }
 
     await validateText(tester, l10n.isUseForColors);
@@ -68,7 +68,7 @@ Future<void> webTests(
   // ToDo: Reset catch
   debugPrint('Clear');
   await touch(tester, find.byIcon(Icons.clear));
-  expect(tester, find.byIcon(Icons.edit));
+  expect(find.byIcon(Icons.edit), findsOneWidget);
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -115,7 +115,10 @@ Future<void> mobileTests(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
   );
-  expect(tester, find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit));
+  expect(
+    find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
+    findsOneWidget,
+  );
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -157,7 +160,10 @@ Future<void> desktopTests(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
   );
-  expect(tester, find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit));
+  expect(
+    find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
+    findsOneWidget,
+  );
   await touch(tester, finder);
 
   debugPrint('Close');
@@ -170,6 +176,10 @@ Future<void> testFile(
   required bool isLefty,
   required bool isCupertino,
 }) async {
+  expect(
+    find.byIcon(isCupertino ? CupertinoIcons.folder : Icons.folder),
+    findsOneWidget,
+  );
   await touchAtText(tester, l10n.gClose);
 }
 
@@ -179,6 +189,10 @@ Future<void> testCamera(
   required bool isLefty,
   required bool isCupertino,
 }) async {
+  expect(
+    find.byIcon(isCupertino ? CupertinoIcons.photo_camera : Icons.photo_camera),
+    findsOneWidget,
+  );
   await touchAtText(tester, l10n.gClose);
 }
 
@@ -236,4 +250,8 @@ Future<void> testNetwork(
     etechGHProfileLink,
   );
   await touchAtText(tester, l10n.gApply);
+  expect(
+    find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
+    findsNothing,
+  );
 }
