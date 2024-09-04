@@ -31,23 +31,56 @@ void testSuite({
 
       debugPrint('\nTesting navigation');
 
-      final Finder csButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.csPageTitle,
+      await touch(
+        tester,
+        find.widgetWithText(ElevatedButton, l10n.csPageTitle),
       );
 
-      expect(csButton, findsOneWidget);
-      await touch(tester, csButton);
+      //// Test functionality: Quick settings ////
 
-      // Verify text loaded //
+      debugPrint('\nTesting quick settings');
 
-      debugPrint('\nValidating text');
+      debugPrint('Validating text');
       await validateText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
-      //// Test functionality ////
+      await testImageSetting(
+        tester,
+        finder: find.byType(EzImageSetting),
+        type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
+        updateCS: false,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
+
+      await testResetButton(
+        tester,
+        type: RBType.color,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
+
+      //// Test functionality: Advanced settings ////
+
+      debugPrint('\nTesting advanced settings');
+
+      debugPrint('Navigation');
+      await touchAtText(tester, l10n.gAdvanced);
+
+      debugPrint('Validating text');
+      await validateText(
+        tester,
+        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+      );
+
+      await testResetButton(
+        tester,
+        type: RBType.color,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
 
       // Reset for next test suite  //
 
