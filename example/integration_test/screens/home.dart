@@ -161,25 +161,25 @@ void testSuite({
       // Activate Spanish localizations
       debugPrint('Spanish');
       await touch(tester, find.byType(EzLocaleSetting));
-      await tester.tap(find.text(l10nNames.nameOf('es')!).last); // tap at text
+      await touchAtText(tester, l10nNames.nameOf('es')!);
       await tester.pumpAndSettle();
 
       // Activate French localizations
       debugPrint('French');
       await touch(tester, find.byType(EzLocaleSetting));
-      await tester.tap(find.text(l10nNames.nameOf('fr')!).last);
+      await touchAtText(tester, l10nNames.nameOf('fr')!);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('English');
       await touch(tester, find.byType(EzLocaleSetting));
-      await tester.tap(find.text(l10nNames.nameOf('en')!).last);
+      await touchAtText(tester, l10nNames.nameOf('en')!);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('Close');
       await touch(tester, find.byType(EzLocaleSetting));
-      await tester.tap(find.text(l10n.gClose).last);
+      await touchAtText(tester, l10n.gClose);
       await tester.pumpAndSettle();
 
       // Reset button //
