@@ -44,19 +44,19 @@ void testSuite({
 
       // Options menu //
 
-      debugPrint('\nTesting options menu (OM)');
+      debugPrint('\nTesting options menu');
       await touch(tester, find.byType(MenuAnchor).last);
 
       // ToDo: Test options functionality
       expect(find.text(l10n.gBYO).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 
-      debugPrint('Dismissing OM');
+      debugPrint('Dismissing');
       await dismissTap(tester);
 
       // Dominant hand  //
 
-      debugPrint('\nTesting dominant hand setting (DHS)');
+      debugPrint('\nTesting dominant hand setting');
       await touch(tester, find.byType(DropdownMenu<bool>).last);
 
       if (isLefty) {
@@ -121,7 +121,7 @@ void testSuite({
 
       // Theme mode //
 
-      debugPrint('\nTesting theme mode setting (TMS)');
+      debugPrint('\nTesting theme mode setting');
 
       // Verify  layout
       final List<Widget> themeButtonsChildren =
@@ -155,7 +155,7 @@ void testSuite({
 
       // Language //
 
-      debugPrint('\nTesting language setting button (LSB)');
+      debugPrint('\nTesting language setting button');
 
       // Activate Spanish localizations
       debugPrint('Spanish');
