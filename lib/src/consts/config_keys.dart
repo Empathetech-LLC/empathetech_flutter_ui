@@ -139,35 +139,35 @@ const String underlined = 'underlined';
 /// '-5.5'
 const String sampleString = '-5.5';
 
-/// 105.0
-const double maxDisplay = 105.0;
+/// 84.0
+const double maxDisplay = 84.0;
 
-/// 105.0
+/// 21.0
 const double minDisplay = 21.0;
 
-/// 80.0
-const double maxHeadline = 80;
+/// 64.0
+const double maxHeadline = 64.0;
 
 /// 16.0
-const double minHeadline = 16;
+const double minHeadline = 16.0;
 
-/// 55.0
-const double maxTitle = 55.0;
+/// 42.0
+const double maxTitle = 42.0;
 
 /// 11.0
 const double minTitle = 11.0;
 
-/// 40.0
+/// 32.0
 const double maxBody = 32.0;
 
 /// 8.0
 const double minBody = 8.0;
 
-/// 35.0
-const double maxLabel = 35.0;
+/// 28.0
+const double maxLabel = 28.0;
 
 /// 7.0
-const double minLabel = 6.0;
+const double minLabel = 7.0;
 
 const Map<String, double> fontSizeMaxes = <String, double>{
   displayFontSizeKey: maxDisplay,
@@ -197,11 +197,11 @@ const double minFontWordSpacing = -3.0;
 /// 3.0
 const double maxFontWordSpacing = 3.0;
 
-/// 0.5
-const double minFontHeight = 0.5;
+/// 1.0
+const double minFontHeight = 1.0;
 
-/// 2.5
-const double maxFontHeight = 2.5;
+/// 2.0
+const double maxFontHeight = 2.0;
 
 // Image settings' keys //
 
