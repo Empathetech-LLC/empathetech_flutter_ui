@@ -42,13 +42,16 @@ Future<void> touch(WidgetTester tester, Finder finder) async {
 
 /// Find, touch, and settle a target
 Future<void> touchAt(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
 /// Find, touch, and settle a text target
 Future<void> touchAtText(WidgetTester tester, String text) async {
-  await tester.tapAt(tester.getCenter(find.text(text).last));
+  final Finder finder = find.text(text).last;
+  await tester.ensureVisible(finder);
+  await tester.tapAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
