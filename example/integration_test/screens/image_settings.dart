@@ -31,13 +31,10 @@ void testSuite({
 
       debugPrint('\nTesting navigation');
 
-      final Finder isButton = find.widgetWithText(
-        ElevatedButton,
-        l10n.isPageTitle,
+      await touch(
+        tester,
+        find.widgetWithText(ElevatedButton, l10n.isPageTitle),
       );
-
-      expect(isButton, findsOneWidget);
-      await touch(tester, isButton);
 
       // Verify text loaded //
 
@@ -48,6 +45,25 @@ void testSuite({
       );
 
       //// Test functionality ////
+
+      // Background image  //
+
+      debugPrint('\nTesting background image setting');
+      await testImageSetting(
+        tester,
+        finder: find.byType(EzImageSetting),
+        l10n: l10n,
+        isLefty: isLefty,
+      );
+
+      // Reset button //
+
+      await testResetButton(
+        tester,
+        type: RBType.image,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
 
       // Reset for next test suite  //
 
