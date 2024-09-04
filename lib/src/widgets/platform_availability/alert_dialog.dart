@@ -69,7 +69,7 @@ class EzAlertDialog extends PlatformAlertDialog {
           ),
 
           // Actions
-          actions: cupertinoActions == null
+          actions: materialActions == null
               ? <Widget>[closeAction]
               : needsClose
                   ? <Widget>[...materialActions!, closeAction]
