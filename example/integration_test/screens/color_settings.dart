@@ -79,6 +79,64 @@ void testSuite({
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
+      await testCS(
+        tester,
+        text: l10n.csPrimary,
+        l10n: l10n,
+        defaultColor: true,
+        textColor: false,
+        isLefty: isLefty,
+      );
+      await testCS(
+        tester,
+        text: l10n.csOnSurface,
+        l10n: l10n,
+        defaultColor: true,
+        textColor: true,
+        isLefty: isLefty,
+      );
+
+      debugPrint('Testing add color modal');
+      await touchAtText(tester, l10n.csAddColor);
+
+      debugPrint('How this works');
+      await validateText(tester, l10n.gHowThisWorks);
+      // ToDo: Verify link
+
+      debugPrint('Add on primary');
+      await touchAtText(tester, l10n.csOnPrimary);
+      await testCS(
+        tester,
+        text: l10n.csOnPrimary,
+        l10n: l10n,
+        defaultColor: false,
+        textColor: true,
+        isLefty: isLefty,
+      );
+
+      debugPrint('Add surface tint');
+      await touchAtText(tester, l10n.csAddColor);
+      await tester.ensureVisible(find.text(l10n.csSurfaceTint).last);
+      await tester.fling(
+        find.descendant(
+          of: find.byType(BottomSheet),
+          matching: find.byType(EzScrollView),
+        ),
+        const Offset(0, -500),
+        2000,
+      );
+      await tester.pumpAndSettle();
+      await touchAtText(tester, l10n.csSurfaceTint);
+
+      await testCS(
+        tester,
+        text: l10n.csSurfaceTint,
+        l10n: l10n,
+        defaultColor: false,
+        textColor: false,
+        isLefty: isLefty,
+      );
+
       await testResetButton(
         tester,
         type: RBType.color,
@@ -91,3 +149,15 @@ void testSuite({
       await goBack(tester, l10n);
       debugPrint('\nColor settings test suite complete\n');
     });
+
+Future<void> testCS(
+  WidgetTester tester, {
+  required String text,
+  required EFUILang l10n,
+  required bool defaultColor,
+  required bool textColor,
+  required bool isLefty,
+}) async {
+  debugPrint('Testing $text update');
+  debugPrint('Testing $text reset');
+}
