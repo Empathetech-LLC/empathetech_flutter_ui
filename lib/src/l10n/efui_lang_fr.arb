@@ -26,6 +26,9 @@
   "gEditing": "Modification : ",
   "gEditingTheme": "Modification : Thème {themeType}",
 
+  "gQuick": "Rapide",
+  "gAdvanced": "Avancé",
+
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
 
@@ -111,9 +114,6 @@
   "csPageTitle": "Paramètres de couleur",
 
   "csPickerHint": "Ouvre un sélecteur de couleurs pour {name}. Appuyer longuement pour plus d'options.",
-
-  "csQuick": "Rapide",
-  "csAdvanced": "Avancé",
 
   "csMonoChrome": "Utiliser un schéma monochrome",
   "csHighContrast": "Utiliser un schéma à contraste élevé",

@@ -212,6 +212,18 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
+  /// No description provided for @gQuick.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick'**
+  String get gQuick;
+
+  /// No description provided for @gAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get gAdvanced;
+
   /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:
@@ -565,18 +577,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open a color picker for {name}. Long press for more options.'**
   String csPickerHint(Object name);
-
-  /// No description provided for @csQuick.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick'**
-  String get csQuick;
-
-  /// No description provided for @csAdvanced.
-  ///
-  /// In en, this message translates to:
-  /// **'Advanced'**
-  String get csAdvanced;
 
   /// No description provided for @csMonoChrome.
   ///

@@ -128,11 +128,11 @@ class _ColorSettingsState extends State<ColorSettings> {
             segments: <ButtonSegment<String>>[
               ButtonSegment<String>(
                 value: quick,
-                label: Text(l10n.csQuick),
+                label: Text(l10n.gQuick),
               ),
               ButtonSegment<String>(
                 value: advanced,
-                label: Text(l10n.csAdvanced),
+                label: Text(l10n.gAdvanced),
               ),
             ],
             selected: <String>{currentTab},

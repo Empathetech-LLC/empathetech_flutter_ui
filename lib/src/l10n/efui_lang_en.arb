@@ -26,6 +26,9 @@
   "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
 
+  "gQuick": "Quick",
+  "gAdvanced": "Advanced",
+
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
@@ -111,9 +114,6 @@
   "csPageTitle": "Color settings",
 
   "csPickerHint": "Open a color picker for {name}. Long press for more options.",
-
-  "csQuick": "Quick",
-  "csAdvanced": "Advanced",
 
   "csMonoChrome": "Use monochrome scheme",
   "csHighContrast": "Use high contrast scheme",

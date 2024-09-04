@@ -68,6 +68,12 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
+  String get gQuick => 'Rapide';
+
+  @override
+  String get gAdvanced => 'Avancé';
+
+  @override
   String get gHowThisWorks => 'Comment ça marche';
 
   @override
@@ -256,12 +262,6 @@ class EFUILangFr extends EFUILang {
   String csPickerHint(Object name) {
     return 'Ouvre un sélecteur de couleurs pour $name. Appuyer longuement pour plus d\'options.';
   }
-
-  @override
-  String get csQuick => 'Rapide';
-
-  @override
-  String get csAdvanced => 'Avancé';
 
   @override
   String get csMonoChrome => 'Utiliser un schéma monochrome';
