@@ -35,10 +35,10 @@ Future<void> testResetButton(
       await validateText(tester, l10n.lsResetAll);
       break;
     case RBType.color:
-      await validateText(tester, l10n.csResetAll(l10n.gDark));
+      await validateText(tester, l10n.csResetAll(l10n.gDark.toLowerCase()));
       break;
     case RBType.image:
-      await validateText(tester, l10n.isResetAll(l10n.gDark));
+      await validateText(tester, l10n.isResetAll(l10n.gDark.toLowerCase()));
       break;
   }
   await validateText(tester, l10n.gResetWarn);
@@ -46,21 +46,10 @@ Future<void> testResetButton(
   debugPrint('Validating layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
-  late final List<TextButton>? materialActions;
-  late final List<CupertinoDialogAction>? cupertinoActions;
-
   if (isCupertino) {
-    cupertinoActions =
+    final List<CupertinoDialogAction> actions =
         (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
             .cupertinoActions!;
-  } else {
-    materialActions =
-        (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
-  }
-
-  if (isCupertino) {
-    final List<CupertinoDialogAction> actions = cupertinoActions!;
 
     expect(actions.length, 2);
     if (isLefty) {
@@ -71,7 +60,9 @@ Future<void> testResetButton(
       expect(actions[1].child.toString(), Text(l10n.gYes).toString());
     }
   } else {
-    final List<TextButton> actions = materialActions!;
+    final List<TextButton> actions =
+        (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
+            .materialActions! as List<TextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
