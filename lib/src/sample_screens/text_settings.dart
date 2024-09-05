@@ -182,10 +182,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          reverseHands: true,
+        EzRowCol.sym(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(key: UniqueKey()),
