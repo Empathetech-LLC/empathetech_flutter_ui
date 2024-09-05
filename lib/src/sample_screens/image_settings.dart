@@ -69,19 +69,23 @@ class _ImageSettingsState extends State<ImageSettings> {
           separator,
 
           // Page image setting
-          isDark
-              ? EzImageSetting(
-                  key: ValueKey<String>('dark$keyValue'),
-                  configKey: darkPageImageKey,
-                  label: l10n.isBackground,
-                  updateTheme: Brightness.dark,
-                )
-              : EzImageSetting(
-                  key: ValueKey<String>('light$keyValue'),
-                  configKey: lightPageImageKey,
-                  label: l10n.isBackground,
-                  updateTheme: Brightness.light,
-                ),
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            mainAxisSize: MainAxisSize.min,
+            child: isDark
+                ? EzImageSetting(
+                    key: ValueKey<String>('dark$keyValue'),
+                    configKey: darkPageImageKey,
+                    label: l10n.isBackground,
+                    updateTheme: Brightness.dark,
+                  )
+                : EzImageSetting(
+                    key: ValueKey<String>('light$keyValue'),
+                    configKey: lightPageImageKey,
+                    label: l10n.isBackground,
+                    updateTheme: Brightness.light,
+                  ),
+          ),
           separator,
 
           // Local reset all
