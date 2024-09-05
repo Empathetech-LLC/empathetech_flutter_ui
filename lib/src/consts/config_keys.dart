@@ -569,7 +569,7 @@ const double minMargin = 0.0;
 const double maxMargin = 50.0;
 
 /// 0.0
-const double minPadding = 0.0;
+const double minPadding = 5.0;
 
 /// 50.0
 const double maxPadding = 50.0;
