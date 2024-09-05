@@ -9,15 +9,34 @@ import 'package:google_fonts/google_fonts.dart';
 // Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
 // Plus some ones we think are cute
 
+/// 'AlexBrush'
 const String alexBrush = 'AlexBrush';
+
+/// 'AtkinsonHyperlegible'
 const String atkinsonHyperlegible = 'AtkinsonHyperlegible';
+
+/// 'FingerPaint'
 const String fingerPaint = 'FingerPaint';
+
+/// 'Lexend'
 const String lexend = 'Lexend';
+
+/// 'NotoSans'
 const String noto = 'NotoSans';
+
+/// 'OpenSans'
 const String openSans = 'OpenSans';
+
+/// 'PressStart2P'
 const String pressStart2P = 'PressStart2P';
+
+/// 'ReadexPro'
 const String readexPro = 'ReadexPro';
+
+/// 'Roboto'
 const String roboto = 'Roboto';
+
+/// 'SourceCodePro'
 const String sourceCodePro = 'SourceCodePro';
 
 /// All the [GoogleFonts] currently supported
