@@ -106,11 +106,11 @@ class _TextSettingsState extends State<_TextSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
+    return EzScreen.hScroll(
       decorationImageKey: isDark
           ? widget.darkBackgroundImageKey
           : widget.lightBackgroundImageKey,
-      child: EzScrollView(
+      kid: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
 
@@ -184,9 +184,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          reverseHands: true,
+        EzRow(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -754,52 +752,47 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         spacer,
 
         // Controls
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
+        EzRowCol.sym(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          child: EzRowCol.sym(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Font family
-              familyControllers[editing]!,
-              swapSpacer,
+          children: <Widget>[
+            // Font family
+            familyControllers[editing]!,
+            swapSpacer,
 
-              // Font size
-              sizeControllers[editing]!,
-              swapSpacer,
+            // Font size
+            sizeControllers[editing]!,
+            swapSpacer,
 
-              // Font weight, style, and decoration
+            // Font weight, style, and decoration
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                boldControllers[editing]!,
+                rowSpacer,
+                italicsControllers[editing]!,
+                rowSpacer,
+                underlineControllers[editing]!,
+              ],
+            ),
+
+            // Letter, word, and line spacing
+            if (widget.showSpacing) ...<Widget>{
+              swapSpacer,
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  boldControllers[editing]!,
+                  letterSpacingControllers[editing]!,
                   rowSpacer,
-                  italicsControllers[editing]!,
+                  wordSpacingControllers[editing]!,
                   rowSpacer,
-                  underlineControllers[editing]!,
+                  lineHeightControllers[editing]!,
                 ],
               ),
-
-              // Letter, word, and line spacing
-              if (widget.showSpacing) ...<Widget>{
-                swapSpacer,
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    letterSpacingControllers[editing]!,
-                    rowSpacer,
-                    wordSpacingControllers[editing]!,
-                    rowSpacer,
-                    lineHeightControllers[editing]!,
-                  ],
-                ),
-              }
-            ],
-          ),
+            }
+          ],
         ),
         separator,
 

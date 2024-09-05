@@ -50,11 +50,11 @@ class _LayoutSettingsState extends State<LayoutSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
+    return EzScreen.hScroll(
       decorationImageKey: isDark
           ? widget.darkBackgroundImageKey
           : widget.lightBackgroundImageKey,
-      child: EzScrollView(
+      kid: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
           // Margin

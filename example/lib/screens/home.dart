@@ -42,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return OpenUIScaffold(
-      body: EzScreen(
+      body: EzScreen.hScroll(
         decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
-        child: EzScrollView(
+        kid: EzScrollView(
           children: <Widget>[
             // Functionality disclaimer
             EzWarning(
