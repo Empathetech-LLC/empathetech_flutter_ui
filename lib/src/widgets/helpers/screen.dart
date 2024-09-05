@@ -85,4 +85,45 @@ class EzScreen extends StatelessWidget {
       child: child,
     );
   }
+
+  /// [EzScreen] with a horizontal [EzScrollView] as the top level child
+  EzScreen.hScroll({
+    super.key,
+    this.alignment,
+    this.margin,
+    this.decoration,
+    this.decorationImageKey,
+    this.width = double.infinity,
+    this.height = double.infinity,
+    this.constraints,
+    this.transform,
+    this.transformAlignment,
+    this.clipBehavior = Clip.none,
+    required Widget kid,
+  }) : child = EzScrollView(
+          scrollDirection: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: kid,
+        );
+
+  /// [EzScreen] with a [EzScrollView] as the top level child
+  EzScreen.vScroll({
+    super.key,
+    this.alignment,
+    this.margin,
+    this.decoration,
+    this.decorationImageKey,
+    this.width = double.infinity,
+    this.height = double.infinity,
+    this.constraints,
+    this.transform,
+    this.transformAlignment,
+    this.clipBehavior = Clip.none,
+    required Widget kid,
+  }) : child = EzScrollView(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          child: kid,
+        );
 }
