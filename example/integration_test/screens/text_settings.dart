@@ -73,7 +73,6 @@ void testSuite({
       debugPrint('Batch font updater');
       await touch(tester, find.byType(DropdownMenu<String>));
       await touchText(tester, roboto);
-      await dismissTap(tester);
 
       // Batch size updates //
 
@@ -111,10 +110,10 @@ void testSuite({
 
       debugPrint('\nDisplay');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchText(tester, l10n.tsDisplay.toLowerCase());
+      await touch(tester, find.text(l10n.tsDisplay.toLowerCase()).first);
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsDisplay.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsDisplayLink),
       );
       await testAdvancedOptions(
         tester,
@@ -124,10 +123,10 @@ void testSuite({
 
       debugPrint('\nHeadline');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchText(tester, l10n.tsHeadline.toLowerCase());
+      await touch(tester, find.text(l10n.tsHeadline.toLowerCase()).first);
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsHeadlineLink.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsHeadlineLink),
       );
       await testAdvancedOptions(
         tester,
@@ -137,10 +136,10 @@ void testSuite({
 
       debugPrint('\nTitle');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchText(tester, l10n.tsTitle.toLowerCase());
+      await touch(tester, find.text(l10n.tsTitle.toLowerCase()).first);
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsTitleLink.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsTitleLink),
       );
       await testAdvancedOptions(
         tester,
@@ -150,10 +149,10 @@ void testSuite({
 
       debugPrint('\nBody');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchText(tester, l10n.tsBody.toLowerCase());
+      await touch(tester, find.text(l10n.tsBody.toLowerCase()).first);
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsBodyLink.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsBodyLink),
       );
       await testAdvancedOptions(
         tester,
@@ -163,10 +162,10 @@ void testSuite({
 
       debugPrint('\nLabel');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchText(tester, l10n.tsLabel.toLowerCase());
+      await touch(tester, find.text(l10n.tsLabel.toLowerCase()).first);
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsLabelLink.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsLabelLink),
       );
       await testAdvancedOptions(
         tester,
@@ -197,7 +196,6 @@ Future<void> testAdvancedOptions(
   debugPrint('Font family');
   await touch(tester, find.byType(DropdownMenu<String>).last);
   await touchText(tester, roboto);
-  await dismissTap(tester);
 
   debugPrint('Font size');
   await touch(
