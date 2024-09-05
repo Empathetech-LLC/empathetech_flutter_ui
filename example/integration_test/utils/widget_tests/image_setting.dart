@@ -247,7 +247,7 @@ Future<void> testNetwork(
   debugPrint('Test apply - valid URL');
   await tester.enterText(
     find.byType(PlatformTextFormField),
-    etechGHProfileLink,
+    getImageUrl(),
   );
   await touchAtText(tester, l10n.gApply);
   expect(
