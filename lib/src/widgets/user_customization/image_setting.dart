@@ -377,43 +377,6 @@ class _ImageSettingState extends State<EzImageSetting> {
           );
   }
 
-  // Define custom widgets //
-
-  late final Widget icon = Container(
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: theme.colorScheme.primaryContainer,
-      ),
-    ),
-    child: CircleAvatar(
-      radius: padding * 2,
-      foregroundImage:
-          (inProgress || currPath == null || currPath == noImageValue)
-              ? null
-              : provideImage(currPath!),
-      backgroundColor: Colors.transparent,
-      foregroundColor: theme.colorScheme.onSurface,
-      child: inProgress
-          ? const CircularProgressIndicator()
-          : (currPath == null || currPath == noImageValue)
-              ? Icon(
-                  PlatformIcons(context).edit,
-                  size: theme.textTheme.titleLarge?.fontSize,
-                )
-              : null,
-    ),
-  );
-
-  late final ButtonStyle style = theme.elevatedButtonTheme.style!.copyWith(
-    padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-      EdgeInsets.all(padding * 0.75),
-    ),
-    foregroundColor: WidgetStatePropertyAll<Color>(
-      theme.colorScheme.onSurface,
-    ),
-  );
-
   // Return the build //
 
   @override
@@ -423,10 +386,41 @@ class _ImageSettingState extends State<EzImageSetting> {
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
-          style: style,
+          style: theme.elevatedButtonTheme.style!.copyWith(
+            padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
+              EdgeInsets.all(padding * 0.75),
+            ),
+            foregroundColor: WidgetStatePropertyAll<Color>(
+              theme.colorScheme.onSurface,
+            ),
+          ),
           onPressed: inProgress ? doNothing : activateSetting,
           onLongPress: inProgress ? doNothing : showCredits,
-          icon: icon,
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: theme.colorScheme.primaryContainer,
+              ),
+            ),
+            child: CircleAvatar(
+              radius: padding * 2,
+              foregroundImage:
+                  (inProgress || currPath == null || currPath == noImageValue)
+                      ? null
+                      : provideImage(currPath!),
+              backgroundColor: Colors.transparent,
+              foregroundColor: theme.colorScheme.onSurface,
+              child: inProgress
+                  ? const CircularProgressIndicator()
+                  : (currPath == null || currPath == noImageValue)
+                      ? Icon(
+                          PlatformIcons(context).edit,
+                          size: theme.textTheme.titleLarge?.fontSize,
+                        )
+                      : null,
+            ),
+          ),
           label: Text(widget.label, textAlign: TextAlign.center),
         ),
       ),
