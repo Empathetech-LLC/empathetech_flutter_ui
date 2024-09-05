@@ -54,7 +54,12 @@ class EzSwapScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (widthOf(context) <= threshold)
+    /// Adjust the threshold based on user layout config
+    final double adjusted = threshold -
+        (EzConfig.get(marginKey) - EzConfig.getDefault(marginKey)) -
+        (EzConfig.get(paddingKey) - EzConfig.getDefault(paddingKey));
+
+    return (widthOf(context) <= adjusted)
         ? ScreenSpace(isLimited: true, child: small)
         : ScreenSpace(isLimited: false, child: large);
   }
