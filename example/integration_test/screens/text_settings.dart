@@ -116,43 +116,64 @@ void testSuite({
         tester,
         find.widgetWithText(EzLink, l10n.tsDisplay.toLowerCase()),
       );
-      await testAdvancedOptions(tester);
+      await testAdvancedOptions(
+        tester,
+        fontSize: 63.0,
+        isCupertino: isCupertino,
+      );
 
       debugPrint('\nHeadline');
+      await pause(5);
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touchAtText(tester, l10n.tsHeadline.toLowerCase());
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsHeadline.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsHeadlineLink.toLowerCase()),
       );
-      await testAdvancedOptions(tester);
+      await testAdvancedOptions(
+        tester,
+        fontSize: 48.0,
+        isCupertino: isCupertino,
+      );
 
       debugPrint('\nTitle');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touchAtText(tester, l10n.tsTitle.toLowerCase());
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsTitle.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsTitleLink.toLowerCase()),
       );
-      await testAdvancedOptions(tester);
+      await testAdvancedOptions(
+        tester,
+        fontSize: 33.0,
+        isCupertino: isCupertino,
+      );
 
       debugPrint('\nBody');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touchAtText(tester, l10n.tsBody.toLowerCase());
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsBody.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsBodyLink.toLowerCase()),
       );
-      await testAdvancedOptions(tester);
+      await testAdvancedOptions(
+        tester,
+        fontSize: 24.0,
+        isCupertino: isCupertino,
+      );
 
       debugPrint('\nLabel');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touchAtText(tester, l10n.tsLabel.toLowerCase());
       await touch(
         tester,
-        find.widgetWithText(EzLink, l10n.tsLabel.toLowerCase()),
+        find.widgetWithText(EzLink, l10n.tsLabelLink.toLowerCase()),
       );
-      await testAdvancedOptions(tester);
+      await testAdvancedOptions(
+        tester,
+        fontSize: 21.0,
+        isCupertino: isCupertino,
+      );
 
       // Reset //
 
@@ -169,17 +190,39 @@ void testSuite({
       debugPrint('\nText settings test suite complete\n');
     });
 
-Future<void> testAdvancedOptions(WidgetTester tester) async {
+Future<void> testAdvancedOptions(
+  WidgetTester tester, {
+  required bool isCupertino,
+  required double fontSize,
+}) async {
   debugPrint('Font family');
   await touch(tester, find.byType(DropdownMenu<String>).last);
   await touchAtText(tester, roboto);
   await dismissTap(tester);
 
   debugPrint('Font size');
+  await touchAt(
+    tester,
+    find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
+  );
+  await tester.enterText(find.byType(TextFormField).at(0), '$fontSize');
+  await touchAt(
+    tester,
+    find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
+  );
+
   debugPrint('Bold');
+
   debugPrint('Italics');
+
   debugPrint('Underline');
+
   debugPrint('Letter spacing');
+  await tester.enterText(find.byType(TextFormField).at(1), '1.0');
+
   debugPrint('Word spacing');
+  await tester.enterText(find.byType(TextFormField).at(2), '1.0');
+
   debugPrint('Line height');
+  await tester.enterText(find.byType(TextFormField).at(3), '1.0');
 }
