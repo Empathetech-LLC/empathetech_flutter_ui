@@ -43,33 +43,33 @@ void testSuite({
 
       //// Test functionality: Quick settings ////
 
-      // debugPrint('\nTesting quick settings');
+      debugPrint('\nTesting quick settings');
 
-      // debugPrint('Validating text');
-      // await validateText(
-      //   tester,
-      //   l10n.gEditingTheme(l10n.gDark.toLowerCase()),
-      // );
+      debugPrint('Validating text');
+      await validateText(
+        tester,
+        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+      );
 
-      // debugPrint('Monochrome');
-      // await touchAtText(tester, l10n.csMonoChrome);
+      debugPrint('Monochrome');
+      await touchAtText(tester, l10n.csMonoChrome);
 
-      // debugPrint('Color scheme from image');
-      // await testImageSetting(
-      //   tester,
-      //   finder: find.byType(EzImageSetting),
-      //   type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
-      //   updateCS: false,
-      //   l10n: l10n,
-      //   isLefty: isLefty,
-      // );
+      debugPrint('Color scheme from image');
+      await testImageSetting(
+        tester,
+        finder: find.byType(EzImageSetting),
+        type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
+        updateCS: false,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
 
-      // await testResetButton(
-      //   tester,
-      //   type: RBType.color,
-      //   l10n: l10n,
-      //   isLefty: isLefty,
-      // );
+      await testResetButton(
+        tester,
+        type: RBType.color,
+        l10n: l10n,
+        isLefty: isLefty,
+      );
 
       //// Test functionality: Advanced settings ////
 
@@ -224,6 +224,9 @@ Future<void> testCS(
   await chaChaNow(tester, find.byType(Slider));
   await touchAtText(tester, l10n.gApply);
 
+  /* Tests to unlock when the follow issue is resolved
+  https://github.com/flutter/flutter/issues/98804
+
   debugPrint('\nTesting $text reset');
   await holdAtText(tester, text);
 
@@ -269,12 +272,7 @@ Future<void> testCS(
 
   debugPrint('Test Yes');
   await holdAtText(tester, text);
-
-  if (!defaultColor) {
-    await validateText(tester, l10n.gOptions);
-    await touchAtText(tester, l10n.gReset);
-  }
-
+  if (!defaultColor) await touchAtText(tester, l10n.gReset);
   await touchAtText(tester, l10n.gYes);
 
   if (!defaultColor) {
@@ -286,4 +284,5 @@ Future<void> testCS(
     await touchAtText(tester, l10n.csRemove);
     expect(find.text(text), findsNothing);
   }
+  */
 }
