@@ -147,7 +147,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   decoration: const InputDecoration(border: InputBorder.none),
                   onFieldSubmitted: (String stringVal) async {
                     final double? doubleVal = double.tryParse(stringVal);
-                    if (doubleVal == null) return;
+                    if (doubleVal == null ||
+                        doubleVal > widget.max ||
+                        doubleVal < widget.min) return;
 
                     currValue = doubleVal;
                     await EzConfig.setDouble(widget.configKey, doubleVal);
