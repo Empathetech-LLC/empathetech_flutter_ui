@@ -126,7 +126,7 @@ void testSuite({
       await tester.fling(
         find.descendant(
           of: find.byType(BottomSheet),
-          matching: find.byType(EzScrollView),
+          matching: find.byType(EzScrollView).last,
         ),
         const Offset(0, -500),
         2000,
