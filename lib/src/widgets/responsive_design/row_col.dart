@@ -16,8 +16,16 @@ class EzRowCol extends StatelessWidget {
     super.key,
     required this.row,
     required this.col,
-  }) : assert(row.runtimeType == Row || row.runtimeType == EzRow,
-            'row Widget can only be a Row or EzRow');
+  })  : assert(
+          row.runtimeType == Row ||
+              row.runtimeType == EzRow ||
+              row.runtimeType == EzScrollView,
+          'row Widget can be a Row, EzRow, or EzScrollView',
+        ),
+        assert(
+          row.runtimeType == Column || row.runtimeType == EzScrollView,
+          'col Widget can be a Column or EzScrollView',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class EzRowCol extends StatelessWidget {
     return limitedSpace ? col : row;
   }
 
-  /// [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
+  /// Horizontal [EzScrollView] that will switch to a [Column] if the [ScreenSpace.isLimited]
   /// Alignment, size, and direction values will be shared (symmetric)
   EzRowCol.sym({
     super.key,
@@ -37,7 +45,8 @@ class EzRowCol extends StatelessWidget {
     TextBaseline? textBaseline,
     required List<Widget> children,
     bool reverseHands = false,
-  })  : row = EzRow(
+  })  : row = EzScrollView(
+          scrollDirection: Axis.horizontal,
           mainAxisAlignment: mainAxisAlignment,
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,
