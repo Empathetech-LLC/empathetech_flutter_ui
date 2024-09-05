@@ -66,6 +66,7 @@ class EzWarning extends StatelessWidget {
               children: <Widget>[
                 // Title
                 EzScrollView(
+                  startCentered: true,
                   scrollDirection: Axis.horizontal,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
