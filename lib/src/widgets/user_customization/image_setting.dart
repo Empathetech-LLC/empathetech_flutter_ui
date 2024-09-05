@@ -419,22 +419,16 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScrollView(
-      scrollDirection: Axis.horizontal,
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      child: Semantics(
-        button: true,
-        hint: l10n.isButtonHint(widget.label),
-        child: ExcludeSemantics(
-          child: ElevatedButton.icon(
-            style: style,
-            onPressed: inProgress ? doNothing : activateSetting,
-            onLongPress: inProgress ? doNothing : showCredits,
-            icon: icon,
-            label: Text(widget.label, textAlign: TextAlign.center),
-          ),
+    return Semantics(
+      button: true,
+      hint: l10n.isButtonHint(widget.label),
+      child: ExcludeSemantics(
+        child: ElevatedButton.icon(
+          style: style,
+          onPressed: inProgress ? doNothing : activateSetting,
+          onLongPress: inProgress ? doNothing : showCredits,
+          icon: icon,
+          label: Text(widget.label, textAlign: TextAlign.center),
         ),
       ),
     );
