@@ -113,12 +113,14 @@ class _EzScrollViewState extends State<EzScrollView> {
     super.initState();
     controller = widget.controller ?? ScrollController();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.startCentered && controller.hasClients) {
-        final double position = controller.position.maxScrollExtent / 2;
-        controller.jumpTo(position);
-      }
-    });
+    if (widget.startCentered) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (controller.hasClients) {
+          final double position = controller.position.maxScrollExtent / 2;
+          controller.jumpTo(position);
+        }
+      });
+    }
   }
 
   // Return the build //
