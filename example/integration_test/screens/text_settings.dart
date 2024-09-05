@@ -72,14 +72,14 @@ void testSuite({
 
       debugPrint('Batch font updater');
       await touch(tester, find.byType(DropdownMenu<String>));
-      await touchAtText(tester, roboto);
+      await touchText(tester, roboto);
       await dismissTap(tester);
 
       // Batch size updates //
 
       debugPrint('Batch font size: max');
       for (int i = 0; i < 15; i++) {
-        await touchAt(
+        await touch(
           tester,
           find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
         );
@@ -87,7 +87,7 @@ void testSuite({
 
       debugPrint('Batch font size: min');
       for (int i = 0; i < 15; i++) {
-        await touchAt(
+        await touch(
           tester,
           find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
         );
@@ -107,11 +107,11 @@ void testSuite({
       debugPrint('\nTesting advanced settings');
 
       debugPrint('\nNavigation');
-      await touchAtText(tester, l10n.gAdvanced);
+      await touchText(tester, l10n.gAdvanced);
 
       debugPrint('\nDisplay');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchAtText(tester, l10n.tsDisplay.toLowerCase());
+      await touchText(tester, l10n.tsDisplay.toLowerCase());
       await touch(
         tester,
         find.widgetWithText(EzLink, l10n.tsDisplay.toLowerCase()),
@@ -124,7 +124,7 @@ void testSuite({
 
       debugPrint('\nHeadline');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchAtText(tester, l10n.tsHeadline.toLowerCase());
+      await touchText(tester, l10n.tsHeadline.toLowerCase());
       await touch(
         tester,
         find.widgetWithText(EzLink, l10n.tsHeadlineLink.toLowerCase()),
@@ -137,7 +137,7 @@ void testSuite({
 
       debugPrint('\nTitle');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchAtText(tester, l10n.tsTitle.toLowerCase());
+      await touchText(tester, l10n.tsTitle.toLowerCase());
       await touch(
         tester,
         find.widgetWithText(EzLink, l10n.tsTitleLink.toLowerCase()),
@@ -150,7 +150,7 @@ void testSuite({
 
       debugPrint('\nBody');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchAtText(tester, l10n.tsBody.toLowerCase());
+      await touchText(tester, l10n.tsBody.toLowerCase());
       await touch(
         tester,
         find.widgetWithText(EzLink, l10n.tsBodyLink.toLowerCase()),
@@ -163,7 +163,7 @@ void testSuite({
 
       debugPrint('\nLabel');
       await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touchAtText(tester, l10n.tsLabel.toLowerCase());
+      await touchText(tester, l10n.tsLabel.toLowerCase());
       await touch(
         tester,
         find.widgetWithText(EzLink, l10n.tsLabelLink.toLowerCase()),
@@ -196,16 +196,16 @@ Future<void> testAdvancedOptions(
 }) async {
   debugPrint('Font family');
   await touch(tester, find.byType(DropdownMenu<String>).last);
-  await touchAtText(tester, roboto);
+  await touchText(tester, roboto);
   await dismissTap(tester);
 
   debugPrint('Font size');
-  await touchAt(
+  await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
   );
   await tester.enterText(find.byType(TextFormField).at(0), '$fontSize');
-  await touchAt(
+  await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
   );
@@ -231,33 +231,33 @@ Future<void> testAdvancedOptions(
 
 Future<void> touchBold(WidgetTester tester) async {
   try {
-    await touchAt(tester, find.byIcon(Icons.format_bold));
+    await touch(tester, find.byIcon(Icons.format_bold));
   } catch (_) {
-    await touchAt(tester, find.byIcon(Icons.format_bold_outlined));
-    await touchAt(tester, find.byIcon(Icons.format_bold));
+    await touch(tester, find.byIcon(Icons.format_bold_outlined));
+    await touch(tester, find.byIcon(Icons.format_bold));
     return;
   }
-  await touchAt(tester, find.byIcon(Icons.format_bold_outlined));
+  await touch(tester, find.byIcon(Icons.format_bold_outlined));
 }
 
 Future<void> touchItalics(WidgetTester tester) async {
   try {
-    await touchAt(tester, find.byIcon(Icons.format_italic));
+    await touch(tester, find.byIcon(Icons.format_italic));
   } catch (_) {
-    await touchAt(tester, find.byIcon(Icons.format_italic_outlined));
-    await touchAt(tester, find.byIcon(Icons.format_italic));
+    await touch(tester, find.byIcon(Icons.format_italic_outlined));
+    await touch(tester, find.byIcon(Icons.format_italic));
     return;
   }
-  await touchAt(tester, find.byIcon(Icons.format_italic_outlined));
+  await touch(tester, find.byIcon(Icons.format_italic_outlined));
 }
 
 Future<void> touchUnderline(WidgetTester tester) async {
   try {
-    await touchAt(tester, find.byIcon(Icons.format_underline));
+    await touch(tester, find.byIcon(Icons.format_underline));
   } catch (_) {
-    await touchAt(tester, find.byIcon(Icons.format_underline_outlined));
-    await touchAt(tester, find.byIcon(Icons.format_underline));
+    await touch(tester, find.byIcon(Icons.format_underline_outlined));
+    await touch(tester, find.byIcon(Icons.format_underline));
     return;
   }
-  await touchAt(tester, find.byIcon(Icons.format_underline_outlined));
+  await touch(tester, find.byIcon(Icons.format_underline_outlined));
 }

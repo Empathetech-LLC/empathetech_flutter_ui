@@ -75,9 +75,9 @@ Future<void> testResetButton(
   }
 
   debugPrint('No');
-  await touchAtText(tester, l10n.gNo);
+  await touchText(tester, l10n.gNo);
 
   debugPrint('Yes');
   await touch(tester, find.byType(EzResetButton));
-  await touchAtText(tester, l10n.gYes);
+  await touchText(tester, l10n.gYes);
 }

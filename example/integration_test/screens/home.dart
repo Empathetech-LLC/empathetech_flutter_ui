@@ -63,7 +63,7 @@ void testSuite({
         debugPrint('Right hand layout');
 
         // Activate righty layout
-        await touchAtText(tester, l10n.gRight);
+        await touchText(tester, l10n.gRight);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -79,7 +79,7 @@ void testSuite({
 
         // Activate lefty layout
         await touch(tester, find.byType(DropdownMenu<bool>).last);
-        await touchAtText(tester, l10n.gLeft);
+        await touchText(tester, l10n.gLeft);
 
         // Verify lefty layout
         handButtonsChildren =
@@ -92,7 +92,7 @@ void testSuite({
         debugPrint('Left hand layout');
 
         // Activate lefty layout
-        await touchAtText(tester, l10n.gLeft);
+        await touchText(tester, l10n.gLeft);
 
         List<Widget> handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -108,7 +108,7 @@ void testSuite({
 
         // Activate righty layout
         await touch(tester, find.byType(DropdownMenu<bool>).last);
-        await touchAtText(tester, l10n.gRight);
+        await touchText(tester, l10n.gRight);
 
         // Verify righty layout
         handButtonsChildren =
@@ -141,17 +141,17 @@ void testSuite({
       // Activate light theme
       debugPrint('Light');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAtText(tester, l10n.gLight);
+      await touchText(tester, l10n.gLight);
 
       // Activate system theme
       debugPrint('System');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAtText(tester, l10n.gSystem);
+      await touchText(tester, l10n.gSystem);
 
       // Activate dark theme
       debugPrint('Dark');
       await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchAtText(tester, l10n.gDark);
+      await touchText(tester, l10n.gDark);
 
       // Language //
 
@@ -161,25 +161,25 @@ void testSuite({
       // Activate Spanish localizations
       debugPrint('Spanish');
       await touch(tester, find.byType(EzLocaleSetting));
-      await touchAtText(tester, l10nNames.nameOf('es')!);
+      await touchText(tester, l10nNames.nameOf('es')!);
       await tester.pumpAndSettle();
 
       // Activate French localizations
       debugPrint('French');
       await touch(tester, find.byType(EzLocaleSetting));
-      await touchAtText(tester, l10nNames.nameOf('fr')!);
+      await touchText(tester, l10nNames.nameOf('fr')!);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('English');
       await touch(tester, find.byType(EzLocaleSetting));
-      await touchAtText(tester, l10nNames.nameOf('en')!);
+      await touchText(tester, l10nNames.nameOf('en')!);
       await tester.pumpAndSettle();
 
       // Activate English localizations
       debugPrint('Close');
       await touch(tester, find.byType(EzLocaleSetting));
-      await touchAtText(tester, l10n.gClose);
+      await touchText(tester, l10n.gClose);
       await tester.pumpAndSettle();
 
       // Reset button //

@@ -33,36 +33,22 @@ Future<void> validateWidget(
   await tester.ensureVisible(widgetFinder);
 }
 
-/// Find, touch, and settle a touch-point
-Future<void> touch(WidgetTester tester, Finder finder) async {
-  await tester.ensureVisible(finder);
-  await tester.tap(finder);
-  await tester.pumpAndSettle();
-}
-
-/// Find, touch, hold, and settle a touch-point
-Future<void> hold(WidgetTester tester, Finder finder) async {
-  await tester.ensureVisible(finder);
-  await tester.longPress(finder);
-  await tester.pumpAndSettle();
-}
-
 /// Find, touch, and settle a target
-Future<void> touchAt(WidgetTester tester, Finder finder) async {
+Future<void> touch(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
 /// Find, touch, hold, and settle a target
-Future<void> holdAt(WidgetTester tester, Finder finder) async {
+Future<void> hold(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
   await tester.longPressAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
 /// Find, touch, and settle a text target
-Future<void> touchAtText(WidgetTester tester, String text) async {
+Future<void> touchText(WidgetTester tester, String text) async {
   final Finder finder = find.text(text).last;
   await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder));
@@ -70,7 +56,7 @@ Future<void> touchAtText(WidgetTester tester, String text) async {
 }
 
 /// Find, touch, hold, and settle a text target
-Future<void> holdAtText(WidgetTester tester, String text) async {
+Future<void> holdText(WidgetTester tester, String text) async {
   final Finder finder = find.text(text).last;
   await tester.ensureVisible(finder);
   await tester.longPressAt(tester.getCenter(finder));

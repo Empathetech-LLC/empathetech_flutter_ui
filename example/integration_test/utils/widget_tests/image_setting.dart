@@ -72,7 +72,7 @@ Future<void> webTests(
   await touch(tester, finder);
 
   debugPrint('\nClose');
-  await touchAtText(tester, l10n.gClose);
+  await touchText(tester, l10n.gClose);
 }
 
 Future<void> mobileTests(
@@ -122,7 +122,7 @@ Future<void> mobileTests(
   await touch(tester, finder);
 
   debugPrint('\nClose');
-  await touchAtText(tester, l10n.gClose);
+  await touchText(tester, l10n.gClose);
 }
 
 Future<void> desktopTests(
@@ -167,7 +167,7 @@ Future<void> desktopTests(
   await touch(tester, finder);
 
   debugPrint('\nClose');
-  await touchAtText(tester, l10n.gClose);
+  await touchText(tester, l10n.gClose);
 }
 
 Future<void> testFile(
@@ -180,7 +180,7 @@ Future<void> testFile(
     find.byIcon(isCupertino ? CupertinoIcons.folder : Icons.folder),
     findsOneWidget,
   );
-  await touchAtText(tester, l10n.gClose);
+  await touchText(tester, l10n.gClose);
 }
 
 Future<void> testCamera(
@@ -193,7 +193,7 @@ Future<void> testCamera(
     find.byIcon(isCupertino ? CupertinoIcons.photo_camera : Icons.photo_camera),
     findsOneWidget,
   );
-  await touchAtText(tester, l10n.gClose);
+  await touchText(tester, l10n.gClose);
 }
 
 Future<void> testNetwork(
@@ -237,19 +237,19 @@ Future<void> testNetwork(
   }
 
   debugPrint('Cancel');
-  await touchAtText(tester, l10n.gCancel);
+  await touchText(tester, l10n.gCancel);
 
   debugPrint('Apply w/ invalid URL');
   await touch(tester, find.byIcon(Icons.computer_outlined));
   await tester.enterText(find.byType(PlatformTextFormField), 'invalid');
-  await touchAtText(tester, l10n.gApply);
+  await touchText(tester, l10n.gApply);
 
   debugPrint('Apply w/ valid URL');
   await tester.enterText(
     find.byType(PlatformTextFormField),
     getImageUrl(),
   );
-  await touchAtText(tester, l10n.gApply);
+  await touchText(tester, l10n.gApply);
   expect(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsNothing,

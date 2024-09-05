@@ -52,7 +52,7 @@ void testSuite({
       );
 
       debugPrint('\nMonochrome');
-      await touchAtText(tester, l10n.csMonoChrome);
+      await touchText(tester, l10n.csMonoChrome);
 
       debugPrint('\nColorScheme from image');
       await testImageSetting(
@@ -76,7 +76,7 @@ void testSuite({
       debugPrint('\nTesting advanced settings');
 
       debugPrint('Navigation');
-      await touchAtText(tester, l10n.gAdvanced);
+      await touchText(tester, l10n.gAdvanced);
 
       debugPrint('Validating text');
       await validateText(
@@ -102,14 +102,14 @@ void testSuite({
       );
 
       debugPrint('Testing add color modal');
-      await touchAtText(tester, l10n.csAddColor);
+      await touchText(tester, l10n.csAddColor);
 
       debugPrint('How this works');
       await validateText(tester, l10n.gHowThisWorks);
       // ToDo: Verify link
 
       debugPrint('Add on primary');
-      await touchAtText(tester, l10n.csOnPrimary);
+      await touchText(tester, l10n.csOnPrimary);
       await dismissTap(tester);
       await testCS(
         tester,
@@ -121,7 +121,7 @@ void testSuite({
       );
 
       debugPrint('Add surface tint');
-      await touchAtText(tester, l10n.csAddColor);
+      await touchText(tester, l10n.csAddColor);
       await tester.ensureVisible(find.text(l10n.csSurfaceTint).last);
       await tester.fling(
         find.descendant(
@@ -132,7 +132,7 @@ void testSuite({
         2000,
       );
       await tester.pumpAndSettle();
-      await touchAtText(tester, l10n.csSurfaceTint);
+      await touchText(tester, l10n.csSurfaceTint);
       await dismissTap(tester);
 
       await testCS(
@@ -166,22 +166,22 @@ Future<void> testCS(
   required bool isLefty,
 }) async {
   debugPrint('\nTesting $text update\n');
-  await touchAtText(tester, text);
+  await touchText(tester, text);
 
   if (textColor) {
     debugPrint('Text options');
     await validateText(tester, l10n.csRecommended);
 
     debugPrint('Close');
-    await touchAtText(tester, l10n.gClose);
+    await touchText(tester, l10n.gClose);
 
     debugPrint('Yes');
-    await touchAtText(tester, text);
-    await touchAtText(tester, l10n.gYes);
+    await touchText(tester, text);
+    await touchText(tester, l10n.gYes);
 
     debugPrint('Custom\n');
-    await touchAtText(tester, text);
-    await touchAtText(tester, l10n.csUseCustom);
+    await touchText(tester, text);
+    await touchText(tester, l10n.csUseCustom);
   }
 
   debugPrint('Layout');
@@ -216,25 +216,25 @@ Future<void> testCS(
   }
 
   debugPrint('Cancel');
-  await touchAtText(tester, l10n.gCancel);
+  await touchText(tester, l10n.gCancel);
 
   debugPrint('Apply');
-  await touchAtText(tester, text);
-  if (textColor) await touchAtText(tester, l10n.csUseCustom);
+  await touchText(tester, text);
+  if (textColor) await touchText(tester, l10n.csUseCustom);
   await chaChaNow(tester, find.byType(Slider));
-  await touchAtText(tester, l10n.gApply);
+  await touchText(tester, l10n.gApply);
 
   /* Tests to unlock when the follow issue is resolved
   https://github.com/flutter/flutter/issues/98804
 
   debugPrint('\nTesting $text reset\n');
-  await holdAtText(tester, text);
+  await holdText(tester, text);
 
   debugPrint('Text/layout');
 
   if (!defaultColor) {
     await validateText(tester, l10n.gOptions);
-    await touchAtText(tester, l10n.gReset);
+    await touchText(tester, l10n.gReset);
   }
 
   await validateText(tester, l10n.csResetTo);
@@ -268,20 +268,20 @@ Future<void> testCS(
   }
 
   debugPrint('No');
-  await touchAtText(tester, l10n.gNo);
+  await touchText(tester, l10n.gNo);
 
   debugPrint('Yes');
-  await holdAtText(tester, text);
-  if (!defaultColor) await touchAtText(tester, l10n.gReset);
-  await touchAtText(tester, l10n.gYes);
+  await holdText(tester, text);
+  if (!defaultColor) await touchText(tester, l10n.gReset);
+  await touchText(tester, l10n.gYes);
 
   if (!defaultColor) {
     debugPrint('Remove');
 
-    await holdAtText(tester, text);
-    await touchAtText(tester, l10n.gClose);
-    await holdAtText(tester, text);
-    await touchAtText(tester, l10n.csRemove);
+    await holdText(tester, text);
+    await touchText(tester, l10n.gClose);
+    await holdText(tester, text);
+    await touchText(tester, l10n.csRemove);
     expect(find.text(text), findsNothing);
   }
   */
