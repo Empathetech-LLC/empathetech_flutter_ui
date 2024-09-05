@@ -45,8 +45,8 @@
 
 
   "ssPageTitle": "Paramètres",
-  "ssSettingsGuide": "Redémarrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
-  "ssSettingsGuideWeb": "Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuide": "Redémarrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuideWeb": "Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
 
   "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",
@@ -179,7 +179,7 @@
   "csFromImage": "Construire le schéma de couleurs à partir d'une image",
   "csColorScheme": "schéma de couleurs",
 
-  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
+  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
 
 
 
@@ -189,7 +189,7 @@
   "isImage": "image",
 
   "isButtonHint": "Mettre à jour l'image {title}",
-  "isDialogTitle": "Comment l’image {title} doit-elle être mise à jour ?",
+  "isDialogTitle": "Comment l'image {title} doit-elle être mise à jour ?",
   "isFromFile": "Depuis un fichier",
   "isFromCamera": "Depuis la caméra",
   "isFromNetwork": "Depuis une URL",
@@ -198,10 +198,10 @@
 
   "isEnterURL": "Entrer l'URL",
   "isGetFailed": "Impossible de récupérer l'image",
-  "isSetFailed": "Échec de la mise à jour de l'image :\n{error}",
+  "isSetFailed": "Échec de la mise à jour de l'image :\n{error}",
   "isPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
 
   "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
   
-  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
+  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
 }

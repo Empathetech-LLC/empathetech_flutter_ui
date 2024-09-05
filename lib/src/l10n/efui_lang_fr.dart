@@ -112,11 +112,11 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Redémarrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Redémarrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssThemeMode => 'Mode de thème';
@@ -443,7 +443,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String csResetAll(Object themeType) {
-    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
+    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
   }
 
   @override
@@ -462,7 +462,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String isDialogTitle(Object title) {
-    return 'Comment l’image $title doit-elle être mise à jour ?';
+    return 'Comment l\'image $title doit-elle être mise à jour ?';
   }
 
   @override
@@ -488,7 +488,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String isSetFailed(Object error) {
-    return 'Échec de la mise à jour de l\'image :\n$error';
+    return 'Échec de la mise à jour de l\'image :\n$error';
   }
 
   @override
@@ -501,6 +501,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String isResetAll(Object themeType) {
-    return 'Réinitialiser toutes les images du thème $themeType ?';
+    return 'Réinitialiser toutes les images du thème $themeType ?';
   }
 }
