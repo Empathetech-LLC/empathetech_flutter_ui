@@ -123,7 +123,6 @@ void testSuite({
       );
 
       debugPrint('\nHeadline');
-      await pause(5);
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touchAtText(tester, l10n.tsHeadline.toLowerCase());
       await touch(
