@@ -121,9 +121,5 @@ class EzScreen extends StatelessWidget {
     this.transformAlignment,
     this.clipBehavior = Clip.none,
     required Widget kid,
-  }) : child = EzScrollView(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          child: kid,
-        );
+  }) : child = EzScrollView(child: kid);
 }

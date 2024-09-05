@@ -66,7 +66,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         reverseHands: true,
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Label
           Text(

@@ -159,7 +159,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisSize: MainAxisSize.min,
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
                 style: theme.elevatedButtonTheme.style!.copyWith(
@@ -200,7 +199,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisSize: MainAxisSize.min,
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
                 onPressed: doNothing,

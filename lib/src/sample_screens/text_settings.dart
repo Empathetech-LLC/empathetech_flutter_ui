@@ -181,15 +181,11 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         EzScrollView(
           scrollDirection: Axis.horizontal,
           reverseHands: true,
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(key: UniqueKey()),
@@ -723,12 +719,11 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // Style selector
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        EzScrollView(
+          scrollDirection: Axis.horizontal,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
               l10n.gEditing,
