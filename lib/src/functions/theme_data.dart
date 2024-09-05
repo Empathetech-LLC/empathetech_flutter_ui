@@ -37,6 +37,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
+    primaryColor: colorScheme.primary,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
     dividerColor: colorScheme.secondary,
 
