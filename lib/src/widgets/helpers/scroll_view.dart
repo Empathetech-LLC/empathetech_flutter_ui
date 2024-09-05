@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzScrollView extends StatelessWidget {
+class EzScrollView extends StatefulWidget {
   // Scrollbar parameters //
 
   final ScrollController? controller;
@@ -45,6 +45,9 @@ class EzScrollView extends StatelessWidget {
   final TextDirection? textDirection;
   final TextBaseline? textBaseline;
   final VerticalDirection verticalDirection;
+
+  /// Optionally jump to the center of the scroll upon creation
+  final bool startCentered;
 
   /// Replacement to original [child] parameter
   /// [children] will be placed into an [EzRow] or [Column] based on [scrollDirection]
@@ -87,56 +90,81 @@ class EzScrollView extends StatelessWidget {
     this.textDirection,
     this.textBaseline,
     this.verticalDirection = VerticalDirection.down,
+    this.startCentered = false,
     this.children,
   }) : assert(
           (child == null) != (children == null),
           'Either child or children should be provided, but not both.',
         );
 
-  Widget _child() {
-    return (scrollDirection == Axis.vertical)
-        ? Column(
-            mainAxisSize: mainAxisSize,
-            mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            verticalDirection: verticalDirection,
-            textBaseline: textBaseline,
-            children: children!,
-          )
-        : EzRow(
-            mainAxisSize: mainAxisSize,
-            mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            verticalDirection: verticalDirection,
-            textBaseline: textBaseline,
-            reverseHands: reverseHands,
-            children: children!,
-          );
+  @override
+  State<EzScrollView> createState() => _EzScrollViewState();
+}
+
+class _EzScrollViewState extends State<EzScrollView> {
+  // Define build data //
+
+  late final ScrollController controller;
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.controller ?? ScrollController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.startCentered && controller.hasClients) {
+        final double position = controller.position.maxScrollExtent / 2;
+        controller.jumpTo(position);
+      }
+    });
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return PlatformScrollbar(
       controller: controller,
-      thumbVisibility: thumbVisibility,
-      thickness: thickness,
-      radius: radius,
-      notificationPredicate: notificationPredicate,
-      scrollbarOrientation: scrollbarOrientation,
+      thumbVisibility: widget.thumbVisibility,
+      thickness: widget.thickness,
+      radius: widget.radius,
+      notificationPredicate: widget.notificationPredicate,
+      scrollbarOrientation: widget.scrollbarOrientation,
       child: SingleChildScrollView(
-        scrollDirection: scrollDirection,
-        reverse: reverse,
-        padding: padding,
-        primary: primary,
-        physics: physics,
+        scrollDirection: widget.scrollDirection,
+        reverse: widget.reverse,
+        padding: widget.padding,
+        primary: widget.primary,
+        physics: widget.physics,
         controller: controller,
-        dragStartBehavior: dragStartBehavior,
-        clipBehavior: clipBehavior,
-        restorationId: restorationId,
-        keyboardDismissBehavior: keyboardDismissBehavior,
-        child: child ?? _child(),
+        dragStartBehavior: widget.dragStartBehavior,
+        clipBehavior: widget.clipBehavior,
+        restorationId: widget.restorationId,
+        keyboardDismissBehavior: widget.keyboardDismissBehavior,
+        child: (widget.child != null)
+            ? widget.child
+            : (widget.scrollDirection == Axis.vertical)
+                ? Column(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    children: widget.children!,
+                  )
+                : EzRow(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    reverseHands: widget.reverseHands,
+                    children: widget.children!,
+                  ),
       ),
     );
   }
