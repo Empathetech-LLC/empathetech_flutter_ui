@@ -109,11 +109,11 @@ class _ColorSettingsState extends State<ColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen.hScroll(
+    return EzScreen(
       decorationImageKey: isDark
           ? widget.darkBackgroundImageKey
           : widget.lightBackgroundImageKey,
-      kid: EzScrollView(
+      child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
           Text(
@@ -406,14 +406,20 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Dynamic color settings
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: widthOf(context) * (2 / 3),
+        EzSwapWidget(
+          large: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: widthOf(context) * (2 / 3),
+            ),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              runAlignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: dynamicColorSettings(),
+            ),
           ),
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            runAlignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
+          small: Column(
+            mainAxisSize: MainAxisSize.min,
             children: dynamicColorSettings(),
           ),
         ),

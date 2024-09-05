@@ -54,11 +54,11 @@ class _ImageSettingsState extends State<ImageSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen.hScroll(
+    return EzScreen(
       decorationImageKey: isDark
           ? widget.darkBackgroundImageKey
           : widget.lightBackgroundImageKey,
-      kid: EzScrollView(
+      child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
           Text(
