@@ -448,7 +448,12 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                   StateSetter setModalState,
                 ) {
                   return EzScrollView(
-                    children: getUntrackedColors(setModalState),
+                    scrollDirection: Axis.horizontal,
+                    mainAxisSize: MainAxisSize.min,
+                    child: EzScrollView(
+                      mainAxisSize: MainAxisSize.min,
+                      children: getUntrackedColors(setModalState),
+                    ),
                   );
                 },
               ),
