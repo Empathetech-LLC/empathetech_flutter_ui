@@ -74,7 +74,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
             type: LayoutSettingType.padding,
             min: minPadding,
             max: maxPadding,
-            steps: 10,
+            steps: 9,
             decimals: 1,
           ),
           spacer,
