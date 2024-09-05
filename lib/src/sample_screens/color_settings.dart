@@ -239,6 +239,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   Widget build(BuildContext context) {
     return EzScrollView(
       scrollDirection: Axis.horizontal,
+      startCentered: true,
       mainAxisSize: MainAxisSize.min,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -424,6 +425,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           ),
           small: EzScrollView(
             scrollDirection: Axis.horizontal,
+            startCentered: true,
             mainAxisSize: MainAxisSize.min,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -449,6 +451,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                 ) {
                   return EzScrollView(
                     scrollDirection: Axis.horizontal,
+                    startCentered: true,
                     mainAxisSize: MainAxisSize.min,
                     child: EzScrollView(
                       mainAxisSize: MainAxisSize.min,

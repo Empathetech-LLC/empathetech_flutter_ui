@@ -71,6 +71,7 @@ class _ImageSettingsState extends State<ImageSettings> {
           // Page image setting
           EzScrollView(
             scrollDirection: Axis.horizontal,
+            startCentered: true,
             mainAxisSize: MainAxisSize.min,
             child: isDark
                 ? EzImageSetting(
