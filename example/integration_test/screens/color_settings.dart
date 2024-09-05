@@ -110,7 +110,7 @@ void testSuite({
 
       debugPrint('Add on primary');
       await touchText(tester, l10n.csOnPrimary);
-      await dismissTap(tester);
+      await dismissModal(tester);
       await testCS(
         tester,
         text: l10n.csOnPrimary,
@@ -133,7 +133,7 @@ void testSuite({
       );
       await tester.pumpAndSettle();
       await touchText(tester, l10n.csSurfaceTint);
-      await dismissTap(tester);
+      await dismissModal(tester);
 
       await testCS(
         tester,

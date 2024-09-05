@@ -98,3 +98,9 @@ Future<void> dismissTap(WidgetTester tester) async {
   await tester.tapAt(const Offset(1, 1));
   await tester.pumpAndSettle();
 }
+
+/// Dismiss modal (aka [BottomSheet])
+Future<void> dismissModal(WidgetTester tester) async {
+  await tester.drag(find.byType(BottomSheet).last, const Offset(0, -100));
+  await tester.pumpAndSettle();
+}

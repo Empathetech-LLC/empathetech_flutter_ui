@@ -63,7 +63,7 @@ void testSuite({
       }
 
       debugPrint('Dismissing');
-      await dismissTap(tester);
+      await dismissModal(tester);
 
       // Padding //
       debugPrint('\nTesting padding');
@@ -80,7 +80,7 @@ void testSuite({
       }
 
       debugPrint('Dismissing');
-      await dismissTap(tester);
+      await dismissModal(tester);
 
       // Spacing //
       debugPrint('\nTesting spacing');
@@ -97,7 +97,7 @@ void testSuite({
       }
 
       debugPrint('Dismissing');
-      await dismissTap(tester);
+      await dismissModal(tester);
 
       // Reset button //
 
