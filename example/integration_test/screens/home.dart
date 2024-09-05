@@ -193,5 +193,5 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      debugPrint('\nSettings home test suite complete\n');
+      debugPrint('\nSettings home test suite complete\n\n');
     });

@@ -111,5 +111,5 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n);
-      debugPrint('\nLayout settings test suite complete\n');
+      debugPrint('\nLayout settings test suite complete\n\n');
     });

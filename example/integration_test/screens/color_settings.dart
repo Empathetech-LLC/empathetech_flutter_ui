@@ -45,16 +45,16 @@ void testSuite({
 
       debugPrint('\nTesting quick settings');
 
-      debugPrint('Validating text');
+      debugPrint('\nValidating text');
       await validateText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
-      debugPrint('Monochrome');
+      debugPrint('\nMonochrome');
       await touchAtText(tester, l10n.csMonoChrome);
 
-      debugPrint('Color scheme from image');
+      debugPrint('\nColorScheme from image');
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
@@ -154,7 +154,7 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n);
-      debugPrint('\nColor settings test suite complete\n');
+      debugPrint('\nColor settings test suite complete\n\n');
     });
 
 Future<void> testCS(
@@ -165,11 +165,11 @@ Future<void> testCS(
   required bool textColor,
   required bool isLefty,
 }) async {
-  debugPrint('\nTesting $text update');
+  debugPrint('\nTesting $text update\n');
   await touchAtText(tester, text);
 
   if (textColor) {
-    debugPrint('Testing text options');
+    debugPrint('Text options');
     await validateText(tester, l10n.csRecommended);
 
     debugPrint('Close');
@@ -179,12 +179,12 @@ Future<void> testCS(
     await touchAtText(tester, text);
     await touchAtText(tester, l10n.gYes);
 
-    debugPrint('Custom');
+    debugPrint('Custom\n');
     await touchAtText(tester, text);
     await touchAtText(tester, l10n.csUseCustom);
   }
 
-  debugPrint('Validating layout');
+  debugPrint('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
@@ -215,10 +215,10 @@ Future<void> testCS(
     }
   }
 
-  debugPrint('Test Cancel');
+  debugPrint('Cancel');
   await touchAtText(tester, l10n.gCancel);
 
-  debugPrint('Test Apply');
+  debugPrint('Apply');
   await touchAtText(tester, text);
   if (textColor) await touchAtText(tester, l10n.csUseCustom);
   await chaChaNow(tester, find.byType(Slider));
@@ -227,10 +227,10 @@ Future<void> testCS(
   /* Tests to unlock when the follow issue is resolved
   https://github.com/flutter/flutter/issues/98804
 
-  debugPrint('\nTesting $text reset');
+  debugPrint('\nTesting $text reset\n');
   await holdAtText(tester, text);
 
-  debugPrint('Validating text/layout');
+  debugPrint('Text/layout');
 
   if (!defaultColor) {
     await validateText(tester, l10n.gOptions);
@@ -267,16 +267,16 @@ Future<void> testCS(
     }
   }
 
-  debugPrint('Test No');
+  debugPrint('No');
   await touchAtText(tester, l10n.gNo);
 
-  debugPrint('Test Yes');
+  debugPrint('Yes');
   await holdAtText(tester, text);
   if (!defaultColor) await touchAtText(tester, l10n.gReset);
   await touchAtText(tester, l10n.gYes);
 
   if (!defaultColor) {
-    debugPrint('\nTesting remove');
+    debugPrint('Remove');
 
     await holdAtText(tester, text);
     await touchAtText(tester, l10n.gClose);

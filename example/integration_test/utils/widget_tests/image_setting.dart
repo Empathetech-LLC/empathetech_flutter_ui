@@ -43,7 +43,7 @@ Future<void> testImageSetting(
     await validateText(tester, l10n.isUseForColors);
   }
 
-  debugPrint('Validating platform options');
+  debugPrint('Validating platform options\n');
   if (kIsWeb) {
     await webTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
   } else if (Platform.isIOS || Platform.isAndroid) {
@@ -61,17 +61,17 @@ Future<void> webTests(
 }) async {
   debugPrint('Detected web');
 
-  debugPrint('From network');
+  debugPrint('\nFrom network');
   await testNetwork(tester, l10n: l10n, isLefty: isLefty, isCupertino: false);
   await touch(tester, finder);
 
   // ToDo: Reset catch
-  debugPrint('Clear');
+  debugPrint('\nClear');
   await touch(tester, find.byIcon(Icons.clear));
   expect(find.byIcon(Icons.edit), findsOneWidget);
   await touch(tester, finder);
 
-  debugPrint('Close');
+  debugPrint('\nClose');
   await touchAtText(tester, l10n.gClose);
 }
 
@@ -86,12 +86,12 @@ Future<void> mobileTests(
   final bool isCupertino = Platform.isIOS;
   debugPrint(isCupertino ? 'iOS' : 'Android');
 
-  debugPrint('From file');
+  debugPrint('\nFrom file');
   await testFile(tester,
       l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
   await touch(tester, finder);
 
-  debugPrint('From camera');
+  debugPrint('\nFrom camera');
   await testCamera(
     tester,
     l10n: l10n,
@@ -100,7 +100,7 @@ Future<void> mobileTests(
   );
   await touch(tester, finder);
 
-  debugPrint('From network');
+  debugPrint('\nFrom network');
   await testNetwork(
     tester,
     l10n: l10n,
@@ -110,7 +110,7 @@ Future<void> mobileTests(
   await touch(tester, finder);
 
   // ToDo: Reset catch
-  debugPrint('Clear');
+  debugPrint('\nClear');
   await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
@@ -121,7 +121,7 @@ Future<void> mobileTests(
   );
   await touch(tester, finder);
 
-  debugPrint('Close');
+  debugPrint('\nClose');
   await touchAtText(tester, l10n.gClose);
 }
 
@@ -136,7 +136,7 @@ Future<void> desktopTests(
   final bool isCupertino = Platform.isMacOS;
   debugPrint(isCupertino ? 'Mac' : 'Not Mac');
 
-  debugPrint('From file');
+  debugPrint('\nFrom file');
   await testFile(
     tester,
     l10n: l10n,
@@ -145,7 +145,7 @@ Future<void> desktopTests(
   );
   await touch(tester, finder);
 
-  debugPrint('From network');
+  debugPrint('\nFrom network');
   await testNetwork(
     tester,
     l10n: l10n,
@@ -155,7 +155,7 @@ Future<void> desktopTests(
   await touch(tester, finder);
 
   // ToDo: Reset catch
-  debugPrint('Clear');
+  debugPrint('\nClear');
   await touch(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
@@ -166,7 +166,7 @@ Future<void> desktopTests(
   );
   await touch(tester, finder);
 
-  debugPrint('Close');
+  debugPrint('\nClose');
   await touchAtText(tester, l10n.gClose);
 }
 
@@ -236,15 +236,15 @@ Future<void> testNetwork(
     }
   }
 
-  debugPrint('Test cancel');
+  debugPrint('Cancel');
   await touchAtText(tester, l10n.gCancel);
 
-  debugPrint('Test apply - invalid URL');
+  debugPrint('Apply w/ invalid URL');
   await touch(tester, find.byIcon(Icons.computer_outlined));
   await tester.enterText(find.byType(PlatformTextFormField), 'invalid');
   await touchAtText(tester, l10n.gApply);
 
-  debugPrint('Test apply - valid URL');
+  debugPrint('Apply w/ valid URL');
   await tester.enterText(
     find.byType(PlatformTextFormField),
     getImageUrl(),

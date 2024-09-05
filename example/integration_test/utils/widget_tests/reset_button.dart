@@ -23,7 +23,7 @@ Future<void> testResetButton(
   debugPrint('\nTesting reset button');
   await touch(tester, find.byType(EzResetButton));
 
-  debugPrint('Validating text');
+  debugPrint('Text');
   switch (type) {
     case RBType.all:
       await validateText(tester, l10n.gResetAll);
@@ -43,7 +43,7 @@ Future<void> testResetButton(
   }
   await validateText(tester, l10n.gResetWarn);
 
-  debugPrint('Validating layout');
+  debugPrint('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
@@ -74,10 +74,10 @@ Future<void> testResetButton(
     }
   }
 
-  debugPrint('Test No');
+  debugPrint('No');
   await touchAtText(tester, l10n.gNo);
 
-  debugPrint('Test Yes');
+  debugPrint('Yes');
   await touch(tester, find.byType(EzResetButton));
   await touchAtText(tester, l10n.gYes);
 }

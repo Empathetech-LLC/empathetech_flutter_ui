@@ -70,5 +70,5 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n);
-      debugPrint('\nImage settings test suite complete\n');
+      debugPrint('\nImage settings test suite complete\n\n');
     });
