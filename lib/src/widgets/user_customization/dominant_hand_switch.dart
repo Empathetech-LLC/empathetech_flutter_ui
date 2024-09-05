@@ -63,12 +63,10 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Label
-          Flexible(
-            child: Text(
-              l10n.ssDominantHand,
-              style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-              textAlign: TextAlign.center,
-            ),
+          Text(
+            l10n.ssDominantHand,
+            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+            textAlign: TextAlign.center,
           ),
           EzSpacer(space: padding, vertical: false),
 

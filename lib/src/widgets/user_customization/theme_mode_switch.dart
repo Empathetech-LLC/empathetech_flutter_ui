@@ -67,12 +67,10 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Label
-          Flexible(
-            child: Text(
-              l10n.ssThemeMode,
-              style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
-              textAlign: TextAlign.center,
-            ),
+          Text(
+            l10n.ssThemeMode,
+            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+            textAlign: TextAlign.center,
           ),
           EzSpacer(space: EzConfig.get(paddingKey), vertical: false),
 

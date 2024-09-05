@@ -71,7 +71,7 @@ void testSuite({
         expect(handButtonsChildren.length, 3);
 
         // Verify righty layout
-        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[0], isA<Text>());
         expect(handButtonsChildren[1], isA<EzSpacer>());
         expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
@@ -87,7 +87,7 @@ void testSuite({
 
         expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
         expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<Flexible>());
+        expect(handButtonsChildren[2], isA<Text>());
       } else {
         debugPrint('Left hand layout');
 
@@ -102,7 +102,7 @@ void testSuite({
         // Verify lefty layout
         expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
         expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<Flexible>());
+        expect(handButtonsChildren[2], isA<Text>());
 
         debugPrint('Right hand layout');
 
@@ -114,7 +114,7 @@ void testSuite({
         handButtonsChildren =
             (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-        expect(handButtonsChildren[0], isA<Flexible>());
+        expect(handButtonsChildren[0], isA<Text>());
         expect(handButtonsChildren[1], isA<EzSpacer>());
         expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
       }
@@ -131,9 +131,9 @@ void testSuite({
       if (isLefty) {
         expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>());
         expect(themeButtonsChildren[1], isA<EzSpacer>());
-        expect(themeButtonsChildren[2], isA<Flexible>());
+        expect(themeButtonsChildren[2], isA<Text>());
       } else {
-        expect(themeButtonsChildren[0], isA<Flexible>());
+        expect(themeButtonsChildren[0], isA<Text>());
         expect(themeButtonsChildren[1], isA<EzSpacer>());
         expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
       }

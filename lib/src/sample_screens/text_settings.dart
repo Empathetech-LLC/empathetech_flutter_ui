@@ -728,12 +728,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Flexible(
-              child: Text(
-                l10n.gEditing,
-                style: labelProvider.value,
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              l10n.gEditing,
+              style: labelProvider.value,
+              textAlign: TextAlign.center,
             ),
             spacer,
             DropdownMenu<TextSettingType>(
