@@ -14,6 +14,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// ToDo: Verify expected color values
+
 void testSuite({
   Locale locale = english,
   bool isLefty = false,
@@ -163,7 +165,7 @@ Future<void> testCS(
   required bool textColor,
   required bool isLefty,
 }) async {
-  debugPrint('Testing $text update');
+  debugPrint('\nTesting $text update');
   await touchAtText(tester, text);
 
   if (textColor) {
@@ -222,5 +224,66 @@ Future<void> testCS(
   await chaChaNow(tester, find.byType(Slider));
   await touchAtText(tester, l10n.gApply);
 
-  debugPrint('Testing $text reset');
+  debugPrint('\nTesting $text reset');
+  await holdAtText(tester, text);
+
+  debugPrint('Validating text/layout');
+
+  if (!defaultColor) {
+    await validateText(tester, l10n.gOptions);
+    await touchAtText(tester, l10n.gReset);
+  }
+
+  await validateText(tester, l10n.csResetTo);
+
+  if (isCupertino) {
+    final List<CupertinoDialogAction> actions =
+        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
+            .cupertinoActions!;
+
+    expect(actions.length, 2);
+    if (isLefty) {
+      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+    } else {
+      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+    }
+  } else {
+    final List<TextButton> actions =
+        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
+            .materialActions! as List<TextButton>;
+
+    expect(actions.length, 2);
+    if (isLefty) {
+      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+    } else {
+      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+    }
+  }
+
+  debugPrint('Test No');
+  await touchAtText(tester, l10n.gNo);
+
+  debugPrint('Test Yes');
+  await holdAtText(tester, text);
+
+  if (!defaultColor) {
+    await validateText(tester, l10n.gOptions);
+    await touchAtText(tester, l10n.gReset);
+  }
+
+  await touchAtText(tester, l10n.gYes);
+
+  if (!defaultColor) {
+    debugPrint('\nTesting remove');
+
+    await holdAtText(tester, text);
+    await touchAtText(tester, l10n.gClose);
+    await holdAtText(tester, text);
+    await touchAtText(tester, l10n.csRemove);
+    expect(find.text(text), findsNothing);
+  }
 }
