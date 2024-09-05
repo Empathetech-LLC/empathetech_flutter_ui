@@ -237,13 +237,17 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return EzScrollView(
+      scrollDirection: Axis.horizontal,
       mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        const EzMonoChromeColorsSetting(),
-        spacer,
-        fromImageButton
-      ],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const EzMonoChromeColorsSetting(),
+          spacer,
+          fromImageButton
+        ],
+      ),
     );
   }
 }
@@ -418,9 +422,13 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               children: dynamicColorSettings(),
             ),
           ),
-          small: Column(
+          small: EzScrollView(
+            scrollDirection: Axis.horizontal,
             mainAxisSize: MainAxisSize.min,
-            children: dynamicColorSettings(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: dynamicColorSettings(),
+            ),
           ),
         ),
         spacer,
