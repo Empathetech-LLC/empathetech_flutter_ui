@@ -57,7 +57,9 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
       ),
-      child: EzRow(
+      child: EzScrollView(
+        scrollDirection: Axis.horizontal,
+        reverseHands: true,
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
