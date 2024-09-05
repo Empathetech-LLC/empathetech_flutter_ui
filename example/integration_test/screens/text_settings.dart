@@ -212,10 +212,13 @@ Future<void> testAdvancedOptions(
   );
 
   debugPrint('Bold');
+  await touchBold(tester);
 
   debugPrint('Italics');
+  await touchItalics(tester);
 
   debugPrint('Underline');
+  await touchUnderline(tester);
 
   debugPrint('Letter spacing');
   await tester.enterText(find.byType(TextFormField).at(1), '1.0');
@@ -225,4 +228,37 @@ Future<void> testAdvancedOptions(
 
   debugPrint('Line height');
   await tester.enterText(find.byType(TextFormField).at(3), '1.0');
+}
+
+Future<void> touchBold(WidgetTester tester) async {
+  try {
+    await touchAt(tester, find.byIcon(Icons.format_bold));
+  } catch (_) {
+    await touchAt(tester, find.byIcon(Icons.format_bold_outlined));
+    await touchAt(tester, find.byIcon(Icons.format_bold));
+    return;
+  }
+  await touchAt(tester, find.byIcon(Icons.format_bold_outlined));
+}
+
+Future<void> touchItalics(WidgetTester tester) async {
+  try {
+    await touchAt(tester, find.byIcon(Icons.format_italic));
+  } catch (_) {
+    await touchAt(tester, find.byIcon(Icons.format_italic_outlined));
+    await touchAt(tester, find.byIcon(Icons.format_italic));
+    return;
+  }
+  await touchAt(tester, find.byIcon(Icons.format_italic_outlined));
+}
+
+Future<void> touchUnderline(WidgetTester tester) async {
+  try {
+    await touchAt(tester, find.byIcon(Icons.format_underline));
+  } catch (_) {
+    await touchAt(tester, find.byIcon(Icons.format_underline_outlined));
+    await touchAt(tester, find.byIcon(Icons.format_underline));
+    return;
+  }
+  await touchAt(tester, find.byIcon(Icons.format_underline_outlined));
 }
