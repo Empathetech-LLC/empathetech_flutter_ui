@@ -11,4 +11,5 @@ export 'utils.dart';
 // Widget tests //
 
 export 'widget_tests/image_setting.dart';
+export 'widget_tests/network_image.dart';
 export 'widget_tests/reset_button.dart';
