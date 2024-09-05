@@ -12,6 +12,7 @@
   "gClose": "Close",
 
   "gBYO": "Build your own",
+  "gEFUISourceHint": "Open the GitHub page for EFUI",
   "gGiveFeedback": "Give feedback",
   "gClipboard": "{thing} copied to clipboard",
   "gSupportEmail": "Support Email",

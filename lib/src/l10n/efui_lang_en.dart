@@ -31,6 +31,9 @@ class EFUILangEn extends EFUILang {
   String get gBYO => 'Build your own';
 
   @override
+  String get gEFUISourceHint => 'Open the GitHub page for EFUI';
+
+  @override
   String get gGiveFeedback => 'Give feedback';
 
   @override

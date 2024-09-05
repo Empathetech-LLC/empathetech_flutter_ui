@@ -31,6 +31,9 @@ class EFUILangFr extends EFUILang {
   String get gBYO => 'Construisez la vôtre';
 
   @override
+  String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
+
+  @override
   String get gGiveFeedback => 'Partager des commentaires';
 
   @override
