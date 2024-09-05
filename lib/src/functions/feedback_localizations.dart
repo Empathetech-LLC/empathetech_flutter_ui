@@ -31,7 +31,22 @@ class EmpathetechEsFeedbackLocalizations extends FeedbackLocalizations {
   String get navigate => 'Interactuar';
 
   @override
-  String get submitButtonText => 'Enviar comentarios';
+  String get submitButtonText => 'Entregar';
+}
+
+class EmpathetechFrFeedbackLocalizations extends FeedbackLocalizations {
+  @override
+  String get draw => 'Dessiner';
+
+  @override
+  String get feedbackDescriptionText =>
+      "Qu'est-ce qui préoccupe votre esprit ?";
+
+  @override
+  String get navigate => 'Interagir';
+
+  @override
+  String get submitButtonText => 'Soumettre';
 }
 
 class EmpathetechFeedbackLocalizationsDelegate
@@ -41,5 +56,6 @@ class EmpathetechFeedbackLocalizationsDelegate
       <Locale, FeedbackLocalizations>{
         const Locale('en'): EmpathetechEnFeedbackLocalizations(),
         const Locale('es'): EmpathetechEsFeedbackLocalizations(),
+        const Locale('fr'): EmpathetechFrFeedbackLocalizations(),
       };
 }
