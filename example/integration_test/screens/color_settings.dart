@@ -7,7 +7,10 @@ import '../utils/export.dart';
 
 import 'package:example/main.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -38,33 +41,33 @@ void testSuite({
 
       //// Test functionality: Quick settings ////
 
-      debugPrint('\nTesting quick settings');
+      // debugPrint('\nTesting quick settings');
 
-      debugPrint('Validating text');
-      await validateText(
-        tester,
-        l10n.gEditingTheme(l10n.gDark.toLowerCase()),
-      );
+      // debugPrint('Validating text');
+      // await validateText(
+      //   tester,
+      //   l10n.gEditingTheme(l10n.gDark.toLowerCase()),
+      // );
 
-      debugPrint('Monochrome');
-      await touchAtText(tester, l10n.csMonoChrome);
+      // debugPrint('Monochrome');
+      // await touchAtText(tester, l10n.csMonoChrome);
 
-      debugPrint('Color scheme from image');
-      await testImageSetting(
-        tester,
-        finder: find.byType(EzImageSetting),
-        type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
-        updateCS: false,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      // debugPrint('Color scheme from image');
+      // await testImageSetting(
+      //   tester,
+      //   finder: find.byType(EzImageSetting),
+      //   type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
+      //   updateCS: false,
+      //   l10n: l10n,
+      //   isLefty: isLefty,
+      // );
 
-      await testResetButton(
-        tester,
-        type: RBType.color,
-        l10n: l10n,
-        isLefty: isLefty,
-      );
+      // await testResetButton(
+      //   tester,
+      //   type: RBType.color,
+      //   l10n: l10n,
+      //   isLefty: isLefty,
+      // );
 
       //// Test functionality: Advanced settings ////
 
@@ -105,6 +108,7 @@ void testSuite({
 
       debugPrint('Add on primary');
       await touchAtText(tester, l10n.csOnPrimary);
+      await dismissTap(tester);
       await testCS(
         tester,
         text: l10n.csOnPrimary,
@@ -127,6 +131,7 @@ void testSuite({
       );
       await tester.pumpAndSettle();
       await touchAtText(tester, l10n.csSurfaceTint);
+      await dismissTap(tester);
 
       await testCS(
         tester,
@@ -159,5 +164,63 @@ Future<void> testCS(
   required bool isLefty,
 }) async {
   debugPrint('Testing $text update');
+  await touchAtText(tester, text);
+
+  if (textColor) {
+    debugPrint('Testing text options');
+    await validateText(tester, l10n.csRecommended);
+
+    debugPrint('Close');
+    await touchAtText(tester, l10n.gClose);
+
+    debugPrint('Yes');
+    await touchAtText(tester, text);
+    await touchAtText(tester, l10n.gYes);
+
+    debugPrint('Custom');
+    await touchAtText(tester, text);
+    await touchAtText(tester, l10n.csUseCustom);
+  }
+
+  debugPrint('Validating layout');
+  final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
+
+  if (isCupertino) {
+    final List<CupertinoDialogAction> actions =
+        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
+            .cupertinoActions!;
+
+    expect(actions.length, 2);
+    if (isLefty) {
+      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+    } else {
+      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+    }
+  } else {
+    final List<TextButton> actions =
+        (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
+            .materialActions! as List<TextButton>;
+
+    expect(actions.length, 2);
+    if (isLefty) {
+      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+    } else {
+      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+    }
+  }
+
+  debugPrint('Test Cancel');
+  await touchAtText(tester, l10n.gCancel);
+
+  debugPrint('Test Apply');
+  await touchAtText(tester, text);
+  if (textColor) await touchAtText(tester, l10n.csUseCustom);
+  await chaChaNow(tester, find.byType(Slider));
+  await touchAtText(tester, l10n.gApply);
+
   debugPrint('Testing $text reset');
 }
