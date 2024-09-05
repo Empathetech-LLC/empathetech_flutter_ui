@@ -20,13 +20,15 @@ class BYOButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String text = l10n.gBYO;
     return MenuItemButton(
       onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
       leadingIcon: Icon(
         LineIcons.github,
         size: Theme.of(context).textTheme.titleLarge?.fontSize,
       ),
-      child: Text(l10n.gBYO),
+      semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
+      child: Text(text),
     );
   }
 }
