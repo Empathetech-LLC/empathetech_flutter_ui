@@ -260,7 +260,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         spacer,
         EzRow(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Check box
             Checkbox(

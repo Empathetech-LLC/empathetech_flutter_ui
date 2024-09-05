@@ -760,7 +760,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             swapSpacer,
 
             // Font weight, style, and decoration
-            Row(
+            EzScrollView(
+              scrollDirection: Axis.horizontal,
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -775,7 +776,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             // Letter, word, and line spacing
             if (widget.showSpacing) ...<Widget>{
               swapSpacer,
-              Row(
+              EzScrollView(
+                scrollDirection: Axis.horizontal,
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

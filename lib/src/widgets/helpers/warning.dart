@@ -63,13 +63,11 @@ class EzWarning extends StatelessWidget {
             padding: EdgeInsets.all(EzConfig.get(marginKey)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Title
                 EzScrollView(
                   scrollDirection: Axis.horizontal,
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     // Thing1
                     Icon(

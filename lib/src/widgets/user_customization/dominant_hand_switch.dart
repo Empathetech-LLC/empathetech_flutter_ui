@@ -61,7 +61,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         scrollDirection: Axis.horizontal,
         reverseHands: true,
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Label
           Text(
