@@ -1,5 +1,5 @@
 display_name: Open UI
-icon: assets/images/settings-sandbox-round.png
+icon: linux/assets/settings-sandbox.png
 summary: Checkout Open UI, a sandbox app where every aspect of the UI can be controlled by you.
 group: Applications/Development Tools
 vendor: Empathetech LLC
