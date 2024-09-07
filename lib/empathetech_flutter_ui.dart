@@ -32,7 +32,6 @@ export 'src/functions/theme_data.dart';
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
 export 'src/functions/testing/widgets/image_setting.dart';
-export 'src/functions/testing/widgets/network_image.dart';
 export 'src/functions/testing/widgets/reset_button.dart';
 
 // l10n //
