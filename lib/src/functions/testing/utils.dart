@@ -5,7 +5,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// For integration tests
 /// Wait for a desired number of [seconds]
@@ -98,9 +97,9 @@ Future<void> chaChaNow(
 }
 
 /// For integration tests
-/// Find and touch the button whose [Tooltip] is [l10n.gBack]
-Future<void> goBack(WidgetTester tester, EFUILang l10n) async {
-  final Finder backButton = find.byTooltip(l10n.gBack);
+/// Find and touch the button whose [Tooltip] is [back]
+Future<void> goBack(WidgetTester tester, String back) async {
+  final Finder backButton = find.byTooltip(back);
 
   await tester.ensureVisible(backButton);
   await tester.tap(backButton);
