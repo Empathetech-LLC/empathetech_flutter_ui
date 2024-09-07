@@ -1,5 +1,7 @@
 import 'efui_lang.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Spanish Castilian (`es`).
 class EFUILangEs extends EFUILang {
   EFUILangEs([String locale = 'es']) : super(locale);
@@ -26,6 +28,23 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String get gBYO => 'Construye uno';
+
+  @override
+  String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
+
+  @override
+  String get gGiveFeedback => 'Dar feedback';
+
+  @override
+  String gClipboard(Object thing) {
+    return '$thing copiado al portapapeles';
+  }
+
+  @override
+  String get gSupportEmail => 'Email de soporte';
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override
@@ -38,10 +57,13 @@ class EFUILangEs extends EFUILang {
   String get gSystem => 'Sistema';
 
   @override
-  String get gLight => 'Ligero';
+  String get gLight => 'Claro';
 
   @override
   String get gDark => 'Oscuro';
+
+  @override
+  String get gEditing => 'Editando: ';
 
   @override
   String gEditingTheme(Object themeType) {
@@ -49,10 +71,16 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get gHowThisWorks => 'Cómo funciona esto';
+  String get gQuick => 'Rápido';
 
   @override
-  String get gHowThisWorksHint => 'Activar para abrir documentación útil';
+  String get gAdvanced => 'Avanzado';
+
+  @override
+  String get gHowThisWorks => 'Cómo funciona';
+
+  @override
+  String get gHowThisWorksHint => 'Abrir documentación útil';
 
   @override
   String get gAttention => 'Atención';
@@ -62,12 +90,7 @@ class EFUILangEs extends EFUILang {
 
   @override
   String gSetToValue(Object name, Object value) {
-    return '$name está establecido en $value';
-  }
-
-  @override
-  String gDefaultEntry(Object entry) {
-    return '$entry* (por defecto)';
+    return '$name está configurado a $value';
   }
 
   @override
@@ -85,24 +108,24 @@ class EFUILangEs extends EFUILang {
   String get gResetWarn => 'No se puede deshacer';
 
   @override
-  String get gCreditTo => 'Crédito a:';
+  String get gCreditTo => 'Acreditando a:';
 
   @override
-  String get ssPageTitle => 'Configuraciones';
+  String get ssPageTitle => 'Configuración';
 
   @override
   String get ssSettingsGuide =>
-      'Reinicia la aplicación para guardar tus cambios.\n\n¡Diviértete!';
+      'Reinicia la app para aplicar los cambios.\n\n¡Diviértete!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Recarga la página para guardar tus cambios.\n\n¡Diviértete!';
+      'Recarga la página para aplicar tus cambios.\n\n¡Diviértete!';
 
   @override
-  String get ssThemeMode => 'Modo de tema';
+  String get ssThemeMode => 'Modo del tema';
 
   @override
-  String get ssDominantHand => 'Mano dominante';
+  String get ssDominantHand => 'Mano preferente';
 
   @override
   String get ssLanguage => 'Idioma';
@@ -111,19 +134,21 @@ class EFUILangEs extends EFUILang {
   String get ssLanguages => 'Idiomas';
 
   @override
-  String get ssLangSemantics => 'Idioma de la aplicación';
+  String get ssLangHint => 'Idioma de la aplicación';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
 
   @override
-  String get tsPageTitle => 'Configuraciones de texto';
+  String get tsPageTitle => 'Configuración del texto';
 
   @override
-  String get tsEditing => 'Editando: ';
+  String tsBatchOverride(Object setting) {
+    return 'Ya has realizado cambios de \"$setting\" granulares en la configuración avanzada.\n\n¿Seguro que quieres anular esos cambios con una actualización por lotes?';
+  }
 
   @override
-  String get tsDisplay => 'Presentar';
+  String get tsDisplay => 'Despliegue';
 
   @override
   String get tsHeadline => 'Encabezado';
@@ -143,7 +168,7 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get tsFontFamily => 'Familia de fuentes';
+  String get tsFontFamily => 'Familia de fuente';
 
   @override
   String get tsFontSize => 'Tamaño de fuente';
@@ -152,37 +177,43 @@ class EFUILangEs extends EFUILang {
   String get tsBold => 'Negrita';
 
   @override
-  String get tsItalic => 'Itálica';
+  String get tsItalic => 'Cursiva';
 
   @override
-  String get tsUnderline => 'Subrayar';
+  String get tsUnderline => 'Subrayado';
 
   @override
-  String get tsLetterSpacing => 'Espaciado de letras';
+  String get tsLetterSpacing => 'Espaciado entre letras';
 
   @override
-  String get tsWordSpacing => 'Espaciado de palabras';
+  String get tsWordSpacing => 'Espaciado entre palabras';
 
   @override
   String get tsLineHeight => 'Altura de línea';
 
   @override
-  String get tsDisplayP1 => '¿Esto se ';
+  String get tsDecrease => 'Disminuir';
 
   @override
-  String get tsDisplayLink => 'presenta';
+  String get tsIncrease => 'Aumentar';
 
   @override
-  String get tsDisplayP2 => ' bien?';
+  String get tsDisplayP1 => '¿Se ';
 
   @override
-  String get tsHeadlineP1 => 'Son los ';
+  String get tsDisplayLink => 'despliegue';
+
+  @override
+  String get tsDisplayP2 => ' bien esto?';
+
+  @override
+  String get tsHeadlineP1 => '¿Se diferencian los ';
 
   @override
   String get tsHeadlineLink => 'encabezados';
 
   @override
-  String get tsHeadlineP2 => ' distintos...';
+  String get tsHeadlineP2 => '...';
 
   @override
   String get tsTitleP1 => 'de los ';
@@ -191,13 +222,13 @@ class EFUILangEs extends EFUILang {
   String get tsTitleLink => 'títulos?';
 
   @override
-  String get tsBodyP1 => '¿Qué tal ';
+  String get tsBodyP1 => '¿Y ';
 
   @override
   String get tsBodyLink => 'el cuerpo?';
 
   @override
-  String get tsBodyP2 => ' ¿Es fácil de leer?';
+  String get tsBodyP2 => ' ¿Se puede leer bien?';
 
   @override
   String get tsLabelP1 => '¿Y ';
@@ -206,129 +237,183 @@ class EFUILangEs extends EFUILang {
   String get tsLabelLink => 'las etiquetas?';
 
   @override
-  String get tsLabelP2 => ' ¿No demasiado grande ni demasiado pequeño?';
+  String get tsLabelP2 => ' ¿No muy grandes, no muy pequeñas?';
 
   @override
-  String get tsResetAll => '¿Restablecer todas las configuraciones de texto?';
+  String get tsResetAll => '¿Restablecer la configuración del texto?';
 
   @override
-  String get lsPageTitle => 'Configuraciones de diseño';
+  String get lsPageTitle => 'Configuración del esquema';
 
   @override
   String get lsMargin => 'Margen';
 
   @override
-  String get lsPadding => 'Relleno';
+  String get lsPadding => 'Acolchado';
 
   @override
   String get lsSpacing => 'Espaciado';
 
   @override
-  String get lsResetAll => '¿Restablecer todas las configuraciones de diseño?';
+  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
 
   @override
-  String get csPageTitle => 'Configuraciones de color';
+  String get csPageTitle => 'Configuración de color';
 
   @override
-  String csPickerSemantics(Object name) {
-    return 'Activar para abrir un selector de color para $name. Mantenga presionado para más opciones.';
+  String csPickerHint(Object name) {
+    return 'Abre un selector de color para $name. Mantén pulsado para ver más opciones.';
   }
 
   @override
-  String get csPrimary => 'Primario';
+  String get csMonoChrome => 'Usar esquema monocromático';
 
   @override
-  String get csOnPrimary => 'En Primario';
+  String get csHighContrast => 'Usar esquema de alto contraste';
 
   @override
-  String get csPrimaryContainer => 'Contenedor Primario';
+  String get csPrimary => 'Primary';
 
   @override
-  String get csOnPrimaryContainer => 'En Contenedor Primario';
+  String get csOnPrimary => 'On primary';
 
   @override
-  String get csSecondary => 'Secundario';
+  String get csPrimaryContainer => 'Primary container';
 
   @override
-  String get csOnSecondary => 'En Secundario';
+  String get csOnPrimaryContainer => 'On primary container';
 
   @override
-  String get csSecondaryContainer => 'Contenedor Secundario';
+  String get csPrimaryFixed => 'Primary fixed';
 
   @override
-  String get csOnSecondaryContainer => 'En Contenedor Secundario';
+  String get csPrimaryFixedDim => 'Primary fixed dim';
 
   @override
-  String get csTertiary => 'Terciario';
+  String get csOnPrimaryFixed => 'On primary fixed';
 
   @override
-  String get csOnTertiary => 'En Terciario';
+  String get csOnPrimaryFixedVariant => 'On primary fixed variant';
 
   @override
-  String get csTertiaryContainer => 'Contenedor Terciario';
+  String get csSecondary => 'Secondary';
 
   @override
-  String get csOnTertiaryContainer => 'En Contenedor Terciario';
+  String get csOnSecondary => 'On secondary';
+
+  @override
+  String get csSecondaryContainer => 'Secondary container';
+
+  @override
+  String get csOnSecondaryContainer => 'On secondary container';
+
+  @override
+  String get csSecondaryFixed => 'Secondary fixed';
+
+  @override
+  String get csSecondaryFixedDim => 'Secondary fixed dim';
+
+  @override
+  String get csOnSecondaryFixed => 'On secondary fixed';
+
+  @override
+  String get csOnSecondaryFixedVariant => 'On secondary fixed variant';
+
+  @override
+  String get csTertiary => 'Tertiary';
+
+  @override
+  String get csOnTertiary => 'On tertiary';
+
+  @override
+  String get csTertiaryContainer => 'Tertiary container';
+
+  @override
+  String get csOnTertiaryContainer => 'On tertiary container';
+
+  @override
+  String get csTertiaryFixed => 'Tertiary fixed';
+
+  @override
+  String get csTertiaryFixedDim => 'Tertiary fixed dim';
+
+  @override
+  String get csOnTertiaryFixed => 'On tertiary fixed';
+
+  @override
+  String get csOnTertiaryFixedVariant => 'On tertiary fixed variant';
 
   @override
   String get csError => 'Error';
 
   @override
-  String get csOnError => 'En Error';
+  String get csOnError => 'On error';
 
   @override
-  String get csErrorContainer => 'Contenedor de Error';
+  String get csErrorContainer => 'Error container';
 
   @override
-  String get csOnErrorContainer => 'En Contenedor de Error';
+  String get csOnErrorContainer => 'On error container';
 
   @override
-  String get csOutline => 'Contorno';
+  String get csOutline => 'Outline';
 
   @override
-  String get csOutlineVariant => 'Variante de Contorno';
+  String get csOutlineVariant => 'Outline variant';
 
   @override
-  String get csBackground => 'Fondo';
+  String get csSurface => 'Surface';
 
   @override
-  String get csOnBackground => 'En Fondo';
+  String get csOnSurface => 'On surface';
 
   @override
-  String get csSurface => 'Superficie';
+  String get csSurfaceDim => 'Surface dim';
 
   @override
-  String get csOnSurface => 'En Superficie';
+  String get csSurfaceBright => 'Surface bright';
 
   @override
-  String get csSurfaceVariant => 'Variante de Superficie';
+  String get csSurfaceContainerLowest => 'Surface container lowest';
 
   @override
-  String get csOnSurfaceVariant => 'En Variante de Superficie';
+  String get csSurfaceContainerLow => 'Surface container low';
 
   @override
-  String get csInverseSurface => 'Superficie Inversa';
+  String get csSurfaceContainer => 'Surface container';
 
   @override
-  String get csOnInverseSurface => 'En Superficie Inversa';
+  String get csSurfaceContainerHigh => 'Surface container high';
 
   @override
-  String get csInversePrimary => 'Primario Inversa';
+  String get csSurfaceContainerHighest => 'Surface container highest';
 
   @override
-  String get csScrim => 'Telón';
+  String get csOnSurfaceVariant => 'On surface variant';
 
   @override
-  String get csShadow => 'Sombra';
+  String get csInverseSurface => 'Inverse surface';
 
   @override
-  String get csSurfaceTint => 'Tinte de Superficie';
+  String get csOnInverseSurface => 'On inverse surface';
 
   @override
-  String get csPickerTitle => '¡Selecciona un color!';
+  String get csInversePrimary => 'Inverse primary';
 
   @override
-  String get csRecommended => '¿Usar recomendación de contraste?';
+  String get csScrim => 'Scrim';
+
+  @override
+  String get csShadow => 'Shadow';
+
+  @override
+  String get csSurfaceTint => 'Surface tint';
+
+  @override
+  String get csPickerTitle => 'Selecciona un color';
+
+  @override
+  String get csRecommended => '¿Usar contraste recomendado?';
 
   @override
   String get csUseCustom => 'Usar personalizado';
@@ -337,7 +422,7 @@ class EFUILangEs extends EFUILang {
   String get csAddColor => 'Añadir un color';
 
   @override
-  String get csRemove => 'Eliminar';
+  String get csRemove => 'Quitar';
 
   @override
   String get csReset => 'Restablecer';
@@ -346,25 +431,24 @@ class EFUILangEs extends EFUILang {
   String get csResetTo => 'Restablecer a...';
 
   @override
-  String get csSchemeBase => 'Construir a partir\nde imagen';
+  String get csSchemeBase => 'Crear tema\nusando imagen';
 
   @override
   String get csOptional => 'opcional';
 
   @override
-  String get csFromImage =>
-      'Construye la esquema de colores a partir de una imagen';
+  String get csFromImage => 'Diseña un esquema de color a partir de una imagen';
 
   @override
-  String get csColorScheme => 'esquema de colores';
+  String get csColorScheme => 'esquema de color';
 
   @override
   String csResetAll(Object themeType) {
-    return '¿Restablecer todos los colores del tema $themeType?';
+    return 'Restablecer todos los esquemas de colores de $themeType?';
   }
 
   @override
-  String get isPageTitle => 'Configuraciones de imagen';
+  String get isPageTitle => 'Configuración de imagen';
 
   @override
   String get isBackground => 'Fondo';
@@ -374,43 +458,47 @@ class EFUILangEs extends EFUILang {
 
   @override
   String isButtonHint(Object title) {
-    return 'Actualizar la imagen de $title';
+    return 'Actualizar la imagen $title';
   }
 
   @override
   String isDialogTitle(Object title) {
-    return '¿Cómo se debe actualizar la imagen de $title?';
+    return '¿Cómo quieres actualizar la imagen $title?';
   }
 
   @override
-  String get isFromFile => 'Desde archivo';
+  String get isFromFile => 'Usando un archivo';
 
   @override
-  String get isFromCamera => 'Desde cámara';
+  String get isFromCamera => 'Usando la cámara';
 
   @override
-  String get isFromNetwork => 'Desde URL';
+  String get isFromNetwork => 'Usando un link';
 
   @override
-  String get isResetIt => 'Restablecerlo';
+  String get isResetIt => 'Restablecer';
 
   @override
-  String get isClearIt => 'Limpiarlo';
+  String get isClearIt => 'Borrar';
 
   @override
-  String get isEnterURL => 'Ingrese URL';
+  String get isEnterURL => 'Inserta el link';
 
   @override
-  String get isGetFailed => 'Error al recuperar la imagen';
+  String get isGetFailed => 'Error al intentar obtener la imagen';
 
   @override
   String isSetFailed(Object error) {
-    return 'Error al actualizar la imagen:\n$error';
+    return 'Error al intentar actualizar la imagen:\n$error';
   }
 
   @override
+  String get isPermission =>
+      'Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.';
+
+  @override
   String get isUseForColors =>
-      'Actualizar los colores de la aplicación usando esta imagen';
+      'Actualiza los colores de la app usando esta imagen';
 
   @override
   String isResetAll(Object themeType) {

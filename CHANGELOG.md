@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.0] - 2024-09-06
+### Updated
+- Honestly, pretty much everything
+  - Will get back to good CHANGELOG-ing next release
+    - And smaller releases
+  - Code comments are aplenty, any breaking changes should be easy to track down
+
 ## [6.0.0] - 2024-03-23
 ### Updated
 - Jenkins pipeline to use external libraries

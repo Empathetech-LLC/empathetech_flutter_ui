@@ -1,0 +1,28 @@
+display_name: Open UI
+package_name: open-ui
+
+maintainer:
+  name: Empathetech LLC
+  email: support@empathetech.net
+
+priority: optional
+
+section: x11
+
+installed_size: 51200
+
+essential: false
+
+icon: linux/assets/settings-sandbox.png
+
+keywords:
+  - Open Source
+  - Design
+  - Accessibility
+
+generic_name: Open UI
+
+categories:
+  - Development
+
+startup_notify: true

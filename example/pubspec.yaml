@@ -1,37 +1,80 @@
 name: example
-description: "An example app to show off EFUI. It is a screen reader compliant and internationalized (currently: English and Spanish) user customization sandbox."
+description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
+version: 1.2.0+4
 publish_to: 'none'
 
-version: 1.0.0+1
-
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  intl: ^0.18.1
-
-  empathetech_flutter_ui:
-   path: ../
 
   # Flutter (Google)
-  go_router: ^13.0.0
+  go_router: ^14.0.1
   shared_preferences: ^2.2.1
+  url_launcher: ^6.1.14
 
   # Community
+  feedback: ^3.0.1
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^6.0.2
-  provider: ^6.1.2
+  flutter_platform_widgets: ^7.0.0
+  line_icons: ^2.0.3
+
+  # Empathetech
+  empathetech_flutter_ui:
+    path: ../
 
 dev_dependencies:
-  flutter_lints: ^3.0.1
-  
+  dependency_validator: ^4.1.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^4.0.0
+  flutter_native_splash: ^2.3.2
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
 flutter:
   generate: true # For l10n
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/fonts/
+    - assets/fonts/Roboto-Black.ttf
+    - assets/fonts/Roboto-BlackItalic.ttf
+    - assets/fonts/Roboto-Bold.ttf
+    - assets/fonts/Roboto-BoldItalic.ttf
+    - assets/fonts/Roboto-Italic.ttf
+    - assets/fonts/Roboto-Light.ttf
+    - assets/fonts/Roboto-LightItalic.ttf
+    - assets/fonts/Roboto-Medium.ttf
+    - assets/fonts/Roboto-MediumItalic.ttf
+    - assets/fonts/Roboto-Regular.ttf
+    - assets/fonts/Roboto-Thin.ttf
+    - assets/fonts/Roboto-ThinItalic.ttf
+    - assets/images/
+    - assets/images/settings-sandbox.jpg
+    - assets/images/settings-sandbox-round.png
+
+flutter_launcher_icons:
+  image_path: assets/images/settings-sandbox.jpg
+  adaptive_icon_foreground: assets/images/settings-sandbox-round.png
+  adaptive_icon_background: "#F5F5F5"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  web:
+    generate: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+
+flutter_native_splash:
+  color: "#F5F5F5"
+  image: assets/images/settings-sandbox.jpg
+  android: true
+  ios: true
+  web: true

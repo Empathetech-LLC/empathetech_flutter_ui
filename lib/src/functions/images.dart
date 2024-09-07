@@ -22,8 +22,8 @@ ImageProvider provideImage(String path) {
   }
 }
 
-/// Overwrite the [Image] stored in [prefsPath] from [source]
-Future<String?> changeImage({
+/// Save (and/or overwrite) the [Image] stored in [prefsPath] from [source]
+Future<String?> saveImage({
   required BuildContext context,
   required String prefsPath,
   required ImageSource source,
@@ -31,13 +31,7 @@ Future<String?> changeImage({
   // Load image picker and save the result
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
-    if (picked == null) {
-      logAlert(
-        context: context,
-        message: EFUILang.of(context)!.isGetFailed,
-      );
-      return null;
-    }
+    if (picked == null) return null;
 
     // Build the path
     final Directory directory = await getApplicationDocumentsDirectory();
@@ -45,12 +39,12 @@ Future<String?> changeImage({
     final File image = File('${directory.path}/$imageName');
 
     // Save the new image
-    File(picked.path).copy(image.path);
-    EzConfig.setString(prefsPath, image.path);
+    await File(picked.path).copy(image.path);
+    await EzConfig.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
     final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-    logAlert(context: context, message: errorMsg);
+    await logAlert(context: context, message: errorMsg);
     return null;
   }
 }

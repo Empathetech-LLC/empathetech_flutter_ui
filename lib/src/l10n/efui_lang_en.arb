@@ -11,6 +11,12 @@
   "gCancel": "Cancel",
   "gClose": "Close",
 
+  "gBYO": "Build your own",
+  "gEFUISourceHint": "Open the GitHub page for EFUI",
+  "gGiveFeedback": "Give feedback",
+  "gClipboard": "{thing} copied to clipboard",
+  "gSupportEmail": "Support Email",
+
   "gLeft": "Left",
   "gRight": "Right",
   "gBack": "Back",
@@ -18,15 +24,18 @@
   "gSystem": "System",
   "gLight": "Light",
   "gDark": "Dark",
-
+  "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
+
+  "gQuick": "Quick",
+  "gAdvanced": "Advanced",
+
   "gHowThisWorks": "How this works",
-  "gHowThisWorksHint": "Activate to open helpful documentation",
+  "gHowThisWorksHint": "Open helpful documentation",
 
   "gAttention": "Attention",
   "gCurrently": "Currently:",
-  "gSetToValue": "{name} is currently set to {value}",
-  "gDefaultEntry": "{entry}* (default)",
+  "gSetToValue": "{name} is set to {value}",
   "gReset": "Reset:",
   "gResetToValue": "Reset {name} to {value}",
   "gResetAll": "Reset all",
@@ -37,15 +46,15 @@
 
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Restart the app to save your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload the page to save your changes.\n\nHave fun!",
+  "ssSettingsGuide": "Restart the app to apply your changes.\n\nHave fun!",
+  "ssSettingsGuideWeb": "Reload the page to apply your changes.\n\nHave fun!",
 
   "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",
   
   "ssLanguage": "Language",
   "ssLanguages": "Languages",
-  "ssLangSemantics": "App language",
+  "ssLangHint": "App language",
 
   "ssResetAll": "Reset all settings?",
 
@@ -53,7 +62,7 @@
 
   "tsPageTitle": "Text settings",
 
-  "tsEditing": "Editing: ",
+  "tsBatchOverride": "You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?",
 
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
@@ -71,6 +80,8 @@
   "tsLetterSpacing": "Letter spacing",
   "tsWordSpacing": "Word spacing",
   "tsLineHeight": "Line height",
+  "tsDecrease": "Decrease",
+  "tsIncrease": "Increase",
 
   "tsDisplayP1": "Does this ",
   "tsDisplayLink": "display",
@@ -103,40 +114,59 @@
   
   "csPageTitle": "Color settings",
 
-  "csPickerSemantics": "Activate to open a color picker for {name}. Long press for more options.",
+  "csPickerHint": "Open a color picker for {name}. Long press for more options.",
+
+  "csMonoChrome": "Use monochrome scheme",
+  "csHighContrast": "Use high contrast scheme",
   
   "csPrimary": "Primary",
-  "csOnPrimary": "On Primary",
-  "csPrimaryContainer": "Primary Container",
-  "csOnPrimaryContainer": "On Primary Container",
+  "csOnPrimary": "On primary",
+  "csPrimaryContainer": "Primary container",
+  "csOnPrimaryContainer": "On primary container",
+  "csPrimaryFixed": "Primary fixed",
+  "csPrimaryFixedDim": "Primary fixed dim",
+  "csOnPrimaryFixed": "On primary fixed",
+  "csOnPrimaryFixedVariant": "On primary fixed variant",
   "csSecondary": "Secondary",
-  "csOnSecondary": "On Secondary",
-  "csSecondaryContainer": "Secondary Container",
-  "csOnSecondaryContainer": "On Secondary Container",
+  "csOnSecondary": "On secondary",
+  "csSecondaryContainer": "Secondary container",
+  "csOnSecondaryContainer": "On secondary container",
+  "csSecondaryFixed": "Secondary fixed",
+  "csSecondaryFixedDim": "Secondary fixed dim",
+  "csOnSecondaryFixed": "On secondary fixed",
+  "csOnSecondaryFixedVariant": "On secondary fixed variant",
   "csTertiary": "Tertiary",
-  "csOnTertiary": "On Tertiary",
-  "csTertiaryContainer": "Tertiary Container",
-  "csOnTertiaryContainer": "On Tertiary Container",
+  "csOnTertiary": "On tertiary",
+  "csTertiaryContainer": "Tertiary container",
+  "csOnTertiaryContainer": "On tertiary container",
+  "csTertiaryFixed": "Tertiary fixed",
+  "csTertiaryFixedDim": "Tertiary fixed dim",
+  "csOnTertiaryFixed": "On tertiary fixed",
+  "csOnTertiaryFixedVariant": "On tertiary fixed variant",
   "csError": "Error",
-  "csOnError": "On Error",
-  "csErrorContainer": "Error Container",
-  "csOnErrorContainer": "On Error Container",
+  "csOnError": "On error",
+  "csErrorContainer": "Error container",
+  "csOnErrorContainer": "On error container",
   "csOutline": "Outline",
-  "csOutlineVariant": "Outline Variant",
-  "csBackground": "Background",
-  "csOnBackground": "On Background",
+  "csOutlineVariant": "Outline variant",
   "csSurface": "Surface",
-  "csOnSurface": "On Surface",
-  "csSurfaceVariant": "Surface Variant",
-  "csOnSurfaceVariant": "On Surface Variant",
-  "csInverseSurface": "Inverse Surface",
-  "csOnInverseSurface": "Inverse On Surface",
-  "csInversePrimary": "Inverse Primary",
+  "csOnSurface": "On surface",
+  "csSurfaceDim": "Surface dim",
+  "csSurfaceBright": "Surface bright",
+  "csSurfaceContainerLowest": "Surface container lowest",
+  "csSurfaceContainerLow": "Surface container low",
+  "csSurfaceContainer": "Surface container",
+  "csSurfaceContainerHigh": "Surface container high",
+  "csSurfaceContainerHighest": "Surface container highest",
+  "csOnSurfaceVariant": "On surface variant",
+  "csInverseSurface": "Inverse surface",
+  "csOnInverseSurface": "On inverse surface",
+  "csInversePrimary": "Inverse primary",
   "csScrim": "Scrim",
   "csShadow": "Shadow",
-  "csSurfaceTint": "Surface Tint",
+  "csSurfaceTint": "Surface tint",
 
-  "csPickerTitle": "Pick a color!",
+  "csPickerTitle": "Pick a color",
   "csRecommended": "Use contrast recommendation?",
   "csUseCustom": "Use custom",
 
@@ -145,7 +175,7 @@
   "csReset": "Reset",
   "csResetTo": "Reset to...",
 
-  "csSchemeBase": "Build from\nimage",
+  "csSchemeBase": "Build scheme\nfrom image",
   "csOptional": "optional",
   "csFromImage": "Build the color scheme from an image",
   "csColorScheme": "color scheme",
@@ -170,7 +200,8 @@
   "isEnterURL": "Enter URL",
   "isGetFailed": "Failed to retrieve image",
   "isSetFailed": "Failed to update image:\n{error}",
-  
+  "isPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
+
   "isUseForColors": "Update the app colors using this image",
 
   "isResetAll": "Reset all {themeType} theme images?"

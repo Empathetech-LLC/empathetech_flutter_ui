@@ -15,14 +15,14 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
 
-  final TextTheme textTheme = ezTextTheme();
+  final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
   final IconThemeData iconData = IconThemeData(
-    size: textTheme.bodyLarge!.fontSize,
+    size: textTheme.bodyLarge?.fontSize,
     color: colorScheme.onSurface,
   );
   final IconThemeData appBarIconData = IconThemeData(
-    size: textTheme.headlineLarge!.fontSize,
+    size: textTheme.headlineLarge?.fontSize,
     color: colorScheme.onSurface,
   );
 
@@ -37,6 +37,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
+    primaryColor: colorScheme.primary,
+    scaffoldBackgroundColor: colorScheme.surfaceContainer,
+    dividerColor: colorScheme.secondary,
 
     // Typography //
 
@@ -55,31 +58,30 @@ ThemeData ezThemeData(Brightness brightness) {
     appBarTheme: AppBarTheme(
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
-      titleTextStyle: textTheme.headlineLarge?.copyWith(
-        color: colorScheme.onSurface,
-      ),
+      backgroundColor: colorScheme.surface,
+      foregroundColor: colorScheme.onSurface,
+      titleTextStyle: textTheme.headlineLarge,
       centerTitle: true,
       titleSpacing: 0,
     ),
 
-    // Bottom navigation bar
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      type: BottomNavigationBarType.fixed,
-      selectedIconTheme: appBarIconData,
-      unselectedIconTheme: appBarIconData,
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      modalBackgroundColor: colorScheme.surfaceContainer,
+      dragHandleColor: colorScheme.onSurface,
     ),
 
     // Cards
-    cardTheme: const CardTheme(margin: EdgeInsets.zero),
+    cardTheme: CardTheme(
+      margin: EdgeInsets.zero,
+      color: colorScheme.surface,
+    ),
 
     // Dialogs
     dialogTheme: DialogTheme(
-      titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onBackground,
-      ),
-      contentTextStyle: textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onBackground,
-      ),
+      backgroundColor: colorScheme.surfaceContainer,
+      titleTextStyle: textTheme.titleLarge,
+      contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
         top: (spacing > padding) ? (spacing - padding) : 0.0,
@@ -89,76 +91,85 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
-    // Dropdown menu
-    dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: textTheme.bodyLarge,
+    dividerTheme: DividerThemeData(
+      color: colorScheme.secondary,
+      space: (spacing + padding) * 2,
+      thickness: 0.75,
     ),
+
+    // Dropdown menu
+    dropdownMenuTheme: DropdownMenuThemeData(textStyle: textTheme.bodyLarge),
 
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        foregroundColor: colorScheme.primary,
+        backgroundColor: colorScheme.surface,
         textStyle: textTheme.bodyLarge,
-        alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
+        alignment: Alignment.center,
       ),
     ),
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
-      extendedPadding: EdgeInsets.all(padding),
+      backgroundColor: colorScheme.primary,
       shape: const CircleBorder(),
+      extendedPadding: EdgeInsets.all(padding),
     ),
 
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        iconSize: textTheme.bodyLarge!.fontSize,
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
+        iconSize: textTheme.bodyLarge?.fontSize,
         side: null,
-      ),
-    ),
-
-    // Outlined button
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        textStyle: textTheme.bodyLarge,
+        padding: EdgeInsets.zero,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
-        backgroundColor: colorScheme.background,
       ),
     ),
 
-    // TabBar
-    tabBarTheme: TabBarTheme(
-      labelStyle: textTheme.bodyLarge,
-      unselectedLabelStyle: textTheme.bodyLarge,
+    // Segmented button
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: SegmentedButton.styleFrom(
+        selectedForegroundColor: colorScheme.onPrimary,
+        selectedBackgroundColor: colorScheme.primary,
+        disabledForegroundColor: colorScheme.onSurface,
+        disabledBackgroundColor: colorScheme.surface,
+        textStyle: textTheme.bodyLarge,
+        padding: EdgeInsets.all(padding),
+        alignment: Alignment.center,
+      ),
+    ),
+
+    // Snackbar
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: colorScheme.surface,
+      contentTextStyle: textTheme.bodyLarge,
     ),
 
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: textTheme.bodyLarge,
-        alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        alignment: Alignment.center,
       ),
     ),
 
     // Tooltip
     tooltipTheme: TooltipThemeData(
-      margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-      textStyle: textTheme.bodyLarge,
-      textAlign: TextAlign.center,
+      margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
       ),
+      textStyle: textTheme.bodyLarge,
+      textAlign: TextAlign.center,
       waitDuration: const Duration(milliseconds: 750),
     ),
   );

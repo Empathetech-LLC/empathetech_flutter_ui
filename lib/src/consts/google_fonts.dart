@@ -7,18 +7,37 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
-// Plus some ones I thought were cute
+// Plus some ones we think are cute
 
-const String alexBrush = 'Alex Brush';
-const String atkinsonHyperlegible = 'Atkinson Hyperlegible';
-const String fingerPaint = 'Finger Paint';
+/// 'AlexBrush'
+const String alexBrush = 'AlexBrush';
+
+/// 'AtkinsonHyperlegible'
+const String atkinsonHyperlegible = 'AtkinsonHyperlegible';
+
+/// 'FingerPaint'
+const String fingerPaint = 'FingerPaint';
+
+/// 'Lexend'
 const String lexend = 'Lexend';
-const String noto = 'Noto Sans';
-const String openSans = 'Open Sans';
-const String pressStart2P = 'Press Start 2 Play';
-const String readexPro = 'Readex Pro';
+
+/// 'NotoSans'
+const String noto = 'NotoSans';
+
+/// 'OpenSans'
+const String openSans = 'OpenSans';
+
+/// 'PressStart2P'
+const String pressStart2P = 'PressStart2P';
+
+/// 'ReadexPro'
+const String readexPro = 'ReadexPro';
+
+/// 'Roboto'
 const String roboto = 'Roboto';
-const String sourceCodePro = 'Source Code Pro';
+
+/// 'SourceCodePro'
+const String sourceCodePro = 'SourceCodePro';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
@@ -32,6 +51,20 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   readexPro: GoogleFonts.readexPro(),
   roboto: GoogleFonts.roboto(),
   sourceCodePro: GoogleFonts.sourceCodePro(),
+};
+
+/// Human readable names for the [GoogleFonts] currently supported
+final Map<String, String> googleStyleNames = <String, String>{
+  alexBrush: 'Alex Brush',
+  atkinsonHyperlegible: 'Atkinson Hyperlegible',
+  fingerPaint: 'Finger Paint',
+  lexend: 'Lexend',
+  noto: 'Noto Sans',
+  openSans: 'Open Sans',
+  pressStart2P: 'Press Start 2P',
+  readexPro: 'Readex Pro',
+  roboto: 'Roboto',
+  sourceCodePro: 'Source Code Pro',
 };
 
 /// Pass [starter] to the [gFont]'s [GoogleFonts.textStyle] param

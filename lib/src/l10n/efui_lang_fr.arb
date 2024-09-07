@@ -1,0 +1,208 @@
+{
+  "@@locale": "fr",
+
+
+
+  "gYes": "Oui",
+  "gNo": "Non",
+  "gOptions": "Paramètres",
+  "gApply": "Appliquer",
+  "gContinue": "Continuer",
+  "gCancel": "Annuler",
+  "gClose": "Fermer",
+
+  "gBYO": "Construisez la vôtre",
+  "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
+  "gGiveFeedback": "Partager des commentaires",
+  "gClipboard": "{thing} copié dans le presse-papiers",
+  "gSupportEmail": "E-mail de support",
+
+  "gLeft": "Gauche",
+  "gRight": "Droite",
+  "gBack": "Retour",
+
+  "gSystem": "Système",
+  "gLight": "Clair",
+  "gDark": "Sombre",
+  "gEditing": "Modification : ",
+  "gEditingTheme": "Modification : Thème {themeType}",
+
+  "gQuick": "Rapide",
+  "gAdvanced": "Avancé",
+
+  "gHowThisWorks": "Comment ça marche",
+  "gHowThisWorksHint": "Ouvre la documentation utile",
+
+  "gAttention": "Attention",
+  "gCurrently": "Actuellement :",
+  "gSetToValue": "{name} est défini sur {value}",
+  "gReset": "Réinitialiser :",
+  "gResetToValue": "Réinitialiser {name} à {value}",
+  "gResetAll": "Tout réinitialiser",
+  "gResetWarn": "Ne peut pas être annulé",
+
+  "gCreditTo": "Crédits à :",
+
+
+
+  "ssPageTitle": "Paramètres",
+  "ssSettingsGuide": "Redémarrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuideWeb": "Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+
+  "ssThemeMode": "Mode de thème",
+  "ssDominantHand": "Main dominante",
+
+  "ssLanguage": "Langue",
+  "ssLanguages": "Langues",
+  "ssLangHint": "Langue de l'appli",
+
+  "ssResetAll": "Réinitialiser tous les paramètres ?",
+
+
+
+  "tsPageTitle": "Paramètres de texte",
+
+  "tsBatchOverride": "Vous avez déjà apporté des modifications à \"{setting}\" dans les paramètres avancés.\n\nÊtes-vous sûr de vouloir remplacer ces modifications par une mise à jour de masse ?",
+
+  "tsDisplay": "Affichage",
+  "tsHeadline": "Gros titre",
+  "tsTitle": "Titre",
+  "tsBody": "Corps",
+  "tsLabel": "Label",
+
+  "tsLinkHint": "Activer pour modifier {style}",
+
+  "tsFontFamily": "Police de caractères",
+  "tsFontSize": "Taille de police",
+  "tsBold": "Gras",
+  "tsItalic": "Italique",
+  "tsUnderline": "Souligné",
+  "tsLetterSpacing": "Espacement des lettres",
+  "tsWordSpacing": "Espacement des mots",
+  "tsLineHeight": "Hauteur de ligne",
+  "tsDecrease": "Réduire",
+  "tsIncrease": "Augmenter",
+
+  "tsDisplayP1": "Est-ce que ça ",
+  "tsDisplayLink": "s'affiche",
+  "tsDisplayP2": " bien ?",
+  "tsHeadlineP1": "Est-ce que ",
+  "tsHeadlineLink": "les gros titres",
+  "tsHeadlineP2": " se différencient...",
+  "tsTitleP1": "des ",
+  "tsTitleLink": "titres ?",
+  "tsBodyP1": "Qu'en est-il ",
+  "tsBodyLink": "du corps ?",
+  "tsBodyP2": " Est-ce facile à lire ?",
+  "tsLabelP1": "Et ",
+  "tsLabelLink": "les labels ?",
+  "tsLabelP2": " Ni trop gros, ni trop petits ?",
+
+  "tsResetAll": "Réinitialiser tous les paramètres de texte ?",
+
+
+
+  "lsPageTitle": "Paramètres de mise en page",
+
+  "lsMargin": "Marge extérieure",
+  "lsPadding": "Marge intérieure",
+  "lsSpacing": "Espacement",
+
+  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
+
+
+
+  "csPageTitle": "Paramètres de couleur",
+
+  "csPickerHint": "Ouvre un sélecteur de couleurs pour {name}. Appuyer longuement pour plus d'options.",
+
+  "csMonoChrome": "Utiliser un schéma monochrome",
+  "csHighContrast": "Utiliser un schéma à contraste élevé",
+
+  "csPrimary": "Primary",
+  "csOnPrimary": "On primary",
+  "csPrimaryContainer": "Primary container",
+  "csOnPrimaryContainer": "On primary container",
+  "csPrimaryFixed": "Primary fixed",
+  "csPrimaryFixedDim": "Primary fixed dim",
+  "csOnPrimaryFixed": "On primary fixed",
+  "csOnPrimaryFixedVariant": "On primary fixed variant",
+  "csSecondary": "Secondary",
+  "csOnSecondary": "On secondary",
+  "csSecondaryContainer": "Secondary container",
+  "csOnSecondaryContainer": "On secondary container",
+  "csSecondaryFixed": "Secondary fixed",
+  "csSecondaryFixedDim": "Secondary fixed dim",
+  "csOnSecondaryFixed": "On secondary fixed",
+  "csOnSecondaryFixedVariant": "On secondary fixed variant",
+  "csTertiary": "Tertiary",
+  "csOnTertiary": "On tertiary",
+  "csTertiaryContainer": "Tertiary container",
+  "csOnTertiaryContainer": "On tertiary container",
+  "csTertiaryFixed": "Tertiary fixed",
+  "csTertiaryFixedDim": "Tertiary fixed dim",
+  "csOnTertiaryFixed": "On tertiary fixed",
+  "csOnTertiaryFixedVariant": "On tertiary fixed variant",
+  "csError": "Error",
+  "csOnError": "On error",
+  "csErrorContainer": "Error container",
+  "csOnErrorContainer": "On error container",
+  "csOutline": "Outline",
+  "csOutlineVariant": "Outline variant",
+  "csSurface": "Surface",
+  "csOnSurface": "On surface",
+  "csSurfaceDim": "Surface dim",
+  "csSurfaceBright": "Surface bright",
+  "csSurfaceContainerLowest": "Surface container lowest",
+  "csSurfaceContainerLow": "Surface container low",
+  "csSurfaceContainer": "Surface container",
+  "csSurfaceContainerHigh": "Surface container high",
+  "csSurfaceContainerHighest": "Surface container highest",
+  "csOnSurfaceVariant": "On surface variant",
+  "csInverseSurface": "Inverse surface",
+  "csOnInverseSurface": "On inverse surface",
+  "csInversePrimary": "Inverse primary",
+  "csScrim": "Scrim",
+  "csShadow": "Shadow",
+  "csSurfaceTint": "Surface tint",
+
+  "csPickerTitle": "Choisissez une couleur",
+  "csRecommended": "Utiliser la recommandation de contraste ?",
+  "csUseCustom": "Utiliser personnalisé",
+
+  "csAddColor": "Ajouter une couleur",
+  "csRemove": "Retirer",
+  "csReset": "Réinitialiser",
+  "csResetTo": "Réinitialiser à...",
+
+  "csSchemeBase": "Construire le schéma\nà partir de l'image",
+  "csOptional": "optionnel",
+  "csFromImage": "Construire le schéma de couleurs à partir d'une image",
+  "csColorScheme": "schéma de couleurs",
+
+  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
+
+
+
+  "isPageTitle": "Paramètres d'image",
+
+  "isBackground": "Arrière-plan",
+  "isImage": "image",
+
+  "isButtonHint": "Mettre à jour l'image {title}",
+  "isDialogTitle": "Comment l'image {title} doit-elle être mise à jour ?",
+  "isFromFile": "Depuis un fichier",
+  "isFromCamera": "Depuis la caméra",
+  "isFromNetwork": "Depuis une URL",
+  "isResetIt": "Réinitialiser",
+  "isClearIt": "Effacer",
+
+  "isEnterURL": "Entrer l'URL",
+  "isGetFailed": "Impossible de récupérer l'image",
+  "isSetFailed": "Échec de la mise à jour de l'image :\n{error}",
+  "isPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
+
+  "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
+  
+  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
+}

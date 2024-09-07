@@ -1,11 +1,15 @@
-import './screens.dart';
-import '../utils/utils.dart';
+/* open_ui
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * See LICENSE for distribution and usage details.
+ */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import './export.dart';
+import '../widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,12 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late bool isDark = PlatformTheme.of(context)!.isDark;
 
-  final double spacing = EzConfig.get(spacingKey);
-
-  late final EzSpacer spacer = EzSpacer(spacing);
-  late final EzSpacer separator = EzSpacer(2 * spacing);
-
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   // Set the page title //
 
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ExampleScaffold(
+    return OpenUIScaffold(
       body: EzScreen(
         decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
@@ -55,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             spacer,
 
             const EzThemeModeSwitch(),
-            separator,
+            spacer,
 
             const EzLocaleSetting(),
             spacer,

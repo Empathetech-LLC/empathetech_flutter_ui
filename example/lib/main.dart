@@ -1,11 +1,18 @@
-import 'screens/screens.dart';
+/* open_ui
+ * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * See LICENSE for distribution and usage details.
+ */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'screens/export.dart';
+import 'utils/export.dart';
+import 'widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:feedback/feedback.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
@@ -31,21 +38,53 @@ void main() async {
   );
 
   // Set device orientation(s)
-  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
-    // DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitDown,
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
 
+  late final TextStyle lightFeedbackText = buildBody(Colors.black);
+  late final TextStyle darkFeedbackText = buildBody(Colors.white);
+
   // Run the app!
-  runApp(const EFUIExample());
+  runApp(BetterFeedback(
+    theme: FeedbackThemeData(
+      background: Colors.grey,
+      feedbackSheetColor: Colors.white,
+      activeFeedbackModeColor: empathPurple,
+      bottomSheetDescriptionStyle: lightFeedbackText,
+      bottomSheetTextInputStyle: lightFeedbackText,
+      sheetIsDraggable: true,
+      dragHandleColor: Colors.grey,
+      colorScheme: const ColorScheme.light(primary: empathGoldenrod),
+    ),
+    darkTheme: FeedbackThemeData(
+      background: Colors.grey,
+      feedbackSheetColor: Colors.black,
+      activeFeedbackModeColor: empathEucalyptus,
+      bottomSheetDescriptionStyle: darkFeedbackText,
+      bottomSheetTextInputStyle: darkFeedbackText,
+      sheetIsDraggable: true,
+      dragHandleColor: Colors.grey,
+      colorScheme: const ColorScheme.dark(primary: empathGoldenrod),
+    ),
+    themeMode: EzConfig.getThemeMode(),
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+      const LocaleNamesLocalizationsDelegate(),
+      ...EFUILang.localizationsDelegates,
+      EmpathetechFeedbackLocalizationsDelegate(),
+    ],
+    localeOverride: EzConfig.getLocale(),
+    child: const OpenUI(),
+  ));
 }
 
 /// Initialize a path based router for web-enabled apps
 /// Or any other app that requires deep linking
 /// https://docs.flutter.dev/ui/navigation/deep-linking
-final GoRouter _router = GoRouter(
+final GoRouter router = GoRouter(
   initialLocation: homePath,
   routes: <RouteBase>[
     GoRoute(
@@ -83,20 +122,22 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class EFUIExample extends StatelessWidget {
-  const EFUIExample({super.key});
+class OpenUI extends StatelessWidget {
+  const OpenUI({super.key});
 
   @override
   Widget build(BuildContext context) {
     return EzAppProvider(
+      scaffoldMessengerKey: scaffoldMessengerKey,
       app: PlatformApp.router(
         // Production ready!
         debugShowCheckedModeBanner: false,
 
         // Language handlers
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>{
-          LocaleNamesLocalizationsDelegate(),
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+          const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
+          EmpathetechFeedbackLocalizationsDelegate(),
         },
 
         // Supported languages
@@ -105,8 +146,8 @@ class EFUIExample extends StatelessWidget {
         // Current language
         locale: EzConfig.getLocale(),
 
-        title: efuiL,
-        routerConfig: _router,
+        title: appTitle,
+        routerConfig: router,
       ),
     );
   }
