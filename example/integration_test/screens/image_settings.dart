@@ -70,6 +70,6 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n);
+      await goBack(tester, l10n.gBack);
       debugPrint('\nImage settings test suite complete\n\n');
     });
