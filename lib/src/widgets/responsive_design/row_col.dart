@@ -23,7 +23,7 @@ class EzRowCol extends StatelessWidget {
           'row Widget can be a Row, EzRow, or EzScrollView',
         ),
         assert(
-          row.runtimeType == Column || row.runtimeType == EzScrollView,
+          col.runtimeType == Column || col.runtimeType == EzScrollView,
           'col Widget can be a Column or EzScrollView',
         );
 
