@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
-
 import 'package:example/main.dart';
 import 'package:example/utils/consts.dart';
 
