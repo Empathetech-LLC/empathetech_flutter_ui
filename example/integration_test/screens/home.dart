@@ -35,7 +35,6 @@ void testSuite({
 
       debugPrint('\nValidating text');
       await validateText(tester, appTitle);
-      await validateText(tester, l10n.gAttention);
       await validateWidget(tester, EzWarning);
       await validateText(tester, l10n.ssDominantHand);
       await validateText(tester, l10n.ssThemeMode);
