@@ -31,8 +31,11 @@ export 'src/functions/theme_data.dart';
 // Testing
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
+export 'src/functions/testing/widgets/dominant_hand_switch.dart';
 export 'src/functions/testing/widgets/image_setting.dart';
+export 'src/functions/testing/widgets/locale_setting.dart';
 export 'src/functions/testing/widgets/reset_button.dart';
+export 'src/functions/testing/widgets/theme_mode_switch.dart';
 
 // l10n //
 
