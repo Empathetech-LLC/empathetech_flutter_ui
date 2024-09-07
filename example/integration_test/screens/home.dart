@@ -51,133 +51,14 @@ void testSuite({
       debugPrint('Dismissing');
       await dismissTap(tester);
 
-      // Dominant hand  //
-
-      debugPrint('\nTesting dominant hand setting');
-      await touch(tester, find.byType(DropdownMenu<bool>).last);
-
-      if (isLefty) {
-        debugPrint('Right hand layout');
-
-        // Activate righty layout
-        await touchText(tester, l10n.gRight);
-
-        List<Widget> handButtonsChildren =
-            (tester.widget(find.byType(Row).at(1)) as Row).children;
-
-        expect(handButtonsChildren.length, 3);
-
-        // Verify righty layout
-        expect(handButtonsChildren[0], isA<Text>());
-        expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
-
-        debugPrint('Left hand layout');
-
-        // Activate lefty layout
-        await touch(tester, find.byType(DropdownMenu<bool>).last);
-        await touchText(tester, l10n.gLeft);
-
-        // Verify lefty layout
-        handButtonsChildren =
-            (tester.widget(find.byType(Row).at(1)) as Row).children;
-
-        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
-        expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<Text>());
-      } else {
-        debugPrint('Left hand layout');
-
-        // Activate lefty layout
-        await touchText(tester, l10n.gLeft);
-
-        List<Widget> handButtonsChildren =
-            (tester.widget(find.byType(Row).at(1)) as Row).children;
-
-        expect(handButtonsChildren.length, 3);
-
-        // Verify lefty layout
-        expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
-        expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<Text>());
-
-        debugPrint('Right hand layout');
-
-        // Activate righty layout
-        await touch(tester, find.byType(DropdownMenu<bool>).last);
-        await touchText(tester, l10n.gRight);
-
-        // Verify righty layout
-        handButtonsChildren =
-            (tester.widget(find.byType(Row).at(1)) as Row).children;
-
-        expect(handButtonsChildren[0], isA<Text>());
-        expect(handButtonsChildren[1], isA<EzSpacer>());
-        expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
-      }
-
-      // Theme mode //
-
-      debugPrint('\nTesting theme mode setting');
-
-      // Verify  layout
-      final List<Widget> themeButtonsChildren =
-          (tester.widget(find.byType(EzRow).at(2)) as EzRow).children;
-
-      expect(themeButtonsChildren.length, 3);
-      if (isLefty) {
-        expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>());
-        expect(themeButtonsChildren[1], isA<EzSpacer>());
-        expect(themeButtonsChildren[2], isA<Text>());
-      } else {
-        expect(themeButtonsChildren[0], isA<Text>());
-        expect(themeButtonsChildren[1], isA<EzSpacer>());
-        expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
-      }
-
-      // Activate light theme
-      debugPrint('Light');
-      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchText(tester, l10n.gLight);
-
-      // Activate system theme
-      debugPrint('System');
-      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchText(tester, l10n.gSystem);
-
-      // Activate dark theme
-      debugPrint('Dark');
-      await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-      await touchText(tester, l10n.gDark);
-
-      // Language //
-
-      debugPrint('\nTesting language setting button');
-      // ToDo: Test button text updates with selected locale
-
-      // Activate Spanish localizations
-      debugPrint('Spanish');
-      await touch(tester, find.byType(EzLocaleSetting));
-      await touchText(tester, l10nNames.nameOf('es')!);
-      await tester.pumpAndSettle();
-
-      // Activate French localizations
-      debugPrint('French');
-      await touch(tester, find.byType(EzLocaleSetting));
-      await touchText(tester, l10nNames.nameOf('fr')!);
-      await tester.pumpAndSettle();
-
-      // Activate English localizations
-      debugPrint('English');
-      await touch(tester, find.byType(EzLocaleSetting));
-      await touchText(tester, l10nNames.nameOf('en')!);
-      await tester.pumpAndSettle();
-
-      // Activate English localizations
-      debugPrint('Close');
-      await touch(tester, find.byType(EzLocaleSetting));
-      await touchText(tester, l10n.gClose);
-      await tester.pumpAndSettle();
+      await testDHSetting(tester, l10n: l10n, isLefty: isLefty);
+      await testTMSwitch(tester, l10n: l10n, isLefty: isLefty);
+      await testLocaleSetting(
+        tester,
+        l10n: l10n,
+        l10nNames: l10nNames,
+        isLefty: isLefty,
+      );
 
       // Reset button //
 
