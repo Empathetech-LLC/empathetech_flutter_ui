@@ -19,6 +19,7 @@ export 'src/consts/google_fonts.dart';
 
 // Functions //
 
+// General
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
@@ -26,6 +27,13 @@ export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
+
+// Testing
+export 'src/functions/testing/consts.dart';
+export 'src/functions/testing/utils.dart';
+export 'src/functions/testing/widgets/image_setting.dart';
+export 'src/functions/testing/widgets/network_image.dart';
+export 'src/functions/testing/widgets/reset_button.dart';
 
 // l10n //
 
