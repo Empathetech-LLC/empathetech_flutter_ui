@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../utils/image_links.dart';
+
 import 'package:example/main.dart';
 
 import 'dart:io';
@@ -59,6 +61,7 @@ void testSuite({
         type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
         updateCS: false,
         l10n: l10n,
+        networkImageURLs: imageURLs,
         isLefty: isLefty,
       );
 

@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../utils/image_links.dart';
+
 import 'package:example/main.dart';
 
 import 'package:flutter/material.dart';
@@ -53,6 +55,7 @@ void testSuite({
         type: l10n.isBackground,
         updateCS: true,
         l10n: l10n,
+        networkImageURLs: imageURLs,
         isLefty: isLefty,
       );
 
