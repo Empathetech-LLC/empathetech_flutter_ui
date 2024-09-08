@@ -562,23 +562,23 @@ const Map<String, Type> layoutKeys = <String, Type>{
 
 // Layout settings recommended parameters //
 
-/// 0.0
-const double minMargin = 0.0;
+/// 5.0
+const double minMargin = 5.0;
 
-/// 50.0
-const double maxMargin = 50.0;
+/// 20.0
+const double maxMargin = 20.0;
 
-/// 0.0
-const double minPadding = 5.0;
+/// 10.0
+const double minPadding = 10.0;
 
-/// 50.0
-const double maxPadding = 50.0;
+/// 40.0
+const double maxPadding = 40.0;
 
 /// 10.0
 const double minSpacing = 10.0;
 
-/// 100.0
-const double maxSpacing = 100.0;
+/// 50.0
+const double maxSpacing = 75.0;
 
 // Global trackers //
 
