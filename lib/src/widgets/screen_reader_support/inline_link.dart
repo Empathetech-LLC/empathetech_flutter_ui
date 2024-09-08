@@ -19,12 +19,12 @@ class EzInlineLink extends WidgetSpan {
   /// Destination URL
   final Uri? url;
 
-  /// Message for screen readers
+  /// Message for screen readers when the link is focused
   /// Don't repeat [text] here, it is appended automatically
   final String semanticsLabel;
 
-  /// Updates [text]'s [Semantics] readout in [EzRichText]
-  final String? textFix;
+  /// Message for screen readers when the parent [EzRichText] is focused
+  final String? richSemanticsLabel;
 
   /// Optional tooltip override
   final String? tooltip;
@@ -47,7 +47,7 @@ class EzInlineLink extends WidgetSpan {
     this.onTap,
     this.url,
     required this.semanticsLabel,
-    this.textFix, // For screen readers, handled by EzRichText
+    this.richSemanticsLabel, // Not used here, but in EzRichText
     this.tooltip,
     this.statesController,
   })  : assert((onTap == null) != (url == null),

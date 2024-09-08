@@ -9,7 +9,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class EzPlainText extends TextSpan {
-  /// [TextSpan] wrapper with custom [Semantics] to pair with [EzInlineLink]s in [RichText] blocks
+  /// [TextSpan] wrapper with custom [Semantics] to pair with [EzInlineLink]s in [EzRichText] blocks
   /// Does not accept [children], only [text]
   const EzPlainText({
     super.text,
