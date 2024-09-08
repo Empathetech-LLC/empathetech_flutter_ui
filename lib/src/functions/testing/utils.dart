@@ -62,7 +62,7 @@ Future<void> validateWidget(
 /// Find, touch, and settle a target
 Future<void> touch(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
@@ -79,7 +79,7 @@ Future<void> touchText(
       .last;
 
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
@@ -94,7 +94,7 @@ Future<void> touchWidget(
       find.byType(widgetType, skipOffstage: skipOffstage).last;
 
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
@@ -102,7 +102,7 @@ Future<void> touchWidget(
 /// Find, touch, hold, and settle a target
 Future<void> hold(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
-  await tester.longPressAt(tester.getCenter(finder));
+  await tester.longPressAt(tester.getCenter(finder, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
@@ -111,7 +111,7 @@ Future<void> hold(WidgetTester tester, Finder finder) async {
 Future<void> holdText(WidgetTester tester, String text) async {
   final Finder finder = find.text(text).last;
   await tester.ensureVisible(finder);
-  await tester.longPressAt(tester.getCenter(finder));
+  await tester.longPressAt(tester.getCenter(finder, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
@@ -148,7 +148,7 @@ Future<void> goBack(WidgetTester tester, String back) async {
   final Finder backButton = find.byTooltip(back);
 
   await tester.ensureVisible(backButton);
-  await tester.tapAt(tester.getCenter(backButton));
+  await tester.tapAt(tester.getCenter(backButton, warnIfMissed: true));
   await tester.pumpAndSettle();
 }
 
