@@ -261,6 +261,14 @@ class _ImageSettingState extends State<EzImageSetting> {
         EzRow(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            // Label
+            Flexible(
+              child: Text(
+                l10n.isUseForColors,
+                textAlign: TextAlign.center,
+              ),
+            ),
+
             // Check box
             Checkbox(
               value: updateTheme,
@@ -269,14 +277,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                 dialogState(() {});
                 setState(() {});
               },
-            ),
-
-            // Label
-            Flexible(
-              child: Text(
-                l10n.isUseForColors,
-                textAlign: TextAlign.center,
-              ),
             ),
           ],
         )
