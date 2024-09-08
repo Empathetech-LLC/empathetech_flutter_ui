@@ -248,7 +248,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Layout settings //
 
-  marginKey: 15.0, // recommended key
+  marginKey: 10.0, // recommended key
   paddingKey: 20.0, // recommended key
   spacingKey: 25.0, // recommended key
 };
