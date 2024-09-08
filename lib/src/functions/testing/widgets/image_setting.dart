@@ -35,21 +35,17 @@ Future<void> testImageSetting(
 
     expect(updateCSWidgets.length, 2);
     if (isLefty) {
-      expect(() {
-        assert(
-          tester.getCenter(find.byType(Checkbox)).dx <
-              tester.getCenter(find.byType(Flexible)).dx,
-          'DH layout mismatch',
-        );
-      }, throwsAssertionError);
+      assert(
+        tester.getCenter(find.byType(Checkbox)).dx <
+            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+        'DH layout mismatch',
+      );
     } else {
-      expect(() {
-        assert(
-          tester.getCenter(find.byType(Checkbox)).dx >
-              tester.getCenter(find.byType(Flexible)).dx,
-          'DH layout mismatch',
-        );
-      }, throwsAssertionError);
+      assert(
+        tester.getCenter(find.byType(Checkbox)).dx >
+            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+        'DH layout mismatch',
+      );
     }
 
     await validateText(tester, l10n.isUseForColors);

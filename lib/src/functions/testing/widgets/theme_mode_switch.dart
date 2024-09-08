@@ -18,21 +18,17 @@ Future<void> testTMSwitch(
 
   // Verify  layout
   if (isLefty) {
-    expect(() {
-      assert(
-        tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx <
-            tester.getCenter(find.text(l10n.ssThemeMode)).dx,
-        'DH layout mismatch',
-      );
-    }, throwsAssertionError);
+    assert(
+      tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx <
+          tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+      'DH layout mismatch',
+    );
   } else {
-    expect(() {
-      assert(
-        tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx >
-            tester.getCenter(find.text(l10n.ssThemeMode)).dx,
-        'DH layout mismatch',
-      );
-    }, throwsAssertionError);
+    assert(
+      tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx >
+          tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+      'DH layout mismatch',
+    );
   }
 
   // Activate light theme
