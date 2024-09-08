@@ -35,11 +35,11 @@ Future<void> testImageSetting(
 
     expect(updateCSWidgets.length, 2);
     if (isLefty) {
-      expect(updateCSWidgets[0], isA<Flexible>());
-      expect(updateCSWidgets[1], isA<Checkbox>());
-    } else {
       expect(updateCSWidgets[0], isA<Checkbox>());
       expect(updateCSWidgets[1], isA<Flexible>());
+    } else {
+      expect(updateCSWidgets[0], isA<Flexible>());
+      expect(updateCSWidgets[1], isA<Checkbox>());
     }
 
     await validateText(tester, l10n.isUseForColors);
