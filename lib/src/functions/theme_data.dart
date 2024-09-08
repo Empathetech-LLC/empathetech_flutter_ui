@@ -98,12 +98,6 @@ ThemeData ezThemeData(Brightness brightness) {
       thickness: 0.75,
     ),
 
-    // Drawer
-    drawerTheme: DrawerThemeData(
-      backgroundColor: colorScheme.surfaceContainer,
-      surfaceTintColor: colorScheme.surfaceTint,
-    ),
-
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(textStyle: textTheme.bodyLarge),
 
@@ -135,6 +129,12 @@ ThemeData ezThemeData(Brightness brightness) {
         padding: EdgeInsets.zero,
         alignment: Alignment.center,
       ),
+    ),
+
+    // Drawer
+    navigationDrawerTheme: NavigationDrawerThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      surfaceTintColor: colorScheme.surfaceTint,
     ),
 
     // Segmented button
