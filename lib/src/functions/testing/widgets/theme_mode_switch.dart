@@ -17,18 +17,22 @@ Future<void> testTMSwitch(
   debugPrint('\nTesting theme mode setting');
 
   // Verify  layout
-  final List<Widget> themeButtonsChildren =
-      (tester.widget(find.byType(EzRow).at(2)) as EzRow).children;
-
-  expect(themeButtonsChildren.length, 3);
   if (isLefty) {
-    expect(themeButtonsChildren[0], isA<DropdownMenu<ThemeMode>>());
-    expect(themeButtonsChildren[1], isA<EzSpacer>());
-    expect(themeButtonsChildren[2], isA<Text>());
+    expect(() {
+      assert(
+        tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx <
+            tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+        'DH layout mismatch',
+      );
+    }, throwsAssertionError);
   } else {
-    expect(themeButtonsChildren[0], isA<Text>());
-    expect(themeButtonsChildren[1], isA<EzSpacer>());
-    expect(themeButtonsChildren[2], isA<DropdownMenu<ThemeMode>>());
+    expect(() {
+      assert(
+        tester.getCenter(find.byType(DropdownMenu<ThemeMode>)).dx >
+            tester.getCenter(find.text(l10n.ssThemeMode)).dx,
+        'DH layout mismatch',
+      );
+    }, throwsAssertionError);
   }
 
   // Activate light theme
