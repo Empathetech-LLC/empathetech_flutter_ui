@@ -91,10 +91,17 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
       space: (spacing + padding) * 2,
       thickness: 0.75,
+    ),
+
+    // Drawer
+    drawerTheme: DrawerThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      surfaceTintColor: transparent,
     ),
 
     // Dropdown menu
