@@ -102,12 +102,12 @@ Future<void> goBack(WidgetTester tester, String back) async {
   final Finder backButton = find.byTooltip(back);
 
   await tester.ensureVisible(backButton);
-  await tester.tap(backButton);
+  await tester.tapAt(tester.getCenter(backButton));
   await tester.pumpAndSettle();
 }
 
 /// For integration tests
-/// Tap at [offset] to dismiss a dialog/modal/etc
+/// [WidgetTester.tapAt] the [offset] to dismiss a dialog/modal/etc
 Future<void> dismissTap(
   WidgetTester tester, {
   Offset offset = const Offset(1, 1),
