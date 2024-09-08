@@ -797,8 +797,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           <InlineSpan>[
             EzPlainText(text: l10n.tsDisplayP1),
             EzInlineLink(
-              key: ValueKey<int>(displayProvider.id),
               l10n.tsDisplayLink,
+              key: ValueKey<int>(displayProvider.id),
               style: displayProvider.value,
               textAlign: TextAlign.center,
               onTap: () {
@@ -819,8 +819,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           <InlineSpan>[
             EzPlainText(text: l10n.tsHeadlineP1),
             EzInlineLink(
-              key: ValueKey<int>(headlineProvider.id),
               l10n.tsHeadlineLink,
+              key: ValueKey<int>(headlineProvider.id),
               style: headlineProvider.value,
               textAlign: TextAlign.center,
               onTap: () {
@@ -841,8 +841,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           <InlineSpan>[
             EzPlainText(text: l10n.tsTitleP1),
             EzInlineLink(
-              key: ValueKey<int>(titleProvider.id),
               l10n.tsTitleLink,
+              key: ValueKey<int>(titleProvider.id),
               style: titleProvider.value,
               textAlign: TextAlign.center,
               onTap: () {
@@ -862,8 +862,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           <InlineSpan>[
             EzPlainText(text: l10n.tsBodyP1),
             EzInlineLink(
-              key: ValueKey<int>(bodyProvider.id),
               l10n.tsBodyLink,
+              key: ValueKey<int>(bodyProvider.id),
               style: bodyProvider.value,
               textAlign: TextAlign.center,
               onTap: () {
@@ -884,8 +884,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           <InlineSpan>[
             EzPlainText(text: l10n.tsLabelP1),
             EzInlineLink(
-              key: ValueKey<int>(labelProvider.id),
               l10n.tsLabelLink,
+              key: ValueKey<int>(labelProvider.id),
               style: labelProvider.value,
               textAlign: TextAlign.center,
               onTap: () {
