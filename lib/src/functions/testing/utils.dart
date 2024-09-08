@@ -28,7 +28,7 @@ Future<void> validateText(
   WidgetTester tester,
   String text, {
   bool findRichText = false,
-  bool skipOffstage = true,
+  bool skipOffstage = false,
   Matcher matcher = findsOneWidget,
 }) async {
   final Finder textFinder = find.text(
@@ -47,7 +47,7 @@ Future<void> validateWidget(
   WidgetTester tester,
   Type widgetType, {
   Matcher matcher = findsOneWidget,
-  bool skipOffstage = true,
+  bool skipOffstage = false,
 }) async {
   final Finder widgetFinder = find.byType(
     widgetType,
@@ -72,7 +72,7 @@ Future<void> touchText(
   WidgetTester tester,
   String text, {
   bool findRichText = false,
-  bool skipOffstage = true,
+  bool skipOffstage = false,
 }) async {
   final Finder finder = find
       .text(text, findRichText: findRichText, skipOffstage: skipOffstage)
@@ -88,7 +88,7 @@ Future<void> touchText(
 Future<void> touchWidget(
   WidgetTester tester,
   Type widgetType, {
-  bool skipOffstage = true,
+  bool skipOffstage = false,
 }) async {
   final Finder finder =
       find.byType(widgetType, skipOffstage: skipOffstage).last;
