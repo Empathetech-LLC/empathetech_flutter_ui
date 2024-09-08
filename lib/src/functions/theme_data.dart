@@ -101,7 +101,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Drawer
     drawerTheme: DrawerThemeData(
       backgroundColor: colorScheme.surfaceContainer,
-      surfaceTintColor: transparent,
+      surfaceTintColor: colorScheme.surfaceTint,
     ),
 
     // Dropdown menu
