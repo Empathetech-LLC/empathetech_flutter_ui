@@ -12,13 +12,31 @@ Future<void> pause(int seconds) =>
     Future<void>.delayed(Duration(seconds: seconds));
 
 /// For integration tests
+/// expect([finder], [matcher]) and ensure visibility
+Future<void> validate(
+  WidgetTester tester,
+  Finder finder, {
+  Matcher matcher = findsOneWidget,
+}) async {
+  expect(finder, matcher);
+  await tester.ensureVisible(finder);
+}
+
+/// For integration tests
 /// Find text and ensure visibility
 Future<void> validateText(
   WidgetTester tester,
   String text, {
+  bool findRichText = false,
+  bool skipOffstage = true,
   Matcher matcher = findsOneWidget,
 }) async {
-  final Finder textFinder = find.text(text);
+  final Finder textFinder = find.text(
+    text,
+    findRichText: findRichText,
+    skipOffstage: skipOffstage,
+  );
+
   expect(textFinder, matcher);
   await tester.ensureVisible(textFinder);
 }
@@ -29,8 +47,13 @@ Future<void> validateWidget(
   WidgetTester tester,
   Type widgetType, {
   Matcher matcher = findsOneWidget,
+  bool skipOffstage = true,
 }) async {
-  final Finder widgetFinder = find.byType(widgetType);
+  final Finder widgetFinder = find.byType(
+    widgetType,
+    skipOffstage: skipOffstage,
+  );
+
   expect(widgetFinder, matcher);
   await tester.ensureVisible(widgetFinder);
 }
@@ -44,19 +67,42 @@ Future<void> touch(WidgetTester tester, Finder finder) async {
 }
 
 /// For integration tests
-/// Find, touch, hold, and settle a target
-Future<void> hold(WidgetTester tester, Finder finder) async {
+/// Find, touch, and settle a text target
+Future<void> touchText(
+  WidgetTester tester,
+  String text, {
+  bool findRichText = false,
+  bool skipOffstage = true,
+}) async {
+  final Finder finder = find
+      .text(text, findRichText: findRichText, skipOffstage: skipOffstage)
+      .last;
+
   await tester.ensureVisible(finder);
-  await tester.longPressAt(tester.getCenter(finder));
+  await tester.tapAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
 /// For integration tests
-/// Find, touch, and settle a text target
-Future<void> touchText(WidgetTester tester, String text) async {
-  final Finder finder = find.text(text).last;
+/// Find, touch, and settle a widget target
+Future<void> touchWidget(
+  WidgetTester tester,
+  Type widgetType, {
+  bool skipOffstage = true,
+}) async {
+  final Finder finder =
+      find.byType(widgetType, skipOffstage: skipOffstage).last;
+
   await tester.ensureVisible(finder);
   await tester.tapAt(tester.getCenter(finder));
+  await tester.pumpAndSettle();
+}
+
+/// For integration tests
+/// Find, touch, hold, and settle a target
+Future<void> hold(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
+  await tester.longPressAt(tester.getCenter(finder));
   await tester.pumpAndSettle();
 }
 
