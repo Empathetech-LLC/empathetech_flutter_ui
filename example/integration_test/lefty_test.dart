@@ -37,11 +37,11 @@ void main() async {
   group(
     'lefty-layout',
     () {
-      home.testSuite();
-      text.testSuite();
-      layout.testSuite();
-      color.testSuite();
-      image.testSuite();
+      home.testSuite(isLefty: true);
+      text.testSuite(isLefty: true);
+      layout.testSuite(isLefty: true);
+      color.testSuite(isLefty: true);
+      image.testSuite(isLefty: true);
     },
   );
 }
