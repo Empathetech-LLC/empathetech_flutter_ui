@@ -59,9 +59,6 @@ const Color empathOffBlack = Color(offBlackHex);
 /// 0xFF000000
 const int transparentHex = 0x00000000;
 
-/// 0xFF000000
-const Color transparent = Color(transparentHex);
-
 // Brand links //
 
 /// If you want to lend a hand
