@@ -70,8 +70,10 @@ class EzRichText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: _semanticsLabel(),
+      container: true,
+      explicitChildNodes: true,
       child: Text.rich(
-        TextSpan(children: children),
+        TextSpan(children: children, semanticsLabel: null),
         style: style,
         textAlign: textAlign,
         textDirection: textDirection,
