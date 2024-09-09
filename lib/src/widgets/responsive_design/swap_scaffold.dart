@@ -43,7 +43,7 @@ class EzSwapScaffold extends StatelessWidget {
   final Widget large;
 
   /// Enables real-time responses to screen space changes
-  /// [small] when [widthOf] the [BuildContext] is less than || equal to [threshold]
+  /// [small] when [widthOf] the [BuildContext] is less than or equal to [threshold]
   /// [large] when [widthOf] the [BuildContext] is greater than [threshold]
   const EzSwapScaffold({
     super.key,
@@ -54,12 +54,7 @@ class EzSwapScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Adjust the threshold based on user layout config
-    final double adjusted = threshold -
-        (EzConfig.get(marginKey) - EzConfig.getDefault(marginKey)) -
-        (EzConfig.get(paddingKey) - EzConfig.getDefault(paddingKey));
-
-    return (widthOf(context) <= adjusted)
+    return (widthOf(context) <= threshold)
         ? ScreenSpace(isLimited: true, child: small)
         : ScreenSpace(isLimited: false, child: large);
   }

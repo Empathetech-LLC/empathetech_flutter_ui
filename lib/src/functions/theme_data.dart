@@ -91,6 +91,7 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
+    // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
       space: (spacing + padding) * 2,
@@ -128,6 +129,12 @@ ThemeData ezThemeData(Brightness brightness) {
         padding: EdgeInsets.zero,
         alignment: Alignment.center,
       ),
+    ),
+
+    // Drawer
+    navigationDrawerTheme: NavigationDrawerThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      surfaceTintColor: colorScheme.surfaceTint,
     ),
 
     // Segmented button

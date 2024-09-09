@@ -3,17 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/material.dart';
-
-/// 'en'
-const Locale english = Locale('en');
-
-/// 'es'
-const Locale spanish = Locale('es');
-
-/// 'fr'
-const Locale french = Locale('fr');
-
 /// 'https://avatars.githubusercontent.com/u/105748845?s=400&u=f239d55e2f2a37070dcdf1f3b31a579c2b0d484e&v=4'
 const String etechGHProfileLink =
     'https://avatars.githubusercontent.com/u/105748845';

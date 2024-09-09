@@ -1,11 +1,10 @@
-/* open_ui
+/* empathetech_flutter_ui
  * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
-import '../export.dart';
-
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -13,12 +12,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// For integration testing
+/// Tests [EzImageSetting]
 Future<void> testImageSetting(
   WidgetTester tester, {
   required Finder finder,
   required String type,
   required bool updateCS,
   required EFUILang l10n,
+  required List<String> networkImageURLs,
   required bool isLefty,
 }) async {
   debugPrint('Opening dialog');
@@ -33,11 +35,17 @@ Future<void> testImageSetting(
 
     expect(updateCSWidgets.length, 2);
     if (isLefty) {
-      expect(updateCSWidgets[0], isA<Flexible>());
-      expect(updateCSWidgets[1], isA<Checkbox>());
+      assert(
+        tester.getCenter(find.byType(Checkbox)).dx <
+            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+        'DH layout mismatch',
+      );
     } else {
-      expect(updateCSWidgets[0], isA<Checkbox>());
-      expect(updateCSWidgets[1], isA<Flexible>());
+      assert(
+        tester.getCenter(find.byType(Checkbox)).dx >
+            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+        'DH layout mismatch',
+      );
     }
 
     await validateText(tester, l10n.isUseForColors);
@@ -45,24 +53,50 @@ Future<void> testImageSetting(
 
   debugPrint('Validating platform options\n');
   if (kIsWeb) {
-    await webTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
+    await _webTests(
+      tester,
+      finder: finder,
+      l10n: l10n,
+      imageURLs: networkImageURLs,
+      isLefty: isLefty,
+    );
   } else if (Platform.isIOS || Platform.isAndroid) {
-    await mobileTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
+    await _mobileTests(
+      tester,
+      finder: finder,
+      l10n: l10n,
+      imageURLs: networkImageURLs,
+      isLefty: isLefty,
+    );
   } else {
-    await desktopTests(tester, finder: finder, l10n: l10n, isLefty: isLefty);
+    await _desktopTests(
+      tester,
+      finder: finder,
+      l10n: l10n,
+      imageURLs: networkImageURLs,
+      isLefty: isLefty,
+    );
   }
 }
 
-Future<void> webTests(
+/// Web sub-set of [testImageSetting]
+Future<void> _webTests(
   WidgetTester tester, {
   required Finder finder,
   required EFUILang l10n,
+  required List<String> imageURLs,
   required bool isLefty,
 }) async {
   debugPrint('Detected web');
 
   debugPrint('\nFrom network');
-  await testNetwork(tester, l10n: l10n, isLefty: isLefty, isCupertino: false);
+  await _testNetwork(
+    tester,
+    l10n: l10n,
+    imageURLs: imageURLs,
+    isLefty: isLefty,
+    isCupertino: false,
+  );
   await touch(tester, finder);
 
   // ToDo: Reset catch
@@ -75,10 +109,12 @@ Future<void> webTests(
   await touchText(tester, l10n.gClose);
 }
 
-Future<void> mobileTests(
+/// Mobile (Android, iOS) sub-set of [testImageSetting]
+Future<void> _mobileTests(
   WidgetTester tester, {
   required Finder finder,
   required EFUILang l10n,
+  required List<String> imageURLs,
   required bool isLefty,
 }) async {
   debugPrint('Detected mobile');
@@ -87,12 +123,12 @@ Future<void> mobileTests(
   debugPrint(isCupertino ? 'iOS' : 'Android');
 
   debugPrint('\nFrom file');
-  await testFile(tester,
+  await _testFile(tester,
       l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
   await touch(tester, finder);
 
   debugPrint('\nFrom camera');
-  await testCamera(
+  await _testCamera(
     tester,
     l10n: l10n,
     isLefty: isLefty,
@@ -101,9 +137,10 @@ Future<void> mobileTests(
   await touch(tester, finder);
 
   debugPrint('\nFrom network');
-  await testNetwork(
+  await _testNetwork(
     tester,
     l10n: l10n,
+    imageURLs: imageURLs,
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
@@ -125,10 +162,12 @@ Future<void> mobileTests(
   await touchText(tester, l10n.gClose);
 }
 
-Future<void> desktopTests(
+/// Desktop (Linux, MacOS, Windows) sub-set of [testImageSetting]
+Future<void> _desktopTests(
   WidgetTester tester, {
   required Finder finder,
   required EFUILang l10n,
+  required List<String> imageURLs,
   required bool isLefty,
 }) async {
   debugPrint('Detected desktop');
@@ -137,7 +176,7 @@ Future<void> desktopTests(
   debugPrint(isCupertino ? 'Mac' : 'Not Mac');
 
   debugPrint('\nFrom file');
-  await testFile(
+  await _testFile(
     tester,
     l10n: l10n,
     isLefty: isLefty,
@@ -146,9 +185,10 @@ Future<void> desktopTests(
   await touch(tester, finder);
 
   debugPrint('\nFrom network');
-  await testNetwork(
+  await _testNetwork(
     tester,
     l10n: l10n,
+    imageURLs: imageURLs,
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
@@ -170,7 +210,7 @@ Future<void> desktopTests(
   await touchText(tester, l10n.gClose);
 }
 
-Future<void> testFile(
+Future<void> _testFile(
   WidgetTester tester, {
   required EFUILang l10n,
   required bool isLefty,
@@ -183,7 +223,7 @@ Future<void> testFile(
   await touchText(tester, l10n.gClose);
 }
 
-Future<void> testCamera(
+Future<void> _testCamera(
   WidgetTester tester, {
   required EFUILang l10n,
   required bool isLefty,
@@ -196,9 +236,10 @@ Future<void> testCamera(
   await touchText(tester, l10n.gClose);
 }
 
-Future<void> testNetwork(
+Future<void> _testNetwork(
   WidgetTester tester, {
   required EFUILang l10n,
+  required List<String> imageURLs,
   required bool isLefty,
   required bool isCupertino,
 }) async {
@@ -247,11 +288,17 @@ Future<void> testNetwork(
   debugPrint('Apply w/ valid URL');
   await tester.enterText(
     find.byType(PlatformTextFormField),
-    getImageUrl(),
+    getRandomURL(imageURLs),
   );
   await touchText(tester, l10n.gApply);
   expect(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsNothing,
   );
+}
+
+/// Provide a [List] of [imageURLs] and one will be returned at random
+String getRandomURL(List<String> imageURLs) {
+  final int choice = Random().nextInt(imageURLs.length);
+  return imageURLs[choice];
 }

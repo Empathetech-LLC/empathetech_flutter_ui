@@ -22,7 +22,7 @@ void main() async {
   final Map<String, Object> testConfig = <String, Object>{
     ...empathetechConfig,
     isDarkThemeKey: true,
-    localeKey: <String>['es'],
+    isLeftyKey: true,
   };
 
   SharedPreferences.setMockInitialValues(testConfig);
@@ -35,13 +35,13 @@ void main() async {
   );
 
   group(
-    'es-locale',
+    'lefty-layout',
     () {
-      home.testSuite(locale: spanish);
-      text.testSuite(locale: spanish);
-      layout.testSuite(locale: spanish);
-      color.testSuite(locale: spanish);
-      image.testSuite(locale: spanish);
+      home.testSuite(isLefty: true);
+      text.testSuite(isLefty: true);
+      layout.testSuite(isLefty: true);
+      color.testSuite(isLefty: true);
+      image.testSuite(isLefty: true);
     },
   );
 }

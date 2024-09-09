@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
+import '../utils/image_links.dart';
 
 import 'package:example/main.dart';
 
@@ -61,6 +61,7 @@ void testSuite({
         type: '${l10n.gDark.toLowerCase()} ${l10n.csColorScheme}',
         updateCS: false,
         l10n: l10n,
+        networkImageURLs: imageURLs,
         isLefty: isLefty,
       );
 
@@ -153,7 +154,7 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n);
+      await goBack(tester, l10n.gBack);
       debugPrint('\nColor settings test suite complete\n\n');
     });
 

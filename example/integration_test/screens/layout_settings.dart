@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
-
 import 'package:example/main.dart';
 
 import 'dart:io';
@@ -110,6 +108,6 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n);
+      await goBack(tester, l10n.gBack);
       debugPrint('\nLayout settings test suite complete\n\n');
     });

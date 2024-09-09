@@ -59,9 +59,6 @@ const Color empathOffBlack = Color(offBlackHex);
 /// 0xFF000000
 const int transparentHex = 0x00000000;
 
-/// 0xFF000000
-const Color transparent = Color(transparentHex);
-
 // Brand links //
 
 /// If you want to lend a hand
@@ -251,7 +248,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Layout settings //
 
-  marginKey: 15.0, // recommended key
+  marginKey: 10.0, // recommended key
   paddingKey: 20.0, // recommended key
   spacingKey: 25.0, // recommended key
 };

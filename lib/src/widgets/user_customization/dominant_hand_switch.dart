@@ -84,7 +84,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
                 }
               } else {
                 if (isLefty) {
-                  await EzConfig.remove(isLeftyKey);
+                  await EzConfig.setBool(isLeftyKey, false);
                   isLefty = false;
                   setState(() {});
                 }

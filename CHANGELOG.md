@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.1.0] - 2024-09-08
+### Added
+- Integration testing utils
+- Lefty test
+
+### Updated
+- Tightened dependencies
+- Layout settings mins, maxes, and defaults
+- RowCol bug fix
+- EzRichText semantics
+  - EzInlineLink params and documentation
+  - EzPlainText placeholder
+
 ## [7.0.0] - 2024-09-06
 ### Updated
 - Honestly, pretty much everything

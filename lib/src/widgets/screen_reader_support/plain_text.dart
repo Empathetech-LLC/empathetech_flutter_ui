@@ -9,7 +9,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class EzPlainText extends TextSpan {
-  /// [TextSpan] wrapper with custom [Semantics] to pair with [EzInlineLink]s in [RichText] blocks
+  /// [TextSpan] wrapper with custom [Semantics] to pair with [EzInlineLink]s in [EzRichText] blocks
   /// Does not accept [children], only [text]
   const EzPlainText({
     super.text,
@@ -29,8 +29,6 @@ class EzPlainText extends TextSpan {
     ui.Locale? inheritedLocale,
     bool inheritedSpellOut = false,
   }) {
-    // Do nothing
-    // EzRichText will add this.text to it's semanticsLabel
-    // So we want this to be skipped in the semantics tree
+    collector.add(InlineSpanSemanticsInformation.placeholder);
   }
 }

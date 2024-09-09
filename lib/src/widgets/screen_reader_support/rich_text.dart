@@ -48,18 +48,15 @@ class EzRichText extends StatelessWidget {
       switch (child.runtimeType) {
         case const (TextSpan):
           final TextSpan ogSpan = child as TextSpan;
-          label.writeAll(<String>[ogSpan.semanticsLabel ?? ogSpan.text!, ' ']);
+          label.write(ogSpan.semanticsLabel ?? ogSpan.text!);
           break;
         case const (EzPlainText):
           final EzPlainText plainSpan = child as EzPlainText;
-          label.writeAll(<String>[
-            plainSpan.semanticsLabel ?? plainSpan.text!,
-            ' ',
-          ]);
+          label.write(plainSpan.semanticsLabel ?? plainSpan.text!);
           break;
         case const (EzInlineLink):
           final EzInlineLink linkSpan = child as EzInlineLink;
-          label.writeAll(<String>[linkSpan.textFix ?? linkSpan.text, ' ']);
+          label.write(linkSpan.richSemanticsLabel ?? linkSpan.text);
           break;
         default:
           break;
@@ -73,8 +70,10 @@ class EzRichText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: _semanticsLabel(),
+      container: true,
+      explicitChildNodes: true,
       child: Text.rich(
-        TextSpan(children: children),
+        TextSpan(children: children, semanticsLabel: null),
         style: style,
         textAlign: textAlign,
         textDirection: textDirection,
