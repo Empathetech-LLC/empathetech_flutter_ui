@@ -18,6 +18,11 @@ class ColorSettingsScreen extends StatefulWidget {
 class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const OpenUIScaffold(body: ColorSettings());
+    return const OpenUIScaffold(
+      body: ColorSettings(
+        lightBackgroundImageKey: lightPageImageKey,
+        darkBackgroundImageKey: darkPageImageKey,
+      ),
+    );
   }
 }
