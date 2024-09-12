@@ -50,7 +50,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     return PlatformAlertDialog(
       material: (BuildContext dialogContext, PlatformTarget platform) {
-        final TextButton closeAction = TextButton(
+        late final TextButton closeAction = TextButton(
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
         );
@@ -84,7 +84,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         );
       },
       cupertino: (BuildContext dialogContext, PlatformTarget platform) {
-        final CupertinoDialogAction closeAction = CupertinoDialogAction(
+        late final CupertinoDialogAction closeAction = CupertinoDialogAction(
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
         );
