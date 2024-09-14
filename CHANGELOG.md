@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [7.2.0] - 2024-09-XX
+## [7.2.0] - 2024-09-15
+### Updated
+- Integrated testing
 
 ## [7.1.0] - 2024-09-08
 ### Added
