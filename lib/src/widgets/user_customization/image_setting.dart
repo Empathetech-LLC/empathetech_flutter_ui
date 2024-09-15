@@ -187,9 +187,9 @@ class _ImageSettingState extends State<EzImageSetting> {
               contents: <Widget>[
                 Form(
                   key: urlFormKey,
-                  child: PlatformTextFormField(
+                  child: TextFormField(
                     controller: urlText,
-                    hintText: 'https://example.com/image.jpg',
+                    initialValue: 'https://example.com/image.jpg',
                     style: theme.dialogTheme.contentTextStyle,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (String? value) {
