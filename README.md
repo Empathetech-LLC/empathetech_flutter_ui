@@ -29,7 +29,6 @@ EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a s
 * [Demo](#demo)
 * [Contributing](#contributing)
 * [License](#license)
-* [Credits](#credits)
 
 # Installation
 
@@ -293,9 +292,3 @@ Many thanks for any and all donations!
 # License
 
 [GNU GPLv3](LICENSE)
-
-# Credits
-
-## Translations
-
-Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!
