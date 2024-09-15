@@ -25,7 +25,7 @@ EFUI est un kit de démarrage pour créer des applications [Flutter](https://flu
 
 * [Installation](#installation)
 * [Utilisation](#usage)
-* [Démo](#demo)
+* [Démo](#démo)
 * [Contributions](#contributing)
 * [Licence](#license)
 * [Crédits](#credits)
@@ -246,7 +246,7 @@ Heureusement, EFUI vous soutient pour ça aussi !
 
 <br>Au risque de vous surcharger en informations, cela devrait suffire à vous lancer. Une fois que vous vous sentirez à l'aise, le dépôt a été organisé pour faciliter l'exploration !
 
-# Démos
+# Démo
 
 ### [Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)
 ### [iOS](https://apps.apple.com/us/app/open-ui/id6499560244)
@@ -297,4 +297,4 @@ Merci beaucoup pour tous vos dons !
 
 ## Traductions
 
-Français | [Alexis Nguyen](https://www.fiverr.com/alexisnguyen2)
+[Alexis Nguyen](https://www.fiverr.com/alexisnguyen2)
