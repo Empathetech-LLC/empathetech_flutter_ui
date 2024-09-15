@@ -24,11 +24,11 @@ EFUI est un kit de démarrage pour créer des applications [Flutter](https://flu
 ## Sommaire
 
 * [Installation](#installation)
-* [Utilisation](#usage)
+* [Utilisation](#utilisation)
 * [Démo](#démo)
-* [Contributions](#contributing)
-* [Licence](#license)
-* [Crédits](#credits)
+* [Contributions](#contributions)
+* [Licence](#licence)
+* [Crédits](#crédits)
 
 # Installation
 
