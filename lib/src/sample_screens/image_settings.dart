@@ -76,13 +76,13 @@ class _ImageSettingsState extends State<ImageSettings> {
             child: isDark
                 ? EzImageSetting(
                     key: ValueKey<String>('dark$keyValue'),
-                    configKey: darkPageImageKey,
+                    configKey: darkBackgroundImageKey,
                     label: l10n.isBackground,
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
                     key: ValueKey<String>('light$keyValue'),
-                    configKey: lightPageImageKey,
+                    configKey: lightBackgroundImageKey,
                     label: l10n.isBackground,
                     updateTheme: Brightness.light,
                   ),

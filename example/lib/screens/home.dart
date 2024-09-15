@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       body: EzScreen(
-        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
+        decorationImageKey:
+            isDark ? darkBackgroundImageKey : lightBackgroundImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Functionality disclaimer

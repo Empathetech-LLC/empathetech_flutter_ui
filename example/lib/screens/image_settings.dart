@@ -20,8 +20,8 @@ class _ImageSettingsScreenState extends State<ImageSettingsScreen> {
   Widget build(BuildContext context) {
     return const OpenUIScaffold(
       body: ImageSettings(
-        lightBackgroundImageKey: lightPageImageKey,
-        darkBackgroundImageKey: darkPageImageKey,
+        lightBackgroundImageKey: lightBackgroundImageKey,
+        darkBackgroundImageKey: darkBackgroundImageKey,
       ),
     );
   }

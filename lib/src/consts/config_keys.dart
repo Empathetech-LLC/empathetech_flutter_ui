@@ -206,10 +206,10 @@ const double maxFontHeight = 2.0;
 // Image settings' keys //
 
 const String lightColorSchemeImageKey = 'lightColorSchemeImage';
-const String lightPageImageKey = 'lightPageImage';
+const String lightBackgroundImageKey = 'lightBackgroundImage';
 
 const String darkColorSchemeImageKey = 'darkColorSchemeImage';
-const String darkPageImageKey = 'darkPageImage';
+const String darkBackgroundImageKey = 'darkBackgroundImage';
 
 /// [light, dark]
 ///      X
@@ -217,11 +217,11 @@ const String darkPageImageKey = 'darkPageImage';
 const Map<String, Type> imageKeys = <String, Type>{
   // Light theme
   lightColorSchemeImageKey: String,
-  lightPageImageKey: String,
+  lightBackgroundImageKey: String,
 
   // Dark theme
   darkColorSchemeImageKey: String,
-  darkPageImageKey: String,
+  darkBackgroundImageKey: String,
 };
 
 /// Allows for app images whose default is an asset to be "null"

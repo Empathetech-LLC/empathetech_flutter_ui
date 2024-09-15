@@ -20,8 +20,8 @@ class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
   Widget build(BuildContext context) {
     return const OpenUIScaffold(
       body: ColorSettings(
-        lightBackgroundImageKey: lightPageImageKey,
-        darkBackgroundImageKey: darkPageImageKey,
+        lightBackgroundImageKey: lightBackgroundImageKey,
+        darkBackgroundImageKey: darkBackgroundImageKey,
       ),
     );
   }
