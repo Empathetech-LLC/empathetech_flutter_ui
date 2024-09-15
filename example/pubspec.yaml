@@ -21,7 +21,6 @@ dependencies:
   flutter_platform_widgets: ^7.0.1
   line_icons: ^2.0.3
 
-  # Empathetech
   empathetech_flutter_ui:
     path: ../
 
