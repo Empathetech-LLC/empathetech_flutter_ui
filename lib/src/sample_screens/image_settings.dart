@@ -16,10 +16,15 @@ class ImageSettings extends StatefulWidget {
   /// Light theme value for [EzScreen.decorationImageKey]
   final String? lightBackgroundImageKey;
 
+  /// Optional additional settings
+  /// Recommended to use [EzImageSetting]
+  final List<Widget> additionalSettings;
+
   const ImageSettings({
     super.key,
     this.lightBackgroundImageKey,
     this.darkBackgroundImageKey,
+    this.additionalSettings = const <Widget>[],
   });
 
   @override
@@ -87,6 +92,9 @@ class _ImageSettingsState extends State<ImageSettings> {
                     updateTheme: Brightness.light,
                   ),
           ),
+
+          if (widget.additionalSettings.isNotEmpty) spacer,
+          ...widget.additionalSettings,
           separator,
 
           // Local reset all
