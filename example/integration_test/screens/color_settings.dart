@@ -41,7 +41,7 @@ void testSuite({
         find.widgetWithText(ElevatedButton, l10n.csPageTitle),
       );
 
-      //// Test functionality: Quick settings ////
+      //* Test functionality: Quick settings *//
 
       debugPrint('\nTesting quick settings');
 
@@ -72,7 +72,7 @@ void testSuite({
         isLefty: isLefty,
       );
 
-      //// Test functionality: Advanced settings ////
+      //* Test functionality: Advanced settings *//
 
       debugPrint('\nTesting advanced settings');
 

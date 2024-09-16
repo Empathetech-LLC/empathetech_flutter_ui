@@ -37,7 +37,7 @@ void testSuite({
       await validateText(tester, l10n.ssDominantHand);
       await validateText(tester, l10n.ssThemeMode);
 
-      //// Test functionality ////
+      //* Test functionality *//
 
       // Options menu //
 

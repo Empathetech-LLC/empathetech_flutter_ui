@@ -61,7 +61,7 @@ void testSuite({
         l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
       );
 
-      //// Test functionality: Quick settings ////
+      //* Test functionality: Quick settings *//
 
       debugPrint('\nTesting quick settings');
       final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
@@ -99,7 +99,7 @@ void testSuite({
         isLefty: isLefty,
       );
 
-      //// Test functionality: Advanced settings ////
+      //* Test functionality: Advanced settings *//
 
       debugPrint('\nTesting advanced settings');
 
