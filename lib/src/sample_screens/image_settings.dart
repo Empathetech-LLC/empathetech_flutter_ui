@@ -30,15 +30,17 @@ class ImageSettings extends StatefulWidget {
 class _ImageSettingsState extends State<ImageSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
-  int keyValue = Random().nextInt(rMax);
-
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
+
+  late bool isDark = PlatformTheme.of(context)?.isDark ??
+      (MediaQuery.of(context).platformBrightness == Brightness.dark);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the page content //
+
+  int keyValue = Random().nextInt(rMax);
 
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();

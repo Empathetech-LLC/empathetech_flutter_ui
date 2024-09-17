@@ -22,7 +22,9 @@ class EzHighContrastColorsSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = PlatformTheme.of(context)!.isDark;
+    final bool isDark = PlatformTheme.of(context)?.isDark ??
+        (MediaQuery.of(context).platformBrightness == Brightness.dark);
+
     final Color onSurface = Theme.of(context).colorScheme.onSurface;
 
     return ElevatedButton.icon(

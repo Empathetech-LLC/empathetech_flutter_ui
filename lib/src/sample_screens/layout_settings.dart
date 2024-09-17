@@ -21,7 +21,8 @@ class LayoutSettings extends StatefulWidget {
 class _LayoutSettingsState extends State<LayoutSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
+  late bool isDark = PlatformTheme.of(context)?.isDark ??
+      (MediaQuery.of(context).platformBrightness == Brightness.dark);
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);

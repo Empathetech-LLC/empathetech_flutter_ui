@@ -67,7 +67,8 @@ class EzScreen extends StatelessWidget {
     Decoration? buildDecoration() {
       if (!useImageDecoration) return null;
 
-      final bool isDark = PlatformTheme.of(context)!.isDark;
+      final bool isDark = PlatformTheme.of(context)?.isDark ??
+          (MediaQuery.of(context).platformBrightness == Brightness.dark);
 
       final String? imagePath = EzConfig.get(
         isDark ? darkDecorationImageKey : lightDecorationImageKey,
