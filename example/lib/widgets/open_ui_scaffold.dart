@@ -11,6 +11,8 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
   final Widget body;
+
+  /// [FloatingActionButton]
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
@@ -87,6 +89,9 @@ class OpenUIScaffold extends StatelessWidget {
         // Body
         body: body,
         floatingActionButton: fab,
+        floatingActionButtonLocation: isLefty
+            ? FloatingActionButtonLocation.startFloat
+            : FloatingActionButtonLocation.endFloat,
       ),
     );
 

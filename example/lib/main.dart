@@ -3,9 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'screens/export.dart';
-import 'utils/export.dart';
-import 'widgets/export.dart';
+import './screens/export.dart';
+import './utils/export.dart';
+import './widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,16 +17,24 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
+  // Setup the app //
+
   // Most apps need this
   // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Set device orientation(s)
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
   // Initialize EzConfig //
 
-  // Get a SharedPreferences instance to... share
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Make it so
   EzConfig.init(
     // Paths to any locally stored images the app uses
     assetPaths: <String>{},
@@ -37,13 +45,8 @@ void main() async {
     defaults: empathetechConfig,
   );
 
-  // Set device orientation(s)
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]);
+  // Run the app //
+  // With a feedback wrapper
 
   late final TextStyle lightFeedbackText = buildBody(Colors.black);
   late final TextStyle darkFeedbackText = buildBody(Colors.white);
