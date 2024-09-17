@@ -175,7 +175,7 @@ final GoRouter _yourAppRouter = GoRouter(
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const SettingsScreen();
+            return const SettingsHomeScreen();
           },
           routes:<RouteBase>[
             GoRoute(
@@ -214,7 +214,7 @@ final GoRouter _yourAppRouter = GoRouter(
 
 **¡Es así de fácil!**
 
-*NOTA:* El fragmento de código anterior asume que has renombrado el archivo (recién copiado) `Home.dart` y la clase `HomeScreen()` a `Settings.dart` y `SettingsScreen()`
+*NOTA:* El fragmento de código anterior asume que has renombrado el archivo (recién copiado) `Home.dart` y la clase `HomeScreen()` a `Settings.dart` y `SettingsHomeScreen()`
 
 #### Cómo funciona
 

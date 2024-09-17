@@ -174,7 +174,7 @@ final GoRouter _yourAppRouter = GoRouter(
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const SettingsScreen();
+            return const SettingsHomeScreen();
           },
           routes:<RouteBase>[
             GoRoute(
@@ -213,7 +213,7 @@ And boom!
 
 **It's that Ez!**
 
-*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsScreen()`
+*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsHomeScreen()`
 
 #### How it works
 
