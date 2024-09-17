@@ -8,21 +8,10 @@ import '../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class TextSettingsScreen extends StatefulWidget {
+class TextSettingsScreen extends StatelessWidget {
   const TextSettingsScreen({super.key});
 
   @override
-  State<TextSettingsScreen> createState() => _TextSettingsScreenState();
-}
-
-class _TextSettingsScreenState extends State<TextSettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return const OpenUIScaffold(
-      body: TextSettings(
-        lightBackgroundImageKey: lightBackgroundImageKey,
-        darkBackgroundImageKey: darkBackgroundImageKey,
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+      const OpenUIScaffold(body: TextSettings());
 }

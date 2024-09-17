@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
-
-  late bool isDark = PlatformTheme.of(context)!.isDark;
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -43,8 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       body: EzScreen(
-        decorationImageKey:
-            isDark ? darkBackgroundImageKey : lightBackgroundImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Functionality disclaimer
