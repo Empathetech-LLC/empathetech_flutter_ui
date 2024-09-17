@@ -7,25 +7,20 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum TextSettingType { display, headline, title, body, label }
 
 class TextSettings extends StatelessWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
-
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
   /// Whether the [TextStyle] spacing controls should be shown
   final bool showSpacing;
 
   const TextSettings({
     super.key,
-    this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    this.useImageDecoration = true,
     this.showSpacing = true,
   });
 
@@ -54,8 +49,7 @@ class TextSettings extends StatelessWidget {
         ),
       ],
       child: _TextSettings(
-        darkBackgroundImageKey: darkBackgroundImageKey,
-        lightBackgroundImageKey: lightBackgroundImageKey,
+        useImageDecoration: useImageDecoration,
         showSpacing: showSpacing,
       ),
     );
@@ -63,13 +57,11 @@ class TextSettings extends StatelessWidget {
 }
 
 class _TextSettings extends StatefulWidget {
-  final String? darkBackgroundImageKey;
-  final String? lightBackgroundImageKey;
+  final bool useImageDecoration;
   final bool showSpacing;
 
   const _TextSettings({
-    required this.darkBackgroundImageKey,
-    required this.lightBackgroundImageKey,
+    required this.useImageDecoration,
     required this.showSpacing,
   });
 
@@ -79,8 +71,6 @@ class _TextSettings extends StatefulWidget {
 
 class _TextSettingsState extends State<_TextSettings> {
   // Gather the theme data //
-
-  late final bool isDark = PlatformTheme.of(context)!.isDark;
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -107,9 +97,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),

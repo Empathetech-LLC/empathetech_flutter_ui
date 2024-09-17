@@ -10,11 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettings extends StatefulWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
-
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
   /// Initial set of color configKeys to display in the advanced settings (light theme)
   final List<String> lightStarterSet;
@@ -24,8 +21,7 @@ class ColorSettings extends StatefulWidget {
 
   const ColorSettings({
     super.key,
-    this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    this.useImageDecoration = true,
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
@@ -110,9 +106,7 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
