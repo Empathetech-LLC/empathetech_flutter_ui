@@ -34,10 +34,10 @@ Future<void> logAlert(
 }
 
 /// Log the passed message and display a [SnackBar] to notify the user
-Future<void> logSnack({
-  required ScaffoldMessengerState state,
-  required String message,
-}) async {
+Future<void> logSnack(
+  ScaffoldMessengerState state,
+  String message,
+) async {
   debugPrint(message);
   state.showSnackBar(SnackBar(
     content: Text(message, textAlign: TextAlign.center),
@@ -46,8 +46,8 @@ Future<void> logSnack({
 }
 
 /// Wrap a [ColorPicker] in an [EzAlertDialog]
-Future<dynamic> ezColorPicker({
-  required BuildContext context,
+Future<dynamic> ezColorPicker(
+  BuildContext context, {
   String? title,
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
