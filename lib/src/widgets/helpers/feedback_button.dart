@@ -10,14 +10,12 @@ import 'package:share_plus/share_plus.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FeedbackButton extends StatelessWidget {
-  final BuildContext parentContext;
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
   final EFUILang l10n;
   final String supportEmail;
 
   const FeedbackButton({
     super.key,
-    required this.parentContext,
     required this.scaffoldMessengerKey,
     required this.l10n,
     this.supportEmail = empathSupport,
@@ -36,20 +34,22 @@ class FeedbackButton extends StatelessWidget {
             ))
             .closed;
 
-        BetterFeedback.of(parentContext).show((UserFeedback feedback) async {
-          await Clipboard.setData(ClipboardData(text: supportEmail));
+        if (context.mounted) {
+          BetterFeedback.of(context).show((UserFeedback feedback) async {
+            await Clipboard.setData(ClipboardData(text: supportEmail));
 
-          await Share.shareXFiles(
-            <XFile>[
-              XFile.fromData(
-                feedback.screenshot,
-                name: 'screenshot.png',
-                mimeType: 'image/png',
-              )
-            ],
-            text: feedback.text,
-          );
-        });
+            await Share.shareXFiles(
+              <XFile>[
+                XFile.fromData(
+                  feedback.screenshot,
+                  name: 'screenshot.png',
+                  mimeType: 'image/png',
+                )
+              ],
+              text: feedback.text,
+            );
+          });
+        }
       },
       leadingIcon: Icon(
         Icons.feedback,
