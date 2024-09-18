@@ -60,28 +60,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Text settings
             ElevatedButton(
-              onPressed: () => context.go(textSettingsRoute),
+              onPressed: () => context.goNamed(textSettingsPath),
               child: Text(l10n.tsPageTitle),
             ),
             spacer,
 
             // Layout settings
             ElevatedButton(
-              onPressed: () => context.go(layoutSettingsRoute),
+              onPressed: () => context.goNamed(layoutSettingsPath),
               child: Text(l10n.lsPageTitle),
             ),
             spacer,
 
             // Color settings
             ElevatedButton(
-              onPressed: () => context.go(colorSettingsRoute),
+              onPressed: () => context.goNamed(colorSettingsPath),
               child: Text(l10n.csPageTitle),
             ),
             spacer,
 
             // Image settings
             ElevatedButton(
-              onPressed: () => context.go(imageSettingsRoute),
+              onPressed: () => context.goNamed(imageSettingsPath),
               child: Text(l10n.isPageTitle),
             ),
             separator,
