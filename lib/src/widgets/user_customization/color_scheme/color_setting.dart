@@ -266,7 +266,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ElevatedButton.icon(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
-                    Navigator.of(dialogContext).pop(resetResponse);
+
+                    if (dialogContext.mounted) {
+                      Navigator.of(dialogContext).pop(resetResponse);
+                    }
                   },
                   icon: Icon(PlatformIcons(context).refresh),
                   label: Text(l10n.csReset),
