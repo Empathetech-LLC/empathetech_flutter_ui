@@ -329,7 +329,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// First-layer [ElevatedButton.onPressed]
   /// Runs the [chooseImage] dialog and updates the state accordingly
-  void activateSetting() async {
+  Future<void> activateSetting() async {
     final dynamic newPath = await chooseImage(context);
 
     if (newPath is String) {
@@ -351,11 +351,14 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           setState(() => inProgress = false);
 
-          await logAlert(
-            context,
-            title: l10n.isGetFailed,
-            message: '$result\n\n${l10n.isPermission}',
-          );
+          if (context.mounted) {
+            await logAlert(
+              // ignore: use_build_context_synchronously
+              context,
+              title: l10n.isGetFailed,
+              message: '$result\n\n${l10n.isPermission}',
+            );
+          }
           return;
         }
 
