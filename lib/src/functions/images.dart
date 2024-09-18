@@ -43,8 +43,10 @@ Future<String?> saveImage({
     await EzConfig.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-    await logAlert(context: context, message: errorMsg);
+    if (context.mounted) {
+      final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
+      await logAlert(context, message: errorMsg);
+    }
     return null;
   }
 }

@@ -113,7 +113,9 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            Navigator.of(dialogContext).pop(changed);
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(changed);
+            }
           },
           label: Text(l10n.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
@@ -137,7 +139,9 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            Navigator.of(dialogContext).pop(changed);
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(changed);
+            }
           },
           label: Text(l10n.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
@@ -163,17 +167,26 @@ class _ImageSettingState extends State<EzImageSetting> {
                   image = NetworkImage(urlText.text);
                 } catch (e) {
                   await logAlert(
-                    context: context,
+                    context,
                     title: l10n.isGetFailed,
                     message: '${e.toString()}\n\n${l10n.isPermission}',
                   );
-                  Navigator.of(networkDialogContext).pop(null);
+
+                  if (networkDialogContext.mounted) {
+                    Navigator.of(networkDialogContext).pop(null);
+                  }
                   return;
                 }
 
                 await EzConfig.setString(widget.configKey, image.url);
-                Navigator.of(networkDialogContext).pop(image.url);
-                Navigator.of(dialogContext).pop(image.url);
+
+                if (networkDialogContext.mounted) {
+                  Navigator.of(networkDialogContext).pop(image.url);
+                }
+
+                if (dialogContext.mounted) {
+                  Navigator.of(dialogContext).pop(image.url);
+                }
               }
             }
 
@@ -230,7 +243,10 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             cleanup();
             await EzConfig.remove(widget.configKey);
-            Navigator.of(dialogContext).pop(defaultPath);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(defaultPath);
+            }
           },
           label: Text(l10n.isResetIt),
           icon: Icon(PlatformIcons(context).refresh),
@@ -246,7 +262,10 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             cleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
-            Navigator.of(dialogContext).pop(noImageValue);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(noImageValue);
+            }
           },
           label: Text(l10n.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
@@ -333,7 +352,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           setState(() => inProgress = false);
 
           await logAlert(
-            context: context,
+            context,
             title: l10n.isGetFailed,
             message: '$result\n\n${l10n.isPermission}',
           );

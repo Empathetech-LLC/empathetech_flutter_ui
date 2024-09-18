@@ -56,7 +56,7 @@ class _ColorSettingState extends State<EzColorSetting> {
     final Color backup = currColor;
 
     return ezColorPicker(
-      context: context,
+      context,
       startColor: backup,
       onColorChange: (Color chosenColor) =>
           setState(() => currColor = chosenColor),
@@ -101,12 +101,18 @@ class _ColorSettingState extends State<EzColorSetting> {
             currColor = Color(recommended);
             await EzConfig.setInt(widget.configKey, recommended);
             setState(() {});
-            Navigator.of(dialogContext).pop(recommended);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(recommended);
+            }
           }
 
           void onDeny() async {
             final dynamic chosen = await openColorPicker(context);
-            Navigator.of(dialogContext).pop(chosen);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(chosen);
+            }
           }
 
           return EzAlertDialog(
@@ -176,7 +182,10 @@ class _ColorSettingState extends State<EzColorSetting> {
             currColor = resetColor;
             await EzConfig.remove(widget.configKey);
             setState(() {});
-            Navigator.of(dialogContext).pop(resetColor);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(resetColor);
+            }
           }
 
           void onDeny() => Navigator.of(dialogContext).pop();

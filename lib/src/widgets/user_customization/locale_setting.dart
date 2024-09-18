@@ -69,7 +69,10 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                 currLocale = locale;
                 l10n = await EFUILang.delegate.load(locale);
                 setState(() {});
-                Navigator.of(dialogContext).pop(locale);
+
+                if (dialogContext.mounted) {
+                  Navigator.of(dialogContext).pop(locale);
+                }
               },
               icon: _flag(locale),
               label: Text(
