@@ -58,18 +58,12 @@ class _ColorSettingState extends State<EzColorSetting> {
     return ezColorPicker(
       context: context,
       startColor: backup,
-      onColorChange: (Color chosenColor) {
-        // Update currColor
-        currColor = chosenColor;
-        setState(() {});
-      },
+      onColorChange: (Color chosenColor) =>
+          setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.value);
       },
-      onDeny: () {
-        currColor = backup;
-        setState(() {});
-      },
+      onDeny: () => setState(() => currColor = backup),
     );
   }
 

@@ -319,9 +319,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (widget.updateTheme != null &&
           updateTheme &&
           newPath != noImageValue) {
-        setState(() {
-          inProgress = true;
-        });
+        setState(() => inProgress = true);
 
         final String result = await storeImageColorScheme(
           brightness: widget.updateTheme!,
@@ -332,9 +330,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           await EzConfig.remove(widget.configKey);
           currPath = null;
 
-          setState(() {
-            inProgress = false;
-          });
+          setState(() => inProgress = false);
 
           await logAlert(
             context: context,
@@ -351,9 +347,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
 
     // Here to act as a a "default" for clearing and/or resetting the image
-    setState(() {
-      inProgress = false;
-    });
+    setState(() => inProgress = false);
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information

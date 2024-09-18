@@ -116,10 +116,8 @@ class _TextSettingsState extends State<_TextSettings> {
             ],
             selected: <String>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) {
-              currentTab = selected.first;
-              setState(() {});
-            },
+            onSelectionChanged: (Set<String> selected) =>
+                setState(() => currentTab = selected.first),
           ),
           spacer,
 
@@ -721,10 +719,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             DropdownMenu<TextSettingType>(
               initialSelection: editing,
               onSelected: (TextSettingType? value) {
-                if (value != null) {
-                  editing = value;
-                  setState(() {});
-                }
+                if (value != null) setState(() => editing = value);
               },
               dropdownMenuEntries: styleChoices,
               textStyle: labelProvider.value,

@@ -83,20 +83,17 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
               switch (newThemeMode) {
                 case ThemeMode.system:
                   await EzConfig.remove(isDarkThemeKey);
-                  platformTheme = ThemeMode.system;
-                  setState(() {});
+                  setState(() => platformTheme = ThemeMode.system);
                   break;
 
                 case ThemeMode.light:
                   await EzConfig.setBool(isDarkThemeKey, false);
-                  platformTheme = ThemeMode.light;
-                  setState(() {});
+                  setState(() => platformTheme = ThemeMode.light);
                   break;
 
                 case ThemeMode.dark:
                   await EzConfig.setBool(isDarkThemeKey, true);
-                  platformTheme = ThemeMode.dark;
-                  setState(() {});
+                  setState(() => platformTheme = ThemeMode.dark);
                   break;
 
                 default:

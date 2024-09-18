@@ -98,8 +98,7 @@ class _ImageSettingsState extends State<ImageSettings> {
             dialogTitle: l10n.isResetAll(themeProfile),
             onConfirm: () async {
               await EzConfig.removeKeys(imageKeys.keys.toSet());
-              keyValue = Random().nextInt(rMax);
-              setState(() {});
+              setState(() => keyValue = Random().nextInt(rMax));
             },
           ),
           spacer,

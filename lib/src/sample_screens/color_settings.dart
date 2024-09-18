@@ -89,8 +89,8 @@ class _ColorSettingsState extends State<ColorSettings> {
         darkColorSchemeImageKey,
         lightColorSchemeImageKey,
       });
-      currList = List<String>.from(defaultList);
-      setState(() {});
+
+      setState(() => currList = List<String>.from(defaultList));
     },
   );
 
@@ -132,10 +132,8 @@ class _ColorSettingsState extends State<ColorSettings> {
             ],
             selected: <String>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) {
-              currentTab = selected.first;
-              setState(() {});
-            },
+            onSelectionChanged: (Set<String> selected) =>
+                setState(() => currentTab = selected.first),
           ),
           separator,
 

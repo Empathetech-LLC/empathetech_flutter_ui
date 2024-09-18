@@ -59,10 +59,7 @@ class _EzLinkImageState extends State<EzLinkImage> {
 
   // Define the styling function(s) //
 
-  void _showShadow(bool showIt) {
-    _shadow = showIt;
-    setState(() {});
-  }
+  void _showShadow(bool showIt) => setState(() => _shadow = showIt);
 
   // Return the build //
 
