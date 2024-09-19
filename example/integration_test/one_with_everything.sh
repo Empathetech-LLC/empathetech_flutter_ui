@@ -4,7 +4,7 @@ set -e
 
 ## Setup ##
 
-prefix=$HOME/repos/empathetech_flutter_ui/example
+prefix=$HOME/repos/flutter/empathetech_flutter_ui/example
 device=""
 
 # Gather flag variables
