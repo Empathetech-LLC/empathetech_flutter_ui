@@ -54,7 +54,7 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
 };
 
 /// Human readable names for the [GoogleFonts] currently supported
-final Map<String, String> googleStyleNames = <String, String>{
+const Map<String, String> googleStyleNames = <String, String>{
   alexBrush: 'Alex Brush',
   atkinsonHyperlegible: 'Atkinson Hyperlegible',
   fingerPaint: 'Finger Paint',
