@@ -56,6 +56,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
+        borderRadius: ezRoundEdge,
       ),
       child: EzScrollView(
         scrollDirection: Axis.horizontal,

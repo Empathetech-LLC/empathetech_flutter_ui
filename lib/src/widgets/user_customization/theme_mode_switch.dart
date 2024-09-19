@@ -60,6 +60,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
+        borderRadius: ezRoundEdge,
       ),
       child: EzScrollView(
         scrollDirection: Axis.horizontal,
