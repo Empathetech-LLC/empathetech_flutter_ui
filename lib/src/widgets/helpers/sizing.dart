@@ -31,3 +31,6 @@ EdgeInsets ezRowPadding() => EdgeInsets.symmetric(
 
 /// EdgeInsets.all(Half EzConfig padding)
 EdgeInsets ezWrapPadding() => EdgeInsets.all(EzConfig.get(paddingKey) / 2);
+
+/// BorderRadius.all(Radius.circular(20))
+const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(20));
