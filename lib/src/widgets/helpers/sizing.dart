@@ -6,11 +6,6 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
-BoxConstraints textFieldConstraints(BuildContext context) => BoxConstraints(
-      minWidth: widthOf(context) * (2 / 3),
-      maxWidth: smallBreakpoint,
-    );
-
 /// EdgeInsets.all(EzConfig margin)
 EdgeInsets ezMargin() => EdgeInsets.all(EzConfig.get(marginKey));
 
@@ -34,3 +29,9 @@ EdgeInsets ezWrapPadding() => EdgeInsets.all(EzConfig.get(paddingKey) / 2);
 
 /// BorderRadius.all(Radius.circular(20))
 const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(20));
+
+/// min: [widthOf] context * (2 / 3), max: [smallBreakpoint]
+BoxConstraints textFieldConstraints(BuildContext context) => BoxConstraints(
+      minWidth: widthOf(context) * (2 / 3),
+      maxWidth: smallBreakpoint,
+    );
