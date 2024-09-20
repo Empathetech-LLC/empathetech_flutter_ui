@@ -202,7 +202,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   key: urlFormKey,
                   child: TextFormField(
                     controller: urlText,
-                    initialValue: 'https://example.com/image.jpg',
+                    decoration: const InputDecoration(
+                        hintText: 'https://example.com/image.jpg'),
                     style: theme.dialogTheme.contentTextStyle,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (String? value) {
