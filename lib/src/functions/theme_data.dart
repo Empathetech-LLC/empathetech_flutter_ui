@@ -54,7 +54,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Widgets //
 
-    // AppBar
+    // App bar
     appBarTheme: AppBarTheme(
       iconTheme: appBarIconData,
       actionsIconTheme: appBarIconData,
@@ -65,19 +65,20 @@ ThemeData ezThemeData(Brightness brightness) {
       titleSpacing: 0,
     ),
 
+    // Bottom sheet
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: colorScheme.surfaceContainer,
       modalBackgroundColor: colorScheme.surfaceContainer,
       dragHandleColor: colorScheme.onSurface,
     ),
 
-    // Cards
+    // Card
     cardTheme: CardTheme(
       margin: EdgeInsets.zero,
       color: colorScheme.surface,
     ),
 
-    // Dialogs
+    // Dialog
     dialogTheme: DialogTheme(
       backgroundColor: colorScheme.surfaceContainer,
       titleTextStyle: textTheme.titleLarge,
@@ -96,6 +97,12 @@ ThemeData ezThemeData(Brightness brightness) {
       color: colorScheme.secondary,
       space: (spacing + padding) * 2,
       thickness: 0.75,
+    ),
+
+    // Drawer
+    navigationDrawerTheme: NavigationDrawerThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      surfaceTintColor: colorScheme.surfaceTint,
     ),
 
     // Dropdown menu
@@ -131,10 +138,12 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
-    // Drawer
-    navigationDrawerTheme: NavigationDrawerThemeData(
-      backgroundColor: colorScheme.surfaceContainer,
-      surfaceTintColor: colorScheme.surfaceTint,
+    // Input decoration
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: textTheme.labelLarge,
+      hintStyle: textTheme.bodyLarge,
+      filled: true,
+      fillColor: colorScheme.surface.withOpacity(0.25),
     ),
 
     // Segmented button
