@@ -25,7 +25,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// Message for the on hover [Tooltip]
   final String tooltip;
 
-  /// Optionally include plus/minus buttons surrounding the [PlatformTextFormField]
+  /// Optionally include plus/minus buttons surrounding the [TextFormField]
   /// Increments/decrements based on [delta]
   final bool plusMinus;
 
