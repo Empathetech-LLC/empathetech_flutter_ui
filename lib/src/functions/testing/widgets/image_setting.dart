@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// For integration testing
 /// Tests [EzImageSetting]
@@ -282,14 +281,11 @@ Future<void> _testNetwork(
 
   debugPrint('Apply w/ invalid URL');
   await touch(tester, find.byIcon(Icons.computer_outlined));
-  await tester.enterText(find.byType(PlatformTextFormField), 'invalid');
+  await tester.enterText(find.byType(TextFormField), 'invalid');
   await touchText(tester, l10n.gApply);
 
   debugPrint('Apply w/ valid URL');
-  await tester.enterText(
-    find.byType(PlatformTextFormField),
-    getRandomURL(imageURLs),
-  );
+  await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
   await touchText(tester, l10n.gApply);
   expect(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
