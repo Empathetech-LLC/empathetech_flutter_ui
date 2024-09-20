@@ -278,7 +278,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   // Gather the theme data //
 
   final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -290,13 +289,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   List<Widget> dynamicColorSettings() {
     final List<Widget> toReturn = <Widget>[];
 
-    Widget personalSpace(Widget child) {
+    Widget personalSpace(EzColorSetting child) {
       return Padding(
-        padding: EdgeInsets.only(
-          left: spacing / 2,
-          right: spacing / 2,
-          bottom: spacing,
-        ),
+        padding: ezWrapPadding(),
         child: child,
       );
     }
@@ -339,10 +334,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       final Color liveColor = getLiveColor(context, configKeyKey);
 
       return Container(
-        padding: EdgeInsets.symmetric(
-          vertical: spacing / 2,
-          horizontal: spacing,
-        ),
+        padding: ezColumnPadding(),
         child: ElevatedButton.icon(
           key: ValueKey<String>(configKeyKey),
           icon: Container(
