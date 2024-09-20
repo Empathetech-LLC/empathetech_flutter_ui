@@ -32,6 +32,8 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  final double padding = EzConfig.get(paddingKey);
+
   late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   // Define the build data //
@@ -68,12 +70,13 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Label
+          EzSpacer(space: padding / 2, vertical: false),
           Text(
             l10n.ssThemeMode,
             style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
-          EzSpacer(space: EzConfig.get(paddingKey), vertical: false),
+          EzSpacer(space: padding, vertical: false),
 
           // Button
           DropdownMenu<ThemeMode>(

@@ -64,6 +64,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Label
+          EzSpacer(space: padding / 2, vertical: false),
           Text(
             l10n.ssDominantHand,
             style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
