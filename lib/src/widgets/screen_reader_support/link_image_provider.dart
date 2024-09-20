@@ -86,7 +86,7 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
   late final List<BoxShadow> _shadows = widget.shadows ??
       <BoxShadow>[
         BoxShadow(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.10),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
         ),
       ];
 
