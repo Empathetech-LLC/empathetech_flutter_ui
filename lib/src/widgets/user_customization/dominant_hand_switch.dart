@@ -31,7 +31,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final double padding = EzConfig.get(paddingKey);
+  final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
 
   bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -64,13 +64,13 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Label
-          EzSpacer(space: padding / 2, vertical: false),
+          margin,
           Text(
             l10n.ssDominantHand,
             style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
-          EzSpacer(space: padding, vertical: false),
+          margin,
 
           // Button
           DropdownMenu<bool>(
