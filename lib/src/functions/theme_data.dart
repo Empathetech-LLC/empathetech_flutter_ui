@@ -143,7 +143,7 @@ ThemeData ezThemeData(Brightness brightness) {
       labelStyle: textTheme.labelLarge,
       hintStyle: textTheme.bodyLarge,
       filled: true,
-      fillColor: colorScheme.surface.withOpacity(0.25),
+      fillColor: colorScheme.surface.withOpacity(0.5),
     ),
 
     // Segmented button
