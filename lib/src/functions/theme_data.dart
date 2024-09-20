@@ -169,7 +169,7 @@ ThemeData ezThemeData(Brightness brightness) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         alignment: Alignment.center,
-        backgroundColor: colorScheme.surface.withOpacity(0.5),
+        backgroundColor: colorScheme.surface.withOpacity(0.75),
         padding: EdgeInsets.all(margin),
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
