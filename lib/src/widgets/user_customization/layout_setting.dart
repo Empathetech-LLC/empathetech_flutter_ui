@@ -254,9 +254,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
       // Slider
       ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 700, // Chosen via visual inspection
-        ),
+        constraints: const BoxConstraints(maxWidth: smallBreakpoint),
         child: Slider(
           // Slider values
           value: currValue,
