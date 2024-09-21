@@ -19,3 +19,5 @@ const double smallBreakpoint = 700.0;
 /// 1000
 /// https://pub.dev/packages/flutter_adaptive_scaffold
 const double largeBreakpoint = 1000.0;
+
+const double highlightOpacity = 0.25;
