@@ -157,7 +157,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  late final Color? surfaceContainer =
+      Theme.of(context).colorScheme.surfaceContainer;
+
   // Gather the build data //
+
+  double currOpacity = EzConfig.getDouble(textBackgroundOKey) ??
+      EzConfig.getDefault(textBackgroundOKey);
+
+  late Color? backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
   late final DisplayTextStyleProvider displayProvider =
       Provider.of<DisplayTextStyleProvider>(context);
@@ -190,6 +198,30 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             EzFontDoubleBatchSetting(key: UniqueKey()),
           ],
         ),
+        spacer,
+
+        // Text background opacity
+        Slider(
+          // Slider values
+          value: currOpacity,
+          min: minOpacity,
+          max: maxOpacity,
+          divisions: 21,
+
+          // Slider functions
+          onChanged: (double value) {
+            setState(() {
+              currOpacity = value;
+              backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+            });
+          },
+          onChangeEnd: (double value) async {
+            await EzConfig.setDouble(textBackgroundOKey, value);
+          },
+
+          // Slider semantics
+          semanticFormatterCallback: (double value) => value.toStringAsFixed(2),
+        ),
 
         // Optional additional settings
         if (widget.additionalSettings != null) ...<Widget>{
@@ -205,7 +237,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
             style: displayProvider.value,
           ),
-          useSurface: false,
+          backgroundColor: backgroundColor,
         ),
         spacer,
 
@@ -216,7 +248,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
             style: headlineProvider.value,
           ),
-          useSurface: false,
+          backgroundColor: backgroundColor,
         ),
         spacer,
 
@@ -227,7 +259,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
             style: titleProvider.value,
           ),
-          useSurface: false,
+          backgroundColor: backgroundColor,
         ),
         spacer,
 
@@ -238,7 +270,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
             style: bodyProvider.value,
           ),
-          useSurface: false,
+          backgroundColor: backgroundColor,
         ),
         spacer,
 
@@ -249,7 +281,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
             style: labelProvider.value,
           ),
-          useSurface: false,
+          backgroundColor: backgroundColor,
         ),
         separator,
 
