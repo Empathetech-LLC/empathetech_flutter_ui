@@ -106,7 +106,16 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Dropdown menu
-    dropdownMenuTheme: DropdownMenuThemeData(textStyle: textTheme.bodyLarge),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: textTheme.bodyLarge,
+      inputDecorationTheme: InputDecorationTheme(
+        errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+        hintStyle: textTheme.bodyLarge,
+        labelStyle: textTheme.labelLarge,
+        fillColor: colorScheme.surface,
+        filled: true,
+      ),
+    ),
 
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
