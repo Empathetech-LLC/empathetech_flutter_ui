@@ -12,7 +12,7 @@ class EzThemeModeSwitch extends StatefulWidget {
   /// Defaults to [DropdownMenuThemeData.textStyle]
   final TextStyle? labelStyle;
 
-  /// Defaults to [ColorScheme.surfaceContainer]
+  /// Defaults to [ColorScheme.surface]
   final Color? backgroundColor;
 
   /// Standardized tool for changing the [ThemeMode]
@@ -61,7 +61,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
+        color: widget.backgroundColor ?? theme.colorScheme.surface,
         borderRadius: ezRoundEdge,
       ),
       child: EzScrollView(

@@ -11,7 +11,7 @@ class EzDominantHandSwitch extends StatefulWidget {
   /// Defaults to [DropdownMenuThemeData.textStyle]
   final TextStyle? labelStyle;
 
-  /// Defaults to [ColorScheme.surfaceContainer]
+  /// Defaults to [ColorScheme.surface]
   final Color? backgroundColor;
 
   /// Standardized tool for updating [EzConfig] dominantHand
@@ -55,7 +55,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
+        color: widget.backgroundColor ?? theme.colorScheme.surface,
         borderRadius: ezRoundEdge,
       ),
       child: EzScrollView(
