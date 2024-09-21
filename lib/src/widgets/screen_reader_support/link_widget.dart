@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -56,7 +57,10 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
   late final List<BoxShadow> _shadows = widget.shadows ??
       <BoxShadow>[
         BoxShadow(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
+          color: Theme.of(context)
+              .colorScheme
+              .primary
+              .withOpacity(highlightOpacity),
         ),
       ];
 
