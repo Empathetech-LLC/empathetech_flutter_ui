@@ -10,7 +10,7 @@ class EzLink extends StatefulWidget {
   /// Link message
   final String text;
 
-  final TextStyle? style;
+  final TextStyle style;
 
   /// Optional icon [Widget]
   /// Will make the [TextButton] wrapper a [TextButton.icon] wrapper
@@ -69,20 +69,26 @@ class EzLink extends StatefulWidget {
 class _EzLinkState extends State<EzLink> {
   // Define theme updates //
 
-  late final Color _color =
+  late final Color textColor =
       widget.color ?? Theme.of(context).colorScheme.primary;
 
-  late TextStyle _style = widget.style!.copyWith(
-    backgroundColor: widget.backgroundColor,
-    color: _color,
+  late TextStyle textStyle = widget.style.copyWith(
+    color: textColor,
     decoration: TextDecoration.none,
-    decorationColor: _color,
+    decorationColor: textColor,
   );
+
+  late final ButtonStyle? buttonTheme = Theme.of(context).textButtonTheme.style;
+  late final ButtonStyle? linkTheme = widget.backgroundColor != null
+      ? buttonTheme?.copyWith(
+          backgroundColor: WidgetStateProperty.all(widget.backgroundColor!),
+        )
+      : buttonTheme;
 
   // Define custom functions //
 
   void _addUnderline(bool addIt) {
-    _style = _style.copyWith(
+    textStyle = textStyle.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
     setState(() {});
@@ -95,9 +101,10 @@ class _EzLinkState extends State<EzLink> {
     onLongPress: null,
     onHover: (bool isHovering) => _addUnderline(isHovering),
     onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
+    style: linkTheme,
     child: Text(
       widget.text,
-      style: _style,
+      style: textStyle,
       textAlign: widget.textAlign,
     ),
   );
@@ -107,10 +114,11 @@ class _EzLinkState extends State<EzLink> {
     onLongPress: null,
     onHover: (bool isHovering) => _addUnderline(isHovering),
     onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
+    style: linkTheme,
     icon: widget.icon,
     label: Text(
       widget.text,
-      style: _style,
+      style: textStyle,
       textAlign: widget.textAlign,
     ),
   );
