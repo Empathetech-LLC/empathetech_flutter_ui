@@ -98,90 +98,88 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: l10n.tsFontSize,
-      child: EzTextBackground(
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Minus icon
-            IconButton(
-              icon: Icon(
-                PlatformIcons(context).remove,
-                color: atMin ? outlineColor : onBackground,
-                size: bodyProvider.value.fontSize,
-              ),
-              onPressed: atMin
-                  ? doNothing
-                  : () async {
-                      for (final String key in keys) {
-                        final BaseTextStyleProvider provider =
-                            providerFromKey(key);
-
-                        final double currSize =
-                            provider.value.fontSize ?? EzConfig.get(key);
-
-                        if (currSize != fontSizeMins[key]) {
-                          final double newSize = currSize * (1 - widget.delta);
-                          final double sizeLimit = fontSizeMins[key]!;
-
-                          if (newSize >= sizeLimit) {
-                            await EzConfig.setDouble(key, newSize);
-                            provider.resize(newSize);
-                          } else {
-                            await EzConfig.setDouble(key, sizeLimit);
-                            provider.resize(sizeLimit);
-                          }
-                        }
-                      }
-                      setState(() {});
-                    },
-              tooltip: '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
-            ),
-            pMSpacer,
-
-            // Core
-            Icon(
-              Icons.text_fields_sharp,
-              color: onBackground,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Minus icon
+          IconButton(
+            icon: Icon(
+              PlatformIcons(context).remove,
+              color: atMin ? outlineColor : onBackground,
               size: bodyProvider.value.fontSize,
             ),
-            pMSpacer,
+            onPressed: atMin
+                ? doNothing
+                : () async {
+                    for (final String key in keys) {
+                      final BaseTextStyleProvider provider =
+                          providerFromKey(key);
 
-            // Plus icon
-            IconButton(
-              icon: Icon(
-                PlatformIcons(context).add,
-                color: atMax ? outlineColor : onBackground,
-                size: bodyProvider.value.fontSize,
-              ),
-              onPressed: atMax
-                  ? doNothing
-                  : () async {
-                      for (final String key in keys) {
-                        final BaseTextStyleProvider provider =
-                            providerFromKey(key);
+                      final double currSize =
+                          provider.value.fontSize ?? EzConfig.get(key);
 
-                        final double currSize =
-                            provider.value.fontSize ?? EzConfig.get(key);
+                      if (currSize != fontSizeMins[key]) {
+                        final double newSize = currSize * (1 - widget.delta);
+                        final double sizeLimit = fontSizeMins[key]!;
 
-                        if (currSize != fontSizeMaxes[key]) {
-                          final double newSize = currSize * (1 + widget.delta);
-                          final double sizeLimit = fontSizeMaxes[key]!;
-
-                          if (newSize <= sizeLimit) {
-                            await EzConfig.setDouble(key, newSize);
-                            provider.resize(newSize);
-                          } else {
-                            await EzConfig.setDouble(key, sizeLimit);
-                            provider.resize(sizeLimit);
-                          }
+                        if (newSize >= sizeLimit) {
+                          await EzConfig.setDouble(key, newSize);
+                          provider.resize(newSize);
+                        } else {
+                          await EzConfig.setDouble(key, sizeLimit);
+                          provider.resize(sizeLimit);
                         }
                       }
-                      setState(() {});
-                    },
-              tooltip: '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
+                    }
+                    setState(() {});
+                  },
+            tooltip: '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
+          ),
+          pMSpacer,
+
+          // Core
+          Icon(
+            Icons.text_fields_sharp,
+            color: onBackground,
+            size: bodyProvider.value.fontSize,
+          ),
+          pMSpacer,
+
+          // Plus icon
+          IconButton(
+            icon: Icon(
+              PlatformIcons(context).add,
+              color: atMax ? outlineColor : onBackground,
+              size: bodyProvider.value.fontSize,
             ),
-          ],
-        ),
+            onPressed: atMax
+                ? doNothing
+                : () async {
+                    for (final String key in keys) {
+                      final BaseTextStyleProvider provider =
+                          providerFromKey(key);
+
+                      final double currSize =
+                          provider.value.fontSize ?? EzConfig.get(key);
+
+                      if (currSize != fontSizeMaxes[key]) {
+                        final double newSize = currSize * (1 + widget.delta);
+                        final double sizeLimit = fontSizeMaxes[key]!;
+
+                        if (newSize <= sizeLimit) {
+                          await EzConfig.setDouble(key, newSize);
+                          provider.resize(newSize);
+                        } else {
+                          await EzConfig.setDouble(key, sizeLimit);
+                          provider.resize(sizeLimit);
+                        }
+                      }
+                    }
+                    setState(() {});
+                  },
+            tooltip: '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
+          ),
+        ],
       ),
     );
   }
