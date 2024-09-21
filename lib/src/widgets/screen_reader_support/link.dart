@@ -15,6 +15,9 @@ class EzLink extends StatefulWidget {
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
 
+  /// Optional [Color] to overwrite what's in the [ThemeData]
+  final Color? backgroundColor;
+
   final TextAlign? textAlign;
 
   /// Destination function
@@ -44,6 +47,7 @@ class EzLink extends StatefulWidget {
     super.key,
     required this.style,
     this.color,
+    this.backgroundColor,
     this.textAlign,
     this.onTap,
     this.url,
@@ -62,6 +66,7 @@ class _EzLinkState extends State<EzLink> {
       widget.color ?? Theme.of(context).colorScheme.primary;
 
   late TextStyle _style = widget.style!.copyWith(
+    backgroundColor: widget.backgroundColor,
     color: _color,
     decoration: TextDecoration.none,
     decorationColor: _color,
