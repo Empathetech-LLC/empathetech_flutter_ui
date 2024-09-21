@@ -195,33 +195,13 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             swapSpacer,
 
             // Font size
-            EzFontDoubleBatchSetting(key: UniqueKey()),
+            EzTextBackground(
+              EzFontDoubleBatchSetting(key: UniqueKey()),
+              backgroundColor: backgroundColor,
+            ),
           ],
         ),
         spacer,
-
-        // Text background opacity
-        Slider(
-          // Slider values
-          value: currOpacity,
-          min: minOpacity,
-          max: maxOpacity,
-          divisions: 21,
-
-          // Slider functions
-          onChanged: (double value) {
-            setState(() {
-              currOpacity = value;
-              backgroundColor = surfaceContainer?.withOpacity(currOpacity);
-            });
-          },
-          onChangeEnd: (double value) async {
-            await EzConfig.setDouble(textBackgroundOKey, value);
-          },
-
-          // Slider semantics
-          semanticFormatterCallback: (double value) => value.toStringAsFixed(2),
-        ),
 
         // Optional additional settings
         if (widget.additionalSettings != null) ...<Widget>{
@@ -280,6 +260,43 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
             textAlign: TextAlign.center,
             style: labelProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+        ),
+        separator,
+
+        // Text background opacity
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: smallBreakpoint),
+          child: Slider(
+            // Slider values
+            value: currOpacity,
+            min: minOpacity,
+            max: maxOpacity,
+            divisions: 20,
+            label: currOpacity.toStringAsFixed(2),
+
+            // Slider functions
+            onChanged: (double value) {
+              setState(() {
+                currOpacity = value;
+                backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+              });
+            },
+            onChangeEnd: (double value) async {
+              await EzConfig.setDouble(textBackgroundOKey, value);
+            },
+
+            // Slider semantics
+            semanticFormatterCallback: (double value) =>
+                value.toStringAsFixed(2),
+          ),
+        ),
+        EzTextBackground(
+          Text(
+            'Text background opacity',
+            style: labelProvider.value,
+            textAlign: TextAlign.center,
           ),
           backgroundColor: backgroundColor,
         ),
@@ -966,6 +983,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             titleProvider.reset();
             bodyProvider.reset();
             labelProvider.reset();
+
             editing = TextSettingType.display;
 
             setState(() {});
