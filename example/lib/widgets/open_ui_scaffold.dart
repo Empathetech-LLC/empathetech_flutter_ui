@@ -36,7 +36,7 @@ class OpenUIScaffold extends StatelessWidget {
     );
 
     final double toolbarHeight =
-        appBarTextSize.height + EzConfig.get(paddingKey);
+        appBarTextSize.height + EzConfig.get(marginKey);
 
     // Define custom widgets //
 
