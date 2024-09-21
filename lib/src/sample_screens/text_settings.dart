@@ -710,10 +710,13 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           scrollDirection: Axis.horizontal,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(
-              l10n.gEditing,
-              style: labelProvider.value,
-              textAlign: TextAlign.center,
+            EzTextBackground(
+              Text(
+                l10n.gEditing,
+                style: labelProvider.value,
+                textAlign: TextAlign.center,
+              ),
+              useSurface: false,
             ),
             spacer,
             DropdownMenu<TextSettingType>(

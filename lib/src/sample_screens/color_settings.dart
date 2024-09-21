@@ -111,10 +111,13 @@ class _ColorSettingsState extends State<ColorSettings> {
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
-          Text(
-            l10n.gEditingTheme(themeProfile),
-            style: theme.textTheme.labelLarge,
-            textAlign: TextAlign.center,
+          EzTextBackground(
+            Text(
+              l10n.gEditingTheme(themeProfile),
+              style: theme.textTheme.labelLarge,
+              textAlign: TextAlign.center,
+            ),
+            useSurface: false,
           ),
           spacer,
 
