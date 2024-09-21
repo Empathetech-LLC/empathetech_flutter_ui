@@ -199,42 +199,57 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         separator,
 
         // Display preview
-        Text(
-          l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
-          textAlign: TextAlign.center,
-          style: displayProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
+            textAlign: TextAlign.center,
+            style: displayProvider.value,
+          ),
+          useSurface: false,
         ),
         spacer,
 
         // Headline preview
-        Text(
-          l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
-          textAlign: TextAlign.center,
-          style: headlineProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
+            textAlign: TextAlign.center,
+            style: headlineProvider.value,
+          ),
+          useSurface: false,
         ),
         spacer,
 
         // Title preview
-        Text(
-          l10n.tsTitleP1 + l10n.tsTitleLink,
-          textAlign: TextAlign.center,
-          style: titleProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsTitleP1 + l10n.tsTitleLink,
+            textAlign: TextAlign.center,
+            style: titleProvider.value,
+          ),
+          useSurface: false,
         ),
         spacer,
 
         // Body preview
-        Text(
-          l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
-          textAlign: TextAlign.center,
-          style: bodyProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
+            textAlign: TextAlign.center,
+            style: bodyProvider.value,
+          ),
+          useSurface: false,
         ),
         spacer,
 
         // Label preview
-        Text(
-          l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
-          textAlign: TextAlign.center,
-          style: labelProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
+            textAlign: TextAlign.center,
+            style: labelProvider.value,
+          ),
+          useSurface: false,
         ),
         separator,
 
@@ -800,9 +815,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             EzPlainText(text: l10n.tsDisplayP1),
             EzInlineLink(
               l10n.tsDisplayLink,
-              key: ValueKey<int>(displayProvider.id),
               style: displayProvider.value,
+              backgroundColor: Colors.transparent,
               textAlign: TextAlign.center,
+              key: ValueKey<int>(displayProvider.id),
               onTap: () {
                 editing = TextSettingType.display;
                 setState(() {});
@@ -822,9 +838,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             EzPlainText(text: l10n.tsHeadlineP1),
             EzInlineLink(
               l10n.tsHeadlineLink,
-              key: ValueKey<int>(headlineProvider.id),
               style: headlineProvider.value,
+              backgroundColor: Colors.transparent,
               textAlign: TextAlign.center,
+              key: ValueKey<int>(headlineProvider.id),
               onTap: () {
                 editing = TextSettingType.headline;
                 setState(() {});
@@ -844,9 +861,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             EzPlainText(text: l10n.tsTitleP1),
             EzInlineLink(
               l10n.tsTitleLink,
-              key: ValueKey<int>(titleProvider.id),
               style: titleProvider.value,
+              backgroundColor: Colors.transparent,
               textAlign: TextAlign.center,
+              key: ValueKey<int>(titleProvider.id),
               onTap: () {
                 editing = TextSettingType.title;
                 setState(() {});
@@ -865,9 +883,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             EzPlainText(text: l10n.tsBodyP1),
             EzInlineLink(
               l10n.tsBodyLink,
-              key: ValueKey<int>(bodyProvider.id),
               style: bodyProvider.value,
+              backgroundColor: Colors.transparent,
               textAlign: TextAlign.center,
+              key: ValueKey<int>(bodyProvider.id),
               onTap: () {
                 editing = TextSettingType.body;
                 setState(() {});
@@ -887,9 +906,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             EzPlainText(text: l10n.tsLabelP1),
             EzInlineLink(
               l10n.tsLabelLink,
-              key: ValueKey<int>(labelProvider.id),
               style: labelProvider.value,
+              backgroundColor: Colors.transparent,
               textAlign: TextAlign.center,
+              key: ValueKey<int>(labelProvider.id),
               onTap: () {
                 editing = TextSettingType.label;
                 setState(() {});
