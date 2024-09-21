@@ -382,8 +382,8 @@ class _ImageSettingState extends State<EzImageSetting> {
         ? showPlatformDialog(
             context: context,
             builder: (_) => EzAlertDialog(
-              title: Text(l10n.gCreditTo),
-              content: Text(widget.credits!),
+              title: Text(l10n.gCreditTo, textAlign: TextAlign.center),
+              content: Text(widget.credits!, textAlign: TextAlign.center),
             ),
           )
         : null;
