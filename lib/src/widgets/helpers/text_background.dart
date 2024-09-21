@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class EzTextBackground extends StatelessWidget {
   /// The [Text] that needs a background
-  final Text text;
+  final Widget text;
 
   /// Will use surface container if false
   final bool useSurface;
