@@ -12,6 +12,10 @@ class EzLink extends StatefulWidget {
 
   final TextStyle? style;
 
+  /// Optional icon [Widget]
+  /// Will make the [TextButton] wrapper a [TextButton.icon] wrapper
+  final Widget? icon;
+
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
 
@@ -46,6 +50,7 @@ class EzLink extends StatefulWidget {
     this.text, {
     super.key,
     required this.style,
+    this.icon,
     this.color,
     this.backgroundColor,
     this.textAlign,
@@ -62,6 +67,8 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
+  // Define theme updates //
+
   late final Color _color =
       widget.color ?? Theme.of(context).colorScheme.primary;
 
@@ -72,12 +79,43 @@ class _EzLinkState extends State<EzLink> {
     decorationColor: _color,
   );
 
+  // Define custom functions //
+
   void _addUnderline(bool addIt) {
     _style = _style.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
     setState(() {});
   }
+
+  // Define build options //
+
+  late final Widget textButton = TextButton(
+    onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+    onLongPress: null,
+    onHover: (bool isHovering) => _addUnderline(isHovering),
+    onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
+    child: Text(
+      widget.text,
+      style: _style,
+      textAlign: widget.textAlign,
+    ),
+  );
+
+  late final Widget iconTextButton = TextButton.icon(
+    onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+    onLongPress: null,
+    onHover: (bool isHovering) => _addUnderline(isHovering),
+    onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
+    icon: widget.icon,
+    label: Text(
+      widget.text,
+      style: _style,
+      textAlign: widget.textAlign,
+    ),
+  );
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -90,17 +128,7 @@ class _EzLinkState extends State<EzLink> {
         link: true,
         hint: semantics,
         child: ExcludeSemantics(
-          child: TextButton(
-            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-            onLongPress: null,
-            onHover: (bool isHovering) => _addUnderline(isHovering),
-            onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
-            child: Text(
-              widget.text,
-              style: _style,
-              textAlign: widget.textAlign,
-            ),
-          ),
+          child: (widget.icon == null) ? textButton : iconTextButton,
         ),
       ),
     );
