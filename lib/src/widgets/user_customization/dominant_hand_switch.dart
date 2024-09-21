@@ -52,47 +52,43 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: widget.backgroundColor ?? theme.colorScheme.surface,
-        borderRadius: ezRoundEdge,
-      ),
-      child: EzScrollView(
-        scrollDirection: Axis.horizontal,
-        reverseHands: true,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          // Label
-          margin,
+    return EzScrollView(
+      scrollDirection: Axis.horizontal,
+      reverseHands: true,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // Label
+        margin,
+        EzTextBackground(
           Text(
             l10n.ssDominantHand,
             style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
-          margin,
+          useSurface: false,
+        ),
+        margin,
 
-          // Button
-          DropdownMenu<bool>(
-            enableSearch: false,
-            initialSelection: isLefty,
-            dropdownMenuEntries: entries,
-            onSelected: (bool? makeLeft) async {
-              if (makeLeft == true) {
-                if (!isLefty) {
-                  await EzConfig.setBool(isLeftyKey, true);
-                  setState(() => isLefty = true);
-                }
-              } else {
-                if (isLefty) {
-                  await EzConfig.setBool(isLeftyKey, false);
-                  setState(() => isLefty = false);
-                }
+        // Button
+        DropdownMenu<bool>(
+          enableSearch: false,
+          initialSelection: isLefty,
+          dropdownMenuEntries: entries,
+          onSelected: (bool? makeLeft) async {
+            if (makeLeft == true) {
+              if (!isLefty) {
+                await EzConfig.setBool(isLeftyKey, true);
+                setState(() => isLefty = true);
               }
-            },
-          ),
-        ],
-      ),
+            } else {
+              if (isLefty) {
+                await EzConfig.setBool(isLeftyKey, false);
+                setState(() => isLefty = false);
+              }
+            }
+          },
+        ),
+      ],
     );
   }
 }

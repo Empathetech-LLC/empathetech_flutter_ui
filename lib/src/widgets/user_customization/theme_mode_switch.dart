@@ -58,55 +58,51 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: widget.backgroundColor ?? theme.colorScheme.surface,
-        borderRadius: ezRoundEdge,
-      ),
-      child: EzScrollView(
-        scrollDirection: Axis.horizontal,
-        reverseHands: true,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          // Label
-          margin,
+    return EzScrollView(
+      scrollDirection: Axis.horizontal,
+      reverseHands: true,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // Label
+        margin,
+        EzTextBackground(
           Text(
             l10n.ssThemeMode,
             style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
             textAlign: TextAlign.center,
           ),
-          margin,
+          useSurface: false,
+        ),
+        margin,
 
-          // Button
-          DropdownMenu<ThemeMode>(
-            enableSearch: false,
-            initialSelection: platformTheme,
-            dropdownMenuEntries: entries,
-            onSelected: (ThemeMode? newThemeMode) async {
-              switch (newThemeMode) {
-                case ThemeMode.system:
-                  await EzConfig.remove(isDarkThemeKey);
-                  setState(() => platformTheme = ThemeMode.system);
-                  break;
+        // Button
+        DropdownMenu<ThemeMode>(
+          enableSearch: false,
+          initialSelection: platformTheme,
+          dropdownMenuEntries: entries,
+          onSelected: (ThemeMode? newThemeMode) async {
+            switch (newThemeMode) {
+              case ThemeMode.system:
+                await EzConfig.remove(isDarkThemeKey);
+                setState(() => platformTheme = ThemeMode.system);
+                break;
 
-                case ThemeMode.light:
-                  await EzConfig.setBool(isDarkThemeKey, false);
-                  setState(() => platformTheme = ThemeMode.light);
-                  break;
+              case ThemeMode.light:
+                await EzConfig.setBool(isDarkThemeKey, false);
+                setState(() => platformTheme = ThemeMode.light);
+                break;
 
-                case ThemeMode.dark:
-                  await EzConfig.setBool(isDarkThemeKey, true);
-                  setState(() => platformTheme = ThemeMode.dark);
-                  break;
+              case ThemeMode.dark:
+                await EzConfig.setBool(isDarkThemeKey, true);
+                setState(() => platformTheme = ThemeMode.dark);
+                break;
 
-                default:
-                  break;
-              }
-            },
-          ),
-        ],
-      ),
+              default:
+                break;
+            }
+          },
+        ),
+      ],
     );
   }
 }
