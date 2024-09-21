@@ -8,9 +8,23 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzInlineLink extends WidgetSpan {
+  /// Link message
   final String text;
+
   final Key? key;
+
+  // super.style;
+
+  /// Optional icon [Widget]
+  /// Will make the [TextButton] wrapper a [TextButton.icon] wrapper
+  final Widget? icon;
+
+  /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
+
+  /// Optional [Color] to overwrite what's in the [ThemeData]
+  final Color? backgroundColor;
+
   final TextAlign? textAlign;
 
   /// Destination function
@@ -19,7 +33,7 @@ class EzInlineLink extends WidgetSpan {
   /// Destination URL
   final Uri? url;
 
-  /// Message for screen readers when the link is focused
+  /// Message for screen readers
   /// Don't repeat [text] here, it is appended automatically
   final String semanticsLabel;
 
@@ -38,11 +52,13 @@ class EzInlineLink extends WidgetSpan {
     this.text, {
     super.alignment = PlaceholderAlignment.baseline,
     super.baseline = TextBaseline.alphabetic,
-    super.style,
+    required super.style,
 
     // EzLink
     this.key,
+    this.icon,
     this.color,
+    this.backgroundColor,
     this.textAlign,
     this.onTap,
     this.url,
@@ -52,12 +68,16 @@ class EzInlineLink extends WidgetSpan {
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
+        assert(style != null,
+            "Style cannot be null. It claims it can be because we're using the super constructor; apologies for any confusion."),
         super(
           child: EzLink(
             text,
             key: key,
-            style: style,
+            style: style!,
+            icon: icon,
             color: color,
+            backgroundColor: backgroundColor,
             textAlign: textAlign,
             onTap: onTap,
             url: url,
