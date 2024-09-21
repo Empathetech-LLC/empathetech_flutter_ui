@@ -15,7 +15,7 @@ class ImageSettings extends StatefulWidget {
 
   /// Optional additional settings
   /// Recommended to use [EzImageSetting]
-  final List<Widget> additionalSettings;
+  final List<Widget>? additionalSettings;
 
   /// Optional credits for dark background image
   final String? darkBackgroundCredits;
@@ -28,7 +28,7 @@ class ImageSettings extends StatefulWidget {
     this.useImageDecoration = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.additionalSettings = const <Widget>[],
+    this.additionalSettings,
   });
 
   @override
@@ -102,8 +102,10 @@ class _ImageSettingsState extends State<ImageSettings> {
                   ),
           ),
 
-          if (widget.additionalSettings.isNotEmpty) spacer,
-          ...widget.additionalSettings,
+          if (widget.additionalSettings != null) ...<Widget>{
+            spacer,
+            ...widget.additionalSettings!,
+          },
           separator,
 
           // Local reset all
