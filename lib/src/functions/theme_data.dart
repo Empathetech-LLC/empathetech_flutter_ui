@@ -183,7 +183,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Tooltip
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
-        color: colorScheme.surface.withOpacity(0.75),
+        color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
       ),
       margin: EdgeInsets.all(margin),
