@@ -374,13 +374,20 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Open an [EzAlertDialog] with the [Image]s source information
-  Future<dynamic> showCredits() => showPlatformDialog(
-        context: context,
-        builder: (_) => EzAlertDialog(
-          title: (widget.credits == null) ? null : Text(l10n.gCreditTo),
-          content: Text(widget.credits ?? l10n.gYou),
-        ),
-      );
+  Future<dynamic>? showCredits() {
+    final bool hasChanged = currPath != EzConfig.getDefault(widget.configKey);
+    final bool showCredits = !hasChanged && (widget.credits != null);
+
+    return showCredits
+        ? showPlatformDialog(
+            context: context,
+            builder: (_) => EzAlertDialog(
+              title: Text(l10n.gCreditTo),
+              content: Text(widget.credits!),
+            ),
+          )
+        : null;
+  }
 
   // Return the build //
 
