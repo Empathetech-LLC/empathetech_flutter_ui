@@ -15,12 +15,16 @@ class TextSettings extends StatelessWidget {
   /// For [EzScreen.useImageDecoration]
   final bool useImageDecoration;
 
-  /// Whether the [TextStyle] spacing controls should be shown
+  /// Optional additional batch settings for the quick tab
+  final List<Widget>? additionalBatchSettings;
+
+  /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   final bool showSpacing;
 
   const TextSettings({
     super.key,
     this.useImageDecoration = true,
+    this.additionalBatchSettings,
     this.showSpacing = true,
   });
 
@@ -50,6 +54,7 @@ class TextSettings extends StatelessWidget {
       ],
       child: _TextSettings(
         useImageDecoration: useImageDecoration,
+        additionalBatchSettings: additionalBatchSettings,
         showSpacing: showSpacing,
       ),
     );
@@ -58,10 +63,12 @@ class TextSettings extends StatelessWidget {
 
 class _TextSettings extends StatefulWidget {
   final bool useImageDecoration;
+  final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
 
   const _TextSettings({
     required this.useImageDecoration,
+    required this.additionalBatchSettings,
     required this.showSpacing,
   });
 
@@ -123,7 +130,7 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Settings
           if (currentTab == quick)
-            const _QuickTextSettings()
+            _QuickTextSettings(widget.additionalBatchSettings)
           else
             _AdvancedTextSettings(showSpacing: widget.showSpacing),
         ],
@@ -133,7 +140,9 @@ class _TextSettingsState extends State<_TextSettings> {
 }
 
 class _QuickTextSettings extends StatefulWidget {
-  const _QuickTextSettings();
+  final List<Widget>? additionalSettings;
+
+  const _QuickTextSettings(this.additionalSettings);
 
   @override
   State<_QuickTextSettings> createState() => _QuickTextSettingsState();
@@ -168,6 +177,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        // Required batch settings
         EzRowCol.sym(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -180,6 +190,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             EzFontDoubleBatchSetting(key: UniqueKey()),
           ],
         ),
+
+        // Optional additional settings
+        if (widget.additionalSettings != null) ...<Widget>{
+          spacer,
+          ...widget.additionalSettings!,
+        },
         separator,
 
         // Display preview

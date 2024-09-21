@@ -13,6 +13,9 @@ class ColorSettings extends StatefulWidget {
   /// For [EzScreen.useImageDecoration]
   final bool useImageDecoration;
 
+  /// Optional addition quick settings
+  final List<Widget>? additionalQuickSettings;
+
   /// Initial set of color configKeys to display in the advanced settings (light theme)
   final List<String> lightStarterSet;
 
@@ -22,6 +25,7 @@ class ColorSettings extends StatefulWidget {
   const ColorSettings({
     super.key,
     this.useImageDecoration = true,
+    this.additionalQuickSettings,
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
@@ -146,6 +150,7 @@ class _ColorSettingsState extends State<ColorSettings> {
               l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
+              additionalSettings: widget.additionalQuickSettings,
             )
           else
             _AdvancedColorSettings(
@@ -171,11 +176,13 @@ class _QuickColorSettings extends StatefulWidget {
   final EFUILang l10n;
   final bool isDark;
   final String themeProfile;
+  final List<Widget>? additionalSettings;
 
   const _QuickColorSettings({
     required this.l10n,
     required this.isDark,
     required this.themeProfile,
+    required this.additionalSettings,
   });
 
   @override
@@ -240,9 +247,18 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          // MonoChrome
           const EzMonoChromeColorsSetting(),
           spacer,
-          fromImageButton
+
+          // From image
+          fromImageButton,
+
+          // Additional settings
+          if (widget.additionalSettings != null) ...<Widget>{
+            spacer,
+            ...widget.additionalSettings!,
+          },
         ],
       ),
     );

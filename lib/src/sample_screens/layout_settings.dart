@@ -12,7 +12,14 @@ class LayoutSettings extends StatefulWidget {
   /// For [EzScreen.useImageDecoration]
   final bool useImageDecoration;
 
-  const LayoutSettings({super.key, this.useImageDecoration = true});
+  /// Optional additional settings
+  final List<Widget>? additionalSettings;
+
+  const LayoutSettings({
+    super.key,
+    this.useImageDecoration = true,
+    this.additionalSettings,
+  });
 
   @override
   State<LayoutSettings> createState() => _LayoutSettingsState();
@@ -80,6 +87,12 @@ class _LayoutSettingsState extends State<LayoutSettings> {
             steps: 13,
             decimals: 0,
           ),
+
+          // Additional settings
+          if (widget.additionalSettings != null) ...<Widget>{
+            spacer,
+            ...widget.additionalSettings!
+          },
           separator,
 
           // Local reset all
