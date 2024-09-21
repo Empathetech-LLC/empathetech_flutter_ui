@@ -396,7 +396,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       0,
       EzLink(
         l10n.gHowThisWorks,
-        style: theme.textTheme.labelLarge,
+        style: theme.textTheme.labelLarge!,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
         semanticsLabel: l10n.gHowThisWorksHint,

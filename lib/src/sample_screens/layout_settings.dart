@@ -107,7 +107,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           // Help
           EzLink(
             EFUILang.of(context)!.gHowThisWorks,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!,
             textAlign: TextAlign.center,
             url: Uri.parse(understandingLayout),
             semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
