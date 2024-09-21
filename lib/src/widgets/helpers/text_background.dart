@@ -14,16 +14,31 @@ class EzTextBackground extends StatelessWidget {
   /// Will use surface container if false
   final bool useSurface;
 
+  /// Optional background color override
+  /// Can ignore [useSurface] if this is set
+  final Color? backgroundColor;
+
   /// Create a [Container] for your [text] with a su
-  const EzTextBackground(this.text, {this.useSurface = true, super.key});
+  const EzTextBackground(
+    this.text, {
+    super.key,
+    this.useSurface = true,
+    this.backgroundColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final double percent = EzConfig.get(textBackgroundOKey) ?? 0.55;
+    final double percent = EzConfig.get(textBackgroundOKey) ??
+        EzConfig.getDefault(textBackgroundOKey);
 
-    final Color color = useSurface
-        ? Theme.of(context).colorScheme.surface.withOpacity(percent)
-        : Theme.of(context).colorScheme.surfaceContainer.withOpacity(percent);
+    final Color color = (backgroundColor == null)
+        ? useSurface
+            ? Theme.of(context).colorScheme.surface.withOpacity(percent)
+            : Theme.of(context)
+                .colorScheme
+                .surfaceContainer
+                .withOpacity(percent)
+        : backgroundColor!;
 
     return Container(
       padding: ezMargin(),
