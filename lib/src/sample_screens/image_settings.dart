@@ -17,9 +17,17 @@ class ImageSettings extends StatefulWidget {
   /// Recommended to use [EzImageSetting]
   final List<Widget> additionalSettings;
 
+  /// Optional credits for dark background image
+  final String? darkBackgroundCredits;
+
+  /// Optional credits for light background image
+  final String? lightBackgroundCredits;
+
   const ImageSettings({
     super.key,
     this.useImageDecoration = true,
+    this.darkBackgroundCredits,
+    this.lightBackgroundCredits,
     this.additionalSettings = const <Widget>[],
   });
 
@@ -78,12 +86,14 @@ class _ImageSettingsState extends State<ImageSettings> {
                 ? EzImageSetting(
                     key: ValueKey<String>('dark$keyValue'),
                     configKey: darkBackgroundImageKey,
+                    credits: widget.darkBackgroundCredits,
                     label: l10n.isBackground,
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
                     key: ValueKey<String>('light$keyValue'),
                     configKey: lightBackgroundImageKey,
+                    credits: widget.lightBackgroundCredits,
                     label: l10n.isBackground,
                     updateTheme: Brightness.light,
                   ),
