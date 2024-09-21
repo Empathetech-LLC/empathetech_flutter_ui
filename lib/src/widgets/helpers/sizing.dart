@@ -10,6 +10,21 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 /// EdgeInsets.all(EzConfig margin)
 EdgeInsets ezMargin() => EdgeInsets.all(EzConfig.get(marginKey));
 
+/// EdgeInsets.symmetric(horizontal: full margin, vertical: half margin)
+EdgeInsets ezColumnMargin() => EdgeInsets.symmetric(
+      horizontal: EzConfig.get(marginKey),
+      vertical: EzConfig.get(marginKey) / 2,
+    );
+
+/// EdgeInsets.symmetric(horizontal: half margin, vertical: full margin)
+EdgeInsets ezRowMargin() => EdgeInsets.symmetric(
+      horizontal: EzConfig.get(marginKey) / 2,
+      vertical: EzConfig.get(marginKey),
+    );
+
+/// EdgeInsets.all(Half EzConfig margin)
+EdgeInsets ezWrapMargin() => EdgeInsets.all(EzConfig.get(marginKey) / 2);
+
 /// EdgeInsets.all(EzConfig padding)
 EdgeInsets ezPadding() => EdgeInsets.all(EzConfig.get(paddingKey));
 
