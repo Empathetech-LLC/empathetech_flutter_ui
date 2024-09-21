@@ -11,6 +11,9 @@ class EzTextBackground extends StatelessWidget {
   /// The [Text] that needs a background
   final Widget text;
 
+  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
+  final EdgeInsets? margin;
+
   /// Will use surface container if false
   final bool useSurface;
 
@@ -22,6 +25,7 @@ class EzTextBackground extends StatelessWidget {
   const EzTextBackground(
     this.text, {
     super.key,
+    this.margin,
     this.useSurface = true,
     this.backgroundColor,
   });
@@ -41,7 +45,7 @@ class EzTextBackground extends StatelessWidget {
         : backgroundColor!;
 
     return Container(
-      padding: ezMargin(),
+      padding: margin ?? ezColumnMargin(),
       decoration: BoxDecoration(
         color: color,
         borderRadius: ezRoundEdge,
