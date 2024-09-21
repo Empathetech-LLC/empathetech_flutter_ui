@@ -19,9 +19,11 @@ class EzTextBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double percent = EzConfig.get(textBackgroundOKey) ?? 0.55;
+
     final Color color = useSurface
-        ? Theme.of(context).colorScheme.surface.withOpacity(0.75)
-        : Theme.of(context).colorScheme.surfaceContainer.withOpacity(0.75);
+        ? Theme.of(context).colorScheme.surface.withOpacity(percent)
+        : Theme.of(context).colorScheme.surfaceContainer.withOpacity(percent);
 
     return Container(
       padding: ezMargin(),

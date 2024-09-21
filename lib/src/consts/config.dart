@@ -192,6 +192,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   labelLetterSpacingKey: 0.25,
   labelWordSpacingKey: 1.0,
 
+  // Background opacity
+  textBackgroundOKey: 55, // recommended key
+
   // No default image settings //
 
   // Color settings //

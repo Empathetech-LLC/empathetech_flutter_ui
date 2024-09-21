@@ -73,6 +73,9 @@ const String labelFontHeightKey = 'labelFontHeight';
 const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
 
+// Background opacity
+const String textBackgroundOKey = 'textBackgroundOpacity';
+
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
@@ -126,6 +129,9 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   labelWordSpacingKey: double,
   labelFontHeightKey: double,
   labelUnderlinedKey: String,
+
+  // Background opacity
+  textBackgroundOKey: double,
 };
 
 // Text settings' values //
@@ -134,10 +140,10 @@ const String bold = 'bold';
 const String italic = 'italic';
 const String underlined = 'underlined';
 
-// Text settings' recommended parameters //
-
 /// '-5.5'
 const String sampleString = '-5.5';
+
+// Text settings' recommended parameters //
 
 /// 84.0
 const double maxDisplay = 84.0;
@@ -184,6 +190,12 @@ const Map<String, double> fontSizeMins = <String, double>{
   bodyFontSizeKey: minBody,
   labelFontSizeKey: minLabel,
 };
+
+/// 0.0
+const double minOpacity = 0.0;
+
+/// 1.0
+const double maxOpacity = 1.0;
 
 /// -1.0
 const double minFontLetterSpacing = -1.0;

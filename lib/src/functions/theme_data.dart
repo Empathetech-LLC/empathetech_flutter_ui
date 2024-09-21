@@ -26,6 +26,8 @@ ThemeData ezThemeData(Brightness brightness) {
     color: colorScheme.onSurface,
   );
 
+  final double textBackgroundOpacity = EzConfig.get(textBackgroundOKey);
+
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -152,7 +154,7 @@ ThemeData ezThemeData(Brightness brightness) {
       errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
-      fillColor: colorScheme.surface.withOpacity(0.5),
+      fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
       filled: true,
     ),
 
@@ -181,7 +183,7 @@ ThemeData ezThemeData(Brightness brightness) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         alignment: Alignment.center,
-        backgroundColor: colorScheme.surface.withOpacity(0.75),
+        backgroundColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
         padding: EdgeInsets.all(margin),
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
