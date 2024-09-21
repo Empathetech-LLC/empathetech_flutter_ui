@@ -290,6 +290,12 @@ abstract class EFUILang {
   /// **'Credit to:'**
   String get gCreditTo;
 
+  /// No description provided for @gYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Set by you'**
+  String get gYou;
+
   /// No description provided for @ssPageTitle.
   ///
   /// In en, this message translates to:

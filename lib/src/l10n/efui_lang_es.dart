@@ -111,6 +111,9 @@ class EFUILangEs extends EFUILang {
   String get gCreditTo => 'Acreditando a:';
 
   @override
+  String get gYou => 'Configurado por ti';
+
+  @override
   String get ssPageTitle => 'Configuración';
 
   @override
