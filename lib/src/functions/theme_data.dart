@@ -140,6 +140,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
+      errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
       fillColor: colorScheme.surface.withOpacity(0.5),
@@ -150,8 +151,10 @@ ThemeData ezThemeData(Brightness brightness) {
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
         alignment: Alignment.center,
-        disabledBackgroundColor: colorScheme.surface,
+        backgroundColor: colorScheme.surface,
+        disabledBackgroundColor: colorScheme.outline,
         disabledForegroundColor: colorScheme.onSurface,
+        foregroundColor: colorScheme.onSurface,
         padding: EdgeInsets.all(padding),
         selectedBackgroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
