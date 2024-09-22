@@ -33,7 +33,8 @@ class EzTextBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double percent = EzConfig.get(textBackgroundOKey) ??
-        EzConfig.getDefault(textBackgroundOKey);
+        EzConfig.getDefault(textBackgroundOKey) ??
+        0.0;
 
     final Color color = (backgroundColor == null)
         ? useSurface

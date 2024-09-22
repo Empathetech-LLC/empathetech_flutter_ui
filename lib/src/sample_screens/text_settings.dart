@@ -163,7 +163,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the build data //
 
   double currOpacity = EzConfig.getDouble(textBackgroundOKey) ??
-      EzConfig.getDefault(textBackgroundOKey);
+      EzConfig.getDefault(textBackgroundOKey) ??
+      0.0;
 
   late Color? backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
