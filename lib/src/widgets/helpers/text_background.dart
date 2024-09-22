@@ -45,7 +45,7 @@ class EzTextBackground extends StatelessWidget {
         : backgroundColor!;
 
     return Container(
-      padding: margin ?? ezColumnMargin(),
+      padding: margin ?? EzMargin.col(),
       decoration: BoxDecoration(
         color: color,
         borderRadius: ezRoundEdge,

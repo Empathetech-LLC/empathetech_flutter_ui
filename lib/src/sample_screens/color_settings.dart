@@ -310,7 +310,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
     Widget personalSpace(EzColorSetting child) {
       return Padding(
-        padding: ezWrapPadding(),
+        padding: EzPadding.wrap(),
         child: child,
       );
     }
@@ -353,7 +353,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       final Color liveColor = getLiveColor(context, configKeyKey);
 
       return Container(
-        padding: ezColumnPadding(),
+        padding: EzPadding.col(),
         child: ElevatedButton.icon(
           key: ValueKey<String>(configKeyKey),
           icon: Container(
