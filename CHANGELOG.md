@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Empathetech theme data
 - Localizations
 - EzScreen decorations
+- Highlight opacity 0.1 -> 0.25
 
 ### Added
 - Text backgrounds
@@ -20,6 +21,10 @@ All notable changes to this project will be documented in this file.
 - Mounted context checks
 - Additional settings passthrough for sample screens
 - Sizing widgets
+- Icon option to EzLink && EzInlineLink
+- PlatformTheme check backups
+  - Makes it easier to use EFUI w/out having to use Flutter Platform Widgets
+    - FPW is still recommended (and unaffiliated)
 
 ## [7.1.0] - 2024-09-08
 ### Added
