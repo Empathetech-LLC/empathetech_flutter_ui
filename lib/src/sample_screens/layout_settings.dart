@@ -105,13 +105,16 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           separator,
 
           // Help
-          EzLink(
-            EFUILang.of(context)!.gHowThisWorks,
-            style: Theme.of(context).textTheme.bodyLarge!,
-            textAlign: TextAlign.center,
-            url: Uri.parse(understandingLayout),
-            semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
-            tooltip: understandingLayout,
+          EzTextBackground(
+            EzLink(
+              EFUILang.of(context)!.gHowThisWorks,
+              style: Theme.of(context).textTheme.bodyLarge!,
+              textAlign: TextAlign.center,
+              url: Uri.parse(understandingLayout),
+              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
+              tooltip: understandingLayout,
+            ),
+            borderRadius: ezPillShape,
           ),
           spacer,
         ],
