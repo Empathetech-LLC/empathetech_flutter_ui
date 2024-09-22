@@ -68,10 +68,16 @@ class _EzLinkState extends State<EzLink> {
   late final Color textColor =
       widget.color ?? Theme.of(context).colorScheme.primary;
 
+  late final ButtonStyle? buttonStyle = Theme.of(context).textButtonTheme.style;
+
   late TextStyle textStyle = widget.style.copyWith(
     color: textColor,
     decoration: TextDecoration.none,
     decorationColor: textColor,
+  );
+
+  late ButtonStyle? linkStyle = buttonStyle?.copyWith(
+    textStyle: WidgetStatePropertyAll<TextStyle>(textStyle),
   );
 
   // Define custom functions //
@@ -80,16 +86,20 @@ class _EzLinkState extends State<EzLink> {
     textStyle = textStyle.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
+    linkStyle = buttonStyle?.copyWith(
+      textStyle: WidgetStatePropertyAll<TextStyle>(textStyle),
+    );
     setState(() {});
   }
 
   // Define build options //
 
-  late final Widget textButton = TextButton(
+  late final TextButton textButton = TextButton(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
     onHover: (bool isHovering) => addUnderline(isHovering),
     onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
+    style: linkStyle,
     child: Text(
       widget.text,
       style: textStyle,
@@ -97,11 +107,12 @@ class _EzLinkState extends State<EzLink> {
     ),
   );
 
-  late final Widget iconTextButton = TextButton.icon(
+  late final TextButton iconTextButton = TextButton.icon(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
     onHover: (bool isHovering) => addUnderline(isHovering),
     onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
+    style: linkStyle,
     icon: widget.icon,
     label: Text(
       widget.text,
