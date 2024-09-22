@@ -111,20 +111,19 @@ ThemeData ezThemeData(Brightness brightness) {
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: textTheme.bodyLarge,
       inputDecorationTheme: InputDecorationTheme(
+        hintStyle: textTheme.bodyLarge,
+        labelStyle: textTheme.labelLarge,
+        errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         contentPadding: EdgeInsets.all(margin),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: colorScheme.primary),
+        filled: true,
+        fillColor: colorScheme.surface,
+        iconColor: colorScheme.primary,
+        prefixIconColor: colorScheme.primary,
+        suffixIconColor: colorScheme.primary,
+        border: const OutlineInputBorder(
           borderRadius: ezRoundEdge,
           gapPadding: 0,
         ),
-        errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
-        filled: true,
-        fillColor: colorScheme.surface,
-        hintStyle: textTheme.bodyLarge,
-        iconColor: colorScheme.primary,
-        labelStyle: textTheme.labelLarge,
-        prefixIconColor: colorScheme.primary,
-        suffixIconColor: colorScheme.primary,
       ),
     ),
 
