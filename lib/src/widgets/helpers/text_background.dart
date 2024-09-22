@@ -11,7 +11,7 @@ class EzTextBackground extends StatelessWidget {
   /// The [Text] that needs a background
   final Widget text;
 
-  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
+  /// Defaults to [EzMargin.col]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
@@ -24,7 +24,7 @@ class EzTextBackground extends StatelessWidget {
   /// Can ignore [useSurface] if this is set
   final Color? backgroundColor;
 
-  /// Create a [Container] for your [text] with a su
+  /// Create a [Container] for your [text] with a background color that automatically responds to [textBackgroundOKey]
   const EzTextBackground(
     this.text, {
     super.key,
