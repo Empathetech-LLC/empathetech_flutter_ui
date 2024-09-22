@@ -76,7 +76,6 @@ class _ImageSettingState extends State<EzImageSetting> {
   bool inProgress = false;
 
   late final TextEditingController urlText = TextEditingController();
-  late final GlobalKey<FormState> urlFormKey = GlobalKey<FormState>();
 
   // Define button functions //
 
@@ -90,6 +89,14 @@ class _ImageSettingState extends State<EzImageSetting> {
         doNothing();
       }
     }
+  }
+
+  /// Validate a URL
+  String? urlValidator(String? value) {
+    if (value == null || value.isEmpty || !isUrl(value)) {
+      return 'Enter a valid URL';
+    }
+    return null;
   }
 
   /// Build the list of [ImageSource] options
@@ -159,34 +166,40 @@ class _ImageSettingState extends State<EzImageSetting> {
           context: context,
           builder: (BuildContext networkDialogContext) {
             void onConfirm() async {
-              if (urlFormKey.currentState!.validate()) {
-                late final NetworkImage image;
+              closeKeyboard(networkDialogContext);
 
-                // Verify that the image is accessible
-                try {
-                  image = NetworkImage(urlText.text);
-                } catch (e) {
-                  await logAlert(
-                    context,
-                    title: l10n.isGetFailed,
-                    message: '${e.toString()}\n\n${l10n.isPermission}',
-                  );
+              // Validate the URL
+              final String url = urlText.text.trim();
 
-                  if (networkDialogContext.mounted) {
-                    Navigator.of(networkDialogContext).pop(null);
-                  }
-                  return;
-                }
+              if (urlValidator(url) != null) return;
 
-                await EzConfig.setString(widget.configKey, image.url);
+              // Verify that the image is accessible
+              late final NetworkImage image;
+              try {
+                image = NetworkImage(urlText.text);
+              } catch (e) {
+                await logAlert(
+                  context,
+                  title: l10n.isGetFailed,
+                  message: '${e.toString()}\n\n${l10n.isPermission}',
+                );
 
                 if (networkDialogContext.mounted) {
-                  Navigator.of(networkDialogContext).pop(image.url);
+                  Navigator.of(networkDialogContext).pop(null);
                 }
+                return;
+              }
 
-                if (dialogContext.mounted) {
-                  Navigator.of(dialogContext).pop(image.url);
-                }
+              // Save the URL
+              await EzConfig.setString(widget.configKey, image.url);
+
+              // Pop dialogs
+              if (networkDialogContext.mounted) {
+                Navigator.of(networkDialogContext).pop(image.url);
+              }
+
+              if (dialogContext.mounted) {
+                Navigator.of(dialogContext).pop(image.url);
               }
             }
 
@@ -199,19 +212,15 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               contents: <Widget>[
                 Form(
-                  key: urlFormKey,
                   child: TextFormField(
                     controller: urlText,
+                    maxLines: 1,
+                    autofillHints: const <String>[AutofillHints.url],
                     decoration: const InputDecoration(
-                        hintText: 'https://example.com/image.jpg'),
-                    style: theme.dialogTheme.contentTextStyle,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty || !isUrl(value)) {
-                        return 'Enter a valid URL';
-                      }
-                      return null;
-                    },
+                      hintText: 'https://example.com/image.jpg',
+                    ),
+                    autovalidateMode: AutovalidateMode.onUnfocus,
+                    validator: urlValidator,
                   ),
                 ),
               ],

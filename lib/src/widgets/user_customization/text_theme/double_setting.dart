@@ -143,20 +143,13 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 ),
                 child: TextFormField(
                   controller: controller,
+                  style: style,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(border: InputBorder.none),
-                  onFieldSubmitted: (String stringVal) async {
-                    final double? doubleVal = double.tryParse(stringVal);
-                    if (doubleVal == null ||
-                        doubleVal > widget.max ||
-                        doubleVal < widget.min) return;
-
-                    currValue = doubleVal;
-                    await EzConfig.setDouble(widget.configKey, doubleVal);
-                    widget.notifierCallback(doubleVal);
-                    setState(() {});
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autovalidateMode: AutovalidateMode.onUnfocus,
                   validator: (String? value) {
                     if (value == null) return null;
 
@@ -170,9 +163,17 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
                     return null;
                   },
-                  style: style,
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
+                  onFieldSubmitted: (String stringVal) async {
+                    final double? doubleVal = double.tryParse(stringVal);
+                    if (doubleVal == null ||
+                        doubleVal > widget.max ||
+                        doubleVal < widget.min) return;
+
+                    currValue = doubleVal;
+                    await EzConfig.setDouble(widget.configKey, doubleVal);
+                    widget.notifierCallback(doubleVal);
+                    setState(() {});
+                  },
                 ),
               ),
 
