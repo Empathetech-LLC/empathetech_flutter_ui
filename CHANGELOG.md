@@ -2,9 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [7.2.0] - 2024-09-15
+## [7.2.0] - 2024-XX-XX
 ### Updated
 - Integrated testing
+- Analysis options
+- Code comments
+- Using named routes (go router)
+- Page image key -> background image key
+- Dialog function parameters
+- Empathetech theme data
+- Localizations
+- EzScreen decorations
+
+### Added
+- Text backgrounds
+  - Background opacity slider in sample text settings
+- Mounted context checks
+- Additional settings passthrough for sample screens
+- Sizing widgets
 
 ## [7.1.0] - 2024-09-08
 ### Added
