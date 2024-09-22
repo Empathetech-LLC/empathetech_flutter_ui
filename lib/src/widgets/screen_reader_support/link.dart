@@ -19,9 +19,6 @@ class EzLink extends StatefulWidget {
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
 
-  /// Optional [Color] to overwrite what's in the [ThemeData]
-  final Color? backgroundColor;
-
   final TextAlign? textAlign;
 
   /// Destination function
@@ -52,7 +49,6 @@ class EzLink extends StatefulWidget {
     required this.style,
     this.icon,
     this.color,
-    this.backgroundColor,
     this.textAlign,
     this.onTap,
     this.url,
@@ -78,16 +74,9 @@ class _EzLinkState extends State<EzLink> {
     decorationColor: textColor,
   );
 
-  late final ButtonStyle? buttonTheme = Theme.of(context).textButtonTheme.style;
-  late final ButtonStyle? linkTheme = widget.backgroundColor != null
-      ? buttonTheme?.copyWith(
-          backgroundColor: WidgetStateProperty.all(widget.backgroundColor!),
-        )
-      : buttonTheme;
-
   // Define custom functions //
 
-  void _addUnderline(bool addIt) {
+  void addUnderline(bool addIt) {
     textStyle = textStyle.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
@@ -99,9 +88,8 @@ class _EzLinkState extends State<EzLink> {
   late final Widget textButton = TextButton(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
-    onHover: (bool isHovering) => _addUnderline(isHovering),
-    onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
-    style: linkTheme,
+    onHover: (bool isHovering) => addUnderline(isHovering),
+    onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
     child: Text(
       widget.text,
       style: textStyle,
@@ -112,9 +100,8 @@ class _EzLinkState extends State<EzLink> {
   late final Widget iconTextButton = TextButton.icon(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
-    onHover: (bool isHovering) => _addUnderline(isHovering),
-    onFocusChange: (bool hasFocus) => _addUnderline(hasFocus),
-    style: linkTheme,
+    onHover: (bool isHovering) => addUnderline(isHovering),
+    onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
     icon: widget.icon,
     label: Text(
       widget.text,

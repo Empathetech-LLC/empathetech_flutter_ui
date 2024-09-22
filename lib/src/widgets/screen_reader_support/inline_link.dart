@@ -22,9 +22,6 @@ class EzInlineLink extends WidgetSpan {
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
 
-  /// Optional [Color] to overwrite what's in the [ThemeData]
-  final Color? backgroundColor;
-
   final TextAlign? textAlign;
 
   /// Destination function
@@ -58,7 +55,6 @@ class EzInlineLink extends WidgetSpan {
     this.key,
     this.icon,
     this.color,
-    this.backgroundColor,
     this.textAlign,
     this.onTap,
     this.url,
@@ -77,7 +73,6 @@ class EzInlineLink extends WidgetSpan {
             style: style!,
             icon: icon,
             color: color,
-            backgroundColor: backgroundColor,
             textAlign: textAlign,
             onTap: onTap,
             url: url,

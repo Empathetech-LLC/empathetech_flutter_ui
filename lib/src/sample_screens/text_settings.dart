@@ -867,7 +867,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               EzInlineLink(
                 l10n.tsDisplayLink,
                 style: displayProvider.value,
-                backgroundColor: Colors.transparent,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(displayProvider.id),
                 onTap: () {
@@ -892,7 +891,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               EzInlineLink(
                 l10n.tsHeadlineLink,
                 style: headlineProvider.value,
-                backgroundColor: Colors.transparent,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(headlineProvider.id),
                 onTap: () {
@@ -917,7 +915,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               EzInlineLink(
                 l10n.tsTitleLink,
                 style: titleProvider.value,
-                backgroundColor: Colors.transparent,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(titleProvider.id),
                 onTap: () {
@@ -941,7 +938,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               EzInlineLink(
                 l10n.tsBodyLink,
                 style: bodyProvider.value,
-                backgroundColor: Colors.transparent,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(bodyProvider.id),
                 onTap: () {
@@ -966,7 +962,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               EzInlineLink(
                 l10n.tsLabelLink,
                 style: labelProvider.value,
-                backgroundColor: Colors.transparent,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(labelProvider.id),
                 onTap: () {
