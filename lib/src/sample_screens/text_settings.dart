@@ -316,6 +316,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             bodyProvider.reset();
             labelProvider.reset();
 
+            currOpacity = EzConfig.getDefault(textBackgroundOKey) ?? 0.0;
+            backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+
             setState(() {});
           },
         ),
