@@ -199,6 +199,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             EzTextBackground(
               EzFontDoubleBatchSetting(key: UniqueKey()),
               margin: EzMargin.wrap(),
+              borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
             ),
           ],
