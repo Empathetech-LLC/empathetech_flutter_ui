@@ -54,6 +54,9 @@ class EzPadding extends EdgeInsets {
 /// BorderRadius.all(Radius.circular(4.0))
 const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
 
+/// BorderRadius.all(Radius.circular(32.0))
+const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(32.0));
+
 /// threeQs = [widthOf] context * (2 / 3)
 /// min: threeQs, max: min(threeQs, [smallBreakpoint])
 BoxConstraints textFieldConstraints(BuildContext context) {
