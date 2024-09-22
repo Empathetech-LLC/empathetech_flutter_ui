@@ -14,6 +14,9 @@ class EzTextBackground extends StatelessWidget {
   /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
   final EdgeInsets? margin;
 
+  /// Defaults to [ezRoundEdge]
+  final BorderRadiusGeometry? borderRadius;
+
   /// Will use surface container if false
   final bool useSurface;
 
@@ -26,6 +29,7 @@ class EzTextBackground extends StatelessWidget {
     this.text, {
     super.key,
     this.margin,
+    this.borderRadius,
     this.useSurface = true,
     this.backgroundColor,
   });
@@ -49,7 +53,7 @@ class EzTextBackground extends StatelessWidget {
       padding: margin ?? EzMargin.col(),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: ezRoundEdge,
+        borderRadius: borderRadius ?? ezRoundEdge,
       ),
       child: text,
     );
