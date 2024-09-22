@@ -860,118 +860,127 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         separator,
 
         // Display preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsDisplayP1),
-            EzInlineLink(
-              l10n.tsDisplayLink,
-              style: displayProvider.value,
-              backgroundColor: Colors.transparent,
-              textAlign: TextAlign.center,
-              key: ValueKey<int>(displayProvider.id),
-              onTap: () {
-                editing = TextSettingType.display;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(display),
-            ),
-            EzPlainText(text: l10n.tsDisplayP2),
-          ],
-          style: displayProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsDisplayP1),
+              EzInlineLink(
+                l10n.tsDisplayLink,
+                style: displayProvider.value,
+                backgroundColor: Colors.transparent,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(displayProvider.id),
+                onTap: () {
+                  editing = TextSettingType.display;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(display),
+              ),
+              EzPlainText(text: l10n.tsDisplayP2),
+            ],
+            style: displayProvider.value,
+            textAlign: TextAlign.center,
+          ),
         ),
         spacer,
 
         // Headline preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsHeadlineP1),
-            EzInlineLink(
-              l10n.tsHeadlineLink,
-              style: headlineProvider.value,
-              backgroundColor: Colors.transparent,
-              textAlign: TextAlign.center,
-              key: ValueKey<int>(headlineProvider.id),
-              onTap: () {
-                editing = TextSettingType.headline;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(headline),
-            ),
-            EzPlainText(text: l10n.tsHeadlineP2),
-          ],
-          style: headlineProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsHeadlineP1),
+              EzInlineLink(
+                l10n.tsHeadlineLink,
+                style: headlineProvider.value,
+                backgroundColor: Colors.transparent,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(headlineProvider.id),
+                onTap: () {
+                  editing = TextSettingType.headline;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(headline),
+              ),
+              EzPlainText(text: l10n.tsHeadlineP2),
+            ],
+            style: headlineProvider.value,
+            textAlign: TextAlign.center,
+          ),
         ),
         spacer,
 
         // Title preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsTitleP1),
-            EzInlineLink(
-              l10n.tsTitleLink,
-              style: titleProvider.value,
-              backgroundColor: Colors.transparent,
-              textAlign: TextAlign.center,
-              key: ValueKey<int>(titleProvider.id),
-              onTap: () {
-                editing = TextSettingType.title;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(title),
-            ),
-          ],
-          style: titleProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsTitleP1),
+              EzInlineLink(
+                l10n.tsTitleLink,
+                style: titleProvider.value,
+                backgroundColor: Colors.transparent,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(titleProvider.id),
+                onTap: () {
+                  editing = TextSettingType.title;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(title),
+              ),
+            ],
+            style: titleProvider.value,
+            textAlign: TextAlign.center,
+          ),
         ),
         spacer,
 
         // Body preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsBodyP1),
-            EzInlineLink(
-              l10n.tsBodyLink,
-              style: bodyProvider.value,
-              backgroundColor: Colors.transparent,
-              textAlign: TextAlign.center,
-              key: ValueKey<int>(bodyProvider.id),
-              onTap: () {
-                editing = TextSettingType.body;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(body),
-            ),
-            EzPlainText(text: l10n.tsBodyP2),
-          ],
-          style: bodyProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsBodyP1),
+              EzInlineLink(
+                l10n.tsBodyLink,
+                style: bodyProvider.value,
+                backgroundColor: Colors.transparent,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(bodyProvider.id),
+                onTap: () {
+                  editing = TextSettingType.body;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(body),
+              ),
+              EzPlainText(text: l10n.tsBodyP2),
+            ],
+            style: bodyProvider.value,
+            textAlign: TextAlign.center,
+          ),
         ),
         spacer,
 
         // Label preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsLabelP1),
-            EzInlineLink(
-              l10n.tsLabelLink,
-              style: labelProvider.value,
-              backgroundColor: Colors.transparent,
-              textAlign: TextAlign.center,
-              key: ValueKey<int>(labelProvider.id),
-              onTap: () {
-                editing = TextSettingType.label;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(label),
-            ),
-            EzPlainText(text: l10n.tsLabelP2),
-          ],
-          style: labelProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsLabelP1),
+              EzInlineLink(
+                l10n.tsLabelLink,
+                style: labelProvider.value,
+                backgroundColor: Colors.transparent,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(labelProvider.id),
+                onTap: () {
+                  editing = TextSettingType.label;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(label),
+              ),
+              EzPlainText(text: l10n.tsLabelP2),
+            ],
+            style: labelProvider.value,
+            textAlign: TextAlign.center,
+          ),
         ),
-
         separator,
 
         // Reset all
