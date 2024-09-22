@@ -12,7 +12,7 @@ class EzMargin extends EdgeInsets {
   EzMargin() : super.all(EzConfig.get(marginKey));
 
   /// EdgeInsets.symmetric(horizontal: full margin, vertical: half margin)
-  EzMargin.column()
+  EzMargin.col()
       : super.symmetric(
           horizontal: EzConfig.get(marginKey),
           vertical: EzConfig.get(marginKey) / 2,
@@ -34,7 +34,7 @@ class EzPadding extends EdgeInsets {
   EzPadding() : super.all(EzConfig.get(paddingKey));
 
   /// EdgeInsets.symmetric(horizontal: full padding, vertical: half padding)
-  EzPadding.column()
+  EzPadding.col()
       : super.symmetric(
           horizontal: EzConfig.get(paddingKey),
           vertical: EzConfig.get(paddingKey) / 2,
@@ -54,12 +54,13 @@ class EzPadding extends EdgeInsets {
 /// BorderRadius.all(Radius.circular(4.0))
 const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
 
-class EzTextFieldConstraints extends BoxConstraints {
-  ///   minWidth: [widthOf] context * (2 / 3),
-  ///   maxWidth: min([smallBreakpoint], [widthOf] context * (2 / 3))
-  EzTextFieldConstraints(BuildContext context)
-      : super(
-          minWidth: widthOf(context) * (2 / 3),
-          maxWidth: min(smallBreakpoint, widthOf(context) * (2 / 3)),
-        );
+/// threeQs = [widthOf] context * (2 / 3)
+/// min: threeQs, max: min(threeQs, [smallBreakpoint])
+BoxConstraints textFieldConstraints(BuildContext context) {
+  final double threeQs = widthOf(context) * 0.75;
+
+  return BoxConstraints(
+    minWidth: threeQs,
+    maxWidth: min(threeQs, smallBreakpoint),
+  );
 }
