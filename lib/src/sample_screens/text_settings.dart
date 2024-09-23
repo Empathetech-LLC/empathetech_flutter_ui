@@ -905,6 +905,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: displayProvider.value,
             textAlign: TextAlign.center,
           ),
+          borderRadius: ezPillShape,
         ),
         spacer,
 
@@ -929,6 +930,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: headlineProvider.value,
             textAlign: TextAlign.center,
           ),
+          borderRadius: ezPillShape,
         ),
         spacer,
 
@@ -952,6 +954,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: titleProvider.value,
             textAlign: TextAlign.center,
           ),
+          borderRadius: ezPillShape,
         ),
         spacer,
 
@@ -976,6 +979,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: bodyProvider.value,
             textAlign: TextAlign.center,
           ),
+          borderRadius: ezPillShape,
         ),
         spacer,
 
@@ -1000,6 +1004,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: labelProvider.value,
             textAlign: TextAlign.center,
           ),
+          borderRadius: ezPillShape,
         ),
         separator,
 
