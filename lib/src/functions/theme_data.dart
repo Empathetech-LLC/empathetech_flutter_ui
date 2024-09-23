@@ -26,7 +26,11 @@ ThemeData ezThemeData(Brightness brightness) {
     color: colorScheme.onSurface,
   );
 
-  final double textBackgroundOpacity = EzConfig.get(textBackgroundOKey);
+  final double textBackgroundOpacity = EzConfig.get(
+    brightness == Brightness.dark
+        ? darkTextBackgroundOKey
+        : lightTextBackgroundOKey,
+  );
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);

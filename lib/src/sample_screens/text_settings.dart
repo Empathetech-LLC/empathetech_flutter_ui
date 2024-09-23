@@ -162,9 +162,11 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Gather the build data //
 
-  double currOpacity = EzConfig.getDouble(textBackgroundOKey) ??
-      EzConfig.getDefault(textBackgroundOKey) ??
-      0.0;
+  late final String oKey =
+      isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+
+  late double currOpacity =
+      EzConfig.getDouble(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
 
   late Color? backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
@@ -287,7 +289,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               });
             },
             onChangeEnd: (double value) async {
-              await EzConfig.setDouble(textBackgroundOKey, value);
+              await EzConfig.setDouble(oKey, value);
             },
 
             // Slider semantics
@@ -316,7 +318,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             bodyProvider.reset();
             labelProvider.reset();
 
-            currOpacity = EzConfig.getDefault(textBackgroundOKey) ?? 0.0;
+            currOpacity = EzConfig.getDefault(oKey) ?? 0.0;
             backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
             setState(() {});

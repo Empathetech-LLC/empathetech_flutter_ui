@@ -74,7 +74,8 @@ const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
 
 // Background opacity
-const String textBackgroundOKey = 'textBackgroundOpacity';
+const String darkTextBackgroundOKey = 'darkTextBackgroundOpacity';
+const String lightTextBackgroundOKey = 'lightTextBackgroundOpacity';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -131,7 +132,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   labelUnderlinedKey: String,
 
   // Background opacity
-  textBackgroundOKey: double,
+  darkTextBackgroundOKey: double,
+  lightTextBackgroundOKey: double,
 };
 
 // Text settings' values //
