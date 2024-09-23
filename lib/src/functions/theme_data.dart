@@ -123,7 +123,8 @@ ThemeData ezThemeData(Brightness brightness) {
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         contentPadding: EdgeInsets.all(margin),
-        border: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
           gapPadding: 0,
         ),
@@ -177,13 +178,20 @@ ThemeData ezThemeData(Brightness brightness) {
     menuButtonTheme: MenuButtonThemeData(
       style: TextButton.styleFrom(
         backgroundColor: colorScheme.surface,
+        disabledBackgroundColor: colorScheme.outline,
         foregroundColor: colorScheme.onSurface,
+        disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
+    ),
+
+    // Progress indicator
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: colorScheme.secondary,
     ),
 
     // Segmented button
