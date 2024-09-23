@@ -178,7 +178,7 @@ ThemeData ezThemeData(Brightness brightness) {
       style: TextButton.styleFrom(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        textStyle: textTheme.titleLarge,
+        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
