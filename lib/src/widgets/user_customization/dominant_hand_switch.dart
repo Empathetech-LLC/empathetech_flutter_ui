@@ -28,7 +28,6 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
 
-  late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
   final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
@@ -62,7 +61,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         EzTextBackground(
           Text(
             l10n.ssDominantHand,
-            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           useSurface: false,

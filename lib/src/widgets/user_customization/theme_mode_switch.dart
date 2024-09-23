@@ -29,7 +29,6 @@ class EzThemeModeSwitch extends StatefulWidget {
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
 
-  late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
   final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
@@ -68,7 +67,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         EzTextBackground(
           Text(
             l10n.ssThemeMode,
-            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           useSurface: false,
