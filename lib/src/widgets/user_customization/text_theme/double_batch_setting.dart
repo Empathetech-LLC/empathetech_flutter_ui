@@ -102,11 +102,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
         children: <Widget>[
           // Minus icon
           IconButton(
-            style: Theme.of(context).iconButtonTheme.style?.copyWith(
-                  side: WidgetStateProperty.all(BorderSide(
-                    color: colorScheme.primaryContainer,
-                  )),
-                ),
+            style: IconButton.styleFrom(
+              side: BorderSide(color: colorScheme.primaryContainer),
+            ),
             icon: Icon(
               PlatformIcons(context).remove,
               color: atMin ? colorScheme.outline : colorScheme.primary,
@@ -151,11 +149,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
           // Plus icon
           IconButton(
-            style: Theme.of(context).iconButtonTheme.style?.copyWith(
-                  side: WidgetStateProperty.all(BorderSide(
-                    color: colorScheme.primaryContainer,
-                  )),
-                ),
+            style: IconButton.styleFrom(
+              side: BorderSide(color: colorScheme.primaryContainer),
+            ),
             icon: Icon(
               PlatformIcons(context).add,
               color: atMax ? colorScheme.outline : colorScheme.primary,
