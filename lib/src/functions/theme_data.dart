@@ -129,6 +129,9 @@ ThemeData ezThemeData(Brightness brightness) {
           gapPadding: 0,
         ),
       ),
+      menuStyle: MenuStyle(
+        backgroundColor: WidgetStatePropertyAll<Color>(colorScheme.surface),
+      ),
     ),
 
     // Elevated button
