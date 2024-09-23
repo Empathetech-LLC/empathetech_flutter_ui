@@ -206,7 +206,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             ),
           ],
         ),
-        spacer,
 
         // Optional additional settings
         if (widget.additionalSettings != null) ...<Widget>{
@@ -398,6 +397,62 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   // Define the setting controllers //
 
+  late final Widget fontSizeIcon = EzTextBackground(
+    Icon(
+      Icons.text_fields_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    useSurface: false,
+    margin: EzMargin.wrap(),
+    borderRadius: const BorderRadius.only(
+      bottomLeft: Radius.circular(4),
+      bottomRight: Radius.circular(4),
+    ),
+  );
+
+  late final Widget letterSpacingIcon = EzTextBackground(
+    Icon(
+      Icons.horizontal_distribute_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    useSurface: false,
+    margin: EzMargin.wrap(),
+    borderRadius: const BorderRadius.only(
+      bottomLeft: Radius.circular(4),
+      bottomRight: Radius.circular(4),
+    ),
+  );
+
+  late final Widget wordSpacingIcon = EzTextBackground(
+    Icon(
+      Icons.space_bar_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    useSurface: false,
+    margin: EzMargin.wrap(),
+    borderRadius: const BorderRadius.only(
+      bottomLeft: Radius.circular(4),
+      bottomRight: Radius.circular(4),
+    ),
+  );
+
+  late final Widget lineHeightIcon = EzTextBackground(
+    Icon(
+      Icons.format_line_spacing_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    useSurface: false,
+    margin: EzMargin.wrap(),
+    borderRadius: const BorderRadius.only(
+      bottomLeft: Radius.circular(4),
+      bottomRight: Radius.circular(4),
+    ),
+  );
+
   /// Font family setting(s)
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
       <TextSettingType, EzFontFamilySetting>{
@@ -444,11 +499,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxDisplay,
       notifierCallback: displayProvider.resize,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.text_fields_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -460,11 +511,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxHeadline,
       notifierCallback: headlineProvider.resize,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.text_fields_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -476,11 +523,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxTitle,
       notifierCallback: titleProvider.resize,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.text_fields_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -492,11 +535,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxBody,
       notifierCallback: bodyProvider.resize,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.text_fields_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -508,11 +547,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxLabel,
       notifierCallback: labelProvider.resize,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.text_fields_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -634,11 +669,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.horizontal_distribute_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
@@ -649,11 +680,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.horizontal_distribute_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
@@ -664,11 +691,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.horizontal_distribute_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -679,11 +702,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.horizontal_distribute_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
@@ -694,11 +713,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.horizontal_distribute_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
   };
@@ -714,11 +729,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.space_bar_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
@@ -729,11 +740,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.space_bar_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
@@ -744,11 +751,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.space_bar_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -759,11 +762,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.space_bar_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
@@ -774,11 +773,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.space_bar_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
   };
@@ -794,11 +789,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.format_line_spacing_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
@@ -809,11 +800,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.format_line_spacing_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.title: EzFontDoubleSetting(
@@ -824,11 +811,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.format_line_spacing_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -839,11 +822,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.format_line_spacing_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.label: EzFontDoubleSetting(
@@ -854,11 +833,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icon(
-        Icons.format_line_spacing_sharp,
-        color: colorScheme.onSurface,
-        size: labelProvider.value.fontSize,
-      ),
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
   };
