@@ -110,8 +110,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   /// Return the preview Widget(s) for the passed [LayoutSettingType]
   List<Widget> _buildPreview(BuildContext context) {
-    final String currLabel =
-        '${l10n.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
+    final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
       // Margin
@@ -127,7 +126,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               // Label
               Flexible(
                 child: Text(
-                  currLabel,
+                  '${l10n.gCurrently} $valString',
                   style: bodyStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -165,6 +164,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                   padding: WidgetStateProperty.all(
                     EdgeInsets.all(currValue),
                   ),
+                  foregroundColor: WidgetStateProperty.all(
+                    theme.colorScheme.onSurface,
+                  ),
                 ),
                 onPressed: doNothing,
                 child: Text(l10n.gCurrently),
@@ -175,12 +177,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                   padding: WidgetStateProperty.all(
                     EdgeInsets.all(currValue),
                   ),
-                  shape: const WidgetStatePropertyAll<OutlinedBorder>(
-                    CircleBorder(),
+                  foregroundColor: WidgetStateProperty.all(
+                    theme.colorScheme.onSurface,
                   ),
+                  shape: WidgetStateProperty.all(const CircleBorder()),
                 ),
                 onPressed: doNothing,
-                child: Text(currValue.toStringAsFixed(widget.decimals)),
+                child: Text(valString),
               ),
             ],
           ),
@@ -201,13 +204,23 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
+                style: theme.elevatedButtonTheme.style?.copyWith(
+                  foregroundColor: WidgetStateProperty.all(
+                    theme.colorScheme.onSurface,
+                  ),
+                ),
                 onPressed: doNothing,
-                child: Text(currLabel),
+                child: Text(l10n.gCurrently),
               ),
               EzSpacer(space: currValue, vertical: false),
               ElevatedButton(
+                style: theme.elevatedButtonTheme.style?.copyWith(
+                  foregroundColor: WidgetStateProperty.all(
+                    theme.colorScheme.onSurface,
+                  ),
+                ),
                 onPressed: doNothing,
-                child: Text(currLabel),
+                child: Text(valString),
               ),
             ],
           ),
