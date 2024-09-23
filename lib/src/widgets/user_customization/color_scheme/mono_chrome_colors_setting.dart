@@ -78,9 +78,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = PlatformTheme.of(context)?.isDark ??
-        (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
+    final bool isDark = isDarkTheme(context);
     final Color onSurface = Theme.of(context).colorScheme.onSurface;
 
     return ElevatedButton.icon(

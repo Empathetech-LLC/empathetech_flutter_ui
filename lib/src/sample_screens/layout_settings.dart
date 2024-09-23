@@ -6,7 +6,6 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LayoutSettings extends StatefulWidget {
   /// For [EzScreen.useImageDecoration]
@@ -28,15 +27,13 @@ class LayoutSettings extends StatefulWidget {
 class _LayoutSettingsState extends State<LayoutSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)?.isDark ??
-      (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Set the page title //

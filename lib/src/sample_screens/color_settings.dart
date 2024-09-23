@@ -50,14 +50,12 @@ class ColorSettings extends StatefulWidget {
 class _ColorSettingsState extends State<ColorSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)?.isDark ??
-      (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
   late final ThemeData theme = Theme.of(context);
+  late bool isDark = isDarkTheme(context);
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 

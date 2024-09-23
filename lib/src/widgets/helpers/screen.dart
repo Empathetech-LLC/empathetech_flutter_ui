@@ -6,7 +6,6 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzScreen extends StatelessWidget {
   /// Alignment of screen context
@@ -66,9 +65,7 @@ class EzScreen extends StatelessWidget {
     Decoration? buildDecoration() {
       if (!useImageDecoration) return null;
 
-      final bool isDark = PlatformTheme.of(context)?.isDark ??
-          (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
+      final bool isDark = isDarkTheme(context);
       final String? imagePath = EzConfig.get(
         isDark ? darkDecorationImageKey : lightDecorationImageKey,
       );

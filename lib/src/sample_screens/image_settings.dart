@@ -7,7 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettings extends StatefulWidget {
   /// For [EzScreen.useImageDecoration]
@@ -41,9 +40,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  late bool isDark = PlatformTheme.of(context)?.isDark ??
-      (MediaQuery.of(context).platformBrightness == Brightness.dark);
-
+  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the page content //
