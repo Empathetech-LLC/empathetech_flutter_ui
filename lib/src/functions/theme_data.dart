@@ -109,10 +109,11 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: textTheme.bodyLarge,
+      textStyle: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: textTheme.bodyLarge,
         labelStyle: textTheme.labelLarge,
+        helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         contentPadding: EdgeInsets.all(margin),
         filled: true,
