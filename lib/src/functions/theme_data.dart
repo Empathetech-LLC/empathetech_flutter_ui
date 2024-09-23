@@ -18,12 +18,12 @@ ThemeData ezThemeData(Brightness brightness) {
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
   final IconThemeData iconData = IconThemeData(
-    size: textTheme.bodyLarge?.fontSize,
-    color: colorScheme.onSurface,
+    size: textTheme.titleLarge?.fontSize,
+    color: colorScheme.primary,
   );
   final IconThemeData appBarIconData = IconThemeData(
     size: textTheme.headlineLarge?.fontSize,
-    color: colorScheme.onSurface,
+    color: colorScheme.primary,
   );
 
   final double textBackgroundOpacity = EzConfig.get(textBackgroundOKey);
@@ -152,7 +152,9 @@ ThemeData ezThemeData(Brightness brightness) {
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         alignment: Alignment.center,
-        iconSize: textTheme.bodyLarge?.fontSize,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.primary,
+        iconSize: textTheme.titleLarge?.fontSize,
         padding: EdgeInsets.zero,
         side: null,
       ),
