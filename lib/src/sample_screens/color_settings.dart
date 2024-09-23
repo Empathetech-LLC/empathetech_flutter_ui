@@ -32,6 +32,7 @@ class ColorSettings extends StatefulWidget {
       darkSurfaceContainerKey,
       darkSurfaceKey,
       darkOnSurfaceKey,
+      darkSurfaceTintKey,
     ],
     this.lightStarterSet = const <String>[
       lightPrimaryKey,
@@ -40,6 +41,7 @@ class ColorSettings extends StatefulWidget {
       lightSurfaceContainerKey,
       lightSurfaceKey,
       lightOnSurfaceKey,
+      lightSurfaceTintKey,
     ],
   });
 
