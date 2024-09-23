@@ -179,6 +179,7 @@ ThemeData ezThemeData(Brightness brightness) {
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+      errorMaxLines: 1,
     ),
 
     // Menu button
