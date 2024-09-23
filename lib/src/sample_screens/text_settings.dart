@@ -857,6 +857,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
             spacer,
             DropdownMenu<TextSettingType>(
+              enableSearch: false,
               initialSelection: editing,
               onSelected: (TextSettingType? value) {
                 if (value != null) setState(() => editing = value);
