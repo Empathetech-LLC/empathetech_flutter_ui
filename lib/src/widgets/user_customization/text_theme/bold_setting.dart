@@ -31,11 +31,13 @@ class EzBoldSetting extends StatefulWidget {
 class _EzBoldSettingState extends State<EzBoldSetting> {
   // Gather the theme data //
 
-  late bool isBold = EzConfig.get(widget.configKey) ?? false;
-
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
+  late bool isBold = EzConfig.get(widget.configKey) ?? false;
+
   // Define the build //
+
+  late final String tooltip = EFUILang.of(context)!.tsBold;
 
   void swapState() async {
     isBold = !isBold;
@@ -44,26 +46,30 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
     setState(() {});
   }
 
-  late final String tooltip = EFUILang.of(context)!.tsBold;
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return isBold
         ? IconButton(
-            icon: const Icon(Icons.format_bold),
-            color: colorScheme.primary,
-            iconSize: widget.size,
+            style: IconButton.styleFrom(
+              foregroundColor: colorScheme.primary,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              iconSize: widget.size,
+            ),
             onPressed: swapState,
             tooltip: tooltip,
+            icon: const Icon(Icons.format_bold),
           )
         : IconButton(
-            icon: const Icon(Icons.format_bold_outlined),
-            color: colorScheme.outline,
-            iconSize: widget.size,
+            style: IconButton.styleFrom(
+              foregroundColor: colorScheme.outline,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              iconSize: widget.size,
+            ),
             onPressed: swapState,
             tooltip: tooltip,
+            icon: const Icon(Icons.format_bold_outlined),
           );
   }
 }
