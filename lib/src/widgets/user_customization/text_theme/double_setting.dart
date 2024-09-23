@@ -20,7 +20,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   final void Function(double) notifierCallback;
 
   /// Label [icon] below the [EzFontDoubleSetting]
-  final IconData icon;
+  final Icon icon;
 
   /// Message for the on hover [Tooltip]
   final String tooltip;
@@ -32,6 +32,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// Only relevant if [plusMinus] is true
   final double delta;
 
+  /// [TextStyle] for the [TextFormField]
   final TextStyle? style;
 
   /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size using the results of [measureText] on [sizingString]
@@ -65,24 +66,23 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final double padding = EzConfig.get(paddingKey);
-  late final double lineHeight = style?.height ?? 1.5;
 
   late final EzSpacer pMSpacer = EzSpacer(
     space: padding / 2,
     vertical: false,
   );
 
-  late final double formFieldWidth = sizeLimit.width + padding;
-  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
-
-  late final TextStyle? style =
-      widget.style ?? Theme.of(context).textTheme.bodyLarge;
-
   late final Size sizeLimit = measureText(
     widget.sizingString,
     style: style,
     context: context,
   );
+
+  late final double formFieldWidth = sizeLimit.width + padding;
+  late final double formFieldHeight = sizeLimit.height + padding;
+
+  late final TextStyle? style =
+      widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -210,14 +210,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               }
             ],
           ),
-          EzSpacer(space: padding / 8),
+          EzSpacer(space: padding / 4),
 
           // Label icon
-          Icon(
-            widget.icon,
-            color: colorScheme.onSurface,
-            size: formFieldHeight / 4,
-          ),
+          widget.icon,
         ],
       ),
     );
