@@ -815,6 +815,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         EzScrollView(
           scrollDirection: Axis.horizontal,
           mainAxisSize: MainAxisSize.min,
+          primary: false,
           children: <Widget>[
             EzTextBackground(
               Text(
