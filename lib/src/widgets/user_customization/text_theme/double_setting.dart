@@ -20,7 +20,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   final void Function(double) notifierCallback;
 
   /// Label [icon] below the [EzFontDoubleSetting]
-  final Icon icon;
+  final Widget icon;
 
   /// Message for the on hover [Tooltip]
   final String tooltip;
@@ -210,7 +210,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               }
             ],
           ),
-          EzSpacer(space: padding / 4),
 
           // Label icon
           widget.icon,
