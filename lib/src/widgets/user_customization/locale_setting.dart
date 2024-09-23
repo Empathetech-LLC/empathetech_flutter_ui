@@ -50,7 +50,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             child: CountryFlag.fromLanguageCode(
               flagLocale.languageCode,
               shape: const Circle(),
-              width: (padding + margin) * 2,
+              width: padding * 2 + margin,
             ),
           )
         : Container(
@@ -61,7 +61,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
             child: CountryFlag.fromCountryCode(
               flagLocale.countryCode!,
               shape: const Circle(),
-              width: (padding + margin) * 2,
+              width: padding * 2 + margin,
             ),
           );
   }

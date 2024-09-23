@@ -59,8 +59,10 @@ class EzImageSetting extends StatefulWidget {
 class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
-  final double padding = EzConfig.get(paddingKey);
   static const EzSpacer spacer = EzSpacer();
+
+  final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
 
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -423,7 +425,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
             ),
             child: CircleAvatar(
-              radius: padding * 2,
+              radius: padding * 2 + margin * 0.5,
               foregroundImage:
                   (inProgress || currPath == null || currPath == noImageValue)
                       ? null
