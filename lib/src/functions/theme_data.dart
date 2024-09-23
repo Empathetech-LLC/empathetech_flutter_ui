@@ -49,49 +49,51 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Typography //
 
-    iconTheme: iconData,
     textTheme: textTheme,
-    primaryIconTheme: iconData,
     primaryTextTheme: textTheme,
+
+    iconTheme: iconData,
+    primaryIconTheme: iconData,
 
     // Widgets //
 
     // App bar
     appBarTheme: AppBarTheme(
-      actionsIconTheme: appBarIconData,
       backgroundColor: colorScheme.surface,
-      centerTitle: true,
-      iconTheme: appBarIconData,
       foregroundColor: colorScheme.onSurface,
-      titleSpacing: 0,
       titleTextStyle: textTheme.headlineLarge,
+      iconTheme: appBarIconData,
+      actionsIconTheme: appBarIconData,
+      centerTitle: true,
+      titleSpacing: 0,
     ),
 
     // Bottom sheet
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: colorScheme.surfaceContainer,
-      dragHandleColor: colorScheme.onSurface,
       modalBackgroundColor: colorScheme.surfaceContainer,
+      dragHandleColor: colorScheme.onSurface,
     ),
 
     // Card
     cardTheme: CardTheme(
       color: colorScheme.surface,
+      surfaceTintColor: colorScheme.surfaceTint,
       margin: EdgeInsets.zero,
     ),
 
     // Dialog
     dialogTheme: DialogTheme(
+      backgroundColor: colorScheme.surfaceContainer,
+      titleTextStyle: textTheme.titleLarge,
+      contentTextStyle: textTheme.bodyLarge,
+      alignment: Alignment.center,
       actionsPadding: EdgeInsets.only(
         top: (spacing > padding) ? (spacing - padding) : 0.0,
         left: spacing,
         right: spacing,
         bottom: spacing,
       ),
-      alignment: Alignment.center,
-      backgroundColor: colorScheme.surfaceContainer,
-      contentTextStyle: textTheme.bodyLarge,
-      titleTextStyle: textTheme.titleLarge,
     ),
 
     // Divider
@@ -109,18 +111,18 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
-      textStyle: textTheme.bodyLarge?.copyWith(color: colorScheme.primary),
+      textStyle: textTheme.bodyLarge,
       inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surface,
+        prefixIconColor: colorScheme.primary,
+        iconColor: colorScheme.primary,
+        suffixIconColor: colorScheme.primary,
         hintStyle: textTheme.bodyLarge,
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
         contentPadding: EdgeInsets.all(margin),
-        filled: true,
-        fillColor: colorScheme.surface,
-        iconColor: colorScheme.primary,
-        prefixIconColor: colorScheme.primary,
-        suffixIconColor: colorScheme.primary,
         border: const OutlineInputBorder(
           borderRadius: ezRoundEdge,
           gapPadding: 0,
@@ -131,56 +133,72 @@ ThemeData ezThemeData(Brightness brightness) {
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        alignment: Alignment.center,
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.primary,
         textStyle: textTheme.bodyLarge,
+        alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
     // Floating action button
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: colorScheme.primary,
-      extendedPadding: EdgeInsets.all(padding),
       foregroundColor: colorScheme.onPrimary,
+      extendedPadding: EdgeInsets.all(padding),
       shape: const CircleBorder(),
     ),
 
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        alignment: Alignment.center,
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.primary,
         iconSize: textTheme.titleLarge?.fontSize,
+        alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
-      errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+      filled: true,
+      fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
-      fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
-      filled: true,
+      errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+    ),
+
+    // Menu button
+    menuButtonTheme: MenuButtonThemeData(
+      style: TextButton.styleFrom(
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        textStyle: textTheme.titleLarge,
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        side: null,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
     ),
 
     // Segmented button
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
-        alignment: Alignment.center,
         backgroundColor: colorScheme.surface,
-        disabledBackgroundColor: colorScheme.outline,
-        disabledForegroundColor: colorScheme.onSurface,
-        foregroundColor: colorScheme.onSurface,
-        padding: EdgeInsets.all(padding),
         selectedBackgroundColor: colorScheme.primary,
+        disabledBackgroundColor: colorScheme.outline,
+        foregroundColor: colorScheme.onSurface,
         selectedForegroundColor: colorScheme.onPrimary,
+        disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(padding),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
@@ -193,11 +211,13 @@ ThemeData ezThemeData(Brightness brightness) {
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        foregroundColor: colorScheme.primary,
+        textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        textStyle: textTheme.bodyLarge,
       ),
     ),
 
@@ -207,10 +227,10 @@ ThemeData ezThemeData(Brightness brightness) {
         color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
       ),
+      textStyle: textTheme.bodyLarge,
+      textAlign: TextAlign.center,
       margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-      textAlign: TextAlign.center,
-      textStyle: textTheme.bodyLarge,
       waitDuration: const Duration(milliseconds: 750),
     ),
   );
