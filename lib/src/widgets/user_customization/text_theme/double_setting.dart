@@ -62,21 +62,21 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
-  late final TextStyle? style =
-      widget.style ?? Theme.of(context).textTheme.bodyLarge;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final double padding = EzConfig.get(paddingKey);
   late final double lineHeight = style?.height ?? 1.5;
 
   late final EzSpacer pMSpacer = EzSpacer(
-    space: padding / 4,
+    space: padding / 2,
     vertical: false,
   );
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final double formFieldWidth = sizeLimit.width + padding;
+  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
 
-  late final Color onBackground = Theme.of(context).colorScheme.onSurface;
-  late final Color outlineColor = Theme.of(context).colorScheme.outline;
+  late final TextStyle? style =
+      widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
   late final Size sizeLimit = measureText(
     widget.sizingString,
@@ -84,15 +84,14 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     context: context,
   );
 
-  late final double formFieldWidth = sizeLimit.width + padding;
-  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 
   late double currValue;
   final TextEditingController controller = TextEditingController();
 
-  // Return the build //
+  // Init //
 
   @override
   void initState() {
@@ -100,6 +99,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     currValue = widget.initialValue;
     controller.text = currValue.toString();
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -114,10 +115,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               // Minus
               if (widget.plusMinus) ...<Widget>{
                 IconButton(
-                  icon: Icon(
-                    PlatformIcons(context).remove,
-                    color:
-                        (currValue > widget.min) ? onBackground : outlineColor,
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
                   ),
                   onPressed: (currValue > widget.min)
                       ? () async {
@@ -130,7 +129,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         }
                       : doNothing,
                   tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-                  alignment: Alignment.bottomCenter,
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    color: (currValue > widget.min)
+                        ? colorScheme.primary
+                        : colorScheme.outline,
+                  ),
                 ),
                 pMSpacer,
               },
@@ -182,10 +186,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
                 // Plus icon
                 IconButton(
-                  icon: Icon(
-                    PlatformIcons(context).add,
-                    color:
-                        (currValue < widget.max) ? onBackground : outlineColor,
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
                   ),
                   onPressed: (currValue < widget.max)
                       ? () async {
@@ -198,7 +200,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         }
                       : doNothing,
                   tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-                  alignment: Alignment.bottomCenter,
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    color: (currValue < widget.max)
+                        ? colorScheme.primary
+                        : colorScheme.outline,
+                  ),
                 ),
               }
             ],
@@ -208,8 +215,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
           // Label icon
           Icon(
             widget.icon,
+            color: colorScheme.onSurface,
             size: formFieldHeight / 4,
-            color: onBackground,
           ),
         ],
       ),
