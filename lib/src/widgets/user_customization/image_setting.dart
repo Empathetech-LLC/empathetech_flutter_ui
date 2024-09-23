@@ -418,7 +418,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: theme.colorScheme.primaryContainer,
+                color: theme.colorScheme.onSurface,
+                width: 0.5,
               ),
             ),
             child: CircleAvatar(

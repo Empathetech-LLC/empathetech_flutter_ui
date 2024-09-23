@@ -5,7 +5,6 @@
 
 import '../../../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -40,6 +39,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
+  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
   static const EzSpacer spacer = EzSpacer();
@@ -131,7 +131,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     ? CircleAvatar(
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                         child: Icon(
                           PlatformIcons(context).eyeSlash,
                           size: theme.textTheme.titleLarge?.fontSize,
@@ -140,7 +140,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     : CircleAvatar(
                         backgroundColor: Color(recommended),
                         foregroundColor: getTextColor(Color(recommended)),
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                       ),
               ),
             ],
@@ -206,7 +206,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     ? CircleAvatar(
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                         child: Icon(
                           PlatformIcons(context).eyeSlash,
                           size: theme.textTheme.titleLarge?.fontSize,
@@ -215,7 +215,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     : CircleAvatar(
                         backgroundColor: resetColor,
                         foregroundColor: getTextColor(resetColor),
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                       ),
               ),
             ],
@@ -305,7 +305,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ? CircleAvatar(
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
-                    radius: padding * sqrt(2),
+                    radius: padding + margin,
                     child: Icon(
                       PlatformIcons(context).eyeSlash,
                       size: theme.textTheme.titleLarge?.fontSize,
@@ -314,7 +314,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 : CircleAvatar(
                     backgroundColor: currColor,
                     foregroundColor: getTextColor(currColor),
-                    radius: padding * sqrt(2),
+                    radius: padding + margin,
                   ),
           ),
           label: Text(label),

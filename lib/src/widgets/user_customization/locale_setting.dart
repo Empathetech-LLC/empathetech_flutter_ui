@@ -25,25 +25,44 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the theme data //
 
-  late Locale currLocale = Localizations.localeOf(context);
-
   static const EzSpacer spacer = EzSpacer();
+
+  final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
+
+  late final Color onSurface = Theme.of(context).colorScheme.onSurface;
+
+  late Locale currLocale = Localizations.localeOf(context);
 
   late EFUILang l10n = EFUILang.of(context)!;
 
   // Gather the list items //
 
-  CountryFlag _flag(Locale locale) {
+  Widget flag(Locale locale) {
     final Locale flagLocale = locale;
 
     return (flagLocale.countryCode == null)
-        ? CountryFlag.fromLanguageCode(
-            flagLocale.languageCode,
-            shape: const Circle(),
+        ? Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: onSurface, width: 0.5),
+            ),
+            child: CountryFlag.fromLanguageCode(
+              flagLocale.languageCode,
+              shape: const Circle(),
+              width: (padding + margin) * 2,
+            ),
           )
-        : CountryFlag.fromCountryCode(
-            flagLocale.countryCode!,
-            shape: const Circle(),
+        : Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: onSurface, width: 0.5),
+            ),
+            child: CountryFlag.fromCountryCode(
+              flagLocale.countryCode!,
+              shape: const Circle(),
+              width: (padding + margin) * 2,
+            ),
           );
   }
 
@@ -74,7 +93,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                   Navigator.of(dialogContext).pop(locale);
                 }
               },
-              icon: _flag(locale),
+              icon: flag(locale),
               label: Text(
                 LocaleNames.of(context)!.nameOf(locale.languageCode)!,
                 textAlign: TextAlign.center,
@@ -106,7 +125,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           onPressed: () => _chooseLocale(context),
-          icon: _flag(currLocale),
+          icon: flag(currLocale),
           label: Text(l10n.ssLanguage),
         ),
       ),

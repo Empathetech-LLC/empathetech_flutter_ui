@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -296,6 +295,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   // Gather the theme data //
 
+  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
   static const EzSpacer spacer = EzSpacer();
@@ -365,7 +365,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
-              radius: padding * sqrt(2),
+              radius: padding + margin,
               child: liveColor == Colors.transparent
                   ? Icon(PlatformIcons(context).eyeSlash)
                   : null,
