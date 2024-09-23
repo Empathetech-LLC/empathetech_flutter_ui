@@ -411,9 +411,6 @@ class _ImageSettingState extends State<EzImageSetting> {
             padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
               EdgeInsets.all(padding * 0.75),
             ),
-            foregroundColor: WidgetStatePropertyAll<Color>(
-              theme.colorScheme.onSurface,
-            ),
           ),
           onPressed: inProgress ? doNothing : activateSetting,
           onLongPress: inProgress ? doNothing : showCredits,
