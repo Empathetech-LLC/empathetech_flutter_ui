@@ -143,7 +143,7 @@ const String italic = 'italic';
 const String underlined = 'underlined';
 
 /// '-5.5'
-const String sampleString = '-5.5';
+const String sampleString = '55.55';
 
 // Text settings' recommended parameters //
 
