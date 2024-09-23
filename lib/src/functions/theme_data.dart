@@ -23,7 +23,7 @@ ThemeData ezThemeData(Brightness brightness) {
   );
   final IconThemeData appBarIconData = IconThemeData(
     size: textTheme.headlineLarge?.fontSize,
-    color: colorScheme.primary,
+    color: colorScheme.onSurface,
   );
 
   final double textBackgroundOpacity = EzConfig.get(textBackgroundOKey);
@@ -200,12 +200,13 @@ ThemeData ezThemeData(Brightness brightness) {
         backgroundColor: colorScheme.surface,
         selectedBackgroundColor: colorScheme.primary,
         disabledBackgroundColor: colorScheme.outline,
-        foregroundColor: colorScheme.onSurface,
+        foregroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
         disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
+        side: BorderSide(color: colorScheme.primaryContainer),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
