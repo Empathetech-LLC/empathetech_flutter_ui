@@ -77,6 +77,7 @@ class _EzLinkState extends State<EzLink> {
   );
 
   late ButtonStyle? linkStyle = buttonStyle?.copyWith(
+    foregroundColor: WidgetStateProperty.all(textColor),
     textStyle: WidgetStateProperty.all(textStyle),
   );
 
