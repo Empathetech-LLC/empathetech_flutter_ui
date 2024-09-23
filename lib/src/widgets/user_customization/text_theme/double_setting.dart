@@ -152,7 +152,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 1,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(border: InputBorder.none),
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   validator: (String? value) {
                     if (value == null) return null;
