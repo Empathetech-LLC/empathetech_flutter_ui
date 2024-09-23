@@ -376,7 +376,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             padding: WidgetStateProperty.all(
               EdgeInsets.all(padding * 0.75),
             ),
-            foregroundColor: WidgetStatePropertyAll<Color?>(
+            foregroundColor: WidgetStateProperty.all(
               theme.colorScheme.onSurface,
             ),
           ),

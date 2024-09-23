@@ -77,7 +77,7 @@ class _EzLinkState extends State<EzLink> {
   );
 
   late ButtonStyle? linkStyle = buttonStyle?.copyWith(
-    textStyle: WidgetStatePropertyAll<TextStyle>(textStyle),
+    textStyle: WidgetStateProperty.all(textStyle),
   );
 
   // Define custom functions //
@@ -87,7 +87,7 @@ class _EzLinkState extends State<EzLink> {
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
     linkStyle = buttonStyle?.copyWith(
-      textStyle: WidgetStatePropertyAll<TextStyle>(textStyle),
+      textStyle: WidgetStateProperty.all(textStyle),
     );
     setState(() {});
   }

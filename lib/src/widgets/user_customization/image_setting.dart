@@ -410,7 +410,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
           style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
+            padding: WidgetStateProperty.all(
               EdgeInsets.all(padding * 0.75),
             ),
           ),

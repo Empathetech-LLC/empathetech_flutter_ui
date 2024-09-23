@@ -130,7 +130,7 @@ ThemeData ezThemeData(Brightness brightness) {
         ),
       ),
       menuStyle: MenuStyle(
-        backgroundColor: WidgetStatePropertyAll<Color>(colorScheme.surface),
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
       ),
     ),
 

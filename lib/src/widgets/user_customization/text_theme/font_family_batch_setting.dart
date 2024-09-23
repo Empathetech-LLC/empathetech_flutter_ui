@@ -94,7 +94,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       value: entry.key,
       label: googleStyleNames[entry.key]!,
       style: theme.textButtonTheme.style?.copyWith(
-        textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
+        textStyle: WidgetStateProperty.all(entry.value),
       ),
     );
   }).toList();
