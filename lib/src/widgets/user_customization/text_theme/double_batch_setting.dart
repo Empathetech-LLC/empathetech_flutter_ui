@@ -43,11 +43,10 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
     labelFontSizeKey,
   ];
 
-  late final Color onBackground = Theme.of(context).colorScheme.onSurface;
-  late final Color outlineColor = Theme.of(context).colorScheme.outline;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final EzSpacer pMSpacer = EzSpacer(
-    space: EzConfig.get(paddingKey) / 4,
+    space: EzConfig.get(paddingKey) / 2,
     vertical: false,
   );
 
@@ -103,10 +102,15 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
         children: <Widget>[
           // Minus icon
           IconButton(
+            style: Theme.of(context).iconButtonTheme.style?.copyWith(
+                  side: WidgetStateProperty.all(BorderSide(
+                    color: colorScheme.primaryContainer,
+                  )),
+                ),
             icon: Icon(
               PlatformIcons(context).remove,
-              color: atMin ? outlineColor : onBackground,
-              size: bodyProvider.value.fontSize,
+              color: atMin ? colorScheme.outline : colorScheme.primary,
+              size: titleProvider.value.fontSize,
             ),
             onPressed: atMin
                 ? doNothing
@@ -140,16 +144,21 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           // Core
           Icon(
             Icons.text_fields_sharp,
-            color: onBackground,
-            size: bodyProvider.value.fontSize,
+            color: colorScheme.onSurface,
+            size: titleProvider.value.fontSize,
           ),
           pMSpacer,
 
           // Plus icon
           IconButton(
+            style: Theme.of(context).iconButtonTheme.style?.copyWith(
+                  side: WidgetStateProperty.all(BorderSide(
+                    color: colorScheme.primaryContainer,
+                  )),
+                ),
             icon: Icon(
               PlatformIcons(context).add,
-              color: atMax ? outlineColor : onBackground,
+              color: atMax ? colorScheme.outline : colorScheme.primary,
               size: bodyProvider.value.fontSize,
             ),
             onPressed: atMax
