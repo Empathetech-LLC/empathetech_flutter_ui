@@ -160,7 +160,10 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
           borderRadius: ezRoundEdge,
         ),
         child: DropdownMenu<String>(
+          enableSearch: false,
           initialSelection: currFontFamily,
+          textStyle: bodyProvider.value,
+          width: smallBreakpoint / 4,
           dropdownMenuEntries: entries,
           onSelected: (String? fontFamily) async {
             if (fontFamily == null) return;
@@ -189,8 +192,6 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
             setState(() {});
           },
-          textStyle: bodyProvider.value,
-          width: smallBreakpoint / 4,
         ),
       ),
     );

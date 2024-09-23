@@ -859,11 +859,11 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             DropdownMenu<TextSettingType>(
               enableSearch: false,
               initialSelection: editing,
+              textStyle: labelProvider.value,
+              dropdownMenuEntries: styleChoices,
               onSelected: (TextSettingType? value) {
                 if (value != null) setState(() => editing = value);
               },
-              dropdownMenuEntries: styleChoices,
-              textStyle: labelProvider.value,
             ),
           ],
         ),
