@@ -53,6 +53,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       value: entry.key,
       label: googleStyleNames[entry.key]!,
       style: theme.textButtonTheme.style?.copyWith(
+        foregroundColor: WidgetStateProperty.all(theme.colorScheme.onSurface),
         textStyle: WidgetStateProperty.all(entry.value),
       ),
     );
