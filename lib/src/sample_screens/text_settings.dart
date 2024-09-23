@@ -430,72 +430,92 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   };
 
   /// Font size setting(s)
-  late final Map<TextSettingType, EzFontDoubleSetting> sizeControllers =
-      <TextSettingType, EzFontDoubleSetting>{
-    TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$displayFontSizeKey-${displayProvider.id}-${bodyProvider.id}'),
-      configKey: displayFontSizeKey,
-      initialValue: displayProvider.value.fontSize!,
-      min: minDisplay,
-      max: maxDisplay,
-      notifierCallback: displayProvider.resize,
-      style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
+  late final Map<TextSettingType, Widget> sizeControllers =
+      <TextSettingType, Widget>{
+    TextSettingType.display: EzTextBackground(
+      EzFontDoubleSetting(
+        key: ValueKey<String>(
+          '$displayFontSizeKey-${displayProvider.id}-${bodyProvider.id}',
+        ),
+        configKey: displayFontSizeKey,
+        initialValue: displayProvider.value.fontSize!,
+        min: minDisplay,
+        max: maxDisplay,
+        notifierCallback: displayProvider.resize,
+        style: bodyProvider.value,
+        icon: Icons.text_fields_sharp,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      borderRadius: ezPillShape,
     ),
-    TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineFontSizeKey-${headlineProvider.id}-${bodyProvider.id}'),
-      configKey: headlineFontSizeKey,
-      initialValue: headlineProvider.value.fontSize!,
-      min: minHeadline,
-      max: maxHeadline,
-      notifierCallback: headlineProvider.resize,
-      style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
+    TextSettingType.headline: EzTextBackground(
+      EzFontDoubleSetting(
+        key: ValueKey<String>(
+          '$headlineFontSizeKey-${headlineProvider.id}-${bodyProvider.id}',
+        ),
+        configKey: headlineFontSizeKey,
+        initialValue: headlineProvider.value.fontSize!,
+        min: minHeadline,
+        max: maxHeadline,
+        notifierCallback: headlineProvider.resize,
+        style: bodyProvider.value,
+        icon: Icons.text_fields_sharp,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      borderRadius: ezPillShape,
     ),
-    TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$titleFontSizeKey-${titleProvider.id}-${bodyProvider.id}'),
-      configKey: titleFontSizeKey,
-      initialValue: titleProvider.value.fontSize!,
-      min: minTitle,
-      max: maxTitle,
-      notifierCallback: titleProvider.resize,
-      style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
+    TextSettingType.title: EzTextBackground(
+      EzFontDoubleSetting(
+        key: ValueKey<String>(
+          '$titleFontSizeKey-${titleProvider.id}-${bodyProvider.id}',
+        ),
+        configKey: titleFontSizeKey,
+        initialValue: titleProvider.value.fontSize!,
+        min: minTitle,
+        max: maxTitle,
+        notifierCallback: titleProvider.resize,
+        style: bodyProvider.value,
+        icon: Icons.text_fields_sharp,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      borderRadius: ezPillShape,
     ),
-    TextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$bodyFontSizeKey-${bodyProvider.id}-${bodyProvider.id}'),
-      configKey: bodyFontSizeKey,
-      initialValue: bodyProvider.value.fontSize!,
-      min: minBody,
-      max: maxBody,
-      notifierCallback: bodyProvider.resize,
-      style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
+    TextSettingType.body: EzTextBackground(
+      EzFontDoubleSetting(
+        key: ValueKey<String>(
+          '$bodyFontSizeKey-${bodyProvider.id}-${bodyProvider.id}',
+        ),
+        configKey: bodyFontSizeKey,
+        initialValue: bodyProvider.value.fontSize!,
+        min: minBody,
+        max: maxBody,
+        notifierCallback: bodyProvider.resize,
+        style: bodyProvider.value,
+        icon: Icons.text_fields_sharp,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      borderRadius: ezPillShape,
     ),
-    TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$labelFontSizeKey-${labelProvider.id}-${bodyProvider.id}'),
-      configKey: labelFontSizeKey,
-      initialValue: labelProvider.value.fontSize!,
-      min: minLabel,
-      max: maxLabel,
-      notifierCallback: labelProvider.resize,
-      style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
+    TextSettingType.label: EzTextBackground(
+      EzFontDoubleSetting(
+        key: ValueKey<String>(
+          '$labelFontSizeKey-${labelProvider.id}-${bodyProvider.id}',
+        ),
+        configKey: labelFontSizeKey,
+        initialValue: labelProvider.value.fontSize!,
+        min: minLabel,
+        max: maxLabel,
+        notifierCallback: labelProvider.resize,
+        style: bodyProvider.value,
+        icon: Icons.text_fields_sharp,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      borderRadius: ezPillShape,
     ),
   };
 
