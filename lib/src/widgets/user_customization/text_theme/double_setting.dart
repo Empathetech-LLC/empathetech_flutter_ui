@@ -65,6 +65,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
+  late final String oKey =
+      isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+  late final double fieldOpacity =
+      EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
+  late final Color fieldColor = colorScheme.surface.withOpacity(fieldOpacity);
+
   late final double padding = EzConfig.get(paddingKey);
 
   late final EzSpacer pMSpacer = EzSpacer(
@@ -78,8 +84,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     context: context,
   );
 
-  late final double formFieldWidth = sizeLimit.width + padding;
-  late final double formFieldHeight = sizeLimit.height + padding;
+  late double formFieldWidth = sizeLimit.width + padding;
+  late double formFieldHeight = sizeLimit.height + padding;
 
   late final TextStyle? style =
       widget.style ?? Theme.of(context).textTheme.bodyLarge;
@@ -121,8 +127,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   onPressed: (currValue > widget.min)
                       ? () async {
                           currValue -= widget.delta;
-                          await EzConfig.setDouble(widget.configKey, currValue);
                           controller.text = currValue.toString();
+
+                          await EzConfig.setDouble(widget.configKey, currValue);
                           widget.notifierCallback(currValue);
 
                           setState(() {});
@@ -140,10 +147,14 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               },
 
               // Text field
-              ConstrainedBox(
+              Container(
                 constraints: BoxConstraints(
                   maxWidth: formFieldWidth,
                   maxHeight: formFieldHeight,
+                ),
+                decoration: BoxDecoration(
+                  color: fieldColor,
+                  borderRadius: ezRoundEdge,
                 ),
                 child: TextFormField(
                   controller: controller,
@@ -161,19 +172,29 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                     if (doubleVale == null ||
                         doubleVale < widget.min ||
                         doubleVale > widget.max) {
-                      return '${widget.min}-${widget.max}';
+                      setState(() {
+                        formFieldWidth = (sizeLimit.width + padding) * 2;
+                        formFieldHeight = (sizeLimit.height + padding) * 2;
+                      });
+                      return '${widget.min} <--> ${widget.max}';
                     }
 
+                    setState(() {
+                      formFieldWidth = sizeLimit.width + padding;
+                      formFieldHeight = sizeLimit.height + padding;
+                    });
                     return null;
                   },
                   onFieldSubmitted: (String stringVal) async {
                     final double? doubleVal = double.tryParse(stringVal);
+
                     if (doubleVal == null ||
                         doubleVal > widget.max ||
                         doubleVal < widget.min) return;
 
                     currValue = doubleVal;
                     await EzConfig.setDouble(widget.configKey, doubleVal);
+
                     widget.notifierCallback(doubleVal);
                     setState(() {});
                   },
@@ -191,8 +212,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   onPressed: (currValue < widget.max)
                       ? () async {
                           currValue += widget.delta;
-                          await EzConfig.setDouble(widget.configKey, currValue);
                           controller.text = currValue.toString();
+
+                          await EzConfig.setDouble(widget.configKey, currValue);
                           widget.notifierCallback(currValue);
 
                           setState(() {});
