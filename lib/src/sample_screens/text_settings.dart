@@ -403,7 +403,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    useSurface: false,
     margin: EzMargin.wrap(),
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
@@ -417,7 +416,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    useSurface: false,
     margin: EzMargin.wrap(),
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
@@ -431,7 +429,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    useSurface: false,
     margin: EzMargin.wrap(),
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
@@ -445,7 +442,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    useSurface: false,
     margin: EzMargin.wrap(),
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
