@@ -437,7 +437,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   : (currPath == null || currPath == noImageValue)
                       ? Icon(
                           PlatformIcons(context).edit,
-                          size: theme.textTheme.titleLarge?.fontSize,
+                          color: theme.colorScheme.primary,
+                          size: theme.textTheme.headlineLarge?.fontSize,
                         )
                       : null,
             ),
