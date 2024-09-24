@@ -249,7 +249,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       ),
 
       // Reset
-      if (defaultPath != null) ...<Widget>{
+      if (defaultPath != null) ...<Widget>[
         spacer,
         ElevatedButton.icon(
           onPressed: () async {
@@ -263,7 +263,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           label: Text(l10n.isResetIt),
           icon: Icon(PlatformIcons(context).refresh),
         ),
-      }
+      ],
     ]);
 
     // Clear (optional)

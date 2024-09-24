@@ -208,10 +208,10 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ),
 
         // Optional additional settings
-        if (widget.additionalSettings != null) ...<Widget>{
+        if (widget.additionalSettings != null) ...<Widget>[
           spacer,
           ...widget.additionalSettings!,
-        },
+        ],
         separator,
 
         // Display preview
@@ -897,7 +897,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
 
             // Letter, word, and line spacing
-            if (widget.showSpacing) ...<Widget>{
+            if (widget.showSpacing) ...<Widget>[
               swapSpacer,
               EzScrollView(
                 scrollDirection: Axis.horizontal,
@@ -911,7 +911,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   lineHeightControllers[editing]!,
                 ],
               ),
-            }
+            ],
           ],
         ),
         separator,

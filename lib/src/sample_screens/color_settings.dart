@@ -254,10 +254,10 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           fromImageButton,
 
           // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>{
+          if (widget.additionalSettings != null) ...<Widget>[
             spacer,
             ...widget.additionalSettings!,
-          },
+          ],
         ],
       ),
     );

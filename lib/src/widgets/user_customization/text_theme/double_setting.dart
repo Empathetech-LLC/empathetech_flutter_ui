@@ -119,7 +119,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               // Minus
-              if (widget.plusMinus) ...<Widget>{
+              if (widget.plusMinus) ...<Widget>[
                 IconButton(
                   style: IconButton.styleFrom(
                     side: BorderSide(color: colorScheme.primaryContainer),
@@ -144,7 +144,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   ),
                 ),
                 pMSpacer,
-              },
+              ],
 
               // Text field
               Container(
@@ -201,7 +201,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 ),
               ),
 
-              if (widget.plusMinus) ...<Widget>{
+              if (widget.plusMinus) ...<Widget>[
                 pMSpacer,
 
                 // Plus icon
@@ -228,7 +228,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         : colorScheme.outline,
                   ),
                 ),
-              }
+              ],
             ],
           ),
 

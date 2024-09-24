@@ -87,10 +87,10 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           ),
 
           // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>{
+          if (widget.additionalSettings != null) ...<Widget>[
             spacer,
             ...widget.additionalSettings!
-          },
+          ],
           separator,
 
           // Local reset all
