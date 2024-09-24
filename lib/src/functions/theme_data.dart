@@ -92,19 +92,13 @@ ThemeData ezThemeData(Brightness brightness) {
       titleTextStyle: textTheme.titleLarge,
       contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
-      actionsPadding: EdgeInsets.only(
-        top: (spacing > padding) ? (spacing - padding) : 0.0,
-        left: spacing,
-        right: spacing,
-        bottom: spacing,
-      ),
     ),
 
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: (spacing + margin) * 2,
-      thickness: 0.75,
+      space: spacing * 4, // Double separator
+      thickness: 1,
     ),
 
     // Drawer
