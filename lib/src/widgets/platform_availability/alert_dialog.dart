@@ -36,20 +36,23 @@ class EzAlertDialog extends PlatformAlertDialog {
     this.cupertinoActions,
     this.needsClose = true,
   }) : assert(
-          (content == null) != (contents == null),
+          (content == null && contents == null) ||
+              ((content == null) != (contents == null)),
           'Either content or contents should be provided, but not both.',
         );
 
   @override
   Widget build(BuildContext context) {
     final double margin = EzConfig.get(marginKey);
-    final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
+    final Widget? dialogContent = content ??
+        ((contents == null) ? null : EzScrollView(children: contents!));
+
     return PlatformAlertDialog(
-      material: (BuildContext dialogContext, PlatformTarget platform) {
+      material: (BuildContext dialogContext, _) {
         late final TextButton closeAction = TextButton(
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
@@ -58,14 +61,14 @@ class EzAlertDialog extends PlatformAlertDialog {
         return MaterialAlertDialogData(
           // Title
           title: title,
-          titlePadding: EdgeInsets.all(padding),
+          titlePadding: EdgeInsets.all(margin),
 
           // Content
-          content: content ?? EzScrollView(children: contents),
+          content: dialogContent,
           contentPadding: EdgeInsets.only(
-            left: padding,
-            right: padding,
-            bottom: padding,
+            top: (spacing > margin) ? spacing - margin : 0,
+            left: margin,
+            right: margin,
           ),
 
           // Actions
@@ -78,24 +81,20 @@ class EzAlertDialog extends PlatformAlertDialog {
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
           // General
-          iconPadding: EdgeInsets.only(right: spacing),
-          buttonPadding: EdgeInsets.only(right: spacing),
+          iconPadding: EdgeInsets.zero,
+          buttonPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(margin),
         );
       },
-      cupertino: (BuildContext dialogContext, PlatformTarget platform) {
+      cupertino: (BuildContext dialogContext, _) {
         late final CupertinoDialogAction closeAction = CupertinoDialogAction(
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
         );
 
         return CupertinoAlertDialogData(
-          title: Padding(
-            // No titlePadding equivalent, have to do it manually
-            padding: EdgeInsets.only(bottom: padding),
-            child: title,
-          ),
-          content: content ?? EzScrollView(children: contents),
+          title: title,
+          content: dialogContent,
           actions: cupertinoActions == null
               ? <Widget>[closeAction]
               : needsClose
@@ -114,22 +113,31 @@ List<TextButton> ezMaterialActions({
   required BuildContext context,
   required void Function() onConfirm,
   String? confirmMsg,
+  bool confirmIsDestructive = false,
   required void Function() onDeny,
   String? denyMsg,
+  bool denyIsDestructive = false,
   bool reverseHands = true,
 }) {
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
+  final Color onSurface = Theme.of(context).colorScheme.onSurface;
 
   final List<TextButton> actions = <TextButton>[
     // Deny
     TextButton(
       onPressed: onDeny,
+      style: denyIsDestructive
+          ? TextButton.styleFrom(foregroundColor: onSurface)
+          : null,
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
 
     // Confirm
     TextButton(
       onPressed: onConfirm,
+      style: denyIsDestructive
+          ? TextButton.styleFrom(foregroundColor: onSurface)
+          : null,
       child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
   ];
