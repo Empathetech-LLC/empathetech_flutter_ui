@@ -81,8 +81,9 @@ class EzAlertDialog extends PlatformAlertDialog {
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
           // General
-          iconPadding: EdgeInsets.zero,
+          actionsPadding: EdgeInsets.zero,
           buttonPadding: EdgeInsets.zero,
+          iconPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(margin),
         );
       },
@@ -93,7 +94,15 @@ class EzAlertDialog extends PlatformAlertDialog {
         );
 
         return CupertinoAlertDialogData(
-          title: title,
+          title: Padding(
+            padding: EdgeInsets.only(
+              left: margin,
+              right: margin,
+              top: margin,
+              bottom: spacing,
+            ),
+            child: title,
+          ),
           content: dialogContent,
           actions: cupertinoActions == null
               ? <Widget>[closeAction]
