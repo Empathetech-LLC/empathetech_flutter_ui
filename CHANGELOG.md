@@ -26,6 +26,10 @@ All notable changes to this project will be documented in this file.
   - Makes it easier to use EFUI w/out having to use Flutter Platform Widgets
     - FPW is still recommended (and unaffiliated)
 
+### Removed
+- EzLinkImage
+  - EzLinkImageProvider is better
+
 ## [7.1.0] - 2024-09-08
 ### Added
 - Integration testing utils
