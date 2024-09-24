@@ -53,6 +53,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
+
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,
