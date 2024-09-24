@@ -75,7 +75,6 @@ export 'src/widgets/responsive_design/transitions.dart';
 export 'src/widgets/screen_reader_support/image.dart';
 export 'src/widgets/screen_reader_support/inline_link.dart';
 export 'src/widgets/screen_reader_support/link_image_provider.dart';
-export 'src/widgets/screen_reader_support/link_image.dart';
 export 'src/widgets/screen_reader_support/link_widget.dart';
 export 'src/widgets/screen_reader_support/link.dart';
 export 'src/widgets/screen_reader_support/plain_text.dart';
