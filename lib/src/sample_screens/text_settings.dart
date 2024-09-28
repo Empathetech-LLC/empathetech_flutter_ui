@@ -376,22 +376,27 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.display,
       label: display,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.headline,
       label: headline,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.title,
       label: title,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.body,
       label: body,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.label,
       label: label,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
   ];
 

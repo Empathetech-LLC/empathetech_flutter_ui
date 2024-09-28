@@ -40,10 +40,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     DropdownMenuEntry<bool>(
       value: false,
       label: l10n.gRight,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<bool>(
       value: true,
       label: l10n.gLeft,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
   ];
 

@@ -42,14 +42,17 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.system,
       label: l10n.gSystem,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.light,
       label: l10n.gLight,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.dark,
       label: l10n.gDark,
+      style: TextButton.styleFrom(padding: EzPadding.menu()),
     ),
   ];
 

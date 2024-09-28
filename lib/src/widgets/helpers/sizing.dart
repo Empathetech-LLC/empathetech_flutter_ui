@@ -49,6 +49,14 @@ class EzPadding extends EdgeInsets {
 
   /// EdgeInsets.all(Half EzConfig padding)
   EzPadding.wrap() : super.all(EzConfig.get(paddingKey) / 2);
+
+  /// EdgeInsets padding everywhere but bottom
+  EzPadding.menu()
+      : super.only(
+          left: EzConfig.get(paddingKey),
+          right: EzConfig.get(paddingKey),
+          top: EzConfig.get(paddingKey),
+        );
 }
 
 /// BorderRadius.all(Radius.circular(4.0))

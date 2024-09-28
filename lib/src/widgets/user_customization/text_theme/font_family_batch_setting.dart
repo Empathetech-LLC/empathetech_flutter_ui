@@ -93,9 +93,10 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: googleStyleNames[entry.key]!,
-      style: theme.textButtonTheme.style?.copyWith(
-        foregroundColor: WidgetStateProperty.all(theme.colorScheme.onSurface),
-        textStyle: WidgetStateProperty.all(entry.value),
+      style: TextButton.styleFrom(
+        foregroundColor: theme.colorScheme.onSurface,
+        textStyle: entry.value,
+        padding: EzPadding.menu(),
       ),
     );
   }).toList();
