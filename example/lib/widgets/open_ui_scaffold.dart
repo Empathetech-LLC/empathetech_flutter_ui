@@ -42,7 +42,6 @@ class OpenUIScaffold extends StatelessWidget {
 
     late final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
-        padding: EdgeInsets.symmetric(horizontal: EzConfig.get(marginKey)),
         onPressed: () {
           if (controller.isOpen) {
             controller.close();
