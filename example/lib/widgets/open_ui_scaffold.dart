@@ -42,6 +42,7 @@ class OpenUIScaffold extends StatelessWidget {
 
     late final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
+        padding: EdgeInsets.symmetric(horizontal: EzConfig.get(marginKey)),
         onPressed: () {
           if (controller.isOpen) {
             controller.close();
@@ -49,8 +50,8 @@ class OpenUIScaffold extends StatelessWidget {
             controller.open();
           }
         },
-        icon: const Icon(Icons.more_vert),
         tooltip: l10n.gOptions,
+        icon: const Icon(Icons.more_vert),
       ),
       menuChildren: <Widget>[
         BYOButton(parentContext: context, l10n: l10n),
