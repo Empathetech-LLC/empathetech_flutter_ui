@@ -132,6 +132,9 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       menuStyle: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        side: WidgetStateProperty.all(
+          BorderSide(color: colorScheme.primaryContainer),
+        ),
       ),
     ),
 
@@ -183,6 +186,9 @@ ThemeData ezThemeData(Brightness brightness) {
     menuTheme: MenuThemeData(
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        side: WidgetStateProperty.all(
+          BorderSide(color: colorScheme.primaryContainer),
+        ),
       ),
     ),
 
