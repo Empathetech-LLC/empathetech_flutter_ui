@@ -13,7 +13,7 @@ while [[ "$1" != "" ]]; do
     --device ) shift
                device="-d $1"
                ;;
-    --repo_path ) shift
+    --repo-path ) shift
               repos="$1"
               ;;
     * ) echo "Invalid input. Aborting."; exit 1
