@@ -13,8 +13,8 @@ while [[ "$1" != "" ]]; do
     --device ) shift
                device="-d $1"
                ;;
-    --repos ) shift
-              repos=$1
+    --repo_path ) shift
+              repos="$1"
               ;;
     * ) echo "Invalid input. Aborting."; exit 1
   esac
