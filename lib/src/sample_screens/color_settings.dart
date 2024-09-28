@@ -298,8 +298,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
-  static const EzSpacer spacer = EzSpacer();
-
   // Define custom Widgets //
 
   late final Set<String> defaultSet = defaultList.toSet();
@@ -437,7 +435,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             ),
           ),
         ),
-        spacer,
+        const EzSeparator(),
 
         // Add a color button
         EzTextBackground(
