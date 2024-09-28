@@ -25,17 +25,19 @@ class FeedbackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuItemButton(
       onPressed: () async {
+        if (scaffoldMessengerKey.currentContext == null) return;
+
         final String snackBarText = l10n.gClipboard(l10n.gSupportEmail);
 
         await scaffoldMessengerKey.currentState
-            ?.showSnackBar(SnackBar(
+            !.showSnackBar(SnackBar(
               content: Text(snackBarText, textAlign: TextAlign.center),
               duration: readingTime(snackBarText),
             ))
             .closed;
 
-        if (context.mounted) {
-          BetterFeedback.of(context).show((UserFeedback feedback) async {
+        BetterFeedback.of(scaffoldMessengerKey.currentContext!).show(
+          (UserFeedback feedback) async {
             await Clipboard.setData(ClipboardData(text: supportEmail));
 
             await Share.shareXFiles(
@@ -48,8 +50,8 @@ class FeedbackButton extends StatelessWidget {
               ],
               text: feedback.text,
             );
-          });
-        }
+          },
+        );
       },
       leadingIcon: Icon(
         Icons.feedback,
