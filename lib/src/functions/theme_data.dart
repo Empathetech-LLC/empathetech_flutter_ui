@@ -120,7 +120,10 @@ ThemeData ezThemeData(Brightness brightness) {
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
-        contentPadding: EdgeInsets.all(margin),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: margin,
+          vertical: padding / 2,
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
@@ -176,6 +179,13 @@ ThemeData ezThemeData(Brightness brightness) {
       errorMaxLines: 1,
     ),
 
+    // Menu
+    menuTheme: MenuThemeData(
+      style: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+      ),
+    ),
+
     // Menu button
     menuButtonTheme: MenuButtonThemeData(
       style: TextButton.styleFrom(
@@ -185,7 +195,10 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(
+          horizontal: margin,
+          vertical: padding / 2,
+        ),
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
