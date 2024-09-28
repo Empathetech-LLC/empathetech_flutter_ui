@@ -25,6 +25,7 @@ class BYOButton extends StatelessWidget {
       onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
       leadingIcon: Icon(
         LineIcons.github,
+        color: Theme.of(context).colorScheme.onSurface,
         size: Theme.of(context).textTheme.titleLarge?.fontSize,
       ),
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',

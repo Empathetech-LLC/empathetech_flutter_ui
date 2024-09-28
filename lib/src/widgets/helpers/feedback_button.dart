@@ -29,8 +29,8 @@ class FeedbackButton extends StatelessWidget {
 
         final String snackBarText = l10n.gClipboard(l10n.gSupportEmail);
 
-        await scaffoldMessengerKey.currentState
-            !.showSnackBar(SnackBar(
+        await scaffoldMessengerKey.currentState!
+            .showSnackBar(SnackBar(
               content: Text(snackBarText, textAlign: TextAlign.center),
               duration: readingTime(snackBarText),
             ))
@@ -55,6 +55,7 @@ class FeedbackButton extends StatelessWidget {
       },
       leadingIcon: Icon(
         Icons.feedback,
+        color: Theme.of(context).colorScheme.onSurface,
         size: Theme.of(context).textTheme.titleLarge?.fontSize,
       ),
       child: Text(l10n.gGiveFeedback),
