@@ -4,7 +4,7 @@ set -e
 
 ## Setup ##
 
-prefix=$HOME/repos/flutter/empathetech_flutter_ui/example
+repos="repos/flutter"
 device=""
 
 # Gather flag variables
@@ -13,10 +13,15 @@ while [[ "$1" != "" ]]; do
     --device ) shift
                device="-d $1"
                ;;
+    --repos ) shift
+              repos=$1
+              ;;
     * ) echo "Invalid input. Aborting."; exit 1
   esac
   shift
 done
+
+prefix=$HOME/$repos/empathetech_flutter_ui/example
 
 ## Tests ##
 
