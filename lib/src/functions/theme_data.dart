@@ -110,6 +110,12 @@ ThemeData ezThemeData(Brightness brightness) {
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: textTheme.bodyLarge,
+      menuStyle: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        side: WidgetStateProperty.all(
+          BorderSide(color: colorScheme.primaryContainer),
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surface,
@@ -120,20 +126,10 @@ ThemeData ezThemeData(Brightness brightness) {
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: margin,
-          vertical: padding / 2,
-        ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
           gapPadding: 0,
-        ),
-      ),
-      menuStyle: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
-        side: WidgetStateProperty.all(
-          BorderSide(color: colorScheme.primaryContainer),
         ),
       ),
     ),
@@ -201,10 +197,6 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(
-          horizontal: margin,
-          vertical: padding / 2,
-        ),
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
@@ -256,6 +248,7 @@ ThemeData ezThemeData(Brightness brightness) {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         border: Border.all(color: colorScheme.secondary),
+        borderRadius: ezRoundEdge,
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
