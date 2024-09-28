@@ -110,12 +110,6 @@ ThemeData ezThemeData(Brightness brightness) {
     // Dropdown menu
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: textTheme.bodyLarge,
-      menuStyle: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
-        side: WidgetStateProperty.all(
-          BorderSide(color: colorScheme.primaryContainer),
-        ),
-      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surface,
@@ -185,6 +179,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: WidgetStateProperty.all(
           BorderSide(color: colorScheme.primaryContainer),
         ),
+        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: padding)),
       ),
     ),
 
@@ -197,6 +192,7 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
+        padding: EdgeInsets.only(left: padding, right: padding, top: padding),
         side: null,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
