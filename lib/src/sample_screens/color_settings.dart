@@ -102,7 +102,7 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.csPageTitle);
+    setPageTitle(l10n.csPageTitle, theme.colorScheme.primary);
   }
 
   // Return the build //

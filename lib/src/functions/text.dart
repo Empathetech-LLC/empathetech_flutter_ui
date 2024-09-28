@@ -306,8 +306,11 @@ TextStyle buildLabelFromDefaults(Color? color) {
 }
 
 /// For web apps, set the tab's title
-void setPageTitle(String title) {
+void setPageTitle(String title, Color primaryColor) {
   SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(label: title),
+    ApplicationSwitcherDescription(
+      label: title,
+      primaryColor: primaryColor.value,
+    ),
   );
 }

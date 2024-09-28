@@ -41,7 +41,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.lsPageTitle);
+    setPageTitle(l10n.lsPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //

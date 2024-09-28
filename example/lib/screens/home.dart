@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(efuiL);
+    setPageTitle(efuiL, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //

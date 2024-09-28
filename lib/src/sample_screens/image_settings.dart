@@ -55,7 +55,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.isPageTitle);
+    setPageTitle(l10n.isPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //

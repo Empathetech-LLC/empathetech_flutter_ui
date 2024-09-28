@@ -96,7 +96,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.tsPageTitle);
+    setPageTitle(l10n.tsPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
