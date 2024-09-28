@@ -212,20 +212,18 @@ class _ImageSettingState extends State<EzImageSetting> {
                 l10n.isEnterURL,
                 textAlign: TextAlign.center,
               ),
-              contents: <Widget>[
-                Form(
-                  child: TextFormField(
-                    controller: urlText,
-                    maxLines: 1,
-                    autofillHints: const <String>[AutofillHints.url],
-                    decoration: const InputDecoration(
-                      hintText: 'https://example.com/image.jpg',
-                    ),
-                    autovalidateMode: AutovalidateMode.onUnfocus,
-                    validator: urlValidator,
+              content: Form(
+                child: TextFormField(
+                  controller: urlText,
+                  maxLines: 1,
+                  autofillHints: const <String>[AutofillHints.url],
+                  decoration: const InputDecoration(
+                    hintText: 'https://example.com/image.jpg',
                   ),
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                  validator: urlValidator,
                 ),
-              ],
+              ),
               materialActions: ezMaterialActions(
                 context: context,
                 onConfirm: onConfirm,
