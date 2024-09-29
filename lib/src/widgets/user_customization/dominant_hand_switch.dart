@@ -28,8 +28,6 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
-
   final double margin = EzConfig.get(marginKey);
 
   late final EzSpacer marginer = EzSpacer(space: margin);
@@ -38,9 +36,11 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
 
-  bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
+
+  bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
     DropdownMenuEntry<bool>(
@@ -78,6 +78,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
         // Button
         DropdownMenu<bool>(
+          width: dropdownWidth(
+            context: context,
+            entries: entries
+                .map((DropdownMenuEntry<bool> entry) => entry.label)
+                .toList(),
+          ),
           dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: isLefty,

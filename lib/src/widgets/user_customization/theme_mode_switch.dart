@@ -85,6 +85,12 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
         // Button
         DropdownMenu<ThemeMode>(
+          width: dropdownWidth(
+            context: context,
+            entries: entries
+                .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
+                .toList(),
+          ),
           enableSearch: false,
           initialSelection: platformTheme,
           dropdownMenuEntries: entries,
