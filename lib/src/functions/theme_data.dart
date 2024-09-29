@@ -18,12 +18,14 @@ ThemeData ezThemeData(Brightness brightness) {
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
   final IconThemeData iconData = IconThemeData(
-    size: textTheme.titleLarge?.fontSize,
     color: colorScheme.primary,
+    size: textTheme.titleLarge?.fontSize,
+    applyTextScaling: true,
   );
   final IconThemeData appBarIconData = IconThemeData(
+    color: colorScheme.primary,
     size: textTheme.headlineLarge?.fontSize,
-    color: colorScheme.onSurface,
+    applyTextScaling: true,
   );
 
   final double textBackgroundOpacity = EzConfig.get(
@@ -132,7 +134,7 @@ ThemeData ezThemeData(Brightness brightness) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.surface,
-        foregroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onSurface,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
