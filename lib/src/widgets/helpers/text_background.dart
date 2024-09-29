@@ -11,7 +11,7 @@ class EzTextBackground extends StatelessWidget {
   /// The [Text] that needs a background
   final Widget text;
 
-  /// Defaults to [EzMargin.col]
+  /// Defaults to [EzInsets.col]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
@@ -52,7 +52,7 @@ class EzTextBackground extends StatelessWidget {
         : backgroundColor!;
 
     return Container(
-      padding: margin ?? EzMargin.col(),
+      padding: margin ?? EzInsets.col(EzConfig.get(marginKey)),
       decoration: BoxDecoration(
         color: color,
         borderRadius: borderRadius ?? ezRoundEdge,
