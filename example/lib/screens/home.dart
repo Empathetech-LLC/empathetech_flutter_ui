@@ -59,30 +59,34 @@ class _HomeScreenState extends State<HomeScreen> {
             separator,
 
             // Text settings
-            ElevatedButton(
+            EzButton(
               onPressed: () => context.goNamed(textSettingsPath),
-              child: Text(l10n.tsPageTitle),
+              icon: const Icon(Icons.navigate_next),
+              label: Text(l10n.tsPageTitle),
             ),
             spacer,
 
             // Layout settings
-            ElevatedButton(
+            EzButton(
               onPressed: () => context.goNamed(layoutSettingsPath),
-              child: Text(l10n.lsPageTitle),
+              icon: const Icon(Icons.navigate_next),
+              label: Text(l10n.lsPageTitle),
             ),
             spacer,
 
             // Color settings
-            ElevatedButton(
+            EzButton(
               onPressed: () => context.goNamed(colorSettingsPath),
-              child: Text(l10n.csPageTitle),
+              icon: const Icon(Icons.navigate_next),
+              label: Text(l10n.csPageTitle),
             ),
             spacer,
 
             // Image settings
-            ElevatedButton(
+            EzButton(
               onPressed: () => context.goNamed(imageSettingsPath),
-              child: Text(l10n.isPageTitle),
+              icon: const Icon(Icons.navigate_next),
+              label: Text(l10n.isPageTitle),
             ),
             separator,
 

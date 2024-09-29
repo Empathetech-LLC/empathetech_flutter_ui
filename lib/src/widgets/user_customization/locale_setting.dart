@@ -123,7 +123,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       button: true,
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: EzButton(
           onPressed: () => _chooseLocale(context),
           icon: flag(currLocale),
           label: Text(l10n.ssLanguage),
