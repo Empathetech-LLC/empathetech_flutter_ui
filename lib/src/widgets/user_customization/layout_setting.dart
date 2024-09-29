@@ -231,8 +231,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     }
   }
 
-  /// Assemble the final list of widgets to build for [_SliderSettingState]
-  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
+  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzElevatedButton]
   List<Widget> buildModal({
     required BuildContext context,
     required StateSetter setModalState,
@@ -294,7 +293,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       spacer,
 
       // Reset button
-      ElevatedButton.icon(
+      EzElevatedButton(
         onPressed: () async {
           await EzConfig.remove(widget.configKey);
           setModalState(() {
@@ -302,9 +301,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text(
-          '${l10n.gReset} ${defaultValue.toStringAsFixed(widget.decimals)}',
-        ),
+        label:
+            '${l10n.gReset} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
       spacer,
     ];
@@ -314,7 +312,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return EzElevatedButton(
       onPressed: () => showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -332,7 +330,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ),
       ),
       icon: widget.type.icon,
-      label: Text(label),
+      label: label,
     );
   }
 }
