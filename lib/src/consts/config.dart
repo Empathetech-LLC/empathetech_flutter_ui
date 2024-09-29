@@ -140,6 +140,10 @@ const String understandingLayout =
 
 /// Empathetech's default configuration for [EzConfig]
 const Map<String, Object> empathetechConfig = <String, Object>{
+  // Global settings //
+
+  isLeftyKey: false,
+
   // Text settings //
 
   // Display
@@ -196,7 +200,13 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkTextBackgroundOKey: 0.0,
   lightTextBackgroundOKey: 0.0,
 
-  // No default image settings //
+  // Layout settings //
+
+  marginKey: 10.0, // required key
+  paddingKey: 20.0, // required key
+  spacingKey: 25.0, // required key
+
+  hideScrollKey: false,
 
   // Color settings //
 
@@ -250,9 +260,5 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
 
-  // Layout settings //
-
-  marginKey: 10.0, // recommended key
-  paddingKey: 20.0, // recommended key
-  spacingKey: 25.0, // recommended key
+  // No default image settings //
 };
