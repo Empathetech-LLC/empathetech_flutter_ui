@@ -66,6 +66,7 @@ export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
 
 // Responsive design
+export 'src/widgets/responsive_design/button.dart';
 export 'src/widgets/responsive_design/row_col.dart';
 export 'src/widgets/responsive_design/swap_scaffold.dart';
 export 'src/widgets/responsive_design/swap_widget.dart';
