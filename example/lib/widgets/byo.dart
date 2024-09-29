@@ -22,7 +22,7 @@ class BYOButton extends StatelessWidget {
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
       leadingIcon: Icon(
         LineIcons.github,
-        size: Theme.of(context).textTheme.headlineLarge?.fontSize,
+        size: Theme.of(context).textTheme.titleLarge?.fontSize,
         color: Theme.of(context).colorScheme.primary,
       ),
       child: Text(text),

@@ -56,7 +56,7 @@ class FeedbackButton extends StatelessWidget {
       leadingIcon: Icon(
         Icons.feedback_outlined,
         color: Theme.of(context).colorScheme.primary,
-        size: Theme.of(context).textTheme.headlineLarge?.fontSize,
+        size: Theme.of(context).textTheme.titleLarge?.fontSize,
       ),
       child: Text(l10n.gGiveFeedback),
     );
