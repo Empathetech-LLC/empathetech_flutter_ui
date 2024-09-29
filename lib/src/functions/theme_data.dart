@@ -186,6 +186,7 @@ ThemeData ezThemeData(Brightness brightness) {
           BorderSide(color: colorScheme.primaryContainer),
         ),
         padding: WidgetStateProperty.all(EdgeInsets.only(bottom: padding)),
+        alignment: Alignment.center,
       ),
     ),
 
