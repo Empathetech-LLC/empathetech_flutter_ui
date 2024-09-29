@@ -438,9 +438,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
         // Add a color button
         EzTextBackground(
-          TextButton.icon(
+          EzTextButton(
             icon: Icon(PlatformIcons(context).addCircledOutline),
-            label: Text(l10n.csAddColor),
+            label: l10n.csAddColor,
             onPressed: () async {
               // Show available color configKeys
               await showModalBottomSheet(

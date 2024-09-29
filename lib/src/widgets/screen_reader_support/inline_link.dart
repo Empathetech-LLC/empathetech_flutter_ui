@@ -16,7 +16,7 @@ class EzInlineLink extends WidgetSpan {
   // super.style;
 
   /// Optional icon [Widget]
-  /// Will make the [TextButton] wrapper a [TextButton.icon] wrapper
+  /// Will make the [TextButton] wrapper a [EzTextButton] wrapper
   final Widget? icon;
 
   /// Optional [Color] to overwrite the default [ColorScheme.primary]

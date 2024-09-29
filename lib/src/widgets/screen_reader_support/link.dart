@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,7 +15,7 @@ class EzLink extends StatefulWidget {
   final TextStyle style;
 
   /// Optional icon [Widget]
-  /// Will make the [TextButton] wrapper a [TextButton.icon] wrapper
+  /// Will make the [TextButton] wrapper a [EzTextButton] wrapper
   final Widget? icon;
 
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
@@ -95,7 +97,7 @@ class _EzLinkState extends State<EzLink> {
 
   // Define build options //
 
-  late final TextButton textButton = TextButton(
+  late final Widget textButton = TextButton(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
     onHover: (bool isHovering) => addUnderline(isHovering),
@@ -108,18 +110,16 @@ class _EzLinkState extends State<EzLink> {
     ),
   );
 
-  late final TextButton iconTextButton = TextButton.icon(
+  late final Widget iconTextButton = EzTextButton(
     onPressed: widget.onTap ?? () => launchUrl(widget.url!),
     onLongPress: null,
     onHover: (bool isHovering) => addUnderline(isHovering),
     onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
     style: linkStyle,
-    icon: widget.icon,
-    label: Text(
-      widget.text,
-      style: textStyle,
-      textAlign: widget.textAlign,
-    ),
+    icon: widget.icon!,
+    label: widget.text,
+    textStyle: textStyle,
+    textAlign: widget.textAlign,
   );
 
   // Return the build //
