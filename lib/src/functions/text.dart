@@ -10,11 +10,6 @@ import 'package:flutter/services.dart';
 
 // Helpers //
 
-/// Returns whether the passed [text] follows a URL pattern
-bool isUrl(String text) {
-  return Uri.parse(text).host.isNotEmpty;
-}
-
 /// Returns the soon-to-be rendered size of text via a [TextPainter]
 Size measureText(
   String text, {
@@ -29,6 +24,21 @@ Size measureText(
   )..layout();
 
   return textPainter.size;
+}
+
+/// For web apps, set the tab's title
+void setPageTitle(String title, Color primaryColor) {
+  SystemChrome.setApplicationSwitcherDescription(
+    ApplicationSwitcherDescription(
+      label: title,
+      primaryColor: primaryColor.value,
+    ),
+  );
+}
+
+/// Returns whether the passed [text] follows a URL pattern
+bool isUrl(String text) {
+  return Uri.parse(text).host.isNotEmpty;
 }
 
 /// Splits the string on '_' and/or ' ' and returns the first word
@@ -81,6 +91,7 @@ TextStyle buildDisplay(Color? color) {
         : null,
     color: color,
     height: EzConfig.get(displayFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.get(displayLetterSpacingKey),
     wordSpacing: EzConfig.get(displayWordSpacingKey),
   );
@@ -106,6 +117,7 @@ TextStyle buildDisplayFromDefaults(Color? color) {
         : null,
     color: color,
     height: EzConfig.getDefault(displayFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.getDefault(displayLetterSpacingKey),
     wordSpacing: EzConfig.getDefault(displayWordSpacingKey),
   );
@@ -130,6 +142,7 @@ TextStyle buildHeadline(Color? color) {
         : null,
     color: color,
     height: EzConfig.get(headlineFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.get(headlineLetterSpacingKey),
     wordSpacing: EzConfig.get(headlineWordSpacingKey),
   );
@@ -155,6 +168,7 @@ TextStyle buildHeadlineFromDefaults(Color? color) {
         : null,
     color: color,
     height: EzConfig.getDefault(headlineFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.getDefault(headlineLetterSpacingKey),
     wordSpacing: EzConfig.getDefault(headlineWordSpacingKey),
   );
@@ -178,6 +192,7 @@ TextStyle buildTitle(Color? color) {
         : null,
     color: color,
     height: EzConfig.get(titleFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.get(titleLetterSpacingKey),
     wordSpacing: EzConfig.get(titleWordSpacingKey),
   );
@@ -202,6 +217,7 @@ TextStyle buildTitleFromDefaults(Color? color) {
         : null,
     color: color,
     height: EzConfig.getDefault(titleFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.getDefault(titleLetterSpacingKey),
     wordSpacing: EzConfig.getDefault(titleWordSpacingKey),
   );
@@ -224,6 +240,7 @@ TextStyle buildBody(Color? color) {
         : null,
     color: color,
     height: EzConfig.get(bodyFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.get(bodyLetterSpacingKey),
     wordSpacing: EzConfig.get(bodyWordSpacingKey),
   );
@@ -248,6 +265,7 @@ TextStyle buildBodyFromDefaults(Color? color) {
         : null,
     color: color,
     height: EzConfig.getDefault(bodyFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.getDefault(bodyLetterSpacingKey),
     wordSpacing: EzConfig.getDefault(bodyWordSpacingKey),
   );
@@ -271,6 +289,7 @@ TextStyle buildLabel(Color? color) {
         : null,
     color: color,
     height: EzConfig.get(labelFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.get(labelLetterSpacingKey),
     wordSpacing: EzConfig.get(labelWordSpacingKey),
   );
@@ -295,6 +314,7 @@ TextStyle buildLabelFromDefaults(Color? color) {
         : null,
     color: color,
     height: EzConfig.getDefault(labelFontHeightKey),
+    leadingDistribution: TextLeadingDistribution.even,
     letterSpacing: EzConfig.getDefault(labelLetterSpacingKey),
     wordSpacing: EzConfig.getDefault(labelWordSpacingKey),
   );
@@ -302,15 +322,5 @@ TextStyle buildLabelFromDefaults(Color? color) {
   return fuseWithGFont(
     starter: starter,
     gFont: EzConfig.getDefault(labelFontFamilyKey),
-  );
-}
-
-/// For web apps, set the tab's title
-void setPageTitle(String title, Color primaryColor) {
-  SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(
-      label: title,
-      primaryColor: primaryColor.value,
-    ),
   );
 }
