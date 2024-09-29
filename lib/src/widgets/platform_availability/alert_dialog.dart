@@ -44,6 +44,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   @override
   Widget build(BuildContext context) {
     final double margin = EzConfig.get(marginKey);
+    final double padding = EzConfig.get(paddingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -60,11 +61,19 @@ class EzAlertDialog extends PlatformAlertDialog {
         return MaterialAlertDialogData(
           // Title
           title: title,
-          titlePadding: EdgeInsets.all(margin),
+          titlePadding: EdgeInsets.only(
+            left: margin,
+            right: margin,
+            top: margin,
+            bottom: padding / 2,
+          ),
 
           // Content
           content: dialogContent,
-          contentPadding: EdgeInsets.all(margin),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: margin,
+            vertical: padding / 2,
+          ),
 
           // Actions
           actions: materialActions == null
@@ -76,7 +85,10 @@ class EzAlertDialog extends PlatformAlertDialog {
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
           // General
-          actionsPadding: EdgeInsets.zero,
+          actionsPadding: EdgeInsets.symmetric(
+            horizontal: EzConfig.get(spacingKey) / 2,
+            vertical: padding / 2,
+          ),
           buttonPadding: EdgeInsets.zero,
           iconPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(margin),
@@ -89,14 +101,12 @@ class EzAlertDialog extends PlatformAlertDialog {
         );
 
         return CupertinoAlertDialogData(
-          title: Padding(padding: EdgeInsets.all(margin), child: title),
+          title: Padding(
+            padding: EdgeInsets.only(bottom: padding / 2),
+            child: title,
+          ),
           content: Padding(
-            padding: EdgeInsets.only(
-              left: margin,
-              right: margin,
-              top: margin,
-              bottom: margin / 2, // Looks better with less bottom padding
-            ),
+            padding: EdgeInsets.only(top: padding / 2),
             child: dialogContent,
           ),
           actions: cupertinoActions == null
