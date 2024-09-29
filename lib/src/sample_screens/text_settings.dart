@@ -200,7 +200,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             // Font size
             EzTextBackground(
               EzFontDoubleBatchSetting(key: UniqueKey()),
-              margin: EzMargin.wrap(),
+              margin: EzInsets.wrap(EzConfig.get(marginKey)),
               borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
             ),
@@ -346,7 +346,12 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  final EdgeInsets wrapMargin = EzMargin.wrap();
+  final double margin = EzConfig.get(marginKey);
+
+  late final EdgeInsets wrapMargin = EzInsets.wrap(margin);
+  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
+    padding: EzInsets.menu(EzConfig.get(paddingKey)),
+  );
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -378,27 +383,27 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.display,
       label: display,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.headline,
       label: headline,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.title,
       label: title,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.body,
       label: body,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.label,
       label: label,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
   ];
 
