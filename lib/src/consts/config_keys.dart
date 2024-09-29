@@ -11,14 +11,11 @@ const String isDarkThemeKey = 'isDarkTheme';
 
 const String localeKey = 'appLocale';
 
-const String userColorsKey = 'userColors';
-
-///  [isLeftyKey], [isDarkThemeKey], [localeKey],  [userColorsKey],
+///  [isLeftyKey], [isDarkThemeKey], [localeKey]
 const Map<String, Type> globalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   localeKey: List<String>,
-  userColorsKey: List<String>,
 };
 
 // Text settings' keys //
@@ -217,29 +214,41 @@ const double minFontHeight = 1.0;
 /// 2.0
 const double maxFontHeight = 2.0;
 
-// Image settings' keys //
+// Layout keys //
 
-const String lightColorSchemeImageKey = 'lightColorSchemeImage';
-const String lightBackgroundImageKey = 'lightBackgroundImage';
+const String marginKey = 'margin'; // Required key
+const String paddingKey = 'padding'; // Required key
+const String spacingKey = 'spacing'; // Required key
 
-const String darkColorSchemeImageKey = 'darkColorSchemeImage';
-const String darkBackgroundImageKey = 'darkBackgroundImage';
+const String hideScrollKey = 'hideScroll';
 
-/// [light, dark]
-///      X
-/// [colorSchemeImageKey, pageImageKey]
-const Map<String, Type> imageKeys = <String, Type>{
-  // Light theme
-  lightColorSchemeImageKey: String,
-  lightBackgroundImageKey: String,
-
-  // Dark theme
-  darkColorSchemeImageKey: String,
-  darkBackgroundImageKey: String,
+/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
+const Map<String, Type> layoutKeys = <String, Type>{
+  marginKey: double,
+  paddingKey: double,
+  spacingKey: double,
+  hideScrollKey: bool,
 };
 
-/// Allows for app images whose default is an asset to be "null"
-const String noImageValue = 'noImage';
+// Layout settings recommended parameters //
+
+/// 5.0
+const double minMargin = 5.0;
+
+/// 20.0
+const double maxMargin = 20.0;
+
+/// 10.0
+const double minPadding = 10.0;
+
+/// 40.0
+const double maxPadding = 40.0;
+
+/// 10.0
+const double minSpacing = 10.0;
+
+/// 50.0
+const double maxSpacing = 75.0;
 
 // Color settings' keys //
 
@@ -463,8 +472,12 @@ const List<String> darkColors = <String>[
   darkSurfaceTintKey,
 ];
 
+const String userColorsKey = 'userColors';
+
 /// [light, dark] X all 26 material color scheme keys
 const Map<String, Type> colorKeys = <String, Type>{
+  userColorsKey: List<String>,
+
   // Light theme
   lightPrimaryKey: int, // Required key
   lightOnPrimaryKey: int,
@@ -562,44 +575,36 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkSurfaceTintKey: int,
 };
 
-// Layout keys //
+// Image settings' keys //
 
-const String marginKey = 'margin'; // Recommended key
-const String paddingKey = 'padding'; // Recommended key
-const String spacingKey = 'spacing'; // Recommended key
+const String lightColorSchemeImageKey = 'lightColorSchemeImage';
+const String lightBackgroundImageKey = 'lightBackgroundImage';
 
-const Map<String, Type> layoutKeys = <String, Type>{
-  marginKey: double,
-  paddingKey: double,
-  spacingKey: double,
+const String darkColorSchemeImageKey = 'darkColorSchemeImage';
+const String darkBackgroundImageKey = 'darkBackgroundImage';
+
+/// [light, dark]
+///      X
+/// [colorSchemeImageKey, pageImageKey]
+const Map<String, Type> imageKeys = <String, Type>{
+  // Light theme
+  lightColorSchemeImageKey: String,
+  lightBackgroundImageKey: String,
+
+  // Dark theme
+  darkColorSchemeImageKey: String,
+  darkBackgroundImageKey: String,
 };
 
-// Layout settings recommended parameters //
-
-/// 5.0
-const double minMargin = 5.0;
-
-/// 20.0
-const double maxMargin = 20.0;
-
-/// 10.0
-const double minPadding = 10.0;
-
-/// 40.0
-const double maxPadding = 40.0;
-
-/// 10.0
-const double minSpacing = 10.0;
-
-/// 50.0
-const double maxSpacing = 75.0;
+/// Allows for app images whose default is an asset to be "null"
+const String noImageValue = 'noImage';
 
 // Global trackers //
 
 const Map<String, Type> allKeys = <String, Type>{
   ...globalKeys,
   ...textStyleKeys,
-  ...imageKeys,
-  ...colorKeys,
   ...layoutKeys,
+  ...colorKeys,
+  ...imageKeys,
 };
