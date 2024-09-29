@@ -44,7 +44,6 @@ class EzAlertDialog extends PlatformAlertDialog {
   @override
   Widget build(BuildContext context) {
     final double margin = EzConfig.get(marginKey);
-    final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -65,11 +64,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
           // Content
           content: dialogContent,
-          contentPadding: EdgeInsets.only(
-            top: (spacing > margin) ? spacing - margin : 0,
-            left: margin,
-            right: margin,
-          ),
+          contentPadding: EdgeInsets.all(margin),
 
           // Actions
           actions: materialActions == null
@@ -94,16 +89,16 @@ class EzAlertDialog extends PlatformAlertDialog {
         );
 
         return CupertinoAlertDialogData(
-          title: Padding(
+          title: Padding(padding: EdgeInsets.all(margin), child: title),
+          content: Padding(
             padding: EdgeInsets.only(
               left: margin,
               right: margin,
               top: margin,
-              bottom: spacing,
+              bottom: margin / 2, // Looks better with less bottom padding
             ),
-            child: title,
+            child: dialogContent,
           ),
-          content: dialogContent,
           actions: cupertinoActions == null
               ? <Widget>[closeAction]
               : needsClose
