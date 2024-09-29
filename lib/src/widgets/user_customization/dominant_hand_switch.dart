@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
-  /// Defaults to [DropdownMenuThemeData.textStyle]
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
   /// Defaults to [ColorScheme.surface]
@@ -35,7 +35,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
   late final EzSpacer marginer = EzSpacer(space: margin);
 
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.menu(width: margin, height: EzConfig.get(paddingKey)),
+    padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
 
   bool isLefty = EzConfig.get(isLeftyKey) ?? false;

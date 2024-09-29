@@ -41,6 +41,8 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   late final ThemeData theme = Theme.of(context);
 
+  final double padding = EzConfig.get(paddingKey);
+
   // Define the build data  //
 
   late String currFontFamily = firstWord(
@@ -55,7 +57,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       style: TextButton.styleFrom(
         foregroundColor: theme.colorScheme.onSurface,
         textStyle: entry.value,
-        padding: EzPadding.menu(),
+        padding: EzInsets.menu(padding),
       ),
     );
   }).toList();

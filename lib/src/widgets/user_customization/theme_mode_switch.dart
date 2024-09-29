@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzThemeModeSwitch extends StatefulWidget {
-  /// Defaults to [DropdownMenuThemeData.textStyle]
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
   /// Defaults to [ColorScheme.surface]
@@ -31,28 +31,34 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
+  final double margin = EzConfig.get(marginKey);
 
-  late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
+  late final EzSpacer marginer = EzSpacer(space: margin);
+
+  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
+    padding: EzInsets.menu(EzConfig.get(paddingKey)),
+  );
 
   // Define the build data //
+
+  late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   late final List<DropdownMenuEntry<ThemeMode>> entries =
       <DropdownMenuEntry<ThemeMode>>[
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.system,
       label: l10n.gSystem,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.light,
       label: l10n.gLight,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<ThemeMode>(
       value: ThemeMode.dark,
       label: l10n.gDark,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
   ];
 
@@ -66,7 +72,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        margin,
+        marginer,
         EzTextBackground(
           Text(
             l10n.ssThemeMode,
@@ -75,7 +81,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
           ),
           useSurface: false,
         ),
-        margin,
+        marginer,
 
         // Button
         DropdownMenu<ThemeMode>(

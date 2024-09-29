@@ -29,6 +29,8 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  final double padding = EzConfig.get(paddingKey);
+
   late final DisplayTextStyleProvider displayProvider;
   late final HeadlineTextStyleProvider headlineProvider;
   late final TitleTextStyleProvider titleProvider;
@@ -96,7 +98,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       style: TextButton.styleFrom(
         foregroundColor: theme.colorScheme.onSurface,
         textStyle: entry.value,
-        padding: EzPadding.menu(),
+        padding: EzInsets.menu(padding),
       ),
     );
   }).toList();
