@@ -32,9 +32,16 @@ class _LayoutSettingsState extends State<LayoutSettings> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
+  late final EzSpacer marginer = EzSpacer(space: margin);
 
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextStyle style = Theme.of(context).textTheme.bodyLarge!;
+
+  // Define build data //
+
+  bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
 
   // Set the page title //
 
@@ -85,6 +92,34 @@ class _LayoutSettingsState extends State<LayoutSettings> {
             steps: 13,
             decimals: 0,
           ),
+          spacer,
+
+          // Hide scroll
+          EzRow(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              marginer,
+              EzTextBackground(
+                Text(
+                  'Hide scroll bars?',
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+                useSurface: false,
+                margin: EzInsets.col(margin),
+              ),
+              marginer,
+              Checkbox(
+                value: hideScroll,
+                onChanged: (bool? value) async {
+                  if (value == null) return;
+                  await EzConfig.setBool(hideScrollKey, value);
+                  setState(() => hideScroll = value);
+                },
+              ),
+            ],
+          ),
+          spacer,
 
           // Additional settings
           if (widget.additionalSettings != null) ...<Widget>[
@@ -106,7 +141,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           EzTextBackground(
             EzLink(
               EFUILang.of(context)!.gHowThisWorks,
-              style: Theme.of(context).textTheme.bodyLarge!,
+              style: style,
               textAlign: TextAlign.center,
               url: Uri.parse(understandingLayout),
               semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
