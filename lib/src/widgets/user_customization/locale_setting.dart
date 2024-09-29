@@ -95,6 +95,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
               },
               icon: flag(locale),
               label: LocaleNames.of(context)!.nameOf(locale.languageCode)!,
+              labelPadding: false,
             ),
             spacer,
           ]);
@@ -124,6 +125,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           onPressed: () => _chooseLocale(context),
           icon: flag(currLocale),
           label: l10n.ssLanguage,
+          labelPadding: false,
         ),
       ),
     );
