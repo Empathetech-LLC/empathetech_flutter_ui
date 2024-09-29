@@ -346,6 +346,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  final EdgeInsets wrapMargin = EzMargin.wrap();
+
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -408,7 +410,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: EzMargin.wrap(),
+    margin: wrapMargin,
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
       bottomRight: Radius.circular(4),
@@ -421,7 +423,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: EzMargin.wrap(),
+    margin: wrapMargin,
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
       bottomRight: Radius.circular(4),
@@ -434,7 +436,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: EzMargin.wrap(),
+    margin: wrapMargin,
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
       bottomRight: Radius.circular(4),
@@ -447,7 +449,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: EzMargin.wrap(),
+    margin: wrapMargin,
     borderRadius: const BorderRadius.only(
       bottomLeft: Radius.circular(4),
       bottomRight: Radius.circular(4),
