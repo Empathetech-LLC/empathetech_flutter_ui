@@ -30,7 +30,13 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
+  final double margin = EzConfig.get(marginKey);
+
+  late final EzSpacer marginer = EzSpacer(space: margin);
+
+  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
+    padding: EzInsets.menu(width: margin, height: EzConfig.get(paddingKey)),
+  );
 
   bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -40,12 +46,12 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     DropdownMenuEntry<bool>(
       value: false,
       label: l10n.gRight,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<bool>(
       value: true,
       label: l10n.gLeft,
-      style: TextButton.styleFrom(padding: EzPadding.menu()),
+      style: menuButtonStyle,
     ),
   ];
 
@@ -59,7 +65,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        margin,
+        marginer,
         EzTextBackground(
           Text(
             l10n.ssDominantHand,
@@ -68,13 +74,13 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
           ),
           useSurface: false,
         ),
-        margin,
+        marginer,
 
         // Button
         DropdownMenu<bool>(
+          dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: isLefty,
-          dropdownMenuEntries: entries,
           onSelected: (bool? makeLeft) async {
             if (makeLeft == true) {
               if (!isLefty) {
