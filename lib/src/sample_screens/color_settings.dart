@@ -306,34 +306,33 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   List<Widget> dynamicColorSettings() {
     final List<Widget> toReturn = <Widget>[];
 
-    Widget personalSpace(EzColorSetting child) {
-      return Padding(
-        padding: EzPadding.wrap(),
-        child: child,
-      );
-    }
-
     for (final String key in currList) {
       if (defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.add(
-          personalSpace(EzColorSetting(
-            key: ValueKey<String>(key),
-            configKey: key,
-          )),
+          Padding(
+            padding: EzInsets.wrap(padding),
+            child: (EzColorSetting(
+              key: ValueKey<String>(key),
+              configKey: key,
+            )),
+          ),
         );
       } else {
         toReturn.add(
           // Removable buttons
-          personalSpace(EzColorSetting(
-            key: ValueKey<String>(key),
-            configKey: key,
-            onRemove: () async {
-              currList.remove(key);
-              await EzConfig.setStringList(userColorsKey, currList);
-              setState(() {});
-            },
-          )),
+          Padding(
+            padding: EzInsets.wrap(padding),
+            child: (EzColorSetting(
+              key: ValueKey<String>(key),
+              configKey: key,
+              onRemove: () async {
+                currList.remove(key);
+                await EzConfig.setStringList(userColorsKey, currList);
+                setState(() {});
+              },
+            )),
+          ),
         );
       }
     }
@@ -351,7 +350,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       final Color liveColor = getLiveColor(context, configKeyKey);
 
       return Container(
-        padding: EzPadding.col(),
+        padding: EzInsets.col(padding),
         child: ElevatedButton.icon(
           key: ValueKey<String>(configKeyKey),
           icon: Container(
