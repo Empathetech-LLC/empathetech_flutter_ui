@@ -23,6 +23,14 @@ class FeedbackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+    final Widget icon = Icon(
+      Icons.feedback_outlined,
+      color: Theme.of(context).colorScheme.primary,
+      size: Theme.of(context).textTheme.titleLarge?.fontSize,
+    );
+
     return MenuItemButton(
       onPressed: () async {
         if (scaffoldMessengerKey.currentContext == null) return;
@@ -53,11 +61,8 @@ class FeedbackButton extends StatelessWidget {
           },
         );
       },
-      leadingIcon: Icon(
-        Icons.feedback_outlined,
-        color: Theme.of(context).colorScheme.primary,
-        size: Theme.of(context).textTheme.titleLarge?.fontSize,
-      ),
+      leadingIcon: isLefty ? icon : null,
+      trailingIcon: isLefty ? null : icon,
       child: Text(l10n.gGiveFeedback),
     );
   }
