@@ -41,6 +41,10 @@ ThemeData ezThemeData(Brightness brightness) {
   // Build the ThemeData //
 
   return ThemeData(
+    // UX //
+
+    materialTapTargetSize: MaterialTapTargetSize.padded,
+
     // Color scheme //
 
     brightness: brightness,
@@ -135,11 +139,12 @@ ThemeData ezThemeData(Brightness brightness) {
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
+        iconColor: colorScheme.primary,
+        disabledIconColor: colorScheme.outline,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
@@ -160,7 +165,6 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
@@ -196,7 +200,6 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.only(left: padding, right: padding, top: padding),
         side: null,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
@@ -218,7 +221,6 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
         side: BorderSide(color: colorScheme.primaryContainer),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
@@ -237,7 +239,6 @@ ThemeData ezThemeData(Brightness brightness) {
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         side: null,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
 
