@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 
 // Helpers //
 
-/// Returns the soon-to-be rendered size of text via a [TextPainter]
+/// Returns the soon-to-be rendered size of [text] via a [TextPainter]
 Size measureText(
   String text, {
   required BuildContext context,
@@ -18,6 +18,22 @@ Size measureText(
 }) {
   final TextPainter textPainter = TextPainter(
     text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textScaler: MediaQuery.textScalerOf(context),
+    textDirection: TextDirection.ltr,
+  )..layout();
+
+  return textPainter.size;
+}
+
+/// Returns the soon-to-be rendered size of an [icon] via a [TextPainter]
+Size measureIcon(
+  IconData icon, {
+  required BuildContext context,
+  required TextStyle? style,
+}) {
+  final TextPainter textPainter = TextPainter(
+    text: TextSpan(text: String.fromCharCode(icon.codePoint), style: style),
     maxLines: 1,
     textScaler: MediaQuery.textScalerOf(context),
     textDirection: TextDirection.ltr,
