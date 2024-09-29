@@ -60,7 +60,8 @@ class EzScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EdgeInsetsGeometry screenMargin = margin ?? EzMargin();
+    final EdgeInsetsGeometry screenMargin =
+        margin ?? EdgeInsets.all(EzConfig.get(marginKey));
 
     Decoration? buildDecoration() {
       if (!useImageDecoration) return null;
