@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             spacer,
 
             const EzLocaleSetting(),
-            spacer,
+            separator,
 
             // Text settings
             ElevatedButton(
