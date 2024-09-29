@@ -40,3 +40,26 @@ BoxConstraints textFieldConstraints(BuildContext context) {
     maxWidth: min(threeQs, smallBreakpoint),
   );
 }
+
+/// Returns an appropriate width for a [DropdownMenu]
+double dropdownWidth({
+  required BuildContext context,
+  required List<String> entries,
+}) {
+  final TextStyle style = Theme.of(context)
+          .menuButtonTheme
+          .style
+          ?.textStyle
+          ?.resolve(<WidgetState>{}) ??
+      Theme.of(context).textTheme.bodyLarge!;
+
+  return measureText(getLongest(entries), context: context, style: style)
+          .width +
+      measureIcon(Icons.arrow_drop_down, context: context, style: style).width +
+      EzConfig.get(marginKey) +
+      EzConfig.get(paddingKey) * 2;
+}
+
+/// Returns the longest [String] in [list]
+String getLongest(List<String> list) =>
+    list.reduce((String a, String b) => a.length > b.length ? a : b);
