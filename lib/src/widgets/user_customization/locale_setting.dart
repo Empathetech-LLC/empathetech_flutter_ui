@@ -82,7 +82,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           if (locale.countryCode != null) localeData.add(locale.countryCode!);
 
           buttons.addAll(<Widget>[
-            EzButton(
+            EzElevatedButton(
               onPressed: () async {
                 await EzConfig.setStringList(localeKey, localeData);
                 currLocale = locale;
@@ -94,10 +94,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                 }
               },
               icon: flag(locale),
-              label: Text(
-                LocaleNames.of(context)!.nameOf(locale.languageCode)!,
-                textAlign: TextAlign.center,
-              ),
+              label: LocaleNames.of(context)!.nameOf(locale.languageCode)!,
             ),
             spacer,
           ]);
@@ -123,10 +120,10 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       button: true,
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
-        child: EzButton(
+        child: EzElevatedButton(
           onPressed: () => _chooseLocale(context),
           icon: flag(currLocale),
-          label: Text(l10n.ssLanguage),
+          label: l10n.ssLanguage,
         ),
       ),
     );

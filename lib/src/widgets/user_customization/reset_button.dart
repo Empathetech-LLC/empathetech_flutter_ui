@@ -105,10 +105,10 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return EzButton(
+    return EzElevatedButton(
       onPressed: resetDialog,
       icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? l10n.gResetAll),
+      label: label ?? l10n.gResetAll,
     );
   }
 }
