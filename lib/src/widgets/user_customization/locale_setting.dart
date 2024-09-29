@@ -30,7 +30,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
-  late final Color onSurface = Theme.of(context).colorScheme.onSurface;
+  late final Color primary = Theme.of(context).colorScheme.primary;
 
   late Locale currLocale = Localizations.localeOf(context);
 
@@ -45,7 +45,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         ? Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: onSurface, width: 0.5),
+              border: Border.all(color: primary),
             ),
             child: CountryFlag.fromLanguageCode(
               flagLocale.languageCode,
@@ -56,7 +56,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: onSurface, width: 0.5),
+              border: Border.all(color: primary),
             ),
             child: CountryFlag.fromCountryCode(
               flagLocale.countryCode!,
