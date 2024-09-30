@@ -10,13 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  /// Optional background color override
-  /// Defaults to [ColorScheme.surface]
-  final Color? backgroundColor;
-
-  /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
-  /// Updates all font families at once
-  const EzFontFamilyBatchSetting({super.key, this.backgroundColor});
+  const EzFontFamilyBatchSetting({super.key});
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -156,46 +150,39 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: l10n.tsFontFamily,
-      child: Container(
-        padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          color: widget.backgroundColor ?? theme.colorScheme.surface,
-          borderRadius: ezRoundEdge,
-        ),
-        child: DropdownMenu<String>(
-          enableSearch: false,
-          initialSelection: currFontFamily,
-          textStyle: bodyProvider.value,
-          width: smallBreakpoint / 4,
-          dropdownMenuEntries: entries,
-          onSelected: (String? fontFamily) async {
-            if (fontFamily == null) return;
+      child: DropdownMenu<String>(
+        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+        textStyle: bodyProvider.value,
+        dropdownMenuEntries: entries,
+        enableSearch: false,
+        initialSelection: currFontFamily,
+        onSelected: (String? fontFamily) async {
+          if (fontFamily == null) return;
 
-            if (!isUniform) {
-              final bool override = await confirmBatchOverride();
+          if (!isUniform) {
+            final bool override = await confirmBatchOverride();
 
-              if (override) {
-                isUniform = true;
-              } else {
-                return;
-              }
+            if (override) {
+              isUniform = true;
+            } else {
+              return;
             }
+          }
 
-            currFontFamily = fontFamily;
+          currFontFamily = fontFamily;
 
-            for (final String key in currFonts.keys) {
-              await EzConfig.setString(key, fontFamily);
-            }
+          for (final String key in currFonts.keys) {
+            await EzConfig.setString(key, fontFamily);
+          }
 
-            displayProvider.fuse(fontFamily);
-            headlineProvider.fuse(fontFamily);
-            titleProvider.fuse(fontFamily);
-            bodyProvider.fuse(fontFamily);
-            labelProvider.fuse(fontFamily);
+          displayProvider.fuse(fontFamily);
+          headlineProvider.fuse(fontFamily);
+          titleProvider.fuse(fontFamily);
+          bodyProvider.fuse(fontFamily);
+          labelProvider.fuse(fontFamily);
 
-            setState(() {});
-          },
-        ),
+          setState(() {});
+        },
       ),
     );
   }
