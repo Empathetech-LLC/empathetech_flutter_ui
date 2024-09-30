@@ -369,13 +369,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             ),
           ),
           label: Text(getColorName(context, configKeyKey)),
-          style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.all(padding * 0.75),
-            ),
-            foregroundColor: WidgetStateProperty.all(
-              theme.colorScheme.onSurface,
-            ),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
+            foregroundColor: theme.colorScheme.onSurface,
           ),
           onPressed: () {
             currList.add(configKeyKey);

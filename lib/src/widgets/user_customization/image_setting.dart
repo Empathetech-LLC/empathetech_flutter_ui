@@ -407,10 +407,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
         child: ElevatedButton.icon(
-          style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.all(padding * 0.75),
-            ),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: inProgress ? doNothing : activateSetting,
           onLongPress: inProgress ? doNothing : showCredits,

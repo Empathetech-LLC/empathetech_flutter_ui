@@ -196,20 +196,16 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                style: theme.elevatedButtonTheme.style?.copyWith(
-                  foregroundColor: WidgetStateProperty.all(
-                    theme.colorScheme.onSurface,
-                  ),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSurface,
                 ),
                 onPressed: doNothing,
                 child: Text(l10n.gCurrently),
               ),
               EzSpacer(space: currValue, vertical: false),
               ElevatedButton(
-                style: theme.elevatedButtonTheme.style?.copyWith(
-                  foregroundColor: WidgetStateProperty.all(
-                    theme.colorScheme.onSurface,
-                  ),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSurface,
                 ),
                 onPressed: doNothing,
                 child: Text(valString),

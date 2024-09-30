@@ -318,13 +318,9 @@ class _ColorSettingState extends State<EzColorSetting> {
                   ),
           ),
           label: Text(label),
-          style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.all(padding * 0.75),
-            ),
-            foregroundColor: WidgetStateProperty.all(
-              theme.colorScheme.onSurface,
-            ),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
+            foregroundColor: theme.colorScheme.onSurface,
           ),
         ),
       ),
