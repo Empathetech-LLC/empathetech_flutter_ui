@@ -44,7 +44,6 @@ void testSuite({
       debugPrint('\nTesting options menu');
       await touch(tester, find.byType(MenuAnchor).last);
 
-      // ToDo: Test options functionality
       expect(find.text(l10n.gBYO).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 

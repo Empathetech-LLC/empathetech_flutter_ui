@@ -98,7 +98,6 @@ Future<void> _webTests(
   );
   await touch(tester, finder);
 
-  // ToDo: Reset catch
   debugPrint('\nClear');
   await touch(tester, find.byIcon(Icons.clear));
   expect(find.byIcon(Icons.edit), findsOneWidget);
@@ -145,7 +144,6 @@ Future<void> _mobileTests(
   );
   await touch(tester, finder);
 
-  // ToDo: Reset catch
   debugPrint('\nClear');
   await touch(
     tester,
@@ -193,7 +191,6 @@ Future<void> _desktopTests(
   );
   await touch(tester, finder);
 
-  // ToDo: Reset catch
   debugPrint('\nClear');
   await touch(
     tester,

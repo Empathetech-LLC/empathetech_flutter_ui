@@ -14,8 +14,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-// ToDo: Verify expected color values
-
 void testSuite({
   Locale locale = english,
   bool isLefty = false,
@@ -107,7 +105,6 @@ void testSuite({
 
       debugPrint('How this works');
       await validateText(tester, l10n.gHowThisWorks);
-      // ToDo: Verify link
 
       debugPrint('Add on primary');
       await touchText(tester, l10n.csOnPrimary);
