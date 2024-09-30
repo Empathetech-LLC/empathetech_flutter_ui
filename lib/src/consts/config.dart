@@ -132,10 +132,6 @@ const String empathKofi = 'https://ko-fi.com/empathetech';
 /// [https://m3.material.io/styles/color/roles]
 const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
 
-/// [https://m3.material.io/foundations/layout/understanding-layout/spacing]
-const String understandingLayout =
-    'https://m3.material.io/foundations/layout/understanding-layout/spacing';
-
 // EzConfig base //
 
 /// Empathetech's default configuration for [EzConfig]
