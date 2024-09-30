@@ -92,7 +92,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
             steps: 13,
             decimals: 0,
           ),
-          spacer,
+          separator,
 
           // Hide scroll
           EzRow(
@@ -119,14 +119,13 @@ class _LayoutSettingsState extends State<LayoutSettings> {
               ),
             ],
           ),
-          spacer,
+          separator,
 
           // Additional settings
           if (widget.additionalSettings != null) ...<Widget>[
-            spacer,
-            ...widget.additionalSettings!
+            ...widget.additionalSettings!,
+            separator,
           ],
-          separator,
 
           // Local reset all
           EzResetButton(
@@ -134,20 +133,6 @@ class _LayoutSettingsState extends State<LayoutSettings> {
             onConfirm: () async {
               await EzConfig.removeKeys(layoutKeys.keys.toSet());
             },
-          ),
-          separator,
-
-          // Help
-          EzTextBackground(
-            EzLink(
-              EFUILang.of(context)!.gHowThisWorks,
-              style: style,
-              textAlign: TextAlign.center,
-              url: Uri.parse(understandingLayout),
-              semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
-              tooltip: understandingLayout,
-            ),
-            borderRadius: ezPillShape,
           ),
           spacer,
         ],
