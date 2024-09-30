@@ -3,9 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-/// Build apps for anyone. EFUI makes building user accessible and customizable apps Ez. So everyone can enjoy your great idea!
-library empathetech_flutter_ui;
-
 // Core //
 
 export 'src/config.dart';
