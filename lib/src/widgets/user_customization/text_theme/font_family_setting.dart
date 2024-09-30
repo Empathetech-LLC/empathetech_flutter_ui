@@ -69,14 +69,14 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
     return Tooltip(
       message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
       child: DropdownMenu<String>(
-        enableSearch: false,
-        initialSelection: currFontFamily,
+        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
         textStyle: fuseWithGFont(
           starter: widget.baseStyle,
           gFont: currFontFamily,
         ),
-        width: smallBreakpoint / 4,
         dropdownMenuEntries: entries,
+        enableSearch: false,
+        initialSelection: currFontFamily,
         onSelected: (String? fontFamily) async {
           if (fontFamily == null) return;
           currFontFamily = fontFamily;
