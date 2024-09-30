@@ -869,10 +869,17 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
             spacer,
             DropdownMenu<TextSettingType>(
-              enableSearch: false,
-              initialSelection: editing,
+              width: dropdownWidth(
+                context: context,
+                entries: styleChoices
+                    .map(
+                        (DropdownMenuEntry<TextSettingType> type) => type.label)
+                    .toList(),
+              ),
               textStyle: labelProvider.value,
               dropdownMenuEntries: styleChoices,
+              enableSearch: false,
+              initialSelection: editing,
               onSelected: (TextSettingType? value) {
                 if (value != null) setState(() => editing = value);
               },
