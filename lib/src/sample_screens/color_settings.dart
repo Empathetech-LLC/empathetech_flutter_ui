@@ -442,7 +442,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               // Show available color configKeys
               await showModalBottomSheet(
                 context: context,
-                showDragHandle: true,
                 builder: (BuildContext context) => StatefulBuilder(
                   builder: (
                     BuildContext context,
