@@ -28,8 +28,6 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
 
-  final double margin = EzConfig.get(marginKey);
-
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
@@ -62,7 +60,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         textAlign: TextAlign.center,
       ),
     ),
-    EzSpacer(space: margin),
+    EzSpacer(space: EzConfig.get(marginKey)),
 
     // Button
     DropdownMenu<bool>(
