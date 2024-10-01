@@ -108,7 +108,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
         return EzAlertDialog(
           title: Text(
-            l10n.ssLanguages,
+            l10n.gAttention,
             textAlign: TextAlign.center,
           ),
           content: Text(
@@ -118,12 +118,15 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
           materialActions: ezMaterialActions(
             context: dialogContext,
             onConfirm: onConfirm,
+            confirmIsDestructive: true,
             onDeny: onDeny,
           ),
           cupertinoActions: ezCupertinoActions(
             context: dialogContext,
             onConfirm: onConfirm,
+            confirmIsDestructive: true,
             onDeny: onDeny,
+            denyIsDefault: true,
           ),
           needsClose: false,
         );
