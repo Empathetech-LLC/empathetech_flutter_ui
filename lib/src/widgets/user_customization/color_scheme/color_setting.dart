@@ -147,15 +147,16 @@ class _ColorSettingState extends State<EzColorSetting> {
             materialActions: ezMaterialActions(
               context: context,
               onConfirm: onConfirm,
-              onDeny: onDeny,
+              confirmIsDestructive: true,
               denyMsg: denyMsg,
+              onDeny: onDeny,
             ),
             cupertinoActions: ezCupertinoActions(
               context: context,
               onConfirm: onConfirm,
-              onDeny: onDeny,
-              denyMsg: denyMsg,
               confirmIsDestructive: true,
+              denyMsg: denyMsg,
+              onDeny: onDeny,
             ),
           );
         },

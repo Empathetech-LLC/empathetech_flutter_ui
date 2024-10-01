@@ -80,6 +80,7 @@ class EzResetButton extends StatelessWidget {
               confirm();
               Navigator.of(dialogContext).pop();
             },
+            confirmIsDestructive: true,
             onDeny: () {
               deny();
               Navigator.of(dialogContext).pop();
@@ -91,11 +92,11 @@ class EzResetButton extends StatelessWidget {
               confirm();
               Navigator.of(dialogContext).pop();
             },
+            confirmIsDestructive: true,
             onDeny: () {
               deny();
               Navigator.of(dialogContext).pop();
             },
-            confirmIsDestructive: true,
             denyIsDefault: true,
           ),
           needsClose: false,

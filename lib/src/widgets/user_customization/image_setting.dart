@@ -224,18 +224,19 @@ class _ImageSettingState extends State<EzImageSetting> {
               ),
               materialActions: ezMaterialActions(
                 context: context,
-                onConfirm: onConfirm,
                 confirmMsg: l10n.gApply,
-                onDeny: onDeny,
+                onConfirm: onConfirm,
+                confirmIsDestructive: true,
                 denyMsg: l10n.gCancel,
+                onDeny: onDeny,
               ),
               cupertinoActions: ezCupertinoActions(
                 context: context,
-                onConfirm: onConfirm,
                 confirmMsg: l10n.gApply,
+                onConfirm: onConfirm,
                 confirmIsDestructive: true,
-                onDeny: onDeny,
                 denyMsg: l10n.gCancel,
+                onDeny: onDeny,
               ),
               needsClose: false,
             );
