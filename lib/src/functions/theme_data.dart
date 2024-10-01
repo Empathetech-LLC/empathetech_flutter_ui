@@ -69,6 +69,12 @@ ThemeData ezThemeData(Brightness brightness) {
     iconTheme: iconData,
     primaryIconTheme: iconData,
 
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: colorScheme.primary,
+      selectionColor: colorScheme.secondary.withOpacity(0.5),
+      selectionHandleColor: colorScheme.primary,
+    ),
+
     // Widgets //
 
     // App bar
