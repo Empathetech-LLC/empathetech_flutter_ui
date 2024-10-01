@@ -90,6 +90,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       final int recommended = getTextColor(backgroundColor).value;
 
+      // Just open a color picker if the value is already what's recommended
+      if (recommended == currColor.value) return openColorPicker(context);
+
       // Define action button parameters
       final String denyMsg = l10n.csUseCustom;
 
@@ -150,6 +153,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               confirmIsDestructive: true,
               denyMsg: denyMsg,
               onDeny: onDeny,
+              denyIsDestructive: true,
             ),
             cupertinoActions: ezCupertinoActions(
               context: context,
@@ -157,6 +161,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               confirmIsDestructive: true,
               denyMsg: denyMsg,
               onDeny: onDeny,
+              denyIsDestructive: true,
             ),
           );
         },
@@ -223,11 +228,13 @@ class _ColorSettingState extends State<EzColorSetting> {
             materialActions: ezMaterialActions(
               context: context,
               onConfirm: onConfirm,
+              confirmIsDestructive: true,
               onDeny: onDeny,
             ),
             cupertinoActions: ezCupertinoActions(
               context: context,
               onConfirm: onConfirm,
+              confirmIsDestructive: true,
               onDeny: onDeny,
             ),
             needsClose: false,
