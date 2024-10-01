@@ -14,6 +14,8 @@ ThemeData ezThemeData(Brightness brightness) {
   // Gather values from EzConfig //
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
+  final Color highlightColor =
+      colorScheme.primary.withOpacity(highlightOpacity);
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
@@ -52,7 +54,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     dialogBackgroundColor: colorScheme.surface,
     dividerColor: colorScheme.secondary,
-    hoverColor: colorScheme.primary.withOpacity(highlightOpacity),
+    hoverColor: highlightColor,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
 
     // Transitions //
@@ -107,6 +109,7 @@ ThemeData ezThemeData(Brightness brightness) {
         }
         return null;
       }),
+      overlayColor: WidgetStateProperty.all(highlightColor),
       side: BorderSide(color: colorScheme.primary),
     ),
 
