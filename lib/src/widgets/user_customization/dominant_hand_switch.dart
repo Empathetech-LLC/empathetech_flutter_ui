@@ -51,52 +51,44 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     ),
   ];
 
-  late final List<Widget> children = <Widget>[
-    // Label
-    EzTextBackground(
-      Text(
-        l10n.ssDominantHand,
-        style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
-        textAlign: TextAlign.center,
-      ),
-    ),
-    EzSpacer(space: EzConfig.get(marginKey)),
-
-    // Button
-    DropdownMenu<bool>(
-      width: dropdownWidth(
-        context: context,
-        entries: entries
-            .map((DropdownMenuEntry<bool> entry) => entry.label)
-            .toList(),
-      ),
-      dropdownMenuEntries: entries,
-      enableSearch: false,
-      initialSelection: isLefty,
-      onSelected: (bool? makeLeft) async {
-        if (makeLeft == true) {
-          if (!isLefty) {
-            await EzConfig.setBool(isLeftyKey, true);
-            setState(() => isLefty = true);
-          }
-        } else {
-          if (isLefty) {
-            await EzConfig.setBool(isLeftyKey, false);
-            setState(() => isLefty = false);
-          }
-        }
-      },
-    ),
-  ];
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return EzScrollView(
       scrollDirection: Axis.horizontal,
+      reverseHands: true,
       mainAxisSize: MainAxisSize.min,
-      children: isLefty ? children.reversed.toList() : children,
+      children: <Widget>[
+        // Label
+        EzTextBackground(
+          Text(
+            l10n.ssDominantHand,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        EzSpacer(space: EzConfig.get(marginKey)),
+
+        // Button
+        DropdownMenu<bool>(
+          width: dropdownWidth(
+            context: context,
+            entries: entries
+                .map((DropdownMenuEntry<bool> entry) => entry.label)
+                .toList(),
+          ),
+          dropdownMenuEntries: entries,
+          enableSearch: false,
+          initialSelection: isLefty,
+          onSelected: (bool? makeLeft) async {
+            if (makeLeft == null || makeLeft == isLefty) return;
+
+            await EzConfig.setBool(isLeftyKey, makeLeft);
+            setState(() => isLefty = makeLeft);
+          },
+        ),
+      ],
     );
   }
 }
