@@ -20,6 +20,8 @@ class EzElevatedButton extends StatelessWidget {
   final Widget icon;
   final String label;
   final bool labelPadding;
+  final TextStyle? textStyle;
+  final TextAlign? textAlign;
 
   /// [ElevatedButton.icon] wrapper that responds to [isLeftyKey]
   const EzElevatedButton({
@@ -36,6 +38,8 @@ class EzElevatedButton extends StatelessWidget {
     required this.icon,
     required this.label,
     this.labelPadding = true,
+    this.textStyle,
+    this.textAlign,
   });
 
   @override
@@ -54,7 +58,11 @@ class EzElevatedButton extends StatelessWidget {
       statesController: statesController,
       icon: icon,
       iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
-      label: Text(labelPadding ? (isLefty ? '$label\t' : '\t$label') : label),
+      label: Text(
+        labelPadding ? (isLefty ? '$label\t' : '\t$label') : label,
+        style: textStyle,
+        textAlign: textAlign,
+      ),
     );
   }
 }
