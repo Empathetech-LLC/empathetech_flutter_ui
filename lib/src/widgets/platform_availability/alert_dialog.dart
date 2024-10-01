@@ -143,14 +143,14 @@ List<TextButton> ezMaterialActions({
   bool reverseHands = true,
 }) {
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
-  final Color onSurface = Theme.of(context).colorScheme.onSurface;
+  final Color primary = Theme.of(context).colorScheme.primary;
 
   final List<TextButton> actions = <TextButton>[
     // Deny
     TextButton(
       onPressed: onDeny,
       style: denyIsDestructive
-          ? TextButton.styleFrom(foregroundColor: onSurface)
+          ? TextButton.styleFrom(foregroundColor: primary)
           : null,
       child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
     ),
@@ -158,8 +158,8 @@ List<TextButton> ezMaterialActions({
     // Confirm
     TextButton(
       onPressed: onConfirm,
-      style: denyIsDestructive
-          ? TextButton.styleFrom(foregroundColor: onSurface)
+      style: confirmIsDestructive
+          ? TextButton.styleFrom(foregroundColor: primary)
           : null,
       child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
     ),
