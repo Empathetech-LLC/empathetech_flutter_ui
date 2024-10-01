@@ -295,7 +295,6 @@ class _ColorSettingState extends State<EzColorSetting> {
         child: EzElevatedButton(
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
-            foregroundColor: theme.colorScheme.onSurface,
           ),
           onPressed: () => changeColor(context),
           onLongPress: () => options(context),
