@@ -235,6 +235,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                 context: context,
                 onConfirm: onConfirm,
                 confirmMsg: l10n.gApply,
+                confirmIsDestructive: true,
                 onDeny: onDeny,
                 denyMsg: l10n.gCancel,
               ),
