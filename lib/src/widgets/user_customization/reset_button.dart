@@ -68,12 +68,10 @@ class EzResetButton extends StatelessWidget {
             dialogTitle ?? l10n.ssResetAll,
             textAlign: TextAlign.center,
           ),
-          contents: <Widget>[
-            Text(
-              dialogContent ?? l10n.gResetWarn,
-              textAlign: TextAlign.center,
-            ),
-          ],
+          content: Text(
+            dialogContent ?? l10n.gResetWarn,
+            textAlign: TextAlign.center,
+          ),
           materialActions: ezMaterialActions(
             context: context,
             onConfirm: () {
