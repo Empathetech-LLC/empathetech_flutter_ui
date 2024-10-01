@@ -58,8 +58,6 @@ class EzAlertDialog extends PlatformAlertDialog {
     return PlatformAlertDialog(
       material: (BuildContext dialogContext, _) {
         late final TextButton closeAction = TextButton(
-          style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.onSurface),
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
         );
