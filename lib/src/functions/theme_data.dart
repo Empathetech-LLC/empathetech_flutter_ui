@@ -49,6 +49,10 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
+
+    dialogBackgroundColor: colorScheme.surface,
+    dividerColor: colorScheme.secondary,
+    hoverColor: colorScheme.primary.withOpacity(highlightOpacity),
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
 
     // Transitions //
@@ -204,7 +208,6 @@ ThemeData ezThemeData(Brightness brightness) {
         side: WidgetStateProperty.all(
           BorderSide(color: colorScheme.primaryContainer),
         ),
-        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: padding)),
         alignment: Alignment.center,
       ),
     ),
@@ -221,7 +224,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.only(left: padding, right: padding, top: padding),
+        padding: EdgeInsets.all(padding / 2),
       ),
     ),
 
@@ -260,6 +263,7 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
+        overlayColor: colorScheme.primary,
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
