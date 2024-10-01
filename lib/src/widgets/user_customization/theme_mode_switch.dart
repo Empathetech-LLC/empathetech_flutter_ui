@@ -34,7 +34,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   final double margin = EzConfig.get(marginKey);
 
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.menu(EzConfig.get(paddingKey)),
+    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
   );
 
   // Define the build data //

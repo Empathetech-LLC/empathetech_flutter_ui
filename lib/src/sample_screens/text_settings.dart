@@ -358,7 +358,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     bottomRight: Radius.circular(4),
   );
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.menu(EzConfig.get(paddingKey)),
+    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
   );
   late final EdgeInsets colMargin = EzInsets.col(margin);
 

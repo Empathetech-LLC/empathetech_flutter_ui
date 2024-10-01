@@ -18,10 +18,6 @@ class EzInsets extends EdgeInsets {
 
   /// [EdgeInsets].all([base] / 2)
   const EzInsets.wrap(double base) : super.all(base / 2);
-
-  /// [EdgeInsets] .only(left: [base], right: [base], top: [base])
-  const EzInsets.menu(double base)
-      : super.only(left: base, right: base, top: base);
 }
 
 /// BorderRadius.all(Radius.circular(4.0))

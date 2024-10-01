@@ -57,7 +57,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       style: TextButton.styleFrom(
         foregroundColor: theme.colorScheme.onSurface,
         textStyle: entry.value,
-        padding: EzInsets.menu(padding),
+        padding: EzInsets.wrap(padding),
       ),
     );
   }).toList();
