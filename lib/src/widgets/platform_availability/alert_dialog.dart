@@ -134,11 +134,11 @@ class EzAlertDialog extends PlatformAlertDialog {
 /// All required parameters are identical to [ezCupertinoActions]
 List<TextButton> ezMaterialActions({
   required BuildContext context,
-  required void Function() onConfirm,
   String? confirmMsg,
+  required void Function() onConfirm,
   bool confirmIsDestructive = false,
-  required void Function() onDeny,
   String? denyMsg,
+  required void Function() onDeny,
   bool denyIsDestructive = false,
   bool reverseHands = true,
 }) {
@@ -173,12 +173,12 @@ List<TextButton> ezMaterialActions({
 /// All required parameters are identical to [ezMaterialActions]
 List<CupertinoDialogAction> ezCupertinoActions({
   required BuildContext context,
-  required void Function() onConfirm,
   String? confirmMsg,
+  required void Function() onConfirm,
   bool confirmIsDefault = false,
   bool confirmIsDestructive = false,
-  required void Function() onDeny,
   String? denyMsg,
+  required void Function() onDeny,
   bool denyIsDefault = false,
   bool denyIsDestructive = false,
   bool reverseHands = true,
