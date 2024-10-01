@@ -32,7 +32,6 @@ class _LayoutSettingsState extends State<LayoutSettings> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
-  late final EzSpacer marginer = EzSpacer(space: margin);
 
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -98,15 +97,14 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           EzRow(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              marginer,
               EzTextBackground(
                 Text(
                   l10n.lsScroll,
                   style: style,
                   textAlign: TextAlign.center,
                 ),
+                margin: EzInsets.col(margin),
               ),
-              marginer,
               Checkbox(
                 value: hideScroll,
                 onChanged: (bool? value) async {

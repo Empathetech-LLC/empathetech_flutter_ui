@@ -38,7 +38,6 @@ class _ImageSettingsState extends State<ImageSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
 
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -74,7 +73,7 @@ class _ImageSettingsState extends State<ImageSettings> {
               textAlign: TextAlign.center,
             ),
           ),
-          separator,
+          EzSpacer(space: EzConfig.get(marginKey)),
 
           // Page image setting
           EzScrollView(
@@ -102,7 +101,7 @@ class _ImageSettingsState extends State<ImageSettings> {
             spacer,
             ...widget.additionalSettings!,
           ],
-          separator,
+          const EzSeparator(),
 
           // Local reset all
           EzResetButton(

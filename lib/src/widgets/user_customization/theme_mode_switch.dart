@@ -33,8 +33,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   final double margin = EzConfig.get(marginKey);
 
-  late final EzSpacer marginer = EzSpacer(space: margin);
-
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
@@ -72,7 +70,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        marginer,
         EzTextBackground(
           Text(
             l10n.ssThemeMode,
@@ -80,7 +77,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
             textAlign: TextAlign.center,
           ),
         ),
-        marginer,
+        EzSpacer(space: margin),
 
         // Button
         DropdownMenu<ThemeMode>(

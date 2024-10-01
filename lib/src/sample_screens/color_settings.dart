@@ -28,19 +28,17 @@ class ColorSettings extends StatefulWidget {
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
-      darkTertiaryKey,
-      darkSurfaceContainerKey,
       darkSurfaceKey,
       darkOnSurfaceKey,
+      darkSurfaceContainerKey,
       darkSurfaceTintKey,
     ],
     this.lightStarterSet = const <String>[
       lightPrimaryKey,
       lightSecondaryKey,
-      lightTertiaryKey,
-      lightSurfaceContainerKey,
       lightSurfaceKey,
       lightOnSurfaceKey,
+      lightSurfaceContainerKey,
       lightSurfaceTintKey,
     ],
   });
@@ -52,7 +50,6 @@ class ColorSettings extends StatefulWidget {
 class _ColorSettingsState extends State<ColorSettings> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
   late final ThemeData theme = Theme.of(context);
@@ -121,7 +118,7 @@ class _ColorSettingsState extends State<ColorSettings> {
               textAlign: TextAlign.center,
             ),
           ),
-          spacer,
+          EzSpacer(space: EzConfig.get(marginKey)),
 
           // Mode switch
           SegmentedButton<String>(
@@ -163,7 +160,7 @@ class _ColorSettingsState extends State<ColorSettings> {
 
           // Reset button
           resetButton,
-          spacer,
+          const EzSpacer(),
         ],
       ),
     );
