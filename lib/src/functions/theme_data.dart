@@ -97,10 +97,18 @@ ThemeData ezThemeData(Brightness brightness) {
       fillColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return colorScheme.surface.withOpacity(textBackgroundOpacity);
-        } else {
-          return colorScheme.surface;
+        } else if (states.contains(WidgetState.selected)) {
+          return colorScheme.primary;
         }
+        return null;
       }),
+      checkColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return colorScheme.onPrimary;
+        }
+        return null;
+      }),
+      side: BorderSide(color: colorScheme.primary),
     ),
 
     // Dialog
