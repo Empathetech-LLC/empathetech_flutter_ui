@@ -92,6 +92,17 @@ ThemeData ezThemeData(Brightness brightness) {
       margin: EdgeInsets.zero,
     ),
 
+    // Checkbox
+    checkboxTheme: CheckboxThemeData(
+      fillColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return colorScheme.surface.withOpacity(textBackgroundOpacity);
+        } else {
+          return colorScheme.surface;
+        }
+      }),
+    ),
+
     // Dialog
     dialogTheme: DialogTheme(
       backgroundColor: colorScheme.surfaceContainer,
