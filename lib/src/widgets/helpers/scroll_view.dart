@@ -125,55 +125,51 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   // Return the build //
 
-  late final Widget scrollView = SingleChildScrollView(
-    scrollDirection: widget.scrollDirection,
-    reverse: widget.reverse,
-    padding: widget.padding,
-    primary: widget.primary,
-    physics: widget.physics,
-    controller: controller,
-    dragStartBehavior: widget.dragStartBehavior,
-    clipBehavior: widget.clipBehavior,
-    restorationId: widget.restorationId,
-    keyboardDismissBehavior: widget.keyboardDismissBehavior,
-    child: (widget.child != null)
-        ? widget.child
-        : (widget.scrollDirection == Axis.vertical)
-            ? Column(
-                mainAxisSize: widget.mainAxisSize,
-                mainAxisAlignment: widget.mainAxisAlignment,
-                crossAxisAlignment: widget.crossAxisAlignment,
-                textDirection: widget.textDirection,
-                verticalDirection: widget.verticalDirection,
-                textBaseline: widget.textBaseline,
-                children: widget.children!,
-              )
-            : EzRow(
-                mainAxisSize: widget.mainAxisSize,
-                mainAxisAlignment: widget.mainAxisAlignment,
-                crossAxisAlignment: widget.crossAxisAlignment,
-                textDirection: widget.textDirection,
-                verticalDirection: widget.verticalDirection,
-                textBaseline: widget.textBaseline,
-                reverseHands: widget.reverseHands,
-                children: widget.children!,
-              ),
-  );
-
   @override
   Widget build(BuildContext context) {
     final bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
 
-    return hideScroll
-        ? scrollView
-        : PlatformScrollbar(
-            controller: controller,
-            thumbVisibility: widget.thumbVisibility,
-            thickness: widget.thickness,
-            radius: widget.radius,
-            notificationPredicate: widget.notificationPredicate,
-            scrollbarOrientation: widget.scrollbarOrientation,
-            child: scrollView,
-          );
+    return PlatformScrollbar(
+      controller: controller,
+      thumbVisibility: hideScroll ? false : widget.thumbVisibility,
+      thickness: hideScroll ? 0.0 : widget.thickness,
+      radius: hideScroll ? Radius.zero : widget.radius,
+      notificationPredicate: widget.notificationPredicate,
+      scrollbarOrientation: widget.scrollbarOrientation,
+      child: SingleChildScrollView(
+        scrollDirection: widget.scrollDirection,
+        reverse: widget.reverse,
+        padding: widget.padding,
+        primary: widget.primary,
+        physics: widget.physics,
+        controller: controller,
+        dragStartBehavior: widget.dragStartBehavior,
+        clipBehavior: widget.clipBehavior,
+        restorationId: widget.restorationId,
+        keyboardDismissBehavior: widget.keyboardDismissBehavior,
+        child: (widget.child != null)
+            ? widget.child
+            : (widget.scrollDirection == Axis.vertical)
+                ? Column(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    children: widget.children!,
+                  )
+                : EzRow(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    reverseHands: widget.reverseHands,
+                    children: widget.children!,
+                  ),
+      ),
+    );
   }
 }
