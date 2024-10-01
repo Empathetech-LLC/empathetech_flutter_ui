@@ -55,7 +55,6 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       value: entry.key,
       label: googleStyleNames[entry.key]!,
       style: TextButton.styleFrom(
-        foregroundColor: theme.colorScheme.onSurface,
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
       ),
