@@ -9,6 +9,9 @@ const String homePath = '/';
 /// 'SUCCESS'
 const String success = 'SUCCESS';
 
+/// example.com/image.jpg
+const String webImgHint = 'example.com/image.jpg';
+
 /// 255
 const int rMax = 255;
 
