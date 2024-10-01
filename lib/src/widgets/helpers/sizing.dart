@@ -46,16 +46,18 @@ double dropdownWidth({
   required BuildContext context,
   required List<String> entries,
 }) {
-  final TextStyle style = Theme.of(context)
-          .menuButtonTheme
-          .style
-          ?.textStyle
-          ?.resolve(<WidgetState>{}) ??
-      Theme.of(context).textTheme.bodyLarge!;
+  final TextTheme textTheme = Theme.of(context).textTheme;
 
-  return measureText(getLongest(entries), context: context, style: style)
-          .width +
-      measureIcon(Icons.arrow_drop_down, context: context, style: style).width +
+  return measureText(
+        getLongest(entries),
+        context: context,
+        style: textTheme.bodyLarge,
+      ).width +
+      measureIcon(
+        Icons.arrow_drop_down,
+        context: context,
+        style: textTheme.titleLarge,
+      ).width +
       EzConfig.get(marginKey) +
       EzConfig.get(paddingKey) * 2;
 }
