@@ -94,7 +94,7 @@ class EzAlertDialog extends PlatformAlertDialog {
             top: spacing / 2,
             bottom: spacing,
           ),
-          buttonPadding: EdgeInsets.zero,
+          buttonPadding: EdgeInsets.only(right: spacing),
           iconPadding: EdgeInsets.zero,
           insetPadding: EdgeInsets.all(margin),
         );
