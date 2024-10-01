@@ -297,6 +297,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
+  late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
+
   // Define custom Widgets //
 
   late final Set<String> defaultSet = defaultList.toSet();
@@ -310,7 +312,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         // Non-removable buttons
         toReturn.add(
           Padding(
-            padding: EzInsets.wrap(padding),
+            padding: wrapPadding,
             child: (EzColorSetting(
               key: ValueKey<String>(key),
               configKey: key,
@@ -321,7 +323,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         toReturn.add(
           // Removable buttons
           Padding(
-            padding: EzInsets.wrap(padding),
+            padding: wrapPadding,
             child: (EzColorSetting(
               key: ValueKey<String>(key),
               configKey: key,
