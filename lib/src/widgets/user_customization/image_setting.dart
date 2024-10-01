@@ -114,7 +114,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (!isWeb) {
       options.addAll(<Widget>[
         // From file
-        ElevatedButton.icon(
+        EzElevatedButton(
           onPressed: () async {
             final String? changed = await saveImage(
               context: context,
@@ -126,8 +126,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          label: Text(l10n.isFromFile),
           icon: Icon(PlatformIcons(context).folder),
+          label: l10n.isFromFile,
         ),
         spacer,
       ]);
@@ -140,7 +140,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             platform == TargetPlatform.iOS)) {
       options.addAll(<Widget>[
         // From camera
-        ElevatedButton.icon(
+        EzElevatedButton(
           onPressed: () async {
             final String? changed = await saveImage(
               context: context,
@@ -152,8 +152,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          label: Text(l10n.isFromCamera),
           icon: Icon(PlatformIcons(context).photoCamera),
+          label: l10n.isFromCamera,
         ),
         spacer,
       ]);
@@ -163,7 +163,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Works everywhere
     options.addAll(<Widget>[
       // From network
-      ElevatedButton.icon(
+      EzElevatedButton(
         onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext networkDialogContext) {
@@ -242,14 +242,14 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
         ),
-        label: Text(l10n.isFromNetwork),
         icon: const Icon(Icons.computer_outlined),
+        label: l10n.isFromNetwork,
       ),
 
       // Reset
       if (defaultPath != null) ...<Widget>[
         spacer,
-        ElevatedButton.icon(
+        EzElevatedButton(
           onPressed: () async {
             cleanup();
             await EzConfig.remove(widget.configKey);
@@ -258,8 +258,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(defaultPath);
             }
           },
-          label: Text(l10n.isResetIt),
           icon: Icon(PlatformIcons(context).refresh),
+          label: l10n.isResetIt,
         ),
       ],
     ]);
@@ -268,7 +268,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (widget.allowClear) {
       options.addAll(<Widget>[
         spacer,
-        ElevatedButton.icon(
+        EzElevatedButton(
           onPressed: () async {
             cleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
@@ -277,8 +277,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(noImageValue);
             }
           },
-          label: Text(l10n.isClearIt),
           icon: Icon(PlatformIcons(context).clear),
+          label: l10n.isClearIt,
         ),
       ]);
     }
@@ -406,7 +406,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       button: true,
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: EzElevatedButton(
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
@@ -439,7 +439,9 @@ class _ImageSettingState extends State<EzImageSetting> {
                       : null,
             ),
           ),
-          label: Text(widget.label, textAlign: TextAlign.center),
+          label: widget.label,
+          textAlign: TextAlign.center,
+          labelPadding: false,
         ),
       ),
     );

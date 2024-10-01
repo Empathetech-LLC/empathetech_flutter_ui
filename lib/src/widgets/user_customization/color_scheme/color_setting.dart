@@ -252,18 +252,18 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
               contents: <Widget>[
                 // Remove from list
-                ElevatedButton.icon(
+                EzElevatedButton(
                   onPressed: () {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
                   },
                   icon: Icon(PlatformIcons(context).delete),
-                  label: Text(l10n.csRemove),
+                  label: l10n.csRemove,
                 ),
                 spacer,
 
                 // Reset to default
-                ElevatedButton.icon(
+                EzElevatedButton(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
 
@@ -272,7 +272,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     }
                   },
                   icon: Icon(PlatformIcons(context).refresh),
-                  label: Text(l10n.csReset),
+                  label: l10n.csReset,
                 ),
               ],
               needsClose: true,
@@ -291,7 +291,11 @@ class _ColorSettingState extends State<EzColorSetting> {
       button: true,
       hint: l10n.csPickerHint(label),
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: EzElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
+            foregroundColor: theme.colorScheme.onSurface,
+          ),
           onPressed: () => changeColor(context),
           onLongPress: () => options(context),
           icon: Container(
@@ -317,11 +321,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     radius: padding + margin,
                   ),
           ),
-          label: Text(label),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
-            foregroundColor: theme.colorScheme.onSurface,
-          ),
+          label: label,
         ),
       ),
     );

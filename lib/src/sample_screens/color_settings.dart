@@ -352,8 +352,20 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
       return Container(
         padding: EzInsets.col(padding),
-        child: ElevatedButton.icon(
+        child: EzElevatedButton(
           key: ValueKey<String>(configKeyKey),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
+            foregroundColor: theme.colorScheme.onSurface,
+          ),
+          onPressed: () {
+            currList.add(configKeyKey);
+            currList.sort(
+              (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
+            );
+            setState(() {});
+            setModalState(() {});
+          },
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -369,19 +381,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                   : null,
             ),
           ),
-          label: Text(getColorName(context, configKeyKey)),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
-            foregroundColor: theme.colorScheme.onSurface,
-          ),
-          onPressed: () {
-            currList.add(configKeyKey);
-            currList.sort(
-              (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
-            );
-            setState(() {});
-            setModalState(() {});
-          },
+          label: getColorName(context, configKeyKey),
         ),
       );
     }).toList();
