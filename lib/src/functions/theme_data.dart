@@ -87,7 +87,7 @@ ThemeData ezThemeData(Brightness brightness) {
       backgroundColor: colorScheme.surfaceContainer,
       modalBackgroundColor: colorScheme.surfaceContainer,
       showDragHandle: true,
-      dragHandleColor: colorScheme.primary,
+      dragHandleColor: colorScheme.onSurface,
     ),
 
     // Card
