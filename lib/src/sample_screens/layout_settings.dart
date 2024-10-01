@@ -105,8 +105,6 @@ class _LayoutSettingsState extends State<LayoutSettings> {
                   style: style,
                   textAlign: TextAlign.center,
                 ),
-                useSurface: false,
-                margin: EzInsets.col(margin),
               ),
               marginer,
               Checkbox(

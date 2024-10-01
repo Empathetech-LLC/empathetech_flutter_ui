@@ -120,7 +120,6 @@ class _ColorSettingsState extends State<ColorSettings> {
               style: theme.textTheme.labelLarge,
               textAlign: TextAlign.center,
             ),
-            useSurface: false,
           ),
           spacer,
 
@@ -466,6 +465,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               }
             },
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
       ],

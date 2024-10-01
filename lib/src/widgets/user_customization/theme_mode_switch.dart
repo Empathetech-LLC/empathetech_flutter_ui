@@ -79,7 +79,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
             style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
-          useSurface: false,
         ),
         marginer,
 

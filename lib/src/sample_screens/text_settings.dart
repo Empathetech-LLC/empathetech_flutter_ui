@@ -200,7 +200,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             // Font size
             EzTextBackground(
               EzFontDoubleBatchSetting(key: UniqueKey()),
-              margin: EzInsets.wrap(EzConfig.get(marginKey)),
+              useSurface: true,
               borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
             ),
@@ -346,9 +346,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  final double margin = EzConfig.get(marginKey);
-
-  late final EdgeInsets wrapMargin = EzInsets.wrap(margin);
+  static const BorderRadius textFieldRadius = BorderRadius.only(
+    bottomLeft: Radius.circular(4),
+    bottomRight: Radius.circular(4),
+  );
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
@@ -415,11 +416,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: wrapMargin,
-    borderRadius: const BorderRadius.only(
-      bottomLeft: Radius.circular(4),
-      bottomRight: Radius.circular(4),
-    ),
+    borderRadius: textFieldRadius,
   );
 
   late final Widget letterSpacingIcon = EzTextBackground(
@@ -428,11 +425,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: wrapMargin,
-    borderRadius: const BorderRadius.only(
-      bottomLeft: Radius.circular(4),
-      bottomRight: Radius.circular(4),
-    ),
+    borderRadius: textFieldRadius,
   );
 
   late final Widget wordSpacingIcon = EzTextBackground(
@@ -441,11 +434,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: wrapMargin,
-    borderRadius: const BorderRadius.only(
-      bottomLeft: Radius.circular(4),
-      bottomRight: Radius.circular(4),
-    ),
+    borderRadius: textFieldRadius,
   );
 
   late final Widget lineHeightIcon = EzTextBackground(
@@ -454,11 +443,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       color: colorScheme.onSurface,
       size: labelProvider.value.fontSize,
     ),
-    margin: wrapMargin,
-    borderRadius: const BorderRadius.only(
-      bottomLeft: Radius.circular(4),
-      bottomRight: Radius.circular(4),
-    ),
+    borderRadius: textFieldRadius,
   );
 
   /// Font family setting(s)
@@ -865,7 +850,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: labelProvider.value,
                 textAlign: TextAlign.center,
               ),
-              useSurface: false,
             ),
             spacer,
             DropdownMenu<TextSettingType>(
@@ -956,6 +940,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: displayProvider.value,
             textAlign: TextAlign.center,
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -981,6 +966,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: headlineProvider.value,
             textAlign: TextAlign.center,
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1005,6 +991,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: titleProvider.value,
             textAlign: TextAlign.center,
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1030,6 +1017,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: bodyProvider.value,
             textAlign: TextAlign.center,
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1055,6 +1043,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             style: labelProvider.value,
             textAlign: TextAlign.center,
           ),
+          useSurface: true,
           borderRadius: ezPillShape,
         ),
         separator,

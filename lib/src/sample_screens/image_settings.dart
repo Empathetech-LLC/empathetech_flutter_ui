@@ -73,7 +73,6 @@ class _ImageSettingsState extends State<ImageSettings> {
               style: Theme.of(context).textTheme.labelLarge,
               textAlign: TextAlign.center,
             ),
-            useSurface: false,
           ),
           separator,
 

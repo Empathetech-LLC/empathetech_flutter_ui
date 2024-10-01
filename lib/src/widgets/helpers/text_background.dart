@@ -11,7 +11,7 @@ class EzTextBackground extends StatelessWidget {
   /// The [Text] that needs a background
   final Widget text;
 
-  /// Defaults to [EzInsets.col]
+  /// Defaults to [EzInsets.wrap]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
@@ -30,16 +30,16 @@ class EzTextBackground extends StatelessWidget {
     super.key,
     this.margin,
     this.borderRadius,
-    this.useSurface = true,
+    this.useSurface = false,
     this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final String oKey =
+    late final String oKey =
         isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
 
-    final double percent =
+    late final double percent =
         EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
 
     final Color color = (backgroundColor == null)
@@ -52,7 +52,7 @@ class EzTextBackground extends StatelessWidget {
         : backgroundColor!;
 
     return Container(
-      padding: margin ?? EzInsets.col(EzConfig.get(marginKey)),
+      padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),
       decoration: BoxDecoration(
         color: color,
         borderRadius: borderRadius ?? ezRoundEdge,

@@ -61,7 +61,6 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
         textAlign: TextAlign.center,
       ),
-      useSurface: false,
     ),
     EzSpacer(space: margin),
 
