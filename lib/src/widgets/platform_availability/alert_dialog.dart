@@ -46,7 +46,7 @@ class EzAlertDialog extends PlatformAlertDialog {
     // Gather theme data //
 
     final double margin = EzConfig.get(marginKey);
-    final double padding = EzConfig.get(paddingKey);
+    final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -71,14 +71,14 @@ class EzAlertDialog extends PlatformAlertDialog {
             left: margin,
             right: margin,
             top: margin,
-            bottom: padding / 2,
+            bottom: spacing / 2,
           ),
 
           // Content
           content: dialogContent,
           contentPadding: EdgeInsets.symmetric(
             horizontal: margin,
-            vertical: padding / 2,
+            vertical: spacing / 2,
           ),
 
           // Actions
@@ -91,9 +91,10 @@ class EzAlertDialog extends PlatformAlertDialog {
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
           // General
-          actionsPadding: EdgeInsets.symmetric(
-            horizontal: EzConfig.get(spacingKey) / 2,
-            vertical: padding / 2,
+          actionsPadding: EdgeInsets.only(
+            right: spacing,
+            top: spacing / 2,
+            bottom: spacing,
           ),
           buttonPadding: EdgeInsets.zero,
           iconPadding: EdgeInsets.zero,
@@ -111,11 +112,11 @@ class EzAlertDialog extends PlatformAlertDialog {
 
         return CupertinoAlertDialogData(
           title: Padding(
-            padding: EdgeInsets.only(bottom: padding / 2),
+            padding: EdgeInsets.only(bottom: spacing / 2),
             child: title,
           ),
           content: Padding(
-            padding: EdgeInsets.only(top: padding / 2),
+            padding: EdgeInsets.symmetric(vertical: spacing / 2),
             child: dialogContent,
           ),
           actions: cupertinoActions == null
