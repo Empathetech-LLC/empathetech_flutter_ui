@@ -162,6 +162,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Gather the build data //
 
+  late final EdgeInsets margin = EzInsets.col(EzConfig.get(marginKey));
+
   late final String oKey =
       isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
 
@@ -222,6 +224,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: displayProvider.value,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         spacer,
 
@@ -233,6 +236,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: headlineProvider.value,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         spacer,
 
@@ -244,6 +248,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: titleProvider.value,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         spacer,
 
@@ -255,6 +260,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: bodyProvider.value,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         spacer,
 
@@ -266,6 +272,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: labelProvider.value,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         separator,
 
@@ -303,6 +310,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
           ),
           backgroundColor: backgroundColor,
+          margin: margin,
         ),
         separator,
 
