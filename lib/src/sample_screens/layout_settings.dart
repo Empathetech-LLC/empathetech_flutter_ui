@@ -101,7 +101,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
               marginer,
               EzTextBackground(
                 Text(
-                  'Hide scroll bars?',
+                  l10n.lsScroll,
                   style: style,
                   textAlign: TextAlign.center,
                 ),
