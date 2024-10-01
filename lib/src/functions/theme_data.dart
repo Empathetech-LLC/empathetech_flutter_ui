@@ -289,8 +289,8 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
-      margin: EdgeInsets.all(margin),
-      padding: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(padding),
+      padding: EdgeInsets.all(margin),
       waitDuration: const Duration(milliseconds: 750),
     ),
   );
