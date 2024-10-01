@@ -43,10 +43,14 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
+    // Gather theme data //
+
     final double margin = EzConfig.get(marginKey);
     final double padding = EzConfig.get(paddingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+    // Return the build //
 
     final Widget? dialogContent = content ??
         ((contents == null) ? null : EzScrollView(children: contents!));
@@ -54,6 +58,8 @@ class EzAlertDialog extends PlatformAlertDialog {
     return PlatformAlertDialog(
       material: (BuildContext dialogContext, _) {
         late final TextButton closeAction = TextButton(
+          style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.onSurface),
           onPressed: () => Navigator.of(dialogContext).pop(),
           child: Text(EFUILang.of(context)!.gClose),
         );
@@ -97,7 +103,10 @@ class EzAlertDialog extends PlatformAlertDialog {
       cupertino: (BuildContext dialogContext, _) {
         late final CupertinoDialogAction closeAction = CupertinoDialogAction(
           onPressed: () => Navigator.of(dialogContext).pop(),
-          child: Text(EFUILang.of(context)!.gClose),
+          child: Text(
+            EFUILang.of(context)!.gClose,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
         );
 
         return CupertinoAlertDialogData(
