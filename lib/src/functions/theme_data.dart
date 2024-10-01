@@ -49,8 +49,6 @@ ThemeData ezThemeData(Brightness brightness) {
 
     brightness: brightness,
     colorScheme: colorScheme,
-    dividerColor: colorScheme.secondary,
-    primaryColor: colorScheme.primary,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
 
     // Transitions //
@@ -82,15 +80,12 @@ ThemeData ezThemeData(Brightness brightness) {
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: colorScheme.surfaceContainer,
       modalBackgroundColor: colorScheme.surfaceContainer,
-      dragHandleColor: colorScheme.onSurface,
+      showDragHandle: true,
+      dragHandleColor: colorScheme.primary,
     ),
 
     // Card
-    cardTheme: CardTheme(
-      color: colorScheme.surface,
-      surfaceTintColor: colorScheme.surfaceTint,
-      margin: EdgeInsets.zero,
-    ),
+    cardTheme: CardTheme(color: colorScheme.surface, margin: EdgeInsets.zero),
 
     // Checkbox
     checkboxTheme: CheckboxThemeData(
@@ -122,14 +117,12 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 4, // Double separator
-      thickness: 1,
+      space: spacing * 4,
     ),
 
     // Drawer
     navigationDrawerTheme: NavigationDrawerThemeData(
       backgroundColor: colorScheme.surfaceContainer,
-      surfaceTintColor: colorScheme.surfaceTint,
     ),
 
     // Dropdown menu
@@ -158,12 +151,14 @@ ThemeData ezThemeData(Brightness brightness) {
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
+        disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
+        overlayColor: colorScheme.primary,
+        side: BorderSide(color: colorScheme.primaryContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
-        side: BorderSide(color: colorScheme.primaryContainer),
       ),
     ),
 
@@ -180,10 +175,12 @@ ThemeData ezThemeData(Brightness brightness) {
       style: IconButton.styleFrom(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.primary,
+        disabledForegroundColor: colorScheme.outline,
+        overlayColor: colorScheme.primary,
+        side: null,
         iconSize: textTheme.titleLarge?.fontSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
-        side: null,
       ),
     ),
 
@@ -191,6 +188,9 @@ ThemeData ezThemeData(Brightness brightness) {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
+      prefixIconColor: colorScheme.primary,
+      iconColor: colorScheme.primary,
+      suffixIconColor: colorScheme.primary,
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
@@ -213,13 +213,15 @@ ThemeData ezThemeData(Brightness brightness) {
     menuButtonTheme: MenuButtonThemeData(
       style: TextButton.styleFrom(
         backgroundColor: colorScheme.surface,
-        disabledBackgroundColor: colorScheme.outline,
         foregroundColor: colorScheme.onSurface,
-        disabledForegroundColor: colorScheme.onSurface,
+        disabledForegroundColor: colorScheme.outline,
+        iconColor: colorScheme.primary,
+        disabledIconColor: colorScheme.outline,
+        overlayColor: colorScheme.primary,
+        side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.only(left: padding, right: padding, top: padding),
-        side: null,
       ),
     ),
 
@@ -233,20 +235,20 @@ ThemeData ezThemeData(Brightness brightness) {
       style: SegmentedButton.styleFrom(
         backgroundColor: colorScheme.surface,
         selectedBackgroundColor: colorScheme.primary,
-        disabledBackgroundColor: colorScheme.outline,
         foregroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
-        disabledForegroundColor: colorScheme.onSurface,
+        disabledForegroundColor: colorScheme.outline,
+        side: BorderSide(color: colorScheme.primaryContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.all(padding),
-        side: BorderSide(color: colorScheme.primaryContainer),
       ),
     ),
 
     // Snackbar
     snackBarTheme: SnackBarThemeData(
       backgroundColor: colorScheme.surface,
+      closeIconColor: colorScheme.primary,
       contentTextStyle: textTheme.bodyLarge,
     ),
 
@@ -254,11 +256,14 @@ ThemeData ezThemeData(Brightness brightness) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         backgroundColor: Colors.transparent,
-        foregroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onSurface,
+        disabledForegroundColor: colorScheme.outline,
+        iconColor: colorScheme.primary,
+        disabledIconColor: colorScheme.outline,
+        side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
-        side: null,
       ),
     ),
 
