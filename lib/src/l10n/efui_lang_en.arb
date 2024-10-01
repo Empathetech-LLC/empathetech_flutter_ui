@@ -109,6 +109,8 @@
   "lsPadding": "Padding",
   "lsSpacing": "Spacing",
 
+  "lsScroll": "Hide scrollbars?",
+
   "lsResetAll": "Reset all layout settings?",
   
   

@@ -258,6 +258,9 @@ class EFUILangFr extends EFUILang {
   String get lsSpacing => 'Espacement';
 
   @override
+  String get lsScroll => 'Masquer les barres de défilement ?';
+
+  @override
   String get lsResetAll =>
       'Réinitialiser tous les paramètres de mise en page ?';
 

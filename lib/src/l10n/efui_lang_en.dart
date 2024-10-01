@@ -258,6 +258,9 @@ class EFUILangEn extends EFUILang {
   String get lsSpacing => 'Spacing';
 
   @override
+  String get lsScroll => 'Hide scrollbars?';
+
+  @override
   String get lsResetAll => 'Reset all layout settings?';
 
   @override

@@ -572,6 +572,12 @@ abstract class EFUILang {
   /// **'Spacing'**
   String get lsSpacing;
 
+  /// No description provided for @lsScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide scrollbars?'**
+  String get lsScroll;
+
   /// No description provided for @lsResetAll.
   ///
   /// In en, this message translates to:

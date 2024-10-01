@@ -258,6 +258,9 @@ class EFUILangEs extends EFUILang {
   String get lsSpacing => 'Espaciado';
 
   @override
+  String get lsScroll => '¿Ocultar las barras de desplazamiento?';
+
+  @override
   String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
 
   @override
