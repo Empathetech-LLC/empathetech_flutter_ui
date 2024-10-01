@@ -82,8 +82,6 @@ class _TextSettingsState extends State<_TextSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  static const EzSpacer spacer = EzSpacer();
-
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
@@ -126,7 +124,7 @@ class _TextSettingsState extends State<_TextSettings> {
             onSelectionChanged: (Set<String> selected) =>
                 setState(() => currentTab = selected.first),
           ),
-          spacer,
+          const EzSpacer(),
 
           // Settings
           if (currentTab == quick)
@@ -152,7 +150,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -162,7 +159,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Gather the build data //
 
-  late final EdgeInsets margin = EzInsets.col(EzConfig.get(marginKey));
+  late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
 
   late final String oKey =
       isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
@@ -197,7 +194,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(key: UniqueKey()),
-            swapSpacer,
+            const EzSwapSpacer(),
 
             // Font size
             EzTextBackground(
@@ -224,7 +221,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: displayProvider.value,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         spacer,
 
@@ -236,7 +233,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: headlineProvider.value,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         spacer,
 
@@ -248,7 +245,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: titleProvider.value,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         spacer,
 
@@ -260,7 +257,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: bodyProvider.value,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         spacer,
 
@@ -272,7 +269,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             style: labelProvider.value,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         separator,
 
@@ -310,7 +307,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             textAlign: TextAlign.center,
           ),
           backgroundColor: backgroundColor,
-          margin: margin,
+          margin: colMargin,
         ),
         separator,
 
@@ -354,6 +351,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  final double margin = EzConfig.get(marginKey);
+
   static const BorderRadius textFieldRadius = BorderRadius.only(
     bottomLeft: Radius.circular(4),
     bottomRight: Radius.circular(4),
@@ -361,6 +360,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.menu(EzConfig.get(paddingKey)),
   );
+  late final EdgeInsets colMargin = EzInsets.col(margin);
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -859,7 +859,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 textAlign: TextAlign.center,
               ),
             ),
-            spacer,
+            EzSpacer(space: margin, vertical: false),
             DropdownMenu<TextSettingType>(
               width: dropdownWidth(
                 context: context,
@@ -949,6 +949,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             textAlign: TextAlign.center,
           ),
           useSurface: true,
+          margin: colMargin,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -975,6 +976,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             textAlign: TextAlign.center,
           ),
           useSurface: true,
+          margin: colMargin,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1000,6 +1002,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             textAlign: TextAlign.center,
           ),
           useSurface: true,
+          margin: colMargin,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1026,6 +1029,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             textAlign: TextAlign.center,
           ),
           useSurface: true,
+          margin: colMargin,
           borderRadius: ezPillShape,
         ),
         spacer,
@@ -1052,6 +1056,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             textAlign: TextAlign.center,
           ),
           useSurface: true,
+          margin: colMargin,
           borderRadius: ezPillShape,
         ),
         separator,
