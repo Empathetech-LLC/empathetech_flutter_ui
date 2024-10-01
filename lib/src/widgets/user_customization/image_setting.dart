@@ -217,9 +217,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   controller: urlText,
                   maxLines: 1,
                   autofillHints: const <String>[AutofillHints.url],
-                  decoration: const InputDecoration(
-                    hintText: 'https://example.com/image.jpg',
-                  ),
+                  decoration: const InputDecoration(hintText: webImgHint),
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   validator: urlValidator,
                 ),
