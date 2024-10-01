@@ -353,7 +353,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           key: ValueKey<String>(configKeyKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
-            foregroundColor: theme.colorScheme.onSurface,
           ),
           onPressed: () {
             currList.add(configKeyKey);
