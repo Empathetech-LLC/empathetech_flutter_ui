@@ -58,7 +58,7 @@ double dropdownWidth({
         context: context,
         style: textTheme.titleLarge,
       ).width +
-      EzConfig.get(marginKey) +
+      EzConfig.get(marginKey) * 2 +
       EzConfig.get(paddingKey) * 2;
 }
 
