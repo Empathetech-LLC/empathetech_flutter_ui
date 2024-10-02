@@ -7,20 +7,44 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class EzElevatedButton extends StatelessWidget {
+class EzElevatedButton extends StatefulWidget {
   final void Function()? onPressed;
   final void Function()? onLongPress;
+
+  /// Defaults to add an [TextDecoration.underline] to the [label]
+  /// Can override and/or set [underline] to false
   final void Function(bool)? onHover;
+
+  /// Defaults to add an [TextDecoration.underline] to the [label]
+  /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
+
+  /// Default true
+  /// Adds an [TextDecoration.underline] to the [label] via [onHover] and [onFocusChange]
+  final bool underline;
+
+  /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
+  final Color? decorationColor;
+
   final ButtonStyle? style;
   final FocusNode? focusNode;
   final bool? autofocus;
   final Clip? clipBehavior;
   final WidgetStatesController? statesController;
+
+  /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
   final Widget icon;
+
   final String label;
+
+  /// Default true
+  /// Adds a '\t' sized [EdgeInsets] as prefix (righty) or suffix (lefty) to the [label]
   final bool labelPadding;
+
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
+
+  /// [Text] passthrough
   final TextAlign? textAlign;
 
   /// [ElevatedButton.icon] wrapper that responds to [isLeftyKey]
@@ -30,6 +54,8 @@ class EzElevatedButton extends StatelessWidget {
     this.onLongPress,
     this.onHover,
     this.onFocusChange,
+    this.underline = true,
+    this.decorationColor,
     this.style,
     this.focusNode,
     this.autofocus,
@@ -43,25 +69,66 @@ class EzElevatedButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  State<EzElevatedButton> createState() => _EzElevatedButtonState();
+}
 
+class _EzElevatedButtonState extends State<EzElevatedButton> {
+  // Gather theme data //
+
+  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+  late final String label = widget.label;
+
+  late final Color primary = Theme.of(context).colorScheme.primary;
+
+  late TextStyle? textStyle =
+      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+    decorationColor: widget.decorationColor ?? primary,
+  );
+
+  late final double margin =
+      measureText('\t', context: context, style: textStyle).width;
+
+  late final EdgeInsets labelPadding = widget.labelPadding
+      ? (isLefty
+          ? EdgeInsets.only(right: margin)
+          : EdgeInsets.only(left: margin))
+      : EdgeInsets.zero;
+
+  // Define custom functions //
+
+  void addUnderline(bool addIt) {
+    textStyle = textStyle?.copyWith(
+      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+    );
+    setState(() {});
+  }
+
+  late final void Function(bool)? onHover = widget.onHover ??
+      (widget.underline
+          ? (bool isHovering) => addUnderline(isHovering)
+          : (_) {});
+
+  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
+      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
+
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: onPressed,
-      onLongPress: onLongPress,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
-      style: style,
-      focusNode: focusNode,
-      autofocus: autofocus,
-      clipBehavior: clipBehavior,
-      statesController: statesController,
-      icon: icon,
+      style: widget.style,
+      focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
+      clipBehavior: widget.clipBehavior,
+      statesController: widget.statesController,
+      icon: widget.icon,
       iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
-      label: Text(
-        labelPadding ? (isLefty ? '$label\t' : '\t$label') : label,
-        style: textStyle,
-        textAlign: textAlign,
+      label: Padding(
+        padding: labelPadding,
+        child: Text(label, style: textStyle, textAlign: widget.textAlign),
       ),
     );
   }
