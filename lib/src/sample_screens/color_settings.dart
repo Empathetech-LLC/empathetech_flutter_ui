@@ -430,40 +430,38 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         const EzSeparator(),
 
         // Add a color button
-        EzTextBackground(
-          EzTextButton(
-            icon: Icon(PlatformIcons(context).addCircledOutline),
-            label: l10n.csAddColor,
-            onPressed: () async {
-              // Show available color configKeys
-              await showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) => StatefulBuilder(
-                  builder: (
-                    BuildContext context,
-                    StateSetter setModalState,
-                  ) {
-                    return EzScrollView(
-                      scrollDirection: Axis.horizontal,
-                      startCentered: true,
+        EzIconLink(
+          onTap: () async {
+            // Show available color configKeys
+            await showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) => StatefulBuilder(
+                builder: (
+                  BuildContext context,
+                  StateSetter setModalState,
+                ) {
+                  return EzScrollView(
+                    scrollDirection: Axis.horizontal,
+                    startCentered: true,
+                    mainAxisSize: MainAxisSize.min,
+                    child: EzScrollView(
                       mainAxisSize: MainAxisSize.min,
-                      child: EzScrollView(
-                        mainAxisSize: MainAxisSize.min,
-                        children: getUntrackedColors(setModalState),
-                      ),
-                    );
-                  },
-                ),
-              );
+                      children: getUntrackedColors(setModalState),
+                    ),
+                  );
+                },
+              ),
+            );
 
-              // Save the user's changes
-              if (currList != defaultList) {
-                await EzConfig.setStringList(userColorsKey, currList);
-              }
-            },
-          ),
-          useSurface: true,
-          borderRadius: ezPillShape,
+            // Save the user's changes
+            if (currList != defaultList) {
+              await EzConfig.setStringList(userColorsKey, currList);
+            }
+          },
+          semanticsLabel: l10n.csAddColor,
+          button: true,
+          icon: Icon(PlatformIcons(context).addCircledOutline),
+          label: l10n.csAddColor,
         ),
       ],
     );
