@@ -10,13 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 class EzLinkWidget extends StatefulWidget {
   final Widget child;
 
-  /// Message for screen readers
-  final String semanticLabel;
-
-  final bool isImage;
-
-  /// Tooltip for on hover/focus
-  final String tooltip;
+  /// Optional [BoxShadow]s to be drawn on hover/focus the [EzLinkWidget]
+  final List<BoxShadow>? shadows;
 
   /// Destination function
   final void Function()? onTap;
@@ -24,24 +19,35 @@ class EzLinkWidget extends StatefulWidget {
   /// Destination URL
   final Uri? url;
 
-  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkWidget]
-  final List<BoxShadow>? shadows;
+  /// Message for screen readers
+  final String semanticLabel;
+
+  /// Defaults to false
+  /// Is this an image?
+  final bool isImage;
+
+  /// [Semantics] defaults to type link
+  /// Set true to be a button
+  final bool button;
+
+  /// Tooltip for on hover/focus
+  final String tooltip;
 
   /// [Widget] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticLabel] for screen readers
   /// Automatically draws a [BoxShadow] which mimics button hover based on...
   /// https://m3.material.io/foundations/interaction/states/state-layers
   /// The [shadows] can be overridden
   const EzLinkWidget({
     super.key,
     required this.child,
-    required this.semanticLabel,
-    this.isImage = false,
-    required this.tooltip,
+    this.shadows,
     this.onTap,
     this.url,
-    this.shadows,
+    required this.semanticLabel,
+    this.isImage = false,
+    this.button = false,
+    required this.tooltip,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -77,7 +83,8 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
       excludeFromSemantics: true,
       child: Semantics(
         image: widget.isImage,
-        link: true,
+        link: !widget.button,
+        button: widget.button,
         hint: widget.semanticLabel,
         child: ExcludeSemantics(
           child: Focus(

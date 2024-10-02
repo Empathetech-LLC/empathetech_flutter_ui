@@ -9,13 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLinkImageProvider extends StatefulWidget {
+  // Ez parameters //
+
   final ImageProvider<Object> image;
 
-  /// Message for screen readers
-  final String semanticLabel;
-
-  /// Tooltip for on hover/focus
-  final String tooltip;
+  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImageProvider]
+  final List<BoxShadow>? shadows;
 
   /// Destination function
   final void Function()? onTap;
@@ -23,8 +22,13 @@ class EzLinkImageProvider extends StatefulWidget {
   /// Destination URL
   final Uri? url;
 
-  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImageProvider]
-  final List<BoxShadow>? shadows;
+  /// Message for screen readers
+  final String semanticLabel;
+
+  /// Tooltip for on hover/focus
+  final String tooltip;
+
+  // Image parameters //
 
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
@@ -43,9 +47,8 @@ class EzLinkImageProvider extends StatefulWidget {
   final bool isAntiAlias;
   final FilterQuality filterQuality;
 
-  /// [ImageProvider] wrapper that either opens an internal link via [onTap]
+  /// [Image] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticLabel] for screen readers
   /// Automatically draws a [BoxShadow] which mimics button hover based on...
   /// https://m3.material.io/foundations/interaction/states/state-layers
   /// The [shadows] can be overridden
