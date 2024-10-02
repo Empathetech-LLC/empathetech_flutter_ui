@@ -19,7 +19,7 @@ class EzElevatedButton extends StatefulWidget {
   /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
 
-  /// Default true
+  /// Default false
   /// Adds an [TextDecoration.underline] to the [label] via [onHover] and [onFocusChange]
   final bool underline;
 
@@ -54,7 +54,7 @@ class EzElevatedButton extends StatefulWidget {
     this.onLongPress,
     this.onHover,
     this.onFocusChange,
-    this.underline = true,
+    this.underline = false,
     this.decorationColor,
     this.style,
     this.focusNode,
