@@ -12,13 +12,10 @@ class EzLink extends StatefulWidget {
   /// Link message
   final String text;
 
-  final TextStyle style;
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? style;
 
-  /// Optional icon [Widget]
-  /// Will make the [TextButton] wrapper a [EzTextButton] wrapper
-  final Widget? icon;
-
-  /// Optional [Color] to overwrite the default [ColorScheme.primary]
+  /// Defaults to [ColorScheme.primary]
   final Color? color;
 
   final TextAlign? textAlign;
@@ -39,17 +36,15 @@ class EzLink extends StatefulWidget {
 
   final WidgetStatesController? statesController;
 
-  /// [TextButton] wrapper that acts like [Text] and either opens an internal link via [onTap]
+  /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// [semanticsLabel]; is required
   /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]
-  /// Automatically colors [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
+  /// Automatically draws [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
   /// The [color] can optionally be overwritten
   const EzLink(
     this.text, {
     super.key,
-    required this.style,
-    this.icon,
+    this.style,
     this.color,
     this.textAlign,
     this.onTap,
@@ -65,62 +60,25 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
-  // Define theme updates //
+  // Gather theme data //
 
   late final Color textColor =
       widget.color ?? Theme.of(context).colorScheme.primary;
 
-  late final ButtonStyle? buttonStyle = Theme.of(context).textButtonTheme.style;
-
-  late TextStyle textStyle = widget.style.copyWith(
+  late TextStyle? textStyle = widget.style?.copyWith(
     color: textColor,
     decoration: TextDecoration.none,
     decorationColor: textColor,
   );
 
-  late ButtonStyle? linkStyle = buttonStyle?.copyWith(
-    foregroundColor: WidgetStateProperty.all(textColor),
-    textStyle: WidgetStateProperty.all(textStyle),
-  );
-
   // Define custom functions //
 
   void addUnderline(bool addIt) {
-    textStyle = textStyle.copyWith(
+    textStyle = textStyle?.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    linkStyle = buttonStyle?.copyWith(
-      textStyle: WidgetStateProperty.all(textStyle),
     );
     setState(() {});
   }
-
-  // Define build options //
-
-  late final Widget textButton = TextButton(
-    onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-    onLongPress: null,
-    onHover: (bool isHovering) => addUnderline(isHovering),
-    onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
-    style: linkStyle,
-    child: Text(
-      widget.text,
-      style: textStyle,
-      textAlign: widget.textAlign,
-    ),
-  );
-
-  late final Widget iconTextButton = EzTextButton(
-    onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-    onLongPress: null,
-    onHover: (bool isHovering) => addUnderline(isHovering),
-    onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
-    style: linkStyle,
-    icon: widget.icon!,
-    label: widget.text,
-    textStyle: textStyle,
-    textAlign: widget.textAlign,
-  );
 
   // Return the build //
 
@@ -135,7 +93,137 @@ class _EzLinkState extends State<EzLink> {
         link: true,
         hint: semantics,
         child: ExcludeSemantics(
-          child: (widget.icon == null) ? textButton : iconTextButton,
+          child: TextButton(
+            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+            onLongPress: null,
+            onHover: (bool isHovering) => addUnderline(isHovering),
+            onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
+            child: Text(
+              widget.text,
+              style: textStyle,
+              textAlign: widget.textAlign,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EzIconLink extends StatefulWidget {
+  /// Link message
+  final String label;
+
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? style;
+
+  final Widget icon;
+
+  /// Defaults to [ColorScheme.onSurface]
+  final Color? baseColor;
+
+  /// Defaults to [ColorScheme.primary]
+  final Color? highlightColor;
+
+  final TextAlign? textAlign;
+
+  /// Destination function
+  final void Function()? onTap;
+
+  /// Destination URL
+  final Uri? url;
+
+  /// Message for screen readers
+  /// Don't repeat [label] here, it is appended automatically
+  final String semanticsLabel;
+
+  /// On hover/focus hint
+  /// Defaults to [semanticsLabel] (or [label])
+  final String? tooltip;
+
+  final WidgetStatesController? statesController;
+
+  /// [TextButton.icon] wrapper that either opens an internal link via [onTap]
+  /// Or an external link to [url]
+  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]...
+  /// Highlights [label] of [baseColor] [ColorScheme.onSurface] with [ColorScheme.primary]
+  /// ...and adds an [TextDecoration.underline] on hover/focus
+  /// The [highlightColor] and [baseColor] can optionally be overwritten
+  const EzIconLink({
+    super.key,
+    required this.label,
+    this.style,
+    required this.icon,
+    this.baseColor,
+    this.highlightColor,
+    this.textAlign,
+    this.onTap,
+    this.url,
+    required this.semanticsLabel,
+    this.tooltip,
+    this.statesController,
+  }) : assert((onTap == null) != (url == null),
+            'Either onTap or url should be provided, but not both.');
+
+  @override
+  State<EzIconLink> createState() => _EzIconLinkState();
+}
+
+class _EzIconLinkState extends State<EzIconLink> {
+  // Gather theme data //
+
+  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+  late final Color baseColor =
+      widget.baseColor ?? Theme.of(context).colorScheme.onSurface;
+
+  late final Color highlightColor =
+      widget.highlightColor ?? Theme.of(context).colorScheme.primary;
+
+  late TextStyle? textStyle = widget.style?.copyWith(
+    color: baseColor,
+    decoration: TextDecoration.none,
+    decorationColor: highlightColor,
+  );
+
+  // Define build data //
+
+  late final String semantics = '${widget.label}; ${widget.semanticsLabel}';
+
+  // Define custom functions //
+
+  void highlight(bool addIt) {
+    textStyle = textStyle?.copyWith(
+      color: addIt ? highlightColor : baseColor,
+      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+    );
+    setState(() {});
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: widget.tooltip ?? widget.semanticsLabel,
+      excludeFromSemantics: true,
+      child: Semantics(
+        link: true,
+        hint: semantics,
+        child: ExcludeSemantics(
+          child: TextButton.icon(
+            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
+            onLongPress: null,
+            onHover: (bool isHovering) => highlight(isHovering),
+            onFocusChange: (bool hasFocus) => highlight(hasFocus),
+            icon: widget.icon,
+            iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
+            label: Text(
+              widget.label,
+              style: textStyle,
+              textAlign: widget.textAlign,
+            ),
+          ),
         ),
       ),
     );
