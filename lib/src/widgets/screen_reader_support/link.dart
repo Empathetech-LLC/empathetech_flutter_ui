@@ -66,10 +66,12 @@ class EzLink extends StatefulWidget {
 class _EzLinkState extends State<EzLink> {
   // Gather theme data //
 
-  late final Color textColor =
-      widget.color ?? Theme.of(context).colorScheme.primary;
+  late final ThemeData theme = Theme.of(context);
 
-  late TextStyle? textStyle = widget.style?.copyWith(
+  late final Color textColor = widget.color ?? theme.colorScheme.primary;
+
+  late TextStyle? textStyle =
+      (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
     color: textColor,
     decoration: TextDecoration.none,
     decorationColor: textColor,
@@ -183,13 +185,15 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final Color baseColor =
-      widget.baseColor ?? Theme.of(context).colorScheme.onSurface;
+  late final ThemeData theme = Theme.of(context);
+
+  late final Color baseColor = widget.baseColor ?? theme.colorScheme.onSurface;
 
   late final Color highlightColor =
-      widget.highlightColor ?? Theme.of(context).colorScheme.primary;
+      widget.highlightColor ?? theme.colorScheme.primary;
 
-  late TextStyle? textStyle = widget.style?.copyWith(
+  late TextStyle? textStyle =
+      (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
     color: baseColor,
     decoration: TextDecoration.none,
     decorationColor: highlightColor,
