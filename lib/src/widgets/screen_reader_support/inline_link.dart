@@ -13,12 +13,6 @@ class EzInlineLink extends WidgetSpan {
 
   final Key? key;
 
-  // super.style;
-
-  /// Optional icon [Widget]
-  /// Will make the [TextButton] wrapper a [EzTextButton] wrapper
-  final Widget? icon;
-
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? color;
 
@@ -49,11 +43,10 @@ class EzInlineLink extends WidgetSpan {
     this.text, {
     super.alignment = PlaceholderAlignment.baseline,
     super.baseline = TextBaseline.alphabetic,
-    required super.style,
+    super.style,
 
     // EzLink
     this.key,
-    this.icon,
     this.color,
     this.textAlign,
     this.onTap,
@@ -64,14 +57,11 @@ class EzInlineLink extends WidgetSpan {
     this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
-        assert(style != null,
-            "Style cannot be null. It claims it can be because we're using the super constructor; apologies for any confusion."),
         super(
           child: EzLink(
             text,
             key: key,
-            style: style!,
-            icon: icon,
+            style: style,
             color: color,
             textAlign: textAlign,
             onTap: onTap,
