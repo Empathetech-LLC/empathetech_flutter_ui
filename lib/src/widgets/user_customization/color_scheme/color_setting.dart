@@ -179,7 +179,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       builder: (BuildContext dialogContext) {
         final int? resetValue = EzConfig.getDefault(widget.configKey);
         final String currColorLabel =
-            currColor.value.toRadixString(16).toUpperCase();
+            currColor.value.toRadixString(16).toUpperCase().substring(2);
 
         void onConfirm() async {
           // Remove the user's configKey and reset the current state
