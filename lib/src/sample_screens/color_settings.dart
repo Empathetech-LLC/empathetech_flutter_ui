@@ -430,8 +430,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         const EzSeparator(),
 
         // Add a color button
-        EzIconLink(
-          onTap: () async {
+        EzTextButton(
+          onPressed: () async {
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
@@ -458,8 +458,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
-          semanticsLabel: l10n.csAddColor,
-          button: true,
           icon: Icon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),
