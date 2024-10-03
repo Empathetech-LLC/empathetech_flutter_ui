@@ -125,7 +125,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               child: Center(
                 child: EzTextBackground(
                   Text(
-                    '${l10n.gCurrently} $valString',
+                    valString,
                     style:
                         bodyStyle?.copyWith(color: theme.colorScheme.surface),
                     textAlign: TextAlign.center,
