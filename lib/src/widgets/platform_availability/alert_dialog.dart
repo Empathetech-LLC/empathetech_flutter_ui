@@ -56,75 +56,77 @@ class EzAlertDialog extends PlatformAlertDialog {
     final Widget? dialogContent = content ??
         ((contents == null) ? null : EzScrollView(children: contents!));
 
-    return PlatformAlertDialog(
-      material: (BuildContext dialogContext, _) {
-        late final TextButton closeAction = TextButton(
-          onPressed: () => Navigator.of(dialogContext).pop(),
-          child: Text(EFUILang.of(context)!.gClose),
-        );
+    return SelectionArea(
+      child: PlatformAlertDialog(
+        material: (BuildContext dialogContext, _) {
+          late final TextButton closeAction = TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(EFUILang.of(context)!.gClose),
+          );
 
-        return MaterialAlertDialogData(
-          // Title
-          title: title,
-          titlePadding: EdgeInsets.only(
-            left: padding,
-            right: padding,
-            top: padding,
-            bottom: spacing / 2,
-          ),
+          return MaterialAlertDialogData(
+            // Title
+            title: title,
+            titlePadding: EdgeInsets.only(
+              left: padding,
+              right: padding,
+              top: padding,
+              bottom: spacing / 2,
+            ),
 
-          // Content
-          content: dialogContent,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: margin,
-            vertical: spacing / 2,
-          ),
+            // Content
+            content: dialogContent,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: margin,
+              vertical: spacing / 2,
+            ),
 
-          // Actions
-          actions: materialActions == null
-              ? <Widget>[closeAction]
-              : needsClose
-                  ? <Widget>[...materialActions!, closeAction]
-                  : materialActions,
-          actionsAlignment:
-              isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+            // Actions
+            actions: materialActions == null
+                ? <Widget>[closeAction]
+                : needsClose
+                    ? <Widget>[...materialActions!, closeAction]
+                    : materialActions,
+            actionsAlignment:
+                isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
-          // General
-          actionsPadding: EdgeInsets.only(
-            right: spacing,
-            top: spacing / 2,
-            bottom: spacing,
-          ),
-          buttonPadding: EdgeInsets.only(right: spacing),
-          iconPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(margin),
-        );
-      },
-      cupertino: (BuildContext dialogContext, _) {
-        late final CupertinoDialogAction closeAction = CupertinoDialogAction(
-          onPressed: () => Navigator.of(dialogContext).pop(),
-          child: Text(
-            EFUILang.of(context)!.gClose,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        );
+            // General
+            actionsPadding: EdgeInsets.only(
+              right: spacing,
+              top: spacing / 2,
+              bottom: spacing,
+            ),
+            buttonPadding: EdgeInsets.only(right: spacing),
+            iconPadding: EdgeInsets.zero,
+            insetPadding: EdgeInsets.all(margin),
+          );
+        },
+        cupertino: (BuildContext dialogContext, _) {
+          late final CupertinoDialogAction closeAction = CupertinoDialogAction(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(
+              EFUILang.of(context)!.gClose,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          );
 
-        return CupertinoAlertDialogData(
-          title: Padding(
-            padding: EdgeInsets.only(bottom: spacing / 2),
-            child: title,
-          ),
-          content: Padding(
-            padding: EdgeInsets.symmetric(vertical: spacing / 2),
-            child: dialogContent,
-          ),
-          actions: cupertinoActions == null
-              ? <Widget>[closeAction]
-              : needsClose
-                  ? <Widget>[...cupertinoActions!, closeAction]
-                  : cupertinoActions,
-        );
-      },
+          return CupertinoAlertDialogData(
+            title: Padding(
+              padding: EdgeInsets.only(bottom: spacing / 2),
+              child: title,
+            ),
+            content: Padding(
+              padding: EdgeInsets.symmetric(vertical: spacing / 2),
+              child: dialogContent,
+            ),
+            actions: cupertinoActions == null
+                ? <Widget>[closeAction]
+                : needsClose
+                    ? <Widget>[...cupertinoActions!, closeAction]
+                    : cupertinoActions,
+          );
+        },
+      ),
     );
   }
 }
