@@ -59,6 +59,7 @@ Future<dynamic> ezColorPicker(
   return showPlatformDialog(
     context: context,
     builder: (BuildContext dialogContext) {
+      final double padding = EzConfig.get(paddingKey);
       final double spacing = EzConfig.get(spacingKey);
 
       void confirm() {
@@ -76,30 +77,29 @@ Future<dynamic> ezColorPicker(
           title ?? EFUILang.of(context)!.csPickerTitle,
           textAlign: TextAlign.center,
         ),
-        contents: <Widget>[
-          ColorPicker(
-            color: startColor,
-            padding: EdgeInsets.zero,
-            mainAxisSize: MainAxisSize.min,
-            spacing: spacing / 2,
-            runSpacing: spacing / 2,
-            columnSpacing: spacing,
-            pickersEnabled: const <ColorPickerType, bool>{
-              ColorPickerType.both: false,
-              ColorPickerType.primary: false,
-              ColorPickerType.accent: false,
-              ColorPickerType.bw: false,
-              ColorPickerType.custom: false,
-              ColorPickerType.customSecondary: false,
-              ColorPickerType.wheel: true
-            },
-            enableOpacity: true,
-            showColorName: true,
-            showColorCode: true,
-            showRecentColors: true,
-            onColorChanged: onColorChange,
-          ),
-        ],
+        content: ColorPicker(
+          color: startColor,
+          mainAxisSize: MainAxisSize.min,
+          padding: EdgeInsets.zero,
+          spacing: spacing / 2,
+          runSpacing: spacing / 2,
+          columnSpacing: spacing,
+          pickersEnabled: const <ColorPickerType, bool>{
+            ColorPickerType.both: false,
+            ColorPickerType.primary: false,
+            ColorPickerType.accent: false,
+            ColorPickerType.bw: false,
+            ColorPickerType.custom: false,
+            ColorPickerType.customSecondary: false,
+            ColorPickerType.wheel: true
+          },
+          onColorChanged: onColorChange,
+          showRecentColors: true,
+          enableOpacity: true,
+          opacityThumbRadius: padding,
+          opacityTrackHeight: padding * 2,
+          showColorCode: true,
+        ),
         materialActions: ezMaterialActions(
           context: context,
           confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
