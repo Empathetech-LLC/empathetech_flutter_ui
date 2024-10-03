@@ -276,7 +276,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.all(margin),
       ),
     ),
 
