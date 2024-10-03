@@ -6,6 +6,7 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -173,75 +174,52 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset(BuildContext context) async {
-    final int? resetValue = EzConfig.getDefault(widget.configKey);
+    return showPlatformDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        final int? resetValue = EzConfig.getDefault(widget.configKey);
+        final String currColorLabel =
+            currColor.value.toRadixString(16).toUpperCase();
 
-    if (resetValue == null) {
-      return EzConfig.remove(widget.configKey);
-    } else {
-      final Color resetColor = Color(resetValue);
+        void onConfirm() async {
+          // Remove the user's configKey and reset the current state
+          await EzConfig.remove(widget.configKey);
+          if (resetValue != null) currColor = Color(resetValue);
+          setState(() {});
 
-      return showPlatformDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          void onConfirm() async {
-            // Remove the user's configKey and reset the current state
-            currColor = resetColor;
-            await EzConfig.remove(widget.configKey);
-            setState(() {});
+          if (dialogContext.mounted) Navigator.of(dialogContext).pop();
+        }
 
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(resetColor);
-            }
-          }
+        void onDeny() => Navigator.of(dialogContext).pop();
 
-          void onDeny() => Navigator.of(dialogContext).pop();
-
-          return EzAlertDialog(
-            title: Text(
-              l10n.csResetTo,
-              textAlign: TextAlign.center,
+        return EzAlertDialog(
+          title: Text(l10n.gReset, textAlign: TextAlign.center),
+          contents: <Widget>[
+            Text(l10n.csCurrVal, textAlign: TextAlign.center),
+            EzSpacer(space: margin),
+            EzTextButton(
+              onPressed: () =>
+                  Clipboard.setData(ClipboardData(text: currColorLabel)),
+              icon: const Icon(Icons.copy),
+              label: currColorLabel,
             ),
-            // Reset color preview
-            contents: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: getTextColor(resetColor)),
-                ),
-                child: resetColor == Colors.transparent
-                    ? CircleAvatar(
-                        backgroundColor: theme.colorScheme.surface,
-                        foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding + margin,
-                        child: Icon(
-                          PlatformIcons(context).eyeSlash,
-                          size: theme.textTheme.titleLarge?.fontSize,
-                        ),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: resetColor,
-                        foregroundColor: getTextColor(resetColor),
-                        radius: padding + margin,
-                      ),
-              ),
-            ],
-            materialActions: ezMaterialActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              onDeny: onDeny,
-            ),
-            cupertinoActions: ezCupertinoActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              onDeny: onDeny,
-            ),
-            needsClose: false,
-          );
-        },
-      );
-    }
+          ],
+          materialActions: ezMaterialActions(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            onDeny: onDeny,
+          ),
+          cupertinoActions: ezCupertinoActions(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            onDeny: onDeny,
+          ),
+          needsClose: false,
+        );
+      },
+    );
   }
 
   /// Opens an [EzAlertDialog] with the all optional actions
