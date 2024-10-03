@@ -94,8 +94,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final String label = lstName(context, widget.type);
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
-  static const EzSeparator rowSeparator = EzSeparator(vertical: false);
 
   late final ThemeData theme = Theme.of(context);
 
@@ -117,33 +115,26 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       case LayoutSettingType.margin:
         return <Widget>[
           spacer,
-
-          // Live preview && label
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Label
-              Flexible(
-                child: Text(
-                  '${l10n.gCurrently} $valString',
-                  style: bodyStyle,
-                  textAlign: TextAlign.center,
+          Container(
+            color: theme.colorScheme.onSurface,
+            height: heightOf(context) * 0.25,
+            width: widthOf(context) * 0.25,
+            child: Container(
+              color: theme.colorScheme.surface,
+              margin: EdgeInsets.all(currValue * 0.25),
+              child: Center(
+                child: EzTextBackground(
+                  Text(
+                    '${l10n.gCurrently} $valString',
+                    style:
+                        bodyStyle?.copyWith(color: theme.colorScheme.surface),
+                    textAlign: TextAlign.center,
+                  ),
+                  margin: EdgeInsets.all(currValue),
+                  backgroundColor: theme.colorScheme.onSurface,
                 ),
               ),
-              rowSeparator,
-
-              // Preview
-              Container(
-                color: theme.colorScheme.onSurface,
-                height: heightOf(context) * 0.1,
-                width: widthOf(context) * 0.1,
-                child: Container(
-                  color: theme.colorScheme.surface,
-                  margin: EdgeInsets.all(currValue * 0.1),
-                ),
-              ),
-            ],
+            ),
           ),
           spacer,
         ];
@@ -167,7 +158,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                 onPressed: doNothing,
                 child: Text(l10n.gCurrently),
               ),
-              rowSpacer,
+              const EzSpacer(vertical: false),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(currValue),
