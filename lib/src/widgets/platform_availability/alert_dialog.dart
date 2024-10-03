@@ -46,6 +46,7 @@ class EzAlertDialog extends PlatformAlertDialog {
     // Gather theme data //
 
     final double margin = EzConfig.get(marginKey);
+    final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
@@ -66,9 +67,9 @@ class EzAlertDialog extends PlatformAlertDialog {
           // Title
           title: title,
           titlePadding: EdgeInsets.only(
-            left: margin,
-            right: margin,
-            top: margin,
+            left: padding,
+            right: padding,
+            top: padding,
             bottom: spacing / 2,
           ),
 
