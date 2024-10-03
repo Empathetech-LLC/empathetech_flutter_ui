@@ -20,6 +20,10 @@ class EzLink extends StatefulWidget {
 
   final TextAlign? textAlign;
 
+  /// Optional padding override for [TextButton.style]
+  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
+  final EdgeInsets? padding;
+
   /// Destination function
   final void Function()? onTap;
 
@@ -47,6 +51,7 @@ class EzLink extends StatefulWidget {
     this.style,
     this.color,
     this.textAlign,
+    this.padding,
     this.onTap,
     this.url,
     required this.semanticsLabel,
@@ -96,6 +101,7 @@ class _EzLinkState extends State<EzLink> {
         hint: semantics,
         child: ExcludeSemantics(
           child: TextButton(
+            style: TextButton.styleFrom(padding: widget.padding),
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
             onHover: (bool isHovering) => addUnderline(isHovering),
