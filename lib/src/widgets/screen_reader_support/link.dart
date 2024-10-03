@@ -16,10 +16,10 @@ class EzLink extends StatefulWidget {
   final TextStyle? style;
 
   /// Defaults to [ColorScheme.primary]
-  final Color? color;
+  final Color? textColor;
 
   /// Optional [TextDecoration] color override
-  /// Defaults to [color]... which defaults to [ColorScheme.primary]
+  /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
   final TextAlign? textAlign;
@@ -53,7 +53,7 @@ class EzLink extends StatefulWidget {
     this.text, {
     super.key,
     this.style,
-    this.color,
+    this.textColor,
     this.decorationColor,
     this.textAlign,
     this.padding,
@@ -74,7 +74,7 @@ class _EzLinkState extends State<EzLink> {
 
   late final ThemeData theme = Theme.of(context);
 
-  late final Color textColor = widget.color ?? theme.colorScheme.primary;
+  late final Color textColor = widget.textColor ?? theme.colorScheme.primary;
 
   late TextStyle? textStyle =
       (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
@@ -106,7 +106,10 @@ class _EzLinkState extends State<EzLink> {
         hint: semantics,
         child: ExcludeSemantics(
           child: TextButton(
-            style: TextButton.styleFrom(padding: widget.padding),
+            style: TextButton.styleFrom(
+              padding: widget.padding,
+              overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+            ),
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
             onHover: (bool isHovering) => addUnderline(isHovering),
@@ -133,12 +136,17 @@ class EzIconLink extends StatefulWidget {
   final Widget icon;
 
   /// Defaults to [ColorScheme.onSurface]
-  final Color? baseColor;
+  final Color? textColor;
 
+  /// Optional [TextDecoration] color override
   /// Defaults to [ColorScheme.primary]
-  final Color? highlightColor;
+  final Color? decorationColor;
 
   final TextAlign? textAlign;
+
+  /// Optional padding override for [TextButton.style]
+  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
+  final EdgeInsets? padding;
 
   /// Destination function
   final void Function()? onTap;
@@ -161,15 +169,16 @@ class EzIconLink extends StatefulWidget {
   /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]...
   /// Highlights [label] of [baseColor] [ColorScheme.onSurface] with [ColorScheme.primary]
   /// ...and adds an [TextDecoration.underline] on hover/focus
-  /// The [highlightColor] and [baseColor] can optionally be overwritten
+  /// The [decorationColor] and [textColor] can optionally be overwritten
   const EzIconLink({
     super.key,
     required this.label,
     this.style,
     required this.icon,
-    this.baseColor,
-    this.highlightColor,
+    this.textColor,
+    this.decorationColor,
     this.textAlign,
+    this.padding,
     this.onTap,
     this.url,
     required this.semanticsLabel,
@@ -185,31 +194,21 @@ class EzIconLink extends StatefulWidget {
 class _EzIconLinkState extends State<EzIconLink> {
   // Gather theme data //
 
-  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-
   late final ThemeData theme = Theme.of(context);
 
-  late final Color baseColor = widget.baseColor ?? theme.colorScheme.onSurface;
-
-  late final Color highlightColor =
-      widget.highlightColor ?? theme.colorScheme.primary;
+  late final Color textColor = widget.textColor ?? theme.colorScheme.onSurface;
 
   late TextStyle? textStyle =
       (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
-    color: baseColor,
+    color: textColor,
     decoration: TextDecoration.none,
-    decorationColor: highlightColor,
+    decorationColor: widget.decorationColor ?? theme.colorScheme.primary,
   );
-
-  // Define build data //
-
-  late final String semantics = '${widget.label}; ${widget.semanticsLabel}';
 
   // Define custom functions //
 
   void highlight(bool addIt) {
     textStyle = textStyle?.copyWith(
-      color: addIt ? highlightColor : baseColor,
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
     setState(() {});
@@ -219,6 +218,8 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   @override
   Widget build(BuildContext context) {
+    final String semantics = '${widget.label}; ${widget.semanticsLabel}';
+
     return Tooltip(
       message: widget.tooltip ?? widget.semanticsLabel,
       excludeFromSemantics: true,
@@ -227,12 +228,18 @@ class _EzIconLinkState extends State<EzIconLink> {
         hint: semantics,
         child: ExcludeSemantics(
           child: TextButton.icon(
+            style: TextButton.styleFrom(
+              padding: widget.padding,
+              overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+            ),
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
             onHover: (bool isHovering) => highlight(isHovering),
             onFocusChange: (bool hasFocus) => highlight(hasFocus),
             icon: widget.icon,
-            iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
+            iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
+                ? IconAlignment.start
+                : IconAlignment.end,
             label: Text(
               widget.label,
               style: textStyle,
