@@ -290,7 +290,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         },
         icon: Icon(PlatformIcons(context).refresh),
         label:
-            '${l10n.gReset} ${defaultValue.toStringAsFixed(widget.decimals)}',
+            '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
       spacer,
     ];
