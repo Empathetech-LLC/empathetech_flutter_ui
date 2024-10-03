@@ -193,13 +193,19 @@ class _ColorSettingState extends State<EzColorSetting> {
         void onDeny() => Navigator.of(dialogContext).pop();
 
         return EzAlertDialog(
-          title: Text(l10n.gReset, textAlign: TextAlign.center),
+          title: Text(
+            l10n.gResetValue(
+              getColorName(context, widget.configKey).toLowerCase(),
+            ),
+            textAlign: TextAlign.center,
+          ),
           contents: <Widget>[
             Text(l10n.csCurrVal, textAlign: TextAlign.center),
             EzSpacer(space: margin),
             EzTextButton(
-              onPressed: () =>
-                  Clipboard.setData(ClipboardData(text: currColorLabel)),
+              onPressed: () => Clipboard.setData(
+                ClipboardData(text: currColorLabel),
+              ),
               icon: const Icon(Icons.copy),
               label: currColorLabel,
             ),
