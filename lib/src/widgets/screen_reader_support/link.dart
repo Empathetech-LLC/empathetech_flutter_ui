@@ -18,6 +18,10 @@ class EzLink extends StatefulWidget {
   /// Defaults to [ColorScheme.primary]
   final Color? color;
 
+  /// Optional [TextDecoration] color override
+  /// Defaults to [color]... which defaults to [ColorScheme.primary]
+  final Color? decorationColor;
+
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
@@ -50,6 +54,7 @@ class EzLink extends StatefulWidget {
     super.key,
     this.style,
     this.color,
+    this.decorationColor,
     this.textAlign,
     this.padding,
     this.onTap,
@@ -75,7 +80,7 @@ class _EzLinkState extends State<EzLink> {
       (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
     color: textColor,
     decoration: TextDecoration.none,
-    decorationColor: textColor,
+    decorationColor: widget.decorationColor ?? textColor,
   );
 
   // Define custom functions //
