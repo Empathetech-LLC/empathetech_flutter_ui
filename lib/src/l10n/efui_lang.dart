@@ -263,8 +263,14 @@ abstract class EFUILang {
   /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset:'**
+  /// **'Reset'**
   String get gReset;
+
+  /// No description provided for @gResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset:'**
+  String get gResetTo;
 
   /// No description provided for @gResetToValue.
   ///

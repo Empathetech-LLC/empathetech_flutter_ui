@@ -94,7 +94,10 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get gReset => 'Reset:';
+  String get gReset => 'Reset';
+
+  @override
+  String get gResetTo => 'Reset:';
 
   @override
   String gResetToValue(Object name, Object value) {

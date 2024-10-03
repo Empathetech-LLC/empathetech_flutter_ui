@@ -94,7 +94,10 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get gReset => 'Restablecer:';
+  String get gReset => 'Restablecer';
+
+  @override
+  String get gResetTo => 'Restablecer:';
 
   @override
   String gResetToValue(Object name, Object value) {
