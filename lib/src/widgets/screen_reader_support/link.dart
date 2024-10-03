@@ -30,9 +30,6 @@ class EzLink extends StatefulWidget {
   /// Don't repeat [text] here, it is appended automatically
   final String semanticsLabel;
 
-  /// [Semantics] default to type link, set true to be a button
-  final bool button;
-
   /// On hover/focus hint
   /// Defaults to [semanticsLabel] (or [text])
   final String? tooltip;
@@ -53,7 +50,6 @@ class EzLink extends StatefulWidget {
     this.onTap,
     this.url,
     required this.semanticsLabel,
-    this.button = false,
     this.tooltip,
     this.statesController,
   }) : assert((onTap == null) != (url == null),
@@ -96,8 +92,7 @@ class _EzLinkState extends State<EzLink> {
       message: widget.tooltip ?? widget.semanticsLabel,
       excludeFromSemantics: true,
       child: Semantics(
-        link: !widget.button,
-        button: widget.button,
+        link: true,
         hint: semantics,
         child: ExcludeSemantics(
           child: TextButton(
@@ -144,9 +139,6 @@ class EzIconLink extends StatefulWidget {
   /// Don't repeat [label] here, it is appended automatically
   final String semanticsLabel;
 
-  /// [Semantics] default to type link, set true to be a button
-  final bool button;
-
   /// On hover/focus hint
   /// Defaults to [semanticsLabel] (or [label])
   final String? tooltip;
@@ -170,7 +162,6 @@ class EzIconLink extends StatefulWidget {
     this.onTap,
     this.url,
     required this.semanticsLabel,
-    this.button = false,
     this.tooltip,
     this.statesController,
   }) : assert((onTap == null) != (url == null),
@@ -221,8 +212,7 @@ class _EzIconLinkState extends State<EzIconLink> {
       message: widget.tooltip ?? widget.semanticsLabel,
       excludeFromSemantics: true,
       child: Semantics(
-        link: !widget.button,
-        button: widget.button,
+        link: true,
         hint: semantics,
         child: ExcludeSemantics(
           child: TextButton.icon(
