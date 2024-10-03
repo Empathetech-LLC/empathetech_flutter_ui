@@ -176,7 +176,6 @@
   "csAddColor": "Add a color",
   "csRemove": "Remove",
   "csReset": "Reset",
-  "csResetTo": "Reset to...",
 
   "csSchemeBase": "Build scheme\nfrom image",
   "csOptional": "optional",

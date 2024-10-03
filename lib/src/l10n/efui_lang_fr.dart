@@ -435,9 +435,6 @@ class EFUILangFr extends EFUILang {
   String get csReset => 'Réinitialiser';
 
   @override
-  String get csResetTo => 'Réinitialiser à...';
-
-  @override
   String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
 
   @override

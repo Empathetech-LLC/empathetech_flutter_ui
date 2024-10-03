@@ -434,9 +434,6 @@ class EFUILangEs extends EFUILang {
   String get csReset => 'Restablecer';
 
   @override
-  String get csResetTo => 'Restablecer a...';
-
-  @override
   String get csSchemeBase => 'Crear tema\nusando imagen';
 
   @override

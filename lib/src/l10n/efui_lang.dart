@@ -920,12 +920,6 @@ abstract class EFUILang {
   /// **'Reset'**
   String get csReset;
 
-  /// No description provided for @csResetTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
-
   /// No description provided for @csSchemeBase.
   ///
   /// In en, this message translates to:

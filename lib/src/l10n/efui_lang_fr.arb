@@ -176,7 +176,6 @@
   "csAddColor": "Ajouter une couleur",
   "csRemove": "Retirer",
   "csReset": "Réinitialiser",
-  "csResetTo": "Réinitialiser à...",
 
   "csSchemeBase": "Construire le schéma\nà partir de l'image",
   "csOptional": "optionnel",

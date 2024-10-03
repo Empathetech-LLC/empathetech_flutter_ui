@@ -434,9 +434,6 @@ class EFUILangEn extends EFUILang {
   String get csReset => 'Reset';
 
   @override
-  String get csResetTo => 'Reset to...';
-
-  @override
   String get csSchemeBase => 'Build scheme\nfrom image';
 
   @override
