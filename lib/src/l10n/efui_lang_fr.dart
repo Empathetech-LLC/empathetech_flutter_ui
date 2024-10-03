@@ -100,7 +100,12 @@ class EFUILangFr extends EFUILang {
   String get gResetTo => 'Réinitialiser :';
 
   @override
-  String gResetToValue(Object name, Object value) {
+  String gResetValue(Object name) {
+    return 'Réinitialiser $name ?';
+  }
+
+  @override
+  String gResetValueTo(Object name, Object value) {
     return 'Réinitialiser $name à $value';
   }
 
@@ -436,6 +441,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get csReset => 'Réinitialiser';
+
+  @override
+  String get csCurrVal => 'Valeur de couleur actuelle :';
 
   @override
   String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';

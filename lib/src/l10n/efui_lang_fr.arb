@@ -38,7 +38,8 @@
   "gSetToValue": "{name} est défini sur {value}",
   "gReset": "Réinitialiser",
   "gResetTo": "Réinitialiser :",
-  "gResetToValue": "Réinitialiser {name} à {value}",
+  "gResetValue": "Réinitialiser {name} ?",
+  "gResetValueTo": "Réinitialiser {name} à {value}",
   "gResetAll": "Tout réinitialiser",
   "gResetWarn": "Ne peut pas être annulé",
 
@@ -177,6 +178,7 @@
   "csAddColor": "Ajouter une couleur",
   "csRemove": "Retirer",
   "csReset": "Réinitialiser",
+  "csCurrVal": "Valeur de couleur actuelle :",
 
   "csSchemeBase": "Construire le schéma\nà partir de l'image",
   "csOptional": "optionnel",

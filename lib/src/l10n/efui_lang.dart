@@ -272,11 +272,17 @@ abstract class EFUILang {
   /// **'Reset:'**
   String get gResetTo;
 
-  /// No description provided for @gResetToValue.
+  /// No description provided for @gResetValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {name}?'**
+  String gResetValue(Object name);
+
+  /// No description provided for @gResetValueTo.
   ///
   /// In en, this message translates to:
   /// **'Reset {name} to {value}'**
-  String gResetToValue(Object name, Object value);
+  String gResetValueTo(Object name, Object value);
 
   /// No description provided for @gResetAll.
   ///
@@ -925,6 +931,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Reset'**
   String get csReset;
+
+  /// No description provided for @csCurrVal.
+  ///
+  /// In en, this message translates to:
+  /// **'Current color value:'**
+  String get csCurrVal;
 
   /// No description provided for @csSchemeBase.
   ///

@@ -100,7 +100,12 @@ class EFUILangEs extends EFUILang {
   String get gResetTo => 'Restablecer:';
 
   @override
-  String gResetToValue(Object name, Object value) {
+  String gResetValue(Object name) {
+    return '¿Restablecer $name?';
+  }
+
+  @override
+  String gResetValueTo(Object name, Object value) {
     return 'Restablecer $name a $value';
   }
 
@@ -435,6 +440,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get csReset => 'Restablecer';
+
+  @override
+  String get csCurrVal => 'Valor de color actual:';
 
   @override
   String get csSchemeBase => 'Crear tema\nusando imagen';

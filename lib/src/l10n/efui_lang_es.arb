@@ -38,7 +38,8 @@
   "gSetToValue": "{name} está configurado a {value}",
   "gReset": "Restablecer",
   "gResetTo": "Restablecer:",
-  "gResetToValue": "Restablecer {name} a {value}",
+  "gResetValue": "¿Restablecer {name}?",
+  "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
   "gResetWarn": "No se puede deshacer",
 
@@ -177,6 +178,7 @@
   "csAddColor": "Añadir un color",
   "csRemove": "Quitar",
   "csReset": "Restablecer",
+  "csCurrVal": "Valor de color actual:",
 
   "csSchemeBase": "Crear tema\nusando imagen",
   "csOptional": "opcional",
