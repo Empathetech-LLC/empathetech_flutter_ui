@@ -29,14 +29,12 @@ class OpenUIScaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final Size appBarTextSize = measureText(
-      appTitle,
-      style: Theme.of(context).appBarTheme.titleTextStyle,
-      context: context,
-    );
-
-    final double toolbarHeight =
-        appBarTextSize.height + EzConfig.get(marginKey);
+    final double toolbarHeight = measureText(
+          appTitle,
+          style: Theme.of(context).appBarTheme.titleTextStyle,
+          context: context,
+        ).height +
+        EzConfig.get(marginKey);
 
     // Define custom widgets //
 
@@ -75,6 +73,8 @@ class OpenUIScaffold extends StatelessWidget {
 
             // Title
             title: const Text(appTitle),
+            centerTitle: true,
+            titleSpacing: 0,
 
             // Actions (aka trailing aka right)
             actions:
