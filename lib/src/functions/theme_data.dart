@@ -38,7 +38,6 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
 
   // Build the ThemeData //
 
@@ -130,7 +129,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: spacing * 4,
+      space: EzConfig.get(spacingKey) * 4,
     ),
 
     // Drawer
