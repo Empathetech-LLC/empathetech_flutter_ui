@@ -99,9 +99,6 @@ Future<dynamic> ezColorPicker(
           opacityThumbRadius: padding,
           opacityTrackHeight: padding * 2,
           showColorCode: true,
-          copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-            editFieldCopyButton: false,
-          ),
         ),
         materialActions: ezMaterialActions(
           context: context,
