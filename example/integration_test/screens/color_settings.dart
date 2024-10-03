@@ -222,9 +222,6 @@ Future<void> testCS(
   await chaChaNow(tester, find.byType(Slider));
   await touchText(tester, l10n.gApply);
 
-  /* Tests to unlock when the follow issue is resolved
-  https://github.com/flutter/flutter/issues/98804
-
   debugPrint('\nTesting $text reset\n');
   await holdText(tester, text);
 
@@ -235,7 +232,7 @@ Future<void> testCS(
     await touchText(tester, l10n.gReset);
   }
 
-  await validateText(tester, l10n.csResetTo);
+  await validateText(tester, l10n.gReset);
 
   if (isCupertino) {
     final List<CupertinoDialogAction> actions =
@@ -282,5 +279,4 @@ Future<void> testCS(
     await touchText(tester, l10n.csRemove);
     expect(find.text(text), findsNothing);
   }
-  */
 }
