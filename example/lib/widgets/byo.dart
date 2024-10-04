@@ -14,22 +14,14 @@ class BYOButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EFUILang l10n = EFUILang.of(context)!;
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
     final String text = l10n.gBYO;
 
-    final Widget icon = Icon(
-      LineIcons.github,
-      size: Theme.of(context).textTheme.titleLarge?.fontSize,
-      color: Theme.of(context).colorScheme.primary,
-    );
-
-    return MenuItemButton(
+    return EzMenuButton(
       onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-      leadingIcon: isLefty ? icon : null,
-      trailingIcon: isLefty ? null : icon,
-      child: Text(text),
+      icon: const Icon(LineIcons.github),
+      label: text,
     );
   }
 }
