@@ -15,6 +15,9 @@ class TextSettings extends StatelessWidget {
   /// For [EzScreen.useImageDecoration]
   final bool useImageDecoration;
 
+  /// Whether the text background opacity setting should be shown
+  final bool showOpacity;
+
   /// Optional additional batch settings for the quick tab
   final List<Widget>? additionalBatchSettings;
 
@@ -24,6 +27,7 @@ class TextSettings extends StatelessWidget {
   const TextSettings({
     super.key,
     this.useImageDecoration = true,
+    this.showOpacity = true,
     this.additionalBatchSettings,
     this.showSpacing = true,
   });
@@ -54,6 +58,7 @@ class TextSettings extends StatelessWidget {
       ],
       child: _TextSettings(
         useImageDecoration: useImageDecoration,
+        showOpacity: showOpacity,
         additionalBatchSettings: additionalBatchSettings,
         showSpacing: showSpacing,
       ),
@@ -63,11 +68,13 @@ class TextSettings extends StatelessWidget {
 
 class _TextSettings extends StatefulWidget {
   final bool useImageDecoration;
+  final bool showOpacity;
   final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
 
   const _TextSettings({
     required this.useImageDecoration,
+    required this.showOpacity,
     required this.additionalBatchSettings,
     required this.showSpacing,
   });
@@ -128,7 +135,10 @@ class _TextSettingsState extends State<_TextSettings> {
 
           // Settings
           if (currentTab == quick)
-            _QuickTextSettings(widget.additionalBatchSettings)
+            _QuickTextSettings(
+              widget.showOpacity,
+              widget.additionalBatchSettings,
+            )
           else
             _AdvancedTextSettings(showSpacing: widget.showSpacing),
         ],
@@ -138,9 +148,10 @@ class _TextSettingsState extends State<_TextSettings> {
 }
 
 class _QuickTextSettings extends StatefulWidget {
+  final bool showOpacity;
   final List<Widget>? additionalSettings;
 
-  const _QuickTextSettings(this.additionalSettings);
+  const _QuickTextSettings(this.showOpacity, this.additionalSettings);
 
   @override
   State<_QuickTextSettings> createState() => _QuickTextSettingsState();
@@ -273,43 +284,45 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ),
         separator,
 
-        // Text background opacity
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: smallBreakpoint),
-          child: Slider(
-            // Slider values
-            value: currOpacity,
-            min: minOpacity,
-            max: maxOpacity,
-            divisions: 20,
-            label: currOpacity.toStringAsFixed(2),
+        if (widget.showOpacity) ...<Widget>[
+          // Text background opacity
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: smallBreakpoint),
+            child: Slider(
+              // Slider values
+              value: currOpacity,
+              min: minOpacity,
+              max: maxOpacity,
+              divisions: 20,
+              label: currOpacity.toStringAsFixed(2),
 
-            // Slider functions
-            onChanged: (double value) {
-              setState(() {
-                currOpacity = value;
-                backgroundColor = surfaceContainer?.withOpacity(currOpacity);
-              });
-            },
-            onChangeEnd: (double value) async {
-              await EzConfig.setDouble(oKey, value);
-            },
+              // Slider functions
+              onChanged: (double value) {
+                setState(() {
+                  currOpacity = value;
+                  backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+                });
+              },
+              onChangeEnd: (double value) async {
+                await EzConfig.setDouble(oKey, value);
+              },
 
-            // Slider semantics
-            semanticFormatterCallback: (double value) =>
-                value.toStringAsFixed(2),
+              // Slider semantics
+              semanticFormatterCallback: (double value) =>
+                  value.toStringAsFixed(2),
+            ),
           ),
-        ),
-        EzTextBackground(
-          Text(
-            'Text background opacity',
-            style: labelProvider.value,
-            textAlign: TextAlign.center,
+          EzTextBackground(
+            Text(
+              'Text background opacity',
+              style: labelProvider.value,
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: backgroundColor,
+            margin: colMargin,
           ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        separator,
+          separator,
+        ],
 
         // Reset all
         EzResetButton(
