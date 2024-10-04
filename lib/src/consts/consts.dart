@@ -25,3 +25,6 @@ const double largeBreakpoint = 1000.0;
 
 /// 0.08
 const double highlightOpacity = 0.08;
+
+/// 0.4 == [highlightOpacity] * 5
+const double containerOpacity = 0.4;
