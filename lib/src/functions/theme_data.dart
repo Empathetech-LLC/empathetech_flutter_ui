@@ -100,20 +100,16 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Checkbox
     checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return colorScheme.surface.withOpacity(textBackgroundOpacity);
-        } else if (states.contains(WidgetState.selected)) {
-          return colorScheme.primary;
-        }
-        return null;
-      }),
-      checkColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.selected)) {
-          return colorScheme.onPrimary;
-        }
-        return null;
-      }),
+      fillColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+            ? colorScheme.primary
+            : colorScheme.surface.withOpacity(textBackgroundOpacity),
+      ),
+      checkColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+            ? colorScheme.onPrimary
+            : null,
+      ),
       overlayColor: WidgetStateProperty.all(highlightColor),
       side: BorderSide(color: colorScheme.primary),
     ),
