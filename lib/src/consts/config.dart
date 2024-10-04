@@ -26,17 +26,35 @@ const int empathEucalyptusHex = 0xFF20DAA5;
 /// 0xFF20DAA5
 const Color empathEucalyptus = Color(empathEucalyptusHex);
 
+/// 0x4020DAA5
+const int empathEucalyptusDimHex = 0x4020DAA5;
+
+/// 0x4020DAA5
+const Color empathEucalyptusDim = Color(empathEucalyptusHex);
+
 /// 0xFFA520DA
 const int empathPurpleHex = 0xFFA520DA;
 
 /// 0xFFA520DA
 const Color empathPurple = Color(empathPurpleHex);
 
-/// 0xFFDAA520
-const int empathGoldenrodHex = 0xFFDAA520;
+/// 0x40A520DA
+const int empathPurpleDimHex = 0x40A520DA;
+
+/// 0x40A520DA
+const Color empathPurpleDim = Color(empathPurpleDimHex);
 
 /// 0xFFDAA520
-const Color empathGoldenrod = Color(empathGoldenrodHex);
+const int empathSandHex = 0xFFDAA520;
+
+/// 0xFFDAA520
+const Color empathSand = Color(empathSandHex);
+
+/// 0x40DAA520
+const int empathSandDimHex = 0x40DAA520;
+
+/// 0x40DAA520
+const Color empathSandSim = Color(empathSandHex);
 
 /// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
@@ -208,22 +226,19 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Light
   lightPrimaryKey: empathPurpleHex, // required key
+  lightPrimaryContainerKey: empathPurpleDimHex,
   lightOnPrimaryKey: whiteHex,
   lightOnPrimaryContainerKey: whiteHex,
-  lightOnPrimaryFixedKey: whiteHex,
-  lightOnPrimaryFixedVariantKey: whiteHex,
 
-  lightSecondaryKey: empathGoldenrodHex,
+  lightSecondaryKey: empathSandHex,
+  lightSecondaryContainerKey: empathSandDimHex,
   lightOnSecondaryKey: blackHex,
   lightOnSecondaryContainerKey: blackHex,
-  lightOnSecondaryFixedKey: blackHex,
-  lightOnSecondaryFixedVariantKey: blackHex,
 
   lightTertiaryKey: empathEucalyptusHex,
+  lightTertiaryContainerKey: empathEucalyptusDimHex,
   lightOnTertiaryKey: blackHex,
   lightOnTertiaryContainerKey: blackHex,
-  lightOnTertiaryFixedKey: blackHex,
-  lightOnTertiaryFixedVariantKey: blackHex,
 
   lightSurfaceKey: whiteHex,
   lightOnSurfaceKey: blackHex,
@@ -233,22 +248,19 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Dark
   darkPrimaryKey: empathEucalyptusHex, // required key
+  darkPrimaryContainerKey: empathEucalyptusDimHex,
   darkOnPrimaryKey: blackHex,
   darkOnPrimaryContainerKey: blackHex,
-  darkOnPrimaryFixedKey: blackHex,
-  darkOnPrimaryFixedVariantKey: blackHex,
 
-  darkSecondaryKey: empathGoldenrodHex,
+  darkSecondaryKey: empathSandHex,
+  darkSecondaryContainerKey: empathSandDimHex,
   darkOnSecondaryKey: blackHex,
   darkOnSecondaryContainerKey: blackHex,
-  darkOnSecondaryFixedKey: blackHex,
-  darkOnSecondaryFixedVariantKey: blackHex,
 
   darkTertiaryKey: empathPurpleHex,
+  darkTertiaryContainerKey: empathPurpleDimHex,
   darkOnTertiaryKey: whiteHex,
   darkOnTertiaryContainerKey: whiteHex,
-  darkOnTertiaryFixedKey: whiteHex,
-  darkOnTertiaryFixedVariantKey: whiteHex,
 
   darkSurfaceKey: blackHex,
   darkOnSurfaceKey: whiteHex,
