@@ -70,7 +70,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: colorScheme.primary,
-      selectionColor: colorScheme.secondary.withOpacity(0.5),
+      selectionColor: colorScheme.secondary.withOpacity(containerOpacity),
       selectionHandleColor: colorScheme.primary,
     ),
 
