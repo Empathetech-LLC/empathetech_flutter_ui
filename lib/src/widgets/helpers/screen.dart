@@ -74,11 +74,11 @@ class EzScreen extends StatelessWidget {
       if (imagePath == null || imagePath == noImageValue) {
         return null;
       } else {
+        final BoxFit? fit =
+            boxFitFromName(EzConfig.getString('$decorationKey$boxFitSuffix'));
+
         return BoxDecoration(
-          image: DecorationImage(
-            image: provideImage(imagePath),
-            fit: boxFitFromName(EzConfig.get('$decorationKey$boxFitSuffix')),
-          ),
+          image: DecorationImage(image: provideImage(imagePath), fit: fit),
         );
       }
     }
