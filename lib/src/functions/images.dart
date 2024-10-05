@@ -8,6 +8,7 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,6 +25,27 @@ ImageProvider provideImage(String path) {
 
 /// Save (and/or overwrite) the [Image] stored in [prefsPath] from [source]
 Future<String?> saveImage({
+  required BuildContext context,
+  required String prefsPath,
+  required ImageSource source,
+}) async {
+  if (kIsWeb) {
+    return saveImageWeb(
+      context: context,
+      prefsPath: prefsPath,
+      source: source,
+    );
+  } else {
+    return saveImageLocal(
+      context: context,
+      prefsPath: prefsPath,
+      source: source,
+    );
+  }
+}
+
+/// [saveImage] for mobile and desktop
+Future<String?> saveImageLocal({
   required BuildContext context,
   required String prefsPath,
   required ImageSource source,
