@@ -244,7 +244,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
               contents: <Widget>[
                 // Remove from list
-                EzElevatedButton(
+                EzElevatedIconButton(
                   onPressed: () {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
@@ -255,7 +255,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 spacer,
 
                 // Reset to default
-                EzElevatedButton(
+                EzElevatedIconButton(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
 
@@ -283,7 +283,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       button: true,
       hint: l10n.csPickerHint(label),
       child: ExcludeSemantics(
-        child: EzElevatedButton(
+        child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),

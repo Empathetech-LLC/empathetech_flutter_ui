@@ -80,7 +80,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
 
-    return EzElevatedButton(
+    return EzElevatedIconButton(
       onPressed: isDark
           ? () async {
               await storeColorScheme(

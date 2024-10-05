@@ -115,7 +115,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             platform == TargetPlatform.iOS)) {
       options.addAll(<Widget>[
         // From camera
-        EzElevatedButton(
+        EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await saveImage(
               context: context,
@@ -138,7 +138,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Works everywhere
     options.addAll(<Widget>[
       // From file
-      EzElevatedButton(
+      EzElevatedIconButton(
         onPressed: () async {
           final String? changed = await saveImage(
             context: context,
@@ -156,7 +156,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       spacer,
 
       // From network
-      EzElevatedButton(
+      EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext networkDialogContext) {
@@ -242,7 +242,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       // Reset
       if (defaultPath != null) ...<Widget>[
         spacer,
-        EzElevatedButton(
+        EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.remove(widget.configKey);
@@ -261,7 +261,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (widget.allowClear) {
       options.addAll(<Widget>[
         spacer,
-        EzElevatedButton(
+        EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
@@ -400,7 +400,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       button: true,
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
-        child: EzElevatedButton(
+        child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),

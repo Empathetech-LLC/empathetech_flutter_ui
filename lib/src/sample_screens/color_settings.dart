@@ -349,7 +349,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
       return Container(
         padding: EzInsets.col(padding),
-        child: EzElevatedButton(
+        child: EzElevatedIconButton(
           key: ValueKey<String>(configKeyKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
