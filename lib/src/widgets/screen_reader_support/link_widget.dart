@@ -26,10 +26,6 @@ class EzLinkWidget extends StatefulWidget {
   /// Is this an image?
   final bool isImage;
 
-  /// [Semantics] defaults to type link
-  /// Set true to be a button
-  final bool button;
-
   /// Tooltip for on hover/focus
   final String tooltip;
 
@@ -46,7 +42,6 @@ class EzLinkWidget extends StatefulWidget {
     this.url,
     required this.semanticLabel,
     this.isImage = false,
-    this.button = false,
     required this.tooltip,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
@@ -58,9 +53,9 @@ class EzLinkWidget extends StatefulWidget {
 class _EzLinkWidgetState extends State<EzLinkWidget> {
   // Gather the theme data //
 
-  bool _shadow = false;
+  List<BoxShadow> boxShadow = <BoxShadow>[];
 
-  late final List<BoxShadow> _shadows = widget.shadows ??
+  late final List<BoxShadow> shadows = widget.shadows ??
       <BoxShadow>[
         BoxShadow(
           color: Theme.of(context)
@@ -72,7 +67,8 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
 
   // Define the styling function(s) //
 
-  void _showShadow(bool showIt) => setState(() => _shadow = showIt);
+  void showShadow(bool sun) =>
+      setState(() => boxShadow = sun ? shadows : <BoxShadow>[]);
 
   // Return the build //
 
@@ -82,24 +78,21 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
       message: widget.tooltip,
       excludeFromSemantics: true,
       child: Semantics(
-        image: widget.isImage,
-        link: !widget.button,
-        button: widget.button,
         hint: widget.semanticLabel,
+        link: true,
+        image: widget.isImage,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
-            onFocusChange: (bool hasFocus) => _showShadow(hasFocus),
+            onFocusChange: (bool hasFocus) => showShadow(hasFocus),
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
-              onEnter: (_) => _showShadow(true),
-              onExit: (_) => _showShadow(false),
+              onEnter: (_) => showShadow(true),
+              onExit: (_) => showShadow(false),
               child: GestureDetector(
                 onTap: widget.onTap ?? () => launchUrl(widget.url!),
                 child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: _shadow ? _shadows : <BoxShadow>[],
-                  ),
+                  decoration: BoxDecoration(boxShadow: boxShadow),
                   child: widget.child,
                 ),
               ),

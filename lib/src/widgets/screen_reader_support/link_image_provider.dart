@@ -86,9 +86,9 @@ class EzLinkImageProvider extends StatefulWidget {
 class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
   // Gather the theme data //
 
-  bool _shadow = false;
+  List<BoxShadow> boxShadow = <BoxShadow>[];
 
-  late final List<BoxShadow> _shadows = widget.shadows ??
+  late final List<BoxShadow> shadows = widget.shadows ??
       <BoxShadow>[
         BoxShadow(
           color: Theme.of(context)
@@ -100,7 +100,8 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
 
   // Define the styling function(s) //
 
-  void _showShadow(bool showIt) => setState(() => _shadow = showIt);
+  void showShadow(bool sun) =>
+      setState(() => boxShadow = sun ? shadows : <BoxShadow>[]);
 
   // Return the build //
 
@@ -110,23 +111,21 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
       message: widget.tooltip,
       excludeFromSemantics: true,
       child: Semantics(
-        image: true,
-        link: true,
         hint: widget.semanticLabel,
+        link: true,
+        image: true,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
-            onFocusChange: (bool hasFocus) => _showShadow(hasFocus),
+            onFocusChange: (bool hasFocus) => showShadow(hasFocus),
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
-              onEnter: (_) => _showShadow(true),
-              onExit: (_) => _showShadow(false),
+              onEnter: (_) => showShadow(true),
+              onExit: (_) => showShadow(false),
               child: GestureDetector(
                 onTap: widget.onTap ?? () => launchUrl(widget.url!),
                 child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: _shadow ? _shadows : <BoxShadow>[],
-                  ),
+                  decoration: BoxDecoration(boxShadow: boxShadow),
                   child: Image(
                     image: widget.image,
                     frameBuilder: widget.frameBuilder,
