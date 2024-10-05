@@ -22,6 +22,7 @@ export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
+export 'src/functions/images_web.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
