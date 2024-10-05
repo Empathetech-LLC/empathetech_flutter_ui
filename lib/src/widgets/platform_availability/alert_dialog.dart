@@ -112,13 +112,17 @@ class EzAlertDialog extends PlatformAlertDialog {
 
           return CupertinoAlertDialogData(
             title: Padding(
-              padding: EdgeInsets.only(bottom: spacing / 2),
+              padding: dialogContent == null
+                  ? EdgeInsets.zero
+                  : EdgeInsets.only(bottom: spacing / 2),
               child: title,
             ),
-            content: Padding(
-              padding: EdgeInsets.symmetric(vertical: spacing / 2),
-              child: dialogContent,
-            ),
+            content: dialogContent == null
+                ? null
+                : Padding(
+                    padding: EdgeInsets.symmetric(vertical: spacing / 2),
+                    child: dialogContent,
+                  ),
             actions: cupertinoActions == null
                 ? <Widget>[closeAction]
                 : needsClose
