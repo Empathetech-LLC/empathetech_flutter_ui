@@ -29,41 +29,25 @@ Future<String?> saveImage({
   required String prefsPath,
   required ImageSource source,
 }) async {
-  if (kIsWeb) {
-    return saveImageWeb(
-      context: context,
-      prefsPath: prefsPath,
-      source: source,
-    );
-  } else {
-    return saveImageLocal(
-      context: context,
-      prefsPath: prefsPath,
-      source: source,
-    );
-  }
-}
-
-/// [saveImage] for mobile and desktop
-Future<String?> saveImageLocal({
-  required BuildContext context,
-  required String prefsPath,
-  required ImageSource source,
-}) async {
   // Load image picker and save the result
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) return null;
 
-    // Build the path
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final String imageName = basename(picked.path);
-    final File image = File('${directory.path}/$imageName');
+    if (kIsWeb) {
+      await EzConfig.setString(prefsPath, picked.path);
+      return picked.path;
+    } else {
+      // Build the path
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final String imageName = basename(picked.path);
+      final File image = File('${directory.path}/$imageName');
 
-    // Save the new image
-    await File(picked.path).copy(image.path);
-    await EzConfig.setString(prefsPath, image.path);
-    return image.path;
+      // Save the new image
+      await File(picked.path).copy(image.path);
+      await EzConfig.setString(prefsPath, image.path);
+      return image.path;
+    }
   } on Exception catch (e) {
     if (context.mounted) {
       final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
