@@ -430,7 +430,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         const EzSeparator(),
 
         // Add a color button
-        EzTextButton(
+        EzTextIconButton(
           onPressed: () async {
             // Show available color configKeys
             await showModalBottomSheet(
