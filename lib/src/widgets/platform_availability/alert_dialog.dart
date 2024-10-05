@@ -59,9 +59,9 @@ class EzAlertDialog extends PlatformAlertDialog {
     return SelectionArea(
       child: PlatformAlertDialog(
         material: (BuildContext dialogContext, _) {
-          late final TextButton closeAction = TextButton(
+          late final Widget closeAction = EzTextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(EFUILang.of(context)!.gClose),
+            text: EFUILang.of(context)!.gClose,
           );
 
           return MaterialAlertDialogData(
