@@ -66,7 +66,6 @@ class _ImageSettingState extends State<EzImageSetting> {
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final bool isWeb = kIsWeb;
   late final TargetPlatform platform = Theme.of(context).platform;
 
   // Define build data //
@@ -110,11 +109,10 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     // From camera
     // Only works on mobile
-    if (!isWeb &&
+    if (!kIsWeb &&
         (platform == TargetPlatform.android ||
             platform == TargetPlatform.iOS)) {
       options.addAll(<Widget>[
-        // From camera
         EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await saveImage(
@@ -134,28 +132,32 @@ class _ImageSettingState extends State<EzImageSetting> {
       ]);
     }
 
-    // From file, network && reset
+    // From file
+    // Doesn't work on web
+    if (!kIsWeb) {
+      options.addAll(<Widget>[
+        EzElevatedIconButton(
+          onPressed: () async {
+            final String? changed = await saveImage(
+              context: context,
+              prefsPath: widget.configKey,
+              source: ImageSource.gallery,
+            );
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(changed);
+            }
+          },
+          icon: Icon(PlatformIcons(context).folder),
+          label: l10n.isFromFile,
+        ),
+        spacer,
+      ]);
+    }
+
+    // From network
     // Works everywhere
     options.addAll(<Widget>[
-      // From file
-      EzElevatedIconButton(
-        onPressed: () async {
-          final String? changed = await saveImage(
-            context: context,
-            prefsPath: widget.configKey,
-            source: ImageSource.gallery,
-          );
-
-          if (dialogContext.mounted) {
-            Navigator.of(dialogContext).pop(changed);
-          }
-        },
-        icon: Icon(PlatformIcons(context).folder),
-        label: l10n.isFromFile,
-      ),
-      spacer,
-
-      // From network
       EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
@@ -238,9 +240,11 @@ class _ImageSettingState extends State<EzImageSetting> {
         icon: const Icon(Icons.computer_outlined),
         label: l10n.isFromNetwork,
       ),
+    ]);
 
-      // Reset
-      if (defaultPath != null) ...<Widget>[
+    // Reset
+    if (defaultPath != null) {
+      options.addAll(<Widget>[
         spacer,
         EzElevatedIconButton(
           onPressed: () async {
@@ -254,8 +258,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: Icon(PlatformIcons(context).refresh),
           label: l10n.isResetIt,
         ),
-      ],
-    ]);
+      ]);
+    }
 
     // Clear (optional)
     if (widget.allowClear) {
