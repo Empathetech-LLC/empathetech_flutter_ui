@@ -115,25 +115,33 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       case LayoutSettingType.margin:
         return <Widget>[
           spacer,
+          EzTextBackground(
+            Text(
+              valString,
+              style: bodyStyle?.copyWith(color: theme.colorScheme.surface),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.all(currValue),
+            backgroundColor: theme.colorScheme.onSurface,
+          ),
+          spacer,
           Container(
             color: theme.colorScheme.onSurface,
             height: heightOf(context) * 0.25,
             width: widthOf(context) * 0.25,
             child: Container(
-              color: theme.colorScheme.surface,
-              margin: EdgeInsets.all(currValue * 0.25),
-              child: Center(
-                child: EzTextBackground(
-                  Text(
-                    valString,
-                    style:
-                        bodyStyle?.copyWith(color: theme.colorScheme.surface),
-                    textAlign: TextAlign.center,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                image: DecorationImage(
+                  image: provideImage(
+                    EzConfig.get(isDarkTheme(context)
+                        ? darkBackgroundImageKey
+                        : lightBackgroundImageKey),
                   ),
-                  margin: EdgeInsets.all(currValue),
-                  backgroundColor: theme.colorScheme.onSurface,
+                  fit: BoxFit.fill,
                 ),
               ),
+              margin: EdgeInsets.all(currValue * 0.25),
             ),
           ),
           spacer,
