@@ -214,6 +214,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
               dialogTitle: fromImageTitle,
               updateTheme: Brightness.dark,
               updateThemeOption: false,
+              showFitOption: false,
             ),
           ),
         )
@@ -227,6 +228,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
               dialogTitle: fromImageTitle,
               updateTheme: Brightness.light,
               updateThemeOption: false,
+              showFitOption: false,
             ),
           ),
         );
