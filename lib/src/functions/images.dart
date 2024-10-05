@@ -52,7 +52,7 @@ Future<String?> saveImage({
 }
 
 /// Given a [BoxFit].name, return the associated [BoxFit]
-BoxFit? boxFitFromName(String name) {
+BoxFit? boxFitFromName(String? name) {
   switch (name) {
     case 'contain':
       return BoxFit.contain;
