@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [7.2.0] - 2024-XX-XX
+## [7.2.0] - 2024-10-06
 ### Updated
 - Integrated testing
 - Analysis options
@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
 - Localizations
 - EzScreen decorations
 - Highlight opacity 0.1 -> 0.25
+- Alert dialogs
+- Color pickers
 
 ### Added
 - Text backgrounds
@@ -25,6 +27,10 @@ All notable changes to this project will be documented in this file.
 - PlatformTheme check backups
   - Makes it easier to use EFUI w/out having to use Flutter Platform Widgets
     - FPW is still recommended (and unaffiliated)
+- isLefty responsive Elevated, Text, and MenuItem buttons
+- Hide scrollbars setting
+- Fit options for image settings
+- More text underlining and more options for it
 
 ### Removed
 - EzLinkImage
