@@ -8,7 +8,6 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -34,20 +33,15 @@ Future<String?> saveImage({
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) return null;
 
-    if (kIsWeb) {
-      await EzConfig.setString(prefsPath, picked.path);
-      return picked.path;
-    } else {
-      // Build the path
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final String imageName = basename(picked.path);
-      final File image = File('${directory.path}/$imageName');
+    // Build the path
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final String imageName = basename(picked.path);
+    final File image = File('${directory.path}/$imageName');
 
-      // Save the new image
-      await File(picked.path).copy(image.path);
-      await EzConfig.setString(prefsPath, image.path);
-      return image.path;
-    }
+    // Save the new image
+    await File(picked.path).copy(image.path);
+    await EzConfig.setString(prefsPath, image.path);
+    return image.path;
   } on Exception catch (e) {
     if (context.mounted) {
       final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
