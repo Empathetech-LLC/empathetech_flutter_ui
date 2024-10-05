@@ -11,6 +11,106 @@ class EzElevatedButton extends StatefulWidget {
   final void Function()? onPressed;
   final void Function()? onLongPress;
 
+  /// Defaults to add an [TextDecoration.underline] to the [text]
+  /// Can override and/or set [underline] to false
+  final void Function(bool)? onHover;
+
+  /// Defaults to add an [TextDecoration.underline] to the [text]
+  /// Can override and/or set [underline] to false
+  final void Function(bool)? onFocusChange;
+
+  /// Default false
+  /// Adds an [TextDecoration.underline] to the [text] via [onHover] and [onFocusChange]
+  final bool underline;
+
+  /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
+  final Color? decorationColor;
+
+  final ButtonStyle? style;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final Clip? clipBehavior;
+  final WidgetStatesController? statesController;
+
+  final String text;
+
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? textStyle;
+
+  /// [Text] passthrough
+  final TextAlign? textAlign;
+
+  /// [ElevatedButton] wrapper that will optionally underline its text [onHover] and [onFocusChange]
+  const EzElevatedButton({
+    super.key,
+    this.onPressed,
+    this.onLongPress,
+    this.onHover,
+    this.onFocusChange,
+    this.underline = false,
+    this.decorationColor,
+    this.style,
+    this.focusNode,
+    this.autofocus = false,
+    this.clipBehavior,
+    this.statesController,
+    required this.text,
+    this.textStyle,
+    this.textAlign,
+  });
+
+  @override
+  State<EzElevatedButton> createState() => _EzElevatedButtonState();
+}
+
+class _EzElevatedButtonState extends State<EzElevatedButton> {
+  // Gather theme data //
+
+  late final Color primary = Theme.of(context).colorScheme.primary;
+
+  late TextStyle? textStyle =
+      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+    decorationColor: widget.decorationColor ?? primary,
+  );
+
+  // Define custom functions //
+
+  void addUnderline(bool addIt) {
+    textStyle = textStyle?.copyWith(
+      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+    );
+    setState(() {});
+  }
+
+  late final void Function(bool)? onHover = widget.onHover ??
+      (widget.underline
+          ? (bool isHovering) => addUnderline(isHovering)
+          : (_) {});
+
+  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
+      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      onHover: onHover,
+      onFocusChange: onFocusChange,
+      style: widget.style,
+      focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
+      clipBehavior: widget.clipBehavior,
+      statesController: widget.statesController,
+      child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
+    );
+  }
+}
+
+class EzElevatedIconButton extends StatefulWidget {
+  final void Function()? onPressed;
+  final void Function()? onLongPress;
+
   /// Defaults to add an [TextDecoration.underline] to the [label]
   /// Can override and/or set [underline] to false
   final void Function(bool)? onHover;
@@ -48,7 +148,7 @@ class EzElevatedButton extends StatefulWidget {
   final TextAlign? textAlign;
 
   /// [ElevatedButton.icon] wrapper that responds to [isLeftyKey]
-  const EzElevatedButton({
+  const EzElevatedIconButton({
     super.key,
     this.onPressed,
     this.onLongPress,
@@ -69,10 +169,10 @@ class EzElevatedButton extends StatefulWidget {
   });
 
   @override
-  State<EzElevatedButton> createState() => _EzElevatedButtonState();
+  State<EzElevatedIconButton> createState() => _EzElevatedIconButtonState();
 }
 
-class _EzElevatedButtonState extends State<EzElevatedButton> {
+class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
   // Gather theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
