@@ -138,7 +138,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 /// Pairs with [EzAlertDialog]
 /// Quickly creates Material 'action' buttons for the dialog
 /// All required parameters are identical to [ezCupertinoActions]
-List<TextButton> ezMaterialActions({
+List<Widget> ezMaterialActions({
   required BuildContext context,
   String? confirmMsg,
   required void Function() onConfirm,
@@ -151,23 +151,25 @@ List<TextButton> ezMaterialActions({
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
   final Color primary = Theme.of(context).colorScheme.primary;
 
-  final List<TextButton> actions = <TextButton>[
+  final List<Widget> actions = <Widget>[
     // Deny
-    TextButton(
+    EzTextButton(
       onPressed: onDeny,
       style: denyIsDestructive
           ? TextButton.styleFrom(foregroundColor: primary)
           : null,
-      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
+      decorationColor: primary,
+      text: denyMsg ?? EFUILang.of(context)!.gNo,
     ),
 
     // Confirm
-    TextButton(
+    EzTextButton(
       onPressed: onConfirm,
       style: confirmIsDestructive
           ? TextButton.styleFrom(foregroundColor: primary)
           : null,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
+      decorationColor: primary,
+      text: confirmMsg ?? EFUILang.of(context)!.gYes,
     ),
   ];
 
