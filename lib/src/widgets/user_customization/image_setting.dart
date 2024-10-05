@@ -108,30 +108,6 @@ class _ImageSettingState extends State<EzImageSetting> {
     final List<Widget> options = <Widget>[];
     final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
-    // From file
-    // Doesn't work on web
-    if (!isWeb) {
-      options.addAll(<Widget>[
-        // From file
-        EzElevatedButton(
-          onPressed: () async {
-            final String? changed = await saveImage(
-              context: context,
-              prefsPath: widget.configKey,
-              source: ImageSource.gallery,
-            );
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(changed);
-            }
-          },
-          icon: Icon(PlatformIcons(context).folder),
-          label: l10n.isFromFile,
-        ),
-        spacer,
-      ]);
-    }
-
     // From camera
     // Only works on mobile
     if (!isWeb &&
@@ -158,9 +134,27 @@ class _ImageSettingState extends State<EzImageSetting> {
       ]);
     }
 
-    // From network && reset
+    // From file, network && reset
     // Works everywhere
     options.addAll(<Widget>[
+      // From file
+      EzElevatedButton(
+        onPressed: () async {
+          final String? changed = await saveImage(
+            context: context,
+            prefsPath: widget.configKey,
+            source: ImageSource.gallery,
+          );
+
+          if (dialogContext.mounted) {
+            Navigator.of(dialogContext).pop(changed);
+          }
+        },
+        icon: Icon(PlatformIcons(context).folder),
+        label: l10n.isFromFile,
+      ),
+      spacer,
+
       // From network
       EzElevatedButton(
         onPressed: () => showPlatformDialog(
