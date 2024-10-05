@@ -38,6 +38,9 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the update theme checkbox && message should be displayed
   final bool updateThemeOption;
 
+  /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
+  final bool showFitOption;
+
   /// Creates a tool for updating the image at [configKey]'s path
   /// [EzImageSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
   const EzImageSetting({
@@ -49,6 +52,7 @@ class EzImageSetting extends StatefulWidget {
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
+    this.showFitOption = true,
   });
 
   @override
@@ -63,6 +67,8 @@ class _ImageSettingState extends State<EzImageSetting> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
+  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -74,8 +80,76 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late bool updateTheme = (widget.updateTheme != null);
   bool inProgress = false;
+  BoxFit? selected;
 
   late final TextEditingController urlText = TextEditingController();
+
+  /// Creates a mini-[Scaffold] to preview the [BoxFit] option(s)
+  Widget fitPreview({
+    required BoxFit fit,
+    required double width,
+    required double height,
+    required StateSetter dialogState,
+  }) {
+    final String name = fit.name;
+    final double toolbarHeight = measureText(
+          name,
+          style: theme.textTheme.bodyLarge,
+          context: context,
+        ).height +
+        margin * 0.25;
+
+    final Widget selectButton = Radio<BoxFit>(
+      groupValue: selected,
+      value: fit,
+      onChanged: (BoxFit? value) {
+        selected = value;
+        setState(() {});
+        dialogState(() {});
+      },
+    );
+
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, toolbarHeight),
+          child: AppBar(
+            excludeHeaderSemantics: true,
+            toolbarHeight: toolbarHeight,
+
+            // Leading (aka left)
+            leading: isLefty ? selectButton : const SizedBox.shrink(),
+
+            // Title
+            title: Text(
+              name,
+              style: theme.textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+            centerTitle: true,
+            titleSpacing: 0,
+
+            // Actions (aka trailing aka right)
+            actions: isLefty ? null : <Widget>[selectButton],
+          ),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainer,
+            image: DecorationImage(
+              image: provideImage(currPath!),
+              fit: fit,
+            ),
+          ),
+        ),
+        resizeToAvoidBottomInset: false,
+      ),
+    );
+  }
 
   // Define button functions //
 
@@ -335,6 +409,103 @@ class _ImageSettingState extends State<EzImageSetting> {
     );
   }
 
+  /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
+  Future<void> chooseFit() {
+    return showPlatformDialog(
+      context: context,
+      builder: (_) => StatefulBuilder(
+        builder: (BuildContext fitContext, StateSetter fitState) {
+          void onConfirm() async {
+            if (selected != null) {
+              await EzConfig.setString(
+                '${widget.configKey}$boxFitSuffix',
+                selected!.name,
+              );
+            }
+
+            if (fitContext.mounted) Navigator.of(fitContext).pop();
+          }
+
+          void onDeny() => Navigator.of(fitContext).pop();
+
+          final double width = widthOf(context) * 0.25;
+          final double height = heightOf(context) * 0.25;
+
+          return EzAlertDialog(
+            title: Text(l10n.isFit, textAlign: TextAlign.center),
+            contents: <Widget>[
+              fitPreview(
+                fit: BoxFit.contain,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.cover,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.fill,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.fitWidth,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.fitHeight,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.none,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+              spacer,
+              fitPreview(
+                fit: BoxFit.scaleDown,
+                width: width,
+                height: height,
+                dialogState: fitState,
+              ),
+            ],
+            materialActions: ezMaterialActions(
+              context: context,
+              confirmMsg: l10n.gApply,
+              onConfirm: onConfirm,
+              confirmIsDestructive: true,
+              denyMsg: l10n.gCancel,
+              onDeny: onDeny,
+            ),
+            cupertinoActions: ezCupertinoActions(
+              context: context,
+              confirmMsg: l10n.gApply,
+              onConfirm: onConfirm,
+              confirmIsDestructive: true,
+              denyMsg: l10n.gCancel,
+              onDeny: onDeny,
+            ),
+            needsClose: false,
+          );
+        },
+      ),
+    );
+  }
+
   /// First-layer [ElevatedButton.onPressed]
   /// Runs the [chooseImage] dialog and updates the state accordingly
   Future<void> activateSetting() async {
@@ -375,6 +546,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             : await EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
     }
+
+    if (widget.showFitOption) await chooseFit();
 
     // Here to act as a a "default" for clearing and/or resetting the image
     setState(() => inProgress = false);
