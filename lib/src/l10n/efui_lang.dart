@@ -1058,6 +1058,12 @@ abstract class EFUILang {
   /// **'Update the app colors using this image'**
   String get isUseForColors;
 
+  /// No description provided for @isFit.
+  ///
+  /// In en, this message translates to:
+  /// **'How should it fit?'**
+  String get isFit;
+
   /// No description provided for @isResetAll.
   ///
   /// In en, this message translates to:

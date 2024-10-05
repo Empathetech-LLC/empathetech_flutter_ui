@@ -514,6 +514,9 @@ class EFUILangEn extends EFUILang {
   String get isUseForColors => 'Update the app colors using this image';
 
   @override
+  String get isFit => 'How should it fit?';
+
+  @override
   String isResetAll(Object themeType) {
     return 'Reset all $themeType theme images?';
   }

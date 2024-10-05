@@ -209,5 +209,7 @@
 
   "isUseForColors": "Actualiza los colores de la app usando esta imagen",
 
+  "isFit": "¿Cómo debe quedar?",
+
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
 }
