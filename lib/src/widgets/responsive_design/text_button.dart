@@ -11,16 +11,16 @@ class EzTextButton extends StatefulWidget {
   final void Function()? onPressed;
   final void Function()? onLongPress;
 
-  /// Defaults to add an [TextDecoration.underline] to the [label]
+  /// Defaults to add an [TextDecoration.underline] to the [text]
   /// Can override and/or set [underline] to false
   final void Function(bool)? onHover;
 
-  /// Defaults to add an [TextDecoration.underline] to the [label]
+  /// Defaults to add an [TextDecoration.underline] to the [text]
   /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
 
   /// Default true
-  /// Adds an [TextDecoration.underline] to the [label] via [onHover] and [onFocusChange]
+  /// Adds an [TextDecoration.underline] to the [text] via [onHover] and [onFocusChange]
   final bool underline;
 
   /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
@@ -40,7 +40,7 @@ class EzTextButton extends StatefulWidget {
   /// [Text] passthrough
   final TextAlign? textAlign;
 
-  /// [TextButton] wrapper that responds to [isLeftyKey]
+  /// [TextButton] wrapper that automatically underlines its text [onHover] and [onFocusChange]
   const EzTextButton({
     super.key,
     this.onPressed,
