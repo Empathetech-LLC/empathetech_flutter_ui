@@ -66,10 +66,10 @@ class EzScreen extends StatelessWidget {
     Decoration? buildDecoration() {
       if (!useImageDecoration) return null;
 
-      final bool isDark = isDarkTheme(context);
-      final String? imagePath = EzConfig.get(
-        isDark ? darkDecorationImageKey : lightDecorationImageKey,
-      );
+      final String decorationKey = isDarkTheme(context)
+          ? darkDecorationImageKey
+          : lightDecorationImageKey;
+      final String? imagePath = EzConfig.get(decorationKey);
 
       if (imagePath == null || imagePath == noImageValue) {
         return null;
@@ -77,7 +77,7 @@ class EzScreen extends StatelessWidget {
         return BoxDecoration(
           image: DecorationImage(
             image: provideImage(imagePath),
-            fit: BoxFit.fill,
+            fit: boxFitFromName(EzConfig.get('$decorationKey$boxFitSuffix')),
           ),
         );
       }
