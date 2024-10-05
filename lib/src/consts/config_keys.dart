@@ -583,6 +583,9 @@ const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String darkColorSchemeImageKey = 'darkColorSchemeImage';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
 
+/// 'Fit'
+const String boxFitSuffix = 'Fit';
+
 /// [light, dark]
 ///      X
 /// [colorSchemeImageKey, pageImageKey]
