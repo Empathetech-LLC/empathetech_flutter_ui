@@ -113,6 +113,11 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     switch (widget.type) {
       // Margin
       case LayoutSettingType.margin:
+        late final String? backgroundImagePath = EzConfig.get(
+            isDarkTheme(context)
+                ? darkBackgroundImageKey
+                : lightBackgroundImageKey);
+
         return <Widget>[
           spacer,
           EzTextBackground(
@@ -132,14 +137,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             child: Container(
               decoration: BoxDecoration(
                 color: theme.colorScheme.surface,
-                image: DecorationImage(
-                  image: provideImage(
-                    EzConfig.get(isDarkTheme(context)
-                        ? darkBackgroundImageKey
-                        : lightBackgroundImageKey),
-                  ),
-                  fit: BoxFit.fill,
-                ),
+                image: (backgroundImagePath == null ||
+                        backgroundImagePath == noImageValue)
+                    ? null
+                    : DecorationImage(
+                        image: provideImage(backgroundImagePath),
+                        fit: BoxFit.fill,
+                      ),
               ),
               margin: EdgeInsets.all(currValue * 0.25),
             ),
