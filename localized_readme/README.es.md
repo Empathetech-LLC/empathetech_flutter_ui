@@ -24,12 +24,12 @@ EFUI es un kit de inicio para la creación de aplicaciones de [Flutter](https://
 
 ## Tabla de contenidos
 
-* [Instalación](#installation)
-* [Uso](#usage)
+* [Instalación](#instalación)
+* [Uso](#uso)
 * [Demo](#demo)
-* [Contribuyendo](#contributing)
-* [Licencia](#license)
-* [Créditos](#credits)
+* [Contribuyendo](#contribuyendo)
+* [Licencia](#licencia)
+* [Créditos](#créditos)
 
 # Instalación
 
@@ -175,7 +175,7 @@ final GoRouter _yourAppRouter = GoRouter(
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const SettingsScreen();
+            return const SettingsHomeScreen();
           },
           routes:<RouteBase>[
             GoRoute(
@@ -214,7 +214,7 @@ final GoRouter _yourAppRouter = GoRouter(
 
 **¡Es así de fácil!**
 
-*NOTA:* El fragmento de código anterior asume que has renombrado el archivo (recién copiado) `Home.dart` y la clase `HomeScreen()` a `Settings.dart` y `SettingsScreen()`
+*NOTA:* El fragmento de código anterior asume que has renombrado el archivo (recién copiado) `Home.dart` y la clase `HomeScreen()` a `Settings.dart` y `SettingsHomeScreen()`
 
 #### Cómo funciona
 
@@ -298,4 +298,4 @@ O bien: Si hablas inglés y un idioma soportado actualmente, y ves algo que est�
 
 ## Traducciones
 
-Español: [Sara Herrera](https://www.fiverr.com/saraqua)
+[Sara Herrera](https://www.fiverr.com/saraqua)

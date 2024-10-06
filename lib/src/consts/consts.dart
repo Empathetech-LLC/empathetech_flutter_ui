@@ -9,6 +9,9 @@ const String homePath = '/';
 /// 'SUCCESS'
 const String success = 'SUCCESS';
 
+/// example.com/image.jpg
+const String webImgHint = 'example.com/image.jpg';
+
 /// 255
 const int rMax = 255;
 
@@ -19,3 +22,9 @@ const double smallBreakpoint = 700.0;
 /// 1000
 /// https://pub.dev/packages/flutter_adaptive_scaffold
 const double largeBreakpoint = 1000.0;
+
+/// 0.08
+const double highlightOpacity = 0.08;
+
+/// 0.4 == [highlightOpacity] * 5
+const double containerOpacity = 0.4;

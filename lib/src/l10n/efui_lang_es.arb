@@ -36,13 +36,16 @@
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
   "gSetToValue": "{name} está configurado a {value}",
-  "gReset": "Restablecer:",
-  "gResetToValue": "Restablecer {name} a {value}",
+  "gReset": "Restablecer",
+  "gResetTo": "Restablecer:",
+  "gResetValue": "¿Restablecer {name}?",
+  "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
   "gResetWarn": "No se puede deshacer",
 
   "gCreditTo": "Acreditando a:",
-
+  "gYou": "Configurado por ti",
+  
 
 
   "ssPageTitle": "Configuración",
@@ -107,6 +110,8 @@
   "lsMargin": "Margen",
   "lsPadding": "Acolchado",
   "lsSpacing": "Espaciado",
+
+  "lsScroll": "¿Ocultar las barras de desplazamiento?",
 
   "lsResetAll": "¿Restablecer todos los configuración del esquema?",
   
@@ -173,7 +178,7 @@
   "csAddColor": "Añadir un color",
   "csRemove": "Quitar",
   "csReset": "Restablecer",
-  "csResetTo": "Restablecer a...",
+  "csCurrVal": "Valor de color actual:",
 
   "csSchemeBase": "Crear tema\nusando imagen",
   "csOptional": "opcional",
@@ -203,6 +208,8 @@
   "isPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
 
   "isUseForColors": "Actualiza los colores de la app usando esta imagen",
+
+  "isFit": "¿Cómo debe quedar?",
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
 }

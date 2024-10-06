@@ -94,10 +94,18 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get gReset => 'Restablecer:';
+  String get gReset => 'Restablecer';
 
   @override
-  String gResetToValue(Object name, Object value) {
+  String get gResetTo => 'Restablecer:';
+
+  @override
+  String gResetValue(Object name) {
+    return '¿Restablecer $name?';
+  }
+
+  @override
+  String gResetValueTo(Object name, Object value) {
     return 'Restablecer $name a $value';
   }
 
@@ -109,6 +117,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gCreditTo => 'Acreditando a:';
+
+  @override
+  String get gYou => 'Configurado por ti';
 
   @override
   String get ssPageTitle => 'Configuración';
@@ -253,6 +264,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get lsSpacing => 'Espaciado';
+
+  @override
+  String get lsScroll => '¿Ocultar las barras de desplazamiento?';
 
   @override
   String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
@@ -428,7 +442,7 @@ class EFUILangEs extends EFUILang {
   String get csReset => 'Restablecer';
 
   @override
-  String get csResetTo => 'Restablecer a...';
+  String get csCurrVal => 'Valor de color actual:';
 
   @override
   String get csSchemeBase => 'Crear tema\nusando imagen';
@@ -499,6 +513,9 @@ class EFUILangEs extends EFUILang {
   @override
   String get isUseForColors =>
       'Actualiza los colores de la app usando esta imagen';
+
+  @override
+  String get isFit => '¿Cómo debe quedar?';
 
   @override
   String isResetAll(Object themeType) {

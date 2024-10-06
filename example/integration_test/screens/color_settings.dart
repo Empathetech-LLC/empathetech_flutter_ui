@@ -14,8 +14,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-// ToDo: Verify expected color values
-
 void testSuite({
   Locale locale = english,
   bool isLefty = false,
@@ -41,7 +39,7 @@ void testSuite({
         find.widgetWithText(ElevatedButton, l10n.csPageTitle),
       );
 
-      //// Test functionality: Quick settings ////
+      //* Test functionality: Quick settings *//
 
       debugPrint('\nTesting quick settings');
 
@@ -72,7 +70,7 @@ void testSuite({
         isLefty: isLefty,
       );
 
-      //// Test functionality: Advanced settings ////
+      //* Test functionality: Advanced settings *//
 
       debugPrint('\nTesting advanced settings');
 
@@ -107,7 +105,6 @@ void testSuite({
 
       debugPrint('How this works');
       await validateText(tester, l10n.gHowThisWorks);
-      // ToDo: Verify link
 
       debugPrint('Add on primary');
       await touchText(tester, l10n.csOnPrimary);
@@ -225,9 +222,6 @@ Future<void> testCS(
   await chaChaNow(tester, find.byType(Slider));
   await touchText(tester, l10n.gApply);
 
-  /* Tests to unlock when the follow issue is resolved
-  https://github.com/flutter/flutter/issues/98804
-
   debugPrint('\nTesting $text reset\n');
   await holdText(tester, text);
 
@@ -238,7 +232,7 @@ Future<void> testCS(
     await touchText(tester, l10n.gReset);
   }
 
-  await validateText(tester, l10n.csResetTo);
+  await validateText(tester, l10n.gReset);
 
   if (isCupertino) {
     final List<CupertinoDialogAction> actions =
@@ -285,5 +279,4 @@ Future<void> testCS(
     await touchText(tester, l10n.csRemove);
     expect(find.text(text), findsNothing);
   }
-  */
 }

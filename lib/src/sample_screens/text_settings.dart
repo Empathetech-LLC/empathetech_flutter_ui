@@ -7,25 +7,28 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum TextSettingType { display, headline, title, body, label }
 
 class TextSettings extends StatelessWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// Whether the text background opacity setting should be shown
+  final bool showOpacity;
 
-  /// Whether the [TextStyle] spacing controls should be shown
+  /// Optional additional batch settings for the quick tab
+  final List<Widget>? additionalBatchSettings;
+
+  /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   final bool showSpacing;
 
   const TextSettings({
     super.key,
-    this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    this.useImageDecoration = true,
+    this.showOpacity = true,
+    this.additionalBatchSettings,
     this.showSpacing = true,
   });
 
@@ -54,8 +57,9 @@ class TextSettings extends StatelessWidget {
         ),
       ],
       child: _TextSettings(
-        darkBackgroundImageKey: darkBackgroundImageKey,
-        lightBackgroundImageKey: lightBackgroundImageKey,
+        useImageDecoration: useImageDecoration,
+        showOpacity: showOpacity,
+        additionalBatchSettings: additionalBatchSettings,
         showSpacing: showSpacing,
       ),
     );
@@ -63,13 +67,15 @@ class TextSettings extends StatelessWidget {
 }
 
 class _TextSettings extends StatefulWidget {
-  final String? darkBackgroundImageKey;
-  final String? lightBackgroundImageKey;
+  final bool useImageDecoration;
+  final bool showOpacity;
+  final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
 
   const _TextSettings({
-    required this.darkBackgroundImageKey,
-    required this.lightBackgroundImageKey,
+    required this.useImageDecoration,
+    required this.showOpacity,
+    required this.additionalBatchSettings,
     required this.showSpacing,
   });
 
@@ -80,12 +86,8 @@ class _TextSettings extends StatefulWidget {
 class _TextSettingsState extends State<_TextSettings> {
   // Gather the theme data //
 
-  late final bool isDark = PlatformTheme.of(context)!.isDark;
-
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
-
-  static const EzSpacer spacer = EzSpacer();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -99,7 +101,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.tsPageTitle);
+    setPageTitle(l10n.tsPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -107,9 +109,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
@@ -128,16 +128,17 @@ class _TextSettingsState extends State<_TextSettings> {
             ],
             selected: <String>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) {
-              currentTab = selected.first;
-              setState(() {});
-            },
+            onSelectionChanged: (Set<String> selected) =>
+                setState(() => currentTab = selected.first),
           ),
-          spacer,
+          const EzSpacer(),
 
           // Settings
           if (currentTab == quick)
-            const _QuickTextSettings()
+            _QuickTextSettings(
+              widget.showOpacity,
+              widget.additionalBatchSettings,
+            )
           else
             _AdvancedTextSettings(showSpacing: widget.showSpacing),
         ],
@@ -147,7 +148,10 @@ class _TextSettingsState extends State<_TextSettings> {
 }
 
 class _QuickTextSettings extends StatefulWidget {
-  const _QuickTextSettings();
+  final bool showOpacity;
+  final List<Widget>? additionalSettings;
+
+  const _QuickTextSettings(this.showOpacity, this.additionalSettings);
 
   @override
   State<_QuickTextSettings> createState() => _QuickTextSettingsState();
@@ -157,12 +161,24 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  late final Color? surfaceContainer =
+      Theme.of(context).colorScheme.surfaceContainer;
+
   // Gather the build data //
+
+  late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
+
+  late final String oKey =
+      isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+
+  late double currOpacity =
+      EzConfig.getDouble(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
+
+  late Color? backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
   late final DisplayTextStyleProvider displayProvider =
       Provider.of<DisplayTextStyleProvider>(context);
@@ -182,59 +198,131 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        // Required batch settings
         EzRowCol.sym(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Font family
             EzFontFamilyBatchSetting(key: UniqueKey()),
-            swapSpacer,
+            const EzSwapSpacer(),
 
             // Font size
-            EzFontDoubleBatchSetting(key: UniqueKey()),
+            EzTextBackground(
+              EzFontDoubleBatchSetting(key: UniqueKey()),
+              useSurface: true,
+              borderRadius: ezPillShape,
+              backgroundColor: backgroundColor,
+            ),
           ],
         ),
+
+        // Optional additional settings
+        if (widget.additionalSettings != null) ...<Widget>[
+          spacer,
+          ...widget.additionalSettings!,
+        ],
         separator,
 
         // Display preview
-        Text(
-          l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
-          textAlign: TextAlign.center,
-          style: displayProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
+            textAlign: TextAlign.center,
+            style: displayProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
         ),
         spacer,
 
         // Headline preview
-        Text(
-          l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
-          textAlign: TextAlign.center,
-          style: headlineProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
+            textAlign: TextAlign.center,
+            style: headlineProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
         ),
         spacer,
 
         // Title preview
-        Text(
-          l10n.tsTitleP1 + l10n.tsTitleLink,
-          textAlign: TextAlign.center,
-          style: titleProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsTitleP1 + l10n.tsTitleLink,
+            textAlign: TextAlign.center,
+            style: titleProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
         ),
         spacer,
 
         // Body preview
-        Text(
-          l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
-          textAlign: TextAlign.center,
-          style: bodyProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
+            textAlign: TextAlign.center,
+            style: bodyProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
         ),
         spacer,
 
         // Label preview
-        Text(
-          l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
-          textAlign: TextAlign.center,
-          style: labelProvider.value,
+        EzTextBackground(
+          Text(
+            l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
+            textAlign: TextAlign.center,
+            style: labelProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
         ),
         separator,
+
+        if (widget.showOpacity) ...<Widget>[
+          // Text background opacity
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: smallBreakpoint),
+            child: Slider(
+              // Slider values
+              value: currOpacity,
+              min: minOpacity,
+              max: maxOpacity,
+              divisions: 20,
+              label: currOpacity.toStringAsFixed(2),
+
+              // Slider functions
+              onChanged: (double value) {
+                setState(() {
+                  currOpacity = value;
+                  backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+                });
+              },
+              onChangeEnd: (double value) async {
+                await EzConfig.setDouble(oKey, value);
+              },
+
+              // Slider semantics
+              semanticFormatterCallback: (double value) =>
+                  value.toStringAsFixed(2),
+            ),
+          ),
+          EzTextBackground(
+            Text(
+              'Text background opacity',
+              style: labelProvider.value,
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: backgroundColor,
+            margin: colMargin,
+          ),
+          separator,
+        ],
 
         // Reset all
         EzResetButton(
@@ -246,6 +334,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             titleProvider.reset();
             bodyProvider.reset();
             labelProvider.reset();
+
+            currOpacity = EzConfig.getDefault(oKey) ?? 0.0;
+            backgroundColor = surfaceContainer?.withOpacity(currOpacity);
 
             setState(() {});
           },
@@ -272,6 +363,19 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   static const EzSpacer rowSpacer = EzSpacer(vertical: false);
   static const EzSwapSpacer swapSpacer = EzSwapSpacer();
   static const EzSeparator separator = EzSeparator();
+
+  final double margin = EzConfig.get(marginKey);
+
+  static const BorderRadius textFieldRadius = BorderRadius.only(
+    bottomLeft: Radius.circular(4),
+    bottomRight: Radius.circular(4),
+  );
+  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
+    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+  );
+  late final EdgeInsets colMargin = EzInsets.col(margin);
+
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -301,26 +405,67 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.display,
       label: display,
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.headline,
       label: headline,
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.title,
       label: title,
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.body,
       label: body,
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<TextSettingType>(
       value: TextSettingType.label,
       label: label,
+      style: menuButtonStyle,
     ),
   ];
 
   // Define the setting controllers //
+
+  late final Widget fontSizeIcon = EzTextBackground(
+    Icon(
+      Icons.text_fields_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    borderRadius: textFieldRadius,
+  );
+
+  late final Widget letterSpacingIcon = EzTextBackground(
+    Icon(
+      Icons.horizontal_distribute_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    borderRadius: textFieldRadius,
+  );
+
+  late final Widget wordSpacingIcon = EzTextBackground(
+    Icon(
+      Icons.space_bar_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    borderRadius: textFieldRadius,
+  );
+
+  late final Widget lineHeightIcon = EzTextBackground(
+    Icon(
+      Icons.format_line_spacing_sharp,
+      color: colorScheme.onSurface,
+      size: labelProvider.value.fontSize,
+    ),
+    borderRadius: textFieldRadius,
+  );
 
   /// Font family setting(s)
   late final Map<TextSettingType, EzFontFamilySetting> familyControllers =
@@ -358,70 +503,65 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   };
 
   /// Font size setting(s)
-  late final Map<TextSettingType, EzFontDoubleSetting> sizeControllers =
-      <TextSettingType, EzFontDoubleSetting>{
+  late final Map<TextSettingType, Widget> sizeControllers =
+      <TextSettingType, Widget>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$displayFontSizeKey-${displayProvider.id}-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayFontSizeKey-${displayProvider.id}'),
       configKey: displayFontSizeKey,
       initialValue: displayProvider.value.fontSize!,
       min: minDisplay,
       max: maxDisplay,
       notifierCallback: displayProvider.resize,
       style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineFontSizeKey-${headlineProvider.id}-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineFontSizeKey-${headlineProvider.id}'),
       configKey: headlineFontSizeKey,
       initialValue: headlineProvider.value.fontSize!,
       min: minHeadline,
       max: maxHeadline,
       notifierCallback: headlineProvider.resize,
       style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$titleFontSizeKey-${titleProvider.id}-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleFontSizeKey-${titleProvider.id}'),
       configKey: titleFontSizeKey,
       initialValue: titleProvider.value.fontSize!,
       min: minTitle,
       max: maxTitle,
       notifierCallback: titleProvider.resize,
       style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
     TextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$bodyFontSizeKey-${bodyProvider.id}-${bodyProvider.id}'),
+      key: ValueKey<String>('$bodyFontSizeKey-${bodyProvider.id}'),
       configKey: bodyFontSizeKey,
       initialValue: bodyProvider.value.fontSize!,
       min: minBody,
       max: maxBody,
       notifierCallback: bodyProvider.resize,
       style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$labelFontSizeKey-${labelProvider.id}-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelFontSizeKey-${labelProvider.id}'),
       configKey: labelFontSizeKey,
       initialValue: labelProvider.value.fontSize!,
       min: minLabel,
       max: maxLabel,
       notifierCallback: labelProvider.resize,
       style: bodyProvider.value,
-      icon: Icons.text_fields_sharp,
+      icon: fontSizeIcon,
       plusMinus: true,
       tooltip: l10n.tsFontSize,
     ),
@@ -431,34 +571,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzBoldSetting> boldControllers =
       <TextSettingType, EzBoldSetting>{
     TextSettingType.display: EzBoldSetting(
-      key: ValueKey<String>('$displayBoldKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayBoldKey-${displayProvider.id}'),
       configKey: displayBoldKey,
       notifierCallback: displayProvider.bold,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.headline: EzBoldSetting(
-      key: ValueKey<String>('$headlineBoldKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineBoldKey-${headlineProvider.id}'),
       configKey: headlineBoldKey,
       notifierCallback: headlineProvider.bold,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.title: EzBoldSetting(
-      key: ValueKey<String>('$titleBoldKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleBoldKey-${titleProvider.id}'),
       configKey: titleBoldKey,
       notifierCallback: titleProvider.bold,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.body: EzBoldSetting(
       key: ValueKey<String>('$bodyBoldKey-${bodyProvider.id}'),
       configKey: bodyBoldKey,
       notifierCallback: bodyProvider.bold,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.label: EzBoldSetting(
-      key: ValueKey<String>('$labelBoldKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelBoldKey-${labelProvider.id}'),
       configKey: labelBoldKey,
       notifierCallback: labelProvider.bold,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
   };
 
@@ -466,34 +606,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzItalicSetting> italicsControllers =
       <TextSettingType, EzItalicSetting>{
     TextSettingType.display: EzItalicSetting(
-      key: ValueKey<String>('$displayItalicsKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayItalicsKey-${displayProvider.id}'),
       configKey: displayItalicsKey,
       notifierCallback: displayProvider.italic,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.headline: EzItalicSetting(
-      key: ValueKey<String>('$headlineItalicsKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineItalicsKey-${headlineProvider.id}'),
       configKey: headlineItalicsKey,
       notifierCallback: headlineProvider.italic,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.title: EzItalicSetting(
-      key: ValueKey<String>('$titleItalicsKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleItalicsKey-${titleProvider.id}'),
       configKey: titleItalicsKey,
       notifierCallback: titleProvider.italic,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.body: EzItalicSetting(
       key: ValueKey<String>('$bodyItalicsKey-${bodyProvider.id}'),
       configKey: bodyItalicsKey,
       notifierCallback: bodyProvider.italic,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.label: EzItalicSetting(
-      key: ValueKey<String>('$labelItalicsKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelItalicsKey-${labelProvider.id}'),
       configKey: labelItalicsKey,
       notifierCallback: labelProvider.italic,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
   };
 
@@ -501,34 +641,34 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzUnderlineSetting> underlineControllers =
       <TextSettingType, EzUnderlineSetting>{
     TextSettingType.display: EzUnderlineSetting(
-      key: ValueKey<String>('$displayUnderlinedKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayUnderlinedKey-${displayProvider.id}'),
       configKey: displayUnderlinedKey,
       notifierCallback: displayProvider.underline,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.headline: EzUnderlineSetting(
-      key: ValueKey<String>('$headlineUnderlinedKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineUnderlinedKey-${headlineProvider.id}'),
       configKey: headlineUnderlinedKey,
       notifierCallback: headlineProvider.underline,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.title: EzUnderlineSetting(
-      key: ValueKey<String>('$titleUnderlinedKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleUnderlinedKey-${titleProvider.id}'),
       configKey: titleUnderlinedKey,
       notifierCallback: titleProvider.underline,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.body: EzUnderlineSetting(
       key: ValueKey<String>('$bodyUnderlinedKey-${bodyProvider.id}'),
       configKey: bodyUnderlinedKey,
       notifierCallback: bodyProvider.underline,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
     TextSettingType.label: EzUnderlineSetting(
-      key: ValueKey<String>('$labelUnderlinedKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelUnderlinedKey-${labelProvider.id}'),
       configKey: labelUnderlinedKey,
       notifierCallback: labelProvider.underline,
-      size: bodyProvider.value.fontSize,
+      size: titleProvider.value.fontSize,
     ),
   };
 
@@ -536,36 +676,36 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting>
       letterSpacingControllers = <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayLetterSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayLetterSpacingKey-${displayProvider.id}'),
       configKey: displayLetterSpacingKey,
       initialValue: displayProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icons.horizontal_distribute_sharp,
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineLetterSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineLetterSpacingKey-${headlineProvider.id}'),
       configKey: headlineLetterSpacingKey,
       initialValue: headlineProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icons.horizontal_distribute_sharp,
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleLetterSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleLetterSpacingKey-${titleProvider.id}'),
       configKey: titleLetterSpacingKey,
       initialValue: titleProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icons.horizontal_distribute_sharp,
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -576,18 +716,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icons.horizontal_distribute_sharp,
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelLetterSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelLetterSpacingKey-${labelProvider.id}'),
       configKey: labelLetterSpacingKey,
       initialValue: labelProvider.value.letterSpacing!,
       min: minFontLetterSpacing,
       max: maxFontLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
       style: bodyProvider.value,
-      icon: Icons.horizontal_distribute_sharp,
+      icon: letterSpacingIcon,
       tooltip: l10n.tsLetterSpacing,
     ),
   };
@@ -596,36 +736,36 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> wordSpacingControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayWordSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayWordSpacingKey-${displayProvider.id}'),
       configKey: displayWordSpacingKey,
       initialValue: displayProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icons.space_bar_sharp,
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineWordSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineWordSpacingKey-${headlineProvider.id}'),
       configKey: headlineWordSpacingKey,
       initialValue: headlineProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icons.space_bar_sharp,
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleWordSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleWordSpacingKey-${titleProvider.id}'),
       configKey: titleWordSpacingKey,
       initialValue: titleProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icons.space_bar_sharp,
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -636,18 +776,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icons.space_bar_sharp,
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelWordSpacingKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelWordSpacingKey-${labelProvider.id}'),
       configKey: labelWordSpacingKey,
       initialValue: labelProvider.value.wordSpacing!,
       min: minFontWordSpacing,
       max: maxFontWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
       style: bodyProvider.value,
-      icon: Icons.space_bar_sharp,
+      icon: wordSpacingIcon,
       tooltip: l10n.tsWordSpacing,
     ),
   };
@@ -656,36 +796,36 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzFontDoubleSetting> lineHeightControllers =
       <TextSettingType, EzFontDoubleSetting>{
     TextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayFontHeightKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$displayFontHeightKey-${displayProvider.id}'),
       configKey: displayFontHeightKey,
       initialValue: displayProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: displayProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icons.format_line_spacing_sharp,
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>('$headlineFontHeightKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$headlineFontHeightKey-${headlineProvider.id}'),
       configKey: headlineFontHeightKey,
       initialValue: headlineProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: headlineProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icons.format_line_spacing_sharp,
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleFontHeightKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$titleFontHeightKey-${titleProvider.id}'),
       configKey: titleFontHeightKey,
       initialValue: titleProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: titleProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icons.format_line_spacing_sharp,
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.body: EzFontDoubleSetting(
@@ -696,18 +836,18 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       max: maxFontHeight,
       notifierCallback: bodyProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icons.format_line_spacing_sharp,
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
     TextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelFontHeightKey-${bodyProvider.id}'),
+      key: ValueKey<String>('$labelFontHeightKey-${labelProvider.id}'),
       configKey: labelFontHeightKey,
       initialValue: labelProvider.value.height!,
       min: minFontHeight,
       max: maxFontHeight,
       notifierCallback: labelProvider.setHeight,
       style: bodyProvider.value,
-      icon: Icons.format_line_spacing_sharp,
+      icon: lineHeightIcon,
       tooltip: l10n.tsLineHeight,
     ),
   };
@@ -723,23 +863,31 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         EzScrollView(
           scrollDirection: Axis.horizontal,
           mainAxisSize: MainAxisSize.min,
+          primary: false,
           children: <Widget>[
-            Text(
-              l10n.gEditing,
-              style: labelProvider.value,
-              textAlign: TextAlign.center,
+            EzTextBackground(
+              Text(
+                l10n.gEditing,
+                style: labelProvider.value,
+                textAlign: TextAlign.center,
+              ),
             ),
-            spacer,
+            EzSpacer(space: margin),
             DropdownMenu<TextSettingType>(
+              width: dropdownWidth(
+                context: context,
+                entries: styleChoices
+                    .map(
+                        (DropdownMenuEntry<TextSettingType> type) => type.label)
+                    .toList(),
+              ),
+              textStyle: labelProvider.value,
+              dropdownMenuEntries: styleChoices,
+              enableSearch: false,
               initialSelection: editing,
               onSelected: (TextSettingType? value) {
-                if (value != null) {
-                  editing = value;
-                  setState(() {});
-                }
+                if (value != null) setState(() => editing = value);
               },
-              dropdownMenuEntries: styleChoices,
-              textStyle: labelProvider.value,
             ),
           ],
         ),
@@ -773,7 +921,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             ),
 
             // Letter, word, and line spacing
-            if (widget.showSpacing) ...<Widget>{
+            if (widget.showSpacing) ...<Widget>[
               swapSpacer,
               EzScrollView(
                 scrollDirection: Axis.horizontal,
@@ -787,119 +935,143 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   lineHeightControllers[editing]!,
                 ],
               ),
-            }
+            ],
           ],
         ),
         separator,
 
         // Display preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsDisplayP1),
-            EzInlineLink(
-              l10n.tsDisplayLink,
-              key: ValueKey<int>(displayProvider.id),
-              style: displayProvider.value,
-              textAlign: TextAlign.center,
-              onTap: () {
-                editing = TextSettingType.display;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(display),
-            ),
-            EzPlainText(text: l10n.tsDisplayP2),
-          ],
-          style: displayProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsDisplayP1),
+              EzInlineLink(
+                l10n.tsDisplayLink,
+                style: displayProvider.value,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(displayProvider.id),
+                onTap: () {
+                  editing = TextSettingType.display;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(display),
+              ),
+              EzPlainText(text: l10n.tsDisplayP2),
+            ],
+            style: displayProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          useSurface: true,
+          margin: colMargin,
+          borderRadius: ezPillShape,
         ),
         spacer,
 
         // Headline preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsHeadlineP1),
-            EzInlineLink(
-              l10n.tsHeadlineLink,
-              key: ValueKey<int>(headlineProvider.id),
-              style: headlineProvider.value,
-              textAlign: TextAlign.center,
-              onTap: () {
-                editing = TextSettingType.headline;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(headline),
-            ),
-            EzPlainText(text: l10n.tsHeadlineP2),
-          ],
-          style: headlineProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsHeadlineP1),
+              EzInlineLink(
+                l10n.tsHeadlineLink,
+                style: headlineProvider.value,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(headlineProvider.id),
+                onTap: () {
+                  editing = TextSettingType.headline;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(headline),
+              ),
+              EzPlainText(text: l10n.tsHeadlineP2),
+            ],
+            style: headlineProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          useSurface: true,
+          margin: colMargin,
+          borderRadius: ezPillShape,
         ),
         spacer,
 
         // Title preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsTitleP1),
-            EzInlineLink(
-              l10n.tsTitleLink,
-              key: ValueKey<int>(titleProvider.id),
-              style: titleProvider.value,
-              textAlign: TextAlign.center,
-              onTap: () {
-                editing = TextSettingType.title;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(title),
-            ),
-          ],
-          style: titleProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsTitleP1),
+              EzInlineLink(
+                l10n.tsTitleLink,
+                style: titleProvider.value,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(titleProvider.id),
+                onTap: () {
+                  editing = TextSettingType.title;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(title),
+              ),
+            ],
+            style: titleProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          useSurface: true,
+          margin: colMargin,
+          borderRadius: ezPillShape,
         ),
         spacer,
 
         // Body preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsBodyP1),
-            EzInlineLink(
-              l10n.tsBodyLink,
-              key: ValueKey<int>(bodyProvider.id),
-              style: bodyProvider.value,
-              textAlign: TextAlign.center,
-              onTap: () {
-                editing = TextSettingType.body;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(body),
-            ),
-            EzPlainText(text: l10n.tsBodyP2),
-          ],
-          style: bodyProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsBodyP1),
+              EzInlineLink(
+                l10n.tsBodyLink,
+                style: bodyProvider.value,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(bodyProvider.id),
+                onTap: () {
+                  editing = TextSettingType.body;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(body),
+              ),
+              EzPlainText(text: l10n.tsBodyP2),
+            ],
+            style: bodyProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          useSurface: true,
+          margin: colMargin,
+          borderRadius: ezPillShape,
         ),
         spacer,
 
         // Label preview
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(text: l10n.tsLabelP1),
-            EzInlineLink(
-              l10n.tsLabelLink,
-              key: ValueKey<int>(labelProvider.id),
-              style: labelProvider.value,
-              textAlign: TextAlign.center,
-              onTap: () {
-                editing = TextSettingType.label;
-                setState(() {});
-              },
-              semanticsLabel: l10n.tsLinkHint(label),
-            ),
-            EzPlainText(text: l10n.tsLabelP2),
-          ],
-          style: labelProvider.value,
-          textAlign: TextAlign.center,
+        EzTextBackground(
+          EzRichText(
+            <InlineSpan>[
+              EzPlainText(text: l10n.tsLabelP1),
+              EzInlineLink(
+                l10n.tsLabelLink,
+                style: labelProvider.value,
+                textAlign: TextAlign.center,
+                key: ValueKey<int>(labelProvider.id),
+                onTap: () {
+                  editing = TextSettingType.label;
+                  setState(() {});
+                },
+                semanticsLabel: l10n.tsLinkHint(label),
+              ),
+              EzPlainText(text: l10n.tsLabelP2),
+            ],
+            style: labelProvider.value,
+            textAlign: TextAlign.center,
+          ),
+          useSurface: true,
+          margin: colMargin,
+          borderRadius: ezPillShape,
         ),
-
         separator,
 
         // Reset all
@@ -912,6 +1084,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             titleProvider.reset();
             bodyProvider.reset();
             labelProvider.reset();
+
             editing = TextSettingType.display;
 
             setState(() {});

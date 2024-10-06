@@ -20,18 +20,19 @@ class EzFontDoubleSetting extends StatefulWidget {
   final void Function(double) notifierCallback;
 
   /// Label [icon] below the [EzFontDoubleSetting]
-  final IconData icon;
+  final Widget icon;
 
   /// Message for the on hover [Tooltip]
   final String tooltip;
 
-  /// Optionally include plus/minus buttons surrounding the [PlatformTextFormField]
+  /// Optionally include plus/minus buttons surrounding the [TextFormField]
   /// Increments/decrements based on [delta]
   final bool plusMinus;
 
   /// Only relevant if [plusMinus] is true
   final double delta;
 
+  /// [TextStyle] for the [TextFormField]
   final TextStyle? style;
 
   /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size using the results of [measureText] on [sizingString]
@@ -62,21 +63,20 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the theme data //
 
-  late final TextStyle? style =
-      widget.style ?? Theme.of(context).textTheme.bodyLarge;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+  late final String oKey =
+      isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+  late final double fieldOpacity =
+      EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
+  late final Color fieldColor = colorScheme.surface.withOpacity(fieldOpacity);
 
   late final double padding = EzConfig.get(paddingKey);
-  late final double lineHeight = style?.height ?? 1.5;
 
   late final EzSpacer pMSpacer = EzSpacer(
-    space: padding / 4,
+    space: padding / 2,
     vertical: false,
   );
-
-  late final EFUILang l10n = EFUILang.of(context)!;
-
-  late final Color onBackground = Theme.of(context).colorScheme.onSurface;
-  late final Color outlineColor = Theme.of(context).colorScheme.outline;
 
   late final Size sizeLimit = measureText(
     widget.sizingString,
@@ -84,15 +84,20 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     context: context,
   );
 
-  late final double formFieldWidth = sizeLimit.width + padding;
-  late final double formFieldHeight = sizeLimit.height * lineHeight + padding;
+  late double formFieldWidth = sizeLimit.width + padding;
+  late double formFieldHeight = sizeLimit.height + padding;
+
+  late final TextStyle? style =
+      widget.style ?? Theme.of(context).textTheme.bodyLarge;
+
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 
   late double currValue;
   final TextEditingController controller = TextEditingController();
 
-  // Return the build //
+  // Init //
 
   @override
   void initState() {
@@ -100,6 +105,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     currValue = widget.initialValue;
     controller.text = currValue.toString();
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -112,51 +119,51 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               // Minus
-              if (widget.plusMinus) ...<Widget>{
+              if (widget.plusMinus) ...<Widget>[
                 IconButton(
-                  icon: Icon(
-                    PlatformIcons(context).remove,
-                    color:
-                        (currValue > widget.min) ? onBackground : outlineColor,
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
                   ),
                   onPressed: (currValue > widget.min)
                       ? () async {
                           currValue -= widget.delta;
-                          await EzConfig.setDouble(widget.configKey, currValue);
                           controller.text = currValue.toString();
+
+                          await EzConfig.setDouble(widget.configKey, currValue);
                           widget.notifierCallback(currValue);
 
                           setState(() {});
                         }
                       : doNothing,
                   tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-                  alignment: Alignment.bottomCenter,
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    color: (currValue > widget.min)
+                        ? colorScheme.primary
+                        : colorScheme.outline,
+                  ),
                 ),
                 pMSpacer,
-              },
+              ],
 
               // Text field
-              ConstrainedBox(
+              Container(
                 constraints: BoxConstraints(
                   maxWidth: formFieldWidth,
                   maxHeight: formFieldHeight,
                 ),
+                decoration: BoxDecoration(
+                  color: fieldColor,
+                  borderRadius: ezRoundEdge,
+                ),
                 child: TextFormField(
                   controller: controller,
+                  style: style,
+                  textAlign: TextAlign.center,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  onFieldSubmitted: (String stringVal) async {
-                    final double? doubleVal = double.tryParse(stringVal);
-                    if (doubleVal == null ||
-                        doubleVal > widget.max ||
-                        doubleVal < widget.min) return;
-
-                    currValue = doubleVal;
-                    await EzConfig.setDouble(widget.configKey, doubleVal);
-                    widget.notifierCallback(doubleVal);
-                    setState(() {});
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autovalidateMode: AutovalidateMode.onUnfocus,
                   validator: (String? value) {
                     if (value == null) return null;
 
@@ -165,51 +172,68 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                     if (doubleVale == null ||
                         doubleVale < widget.min ||
                         doubleVale > widget.max) {
-                      return '${widget.min}-${widget.max}';
+                      setState(() {
+                        formFieldWidth = (sizeLimit.width + padding) * 2;
+                        formFieldHeight = (sizeLimit.height + padding) * 2;
+                      });
+                      return '${widget.min} <--> ${widget.max}';
                     }
 
+                    setState(() {
+                      formFieldWidth = sizeLimit.width + padding;
+                      formFieldHeight = sizeLimit.height + padding;
+                    });
                     return null;
                   },
-                  style: style,
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
+                  onFieldSubmitted: (String stringVal) async {
+                    final double? doubleVal = double.tryParse(stringVal);
+
+                    if (doubleVal == null ||
+                        doubleVal > widget.max ||
+                        doubleVal < widget.min) return;
+
+                    currValue = doubleVal;
+                    await EzConfig.setDouble(widget.configKey, doubleVal);
+
+                    widget.notifierCallback(doubleVal);
+                    setState(() {});
+                  },
                 ),
               ),
 
-              if (widget.plusMinus) ...<Widget>{
+              if (widget.plusMinus) ...<Widget>[
                 pMSpacer,
 
                 // Plus icon
                 IconButton(
-                  icon: Icon(
-                    PlatformIcons(context).add,
-                    color:
-                        (currValue < widget.max) ? onBackground : outlineColor,
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
                   ),
                   onPressed: (currValue < widget.max)
                       ? () async {
                           currValue += widget.delta;
-                          await EzConfig.setDouble(widget.configKey, currValue);
                           controller.text = currValue.toString();
+
+                          await EzConfig.setDouble(widget.configKey, currValue);
                           widget.notifierCallback(currValue);
 
                           setState(() {});
                         }
                       : doNothing,
                   tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-                  alignment: Alignment.bottomCenter,
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    color: (currValue < widget.max)
+                        ? colorScheme.primary
+                        : colorScheme.outline,
+                  ),
                 ),
-              }
+              ],
             ],
           ),
-          EzSpacer(space: padding / 8),
 
           // Label icon
-          Icon(
-            widget.icon,
-            size: formFieldHeight / 4,
-            color: onBackground,
-          ),
+          widget.icon,
         ],
       ),
     );

@@ -10,7 +10,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Mimics the leading back button in an app bar
 /// But is designed for the actions widget
-/// Useful for [Hand.left]
+/// Useful for [EzConfig]'s [isLeftyKey]
 class EzBackAction extends StatelessWidget {
   const EzBackAction({super.key});
 

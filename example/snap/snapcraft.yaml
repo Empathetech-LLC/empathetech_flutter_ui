@@ -1,3 +1,5 @@
+# Incomplete
+# See example/linux/packaging/* and example/distribute_options.yaml for currently in use build scripts
 name: open-ui
 version: 0.1.0
 summary: Built for you, by you

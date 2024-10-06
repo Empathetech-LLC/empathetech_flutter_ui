@@ -5,8 +5,8 @@
 
 import '../../../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
@@ -40,6 +40,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
+  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
 
   static const EzSpacer spacer = EzSpacer();
@@ -56,20 +57,14 @@ class _ColorSettingState extends State<EzColorSetting> {
     final Color backup = currColor;
 
     return ezColorPicker(
-      context: context,
+      context,
       startColor: backup,
-      onColorChange: (Color chosenColor) {
-        // Update currColor
-        currColor = chosenColor;
-        setState(() {});
-      },
+      onColorChange: (Color chosenColor) =>
+          setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.value);
       },
-      onDeny: () {
-        currColor = backup;
-        setState(() {});
-      },
+      onDeny: () => setState(() => currColor = backup),
     );
   }
 
@@ -96,6 +91,9 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       final int recommended = getTextColor(backgroundColor).value;
 
+      // Just open a color picker if the value is already what's recommended
+      if (recommended == currColor.value) return openColorPicker(context);
+
       // Define action button parameters
       final String denyMsg = l10n.csUseCustom;
 
@@ -107,12 +105,18 @@ class _ColorSettingState extends State<EzColorSetting> {
             currColor = Color(recommended);
             await EzConfig.setInt(widget.configKey, recommended);
             setState(() {});
-            Navigator.of(dialogContext).pop(recommended);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(recommended);
+            }
           }
 
           void onDeny() async {
             final dynamic chosen = await openColorPicker(context);
-            Navigator.of(dialogContext).pop(chosen);
+
+            if (dialogContext.mounted) {
+              Navigator.of(dialogContext).pop(chosen);
+            }
           }
 
           return EzAlertDialog(
@@ -131,7 +135,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     ? CircleAvatar(
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                         child: Icon(
                           PlatformIcons(context).eyeSlash,
                           size: theme.textTheme.titleLarge?.fontSize,
@@ -140,22 +144,25 @@ class _ColorSettingState extends State<EzColorSetting> {
                     : CircleAvatar(
                         backgroundColor: Color(recommended),
                         foregroundColor: getTextColor(Color(recommended)),
-                        radius: padding * sqrt(2),
+                        radius: padding + margin,
                       ),
               ),
             ],
             materialActions: ezMaterialActions(
               context: context,
               onConfirm: onConfirm,
-              onDeny: onDeny,
+              confirmIsDestructive: true,
               denyMsg: denyMsg,
+              onDeny: onDeny,
+              denyIsDestructive: true,
             ),
             cupertinoActions: ezCupertinoActions(
               context: context,
               onConfirm: onConfirm,
-              onDeny: onDeny,
-              denyMsg: denyMsg,
               confirmIsDestructive: true,
+              denyMsg: denyMsg,
+              onDeny: onDeny,
+              denyIsDestructive: true,
             ),
           );
         },
@@ -167,70 +174,58 @@ class _ColorSettingState extends State<EzColorSetting> {
   /// If there is no [EzConfig.defaults] value, the key will simply be removed from [EzConfig.prefs]
   /// If a value is found, a preview of the reset color is shown and the user can confirm/deny
   Future<dynamic> reset(BuildContext context) async {
-    final int? resetValue = EzConfig.getDefault(widget.configKey);
+    return showPlatformDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        final int? resetValue = EzConfig.getDefault(widget.configKey);
+        final String currColorLabel =
+            currColor.value.toRadixString(16).toUpperCase().substring(2);
 
-    if (resetValue == null) {
-      return EzConfig.remove(widget.configKey);
-    } else {
-      final Color resetColor = Color(resetValue);
+        void onConfirm() async {
+          // Remove the user's configKey and reset the current state
+          await EzConfig.remove(widget.configKey);
+          if (resetValue != null) currColor = Color(resetValue);
+          setState(() {});
 
-      return showPlatformDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          void onConfirm() async {
-            // Remove the user's configKey and reset the current state
-            currColor = resetColor;
-            await EzConfig.remove(widget.configKey);
-            setState(() {});
-            Navigator.of(dialogContext).pop(resetColor);
-          }
+          if (dialogContext.mounted) Navigator.of(dialogContext).pop();
+        }
 
-          void onDeny() => Navigator.of(dialogContext).pop();
+        void onDeny() => Navigator.of(dialogContext).pop();
 
-          return EzAlertDialog(
-            title: Text(
-              l10n.csResetTo,
-              textAlign: TextAlign.center,
+        return EzAlertDialog(
+          title: Text(
+            l10n.gResetValue(
+              getColorName(context, widget.configKey).toLowerCase(),
             ),
-            // Reset color preview
-            contents: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: getTextColor(resetColor)),
-                ),
-                child: resetColor == Colors.transparent
-                    ? CircleAvatar(
-                        backgroundColor: theme.colorScheme.surface,
-                        foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding * sqrt(2),
-                        child: Icon(
-                          PlatformIcons(context).eyeSlash,
-                          size: theme.textTheme.titleLarge?.fontSize,
-                        ),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: resetColor,
-                        foregroundColor: getTextColor(resetColor),
-                        radius: padding * sqrt(2),
-                      ),
+            textAlign: TextAlign.center,
+          ),
+          contents: <Widget>[
+            Text(l10n.csCurrVal, textAlign: TextAlign.center),
+            EzSpacer(space: margin),
+            EzTextIconButton(
+              onPressed: () => Clipboard.setData(
+                ClipboardData(text: currColorLabel),
               ),
-            ],
-            materialActions: ezMaterialActions(
-              context: context,
-              onConfirm: onConfirm,
-              onDeny: onDeny,
+              icon: const Icon(Icons.copy),
+              label: currColorLabel,
             ),
-            cupertinoActions: ezCupertinoActions(
-              context: context,
-              onConfirm: onConfirm,
-              onDeny: onDeny,
-            ),
-            needsClose: false,
-          );
-        },
-      );
-    }
+          ],
+          materialActions: ezMaterialActions(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            onDeny: onDeny,
+          ),
+          cupertinoActions: ezCupertinoActions(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            onDeny: onDeny,
+          ),
+          needsClose: false,
+        );
+      },
+    );
   }
 
   /// Opens an [EzAlertDialog] with the all optional actions
@@ -249,24 +244,27 @@ class _ColorSettingState extends State<EzColorSetting> {
               ),
               contents: <Widget>[
                 // Remove from list
-                ElevatedButton.icon(
+                EzElevatedIconButton(
                   onPressed: () {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
                   },
                   icon: Icon(PlatformIcons(context).delete),
-                  label: Text(l10n.csRemove),
+                  label: l10n.csRemove,
                 ),
                 spacer,
 
                 // Reset to default
-                ElevatedButton.icon(
+                EzElevatedIconButton(
                   onPressed: () async {
                     final dynamic resetResponse = await reset(context);
-                    Navigator.of(dialogContext).pop(resetResponse);
+
+                    if (dialogContext.mounted) {
+                      Navigator.of(dialogContext).pop(resetResponse);
+                    }
                   },
                   icon: Icon(PlatformIcons(context).refresh),
-                  label: Text(l10n.csReset),
+                  label: l10n.csReset,
                 ),
               ],
               needsClose: true,
@@ -285,7 +283,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       button: true,
       hint: l10n.csPickerHint(label),
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: EzElevatedIconButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
+          ),
           onPressed: () => changeColor(context),
           onLongPress: () => options(context),
           icon: Container(
@@ -299,7 +300,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ? CircleAvatar(
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
-                    radius: padding * sqrt(2),
+                    radius: padding + margin,
                     child: Icon(
                       PlatformIcons(context).eyeSlash,
                       size: theme.textTheme.titleLarge?.fontSize,
@@ -308,18 +309,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                 : CircleAvatar(
                     backgroundColor: currColor,
                     foregroundColor: getTextColor(currColor),
-                    radius: padding * sqrt(2),
+                    radius: padding + margin,
                   ),
           ),
-          label: Text(label),
-          style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.all(padding * 0.75),
-            ),
-            foregroundColor: WidgetStateProperty.all(
-              theme.colorScheme.onSurface,
-            ),
-          ),
+          label: label,
         ),
       ),
     );

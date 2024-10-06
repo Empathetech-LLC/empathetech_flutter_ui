@@ -44,7 +44,7 @@ void testSuite({
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
-      //// Test functionality ////
+      //* Test functionality *//
 
       // Background image  //
 

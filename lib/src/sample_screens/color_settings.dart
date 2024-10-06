@@ -5,16 +5,15 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettings extends StatefulWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// Optional addition quick settings
+  final List<Widget>? additionalQuickSettings;
 
   /// Initial set of color configKeys to display in the advanced settings (light theme)
   final List<String> lightStarterSet;
@@ -24,23 +23,23 @@ class ColorSettings extends StatefulWidget {
 
   const ColorSettings({
     super.key,
-    this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    this.useImageDecoration = true,
+    this.additionalQuickSettings,
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
-      darkTertiaryKey,
-      darkSurfaceContainerKey,
       darkSurfaceKey,
       darkOnSurfaceKey,
+      darkSurfaceContainerKey,
+      darkSurfaceTintKey,
     ],
     this.lightStarterSet = const <String>[
       lightPrimaryKey,
       lightSecondaryKey,
-      lightTertiaryKey,
-      lightSurfaceContainerKey,
       lightSurfaceKey,
       lightOnSurfaceKey,
+      lightSurfaceContainerKey,
+      lightSurfaceTintKey,
     ],
   });
 
@@ -51,13 +50,11 @@ class ColorSettings extends StatefulWidget {
 class _ColorSettingsState extends State<ColorSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
-
-  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
   late final ThemeData theme = Theme.of(context);
+  late bool isDark = isDarkTheme(context);
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 
@@ -92,8 +89,8 @@ class _ColorSettingsState extends State<ColorSettings> {
         darkColorSchemeImageKey,
         lightColorSchemeImageKey,
       });
-      currList = List<String>.from(defaultList);
-      setState(() {});
+
+      setState(() => currList = List<String>.from(defaultList));
     },
   );
 
@@ -102,7 +99,7 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.csPageTitle);
+    setPageTitle(l10n.csPageTitle, theme.colorScheme.primary);
   }
 
   // Return the build //
@@ -110,18 +107,18 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
-          Text(
-            l10n.gEditingTheme(themeProfile),
-            style: theme.textTheme.labelLarge,
-            textAlign: TextAlign.center,
+          EzTextBackground(
+            Text(
+              l10n.gEditingTheme(themeProfile),
+              style: theme.textTheme.labelLarge,
+              textAlign: TextAlign.center,
+            ),
           ),
-          spacer,
+          EzSpacer(space: EzConfig.get(marginKey)),
 
           // Mode switch
           SegmentedButton<String>(
@@ -137,10 +134,8 @@ class _ColorSettingsState extends State<ColorSettings> {
             ],
             selected: <String>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) {
-              currentTab = selected.first;
-              setState(() {});
-            },
+            onSelectionChanged: (Set<String> selected) =>
+                setState(() => currentTab = selected.first),
           ),
           separator,
 
@@ -150,6 +145,7 @@ class _ColorSettingsState extends State<ColorSettings> {
               l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
+              additionalSettings: widget.additionalQuickSettings,
             )
           else
             _AdvancedColorSettings(
@@ -164,7 +160,7 @@ class _ColorSettingsState extends State<ColorSettings> {
 
           // Reset button
           resetButton,
-          spacer,
+          const EzSpacer(),
         ],
       ),
     );
@@ -175,11 +171,13 @@ class _QuickColorSettings extends StatefulWidget {
   final EFUILang l10n;
   final bool isDark;
   final String themeProfile;
+  final List<Widget>? additionalSettings;
 
   const _QuickColorSettings({
     required this.l10n,
     required this.isDark,
     required this.themeProfile,
+    required this.additionalSettings,
   });
 
   @override
@@ -216,6 +214,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
               dialogTitle: fromImageTitle,
               updateTheme: Brightness.dark,
               updateThemeOption: false,
+              showFitOption: false,
             ),
           ),
         )
@@ -229,6 +228,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
               dialogTitle: fromImageTitle,
               updateTheme: Brightness.light,
               updateThemeOption: false,
+              showFitOption: false,
             ),
           ),
         );
@@ -244,9 +244,18 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          // MonoChrome
           const EzMonoChromeColorsSetting(),
           spacer,
-          fromImageButton
+
+          // From image
+          fromImageButton,
+
+          // Additional settings
+          if (widget.additionalSettings != null) ...<Widget>[
+            spacer,
+            ...widget.additionalSettings!,
+          ],
         ],
       ),
     );
@@ -284,10 +293,10 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   // Gather the theme data //
 
+  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
-  final double spacing = EzConfig.get(spacingKey);
 
-  static const EzSpacer spacer = EzSpacer();
+  late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
 
   // Define custom Widgets //
 
@@ -297,38 +306,33 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   List<Widget> dynamicColorSettings() {
     final List<Widget> toReturn = <Widget>[];
 
-    Widget personalSpace(Widget child) {
-      return Padding(
-        padding: EdgeInsets.only(
-          left: spacing / 2,
-          right: spacing / 2,
-          bottom: spacing,
-        ),
-        child: child,
-      );
-    }
-
     for (final String key in currList) {
       if (defaultSet.contains(key)) {
         // Non-removable buttons
         toReturn.add(
-          personalSpace(EzColorSetting(
-            key: ValueKey<String>(key),
-            configKey: key,
-          )),
+          Padding(
+            padding: wrapPadding,
+            child: (EzColorSetting(
+              key: ValueKey<String>(key),
+              configKey: key,
+            )),
+          ),
         );
       } else {
         toReturn.add(
           // Removable buttons
-          personalSpace(EzColorSetting(
-            key: ValueKey<String>(key),
-            configKey: key,
-            onRemove: () async {
-              currList.remove(key);
-              await EzConfig.setStringList(userColorsKey, currList);
-              setState(() {});
-            },
-          )),
+          Padding(
+            padding: wrapPadding,
+            child: (EzColorSetting(
+              key: ValueKey<String>(key),
+              configKey: key,
+              onRemove: () async {
+                currList.remove(key);
+                await EzConfig.setStringList(userColorsKey, currList);
+                setState(() {});
+              },
+            )),
+          ),
         );
       }
     }
@@ -346,35 +350,11 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       final Color liveColor = getLiveColor(context, configKeyKey);
 
       return Container(
-        padding: EdgeInsets.symmetric(
-          vertical: spacing / 2,
-          horizontal: spacing,
-        ),
-        child: ElevatedButton.icon(
+        padding: EzInsets.col(padding),
+        child: EzElevatedIconButton(
           key: ValueKey<String>(configKeyKey),
-          icon: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.colorScheme.primaryContainer,
-              ),
-            ),
-            child: CircleAvatar(
-              backgroundColor: liveColor,
-              radius: padding * sqrt(2),
-              child: liveColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
-                  : null,
-            ),
-          ),
-          label: Text(getColorName(context, configKeyKey)),
-          style: theme.elevatedButtonTheme.style!.copyWith(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.all(padding * 0.75),
-            ),
-            foregroundColor: WidgetStatePropertyAll<Color?>(
-              theme.colorScheme.onSurface,
-            ),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: () {
             currList.add(configKeyKey);
@@ -384,6 +364,22 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             setState(() {});
             setModalState(() {});
           },
+          icon: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: theme.colorScheme.primaryContainer,
+              ),
+            ),
+            child: CircleAvatar(
+              backgroundColor: liveColor,
+              radius: padding + margin,
+              child: liveColor == Colors.transparent
+                  ? Icon(PlatformIcons(context).eyeSlash)
+                  : null,
+            ),
+          ),
+          label: getColorName(context, configKeyKey),
         ),
       );
     }).toList();
@@ -392,7 +388,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       0,
       EzLink(
         l10n.gHowThisWorks,
-        style: theme.textTheme.labelLarge,
+        style: theme.textTheme.labelLarge!,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
         semanticsLabel: l10n.gHowThisWorksHint,
@@ -433,17 +429,14 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             ),
           ),
         ),
-        spacer,
+        const EzSeparator(),
 
         // Add a color button
-        TextButton.icon(
-          icon: Icon(PlatformIcons(context).addCircledOutline),
-          label: Text(l10n.csAddColor),
+        EzTextIconButton(
           onPressed: () async {
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
-              showDragHandle: true,
               builder: (BuildContext context) => StatefulBuilder(
                 builder: (
                   BuildContext context,
@@ -467,6 +460,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
+          icon: Icon(PlatformIcons(context).addCircledOutline),
+          label: l10n.csAddColor,
         ),
       ],
     );

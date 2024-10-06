@@ -41,9 +41,8 @@ void testSuite({
 
       debugPrint('\nValidating text');
       await validateText(tester, l10n.gHowThisWorks);
-      // ToDo: Validate link
 
-      //// Test functionality ////
+      //* Test functionality *//
 
       // Margin //
       debugPrint('\nTesting margin');

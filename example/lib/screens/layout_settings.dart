@@ -8,16 +8,10 @@ import '../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class LayoutSettingsScreen extends StatefulWidget {
+class LayoutSettingsScreen extends StatelessWidget {
   const LayoutSettingsScreen({super.key});
 
   @override
-  State<LayoutSettingsScreen> createState() => _LayoutSettingsScreenState();
-}
-
-class _LayoutSettingsScreenState extends State<LayoutSettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return const OpenUIScaffold(body: LayoutSettings());
-  }
+  Widget build(BuildContext context) =>
+      const OpenUIScaffold(body: LayoutSettings());
 }

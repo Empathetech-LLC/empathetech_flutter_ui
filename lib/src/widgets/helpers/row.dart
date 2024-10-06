@@ -15,13 +15,13 @@ class EzRow extends StatelessWidget {
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
 
-  /// Whether this should respond to [Hand] changes
-  /// If true, [children] will be reversed when [Hand.left]
+  /// Whether this should respond to [isLeftyKey]'s status
+  /// If true, [children] will be reversed
   final bool reverseHands;
 
   final List<Widget> children;
 
-  /// [Row] wrapper that automatically supports [Hand] changes via [reverseHands]
+  /// [Row] wrapper that automatically supports [isLeftyKey]'s status via [reverseHands]
   const EzRow({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,

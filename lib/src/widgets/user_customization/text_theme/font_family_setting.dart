@@ -41,6 +41,8 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   late final ThemeData theme = Theme.of(context);
 
+  final double padding = EzConfig.get(paddingKey);
+
   // Define the build data  //
 
   late String currFontFamily = firstWord(
@@ -52,8 +54,9 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: googleStyleNames[entry.key]!,
-      style: theme.textButtonTheme.style?.copyWith(
-        textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
+      style: TextButton.styleFrom(
+        textStyle: entry.value,
+        padding: EzInsets.wrap(padding),
       ),
     );
   }).toList();
@@ -65,8 +68,14 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
     return Tooltip(
       message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
       child: DropdownMenu<String>(
-        initialSelection: currFontFamily,
+        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+        textStyle: fuseWithGFont(
+          starter: widget.baseStyle,
+          gFont: currFontFamily,
+        ),
         dropdownMenuEntries: entries,
+        enableSearch: false,
+        initialSelection: currFontFamily,
         onSelected: (String? fontFamily) async {
           if (fontFamily == null) return;
           currFontFamily = fontFamily;
@@ -77,11 +86,6 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
           setState(() {});
         },
-        textStyle: fuseWithGFont(
-          starter: widget.baseStyle,
-          gFont: currFontFamily,
-        ),
-        width: smallBreakpoint / 4,
       ),
     );
   }

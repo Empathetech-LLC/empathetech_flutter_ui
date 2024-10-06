@@ -6,19 +6,18 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LayoutSettings extends StatefulWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// Optional additional settings
+  final List<Widget>? additionalSettings;
 
   const LayoutSettings({
     super.key,
-    this.darkBackgroundImageKey,
-    this.lightBackgroundImageKey,
+    this.useImageDecoration = true,
+    this.additionalSettings,
   });
 
   @override
@@ -28,22 +27,27 @@ class LayoutSettings extends StatefulWidget {
 class _LayoutSettingsState extends State<LayoutSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
-
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextStyle style = Theme.of(context).textTheme.bodyLarge!;
+
+  // Define build data //
+
+  bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
 
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.lsPageTitle);
+    setPageTitle(l10n.lsPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -51,12 +55,11 @@ class _LayoutSettingsState extends State<LayoutSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
+
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,
@@ -90,23 +93,42 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           ),
           separator,
 
+          // Hide scroll
+          EzRow(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              EzTextBackground(
+                Text(
+                  l10n.lsScroll,
+                  style: style,
+                  textAlign: TextAlign.center,
+                ),
+                margin: EzInsets.col(margin),
+              ),
+              Checkbox(
+                value: hideScroll,
+                onChanged: (bool? value) async {
+                  if (value == null) return;
+                  await EzConfig.setBool(hideScrollKey, value);
+                  setState(() => hideScroll = value);
+                },
+              ),
+            ],
+          ),
+          separator,
+
+          // Additional settings
+          if (widget.additionalSettings != null) ...<Widget>[
+            ...widget.additionalSettings!,
+            separator,
+          ],
+
           // Local reset all
           EzResetButton(
             dialogTitle: l10n.lsResetAll,
             onConfirm: () async {
               await EzConfig.removeKeys(layoutKeys.keys.toSet());
             },
-          ),
-          separator,
-
-          // Help
-          EzLink(
-            EFUILang.of(context)!.gHowThisWorks,
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-            url: Uri.parse(understandingLayout),
-            semanticsLabel: EFUILang.of(context)!.gHowThisWorksHint,
-            tooltip: understandingLayout,
           ),
           spacer,
         ],

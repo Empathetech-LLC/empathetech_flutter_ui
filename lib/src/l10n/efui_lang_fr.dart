@@ -94,10 +94,18 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get gReset => 'Réinitialiser :';
+  String get gReset => 'Réinitialiser';
 
   @override
-  String gResetToValue(Object name, Object value) {
+  String get gResetTo => 'Réinitialiser :';
+
+  @override
+  String gResetValue(Object name) {
+    return 'Réinitialiser $name ?';
+  }
+
+  @override
+  String gResetValueTo(Object name, Object value) {
     return 'Réinitialiser $name à $value';
   }
 
@@ -109,6 +117,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gCreditTo => 'Crédits à :';
+
+  @override
+  String get gYou => 'Défini par vous';
 
   @override
   String get ssPageTitle => 'Paramètres';
@@ -253,6 +264,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get lsSpacing => 'Espacement';
+
+  @override
+  String get lsScroll => 'Masquer les barres de défilement ?';
 
   @override
   String get lsResetAll =>
@@ -429,7 +443,7 @@ class EFUILangFr extends EFUILang {
   String get csReset => 'Réinitialiser';
 
   @override
-  String get csResetTo => 'Réinitialiser à...';
+  String get csCurrVal => 'Valeur de couleur actuelle :';
 
   @override
   String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
@@ -501,6 +515,9 @@ class EFUILangFr extends EFUILang {
   @override
   String get isUseForColors =>
       'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
+
+  @override
+  String get isFit => 'Comment devrait-il s\'adapter ?';
 
   @override
   String isResetAll(Object themeType) {

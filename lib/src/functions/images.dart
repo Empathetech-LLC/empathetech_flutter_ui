@@ -43,8 +43,32 @@ Future<String?> saveImage({
     await EzConfig.setString(prefsPath, image.path);
     return image.path;
   } on Exception catch (e) {
-    final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-    await logAlert(context: context, message: errorMsg);
+    if (context.mounted) {
+      final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
+      await logAlert(context, message: errorMsg);
+    }
     return null;
+  }
+}
+
+/// Given a [BoxFit].name, return the associated [BoxFit]
+BoxFit? boxFitFromName(String? name) {
+  switch (name) {
+    case 'contain':
+      return BoxFit.contain;
+    case 'cover':
+      return BoxFit.cover;
+    case 'fill':
+      return BoxFit.fill;
+    case 'fitWidth':
+      return BoxFit.fitWidth;
+    case 'fitHeight':
+      return BoxFit.fitHeight;
+    case 'none':
+      return BoxFit.none;
+    case 'scaleDown':
+      return BoxFit.scaleDown;
+    default:
+      return null;
   }
 }

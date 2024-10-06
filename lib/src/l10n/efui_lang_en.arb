@@ -36,12 +36,15 @@
   "gAttention": "Attention",
   "gCurrently": "Currently:",
   "gSetToValue": "{name} is set to {value}",
-  "gReset": "Reset:",
-  "gResetToValue": "Reset {name} to {value}",
+  "gReset": "Reset",
+  "gResetTo": "Reset:",
+  "gResetValue": "Reset {name}?",
+  "gResetValueTo": "Reset {name} to {value}",
   "gResetAll": "Reset all",
   "gResetWarn": "Cannot be undone",
 
   "gCreditTo": "Credit to:",
+  "gYou": "Set by you",
 
 
 
@@ -108,6 +111,8 @@
   "lsPadding": "Padding",
   "lsSpacing": "Spacing",
 
+  "lsScroll": "Hide scrollbars?",
+
   "lsResetAll": "Reset all layout settings?",
   
   
@@ -173,7 +178,7 @@
   "csAddColor": "Add a color",
   "csRemove": "Remove",
   "csReset": "Reset",
-  "csResetTo": "Reset to...",
+  "csCurrVal": "Current color value:",
 
   "csSchemeBase": "Build scheme\nfrom image",
   "csOptional": "optional",
@@ -203,6 +208,8 @@
   "isPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
 
   "isUseForColors": "Update the app colors using this image",
+
+  "isFit": "How should it fit?",
 
   "isResetAll": "Reset all {themeType} theme images?"
 }

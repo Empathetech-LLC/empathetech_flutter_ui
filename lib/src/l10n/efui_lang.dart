@@ -263,14 +263,26 @@ abstract class EFUILang {
   /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
-  /// **'Reset:'**
+  /// **'Reset'**
   String get gReset;
 
-  /// No description provided for @gResetToValue.
+  /// No description provided for @gResetTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset:'**
+  String get gResetTo;
+
+  /// No description provided for @gResetValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset {name}?'**
+  String gResetValue(Object name);
+
+  /// No description provided for @gResetValueTo.
   ///
   /// In en, this message translates to:
   /// **'Reset {name} to {value}'**
-  String gResetToValue(Object name, Object value);
+  String gResetValueTo(Object name, Object value);
 
   /// No description provided for @gResetAll.
   ///
@@ -289,6 +301,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Credit to:'**
   String get gCreditTo;
+
+  /// No description provided for @gYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Set by you'**
+  String get gYou;
 
   /// No description provided for @ssPageTitle.
   ///
@@ -565,6 +583,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Spacing'**
   String get lsSpacing;
+
+  /// No description provided for @lsScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide scrollbars?'**
+  String get lsScroll;
 
   /// No description provided for @lsResetAll.
   ///
@@ -908,11 +932,11 @@ abstract class EFUILang {
   /// **'Reset'**
   String get csReset;
 
-  /// No description provided for @csResetTo.
+  /// No description provided for @csCurrVal.
   ///
   /// In en, this message translates to:
-  /// **'Reset to...'**
-  String get csResetTo;
+  /// **'Current color value:'**
+  String get csCurrVal;
 
   /// No description provided for @csSchemeBase.
   ///
@@ -1033,6 +1057,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Update the app colors using this image'**
   String get isUseForColors;
+
+  /// No description provided for @isFit.
+  ///
+  /// In en, this message translates to:
+  /// **'How should it fit?'**
+  String get isFit;
 
   /// No description provided for @isResetAll.
   ///

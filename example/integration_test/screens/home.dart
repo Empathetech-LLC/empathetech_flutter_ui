@@ -37,14 +37,13 @@ void testSuite({
       await validateText(tester, l10n.ssDominantHand);
       await validateText(tester, l10n.ssThemeMode);
 
-      //// Test functionality ////
+      //* Test functionality *//
 
       // Options menu //
 
       debugPrint('\nTesting options menu');
       await touch(tester, find.byType(MenuAnchor).last);
 
-      // ToDo: Test options functionality
       expect(find.text(l10n.gBYO).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 

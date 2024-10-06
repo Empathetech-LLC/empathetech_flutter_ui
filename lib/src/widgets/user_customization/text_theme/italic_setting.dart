@@ -31,11 +31,13 @@ class EzItalicSetting extends StatefulWidget {
 class _EzItalicSettingState extends State<EzItalicSetting> {
   // Gather the theme data //
 
-  late bool isItalic = EzConfig.get(widget.configKey) ?? false;
-
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
+  late bool isItalic = EzConfig.get(widget.configKey) ?? false;
+
   // Define the build //
+
+  late final String tooltip = EFUILang.of(context)!.tsItalic;
 
   void swapState() async {
     isItalic = !isItalic;
@@ -44,26 +46,30 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
     setState(() {});
   }
 
-  late final String tooltip = EFUILang.of(context)!.tsItalic;
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
     return isItalic
         ? IconButton(
-            icon: const Icon(Icons.format_italic),
-            color: colorScheme.primary,
-            iconSize: widget.size,
+            style: IconButton.styleFrom(
+              foregroundColor: colorScheme.primary,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              iconSize: widget.size,
+            ),
             onPressed: swapState,
             tooltip: tooltip,
+            icon: const Icon(Icons.format_italic),
           )
         : IconButton(
-            icon: const Icon(Icons.format_italic_outlined),
-            color: colorScheme.outline,
-            iconSize: widget.size,
+            style: IconButton.styleFrom(
+              foregroundColor: colorScheme.outline,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              iconSize: widget.size,
+            ),
             onPressed: swapState,
             tooltip: tooltip,
+            icon: const Icon(Icons.format_italic_outlined),
           );
   }
 }

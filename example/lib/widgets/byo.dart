@@ -9,26 +9,19 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class BYOButton extends StatelessWidget {
-  final BuildContext parentContext;
-  final EFUILang l10n;
-
-  const BYOButton({
-    super.key,
-    required this.parentContext,
-    required this.l10n,
-  });
+  const BYOButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final EFUILang l10n = EFUILang.of(context)!;
+
     final String text = l10n.gBYO;
-    return MenuItemButton(
+
+    return EzMenuButton(
       onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
-      leadingIcon: Icon(
-        LineIcons.github,
-        size: Theme.of(context).textTheme.titleLarge?.fontSize,
-      ),
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-      child: Text(text),
+      icon: const Icon(LineIcons.github),
+      label: text,
     );
   }
 }

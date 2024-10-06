@@ -22,10 +22,9 @@ class EzHighContrastColorsSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = PlatformTheme.of(context)!.isDark;
-    final Color onSurface = Theme.of(context).colorScheme.onSurface;
+    final bool isDark = isDarkTheme(context);
 
-    return ElevatedButton.icon(
+    return EzElevatedIconButton(
       onPressed: isDark
           ? () async {
               await storeColorScheme(
@@ -39,11 +38,11 @@ class EzHighContrastColorsSetting extends StatelessWidget {
                 brightness: Brightness.light,
               );
             },
-      icon: Icon(Icons.contrast, color: onSurface),
-      label: Text(
-        EFUILang.of(context)!.csHighContrast,
-        style: TextStyle(color: onSurface),
+      icon: Icon(
+        Icons.contrast,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
+      label: EFUILang.of(context)!.csHighContrast,
     );
   }
 }

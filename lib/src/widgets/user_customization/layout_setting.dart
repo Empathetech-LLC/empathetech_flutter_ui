@@ -94,8 +94,6 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final String label = lstName(context, widget.type);
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
-  static const EzSeparator rowSeparator = EzSeparator(vertical: false);
 
   late final ThemeData theme = Theme.of(context);
 
@@ -110,41 +108,45 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   /// Return the preview Widget(s) for the passed [LayoutSettingType]
   List<Widget> _buildPreview(BuildContext context) {
-    final String currLabel =
-        '${l10n.gCurrently} ${currValue.toStringAsFixed(widget.decimals)}';
+    final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
       // Margin
       case LayoutSettingType.margin:
+        late final String? backgroundImagePath = EzConfig.get(
+            isDarkTheme(context)
+                ? darkBackgroundImageKey
+                : lightBackgroundImageKey);
+
         return <Widget>[
           spacer,
-
-          // Live preview && label
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Label
-              Flexible(
-                child: Text(
-                  currLabel,
-                  style: bodyStyle,
-                  textAlign: TextAlign.center,
-                ),
+          EzTextBackground(
+            Text(
+              valString,
+              style: bodyStyle?.copyWith(color: theme.colorScheme.surface),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.all(currValue),
+            backgroundColor: theme.colorScheme.onSurface,
+          ),
+          spacer,
+          Container(
+            color: theme.colorScheme.onSurface,
+            height: heightOf(context) * 0.25,
+            width: widthOf(context) * 0.25,
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                image: (backgroundImagePath == null ||
+                        backgroundImagePath == noImageValue)
+                    ? null
+                    : DecorationImage(
+                        image: provideImage(backgroundImagePath),
+                        fit: BoxFit.fill,
+                      ),
               ),
-              rowSeparator,
-
-              // Preview
-              Container(
-                color: theme.colorScheme.onSurface,
-                height: heightOf(context) * 0.1,
-                width: widthOf(context) * 0.1,
-                child: Container(
-                  color: theme.colorScheme.surface,
-                  margin: EdgeInsets.all(currValue * 0.1),
-                ),
-              ),
-            ],
+              margin: EdgeInsets.all(currValue * 0.25),
+            ),
           ),
           spacer,
         ];
@@ -161,26 +163,22 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                style: theme.elevatedButtonTheme.style!.copyWith(
-                  padding: WidgetStateProperty.all(
-                    EdgeInsets.all(currValue),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(currValue),
+                  foregroundColor: theme.colorScheme.onSurface,
                 ),
                 onPressed: doNothing,
                 child: Text(l10n.gCurrently),
               ),
-              rowSpacer,
+              const EzSpacer(vertical: false),
               ElevatedButton(
-                style: theme.elevatedButtonTheme.style!.copyWith(
-                  padding: WidgetStateProperty.all(
-                    EdgeInsets.all(currValue),
-                  ),
-                  shape: const WidgetStatePropertyAll<OutlinedBorder>(
-                    CircleBorder(),
-                  ),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(currValue),
+                  foregroundColor: theme.colorScheme.onSurface,
+                  shape: const CircleBorder(),
                 ),
                 onPressed: doNothing,
-                child: Text(currValue.toStringAsFixed(widget.decimals)),
+                child: Text(valString),
               ),
             ],
           ),
@@ -201,13 +199,19 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSurface,
+                ),
                 onPressed: doNothing,
-                child: Text(currLabel),
+                child: Text(l10n.gCurrently),
               ),
               EzSpacer(space: currValue, vertical: false),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSurface,
+                ),
                 onPressed: doNothing,
-                child: Text(currLabel),
+                child: Text(valString),
               ),
             ],
           ),
@@ -218,8 +222,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     }
   }
 
-  /// Assemble the final list of widgets to build for [_SliderSettingState]
-  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [ElevatedButton.icon]
+  /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzElevatedIconButton]
   List<Widget> buildModal({
     required BuildContext context,
     required StateSetter setModalState,
@@ -254,9 +257,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
       // Slider
       ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 700, // Chosen via visual inspection
-        ),
+        constraints: const BoxConstraints(maxWidth: smallBreakpoint),
         child: Slider(
           // Slider values
           value: currValue,
@@ -283,7 +284,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       spacer,
 
       // Reset button
-      ElevatedButton.icon(
+      EzElevatedIconButton(
         onPressed: () async {
           await EzConfig.remove(widget.configKey);
           setModalState(() {
@@ -291,9 +292,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           });
         },
         icon: Icon(PlatformIcons(context).refresh),
-        label: Text(
-          '${l10n.gReset} ${defaultValue.toStringAsFixed(widget.decimals)}',
-        ),
+        label:
+            '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
       spacer,
     ];
@@ -303,11 +303,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return EzElevatedIconButton(
       onPressed: () => showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        showDragHandle: true,
         builder: (BuildContext context) => StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return EzScrollView(
@@ -321,7 +320,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ),
       ),
       icon: widget.type.icon,
-      label: Text(label),
+      label: label,
     );
   }
 }

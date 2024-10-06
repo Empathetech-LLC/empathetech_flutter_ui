@@ -1,7 +1,7 @@
 # Empathetech Flutter UI <br><br> Build apps for anyone
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.md)
-[![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.es.md)
-[![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/README.fr.md)
+[![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.es.md)
+[![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.fr.md)
 
 EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a solid foundation in every aspect of digital accessibility:
 
@@ -29,7 +29,6 @@ EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a s
 * [Demo](#demo)
 * [Contributing](#contributing)
 * [License](#license)
-* [Credits](#credits)
 
 # Installation
 
@@ -175,7 +174,7 @@ final GoRouter _yourAppRouter = GoRouter(
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const SettingsScreen();
+            return const SettingsHomeScreen();
           },
           routes:<RouteBase>[
             GoRoute(
@@ -214,7 +213,7 @@ And boom!
 
 **It's that Ez!**
 
-*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsScreen()`
+*NOTE:* The above code snippet assumes you renamed the (just copied) `Home.dart` file and `HomeScreen()` class to `Settings.dart` and `SettingsHomeScreen()`
 
 #### How it works
 
@@ -293,9 +292,3 @@ Many thanks for any and all donations!
 # License
 
 [GNU GPLv3](LICENSE)
-
-# Credits
-
-## Translations
-
-Thank you to [M Ramirez](https://www.linkedin.com/in/mauro-ramirez-rivas) for verifying EFUI's [Spanish](./lib/src/l10n/efui_es.arb) translations!

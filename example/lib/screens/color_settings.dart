@@ -8,16 +8,10 @@ import '../widgets/export.dart';
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class ColorSettingsScreen extends StatefulWidget {
+class ColorSettingsScreen extends StatelessWidget {
   const ColorSettingsScreen({super.key});
 
   @override
-  State<ColorSettingsScreen> createState() => _ColorSettingsScreenState();
-}
-
-class _ColorSettingsScreenState extends State<ColorSettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return const OpenUIScaffold(body: ColorSettings());
-  }
+  Widget build(BuildContext context) =>
+      const OpenUIScaffold(body: ColorSettings());
 }

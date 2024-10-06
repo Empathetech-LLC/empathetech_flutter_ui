@@ -11,6 +11,8 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
   final Widget body;
+
+  /// [FloatingActionButton]
   final Widget? fab;
 
   /// Standardized [Scaffold] for all of the EFUI example app's screens
@@ -27,14 +29,12 @@ class OpenUIScaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final Size appBarTextSize = measureText(
-      appTitle,
-      style: Theme.of(context).appBarTheme.titleTextStyle,
-      context: context,
-    );
-
-    final double toolbarHeight =
-        appBarTextSize.height + EzConfig.get(paddingKey);
+    final double toolbarHeight = measureText(
+          appTitle,
+          style: Theme.of(context).appBarTheme.titleTextStyle,
+          context: context,
+        ).height +
+        EzConfig.get(marginKey);
 
     // Define custom widgets //
 
@@ -47,16 +47,12 @@ class OpenUIScaffold extends StatelessWidget {
             controller.open();
           }
         },
-        icon: const Icon(Icons.more_vert),
         tooltip: l10n.gOptions,
+        icon: const Icon(Icons.more_vert),
       ),
       menuChildren: <Widget>[
-        BYOButton(parentContext: context, l10n: l10n),
-        FeedbackButton(
-          parentContext: context,
-          scaffoldMessengerKey: scaffoldMessengerKey,
-          l10n: l10n,
-        ),
+        const BYOButton(),
+        FeedbackButton(scaffoldMessengerKey: scaffoldMessengerKey, l10n: l10n),
       ],
     );
 
@@ -77,6 +73,8 @@ class OpenUIScaffold extends StatelessWidget {
 
             // Title
             title: const Text(appTitle),
+            centerTitle: true,
+            titleSpacing: 0,
 
             // Actions (aka trailing aka right)
             actions:
@@ -86,7 +84,15 @@ class OpenUIScaffold extends StatelessWidget {
 
         // Body
         body: body,
+
+        // FAB
         floatingActionButton: fab,
+        floatingActionButtonLocation: isLefty
+            ? FloatingActionButtonLocation.startFloat
+            : FloatingActionButtonLocation.endFloat,
+
+        // Prevents the keyboard from pushing the body up
+        resizeToAvoidBottomInset: false,
       ),
     );
 

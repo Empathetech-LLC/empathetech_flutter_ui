@@ -8,9 +8,18 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzInlineLink extends WidgetSpan {
+  /// Link message
   final String text;
+
   final Key? key;
-  final Color? color;
+
+  /// Optional [Color] to overwrite the default [ColorScheme.primary]
+  final Color? textColor;
+
+  /// Optional [TextDecoration] color override
+  /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
+  final Color? decorationColor;
+
   final TextAlign? textAlign;
 
   /// Destination function
@@ -19,7 +28,7 @@ class EzInlineLink extends WidgetSpan {
   /// Destination URL
   final Uri? url;
 
-  /// Message for screen readers when the link is focused
+  /// Message for screen readers
   /// Don't repeat [text] here, it is appended automatically
   final String semanticsLabel;
 
@@ -42,7 +51,8 @@ class EzInlineLink extends WidgetSpan {
 
     // EzLink
     this.key,
-    this.color,
+    this.textColor,
+    this.decorationColor,
     this.textAlign,
     this.onTap,
     this.url,
@@ -57,8 +67,10 @@ class EzInlineLink extends WidgetSpan {
             text,
             key: key,
             style: style,
-            color: color,
+            textColor: textColor,
+            decorationColor: decorationColor,
             textAlign: textAlign,
+            padding: EdgeInsets.zero,
             onTap: onTap,
             url: url,
             semanticsLabel: semanticsLabel,

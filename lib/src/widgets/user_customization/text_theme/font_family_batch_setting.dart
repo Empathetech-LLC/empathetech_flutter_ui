@@ -10,8 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
-  /// Updates all font families at once
   const EzFontFamilyBatchSetting({super.key});
 
   @override
@@ -24,6 +22,8 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = EFUILang.of(context)!;
+
+  final double padding = EzConfig.get(paddingKey);
 
   late final DisplayTextStyleProvider displayProvider;
   late final HeadlineTextStyleProvider headlineProvider;
@@ -89,8 +89,9 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: googleStyleNames[entry.key]!,
-      style: theme.textButtonTheme.style?.copyWith(
-        textStyle: WidgetStatePropertyAll<TextStyle>(entry.value),
+      style: TextButton.styleFrom(
+        textStyle: entry.value,
+        padding: EzInsets.wrap(padding),
       ),
     );
   }).toList();
@@ -107,7 +108,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
         return EzAlertDialog(
           title: Text(
-            l10n.ssLanguages,
+            l10n.gAttention,
             textAlign: TextAlign.center,
           ),
           content: Text(
@@ -117,12 +118,15 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
           materialActions: ezMaterialActions(
             context: dialogContext,
             onConfirm: onConfirm,
+            confirmIsDestructive: true,
             onDeny: onDeny,
           ),
           cupertinoActions: ezCupertinoActions(
             context: dialogContext,
             onConfirm: onConfirm,
+            confirmIsDestructive: true,
             onDeny: onDeny,
+            denyIsDefault: true,
           ),
           needsClose: false,
         );
@@ -149,8 +153,11 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     return Tooltip(
       message: l10n.tsFontFamily,
       child: DropdownMenu<String>(
-        initialSelection: currFontFamily,
+        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+        textStyle: bodyProvider.value,
         dropdownMenuEntries: entries,
+        enableSearch: false,
+        initialSelection: currFontFamily,
         onSelected: (String? fontFamily) async {
           if (fontFamily == null) return;
 
@@ -178,8 +185,6 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
           setState(() {});
         },
-        textStyle: bodyProvider.value,
-        width: smallBreakpoint / 4,
       ),
     );
   }

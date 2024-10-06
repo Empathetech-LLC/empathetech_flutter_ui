@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,19 +21,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
-
-  late final EFUILang l10n = EFUILang.of(context)!;
-
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
+
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   // Set the page title //
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(efuiL);
+    setPageTitle(efuiL, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -43,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       body: EzScreen(
-        decorationImageKey: isDark ? darkPageImageKey : lightPageImageKey,
         child: EzScrollView(
           children: <Widget>[
             // Functionality disclaimer
@@ -60,33 +56,37 @@ class _HomeScreenState extends State<HomeScreen> {
             spacer,
 
             const EzLocaleSetting(),
-            spacer,
+            separator,
 
             // Text settings
-            ElevatedButton(
-              onPressed: () => context.go(textSettingsRoute),
-              child: Text(l10n.tsPageTitle),
+            EzElevatedIconButton(
+              onPressed: () => context.goNamed(textSettingsPath),
+              icon: const Icon(Icons.navigate_next),
+              label: l10n.tsPageTitle,
             ),
             spacer,
 
             // Layout settings
-            ElevatedButton(
-              onPressed: () => context.go(layoutSettingsRoute),
-              child: Text(l10n.lsPageTitle),
+            EzElevatedIconButton(
+              onPressed: () => context.goNamed(layoutSettingsPath),
+              icon: const Icon(Icons.navigate_next),
+              label: l10n.lsPageTitle,
             ),
             spacer,
 
             // Color settings
-            ElevatedButton(
-              onPressed: () => context.go(colorSettingsRoute),
-              child: Text(l10n.csPageTitle),
+            EzElevatedIconButton(
+              onPressed: () => context.goNamed(colorSettingsPath),
+              icon: const Icon(Icons.navigate_next),
+              label: l10n.csPageTitle,
             ),
             spacer,
 
             // Image settings
-            ElevatedButton(
-              onPressed: () => context.go(imageSettingsRoute),
-              child: Text(l10n.isPageTitle),
+            EzElevatedIconButton(
+              onPressed: () => context.goNamed(imageSettingsPath),
+              icon: const Icon(Icons.navigate_next),
+              label: l10n.isPageTitle,
             ),
             separator,
 

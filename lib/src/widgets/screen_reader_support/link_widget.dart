@@ -3,19 +3,15 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLinkWidget extends StatefulWidget {
   final Widget child;
 
-  /// Message for screen readers
-  final String semanticLabel;
-
-  final bool isImage;
-
-  /// Tooltip for on hover/focus
-  final String tooltip;
+  /// Optional [BoxShadow]s to be drawn on hover/focus the [EzLinkWidget]
+  final List<BoxShadow>? shadows;
 
   /// Destination function
   final void Function()? onTap;
@@ -23,24 +19,30 @@ class EzLinkWidget extends StatefulWidget {
   /// Destination URL
   final Uri? url;
 
-  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkWidget]
-  final List<BoxShadow>? shadows;
+  /// Message for screen readers
+  final String semanticLabel;
+
+  /// Defaults to false
+  /// Is this an image?
+  final bool isImage;
+
+  /// Tooltip for on hover/focus
+  final String tooltip;
 
   /// [Widget] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Requires [semanticLabel] for screen readers
   /// Automatically draws a [BoxShadow] which mimics button hover based on...
   /// https://m3.material.io/foundations/interaction/states/state-layers
   /// The [shadows] can be overridden
   const EzLinkWidget({
     super.key,
     required this.child,
+    this.shadows,
+    this.onTap,
+    this.url,
     required this.semanticLabel,
     this.isImage = false,
     required this.tooltip,
-    this.onTap,
-    this.url,
-    this.shadows,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -51,21 +53,22 @@ class EzLinkWidget extends StatefulWidget {
 class _EzLinkWidgetState extends State<EzLinkWidget> {
   // Gather the theme data //
 
-  bool _shadow = false;
+  List<BoxShadow> boxShadow = <BoxShadow>[];
 
-  late final List<BoxShadow> _shadows = widget.shadows ??
+  late final List<BoxShadow> shadows = widget.shadows ??
       <BoxShadow>[
         BoxShadow(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.10),
+          color: Theme.of(context)
+              .colorScheme
+              .primary
+              .withOpacity(highlightOpacity),
         ),
       ];
 
   // Define the styling function(s) //
 
-  void _showShadow(bool showIt) {
-    _shadow = showIt;
-    setState(() {});
-  }
+  void showShadow(bool sun) =>
+      setState(() => boxShadow = sun ? shadows : <BoxShadow>[]);
 
   // Return the build //
 
@@ -75,23 +78,21 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
       message: widget.tooltip,
       excludeFromSemantics: true,
       child: Semantics(
-        image: widget.isImage,
-        link: true,
         hint: widget.semanticLabel,
+        link: true,
+        image: widget.isImage,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
-            onFocusChange: (bool hasFocus) => _showShadow(hasFocus),
+            onFocusChange: (bool hasFocus) => showShadow(hasFocus),
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
-              onEnter: (_) => _showShadow(true),
-              onExit: (_) => _showShadow(false),
+              onEnter: (_) => showShadow(true),
+              onExit: (_) => showShadow(false),
               child: GestureDetector(
                 onTap: widget.onTap ?? () => launchUrl(widget.url!),
                 child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: _shadow ? _shadows : <BoxShadow>[],
-                  ),
+                  decoration: BoxDecoration(boxShadow: boxShadow),
                   child: widget.child,
                 ),
               ),

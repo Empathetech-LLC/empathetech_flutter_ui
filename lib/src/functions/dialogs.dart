@@ -10,8 +10,8 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an [EzAlertDialog] to notify the user
-Future<void> logAlert({
-  required BuildContext context,
+Future<void> logAlert(
+  BuildContext context, {
   String? title,
   required String message,
 }) async {
@@ -34,10 +34,10 @@ Future<void> logAlert({
 }
 
 /// Log the passed message and display a [SnackBar] to notify the user
-Future<void> logSnack({
-  required ScaffoldMessengerState state,
-  required String message,
-}) async {
+Future<void> logSnack(
+  ScaffoldMessengerState state,
+  String message,
+) async {
   debugPrint(message);
   state.showSnackBar(SnackBar(
     content: Text(message, textAlign: TextAlign.center),
@@ -46,8 +46,8 @@ Future<void> logSnack({
 }
 
 /// Wrap a [ColorPicker] in an [EzAlertDialog]
-Future<dynamic> ezColorPicker({
-  required BuildContext context,
+Future<dynamic> ezColorPicker(
+  BuildContext context, {
   String? title,
   required Color startColor,
   required void Function(Color chosenColor) onColorChange,
@@ -59,6 +59,7 @@ Future<dynamic> ezColorPicker({
   return showPlatformDialog(
     context: context,
     builder: (BuildContext dialogContext) {
+      final double padding = EzConfig.get(paddingKey);
       final double spacing = EzConfig.get(spacingKey);
 
       void confirm() {
@@ -76,44 +77,44 @@ Future<dynamic> ezColorPicker({
           title ?? EFUILang.of(context)!.csPickerTitle,
           textAlign: TextAlign.center,
         ),
-        contents: <Widget>[
-          ColorPicker(
-            color: startColor,
-            padding: EdgeInsets.zero,
-            mainAxisSize: MainAxisSize.min,
-            spacing: spacing / 2,
-            runSpacing: spacing / 2,
-            columnSpacing: spacing,
-            pickersEnabled: const <ColorPickerType, bool>{
-              ColorPickerType.both: false,
-              ColorPickerType.primary: false,
-              ColorPickerType.accent: false,
-              ColorPickerType.bw: false,
-              ColorPickerType.custom: false,
-              ColorPickerType.customSecondary: false,
-              ColorPickerType.wheel: true
-            },
-            enableOpacity: true,
-            showColorName: true,
-            showColorCode: true,
-            showRecentColors: true,
-            onColorChanged: onColorChange,
-          ),
-        ],
+        content: ColorPicker(
+          color: startColor,
+          mainAxisSize: MainAxisSize.min,
+          padding: EdgeInsets.zero,
+          spacing: spacing / 2,
+          runSpacing: spacing / 2,
+          columnSpacing: spacing,
+          pickersEnabled: const <ColorPickerType, bool>{
+            ColorPickerType.both: false,
+            ColorPickerType.primary: false,
+            ColorPickerType.accent: false,
+            ColorPickerType.bw: false,
+            ColorPickerType.custom: false,
+            ColorPickerType.customSecondary: false,
+            ColorPickerType.wheel: true
+          },
+          onColorChanged: onColorChange,
+          showRecentColors: true,
+          enableOpacity: true,
+          opacityThumbRadius: padding,
+          opacityTrackHeight: padding * 2,
+          showColorCode: true,
+        ),
         materialActions: ezMaterialActions(
           context: context,
-          onConfirm: confirm,
-          onDeny: deny,
           confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
+          onConfirm: confirm,
+          confirmIsDestructive: true,
           denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+          onDeny: deny,
         ),
         cupertinoActions: ezCupertinoActions(
           context: context,
-          onConfirm: confirm,
-          onDeny: deny,
           confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+          onConfirm: confirm,
           confirmIsDestructive: true,
+          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+          onDeny: deny,
         ),
         needsClose: false,
       );

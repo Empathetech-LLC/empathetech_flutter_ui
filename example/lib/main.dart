@@ -3,9 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'screens/export.dart';
-import 'utils/export.dart';
-import 'widgets/export.dart';
+import './screens/export.dart';
+import './utils/export.dart';
+import './widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,16 +17,24 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 void main() async {
+  // Setup the app //
+
   // Most apps need this
   // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Set device orientation(s)
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
   // Initialize EzConfig //
 
-  // Get a SharedPreferences instance to... share
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Make it so
   EzConfig.init(
     // Paths to any locally stored images the app uses
     assetPaths: <String>{},
@@ -37,13 +45,8 @@ void main() async {
     defaults: empathetechConfig,
   );
 
-  // Set device orientation(s)
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]);
+  // Run the app //
+  // With a feedback wrapper
 
   late final TextStyle lightFeedbackText = buildBody(Colors.black);
   late final TextStyle darkFeedbackText = buildBody(Colors.white);
@@ -57,8 +60,8 @@ void main() async {
       bottomSheetDescriptionStyle: lightFeedbackText,
       bottomSheetTextInputStyle: lightFeedbackText,
       sheetIsDraggable: true,
-      dragHandleColor: Colors.grey,
-      colorScheme: const ColorScheme.light(primary: empathGoldenrod),
+      dragHandleColor: Colors.black,
+      colorScheme: const ColorScheme.light(primary: empathPurple),
     ),
     darkTheme: FeedbackThemeData(
       background: Colors.grey,
@@ -67,8 +70,8 @@ void main() async {
       bottomSheetDescriptionStyle: darkFeedbackText,
       bottomSheetTextInputStyle: darkFeedbackText,
       sheetIsDraggable: true,
-      dragHandleColor: Colors.grey,
-      colorScheme: const ColorScheme.dark(primary: empathGoldenrod),
+      dragHandleColor: Colors.white,
+      colorScheme: const ColorScheme.dark(primary: empathEucalyptus),
     ),
     themeMode: EzConfig.getThemeMode(),
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
@@ -89,33 +92,28 @@ final GoRouter router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: homePath,
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
-      },
+      name: homePath,
+      builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
         GoRoute(
           path: textSettingsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const TextSettingsScreen();
-          },
+          name: textSettingsPath,
+          builder: (_, __) => const TextSettingsScreen(),
         ),
         GoRoute(
           path: layoutSettingsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const LayoutSettingsScreen();
-          },
+          name: layoutSettingsPath,
+          builder: (_, __) => const LayoutSettingsScreen(),
         ),
         GoRoute(
           path: colorSettingsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ColorSettingsScreen();
-          },
+          name: colorSettingsPath,
+          builder: (_, __) => const ColorSettingsScreen(),
         ),
         GoRoute(
           path: imageSettingsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ImageSettingsScreen();
-          },
+          name: imageSettingsPath,
+          builder: (_, __) => const ImageSettingsScreen(),
         ),
       ],
     ),

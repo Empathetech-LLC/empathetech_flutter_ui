@@ -68,18 +68,17 @@ class EzResetButton extends StatelessWidget {
             dialogTitle ?? l10n.ssResetAll,
             textAlign: TextAlign.center,
           ),
-          contents: <Widget>[
-            Text(
-              dialogContent ?? l10n.gResetWarn,
-              textAlign: TextAlign.center,
-            ),
-          ],
+          content: Text(
+            dialogContent ?? l10n.gResetWarn,
+            textAlign: TextAlign.center,
+          ),
           materialActions: ezMaterialActions(
             context: context,
             onConfirm: () {
               confirm();
               Navigator.of(dialogContext).pop();
             },
+            confirmIsDestructive: true,
             onDeny: () {
               deny();
               Navigator.of(dialogContext).pop();
@@ -91,11 +90,11 @@ class EzResetButton extends StatelessWidget {
               confirm();
               Navigator.of(dialogContext).pop();
             },
+            confirmIsDestructive: true,
             onDeny: () {
               deny();
               Navigator.of(dialogContext).pop();
             },
-            confirmIsDestructive: true,
             denyIsDefault: true,
           ),
           needsClose: false,
@@ -105,10 +104,10 @@ class EzResetButton extends StatelessWidget {
 
     // Return the build //
 
-    return ElevatedButton.icon(
-      icon: Icon(PlatformIcons(context).refresh),
-      label: Text(label ?? l10n.gResetAll),
+    return EzElevatedIconButton(
       onPressed: resetDialog,
+      icon: Icon(PlatformIcons(context).refresh),
+      label: label ?? l10n.gResetAll,
     );
   }
 }

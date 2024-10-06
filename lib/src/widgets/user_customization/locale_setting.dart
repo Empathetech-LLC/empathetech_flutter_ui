@@ -25,25 +25,44 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the theme data //
 
-  late Locale currLocale = Localizations.localeOf(context);
-
   static const EzSpacer spacer = EzSpacer();
+
+  final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
+
+  late final Color primary = Theme.of(context).colorScheme.primary;
+
+  late Locale currLocale = Localizations.localeOf(context);
 
   late EFUILang l10n = EFUILang.of(context)!;
 
   // Gather the list items //
 
-  CountryFlag _flag(Locale locale) {
+  Widget flag(Locale locale) {
     final Locale flagLocale = locale;
 
     return (flagLocale.countryCode == null)
-        ? CountryFlag.fromLanguageCode(
-            flagLocale.languageCode,
-            shape: const Circle(),
+        ? Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: primary),
+            ),
+            child: CountryFlag.fromLanguageCode(
+              flagLocale.languageCode,
+              shape: const Circle(),
+              width: padding * 2 + margin,
+            ),
           )
-        : CountryFlag.fromCountryCode(
-            flagLocale.countryCode!,
-            shape: const Circle(),
+        : Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: primary),
+            ),
+            child: CountryFlag.fromCountryCode(
+              flagLocale.countryCode!,
+              shape: const Circle(),
+              width: padding * 2 + margin,
+            ),
           );
   }
 
@@ -63,19 +82,20 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           if (locale.countryCode != null) localeData.add(locale.countryCode!);
 
           buttons.addAll(<Widget>[
-            ElevatedButton.icon(
+            EzElevatedIconButton(
               onPressed: () async {
                 await EzConfig.setStringList(localeKey, localeData);
                 currLocale = locale;
                 l10n = await EFUILang.delegate.load(locale);
                 setState(() {});
-                Navigator.of(dialogContext).pop(locale);
+
+                if (dialogContext.mounted) {
+                  Navigator.of(dialogContext).pop(locale);
+                }
               },
-              icon: _flag(locale),
-              label: Text(
-                LocaleNames.of(context)!.nameOf(locale.languageCode)!,
-                textAlign: TextAlign.center,
-              ),
+              icon: flag(locale),
+              label: LocaleNames.of(context)!.nameOf(locale.languageCode)!,
+              labelPadding: false,
             ),
             spacer,
           ]);
@@ -101,10 +121,11 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       button: true,
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
-        child: ElevatedButton.icon(
+        child: EzElevatedIconButton(
           onPressed: () => _chooseLocale(context),
-          icon: _flag(currLocale),
-          label: Text(l10n.ssLanguage),
+          icon: flag(currLocale),
+          label: l10n.ssLanguage,
+          labelPadding: false,
         ),
       ),
     );

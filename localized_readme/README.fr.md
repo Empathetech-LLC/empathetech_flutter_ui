@@ -24,11 +24,11 @@ EFUI est un kit de démarrage pour créer des applications [Flutter](https://flu
 ## Sommaire
 
 * [Installation](#installation)
-* [Utilisation](#usage)
-* [Démo](#demo)
-* [Contributions](#contributing)
-* [Licence](#license)
-* [Crédits](#credits)
+* [Utilisation](#utilisation)
+* [Démo](#démo)
+* [Contributions](#contributions)
+* [Licence](#licence)
+* [Crédits](#crédits)
 
 # Installation
 
@@ -174,7 +174,7 @@ final GoRouter _yourAppRouter = GoRouter(
         GoRoute(
           path: settingsRoute,
           builder: (BuildContext context, GoRouterState state) {
-            return const SettingsScreen();
+            return const SettingsHomeScreen();
           },
           routes:<RouteBase>[
             GoRoute(
@@ -213,7 +213,7 @@ Et voilà !
 
 **C'est aussi simple que ça !**
 
-*REMARQUE :* L'extrait de code ci-dessus suppose que vous avez renommé le fichier `Home.dart` (qui vient d'être copié) ainsi que la classe `HomeScreen()` respectivement en `Settings.dart` et `SettingsScreen()`.
+*REMARQUE :* L'extrait de code ci-dessus suppose que vous avez renommé le fichier `Home.dart` (qui vient d'être copié) ainsi que la classe `HomeScreen()` respectivement en `Settings.dart` et `SettingsHomeScreen()`.
 
 #### Fonctionnement
 
@@ -246,7 +246,7 @@ Heureusement, EFUI vous soutient pour ça aussi !
 
 <br>Au risque de vous surcharger en informations, cela devrait suffire à vous lancer. Une fois que vous vous sentirez à l'aise, le dépôt a été organisé pour faciliter l'exploration !
 
-# Démos
+# Démo
 
 ### [Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)
 ### [iOS](https://apps.apple.com/us/app/open-ui/id6499560244)
@@ -297,4 +297,4 @@ Merci beaucoup pour tous vos dons !
 
 ## Traductions
 
-Français | [Alexis Nguyen](https://www.fiverr.com/alexisnguyen2)
+[Alexis Nguyen](https://www.fiverr.com/alexisnguyen2)

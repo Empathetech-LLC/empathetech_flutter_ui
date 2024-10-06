@@ -7,19 +7,27 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSettings extends StatefulWidget {
-  /// Dark theme value for [EzScreen.decorationImageKey]
-  final String? darkBackgroundImageKey;
+  /// For [EzScreen.useImageDecoration]
+  final bool useImageDecoration;
 
-  /// Light theme value for [EzScreen.decorationImageKey]
-  final String? lightBackgroundImageKey;
+  /// Optional additional settings
+  /// Recommended to use [EzImageSetting]
+  final List<Widget>? additionalSettings;
+
+  /// Optional credits for dark background image
+  final String? darkBackgroundCredits;
+
+  /// Optional credits for light background image
+  final String? lightBackgroundCredits;
 
   const ImageSettings({
     super.key,
-    this.lightBackgroundImageKey,
-    this.darkBackgroundImageKey,
+    this.useImageDecoration = true,
+    this.darkBackgroundCredits,
+    this.lightBackgroundCredits,
+    this.additionalSettings,
   });
 
   @override
@@ -29,15 +37,14 @@ class ImageSettings extends StatefulWidget {
 class _ImageSettingsState extends State<ImageSettings> {
   // Gather the theme data //
 
-  late bool isDark = PlatformTheme.of(context)!.isDark;
-  int keyValue = Random().nextInt(rMax);
-
   static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
 
+  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the page content //
+
+  int keyValue = Random().nextInt(rMax);
 
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
@@ -47,7 +54,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.isPageTitle);
+    setPageTitle(l10n.isPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -55,18 +62,18 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
-      decorationImageKey: isDark
-          ? widget.darkBackgroundImageKey
-          : widget.lightBackgroundImageKey,
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
-          Text(
-            l10n.gEditingTheme(themeProfile),
-            style: Theme.of(context).textTheme.labelLarge,
-            textAlign: TextAlign.center,
+          EzTextBackground(
+            Text(
+              l10n.gEditingTheme(themeProfile),
+              style: Theme.of(context).textTheme.labelLarge,
+              textAlign: TextAlign.center,
+            ),
           ),
-          separator,
+          EzSpacer(space: EzConfig.get(marginKey)),
 
           // Page image setting
           EzScrollView(
@@ -76,26 +83,32 @@ class _ImageSettingsState extends State<ImageSettings> {
             child: isDark
                 ? EzImageSetting(
                     key: ValueKey<String>('dark$keyValue'),
-                    configKey: darkPageImageKey,
+                    configKey: darkBackgroundImageKey,
+                    credits: widget.darkBackgroundCredits,
                     label: l10n.isBackground,
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
                     key: ValueKey<String>('light$keyValue'),
-                    configKey: lightPageImageKey,
+                    configKey: lightBackgroundImageKey,
+                    credits: widget.lightBackgroundCredits,
                     label: l10n.isBackground,
                     updateTheme: Brightness.light,
                   ),
           ),
-          separator,
+
+          if (widget.additionalSettings != null) ...<Widget>[
+            spacer,
+            ...widget.additionalSettings!,
+          ],
+          const EzSeparator(),
 
           // Local reset all
           EzResetButton(
             dialogTitle: l10n.isResetAll(themeProfile),
             onConfirm: () async {
               await EzConfig.removeKeys(imageKeys.keys.toSet());
-              keyValue = Random().nextInt(rMax);
-              setState(() {});
+              setState(() => keyValue = Random().nextInt(rMax));
             },
           ),
           spacer,

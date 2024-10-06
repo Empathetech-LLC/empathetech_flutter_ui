@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.2.0] - 2024-10-06
+### Updated
+- Integrated testing
+- Analysis options
+- Code comments
+- Using named routes (go router)
+- Page image key -> background image key
+- Dialog function parameters
+- Empathetech theme data
+- Localizations
+- EzScreen decorations
+- Highlight opacity 0.1 -> 0.25
+- Alert dialogs
+- Color pickers
+
+### Added
+- Text backgrounds
+  - Background opacity slider in sample text settings
+- Mounted context checks
+- Additional settings passthrough for sample screens
+- Sizing widgets
+- Icon option to EzLink && EzInlineLink
+- PlatformTheme check backups
+  - Makes it easier to use EFUI w/out having to use Flutter Platform Widgets
+    - FPW is still recommended (and unaffiliated)
+- isLefty responsive Elevated, Text, and MenuItem buttons
+- Hide scrollbars setting
+- Fit options for image settings
+- More text underlining and more options for it
+
+### Removed
+- EzLinkImage
+  - EzLinkImageProvider is better
+
 ## [7.1.0] - 2024-09-08
 ### Added
 - Integration testing utils

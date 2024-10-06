@@ -8,10 +8,10 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzDominantHandSwitch extends StatefulWidget {
-  /// Defaults to [DropdownMenuThemeData.textStyle]
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? labelStyle;
 
-  /// Defaults to [ColorScheme.surfaceContainer]
+  /// Defaults to [ColorScheme.surface]
   final Color? backgroundColor;
 
   /// Standardized tool for updating [EzConfig] dominantHand
@@ -28,23 +28,26 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the theme data //
 
-  late final ThemeData theme = Theme.of(context);
+  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
+    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+  );
+
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final double padding = EzConfig.get(paddingKey);
+  // Define the build data //
 
   bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-
-  // Define the build data //
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
     DropdownMenuEntry<bool>(
       value: false,
       label: l10n.gRight,
+      style: menuButtonStyle,
     ),
     DropdownMenuEntry<bool>(
       value: true,
       label: l10n.gLeft,
+      style: menuButtonStyle,
     ),
   ];
 
@@ -52,47 +55,40 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color: widget.backgroundColor ?? theme.colorScheme.surfaceContainer,
-      ),
-      child: EzScrollView(
-        scrollDirection: Axis.horizontal,
-        reverseHands: true,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          // Label
+    return EzScrollView(
+      scrollDirection: Axis.horizontal,
+      reverseHands: true,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // Label
+        EzTextBackground(
           Text(
             l10n.ssDominantHand,
-            style: widget.labelStyle ?? theme.dropdownMenuTheme.textStyle,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
-          EzSpacer(space: padding, vertical: false),
+        ),
+        EzSpacer(space: EzConfig.get(marginKey)),
 
-          // Button
-          DropdownMenu<bool>(
-            enableSearch: false,
-            initialSelection: isLefty,
-            dropdownMenuEntries: entries,
-            onSelected: (bool? makeLeft) async {
-              if (makeLeft == true) {
-                if (!isLefty) {
-                  await EzConfig.setBool(isLeftyKey, true);
-                  isLefty = true;
-                  setState(() {});
-                }
-              } else {
-                if (isLefty) {
-                  await EzConfig.setBool(isLeftyKey, false);
-                  isLefty = false;
-                  setState(() {});
-                }
-              }
-            },
+        // Button
+        DropdownMenu<bool>(
+          width: dropdownWidth(
+            context: context,
+            entries: entries
+                .map((DropdownMenuEntry<bool> entry) => entry.label)
+                .toList(),
           ),
-        ],
-      ),
+          dropdownMenuEntries: entries,
+          enableSearch: false,
+          initialSelection: isLefty,
+          onSelected: (bool? makeLeft) async {
+            if (makeLeft == null || makeLeft == isLefty) return;
+
+            await EzConfig.setBool(isLeftyKey, makeLeft);
+            setState(() => isLefty = makeLeft);
+          },
+        ),
+      ],
     );
   }
 }

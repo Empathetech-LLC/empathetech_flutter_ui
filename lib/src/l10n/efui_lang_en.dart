@@ -94,10 +94,18 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get gReset => 'Reset:';
+  String get gReset => 'Reset';
 
   @override
-  String gResetToValue(Object name, Object value) {
+  String get gResetTo => 'Reset:';
+
+  @override
+  String gResetValue(Object name) {
+    return 'Reset $name?';
+  }
+
+  @override
+  String gResetValueTo(Object name, Object value) {
     return 'Reset $name to $value';
   }
 
@@ -109,6 +117,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gCreditTo => 'Credit to:';
+
+  @override
+  String get gYou => 'Set by you';
 
   @override
   String get ssPageTitle => 'Settings';
@@ -253,6 +264,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsScroll => 'Hide scrollbars?';
 
   @override
   String get lsResetAll => 'Reset all layout settings?';
@@ -428,7 +442,7 @@ class EFUILangEn extends EFUILang {
   String get csReset => 'Reset';
 
   @override
-  String get csResetTo => 'Reset to...';
+  String get csCurrVal => 'Current color value:';
 
   @override
   String get csSchemeBase => 'Build scheme\nfrom image';
@@ -498,6 +512,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get isUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get isFit => 'How should it fit?';
 
   @override
   String isResetAll(Object themeType) {

@@ -17,7 +17,6 @@ Future<void> testLocaleSetting(
   required bool isLefty,
 }) async {
   debugPrint('\nTesting language setting button');
-  // ToDo: Test button text updates with selected locale
 
   // Activate Spanish localizations
   debugPrint('Spanish');

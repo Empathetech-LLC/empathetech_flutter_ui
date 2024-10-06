@@ -36,12 +36,15 @@
   "gAttention": "Attention",
   "gCurrently": "Actuellement :",
   "gSetToValue": "{name} est défini sur {value}",
-  "gReset": "Réinitialiser :",
-  "gResetToValue": "Réinitialiser {name} à {value}",
+  "gReset": "Réinitialiser",
+  "gResetTo": "Réinitialiser :",
+  "gResetValue": "Réinitialiser {name} ?",
+  "gResetValueTo": "Réinitialiser {name} à {value}",
   "gResetAll": "Tout réinitialiser",
   "gResetWarn": "Ne peut pas être annulé",
 
   "gCreditTo": "Crédits à :",
+  "gYou": "Défini par vous",
 
 
 
@@ -108,6 +111,8 @@
   "lsPadding": "Marge intérieure",
   "lsSpacing": "Espacement",
 
+  "lsScroll": "Masquer les barres de défilement ?",
+
   "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
 
 
@@ -173,7 +178,7 @@
   "csAddColor": "Ajouter une couleur",
   "csRemove": "Retirer",
   "csReset": "Réinitialiser",
-  "csResetTo": "Réinitialiser à...",
+  "csCurrVal": "Valeur de couleur actuelle :",
 
   "csSchemeBase": "Construire le schéma\nà partir de l'image",
   "csOptional": "optionnel",
@@ -204,5 +209,7 @@
 
   "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
   
+  "isFit": "Comment devrait-il s'adapter ?",
+
   "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
 }
