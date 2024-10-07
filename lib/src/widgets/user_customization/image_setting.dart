@@ -547,7 +547,9 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
     }
 
-    if (widget.showFitOption) await chooseFit();
+    if (widget.showFitOption && currPath != null && currPath != noImageValue) {
+      await chooseFit();
+    }
 
     // Here to act as a a "default" for clearing and/or resetting the image
     setState(() => inProgress = false);
