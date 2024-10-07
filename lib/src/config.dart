@@ -55,6 +55,42 @@ class EzConfig {
 
       // Merge defaults
       for (final MapEntry<String, dynamic> entry in defaults.entries) {
+        // Load missing custom defaults into preferences
+        if (!keys.containsKey(entry.key)) {
+          switch (entry.key.runtimeType) {
+            case const (bool):
+              if (preferences.getBool(entry.key) == null) {
+                preferences.setBool(entry.key, entry.value);
+              }
+              break;
+            case const (int):
+              if (preferences.getInt(entry.key) == null) {
+                preferences.setInt(entry.key, entry.value);
+              }
+              break;
+            case const (double):
+              if (preferences.getDouble(entry.key) == null) {
+                preferences.setDouble(entry.key, entry.value);
+              }
+              break;
+            case const (String):
+              if (preferences.getString(entry.key) == null) {
+                preferences.setString(entry.key, entry.value);
+              }
+              break;
+            case const (List<String>):
+              if (preferences.getStringList(entry.key) == null) {
+                preferences.setStringList(entry.key, entry.value);
+              }
+              break;
+            default:
+              debugPrint(
+                  '''Key [${entry.key}] has unsupported Type [${entry.key.runtimeType}]
+Must be one of [int, bool, double, String, List<String>]''');
+              break;
+          }
+        }
+
         keys[entry.key] = entry.value.runtimeType;
       }
 
