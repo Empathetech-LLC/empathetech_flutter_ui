@@ -367,9 +367,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.colorScheme.primaryContainer,
-              ),
+              border: Border.all(color: theme.colorScheme.primaryContainer),
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,

@@ -97,7 +97,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           style: theme.textTheme.bodyLarge,
           context: context,
         ).height +
-        margin * 0.25;
+        (margin * 0.25);
 
     final Widget selectButton = Radio<BoxFit>(
       groupValue: selected,
@@ -588,10 +588,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.colorScheme.onSurface,
-                width: 0.5,
-              ),
+              border: Border.all(color: theme.colorScheme.onSurface),
             ),
             child: CircleAvatar(
               radius: padding * 2 + margin * 0.5,
