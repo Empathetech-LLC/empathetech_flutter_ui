@@ -63,6 +63,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
+  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
   static const EzSeparator separator = EzSeparator();
 
   final double margin = EzConfig.get(marginKey);
@@ -91,15 +92,18 @@ class _ImageSettingState extends State<EzImageSetting> {
     required BoxFit fit,
     required double width,
     required double height,
-    required StateSetter dialogState,
+    required StateSetter modalState,
   }) {
+    final double scaleMargin = margin * 0.25;
+
     final String name = fit.name;
+
     final double toolbarHeight = measureText(
           name,
           style: theme.textTheme.bodyLarge,
           context: context,
         ).height +
-        (margin * 0.25);
+        scaleMargin;
 
     final Widget selectButton = Radio<BoxFit>(
       groupValue: selected,
@@ -107,45 +111,52 @@ class _ImageSettingState extends State<EzImageSetting> {
       onChanged: (BoxFit? value) {
         selected = value;
         setState(() {});
-        dialogState(() {});
+        modalState(() {});
       },
     );
 
-    return Padding(
-      padding: EzInsets.wrap(spacing),
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              width: double.infinity,
-              height: toolbarHeight,
-              child: EzRow(
-                children: <Widget>[
-                  Text(
+    return Column(
+      children: <Widget>[
+        GestureDetector(
+          onTap: () {
+            selected = fit;
+            setState(() {});
+            modalState(() {});
+          },
+          child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              border: Border.all(color: theme.colorScheme.onSurface),
+              borderRadius: ezRoundEdge,
+            ),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: toolbarHeight,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surface,
+                    borderRadius: textFieldRadius,
+                  ),
+                  child: Text(
                     name,
                     style: theme.textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
-                  selectButton,
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainer,
-                image: DecorationImage(
+                ),
+                Image(
+                  width: width - scaleMargin,
+                  height: height - toolbarHeight - scaleMargin,
                   image: provideImage(currPath!),
                   fit: fit,
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        selectButton,
+      ],
     );
   }
 
@@ -426,64 +437,76 @@ class _ImageSettingState extends State<EzImageSetting> {
                 textAlign: TextAlign.center,
               ),
               separator,
-              Wrap(
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
+              EzScrollView(
+                scrollDirection: Axis.horizontal,
+                primary: false,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.contain,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.cover,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.fill,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.fitWidth,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.fitHeight,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.none,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                   fitPreview(
                     fit: BoxFit.scaleDown,
                     width: width,
                     height: height,
-                    dialogState: fitState,
+                    modalState: fitState,
                   ),
+                  rowSpacer,
                 ],
               ),
               separator,
               EzRow(
+                mainAxisAlignment:
+                    isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
                 children: <Widget>[
+                  rowSpacer,
                   EzTextButton(
                     onPressed: () => Navigator.of(fitContext).pop(),
                     text: l10n.gCancel,
                     textStyle: theme.textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
+                  rowSpacer,
                   EzTextButton(
                     onPressed: () async {
                       if (selected != null) {
@@ -500,9 +523,11 @@ class _ImageSettingState extends State<EzImageSetting> {
                       color: theme.colorScheme.primary,
                     ),
                     textAlign: TextAlign.center,
-                  )
+                  ),
+                  rowSpacer,
                 ],
               ),
+              spacer,
             ],
           );
         },
