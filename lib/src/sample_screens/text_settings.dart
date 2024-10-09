@@ -366,10 +366,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   final double margin = EzConfig.get(marginKey);
 
-  static const BorderRadius textFieldRadius = BorderRadius.only(
-    bottomLeft: Radius.circular(4),
-    bottomRight: Radius.circular(4),
-  );
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.wrap(EzConfig.get(paddingKey)),
   );

@@ -268,5 +268,11 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
 
-  // No default image settings //
+  // Image settings //
+
+  lightBackgroundImageKey: noImageValue,
+  '$lightBackgroundImageKey$boxFitSuffix': none,
+
+  darkBackgroundImageKey: noImageValue,
+  '$darkBackgroundImageKey$boxFitSuffix': none,
 };

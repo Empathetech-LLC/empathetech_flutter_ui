@@ -307,8 +307,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       onPressed: () => showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        builder: (BuildContext context) => StatefulBuilder(
-          builder: (BuildContext context, StateSetter setModalState) {
+        builder: (_) => StatefulBuilder(
+          builder: (_, StateSetter setModalState) {
             return EzScrollView(
               mainAxisSize: MainAxisSize.min,
               children: buildModal(

@@ -367,9 +367,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: theme.colorScheme.primaryContainer,
-              ),
+              border: Border.all(color: theme.colorScheme.primaryContainer),
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
@@ -437,11 +435,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
-              builder: (BuildContext context) => StatefulBuilder(
-                builder: (
-                  BuildContext context,
-                  StateSetter setModalState,
-                ) {
+              builder: (_) => StatefulBuilder(
+                builder: (_, StateSetter setModalState) {
                   return EzScrollView(
                     scrollDirection: Axis.horizontal,
                     startCentered: true,

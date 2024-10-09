@@ -147,29 +147,31 @@ List<Widget> ezMaterialActions({
   required void Function() onDeny,
   bool denyIsDestructive = false,
   bool reverseHands = true,
+  TextStyle? defaultStyle,
+  TextStyle? destructiveStyle,
 }) {
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
-  final Color primary = Theme.of(context).colorScheme.primary;
+
+  late final ThemeData theme = Theme.of(context);
+
+  final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
+
+  final TextStyle? destructiveText = destructiveStyle ??
+      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
 
   final List<Widget> actions = <Widget>[
     // Deny
     EzTextButton(
       onPressed: onDeny,
-      style: denyIsDestructive
-          ? TextButton.styleFrom(foregroundColor: primary)
-          : null,
-      decorationColor: primary,
       text: denyMsg ?? EFUILang.of(context)!.gNo,
+      textStyle: denyIsDestructive ? destructiveText : defaultText,
     ),
 
     // Confirm
     EzTextButton(
       onPressed: onConfirm,
-      style: confirmIsDestructive
-          ? TextButton.styleFrom(foregroundColor: primary)
-          : null,
-      decorationColor: primary,
       text: confirmMsg ?? EFUILang.of(context)!.gYes,
+      textStyle: confirmIsDestructive ? destructiveText : defaultText,
     ),
   ];
 

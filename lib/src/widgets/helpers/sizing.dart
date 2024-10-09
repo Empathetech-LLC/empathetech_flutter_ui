@@ -20,10 +20,16 @@ class EzInsets extends EdgeInsets {
   const EzInsets.wrap(double base) : super.all(base / 2);
 }
 
-/// BorderRadius.all(Radius.circular(4.0))
+/// [BorderRadius].all([Radius.circular] => 4.0)
 const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
 
-/// BorderRadius.all(Radius.circular(64.0))
+/// [BorderRadius].only(top left && top right: [Radius.circular] => 4.0)
+const BorderRadius textFieldRadius = BorderRadius.only(
+  topLeft: Radius.circular(4),
+  topRight: Radius.circular(4),
+);
+
+/// [BorderRadius].all([Radius.circular] => 64.0)
 const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(64.0));
 
 /// threeQs = [widthOf] context * 0.75
@@ -32,7 +38,7 @@ BoxConstraints textFieldConstraints(BuildContext context) {
   final double threeQs = widthOf(context) * 0.75;
 
   return BoxConstraints(
-    minWidth: threeQs,
+    minWidth: min(threeQs, smallBreakpoint),
     maxWidth: min(threeQs, smallBreakpoint),
   );
 }

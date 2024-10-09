@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.2.1] - 2024-10-08
+### Added
+- EzConfig.reset
+  - Updated EzResetButton default to be EzConfig.reset
+- Image setting defaults
+- BoxFit consts
+- Bug fixes
+
+### Updated
+- Image fit preview
+
 ## [7.2.0] - 2024-10-06
 ### Updated
 - Integrated testing

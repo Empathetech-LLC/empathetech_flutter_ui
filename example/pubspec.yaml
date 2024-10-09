@@ -1,6 +1,6 @@
 name: example
 description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
-version: 1.4.0+8
+version: 1.4.1+11
 publish_to: 'none'
 
 environment:
@@ -13,7 +13,7 @@ dependencies:
   # Flutter (Google)
   go_router: ^14.3.0
   shared_preferences: ^2.3.2
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
 
   # Community
   feedback: ^3.1.0

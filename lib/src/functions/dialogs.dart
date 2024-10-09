@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -96,8 +97,8 @@ Future<dynamic> ezColorPicker(
           onColorChanged: onColorChange,
           showRecentColors: true,
           enableOpacity: true,
-          opacityThumbRadius: padding,
-          opacityTrackHeight: padding * 2,
+          opacityThumbRadius: min(padding, 25.0),
+          opacityTrackHeight: min(padding * 2, 50.0),
           showColorCode: true,
         ),
         materialActions: ezMaterialActions(

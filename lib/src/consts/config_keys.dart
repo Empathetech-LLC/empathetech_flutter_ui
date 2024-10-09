@@ -583,9 +583,6 @@ const String lightBackgroundImageKey = 'lightBackgroundImage';
 const String darkColorSchemeImageKey = 'darkColorSchemeImage';
 const String darkBackgroundImageKey = 'darkBackgroundImage';
 
-/// 'Fit'
-const String boxFitSuffix = 'Fit';
-
 /// [light, dark]
 ///      X
 /// [colorSchemeImageKey, pageImageKey]
@@ -593,14 +590,42 @@ const Map<String, Type> imageKeys = <String, Type>{
   // Light theme
   lightColorSchemeImageKey: String,
   lightBackgroundImageKey: String,
+  '$lightBackgroundImageKey$boxFitSuffix': String,
 
   // Dark theme
   darkColorSchemeImageKey: String,
   darkBackgroundImageKey: String,
+  '$darkBackgroundImageKey$boxFitSuffix': String,
 };
+
+// Image settings' values //
 
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
+
+/// 'Fit'
+const String boxFitSuffix = 'Fit';
+
+/// 'contain'
+const String contain = 'contain';
+
+/// 'cover'
+const String cover = 'cover';
+
+/// 'fill'
+const String fill = 'fill';
+
+/// 'fitWidth'
+const String fitWidth = 'fitWidth';
+
+/// 'fitHeight'
+const String fitHeight = 'fitHeight';
+
+/// 'none'
+const String none = 'none';
+
+/// 'scaleDown'
+const String scaleDown = 'scaleDown';
 
 // Global trackers //
 

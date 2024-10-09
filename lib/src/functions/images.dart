@@ -54,19 +54,19 @@ Future<String?> saveImage({
 /// Given a [BoxFit].name, return the associated [BoxFit]
 BoxFit? boxFitFromName(String? name) {
   switch (name) {
-    case 'contain':
+    case contain:
       return BoxFit.contain;
-    case 'cover':
+    case cover:
       return BoxFit.cover;
-    case 'fill':
+    case fill:
       return BoxFit.fill;
-    case 'fitWidth':
+    case fitWidth:
       return BoxFit.fitWidth;
-    case 'fitHeight':
+    case fitHeight:
       return BoxFit.fitHeight;
-    case 'none':
+    case none:
       return BoxFit.none;
-    case 'scaleDown':
+    case scaleDown:
       return BoxFit.scaleDown;
     default:
       return null;
