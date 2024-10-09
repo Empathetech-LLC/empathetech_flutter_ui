@@ -326,7 +326,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     ]);
 
     // Reset
-    if (defaultPath != null) {
+    if (defaultPath != null && defaultPath != noImageValue) {
       options.addAll(<Widget>[
         spacer,
         EzElevatedIconButton(
