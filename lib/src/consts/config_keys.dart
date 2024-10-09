@@ -590,10 +590,12 @@ const Map<String, Type> imageKeys = <String, Type>{
   // Light theme
   lightColorSchemeImageKey: String,
   lightBackgroundImageKey: String,
+  '$lightBackgroundImageKey$boxFitSuffix': String,
 
   // Dark theme
   darkColorSchemeImageKey: String,
   darkBackgroundImageKey: String,
+  '$darkBackgroundImageKey$boxFitSuffix': String,
 };
 
 // Image settings' values //
