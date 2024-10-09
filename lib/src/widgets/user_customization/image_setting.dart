@@ -542,10 +542,12 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (newPath is String) {
       currPath = newPath;
+      final String defaultPath = EzConfig.getDefault(widget.configKey);
 
       if (widget.updateTheme != null &&
           updateTheme &&
-          newPath != noImageValue) {
+          newPath != noImageValue &&
+          newPath != defaultPath) {
         setState(() => inProgress = true);
 
         final String result = await storeImageColorScheme(
