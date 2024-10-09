@@ -38,7 +38,7 @@ BoxConstraints textFieldConstraints(BuildContext context) {
   final double threeQs = widthOf(context) * 0.75;
 
   return BoxConstraints(
-    minWidth: threeQs,
+    minWidth: min(threeQs, smallBreakpoint),
     maxWidth: min(threeQs, smallBreakpoint),
   );
 }
