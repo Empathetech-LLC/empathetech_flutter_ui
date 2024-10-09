@@ -105,14 +105,16 @@ class _ImageSettingState extends State<EzImageSetting> {
         ).height +
         scaleMargin;
 
-    final Widget selectButton = Radio<BoxFit>(
-      groupValue: selected,
-      value: fit,
-      onChanged: (BoxFit? value) {
-        selected = value;
-        setState(() {});
-        modalState(() {});
-      },
+    final Widget selectButton = ExcludeSemantics(
+      child: Radio<BoxFit>(
+        groupValue: selected,
+        value: fit,
+        onChanged: (BoxFit? value) {
+          selected = value;
+          setState(() {});
+          modalState(() {});
+        },
+      ),
     );
 
     return Column(
@@ -123,35 +125,42 @@ class _ImageSettingState extends State<EzImageSetting> {
             setState(() {});
             modalState(() {});
           },
-          child: Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-              border: Border.all(color: theme.colorScheme.onSurface),
-              borderRadius: ezRoundEdge,
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: toolbarHeight,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: textFieldRadius,
-                  ),
-                  child: Text(
-                    name,
-                    style: theme.textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                  ),
+          child: Semantics(
+            hint: name,
+            image: true,
+            button: true,
+            child: ExcludeSemantics(
+              child: Container(
+                width: width,
+                height: height,
+                decoration: BoxDecoration(
+                  border: Border.all(color: theme.colorScheme.onSurface),
+                  borderRadius: ezRoundEdge,
                 ),
-                Image(
-                  width: width - scaleMargin,
-                  height: height - toolbarHeight - scaleMargin,
-                  image: provideImage(currPath!),
-                  fit: fit,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: toolbarHeight,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surface,
+                        borderRadius: textFieldRadius,
+                      ),
+                      child: Text(
+                        name,
+                        style: theme.textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Image(
+                      width: width - scaleMargin,
+                      height: height - toolbarHeight - scaleMargin,
+                      image: provideImage(currPath!),
+                      fit: fit,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
