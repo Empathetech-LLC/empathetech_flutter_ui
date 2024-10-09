@@ -309,4 +309,25 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     return success;
   }
+
+  static Future<bool> reset({bool storageOnly = false}) async {
+    bool success = true;
+
+    for (final String key in _instance!.keys.keys) {
+      final bool remove = await _instance!.preferences.remove(key);
+
+      if (remove) {
+        if (!storageOnly) {
+          _instance!.defaults.containsKey(key)
+              ? _instance!.prefs[key] = _instance!.defaults[key]
+              : _instance!.prefs.remove(key);
+        }
+      } else {
+        success = false;
+        debugPrint('Failed to remove key [$key]');
+      }
+    }
+
+    return success;
+  }
 }
