@@ -18,65 +18,6 @@ const String efuiL = 'Empathetech Flutter UI';
 /// Empathetic Flutter UI
 const String efuiLFix = 'Empathetic Flutter UI';
 
-// Brand Colors //
-
-/// 0xFF20DAA5
-const int empathEucalyptusHex = 0xFF20DAA5;
-
-/// 0xFF20DAA5
-const Color empathEucalyptus = Color(empathEucalyptusHex);
-
-/// 0x4020DAA5
-const int empathEucalyptusDimHex = 0x4020DAA5;
-
-/// 0x4020DAA5
-const Color empathEucalyptusDim = Color(empathEucalyptusHex);
-
-/// 0xFFA520DA
-const int empathPurpleHex = 0xFFA520DA;
-
-/// 0xFFA520DA
-const Color empathPurple = Color(empathPurpleHex);
-
-/// 0x40A520DA
-const int empathPurpleDimHex = 0x40A520DA;
-
-/// 0x40A520DA
-const Color empathPurpleDim = Color(empathPurpleDimHex);
-
-/// 0xFFDAA520
-const int empathSandHex = 0xFFDAA520;
-
-/// 0xFFDAA520
-const Color empathSand = Color(empathSandHex);
-
-/// 0x40DAA520
-const int empathSandDimHex = 0x40DAA520;
-
-/// 0x40DAA520
-const Color empathSandSim = Color(empathSandHex);
-
-/// 0xFFFFFFFF
-const int whiteHex = 0xFFFFFFFF;
-
-/// 0xFFF5F5F5
-const int offWhiteHex = 0xFFF5F5F5;
-
-/// 0xFFF5F5F5
-const Color empathOffWhite = Color(offWhiteHex);
-
-/// 0xFF000000
-const int blackHex = 0xFF000000;
-
-/// 0xFF191919
-const int offBlackHex = 0xFF191919;
-
-/// 0xFF191919
-const Color empathOffBlack = Color(offBlackHex);
-
-/// 0xFF000000
-const int transparentHex = 0x00000000;
-
 // Brand links //
 
 /// If you want to lend a hand
@@ -150,7 +91,103 @@ const String empathKofi = 'https://ko-fi.com/empathetech';
 /// [https://m3.material.io/styles/color/roles]
 const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
 
-// EzConfig base //
+// Brand text theme //
+
+/// 42.0
+const double defaultDisplaySize = 42.0;
+
+/// 32.0
+const double defaultHeadlineSize = 32.0;
+
+/// 22.0
+const double defaultTitleSize = 22.0;
+
+/// 16.0
+const double defaultBodySize = 16.0;
+
+/// 14.0
+const double defaultLabelSize = 14.0;
+
+/// 1.5
+const double defaultFontHeight = 1.5;
+
+/// 0.25
+const double defaultLetterSpacing = 0.25;
+
+/// 1.0
+const double defaultWordSpacing = 1.0;
+
+// Brand layout //
+
+/// 10.0
+const double defaultMargin = 10.0;
+
+/// 20.0
+const double defaultPadding = 20.0;
+
+/// 25.0
+const double defaultSpacing = 25.0;
+
+// Brand color scheme //
+
+/// 0xFF20DAA5
+const int empathEucalyptusHex = 0xFF20DAA5;
+
+/// 0xFF20DAA5
+const Color empathEucalyptus = Color(empathEucalyptusHex);
+
+/// 0x4020DAA5
+const int empathEucalyptusDimHex = 0x4020DAA5;
+
+/// 0x4020DAA5
+const Color empathEucalyptusDim = Color(empathEucalyptusHex);
+
+/// 0xFFA520DA
+const int empathPurpleHex = 0xFFA520DA;
+
+/// 0xFFA520DA
+const Color empathPurple = Color(empathPurpleHex);
+
+/// 0x40A520DA
+const int empathPurpleDimHex = 0x40A520DA;
+
+/// 0x40A520DA
+const Color empathPurpleDim = Color(empathPurpleDimHex);
+
+/// 0xFFDAA520
+const int empathSandHex = 0xFFDAA520;
+
+/// 0xFFDAA520
+const Color empathSand = Color(empathSandHex);
+
+/// 0x40DAA520
+const int empathSandDimHex = 0x40DAA520;
+
+/// 0x40DAA520
+const Color empathSandSim = Color(empathSandHex);
+
+/// 0xFFFFFFFF
+const int whiteHex = 0xFFFFFFFF;
+
+/// 0xFFF5F5F5
+const int offWhiteHex = 0xFFF5F5F5;
+
+/// 0xFFF5F5F5
+const Color empathOffWhite = Color(offWhiteHex);
+
+/// 0xFF000000
+const int blackHex = 0xFF000000;
+
+/// 0xFF191919
+const int offBlackHex = 0xFF191919;
+
+/// 0xFF191919
+const Color empathOffBlack = Color(offBlackHex);
+
+/// 0xFF000000
+const int transparentHex = 0x00000000;
+
+// Brand config //
 
 /// Empathetech's default configuration for [EzConfig]
 const Map<String, Object> empathetechConfig = <String, Object>{
@@ -162,53 +199,53 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Display
   displayFontFamilyKey: roboto,
-  displayFontSizeKey: 42.0,
+  displayFontSizeKey: defaultDisplaySize,
   displayBoldKey: false,
   displayItalicsKey: false,
   displayUnderlinedKey: false,
-  displayFontHeightKey: 1.5,
-  displayLetterSpacingKey: 0.25,
-  displayWordSpacingKey: 1.0,
+  displayFontHeightKey: defaultFontHeight,
+  displayLetterSpacingKey: defaultLetterSpacing,
+  displayWordSpacingKey: defaultWordSpacing,
 
   // Headline
   headlineFontFamilyKey: roboto,
-  headlineFontSizeKey: 32.0,
+  headlineFontSizeKey: defaultHeadlineSize,
   headlineBoldKey: false,
   headlineItalicsKey: false,
   headlineUnderlinedKey: false,
-  headlineFontHeightKey: 1.5,
-  headlineLetterSpacingKey: 0.25,
-  headlineWordSpacingKey: 1.0,
+  headlineFontHeightKey: defaultFontHeight,
+  headlineLetterSpacingKey: defaultLetterSpacing,
+  headlineWordSpacingKey: defaultWordSpacing,
 
   // Title
   titleFontFamilyKey: roboto,
-  titleFontSizeKey: 22.0,
+  titleFontSizeKey: defaultTitleSize,
   titleBoldKey: true,
   titleItalicsKey: false,
   titleUnderlinedKey: false,
-  titleFontHeightKey: 1.5,
-  titleLetterSpacingKey: 0.25,
-  titleWordSpacingKey: 1.0,
+  titleFontHeightKey: defaultFontHeight,
+  titleLetterSpacingKey: defaultLetterSpacing,
+  titleWordSpacingKey: defaultWordSpacing,
 
   // Body
   bodyFontFamilyKey: roboto,
-  bodyFontSizeKey: 16.0,
+  bodyFontSizeKey: defaultBodySize,
   bodyBoldKey: false,
   bodyItalicsKey: false,
   bodyUnderlinedKey: false,
-  bodyFontHeightKey: 1.5,
-  bodyLetterSpacingKey: 0.25,
-  bodyWordSpacingKey: 1.0,
+  bodyFontHeightKey: defaultFontHeight,
+  bodyLetterSpacingKey: defaultLetterSpacing,
+  bodyWordSpacingKey: defaultWordSpacing,
 
   // Label
   labelFontFamilyKey: roboto,
-  labelFontSizeKey: 14.0,
+  labelFontSizeKey: defaultLabelSize,
   labelBoldKey: false,
   labelItalicsKey: false,
   labelUnderlinedKey: false,
-  labelFontHeightKey: 1.5,
-  labelLetterSpacingKey: 0.25,
-  labelWordSpacingKey: 1.0,
+  labelFontHeightKey: defaultFontHeight,
+  labelLetterSpacingKey: defaultLetterSpacing,
+  labelWordSpacingKey: defaultWordSpacing,
 
   // Background opacity
   darkTextBackgroundOKey: 0.0,
@@ -216,9 +253,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Layout settings //
 
-  marginKey: 10.0, // required key
-  paddingKey: 20.0, // required key
-  spacingKey: 25.0, // required key
+  marginKey: defaultMargin, // required key
+  paddingKey: defaultPadding, // required key
+  spacingKey: defaultSpacing, // required key
 
   hideScrollKey: false,
 
