@@ -5,6 +5,7 @@
 
 import '../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -264,6 +265,200 @@ Must be one of [int, bool, double, String, List<String>]''');
     final bool result = await _instance!.preferences.setStringList(key, value);
     if (result && !storageOnly) _instance!.prefs[key] = value;
     return result;
+  }
+
+  /// Create a pseudo-random config that follows the default vibe
+  static Future<void> randomize(bool isDark) async {
+    final Random random = Random();
+
+    // Update global settings //
+
+    // Lefty
+    await EzConfig.setBool(isLeftyKey, random.nextBool());
+
+    // Leave theme as-is, don't wanna light blast peeps at night
+
+    // Locale
+    if (random.nextInt(4096) == 376) {
+      final List<Locale> trimmedLocales =
+          List<Locale>.from(EFUILang.supportedLocales);
+      trimmedLocales.remove(EzConfig.getLocale());
+
+      final Locale randomLocale = trimmedLocales
+          .elementAt(random.nextInt(EFUILang.supportedLocales.length));
+
+      final List<String> localeData = <String>[randomLocale.languageCode];
+      if (randomLocale.countryCode != null) {
+        localeData.add(randomLocale.countryCode!);
+      }
+
+      await EzConfig.setStringList(localeKey, localeData);
+    }
+
+    // Update text settings //
+
+    final List<String> styleOptions = googleStyles.keys.toList();
+
+    final String attentionStyle =
+        styleOptions[random.nextInt(styleOptions.length)];
+    final double attentionScale = (random.nextDouble() * 1.5) + 0.5;
+
+    final String descriptionStyle =
+        styleOptions[random.nextInt(styleOptions.length)];
+    final double descriptionScale = (random.nextDouble() * 1.5) + 0.5;
+
+    await EzConfig.setString(displayFontFamilyKey, attentionStyle);
+    await EzConfig.setDouble(displayFontSizeKey, 42.0 * attentionScale);
+    await EzConfig.setBool(displayBoldKey, false);
+    await EzConfig.setBool(displayItalicsKey, false);
+    await EzConfig.setBool(displayUnderlinedKey, random.nextBool());
+    await EzConfig.setDouble(displayFontHeightKey, defaultFontHeight);
+    await EzConfig.setDouble(displayLetterSpacingKey, defaultLetterSpacing);
+    await EzConfig.setDouble(displayWordSpacingKey, defaultWordSpacing);
+
+    await EzConfig.setString(headlineFontFamilyKey, attentionStyle);
+    await EzConfig.setDouble(
+        headlineFontSizeKey, defaultHeadlineSize * attentionScale);
+    await EzConfig.setBool(headlineBoldKey, false);
+    await EzConfig.setBool(headlineItalicsKey, false);
+    await EzConfig.setBool(headlineUnderlinedKey, false);
+    await EzConfig.setDouble(headlineFontHeightKey, defaultFontHeight);
+    await EzConfig.setDouble(headlineLetterSpacingKey, defaultLetterSpacing);
+    await EzConfig.setDouble(headlineWordSpacingKey, defaultWordSpacing);
+
+    await EzConfig.setString(
+        titleFontFamilyKey, styleOptions[random.nextInt(styleOptions.length)]);
+    await EzConfig.setDouble(
+        titleFontSizeKey, defaultTitleSize * attentionScale);
+    await EzConfig.setBool(titleBoldKey, false);
+    await EzConfig.setBool(titleItalicsKey, false);
+    await EzConfig.setBool(titleUnderlinedKey, random.nextBool());
+    await EzConfig.setDouble(titleFontHeightKey, defaultFontHeight);
+    await EzConfig.setDouble(titleLetterSpacingKey, defaultLetterSpacing);
+    await EzConfig.setDouble(titleWordSpacingKey, defaultWordSpacing);
+
+    await EzConfig.setString(bodyFontFamilyKey, descriptionStyle);
+    await EzConfig.setDouble(bodyFontSizeKey, 16.0 * descriptionScale);
+    await EzConfig.setBool(bodyBoldKey, false);
+    await EzConfig.setBool(bodyItalicsKey, false);
+    await EzConfig.setBool(bodyUnderlinedKey, false);
+    await EzConfig.setDouble(bodyFontHeightKey, defaultFontHeight);
+    await EzConfig.setDouble(bodyLetterSpacingKey, defaultLetterSpacing);
+    await EzConfig.setDouble(bodyWordSpacingKey, defaultWordSpacing);
+
+    await EzConfig.setString(labelFontFamilyKey, descriptionStyle);
+    await EzConfig.setDouble(labelFontSizeKey, 14.0 * descriptionScale);
+    await EzConfig.setBool(labelBoldKey, false);
+    await EzConfig.setBool(labelItalicsKey, false);
+    await EzConfig.setBool(labelUnderlinedKey, false);
+    await EzConfig.setDouble(labelFontHeightKey, defaultFontHeight);
+    await EzConfig.setDouble(labelLetterSpacingKey, defaultLetterSpacing);
+    await EzConfig.setDouble(labelWordSpacingKey, defaultWordSpacing);
+
+    // Update layout settings //
+
+    await EzConfig.setDouble(
+      marginKey,
+      defaultMargin * ((random.nextDouble() * 1.5) + 0.5),
+    );
+    await EzConfig.setDouble(
+      paddingKey,
+      defaultPadding * ((random.nextDouble() * 1.5) + 0.5),
+    );
+    await EzConfig.setDouble(
+      spacingKey,
+      defaultSpacing * ((random.nextDouble() * 1.5) + 0.5),
+    );
+
+    await EzConfig.setBool(hideScrollKey, random.nextBool());
+
+    // Update color settings //
+
+    // Define random seed
+    final Color primary = Color.fromRGBO(
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+      1.0,
+    );
+    final Color onPrimary = getTextColor(primary);
+
+    // Build a triadic combo from the seed
+    final HSVColor primaryHSV = HSVColor.fromColor(primary);
+    final double secondaryHue = (primaryHSV.hue + 120) % 360;
+    final double tertiaryHue = (primaryHSV.hue + 240) % 360;
+
+    final Color secondary = HSVColor.fromAHSV(
+      1.0,
+      secondaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onSecondary = getTextColor(secondary);
+
+    final Color tertiary = HSVColor.fromAHSV(
+      1.0,
+      tertiaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onTertiary = getTextColor(tertiary);
+
+    // Create a pseudo-random ColorScheme that follows the default vibe
+    await storeColorScheme(
+      colorScheme: isDark
+          ? ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer: primary.withOpacity(containerOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer: secondary.withOpacity(containerOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer: tertiary.withOpacity(containerOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              surface: Colors.black,
+              onSurface: Colors.white,
+              surfaceContainer: Color.fromRGBO(
+                (primary.red / 4).floor(),
+                (primary.green / 4).floor(),
+                (primary.blue / 4).floor(),
+                1.0,
+              ),
+              surfaceTint: Colors.transparent,
+            )
+          : ColorScheme.fromSeed(
+              brightness: Brightness.light,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer: primary.withOpacity(containerOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer: secondary.withOpacity(containerOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer: tertiary.withOpacity(containerOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              surface: Colors.white,
+              onSurface: Colors.black,
+              surfaceContainer: Color.fromRGBO(
+                ((primary.red + 765) / 4).ceil(),
+                ((primary.green + 765) / 4).ceil(),
+                ((primary.blue + 765) / 4).ceil(),
+                1.0,
+              ),
+              surfaceTint: Colors.transparent,
+            ),
+      brightness: isDark ? Brightness.dark : Brightness.light,
+    );
   }
 
   // Removers //
