@@ -254,9 +254,15 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Snackbar
     snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
       backgroundColor: colorScheme.surface,
       closeIconColor: colorScheme.primary,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colorScheme.secondary),
+        borderRadius: ezRoundEdge,
+      ),
       contentTextStyle: textTheme.bodyLarge,
+      insetPadding: EdgeInsets.all(margin),
     ),
 
     // Text button
