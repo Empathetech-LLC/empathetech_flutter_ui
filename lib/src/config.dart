@@ -450,9 +450,9 @@ Must be one of [int, bool, double, String, List<String>]''');
               surface: Colors.white,
               onSurface: Colors.black,
               surfaceContainer: Color.fromRGBO(
-                ((primary.red + 765) / 4).ceil(),
-                ((primary.green + 765) / 4).ceil(),
-                ((primary.blue + 765) / 4).ceil(),
+                ((((primary.red + 255) / 2) + 255) / 2).ceil(),
+                ((((primary.green + 255) / 2) + 255) / 2).ceil(),
+                ((((primary.blue + 255) / 2) + 255) / 2).ceil(),
                 1.0,
               ),
               surfaceTint: Colors.transparent,
