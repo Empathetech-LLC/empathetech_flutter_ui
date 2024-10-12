@@ -52,7 +52,7 @@ class OpenUIScaffold extends StatelessWidget {
       ),
       menuChildren: <Widget>[
         const BYOButton(),
-        FeedbackButton(scaffoldMessengerKey: scaffoldMessengerKey, l10n: l10n),
+        FeedbackButton(l10n: l10n),
       ],
     );
 
