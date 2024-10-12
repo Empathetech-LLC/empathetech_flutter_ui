@@ -32,10 +32,10 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// Comfortable reading time for a US tween: 125 words per minute
+/// Comfortable reading time for a US tween: 100 words per minute
 /// Minimum 2 seconds
 Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
-  final int milliseconds = ((words / 125) * 60 * 100).ceil();
+  final int milliseconds = ((words / 100) * 60 * 100).ceil();
   return Duration(milliseconds: max(milliseconds, 2000));
 }
