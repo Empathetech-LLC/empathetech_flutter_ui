@@ -54,9 +54,11 @@ class EzConfig {
       // Start with the known EzConfigverse
       final Map<String, Type> keys = Map<String, Type>.from(allKeys);
 
-      // Merge defaults
+      // Include defaults
       for (final MapEntry<String, dynamic> entry in defaults.entries) {
-        keys[entry.key] = entry.value.runtimeType;
+        if (!keys.containsKey(entry.key)) {
+          keys[entry.key] = entry.value.runtimeType;
+        }
       }
 
       // Build this.prefs //
