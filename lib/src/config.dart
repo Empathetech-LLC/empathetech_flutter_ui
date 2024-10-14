@@ -269,7 +269,11 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Create a pseudo-random config that follows the default vibe
   static Future<void> randomize(bool isDark) async {
+    // Define data //
+
     final Random random = Random();
+
+    double getScaler() => (random.nextDouble() * 1.5) + 0.5;
 
     // Update global settings //
 
@@ -301,11 +305,11 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     final String attentionStyle =
         styleOptions[random.nextInt(styleOptions.length)];
-    final double attentionScale = (random.nextDouble() * 1.5) + 0.5;
+    final double attentionScale = getScaler();
 
     final String descriptionStyle =
         styleOptions[random.nextInt(styleOptions.length)];
-    final double descriptionScale = (random.nextDouble() * 1.5) + 0.5;
+    final double descriptionScale = getScaler();
 
     await EzConfig.setString(displayFontFamilyKey, attentionStyle);
     await EzConfig.setDouble(displayFontSizeKey, 42.0 * attentionScale);
@@ -357,18 +361,9 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     // Update layout settings //
 
-    await EzConfig.setDouble(
-      marginKey,
-      defaultMargin * ((random.nextDouble() * 1.5) + 0.5),
-    );
-    await EzConfig.setDouble(
-      paddingKey,
-      defaultPadding * ((random.nextDouble() * 1.5) + 0.5),
-    );
-    await EzConfig.setDouble(
-      spacingKey,
-      defaultSpacing * ((random.nextDouble() * 1.5) + 0.5),
-    );
+    await EzConfig.setDouble(marginKey, defaultMargin * getScaler());
+    await EzConfig.setDouble(paddingKey, defaultPadding * getScaler());
+    await EzConfig.setDouble(spacingKey, defaultSpacing * getScaler());
 
     await EzConfig.setBool(hideScrollKey, random.nextBool());
 
