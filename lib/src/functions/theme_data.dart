@@ -28,7 +28,7 @@ ThemeData ezThemeData(Brightness brightness) {
   );
   final IconThemeData appBarIconData = IconThemeData(
     color: colorScheme.primary,
-    size: iconSize,
+    size: textTheme.headlineLarge?.fontSize,
     applyTextScaling: true,
   );
 
