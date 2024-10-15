@@ -28,9 +28,9 @@ const String empathCommunity = 'community@empathetech.net';
 /// support@empathetech.net
 const String empathSupport = 'support@empathetech.net';
 
-/// If you need two hands
-/// admin@empathetech.net
-const String empathAdmin = 'admin@empathetech.net';
+/// If you want to say hi
+/// mwaldron@empathetech.net
+const String empathFounder = 'mwaldron@empathetech.net';
 
 /// If you want to stay informed
 /// http://eepurl.com/iHe_I2
