@@ -130,7 +130,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
               await EzConfig.removeKeys(layoutKeys.keys.toSet());
             },
           ),
-          spacer,
+          separator,
         ],
       ),
     );

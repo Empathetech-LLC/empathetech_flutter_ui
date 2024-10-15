@@ -38,6 +38,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
+  static const EzSeparator separator = EzSeparator();
 
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -101,7 +102,7 @@ class _ImageSettingsState extends State<ImageSettings> {
             spacer,
             ...widget.additionalSettings!,
           ],
-          const EzSeparator(),
+          separator,
 
           // Local reset all
           EzResetButton(
@@ -111,7 +112,7 @@ class _ImageSettingsState extends State<ImageSettings> {
               setState(() => keyValue = Random().nextInt(rMax));
             },
           ),
-          spacer,
+          separator,
         ],
       ),
     );

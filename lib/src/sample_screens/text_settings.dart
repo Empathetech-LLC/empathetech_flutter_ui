@@ -341,7 +341,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             setState(() {});
           },
         ),
-        spacer,
+        separator,
       ],
     );
   }
@@ -1086,7 +1086,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
             setState(() {});
           },
         ),
-        spacer,
+        separator,
       ],
     );
   }

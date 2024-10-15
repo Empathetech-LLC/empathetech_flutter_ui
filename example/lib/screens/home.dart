@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Reset button
             const EzResetButton(),
-            spacer,
+            separator,
           ],
         ),
       ),

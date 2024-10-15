@@ -160,7 +160,7 @@ class _ColorSettingsState extends State<ColorSettings> {
 
           // Reset button
           resetButton,
-          const EzSpacer(),
+          separator,
         ],
       ),
     );
