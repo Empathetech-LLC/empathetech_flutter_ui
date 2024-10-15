@@ -19,7 +19,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
-  final double? iconSize = textTheme.titleLarge?.fontSize;
+  final double iconSize = textTheme.titleLarge!.fontSize!;
 
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
@@ -28,7 +28,7 @@ ThemeData ezThemeData(Brightness brightness) {
   );
   final IconThemeData appBarIconData = IconThemeData(
     color: colorScheme.primary,
-    size: textTheme.headlineLarge?.fontSize,
+    size: textTheme.headlineLarge!.fontSize,
     applyTextScaling: true,
   );
 
@@ -147,7 +147,7 @@ ThemeData ezThemeData(Brightness brightness) {
         hintStyle: textTheme.bodyLarge,
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
-        errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+        errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
@@ -179,10 +179,10 @@ ThemeData ezThemeData(Brightness brightness) {
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
       sizeConstraints: BoxConstraints(
-        minWidth: padding * 2,
-        maxWidth: padding * 2,
-        minHeight: padding * 2,
-        maxHeight: padding * 2,
+        minWidth: (iconSize / 2) + (padding * 2),
+        maxWidth: (iconSize / 2) + (padding * 2),
+        minHeight: (iconSize / 2) + (padding * 2),
+        maxHeight: (iconSize / 2) + (padding * 2),
       ),
     ),
 
@@ -209,7 +209,7 @@ ThemeData ezThemeData(Brightness brightness) {
       suffixIconColor: colorScheme.primary,
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
-      errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+      errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
     ),
 
