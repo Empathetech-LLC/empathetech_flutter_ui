@@ -59,6 +59,9 @@
   "ssLanguages": "Langues",
   "ssLangHint": "Langue de l'appli",
 
+  "ssRandom": "Randomiser",
+  "ssRandomize": "Thème {themeType} aléatoire ?",
+
   "ssResetAll": "Réinitialiser tous les paramètres ?",
 
 

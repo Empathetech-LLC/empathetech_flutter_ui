@@ -59,6 +59,9 @@
   "ssLanguages": "Idiomas",
   "ssLangHint": "Idioma de la aplicación",
 
+  "ssRandom": "Aleatorizar",
+  "ssRandomize": "¿Aleatorizar el tema {themeType}?",
+
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 
 

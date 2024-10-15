@@ -356,6 +356,18 @@ abstract class EFUILang {
   /// **'App language'**
   String get ssLangHint;
 
+  /// No description provided for @ssRandom.
+  ///
+  /// In en, this message translates to:
+  /// **'Randomize'**
+  String get ssRandom;
+
+  /// No description provided for @ssRandomize.
+  ///
+  /// In en, this message translates to:
+  /// **'Randomize {themeType} theme?'**
+  String ssRandomize(Object themeType);
+
   /// No description provided for @ssResetAll.
   ///
   /// In en, this message translates to:

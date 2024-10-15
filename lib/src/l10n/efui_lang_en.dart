@@ -148,6 +148,14 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'App language';
 
   @override
+  String get ssRandom => 'Randomize';
+
+  @override
+  String ssRandomize(Object themeType) {
+    return 'Randomize $themeType theme?';
+  }
+
+  @override
   String get ssResetAll => 'Reset all settings?';
 
   @override
