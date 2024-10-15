@@ -6,15 +6,16 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
   /// Button label
-  /// Defaults to [EFUILang.BLARG]
+  /// Defaults to [EFUILang.ssRandom]
   final String? label;
 
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.BLARG]
+  /// Defaults to [EFUILang.ssRandomize]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
@@ -47,6 +48,10 @@ class EzConfigRandomizer extends StatelessWidget {
 
     final EFUILang l10n = EFUILang.of(context)!;
 
+    final String themeProfile = isDarkTheme(context)
+        ? l10n.gDark.toLowerCase()
+        : l10n.gLight.toLowerCase();
+
     // Define the button functions //
 
     final void Function() confirm =
@@ -61,7 +66,7 @@ class EzConfigRandomizer extends StatelessWidget {
         context: context,
         builder: (BuildContext dialogContext) => EzAlertDialog(
           title: Text(
-            dialogTitle ?? 'BLARG',
+            dialogTitle ?? l10n.ssRandomize(themeProfile),
             textAlign: TextAlign.center,
           ),
           content: Text(
@@ -102,8 +107,8 @@ class EzConfigRandomizer extends StatelessWidget {
 
     return EzElevatedIconButton(
       onPressed: randomizeDialog,
-      icon: const Icon(Icons.question_mark),
-      label: label ?? 'BLARG',
+      icon: const Icon(LineIcons.diceD6),
+      label: label ?? l10n.ssRandom,
     );
   }
 }
