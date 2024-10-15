@@ -19,14 +19,16 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
+  final double? iconSize = textTheme.titleLarge?.fontSize;
+
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
-    size: textTheme.titleLarge?.fontSize,
+    size: iconSize,
     applyTextScaling: true,
   );
   final IconThemeData appBarIconData = IconThemeData(
     color: colorScheme.primary,
-    size: textTheme.headlineLarge?.fontSize,
+    size: iconSize,
     applyTextScaling: true,
   );
 
@@ -174,8 +176,14 @@ ThemeData ezThemeData(Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
-      extendedPadding: EdgeInsets.all(padding),
+      extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
+      sizeConstraints: BoxConstraints(
+        minWidth: padding * 2,
+        maxWidth: padding * 2,
+        minHeight: padding * 2,
+        maxHeight: padding * 2,
+      ),
     ),
 
     // Icon button
@@ -186,7 +194,7 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: null,
-        iconSize: textTheme.titleLarge?.fontSize,
+        iconSize: iconSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
       ),
