@@ -41,7 +41,7 @@
   "gResetValue": "¿Restablecer {name}?",
   "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
-  "gResetWarn": "No se puede deshacer",
+  "gUndoWarn": "No se puede deshacer",
 
   "gCreditTo": "Acreditando a:",
   "gYou": "Configurado por ti",
