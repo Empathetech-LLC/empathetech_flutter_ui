@@ -19,14 +19,16 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
+  final double iconSize = textTheme.titleLarge!.fontSize!;
+
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
-    size: textTheme.titleLarge?.fontSize,
+    size: iconSize,
     applyTextScaling: true,
   );
   final IconThemeData appBarIconData = IconThemeData(
     color: colorScheme.primary,
-    size: textTheme.headlineLarge?.fontSize,
+    size: textTheme.headlineLarge!.fontSize,
     applyTextScaling: true,
   );
 
@@ -70,7 +72,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: colorScheme.primary,
-      selectionColor: colorScheme.secondary.withOpacity(containerOpacity),
+      selectionColor: colorScheme.secondary.withOpacity(selectionOpacity),
       selectionHandleColor: colorScheme.primary,
     ),
 
@@ -145,7 +147,7 @@ ThemeData ezThemeData(Brightness brightness) {
         hintStyle: textTheme.bodyLarge,
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
-        errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+        errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
@@ -174,8 +176,14 @@ ThemeData ezThemeData(Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
-      extendedPadding: EdgeInsets.all(padding),
+      extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
+      sizeConstraints: BoxConstraints(
+        minWidth: (iconSize / 2) + (padding * 2),
+        maxWidth: (iconSize / 2) + (padding * 2),
+        minHeight: (iconSize / 2) + (padding * 2),
+        maxHeight: (iconSize / 2) + (padding * 2),
+      ),
     ),
 
     // Icon button
@@ -186,7 +194,7 @@ ThemeData ezThemeData(Brightness brightness) {
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
         side: null,
-        iconSize: textTheme.titleLarge?.fontSize,
+        iconSize: iconSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
       ),
@@ -201,7 +209,7 @@ ThemeData ezThemeData(Brightness brightness) {
       suffixIconColor: colorScheme.primary,
       hintStyle: textTheme.bodyLarge,
       labelStyle: textTheme.labelLarge,
-      errorStyle: textTheme.labelLarge?.copyWith(color: colorScheme.error),
+      errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
     ),
 
@@ -254,9 +262,15 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Snackbar
     snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
       backgroundColor: colorScheme.surface,
       closeIconColor: colorScheme.primary,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colorScheme.secondary),
+        borderRadius: ezRoundEdge,
+      ),
       contentTextStyle: textTheme.bodyLarge,
+      insetPadding: EdgeInsets.all(margin),
     ),
 
     // Text button

@@ -32,11 +32,10 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// Approximate time it takes the average reader to complete the passage
-/// (reading silently to oneself)
-/// Min 1 second
+/// Comfortable reading time for a US tween: 100 words per minute
+/// Minimum 2 seconds
 Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
-  final int milliseconds = ((words / 250) * 60 * 100).ceil();
-  return Duration(milliseconds: max(milliseconds, 1000));
+  final int milliseconds = ((words / 100) * 60 * 100).ceil();
+  return Duration(milliseconds: max(milliseconds, 2000));
 }

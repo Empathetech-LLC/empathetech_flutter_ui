@@ -1,7 +1,7 @@
 # Open UI
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/README.md)
-[![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/README.es.md)
-[![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/README.fr.md)
+[![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/localized_readme/README.es.md)
+[![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/localized_readme/README.fr.md)
 
 Voir le [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme) source
 

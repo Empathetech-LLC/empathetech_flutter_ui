@@ -41,7 +41,7 @@
   "gResetValue": "¿Restablecer {name}?",
   "gResetValueTo": "Restablecer {name} a {value}",
   "gResetAll": "Restablecer todo",
-  "gResetWarn": "No se puede deshacer",
+  "gUndoWarn": "No se puede deshacer",
 
   "gCreditTo": "Acreditando a:",
   "gYou": "Configurado por ti",
@@ -58,6 +58,9 @@
   "ssLanguage": "Idioma",
   "ssLanguages": "Idiomas",
   "ssLangHint": "Idioma de la aplicación",
+
+  "ssRandom": "Aleatorizar",
+  "ssRandomize": "¿Aleatorizar el tema {themeType}?",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 

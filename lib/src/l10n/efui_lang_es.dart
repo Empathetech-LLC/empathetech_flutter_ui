@@ -113,7 +113,7 @@ class EFUILangEs extends EFUILang {
   String get gResetAll => 'Restablecer todo';
 
   @override
-  String get gResetWarn => 'No se puede deshacer';
+  String get gUndoWarn => 'No se puede deshacer';
 
   @override
   String get gCreditTo => 'Acreditando a:';
@@ -146,6 +146,14 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssLangHint => 'Idioma de la aplicación';
+
+  @override
+  String get ssRandom => 'Aleatorizar';
+
+  @override
+  String ssRandomize(Object themeType) {
+    return '¿Aleatorizar el tema $themeType?';
+  }
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';

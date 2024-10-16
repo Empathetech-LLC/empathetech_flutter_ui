@@ -290,11 +290,11 @@ abstract class EFUILang {
   /// **'Reset all'**
   String get gResetAll;
 
-  /// No description provided for @gResetWarn.
+  /// No description provided for @gUndoWarn.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone'**
-  String get gResetWarn;
+  String get gUndoWarn;
 
   /// No description provided for @gCreditTo.
   ///
@@ -355,6 +355,18 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'App language'**
   String get ssLangHint;
+
+  /// No description provided for @ssRandom.
+  ///
+  /// In en, this message translates to:
+  /// **'Randomize'**
+  String get ssRandom;
+
+  /// No description provided for @ssRandomize.
+  ///
+  /// In en, this message translates to:
+  /// **'Randomize {themeType} theme?'**
+  String ssRandomize(Object themeType);
 
   /// No description provided for @ssResetAll.
   ///

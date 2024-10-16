@@ -113,7 +113,7 @@ class EFUILangFr extends EFUILang {
   String get gResetAll => 'Tout réinitialiser';
 
   @override
-  String get gResetWarn => 'Ne peut pas être annulé';
+  String get gUndoWarn => 'Ne peut pas être annulé';
 
   @override
   String get gCreditTo => 'Crédits à :';
@@ -146,6 +146,14 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssLangHint => 'Langue de l\'appli';
+
+  @override
+  String get ssRandom => 'Randomiser';
+
+  @override
+  String ssRandomize(Object themeType) {
+    return 'Thème $themeType aléatoire ?';
+  }
 
   @override
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';

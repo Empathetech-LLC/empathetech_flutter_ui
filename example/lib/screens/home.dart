@@ -90,9 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             separator,
 
+            // Feeling lucky
+            const EzConfigRandomizer(),
+            separator,
+
             // Reset button
             const EzResetButton(),
-            spacer,
+            separator,
           ],
         ),
       ),

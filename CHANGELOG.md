@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.3.0] - 2024-10-19
+### Added
+- Randomize button
+  - Added more defaults to const file
+
+### Updated
+- Spacer -> Separator at bottom of sample screens
+- Reading time
+  - Now estimates 100 words/min reading rate and has a 2 second minimum
+- FAB theme
+- SnackBar theme
+- Line icons got promoted for the randomize button's D6 icon
+
+### Removed
+- logSnack dialog
+- Scaffold messenger key from Open UI
+  - Updated to context call
+
 ## [7.2.1] - 2024-10-08
 ### Added
 - EzConfig.reset

@@ -6,24 +6,24 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzResetButton extends StatelessWidget {
+class EzConfigRandomizer extends StatelessWidget {
   /// Button label
-  /// Defaults to [EFUILang.gResetAll]
+  /// Defaults to [EFUILang.ssRandom]
   final String? label;
 
   /// [EzAlertDialog.title] that shows on click
-  /// Defaults to [EFUILang.ssResetAll]
+  /// Defaults to [EFUILang.ssRandomize]
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
   /// Defaults to [EFUILang.gUndoWarn]
   final String? dialogContent;
 
-  /// What happens when the user choses to reset
-  /// Defaults to clearing user [SharedPreferences]
+  /// What happens when the user choses to randomize
+  /// Defaults to [EzConfig.randomize]
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onConfirm;
 
@@ -31,10 +31,9 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
-  /// Colors are reversed to stand out
-  /// [EzResetButton] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
-  const EzResetButton({
+  /// Standardized [EzElevatedIconButton] for randomizing EzConfig
+  /// [EzConfigRandomizer] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  const EzConfigRandomizer({
     super.key,
     this.label,
     this.dialogTitle,
@@ -49,20 +48,25 @@ class EzResetButton extends StatelessWidget {
 
     final EFUILang l10n = EFUILang.of(context)!;
 
+    final String themeProfile = isDarkTheme(context)
+        ? l10n.gDark.toLowerCase()
+        : l10n.gLight.toLowerCase();
+
     // Define the button functions //
 
-    final void Function() confirm = onConfirm ?? () => EzConfig.reset();
+    final void Function() confirm =
+        onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
 
     final void Function() deny = onDeny ?? doNothing;
 
     // Define the dialog //
 
-    void resetDialog() {
+    void randomizeDialog() {
       showPlatformDialog(
         context: context,
         builder: (BuildContext dialogContext) => EzAlertDialog(
           title: Text(
-            dialogTitle ?? l10n.ssResetAll,
+            dialogTitle ?? l10n.ssRandomize(themeProfile),
             textAlign: TextAlign.center,
           ),
           content: Text(
@@ -102,9 +106,9 @@ class EzResetButton extends StatelessWidget {
     // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: resetDialog,
-      icon: Icon(PlatformIcons(context).refresh),
-      label: label ?? l10n.gResetAll,
+      onPressed: randomizeDialog,
+      icon: const Icon(LineIcons.diceD6),
+      label: label ?? l10n.ssRandom,
     );
   }
 }

@@ -26,9 +26,9 @@ const String displayFontSizeKey = 'displayFontSize';
 const String displayBoldKey = 'displayBolded';
 const String displayItalicsKey = 'displayItalicized';
 const String displayUnderlinedKey = 'displayUnderlined';
-const String displayFontHeightKey = 'displayFontHeight';
 const String displayLetterSpacingKey = 'displayLetterSpacing';
 const String displayWordSpacingKey = 'displayWordSpacing';
+const String displayFontHeightKey = 'displayFontHeight';
 
 // Headline
 const String headlineFontFamilyKey = 'headlineFontFamily';
@@ -36,9 +36,9 @@ const String headlineFontSizeKey = 'headlineFontSize';
 const String headlineBoldKey = 'headlineBolded';
 const String headlineItalicsKey = 'headlineItalicized';
 const String headlineUnderlinedKey = 'headlineUnderlined';
-const String headlineFontHeightKey = 'headlineFontHeight';
 const String headlineLetterSpacingKey = 'headlineLetterSpacing';
 const String headlineWordSpacingKey = 'headlineWordSpacing';
+const String headlineFontHeightKey = 'headlineFontHeight';
 
 // Title
 const String titleFontFamilyKey = 'titleFontFamily';
@@ -46,9 +46,9 @@ const String titleFontSizeKey = 'titleFontSize';
 const String titleBoldKey = 'titleBolded';
 const String titleItalicsKey = 'titleItalicized';
 const String titleUnderlinedKey = 'titleUnderlined';
-const String titleFontHeightKey = 'titleFontHeight';
 const String titleLetterSpacingKey = 'titleLetterSpacing';
 const String titleWordSpacingKey = 'titleWordSpacing';
+const String titleFontHeightKey = 'titleFontHeight';
 
 // Body
 const String bodyFontFamilyKey = 'bodyFontFamily';
@@ -56,9 +56,9 @@ const String bodyFontSizeKey = 'bodyFontSize';
 const String bodyBoldKey = 'bodyBolded';
 const String bodyItalicsKey = 'bodyItalicized';
 const String bodyUnderlinedKey = 'bodyUnderlined';
-const String bodyFontHeightKey = 'bodyFontHeight';
 const String bodyLetterSpacingKey = 'bodyLetterSpacing';
 const String bodyWordSpacingKey = 'bodyWordSpacing';
+const String bodyFontHeightKey = 'bodyFontHeight';
 
 // Label
 const String labelFontFamilyKey = 'labelFontFamily';
@@ -66,9 +66,9 @@ const String labelFontSizeKey = 'labelFontSize';
 const String labelBoldKey = 'labelBolded';
 const String labelItalicsKey = 'labelItalicized';
 const String labelUnderlinedKey = 'labelUnderlined';
-const String labelFontHeightKey = 'labelFontHeight';
 const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
+const String labelFontHeightKey = 'labelFontHeight';
 
 // Background opacity
 const String darkTextBackgroundOKey = 'darkTextBackgroundOpacity';
@@ -81,52 +81,52 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Display
   displayFontFamilyKey: String,
   displayFontSizeKey: double,
-  displayBoldKey: String,
-  displayItalicsKey: String,
+  displayBoldKey: bool,
+  displayItalicsKey: bool,
+  displayUnderlinedKey: bool,
   displayLetterSpacingKey: double,
   displayWordSpacingKey: double,
   displayFontHeightKey: double,
-  displayUnderlinedKey: String,
 
   // Headline
   headlineFontFamilyKey: String,
   headlineFontSizeKey: double,
-  headlineBoldKey: String,
-  headlineItalicsKey: String,
+  headlineBoldKey: bool,
+  headlineItalicsKey: bool,
+  headlineUnderlinedKey: bool,
   headlineLetterSpacingKey: double,
   headlineWordSpacingKey: double,
   headlineFontHeightKey: double,
-  headlineUnderlinedKey: String,
 
   // Title
   titleFontFamilyKey: String,
   titleFontSizeKey: double,
-  titleBoldKey: String,
-  titleItalicsKey: String,
+  titleBoldKey: bool,
+  titleItalicsKey: bool,
+  titleUnderlinedKey: bool,
   titleLetterSpacingKey: double,
   titleWordSpacingKey: double,
   titleFontHeightKey: double,
-  titleUnderlinedKey: String,
 
   // Body
   bodyFontFamilyKey: String,
   bodyFontSizeKey: double,
-  bodyBoldKey: String,
-  bodyItalicsKey: String,
+  bodyBoldKey: bool,
+  bodyItalicsKey: bool,
+  bodyUnderlinedKey: bool,
   bodyLetterSpacingKey: double,
   bodyWordSpacingKey: double,
   bodyFontHeightKey: double,
-  bodyUnderlinedKey: String,
 
   // Label
   labelFontFamilyKey: String,
   labelFontSizeKey: double,
-  labelBoldKey: String,
-  labelItalicsKey: String,
+  labelBoldKey: bool,
+  labelItalicsKey: bool,
+  labelUnderlinedKey: bool,
   labelLetterSpacingKey: double,
   labelWordSpacingKey: double,
   labelFontHeightKey: double,
-  labelUnderlinedKey: String,
 
   // Background opacity
   darkTextBackgroundOKey: double,

@@ -160,7 +160,7 @@ class _ColorSettingsState extends State<ColorSettings> {
 
           // Reset button
           resetButton,
-          const EzSpacer(),
+          separator,
         ],
       ),
     );
@@ -408,7 +408,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         EzSwapWidget(
           large: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: widthOf(context) * (2 / 3),
+              maxWidth: widthOf(context) * 0.667,
             ),
             child: Wrap(
               alignment: WrapAlignment.center,

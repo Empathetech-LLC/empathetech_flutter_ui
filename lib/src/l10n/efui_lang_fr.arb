@@ -41,7 +41,7 @@
   "gResetValue": "Réinitialiser {name} ?",
   "gResetValueTo": "Réinitialiser {name} à {value}",
   "gResetAll": "Tout réinitialiser",
-  "gResetWarn": "Ne peut pas être annulé",
+  "gUndoWarn": "Ne peut pas être annulé",
 
   "gCreditTo": "Crédits à :",
   "gYou": "Défini par vous",
@@ -58,6 +58,9 @@
   "ssLanguage": "Langue",
   "ssLanguages": "Langues",
   "ssLangHint": "Langue de l'appli",
+
+  "ssRandom": "Randomiser",
+  "ssRandomize": "Thème {themeType} aléatoire ?",
 
   "ssResetAll": "Réinitialiser tous les paramètres ?",
 

@@ -113,7 +113,7 @@ class EFUILangEn extends EFUILang {
   String get gResetAll => 'Reset all';
 
   @override
-  String get gResetWarn => 'Cannot be undone';
+  String get gUndoWarn => 'Cannot be undone';
 
   @override
   String get gCreditTo => 'Credit to:';
@@ -146,6 +146,14 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssLangHint => 'App language';
+
+  @override
+  String get ssRandom => 'Randomize';
+
+  @override
+  String ssRandomize(Object themeType) {
+    return 'Randomize $themeType theme?';
+  }
 
   @override
   String get ssResetAll => 'Reset all settings?';
