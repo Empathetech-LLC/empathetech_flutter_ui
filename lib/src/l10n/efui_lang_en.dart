@@ -113,7 +113,7 @@ class EFUILangEn extends EFUILang {
   String get gResetAll => 'Reset all';
 
   @override
-  String get gResetWarn => 'Cannot be undone';
+  String get gUndoWarn => 'Cannot be undone';
 
   @override
   String get gCreditTo => 'Credit to:';

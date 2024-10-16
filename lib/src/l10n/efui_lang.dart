@@ -290,11 +290,11 @@ abstract class EFUILang {
   /// **'Reset all'**
   String get gResetAll;
 
-  /// No description provided for @gResetWarn.
+  /// No description provided for @gUndoWarn.
   ///
   /// In en, this message translates to:
   /// **'Cannot be undone'**
-  String get gResetWarn;
+  String get gUndoWarn;
 
   /// No description provided for @gCreditTo.
   ///

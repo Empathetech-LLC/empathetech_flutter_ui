@@ -41,7 +41,7 @@
   "gResetValue": "Reset {name}?",
   "gResetValueTo": "Reset {name} to {value}",
   "gResetAll": "Reset all",
-  "gResetWarn": "Cannot be undone",
+  "gUndoWarn": "Cannot be undone",
 
   "gCreditTo": "Credit to:",
   "gYou": "Set by you",
