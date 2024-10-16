@@ -41,7 +41,7 @@ Future<void> testResetButton(
       await validateText(tester, l10n.isResetAll(l10n.gDark.toLowerCase()));
       break;
   }
-  await validateText(tester, l10n.gResetWarn);
+  await validateText(tester, l10n.gUndoWarn);
 
   debugPrint('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);

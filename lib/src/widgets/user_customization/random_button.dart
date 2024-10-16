@@ -19,7 +19,7 @@ class EzConfigRandomizer extends StatelessWidget {
   final String? dialogTitle;
 
   /// [EzAlertDialog.content] that shows on click
-  /// Defaults to [EFUILang.gResetWarn]
+  /// Defaults to [EFUILang.gUndoWarn]
   final String? dialogContent;
 
   /// What happens when the user choses to randomize
@@ -70,7 +70,7 @@ class EzConfigRandomizer extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           content: Text(
-            dialogContent ?? l10n.gResetWarn,
+            dialogContent ?? l10n.gUndoWarn,
             textAlign: TextAlign.center,
           ),
           materialActions: ezMaterialActions(
