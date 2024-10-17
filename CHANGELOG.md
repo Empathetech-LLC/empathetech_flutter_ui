@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Stuff
 
-## [7.3.0] - 2024-10-19
+## [7.3.0] - 2024-10-16
 ### Added
 - Randomize button
   - Added more defaults to const file
