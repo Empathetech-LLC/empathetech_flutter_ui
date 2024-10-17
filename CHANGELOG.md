@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [7.3.1] - 2024-10-XX
 ### Updated
-- Stuff
+- Updated snack bars to have a half second notice time
+- Updated snack bar bounds
+- Added progress indicator to snack bars
+- "Reload" -> "Reload/refresh" (Web) && "Close and reopen" (other)
+- Restored BackFAB
 
 ## [7.3.0] - 2024-10-16
 ### Added
