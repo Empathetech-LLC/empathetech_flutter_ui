@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.3.1] - 2024-10-XX
+### Updated
+- Stuff
+
 ## [7.3.0] - 2024-10-19
 ### Added
 - Randomize button
