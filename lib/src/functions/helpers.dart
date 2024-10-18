@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -32,10 +31,9 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// Comfortable reading time for a US tween: 100 words per minute
-/// Minimum 2 seconds
+/// Reading time for a US tween: 150 words per minute
 Duration readingTime(String passage) {
-  final int words = passage.split(' ').length;
-  final int milliseconds = ((words / 100) * 60 * 100).ceil();
-  return Duration(milliseconds: max(milliseconds, 2000));
+  final int words = passage.split(r'\w\s/_-').length;
+  debugPrint('Reading time: $words words');
+  return Duration(milliseconds: ((words / 150) * 60 * 1000).ceil());
 }
