@@ -31,7 +31,7 @@ dependencies:
   flutter_platform_widgets: ^7.0.1
   line_icons: ^2.0.3 
   provider: ^6.1.2
-  share_plus: ^10.0.3
+  share_plus: ^10.1.0
 
 dev_dependencies:
   # For development
