@@ -56,6 +56,9 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get gAttachScreenshot => 'Adjunte su captura de pantalla';
+
+  @override
   String get gLeft => 'Izquierda';
 
   @override

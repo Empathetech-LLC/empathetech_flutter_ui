@@ -56,6 +56,9 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get gAttachScreenshot => 'Please attach your screenshot';
+
+  @override
   String get gLeft => 'Left';
 
   @override

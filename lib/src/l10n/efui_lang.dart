@@ -188,6 +188,12 @@ abstract class EFUILang {
   /// **'Please take a screenshot{hint} of the issue.'**
   String gSubmitWebFeedback(Object hint);
 
+  /// No description provided for @gAttachScreenshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Please attach your screenshot'**
+  String get gAttachScreenshot;
+
   /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:

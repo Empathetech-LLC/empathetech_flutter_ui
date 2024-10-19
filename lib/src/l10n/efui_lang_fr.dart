@@ -56,6 +56,9 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
+  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
+
+  @override
   String get gLeft => 'Gauche';
 
   @override
