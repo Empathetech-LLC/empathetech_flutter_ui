@@ -31,9 +31,9 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// Reading time for a US tween: 150 words per minute
+/// Reading time for a US tween: 125 words per minute
 Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
   debugPrint('Reading time: $words words');
-  return Duration(milliseconds: ((words / 150) * 60 * 1000).ceil());
+  return Duration(milliseconds: ((words / 125) * 60 * 1000).ceil());
 }
