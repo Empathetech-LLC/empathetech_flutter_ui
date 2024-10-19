@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 /// Calculates [SnackBar.width] based on [message] and [context]
@@ -68,10 +69,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       dismissDirection: dismissDirection ?? DismissDirection.down,
       clipBehavior: clipBehavior,
       padding: EdgeInsets.all(toastMargin),
-      width: snackWidth(
-        context: context,
-        message: message,
-        margin: toastMargin,
+      width: min(
+        snackWidth(context: context, message: message, margin: toastMargin),
+        widthOf(context),
       ),
       content: Row(
         mainAxisSize: MainAxisSize.min,
