@@ -3,7 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
+// ignore_for_file: avoid_web_libraries_in_flutter
+
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
@@ -36,4 +40,41 @@ Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
   debugPrint('Reading time: $words words');
   return Duration(milliseconds: ((words / 125) * 60 * 1000).ceil());
+}
+
+/// Get the current [TargetPlatform]
+/// Including the base platform when [kIsWeb]
+TargetPlatform getBasePlatform(BuildContext context) {
+  if (!kIsWeb) return Theme.of(context).platform;
+
+  final String userAgent = html.window.navigator.userAgent;
+
+  if (userAgent.contains('Android')) {
+    return TargetPlatform.android;
+  } else if (userAgent.contains('iPhone') || userAgent.contains('iPad')) {
+    return TargetPlatform.iOS;
+  } else if (userAgent.contains('Mac OS')) {
+    return TargetPlatform.macOS;
+  } else if (userAgent.contains('Windows')) {
+    return TargetPlatform.windows;
+  } else {
+    return TargetPlatform.linux;
+  }
+}
+
+/// Button combo(s) for taking a screenshot on the current [TargetPlatform]
+/// Empty for mobile
+String screenshotHint(BuildContext context) {
+  final TargetPlatform platform = getBasePlatform(context);
+
+  switch (platform) {
+    case TargetPlatform.linux:
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.windows:
+      return '(Alt + Print Screen)';
+    case TargetPlatform.macOS:
+      return '(Command + Shift + 4)';
+    default:
+      return '';
+  }
 }
