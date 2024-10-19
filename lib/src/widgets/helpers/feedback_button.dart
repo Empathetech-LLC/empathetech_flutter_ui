@@ -22,27 +22,12 @@ class FeedbackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double margin = EzConfig.get(marginKey);
-
-    late final String message = l10n.gClipboard(l10n.gSupportEmail);
-    late final Duration duration = readingTime(message);
+    final String message = l10n.gClipboard(l10n.gSupportEmail);
 
     return EzMenuButton(
       onPressed: () async {
         await ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(
-              padding: EdgeInsets.all(margin),
-              width: snackWidth(context: context, message: message),
-              content: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Flexible(child: Text(message, textAlign: TextAlign.center)),
-                  EzSpacer(space: margin, vertical: false),
-                  EzCountdownTimer(duration: duration),
-                ],
-              ),
-              duration: duration,
-            ))
+            .showSnackBar(EzSnackBar(message: message) as SnackBar)
             .closed;
 
         if (context.mounted) {
