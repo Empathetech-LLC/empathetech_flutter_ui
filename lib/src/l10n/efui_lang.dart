@@ -146,6 +146,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'{thing} copied to clipboard'**
+  String gClipboard(Object thing);
+
   /// No description provided for @gBYO.
   ///
   /// In en, this message translates to:
@@ -170,17 +176,17 @@ abstract class EFUILang {
   /// **'Opening feedback tool'**
   String get gOpeningFeedback;
 
-  /// No description provided for @gClipboard.
-  ///
-  /// In en, this message translates to:
-  /// **'{thing} copied to clipboard'**
-  String gClipboard(Object thing);
-
   /// No description provided for @gSupportEmail.
   ///
   /// In en, this message translates to:
   /// **'Support Email'**
   String get gSupportEmail;
+
+  /// No description provided for @gSubmitWebFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Please take a screenshot{hint} before hitting Submit'**
+  String gSubmitWebFeedback(Object hint);
 
   /// No description provided for @gLeft.
   ///

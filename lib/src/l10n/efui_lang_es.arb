@@ -11,13 +11,14 @@
   "gContinue": "Continuar",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
+  "gClipboard": "{thing} copiado al portapapeles",
 
   "gBYO": "Construye uno",
   "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
   "gGiveFeedback": "Dar feedback",
   "gOpeningFeedback": "Apertura de la herramienta de feedback",
-  "gClipboard": "{thing} copiado al portapapeles",
   "gSupportEmail": "Email de soporte",
+  "gSubmitWebFeedback": "Tome una captura de pantalla{hint} antes de presionar Entregar",
 
   "gLeft": "Izquierda",
   "gRight": "Derecha",
