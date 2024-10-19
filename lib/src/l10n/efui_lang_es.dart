@@ -32,7 +32,7 @@ class EFUILangEs extends EFUILang {
 
   @override
   String gClipboard(Object thing) {
-    return '$thing copiado al portapapeles';
+    return '$thing ha sido copiado al portapapeles';
   }
 
   @override
@@ -48,7 +48,7 @@ class EFUILangEs extends EFUILang {
   String get gOpeningFeedback => 'Apertura de la herramienta de feedback';
 
   @override
-  String get gSupportEmail => 'Email de soporte';
+  String get gSupportEmail => 'Nuestro Email de soporte';
 
   @override
   String gSubmitWebFeedback(Object hint) {

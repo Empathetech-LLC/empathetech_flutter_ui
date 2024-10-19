@@ -32,7 +32,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String gClipboard(Object thing) {
-    return '$thing copied to clipboard';
+    return '$thing has been copied to the clipboard';
   }
 
   @override
@@ -45,10 +45,10 @@ class EFUILangEn extends EFUILang {
   String get gGiveFeedback => 'Give feedback';
 
   @override
-  String get gOpeningFeedback => 'Opening feedback tool';
+  String get gOpeningFeedback => 'Opening the feedback tool';
 
   @override
-  String get gSupportEmail => 'Support Email';
+  String get gSupportEmail => 'Our support Email';
 
   @override
   String gSubmitWebFeedback(Object hint) {
