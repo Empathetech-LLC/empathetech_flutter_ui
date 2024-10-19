@@ -40,6 +40,9 @@ class EFUILangFr extends EFUILang {
   String get gGiveFeedback => 'Partager des commentaires';
 
   @override
+  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback';
+
+  @override
   String gClipboard(Object thing) {
     return '$thing copié dans le presse-papiers';
   }

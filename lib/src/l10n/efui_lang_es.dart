@@ -40,6 +40,9 @@ class EFUILangEs extends EFUILang {
   String get gGiveFeedback => 'Dar feedback';
 
   @override
+  String get gOpeningFeedback => 'Apertura de la herramienta de feedback';
+
+  @override
   String gClipboard(Object thing) {
     return '$thing copiado al portapapeles';
   }

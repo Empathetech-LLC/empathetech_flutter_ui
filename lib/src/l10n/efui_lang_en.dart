@@ -40,6 +40,9 @@ class EFUILangEn extends EFUILang {
   String get gGiveFeedback => 'Give feedback';
 
   @override
+  String get gOpeningFeedback => 'Opening feedback tool';
+
+  @override
   String gClipboard(Object thing) {
     return '$thing copied to clipboard';
   }

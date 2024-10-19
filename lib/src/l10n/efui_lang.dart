@@ -164,6 +164,12 @@ abstract class EFUILang {
   /// **'Give feedback'**
   String get gGiveFeedback;
 
+  /// No description provided for @gOpeningFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening feedback tool'**
+  String get gOpeningFeedback;
+
   /// No description provided for @gClipboard.
   ///
   /// In en, this message translates to:
