@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -38,22 +36,4 @@ Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
   debugPrint('Reading time: $words words');
   return Duration(milliseconds: ((words / 125) * 60 * 1000).ceil());
-}
-
-/// Calculates [SnackBar.width] based on [message] and [context]
-/// [style] defaults to [SnackBarThemeData.contentTextStyle]
-double snackWidth({
-  required BuildContext context,
-  required String message,
-  TextStyle? style,
-}) {
-  final TextStyle? snackStyle =
-      style ?? Theme.of(context).snackBarTheme.contentTextStyle;
-
-  final double iconRadius =
-      measureIcon(Icons.circle, context: context, style: snackStyle).width;
-
-  return measureText(message, context: context, style: snackStyle).width +
-      iconRadius * 2 +
-      3 * EzConfig.get(marginKey);
 }
