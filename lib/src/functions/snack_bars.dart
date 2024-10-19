@@ -27,6 +27,9 @@ double snackWidth({
 }
 
 /// Standardized [SnackBar] with an [EzCountdownTimer]
+/// Most parameters are available, but [SnackBar.padding], [SnackBar.width], [SnackBar.content], and [SnackBar.duration] are controlled
+/// [SnackBar.padding] can be influenced by [margin], [SnackBar.padding] is always [EdgeInsets.all]
+/// [SnackBar.width], [SnackBar.content], and [SnackBar.duration] all respond to [message]
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   Color? backgroundColor,
   double? elevation,
@@ -56,11 +59,11 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       behavior: behavior,
       action: action,
       actionOverflowThreshold: actionOverflowThreshold,
-      showCloseIcon: showCloseIcon,
-      closeIconColor: closeIconColor,
+      showCloseIcon: showCloseIcon ?? true,
+      closeIconColor: closeIconColor ?? Theme.of(context).colorScheme.primary,
       animation: animation,
       onVisible: onVisible,
-      dismissDirection: dismissDirection,
+      dismissDirection: dismissDirection ?? DismissDirection.down,
       clipBehavior: clipBehavior,
       padding: EdgeInsets.all(toastMargin),
       width: snackWidth(
