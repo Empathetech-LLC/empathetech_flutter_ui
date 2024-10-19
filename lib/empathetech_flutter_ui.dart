@@ -54,6 +54,7 @@ export 'src/widgets/helpers/row.dart';
 export 'src/widgets/helpers/screen.dart';
 export 'src/widgets/helpers/scroll_view.dart';
 export 'src/widgets/helpers/sizing.dart';
+export 'src/widgets/helpers/snackbar.dart';
 export 'src/widgets/helpers/spacers.dart';
 export 'src/widgets/helpers/text_background.dart';
 export 'src/widgets/helpers/warning.dart';
