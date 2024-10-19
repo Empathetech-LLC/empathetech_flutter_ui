@@ -8,25 +8,37 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-/// Calculates [SnackBar.width] based on [message] and [context]
+/// Calculates [ezSnackBar] width based on [message] and [context]
 /// [style] defaults to [SnackBarThemeData.contentTextStyle]
 double snackWidth({
   required BuildContext context,
   required String message,
   TextStyle? style,
   double? margin,
+  bool showCloseIcon = true,
 }) {
   final TextStyle? snackStyle =
       style ?? Theme.of(context).snackBarTheme.contentTextStyle;
 
   final double snackMargin = margin ?? EzConfig.get(marginKey);
 
-  final double iconRadius =
-      measureIcon(Icons.circle, context: context, style: snackStyle).width;
+  final double countDownSize =
+      measureIcon(Icons.circle, context: context, style: snackStyle).width * 2;
+
+  final double closeIconSize = showCloseIcon
+      ? (Theme.of(context)
+                  .iconButtonTheme
+                  .style
+                  ?.iconSize
+                  ?.resolve(<WidgetState>{WidgetState.selected}) ??
+              0) +
+          EzConfig.get(spacingKey)
+      : 0;
 
   return measureText(message, context: context, style: snackStyle).width +
-      iconRadius * 2 +
-      3 * snackMargin;
+      countDownSize +
+      closeIconSize +
+      (snackMargin * 3);
 }
 
 /// Standardized [SnackBar] with an [EzCountdownTimer]
@@ -70,7 +82,12 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
       clipBehavior: clipBehavior,
       padding: EdgeInsets.all(toastMargin),
       width: min(
-        snackWidth(context: context, message: message, margin: toastMargin),
+        snackWidth(
+          context: context,
+          message: message,
+          margin: toastMargin,
+          showCloseIcon: showCloseIcon ?? true,
+        ),
         widthOf(context),
       ),
       content: Row(
