@@ -173,7 +173,7 @@ abstract class EFUILang {
   /// No description provided for @gOpeningFeedback.
   ///
   /// In en, this message translates to:
-  /// **'Opening the feedback tool'**
+  /// **'Opening the feedback tool.'**
   String get gOpeningFeedback;
 
   /// No description provided for @gSupportEmail.
@@ -185,7 +185,7 @@ abstract class EFUILang {
   /// No description provided for @gSubmitWebFeedback.
   ///
   /// In en, this message translates to:
-  /// **'Please take a screenshot{hint} before hitting Submit'**
+  /// **'Please take a screenshot{hint} of the issue.'**
   String gSubmitWebFeedback(Object hint);
 
   /// No description provided for @gLeft.

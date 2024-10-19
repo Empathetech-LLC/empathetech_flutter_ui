@@ -45,14 +45,14 @@ class EFUILangEn extends EFUILang {
   String get gGiveFeedback => 'Give feedback';
 
   @override
-  String get gOpeningFeedback => 'Opening the feedback tool';
+  String get gOpeningFeedback => 'Opening the feedback tool.';
 
   @override
   String get gSupportEmail => 'Our support Email';
 
   @override
   String gSubmitWebFeedback(Object hint) {
-    return 'Please take a screenshot$hint before hitting Submit';
+    return 'Please take a screenshot$hint of the issue.';
   }
 
   @override

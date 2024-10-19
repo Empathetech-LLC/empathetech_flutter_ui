@@ -16,9 +16,9 @@
   "gBYO": "Build your own",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
   "gGiveFeedback": "Give feedback",
-  "gOpeningFeedback": "Opening the feedback tool",
+  "gOpeningFeedback": "Opening the feedback tool.",
   "gSupportEmail": "Our support Email",
-  "gSubmitWebFeedback": "Please take a screenshot{hint} before hitting Submit",
+  "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
 
   "gLeft": "Left",
   "gRight": "Right",

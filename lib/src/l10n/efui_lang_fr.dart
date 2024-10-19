@@ -45,14 +45,14 @@ class EFUILangFr extends EFUILang {
   String get gGiveFeedback => 'Partager des commentaires';
 
   @override
-  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback';
+  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
 
   @override
   String get gSupportEmail => 'Notre Email de support';
 
   @override
   String gSubmitWebFeedback(Object hint) {
-    return 'Veuillez prendre une capture d\'écran$hint avant de cliquer sur Soumettre';
+    return 'Veuillez prendre une capture d\'écran$hint du problème.';
   }
 
   @override
