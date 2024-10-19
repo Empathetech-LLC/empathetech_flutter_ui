@@ -14,16 +14,22 @@ double snackWidth({
   required String message,
   TextStyle? style,
   double? margin,
+  bool showCloseIcon = true,
 }) {
   final TextStyle? snackStyle =
       style ?? Theme.of(context).snackBarTheme.contentTextStyle;
 
+  final double snackMargin = margin ?? EzConfig.get(marginKey);
+
   final double iconRadius =
       measureIcon(Icons.circle, context: context, style: snackStyle).width;
 
-  return measureText(message, context: context, style: snackStyle).width +
-      iconRadius * 2 +
-      3 * (margin ?? EzConfig.get(marginKey));
+  final double wNoClose =
+      measureText(message, context: context, style: snackStyle).width +
+          iconRadius * 2 +
+          3 * snackMargin;
+
+  return showCloseIcon ? (wNoClose + iconRadius * 2 + snackMargin) : wNoClose;
 }
 
 /// Standardized [SnackBar] with an [EzCountdownTimer]
@@ -70,6 +76,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
         context: context,
         message: message,
         margin: toastMargin,
+        showCloseIcon: showCloseIcon ?? true,
       ),
       content: Row(
         mainAxisSize: MainAxisSize.min,
