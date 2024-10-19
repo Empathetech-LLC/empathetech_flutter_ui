@@ -38,7 +38,6 @@ double heightOf(BuildContext context) {
 /// Relaxed reading time for a US tween: 100 words per minute
 Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
-  debugPrint('Reading time: $words words');
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
