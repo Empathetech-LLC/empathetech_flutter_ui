@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// [debugPrint] rename
-/// 100% so I can search for DebugPrint in my code to find the temporary ones
+/// 100% so I can search for [debugPrint] in my code to find the temporary ones
 void ezLog(String message, {int? wrapWidth}) =>
     debugPrint(message, wrapWidth: wrapWidth);
 
