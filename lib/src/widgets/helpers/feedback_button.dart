@@ -3,11 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FeedbackButton extends StatelessWidget {
   final EFUILang l10n;
