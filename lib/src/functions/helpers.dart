@@ -71,9 +71,9 @@ String screenshotHint(BuildContext context) {
     case TargetPlatform.linux:
     case TargetPlatform.fuchsia:
     case TargetPlatform.windows:
-      return '(Alt + Print Screen)';
+      return ' (Alt + Print Screen)';
     case TargetPlatform.macOS:
-      return '(Command + Shift + 4)';
+      return ' (Command + Shift + 4)';
     default:
       return '';
   }
