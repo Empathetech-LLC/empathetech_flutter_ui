@@ -8,6 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
 
 class FeedbackButton extends StatelessWidget {
@@ -22,7 +23,9 @@ class FeedbackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String message = l10n.gClipboard(l10n.gSupportEmail);
+    String message =
+        '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
+    if (kIsWeb) message += l10n.gSubmitWebFeedback(screenshotHint(context));
 
     return EzMenuButton(
       onPressed: () async {
