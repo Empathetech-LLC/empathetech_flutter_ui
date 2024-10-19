@@ -35,11 +35,11 @@ double heightOf(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-/// Reading time for a US tween: 125 words per minute
+/// Relaxed reading time for a US tween: 100 words per minute
 Duration readingTime(String passage) {
   final int words = passage.split(' ').length;
   debugPrint('Reading time: $words words');
-  return Duration(milliseconds: ((words / 125) * 60 * 1000).ceil());
+  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
 /// Get the current [TargetPlatform]
@@ -73,7 +73,7 @@ String screenshotHint(BuildContext context) {
     case TargetPlatform.windows:
       return ' (Alt + Print Screen)';
     case TargetPlatform.macOS:
-      return ' (Command + Shift + 4)';
+      return ' (Command + Shift + 5)';
     default:
       return '';
   }
