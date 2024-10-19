@@ -16,7 +16,7 @@ Future<void> logAlert(
   String? title,
   required String message,
 }) async {
-  debugPrint(message);
+  ezLog(message);
   await showPlatformDialog(
     context: context,
     builder: (BuildContext context) => EzAlertDialog(

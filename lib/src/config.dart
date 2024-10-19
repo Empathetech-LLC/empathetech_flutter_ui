@@ -97,7 +97,7 @@ class EzConfig {
             break;
 
           default:
-            debugPrint('''Key [$key] has unsupported Type [$valueType]
+            ezLog('''Key [$key] has unsupported Type [$valueType]
 Must be one of [int, bool, double, String, List<String>]''');
             break;
         }
@@ -495,7 +495,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         }
       } else {
         success = false;
-        debugPrint('Failed to remove key [$key]');
+        ezLog('Failed to remove key [$key]');
       }
     }
 
@@ -516,7 +516,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         }
       } else {
         success = false;
-        debugPrint('Failed to remove key [$key]');
+        ezLog('Failed to remove key [$key]');
       }
     }
 

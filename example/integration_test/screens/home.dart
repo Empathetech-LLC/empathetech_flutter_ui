@@ -18,20 +18,20 @@ void testSuite({
     testWidgets('home-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
-      testLog('Loading localizations');
+      ezLog('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
       final LocaleNames l10nNames =
           await const LocaleNamesLocalizationsDelegate().load(locale);
 
       // Load the app //
 
-      testLog('Loading OpenUI');
+      ezLog('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       // Verify text loaded //
 
-      testLog('\nValidating text');
+      ezLog('\nValidating text');
       await validateText(tester, appTitle);
       await validateWidget(tester, EzWarning);
       await validateText(tester, l10n.ssDominantHand);
@@ -41,13 +41,13 @@ void testSuite({
 
       // Options menu //
 
-      testLog('\nTesting options menu');
+      ezLog('\nTesting options menu');
       await touch(tester, find.byType(MenuAnchor).last);
 
       expect(find.text(l10n.gBYO).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 
-      testLog('Dismissing');
+      ezLog('Dismissing');
       await dismissTap(tester);
 
       await testDHSetting(tester, l10n: l10n, isLefty: isLefty);
@@ -70,5 +70,5 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      testLog('\nSettings home test suite complete\n\n');
+      ezLog('\nSettings home test suite complete\n\n');
     });

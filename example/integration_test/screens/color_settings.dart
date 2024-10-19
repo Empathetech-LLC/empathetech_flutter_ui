@@ -21,18 +21,18 @@ void testSuite({
     testWidgets('color-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
-      testLog('Loading localizations');
+      ezLog('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
-      testLog('Loading OpenUI');
+      ezLog('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       // Test navigation //
 
-      testLog('\nTesting navigation');
+      ezLog('\nTesting navigation');
 
       await touch(
         tester,
@@ -41,18 +41,18 @@ void testSuite({
 
       //* Test functionality: Quick settings *//
 
-      testLog('\nTesting quick settings');
+      ezLog('\nTesting quick settings');
 
-      testLog('\nValidating text');
+      ezLog('\nValidating text');
       await validateText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
-      testLog('\nMonochrome');
+      ezLog('\nMonochrome');
       await touchText(tester, l10n.csMonoChrome);
 
-      testLog('\nColorScheme from image');
+      ezLog('\nColorScheme from image');
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
@@ -72,12 +72,12 @@ void testSuite({
 
       //* Test functionality: Advanced settings *//
 
-      testLog('\nTesting advanced settings');
+      ezLog('\nTesting advanced settings');
 
-      testLog('Navigation');
+      ezLog('Navigation');
       await touchText(tester, l10n.gAdvanced);
 
-      testLog('Validating text');
+      ezLog('Validating text');
       await validateText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
@@ -100,13 +100,13 @@ void testSuite({
         isLefty: isLefty,
       );
 
-      testLog('Testing add color modal');
+      ezLog('Testing add color modal');
       await touchText(tester, l10n.csAddColor);
 
-      testLog('How this works');
+      ezLog('How this works');
       await validateText(tester, l10n.gHowThisWorks);
 
-      testLog('Add on primary');
+      ezLog('Add on primary');
       await touchText(tester, l10n.csOnPrimary);
       await dismissTap(tester);
       await testCS(
@@ -118,7 +118,7 @@ void testSuite({
         isLefty: isLefty,
       );
 
-      testLog('Add surface tint');
+      ezLog('Add surface tint');
       await touchText(tester, l10n.csAddColor);
       await tester.ensureVisible(find.text(l10n.csSurfaceTint).last);
       await tester.fling(
@@ -152,7 +152,7 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n.gBack);
-      testLog('\nColor settings test suite complete\n\n');
+      ezLog('\nColor settings test suite complete\n\n');
     });
 
 Future<void> testCS(
@@ -163,26 +163,26 @@ Future<void> testCS(
   required bool textColor,
   required bool isLefty,
 }) async {
-  testLog('\nTesting $text update\n');
+  ezLog('\nTesting $text update\n');
   await touchText(tester, text);
 
   if (textColor) {
-    testLog('Text options');
+    ezLog('Text options');
     await validateText(tester, l10n.csRecommended);
 
-    testLog('Close');
+    ezLog('Close');
     await touchText(tester, l10n.gClose);
 
-    testLog('Yes');
+    ezLog('Yes');
     await touchText(tester, text);
     await touchText(tester, l10n.gYes);
 
-    testLog('Custom\n');
+    ezLog('Custom\n');
     await touchText(tester, text);
     await touchText(tester, l10n.csUseCustom);
   }
 
-  testLog('Layout');
+  ezLog('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
@@ -213,19 +213,19 @@ Future<void> testCS(
     }
   }
 
-  testLog('Cancel');
+  ezLog('Cancel');
   await touchText(tester, l10n.gCancel);
 
-  testLog('Apply');
+  ezLog('Apply');
   await touchText(tester, text);
   if (textColor) await touchText(tester, l10n.csUseCustom);
   await chaChaNow(tester, find.byType(Slider));
   await touchText(tester, l10n.gApply);
 
-  testLog('\nTesting $text reset\n');
+  ezLog('\nTesting $text reset\n');
   await holdText(tester, text);
 
-  testLog('Text/layout');
+  ezLog('Text/layout');
 
   if (!defaultColor) {
     await validateText(tester, l10n.gOptions);
@@ -262,16 +262,16 @@ Future<void> testCS(
     }
   }
 
-  testLog('No');
+  ezLog('No');
   await touchText(tester, l10n.gNo);
 
-  testLog('Yes');
+  ezLog('Yes');
   await holdText(tester, text);
   if (!defaultColor) await touchText(tester, l10n.gReset);
   await touchText(tester, l10n.gYes);
 
   if (!defaultColor) {
-    testLog('Remove');
+    ezLog('Remove');
 
     await holdText(tester, text);
     await touchText(tester, l10n.gClose);
