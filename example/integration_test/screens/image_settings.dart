@@ -18,18 +18,18 @@ void testSuite({
     testWidgets('image-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
-      debugPrint('Loading localizations');
+      testLog('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
-      debugPrint('Loading OpenUI');
+      testLog('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       // Test navigation //
 
-      debugPrint('\nTesting navigation');
+      testLog('\nTesting navigation');
 
       await touch(
         tester,
@@ -38,7 +38,7 @@ void testSuite({
 
       // Verify text loaded //
 
-      debugPrint('\nValidating text');
+      testLog('\nValidating text');
       await validateText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
@@ -48,7 +48,7 @@ void testSuite({
 
       // Background image  //
 
-      debugPrint('\nTesting background image setting');
+      testLog('\nTesting background image setting');
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
@@ -71,5 +71,5 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n.gBack);
-      debugPrint('\nImage settings test suite complete\n\n');
+      testLog('\nImage settings test suite complete\n\n');
     });

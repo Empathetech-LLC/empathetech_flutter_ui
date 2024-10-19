@@ -19,18 +19,18 @@ void testSuite({
     testWidgets('text-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
-      debugPrint('Loading localizations');
+      testLog('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
-      debugPrint('Loading OpenUI');
+      testLog('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       // Test navigation //
 
-      debugPrint('\nTesting navigation');
+      testLog('\nTesting navigation');
 
       await touch(
         tester,
@@ -39,7 +39,7 @@ void testSuite({
 
       // Verify text loaded //
 
-      debugPrint('\nValidating text');
+      testLog('\nValidating text');
       await validateText(
         tester,
         l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
@@ -63,18 +63,18 @@ void testSuite({
 
       //* Test functionality: Quick settings *//
 
-      debugPrint('\nTesting quick settings');
+      testLog('\nTesting quick settings');
       final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
       // Batch font updates //
 
-      debugPrint('Batch font updater');
+      testLog('Batch font updater');
       await touch(tester, find.byType(DropdownMenu<String>));
       await touchText(tester, roboto);
 
       // Batch size updates //
 
-      debugPrint('Batch font size: max');
+      testLog('Batch font size: max');
       for (int i = 0; i < 15; i++) {
         await touch(
           tester,
@@ -82,7 +82,7 @@ void testSuite({
         );
       }
 
-      debugPrint('Batch font size: min');
+      testLog('Batch font size: min');
       for (int i = 0; i < 15; i++) {
         await touch(
           tester,
@@ -101,12 +101,12 @@ void testSuite({
 
       //* Test functionality: Advanced settings *//
 
-      debugPrint('\nTesting advanced settings');
+      testLog('\nTesting advanced settings');
 
-      debugPrint('\nNavigation');
+      testLog('\nNavigation');
       await touchText(tester, l10n.gAdvanced);
 
-      debugPrint('\nDisplay');
+      testLog('\nDisplay');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touch(tester, find.text(l10n.tsDisplay.toLowerCase()).first);
       await touch(
@@ -119,7 +119,7 @@ void testSuite({
         isCupertino: isCupertino,
       );
 
-      debugPrint('\nHeadline');
+      testLog('\nHeadline');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touch(tester, find.text(l10n.tsHeadline.toLowerCase()).first);
       await touch(
@@ -132,7 +132,7 @@ void testSuite({
         isCupertino: isCupertino,
       );
 
-      debugPrint('\nTitle');
+      testLog('\nTitle');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touch(tester, find.text(l10n.tsTitle.toLowerCase()).first);
       await touch(
@@ -145,7 +145,7 @@ void testSuite({
         isCupertino: isCupertino,
       );
 
-      debugPrint('\nBody');
+      testLog('\nBody');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touch(tester, find.text(l10n.tsBody.toLowerCase()).first);
       await touch(
@@ -158,7 +158,7 @@ void testSuite({
         isCupertino: isCupertino,
       );
 
-      debugPrint('\nLabel');
+      testLog('\nLabel');
       await touch(tester, find.byType(DropdownMenu<String>).first);
       await touch(tester, find.text(l10n.tsLabel.toLowerCase()).first);
       await touch(
@@ -183,7 +183,7 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n.gBack);
-      debugPrint('\nText settings test suite complete\n\n');
+      testLog('\nText settings test suite complete\n\n');
     });
 
 Future<void> testAdvancedOptions(
@@ -191,11 +191,11 @@ Future<void> testAdvancedOptions(
   required bool isCupertino,
   required double fontSize,
 }) async {
-  debugPrint('Font family');
+  testLog('Font family');
   await touch(tester, find.byType(DropdownMenu<String>).last);
   await touchText(tester, roboto);
 
-  debugPrint('Font size');
+  testLog('Font size');
   await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
@@ -206,22 +206,22 @@ Future<void> testAdvancedOptions(
     find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
   );
 
-  debugPrint('Bold');
+  testLog('Bold');
   await touchBold(tester);
 
-  debugPrint('Italics');
+  testLog('Italics');
   await touchItalics(tester);
 
-  debugPrint('Underline');
+  testLog('Underline');
   await touchUnderline(tester);
 
-  debugPrint('Letter spacing');
+  testLog('Letter spacing');
   await tester.enterText(find.byType(TextFormField).at(1), '1.0');
 
-  debugPrint('Word spacing');
+  testLog('Word spacing');
   await tester.enterText(find.byType(TextFormField).at(2), '1.0');
 
-  debugPrint('Line height');
+  testLog('Line height');
   await tester.enterText(find.byType(TextFormField).at(3), '1.0');
 }
 
