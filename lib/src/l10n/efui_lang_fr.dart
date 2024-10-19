@@ -129,11 +129,11 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Redémarrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Fermez et rouvrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssThemeMode => 'Mode de thème';

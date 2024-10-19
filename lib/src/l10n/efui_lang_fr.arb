@@ -50,8 +50,8 @@
 
 
   "ssPageTitle": "Paramètres",
-  "ssSettingsGuide": "Redémarrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
-  "ssSettingsGuideWeb": "Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuide": "Fermez et rouvrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuideWeb": "Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
 
   "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",
