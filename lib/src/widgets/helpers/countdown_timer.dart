@@ -3,21 +3,26 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class EzCountdownTimer extends StatefulWidget {
   final Duration duration;
-  final double radius;
+
+  /// Defaults to a [SnackBar] appropriate value
+  final double? radius;
 
   /// Optional color override, defaults to [ColorScheme.secondary]
   final Color? color;
 
   /// An animated circle/pie countdown timer
+  /// Default [radius] is for use in a [SnackBar]
   const EzCountdownTimer({
     super.key,
     required this.duration,
-    required this.radius,
+    this.radius,
     this.color,
   });
 
@@ -43,10 +48,18 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
 
   @override
   Widget build(BuildContext context) {
+    final double size = (widget.radius ??
+            measureIcon(
+              Icons.circle,
+              context: context,
+              style: Theme.of(context).snackBarTheme.contentTextStyle,
+            ).width) *
+        2;
+
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, __) => CustomPaint(
-        size: Size(widget.radius * 2, widget.radius * 2),
+        size: Size(size, size),
         painter: _CountdownTimerPainter(
           progress: _animation.value,
           color: widget.color ?? Theme.of(context).colorScheme.secondary,
