@@ -26,9 +26,7 @@ class FeedbackButton extends StatelessWidget {
 
     return EzMenuButton(
       onPressed: () async {
-        await ScaffoldMessenger.of(context)
-            .showSnackBar(EzSnackBar(message: message) as SnackBar)
-            .closed;
+        await ezSnackBar(context: context, message: message).closed;
 
         if (context.mounted) {
           BetterFeedback.of(context).show(

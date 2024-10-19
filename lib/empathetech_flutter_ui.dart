@@ -22,6 +22,7 @@ export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
+export 'src/functions/snack_bars.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
@@ -54,7 +55,6 @@ export 'src/widgets/helpers/row.dart';
 export 'src/widgets/helpers/screen.dart';
 export 'src/widgets/helpers/scroll_view.dart';
 export 'src/widgets/helpers/sizing.dart';
-export 'src/widgets/helpers/snackbar.dart';
 export 'src/widgets/helpers/spacers.dart';
 export 'src/widgets/helpers/text_background.dart';
 export 'src/widgets/helpers/warning.dart';

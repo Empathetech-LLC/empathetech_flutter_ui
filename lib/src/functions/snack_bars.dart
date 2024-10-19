@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,50 +26,30 @@ double snackWidth({
       3 * (margin ?? EzConfig.get(marginKey));
 }
 
-class EzSnackBar extends StatelessWidget {
-  final Color? backgroundColor;
-  final double? elevation;
-  final ShapeBorder? shape;
-  final SnackBarBehavior? behavior;
-  final SnackBarAction? action;
-  final double? actionOverflowThreshold;
-  final bool? showCloseIcon;
-  final Color? closeIconColor;
-  final Animation<double>? animation;
-  final VoidCallback? onVisible;
-  final DismissDirection? dismissDirection;
-  final Clip clipBehavior;
-  final double? margin;
-  final Duration? duration;
-  final String message;
+/// Standardized [SnackBar] with an [EzCountdownTimer]
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
+  Color? backgroundColor,
+  double? elevation,
+  ShapeBorder? shape,
+  SnackBarBehavior? behavior,
+  SnackBarAction? action,
+  double? actionOverflowThreshold,
+  bool? showCloseIcon,
+  Color? closeIconColor,
+  Animation<double>? animation,
+  VoidCallback? onVisible,
+  DismissDirection? dismissDirection,
+  Clip clipBehavior = Clip.hardEdge,
+  required BuildContext context,
+  required String message,
+  double? margin,
+  Duration? duration,
+}) {
+  final Duration toastLength = duration ?? readingTime(message);
+  final double toastMargin = margin ?? EzConfig.get(marginKey);
 
-  /// Standardized [message] toast with an [EzCountdownTimer]
-  /// Needs to be casted: `EzSnackBar(message: 'Hello World') as SnackBar`
-  const EzSnackBar({
-    super.key,
-    this.backgroundColor,
-    this.elevation,
-    this.shape,
-    this.behavior,
-    this.action,
-    this.actionOverflowThreshold,
-    this.showCloseIcon,
-    this.closeIconColor,
-    this.animation,
-    this.onVisible,
-    this.dismissDirection,
-    this.clipBehavior = Clip.hardEdge,
-    this.margin,
-    this.duration,
-    required this.message,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final double toastMargin = margin ?? EzConfig.get(marginKey);
-    final Duration toastLength = duration ?? readingTime(message);
-
-    return SnackBar(
+  return ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
       backgroundColor: backgroundColor,
       elevation: elevation,
       shape: shape,
@@ -97,6 +77,6 @@ class EzSnackBar extends StatelessWidget {
         ],
       ),
       duration: toastLength,
-    );
-  }
+    ),
+  );
 }
