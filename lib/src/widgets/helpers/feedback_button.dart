@@ -23,9 +23,9 @@ class FeedbackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String message =
-        '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
-    if (kIsWeb) message += l10n.gSubmitWebFeedback(screenshotHint(context));
+    final String message = kIsWeb
+        ? '${l10n.gOpeningFeedback}\n${l10n.gSubmitWebFeedback(screenshotHint(context))}'
+        : '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
 
     return EzMenuButton(
       onPressed: () async {
