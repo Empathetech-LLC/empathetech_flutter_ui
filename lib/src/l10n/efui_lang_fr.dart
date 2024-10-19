@@ -13,6 +13,9 @@ class EFUILangFr extends EFUILang {
   String get gNo => 'Non';
 
   @override
+  String get gAnd => 'et';
+
+  @override
   String get gOptions => 'Paramètres';
 
   @override
