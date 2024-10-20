@@ -7,10 +7,9 @@
 
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
-/// Get the current [TargetPlatform] when [kIsWeb]
-TargetPlatform getWebHostPlatform(BuildContext context) {
+/// Get the current [TargetPlatform] for web
+TargetPlatform getHostPlatform(BuildContext context) {
   final String userAgent = html.window.navigator.userAgent;
 
   if (userAgent.contains('Android')) {
