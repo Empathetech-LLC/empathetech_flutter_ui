@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import './helpers_io.dart' if (dart.library.html) './helpers_web.dart';
+import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
 /// Do you have a void [Function] as a parameter that you want to be optional?
 /// Then do nothing!
