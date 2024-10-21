@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [7.3.0] - 2024-10-19
+## [7.3.1] - 2024-10-19
+### Updated
+- Feedback button
+  - Better communication and works on web!
+- Feedback related localizations
+
+### Added
+- ezLog function to differentiate permanent and temporary logs
+- getBasePlatform and screenshotHint (functions/helpers.dart)
+- ezSnackBar and snackWidth (functions/snack_bars.dart)
+- EzCountdownTimer (widgets/helpers/countdown_timer.dart)
+
+## [7.3.0] - 2024-10-16
 ### Added
 - Randomize button
   - Added more defaults to const file

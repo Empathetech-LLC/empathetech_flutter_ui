@@ -13,6 +13,9 @@ class EFUILangEn extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gAnd => 'and';
+
+  @override
   String get gOptions => 'Options';
 
   @override
@@ -28,6 +31,11 @@ class EFUILangEn extends EFUILang {
   String get gClose => 'Close';
 
   @override
+  String gClipboard(Object thing) {
+    return '$thing has been copied to the clipboard';
+  }
+
+  @override
   String get gBYO => 'Build your own';
 
   @override
@@ -37,12 +45,18 @@ class EFUILangEn extends EFUILang {
   String get gGiveFeedback => 'Give feedback';
 
   @override
-  String gClipboard(Object thing) {
-    return '$thing copied to clipboard';
+  String get gOpeningFeedback => 'Opening the feedback tool.';
+
+  @override
+  String get gSupportEmail => 'Our support Email';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Please take a screenshot$hint of the issue.';
   }
 
   @override
-  String get gSupportEmail => 'Support Email';
+  String get gAttachScreenshot => 'Please attach your screenshot';
 
   @override
   String get gLeft => 'Left';
@@ -126,11 +140,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Restart the app to apply your changes.\n\nHave fun!';
+      'Close and reopen the app to apply your changes.\n\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Reload the page to apply your changes.\n\nHave fun!';
+      'Reload/refresh the page to apply your changes.\n\nHave fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';

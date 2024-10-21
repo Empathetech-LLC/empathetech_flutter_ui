@@ -11,25 +11,20 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Log the passed message and display an [EzAlertDialog] to notify the user
-Future<void> logAlert(
+Future<dynamic> logAlert(
   BuildContext context, {
   String? title,
   required String message,
 }) async {
-  debugPrint(message);
-  await showPlatformDialog(
+  ezLog(message);
+  return showPlatformDialog(
     context: context,
     builder: (BuildContext context) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
-      contents: <Widget>[
-        Text(
-          message,
-          textAlign: TextAlign.center,
-        )
-      ],
+      contents: <Widget>[Text(message, textAlign: TextAlign.center)],
     ),
   );
 }

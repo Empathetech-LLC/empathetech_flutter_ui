@@ -13,6 +13,9 @@ class EFUILangEs extends EFUILang {
   String get gNo => 'No';
 
   @override
+  String get gAnd => 'y';
+
+  @override
   String get gOptions => 'Opciones';
 
   @override
@@ -28,6 +31,11 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String gClipboard(Object thing) {
+    return '$thing ha sido copiado al portapapeles';
+  }
+
+  @override
   String get gBYO => 'Construye uno';
 
   @override
@@ -37,12 +45,18 @@ class EFUILangEs extends EFUILang {
   String get gGiveFeedback => 'Dar feedback';
 
   @override
-  String gClipboard(Object thing) {
-    return '$thing copiado al portapapeles';
+  String get gOpeningFeedback => 'Apertura de la herramienta de feedback.';
+
+  @override
+  String get gSupportEmail => 'Nuestro Email de soporte';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Por favor, tome una captura de pantalla$hint del problema.';
   }
 
   @override
-  String get gSupportEmail => 'Email de soporte';
+  String get gAttachScreenshot => 'Adjunte su captura de pantalla';
 
   @override
   String get gLeft => 'Izquierda';
@@ -126,11 +140,11 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Reinicia la app para aplicar los cambios.\n\n¡Diviértete!';
+      'Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Recarga la página para aplicar tus cambios.\n\n¡Diviértete!';
+      'Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!';
 
   @override
   String get ssThemeMode => 'Modo del tema';

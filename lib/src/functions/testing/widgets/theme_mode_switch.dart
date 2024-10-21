@@ -14,7 +14,7 @@ Future<void> testTMSwitch(
   required EFUILang l10n,
   required bool isLefty,
 }) async {
-  debugPrint('\nTesting theme mode setting');
+  ezLog('\nTesting theme mode setting');
 
   // Verify  layout
   if (isLefty) {
@@ -32,17 +32,17 @@ Future<void> testTMSwitch(
   }
 
   // Activate light theme
-  debugPrint('Light');
+  ezLog('Light');
   await touch(tester, find.byType(DropdownMenu<ThemeMode>));
   await touchText(tester, l10n.gLight);
 
   // Activate system theme
-  debugPrint('System');
+  ezLog('System');
   await touch(tester, find.byType(DropdownMenu<ThemeMode>));
   await touchText(tester, l10n.gSystem);
 
   // Activate dark theme
-  debugPrint('Dark');
+  ezLog('Dark');
   await touch(tester, find.byType(DropdownMenu<ThemeMode>));
   await touchText(tester, l10n.gDark);
 }

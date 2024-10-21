@@ -22,6 +22,7 @@ export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
+export 'src/functions/snack_bars.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
@@ -48,6 +49,7 @@ export 'src/sample_screens/text_settings.dart';
 // Widgets //
 
 // Helpers
+export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/feedback_button.dart';
 export 'src/widgets/helpers/row.dart';
 export 'src/widgets/helpers/screen.dart';

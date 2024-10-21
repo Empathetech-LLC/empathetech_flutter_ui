@@ -3,50 +3,58 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedbackButton extends StatelessWidget {
   final EFUILang l10n;
+  final String appName;
   final String supportEmail;
 
   const FeedbackButton({
     super.key,
     required this.l10n,
+    required this.appName,
     this.supportEmail = empathSupport,
   });
 
   @override
   Widget build(BuildContext context) {
+    final String message = kIsWeb
+        ? '${l10n.gOpeningFeedback}\n${l10n.gSubmitWebFeedback(screenshotHint(context))}'
+        : '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
+
     return EzMenuButton(
       onPressed: () async {
-        final String snackBarText = l10n.gClipboard(l10n.gSupportEmail);
-
-        await ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(
-              content: Text(snackBarText, textAlign: TextAlign.center),
-              duration: readingTime(snackBarText),
-            ))
-            .closed;
+        await ezSnackBar(context: context, message: message).closed;
 
         if (context.mounted) {
           BetterFeedback.of(context).show(
             (UserFeedback feedback) async {
-              await Clipboard.setData(ClipboardData(text: supportEmail));
+              if (kIsWeb) {
+                await launchUrl(Uri.parse(
+                  'mailto:$empathSupport?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
+                ));
+              } else {
+                await Clipboard.setData(ClipboardData(text: supportEmail));
 
-              await Share.shareXFiles(
-                <XFile>[
-                  XFile.fromData(
-                    feedback.screenshot,
-                    name: 'screenshot.png',
-                    mimeType: 'image/png',
-                  )
-                ],
-                text: feedback.text,
-              );
+                await Share.shareXFiles(
+                  <XFile>[
+                    XFile.fromData(
+                      feedback.screenshot,
+                      name: 'screenshot.png',
+                      mimeType: 'image/png',
+                    )
+                  ],
+                  text: feedback.text,
+                );
+              }
             },
           );
         }

@@ -110,6 +110,12 @@ abstract class EFUILang {
   /// **'No'**
   String get gNo;
 
+  /// No description provided for @gAnd.
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get gAnd;
+
   /// No description provided for @gOptions.
   ///
   /// In en, this message translates to:
@@ -140,6 +146,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'{thing} has been copied to the clipboard'**
+  String gClipboard(Object thing);
+
   /// No description provided for @gBYO.
   ///
   /// In en, this message translates to:
@@ -158,17 +170,29 @@ abstract class EFUILang {
   /// **'Give feedback'**
   String get gGiveFeedback;
 
-  /// No description provided for @gClipboard.
+  /// No description provided for @gOpeningFeedback.
   ///
   /// In en, this message translates to:
-  /// **'{thing} copied to clipboard'**
-  String gClipboard(Object thing);
+  /// **'Opening the feedback tool.'**
+  String get gOpeningFeedback;
 
   /// No description provided for @gSupportEmail.
   ///
   /// In en, this message translates to:
-  /// **'Support Email'**
+  /// **'Our support Email'**
   String get gSupportEmail;
+
+  /// No description provided for @gSubmitWebFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Please take a screenshot{hint} of the issue.'**
+  String gSubmitWebFeedback(Object hint);
+
+  /// No description provided for @gAttachScreenshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Please attach your screenshot'**
+  String get gAttachScreenshot;
 
   /// No description provided for @gLeft.
   ///
@@ -317,13 +341,13 @@ abstract class EFUILang {
   /// No description provided for @ssSettingsGuide.
   ///
   /// In en, this message translates to:
-  /// **'Restart the app to apply your changes.\n\nHave fun!'**
+  /// **'Close and reopen the app to apply your changes.\n\nHave fun!'**
   String get ssSettingsGuide;
 
   /// No description provided for @ssSettingsGuideWeb.
   ///
   /// In en, this message translates to:
-  /// **'Reload the page to apply your changes.\n\nHave fun!'**
+  /// **'Reload/refresh the page to apply your changes.\n\nHave fun!'**
   String get ssSettingsGuideWeb;
 
   /// No description provided for @ssThemeMode.

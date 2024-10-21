@@ -13,6 +13,9 @@ class EFUILangFr extends EFUILang {
   String get gNo => 'Non';
 
   @override
+  String get gAnd => 'et';
+
+  @override
   String get gOptions => 'Paramètres';
 
   @override
@@ -28,6 +31,11 @@ class EFUILangFr extends EFUILang {
   String get gClose => 'Fermer';
 
   @override
+  String gClipboard(Object thing) {
+    return '$thing a été copié dans le presse-papiers';
+  }
+
+  @override
   String get gBYO => 'Construisez la vôtre';
 
   @override
@@ -37,12 +45,18 @@ class EFUILangFr extends EFUILang {
   String get gGiveFeedback => 'Partager des commentaires';
 
   @override
-  String gClipboard(Object thing) {
-    return '$thing copié dans le presse-papiers';
+  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
+
+  @override
+  String get gSupportEmail => 'Notre Email de support';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Veuillez prendre une capture d\'écran$hint du problème.';
   }
 
   @override
-  String get gSupportEmail => 'E-mail de support';
+  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
 
   @override
   String get gLeft => 'Gauche';
@@ -126,11 +140,11 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Redémarrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Fermez et rouvrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
 
   @override
   String get ssThemeMode => 'Mode de thème';

@@ -22,10 +22,10 @@ Future<void> testImageSetting(
   required List<String> networkImageURLs,
   required bool isLefty,
 }) async {
-  debugPrint('Opening dialog');
+  ezLog('Opening dialog');
   await touch(tester, finder);
 
-  debugPrint('Validating text');
+  ezLog('Validating text');
   await validateText(tester, l10n.isDialogTitle(type));
 
   if (updateCS) {
@@ -50,7 +50,7 @@ Future<void> testImageSetting(
     await validateText(tester, l10n.isUseForColors);
   }
 
-  debugPrint('Validating platform options\n');
+  ezLog('Validating platform options\n');
   if (kIsWeb) {
     await _webTests(
       tester,
@@ -86,9 +86,9 @@ Future<void> _webTests(
   required List<String> imageURLs,
   required bool isLefty,
 }) async {
-  debugPrint('Detected web');
+  ezLog('Detected web');
 
-  debugPrint('\nFrom network');
+  ezLog('\nFrom network');
   await _testNetwork(
     tester,
     l10n: l10n,
@@ -98,12 +98,12 @@ Future<void> _webTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nClear');
+  ezLog('\nClear');
   await touch(tester, find.byIcon(Icons.clear));
   expect(find.byIcon(Icons.edit), findsOneWidget);
   await touch(tester, finder);
 
-  debugPrint('\nClose');
+  ezLog('\nClose');
   await touchText(tester, l10n.gClose);
 }
 
@@ -115,17 +115,17 @@ Future<void> _mobileTests(
   required List<String> imageURLs,
   required bool isLefty,
 }) async {
-  debugPrint('Detected mobile');
+  ezLog('Detected mobile');
 
   final bool isCupertino = Platform.isIOS;
-  debugPrint(isCupertino ? 'iOS' : 'Android');
+  ezLog(isCupertino ? 'iOS' : 'Android');
 
-  debugPrint('\nFrom file');
+  ezLog('\nFrom file');
   await _testFile(tester,
       l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
   await touch(tester, finder);
 
-  debugPrint('\nFrom camera');
+  ezLog('\nFrom camera');
   await _testCamera(
     tester,
     l10n: l10n,
@@ -134,7 +134,7 @@ Future<void> _mobileTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nFrom network');
+  ezLog('\nFrom network');
   await _testNetwork(
     tester,
     l10n: l10n,
@@ -144,7 +144,7 @@ Future<void> _mobileTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nClear');
+  ezLog('\nClear');
   await touch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
@@ -155,7 +155,7 @@ Future<void> _mobileTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nClose');
+  ezLog('\nClose');
   await touchText(tester, l10n.gClose);
 }
 
@@ -167,12 +167,12 @@ Future<void> _desktopTests(
   required List<String> imageURLs,
   required bool isLefty,
 }) async {
-  debugPrint('Detected desktop');
+  ezLog('Detected desktop');
 
   final bool isCupertino = Platform.isMacOS;
-  debugPrint(isCupertino ? 'Mac' : 'Not Mac');
+  ezLog(isCupertino ? 'Mac' : 'Not Mac');
 
-  debugPrint('\nFrom file');
+  ezLog('\nFrom file');
   await _testFile(
     tester,
     l10n: l10n,
@@ -181,7 +181,7 @@ Future<void> _desktopTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nFrom network');
+  ezLog('\nFrom network');
   await _testNetwork(
     tester,
     l10n: l10n,
@@ -191,7 +191,7 @@ Future<void> _desktopTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nClear');
+  ezLog('\nClear');
   await touch(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
@@ -202,7 +202,7 @@ Future<void> _desktopTests(
   );
   await touch(tester, finder);
 
-  debugPrint('\nClose');
+  ezLog('\nClose');
   await touchText(tester, l10n.gClose);
 }
 
@@ -241,10 +241,10 @@ Future<void> _testNetwork(
 }) async {
   await touch(tester, find.byIcon(Icons.computer_outlined));
 
-  debugPrint('Validating text');
+  ezLog('Validating text');
   await validateText(tester, l10n.isEnterURL);
 
-  debugPrint('Validating layout');
+  ezLog('Validating layout');
   if (isCupertino) {
     final List<CupertinoDialogAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
@@ -273,15 +273,15 @@ Future<void> _testNetwork(
     }
   }
 
-  debugPrint('Cancel');
+  ezLog('Cancel');
   await touchText(tester, l10n.gCancel);
 
-  debugPrint('Apply w/ invalid URL');
+  ezLog('Apply w/ invalid URL');
   await touch(tester, find.byIcon(Icons.computer_outlined));
   await tester.enterText(find.byType(TextFormField), 'invalid');
   await touchText(tester, l10n.gApply);
 
-  debugPrint('Apply w/ valid URL');
+  ezLog('Apply w/ valid URL');
   await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
   await touchText(tester, l10n.gApply);
   expect(

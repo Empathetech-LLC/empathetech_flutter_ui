@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -16,28 +15,28 @@ Future<void> testLocaleSetting(
   required LocaleNames l10nNames,
   required bool isLefty,
 }) async {
-  debugPrint('\nTesting language setting button');
+  ezLog('\nTesting language setting button');
 
   // Activate Spanish localizations
-  debugPrint('Spanish');
+  ezLog('Spanish');
   await touch(tester, find.byType(EzLocaleSetting));
   await touchText(tester, l10nNames.nameOf('es')!);
   await tester.pumpAndSettle();
 
   // Activate French localizations
-  debugPrint('French');
+  ezLog('French');
   await touch(tester, find.byType(EzLocaleSetting));
   await touchText(tester, l10nNames.nameOf('fr')!);
   await tester.pumpAndSettle();
 
   // Activate English localizations
-  debugPrint('English');
+  ezLog('English');
   await touch(tester, find.byType(EzLocaleSetting));
   await touchText(tester, l10nNames.nameOf('en')!);
   await tester.pumpAndSettle();
 
   // Activate English localizations
-  debugPrint('Close');
+  ezLog('Close');
   await touch(tester, find.byType(EzLocaleSetting));
   await touchText(tester, l10n.gClose);
   await tester.pumpAndSettle();

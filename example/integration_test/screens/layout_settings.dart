@@ -19,18 +19,18 @@ void testSuite({
     testWidgets('layout-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
-      debugPrint('Loading localizations');
+      ezLog('Loading localizations');
       final EFUILang l10n = await EFUILang.delegate.load(locale);
 
       // Load the app //
 
-      debugPrint('Loading OpenUI');
+      ezLog('Loading OpenUI');
       await tester.pumpWidget(const OpenUI());
       await tester.pumpAndSettle();
 
       // Test navigation //
 
-      debugPrint('\nTesting navigation');
+      ezLog('\nTesting navigation');
 
       await touch(
         tester,
@@ -39,19 +39,19 @@ void testSuite({
 
       // Verify text loaded //
 
-      debugPrint('\nValidating text');
+      ezLog('\nValidating text');
       await validateText(tester, l10n.gHowThisWorks);
 
       //* Test functionality *//
 
       // Margin //
-      debugPrint('\nTesting margin');
+      ezLog('\nTesting margin');
       await touch(tester, find.byType(EzLayoutSetting).at(0));
 
-      debugPrint('Slider');
+      ezLog('Slider');
       await chaChaNow(tester, find.byType(Slider));
 
-      debugPrint('Reset');
+      ezLog('Reset');
       final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
       if (isCupertino) {
         await touch(tester, find.byIcon(CupertinoIcons.refresh).last);
@@ -59,41 +59,41 @@ void testSuite({
         await touch(tester, find.byIcon(Icons.refresh).last);
       }
 
-      debugPrint('Dismissing');
+      ezLog('Dismissing');
       await dismissTap(tester);
 
       // Padding //
-      debugPrint('\nTesting padding');
+      ezLog('\nTesting padding');
       await touch(tester, find.byType(EzLayoutSetting).at(1));
 
-      debugPrint('Slider');
+      ezLog('Slider');
       await chaChaNow(tester, find.byType(Slider));
 
-      debugPrint('Reset');
+      ezLog('Reset');
       if (isCupertino) {
         await touch(tester, find.byIcon(CupertinoIcons.refresh).last);
       } else {
         await touch(tester, find.byIcon(Icons.refresh).last);
       }
 
-      debugPrint('Dismissing');
+      ezLog('Dismissing');
       await dismissTap(tester);
 
       // Spacing //
-      debugPrint('\nTesting spacing');
+      ezLog('\nTesting spacing');
       await touch(tester, find.byType(EzLayoutSetting).at(2));
 
-      debugPrint('Slider');
+      ezLog('Slider');
       await chaChaNow(tester, find.byType(Slider));
 
-      debugPrint('Reset');
+      ezLog('Reset');
       if (isCupertino) {
         await touch(tester, find.byIcon(CupertinoIcons.refresh).last);
       } else {
         await touch(tester, find.byIcon(Icons.refresh).last);
       }
 
-      debugPrint('Dismissing');
+      ezLog('Dismissing');
       await dismissTap(tester);
 
       // Reset button //
@@ -108,5 +108,5 @@ void testSuite({
       // Reset for next test suite  //
 
       await goBack(tester, l10n.gBack);
-      debugPrint('\nLayout settings test suite complete\n\n');
+      ezLog('\nLayout settings test suite complete\n\n');
     });

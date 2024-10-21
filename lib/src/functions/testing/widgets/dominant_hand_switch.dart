@@ -14,11 +14,11 @@ Future<void> testDHSetting(
   required EFUILang l10n,
   required bool isLefty,
 }) async {
-  debugPrint('\nTesting dominant hand setting');
+  ezLog('\nTesting dominant hand setting');
   await touch(tester, find.byType(DropdownMenu<bool>).last);
 
   if (isLefty) {
-    debugPrint('Right hand layout');
+    ezLog('Right hand layout');
 
     // Activate righty layout
     await touchText(tester, l10n.gRight);
@@ -33,7 +33,7 @@ Future<void> testDHSetting(
     expect(handButtonsChildren[1], isA<EzSpacer>());
     expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
-    debugPrint('Left hand layout');
+    ezLog('Left hand layout');
 
     // Activate lefty layout
     await touch(tester, find.byType(DropdownMenu<bool>).last);
@@ -47,7 +47,7 @@ Future<void> testDHSetting(
     expect(handButtonsChildren[1], isA<EzSpacer>());
     expect(handButtonsChildren[2], isA<Text>());
   } else {
-    debugPrint('Left hand layout');
+    ezLog('Left hand layout');
 
     // Activate lefty layout
     await touchText(tester, l10n.gLeft);
@@ -62,7 +62,7 @@ Future<void> testDHSetting(
     expect(handButtonsChildren[1], isA<EzSpacer>());
     expect(handButtonsChildren[2], isA<Text>());
 
-    debugPrint('Right hand layout');
+    ezLog('Right hand layout');
 
     // Activate righty layout
     await touch(tester, find.byType(DropdownMenu<bool>).last);

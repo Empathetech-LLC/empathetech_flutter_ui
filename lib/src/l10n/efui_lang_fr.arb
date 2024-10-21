@@ -5,17 +5,21 @@
 
   "gYes": "Oui",
   "gNo": "Non",
+  "gAnd": "et",
   "gOptions": "Paramètres",
   "gApply": "Appliquer",
   "gContinue": "Continuer",
   "gCancel": "Annuler",
   "gClose": "Fermer",
+  "gClipboard": "{thing} a été copié dans le presse-papiers",
 
   "gBYO": "Construisez la vôtre",
   "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
   "gGiveFeedback": "Partager des commentaires",
-  "gClipboard": "{thing} copié dans le presse-papiers",
-  "gSupportEmail": "E-mail de support",
+  "gOpeningFeedback": "Ouverture de l'outil de feedback.",
+  "gSupportEmail": "Notre Email de support",
+  "gSubmitWebFeedback": "Veuillez prendre une capture d'écran{hint} du problème.",
+  "gAttachScreenshot": "Veuillez joindre votre capture d'écran",
 
   "gLeft": "Gauche",
   "gRight": "Droite",
@@ -49,8 +53,8 @@
 
 
   "ssPageTitle": "Paramètres",
-  "ssSettingsGuide": "Redémarrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
-  "ssSettingsGuideWeb": "Rechargez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuide": "Fermez et rouvrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssSettingsGuideWeb": "Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
 
   "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",

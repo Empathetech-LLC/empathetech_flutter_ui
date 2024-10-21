@@ -5,17 +5,21 @@
 
   "gYes": "Yes",
   "gNo": "No",
+  "gAnd": "and",
   "gOptions": "Options",
   "gApply": "Apply",
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
+  "gClipboard": "{thing} has been copied to the clipboard",
 
   "gBYO": "Build your own",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
   "gGiveFeedback": "Give feedback",
-  "gClipboard": "{thing} copied to clipboard",
-  "gSupportEmail": "Support Email",
+  "gOpeningFeedback": "Opening the feedback tool.",
+  "gSupportEmail": "Our support Email",
+  "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
+  "gAttachScreenshot": "Please attach your screenshot",
 
   "gLeft": "Left",
   "gRight": "Right",
@@ -49,8 +53,8 @@
 
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Restart the app to apply your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload the page to apply your changes.\n\nHave fun!",
+  "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
+  "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
 
   "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",
