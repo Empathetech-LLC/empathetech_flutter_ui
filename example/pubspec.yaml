@@ -28,7 +28,7 @@ dev_dependencies:
   dependency_validator: ^4.1.1
   flutter_launcher_icons: ^0.14.1
   flutter_lints: ^5.0.0
-  flutter_native_splash: ^2.4.1
+  flutter_native_splash: ^2.4.2
   flutter_test:
     sdk: flutter
   integration_test:
