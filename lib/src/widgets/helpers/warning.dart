@@ -37,21 +37,20 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final ThemeData theme = Theme.of(context);
+    final double margin = EzConfig.get(marginKey);
+    final EzSpacer colMargin = EzSpacer(space: margin, horizontal: false);
+    final EzSpacer rowMargin = EzSpacer(space: margin, vertical: false);
 
-    final String warning = title ?? EFUILang.of(context)!.gAttention;
+    final ThemeData theme = Theme.of(context);
 
     final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
     final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
 
     final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
-    final EzSpacer rowPadding = EzSpacer(
-      space: EzConfig.get(paddingKey),
-      vertical: false,
-    );
-
     // Return the build
+
+    final String warning = title ?? EFUILang.of(context)!.gAttention;
 
     return Semantics(
       button: false,
@@ -60,14 +59,14 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(EzConfig.get(marginKey)),
+            padding: EdgeInsets.all(margin),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Title
                 EzScrollView(
-                  startCentered: true,
                   scrollDirection: Axis.horizontal,
+                  startCentered: true,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     // Thing1
@@ -76,14 +75,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    rowPadding,
+                    rowMargin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    rowPadding,
+                    rowMargin,
 
                     // Thing 2
                     Icon(
@@ -93,13 +92,10 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
+                colMargin,
 
                 // Label
-                Text(
-                  '\n$body',
-                  style: bStyle,
-                  textAlign: TextAlign.center,
-                ),
+                Text(body, style: bStyle, textAlign: TextAlign.center),
               ],
             ),
           ),
