@@ -21,6 +21,8 @@
   "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
   "gAttachScreenshot": "Please attach your screenshot",
 
+  "gValidURL": "Please enter a valid URL",
+
   "gLeft": "Left",
   "gRight": "Right",
   "gBack": "Back",
@@ -53,8 +55,8 @@
 
 
   "ssPageTitle": "Settings",
-  "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
+  "ssSettingsGuide": "Close and reopen the app to apply your changes.\nHave fun!",
+  "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\nHave fun!",
 
   "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",

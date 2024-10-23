@@ -185,10 +185,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Validate a URL
   String? urlValidator(String? value) {
-    if (value == null || value.isEmpty || !isUrl(value)) {
-      return 'Enter a valid URL';
-    }
-    return null;
+    return (value == null || value.isEmpty || !isUrl(value))
+        ? l10n.gValidURL
+        : null;
   }
 
   /// Build the list of [ImageSource] options

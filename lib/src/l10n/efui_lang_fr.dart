@@ -59,6 +59,9 @@ class EFUILangFr extends EFUILang {
   String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
 
   @override
+  String get gValidURL => 'Veuillez saisir une URL valide';
+
+  @override
   String get gLeft => 'Gauche';
 
   @override
@@ -140,11 +143,11 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Fermez et rouvrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Fermez et rouvrez l\'application pour appliquer vos modifications.\nAmusez-vous bien !';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
+      'Rechargez/actualisez la page pour appliquer vos modifications.\nAmusez-vous bien !';
 
   @override
   String get ssThemeMode => 'Mode de thème';

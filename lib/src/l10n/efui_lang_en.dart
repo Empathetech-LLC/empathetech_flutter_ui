@@ -59,6 +59,9 @@ class EFUILangEn extends EFUILang {
   String get gAttachScreenshot => 'Please attach your screenshot';
 
   @override
+  String get gValidURL => 'Please enter a valid URL';
+
+  @override
   String get gLeft => 'Left';
 
   @override
@@ -140,11 +143,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Close and reopen the app to apply your changes.\n\nHave fun!';
+      'Close and reopen the app to apply your changes.\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Reload/refresh the page to apply your changes.\n\nHave fun!';
+      'Reload/refresh the page to apply your changes.\nHave fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';

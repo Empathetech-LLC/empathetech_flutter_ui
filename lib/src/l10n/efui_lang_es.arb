@@ -21,6 +21,8 @@
   "gSubmitWebFeedback": "Por favor, tome una captura de pantalla{hint} del problema.",
   "gAttachScreenshot": "Adjunte su captura de pantalla",
 
+  "gValidURL": "Por favor, introduzca una URL válida",
+
   "gLeft": "Izquierda",
   "gRight": "Derecha",
   "gBack": "Atrás",
@@ -53,8 +55,8 @@
 
 
   "ssPageTitle": "Configuración",
-  "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
-  "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
+  "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n¡Diviértete!",
+  "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n¡Diviértete!",
 
   "ssThemeMode": "Modo del tema",
   "ssDominantHand": "Mano preferente",
