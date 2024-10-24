@@ -415,10 +415,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: d34e0d9e024e81321b2aeed7b202ec6181cc282e6a1c0c0b4e6ad07ef1065d82
+      sha256: "8faba09ba361d4b246dc0a17cb4289b3324c2b9f6db7b3d457ee69106a86bd32"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.12+16"
+    version: "0.8.12+17"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -921,10 +921,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "8fc3bae0b68c02c47c5c86fa8bfa74471d42687b0eded01b78de87872db745e2"
+      sha256: "0dea215895a4d254401730ca0ba8204b29109a34a99fb06ae559a2b60988d2de"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.12"
+    version: "6.3.13"
   url_launcher_ios:
     dependency: transitive
     description:
