@@ -272,6 +272,12 @@ abstract class EFUILang {
   /// **'Open helpful documentation'**
   String get gHowThisWorksHint;
 
+  /// No description provided for @gTranslationsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Translations pending human review'**
+  String get gTranslationsPending;
+
   /// No description provided for @gAttention.
   ///
   /// In en, this message translates to:

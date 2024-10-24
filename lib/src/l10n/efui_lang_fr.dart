@@ -100,6 +100,10 @@ class EFUILangFr extends EFUILang {
   String get gHowThisWorksHint => 'Ouvre la documentation utile';
 
   @override
+  String get gTranslationsPending =>
+      'Traductions en attente de révision humaine';
+
+  @override
   String get gAttention => 'Attention';
 
   @override

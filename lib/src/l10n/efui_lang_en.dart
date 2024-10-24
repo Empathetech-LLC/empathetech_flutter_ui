@@ -100,6 +100,9 @@ class EFUILangEn extends EFUILang {
   String get gHowThisWorksHint => 'Open helpful documentation';
 
   @override
+  String get gTranslationsPending => 'Translations pending human review';
+
+  @override
   String get gAttention => 'Attention';
 
   @override
