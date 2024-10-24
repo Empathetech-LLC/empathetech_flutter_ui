@@ -147,11 +147,11 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      'Cierre y vuelva a abrir la app para aplicar los cambios.\n¡Diviértete!';
+      'Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!';
 
   @override
   String get ssSettingsGuideWeb =>
-      'Recarga o actualice la página para aplicar tus cambios.\n¡Diviértete!';
+      'Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!';
 
   @override
   String get ssThemeMode => 'Modo del tema';
