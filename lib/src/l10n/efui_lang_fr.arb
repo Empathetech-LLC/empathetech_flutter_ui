@@ -11,6 +11,8 @@
   "gContinue": "Continuer",
   "gCancel": "Annuler",
   "gClose": "Fermer",
+  "gError": "Erreur",
+
   "gClipboard": "{thing} a été copié dans le presse-papiers",
 
   "gBYO": "Construisez la vôtre",

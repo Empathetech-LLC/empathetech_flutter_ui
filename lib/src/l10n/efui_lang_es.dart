@@ -31,6 +31,9 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String get gError => 'Error';
+
+  @override
   String gClipboard(Object thing) {
     return '$thing ha sido copiado al portapapeles';
   }

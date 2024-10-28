@@ -146,6 +146,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get gError;
+
   /// No description provided for @gClipboard.
   ///
   /// In en, this message translates to:

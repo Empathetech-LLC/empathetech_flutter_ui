@@ -11,6 +11,8 @@
   "gContinue": "Continue",
   "gCancel": "Cancel",
   "gClose": "Close",
+  "gError": "Error",
+
   "gClipboard": "{thing} has been copied to the clipboard",
 
   "gBYO": "Build your own",
