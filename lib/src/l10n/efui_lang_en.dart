@@ -34,6 +34,10 @@ class EFUILangEn extends EFUILang {
   String get gError => 'Error';
 
   @override
+  String get g404 =>
+      'Not all who wander are lost.\n\nBut, in this case: 404 page not found.\n\n\n\nNote: Flutter web uses hash routing, ie: https://www.example.com/#/settings';
+
+  @override
   String gClipboard(Object thing) {
     return '$thing has been copied to the clipboard';
   }
