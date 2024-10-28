@@ -13,7 +13,9 @@
   "gClose": "Close",
   "gError": "Error",
 
-  "g404": "Not all who wander are lost.\n\nBut, in this case: 404 page not found.\n\n\n\nNote: Flutter web uses hash routing, ie: https://www.example.com/#/settings",
+  "g404Wonder": "Not all who wander are lost.",
+  "g404": "But, in this case: 404 page not found.",
+  "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings",
 
   "gClipboard": "{thing} has been copied to the clipboard",
 

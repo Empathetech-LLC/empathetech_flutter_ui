@@ -152,11 +152,23 @@ abstract class EFUILang {
   /// **'Error'**
   String get gError;
 
+  /// No description provided for @g404Wonder.
+  ///
+  /// In en, this message translates to:
+  /// **'Not all who wander are lost.'**
+  String get g404Wonder;
+
   /// No description provided for @g404.
   ///
   /// In en, this message translates to:
-  /// **'Not all who wander are lost.\n\nBut, in this case: 404 page not found.\n\n\n\nNote: Flutter web uses hash routing, ie: https://www.example.com/#/settings'**
+  /// **'But, in this case: 404 page not found.'**
   String get g404;
+
+  /// No description provided for @g404Note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings'**
+  String get g404Note;
 
   /// No description provided for @gClipboard.
   ///

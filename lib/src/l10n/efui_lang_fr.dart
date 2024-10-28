@@ -34,8 +34,14 @@ class EFUILangFr extends EFUILang {
   String get gError => 'Erreur';
 
   @override
-  String get g404 =>
-      'Tous ceux qui errent ne sont pas perdus.\n\nMais, dans ce cas : page 404 non trouvée.\n\n\n\nRemarque : le site Web Flutter utilise le routage par hachage, c\'est-à-dire : https://www.example.com/#/settings';
+  String get g404Wonder => 'Tous ceux qui errent ne sont pas perdus.';
+
+  @override
+  String get g404 => 'Mais, dans ce cas : page 404 non trouvée.';
+
+  @override
+  String get g404Note =>
+      'Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings';
 
   @override
   String gClipboard(Object thing) {

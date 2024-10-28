@@ -13,7 +13,9 @@
   "gClose": "Fermer",
   "gError": "Erreur",
 
-  "g404": "Tous ceux qui errent ne sont pas perdus.\n\nMais, dans ce cas : page 404 non trouvée.\n\n\n\nRemarque : le site Web Flutter utilise le routage par hachage, c'est-à-dire : https://www.example.com/#/settings",
+  "g404Wonder": "Tous ceux qui errent ne sont pas perdus.",
+  "g404": "Mais, dans ce cas : page 404 non trouvée.",
+  "g404Note": "Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings",
 
   "gClipboard": "{thing} a été copié dans le presse-papiers",
 
