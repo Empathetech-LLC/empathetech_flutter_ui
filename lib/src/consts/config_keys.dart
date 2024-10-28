@@ -575,6 +575,55 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkSurfaceTintKey: int,
 };
 
+// Color settings' values //
+
+const String csPrimary = 'Primary';
+const String csOnPrimary = 'On primary';
+const String csPrimaryContainer = 'Primary container';
+const String csOnPrimaryContainer = 'On primary container';
+const String csPrimaryFixed = 'Primary fixed';
+const String csPrimaryFixedDim = 'Primary fixed dim';
+const String csOnPrimaryFixed = 'On primary fixed';
+const String csOnPrimaryFixedVariant = 'On primary fixed variant';
+const String csSecondary = 'Secondary';
+const String csOnSecondary = 'On secondary';
+const String csSecondaryContainer = 'Secondary container';
+const String csOnSecondaryContainer = 'On secondary container';
+const String csSecondaryFixed = 'Secondary fixed';
+const String csSecondaryFixedDim = 'Secondary fixed dim';
+const String csOnSecondaryFixed = 'On secondary fixed';
+const String csOnSecondaryFixedVariant = 'On secondary fixed variant';
+const String csTertiary = 'Tertiary';
+const String csOnTertiary = 'On tertiary';
+const String csTertiaryContainer = 'Tertiary container';
+const String csOnTertiaryContainer = 'On tertiary container';
+const String csTertiaryFixed = 'Tertiary fixed';
+const String csTertiaryFixedDim = 'Tertiary fixed dim';
+const String csOnTertiaryFixed = 'On tertiary fixed';
+const String csOnTertiaryFixedVariant = 'On tertiary fixed variant';
+const String csError = 'Error';
+const String csOnError = 'On error';
+const String csErrorContainer = 'Error container';
+const String csOnErrorContainer = 'On error container';
+const String csOutline = 'Outline';
+const String csOutlineVariant = 'Outline variant';
+const String csSurface = 'Surface';
+const String csOnSurface = 'On surface';
+const String csSurfaceDim = 'Surface dim';
+const String csSurfaceBright = 'Surface bright';
+const String csSurfaceContainerLowest = 'Surface container lowest';
+const String csSurfaceContainerLow = 'Surface container low';
+const String csSurfaceContainer = 'Surface container';
+const String csSurfaceContainerHigh = 'Surface container high';
+const String csSurfaceContainerHighest = 'Surface container highest';
+const String csOnSurfaceVariant = 'On surface variant';
+const String csInverseSurface = 'Inverse surface';
+const String csOnInverseSurface = 'On inverse surface';
+const String csInversePrimary = 'Inverse primary';
+const String csScrim = 'Scrim';
+const String csShadow = 'Shadow';
+const String csSurfaceTint = 'Surface tint';
+
 // Image settings' keys //
 
 const String lightColorSchemeImageKey = 'lightColorSchemeImage';
