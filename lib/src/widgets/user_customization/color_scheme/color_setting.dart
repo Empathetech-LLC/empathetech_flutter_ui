@@ -195,7 +195,7 @@ class _ColorSettingState extends State<EzColorSetting> {
         return EzAlertDialog(
           title: Text(
             l10n.gResetValue(
-              getColorName(context, widget.configKey).toLowerCase(),
+              getColorName(widget.configKey).toLowerCase(),
             ),
             textAlign: TextAlign.center,
           ),
@@ -277,7 +277,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final String label = getColorName(context, widget.configKey);
+    final String label = getColorName(widget.configKey);
 
     return Semantics(
       button: true,

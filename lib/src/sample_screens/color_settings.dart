@@ -346,18 +346,18 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
     final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
-        .map<Widget>((String configKeyKey) {
-      final Color liveColor = getLiveColor(context, configKeyKey);
+        .map<Widget>((String configKey) {
+      final Color liveColor = getLiveColor(context, configKey);
 
       return Container(
         padding: EzInsets.col(padding),
         child: EzElevatedIconButton(
-          key: ValueKey<String>(configKeyKey),
+          key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: () {
-            currList.add(configKeyKey);
+            currList.add(configKey);
             currList.sort(
               (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
             );
@@ -377,7 +377,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                   : null,
             ),
           ),
-          label: getColorName(context, configKeyKey),
+          label: getColorName(configKey),
         ),
       );
     }).toList();
