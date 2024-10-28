@@ -476,148 +476,146 @@ Future<String> storeImageColorScheme({
 }
 
 /// Get the human readable name of a [key]s color
-String getColorName(BuildContext context, String key) {
-  final EFUILang l10n = EFUILang.of(context)!;
-
+String getColorName(String key) {
   switch (key) {
     case lightPrimaryKey:
     case darkPrimaryKey:
-      return l10n.csPrimary;
+      return csPrimary;
     case lightOnPrimaryKey:
     case darkOnPrimaryKey:
-      return l10n.csOnPrimary;
+      return csOnPrimary;
     case lightPrimaryContainerKey:
     case darkPrimaryContainerKey:
-      return l10n.csPrimaryContainer;
+      return csPrimaryContainer;
     case lightOnPrimaryContainerKey:
     case darkOnPrimaryContainerKey:
-      return l10n.csOnPrimaryContainer;
+      return csOnPrimaryContainer;
     case lightPrimaryFixedKey:
     case darkPrimaryFixedKey:
-      return l10n.csPrimaryFixed;
+      return csPrimaryFixed;
     case lightPrimaryFixedDimKey:
     case darkPrimaryFixedDimKey:
-      return l10n.csPrimaryFixedDim;
+      return csPrimaryFixedDim;
     case lightOnPrimaryFixedKey:
     case darkOnPrimaryFixedKey:
-      return l10n.csOnPrimaryFixed;
+      return csOnPrimaryFixed;
     case lightOnPrimaryFixedVariantKey:
     case darkOnPrimaryFixedVariantKey:
-      return l10n.csOnPrimaryFixedVariant;
+      return csOnPrimaryFixedVariant;
     case lightSecondaryKey:
     case darkSecondaryKey:
-      return l10n.csSecondary;
+      return csSecondary;
     case lightOnSecondaryKey:
     case darkOnSecondaryKey:
-      return l10n.csOnSecondary;
+      return csOnSecondary;
     case lightSecondaryContainerKey:
     case darkSecondaryContainerKey:
-      return l10n.csSecondaryContainer;
+      return csSecondaryContainer;
     case lightOnSecondaryContainerKey:
     case darkOnSecondaryContainerKey:
-      return l10n.csOnSecondaryContainer;
+      return csOnSecondaryContainer;
     case lightSecondaryFixedKey:
     case darkSecondaryFixedKey:
-      return l10n.csSecondaryFixed;
+      return csSecondaryFixed;
     case lightSecondaryFixedDimKey:
     case darkSecondaryFixedDimKey:
-      return l10n.csSecondaryFixedDim;
+      return csSecondaryFixedDim;
     case lightOnSecondaryFixedKey:
     case darkOnSecondaryFixedKey:
-      return l10n.csOnSecondaryFixed;
+      return csOnSecondaryFixed;
     case lightOnSecondaryFixedVariantKey:
     case darkOnSecondaryFixedVariantKey:
-      return l10n.csOnSecondaryFixedVariant;
+      return csOnSecondaryFixedVariant;
     case lightTertiaryKey:
     case darkTertiaryKey:
-      return l10n.csTertiary;
+      return csTertiary;
     case lightOnTertiaryKey:
     case darkOnTertiaryKey:
-      return l10n.csOnTertiary;
+      return csOnTertiary;
     case lightTertiaryContainerKey:
     case darkTertiaryContainerKey:
-      return l10n.csTertiaryContainer;
+      return csTertiaryContainer;
     case lightOnTertiaryContainerKey:
     case darkOnTertiaryContainerKey:
-      return l10n.csOnTertiaryContainer;
+      return csOnTertiaryContainer;
     case lightTertiaryFixedKey:
     case darkTertiaryFixedKey:
-      return l10n.csTertiaryFixed;
+      return csTertiaryFixed;
     case lightTertiaryFixedDimKey:
     case darkTertiaryFixedDimKey:
-      return l10n.csTertiaryFixedDim;
+      return csTertiaryFixedDim;
     case lightOnTertiaryFixedKey:
     case darkOnTertiaryFixedKey:
-      return l10n.csOnTertiaryFixed;
+      return csOnTertiaryFixed;
     case lightOnTertiaryFixedVariantKey:
     case darkOnTertiaryFixedVariantKey:
-      return l10n.csOnTertiaryFixedVariant;
+      return csOnTertiaryFixedVariant;
     case lightErrorKey:
     case darkErrorKey:
-      return l10n.csError;
+      return csError;
     case lightOnErrorKey:
     case darkOnErrorKey:
-      return l10n.csOnError;
+      return csOnError;
     case lightErrorContainerKey:
     case darkErrorContainerKey:
-      return l10n.csErrorContainer;
+      return csErrorContainer;
     case lightOnErrorContainerKey:
     case darkOnErrorContainerKey:
-      return l10n.csOnErrorContainer;
+      return csOnErrorContainer;
     case lightOutlineKey:
     case darkOutlineKey:
-      return l10n.csOutline;
+      return csOutline;
     case lightOutlineVariantKey:
     case darkOutlineVariantKey:
-      return l10n.csOutlineVariant;
+      return csOutlineVariant;
     case lightSurfaceKey:
     case darkSurfaceKey:
-      return l10n.csSurface;
+      return csSurface;
     case lightOnSurfaceKey:
     case darkOnSurfaceKey:
-      return l10n.csOnSurface;
+      return csOnSurface;
     case lightSurfaceDimKey:
     case darkSurfaceDimKey:
-      return l10n.csSurfaceDim;
+      return csSurfaceDim;
     case lightSurfaceBrightKey:
     case darkSurfaceBrightKey:
-      return l10n.csSurfaceBright;
+      return csSurfaceBright;
     case lightSurfaceContainerLowestKey:
     case darkSurfaceContainerLowestKey:
-      return l10n.csSurfaceContainerLowest;
+      return csSurfaceContainerLowest;
     case lightSurfaceContainerLowKey:
     case darkSurfaceContainerLowKey:
-      return l10n.csSurfaceContainerLow;
+      return csSurfaceContainerLow;
     case lightSurfaceContainerKey:
     case darkSurfaceContainerKey:
-      return l10n.csSurfaceContainer;
+      return csSurfaceContainer;
     case lightSurfaceContainerHighKey:
     case darkSurfaceContainerHighKey:
-      return l10n.csSurfaceContainerHigh;
+      return csSurfaceContainerHigh;
     case lightSurfaceContainerHighestKey:
     case darkSurfaceContainerHighestKey:
-      return l10n.csSurfaceContainerHighest;
+      return csSurfaceContainerHighest;
     case lightOnSurfaceVariantKey:
     case darkOnSurfaceVariantKey:
-      return l10n.csOnSurfaceVariant;
+      return csOnSurfaceVariant;
     case lightInverseSurfaceKey:
     case darkInverseSurfaceKey:
-      return l10n.csInverseSurface;
+      return csInverseSurface;
     case lightOnInverseSurfaceKey:
     case darkOnInverseSurfaceKey:
-      return l10n.csOnInverseSurface;
+      return csOnInverseSurface;
     case lightInversePrimaryKey:
     case darkInversePrimaryKey:
-      return l10n.csInversePrimary;
+      return csInversePrimary;
     case lightScrimKey:
     case darkScrimKey:
-      return l10n.csScrim;
+      return csScrim;
     case lightShadowKey:
     case darkShadowKey:
-      return l10n.csShadow;
+      return csShadow;
     case lightSurfaceTintKey:
     case darkSurfaceTintKey:
-      return l10n.csSurfaceTint;
+      return csSurfaceTint;
     default:
       return 'null';
   }

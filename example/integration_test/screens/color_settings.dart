@@ -85,7 +85,7 @@ void testSuite({
 
       await testCS(
         tester,
-        text: l10n.csPrimary,
+        text: csPrimary,
         l10n: l10n,
         defaultColor: true,
         textColor: false,
@@ -93,7 +93,7 @@ void testSuite({
       );
       await testCS(
         tester,
-        text: l10n.csOnSurface,
+        text: csOnSurface,
         l10n: l10n,
         defaultColor: true,
         textColor: true,
@@ -107,11 +107,11 @@ void testSuite({
       await validateText(tester, l10n.gHowThisWorks);
 
       ezLog('Add on primary');
-      await touchText(tester, l10n.csOnPrimary);
+      await touchText(tester, csOnPrimary);
       await dismissTap(tester);
       await testCS(
         tester,
-        text: l10n.csOnPrimary,
+        text: csOnPrimary,
         l10n: l10n,
         defaultColor: false,
         textColor: true,
@@ -120,7 +120,7 @@ void testSuite({
 
       ezLog('Add surface tint');
       await touchText(tester, l10n.csAddColor);
-      await tester.ensureVisible(find.text(l10n.csSurfaceTint).last);
+      await tester.ensureVisible(find.text(csSurfaceTint).last);
       await tester.fling(
         find.descendant(
           of: find.byType(BottomSheet),
@@ -130,12 +130,12 @@ void testSuite({
         2000,
       );
       await tester.pumpAndSettle();
-      await touchText(tester, l10n.csSurfaceTint);
+      await touchText(tester, csSurfaceTint);
       await dismissTap(tester);
 
       await testCS(
         tester,
-        text: l10n.csSurfaceTint,
+        text: csSurfaceTint,
         l10n: l10n,
         defaultColor: false,
         textColor: false,
