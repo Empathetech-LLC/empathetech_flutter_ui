@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Feedback button
   - Better communication and works on web!
 - Feedback related localizations
+- Moved color key names to consts
 
 ### Added
 - ezLog function to differentiate permanent and temporary logs
