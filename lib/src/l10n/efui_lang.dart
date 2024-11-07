@@ -176,6 +176,18 @@ abstract class EFUILang {
   /// **'{thing} has been copied to the clipboard'**
   String gClipboard(Object thing);
 
+  /// No description provided for @gC4U.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for updates'**
+  String get gC4U;
+
+  /// No description provided for @gC4UHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Check if there is a newer version of {name}'**
+  String gC4UHint(Object name);
+
   /// No description provided for @gBYO.
   ///
   /// In en, this message translates to:

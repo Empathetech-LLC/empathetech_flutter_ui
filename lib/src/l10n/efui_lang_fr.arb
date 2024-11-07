@@ -19,6 +19,8 @@
 
   "gClipboard": "{thing} a été copié dans le presse-papiers",
 
+  "gC4U": "Rechercher des mises à jour",
+  "gC4UHint": "Vérifiez s'il existe une version plus récente de {name}",
   "gBYO": "Construisez la vôtre",
   "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
   "gGiveFeedback": "Partager des commentaires",

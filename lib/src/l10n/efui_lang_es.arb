@@ -19,6 +19,8 @@
 
   "gClipboard": "{thing} ha sido copiado al portapapeles",
 
+  "gC4U": "Buscar actualizaciones",
+  "gC4UHint": "Comprueba si hay una versión más nueva de {name}",
   "gBYO": "Construye uno",
   "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
   "gGiveFeedback": "Dar feedback",
