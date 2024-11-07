@@ -13,13 +13,19 @@ class EzWarning extends StatelessWidget {
 
   final TextStyle? titleStyle;
 
+  /// Optional icon [Color] override, defaults to [ColorScheme.secondary]
+  final Color? iconColor;
+
+  /// Optional [Widget] to display above the [body]
+  final Widget? header;
+
   /// What does the user need to know?
   final String body;
 
   final TextStyle? bodyStyle;
 
-  /// Optional icon [Color] override, defaults to [ColorScheme.secondary]
-  final Color? iconColor;
+  /// Optional [Widget] to display below the [body]
+  final Widget? footer;
 
   /// [Card] wrapper designed to grab attention for warnings...
   ///  /!\ [title] /!\
@@ -28,14 +34,18 @@ class EzWarning extends StatelessWidget {
     super.key,
     this.title,
     this.titleStyle,
+    this.iconColor,
+    this.header,
     required this.body,
     this.bodyStyle,
-    this.iconColor,
+    this.footer,
   });
 
   @override
   Widget build(BuildContext context) {
     // Gather theme data //
+
+    const EzSpacer spacer = EzSpacer();
 
     final double margin = EzConfig.get(marginKey);
     final EzSpacer colMargin = EzSpacer(space: margin, horizontal: false);
@@ -94,8 +104,18 @@ class EzWarning extends StatelessWidget {
                 ),
                 colMargin,
 
+                if (header != null) ...<Widget>[
+                  header!,
+                  spacer,
+                ],
+
                 // Label
                 Text(body, style: bStyle, textAlign: TextAlign.center),
+
+                if (footer != null) ...<Widget>[
+                  spacer,
+                  footer!,
+                ],
               ],
             ),
           ),
