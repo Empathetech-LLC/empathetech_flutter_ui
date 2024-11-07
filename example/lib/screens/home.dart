@@ -4,8 +4,10 @@
  */
 
 import './export.dart';
+import '../utils/export.dart';
 import '../widgets/export.dart';
 
+import 'package:updat/updat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -44,6 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             // Functionality disclaimer
             EzWarning(
+              header: UpdatWidget(
+                currentVersion: appVersion,
+                getLatestVersion: getLatestVersion,
+                getBinaryUrl: getBinaryUrl,
+                appName: appTitle,
+                getDownloadFileLocation: getDownloadFileLocation,
+                getChangelog: getChangelog,
+                openOnDownload: true,
+                closeOnInstall: true,
+              ),
               body: kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide,
             ),
             separator,
