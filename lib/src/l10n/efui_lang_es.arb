@@ -63,8 +63,8 @@
 
 
   "ssPageTitle": "Configuración",
-  "ssSettingsGuide": "\nCierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
-  "ssSettingsGuideWeb": "\nRecarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
+  "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
+  "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
 
   "ssThemeMode": "Modo del tema",
   "ssDominantHand": "Mano preferente",

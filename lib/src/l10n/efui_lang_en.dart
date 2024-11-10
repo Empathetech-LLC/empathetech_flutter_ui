@@ -162,11 +162,11 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssSettingsGuide =>
-      '\nClose and reopen the app to apply your changes.\n\nHave fun!';
+      'Close and reopen the app to apply your changes.\n\nHave fun!';
 
   @override
   String get ssSettingsGuideWeb =>
-      '\nReload/refresh the page to apply your changes.\n\nHave fun!';
+      'Reload/refresh the page to apply your changes.\n\nHave fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';
