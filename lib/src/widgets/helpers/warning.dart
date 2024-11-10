@@ -48,7 +48,6 @@ class EzWarning extends StatelessWidget {
     // Gather theme data //
 
     final double margin = EzConfig.get(marginKey);
-    final EzSpacer colMargin = EzSpacer(space: margin, horizontal: false);
     final EzSpacer rowMargin = EzSpacer(space: margin, vertical: false);
 
     final ThemeData theme = Theme.of(context);
@@ -102,7 +101,6 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
-                colMargin,
 
                 // Header (optional)
                 if (header != null) header!,
