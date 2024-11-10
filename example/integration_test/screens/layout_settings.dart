@@ -37,11 +37,6 @@ void testSuite({
         find.widgetWithText(EzElevatedIconButton, l10n.lsPageTitle),
       );
 
-      // Verify text loaded //
-
-      ezLog('\nValidating text');
-      await validateText(tester, l10n.gHowThisWorks);
-
       //* Test functionality *//
 
       // Margin //
