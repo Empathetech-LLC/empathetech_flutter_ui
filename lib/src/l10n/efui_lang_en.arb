@@ -19,8 +19,7 @@
 
   "gClipboard": "{thing} has been copied to the clipboard",
 
-  "gC4U": "Check for updates",
-  "gC4UHint": "Check if there is a newer version of {name}",
+  "gUpdates": "Updates available",
   "gBYO": "Build your own",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
   "gGiveFeedback": "Give feedback",

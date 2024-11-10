@@ -49,12 +49,7 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get gC4U => 'Rechercher des mises à jour';
-
-  @override
-  String gC4UHint(Object name) {
-    return 'Vérifiez s\'il existe une version plus récente de $name';
-  }
+  String get gUpdates => 'Mises à jour disponibles';
 
   @override
   String get gBYO => 'Construisez la vôtre';

@@ -49,12 +49,7 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get gC4U => 'Check for updates';
-
-  @override
-  String gC4UHint(Object name) {
-    return 'Check if there is a newer version of $name';
-  }
+  String get gUpdates => 'Updates available';
 
   @override
   String get gBYO => 'Build your own';
