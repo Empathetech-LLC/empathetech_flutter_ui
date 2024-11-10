@@ -5,3 +5,4 @@
 
 export 'byo.dart';
 export 'open_ui_scaffold.dart';
+export 'updater.dart';
