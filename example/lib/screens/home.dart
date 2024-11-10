@@ -4,11 +4,8 @@
  */
 
 import './export.dart';
-import '../utils/export.dart';
 import '../widgets/export.dart';
 
-import 'package:http/http.dart' as http;
-import 'package:updat/updat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -29,18 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  // Define build data //
-
-  late final TargetPlatform platform = getBasePlatform(context);
-  late final bool isDesktop = (platform == TargetPlatform.linux) ||
-      (platform == TargetPlatform.macOS) ||
-      (platform == TargetPlatform.windows);
-
-  static const String appVersionLink =
-      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
-  static const String downloadPrefix =
-      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download';
-
   // Set the page title //
 
   @override
@@ -59,47 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             // Functionality disclaimer
             EzWarning(
-              header: isDesktop
-                  ? UpdatWidget(
-                      currentVersion: appVersion,
-                      getLatestVersion: () async {
-                        final http.Response response =
-                            await http.get(Uri.parse(appVersionLink));
-
-                        return (response.statusCode == 200)
-                            ? response.body
-                            : null;
-                      },
-                      getBinaryUrl: (String? version) async {
-                        String ver = version ?? '';
-
-                        if (ver.isEmpty) {
-                          final http.Response response =
-                              await http.get(Uri.parse(appVersionLink));
-
-                          ver = (response.statusCode == 200)
-                              ? response.body
-                              : appVersion;
-                        }
-
-                        switch (platform) {
-                          case TargetPlatform.linux:
-                            return '$downloadPrefix/$ver/open-ui-linux.deb';
-                          case TargetPlatform.macOS:
-                            return '$downloadPrefix/$ver/open-ui-mac.zip';
-                          case TargetPlatform.windows:
-                            return '$downloadPrefix/$ver/open-ui-windows.exe';
-                          default:
-                            ezLog(
-                                'Something went wrong...\n$platform provided to UpdatWidget');
-                            return '';
-                        }
-                      },
-                      appName: appTitle,
-                      openOnDownload: platform == TargetPlatform.windows,
-                      closeOnInstall: platform == TargetPlatform.windows,
-                    )
-                  : null,
+              header: const EzUpdater(),
               body: kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide,
             ),
             separator,
