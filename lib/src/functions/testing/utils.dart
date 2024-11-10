@@ -65,9 +65,13 @@ Future<void> validateWidget(
 
 /// For integration tests
 /// Find, touch, and settle a target
-Future<void> touch(WidgetTester tester, Finder finder) async {
+Future<void> touch(
+  WidgetTester tester,
+  Finder finder, {
+  bool warnIfMissed = false,
+}) async {
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: warnIfMissed));
   await tester.pumpAndSettle();
 }
 
@@ -78,13 +82,14 @@ Future<void> touchText(
   String text, {
   bool findRichText = false,
   bool skipOffstage = false,
+  bool warnIfMissed = false,
 }) async {
   final Finder finder = find
       .text(text, findRichText: findRichText, skipOffstage: skipOffstage)
       .last;
 
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: warnIfMissed));
   await tester.pumpAndSettle();
 }
 
@@ -94,29 +99,44 @@ Future<void> touchWidget(
   WidgetTester tester,
   Type widgetType, {
   bool skipOffstage = false,
+  bool warnIfMissed = false,
 }) async {
   final Finder finder =
       find.byType(widgetType, skipOffstage: skipOffstage).last;
 
   await tester.ensureVisible(finder);
-  await tester.tapAt(tester.getCenter(finder, warnIfMissed: true));
+  await tester.tapAt(tester.getCenter(finder, warnIfMissed: warnIfMissed));
   await tester.pumpAndSettle();
 }
 
 /// For integration tests
 /// Find, touch, hold, and settle a target
-Future<void> hold(WidgetTester tester, Finder finder) async {
+Future<void> hold(
+  WidgetTester tester,
+  Finder finder, {
+  bool warnIfMissed = false,
+}) async {
   await tester.ensureVisible(finder);
-  await tester.longPressAt(tester.getCenter(finder, warnIfMissed: true));
+  await tester.longPressAt(tester.getCenter(
+    finder,
+    warnIfMissed: warnIfMissed,
+  ));
   await tester.pumpAndSettle();
 }
 
 /// For integration tests
 /// Find, touch, hold, and settle a text target
-Future<void> holdText(WidgetTester tester, String text) async {
+Future<void> holdText(
+  WidgetTester tester,
+  String text, {
+  bool warnIfMissed = false,
+}) async {
   final Finder finder = find.text(text).last;
   await tester.ensureVisible(finder);
-  await tester.longPressAt(tester.getCenter(finder, warnIfMissed: true));
+  await tester.longPressAt(tester.getCenter(
+    finder,
+    warnIfMissed: warnIfMissed,
+  ));
   await tester.pumpAndSettle();
 }
 
@@ -149,11 +169,15 @@ Future<void> chaChaNow(
 
 /// For integration tests
 /// Find and touch the button whose [Tooltip] is [back]
-Future<void> goBack(WidgetTester tester, String back) async {
+Future<void> goBack(
+  WidgetTester tester,
+  String back, {
+  bool warnIfMissed = false,
+}) async {
   final Finder backButton = find.byTooltip(back);
 
   await tester.ensureVisible(backButton);
-  await tester.tapAt(tester.getCenter(backButton, warnIfMissed: true));
+  await tester.tapAt(tester.getCenter(backButton, warnIfMissed: warnIfMissed));
   await tester.pumpAndSettle();
 }
 
