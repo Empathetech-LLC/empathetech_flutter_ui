@@ -18,10 +18,15 @@ class EzUpdater extends StatefulWidget {
 }
 
 class _EzUpdaterState extends State<EzUpdater> {
+  // Gather theme data //
+
+  final double margin = EzConfig.get(marginKey);
+  final double spacing = EzConfig.get(spacingKey);
+
   // Define build data //
 
   bool isLatest = true;
-  String? thisVersion;
+  String? latestVersion;
 
   static const String appVersionLink =
       'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
@@ -33,8 +38,8 @@ class _EzUpdaterState extends State<EzUpdater> {
 
     if (response.statusCode != 200) return;
 
-    thisVersion = response.body;
-    if (thisVersion != appVersion) setState(() => isLatest = false);
+    latestVersion = response.body;
+    if (latestVersion != appVersion) setState(() => isLatest = false);
   }
 
   @override
@@ -49,25 +54,31 @@ class _EzUpdaterState extends State<EzUpdater> {
 
     return isLatest
         ? const SizedBox.shrink()
-        : EzElevatedIconButton(
-            onPressed: () {
-              String? url;
+        : Padding(
+            padding: EdgeInsets.only(
+              top: (spacing > margin) ? (spacing - margin) : 0,
+              bottom: spacing,
+            ),
+            child: EzElevatedIconButton(
+              onPressed: () {
+                late String url;
 
-              switch (platform) {
-                case TargetPlatform.android:
-                  url =
-                      'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
-                case TargetPlatform.iOS:
-                  url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
-                default:
-                  url =
-                      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download';
+                switch (platform) {
+                  case TargetPlatform.android:
+                    url =
+                        'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
+                  case TargetPlatform.iOS:
+                    url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
+                  default:
+                    url =
+                        'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/';
+                }
 
-                  launchUrl(Uri.parse(url));
-              }
-            },
-            icon: const Icon(Icons.update),
-            label: EFUILang.of(context)!.gUpdates,
+                launchUrl(Uri.parse(url));
+              },
+              icon: const Icon(Icons.update),
+              label: EFUILang.of(context)!.gUpdates,
+            ),
           );
   }
 }
