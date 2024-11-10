@@ -17,6 +17,7 @@ class EzWarning extends StatelessWidget {
   final Color? iconColor;
 
   /// Optional [Widget] to display above the [body]
+  /// Must include it's own spacing widgets
   final Widget? header;
 
   /// What does the user need to know?
@@ -25,6 +26,7 @@ class EzWarning extends StatelessWidget {
   final TextStyle? bodyStyle;
 
   /// Optional [Widget] to display below the [body]
+  /// Must include it's own spacing widgets
   final Widget? footer;
 
   /// [Card] wrapper designed to grab attention for warnings...
@@ -44,8 +46,6 @@ class EzWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Gather theme data //
-
-    const EzSpacer spacer = EzSpacer();
 
     final double margin = EzConfig.get(marginKey);
     final EzSpacer colMargin = EzSpacer(space: margin, horizontal: false);
@@ -104,18 +104,14 @@ class EzWarning extends StatelessWidget {
                 ),
                 colMargin,
 
-                if (header != null) ...<Widget>[
-                  header!,
-                  spacer,
-                ],
+                // Header (optional)
+                if (header != null) header!,
 
-                // Label
+                // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),
 
-                if (footer != null) ...<Widget>[
-                  spacer,
-                  footer!,
-                ],
+                // Footer (optional)
+                if (footer != null) footer!,
               ],
             ),
           ),
