@@ -20,7 +20,6 @@ class EzUpdater extends StatefulWidget {
 class _EzUpdaterState extends State<EzUpdater> {
   // Gather theme data //
 
-  final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
   // Define build data //
@@ -55,10 +54,7 @@ class _EzUpdaterState extends State<EzUpdater> {
     return isLatest
         ? const SizedBox.shrink()
         : Padding(
-            padding: EdgeInsets.only(
-              top: (spacing > margin) ? (spacing - margin) : 0,
-              bottom: spacing,
-            ),
+            padding: EdgeInsets.symmetric(vertical: spacing),
             child: EzElevatedIconButton(
               onPressed: () {
                 late String url;
