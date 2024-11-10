@@ -26,7 +26,9 @@ class EzImageSetting extends StatefulWidget {
   final bool allowClear;
 
   /// Optional [EzAlertDialog] title override
-  final String? dialogTitle;
+  /// Defaults to [label]
+  /// Used with [EFUILang.isDialogTitle]
+  final String? dialogTitleLabel;
 
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
@@ -48,7 +50,7 @@ class EzImageSetting extends StatefulWidget {
     required this.configKey,
     required this.label,
     this.allowClear = true,
-    this.dialogTitle,
+    this.dialogTitleLabel,
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
@@ -412,8 +414,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         builder: (BuildContext dialogContext, StateSetter dialogState) {
           return EzAlertDialog(
             title: Text(
-              widget.dialogTitle ??
-                  l10n.isDialogTitle(widget.label.toLowerCase()),
+              l10n.isDialogTitle(
+                widget.dialogTitleLabel ?? widget.label.toLowerCase(),
+              ),
               textAlign: TextAlign.center,
             ),
             contents: sourceOptions(
