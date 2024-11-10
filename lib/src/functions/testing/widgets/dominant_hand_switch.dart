@@ -29,7 +29,7 @@ Future<void> testDHSetting(
     expect(handButtonsChildren.length, 3);
 
     // Verify righty layout
-    expect(handButtonsChildren[0], isA<Text>());
+    expect(handButtonsChildren[0], isA<EzTextBackground>());
     expect(handButtonsChildren[1], isA<EzSpacer>());
     expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
 
@@ -45,7 +45,7 @@ Future<void> testDHSetting(
 
     expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
     expect(handButtonsChildren[1], isA<EzSpacer>());
-    expect(handButtonsChildren[2], isA<Text>());
+    expect(handButtonsChildren[2], isA<EzTextBackground>());
   } else {
     ezLog('Left hand layout');
 
@@ -60,7 +60,7 @@ Future<void> testDHSetting(
     // Verify lefty layout
     expect(handButtonsChildren[0], isA<DropdownMenu<bool>>());
     expect(handButtonsChildren[1], isA<EzSpacer>());
-    expect(handButtonsChildren[2], isA<Text>());
+    expect(handButtonsChildren[2], isA<EzTextBackground>());
 
     ezLog('Right hand layout');
 
@@ -72,7 +72,7 @@ Future<void> testDHSetting(
     handButtonsChildren =
         (tester.widget(find.byType(Row).at(1)) as Row).children;
 
-    expect(handButtonsChildren[0], isA<Text>());
+    expect(handButtonsChildren[0], isA<EzTextBackground>());
     expect(handButtonsChildren[1], isA<EzSpacer>());
     expect(handButtonsChildren[2], isA<DropdownMenu<bool>>());
   }
