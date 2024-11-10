@@ -101,6 +101,7 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
+                const EzSpacer(),
 
                 // Header (optional)
                 if (header != null) header!,

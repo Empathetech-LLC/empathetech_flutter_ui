@@ -54,7 +54,7 @@ class _EzUpdaterState extends State<EzUpdater> {
     return isLatest
         ? const SizedBox.shrink()
         : Padding(
-            padding: EdgeInsets.symmetric(vertical: spacing),
+            padding: EdgeInsets.only(bottom: spacing),
             child: EzElevatedIconButton(
               onPressed: () {
                 late String url;
