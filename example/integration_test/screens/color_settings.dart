@@ -36,7 +36,7 @@ void testSuite({
 
       await touch(
         tester,
-        find.widgetWithText(ElevatedButton, l10n.csPageTitle),
+        find.widgetWithText(EzElevatedIconButton, l10n.csPageTitle),
       );
 
       //* Test functionality: Quick settings *//

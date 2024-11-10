@@ -34,7 +34,7 @@ void testSuite({
 
       await touch(
         tester,
-        find.widgetWithText(ElevatedButton, l10n.lsPageTitle),
+        find.widgetWithText(EzElevatedIconButton, l10n.lsPageTitle),
       );
 
       // Verify text loaded //
