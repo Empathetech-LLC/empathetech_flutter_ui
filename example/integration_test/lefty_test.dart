@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'screens/home.dart' as home;
+import 'screens/settings-home.dart' as home;
 import 'screens/text_settings.dart' as text;
 import 'screens/layout_settings.dart' as layout;
 import 'screens/color_settings.dart' as color;
