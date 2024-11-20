@@ -3,12 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './export.dart';
 import '../widgets/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -42,61 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: <Widget>[
-            // Functionality disclaimer
-            EzWarning(
-              header: const EzUpdater(),
-              body: kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide,
+            Center(
+              child: Text(
+                'Sup',
+                style: Theme.of(context).textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
             ),
-            separator,
-
-            // Global settings
-            const EzDominantHandSwitch(),
-            spacer,
-
-            const EzThemeModeSwitch(),
-            spacer,
-
-            const EzLocaleSetting(),
-            separator,
-
-            // Text settings
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(textSettingsPath),
-              icon: const Icon(Icons.navigate_next),
-              label: l10n.tsPageTitle,
-            ),
-            spacer,
-
-            // Layout settings
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(layoutSettingsPath),
-              icon: const Icon(Icons.navigate_next),
-              label: l10n.lsPageTitle,
-            ),
-            spacer,
-
-            // Color settings
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(colorSettingsPath),
-              icon: const Icon(Icons.navigate_next),
-              label: l10n.csPageTitle,
-            ),
-            spacer,
-
-            // Image settings
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(imageSettingsPath),
-              icon: const Icon(Icons.navigate_next),
-              label: l10n.isPageTitle,
-            ),
-            separator,
-
-            // Feeling lucky
-            const EzConfigRandomizer(),
-            separator,
-
-            // Reset button
-            const EzResetButton(),
             separator,
           ],
         ),
