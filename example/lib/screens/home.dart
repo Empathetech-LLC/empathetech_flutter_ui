@@ -93,8 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       marginer,
                       EzRow(
                         children: <Widget>[
-                          const Text('Publishing domain:'),
-                          rowMargin,
+                          const Text('N/A'),
                           Checkbox(
                             value: exampleDomain,
                             onChanged: (bool? value) async {
@@ -103,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
                         ],
-                      ),
+                      )
                     ],
                   ),
                 ),
