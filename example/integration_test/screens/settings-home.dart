@@ -15,7 +15,7 @@ void testSuite({
   Locale locale = english,
   bool isLefty = false,
 }) =>
-    testWidgets('home-screen', (WidgetTester tester) async {
+    testWidgets('settings-home-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
       ezLog('Loading localizations');
@@ -44,7 +44,7 @@ void testSuite({
       ezLog('\nTesting options menu');
       await touch(tester, find.byType(MenuAnchor).last);
 
-      expect(find.text(l10n.gBYO).last, findsOneWidget);
+      expect(find.text(l10n.gOpenSource).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 
       ezLog('Dismissing');
