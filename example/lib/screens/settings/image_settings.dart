@@ -12,6 +12,9 @@ class ImageSettingsScreen extends StatelessWidget {
   const ImageSettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      const OpenUIScaffold(settingsMenu: false, body: ImageSettings());
+  Widget build(BuildContext context) => OpenUIScaffold(
+        title: EFUILang.of(context)!.isPageTitle,
+        settingsMenu: false,
+        body: const ImageSettings(),
+      );
 }

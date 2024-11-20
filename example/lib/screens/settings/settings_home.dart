@@ -13,9 +13,10 @@ class SettingsHomeScreen extends StatelessWidget {
   const SettingsHomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => const OpenUIScaffold(
+  Widget build(BuildContext context) => OpenUIScaffold(
+        title: EFUILang.of(context)!.ssPageTitle,
         settingsMenu: false,
-        body: SettingsHome(
+        body: const SettingsHome(
           warningHeader: EzUpdater(),
           textSettingsPath: textSettingsPath,
           layoutSettingsPath: layoutSettingsPath,

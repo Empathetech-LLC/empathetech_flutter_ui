@@ -12,6 +12,9 @@ class TextSettingsScreen extends StatelessWidget {
   const TextSettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      const OpenUIScaffold(settingsMenu: false, body: TextSettings());
+  Widget build(BuildContext context) => OpenUIScaffold(
+        title: EFUILang.of(context)!.tsPageTitle,
+        settingsMenu: false,
+        body: const TextSettings(),
+      );
 }

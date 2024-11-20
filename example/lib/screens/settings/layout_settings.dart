@@ -12,6 +12,9 @@ class LayoutSettingsScreen extends StatelessWidget {
   const LayoutSettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      const OpenUIScaffold(settingsMenu: false, body: LayoutSettings());
+  Widget build(BuildContext context) => OpenUIScaffold(
+        title: EFUILang.of(context)!.lsPageTitle,
+        settingsMenu: false,
+        body: const LayoutSettings(),
+      );
 }
