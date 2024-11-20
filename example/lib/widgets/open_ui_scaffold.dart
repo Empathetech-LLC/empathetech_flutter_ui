@@ -3,13 +3,15 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
 import './export.dart';
+import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
+  final bool settingsMenu;
+
   final Widget body;
 
   /// [FloatingActionButton]
@@ -18,6 +20,7 @@ class OpenUIScaffold extends StatelessWidget {
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const OpenUIScaffold({
     super.key,
+    this.settingsMenu = true,
     required this.body,
     this.fab,
   });
@@ -51,8 +54,9 @@ class OpenUIScaffold extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
       ),
       menuChildren: <Widget>[
-        const BYOButton(),
-        FeedbackButton(l10n: l10n, appName: appTitle),
+        if (settingsMenu) const SettingsButton(),
+        EzFeedbackMenuButton(l10n: l10n, appName: appTitle),
+        const OpenSourceButton(),
       ],
     );
 
