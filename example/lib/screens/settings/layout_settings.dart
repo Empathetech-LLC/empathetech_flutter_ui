@@ -13,5 +13,5 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      const OpenUIScaffold(body: LayoutSettings());
+      const OpenUIScaffold(settingsMenu: false, body: LayoutSettings());
 }

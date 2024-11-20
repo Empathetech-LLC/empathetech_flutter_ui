@@ -3,8 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:example/screens/export.dart';
-
+import '../../screens/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const OpenUIScaffold(
+        settingsMenu: false,
         body: SettingsHome(
           warningHeader: EzUpdater(),
           textSettingsPath: textSettingsPath,
