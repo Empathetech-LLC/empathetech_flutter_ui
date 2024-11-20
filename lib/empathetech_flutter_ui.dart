@@ -44,6 +44,7 @@ export 'src/l10n/efui_lang.dart';
 export 'src/sample_screens/color_settings.dart';
 export 'src/sample_screens/image_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
+export 'src/sample_screens/settings_home.dart';
 export 'src/sample_screens/text_settings.dart';
 
 // Widgets //
