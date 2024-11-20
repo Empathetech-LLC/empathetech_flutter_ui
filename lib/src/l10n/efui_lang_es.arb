@@ -17,7 +17,7 @@
   "g404": "Pero, en este caso: 404 página no encontrada.",
   "g404Note": "Nota: Flutter web utiliza enrutamiento hash, como...\nhttps://www.example.com/#/settings",
 
-  "gClipboard": "{thing} ha sido copiado al portapapeles",
+  "gClipboard": "{thing} ha sido copiado al portapapeles.",
 
   "gUpdates": "Actualizaciones disponibles",
   "gOpenSource": "Código abierto",

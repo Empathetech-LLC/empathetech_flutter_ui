@@ -17,7 +17,7 @@
   "g404": "But, in this case: 404 page not found.",
   "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings",
 
-  "gClipboard": "{thing} has been copied to the clipboard",
+  "gClipboard": "{thing} has been copied to the clipboard.",
 
   "gUpdates": "Updates available",
   "gOpenSource": "Open source",

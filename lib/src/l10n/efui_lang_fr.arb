@@ -17,7 +17,7 @@
   "g404": "Mais, dans ce cas : page 404 non trouvée.",
   "g404Note": "Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings",
 
-  "gClipboard": "{thing} a été copié dans le presse-papiers",
+  "gClipboard": "{thing} a été copié dans le presse-papiers.",
 
   "gUpdates": "Mises à jour disponibles",
   "gOpenSource": "Open source",

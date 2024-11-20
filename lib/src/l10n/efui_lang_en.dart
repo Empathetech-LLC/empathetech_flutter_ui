@@ -45,7 +45,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String gClipboard(Object thing) {
-    return '$thing has been copied to the clipboard';
+    return '$thing has been copied to the clipboard.';
   }
 
   @override

@@ -173,7 +173,7 @@ abstract class EFUILang {
   /// No description provided for @gClipboard.
   ///
   /// In en, this message translates to:
-  /// **'{thing} has been copied to the clipboard'**
+  /// **'{thing} has been copied to the clipboard.'**
   String gClipboard(Object thing);
 
   /// No description provided for @gUpdates.

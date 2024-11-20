@@ -45,7 +45,7 @@ class EFUILangEs extends EFUILang {
 
   @override
   String gClipboard(Object thing) {
-    return '$thing ha sido copiado al portapapeles';
+    return '$thing ha sido copiado al portapapeles.';
   }
 
   @override
