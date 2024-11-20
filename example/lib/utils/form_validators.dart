@@ -16,5 +16,7 @@ String? validateAppName(String? value) {
 String? validateDomain(String? value) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
-  return (value != null && !pattern.hasMatch(value)) ? 'Invalid domain' : null;
+  return (value != null && !pattern.hasMatch(value))
+      ? "'name.extension' only"
+      : null;
 }
