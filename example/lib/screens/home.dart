@@ -20,15 +20,21 @@ class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSpacer rowSpacer = EzSpacer(vertical: false);
   static const EzSeparator separator = EzSeparator();
+
+  final double margin = EzConfig.get(marginKey);
+
+  late final EzSpacer marginer = EzSpacer(space: margin);
+  late final EzSpacer rowMargin = EzSpacer(space: margin, vertical: false);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define build data //
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController orgController = TextEditingController();
+  final TextEditingController domController = TextEditingController();
+
+  bool exampleDomain = false;
 
   // Set the page title //
 
@@ -47,40 +53,63 @@ class _HomeScreenState extends State<HomeScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: <Widget>[
-            Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  // App name
-                  EzRow(
-                    children: <Widget>[
-                      const Text('App Name:'),
-                      rowSpacer,
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Enter your app name',
-                        ),
-                      ),
-                    ],
+            // App name
+            EzRow(
+              children: <Widget>[
+                const Text('App name:'),
+                rowMargin,
+                ConstrainedBox(
+                  constraints: ezTextFieldConstraints(context),
+                  child: TextFormField(
+                    controller: nameController,
+                    maxLines: 1,
+                    validator: validateAppName,
+                    autovalidateMode: AutovalidateMode.onUnfocus,
+                    decoration: const InputDecoration(hintText: 'My app'),
                   ),
-                  spacer,
+                ),
+              ],
+            ),
+            spacer,
 
-                  // Organization name
-                  EzRow(
+            // Organization name
+            EzRow(
+              children: <Widget>[
+                const Text('Publishing domain:'),
+                rowMargin,
+                ConstrainedBox(
+                  constraints: ezTextFieldConstraints(context),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Text('Organization Name:'),
-                      rowSpacer,
                       TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Enter your organization name',
-                        ),
+                        controller: domController,
+                        maxLines: 1,
+                        validator: validateDomain,
+                        autovalidateMode: AutovalidateMode.onUnfocus,
+                        decoration:
+                            const InputDecoration(hintText: 'example.com'),
+                      ),
+                      marginer,
+                      EzRow(
+                        children: <Widget>[
+                          const Text('Publishing domain:'),
+                          rowMargin,
+                          Checkbox(
+                            value: exampleDomain,
+                            onChanged: (bool? value) async {
+                              if (value == null) return;
+                              setState(() => exampleDomain = value);
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  separator,
-                ],
-              ),
-            )
+                ),
+              ],
+            ),
+            separator,
           ],
         ),
       ),
@@ -90,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     nameController.dispose();
-    orgController.dispose();
+    domController.dispose();
     super.dispose();
   }
 }
