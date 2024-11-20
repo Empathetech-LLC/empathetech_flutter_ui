@@ -12,6 +12,10 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 class OpenUIScaffold extends StatelessWidget {
   final bool settingsMenu;
 
+  /// [AppBar.title] passthrough (via [Text] widget)
+  final String title;
+
+  /// [Scaffold.body] passthrough
   final Widget body;
 
   /// [FloatingActionButton]
@@ -20,6 +24,7 @@ class OpenUIScaffold extends StatelessWidget {
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const OpenUIScaffold({
     super.key,
+    this.title = appTitle,
     this.settingsMenu = true,
     required this.body,
     this.fab,
@@ -76,7 +81,7 @@ class OpenUIScaffold extends StatelessWidget {
             leadingWidth: toolbarHeight,
 
             // Title
-            title: const Text(appTitle),
+            title: Text(title, textAlign: TextAlign.center),
             centerTitle: true,
             titleSpacing: 0,
 
