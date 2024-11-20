@@ -82,6 +82,7 @@ class _SettingsHomeState extends State<SettingsHome> {
   @override
   Widget build(BuildContext context) {
     return EzScreen(
+      useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
           // Functionality disclaimer
