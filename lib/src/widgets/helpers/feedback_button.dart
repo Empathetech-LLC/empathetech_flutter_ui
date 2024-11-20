@@ -12,12 +12,12 @@ import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FeedbackButton extends StatelessWidget {
+class EzFeedbackMenuButton extends StatelessWidget {
   final EFUILang l10n;
   final String appName;
   final String supportEmail;
 
-  const FeedbackButton({
+  const EzFeedbackMenuButton({
     super.key,
     required this.l10n,
     required this.appName,
