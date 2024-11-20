@@ -6,12 +6,17 @@
 // Exports //
 
 export 'home.dart';
-export 'text_settings.dart';
-export 'image_settings.dart';
-export 'color_settings.dart';
-export 'layout_settings.dart';
+
+export 'settings/settings_home.dart';
+export 'settings/text_settings.dart';
+export 'settings/image_settings.dart';
+export 'settings/color_settings.dart';
+export 'settings/layout_settings.dart';
 
 // Route names //
+
+/// 'settings-home'
+const String settingsHomePath = 'settings-home';
 
 /// 'text-settings'
 const String textSettingsPath = 'text-settings';
