@@ -34,7 +34,7 @@ const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(64.0));
 
 /// threeQs = [widthOf] context * 0.75
 /// min: threeQs, max: min(threeQs, [smallBreakpoint])
-BoxConstraints textFieldConstraints(BuildContext context) {
+BoxConstraints ezTextFieldConstraints(BuildContext context) {
   final double threeQs = widthOf(context) * 0.75;
 
   return BoxConstraints(
