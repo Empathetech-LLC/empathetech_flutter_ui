@@ -54,8 +54,8 @@ class OpenUIScaffold extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
       ),
       menuChildren: <Widget>[
-        if (settingsMenu) const SettingsButton(),
-        EzFeedbackMenuButton(l10n: l10n, appName: appTitle),
+        if (settingsMenu) SettingsButton(context),
+        EzFeedbackMenuButton(parentContext: context, appName: appTitle),
         const OpenSourceButton(),
       ],
     );
