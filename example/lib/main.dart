@@ -95,24 +95,31 @@ final GoRouter router = GoRouter(
       builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
         GoRoute(
-          path: textSettingsPath,
-          name: textSettingsPath,
-          builder: (_, __) => const TextSettingsScreen(),
-        ),
-        GoRoute(
-          path: layoutSettingsPath,
-          name: layoutSettingsPath,
-          builder: (_, __) => const LayoutSettingsScreen(),
-        ),
-        GoRoute(
-          path: colorSettingsPath,
-          name: colorSettingsPath,
-          builder: (_, __) => const ColorSettingsScreen(),
-        ),
-        GoRoute(
-          path: imageSettingsPath,
-          name: imageSettingsPath,
-          builder: (_, __) => const ImageSettingsScreen(),
+          path: settingsHomePath,
+          name: settingsHomePath,
+          builder: (_, __) => const SettingsHomeScreen(),
+          routes: <RouteBase>[
+            GoRoute(
+              path: textSettingsPath,
+              name: textSettingsPath,
+              builder: (_, __) => const TextSettingsScreen(),
+            ),
+            GoRoute(
+              path: layoutSettingsPath,
+              name: layoutSettingsPath,
+              builder: (_, __) => const LayoutSettingsScreen(),
+            ),
+            GoRoute(
+              path: colorSettingsPath,
+              name: colorSettingsPath,
+              builder: (_, __) => const ColorSettingsScreen(),
+            ),
+            GoRoute(
+              path: imageSettingsPath,
+              name: imageSettingsPath,
+              builder: (_, __) => const ImageSettingsScreen(),
+            ),
+          ],
         ),
       ],
     ),
