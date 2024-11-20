@@ -13,29 +13,31 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzFeedbackMenuButton extends StatelessWidget {
-  final EFUILang l10n;
+  final BuildContext parentContext;
   final String appName;
   final String supportEmail;
 
   const EzFeedbackMenuButton({
     super.key,
-    required this.l10n,
+    required this.parentContext,
     required this.appName,
     this.supportEmail = empathSupport,
   });
 
   @override
   Widget build(BuildContext context) {
+    final EFUILang l10n = EFUILang.of(context)!;
+
     final String message = kIsWeb
         ? '${l10n.gOpeningFeedback}\n${l10n.gSubmitWebFeedback(screenshotHint(context))}'
         : '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
 
     return EzMenuButton(
       onPressed: () async {
-        await ezSnackBar(context: context, message: message).closed;
+        await ezSnackBar(context: parentContext, message: message).closed;
 
-        if (context.mounted) {
-          BetterFeedback.of(context).show(
+        if (parentContext.mounted) {
+          BetterFeedback.of(parentContext).show(
             (UserFeedback feedback) async {
               if (kIsWeb) {
                 await launchUrl(Uri.parse(
