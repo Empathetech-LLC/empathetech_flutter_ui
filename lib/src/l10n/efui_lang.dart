@@ -182,11 +182,11 @@ abstract class EFUILang {
   /// **'Updates available'**
   String get gUpdates;
 
-  /// No description provided for @gBYO.
+  /// No description provided for @gOpenSource.
   ///
   /// In en, this message translates to:
-  /// **'Build your own'**
-  String get gBYO;
+  /// **'Open source'**
+  String get gOpenSource;
 
   /// No description provided for @gEFUISourceHint.
   ///

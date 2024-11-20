@@ -52,7 +52,7 @@ class EFUILangEs extends EFUILang {
   String get gUpdates => 'Actualizaciones disponibles';
 
   @override
-  String get gBYO => 'Construye uno';
+  String get gOpenSource => 'Código abierto';
 
   @override
   String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
