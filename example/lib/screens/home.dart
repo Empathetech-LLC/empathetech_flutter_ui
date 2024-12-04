@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define build data //
 
   final TextEditingController nameController = TextEditingController();
+  bool validName = false;
 
   final TextEditingController domController = TextEditingController();
   bool exampleDomain = false;
@@ -50,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool imageSettings = true;
 
   late final TargetPlatform platform = getBasePlatform(context);
-  bool validName = false;
 
   bool showAdvanced = false;
 
@@ -277,6 +277,24 @@ It is recommended to set a custom color scheme. If you need help building one, t
             ),
           ],
         ),
+      ),
+      fab: ResetFAB(
+        clearForms: () => setState(() {
+          nameController.clear();
+          validName = false;
+
+          domController.clear();
+          exampleDomain = false;
+
+          textSettings = true;
+          layoutSettings = true;
+          colorSettings = true;
+          imageSettings = true;
+
+          showAdvanced = false;
+
+          autoEmu = false;
+        }),
       ),
     );
   }

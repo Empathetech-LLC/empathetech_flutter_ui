@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+export 'fabulous.dart';
 export 'menu_buttons.dart';
 export 'open_ui_scaffold.dart';
 export 'updater.dart';
