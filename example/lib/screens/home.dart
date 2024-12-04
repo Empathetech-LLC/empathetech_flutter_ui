@@ -56,51 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool autoEmu = false;
 
-  // Define custom widgets //
-
-  Widget settingsToggle(String title, bool toggle) {
-    return Padding(
-      padding: wrapPadding,
-      child: EzRow(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(title, style: textTheme.bodyLarge, textAlign: TextAlign.center),
-          Checkbox(
-            value: toggle,
-            onChanged: (bool? value) async {
-              if (value == null) return;
-              setState(() => toggle = value);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  late final List<Widget> advancedSettings = <Widget>[
-    // Emulate
-    EzRow(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          'Run Android emulator when complete',
-          style: textTheme.bodyLarge,
-          textAlign: TextAlign.center,
-        ),
-        Checkbox(
-          value: autoEmu,
-          onChanged: (bool? value) async {
-            if (value == null) return;
-            setState(() => autoEmu = value);
-          },
-        ),
-      ],
-    ),
-    divider,
-  ];
-
   // Set the page title //
 
   @override
@@ -212,10 +167,89 @@ class _HomeScreenState extends State<HomeScreen> {
                 runAlignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
-                  settingsToggle('Text settings', textSettings),
-                  settingsToggle('Layout settings', layoutSettings),
-                  settingsToggle('Color settings', colorSettings),
-                  settingsToggle('Image settings', imageSettings),
+                  // Text
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Text settings',
+                            style: textTheme.bodyLarge,
+                            textAlign: TextAlign.center),
+                        Checkbox(
+                          value: textSettings,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => textSettings = value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Layout
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Layout settings',
+                            style: textTheme.bodyLarge,
+                            textAlign: TextAlign.center),
+                        Checkbox(
+                          value: layoutSettings,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => layoutSettings = value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Color
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Color settings',
+                            style: textTheme.bodyLarge,
+                            textAlign: TextAlign.center),
+                        Checkbox(
+                          value: colorSettings,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => colorSettings = value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Image
+                  Padding(
+                    padding: wrapPadding,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Image settings',
+                            style: textTheme.bodyLarge,
+                            textAlign: TextAlign.center),
+                        Checkbox(
+                          value: imageSettings,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => imageSettings = value);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -258,7 +292,28 @@ It is recommended to set a custom color scheme. If you need help building one, t
             // Advanced settings //
 
             ...(showAdvanced
-                ? advancedSettings
+                ? <Widget>[
+                    // Emulate
+                    EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Run Android emulator when complete',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                        Checkbox(
+                          value: autoEmu,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => autoEmu = value);
+                          },
+                        ),
+                      ],
+                    ),
+                    divider,
+                  ]
                 : <Widget>[
                     EzTextIconButton(
                       onPressed: () => setState(() => showAdvanced = true),
