@@ -4,12 +4,23 @@
  */
 
 /// Allows letters (upper and lower case) and underscores
-String? validateAppName(String? value) {
+String? validateAppName({
+  required String? value,
+  Function? onSuccess,
+  Function? onFailure,
+}) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+$');
 
-  return (value != null && !pattern.hasMatch(value))
-      ? 'Only lowercase letters, numbers, and underscores are allowed'
-      : null;
+  if (value == null || value.isEmpty) {
+    onFailure?.call();
+    return 'App name is required. Lowercase letters, numbers, and underscores are allowed.';
+  } else if (!pattern.hasMatch(value)) {
+    onFailure?.call();
+    return 'Only lowercase letters, numbers, and underscores are allowed.';
+  } else {
+    onSuccess?.call();
+    return null;
+  }
 }
 
 /// Validates name.extension domains
