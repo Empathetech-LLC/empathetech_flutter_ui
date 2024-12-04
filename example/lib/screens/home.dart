@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,10 +23,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
-
+  static const EzDivider divider = EzDivider();
   final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
+
+  late final EdgeInsets wrapPadding =
+      EzInsets.col(EzConfig.get(paddingKey) * 2);
+  late BoxConstraints textConstraints = ezTextFieldConstraints(context);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -36,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define build data //
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController domController = TextEditingController();
 
+  final TextEditingController domController = TextEditingController();
   bool exampleDomain = false;
 
   bool textSettings = true;
@@ -46,6 +50,56 @@ class _HomeScreenState extends State<HomeScreen> {
   bool imageSettings = true;
 
   late final TargetPlatform platform = getBasePlatform(context);
+  bool validName = false;
+
+  bool showAdvanced = false;
+
+  bool autoEmu = false;
+
+  // Define custom widgets //
+
+  Widget settingsToggle(String title, bool toggle) {
+    return Padding(
+      padding: wrapPadding,
+      child: EzRow(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(title, style: textTheme.bodyLarge, textAlign: TextAlign.center),
+          Checkbox(
+            value: toggle,
+            onChanged: (bool? value) async {
+              if (value == null) return;
+              setState(() => toggle = value);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  late final List<Widget> advancedSettings = <Widget>[
+    // Emulate
+    EzRow(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'Run Android emulator when complete',
+          style: textTheme.bodyLarge,
+          textAlign: TextAlign.center,
+        ),
+        Checkbox(
+          value: autoEmu,
+          onChanged: (bool? value) async {
+            if (value == null) return;
+            setState(() => autoEmu = value);
+          },
+        ),
+      ],
+    ),
+    divider,
+  ];
 
   // Set the page title //
 
@@ -64,35 +118,47 @@ class _HomeScreenState extends State<HomeScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: <Widget>[
-            // App name
+            // App name //
+
+            // Title
             Text(
               'App name',
               style: textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             margin,
+
+            // Field
             ConstrainedBox(
-              constraints: ezTextFieldConstraints(context),
+              constraints: textConstraints,
               child: TextFormField(
                 controller: nameController,
                 textAlign: TextAlign.center,
                 maxLines: 1,
-                validator: validateAppName,
+                validator: (String? entry) => validateAppName(
+                  value: entry,
+                  onSuccess: () => setState(() => validName = true),
+                  onFailure: () => setState(() => validName = false),
+                ),
                 autovalidateMode: AutovalidateMode.onUnfocus,
                 decoration: const InputDecoration(hintText: 'my_app'),
               ),
             ),
             separator,
 
-            // Organization name
+            // Organization name //
+
+            // Title
             Text(
               'Publishing domain',
               style: textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             margin,
+
+            // Field
             ConstrainedBox(
-              constraints: ezTextFieldConstraints(context),
+              constraints: textConstraints,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -129,6 +195,8 @@ class _HomeScreenState extends State<HomeScreen> {
             separator,
 
             // Settings selection //
+
+            // Title
             Text(
               'Include',
               style: textTheme.titleLarge,
@@ -136,95 +204,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             EzSpacer(space: EzConfig.get(paddingKey)),
 
-            // Text
-            EzRow(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Text settings',
-                  style: textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-                Checkbox(
-                  value: textSettings,
-                  onChanged: (bool? value) async {
-                    if (value == null) return;
-                    setState(() => textSettings = value);
-                  },
-                ),
-              ],
-            ),
-            spacer,
-
-            // Layout
-            EzRow(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Layout settings',
-                  style: textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-                Checkbox(
-                  value: layoutSettings,
-                  onChanged: (bool? value) async {
-                    if (value == null) return;
-                    setState(() => layoutSettings = value);
-                  },
-                ),
-              ],
-            ),
-            spacer,
-
-            // Color
-            EzRow(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Color settings',
-                  style: textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-                Checkbox(
-                  value: colorSettings,
-                  onChanged: (bool? value) async {
-                    if (value == null) return;
-                    setState(() => colorSettings = value);
-                  },
-                ),
-              ],
-            ),
-            spacer,
-
-            // Image
-            EzRow(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Image settings',
-                  style: textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-                Checkbox(
-                  value: imageSettings,
-                  onChanged: (bool? value) async {
-                    if (value == null) return;
-                    setState(() => imageSettings = value);
-                  },
-                ),
-              ],
-            ),
+            // Options
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: widthOf(context) * 0.667),
-              child: const Divider(),
+              constraints: textConstraints,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  settingsToggle('Text settings', textSettings),
+                  settingsToggle('Layout settings', layoutSettings),
+                  settingsToggle('Color settings', colorSettings),
+                  settingsToggle('Image settings', imageSettings),
+                ],
+              ),
             ),
+            divider,
 
             // Default config notice
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
                   text:
-                      'When you generate ${(kIsWeb || platform == TargetPlatform.iOS || platform == TargetPlatform.android) ? 'the config' : 'the app'}, the current ',
+                      'When you generate ${(kIsWeb || platform == TargetPlatform.iOS || platform == TargetPlatform.android) ? 'the config' : (validName ? nameController.text : 'the app')}, the current ',
                   style: notificationStyle,
                 ),
                 EzInlineLink(
@@ -236,7 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 EzPlainText(
                   text:
-                      ''' (except images) will become the default config for ${nameController.text.isNotEmpty ? nameController.text : 'your app'}.
+                      ''' (except images) will become the default config for ${validName ? nameController.text : 'your app'}.
+
 It is recommended to set a custom color scheme. If you need help building one, try starting ''',
                   style: notificationStyle,
                 ),
@@ -249,6 +252,28 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 ),
               ],
               textAlign: TextAlign.center,
+            ),
+            divider,
+
+            // Advanced settings //
+
+            ...(showAdvanced
+                ? advancedSettings
+                : <Widget>[
+                    EzTextIconButton(
+                      onPressed: () => setState(() => showAdvanced = true),
+                      icon: Icon(PlatformIcons(context).addCircledOutline),
+                      label: 'Show advanced settings',
+                    ),
+                    separator,
+                  ]),
+
+            // Make it so //
+
+            EzElevatedIconButton(
+              onPressed: () {},
+              icon: Icon(PlatformIcons(context).create),
+              label: 'Generate',
             ),
           ],
         ),
