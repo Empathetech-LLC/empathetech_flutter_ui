@@ -23,12 +23,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
+  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
   static const EzDivider divider = EzDivider();
-  final EzSpacer margin = EzSpacer(space: EzConfig.get(marginKey));
 
-  late final EdgeInsets wrapPadding =
-      EzInsets.col(EzConfig.get(paddingKey) * 2);
+  final double spacing = EzConfig.get(spacingKey);
+
+  late final EdgeInsets wrapPadding = EdgeInsets.only(
+    left: spacing,
+    right: spacing,
+    top: spacing,
+  );
   late BoxConstraints textConstraints = ezTextFieldConstraints(context);
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -39,8 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define build data //
 
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController appController = TextEditingController();
   bool validName = false;
+
+  final TextEditingController pubController = TextEditingController();
 
   final TextEditingController domController = TextEditingController();
   bool exampleDomain = false;
@@ -55,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showAdvanced = false;
 
   bool autoEmu = false;
+
+  final TextEditingController vscController = TextEditingController();
 
   // Set the page title //
 
@@ -81,13 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
               style: textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            margin,
 
             // Field
             ConstrainedBox(
               constraints: textConstraints,
               child: TextFormField(
-                controller: nameController,
+                controller: appController,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 validator: (String? entry) => validateAppName(
@@ -96,20 +104,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   onFailure: () => setState(() => validName = false),
                 ),
                 autovalidateMode: AutovalidateMode.onUnfocus,
-                decoration: const InputDecoration(hintText: 'my_app'),
+                decoration: const InputDecoration(hintText: 'your_app'),
               ),
             ),
-            separator,
+            spacer,
 
             // Organization name //
 
             // Title
             Text(
-              'Publishing domain',
+              'Publisher name',
               style: textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            margin,
+
+            // Field
+            ConstrainedBox(
+              constraints: textConstraints,
+              child: TextFormField(
+                controller: pubController,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                decoration: const InputDecoration(hintText: 'Your LLC'),
+              ),
+            ),
+            spacer,
+
+            // Domain //
+
+            // Title
+            Text(
+              'Domain name',
+              style: textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
 
             // Field
             ConstrainedBox(
@@ -125,9 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       validator: validateDomain,
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration:
-                          const InputDecoration(hintText: 'example.com'),
+                          const InputDecoration(hintText: 'com.example'),
                     ),
-                    margin,
                   ],
                   EzRow(
                     mainAxisAlignment: exampleDomain
@@ -157,7 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
               style: textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            EzSpacer(space: EzConfig.get(paddingKey)),
 
             // Options
             ConstrainedBox(
@@ -174,9 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Text settings',
-                            style: textTheme.bodyLarge,
-                            textAlign: TextAlign.center),
+                        Text(
+                          'Text settings',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
                         Checkbox(
                           value: textSettings,
                           onChanged: (bool? value) async {
@@ -195,9 +223,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Layout settings',
-                            style: textTheme.bodyLarge,
-                            textAlign: TextAlign.center),
+                        Text(
+                          'Layout settings',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
                         Checkbox(
                           value: layoutSettings,
                           onChanged: (bool? value) async {
@@ -216,9 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Color settings',
-                            style: textTheme.bodyLarge,
-                            textAlign: TextAlign.center),
+                        Text(
+                          'Color settings',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
                         Checkbox(
                           value: colorSettings,
                           onChanged: (bool? value) async {
@@ -237,9 +269,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Image settings',
-                            style: textTheme.bodyLarge,
-                            textAlign: TextAlign.center),
+                        Text(
+                          'Image settings',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
                         Checkbox(
                           value: imageSettings,
                           onChanged: (bool? value) async {
@@ -260,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
               <InlineSpan>[
                 EzPlainText(
                   text:
-                      'When you generate ${(kIsWeb || platform == TargetPlatform.iOS || platform == TargetPlatform.android) ? 'the config' : (validName ? nameController.text : 'the app')}, the current ',
+                      'When you generate ${(kIsWeb || platform == TargetPlatform.iOS || platform == TargetPlatform.android) ? 'the config' : (validName ? appController.text : 'the app')}, the current ',
                   style: notificationStyle,
                 ),
                 EzInlineLink(
@@ -272,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 EzPlainText(
                   text:
-                      ''' (except images) will become the default config for ${validName ? nameController.text : 'your app'}.
+                      ''' (except images) will become the default config for ${validName ? appController.text : 'your app'}.
 
 It is recommended to set a custom color scheme. If you need help building one, try starting ''',
                   style: notificationStyle,
@@ -312,6 +346,20 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         ),
                       ],
                     ),
+                    spacer,
+
+                    // VS Code config
+                    Text(
+                      'VS Code config',
+                      style: textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
+
+                    // Field
+                    ConstrainedBox(
+                      constraints: textConstraints,
+                      child: TextFormField(controller: pubController),
+                    ),
                     divider,
                   ]
                 : <Widget>[
@@ -330,12 +378,13 @@ It is recommended to set a custom color scheme. If you need help building one, t
               icon: Icon(PlatformIcons(context).create),
               label: 'Generate',
             ),
+            separator,
           ],
         ),
       ),
       fab: ResetFAB(
         clearForms: () => setState(() {
-          nameController.clear();
+          appController.clear();
           validName = false;
 
           domController.clear();
@@ -356,8 +405,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
   @override
   void dispose() {
-    nameController.dispose();
+    appController.dispose();
+    pubController.dispose();
     domController.dispose();
+    vscController.dispose();
     super.dispose();
   }
 }
