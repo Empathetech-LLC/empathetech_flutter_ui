@@ -4,7 +4,7 @@ version: 7.3.1
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+   sdk: ^3.6.0
 
 dependencies:
   flutter:
@@ -25,19 +25,19 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  country_flags: ^3.0.0
+  country_flags: ^3.1.0
   feedback: ^3.1.0
   flex_color_picker: ^3.6.0
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.1
   line_icons: ^2.0.3 
   provider: ^6.1.2
-  share_plus: ^10.1.2
+  share_plus: ^10.1.3
 
 dev_dependencies:
   # For development
-  dartdoc: ^8.1.0
-  dependency_validator: ^4.1.1
+  dartdoc: ^8.3.1
+  dependency_validator: ^4.1.2
   flutter_lints: ^5.0.0
 
   # For example app (Open UI)
@@ -46,7 +46,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.3
   
 
