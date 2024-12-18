@@ -63,7 +63,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool autoEmu = false;
 
-  final TextEditingController vscController = TextEditingController();
+  final TextEditingController vscController = TextEditingController(text: '''{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "run-app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "example/lib/main.dart",
+    },
+    {
+      "name": "install-app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "example/lib/main.dart",
+    },
+  ]
+}''');
 
   // Set the page title //
 
@@ -350,7 +368,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                     // VS Code config
                     Text(
-                      'VS Code config',
+                      '.vscode/launch.json',
                       style: textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),
@@ -358,7 +376,11 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     // Field
                     ConstrainedBox(
                       constraints: textConstraints,
-                      child: TextFormField(controller: pubController),
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        controller: vscController,
+                      ),
                     ),
                     divider,
                   ]
