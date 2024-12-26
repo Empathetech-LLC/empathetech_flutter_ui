@@ -4,6 +4,7 @@
  */
 
 import '../screens/export.dart';
+import '../structs/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
 
@@ -146,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: pubController,
                 textAlign: TextAlign.center,
                 maxLines: 1,
-                decoration: const InputDecoration(hintText: 'Your LLC'),
+                decoration: const InputDecoration(hintText: 'You/your LLC'),
               ),
             ),
             spacer,
@@ -399,7 +400,35 @@ It is recommended to set a custom color scheme. If you need help building one, t
             // Make it so //
 
             EzElevatedIconButton(
-              onPressed: () {},
+              onPressed: () {
+                if (!validName ||
+                    (!exampleDomain &&
+                        validateDomain(domController.text) != null)) {
+                  // TOAST OR SOMETHING
+                  return;
+                }
+
+                context.goNamed(
+                  progressPath,
+                  extra: EAGConfig(
+                    appName: appController.text,
+                    publisherName: pubController.text,
+                    domainName:
+                        exampleDomain ? 'com.example' : domController.text,
+                    textSettings: textSettings,
+                    layoutSettings: layoutSettings,
+                    colorSettings: colorSettings,
+                    imageSettings: imageSettings,
+                    vsCodeConfig: vscController.text,
+                    appDefaults: Map<String, dynamic>.fromEntries(
+                      allKeys.keys.map(
+                        (String key) =>
+                            MapEntry<String, dynamic>(key, EzConfig.get(key)),
+                      ),
+                    ),
+                  ),
+                );
+              },
               icon: Icon(PlatformIcons(context).create),
               label: 'Generate',
             ),
