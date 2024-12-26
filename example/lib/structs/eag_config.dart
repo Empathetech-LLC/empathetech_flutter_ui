@@ -49,7 +49,7 @@ class EAGConfig {
       colorSettingsKey: colorSettings,
       imageSettingsKey: imageSettings,
       vsCodeConfigKey: vsCodeConfig,
-      appDefaultsKey: ,
+      appDefaultsKey: appDefaults,
     };
   }
 
@@ -63,7 +63,7 @@ class EAGConfig {
       colorSettings: json[colorSettingsKey] as bool,
       imageSettings: json[imageSettingsKey] as bool,
       vsCodeConfig: json[vsCodeConfigKey] as String,
-      appDefaults: ,
+      appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
     );
   }
 
@@ -78,7 +78,7 @@ class EAGConfig {
   $colorSettingsKey: $colorSettings,
   $imageSettingsKey: $imageSettings,
   $vsCodeConfigKey: $vsCodeConfig,
-  $appDefaultsKey: BLARG,
+  $appDefaultsKey: ${appDefaults.toString()},
 }''';
   }
 }
