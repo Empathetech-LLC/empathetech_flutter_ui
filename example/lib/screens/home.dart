@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const EzSeparator separator = EzSeparator();
   static const EzDivider divider = EzDivider();
 
+  final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
   late final EdgeInsets wrapPadding = EdgeInsets.only(
@@ -100,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: EzScreen(
         child: EzScrollView(
           children: <Widget>[
+            if (spacing > margin) EzSpacer(space: spacing - margin),
+
             // App name //
 
             // Title
