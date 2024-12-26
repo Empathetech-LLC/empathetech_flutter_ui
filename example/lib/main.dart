@@ -4,6 +4,7 @@
  */
 
 import './screens/export.dart';
+import './structs/export.dart';
 import './utils/export.dart';
 
 import 'package:flutter/material.dart';
@@ -22,7 +23,6 @@ void main() async {
   // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set device orientation(s)
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -88,12 +88,21 @@ void main() async {
 /// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter router = GoRouter(
   initialLocation: homePath,
+  errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
   routes: <RouteBase>[
     GoRoute(
       path: homePath,
       name: homePath,
       builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
+        GoRoute(
+          path: progressPath,
+          name: progressPath,
+          builder: (_, GoRouterState state) {
+            final EAGConfig config = state.extra as EAGConfig;
+            return ProgressScreen(config: config);
+          },
+        ),
         GoRoute(
           path: settingsHomePath,
           name: settingsHomePath,
@@ -133,7 +142,6 @@ class OpenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return EzAppProvider(
       app: PlatformApp.router(
-        // Production ready!
         debugShowCheckedModeBanner: false,
 
         // Language handlers
