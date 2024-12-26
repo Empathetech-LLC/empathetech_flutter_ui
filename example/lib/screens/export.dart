@@ -13,6 +13,8 @@ export 'settings/image_settings.dart';
 export 'settings/color_settings.dart';
 export 'settings/layout_settings.dart';
 
+export 'generator/progress.dart';
+
 // Route names //
 
 /// 'settings-home'
@@ -29,3 +31,6 @@ const String colorSettingsPath = 'color-settings';
 
 /// 'layout-settings'
 const String layoutSettingsPath = 'layout-settings';
+
+/// 'generator-progress'
+const String progressPath = 'generator-progress';
