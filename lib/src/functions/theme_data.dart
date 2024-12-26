@@ -15,7 +15,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
   final Color highlightColor =
-      colorScheme.primary.withOpacity(highlightOpacity);
+      colorScheme.primary.withValues(alpha: highlightOpacity);
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
@@ -72,7 +72,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: colorScheme.primary,
-      selectionColor: colorScheme.secondary.withOpacity(selectionOpacity),
+      selectionColor: colorScheme.secondary.withValues(alpha: selectionOpacity),
       selectionHandleColor: colorScheme.primary,
     ),
 
@@ -105,7 +105,7 @@ ThemeData ezThemeData(Brightness brightness) {
       fillColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected))
             ? colorScheme.primary
-            : colorScheme.surface.withOpacity(textBackgroundOpacity),
+            : colorScheme.surface.withValues(alpha: textBackgroundOpacity),
       ),
       checkColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected))
@@ -203,7 +203,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
+      fillColor: colorScheme.surface.withValues(alpha: textBackgroundOpacity),
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,

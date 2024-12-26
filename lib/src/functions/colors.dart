@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
+
 /* empathetech_flutter_ui
  * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
@@ -10,9 +13,9 @@ import 'package:flutter/material.dart';
 /// Returns the guesstimated most readable text color (black/white) for [background]
 /// Formula credit: https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
 Color getTextColor(Color background) {
-  return Color((((background.red * 0.299) +
-              (background.green * 0.587) +
-              (background.blue * 0.114)) >=
+  return Color((((background.r * 0.299) +
+              (background.g * 0.587) +
+              (background.b * 0.114)) >=
           150)
       ? blackHex
       : whiteHex);

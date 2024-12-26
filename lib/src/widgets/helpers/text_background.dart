@@ -44,11 +44,11 @@ class EzTextBackground extends StatelessWidget {
 
     final Color color = (backgroundColor == null)
         ? useSurface
-            ? Theme.of(context).colorScheme.surface.withOpacity(percent)
+            ? Theme.of(context).colorScheme.surface.withValues(alpha: percent)
             : Theme.of(context)
                 .colorScheme
                 .surfaceContainer
-                .withOpacity(percent)
+                .withValues(alpha: percent)
         : backgroundColor!;
 
     return Container(

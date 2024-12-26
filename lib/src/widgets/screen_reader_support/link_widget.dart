@@ -61,7 +61,7 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
           color: Theme.of(context)
               .colorScheme
               .primary
-              .withOpacity(highlightOpacity),
+              .withValues(alpha: highlightOpacity),
         ),
       ];
 

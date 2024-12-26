@@ -69,7 +69,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
       isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
   late final double fieldOpacity =
       EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
-  late final Color fieldColor = colorScheme.surface.withOpacity(fieldOpacity);
+  late final Color fieldColor =
+      colorScheme.surface.withValues(alpha: fieldOpacity);
 
   late final double padding = EzConfig.get(paddingKey);
 
@@ -190,7 +191,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
                     if (doubleVal == null ||
                         doubleVal > widget.max ||
-                        doubleVal < widget.min) return;
+                        doubleVal < widget.min) {
+                      return;
+                    }
 
                     currValue = doubleVal;
                     await EzConfig.setDouble(widget.configKey, doubleVal);

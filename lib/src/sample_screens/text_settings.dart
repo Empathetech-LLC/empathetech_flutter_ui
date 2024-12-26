@@ -178,7 +178,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late double currOpacity =
       EzConfig.getDouble(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
 
-  late Color? backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+  late Color? backgroundColor =
+      surfaceContainer?.withValues(alpha: currOpacity);
 
   late final DisplayTextStyleProvider displayProvider =
       Provider.of<DisplayTextStyleProvider>(context);
@@ -300,7 +301,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               onChanged: (double value) {
                 setState(() {
                   currOpacity = value;
-                  backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+                  backgroundColor =
+                      surfaceContainer?.withValues(alpha: currOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -336,7 +338,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             labelProvider.reset();
 
             currOpacity = EzConfig.getDefault(oKey) ?? 0.0;
-            backgroundColor = surfaceContainer?.withOpacity(currOpacity);
+            backgroundColor = surfaceContainer?.withValues(alpha: currOpacity);
 
             setState(() {});
           },

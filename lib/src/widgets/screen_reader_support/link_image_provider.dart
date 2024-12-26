@@ -94,7 +94,7 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
           color: Theme.of(context)
               .colorScheme
               .primary
-              .withOpacity(highlightOpacity),
+              .withValues(alpha: highlightOpacity),
         ),
       ];
 
