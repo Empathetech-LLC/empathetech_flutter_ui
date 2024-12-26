@@ -6,7 +6,9 @@
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ProgressScreen extends StatefulWidget {
@@ -27,12 +29,24 @@ class _HomeScreenState extends State<ProgressScreen> {
 
   late final TargetPlatform platform = getBasePlatform(context);
 
+  // Define custom functions //
+
+  void archive() async {}
+
+  void run() async {
+    await Process.run('flutter', <String>['create']);
+  }
+
   // Init //
 
   @override
   void initState() {
     super.initState();
-    isDesktop ? run() : archive();
+    (kIsWeb ||
+            platform == TargetPlatform.iOS ||
+            platform == TargetPlatform.android)
+        ? archive()
+        : run();
   }
 
   // Set the page title //
