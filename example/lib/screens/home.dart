@@ -45,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define build data //
 
+  late final TargetPlatform platform = getBasePlatform(context);
+
   final TextEditingController appController = TextEditingController();
   bool validName = false;
 
@@ -57,8 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool layoutSettings = true;
   bool colorSettings = true;
   bool imageSettings = true;
-
-  late final TargetPlatform platform = getBasePlatform(context);
 
   bool showAdvanced = false;
 
