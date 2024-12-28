@@ -18,6 +18,7 @@ dependencies:
 
   # Community
   feedback: ^3.1.0
+  file_saver: ^0.2.14
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.1
   line_icons: ^2.0.3

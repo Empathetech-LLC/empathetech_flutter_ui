@@ -46,6 +46,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
+  file_saver: ^0.2.14
   flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.3
   
