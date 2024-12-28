@@ -7,8 +7,10 @@ import '../../structs/export.dart';
 import '../../widgets/export.dart';
 
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ProgressScreen extends StatefulWidget {
@@ -31,7 +33,14 @@ class _HomeScreenState extends State<ProgressScreen> {
 
   // Define custom functions //
 
-  void archive() async {}
+  void archive() async {
+    await FileSaver.instance.saveFile(
+      name: '${widget.config.appName}-eag-config.json',
+      bytes: utf8.encode(jsonEncode(widget.config.toJson())),
+      ext: 'json',
+      mimeType: MimeType.json,
+    );
+  }
 
   void run() async {
     await Process.run('flutter', <String>['create']);
