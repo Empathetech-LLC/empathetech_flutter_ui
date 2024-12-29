@@ -4,3 +4,4 @@
  */
 
 export 'eag_config.dart';
+export 'licenses.dart';
