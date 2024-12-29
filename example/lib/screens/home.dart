@@ -82,6 +82,51 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
+  bool showAnalysis = false;
+  bool deleteAnalysis = false;
+  static const String analysisDefault =
+      '''include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude: [lib/l10n/**]
+
+linter:
+  rules:
+    always_declare_return_types: true
+    always_specify_types: true
+    avoid_null_checks_in_equality_operators: true
+    avoid_types_as_parameter_names: true
+    await_only_futures: true
+    camel_case_types: true
+    constant_identifier_names: true
+    empty_catches: true
+    file_names: true
+    hash_and_equals: true
+    library_names: true
+    library_prefixes: true
+    non_constant_identifier_names: true
+    package_names: true
+    prefer_asserts_with_message: true
+    prefer_conditional_assignment: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_function_declarations_over_variables: true
+    prefer_if_null_operators: true
+    prefer_single_quotes: true
+    provide_deprecation_message: true
+    test_types_in_equals: true
+    unnecessary_late: true
+    unnecessary_library_name: true
+    unnecessary_new: true
+    use_build_context_synchronously: true
+    use_full_hex_values_for_flutter_colors: true
+    ''';
+  final TextEditingController analysisController =
+      TextEditingController(text: analysisDefault);
+
   // Set the page title //
 
   @override
@@ -383,6 +428,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   Visibility(
                     visible: !deleteVSC,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         EzRow(
                           children: <Widget>[
@@ -418,6 +465,56 @@ It is recommended to set a custom color scheme. If you need help building one, t
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               controller: vscController,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  spacer,
+
+                  // Analysis options config
+                  Visibility(
+                    visible: !deleteAnalysis,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        EzRow(
+                          children: <Widget>[
+                            Text(
+                              'analysis_options.yaml',
+                              style: textTheme.bodyLarge,
+                              textAlign: TextAlign.start,
+                            ),
+                            EzSpacer(vertical: false, space: margin),
+                            IconButton(
+                              onPressed: () =>
+                                  setState(() => showAnalysis = !showAnalysis),
+                              icon: Icon(
+                                showAnalysis
+                                    ? Icons.arrow_drop_up
+                                    : Icons.arrow_drop_down,
+                              ),
+                            ),
+                            EzSpacer(vertical: false, space: margin),
+                            IconButton(
+                              onPressed: () =>
+                                  setState(() => deleteAnalysis = true),
+                              icon: Icon(PlatformIcons(context).delete),
+                            ),
+                          ],
+                        ),
+
+                        // Field
+                        Visibility(
+                          visible: showAnalysis,
+                          child: ConstrainedBox(
+                            constraints: ezTextFieldConstraints(context),
+                            child: TextFormField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: analysisController,
                             ),
                           ),
                         ),
@@ -492,6 +589,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
           showVSC = false;
           deleteVSC = false;
           vscController.text = vscDefault;
+
+          showAnalysis = false;
+          deleteAnalysis = false;
+          vscController.text = analysisDefault;
         }),
       ),
     );
@@ -503,6 +604,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
     pubController.dispose();
     domController.dispose();
     vscController.dispose();
+    analysisController.dispose();
     super.dispose();
   }
 }
