@@ -148,6 +148,7 @@ ThemeData ezThemeData(Brightness brightness) {
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
+        errorMaxLines: 1,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
@@ -209,6 +210,7 @@ ThemeData ezThemeData(Brightness brightness) {
       suffixIconColor: colorScheme.primary,
       hintStyle: textTheme.bodyLarge?.copyWith(color: colorScheme.outline),
       labelStyle: textTheme.labelLarge,
+      helperStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
     ),
