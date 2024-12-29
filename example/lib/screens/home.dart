@@ -9,7 +9,6 @@ import '../utils/export.dart';
 import '../widgets/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -40,6 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
+  late final bool isDesktop = platform == TargetPlatform.linux ||
+      platform == TargetPlatform.macOS ||
+      platform == TargetPlatform.windows;
 
   final TextEditingController nameController = TextEditingController();
   String namePreview = 'your_app';
@@ -65,19 +67,19 @@ class _HomeScreenState extends State<HomeScreen> {
   bool autoEmu = false;
 
   bool showVSC = false;
-  bool deleteVSC = false;
+  bool removeVSC = false;
   // Default at bottom of file
   late final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
   bool showAnalysis = false;
-  bool deleteAnalysis = false;
+  bool removeAnalysis = false;
   // Default at bottom of file
   final TextEditingController analysisController =
       TextEditingController(text: analysisDefault);
 
   bool showCopyright = false;
-  bool deleteCopyright = false;
+  bool removeCopyright = false;
   // Default at bottom of file
   late final TextEditingController copyrightController =
       TextEditingController(text: copyrightDefault);
@@ -132,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     validName = true;
                     namePreview = nameController.text;
 
-                    if (!deleteVSC) {
+                    if (!removeVSC) {
                       vscController.text = vscController.text
                           .replaceFirst(
                             RegExp(r'"name": "run-[a-zA-Z0-9_-]+"'),
@@ -144,10 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                     }
 
-                    if (!deleteCopyright) {
+                    if (!removeCopyright) {
                       copyrightController.text =
                           copyrightController.text.replaceFirst(
-                        RegExp(r'/* [a-z0-9_]+'),
+                        RegExp(r'\/\* [a-z0-9_]+'),
                         '/* $namePreview',
                       );
                     }
@@ -177,8 +179,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       .width),
               child: TextFormField(
                 controller: pubController,
-                onEditingComplete: () =>
-                    setState(() => pubPreview = pubController.text),
+                onEditingComplete: () => setState(() {
+                  pubPreview = pubController.text;
+
+                  if (!removeCopyright) {
+                    copyrightController.text =
+                        copyrightController.text.replaceFirst(
+                      RegExp(
+                          r'Copyright \(c\) \d{4} .*\. All rights reserved\.'),
+                      'Copyright (c) $currentYear $pubPreview. All rights reserved.',
+                    );
+                  }
+                }),
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 decoration: const InputDecoration(hintText: 'You/your LLC'),
@@ -283,73 +295,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  EzRow(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        'Text settings',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
-                      Checkbox(
-                        value: textSettings,
-                        onChanged: (bool? value) async {
-                          if (value == null) return;
-                          setState(() => textSettings = value);
-                        },
-                      ),
-                    ],
+                  _SettingsCheckbox(
+                    textTheme: textTheme,
+                    title: 'Text settings',
+                    value: textSettings,
+                    onChanged: (bool? value) async {
+                      if (value == null) return;
+                      setState(() => textSettings = value);
+                    },
                   ),
-                  EzRow(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        'Layout settings',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
-                      Checkbox(
-                        value: layoutSettings,
-                        onChanged: (bool? value) async {
-                          if (value == null) return;
-                          setState(() => layoutSettings = value);
-                        },
-                      ),
-                    ],
+                  _SettingsCheckbox(
+                    textTheme: textTheme,
+                    title: 'Layout settings',
+                    value: layoutSettings,
+                    onChanged: (bool? value) async {
+                      if (value == null) return;
+                      setState(() => layoutSettings = value);
+                    },
                   ),
-                  EzRow(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        'Color settings',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
-                      Checkbox(
-                        value: colorSettings,
-                        onChanged: (bool? value) async {
-                          if (value == null) return;
-                          setState(() => colorSettings = value);
-                        },
-                      ),
-                    ],
+                  _SettingsCheckbox(
+                    textTheme: textTheme,
+                    title: 'Color settings',
+                    value: colorSettings,
+                    onChanged: (bool? value) async {
+                      if (value == null) return;
+                      setState(() => colorSettings = value);
+                    },
                   ),
-                  EzRow(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        'Image settings',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
-                      Checkbox(
-                        value: imageSettings,
-                        onChanged: (bool? value) async {
-                          if (value == null) return;
-                          setState(() => imageSettings = value);
-                        },
-                      ),
-                    ],
+                  _SettingsCheckbox(
+                    textTheme: textTheme,
+                    title: 'Image settings',
+                    value: imageSettings,
+                    onChanged: (bool? value) async {
+                      if (value == null) return;
+                      setState(() => imageSettings = value);
+                    },
                   ),
                 ],
               ),
@@ -361,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
               <InlineSpan>[
                 EzPlainText(
                   text:
-                      'When you generate ${(kIsWeb || platform == TargetPlatform.iOS || platform == TargetPlatform.android) ? 'the config' : (validName ? namePreview : 'the app')}, the current ',
+                      'When you generate ${isDesktop ? (validName ? namePreview : 'the app') : 'the config'}, the current ',
                   style: notificationStyle,
                 ),
                 EzInlineLink(
@@ -418,124 +398,65 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // Emulate
-                  EzRow(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Run Android emulator when complete (may require install)',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
-                      Checkbox(
-                        value: autoEmu,
-                        onChanged: (bool? value) async {
-                          if (value == null) return;
-                          setState(() => autoEmu = value);
-                        },
-                      ),
-                    ],
+                  Visibility(
+                    visible: isDesktop,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Run Android emulator when complete (may require install)',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.start,
+                        ),
+                        Checkbox(
+                          value: autoEmu,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => autoEmu = value);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   spacer,
 
-                  // VS Code config
-                  Visibility(
-                    visible: !deleteVSC,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        EzRow(
-                          children: <Widget>[
-                            Text(
-                              '.vscode/launch.json',
-                              style: textTheme.bodyLarge,
-                              textAlign: TextAlign.start,
-                            ),
-                            EzSpacer(vertical: false, space: margin),
-                            IconButton(
-                              onPressed: () =>
-                                  setState(() => showVSC = !showVSC),
-                              icon: Icon(
-                                showVSC
-                                    ? Icons.arrow_drop_up
-                                    : Icons.arrow_drop_down,
-                              ),
-                            ),
-                            EzSpacer(vertical: false, space: margin),
-                            IconButton(
-                              onPressed: () => setState(() => deleteVSC = true),
-                              icon: Icon(PlatformIcons(context).delete),
-                            ),
-                          ],
-                        ),
-
-                        // Field
-                        Visibility(
-                          visible: showVSC,
-                          child: ConstrainedBox(
-                            constraints: ezTextFieldConstraints(context),
-                            child: TextFormField(
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: vscController,
-                            ),
-                          ),
-                        ),
-                        spacer,
-                      ],
-                    ),
+                  // Copyright config
+                  _AdvancedSettingsField(
+                    margin: margin,
+                    textTheme: textTheme,
+                    title: 'Copyright notice',
+                    controller: copyrightController,
+                    visible: showCopyright,
+                    onHide: () =>
+                        setState(() => showCopyright = !showCopyright),
+                    removed: removeCopyright,
+                    onRemove: () => setState(() => removeCopyright = true),
                   ),
 
                   // Analysis options config
-                  Visibility(
-                    visible: !deleteAnalysis,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        EzRow(
-                          children: <Widget>[
-                            Text(
-                              'analysis_options.yaml',
-                              style: textTheme.bodyLarge,
-                              textAlign: TextAlign.start,
-                            ),
-                            EzSpacer(vertical: false, space: margin),
-                            IconButton(
-                              onPressed: () =>
-                                  setState(() => showAnalysis = !showAnalysis),
-                              icon: Icon(
-                                showAnalysis
-                                    ? Icons.arrow_drop_up
-                                    : Icons.arrow_drop_down,
-                              ),
-                            ),
-                            EzSpacer(vertical: false, space: margin),
-                            IconButton(
-                              onPressed: () =>
-                                  setState(() => deleteAnalysis = true),
-                              icon: Icon(PlatformIcons(context).delete),
-                            ),
-                          ],
-                        ),
+                  _AdvancedSettingsField(
+                    margin: margin,
+                    textTheme: textTheme,
+                    title: 'analysis_options.yaml',
+                    controller: analysisController,
+                    visible: showAnalysis,
+                    onHide: () => setState(() => showAnalysis = !showAnalysis),
+                    removed: removeAnalysis,
+                    onRemove: () => setState(() => removeAnalysis = true),
+                  ),
 
-                        // Field
-                        Visibility(
-                          visible: showAnalysis,
-                          child: ConstrainedBox(
-                            constraints: ezTextFieldConstraints(context),
-                            child: TextFormField(
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: analysisController,
-                            ),
-                          ),
-                        ),
-                        spacer,
-                      ],
-                    ),
-                  )
+                  // VS Code launch config
+                  _AdvancedSettingsField(
+                    margin: margin,
+                    textTheme: textTheme,
+                    title: '.vscode/launch.json',
+                    controller: vscController,
+                    visible: showVSC,
+                    onHide: () => setState(() => showVSC = !showVSC),
+                    removed: removeVSC,
+                    onRemove: () => setState(() => removeVSC = true),
+                  ),
                 ],
               ),
             ),
@@ -568,9 +489,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       colorSettings: colorSettings,
                       imageSettings: imageSettings,
                       autoEmulate: autoEmu,
-                      vsCodeConfig: deleteVSC ? null : vscController.text,
+                      vsCodeConfig: removeVSC ? null : vscController.text,
                       analysisOptions:
-                          deleteAnalysis ? null : analysisController.text,
+                          removeAnalysis ? null : analysisController.text,
                       appDefaults: Map<String, dynamic>.fromEntries(
                         allKeys.keys.map(
                           (String key) =>
@@ -610,15 +531,15 @@ It is recommended to set a custom color scheme. If you need help building one, t
           autoEmu = false;
 
           showVSC = false;
-          deleteVSC = false;
+          removeVSC = false;
           vscController.text = vscDefault;
 
           showAnalysis = false;
-          deleteAnalysis = false;
+          removeAnalysis = false;
           analysisController.text = analysisDefault;
 
           showCopyright = false;
-          deleteCopyright = false;
+          removeCopyright = false;
           copyrightController.text = copyrightDefault;
 
           showLicense = false;
@@ -1382,4 +1303,113 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.""";
+}
+
+class _SettingsCheckbox extends StatelessWidget {
+  final TextTheme textTheme;
+
+  final String title;
+  final bool value;
+  final void Function(bool?) onChanged;
+
+  const _SettingsCheckbox({
+    required this.textTheme,
+    required this.title,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return EzRow(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(
+          title,
+          style: textTheme.bodyLarge,
+          textAlign: TextAlign.start,
+        ),
+        Checkbox(
+          value: value,
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+}
+
+class _AdvancedSettingsField extends StatelessWidget {
+  final double margin;
+  final TextTheme textTheme;
+
+  final String title;
+  final TextEditingController controller;
+  final bool visible;
+  final void Function() onHide;
+  final bool removed;
+  final void Function()? onRemove;
+
+  const _AdvancedSettingsField({
+    required this.margin,
+    required this.textTheme,
+    required this.title,
+    required this.controller,
+    required this.visible,
+    required this.onHide,
+    required this.removed,
+    required this.onRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final EzSpacer buttonMargin = EzSpacer(vertical: false, space: margin);
+
+    return Visibility(
+      visible: !removed,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          // Title and show buttons
+          EzRow(
+            children: <Widget>[
+              Text(
+                title,
+                style: textTheme.bodyLarge,
+                textAlign: TextAlign.start,
+              ),
+              buttonMargin,
+              IconButton(
+                onPressed: onHide,
+                icon: Icon(
+                  visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                ),
+              ),
+              if (onRemove != null) ...<Widget>[
+                buttonMargin,
+                IconButton(
+                  onPressed: onRemove,
+                  icon: Icon(PlatformIcons(context).delete),
+                ),
+              ]
+            ],
+          ),
+
+          // Form field
+          Visibility(
+            visible: visible,
+            child: ConstrainedBox(
+              constraints: ezTextFieldConstraints(context),
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: controller,
+              ),
+            ),
+          ),
+          const EzSpacer(),
+        ],
+      ),
+    );
+  }
 }
