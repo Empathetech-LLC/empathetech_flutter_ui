@@ -128,7 +128,7 @@ class _EzMenuButtonState extends State<EzMenuButton> {
         widget.label,
         style: textStyle,
         textAlign:
-            widget.textAlign ?? (isLefty ? TextAlign.left : TextAlign.right),
+            widget.textAlign ?? (isLefty ? TextAlign.start : TextAlign.end),
       ),
     );
   }
