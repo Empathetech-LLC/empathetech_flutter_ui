@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool validName = false;
 
   final TextEditingController pubController = TextEditingController();
-  String pubPreview = 'You/your LLC';
+  String pubPreview = 'Your org';
 
   final TextEditingController domainController = TextEditingController();
   bool exampleDomain = false;
@@ -131,27 +131,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 validator: (String? entry) => validateAppName(
                   value: entry,
                   onSuccess: () => setState(() {
+                    final String previous = namePreview;
                     validName = true;
                     namePreview = nameController.text;
 
                     if (!removeVSC) {
-                      vscController.text = vscController.text
-                          .replaceFirst(
-                            RegExp(r'"name": "run-[a-zA-Z0-9_-]+"'),
-                            '"name": "run-${namePreview.replaceAll('_', '-')}"',
-                          )
-                          .replaceFirst(
-                            RegExp(r'"name": "install-[a-zA-Z0-9_-]+"'),
-                            '"name": "install-${namePreview.replaceAll('_', '-')}"',
-                          );
+                      vscController.text = vscController.text.replaceAll(
+                        previous.replaceAll('_', '-'),
+                        namePreview.replaceAll('_', '-'),
+                      );
                     }
 
                     if (!removeCopyright) {
-                      copyrightController.text =
-                          copyrightController.text.replaceFirst(
-                        RegExp(r'\/\* [a-z0-9_]+'),
-                        '/* $namePreview',
-                      );
+                      copyrightController.text = copyrightController.text
+                          .replaceAll(previous, namePreview);
                     }
                   }),
                   onFailure: () => setState(() => validName = false),
@@ -179,21 +172,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       .width),
               child: TextFormField(
                 controller: pubController,
-                onEditingComplete: () => setState(() {
-                  pubPreview = pubController.text;
-
-                  if (!removeCopyright) {
-                    copyrightController.text =
-                        copyrightController.text.replaceFirst(
-                      RegExp(
-                          r'Copyright \(c\) \d{4} .*\. All rights reserved\.'),
-                      'Copyright (c) $currentYear $pubPreview. All rights reserved.',
-                    );
-                  }
-                }),
                 textAlign: TextAlign.start,
                 maxLines: 1,
-                decoration: const InputDecoration(hintText: 'You/your LLC'),
+                validator: (_) {
+                  setState(() {
+                    final String previous = pubPreview;
+                    pubPreview = pubController.text;
+
+                    if (!removeCopyright) {
+                      copyrightController.text = copyrightController.text
+                          .replaceAll(previous, pubPreview);
+                    }
+                  });
+                  return null;
+                },
+                autovalidateMode: AutovalidateMode.onUnfocus,
+                decoration: const InputDecoration(hintText: 'Your org'),
               ),
             ),
             spacer,
@@ -516,7 +510,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
           validName = false;
 
           pubController.clear();
-          pubPreview = 'You/your LLC';
+          pubPreview = 'Your org';
 
           domainController.clear();
           exampleDomain = false;
