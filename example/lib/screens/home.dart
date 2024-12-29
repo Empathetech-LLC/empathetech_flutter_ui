@@ -36,6 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextStyle? notificationStyle =
       textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
+  late final double singleLineFormWidth = measureText(
+    longestError,
+    context: context,
+    style: textTheme.bodyLarge,
+  ).width;
+
   // Define build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
@@ -103,92 +109,66 @@ class _HomeScreenState extends State<HomeScreen> {
         child: EzScrollView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // App name //
+            // Basic settings //
 
-            // Title
-            Text(
-              'App name',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
-            ),
+            // App name
+            _BasicField(
+              textTheme: textTheme,
+              title: 'App name',
+              controller: nameController,
+              width: singleLineFormWidth,
+              validator: (String? entry) => validateAppName(
+                value: entry,
+                onSuccess: () => setState(() {
+                  final String previous = namePreview;
+                  validName = true;
+                  namePreview = nameController.text;
 
-            // Field
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: measureText('very_long_app_name',
-                          context: context, style: textTheme.bodyLarge)
-                      .width),
-              child: TextFormField(
-                controller: nameController,
-                textAlign: TextAlign.start,
-                maxLines: 1,
-                validator: (String? entry) => validateAppName(
-                  value: entry,
-                  onSuccess: () => setState(() {
-                    final String previous = namePreview;
-                    validName = true;
-                    namePreview = nameController.text;
+                  if (!removeVSC) {
+                    vscController.text = vscController.text.replaceAll(
+                      previous.replaceAll('_', '-'),
+                      namePreview.replaceAll('_', '-'),
+                    );
+                  }
 
-                    if (!removeVSC) {
-                      vscController.text = vscController.text.replaceAll(
-                        previous.replaceAll('_', '-'),
-                        namePreview.replaceAll('_', '-'),
-                      );
-                    }
-
-                    if (!removeCopyright) {
-                      copyrightController.text = copyrightController.text
-                          .replaceAll(previous, namePreview);
-                    }
-                  }),
-                  onFailure: () => setState(() => validName = false),
-                ),
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                decoration: const InputDecoration(hintText: 'your_app'),
+                  if (!removeCopyright) {
+                    copyrightController.text = copyrightController.text
+                        .replaceAll(previous, namePreview);
+                  }
+                }),
+                onFailure: () => setState(() => validName = false),
               ),
+              hintText: 'your_app',
             ),
             spacer,
 
-            // Publisher name //
+            // Publisher name
+            _BasicField(
+              textTheme: textTheme,
+              title: 'Publisher name',
+              controller: pubController,
+              width: singleLineFormWidth,
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Required';
+                }
 
-            // Title
-            Text(
-              'Publisher name',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
-            ),
+                setState(() {
+                  final String previous = pubPreview;
+                  pubPreview = pubController.text;
 
-            // Field
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: measureText('Very Long Company Name',
-                          context: context, style: textTheme.bodyLarge)
-                      .width),
-              child: TextFormField(
-                controller: pubController,
-                textAlign: TextAlign.start,
-                maxLines: 1,
-                validator: (_) {
-                  setState(() {
-                    final String previous = pubPreview;
-                    pubPreview = pubController.text;
-
-                    if (!removeCopyright) {
-                      copyrightController.text = copyrightController.text
-                          .replaceAll(previous, pubPreview);
-                    }
-                  });
-                  return null;
-                },
-                autovalidateMode: AutovalidateMode.onUnfocus,
-                decoration: const InputDecoration(hintText: 'Your org'),
-              ),
+                  if (!removeCopyright) {
+                    copyrightController.text = copyrightController.text
+                        .replaceAll(previous, pubPreview);
+                  }
+                });
+                return null;
+              },
+              hintText: 'Your org',
             ),
             spacer,
 
-            // Domain name //
-
-            // Title
+            // Domain name
             Text(
               'Domain name',
               style: textTheme.titleLarge,
@@ -197,12 +177,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Field
             ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: measureText('very.LongDomainName',
-                          context: context, style: textTheme.bodyLarge)
-                      .width),
+              constraints: BoxConstraints(maxWidth: singleLineFormWidth),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   if (!exampleDomain) ...<Widget>[
                     TextFormField(
@@ -239,31 +217,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             spacer,
 
-            // Description //
-
-            // Title
-            Text(
-              'Description',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
-            ),
-
-            // Field
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: measureText(
-                'A moderately long app description.',
-                context: context,
-                style: textTheme.bodyLarge,
-              ).width),
-              child: TextFormField(
-                controller: descriptionController,
-                textAlign: TextAlign.start,
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  hintText: 'One sentence about your app.',
-                ),
-              ),
+            // Description
+            _BasicField(
+              textTheme: textTheme,
+              title: 'Description',
+              controller: descriptionController,
+              width: singleLineFormWidth,
+              validator: (String? value) =>
+                  (value == null || value.isEmpty) ? 'Required' : null,
+              hintText: 'One sentence about your app.',
             ),
             separator,
 
@@ -620,6 +582,54 @@ linter:
     ''';
 }
 
+class _BasicField extends StatelessWidget {
+  final TextTheme textTheme;
+
+  final String title;
+  final TextEditingController controller;
+  final double width;
+  final String? Function(String?)? validator;
+  final String hintText;
+
+  const _BasicField({
+    required this.textTheme,
+    required this.title,
+    required this.controller,
+    required this.width,
+    required this.validator,
+    required this.hintText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        // Title
+        Text(
+          title,
+          style: textTheme.titleLarge,
+          textAlign: TextAlign.start,
+        ),
+
+        // Field
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: width),
+          child: TextFormField(
+            controller: controller,
+            textAlign: TextAlign.start,
+            maxLines: 1,
+            validator: validator,
+            autovalidateMode: AutovalidateMode.onUnfocus,
+            decoration: InputDecoration(hintText: hintText),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _SettingsCheckbox extends StatelessWidget {
   final TextTheme textTheme;
 
@@ -750,18 +760,19 @@ class _LicensePicker extends StatelessWidget {
         EzRichText(
           <InlineSpan>[
             EzPlainText(
-              text: 'LICENSE',
+              text: 'License',
               style: notificationStyle,
             ),
             EzPlainText(
-              text: '(required)',
+              text: '\t(required)',
               style: labelStyle,
             ),
           ],
           textAlign: TextAlign.start,
         ),
 
-        // Carousel
+        // Options
+        EzSpacer(space: EzConfig.get(marginKey)),
         EzScrollView(
           scrollDirection: Axis.horizontal,
           thumbVisibility: false,
