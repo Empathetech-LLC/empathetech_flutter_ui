@@ -127,7 +127,8 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
+    final bool hideScroll = (EzConfig.get(hideScrollKey) ?? false) ||
+        (widget.thumbVisibility == false);
 
     return PlatformScrollbar(
       controller: controller,
