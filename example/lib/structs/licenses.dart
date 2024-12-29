@@ -4,7 +4,10 @@
  */
 
 /// GNU General Public License v3.0
-String gnuGplV3(
+const String gnuKey = 'GNU General Public License v3.0';
+
+/// GNU General Public License v3.0
+String genGNU(
         String appName, String appDescription, String publisher, String year) =>
     """                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
@@ -682,8 +685,11 @@ Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 """;
 
-/// The MIT License
-String mit(String publisher, String year) => '''MIT License
+/// MIT License
+const String mitKey = 'MIT License';
+
+/// MIT License
+String genMIT(String publisher, String year) => '''MIT License
 
 Copyright (c) $year $publisher
 
@@ -706,8 +712,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ''';
 
-/// The ISC License
-String isc(String publisher, String year) => '''ISC License
+/// ISC License
+const String iscKey = 'ISC License';
+
+/// ISC License
+String genISC(String publisher, String year) => '''ISC License
 
 Copyright (c) $year $publisher
 
@@ -724,8 +733,11 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ''';
 
-/// The Apache License 2.0
-String apache(String publisher, String year) =>
+/// Apache License 2.0
+const String apacheKey = 'Apache License 2.0';
+
+/// Apache License 2.0
+String genApache(String publisher, String year) =>
     """                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -929,8 +941,11 @@ String apache(String publisher, String year) =>
    limitations under the License.
 """;
 
-/// The Mozilla Public License 2.0
-String mozilla() => """Mozilla Public License Version 2.0
+/// Mozilla Public License 2.0
+const String mozillaKey = 'Mozilla Public License 2.0';
+
+/// Mozilla Public License 2.0
+String genMozilla() => """Mozilla Public License Version 2.0
 ==================================
 
 1. Definitions
@@ -1306,7 +1321,10 @@ Exhibit B - "Incompatible With Secondary Licenses" Notice
 """;
 
 /// The Unlicense
-String unlicense() =>
+const String unlicenseKey = 'The Unlicense';
+
+/// The Unlicense
+String genUnlicense() =>
     '''This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -1333,8 +1351,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 ''';
 
-/// Do What The F*ck You Want To Public License
-String dwtfyw() => '''            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+/// Do What The Fuck You Want To Public License
+const String dwtfywKey = 'Do What The Fuck You Want To Public License';
+
+/// Do What The Fuck You Want To Public License
+String genDWTFYW() => '''            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
 
  Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
