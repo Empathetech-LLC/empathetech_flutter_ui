@@ -26,17 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
-  static const EzDivider divider = EzDivider();
+  static const Widget divider = Center(child: EzDivider());
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
-
-  late final EdgeInsets wrapPadding = EdgeInsets.only(
-    left: spacing,
-    right: spacing,
-    top: spacing,
-  );
-  late BoxConstraints textConstraints = ezTextFieldConstraints(context);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -65,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool autoEmu = false;
 
-  final TextEditingController vscController = TextEditingController(text: '''{
+  bool showVSC = false;
+  bool deleteVSC = false;
+  static const String vscDefault = '''{
   "version": "0.2.0",
   "configurations": [
     {
@@ -83,7 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
       "program": "example/lib/main.dart",
     },
   ]
-}''');
+}''';
+  final TextEditingController vscController =
+      TextEditingController(text: vscDefault);
 
   // Set the page title //
 
@@ -100,25 +97,28 @@ class _HomeScreenState extends State<HomeScreen> {
     return OpenUIScaffold(
       title: 'Builder',
       body: EzScreen(
+        alignment: Alignment.topLeft,
         child: EzScrollView(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (spacing > margin) EzSpacer(space: spacing - margin),
-
             // App name //
 
             // Title
             Text(
               'App name',
               style: textTheme.titleLarge,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
 
             // Field
             ConstrainedBox(
-              constraints: textConstraints,
+              constraints: BoxConstraints(
+                  maxWidth: measureText('long_app_name',
+                          context: context, style: textTheme.bodyLarge)
+                      .width),
               child: TextFormField(
                 controller: appController,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 maxLines: 1,
                 validator: (String? entry) => validateAppName(
                   value: entry,
@@ -131,21 +131,24 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             spacer,
 
-            // Organization name //
+            // Publisher name //
 
             // Title
             Text(
               'Publisher name',
               style: textTheme.titleLarge,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
 
             // Field
             ConstrainedBox(
-              constraints: textConstraints,
+              constraints: BoxConstraints(
+                  maxWidth: measureText('Long Company Name',
+                          context: context, style: textTheme.bodyLarge)
+                      .width),
               child: TextFormField(
                 controller: pubController,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 maxLines: 1,
                 decoration: const InputDecoration(hintText: 'You/your LLC'),
               ),
@@ -158,19 +161,22 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'Domain name',
               style: textTheme.titleLarge,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
 
             // Field
             ConstrainedBox(
-              constraints: textConstraints,
+              constraints: BoxConstraints(
+                  maxWidth: measureText('com.LongDomainName',
+                          context: context, style: textTheme.bodyLarge)
+                      .width),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   if (!exampleDomain) ...<Widget>[
                     TextFormField(
                       controller: domController,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       maxLines: 1,
                       validator: validateDomain,
                       autovalidateMode: AutovalidateMode.onUnfocus,
@@ -180,10 +186,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   EzRow(
                     mainAxisAlignment: exampleDomain
-                        ? MainAxisAlignment.center
+                        ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     children: <Widget>[
-                      const Text('N/A'),
+                      Text(
+                        'N/A',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
                       Checkbox(
                         value: exampleDomain,
                         onChanged: (bool? value) async {
@@ -204,107 +214,83 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'Include',
               style: textTheme.titleLarge,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
 
             // Options
-            ConstrainedBox(
-              constraints: textConstraints,
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: margin),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Text
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Text settings',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        Checkbox(
-                          value: textSettings,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => textSettings = value);
-                          },
-                        ),
-                      ],
-                    ),
+                  EzRow(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Text settings',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
+                      Checkbox(
+                        value: textSettings,
+                        onChanged: (bool? value) async {
+                          if (value == null) return;
+                          setState(() => textSettings = value);
+                        },
+                      ),
+                    ],
                   ),
-
-                  // Layout
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Layout settings',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        Checkbox(
-                          value: layoutSettings,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => layoutSettings = value);
-                          },
-                        ),
-                      ],
-                    ),
+                  EzRow(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Layout settings',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
+                      Checkbox(
+                        value: layoutSettings,
+                        onChanged: (bool? value) async {
+                          if (value == null) return;
+                          setState(() => layoutSettings = value);
+                        },
+                      ),
+                    ],
                   ),
-
-                  // Color
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Color settings',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        Checkbox(
-                          value: colorSettings,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => colorSettings = value);
-                          },
-                        ),
-                      ],
-                    ),
+                  EzRow(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Color settings',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
+                      Checkbox(
+                        value: colorSettings,
+                        onChanged: (bool? value) async {
+                          if (value == null) return;
+                          setState(() => colorSettings = value);
+                        },
+                      ),
+                    ],
                   ),
-
-                  // Image
-                  Padding(
-                    padding: wrapPadding,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Image settings',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        Checkbox(
-                          value: imageSettings,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => imageSettings = value);
-                          },
-                        ),
-                      ],
-                    ),
+                  EzRow(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Image settings',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
+                      Checkbox(
+                        value: imageSettings,
+                        onChanged: (bool? value) async {
+                          if (value == null) return;
+                          setState(() => imageSettings = value);
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -341,96 +327,144 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       'Open a link to an online color scheme builder',
                 ),
               ],
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
             divider,
 
             // Advanced settings //
 
-            ...(showAdvanced
-                ? <Widget>[
-                    // Emulate
-                    EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
+            // Toggle
+            EzRow(
+              children: <Widget>[
+                Text(
+                  'Advanced settings',
+                  style: textTheme.titleLarge,
+                  textAlign: TextAlign.start,
+                ),
+                EzSpacer(vertical: false, space: margin),
+                IconButton(
+                  onPressed: () => setState(() => showAdvanced = !showAdvanced),
+                  icon: Icon(
+                    showAdvanced ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  ),
+                ),
+              ],
+            ),
+
+            // Settings
+            Visibility(
+              visible: showAdvanced,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Emulate
+                  EzRow(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Run Android emulator when complete',
+                        style: textTheme.bodyLarge,
+                        textAlign: TextAlign.start,
+                      ),
+                      Checkbox(
+                        value: autoEmu,
+                        onChanged: (bool? value) async {
+                          if (value == null) return;
+                          setState(() => autoEmu = value);
+                        },
+                      ),
+                    ],
+                  ),
+                  spacer,
+
+                  // VS Code config
+                  Visibility(
+                    visible: !deleteVSC,
+                    child: Column(
                       children: <Widget>[
-                        Text(
-                          'Run Android emulator when complete',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
+                        EzRow(
+                          children: <Widget>[
+                            Text(
+                              '.vscode/launch.json',
+                              style: textTheme.bodyLarge,
+                              textAlign: TextAlign.start,
+                            ),
+                            EzSpacer(vertical: false, space: margin),
+                            IconButton(
+                              onPressed: () =>
+                                  setState(() => showVSC = !showVSC),
+                              icon: Icon(
+                                showVSC
+                                    ? Icons.arrow_drop_up
+                                    : Icons.arrow_drop_down,
+                              ),
+                            ),
+                            EzSpacer(vertical: false, space: margin),
+                            IconButton(
+                              onPressed: () => setState(() => deleteVSC = true),
+                              icon: Icon(PlatformIcons(context).delete),
+                            ),
+                          ],
                         ),
-                        Checkbox(
-                          value: autoEmu,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => autoEmu = value);
-                          },
+
+                        // Field
+                        Visibility(
+                          visible: showVSC,
+                          child: ConstrainedBox(
+                            constraints: ezTextFieldConstraints(context),
+                            child: TextFormField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: vscController,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    spacer,
-
-                    // VS Code config
-                    Text(
-                      '.vscode/launch.json',
-                      style: textTheme.titleLarge,
-                      textAlign: TextAlign.center,
-                    ),
-
-                    // Field
-                    ConstrainedBox(
-                      constraints: textConstraints,
-                      child: TextFormField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        controller: vscController,
-                      ),
-                    ),
-                    divider,
-                  ]
-                : <Widget>[
-                    EzTextIconButton(
-                      onPressed: () => setState(() => showAdvanced = true),
-                      icon: Icon(PlatformIcons(context).addCircledOutline),
-                      label: 'Show advanced settings',
-                    ),
-                    separator,
-                  ]),
+                  )
+                ],
+              ),
+            ),
+            showAdvanced ? divider : separator,
 
             // Make it so //
 
-            EzElevatedIconButton(
-              onPressed: () {
-                if (!validName ||
-                    (!exampleDomain &&
-                        validateDomain(domController.text) != null)) {
-                  // TOAST OR SOMETHING
-                  return;
-                }
+            Center(
+              child: EzElevatedIconButton(
+                onPressed: () {
+                  if (!validName ||
+                      (!exampleDomain &&
+                          validateDomain(domController.text) != null)) {
+                    // TOAST OR SOMETHING
+                    return;
+                  }
 
-                context.goNamed(
-                  progressPath,
-                  extra: EAGConfig(
-                    appName: appController.text,
-                    publisherName: pubController.text,
-                    domainName:
-                        exampleDomain ? 'com.example' : domController.text,
-                    textSettings: textSettings,
-                    layoutSettings: layoutSettings,
-                    colorSettings: colorSettings,
-                    imageSettings: imageSettings,
-                    vsCodeConfig: vscController.text,
-                    appDefaults: Map<String, dynamic>.fromEntries(
-                      allKeys.keys.map(
-                        (String key) =>
-                            MapEntry<String, dynamic>(key, EzConfig.get(key)),
+                  context.goNamed(
+                    progressPath,
+                    extra: EAGConfig(
+                      appName: appController.text,
+                      publisherName: pubController.text,
+                      domainName:
+                          exampleDomain ? 'com.example' : domController.text,
+                      textSettings: textSettings,
+                      layoutSettings: layoutSettings,
+                      colorSettings: colorSettings,
+                      imageSettings: imageSettings,
+                      vsCodeConfig: vscController.text,
+                      appDefaults: Map<String, dynamic>.fromEntries(
+                        allKeys.keys.map(
+                          (String key) =>
+                              MapEntry<String, dynamic>(key, EzConfig.get(key)),
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-              icon: Icon(PlatformIcons(context).create),
-              label: 'Generate',
+                  );
+                },
+                icon: Icon(PlatformIcons(context).create),
+                label: 'Generate',
+              ),
             ),
             separator,
           ],
@@ -440,6 +474,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
         clearForms: () => setState(() {
           appController.clear();
           validName = false;
+
+          pubController.clear();
 
           domController.clear();
           exampleDomain = false;
@@ -452,6 +488,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
           showAdvanced = false;
 
           autoEmu = false;
+
+          showVSC = false;
+          deleteVSC = false;
+          vscController.text = vscDefault;
         }),
       ),
     );
