@@ -6,11 +6,17 @@
 const String appNameKey = 'appName';
 const String publisherNameKey = 'publisherName';
 const String domainNameKey = 'domainName';
+
 const String textSettingsKey = 'textSettings';
 const String layoutSettingsKey = 'layoutSettings';
 const String colorSettingsKey = 'colorSettings';
 const String imageSettingsKey = 'imageSettings';
+
+const String autoEmulateKey = 'autoEmulate';
+
 const String vsCodeConfigKey = 'vsCodeConfig';
+const String analysisOptionsKey = 'analysisOptions';
+
 const String appDefaultsKey = 'appDefaults';
 
 class EAGConfig {
@@ -23,7 +29,10 @@ class EAGConfig {
   final bool colorSettings;
   final bool imageSettings;
 
+  final bool autoEmulate;
+
   final String? vsCodeConfig;
+  final String? analysisOptions;
 
   final Map<String, dynamic> appDefaults;
 
@@ -35,7 +44,9 @@ class EAGConfig {
     required this.layoutSettings,
     required this.colorSettings,
     required this.imageSettings,
+    required this.autoEmulate,
     this.vsCodeConfig,
+    this.analysisOptions,
     required this.appDefaults,
   });
 
@@ -48,7 +59,9 @@ class EAGConfig {
       layoutSettingsKey: layoutSettings,
       colorSettingsKey: colorSettings,
       imageSettingsKey: imageSettings,
+      autoEmulateKey: autoEmulate,
       vsCodeConfigKey: vsCodeConfig,
+      analysisOptionsKey: analysisOptions,
       appDefaultsKey: appDefaults,
     };
   }
@@ -62,7 +75,9 @@ class EAGConfig {
       layoutSettings: json[layoutSettingsKey] as bool,
       colorSettings: json[colorSettingsKey] as bool,
       imageSettings: json[imageSettingsKey] as bool,
+      autoEmulate: json[autoEmulateKey] as bool,
       vsCodeConfig: json[vsCodeConfigKey] as String,
+      analysisOptions: json[analysisOptionsKey] as String,
       appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
     );
   }
@@ -77,8 +92,10 @@ class EAGConfig {
   $layoutSettingsKey: $layoutSettings,
   $colorSettingsKey: $colorSettings,
   $imageSettingsKey: $imageSettings,
+  $autoEmulateKey: $autoEmulate,
   $vsCodeConfigKey: $vsCodeConfig,
-  $appDefaultsKey: ${appDefaults.toString()},
+  $analysisOptionsKey: $analysisOptions,
+  $appDefaultsKey: ${appDefaults.toString()}
 }''';
   }
 }
