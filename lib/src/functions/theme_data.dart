@@ -203,7 +203,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surface.withValues(alpha: textBackgroundOpacity),
+      fillColor: colorScheme.surface,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
