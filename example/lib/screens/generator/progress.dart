@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../screens/export.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -11,6 +12,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -30,6 +32,8 @@ class _HomeScreenState extends State<ProgressScreen> {
 
   // Define the build data //
 
+  bool itFailed = false;
+
   late final TargetPlatform platform = getBasePlatform(context);
   late final bool isDesktop = !(kIsWeb ||
       platform == TargetPlatform.iOS ||
@@ -46,9 +50,9 @@ class _HomeScreenState extends State<ProgressScreen> {
 
     // Check for a String that ends in .json
     if (savedConfig.endsWith('.json')) {
-      debugPrint('Success stuff');
+      if (context.mounted) context.goNamed(failurePath);
     } else {
-      debugPrint('Failure stuff');
+      if (context.mounted) context.goNamed(successPath);
     }
   }
 
@@ -71,17 +75,12 @@ class _HomeScreenState extends State<ProgressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return OpenUIScaffold(
+    return const OpenUIScaffold(
       title: 'Builder',
-      body: EzScreen(
-        child: EzScrollView(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            EmpathetechLoadingAnimation(
-              height: heightOf(context),
-              semantics: 'TODO',
-            ),
-          ],
+      body: Center(
+        child: EmpathetechLoadingAnimation(
+          height: double.infinity,
+          semantics: 'TODO',
         ),
       ),
     );
