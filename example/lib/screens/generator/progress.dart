@@ -5,6 +5,7 @@
 
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
+import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:io';
 import 'dart:convert';
@@ -30,16 +31,25 @@ class _HomeScreenState extends State<ProgressScreen> {
   // Define the build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
+  late final bool isDesktop = !(kIsWeb ||
+      platform == TargetPlatform.iOS ||
+      platform == TargetPlatform.android);
 
   // Define custom functions //
 
   void archive() async {
-    await FileSaver.instance.saveFile(
+    final String savedConfig = await FileSaver.instance.saveFile(
       name: '${widget.config.appName}-eag-config.json',
       bytes: utf8.encode(jsonEncode(widget.config.toJson())),
-      ext: 'json',
       mimeType: MimeType.json,
     );
+
+    // Check for a String that ends in .json
+    if (savedConfig.endsWith('.json')) {
+      debugPrint('Success stuff');
+    } else {
+      debugPrint('Failure stuff');
+    }
   }
 
   void run() async {
@@ -49,21 +59,12 @@ class _HomeScreenState extends State<ProgressScreen> {
   // Init //
 
   @override
-  void initState() {
-    super.initState();
-    (kIsWeb ||
-            platform == TargetPlatform.iOS ||
-            platform == TargetPlatform.android)
-        ? archive()
-        : run();
-  }
-
-  // Set the page title //
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     setPageTitle('Generating', Theme.of(context).colorScheme.primary);
+
+    isDesktop ? run() : archive();
   }
 
   // Return the build //
@@ -72,7 +73,17 @@ class _HomeScreenState extends State<ProgressScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       title: 'Builder',
-      body: EzScreen(child: EzScrollView()),
+      body: EzScreen(
+        child: EzScrollView(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            EmpathetechLoadingAnimation(
+              height: heightOf(context),
+              semantics: 'TODO',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
