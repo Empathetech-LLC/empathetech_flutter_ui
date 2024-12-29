@@ -740,17 +740,34 @@ class _AdvancedSettingsField extends StatelessWidget {
 }
 
 class _LicensePicker extends StatelessWidget {
+  final TextTheme? textTheme;
   final TextStyle? notificationStyle;
-  final TextStyle? labelStyle;
 
   const _LicensePicker({
+    required this.textTheme,
     required this.notificationStyle,
-    required this.labelStyle,
   });
+
+  static const EzSpacer spacer = EzSpacer(vertical: false);
+
+  Widget radio(String title, String value, String groupValue) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(title, style: textTheme.bodyLarge),
+        Radio<String>(
+          value: value,
+          groupValue: groupValue,
+          onChanged: (String? changed) =>
+              (changed != null) ? groupValue = changed : null,
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    const EzSpacer spacer = EzSpacer(vertical: false);
+    String selected = gnuKey;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -765,7 +782,7 @@ class _LicensePicker extends StatelessWidget {
             ),
             EzPlainText(
               text: '\t(required)',
-              style: labelStyle,
+              style: textTheme.labelLarge,
             ),
           ],
           textAlign: TextAlign.start,
@@ -778,9 +795,12 @@ class _LicensePicker extends StatelessWidget {
           thumbVisibility: false,
           children: <Widget>[
             spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('GNU GPLv3'),
+            const Text('GNU GPLv3'),
+            Radio<String>(
+              value: gnuKey,
+              groupValue: selected,
+              onChanged: (String? value) =>
+                  (value != null) ? selected = value : null,
             ),
             spacer,
             ElevatedButton(
