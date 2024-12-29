@@ -3,6 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
+const String longestError =
+    'Required; lowercase letters, numbers, and underscores are allowed.';
+
 /// Allows letters (upper and lower case) and underscores
 String? validateAppName({
   required String? value,
@@ -13,7 +16,7 @@ String? validateAppName({
 
   if (value == null || value.isEmpty) {
     onFailure?.call();
-    return 'App name is required. Lowercase letters, numbers, and underscores are allowed.';
+    return 'Required; lowercase letters, numbers, and underscores are allowed.';
   } else if (!pattern.hasMatch(value)) {
     onFailure?.call();
     return 'Only lowercase letters, numbers, and underscores are allowed.';
@@ -27,7 +30,11 @@ String? validateAppName({
 String? validateDomain(String? value) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
-  return (value != null && !pattern.hasMatch(value))
-      ? "'name.extension' only"
-      : null;
+  if (value == null || value.isEmpty) {
+    return "Required; 'dom.name'";
+  } else if (!pattern.hasMatch(value)) {
+    return "'dom.name' only; r'^[a-z0-9_]+\\.[a-z]+\$'";
+  } else {
+    return null;
+  }
 }
