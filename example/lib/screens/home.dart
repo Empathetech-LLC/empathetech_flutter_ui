@@ -409,7 +409,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Run Android emulator when complete',
+                        'Run Android emulator when complete (may require install)',
                         style: textTheme.bodyLarge,
                         textAlign: TextAlign.start,
                       ),
@@ -517,6 +517,18 @@ It is recommended to set a custom color scheme. If you need help building one, t
                               controller: analysisController,
                             ),
                           ),
+                        ),
+                        spacer,
+
+                        Text(
+                          'Extra packages',
+                          style: notificationStyle,
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          '(name only)',
+                          style: textTheme.labelLarge,
+                          textAlign: TextAlign.start,
                         ),
                       ],
                     ),
