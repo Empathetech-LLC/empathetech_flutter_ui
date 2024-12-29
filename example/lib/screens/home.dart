@@ -131,6 +131,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   onSuccess: () => setState(() {
                     validName = true;
                     namePreview = nameController.text;
+
+                    if (!deleteVSC) {
+                      vscController.text = vscController.text
+                          .replaceFirst(
+                            RegExp(r'"name": "run-[a-zA-Z0-9_-]+"'),
+                            '"name": "run-${namePreview.replaceAll('_', '-')}"',
+                          )
+                          .replaceFirst(
+                            RegExp(r'"name": "install-[a-zA-Z0-9_-]+"'),
+                            '"name": "install-${namePreview.replaceAll('_', '-')}"',
+                          );
+                    }
+
+                    if (!deleteCopyright) {
+                      copyrightController.text =
+                          copyrightController.text.replaceFirst(
+                        RegExp(r'/* [a-z0-9_]+'),
+                        '/* $namePreview',
+                      );
+                    }
                   }),
                   onFailure: () => setState(() => validName = false),
                 ),
@@ -232,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ConstrainedBox(
               constraints: BoxConstraints(
                   maxWidth: measureText(
-                'A very long sentence == a very long app description.',
+                'A moderately long app description.',
                 context: context,
                 style: textTheme.bodyLarge,
               ).width),
