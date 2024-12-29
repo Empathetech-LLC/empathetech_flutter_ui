@@ -190,6 +190,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  efui_bios:
+    dependency: transitive
+    description:
+      path: "../efui_bios"
+      relative: true
+    source: path
+    version: "1.0.0"
   example:
     dependency: "direct dev"
     description:

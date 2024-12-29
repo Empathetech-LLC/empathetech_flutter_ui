@@ -25,6 +25,8 @@ dependencies:
 
   empathetech_flutter_ui:
     path: ../
+  efui_bios:
+    path: ../../efui_bios
 
 dev_dependencies:
   dependency_validator: ^4.1.2
