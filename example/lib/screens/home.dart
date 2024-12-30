@@ -115,7 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       title: 'Builder',
-      onUpload: (EAGConfig config) {
+      onUpload: (EAGConfig config) async {
+        setState(() => noSpam = false);
+
         nameController.text = config.appName;
         namePreview = config.appName;
         validName = true;
@@ -133,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
         colorSettings = config.colorSettings;
         imageSettings = config.imageSettings;
 
-        // EzConfig stuff
+        await EzConfig.loadConfig(config.appDefaults);
 
         config.copyright == null
             ? removeCopyright = true
@@ -155,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         if (config.autoEmulate != null) autoEmu = config.autoEmulate!;
 
-        setState(() {});
+        setState(() => noSpam = true);
       },
       body: EzScreen(
         alignment: Alignment.topLeft,

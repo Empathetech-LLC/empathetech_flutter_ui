@@ -269,6 +269,27 @@ Must be one of [int, bool, double, String, List<String>]''');
     return result;
   }
 
+  /// Load values to [prefs]/[preferences]
+  static Future<void> loadConfig(Map<String, dynamic> config) async {
+    for (final MapEntry<String, dynamic> entry in config.entries) {
+      switch (entry.value.runtimeType) {
+        case const (bool):
+          await setBool(entry.key, entry.value);
+          break;
+        case const (int):
+          await setInt(entry.key, entry.value);
+        case const (double):
+          await setDouble(entry.key, entry.value);
+        case const (String):
+          await setString(entry.key, entry.value);
+          break;
+        case const (List<String>):
+          await setStringList(entry.key, entry.value);
+          break;
+      }
+    }
+  }
+
   /// Create a pseudo-random config that follows the default vibe
   static Future<void> randomize(bool isDark) async {
     // Define data //
@@ -280,7 +301,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Update global settings //
 
     // Lefty
-    await EzConfig.setBool(isLeftyKey, random.nextBool());
+    await setBool(isLeftyKey, random.nextBool());
 
     // Leave theme as-is, don't wanna light blast peeps at night
 
@@ -288,7 +309,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     if (random.nextInt(4096) == 376) {
       final List<Locale> trimmedLocales =
           List<Locale>.from(EFUILang.supportedLocales);
-      trimmedLocales.remove(EzConfig.getLocale());
+      trimmedLocales.remove(getLocale());
 
       final Locale randomLocale = trimmedLocales
           .elementAt(random.nextInt(EFUILang.supportedLocales.length));
@@ -298,7 +319,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         localeData.add(randomLocale.countryCode!);
       }
 
-      await EzConfig.setStringList(localeKey, localeData);
+      await setStringList(localeKey, localeData);
     }
 
     // Update text settings //
@@ -313,61 +334,59 @@ Must be one of [int, bool, double, String, List<String>]''');
         styleOptions[random.nextInt(styleOptions.length)];
     final double descriptionScale = getScaler();
 
-    await EzConfig.setString(displayFontFamilyKey, attentionStyle);
-    await EzConfig.setDouble(displayFontSizeKey, 42.0 * attentionScale);
-    await EzConfig.setBool(displayBoldKey, false);
-    await EzConfig.setBool(displayItalicsKey, false);
-    await EzConfig.setBool(displayUnderlinedKey, random.nextBool());
-    await EzConfig.setDouble(displayFontHeightKey, defaultFontHeight);
-    await EzConfig.setDouble(displayLetterSpacingKey, defaultLetterSpacing);
-    await EzConfig.setDouble(displayWordSpacingKey, defaultWordSpacing);
+    await setString(displayFontFamilyKey, attentionStyle);
+    await setDouble(displayFontSizeKey, 42.0 * attentionScale);
+    await setBool(displayBoldKey, false);
+    await setBool(displayItalicsKey, false);
+    await setBool(displayUnderlinedKey, random.nextBool());
+    await setDouble(displayFontHeightKey, defaultFontHeight);
+    await setDouble(displayLetterSpacingKey, defaultLetterSpacing);
+    await setDouble(displayWordSpacingKey, defaultWordSpacing);
 
-    await EzConfig.setString(headlineFontFamilyKey, attentionStyle);
-    await EzConfig.setDouble(
-        headlineFontSizeKey, defaultHeadlineSize * attentionScale);
-    await EzConfig.setBool(headlineBoldKey, false);
-    await EzConfig.setBool(headlineItalicsKey, false);
-    await EzConfig.setBool(headlineUnderlinedKey, false);
-    await EzConfig.setDouble(headlineFontHeightKey, defaultFontHeight);
-    await EzConfig.setDouble(headlineLetterSpacingKey, defaultLetterSpacing);
-    await EzConfig.setDouble(headlineWordSpacingKey, defaultWordSpacing);
+    await setString(headlineFontFamilyKey, attentionStyle);
+    await setDouble(headlineFontSizeKey, defaultHeadlineSize * attentionScale);
+    await setBool(headlineBoldKey, false);
+    await setBool(headlineItalicsKey, false);
+    await setBool(headlineUnderlinedKey, false);
+    await setDouble(headlineFontHeightKey, defaultFontHeight);
+    await setDouble(headlineLetterSpacingKey, defaultLetterSpacing);
+    await setDouble(headlineWordSpacingKey, defaultWordSpacing);
 
-    await EzConfig.setString(
+    await setString(
         titleFontFamilyKey, styleOptions[random.nextInt(styleOptions.length)]);
-    await EzConfig.setDouble(
-        titleFontSizeKey, defaultTitleSize * attentionScale);
-    await EzConfig.setBool(titleBoldKey, false);
-    await EzConfig.setBool(titleItalicsKey, false);
-    await EzConfig.setBool(titleUnderlinedKey, random.nextBool());
-    await EzConfig.setDouble(titleFontHeightKey, defaultFontHeight);
-    await EzConfig.setDouble(titleLetterSpacingKey, defaultLetterSpacing);
-    await EzConfig.setDouble(titleWordSpacingKey, defaultWordSpacing);
+    await setDouble(titleFontSizeKey, defaultTitleSize * attentionScale);
+    await setBool(titleBoldKey, false);
+    await setBool(titleItalicsKey, false);
+    await setBool(titleUnderlinedKey, random.nextBool());
+    await setDouble(titleFontHeightKey, defaultFontHeight);
+    await setDouble(titleLetterSpacingKey, defaultLetterSpacing);
+    await setDouble(titleWordSpacingKey, defaultWordSpacing);
 
-    await EzConfig.setString(bodyFontFamilyKey, descriptionStyle);
-    await EzConfig.setDouble(bodyFontSizeKey, 16.0 * descriptionScale);
-    await EzConfig.setBool(bodyBoldKey, false);
-    await EzConfig.setBool(bodyItalicsKey, false);
-    await EzConfig.setBool(bodyUnderlinedKey, false);
-    await EzConfig.setDouble(bodyFontHeightKey, defaultFontHeight);
-    await EzConfig.setDouble(bodyLetterSpacingKey, defaultLetterSpacing);
-    await EzConfig.setDouble(bodyWordSpacingKey, defaultWordSpacing);
+    await setString(bodyFontFamilyKey, descriptionStyle);
+    await setDouble(bodyFontSizeKey, 16.0 * descriptionScale);
+    await setBool(bodyBoldKey, false);
+    await setBool(bodyItalicsKey, false);
+    await setBool(bodyUnderlinedKey, false);
+    await setDouble(bodyFontHeightKey, defaultFontHeight);
+    await setDouble(bodyLetterSpacingKey, defaultLetterSpacing);
+    await setDouble(bodyWordSpacingKey, defaultWordSpacing);
 
-    await EzConfig.setString(labelFontFamilyKey, descriptionStyle);
-    await EzConfig.setDouble(labelFontSizeKey, 14.0 * descriptionScale);
-    await EzConfig.setBool(labelBoldKey, false);
-    await EzConfig.setBool(labelItalicsKey, false);
-    await EzConfig.setBool(labelUnderlinedKey, false);
-    await EzConfig.setDouble(labelFontHeightKey, defaultFontHeight);
-    await EzConfig.setDouble(labelLetterSpacingKey, defaultLetterSpacing);
-    await EzConfig.setDouble(labelWordSpacingKey, defaultWordSpacing);
+    await setString(labelFontFamilyKey, descriptionStyle);
+    await setDouble(labelFontSizeKey, 14.0 * descriptionScale);
+    await setBool(labelBoldKey, false);
+    await setBool(labelItalicsKey, false);
+    await setBool(labelUnderlinedKey, false);
+    await setDouble(labelFontHeightKey, defaultFontHeight);
+    await setDouble(labelLetterSpacingKey, defaultLetterSpacing);
+    await setDouble(labelWordSpacingKey, defaultWordSpacing);
 
     // Update layout settings //
 
-    await EzConfig.setDouble(marginKey, defaultMargin * getScaler());
-    await EzConfig.setDouble(paddingKey, defaultPadding * getScaler());
-    await EzConfig.setDouble(spacingKey, defaultSpacing * getScaler());
+    await setDouble(marginKey, defaultMargin * getScaler());
+    await setDouble(paddingKey, defaultPadding * getScaler());
+    await setDouble(spacingKey, defaultSpacing * getScaler());
 
-    await EzConfig.setBool(hideScrollKey, random.nextBool());
+    await setBool(hideScrollKey, random.nextBool());
 
     // Update color settings //
 
