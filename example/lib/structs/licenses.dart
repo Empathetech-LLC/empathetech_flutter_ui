@@ -3,12 +3,41 @@
  * See LICENSE for distribution and usage details.
  */
 
+String genLicense({
+  required String license,
+  required String appName,
+  required String publisher,
+  required String description,
+  required String year,
+}) {
+  switch (license) {
+    case mitKey:
+      return genMIT(publisher, year);
+    case iscKey:
+      return genISC(publisher, year);
+    case apacheKey:
+      return genApache(publisher, year);
+    case mozillaKey:
+      return genMozilla();
+    case unlicenseKey:
+      return genUnlicense();
+    case dwtfywKey:
+      return genDWTFYW();
+    default:
+      return genGNU(appName, publisher, description, year);
+  }
+}
+
 /// GNU General Public License v3.0
 const String gnuKey = 'GNU General Public License v3.0';
 
 /// GNU General Public License v3.0
 String genGNU(
-        String appName, String appDescription, String publisher, String year) =>
+  String appName,
+  String publisher,
+  String description,
+  String year,
+) =>
     """                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -642,7 +671,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    $appDescription
+    $description
     Copyright (C) $year  $publisher
 
     This program is free software: you can redistribute it and/or modify
