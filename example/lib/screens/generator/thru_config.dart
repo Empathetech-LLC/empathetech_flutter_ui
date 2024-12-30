@@ -27,14 +27,38 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  // Define the build data //
+  late final TextTheme textTheme = Theme.of(context).textTheme;
+  late final TextStyle? notificationStyle =
+      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
-  bool itFailed = false;
+  // Define the build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
+
+  late Widget centerPiece = loadingPage;
+
+  // Define custom Widgets //
+
+  late final Widget loadingPage = SizedBox(
+    height: heightOf(context) / 2,
+    child: const EmpathetechLoadingAnimation(
+      height: double.infinity,
+      semantics: 'TODO',
+    ),
+  );
+
+  late final Widget successPage = Text(
+    '''Success!
+
+Your configuration has been saved to ${archivePath()}
+
+Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+    style: notificationStyle,
+    textAlign: TextAlign.center,
+  );
 
   // Define custom functions //
 
@@ -47,10 +71,26 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
     // Check for a String that ends in .json
     if (savedConfig.endsWith('.json')) {
-      debugPrint('DO SOMETHING!');
+      setState(() => centerPiece = successPage);
     } else {
-      setState(() => itFailed = true);
-      debugPrint('DO SOMETHING ELSE!');
+      debugPrint('WHOOPSIE!');
+    }
+  }
+
+  String archivePath() {
+    switch (platform) {
+      case TargetPlatform.android:
+        return 'TODO';
+      case TargetPlatform.iOS:
+        return 'Files > Browse > Open UI';
+      case TargetPlatform.linux:
+        return 'TODO';
+      case TargetPlatform.macOS:
+        return 'TODO';
+      case TargetPlatform.windows:
+        return 'TODO';
+      case TargetPlatform.fuchsia:
+        return 'TODO';
     }
   }
 
@@ -70,14 +110,9 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const OpenUIScaffold(
+    return OpenUIScaffold(
       title: 'Generator',
-      body: Center(
-        child: EmpathetechLoadingAnimation(
-          height: 300,
-          semantics: 'TODO',
-        ),
-      ),
+      body: Center(child: centerPiece),
     );
   }
 }
