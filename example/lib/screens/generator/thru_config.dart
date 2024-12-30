@@ -7,11 +7,11 @@ import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
-import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ThruConfigScreen extends StatefulWidget {
   final EAGConfig config;
@@ -24,6 +24,8 @@ class ThruConfigScreen extends StatefulWidget {
 
 class _ThruConfigScreenState extends State<ThruConfigScreen> {
   // Gather the theme data //
+
+  static const EzSpacer spacer = EzSpacer();
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -39,6 +41,8 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
       platform == TargetPlatform.windows;
 
   late Widget centerPiece = loadingPage;
+
+  String errorMessage = 'The config could not be saved.\nPlease try again.';
 
   // Define custom Widgets //
 
@@ -77,7 +81,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         textAlign: TextAlign.center,
       ),
       Text(
-        'Gosh darnit!',
+        errorMessage,
         style: notificationStyle,
         textAlign: TextAlign.center,
       ),
@@ -87,11 +91,18 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Define custom functions //
 
   void archive() async {
-    final String savedConfig = await FileSaver.instance.saveFile(
-      name: '${widget.config.appName}-eag-config.json',
-      bytes: utf8.encode(jsonEncode(widget.config.toJson())),
-      mimeType: MimeType.json,
-    );
+    late final String savedConfig;
+    try {
+      savedConfig = await FileSaver.instance.saveFile(
+        name: '${widget.config.appName}-eag-config.json',
+        bytes: utf8.encode(jsonEncode(widget.config.toJson())),
+        mimeType: MimeType.json,
+      );
+    } catch (e) {
+      errorMessage = 'Something went wrong...\n\n${e.toString()}';
+      centerPiece = failurePage;
+      setState(() {});
+    }
 
     // Check for a String that ends in .json
     if (savedConfig.endsWith('.json')) {
@@ -118,25 +129,55 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
-  void run() async {
-    await Process.run('echo', <String>['create']);
+  void genCode() async {
+    debugPrint('one of us... One Of Us... ONE OF US!');
+  }
+
+  Future<dynamic> confirm() async {
+    return await showPlatformDialog(
+      context: context,
+      builder: (BuildContext confirmContext) {
+        return EzAlertDialog(
+          title: const Text('Would you like to...'),
+          contents: <Widget>[
+            // Generate code
+            EzElevatedIconButton(
+              label: 'Generate ${widget.config.appName}',
+              icon: Icon(PlatformIcons(context).folderOpen),
+              onPressed: () {
+                Navigator.of(confirmContext).pop(true);
+                genCode();
+              },
+            ),
+            spacer,
+
+            // Save config
+            EzElevatedIconButton(
+              label: 'Save config',
+              icon: const Icon(Icons.save),
+              onPressed: () {
+                Navigator.of(confirmContext).pop(false);
+                archive();
+              },
+            ),
+          ],
+          needsClose: false,
+        );
+      },
+    );
   }
 
   // Init //
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    isDesktop ? run() : archive();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => isDesktop ? confirm() : archive());
   }
 
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    return OpenUIScaffold(
-      title: 'Generator',
-      body: centerPiece,
-    );
-  }
+  Widget build(_) => OpenUIScaffold(title: 'Generator', body: centerPiece);
 }
