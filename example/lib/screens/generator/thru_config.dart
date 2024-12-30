@@ -47,9 +47,10 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
     // Check for a String that ends in .json
     if (savedConfig.endsWith('.json')) {
-      debugPrint('It worked!');
+      debugPrint('DO SOMETHING!');
     } else {
       setState(() => itFailed = true);
+      debugPrint('DO SOMETHING ELSE!');
     }
   }
 
@@ -73,7 +74,7 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
       title: 'Generator',
       body: Center(
         child: EmpathetechLoadingAnimation(
-          height: double.infinity,
+          height: 300,
           semantics: 'TODO',
         ),
       ),
