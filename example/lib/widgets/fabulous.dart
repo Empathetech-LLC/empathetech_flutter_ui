@@ -33,7 +33,38 @@ class ResetFAB extends StatelessWidget {
               l10n.gUndoWarn,
               textAlign: TextAlign.center,
             ),
-            materialActions: <Widget>[],
+            materialActions: <Widget>[
+              EzTextButton(
+                text: 'Builder values',
+                textStyle: style,
+                onPressed: () async {
+                  clearForms.call();
+                  if (alertContext.mounted) Navigator.of(alertContext).pop();
+                },
+              ),
+              EzTextButton(
+                text: 'App settings',
+                textStyle: style,
+                onPressed: () async {
+                  await EzConfig.reset();
+                  if (alertContext.mounted) Navigator.of(alertContext).pop();
+                },
+              ),
+              EzTextButton(
+                text: 'Both',
+                textStyle: style,
+                onPressed: () async {
+                  clearForms.call();
+                  await EzConfig.reset();
+                  if (alertContext.mounted) Navigator.of(alertContext).pop();
+                },
+              ),
+              EzTextButton(
+                text: 'Nothing',
+                textStyle: style,
+                onPressed: () => Navigator.of(alertContext).pop(),
+              ),
+            ],
             cupertinoActions: <CupertinoDialogAction>[
               CupertinoDialogAction(
                 onPressed: () async {
