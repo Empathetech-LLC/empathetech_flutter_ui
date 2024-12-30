@@ -14,7 +14,7 @@ class ImageSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
         title: EFUILang.of(context)!.isPageTitle,
-        settingsMenu: false,
+        showSettings: false,
         body: const ImageSettings(),
       );
 }

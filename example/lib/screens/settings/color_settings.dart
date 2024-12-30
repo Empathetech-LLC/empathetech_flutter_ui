@@ -14,7 +14,7 @@ class ColorSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
         title: EFUILang.of(context)!.csPageTitle,
-        settingsMenu: false,
+        showSettings: false,
         body: const ColorSettings(),
       );
 }
