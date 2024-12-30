@@ -70,13 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool showAdvanced = false;
 
-  bool autoEmu = false;
-
-  bool showVSC = false;
-  bool removeVSC = false;
+  bool showCopyright = false;
+  bool removeCopyright = false;
   // Default at bottom of file
-  late final TextEditingController vscController =
-      TextEditingController(text: vscDefault);
+  late final TextEditingController copyrightController =
+      TextEditingController(text: copyrightDefault);
+
+  bool showLicense = false;
+  String license = gnuKey;
 
   bool showAnalysis = false;
   bool removeAnalysis = false;
@@ -84,11 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController analysisController =
       TextEditingController(text: analysisDefault);
 
-  bool showCopyright = false;
-  bool removeCopyright = false;
+  bool showVSC = false;
+  bool removeVSC = false;
   // Default at bottom of file
-  late final TextEditingController copyrightController =
-      TextEditingController(text: copyrightDefault);
+  late final TextEditingController vscController =
+      TextEditingController(text: vscDefault);
+
+  bool autoEmu = false;
 
   // Set the page title //
 
@@ -347,28 +350,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Emulate
-                  Visibility(
-                    visible: isDesktop,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Run Android emulator when complete (may require install)',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.start,
-                        ),
-                        Checkbox(
-                          value: autoEmu,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => autoEmu = value);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                   spacer,
 
                   // Copyright config
@@ -386,8 +367,14 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // LICENSE config
                   _LicensePicker(
+                    textTheme: textTheme,
                     notificationStyle: notificationStyle,
-                    labelStyle: textTheme.labelLarge,
+                    visible: showLicense,
+                    onHide: () => setState(() => showLicense = !showLicense),
+                    groupValue: license,
+                    onChanged: (String? picked) {
+                      if (picked != null) setState(() => license = picked);
+                    },
                   ),
 
                   // Analysis options config
@@ -412,6 +399,29 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     onHide: () => setState(() => showVSC = !showVSC),
                     removed: removeVSC,
                     onRemove: () => setState(() => removeVSC = true),
+                  ),
+
+                  // Emulate
+                  Visibility(
+                    visible: isDesktop,
+                    child: EzRow(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Run Android emulator when complete (may require install)',
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.start,
+                        ),
+                        Checkbox(
+                          value: autoEmu,
+                          onChanged: (bool? value) async {
+                            if (value == null) return;
+                            setState(() => autoEmu = value);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -572,14 +582,12 @@ linter:
     unnecessary_library_name: true
     unnecessary_new: true
     use_build_context_synchronously: true
-    use_full_hex_values_for_flutter_colors: true
-    ''';
+    use_full_hex_values_for_flutter_colors: true''';
 
   late String copyrightDefault = '''/* $namePreview
  * Copyright (c) $currentYear $pubPreview. All rights reserved.
  * See LICENSE for distribution and usage details.
- */
-    ''';
+ */''';
 }
 
 class _BasicField extends StatelessWidget {
@@ -740,100 +748,127 @@ class _AdvancedSettingsField extends StatelessWidget {
 }
 
 class _LicensePicker extends StatelessWidget {
-  final TextTheme? textTheme;
+  final TextTheme textTheme;
   final TextStyle? notificationStyle;
+
+  final bool visible;
+  final void Function() onHide;
+
+  final String groupValue;
+  final void Function(String?)? onChanged;
 
   const _LicensePicker({
     required this.textTheme,
     required this.notificationStyle,
+    required this.visible,
+    required this.onHide,
+    required this.groupValue,
+    required this.onChanged,
   });
 
   static const EzSpacer spacer = EzSpacer(vertical: false);
 
-  Widget radio(String title, String value, String groupValue) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Text(title, style: textTheme.bodyLarge),
-        Radio<String>(
-          value: value,
-          groupValue: groupValue,
-          onChanged: (String? changed) =>
-              (changed != null) ? groupValue = changed : null,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    String selected = gnuKey;
+    Widget radio({
+      required String title,
+      required String value,
+    }) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            title,
+            style: textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
+          Radio<String>(
+            value: value,
+            groupValue: groupValue,
+            onChanged: onChanged,
+          ),
+        ],
+      );
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // Title
-        EzRichText(
-          <InlineSpan>[
-            EzPlainText(
-              text: 'License',
-              style: notificationStyle,
+        // Title and show buttons
+        EzRow(
+          children: <Widget>[
+            EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                  text: 'License',
+                  style: notificationStyle,
+                ),
+                EzPlainText(
+                  text: '\n(required)',
+                  style: textTheme.labelLarge,
+                ),
+              ],
+              textAlign: TextAlign.start,
             ),
-            EzPlainText(
-              text: '\t(required)',
-              style: textTheme.labelLarge,
+            EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
+            IconButton(
+              onPressed: onHide,
+              icon: Icon(
+                visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              ),
             ),
           ],
-          textAlign: TextAlign.start,
         ),
 
         // Options
-        EzSpacer(space: EzConfig.get(marginKey)),
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          thumbVisibility: false,
-          children: <Widget>[
-            spacer,
-            const Text('GNU GPLv3'),
-            Radio<String>(
-              value: gnuKey,
-              groupValue: selected,
-              onChanged: (String? value) =>
-                  (value != null) ? selected = value : null,
+        Visibility(
+          visible: visible,
+          child: Padding(
+            padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
+            child: EzScrollView(
+              scrollDirection: Axis.horizontal,
+              thumbVisibility: false,
+              children: <Widget>[
+                spacer,
+                radio(
+                  title: 'GNU GPLv3',
+                  value: gnuKey,
+                ),
+                spacer,
+                radio(
+                  title: 'MIT',
+                  value: mitKey,
+                ),
+                spacer,
+                radio(
+                  title: 'ISC',
+                  value: iscKey,
+                ),
+                spacer,
+                radio(
+                  title: 'Apache 2.0',
+                  value: apacheKey,
+                ),
+                spacer,
+                radio(
+                  title: 'Mozilla 2.0',
+                  value: mozillaKey,
+                ),
+                spacer,
+                radio(
+                  title: 'Unlicense',
+                  value: unlicenseKey,
+                ),
+                spacer,
+                radio(
+                  title: 'DWTFYW',
+                  value: dwtfywKey,
+                ),
+                spacer,
+              ],
             ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('MIT'),
-            ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('ISC'),
-            ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Apache 2.0'),
-            ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Mozilla 2.0'),
-            ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Unlicense'),
-            ),
-            spacer,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('DWTFYW'),
-            ),
-            spacer,
-          ],
+          ),
         ),
         const EzSpacer(),
       ],
