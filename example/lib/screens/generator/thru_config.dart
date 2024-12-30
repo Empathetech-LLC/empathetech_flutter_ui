@@ -42,6 +42,11 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
   late Widget centerPiece = loadingPage;
 
+  late String successMessage =
+      '''\nYour configuration has been saved to ${archivePath()}
+
+Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
+
   String errorMessage = 'The config could not be saved.\nPlease try again.';
 
   // Define custom Widgets //
@@ -64,9 +69,7 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
         textAlign: TextAlign.center,
       ),
       Text(
-        '''\nYour configuration has been saved to ${archivePath()}
-
-Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+        successMessage,
         style: notificationStyle,
         textAlign: TextAlign.center,
       ),
@@ -105,11 +108,9 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
 
     // Check for a String that ends in .json
-    if (savedConfig.endsWith('.json')) {
-      setState(() => centerPiece = successPage);
-    } else {
-      setState(() => centerPiece = failurePage);
-    }
+    savedConfig.endsWith('.json')
+        ? setState(() => centerPiece = successPage)
+        : setState(() => centerPiece = failurePage);
   }
 
   String archivePath() {
@@ -118,14 +119,8 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         return 'Root > Android > Data > net.empathetech.open_ui > files';
       case TargetPlatform.iOS:
         return 'Files > Browse > Open UI';
-      case TargetPlatform.linux:
-        return 'TODO';
-      case TargetPlatform.macOS:
-        return 'TODO';
-      case TargetPlatform.windows:
-        return 'TODO';
-      case TargetPlatform.fuchsia:
-        return 'TODO';
+      default:
+        return 'Downloads';
     }
   }
 
@@ -179,5 +174,8 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(title: 'Generator', body: centerPiece);
+  Widget build(_) => OpenUIScaffold(
+        title: 'Generator',
+        body: EzScreen(child: centerPiece),
+      );
 }
