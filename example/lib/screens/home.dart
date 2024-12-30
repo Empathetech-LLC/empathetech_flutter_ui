@@ -72,26 +72,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool showCopyright = false;
   bool removeCopyright = false;
-  // Default at bottom of file
+  // Default at the bottom of the Class
   late final TextEditingController copyrightController =
       TextEditingController(text: copyrightDefault);
 
   bool showLicense = false;
   String license = gnuKey;
 
+  bool showL10n = false;
+  bool removeL10n = false;
+  // Default at the bottom of the Class
+  final TextEditingController l10nController =
+      TextEditingController(text: l10nDefault);
+
   bool showAnalysis = false;
   bool removeAnalysis = false;
-  // Default at bottom of file
+  // Default at the bottom of the Class
   final TextEditingController analysisController =
       TextEditingController(text: analysisDefault);
 
   bool showVSC = false;
   bool removeVSC = false;
-  // Default at bottom of file
+  // Default at the bottom of the Class
   late final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
   bool autoEmu = false;
+
+  bool noSpam = true;
 
   // Set the page title //
 
@@ -364,6 +372,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeCopyright,
                     onRemove: () => setState(() => removeCopyright = true),
                   ),
+                  if (!removeCopyright) spacer,
 
                   // LICENSE config
                   _LicensePicker(
@@ -376,6 +385,20 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       if (picked != null) setState(() => license = picked);
                     },
                   ),
+                  spacer,
+
+                  // l10n config
+                  _AdvancedSettingsField(
+                    margin: margin,
+                    textTheme: textTheme,
+                    title: 'l10n.yaml',
+                    controller: l10nController,
+                    visible: showL10n,
+                    onHide: () => setState(() => showL10n = !showL10n),
+                    removed: removeL10n,
+                    onRemove: () => setState(() => removeL10n = true),
+                  ),
+                  if (!removeL10n) spacer,
 
                   // Analysis options config
                   _AdvancedSettingsField(
@@ -388,6 +411,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeAnalysis,
                     onRemove: () => setState(() => removeAnalysis = true),
                   ),
+                  if (!removeAnalysis) spacer,
 
                   // VS Code launch config
                   _AdvancedSettingsField(
@@ -400,6 +424,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeVSC,
                     onRemove: () => setState(() => removeVSC = true),
                   ),
+                  if (isDesktop) spacer,
 
                   // Emulate
                   Visibility(
@@ -432,41 +457,50 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
             Center(
               child: EzElevatedIconButton(
-                onPressed: () {
-                  if (!validName ||
-                      (!exampleDomain &&
-                          validateDomain(domainController.text) != null)) {
-                    ezSnackBar(
-                      context: context,
-                      message: 'Some fields are invalid',
-                    );
-                    return;
-                  }
-
-                  context.goNamed(
-                    progressPath,
-                    extra: EAGConfig(
-                      appName: nameController.text,
-                      publisherName: pubController.text,
-                      domainName:
-                          exampleDomain ? 'com.example' : domainController.text,
-                      textSettings: textSettings,
-                      layoutSettings: layoutSettings,
-                      colorSettings: colorSettings,
-                      imageSettings: imageSettings,
-                      autoEmulate: autoEmu,
-                      vsCodeConfig: removeVSC ? null : vscController.text,
-                      analysisOptions:
-                          removeAnalysis ? null : analysisController.text,
-                      appDefaults: Map<String, dynamic>.fromEntries(
-                        allKeys.keys.map(
-                          (String key) =>
-                              MapEntry<String, dynamic>(key, EzConfig.get(key)),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                onPressed: noSpam
+                    ? () async {
+                        if (validName &&
+                            pubController.text.isNotEmpty &&
+                            (exampleDomain ||
+                                validateDomain(domainController.text) ==
+                                    null) &&
+                            descriptionController.text.isNotEmpty) {
+                          context.goNamed(
+                            progressPath,
+                            extra: EAGConfig(
+                              appName: nameController.text,
+                              publisherName: pubController.text,
+                              domainName: exampleDomain
+                                  ? 'com.example'
+                                  : domainController.text,
+                              textSettings: textSettings,
+                              layoutSettings: layoutSettings,
+                              colorSettings: colorSettings,
+                              imageSettings: imageSettings,
+                              autoEmulate: autoEmu,
+                              vsCodeConfig:
+                                  removeVSC ? null : vscController.text,
+                              analysisOptions: removeAnalysis
+                                  ? null
+                                  : analysisController.text,
+                              appDefaults: Map<String, dynamic>.fromEntries(
+                                allKeys.keys.map(
+                                  (String key) => MapEntry<String, dynamic>(
+                                      key, EzConfig.get(key)),
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          setState(() => noSpam = false);
+                          await ezSnackBar(
+                            context: context,
+                            message: 'Some fields are invalid',
+                          ).closed;
+                          setState(() => noSpam = true);
+                        }
+                      }
+                    : () {},
                 icon: Icon(PlatformIcons(context).create),
                 label: 'Generate',
               ),
@@ -487,6 +521,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
           domainController.clear();
           exampleDomain = false;
 
+          descriptionController.clear();
+
           textSettings = true;
           layoutSettings = true;
           colorSettings = true;
@@ -494,19 +530,26 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
           showAdvanced = false;
 
-          autoEmu = false;
+          showCopyright = false;
+          removeCopyright = false;
+          copyrightController.text = copyrightDefault;
 
-          showVSC = false;
-          removeVSC = false;
-          vscController.text = vscDefault;
+          showLicense = false;
+          license = gnuKey;
+
+          showL10n = false;
+          removeL10n = false;
+          l10nController.text = l10nDefault;
 
           showAnalysis = false;
           removeAnalysis = false;
           analysisController.text = analysisDefault;
 
-          showCopyright = false;
-          removeCopyright = false;
-          copyrightController.text = copyrightDefault;
+          showVSC = false;
+          removeVSC = false;
+          vscController.text = vscDefault;
+
+          autoEmu = false;
         }),
       ),
     );
@@ -518,9 +561,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
     pubController.dispose();
     domainController.dispose();
     descriptionController.dispose();
-    vscController.dispose();
-    analysisController.dispose();
     copyrightController.dispose();
+    l10nController.dispose();
+    analysisController.dispose();
+    vscController.dispose();
     super.dispose();
   }
 
@@ -543,6 +587,18 @@ It is recommended to set a custom color scheme. If you need help building one, t
     },
   ]
 }''';
+
+  static const String l10nDefault = '''arb-dir: lib/l10n
+output-dir: lib/l10n
+template-arb-file: lang_en.arb
+output-localization-file: lang.dart
+output-class: Lang
+use-deferred-loading: true
+gen-inputs-and-outputs-list: lib/l10n
+synthetic-package: false
+required-resource-attributes: false
+format: true
+suppress-warnings: false''';
 
   static const String analysisDefault =
       '''include: package:flutter_lints/flutter.yaml
@@ -740,7 +796,6 @@ class _AdvancedSettingsField extends StatelessWidget {
               ),
             ),
           ),
-          const EzSpacer(),
         ],
       ),
     );
@@ -770,6 +825,8 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = EzConfig.get(marginKey);
+
     Widget radio({
       required String title,
       required String value,
@@ -798,17 +855,9 @@ class _LicensePicker extends StatelessWidget {
         // Title and show buttons
         EzRow(
           children: <Widget>[
-            EzRichText(
-              <InlineSpan>[
-                EzPlainText(
-                  text: 'License',
-                  style: notificationStyle,
-                ),
-                EzPlainText(
-                  text: '\n(required)',
-                  style: textTheme.labelLarge,
-                ),
-              ],
+            Text(
+              'LICENSE',
+              style: textTheme.bodyLarge,
               textAlign: TextAlign.start,
             ),
             EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
@@ -825,12 +874,12 @@ class _LicensePicker extends StatelessWidget {
         Visibility(
           visible: visible,
           child: Padding(
-            padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
+            padding: EdgeInsets.only(top: margin),
             child: EzScrollView(
               scrollDirection: Axis.horizontal,
               thumbVisibility: false,
               children: <Widget>[
-                spacer,
+                EzSpacer(space: margin),
                 radio(
                   title: 'GNU GPLv3',
                   value: gnuKey,
@@ -870,7 +919,6 @@ class _LicensePicker extends StatelessWidget {
             ),
           ),
         ),
-        const EzSpacer(),
       ],
     );
   }
