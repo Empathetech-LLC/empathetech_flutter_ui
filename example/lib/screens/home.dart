@@ -115,6 +115,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       title: 'Builder',
+      onUpload: (EAGConfig config) {
+        nameController.text = config.appName;
+        namePreview = config.appName;
+        validName = true;
+
+        pubController.text = config.publisherName;
+        pubPreview = config.publisherName;
+
+        domainController.text = config.domainName;
+        if (config.domainName == 'com.example') exampleDomain = true;
+
+        descriptionController.text = config.description;
+
+        textSettings = config.textSettings;
+        layoutSettings = config.layoutSettings;
+        colorSettings = config.colorSettings;
+        imageSettings = config.imageSettings;
+
+        // EzConfig stuff
+
+        config.copyright == null
+            ? removeCopyright = true
+            : copyrightController.text = config.copyright!;
+
+        // Update license
+
+        config.l10nConfig == null
+            ? removeL10n = true
+            : l10nController.text = config.l10nConfig!;
+
+        config.analysisOptions == null
+            ? removeAnalysis = true
+            : analysisController.text = config.analysisOptions!;
+
+        config.vsCodeConfig == null
+            ? removeVSC = true
+            : vscController.text = config.vsCodeConfig!;
+
+        if (config.autoEmulate != null) autoEmu = config.autoEmulate!;
+
+        setState(() {});
+      },
       body: EzScreen(
         alignment: Alignment.topLeft,
         child: EzScrollView(
