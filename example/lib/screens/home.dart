@@ -473,22 +473,39 @@ It is recommended to set a custom color scheme. If you need help building one, t
                               domainName: exampleDomain
                                   ? 'com.example'
                                   : domainController.text,
+                              description: descriptionController.text,
                               textSettings: textSettings,
                               layoutSettings: layoutSettings,
                               colorSettings: colorSettings,
                               imageSettings: imageSettings,
-                              autoEmulate: autoEmu,
-                              vsCodeConfig:
-                                  removeVSC ? null : vscController.text,
-                              analysisOptions: removeAnalysis
-                                  ? null
-                                  : analysisController.text,
                               appDefaults: Map<String, dynamic>.fromEntries(
                                 allKeys.keys.map(
                                   (String key) => MapEntry<String, dynamic>(
                                       key, EzConfig.get(key)),
                                 ),
                               ),
+                              copyright: (removeCopyright ||
+                                      copyrightController.text.isEmpty)
+                                  ? null
+                                  : copyrightController.text,
+                              license: genLicense(
+                                license: license,
+                                appName: nameController.text,
+                                publisher: pubController.text,
+                                description: descriptionController.text,
+                                year: currentYear.toString(),
+                              ),
+                              l10nConfig:
+                                  (removeL10n || l10nController.text.isEmpty)
+                                      ? null
+                                      : l10nController.text,
+                              analysisOptions: (removeAnalysis ||
+                                      analysisController.text.isEmpty)
+                                  ? null
+                                  : analysisController.text,
+                              vsCodeConfig:
+                                  removeVSC ? null : vscController.text,
+                              autoEmulate: isDesktop ? autoEmu : null,
                             ),
                           );
                         } else {
