@@ -10,30 +10,31 @@ import 'package:efui_bios/efui_bios.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class SuccessScreen extends StatefulWidget {
+class ThruConfigScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const SuccessScreen({super.key, required this.config});
+  const ThruConfigScreen({super.key, required this.config});
 
   @override
-  State<SuccessScreen> createState() => _HomeScreenState();
+  State<ThruConfigScreen> createState() => _ThruConfigScreenState();
 }
 
-class _HomeScreenState extends State<SuccessScreen> {
+class _ThruConfigScreenState extends State<ThruConfigScreen> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
 
+  bool itFailed = false;
+
   late final TargetPlatform platform = getBasePlatform(context);
-  late final bool isDesktop = !(kIsWeb ||
-      platform == TargetPlatform.iOS ||
-      platform == TargetPlatform.android);
+  late final bool isDesktop = platform == TargetPlatform.linux ||
+      platform == TargetPlatform.macOS ||
+      platform == TargetPlatform.windows;
 
   // Define custom functions //
 
@@ -46,14 +47,14 @@ class _HomeScreenState extends State<SuccessScreen> {
 
     // Check for a String that ends in .json
     if (savedConfig.endsWith('.json')) {
-      debugPrint('Success stuff');
+      debugPrint('It worked!');
     } else {
-      debugPrint('Failure stuff');
+      setState(() => itFailed = true);
     }
   }
 
   void run() async {
-    await Process.run('flutter', <String>['create']);
+    await Process.run('echo', <String>['create']);
   }
 
   // Init //
@@ -61,9 +62,6 @@ class _HomeScreenState extends State<SuccessScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    setPageTitle('Generating', Theme.of(context).colorScheme.primary);
-
     isDesktop ? run() : archive();
   }
 
@@ -71,17 +69,12 @@ class _HomeScreenState extends State<SuccessScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return OpenUIScaffold(
-      title: 'Builder',
-      body: EzScreen(
-        child: EzScrollView(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            EmpathetechLoadingAnimation(
-              height: heightOf(context),
-              semantics: 'TODO',
-            ),
-          ],
+    return const OpenUIScaffold(
+      title: 'Generator',
+      body: Center(
+        child: EmpathetechLoadingAnimation(
+          height: double.infinity,
+          semantics: 'TODO',
         ),
       ),
     );

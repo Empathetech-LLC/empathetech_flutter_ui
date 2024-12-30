@@ -96,11 +96,11 @@ final GoRouter router = GoRouter(
       builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
         GoRoute(
-          path: progressPath,
-          name: progressPath,
+          path: thruConfigPath,
+          name: thruConfigPath,
           builder: (_, GoRouterState state) {
             final EAGConfig config = state.extra as EAGConfig;
-            return ProgressScreen(config: config);
+            return ThruConfigScreen(config: config);
           },
         ),
         GoRoute(

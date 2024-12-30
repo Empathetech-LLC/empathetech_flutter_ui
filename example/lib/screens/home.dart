@@ -466,7 +466,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                     null) &&
                             descriptionController.text.isNotEmpty) {
                           context.goNamed(
-                            progressPath,
+                            thruConfigPath,
                             extra: EAGConfig(
                               appName: nameController.text,
                               publisherName: pubController.text,

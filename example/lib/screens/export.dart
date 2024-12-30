@@ -14,9 +14,7 @@ export 'settings/image_settings.dart';
 export 'settings/color_settings.dart';
 export 'settings/layout_settings.dart';
 
-export 'generator/progress.dart';
-export 'generator/success.dart';
-export 'generator/failure.dart';
+export 'generator/thru_config.dart';
 
 // Route names //
 
@@ -35,11 +33,5 @@ const String colorSettingsPath = 'color-settings';
 /// 'layout-settings'
 const String layoutSettingsPath = 'layout-settings';
 
-/// 'generator-progress'
-const String progressPath = 'generator-progress';
-
-/// 'generator-success'
-const String successPath = 'generator-success';
-
-/// 'generator-failure'
-const String failurePath = 'generator-failure';
+/// 'generator-thru-config'
+const String thruConfigPath = 'generator-thru-config';
