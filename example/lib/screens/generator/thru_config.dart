@@ -42,22 +42,46 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
   // Define custom Widgets //
 
-  late final Widget loadingPage = SizedBox(
-    height: heightOf(context) / 2,
-    child: const EmpathetechLoadingAnimation(
-      height: double.infinity,
-      semantics: 'TODO',
+  late final Widget loadingPage = Center(
+    child: SizedBox(
+      height: heightOf(context) / 2,
+      child: const EmpathetechLoadingAnimation(
+        height: double.infinity,
+        semantics: 'TODO',
+      ),
     ),
   );
 
-  late final Widget successPage = Text(
-    '''Success!
-
-Your configuration has been saved to ${archivePath()}
+  late final Widget successPage = EzScrollView(
+    children: <Widget>[
+      Text(
+        'Success!',
+        style: textTheme.headlineLarge,
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        '''\nYour configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
-    style: notificationStyle,
-    textAlign: TextAlign.center,
+        style: notificationStyle,
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
+
+  late final Widget failurePage = EzScrollView(
+    children: <Widget>[
+      Text(
+        'Failure',
+        style: textTheme.headlineLarge,
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        'Gosh darnit!',
+        style: notificationStyle,
+        textAlign: TextAlign.center,
+      ),
+    ],
   );
 
   // Define custom functions //
@@ -73,14 +97,14 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     if (savedConfig.endsWith('.json')) {
       setState(() => centerPiece = successPage);
     } else {
-      debugPrint('WHOOPSIE!');
+      setState(() => centerPiece = failurePage);
     }
   }
 
   String archivePath() {
     switch (platform) {
       case TargetPlatform.android:
-        return 'TODO';
+        return 'Root > Android > Data > net.empathetech.open_ui > files';
       case TargetPlatform.iOS:
         return 'Files > Browse > Open UI';
       case TargetPlatform.linux:
@@ -112,7 +136,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       title: 'Generator',
-      body: Center(child: centerPiece),
+      body: centerPiece,
     );
   }
 }
