@@ -4,16 +4,21 @@
  */
 
 import './export.dart';
+import '../structs/export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class OpenUIScaffold extends StatelessWidget {
-  final bool settingsMenu;
-
   /// [AppBar.title] passthrough (via [Text] widget)
   final String title;
+
+  /// Whether to include [SettingsButton] in the [MenuAnchor]
+  final bool showSettings;
+
+  /// Whether to include [UploadButton] in the [MenuAnchor]
+  final void Function(EAGConfig)? onUpload;
 
   /// [Scaffold.body] passthrough
   final Widget body;
@@ -25,7 +30,8 @@ class OpenUIScaffold extends StatelessWidget {
   const OpenUIScaffold({
     super.key,
     this.title = appTitle,
-    this.settingsMenu = true,
+    this.showSettings = true,
+    this.onUpload,
     required this.body,
     this.fab,
   });
@@ -59,7 +65,8 @@ class OpenUIScaffold extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
       ),
       menuChildren: <Widget>[
-        if (settingsMenu) SettingsButton(context),
+        if (showSettings) SettingsButton(context),
+        if (onUpload != null) UploadButton(context, onUpload: onUpload!),
         EzFeedbackMenuButton(parentContext: context, appName: appTitle),
         const OpenSourceButton(),
       ],
