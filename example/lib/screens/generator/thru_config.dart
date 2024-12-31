@@ -3,10 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:flutter/cupertino.dart';
+
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
+import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
@@ -47,7 +50,12 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
 
-  String errorMessage = 'The config could not be saved.\nPlease try again.';
+  String errorMessage = 'Something went wrong.\nPlease try again.';
+
+  late final TextEditingController pathController = TextEditingController(
+      text: platform == TargetPlatform.windows
+          ? '${Platform.environment['UserProfile']}\\Documents'
+          : '${Platform.environment['HOME']}/Documents');
 
   // Define custom Widgets //
 
@@ -125,7 +133,57 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   }
 
   void genCode() async {
-    debugPrint('one of us... One Of Us... ONE OF US!');
+    await showPlatformDialog(
+      context: context,
+      builder: (BuildContext pathContext) {
+        return EzAlertDialog(
+          title: const Text('Confirm project directory'),
+          content: TextFormField(
+            controller: pathController,
+            textAlign: TextAlign.start,
+            maxLines: 1,
+            // validator: pathValidation(),
+            // autovalidateMode: AutovalidateMode.onUnfocus,
+          ),
+          materialActions: <Widget>[
+            EzTextButton(
+              text: 'Done',
+              onPressed: () => Navigator.of(pathContext).pop(),
+            ),
+          ],
+          cupertinoActions: <CupertinoDialogAction>[
+            CupertinoDialogAction(
+              child: const Text('Done'),
+              onPressed: () => Navigator.of(pathContext).pop(),
+            ),
+          ],
+          needsClose: true,
+        );
+      },
+    );
+
+    late final ProcessResult? runResult;
+    try {
+      runResult = await Process.run(
+        'flutter',
+        <String>[
+          'create',
+          '--org',
+          widget.config.domainName,
+          widget.config.appName,
+        ],
+        runInShell: true,
+        workingDirectory: pathController.text,
+      );
+    } catch (e) {
+      errorMessage = 'Something went wrong...\n\n${e.toString()}';
+      centerPiece = failurePage;
+      setState(() {});
+    }
+
+    runResult != null
+        ? setState(() => centerPiece = successPage)
+        : setState(() => centerPiece = failurePage);
   }
 
   Future<dynamic> confirm() async {
@@ -178,4 +236,10 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         title: 'Generator',
         body: EzScreen(child: centerPiece),
       );
+
+  @override
+  void dispose() {
+    pathController.dispose();
+    super.dispose();
+  }
 }
