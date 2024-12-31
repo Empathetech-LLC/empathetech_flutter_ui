@@ -15,6 +15,7 @@ const String imageSettingsKey = 'imageSettings';
 
 const String appDefaultsKey = 'appDefaults';
 
+const String genPathKey = 'genPath';
 const String copyrightKey = 'copyrightNotice';
 const String licenseKey = 'chosenLicense';
 const String l10nConfigKey = 'l10nConfig';
@@ -35,6 +36,7 @@ class EAGConfig {
 
   final Map<String, dynamic> appDefaults;
 
+  final String? genPath;
   final String? copyright;
   final String license;
   final String? l10nConfig;
@@ -51,6 +53,7 @@ class EAGConfig {
     required this.colorSettings,
     required this.imageSettings,
     required this.appDefaults,
+    this.genPath,
     this.copyright,
     required this.license,
     this.l10nConfig,
@@ -69,6 +72,7 @@ class EAGConfig {
       colorSettingsKey: colorSettings,
       imageSettingsKey: imageSettings,
       appDefaultsKey: appDefaults,
+      genPathKey: genPath,
       copyrightKey: copyright,
       licenseKey: license,
       l10nConfigKey: l10nConfig,
@@ -88,6 +92,7 @@ class EAGConfig {
       colorSettings: json[colorSettingsKey] as bool,
       imageSettings: json[imageSettingsKey] as bool,
       appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
+      genPath: json[genPathKey] as String?,
       copyright: json[copyrightKey] as String?,
       license: json[licenseKey] as String,
       l10nConfig: json[l10nConfigKey] as String?,
@@ -108,6 +113,7 @@ class EAGConfig {
   $colorSettingsKey: $colorSettings,
   $imageSettingsKey: $imageSettings,
   $appDefaultsKey: ${appDefaults.toString()}
+  $genPathKey: $genPath,
   $copyrightKey: $copyright,
   $licenseKey: $license,
   $l10nConfigKey: $l10nConfig,
