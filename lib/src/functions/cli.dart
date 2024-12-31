@@ -10,8 +10,8 @@ Future<void> cli({
   required List<String> args,
   required String dir,
   required void Function() onSuccess,
-  required void Function() onError,
-  required void Function() onFailure,
+  required void Function(String message) onFailure,
+  void Function(String message)? onError,
 }) async {
   late final ProcessResult runResult;
   try {
@@ -22,8 +22,10 @@ Future<void> cli({
       workingDirectory: dir,
     );
   } catch (e) {
-    onError();
+    onError == null ? onFailure(e.toString()) : onError(e.toString());
   }
 
-  runResult.exitCode == 0 ? onSuccess() : onFailure();
+  runResult.exitCode == 0
+      ? onSuccess()
+      : onFailure(runResult.stderr.toString());
 }
