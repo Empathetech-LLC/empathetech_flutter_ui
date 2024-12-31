@@ -8,8 +8,10 @@ import '../structs/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -23,18 +25,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
-  static const Widget divider = Center(child: EzDivider());
-
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  static const EzSpacer spacer = EzSpacer();
+  late final EzSpacer rowMargin = EzSpacer(vertical: false, space: margin);
+  static const EzSeparator separator = EzSeparator();
+  static const Widget divider = Center(child: EzDivider());
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? notificationStyle =
       textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
+  late final EFUILang l10n = EFUILang.of(context)!;
 
   late final double singleLineFormWidth = measureText(
     longestError,
@@ -48,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
+
+  late final String defaultPath = platform == TargetPlatform.windows
+      ? '${Platform.environment['UserProfile']}\\Documents'
+      : '${Platform.environment['HOME']}/Documents';
 
   final TextEditingController nameController = TextEditingController();
   String namePreview = 'your_app';
@@ -69,6 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool imageSettings = true;
 
   bool showAdvanced = false;
+
+  late final TextEditingController pathController =
+      TextEditingController(text: defaultPath);
+  bool readOnly = false;
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -97,8 +108,36 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
-  /// Set to false when buttons are "thinking"
-  bool noSpam = true;
+  /// Set to true when buttons are "thinking"
+  bool noGen = false;
+
+  // Define custom functions //
+
+  /// Validate the code gen file path (Desktop only)
+  Future<bool> checkPath() async {
+    if (await Directory(pathController.text).exists()) return true;
+
+    const String badPath = 'Invalid path';
+
+    // Disable interaction
+    setState(() {
+      readOnly = true;
+      noGen = true;
+      pathController.text = badPath;
+    });
+
+    // Wait a sec
+    await Future<void>.delayed(readingTime(badPath));
+
+    // Re-enable interaction
+    setState(() {
+      readOnly = false;
+      noGen = false;
+      pathController.text = defaultPath;
+    });
+
+    return false;
+  }
 
   // Set the page title //
 
@@ -116,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'Builder',
       onUpload: (EAGConfig config) async {
         // Disable buttons
-        setState(() => noSpam = false);
+        setState(() => noGen = true);
 
         // Gather everything
         nameController.text = config.appName;
@@ -173,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
             : vscController.text = config.vsCodeConfig!;
 
         // Enable buttons
-        setState(() => noSpam = true);
+        setState(() => noGen = false);
       },
       body: EzScreen(
         alignment: Alignment.topLeft,
@@ -397,7 +436,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   style: textTheme.titleLarge,
                   textAlign: TextAlign.start,
                 ),
-                EzSpacer(vertical: false, space: margin),
+                rowMargin,
                 IconButton(
                   onPressed: () => setState(() => showAdvanced = !showAdvanced),
                   icon: Icon(
@@ -416,6 +455,48 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 children: <Widget>[
                   spacer,
 
+                  // Path picker
+                  Visibility(
+                    visible: isDesktop,
+                    child: EzRow(
+                      children: <Widget>[
+                        // Text
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: singleLineFormWidth,
+                          ),
+                          child: TextFormField(
+                            controller: pathController,
+                            readOnly: readOnly,
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            validator: (String? path) =>
+                                (path == null || path.isEmpty)
+                                    ? 'Path required. Cannot use root folder.'
+                                    : null,
+                            autovalidateMode: AutovalidateMode.onUnfocus,
+                          ),
+                        ),
+                        rowMargin,
+
+                        // Browse
+                        IconButton(
+                          onPressed: () async {
+                            final String? selectedDirectory =
+                                await FilePicker.platform.getDirectoryPath();
+
+                            if (selectedDirectory != null) {
+                              setState(() =>
+                                  pathController.text = selectedDirectory);
+                            }
+                          },
+                          icon: Icon(PlatformIcons(context).folderOpen),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (!removeCopyright) spacer,
+
                   // Copyright config
                   _AdvancedSettingsField(
                     margin: margin,
@@ -428,7 +509,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeCopyright,
                     onRemove: () => setState(() => removeCopyright = true),
                   ),
-                  if (!removeCopyright) spacer,
+                  spacer,
 
                   // LICENSE config
                   _LicensePicker(
@@ -441,7 +522,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       if (picked != null) setState(() => license = picked);
                     },
                   ),
-                  spacer,
+                  if (!removeL10n) spacer,
 
                   // l10n config
                   _AdvancedSettingsField(
@@ -454,7 +535,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeL10n,
                     onRemove: () => setState(() => removeL10n = true),
                   ),
-                  if (!removeL10n) spacer,
+                  if (!removeAnalysis) spacer,
 
                   // Analysis options config
                   _AdvancedSettingsField(
@@ -467,7 +548,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeAnalysis,
                     onRemove: () => setState(() => removeAnalysis = true),
                   ),
-                  if (!removeAnalysis) spacer,
+                  if (!removeVSC) spacer,
 
                   // VS Code launch config
                   _AdvancedSettingsField(
@@ -489,68 +570,71 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
             Center(
               child: EzElevatedIconButton(
-                onPressed: noSpam
-                    ? () async {
+                onPressed: noGen
+                    ? () {}
+                    : () async {
                         if (validName &&
                             pubController.text.isNotEmpty &&
                             (exampleDomain ||
                                 validateDomain(domainController.text) ==
                                     null) &&
-                            descriptionController.text.isNotEmpty) {
-                          context.goNamed(
-                            thruConfigPath,
-                            extra: EAGConfig(
-                              appName: nameController.text,
-                              publisherName: pubController.text,
-                              domainName: exampleDomain
-                                  ? 'com.example'
-                                  : domainController.text,
-                              description: descriptionController.text,
-                              textSettings: textSettings,
-                              layoutSettings: layoutSettings,
-                              colorSettings: colorSettings,
-                              imageSettings: imageSettings,
-                              appDefaults: Map<String, dynamic>.fromEntries(
-                                allKeys.keys.map(
-                                  (String key) => MapEntry<String, dynamic>(
-                                      key, EzConfig.get(key)),
-                                ),
-                              ),
-                              copyright: (removeCopyright ||
-                                      copyrightController.text.isEmpty)
-                                  ? null
-                                  : copyrightController.text,
-                              license: genLicense(
-                                license: license,
+                            descriptionController.text.isNotEmpty &&
+                            (!isDesktop || await checkPath())) {
+                          if (context.mounted) {
+                            context.goNamed(
+                              appGeneratorPath,
+                              extra: EAGConfig(
                                 appName: nameController.text,
-                                publisher: pubController.text,
+                                publisherName: pubController.text,
+                                domainName: exampleDomain
+                                    ? 'com.example'
+                                    : domainController.text,
                                 description: descriptionController.text,
-                                year: currentYear.toString(),
+                                textSettings: textSettings,
+                                layoutSettings: layoutSettings,
+                                colorSettings: colorSettings,
+                                imageSettings: imageSettings,
+                                appDefaults: Map<String, dynamic>.fromEntries(
+                                  allKeys.keys.map(
+                                    (String key) => MapEntry<String, dynamic>(
+                                        key, EzConfig.get(key)),
+                                  ),
+                                ),
+                                copyright: (removeCopyright ||
+                                        copyrightController.text.isEmpty)
+                                    ? null
+                                    : copyrightController.text,
+                                license: pickLicense(
+                                  license: license,
+                                  appName: nameController.text,
+                                  publisher: pubController.text,
+                                  description: descriptionController.text,
+                                  year: currentYear.toString(),
+                                ),
+                                l10nConfig:
+                                    (removeL10n || l10nController.text.isEmpty)
+                                        ? null
+                                        : l10nController.text,
+                                analysisOptions: (removeAnalysis ||
+                                        analysisController.text.isEmpty)
+                                    ? null
+                                    : analysisController.text,
+                                vsCodeConfig:
+                                    (removeVSC || vscController.text.isEmpty)
+                                        ? null
+                                        : vscController.text,
                               ),
-                              l10nConfig:
-                                  (removeL10n || l10nController.text.isEmpty)
-                                      ? null
-                                      : l10nController.text,
-                              analysisOptions: (removeAnalysis ||
-                                      analysisController.text.isEmpty)
-                                  ? null
-                                  : analysisController.text,
-                              vsCodeConfig:
-                                  (removeVSC || vscController.text.isEmpty)
-                                      ? null
-                                      : vscController.text,
-                            ),
-                          );
+                            );
+                          }
                         } else {
-                          setState(() => noSpam = false);
+                          setState(() => noGen = true);
                           await ezSnackBar(
                             context: context,
                             message: 'Some fields are invalid',
                           ).closed;
-                          setState(() => noSpam = true);
+                          setState(() => noGen = false);
                         }
-                      }
-                    : () {},
+                      },
                 icon: Icon(PlatformIcons(context).create),
                 label: 'Generate',
               ),
@@ -609,6 +693,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
     pubController.dispose();
     domainController.dispose();
     descriptionController.dispose();
+    pathController.dispose();
     copyrightController.dispose();
     l10nController.dispose();
     analysisController.dispose();
@@ -804,7 +889,7 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzSpacer buttonMargin = EzSpacer(vertical: false, space: margin);
+    final EzSpacer rowMargin = EzSpacer(vertical: false, space: margin);
 
     return Visibility(
       visible: !removed,
@@ -820,7 +905,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                 style: textTheme.bodyLarge,
                 textAlign: TextAlign.start,
               ),
-              buttonMargin,
+              rowMargin,
               IconButton(
                 onPressed: onHide,
                 icon: Icon(
@@ -828,7 +913,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                 ),
               ),
               if (onRemove != null) ...<Widget>[
-                buttonMargin,
+                rowMargin,
                 IconButton(
                   onPressed: onRemove,
                   icon: Icon(PlatformIcons(context).delete),
@@ -913,7 +998,7 @@ class _LicensePicker extends StatelessWidget {
               style: textTheme.bodyLarge,
               textAlign: TextAlign.start,
             ),
-            EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
+            EzSpacer(vertical: false, space: margin),
             IconButton(
               onPressed: onHide,
               icon: Icon(
