@@ -10,11 +10,8 @@ import 'package:efui_bios/efui_bios.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:file_saver/file_saver.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ThruConfigScreen extends StatefulWidget {
   final EAGConfig config;
@@ -28,8 +25,6 @@ class ThruConfigScreen extends StatefulWidget {
 class _ThruConfigScreenState extends State<ThruConfigScreen> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
@@ -42,14 +37,6 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
-
-  late final String defaultPath = platform == TargetPlatform.windows
-      ? '${Platform.environment['UserProfile']}\\Documents'
-      : '${Platform.environment['HOME']}/Documents';
-
-  late final TextEditingController pathController =
-      TextEditingController(text: defaultPath);
-  bool readOnly = false;
 
   late Widget centerPiece = loadingPage;
 
@@ -95,82 +82,8 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
-  /// Confirm func for the project directory alert actions
-  void usePath(BuildContext dialogContext) async {
-    const String message = 'Invalid path';
-
-    final bool validPath = await Directory(pathController.text).exists();
-    if (validPath) {
-      if (dialogContext.mounted) {
-        Navigator.of(dialogContext).pop(pathController.text);
-      }
-    } else {
-      // Disable interaction
-      setState(() {
-        readOnly = true;
-        pathController.text = message;
-      });
-
-      // Wait a sec
-      await Future<void>.delayed(readingTime(message));
-
-      // Allow
-      setState(() {
-        readOnly = false;
-        pathController.text = defaultPath;
-      });
-    }
-  }
-
-  /// Generate the new app!
-  void genCode() async {
-    final String? userPath = await showPlatformDialog(
-      context: context,
-      builder: (BuildContext pathContext) {
-        return EzAlertDialog(
-          title: const Text('Confirm project directory'),
-          content: EzScrollView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[],
-          ),
-          materialActions: <Widget>[
-            EzTextButton(
-              onPressed: () => usePath(pathContext),
-              text: 'Done',
-            ),
-            EzTextButton(
-              onPressed: () {
-                Navigator.of(pathContext).pop();
-                Navigator.of(context).pop();
-              },
-              text: 'Cancel',
-            ),
-          ],
-          cupertinoActions: <CupertinoDialogAction>[
-            CupertinoDialogAction(
-              onPressed: () => usePath(pathContext),
-              child: const Text('Done'),
-            ),
-            CupertinoDialogAction(
-              onPressed: () {
-                Navigator.of(pathContext).pop();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-          ],
-          needsClose: false,
-        );
-      },
-    );
-    if (userPath == null || userPath.isEmpty) {
-      setState(() {
-        errorMessage = 'Path required. Cannot use root folder.';
-        centerPiece = failurePage;
-      });
-      return;
-    }
-
+  /// Run Flutter, Run!
+  void generateStuff() async {
     late final ProcessResult? runResult;
     try {
       runResult = await Process.run(
@@ -182,7 +95,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           widget.config.appName,
         ],
         runInShell: true,
-        workingDirectory: userPath,
+        workingDirectory: widget.config.genPath,
       );
     } catch (e) {
       setState(() {
@@ -196,7 +109,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         : setState(() => centerPiece = failurePage);
   }
 
-  /// Runs immediately after a successful [genCode]
+  /// Runs immediately after a successful [generateStuff]
   Future<void> deleteStuff() async {
     replaceStuff();
   }
@@ -210,64 +123,10 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   /// Last method before completion
   Future<void> addStuff() async {
     setState(() {
-      successMessage = '${widget.config.appName} is ready in\n$userPath';
+      successMessage =
+          '${widget.config.appName} is ready in\n${widget.config.genPath}';
       centerPiece = successPage;
     });
-  }
-
-  /// (Desktop only) confirm if the user wants to...
-  /// generate code, save the config, or cancel
-  Future<dynamic> confirm() async {
-    return await showPlatformDialog(
-      context: context,
-      builder: (BuildContext confirmContext) {
-        return EzAlertDialog(
-          title: const Text('Would you like to...'),
-          contents: <Widget>[
-            // Generate code
-            EzElevatedIconButton(
-              label: 'Generate ${widget.config.appName}',
-              textAlign: TextAlign.center,
-              icon: Icon(PlatformIcons(context).folderOpen),
-              onPressed: () {
-                Navigator.of(confirmContext).pop(true);
-                genCode();
-              },
-            ),
-            spacer,
-
-            // Save config
-            EzElevatedIconButton(
-              label: 'Save config',
-              icon: const Icon(Icons.save),
-              onPressed: () {
-                Navigator.of(confirmContext).pop(false);
-                archive();
-              },
-            ),
-          ],
-          materialActions: <Widget>[
-            EzTextButton(
-              text: 'Cancel',
-              onPressed: () {
-                Navigator.of(confirmContext).pop(null);
-                Navigator.of(context).pop(false);
-              },
-            ),
-          ],
-          cupertinoActions: <CupertinoDialogAction>[
-            CupertinoDialogAction(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(confirmContext).pop(null);
-                Navigator.of(context).pop(false);
-              },
-            ),
-          ],
-          needsClose: false,
-        );
-      },
-    );
   }
 
   // Define custom Widgets //
@@ -321,7 +180,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   void initState() {
     super.initState();
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => isDesktop ? confirm() : archive());
+        .addPostFrameCallback((_) => isDesktop ? generateStuff() : archive());
   }
 
   // Return the build //
@@ -331,10 +190,4 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         title: 'Generator',
         body: EzScreen(child: centerPiece),
       );
-
-  @override
-  void dispose() {
-    pathController.dispose();
-    super.dispose();
-  }
 }
