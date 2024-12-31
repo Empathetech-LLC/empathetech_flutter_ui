@@ -6,5 +6,5 @@
 /// Open UI
 const String appTitle = 'Open UI';
 
-/// 1.5.2
-const String appVersion = '1.5.2';
+/// 2.0.0
+const String appVersion = '2.0.0';
