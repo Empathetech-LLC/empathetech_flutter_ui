@@ -104,24 +104,62 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
       });
     }
 
-    runResult != null
+    (runResult != null && runResult.exitCode == 0)
         ? deleteStuff()
-        : setState(() => centerPiece = failurePage);
+        : setState(() {
+            errorMessage = runResult?.stderr.toString() ?? errorMessage;
+            centerPiece = failurePage;
+          });
   }
 
   /// Runs immediately after a successful [generateStuff]
   Future<void> deleteStuff() async {
-    replaceStuff();
+    late final ProcessResult? runResult;
+    try {
+      runResult = await Process.run(
+        'rm -rf',
+        <String>[
+          'lib',
+          'analysis_options.yaml',
+          'pubspec.lock',
+          'pubspec.yaml',
+          'README.md',
+        ],
+        runInShell: true,
+        workingDirectory: widget.config.genPath,
+      );
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Something went wrong...\n\n${e.toString()}';
+        centerPiece = failurePage;
+      });
+    }
+
+    (runResult != null && runResult.exitCode == 0)
+        ? addStuff()
+        : setState(() {
+            errorMessage = runResult?.stderr.toString() ?? errorMessage;
+            centerPiece = failurePage;
+          });
   }
 
   /// Runs immediately after a successful [deleteStuff]
-  Future<void> replaceStuff() async {
-    addStuff();
+  Future<void> addStuff() async {
+    await genREADME(widget.config);
+    await genAppVersion(widget.config);
+    await genLicense(widget.config);
+    await genPubspec(widget.config);
+    await genLib(widget.config);
+    if (widget.config.l10nConfig != null) await genL10n(widget.config);
+    if (widget.config.analysisOptions != null) await genAnalysis(widget.config);
+    if (widget.config.vsCodeConfig != null) await genVSCode(widget.config);
+    await genIntegrationTests(widget.config);
+    runStuff();
   }
 
-  /// Runs immediately after a successful [replaceStuff]
+  /// Runs immediately after a successful [addStuff]
   /// Last method before completion
-  Future<void> addStuff() async {
+  Future<void> runStuff() async {
     setState(() {
       successMessage =
           '${widget.config.appName} is ready in\n${widget.config.genPath}';
