@@ -82,68 +82,45 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
+  void onFailure(String message) => setState(() {
+        errorMessage = 'Something went wrong...\n$message';
+        centerPiece = failurePage;
+      });
+
   /// Run Flutter, Run!
-  void generateStuff() async {
-    late final ProcessResult? runResult;
-    try {
-      runResult = await Process.run(
-        'flutter',
-        <String>[
-          'create',
-          '--org',
-          widget.config.domainName,
-          widget.config.appName,
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
-    } catch (e) {
-      setState(() {
-        errorMessage = 'Something went wrong...\n\n${e.toString()}';
-        centerPiece = failurePage;
-      });
-    }
-
-    (runResult != null && runResult.exitCode == 0)
-        ? deleteStuff()
-        : setState(() {
-            errorMessage = runResult?.stderr.toString() ?? errorMessage;
-            centerPiece = failurePage;
-          });
+  void genStuff() async {
+    cli(
+      exe: 'flutter',
+      args: <String>[
+        'create',
+        '--org',
+        widget.config.domainName,
+        widget.config.appName,
+      ],
+      dir: widget.config.genPath!,
+      onSuccess: delStuff,
+      onFailure: onFailure,
+    );
   }
 
-  /// Runs immediately after a successful [generateStuff]
-  Future<void> deleteStuff() async {
-    late final ProcessResult? runResult;
-    try {
-      runResult = await Process.run(
-        'rm -rf',
-        <String>[
-          'lib',
-          'analysis_options.yaml',
-          'pubspec.lock',
-          'pubspec.yaml',
-          'README.md',
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
-    } catch (e) {
-      setState(() {
-        errorMessage = 'Something went wrong...\n\n${e.toString()}';
-        centerPiece = failurePage;
-      });
-    }
-
-    (runResult != null && runResult.exitCode == 0)
-        ? addStuff()
-        : setState(() {
-            errorMessage = runResult?.stderr.toString() ?? errorMessage;
-            centerPiece = failurePage;
-          });
+  /// Runs immediately after a successful [genStuff]
+  Future<void> delStuff() async {
+    cli(
+      exe: 'rm -rf',
+      args: <String>[
+        'lib',
+        'analysis_options.yaml',
+        'pubspec.lock',
+        'pubspec.yaml',
+        'README.md',
+      ],
+      dir: widget.config.genPath!,
+      onSuccess: addStuff,
+      onFailure: onFailure,
+    );
   }
 
-  /// Runs immediately after a successful [deleteStuff]
+  /// Runs immediately after a successful [delStuff]
   Future<void> addStuff() async {
     await genREADME(widget.config);
     await genAppVersion(widget.config);
@@ -160,11 +137,43 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   /// Runs immediately after a successful [addStuff]
   /// Last method before completion
   Future<void> runStuff() async {
-    setState(() {
-      successMessage =
-          '${widget.config.appName} is ready in\n${widget.config.genPath}';
-      centerPiece = successPage;
-    });
+    late ProcessResult runResult;
+    try {
+      runResult = await Process.run(
+        'flutter',
+        <String>[
+          'clean',
+        ],
+        runInShell: true,
+        workingDirectory: widget.config.genPath,
+      );
+      runResult = await Process.run(
+        'flutter',
+        <String>[
+          'pub upgrade --major-versions',
+        ],
+        runInShell: true,
+        workingDirectory: widget.config.genPath,
+      );
+      runResult = await Process.run(
+        'flutter',
+        <String>[
+          'pub upgrade --tighten',
+        ],
+        runInShell: true,
+        workingDirectory: widget.config.genPath,
+      );
+    } catch (e) {
+      onFailure(e.toString());
+    }
+
+    runResult.exitCode == 0
+        ? setState(() {
+            successMessage =
+                '${widget.config.appName} is ready in\n${widget.config.genPath}';
+            centerPiece = successPage;
+          })
+        : onFailure(runResult.stderr.toString());
   }
 
   // Define custom Widgets //
@@ -218,14 +227,12 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   void initState() {
     super.initState();
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => isDesktop ? generateStuff() : archive());
+        .addPostFrameCallback((_) => isDesktop ? genStuff() : archive());
   }
 
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(
-        title: 'Generator',
-        body: EzScreen(child: centerPiece),
-      );
+  Widget build(_) =>
+      OpenUIScaffold(title: 'Generator', body: EzScreen(child: centerPiece));
 }
