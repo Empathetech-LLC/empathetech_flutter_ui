@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/cupertino.dart';
-
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -12,7 +10,9 @@ import 'package:efui_bios/efui_bios.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:file_saver/file_saver.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -43,6 +43,16 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
 
+  late final String defaultPath = platform == TargetPlatform.windows
+      ? '${Platform.environment['UserProfile']}\\Documents'
+      : '${Platform.environment['HOME']}/Documents';
+
+  late final TextEditingController pathController =
+      TextEditingController(text: defaultPath);
+
+  bool validPath = true;
+  bool readOnly = false;
+
   late Widget centerPiece = loadingPage;
 
   late String successMessage =
@@ -52,60 +62,14 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
 
   String errorMessage = 'Something went wrong.\nPlease try again.';
 
-  late final TextEditingController pathController = TextEditingController(
-      text: platform == TargetPlatform.windows
-          ? '${Platform.environment['UserProfile']}\\Documents'
-          : '${Platform.environment['HOME']}/Documents');
-
-  // Define custom Widgets //
-
-  late final Widget loadingPage = Center(
-    child: SizedBox(
-      height: heightOf(context) / 2,
-      child: const EmpathetechLoadingAnimation(
-        height: double.infinity,
-        semantics: 'TODO',
-      ),
-    ),
-  );
-
-  late final Widget successPage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Success!',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        successMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
-
-  late final Widget failurePage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Failure',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        errorMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
-
   // Define custom functions //
 
+  /// Save the config
   void archive() async {
     late final String savedConfig;
     try {
       savedConfig = await FileSaver.instance.saveFile(
-        name: '${widget.config.appName}-eag-config.json',
+        name: '${widget.config.appName}_eag_config.json',
         bytes: utf8.encode(jsonEncode(widget.config.toJson())),
         mimeType: MimeType.json,
       );
@@ -115,12 +79,12 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
       setState(() {});
     }
 
-    // Check for a String that ends in .json
     savedConfig.endsWith('.json')
         ? setState(() => centerPiece = successPage)
         : setState(() => centerPiece = failurePage);
   }
 
+  /// Human readable path for saved config
   String archivePath() {
     switch (platform) {
       case TargetPlatform.android:
@@ -132,6 +96,35 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
+  /// Validate user configured path for code generation
+  void validatePath(String path) async {
+    final bool exists = await Directory(path).exists();
+    setState(() => validPath = exists);
+  }
+
+  /// Confirm func for the project directory alert actions
+  void usePath() async {
+    const String message = 'Invalid path';
+
+    if (validPath) {
+      Navigator.of(context).pop();
+    } else {
+      // Disable interaction
+      readOnly = true;
+      pathController.text = message;
+      setState(() {});
+
+      // Wait a sec
+      await Future<Duration>.delayed(readingTime(message));
+
+      // Retry
+      readOnly = false;
+      pathController.text = '';
+      setState(() {});
+    }
+  }
+
+  /// Generate the new app!
   void genCode() async {
     await showPlatformDialog(
       context: context,
@@ -140,21 +133,29 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           title: const Text('Confirm project directory'),
           content: TextFormField(
             controller: pathController,
+            readOnly: readOnly,
             textAlign: TextAlign.start,
             maxLines: 1,
-            // validator: pathValidation(),
-            // autovalidateMode: AutovalidateMode.onUnfocus,
+            validator: (String? path) {
+              if (path == null || path.isEmpty) {
+                return 'Path required. Cannot use root folder.';
+              }
+              validatePath(path);
+
+              return validPath ? null : 'Invalid path';
+            },
+            autovalidateMode: AutovalidateMode.onUnfocus,
           ),
           materialActions: <Widget>[
             EzTextButton(
+              onPressed: usePath,
               text: 'Done',
-              onPressed: () => Navigator.of(pathContext).pop(),
             ),
           ],
           cupertinoActions: <CupertinoDialogAction>[
             CupertinoDialogAction(
+              onPressed: usePath,
               child: const Text('Done'),
-              onPressed: () => Navigator.of(pathContext).pop(),
             ),
           ],
           needsClose: true,
@@ -186,6 +187,8 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         : setState(() => centerPiece = failurePage);
   }
 
+  /// (Desktop only) confirm if the user wants to...
+  /// generate code, save the config, or cancel
   Future<dynamic> confirm() async {
     return await showPlatformDialog(
       context: context,
@@ -196,6 +199,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
             // Generate code
             EzElevatedIconButton(
               label: 'Generate ${widget.config.appName}',
+              textAlign: TextAlign.center,
               icon: Icon(PlatformIcons(context).folderOpen),
               onPressed: () {
                 Navigator.of(confirmContext).pop(true);
@@ -214,11 +218,74 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
               },
             ),
           ],
+          materialActions: <Widget>[
+            EzTextButton(
+              text: 'Cancel',
+              onPressed: () {
+                Navigator.of(confirmContext).pop(null);
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+          cupertinoActions: <CupertinoDialogAction>[
+            CupertinoDialogAction(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(confirmContext).pop(null);
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
           needsClose: false,
         );
       },
     );
   }
+
+  // Define custom Widgets //
+
+  /// Loading animation
+  late final Widget loadingPage = Center(
+    child: SizedBox(
+      height: heightOf(context) / 2,
+      child: const EmpathetechLoadingAnimation(
+        height: double.infinity,
+        semantics: 'TODO',
+      ),
+    ),
+  );
+
+  /// Tells user what to do next
+  late final Widget successPage = EzScrollView(
+    children: <Widget>[
+      Text(
+        'Success!',
+        style: textTheme.headlineLarge,
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        successMessage,
+        style: notificationStyle,
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
+
+  /// Displays the error
+  late final Widget failurePage = EzScrollView(
+    children: <Widget>[
+      Text(
+        'Failure',
+        style: textTheme.headlineLarge,
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        errorMessage,
+        style: notificationStyle,
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
 
   // Init //
 
