@@ -129,15 +129,42 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
       builder: (BuildContext pathContext) {
         return EzAlertDialog(
           title: const Text('Confirm project directory'),
-          content: TextFormField(
-            controller: pathController,
-            readOnly: readOnly,
-            textAlign: TextAlign.start,
-            maxLines: 1,
-            validator: (String? path) => (path == null || path.isEmpty)
-                ? 'Path required. Cannot use root folder.'
-                : null,
-            autovalidateMode: AutovalidateMode.onUnfocus,
+          content: EzScrollView(
+            scrollDirection: Axis.horizontal,
+            primary: true,
+            children: <Widget>[
+              IconButton(
+                onPressed: () async {
+                  final String? selectedDirectory =
+                      await FilePicker.platform.getDirectoryPath();
+
+                  if (selectedDirectory != null) {
+                    setState(() => pathController.text = selectedDirectory);
+                  }
+                },
+                icon: Icon(PlatformIcons(context).folderOpen),
+              ),
+              EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: measureText(
+                    '/Users/username/Documents/Subfolder',
+                    context: context,
+                    style: textTheme.bodyLarge,
+                  ).width,
+                ),
+                child: TextFormField(
+                  controller: pathController,
+                  readOnly: readOnly,
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  validator: (String? path) => (path == null || path.isEmpty)
+                      ? 'Path required. Cannot use root folder.'
+                      : null,
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                ),
+              ),
+            ],
           ),
           materialActions: <Widget>[
             EzTextButton(
@@ -198,7 +225,10 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
 
     runResult != null
-        ? setState(() => centerPiece = successPage)
+        ? setState(() {
+            successMessage = '${widget.config.appName} is ready in\n$userPath';
+            centerPiece = successPage;
+          })
         : setState(() => centerPiece = failurePage);
   }
 
