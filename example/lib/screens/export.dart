@@ -6,6 +6,7 @@
 // Exports //
 
 export 'error.dart';
+export 'generator.dart';
 export 'home.dart';
 
 export 'settings/settings_home.dart';
@@ -14,9 +15,10 @@ export 'settings/image_settings.dart';
 export 'settings/color_settings.dart';
 export 'settings/layout_settings.dart';
 
-export 'generator/thru_config.dart';
-
 // Route names //
+
+/// 'app-generator'
+const String appGeneratorPath = 'app-generator';
 
 /// 'settings-home'
 const String settingsHomePath = 'settings-home';
@@ -32,6 +34,3 @@ const String colorSettingsPath = 'color-settings';
 
 /// 'layout-settings'
 const String layoutSettingsPath = 'layout-settings';
-
-/// 'generator-thru-config'
-const String thruConfigPath = 'generator-thru-config';
