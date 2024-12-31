@@ -3,5 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
+export 'code_gen.dart';
 export 'eag_config.dart';
 export 'licenses.dart';
