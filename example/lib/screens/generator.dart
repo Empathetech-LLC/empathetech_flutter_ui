@@ -3,8 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../structs/export.dart';
-import '../../widgets/export.dart';
+import '../structs/export.dart';
+import '../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:io';
@@ -131,39 +131,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           title: const Text('Confirm project directory'),
           content: EzScrollView(
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              IconButton(
-                onPressed: () async {
-                  final String? selectedDirectory =
-                      await FilePicker.platform.getDirectoryPath();
-
-                  if (selectedDirectory != null) {
-                    setState(() => pathController.text = selectedDirectory);
-                  }
-                },
-                icon: Icon(PlatformIcons(context).folderOpen),
-              ),
-              EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: measureText(
-                    '/Users/username/Documents/Subfolder',
-                    context: context,
-                    style: textTheme.bodyLarge,
-                  ).width,
-                ),
-                child: TextFormField(
-                  controller: pathController,
-                  readOnly: readOnly,
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  validator: (String? path) => (path == null || path.isEmpty)
-                      ? 'Path required. Cannot use root folder.'
-                      : null,
-                  autovalidateMode: AutovalidateMode.onUnfocus,
-                ),
-              ),
-            ],
+            children: <Widget>[],
           ),
           materialActions: <Widget>[
             EzTextButton(
@@ -224,11 +192,27 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
 
     runResult != null
-        ? setState(() {
-            successMessage = '${widget.config.appName} is ready in\n$userPath';
-            centerPiece = successPage;
-          })
+        ? deleteStuff()
         : setState(() => centerPiece = failurePage);
+  }
+
+  /// Runs immediately after a successful [genCode]
+  Future<void> deleteStuff() async {
+    replaceStuff();
+  }
+
+  /// Runs immediately after a successful [deleteStuff]
+  Future<void> replaceStuff() async {
+    addStuff();
+  }
+
+  /// Runs immediately after a successful [replaceStuff]
+  /// Last method before completion
+  Future<void> addStuff() async {
+    setState(() {
+      successMessage = '${widget.config.appName} is ready in\n$userPath';
+      centerPiece = successPage;
+    });
   }
 
   /// (Desktop only) confirm if the user wants to...
