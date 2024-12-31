@@ -99,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool autoEmu = false;
 
+  /// Set to false when buttons are "thinking"
   bool noSpam = true;
 
   // Set the page title //
@@ -116,8 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return OpenUIScaffold(
       title: 'Builder',
       onUpload: (EAGConfig config) async {
+        // Disable buttons
         setState(() => noSpam = false);
 
+        // Gather everything
         nameController.text = config.appName;
         namePreview = config.appName;
         validName = true;
@@ -141,7 +144,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ? removeCopyright = true
             : copyrightController.text = config.copyright!;
 
-        // Update license
+        if (config.license.contains('GNU General Public License')) {
+          license = gnuKey;
+        } else if (config.license.contains('MIT License')) {
+          license = mitKey;
+        } else if (config.license.contains('ISC License')) {
+          license = iscKey;
+        } else if (config.license.contains('Apache License')) {
+          license = apacheKey;
+        } else if (config.license.contains('Mozilla Public License')) {
+          license = mozillaKey;
+        } else if (config.license.contains('free and unencumbered')) {
+          license = unlicenseKey;
+        } else if (config.license.contains('WHAT THE FU')) {
+          license = dwtfywKey;
+        } else {
+          license = gnuKey;
+        }
 
         config.l10nConfig == null
             ? removeL10n = true
@@ -157,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         if (config.autoEmulate != null) autoEmu = config.autoEmulate!;
 
+        // Enable buttons
         setState(() => noSpam = true);
       },
       body: EzScreen(
@@ -229,8 +249,6 @@ class _HomeScreenState extends State<HomeScreen> {
               style: textTheme.titleLarge,
               textAlign: TextAlign.start,
             ),
-
-            // Field
             ConstrainedBox(
               constraints: BoxConstraints(maxWidth: singleLineFormWidth),
               child: Column(
@@ -286,14 +304,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Settings selection //
 
-            // Title
             Text(
               'Include',
               style: textTheme.titleLarge,
               textAlign: TextAlign.start,
             ),
-
-            // Options
             Padding(
               padding: EdgeInsets.symmetric(horizontal: margin),
               child: Column(
@@ -341,7 +356,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             divider,
 
-            // Default config notice
+            // Default app config //
+
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
@@ -470,7 +486,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   ),
                   if (isDesktop) spacer,
 
-                  // Emulate
+                  // Auto emulate?
                   Visibility(
                     visible: isDesktop,
                     child: EzRow(
@@ -548,7 +564,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                   ? null
                                   : analysisController.text,
                               vsCodeConfig:
-                                  removeVSC ? null : vscController.text,
+                                  (removeVSC || vscController.text.isEmpty)
+                                      ? null
+                                      : vscController.text,
                               autoEmulate: isDesktop ? autoEmu : null,
                             ),
                           );
@@ -629,6 +647,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
     super.dispose();
   }
 
+  /// .vscode launch config with debug run and release install
   late String vscDefault = '''{
   "version": "0.2.0",
   "configurations": [
@@ -649,6 +668,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
   ]
 }''';
 
+  /// Empathetech's recommended l10n config
   static const String l10nDefault = '''arb-dir: lib/l10n
 output-dir: lib/l10n
 template-arb-file: lang_en.arb
@@ -661,6 +681,7 @@ required-resource-attributes: false
 format: true
 suppress-warnings: false''';
 
+  /// Empathetech's recommended lints
   static const String analysisDefault =
       '''include: package:flutter_lints/flutter.yaml
 
@@ -701,6 +722,8 @@ linter:
     use_build_context_synchronously: true
     use_full_hex_values_for_flutter_colors: true''';
 
+  /// Gets copied to the top of every dart file
+  /// Includes the app name, publisher, and year of generation
   late String copyrightDefault = '''/* $namePreview
  * Copyright (c) $currentYear $pubPreview. All rights reserved.
  * See LICENSE for distribution and usage details.
