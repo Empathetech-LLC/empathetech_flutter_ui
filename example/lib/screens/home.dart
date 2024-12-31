@@ -97,8 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
-  bool autoEmu = false;
-
   /// Set to false when buttons are "thinking"
   bool noSpam = true;
 
@@ -173,8 +171,6 @@ class _HomeScreenState extends State<HomeScreen> {
         config.vsCodeConfig == null
             ? removeVSC = true
             : vscController.text = config.vsCodeConfig!;
-
-        if (config.autoEmulate != null) autoEmu = config.autoEmulate!;
 
         // Enable buttons
         setState(() => noSpam = true);
@@ -484,30 +480,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     removed: removeVSC,
                     onRemove: () => setState(() => removeVSC = true),
                   ),
-                  if (isDesktop) spacer,
-
-                  // Auto emulate?
-                  Visibility(
-                    visible: isDesktop,
-                    child: EzRow(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Run Android emulator when complete (may require install)',
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.start,
-                        ),
-                        Checkbox(
-                          value: autoEmu,
-                          onChanged: (bool? value) async {
-                            if (value == null) return;
-                            setState(() => autoEmu = value);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -567,7 +539,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                   (removeVSC || vscController.text.isEmpty)
                                       ? null
                                       : vscController.text,
-                              autoEmulate: isDesktop ? autoEmu : null,
                             ),
                           );
                         } else {
@@ -627,8 +598,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
           showVSC = false;
           removeVSC = false;
           vscController.text = vscDefault;
-
-          autoEmu = false;
         }),
       ),
     );

@@ -21,8 +21,6 @@ const String l10nConfigKey = 'l10nConfig';
 const String analysisOptionsKey = 'analysisOptions';
 const String vsCodeConfigKey = 'vsCodeConfig';
 
-const String autoEmulateKey = 'autoEmulate';
-
 /// JSON-serializable configuration for an Empathetech app
 class EAGConfig {
   final String appName;
@@ -43,8 +41,6 @@ class EAGConfig {
   final String? analysisOptions;
   final String? vsCodeConfig;
 
-  final bool? autoEmulate;
-
   EAGConfig({
     required this.appName,
     required this.publisherName,
@@ -60,7 +56,6 @@ class EAGConfig {
     this.l10nConfig,
     this.analysisOptions,
     this.vsCodeConfig,
-    this.autoEmulate,
   });
 
   Map<String, dynamic> toJson() {
@@ -79,7 +74,6 @@ class EAGConfig {
       l10nConfigKey: l10nConfig,
       analysisOptionsKey: analysisOptions,
       vsCodeConfigKey: vsCodeConfig,
-      autoEmulateKey: autoEmulate,
     };
   }
 
@@ -99,7 +93,6 @@ class EAGConfig {
       l10nConfig: json[l10nConfigKey] as String?,
       analysisOptions: json[analysisOptionsKey] as String?,
       vsCodeConfig: json[vsCodeConfigKey] as String?,
-      autoEmulate: json[autoEmulateKey] as bool?,
     );
   }
 
@@ -120,7 +113,6 @@ class EAGConfig {
   $l10nConfigKey: $l10nConfig,
   $analysisOptionsKey: $analysisOptions,
   $vsCodeConfigKey: $vsCodeConfig,
-  $autoEmulateKey: $autoEmulate,
 }''';
   }
 }
