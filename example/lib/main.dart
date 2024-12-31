@@ -96,8 +96,8 @@ final GoRouter router = GoRouter(
       builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
         GoRoute(
-          path: thruConfigPath,
-          name: thruConfigPath,
+          path: appGeneratorPath,
+          name: appGeneratorPath,
           builder: (_, GoRouterState state) {
             final EAGConfig config = state.extra as EAGConfig;
             return ThruConfigScreen(config: config);
