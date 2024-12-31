@@ -11,6 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class EzUpdater extends StatefulWidget {
+  /// Checks for Open UI updates
+  /// If yes, it will become an [EzElevatedIconButton] that links to the latest version
+  /// Defaults to a [SizedBox.shrink]
   const EzUpdater({super.key});
 
   @override
@@ -32,6 +35,7 @@ class _EzUpdaterState extends State<EzUpdater> {
 
   // Define custom functions //
 
+  /// Check for Open UI updates
   void checkVersion() async {
     final http.Response response = await http.get(Uri.parse(appVersionLink));
 

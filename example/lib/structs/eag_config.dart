@@ -23,6 +23,7 @@ const String vsCodeConfigKey = 'vsCodeConfig';
 
 const String autoEmulateKey = 'autoEmulate';
 
+/// JSON-serializable configuration for an Empathetech app
 class EAGConfig {
   final String appName;
   final String publisherName;
