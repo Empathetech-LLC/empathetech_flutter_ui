@@ -49,8 +49,6 @@ class _ThruConfigScreenState extends State<ThruConfigScreen> {
 
   late final TextEditingController pathController =
       TextEditingController(text: defaultPath);
-
-  bool validPath = true;
   bool readOnly = false;
 
   late Widget centerPiece = loadingPage;
@@ -74,9 +72,10 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         mimeType: MimeType.json,
       );
     } catch (e) {
-      errorMessage = 'Something went wrong...\n\n${e.toString()}';
-      centerPiece = failurePage;
-      setState(() {});
+      setState(() {
+        errorMessage = 'Something went wrong...\n\n${e.toString()}';
+        centerPiece = failurePage;
+      });
     }
 
     savedConfig.endsWith('.json')
@@ -96,37 +95,36 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
-  /// Validate user configured path for code generation
-  void validatePath(String path) async {
-    final bool exists = await Directory(path).exists();
-    setState(() => validPath = exists);
-  }
-
   /// Confirm func for the project directory alert actions
-  void usePath() async {
+  void usePath(BuildContext dialogContext) async {
     const String message = 'Invalid path';
 
+    final bool validPath = await Directory(pathController.text).exists();
     if (validPath) {
-      Navigator.of(context).pop();
+      if (dialogContext.mounted) {
+        Navigator.of(dialogContext).pop(pathController.text);
+      }
     } else {
       // Disable interaction
-      readOnly = true;
-      pathController.text = message;
-      setState(() {});
+      setState(() {
+        readOnly = true;
+        pathController.text = message;
+      });
 
       // Wait a sec
-      await Future<Duration>.delayed(readingTime(message));
+      await Future<void>.delayed(readingTime(message));
 
-      // Retry
-      readOnly = false;
-      pathController.text = '';
-      setState(() {});
+      // Allow
+      setState(() {
+        readOnly = false;
+        pathController.text = defaultPath;
+      });
     }
   }
 
   /// Generate the new app!
   void genCode() async {
-    await showPlatformDialog(
+    final String? userPath = await showPlatformDialog(
       context: context,
       builder: (BuildContext pathContext) {
         return EzAlertDialog(
@@ -136,32 +134,48 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
             readOnly: readOnly,
             textAlign: TextAlign.start,
             maxLines: 1,
-            validator: (String? path) {
-              if (path == null || path.isEmpty) {
-                return 'Path required. Cannot use root folder.';
-              }
-              validatePath(path);
-
-              return validPath ? null : 'Invalid path';
-            },
+            validator: (String? path) => (path == null || path.isEmpty)
+                ? 'Path required. Cannot use root folder.'
+                : null,
             autovalidateMode: AutovalidateMode.onUnfocus,
           ),
           materialActions: <Widget>[
             EzTextButton(
-              onPressed: usePath,
+              onPressed: () => usePath(pathContext),
               text: 'Done',
+            ),
+            EzTextButton(
+              onPressed: () {
+                Navigator.of(pathContext).pop();
+                Navigator.of(context).pop();
+              },
+              text: 'Cancel',
             ),
           ],
           cupertinoActions: <CupertinoDialogAction>[
             CupertinoDialogAction(
-              onPressed: usePath,
+              onPressed: () => usePath(pathContext),
               child: const Text('Done'),
             ),
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.of(pathContext).pop();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
           ],
-          needsClose: true,
+          needsClose: false,
         );
       },
     );
+    if (userPath == null || userPath.isEmpty) {
+      setState(() {
+        errorMessage = 'Path required. Cannot use root folder.';
+        centerPiece = failurePage;
+      });
+      return;
+    }
 
     late final ProcessResult? runResult;
     try {
@@ -174,12 +188,13 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           widget.config.appName,
         ],
         runInShell: true,
-        workingDirectory: pathController.text,
+        workingDirectory: userPath,
       );
     } catch (e) {
-      errorMessage = 'Something went wrong...\n\n${e.toString()}';
-      centerPiece = failurePage;
-      setState(() {});
+      setState(() {
+        errorMessage = 'Something went wrong...\n\n${e.toString()}';
+        centerPiece = failurePage;
+      });
     }
 
     runResult != null
