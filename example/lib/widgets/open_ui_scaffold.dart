@@ -18,7 +18,7 @@ class OpenUIScaffold extends StatelessWidget {
   final bool showSettings;
 
   /// Whether to include [UploadButton] in the [MenuAnchor]
-  final void Function(EAGConfig)? onUpload;
+  final Future<void> Function(EAGConfig)? onUpload;
 
   /// [Scaffold.body] passthrough
   final Widget body;

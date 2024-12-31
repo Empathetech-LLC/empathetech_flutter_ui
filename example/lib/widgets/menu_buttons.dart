@@ -32,7 +32,7 @@ class SettingsButton extends StatelessWidget {
 
 class UploadButton extends StatelessWidget {
   final BuildContext parentContext;
-  final void Function(EAGConfig) onUpload;
+  final Future<void> Function(EAGConfig) onUpload;
 
   /// [EzMenuButton] for uploading a config
   const UploadButton(
@@ -57,7 +57,7 @@ class UploadButton extends StatelessWidget {
               final Map<String, dynamic> jsonData = jsonDecode(fileContent);
               final EAGConfig config = EAGConfig.fromJson(jsonData);
 
-              onUpload(config);
+              await onUpload(config);
             } catch (e) {
               if (context.mounted) {
                 ezSnackBar(
