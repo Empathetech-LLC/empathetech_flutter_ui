@@ -131,7 +131,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           title: const Text('Confirm project directory'),
           content: EzScrollView(
             scrollDirection: Axis.horizontal,
-            primary: true,
             children: <Widget>[
               IconButton(
                 onPressed: () async {
