@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-String genLicense({
+String pickLicense({
   required String license,
   required String appName,
   required String publisher,
