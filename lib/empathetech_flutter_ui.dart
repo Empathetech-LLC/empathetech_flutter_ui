@@ -17,6 +17,7 @@ export 'src/consts/google_fonts.dart';
 // Functions //
 
 // General
+export 'src/functions/cli.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
