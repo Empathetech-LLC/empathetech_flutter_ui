@@ -3,9 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
+import './shared.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
-import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -25,10 +25,7 @@ class _SaveScreenState extends State<SaveScreen> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
-
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? notificationStyle =
-      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
   // Define the build data //
 
@@ -37,14 +34,7 @@ class _SaveScreenState extends State<SaveScreen> {
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
 
-  late Widget centerPiece = loadingPage;
-
-  late String successMessage =
-      '''\nYour configuration has been saved to ${archivePath()}
-
-Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
-
-  String errorMessage = '\nSomething went wrong.\nPlease try again.';
+  late Widget centerPiece = loadingPage(context);
 
   // Define custom functions //
 
@@ -58,19 +48,26 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         mimeType: MimeType.json,
       );
     } catch (e) {
-      setState(() {
-        errorMessage = '\nSomething went wrong...\n\n${e.toString()}';
-        centerPiece = failurePage;
-      });
+      setState(() => centerPiece = failurePage(
+            context,
+            '\nSomething went wrong...\n\n${e.toString()}',
+            textTheme,
+          ));
     }
 
     savedConfig.endsWith('.json')
-        ? setState(() => centerPiece = successPage)
-        : setState(() {
-            errorMessage =
-                '\nSomething went wrong, the file was not saved as .json...\n\n$savedConfig';
-            centerPiece = failurePage;
-          });
+        ? setState(() => centerPiece = successPage(
+              context,
+              '''\nYour configuration has been saved to ${archivePath()}
+
+Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+              textTheme,
+            ))
+        : setState(() => centerPiece = failurePage(
+              context,
+              '\nSomething went wrong, the file was not saved as .json...\n\n$savedConfig',
+              textTheme,
+            ));
   }
 
   /// Generate a (platform aware) human readable path for the saved config
@@ -84,52 +81,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         return 'Downloads';
     }
   }
-
-  // Define custom Widgets //
-
-  /// Loading animation
-  late final Widget loadingPage = Center(
-    child: SizedBox(
-      height: heightOf(context) / 2,
-      child: const EmpathetechLoadingAnimation(
-        height: double.infinity,
-        semantics:
-            'Loading. A repeating video of the Empathetic logo imitating an hour glass',
-      ),
-    ),
-  );
-
-  /// Tells user what to do next
-  late final Widget successPage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Success!',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        successMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
-
-  /// Displays the error
-  late final Widget failurePage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Failure',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        errorMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
 
   // Return the build //
 

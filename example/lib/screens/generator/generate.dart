@@ -3,10 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
+import './shared.dart';
 import '../../structs/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
-import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -25,10 +25,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
-
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? notificationStyle =
-      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
   // Define the build data //
 
@@ -40,19 +37,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ? '$workDir\\${widget.config.appName}'
       : '$workDir/${widget.config.appName}';
 
-  late Widget centerPiece = loadingPage;
-
-  late String successMessage =
-      '\n${widget.config.appName} is ready in\n${widget.config.genPath}';
+  late Widget centerPiece = loadingPage(context);
 
   String errorMessage = '\nSomething went wrong.\nPlease try again.';
 
   // Define custom functions //
 
-  void onFailure(String message) => setState(() {
-        errorMessage = '\nSomething went wrong...\n\n$message';
-        centerPiece = failurePage;
-      });
+  void onFailure(String message) => setState(() => centerPiece =
+      failurePage(context, '\nSomething went wrong...\n\n$message', textTheme));
 
   /// Run Flutter, Run!
   Future<void> genStuff() async {
@@ -164,54 +156,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
     }
 
     runResult.exitCode == 0
-        ? setState(() => centerPiece = successPage)
+        ? setState(() => centerPiece = successPage(
+              context,
+              '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+              textTheme,
+            ))
         : onFailure(runResult.stderr.toString());
   }
-
-  // Define custom Widgets //
-
-  /// Loading animation
-  late final Widget loadingPage = Center(
-    child: SizedBox(
-      height: heightOf(context) / 2,
-      child: const EmpathetechLoadingAnimation(
-        height: double.infinity,
-        semantics: 'TODO',
-      ),
-    ),
-  );
-
-  /// Tells user what to do next
-  late final Widget successPage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Success!',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        successMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
-
-  /// Displays the error
-  late final Widget failurePage = EzScrollView(
-    children: <Widget>[
-      Text(
-        'Failure',
-        style: textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-      Text(
-        errorMessage,
-        style: notificationStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
 
   // Init //
 
