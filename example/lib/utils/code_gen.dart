@@ -419,9 +419,103 @@ const String appTitle = '$humanCaseAppName';
     onFailure: onFailure,
   );
 
-  // widgets
+  // export.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
 
-  // screens
+export 'consts.dart';
+""",
+      '>',
+      'lib/utils/export.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // widgets //
+
+  // fabulous.dart
+
+  // menu_buttons.dart
+
+  // scaffold file
+
+  // export.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+export 'fabulous.dart';
+export 'menu_buttons.dart';
+export '${config.appName}_scaffold.dart';
+""",
+      '>',
+      'lib/widgets/export.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // screens //
+
+  // error.dart
+
+  // home_screen.dart
+
+  // text_settings_screen.dart?
+
+  // layout_settings_screen.dart?
+
+  // color_settings_screen.dart?
+
+  // image_settings_screen.dart?
+
+  // export.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+// Exports //
+
+export 'error.dart';
+export 'home.dart';
+
+export 'settings/settings_home.dart';
+${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
+${config.layoutSettings ? "export 'settings/layout_settings.dart';" : ''}
+${config.colorSettings ? "export 'settings/color_settings.dart';" : ''}
+${config.imageSettings ? "export 'settings/image_settings.dart';" : ''}
+
+// Route names //
+
+/// 'settings-home'
+const String settingsHomePath = 'settings-home';
+
+${config.textSettings ? """/// 'text-settings'
+const String textSettingsPath = 'text-settings';""" : ''}
+
+${config.layoutSettings ? """/// 'layout-settings'
+const String layoutSettingsPath = 'layout-settings';""" : ''}
+
+${config.colorSettings ? """/// 'color-settings'
+const String colorSettingsPath = 'color-settings';""" : ''}
+
+${config.imageSettings ? """/// 'image-settings'
+const String imageSettingsPath = 'image-settings';""" : ''}
+""",
+      '>',
+      'lib/screens/export.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 }
 
 /// Localizations config
