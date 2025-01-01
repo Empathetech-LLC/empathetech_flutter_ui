@@ -19,8 +19,6 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 void main() async {
   // Setup the app //
 
-  // Most apps need this
-  // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -35,12 +33,8 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    // Paths to any locally stored images the app uses
     assetPaths: <String>{},
-
     preferences: prefs,
-
-    // Your brand colors, custom styling, etc
     defaults: empathetechConfig,
   );
 
@@ -50,7 +44,6 @@ void main() async {
   late final TextStyle lightFeedbackText = buildBody(Colors.black);
   late final TextStyle darkFeedbackText = buildBody(Colors.white);
 
-  // Run the app!
   runApp(BetterFeedback(
     theme: FeedbackThemeData(
       background: Colors.grey,
