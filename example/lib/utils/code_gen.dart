@@ -464,16 +464,155 @@ export '${config.appName}_scaffold.dart';
   // screens //
 
   // error.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+import '../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class ErrorScreen extends StatefulWidget {
+  final GoException? error;
+
+  const ErrorScreen(this.error, {super.key});
+
+  @override
+  State<ErrorScreen> createState() => _ErrorScreenState();
+}
+
+class _ErrorScreenState extends State<ErrorScreen> {
+  // Gather the theme data //
+
+  static const EzSeparator separator = EzSeparator();
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextTheme textTheme = Theme.of(context).textTheme;
+  late final TextStyle? bodyStyle = textTheme.bodyLarge;
+  late final TextStyle? pitchStyle =
+      bodyStyle?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
+  // Set the page title //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle('404 \${l10n.gError}', Theme.of(context).colorScheme.primary);
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return ${classCaseAppName}Scaffold(
+      body: EzScreen(
+        useImageDecoration: false,
+        child: Center(
+          child: EzScrollView(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                l10n.g404Wonder,
+                style: pitchStyle,
+                textAlign: TextAlign.center,
+              ),
+              const EzSpacer(),
+              Text(
+                l10n.g404,
+                style: bodyStyle,
+                textAlign: TextAlign.center,
+              ),
+              separator,
+              Text(
+                l10n.g404Note,
+                style: textTheme.labelLarge,
+                textAlign: TextAlign.center,
+              ),
+              separator,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+""",
+      '>',
+      'lib/screens/error.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // home_screen.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/screens/home.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // text_settings_screen.dart?
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/BLARG/BLARG.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // layout_settings_screen.dart?
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/BLARG/BLARG.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // color_settings_screen.dart?
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/BLARG/BLARG.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // image_settings_screen.dart?
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/BLARG/BLARG.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // export.dart
   await ezCLI(
