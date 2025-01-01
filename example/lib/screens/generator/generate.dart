@@ -3,8 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../structs/export.dart';
-import '../widgets/export.dart';
+import '../../structs/export.dart';
+import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:io';
@@ -13,16 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class ThruConfigScreen extends StatefulWidget {
+class GenerateScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const ThruConfigScreen({super.key, required this.config});
+  const GenerateScreen({super.key, required this.config});
 
   @override
-  State<ThruConfigScreen> createState() => _ThruConfigScreenState();
+  State<GenerateScreen> createState() => _GenerateScreenState();
 }
 
-class _ThruConfigScreenState extends State<ThruConfigScreen> {
+class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
