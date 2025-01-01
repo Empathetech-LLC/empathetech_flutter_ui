@@ -484,7 +484,29 @@ class PlusFAB extends StatelessWidget {
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      """BLARG""",
+      """$copyright
+
+import '../screens/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+class SettingsButton extends StatelessWidget {
+  final BuildContext parentContext;
+
+  /// [EzMenuButton] for opening the settings
+  const SettingsButton(this.parentContext, {super.key});
+
+  @override
+  Widget build(BuildContext context) => EzMenuButton(
+        onPressed: () => parentContext.goNamed(settingsHomePath),
+        icon: Icon(PlatformIcons(context).settings),
+        label: EFUILang.of(context)!.ssPageTitle,
+      );
+}
+""",
       '>',
       'lib/widgets/menu_buttons.dart',
     ],
