@@ -40,11 +40,11 @@ class _SaveScreenState extends State<SaveScreen> {
   late Widget centerPiece = loadingPage;
 
   late String successMessage =
-      '''Your configuration has been saved to ${archivePath()}
+      '''\nYour configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
 
-  String errorMessage = 'Something went wrong.\n\nPlease try again.';
+  String errorMessage = '\nSomething went wrong.\nPlease try again.';
 
   // Define custom functions //
 
@@ -59,7 +59,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
       );
     } catch (e) {
       setState(() {
-        errorMessage = 'Something went wrong...\n\n${e.toString()}';
+        errorMessage = '\nSomething went wrong...\n\n${e.toString()}';
         centerPiece = failurePage;
       });
     }
@@ -68,7 +68,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         ? setState(() => centerPiece = successPage)
         : setState(() {
             errorMessage =
-                'Something went wrong, the file was not saved as .json...\n\n$savedConfig';
+                '\nSomething went wrong, the file was not saved as .json...\n\n$savedConfig';
             centerPiece = failurePage;
           });
   }
