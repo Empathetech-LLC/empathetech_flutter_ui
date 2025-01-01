@@ -178,6 +178,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
         await EzConfig.loadConfig(config.appDefaults);
 
+        if (config.genPath != null &&
+            await Directory(config.genPath!).exists()) {
+          pathController.text = config.genPath!;
+        }
+
         config.copyright == null
             ? removeCopyright = true
             : copyrightController.text = config.copyright!;
@@ -576,7 +581,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 children: <Widget>[
                   // Save config
                   EzElevatedIconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (noGen) return;
 
                       if (validName &&
@@ -584,6 +589,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           (exampleDomain ||
                               validateDomain(domainController.text) == null) &&
                           descriptionController.text.isNotEmpty &&
+                          (!isDesktop || await checkPath()) &&
                           context.mounted) {
                         context.goNamed(
                           saveScreenPath,
@@ -604,6 +610,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                     key, EzConfig.get(key)),
                               ),
                             ),
+                            genPath: isDesktop ? pathController.text : null,
                             copyright: (removeCopyright ||
                                     copyrightController.text.isEmpty)
                                 ? null
@@ -706,7 +713,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         }
                       },
                       icon: Icon(PlatformIcons(context).create),
-                      label: 'Generate $namePreview',
+                      label: 'Generate app',
                     ),
                   ],
                 ],
