@@ -8,9 +8,7 @@ import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class GenerateScreen extends StatefulWidget {
@@ -41,46 +39,11 @@ class _GenerateScreenState extends State<GenerateScreen> {
   late Widget centerPiece = loadingPage;
 
   late String successMessage =
-      '''\nYour configuration has been saved to ${archivePath()}
-
-Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
+      '${widget.config.appName} is ready in\n${widget.config.genPath}';
 
   String errorMessage = 'Something went wrong.\nPlease try again.';
 
   // Define custom functions //
-
-  /// Save the config
-  void archive() async {
-    late final String savedConfig;
-    try {
-      savedConfig = await FileSaver.instance.saveFile(
-        name: '${widget.config.appName}_eag_config.json',
-        bytes: utf8.encode(jsonEncode(widget.config.toJson())),
-        mimeType: MimeType.json,
-      );
-    } catch (e) {
-      setState(() {
-        errorMessage = 'Something went wrong...\n\n${e.toString()}';
-        centerPiece = failurePage;
-      });
-    }
-
-    savedConfig.endsWith('.json')
-        ? setState(() => centerPiece = successPage)
-        : setState(() => centerPiece = failurePage);
-  }
-
-  /// Human readable path for saved config
-  String archivePath() {
-    switch (platform) {
-      case TargetPlatform.android:
-        return 'Root > Android > Data > net.empathetech.open_ui > files';
-      case TargetPlatform.iOS:
-        return 'Files > Browse > Open UI';
-      default:
-        return 'Downloads';
-    }
-  }
 
   void onFailure(String message) => setState(() {
         errorMessage = 'Something went wrong...\n$message';
@@ -168,11 +131,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
 
     runResult.exitCode == 0
-        ? setState(() {
-            successMessage =
-                '${widget.config.appName} is ready in\n${widget.config.genPath}';
-            centerPiece = successPage;
-          })
+        ? setState(() => centerPiece = successPage)
         : onFailure(runResult.stderr.toString());
   }
 
@@ -226,8 +185,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => isDesktop ? genStuff() : archive());
+    WidgetsBinding.instance.addPostFrameCallback((_) => genStuff());
   }
 
   // Return the build //

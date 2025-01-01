@@ -134,6 +134,12 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Return the build //
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => archive());
+  }
+
+  @override
   Widget build(_) =>
       OpenUIScaffold(title: 'Archiver', body: EzScreen(child: centerPiece));
 }
