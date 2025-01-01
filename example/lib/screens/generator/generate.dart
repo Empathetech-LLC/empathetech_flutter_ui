@@ -91,7 +91,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Runs immediately after a successful [delStuff]
   Future<void> addStuff() async {
     await genREADME(config: widget.config, dir: projDir, onFailure: onFailure);
-    await genAppVersion(
+    await genVersionTracking(
         config: widget.config, dir: projDir, onFailure: onFailure);
     await genLicense(config: widget.config, dir: projDir, onFailure: onFailure);
     await genPubspec(config: widget.config, dir: projDir, onFailure: onFailure);
