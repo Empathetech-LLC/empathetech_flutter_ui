@@ -519,7 +519,112 @@ class SettingsButton extends StatelessWidget {
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      """BLARG""",
+      """$copyright
+
+import './export.dart';
+import '../utils/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class ${classCaseAppName}Scaffold extends StatelessWidget {
+  /// [AppBar.title] passthrough (via [Text] widget)
+  final String title;
+
+  /// Whether to include [SettingsButton] in the [MenuAnchor]
+  final bool showSettings;
+
+  /// [Scaffold.body] passthrough
+  final Widget body;
+
+  /// [FloatingActionButton]
+  final Widget? fab;
+
+  /// Standardized [Scaffold] for all of the EFUI example app's screens
+  const ${classCaseAppName}Scaffold({
+    super.key,
+    this.title = appTitle,
+    this.showSettings = true,
+    required this.body,
+    this.fab,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Gather the theme data //
+
+    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final EFUILang l10n = EFUILang.of(context)!;
+
+    final double toolbarHeight = measureText(
+          appTitle,
+          style: Theme.of(context).appBarTheme.titleTextStyle,
+          context: context,
+        ).height +
+        EzConfig.get(marginKey);
+
+    // Define custom widgets //
+
+    late final MenuAnchor? options = (showSettings)
+        ? MenuAnchor(
+            builder: (_, MenuController controller, ___) => IconButton(
+              onPressed: () =>
+                  controller.isOpen ? controller.close() : controller.open(),
+              tooltip: l10n.gOptions,
+              icon: const Icon(Icons.more_vert),
+            ),
+            menuChildren: <Widget>[SettingsButton(context)],
+          )
+        : null;
+
+    // Return the build //
+
+    final Widget theBuild = SelectionArea(
+      child: Scaffold(
+        // AppBar
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, toolbarHeight),
+          child: AppBar(
+            excludeHeaderSemantics: true,
+            toolbarHeight: toolbarHeight,
+
+            // Leading (aka left)
+            leading: isLefty ? options : null,
+            leadingWidth: toolbarHeight,
+
+            // Title
+            title: Text(title, textAlign: TextAlign.center),
+            centerTitle: true,
+            titleSpacing: 0,
+
+            // Actions (aka trailing aka right)
+            actions:
+                isLefty ? const <Widget>[EzBackAction()] : <Widget>[options],
+          ),
+        ),
+
+        // Body
+        body: body,
+
+        // FAB
+        floatingActionButton: fab,
+        floatingActionButtonLocation: isLefty
+            ? FloatingActionButtonLocation.startFloat
+            : FloatingActionButtonLocation.endFloat,
+
+        // Prevents the keyboard from pushing the body up
+        resizeToAvoidBottomInset: false,
+      ),
+    );
+
+    return EzSwapScaffold(
+      small: theBuild,
+      large: theBuild,
+      threshold: smallBreakpoint,
+    );
+  }
+}
+""",
       '>',
       'lib/widgets/${config.appName}_scaffold.dart',
     ],
