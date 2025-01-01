@@ -204,7 +204,188 @@ Future<void> genLib({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  ezLog("I don't do anything... yet!\nAlso: BLARG");
+  // Useful substrings //
+
+  final String camelCaseAppName = config.appName.replaceAllMapped(
+    RegExp(r'_(\w)'),
+    (Match match) => match.group(1)!.toUpperCase(),
+  );
+
+  final String classCaseAppName = camelCaseAppName.replaceRange(
+    0,
+    0,
+    config.appName[0].toUpperCase(),
+  );
+
+  String? l10nName() {
+    if (config.l10nConfig == null) return null;
+
+    final List<String> lines = config.l10nConfig!.split('\n');
+
+    for (final String line in lines) {
+      if (line.contains('output-class')) {
+        final List<String> parts = line.split(':');
+        return parts[1].trim();
+      }
+    }
+
+    return null;
+  }
+
+  String? l10nDelegates() {
+    final String? name = l10nName();
+    if (name == null) return null;
+
+    return '$name.localizationsDelegates';
+  }
+
+  String delegateHandler() {
+    final String? delegate = l10nDelegates();
+
+    return delegate == null ? '' : '\n...$delegate,\n';
+  }
+
+  // Make directories //
+
+  await ezCLI(
+    exe: 'mkdir',
+    args: <String>['lib', 'lib/utils', 'lib/widgets', 'lib/screens'],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // Make files //
+
+  // main.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """${config.copyright ?? '/* ${config.appName} */'}
+
+import './screens/export.dart';
+import './utils/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
+
+void main() async {
+  // Setup the app //
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
+  // Initialize EzConfig //
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  EzConfig.init(
+    assetPaths: <String>{},
+    preferences: prefs,
+    defaults: ${camelCaseAppName}Config,
+  );
+
+  // Run the app //
+
+  runApp(const $classCaseAppName());
+}
+
+/// Initialize a path based router for web-enabled apps
+/// Or any other app that requires deep linking
+/// https://docs.flutter.dev/ui/navigation/deep-linking
+final GoRouter router = GoRouter(
+  initialLocation: homePath,
+  errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
+  routes: <RouteBase>[
+    GoRoute(
+      path: homePath,
+      name: homePath,
+      builder: (_, __) => const HomeScreen(),
+      routes: <RouteBase>[
+        GoRoute(
+          path: settingsHomePath,
+          name: settingsHomePath,
+          builder: (_, __) => const SettingsHomeScreen(),
+          routes: <RouteBase>[
+            GoRoute(
+              path: textSettingsPath,
+              name: textSettingsPath,
+              builder: (_, __) => const TextSettingsScreen(),
+            ),
+            GoRoute(
+              path: layoutSettingsPath,
+              name: layoutSettingsPath,
+              builder: (_, __) => const LayoutSettingsScreen(),
+            ),
+            GoRoute(
+              path: colorSettingsPath,
+              name: colorSettingsPath,
+              builder: (_, __) => const ColorSettingsScreen(),
+            ),
+            GoRoute(
+              path: imageSettingsPath,
+              name: imageSettingsPath,
+              builder: (_, __) => const ImageSettingsScreen(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);
+
+class $classCaseAppName extends StatelessWidget {
+  const $classCaseAppName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return EzAppProvider(
+      app: PlatformApp.router(
+        debugShowCheckedModeBanner: false,
+
+        // Language handlers
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>{
+          const LocaleNamesLocalizationsDelegate(),
+          ...EFUILang.localizationsDelegates,${delegateHandler()}
+        },
+
+        // Supported languages
+        supportedLocales: ${l10nName() ?? 'EFUILang'}.supportedLocales,
+
+        // Current language
+        locale: EzConfig.getLocale(),
+
+        title: appTitle,
+        routerConfig: router,
+      ),
+    );
+  }
+}
+""",
+      '>',
+      'lib/main.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // utils
+
+  // widgets
+
+  // screens
 }
 
 /// Localizations config
