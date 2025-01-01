@@ -10,7 +10,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ResetFAB extends StatelessWidget {
   /// Function to execute with 'Builder values' and 'Both' options
-  final Function clearForms;
+  final void Function() clearForms;
 
   /// Opens an [EzAlertDialog] for resetting the form fields, app settings, both, or none
   const ResetFAB({required this.clearForms, super.key});
@@ -38,7 +38,7 @@ class ResetFAB extends StatelessWidget {
                 text: 'Builder values',
                 textStyle: style,
                 onPressed: () async {
-                  clearForms.call();
+                  clearForms();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
               ),
@@ -54,7 +54,7 @@ class ResetFAB extends StatelessWidget {
                 text: 'Both',
                 textStyle: style,
                 onPressed: () async {
-                  clearForms.call();
+                  clearForms();
                   await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
@@ -68,7 +68,7 @@ class ResetFAB extends StatelessWidget {
             cupertinoActions: <CupertinoDialogAction>[
               CupertinoDialogAction(
                 onPressed: () async {
-                  clearForms.call();
+                  clearForms();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 textStyle: style,
@@ -84,7 +84,7 @@ class ResetFAB extends StatelessWidget {
               ),
               CupertinoDialogAction(
                 onPressed: () async {
-                  clearForms.call();
+                  clearForms();
                   await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
