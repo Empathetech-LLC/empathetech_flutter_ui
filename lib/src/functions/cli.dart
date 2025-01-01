@@ -29,9 +29,9 @@ Future<void> ezCLI({
   }
 
   if (debug) {
-    ezLog('\n$exe results...');
-    ezLog('\nstdout: ${runResult.stdout}');
-    ezLog('\nstderr: ${runResult.stderr}');
+    ezLog("\n'$exe $args'...");
+    ezLog('stdout: ${runResult.stdout}');
+    ezLog('stderr: ${runResult.stderr}');
   }
 
   runResult.exitCode == 0
