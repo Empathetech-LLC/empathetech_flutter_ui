@@ -268,7 +268,13 @@ Future<void> genLib({
 
   await ezCLI(
     exe: 'mkdir',
-    args: <String>['lib', 'lib/utils', 'lib/widgets', 'lib/screens'],
+    args: <String>[
+      'lib',
+      'lib/utils',
+      'lib/widgets',
+      'lib/screens',
+      'lib/screens/settings',
+    ],
     dir: dir,
     onSuccess: onSuccess,
     onFailure: onFailure,
@@ -562,57 +568,169 @@ class _ErrorScreenState extends State<ErrorScreen> {
     onFailure: onFailure,
   );
 
-  // text_settings_screen.dart?
+  // settings_home.dart
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      """BLARG""",
+      """$copyright
+
+import '../../screens/export.dart';
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class SettingsHomeScreen extends StatelessWidget {
+  const SettingsHomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: EFUILang.of(context)!.ssPageTitle,
+        showSettings: false,
+        body: const SettingsHome(
+          ${config.textSettings ? 'textSettingsPath: textSettingsPath,' : ''}
+          ${config.layoutSettings ? 'layoutSettingsPath: layoutSettingsPath,' : ''}
+          ${config.colorSettings ? 'colorSettingsPath: colorSettingsPath,' : ''}
+          ${config.imageSettings ? 'imageSettingsPath: imageSettingsPath,' : ''}                                
+        ),
+      );
+}
+""",
       '>',
-      'lib/BLARG/BLARG.dart',
+      'lib/screens/settings/settings_home.dart',
     ],
     dir: dir,
     onSuccess: onSuccess,
     onFailure: onFailure,
   );
+
+  // text_settings_screen.dart?
+  if (config.textSettings) {
+    await ezCLI(
+      exe: 'echo',
+      args: <String>[
+        """$copyright
+
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class TextSettingsScreen extends StatelessWidget {
+  const TextSettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: EFUILang.of(context)!.tsPageTitle,
+        showSettings: false,
+        body: const TextSettings(),
+      );
+}
+""",
+        '>',
+        'lib/screens/settings/text_settings.dart',
+      ],
+      dir: dir,
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+    );
+  }
 
   // layout_settings_screen.dart?
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """BLARG""",
-      '>',
-      'lib/BLARG/BLARG.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+  if (config.layoutSettings) {
+    await ezCLI(
+      exe: 'echo',
+      args: <String>[
+        """$copyright
+
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class LayoutSettingsScreen extends StatelessWidget {
+  const LayoutSettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: EFUILang.of(context)!.lsPageTitle,
+        showSettings: false,
+        body: const LayoutSettings(),
+      );
+}
+""",
+        '>',
+        'lib/screens/settings/layout_settings.dart',
+      ],
+      dir: dir,
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+    );
+  }
 
   // color_settings_screen.dart?
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """BLARG""",
-      '>',
-      'lib/BLARG/BLARG.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+  if (config.colorSettings) {
+    await ezCLI(
+      exe: 'echo',
+      args: <String>[
+        """$copyright
+
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class ColorSettingsScreen extends StatelessWidget {
+  const ColorSettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: EFUILang.of(context)!.csPageTitle,
+        showSettings: false,
+        body: const ColorSettings(),
+      );
+}
+""",
+        '>',
+        'lib/screens/settings/color_settings.dart',
+      ],
+      dir: dir,
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+    );
+  }
 
   // image_settings_screen.dart?
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """BLARG""",
-      '>',
-      'lib/BLARG/BLARG.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+  if (config.imageSettings) {
+    await ezCLI(
+      exe: 'echo',
+      args: <String>[
+        """$copyright
+
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class ImageSettingsScreen extends StatelessWidget {
+  const ImageSettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: EFUILang.of(context)!.isPageTitle,
+        showSettings: false,
+        body: const ImageSettings(),
+      );
+}
+""",
+        '>',
+        'lib/screens/settings/image_settings.dart',
+      ],
+      dir: dir,
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+    );
+  }
 
   // export.dart
   await ezCLI(
