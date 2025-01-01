@@ -121,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Disable interaction
     setState(() {
+      showAdvanced = true;
       readOnly = true;
       noGen = true;
       pathController.text = badPath;
@@ -569,63 +570,132 @@ It is recommended to set a custom color scheme. If you need help building one, t
             // Make it so //
 
             Center(
-              child: EzElevatedIconButton(
-                onPressed: noGen
-                    ? () {}
-                    : () async {
+              child: EzScrollView(
+                scrollDirection: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // Save config
+                  EzElevatedIconButton(
+                    onPressed: () {
+                      if (noGen) return;
+
+                      if (validName &&
+                          pubController.text.isNotEmpty &&
+                          (exampleDomain ||
+                              validateDomain(domainController.text) == null) &&
+                          descriptionController.text.isNotEmpty &&
+                          context.mounted) {
+                        context.goNamed(
+                          saveScreenPath,
+                          extra: EAGConfig(
+                            appName: nameController.text,
+                            publisherName: pubController.text,
+                            domainName: exampleDomain
+                                ? 'com.example'
+                                : domainController.text,
+                            description: descriptionController.text,
+                            textSettings: textSettings,
+                            layoutSettings: layoutSettings,
+                            colorSettings: colorSettings,
+                            imageSettings: imageSettings,
+                            appDefaults: Map<String, dynamic>.fromEntries(
+                              allKeys.keys.map(
+                                (String key) => MapEntry<String, dynamic>(
+                                    key, EzConfig.get(key)),
+                              ),
+                            ),
+                            copyright: (removeCopyright ||
+                                    copyrightController.text.isEmpty)
+                                ? null
+                                : copyrightController.text,
+                            license: pickLicense(
+                              license: license,
+                              appName: nameController.text,
+                              publisher: pubController.text,
+                              description: descriptionController.text,
+                              year: currentYear.toString(),
+                            ),
+                            l10nConfig:
+                                (removeL10n || l10nController.text.isEmpty)
+                                    ? null
+                                    : l10nController.text,
+                            analysisOptions: (removeAnalysis ||
+                                    analysisController.text.isEmpty)
+                                ? null
+                                : analysisController.text,
+                            vsCodeConfig:
+                                (removeVSC || vscController.text.isEmpty)
+                                    ? null
+                                    : vscController.text,
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.save),
+                    label: 'Save config',
+                    textAlign: TextAlign.center,
+                  ),
+
+                  // Generate app
+                  if (isDesktop) ...<Widget>[
+                    spacer,
+                    EzElevatedIconButton(
+                      onPressed: () async {
+                        if (noGen) return;
+
                         if (validName &&
                             pubController.text.isNotEmpty &&
                             (exampleDomain ||
                                 validateDomain(domainController.text) ==
                                     null) &&
                             descriptionController.text.isNotEmpty &&
-                            (!isDesktop || await checkPath())) {
-                          if (context.mounted) {
-                            context.goNamed(
-                              appGeneratorPath,
-                              extra: EAGConfig(
-                                appName: nameController.text,
-                                publisherName: pubController.text,
-                                domainName: exampleDomain
-                                    ? 'com.example'
-                                    : domainController.text,
-                                description: descriptionController.text,
-                                textSettings: textSettings,
-                                layoutSettings: layoutSettings,
-                                colorSettings: colorSettings,
-                                imageSettings: imageSettings,
-                                appDefaults: Map<String, dynamic>.fromEntries(
-                                  allKeys.keys.map(
-                                    (String key) => MapEntry<String, dynamic>(
-                                        key, EzConfig.get(key)),
-                                  ),
+                            await checkPath() &&
+                            context.mounted) {
+                          context.goNamed(
+                            generateScreenPath,
+                            extra: EAGConfig(
+                              appName: nameController.text,
+                              publisherName: pubController.text,
+                              domainName: exampleDomain
+                                  ? 'com.example'
+                                  : domainController.text,
+                              description: descriptionController.text,
+                              textSettings: textSettings,
+                              layoutSettings: layoutSettings,
+                              colorSettings: colorSettings,
+                              imageSettings: imageSettings,
+                              appDefaults: Map<String, dynamic>.fromEntries(
+                                allKeys.keys.map(
+                                  (String key) => MapEntry<String, dynamic>(
+                                      key, EzConfig.get(key)),
                                 ),
-                                copyright: (removeCopyright ||
-                                        copyrightController.text.isEmpty)
-                                    ? null
-                                    : copyrightController.text,
-                                license: pickLicense(
-                                  license: license,
-                                  appName: nameController.text,
-                                  publisher: pubController.text,
-                                  description: descriptionController.text,
-                                  year: currentYear.toString(),
-                                ),
-                                l10nConfig:
-                                    (removeL10n || l10nController.text.isEmpty)
-                                        ? null
-                                        : l10nController.text,
-                                analysisOptions: (removeAnalysis ||
-                                        analysisController.text.isEmpty)
-                                    ? null
-                                    : analysisController.text,
-                                vsCodeConfig:
-                                    (removeVSC || vscController.text.isEmpty)
-                                        ? null
-                                        : vscController.text,
                               ),
-                            );
-                          }
+                              genPath: pathController.text,
+                              copyright: (removeCopyright ||
+                                      copyrightController.text.isEmpty)
+                                  ? null
+                                  : copyrightController.text,
+                              license: pickLicense(
+                                license: license,
+                                appName: nameController.text,
+                                publisher: pubController.text,
+                                description: descriptionController.text,
+                                year: currentYear.toString(),
+                              ),
+                              l10nConfig:
+                                  (removeL10n || l10nController.text.isEmpty)
+                                      ? null
+                                      : l10nController.text,
+                              analysisOptions: (removeAnalysis ||
+                                      analysisController.text.isEmpty)
+                                  ? null
+                                  : analysisController.text,
+                              vsCodeConfig:
+                                  (removeVSC || vscController.text.isEmpty)
+                                      ? null
+                                      : vscController.text,
+                            ),
+                          );
                         } else {
                           setState(() => noGen = true);
                           await ezSnackBar(
@@ -635,8 +705,11 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           setState(() => noGen = false);
                         }
                       },
-                icon: Icon(PlatformIcons(context).create),
-                label: 'Generate',
+                      icon: Icon(PlatformIcons(context).create),
+                      label: 'Generate $namePreview',
+                    ),
+                  ],
+                ],
               ),
             ),
             separator,
