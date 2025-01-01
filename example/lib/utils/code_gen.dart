@@ -8,7 +8,7 @@ import '../structs/export.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// Slightly modified from the standard template README
-/// Mostly with Empathetech LLC stuff
+/// Mostly with Empathetech LLC stuff TODO: Finish this
 Future<void> genREADME({
   required EAGConfig config,
   required String dir,
@@ -204,7 +204,9 @@ Future<void> genLib({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  // Useful substrings //
+  //// Useful substrings ////
+
+  // Naming //
 
   final String camelCaseAppName = config.appName.replaceAllMapped(
     RegExp(r'_(\w)'),
@@ -216,6 +218,23 @@ Future<void> genLib({
     0,
     config.appName[0].toUpperCase(),
   );
+
+  final String humanCaseAppName = config.appName
+      .replaceAllMapped(
+        RegExp(r'_(\w)'),
+        (Match match) => ' ${match.group(1)!.toUpperCase()}',
+      )
+      .replaceRange(
+        0,
+        0,
+        config.appName[0].toUpperCase(),
+      );
+
+  // Dart code //
+
+  final String copyright = config.copyright ?? '/* ${config.appName} */';
+
+  // yaml files //
 
   String? l10nName() {
     if (config.l10nConfig == null) return null;
@@ -255,13 +274,13 @@ Future<void> genLib({
     onFailure: onFailure,
   );
 
-  // Make files //
+  //// Make files ////
 
   // main.dart
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      """${config.copyright ?? '/* ${config.appName} */'}
+      """$copyright
 
 import './screens/export.dart';
 import './utils/export.dart';
@@ -381,7 +400,24 @@ class $classCaseAppName extends StatelessWidget {
     onFailure: onFailure,
   );
 
-  // utils
+  // utils //
+
+  // consts.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+/// $humanCaseAppName
+const String appTitle = '$humanCaseAppName';
+""",
+      '>',
+      'lib/utils/consts.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // widgets
 
