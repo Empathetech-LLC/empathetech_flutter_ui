@@ -444,10 +444,67 @@ export 'consts.dart';
   // widgets //
 
   // fabulous.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
+class PlusFAB extends StatelessWidget {
+  /// [FloatingActionButton.onPressed] passthrough
+  final void Function() count;
+
+  /// Increases the count (for the home screen)
+  const CountFAB({required this.count, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final EFUILang l10n = EFUILang.of(context)!;
+
+    return FloatingActionButton(
+      onPressed: count,
+      child: Icon(PlatformIcons(context).add),
+    );
+  }
+}
+""",
+      '>',
+      'lib/widgets/fabulous.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // menu_buttons.dart
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/widgets/menu_buttons.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // scaffold file
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """BLARG""",
+      '>',
+      'lib/widgets/${config.appName}_scaffold.dart',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
   // export.dart
   await ezCLI(
