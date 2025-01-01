@@ -7,7 +7,6 @@ import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
-import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
@@ -41,11 +40,11 @@ class _SaveScreenState extends State<SaveScreen> {
   late Widget centerPiece = loadingPage;
 
   late String successMessage =
-      '''\nYour configuration has been saved to ${archivePath()}
+      '''Your configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''';
 
-  String errorMessage = 'Something went wrong.\nPlease try again.';
+  String errorMessage = 'Something went wrong.\n\nPlease try again.';
 
   // Define custom functions //
 
@@ -67,10 +66,14 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
 
     savedConfig.endsWith('.json')
         ? setState(() => centerPiece = successPage)
-        : setState(() => centerPiece = failurePage);
+        : setState(() {
+            errorMessage =
+                'Something went wrong, the file was not saved as .json...\n\n$savedConfig';
+            centerPiece = failurePage;
+          });
   }
 
-  /// Human readable path for saved config
+  /// Generate a (platform aware) human readable path for the saved config
   String archivePath() {
     switch (platform) {
       case TargetPlatform.android:
@@ -82,100 +85,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
-  void onFailure(String message) => setState(() {
-        errorMessage = 'Something went wrong...\n$message';
-        centerPiece = failurePage;
-      });
-
-  /// Run Flutter, Run!
-  void genStuff() async {
-    cli(
-      exe: 'flutter',
-      args: <String>[
-        'create',
-        '--org',
-        widget.config.domainName,
-        widget.config.appName,
-      ],
-      dir: widget.config.genPath!,
-      onSuccess: delStuff,
-      onFailure: onFailure,
-    );
-  }
-
-  /// Runs immediately after a successful [genStuff]
-  Future<void> delStuff() async {
-    cli(
-      exe: 'rm -rf',
-      args: <String>[
-        'lib',
-        'analysis_options.yaml',
-        'pubspec.lock',
-        'pubspec.yaml',
-        'README.md',
-      ],
-      dir: widget.config.genPath!,
-      onSuccess: addStuff,
-      onFailure: onFailure,
-    );
-  }
-
-  /// Runs immediately after a successful [delStuff]
-  Future<void> addStuff() async {
-    await genREADME(widget.config);
-    await genAppVersion(widget.config);
-    await genLicense(widget.config);
-    await genPubspec(widget.config);
-    await genLib(widget.config);
-    if (widget.config.l10nConfig != null) await genL10n(widget.config);
-    if (widget.config.analysisOptions != null) await genAnalysis(widget.config);
-    if (widget.config.vsCodeConfig != null) await genVSCode(widget.config);
-    await genIntegrationTests(widget.config);
-    runStuff();
-  }
-
-  /// Runs immediately after a successful [addStuff]
-  /// Last method before completion
-  Future<void> runStuff() async {
-    late ProcessResult runResult;
-    try {
-      runResult = await Process.run(
-        'flutter',
-        <String>[
-          'clean',
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
-      runResult = await Process.run(
-        'flutter',
-        <String>[
-          'pub upgrade --major-versions',
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
-      runResult = await Process.run(
-        'flutter',
-        <String>[
-          'pub upgrade --tighten',
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
-    } catch (e) {
-      onFailure(e.toString());
-    }
-
-    runResult.exitCode == 0
-        ? setState(() {
-            successMessage =
-                '${widget.config.appName} is ready in\n${widget.config.genPath}';
-            centerPiece = successPage;
-          })
-        : onFailure(runResult.stderr.toString());
-  }
-
   // Define custom Widgets //
 
   /// Loading animation
@@ -184,7 +93,8 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
       height: heightOf(context) / 2,
       child: const EmpathetechLoadingAnimation(
         height: double.infinity,
-        semantics: 'TODO',
+        semantics:
+            'Loading. A repeating video of the Empathetic logo imitating an hour glass',
       ),
     ),
   );
@@ -221,18 +131,9 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     ],
   );
 
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => isDesktop ? genStuff() : archive());
-  }
-
   // Return the build //
 
   @override
   Widget build(_) =>
-      OpenUIScaffold(title: 'Generator', body: EzScreen(child: centerPiece));
+      OpenUIScaffold(title: 'Archiver', body: EzScreen(child: centerPiece));
 }
