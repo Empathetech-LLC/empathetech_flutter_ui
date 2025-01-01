@@ -6,8 +6,10 @@
 // Exports //
 
 export 'error.dart';
-export 'generator.dart';
 export 'home.dart';
+
+export 'generator/generate.dart';
+export 'generator/save.dart';
 
 export 'settings/settings_home.dart';
 export 'settings/text_settings.dart';
@@ -18,7 +20,10 @@ export 'settings/layout_settings.dart';
 // Route names //
 
 /// 'app-generator'
-const String appGeneratorPath = 'app-generator';
+const String generateScreenPath = 'app-generator';
+
+/// 'config-saver'
+const String saveScreenPath = 'config-saver';
 
 /// 'settings-home'
 const String settingsHomePath = 'settings-home';
