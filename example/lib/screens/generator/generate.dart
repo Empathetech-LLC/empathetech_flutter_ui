@@ -31,28 +31,31 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define the build data //
 
-  late final TargetPlatform platform = getBasePlatform(context);
-  late final bool isDesktop = platform == TargetPlatform.linux ||
-      platform == TargetPlatform.macOS ||
-      platform == TargetPlatform.windows;
+  late final bool isWindows =
+      getBasePlatform(context) == TargetPlatform.windows;
+
+  late final String workDir = widget.config.genPath!;
+  late final String projDir = isWindows
+      ? '$workDir\\${widget.config.appName}'
+      : '$workDir/${widget.config.appName}';
 
   late Widget centerPiece = loadingPage;
 
   late String successMessage =
-      '${widget.config.appName} is ready in\n${widget.config.genPath}';
+      '\n${widget.config.appName} is ready in\n${widget.config.genPath}';
 
-  String errorMessage = 'Something went wrong.\nPlease try again.';
+  String errorMessage = '\nSomething went wrong.\nPlease try again.';
 
   // Define custom functions //
 
   void onFailure(String message) => setState(() {
-        errorMessage = 'Something went wrong...\n$message';
+        errorMessage = '\nSomething went wrong...\n\n$message';
         centerPiece = failurePage;
       });
 
   /// Run Flutter, Run!
-  void genStuff() async {
-    cli(
+  Future<void> genStuff() async {
+    ezCLI(
       exe: 'flutter',
       args: <String>[
         'create',
@@ -60,7 +63,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         widget.config.domainName,
         widget.config.appName,
       ],
-      dir: widget.config.genPath!,
+      dir: workDir,
       onSuccess: delStuff,
       onFailure: onFailure,
     );
@@ -68,16 +71,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [genStuff]
   Future<void> delStuff() async {
-    cli(
-      exe: 'rm -rf',
+    ezCLI(
+      exe: 'rm',
       args: <String>[
+        '-rf',
         'lib',
         'analysis_options.yaml',
         'pubspec.lock',
         'pubspec.yaml',
         'README.md',
       ],
-      dir: widget.config.genPath!,
+      dir: projDir,
       onSuccess: addStuff,
       onFailure: onFailure,
     );
@@ -85,15 +89,23 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [delStuff]
   Future<void> addStuff() async {
-    await genREADME(widget.config);
-    await genAppVersion(widget.config);
-    await genLicense(widget.config);
-    await genPubspec(widget.config);
-    await genLib(widget.config);
-    if (widget.config.l10nConfig != null) await genL10n(widget.config);
-    if (widget.config.analysisOptions != null) await genAnalysis(widget.config);
-    if (widget.config.vsCodeConfig != null) await genVSCode(widget.config);
-    await genIntegrationTests(widget.config);
+    await genREADME(widget.config, projDir);
+    await genAppVersion(widget.config, projDir);
+    await genLicense(widget.config, projDir);
+    await genPubspec(widget.config, projDir);
+    await genLib(widget.config, projDir);
+
+    if (widget.config.l10nConfig != null) await genL10n(widget.config, projDir);
+
+    if (widget.config.analysisOptions != null) {
+      await genAnalysis(widget.config, projDir);
+    }
+
+    if (widget.config.vsCodeConfig != null) {
+      await genVSCode(widget.config, projDir);
+    }
+
+    await genIntegrationTests(widget.config, projDir);
     runStuff();
   }
 
@@ -102,30 +114,43 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Future<void> runStuff() async {
     late ProcessResult runResult;
     try {
+      debugPrint("\n'flutter clean'...");
+      runResult = await Process.run(
+        'flutter',
+        <String>['clean'],
+        runInShell: true,
+        workingDirectory: projDir,
+      );
+      debugPrint('stdout: ${runResult.stdout}');
+      debugPrint('stderr: ${runResult.stderr}');
+
+      debugPrint("\n'flutter upgrade'...");
       runResult = await Process.run(
         'flutter',
         <String>[
-          'clean',
+          'pub',
+          'upgrade',
+          '--major-versions',
         ],
         runInShell: true,
-        workingDirectory: widget.config.genPath,
+        workingDirectory: projDir,
       );
+      debugPrint('stdout: ${runResult.stdout}');
+      debugPrint('stderr: ${runResult.stderr}');
+
+      debugPrint("\n'flutter tighten'...");
       runResult = await Process.run(
         'flutter',
         <String>[
-          'pub upgrade --major-versions',
+          'pub',
+          'upgrade',
+          '--tighten',
         ],
         runInShell: true,
-        workingDirectory: widget.config.genPath,
+        workingDirectory: projDir,
       );
-      runResult = await Process.run(
-        'flutter',
-        <String>[
-          'pub upgrade --tighten',
-        ],
-        runInShell: true,
-        workingDirectory: widget.config.genPath,
-      );
+      debugPrint('stdout: ${runResult.stdout}');
+      debugPrint('stderr: ${runResult.stderr}');
     } catch (e) {
       onFailure(e.toString());
     }
