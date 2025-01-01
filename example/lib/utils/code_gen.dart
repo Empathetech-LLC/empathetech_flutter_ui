@@ -7,6 +7,8 @@ import '../structs/export.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+/// Slightly modified from the standard template README
+/// Mostly with Empathetech LLC stuff
 Future<void> genREADME({
   required EAGConfig config,
   required String dir,
@@ -15,26 +17,68 @@ Future<void> genREADME({
 }) =>
     ezCLI(
       exe: 'echo',
-      args: <String>['>', 'BLARG', 'README.md'],
+      args: <String>[
+        '''# ${config.appName}
+
+A new empathetic Flutter project.
+
+## Getting Started
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [EFUI: Digital accessibility made Ez](https://github.com/Empathetech-LLC/empathetech_flutter_ui)
+
+## Maintaining Momentum
+
+Thanks for using Open UI!
+
+P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend removing them if this project is going to be public.
+
+## Credits
+
+${config.appName} began with [Open UI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)'s app generation service.
+
+It is free and open source, maintained by Empathetech LLC.
+''',
+        '>',
+        'README.md',
+      ],
       dir: dir,
       onSuccess: onSuccess,
       onFailure: onFailure,
     );
 
-Future<void> genAppVersion({
+/// APP_VERSION and CHANGELOG.md
+Future<void> genVersionTracking({
   required EAGConfig config,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>['>', '1.0.0', 'APP_VERSION'],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+}) async {
+  await ezCLI(
+    exe: 'echo',
+    args: <String>['1.0.0', '>', 'APP_VERSION'],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      'BLARG',
+      '>',
+      'CHANGELOG.md',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+}
+
+/// LICENSE
 Future<void> genLicense({
   required EAGConfig config,
   required String dir,
@@ -43,12 +87,13 @@ Future<void> genLicense({
 }) =>
     ezCLI(
       exe: 'echo',
-      args: <String>['>', config.license, 'LICENSE'],
+      args: <String>[config.license, '>', 'LICENSE'],
       dir: dir,
       onSuccess: onSuccess,
       onFailure: onFailure,
     );
 
+/// pubspec.yaml TODO: https://pub.dev/help/api
 Future<void> genPubspec({
   required EAGConfig config,
   required String dir,
@@ -57,12 +102,102 @@ Future<void> genPubspec({
 }) =>
     ezCLI(
       exe: 'echo',
-      args: <String>['>', 'BLARG', 'pubspec.yaml'],
+      args: <String>[
+        '''name: example
+description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
+version: 1.5.2+14
+publish_to: 'none'
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Flutter (Google)
+  go_router: ^14.6.2
+  http: ^1.2.2
+  shared_preferences: ^2.3.4
+  url_launcher: ^6.3.1
+
+  # Community
+  feedback: ^3.1.0
+  file_picker: ^8.1.7
+  file_saver: ^0.2.14
+  flutter_localized_locales: ^2.0.5
+  flutter_platform_widgets: ^7.0.1
+  line_icons: ^2.0.3
+
+  empathetech_flutter_ui:
+    path: ../
+  efui_bios:
+    path: ../../efui_bios
+
+dev_dependencies:
+  dependency_validator: ^4.1.2
+  flutter_launcher_icons: ^0.14.2
+  flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.4
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  generate: true # For l10n
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/fonts/
+    - assets/fonts/Roboto-Black.ttf
+    - assets/fonts/Roboto-BlackItalic.ttf
+    - assets/fonts/Roboto-Bold.ttf
+    - assets/fonts/Roboto-BoldItalic.ttf
+    - assets/fonts/Roboto-Italic.ttf
+    - assets/fonts/Roboto-Light.ttf
+    - assets/fonts/Roboto-LightItalic.ttf
+    - assets/fonts/Roboto-Medium.ttf
+    - assets/fonts/Roboto-MediumItalic.ttf
+    - assets/fonts/Roboto-Regular.ttf
+    - assets/fonts/Roboto-Thin.ttf
+    - assets/fonts/Roboto-ThinItalic.ttf
+    - assets/images/
+    - assets/images/settings-sandbox.jpg
+    - assets/images/settings-sandbox-round.png
+
+flutter_launcher_icons:
+  image_path: assets/images/settings-sandbox.jpg
+  adaptive_icon_foreground: assets/images/settings-sandbox-round.png
+  adaptive_icon_background: "#F5F5F5"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  web:
+    generate: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+
+flutter_native_splash:
+  color: "#F5F5F5"
+  image: assets/images/settings-sandbox.jpg
+  android: true
+  ios: true
+  web: true
+''',
+        '>',
+        'pubspec.yaml',
+      ],
       dir: dir,
       onSuccess: onSuccess,
       onFailure: onFailure,
     );
 
+/// lib/ and many goodies within
+/// Heavily modified from the standard template
 Future<void> genLib({
   required EAGConfig config,
   required String dir,
@@ -72,6 +207,7 @@ Future<void> genLib({
   ezLog("I don't do anything... yet!\nAlso: BLARG");
 }
 
+/// Localizations config
 Future<void> genL10n({
   required EAGConfig config,
   required String dir,
@@ -81,16 +217,16 @@ Future<void> genL10n({
     ezCLI(
       exe: 'echo',
       args: <String>[
+        config.l10nConfig ?? 'null',
         '>',
-        config.l10nConfig ??
-            'Something went wrong\nnull config.l10nConfig sent to genL10n',
-        'l10n.yaml'
+        'l10n.yaml',
       ],
       dir: dir,
       onSuccess: onSuccess,
       onFailure: onFailure,
     );
 
+/// analysis_options.yaml
 Future<void> genAnalysis({
   required EAGConfig config,
   required String dir,
@@ -100,9 +236,8 @@ Future<void> genAnalysis({
     ezCLI(
       exe: 'echo',
       args: <String>[
+        config.analysisOptions ?? 'null',
         '>',
-        config.analysisOptions ??
-            'Something went wrong\nnull config.analysisOptions sent to genAnalysis',
         'analysis_options.yaml'
       ],
       dir: dir,
@@ -110,6 +245,7 @@ Future<void> genAnalysis({
       onFailure: onFailure,
     );
 
+/// Launch config
 Future<void> genVSCode({
   required EAGConfig config,
   required String dir,
@@ -129,10 +265,9 @@ Future<void> genVSCode({
   await ezCLI(
     exe: 'echo',
     args: <String>[
+      config.vsCodeConfig ?? 'null',
       '>',
-      config.vsCodeConfig ??
-          'Something went wrong\bnull config.vsCodeConfig sent to genVSCode',
-      '.vscode/launch.json'
+      '.vscode/launch.json',
     ],
     dir: dir,
     onSuccess: onSuccess,
@@ -140,6 +275,7 @@ Future<void> genVSCode({
   );
 }
 
+/// Skeleton setup to reduce testing friction
 Future<void> genIntegrationTests({
   required EAGConfig config,
   required String dir,
@@ -147,4 +283,6 @@ Future<void> genIntegrationTests({
   required void Function(String) onFailure,
 }) async {
   ezLog("I don't do anything... yet!\nAlso: BLARG");
+  // test_driver
+  // integration_test
 }
