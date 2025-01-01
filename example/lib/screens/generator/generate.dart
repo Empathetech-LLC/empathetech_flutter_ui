@@ -4,6 +4,7 @@
  */
 
 import '../../structs/export.dart';
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
@@ -89,23 +90,30 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [delStuff]
   Future<void> addStuff() async {
-    await genREADME(widget.config, projDir);
-    await genAppVersion(widget.config, projDir);
-    await genLicense(widget.config, projDir);
-    await genPubspec(widget.config, projDir);
-    await genLib(widget.config, projDir);
+    await genREADME(config: widget.config, dir: projDir, onFailure: onFailure);
+    await genAppVersion(
+        config: widget.config, dir: projDir, onFailure: onFailure);
+    await genLicense(config: widget.config, dir: projDir, onFailure: onFailure);
+    await genPubspec(config: widget.config, dir: projDir, onFailure: onFailure);
+    await genLib(config: widget.config, dir: projDir, onFailure: onFailure);
 
-    if (widget.config.l10nConfig != null) await genL10n(widget.config, projDir);
+    if (widget.config.l10nConfig != null) {
+      await genL10n(config: widget.config, dir: projDir, onFailure: onFailure);
+    }
 
     if (widget.config.analysisOptions != null) {
-      await genAnalysis(widget.config, projDir);
+      await genAnalysis(
+          config: widget.config, dir: projDir, onFailure: onFailure);
     }
 
     if (widget.config.vsCodeConfig != null) {
-      await genVSCode(widget.config, projDir);
+      await genVSCode(
+          config: widget.config, dir: projDir, onFailure: onFailure);
     }
 
-    await genIntegrationTests(widget.config, projDir);
+    await genIntegrationTests(
+        config: widget.config, dir: projDir, onFailure: onFailure);
+
     runStuff();
   }
 
