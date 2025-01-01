@@ -54,13 +54,8 @@ class OpenUIScaffold extends StatelessWidget {
 
     late final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
-        onPressed: () {
-          if (controller.isOpen) {
-            controller.close();
-          } else {
-            controller.open();
-          }
-        },
+        onPressed: () =>
+            (controller.isOpen) ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
         icon: const Icon(Icons.more_vert),
       ),
