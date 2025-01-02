@@ -194,7 +194,7 @@ Future<void> genLib({
       )
       .replaceRange(
         0,
-        0,
+        1,
         config.appName[0].toUpperCase(),
       );
 
@@ -958,7 +958,7 @@ Future<void> genIntegrationTests({
       )
       .replaceRange(
         0,
-        0,
+        1,
         config.appName[0].toUpperCase(),
       );
 
@@ -1025,7 +1025,7 @@ void main() async {
 
       // Load the app //
 
-      ezLog('Loading $humanCaseAppName').replaceRange(0, 0, config.appName[0].toUpperCase())}');
+      ezLog('Loading $humanCaseAppName');
       await tester.pumpWidget(const $classCaseAppName());
       await tester.pumpAndSettle();
     },
