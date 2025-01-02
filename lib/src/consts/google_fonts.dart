@@ -10,31 +10,31 @@ import 'package:google_fonts/google_fonts.dart';
 // Plus some ones we think are cute
 
 /// 'AlexBrush'
-const String alexBrush = 'AlexBrush';
+const String alexBrush = 'alexBrush';
 
 /// 'AtkinsonHyperlegible'
-const String atkinsonHyperlegible = 'AtkinsonHyperlegible';
+const String atkinsonHyperlegible = 'atkinsonHyperlegible';
 
 /// 'FingerPaint'
-const String fingerPaint = 'FingerPaint';
+const String fingerPaint = 'fingerPaint';
 
 /// 'Lexend'
-const String lexend = 'Lexend';
+const String lexend = 'lexend';
 
 /// 'NotoSans'
-const String noto = 'NotoSans';
+const String noto = 'noto';
 
 /// 'OpenSans'
-const String openSans = 'OpenSans';
+const String openSans = 'openSans';
 
 /// 'PressStart2P'
-const String pressStart2P = 'PressStart2P';
+const String pressStart2P = 'pressStart2P';
 
 /// 'ReadexPro'
-const String readexPro = 'ReadexPro';
+const String readexPro = 'readexPro';
 
 /// 'Roboto'
-const String roboto = 'Roboto';
+const String roboto = 'roboto';
 
 /// 'SourceCodePro'
 const String sourceCodePro = 'SourceCodePro';
