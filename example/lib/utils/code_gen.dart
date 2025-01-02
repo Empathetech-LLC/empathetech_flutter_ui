@@ -264,7 +264,9 @@ Future<void> genLib({
     return delegate == null ? '' : '\n...$delegate,\n';
   }
 
-  // Make directories //
+  //// Make it so ////
+
+  // Directories //
 
   await ezCLI(
     exe: 'mkdir',
@@ -280,7 +282,7 @@ Future<void> genLib({
     onFailure: onFailure,
   );
 
-  //// Make files ////
+  // Files //
 
   // main.dart
   await ezCLI(
@@ -1099,7 +1101,96 @@ Future<void> genIntegrationTests({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  ezLog("I don't do anything... yet!\nAlso: BLARG");
-  // test_driver
-  // integration_test
+  // Shared Strings //
+
+  final String copyright = config.copyright ?? '/* ${config.appName} */';
+
+  // Testing dirs //
+
+  await ezCLI(
+    exe: 'mkdir',
+    args: <String>[
+      'test_driver',
+      'integration_test',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // Testing files //
+
+  // Driver
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+import 'package:integration_test/integration_test_driver.dart';
+
+Future<void> main() => integrationDriver();
+""",
+      '>',
+      'test_driver/integration_test_driver.json',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // Tests
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      """$copyright
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+void main() async {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final Map<String, Object> testConfig = <String, Object>{
+    ...${config.appName.replaceAllMapped(RegExp(r'_(\w)'), (Match match) => match.group(1)!.toUpperCase())}Config,
+    isDarkThemeKey: true,
+  };
+
+  SharedPreferences.setMockInitialValues(testConfig);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  EzConfig.init(
+    assetPaths: <String>{},
+    preferences: prefs,
+    defaults: testConfig,
+  );
+
+  group(
+    'default-test',
+    () {
+      testWidgets('test-app', (WidgetTester tester) async {
+      // Load localization(s) //
+
+      ezLog('Loading localizations');
+      final EFUILang l10n = await EFUILang.delegate.load(locale);
+
+      // Load the app //
+
+      ezLog('Loading ${config.appName.replaceAllMapped(RegExp(r'_(\w)'), (Match match) => ' ${match.group(1)!.toUpperCase()}').replaceRange(0, 0, config.appName[0].toUpperCase())}');
+      await tester.pumpWidget(const OpenUI());
+      await tester.pumpAndSettle();
+    },
+  );
+}
+""",
+      '>',
+      'integration_test/test.json',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
 }
