@@ -248,7 +248,7 @@ Future<void> genLib({
       'lib/screens/settings',
     ],
     dir: dir,
-    onSuccess: onSuccess,
+    onSuccess: doNothing,
     onFailure: onFailure,
   );
 
@@ -923,7 +923,7 @@ Future<void> genL10n({
     exe: 'mkdir',
     args: <String>[l10nPath()],
     dir: dir,
-    onSuccess: onSuccess,
+    onSuccess: doNothing,
     onFailure: onFailure,
   );
 
@@ -993,13 +993,18 @@ Future<void> genVSCode({
     exe: 'mkdir',
     args: <String>['.vscode'],
     dir: dir,
-    onSuccess: onSuccess,
+    onSuccess: doNothing,
     onFailure: onFailure,
   );
 
   // Make file
-  final File file = File('$dir/.vscode/launch.json');
-  await file.writeAsString(config.vsCodeConfig!);
+  try {
+    final File file = File('$dir/.vscode/launch.json');
+    await file.writeAsString(config.vsCodeConfig!);
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
 }
 
 /// Skeleton setup to reduce testing friction
@@ -1044,24 +1049,25 @@ Future<void> genIntegrationTests({
       'integration_test',
     ],
     dir: dir,
-    onSuccess: onSuccess,
+    onSuccess: doNothing,
     onFailure: onFailure,
   );
 
   // Testing files //
 
-  // Driver
-  final File driver = File('$dir/test_driver/integration_test_driver.dart');
-  await driver.writeAsString("""$copyright
+  try {
+    // Driver
+    final File driver = File('$dir/test_driver/integration_test_driver.dart');
+    await driver.writeAsString("""$copyright
 
 import 'package:integration_test/integration_test_driver.dart';
 
 Future<void> main() => integrationDriver();
 """);
 
-  // Tests
-  final File tests = File('$dir/integration_test/test.dart');
-  await tests.writeAsString("""$copyright
+// Tests
+    final File tests = File('$dir/integration_test/test.dart');
+    await tests.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -1070,39 +1076,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 void main() async {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
+IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+WidgetsFlutterBinding.ensureInitialized();
 
-  final Map<String, Object> testConfig = <String, Object>{
-    ...${camelCaseAppName}Config,
-    isDarkThemeKey: true,
-  };
+final Map<String, Object> testConfig = <String, Object>{
+  ...${camelCaseAppName}Config,
+  isDarkThemeKey: true,
+};
 
-  SharedPreferences.setMockInitialValues(testConfig);
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
+SharedPreferences.setMockInitialValues(testConfig);
+final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  EzConfig.init(
-    assetPaths: <String>{},
-    preferences: prefs,
-    defaults: testConfig,
-  );
+EzConfig.init(
+  assetPaths: <String>{},
+  preferences: prefs,
+  defaults: testConfig,
+);
 
-  group(
-    'default-test',
-    () {
-      testWidgets('test-app', (WidgetTester tester) async {
-      // Load localization(s) //
+group(
+  'default-test',
+  () {
+    testWidgets('test-app', (WidgetTester tester) async {
+    // Load localization(s) //
 
-      ezLog('Loading localizations');
-      final EFUILang l10n = await EFUILang.delegate.load(locale);
+    ezLog('Loading localizations');
+    final EFUILang l10n = await EFUILang.delegate.load(locale);
 
-      // Load the app //
+    // Load the app //
 
-      ezLog('Loading $humanCaseAppName');
-      await tester.pumpWidget(const $classCaseAppName());
-      await tester.pumpAndSettle();
-    },
-  );
+    ezLog('Loading $humanCaseAppName');
+    await tester.pumpWidget(const $classCaseAppName());
+    await tester.pumpAndSettle();
+  },
+);
 }
 """);
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
 }
