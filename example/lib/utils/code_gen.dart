@@ -378,7 +378,7 @@ class $classCaseAppName extends StatelessWidget {
 const String appTitle = '$humanCaseAppName';
 
 /// Default [EzConfig] values
-const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${config.appDefaults.toString()}
+const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${config.appDefaults.toString().replaceAll(':', 'Key:')};
 """);
 
     // export.dart
