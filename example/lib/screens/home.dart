@@ -744,6 +744,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
           showAdvanced = false;
 
+          pathController.text = defaultPath;
+
           showCopyright = false;
           removeCopyright = false;
           copyrightController.text = copyrightDefault;
