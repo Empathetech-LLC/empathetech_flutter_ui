@@ -459,7 +459,7 @@ class PlusFAB extends StatelessWidget {
   final void Function() count;
 
   /// Increases the count (for the home screen)
-  const CountFAB({required this.count, super.key});
+  const CountFAB(this.count, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -743,7 +743,72 @@ class _ErrorScreenState extends State<ErrorScreen> {
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      """BLARG""",
+      """$copyright
+
+import '../utils/export.dart';
+import '../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Gather the theme data //
+
+  late final EFUILang l10n = EFUILang.of(context)!;
+
+  late final TextTheme textTheme = Theme.of(context).textTheme;
+  late final TextStyle? bigLabelStyle =
+      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
+  // Define the build data //
+
+  int count = 0;
+
+  // Set the page title //
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setPageTitle(appTitle, Theme.of(context).colorScheme.primary);
+  }
+
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
+    return ${classCaseAppName}Scaffold(
+      title: appTitle,
+      body: EzScreen(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                l10n.counterLabel,
+                style: bigLabelStyle,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                count.toString(),
+                style: textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+      fab: CountFAB(() => setState(() => count += 1)),
+    );
+  }
+}
+""",
       '>',
       'lib/screens/home.dart',
     ],
