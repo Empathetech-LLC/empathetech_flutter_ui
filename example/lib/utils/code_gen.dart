@@ -183,7 +183,7 @@ Future<void> genLib({
 
   final String classCaseAppName = camelCaseAppName.replaceRange(
     0,
-    0,
+    1,
     config.appName[0].toUpperCase(),
   );
 
@@ -940,6 +940,28 @@ Future<void> genIntegrationTests({
 
   final String copyright = config.copyright ?? '/* ${config.appName} */';
 
+  final String camelCaseAppName = config.appName.replaceAllMapped(
+    RegExp(r'_(\w)'),
+    (Match match) => match.group(1)!.toUpperCase(),
+  );
+
+  final String classCaseAppName = camelCaseAppName.replaceRange(
+    0,
+    1,
+    config.appName[0].toUpperCase(),
+  );
+
+  final String humanCaseAppName = config.appName
+      .replaceAllMapped(
+        RegExp(r'_(\w)'),
+        (Match match) => ' ${match.group(1)!.toUpperCase()}',
+      )
+      .replaceRange(
+        0,
+        0,
+        config.appName[0].toUpperCase(),
+      );
+
   // Testing dirs //
 
   await ezCLI(
@@ -965,7 +987,7 @@ Future<void> main() => integrationDriver();
 """);
 
   // Tests
-  final File tests = File('$dir/integration_test/test.json');
+  final File tests = File('$dir/integration_test/test.dart');
   await tests.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
@@ -979,7 +1001,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final Map<String, Object> testConfig = <String, Object>{
-    ...${config.appName.replaceAllMapped(RegExp(r'_(\w)'), (Match match) => match.group(1)!.toUpperCase())}Config,
+    ...${camelCaseAppName}Config,
     isDarkThemeKey: true,
   };
 
@@ -1003,8 +1025,8 @@ void main() async {
 
       // Load the app //
 
-      ezLog('Loading ${config.appName.replaceAllMapped(RegExp(r'_(\w)'), (Match match) => ' ${match.group(1)!.toUpperCase()}').replaceRange(0, 0, config.appName[0].toUpperCase())}');
-      await tester.pumpWidget(const OpenUI());
+      ezLog('Loading $humanCaseAppName').replaceRange(0, 0, config.appName[0].toUpperCase())}');
+      await tester.pumpWidget(const $classCaseAppName());
       await tester.pumpAndSettle();
     },
   );
