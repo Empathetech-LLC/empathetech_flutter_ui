@@ -517,8 +517,9 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
             titleSpacing: 0,
 
             // Actions (aka trailing aka right)
-            actions:
-                isLefty ? const <Widget>[EzBackAction()] : <Widget>[options],
+            actions: isLefty
+                ? const <Widget>[EzBackAction()]
+                : (showSettings ? <Widget>[options!] : null),
           ),
         ),
 
