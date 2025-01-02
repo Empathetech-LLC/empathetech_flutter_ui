@@ -8,7 +8,6 @@ import '../structs/export.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// Slightly modified from the standard template README
-/// Mostly with Empathetech LLC stuff TODO: Finish this
 Future<void> genREADME({
   required EAGConfig config,
   required String dir,
@@ -20,7 +19,7 @@ Future<void> genREADME({
       args: <String>[
         '''# ${config.appName}
 
-A new empathetic Flutter project.
+An empathetic Flutter project.
 
 ## Getting Started
 
@@ -32,15 +31,23 @@ A few resources to get you started if this is your first Flutter project:
 
 ## Maintaining Momentum
 
-Thanks for using Open UI!
+Thanks for using Open UI! We hope you find it helpful.
 
-P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend removing them if this project is going to be public.
+All that we ask is that you leave the credits/acknowledgements for Empathetech LLC in the code, everywhere they are found.
+
+That, and/or donate via one of the many options we provide; if (and only if) the product that we catalyze (and you make) becomes profitable.
+
+P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend removing them if this project is going to be made public.
 
 ## Credits
 
 ${config.appName} began with [Open UI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)'s app generation service.
 
-It is free and open source, maintained by Empathetech LLC.
+It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
+
+If you have an idea that needs to be made a reality, check out [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)!
+
+If you are a fan of digital accessibility and want to encourage its existence, please join the [contributors](https://www.empathetech.net/#/contribute)!
 ''',
         '>',
         'README.md',
@@ -68,7 +75,16 @@ Future<void> genVersionTracking({
   await ezCLI(
     exe: 'echo',
     args: <String>[
-      'BLARG',
+      '''# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [1.0.0] - ${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}
+### Added
+- ${config.appName} foundation generated via [Open UI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+''',
       '>',
       'CHANGELOG.md',
     ],
