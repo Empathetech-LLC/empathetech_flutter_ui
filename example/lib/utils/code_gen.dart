@@ -371,6 +371,19 @@ class $classCaseAppName extends StatelessWidget {
     // utils //
 
     // consts.dart
+    String configString() {
+      String result = '{';
+
+      for (final MapEntry<String, dynamic> entry
+          in config.appDefaults.entries) {
+        if (entry.value != null && !entry.key.contains('Image')) {
+          result += '${entry.key}Key: ${entry.value},';
+        }
+      }
+
+      return '$result}';
+    }
+
     final File utilsConsts = File('$dir/lib/utils/consts.dart');
     await utilsConsts.writeAsString("""$copyright
 
@@ -378,7 +391,7 @@ class $classCaseAppName extends StatelessWidget {
 const String appTitle = '$humanCaseAppName';
 
 /// Default [EzConfig] values
-const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${config.appDefaults.toString().replaceAll(':', 'Key:')};
+const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
 """);
 
     // export.dart
