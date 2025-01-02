@@ -5,6 +5,8 @@
 
 import '../structs/export.dart';
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// Slightly modified from the standard template README
@@ -109,19 +111,31 @@ Future<void> genLicense({
       onFailure: onFailure,
     );
 
-/// pubspec.yaml TODO: https://pub.dev/help/api
+/// pubspec.yaml
 Future<void> genPubspec({
   required EAGConfig config,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>[
-        '''name: example
-description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, check out https://github.com/Empathetech-LLC/empathetech_flutter_ui"
-version: 1.5.2+14
+}) async {
+  Future<String?> getLatest(String packageName) async {
+    final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
+    final http.Response response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      return jsonResponse['latest']['version'];
+    } else {
+      return null;
+    }
+  }
+
+  await ezCLI(
+    exe: 'echo',
+    args: <String>[
+      '''name: ${config.appName}
+description: "${config.description}"
+version: 1.0.0
 publish_to: 'none'
 
 environment:
@@ -132,85 +146,36 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  go_router: ^14.6.2
-  http: ^1.2.2
-  shared_preferences: ^2.3.4
-  url_launcher: ^6.3.1
+  go_router: ${await getLatest('go_router') ?? '^14.6.2'}
+  http: ${await getLatest('http') ?? '^1.2.2'}
+  shared_preferences: ${await getLatest('shared_preferences') ?? '^2.3.4'}
+  url_launcher: ${await getLatest('url_launcher') ?? '^6.3.1'}
 
   # Community
-  feedback: ^3.1.0
-  file_picker: ^8.1.7
-  file_saver: ^0.2.14
-  flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^7.0.1
-  line_icons: ^2.0.3
-
-  empathetech_flutter_ui:
-    path: ../
-  efui_bios:
-    path: ../../efui_bios
+  empathetech_flutter_ui: ${await getLatest('empathetech_flutter_ui') ?? '^8.0.0'}
+  flutter_localized_locales: ${await getLatest('flutter_localized_locales') ?? '^2.0.5'}
+  flutter_platform_widgets: ${await getLatest('flutter_platform_widgets') ?? '^7.0.1'}
 
 dev_dependencies:
-  dependency_validator: ^4.1.2
-  flutter_launcher_icons: ^0.14.2
-  flutter_lints: ^5.0.0
-  flutter_native_splash: ^2.4.4
+  dependency_validator: ${await getLatest('dependency_validator') ?? '^4.1.2'}
+  flutter_lints: ${await getLatest('flutter_lints') ?? '^5.0.0'}
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
 
 flutter:
-  generate: true # For l10n
+  generate: true
   uses-material-design: true
-
-  assets:
-    - assets/
-    - assets/fonts/
-    - assets/fonts/Roboto-Black.ttf
-    - assets/fonts/Roboto-BlackItalic.ttf
-    - assets/fonts/Roboto-Bold.ttf
-    - assets/fonts/Roboto-BoldItalic.ttf
-    - assets/fonts/Roboto-Italic.ttf
-    - assets/fonts/Roboto-Light.ttf
-    - assets/fonts/Roboto-LightItalic.ttf
-    - assets/fonts/Roboto-Medium.ttf
-    - assets/fonts/Roboto-MediumItalic.ttf
-    - assets/fonts/Roboto-Regular.ttf
-    - assets/fonts/Roboto-Thin.ttf
-    - assets/fonts/Roboto-ThinItalic.ttf
-    - assets/images/
-    - assets/images/settings-sandbox.jpg
-    - assets/images/settings-sandbox-round.png
-
-flutter_launcher_icons:
-  image_path: assets/images/settings-sandbox.jpg
-  adaptive_icon_foreground: assets/images/settings-sandbox-round.png
-  adaptive_icon_background: "#F5F5F5"
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  web:
-    generate: true
-  windows:
-    generate: true
-  macos:
-    generate: true
-
-flutter_native_splash:
-  color: "#F5F5F5"
-  image: assets/images/settings-sandbox.jpg
-  android: true
-  ios: true
-  web: true
 ''',
-        '>',
-        'pubspec.yaml',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+      '>',
+      'pubspec.yaml',
+    ],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+}
 
 /// lib/ and many goodies within
 /// Heavily modified from the standard template
