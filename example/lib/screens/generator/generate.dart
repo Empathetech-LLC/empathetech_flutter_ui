@@ -43,12 +43,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define custom functions //
 
-  void onFailure(String message) => setState(() => centerPiece =
-      failurePage(context, '\nSomething went wrong...\n\n$message', textTheme));
+  void onFailure(String message) {
+    setState(() => centerPiece = failurePage(
+        context, '\nSomething went wrong...\n\n$message', textTheme));
+    return;
+  }
 
   /// Run Flutter, Run!
   Future<void> genStuff() async {
-    ezCLI(
+    await ezCLI(
       exe: 'flutter',
       args: <String>[
         'create',
@@ -64,7 +67,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [genStuff]
   Future<void> delStuff() async {
-    ezCLI(
+    await ezCLI(
       exe: 'rm',
       args: <String>[
         '-rf',
@@ -106,7 +109,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await genIntegrationTests(
         config: widget.config, dir: projDir, onFailure: onFailure);
 
-    runStuff();
+    await runStuff();
   }
 
   /// Runs immediately after a successful [addStuff]
