@@ -254,7 +254,7 @@ Future<void> genLib({
 
   // main.dart
   try {
-    final File dartMain = File('$dir/main.dart');
+    final File dartMain = File('$dir/lib/main.dart');
     await dartMain.writeAsString("""$copyright
 
 import './screens/export.dart';
@@ -371,7 +371,7 @@ class $classCaseAppName extends StatelessWidget {
     // utils //
 
     // consts.dart
-    final File utilsConsts = File('$dir/utils/consts.dart');
+    final File utilsConsts = File('$dir/lib/utils/consts.dart');
     await utilsConsts.writeAsString("""$copyright
 
 /// $humanCaseAppName
@@ -379,7 +379,7 @@ const String appTitle = '$humanCaseAppName';
 """);
 
     // export.dart
-    final File utilsExport = File('$dir/utils/export.dart');
+    final File utilsExport = File('$dir/lib/utils/export.dart');
     await utilsExport.writeAsString("""$copyright
 
 export 'consts.dart';
@@ -388,7 +388,7 @@ export 'consts.dart';
     // widgets //
 
     // fabulous.dart
-    final File fabulous = File('$dir/widgets/fabulous.dart');
+    final File fabulous = File('$dir/lib/widgets/fabulous.dart');
     await fabulous.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
@@ -416,7 +416,7 @@ class PlusFAB extends StatelessWidget {
 """);
 
     // menu_buttons.dart
-    final File menuButtons = File('$dir/widgets/menu_buttons.dart');
+    final File menuButtons = File('$dir/lib/widgets/menu_buttons.dart');
     await menuButtons.writeAsString("""$copyright
 
 import '../screens/export.dart';
@@ -443,7 +443,7 @@ class SettingsButton extends StatelessWidget {
 
     // scaffold file
     final File scaffoldWidget =
-        File('$dir/widgets/${config.appName}_scaffold.dart');
+        File('$dir/lib/widgets/${config.appName}_scaffold.dart');
     await scaffoldWidget.writeAsString("""$copyright
 
 import './export.dart';
@@ -552,7 +552,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 """);
 
     // export.dart
-    final File widgetsExport = File('$dir/widgets/export.dart');
+    final File widgetsExport = File('$dir/lib/widgets/export.dart');
     await widgetsExport.writeAsString("""$copyright
 
 export 'fabulous.dart';
@@ -563,7 +563,7 @@ export '${config.appName}_scaffold.dart';
     // screens //
 
     // error.dart
-    final File errorScreen = File('$dir/screens/error.dart');
+    final File errorScreen = File('$dir/lib/screens/error.dart');
     await errorScreen.writeAsString("""$copyright
 
 import '../widgets/export.dart';
@@ -640,7 +640,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 """);
 
     // home_screen.dart
-    final File homeScreen = File('$dir/screens/home.dart');
+    final File homeScreen = File('$dir/lib/screens/home.dart');
     await homeScreen.writeAsString("""$copyright
 
 import '../utils/export.dart';
@@ -709,7 +709,8 @@ class _HomeScreenState extends State<HomeScreen> {
 """);
 
     // settings_home.dart
-    final File settingsHome = File('$dir/screens/settings/settings_home.dart');
+    final File settingsHome =
+        File('$dir/lib/screens/settings/settings_home.dart');
     await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
@@ -738,7 +739,7 @@ class SettingsHomeScreen extends StatelessWidget {
     // text_settings_screen.dart?
     if (config.textSettings) {
       final File textSettings =
-          File('$dir/screens/settings/text_settings.dart');
+          File('$dir/lib/screens/settings/text_settings.dart');
       await textSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -762,7 +763,7 @@ class TextSettingsScreen extends StatelessWidget {
     // layout_settings_screen.dart?
     if (config.layoutSettings) {
       final File layoutSettings =
-          File('$dir/screens/settings/layout_settings.dart');
+          File('$dir/lib/screens/settings/layout_settings.dart');
       await layoutSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -786,7 +787,7 @@ class LayoutSettingsScreen extends StatelessWidget {
     // color_settings_screen.dart?
     if (config.colorSettings) {
       final File colorSettings =
-          File('$dir/screens/settings/color_settings.dart');
+          File('$dir/lib/screens/settings/color_settings.dart');
       await colorSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -810,7 +811,7 @@ class ColorSettingsScreen extends StatelessWidget {
     // image_settings_screen.dart?
     if (config.imageSettings) {
       final File imageSettings =
-          File('$dir/screens/settings/image_settings.dart');
+          File('$dir/lib/screens/settings/image_settings.dart');
       await imageSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -832,7 +833,7 @@ class ImageSettingsScreen extends StatelessWidget {
     }
 
     // export.dart
-    final File screensExport = File('$dir/screens/export.dart');
+    final File screensExport = File('$dir/lib/screens/export.dart');
     await screensExport.writeAsString("""$copyright
 
 // Exports //
