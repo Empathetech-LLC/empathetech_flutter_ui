@@ -892,7 +892,7 @@ Future<void> genL10n({
 }) async {
   if (config.l10nConfig == null) return;
 
-  String l10nName() {
+  String getL10nName() {
     final List<String> lines = config.l10nConfig!.split('\n');
 
     for (final String line in lines) {
@@ -905,7 +905,7 @@ Future<void> genL10n({
     return 'lang';
   }
 
-  String l10nPath() {
+  String getL10nPath() {
     final List<String> lines = config.l10nConfig!.split('\n');
 
     for (final String line in lines) {
@@ -918,10 +918,13 @@ Future<void> genL10n({
     return 'lib/10n';
   }
 
+  final String l10nName = getL10nName();
+  final String l10nPath = getL10nPath();
+
   // Make dir
   await ezCLI(
     exe: 'mkdir',
-    args: <String>[l10nPath()],
+    args: <String>[l10nPath],
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -929,7 +932,7 @@ Future<void> genL10n({
 
   // Make files
   try {
-    final File english = File('$dir/${l10nPath()}/${l10nName()}_en.arb');
+    final File english = File('$dir/$l10nPath/${l10nName}_en.arb');
     await english.writeAsString('''{
   "@@locale": "en",
 
@@ -938,7 +941,7 @@ Future<void> genL10n({
   "hsCounterLabel": "You have pushed the button this many times:"
 }''');
 
-    final File spanish = File('$dir/${l10nPath()}/${l10nName()}_es.arb');
+    final File spanish = File('$dir/$l10nPath/${l10nName}_es.arb');
     await spanish.writeAsString('''{
   "@@locale": "es",
 
@@ -947,7 +950,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Has pulsado el botón muchas veces:"
 }''');
 
-    final File french = File('$dir/${l10nPath()}/${l10nName()}_fr.arb');
+    final File french = File('$dir/$l10nPath/${l10nName}_fr.arb');
     await french.writeAsString('''{
   "@@locale": "fr",
 
@@ -955,6 +958,9 @@ Future<void> genL10n({
 
   "hsCounterLabel": "Vous avez appuyé sur le bouton autant de fois que cela :"
 }''');
+
+    final File l10nConfig = File('$dir/l10n.yaml');
+    await l10nConfig.writeAsString(config.l10nConfig!);
   } catch (e) {
     onFailure(e.toString());
   }
