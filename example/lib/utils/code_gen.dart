@@ -5,6 +5,7 @@
 
 import '../structs/export.dart';
 
+import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -15,11 +16,10 @@ Future<void> genREADME({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>[
-        '''# ${config.appName}
+}) async {
+  try {
+    final File file = File('$dir/README.md');
+    await file.writeAsString('''# ${config.appName}
 
 An empathetic Flutter project.
 
@@ -50,14 +50,12 @@ It is free and open source, maintained by [Empathetech LLC](https://www.empathet
 If you have an idea that needs to be made a reality, check out [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)!
 
 If you are a fan of digital accessibility and want to encourage its existence, please join the [contributors](https://www.empathetech.net/#/contribute)!
-''',
-        '>',
-        'README.md',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+''');
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
+}
 
 /// APP_VERSION and CHANGELOG.md
 Future<void> genVersionTracking({
@@ -66,34 +64,26 @@ Future<void> genVersionTracking({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  await ezCLI(
-    exe: 'echo',
-    args: <String>['1.0.0', '>', 'APP_VERSION'],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+  try {
+    final File version = File('$dir/APP_VERSION');
+    await version.writeAsString('1.0.0');
 
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      '''# Changelog
+    final DateTime now = DateTime.now();
+    final File changelog = File('$dir/CHANGELOG.md');
+    await changelog.writeAsString('''# Changelog
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - ${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}
+## [1.0.0] - ${now.year}-${now.month}-${now.day}
 ### Added
 - ${config.appName} foundation generated via [Open UI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-''',
-      '>',
-      'CHANGELOG.md',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+''');
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
 }
 
 /// LICENSE
@@ -102,14 +92,15 @@ Future<void> genLicense({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>[config.license, '>', 'LICENSE'],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+}) async {
+  try {
+    final File file = File('$dir/LICENSE');
+    await file.writeAsString(config.license);
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
+}
 
 /// pubspec.yaml
 Future<void> genPubspec({
@@ -130,10 +121,9 @@ Future<void> genPubspec({
     }
   }
 
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      '''name: ${config.appName}
+  try {
+    final File version = File('$dir/pubspec.yaml');
+    await version.writeAsString('''name: ${config.appName}
 description: "${config.description}"
 version: 1.0.0
 publish_to: 'none'
@@ -167,14 +157,11 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
-''',
-      '>',
-      'pubspec.yaml',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+''');
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
 }
 
 /// lib/ and many goodies within
