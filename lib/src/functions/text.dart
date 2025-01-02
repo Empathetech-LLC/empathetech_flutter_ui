@@ -100,11 +100,11 @@ TextTheme ezTextTheme(Color? color) {
 TextStyle buildDisplay(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
-    fontWeight: EzConfig.get(displayBoldKey) == true
+    fontWeight: EzConfig.get(displayBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
     fontStyle:
-        EzConfig.get(displayItalicsKey) == true ? FontStyle.italic : null,
+        EzConfig.get(displayItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(displayUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -125,10 +125,10 @@ TextStyle buildDisplay(Color? color) {
 TextStyle buildDisplayFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(displayFontSizeKey),
-    fontWeight: EzConfig.getDefault(displayBoldKey) == true
+    fontWeight: EzConfig.getDefault(displayBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(displayItalicsKey) == true
+    fontStyle: EzConfig.getDefault(displayItalicizedKey) == true
         ? FontStyle.italic
         : null,
     decoration: EzConfig.getDefault(displayUnderlinedKey) == true
@@ -151,11 +151,11 @@ TextStyle buildDisplayFromDefaults(Color? color) {
 TextStyle buildHeadline(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
-    fontWeight: EzConfig.get(headlineBoldKey) == true
+    fontWeight: EzConfig.get(headlineBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
     fontStyle:
-        EzConfig.get(headlineItalicsKey) == true ? FontStyle.italic : null,
+        EzConfig.get(headlineItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(headlineUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -176,10 +176,10 @@ TextStyle buildHeadline(Color? color) {
 TextStyle buildHeadlineFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(headlineFontSizeKey),
-    fontWeight: EzConfig.getDefault(headlineBoldKey) == true
+    fontWeight: EzConfig.getDefault(headlineBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(headlineItalicsKey) == true
+    fontStyle: EzConfig.getDefault(headlineItalicizedKey) == true
         ? FontStyle.italic
         : null,
     decoration: EzConfig.getDefault(headlineUnderlinedKey) == true
@@ -202,10 +202,11 @@ TextStyle buildHeadlineFromDefaults(Color? color) {
 TextStyle buildTitle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
-    fontWeight: EzConfig.get(titleBoldKey) == true
+    fontWeight: EzConfig.get(titleBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.get(titleItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle:
+        EzConfig.get(titleItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(titleUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -226,11 +227,12 @@ TextStyle buildTitle(Color? color) {
 TextStyle buildTitleFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(titleFontSizeKey),
-    fontWeight: EzConfig.getDefault(titleBoldKey) == true
+    fontWeight: EzConfig.getDefault(titleBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(titleItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(titleItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(titleUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -251,9 +253,11 @@ TextStyle buildTitleFromDefaults(Color? color) {
 TextStyle buildBody(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
-    fontWeight:
-        EzConfig.get(bodyBoldKey) == true ? FontWeight.bold : FontWeight.normal,
-    fontStyle: EzConfig.get(bodyItalicsKey) == true ? FontStyle.italic : null,
+    fontWeight: EzConfig.get(bodyBoldedKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.get(bodyItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(bodyUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -274,11 +278,12 @@ TextStyle buildBody(Color? color) {
 TextStyle buildBodyFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(bodyFontSizeKey),
-    fontWeight: EzConfig.getDefault(bodyBoldKey) == true
+    fontWeight: EzConfig.getDefault(bodyBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(bodyItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(bodyItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(bodyUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -299,10 +304,11 @@ TextStyle buildBodyFromDefaults(Color? color) {
 TextStyle buildLabel(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
-    fontWeight: EzConfig.get(labelBoldKey) == true
+    fontWeight: EzConfig.get(labelBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.get(labelItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle:
+        EzConfig.get(labelItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(labelUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -323,11 +329,12 @@ TextStyle buildLabel(Color? color) {
 TextStyle buildLabelFromDefaults(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(labelFontSizeKey),
-    fontWeight: EzConfig.getDefault(labelBoldKey) == true
+    fontWeight: EzConfig.getDefault(labelBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(labelItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(labelItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(labelUnderlinedKey) == true
         ? TextDecoration.underline
         : null,

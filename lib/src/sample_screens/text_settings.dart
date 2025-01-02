@@ -172,8 +172,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
 
-  late final String oKey =
-      isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+  late final String oKey = isDarkTheme(context)
+      ? darkTextBackgroundOpacityKey
+      : lightTextBackgroundOpacityKey;
 
   late double currOpacity =
       EzConfig.getDouble(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
@@ -569,32 +570,32 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzBoldSetting> boldControllers =
       <TextSettingType, EzBoldSetting>{
     TextSettingType.display: EzBoldSetting(
-      key: ValueKey<String>('$displayBoldKey-${displayProvider.id}'),
-      configKey: displayBoldKey,
+      key: ValueKey<String>('$displayBoldedKey-${displayProvider.id}'),
+      configKey: displayBoldedKey,
       notifierCallback: displayProvider.bold,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.headline: EzBoldSetting(
-      key: ValueKey<String>('$headlineBoldKey-${headlineProvider.id}'),
-      configKey: headlineBoldKey,
+      key: ValueKey<String>('$headlineBoldedKey-${headlineProvider.id}'),
+      configKey: headlineBoldedKey,
       notifierCallback: headlineProvider.bold,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.title: EzBoldSetting(
-      key: ValueKey<String>('$titleBoldKey-${titleProvider.id}'),
-      configKey: titleBoldKey,
+      key: ValueKey<String>('$titleBoldedKey-${titleProvider.id}'),
+      configKey: titleBoldedKey,
       notifierCallback: titleProvider.bold,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.body: EzBoldSetting(
-      key: ValueKey<String>('$bodyBoldKey-${bodyProvider.id}'),
-      configKey: bodyBoldKey,
+      key: ValueKey<String>('$bodyBoldedKey-${bodyProvider.id}'),
+      configKey: bodyBoldedKey,
       notifierCallback: bodyProvider.bold,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.label: EzBoldSetting(
-      key: ValueKey<String>('$labelBoldKey-${labelProvider.id}'),
-      configKey: labelBoldKey,
+      key: ValueKey<String>('$labelBoldedKey-${labelProvider.id}'),
+      configKey: labelBoldedKey,
       notifierCallback: labelProvider.bold,
       size: titleProvider.value.fontSize,
     ),
@@ -604,32 +605,32 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   late final Map<TextSettingType, EzItalicSetting> italicsControllers =
       <TextSettingType, EzItalicSetting>{
     TextSettingType.display: EzItalicSetting(
-      key: ValueKey<String>('$displayItalicsKey-${displayProvider.id}'),
-      configKey: displayItalicsKey,
+      key: ValueKey<String>('$displayItalicizedKey-${displayProvider.id}'),
+      configKey: displayItalicizedKey,
       notifierCallback: displayProvider.italic,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.headline: EzItalicSetting(
-      key: ValueKey<String>('$headlineItalicsKey-${headlineProvider.id}'),
-      configKey: headlineItalicsKey,
+      key: ValueKey<String>('$headlineItalicizedKey-${headlineProvider.id}'),
+      configKey: headlineItalicizedKey,
       notifierCallback: headlineProvider.italic,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.title: EzItalicSetting(
-      key: ValueKey<String>('$titleItalicsKey-${titleProvider.id}'),
-      configKey: titleItalicsKey,
+      key: ValueKey<String>('$titleItalicizedKey-${titleProvider.id}'),
+      configKey: titleItalicizedKey,
       notifierCallback: titleProvider.italic,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.body: EzItalicSetting(
-      key: ValueKey<String>('$bodyItalicsKey-${bodyProvider.id}'),
-      configKey: bodyItalicsKey,
+      key: ValueKey<String>('$bodyItalicizedKey-${bodyProvider.id}'),
+      configKey: bodyItalicizedKey,
       notifierCallback: bodyProvider.italic,
       size: titleProvider.value.fontSize,
     ),
     TextSettingType.label: EzItalicSetting(
-      key: ValueKey<String>('$labelItalicsKey-${labelProvider.id}'),
-      configKey: labelItalicsKey,
+      key: ValueKey<String>('$labelItalicizedKey-${labelProvider.id}'),
+      configKey: labelItalicizedKey,
       notifierCallback: labelProvider.italic,
       size: titleProvider.value.fontSize,
     ),

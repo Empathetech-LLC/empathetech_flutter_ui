@@ -23,8 +23,8 @@ const Map<String, Type> globalKeys = <String, Type>{
 // Display
 const String displayFontFamilyKey = 'displayFontFamily';
 const String displayFontSizeKey = 'displayFontSize';
-const String displayBoldKey = 'displayBolded';
-const String displayItalicsKey = 'displayItalicized';
+const String displayBoldedKey = 'displayBolded';
+const String displayItalicizedKey = 'displayItalicized';
 const String displayUnderlinedKey = 'displayUnderlined';
 const String displayLetterSpacingKey = 'displayLetterSpacing';
 const String displayWordSpacingKey = 'displayWordSpacing';
@@ -33,8 +33,8 @@ const String displayFontHeightKey = 'displayFontHeight';
 // Headline
 const String headlineFontFamilyKey = 'headlineFontFamily';
 const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineBoldKey = 'headlineBolded';
-const String headlineItalicsKey = 'headlineItalicized';
+const String headlineBoldedKey = 'headlineBolded';
+const String headlineItalicizedKey = 'headlineItalicized';
 const String headlineUnderlinedKey = 'headlineUnderlined';
 const String headlineLetterSpacingKey = 'headlineLetterSpacing';
 const String headlineWordSpacingKey = 'headlineWordSpacing';
@@ -43,8 +43,8 @@ const String headlineFontHeightKey = 'headlineFontHeight';
 // Title
 const String titleFontFamilyKey = 'titleFontFamily';
 const String titleFontSizeKey = 'titleFontSize';
-const String titleBoldKey = 'titleBolded';
-const String titleItalicsKey = 'titleItalicized';
+const String titleBoldedKey = 'titleBolded';
+const String titleItalicizedKey = 'titleItalicized';
 const String titleUnderlinedKey = 'titleUnderlined';
 const String titleLetterSpacingKey = 'titleLetterSpacing';
 const String titleWordSpacingKey = 'titleWordSpacing';
@@ -53,8 +53,8 @@ const String titleFontHeightKey = 'titleFontHeight';
 // Body
 const String bodyFontFamilyKey = 'bodyFontFamily';
 const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyBoldKey = 'bodyBolded';
-const String bodyItalicsKey = 'bodyItalicized';
+const String bodyBoldedKey = 'bodyBolded';
+const String bodyItalicizedKey = 'bodyItalicized';
 const String bodyUnderlinedKey = 'bodyUnderlined';
 const String bodyLetterSpacingKey = 'bodyLetterSpacing';
 const String bodyWordSpacingKey = 'bodyWordSpacing';
@@ -63,16 +63,16 @@ const String bodyFontHeightKey = 'bodyFontHeight';
 // Label
 const String labelFontFamilyKey = 'labelFontFamily';
 const String labelFontSizeKey = 'labelFontSize';
-const String labelBoldKey = 'labelBolded';
-const String labelItalicsKey = 'labelItalicized';
+const String labelBoldedKey = 'labelBolded';
+const String labelItalicizedKey = 'labelItalicized';
 const String labelUnderlinedKey = 'labelUnderlined';
 const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
 const String labelFontHeightKey = 'labelFontHeight';
 
 // Background opacity
-const String darkTextBackgroundOKey = 'darkTextBackgroundOpacity';
-const String lightTextBackgroundOKey = 'lightTextBackgroundOpacity';
+const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
+const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -81,8 +81,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Display
   displayFontFamilyKey: String,
   displayFontSizeKey: double,
-  displayBoldKey: bool,
-  displayItalicsKey: bool,
+  displayBoldedKey: bool,
+  displayItalicizedKey: bool,
   displayUnderlinedKey: bool,
   displayLetterSpacingKey: double,
   displayWordSpacingKey: double,
@@ -91,8 +91,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Headline
   headlineFontFamilyKey: String,
   headlineFontSizeKey: double,
-  headlineBoldKey: bool,
-  headlineItalicsKey: bool,
+  headlineBoldedKey: bool,
+  headlineItalicizedKey: bool,
   headlineUnderlinedKey: bool,
   headlineLetterSpacingKey: double,
   headlineWordSpacingKey: double,
@@ -101,8 +101,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Title
   titleFontFamilyKey: String,
   titleFontSizeKey: double,
-  titleBoldKey: bool,
-  titleItalicsKey: bool,
+  titleBoldedKey: bool,
+  titleItalicizedKey: bool,
   titleUnderlinedKey: bool,
   titleLetterSpacingKey: double,
   titleWordSpacingKey: double,
@@ -111,8 +111,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Body
   bodyFontFamilyKey: String,
   bodyFontSizeKey: double,
-  bodyBoldKey: bool,
-  bodyItalicsKey: bool,
+  bodyBoldedKey: bool,
+  bodyItalicizedKey: bool,
   bodyUnderlinedKey: bool,
   bodyLetterSpacingKey: double,
   bodyWordSpacingKey: double,
@@ -121,16 +121,16 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Label
   labelFontFamilyKey: String,
   labelFontSizeKey: double,
-  labelBoldKey: bool,
-  labelItalicsKey: bool,
+  labelBoldedKey: bool,
+  labelItalicizedKey: bool,
   labelUnderlinedKey: bool,
   labelLetterSpacingKey: double,
   labelWordSpacingKey: double,
   labelFontHeightKey: double,
 
   // Background opacity
-  darkTextBackgroundOKey: double,
-  lightTextBackgroundOKey: double,
+  darkTextBackgroundOpacityKey: double,
+  lightTextBackgroundOpacityKey: double,
 };
 
 // Text settings' values //

@@ -34,8 +34,8 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double textBackgroundOpacity = EzConfig.get(
     brightness == Brightness.dark
-        ? darkTextBackgroundOKey
-        : lightTextBackgroundOKey,
+        ? darkTextBackgroundOpacityKey
+        : lightTextBackgroundOpacityKey,
   );
 
   final double margin = EzConfig.get(marginKey);

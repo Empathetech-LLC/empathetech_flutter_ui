@@ -24,7 +24,7 @@ class EzTextBackground extends StatelessWidget {
   /// Can ignore [useSurface] if this is set
   final Color? backgroundColor;
 
-  /// Create a [Container] for your [text] with a background color that automatically responds to [textBackgroundOKey]
+  /// Create a [Container] for your [text] with a background color that automatically responds to [textBackgroundOpacityKey]
   const EzTextBackground(
     this.text, {
     super.key,
@@ -36,8 +36,9 @@ class EzTextBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final String oKey =
-        isDarkTheme(context) ? darkTextBackgroundOKey : lightTextBackgroundOKey;
+    late final String oKey = isDarkTheme(context)
+        ? darkTextBackgroundOpacityKey
+        : lightTextBackgroundOpacityKey;
 
     late final double percent =
         EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;

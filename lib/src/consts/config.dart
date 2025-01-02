@@ -200,8 +200,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Display
   displayFontFamilyKey: roboto,
   displayFontSizeKey: defaultDisplaySize,
-  displayBoldKey: false,
-  displayItalicsKey: false,
+  displayBoldedKey: false,
+  displayItalicizedKey: false,
   displayUnderlinedKey: false,
   displayFontHeightKey: defaultFontHeight,
   displayLetterSpacingKey: defaultLetterSpacing,
@@ -210,8 +210,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Headline
   headlineFontFamilyKey: roboto,
   headlineFontSizeKey: defaultHeadlineSize,
-  headlineBoldKey: false,
-  headlineItalicsKey: false,
+  headlineBoldedKey: false,
+  headlineItalicizedKey: false,
   headlineUnderlinedKey: false,
   headlineFontHeightKey: defaultFontHeight,
   headlineLetterSpacingKey: defaultLetterSpacing,
@@ -220,8 +220,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Title
   titleFontFamilyKey: roboto,
   titleFontSizeKey: defaultTitleSize,
-  titleBoldKey: true,
-  titleItalicsKey: false,
+  titleBoldedKey: true,
+  titleItalicizedKey: false,
   titleUnderlinedKey: false,
   titleFontHeightKey: defaultFontHeight,
   titleLetterSpacingKey: defaultLetterSpacing,
@@ -230,8 +230,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Body
   bodyFontFamilyKey: roboto,
   bodyFontSizeKey: defaultBodySize,
-  bodyBoldKey: false,
-  bodyItalicsKey: false,
+  bodyBoldedKey: false,
+  bodyItalicizedKey: false,
   bodyUnderlinedKey: false,
   bodyFontHeightKey: defaultFontHeight,
   bodyLetterSpacingKey: defaultLetterSpacing,
@@ -240,16 +240,16 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Label
   labelFontFamilyKey: roboto,
   labelFontSizeKey: defaultLabelSize,
-  labelBoldKey: false,
-  labelItalicsKey: false,
+  labelBoldedKey: false,
+  labelItalicizedKey: false,
   labelUnderlinedKey: false,
   labelFontHeightKey: defaultFontHeight,
   labelLetterSpacingKey: defaultLetterSpacing,
   labelWordSpacingKey: defaultWordSpacing,
 
   // Background opacity
-  darkTextBackgroundOKey: 0.0,
-  lightTextBackgroundOKey: 0.0,
+  darkTextBackgroundOpacityKey: 0.0,
+  lightTextBackgroundOpacityKey: 0.0,
 
   // Layout settings //
 

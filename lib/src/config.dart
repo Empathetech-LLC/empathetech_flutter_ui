@@ -336,8 +336,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     await setString(displayFontFamilyKey, attentionStyle);
     await setDouble(displayFontSizeKey, 42.0 * attentionScale);
-    await setBool(displayBoldKey, false);
-    await setBool(displayItalicsKey, false);
+    await setBool(displayBoldedKey, false);
+    await setBool(displayItalicizedKey, false);
     await setBool(displayUnderlinedKey, random.nextBool());
     await setDouble(displayFontHeightKey, defaultFontHeight);
     await setDouble(displayLetterSpacingKey, defaultLetterSpacing);
@@ -345,8 +345,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     await setString(headlineFontFamilyKey, attentionStyle);
     await setDouble(headlineFontSizeKey, defaultHeadlineSize * attentionScale);
-    await setBool(headlineBoldKey, false);
-    await setBool(headlineItalicsKey, false);
+    await setBool(headlineBoldedKey, false);
+    await setBool(headlineItalicizedKey, false);
     await setBool(headlineUnderlinedKey, false);
     await setDouble(headlineFontHeightKey, defaultFontHeight);
     await setDouble(headlineLetterSpacingKey, defaultLetterSpacing);
@@ -355,8 +355,8 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setString(
         titleFontFamilyKey, styleOptions[random.nextInt(styleOptions.length)]);
     await setDouble(titleFontSizeKey, defaultTitleSize * attentionScale);
-    await setBool(titleBoldKey, false);
-    await setBool(titleItalicsKey, false);
+    await setBool(titleBoldedKey, false);
+    await setBool(titleItalicizedKey, false);
     await setBool(titleUnderlinedKey, random.nextBool());
     await setDouble(titleFontHeightKey, defaultFontHeight);
     await setDouble(titleLetterSpacingKey, defaultLetterSpacing);
@@ -364,8 +364,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     await setString(bodyFontFamilyKey, descriptionStyle);
     await setDouble(bodyFontSizeKey, 16.0 * descriptionScale);
-    await setBool(bodyBoldKey, false);
-    await setBool(bodyItalicsKey, false);
+    await setBool(bodyBoldedKey, false);
+    await setBool(bodyItalicizedKey, false);
     await setBool(bodyUnderlinedKey, false);
     await setDouble(bodyFontHeightKey, defaultFontHeight);
     await setDouble(bodyLetterSpacingKey, defaultLetterSpacing);
@@ -373,8 +373,8 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     await setString(labelFontFamilyKey, descriptionStyle);
     await setDouble(labelFontSizeKey, 14.0 * descriptionScale);
-    await setBool(labelBoldKey, false);
-    await setBool(labelItalicsKey, false);
+    await setBool(labelBoldedKey, false);
+    await setBool(labelItalicizedKey, false);
     await setBool(labelUnderlinedKey, false);
     await setDouble(labelFontHeightKey, defaultFontHeight);
     await setDouble(labelLetterSpacingKey, defaultLetterSpacing);
