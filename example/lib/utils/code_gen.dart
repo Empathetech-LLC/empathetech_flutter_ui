@@ -37,7 +37,7 @@ Thanks for using Open UI! We hope you find it helpful.
 
 All that we ask is that you leave the credits/acknowledgements for Empathetech LLC in the code, everywhere they are found.
 
-That, and/or donate via one of the many options we provide; if (and only if) the product that we catalyze (and you make) becomes profitable.
+That, and/or donate via one of the many options we provide; if the product that we helped catalyze becomes profitable.
 
 P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend removing them if this project is going to be made public.
 
@@ -47,7 +47,7 @@ ${config.appName} began with [Open UI](https://github.com/Empathetech-LLC/empath
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
-If you have an idea that needs to be made a reality, check out [EFUI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)!
+If you have a dream that wants to be made a reality, try Open UI!
 
 If you are a fan of digital accessibility and want to encourage its existence, please join the [contributors](https://www.empathetech.net/#/contribute)!
 ''');
