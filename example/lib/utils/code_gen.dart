@@ -401,6 +401,8 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
     await utilsExport.writeAsString("""$copyright
 
 export 'consts.dart';
+
+${config.l10nConfig != null ? "export '../l10n/${l10nName()?.toLowerCase() ?? 'lang'}.dart'" : ''};
 """);
 
     // widgets //
