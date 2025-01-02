@@ -155,6 +155,18 @@ class _GenerateScreenState extends State<GenerateScreen> {
       );
       debugPrint('stdout: ${runResult.stdout}');
       debugPrint('stderr: ${runResult.stderr}');
+
+      if (widget.config.l10nConfig != null) {
+        debugPrint("\n'flutter gen-l10n'...");
+        runResult = await Process.run(
+          'flutter',
+          <String>['gen-l10n'],
+          runInShell: true,
+          workingDirectory: projDir,
+        );
+        debugPrint('stdout: ${runResult.stdout}');
+        debugPrint('stderr: ${runResult.stderr}');
+      }
     } catch (e) {
       onFailure(e.toString());
     }
