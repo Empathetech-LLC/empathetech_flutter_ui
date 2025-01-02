@@ -392,11 +392,9 @@ export 'consts.dart';
     await fabulous.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class PlusFAB extends StatelessWidget {
+class CountFAB extends StatelessWidget {
   /// [FloatingActionButton.onPressed] passthrough
   final void Function() count;
 
@@ -404,14 +402,10 @@ class PlusFAB extends StatelessWidget {
   const CountFAB(this.count, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final EFUILang l10n = EFUILang.of(context)!;
-
-    return FloatingActionButton(
-      onPressed: count,
-      child: Icon(PlatformIcons(context).add),
-    );
-  }
+  Widget build(BuildContext context) => FloatingActionButton(
+        onPressed: count,
+        child: Icon(PlatformIcons(context).add),
+      );
 }
 """);
 
