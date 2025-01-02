@@ -389,6 +389,8 @@ class $classCaseAppName extends StatelessWidget {
     final File utilsConsts = File('$dir/lib/utils/consts.dart');
     await utilsConsts.writeAsString("""$copyright
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 /// $humanCaseAppName
 const String appTitle = '$humanCaseAppName';
 
