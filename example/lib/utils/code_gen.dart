@@ -672,7 +672,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  ${config.l10nConfig != null ? 'late final EFUILang l10n = Lang.of(context)!;' : ''}
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? bigLabelStyle =
@@ -702,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                l10n.counterLabel,
+                ${config.l10nConfig != null ? 'l10n.counterLabel' : 'You have pushed the button this many times:'},
                 style: bigLabelStyle,
                 textAlign: TextAlign.center,
               ),
