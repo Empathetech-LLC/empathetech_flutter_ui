@@ -892,9 +892,51 @@ Future<void> genL10n({
 }) async {
   if (config.l10nConfig == null) return;
 
+  String l10nName() {
+    final List<String> lines = config.l10nConfig!.split('\n');
+
+    for (final String line in lines) {
+      if (line.contains('output-class')) {
+        final List<String> parts = line.split(':');
+        return parts[1].trim().toLowerCase();
+      }
+    }
+
+    return 'lang';
+  }
+
+  String l10nPath() {
+    final List<String> lines = config.l10nConfig!.split('\n');
+
+    for (final String line in lines) {
+      if (line.contains('arb-dir')) {
+        final List<String> parts = line.split(':');
+        return parts[1].trim();
+      }
+    }
+
+    return 'lib/10n';
+  }
+
+  // Make dir
+  await ezCLI(
+    exe: 'mkdir',
+    args: <String>[l10nPath()],
+    dir: dir,
+    onSuccess: onSuccess,
+    onFailure: onFailure,
+  );
+
+  // Make files
   try {
-    final File file = File('$dir/l10n.yaml');
-    await file.writeAsString(config.l10nConfig!);
+    final File english = File('$dir/${l10nPath()}/${l10nName()}_en.arb');
+    await english.writeAsString(config.l10nConfig!);
+
+    final File spanish = File('$dir/${l10nPath()}/${l10nName()}_es.arb');
+    await spanish.writeAsString(config.l10nConfig!);
+
+    final File french = File('$dir/${l10nPath()}/${l10nName()}_fr.arb');
+    await french.writeAsString(config.l10nConfig!);
   } catch (e) {
     onFailure(e.toString());
   }
