@@ -72,6 +72,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       args: <String>[
         '-rf',
         'lib',
+        'test',
         'analysis_options.yaml',
         'pubspec.lock',
         'pubspec.yaml',
