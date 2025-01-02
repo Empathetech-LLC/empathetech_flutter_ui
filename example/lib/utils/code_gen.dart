@@ -702,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                ${config.l10nConfig != null ? 'l10n.counterLabel' : 'You have pushed the button this many times:'},
+                ${config.l10nConfig != null ? 'l10n.hsCounterLabel' : 'You have pushed the button this many times:'},
                 style: bigLabelStyle,
                 textAlign: TextAlign.center,
               ),
@@ -930,13 +930,31 @@ Future<void> genL10n({
   // Make files
   try {
     final File english = File('$dir/${l10nPath()}/${l10nName()}_en.arb');
-    await english.writeAsString(config.l10nConfig!);
+    await english.writeAsString('''{
+  "@@locale": "en",
+
+
+
+  "hsCounterLabel": "You have pushed the button this many times:"
+}''');
 
     final File spanish = File('$dir/${l10nPath()}/${l10nName()}_es.arb');
-    await spanish.writeAsString(config.l10nConfig!);
+    await spanish.writeAsString('''{
+  "@@locale": "es",
+
+
+
+  "hsCounterLabel": "Has pulsado el botón muchas veces:"
+}''');
 
     final File french = File('$dir/${l10nPath()}/${l10nName()}_fr.arb');
-    await french.writeAsString(config.l10nConfig!);
+    await french.writeAsString('''{
+  "@@locale": "fr",
+
+
+
+  "hsCounterLabel": "Vous avez appuyé sur le bouton autant de fois que cela :"
+}''');
   } catch (e) {
     onFailure(e.toString());
   }
