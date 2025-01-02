@@ -122,8 +122,8 @@ Future<void> genPubspec({
   }
 
   try {
-    final File version = File('$dir/pubspec.yaml');
-    await version.writeAsString('''name: ${config.appName}
+    final File file = File('$dir/pubspec.yaml');
+    await file.writeAsString('''name: ${config.appName}
 description: "${config.description}"
 version: 1.0.0
 publish_to: 'none'
@@ -253,10 +253,9 @@ Future<void> genLib({
   // Files //
 
   // main.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+  try {
+    final File dartMain = File('$dir/main.dart');
+    await dartMain.writeAsString("""$copyright
 
 import './screens/export.dart';
 import './utils/export.dart';
@@ -367,57 +366,30 @@ class $classCaseAppName extends StatelessWidget {
     );
   }
 }
-""",
-      '>',
-      'lib/main.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // utils //
+    // utils //
 
-  // consts.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // consts.dart
+    final File utilsConsts = File('$dir/utils/consts.dart');
+    await utilsConsts.writeAsString("""$copyright
 
 /// $humanCaseAppName
 const String appTitle = '$humanCaseAppName';
-""",
-      '>',
-      'lib/utils/consts.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // export.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // export.dart
+    final File utilsExport = File('$dir/utils/export.dart');
+    await utilsExport.writeAsString("""$copyright
 
 export 'consts.dart';
-""",
-      '>',
-      'lib/utils/export.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // widgets //
+    // widgets //
 
-  // fabulous.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // fabulous.dart
+    final File fabulous = File('$dir/widgets/fabulous.dart');
+    await fabulous.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -441,20 +413,11 @@ class PlusFAB extends StatelessWidget {
     );
   }
 }
-""",
-      '>',
-      'lib/widgets/fabulous.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // menu_buttons.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // menu_buttons.dart
+    final File menuButtons = File('$dir/widgets/menu_buttons.dart');
+    await menuButtons.writeAsString("""$copyright
 
 import '../screens/export.dart';
 
@@ -476,20 +439,12 @@ class SettingsButton extends StatelessWidget {
         label: EFUILang.of(context)!.ssPageTitle,
       );
 }
-""",
-      '>',
-      'lib/widgets/menu_buttons.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // scaffold file
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // scaffold file
+    final File scaffoldWidget =
+        File('$dir/widgets/${config.appName}_scaffold.dart');
+    await scaffoldWidget.writeAsString("""$copyright
 
 import './export.dart';
 import '../utils/export.dart';
@@ -594,40 +549,22 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     );
   }
 }
-""",
-      '>',
-      'lib/widgets/${config.appName}_scaffold.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // export.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // export.dart
+    final File widgetsExport = File('$dir/widgets/export.dart');
+    await widgetsExport.writeAsString("""$copyright
 
 export 'fabulous.dart';
 export 'menu_buttons.dart';
 export '${config.appName}_scaffold.dart';
-""",
-      '>',
-      'lib/widgets/export.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // screens //
+    // screens //
 
-  // error.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // error.dart
+    final File errorScreen = File('$dir/screens/error.dart');
+    await errorScreen.writeAsString("""$copyright
 
 import '../widgets/export.dart';
 
@@ -700,20 +637,11 @@ class _ErrorScreenState extends State<ErrorScreen> {
     );
   }
 }
-""",
-      '>',
-      'lib/screens/error.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // home_screen.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // home_screen.dart
+    final File homeScreen = File('$dir/screens/home.dart');
+    await homeScreen.writeAsString("""$copyright
 
 import '../utils/export.dart';
 import '../widgets/export.dart';
@@ -778,20 +706,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-""",
-      '>',
-      'lib/screens/home.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // settings_home.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // settings_home.dart
+    final File settingsHome = File('$dir/screens/settings/settings_home.dart');
+    await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
 import '../../widgets/export.dart';
@@ -814,21 +733,13 @@ class SettingsHomeScreen extends StatelessWidget {
         ),
       );
 }
-""",
-      '>',
-      'lib/screens/settings/settings_home.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
-  // text_settings_screen.dart?
-  if (config.textSettings) {
-    await ezCLI(
-      exe: 'echo',
-      args: <String>[
-        """$copyright
+    // text_settings_screen.dart?
+    if (config.textSettings) {
+      final File textSettings =
+          File('$dir/screens/settings/text_settings.dart');
+      await textSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
@@ -845,22 +756,14 @@ class TextSettingsScreen extends StatelessWidget {
         body: const TextSettings(),
       );
 }
-""",
-        '>',
-        'lib/screens/settings/text_settings.dart',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
-  }
+""");
+    }
 
-  // layout_settings_screen.dart?
-  if (config.layoutSettings) {
-    await ezCLI(
-      exe: 'echo',
-      args: <String>[
-        """$copyright
+    // layout_settings_screen.dart?
+    if (config.layoutSettings) {
+      final File layoutSettings =
+          File('$dir/screens/settings/layout_settings.dart');
+      await layoutSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
@@ -877,22 +780,14 @@ class LayoutSettingsScreen extends StatelessWidget {
         body: const LayoutSettings(),
       );
 }
-""",
-        '>',
-        'lib/screens/settings/layout_settings.dart',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
-  }
+""");
+    }
 
-  // color_settings_screen.dart?
-  if (config.colorSettings) {
-    await ezCLI(
-      exe: 'echo',
-      args: <String>[
-        """$copyright
+    // color_settings_screen.dart?
+    if (config.colorSettings) {
+      final File colorSettings =
+          File('$dir/screens/settings/color_settings.dart');
+      await colorSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
@@ -909,22 +804,14 @@ class ColorSettingsScreen extends StatelessWidget {
         body: const ColorSettings(),
       );
 }
-""",
-        '>',
-        'lib/screens/settings/color_settings.dart',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
-  }
+""");
+    }
 
-  // image_settings_screen.dart?
-  if (config.imageSettings) {
-    await ezCLI(
-      exe: 'echo',
-      args: <String>[
-        """$copyright
+    // image_settings_screen.dart?
+    if (config.imageSettings) {
+      final File imageSettings =
+          File('$dir/screens/settings/image_settings.dart');
+      await imageSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
@@ -941,21 +828,12 @@ class ImageSettingsScreen extends StatelessWidget {
         body: const ImageSettings(),
       );
 }
-""",
-        '>',
-        'lib/screens/settings/image_settings.dart',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
-  }
+""");
+    }
 
-  // export.dart
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+    // export.dart
+    final File screensExport = File('$dir/screens/export.dart');
+    await screensExport.writeAsString("""$copyright
 
 // Exports //
 
@@ -984,14 +862,11 @@ const String colorSettingsPath = 'color-settings';""" : ''}
 
 ${config.imageSettings ? """/// 'image-settings'
 const String imageSettingsPath = 'image-settings';""" : ''}
-""",
-      '>',
-      'lib/screens/export.dart',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
 }
 
 /// Localizations config
@@ -1000,18 +875,17 @@ Future<void> genL10n({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>[
-        config.l10nConfig ?? 'null',
-        '>',
-        'l10n.yaml',
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+}) async {
+  if (config.l10nConfig == null) return;
+
+  try {
+    final File file = File('$dir/l10n.yaml');
+    await file.writeAsString(config.l10nConfig!);
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
+}
 
 /// analysis_options.yaml
 Future<void> genAnalysis({
@@ -1019,18 +893,17 @@ Future<void> genAnalysis({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-}) =>
-    ezCLI(
-      exe: 'echo',
-      args: <String>[
-        config.analysisOptions ?? 'null',
-        '>',
-        'analysis_options.yaml'
-      ],
-      dir: dir,
-      onSuccess: onSuccess,
-      onFailure: onFailure,
-    );
+}) async {
+  if (config.analysisOptions == null) return;
+
+  try {
+    final File file = File('$dir/analysis_options.yaml');
+    await file.writeAsString(config.analysisOptions!);
+  } catch (e) {
+    onFailure(e.toString());
+  }
+  onSuccess();
+}
 
 /// Launch config
 Future<void> genVSCode({
@@ -1039,6 +912,8 @@ Future<void> genVSCode({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
+  if (config.vsCodeConfig == null) return;
+
   // Make dir
   await ezCLI(
     exe: 'mkdir',
@@ -1049,17 +924,8 @@ Future<void> genVSCode({
   );
 
   // Make file
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      config.vsCodeConfig ?? 'null',
-      '>',
-      '.vscode/launch.json',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+  final File file = File('$dir/.vscode/launch.json');
+  await file.writeAsString(config.vsCodeConfig!);
 }
 
 /// Skeleton setup to reduce testing friction
@@ -1089,28 +955,17 @@ Future<void> genIntegrationTests({
   // Testing files //
 
   // Driver
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+  final File driver = File('$dir/test_driver/integration_test_driver.dart');
+  await driver.writeAsString("""$copyright
 
 import 'package:integration_test/integration_test_driver.dart';
 
 Future<void> main() => integrationDriver();
-""",
-      '>',
-      'test_driver/integration_test_driver.json',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 
   // Tests
-  await ezCLI(
-    exe: 'echo',
-    args: <String>[
-      """$copyright
+  final File tests = File('$dir/integration_test/test.json');
+  await tests.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -1153,12 +1008,5 @@ void main() async {
     },
   );
 }
-""",
-      '>',
-      'integration_test/test.json',
-    ],
-    dir: dir,
-    onSuccess: onSuccess,
-    onFailure: onFailure,
-  );
+""");
 }
