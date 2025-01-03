@@ -1199,6 +1199,17 @@ void main() async {
 }
 """);
 
+    String relativeDir() {
+      final String? home = Platform.environment['HOME'];
+
+      if (home == null) return dir;
+
+      final List<String> split = dir.split(home);
+
+      return (split.length > 1 ? '$home${split.last}' : split.first)
+          .replaceAll(' ', '\\ ');
+    }
+
     final File runner = File('$dir/integration_test/run_int_tests.sh');
     await runner.writeAsString('''#!/usr/bin/env bash
 
@@ -1206,7 +1217,7 @@ set -e
 
 ## Setup ##
 
-project_dir="${dir.replaceAll(' ', '\\ ')}"
+project_dir="${relativeDir()}"
 device=""
 
 # Gather flag variables
