@@ -676,7 +676,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  ${config.l10nConfig != null ? 'late final EFUILang l10n = Lang.of(context)!;' : ''}
+  ${config.l10nConfig != null ? 'late final Lang l10n = Lang.of(context)!;' : ''}
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? bigLabelStyle =
