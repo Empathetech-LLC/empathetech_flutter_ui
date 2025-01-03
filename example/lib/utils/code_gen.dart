@@ -42,6 +42,8 @@ That, and/or donate via one of the many options we provide; if the product that 
 
 P.S. `Getting Started` and `Maintaining Momentum` are for ${config.publisherName}, we recommend removing them if this project is going to be made public.
 
+P.P.S. Integration testing has been setup along with a basic runner script; `integration_test/run_int_tests.sh`
+
 ## Credits
 
 ${config.appName} began with [Open UI](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)'s app generation service.
