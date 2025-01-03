@@ -985,8 +985,11 @@ Future<void> genL10n({
 
     if (debugDoc.findAllElements(networkClientKey).isEmpty) {
       // Add the entitlement
-      debugDoc.rootElement.children.add(XmlElement(XmlName(networkClientKey)));
-      debugDoc.rootElement.children.add(XmlElement(XmlName('true')));
+      final XmlElement dictionary =
+          debugDoc.rootElement.findElements('dict').first;
+
+      dictionary.children.add(XmlElement(XmlName(networkClientKey)));
+      dictionary.children.add(XmlElement(XmlName('true')));
 
       // Save the modified file
       await macOSDebugEntitlements
@@ -995,9 +998,11 @@ Future<void> genL10n({
 
     if (releaseDoc.findAllElements(networkClientKey).isEmpty) {
       // Add the entitlement
-      releaseDoc.rootElement.children
-          .add(XmlElement(XmlName(networkClientKey)));
-      releaseDoc.rootElement.children.add(XmlElement(XmlName('true')));
+      final XmlElement dictionary =
+          releaseDoc.rootElement.findElements('dict').first;
+
+      dictionary.children.add(XmlElement(XmlName(networkClientKey)));
+      dictionary.children.add(XmlElement(XmlName('true')));
 
       // Save the modified file
       await macOSReleaseEntitlements
