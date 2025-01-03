@@ -11,6 +11,85 @@ import 'package:xml/xml.dart';
 import 'package:http/http.dart' as http;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// Sub-string getters //
+
+/// snake_case -> camelCase
+String snakeToCamelCase(String name) => name.replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => match.group(1)!.toUpperCase(),
+    );
+
+// snake_case -> ClassCase
+String snakeToClassCase(String name) => snakeToCamelCase(name).replaceRange(
+      0,
+      1,
+      name[0].toUpperCase(),
+    );
+
+/// snake_case -> Title Case
+String snakeToTitleCase(String name) => name
+    .replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => ' ${match.group(1)!.toUpperCase()}',
+    )
+    .replaceRange(
+      0,
+      1,
+      name[0].toUpperCase(),
+    );
+
+/// ClassCase -> snake_case
+String classToSnakeCase(String name) {
+  final String camelCase = name.replaceRange(
+    0,
+    1,
+    name[0].toLowerCase(),
+  );
+
+  return camelCase.replaceAllMapped(
+    RegExp(r'[A-Z]'),
+    (Match match) => '_${match.group(0)!.toLowerCase()}',
+  );
+}
+
+/// Copyright notice for the top of code files
+String copyright(EAGConfig config) =>
+    config.copyright ?? '/* ${config.appName} */';
+
+/// OutputClass name
+String? l10nName(EAGConfig config) {
+  if (config.l10nConfig == null) return null;
+
+  final List<String> lines = config.l10nConfig!.split('\n');
+
+  for (final String line in lines) {
+    if (line.contains('output-class')) {
+      final List<String> parts = line.split(':');
+      return parts[1].trim();
+    }
+  }
+
+  // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
+  return 'AppLocalizations';
+}
+
+/// '[l10nName].localizationsDelegates'
+String? l10nDelegates(EAGConfig config) {
+  final String? name = l10nName(config);
+  if (name == null) return null;
+
+  return '$name.localizationsDelegates';
+}
+
+/// '\n...[l10nDelegates],\n'
+String l10nDelegateHandler(EAGConfig config) {
+  final String? delegate = l10nDelegates(config);
+
+  return delegate == null ? '' : '\n...$delegate,\n';
+}
+
+// Code generation //
+
 /// Slightly modified from the standard template README
 Future<void> genREADME({
   required EAGConfig config,
@@ -177,65 +256,11 @@ Future<void> genLib({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  //// Useful substrings ////
+  // Useful substrings //
 
-  // Naming //
-
-  final String camelCaseAppName = config.appName.replaceAllMapped(
-    RegExp(r'_(\w)'),
-    (Match match) => match.group(1)!.toUpperCase(),
-  );
-
-  final String classCaseAppName = camelCaseAppName.replaceRange(
-    0,
-    1,
-    config.appName[0].toUpperCase(),
-  );
-
-  final String humanCaseAppName = config.appName
-      .replaceAllMapped(
-        RegExp(r'_(\w)'),
-        (Match match) => ' ${match.group(1)!.toUpperCase()}',
-      )
-      .replaceRange(
-        0,
-        1,
-        config.appName[0].toUpperCase(),
-      );
-
-  // Dart code //
-
-  final String copyright = config.copyright ?? '/* ${config.appName} */';
-
-  // yaml files //
-
-  String? l10nName() {
-    if (config.l10nConfig == null) return null;
-
-    final List<String> lines = config.l10nConfig!.split('\n');
-
-    for (final String line in lines) {
-      if (line.contains('output-class')) {
-        final List<String> parts = line.split(':');
-        return parts[1].trim();
-      }
-    }
-
-    return null;
-  }
-
-  String? l10nDelegates() {
-    final String? name = l10nName();
-    if (name == null) return null;
-
-    return '$name.localizationsDelegates';
-  }
-
-  String delegateHandler() {
-    final String? delegate = l10nDelegates();
-
-    return delegate == null ? '' : '\n...$delegate,\n';
-  }
+  final String camelCaseAppName = toCamelCase(config.appName);
+  final String classCaseAppName = toClassCase(config.appName);
+  final String titleCaseAppName = toTitleCase(config.appName);
 
   //// Make it so ////
 
@@ -356,11 +381,11 @@ class $classCaseAppName extends StatelessWidget {
         // Language handlers
         localizationsDelegates: <LocalizationsDelegate<dynamic>>{
           const LocaleNamesLocalizationsDelegate(),
-          ...EFUILang.localizationsDelegates,${delegateHandler()}
+          ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
         },
 
         // Supported languages
-        supportedLocales: ${l10nName() ?? 'EFUILang'}.supportedLocales,
+        supportedLocales: ${l10nName(config) ?? 'EFUILang'}.supportedLocales,
 
         // Current language
         locale: EzConfig.getLocale(),
@@ -394,8 +419,8 @@ class $classCaseAppName extends StatelessWidget {
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-/// $humanCaseAppName
-const String appTitle = '$humanCaseAppName';
+/// $titleCaseAppName
+const String appTitle = '$titleCaseAppName';
 
 /// Default [EzConfig] values
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
