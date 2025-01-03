@@ -50,7 +50,7 @@ class _SaveScreenState extends State<SaveScreen> {
     } catch (e) {
       setState(() => centerPiece = failurePage(
             context,
-            '\nSomething went wrong...\n\n${e.toString()}',
+            '\n${e.toString()}',
             textTheme,
           ));
     }
@@ -65,7 +65,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
             ))
         : setState(() => centerPiece = failurePage(
               context,
-              '\nSomething went wrong, the file was not saved as .json...\n\n$savedConfig',
+              '\nThe file was not saved as .json...\n\n$savedConfig',
               textTheme,
             ));
   }
