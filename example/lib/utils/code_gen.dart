@@ -1096,6 +1096,7 @@ Future<void> main() => integrationDriver();
 
 import 'package:${config.appName}/main.dart';
 import 'package:${config.appName}/utils/export.dart';
+import 'package:${config.appName}/widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
