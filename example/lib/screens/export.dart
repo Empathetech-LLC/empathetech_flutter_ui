@@ -9,7 +9,6 @@ export 'error.dart';
 export 'home.dart';
 
 export 'generator/generate.dart';
-export 'generator/install.dart';
 export 'generator/save.dart';
 
 export 'settings/settings_home.dart';
@@ -22,9 +21,6 @@ export 'settings/layout_settings.dart';
 
 /// 'app-generator'
 const String generateScreenPath = 'app-generator';
-
-/// 'flutter-installer'
-const String installScreenPath = 'flutter-installer';
 
 /// 'config-saver'
 const String saveScreenPath = 'config-saver';

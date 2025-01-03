@@ -97,11 +97,6 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: installScreenPath,
-          name: installScreenPath,
-          builder: (_, __) => const InstallScreen(),
-        ),
-        GoRoute(
           path: saveScreenPath,
           name: saveScreenPath,
           builder: (_, GoRouterState state) {
