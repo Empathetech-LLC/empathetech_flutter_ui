@@ -315,26 +315,26 @@ final GoRouter router = GoRouter(
           name: settingsHomePath,
           builder: (_, __) => const SettingsHomeScreen(),
           routes: <RouteBase>[
-            GoRoute(
+            ${config.textSettings ? '''GoRoute(
               path: textSettingsPath,
               name: textSettingsPath,
               builder: (_, __) => const TextSettingsScreen(),
-            ),
-            GoRoute(
+            ),''' : ''}
+            ${config.layoutSettings ? '''GoRoute(
               path: layoutSettingsPath,
               name: layoutSettingsPath,
               builder: (_, __) => const LayoutSettingsScreen(),
-            ),
-            GoRoute(
+            ),''' : ''}
+            ${config.colorSettings ? '''GoRoute(
               path: colorSettingsPath,
               name: colorSettingsPath,
               builder: (_, __) => const ColorSettingsScreen(),
-            ),
-            GoRoute(
+            ),''' : ''}
+            ${config.imageSettings ? '''GoRoute(
               path: imageSettingsPath,
               name: imageSettingsPath,
               builder: (_, __) => const ImageSettingsScreen(),
-            ),
+            ),''' : ''}                     
           ],
         ),
       ],
@@ -745,10 +745,10 @@ class SettingsHomeScreen extends StatelessWidget {
         title: EFUILang.of(context)!.ssPageTitle,
         showSettings: false,
         body: const SettingsHome(
-          ${config.textSettings ? 'textSettingsPath: textSettingsPath,' : ''}
-          ${config.layoutSettings ? 'layoutSettingsPath: layoutSettingsPath,' : ''}
-          ${config.colorSettings ? 'colorSettingsPath: colorSettingsPath,' : ''}
-          ${config.imageSettings ? 'imageSettingsPath: imageSettingsPath,' : ''}                                
+          textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
+          layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
+          colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
+          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}                                
         ),
       );
 }
