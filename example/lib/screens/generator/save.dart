@@ -6,6 +6,7 @@
 import './shared.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
+import 'package:efui_bios/efui_bios.dart';
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -33,8 +34,6 @@ class _SaveScreenState extends State<SaveScreen> {
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
-
-  late Widget centerPiece = loadingPage(context);
 
   // Define custom functions //
 
@@ -81,6 +80,18 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         return 'Downloads';
     }
   }
+
+  // Define custom Widgets //
+
+  late Widget centerPiece = EzScrollView(children: <Widget>[
+    SizedBox(
+      height: heightOf(context) / 2,
+      child: const EmpathetechLoadingAnimation(
+        height: double.infinity,
+        semantics: 'TODO',
+      ),
+    ),
+  ]);
 
   // Return the build //
 
