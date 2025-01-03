@@ -1199,14 +1199,14 @@ void main() async {
 }
 """);
 
-    final File runner = File('$dir/integration_test/run_int_tests.dart');
+    final File runner = File('$dir/integration_test/run_int_tests.sh');
     await runner.writeAsString('''#!/usr/bin/env bash
 
 set -e
 
 ## Setup ##
 
-project_dir="$dir"
+project_dir="${dir.replaceAll(' ', '\\ ')}"
 device=""
 
 # Gather flag variables
@@ -1225,8 +1225,16 @@ done
 
 ## Tests ##
 
-flutter drive --driver=\$project_dir/test_driver/integration_test_driver.dart --target=\$project_dir/integration_test/test.dart \$device
+flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" --target="\$project_dir/integration_test/test.dart" \$device
 ''');
+
+    await ezCLI(
+      exe: 'chmod',
+      args: <String>['a+x', 'integration_test/run_int_tests.sh'],
+      dir: dir,
+      onSuccess: doNothing,
+      onFailure: onFailure,
+    );
   } catch (e) {
     onFailure(e.toString());
   }
