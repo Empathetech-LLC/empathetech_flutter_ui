@@ -7,6 +7,7 @@ import '../structs/export.dart';
 
 import 'dart:io';
 import 'dart:convert';
+import 'package:xml/xml.dart';
 import 'package:http/http.dart' as http;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -965,6 +966,43 @@ Future<void> genL10n({
 
     final File l10nConfig = File('$dir/l10n.yaml');
     await l10nConfig.writeAsString(config.l10nConfig!);
+
+    // Update entitlements //
+
+    final File macOSDebugEntitlements =
+        File('$dir/macos/Runner/DebugProfile.entitlements');
+    final File macOSReleaseEntitlements =
+        File('$dir/macos/Runner/Release.entitlements');
+
+    final XmlDocument debugDoc =
+        XmlDocument.parse(await macOSDebugEntitlements.readAsString());
+    final XmlDocument releaseDoc =
+        XmlDocument.parse(await macOSReleaseEntitlements.readAsString());
+
+    const String networkClientKey = 'com.apple.security.network.client';
+
+    // Check if the entitlements already exist
+
+    if (debugDoc.findAllElements(networkClientKey).isEmpty) {
+      // Add the entitlement
+      debugDoc.rootElement.children.add(XmlElement(XmlName(networkClientKey)));
+      debugDoc.rootElement.children.add(XmlElement(XmlName('true')));
+
+      // Save the modified file
+      await macOSDebugEntitlements
+          .writeAsString(debugDoc.toXmlString(pretty: true));
+    }
+
+    if (releaseDoc.findAllElements(networkClientKey).isEmpty) {
+      // Add the entitlement
+      releaseDoc.rootElement.children
+          .add(XmlElement(XmlName(networkClientKey)));
+      releaseDoc.rootElement.children.add(XmlElement(XmlName('true')));
+
+      // Save the modified file
+      await macOSReleaseEntitlements
+          .writeAsString(releaseDoc.toXmlString(pretty: true));
+    }
   } catch (e) {
     onFailure(e.toString());
   }
