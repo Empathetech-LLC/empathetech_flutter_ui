@@ -1050,6 +1050,21 @@ Future<void> genIntegrationTests({
         config.appName[0].toUpperCase(),
       );
 
+  String l10nName() {
+    if (config.l10nConfig == null) return 'Lang';
+
+    final List<String> lines = config.l10nConfig!.split('\n');
+
+    for (final String line in lines) {
+      if (line.contains('output-class')) {
+        final List<String> parts = line.split(':');
+        return parts[1].trim();
+      }
+    }
+
+    return 'Lang';
+  }
+
   // Testing dirs //
 
   await ezCLI(
@@ -1079,6 +1094,9 @@ Future<void> main() => integrationDriver();
     final File tests = File('$dir/integration_test/test.dart');
     await tests.writeAsString("""$copyright
 
+import 'package:${config.appName}/main.dart';
+import 'package:${config.appName}/utils/export.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -1086,39 +1104,74 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 void main() async {
-IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-WidgetsFlutterBinding.ensureInitialized();
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-final Map<String, Object> testConfig = <String, Object>{
-  ...${camelCaseAppName}Config,
-  isDarkThemeKey: true,
-};
+  final Map<String, Object> testConfig = <String, Object>{
+    ...${camelCaseAppName}Config,
+    isDarkThemeKey: true,
+  };
 
-SharedPreferences.setMockInitialValues(testConfig);
-final SharedPreferences prefs = await SharedPreferences.getInstance();
+  SharedPreferences.setMockInitialValues(testConfig);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-EzConfig.init(
-  assetPaths: <String>{},
-  preferences: prefs,
-  defaults: testConfig,
-);
+  EzConfig.init(
+    assetPaths: <String>{},
+    preferences: prefs,
+    defaults: testConfig,
+  );
 
-group(
-  'default-test',
-  () {
-    testWidgets('test-app', (WidgetTester tester) async {
-    // Load localization(s) //
+  group(
+    'settings-tests',
+    () => testWidgets('test-randomizer', (WidgetTester tester) async {
+      // Load localization(s) //
 
-    ezLog('Loading localizations');
-    final EFUILang l10n = await EFUILang.delegate.load(locale);
+      ezLog('Loading localizations');
+      final EFUILang eL10n = await EFUILang.delegate.load(english);
+      ${config.l10nConfig != null ? 'await ${l10nName()}.delegate.load(english);' : ''}
 
-    // Load the app //
+      // Load the app //
 
-    ezLog('Loading $humanCaseAppName');
-    await tester.pumpWidget(const $classCaseAppName());
-    await tester.pumpAndSettle();
-  },
-);
+      ezLog('Loading $humanCaseAppName');
+      await tester.pumpWidget(const $classCaseAppName());
+      await tester.pumpAndSettle();
+
+      // Randomize the settings //
+
+      // Open the settings menu
+      await touch(tester, find.byIcon(Icons.more_vert));
+
+      // Go to the settings page
+      await touchText(tester, eL10n.ssPageTitle);
+
+      // Randomize the settings
+      await touchText(tester, eL10n.ssRandom);
+      await touchText(tester, eL10n.gYes);
+    }),
+  );
+
+  group(
+    'app-tests',
+    () => testWidgets('test-count', (WidgetTester tester) async {
+      // Load localization(s) //
+
+      ezLog('Loading localizations');
+      await EFUILang.delegate.load(english);
+      ${config.l10nConfig != null ? 'await ${l10nName()}.delegate.load(english);' : ''}
+
+      // Load the app //
+
+      ezLog('Loading $humanCaseAppName');
+      await tester.pumpWidget(const $classCaseAppName());
+      await tester.pumpAndSettle();
+
+      // ♫ It's as Ez as... ♫ //
+
+      await touch(tester, find.byType(CountFAB)); // 1
+      await touch(tester, find.byType(CountFAB)); // 2
+      await touch(tester, find.byType(CountFAB)); // 3
+    }),
+  );
 }
 """);
   } catch (e) {
