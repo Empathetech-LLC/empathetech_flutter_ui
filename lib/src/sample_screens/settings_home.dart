@@ -40,6 +40,10 @@ class SettingsHome extends StatefulWidget {
   /// Do not include a trailing spacer, one will be provided
   final List<Widget>? additionalRoutes;
 
+  /// Whether to allow settings randomization
+  /// We think it's fun, but it might not always be appropriate
+  final bool allowRandom;
+
   /// Widgets to be added below reset
   /// Do not include a trailing spacer, one will be provided
   final List<Widget>? footer;
@@ -54,6 +58,7 @@ class SettingsHome extends StatefulWidget {
     required this.colorSettingsPath,
     required this.imageSettingsPath,
     this.additionalRoutes,
+    this.allowRandom = true,
     this.footer,
   });
 
@@ -160,8 +165,10 @@ class _SettingsHomeState extends State<SettingsHome> {
           ],
 
           // Feeling lucky
-          const EzConfigRandomizer(),
-          separator,
+          if (widget.allowRandom) ...<Widget>[
+            const EzConfigRandomizer(),
+            separator,
+          ],
 
           // Reset button
           const EzResetButton(),
