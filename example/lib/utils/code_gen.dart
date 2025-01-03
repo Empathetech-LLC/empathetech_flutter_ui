@@ -57,7 +57,7 @@ String copyright(EAGConfig config) =>
     config.copyright ?? '/* ${config.appName} */';
 
 /// OutputClass name
-String? l10nName(EAGConfig config) {
+String? l10nClassName(EAGConfig config) {
   if (config.l10nConfig == null) return null;
 
   final List<String> lines = config.l10nConfig!.split('\n');
@@ -73,9 +73,9 @@ String? l10nName(EAGConfig config) {
   return 'AppLocalizations';
 }
 
-/// '[l10nName].localizationsDelegates'
+/// '[l10nClassName].localizationsDelegates'
 String? l10nDelegates(EAGConfig config) {
-  final String? name = l10nName(config);
+  final String? name = l10nClassName(config);
   if (name == null) return null;
 
   return '$name.localizationsDelegates';
@@ -248,7 +248,7 @@ flutter:
   onSuccess();
 }
 
-/// lib/ and many goodies within
+/// `lib/` and many goodies within
 /// Heavily modified from the standard template
 Future<void> genLib({
   required EAGConfig config,
@@ -258,9 +258,9 @@ Future<void> genLib({
 }) async {
   // Useful substrings //
 
-  final String camelCaseAppName = toCamelCase(config.appName);
-  final String classCaseAppName = toClassCase(config.appName);
-  final String titleCaseAppName = toTitleCase(config.appName);
+  final String camelCaseAppName = snakeToCamelCase(config.appName);
+  final String classCaseAppName = snakeToClassCase(config.appName);
+  final String titleCaseAppName = snakeToTitleCase(config.appName);
 
   //// Make it so ////
 
@@ -385,7 +385,7 @@ class $classCaseAppName extends StatelessWidget {
         },
 
         // Supported languages
-        supportedLocales: ${l10nName(config) ?? 'EFUILang'}.supportedLocales,
+        supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
 
         // Current language
         locale: EzConfig.getLocale(),
@@ -432,7 +432,7 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 
 export 'consts.dart';
 
-${config.l10nConfig != null ? "export '../l10n/${l10nName()?.toLowerCase() ?? 'lang'}.dart'" : ''};
+${config.l10nConfig != null ? "export '../l10n/${classToSnakeCase(l10nClassName(config)!)}.dart'" : ''};
 """);
 
     // widgets //
@@ -704,7 +704,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  ${config.l10nConfig != null ? 'late final Lang l10n = Lang.of(context)!;' : ''}
+  ${config.l10nConfig != null ? 'late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? bigLabelStyle =
@@ -924,20 +924,9 @@ Future<void> genL10n({
 }) async {
   if (config.l10nConfig == null) return;
 
-  String getL10nName() {
-    final List<String> lines = config.l10nConfig!.split('\n');
+  // Gather setup //
 
-    for (final String line in lines) {
-      if (line.contains('output-class')) {
-        final List<String> parts = line.split(':');
-        return parts[1].trim().toLowerCase();
-      }
-    }
-
-    return 'lang';
-  }
-
-  String getL10nPath() {
+  String getArbDir() {
     final List<String> lines = config.l10nConfig!.split('\n');
 
     for (final String line in lines) {
@@ -947,16 +936,17 @@ Future<void> genL10n({
       }
     }
 
+    // Default: https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
     return 'lib/10n';
   }
 
-  final String l10nName = getL10nName();
-  final String l10nPath = getL10nPath();
+  final String snakeName = classToSnakeCase(l10nClassName(config)!);
+  final String arbPath = getArbDir();
 
   // Make dir
   await ezCLI(
     exe: 'mkdir',
-    args: <String>[l10nPath],
+    args: <String>[arbPath],
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -964,7 +954,7 @@ Future<void> genL10n({
 
   // Make files
   try {
-    final File english = File('$dir/$l10nPath/${l10nName}_en.arb');
+    final File english = File('$dir/$arbPath/${snakeName}_en.arb');
     await english.writeAsString('''{
   "@@locale": "en",
 
@@ -973,7 +963,7 @@ Future<void> genL10n({
   "hsCounterLabel": "You have pushed the button this many times:"
 }''');
 
-    final File spanish = File('$dir/$l10nPath/${l10nName}_es.arb');
+    final File spanish = File('$dir/$arbPath/${snakeName}_es.arb');
     await spanish.writeAsString('''{
   "@@locale": "es",
 
@@ -982,7 +972,7 @@ Future<void> genL10n({
   "hsCounterLabel": "Has pulsado el botón muchas veces:"
 }''');
 
-    final File french = File('$dir/$l10nPath/${l10nName}_fr.arb');
+    final File french = File('$dir/$arbPath/${snakeName}_fr.arb');
     await french.writeAsString('''{
   "@@locale": "fr",
 
@@ -1094,33 +1084,13 @@ Future<void> genIntegrationTests({
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
 }) async {
-  // Shared Strings //
+  // Gather Strings //
 
-  final String copyright = config.copyright ?? '/* ${config.appName} */';
+  final String camelCaseAppName = snakeToCamelCase(config.appName);
+  final String titleCaseAppName = snakeToTitleCase(config.appName);
+  final String classCaseAppName = snakeToClassCase(config.appName);
 
-  final String camelCaseAppName = config.appName.replaceAllMapped(
-    RegExp(r'_(\w)'),
-    (Match match) => match.group(1)!.toUpperCase(),
-  );
-
-  final String classCaseAppName = camelCaseAppName.replaceRange(
-    0,
-    1,
-    config.appName[0].toUpperCase(),
-  );
-
-  final String humanCaseAppName = config.appName
-      .replaceAllMapped(
-        RegExp(r'_(\w)'),
-        (Match match) => ' ${match.group(1)!.toUpperCase()}',
-      )
-      .replaceRange(
-        0,
-        1,
-        config.appName[0].toUpperCase(),
-      );
-
-  // Testing dirs //
+  // Make dir(s) //
 
   await ezCLI(
     exe: 'mkdir',
@@ -1133,7 +1103,7 @@ Future<void> genIntegrationTests({
     onFailure: onFailure,
   );
 
-  // Testing files //
+  // Make files //
 
   try {
     // Driver
@@ -1188,7 +1158,7 @@ void main() async {
 
         // Load the app //
 
-        ezLog('Loading $humanCaseAppName');
+        ezLog('Loading $titleCaseAppName');
         await tester.pumpWidget(const $classCaseAppName());
         await tester.pumpAndSettle();
 
@@ -1211,7 +1181,7 @@ void main() async {
       testWidgets('Test CountFAB', (WidgetTester tester) async {
         // Load the app //
 
-        ezLog('Loading $humanCaseAppName');
+        ezLog('Loading $titleCaseAppName');
         await tester.pumpWidget(const $classCaseAppName());
         await tester.pumpAndSettle();
 
