@@ -1093,21 +1093,6 @@ Future<void> genIntegrationTests({
         config.appName[0].toUpperCase(),
       );
 
-  String l10nName() {
-    if (config.l10nConfig == null) return 'Lang';
-
-    final List<String> lines = config.l10nConfig!.split('\n');
-
-    for (final String line in lines) {
-      if (line.contains('output-class')) {
-        final List<String> parts = line.split(':');
-        return parts[1].trim();
-      }
-    }
-
-    return 'Lang';
-  }
-
   // Testing dirs //
 
   await ezCLI(
@@ -1166,58 +1151,82 @@ void main() async {
   );
 
   group(
-    'settings-tests',
-    () => testWidgets('test-randomizer', (WidgetTester tester) async {
-      // Load localization(s) //
+    'Generated tests',
+    () {
+      testWidgets('Test randomizer', (WidgetTester tester) async {
+        // Load localization(s) //
 
-      ezLog('Loading localizations');
-      final EFUILang eL10n = await EFUILang.delegate.load(english);
-      ${config.l10nConfig != null ? 'await ${l10nName()}.delegate.load(english);' : ''}
+        ezLog('Loading localizations');
+        final EFUILang l10n = await EFUILang.delegate.load(english);
 
-      // Load the app //
+        // Load the app //
 
-      ezLog('Loading $humanCaseAppName');
-      await tester.pumpWidget(const $classCaseAppName());
-      await tester.pumpAndSettle();
+        ezLog('Loading $humanCaseAppName');
+        await tester.pumpWidget(const $classCaseAppName());
+        await tester.pumpAndSettle();
 
-      // Randomize the settings //
+        // Randomize the settings //
 
-      // Open the settings menu
-      await touch(tester, find.byIcon(Icons.more_vert));
+        // Open the settings menu
+        await touch(tester, find.byIcon(Icons.more_vert));
 
-      // Go to the settings page
-      await touchText(tester, eL10n.ssPageTitle);
+        // Go to the settings page
+        await touchText(tester, l10n.ssPageTitle);
 
-      // Randomize the settings
-      await touchText(tester, eL10n.ssRandom);
-      await touchText(tester, eL10n.gYes);
-    }),
-  );
+        // Randomize the settings
+        await touchText(tester, l10n.ssRandom);
+        await touchText(tester, l10n.gYes);
 
-  group(
-    'app-tests',
-    () => testWidgets('test-count', (WidgetTester tester) async {
-      // Load localization(s) //
+        // Return to home screen
+        await goBack(tester, l10n.gBack);
+      });
 
-      ezLog('Loading localizations');
-      await EFUILang.delegate.load(english);
-      ${config.l10nConfig != null ? 'await ${l10nName()}.delegate.load(english);' : ''}
+      testWidgets('Test CountFAB', (WidgetTester tester) async {
+        // Load the app //
 
-      // Load the app //
+        ezLog('Loading $humanCaseAppName');
+        await tester.pumpWidget(const $classCaseAppName());
+        await tester.pumpAndSettle();
 
-      ezLog('Loading $humanCaseAppName');
-      await tester.pumpWidget(const $classCaseAppName());
-      await tester.pumpAndSettle();
+        // ♫ It's as Ez as... ♫ //
 
-      // ♫ It's as Ez as... ♫ //
-
-      await touch(tester, find.byType(CountFAB)); // 1
-      await touch(tester, find.byType(CountFAB)); // 2
-      await touch(tester, find.byType(CountFAB)); // 3
-    }),
+        await touch(tester, find.byType(CountFAB)); // 1
+        await touch(tester, find.byType(CountFAB)); // 2
+        await touch(tester, find.byType(CountFAB)); // 3
+      });
+    },
   );
 }
 """);
+
+    final File runner = File('$dir/integration_test/run_int_tests.dart');
+    await runner.writeAsString('''#!/usr/bin/env bash
+
+set -e
+
+## Setup ##
+
+project_dir="$dir"
+device=""
+
+# Gather flag variables
+while [[ "\$1" != "" ]]; do
+  case \$1 in
+    -d ) shift
+               device="-d \$1"
+               ;;
+    -p ) shift
+              project_dir="\$1"
+              ;;
+    * ) echo "Invalid input. Aborting."; exit 1
+  esac
+  shift
+done
+
+## Tests ##
+
+flutter drive --driver=\$project_dir/test_driver/integration_test_driver.dart --target=\$project_dir/integration_test/test.dart \$device
+''');
   } catch (e) {
     onFailure(e.toString());
   }
