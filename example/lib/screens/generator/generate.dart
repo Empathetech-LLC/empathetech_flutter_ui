@@ -39,13 +39,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   late Widget centerPiece = loadingPage(context);
 
-  String errorMessage = '\nSomething went wrong.\nPlease try again.';
-
   // Define custom functions //
 
   void onFailure(String message) {
-    setState(() => centerPiece = failurePage(
-        context, '\nSomething went wrong...\n\n$message', textTheme));
+    setState(() => centerPiece = failurePage(context, '\n$message', textTheme));
     return;
   }
 
