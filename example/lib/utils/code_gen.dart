@@ -534,7 +534,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
     // Define custom widgets //
 
-    late final MenuAnchor? options = (showSettings)
+    late final Widget options = (showSettings)
         ? MenuAnchor(
             builder: (_, MenuController controller, ___) => IconButton(
               onPressed: () =>
@@ -544,7 +544,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
             ),
             menuChildren: <Widget>[SettingsButton(context)],
           )
-        : null;
+        : const SizedBox.shrink();
 
     // Return the build //
 
@@ -569,7 +569,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
             // Actions (aka trailing aka right)
             actions: isLefty
                 ? const <Widget>[EzBackAction()]
-                : (showSettings ? <Widget>[options!] : null),
+                : (showSettings ? <Widget>[options] : null),
           ),
         ),
 
