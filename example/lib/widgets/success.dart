@@ -60,20 +60,22 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            'would you like to...',
-            style: style,
-            textAlign: TextAlign.center,
-          ),
-          const EzSpacer(),
-          EzElevatedIconButton(
-            onPressed: emulate,
-            icon: Icon(PlatformIcons(context).playArrowSolid),
-            label: 'Run it',
-          ),
-        ],
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'would you like to...',
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+            const EzSpacer(),
+            EzElevatedIconButton(
+              onPressed: emulate,
+              icon: Icon(PlatformIcons(context).playArrowSolid),
+              label: 'Run it',
+            ),
+          ],
+        ),
       );
 }
