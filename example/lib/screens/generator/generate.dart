@@ -277,13 +277,16 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Define custom Widgets //
 
   late Widget centerPiece = EzScrollView(
+    mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
       // Loading animation
-      SizedBox(
-        height: heightOf(context) / 2,
-        child: const EmpathetechLoadingAnimation(
-          height: double.infinity,
-          semantics: 'TODO',
+      Center(
+        child: SizedBox(
+          height: heightOf(context) / 3,
+          child: const EmpathetechLoadingAnimation(
+            height: double.infinity,
+            semantics: 'TODO',
+          ),
         ),
       ),
 
@@ -310,7 +313,18 @@ class _GenerateScreenState extends State<GenerateScreen> {
       // Readout
       Visibility(
         visible: showReadout,
-        child: const SizedBox.shrink(),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: heightOf(context) / 2,
+            maxWidth: widthOf(context) * 0.75,
+          ),
+          child: TextFormField(
+            readOnly: true,
+            maxLines: null,
+            textAlign: TextAlign.start,
+            controller: TextEditingController(text: readout.toString()),
+          ),
+        ),
       ),
     ],
   );

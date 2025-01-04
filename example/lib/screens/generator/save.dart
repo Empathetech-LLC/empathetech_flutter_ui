@@ -85,7 +85,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
 
   late Widget centerPiece = EzScrollView(children: <Widget>[
     SizedBox(
-      height: heightOf(context) / 2,
+      height: heightOf(context) / 3,
       child: const EmpathetechLoadingAnimation(
         height: double.infinity,
         semantics: 'TODO',
