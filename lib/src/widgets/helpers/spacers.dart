@@ -112,17 +112,12 @@ class EzDivider extends StatelessWidget {
   /// Defaults to 0.667
   final double widthM;
 
-  /// [Divider.height] override
-  /// Defaults to [EzConfig]s [spacingKey] * 4
-  final double? height;
-
   /// A [Divider] bounded by [BoxConstraints.maxWidth] => [widthOf] * [widthM]
-  /// And a [Divider.height] of [height] ?? [spacingKey] * 4
-  const EzDivider({super.key, this.widthM = 0.667, this.height});
+  const EzDivider({super.key, this.widthM = 0.667});
 
   @override
   Widget build(BuildContext context) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: widthOf(context) * widthM),
-        child: Divider(height: height ?? EzConfig.get(spacingKey * 4)),
+        child: const Divider(),
       );
 }
