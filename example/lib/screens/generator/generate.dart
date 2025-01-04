@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './shared.dart';
 import '../../structs/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -44,8 +43,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define custom functions //
 
-  void onFailure(String message) {
-    setState(() => centerPiece = failurePage(context, '\n$message', textTheme));
+  void onFailure(FailurePage page) {
+    setState(() => centerPiece = page);
     return;
   }
 
@@ -61,7 +60,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: workDir,
       onSuccess: delStuff,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+      )),
       readout: readout,
     );
   }
@@ -81,7 +83,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: projDir,
       onSuccess: addStuff,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
   }
@@ -91,35 +100,70 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await genREADME(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
     await genVersionTracking(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
     await genLicense(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
     await genPubspec(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
     await genLib(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
@@ -127,7 +171,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genL10n(
         config: widget.config,
         dir: projDir,
-        onFailure: onFailure,
+        onFailure: (String message) => onFailure(FailurePage(
+          message: '\n$message',
+          textTheme: textTheme,
+          showDelete: true,
+          deleteAppName: widget.config.appName,
+          deleteBaseDir: workDir,
+          readout: readout,
+        )),
         readout: readout,
       );
     }
@@ -136,7 +187,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genAnalysis(
         config: widget.config,
         dir: projDir,
-        onFailure: onFailure,
+        onFailure: (String message) => onFailure(FailurePage(
+          message: '\n$message',
+          textTheme: textTheme,
+          showDelete: true,
+          deleteAppName: widget.config.appName,
+          deleteBaseDir: workDir,
+          readout: readout,
+        )),
         readout: readout,
       );
     }
@@ -145,7 +203,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genVSCode(
         config: widget.config,
         dir: projDir,
-        onFailure: onFailure,
+        onFailure: (String message) => onFailure(FailurePage(
+          message: '\n$message',
+          textTheme: textTheme,
+          showDelete: true,
+          deleteAppName: widget.config.appName,
+          deleteBaseDir: workDir,
+          readout: readout,
+        )),
         readout: readout,
       );
     }
@@ -153,7 +218,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await genIntegrationTests(
       config: widget.config,
       dir: projDir,
-      onFailure: onFailure,
+      onFailure: (String message) => onFailure(FailurePage(
+        message: '\n$message',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      )),
       readout: readout,
     );
 
@@ -261,17 +333,34 @@ class _GenerateScreenState extends State<GenerateScreen> {
         ezLog('stderr: ${runResult.stderr}', buffer: readout);
       }
     } catch (e) {
-      onFailure(e.toString());
+      onFailure(FailurePage(
+        message: '\n${e.toString()}',
+        textTheme: textTheme,
+        showDelete: true,
+        deleteAppName: widget.config.appName,
+        deleteBaseDir: workDir,
+        readout: readout,
+      ));
     }
 
     (runResult != null && runResult.exitCode == 0)
-        ? setState(() => centerPiece = successPage(
-              context,
-              '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-              textTheme,
+        ? setState(() => centerPiece = SuccessPage(
+              message:
+                  '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+              textTheme: textTheme,
+              showPlay: true,
+              projDir: projDir,
+              readout: readout,
             ))
-        : onFailure(
-            'The code was successfully generated, but some of the project setup failed.');
+        : onFailure(FailurePage(
+            message:
+                '\nThe code was successfully generated, but some of the project setup failed.',
+            textTheme: textTheme,
+            showDelete: true,
+            deleteAppName: widget.config.appName,
+            deleteBaseDir: workDir,
+            readout: readout,
+          ));
   }
 
   // Define custom Widgets //

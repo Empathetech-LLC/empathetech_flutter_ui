@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './shared.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -47,25 +46,23 @@ class _SaveScreenState extends State<SaveScreen> {
         mimeType: MimeType.json,
       );
     } catch (e) {
-      setState(() => centerPiece = failurePage(
-            context,
-            '\n${e.toString()}',
-            textTheme,
+      setState(() => centerPiece = FailurePage(
+            message: '\n${e.toString()}',
+            textTheme: textTheme,
           ));
     }
 
     savedConfig.endsWith('.json')
-        ? setState(() => centerPiece = successPage(
-              context,
-              '''\nYour configuration has been saved to ${archivePath()}
+        ? setState(() => centerPiece = SuccessPage(
+              message:
+                  '''\nYour configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
-              textTheme,
+              textTheme: textTheme,
             ))
-        : setState(() => centerPiece = failurePage(
-              context,
-              '\nThe file was not saved as .json...\n\n$savedConfig',
-              textTheme,
+        : setState(() => centerPiece = FailurePage(
+              message: '\nThe file was not saved as .json...\n\n$savedConfig',
+              textTheme: textTheme,
             ));
   }
 
