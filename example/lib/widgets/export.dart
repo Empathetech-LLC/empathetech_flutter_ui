@@ -4,6 +4,8 @@
  */
 
 export 'fabulous.dart';
+export 'failure.dart';
 export 'menu_buttons.dart';
 export 'open_ui_scaffold.dart';
+export 'success.dart';
 export 'updater.dart';
