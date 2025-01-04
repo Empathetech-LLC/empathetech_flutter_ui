@@ -29,8 +29,7 @@ class GeneratorScreen extends StatelessWidget {
             Center(
               child: SizedBox(height: heightOf(context) / 3, child: header),
             ),
-            EzDivider(height: EzConfig.get(marginKey)),
-            const EzSeparator(),
+            const EzDivider(),
             ...body,
           ]),
         ),
