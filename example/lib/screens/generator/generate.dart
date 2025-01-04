@@ -37,8 +37,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define the build data //
 
-  late final bool isWindows =
-      getBasePlatform(context) == TargetPlatform.windows;
+  late final TargetPlatform platform = getBasePlatform(context);
+
+  late final bool isWindows = platform == TargetPlatform.windows;
 
   late final String workDir = widget.config.genPath!;
   late final String projDir = isWindows
@@ -46,8 +47,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
       : '$workDir/${widget.config.appName}';
 
   String device() {
-    late final TargetPlatform platform = getBasePlatform(context);
-
     if (platform == TargetPlatform.linux) {
       return 'linux';
     } else if (platform == TargetPlatform.macOS) {
