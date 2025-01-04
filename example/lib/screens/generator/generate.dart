@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import './shared.dart';
 import '../../structs/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -25,8 +26,14 @@ class GenerateScreen extends StatefulWidget {
 class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
+  static const EzSeparator separator = EzSeparator();
+  static const EzDivider divider = EzDivider();
+
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
+
+  late final TextStyle? subHeading =
+      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
   // Define the build data //
 
@@ -38,13 +45,97 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ? '$workDir\\${widget.config.appName}'
       : '$workDir/${widget.config.appName}';
 
+  String device() {
+    late final TargetPlatform platform = getBasePlatform(context);
+
+    if (platform == TargetPlatform.linux) {
+      return 'linux';
+    } else if (platform == TargetPlatform.macOS) {
+      return 'macos';
+    } else if (platform == TargetPlatform.windows) {
+      return 'windows';
+    } else {
+      return 'chrome';
+    }
+  }
+
   bool showReadout = false;
   StringBuffer readout = StringBuffer();
 
+  bool emulating = false;
+
+  static const Widget loading = EmpathetechLoadingAnimation(
+    height: double.infinity,
+    semantics: 'BLARG',
+  );
+
+  Widget header = loading;
+
+  late final Widget successHeader = SuccessHeader(
+    textTheme: textTheme,
+    message: '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+  );
+
+  late final List<Widget> body = <Widget>[
+    ConsoleOutput(
+      textTheme: textTheme,
+      showReadout: showReadout,
+      onHide: () => setState(() => showReadout = !showReadout),
+      readout: readout,
+    ),
+    separator,
+  ];
+
+  late final RunOption runOption = RunOption(
+    projDir: projDir,
+    style: subHeading,
+    emulate: () async {
+      if (emulating) return;
+
+      setState(() {
+        emulating = true;
+        header = loading;
+      });
+      ezSnackBar(
+        context: context,
+        message: 'First run usually takes awhile',
+      );
+
+      await ezCLI(
+        exe: 'flutter',
+        args: <String>[
+          'run',
+          '-d',
+          device(),
+        ],
+        dir: projDir,
+        onSuccess: () => setState(() {
+          emulating = false;
+          header = successHeader;
+        }),
+        onFailure: (String message) => onFailure(message, delete: false),
+        readout: readout,
+      );
+    },
+  );
+
+  late final DeleteOption deleteOption = DeleteOption(
+    appName: widget.config.appName,
+    baseDir: workDir,
+    style: subHeading,
+  );
+
   // Define custom functions //
 
-  void onFailure(FailurePage page) {
-    setState(() => centerPiece = page);
+  void onFailure(String message, {bool delete = true}) {
+    setState(() {
+      header = FailureHeader(message: '\n$message', textTheme: textTheme);
+      if (delete && !body.contains(deleteOption)) {
+        body.insertAll(0, <Widget>[deleteOption, divider]);
+      }
+    });
+
+    // Exit any further processing
     return;
   }
 
@@ -60,10 +151,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: workDir,
       onSuccess: delStuff,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
   }
@@ -83,14 +171,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: projDir,
       onSuccess: addStuff,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
   }
@@ -100,70 +181,35 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await genREADME(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
     await genVersionTracking(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
     await genLicense(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
     await genPubspec(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
     await genLib(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
@@ -171,14 +217,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genL10n(
         config: widget.config,
         dir: projDir,
-        onFailure: (String message) => onFailure(FailurePage(
-          message: '\n$message',
-          textTheme: textTheme,
-          showDelete: true,
-          deleteAppName: widget.config.appName,
-          deleteBaseDir: workDir,
-          readout: readout,
-        )),
+        onFailure: onFailure,
         readout: readout,
       );
     }
@@ -187,14 +226,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genAnalysis(
         config: widget.config,
         dir: projDir,
-        onFailure: (String message) => onFailure(FailurePage(
-          message: '\n$message',
-          textTheme: textTheme,
-          showDelete: true,
-          deleteAppName: widget.config.appName,
-          deleteBaseDir: workDir,
-          readout: readout,
-        )),
+        onFailure: onFailure,
         readout: readout,
       );
     }
@@ -203,14 +235,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       await genVSCode(
         config: widget.config,
         dir: projDir,
-        onFailure: (String message) => onFailure(FailurePage(
-          message: '\n$message',
-          textTheme: textTheme,
-          showDelete: true,
-          deleteAppName: widget.config.appName,
-          deleteBaseDir: workDir,
-          readout: readout,
-        )),
+        onFailure: onFailure,
         readout: readout,
       );
     }
@@ -218,14 +243,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     await genIntegrationTests(
       config: widget.config,
       dir: projDir,
-      onFailure: (String message) => onFailure(FailurePage(
-        message: '\n$message',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      )),
+      onFailure: onFailure,
       readout: readout,
     );
 
@@ -333,90 +351,19 @@ class _GenerateScreenState extends State<GenerateScreen> {
         ezLog('stderr: ${runResult.stderr}', buffer: readout);
       }
     } catch (e) {
-      onFailure(FailurePage(
-        message: '\n${e.toString()}',
-        textTheme: textTheme,
-        showDelete: true,
-        deleteAppName: widget.config.appName,
-        deleteBaseDir: workDir,
-        readout: readout,
-      ));
+      onFailure(e.toString());
     }
 
     (runResult != null && runResult.exitCode == 0)
-        ? setState(() => centerPiece = SuccessPage(
-              message:
-                  '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-              textTheme: textTheme,
-              showPlay: true,
-              projDir: projDir,
-              readout: readout,
-            ))
-        : onFailure(FailurePage(
-            message:
-                '\nThe code was successfully generated, but some of the project setup failed.',
-            textTheme: textTheme,
-            showDelete: true,
-            deleteAppName: widget.config.appName,
-            deleteBaseDir: workDir,
-            readout: readout,
-          ));
+        ? setState(() {
+            header = successHeader;
+            if (!body.contains(runOption)) {
+              body.insertAll(0, <Widget>[runOption, divider]);
+            }
+          })
+        : onFailure(
+            '\nThe code was successfully generated, but some of the project setup failed.');
   }
-
-  // Define custom Widgets //
-
-  late Widget centerPiece = EzScrollView(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: <Widget>[
-      // Loading animation
-      Center(
-        child: SizedBox(
-          height: heightOf(context) / 3,
-          child: const EmpathetechLoadingAnimation(
-            height: double.infinity,
-            semantics: 'TODO',
-          ),
-        ),
-      ),
-
-      // Toggle-able readout //
-
-      // Toggle
-      EzRow(
-        children: <Widget>[
-          Text(
-            'Console output',
-            style: textTheme.titleLarge,
-            textAlign: TextAlign.start,
-          ),
-          EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
-          IconButton(
-            onPressed: () => setState(() => showReadout = !showReadout),
-            icon: Icon(
-              showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-            ),
-          ),
-        ],
-      ),
-
-      // Readout
-      Visibility(
-        visible: showReadout,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: heightOf(context) / 2,
-            maxWidth: widthOf(context) * 0.75,
-          ),
-          child: TextFormField(
-            readOnly: true,
-            maxLines: null,
-            textAlign: TextAlign.start,
-            controller: TextEditingController(text: readout.toString()),
-          ),
-        ),
-      ),
-    ],
-  );
 
   // Init //
 
@@ -429,6 +376,69 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Return the build //
 
   @override
-  Widget build(_) =>
-      OpenUIScaffold(title: 'Generator', body: EzScreen(child: centerPiece));
+  Widget build(_) => GeneratorScreen(
+        title: 'Generator',
+        header: header,
+        body: body,
+      );
+}
+
+class ConsoleOutput extends StatelessWidget {
+  final TextTheme textTheme;
+
+  final bool showReadout;
+  final void Function() onHide;
+  final StringBuffer readout;
+
+  const ConsoleOutput({
+    super.key,
+    required this.textTheme,
+    required this.showReadout,
+    required this.onHide,
+    required this.readout,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        EzRow(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'Console output',
+              style: textTheme.titleLarge,
+              textAlign: TextAlign.start,
+            ),
+            EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
+            IconButton(
+              onPressed: onHide,
+              icon: Icon(
+                showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              ),
+            ),
+          ],
+        ),
+
+        // Readout
+        Visibility(
+          visible: showReadout,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: widthOf(context) * 0.75,
+              maxHeight: heightOf(context) / 2,
+            ),
+            child: TextFormField(
+              readOnly: true,
+              maxLines: null,
+              textAlign: TextAlign.start,
+              controller: TextEditingController(text: readout.toString()),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
