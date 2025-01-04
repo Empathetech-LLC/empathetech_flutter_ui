@@ -25,13 +25,15 @@ class GeneratorScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: title,
         body: EzScreen(
-          child: EzScrollView(children: <Widget>[
-            Center(
-              child: SizedBox(height: heightOf(context) / 3, child: header),
-            ),
-            const EzDivider(),
-            ...body,
-          ]),
+          alignment: Alignment.topLeft,
+          child: EzScrollView(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(child: header),
+              const Center(child: EzDivider()),
+              ...body,
+            ],
+          ),
         ),
       );
 }
