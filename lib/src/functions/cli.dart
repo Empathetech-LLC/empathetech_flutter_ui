@@ -15,6 +15,7 @@ Future<void> ezCLI({
   required void Function(String message) onFailure,
   void Function(String message)? onError,
   bool debug = true,
+  StringBuffer? readout,
 }) async {
   late final ProcessResult runResult;
   try {
@@ -32,6 +33,12 @@ Future<void> ezCLI({
     ezLog("\n'$exe $args'...");
     ezLog('stdout: ${runResult.stdout}');
     ezLog('stderr: ${runResult.stderr}');
+  }
+
+  if (readout != null) {
+    readout.writeln("\n'$exe $args'...");
+    readout.writeln(runResult.stdout);
+    readout.writeln(runResult.stderr);
   }
 
   runResult.exitCode == 0
