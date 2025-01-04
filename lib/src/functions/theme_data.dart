@@ -125,10 +125,7 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Divider
-    dividerTheme: DividerThemeData(
-      color: colorScheme.secondary,
-      space: EzConfig.get(spacingKey) * 4,
-    ),
+    dividerTheme: DividerThemeData(color: colorScheme.secondary),
 
     // Drawer
     navigationDrawerTheme: NavigationDrawerThemeData(

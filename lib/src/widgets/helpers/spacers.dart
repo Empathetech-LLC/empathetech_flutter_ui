@@ -108,16 +108,21 @@ class EzSwapSeparator extends StatelessWidget {
 }
 
 class EzDivider extends StatelessWidget {
-  /// Optional [widthOf] multiplier override
+  /// [widthOf] multiplier override
   /// Defaults to 0.667
-  final double multiplier;
+  final double widthM;
 
-  /// A [Divider] bounded by [BoxConstraints.maxWidth] => [widthOf] * [multiplier]
-  const EzDivider({super.key, this.multiplier = 0.667});
+  /// [Divider.height] override
+  /// Defaults to [EzConfig]s [spacingKey] * 4
+  final double? height;
+
+  /// A [Divider] bounded by [BoxConstraints.maxWidth] => [widthOf] * [widthM]
+  /// And a [Divider.height] of [height] ?? [spacingKey] * 4
+  const EzDivider({super.key, this.widthM = 0.667, this.height});
 
   @override
   Widget build(BuildContext context) => ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: widthOf(context) * multiplier),
-        child: const Divider(),
+        constraints: BoxConstraints(maxWidth: widthOf(context) * widthM),
+        child: Divider(height: height ?? EzConfig.get(spacingKey * 4)),
       );
 }
