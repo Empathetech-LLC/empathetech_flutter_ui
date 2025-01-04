@@ -12,13 +12,13 @@ class GeneratorScreen extends StatelessWidget {
   final String title;
 
   final Widget header;
-  final Widget centerpiece;
+  final List<Widget> body;
 
   const GeneratorScreen({
     super.key,
     required this.title,
     required this.header,
-    required this.centerpiece,
+    required this.body,
   });
 
   @override
@@ -29,12 +29,9 @@ class GeneratorScreen extends StatelessWidget {
             Center(
               child: SizedBox(height: heightOf(context) / 3, child: header),
             ),
-            Divider(height: EzConfig.get(marginKey)),
+            EzDivider(height: EzConfig.get(marginKey)),
             const EzSeparator(),
-            SizedBox(
-              height: heightOf(context) / 2,
-              child: centerpiece,
-            ),
+            ...body,
           ]),
         ),
       );
