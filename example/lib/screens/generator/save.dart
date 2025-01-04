@@ -39,12 +39,15 @@ class _SaveScreenState extends State<SaveScreen> {
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
 
-  static const Widget loading = EmpathetechLoadingAnimation(
-    height: double.infinity,
-    semantics: 'BLARG',
+  late final Widget loading = SizedBox(
+    height: heightOf(context) / 3,
+    child: const EmpathetechLoadingAnimation(
+      height: double.infinity,
+      semantics: 'BLARG',
+    ),
   );
 
-  Widget header = loading;
+  late Widget header = loading;
 
   // Define custom functions //
 

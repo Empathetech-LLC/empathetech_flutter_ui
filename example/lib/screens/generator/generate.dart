@@ -27,7 +27,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
   static const EzSeparator separator = EzSeparator();
-  static const EzDivider divider = EzDivider();
+  static const Widget divider = Center(child: EzDivider());
 
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
@@ -63,12 +63,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   bool emulating = false;
 
-  static const Widget loading = EmpathetechLoadingAnimation(
-    height: double.infinity,
-    semantics: 'BLARG',
+  late final Widget loading = SizedBox(
+    height: heightOf(context) / 3,
+    child: const EmpathetechLoadingAnimation(
+      height: double.infinity,
+      semantics: 'BLARG',
+    ),
   );
 
-  Widget header = loading;
+  late Widget header = loading;
 
   late final Widget successHeader = SuccessHeader(
     textTheme: textTheme,
