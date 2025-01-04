@@ -30,13 +30,13 @@ Future<void> ezCLI({
   }
 
   if (debug) {
-    ezLog("\n'$exe $args'...");
-    ezLog('stdout: ${runResult.stdout}');
-    ezLog('stderr: ${runResult.stderr}');
+    ezLog('$exe $args...');
+    ezLog(runResult.stdout);
+    ezLog(runResult.stderr);
   }
 
   if (readout != null) {
-    readout.writeln("\n'$exe $args'...");
+    readout.writeln('$exe $args...');
     readout.writeln(runResult.stdout);
     readout.writeln(runResult.stderr);
   }

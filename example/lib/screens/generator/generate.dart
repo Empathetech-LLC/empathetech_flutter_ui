@@ -58,7 +58,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     }
   }
 
-  bool showReadout = false;
+  bool showReadout = true;
   StringBuffer readout = StringBuffer();
 
   bool emulating = false;
@@ -301,17 +301,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       // Make sure packages are in order //
 
-      ezLog("\n'flutter clean'...", buffer: readout);
+      ezLog('flutter clean...', buffer: readout);
       runResult = await Process.run(
         'flutter',
         <String>['clean'],
         runInShell: true,
         workingDirectory: projDir,
       );
-      ezLog('stdout: ${runResult.stdout}', buffer: readout);
-      ezLog('stderr: ${runResult.stderr}', buffer: readout);
+      ezLog(runResult.stdout, buffer: readout);
+      ezLog(runResult.stderr, buffer: readout);
 
-      ezLog("\n'flutter upgrade'...", buffer: readout);
+      ezLog('flutter upgrade...', buffer: readout);
       runResult = await Process.run(
         'flutter',
         <String>[
@@ -322,10 +322,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
         runInShell: true,
         workingDirectory: projDir,
       );
-      ezLog('stdout: ${runResult.stdout}', buffer: readout);
-      ezLog('stderr: ${runResult.stderr}', buffer: readout);
+      ezLog(runResult.stdout, buffer: readout);
+      ezLog(runResult.stderr, buffer: readout);
 
-      ezLog("\n'flutter tighten'...", buffer: readout);
+      ezLog('flutter tighten...', buffer: readout);
       runResult = await Process.run(
         'flutter',
         <String>[
@@ -336,21 +336,21 @@ class _GenerateScreenState extends State<GenerateScreen> {
         runInShell: true,
         workingDirectory: projDir,
       );
-      ezLog('stdout: ${runResult.stdout}', buffer: readout);
-      ezLog('stderr: ${runResult.stderr}', buffer: readout);
+      ezLog(runResult.stdout, buffer: readout);
+      ezLog(runResult.stderr, buffer: readout);
 
       // (optionally) Generate l10n files //
 
       if (widget.config.l10nConfig != null) {
-        ezLog("\n'flutter gen-l10n'...", buffer: readout);
+        ezLog('flutter gen-l10n...', buffer: readout);
         runResult = await Process.run(
           'flutter',
           <String>['gen-l10n'],
           runInShell: true,
           workingDirectory: projDir,
         );
-        ezLog('stdout: ${runResult.stdout}', buffer: readout);
-        ezLog('stderr: ${runResult.stderr}', buffer: readout);
+        ezLog(runResult.stdout, buffer: readout);
+        ezLog(runResult.stderr, buffer: readout);
       }
     } catch (e) {
       onFailure(e.toString());
@@ -381,7 +381,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) => GeneratorScreen(
         title: 'Generator',
         header: header,
-        body: body,
+        body: <Widget>[
+          ConsoleOutput(
+            textTheme: textTheme,
+            showReadout: showReadout,
+            onHide: () => setState(() => showReadout = !showReadout),
+            readout: readout,
+          )
+        ],
       );
 }
 
