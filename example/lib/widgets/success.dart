@@ -101,6 +101,7 @@ class _SuccessPageState extends State<SuccessPage> {
             style: focusStyle,
             textAlign: TextAlign.center,
           ),
+          const EzSpacer(),
           EzElevatedIconButton(
             onPressed: () async {
               if (emulating) return;
@@ -108,9 +109,12 @@ class _SuccessPageState extends State<SuccessPage> {
               setState(() {
                 emulating = true;
 
-                header = EmpathetechLoadingAnimation(
+                header = SizedBox(
                   height: heightOf(context) / 3,
-                  semantics: 'TODO',
+                  child: const EmpathetechLoadingAnimation(
+                    height: double.infinity,
+                    semantics: 'TODO',
+                  ),
                 );
               });
               ezSnackBar(
