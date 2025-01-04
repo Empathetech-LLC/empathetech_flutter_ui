@@ -68,50 +68,53 @@ class DeleteOption extends StatelessWidget {
   static const EzSpacer spacer = EzSpacer();
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            'would you like to...',
-            style: style,
-            textAlign: TextAlign.center,
-          ),
-          spacer,
-          EzElevatedIconButton(
-            onPressed: () => ezCLI(
-              exe: 'rm',
-              args: <String>[
-                '-rf',
-                appName,
-              ],
-              dir: baseDir,
-              onSuccess: () async {
-                await ezSnackBar(
-                  context: context,
-                  message: 'Success; fingers crossed for next time!',
-                ).closed;
-
-                if (context.mounted) Navigator.of(context).pop();
-              },
-              onFailure: (String message) async {
-                await ezSnackBar(
-                  context: context,
-                  message: 'Another failure; you should probably take over...',
-                ).closed;
-
-                if (context.mounted) Navigator.of(context).pop();
-              },
-              readout: readout,
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'would you like to...',
+              style: style,
+              textAlign: TextAlign.center,
             ),
-            icon: Icon(PlatformIcons(context).delete),
-            label: 'wipe it',
-          ),
-          spacer,
-          EzElevatedIconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(PlatformIcons(context).back),
-            label: 'leave it',
-          ),
-        ],
+            spacer,
+            EzElevatedIconButton(
+              onPressed: () => ezCLI(
+                exe: 'rm',
+                args: <String>[
+                  '-rf',
+                  appName,
+                ],
+                dir: baseDir,
+                onSuccess: () async {
+                  await ezSnackBar(
+                    context: context,
+                    message: 'Success; fingers crossed for next time!',
+                  ).closed;
+
+                  if (context.mounted) Navigator.of(context).pop();
+                },
+                onFailure: (String message) async {
+                  await ezSnackBar(
+                    context: context,
+                    message:
+                        'Another failure; you should probably take over...',
+                  ).closed;
+
+                  if (context.mounted) Navigator.of(context).pop();
+                },
+                readout: readout,
+              ),
+              icon: Icon(PlatformIcons(context).delete),
+              label: 'wipe it',
+            ),
+            spacer,
+            EzElevatedIconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(PlatformIcons(context).back),
+              label: 'leave it',
+            ),
+          ],
+        ),
       );
 }
