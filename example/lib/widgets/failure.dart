@@ -7,72 +7,73 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class FailurePage extends StatelessWidget {
-  /// Core message to display... under 'Failure'
-  final String message;
-
+class FailureHeader extends StatelessWidget {
   /// [ThemeData.textTheme] passthrough
   final TextTheme textTheme;
 
-  /// Whether to show the option to wipe what was created
-  final bool showDelete;
+  /// Core message to display... under 'Failure'
+  final String message;
 
-  /// Required iff [showDelete] is true
-  final String? deleteAppName;
-
-  /// Required iff [showDelete] is true
-  final String? deleteBaseDir;
-
-  /// Optional for when [showDelete] is true
-  final StringBuffer? readout;
-
-  /// centerpiece [Widget] for a failed run
-  const FailurePage({
+  /// header [Widget] for a failed run
+  const FailureHeader({
     super.key,
-    required this.message,
     required this.textTheme,
-    this.showDelete = false,
-    this.deleteAppName,
-    this.deleteBaseDir,
-    this.readout,
+    required this.message,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Gather the theme data //
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // Headline
+          Text(
+            'Failure',
+            style: textTheme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
 
-    const EzSpacer spacer = EzSpacer();
-    const EzSeparator separator = EzSeparator();
+          // Error message
+          Text(
+            message,
+            style: textTheme.bodyLarge
+                ?.copyWith(fontSize: textTheme.titleLarge?.fontSize),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
+}
 
-    final TextStyle? focusStyle =
-        textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+class DeleteOption extends StatelessWidget {
+  /// Directory that will be rm -rf'd
+  final String appName;
 
-    // Return the build //
+  /// Directory to run the rm command in
+  final String baseDir;
 
-    return EzScrollView(
-      children: <Widget>[
-        // Headline
-        Text(
-          'Failure',
-          style: textTheme.headlineLarge,
-          textAlign: TextAlign.center,
-        ),
+  /// [TextStyle] for 'would you like to...'
+  final TextStyle? style;
 
-        // Error message
-        Text(
-          message,
-          style: focusStyle,
-          textAlign: TextAlign.center,
-        ),
+  /// Optional [ezCLI] readout passthrough
+  final StringBuffer? readout;
 
-        // Optional delete option
-        if (showDelete &&
-            deleteAppName != null &&
-            deleteBaseDir != null) ...<Widget>[
-          const EzDivider(),
+  /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
+  const DeleteOption({
+    super.key,
+    required this.appName,
+    required this.baseDir,
+    required this.style,
+    this.readout,
+  });
+
+  static const EzSpacer spacer = EzSpacer();
+
+  @override
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
           Text(
             'would you like to...',
-            style: focusStyle,
+            style: style,
             textAlign: TextAlign.center,
           ),
           spacer,
@@ -81,9 +82,9 @@ class FailurePage extends StatelessWidget {
               exe: 'rm',
               args: <String>[
                 '-rf',
-                deleteAppName!,
+                appName,
               ],
-              dir: deleteBaseDir!,
+              dir: baseDir,
               onSuccess: () async {
                 await ezSnackBar(
                   context: context,
@@ -105,15 +106,12 @@ class FailurePage extends StatelessWidget {
             icon: Icon(PlatformIcons(context).delete),
             label: 'wipe it',
           ),
-          const EzSpacer(),
+          spacer,
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(PlatformIcons(context).back),
             label: 'leave it',
           ),
         ],
-        separator,
-      ],
-    );
-  }
+      );
 }

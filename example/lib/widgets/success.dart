@@ -3,167 +3,77 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:efui_bios/efui_bios.dart';
-
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class SuccessPage extends StatefulWidget {
-  /// Core message to display... under 'Success'
-  final String message;
-
+class SuccessHeader extends StatelessWidget {
   /// [ThemeData.textTheme] passthrough
   final TextTheme textTheme;
 
-  /// Whether to show the play button for emulation
-  /// Should only be true on desktop platforms
-  final bool showPlay;
+  /// Core message to display... under 'Success'
+  final String message;
 
-  /// The Flutter project directory, required iff [showPlay] is true
-  final String? projDir;
-
-  /// Optional readout passthrough, only for when [showPlay] is true
-  final StringBuffer? readout;
-
-  const SuccessPage({
+  /// header [Widget] for a successful run
+  const SuccessHeader({
     super.key,
-    required this.message,
     required this.textTheme,
-    this.showPlay = false,
-    this.projDir,
-    this.readout,
+    required this.message,
   });
 
   @override
-  State<SuccessPage> createState() => _SuccessPageState();
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            'Success!',
+            style: textTheme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+
+          // Where to go next
+          Text(
+            message,
+            style: textTheme.bodyLarge
+                ?.copyWith(fontSize: textTheme.titleLarge?.fontSize),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
 }
 
-class _SuccessPageState extends State<SuccessPage> {
-  // Gather the theme data //
+class RunOption extends StatelessWidget {
+  /// The Flutter project directory
+  final String projDir;
 
-  late final TextStyle? focusStyle = widget.textTheme.bodyLarge
-      ?.copyWith(fontSize: widget.textTheme.titleLarge?.fontSize);
+  /// [TextStyle] for 'would you like to...'
+  final TextStyle? style;
 
-  // Define the build data //
+  /// [EzElevatedIconButton.onPressed] passthrough for the play button
+  final void Function() emulate;
 
-  bool emulating = false;
-
-  String device() {
-    late final TargetPlatform platform = getBasePlatform(context);
-
-    if (platform == TargetPlatform.linux) {
-      return 'linux';
-    } else if (platform == TargetPlatform.macOS) {
-      return 'macos';
-    } else if (platform == TargetPlatform.windows) {
-      return 'windows';
-    } else {
-      return 'chrome';
-    }
-  }
-
-  // Return the build //
-
-  late final Widget successBlock = Column(
-    mainAxisSize: MainAxisSize.min,
-    children: <Widget>[
-      Text(
-        'Success!',
-        style: widget.textTheme.headlineLarge,
-        textAlign: TextAlign.center,
-      ),
-
-      // Where to go next
-      Text(
-        widget.message,
-        style: focusStyle,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
-
-  /// Page header
-  late Widget header = successBlock;
+  const RunOption({
+    super.key,
+    required this.projDir,
+    required this.style,
+    required this.emulate,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return EzScrollView(
-      children: <Widget>[
-        // Headline
-        header,
-
-        // Optional start button
-        if (widget.showPlay && widget.projDir != null) ...<Widget>[
-          const EzDivider(),
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
           Text(
             'would you like to...',
-            style: focusStyle,
+            style: style,
             textAlign: TextAlign.center,
           ),
           const EzSpacer(),
           EzElevatedIconButton(
-            onPressed: () async {
-              if (emulating) return;
-
-              setState(() {
-                emulating = true;
-
-                header = SizedBox(
-                  height: heightOf(context) / 3,
-                  child: const EmpathetechLoadingAnimation(
-                    height: double.infinity,
-                    semantics: 'TODO',
-                  ),
-                );
-              });
-              ezSnackBar(
-                context: context,
-                message: 'First time usually takes awhile',
-              );
-
-              await ezCLI(
-                exe: 'flutter',
-                args: <String>[
-                  'run',
-                  '-d',
-                  device(),
-                ],
-                dir: widget.projDir!,
-                onSuccess: () => setState(() {
-                  emulating = false;
-                  header = successBlock;
-                }),
-                onFailure: (String message) => setState(() {
-                  emulating = false;
-                  header = Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        'Emulator failed',
-                        style: widget.textTheme.headlineLarge,
-                        textAlign: TextAlign.center,
-                      ),
-
-                      // Where to go next
-                      Text(
-                        widget.message,
-                        style: focusStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  );
-                }),
-                readout: widget.readout,
-              );
-            },
+            onPressed: emulate,
             icon: Icon(PlatformIcons(context).playArrowSolid),
             label: 'Run it',
           ),
         ],
-
-        const EzSeparator(),
-      ],
-    );
-  }
+      );
 }
