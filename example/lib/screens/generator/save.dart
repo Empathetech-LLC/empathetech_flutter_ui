@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import './shared.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -27,12 +28,23 @@ class _SaveScreenState extends State<SaveScreen> {
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
+  late final TextStyle? subHeading =
+      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
   // Define the build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
+
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
+
+  static const Widget loading = EmpathetechLoadingAnimation(
+    height: double.infinity,
+    semantics: 'BLARG',
+  );
+
+  Widget header = loading;
 
   // Define custom functions //
 
@@ -46,23 +58,23 @@ class _SaveScreenState extends State<SaveScreen> {
         mimeType: MimeType.json,
       );
     } catch (e) {
-      setState(() => centerPiece = FailurePage(
-            message: '\n${e.toString()}',
+      setState(() => header = FailureHeader(
             textTheme: textTheme,
+            message: '\n${e.toString()}',
           ));
     }
 
     savedConfig.endsWith('.json')
-        ? setState(() => centerPiece = SuccessPage(
+        ? setState(() => header = SuccessHeader(
+              textTheme: textTheme,
               message:
                   '''\nYour configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
-              textTheme: textTheme,
             ))
-        : setState(() => centerPiece = FailurePage(
-              message: '\nThe file was not saved as .json...\n\n$savedConfig',
+        : setState(() => header = FailureHeader(
               textTheme: textTheme,
+              message: '\nThe file was not saved as .json...\n\n$savedConfig',
             ));
   }
 
@@ -78,19 +90,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
-  // Define custom Widgets //
-
-  late Widget centerPiece = EzScrollView(children: <Widget>[
-    SizedBox(
-      height: heightOf(context) / 3,
-      child: const EmpathetechLoadingAnimation(
-        height: double.infinity,
-        semantics: 'TODO',
-      ),
-    ),
-  ]);
-
-  // Return the build //
+  // Init //
 
   @override
   void initState() {
@@ -98,7 +98,12 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     WidgetsBinding.instance.addPostFrameCallback((_) => archive());
   }
 
+  // Return the build //
+
   @override
-  Widget build(_) =>
-      OpenUIScaffold(title: 'Archiver', body: EzScreen(child: centerPiece));
+  Widget build(_) => GeneratorScreen(
+        title: 'Archiver',
+        header: header,
+        body: <Widget>[],
+      );
 }
