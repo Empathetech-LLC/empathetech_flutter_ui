@@ -52,7 +52,7 @@ String classToSnakeCase(String name) {
 }
 
 /// Copyright notice for the top of code files
-String copyright(EAGConfig config) =>
+String genCopyright(EAGConfig config) =>
     config.copyright ?? '/* ${config.appName} */';
 
 /// OutputClass name
@@ -269,6 +269,8 @@ Future<void> genLib({
   final String camelCaseAppName = snakeToCamelCase(config.appName);
   final String classCaseAppName = snakeToClassCase(config.appName);
   final String titleCaseAppName = snakeToTitleCase(config.appName);
+
+  final String copyright = genCopyright(config);
 
   //// Make it so ////
 
@@ -1069,6 +1071,8 @@ Future<void> genIntegrationTests({
   final String camelCaseAppName = snakeToCamelCase(config.appName);
   final String titleCaseAppName = snakeToTitleCase(config.appName);
   final String classCaseAppName = snakeToClassCase(config.appName);
+
+  final String copyright = genCopyright(config);
 
   // Make dir(s) //
 
