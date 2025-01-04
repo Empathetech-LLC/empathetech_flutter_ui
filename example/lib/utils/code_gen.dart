@@ -7,7 +7,6 @@ import '../structs/export.dart';
 
 import 'dart:io';
 import 'dart:convert';
-import 'package:xml/xml.dart';
 import 'package:http/http.dart' as http;
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -96,6 +95,7 @@ Future<void> genREADME({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   try {
     final File file = File('$dir/README.md');
@@ -136,6 +136,7 @@ If you are a fan of digital accessibility and want to encourage its existence, p
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('README.md successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -145,6 +146,7 @@ Future<void> genVersionTracking({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   try {
     final File version = File('$dir/APP_VERSION');
@@ -165,6 +167,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('Version tracking files successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -174,6 +177,7 @@ Future<void> genLicense({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   try {
     final File file = File('$dir/LICENSE');
@@ -181,6 +185,7 @@ Future<void> genLicense({
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('LICENSE successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -190,6 +195,7 @@ Future<void> genPubspec({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   Future<String?> getLatest(String packageName) async {
     final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
@@ -245,6 +251,7 @@ flutter:
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('pubspec.yaml successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -255,6 +262,7 @@ Future<void> genLib({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   // Useful substrings //
 
@@ -278,6 +286,7 @@ Future<void> genLib({
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
+    readout: readout,
   );
 
   // Files //
@@ -912,6 +921,7 @@ const String imageSettingsPath = 'image-settings';""" : ''}
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('Dart code successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -921,6 +931,7 @@ Future<void> genL10n({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   if (config.l10nConfig == null) return;
 
@@ -950,6 +961,7 @@ Future<void> genL10n({
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
+    readout: readout,
   );
 
   // Make files
@@ -983,51 +995,10 @@ Future<void> genL10n({
 
     final File l10nConfig = File('$dir/l10n.yaml');
     await l10nConfig.writeAsString(config.l10nConfig!);
-
-    // Update entitlements //
-
-    final File macOSDebugEntitlements =
-        File('$dir/macos/Runner/DebugProfile.entitlements');
-    final File macOSReleaseEntitlements =
-        File('$dir/macos/Runner/Release.entitlements');
-
-    final XmlDocument debugDoc =
-        XmlDocument.parse(await macOSDebugEntitlements.readAsString());
-    final XmlDocument releaseDoc =
-        XmlDocument.parse(await macOSReleaseEntitlements.readAsString());
-
-    const String networkClientKey = 'com.apple.security.network.client';
-
-    // Check if the entitlements already exist
-
-    if (debugDoc.findAllElements(networkClientKey).isEmpty) {
-      // Add the entitlement
-      final XmlElement dictionary =
-          debugDoc.rootElement.findElements('dict').first;
-
-      dictionary.children.add(XmlElement(XmlName(networkClientKey)));
-      dictionary.children.add(XmlElement(XmlName('true')));
-
-      // Save the modified file
-      await macOSDebugEntitlements
-          .writeAsString(debugDoc.toXmlString(pretty: true));
-    }
-
-    if (releaseDoc.findAllElements(networkClientKey).isEmpty) {
-      // Add the entitlement
-      final XmlElement dictionary =
-          releaseDoc.rootElement.findElements('dict').first;
-
-      dictionary.children.add(XmlElement(XmlName(networkClientKey)));
-      dictionary.children.add(XmlElement(XmlName('true')));
-
-      // Save the modified file
-      await macOSReleaseEntitlements
-          .writeAsString(releaseDoc.toXmlString(pretty: true));
-    }
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('Localizations successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -1037,6 +1008,7 @@ Future<void> genAnalysis({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   if (config.analysisOptions == null) return;
 
@@ -1046,6 +1018,10 @@ Future<void> genAnalysis({
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog(
+    'Analysis options (lint rules) successfully generated',
+    buffer: readout,
+  );
   onSuccess();
 }
 
@@ -1055,6 +1031,7 @@ Future<void> genVSCode({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   if (config.vsCodeConfig == null) return;
 
@@ -1065,6 +1042,7 @@ Future<void> genVSCode({
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
+    readout: readout,
   );
 
   // Make file
@@ -1074,6 +1052,7 @@ Future<void> genVSCode({
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('VS Code launch config successfully generated', buffer: readout);
   onSuccess();
 }
 
@@ -1083,6 +1062,7 @@ Future<void> genIntegrationTests({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
+  required StringBuffer readout,
 }) async {
   // Gather Strings //
 
@@ -1101,6 +1081,7 @@ Future<void> genIntegrationTests({
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
+    readout: readout,
   );
 
   // Make files //
@@ -1242,9 +1223,11 @@ flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" 
       dir: dir,
       onSuccess: doNothing,
       onFailure: onFailure,
+      readout: readout,
     );
   } catch (e) {
     onFailure(e.toString());
   }
+  ezLog('Integration test code successfully generated', buffer: readout);
   onSuccess();
 }
