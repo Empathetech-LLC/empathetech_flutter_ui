@@ -47,8 +47,7 @@ class EzWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final double margin = EzConfig.get(marginKey);
-    final EzSpacer rowMargin = EzSpacer(space: margin, vertical: false);
+    final EzSpacer margin = EzMargin(vertical: false);
 
     final ThemeData theme = Theme.of(context);
 
@@ -68,7 +67,7 @@ class EzWarning extends StatelessWidget {
       child: ExcludeSemantics(
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(margin),
+            padding: EdgeInsets.all(EzConfig.get(marginKey)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -84,14 +83,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    rowMargin,
+                    margin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    rowMargin,
+                    margin,
 
                     // Thing 2
                     Icon(
