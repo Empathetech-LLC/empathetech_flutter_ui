@@ -37,7 +37,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   GeneratorState genState = GeneratorState.running;
   String failureMessage = '';
-  bool showDelete = true;
+
+  /// Quantum computing
+  bool? showDelete = true;
 
   late final TargetPlatform platform = getBasePlatform(context);
 
@@ -88,7 +90,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: workDir,
       onSuccess: delStuff,
-      onFailure: onFailure,
+      onFailure: (String message) => (message.contains('command not found'))
+          ? () {
+              setState(() {
+                showDelete = null;
+                failureMessage = 'Flutter is not installed';
+                genState = GeneratorState.failed;
+              });
+            }
+          : onFailure(message),
       readout: readout,
     );
   }
@@ -365,13 +375,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 textTheme: textTheme,
                 message: '\n$failureMessage',
               ),
-              if (showDelete) ...<Widget>[
+              if (showDelete == true) ...<Widget>[
                 separator,
                 DeleteOption(
                   appName: widget.config.appName,
                   baseDir: workDir,
                   style: subTitle,
                 ),
+              ],
+              if (showDelete == null) ...<Widget>[
+                separator,
+                LinkOption(subTitle),
               ],
             ],
           ),
