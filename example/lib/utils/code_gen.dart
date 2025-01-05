@@ -232,7 +232,7 @@ dependencies:
   url_launcher: ${await getLatest('url_launcher') ?? '^6.3.1'}
 
   # Community
-  empathetech_flutter_ui: ^8.0.0-dev.1
+  empathetech_flutter_ui: ^8.0.0-dev.2
   flutter_localized_locales: ${await getLatest('flutter_localized_locales') ?? '^2.0.5'}
   flutter_platform_widgets: ${await getLatest('flutter_platform_widgets') ?? '^7.0.1'}
 
