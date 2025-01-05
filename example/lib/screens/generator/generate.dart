@@ -75,7 +75,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
     return;
   }
 
-  /// Run Flutter, Run!
+  /// The only way to begin
+  /// Is by beginning
   Future<void> genStuff() async {
     await ezCLI(
       exe: 'flutter',
@@ -302,42 +303,20 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        return SizedBox(
-          height: heightOf(context) / 3,
-          child: const EmpathetechLoadingAnimation(
-            height: double.infinity,
-            semantics: 'BLARG',
-          ),
-        );
-      case GeneratorState.successful:
-        return SuccessHeader(
-          textTheme: textTheme,
-          message:
-              '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-        );
-      case GeneratorState.failed:
-        return FailureHeader(
-          textTheme: textTheme,
-          message: '\n$failureMessage',
-        );
-    }
-  }
-
-  Widget body() {
-    switch (genState) {
-      case GeneratorState.running:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            divider,
-            _ConsoleOutput(readout),
-            separator,
-          ],
+        return const EmpathetechLoadingAnimation(
+          height: double.infinity,
+          semantics: 'BLARG',
         );
       case GeneratorState.successful:
         return Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SuccessHeader(
+              textTheme: textTheme,
+              message:
+                  '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+            ),
             separator,
             RunOption(
               projDir: projDir,
@@ -366,15 +345,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 );
               },
             ),
-            divider,
-            _ConsoleOutput(readout),
-            separator,
           ],
         );
       case GeneratorState.failed:
         return Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            FailureHeader(
+              textTheme: textTheme,
+              message: '\n$failureMessage',
+            ),
             if (showDelete) ...<Widget>[
               separator,
               DeleteOption(
@@ -383,9 +364,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 style: subHeading,
               ),
             ],
-            divider,
-            _ConsoleOutput(readout),
-            separator,
           ],
         );
     }
@@ -405,7 +383,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) => OpenUIScaffold(
         title: 'Generator',
         body: EzScreen(
-          child: EzScrollView(children: <Widget>[header(), body()]),
+          child: EzScrollView(children: <Widget>[
+            SizedBox(
+              height: heightOf(context) / 3,
+              child: Center(child: header()),
+            ),
+            divider,
+            _ConsoleOutput(readout),
+            separator,
+          ]),
         ),
       );
 }
@@ -422,76 +408,72 @@ class _ConsoleOutput extends StatefulWidget {
 class _ConsoleOutputState extends State<_ConsoleOutput> {
   // Define the build data //
 
+  final double margin = EzConfig.get(marginKey);
   late final TextTheme textTheme = Theme.of(context).textTheme;
-
-  late final ValueNotifier<StringBuffer> readoutNotifier;
-  late TextEditingController controller;
 
   bool showReadout = false;
 
-  // Define custom functions //
+  late final TextEditingController controller =
+      TextEditingController(text: widget.readout.toString());
 
-  void updateReadout() {
-    if (!showReadout) return;
-    setState(() => controller.text = readoutNotifier.value.toString());
-  }
+  late final ValueNotifier<StringBuffer> notifier =
+      ValueNotifier<StringBuffer>(widget.readout);
 
   // Init //
 
   @override
   void initState() {
     super.initState();
-    readoutNotifier = ValueNotifier<StringBuffer>(widget.readout);
-    controller = TextEditingController(text: widget.readout.toString());
-    readoutNotifier.addListener(updateReadout);
+    notifier.addListener(() {
+      if (showReadout) {
+        setState(() => controller.text = widget.readout.toString());
+      }
+    });
   }
 
   // Return the build //
 
   @override
-  Widget build(BuildContext context) {
-    final double margin = EzConfig.get(marginKey);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        EzRow(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'Console output',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            EzSpacer(vertical: false, space: margin),
-            IconButton(
-              onPressed: () => setState(() => showReadout = !showReadout),
-              icon: Icon(
-                showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          EzRow(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                'Console output',
+                style: textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              EzSpacer(vertical: false, space: margin),
+              IconButton(
+                onPressed: () => setState(() => showReadout = !showReadout),
+                icon: Icon(
+                  showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                ),
+              ),
+            ],
+          ),
+          EzSpacer(space: margin),
+
+          // Readout
+          Visibility(
+            visible: showReadout,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: widthOf(context) * 0.75,
+                maxHeight: heightOf(context) / 2,
+              ),
+              child: TextFormField(
+                readOnly: true,
+                maxLines: null,
+                textAlign: TextAlign.start,
+                controller: controller,
               ),
             ),
-          ],
-        ),
-        EzSpacer(space: margin),
-
-        // Readout
-        Visibility(
-          visible: showReadout,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: widthOf(context) * 0.75,
-              maxHeight: heightOf(context) / 2,
-            ),
-            child: TextFormField(
-              readOnly: true,
-              maxLines: null,
-              textAlign: TextAlign.start,
-              controller: controller,
-            ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 
   @override
   void dispose() {
