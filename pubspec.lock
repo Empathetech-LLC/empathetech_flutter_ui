@@ -203,7 +203,7 @@ packages:
       path: example
       relative: true
     source: path
-    version: "1.5.2+14"
+    version: "2.0.0+3"
   fake_async:
     dependency: transitive
     description:
