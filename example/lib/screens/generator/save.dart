@@ -103,17 +103,14 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(
-        title: 'Archiver',
-        body: EzScreen(
-          alignment: Alignment.topLeft,
-          child: EzScrollView(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(child: header),
-              const Center(child: EzDivider()),
-            ],
-          ),
+  Widget build(_) {
+    return OpenUIScaffold(
+      title: 'Archiver',
+      body: EzScreen(
+        child: Center(
+          child: EzScrollView(children: <Widget>[header, const EzDivider()]),
         ),
-      );
+      ),
+    );
+  }
 }

@@ -26,7 +26,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
   static const EzSeparator separator = EzSeparator();
-  static const Widget divider = Center(child: EzDivider());
+  static const Widget divider = EzDivider();
 
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
@@ -382,14 +382,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) => OpenUIScaffold(
         title: 'Generator',
         body: EzScreen(
-          alignment: Alignment.topLeft,
-          child: EzScrollView(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(child: header),
-              const Center(child: EzDivider()),
-              ...body,
-            ],
+          child: Center(
+            child: EzScrollView(
+              children: <Widget>[
+                header,
+                const EzDivider(),
+                ...body,
+              ],
+            ),
           ),
         ),
       );
@@ -412,9 +412,9 @@ class ConsoleOutput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = EzConfig.get(marginKey);
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         EzRow(
           mainAxisSize: MainAxisSize.min,
@@ -422,9 +422,9 @@ class ConsoleOutput extends StatelessWidget {
             Text(
               'Console output',
               style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
             ),
-            EzSpacer(vertical: false, space: EzConfig.get(marginKey)),
+            EzSpacer(vertical: false, space: margin),
             IconButton(
               onPressed: onHide,
               icon: Icon(
@@ -433,6 +433,7 @@ class ConsoleOutput extends StatelessWidget {
             ),
           ],
         ),
+        EzSpacer(space: margin),
 
         // Readout
         Visibility(
