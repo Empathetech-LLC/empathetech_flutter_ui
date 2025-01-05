@@ -36,6 +36,10 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   // Define the build data //
 
+  GeneratorState genState = GeneratorState.running;
+  String failureMessage = '';
+  bool showDelete = true;
+
   late final TargetPlatform platform = getBasePlatform(context);
 
   late final bool isWindows = platform == TargetPlatform.windows;
@@ -60,82 +64,12 @@ class _GenerateScreenState extends State<GenerateScreen> {
   bool showReadout = true;
   StringBuffer readout = StringBuffer();
 
-  bool emulating = false;
-
-  late final Widget loading = SizedBox(
-    height: heightOf(context) / 3,
-    child: const EmpathetechLoadingAnimation(
-      height: double.infinity,
-      semantics: 'BLARG',
-    ),
-  );
-
-  late Widget header = loading;
-
-  late final Widget successHeader = SuccessHeader(
-    textTheme: textTheme,
-    message: '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-  );
-
-  late final ConsoleOutput output = ConsoleOutput(
-    textTheme: textTheme,
-    showReadout: showReadout,
-    onHide: () => setState(() => showReadout = !showReadout),
-    readout: readout,
-  );
-
-  late final List<Widget> body = <Widget>[
-    output,
-    separator,
-  ];
-
-  late final RunOption runOption = RunOption(
-    projDir: projDir,
-    style: subHeading,
-    emulate: () async {
-      if (emulating) return;
-
-      setState(() {
-        emulating = true;
-        header = loading;
-      });
-      ezSnackBar(
-        context: context,
-        message: 'First run usually takes awhile',
-      );
-
-      await ezCLI(
-        exe: 'flutter',
-        args: <String>[
-          'run',
-          '-d',
-          device(),
-        ],
-        dir: projDir,
-        onSuccess: () => setState(() {
-          emulating = false;
-          header = successHeader;
-        }),
-        onFailure: (String message) => onFailure(message, delete: false),
-        readout: readout,
-      );
-    },
-  );
-
-  late final DeleteOption deleteOption = DeleteOption(
-    appName: widget.config.appName,
-    baseDir: workDir,
-    style: subHeading,
-  );
-
   // Define custom functions //
 
-  void onFailure(String message, {bool delete = true}) {
+  void onFailure(String message) {
     setState(() {
-      header = FailureHeader(message: '\n$message', textTheme: textTheme);
-      if (delete && !body.contains(deleteOption)) {
-        body.insertAll(0, <Widget>[deleteOption, divider]);
-      }
+      failureMessage = message;
+      genState = GeneratorState.failed;
     });
 
     // Exit any further processing
@@ -359,13 +293,112 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     (runResult != null && runResult.exitCode == 0)
         ? setState(() {
-            header = successHeader;
-            if (!body.contains(runOption)) {
-              body.insertAll(0, <Widget>[runOption, divider]);
-            }
+            showDelete = false;
+            genState = GeneratorState.successful;
           })
         : onFailure(
             '\nThe code was successfully generated, but some of the project setup failed.');
+  }
+
+  Widget header() {
+    switch (genState) {
+      case GeneratorState.running:
+        return const EmpathetechLoadingAnimation(
+          height: double.infinity,
+          semantics: 'BLARG',
+        );
+      case GeneratorState.successful:
+        return SuccessHeader(
+          textTheme: textTheme,
+          message:
+              '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+        );
+      case GeneratorState.failed:
+        return FailureHeader(
+          textTheme: textTheme,
+          message: '\n$failureMessage',
+        );
+    }
+  }
+
+  Widget body() {
+    switch (genState) {
+      case GeneratorState.running:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _ConsoleOutput(
+              textTheme: textTheme,
+              showReadout: showReadout,
+              onHide: () => setState(() => showReadout = !showReadout),
+              readout: readout,
+            ),
+            separator,
+          ],
+        );
+      case GeneratorState.successful:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RunOption(
+              projDir: projDir,
+              style: subHeading,
+              emulate: () async {
+                if (genState == GeneratorState.running) return;
+
+                setState(() => genState = GeneratorState.running);
+                ezSnackBar(
+                  context: context,
+                  message: 'First run usually takes awhile',
+                );
+
+                await ezCLI(
+                  exe: 'flutter',
+                  args: <String>[
+                    'run',
+                    '-d',
+                    device(),
+                  ],
+                  dir: projDir,
+                  onSuccess: () =>
+                      setState(() => genState = GeneratorState.successful),
+                  onFailure: onFailure,
+                  readout: readout,
+                );
+              },
+            ),
+            divider,
+            _ConsoleOutput(
+              textTheme: textTheme,
+              showReadout: showReadout,
+              onHide: () => setState(() => showReadout = !showReadout),
+              readout: readout,
+            ),
+            separator,
+          ],
+        );
+      case GeneratorState.failed:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (showDelete) ...<Widget>[
+              DeleteOption(
+                appName: widget.config.appName,
+                baseDir: workDir,
+                style: subHeading,
+              ),
+              divider,
+            ],
+            _ConsoleOutput(
+              textTheme: textTheme,
+              showReadout: showReadout,
+              onHide: () => setState(() => showReadout = !showReadout),
+              readout: readout,
+            ),
+            separator,
+          ],
+        );
+    }
   }
 
   // Init //
@@ -382,28 +415,26 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) => OpenUIScaffold(
         title: 'Generator',
         body: EzScreen(
-          child: Center(
-            child: EzScrollView(
-              children: <Widget>[
-                header,
-                const EzDivider(),
-                ...body,
-              ],
+          child: EzScrollView(children: <Widget>[
+            SizedBox(
+              height: heightOf(context) / 3,
+              child: header(),
             ),
-          ),
+            const EzDivider(),
+            body(),
+          ]),
         ),
       );
 }
 
-class ConsoleOutput extends StatelessWidget {
+class _ConsoleOutput extends StatelessWidget {
   final TextTheme textTheme;
 
   final bool showReadout;
   final void Function() onHide;
   final StringBuffer readout;
 
-  const ConsoleOutput({
-    super.key,
+  const _ConsoleOutput({
     required this.textTheme,
     required this.showReadout,
     required this.onHide,
