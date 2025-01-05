@@ -4,6 +4,7 @@
  */
 
 import '../../structs/export.dart';
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
 
@@ -32,21 +33,14 @@ class _SaveScreenState extends State<SaveScreen> {
 
   // Define the build data //
 
+  GeneratorState genState = GeneratorState.running;
+  String failureMessage = '';
+
   late final TargetPlatform platform = getBasePlatform(context);
 
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
       platform == TargetPlatform.windows;
-
-  late final Widget loading = SizedBox(
-    height: heightOf(context) / 3,
-    child: const EmpathetechLoadingAnimation(
-      height: double.infinity,
-      semantics: 'BLARG',
-    ),
-  );
-
-  late Widget header = loading;
 
   // Define custom functions //
 
@@ -60,24 +54,19 @@ class _SaveScreenState extends State<SaveScreen> {
         mimeType: MimeType.json,
       );
     } catch (e) {
-      setState(() => header = FailureHeader(
-            textTheme: textTheme,
-            message: '\n${e.toString()}',
-          ));
+      setState(() {
+        failureMessage = e.toString();
+        genState = GeneratorState.failed;
+      });
     }
 
     savedConfig.endsWith('.json')
-        ? setState(() => header = SuccessHeader(
-              textTheme: textTheme,
-              message:
-                  '''\nYour configuration has been saved to ${archivePath()}
-
-Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
-            ))
-        : setState(() => header = FailureHeader(
-              textTheme: textTheme,
-              message: '\nThe file was not saved as .json...\n\n$savedConfig',
-            ));
+        ? setState(() => genState = GeneratorState.successful)
+        : setState(() {
+            failureMessage =
+                'The file was not saved as .json...\n\n$savedConfig';
+            genState = GeneratorState.failed;
+          });
   }
 
   /// Generate a (platform aware) human readable path for the saved config
@@ -92,6 +81,28 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
     }
   }
 
+  Widget header() {
+    switch (genState) {
+      case GeneratorState.running:
+        return const EmpathetechLoadingAnimation(
+          height: double.infinity,
+          semantics: 'BLARG',
+        );
+      case GeneratorState.successful:
+        return SuccessHeader(
+          textTheme: textTheme,
+          message: '''\nYour configuration has been saved to ${archivePath()}
+
+Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+        );
+      case GeneratorState.failed:
+        return FailureHeader(
+          textTheme: textTheme,
+          message: '\n$failureMessage',
+        );
+    }
+  }
+
   // Init //
 
   @override
@@ -103,14 +114,16 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Return the build //
 
   @override
-  Widget build(_) {
-    return OpenUIScaffold(
-      title: 'Archiver',
-      body: EzScreen(
-        child: Center(
-          child: EzScrollView(children: <Widget>[header, const EzDivider()]),
+  Widget build(_) => OpenUIScaffold(
+        title: 'Archiver',
+        body: EzScreen(
+          child: EzScrollView(children: <Widget>[
+            SizedBox(
+              height: heightOf(context) / 3,
+              child: header(),
+            ),
+            const EzDivider(),
+          ]),
         ),
-      ),
-    );
-  }
+      );
 }
