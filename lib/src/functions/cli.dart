@@ -6,6 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 Future<void> ezCLI({
   required String exe,
@@ -15,8 +16,11 @@ Future<void> ezCLI({
   required void Function(String message) onFailure,
   void Function(String message)? onError,
   bool debug = true,
-  StringBuffer? readout,
+  ValueNotifier<String>? readout,
 }) async {
+  if (debug) ezLog('$exe $args...');
+  if (readout != null) readout.value += '$exe $args...\n';
+
   late final ProcessResult runResult;
   try {
     runResult = await Process.run(
@@ -29,16 +33,16 @@ Future<void> ezCLI({
     onError == null ? onFailure(e.toString()) : onError(e.toString());
   }
 
+  final String err = runResult.stderr.toString();
+
   if (debug) {
-    ezLog('$exe $args...');
     ezLog(runResult.stdout);
-    ezLog(runResult.stderr);
+    if (err.isNotEmpty) ezLog(err);
   }
 
   if (readout != null) {
-    readout.writeln('$exe $args...');
-    readout.writeln(runResult.stdout);
-    readout.writeln(runResult.stderr);
+    readout.value += '${runResult.stdout}\n';
+    if (err.isNotEmpty) readout.value += '$err\n';
   }
 
   runResult.exitCode == 0

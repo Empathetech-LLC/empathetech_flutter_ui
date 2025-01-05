@@ -28,6 +28,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
   static const EzSeparator separator = EzSeparator();
   static const Widget divider = EzDivider();
 
+  final double margin = EzConfig.get(marginKey);
+
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -61,7 +63,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
     }
   }
 
-  StringBuffer readout = StringBuffer();
+  ValueNotifier<String> readout = ValueNotifier<String>('');
+  bool showReadout = false;
 
   // Define custom functions //
 
@@ -303,68 +306,78 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        return const EmpathetechLoadingAnimation(
-          height: double.infinity,
-          semantics: 'BLARG',
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: const EmpathetechLoadingAnimation(
+            height: double.infinity,
+            semantics: 'BLARG',
+          ),
         );
       case GeneratorState.successful:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SuccessHeader(
-              textTheme: textTheme,
-              message:
-                  '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-            ),
-            separator,
-            RunOption(
-              projDir: projDir,
-              style: subHeading,
-              emulate: () async {
-                if (genState == GeneratorState.running) return;
-
-                setState(() => genState = GeneratorState.running);
-                ezSnackBar(
-                  context: context,
-                  message: 'First run usually takes awhile',
-                );
-
-                await ezCLI(
-                  exe: 'flutter',
-                  args: <String>[
-                    'run',
-                    '-d',
-                    device(),
-                  ],
-                  dir: projDir,
-                  onSuccess: () =>
-                      setState(() => genState = GeneratorState.successful),
-                  onFailure: onFailure,
-                  readout: readout,
-                );
-              },
-            ),
-          ],
-        );
-      case GeneratorState.failed:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            FailureHeader(
-              textTheme: textTheme,
-              message: '\n$failureMessage',
-            ),
-            if (showDelete) ...<Widget>[
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SuccessHeader(
+                textTheme: textTheme,
+                message:
+                    '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+              ),
               separator,
-              DeleteOption(
-                appName: widget.config.appName,
-                baseDir: workDir,
+              RunOption(
+                projDir: projDir,
                 style: subHeading,
+                emulate: () async {
+                  if (genState == GeneratorState.running) return;
+
+                  setState(() => genState = GeneratorState.running);
+                  ezSnackBar(
+                    context: context,
+                    message: 'First run usually takes awhile',
+                  );
+
+                  await ezCLI(
+                    exe: 'flutter',
+                    args: <String>[
+                      'run',
+                      '-d',
+                      device(),
+                    ],
+                    dir: projDir,
+                    onSuccess: () =>
+                        setState(() => genState = GeneratorState.successful),
+                    onFailure: onFailure,
+                    readout: readout,
+                  );
+                },
               ),
             ],
-          ],
+          ),
+        );
+      case GeneratorState.failed:
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FailureHeader(
+                textTheme: textTheme,
+                message: '\n$failureMessage',
+              ),
+              if (showDelete) ...<Widget>[
+                separator,
+                DeleteOption(
+                  appName: widget.config.appName,
+                  baseDir: workDir,
+                  style: subHeading,
+                ),
+              ],
+            ],
+          ),
         );
     }
   }
@@ -380,63 +393,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Return the build //
 
   @override
-  Widget build(_) => OpenUIScaffold(
-        title: 'Generator',
-        body: EzScreen(
-          child: EzScrollView(children: <Widget>[
-            SizedBox(
-              height: heightOf(context) / 3,
-              child: Center(child: header()),
-            ),
-            divider,
-            _ConsoleOutput(readout),
-            separator,
-          ]),
-        ),
-      );
-}
+  Widget build(_) {
+    return OpenUIScaffold(
+      title: 'Generator',
+      body: EzScreen(
+        child: EzScrollView(children: <Widget>[
+          header(),
+          divider,
 
-class _ConsoleOutput extends StatefulWidget {
-  final StringBuffer readout;
+          // Console output //
 
-  const _ConsoleOutput(this.readout);
-
-  @override
-  State<StatefulWidget> createState() => _ConsoleOutputState();
-}
-
-class _ConsoleOutputState extends State<_ConsoleOutput> {
-  // Define the build data //
-
-  final double margin = EzConfig.get(marginKey);
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
-  bool showReadout = false;
-
-  late final TextEditingController controller =
-      TextEditingController(text: widget.readout.toString());
-
-  late final ValueNotifier<StringBuffer> notifier =
-      ValueNotifier<StringBuffer>(widget.readout);
-
-  // Init //
-
-  @override
-  void initState() {
-    super.initState();
-    notifier.addListener(() {
-      if (showReadout) {
-        setState(() => controller.text = widget.readout.toString());
-      }
-    });
-  }
-
-  // Return the build //
-
-  @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+          // Toggle
           EzRow(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -459,25 +426,33 @@ class _ConsoleOutputState extends State<_ConsoleOutput> {
           // Readout
           Visibility(
             visible: showReadout,
-            child: ConstrainedBox(
+            child: Container(
               constraints: BoxConstraints(
-                maxWidth: widthOf(context) * 0.75,
+                minWidth: widthOf(context) * 0.667,
+                maxWidth: widthOf(context) * 0.667,
                 maxHeight: heightOf(context) / 2,
               ),
-              child: TextFormField(
-                readOnly: true,
-                maxLines: null,
-                textAlign: TextAlign.start,
-                controller: controller,
+              padding: EdgeInsets.all(margin),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: ezRoundEdge,
+              ),
+              child: ValueListenableBuilder<String>(
+                valueListenable: readout,
+                builder: (_, String value, __) => EzScrollView(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Text(
+                    value,
+                    style: textTheme.bodyLarge,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
               ),
             ),
           ),
-        ],
-      );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+          separator,
+        ]),
+      ),
+    );
   }
 }

@@ -54,7 +54,7 @@ class DeleteOption extends StatelessWidget {
   final TextStyle? style;
 
   /// Optional [ezCLI] readout passthrough
-  final StringBuffer? readout;
+  final ValueNotifier<String>? readout;
 
   /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
   const DeleteOption({

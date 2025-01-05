@@ -8,6 +8,7 @@ import '../structs/export.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 // Sub-string getters //
@@ -95,7 +96,7 @@ Future<void> genREADME({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   try {
     final File file = File('$dir/README.md');
@@ -146,7 +147,7 @@ Future<void> genVersionTracking({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   try {
     final File version = File('$dir/APP_VERSION');
@@ -177,7 +178,7 @@ Future<void> genLicense({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   try {
     final File file = File('$dir/LICENSE');
@@ -195,7 +196,7 @@ Future<void> genPubspec({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   Future<String?> getLatest(String packageName) async {
     final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
@@ -262,7 +263,7 @@ Future<void> genLib({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   // Useful substrings //
 
@@ -933,7 +934,7 @@ Future<void> genL10n({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   if (config.l10nConfig == null) return;
 
@@ -1010,7 +1011,7 @@ Future<void> genAnalysis({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   if (config.analysisOptions == null) return;
 
@@ -1033,7 +1034,7 @@ Future<void> genVSCode({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   if (config.vsCodeConfig == null) return;
 
@@ -1064,7 +1065,7 @@ Future<void> genIntegrationTests({
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
-  required StringBuffer readout,
+  required ValueNotifier<String> readout,
 }) async {
   // Gather Strings //
 

@@ -8,9 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// [debugPrint] rename
 /// 100% so I can search for [debugPrint] in my code to find the temporary ones
-void ezLog(String message, {int? wrapWidth, StringBuffer? buffer}) {
+void ezLog(String message, {int? wrapWidth, ValueNotifier<String>? buffer}) {
   debugPrint(message, wrapWidth: wrapWidth);
-  buffer?.writeln(message);
+  if (buffer != null) buffer.value += ('$message\n');
 }
 
 /// For integration tests
