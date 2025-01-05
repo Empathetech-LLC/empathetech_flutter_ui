@@ -46,24 +46,25 @@ Size measureIcon(
 }
 
 /// For web apps, set the tab's title
-void setPageTitle(String title, Color primaryColor) {
-  SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(
-      label: title,
-      primaryColor: primaryColor.value,
-    ),
-  );
-}
+void setPageTitle(String title, Color primaryColor) =>
+    SystemChrome.setApplicationSwitcherDescription(
+      ApplicationSwitcherDescription(
+        label: title,
+        primaryColor: primaryColor.value,
+      ),
+    );
 
 /// Returns whether the passed [text] follows a URL pattern
-bool isUrl(String text) {
-  return Uri.parse(text).host.isNotEmpty;
-}
+bool isUrl(String text) => Uri.parse(text).host.isNotEmpty;
 
 /// Splits the string on '_' and/or ' ' and returns the first word
-String firstWord(String text) {
-  return text.split(RegExp(r'[_\s]+')).first;
-}
+String firstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
+
+// Getters //
+
+/// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
+TextStyle? bigBody(TextTheme textTheme) =>
+    textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
 // Setters //
 
