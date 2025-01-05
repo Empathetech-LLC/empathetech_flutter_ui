@@ -124,7 +124,7 @@ class LinkOption extends StatelessWidget {
   final TextStyle? style;
 
   /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
-  const LinkOption({super.key, required this.style});
+  const LinkOption(this.style, {super.key});
 
   static const EzSpacer spacer = EzSpacer();
   static const String installFlutter =
