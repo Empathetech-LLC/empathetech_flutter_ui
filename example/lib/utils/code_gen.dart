@@ -85,7 +85,7 @@ String? l10nDelegates(EAGConfig config) {
 String l10nDelegateHandler(EAGConfig config) {
   final String? delegate = l10nDelegates(config);
 
-  return delegate == null ? '' : '\n...$delegate,\n';
+  return delegate == null ? '' : '\n          ...$delegate,';
 }
 
 // Code generation //
