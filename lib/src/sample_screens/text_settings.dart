@@ -871,7 +871,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 textAlign: TextAlign.center,
               ),
             ),
-            EzSpacer(space: margin),
+            EzMargin(),
             DropdownMenu<TextSettingType>(
               width: dropdownWidth(
                 context: context,
