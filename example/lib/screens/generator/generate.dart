@@ -394,6 +394,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) {
     return OpenUIScaffold(
       title: 'Generator',
+      running: genState == GeneratorState.running,
       body: EzScreen(
         child: EzScrollView(children: <Widget>[
           header(),

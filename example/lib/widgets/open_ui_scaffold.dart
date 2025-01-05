@@ -14,6 +14,9 @@ class OpenUIScaffold extends StatelessWidget {
   /// [AppBar.title] passthrough (via [Text] widget)
   final String title;
 
+  /// For generator pages; whether there are things running
+  final bool running;
+
   /// Whether to include [SettingsButton] in the [MenuAnchor]
   final bool showSettings;
 
@@ -30,6 +33,7 @@ class OpenUIScaffold extends StatelessWidget {
   const OpenUIScaffold({
     super.key,
     this.title = appTitle,
+    this.running = false,
     this.showSettings = true,
     this.onUpload,
     required this.body,
@@ -79,7 +83,8 @@ class OpenUIScaffold extends StatelessWidget {
             toolbarHeight: toolbarHeight,
 
             // Leading (aka left)
-            leading: isLefty ? options : null,
+            leading:
+                running ? const SizedBox.shrink() : (isLefty ? options : null),
             leadingWidth: toolbarHeight,
 
             // Title
@@ -88,8 +93,11 @@ class OpenUIScaffold extends StatelessWidget {
             titleSpacing: 0,
 
             // Actions (aka trailing aka right)
-            actions:
-                isLefty ? const <Widget>[EzBackAction()] : <Widget>[options],
+            actions: <Widget>[
+              running
+                  ? const SizedBox.shrink()
+                  : (isLefty ? const EzBackAction() : options)
+            ],
           ),
         ),
 
