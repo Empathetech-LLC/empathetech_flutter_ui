@@ -10,7 +10,10 @@ class EFUILangEs extends EFUILang {
   String get gYes => 'Sí';
 
   @override
-  String get gNo => 'No';
+  String get gApply => 'Aplicar';
+
+  @override
+  String get gContinue => 'Continuar';
 
   @override
   String get gAnd => 'y';
@@ -19,10 +22,10 @@ class EFUILangEs extends EFUILang {
   String get gOptions => 'Opciones';
 
   @override
-  String get gApply => 'Aplicar';
+  String get gNo => 'No';
 
   @override
-  String get gContinue => 'Continuar';
+  String get gBack => 'Atrás';
 
   @override
   String get gCancel => 'Cancelar';
@@ -32,59 +35,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gError => 'Error';
-
-  @override
-  String get g404Wonder => 'No todos los que deambulan están perdidos.';
-
-  @override
-  String get g404 => 'Pero, en este caso: 404 página no encontrada.';
-
-  @override
-  String get g404Note =>
-      'Nota: Flutter web utiliza enrutamiento hash, como...\nhttps://www.example.com/#/settings';
-
-  @override
-  String gClipboard(Object thing) {
-    return '$thing ha sido copiado al portapapeles.';
-  }
-
-  @override
-  String get gUpdates => 'Actualizaciones disponibles';
-
-  @override
-  String get gOpenSource => 'Código abierto';
-
-  @override
-  String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
-
-  @override
-  String get gGiveFeedback => 'Dar feedback';
-
-  @override
-  String get gOpeningFeedback => 'Apertura de la herramienta de feedback.';
-
-  @override
-  String get gSupportEmail => 'Nuestro Email de soporte';
-
-  @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Por favor, tome una captura de pantalla$hint del problema.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Adjunte su captura de pantalla';
-
-  @override
-  String get gValidURL => 'Por favor, introduzca una URL válida';
-
-  @override
-  String get gLeft => 'Izquierda';
-
-  @override
-  String get gRight => 'Derecha';
-
-  @override
-  String get gBack => 'Atrás';
 
   @override
   String get gSystem => 'Sistema';
@@ -104,10 +54,60 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
+  String get gLeft => 'Izquierda';
+
+  @override
+  String get gRight => 'Derecha';
+
+  @override
   String get gQuick => 'Rápido';
 
   @override
   String get gAdvanced => 'Avanzado';
+
+  @override
+  String get gUpdates => 'Actualizaciones disponibles';
+
+  @override
+  String get gValidURL => 'Por favor, introduzca una URL válida';
+
+  @override
+  String get g404Wonder => 'No todos los que deambulan están perdidos.';
+
+  @override
+  String get g404 => 'Pero, en este caso: 404 página no encontrada.';
+
+  @override
+  String get g404Note =>
+      'Nota: Flutter web utiliza enrutamiento hash, como...\nhttps://www.example.com/#/settings';
+
+  @override
+  String get gOpenSource => 'Código abierto';
+
+  @override
+  String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
+
+  @override
+  String get gSupportEmail => 'Nuestro Email de soporte';
+
+  @override
+  String gClipboard(Object thing) {
+    return '$thing ha sido copiado al portapapeles.';
+  }
+
+  @override
+  String get gGiveFeedback => 'Dar feedback';
+
+  @override
+  String get gOpeningFeedback => 'Apertura de la herramienta de feedback.';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Por favor, tome una captura de pantalla$hint del problema.';
+  }
+
+  @override
+  String get gAttachScreenshot => 'Adjunte su captura de pantalla';
 
   @override
   String get gHowThisWorks => 'Cómo funciona';

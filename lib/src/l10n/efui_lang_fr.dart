@@ -10,7 +10,10 @@ class EFUILangFr extends EFUILang {
   String get gYes => 'Oui';
 
   @override
-  String get gNo => 'Non';
+  String get gApply => 'Appliquer';
+
+  @override
+  String get gContinue => 'Continuer';
 
   @override
   String get gAnd => 'et';
@@ -19,10 +22,10 @@ class EFUILangFr extends EFUILang {
   String get gOptions => 'Paramètres';
 
   @override
-  String get gApply => 'Appliquer';
+  String get gNo => 'Non';
 
   @override
-  String get gContinue => 'Continuer';
+  String get gBack => 'Retour';
 
   @override
   String get gCancel => 'Annuler';
@@ -32,59 +35,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gError => 'Erreur';
-
-  @override
-  String get g404Wonder => 'Tous ceux qui errent ne sont pas perdus.';
-
-  @override
-  String get g404 => 'Mais, dans ce cas : page 404 non trouvée.';
-
-  @override
-  String get g404Note =>
-      'Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings';
-
-  @override
-  String gClipboard(Object thing) {
-    return '$thing a été copié dans le presse-papiers.';
-  }
-
-  @override
-  String get gUpdates => 'Mises à jour disponibles';
-
-  @override
-  String get gOpenSource => 'Open source';
-
-  @override
-  String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
-
-  @override
-  String get gGiveFeedback => 'Partager des commentaires';
-
-  @override
-  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
-
-  @override
-  String get gSupportEmail => 'Notre Email de support';
-
-  @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Veuillez prendre une capture d\'écran$hint du problème.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
-
-  @override
-  String get gValidURL => 'Veuillez saisir une URL valide';
-
-  @override
-  String get gLeft => 'Gauche';
-
-  @override
-  String get gRight => 'Droite';
-
-  @override
-  String get gBack => 'Retour';
 
   @override
   String get gSystem => 'Système';
@@ -104,10 +54,60 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
+  String get gLeft => 'Gauche';
+
+  @override
+  String get gRight => 'Droite';
+
+  @override
   String get gQuick => 'Rapide';
 
   @override
   String get gAdvanced => 'Avancé';
+
+  @override
+  String get gUpdates => 'Mises à jour disponibles';
+
+  @override
+  String get gValidURL => 'Veuillez saisir une URL valide';
+
+  @override
+  String get g404Wonder => 'Tous ceux qui errent ne sont pas perdus.';
+
+  @override
+  String get g404 => 'Mais, dans ce cas : page 404 non trouvée.';
+
+  @override
+  String get g404Note =>
+      'Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings';
+
+  @override
+  String get gOpenSource => 'Open source';
+
+  @override
+  String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
+
+  @override
+  String get gSupportEmail => 'Notre Email de support';
+
+  @override
+  String gClipboard(Object thing) {
+    return '$thing a été copié dans le presse-papiers.';
+  }
+
+  @override
+  String get gGiveFeedback => 'Partager des commentaires';
+
+  @override
+  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Veuillez prendre une capture d\'écran$hint du problème.';
+  }
+
+  @override
+  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
 
   @override
   String get gHowThisWorks => 'Comment ça marche';

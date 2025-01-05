@@ -4,47 +4,53 @@
 
 
   "gYes": "Yes",
-  "gNo": "No",
-  "gAnd": "and",
-  "gOptions": "Options",
   "gApply": "Apply",
   "gContinue": "Continue",
+
+  "gAnd": "and",
+  "gOptions": "Options",
+
+  "gNo": "No",
+  "gBack": "Back",
   "gCancel": "Cancel",
   "gClose": "Close",
   "gError": "Error",
+
+  "gSystem": "System",
+  "gLight": "Light",
+  "gDark": "Dark",
+
+  "gEditing": "Editing: ",
+  "gEditingTheme": "Editing: {themeType} theme",
+
+  "gLeft": "Left",
+  "gRight": "Right",
+
+  "gQuick": "Quick",
+  "gAdvanced": "Advanced",
+
+  "gUpdates": "Updates available",
+
+  "gValidURL": "Please enter a valid URL",
 
   "g404Wonder": "Not all who wander are lost.",
   "g404": "But, in this case: 404 page not found.",
   "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings",
 
-  "gClipboard": "{thing} has been copied to the clipboard.",
-
-  "gUpdates": "Updates available",
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
+
+  "gSupportEmail": "Our support Email",
+  "gClipboard": "{thing} has been copied to the clipboard.",
+
   "gGiveFeedback": "Give feedback",
   "gOpeningFeedback": "Opening the feedback tool.",
-  "gSupportEmail": "Our support Email",
   "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
   "gAttachScreenshot": "Please attach your screenshot",
 
-  "gValidURL": "Please enter a valid URL",
-
-  "gLeft": "Left",
-  "gRight": "Right",
-  "gBack": "Back",
-
-  "gSystem": "System",
-  "gLight": "Light",
-  "gDark": "Dark",
-  "gEditing": "Editing: ",
-  "gEditingTheme": "Editing: {themeType} theme",
-
-  "gQuick": "Quick",
-  "gAdvanced": "Advanced",
-
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
+  
   "gTranslationsPending": "Translations pending human review",
 
   "gAttention": "Attention",

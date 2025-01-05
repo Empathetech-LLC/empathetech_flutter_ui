@@ -104,11 +104,17 @@ abstract class EFUILang {
   /// **'Yes'**
   String get gYes;
 
-  /// No description provided for @gNo.
+  /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
-  /// **'No'**
-  String get gNo;
+  /// **'Apply'**
+  String get gApply;
+
+  /// No description provided for @gContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get gContinue;
 
   /// No description provided for @gAnd.
   ///
@@ -122,17 +128,17 @@ abstract class EFUILang {
   /// **'Options'**
   String get gOptions;
 
-  /// No description provided for @gApply.
+  /// No description provided for @gNo.
   ///
   /// In en, this message translates to:
-  /// **'Apply'**
-  String get gApply;
+  /// **'No'**
+  String get gNo;
 
-  /// No description provided for @gContinue.
+  /// No description provided for @gBack.
   ///
   /// In en, this message translates to:
-  /// **'Continue'**
-  String get gContinue;
+  /// **'Back'**
+  String get gBack;
 
   /// No description provided for @gCancel.
   ///
@@ -151,102 +157,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Error'**
   String get gError;
-
-  /// No description provided for @g404Wonder.
-  ///
-  /// In en, this message translates to:
-  /// **'Not all who wander are lost.'**
-  String get g404Wonder;
-
-  /// No description provided for @g404.
-  ///
-  /// In en, this message translates to:
-  /// **'But, in this case: 404 page not found.'**
-  String get g404;
-
-  /// No description provided for @g404Note.
-  ///
-  /// In en, this message translates to:
-  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings'**
-  String get g404Note;
-
-  /// No description provided for @gClipboard.
-  ///
-  /// In en, this message translates to:
-  /// **'{thing} has been copied to the clipboard.'**
-  String gClipboard(Object thing);
-
-  /// No description provided for @gUpdates.
-  ///
-  /// In en, this message translates to:
-  /// **'Updates available'**
-  String get gUpdates;
-
-  /// No description provided for @gOpenSource.
-  ///
-  /// In en, this message translates to:
-  /// **'Open source'**
-  String get gOpenSource;
-
-  /// No description provided for @gEFUISourceHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Open the GitHub page for EFUI'**
-  String get gEFUISourceHint;
-
-  /// No description provided for @gGiveFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Give feedback'**
-  String get gGiveFeedback;
-
-  /// No description provided for @gOpeningFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Opening the feedback tool.'**
-  String get gOpeningFeedback;
-
-  /// No description provided for @gSupportEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Our support Email'**
-  String get gSupportEmail;
-
-  /// No description provided for @gSubmitWebFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Please take a screenshot{hint} of the issue.'**
-  String gSubmitWebFeedback(Object hint);
-
-  /// No description provided for @gAttachScreenshot.
-  ///
-  /// In en, this message translates to:
-  /// **'Please attach your screenshot'**
-  String get gAttachScreenshot;
-
-  /// No description provided for @gValidURL.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter a valid URL'**
-  String get gValidURL;
-
-  /// No description provided for @gLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'Left'**
-  String get gLeft;
-
-  /// No description provided for @gRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Right'**
-  String get gRight;
-
-  /// No description provided for @gBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get gBack;
 
   /// No description provided for @gSystem.
   ///
@@ -278,6 +188,18 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
+  /// No description provided for @gLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get gLeft;
+
+  /// No description provided for @gRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get gRight;
+
   /// No description provided for @gQuick.
   ///
   /// In en, this message translates to:
@@ -289,6 +211,84 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Advanced'**
   String get gAdvanced;
+
+  /// No description provided for @gUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates available'**
+  String get gUpdates;
+
+  /// No description provided for @gValidURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid URL'**
+  String get gValidURL;
+
+  /// No description provided for @g404Wonder.
+  ///
+  /// In en, this message translates to:
+  /// **'Not all who wander are lost.'**
+  String get g404Wonder;
+
+  /// No description provided for @g404.
+  ///
+  /// In en, this message translates to:
+  /// **'But, in this case: 404 page not found.'**
+  String get g404;
+
+  /// No description provided for @g404Note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings'**
+  String get g404Note;
+
+  /// No description provided for @gOpenSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Open source'**
+  String get gOpenSource;
+
+  /// No description provided for @gEFUISourceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the GitHub page for EFUI'**
+  String get gEFUISourceHint;
+
+  /// No description provided for @gSupportEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Our support Email'**
+  String get gSupportEmail;
+
+  /// No description provided for @gClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'{thing} has been copied to the clipboard.'**
+  String gClipboard(Object thing);
+
+  /// No description provided for @gGiveFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Give feedback'**
+  String get gGiveFeedback;
+
+  /// No description provided for @gOpeningFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening the feedback tool.'**
+  String get gOpeningFeedback;
+
+  /// No description provided for @gSubmitWebFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Please take a screenshot{hint} of the issue.'**
+  String gSubmitWebFeedback(Object hint);
+
+  /// No description provided for @gAttachScreenshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Please attach your screenshot'**
+  String get gAttachScreenshot;
 
   /// No description provided for @gHowThisWorks.
   ///

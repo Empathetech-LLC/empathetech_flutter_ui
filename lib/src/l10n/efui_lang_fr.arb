@@ -4,47 +4,53 @@
 
 
   "gYes": "Oui",
-  "gNo": "Non",
-  "gAnd": "et",
-  "gOptions": "Paramètres",
   "gApply": "Appliquer",
   "gContinue": "Continuer",
+
+  "gAnd": "et",
+  "gOptions": "Paramètres",
+
+  "gNo": "Non",
+  "gBack": "Retour",
   "gCancel": "Annuler",
   "gClose": "Fermer",
   "gError": "Erreur",
+
+  "gSystem": "Système",
+  "gLight": "Clair",
+  "gDark": "Sombre",
+
+  "gEditing": "Modification : ",
+  "gEditingTheme": "Modification : Thème {themeType}",
+
+  "gLeft": "Gauche",
+  "gRight": "Droite",
+
+  "gQuick": "Rapide",
+  "gAdvanced": "Avancé",
+
+  "gUpdates": "Mises à jour disponibles",
+
+  "gValidURL": "Veuillez saisir une URL valide",
 
   "g404Wonder": "Tous ceux qui errent ne sont pas perdus.",
   "g404": "Mais, dans ce cas : page 404 non trouvée.",
   "g404Note": "Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings",
 
-  "gClipboard": "{thing} a été copié dans le presse-papiers.",
-
-  "gUpdates": "Mises à jour disponibles",
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
+
+  "gSupportEmail": "Notre Email de support",
+  "gClipboard": "{thing} a été copié dans le presse-papiers.",
+
   "gGiveFeedback": "Partager des commentaires",
   "gOpeningFeedback": "Ouverture de l'outil de feedback.",
-  "gSupportEmail": "Notre Email de support",
   "gSubmitWebFeedback": "Veuillez prendre une capture d'écran{hint} du problème.",
   "gAttachScreenshot": "Veuillez joindre votre capture d'écran",
 
-  "gValidURL": "Veuillez saisir une URL valide",
-
-  "gLeft": "Gauche",
-  "gRight": "Droite",
-  "gBack": "Retour",
-
-  "gSystem": "Système",
-  "gLight": "Clair",
-  "gDark": "Sombre",
-  "gEditing": "Modification : ",
-  "gEditingTheme": "Modification : Thème {themeType}",
-
-  "gQuick": "Rapide",
-  "gAdvanced": "Avancé",
-
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
+  
   "gTranslationsPending": "Traductions en attente de révision humaine",
 
   "gAttention": "Attention",

@@ -10,7 +10,10 @@ class EFUILangEn extends EFUILang {
   String get gYes => 'Yes';
 
   @override
-  String get gNo => 'No';
+  String get gApply => 'Apply';
+
+  @override
+  String get gContinue => 'Continue';
 
   @override
   String get gAnd => 'and';
@@ -19,10 +22,10 @@ class EFUILangEn extends EFUILang {
   String get gOptions => 'Options';
 
   @override
-  String get gApply => 'Apply';
+  String get gNo => 'No';
 
   @override
-  String get gContinue => 'Continue';
+  String get gBack => 'Back';
 
   @override
   String get gCancel => 'Cancel';
@@ -32,59 +35,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gError => 'Error';
-
-  @override
-  String get g404Wonder => 'Not all who wander are lost.';
-
-  @override
-  String get g404 => 'But, in this case: 404 page not found.';
-
-  @override
-  String get g404Note =>
-      'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings';
-
-  @override
-  String gClipboard(Object thing) {
-    return '$thing has been copied to the clipboard.';
-  }
-
-  @override
-  String get gUpdates => 'Updates available';
-
-  @override
-  String get gOpenSource => 'Open source';
-
-  @override
-  String get gEFUISourceHint => 'Open the GitHub page for EFUI';
-
-  @override
-  String get gGiveFeedback => 'Give feedback';
-
-  @override
-  String get gOpeningFeedback => 'Opening the feedback tool.';
-
-  @override
-  String get gSupportEmail => 'Our support Email';
-
-  @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Please take a screenshot$hint of the issue.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Please attach your screenshot';
-
-  @override
-  String get gValidURL => 'Please enter a valid URL';
-
-  @override
-  String get gLeft => 'Left';
-
-  @override
-  String get gRight => 'Right';
-
-  @override
-  String get gBack => 'Back';
 
   @override
   String get gSystem => 'System';
@@ -104,10 +54,60 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get gLeft => 'Left';
+
+  @override
+  String get gRight => 'Right';
+
+  @override
   String get gQuick => 'Quick';
 
   @override
   String get gAdvanced => 'Advanced';
+
+  @override
+  String get gUpdates => 'Updates available';
+
+  @override
+  String get gValidURL => 'Please enter a valid URL';
+
+  @override
+  String get g404Wonder => 'Not all who wander are lost.';
+
+  @override
+  String get g404 => 'But, in this case: 404 page not found.';
+
+  @override
+  String get g404Note =>
+      'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings';
+
+  @override
+  String get gOpenSource => 'Open source';
+
+  @override
+  String get gEFUISourceHint => 'Open the GitHub page for EFUI';
+
+  @override
+  String get gSupportEmail => 'Our support Email';
+
+  @override
+  String gClipboard(Object thing) {
+    return '$thing has been copied to the clipboard.';
+  }
+
+  @override
+  String get gGiveFeedback => 'Give feedback';
+
+  @override
+  String get gOpeningFeedback => 'Opening the feedback tool.';
+
+  @override
+  String gSubmitWebFeedback(Object hint) {
+    return 'Please take a screenshot$hint of the issue.';
+  }
+
+  @override
+  String get gAttachScreenshot => 'Please attach your screenshot';
 
   @override
   String get gHowThisWorks => 'How this works';
