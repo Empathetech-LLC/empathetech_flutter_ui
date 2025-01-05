@@ -28,9 +28,6 @@ class _SaveScreenState extends State<SaveScreen> {
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
-  late final TextStyle? subHeading =
-      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
-
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
