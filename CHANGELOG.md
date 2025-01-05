@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.0.0] - 2025-01-99
+### Updated
+- A lot... notes pending
+
 ## [7.3.1] - 2024-10-19
 ### Updated
 - Feedback button
