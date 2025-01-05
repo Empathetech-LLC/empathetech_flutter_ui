@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './shared.dart';
 import '../../structs/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
@@ -78,13 +77,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
     message: '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
   );
 
+  late final ConsoleOutput output = ConsoleOutput(
+    textTheme: textTheme,
+    showReadout: showReadout,
+    onHide: () => setState(() => showReadout = !showReadout),
+    readout: readout,
+  );
+
   late final List<Widget> body = <Widget>[
-    ConsoleOutput(
-      textTheme: textTheme,
-      showReadout: showReadout,
-      onHide: () => setState(() => showReadout = !showReadout),
-      readout: readout,
-    ),
+    output,
     separator,
   ];
 
@@ -378,17 +379,19 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Return the build //
 
   @override
-  Widget build(_) => GeneratorScreen(
+  Widget build(_) => OpenUIScaffold(
         title: 'Generator',
-        header: header,
-        body: <Widget>[
-          ConsoleOutput(
-            textTheme: textTheme,
-            showReadout: showReadout,
-            onHide: () => setState(() => showReadout = !showReadout),
-            readout: readout,
-          )
-        ],
+        body: EzScreen(
+          alignment: Alignment.topLeft,
+          child: EzScrollView(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(child: header),
+              const Center(child: EzDivider()),
+              ...body,
+            ],
+          ),
+        ),
       );
 }
 
