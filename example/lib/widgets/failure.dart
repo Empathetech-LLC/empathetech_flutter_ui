@@ -35,8 +35,7 @@ class FailureHeader extends StatelessWidget {
           // Error message
           Text(
             message,
-            style: textTheme.bodyLarge
-                ?.copyWith(fontSize: textTheme.titleLarge?.fontSize),
+            style: subTitleStyle(textTheme),
             textAlign: TextAlign.center,
           ),
         ],

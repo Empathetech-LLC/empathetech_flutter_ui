@@ -34,8 +34,7 @@ class SuccessHeader extends StatelessWidget {
           // Where to go next
           Text(
             message,
-            style: textTheme.bodyLarge
-                ?.copyWith(fontSize: textTheme.titleLarge?.fontSize),
+            style: subTitleStyle(textTheme),
             textAlign: TextAlign.center,
           ),
         ],

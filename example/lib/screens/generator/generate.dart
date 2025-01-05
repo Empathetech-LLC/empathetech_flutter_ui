@@ -31,8 +31,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
-  late final TextStyle? subHeading =
-      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+  late final TextStyle? subTitle = subTitleStyle(textTheme);
 
   // Define the build data //
 
@@ -327,7 +326,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               separator,
               RunOption(
                 projDir: projDir,
-                style: subHeading,
+                style: subTitle,
                 emulate: () async {
                   if (genState == GeneratorState.running) return;
 
@@ -371,7 +370,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 DeleteOption(
                   appName: widget.config.appName,
                   baseDir: workDir,
-                  style: subHeading,
+                  style: subTitle,
                 ),
               ],
             ],

@@ -26,9 +26,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? bodyStyle = textTheme.bodyLarge;
-  late final TextStyle? pitchStyle =
-      bodyStyle?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+  late final TextStyle? subTitle = subTitleStyle(textTheme);
 
   // Set the page title //
 
@@ -51,13 +49,13 @@ class _ErrorScreenState extends State<ErrorScreen> {
             children: <Widget>[
               Text(
                 l10n.g404Wonder,
-                style: pitchStyle,
+                style: subTitle,
                 textAlign: TextAlign.center,
               ),
               const EzSpacer(),
               Text(
                 l10n.g404,
-                style: bodyStyle,
+                style: textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
               separator,

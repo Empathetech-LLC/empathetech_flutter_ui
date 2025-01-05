@@ -31,8 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const Widget divider = Center(child: EzDivider());
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? notificationStyle =
-      textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+  late final TextStyle? subTitle = subTitleStyle(textTheme);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
@@ -403,11 +402,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 EzPlainText(
                   text:
                       'When you generate ${isDesktop ? (validName ? namePreview : 'the app') : 'the config'}, the current ',
-                  style: notificationStyle,
+                  style: subTitle,
                 ),
                 EzInlineLink(
                   'settings',
-                  style: notificationStyle,
+                  style: subTitle,
                   onTap: () => context.goNamed(settingsHomePath),
                   semanticsLabel:
                       'Open a link to an online color scheme builder',
@@ -417,11 +416,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ''' (except images) will become the default config for ${validName ? namePreview : 'your app'}.
 
 It is recommended to set a custom color scheme. If you need help building one, try starting ''',
-                  style: notificationStyle,
+                  style: subTitle,
                 ),
                 EzInlineLink(
                   'here.',
-                  style: notificationStyle,
+                  style: subTitle,
                   url: Uri.parse('https://www.canva.com/colors/color-wheel/'),
                   semanticsLabel:
                       'Open a link to an online color scheme builder',
@@ -518,7 +517,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // LICENSE config
                   _LicensePicker(
                     textTheme: textTheme,
-                    notificationStyle: notificationStyle,
+                    notificationStyle: subTitle,
                     visible: showLicense,
                     onHide: () => setState(() => showLicense = !showLicense),
                     groupValue: license,
