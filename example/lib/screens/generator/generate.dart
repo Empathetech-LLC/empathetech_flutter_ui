@@ -61,7 +61,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
     }
   }
 
-  bool showReadout = true;
   StringBuffer readout = StringBuffer();
 
   // Define custom functions //
@@ -303,9 +302,12 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        return const EmpathetechLoadingAnimation(
-          height: double.infinity,
-          semantics: 'BLARG',
+        return SizedBox(
+          height: heightOf(context) / 3,
+          child: const EmpathetechLoadingAnimation(
+            height: double.infinity,
+            semantics: 'BLARG',
+          ),
         );
       case GeneratorState.successful:
         return SuccessHeader(
@@ -327,12 +329,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            _ConsoleOutput(
-              textTheme: textTheme,
-              showReadout: showReadout,
-              onHide: () => setState(() => showReadout = !showReadout),
-              readout: readout,
-            ),
+            divider,
+            _ConsoleOutput(readout),
             separator,
           ],
         );
@@ -340,6 +338,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            separator,
             RunOption(
               projDir: projDir,
               style: subHeading,
@@ -368,12 +367,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               },
             ),
             divider,
-            _ConsoleOutput(
-              textTheme: textTheme,
-              showReadout: showReadout,
-              onHide: () => setState(() => showReadout = !showReadout),
-              readout: readout,
-            ),
+            _ConsoleOutput(readout),
             separator,
           ],
         );
@@ -382,19 +376,15 @@ class _GenerateScreenState extends State<GenerateScreen> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             if (showDelete) ...<Widget>[
+              separator,
               DeleteOption(
                 appName: widget.config.appName,
                 baseDir: workDir,
                 style: subHeading,
               ),
-              divider,
             ],
-            _ConsoleOutput(
-              textTheme: textTheme,
-              showReadout: showReadout,
-              onHide: () => setState(() => showReadout = !showReadout),
-              readout: readout,
-            ),
+            divider,
+            _ConsoleOutput(readout),
             separator,
           ],
         );
@@ -415,31 +405,48 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget build(_) => OpenUIScaffold(
         title: 'Generator',
         body: EzScreen(
-          child: EzScrollView(children: <Widget>[
-            SizedBox(
-              height: heightOf(context) / 3,
-              child: header(),
-            ),
-            const EzDivider(),
-            body(),
-          ]),
+          child: EzScrollView(children: <Widget>[header(), body()]),
         ),
       );
 }
 
-class _ConsoleOutput extends StatelessWidget {
-  final TextTheme textTheme;
-
-  final bool showReadout;
-  final void Function() onHide;
+class _ConsoleOutput extends StatefulWidget {
   final StringBuffer readout;
 
-  const _ConsoleOutput({
-    required this.textTheme,
-    required this.showReadout,
-    required this.onHide,
-    required this.readout,
-  });
+  const _ConsoleOutput(this.readout);
+
+  @override
+  State<StatefulWidget> createState() => _ConsoleOutputState();
+}
+
+class _ConsoleOutputState extends State<_ConsoleOutput> {
+  // Define the build data //
+
+  late final TextTheme textTheme = Theme.of(context).textTheme;
+
+  late final ValueNotifier<StringBuffer> readoutNotifier;
+  late TextEditingController controller;
+
+  bool showReadout = false;
+
+  // Define custom functions //
+
+  void updateReadout() {
+    if (!showReadout) return;
+    setState(() => controller.text = readoutNotifier.value.toString());
+  }
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    readoutNotifier = ValueNotifier<StringBuffer>(widget.readout);
+    controller = TextEditingController(text: widget.readout.toString());
+    readoutNotifier.addListener(updateReadout);
+  }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -457,7 +464,7 @@ class _ConsoleOutput extends StatelessWidget {
             ),
             EzSpacer(vertical: false, space: margin),
             IconButton(
-              onPressed: onHide,
+              onPressed: () => setState(() => showReadout = !showReadout),
               icon: Icon(
                 showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
               ),
@@ -478,11 +485,17 @@ class _ConsoleOutput extends StatelessWidget {
               readOnly: true,
               maxLines: null,
               textAlign: TextAlign.start,
-              controller: TextEditingController(text: readout.toString()),
+              controller: controller,
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
