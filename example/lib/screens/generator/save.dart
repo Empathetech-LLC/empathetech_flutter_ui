@@ -84,21 +84,38 @@ class _SaveScreenState extends State<SaveScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        return const EmpathetechLoadingAnimation(
-          height: double.infinity,
-          semantics: 'BLARG',
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: const EmpathetechLoadingAnimation(
+            height: double.infinity,
+            semantics: 'BLARG',
+          ),
         );
       case GeneratorState.successful:
-        return SuccessHeader(
-          textTheme: textTheme,
-          message: '''\nYour configuration has been saved to ${archivePath()}
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: Center(
+            child: SuccessHeader(
+              textTheme: textTheme,
+              message:
+                  '''\nYour configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+            ),
+          ),
         );
       case GeneratorState.failed:
-        return FailureHeader(
-          textTheme: textTheme,
-          message: '\n$failureMessage',
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: Center(
+            child: FailureHeader(
+              textTheme: textTheme,
+              message: '\n$failureMessage',
+            ),
+          ),
         );
     }
   }
@@ -116,11 +133,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   @override
   Widget build(_) => OpenUIScaffold(
         title: 'Archiver',
-        body: EzScreen(
-          child: SizedBox(
-            height: heightOf(context) / 3,
-            child: Center(child: header()),
-          ),
-        ),
+        body: EzScreen(child: header()),
       );
 }
