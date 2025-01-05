@@ -90,15 +90,17 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ],
       dir: workDir,
       onSuccess: delStuff,
-      onFailure: (String message) => (message.contains('command not found'))
-          ? () {
-              setState(() {
-                showDelete = null;
-                failureMessage = 'Flutter is not installed';
-                genState = GeneratorState.failed;
-              });
-            }
-          : onFailure(message),
+      onFailure: (String message) {
+        if (message.contains('command not found')) {
+          setState(() {
+            showDelete = null;
+            failureMessage = 'Flutter is not installed';
+            genState = GeneratorState.failed;
+          });
+        } else {
+          onFailure(message);
+        }
+      },
       readout: readout,
     );
   }
