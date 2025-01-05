@@ -7,3 +7,5 @@ export 'code_gen.dart';
 export 'consts.dart';
 export 'form_validators.dart';
 export 'generator_states.dart';
+
+export '../l10n/lang.dart';
