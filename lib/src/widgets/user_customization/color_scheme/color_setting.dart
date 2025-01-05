@@ -204,7 +204,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           ),
           contents: <Widget>[
             Text(l10n.csCurrVal, textAlign: TextAlign.center),
-            EzSpacer(space: margin),
+            EzMargin(),
             EzTextIconButton(
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
