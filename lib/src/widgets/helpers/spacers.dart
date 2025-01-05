@@ -39,6 +39,15 @@ class EzSpacer extends StatelessWidget {
   }
 }
 
+class Margin extends EzSpacer {
+  /// [EzSpacer] with [EzConfig]s [marginKey] space
+  Margin({
+    super.key,
+    super.vertical,
+    super.horizontal,
+  }) : super(space: EzConfig.get(marginKey));
+}
+
 class EzSwapSpacer extends StatelessWidget {
   /// Optional [EzSpacer.space] passthrough
   final double? space;
@@ -55,6 +64,11 @@ class EzSwapSpacer extends StatelessWidget {
         ? EzSpacer(space: space, horizontal: false)
         : EzSpacer(space: space, vertical: false);
   }
+}
+
+class SwapMargin extends EzSwapSpacer {
+  /// [EzSwapSpacer] with [EzConfig]s [marginKey] space
+  SwapMargin({super.key}) : super(space: EzConfig.get(marginKey));
 }
 
 class EzSeparator extends StatelessWidget {
