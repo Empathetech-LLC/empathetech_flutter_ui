@@ -28,8 +28,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
   static const EzSeparator separator = EzSeparator();
   static const Widget divider = EzDivider();
 
-  final double margin = EzConfig.get(marginKey);
-
   late final EFUILang l10n = EFUILang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -412,7 +410,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 style: textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              EzSpacer(vertical: false, space: margin),
+              EzMargin(vertical: false),
               IconButton(
                 onPressed: () => setState(() => showReadout = !showReadout),
                 icon: Icon(
@@ -421,7 +419,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
             ],
           ),
-          EzSpacer(space: margin),
+          EzMargin(),
 
           // Readout
           Visibility(
@@ -432,7 +430,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 maxWidth: widthOf(context) * 0.667,
                 maxHeight: heightOf(context) / 2,
               ),
-              padding: EdgeInsets.all(margin),
+              padding: EdgeInsets.all(EzConfig.get(marginKey)),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: ezRoundEdge,
