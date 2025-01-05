@@ -3,7 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import './shared.dart';
 import '../../structs/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';
@@ -104,9 +103,17 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   // Return the build //
 
   @override
-  Widget build(_) => GeneratorScreen(
+  Widget build(_) => OpenUIScaffold(
         title: 'Archiver',
-        header: header,
-        body: <Widget>[],
+        body: EzScreen(
+          alignment: Alignment.topLeft,
+          child: EzScrollView(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(child: header),
+              const Center(child: EzDivider()),
+            ],
+          ),
+        ),
       );
 }
