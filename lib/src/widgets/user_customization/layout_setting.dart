@@ -10,11 +10,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which piece of the layout is being updated
 /// This will determine the preview [Widget]s
-enum LayoutSettingType {
-  margin,
-  padding,
-  spacing,
-}
+enum LayoutSettingType { margin, padding, spacing }
 
 /// Get the proper [String] name for [LayoutSettingType]
 String lstName(BuildContext context, LayoutSettingType settingType) {
