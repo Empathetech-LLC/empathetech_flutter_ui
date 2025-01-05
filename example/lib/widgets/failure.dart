@@ -4,6 +4,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -105,13 +106,45 @@ class DeleteOption extends StatelessWidget {
                 readout: readout,
               ),
               icon: Icon(PlatformIcons(context).delete),
-              label: 'wipe it',
+              label: 'Wipe it',
             ),
             spacer,
             EzElevatedIconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(PlatformIcons(context).back),
-              label: 'leave it',
+              label: 'Leave it',
+            ),
+          ],
+        ),
+      );
+}
+
+class LinkOption extends StatelessWidget {
+  /// [TextStyle] for 'would you like to...'
+  final TextStyle? style;
+
+  /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
+  const LinkOption({super.key, required this.style});
+
+  static const EzSpacer spacer = EzSpacer();
+  static const String installFlutter =
+      'https://docs.flutter.dev/get-started/install';
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'would you like to...',
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+            spacer,
+            EzElevatedIconButton(
+              onPressed: () => launchUrl(Uri.parse(installFlutter)),
+              icon: const Icon(Icons.computer),
+              label: 'Install it',
             ),
           ],
         ),
