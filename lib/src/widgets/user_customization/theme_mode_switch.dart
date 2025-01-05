@@ -31,8 +31,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  final double margin = EzConfig.get(marginKey);
-
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.wrap(EzConfig.get(paddingKey)),
   );
@@ -77,7 +75,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
             textAlign: TextAlign.center,
           ),
         ),
-        EzSpacer(space: margin),
+        EzMargin(),
 
         // Button
         DropdownMenu<ThemeMode>(
