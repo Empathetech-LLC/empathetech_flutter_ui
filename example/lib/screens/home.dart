@@ -25,11 +25,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
-
   static const EzSpacer spacer = EzSpacer();
-  late final EzSpacer rowMargin = EzSpacer(vertical: false, space: margin);
+  late final EzSpacer rowMargin = EzMargin(vertical: false);
   static const EzSeparator separator = EzSeparator();
   static const Widget divider = Center(child: EzDivider());
 
@@ -351,7 +348,9 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.start,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: margin),
+              padding: EdgeInsets.symmetric(
+                horizontal: EzConfig.get(marginKey),
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -505,7 +504,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // Copyright config
                   _AdvancedSettingsField(
-                    margin: margin,
                     textTheme: textTheme,
                     title: 'Copyright notice',
                     controller: copyrightController,
@@ -532,7 +530,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // l10n config
                   _AdvancedSettingsField(
-                    margin: margin,
                     textTheme: textTheme,
                     title: 'l10n.yaml',
                     controller: l10nController,
@@ -545,7 +542,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // Analysis options config
                   _AdvancedSettingsField(
-                    margin: margin,
                     textTheme: textTheme,
                     title: 'analysis_options.yaml',
                     controller: analysisController,
@@ -558,7 +554,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // VS Code launch config
                   _AdvancedSettingsField(
-                    margin: margin,
                     textTheme: textTheme,
                     title: '.vscode/launch.json',
                     controller: vscController,
@@ -948,7 +943,6 @@ class _SettingsCheckbox extends StatelessWidget {
 }
 
 class _AdvancedSettingsField extends StatelessWidget {
-  final double margin;
   final TextTheme textTheme;
 
   final String title;
@@ -959,7 +953,6 @@ class _AdvancedSettingsField extends StatelessWidget {
   final void Function()? onRemove;
 
   const _AdvancedSettingsField({
-    required this.margin,
     required this.textTheme,
     required this.title,
     required this.controller,
@@ -971,7 +964,7 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EzSpacer rowMargin = EzSpacer(vertical: false, space: margin);
+    final EzSpacer rowMargin = EzMargin(vertical: false);
 
     return Visibility(
       visible: !removed,
@@ -1080,7 +1073,7 @@ class _LicensePicker extends StatelessWidget {
               style: textTheme.bodyLarge,
               textAlign: TextAlign.start,
             ),
-            EzSpacer(vertical: false, space: margin),
+            EzMargin(vertical: false),
             IconButton(
               onPressed: onHide,
               icon: Icon(
@@ -1099,7 +1092,7 @@ class _LicensePicker extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               thumbVisibility: false,
               children: <Widget>[
-                EzSpacer(space: margin),
+                EzMargin(),
                 radio(
                   title: 'GNU GPLv3',
                   value: gnuKey,
