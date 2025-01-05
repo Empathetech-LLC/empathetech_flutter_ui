@@ -62,8 +62,12 @@ String firstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
 
 // Getters //
 
+/// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
+TextStyle? subHeadingStyle(TextTheme textTheme) =>
+    textTheme.headlineLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
 /// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? bigBody(TextTheme textTheme) =>
+TextStyle? subTitleStyle(TextTheme textTheme) =>
     textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
 // Setters //
