@@ -25,17 +25,21 @@ class SuccessHeader extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            'Success!',
-            style: textTheme.headlineLarge,
-            textAlign: TextAlign.center,
+          Flexible(
+            child: Text(
+              'Success!',
+              style: textTheme.headlineLarge,
+              textAlign: TextAlign.center,
+            ),
           ),
 
           // Where to go next
-          Text(
-            message,
-            style: subTitleStyle(textTheme),
-            textAlign: TextAlign.center,
+          Flexible(
+            child: Text(
+              message,
+              style: subTitleStyle(textTheme),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       );
