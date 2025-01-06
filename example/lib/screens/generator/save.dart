@@ -81,9 +81,13 @@ class _SaveScreenState extends State<SaveScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        return const EmpathetechLoadingAnimation(
-          height: double.infinity,
-          semantics: 'BLARG',
+        return SizedBox(
+          height: heightOf(context) / 3,
+          width: double.infinity,
+          child: const EmpathetechLoadingAnimation(
+            height: double.infinity,
+            semantics: 'BLARG',
+          ),
         );
       case GeneratorState.successful:
         return Center(
@@ -118,6 +122,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   Widget build(_) => OpenUIScaffold(
         title: 'Archiver',
         running: genState == GeneratorState.running,
-        body: EzScreen(child: EzScrollView(child: header())),
+        body: EzScreen(child: header()),
       );
 }
