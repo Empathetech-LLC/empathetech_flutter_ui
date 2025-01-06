@@ -131,6 +131,6 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
   Widget build(_) => OpenUIScaffold(
         title: 'Archiver',
         running: genState == GeneratorState.running,
-        body: EzScreen(child: header()),
+        body: EzScreen(child: EzScrollView(child: header())),
       );
 }
