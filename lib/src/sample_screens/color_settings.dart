@@ -28,6 +28,7 @@ class ColorSettings extends StatefulWidget {
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
+      darkTertiaryKey,
       darkSurfaceKey,
       darkOnSurfaceKey,
       darkSurfaceContainerKey,
@@ -36,6 +37,7 @@ class ColorSettings extends StatefulWidget {
     this.lightStarterSet = const <String>[
       lightPrimaryKey,
       lightSecondaryKey,
+      lightTertiaryKey,
       lightSurfaceKey,
       lightOnSurfaceKey,
       lightSurfaceContainerKey,
