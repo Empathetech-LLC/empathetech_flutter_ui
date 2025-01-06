@@ -9,6 +9,7 @@ import '../utils/export.dart';
 import '../widgets/export.dart';
 
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
@@ -26,20 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  late final EzSpacer rowMargin = EzMargin(vertical: false);
   static const EzSeparator separator = EzSeparator();
   static const Widget divider = Center(child: EzDivider());
+
+  final EzMargin margin = EzMargin();
+  late final EzSpacer rowMargin = EzMargin(vertical: false);
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? subTitle = subTitleStyle(textTheme);
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final double singleLineFormWidth = measureText(
-    longestError,
-    context: context,
-    style: textTheme.bodyLarge,
-  ).width;
+  late final double singleLineFormWidth = min(
+    measureText(
+      longestError,
+      context: context,
+      style: textTheme.bodyLarge,
+    ).width,
+    widthOf(context) * 0.75,
+  );
 
   // Define build data //
 
@@ -363,6 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => textSettings = value);
                     },
                   ),
+                  margin,
                   _SettingsCheckbox(
                     textTheme: textTheme,
                     title: 'Layout settings',
@@ -372,6 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => layoutSettings = value);
                     },
                   ),
+                  margin,
                   _SettingsCheckbox(
                     textTheme: textTheme,
                     title: 'Color settings',
@@ -381,6 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() => colorSettings = value);
                     },
                   ),
+                  margin,
                   _SettingsCheckbox(
                     textTheme: textTheme,
                     title: 'Image settings',
@@ -435,10 +444,12 @@ It is recommended to set a custom color scheme. If you need help building one, t
             // Toggle
             EzRow(
               children: <Widget>[
-                Text(
-                  'Advanced settings',
-                  style: textTheme.titleLarge,
-                  textAlign: TextAlign.start,
+                Flexible(
+                  child: Text(
+                    'Advanced settings',
+                    style: textTheme.titleLarge,
+                    textAlign: TextAlign.start,
+                  ),
                 ),
                 rowMargin,
                 IconButton(
@@ -462,7 +473,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // Path picker
                   Visibility(
                     visible: isDesktop,
-                    child: EzRow(
+                    child: EzScrollView(
+                      mainAxisSize: MainAxisSize.min,
+                      scrollDirection: Axis.horizontal,
+                      reverseHands: true,
                       children: <Widget>[
                         // Text
                         ConstrainedBox(
@@ -927,10 +941,12 @@ class _SettingsCheckbox extends StatelessWidget {
     return EzRow(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(
-          title,
-          style: textTheme.bodyLarge,
-          textAlign: TextAlign.start,
+        Flexible(
+          child: Text(
+            title,
+            style: textTheme.bodyLarge,
+            textAlign: TextAlign.start,
+          ),
         ),
         Checkbox(
           value: value,
@@ -972,7 +988,10 @@ class _AdvancedSettingsField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // Title and show buttons
-          EzRow(
+          EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            scrollDirection: Axis.horizontal,
+            reverseHands: true,
             children: <Widget>[
               Text(
                 title,
