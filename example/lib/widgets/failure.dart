@@ -27,17 +27,21 @@ class FailureHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Headline
-          Text(
-            'Failure',
-            style: textTheme.headlineLarge,
-            textAlign: TextAlign.center,
+          Flexible(
+            child: Text(
+              'Failure',
+              style: textTheme.headlineLarge,
+              textAlign: TextAlign.center,
+            ),
           ),
 
           // Error message
-          Text(
-            message,
-            style: subTitleStyle(textTheme),
-            textAlign: TextAlign.center,
+          Flexible(
+            child: Text(
+              message,
+              style: subTitleStyle(textTheme),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       );
