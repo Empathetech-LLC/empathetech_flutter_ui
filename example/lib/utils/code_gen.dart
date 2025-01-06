@@ -418,6 +418,17 @@ class $classCaseAppName extends StatelessWidget {
       for (final MapEntry<String, dynamic> entry
           in config.appDefaults.entries) {
         if (entry.value != null && !entry.key.contains('Image')) {
+          // Handle specific cases
+          if (entry.key == userColorsKey) {
+            final String colorList =
+                entry.value.toString().replaceAll(',', 'Key,');
+
+            result +=
+                '${entry.key}Key: <String>${colorList.replaceRange(colorList.length - 1, null, 'Key,]')},';
+            continue;
+          }
+
+          // Default case
           result += '${entry.key}Key: ${entry.value},';
         }
       }
