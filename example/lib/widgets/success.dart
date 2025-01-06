@@ -25,6 +25,7 @@ class SuccessHeader extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          // Headline
           Flexible(
             child: Text(
               'Success!',
