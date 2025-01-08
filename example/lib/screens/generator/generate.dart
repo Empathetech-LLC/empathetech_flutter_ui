@@ -43,10 +43,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   late final TargetPlatform platform = getBasePlatform(context);
 
-  late final bool isWindows = platform == TargetPlatform.windows;
-
   late final String workDir = widget.config.genPath!;
-  late final String projDir = isWindows
+  late final String projDir = platform == TargetPlatform.windows
       ? '$workDir\\${widget.config.appName}'
       : '$workDir/${widget.config.appName}';
 
@@ -81,13 +79,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Is by beginning
   Future<void> genStuff() async {
     await ezCLI(
-      exe: 'flutter',
-      args: <String>[
-        'create',
-        '--org',
-        widget.config.domainName,
-        widget.config.appName,
-      ],
+      'flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
       onSuccess: delStuff,
       onFailure: (String message) {
@@ -107,17 +99,27 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   /// Runs immediately after a successful [genStuff]
   Future<void> delStuff() async {
+    const String files =
+        'analysis_options.yaml pubspec.lock pubspec.yaml README.md';
+    const String dirs = 'lib test';
+
+    // Files
     await ezCLI(
-      exe: 'rm',
-      args: <String>[
-        '-rf',
-        'lib',
-        'test',
-        'analysis_options.yaml',
-        'pubspec.lock',
-        'pubspec.yaml',
-        'README.md',
-      ],
+      'rm -f $files',
+      winCMD: 'del /f /q $files',
+      platform: platform,
+      dir: projDir,
+      onSuccess: addStuff,
+      onFailure: onFailure,
+      readout: readout,
+    );
+
+    // Folders
+
+    await ezCLI(
+      'rm -rf $dirs',
+      winCMD: 'rmdir /s /q $dirs',
+      platform: platform,
       dir: projDir,
       onSuccess: addStuff,
       onFailure: onFailure,
@@ -157,6 +159,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     await genLib(
       config: widget.config,
+      platform: platform,
       dir: projDir,
       onFailure: onFailure,
       readout: readout,
@@ -165,6 +168,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     if (widget.config.l10nConfig != null) {
       await genL10n(
         config: widget.config,
+        platform: platform,
         dir: projDir,
         onFailure: onFailure,
         readout: readout,
@@ -191,6 +195,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     await genIntegrationTests(
       config: widget.config,
+      platform: platform,
       dir: projDir,
       onFailure: onFailure,
       readout: readout,
@@ -349,12 +354,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   );
 
                   await ezCLI(
-                    exe: 'flutter',
-                    args: <String>[
-                      'run',
-                      '-d',
-                      device(),
-                    ],
+                    'flutter run -d ${device()}',
                     dir: projDir,
                     onSuccess: () =>
                         setState(() => genState = GeneratorState.successful),
@@ -381,7 +381,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 separator,
                 DeleteOption(
                   appName: widget.config.appName,
-                  baseDir: workDir,
+                  platform: platform,
+                  dir: workDir,
                   style: subTitle,
                 ),
               ],

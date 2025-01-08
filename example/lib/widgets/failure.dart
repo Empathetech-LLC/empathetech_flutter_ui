@@ -51,8 +51,11 @@ class DeleteOption extends StatelessWidget {
   /// Directory that will be rm -rf'd
   final String appName;
 
+  /// Current [TargetPlatform]
+  final TargetPlatform platform;
+
   /// Directory to run the rm command in
-  final String baseDir;
+  final String dir;
 
   /// [TextStyle] for 'would you like to...'
   final TextStyle? style;
@@ -64,7 +67,8 @@ class DeleteOption extends StatelessWidget {
   const DeleteOption({
     super.key,
     required this.appName,
-    required this.baseDir,
+    required this.platform,
+    required this.dir,
     required this.style,
     this.readout,
   });
@@ -84,12 +88,10 @@ class DeleteOption extends StatelessWidget {
             spacer,
             EzElevatedIconButton(
               onPressed: () => ezCLI(
-                exe: 'rm',
-                args: <String>[
-                  '-rf',
-                  appName,
-                ],
-                dir: baseDir,
+                'rm -rf $appName',
+                winCMD: 'rmdir /s /q $appName',
+                platform: platform,
+                dir: dir,
                 onSuccess: () async {
                   await ezSnackBar(
                     context: context,
