@@ -9,13 +9,13 @@ const String isLeftyKey = 'isLefty';
 
 const String isDarkThemeKey = 'isDarkTheme';
 
-const String localeKey = 'appLocale';
+const String appLocaleKey = 'appLocale';
 
-///  [isLeftyKey], [isDarkThemeKey], [localeKey]
+///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
 const Map<String, Type> globalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
-  localeKey: List<String>,
+  appLocaleKey: List<String>,
 };
 
 // Text settings' keys //

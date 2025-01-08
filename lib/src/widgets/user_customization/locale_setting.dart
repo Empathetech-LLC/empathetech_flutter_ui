@@ -84,7 +84,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           buttons.addAll(<Widget>[
             EzElevatedIconButton(
               onPressed: () async {
-                await EzConfig.setStringList(localeKey, localeData);
+                await EzConfig.setStringList(appLocaleKey, localeData);
                 currLocale = locale;
                 l10n = await EFUILang.delegate.load(locale);
                 setState(() {});

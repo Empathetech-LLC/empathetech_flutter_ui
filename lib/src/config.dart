@@ -137,7 +137,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   /// Return the user's selected [Locale]?
   static Locale? getLocale() {
-    final List<String>? localeData = _instance!.prefs[localeKey];
+    final List<String>? localeData = _instance!.prefs[appLocaleKey];
 
     if (localeData == null) {
       return null;
@@ -319,7 +319,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         localeData.add(randomLocale.countryCode!);
       }
 
-      await setStringList(localeKey, localeData);
+      await setStringList(appLocaleKey, localeData);
     }
 
     // Update text settings //

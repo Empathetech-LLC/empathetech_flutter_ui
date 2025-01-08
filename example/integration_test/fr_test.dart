@@ -22,7 +22,7 @@ void main() async {
   final Map<String, Object> testConfig = <String, Object>{
     ...empathetechConfig,
     isDarkThemeKey: true,
-    localeKey: <String>['fr'],
+    appLocaleKey: <String>['fr'],
   };
 
   SharedPreferences.setMockInitialValues(testConfig);
