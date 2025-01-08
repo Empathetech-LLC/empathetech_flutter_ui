@@ -420,7 +420,7 @@ class $classCaseAppName extends StatelessWidget {
           if (entry.key == appLocaleKey) {
             // Update to the default Locale
             result +=
-                '${entry.key}Key: <String>[${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
+                '${entry.key}Key: <String>${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
           } else if (entry.key == userColorsKey) {
             // Updates to which colors are default in the advanced color settings screen
             final String colorList =
