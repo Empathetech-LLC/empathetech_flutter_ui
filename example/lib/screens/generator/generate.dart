@@ -109,7 +109,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       winCMD: 'del /f /q $files',
       platform: platform,
       dir: projDir,
-      onSuccess: addStuff,
+      onSuccess: doNothing,
       onFailure: onFailure,
       readout: readout,
     );
