@@ -360,6 +360,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  margin,
                   _SettingsCheckbox(
                     textTheme: textTheme,
                     title: 'Text settings',
@@ -1056,8 +1057,6 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double margin = EzConfig.get(marginKey);
-
     Widget radio({
       required String title,
       required String value,
@@ -1105,7 +1104,7 @@ class _LicensePicker extends StatelessWidget {
         Visibility(
           visible: visible,
           child: Padding(
-            padding: EdgeInsets.only(top: margin),
+            padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
             child: EzScrollView(
               scrollDirection: Axis.horizontal,
               thumbVisibility: false,
