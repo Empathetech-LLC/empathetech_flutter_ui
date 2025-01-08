@@ -115,7 +115,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
     );
 
     // Folders
-
     await ezCLI(
       'rm -rf $dirs',
       winCMD: 'rmdir /s /q $dirs',
