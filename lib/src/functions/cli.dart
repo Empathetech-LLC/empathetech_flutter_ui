@@ -8,9 +8,10 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
-Future<void> ezCLI({
-  required String exe,
-  required List<String> args,
+Future<void> ezCLI(
+  String cmd, {
+  String? winCMD,
+  TargetPlatform? platform,
   required String dir,
   required void Function() onSuccess,
   required void Function(String message) onFailure,
@@ -18,34 +19,69 @@ Future<void> ezCLI({
   bool debug = true,
   ValueNotifier<String>? readout,
 }) async {
-  if (debug) ezLog('$exe $args...');
-  if (readout != null) readout.value += '$exe $args...\n';
+  if (platform == TargetPlatform.windows && winCMD != null) {
+    if (debug) ezLog('$winCMD...');
+    if (readout != null) readout.value += '$winCMD...\n';
 
-  late final ProcessResult runResult;
-  try {
-    runResult = await Process.run(
-      exe,
-      args,
-      runInShell: true,
-      workingDirectory: dir,
-    );
-  } catch (e) {
-    onError == null ? onFailure(e.toString()) : onError(e.toString());
+    final List<String> cmd = winCMD.split(' ');
+
+    late final ProcessResult runResult;
+    try {
+      runResult = await Process.run(
+        cmd[0],
+        cmd.sublist(1),
+        runInShell: true,
+        workingDirectory: dir,
+      );
+    } catch (e) {
+      onError == null ? onFailure(e.toString()) : onError(e.toString());
+    }
+
+    final String out = runResult.stdout.toString();
+    final String err = runResult.stderr.toString();
+
+    if (debug) {
+      ezLog(out);
+      if (err.isNotEmpty) ezLog(err);
+    }
+
+    if (readout != null) {
+      readout.value += '$out\n';
+      if (err.isNotEmpty) readout.value += '$err\n';
+    }
+
+    runResult.exitCode == 0 ? onSuccess() : onFailure(err);
+  } else {
+    if (debug) ezLog('$cmd...');
+    if (readout != null) readout.value += '$cmd...\n';
+
+    final List<String> args = cmd.split(' ');
+
+    late final ProcessResult runResult;
+    try {
+      runResult = await Process.run(
+        args[0],
+        args.sublist(1),
+        runInShell: true,
+        workingDirectory: dir,
+      );
+    } catch (e) {
+      onError == null ? onFailure(e.toString()) : onError(e.toString());
+    }
+
+    final String out = runResult.stdout.toString();
+    final String err = runResult.stderr.toString();
+
+    if (debug) {
+      ezLog(out);
+      if (err.isNotEmpty) ezLog(err);
+    }
+
+    if (readout != null) {
+      readout.value += '$out\n';
+      if (err.isNotEmpty) readout.value += '$err\n';
+    }
+
+    runResult.exitCode == 0 ? onSuccess() : onFailure(err);
   }
-
-  final String err = runResult.stderr.toString();
-
-  if (debug) {
-    ezLog(runResult.stdout);
-    if (err.isNotEmpty) ezLog(err);
-  }
-
-  if (readout != null) {
-    readout.value += '${runResult.stdout}\n';
-    if (err.isNotEmpty) readout.value += '$err\n';
-  }
-
-  runResult.exitCode == 0
-      ? onSuccess()
-      : onFailure(runResult.stderr.toString());
 }
