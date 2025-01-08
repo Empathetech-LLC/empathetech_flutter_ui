@@ -259,6 +259,7 @@ flutter:
 /// Heavily modified from the standard template
 Future<void> genLib({
   required EAGConfig config,
+  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -277,14 +278,10 @@ Future<void> genLib({
   // Directories //
 
   await ezCLI(
-    exe: 'mkdir',
-    args: <String>[
-      'lib',
-      'lib/utils',
-      'lib/widgets',
-      'lib/screens',
-      'lib/screens/settings',
-    ],
+    'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
+    winCMD:
+        'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings',
+    platform: platform,
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -936,6 +933,7 @@ const String imageSettingsPath = 'image-settings';""" : ''}
 /// Localizations config
 Future<void> genL10n({
   required EAGConfig config,
+  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -960,12 +958,13 @@ Future<void> genL10n({
   }
 
   final String snakeName = classToSnakeCase(l10nClassName(config)!);
-  final String arbPath = getArbDir();
+  final String arbPath = platform == TargetPlatform.windows
+      ? getArbDir().replaceAll('/', '\\')
+      : getArbDir();
 
   // Make dir
   await ezCLI(
-    exe: 'mkdir',
-    args: <String>[arbPath],
+    'mkdir $arbPath',
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -1045,8 +1044,7 @@ Future<void> genVSCode({
 
   // Make dir
   await ezCLI(
-    exe: 'mkdir',
-    args: <String>['.vscode'],
+    'mkdir .vscode',
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -1067,6 +1065,7 @@ Future<void> genVSCode({
 /// Skeleton setup to reduce testing friction
 Future<void> genIntegrationTests({
   required EAGConfig config,
+  required TargetPlatform platform,
   required String dir,
   void Function() onSuccess = doNothing,
   required void Function(String) onFailure,
@@ -1083,11 +1082,7 @@ Future<void> genIntegrationTests({
   // Make dir(s) //
 
   await ezCLI(
-    exe: 'mkdir',
-    args: <String>[
-      'test_driver',
-      'integration_test',
-    ],
+    'mkdir test_driver integration_test',
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -1228,8 +1223,9 @@ flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" 
 ''');
 
     await ezCLI(
-      exe: 'chmod',
-      args: <String>['a+x', 'integration_test/run_int_tests.sh'],
+      'chmod a+x integration_test/run_int_tests.sh',
+      winCMD: 'attrib +x integration_test\\run_int_tests.sh',
+      platform: platform,
       dir: dir,
       onSuccess: doNothing,
       onFailure: onFailure,
