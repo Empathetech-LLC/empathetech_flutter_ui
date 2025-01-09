@@ -17,7 +17,6 @@ class SettingsHomeScreen extends StatelessWidget {
         title: EFUILang.of(context)!.ssPageTitle,
         showSettings: false,
         body: const SettingsHome(
-          warningHeader: EzUpdater(),
           textSettingsPath: textSettingsPath,
           layoutSettingsPath: layoutSettingsPath,
           colorSettingsPath: colorSettingsPath,
