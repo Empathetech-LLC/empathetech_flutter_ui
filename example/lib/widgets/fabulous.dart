@@ -32,6 +32,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'Builder values',
+                isDefaultAction: true,
               ),
               EzMaterialAction(
                 onPressed: () async {
@@ -39,6 +40,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'App settings',
+                isDestructiveAction: true,
               ),
               EzMaterialAction(
                 onPressed: () async {
@@ -47,6 +49,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'Both',
+                isDestructiveAction: true,
               ),
               EzMaterialAction(
                 onPressed: () => Navigator.of(alertContext).pop(),
@@ -60,6 +63,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'Builder values',
+                isDefaultAction: true,
               ),
               EzCupertinoAction(
                 onPressed: () async {
@@ -67,6 +71,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'App settings',
+                isDestructiveAction: true,
               ),
               EzCupertinoAction(
                 onPressed: () async {
@@ -75,6 +80,7 @@ class ResetFAB extends StatelessWidget {
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
                 text: 'Both',
+                isDestructiveAction: true,
               ),
               EzCupertinoAction(
                 onPressed: () => Navigator.of(alertContext).pop(),
