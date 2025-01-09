@@ -56,7 +56,7 @@ class EzMenuButton extends StatefulWidget {
     this.requestFocusOnHover = true,
     this.onHover,
     this.onFocusChange,
-    this.underline = true,
+    this.underline = false,
     this.decorationColor,
     this.focusNode,
     this.autofocus = false,
