@@ -507,6 +507,24 @@ class SettingsButton extends StatelessWidget {
         label: EFUILang.of(context)!.ssPageTitle,
       );
 }
+
+class EFUICredits extends StatelessWidget {
+  final BuildContext parentContext;
+
+  /// [EzMenuButton] for opening EFUI on GitHub
+  /// Honor system: keep a version of this in your app
+  /// Remove if, and only if, appropriate contributions have been made to Empathetech LLC
+  /// https://www.empathetech.net/#/contribute
+  const EFUICredits(this.parentContext, {super.key});
+
+  @override
+  Widget build(BuildContext context) => EzMenuButton(
+        onPressed: () =>
+            launchUrl(Uri.parse('https://www.empathetech.net/#/products')),
+        icon: Icon(PlatformIcons(context).settings),
+        label: EFUILang.of(context)!.gCreator,
+      );
+}
 """);
 
     // scaffold file
@@ -558,17 +576,17 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
     // Define custom widgets //
 
-    late final Widget options = (showSettings)
-        ? MenuAnchor(
-            builder: (_, MenuController controller, ___) => IconButton(
-              onPressed: () =>
-                  controller.isOpen ? controller.close() : controller.open(),
-              tooltip: l10n.gOptions,
-              icon: const Icon(Icons.more_vert),
-            ),
-            menuChildren: <Widget>[SettingsButton(context)],
-          )
-        : const SizedBox.shrink();
+    late final Widget options = MenuAnchor(
+      builder: (_, MenuController controller, ___) => IconButton(
+        onPressed: () =>
+            controller.isOpen ? controller.close() : controller.open(),
+        tooltip: l10n.gOptions,
+        icon: const Icon(Icons.more_vert),
+      ),
+      menuChildren: <Widget>[
+        (showSettings) ? SettingsButton(context) : EFUICredits(context)
+      ],
+    );
 
     // Return the build //
 
