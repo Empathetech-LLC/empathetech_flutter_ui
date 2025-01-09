@@ -4,7 +4,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -18,83 +17,68 @@ class ResetFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EFUILang l10n = EFUILang.of(context)!;
-    final TextStyle? style = Theme.of(context).textTheme.bodyLarge;
 
     return FloatingActionButton(
       onPressed: () => showPlatformDialog(
         context: context,
         builder: (BuildContext alertContext) {
           return EzAlertDialog(
-            title: Text(
-              '${l10n.gReset}...',
-              textAlign: TextAlign.center,
-            ),
-            content: Text(
-              l10n.gUndoWarn,
-              textAlign: TextAlign.center,
-            ),
+            title: Text('${l10n.gReset}...', textAlign: TextAlign.center),
+            content: Text(l10n.gUndoWarn, textAlign: TextAlign.center),
             materialActions: <Widget>[
-              EzTextButton(
+              EzMaterialAction(
+                onPressed: () async {
+                  clearForms();
+                  if (alertContext.mounted) Navigator.of(alertContext).pop();
+                },
                 text: 'Builder values',
-                textStyle: style,
+              ),
+              EzMaterialAction(
                 onPressed: () async {
-                  clearForms();
+                  await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
-              ),
-              EzTextButton(
                 text: 'App settings',
-                textStyle: style,
-                onPressed: () async {
-                  await EzConfig.reset();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
               ),
-              EzTextButton(
-                text: 'Both',
-                textStyle: style,
+              EzMaterialAction(
                 onPressed: () async {
                   clearForms();
                   await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
+                text: 'Both',
               ),
-              EzTextButton(
-                text: 'Nothing',
-                textStyle: style,
+              EzMaterialAction(
                 onPressed: () => Navigator.of(alertContext).pop(),
+                text: 'Nothing',
               ),
             ],
-            cupertinoActions: <CupertinoDialogAction>[
-              CupertinoDialogAction(
+            cupertinoActions: <EzCupertinoAction>[
+              EzCupertinoAction(
                 onPressed: () async {
                   clearForms();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
-                textStyle: style,
-                child: const Text('Builder values'),
+                text: 'Builder values',
               ),
-              CupertinoDialogAction(
+              EzCupertinoAction(
                 onPressed: () async {
                   await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
-                textStyle: style,
-                child: const Text('App settings'),
+                text: 'App settings',
               ),
-              CupertinoDialogAction(
+              EzCupertinoAction(
                 onPressed: () async {
                   clearForms();
                   await EzConfig.reset();
                   if (alertContext.mounted) Navigator.of(alertContext).pop();
                 },
-                textStyle: style,
-                child: const Text('Both'),
+                text: 'Both',
               ),
-              CupertinoDialogAction(
+              EzCupertinoAction(
                 onPressed: () => Navigator.of(alertContext).pop(),
-                textStyle: style,
-                child: const Text('Nothing'),
+                text: 'Nothing',
               ),
             ],
             needsClose: false,
