@@ -6,6 +6,7 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Custom [ColorScheme.highContrastDark]
@@ -85,21 +86,28 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = EFUILang.of(context)!;
 
     return EzElevatedIconButton(
-      onPressed: isDark
-          ? () async {
-              await storeColorScheme(
+      onPressed: () async {
+        isDark
+            ? await storeColorScheme(
                 colorScheme: dark,
                 brightness: Brightness.dark,
-              );
-            }
-          : () async {
-              await storeColorScheme(
+              )
+            : await storeColorScheme(
                 colorScheme: light,
                 brightness: Brightness.light,
               );
-            },
+
+        if (context.mounted) {
+          ezSnackBar(
+            context: context,
+            message: (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)
+                .split('\n')[0],
+          );
+        }
+      },
       icon: Icon(
         Icons.contrast,
         color: Theme.of(context).colorScheme.onSurface,
