@@ -13,9 +13,6 @@ class SettingsHome extends StatefulWidget {
   /// For [EzScreen.useImageDecoration]
   final bool useImageDecoration;
 
-  /// Optional [EzWarning.header] passthrough
-  final Widget? warningHeader;
-
   /// Widgets to be added below language and above any present routes
   /// Do not include a trailing spacer, one will be provided
   final List<Widget>? additionalSettings;
@@ -51,7 +48,6 @@ class SettingsHome extends StatefulWidget {
   const SettingsHome({
     super.key,
     this.useImageDecoration = true,
-    this.warningHeader,
     this.additionalSettings,
     required this.textSettingsPath,
     required this.layoutSettingsPath,
@@ -91,10 +87,7 @@ class _SettingsHomeState extends State<SettingsHome> {
       child: EzScrollView(
         children: <Widget>[
           // Functionality disclaimer
-          EzWarning(
-            header: widget.warningHeader,
-            body: kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide,
-          ),
+          EzWarning(kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide),
           separator,
 
           // Global settings
