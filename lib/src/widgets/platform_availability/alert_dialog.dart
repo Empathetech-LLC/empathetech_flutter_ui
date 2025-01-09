@@ -224,12 +224,11 @@ class EzCupertinoAction extends StatelessWidget {
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: CupertinoDialogAction(
+      child: EzTextButton(
+        style: TextButton.styleFrom(shape: const LinearBorder()),
         onPressed: onPressed,
-        isDefaultAction: isDefaultAction,
-        isDestructiveAction: isDestructiveAction,
+        text: text,
         textStyle: textStyle,
-        child: Text(text),
       ),
     );
   }
