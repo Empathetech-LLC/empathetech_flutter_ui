@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -446,62 +447,67 @@ class _ImageSettingState extends State<EzImageSetting> {
                 textAlign: TextAlign.center,
               ),
               separator,
-              EzScrollView(
-                scrollDirection: Axis.horizontal,
-                primary: false,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.contain,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.cover,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fill,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitWidth,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitHeight,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.none,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.scaleDown,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                ],
+              ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: PointerDeviceKind.values.toSet(),
+                ),
+                child: EzScrollView(
+                  scrollDirection: Axis.horizontal,
+                  primary: false,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.contain,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.cover,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fill,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fitWidth,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fitHeight,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.none,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.scaleDown,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                    ),
+                    rowSpacer,
+                  ],
+                ),
               ),
               separator,
               EzRow(
