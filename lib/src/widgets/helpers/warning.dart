@@ -8,39 +8,32 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzWarning extends StatelessWidget {
-  /// Warning [String] to grab the user's attention
-  final String? title;
-
-  final TextStyle? titleStyle;
-
-  /// Optional icon [Color] override, defaults to [ColorScheme.secondary]
-  final Color? iconColor;
-
-  /// Optional [Widget] to display above the [body]
-  /// Must include it's own spacing widgets
-  final Widget? header;
-
   /// What does the user need to know?
   final String body;
 
+  /// Default to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
-  /// Optional [Widget] to display below the [body]
-  /// Must include it's own spacing widgets
-  final Widget? footer;
+  /// Warning [String] to grab the user's attention
+  /// Defaults to [EFUILang.gAttention]
+  final String? title;
+
+  /// Default to [TextTheme.titleLarge]
+  final TextStyle? titleStyle;
+
+  /// Defaults to [ColorScheme.secondary]
+  final Color? iconColor;
 
   /// [Card] wrapper designed to grab attention for warnings...
   ///  /!\ [title] /!\
   ///      [body]
-  const EzWarning({
-    super.key,
+  const EzWarning(
+    this.body, {
+    this.bodyStyle,
     this.title,
     this.titleStyle,
     this.iconColor,
-    this.header,
-    required this.body,
-    this.bodyStyle,
-    this.footer,
+    super.key,
   });
 
   @override
@@ -102,14 +95,8 @@ class EzWarning extends StatelessWidget {
                 ),
                 const EzSpacer(),
 
-                // Header (optional)
-                if (header != null) header!,
-
                 // Body
                 Text(body, style: bStyle, textAlign: TextAlign.center),
-
-                // Footer (optional)
-                if (footer != null) footer!,
               ],
             ),
           ),
