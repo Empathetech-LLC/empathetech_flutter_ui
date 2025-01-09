@@ -20,7 +20,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   /// [CupertinoAlertDialogData.actions]s to be displayed below the [contents]
   /// Pairs best with [ezCupertinoActions]
-  final List<CupertinoDialogAction>? cupertinoActions;
+  final List<Widget>? cupertinoActions;
 
   /// Whether a "Close" action should be included
   final bool needsClose;
@@ -178,10 +178,62 @@ List<Widget> ezMaterialActions({
   return isLefty ? actions.reversed.toList() : actions;
 }
 
+class EzCupertinoAction extends StatelessWidget {
+  /// [CupertinoDialogAction.child] will be [Text] with [text]
+  final String text;
+
+  /// [CupertinoDialogAction.onPressed] passthrough
+  final void Function() onPressed;
+
+  /// Will use [defaultStyle]
+  final bool isDefaultAction;
+
+  /// Will use [destructiveStyle]
+  final bool isDestructiveAction;
+
+  /// Optional override defaults to [TextTheme.bodyLarge]
+  final TextStyle? defaultStyle;
+
+  /// Optional override defaults to [TextTheme.bodyLarge] with [ColorScheme.primary]
+  final TextStyle? destructiveStyle;
+
+  /// [CupertinoDialogAction] wrapper with custom styling
+  /// Uses proper [MouseCursor]
+  const EzCupertinoAction({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.isDefaultAction = false,
+    this.isDestructiveAction = false,
+    this.defaultStyle,
+    this.destructiveStyle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
+    final TextStyle? destructiveText = destructiveStyle ??
+        theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: CupertinoDialogAction(
+        onPressed: onPressed,
+        isDefaultAction: isDefaultAction,
+        isDestructiveAction: isDestructiveAction,
+        textStyle: isDestructiveAction ? destructiveText : defaultText,
+        child: Text(text),
+      ),
+    );
+  }
+}
+
 /// Pairs with [EzAlertDialog]
 /// Quickly creates [CupertinoDialogAction]s
 /// All required parameters are identical to [ezMaterialActions]
-List<CupertinoDialogAction> ezCupertinoActions({
+List<Widget> ezCupertinoActions({
   required BuildContext context,
   String? confirmMsg,
   required void Function() onConfirm,
@@ -197,30 +249,25 @@ List<CupertinoDialogAction> ezCupertinoActions({
 }) {
   final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
 
-  late final ThemeData theme = Theme.of(context);
-
-  final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
-
-  final TextStyle? destructiveText = destructiveStyle ??
-      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
-
-  final List<CupertinoDialogAction> actions = <CupertinoDialogAction>[
+  final List<Widget> actions = <Widget>[
     // Deny
-    CupertinoDialogAction(
+    EzCupertinoAction(
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
-      textStyle: denyIsDestructive ? destructiveText : defaultText,
-      child: Text(denyMsg ?? EFUILang.of(context)!.gNo),
+      defaultStyle: defaultStyle,
+      destructiveStyle: destructiveStyle,
+      text: denyMsg ?? EFUILang.of(context)!.gNo,
     ),
 
     // Confirm
-    CupertinoDialogAction(
+    EzCupertinoAction(
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
-      textStyle: confirmIsDestructive ? destructiveText : defaultText,
-      child: Text(confirmMsg ?? EFUILang.of(context)!.gYes),
+      defaultStyle: defaultStyle,
+      destructiveStyle: destructiveStyle,
+      text: confirmMsg ?? EFUILang.of(context)!.gYes,
     ),
   ];
 
