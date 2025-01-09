@@ -10,16 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAlertDialog extends PlatformAlertDialog {
-  /// Optional [content] override
-  /// Wraps [contents] in an [EzScrollView]
+  /// Dialog content becomes [contents] in an [EzScrollView]
   final List<Widget>? contents;
 
   /// [AlertDialog.actions]s to be displayed below the [contents]
-  /// Pairs best with [ezMaterialActions]
+  /// Pairs best with [ezActionPairs]
   final List<Widget>? materialActions;
 
   /// [CupertinoAlertDialogData.actions]s to be displayed below the [contents]
-  /// Pairs best with [ezCupertinoActions]
+  /// Pairs best with [ezActionPairs]
   final List<Widget>? cupertinoActions;
 
   /// Whether a "Close" action should be included
@@ -64,6 +63,13 @@ class EzAlertDialog extends PlatformAlertDialog {
             text: EFUILang.of(context)!.gClose,
           );
 
+          late final List<Widget>? actions = needsClose
+              ? <Widget>[
+                  if (materialActions != null) ...materialActions!,
+                  closeAction
+                ]
+              : materialActions;
+
           return MaterialAlertDialogData(
             // Title
             title: title,
@@ -82,33 +88,37 @@ class EzAlertDialog extends PlatformAlertDialog {
             ),
 
             // Actions
-            actions: materialActions == null
-                ? <Widget>[closeAction]
-                : needsClose
-                    ? <Widget>[...materialActions!, closeAction]
-                    : materialActions,
+            actions: isLefty ? actions?.reversed.toList() : actions,
             actionsAlignment:
                 isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
             // General
             actionsPadding: EdgeInsets.only(
-              right: spacing,
+              right: isLefty ? 0 : spacing,
+              left: isLefty ? spacing : 0,
               top: spacing / 2,
               bottom: spacing,
             ),
-            buttonPadding: EdgeInsets.only(right: spacing),
+            buttonPadding: EdgeInsets.only(
+              right: isLefty ? 0 : spacing,
+              left: isLefty ? spacing : 0,
+            ),
             iconPadding: EdgeInsets.zero,
             insetPadding: EdgeInsets.all(margin),
           );
         },
         cupertino: (BuildContext dialogContext, _) {
-          late final CupertinoDialogAction closeAction = CupertinoDialogAction(
+          late final Widget closeAction = EzCupertinoAction(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(
-              EFUILang.of(context)!.gClose,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            text: EFUILang.of(context)!.gClose,
           );
+
+          late final List<Widget>? actions = needsClose
+              ? <Widget>[
+                  if (cupertinoActions != null) ...cupertinoActions!,
+                  closeAction
+                ]
+              : cupertinoActions;
 
           return CupertinoAlertDialogData(
             title: Padding(
@@ -123,11 +133,7 @@ class EzAlertDialog extends PlatformAlertDialog {
                     padding: EdgeInsets.symmetric(vertical: spacing / 2),
                     child: dialogContent,
                   ),
-            actions: cupertinoActions == null
-                ? <Widget>[closeAction]
-                : needsClose
-                    ? <Widget>[...cupertinoActions!, closeAction]
-                    : cupertinoActions,
+            actions: isLefty ? actions?.reversed.toList() : actions,
           );
         },
       ),
@@ -135,47 +141,48 @@ class EzAlertDialog extends PlatformAlertDialog {
   }
 }
 
-/// Pairs with [EzAlertDialog]
-/// Quickly creates Material 'action' buttons for the dialog
-/// All required parameters are identical to [ezCupertinoActions]
-List<Widget> ezMaterialActions({
-  required BuildContext context,
-  String? confirmMsg,
-  required void Function() onConfirm,
-  bool confirmIsDestructive = false,
-  String? denyMsg,
-  required void Function() onDeny,
-  bool denyIsDestructive = false,
-  bool reverseHands = true,
-  TextStyle? defaultStyle,
-  TextStyle? destructiveStyle,
-}) {
-  final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
+class EzMaterialAction extends StatelessWidget {
+  /// [TextButton.child] will be [Text] with [text]
+  final String text;
 
-  late final ThemeData theme = Theme.of(context);
+  /// [TextButton.onPressed] passthrough
+  final void Function() onPressed;
 
-  final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
+  /// Will bold [style]
+  final bool isDefaultAction;
 
-  final TextStyle? destructiveText = destructiveStyle ??
-      theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
+  /// will add [ColorScheme.error] to [style]
+  final bool isDestructiveAction;
 
-  final List<Widget> actions = <Widget>[
-    // Deny
-    EzTextButton(
-      onPressed: onDeny,
-      text: denyMsg ?? EFUILang.of(context)!.gNo,
-      textStyle: denyIsDestructive ? destructiveText : defaultText,
-    ),
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? style;
 
-    // Confirm
-    EzTextButton(
-      onPressed: onConfirm,
-      text: confirmMsg ?? EFUILang.of(context)!.gYes,
-      textStyle: confirmIsDestructive ? destructiveText : defaultText,
-    ),
-  ];
+  /// [EzTextButton] wrapper
+  const EzMaterialAction({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.isDefaultAction = false,
+    this.isDestructiveAction = false,
+    this.style,
+  });
 
-  return isLefty ? actions.reversed.toList() : actions;
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? baseStyle = style ?? Theme.of(context).textTheme.bodyLarge;
+
+    final TextStyle? textStyle = isDefaultAction
+        ? baseStyle?.copyWith(fontWeight: FontWeight.bold)
+        : isDestructiveAction
+            ? baseStyle?.copyWith(color: Theme.of(context).colorScheme.error)
+            : baseStyle;
+
+    return EzTextButton(
+      onPressed: onPressed,
+      text: text,
+      textStyle: textStyle,
+    );
+  }
 }
 
 class EzCupertinoAction extends StatelessWidget {
@@ -185,17 +192,14 @@ class EzCupertinoAction extends StatelessWidget {
   /// [CupertinoDialogAction.onPressed] passthrough
   final void Function() onPressed;
 
-  /// Will use [defaultStyle]
+  /// Will bold [style]
   final bool isDefaultAction;
 
-  /// Will use [destructiveStyle]
+  /// will add [ColorScheme.error] to [style]
   final bool isDestructiveAction;
 
-  /// Optional override defaults to [TextTheme.bodyLarge]
-  final TextStyle? defaultStyle;
-
-  /// Optional override defaults to [TextTheme.bodyLarge] with [ColorScheme.primary]
-  final TextStyle? destructiveStyle;
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? style;
 
   /// [CupertinoDialogAction] wrapper with custom styling
   /// Uses proper [MouseCursor]
@@ -205,17 +209,18 @@ class EzCupertinoAction extends StatelessWidget {
     required this.onPressed,
     this.isDefaultAction = false,
     this.isDestructiveAction = false,
-    this.defaultStyle,
-    this.destructiveStyle,
+    this.style,
   });
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final TextStyle? baseStyle = style ?? Theme.of(context).textTheme.bodyLarge;
 
-    final TextStyle? defaultText = defaultStyle ?? theme.textTheme.bodyLarge;
-    final TextStyle? destructiveText = destructiveStyle ??
-        theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary);
+    final TextStyle? textStyle = isDefaultAction
+        ? baseStyle?.copyWith(fontWeight: FontWeight.bold)
+        : isDestructiveAction
+            ? baseStyle?.copyWith(color: Theme.of(context).colorScheme.error)
+            : baseStyle;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -223,7 +228,7 @@ class EzCupertinoAction extends StatelessWidget {
         onPressed: onPressed,
         isDefaultAction: isDefaultAction,
         isDestructiveAction: isDestructiveAction,
-        textStyle: isDestructiveAction ? destructiveText : defaultText,
+        textStyle: textStyle,
         child: Text(text),
       ),
     );
@@ -231,9 +236,9 @@ class EzCupertinoAction extends StatelessWidget {
 }
 
 /// Pairs with [EzAlertDialog]
-/// Quickly creates [CupertinoDialogAction]s
-/// All required parameters are identical to [ezMaterialActions]
-List<Widget> ezCupertinoActions({
+/// Use when you want a variation of yes/no
+/// Returns [EzAlertDialog.materialActions], [EzAlertDialog.cupertinoActions]
+(List<Widget>, List<Widget>) ezActionPairs({
   required BuildContext context,
   String? confirmMsg,
   required void Function() onConfirm,
@@ -243,33 +248,40 @@ List<Widget> ezCupertinoActions({
   required void Function() onDeny,
   bool denyIsDefault = false,
   bool denyIsDestructive = false,
-  bool reverseHands = true,
-  TextStyle? defaultStyle,
-  TextStyle? destructiveStyle,
+  TextStyle? style,
 }) {
-  final bool isLefty = reverseHands && (EzConfig.get(isLeftyKey) ?? false);
-
-  final List<Widget> actions = <Widget>[
-    // Deny
-    EzCupertinoAction(
+  final List<Widget> materialActions = <Widget>[
+    EzMaterialAction(
+      text: denyMsg ?? EFUILang.of(context)!.gNo,
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
-      defaultStyle: defaultStyle,
-      destructiveStyle: destructiveStyle,
-      text: denyMsg ?? EFUILang.of(context)!.gNo,
+      style: style,
     ),
-
-    // Confirm
-    EzCupertinoAction(
+    EzMaterialAction(
+      text: confirmMsg ?? EFUILang.of(context)!.gYes,
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
-      defaultStyle: defaultStyle,
-      destructiveStyle: destructiveStyle,
-      text: confirmMsg ?? EFUILang.of(context)!.gYes,
+      style: style,
+    ),
+  ];
+  final List<Widget> cupertinoActions = <Widget>[
+    EzCupertinoAction(
+      text: denyMsg ?? EFUILang.of(context)!.gNo,
+      onPressed: onDeny,
+      isDefaultAction: denyIsDefault,
+      isDestructiveAction: denyIsDestructive,
+      style: style,
+    ),
+    EzCupertinoAction(
+      text: denyMsg ?? EFUILang.of(context)!.gNo,
+      onPressed: onDeny,
+      isDefaultAction: denyIsDefault,
+      isDestructiveAction: denyIsDestructive,
+      style: style,
     ),
   ];
 
-  return isLefty ? actions.reversed.toList() : actions;
+  return (materialActions, cupertinoActions);
 }
