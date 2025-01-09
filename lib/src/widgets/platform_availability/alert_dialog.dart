@@ -275,10 +275,10 @@ class EzCupertinoAction extends StatelessWidget {
       style: style,
     ),
     EzCupertinoAction(
-      text: denyMsg ?? EFUILang.of(context)!.gNo,
-      onPressed: onDeny,
-      isDefaultAction: denyIsDefault,
-      isDestructiveAction: denyIsDestructive,
+      text: confirmMsg ?? EFUILang.of(context)!.gYes,
+      onPressed: onConfirm,
+      isDefaultAction: confirmIsDefault,
+      isDestructiveAction: confirmIsDestructive,
       style: style,
     ),
   ];
