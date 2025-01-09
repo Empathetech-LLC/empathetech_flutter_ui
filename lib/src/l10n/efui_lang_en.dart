@@ -155,6 +155,9 @@ class EFUILangEn extends EFUILang {
   String get gCreditTo => 'Credit to:';
 
   @override
+  String get gCreator => 'Creator of';
+
+  @override
   String get gYou => 'Set by you';
 
   @override

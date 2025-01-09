@@ -368,6 +368,12 @@ abstract class EFUILang {
   /// **'Credit to:'**
   String get gCreditTo;
 
+  /// No description provided for @gCreator.
+  ///
+  /// In en, this message translates to:
+  /// **'Creator of'**
+  String get gCreator;
+
   /// No description provided for @gYou.
   ///
   /// In en, this message translates to:
