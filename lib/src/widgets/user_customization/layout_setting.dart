@@ -158,23 +158,15 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                  foregroundColor: theme.colorScheme.onSurface,
-                ),
-                onPressed: doNothing,
-                child: Text(l10n.gCurrently),
+              _FakeButton(
+                text: l10n.gCurrently,
+                padding: EdgeInsets.all(currValue),
               ),
               const EzSpacer(vertical: false),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(currValue),
-                  foregroundColor: theme.colorScheme.onSurface,
-                  shape: const CircleBorder(),
-                ),
-                onPressed: doNothing,
-                child: Text(valString),
+              _FakeButton(
+                text: valString,
+                round: true,
+                padding: EdgeInsets.all(currValue),
               ),
             ],
           ),
@@ -194,21 +186,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: theme.colorScheme.onSurface,
-                ),
-                onPressed: doNothing,
-                child: Text(l10n.gCurrently),
-              ),
+              _FakeButton(text: l10n.gCurrently),
               EzSpacer(space: currValue, vertical: false),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: theme.colorScheme.onSurface,
-                ),
-                onPressed: doNothing,
-                child: Text(valString),
-              ),
+              _FakeButton(text: valString, round: true),
             ],
           ),
 
@@ -317,6 +297,35 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       ),
       icon: widget.type.icon,
       label: label,
+    );
+  }
+}
+
+class _FakeButton extends StatelessWidget {
+  final String text;
+  final bool round;
+  final EdgeInsets? padding;
+
+  const _FakeButton({
+    required this.text,
+    this.round = false,
+    this.padding,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.basic,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: padding,
+          overlayColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: round ? const CircleBorder() : null,
+        ),
+        onPressed: doNothing,
+        child: Text(text),
+      ),
     );
   }
 }
