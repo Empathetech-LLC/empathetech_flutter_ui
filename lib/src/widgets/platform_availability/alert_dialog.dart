@@ -238,7 +238,7 @@ class EzCupertinoAction extends StatelessWidget {
 /// Pairs with [EzAlertDialog]
 /// Use when you want a variation of yes/no
 /// Returns [EzAlertDialog.materialActions], [EzAlertDialog.cupertinoActions]
-(List<Widget>, List<Widget>) ezActionPairs({
+(List<EzMaterialAction>, List<EzCupertinoAction>) ezActionPairs({
   required BuildContext context,
   String? confirmMsg,
   required void Function() onConfirm,
@@ -250,7 +250,7 @@ class EzCupertinoAction extends StatelessWidget {
   bool denyIsDestructive = false,
   TextStyle? style,
 }) {
-  final List<Widget> materialActions = <Widget>[
+  final List<EzMaterialAction> materialActions = <EzMaterialAction>[
     EzMaterialAction(
       text: denyMsg ?? EFUILang.of(context)!.gNo,
       onPressed: onDeny,
@@ -266,7 +266,7 @@ class EzCupertinoAction extends StatelessWidget {
       style: style,
     ),
   ];
-  final List<Widget> cupertinoActions = <Widget>[
+  final List<EzCupertinoAction> cupertinoActions = <EzCupertinoAction>[
     EzCupertinoAction(
       text: denyMsg ?? EFUILang.of(context)!.gNo,
       onPressed: onDeny,
