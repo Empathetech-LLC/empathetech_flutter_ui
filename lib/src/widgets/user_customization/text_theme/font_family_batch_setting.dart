@@ -103,8 +103,17 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       context: context,
       builder: (BuildContext dialogContext) {
         void onConfirm() => Navigator.of(dialogContext).pop(true);
-
         void onDeny() => Navigator.of(dialogContext).pop(false);
+
+        late final List<Widget> materialActions;
+        late final List<Widget> cupertinoActions;
+
+        (materialActions, cupertinoActions) = ezActionPairs(
+          context: context,
+          onConfirm: onConfirm,
+          confirmIsDestructive: true,
+          onDeny: onDeny,
+        );
 
         return EzAlertDialog(
           title: Text(
@@ -115,19 +124,8 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             l10n.tsBatchOverride(l10n.tsFontFamily),
             textAlign: TextAlign.center,
           ),
-          materialActions: ezMaterialActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-            denyIsDefault: true,
-          ),
+          materialActions: materialActions,
+          cupertinoActions: cupertinoActions,
           needsClose: false,
         );
       },

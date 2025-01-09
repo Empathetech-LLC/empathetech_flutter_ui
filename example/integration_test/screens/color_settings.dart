@@ -186,30 +186,30 @@ Future<void> testCS(
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   }
 
@@ -235,30 +235,30 @@ Future<void> testCS(
   await validateText(tester, l10n.gReset);
 
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, Text(l10n.gYes));
+      expect(actions[1].text, Text(l10n.gNo));
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, Text(l10n.gNo));
+      expect(actions[1].text, Text(l10n.gYes));
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, Text(l10n.gYes));
+      expect(actions[1].text, Text(l10n.gNo));
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, Text(l10n.gNo));
+      expect(actions[1].text, Text(l10n.gYes));
     }
   }
 

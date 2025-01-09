@@ -52,61 +52,46 @@ class EzConfigRandomizer extends StatelessWidget {
         ? l10n.gDark.toLowerCase()
         : l10n.gLight.toLowerCase();
 
-    // Define the button functions //
-
-    final void Function() confirm =
-        onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
-
-    final void Function() deny = onDeny ?? doNothing;
-
-    // Define the dialog //
-
-    void randomizeDialog() {
-      showPlatformDialog(
-        context: context,
-        builder: (BuildContext dialogContext) => EzAlertDialog(
-          title: Text(
-            dialogTitle ?? l10n.ssRandomize(themeProfile),
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            dialogContent ?? l10n.gUndoWarn,
-            textAlign: TextAlign.center,
-          ),
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-            denyIsDefault: true,
-          ),
-          needsClose: false,
-        ),
-      );
-    }
-
     // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: randomizeDialog,
+      onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            final void Function() confirm =
+                onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
+            final void Function() deny = onDeny ?? doNothing;
+
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              onConfirm: () {
+                confirm();
+                Navigator.of(dialogContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                deny();
+                Navigator.of(dialogContext).pop();
+              },
+            );
+
+            return EzAlertDialog(
+              title: Text(
+                dialogTitle ?? l10n.ssRandomize(themeProfile),
+                textAlign: TextAlign.center,
+              ),
+              content: Text(
+                dialogContent ?? l10n.gUndoWarn,
+                textAlign: TextAlign.center,
+              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
+              needsClose: false,
+            );
+          }),
       icon: const Icon(LineIcons.diceD6),
       label: label ?? l10n.ssRandom,
     );

@@ -295,6 +295,18 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             void onDeny() => Navigator.of(networkDialogContext).pop(null);
 
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              confirmMsg: l10n.gApply,
+              onConfirm: onConfirm,
+              confirmIsDestructive: true,
+              denyMsg: l10n.gCancel,
+              onDeny: onDeny,
+            );
+
             return EzAlertDialog(
               title: Text(
                 l10n.isEnterURL,
@@ -310,22 +322,8 @@ class _ImageSettingState extends State<EzImageSetting> {
                   validator: urlValidator,
                 ),
               ),
-              materialActions: ezMaterialActions(
-                context: context,
-                confirmMsg: l10n.gApply,
-                onConfirm: onConfirm,
-                confirmIsDestructive: true,
-                denyMsg: l10n.gCancel,
-                onDeny: onDeny,
-              ),
-              cupertinoActions: ezCupertinoActions(
-                context: context,
-                confirmMsg: l10n.gApply,
-                onConfirm: onConfirm,
-                confirmIsDestructive: true,
-                denyMsg: l10n.gCancel,
-                onDeny: onDeny,
-              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
               needsClose: false,
             );
           },

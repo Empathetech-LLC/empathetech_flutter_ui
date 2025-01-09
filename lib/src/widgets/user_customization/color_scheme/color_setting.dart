@@ -122,6 +122,17 @@ class _ColorSettingState extends State<EzColorSetting> {
             }
           }
 
+          late final List<Widget> materialActions;
+          late final List<Widget> cupertinoActions;
+
+          (materialActions, cupertinoActions) = ezActionPairs(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            denyMsg: denyMsg,
+            onDeny: onDeny,
+          );
+
           return EzAlertDialog(
             title: Text(
               l10n.csRecommended,
@@ -151,22 +162,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                       ),
               ),
             ],
-            materialActions: ezMaterialActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              denyMsg: denyMsg,
-              onDeny: onDeny,
-              denyIsDestructive: true,
-            ),
-            cupertinoActions: ezCupertinoActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              denyMsg: denyMsg,
-              onDeny: onDeny,
-              denyIsDestructive: true,
-            ),
+            materialActions: materialActions,
+            cupertinoActions: cupertinoActions,
           );
         },
       );
@@ -195,6 +192,16 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         void onDeny() => Navigator.of(dialogContext).pop();
 
+        late final List<Widget> materialActions;
+        late final List<Widget> cupertinoActions;
+
+        (materialActions, cupertinoActions) = ezActionPairs(
+          context: context,
+          onConfirm: onConfirm,
+          confirmIsDestructive: true,
+          onDeny: onDeny,
+        );
+
         return EzAlertDialog(
           title: Text(
             l10n.gResetValue(
@@ -213,18 +220,8 @@ class _ColorSettingState extends State<EzColorSetting> {
               label: currColorLabel,
             ),
           ],
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
+          materialActions: materialActions,
+          cupertinoActions: cupertinoActions,
           needsClose: false,
         );
       },

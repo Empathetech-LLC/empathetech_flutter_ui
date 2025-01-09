@@ -4,8 +4,6 @@
  */
 
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -47,30 +45,30 @@ Future<void> testResetButton(
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, l10n.gYes);
+      expect(actions[1].text, l10n.gNo);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, l10n.gNo);
+      expect(actions[1].text, l10n.gYes);
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog)) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, l10n.gYes);
+      expect(actions[1].text, l10n.gNo);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, l10n.gNo);
+      expect(actions[1].text, l10n.gYes);
     }
   }
 

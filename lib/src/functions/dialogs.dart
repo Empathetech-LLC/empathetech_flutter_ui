@@ -56,6 +56,18 @@ Future<dynamic> ezColorPicker(
         Navigator.of(dialogContext).pop();
       }
 
+      late final List<Widget> materialActions;
+      late final List<Widget> cupertinoActions;
+
+      (materialActions, cupertinoActions) = ezActionPairs(
+        context: context,
+        confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
+        onConfirm: confirm,
+        confirmIsDestructive: true,
+        denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+        onDeny: deny,
+      );
+
       return EzAlertDialog(
         title: Text(
           title ?? EFUILang.of(context)!.csPickerTitle,
@@ -84,22 +96,8 @@ Future<dynamic> ezColorPicker(
           opacityTrackHeight: min(padding * 2, 50.0),
           showColorCode: true,
         ),
-        materialActions: ezMaterialActions(
-          context: context,
-          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-          onConfirm: confirm,
-          confirmIsDestructive: true,
-          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-          onDeny: deny,
-        ),
-        cupertinoActions: ezCupertinoActions(
-          context: context,
-          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-          onConfirm: confirm,
-          confirmIsDestructive: true,
-          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-          onDeny: deny,
-        ),
+        materialActions: materialActions,
+        cupertinoActions: cupertinoActions,
         needsClose: false,
       );
     },
