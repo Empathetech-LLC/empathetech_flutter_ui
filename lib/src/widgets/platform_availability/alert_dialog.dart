@@ -229,6 +229,7 @@ class EzCupertinoAction extends StatelessWidget {
         onPressed: onPressed,
         text: text,
         textStyle: textStyle,
+        underline: false,
       ),
     );
   }
