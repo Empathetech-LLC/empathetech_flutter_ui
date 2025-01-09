@@ -162,7 +162,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   controller: controller,
                   style: style,
                   textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
+                  textAlignVertical: TextAlignVertical.top,
                   maxLines: 1,
                   keyboardType: TextInputType.number,
                   autovalidateMode: AutovalidateMode.onUnfocus,
@@ -175,10 +175,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         doubleVale < widget.min ||
                         doubleVale > widget.max) {
                       setState(() {
-                        formFieldWidth = (sizeLimit.width + padding) * 2;
-                        formFieldHeight = (sizeLimit.height + padding) * 2;
+                        formFieldWidth = (sizeLimit.width + padding) * 1.75;
+                        formFieldHeight = (sizeLimit.height + padding) * 1.75;
                       });
-                      return '${widget.min} <--> ${widget.max}';
+                      return '${widget.min}  <->  ${widget.max}';
                     }
 
                     setState(() {
