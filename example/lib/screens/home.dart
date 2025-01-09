@@ -1019,13 +1019,20 @@ class _AdvancedSettingsField extends StatelessWidget {
           // Form field
           Visibility(
             visible: visible,
-            child: ConstrainedBox(
-              constraints: ezTextFieldConstraints(context),
-              child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                controller: controller,
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                EzMargin(),
+                ConstrainedBox(
+                  constraints: ezTextFieldConstraints(context),
+                  child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    controller: controller,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -1057,6 +1064,8 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EzMargin margin = EzMargin();
+
     Widget radio({
       required String title,
       required String value,
@@ -1109,7 +1118,7 @@ class _LicensePicker extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               thumbVisibility: false,
               children: <Widget>[
-                EzMargin(),
+                margin,
                 radio(
                   title: 'GNU GPLv3',
                   value: gnuKey,
@@ -1144,7 +1153,7 @@ class _LicensePicker extends StatelessWidget {
                   title: 'DWTFYW',
                   value: dwtfywKey,
                 ),
-                spacer,
+                margin,
               ],
             ),
           ),
