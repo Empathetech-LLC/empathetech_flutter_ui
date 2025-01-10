@@ -8,7 +8,14 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzElevatedButton extends StatefulWidget {
+  /// Easily disable the button
+  /// Useful if the functionality is async
+  final bool enabled;
+
+  /// [ElevatedButton.onPressed] passthrough
   final void Function()? onPressed;
+
+  /// [ElevatedButton.onLongPress] passthrough
   final void Function()? onLongPress;
 
   /// Defaults to add an [TextDecoration.underline] to the [text]
@@ -26,23 +33,34 @@ class EzElevatedButton extends StatefulWidget {
   /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [ElevatedButton.style] passthrough
   final ButtonStyle? style;
+
+  /// [ElevatedButton.focusNode] passthrough
   final FocusNode? focusNode;
+
+  /// [ElevatedButton.autofocus] passthrough
   final bool autofocus;
+
+  /// [ElevatedButton.clipBehavior] passthrough
   final Clip? clipBehavior;
+
+  /// [ElevatedButton.statesController] passthrough
   final WidgetStatesController? statesController;
 
+  /// [ElevatedButton.child] will be [Text] with [text], [textStyle], and [textAlign]
   final String text;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
-  /// [Text] passthrough
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// [ElevatedButton] wrapper that will optionally underline its text [onHover] and [onFocusChange]
   const EzElevatedButton({
     super.key,
+    this.enabled = true,
     this.onPressed,
     this.onLongPress,
     this.onHover,
@@ -66,12 +84,13 @@ class EzElevatedButton extends StatefulWidget {
 class _EzElevatedButtonState extends State<EzElevatedButton> {
   // Gather theme data //
 
-  late final Color primary = Theme.of(context).colorScheme.primary;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  late final Color decorationColor = widget.decorationColor ??
+      (widget.enabled ? colorScheme.primary : colorScheme.outline);
 
   late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
+      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
+          ?.copyWith(decorationColor: decorationColor);
 
   // Define custom functions //
 
@@ -93,8 +112,8 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: widget.onPressed,
-      onLongPress: widget.onLongPress,
+      onPressed: widget.enabled ? widget.onPressed : doNothing,
+      onLongPress: widget.enabled ? widget.onLongPress : doNothing,
       onHover: onHover,
       onFocusChange: onFocusChange,
       style: widget.style,
