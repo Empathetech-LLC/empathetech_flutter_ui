@@ -303,29 +303,22 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
 class _FakeButton extends StatelessWidget {
   final String text;
-  final bool round;
   final EdgeInsets? padding;
+  final bool round;
 
   const _FakeButton({
     required this.text,
-    this.round = false,
     this.padding,
+    this.round = false,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.basic,
-      child: ElevatedButton(
+  Widget build(_) => EzElevatedButton(
+        enabled: false,
         style: ElevatedButton.styleFrom(
           padding: padding,
-          overlayColor: Colors.transparent,
-          shadowColor: Colors.transparent,
           shape: round ? const CircleBorder() : null,
         ),
-        onPressed: doNothing,
-        child: Text(text),
-      ),
-    );
-  }
+        text: text,
+      );
 }
