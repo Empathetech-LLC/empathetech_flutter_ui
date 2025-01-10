@@ -13,45 +13,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 // Sub-string getters //
 
-/// snake_case -> camelCase
-String snakeToCamelCase(String name) => name.replaceAllMapped(
-      RegExp(r'_(\w)'),
-      (Match match) => match.group(1)!.toUpperCase(),
-    );
-
-// snake_case -> ClassCase
-String snakeToClassCase(String name) => snakeToCamelCase(name).replaceRange(
-      0,
-      1,
-      name[0].toUpperCase(),
-    );
-
-/// snake_case -> Title Case
-String snakeToTitleCase(String name) => name
-    .replaceAllMapped(
-      RegExp(r'_(\w)'),
-      (Match match) => ' ${match.group(1)!.toUpperCase()}',
-    )
-    .replaceRange(
-      0,
-      1,
-      name[0].toUpperCase(),
-    );
-
-/// ClassCase -> snake_case
-String classToSnakeCase(String name) {
-  final String camelCase = name.replaceRange(
-    0,
-    1,
-    name[0].toLowerCase(),
-  );
-
-  return camelCase.replaceAllMapped(
-    RegExp(r'[A-Z]'),
-    (Match match) => '_${match.group(0)!.toLowerCase()}',
-  );
-}
-
 /// Copyright notice for the top of code files
 String genCopyright(EAGConfig config) =>
     config.copyright ?? '/* ${config.appName} */';
@@ -267,9 +228,9 @@ Future<void> genLib({
 }) async {
   // Useful substrings //
 
-  final String camelCaseAppName = snakeToCamelCase(config.appName);
-  final String classCaseAppName = snakeToClassCase(config.appName);
-  final String titleCaseAppName = snakeToTitleCase(config.appName);
+  final String camelCaseAppName = ezSnakeToCamel(config.appName);
+  final String classCaseAppName = ezSnakeToClass(config.appName);
+  final String titleCaseAppName = ezSnakeToTitle(config.appName);
 
   final String copyright = genCopyright(config);
 
@@ -456,7 +417,7 @@ const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configSt
 
 export 'consts.dart';
 
-${config.l10nConfig != null ? "export '../l10n/${classToSnakeCase(l10nClassName(config)!)}.dart'" : ''};
+${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(config)!)}.dart'" : ''};
 """);
 
     // widgets //
@@ -980,7 +941,7 @@ Future<void> genL10n({
     return 'lib/10n';
   }
 
-  final String snakeName = classToSnakeCase(l10nClassName(config)!);
+  final String snakeName = ezClassToSnake(l10nClassName(config)!);
   final String arbPath = platform == TargetPlatform.windows
       ? getArbDir().replaceAll('/', '\\')
       : getArbDir();
@@ -1096,9 +1057,9 @@ Future<void> genIntegrationTests({
 }) async {
   // Gather Strings //
 
-  final String camelCaseAppName = snakeToCamelCase(config.appName);
-  final String titleCaseAppName = snakeToTitleCase(config.appName);
-  final String classCaseAppName = snakeToClassCase(config.appName);
+  final String camelCaseAppName = ezSnakeToCamel(config.appName);
+  final String titleCaseAppName = ezSnakeToTitle(config.appName);
+  final String classCaseAppName = ezSnakeToClass(config.appName);
 
   final String copyright = genCopyright(config);
 
