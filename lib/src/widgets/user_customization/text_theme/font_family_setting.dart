@@ -45,15 +45,16 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   // Define the build data  //
 
-  late String currFontFamily = firstWord(
-      widget.provider.value.fontFamily ?? EzConfig.get(widget.configKey));
+  late String? currFontFamily = widget.provider.value.fontFamily == null
+      ? null
+      : ezClassToCamel(firstWord(widget.provider.value.fontFamily!));
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: googleStyleNames[entry.key]!,
+      label: ezSnakeToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
@@ -71,7 +72,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
         width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
         textStyle: fuseWithGFont(
           starter: widget.baseStyle,
-          gFont: currFontFamily,
+          gFont: currFontFamily ?? EzConfig.get(widget.configKey),
         ),
         dropdownMenuEntries: entries,
         enableSearch: false,
