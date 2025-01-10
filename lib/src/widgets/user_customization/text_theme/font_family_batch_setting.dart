@@ -38,21 +38,26 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   // Define the build data //
 
-  late Map<String, String> currFonts = <String, String>{
-    displayFontFamilyKey: firstWord(
-        displayProvider.value.fontFamily ?? EzConfig.get(displayFontFamilyKey)),
-    headlineFontFamilyKey: firstWord(headlineProvider.value.fontFamily ??
-        EzConfig.get(headlineFontFamilyKey)),
-    titleFontFamilyKey: firstWord(
-        titleProvider.value.fontFamily ?? EzConfig.get(titleFontFamilyKey)),
-    bodyFontFamilyKey: firstWord(
-        bodyProvider.value.fontFamily ?? EzConfig.get(bodyFontFamilyKey)),
-    labelFontFamilyKey: firstWord(
-        labelProvider.value.fontFamily ?? EzConfig.get(labelFontFamilyKey)),
+  late Map<String, String?> currFonts = <String, String?>{
+    displayFontFamilyKey: displayProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(firstWord(displayProvider.value.fontFamily!)),
+    headlineFontFamilyKey: headlineProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(firstWord(headlineProvider.value.fontFamily!)),
+    titleFontFamilyKey: titleProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(firstWord(titleProvider.value.fontFamily!)),
+    bodyFontFamilyKey: bodyProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(firstWord(bodyProvider.value.fontFamily!)),
+    labelFontFamilyKey: labelProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(firstWord(labelProvider.value.fontFamily!)),
   };
 
   late bool isUniform =
-      currFonts.values.every((String font) => font == currFonts.values.first);
+      currFonts.values.every((String? font) => font == currFonts.values.first);
 
   late String? currFontFamily = isUniform ? currFonts.values.first : null;
 
@@ -63,7 +68,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: googleStyleNames[entry.key]!,
+      label: ezSnakeToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
