@@ -92,9 +92,6 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
       (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
           ?.copyWith(decorationColor: decorationColor);
 
-  late final ButtonStyle style =
-      widget.style ?? Theme.of(context).elevatedButtonTheme.style!;
-
   // Define custom functions //
 
   void addUnderline(bool addIt) {
@@ -119,8 +116,9 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
         onHover: onHover,
         onFocusChange: onFocusChange,
         style: widget.enabled
-            ? style
-            : style.copyWith(
+            ? widget.style
+            : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
+                ?.copyWith(
                 overlayColor: WidgetStateProperty.all(colorScheme.outline),
                 shadowColor: WidgetStateProperty.all(Colors.transparent),
               ),
