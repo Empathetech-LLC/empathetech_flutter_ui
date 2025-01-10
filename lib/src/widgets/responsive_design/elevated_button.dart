@@ -122,6 +122,7 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
             ? style
             : style.copyWith(
                 overlayColor: WidgetStateProperty.all(colorScheme.outline),
+                shadowColor: WidgetStateProperty.all(Colors.transparent),
               ),
         focusNode: widget.focusNode,
         autofocus: widget.autofocus,
