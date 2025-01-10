@@ -12,8 +12,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
-  /// If yes, it will become an [EzElevatedIconButton] that links to the latest version
-  /// Defaults to a [SizedBox.shrink]
+  /// [FloatingActionButton] (wrapped in a [Visibility]) that links to the latest version
   const EzUpdater({super.key});
 
   @override
@@ -21,10 +20,6 @@ class EzUpdater extends StatefulWidget {
 }
 
 class _EzUpdaterState extends State<EzUpdater> {
-  // Gather theme data //
-
-  final double spacing = EzConfig.get(spacingKey);
-
   // Define build data //
 
   bool isLatest = true;
@@ -53,32 +48,33 @@ class _EzUpdaterState extends State<EzUpdater> {
 
   @override
   Widget build(BuildContext context) {
-    late final TargetPlatform platform = getBasePlatform(context);
+    final TargetPlatform platform = getBasePlatform(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    return isLatest
-        ? const SizedBox.shrink()
-        : Padding(
-            padding: EdgeInsets.only(bottom: spacing),
-            child: EzElevatedIconButton(
-              onPressed: () {
-                late String url;
+    return Visibility(
+      visible: !isLatest,
+      child: FloatingActionButton(
+        onPressed: () {
+          late String url;
 
-                switch (platform) {
-                  case TargetPlatform.android:
-                    url =
-                        'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
-                  case TargetPlatform.iOS:
-                    url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
-                  default:
-                    url =
-                        'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/';
-                }
+          switch (platform) {
+            case TargetPlatform.android:
+              url =
+                  'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
+            case TargetPlatform.iOS:
+              url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
+            default:
+              url =
+                  'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/';
+          }
 
-                launchUrl(Uri.parse(url));
-              },
-              icon: const Icon(Icons.update),
-              label: EFUILang.of(context)!.gUpdates,
-            ),
-          );
+          launchUrl(Uri.parse(url));
+        },
+        tooltip: EFUILang.of(context)!.gUpdates,
+        backgroundColor: colorScheme.secondary,
+        foregroundColor: colorScheme.onSecondary,
+        child: const Icon(Icons.update),
+      ),
+    );
   }
 }

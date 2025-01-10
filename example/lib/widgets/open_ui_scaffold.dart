@@ -105,7 +105,12 @@ class OpenUIScaffold extends StatelessWidget {
         body: body,
 
         // FAB
-        floatingActionButton: fab,
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: fab == null
+              ? <Widget>[const EzUpdater()]
+              : <Widget>[const EzUpdater(), const EzSpacer(), fab!],
+        ),
         floatingActionButtonLocation: isLefty
             ? FloatingActionButtonLocation.startFloat
             : FloatingActionButtonLocation.endFloat,
