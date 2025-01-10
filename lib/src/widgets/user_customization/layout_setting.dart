@@ -158,15 +158,21 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _FakeButton(
+              EzElevatedButton(
+                enabled: false,
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(currValue),
+                ),
                 text: l10n.gCurrently,
-                padding: EdgeInsets.all(currValue),
               ),
               const EzSpacer(vertical: false),
-              _FakeButton(
+              EzElevatedButton(
+                enabled: false,
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(currValue),
+                  shape: const CircleBorder(),
+                ),
                 text: valString,
-                round: true,
-                padding: EdgeInsets.all(currValue),
               ),
             ],
           ),
@@ -186,9 +192,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _FakeButton(text: l10n.gCurrently),
+              EzElevatedButton(enabled: false, text: l10n.gCurrently),
               EzSpacer(space: currValue, vertical: false),
-              _FakeButton(text: valString, round: true),
+              EzElevatedButton(
+                enabled: false,
+                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+                text: valString,
+              ),
             ],
           ),
 
@@ -299,26 +309,4 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
       label: label,
     );
   }
-}
-
-class _FakeButton extends StatelessWidget {
-  final String text;
-  final EdgeInsets? padding;
-  final bool round;
-
-  const _FakeButton({
-    required this.text,
-    this.padding,
-    this.round = false,
-  });
-
-  @override
-  Widget build(_) => EzElevatedButton(
-        enabled: false,
-        style: ElevatedButton.styleFrom(
-          padding: padding,
-          shape: round ? const CircleBorder() : null,
-        ),
-        text: text,
-      );
 }
