@@ -26,11 +26,11 @@ class EzElevatedButton extends StatefulWidget {
   /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
 
-  /// Default false
   /// Adds an [TextDecoration.underline] to the [text] via [onHover] and [onFocusChange]
   final bool underline;
 
-  /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
+  /// [TextDecoration.underline]'s color
+  /// Defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
   /// [ElevatedButton.style] passthrough
@@ -57,7 +57,7 @@ class EzElevatedButton extends StatefulWidget {
   /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// [ElevatedButton] wrapper that will optionally underline its text [onHover] and [onFocusChange]
+  /// [ElevatedButton] with custom styling and an off switch
   const EzElevatedButton({
     super.key,
     this.enabled = true,
@@ -92,6 +92,9 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
       (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
           ?.copyWith(decorationColor: decorationColor);
 
+  late final ButtonStyle style =
+      widget.style ?? Theme.of(context).elevatedButtonTheme.style!;
+
   // Define custom functions //
 
   void addUnderline(bool addIt) {
@@ -110,20 +113,22 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
       (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
 
   @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: widget.enabled ? widget.onPressed : doNothing,
-      onLongPress: widget.enabled ? widget.onLongPress : doNothing,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
-      style: widget.style,
-      focusNode: widget.focusNode,
-      autofocus: widget.autofocus,
-      clipBehavior: widget.clipBehavior,
-      statesController: widget.statesController,
-      child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
-    );
-  }
+  Widget build(_) => ElevatedButton(
+        onPressed: widget.enabled ? widget.onPressed : doNothing,
+        onLongPress: widget.enabled ? widget.onLongPress : doNothing,
+        onHover: onHover,
+        onFocusChange: onFocusChange,
+        style: widget.enabled
+            ? style
+            : style.copyWith(
+                overlayColor: WidgetStateProperty.all(colorScheme.outline),
+              ),
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
+        clipBehavior: widget.clipBehavior,
+        statesController: widget.statesController,
+        child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
+      );
 }
 
 class EzElevatedIconButton extends StatefulWidget {
