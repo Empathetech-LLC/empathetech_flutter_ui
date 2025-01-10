@@ -60,6 +60,75 @@ bool isUrl(String text) => Uri.parse(text).host.isNotEmpty;
 /// Splits the string on '_' and/or ' ' and returns the first word
 String firstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
 
+// Converters //
+
+/// snake_case -> camelCase
+String ezSnakeToCamel(String name) => name.replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => match.group(1)!.toUpperCase(),
+    );
+
+// snake_case -> ClassCase
+String ezSnakeToClass(String name) =>
+    ezSnakeToCamel(name).replaceRange(0, 1, name[0].toUpperCase());
+
+/// snake_case -> Title Case
+String ezSnakeToTitle(String name) => name
+    .replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => ' ${match.group(1)!.toUpperCase()}',
+    )
+    .replaceRange(0, 1, name[0].toUpperCase());
+
+/// camelCase -> snake_case
+String ezCamelToSnake(String name) => name.replaceAllMapped(
+      RegExp(r'[A-Z]'),
+      (Match match) => '_${match.group(0)!.toLowerCase()}',
+    );
+
+/// camelCase -> ClassCase
+String ezCamelToClass(String name) =>
+    name.replaceRange(0, 1, name[0].toUpperCase());
+
+/// camelCase -> Title Case
+String ezCamelToTitle(String name) => name
+    .replaceAllMapped(
+      RegExp(r'[A-Z]'),
+      (Match match) => ' ${match.group(0)!}',
+    )
+    .replaceRange(0, 1, name[0].toUpperCase());
+
+/// ClassCase -> snake_case
+String ezClassToSnake(String name) =>
+    name.replaceRange(0, 1, name[0].toLowerCase()).replaceAllMapped(
+          RegExp(r'[A-Z]'),
+          (Match match) => '_${match.group(0)!.toLowerCase()}',
+        );
+
+/// ClassCase -> camelCase
+String ezClassToCamel(String name) =>
+    name.replaceRange(0, 1, name[0].toLowerCase());
+
+/// ClassCase -> Title Case
+String ezClassToTitle(String name) => name
+    .replaceAllMapped(RegExp(r'[A-Z]'), (Match match) => ' ${match.group(0)!}')
+    .trim();
+
+/// Title Case -> snake_case
+String ezTitleToSnake(String name) => name
+    .replaceAllMapped(
+      RegExp(r'\s(\w)'),
+      (Match match) => '_${match.group(1)!.toLowerCase()}',
+    )
+    .replaceRange(0, 1, name[0].toLowerCase());
+
+/// Title Case -> camelCase
+String ezTitleToCamel(String name) =>
+    ezTitleToClass(name).replaceRange(0, 1, name[0].toLowerCase());
+
+/// Title Case -> ClassCase
+String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
+
 // Getters //
 
 /// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
