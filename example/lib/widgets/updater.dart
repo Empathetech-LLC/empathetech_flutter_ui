@@ -54,6 +54,7 @@ class _EzUpdaterState extends State<EzUpdater> {
     return Visibility(
       visible: !isLatest,
       child: FloatingActionButton(
+        heroTag: null,
         onPressed: () {
           late String url;
 
