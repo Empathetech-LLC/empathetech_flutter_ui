@@ -25,11 +25,16 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   final double padding = EzConfig.get(paddingKey);
 
-  late final DisplayTextStyleProvider displayProvider;
-  late final HeadlineTextStyleProvider headlineProvider;
-  late final TitleTextStyleProvider titleProvider;
-  late final BodyTextStyleProvider bodyProvider;
-  late final LabelTextStyleProvider labelProvider;
+  late final DisplayTextStyleProvider displayProvider =
+      context.watch<DisplayTextStyleProvider>();
+  late final HeadlineTextStyleProvider headlineProvider =
+      context.watch<HeadlineTextStyleProvider>();
+  late final TitleTextStyleProvider titleProvider =
+      context.watch<TitleTextStyleProvider>();
+  late final BodyTextStyleProvider bodyProvider =
+      context.watch<BodyTextStyleProvider>();
+  late final LabelTextStyleProvider labelProvider =
+      context.watch<LabelTextStyleProvider>();
 
   // Define the build data //
 
@@ -49,39 +54,9 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late bool isUniform =
       currFonts.values.every((String font) => font == currFonts.values.first);
 
-  late String currFontFamily = isUniform
-      ? currFonts.values.first
-      : mostCommonFont(currFonts.values.toList());
+  late String? currFontFamily = isUniform ? currFonts.values.first : null;
 
   // Define button functions //
-
-  /// Lazily returns the most common font, or the body font if all are unique
-  String mostCommonFont(List<String> fonts) {
-    final String body = EzConfig.get(bodyFontFamilyKey) ??
-        EzConfig.getDefault(bodyFontFamilyKey);
-
-    if (fonts.isEmpty) return body;
-
-    final Map<String, int> fontCount = <String, int>{};
-    String? mostCommon;
-    int highestCount = 0;
-
-    for (final String font in fonts) {
-      final int count = (fontCount[font] ?? 0) + 1;
-      fontCount[font] = count;
-
-      if (count > highestCount) {
-        mostCommon = font;
-        highestCount = count;
-      }
-    }
-
-    if (highestCount <= 1) {
-      return body;
-    } else {
-      return mostCommon!;
-    }
-  }
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
@@ -130,18 +105,6 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
         );
       },
     );
-  }
-
-  // Initialize the build //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    displayProvider = context.watch<DisplayTextStyleProvider>();
-    headlineProvider = context.watch<HeadlineTextStyleProvider>();
-    titleProvider = context.watch<TitleTextStyleProvider>();
-    bodyProvider = context.watch<BodyTextStyleProvider>();
-    labelProvider = context.watch<LabelTextStyleProvider>();
   }
 
   // Return the build //
