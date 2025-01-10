@@ -54,7 +54,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: ezSnakeToTitle(entry.key),
+      label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
