@@ -6,7 +6,8 @@
 const String appNameKey = 'appName';
 const String publisherNameKey = 'publisherName';
 const String domainNameKey = 'domainName';
-const String descriptionKey = 'appDescription';
+const String appDescriptionKey = 'appDescription';
+const String supportEmailKey = 'supportEmail';
 
 const String textSettingsKey = 'textSettings';
 const String layoutSettingsKey = 'layoutSettings';
@@ -16,8 +17,8 @@ const String imageSettingsKey = 'imageSettings';
 const String appDefaultsKey = 'appDefaults';
 
 const String genPathKey = 'genPath';
-const String copyrightKey = 'copyrightNotice';
-const String licenseKey = 'chosenLicense';
+const String copyrightKey = 'copyright';
+const String licenseKey = 'license';
 const String l10nConfigKey = 'l10nConfig';
 const String analysisOptionsKey = 'analysisOptions';
 const String vsCodeConfigKey = 'vsCodeConfig';
@@ -27,7 +28,8 @@ class EAGConfig {
   final String appName;
   final String publisherName;
   final String domainName;
-  final String description;
+  final String appDescription;
+  final String? supportEmail;
 
   final bool textSettings;
   final bool layoutSettings;
@@ -47,7 +49,8 @@ class EAGConfig {
     required this.appName,
     required this.publisherName,
     required this.domainName,
-    required this.description,
+    required this.appDescription,
+    this.supportEmail,
     required this.textSettings,
     required this.layoutSettings,
     required this.colorSettings,
@@ -66,7 +69,8 @@ class EAGConfig {
       appNameKey: appName,
       publisherNameKey: publisherName,
       domainNameKey: domainName,
-      descriptionKey: description,
+      appDescriptionKey: appDescription,
+      supportEmailKey: supportEmail,
       textSettingsKey: textSettings,
       layoutSettingsKey: layoutSettings,
       colorSettingsKey: colorSettings,
@@ -86,7 +90,8 @@ class EAGConfig {
       appName: json[appNameKey] as String,
       publisherName: json[publisherNameKey] as String,
       domainName: json[domainNameKey] as String,
-      description: json[descriptionKey] as String,
+      appDescription: json[appDescriptionKey] as String,
+      supportEmail: json[supportEmailKey] as String?,
       textSettings: json[textSettingsKey] as bool,
       layoutSettings: json[layoutSettingsKey] as bool,
       colorSettings: json[colorSettingsKey] as bool,
@@ -107,7 +112,8 @@ class EAGConfig {
   $appNameKey: $appName,
   $publisherNameKey: $publisherName,
   $domainNameKey: $domainName,
-  $descriptionKey: $description,
+  $appDescriptionKey: $appDescription,
+  $supportEmailKey: $supportEmail,
   $textSettingsKey: $textSettings,
   $layoutSettingsKey: $layoutSettings,
   $colorSettingsKey: $colorSettings,
