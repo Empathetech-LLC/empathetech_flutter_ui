@@ -21,7 +21,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
     super.key,
     required this.parentContext,
     required this.appName,
-    this.supportEmail = empathSupport,
+    required this.supportEmail,
   });
 
   @override
