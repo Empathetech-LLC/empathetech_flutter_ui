@@ -25,8 +25,11 @@ class _EzToolTipperState extends State<EzToolTipper> {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           shape: BoxShape.circle,
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primaryContainer,
+          ),
         ),
-        child: Icon(PlatformIcons(context).help),
+        child: Icon(PlatformIcons(context).helpOutline),
       ),
     );
   }
