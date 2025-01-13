@@ -290,8 +290,41 @@ void main() async {
   );
 
   // Run the app //
+  ${config.supportEmail != null ? '''// With a feedback wrapper
 
-  runApp(const $classCaseAppName());
+  late final TextStyle lightFeedbackText = buildBody(Colors.black);
+  late final TextStyle darkFeedbackText = buildBody(Colors.white);
+
+  runApp(BetterFeedback(
+    theme: FeedbackThemeData(
+      background: Colors.grey,
+      feedbackSheetColor: Colors.white,
+      // activeFeedbackModeColor: lightPrimaryColor,
+      bottomSheetDescriptionStyle: lightFeedbackText,
+      bottomSheetTextInputStyle: lightFeedbackText,
+      sheetIsDraggable: true,
+      dragHandleColor: Colors.black,
+      // colorScheme: const ColorScheme.light(primary: lightPrimaryColor),
+    ),
+    darkTheme: FeedbackThemeData(
+      background: Colors.grey,
+      feedbackSheetColor: Colors.black,
+      // activeFeedbackModeColor: darkPrimaryColor,
+      bottomSheetDescriptionStyle: darkFeedbackText,
+      bottomSheetTextInputStyle: darkFeedbackText,
+      sheetIsDraggable: true,
+      dragHandleColor: Colors.white,
+      // colorScheme: const ColorScheme.light(primary: darkPrimaryColor),
+    ),
+    themeMode: EzConfig.getThemeMode(),
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+      const LocaleNamesLocalizationsDelegate(),
+      ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
+      EmpathetechFeedbackLocalizationsDelegate(),
+    ],
+    localeOverride: EzConfig.getLocale(),
+    child: const $classCaseAppName(),
+  ));''' : '\n  runApp(const $classCaseAppName());'}
 }
 
 /// Initialize a path based router for web-enabled apps
@@ -546,6 +579,11 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
       ),
       menuChildren: <Widget>[
         (showSettings) ? SettingsButton(context) : EFUICredits(context)
+        ${config.supportEmail != null ? '''EzFeedbackMenuButton(
+          parentContext: context,
+          appName: appTitle,
+          supportEmail: ${config.supportEmail},
+        ),''' : ''}
       ],
     );
 
