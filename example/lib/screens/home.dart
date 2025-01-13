@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final TextEditingController pathController =
       TextEditingController(text: defaultPath);
-  bool readOnly = false;
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -113,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextEditingController vscController =
       TextEditingController(text: vscDefault);
 
-  /// Set to true when buttons are "thinking"
-  bool noGen = false;
+  /// Set to false to disable buttons
+  bool canGen = true;
 
   // Define custom functions //
 
@@ -126,9 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Disable interaction
     setState(() {
+      canGen = false;
+
       showAdvanced = true;
-      readOnly = true;
-      noGen = true;
       pathController.text = badPath;
     });
 
@@ -137,9 +136,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Re-enable interaction
     setState(() {
-      readOnly = false;
-      noGen = false;
       pathController.text = defaultPath;
+
+      canGen = true;
     });
 
     return false;
@@ -161,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'Builder',
       onUpload: (EAGConfig config) async {
         // Disable buttons
-        setState(() => noGen = true);
+        setState(() => canGen = false);
 
         // Gather everything
         nameController.text = config.appName;
@@ -227,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
             : vscController.text = config.vsCodeConfig!;
 
         // Enable buttons
-        setState(() => noGen = false);
+        setState(() => canGen = true);
       },
       body: EzScreen(
         alignment: Alignment.topLeft,
@@ -527,7 +526,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           ),
                           child: TextFormField(
                             controller: pathController,
-                            readOnly: readOnly,
+                            readOnly: !canGen,
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             validator: (String? path) =>
@@ -635,9 +634,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 children: <Widget>[
                   // Save config
                   EzElevatedIconButton(
+                    enabled: canGen,
                     onPressed: () async {
-                      if (noGen) return;
-
                       if (validName &&
                           pubController.text.isNotEmpty &&
                           (exampleDomain ||
@@ -707,9 +705,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   if (isDesktop) ...<Widget>[
                     spacer,
                     EzElevatedIconButton(
+                      enabled: canGen,
                       onPressed: () async {
-                        if (noGen) return;
-
                         if (validName &&
                             pubController.text.isNotEmpty &&
                             (exampleDomain ||
@@ -770,12 +767,12 @@ It is recommended to set a custom color scheme. If you need help building one, t
                             ),
                           );
                         } else {
-                          setState(() => noGen = true);
+                          setState(() => canGen = false);
                           await ezSnackBar(
                             context: context,
                             message: 'Some fields are invalid',
                           ).closed;
-                          setState(() => noGen = false);
+                          setState(() => canGen = true);
                         }
                       },
                       icon: Icon(PlatformIcons(context).create),
