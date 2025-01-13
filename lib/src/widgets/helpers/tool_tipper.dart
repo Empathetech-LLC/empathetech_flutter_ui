@@ -21,6 +21,7 @@ class _EzToolTipperState extends State<EzToolTipper> {
   Widget build(BuildContext context) {
     return Tooltip(
       waitDuration: Duration.zero,
+      enableTapToDismiss: false,
       message: widget.message,
       child: Container(
         decoration: const BoxDecoration(shape: BoxShape.circle),
