@@ -131,7 +131,14 @@ class _EzElevatedButtonState extends State<EzElevatedButton> {
 }
 
 class EzElevatedIconButton extends StatefulWidget {
+  /// Easily disable the button
+  /// Useful if the functionality is async
+  final bool enabled;
+
+  /// [ElevatedButton.onPressed] passthrough
   final void Function()? onPressed;
+
+  /// [ElevatedButton.onLongPress] passthrough
   final void Function()? onLongPress;
 
   /// Defaults to add an [TextDecoration.underline] to the [label]
@@ -146,33 +153,44 @@ class EzElevatedIconButton extends StatefulWidget {
   /// Adds an [TextDecoration.underline] to the [label] via [onHover] and [onFocusChange]
   final bool underline;
 
-  /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
+  /// [TextDecoration.underline]'s color
+  /// Defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [ElevatedButton.style] passthrough
   final ButtonStyle? style;
+
+  /// [ElevatedButton.focusNode] passthrough
   final FocusNode? focusNode;
+
+  /// [ElevatedButton.autofocus] passthrough
   final bool? autofocus;
+
+  /// [ElevatedButton.clipBehavior] passthrough
   final Clip? clipBehavior;
+
+  /// [ElevatedButton.statesController] passthrough
   final WidgetStatesController? statesController;
 
-  /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
+  /// [ElevatedButton.icon] passthrough
   final Widget icon;
 
+  /// [ElevatedButton.icon]'s label will be [Text] with [label], [textStyle], and [textAlign]
   final String label;
-
-  /// Default true
-  /// Adds a '\t' sized [EdgeInsets] as prefix (righty) or suffix (lefty) to the [label]
-  final bool labelPadding;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
-  /// [Text] passthrough
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
+
+  /// Adds a '\t' sized [EdgeInsets] as prefix (righty) or suffix (lefty) to the [label]
+  final bool labelPadding;
 
   /// [ElevatedButton.icon] wrapper that responds to [isLeftyKey]
   const EzElevatedIconButton({
     super.key,
+    this.enabled = true,
     this.onPressed,
     this.onLongPress,
     this.onHover,
@@ -186,9 +204,9 @@ class EzElevatedIconButton extends StatefulWidget {
     this.statesController,
     required this.icon,
     required this.label,
-    this.labelPadding = true,
     this.textStyle,
     this.textAlign,
+    this.labelPadding = true,
   });
 
   @override
@@ -198,16 +216,15 @@ class EzElevatedIconButton extends StatefulWidget {
 class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
   // Gather theme data //
 
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  late final Color decorationColor = widget.decorationColor ??
+      (widget.enabled ? colorScheme.primary : colorScheme.outline);
+
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final String label = widget.label;
-
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
   late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
+      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
+          ?.copyWith(decorationColor: decorationColor);
 
   late final double margin =
       measureText('\t', context: context, style: textStyle).width;
@@ -238,11 +255,17 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: widget.onPressed,
-      onLongPress: widget.onLongPress,
+      onPressed: widget.enabled ? widget.onPressed : doNothing,
+      onLongPress: widget.enabled ? widget.onLongPress : doNothing,
       onHover: onHover,
       onFocusChange: onFocusChange,
-      style: widget.style,
+      style: widget.enabled
+          ? widget.style
+          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
+              ?.copyWith(
+              overlayColor: WidgetStateProperty.all(colorScheme.outline),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+            ),
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       clipBehavior: widget.clipBehavior,
@@ -251,7 +274,11 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
       iconAlignment: isLefty ? IconAlignment.start : IconAlignment.end,
       label: Padding(
         padding: labelPadding,
-        child: Text(label, style: textStyle, textAlign: widget.textAlign),
+        child: Text(
+          widget.label,
+          style: textStyle,
+          textAlign: widget.textAlign,
+        ),
       ),
     );
   }
