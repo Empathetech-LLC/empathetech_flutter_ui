@@ -102,12 +102,8 @@ class EFUILangFr extends EFUILang {
   String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
 
   @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Veuillez prendre une capture d\'écran$hint du problème.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
+  String get gAttachScreenshot =>
+      'Veuillez joindre votre capture d\'écran (dans le dossier de Téléchargements)';
 
   @override
   String get gHowThisWorks => 'Comment ça marche';

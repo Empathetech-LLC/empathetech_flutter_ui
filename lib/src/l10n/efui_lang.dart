@@ -278,16 +278,10 @@ abstract class EFUILang {
   /// **'Opening the feedback tool.'**
   String get gOpeningFeedback;
 
-  /// No description provided for @gSubmitWebFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Please take a screenshot{hint} of the issue.'**
-  String gSubmitWebFeedback(Object hint);
-
   /// No description provided for @gAttachScreenshot.
   ///
   /// In en, this message translates to:
-  /// **'Please attach your screenshot'**
+  /// **'Please attach your screenshot (in Downloads folder)'**
   String get gAttachScreenshot;
 
   /// No description provided for @gHowThisWorks.

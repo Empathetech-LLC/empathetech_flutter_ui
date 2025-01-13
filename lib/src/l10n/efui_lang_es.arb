@@ -45,8 +45,7 @@
 
   "gGiveFeedback": "Dar feedback",
   "gOpeningFeedback": "Apertura de la herramienta de feedback.",
-  "gSubmitWebFeedback": "Por favor, tome una captura de pantalla{hint} del problema.",
-  "gAttachScreenshot": "Adjunte su captura de pantalla",
+  "gAttachScreenshot": "Adjunte su captura de pantalla (en la carpeta de Descargas)",
 
   "gHowThisWorks": "Cómo funciona",
   "gHowThisWorksHint": "Abrir documentación útil",

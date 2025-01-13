@@ -45,8 +45,7 @@
 
   "gGiveFeedback": "Give feedback",
   "gOpeningFeedback": "Opening the feedback tool.",
-  "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
-  "gAttachScreenshot": "Please attach your screenshot",
+  "gAttachScreenshot": "Please attach your screenshot (in Downloads folder)",
 
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",

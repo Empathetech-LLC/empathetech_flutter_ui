@@ -102,12 +102,8 @@ class EFUILangEn extends EFUILang {
   String get gOpeningFeedback => 'Opening the feedback tool.';
 
   @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Please take a screenshot$hint of the issue.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Please attach your screenshot';
+  String get gAttachScreenshot =>
+      'Please attach your screenshot (in Downloads folder)';
 
   @override
   String get gHowThisWorks => 'How this works';
