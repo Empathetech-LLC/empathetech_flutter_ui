@@ -165,7 +165,7 @@ Future<void> genPubspec({
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      return jsonResponse['latest']['version'];
+      return '^${jsonResponse['latest']['version']}';
     } else {
       return null;
     }
@@ -190,7 +190,7 @@ dependencies:
 
   # Flutter (Google)
   go_router: ${await getLatest('go_router') ?? '^14.6.2'}
-  intl: ${await getLatest('intl') ?? '^0.19.0'}
+  intl: ^0.19.0
   http: ${await getLatest('http') ?? '^1.2.2'}
   shared_preferences: ${await getLatest('shared_preferences') ?? '^2.3.4'}
   url_launcher: ${await getLatest('url_launcher') ?? '^6.3.1'}
