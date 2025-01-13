@@ -13,6 +13,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -69,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool exampleDomain = false;
 
   final TextEditingController descriptionController = TextEditingController();
+
+  final TextEditingController supportEmailController = TextEditingController();
 
   late final int currentYear = DateTime.now().year;
 
@@ -171,7 +174,11 @@ class _HomeScreenState extends State<HomeScreen> {
         domainController.text = config.domainName;
         if (config.domainName == 'com.example') exampleDomain = true;
 
-        descriptionController.text = config.description;
+        descriptionController.text = config.appDescription;
+        if (config.supportEmail != null &&
+            EmailValidator.validate(config.supportEmail!)) {
+          supportEmailController.text = config.supportEmail!;
+        }
 
         textSettings = config.textSettings;
         layoutSettings = config.layoutSettings;
@@ -342,6 +349,21 @@ class _HomeScreenState extends State<HomeScreen> {
               validator: (String? value) =>
                   (value == null || value.isEmpty) ? 'Required' : null,
               hintText: 'One sentence about your app.',
+            ),
+            spacer,
+
+            // Support email
+            _BasicField(
+              textTheme: textTheme,
+              title: 'Support email',
+              controller: supportEmailController,
+              width: singleLineFormWidth,
+              validator: (String? value) {
+                if (value == null || value.isEmpty) return null;
+
+                return EmailValidator.validate(value) ? null : 'Invalid email';
+              },
+              hintText: 'optional@example.com',
             ),
             separator,
 
@@ -598,6 +620,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           (exampleDomain ||
                               validateDomain(domainController.text) == null) &&
                           descriptionController.text.isNotEmpty &&
+                          (supportEmailController.text.isEmpty ||
+                              EmailValidator.validate(
+                                  supportEmailController.text)) &&
                           (!isDesktop || await checkPath()) &&
                           context.mounted) {
                         context.goNamed(
@@ -608,7 +633,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
                             domainName: exampleDomain
                                 ? 'com.example'
                                 : domainController.text,
-                            description: descriptionController.text,
+                            appDescription: descriptionController.text,
+                            supportEmail: supportEmailController.text.isEmpty
+                                ? null
+                                : supportEmailController.text,
                             textSettings: textSettings,
                             layoutSettings: layoutSettings,
                             colorSettings: colorSettings,
@@ -665,6 +693,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                 validateDomain(domainController.text) ==
                                     null) &&
                             descriptionController.text.isNotEmpty &&
+                            (supportEmailController.text.isEmpty ||
+                                EmailValidator.validate(
+                                    supportEmailController.text)) &&
                             await checkPath() &&
                             context.mounted) {
                           context.goNamed(
@@ -675,7 +706,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
                               domainName: exampleDomain
                                   ? 'com.example'
                                   : domainController.text,
-                              description: descriptionController.text,
+                              appDescription: descriptionController.text,
+                              supportEmail: supportEmailController.text.isEmpty
+                                  ? null
+                                  : supportEmailController.text,
                               textSettings: textSettings,
                               layoutSettings: layoutSettings,
                               colorSettings: colorSettings,
@@ -784,6 +818,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
     pubController.dispose();
     domainController.dispose();
     descriptionController.dispose();
+    supportEmailController.dispose();
     pathController.dispose();
     copyrightController.dispose();
     l10nController.dispose();
