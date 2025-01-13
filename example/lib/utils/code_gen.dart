@@ -175,7 +175,7 @@ Future<void> genPubspec({
   try {
     final File file = File('$dir/pubspec.yaml');
     await file.writeAsString('''name: ${config.appName}
-description: "${config.description}"
+description: "${config.appDescription}"
 version: 1.0.0
 publish_to: 'none'
 
