@@ -20,16 +20,14 @@ class _EzToolTipperState extends State<EzToolTipper> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      waitDuration: Duration.zero,
       message: widget.message,
       child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        child: Icon(
+          PlatformIcons(context).helpOutline,
+          color: Theme.of(context).colorScheme.outline,
         ),
-        child: Icon(PlatformIcons(context).helpOutline),
       ),
     );
   }
