@@ -294,10 +294,19 @@ class _HomeScreenState extends State<HomeScreen> {
             spacer,
 
             // Domain name
-            Text(
-              'Domain name',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Flexible(
+                  child: Text(
+                    'Domain name',
+                    style: textTheme.titleLarge,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                rowMargin,
+                const EzToolTipper("Yes, it's backwards"),
+              ],
             ),
             ConstrainedBox(
               constraints: BoxConstraints(maxWidth: singleLineFormWidth),
@@ -356,6 +365,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: 'Support email',
+              tip: 'If provided, the feedback system we use will be included.',
               controller: supportEmailController,
               width: singleLineFormWidth,
               validator: (String? value) {
@@ -369,10 +379,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Settings selection //
 
-            Text(
-              'Include',
-              style: textTheme.titleLarge,
-              textAlign: TextAlign.start,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Flexible(
+                  child: Text(
+                    'Include',
+                    style: textTheme.titleLarge,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                rowMargin,
+                const EzToolTipper('Not final/easy to change later'),
+              ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -542,6 +561,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   _AdvancedSettingsField(
                     textTheme: textTheme,
                     title: 'Copyright notice',
+                    tip: 'Will be included at the top of every Dart file',
                     controller: copyrightController,
                     visible: showCopyright,
                     onHide: () =>
@@ -568,6 +588,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   _AdvancedSettingsField(
                     textTheme: textTheme,
                     title: 'l10n.yaml',
+                    tip: 'Localization (aka translations) config',
                     controller: l10nController,
                     visible: showL10n,
                     onHide: () => setState(() => showL10n = !showL10n),
@@ -580,6 +601,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   _AdvancedSettingsField(
                     textTheme: textTheme,
                     title: 'analysis_options.yaml',
+                    tip: 'Code lint >> pocket lint',
                     controller: analysisController,
                     visible: showAnalysis,
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
@@ -592,6 +614,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   _AdvancedSettingsField(
                     textTheme: textTheme,
                     title: '.vscode/launch.json',
+                    tip: "Adds launch options to VS Code's debug menu",
                     controller: vscController,
                     visible: showVSC,
                     onHide: () => setState(() => showVSC = !showVSC),
@@ -914,6 +937,7 @@ class _BasicField extends StatelessWidget {
   final TextTheme textTheme;
 
   final String title;
+  final String? tip;
   final TextEditingController controller;
   final double width;
   final String? Function(String?)? validator;
@@ -922,6 +946,7 @@ class _BasicField extends StatelessWidget {
   const _BasicField({
     required this.textTheme,
     required this.title,
+    this.tip,
     required this.controller,
     required this.width,
     required this.validator,
@@ -930,16 +955,27 @@ class _BasicField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Widget titleText = Text(
+      title,
+      style: textTheme.titleLarge,
+      textAlign: TextAlign.start,
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // Title
-        Text(
-          title,
-          style: textTheme.titleLarge,
-          textAlign: TextAlign.start,
-        ),
+        (tip == null)
+            ? titleText
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Flexible(child: titleText),
+                  EzMargin(vertical: false),
+                  EzToolTipper(tip!),
+                ],
+              ),
 
         // Field
         ConstrainedBox(
@@ -997,6 +1033,7 @@ class _AdvancedSettingsField extends StatelessWidget {
   final TextTheme textTheme;
 
   final String title;
+  final String? tip;
   final TextEditingController controller;
   final bool visible;
   final void Function() onHide;
@@ -1006,6 +1043,7 @@ class _AdvancedSettingsField extends StatelessWidget {
   const _AdvancedSettingsField({
     required this.textTheme,
     required this.title,
+    this.tip,
     required this.controller,
     required this.visible,
     required this.onHide,
@@ -1047,7 +1085,11 @@ class _AdvancedSettingsField extends StatelessWidget {
                   onPressed: onRemove,
                   icon: Icon(PlatformIcons(context).delete),
                 ),
-              ]
+              ],
+              if (tip != null) ...<Widget>[
+                rowMargin,
+                EzToolTipper(tip!),
+              ],
             ],
           ),
 
@@ -1100,6 +1142,7 @@ class _LicensePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EzMargin margin = EzMargin();
+    final EzMargin rowMargin = EzMargin(vertical: false);
 
     Widget radio({
       required String title,
@@ -1134,13 +1177,15 @@ class _LicensePicker extends StatelessWidget {
               style: textTheme.bodyLarge,
               textAlign: TextAlign.start,
             ),
-            EzMargin(vertical: false),
+            rowMargin,
             IconButton(
               onPressed: onHide,
               icon: Icon(
                 visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
               ),
             ),
+            rowMargin,
+            const EzToolTipper('https://choosealicense.com/'),
           ],
         ),
 
