@@ -59,6 +59,7 @@ export 'src/widgets/helpers/sizing.dart';
 export 'src/widgets/helpers/spacers.dart';
 export 'src/widgets/helpers/text_background.dart';
 export 'src/widgets/helpers/text_button.dart';
+export 'src/widgets/helpers/tool_tipper.dart';
 export 'src/widgets/helpers/translations_pending.dart';
 export 'src/widgets/helpers/warning.dart';
 
