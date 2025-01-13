@@ -5,11 +5,13 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzFeedbackMenuButton extends StatelessWidget {
@@ -28,24 +30,26 @@ class EzFeedbackMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final String message = kIsWeb
-        ? '${l10n.gOpeningFeedback}\n${l10n.gSubmitWebFeedback(screenshotHint(context))}'
-        : '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
+    final bool isMobile = !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 
     return EzMenuButton(
       onPressed: () async {
-        await ezSnackBar(context: parentContext, message: message).closed;
+        if (isMobile) {
+          await Clipboard.setData(ClipboardData(text: supportEmail));
+
+          if (parentContext.mounted) {
+            await ezSnackBar(
+              context: parentContext,
+              message:
+                  '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}',
+            ).closed;
+          }
+        }
 
         if (parentContext.mounted) {
           BetterFeedback.of(parentContext).show(
             (UserFeedback feedback) async {
-              if (kIsWeb) {
-                await launchUrl(Uri.parse(
-                  'mailto:$empathSupport?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
-                ));
-              } else {
-                await Clipboard.setData(ClipboardData(text: supportEmail));
-
+              if (isMobile) {
                 await Share.shareXFiles(
                   <XFile>[
                     XFile.fromData(
@@ -56,6 +60,15 @@ class EzFeedbackMenuButton extends StatelessWidget {
                   ],
                   text: feedback.text,
                 );
+              } else {
+                await FileSaver.instance.saveFile(
+                  name: 'screenshot.png',
+                  bytes: feedback.screenshot,
+                  mimeType: MimeType.png,
+                );
+                await launchUrl(Uri.parse(
+                  'mailto:$empathSupport?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
+                ));
               }
             },
           );
