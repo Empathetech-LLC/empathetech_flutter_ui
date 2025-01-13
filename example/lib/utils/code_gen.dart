@@ -185,16 +185,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # Flutter (Google)
   go_router: ${await getLatest('go_router') ?? '^14.6.2'}
+  intl: ${await getLatest('intl') ?? '^0.19.0'}
   http: ${await getLatest('http') ?? '^1.2.2'}
   shared_preferences: ${await getLatest('shared_preferences') ?? '^2.3.4'}
   url_launcher: ${await getLatest('url_launcher') ?? '^6.3.1'}
 
   # Community
-  empathetech_flutter_ui: ^8.0.0-dev.2
-  feedback: ${await getLatest('feedback') ?? '^3.1.0'}
+  empathetech_flutter_ui: ^8.0.0-dev.3
+  ${config.supportEmail != null ? "feedback: ${await getLatest('feedback') ?? '^3.1.0'}" : ''}
   flutter_localized_locales: ${await getLatest('flutter_localized_locales') ?? '^2.0.5'}
   flutter_platform_widgets: ${await getLatest('flutter_platform_widgets') ?? '^7.0.1'}
 
@@ -262,7 +265,7 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:feedback/feedback.dart';
+${config.supportEmail != null ? "import 'package:feedback/feedback.dart';" : ''}
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
