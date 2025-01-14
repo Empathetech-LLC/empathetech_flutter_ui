@@ -217,14 +217,15 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
   // Gather theme data //
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  late final TextTheme textTheme = Theme.of(context).textTheme;
+
   late final Color decorationColor = widget.decorationColor ??
       (widget.enabled ? colorScheme.primary : colorScheme.outline);
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
-          ?.copyWith(decorationColor: decorationColor);
+  late TextStyle? textStyle = (widget.textStyle ?? textTheme.bodyLarge)
+      ?.copyWith(decorationColor: decorationColor);
 
   late final double margin =
       measureText('\t', context: context, style: textStyle).width;
