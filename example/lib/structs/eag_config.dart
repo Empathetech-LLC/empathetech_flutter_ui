@@ -5,8 +5,8 @@
 
 const String appNameKey = 'appName';
 const String publisherNameKey = 'publisherName';
-const String domainNameKey = 'domainName';
 const String appDescriptionKey = 'appDescription';
+const String domainNameKey = 'domainName';
 const String supportEmailKey = 'supportEmail';
 
 const String textSettingsKey = 'textSettings';
@@ -27,8 +27,8 @@ const String vsCodeConfigKey = 'vsCodeConfig';
 class EAGConfig {
   final String appName;
   final String publisherName;
-  final String domainName;
   final String appDescription;
+  final String domainName;
   final String? supportEmail;
 
   final bool textSettings;
@@ -48,8 +48,8 @@ class EAGConfig {
   EAGConfig({
     required this.appName,
     required this.publisherName,
-    required this.domainName,
     required this.appDescription,
+    required this.domainName,
     this.supportEmail,
     required this.textSettings,
     required this.layoutSettings,
@@ -68,8 +68,8 @@ class EAGConfig {
     return <String, dynamic>{
       appNameKey: appName,
       publisherNameKey: publisherName,
-      domainNameKey: domainName,
       appDescriptionKey: appDescription,
+      domainNameKey: domainName,
       supportEmailKey: supportEmail,
       textSettingsKey: textSettings,
       layoutSettingsKey: layoutSettings,
@@ -89,8 +89,8 @@ class EAGConfig {
     return EAGConfig(
       appName: json[appNameKey] as String,
       publisherName: json[publisherNameKey] as String,
-      domainName: json[domainNameKey] as String,
       appDescription: json[appDescriptionKey] as String,
+      domainName: json[domainNameKey] as String,
       supportEmail: json[supportEmailKey] as String?,
       textSettings: json[textSettingsKey] as bool,
       layoutSettings: json[layoutSettingsKey] as bool,
@@ -111,8 +111,8 @@ class EAGConfig {
     return '''{
   $appNameKey: $appName,
   $publisherNameKey: $publisherName,
-  $domainNameKey: $domainName,
   $appDescriptionKey: $appDescription,
+  $domainNameKey: $domainName,
   $supportEmailKey: $supportEmail,
   $textSettingsKey: $textSettings,
   $layoutSettingsKey: $layoutSettings,
