@@ -74,7 +74,7 @@ class _EzUpdaterState extends State<EzUpdater> {
         tooltip: EFUILang.of(context)!.gUpdates,
         backgroundColor: colorScheme.secondary,
         foregroundColor: colorScheme.onSecondary,
-        child: const Icon(Icons.update),
+        child: EzIcon(Icons.update, context),
       ),
     );
   }

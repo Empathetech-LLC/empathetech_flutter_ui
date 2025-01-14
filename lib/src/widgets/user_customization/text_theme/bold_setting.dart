@@ -59,7 +59,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: const Icon(Icons.format_bold),
+            icon: EzIcon(Icons.format_bold, context),
           )
         : IconButton(
             style: IconButton.styleFrom(
@@ -69,7 +69,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: const Icon(Icons.format_bold_outlined),
+            icon: EzIcon(Icons.format_bold_outlined, context),
           );
   }
 }

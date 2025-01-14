@@ -108,8 +108,9 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
           );
         }
       },
-      icon: Icon(
+      icon: EzIcon(
         Icons.contrast,
+        context,
         color: Theme.of(context).colorScheme.onSurface,
       ),
       label: EFUILang.of(context)!.csMonoChrome,

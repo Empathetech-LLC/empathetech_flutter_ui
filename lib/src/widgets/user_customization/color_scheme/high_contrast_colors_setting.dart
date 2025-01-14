@@ -38,8 +38,9 @@ class EzHighContrastColorsSetting extends StatelessWidget {
                 brightness: Brightness.light,
               );
             },
-      icon: Icon(
+      icon: EzIcon(
         Icons.contrast,
+        context,
         color: Theme.of(context).colorScheme.onSurface,
       ),
       label: EFUILang.of(context)!.csHighContrast,

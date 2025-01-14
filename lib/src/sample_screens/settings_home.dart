@@ -109,7 +109,7 @@ class _SettingsHomeState extends State<SettingsHome> {
           if (widget.textSettingsPath != null) ...<Widget>[
             EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.textSettingsPath!),
-              icon: const Icon(Icons.navigate_next),
+              icon: EzIcon(Icons.navigate_next, context),
               label: l10n.tsPageTitle,
             ),
             spacer,
@@ -119,7 +119,7 @@ class _SettingsHomeState extends State<SettingsHome> {
           if (widget.layoutSettingsPath != null) ...<Widget>[
             EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.layoutSettingsPath!),
-              icon: const Icon(Icons.navigate_next),
+              icon: EzIcon(Icons.navigate_next, context),
               label: l10n.lsPageTitle,
             ),
             spacer,
@@ -129,7 +129,7 @@ class _SettingsHomeState extends State<SettingsHome> {
           if (widget.colorSettingsPath != null) ...<Widget>[
             EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.colorSettingsPath!),
-              icon: const Icon(Icons.navigate_next),
+              icon: EzIcon(Icons.navigate_next, context),
               label: l10n.csPageTitle,
             ),
             spacer,
@@ -139,7 +139,7 @@ class _SettingsHomeState extends State<SettingsHome> {
           if (widget.imageSettingsPath != null) ...<Widget>[
             EzElevatedIconButton(
               onPressed: () => context.goNamed(widget.imageSettingsPath!),
-              icon: const Icon(Icons.navigate_next),
+              icon: EzIcon(Icons.navigate_next, context),
               label: l10n.isPageTitle,
             ),
             spacer,

@@ -88,7 +88,7 @@ class EzResetButton extends StatelessWidget {
               needsClose: false,
             );
           }),
-      icon: Icon(PlatformIcons(context).refresh),
+      icon: EzIcon(PlatformIcons(context).refresh, context),
       label: label ?? l10n.gResetAll,
     );
   }
