@@ -27,6 +27,7 @@ class _EzToolTipperState extends State<EzToolTipper> {
         decoration: const BoxDecoration(shape: BoxShape.circle),
         child: Icon(
           PlatformIcons(context).helpOutline,
+          size: Theme.of(context).textTheme.titleLarge?.fontSize,
           color: Theme.of(context).colorScheme.outline,
         ),
       ),
