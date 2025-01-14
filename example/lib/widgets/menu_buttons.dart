@@ -25,7 +25,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: Icon(PlatformIcons(context).settings),
+        icon: EzIcon(PlatformIcons(context).settings, context),
         label: EFUILang.of(context)!.ssPageTitle,
       );
 }
@@ -68,7 +68,7 @@ class UploadButton extends StatelessWidget {
             }
           }
         },
-        icon: const Icon(Icons.upload),
+        icon: EzIcon(Icons.upload, context),
         label: 'Load config',
       );
 }
@@ -85,7 +85,7 @@ class OpenSourceButton extends StatelessWidget {
     return EzMenuButton(
       onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-      icon: const Icon(LineIcons.github),
+      icon: EzIcon(LineIcons.github, context),
       label: text,
     );
   }

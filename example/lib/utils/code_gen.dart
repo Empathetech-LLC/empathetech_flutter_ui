@@ -464,6 +464,7 @@ ${config.l10nConfig != null ? "export '../l10n/${ezClassToSnake(l10nClassName(co
     await fabulous.writeAsString("""$copyright
 
 import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CountFAB extends StatelessWidget {
@@ -476,7 +477,7 @@ class CountFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         onPressed: count,
-        child: Icon(PlatformIcons(context).add),
+        child: EzIcon(PlatformIcons(context).add, context),
       );
 }
 """);
@@ -502,7 +503,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: Icon(PlatformIcons(context).settings),
+        icon: EzIcon(PlatformIcons(context).settings, context),
         label: EFUILang.of(context)!.ssPageTitle,
       );
 }
@@ -520,7 +521,7 @@ class EFUICredits extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () =>
             launchUrl(Uri.parse('https://www.empathetech.net/#/products')),
-        icon: Icon(PlatformIcons(context).settings),
+        icon: EzIcon(PlatformIcons(context).settings, context),
         label: EFUILang.of(context)!.gCreator,
       );
 }
@@ -580,7 +581,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         onPressed: () =>
             controller.isOpen ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
-        icon: const Icon(Icons.more_vert),
+        icon: const EzIcon(Icons.more_vert, context),
       ),
       menuChildren: <Widget>[
         (showSettings) ? SettingsButton(context) : EFUICredits(context),

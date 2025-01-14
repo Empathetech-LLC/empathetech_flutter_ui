@@ -91,7 +91,7 @@ class ResetFAB extends StatelessWidget {
           );
         },
       ),
-      child: Icon(PlatformIcons(context).refresh),
+      child: EzIcon(PlatformIcons(context).refresh, context),
     );
   }
 }
