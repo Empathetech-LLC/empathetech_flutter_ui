@@ -602,7 +602,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   _AdvancedSettingsField(
                     textTheme: textTheme,
                     title: 'analysis_options.yaml',
-                    tip: 'Code lint >> pocket lint',
+                    tip: 'Lint rules',
                     controller: analysisController,
                     visible: showAnalysis,
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
