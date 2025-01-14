@@ -122,12 +122,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
             children: <Widget>[
               // Minus
               if (widget.plusMinus) ...<Widget>[
-                IconButton(
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: colorScheme.primaryContainer),
-                  ),
-                  onPressed: (currValue > widget.min)
-                      ? () async {
+                (currValue > widget.min)
+                    ? IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.primaryContainer),
+                        ),
+                        onPressed: () async {
                           currValue -= widget.delta;
                           controller.text = currValue.toString();
 
@@ -135,16 +135,24 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           widget.notifierCallback(currValue);
 
                           setState(() {});
-                        }
-                      : doNothing,
-                  tooltip: '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-                  icon: Icon(
-                    PlatformIcons(context).remove,
-                    color: (currValue > widget.min)
-                        ? colorScheme.primary
-                        : colorScheme.outline,
-                  ),
-                ),
+                        },
+                        tooltip:
+                            '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+                        icon: Icon(PlatformIcons(context).remove),
+                      )
+                    : IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.outlineVariant),
+                          overlayColor: colorScheme.outline,
+                          shadowColor: Colors.transparent,
+                        ),
+                        onPressed: doNothing,
+                        tooltip: 'Minimum',
+                        icon: Icon(
+                          PlatformIcons(context).remove,
+                          color: colorScheme.outline,
+                        ),
+                      ),
                 pMSpacer,
               ],
 
@@ -209,12 +217,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 pMSpacer,
 
                 // Plus icon
-                IconButton(
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: colorScheme.primaryContainer),
-                  ),
-                  onPressed: (currValue < widget.max)
-                      ? () async {
+                (currValue < widget.max)
+                    ? IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.primaryContainer),
+                        ),
+                        onPressed: () async {
                           currValue += widget.delta;
                           controller.text = currValue.toString();
 
@@ -222,16 +230,24 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           widget.notifierCallback(currValue);
 
                           setState(() {});
-                        }
-                      : doNothing,
-                  tooltip: '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-                  icon: Icon(
-                    PlatformIcons(context).add,
-                    color: (currValue < widget.max)
-                        ? colorScheme.primary
-                        : colorScheme.outline,
-                  ),
-                ),
+                        },
+                        tooltip:
+                            '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+                        icon: Icon(PlatformIcons(context).add),
+                      )
+                    : IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.outlineVariant),
+                          overlayColor: colorScheme.outline,
+                          shadowColor: Colors.transparent,
+                        ),
+                        onPressed: doNothing,
+                        tooltip: 'Maximum',
+                        icon: Icon(
+                          PlatformIcons(context).add,
+                          color: colorScheme.outline,
+                        ),
+                      ),
               ],
             ],
           ),

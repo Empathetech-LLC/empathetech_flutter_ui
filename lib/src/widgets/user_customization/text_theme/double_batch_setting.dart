@@ -101,18 +101,28 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Minus icon
-          IconButton(
-            style: IconButton.styleFrom(
-              side: BorderSide(color: colorScheme.primaryContainer),
-            ),
-            icon: Icon(
-              PlatformIcons(context).remove,
-              color: atMin ? colorScheme.outline : colorScheme.primary,
-              size: titleProvider.value.fontSize,
-            ),
-            onPressed: atMin
-                ? doNothing
-                : () async {
+          atMin
+              ? IconButton(
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.outlineVariant),
+                  ),
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    color: colorScheme.outline,
+                    size: titleProvider.value.fontSize,
+                  ),
+                  onPressed: doNothing,
+                  tooltip: 'Minimum',
+                )
+              : IconButton(
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
+                  ),
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    size: titleProvider.value.fontSize,
+                  ),
+                  onPressed: () async {
                     for (final String key in keys) {
                       final BaseTextStyleProvider provider =
                           providerFromKey(key);
@@ -135,8 +145,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     }
                     setState(() {});
                   },
-            tooltip: '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
-          ),
+                  tooltip:
+                      '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
+                ),
           pMSpacer,
 
           // Core
@@ -148,18 +159,30 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           pMSpacer,
 
           // Plus icon
-          IconButton(
-            style: IconButton.styleFrom(
-              side: BorderSide(color: colorScheme.primaryContainer),
-            ),
-            icon: Icon(
-              PlatformIcons(context).add,
-              color: atMax ? colorScheme.outline : colorScheme.primary,
-              size: bodyProvider.value.fontSize,
-            ),
-            onPressed: atMax
-                ? doNothing
-                : () async {
+          atMax
+              ? IconButton(
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.outlineVariant),
+                    overlayColor: colorScheme.outline,
+                    shadowColor: Colors.transparent,
+                  ),
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    color: colorScheme.outline,
+                    size: bodyProvider.value.fontSize,
+                  ),
+                  onPressed: doNothing,
+                  tooltip: 'Maximum',
+                )
+              : IconButton(
+                  style: IconButton.styleFrom(
+                    side: BorderSide(color: colorScheme.primaryContainer),
+                  ),
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    size: bodyProvider.value.fontSize,
+                  ),
+                  onPressed: () async {
                     for (final String key in keys) {
                       final BaseTextStyleProvider provider =
                           providerFromKey(key);
@@ -182,8 +205,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     }
                     setState(() {});
                   },
-            tooltip: '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
-          ),
+                  tooltip:
+                      '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
+                ),
         ],
       ),
     );
