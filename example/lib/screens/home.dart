@@ -391,7 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 rowMargin,
-                const EzToolTipper('Not final/easy to change later'),
+                const EzToolTipper('Easy to change later'),
               ],
             ),
             Padding(
