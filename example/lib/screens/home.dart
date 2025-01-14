@@ -170,14 +170,14 @@ class _HomeScreenState extends State<HomeScreen> {
         pubController.text = config.publisherName;
         pubPreview = config.publisherName;
 
-        domainController.text = config.domainName;
-        if (config.domainName == 'com.example') exampleDomain = true;
-
         descriptionController.text = config.appDescription;
         if (config.supportEmail != null &&
             EmailValidator.validate(config.supportEmail!)) {
           supportEmailController.text = config.supportEmail!;
         }
+
+        domainController.text = config.domainName;
+        if (config.domainName == 'com.example') exampleDomain = true;
 
         textSettings = config.textSettings;
         layoutSettings = config.layoutSettings;
@@ -239,6 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: 'App name',
+              tip: 'Best App Ever  -->  ${ezTitleToSnake('Best App Ever')}',
               controller: nameController,
               width: singleLineFormWidth,
               validator: (String? entry) => validateAppName(
@@ -262,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
                 onFailure: () => setState(() => validName = false),
               ),
-              hintText: 'your_app',
+              hintText: 'my_app',
             ),
             spacer,
 
@@ -270,6 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: 'Publisher name',
+              tip: 'Or: Example Person',
               controller: pubController,
               width: singleLineFormWidth,
               validator: (String? value) {
@@ -288,7 +290,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
                 return null;
               },
-              hintText: 'Your org',
+              hintText: 'Example LLC',
+            ),
+            spacer,
+
+            // Description
+            _BasicField(
+              textTheme: textTheme,
+              title: 'Description',
+              controller: descriptionController,
+              width: singleLineFormWidth,
+              validator: (String? value) =>
+                  (value == null || value.isEmpty) ? 'Required' : null,
+              hintText: 'One or two sentences about your app.',
             ),
             spacer,
 
@@ -304,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 rowMargin,
-                const EzToolTipper("Yes, it's backwards"),
+                const EzToolTipper('Backwards, it is'),
               ],
             ),
             ConstrainedBox(
@@ -345,18 +359,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            ),
-            spacer,
-
-            // Description
-            _BasicField(
-              textTheme: textTheme,
-              title: 'Description',
-              controller: descriptionController,
-              width: singleLineFormWidth,
-              validator: (String? value) =>
-                  (value == null || value.isEmpty) ? 'Required' : null,
-              hintText: 'One sentence about your app.',
             ),
             spacer,
 
@@ -651,10 +653,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           extra: EAGConfig(
                             appName: nameController.text,
                             publisherName: pubController.text,
+                            appDescription: descriptionController.text,
                             domainName: exampleDomain
                                 ? 'com.example'
                                 : domainController.text,
-                            appDescription: descriptionController.text,
                             supportEmail: supportEmailController.text.isEmpty
                                 ? null
                                 : supportEmailController.text,
@@ -723,10 +725,10 @@ It is recommended to set a custom color scheme. If you need help building one, t
                             extra: EAGConfig(
                               appName: nameController.text,
                               publisherName: pubController.text,
+                              appDescription: descriptionController.text,
                               domainName: exampleDomain
                                   ? 'com.example'
                                   : domainController.text,
-                              appDescription: descriptionController.text,
                               supportEmail: supportEmailController.text.isEmpty
                                   ? null
                                   : supportEmailController.text,
@@ -836,8 +838,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
   void dispose() {
     nameController.dispose();
     pubController.dispose();
-    domainController.dispose();
     descriptionController.dispose();
+    domainController.dispose();
     supportEmailController.dispose();
     pathController.dispose();
     copyrightController.dispose();
