@@ -59,7 +59,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: const Icon(Icons.format_underline),
+            icon: EzIcon(Icons.format_underline, context),
           )
         : IconButton(
             style: IconButton.styleFrom(
@@ -69,7 +69,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: const Icon(Icons.format_underline_outlined),
+            icon: EzIcon(Icons.format_underline_outlined, context),
           );
   }
 }

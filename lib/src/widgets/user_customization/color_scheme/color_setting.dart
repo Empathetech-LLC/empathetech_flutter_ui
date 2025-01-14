@@ -150,10 +150,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
                         radius: padding + margin,
-                        child: Icon(
-                          PlatformIcons(context).eyeSlash,
-                          size: theme.textTheme.titleLarge?.fontSize,
-                        ),
+                        child: EzIcon(PlatformIcons(context).eyeSlash, context),
                       )
                     : CircleAvatar(
                         backgroundColor: Color(recommended),
@@ -216,7 +213,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
               ),
-              icon: const Icon(Icons.copy),
+              icon: EzIcon(Icons.copy, context),
               label: currColorLabel,
             ),
           ],
@@ -249,7 +246,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
                   },
-                  icon: Icon(PlatformIcons(context).delete),
+                  icon: EzIcon(PlatformIcons(context).delete, context),
                   label: l10n.csRemove,
                 ),
                 spacer,
@@ -263,7 +260,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                       Navigator.of(dialogContext).pop(resetResponse);
                     }
                   },
-                  icon: Icon(PlatformIcons(context).refresh),
+                  icon: EzIcon(PlatformIcons(context).refresh, context),
                   label: l10n.csReset,
                 ),
               ],
@@ -299,10 +296,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
                     radius: padding + margin,
-                    child: Icon(
-                      PlatformIcons(context).eyeSlash,
-                      size: theme.textTheme.titleLarge?.fontSize,
-                    ),
+                    child: EzIcon(PlatformIcons(context).eyeSlash, context),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,

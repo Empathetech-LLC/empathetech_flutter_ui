@@ -138,7 +138,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         },
                         tooltip:
                             '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
-                        icon: Icon(PlatformIcons(context).remove),
+                        icon: EzIcon(PlatformIcons(context).remove, context),
                       )
                     : IconButton(
                         style: IconButton.styleFrom(
@@ -148,8 +148,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         ),
                         onPressed: doNothing,
                         tooltip: 'Minimum',
-                        icon: Icon(
+                        icon: EzIcon(
                           PlatformIcons(context).remove,
+                          context,
                           color: colorScheme.outline,
                         ),
                       ),
@@ -233,7 +234,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         },
                         tooltip:
                             '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
-                        icon: Icon(PlatformIcons(context).add),
+                        icon: EzIcon(PlatformIcons(context).add, context),
                       )
                     : IconButton(
                         style: IconButton.styleFrom(
@@ -243,8 +244,9 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                         ),
                         onPressed: doNothing,
                         tooltip: 'Maximum',
-                        icon: Icon(
+                        icon: EzIcon(
                           PlatformIcons(context).add,
+                          context,
                           color: colorScheme.outline,
                         ),
                       ),

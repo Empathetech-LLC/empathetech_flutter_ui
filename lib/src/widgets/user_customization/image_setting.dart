@@ -219,7 +219,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: Icon(PlatformIcons(context).photoCamera),
+          icon: EzIcon(PlatformIcons(context).photoCamera, context),
           label: l10n.isFromCamera,
         ),
         spacer,
@@ -242,7 +242,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: Icon(PlatformIcons(context).folder),
+          icon: EzIcon(PlatformIcons(context).folder, context),
           label: l10n.isFromFile,
         ),
         spacer,
@@ -329,7 +329,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
         ),
-        icon: const Icon(Icons.computer_outlined),
+        icon: EzIcon(Icons.computer_outlined, context),
         label: l10n.isFromNetwork,
       ),
     ]);
@@ -347,7 +347,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(defaultPath);
             }
           },
-          icon: Icon(PlatformIcons(context).refresh),
+          icon: EzIcon(PlatformIcons(context).refresh, context),
           label: l10n.isResetIt,
         ),
       ]);
@@ -366,7 +366,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(noImageValue);
             }
           },
-          icon: Icon(PlatformIcons(context).clear),
+          icon: EzIcon(PlatformIcons(context).clear, context),
           label: l10n.isClearIt,
         ),
       ]);

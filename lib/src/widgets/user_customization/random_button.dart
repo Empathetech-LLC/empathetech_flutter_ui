@@ -92,7 +92,7 @@ class EzConfigRandomizer extends StatelessWidget {
               needsClose: false,
             );
           }),
-      icon: const Icon(LineIcons.diceD6),
+      icon: EzIcon(LineIcons.diceD6, context),
       label: label ?? l10n.ssRandom,
     );
   }

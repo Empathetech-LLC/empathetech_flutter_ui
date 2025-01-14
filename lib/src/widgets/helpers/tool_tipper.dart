@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -25,9 +27,9 @@ class _EzToolTipperState extends State<EzToolTipper> {
       message: widget.message,
       child: Container(
         decoration: const BoxDecoration(shape: BoxShape.circle),
-        child: Icon(
+        child: EzIcon(
           PlatformIcons(context).helpOutline,
-          size: Theme.of(context).textTheme.titleLarge?.fontSize,
+          context,
           color: Theme.of(context).colorScheme.outline,
         ),
       ),

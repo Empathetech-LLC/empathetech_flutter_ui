@@ -18,7 +18,7 @@ class EzBackAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator.canPop(context)
         ? IconButton(
-            icon: Icon(PlatformIcons(context).back),
+            icon: EzIcon(PlatformIcons(context).back, context),
             onPressed: () => Navigator.of(context).pop(),
             tooltip: EFUILang.of(context)!.gBack,
           )
