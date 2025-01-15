@@ -108,6 +108,12 @@ const double defaultBodySize = 16.0;
 /// 14.0
 const double defaultLabelSize = 14.0;
 
+/// 0.0
+const double defaultTextOpacity = 0.0;
+
+/// 20.0
+const double defaultIconSize = 20.0;
+
 /// 1.5
 const double defaultFontHeight = 1.5;
 
@@ -248,8 +254,11 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   labelWordSpacingKey: defaultWordSpacing,
 
   // Background opacity
-  darkTextBackgroundOpacityKey: 0.0,
-  lightTextBackgroundOpacityKey: 0.0,
+  darkTextBackgroundOpacityKey: defaultTextOpacity,
+  lightTextBackgroundOpacityKey: defaultTextOpacity,
+
+  // Icon size
+  iconSizeKey: defaultIconSize,
 
   // Layout settings //
 
