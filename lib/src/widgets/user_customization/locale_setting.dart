@@ -7,7 +7,6 @@ import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:country_flags/country_flags.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
@@ -25,10 +24,9 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
-
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
   late final Color primary = Theme.of(context).colorScheme.primary;
 
@@ -66,63 +64,62 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           );
   }
 
-  /// Builds an [EzAlertDialog] with [Locale]s mapped to a list of [ElevatedButton]s
-  Future<dynamic> _chooseLocale(BuildContext context) {
-    final List<Locale> locales = (widget.locales == null)
-        ? EFUILang.supportedLocales
-        : EFUILang.supportedLocales + widget.locales!;
-
-    final List<Widget> buttons = <Widget>[];
-
-    return showPlatformDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        for (final Locale locale in locales) {
-          final List<String> localeData = <String>[locale.languageCode];
-          if (locale.countryCode != null) localeData.add(locale.countryCode!);
-
-          buttons.addAll(<Widget>[
-            EzElevatedIconButton(
-              onPressed: () async {
-                await EzConfig.setStringList(appLocaleKey, localeData);
-                currLocale = locale;
-                l10n = await EFUILang.delegate.load(locale);
-                setState(() {});
-
-                if (dialogContext.mounted) {
-                  Navigator.of(dialogContext).pop(locale);
-                }
-              },
-              icon: flag(locale),
-              label: LocaleNames.of(context)!.nameOf(locale.languageCode)!,
-              labelPadding: false,
-            ),
-            spacer,
-          ]);
-        }
-
-        return EzAlertDialog(
-          title: Text(
-            l10n.ssLanguages,
-            textAlign: TextAlign.center,
-          ),
-          // Remove the trailing button spacer
-          contents: buttons.sublist(0, buttons.length - 1),
-        );
-      },
-    );
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final List<Locale> locales = (widget.locales == null)
+        ? EFUILang.supportedLocales
+        : EFUILang.supportedLocales + widget.locales!;
+
     return Semantics(
       button: true,
       hint: l10n.ssLangHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          onPressed: () => _chooseLocale(context),
+          onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (BuildContext modalContext) => EzScrollView(
+              mainAxisSize: MainAxisSize.min,
+              children: locales
+                  .map(
+                    (Locale locale) => Padding(
+                      padding: EzInsets.col(spacing),
+                      child: EzElevatedIconButton(
+                        onPressed: () async {
+                          // Gather data
+                          final List<String> localeData = <String>[
+                            locale.languageCode,
+                          ];
+                          if (locale.countryCode != null) {
+                            localeData.add(locale.countryCode!);
+                          }
+
+                          // Set data
+                          await EzConfig.setStringList(
+                            appLocaleKey,
+                            localeData,
+                          );
+                          currLocale = locale;
+                          l10n = await EFUILang.delegate.load(locale);
+
+                          setState(() {});
+
+                          // Close modal
+                          if (modalContext.mounted) {
+                            Navigator.of(modalContext).pop(locale);
+                          }
+                        },
+                        icon: flag(locale),
+                        label: LocaleNames.of(context)!
+                            .nameOf(locale.languageCode)!,
+                        labelPadding: false,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
           icon: flag(currLocale),
           label: l10n.ssLanguage,
           labelPadding: false,
