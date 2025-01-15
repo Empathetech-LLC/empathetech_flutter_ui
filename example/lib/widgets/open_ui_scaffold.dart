@@ -62,6 +62,8 @@ class OpenUIScaffold extends StatelessWidget {
             (controller.isOpen) ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
         icon: const Icon(Icons.more_vert),
+        padding: EdgeInsets.zero,
+        style: IconButton.styleFrom(side: BorderSide.none),
       ),
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
@@ -87,8 +89,9 @@ class OpenUIScaffold extends StatelessWidget {
             toolbarHeight: toolbarHeight,
 
             // Leading (aka left)
-            leading:
-                running ? const SizedBox.shrink() : (isLefty ? options : null),
+            leading: running
+                ? const SizedBox.shrink()
+                : (isLefty ? options : const EzBackAction()),
             leadingWidth: toolbarHeight,
 
             // Title
