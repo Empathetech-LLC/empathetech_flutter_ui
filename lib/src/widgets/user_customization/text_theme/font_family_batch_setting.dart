@@ -10,7 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  const EzFontFamilyBatchSetting({super.key});
+  /// Optional [EzDropdownMenu.iconSize] passthrough
+  final double? iconSize;
+
+  const EzFontFamilyBatchSetting({super.key, this.iconSize});
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -120,6 +123,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       message: l10n.tsFontFamily,
       child: EzDropdownMenu<String>(
         widthEntries: <String>[fingerPaint],
+        iconSize: widget.iconSize,
         textStyle: bodyProvider.value,
         dropdownMenuEntries: entries,
         enableSearch: false,
