@@ -21,6 +21,8 @@ class EzBackAction extends StatelessWidget {
             icon: Icon(PlatformIcons(context).back),
             onPressed: () => Navigator.of(context).pop(),
             tooltip: EFUILang.of(context)!.gBack,
+            padding: EdgeInsets.zero,
+            style: IconButton.styleFrom(side: BorderSide.none),
           )
         : const SizedBox.shrink();
   }
