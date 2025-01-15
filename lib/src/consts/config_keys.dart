@@ -74,6 +74,9 @@ const String labelFontHeightKey = 'labelFontHeight';
 const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
 const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 
+// Icons
+const String iconSizeKey = 'iconSize';
+
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
@@ -131,6 +134,9 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Background opacity
   darkTextBackgroundOpacityKey: double,
   lightTextBackgroundOpacityKey: double,
+
+  // Icons
+  iconSizeKey: double,
 };
 
 // Text settings' values //
@@ -195,6 +201,12 @@ const double minOpacity = 0.0;
 
 /// 1.0
 const double maxOpacity = 1.0;
+
+/// 10.0
+const double minIconSize = 10.0;
+
+/// 40.0
+const double maxIconSize = 40.0;
 
 /// -1.0
 const double minFontLetterSpacing = -1.0;
