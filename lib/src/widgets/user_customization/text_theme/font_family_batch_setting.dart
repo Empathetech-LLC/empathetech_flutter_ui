@@ -118,8 +118,8 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: l10n.tsFontFamily,
-      child: DropdownMenu<String>(
-        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+      child: EzDropdownMenu<String>(
+        widthEntries: <String>[fingerPaint],
         textStyle: bodyProvider.value,
         dropdownMenuEntries: entries,
         enableSearch: false,

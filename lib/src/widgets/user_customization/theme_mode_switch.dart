@@ -78,15 +78,10 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         EzMargin(),
 
         // Button
-        DropdownMenu<ThemeMode>(
-          width: dropdownWidth(
-            context: context,
-            entries: entries
-                .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
-                .toList(),
-          ),
-          trailingIcon: EzIcon(Icons.arrow_drop_down, context),
-          selectedTrailingIcon: EzIcon(Icons.arrow_drop_up, context),
+        EzDropdownMenu<ThemeMode>(
+          widthEntries: entries
+              .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
+              .toList(),
           dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: platformTheme,

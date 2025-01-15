@@ -71,15 +71,10 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
         EzSpacer(space: EzConfig.get(marginKey)),
 
         // Button
-        DropdownMenu<bool>(
-          width: dropdownWidth(
-            context: context,
-            entries: entries
-                .map((DropdownMenuEntry<bool> entry) => entry.label)
-                .toList(),
-          ),
-          trailingIcon: EzIcon(Icons.arrow_drop_down, context),
-          selectedTrailingIcon: EzIcon(Icons.arrow_drop_up, context),
+        EzDropdownMenu<bool>(
+          widthEntries: entries
+              .map((DropdownMenuEntry<bool> entry) => entry.label)
+              .toList(),
           dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: isLefty,

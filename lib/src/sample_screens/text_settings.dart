@@ -872,14 +872,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               ),
             ),
             EzMargin(),
-            DropdownMenu<TextSettingType>(
-              width: dropdownWidth(
-                context: context,
-                entries: styleChoices
-                    .map(
-                        (DropdownMenuEntry<TextSettingType> type) => type.label)
-                    .toList(),
-              ),
+            EzDropdownMenu<TextSettingType>(
+              widthEntries: styleChoices
+                  .map((DropdownMenuEntry<TextSettingType> type) => type.label)
+                  .toList(),
               textStyle: labelProvider.value,
               dropdownMenuEntries: styleChoices,
               enableSearch: false,
