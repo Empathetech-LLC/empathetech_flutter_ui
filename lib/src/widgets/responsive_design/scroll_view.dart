@@ -130,46 +130,59 @@ class _EzScrollViewState extends State<EzScrollView> {
     final bool hideScroll = (EzConfig.get(hideScrollKey) ?? false) ||
         (widget.thumbVisibility == false);
 
-    return PlatformScrollbar(
-      controller: controller,
-      thumbVisibility: hideScroll ? false : widget.thumbVisibility,
-      thickness: hideScroll ? 0.0 : widget.thickness,
-      radius: hideScroll ? Radius.zero : widget.radius,
-      notificationPredicate: widget.notificationPredicate,
-      scrollbarOrientation: widget.scrollbarOrientation,
-      child: SingleChildScrollView(
-        scrollDirection: widget.scrollDirection,
-        reverse: widget.reverse,
-        padding: widget.padding,
-        primary: widget.primary,
-        physics: widget.physics,
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: widget.scrollDirection == Axis.vertical
+            ? <PointerDeviceKind>{
+                PointerDeviceKind.invertedStylus,
+                PointerDeviceKind.stylus,
+                PointerDeviceKind.touch,
+                PointerDeviceKind.trackpad,
+                PointerDeviceKind.unknown,
+              } // No mouse
+            : PointerDeviceKind.values.toSet(),
+      ),
+      child: PlatformScrollbar(
         controller: controller,
-        dragStartBehavior: widget.dragStartBehavior,
-        clipBehavior: widget.clipBehavior,
-        restorationId: widget.restorationId,
-        keyboardDismissBehavior: widget.keyboardDismissBehavior,
-        child: (widget.child != null)
-            ? widget.child
-            : (widget.scrollDirection == Axis.vertical)
-                ? Column(
-                    mainAxisSize: widget.mainAxisSize,
-                    mainAxisAlignment: widget.mainAxisAlignment,
-                    crossAxisAlignment: widget.crossAxisAlignment,
-                    textDirection: widget.textDirection,
-                    verticalDirection: widget.verticalDirection,
-                    textBaseline: widget.textBaseline,
-                    children: widget.children!,
-                  )
-                : EzRow(
-                    mainAxisSize: widget.mainAxisSize,
-                    mainAxisAlignment: widget.mainAxisAlignment,
-                    crossAxisAlignment: widget.crossAxisAlignment,
-                    textDirection: widget.textDirection,
-                    verticalDirection: widget.verticalDirection,
-                    textBaseline: widget.textBaseline,
-                    reverseHands: widget.reverseHands,
-                    children: widget.children!,
-                  ),
+        thumbVisibility: hideScroll ? false : widget.thumbVisibility,
+        thickness: hideScroll ? 0.0 : widget.thickness,
+        radius: hideScroll ? Radius.zero : widget.radius,
+        notificationPredicate: widget.notificationPredicate,
+        scrollbarOrientation: widget.scrollbarOrientation,
+        child: SingleChildScrollView(
+          scrollDirection: widget.scrollDirection,
+          reverse: widget.reverse,
+          padding: widget.padding,
+          primary: widget.primary,
+          physics: widget.physics,
+          controller: controller,
+          dragStartBehavior: widget.dragStartBehavior,
+          clipBehavior: widget.clipBehavior,
+          restorationId: widget.restorationId,
+          keyboardDismissBehavior: widget.keyboardDismissBehavior,
+          child: (widget.child != null)
+              ? widget.child
+              : (widget.scrollDirection == Axis.vertical)
+                  ? Column(
+                      mainAxisSize: widget.mainAxisSize,
+                      mainAxisAlignment: widget.mainAxisAlignment,
+                      crossAxisAlignment: widget.crossAxisAlignment,
+                      textDirection: widget.textDirection,
+                      verticalDirection: widget.verticalDirection,
+                      textBaseline: widget.textBaseline,
+                      children: widget.children!,
+                    )
+                  : EzRow(
+                      mainAxisSize: widget.mainAxisSize,
+                      mainAxisAlignment: widget.mainAxisAlignment,
+                      crossAxisAlignment: widget.crossAxisAlignment,
+                      textDirection: widget.textDirection,
+                      verticalDirection: widget.verticalDirection,
+                      textBaseline: widget.textBaseline,
+                      reverseHands: widget.reverseHands,
+                      children: widget.children!,
+                    ),
+        ),
       ),
     );
   }
