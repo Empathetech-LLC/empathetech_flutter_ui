@@ -85,9 +85,11 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
                 .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
                 .toList(),
           ),
+          trailingIcon: EzIcon(Icons.arrow_drop_down, context),
+          selectedTrailingIcon: EzIcon(Icons.arrow_drop_up, context),
+          dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: platformTheme,
-          dropdownMenuEntries: entries,
           onSelected: (ThemeMode? newThemeMode) async {
             switch (newThemeMode) {
               case ThemeMode.system:

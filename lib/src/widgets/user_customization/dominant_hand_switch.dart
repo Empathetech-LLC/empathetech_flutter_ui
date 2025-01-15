@@ -78,6 +78,8 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
                 .map((DropdownMenuEntry<bool> entry) => entry.label)
                 .toList(),
           ),
+          trailingIcon: EzIcon(Icons.arrow_drop_down, context),
+          selectedTrailingIcon: EzIcon(Icons.arrow_drop_up, context),
           dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: isLefty,
