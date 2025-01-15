@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
   /// Optional override, defaults to...
-  /// Current [TextTheme.titleLarge] fontSize / [defaultTitleSize]
+  /// Current [EzConfig]s [iconSizeKey] / [defaultIconSize]
   final double? scale;
 
   /// Optional override, defaults to [EdgeInsets.all] with [EzConfig]s [marginKey]
@@ -92,8 +92,7 @@ class EzCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        (Theme.of(context).textTheme.titleLarge?.fontSize ?? defaultTitleSize) /
-            defaultTitleSize;
+        (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
 
     return Padding(
       padding: ratio > 1.1
