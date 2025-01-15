@@ -59,11 +59,7 @@ double dropdownWidth({
         style: textTheme.bodyLarge,
       ).width +
       (padding * 2) +
-      measureIcon(
-        Icons.arrow_drop_down,
-        context: context,
-        style: textTheme.titleLarge,
-      ).width +
+      measureIcon(Icons.arrow_drop_down, context).width +
       padding +
       margin;
 }
