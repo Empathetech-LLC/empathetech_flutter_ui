@@ -14,10 +14,13 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   /// aka 10%
   final double delta;
 
+  /// Defaults to [TitleTextStyleProvider.value]s [TextStyle.fontSize]
+  final double? iconSize;
+
   /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
   /// Updates all font size at once by [delta] percent
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
-  const EzFontDoubleBatchSetting({super.key, this.delta = 0.1});
+  const EzFontDoubleBatchSetting({super.key, this.delta = 0.1, this.iconSize});
 
   @override
   State<EzFontDoubleBatchSetting> createState() =>
@@ -45,10 +48,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-  late final EzSpacer pMSpacer = EzSpacer(
-    space: EzConfig.get(paddingKey) / 2,
-    vertical: false,
-  );
+  late final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   // Define the build data //
 
@@ -109,7 +109,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   icon: Icon(
                     PlatformIcons(context).remove,
                     color: colorScheme.outline,
-                    size: titleProvider.value.fontSize,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
                   ),
                   onPressed: doNothing,
                   tooltip: 'Minimum',
@@ -117,7 +117,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               : IconButton(
                   icon: Icon(
                     PlatformIcons(context).remove,
-                    size: titleProvider.value.fontSize,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
                   ),
                   onPressed: () async {
                     for (final String key in keys) {
@@ -151,7 +151,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           Icon(
             Icons.text_fields_sharp,
             color: colorScheme.onSurface,
-            size: titleProvider.value.fontSize,
+            size: widget.iconSize ?? titleProvider.value.fontSize,
           ),
           pMSpacer,
 
@@ -166,7 +166,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   icon: Icon(
                     PlatformIcons(context).add,
                     color: colorScheme.outline,
-                    size: bodyProvider.value.fontSize,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
                   ),
                   onPressed: doNothing,
                   tooltip: 'Maximum',
@@ -174,7 +174,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               : IconButton(
                   icon: Icon(
                     PlatformIcons(context).add,
-                    size: bodyProvider.value.fontSize,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
                   ),
                   onPressed: () async {
                     for (final String key in keys) {
