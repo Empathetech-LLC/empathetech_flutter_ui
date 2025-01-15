@@ -18,6 +18,9 @@ class EzDropdownMenu<T> extends StatelessWidget {
   /// Will set [width] to [dropdownWidth] of [widthEntries]
   final List<String>? widthEntries;
 
+  /// Optional [IconButton.iconSize] override
+  final double? iconSize;
+
   /// [DropdownMenu.menuHeight] passthrough
   final double? menuHeight;
 
@@ -103,6 +106,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
     this.enabled = true,
     this.width,
     this.widthEntries,
+    this.iconSize,
     this.menuHeight,
     this.leadingIcon,
     this.trailingIcon,
@@ -142,7 +146,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
             disabledForegroundColor: theme.colorScheme.outline,
             overlayColor: theme.colorScheme.primary,
             side: BorderSide.none,
-            iconSize: theme.textTheme.titleLarge?.fontSize,
+            iconSize: iconSize ?? theme.textTheme.titleLarge?.fontSize,
             alignment: Alignment.center,
             padding: EzInsets.wrap(EzConfig.get(paddingKey)),
           ),
@@ -157,13 +161,20 @@ class EzDropdownMenu<T> extends StatelessWidget {
                 : dropdownWidth(context: context, entries: widthEntries!)),
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon ?? EzIcon(Icons.arrow_drop_down, context),
+        trailingIcon: trailingIcon ??
+            Icon(
+              Icons.arrow_drop_down,
+              size: iconSize ?? theme.textTheme.titleLarge?.fontSize,
+            ),
         label: label,
         hintText: hintText,
         helperText: helperText,
         errorText: errorText,
-        selectedTrailingIcon:
-            selectedTrailingIcon ?? EzIcon(Icons.arrow_drop_up, context),
+        selectedTrailingIcon: selectedTrailingIcon ??
+            Icon(
+              Icons.arrow_drop_up,
+              size: iconSize ?? theme.textTheme.titleLarge?.fontSize,
+            ),
         enableFilter: enableFilter,
         enableSearch: enableSearch,
         keyboardType: keyboardType,
