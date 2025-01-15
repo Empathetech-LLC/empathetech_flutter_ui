@@ -137,6 +137,8 @@ class EzDropdownMenu<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final double? savedIconSize = EzConfig.get(iconSizeKey);
+
     return Theme(
       data: theme.copyWith(
         iconButtonTheme: IconButtonThemeData(
@@ -146,7 +148,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
             disabledForegroundColor: theme.colorScheme.outline,
             overlayColor: theme.colorScheme.primary,
             side: BorderSide.none,
-            iconSize: iconSize ?? theme.textTheme.titleLarge?.fontSize,
+            iconSize: iconSize ?? savedIconSize,
             alignment: Alignment.center,
             padding: EzInsets.wrap(EzConfig.get(paddingKey)),
           ),
@@ -162,19 +164,13 @@ class EzDropdownMenu<T> extends StatelessWidget {
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
         trailingIcon: trailingIcon ??
-            Icon(
-              Icons.arrow_drop_down,
-              size: iconSize ?? theme.textTheme.titleLarge?.fontSize,
-            ),
+            Icon(Icons.arrow_drop_down, size: iconSize ?? savedIconSize),
         label: label,
         hintText: hintText,
         helperText: helperText,
         errorText: errorText,
         selectedTrailingIcon: selectedTrailingIcon ??
-            Icon(
-              Icons.arrow_drop_up,
-              size: iconSize ?? theme.textTheme.titleLarge?.fontSize,
-            ),
+            Icon(Icons.arrow_drop_up, size: iconSize ?? savedIconSize),
         enableFilter: enableFilter,
         enableSearch: enableSearch,
         keyboardType: keyboardType,
