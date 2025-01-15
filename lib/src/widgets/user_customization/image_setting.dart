@@ -5,7 +5,6 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -219,7 +218,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: EzIcon(PlatformIcons(context).photoCamera, context),
+          icon: EzIcon(PlatformIcons(context).photoCamera),
           label: l10n.isFromCamera,
         ),
         spacer,
@@ -242,7 +241,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: EzIcon(PlatformIcons(context).folder, context),
+          icon: EzIcon(PlatformIcons(context).folder),
           label: l10n.isFromFile,
         ),
         spacer,
@@ -329,7 +328,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
         ),
-        icon: EzIcon(Icons.computer_outlined, context),
+        icon: EzIcon(Icons.computer_outlined),
         label: l10n.isFromNetwork,
       ),
     ]);
@@ -347,7 +346,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(defaultPath);
             }
           },
-          icon: EzIcon(PlatformIcons(context).refresh, context),
+          icon: EzIcon(PlatformIcons(context).refresh),
           label: l10n.isResetIt,
         ),
       ]);
@@ -366,7 +365,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(noImageValue);
             }
           },
-          icon: EzIcon(PlatformIcons(context).clear, context),
+          icon: EzIcon(PlatformIcons(context).clear),
           label: l10n.isClearIt,
         ),
       ]);

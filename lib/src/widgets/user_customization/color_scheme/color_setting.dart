@@ -150,7 +150,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
                         radius: padding + margin,
-                        child: EzIcon(PlatformIcons(context).eyeSlash, context),
+                        child: EzIcon(PlatformIcons(context).eyeSlash),
                       )
                     : CircleAvatar(
                         backgroundColor: Color(recommended),
@@ -213,7 +213,7 @@ class _ColorSettingState extends State<EzColorSetting> {
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
               ),
-              icon: EzIcon(Icons.copy, context),
+              icon: EzIcon(Icons.copy),
               label: currColorLabel,
             ),
           ],
@@ -246,7 +246,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
                   },
-                  icon: EzIcon(PlatformIcons(context).delete, context),
+                  icon: EzIcon(PlatformIcons(context).delete),
                   label: l10n.csRemove,
                 ),
                 spacer,
@@ -260,7 +260,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                       Navigator.of(dialogContext).pop(resetResponse);
                     }
                   },
-                  icon: EzIcon(PlatformIcons(context).refresh, context),
+                  icon: EzIcon(PlatformIcons(context).refresh),
                   label: l10n.csReset,
                 ),
               ],
@@ -296,7 +296,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
                     radius: padding + margin,
-                    child: EzIcon(PlatformIcons(context).eyeSlash, context),
+                    child: EzIcon(PlatformIcons(context).eyeSlash),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,

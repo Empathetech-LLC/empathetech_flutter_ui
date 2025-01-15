@@ -25,14 +25,14 @@ String lstName(BuildContext context, LayoutSettingType settingType) {
 }
 
 /// Enumerator extension for getting the proper button [Icon] for [EzLayoutSetting.type]
-Icon lstIcon(BuildContext context, LayoutSettingType settingType) {
+Icon lstIcon(LayoutSettingType settingType) {
   switch (settingType) {
     case LayoutSettingType.margin:
-      return EzIcon(Icons.margin, context);
+      return EzIcon(Icons.margin);
     case LayoutSettingType.padding:
-      return EzIcon(Icons.padding, context);
+      return EzIcon(Icons.padding);
     case LayoutSettingType.spacing:
-      return EzIcon(Icons.space_bar, context);
+      return EzIcon(Icons.space_bar);
   }
 }
 
@@ -275,7 +275,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             currValue = defaultValue;
           });
         },
-        icon: EzIcon(PlatformIcons(context).refresh, context),
+        icon: EzIcon(PlatformIcons(context).refresh),
         label:
             '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
@@ -303,7 +303,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           },
         ),
       ),
-      icon: lstIcon(context, widget.type),
+      icon: lstIcon(widget.type),
       label: label,
     );
   }

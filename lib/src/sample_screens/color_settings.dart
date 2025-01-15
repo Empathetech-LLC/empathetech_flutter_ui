@@ -375,7 +375,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               backgroundColor: liveColor,
               radius: padding + margin,
               child: liveColor == Colors.transparent
-                  ? EzIcon(PlatformIcons(context).eyeSlash, context)
+                  ? EzIcon(PlatformIcons(context).eyeSlash)
                   : null,
             ),
           ),
@@ -457,7 +457,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
-          icon: EzIcon(PlatformIcons(context).addCircledOutline, context),
+          icon: EzIcon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),
       ],

@@ -74,7 +74,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
           );
         }
       },
-      icon: EzIcon(Icons.feedback_outlined, context),
+      icon: EzIcon(Icons.feedback_outlined),
       label: l10n.gGiveFeedback,
     );
   }
