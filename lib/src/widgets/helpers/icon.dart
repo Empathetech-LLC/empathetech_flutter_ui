@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzIcon extends Icon {
-  /// [Icon] wrapper that responds to the theme's text size.
+  /// [Icon] wrapper that responds to [EzConfig]s [iconSizeKey]
   /// [ThemeData.iconTheme] does not seem to be consumed properly at time of writing
   /// Jan 2025
   EzIcon(
