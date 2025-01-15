@@ -12,7 +12,7 @@ class EzRadio<T> extends StatelessWidget {
   final double? scale;
 
   /// Optional override, defaults to [EdgeInsets.all] with [EzConfig]s [marginKey]
-  /// iff [scale] > 1.0
+  /// iff [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Radio.value] passthrough
@@ -80,7 +80,7 @@ class EzRadio<T> extends StatelessWidget {
             defaultTitleSize;
 
     return Padding(
-      padding: ratio > 1.0
+      padding: ratio > 1.1
           ? padding ?? EzInsets.wrap(EzConfig.get(marginKey))
           : EdgeInsets.zero,
       child: Transform.scale(
