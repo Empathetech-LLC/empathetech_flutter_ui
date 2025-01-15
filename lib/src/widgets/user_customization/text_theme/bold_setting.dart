@@ -54,7 +54,6 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         ? IconButton(
             style: IconButton.styleFrom(
               foregroundColor: colorScheme.primary,
-              side: BorderSide(color: colorScheme.primaryContainer),
               iconSize: widget.size,
             ),
             onPressed: swapState,
@@ -64,7 +63,6 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         : IconButton(
             style: IconButton.styleFrom(
               foregroundColor: colorScheme.outline,
-              side: BorderSide(color: colorScheme.primaryContainer),
               iconSize: widget.size,
             ),
             onPressed: swapState,

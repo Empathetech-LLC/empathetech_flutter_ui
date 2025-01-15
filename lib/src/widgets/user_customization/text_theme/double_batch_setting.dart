@@ -115,9 +115,6 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   tooltip: 'Minimum',
                 )
               : IconButton(
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: colorScheme.primaryContainer),
-                  ),
                   icon: Icon(
                     PlatformIcons(context).remove,
                     size: titleProvider.value.fontSize,
@@ -175,9 +172,6 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   tooltip: 'Maximum',
                 )
               : IconButton(
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: colorScheme.primaryContainer),
-                  ),
                   icon: Icon(
                     PlatformIcons(context).add,
                     size: bodyProvider.value.fontSize,

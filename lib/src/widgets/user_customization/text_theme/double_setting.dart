@@ -124,9 +124,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               if (widget.plusMinus) ...<Widget>[
                 (currValue > widget.min)
                     ? IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.primaryContainer),
-                        ),
                         onPressed: () async {
                           currValue -= widget.delta;
                           controller.text = currValue.toString();
@@ -220,9 +217,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 // Plus icon
                 (currValue < widget.max)
                     ? IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.primaryContainer),
-                        ),
                         onPressed: () async {
                           currValue += widget.delta;
                           controller.text = currValue.toString();
