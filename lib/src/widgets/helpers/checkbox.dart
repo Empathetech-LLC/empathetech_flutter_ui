@@ -91,16 +91,16 @@ class EzCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final double ratio = scale ??
+    final double ratio = scale ??
         (Theme.of(context).textTheme.titleLarge?.fontSize ?? defaultTitleSize) /
             defaultTitleSize;
 
-    return Transform.scale(
-      scale: ratio,
-      child: Padding(
-        padding: ratio > 1.0
-            ? padding ?? EdgeInsets.all(EzConfig.get(marginKey))
-            : EdgeInsets.zero,
+    return Padding(
+      padding: ratio > 1.0
+          ? padding ?? EdgeInsets.all(EzConfig.get(marginKey))
+          : EdgeInsets.zero,
+      child: Transform.scale(
+        scale: ratio,
         child: Checkbox(
           value: value,
           tristate: tristate,
