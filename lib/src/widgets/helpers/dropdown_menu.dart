@@ -132,10 +132,20 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Theme(
-      data: Theme.of(context).copyWith(
+      data: theme.copyWith(
         iconButtonTheme: IconButtonThemeData(
-          style: IconButton.styleFrom(side: BorderSide.none),
+          style: IconButton.styleFrom(
+            backgroundColor: theme.colorScheme.surface,
+            foregroundColor: theme.colorScheme.primary,
+            disabledForegroundColor: theme.colorScheme.outline,
+            overlayColor: theme.colorScheme.primary,
+            side: BorderSide.none,
+            iconSize: theme.textTheme.titleLarge?.fontSize,
+            alignment: Alignment.center,
+            padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+          ),
         ),
       ),
       child: DropdownMenu<T>(
