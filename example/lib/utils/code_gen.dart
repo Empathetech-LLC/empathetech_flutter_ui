@@ -6,8 +6,6 @@
 import '../structs/export.dart';
 
 import 'dart:io';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -159,17 +157,20 @@ Future<void> genPubspec({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  Future<String?> getLatest(String packageName) async {
-    final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
-    final http.Response response = await http.get(url);
+  // Cool idea, causes headaches...
+  // What if the latest package is actually incompatible with something else?
+  //
+  // Future<String?> getLatest(String packageName) async {
+  //   final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
+  //   final http.Response response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      return '^${jsonResponse['latest']['version']}';
-    } else {
-      return null;
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+  //     return '^${jsonResponse['latest']['version']}';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   // TODO: empathetech_flutter_ui: ${await getLatest('empathetech_flutter_ui') ?? '^8.0.0'}
   try {
@@ -189,20 +190,20 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  go_router: ${await getLatest('go_router') ?? '^14.6.2'}
+  go_router: ^14.6.3
   intl: ^0.19.0
-  shared_preferences: ${await getLatest('shared_preferences') ?? '^2.3.4'}
-  url_launcher: ${await getLatest('url_launcher') ?? '^6.3.1'}
+  shared_preferences: ^2.3.5
+  url_launcher: ^6.3.1
 
   # Community
   empathetech_flutter_ui: ^8.0.0-dev.4
-  ${config.supportEmail != null ? "feedback: ${await getLatest('feedback') ?? '^3.1.0'}" : ''}
-  flutter_localized_locales: ${await getLatest('flutter_localized_locales') ?? '^2.0.5'}
-  flutter_platform_widgets: ${await getLatest('flutter_platform_widgets') ?? '^7.0.1'}
+  ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
+  flutter_localized_locales: ^2.0.5
+  flutter_platform_widgets: ^7.0.1
 
 dev_dependencies:
-  dependency_validator: ${await getLatest('dependency_validator') ?? '^4.1.2'}
-  flutter_lints: ${await getLatest('flutter_lints') ?? '^5.0.0'}
+  dependency_validator: ^5.0.2
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
   integration_test:
