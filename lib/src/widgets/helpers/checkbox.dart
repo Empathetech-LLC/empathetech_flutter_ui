@@ -97,7 +97,7 @@ class EzCheckbox extends StatelessWidget {
 
     return Padding(
       padding: ratio > 1.0
-          ? padding ?? EdgeInsets.all(EzConfig.get(marginKey))
+          ? padding ?? EzInsets.col(EzConfig.get(marginKey))
           : EdgeInsets.zero,
       child: Transform.scale(
         scale: ratio,
