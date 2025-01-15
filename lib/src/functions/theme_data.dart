@@ -19,7 +19,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
-  final double iconSize = textTheme.titleLarge!.fontSize!;
+  final double iconSize = EzConfig.get(iconSizeKey);
 
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
