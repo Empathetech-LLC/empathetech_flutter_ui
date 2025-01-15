@@ -7,6 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
 enum TextSettingType { display, headline, title, body, label }
@@ -165,22 +166,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final Color? surfaceContainer =
-      Theme.of(context).colorScheme.surfaceContainer;
+  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  late final Color surfaceContainer = colorScheme.surfaceContainer;
 
   // Gather the build data //
 
   late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
-
-  late final String oKey = isDarkTheme(context)
-      ? darkTextBackgroundOpacityKey
-      : lightTextBackgroundOpacityKey;
-
-  late double currOpacity =
-      EzConfig.getDouble(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
-
-  late Color? backgroundColor =
-      surfaceContainer?.withValues(alpha: currOpacity);
 
   late final DisplayTextStyleProvider displayProvider =
       Provider.of<DisplayTextStyleProvider>(context);
@@ -192,6 +183,23 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       Provider.of<BodyTextStyleProvider>(context);
   late final LabelTextStyleProvider labelProvider =
       Provider.of<LabelTextStyleProvider>(context);
+
+  late final String oKey = isDarkTheme(context)
+      ? darkTextBackgroundOpacityKey
+      : lightTextBackgroundOpacityKey;
+
+  late double currOpacity = EzConfig.getDouble(oKey) ??
+      EzConfig.getDefault(oKey) ??
+      defaultTextOpacity;
+
+  late Color backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+
+  late double currIconSize = EzConfig.getDouble(iconSizeKey) ??
+      EzConfig.getDefault(iconSizeKey) ??
+      defaultIconSize;
+
+  static const double iconDelta = 2.0;
+  final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   // Return the build //
 
@@ -206,12 +214,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Font family
-            EzFontFamilyBatchSetting(key: UniqueKey()),
+            EzFontFamilyBatchSetting(key: UniqueKey(), iconSize: currIconSize),
             const EzSwapSpacer(),
 
             // Font size
             EzTextBackground(
-              EzFontDoubleBatchSetting(key: UniqueKey()),
+              EzFontDoubleBatchSetting(
+                key: UniqueKey(),
+                iconSize: currIconSize,
+              ),
               useSurface: true,
               borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
@@ -303,7 +314,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 setState(() {
                   currOpacity = value;
                   backgroundColor =
-                      surfaceContainer?.withValues(alpha: currOpacity);
+                      surfaceContainer.withValues(alpha: currOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -327,6 +338,71 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           separator,
         ],
 
+        // Icon size
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Minus
+            (currIconSize > minIconSize)
+                ? IconButton(
+                    onPressed: () async {
+                      currIconSize -= iconDelta;
+                      await EzConfig.setDouble(iconSizeKey, currIconSize);
+                      setState(() {});
+                    },
+                    tooltip: '${l10n.tsDecrease} icon size',
+                    icon:
+                        Icon(PlatformIcons(context).remove, size: currIconSize),
+                  )
+                : IconButton(
+                    style: IconButton.styleFrom(
+                      side: BorderSide(color: colorScheme.outlineVariant),
+                      overlayColor: colorScheme.outline,
+                      shadowColor: Colors.transparent,
+                    ),
+                    onPressed: doNothing,
+                    tooltip: 'Minimum',
+                    icon: Icon(
+                      PlatformIcons(context).remove,
+                      size: currIconSize,
+                      color: colorScheme.outline,
+                    ),
+                  ),
+            pMSpacer,
+
+            // Preview
+            Icon(Icons.sync_alt, size: currIconSize),
+            pMSpacer,
+
+            // Plus
+            (currIconSize < maxIconSize)
+                ? IconButton(
+                    onPressed: () async {
+                      currIconSize += iconDelta;
+                      await EzConfig.setDouble(iconSizeKey, currIconSize);
+                      setState(() {});
+                    },
+                    tooltip: '${l10n.tsIncrease} icon size',
+                    icon: Icon(PlatformIcons(context).add, size: currIconSize),
+                  )
+                : IconButton(
+                    style: IconButton.styleFrom(
+                      side: BorderSide(color: colorScheme.outlineVariant),
+                      overlayColor: colorScheme.outline,
+                      shadowColor: Colors.transparent,
+                    ),
+                    onPressed: doNothing,
+                    tooltip: 'Maximum',
+                    icon: Icon(
+                      PlatformIcons(context).add,
+                      size: currIconSize,
+                      color: colorScheme.outline,
+                    ),
+                  ),
+          ],
+        ),
+        separator,
+
         // Reset all
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
@@ -338,8 +414,10 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             bodyProvider.reset();
             labelProvider.reset();
 
-            currOpacity = EzConfig.getDefault(oKey) ?? 0.0;
-            backgroundColor = surfaceContainer?.withValues(alpha: currOpacity);
+            currOpacity = EzConfig.getDefault(oKey) ?? defaultTextOpacity;
+            backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+
+            currIconSize = EzConfig.getDefault(iconSizeKey) ?? defaultIconSize;
 
             setState(() {});
           },
