@@ -194,10 +194,10 @@ ThemeData ezThemeData(Brightness brightness) {
         foregroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
-        side: null,
+        side: BorderSide(color: colorScheme.primaryContainer),
         iconSize: iconSize,
         alignment: Alignment.center,
-        padding: EdgeInsets.zero,
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
