@@ -49,19 +49,23 @@ double dropdownWidth({
   required List<String> entries,
 }) {
   final TextTheme textTheme = Theme.of(context).textTheme;
+  final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
 
-  return measureText(
+  return margin +
+      measureText(
         getLongest(entries),
         context: context,
         style: textTheme.bodyLarge,
       ).width +
+      (padding * 2) +
       measureIcon(
         Icons.arrow_drop_down,
         context: context,
         style: textTheme.titleLarge,
       ).width +
-      EzConfig.get(marginKey) * 2 +
-      EzConfig.get(paddingKey) * 2;
+      padding +
+      margin;
 }
 
 /// Returns the longest [String] in [list]
