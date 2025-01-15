@@ -75,10 +75,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final double padding = EzConfig.get(paddingKey);
 
-  late final EzSpacer pMSpacer = EzSpacer(
-    space: padding / 2,
-    vertical: false,
-  );
+  final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   late final Size sizeLimit = measureText(
     widget.sizingString,
