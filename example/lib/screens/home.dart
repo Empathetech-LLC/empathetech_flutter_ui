@@ -499,7 +499,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   onPressed: () => setState(() => showAdvanced = !showAdvanced),
                   icon: EzIcon(
                     showAdvanced ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                    context,
                   ),
                 ),
               ],
@@ -552,10 +551,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                                   pathController.text = selectedDirectory);
                             }
                           },
-                          icon: EzIcon(
-                            PlatformIcons(context).folderOpen,
-                            context,
-                          ),
+                          icon: EzIcon(PlatformIcons(context).folderOpen),
                         ),
                       ],
                     ),
@@ -702,7 +698,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         );
                       }
                     },
-                    icon: EzIcon(Icons.save, context),
+                    icon: EzIcon(Icons.save),
                     label: 'Save config',
                     textAlign: TextAlign.center,
                   ),
@@ -781,7 +777,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                           setState(() => canGen = true);
                         }
                       },
-                      icon: EzIcon(PlatformIcons(context).create, context),
+                      icon: EzIcon(PlatformIcons(context).create),
                       label: 'Generate app',
                     ),
                   ],
@@ -1080,14 +1076,13 @@ class _AdvancedSettingsField extends StatelessWidget {
                 onPressed: onHide,
                 icon: EzIcon(
                   visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                  context,
                 ),
               ),
               if (onRemove != null) ...<Widget>[
                 rowMargin,
                 IconButton(
                   onPressed: onRemove,
-                  icon: EzIcon(PlatformIcons(context).delete, context),
+                  icon: EzIcon(PlatformIcons(context).delete),
                 ),
               ],
               if (tip != null) ...<Widget>[
@@ -1186,7 +1181,6 @@ class _LicensePicker extends StatelessWidget {
               onPressed: onHide,
               icon: EzIcon(
                 visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                context,
               ),
             ),
             rowMargin,

@@ -58,7 +58,7 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: EzIcon(Icons.format_italic, context),
+            icon: EzIcon(Icons.format_italic),
           )
         : IconButton(
             style: IconButton.styleFrom(
@@ -67,7 +67,7 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
             ),
             onPressed: swapState,
             tooltip: tooltip,
-            icon: EzIcon(Icons.format_italic_outlined, context),
+            icon: EzIcon(Icons.format_italic_outlined),
           );
   }
 }

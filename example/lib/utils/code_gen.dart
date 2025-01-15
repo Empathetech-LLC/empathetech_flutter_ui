@@ -478,7 +478,7 @@ class CountFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FloatingActionButton(
         onPressed: count,
-        child: EzIcon(PlatformIcons(context).add, context),
+        child: EzIcon(PlatformIcons(context).add),
       );
 }
 """);
@@ -504,7 +504,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
-        icon: EzIcon(PlatformIcons(context).settings, context),
+        icon: EzIcon(PlatformIcons(context).settings),
         label: EFUILang.of(context)!.ssPageTitle,
       );
 }
@@ -522,7 +522,7 @@ class EFUICredits extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () =>
             launchUrl(Uri.parse('https://www.empathetech.net/#/products')),
-        icon: EzIcon(PlatformIcons(context).settings, context),
+        icon: EzIcon(PlatformIcons(context).settings),
         label: EFUILang.of(context)!.gCreator,
       );
 }

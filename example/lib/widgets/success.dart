@@ -76,7 +76,7 @@ class RunOption extends StatelessWidget {
             const EzSpacer(),
             EzElevatedIconButton(
               onPressed: emulate,
-              icon: EzIcon(PlatformIcons(context).playArrowSolid, context),
+              icon: EzIcon(PlatformIcons(context).playArrowSolid),
               label: 'Run it',
             ),
           ],
