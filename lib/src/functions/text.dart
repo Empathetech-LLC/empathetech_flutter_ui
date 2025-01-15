@@ -31,12 +31,17 @@ Size measureText(
 
 /// Returns the soon-to-be rendered size of an [icon] via a [TextPainter]
 Size measureIcon(
-  IconData icon, {
-  required BuildContext context,
-  required TextStyle? style,
+  IconData icon,
+  BuildContext context, {
+  TextStyle? style,
+  double? size,
 }) {
   final TextPainter textPainter = TextPainter(
-    text: TextSpan(text: String.fromCharCode(icon.codePoint), style: style),
+    text: TextSpan(
+      text: String.fromCharCode(icon.codePoint),
+      style: (style ?? Theme.of(context).textTheme.titleLarge)
+          ?.copyWith(fontSize: size ?? EzConfig.get(iconSizeKey)),
+    ),
     maxLines: 1,
     textScaler: MediaQuery.textScalerOf(context),
     textDirection: TextDirection.ltr,
