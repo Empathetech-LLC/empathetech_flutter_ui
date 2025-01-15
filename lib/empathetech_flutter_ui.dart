@@ -51,6 +51,7 @@ export 'src/sample_screens/text_settings.dart';
 // Widgets //
 
 // Helpers
+export 'src/widgets/helpers/checkbox.dart';
 export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/feedback_button.dart';
