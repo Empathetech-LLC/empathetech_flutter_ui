@@ -51,7 +51,7 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
     final double size = (widget.radius ??
             measureIcon(
               Icons.circle,
-              context: context,
+              context,
               style: Theme.of(context).snackBarTheme.contentTextStyle,
             ).width) *
         2;
