@@ -105,7 +105,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
                 ),
                 margin: EzInsets.col(margin),
               ),
-              Checkbox(
+              EzCheckbox(
                 value: hideScroll,
                 onChanged: (bool? value) async {
                   if (value == null) return;

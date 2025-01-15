@@ -388,7 +388,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
 
             // Check box
-            Checkbox(
+            EzCheckbox(
               value: updateTheme,
               onChanged: (bool? choice) {
                 updateTheme = (choice == null) ? false : choice;

@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: textTheme.bodyLarge,
                         textAlign: TextAlign.start,
                       ),
-                      Checkbox(
+                      EzCheckbox(
                         value: exampleDomain,
                         onChanged: (bool? value) async {
                           if (value == null) return;
@@ -1023,7 +1023,7 @@ class _SettingsCheckbox extends StatelessWidget {
             textAlign: TextAlign.start,
           ),
         ),
-        Checkbox(
+        EzCheckbox(
           value: value,
           onChanged: onChanged,
         ),
