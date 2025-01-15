@@ -57,6 +57,7 @@ export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/feedback_button.dart';
 export 'src/widgets/helpers/icon.dart';
 export 'src/widgets/helpers/menu_button.dart';
+export 'src/widgets/helpers/radio.dart';
 export 'src/widgets/helpers/sizing.dart';
 export 'src/widgets/helpers/spacers.dart';
 export 'src/widgets/helpers/text_background.dart';

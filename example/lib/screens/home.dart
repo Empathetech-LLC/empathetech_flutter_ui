@@ -1160,7 +1160,7 @@ class _LicensePicker extends StatelessWidget {
             style: textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
-          Radio<String>(
+          EzRadio<String>(
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,

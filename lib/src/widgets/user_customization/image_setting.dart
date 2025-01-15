@@ -109,7 +109,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         scaleMargin;
 
     final Widget selectButton = ExcludeSemantics(
-      child: Radio<BoxFit>(
+      child: EzRadio<BoxFit>(
         groupValue: selected,
         value: fit,
         onChanged: (BoxFit? value) {
