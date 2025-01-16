@@ -278,7 +278,8 @@ ThemeData ezThemeData(Brightness brightness) {
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor:
+            colorScheme.surface.withValues(alpha: textBackgroundOpacity),
         foregroundColor: colorScheme.onSurface,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
