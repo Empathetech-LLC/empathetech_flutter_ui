@@ -1166,6 +1166,8 @@ class _LicensePicker extends StatelessWidget {
     final EzMargin margin = EzMargin();
     final EzMargin rowMargin = EzMargin(vertical: false);
 
+    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
     Widget radio({
       required String title,
       required String value,
@@ -1187,28 +1189,44 @@ class _LicensePicker extends StatelessWidget {
       );
     }
 
+    final Widget title = Text(
+      'LICENSE',
+      style: textTheme.bodyLarge,
+      textAlign: TextAlign.start,
+    );
+
+    final Widget hideButton = IconButton(
+      onPressed: onHide,
+      icon: EzIcon(
+        visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+      ),
+    );
+
+    const Widget tip = EzToolTipper('https://choosealicense.com/');
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // Title and show buttons
-        EzRow(
-          children: <Widget>[
-            Text(
-              'LICENSE',
-              style: textTheme.bodyLarge,
-              textAlign: TextAlign.start,
-            ),
-            rowMargin,
-            IconButton(
-              onPressed: onHide,
-              icon: EzIcon(
-                visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-              ),
-            ),
-            rowMargin,
-            const EzToolTipper('https://choosealicense.com/'),
-          ],
+        EzScrollView(
+          mainAxisSize: MainAxisSize.min,
+          scrollDirection: Axis.horizontal,
+          children: isLefty
+              ? <Widget>[
+                  hideButton,
+                  rowMargin,
+                  title,
+                  rowMargin,
+                  tip,
+                ]
+              : <Widget>[
+                  title,
+                  rowMargin,
+                  hideButton,
+                  rowMargin,
+                  tip,
+                ],
         ),
 
         // Options
