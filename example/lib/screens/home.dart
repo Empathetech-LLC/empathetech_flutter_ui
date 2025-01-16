@@ -249,17 +249,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   validName = true;
                   namePreview = nameController.text;
 
-                  if (!removeVSC) {
-                    vscController.text = vscController.text.replaceAll(
-                      previous.replaceAll('_', '-'),
-                      namePreview.replaceAll('_', '-'),
-                    );
-                  }
+                  vscController.text = vscController.text.replaceAll(
+                    previous.replaceAll('_', '-'),
+                    namePreview.replaceAll('_', '-'),
+                  );
 
-                  if (!removeCopyright) {
-                    copyrightController.text = copyrightController.text
-                        .replaceAll(previous, namePreview);
-                  }
+                  copyrightController.text = copyrightController.text
+                      .replaceAll(previous, namePreview);
                 }),
                 onFailure: () => setState(() => validName = false),
               ),
@@ -283,10 +279,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   final String previous = pubPreview;
                   pubPreview = pubController.text;
 
-                  if (!removeCopyright) {
-                    copyrightController.text = copyrightController.text
-                        .replaceAll(previous, pubPreview);
-                  }
+                  copyrightController.text =
+                      copyrightController.text.replaceAll(previous, pubPreview);
                 });
                 return null;
               },
@@ -556,7 +550,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       ],
                     ),
                   ),
-                  if (!removeCopyright) spacer,
+                  spacer,
 
                   // Copyright config
                   _AdvancedSettingsField(
@@ -569,6 +563,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         setState(() => showCopyright = !showCopyright),
                     removed: removeCopyright,
                     onRemove: () => setState(() => removeCopyright = true),
+                    onRestore: () => setState(() => removeCopyright = false),
                   ),
                   spacer,
 
@@ -583,7 +578,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       if (picked != null) setState(() => license = picked);
                     },
                   ),
-                  if (!removeL10n) spacer,
+                  spacer,
 
                   // l10n config
                   _AdvancedSettingsField(
@@ -595,8 +590,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     onHide: () => setState(() => showL10n = !showL10n),
                     removed: removeL10n,
                     onRemove: () => setState(() => removeL10n = true),
+                    onRestore: () => setState(() => removeL10n = false),
                   ),
-                  if (!removeAnalysis) spacer,
+                  spacer,
 
                   // Analysis options config
                   _AdvancedSettingsField(
@@ -608,8 +604,9 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
                     removed: removeAnalysis,
                     onRemove: () => setState(() => removeAnalysis = true),
+                    onRestore: () => setState(() => removeAnalysis = false),
                   ),
-                  if (!removeVSC) spacer,
+                  spacer,
 
                   // VS Code launch config
                   _AdvancedSettingsField(
@@ -621,6 +618,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                     onHide: () => setState(() => showVSC = !showVSC),
                     removed: removeVSC,
                     onRemove: () => setState(() => removeVSC = true),
+                    onRestore: () => setState(() => removeVSC = false),
                   ),
                 ],
               ),
@@ -1038,6 +1036,7 @@ class _AdvancedSettingsField extends StatelessWidget {
   final void Function() onHide;
   final bool removed;
   final void Function()? onRemove;
+  final void Function()? onRestore;
 
   const _AdvancedSettingsField({
     required this.textTheme,
@@ -1048,72 +1047,96 @@ class _AdvancedSettingsField extends StatelessWidget {
     required this.onHide,
     required this.removed,
     required this.onRemove,
+    required this.onRestore,
   });
 
   @override
   Widget build(BuildContext context) {
-    final EzSpacer rowMargin = EzMargin(vertical: false);
+    late final EzSpacer rowMargin = EzMargin(vertical: false);
+    late final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    return Visibility(
-      visible: !removed,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          // Title and show buttons
-          EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            scrollDirection: Axis.horizontal,
-            reverseHands: true,
-            children: <Widget>[
-              Text(
-                title,
-                style: textTheme.bodyLarge,
-                textAlign: TextAlign.start,
-              ),
-              rowMargin,
-              IconButton(
-                onPressed: onHide,
-                icon: EzIcon(
-                  visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                ),
-              ),
-              if (onRemove != null) ...<Widget>[
-                rowMargin,
-                IconButton(
-                  onPressed: onRemove,
-                  icon: EzIcon(PlatformIcons(context).delete),
-                ),
-              ],
-              if (tip != null) ...<Widget>[
-                rowMargin,
-                EzToolTipper(tip!),
-              ],
-            ],
-          ),
+    late final Widget titleText = Text(
+      title,
+      style: textTheme.titleLarge,
+      textAlign: TextAlign.start,
+    );
 
-          // Form field
-          Visibility(
-            visible: visible,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                EzMargin(),
-                ConstrainedBox(
-                  constraints: ezTextFieldConstraints(context),
-                  child: TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    controller: controller,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+    late final Widget hideButton = IconButton(
+      onPressed: onHide,
+      icon: EzIcon(
+        visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
       ),
     );
+
+    late final Widget removeButton = IconButton(
+      onPressed: onRemove,
+      icon: EzIcon(PlatformIcons(context).delete),
+    );
+
+    return removed
+        ? EzTextIconButton(
+            onPressed: onRestore,
+            icon: EzIcon(Icons.undo),
+            label: "Restore '$title'",
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // Title and show buttons
+              EzScrollView(
+                mainAxisSize: MainAxisSize.min,
+                scrollDirection: Axis.horizontal,
+                children: isLefty
+                    ? <Widget>[
+                        hideButton,
+                        rowMargin,
+                        titleText,
+                        if (onRemove != null) ...<Widget>[
+                          rowMargin,
+                          removeButton,
+                        ],
+                        if (tip != null) ...<Widget>[
+                          rowMargin,
+                          EzToolTipper(tip!),
+                        ],
+                      ]
+                    : <Widget>[
+                        titleText,
+                        rowMargin,
+                        hideButton,
+                        if (onRemove != null) ...<Widget>[
+                          rowMargin,
+                          removeButton,
+                        ],
+                        if (tip != null) ...<Widget>[
+                          rowMargin,
+                          EzToolTipper(tip!),
+                        ],
+                      ],
+              ),
+
+              // Form field
+              Visibility(
+                visible: visible,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    EzMargin(),
+                    ConstrainedBox(
+                      constraints: ezTextFieldConstraints(context),
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        controller: controller,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
   }
 }
 
