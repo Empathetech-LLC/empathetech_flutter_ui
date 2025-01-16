@@ -18,9 +18,12 @@ class EzLink extends StatefulWidget {
   /// Defaults to [ColorScheme.primary]
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
   /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
   final Color? decorationColor;
+
+  /// Optional override
+  /// Especially useful for [EzInlineLink]
+  final Color? backgroundColor;
 
   final TextAlign? textAlign;
 
@@ -55,6 +58,7 @@ class EzLink extends StatefulWidget {
     this.style,
     this.textColor,
     this.decorationColor,
+    this.backgroundColor,
     this.textAlign,
     this.padding,
     this.onTap,
@@ -109,6 +113,7 @@ class _EzLinkState extends State<EzLink> {
             style: TextButton.styleFrom(
               padding: widget.padding,
               overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+              backgroundColor: widget.backgroundColor,
             ),
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
