@@ -24,6 +24,7 @@ class SuccessHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Headline
           Flexible(
@@ -64,22 +65,21 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'would you like to...',
-              style: style,
-              textAlign: TextAlign.center,
-            ),
-            const EzSpacer(),
-            EzElevatedIconButton(
-              onPressed: emulate,
-              icon: EzIcon(PlatformIcons(context).playArrowSolid),
-              label: 'Run it',
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'would you like to...',
+            style: style,
+            textAlign: TextAlign.center,
+          ),
+          const EzSpacer(),
+          EzElevatedIconButton(
+            onPressed: emulate,
+            icon: EzIcon(PlatformIcons(context).playArrowSolid),
+            label: 'Run it',
+          ),
+        ],
       );
 }

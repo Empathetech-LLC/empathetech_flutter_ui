@@ -331,65 +331,69 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EzScrollView(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SuccessHeader(
-                textTheme: textTheme,
-                message:
-                    '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
-              ),
-              spacer,
-              RunOption(
-                projDir: projDir,
-                style: subTitle,
-                emulate: () async {
-                  if (genState == GeneratorState.running) return;
+          child: Center(
+            child: EzScrollView(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SuccessHeader(
+                  textTheme: textTheme,
+                  message:
+                      '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+                ),
+                spacer,
+                RunOption(
+                  projDir: projDir,
+                  style: subTitle,
+                  emulate: () async {
+                    if (genState == GeneratorState.running) return;
 
-                  setState(() => genState = GeneratorState.running);
-                  ezSnackBar(
-                    context: context,
-                    message: 'First run usually takes awhile',
-                  );
+                    setState(() => genState = GeneratorState.running);
+                    ezSnackBar(
+                      context: context,
+                      message: 'First run usually takes awhile',
+                    );
 
-                  await ezCLI(
-                    'flutter run -d ${device()}',
-                    dir: projDir,
-                    onSuccess: () =>
-                        setState(() => genState = GeneratorState.successful),
-                    onFailure: onFailure,
-                    readout: readout,
-                  );
-                },
-              ),
-            ],
+                    await ezCLI(
+                      'flutter run -d ${device()}',
+                      dir: projDir,
+                      onSuccess: () =>
+                          setState(() => genState = GeneratorState.successful),
+                      onFailure: onFailure,
+                      readout: readout,
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         );
       case GeneratorState.failed:
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EzScrollView(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FailureHeader(
-                textTheme: textTheme,
-                message: '\n$failureMessage',
-              ),
-              if (showDelete == true) ...<Widget>[
-                spacer,
-                DeleteOption(
-                  appName: widget.config.appName,
-                  platform: platform,
-                  dir: workDir,
-                  style: subTitle,
+          child: Center(
+            child: EzScrollView(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FailureHeader(
+                  textTheme: textTheme,
+                  message: '\n$failureMessage',
                 ),
+                if (showDelete == true) ...<Widget>[
+                  spacer,
+                  DeleteOption(
+                    appName: widget.config.appName,
+                    platform: platform,
+                    dir: workDir,
+                    style: subTitle,
+                  ),
+                ],
+                if (showDelete == null) ...<Widget>[
+                  spacer,
+                  LinkOption(subTitle),
+                ],
               ],
-              if (showDelete == null) ...<Widget>[
-                spacer,
-                LinkOption(subTitle),
-              ],
-            ],
+            ),
           ),
         );
     }

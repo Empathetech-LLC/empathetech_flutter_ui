@@ -76,52 +76,50 @@ class DeleteOption extends StatelessWidget {
   static const EzSpacer spacer = EzSpacer();
 
   @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'would you like to...',
-              style: style,
-              textAlign: TextAlign.center,
-            ),
-            spacer,
-            EzElevatedIconButton(
-              onPressed: () => ezCLI(
-                'rm -rf $appName',
-                winCMD: 'rmdir /s /q $appName',
-                platform: platform,
-                dir: dir,
-                onSuccess: () async {
-                  await ezSnackBar(
-                    context: context,
-                    message: 'Success; fingers crossed for next time!',
-                  ).closed;
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'would you like to...',
+            style: style,
+            textAlign: TextAlign.center,
+          ),
+          spacer,
+          EzElevatedIconButton(
+            onPressed: () => ezCLI(
+              'rm -rf $appName',
+              winCMD: 'rmdir /s /q $appName',
+              platform: platform,
+              dir: dir,
+              onSuccess: () async {
+                await ezSnackBar(
+                  context: context,
+                  message: 'Success; fingers crossed for next time!',
+                ).closed;
 
-                  if (context.mounted) Navigator.of(context).pop();
-                },
-                onFailure: (String message) async {
-                  await ezSnackBar(
-                    context: context,
-                    message:
-                        'Another failure; you should probably take over...',
-                  ).closed;
+                if (context.mounted) Navigator.of(context).pop();
+              },
+              onFailure: (String message) async {
+                await ezSnackBar(
+                  context: context,
+                  message: 'Another failure; you should probably take over...',
+                ).closed;
 
-                  if (context.mounted) Navigator.of(context).pop();
-                },
-                readout: readout,
-              ),
-              icon: EzIcon(PlatformIcons(context).delete),
-              label: 'Wipe it',
+                if (context.mounted) Navigator.of(context).pop();
+              },
+              readout: readout,
             ),
-            spacer,
-            EzElevatedIconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: EzIcon(PlatformIcons(context).back),
-              label: 'Leave it',
-            ),
-          ],
-        ),
+            icon: EzIcon(PlatformIcons(context).delete),
+            label: 'Wipe it',
+          ),
+          spacer,
+          EzElevatedIconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: EzIcon(PlatformIcons(context).back),
+            label: 'Leave it',
+          ),
+        ],
       );
 }
 
@@ -137,22 +135,21 @@ class LinkOption extends StatelessWidget {
       'https://docs.flutter.dev/get-started/install';
 
   @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'would you like to...',
-              style: style,
-              textAlign: TextAlign.center,
-            ),
-            spacer,
-            EzElevatedIconButton(
-              onPressed: () => launchUrl(Uri.parse(installFlutter)),
-              icon: EzIcon(Icons.computer),
-              label: 'Install it',
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'would you like to...',
+            style: style,
+            textAlign: TextAlign.center,
+          ),
+          spacer,
+          EzElevatedIconButton(
+            onPressed: () => launchUrl(Uri.parse(installFlutter)),
+            icon: EzIcon(Icons.computer),
+            label: 'Install it',
+          ),
+        ],
       );
 }

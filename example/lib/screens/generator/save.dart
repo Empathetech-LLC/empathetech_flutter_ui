@@ -99,9 +99,11 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
           ),
         );
       case GeneratorState.failed:
-        return FailureHeader(
-          textTheme: textTheme,
-          message: '\n$failureMessage',
+        return Center(
+          child: FailureHeader(
+            textTheme: textTheme,
+            message: '\n$failureMessage',
+          ),
         );
     }
   }
