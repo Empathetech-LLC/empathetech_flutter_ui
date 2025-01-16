@@ -369,7 +369,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: Column(
+          child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FailureHeader(
