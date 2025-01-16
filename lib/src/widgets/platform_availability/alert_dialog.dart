@@ -217,7 +217,10 @@ class EzCupertinoAction extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: EzTextButton(
-        style: TextButton.styleFrom(shape: const LinearBorder()),
+        style: TextButton.styleFrom(
+          shape: const LinearBorder(),
+          backgroundColor: Colors.transparent,
+        ),
         onPressed: onPressed,
         text: text,
         textStyle: textStyle,
