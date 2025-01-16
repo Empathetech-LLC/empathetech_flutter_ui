@@ -25,11 +25,6 @@ class EzImageSetting extends StatefulWidget {
   /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
   final bool allowClear;
 
-  /// Optional [EzAlertDialog] title override
-  /// Defaults to [label]
-  /// Used with [EFUILang.isDialogTitle]
-  final String? dialogTitleLabel;
-
   /// Who made this/where did it come from?
   /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
   final String? credits;
@@ -50,7 +45,6 @@ class EzImageSetting extends StatefulWidget {
     required this.configKey,
     required this.label,
     this.allowClear = true,
-    this.dialogTitleLabel,
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
@@ -205,8 +199,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (!kIsWeb &&
         (platform == TargetPlatform.android ||
             platform == TargetPlatform.iOS)) {
-      options.addAll(<Widget>[
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await saveImage(
               context: context,
@@ -221,15 +216,15 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: EzIcon(PlatformIcons(context).photoCamera),
           label: l10n.isFromCamera,
         ),
-        spacer,
-      ]);
+      ));
     }
 
     // From file
     // Doesn't work on web
     if (!kIsWeb) {
-      options.addAll(<Widget>[
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await saveImage(
               context: context,
@@ -244,14 +239,14 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: EzIcon(PlatformIcons(context).folder),
           label: l10n.isFromFile,
         ),
-        spacer,
-      ]);
+      ));
     }
 
     // From network
     // Works everywhere
-    options.addAll(<Widget>[
-      EzElevatedIconButton(
+    options.add(Padding(
+      padding: EzInsets.col(spacing),
+      child: EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext networkDialogContext) {
@@ -331,13 +326,13 @@ class _ImageSettingState extends State<EzImageSetting> {
         icon: EzIcon(Icons.computer_outlined),
         label: l10n.isFromNetwork,
       ),
-    ]);
+    ));
 
     // Reset
     if (defaultPath != null && defaultPath != noImageValue) {
-      options.addAll(<Widget>[
-        spacer,
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.remove(widget.configKey);
@@ -349,14 +344,14 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: EzIcon(PlatformIcons(context).refresh),
           label: l10n.isResetIt,
         ),
-      ]);
+      ));
     }
 
     // Clear (optional)
     if (widget.allowClear) {
-      options.addAll(<Widget>[
-        spacer,
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
@@ -368,14 +363,14 @@ class _ImageSettingState extends State<EzImageSetting> {
           icon: EzIcon(PlatformIcons(context).clear),
           label: l10n.isClearIt,
         ),
-      ]);
+      ));
     }
 
     // Update theme (optional)
     if (widget.updateTheme != null && widget.updateThemeOption) {
-      options.addAll(<Widget>[
-        spacer,
-        EzRow(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzRow(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             // Label
@@ -396,36 +391,27 @@ class _ImageSettingState extends State<EzImageSetting> {
               },
             ),
           ],
-        )
-      ]);
+        ),
+      ));
     }
 
     return options;
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.configKey]
+  /// Opens an [BottomSheet] to pick the [ImageSource] for updating [widget.configKey]
   /// Returns the path, if any, to the new [Image]
-  Future<dynamic> chooseImage(BuildContext context) {
-    return showPlatformDialog(
-      context: context,
-      builder: (_) => StatefulBuilder(
-        builder: (BuildContext dialogContext, StateSetter dialogState) {
-          return EzAlertDialog(
-            title: Text(
-              l10n.isDialogTitle(
-                widget.dialogTitleLabel ?? widget.label.toLowerCase(),
-              ),
-              textAlign: TextAlign.center,
+  Future<dynamic> chooseImage(BuildContext context) => showModalBottomSheet(
+        context: context,
+        builder: (BuildContext modalContext) => StatefulBuilder(
+          builder: (_, StateSetter modalState) => EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            children: sourceOptions(
+              dialogContext: modalContext,
+              dialogState: modalState,
             ),
-            contents: sourceOptions(
-              dialogContext: dialogContext,
-              dialogState: dialogState,
-            ),
-          );
-        },
-      ),
-    );
-  }
+          ),
+        ),
+      );
 
   /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
   Future<void> chooseFit() {
