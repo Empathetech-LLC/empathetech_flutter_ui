@@ -644,7 +644,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                       ? Icon(
                           PlatformIcons(context).edit,
                           color: theme.colorScheme.primary,
-                          size: theme.textTheme.headlineLarge?.fontSize,
+                          size: EzConfig.get(iconSizeKey),
                         )
                       : null,
             ),
