@@ -81,8 +81,11 @@ class _SaveScreenState extends State<SaveScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
+        final double iconScale =
+            (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
+
         return SizedBox(
-          height: heightOf(context) / 3,
+          height: heightOf(context) / 3 * iconScale,
           width: double.infinity,
           child: const EmpathetechLoadingAnimation(
             height: double.infinity,
