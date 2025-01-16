@@ -410,12 +410,6 @@ abstract class EFUILang {
   /// **'Language'**
   String get ssLanguage;
 
-  /// No description provided for @ssLanguages.
-  ///
-  /// In en, this message translates to:
-  /// **'Languages'**
-  String get ssLanguages;
-
   /// No description provided for @ssLangHint.
   ///
   /// In en, this message translates to:
@@ -793,12 +787,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Update the {title} image'**
   String isButtonHint(Object title);
-
-  /// No description provided for @isDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How should the {title} image be updated?'**
-  String isDialogTitle(Object title);
 
   /// No description provided for @isFromFile.
   ///

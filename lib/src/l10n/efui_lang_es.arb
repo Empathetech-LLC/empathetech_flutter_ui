@@ -76,7 +76,6 @@
   "ssDominantHand": "Mano preferente",
   
   "ssLanguage": "Idioma",
-  "ssLanguages": "Idiomas",
   "ssLangHint": "Idioma de la aplicación",
 
   "ssRandom": "Aleatorizar",
@@ -171,7 +170,6 @@
   "isImage": "imagen",
 
   "isButtonHint": "Actualizar la imagen {title}",
-  "isDialogTitle": "¿Cómo quieres actualizar la imagen {title}?",
   "isFromFile": "Usando un archivo",
   "isFromCamera": "Usando la cámara",
   "isFromNetwork": "Usando un link",

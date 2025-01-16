@@ -178,9 +178,6 @@ class EFUILangFr extends EFUILang {
   String get ssLanguage => 'Langue';
 
   @override
-  String get ssLanguages => 'Langues';
-
-  @override
   String get ssLangHint => 'Langue de l\'appli';
 
   @override
@@ -381,11 +378,6 @@ class EFUILangFr extends EFUILang {
   @override
   String isButtonHint(Object title) {
     return 'Mettre à jour l\'image $title';
-  }
-
-  @override
-  String isDialogTitle(Object title) {
-    return 'Comment l\'image $title doit-elle être mise à jour ?';
   }
 
   @override

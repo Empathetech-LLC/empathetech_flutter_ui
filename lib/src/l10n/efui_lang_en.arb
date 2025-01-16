@@ -76,7 +76,6 @@
   "ssDominantHand": "Dominant hand",
   
   "ssLanguage": "Language",
-  "ssLanguages": "Languages",
   "ssLangHint": "App language",
 
   "ssRandom": "Randomize",
@@ -171,7 +170,6 @@
   "isImage": "image",
 
   "isButtonHint": "Update the {title} image",
-  "isDialogTitle": "How should the {title} image be updated?",
   "isFromFile": "From file",
   "isFromCamera": "From camera",
   "isFromNetwork": "From URL",
