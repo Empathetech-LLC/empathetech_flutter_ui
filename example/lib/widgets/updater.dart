@@ -37,7 +37,23 @@ class _EzUpdaterState extends State<EzUpdater> {
     if (response.statusCode != 200) return;
 
     latestVersion = response.body;
-    if (latestVersion != appVersion) setState(() => isLatest = false);
+    if (latestVersion != appVersion && latestVersion != null) {
+      final List<int> latestDigits =
+          latestVersion!.split('.').map(int.parse).toList();
+
+      if (latestDigits.length != 3) return;
+
+      final List<int> appDigits = appVersion.split('.').map(int.parse).toList();
+
+      for (int i = 0; i < latestDigits.length; i++) {
+        if (latestDigits[i] > appDigits[i]) {
+          setState(() => isLatest = false);
+          return;
+        } else if (latestDigits[i] < appDigits[i]) {
+          return;
+        }
+      }
+    }
   }
 
   @override
