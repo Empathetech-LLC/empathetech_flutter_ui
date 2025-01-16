@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
                 onFailure: () => setState(() => validName = false),
               ),
-              hintText: 'my_app',
+              hintText: 'example_app',
             ),
             spacer,
 
