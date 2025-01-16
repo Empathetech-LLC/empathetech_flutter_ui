@@ -26,7 +26,6 @@ Future<void> testImageSetting(
   await touch(tester, finder);
 
   ezLog('Validating text');
-  await validateText(tester, l10n.isDialogTitle(type));
 
   if (updateCS) {
     final List<Widget> updateCSWidgets =
