@@ -820,7 +820,8 @@ class SettingsHomeScreen extends StatelessWidget {
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
-          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}                                
+          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}
+          allowRandom: true,                                
         ),
       );
 }
