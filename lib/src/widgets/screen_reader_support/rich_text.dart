@@ -8,18 +8,46 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRichText extends StatelessWidget {
+  /// Whether a default [EzTextBackground] should be included
+  final bool textBackground;
+
+  /// [Text.rich] passthrough
   final List<InlineSpan> children;
+
+  /// [Text.rich] passthrough
   final TextStyle? style;
+
+  /// [Text.rich] passthrough
   final TextAlign textAlign;
+
+  /// [Text.rich] passthrough
   final TextDirection? textDirection;
+
+  /// [Text.rich] passthrough
   final Locale? locale;
+
+  /// [Text.rich] passthrough
   final bool softWrap;
+
+  /// [Text.rich] passthrough
   final TextOverflow overflow;
+
+  /// [Text.rich] passthrough
   final TextScaler textScaler;
+
+  /// [Text.rich] passthrough
   final int? maxLines;
+
+  /// [Text.rich] passthrough
   final StrutStyle? strutStyle;
+
+  /// [Text.rich] passthrough
   final TextWidthBasis textWidthBasis;
+
+  /// [Text.rich] passthrough
   final TextHeightBehavior? textHeightBehavior;
+
+  /// [Text.rich] passthrough
   final Color? selectionColor;
 
   /// [Text.rich] wrapper with custom [Semantics] behavior
@@ -27,6 +55,7 @@ class EzRichText extends StatelessWidget {
   const EzRichText(
     this.children, {
     super.key,
+    this.textBackground = true,
     this.style,
     this.textAlign = TextAlign.start,
     this.textDirection,
@@ -68,26 +97,28 @@ class EzRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Text text = Text.rich(
+      TextSpan(children: children, semanticsLabel: null),
+      style: style,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      locale: locale,
+      softWrap: softWrap,
+      overflow: overflow,
+      textScaler: textScaler,
+      maxLines: maxLines,
+      strutStyle: strutStyle,
+      semanticsLabel: null,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+    );
+
     return Semantics(
       label: _semanticsLabel(),
       container: true,
       explicitChildNodes: true,
-      child: Text.rich(
-        TextSpan(children: children, semanticsLabel: null),
-        style: style,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        locale: locale,
-        softWrap: softWrap,
-        overflow: overflow,
-        textScaler: textScaler,
-        maxLines: maxLines,
-        strutStyle: strutStyle,
-        semanticsLabel: null,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-        selectionColor: selectionColor,
-      ),
+      child: textBackground ? EzTextBackground(text) : text,
     );
   }
 }
