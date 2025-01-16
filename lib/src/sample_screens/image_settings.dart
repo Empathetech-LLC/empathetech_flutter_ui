@@ -67,12 +67,10 @@ class _ImageSettingsState extends State<ImageSettings> {
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
-          EzTextBackground(
-            Text(
-              l10n.gEditingTheme(themeProfile),
-              style: Theme.of(context).textTheme.labelLarge,
-              textAlign: TextAlign.center,
-            ),
+          EzText(
+            l10n.gEditingTheme(themeProfile),
+            style: Theme.of(context).textTheme.labelLarge,
+            textAlign: TextAlign.center,
           ),
           EzSpacer(space: EzConfig.get(marginKey)),
 

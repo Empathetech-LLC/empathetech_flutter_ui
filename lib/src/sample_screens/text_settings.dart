@@ -942,12 +942,10 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           mainAxisSize: MainAxisSize.min,
           primary: false,
           children: <Widget>[
-            EzTextBackground(
-              Text(
-                l10n.gEditing,
-                style: labelProvider.value,
-                textAlign: TextAlign.center,
-              ),
+            EzText(
+              l10n.gEditing,
+              style: labelProvider.value,
+              textAlign: TextAlign.center,
             ),
             EzMargin(),
             EzDropdownMenu<TextSettingType>(
@@ -1031,6 +1029,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               ),
               EzPlainText(text: l10n.tsDisplayP2),
             ],
+            textBackground: false,
             style: displayProvider.value,
             textAlign: TextAlign.center,
           ),
@@ -1058,6 +1057,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               ),
               EzPlainText(text: l10n.tsHeadlineP2),
             ],
+            textBackground: false,
             style: headlineProvider.value,
             textAlign: TextAlign.center,
           ),
@@ -1084,6 +1084,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 semanticsLabel: l10n.tsLinkHint(title),
               ),
             ],
+            textBackground: false,
             style: titleProvider.value,
             textAlign: TextAlign.center,
           ),
@@ -1111,6 +1112,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               ),
               EzPlainText(text: l10n.tsBodyP2),
             ],
+            textBackground: false,
             style: bodyProvider.value,
             textAlign: TextAlign.center,
           ),
@@ -1138,6 +1140,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
               ),
               EzPlainText(text: l10n.tsLabelP2),
             ],
+            textBackground: false,
             style: labelProvider.value,
             textAlign: TextAlign.center,
           ),

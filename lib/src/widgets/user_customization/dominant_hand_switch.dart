@@ -61,12 +61,10 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        EzTextBackground(
-          Text(
-            l10n.ssDominantHand,
-            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+        EzText(
+          l10n.ssDominantHand,
+          style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
+          textAlign: TextAlign.center,
         ),
         EzSpacer(space: EzConfig.get(marginKey)),
 

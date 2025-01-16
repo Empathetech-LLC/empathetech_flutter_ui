@@ -68,12 +68,10 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        EzTextBackground(
-          Text(
-            l10n.ssThemeMode,
-            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+        EzText(
+          l10n.ssThemeMode,
+          style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
+          textAlign: TextAlign.center,
         ),
         EzMargin(),
 
