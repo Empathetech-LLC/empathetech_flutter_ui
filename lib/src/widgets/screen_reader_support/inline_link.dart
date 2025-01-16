@@ -16,9 +16,11 @@ class EzInlineLink extends WidgetSpan {
   /// Optional [Color] to overwrite the default [ColorScheme.primary]
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
   /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
   final Color? decorationColor;
+
+  /// Defaults to [Colors.transparent]
+  final Color backgroundColor;
 
   final TextAlign? textAlign;
 
@@ -53,6 +55,7 @@ class EzInlineLink extends WidgetSpan {
     this.key,
     this.textColor,
     this.decorationColor,
+    this.backgroundColor = Colors.transparent,
     this.textAlign,
     this.onTap,
     this.url,
@@ -69,6 +72,7 @@ class EzInlineLink extends WidgetSpan {
             style: style,
             textColor: textColor,
             decorationColor: decorationColor,
+            backgroundColor: backgroundColor,
             textAlign: textAlign,
             padding: EdgeInsets.zero,
             onTap: onTap,
