@@ -93,16 +93,8 @@ class EzAlertDialog extends PlatformAlertDialog {
                 isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
             // General
-            actionsPadding: EdgeInsets.only(
-              right: isLefty ? 0 : spacing,
-              left: isLefty ? spacing : 0,
-              top: spacing / 2,
-              bottom: spacing,
-            ),
-            buttonPadding: EdgeInsets.only(
-              right: isLefty ? 0 : spacing,
-              left: isLefty ? spacing : 0,
-            ),
+            actionsPadding: EzInsets.wrap(spacing),
+            buttonPadding: EdgeInsets.zero,
             iconPadding: EdgeInsets.zero,
             insetPadding: EdgeInsets.all(margin),
           );
