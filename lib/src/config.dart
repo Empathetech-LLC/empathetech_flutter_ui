@@ -296,7 +296,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     final Random random = Random();
 
-    double getScaler() => (random.nextDouble() * 1.5) + 0.5;
+    double getScalar() => (random.nextDouble() * 1.5) + 0.5;
 
     // Update global settings //
 
@@ -328,14 +328,14 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     final String attentionStyle =
         styleOptions[random.nextInt(styleOptions.length)];
-    final double attentionScale = getScaler();
+    final double attentionScale = getScalar();
 
     final String descriptionStyle =
         styleOptions[random.nextInt(styleOptions.length)];
-    final double descriptionScale = getScaler();
+    final double descriptionScale = getScalar();
 
     await setString(displayFontFamilyKey, attentionStyle);
-    await setDouble(displayFontSizeKey, 42.0 * attentionScale);
+    await setDouble(displayFontSizeKey, defaultDisplaySize * attentionScale);
     await setBool(displayBoldedKey, false);
     await setBool(displayItalicizedKey, false);
     await setBool(displayUnderlinedKey, random.nextBool());
@@ -363,7 +363,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setDouble(titleWordSpacingKey, defaultWordSpacing);
 
     await setString(bodyFontFamilyKey, descriptionStyle);
-    await setDouble(bodyFontSizeKey, 16.0 * descriptionScale);
+    await setDouble(bodyFontSizeKey, defaultBodySize * descriptionScale);
     await setBool(bodyBoldedKey, false);
     await setBool(bodyItalicizedKey, false);
     await setBool(bodyUnderlinedKey, false);
@@ -372,7 +372,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setDouble(bodyWordSpacingKey, defaultWordSpacing);
 
     await setString(labelFontFamilyKey, descriptionStyle);
-    await setDouble(labelFontSizeKey, 14.0 * descriptionScale);
+    await setDouble(labelFontSizeKey, defaultLabelSize * descriptionScale);
     await setBool(labelBoldedKey, false);
     await setBool(labelItalicizedKey, false);
     await setBool(labelUnderlinedKey, false);
@@ -380,11 +380,15 @@ Must be one of [int, bool, double, String, List<String>]''');
     await setDouble(labelLetterSpacingKey, defaultLetterSpacing);
     await setDouble(labelWordSpacingKey, defaultWordSpacing);
 
+    // Leave text background opacity as-is
+
+    await setDouble(iconSizeKey, defaultIconSize * getScalar());
+
     // Update layout settings //
 
-    await setDouble(marginKey, defaultMargin * getScaler());
-    await setDouble(paddingKey, defaultPadding * getScaler());
-    await setDouble(spacingKey, defaultSpacing * getScaler());
+    await setDouble(marginKey, defaultMargin * getScalar());
+    await setDouble(paddingKey, defaultPadding * getScalar());
+    await setDouble(spacingKey, defaultSpacing * getScalar());
 
     await setBool(hideScrollKey, random.nextBool());
 
