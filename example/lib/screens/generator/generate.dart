@@ -425,7 +425,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
           EzRow(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
+              EzText(
                 'Console output',
                 style: textTheme.titleLarge,
                 textAlign: TextAlign.center,

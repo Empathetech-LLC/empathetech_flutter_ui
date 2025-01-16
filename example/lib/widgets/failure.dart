@@ -28,7 +28,7 @@ class FailureHeader extends StatelessWidget {
         children: <Widget>[
           // Headline
           Flexible(
-            child: Text(
+            child: EzText(
               'Failure',
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
@@ -37,7 +37,7 @@ class FailureHeader extends StatelessWidget {
 
           // Error message
           Flexible(
-            child: Text(
+            child: EzText(
               message,
               style: subTitleStyle(textTheme),
               textAlign: TextAlign.center,
@@ -80,7 +80,7 @@ class DeleteOption extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          EzText(
             'would you like to...',
             style: style,
             textAlign: TextAlign.center,
@@ -139,7 +139,7 @@ class LinkOption extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          EzText(
             'would you like to...',
             style: style,
             textAlign: TextAlign.center,

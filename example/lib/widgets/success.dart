@@ -28,7 +28,7 @@ class SuccessHeader extends StatelessWidget {
         children: <Widget>[
           // Headline
           Flexible(
-            child: Text(
+            child: EzText(
               'Success!',
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
@@ -37,7 +37,7 @@ class SuccessHeader extends StatelessWidget {
 
           // Where to go next
           Flexible(
-            child: Text(
+            child: EzText(
               message,
               style: subTitleStyle(textTheme),
               textAlign: TextAlign.center,
@@ -69,7 +69,7 @@ class RunOption extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          EzText(
             'would you like to...',
             style: style,
             textAlign: TextAlign.center,
