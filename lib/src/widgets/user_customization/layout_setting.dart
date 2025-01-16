@@ -120,10 +120,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               style: bodyStyle?.copyWith(color: theme.colorScheme.surface),
               textAlign: TextAlign.center,
             ),
-            margin: EdgeInsets.all(currValue),
+            margin: EzInsets.wrap(currValue),
             backgroundColor: theme.colorScheme.onSurface,
           ),
-          spacer,
+          EzSpacer(space: currValue),
           Container(
             color: theme.colorScheme.onSurface,
             height: heightOf(context) * 0.25,
