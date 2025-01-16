@@ -799,10 +799,12 @@ It is recommended to set a custom color scheme. If you need help building one, t
           pubController.clear();
           pubPreview = 'Your org';
 
+          descriptionController.clear();
+
           domainController.clear();
           exampleDomain = false;
 
-          descriptionController.clear();
+          supportEmailController.clear();
 
           textSettings = true;
           layoutSettings = true;
