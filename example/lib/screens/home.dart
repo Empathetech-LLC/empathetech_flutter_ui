@@ -310,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Flexible(
-                  child: Text(
+                  child: EzText(
                     'Domain name',
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
@@ -342,11 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        'N/A',
-                        style: textTheme.bodyLarge,
-                        textAlign: TextAlign.start,
-                      ),
+                      const EzText('N/A', textAlign: TextAlign.start),
                       EzCheckbox(
                         value: exampleDomain,
                         onChanged: (bool? value) async {
@@ -383,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Flexible(
-                  child: Text(
+                  child: EzText(
                     'Include',
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
@@ -403,7 +399,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   margin,
                   _SettingsCheckbox(
-                    textTheme: textTheme,
                     title: 'Text settings',
                     value: textSettings,
                     onChanged: (bool? value) async {
@@ -413,7 +408,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    textTheme: textTheme,
                     title: 'Layout settings',
                     value: layoutSettings,
                     onChanged: (bool? value) async {
@@ -423,7 +417,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    textTheme: textTheme,
                     title: 'Color settings',
                     value: colorSettings,
                     onChanged: (bool? value) async {
@@ -433,7 +426,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    textTheme: textTheme,
                     title: 'Image settings',
                     value: imageSettings,
                     onChanged: (bool? value) async {
@@ -487,7 +479,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
             EzRow(
               children: <Widget>[
                 Flexible(
-                  child: Text(
+                  child: EzText(
                     'Advanced settings',
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
@@ -559,7 +551,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // Copyright config
                   _AdvancedSettingsField(
-                    textTheme: textTheme,
                     title: 'Copyright notice',
                     tip: 'Will be included at the top of every Dart file',
                     controller: copyrightController,
@@ -574,7 +565,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // LICENSE config
                   _LicensePicker(
-                    textTheme: textTheme,
                     visible: showLicense,
                     onHide: () => setState(() => showLicense = !showLicense),
                     groupValue: license,
@@ -586,7 +576,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // l10n config
                   _AdvancedSettingsField(
-                    textTheme: textTheme,
                     title: 'l10n.yaml',
                     tip: 'Localization (aka translations) config',
                     controller: l10nController,
@@ -600,7 +589,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // Analysis options config
                   _AdvancedSettingsField(
-                    textTheme: textTheme,
                     title: 'analysis_options.yaml',
                     tip: 'Lint rules',
                     controller: analysisController,
@@ -614,7 +602,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // VS Code launch config
                   _AdvancedSettingsField(
-                    textTheme: textTheme,
                     title: '.vscode/launch.json',
                     tip: "Adds launch options to VS Code's debug menu",
                     controller: vscController,
@@ -958,7 +945,7 @@ class _BasicField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget titleText = Text(
+    final Widget titleText = EzText(
       title,
       style: textTheme.titleLarge,
       textAlign: TextAlign.start,
@@ -998,14 +985,11 @@ class _BasicField extends StatelessWidget {
 }
 
 class _SettingsCheckbox extends StatelessWidget {
-  final TextTheme textTheme;
-
   final String title;
   final bool value;
   final void Function(bool?) onChanged;
 
   const _SettingsCheckbox({
-    required this.textTheme,
     required this.title,
     required this.value,
     required this.onChanged,
@@ -1016,13 +1000,7 @@ class _SettingsCheckbox extends StatelessWidget {
     return EzRow(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Flexible(
-          child: Text(
-            title,
-            style: textTheme.bodyLarge,
-            textAlign: TextAlign.start,
-          ),
-        ),
+        Flexible(child: EzText(title, textAlign: TextAlign.start)),
         EzCheckbox(
           value: value,
           onChanged: onChanged,
@@ -1033,8 +1011,6 @@ class _SettingsCheckbox extends StatelessWidget {
 }
 
 class _AdvancedSettingsField extends StatelessWidget {
-  final TextTheme textTheme;
-
   final String title;
   final String? tip;
   final TextEditingController controller;
@@ -1045,7 +1021,6 @@ class _AdvancedSettingsField extends StatelessWidget {
   final void Function()? onRestore;
 
   const _AdvancedSettingsField({
-    required this.textTheme,
     required this.title,
     this.tip,
     required this.controller,
@@ -1061,11 +1036,7 @@ class _AdvancedSettingsField extends StatelessWidget {
     late final EzSpacer rowMargin = EzMargin(vertical: false);
     late final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    late final Widget titleText = Text(
-      title,
-      style: textTheme.bodyLarge,
-      textAlign: TextAlign.start,
-    );
+    late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
     late final Widget hideButton = IconButton(
       onPressed: onHide,
@@ -1147,8 +1118,6 @@ class _AdvancedSettingsField extends StatelessWidget {
 }
 
 class _LicensePicker extends StatelessWidget {
-  final TextTheme textTheme;
-
   final bool visible;
   final void Function() onHide;
 
@@ -1156,7 +1125,6 @@ class _LicensePicker extends StatelessWidget {
   final void Function(String?)? onChanged;
 
   const _LicensePicker({
-    required this.textTheme,
     required this.visible,
     required this.onHide,
     required this.groupValue,
@@ -1179,11 +1147,7 @@ class _LicensePicker extends StatelessWidget {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            title,
-            style: textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+          EzText(title, textAlign: TextAlign.center),
           EzRadio<String>(
             value: value,
             groupValue: groupValue,
@@ -1193,11 +1157,7 @@ class _LicensePicker extends StatelessWidget {
       );
     }
 
-    final Widget title = Text(
-      'LICENSE',
-      style: textTheme.bodyLarge,
-      textAlign: TextAlign.start,
-    );
+    const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
 
     final Widget hideButton = IconButton(
       onPressed: onHide,
