@@ -25,7 +25,7 @@ class GenerateScreen extends StatefulWidget {
 class _GenerateScreenState extends State<GenerateScreen> {
   // Gather the theme data //
 
-  static const EzSeparator separator = EzSeparator();
+  static const EzSpacer spacer = EzSpacer();
   static const Widget divider = EzDivider();
 
   late final EFUILang l10n = EFUILang.of(context)!;
@@ -319,11 +319,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
   Widget header() {
     switch (genState) {
       case GeneratorState.running:
-        final double iconScale =
-            (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
-
         return SizedBox(
-          height: (heightOf(context) / 3) * iconScale,
+          height: (heightOf(context) / 3),
           width: double.infinity,
           child: const EmpathetechLoadingAnimation(
             height: double.infinity,
@@ -334,7 +331,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: Column(
+          child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SuccessHeader(
@@ -342,7 +339,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 message:
                     '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
               ),
-              separator,
+              spacer,
               RunOption(
                 projDir: projDir,
                 style: subTitle,
@@ -380,7 +377,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 message: '\n$failureMessage',
               ),
               if (showDelete == true) ...<Widget>[
-                separator,
+                spacer,
                 DeleteOption(
                   appName: widget.config.appName,
                   platform: platform,
@@ -389,7 +386,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 ),
               ],
               if (showDelete == null) ...<Widget>[
-                separator,
+                spacer,
                 LinkOption(subTitle),
               ],
             ],
@@ -467,7 +464,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
             ),
           ),
-          separator,
+          const EzSeparator(),
         ]),
       ),
     );
