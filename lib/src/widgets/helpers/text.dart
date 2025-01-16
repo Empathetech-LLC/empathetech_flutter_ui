@@ -62,3 +62,93 @@ class EzTextBackground extends StatelessWidget {
     );
   }
 }
+
+class EzText extends StatelessWidget {
+  /// [EzTextBackground.useSurface] passthrough
+  final bool useSurface;
+
+  /// [Text.data] passthrough
+  final String data;
+
+  /// [Text.style] passthrough
+  /// Default to [TextTheme.bodyLarge]
+  final TextStyle? style;
+
+  /// [Text.strutStyle] passthrough
+  final StrutStyle? strutStyle;
+
+  /// [Text.textAlign] passthrough
+  final TextAlign? textAlign;
+
+  /// [Text.textDirection] passthrough
+  final TextDirection? textDirection;
+
+  /// [Text.locale] passthrough
+  final Locale? locale;
+
+  /// [Text.softWrap] passthrough
+  final bool? softWrap;
+
+  /// [Text.overflow] passthrough
+  final TextOverflow? overflow;
+
+  /// [Text.textScaler] passthrough
+  final TextScaler? textScaler;
+
+  /// [Text.maxLines] passthrough
+  final int? maxLines;
+
+  /// [Text.semanticsLabel] passthrough
+  final String? semanticsLabel;
+
+  /// [Text.textWidthBasis] passthrough
+  final TextWidthBasis? textWidthBasis;
+
+  /// [Text.textHeightBehavior] passthrough
+  final TextHeightBehavior? textHeightBehavior;
+
+  /// [Text.selectionColor] passthrough
+  final Color? selectionColor;
+
+  /// Quick wrapper for creating [Text] with a default [EzTextBackground]
+  const EzText(
+    this.data, {
+    this.useSurface = false,
+    super.key,
+    this.style,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.softWrap,
+    this.overflow,
+    this.textScaler,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+    this.selectionColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return EzTextBackground(
+      Text(
+        data,
+        style: style ?? Theme.of(context).textTheme.bodyLarge,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+        selectionColor: selectionColor,
+      ),
+      useSurface: useSurface,
+    );
+  }
+}
