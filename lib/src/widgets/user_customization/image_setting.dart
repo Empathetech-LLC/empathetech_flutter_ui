@@ -203,7 +203,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await saveImage(
+            final String? changed = await pickImage(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.camera,
@@ -220,13 +220,13 @@ class _ImageSettingState extends State<EzImageSetting> {
     }
 
     // From file
-    // Doesn't work on web
+    // Doesn't work on Web
     if (!kIsWeb) {
       options.add(Padding(
         padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await saveImage(
+            final String? changed = await pickImage(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.gallery,
@@ -561,7 +561,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               // ignore: use_build_context_synchronously
               context,
               title: l10n.isGetFailed,
-              message: '$result\n\n${l10n.isPermission}',
+              message:
+                  '$result${isUrl(newPath) ? '\n\n${l10n.isPermission}' : ''}',
             );
           }
           return;
@@ -572,8 +573,24 @@ class _ImageSettingState extends State<EzImageSetting> {
             : await EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
 
-      if (widget.showFitOption && currPath != noImageValue) {
-        await chooseFit();
+      if (currPath != noImageValue) {
+        if (widget.showFitOption) await chooseFit();
+
+        // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a change to read things
+        final double? lightOpacity =
+            EzConfig.getDouble(lightTextBackgroundOpacityKey);
+        final double? darkOpacity =
+            EzConfig.getDouble(darkTextBackgroundOpacityKey);
+
+        if (widget.updateTheme == Brightness.light) {
+          if (lightOpacity == null || lightOpacity == 0.0) {
+            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          }
+        } else {
+          if (darkOpacity == null || darkOpacity == 0.0) {
+            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          }
+        }
       }
     }
 
