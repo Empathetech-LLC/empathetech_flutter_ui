@@ -11,6 +11,7 @@ import '../widgets/export.dart';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:email_validator/email_validator.dart';
@@ -51,13 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define build data //
 
   late final TargetPlatform platform = getBasePlatform(context);
-  late final bool isDesktop = platform == TargetPlatform.linux ||
-      platform == TargetPlatform.macOS ||
-      platform == TargetPlatform.windows;
+  late final bool isDesktop = kIsWeb
+      ? false
+      : (platform == TargetPlatform.linux ||
+          platform == TargetPlatform.macOS ||
+          platform == TargetPlatform.windows);
 
-  late final String defaultPath = platform == TargetPlatform.windows
-      ? '${Platform.environment['UserProfile']}\\Documents'
-      : '${Platform.environment['HOME']}/Documents';
+  late final String defaultPath = isDesktop
+      ? (platform == TargetPlatform.windows)
+          ? '${Platform.environment['UserProfile']}\\Documents'
+          : '${Platform.environment['HOME']}/Documents'
+      : '';
 
   final TextEditingController nameController = TextEditingController();
   String namePreview = 'your_app';
@@ -505,7 +510,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  spacer,
+                  if (isDesktop) spacer,
 
                   // Path picker
                   Visibility(
@@ -570,7 +575,6 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // LICENSE config
                   _LicensePicker(
                     textTheme: textTheme,
-                    notificationStyle: subTitle,
                     visible: showLicense,
                     onHide: () => setState(() => showLicense = !showLicense),
                     groupValue: license,
@@ -1057,7 +1061,7 @@ class _AdvancedSettingsField extends StatelessWidget {
 
     late final Widget titleText = Text(
       title,
-      style: textTheme.titleLarge,
+      style: textTheme.bodyLarge,
       textAlign: TextAlign.start,
     );
 
@@ -1142,7 +1146,6 @@ class _AdvancedSettingsField extends StatelessWidget {
 
 class _LicensePicker extends StatelessWidget {
   final TextTheme textTheme;
-  final TextStyle? notificationStyle;
 
   final bool visible;
   final void Function() onHide;
@@ -1152,7 +1155,6 @@ class _LicensePicker extends StatelessWidget {
 
   const _LicensePicker({
     required this.textTheme,
-    required this.notificationStyle,
     required this.visible,
     required this.onHide,
     required this.groupValue,
