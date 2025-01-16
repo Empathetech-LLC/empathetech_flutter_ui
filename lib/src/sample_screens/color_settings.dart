@@ -202,9 +202,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   late final String fromImageLabel = l10n.csSchemeBase;
   late final String fromImageHint = '${l10n.csOptional}: ${l10n.csFromImage}';
 
-  /// Build from image button dialog title
-  late final String titleLabel = '$themeProfile ${l10n.csColorScheme}';
-
   late final Widget fromImageButton = isDark
       ? Semantics(
           button: true,
@@ -213,7 +210,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
             child: EzImageSetting(
               configKey: darkColorSchemeImageKey,
               label: fromImageLabel,
-              dialogTitleLabel: titleLabel,
               updateTheme: Brightness.dark,
               updateThemeOption: false,
               showFitOption: false,
@@ -227,7 +223,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
             child: EzImageSetting(
               configKey: lightColorSchemeImageKey,
               label: fromImageLabel,
-              dialogTitleLabel: titleLabel,
               updateTheme: Brightness.light,
               updateThemeOption: false,
               showFitOption: false,
