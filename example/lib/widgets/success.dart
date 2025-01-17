@@ -34,6 +34,7 @@ class SuccessHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          const EzSpacer(),
 
           // Where to go next
           Flexible(

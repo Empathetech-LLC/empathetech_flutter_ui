@@ -34,6 +34,7 @@ class FailureHeader extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          const Spacer(),
 
           // Error message
           Flexible(
@@ -130,7 +131,6 @@ class LinkOption extends StatelessWidget {
   /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
   const LinkOption(this.style, {super.key});
 
-  static const EzSpacer spacer = EzSpacer();
   static const String installFlutter =
       'https://docs.flutter.dev/get-started/install';
 
@@ -144,7 +144,7 @@ class LinkOption extends StatelessWidget {
             style: style,
             textAlign: TextAlign.center,
           ),
-          spacer,
+          const EzSpacer(),
           EzElevatedIconButton(
             onPressed: () => launchUrl(Uri.parse(installFlutter)),
             icon: EzIcon(Icons.computer),

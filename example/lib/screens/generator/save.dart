@@ -93,7 +93,7 @@ class _SaveScreenState extends State<SaveScreen> {
         return Center(
           child: SuccessHeader(
             textTheme: textTheme,
-            message: '''\nYour configuration has been saved to ${archivePath()}
+            message: '''Your configuration has been saved to ${archivePath()}
 
 Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
           ),
@@ -102,7 +102,7 @@ Use it on Open UI for desktop to generate the code for ${widget.config.appName}'
         return Center(
           child: FailureHeader(
             textTheme: textTheme,
-            message: '\n$failureMessage',
+            message: failureMessage,
           ),
         );
     }

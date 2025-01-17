@@ -313,7 +313,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             genState = GeneratorState.successful;
           })
         : onFailure(
-            '\nThe code was successfully generated, but some of the project setup failed.');
+            'The code was successfully generated, but some of the project setup failed.');
   }
 
   Widget header() {
@@ -338,9 +338,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 SuccessHeader(
                   textTheme: textTheme,
                   message:
-                      '\n${widget.config.appName} is ready in\n${widget.config.genPath}',
+                      '${widget.config.appName} is ready in\n${widget.config.genPath}',
                 ),
-                spacer,
+                const EzSeparator(),
                 RunOption(
                   projDir: projDir,
                   style: subTitle,
@@ -377,7 +377,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               children: <Widget>[
                 FailureHeader(
                   textTheme: textTheme,
-                  message: '\n$failureMessage',
+                  message: failureMessage,
                 ),
                 if (showDelete == true) ...<Widget>[
                   spacer,
