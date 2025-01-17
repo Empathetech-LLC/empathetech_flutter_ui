@@ -316,7 +316,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                rowMargin,
                 const EzToolTipper('Backwards, it is'),
               ],
             ),
@@ -956,16 +955,13 @@ class _BasicField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // Title
-        (tip == null)
-            ? titleText
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Flexible(child: titleText),
-                  EzMargin(vertical: false),
-                  EzToolTipper(tip!),
-                ],
-              ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Flexible(child: titleText),
+            if (tip != null) EzToolTipper(tip!),
+          ],
+        ),
 
         // Field
         ConstrainedBox(
@@ -1122,7 +1118,7 @@ class _LicensePicker extends StatelessWidget {
   final void Function() onHide;
 
   final String groupValue;
-  final void Function(String?)? onChanged;
+  final void Function(String?) onChanged;
 
   const _LicensePicker({
     required this.visible,
@@ -1147,7 +1143,11 @@ class _LicensePicker extends StatelessWidget {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          EzText(title, textAlign: TextAlign.center),
+          EzTextButton(
+            text: title,
+            textAlign: TextAlign.center,
+            onPressed: () => onChanged(value),
+          ),
           EzRadio<String>(
             value: value,
             groupValue: groupValue,
