@@ -384,7 +384,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                rowMargin,
                 const EzToolTipper('Easy to change later'),
               ],
             ),
@@ -1181,7 +1180,6 @@ class _LicensePicker extends StatelessWidget {
                   hideButton,
                   rowMargin,
                   title,
-                  rowMargin,
                   tip,
                 ]
               : <Widget>[
