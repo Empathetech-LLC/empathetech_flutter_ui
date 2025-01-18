@@ -11,40 +11,78 @@ import 'package:url_launcher/url_launcher.dart';
 class EzLinkImageProvider extends StatefulWidget {
   // Ez parameters //
 
+  /// [Image.image] passthrough
   final ImageProvider<Object> image;
 
   /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImageProvider]
   final List<BoxShadow>? shadows;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
-  /// Message for screen readers
+  /// What is it?
   final String semanticLabel;
 
-  /// Tooltip for on hover/focus
+  /// What does it do?
+  final String semanticHint;
+
+  /// Is it unique?
+  final String? semanticValue;
+
+  /// [Tooltip.message] for on hover/focus
   final String tooltip;
 
-  // Image parameters //
-
+  /// [Image.frameBuilder] passthrough
   final Widget Function(BuildContext, Widget, int?, bool)? frameBuilder;
+
+  /// [Image.loadingBuilder] passthrough
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
+
+  /// [Image.errorBuilder] passthrough
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
+
+  /// [Image.width] passthrough
   final double? width;
+
+  /// [Image.height] passthrough
   final double? height;
+
+  /// [Image.color] passthrough
   final Color? color;
+
+  /// [Image.opacity] passthrough
   final Animation<double>? opacity;
+
+  /// [Image.colorBlendMode] passthrough
   final BlendMode? colorBlendMode;
+
+  /// [Image.fit] passthrough
   final BoxFit? fit;
+
+  /// [Image.alignment] passthrough
   final AlignmentGeometry alignment;
+
+  /// [Image.repeat] passthrough
   final ImageRepeat repeat;
+
+  /// [Image.centerSlice] passthrough
   final Rect? centerSlice;
+
+  /// [Image.matchTextDirection] passthrough
   final bool matchTextDirection;
+
+  /// [Image.gaplessPlayback] passthrough
   final bool gaplessPlayback;
+
+  /// [Image.isAntiAlias] passthrough
   final bool isAntiAlias;
+
+  /// [Image.filterQuality] passthrough
   final FilterQuality filterQuality;
 
   /// [Image] wrapper that either opens an internal link via [onTap]
@@ -56,6 +94,8 @@ class EzLinkImageProvider extends StatefulWidget {
     super.key,
     required this.image,
     required this.semanticLabel,
+    required this.semanticHint,
+    this.semanticValue,
     required this.tooltip,
     this.onTap,
     this.url,
@@ -75,7 +115,7 @@ class EzLinkImageProvider extends StatefulWidget {
     this.matchTextDirection = false,
     this.gaplessPlayback = false,
     this.isAntiAlias = false,
-    this.filterQuality = FilterQuality.low,
+    this.filterQuality = FilterQuality.medium,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -111,9 +151,11 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
       message: widget.tooltip,
       excludeFromSemantics: true,
       child: Semantics(
-        hint: widget.semanticLabel,
+        label: widget.semanticLabel,
+        value: widget.semanticValue,
         link: true,
         image: true,
+        hint: widget.semanticHint,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
@@ -131,6 +173,8 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
                     frameBuilder: widget.frameBuilder,
                     loadingBuilder: widget.loadingBuilder,
                     errorBuilder: widget.errorBuilder,
+                    semanticLabel: null,
+                    excludeFromSemantics: true,
                     width: widget.width,
                     height: widget.height,
                     color: widget.color,
