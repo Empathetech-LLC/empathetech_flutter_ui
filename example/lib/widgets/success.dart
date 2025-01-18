@@ -12,14 +12,22 @@ class SuccessHeader extends StatelessWidget {
   final TextTheme textTheme;
 
   /// Core message to display... under 'Success'
-  final String message;
+  /// Used in an [Flexible] wrapped [EzText]
+  /// Provide [message] or [richMessage]
+  final String? message;
+
+  /// Core message to display... under 'Success'
+  /// Provide [message] or [richMessage]
+  final Widget? richMessage;
 
   /// header [Widget] for a successful run
   const SuccessHeader({
     super.key,
     required this.textTheme,
-    required this.message,
-  });
+    this.message,
+    this.richMessage,
+  }) : assert((message == null) != (richMessage == null),
+            'Either message or richMessage must be provided, but not both.');
 
   @override
   Widget build(BuildContext context) => Column(
@@ -37,13 +45,15 @@ class SuccessHeader extends StatelessWidget {
           const EzSpacer(),
 
           // Where to go next
-          Flexible(
-            child: EzText(
-              message,
-              style: subTitleStyle(textTheme),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          message == null
+              ? richMessage!
+              : Flexible(
+                  child: EzText(
+                    message!,
+                    style: subTitleStyle(textTheme),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
         ],
       );
 }
