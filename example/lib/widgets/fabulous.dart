@@ -21,7 +21,7 @@ class ResetFAB extends StatelessWidget {
     return Semantics(
       label: 'Reset',
       button: true,
-      hint: 'Opens a dialog to confirm what should be reset.',
+      hint: 'Activate and confirm what should be reset.',
       child: ExcludeSemantics(
         child: FloatingActionButton(
           onPressed: () => showPlatformDialog(
