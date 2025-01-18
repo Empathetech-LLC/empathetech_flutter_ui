@@ -105,20 +105,18 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               ? IconButton(
                   style: IconButton.styleFrom(
                     side: BorderSide(color: colorScheme.outlineVariant),
-                  ),
-                  icon: Icon(
-                    PlatformIcons(context).remove,
-                    color: colorScheme.outline,
-                    size: widget.iconSize ?? titleProvider.value.fontSize,
+                    overlayColor: colorScheme.outline,
+                    shadowColor: Colors.transparent,
                   ),
                   onPressed: doNothing,
                   tooltip: 'Minimum',
-                )
-              : IconButton(
                   icon: Icon(
                     PlatformIcons(context).remove,
                     size: widget.iconSize ?? titleProvider.value.fontSize,
+                    color: colorScheme.outline,
                   ),
+                )
+              : IconButton(
                   onPressed: () async {
                     for (final String key in keys) {
                       final BaseTextStyleProvider provider =
@@ -144,14 +142,18 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   },
                   tooltip:
                       '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
+                  icon: Icon(
+                    PlatformIcons(context).remove,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
+                  ),
                 ),
           pMSpacer,
 
           // Core
           Icon(
             Icons.text_fields_sharp,
-            color: colorScheme.onSurface,
             size: widget.iconSize ?? titleProvider.value.fontSize,
+            color: colorScheme.onSurface,
           ),
           pMSpacer,
 
@@ -163,19 +165,15 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     overlayColor: colorScheme.outline,
                     shadowColor: Colors.transparent,
                   ),
-                  icon: Icon(
-                    PlatformIcons(context).add,
-                    color: colorScheme.outline,
-                    size: widget.iconSize ?? titleProvider.value.fontSize,
-                  ),
                   onPressed: doNothing,
                   tooltip: 'Maximum',
-                )
-              : IconButton(
                   icon: Icon(
                     PlatformIcons(context).add,
                     size: widget.iconSize ?? titleProvider.value.fontSize,
+                    color: colorScheme.outline,
                   ),
+                )
+              : IconButton(
                   onPressed: () async {
                     for (final String key in keys) {
                       final BaseTextStyleProvider provider =
@@ -201,6 +199,10 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                   },
                   tooltip:
                       '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
+                  icon: Icon(
+                    PlatformIcons(context).add,
+                    size: widget.iconSize ?? titleProvider.value.fontSize,
+                  ),
                 ),
         ],
       ),
