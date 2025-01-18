@@ -33,7 +33,7 @@ void testSuite({
 
       ezLog('\nTesting navigation');
 
-      await touch(
+      await ezTouch(
         tester,
         find.widgetWithText(EzElevatedIconButton, l10n.csPageTitle),
       );
@@ -43,13 +43,13 @@ void testSuite({
       ezLog('\nTesting quick settings');
 
       ezLog('\nValidating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
       ezLog('\nMonochrome');
-      await touchText(tester, l10n.csMonoChrome);
+      await ezTouchText(tester, l10n.csMonoChrome);
 
       ezLog('\nColorScheme from image');
       await testImageSetting(
@@ -74,10 +74,10 @@ void testSuite({
       ezLog('\nTesting advanced settings');
 
       ezLog('Navigation');
-      await touchText(tester, l10n.gAdvanced);
+      await ezTouchText(tester, l10n.gAdvanced);
 
       ezLog('Validating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
@@ -100,14 +100,14 @@ void testSuite({
       );
 
       ezLog('Testing add color modal');
-      await touchText(tester, l10n.csAddColor);
+      await ezTouchText(tester, l10n.csAddColor);
 
       ezLog('How this works');
-      await validateText(tester, l10n.gHowThisWorks);
+      await ezFindText(tester, l10n.gHowThisWorks);
 
       ezLog('Add on primary');
-      await touchText(tester, csOnPrimary);
-      await dismissTap(tester);
+      await ezTouchText(tester, csOnPrimary);
+      await ezDismiss(tester);
       await testCS(
         tester,
         text: csOnPrimary,
@@ -118,7 +118,7 @@ void testSuite({
       );
 
       ezLog('Add surface tint');
-      await touchText(tester, l10n.csAddColor);
+      await ezTouchText(tester, l10n.csAddColor);
       await tester.ensureVisible(find.text(csSurfaceTint).last);
       await tester.fling(
         find.descendant(
@@ -129,8 +129,8 @@ void testSuite({
         2000,
       );
       await tester.pumpAndSettle();
-      await touchText(tester, csSurfaceTint);
-      await dismissTap(tester);
+      await ezTouchText(tester, csSurfaceTint);
+      await ezDismiss(tester);
 
       await testCS(
         tester,
@@ -150,7 +150,7 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n.gBack);
+      await ezTapBack(tester, l10n.gBack);
       ezLog('\nColor settings test suite complete\n\n');
     });
 
@@ -163,22 +163,22 @@ Future<void> testCS(
   required bool isLefty,
 }) async {
   ezLog('\nTesting $text update\n');
-  await touchText(tester, text);
+  await ezTouchText(tester, text);
 
   if (textColor) {
     ezLog('Text options');
-    await validateText(tester, l10n.csRecommended);
+    await ezFindText(tester, l10n.csRecommended);
 
     ezLog('Close');
-    await touchText(tester, l10n.gClose);
+    await ezTouchText(tester, l10n.gClose);
 
     ezLog('Yes');
-    await touchText(tester, text);
-    await touchText(tester, l10n.gYes);
+    await ezTouchText(tester, text);
+    await ezTouchText(tester, l10n.gYes);
 
     ezLog('Custom\n');
-    await touchText(tester, text);
-    await touchText(tester, l10n.csUseCustom);
+    await ezTouchText(tester, text);
+    await ezTouchText(tester, l10n.csUseCustom);
   }
 
   ezLog('Layout');
@@ -213,25 +213,25 @@ Future<void> testCS(
   }
 
   ezLog('Cancel');
-  await touchText(tester, l10n.gCancel);
+  await ezTouchText(tester, l10n.gCancel);
 
   ezLog('Apply');
-  await touchText(tester, text);
-  if (textColor) await touchText(tester, l10n.csUseCustom);
-  await chaChaNow(tester, find.byType(Slider));
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, text);
+  if (textColor) await ezTouchText(tester, l10n.csUseCustom);
+  await ezChaCha(tester, find.byType(Slider));
+  await ezTouchText(tester, l10n.gApply);
 
   ezLog('\nTesting $text reset\n');
-  await holdText(tester, text);
+  await ezHoldText(tester, text);
 
   ezLog('Text/layout');
 
   if (!defaultColor) {
-    await validateText(tester, l10n.gOptions);
-    await touchText(tester, l10n.gReset);
+    await ezFindText(tester, l10n.gOptions);
+    await ezTouchText(tester, l10n.gReset);
   }
 
-  await validateText(tester, l10n.gReset);
+  await ezFindText(tester, l10n.gReset);
 
   if (isCupertino) {
     final List<EzCupertinoAction> actions =
@@ -262,20 +262,20 @@ Future<void> testCS(
   }
 
   ezLog('No');
-  await touchText(tester, l10n.gNo);
+  await ezTouchText(tester, l10n.gNo);
 
   ezLog('Yes');
-  await holdText(tester, text);
-  if (!defaultColor) await touchText(tester, l10n.gReset);
-  await touchText(tester, l10n.gYes);
+  await ezHoldText(tester, text);
+  if (!defaultColor) await ezTouchText(tester, l10n.gReset);
+  await ezTouchText(tester, l10n.gYes);
 
   if (!defaultColor) {
     ezLog('Remove');
 
-    await holdText(tester, text);
-    await touchText(tester, l10n.gClose);
-    await holdText(tester, text);
-    await touchText(tester, l10n.csRemove);
+    await ezHoldText(tester, text);
+    await ezTouchText(tester, l10n.gClose);
+    await ezHoldText(tester, text);
+    await ezTouchText(tester, l10n.csRemove);
     expect(find.text(text), findsNothing);
   }
 }

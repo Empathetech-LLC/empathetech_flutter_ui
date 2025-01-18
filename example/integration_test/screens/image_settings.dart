@@ -31,7 +31,7 @@ void testSuite({
 
       ezLog('\nTesting navigation');
 
-      await touch(
+      await ezTouch(
         tester,
         find.widgetWithText(EzElevatedIconButton, l10n.isPageTitle),
       );
@@ -39,7 +39,7 @@ void testSuite({
       // Verify text loaded //
 
       ezLog('\nValidating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
@@ -70,6 +70,6 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n.gBack);
+      await ezTapBack(tester, l10n.gBack);
       ezLog('\nImage settings test suite complete\n\n');
     });
