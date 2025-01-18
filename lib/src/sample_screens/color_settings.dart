@@ -198,10 +198,13 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   // Define custom widgets  //
 
   late final String fromImageLabel = l10n.csSchemeBase;
-  late final String fromImageHint = '${l10n.csOptional}: ${l10n.csFromImage}';
+  late final String fromImageHint =
+      'A color scheme will be generated from the image.';
 
   late final Widget fromImageButton = isDark
       ? Semantics(
+          label: fromImageLabel.replaceAll('\n', ' '),
+          value: l10n.csOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(
@@ -215,6 +218,8 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           ),
         )
       : Semantics(
+          label: fromImageLabel.replaceAll('\n', ' '),
+          value: l10n.csOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(
