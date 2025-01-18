@@ -6,7 +6,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-/// Get the current [TargetPlatform]
+/// Get the current [TargetPlatform] the slow (and reliable) way
+/// Checking each [Platform].is
 TargetPlatform getHostPlatform(BuildContext context) {
   if (Platform.isAndroid) {
     return TargetPlatform.android;

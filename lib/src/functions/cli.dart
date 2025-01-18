@@ -8,6 +8,8 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
+/// Run a command line interface [cmd] on Desktop [platform]s
+/// And track the stdout/err with [debug] and [readout]
 Future<void> ezCLI(
   String cmd, {
   String? winCMD,

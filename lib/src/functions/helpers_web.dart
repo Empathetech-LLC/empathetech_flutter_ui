@@ -8,7 +8,8 @@
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
 
-/// Get the current [TargetPlatform] for web
+/// Get the host [TargetPlatform] on web
+/// via [html.window]'s userAgent
 TargetPlatform getHostPlatform(BuildContext context) {
   final String userAgent = html.window.navigator.userAgent;
 
