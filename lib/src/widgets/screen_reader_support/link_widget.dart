@@ -3,7 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,19 +15,27 @@ class EzLinkWidget extends StatefulWidget {
   final List<BoxShadow>? shadows;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
-  /// Message for screen readers
+  /// What is it?
   final String semanticLabel;
+
+  /// What does it do?
+  final String semanticHint;
+
+  /// Is it unique?
+  final String? semanticValue;
 
   /// Defaults to false
   /// Is this an image?
   final bool isImage;
 
-  /// Tooltip for on hover/focus
+  /// [Tooltip.message] for on hover/focus
   final String tooltip;
 
   /// [Widget] wrapper that either opens an internal link via [onTap]
@@ -41,6 +50,8 @@ class EzLinkWidget extends StatefulWidget {
     this.onTap,
     this.url,
     required this.semanticLabel,
+    required this.semanticHint,
+    this.semanticValue,
     this.isImage = false,
     required this.tooltip,
   }) : assert((onTap == null) != (url == null),
@@ -78,9 +89,11 @@ class _EzLinkWidgetState extends State<EzLinkWidget> {
       message: widget.tooltip,
       excludeFromSemantics: true,
       child: Semantics(
-        hint: widget.semanticLabel,
+        label: widget.semanticLabel,
+        value: widget.semanticValue,
         link: true,
         image: widget.isImage,
+        hint: widget.semanticHint,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),
