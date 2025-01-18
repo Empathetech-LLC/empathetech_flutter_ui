@@ -369,7 +369,12 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Update theme (optional)
     if (widget.updateTheme != null && widget.updateThemeOption) {
       options.add(Padding(
-        padding: EzInsets.col(spacing),
+        padding: EdgeInsets.only(
+          left: spacing / 2,
+          right: spacing / 2,
+          top: spacing / 2,
+          bottom: spacing,
+        ),
         child: EzRow(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
