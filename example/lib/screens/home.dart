@@ -1182,10 +1182,12 @@ class _LicensePicker extends StatelessWidget {
             textAlign: TextAlign.center,
             onPressed: () => onChanged(value),
           ),
-          EzRadio<String>(
-            value: value,
-            groupValue: groupValue,
-            onChanged: onChanged,
+          ExcludeSemantics(
+            child: EzRadio<String>(
+              value: value,
+              groupValue: groupValue,
+              onChanged: onChanged,
+            ),
           ),
         ],
       );
