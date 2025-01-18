@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Log the passed message and display an [EzAlertDialog] to notify the user
-Future<dynamic> logAlert(
+/// [ezLog] the passed message and display an [EzAlertDialog] to notify the user
+Future<dynamic> ezLogAlert(
   BuildContext context, {
   String? title,
   required String message,
@@ -29,7 +29,7 @@ Future<dynamic> logAlert(
   );
 }
 
-/// Wrap a [ColorPicker] in an [EzAlertDialog]
+/// Wraps a [ColorPicker] in an [EzAlertDialog]
 Future<dynamic> ezColorPicker(
   BuildContext context, {
   String? title,
