@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
+
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzRadio<T> extends StatelessWidget {
@@ -78,12 +80,20 @@ class EzRadio<T> extends StatelessWidget {
     final double ratio = scale ??
         (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
 
-    return Padding(
+    return Container(
       padding: ratio > 1.1
           ? padding ?? EzInsets.wrap(EzConfig.get(marginKey))
           : EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: Theme.of(context)
+            .textButtonTheme
+            .style
+            ?.backgroundColor
+            ?.resolve(<WidgetState>{}),
+        shape: BoxShape.circle,
+      ),
       child: Transform.scale(
-        scale: ratio,
+        scale: max(1.0, ratio),
         child: Radio<T>(
           value: value,
           groupValue: groupValue,
