@@ -677,8 +677,8 @@ abstract class EFUILang {
   /// No description provided for @csPickerHint.
   ///
   /// In en, this message translates to:
-  /// **'Open a color picker for {name}. Long press for more options.'**
-  String csPickerHint(Object name);
+  /// **'Open a color picker. Long press for more options.'**
+  String get csPickerHint;
 
   /// No description provided for @csMonoChrome.
   ///

@@ -141,7 +141,7 @@
 
   "csPageTitle": "Paramètres de couleur",
 
-  "csPickerHint": "Ouvre un sélecteur de couleurs pour {name}. Appuyer longuement pour plus d'options.",
+  "csPickerHint": "Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d'options.",
 
   "csMonoChrome": "Utiliser un schéma monochrome",
   "csHighContrast": "Utiliser un schéma à contraste élevé",

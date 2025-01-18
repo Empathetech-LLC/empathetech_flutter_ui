@@ -316,9 +316,8 @@ class EFUILangEs extends EFUILang {
   String get csPageTitle => 'Configuración de color';
 
   @override
-  String csPickerHint(Object name) {
-    return 'Abre un selector de color para $name. Mantén pulsado para ver más opciones.';
-  }
+  String get csPickerHint =>
+      'Abre un selector de color. Mantén pulsado para ver más opciones.';
 
   @override
   String get csMonoChrome => 'Usar esquema monocromático';

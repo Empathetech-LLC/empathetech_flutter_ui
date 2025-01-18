@@ -141,7 +141,7 @@
   
   "csPageTitle": "Configuración de color",
 
-  "csPickerHint": "Abre un selector de color para {name}. Mantén pulsado para ver más opciones.",
+  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
 
   "csMonoChrome": "Usar esquema monocromático",
   "csHighContrast": "Usar esquema de alto contraste",

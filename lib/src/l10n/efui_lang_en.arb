@@ -141,7 +141,7 @@
   
   "csPageTitle": "Color settings",
 
-  "csPickerHint": "Open a color picker for {name}. Long press for more options.",
+  "csPickerHint": "Open a color picker. Long press for more options.",
 
   "csMonoChrome": "Use monochrome scheme",
   "csHighContrast": "Use high contrast scheme",
