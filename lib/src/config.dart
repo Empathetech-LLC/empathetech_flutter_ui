@@ -9,13 +9,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Singleton class for managing user customization
 class EzConfig {
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// Asset paths for the app
-  /// Used for [AssetImage] and video checks
+  /// [AssetImage] paths for the app
   final Set<String> assetPaths;
 
   /// Default config
@@ -41,7 +39,7 @@ class EzConfig {
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
-  /// [assetPaths] => provide your [AssetImage] paths for this app
+  /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
   factory EzConfig.init({
     required SharedPreferences preferences,
@@ -124,18 +122,19 @@ Must be one of [int, bool, double, String, List<String>]''');
 
   // Getters //
 
-  /// Get the [key]s EzConfig value?
+  /// Get the [key]s EzConfig (nullable) value
   /// Uses the live values from [prefs]
   static dynamic get(String key) {
     return _instance!.prefs[key];
   }
 
-  /// Get the [key]s default EzConfig value?
+  /// Get the [key]s default EzConfig (nullable) value
   static dynamic getDefault(String key) {
     return _instance!.defaults[key];
   }
 
-  /// Return the user's selected [Locale]?
+  /// Return the user's selected [Locale], if any
+  /// null otherwise
   static Locale? getLocale() {
     final List<String>? localeData = _instance!.prefs[appLocaleKey];
 
@@ -160,44 +159,44 @@ Must be one of [int, bool, double, String, List<String>]''');
     }
   }
 
-  /// Get the [key]s EzConfig value
-  /// Uses the value stored in [EzConfig.preferences]
+  /// Get the [key]s EzConfig (nullable) [bool] value
+  /// Uses the stored values from [EzConfig.preferences]
   static bool? getBool(String key) {
     return _instance!.preferences.getBool(key);
   }
 
-  /// Get the [key]s EzConfig value
-  /// Uses the value stored in [EzConfig.preferences]
+  /// Get the [key]s EzConfig (nullable) [int] value
+  /// Uses the stored values from [EzConfig.preferences]
   static int? getInt(String key) {
     return _instance!.preferences.getInt(key);
   }
 
-  /// Get the [key]s EzConfig value
-  /// Uses the value stored in [EzConfig.preferences]
+  /// Get the [key]s EzConfig (nullable) [double] value
+  /// Uses the stored values from [EzConfig.preferences]
   static double? getDouble(String key) {
     return _instance!.preferences.getDouble(key);
   }
 
-  /// Get the [key]s EzConfig value
-  /// Uses the value stored in [EzConfig.preferences]
+  /// Get the [key]s EzConfig (nullable) [String] value
+  /// Uses the stored values from [EzConfig.preferences]
   static String? getString(String key) {
     return _instance!.preferences.getString(key);
   }
 
-  /// Get the [key]s EzConfig value
-  /// Uses the value stored in [EzConfig.preferences]
+  /// Get the [key]s EzConfig (nullable) [List] value
+  /// Uses the stored values from [EzConfig.preferences]
   static List<String>? getStringList(String key) {
     return _instance!.preferences.getStringList(key);
   }
 
-  /// Wether the [key] contains the value to a recognized asset path
-  /// From the [EzConfig.init] field [assetPaths]
+  /// Wether the [key] points to an [AssetImage] path
+  /// via [assetPaths]
   static bool isKeyAsset(String key) {
     return _instance!.assetPaths.contains(_instance!.prefs[key]);
   }
 
-  /// Wether the [path] leads to a recognized asset
-  /// From the [EzConfig.init] field [assetPaths]
+  /// Wether the [path] leads to an [AssetImage]
+  /// via [assetPaths]
   static bool isPathAsset(String path) {
     return _instance!.assetPaths.contains(path);
   }
@@ -291,6 +290,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Create a pseudo-random config that follows the default vibe
+  /// i.e. a triadic [ColorScheme] that should be highly legible
+  /// Doubles are limited to half and/or twice their default values'
   static Future<void> randomize(bool isDark) async {
     // Define data //
 
@@ -484,13 +485,19 @@ Must be one of [int, bool, double, String, List<String>]''');
   // Removers //
 
   /// Remove the custom value for [key]
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
-  static Future<bool> remove(String key, {bool storageOnly = false}) async {
+  /// When [reset] is true, the default value is restored (if present)
+  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
+  /// Set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Setting [storageOnly] to true will make [reset] moot
+  static Future<bool> remove(
+    String key, {
+    bool reset = true,
+    bool storageOnly = false,
+  }) async {
     final bool result = await _instance!.preferences.remove(key);
 
     if (result && !storageOnly) {
-      _instance!.defaults.containsKey(key)
+      (reset && _instance!.defaults.containsKey(key))
           ? _instance!.prefs[key] = _instance!.defaults[key]
           : _instance!.prefs.remove(key);
     }
@@ -499,20 +506,24 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Remove the [keys] custom values
-  /// Defaults to both the live [EzConfig.prefs] and stored [EzConfig.preferences]
-  /// Optionally set [storageOnly] to true to only update [EzConfig.preferences]
+  /// When [reset] is true, the default value is restored (if present)
+  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
+  /// Set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Setting [storageOnly] to true will make [reset] moot
+  /// Returns false if any keys fail to be removed, but all keys will be attempted
   static Future<bool> removeKeys(
     Set<String> keys, {
+    bool reset = true,
     bool storageOnly = false,
   }) async {
     bool success = true;
 
     for (final String key in keys) {
-      final bool remove = await _instance!.preferences.remove(key);
+      final bool result = await _instance!.preferences.remove(key);
 
-      if (remove) {
+      if (result) {
         if (!storageOnly) {
-          _instance!.defaults.containsKey(key)
+          (reset && _instance!.defaults.containsKey(key))
               ? _instance!.prefs[key] = _instance!.defaults[key]
               : _instance!.prefs.remove(key);
         }
@@ -525,13 +536,17 @@ Must be one of [int, bool, double, String, List<String>]''');
     return success;
   }
 
+  /// Resets all keys in [EzConfig.prefs]
+  /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
+  /// Set [storageOnly] to true to only update [EzConfig.preferences]
+  /// Returns false if any keys fail to be reset, but all keys will be attempted
   static Future<bool> reset({bool storageOnly = false}) async {
     bool success = true;
 
     for (final String key in _instance!.keys.keys) {
-      final bool remove = await _instance!.preferences.remove(key);
+      final bool result = await _instance!.preferences.remove(key);
 
-      if (remove) {
+      if (result) {
         if (!storageOnly) {
           _instance!.defaults.containsKey(key)
               ? _instance!.prefs[key] = _instance!.defaults[key]
