@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSettings extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional addition quick settings
