@@ -39,22 +39,14 @@ class EzToolTipper extends StatelessWidget {
           } else {
             key.currentState?.ensureTooltipVisible();
 
-            // Custom Semantics announcements for richMessage
+            // Wait for auto-announcement to finish
+            await Future<void>.delayed(readingTime('Help'));
+            String message = this.message ?? '';
+
             if (richMessage != null) {
-              // Wait for auto-announcement to finish
-              await Future<void>.delayed(readingTime('Help'));
-
               if (richMessage.runtimeType == EzInlineLink) {
-                // If it's just a link, use the included semanticsLabel
-                SemanticsService.announce(
-                  (richMessage as EzInlineLink).semanticsLabel,
-                  TextDirection.ltr,
-                  assertiveness: Assertiveness.assertive,
-                );
+                message = (richMessage as EzInlineLink).semanticsLabel;
               } else if (richMessage.runtimeType == TextSpan) {
-                // If it's a TextSpan, we can assume it's a list and combine the semantics of all the children
-                String message = '';
-
                 for (final InlineSpan child
                     in (richMessage as TextSpan).children!) {
                   switch (child.runtimeType) {
@@ -74,14 +66,14 @@ class EzToolTipper extends StatelessWidget {
                       break;
                   }
                 }
-
-                SemanticsService.announce(
-                  message,
-                  TextDirection.ltr,
-                  assertiveness: Assertiveness.assertive,
-                );
               }
             }
+
+            SemanticsService.announce(
+              message,
+              TextDirection.ltr,
+              assertiveness: Assertiveness.assertive,
+            );
           }
           isTooltipVisible = !isTooltipVisible;
         },
