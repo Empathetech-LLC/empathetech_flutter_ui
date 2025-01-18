@@ -7,9 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Creates a [ThemeData] with a [ColorScheme] generated via [ezColorScheme]
-/// Also has some tweaks to the base Material [ThemeData], such as...
-///   margin, padding, [TextStyle]s, [IconData]
+/// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
   // Gather values from EzConfig //
 
@@ -301,7 +299,7 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
-      margin: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(margin),
       waitDuration: const Duration(milliseconds: 750),
     ),
