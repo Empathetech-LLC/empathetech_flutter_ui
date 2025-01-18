@@ -244,7 +244,11 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: 'App name',
-              tip: 'Best App Ever  -->  ${ezTitleToSnake('Best App Ever')}',
+              tip: TextSpan(children: <InlineSpan>[
+                const EzPlainText(text: 'Best App Ever'),
+                const EzPlainText(text: '  -->  ', semanticsLabel: ' becomes '),
+                EzPlainText(text: ezTitleToSnake('Best App Ever')),
+              ]),
               controller: nameController,
               width: singleLineFormWidth,
               validator: (String? entry) => validateAppName(
@@ -937,7 +941,7 @@ class _BasicField extends StatelessWidget {
   final TextTheme textTheme;
 
   final String title;
-  final String? tip;
+  final dynamic tip;
   final TextEditingController controller;
   final double width;
   final String? Function(String?)? validator;
@@ -970,7 +974,10 @@ class _BasicField extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Flexible(child: titleText),
-            if (tip != null) EzToolTipper(message: tip),
+            if (tip != null)
+              tip.runtimeType == String
+                  ? EzToolTipper(message: tip)
+                  : EzToolTipper(richMessage: tip),
           ],
         ),
 
@@ -1019,7 +1026,7 @@ class _SettingsCheckbox extends StatelessWidget {
 
 class _AdvancedSettingsField extends StatelessWidget {
   final String title;
-  final String? tip;
+  final dynamic tip;
   final TextEditingController controller;
   final bool visible;
   final void Function() onHide;
@@ -1069,6 +1076,10 @@ class _AdvancedSettingsField extends StatelessWidget {
       ),
     );
 
+    late final Widget tooltip = tip.runtimeType == String
+        ? EzToolTipper(message: tip)
+        : EzToolTipper(richMessage: tip);
+
     return removed
         ? EzTextIconButton(
             onPressed: onRestore,
@@ -1094,7 +1105,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                         ],
                         if (tip != null) ...<Widget>[
                           rowMargin,
-                          EzToolTipper(message: tip),
+                          tooltip,
                         ],
                       ]
                     : <Widget>[
@@ -1107,7 +1118,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                         ],
                         if (tip != null) ...<Widget>[
                           rowMargin,
-                          EzToolTipper(message: tip),
+                          tooltip,
                         ],
                       ],
               ),
