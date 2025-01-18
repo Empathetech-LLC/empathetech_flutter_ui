@@ -9,8 +9,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-/// Provide the [path] to an [Image] and we'll handle the rest
-ImageProvider provideImage(String path) {
+/// Returns and [AssetImage], [NetworkImage], or [FileImage] based on the [path]
+ImageProvider ezImageProvider(String path) {
   if (EzConfig.isPathAsset(path)) {
     return AssetImage(path);
   } else if (isUrl(path)) {
@@ -20,8 +20,8 @@ ImageProvider provideImage(String path) {
   }
 }
 
-/// Pick an [Image] and return the path [String]
-Future<String?> pickImage({
+/// Wraps an [ImagePicker] in a try/catch and successful results to [EzConfig]
+Future<String?> ezImagePicker({
   required BuildContext context,
   required String prefsPath,
   required ImageSource source,
@@ -35,14 +35,15 @@ Future<String?> pickImage({
   } on Exception catch (e) {
     if (context.mounted) {
       final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
-      await logAlert(context, message: errorMsg);
+      await ezLogAlert(context, message: errorMsg);
     }
     return null;
   }
 }
 
 /// Given a [BoxFit].name, return the associated [BoxFit]
-BoxFit? boxFitFromName(String? name) {
+/// Returns null is [name] is unrecognized
+BoxFit? ezFitFromName(String? name) {
   switch (name) {
     case contain:
       return BoxFit.contain;
