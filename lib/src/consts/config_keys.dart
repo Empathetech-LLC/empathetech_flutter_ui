@@ -75,11 +75,13 @@ const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
 const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 
 // Icons
-const String iconSizeKey = 'iconSize';
+const String iconSizeKey = 'iconSize'; // Required
 
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// y
+/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
 const Map<String, Type> textStyleKeys = <String, Type>{
   // Display
   displayFontFamilyKey: String,
@@ -136,16 +138,21 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   lightTextBackgroundOpacityKey: double,
 
   // Icons
-  iconSizeKey: double,
+  iconSizeKey: double, // Required
 };
 
 // Text settings' values //
 
+/// bold
 const String bold = 'bold';
+
+/// italic
 const String italic = 'italic';
+
+/// underlined
 const String underlined = 'underlined';
 
-/// '-5.5'
+/// '-55.55'
 const String sampleString = '55.55';
 
 // Text settings' recommended parameters //
@@ -180,6 +187,7 @@ const double maxLabel = 28.0;
 /// 7.0
 const double minLabel = 7.0;
 
+/// 84.0, 64.0, 42.0, 32.0, 28.0
 const Map<String, double> fontSizeMaxes = <String, double>{
   displayFontSizeKey: maxDisplay,
   headlineFontSizeKey: maxHeadline,
@@ -188,6 +196,7 @@ const Map<String, double> fontSizeMaxes = <String, double>{
   labelFontSizeKey: maxLabel,
 };
 
+/// 21.0, 16.0, 11.0, 8.0, 7.0
 const Map<String, double> fontSizeMins = <String, double>{
   displayFontSizeKey: minDisplay,
   headlineFontSizeKey: minHeadline,
@@ -228,17 +237,17 @@ const double maxFontHeight = 2.0;
 
 // Layout keys //
 
-const String marginKey = 'margin'; // Required key
-const String paddingKey = 'padding'; // Required key
-const String spacingKey = 'spacing'; // Required key
+const String marginKey = 'margin'; // Required
+const String paddingKey = 'padding'; // Required
+const String spacingKey = 'spacing'; // Required
 
 const String hideScrollKey = 'hideScroll';
 
 /// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
 const Map<String, Type> layoutKeys = <String, Type>{
-  marginKey: double,
-  paddingKey: double,
-  spacingKey: double,
+  marginKey: double, // Required
+  paddingKey: double, // Required
+  spacingKey: double, // Required
   hideScrollKey: bool,
 };
 
@@ -264,10 +273,11 @@ const double maxSpacing = 75.0;
 
 // Color settings' keys //
 
+/// 'On'
 const String textColorPrefix = 'On';
 
 // Light theme
-const String lightPrimaryKey = 'lightPrimary'; // Required key
+const String lightPrimaryKey = 'lightPrimary'; // Required
 const String lightOnPrimaryKey = 'lightOnPrimary';
 const String lightPrimaryContainerKey = 'lightPrimaryContainer';
 const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
@@ -326,7 +336,7 @@ const String lightScrimKey = 'lightScrim';
 const String lightSurfaceTintKey = 'lightSurfaceTint';
 
 // Dark theme
-const String darkPrimaryKey = 'darkPrimary'; // Required key
+const String darkPrimaryKey = 'darkPrimary'; // Required
 const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
@@ -386,7 +396,7 @@ const String darkSurfaceTintKey = 'darkSurfaceTint';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColors = <String>[
-  lightPrimaryKey, // Required key
+  lightPrimaryKey, // Required
   lightOnPrimaryKey,
   lightPrimaryContainerKey,
   lightOnPrimaryContainerKey,
@@ -436,7 +446,7 @@ const List<String> lightColors = <String>[
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> darkColors = <String>[
-  darkPrimaryKey, // Required key
+  darkPrimaryKey, // Required
   darkOnPrimaryKey,
   darkPrimaryContainerKey,
   darkOnPrimaryContainerKey,
@@ -487,11 +497,12 @@ const List<String> darkColors = <String>[
 const String userColorsKey = 'userColors';
 
 /// [light, dark] X all 26 material color scheme keys
+/// y the [userColorsKey]
 const Map<String, Type> colorKeys = <String, Type>{
   userColorsKey: List<String>,
 
   // Light theme
-  lightPrimaryKey: int, // Required key
+  lightPrimaryKey: int, // Required
   lightOnPrimaryKey: int,
   lightPrimaryContainerKey: int,
   lightOnPrimaryContainerKey: int,
@@ -539,7 +550,7 @@ const Map<String, Type> colorKeys = <String, Type>{
   lightSurfaceTintKey: int,
 
   // Dark theme
-  darkPrimaryKey: int, // Required key
+  darkPrimaryKey: int, // Required
   darkOnPrimaryKey: int,
   darkPrimaryContainerKey: int,
   darkOnPrimaryContainerKey: int,
@@ -646,7 +657,7 @@ const String darkBackgroundImageKey = 'darkBackgroundImage';
 
 /// [light, dark]
 ///      X
-/// [colorSchemeImageKey, pageImageKey]
+/// [ColorSchemeImageKey, BackgroundImageKey, BackgroundImageKeyFit]
 const Map<String, Type> imageKeys = <String, Type>{
   // Light theme
   lightColorSchemeImageKey: String,
@@ -690,6 +701,7 @@ const String scaleDown = 'scaleDown';
 
 // Global trackers //
 
+/// [globalKeys], [textStyleKeys], [layoutKeys], [colorKeys], [imageKeys]
 const Map<String, Type> allKeys = <String, Type>{
   ...globalKeys,
   ...textStyleKeys,

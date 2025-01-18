@@ -49,6 +49,7 @@ const String empathMastodon = 'https://mastodon.social/@empathetech';
 const String empathGitHub = 'https://github.com/Empathetech-LLC';
 
 /// Where new journeys begin
+/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
 const String openUIReleases =
     'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
 
@@ -75,7 +76,7 @@ const String empathPayPal =
 const String empathVenmo = 'https://venmo.com/empathetech';
 
 /// If you want to show some love
-/// https://cash.app/\$empathetech
+/// https://cash.app/$empathetech
 const String empathCashApp = 'https://cash.app/\$empathetech';
 
 /// If you want to show some love
@@ -199,7 +200,7 @@ const int transparentHex = 0x00000000;
 
 // Brand config //
 
-/// Empathetech's default configuration for [EzConfig]
+/// Empathetech's [EzConfig.defaults]
 const Map<String, Object> empathetechConfig = <String, Object>{
   // Global settings //
 
@@ -266,16 +267,16 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   // Layout settings //
 
-  marginKey: defaultMargin, // required key
-  paddingKey: defaultPadding, // required key
-  spacingKey: defaultSpacing, // required key
+  marginKey: defaultMargin,
+  paddingKey: defaultPadding,
+  spacingKey: defaultSpacing,
 
   hideScrollKey: false,
 
   // Color settings //
 
   // Light
-  lightPrimaryKey: empathPurpleHex, // required key
+  lightPrimaryKey: empathPurpleHex,
   lightPrimaryContainerKey: empathPurpleDimHex,
   lightOnPrimaryKey: whiteHex,
   lightOnPrimaryContainerKey: whiteHex,
@@ -297,7 +298,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   lightSurfaceTintKey: transparentHex,
 
   // Dark
-  darkPrimaryKey: empathEucalyptusHex, // required key
+  darkPrimaryKey: empathEucalyptusHex,
   darkPrimaryContainerKey: empathEucalyptusDimHex,
   darkOnPrimaryKey: blackHex,
   darkOnPrimaryContainerKey: blackHex,
