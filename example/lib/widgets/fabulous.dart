@@ -24,7 +24,6 @@ class ResetFAB extends StatelessWidget {
         builder: (BuildContext alertContext) {
           return EzAlertDialog(
             title: Text('${l10n.gReset}...', textAlign: TextAlign.center),
-            content: Text(l10n.gUndoWarn, textAlign: TextAlign.center),
             materialActions: <Widget>[
               EzMaterialAction(
                 onPressed: () async {
