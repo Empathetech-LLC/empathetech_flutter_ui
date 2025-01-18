@@ -25,6 +25,7 @@ class EzToolTipper extends StatelessWidget {
             Tooltip(
               waitDuration: Duration.zero,
               enableTapToDismiss: false,
+              triggerMode: TooltipTriggerMode.tap,
               message: message,
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle),
