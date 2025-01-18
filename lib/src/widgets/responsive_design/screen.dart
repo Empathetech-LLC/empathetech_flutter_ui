@@ -78,7 +78,7 @@ class EzScreen extends StatelessWidget {
             boxFitFromName(EzConfig.get('$decorationKey$boxFitSuffix'));
 
         return BoxDecoration(
-          image: DecorationImage(image: provideImage(imagePath), fit: fit),
+          image: DecorationImage(image: ezImageProvider(imagePath), fit: fit),
         );
       }
     }

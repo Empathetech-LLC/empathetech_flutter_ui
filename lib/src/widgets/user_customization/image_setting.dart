@@ -151,7 +151,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Image(
                       width: width - scaleMargin,
                       height: height - toolbarHeight - scaleMargin,
-                      image: provideImage(currPath!),
+                      image: ezImageProvider(currPath!),
                       fit: fit,
                     ),
                   ],
@@ -203,7 +203,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await pickImage(
+            final String? changed = await ezImagePicker(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.camera,
@@ -226,7 +226,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await pickImage(
+            final String? changed = await ezImagePicker(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.gallery,
@@ -263,7 +263,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               try {
                 image = NetworkImage(urlText.text);
               } catch (e) {
-                await logAlert(
+                await ezLogAlert(
                   context,
                   title: l10n.isGetFailed,
                   message: '${e.toString()}\n\n${l10n.isPermission}',
@@ -562,7 +562,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           setState(() => inProgress = false);
 
           if (context.mounted) {
-            await logAlert(
+            await ezLogAlert(
               // ignore: use_build_context_synchronously
               context,
               title: l10n.isGetFailed,
@@ -644,7 +644,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               foregroundImage:
                   (inProgress || currPath == null || currPath == noImageValue)
                       ? null
-                      : provideImage(currPath!),
+                      : ezImageProvider(currPath!),
               backgroundColor: Colors.transparent,
               foregroundColor: theme.colorScheme.onSurface,
               child: inProgress

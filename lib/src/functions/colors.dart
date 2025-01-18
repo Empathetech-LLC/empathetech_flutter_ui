@@ -308,7 +308,7 @@ Future<String> storeImageColorScheme({
 
   try {
     colorScheme = await ColorScheme.fromImageProvider(
-      provider: provideImage(path),
+      provider: ezImageProvider(path),
       brightness: brightness,
     );
   } catch (e) {

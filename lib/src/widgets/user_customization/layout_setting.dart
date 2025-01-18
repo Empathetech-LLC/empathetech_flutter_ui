@@ -135,7 +135,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         backgroundImagePath == noImageValue)
                     ? null
                     : DecorationImage(
-                        image: provideImage(backgroundImagePath),
+                        image: ezImageProvider(backgroundImagePath),
                         fit: BoxFit.fill,
                       ),
               ),
