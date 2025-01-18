@@ -341,7 +341,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     children: <Widget>[
-                      const EzText('N/A', textAlign: TextAlign.start),
+                      const EzText(
+                        'N/A',
+                        semanticsLabel: 'Not applicable',
+                        textAlign: TextAlign.start,
+                      ),
                       EzCheckbox(
                         value: exampleDomain,
                         onChanged: (bool? value) async {
@@ -449,8 +453,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'settings',
                   style: subTitle,
                   onTap: () => context.goNamed(settingsHomePath),
-                  semanticsLabel:
-                      'Open a link to an online color scheme builder',
+                  semanticsLabel: 'Open the settings page',
                 ),
                 EzPlainText(
                   text:
@@ -484,10 +487,19 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   ),
                 ),
                 rowMargin,
-                IconButton(
-                  onPressed: () => setState(() => showAdvanced = !showAdvanced),
-                  icon: EzIcon(
-                    showAdvanced ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                Semantics(
+                  hint: showAdvanced ? 'Close' : 'Open',
+                  button: true,
+                  child: ExcludeSemantics(
+                    child: IconButton(
+                      onPressed: () =>
+                          setState(() => showAdvanced = !showAdvanced),
+                      icon: EzIcon(
+                        showAdvanced
+                            ? Icons.arrow_drop_up
+                            : Icons.arrow_drop_down,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -1033,16 +1045,28 @@ class _AdvancedSettingsField extends StatelessWidget {
 
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
-    late final Widget hideButton = IconButton(
-      onPressed: onHide,
-      icon: EzIcon(
-        visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+    late final Widget hideButton = Semantics(
+      label: visible ? 'Close' : 'Open',
+      button: true,
+      child: ExcludeSemantics(
+        child: IconButton(
+          onPressed: onHide,
+          icon: EzIcon(
+            visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+          ),
+        ),
       ),
     );
 
-    late final Widget removeButton = IconButton(
-      onPressed: onRemove,
-      icon: EzIcon(PlatformIcons(context).delete),
+    late final Widget removeButton = Semantics(
+      hint: 'Remove',
+      button: true,
+      child: ExcludeSemantics(
+        child: IconButton(
+          onPressed: onRemove,
+          icon: EzIcon(PlatformIcons(context).delete),
+        ),
+      ),
     );
 
     return removed

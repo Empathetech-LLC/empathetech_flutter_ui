@@ -20,35 +20,26 @@ class EzToolTipper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Widget tooltip = Semantics(
+      value: message,
+      child: Tooltip(
+        waitDuration: Duration.zero,
+        enableTapToDismiss: false,
+        triggerMode: TooltipTriggerMode.tap,
+        excludeFromSemantics: true,
+        message: message,
+        child: Container(
+          decoration: const BoxDecoration(shape: BoxShape.circle),
+          child: EzIcon(
+            PlatformIcons(context).helpOutline,
+            color: Theme.of(context).colorScheme.outline,
+          ),
+        ),
+      ),
+    );
+
     return textBackground
-        ? EzTextBackground(
-            Tooltip(
-              waitDuration: Duration.zero,
-              enableTapToDismiss: false,
-              triggerMode: TooltipTriggerMode.tap,
-              message: message,
-              child: Container(
-                decoration: const BoxDecoration(shape: BoxShape.circle),
-                child: EzIcon(
-                  PlatformIcons(context).helpOutline,
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-              ),
-            ),
-            useSurface: true,
-            borderRadius: ezPillShape,
-          )
-        : Tooltip(
-            waitDuration: Duration.zero,
-            enableTapToDismiss: false,
-            message: message,
-            child: Container(
-              decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: EzIcon(
-                PlatformIcons(context).helpOutline,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-            ),
-          );
+        ? EzTextBackground(tooltip, useSurface: true, borderRadius: ezPillShape)
+        : tooltip;
   }
 }

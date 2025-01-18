@@ -18,79 +18,98 @@ class ResetFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     final EFUILang l10n = EFUILang.of(context)!;
 
-    return FloatingActionButton(
-      onPressed: () => showPlatformDialog(
-        context: context,
-        builder: (BuildContext alertContext) {
-          return EzAlertDialog(
-            title: Text('${l10n.gReset}...', textAlign: TextAlign.center),
-            materialActions: <Widget>[
-              EzMaterialAction(
-                onPressed: () async {
-                  clearForms();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'Builder values',
-                isDefaultAction: true,
-              ),
-              EzMaterialAction(
-                onPressed: () async {
-                  await EzConfig.reset();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'App settings',
-                isDestructiveAction: true,
-              ),
-              EzMaterialAction(
-                onPressed: () async {
-                  clearForms();
-                  await EzConfig.reset();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'Both',
-                isDestructiveAction: true,
-              ),
-              EzMaterialAction(
-                onPressed: () => Navigator.of(alertContext).pop(),
-                text: 'Nothing',
-              ),
-            ],
-            cupertinoActions: <EzCupertinoAction>[
-              EzCupertinoAction(
-                onPressed: () async {
-                  clearForms();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'Builder values',
-                isDefaultAction: true,
-              ),
-              EzCupertinoAction(
-                onPressed: () async {
-                  await EzConfig.reset();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'App settings',
-                isDestructiveAction: true,
-              ),
-              EzCupertinoAction(
-                onPressed: () async {
-                  clearForms();
-                  await EzConfig.reset();
-                  if (alertContext.mounted) Navigator.of(alertContext).pop();
-                },
-                text: 'Both',
-                isDestructiveAction: true,
-              ),
-              EzCupertinoAction(
-                onPressed: () => Navigator.of(alertContext).pop(),
-                text: 'Nothing',
-              ),
-            ],
-            needsClose: false,
-          );
-        },
+    return Semantics(
+      label: 'Reset',
+      hint: 'Open a dialog to confirm what should be reset.',
+      button: true,
+      child: ExcludeSemantics(
+        child: FloatingActionButton(
+          onPressed: () => showPlatformDialog(
+            context: context,
+            builder: (BuildContext alertContext) {
+              return EzAlertDialog(
+                title: Text('${l10n.gReset}...', textAlign: TextAlign.center),
+                materialActions: <Widget>[
+                  EzMaterialAction(
+                    onPressed: () async {
+                      clearForms();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'Builder values',
+                    isDefaultAction: true,
+                  ),
+                  EzMaterialAction(
+                    onPressed: () async {
+                      await EzConfig.reset();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'App settings',
+                    isDestructiveAction: true,
+                  ),
+                  EzMaterialAction(
+                    onPressed: () async {
+                      clearForms();
+                      await EzConfig.reset();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'Both',
+                    isDestructiveAction: true,
+                  ),
+                  EzMaterialAction(
+                    onPressed: () => Navigator.of(alertContext).pop(),
+                    text: 'Nothing',
+                  ),
+                ],
+                cupertinoActions: <EzCupertinoAction>[
+                  EzCupertinoAction(
+                    onPressed: () async {
+                      clearForms();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'Builder values',
+                    isDefaultAction: true,
+                  ),
+                  EzCupertinoAction(
+                    onPressed: () async {
+                      await EzConfig.reset();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'App settings',
+                    isDestructiveAction: true,
+                  ),
+                  EzCupertinoAction(
+                    onPressed: () async {
+                      clearForms();
+                      await EzConfig.reset();
+                      if (alertContext.mounted) {
+                        Navigator.of(alertContext).pop();
+                      }
+                    },
+                    text: 'Both',
+                    isDestructiveAction: true,
+                  ),
+                  EzCupertinoAction(
+                    onPressed: () => Navigator.of(alertContext).pop(),
+                    text: 'Nothing',
+                  ),
+                ],
+                needsClose: false,
+              );
+            },
+          ),
+          child: EzIcon(PlatformIcons(context).refresh),
+        ),
       ),
-      child: EzIcon(PlatformIcons(context).refresh),
     );
   }
 }
