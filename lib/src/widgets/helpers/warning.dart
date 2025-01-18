@@ -54,9 +54,8 @@ class EzWarning extends StatelessWidget {
     final String warning = title ?? EFUILang.of(context)!.gAttention;
 
     return Semantics(
-      button: false,
-      readOnly: true,
       label: '$warning: $body',
+      readOnly: true,
       child: ExcludeSemantics(
         child: Card(
           child: Container(
