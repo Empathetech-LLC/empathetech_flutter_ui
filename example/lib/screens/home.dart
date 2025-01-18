@@ -1193,10 +1193,16 @@ class _LicensePicker extends StatelessWidget {
 
     const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
 
-    final Widget hideButton = IconButton(
-      onPressed: onHide,
-      icon: EzIcon(
-        visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+    final Widget hideButton = Semantics(
+      label: visible ? 'Close' : 'Open',
+      button: true,
+      child: ExcludeSemantics(
+        child: IconButton(
+          onPressed: onHide,
+          icon: EzIcon(
+            visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+          ),
+        ),
       ),
     );
 
