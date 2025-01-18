@@ -277,8 +277,9 @@ class _ColorSettingState extends State<EzColorSetting> {
     final String label = getColorName(widget.configKey);
 
     return Semantics(
+      label: label,
       button: true,
-      hint: l10n.csPickerHint(label),
+      hint: l10n.csPickerHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(

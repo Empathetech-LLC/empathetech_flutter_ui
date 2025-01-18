@@ -624,6 +624,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return Semantics(
+      label: widget.label,
       button: true,
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(

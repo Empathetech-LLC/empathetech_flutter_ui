@@ -73,8 +73,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         : EFUILang.supportedLocales + widget.locales!;
 
     return Semantics(
+      label: l10n.ssLanguage,
       button: true,
-      hint: l10n.ssLangHint,
+      hint: 'Activate to change the app language',
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           onPressed: () => showModalBottomSheet(
