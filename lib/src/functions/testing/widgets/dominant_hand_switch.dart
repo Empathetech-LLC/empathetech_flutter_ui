@@ -16,13 +16,13 @@ Future<void> testDHSetting(
   required bool isLefty,
 }) async {
   ezLog('\nTesting dominant hand setting');
-  await touch(tester, find.byType(DropdownMenu<bool>).last);
+  await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
 
   if (isLefty) {
     ezLog('Right hand layout');
 
     // Activate righty layout
-    await touchText(tester, l10n.gRight);
+    await ezTouchText(tester, l10n.gRight);
 
     List<Widget> handButtonsChildren =
         (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -37,8 +37,8 @@ Future<void> testDHSetting(
     ezLog('Left hand layout');
 
     // Activate lefty layout
-    await touch(tester, find.byType(DropdownMenu<bool>).last);
-    await touchText(tester, l10n.gLeft);
+    await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
+    await ezTouchText(tester, l10n.gLeft);
 
     // Verify lefty layout
     handButtonsChildren =
@@ -51,7 +51,7 @@ Future<void> testDHSetting(
     ezLog('Left hand layout');
 
     // Activate lefty layout
-    await touchText(tester, l10n.gLeft);
+    await ezTouchText(tester, l10n.gLeft);
 
     List<Widget> handButtonsChildren =
         (tester.widget(find.byType(Row).at(1)) as Row).children;
@@ -66,8 +66,8 @@ Future<void> testDHSetting(
     ezLog('Right hand layout');
 
     // Activate righty layout
-    await touch(tester, find.byType(DropdownMenu<bool>).last);
-    await touchText(tester, l10n.gRight);
+    await ezTouch(tester, find.byType(DropdownMenu<bool>).last);
+    await ezTouchText(tester, l10n.gRight);
 
     // Verify righty layout
     handButtonsChildren =

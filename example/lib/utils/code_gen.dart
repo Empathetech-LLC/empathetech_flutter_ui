@@ -297,8 +297,8 @@ void main() async {
   // Run the app //
   ${config.supportEmail != null ? '''// With a feedback wrapper
 
-  late final TextStyle lightFeedbackText = buildBody(Colors.black);
-  late final TextStyle darkFeedbackText = buildBody(Colors.white);
+  late final TextStyle lightFeedbackText = ezBodyStyle(Colors.black);
+  late final TextStyle darkFeedbackText = ezBodyStyle(Colors.white);
 
   runApp(BetterFeedback(
     theme: FeedbackThemeData(
@@ -581,7 +581,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final double toolbarHeight = measureText(
+    final double toolbarHeight = ezTextSize(
           appTitle,
           style: Theme.of(context).appBarTheme.titleTextStyle,
           context: context,
@@ -701,7 +701,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle('404 \${l10n.gError}', Theme.of(context).colorScheme.primary);
+    ezWindowNamer('404 \${l10n.gError}', Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -776,7 +776,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(appTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(appTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -1195,17 +1195,17 @@ void main() async {
         // Randomize the settings //
 
         // Open the settings menu
-        await touch(tester, find.byIcon(Icons.more_vert));
+        await ezTouch(tester, find.byIcon(Icons.more_vert));
 
         // Go to the settings page
-        await touchText(tester, l10n.ssPageTitle);
+        await ezTouchText(tester, l10n.ssPageTitle);
 
         // Randomize the settings
-        await touchText(tester, l10n.ssRandom);
-        await touchText(tester, l10n.gYes);
+        await ezTouchText(tester, l10n.ssRandom);
+        await ezTouchText(tester, l10n.gYes);
 
         // Return to home screen
-        await goBack(tester, l10n.gBack);
+        await ezTapBack(tester, l10n.gBack);
       });
 
       testWidgets('Test CountFAB', (WidgetTester tester) async {
@@ -1217,9 +1217,9 @@ void main() async {
 
         // ♫ It's as Ez as... ♫ //
 
-        await touch(tester, find.byType(CountFAB)); // 1
-        await touch(tester, find.byType(CountFAB)); // 2
-        await touch(tester, find.byType(CountFAB)); // 3
+        await ezTouch(tester, find.byType(CountFAB)); // 1
+        await ezTouch(tester, find.byType(CountFAB)); // 2
+        await ezTouch(tester, find.byType(CountFAB)); // 3
       });
     },
   );

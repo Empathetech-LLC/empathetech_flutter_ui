@@ -20,25 +20,25 @@ Future<void> testLocaleSetting(
 
   // Activate Spanish localizations
   ezLog('Spanish');
-  await touch(tester, find.byType(EzLocaleSetting));
-  await touchText(tester, l10nNames.nameOf('es')!);
+  await ezTouch(tester, find.byType(EzLocaleSetting));
+  await ezTouchText(tester, l10nNames.nameOf('es')!);
   await tester.pumpAndSettle();
 
   // Activate French localizations
   ezLog('French');
-  await touch(tester, find.byType(EzLocaleSetting));
-  await touchText(tester, l10nNames.nameOf('fr')!);
+  await ezTouch(tester, find.byType(EzLocaleSetting));
+  await ezTouchText(tester, l10nNames.nameOf('fr')!);
   await tester.pumpAndSettle();
 
   // Activate English localizations
   ezLog('English');
-  await touch(tester, find.byType(EzLocaleSetting));
-  await touchText(tester, l10nNames.nameOf('en')!);
+  await ezTouch(tester, find.byType(EzLocaleSetting));
+  await ezTouchText(tester, l10nNames.nameOf('en')!);
   await tester.pumpAndSettle();
 
   // Activate English localizations
   ezLog('Close');
-  await touch(tester, find.byType(EzLocaleSetting));
-  await touchText(tester, l10n.gClose);
+  await ezTouch(tester, find.byType(EzLocaleSetting));
+  await ezTouchText(tester, l10n.gClose);
   await tester.pumpAndSettle();
 }

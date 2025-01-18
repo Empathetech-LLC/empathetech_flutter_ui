@@ -9,8 +9,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
 
-/// Do you have a void [Function] as a parameter that you want to be optional?
-/// Then do nothing!
+// Aliases //
+
+/// Is there a required [Function] that you wish was optional?
+/// Then [doNothing]!
 void doNothing() {}
 
 /// First checks [PlatformTheme] then falls back to [MediaQuery]
@@ -27,19 +29,13 @@ double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 /// More readable than MediaQuery.of(context).size.height
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 
-/// Relaxed reading time for a US tween: 100 words per minute
-Duration readingTime(String passage) {
-  final int words = passage.split(' ').length;
-  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
-}
-
 /// Get the current [TargetPlatform]
 /// Even when [kIsWeb]
 TargetPlatform getBasePlatform(BuildContext context) =>
     getHostPlatform(context);
 
-/// Button combo(s) for taking a screenshot on the current [TargetPlatform]
-/// Empty for mobile (and unknown/default)
+/// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
+/// Defaults to an empty string on mobile (and unknown) platforms
 String screenshotHint(BuildContext context) {
   final TargetPlatform platform = getBasePlatform(context);
 
@@ -53,4 +49,12 @@ String screenshotHint(BuildContext context) {
     default:
       return '';
   }
+}
+
+// Custom //
+
+/// Relaxed reading time for a US tween: 100 words per minute
+Duration ezReadingTime(String passage) {
+  final int words = passage.split(' ').length;
+  return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }

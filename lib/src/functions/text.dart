@@ -1,10 +1,10 @@
-// ignore_for_file: deprecated_member_use
-// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
-
 /* empathetech_flutter_ui
  * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+
+// ignore_for_file: deprecated_member_use
+// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
 
 import '../../empathetech_flutter_ui.dart';
 
@@ -13,8 +13,8 @@ import 'package:flutter/services.dart';
 
 // Helpers //
 
-/// Returns the soon-to-be rendered size of [text] via a [TextPainter]
-Size measureText(
+/// Returns the soon-to-be rendered [Size] of [text] via a [TextPainter]
+Size ezTextSize(
   String text, {
   required BuildContext context,
   required TextStyle? style,
@@ -29,8 +29,8 @@ Size measureText(
   return textPainter.size;
 }
 
-/// Returns the soon-to-be rendered size of an [icon] via a [TextPainter]
-Size measureIcon(
+/// Returns the soon-to-be rendered [Size] of an [icon] via a [TextPainter]
+Size ezIconSize(
   IconData icon,
   BuildContext context, {
   TextStyle? style,
@@ -50,8 +50,9 @@ Size measureIcon(
   return textPainter.size;
 }
 
-/// For web apps, set the tab's title
-void setPageTitle(String title, Color primaryColor) =>
+/// [SystemChrome.setApplicationSwitcherDescription] wrapper
+/// Sets the title of the tab on web and the title of the window on desktop
+void ezWindowNamer(String title, Color primaryColor) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
@@ -60,10 +61,10 @@ void setPageTitle(String title, Color primaryColor) =>
     );
 
 /// Returns whether the passed [text] follows a URL pattern
-bool isUrl(String text) => Uri.parse(text).host.isNotEmpty;
+bool ezUrlCheck(String text) => Uri.parse(text).host.isNotEmpty;
 
 /// Splits the string on '_' and/or ' ' and returns the first word
-String firstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
+String ezFirstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
 
 // Converters //
 
@@ -146,15 +147,16 @@ TextStyle? subTitleStyle(TextTheme textTheme) =>
 
 // Setters //
 
-/// Creates a [TextTheme] with sizes from...
+/// Creates a [TextTheme] with sizes inspired by...
 /// https://m3.material.io/styles/typography/type-scale-tokens
-/// Each variant triplet (large, medium, small) are the same size: large
+/// Each variant triplet (large, medium, small) are identical
+/// 15 different options would be overload for users... 5 makes much more sense
 TextTheme ezTextTheme(Color? color) {
-  final TextStyle display = buildDisplay(color);
-  final TextStyle headline = buildHeadline(color);
-  final TextStyle title = buildTitle(color);
-  final TextStyle body = buildBody(color);
-  final TextStyle label = buildLabel(color);
+  final TextStyle display = ezDisplayStyle(color);
+  final TextStyle headline = ezHeadlineStyle(color);
+  final TextStyle title = ezTitleStyle(color);
+  final TextStyle body = ezBodyStyle(color);
+  final TextStyle label = ezLabelStyle(color);
 
   return TextTheme(
     displayLarge: display,
@@ -175,8 +177,8 @@ TextTheme ezTextTheme(Color? color) {
   );
 }
 
-/// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle buildDisplay(Color? color) {
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig.prefs]
+TextStyle ezDisplayStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
     fontWeight: EzConfig.get(displayBoldedKey) == true
@@ -201,7 +203,7 @@ TextStyle buildDisplay(Color? color) {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig.defaults]
-TextStyle buildDisplayFromDefaults(Color? color) {
+TextStyle ezDefaultDisplayStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(displayFontSizeKey),
     fontWeight: EzConfig.getDefault(displayBoldedKey) == true
@@ -226,8 +228,8 @@ TextStyle buildDisplayFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
-TextStyle buildHeadline(Color? color) {
+/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.prefs]
+TextStyle ezHeadlineStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
     fontWeight: EzConfig.get(headlineBoldedKey) == true
@@ -252,7 +254,7 @@ TextStyle buildHeadline(Color? color) {
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
-TextStyle buildHeadlineFromDefaults(Color? color) {
+TextStyle ezDefaultHeadlineStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(headlineFontSizeKey),
     fontWeight: EzConfig.getDefault(headlineBoldedKey) == true
@@ -277,8 +279,8 @@ TextStyle buildHeadlineFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.titleLarge] w/ values from [EzConfig]
-TextStyle buildTitle(Color? color) {
+/// Builds [TextTheme.titleLarge] w/ values from [EzConfig.prefs]
+TextStyle ezTitleStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
     fontWeight: EzConfig.get(titleBoldedKey) == true
@@ -303,7 +305,7 @@ TextStyle buildTitle(Color? color) {
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
-TextStyle buildTitleFromDefaults(Color? color) {
+TextStyle ezDefaultTitleStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(titleFontSizeKey),
     fontWeight: EzConfig.getDefault(titleBoldedKey) == true
@@ -328,8 +330,8 @@ TextStyle buildTitleFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
-TextStyle buildBody(Color? color) {
+/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.prefs]
+TextStyle ezBodyStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
     fontWeight: EzConfig.get(bodyBoldedKey) == true
@@ -354,7 +356,7 @@ TextStyle buildBody(Color? color) {
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
-TextStyle buildBodyFromDefaults(Color? color) {
+TextStyle ezDefaultBodyStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(bodyFontSizeKey),
     fontWeight: EzConfig.getDefault(bodyBoldedKey) == true
@@ -379,8 +381,8 @@ TextStyle buildBodyFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.labelLarge] w/ values from [EzConfig]
-TextStyle buildLabel(Color? color) {
+/// Builds [TextTheme.labelLarge] w/ values from [EzConfig.prefs]
+TextStyle ezLabelStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
     fontWeight: EzConfig.get(labelBoldedKey) == true
@@ -405,7 +407,7 @@ TextStyle buildLabel(Color? color) {
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
-TextStyle buildLabelFromDefaults(Color? color) {
+TextStyle ezDefaultLabelStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(labelFontSizeKey),
     fontWeight: EzConfig.getDefault(labelBoldedKey) == true

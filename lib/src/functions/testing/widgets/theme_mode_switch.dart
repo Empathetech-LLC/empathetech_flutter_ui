@@ -34,16 +34,16 @@ Future<void> testTMSwitch(
 
   // Activate light theme
   ezLog('Light');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gLight);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gLight);
 
   // Activate system theme
   ezLog('System');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gSystem);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gSystem);
 
   // Activate dark theme
   ezLog('Dark');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gDark);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gDark);
 }

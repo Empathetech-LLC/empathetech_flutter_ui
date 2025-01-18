@@ -24,7 +24,7 @@ Future<void> testImageSetting(
   required bool isLefty,
 }) async {
   ezLog('Opening dialog');
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('Validating text');
 
@@ -47,7 +47,7 @@ Future<void> testImageSetting(
       );
     }
 
-    await validateText(tester, l10n.isUseForColors);
+    await ezFindText(tester, l10n.isUseForColors);
   }
 
   ezLog('Validating platform options\n');
@@ -96,15 +96,15 @@ Future<void> _webTests(
     isLefty: isLefty,
     isCupertino: false,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(tester, find.byIcon(Icons.clear));
+  await ezTouch(tester, find.byIcon(Icons.clear));
   expect(find.byIcon(Icons.edit), findsOneWidget);
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Mobile (Android, iOS) sub-set of [testImageSetting]
@@ -123,7 +123,7 @@ Future<void> _mobileTests(
   ezLog('\nFrom file');
   await _testFile(tester,
       l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom camera');
   await _testCamera(
@@ -132,7 +132,7 @@ Future<void> _mobileTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom network');
   await _testNetwork(
@@ -142,10 +142,10 @@ Future<void> _mobileTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
   );
@@ -153,10 +153,10 @@ Future<void> _mobileTests(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsOneWidget,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Desktop (Linux, MacOS, Windows) sub-set of [testImageSetting]
@@ -179,7 +179,7 @@ Future<void> _desktopTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom network');
   await _testNetwork(
@@ -189,10 +189,10 @@ Future<void> _desktopTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
   );
@@ -200,10 +200,10 @@ Future<void> _desktopTests(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsOneWidget,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Test picking images from the file system
@@ -217,7 +217,7 @@ Future<void> _testFile(
     find.byIcon(isCupertino ? CupertinoIcons.folder : Icons.folder),
     findsOneWidget,
   );
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Test using images from camera
@@ -231,7 +231,7 @@ Future<void> _testCamera(
     find.byIcon(isCupertino ? CupertinoIcons.photo_camera : Icons.photo_camera),
     findsOneWidget,
   );
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Test using images from the web
@@ -242,10 +242,10 @@ Future<void> _testNetwork(
   required bool isLefty,
   required bool isCupertino,
 }) async {
-  await touch(tester, find.byIcon(Icons.computer_outlined));
+  await ezTouch(tester, find.byIcon(Icons.computer_outlined));
 
   ezLog('Validating text');
-  await validateText(tester, l10n.isEnterURL);
+  await ezFindText(tester, l10n.isEnterURL);
 
   ezLog('Validating layout');
   if (isCupertino) {
@@ -277,16 +277,16 @@ Future<void> _testNetwork(
   }
 
   ezLog('Cancel');
-  await touchText(tester, l10n.gCancel);
+  await ezTouchText(tester, l10n.gCancel);
 
   ezLog('Apply w/ invalid URL');
-  await touch(tester, find.byIcon(Icons.computer_outlined));
+  await ezTouch(tester, find.byIcon(Icons.computer_outlined));
   await tester.enterText(find.byType(TextFormField), 'invalid');
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, l10n.gApply);
 
   ezLog('Apply w/ valid URL');
   await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, l10n.gApply);
   expect(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsNothing,

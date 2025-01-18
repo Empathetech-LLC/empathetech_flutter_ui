@@ -47,7 +47,7 @@ class OpenUIScaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final double toolbarHeight = measureText(
+    final double toolbarHeight = ezTextSize(
           appTitle,
           style: Theme.of(context).appBarTheme.titleTextStyle,
           context: context,

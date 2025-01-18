@@ -20,27 +20,27 @@ Future<void> testResetButton(
   required bool isLefty,
 }) async {
   ezLog('\nTesting reset button');
-  await touch(tester, find.byType(EzResetButton));
+  await ezTouch(tester, find.byType(EzResetButton));
 
   ezLog('Text');
   switch (type) {
     case RBType.all:
-      await validateText(tester, l10n.gResetAll);
+      await ezFindText(tester, l10n.gResetAll);
       break;
     case RBType.text:
-      await validateText(tester, l10n.tsResetAll);
+      await ezFindText(tester, l10n.tsResetAll);
       break;
     case RBType.layout:
-      await validateText(tester, l10n.lsResetAll);
+      await ezFindText(tester, l10n.lsResetAll);
       break;
     case RBType.color:
-      await validateText(tester, l10n.csResetAll(l10n.gDark.toLowerCase()));
+      await ezFindText(tester, l10n.csResetAll(l10n.gDark.toLowerCase()));
       break;
     case RBType.image:
-      await validateText(tester, l10n.isResetAll(l10n.gDark.toLowerCase()));
+      await ezFindText(tester, l10n.isResetAll(l10n.gDark.toLowerCase()));
       break;
   }
-  await validateText(tester, l10n.gUndoWarn);
+  await ezFindText(tester, l10n.gUndoWarn);
 
   ezLog('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
@@ -74,9 +74,9 @@ Future<void> testResetButton(
   }
 
   ezLog('No');
-  await touchText(tester, l10n.gNo);
+  await ezTouchText(tester, l10n.gNo);
 
   ezLog('Yes');
-  await touch(tester, find.byType(EzResetButton));
-  await touchText(tester, l10n.gYes);
+  await ezTouch(tester, find.byType(EzResetButton));
+  await ezTouchText(tester, l10n.gYes);
 }

@@ -13,7 +13,7 @@ import 'package:image_picker/image_picker.dart';
 ImageProvider ezImageProvider(String path) {
   if (EzConfig.isPathAsset(path)) {
     return AssetImage(path);
-  } else if (isUrl(path)) {
+  } else if (ezUrlCheck(path)) {
     return NetworkImage(path);
   } else {
     return FileImage(File(path));

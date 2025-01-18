@@ -75,7 +75,7 @@ class _SettingsHomeState extends State<SettingsHome> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.ssPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(l10n.ssPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
