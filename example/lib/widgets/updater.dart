@@ -81,8 +81,7 @@ class _EzUpdaterState extends State<EzUpdater> {
             case TargetPlatform.iOS:
               url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
             default:
-              url =
-                  'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/';
+              url = openUIReleases;
           }
 
           launchUrl(Uri.parse(url));

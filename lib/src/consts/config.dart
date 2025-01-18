@@ -48,6 +48,10 @@ const String empathMastodon = 'https://mastodon.social/@empathetech';
 /// https://github.com/Empathetech-LLC
 const String empathGitHub = 'https://github.com/Empathetech-LLC';
 
+/// Where new journeys begin
+const String openUIReleases =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
+
 /// EFUI source
 /// https://github.com/Empathetech-LLC/empathetech_flutter_ui
 const String efuiGitHub =
