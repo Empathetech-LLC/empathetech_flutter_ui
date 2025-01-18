@@ -3,7 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import '../../../empathetech_flutter_ui.dart';
+
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
@@ -99,7 +101,7 @@ class EzCheckbox extends StatelessWidget {
           ? padding ?? EzInsets.col(EzConfig.get(marginKey))
           : EdgeInsets.zero,
       child: Transform.scale(
-        scale: ratio,
+        scale: max(1.0, ratio),
         child: Checkbox(
           value: value,
           tristate: tristate,
