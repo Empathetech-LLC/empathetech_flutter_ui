@@ -3,8 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 /// For integration testing

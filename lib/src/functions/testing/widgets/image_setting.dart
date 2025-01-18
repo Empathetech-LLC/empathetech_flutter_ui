@@ -3,13 +3,14 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../../empathetech_flutter_ui.dart';
+
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// For integration testing
 /// Tests [EzImageSetting]
@@ -205,6 +206,7 @@ Future<void> _desktopTests(
   await touchText(tester, l10n.gClose);
 }
 
+/// Test picking images from the file system
 Future<void> _testFile(
   WidgetTester tester, {
   required EFUILang l10n,
@@ -218,6 +220,7 @@ Future<void> _testFile(
   await touchText(tester, l10n.gClose);
 }
 
+/// Test using images from camera
 Future<void> _testCamera(
   WidgetTester tester, {
   required EFUILang l10n,
@@ -231,6 +234,7 @@ Future<void> _testCamera(
   await touchText(tester, l10n.gClose);
 }
 
+/// Test using images from the web
 Future<void> _testNetwork(
   WidgetTester tester, {
   required EFUILang l10n,
