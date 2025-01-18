@@ -40,7 +40,7 @@ class EzToolTipper extends StatelessWidget {
             key.currentState?.ensureTooltipVisible();
 
             // Wait for auto-announcement to finish
-            await Future<void>.delayed(readingTime('Help'));
+            await Future<void>.delayed(ezReadingTime('Help'));
             String message = this.message ?? '';
 
             if (richMessage != null) {

@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final double singleLineFormWidth = min(
-    measureText(
+    ezTextSize(
       longestError,
       context: context,
       style: textTheme.bodyLarge,
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     // Wait a sec
-    await Future<void>.delayed(readingTime(badPath));
+    await Future<void>.delayed(ezReadingTime(badPath));
 
     // Re-enable interaction
     setState(() {
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(appTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(appTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //

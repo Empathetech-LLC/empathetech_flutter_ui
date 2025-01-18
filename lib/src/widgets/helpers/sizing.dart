@@ -53,13 +53,13 @@ double dropdownWidth({
   final double padding = EzConfig.get(paddingKey);
 
   return margin +
-      measureText(
+      ezTextSize(
         getLongest(entries),
         context: context,
         style: textTheme.bodyLarge,
       ).width +
       (padding * 2) +
-      measureIcon(Icons.arrow_drop_down, context).width +
+      ezIconSize(Icons.arrow_drop_down, context).width +
       padding +
       margin;
 }

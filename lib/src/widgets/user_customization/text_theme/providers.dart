@@ -85,10 +85,10 @@ class DisplayTextStyleProvider extends BaseTextStyleProvider {
 
   DisplayTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildDisplay(color));
+        super(ezDisplayStyle(color));
 
   void reset() {
-    _style = buildDisplayFromDefaults(_textColor);
+    _style = ezDefaultDisplayStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
@@ -99,10 +99,10 @@ class HeadlineTextStyleProvider extends BaseTextStyleProvider {
 
   HeadlineTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildHeadline(color));
+        super(ezHeadlineStyle(color));
 
   void reset() {
-    _style = buildHeadlineFromDefaults(_textColor);
+    _style = ezDefaultHeadlineStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
@@ -113,10 +113,10 @@ class TitleTextStyleProvider extends BaseTextStyleProvider {
 
   TitleTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildTitle(color));
+        super(ezTitleStyle(color));
 
   void reset() {
-    _style = buildTitleFromDefaults(_textColor);
+    _style = ezDefaultTitleStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
@@ -127,10 +127,10 @@ class BodyTextStyleProvider extends BaseTextStyleProvider {
 
   BodyTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildBody(color));
+        super(ezBodyStyle(color));
 
   void reset() {
-    _style = buildBodyFromDefaults(_textColor);
+    _style = ezDefaultBodyStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
@@ -141,10 +141,10 @@ class LabelTextStyleProvider extends BaseTextStyleProvider {
 
   LabelTextStyleProvider(Color? color)
       : _textColor = color,
-        super(buildLabel(color));
+        super(ezLabelStyle(color));
 
   void reset() {
-    _style = buildLabelFromDefaults(_textColor);
+    _style = ezDefaultLabelStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }

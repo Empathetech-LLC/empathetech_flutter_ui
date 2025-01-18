@@ -32,7 +32,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle('404 ${l10n.gError}', Theme.of(context).colorScheme.primary);
+    ezWindowNamer('404 ${l10n.gError}', Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //

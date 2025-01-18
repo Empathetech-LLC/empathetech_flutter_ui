@@ -47,7 +47,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   late String? currFontFamily = widget.provider.value.fontFamily == null
       ? null
-      : ezClassToCamel(firstWord(widget.provider.value.fontFamily!));
+      : ezClassToCamel(ezFirstWord(widget.provider.value.fontFamily!));
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =

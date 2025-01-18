@@ -44,19 +44,19 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   late Map<String, String?> currFonts = <String, String?>{
     displayFontFamilyKey: displayProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(firstWord(displayProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(displayProvider.value.fontFamily!)),
     headlineFontFamilyKey: headlineProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(firstWord(headlineProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(headlineProvider.value.fontFamily!)),
     titleFontFamilyKey: titleProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(firstWord(titleProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(titleProvider.value.fontFamily!)),
     bodyFontFamilyKey: bodyProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(firstWord(bodyProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(bodyProvider.value.fontFamily!)),
     labelFontFamilyKey: labelProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(firstWord(labelProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(labelProvider.value.fontFamily!)),
   };
 
   late bool isUniform =

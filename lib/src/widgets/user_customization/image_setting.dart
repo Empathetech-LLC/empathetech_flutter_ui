@@ -94,7 +94,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     final String name = fit.name;
 
-    final double toolbarHeight = measureText(
+    final double toolbarHeight = ezTextSize(
           name,
           style: theme.textTheme.bodyLarge,
           context: context,
@@ -181,7 +181,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Validate a URL
   String? urlValidator(String? value) {
-    return (value == null || value.isEmpty || !isUrl(value))
+    return (value == null || value.isEmpty || !ezUrlCheck(value))
         ? l10n.gValidURL
         : null;
   }
@@ -567,7 +567,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               context,
               title: l10n.isGetFailed,
               message:
-                  '$result${isUrl(newPath) ? '\n\n${l10n.isPermission}' : ''}',
+                  '$result${ezUrlCheck(newPath) ? '\n\n${l10n.isPermission}' : ''}',
             );
           }
           return;

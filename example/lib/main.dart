@@ -41,8 +41,8 @@ void main() async {
   // Run the app //
   // With a feedback wrapper
 
-  late final TextStyle lightFeedbackText = buildBody(Colors.black);
-  late final TextStyle darkFeedbackText = buildBody(Colors.white);
+  late final TextStyle lightFeedbackText = ezBodyStyle(Colors.black);
+  late final TextStyle darkFeedbackText = ezBodyStyle(Colors.white);
 
   runApp(BetterFeedback(
     theme: FeedbackThemeData(

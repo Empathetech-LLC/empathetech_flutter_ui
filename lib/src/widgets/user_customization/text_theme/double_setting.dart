@@ -77,7 +77,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   final EzSpacer pMSpacer = EzMargin(vertical: false);
 
-  late final Size sizeLimit = measureText(
+  late final Size sizeLimit = ezTextSize(
     widget.sizingString,
     style: style,
     context: context,
