@@ -339,73 +339,84 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         // Icon size
-        EzTextBackground(
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Minus
-              (currIconSize > minIconSize)
-                  ? IconButton(
-                      onPressed: () async {
-                        currIconSize -= iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, currIconSize);
-                        setState(() {});
-                      },
-                      tooltip: '${l10n.tsDecrease} icon size',
-                      icon: Icon(PlatformIcons(context).remove,
-                          size: currIconSize),
-                    )
-                  : IconButton(
-                      style: IconButton.styleFrom(
-                        side: BorderSide(color: colorScheme.outlineVariant),
-                        overlayColor: colorScheme.outline,
-                        shadowColor: Colors.transparent,
+        Tooltip(
+          message: 'Icon size',
+          child: EzTextBackground(
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                // Minus
+                (currIconSize > minIconSize)
+                    ? IconButton(
+                        onPressed: () async {
+                          currIconSize -= iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, currIconSize);
+                          setState(() {});
+                        },
+                        tooltip: '${l10n.tsDecrease} icon size',
+                        icon: Icon(
+                          PlatformIcons(context).remove,
+                          size: currIconSize,
+                        ),
+                      )
+                    : IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.outlineVariant),
+                          overlayColor: colorScheme.outline,
+                          shadowColor: Colors.transparent,
+                        ),
+                        onPressed: doNothing,
+                        tooltip: 'Minimum',
+                        icon: Icon(
+                          PlatformIcons(context).remove,
+                          size: currIconSize,
+                          color: colorScheme.outline,
+                        ),
                       ),
-                      onPressed: doNothing,
-                      tooltip: 'Minimum',
-                      icon: Icon(
-                        PlatformIcons(context).remove,
-                        size: currIconSize,
-                        color: colorScheme.outline,
-                      ),
-                    ),
-              pMSpacer,
+                pMSpacer,
 
-              // Preview
-              Icon(Icons.sync_alt, size: currIconSize),
-              pMSpacer,
+                // Preview
+                Icon(
+                  Icons.sync_alt,
+                  size: currIconSize,
+                  color: colorScheme.onSurface,
+                ),
+                pMSpacer,
 
-              // Plus
-              (currIconSize < maxIconSize)
-                  ? IconButton(
-                      onPressed: () async {
-                        currIconSize += iconDelta;
-                        await EzConfig.setDouble(iconSizeKey, currIconSize);
-                        setState(() {});
-                      },
-                      tooltip: '${l10n.tsIncrease} icon size',
-                      icon:
-                          Icon(PlatformIcons(context).add, size: currIconSize),
-                    )
-                  : IconButton(
-                      style: IconButton.styleFrom(
-                        side: BorderSide(color: colorScheme.outlineVariant),
-                        overlayColor: colorScheme.outline,
-                        shadowColor: Colors.transparent,
+                // Plus
+                (currIconSize < maxIconSize)
+                    ? IconButton(
+                        onPressed: () async {
+                          currIconSize += iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, currIconSize);
+                          setState(() {});
+                        },
+                        tooltip: '${l10n.tsIncrease} icon size',
+                        icon: Icon(
+                          PlatformIcons(context).add,
+                          size: currIconSize,
+                        ),
+                      )
+                    : IconButton(
+                        style: IconButton.styleFrom(
+                          side: BorderSide(color: colorScheme.outlineVariant),
+                          overlayColor: colorScheme.outline,
+                          shadowColor: Colors.transparent,
+                        ),
+                        onPressed: doNothing,
+                        tooltip: 'Maximum',
+                        icon: Icon(
+                          PlatformIcons(context).add,
+                          size: currIconSize,
+                          color: colorScheme.outline,
+                        ),
                       ),
-                      onPressed: doNothing,
-                      tooltip: 'Maximum',
-                      icon: Icon(
-                        PlatformIcons(context).add,
-                        size: currIconSize,
-                        color: colorScheme.outline,
-                      ),
-                    ),
-            ],
+              ],
+            ),
+            useSurface: true,
+            borderRadius: ezPillShape,
+            backgroundColor: backgroundColor,
           ),
-          useSurface: true,
-          borderRadius: ezPillShape,
-          backgroundColor: backgroundColor,
         ),
         separator,
 
