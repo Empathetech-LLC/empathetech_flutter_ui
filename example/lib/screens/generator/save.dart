@@ -93,9 +93,25 @@ class _SaveScreenState extends State<SaveScreen> {
         return Center(
           child: SuccessHeader(
             textTheme: textTheme,
-            message: '''Your configuration has been saved to ${archivePath()}
-
-Use it on Open UI for desktop to generate the code for ${widget.config.appName}''',
+            richMessage: EzRichText(
+              <InlineSpan>[
+                EzPlainText(
+                    text:
+                        'Your configuration has been saved to ${archivePath()}\n\nUse it on '),
+                EzInlineLink(
+                  'Open UI',
+                  style: subTitleStyle(textTheme),
+                  textAlign: TextAlign.center,
+                  url: Uri.parse(openUIReleases),
+                  semanticsLabel: 'BLARG',
+                ),
+                EzPlainText(
+                    text:
+                        ' for desktop to generate the code for ${widget.config.appName}'),
+              ],
+              style: subTitleStyle(textTheme),
+              textAlign: TextAlign.center,
+            ),
           ),
         );
       case GeneratorState.failed:
