@@ -316,7 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                const EzToolTipper('Backwards, it is'),
+                const EzToolTipper(message: 'Backwards, it is'),
               ],
             ),
             ConstrainedBox(
@@ -388,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                const EzToolTipper('Easy to change later'),
+                const EzToolTipper(message: 'Easy to change later'),
               ],
             ),
             Padding(
@@ -970,7 +970,7 @@ class _BasicField extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Flexible(child: titleText),
-            if (tip != null) EzToolTipper(tip!),
+            if (tip != null) EzToolTipper(message: tip),
           ],
         ),
 
@@ -1094,7 +1094,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                         ],
                         if (tip != null) ...<Widget>[
                           rowMargin,
-                          EzToolTipper(tip!),
+                          EzToolTipper(message: tip),
                         ],
                       ]
                     : <Widget>[
@@ -1107,7 +1107,7 @@ class _AdvancedSettingsField extends StatelessWidget {
                         ],
                         if (tip != null) ...<Widget>[
                           rowMargin,
-                          EzToolTipper(tip!),
+                          EzToolTipper(message: tip),
                         ],
                       ],
               ),
@@ -1189,7 +1189,14 @@ class _LicensePicker extends StatelessWidget {
       ),
     );
 
-    const Widget tip = EzToolTipper('https://choosealicense.com/');
+    const String chooseALicense = 'https://choosealicense.com/';
+    final Widget tip = EzToolTipper(
+      richMessage: EzInlineLink(
+        chooseALicense,
+        url: Uri.parse(chooseALicense),
+        semanticsLabel: 'Open a link to documentation on open source licenses',
+      ),
+    );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
