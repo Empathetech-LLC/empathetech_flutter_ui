@@ -2,7 +2,7 @@
 // Color.value was deprecated without replacement, .toARGB32() should be in next stable release
 
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
