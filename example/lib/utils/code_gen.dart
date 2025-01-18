@@ -512,19 +512,32 @@ class SettingsButton extends StatelessWidget {
 class EFUICredits extends StatelessWidget {
   final BuildContext parentContext;
 
-  /// [EzMenuButton] for opening EFUI on GitHub
+  /// [EzMenuButton] for opening EFUI's product page
   /// Honor system: keep a version of this in your app
-  /// Remove if, and only if, appropriate contributions have been made to Empathetech LLC
+  /// Remove iff appropriate contributions have been made to Empathetech LLC
   /// https://www.empathetech.net/#/contribute
   const EFUICredits(this.parentContext, {super.key});
 
   @override
-  Widget build(BuildContext context) => EzMenuButton(
+  Widget build(BuildContext context) {
+    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+    final String label = isLefty ? 'made by' : EFUILang.of(context)!.gCreator;
+    const String tip = 'Open a link to Empathetic LLC';
+
+    return Tooltip(
+      message: tip,
+      excludeFromSemantics: true,
+      child: EzMenuButton(
         onPressed: () =>
             launchUrl(Uri.parse('https://www.empathetech.net/#/products')),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: EFUILang.of(context)!.gCreator,
-      );
+        label: label,
+        semanticsLabel:
+            '\${isLefty ? 'Settings \$label' : '\$label settings'}. \$tip',
+      ),
+    );
+  }
 }
 """);
 
