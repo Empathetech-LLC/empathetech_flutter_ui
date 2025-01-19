@@ -8,7 +8,10 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRowCol extends StatelessWidget {
+  /// ! [ScreenSpace.isLimited] child
   final Widget row;
+
+  /// [ScreenSpace.isLimited] child
   final Column col;
 
   /// [Row] or [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]

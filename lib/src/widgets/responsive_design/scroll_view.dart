@@ -10,40 +10,74 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzScrollView extends StatefulWidget {
-  // Scrollbar parameters //
-
+  /// [Scrollbar.controller] passthrough
   final ScrollController? controller;
+
+  /// [Scrollbar.thumbVisibility] passthrough
   final bool? thumbVisibility;
+
+  /// [Scrollbar.thickness] passthrough
   final double? thickness;
+
+  /// [Scrollbar.radius] passthrough
   final Radius? radius;
+
+  /// [Scrollbar.notificationPredicate] passthrough
   final ScrollNotificationPredicate? notificationPredicate;
+
+  /// [Scrollbar.scrollbarOrientation] passthrough
   final ScrollbarOrientation? scrollbarOrientation;
 
-  // SingleChildScrollView parameters //
-
+  /// [SingleChildScrollView.scrollDirection] passthrough
   final Axis scrollDirection;
 
   /// Only useful when [scrollDirection] is [Axis.horizontal]
   /// Is passed to the [SingleChildScrollView]s [EzRow]
   final bool reverseHands;
 
+  /// [SingleChildScrollView.reverse] passthrough
   final bool reverse;
+
+  /// [SingleChildScrollView.padding] passthrough
   final EdgeInsetsGeometry? padding;
+
+  /// [SingleChildScrollView.primary] passthrough
   final bool? primary;
+
+  /// [SingleChildScrollView.physics] passthrough
   final ScrollPhysics? physics;
+
+  /// [SingleChildScrollView.child] passthrough
   final Widget? child;
+
+  /// [SingleChildScrollView.clipBehavior] passthrough
   final Clip clipBehavior;
+
+  /// [SingleChildScrollView.dragStartBehavior] passthrough
   final DragStartBehavior dragStartBehavior;
+
+  /// [SingleChildScrollView.restorationId] passthrough
   final String? restorationId;
+
+  /// [SingleChildScrollView.keyboardDismissBehavior] passthrough
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
 
-  // EzRow/Column parameters //
-
+  /// [EzRow.mainAxisSize]/[Column.mainAxisSize] passthrough
   final MainAxisSize mainAxisSize;
+
+  /// [EzRow.mainAxisAlignment]/[Column.mainAxisAlignment] passthrough
   final MainAxisAlignment mainAxisAlignment;
+
+  /// [EzRow.crossAxisAlignment]/[Column.crossAxisAlignment] passthrough
   final CrossAxisAlignment crossAxisAlignment;
+
+  /// [EzRow.textDirection]/[Column.textDirection] passthrough
   final TextDirection? textDirection;
+
+  /// [EzRow.textBaseline]/[Column.textBaseline] passthrough
   final TextBaseline? textBaseline;
+
+  /// [EzRow.verticalDirection]/[Column.verticalDirection] passthrough
   final VerticalDirection verticalDirection;
 
   /// Optionally jump to the center of the scroll upon creation
