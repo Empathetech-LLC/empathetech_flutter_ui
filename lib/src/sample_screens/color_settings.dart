@@ -22,8 +22,8 @@ class EzColorSettings extends StatefulWidget {
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
-  /// Default Empathetech color settings screen
-  /// Recommended to use this as the body for your [Scaffold]
+  /// Empathetech color settings
+  /// Recommended to use as a [Scaffold.body]
   const EzColorSettings({
     super.key,
     this.useImageDecoration = true,
