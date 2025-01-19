@@ -3,34 +3,68 @@
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.fr.md)
 
-EFUI is a starter kit for building [Flutter](https://flutter.dev/) apps with a solid foundation in every aspect of digital accessibility:
+<br>EFUI is a [Flutter](https://flutter.dev/) library for building highly accessible apps. EFUI simplifies...
 
 - **Platform availability**
-  - Thanks to Flutter, EFUI is fully cross platform! You can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
-    - Thanks to integration with [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), apps built with EFUI will gracefully adapt to Cupertino (Apple) styling
+  - Thanks to Flutter, you can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
+    - EFUI uses [Flutter Platform Widgets](https://pub.dev/packages/flutter_platform_widgets), so apps will gracefully adapt to Cupertino (Apple) styling.
 - **Responsive design**
-  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-  - Checkout the [demo](#live) to see it in action
+  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
+  - Checkout [our site](https://www.empathetech.net/#/contribute) to see it in action.
 - **Screen reader support**
-  - All custom Widgets and the example app have been manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios)
+  - Empathetech code is manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios).
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice.
-    - EFUI exposes every aspect of an app's theme to be controlled by the user.
+  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice!
+    - EFUI provides an elegant UX for full control of an app's appearance.
 - **Internationalization**
   - All of EFUI's [external text](./lib/src/l10n/) has been translated to Spanish and French. Alongside the [infrastructure](./l10n.yaml) for unlimited future translations.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to winning a race than acceleration. If your translations are generated, disclose that. EFUI's translations started with A.H.I. and ended with [H.I.](#translations)
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to a great car than just acceleration! If your translations are generated: disclose that. EFUI's translations started with A.I. and ended with [H.I.](#translations)
+- **Cost**
+  - While we encourage [contributions](#contributing), EFUI is completely free and [open source](LICENSE).
+  - [Open UI](#usage) can also get you started with a professionally polished, empathetic app in one click\*
+    - \*if you already have Flutter installed. A few more clicks if not.
 
 <br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a better place together!
 
-## Table of Contents
+## <br>Table of Contents
 
-* [Installation](#installation)
 * [Usage](#usage)
-* [Demo](#demo)
 * [Contributing](#contributing)
 * [License](#license)
 
-# Installation
+# <br>Usage 
+
+## **Open UI**
+
+Is an app generator. It is available everywhere, and can give your idea an accessible, production ready foundation with one click.
+
+&nbsp;&nbsp;&nbsp;[Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[MacOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-windows.exe)
+
+<br>*Mobile platforms simply save a configuration file that can be used on the Desktop app generator(s). Just ne-click for loading configs too!
+
+### <br>Beginner tutorials
+
+If you're new to Flutter: welcome! EFUI is full of doc comments to help you on your path.
+
+Here are some (unaffiliated) videos you might also find helpful.
+
+- [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
+- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
+- [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
+
+## <br>Integrating EFUI with existing projects 
+
+### TL;DR
+
+--- Required ---
+1. Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
+2. Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/theme_data.dart) in any existing provider/app<br>  - OR use `EzConfig`s data when building your `ThemeData`
+
+--- Recommended ---
+1. Copy the [settings sandbox](./example/lib/screens/) to your project
+2. Enjoy
+
+### <br>Step 0
 
 In your app's base directory, run
 
@@ -44,31 +78,7 @@ And add the following import to any files that use EFUI's library
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 ```
 
-## Beginner tutorials
-
-If you're new to Flutter: welcome! EFUI is full of comments to help you on your path.
-
-Here are some (unaffiliated) videos you might also find helpful.
-
-- [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
-- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
-- [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
-
-# Usage
-
-## TL;DR
-
---- Required ---
-1. Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
-2. Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)<br>  - OR use [ezThemeData](./lib/src/functions/theme_data.dart) in any existing provider/app<br>  - OR use `EzConfig` to build a custom `ThemeData`
-
-<br>--- Recommended ---
-1. Copy the [settings sandbox](./example/lib/screens/) to your project
-2. Enjoy
-
-## Setup
-
-### Step 1
+### <br>Step 1
 
 #### Initialize [EzConfig](./lib/src/classes/config.dart) in `void main()`
 
@@ -105,7 +115,7 @@ void main() async {
 
 Once gathered, `EzConfig` stores the data in a Singleton instance for efficient access. `EzConfig` has a series of getter and setter methods for safe interactions with the theme data.
 
-### Step 2
+### <br>Step 2
 
 #### Use [EzAppProvider](./lib/src/classes/platform_availability/app_provider.dart) to build a [PlatformApp](https://pub.dev/documentation/flutter_platform_widgets/latest/flutter_platform_widgets/PlatformApp-class.html)
 
@@ -150,7 +160,7 @@ You are more than welcome to use your own app/app provider with `ezThemeData` fo
 
 Or, you can even build your own fully custom base theme with `EzConfig` data.
 
-### Step 3
+### <br>Step 3
 
 #### Copy the [settings sandbox](./example/lib/screens/) to your project
 
@@ -232,7 +242,7 @@ By default, every base [theme setting](./lib/src/consts/config_keys.dart) is exp
 
 If there are any theme values you wish to stay constant, simply remove the paired setting Widget(s).
 
-### Step 4
+### <br>Step 4
 
 #### Enjoy!
 
@@ -246,20 +256,13 @@ Thankfully, EFUI's got you covered there too!
 
 <br>At the risk of information overload, that should be plenty to get you started. Once you're feeling settled, the repo has been organized to aid in exploration!
 
-# Demo
-
-### [Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)
-### [iOS](https://apps.apple.com/us/app/open-ui/id6499560244)
-### [Desktop](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases)
-### [Web](https://www.empathetech.net/#/settings)
-
-# Contributing
+# <br>Contributing
 
 ## The vibes!
 
 If you build something with EFUI, let us know!
 
-## Time
+## <br>Time
 
 Please reach out to the [community](mailto:community@empathetech.net?subject=Becoming%20a%20contributor) contact about becoming a contributor. There's never a shortage of ideas, only time!
 
@@ -269,26 +272,12 @@ If you speak English and a currently unsupported language, please reach out! The
 
 OR: If you speak English and a currently supported language, and see something wrong, please reach out! It takes a village.
 
-## Money
+## <br>Money
 
 Many thanks for any and all donations!
 
-### [GoFundMe](https://gofund.me/c047d07e)
+&nbsp;&nbsp;&nbsp;[GoFundMe](https://gofund.me/c047d07e)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Patreon](https://patreon.com/empathetech)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Ko-fi](https://ko-fi.com/empathetech)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[PayPal](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Venmo](https://venmo.com/empathetech)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Cash App](https://cash.app/$empathetech)
 
-### [Patreon](https://patreon.com/empathetech)
-
-### [Buy Me a Coffee](https://www.buymeacoffee.com/empathetech)
-
-### [Ko-fi](https://ko-fi.com/empathetech)
-
-### Paypal
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
-
-### [Venmo](https://venmo.com/empathetech)
-
-### [Cash App](https://cash.app/$empathetech)
-
-# License
+# <br>License
 
 [GNU GPLv3](LICENSE)
