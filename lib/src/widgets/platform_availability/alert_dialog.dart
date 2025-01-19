@@ -134,22 +134,22 @@ class EzAlertDialog extends PlatformAlertDialog {
 }
 
 class EzMaterialAction extends StatelessWidget {
-  /// [TextButton.child] will be [Text] with [text]
+  /// [EzTextButton.text] passthrough
   final String text;
 
-  /// [TextButton.onPressed] passthrough
+  /// [EzTextButton.onPressed] passthrough
   final void Function() onPressed;
 
-  /// Will bold [style]
+  /// Will add [FontWeight.bold] to [style]
   final bool isDefaultAction;
 
-  /// will add [ColorScheme.error] to [style]
+  /// Will add [ColorScheme.error] to [style]
   final bool isDestructiveAction;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? style;
 
-  /// [EzTextButton] wrapper
+  /// [EzTextButton] wrapper with custom styling for an [AlertDialog]
   const EzMaterialAction({
     super.key,
     required this.text,
@@ -178,23 +178,23 @@ class EzMaterialAction extends StatelessWidget {
 }
 
 class EzCupertinoAction extends StatelessWidget {
-  /// [CupertinoDialogAction.child] will be [Text] with [text]
+  /// [EzTextButton.text] passthrough
   final String text;
 
-  /// [CupertinoDialogAction.onPressed] passthrough
+  /// [EzTextButton.onPressed] passthrough
   final void Function() onPressed;
 
-  /// Will bold [style]
+  /// Will add [FontWeight.bold] to [style]
   final bool isDefaultAction;
 
-  /// will add [ColorScheme.error] to [style]
+  /// Will add [ColorScheme.error] to [style]
   final bool isDestructiveAction;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? style;
 
-  /// [CupertinoDialogAction] wrapper with custom styling
-  /// Uses proper [MouseCursor]
+  /// [EzTextButton] wrapper with custom styling for a [CupertinoAlertDialog]
+  /// Includes a [MouseCursor] layer for MacOS
   const EzCupertinoAction({
     super.key,
     required this.text,
