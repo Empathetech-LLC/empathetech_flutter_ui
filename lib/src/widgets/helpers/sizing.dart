@@ -8,6 +8,20 @@ import '../../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+// Aliases //
+
+/// [BorderRadius].only(top left && top right: [Radius.circular] => 4.0)
+const BorderRadius textFieldRadius = BorderRadius.only(
+  topLeft: Radius.circular(4),
+  topRight: Radius.circular(4),
+);
+
+/// Returns the longest [String] in [list]
+String getLongest(List<String> list) =>
+    list.reduce((String a, String b) => a.length > b.length ? a : b);
+
+// Custom //
+
 class EzInsets extends EdgeInsets {
   /// [EdgeInsets].symmetric(horizontal: [base], vertical: [base] / 2)
   const EzInsets.col(double base)
@@ -24,12 +38,6 @@ class EzInsets extends EdgeInsets {
 /// [BorderRadius].all([Radius.circular] => 4.0)
 const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
 
-/// [BorderRadius].only(top left && top right: [Radius.circular] => 4.0)
-const BorderRadius textFieldRadius = BorderRadius.only(
-  topLeft: Radius.circular(4),
-  topRight: Radius.circular(4),
-);
-
 /// [BorderRadius].all([Radius.circular] => 64.0)
 const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(64.0));
 
@@ -45,7 +53,7 @@ BoxConstraints ezTextFieldConstraints(BuildContext context) {
 }
 
 /// Returns an appropriate width for a [DropdownMenu]
-double dropdownWidth({
+double ezDropdownWidth({
   required BuildContext context,
   required List<String> entries,
 }) {
@@ -64,7 +72,3 @@ double dropdownWidth({
       padding +
       margin;
 }
-
-/// Returns the longest [String] in [list]
-String getLongest(List<String> list) =>
-    list.reduce((String a, String b) => a.length > b.length ? a : b);

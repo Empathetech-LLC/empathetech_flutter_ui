@@ -14,6 +14,8 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   /// Defaults to [TextTheme.labelLarge]
   final TextStyle? style;
 
+  /// Shout-out: [TextAlign.start] >> [TextAlign.left] for LTR
+  /// (&& >> [TextAlign.right] for RTL)
   final TextAlign textAlign;
 
   /// Won't appear for this locale
@@ -22,7 +24,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
   /// Spacing widget to place below the message
   final Widget footer;
 
-  /// Caw
+  /// Include in pages with translated material that still requires human review
   const EzTranslationsPendingNotice({
     super.key,
     this.message,
@@ -34,8 +36,6 @@ class EzTranslationsPendingNotice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
-
     final Locale currLocale = EzConfig.getLocale() ?? defaultLocale;
 
     return (currLocale == defaultLocale)

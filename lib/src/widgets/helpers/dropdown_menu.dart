@@ -15,7 +15,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
   /// [DropdownMenu.width] passthrough
   final double? width;
 
-  /// Will set [width] to [dropdownWidth] of [widthEntries]
+  /// Will set [width] to [ezDropdownWidth] of [widthEntries]
   final List<String>? widthEntries;
 
   /// Optional [IconButton.iconSize] override
@@ -160,7 +160,7 @@ class EzDropdownMenu<T> extends StatelessWidget {
         width: width ??
             (widthEntries == null
                 ? null
-                : dropdownWidth(context: context, entries: widthEntries!)),
+                : ezDropdownWidth(context: context, entries: widthEntries!)),
         menuHeight: menuHeight,
         leadingIcon: leadingIcon,
         trailingIcon: trailingIcon ??

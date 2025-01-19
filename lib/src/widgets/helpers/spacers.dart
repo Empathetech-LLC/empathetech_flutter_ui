@@ -17,8 +17,7 @@ class EzSpacer extends StatelessWidget {
   /// Whether [space] should be provided to [SizedBox.width]
   final bool horizontal;
 
-  /// [SizedBox] with [space] dimensions for creating space in your layout
-  /// Defaults to [EzConfig]s [spacingKey] value
+  /// [SizedBox] with [space] dimensions for organizing your layout
   const EzSpacer({
     super.key,
     this.space,

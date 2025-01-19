@@ -15,10 +15,17 @@ import 'package:file_saver/file_saver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzFeedbackMenuButton extends StatelessWidget {
+  /// [BuildContext] passthrough
   final BuildContext parentContext;
+
+  /// Included in the email subject
   final String appName;
+
+  /// Feedback recipient
   final String supportEmail;
 
+  /// Activates the [BetterFeedback] tool and shares the results with [supportEmail]
+  /// [Share.shareXFiles] on mobile, classic mailto everywhere else
   const EzFeedbackMenuButton({
     super.key,
     required this.parentContext,

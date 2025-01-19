@@ -8,7 +8,10 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzTextButton extends StatefulWidget {
+  /// [TextButton.onPressed] passthrough
   final void Function()? onPressed;
+
+  /// [TextButton.onLongPress] passthrough
   final void Function()? onLongPress;
 
   /// Defaults to add an [TextDecoration.underline] to the [text]
@@ -19,28 +22,38 @@ class EzTextButton extends StatefulWidget {
   /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
 
-  /// Default true
   /// Adds an [TextDecoration.underline] to the [text] via [onHover] and [onFocusChange]
   final bool underline;
 
   /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [TextButton.style] passthrough
   final ButtonStyle? style;
+
+  /// [TextButton.focusNode] passthrough
   final FocusNode? focusNode;
+
+  /// [TextButton.autofocus] passthrough
   final bool autofocus;
+
+  /// [TextButton.clipBehavior] passthrough
   final Clip? clipBehavior;
+
+  /// [TextButton.statesController] passthrough
   final WidgetStatesController? statesController;
 
+  /// [TextButton.child] will be [Text] with [text], [textStyle], and [textAlign]
   final String text;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
-  /// [Text] passthrough
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// [TextButton] wrapper that automatically underlines its text [onHover] and [onFocusChange]
+  /// [TextButton] with custom styling
+  /// Crucially: automatically underlines its text [onHover] and [onFocusChange]
   const EzTextButton({
     super.key,
     this.onPressed,
@@ -108,7 +121,10 @@ class _EzTextButtonState extends State<EzTextButton> {
 }
 
 class EzTextIconButton extends StatefulWidget {
+  /// [TextButton.onPressed] passthrough
   final void Function()? onPressed;
+
+  /// [TextButton.onLongPress] passthrough
   final void Function()? onLongPress;
 
   /// Defaults to add an [TextDecoration.underline] to the [label]
@@ -119,31 +135,41 @@ class EzTextIconButton extends StatefulWidget {
   /// Can override and/or set [underline] to false
   final void Function(bool)? onFocusChange;
 
-  /// Default true
   /// Adds an [TextDecoration.underline] to the [label] via [onHover] and [onFocusChange]
   final bool underline;
 
   /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [TextButton.style] passthrough
   final ButtonStyle? style;
+
+  /// [TextButton.focusNode] passthrough
   final FocusNode? focusNode;
+
+  /// [TextButton.autofocus] passthrough
   final bool? autofocus;
+
+  /// [TextButton.clipBehavior] passthrough
   final Clip? clipBehavior;
+
+  /// [TextButton.statesController] passthrough
   final WidgetStatesController? statesController;
 
+  /// [TextButton.icon] passthrough
   /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
   final Widget icon;
 
+  /// [TextButton.icon] label will be [Text] with [label], [textStyle], and [textAlign]
   final String label;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? textStyle;
 
-  /// [Text] passthrough
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// [TextButton.icon] wrapper that responds to [isLeftyKey]
+  /// [TextButton.icon] with styling like an [EzTextButton] and the [icon] responds to [isLeftyKey]
   const EzTextIconButton({
     super.key,
     this.onPressed,

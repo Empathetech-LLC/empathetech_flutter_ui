@@ -8,23 +8,25 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzTextBackground extends StatelessWidget {
-  /// The [Text] that needs a background
+  /// The [Widget] that needs a background
+  /// Doesn't have to be [Text]
   final Widget text;
 
-  /// Defaults to [EzInsets.wrap]
+  /// Defaults to [EzInsets.wrap] with [marginKey]
   final EdgeInsets? margin;
 
   /// Defaults to [ezRoundEdge]
   final BorderRadiusGeometry? borderRadius;
 
-  /// Will use surface container if false
+  /// false: [ColorScheme.surfaceContainer]
+  /// true: [ColorScheme.surface]
   final bool useSurface;
 
-  /// Optional background color override
-  /// Can ignore [useSurface] if this is set
+  /// Optional override
+  /// Will ignore [useSurface] if this is set
   final Color? backgroundColor;
 
-  /// Create a [Container] for your [text] with a background color that automatically responds to [textBackgroundOpacityKey]
+  /// Create a [Container] for your [text] with a background color that automatically responds to [lightTextBackgroundOpacityKey]/[darkTextBackgroundOpacityKey]
   const EzTextBackground(
     this.text, {
     super.key,
@@ -71,7 +73,7 @@ class EzText extends StatelessWidget {
   final String data;
 
   /// [Text.style] passthrough
-  /// Default to [TextTheme.bodyLarge]
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? style;
 
   /// [Text.strutStyle] passthrough

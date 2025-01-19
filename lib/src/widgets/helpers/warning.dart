@@ -11,14 +11,14 @@ class EzWarning extends StatelessWidget {
   /// What does the user need to know?
   final String body;
 
-  /// Default to [TextTheme.bodyLarge]
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
   /// Warning [String] to grab the user's attention
   /// Defaults to [EFUILang.gAttention]
   final String? title;
 
-  /// Default to [TextTheme.titleLarge]
+  /// Defaults to [TextTheme.titleLarge]
   final TextStyle? titleStyle;
 
   /// Defaults to [ColorScheme.secondary]
