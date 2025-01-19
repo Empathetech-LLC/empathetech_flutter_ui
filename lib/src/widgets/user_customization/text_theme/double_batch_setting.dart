@@ -14,10 +14,10 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   /// aka 10%
   final double delta;
 
-  /// Defaults to [TitleTextStyleProvider.value]s [TextStyle.fontSize]
+  /// Defaults to [EzTitleStyleProvider.value]s [TextStyle.fontSize]
   final double? iconSize;
 
-  /// Must have each iteration of [BaseTextStyleProvider] in this parent's widget tree
+  /// Must have each iteration of [EzTextStyleProvider] in this parent's widget tree
   /// Updates all font size at once by [delta] percent
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   const EzFontDoubleBatchSetting({super.key, this.delta = 0.1, this.iconSize});
@@ -32,11 +32,11 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
-  late final DisplayTextStyleProvider displayProvider;
-  late final HeadlineTextStyleProvider headlineProvider;
-  late final TitleTextStyleProvider titleProvider;
-  late final BodyTextStyleProvider bodyProvider;
-  late final LabelTextStyleProvider labelProvider;
+  late final EzDisplayStyleProvider displayProvider;
+  late final EzHeadlineStyleProvider headlineProvider;
+  late final EzTitleStyleProvider titleProvider;
+  late final EzBodyStyleProvider bodyProvider;
+  late final EzLabelStyleProvider labelProvider;
 
   static const List<String> keys = <String>[
     displayFontSizeKey,
@@ -62,7 +62,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   // Define custom functions //
 
-  BaseTextStyleProvider providerFromKey(String key) {
+  EzTextStyleProvider providerFromKey(String key) {
     switch (key) {
       case displayFontSizeKey:
         return displayProvider;
@@ -84,11 +84,11 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    displayProvider = context.watch<DisplayTextStyleProvider>();
-    headlineProvider = context.watch<HeadlineTextStyleProvider>();
-    titleProvider = context.watch<TitleTextStyleProvider>();
-    bodyProvider = context.watch<BodyTextStyleProvider>();
-    labelProvider = context.watch<LabelTextStyleProvider>();
+    displayProvider = context.watch<EzDisplayStyleProvider>();
+    headlineProvider = context.watch<EzHeadlineStyleProvider>();
+    titleProvider = context.watch<EzTitleStyleProvider>();
+    bodyProvider = context.watch<EzBodyStyleProvider>();
+    labelProvider = context.watch<EzLabelStyleProvider>();
   }
 
   // Return the build //
@@ -119,8 +119,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               : IconButton(
                   onPressed: () async {
                     for (final String key in keys) {
-                      final BaseTextStyleProvider provider =
-                          providerFromKey(key);
+                      final EzTextStyleProvider provider = providerFromKey(key);
 
                       final double currSize =
                           provider.value.fontSize ?? EzConfig.get(key);
@@ -176,8 +175,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               : IconButton(
                   onPressed: () async {
                     for (final String key in keys) {
-                      final BaseTextStyleProvider provider =
-                          providerFromKey(key);
+                      final EzTextStyleProvider provider = providerFromKey(key);
 
                       final double currSize =
                           provider.value.fontSize ?? EzConfig.get(key);

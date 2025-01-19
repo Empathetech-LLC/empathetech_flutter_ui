@@ -13,8 +13,8 @@ class EzFontFamilySetting extends StatefulWidget {
   final String configKey;
 
   /// [Provider] tracking the [TextStyle] to be updated
-  /// [EzFontFamilySetting] uses [BaseTextStyleProvider.fuse]
-  final BaseTextStyleProvider provider;
+  /// [EzFontFamilySetting] uses [EzTextStyleProvider.fuse]
+  final EzTextStyleProvider provider;
 
   final String? tooltip;
 

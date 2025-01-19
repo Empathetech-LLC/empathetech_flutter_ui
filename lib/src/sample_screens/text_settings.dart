@@ -44,20 +44,20 @@ class EzTextSettings extends StatelessWidget {
 
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
-        ChangeNotifierProvider<DisplayTextStyleProvider>(
-          create: (_) => DisplayTextStyleProvider(textColor),
+        ChangeNotifierProvider<EzDisplayStyleProvider>(
+          create: (_) => EzDisplayStyleProvider(textColor),
         ),
-        ChangeNotifierProvider<HeadlineTextStyleProvider>(
-          create: (_) => HeadlineTextStyleProvider(textColor),
+        ChangeNotifierProvider<EzHeadlineStyleProvider>(
+          create: (_) => EzHeadlineStyleProvider(textColor),
         ),
-        ChangeNotifierProvider<TitleTextStyleProvider>(
-          create: (_) => TitleTextStyleProvider(textColor),
+        ChangeNotifierProvider<EzTitleStyleProvider>(
+          create: (_) => EzTitleStyleProvider(textColor),
         ),
-        ChangeNotifierProvider<BodyTextStyleProvider>(
-          create: (_) => BodyTextStyleProvider(textColor),
+        ChangeNotifierProvider<EzBodyStyleProvider>(
+          create: (_) => EzBodyStyleProvider(textColor),
         ),
-        ChangeNotifierProvider<LabelTextStyleProvider>(
-          create: (_) => LabelTextStyleProvider(textColor),
+        ChangeNotifierProvider<EzLabelStyleProvider>(
+          create: (_) => EzLabelStyleProvider(textColor),
         ),
       ],
       child: _TextSettings(
@@ -176,16 +176,16 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
 
-  late final DisplayTextStyleProvider displayProvider =
-      Provider.of<DisplayTextStyleProvider>(context);
-  late final HeadlineTextStyleProvider headlineProvider =
-      Provider.of<HeadlineTextStyleProvider>(context);
-  late final TitleTextStyleProvider titleProvider =
-      Provider.of<TitleTextStyleProvider>(context);
-  late final BodyTextStyleProvider bodyProvider =
-      Provider.of<BodyTextStyleProvider>(context);
-  late final LabelTextStyleProvider labelProvider =
-      Provider.of<LabelTextStyleProvider>(context);
+  late final EzDisplayStyleProvider displayProvider =
+      Provider.of<EzDisplayStyleProvider>(context);
+  late final EzHeadlineStyleProvider headlineProvider =
+      Provider.of<EzHeadlineStyleProvider>(context);
+  late final EzTitleStyleProvider titleProvider =
+      Provider.of<EzTitleStyleProvider>(context);
+  late final EzBodyStyleProvider bodyProvider =
+      Provider.of<EzBodyStyleProvider>(context);
+  late final EzLabelStyleProvider labelProvider =
+      Provider.of<EzLabelStyleProvider>(context);
 
   late final String oKey = isDarkTheme(context)
       ? darkTextBackgroundOpacityKey
@@ -480,16 +480,16 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   EzTextSettingType editing = EzTextSettingType.display;
 
-  late final DisplayTextStyleProvider displayProvider =
-      Provider.of<DisplayTextStyleProvider>(context);
-  late final HeadlineTextStyleProvider headlineProvider =
-      Provider.of<HeadlineTextStyleProvider>(context);
-  late final TitleTextStyleProvider titleProvider =
-      Provider.of<TitleTextStyleProvider>(context);
-  late final BodyTextStyleProvider bodyProvider =
-      Provider.of<BodyTextStyleProvider>(context);
-  late final LabelTextStyleProvider labelProvider =
-      Provider.of<LabelTextStyleProvider>(context);
+  late final EzDisplayStyleProvider displayProvider =
+      Provider.of<EzDisplayStyleProvider>(context);
+  late final EzHeadlineStyleProvider headlineProvider =
+      Provider.of<EzHeadlineStyleProvider>(context);
+  late final EzTitleStyleProvider titleProvider =
+      Provider.of<EzTitleStyleProvider>(context);
+  late final EzBodyStyleProvider bodyProvider =
+      Provider.of<EzBodyStyleProvider>(context);
+  late final EzLabelStyleProvider labelProvider =
+      Provider.of<EzLabelStyleProvider>(context);
 
   late final String display = l10n.tsDisplay.toLowerCase();
   late final String headline = l10n.tsHeadline.toLowerCase();

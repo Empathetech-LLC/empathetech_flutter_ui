@@ -14,7 +14,7 @@ class EzDominantHandSwitch extends StatefulWidget {
   /// Defaults to [ColorScheme.surface]
   final Color? backgroundColor;
 
-  /// Standardized tool for updating [EzConfig] dominantHand
+  /// Standardized tool for updating [EzConfig]s [isLeftyKey]
   const EzDominantHandSwitch({
     super.key,
     this.labelStyle,

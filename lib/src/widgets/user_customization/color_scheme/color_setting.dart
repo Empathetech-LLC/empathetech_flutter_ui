@@ -22,7 +22,7 @@ class EzColorSetting extends StatefulWidget {
   final void Function()? onRemove;
 
   /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
-  /// When [configKey] is a text ("on") color, the base color will be used to generate a recommendation via [getTextColor]
+  /// When [configKey] is a text color (has [textColorPrefix]), the base color will be used to generate a recommendation via [getTextColor]
   /// [EzColorSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
   const EzColorSetting({
     super.key,

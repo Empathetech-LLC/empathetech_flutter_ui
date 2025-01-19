@@ -28,16 +28,16 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   final double padding = EzConfig.get(paddingKey);
 
-  late final DisplayTextStyleProvider displayProvider =
-      context.watch<DisplayTextStyleProvider>();
-  late final HeadlineTextStyleProvider headlineProvider =
-      context.watch<HeadlineTextStyleProvider>();
-  late final TitleTextStyleProvider titleProvider =
-      context.watch<TitleTextStyleProvider>();
-  late final BodyTextStyleProvider bodyProvider =
-      context.watch<BodyTextStyleProvider>();
-  late final LabelTextStyleProvider labelProvider =
-      context.watch<LabelTextStyleProvider>();
+  late final EzDisplayStyleProvider displayProvider =
+      context.watch<EzDisplayStyleProvider>();
+  late final EzHeadlineStyleProvider headlineProvider =
+      context.watch<EzHeadlineStyleProvider>();
+  late final EzTitleStyleProvider titleProvider =
+      context.watch<EzTitleStyleProvider>();
+  late final EzBodyStyleProvider bodyProvider =
+      context.watch<EzBodyStyleProvider>();
+  late final EzLabelStyleProvider labelProvider =
+      context.watch<EzLabelStyleProvider>();
 
   // Define the build data //
 

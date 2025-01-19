@@ -8,11 +8,12 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-abstract class BaseTextStyleProvider extends ChangeNotifier {
+abstract class EzTextStyleProvider extends ChangeNotifier {
   TextStyle _style;
   int _id;
 
-  BaseTextStyleProvider(TextStyle style)
+  /// [ChangeNotifier] for tracking and modifying a [TextStyle]
+  EzTextStyleProvider(TextStyle style)
       : _style = style,
         _id = Random().nextInt(rMax);
 
@@ -80,10 +81,10 @@ abstract class BaseTextStyleProvider extends ChangeNotifier {
   }
 }
 
-class DisplayTextStyleProvider extends BaseTextStyleProvider {
+class EzDisplayStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  DisplayTextStyleProvider(Color? color)
+  EzDisplayStyleProvider(Color? color)
       : _textColor = color,
         super(ezDisplayStyle(color));
 
@@ -94,10 +95,10 @@ class DisplayTextStyleProvider extends BaseTextStyleProvider {
   }
 }
 
-class HeadlineTextStyleProvider extends BaseTextStyleProvider {
+class EzHeadlineStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  HeadlineTextStyleProvider(Color? color)
+  EzHeadlineStyleProvider(Color? color)
       : _textColor = color,
         super(ezHeadlineStyle(color));
 
@@ -108,10 +109,10 @@ class HeadlineTextStyleProvider extends BaseTextStyleProvider {
   }
 }
 
-class TitleTextStyleProvider extends BaseTextStyleProvider {
+class EzTitleStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  TitleTextStyleProvider(Color? color)
+  EzTitleStyleProvider(Color? color)
       : _textColor = color,
         super(ezTitleStyle(color));
 
@@ -122,10 +123,10 @@ class TitleTextStyleProvider extends BaseTextStyleProvider {
   }
 }
 
-class BodyTextStyleProvider extends BaseTextStyleProvider {
+class EzBodyStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  BodyTextStyleProvider(Color? color)
+  EzBodyStyleProvider(Color? color)
       : _textColor = color,
         super(ezBodyStyle(color));
 
@@ -136,10 +137,10 @@ class BodyTextStyleProvider extends BaseTextStyleProvider {
   }
 }
 
-class LabelTextStyleProvider extends BaseTextStyleProvider {
+class EzLabelStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  LabelTextStyleProvider(Color? color)
+  EzLabelStyleProvider(Color? color)
       : _textColor = color,
         super(ezLabelStyle(color));
 
