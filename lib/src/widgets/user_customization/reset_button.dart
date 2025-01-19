@@ -6,11 +6,10 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  /// Button label
+  /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
@@ -23,7 +22,7 @@ class EzResetButton extends StatelessWidget {
   final String? dialogContent;
 
   /// What happens when the user choses to reset
-  /// Defaults to clearing user [SharedPreferences]
+  /// Defaults to [EzConfig.reset]
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onConfirm;
 
@@ -31,9 +30,7 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
-  /// Colors are reversed to stand out
-  /// [EzResetButton] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  /// [EzElevatedIconButton] for clearing user settings
   const EzResetButton({
     super.key,
     this.label,

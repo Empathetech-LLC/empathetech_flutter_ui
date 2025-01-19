@@ -13,8 +13,8 @@ class EzLocaleSetting extends StatefulWidget {
   /// Pass in any custom supported [Locale]s
   final List<Locale>? locales;
 
-  /// Standardized tool for updating the current [Locale]
-  /// [EzLocaleSetting] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  /// [EzElevatedIconButton] for updating the current [Locale]
+  /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
   const EzLocaleSetting({super.key, this.locales});
 
   @override

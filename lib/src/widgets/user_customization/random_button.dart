@@ -10,7 +10,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
-  /// Button label
+  /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.ssRandom]
   final String? label;
 
@@ -31,8 +31,7 @@ class EzConfigRandomizer extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [EzElevatedIconButton] for randomizing EzConfig
-  /// [EzConfigRandomizer] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  /// [EzElevatedIconButton] for randomizing [EzConfig]
   const EzConfigRandomizer({
     super.key,
     this.label,
