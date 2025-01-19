@@ -9,12 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLinkImageProvider extends StatefulWidget {
-  // Ez parameters //
-
   /// [Image.image] passthrough
   final ImageProvider<Object> image;
 
-  /// Optional [List] of [BoxShadow]s to be drawn when a user hovers over the [EzLinkImageProvider]
+  /// Optional [List] of [BoxShadow]s to be drawn on hover/focus
   final List<BoxShadow>? shadows;
 
   /// Destination function

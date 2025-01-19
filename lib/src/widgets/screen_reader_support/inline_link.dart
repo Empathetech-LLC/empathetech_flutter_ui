@@ -8,39 +8,39 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzInlineLink extends WidgetSpan {
-  /// Link message
+  /// [EzLink.text] passthrough
   final String text;
 
+  /// [EzLink.key] passthrough
   final Key? key;
 
-  /// Optional [Color] to overwrite the default [ColorScheme.primary]
+  /// [EzLink.textColor] passthrough
   final Color? textColor;
 
-  /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
+  /// [EzLink.decorationColor] passthrough
   final Color? decorationColor;
 
   /// Defaults to [Colors.transparent]
   final Color backgroundColor;
 
+  /// [EzLink.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// Destination function
+  /// [EzLink.onTap] passthrough
   final void Function()? onTap;
 
-  /// Destination URL
+  /// [EzLink.url] passthrough
   final Uri? url;
 
-  /// Message for screen readers
+  /// [EzLink.semanticsLabel]
   /// Don't repeat [text] here, it is appended automatically
   final String semanticsLabel;
 
   /// Message for screen readers when the parent [EzRichText] is focused
   final String? richSemanticsLabel;
 
-  /// Optional tooltip override
+  /// [EzLink.tooltip] passthrough
   final String? tooltip;
-
-  final WidgetStatesController? statesController;
 
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
   /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
@@ -62,7 +62,6 @@ class EzInlineLink extends WidgetSpan {
     required this.semanticsLabel,
     this.richSemanticsLabel, // Not used here, but in EzRichText
     this.tooltip,
-    this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
@@ -79,7 +78,6 @@ class EzInlineLink extends WidgetSpan {
             url: url,
             semanticsLabel: semanticsLabel,
             tooltip: tooltip,
-            statesController: statesController,
           ),
         );
 }

@@ -11,7 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 class EzLinkWidget extends StatefulWidget {
   final Widget child;
 
-  /// Optional [BoxShadow]s to be drawn on hover/focus the [EzLinkWidget]
+  /// Optional [BoxShadow] override
+  /// Drawn on hover/focus
   final List<BoxShadow>? shadows;
 
   /// Destination function
@@ -31,7 +32,6 @@ class EzLinkWidget extends StatefulWidget {
   /// Is it unique?
   final String? semanticValue;
 
-  /// Defaults to false
   /// Is this an image?
   final bool isImage;
 

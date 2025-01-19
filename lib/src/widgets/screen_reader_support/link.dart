@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLink extends StatefulWidget {
-  /// Link message
+  /// The [TextButton.child] will be [Text] with [text] and all provided styling
   final String text;
 
   /// Defaults to [TextTheme.bodyLarge]
@@ -21,10 +21,10 @@ class EzLink extends StatefulWidget {
   /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
-  /// Optional override
-  /// Especially useful for [EzInlineLink]
+  /// Optional override for [TextButton.style]
   final Color? backgroundColor;
 
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
@@ -32,9 +32,11 @@ class EzLink extends StatefulWidget {
   final EdgeInsets? padding;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
   /// Message for screen readers
@@ -45,13 +47,10 @@ class EzLink extends StatefulWidget {
   /// Defaults to [semanticsLabel] (or [text])
   final String? tooltip;
 
-  final WidgetStatesController? statesController;
-
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]
-  /// Automatically draws [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
-  /// The [color] can optionally be overwritten
+  /// Always has a [tooltip]; if one is not provided, it will default to [semanticsLabel]
+  /// Automatically draws [text] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzLink(
     this.text, {
     super.key,
@@ -65,7 +64,6 @@ class EzLink extends StatefulWidget {
     this.url,
     required this.semanticsLabel,
     this.tooltip,
-    this.statesController,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -132,21 +130,22 @@ class _EzLinkState extends State<EzLink> {
 }
 
 class EzIconLink extends StatefulWidget {
-  /// Link message
+  /// The [TextButton.icon] label will be [Text] with [label] and all provided styling
   final String label;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? style;
 
+  /// [TextButton.icon] passthrough
   final Widget icon;
 
   /// Defaults to [ColorScheme.onSurface]
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
   /// Defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
@@ -154,9 +153,11 @@ class EzIconLink extends StatefulWidget {
   final EdgeInsets? padding;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
   /// Message for screen readers
@@ -167,14 +168,10 @@ class EzIconLink extends StatefulWidget {
   /// Defaults to [semanticsLabel] (or [label])
   final String? tooltip;
 
-  final WidgetStatesController? statesController;
-
   /// [TextButton.icon] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]...
-  /// Highlights [label] of [baseColor] [ColorScheme.onSurface] with [ColorScheme.primary]
-  /// ...and adds an [TextDecoration.underline] on hover/focus
-  /// The [decorationColor] and [textColor] can optionally be overwritten
+  /// Always has a tool [tooltip]; if one is not provided, it will default to [semanticsLabel]
+  /// Highlights [label] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzIconLink({
     super.key,
     required this.label,
@@ -188,7 +185,6 @@ class EzIconLink extends StatefulWidget {
     this.url,
     required this.semanticsLabel,
     this.tooltip,
-    this.statesController,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
