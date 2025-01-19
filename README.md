@@ -164,6 +164,7 @@ Each of the settings screens we use is a callable (and configurable) `Widget`.
 Copy/paste all the [sample screens](lib/src/sample_screens/) you want and make paths to them in your apps.
 
 <br>Example combo using a go_router...<br>
+
 `text_settings.dart`
 ```Dart
 //...
