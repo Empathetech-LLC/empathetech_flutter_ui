@@ -15,6 +15,6 @@ class ColorSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: EFUILang.of(context)!.csPageTitle,
         showSettings: false,
-        body: const ColorSettings(),
+        body: const EzColorSettings(),
       );
 }
