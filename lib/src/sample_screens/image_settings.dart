@@ -8,12 +8,13 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class ImageSettings extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+class EzImageSettings extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional additional settings
   /// Recommended to use [EzImageSetting]
+  /// Will appear just above the reset button
   final List<Widget>? additionalSettings;
 
   /// Optional credits for dark background image
@@ -22,7 +23,9 @@ class ImageSettings extends StatefulWidget {
   /// Optional credits for light background image
   final String? lightBackgroundCredits;
 
-  const ImageSettings({
+  /// Empathetech image settings
+  /// Recommended to use as a [Scaffold.body]
+  const EzImageSettings({
     super.key,
     this.useImageDecoration = true,
     this.darkBackgroundCredits,
@@ -31,10 +34,10 @@ class ImageSettings extends StatefulWidget {
   });
 
   @override
-  State<ImageSettings> createState() => _ImageSettingsState();
+  State<EzImageSettings> createState() => _EzImageSettingsState();
 }
 
-class _ImageSettingsState extends State<ImageSettings> {
+class _EzImageSettingsState extends State<EzImageSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();

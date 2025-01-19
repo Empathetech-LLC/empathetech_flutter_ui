@@ -929,7 +929,7 @@ class ImageSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: EFUILang.of(context)!.isPageTitle,
         showSettings: false,
-        body: const ImageSettings(),
+        body: const EzImageSettings(),
       );
 }
 """);
