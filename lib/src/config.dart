@@ -292,7 +292,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// Create a pseudo-random config that follows the default vibe
   /// i.e. a triadic [ColorScheme] that should be highly legible
   /// Doubles are limited to half and/or twice their default values'
-  static Future<void> randomize(bool isDark) async {
+  /// There is an optional [shiny] chance (1 in 4096) to change the [Locale]
+  static Future<void> randomize(bool isDark, {bool shiny = true}) async {
     // Define data //
 
     final Random random = Random();
@@ -307,7 +308,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Leave theme as-is, don't wanna light blast peeps at night
 
     // Locale
-    if (random.nextInt(4096) == 376) {
+    if (shiny && random.nextInt(4096) == 376) {
       final List<Locale> trimmedLocales =
           List<Locale>.from(EFUILang.supportedLocales);
       trimmedLocales.remove(getLocale());
