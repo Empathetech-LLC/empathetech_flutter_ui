@@ -8,20 +8,23 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ColorSettings extends StatefulWidget {
+class EzColorSettings extends StatefulWidget {
   /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional addition quick settings
+  /// Will appear just above the reset button
   final List<Widget>? additionalQuickSettings;
 
-  /// Initial set of color configKeys to display in the advanced settings (light theme)
-  final List<String> lightStarterSet;
-
-  /// Initial set of color configKeys to display in the advanced settings (dark theme)
+  /// Initial set of [Brightness.dark] configKeys to display in the advanced settings
   final List<String> darkStarterSet;
 
-  const ColorSettings({
+  /// Initial set of [Brightness.light] configKeys to display in the advanced settings
+  final List<String> lightStarterSet;
+
+  /// Default Empathetech color settings screen
+  /// Recommended to use this as the body for your [Scaffold]
+  const EzColorSettings({
     super.key,
     this.useImageDecoration = true,
     this.additionalQuickSettings,
@@ -46,10 +49,10 @@ class ColorSettings extends StatefulWidget {
   });
 
   @override
-  State<ColorSettings> createState() => _ColorSettingsState();
+  State<EzColorSettings> createState() => _EzColorSettingsState();
 }
 
-class _ColorSettingsState extends State<ColorSettings> {
+class _EzColorSettingsState extends State<EzColorSettings> {
   // Gather the theme data //
 
   static const EzSeparator separator = EzSeparator();
