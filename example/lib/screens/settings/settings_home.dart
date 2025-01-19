@@ -16,7 +16,7 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: EFUILang.of(context)!.ssPageTitle,
         showSettings: false,
-        body: const SettingsHome(
+        body: const EzSettingsHome(
           textSettingsPath: textSettingsPath,
           layoutSettingsPath: layoutSettingsPath,
           colorSettingsPath: colorSettingsPath,

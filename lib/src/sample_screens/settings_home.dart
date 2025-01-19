@@ -9,27 +9,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsHome extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+class EzSettingsHome extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Widgets to be added below language and above any present routes
   /// Do not include a trailing spacer, one will be provided
   final List<Widget>? additionalSettings;
 
-  /// Nullable [goNamed] path to the text settings screen
+  /// [GoRouter.goNamed] path to the text settings screen
   /// If null, no button will appear
   final String? textSettingsPath;
 
-  /// Nullable [goNamed] path to the layout settings screen
+  /// [GoRouter.goNamed] path to the layout settings screen
   /// If null, no button will appear
   final String? layoutSettingsPath;
 
-  /// Nullable [goNamed] path to the color settings screen
+  /// [GoRouter.goNamed] path to the color settings screen
   /// If null, no button will appear
   final String? colorSettingsPath;
 
-  /// Nullable [goNamed] path to the image settings screen
+  /// [GoRouter.goNamed] path to the image settings screen
   /// If null, no button will appear
   final String? imageSettingsPath;
 
@@ -45,7 +45,10 @@ class SettingsHome extends StatefulWidget {
   /// Do not include a trailing spacer, one will be provided
   final List<Widget>? footer;
 
-  const SettingsHome({
+  /// Empathetech settings landing page
+  /// Contains global settings and [EzElevatedIconButton]s that lead to the rest of the settings pages
+  /// Recommended to use as a [Scaffold.body]
+  const EzSettingsHome({
     super.key,
     this.useImageDecoration = true,
     this.additionalSettings,
@@ -59,10 +62,10 @@ class SettingsHome extends StatefulWidget {
   });
 
   @override
-  State<SettingsHome> createState() => _SettingsHomeState();
+  State<EzSettingsHome> createState() => _EzSettingsHomeState();
 }
 
-class _SettingsHomeState extends State<SettingsHome> {
+class _EzSettingsHomeState extends State<EzSettingsHome> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();

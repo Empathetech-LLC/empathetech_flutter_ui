@@ -828,7 +828,7 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: EFUILang.of(context)!.ssPageTitle,
         showSettings: false,
-        body: const SettingsHome(
+        body: const EzSettingsHome(
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
