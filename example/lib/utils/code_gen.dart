@@ -881,7 +881,7 @@ class LayoutSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: EFUILang.of(context)!.lsPageTitle,
         showSettings: false,
-        body: const LayoutSettings(),
+        body: const EzLayoutSettings(),
       );
 }
 """);

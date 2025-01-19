@@ -7,24 +7,27 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class LayoutSettings extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+class EzLayoutSettings extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional additional settings
+  /// Will appear just above the reset button
   final List<Widget>? additionalSettings;
 
-  const LayoutSettings({
+  /// Empathetech layout settings
+  /// Recommended to use as a [Scaffold.body]
+  const EzLayoutSettings({
     super.key,
     this.useImageDecoration = true,
     this.additionalSettings,
   });
 
   @override
-  State<LayoutSettings> createState() => _LayoutSettingsState();
+  State<EzLayoutSettings> createState() => _EzLayoutSettingsState();
 }
 
-class _LayoutSettingsState extends State<LayoutSettings> {
+class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Gather the theme data //
 
   final double margin = EzConfig.get(marginKey);
