@@ -9,12 +9,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzRadio<T> extends StatelessWidget {
-  /// Optional override, defaults to...
-  /// Current [EzConfig]s [iconSizeKey] / [defaultIconSize]
+  /// Defaults to max(current [EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
   final double? scale;
 
-  /// Optional override, defaults to [EdgeInsets.all] with [EzConfig]s [marginKey]
-  /// iff [scale] > 1.1
+  /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
   /// [Radio.value] passthrough
@@ -56,6 +54,7 @@ class EzRadio<T> extends StatelessWidget {
   /// [Radio.autofocus] passthrough
   final bool autofocus;
 
+  /// [Radio] with custom styling and scaling
   const EzRadio({
     super.key,
     this.scale,

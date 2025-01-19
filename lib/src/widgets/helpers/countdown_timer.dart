@@ -9,12 +9,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class EzCountdownTimer extends StatefulWidget {
+  /// How long is the countdown
   final Duration duration;
 
   /// Defaults to a [SnackBar] appropriate value
   final double? radius;
 
-  /// Optional color override, defaults to [ColorScheme.secondary]
+  /// Defaults to [ColorScheme.secondary]
   final Color? color;
 
   /// An animated circle/pie countdown timer
