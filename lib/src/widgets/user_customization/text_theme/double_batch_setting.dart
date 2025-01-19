@@ -10,15 +10,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontDoubleBatchSetting extends StatefulWidget {
-  /// Amount to scale on each click, defaults to 0.1
-  /// aka 10%
+  /// Amount to scale on each click
   final double delta;
 
   /// Defaults to [EzTitleStyleProvider.value]s [TextStyle.fontSize]
   final double? iconSize;
 
   /// Must have each iteration of [EzTextStyleProvider] in this parent's widget tree
-  /// Updates all font size at once by [delta] percent
+  /// Updates all [TextStyle.fontSize]s at once by [delta]
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
   const EzFontDoubleBatchSetting({super.key, this.delta = 0.1, this.iconSize});
 

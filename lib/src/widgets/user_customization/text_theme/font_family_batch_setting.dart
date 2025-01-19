@@ -13,6 +13,8 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
   /// Optional [EzDropdownMenu.iconSize] passthrough
   final double? iconSize;
 
+  /// Standardized tool for updating the [TextStyle.fontFamily] for all five [EzTextStyleProvider]s at once
+  /// As such, the parent widget must have them in the context
   const EzFontFamilyBatchSetting({super.key, this.iconSize});
 
   @override

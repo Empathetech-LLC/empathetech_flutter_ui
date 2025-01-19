@@ -8,15 +8,17 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzUnderlineSetting extends StatefulWidget {
+  /// The [EzConfig] whose value is being updated
   final String configKey;
 
-  /// Use this to live update the [TextStyle] on your UI
+  /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool underline) notifierCallback;
 
-  /// Optional iconSize
+  /// Optional override
+  /// Defaults to [ThemeData.iconButtonTheme]s value
   final double? size;
 
-  /// Standardized tool for updating the [TextStyle.decoration] for the passed [configKey]
+  /// Standardized tool for toggling [TextDecoration.underline] in the [TextStyle.decoration] that matches [configKey]
   const EzUnderlineSetting({
     super.key,
     required this.configKey,

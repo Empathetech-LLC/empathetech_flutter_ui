@@ -6,14 +6,16 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzHighContrastColorsSetting extends StatelessWidget {
+  /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
+
+  /// [ThemeData.colorScheme] for [Brightness.light]
   final ColorScheme light;
 
-  /// Easily store Flutter's built in high contrast color scheme(s) to EzConfig
-  /// Uses flutter_platform_widgets, specifically [PlatformTheme]
+  /// Easily store Flutter's built in high contrast [ColorScheme]s to [EzConfig]
+  /// [ColorScheme]s can be overridden
   const EzHighContrastColorsSetting({
     super.key,
     this.dark = const ColorScheme.highContrastDark(),

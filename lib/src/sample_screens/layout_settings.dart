@@ -66,7 +66,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,
-            type: LayoutSettingType.margin,
+            type: EzLayoutSettingType.margin,
             min: minMargin,
             max: maxMargin,
             steps: 6,
@@ -77,7 +77,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           // Padding
           const EzLayoutSetting(
             configKey: paddingKey,
-            type: LayoutSettingType.padding,
+            type: EzLayoutSettingType.padding,
             min: minPadding,
             max: maxPadding,
             steps: 12,
@@ -88,7 +88,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           // Spacing
           const EzLayoutSetting(
             configKey: spacingKey,
-            type: LayoutSettingType.spacing,
+            type: EzLayoutSettingType.spacing,
             min: minSpacing,
             max: maxSpacing,
             steps: 13,

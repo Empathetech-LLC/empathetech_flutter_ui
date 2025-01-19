@@ -8,15 +8,17 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzItalicSetting extends StatefulWidget {
+  /// The [EzConfig] whose value is being updated
   final String configKey;
 
-  /// Use this to live update the [TextStyle] on your UI
+  /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool italic) notifierCallback;
 
-  /// Optional iconSize
+  /// Optional override
+  /// Defaults to [ThemeData.iconButtonTheme]s value
   final double? size;
 
-  /// Standardized tool for updating the [TextStyle.fontStyle] for the passed [configKey]
+  /// Standardized tool for toggling [FontStyle.italic] in the [TextStyle.fontStyle] that matches [configKey]
   const EzItalicSetting({
     super.key,
     required this.configKey,

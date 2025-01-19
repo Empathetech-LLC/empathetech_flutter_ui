@@ -12,8 +12,13 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// The [EzConfig] key being edited
   final String configKey;
 
+  /// Starting (aka current) value for [configKey]
   final double initialValue;
+
+  /// Lower limit for the new value(s)
   final double min;
+
+  /// Upper limit for the new value(s)
   final double max;
 
   /// Use this to live update the [TextStyle] on your UI
@@ -22,7 +27,7 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// Label [icon] below the [EzFontDoubleSetting]
   final Widget icon;
 
-  /// Message for the on hover [Tooltip]
+  /// [Tooltip.message] passthrough
   final String tooltip;
 
   /// Optionally include plus/minus buttons surrounding the [TextFormField]
@@ -35,12 +40,12 @@ class EzFontDoubleSetting extends StatefulWidget {
   /// [TextStyle] for the [TextFormField]
   final TextStyle? style;
 
-  /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size using the results of [measureText] on [sizingString]
+  /// Optionally provide a [String] for setting the [EzFontDoubleSetting]s size using the results of [ezTextSize] on [sizingString]
   /// Defaults to [sampleString]
   final String sizingString;
 
   /// Standardized tool for updating double [TextStyle] values for the passed [configKey]
-  /// For example: [TextStyle.letterSpacing]
+  /// For example: [TextStyle.fontSize], [TextStyle.letterSpacing], [TextStyle.wordSpacing], and [TextStyle.height]
   const EzFontDoubleSetting({
     super.key,
     required this.configKey,

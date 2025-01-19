@@ -10,28 +10,28 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which piece of the layout is being updated
 /// This will determine the preview [Widget]s
-enum LayoutSettingType { margin, padding, spacing }
+enum EzLayoutSettingType { margin, padding, spacing }
 
-/// Get the proper [String] name for [LayoutSettingType]
-String lstName(BuildContext context, LayoutSettingType settingType) {
+/// Get human readable name for [settingType]
+String ezLstName(BuildContext context, EzLayoutSettingType settingType) {
   switch (settingType) {
-    case LayoutSettingType.margin:
+    case EzLayoutSettingType.margin:
       return EFUILang.of(context)!.lsMargin;
-    case LayoutSettingType.padding:
+    case EzLayoutSettingType.padding:
       return EFUILang.of(context)!.lsPadding;
-    case LayoutSettingType.spacing:
+    case EzLayoutSettingType.spacing:
       return EFUILang.of(context)!.lsSpacing;
   }
 }
 
-/// Enumerator extension for getting the proper button [Icon] for [EzLayoutSetting.type]
-Icon lstIcon(LayoutSettingType settingType) {
+/// Get the [Icon] for [settingType]
+Icon ezLstIcon(EzLayoutSettingType settingType) {
   switch (settingType) {
-    case LayoutSettingType.margin:
+    case EzLayoutSettingType.margin:
       return EzIcon(Icons.margin);
-    case LayoutSettingType.padding:
+    case EzLayoutSettingType.padding:
       return EzIcon(Icons.padding);
-    case LayoutSettingType.spacing:
+    case EzLayoutSettingType.spacing:
       return EzIcon(Icons.space_bar);
   }
 }
@@ -40,8 +40,8 @@ class EzLayoutSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String configKey;
 
-  /// enum for determining the preview Widget(s) required
-  final LayoutSettingType type;
+  /// enum for determining the preview Widget(s)
+  final EzLayoutSettingType type;
 
   /// Smallest value that can be set
   final double min;
@@ -52,7 +52,7 @@ class EzLayoutSetting extends StatefulWidget {
   /// Number of divisions between [min] and [max]
   final int steps;
 
-  /// Number of significant figures to display AFTER the decimal point
+  /// Number of significant figures to display after the decimal point
   final int decimals;
 
   /// Defaults to [TextTheme.titleLarge]
@@ -61,8 +61,8 @@ class EzLayoutSetting extends StatefulWidget {
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
-  /// Standardized [Widget] for updating layout values in [EzConfig]
-  /// Supports all [LayoutSettingType]s
+  /// Standardized [EzElevatedIconButton] for updating layout values in [EzConfig]
+  /// Supports all [EzLayoutSettingType]s
   const EzLayoutSetting({
     super.key,
     required this.configKey,
@@ -85,7 +85,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late double currValue = EzConfig.get(widget.configKey);
   late final double defaultValue = EzConfig.getDefault(widget.configKey);
 
-  late final String label = lstName(context, widget.type);
+  late final String label = ezLstName(context, widget.type);
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -100,13 +100,13 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   // Define build functions //
 
-  /// Return the preview Widget(s) for the passed [LayoutSettingType]
+  /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
   List<Widget> _buildPreview(BuildContext context) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
       // Margin
-      case LayoutSettingType.margin:
+      case EzLayoutSettingType.margin:
         late final String? backgroundImagePath = EzConfig.get(
             isDarkTheme(context)
                 ? darkBackgroundImageKey
@@ -146,7 +146,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Padding
-      case LayoutSettingType.padding:
+      case EzLayoutSettingType.padding:
         return <Widget>[
           spacer,
 
@@ -179,7 +179,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Spacing
-      case LayoutSettingType.spacing:
+      case EzLayoutSettingType.spacing:
         return <Widget>[
           // Preview 1
           EzSpacer(space: currValue),
@@ -303,7 +303,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           },
         ),
       ),
-      icon: lstIcon(widget.type),
+      icon: ezLstIcon(widget.type),
       label: label,
     );
   }

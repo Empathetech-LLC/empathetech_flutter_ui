@@ -11,25 +11,26 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// EzImageSetting has not yet been verified with TalkBack or VoiceOver //
-
 class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose value is being updated
   final String configKey;
 
-  /// [String] to display on the [ElevatedButton]
+  /// [EzElevatedIconButton.label] passthrough
   final String label;
 
   /// Effectively whether the image is nullable
-  /// Recommended to true
+  /// true is recommended
   /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
   final bool allowClear;
 
   /// Who made this/where did it come from?
-  /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
+  /// [credits] will be displayed via [EzAlertDialog] on long press
   final String? credits;
 
-  /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
+  /// For [ColorScheme.fromImageProvider]
+  /// If provided and [updateThemeOption] is true, the user will have the final say
+  /// If provided and [updateThemeOption] is false, it will be automatic
+  /// If null, no theme will be updated
   final Brightness? updateTheme;
 
   /// Whether the update theme checkbox && message should be displayed
@@ -38,8 +39,7 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
   final bool showFitOption;
 
-  /// Creates a tool for updating the image at [configKey]'s path
-  /// [EzImageSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
+  /// [EzElevatedIconButton] for updating the image at [configKey]'s path
   const EzImageSetting({
     super.key,
     required this.configKey,

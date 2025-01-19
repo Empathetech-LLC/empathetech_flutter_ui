@@ -7,7 +7,6 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Custom [ColorScheme.highContrastDark]
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
@@ -72,11 +71,14 @@ const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
 );
 
 class EzMonoChromeColorsSetting extends StatelessWidget {
+  /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
+
+  /// [ThemeData.colorScheme] for [Brightness.light]
   final ColorScheme light;
 
-  /// Easily store Flutter's built in high contrast color scheme(s) to EzConfig
-  /// Uses flutter_platform_widgets, specifically [PlatformTheme]
+  /// Easily store a custom mono chrome [ColorScheme] to [EzConfig]
+  /// [ezHighContrastDark] and [ezHighContrastLight] by default
   const EzMonoChromeColorsSetting({
     super.key,
     this.dark = ezHighContrastDark,

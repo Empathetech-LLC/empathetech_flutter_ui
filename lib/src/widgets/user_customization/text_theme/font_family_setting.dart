@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
-  /// The [EzConfig] key for the [TextStyle.fontFamily] to be updated
+  /// The [EzConfig] key whose value is being updated
   final String configKey;
 
   /// [Provider] tracking the [TextStyle] to be updated
   /// [EzFontFamilySetting] uses [EzTextStyleProvider.fuse]
   final EzTextStyleProvider provider;
 
+  /// [Tooltip.message] passthrough
   final String? tooltip;
 
   /// Base [TextStyle] for the [DropdownMenu]
