@@ -1049,8 +1049,8 @@ Future<void> genL10n({
 
   final String snakeName = ezClassToSnake(l10nClassName(config)!);
   final String arbPath = platform == TargetPlatform.windows
-      ? getArbDir().replaceAll('/', '\\')
-      : getArbDir();
+      ? getArbDir(config)!.replaceAll('/', '\\')
+      : getArbDir(config)!;
 
   // Make dir
   await ezCLI(
