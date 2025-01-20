@@ -80,7 +80,7 @@
   "ssDominantHand": "Main dominante",
 
   "ssLanguage": "Langue",
-  "ssLangHint": "Langue de l'appli",
+  "ssLangHint": "Activer pour changer la langue de l'application",
 
   "ssRandom": "Randomiser",
   "ssRandomize": "Thème {themeType} aléatoire ?",

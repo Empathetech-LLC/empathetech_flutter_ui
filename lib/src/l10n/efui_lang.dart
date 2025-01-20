@@ -431,7 +431,7 @@ abstract class EFUILang {
   /// No description provided for @ssLangHint.
   ///
   /// In en, this message translates to:
-  /// **'App language'**
+  /// **'Activate to change the app language'**
   String get ssLangHint;
 
   /// No description provided for @ssRandom.

@@ -146,7 +146,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           shadowColor: Colors.transparent,
                         ),
                         onPressed: doNothing,
-                        tooltip: 'Minimum',
+                        tooltip: l10n.gMinimum,
                         icon: EzIcon(
                           PlatformIcons(context).remove,
                           color: colorScheme.outline,
@@ -238,7 +238,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           shadowColor: Colors.transparent,
                         ),
                         onPressed: doNothing,
-                        tooltip: 'Maximum',
+                        tooltip: l10n.gMaximum,
                         icon: EzIcon(
                           PlatformIcons(context).add,
                           color: colorScheme.outline,

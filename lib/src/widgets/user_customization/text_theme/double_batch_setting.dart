@@ -108,7 +108,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     shadowColor: Colors.transparent,
                   ),
                   onPressed: doNothing,
-                  tooltip: 'Minimum',
+                  tooltip: l10n.gMinimum,
                   icon: Icon(
                     PlatformIcons(context).remove,
                     size: widget.iconSize ?? titleProvider.value.fontSize,
@@ -164,7 +164,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     shadowColor: Colors.transparent,
                   ),
                   onPressed: doNothing,
-                  tooltip: 'Maximum',
+                  tooltip: l10n.gMaximum,
                   icon: Icon(
                     PlatformIcons(context).add,
                     size: widget.iconSize ?? titleProvider.value.fontSize,

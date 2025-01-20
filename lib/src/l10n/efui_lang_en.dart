@@ -186,7 +186,7 @@ class EFUILangEn extends EFUILang {
   String get ssLanguage => 'Language';
 
   @override
-  String get ssLangHint => 'App language';
+  String get ssLangHint => 'Activate to change the app language';
 
   @override
   String get ssRandom => 'Randomize';
