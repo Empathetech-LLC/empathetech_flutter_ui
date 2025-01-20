@@ -99,6 +99,10 @@ class EFUILangEn extends EFUILang {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gLoadingAnim =>
+      'Loading. The empathetic logo animated as a spinning hourglass.';
+
+  @override
   String get gHowThisWorks => 'How this works';
 
   @override
@@ -128,6 +132,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gEFUISourceHint => 'Open the GitHub page for EFUI';
+
+  @override
+  String get gOpenUIReleases => 'Open the releases page for Open UI';
 
   @override
   String get gGiveFeedback => 'Give feedback';

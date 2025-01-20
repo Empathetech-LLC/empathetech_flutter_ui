@@ -152,6 +152,41 @@ class LangEn extends Lang {
   String get csResetNothing => 'Nothing';
 
   @override
+  String get asPageTitle => 'Archiver';
+
+  @override
+  String asSavedTo(Object path) {
+    return 'Your configuration has been saved to $path\n\nUse it on ';
+  }
+
+  @override
+  String asToGen(Object app_name) {
+    return ' for desktop to generate the code for $app_name';
+  }
+
+  @override
+  String get asBadFile => 'The file was not saved as ';
+
+  @override
+  String get gsPageTitle => 'Generator';
+
+  @override
+  String get gsConsole => 'Console output';
+
+  @override
+  String get gsIsReadyIn => 'is ready in';
+
+  @override
+  String get gsFirstRun => 'First run usually takes awhile';
+
+  @override
+  String get gsNotInstalled => 'Flutter is not installed';
+
+  @override
+  String get gsPartialSuccess =>
+      'The code was successfully generated, but some of the project setup failed.';
+
+  @override
   String get rsWouldYou => 'would you like to...';
 
   @override

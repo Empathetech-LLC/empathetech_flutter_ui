@@ -157,6 +157,41 @@ class LangEs extends Lang {
   String get csResetNothing => 'Nada';
 
   @override
+  String get asPageTitle => 'Archivador';
+
+  @override
+  String asSavedTo(Object path) {
+    return 'Su configuración se ha guardado en $path\n\nÚselo en ';
+  }
+
+  @override
+  String asToGen(Object app_name) {
+    return ' para escritorio para generar el código para $app_name';
+  }
+
+  @override
+  String get asBadFile => 'El archivo no se guardó como ';
+
+  @override
+  String get gsPageTitle => 'Generador';
+
+  @override
+  String get gsConsole => 'Salida de la consola';
+
+  @override
+  String get gsIsReadyIn => 'está listo en';
+
+  @override
+  String get gsFirstRun => 'La primera ejecución suele tardar un tiempo';
+
+  @override
+  String get gsNotInstalled => 'Flutter no está instalado';
+
+  @override
+  String get gsPartialSuccess =>
+      'El código se generó correctamente, pero falló parte de la configuración del proyecto.';
+
+  @override
   String get rsWouldYou => 'Te gustaría...';
 
   @override

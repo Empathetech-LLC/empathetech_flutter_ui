@@ -639,7 +639,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           (!isDesktop || await checkPath()) &&
                           context.mounted) {
                         context.goNamed(
-                          saveScreenPath,
+                          archiveScreenPath,
                           extra: EAGConfig(
                             appName: nameController.text,
                             publisherName: pubController.text,

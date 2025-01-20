@@ -69,6 +69,26 @@
 
 
 
+  "asPageTitle": "Archiver",
+
+  "asSavedTo": "Your configuration has been saved to {path}\n\nUse it on ",
+  "asToGen": " for desktop to generate the code for {app_name}",
+  "asBadFile": "The file was not saved as ",
+
+
+
+  "gsPageTitle": "Generator",
+
+  "gsConsole": "Console output",
+
+  "gsIsReadyIn": "is ready in",
+  "gsFirstRun": "First run usually takes awhile",
+
+  "gsNotInstalled": "Flutter is not installed",
+  "gsPartialSuccess": "The code was successfully generated, but some of the project setup failed.",
+
+
+
   "rsWouldYou": "would you like to...",
 
   "rsInstall": "Install it",

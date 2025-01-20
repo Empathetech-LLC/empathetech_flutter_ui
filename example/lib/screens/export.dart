@@ -9,7 +9,7 @@ export 'error.dart';
 export 'home.dart';
 
 export 'generator/generate.dart';
-export 'generator/save.dart';
+export 'generator/archive.dart';
 
 export 'settings/settings_home.dart';
 export 'settings/text_settings.dart';
@@ -22,8 +22,8 @@ export 'settings/layout_settings.dart';
 /// 'app-generator'
 const String generateScreenPath = 'app-generator';
 
-/// 'config-saver'
-const String saveScreenPath = 'config-saver';
+/// 'config-archiver'
+const String archiveScreenPath = 'config-archiver';
 
 /// 'settings-home'
 const String settingsHomePath = 'settings-home';

@@ -368,6 +368,66 @@ abstract class Lang {
   /// **'Nothing'**
   String get csResetNothing;
 
+  /// No description provided for @asPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Archiver'**
+  String get asPageTitle;
+
+  /// No description provided for @asSavedTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Your configuration has been saved to {path}\n\nUse it on '**
+  String asSavedTo(Object path);
+
+  /// No description provided for @asToGen.
+  ///
+  /// In en, this message translates to:
+  /// **' for desktop to generate the code for {app_name}'**
+  String asToGen(Object app_name);
+
+  /// No description provided for @asBadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'The file was not saved as '**
+  String get asBadFile;
+
+  /// No description provided for @gsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Generator'**
+  String get gsPageTitle;
+
+  /// No description provided for @gsConsole.
+  ///
+  /// In en, this message translates to:
+  /// **'Console output'**
+  String get gsConsole;
+
+  /// No description provided for @gsIsReadyIn.
+  ///
+  /// In en, this message translates to:
+  /// **'is ready in'**
+  String get gsIsReadyIn;
+
+  /// No description provided for @gsFirstRun.
+  ///
+  /// In en, this message translates to:
+  /// **'First run usually takes awhile'**
+  String get gsFirstRun;
+
+  /// No description provided for @gsNotInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter is not installed'**
+  String get gsNotInstalled;
+
+  /// No description provided for @gsPartialSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'The code was successfully generated, but some of the project setup failed.'**
+  String get gsPartialSuccess;
+
   /// No description provided for @rsWouldYou.
   ///
   /// In en, this message translates to:

@@ -278,6 +278,12 @@ abstract class EFUILang {
   /// **'Minimum'**
   String get gMinimum;
 
+  /// No description provided for @gLoadingAnim.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading. The empathetic logo animated as a spinning hourglass.'**
+  String get gLoadingAnim;
+
   /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:
@@ -337,6 +343,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open the GitHub page for EFUI'**
   String get gEFUISourceHint;
+
+  /// No description provided for @gOpenUIReleases.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the releases page for Open UI'**
+  String get gOpenUIReleases;
 
   /// No description provided for @gGiveFeedback.
   ///

@@ -99,6 +99,10 @@ class EFUILangFr extends EFUILang {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gLoadingAnim =>
+      'Chargement. Le logo empathique animé comme un sablier tournant.';
+
+  @override
   String get gHowThisWorks => 'Comment ça marche';
 
   @override
@@ -129,6 +133,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
+
+  @override
+  String get gOpenUIReleases => 'Ouvre la page des versions d\'Open UI';
 
   @override
   String get gGiveFeedback => 'Partager des commentaires';

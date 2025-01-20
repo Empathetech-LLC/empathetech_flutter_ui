@@ -13,19 +13,21 @@ import 'package:flutter/material.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class SaveScreen extends StatefulWidget {
+class ArchiveScreen extends StatefulWidget {
   final EAGConfig config;
 
-  const SaveScreen({super.key, required this.config});
+  const ArchiveScreen({super.key, required this.config});
 
   @override
-  State<SaveScreen> createState() => _SaveScreenState();
+  State<ArchiveScreen> createState() => _ArchiveScreenState();
 }
 
-class _SaveScreenState extends State<SaveScreen> {
+class _ArchiveScreenState extends State<ArchiveScreen> {
   // Gather the theme data //
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang el10n = EFUILang.of(context)!;
+  late final Lang l10n = Lang.of(context)!;
+
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
   // Define the build data //
@@ -60,8 +62,7 @@ class _SaveScreenState extends State<SaveScreen> {
     savedConfig.endsWith('.json')
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
-            failureMessage =
-                'The file was not saved as .json...\n\n$savedConfig';
+            failureMessage = '${l10n.asBadFile} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
   }
@@ -84,9 +85,9 @@ class _SaveScreenState extends State<SaveScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: const EmpathetechLoadingAnimation(
+          child: EmpathetechLoadingAnimation(
             height: double.infinity,
-            semantics: 'BLARG',
+            semantics: el10n.gLoadingAnim,
           ),
         );
       case GeneratorState.successful:
@@ -95,19 +96,15 @@ class _SaveScreenState extends State<SaveScreen> {
             textTheme: textTheme,
             richMessage: EzRichText(
               <InlineSpan>[
-                EzPlainText(
-                    text:
-                        'Your configuration has been saved to ${archivePath()}\n\nUse it on '),
+                EzPlainText(text: l10n.asSavedTo(archivePath())),
                 EzInlineLink(
-                  'Open UI',
+                  appTitle,
                   style: subTitleStyle(textTheme),
                   textAlign: TextAlign.center,
                   url: Uri.parse(openUIReleases),
-                  semanticsLabel: 'BLARG',
+                  semanticsLabel: el10n.gOpenUIReleases,
                 ),
-                EzPlainText(
-                    text:
-                        ' for desktop to generate the code for ${widget.config.appName}'),
+                EzPlainText(text: l10n.asToGen(widget.config.appName)),
               ],
               style: subTitleStyle(textTheme),
               textAlign: TextAlign.center,
@@ -136,7 +133,7 @@ class _SaveScreenState extends State<SaveScreen> {
 
   @override
   Widget build(_) => OpenUIScaffold(
-        title: 'Archiver',
+        title: l10n.asPageTitle,
         running: genState == GeneratorState.running,
         body: EzScreen(alignment: Alignment.center, child: header()),
       );

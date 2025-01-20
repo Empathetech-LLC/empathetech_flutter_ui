@@ -98,11 +98,11 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: saveScreenPath,
-          name: saveScreenPath,
+          path: archiveScreenPath,
+          name: archiveScreenPath,
           builder: (_, GoRouterState state) {
             final EAGConfig config = state.extra as EAGConfig;
-            return SaveScreen(config: config);
+            return ArchiveScreen(config: config);
           },
         ),
         GoRoute(

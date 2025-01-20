@@ -28,7 +28,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   static const EzSpacer spacer = EzSpacer();
   static const Widget divider = EzDivider();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final Lang l10n = Lang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
   late final TextStyle? subTitle = subTitleStyle(textTheme);
@@ -86,7 +86,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         if (message.contains('command not found')) {
           setState(() {
             showDelete = null;
-            failureMessage = 'Flutter is not installed';
+            failureMessage = l10n.gsNotInstalled;
             genState = GeneratorState.failed;
           });
         } else {
@@ -312,8 +312,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             showDelete = false;
             genState = GeneratorState.successful;
           })
-        : onFailure(
-            'The code was successfully generated, but some of the project setup failed.');
+        : onFailure(l10n.gsPartialSuccess);
   }
 
   Widget header() {
@@ -322,9 +321,9 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: (heightOf(context) / 3),
           width: double.infinity,
-          child: const EmpathetechLoadingAnimation(
+          child: EmpathetechLoadingAnimation(
             height: double.infinity,
-            semantics: 'BLARG',
+            semantics: EFUILang.of(context)!.gLoadingAnim,
           ),
         );
       case GeneratorState.successful:
@@ -338,7 +337,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 SuccessHeader(
                   textTheme: textTheme,
                   message:
-                      '${widget.config.appName} is ready in\n${widget.config.genPath}',
+                      '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.genPath}',
                 ),
                 const EzSeparator(),
                 RunOption(
@@ -350,7 +349,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     setState(() => genState = GeneratorState.running);
                     ezSnackBar(
                       context: context,
-                      message: 'First run usually takes awhile',
+                      message: l10n.gsFirstRun,
                     );
 
                     await ezCLI(
@@ -412,7 +411,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   @override
   Widget build(_) {
     return OpenUIScaffold(
-      title: 'Generator',
+      title: l10n.gsPageTitle,
       running: genState == GeneratorState.running,
       body: EzScreen(
         child: EzScrollView(children: <Widget>[
@@ -426,7 +425,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               EzText(
-                'Console output',
+                l10n.gsConsole,
                 style: textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),

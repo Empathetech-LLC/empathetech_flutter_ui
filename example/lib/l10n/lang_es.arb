@@ -69,6 +69,26 @@
 
 
 
+  "asPageTitle": "Archivador",
+
+  "asSavedTo": "Su configuración se ha guardado en {path}\n\nÚselo en ",
+  "asToGen": " para escritorio para generar el código para {app_name}",
+  "asBadFile": "El archivo no se guardó como ",
+
+
+
+  "gsPageTitle": "Generador",
+  
+  "gsConsole": "Salida de la consola",
+
+  "gsIsReadyIn": "está listo en",
+  "gsFirstRun": "La primera ejecución suele tardar un tiempo",
+
+  "gsNotInstalled": "Flutter no está instalado",
+  "gsPartialSuccess": "El código se generó correctamente, pero falló parte de la configuración del proyecto.",
+
+  
+  
   "rsWouldYou": "Te gustaría...",
 
   "rsInstall": "Instalarlo",

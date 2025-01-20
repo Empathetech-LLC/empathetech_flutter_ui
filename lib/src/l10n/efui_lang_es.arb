@@ -41,6 +41,8 @@
   "gMaximum": "Máximo",
   "gMinimum": "Mínimo",
 
+  "gLoadingAnim": "Cargando. El logotipo empático animado como un reloj de arena giratorio.",
+
   "gHowThisWorks": "Cómo funciona",
   "gHowThisWorksHint": "Abrir documentación útil",
 
@@ -56,6 +58,7 @@
 
   "gOpenSource": "Código abierto",
   "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
+  "gOpenUIReleases": "Abrir la página de lanzamientos de Open UI",
 
   "gGiveFeedback": "Dar feedback",
   "gOpeningFeedback": "Apertura de la herramienta de feedback.",

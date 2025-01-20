@@ -99,6 +99,10 @@ class EFUILangEs extends EFUILang {
   String get gMinimum => 'Mínimo';
 
   @override
+  String get gLoadingAnim =>
+      'Cargando. El logotipo empático animado como un reloj de arena giratorio.';
+
+  @override
   String get gHowThisWorks => 'Cómo funciona';
 
   @override
@@ -129,6 +133,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
+
+  @override
+  String get gOpenUIReleases => 'Abrir la página de lanzamientos de Open UI';
 
   @override
   String get gGiveFeedback => 'Dar feedback';

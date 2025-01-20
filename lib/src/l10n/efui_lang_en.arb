@@ -41,6 +41,8 @@
   "gMaximum": "Maximum",
   "gMinimum": "Minimum",
 
+  "gLoadingAnim": "Loading. The empathetic logo animated as a spinning hourglass.",
+
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
@@ -56,6 +58,7 @@
 
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
+  "gOpenUIReleases": "Open the releases page for Open UI",
 
   "gGiveFeedback": "Give feedback",
   "gOpeningFeedback": "Opening the feedback tool.",

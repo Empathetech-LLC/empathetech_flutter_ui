@@ -157,6 +157,42 @@ class LangFr extends Lang {
   String get csResetNothing => 'Rien';
 
   @override
+  String get asPageTitle => 'Archiviste';
+
+  @override
+  String asSavedTo(Object path) {
+    return 'Votre configuration a été enregistrée dans $path\n\nUtilisez-le sur ';
+  }
+
+  @override
+  String asToGen(Object app_name) {
+    return ' pour le bureau pour générer le code pour $app_name';
+  }
+
+  @override
+  String get asBadFile => 'Le fichier n\'a pas été enregistré comme ';
+
+  @override
+  String get gsPageTitle => 'Générateur';
+
+  @override
+  String get gsConsole => 'Sortie de la console';
+
+  @override
+  String get gsIsReadyIn => 'est prêt dans';
+
+  @override
+  String get gsFirstRun =>
+      'La première exécution prend généralement un certain temps';
+
+  @override
+  String get gsNotInstalled => 'Flutter n\'est pas installé';
+
+  @override
+  String get gsPartialSuccess =>
+      'Le code a été généré avec succès, mais une partie de la configuration du projet a échoué.';
+
+  @override
   String get rsWouldYou => 'Souhaitez-vous...';
 
   @override

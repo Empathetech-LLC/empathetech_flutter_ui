@@ -41,6 +41,8 @@
   "gMaximum": "Maximum",
   "gMinimum": "Minimum",
 
+  "gLoadingAnim": "Chargement. Le logo empathique animé comme un sablier tournant.",
+
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
 
@@ -56,6 +58,7 @@
 
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
+  "gOpenUIReleases": "Ouvre la page des versions d'Open UI",
 
   "gGiveFeedback": "Partager des commentaires",
   "gOpeningFeedback": "Ouverture de l'outil de feedback.",
