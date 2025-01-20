@@ -85,7 +85,7 @@ P.P.S. Integration testing has been setup along with a basic runner script; `int
 
 ## Credits
 
-${config.appName} began with [Open UI]($openUIReleases)'s app generation service.
+${config.appName} began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -120,7 +120,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.0] - ${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}
 ### Added
-- ${config.appName} foundation generated via [Open UI]($openUIReleases)
+- ${config.appName} foundation generated via [Open UI]($openUIProdPage)
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ''');
