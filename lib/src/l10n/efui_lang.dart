@@ -128,6 +128,12 @@ abstract class EFUILang {
   /// **'Options'**
   String get gOptions;
 
+  /// No description provided for @gHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get gHelp;
+
   /// No description provided for @gNo.
   ///
   /// In en, this message translates to:
@@ -773,7 +779,7 @@ abstract class EFUILang {
   /// No description provided for @csFromImage.
   ///
   /// In en, this message translates to:
-  /// **'Build the color scheme from an image'**
+  /// **'A color scheme will be generated from the image.'**
   String get csFromImage;
 
   /// No description provided for @csColorScheme.

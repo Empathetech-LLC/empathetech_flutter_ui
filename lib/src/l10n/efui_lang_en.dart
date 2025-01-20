@@ -22,6 +22,9 @@ class EFUILangEn extends EFUILang {
   String get gOptions => 'Options';
 
   @override
+  String get gHelp => 'Help';
+
+  @override
   String get gNo => 'No';
 
   @override
@@ -364,7 +367,7 @@ class EFUILangEn extends EFUILang {
   String get csOptional => 'optional';
 
   @override
-  String get csFromImage => 'Build the color scheme from an image';
+  String get csFromImage => 'A color scheme will be generated from the image.';
 
   @override
   String get csColorScheme => 'color scheme';

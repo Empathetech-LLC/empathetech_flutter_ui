@@ -29,9 +29,11 @@ class EzToolTipper extends StatelessWidget {
     final GlobalKey<TooltipState> key = GlobalKey<TooltipState>();
     bool isTooltipVisible = false;
 
+    final String help = EFUILang.of(context)!.gHelp;
+
     return EzTextBackground(
       Semantics(
-        label: 'Help',
+        label: help,
         button: true,
         onTap: () async {
           if (isTooltipVisible) {
@@ -40,7 +42,7 @@ class EzToolTipper extends StatelessWidget {
             key.currentState?.ensureTooltipVisible();
 
             // Wait for auto-announcement to finish
-            await Future<void>.delayed(ezReadingTime('Help'));
+            await Future<void>.delayed(ezReadingTime(help));
             String message = this.message ?? '';
 
             if (richMessage != null) {

@@ -22,6 +22,9 @@ class EFUILangFr extends EFUILang {
   String get gOptions => 'Paramètres';
 
   @override
+  String get gHelp => 'Aide';
+
+  @override
   String get gNo => 'Non';
 
   @override
@@ -367,7 +370,7 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get csFromImage =>
-      'Construire le schéma de couleurs à partir d\'une image';
+      'Un schéma de couleurs sera généré à partir de l\'image.';
 
   @override
   String get csColorScheme => 'schéma de couleurs';
