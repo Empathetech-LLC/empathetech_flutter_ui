@@ -247,7 +247,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     Navigator.of(dialogContext).pop();
                   },
                   icon: EzIcon(PlatformIcons(context).delete),
-                  label: l10n.csRemove,
+                  label: l10n.gRemove,
                 ),
                 spacer,
 
@@ -261,7 +261,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     }
                   },
                   icon: EzIcon(PlatformIcons(context).refresh),
-                  label: l10n.csReset,
+                  label: l10n.gReset,
                 ),
               ],
               needsClose: true,

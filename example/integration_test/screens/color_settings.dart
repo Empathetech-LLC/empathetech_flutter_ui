@@ -275,7 +275,7 @@ Future<void> testCS(
     await ezHoldText(tester, text);
     await ezTouchText(tester, l10n.gClose);
     await ezHoldText(tester, text);
-    await ezTouchText(tester, l10n.csRemove);
+    await ezTouchText(tester, l10n.gRemove);
     expect(find.text(text), findsNothing);
   }
 }
