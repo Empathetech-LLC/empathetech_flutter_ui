@@ -3,23 +3,31 @@
 
 
 
-  "gYes": "Sí",
   "gApply": "Aplicar",
   "gContinue": "Continuar",
+  "gOpen": "Abrir",
+  "gSuccess": "Éxito",
+  "gSuccessExl": "¡Éxito!",
+  "gYes": "Sí",
 
   "gAnd": "y",
-  "gOptions": "Opciones",
   "gHelp": "Ayuda",
+  "gNA": "N/D",
+  "gNAHint": "No disponible",
+  "gOptional": "opcional",
+  "gOptions": "Opciones",
+  "gRequired": "Requerido",
 
-  "gNo": "No",
   "gBack": "Atrás",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
   "gError": "Error",
+  "gFailure": "Fracaso",
+  "gNo": "No",
 
-  "gSystem": "Sistema",
-  "gLight": "Claro",
   "gDark": "Oscuro",
+  "gLight": "Claro",
+  "gSystem": "Sistema",
 
   "gEditing": "Editando: ",
   "gEditingTheme": "Editando: tema {themeType}",
@@ -27,11 +35,16 @@
   "gLeft": "Izquierda",
   "gRight": "Derecha",
 
-  "gQuick": "Rápido",
   "gAdvanced": "Avanzado",
+  "gQuick": "Rápido",
 
-  "gMinimum": "Mínimo",
   "gMaximum": "Máximo",
+  "gMinimum": "Mínimo",
+
+  "gHowThisWorks": "Cómo funciona",
+  "gHowThisWorksHint": "Abrir documentación útil",
+
+  "gTranslationsPending": "Traducciones pendientes de revisión humana",
 
   "gUpdates": "Actualizaciones disponibles",
   
@@ -44,17 +57,12 @@
   "gOpenSource": "Código abierto",
   "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
 
-  "gSupportEmail": "Nuestro Email de soporte",
-  "gClipboard": "{thing} ha sido copiado al portapapeles.",
-
   "gGiveFeedback": "Dar feedback",
   "gOpeningFeedback": "Apertura de la herramienta de feedback.",
   "gAttachScreenshot": "Adjunte su captura de pantalla (en la carpeta de Descargas)",
-
-  "gHowThisWorks": "Cómo funciona",
-  "gHowThisWorksHint": "Abrir documentación útil",
   
-  "gTranslationsPending": "Traducciones pendientes de revisión humana",
+  "gSupportEmail": "Nuestro Email de soporte",
+  "gClipboard": "{thing} ha sido copiado al portapapeles.",
 
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
@@ -68,11 +76,13 @@
 
   "gCreditTo": "Acreditando a:",
   "gCreator": "Creador de",
+  "gMadeBy": "Hecho por",
   "gYou": "Configurado por ti",
   
 
 
   "ssPageTitle": "Configuración",
+  "ssNavHint": "Abrir la página de configuración",
   "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
 
@@ -163,7 +173,6 @@
   "csCurrVal": "Valor de color actual:",
 
   "csSchemeBase": "Crear tema\nusando imagen",
-  "csOptional": "opcional",
   "csFromImage": "Se generará un esquema de color a partir de la imagen.",
   "csColorScheme": "esquema de color",
 

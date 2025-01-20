@@ -7,25 +7,43 @@ class EFUILangEn extends EFUILang {
   EFUILangEn([String locale = 'en']) : super(locale);
 
   @override
-  String get gYes => 'Yes';
-
-  @override
   String get gApply => 'Apply';
 
   @override
   String get gContinue => 'Continue';
 
   @override
-  String get gAnd => 'and';
+  String get gOpen => 'Open';
 
   @override
-  String get gOptions => 'Options';
+  String get gSuccess => 'Success';
+
+  @override
+  String get gSuccessExl => 'Success!';
+
+  @override
+  String get gYes => 'Yes';
+
+  @override
+  String get gAnd => 'and';
 
   @override
   String get gHelp => 'Help';
 
   @override
-  String get gNo => 'No';
+  String get gNA => 'N/A';
+
+  @override
+  String get gNAHint => 'Not applicable';
+
+  @override
+  String get gOptional => 'optional';
+
+  @override
+  String get gOptions => 'Options';
+
+  @override
+  String get gRequired => 'Required';
 
   @override
   String get gBack => 'Back';
@@ -40,13 +58,19 @@ class EFUILangEn extends EFUILang {
   String get gError => 'Error';
 
   @override
-  String get gSystem => 'System';
+  String get gFailure => 'Failure';
+
+  @override
+  String get gNo => 'No';
+
+  @override
+  String get gDark => 'Dark';
 
   @override
   String get gLight => 'Light';
 
   @override
-  String get gDark => 'Dark';
+  String get gSystem => 'System';
 
   @override
   String get gEditing => 'Editing: ';
@@ -63,16 +87,25 @@ class EFUILangEn extends EFUILang {
   String get gRight => 'Right';
 
   @override
+  String get gAdvanced => 'Advanced';
+
+  @override
   String get gQuick => 'Quick';
 
   @override
-  String get gAdvanced => 'Advanced';
+  String get gMaximum => 'Maximum';
 
   @override
   String get gMinimum => 'Minimum';
 
   @override
-  String get gMaximum => 'Maximum';
+  String get gHowThisWorks => 'How this works';
+
+  @override
+  String get gHowThisWorksHint => 'Open helpful documentation';
+
+  @override
+  String get gTranslationsPending => 'Translations pending human review';
 
   @override
   String get gUpdates => 'Updates available';
@@ -88,21 +121,13 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get g404Note =>
-      'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings';
+      'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/destination';
 
   @override
   String get gOpenSource => 'Open source';
 
   @override
   String get gEFUISourceHint => 'Open the GitHub page for EFUI';
-
-  @override
-  String get gSupportEmail => 'Our support Email';
-
-  @override
-  String gClipboard(Object thing) {
-    return '$thing has been copied to the clipboard.';
-  }
 
   @override
   String get gGiveFeedback => 'Give feedback';
@@ -115,13 +140,12 @@ class EFUILangEn extends EFUILang {
       'Please attach your screenshot (in Downloads folder)';
 
   @override
-  String get gHowThisWorks => 'How this works';
+  String get gSupportEmail => 'Our support Email';
 
   @override
-  String get gHowThisWorksHint => 'Open helpful documentation';
-
-  @override
-  String get gTranslationsPending => 'Translations pending human review';
+  String gClipboard(Object thing) {
+    return '$thing has been copied to the clipboard.';
+  }
 
   @override
   String get gAttention => 'Attention';
@@ -163,10 +187,16 @@ class EFUILangEn extends EFUILang {
   String get gCreator => 'Creator of';
 
   @override
+  String get gMadeBy => 'Made by';
+
+  @override
   String get gYou => 'Set by you';
 
   @override
   String get ssPageTitle => 'Settings';
+
+  @override
+  String get ssNavHint => 'Open the settings page';
 
   @override
   String get ssSettingsGuide =>
@@ -362,9 +392,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get csSchemeBase => 'Build scheme\nfrom image';
-
-  @override
-  String get csOptional => 'optional';
 
   @override
   String get csFromImage => 'A color scheme will be generated from the image.';

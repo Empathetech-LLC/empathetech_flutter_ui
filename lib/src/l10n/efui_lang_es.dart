@@ -7,25 +7,43 @@ class EFUILangEs extends EFUILang {
   EFUILangEs([String locale = 'es']) : super(locale);
 
   @override
-  String get gYes => 'Sí';
-
-  @override
   String get gApply => 'Aplicar';
 
   @override
   String get gContinue => 'Continuar';
 
   @override
-  String get gAnd => 'y';
+  String get gOpen => 'Abrir';
 
   @override
-  String get gOptions => 'Opciones';
+  String get gSuccess => 'Éxito';
+
+  @override
+  String get gSuccessExl => '¡Éxito!';
+
+  @override
+  String get gYes => 'Sí';
+
+  @override
+  String get gAnd => 'y';
 
   @override
   String get gHelp => 'Ayuda';
 
   @override
-  String get gNo => 'No';
+  String get gNA => 'N/D';
+
+  @override
+  String get gNAHint => 'No disponible';
+
+  @override
+  String get gOptional => 'opcional';
+
+  @override
+  String get gOptions => 'Opciones';
+
+  @override
+  String get gRequired => 'Requerido';
 
   @override
   String get gBack => 'Atrás';
@@ -40,13 +58,19 @@ class EFUILangEs extends EFUILang {
   String get gError => 'Error';
 
   @override
-  String get gSystem => 'Sistema';
+  String get gFailure => 'Fracaso';
+
+  @override
+  String get gNo => 'No';
+
+  @override
+  String get gDark => 'Oscuro';
 
   @override
   String get gLight => 'Claro';
 
   @override
-  String get gDark => 'Oscuro';
+  String get gSystem => 'Sistema';
 
   @override
   String get gEditing => 'Editando: ';
@@ -63,16 +87,26 @@ class EFUILangEs extends EFUILang {
   String get gRight => 'Derecha';
 
   @override
+  String get gAdvanced => 'Avanzado';
+
+  @override
   String get gQuick => 'Rápido';
 
   @override
-  String get gAdvanced => 'Avanzado';
+  String get gMaximum => 'Máximo';
 
   @override
   String get gMinimum => 'Mínimo';
 
   @override
-  String get gMaximum => 'Máximo';
+  String get gHowThisWorks => 'Cómo funciona';
+
+  @override
+  String get gHowThisWorksHint => 'Abrir documentación útil';
+
+  @override
+  String get gTranslationsPending =>
+      'Traducciones pendientes de revisión humana';
 
   @override
   String get gUpdates => 'Actualizaciones disponibles';
@@ -97,14 +131,6 @@ class EFUILangEs extends EFUILang {
   String get gEFUISourceHint => 'Abrir la página de GitHub de EFUI';
 
   @override
-  String get gSupportEmail => 'Nuestro Email de soporte';
-
-  @override
-  String gClipboard(Object thing) {
-    return '$thing ha sido copiado al portapapeles.';
-  }
-
-  @override
   String get gGiveFeedback => 'Dar feedback';
 
   @override
@@ -115,14 +141,12 @@ class EFUILangEs extends EFUILang {
       'Adjunte su captura de pantalla (en la carpeta de Descargas)';
 
   @override
-  String get gHowThisWorks => 'Cómo funciona';
+  String get gSupportEmail => 'Nuestro Email de soporte';
 
   @override
-  String get gHowThisWorksHint => 'Abrir documentación útil';
-
-  @override
-  String get gTranslationsPending =>
-      'Traducciones pendientes de revisión humana';
+  String gClipboard(Object thing) {
+    return '$thing ha sido copiado al portapapeles.';
+  }
 
   @override
   String get gAttention => 'Atención';
@@ -164,10 +188,16 @@ class EFUILangEs extends EFUILang {
   String get gCreator => 'Creador de';
 
   @override
+  String get gMadeBy => 'Hecho por';
+
+  @override
   String get gYou => 'Configurado por ti';
 
   @override
   String get ssPageTitle => 'Configuración';
+
+  @override
+  String get ssNavHint => 'Abrir la página de configuración';
 
   @override
   String get ssSettingsGuide =>
@@ -363,9 +393,6 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get csSchemeBase => 'Crear tema\nusando imagen';
-
-  @override
-  String get csOptional => 'opcional';
 
   @override
   String get csFromImage =>

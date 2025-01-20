@@ -56,11 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
       : '';
 
   final TextEditingController nameController = TextEditingController();
-  String namePreview = 'your_app';
+  late String namePreview = l10n.csNamePreview;
   bool validName = false;
 
   final TextEditingController pubController = TextEditingController();
-  String pubPreview = 'Your org';
+  late String pubPreview = l10n.csPubPreview;
 
   final TextEditingController domainController = TextEditingController();
   bool exampleDomain = false;
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<bool> checkPath() async {
     if (await Directory(pathController.text).exists()) return true;
 
-    const String badPath = 'Invalid path';
+    final String badPath = l10n.csBadPath;
 
     // Disable interaction
     setState(() {
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return OpenUIScaffold(
-      title: 'Builder',
+      title: l10n.csPageTitle,
       onUpload: (EAGConfig config) async {
         // Disable buttons
         setState(() => canGen = false);
@@ -234,16 +234,17 @@ class _HomeScreenState extends State<HomeScreen> {
             // App name
             _BasicField(
               textTheme: textTheme,
-              title: 'App name',
+              title: l10n.csAppName,
               tip: TextSpan(children: <InlineSpan>[
-                const EzPlainText(text: 'Best App Ever'),
-                const EzPlainText(text: '  -->  ', semanticsLabel: ' becomes '),
-                EzPlainText(text: ezTitleToSnake('Best App Ever')),
+                EzPlainText(text: l10n.csNameHint),
+                EzPlainText(
+                    text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
+                EzPlainText(text: ezTitleToSnake(l10n.csNameHint)),
               ]),
               controller: nameController,
               validator: (String? entry) => validateAppName(
                 value: entry,
-                l10n: l10n,
+                context: context,
                 onSuccess: () => setState(() {
                   final String previous = namePreview;
                   validName = true;
@@ -259,20 +260,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
                 onFailure: () => setState(() => validName = false),
               ),
-              hintText: 'example_app',
+              hintText: l10n.csNamePreview,
             ),
             spacer,
 
             // Publisher name
             _BasicField(
               textTheme: textTheme,
-              title: 'Publisher name',
-              tip: 'Or: Example Person',
+              title: l10n.csPubName,
+              tip: l10n.csPubPreview,
               controller: pubController,
               validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Required';
-                }
+                if (value == null || value.isEmpty) return el10n.gRequired;
 
                 setState(() {
                   final String previous = pubPreview;
@@ -283,18 +282,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
                 return null;
               },
-              hintText: 'Example LLC',
+              hintText: l10n.csPubPreview,
             ),
             spacer,
 
             // Description
             _BasicField(
               textTheme: textTheme,
-              title: 'Description',
+              title: l10n.csDescription,
               controller: descriptionController,
               validator: (String? value) =>
-                  (value == null || value.isEmpty) ? 'Required' : null,
-              hintText: 'One or two sentences about your app.',
+                  (value == null || value.isEmpty) ? el10n.gRequired : null,
+              hintText: l10n.csDescPreview,
             ),
             spacer,
 
@@ -304,12 +303,12 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 Flexible(
                   child: EzText(
-                    'Domain name',
+                    l10n.csDomainName,
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
-                const EzToolTipper(message: 'Backwards, it is'),
+                EzToolTipper(message: l10n.csDomainHint),
               ],
             ),
             ConstrainedBox(
@@ -323,7 +322,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: domainController,
                       textAlign: TextAlign.start,
                       maxLines: 1,
-                      validator: (String? text) => validateDomain(text, l10n),
+                      validator: (String? text) =>
+                          validateDomain(text, context),
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration:
                           const InputDecoration(hintText: 'com.example'),
@@ -334,9 +334,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     children: <Widget>[
-                      const EzText(
-                        'N/A',
-                        semanticsLabel: 'Not applicable',
+                      EzText(
+                        el10n.gNA,
+                        semanticsLabel: el10n.gNAHint,
                         textAlign: TextAlign.start,
                       ),
                       EzCheckbox(
@@ -356,15 +356,17 @@ class _HomeScreenState extends State<HomeScreen> {
             // Support email
             _BasicField(
               textTheme: textTheme,
-              title: 'Support email',
-              tip: 'If provided, the feedback system we use will be included.',
+              title: l10n.csSupportEmail,
+              tip: l10n.csSupportHint,
               controller: supportEmailController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) return null;
 
-                return EmailValidator.validate(value) ? null : 'Invalid email';
+                return EmailValidator.validate(value)
+                    ? null
+                    : l10n.csInvalidEmail;
               },
-              hintText: 'optional@example.com',
+              hintText: '${el10n.gOptional}@example.com',
             ),
             separator,
 
@@ -375,12 +377,12 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 Flexible(
                   child: EzText(
-                    'Include',
+                    l10n.csInclude,
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
-                const EzToolTipper(message: 'Easy to change later'),
+                EzToolTipper(message: l10n.csEasy),
               ],
             ),
             Padding(
@@ -393,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   margin,
                   _SettingsCheckbox(
-                    title: 'Text settings',
+                    title: el10n.tsPageTitle,
                     value: textSettings,
                     onChanged: (bool? value) async {
                       if (value == null) return;
@@ -402,7 +404,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    title: 'Layout settings',
+                    title: el10n.lsPageTitle,
                     value: layoutSettings,
                     onChanged: (bool? value) async {
                       if (value == null) return;
@@ -411,7 +413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    title: 'Color settings',
+                    title: el10n.csPageTitle,
                     value: colorSettings,
                     onChanged: (bool? value) async {
                       if (value == null) return;
@@ -420,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   _SettingsCheckbox(
-                    title: 'Image settings',
+                    title: el10n.isPageTitle,
                     value: imageSettings,
                     onChanged: (bool? value) async {
                       if (value == null) return;
@@ -437,29 +439,27 @@ class _HomeScreenState extends State<HomeScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text:
-                      'When you generate ${isDesktop ? (validName ? namePreview : 'the app') : 'the config'}, the current ',
+                  text: l10n.csGenApp(isDesktop
+                      ? (validName ? namePreview : l10n.csTheApp)
+                      : l10n.csTheConfig),
                   style: subTitle,
                 ),
                 EzInlineLink(
-                  'settings',
+                  el10n.ssPageTitle.toLowerCase(),
                   style: subTitle,
                   onTap: () => context.goNamed(settingsHomePath),
-                  semanticsLabel: 'Open the settings page',
+                  semanticsLabel: el10n.ssNavHint,
                 ),
                 EzPlainText(
-                  text:
-                      ''' (except images) will become the default config for ${validName ? namePreview : 'your app'}.
-
-It is recommended to set a custom color scheme. If you need help building one, try starting ''',
+                  text: l10n
+                      .csSetColors(validName ? namePreview : l10n.csYourApp),
                   style: subTitle,
                 ),
                 EzInlineLink(
-                  'here.',
+                  l10n.csHere,
                   style: subTitle,
                   url: Uri.parse('https://www.canva.com/colors/color-wheel/'),
-                  semanticsLabel:
-                      'Open a link to an online color scheme builder',
+                  semanticsLabel: l10n.csHereHint,
                 ),
               ],
               textAlign: TextAlign.start,
@@ -473,14 +473,14 @@ It is recommended to set a custom color scheme. If you need help building one, t
               children: <Widget>[
                 Flexible(
                   child: EzText(
-                    'Advanced settings',
+                    l10n.csAdvanced,
                     style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
                 rowMargin,
                 Semantics(
-                  hint: showAdvanced ? 'Close' : 'Open',
+                  hint: showAdvanced ? el10n.gClose : el10n.gOpen,
                   button: true,
                   child: ExcludeSemantics(
                     child: IconButton(
@@ -524,7 +524,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                             maxLines: 1,
                             validator: (String? path) =>
                                 (path == null || path.isEmpty)
-                                    ? 'Path required. Cannot use root folder.'
+                                    ? l10n.csPathRequired
                                     : null,
                             autovalidateMode: AutovalidateMode.onUnfocus,
                           ),
@@ -551,8 +551,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
 
                   // Copyright config
                   _AdvancedSettingsField(
-                    title: 'Copyright notice',
-                    tip: 'Will be included at the top of every Dart file',
+                    title: l10n.csCopyright,
+                    tip: l10n.csCopyrightHint,
                     controller: copyrightController,
                     visible: showCopyright,
                     onHide: () =>
@@ -577,7 +577,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // l10n config
                   _AdvancedSettingsField(
                     title: 'l10n.yaml',
-                    tip: 'Localization (aka translations) config',
+                    tip: l10n.csL10nHint,
                     controller: l10nController,
                     visible: showL10n,
                     onHide: () => setState(() => showL10n = !showL10n),
@@ -590,7 +590,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // Analysis options config
                   _AdvancedSettingsField(
                     title: 'analysis_options.yaml',
-                    tip: 'Lint rules',
+                    tip: l10n.csLintHint,
                     controller: analysisController,
                     visible: showAnalysis,
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
@@ -603,7 +603,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                   // VS Code launch config
                   _AdvancedSettingsField(
                     title: '.vscode/launch.json',
-                    tip: "Adds launch options to VS Code's debug menu",
+                    tip: l10n.csLaunchHint,
                     controller: vscController,
                     visible: showVSC,
                     onHide: () => setState(() => showVSC = !showVSC),
@@ -630,7 +630,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       if (validName &&
                           pubController.text.isNotEmpty &&
                           (exampleDomain ||
-                              validateDomain(domainController.text, l10n) ==
+                              validateDomain(domainController.text, context) ==
                                   null) &&
                           descriptionController.text.isNotEmpty &&
                           (supportEmailController.text.isEmpty ||
@@ -689,7 +689,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       }
                     },
                     icon: EzIcon(Icons.save),
-                    label: 'Save config',
+                    label: l10n.csSave,
                     textAlign: TextAlign.center,
                   ),
 
@@ -702,7 +702,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         if (validName &&
                             pubController.text.isNotEmpty &&
                             (exampleDomain ||
-                                validateDomain(domainController.text, l10n) ==
+                                validateDomain(
+                                        domainController.text, context) ==
                                     null) &&
                             descriptionController.text.isNotEmpty &&
                             (supportEmailController.text.isEmpty ||
@@ -768,7 +769,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         }
                       },
                       icon: EzIcon(PlatformIcons(context).create),
-                      label: 'Generate app',
+                      label: l10n.csGenerate,
                     ),
                   ],
                 ],

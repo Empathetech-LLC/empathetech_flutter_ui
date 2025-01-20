@@ -7,24 +7,127 @@ class LangEs extends Lang {
   LangEs([String locale = 'es']) : super(locale);
 
   @override
-  String get gRequired => 'Requerido';
+  String get csPageTitle => 'Constructor';
 
   @override
-  String get gSuccess => '¡Éxito!';
+  String get csAppName => 'Nombre de la aplicación';
 
   @override
-  String get gFailure => 'Fracaso';
+  String get csNamePreview => 'ejemplo_app';
+
+  @override
+  String get csNameHint => 'La mejor aplicación de todas';
+
+  @override
+  String get csBecomes => 'se convierte en';
 
   @override
   String get csInvalidName =>
       'Se permiten letras minúsculas, números y guiones bajos.';
 
   @override
+  String get csYourApp => 'tu aplicación';
+
+  @override
+  String get csPubName => 'Nombre del editor';
+
+  @override
+  String get csPubPreview => 'Organización Ejemplo';
+
+  @override
+  String get csPubHint => 'O Persona Ejemplo';
+
+  @override
+  String get csDescription => 'Descripción';
+
+  @override
+  String get csDescPreview => 'Una o dos frases sobre tu aplicación.';
+
+  @override
+  String get csDomainName => 'Nombre de dominio';
+
+  @override
+  String get csDomainHint => 'Revés, esta al';
+
+  @override
   String get csInvalidDomain =>
-      '\'dom.name\' solo; r\'^[a-z0-9_]+\\.[a-z]+\$\'';
+      '\'domain.name\' solamente; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')';
+
+  @override
+  String get csSupportEmail => 'Correo de soporte';
+
+  @override
+  String get csSupportHint =>
+      'Si se proporciona, se incluirá el sistema de comentarios que utilizamos.';
+
+  @override
+  String get csInvalidEmail => 'Correo no válido';
+
+  @override
+  String get csInclude => 'Incluir';
+
+  @override
+  String get csEasy => 'Fácil de cambiar más tarde';
+
+  @override
+  String csGenApp(Object app_name) {
+    return 'Cuando generas $app_name el actual ';
+  }
+
+  @override
+  String get csTheApp => 'la aplicación';
+
+  @override
+  String get csTheConfig => 'la configuración';
+
+  @override
+  String csSetColors(Object app_name) {
+    return ' (excepto imágenes) se convertirá en la configuración predeterminada para $app_name.\n\nSe recomienda establecer un esquema de colores personalizado. Si necesitas ayuda para construir uno, intenta comenzar ';
+  }
+
+  @override
+  String get csHere => 'aquí.';
+
+  @override
+  String get csHereHint =>
+      'Abre un enlace a un constructor de esquemas de colores en línea';
+
+  @override
+  String get csAdvanced => 'Configuraciones avanzadas';
+
+  @override
+  String get csPathRequired =>
+      'Se requiere ruta. No se puede usar la carpeta raíz.';
+
+  @override
+  String get csBadPath => 'Ruta no válida';
+
+  @override
+  String get csCopyright => 'Aviso de derechos de autor';
+
+  @override
+  String get csCopyrightHint =>
+      'Se incluirá en la parte superior de cada archivo Dart';
+
+  @override
+  String get csL10nHint =>
+      'Configuración de localización (también conocida como traducciones)';
+
+  @override
+  String get csLintHint => 'Reglas de lint';
+
+  @override
+  String get csLaunchHint =>
+      'Agrega opciones de lanzamiento al menú de depuración de VS Code';
+
+  @override
+  String get csSave => 'Guardar configuración';
 
   @override
   String get csLoad => 'Cargar configuración';
+
+  @override
+  String get csGenerate => 'Generar aplicación';
 
   @override
   String get csResetHint => 'Activa y confirma lo que se debe reiniciar.';

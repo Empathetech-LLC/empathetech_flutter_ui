@@ -3,16 +3,58 @@
 
 
 
-  "gRequired": "Required",
-  "gSuccess": "Success!",
-  "gFailure": "Failure",
+  "csPageTitle": "Builder",
 
-
-
+  "csAppName": "App name",
+  "csNamePreview": "example_app",
+  "csNameHint": "Best App Ever",
+  "csBecomes": "becomes",
   "csInvalidName": "Lowercase letters, numbers, and underscores are allowed.",
-  "csInvalidDomain": "'dom.name' only; r'^[a-z0-9_]+\\.[a-z]+$'",
-  
+  "csYourApp": "your app",
+
+  "csPubName": "Publisher name",
+  "csPubPreview": "Example Organization",
+  "csPubHint": "Or Example Person",
+
+  "csDescription": "Description",
+  "csDescPreview": "One or two sentences about your app.",
+
+  "csDomainName": "Domain name",
+  "csDomainHint": "Backwards, it is",
+  "csInvalidDomain": "'domain.name' only; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
+
+  "csSupportEmail": "Support email",
+  "csSupportHint": "If provided, the feedback system we use will be included.",
+  "csInvalidEmail": "Invalid email",
+
+  "csInclude": "Include",
+  "csEasy": "Easy to change later",
+
+  "csGenApp": "When you generate {app_name} the current ",
+  "csTheApp": "the app",
+  "csTheConfig": "the config",
+  "csSetColors": " (except images) will become the default config for {app_name}.\n\nIt is recommended to set a custom color scheme. If you need help building one, try starting ",
+  "csHere": "here.",
+  "csHereHint": "Open a link to an online color scheme builder",
+
+  "csAdvanced": "Advanced settings",
+
+  "csPathRequired": "Path required. Cannot use root folder.",
+  "csBadPath": "Invalid path",
+
+  "csCopyright": "Copyright notice",
+  "csCopyrightHint": "Will be included at the top of every Dart file",
+
+  "csL10nHint": "Localization (aka translations) config",
+
+  "csLintHint": "Lint rules",
+
+  "csLaunchHint": "Adds launch options to VS Code's debug menu",
+
+  "csSave": "Save config",
   "csLoad": "Load config",
+
+  "csGenerate": "Generate app",
 
   "csResetHint": "Activate and confirm what should be reset.",
   "csResetBuilder": "Builder values",

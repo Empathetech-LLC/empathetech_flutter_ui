@@ -98,12 +98,6 @@ abstract class EFUILang {
     Locale('fr')
   ];
 
-  /// No description provided for @gYes.
-  ///
-  /// In en, this message translates to:
-  /// **'Yes'**
-  String get gYes;
-
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
@@ -116,17 +110,35 @@ abstract class EFUILang {
   /// **'Continue'**
   String get gContinue;
 
+  /// No description provided for @gOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get gOpen;
+
+  /// No description provided for @gSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get gSuccess;
+
+  /// No description provided for @gSuccessExl.
+  ///
+  /// In en, this message translates to:
+  /// **'Success!'**
+  String get gSuccessExl;
+
+  /// No description provided for @gYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get gYes;
+
   /// No description provided for @gAnd.
   ///
   /// In en, this message translates to:
   /// **'and'**
   String get gAnd;
-
-  /// No description provided for @gOptions.
-  ///
-  /// In en, this message translates to:
-  /// **'Options'**
-  String get gOptions;
 
   /// No description provided for @gHelp.
   ///
@@ -134,11 +146,35 @@ abstract class EFUILang {
   /// **'Help'**
   String get gHelp;
 
-  /// No description provided for @gNo.
+  /// No description provided for @gNA.
   ///
   /// In en, this message translates to:
-  /// **'No'**
-  String get gNo;
+  /// **'N/A'**
+  String get gNA;
+
+  /// No description provided for @gNAHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Not applicable'**
+  String get gNAHint;
+
+  /// No description provided for @gOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get gOptional;
+
+  /// No description provided for @gOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Options'**
+  String get gOptions;
+
+  /// No description provided for @gRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get gRequired;
 
   /// No description provided for @gBack.
   ///
@@ -164,11 +200,23 @@ abstract class EFUILang {
   /// **'Error'**
   String get gError;
 
-  /// No description provided for @gSystem.
+  /// No description provided for @gFailure.
   ///
   /// In en, this message translates to:
-  /// **'System'**
-  String get gSystem;
+  /// **'Failure'**
+  String get gFailure;
+
+  /// No description provided for @gNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get gNo;
+
+  /// No description provided for @gDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get gDark;
 
   /// No description provided for @gLight.
   ///
@@ -176,11 +224,11 @@ abstract class EFUILang {
   /// **'Light'**
   String get gLight;
 
-  /// No description provided for @gDark.
+  /// No description provided for @gSystem.
   ///
   /// In en, this message translates to:
-  /// **'Dark'**
-  String get gDark;
+  /// **'System'**
+  String get gSystem;
 
   /// No description provided for @gEditing.
   ///
@@ -206,17 +254,23 @@ abstract class EFUILang {
   /// **'Right'**
   String get gRight;
 
+  /// No description provided for @gAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get gAdvanced;
+
   /// No description provided for @gQuick.
   ///
   /// In en, this message translates to:
   /// **'Quick'**
   String get gQuick;
 
-  /// No description provided for @gAdvanced.
+  /// No description provided for @gMaximum.
   ///
   /// In en, this message translates to:
-  /// **'Advanced'**
-  String get gAdvanced;
+  /// **'Maximum'**
+  String get gMaximum;
 
   /// No description provided for @gMinimum.
   ///
@@ -224,11 +278,23 @@ abstract class EFUILang {
   /// **'Minimum'**
   String get gMinimum;
 
-  /// No description provided for @gMaximum.
+  /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:
-  /// **'Maximum'**
-  String get gMaximum;
+  /// **'How this works'**
+  String get gHowThisWorks;
+
+  /// No description provided for @gHowThisWorksHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open helpful documentation'**
+  String get gHowThisWorksHint;
+
+  /// No description provided for @gTranslationsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Translations pending human review'**
+  String get gTranslationsPending;
 
   /// No description provided for @gUpdates.
   ///
@@ -257,7 +323,7 @@ abstract class EFUILang {
   /// No description provided for @g404Note.
   ///
   /// In en, this message translates to:
-  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings'**
+  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/destination'**
   String get g404Note;
 
   /// No description provided for @gOpenSource.
@@ -271,18 +337,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open the GitHub page for EFUI'**
   String get gEFUISourceHint;
-
-  /// No description provided for @gSupportEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Our support Email'**
-  String get gSupportEmail;
-
-  /// No description provided for @gClipboard.
-  ///
-  /// In en, this message translates to:
-  /// **'{thing} has been copied to the clipboard.'**
-  String gClipboard(Object thing);
 
   /// No description provided for @gGiveFeedback.
   ///
@@ -302,23 +356,17 @@ abstract class EFUILang {
   /// **'Please attach your screenshot (in Downloads folder)'**
   String get gAttachScreenshot;
 
-  /// No description provided for @gHowThisWorks.
+  /// No description provided for @gSupportEmail.
   ///
   /// In en, this message translates to:
-  /// **'How this works'**
-  String get gHowThisWorks;
+  /// **'Our support Email'**
+  String get gSupportEmail;
 
-  /// No description provided for @gHowThisWorksHint.
+  /// No description provided for @gClipboard.
   ///
   /// In en, this message translates to:
-  /// **'Open helpful documentation'**
-  String get gHowThisWorksHint;
-
-  /// No description provided for @gTranslationsPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Translations pending human review'**
-  String get gTranslationsPending;
+  /// **'{thing} has been copied to the clipboard.'**
+  String gClipboard(Object thing);
 
   /// No description provided for @gAttention.
   ///
@@ -386,6 +434,12 @@ abstract class EFUILang {
   /// **'Creator of'**
   String get gCreator;
 
+  /// No description provided for @gMadeBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Made by'**
+  String get gMadeBy;
+
   /// No description provided for @gYou.
   ///
   /// In en, this message translates to:
@@ -397,6 +451,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Settings'**
   String get ssPageTitle;
+
+  /// No description provided for @ssNavHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the settings page'**
+  String get ssNavHint;
 
   /// No description provided for @ssSettingsGuide.
   ///
@@ -769,12 +829,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Build scheme\nfrom image'**
   String get csSchemeBase;
-
-  /// No description provided for @csOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'optional'**
-  String get csOptional;
 
   /// No description provided for @csFromImage.
   ///

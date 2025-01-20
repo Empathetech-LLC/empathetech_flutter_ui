@@ -3,23 +3,31 @@
 
 
 
-  "gYes": "Oui",
   "gApply": "Appliquer",
   "gContinue": "Continuer",
+  "gOpen": "Ouvrir",
+  "gSuccess": "Succès",
+  "gSuccessExl": "Succès !",
+  "gYes": "Oui",
 
   "gAnd": "et",
-  "gOptions": "Paramètres",
   "gHelp": "Aide",
+  "gNA": "N/D",
+  "gNAHint": "Non disponible",
+  "gOptional": "optionnel",
+  "gOptions": "Paramètres",
+  "gRequired": "Requis",
 
-  "gNo": "Non",
   "gBack": "Retour",
   "gCancel": "Annuler",
   "gClose": "Fermer",
   "gError": "Erreur",
+  "gFailure": "Échec",
+  "gNo": "Non",
 
-  "gSystem": "Système",
-  "gLight": "Clair",
   "gDark": "Sombre",
+  "gLight": "Clair",
+  "gSystem": "Système",
 
   "gEditing": "Modification : ",
   "gEditingTheme": "Modification : Thème {themeType}",
@@ -27,11 +35,16 @@
   "gLeft": "Gauche",
   "gRight": "Droite",
 
-  "gQuick": "Rapide",
   "gAdvanced": "Avancé",
+  "gQuick": "Rapide",
 
-  "gMinimum": "Minimum",
   "gMaximum": "Maximum",
+  "gMinimum": "Minimum",
+
+  "gHowThisWorks": "Comment ça marche",
+  "gHowThisWorksHint": "Ouvre la documentation utile",
+
+  "gTranslationsPending": "Traductions en attente de révision humaine",
 
   "gUpdates": "Mises à jour disponibles",
 
@@ -44,17 +57,12 @@
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Ouvre la page GitHub d'EFUI",
 
-  "gSupportEmail": "Notre Email de support",
-  "gClipboard": "{thing} a été copié dans le presse-papiers.",
-
   "gGiveFeedback": "Partager des commentaires",
   "gOpeningFeedback": "Ouverture de l'outil de feedback.",
   "gAttachScreenshot": "Veuillez joindre votre capture d'écran (dans le dossier de Téléchargements)",
 
-  "gHowThisWorks": "Comment ça marche",
-  "gHowThisWorksHint": "Ouvre la documentation utile",
-  
-  "gTranslationsPending": "Traductions en attente de révision humaine",
+  "gSupportEmail": "Notre Email de support",
+  "gClipboard": "{thing} a été copié dans le presse-papiers.",
 
   "gAttention": "Attention",
   "gCurrently": "Actuellement :",
@@ -68,11 +76,13 @@
 
   "gCreditTo": "Crédits à :",
   "gCreator": "Créateur de",
+  "gMadeBy": "Fait par",
   "gYou": "Défini par vous",
 
 
 
   "ssPageTitle": "Paramètres",
+  "ssNavHint": "Ouvrir la page des paramètres",
   "ssSettingsGuide": "Fermez et rouvrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
   "ssSettingsGuideWeb": "Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
 
@@ -163,7 +173,6 @@
   "csCurrVal": "Valeur de couleur actuelle :",
 
   "csSchemeBase": "Construire le schéma\nà partir de l'image",
-  "csOptional": "optionnel",
   "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
   "csColorScheme": "schéma de couleurs",
 

@@ -3,23 +3,31 @@
 
 
 
-  "gYes": "Yes",
   "gApply": "Apply",
   "gContinue": "Continue",
+  "gOpen": "Open",
+  "gSuccess": "Success",
+  "gSuccessExl": "Success!",
+  "gYes": "Yes",
 
   "gAnd": "and",
-  "gOptions": "Options",
   "gHelp": "Help",
+  "gNA": "N/A",
+  "gNAHint": "Not applicable",
+  "gOptional": "optional",
+  "gOptions": "Options",
+  "gRequired": "Required",
 
-  "gNo": "No",
   "gBack": "Back",
   "gCancel": "Cancel",
   "gClose": "Close",
   "gError": "Error",
+  "gFailure": "Failure",
+  "gNo": "No",
 
-  "gSystem": "System",
-  "gLight": "Light",
   "gDark": "Dark",
+  "gLight": "Light",
+  "gSystem": "System",
 
   "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
@@ -27,11 +35,16 @@
   "gLeft": "Left",
   "gRight": "Right",
 
-  "gQuick": "Quick",
   "gAdvanced": "Advanced",
+  "gQuick": "Quick",
 
-  "gMinimum": "Minimum",
   "gMaximum": "Maximum",
+  "gMinimum": "Minimum",
+
+  "gHowThisWorks": "How this works",
+  "gHowThisWorksHint": "Open helpful documentation",
+
+  "gTranslationsPending": "Translations pending human review",
 
   "gUpdates": "Updates available",
 
@@ -39,23 +52,18 @@
 
   "g404Wonder": "Not all who wander are lost.",
   "g404": "But, in this case: 404 page not found.",
-  "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/settings",
+  "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/destination",
 
   "gOpenSource": "Open source",
   "gEFUISourceHint": "Open the GitHub page for EFUI",
-
-  "gSupportEmail": "Our support Email",
-  "gClipboard": "{thing} has been copied to the clipboard.",
 
   "gGiveFeedback": "Give feedback",
   "gOpeningFeedback": "Opening the feedback tool.",
   "gAttachScreenshot": "Please attach your screenshot (in Downloads folder)",
 
-  "gHowThisWorks": "How this works",
-  "gHowThisWorksHint": "Open helpful documentation",
+  "gSupportEmail": "Our support Email",
+  "gClipboard": "{thing} has been copied to the clipboard.",
   
-  "gTranslationsPending": "Translations pending human review",
-
   "gAttention": "Attention",
   "gCurrently": "Currently:",
   "gSetToValue": "{name} is set to {value}",
@@ -68,11 +76,13 @@
 
   "gCreditTo": "Credit to:",
   "gCreator": "Creator of",
+  "gMadeBy": "Made by",
   "gYou": "Set by you",
 
 
 
   "ssPageTitle": "Settings",
+  "ssNavHint": "Open the settings page",
   "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
   "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
 
@@ -163,7 +173,6 @@
   "csCurrVal": "Current color value:",
 
   "csSchemeBase": "Build scheme\nfrom image",
-  "csOptional": "optional",
   "csFromImage": "A color scheme will be generated from the image.",
   "csColorScheme": "color scheme",
 

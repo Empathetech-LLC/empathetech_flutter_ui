@@ -1,18 +1,60 @@
 {
   "@@locale": "es",
 
-
-
-  "gRequired": "Requerido",
-  "gSuccess": "¡Éxito!",
-  "gFailure": "Fracaso",
-
   
 
-  "csInvalidName": "Se permiten letras minúsculas, números y guiones bajos.",
-  "csInvalidDomain": "'dom.name' solo; r'^[a-z0-9_]+\\.[a-z]+$'",
+  "csPageTitle": "Constructor",
 
+  "csAppName": "Nombre de la aplicación",
+  "csNamePreview": "ejemplo_app",
+  "csNameHint": "La mejor aplicación de todas",
+  "csBecomes": "se convierte en",
+  "csInvalidName": "Se permiten letras minúsculas, números y guiones bajos.",
+  "csYourApp": "tu aplicación",
+  
+  "csPubName": "Nombre del editor",
+  "csPubPreview": "Organización Ejemplo",
+  "csPubHint": "O Persona Ejemplo",
+
+  "csDescription": "Descripción",
+  "csDescPreview": "Una o dos frases sobre tu aplicación.",
+
+  "csDomainName": "Nombre de dominio",
+  "csDomainHint": "Revés, esta al",
+  "csInvalidDomain": "'domain.name' solamente; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
+
+  "csSupportEmail": "Correo de soporte",
+  "csSupportHint": "Si se proporciona, se incluirá el sistema de comentarios que utilizamos.",
+  "csInvalidEmail": "Correo no válido",
+
+  "csInclude": "Incluir",
+  "csEasy": "Fácil de cambiar más tarde",
+
+  "csGenApp": "Cuando generas {app_name} el actual ",
+  "csTheApp": "la aplicación",
+  "csTheConfig": "la configuración",
+  "csSetColors": " (excepto imágenes) se convertirá en la configuración predeterminada para {app_name}.\n\nSe recomienda establecer un esquema de colores personalizado. Si necesitas ayuda para construir uno, intenta comenzar ",
+  "csHere": "aquí.",
+  "csHereHint": "Abre un enlace a un constructor de esquemas de colores en línea",
+
+  "csAdvanced": "Configuraciones avanzadas",
+
+  "csPathRequired": "Se requiere ruta. No se puede usar la carpeta raíz.",
+  "csBadPath": "Ruta no válida",
+
+  "csCopyright": "Aviso de derechos de autor",
+  "csCopyrightHint": "Se incluirá en la parte superior de cada archivo Dart",
+
+  "csL10nHint": "Configuración de localización (también conocida como traducciones)",
+
+  "csLintHint": "Reglas de lint",
+
+  "csLaunchHint": "Agrega opciones de lanzamiento al menú de depuración de VS Code",
+
+  "csSave": "Guardar configuración",
   "csLoad": "Cargar configuración",
+
+  "csGenerate": "Generar aplicación",
 
   "csResetHint": "Activa y confirma lo que se debe reiniciar.",
   "csResetBuilder": "Valores del constructor",

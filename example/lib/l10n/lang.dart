@@ -98,23 +98,35 @@ abstract class Lang {
     Locale('fr')
   ];
 
-  /// No description provided for @gRequired.
+  /// No description provided for @csPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Required'**
-  String get gRequired;
+  /// **'Builder'**
+  String get csPageTitle;
 
-  /// No description provided for @gSuccess.
+  /// No description provided for @csAppName.
   ///
   /// In en, this message translates to:
-  /// **'Success!'**
-  String get gSuccess;
+  /// **'App name'**
+  String get csAppName;
 
-  /// No description provided for @gFailure.
+  /// No description provided for @csNamePreview.
   ///
   /// In en, this message translates to:
-  /// **'Failure'**
-  String get gFailure;
+  /// **'example_app'**
+  String get csNamePreview;
+
+  /// No description provided for @csNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Best App Ever'**
+  String get csNameHint;
+
+  /// No description provided for @csBecomes.
+  ///
+  /// In en, this message translates to:
+  /// **'becomes'**
+  String get csBecomes;
 
   /// No description provided for @csInvalidName.
   ///
@@ -122,17 +134,191 @@ abstract class Lang {
   /// **'Lowercase letters, numbers, and underscores are allowed.'**
   String get csInvalidName;
 
+  /// No description provided for @csYourApp.
+  ///
+  /// In en, this message translates to:
+  /// **'your app'**
+  String get csYourApp;
+
+  /// No description provided for @csPubName.
+  ///
+  /// In en, this message translates to:
+  /// **'Publisher name'**
+  String get csPubName;
+
+  /// No description provided for @csPubPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Example Organization'**
+  String get csPubPreview;
+
+  /// No description provided for @csPubHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Or Example Person'**
+  String get csPubHint;
+
+  /// No description provided for @csDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get csDescription;
+
+  /// No description provided for @csDescPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'One or two sentences about your app.'**
+  String get csDescPreview;
+
+  /// No description provided for @csDomainName.
+  ///
+  /// In en, this message translates to:
+  /// **'Domain name'**
+  String get csDomainName;
+
+  /// No description provided for @csDomainHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Backwards, it is'**
+  String get csDomainHint;
+
   /// No description provided for @csInvalidDomain.
   ///
   /// In en, this message translates to:
-  /// **'\'dom.name\' only; r\'^[a-z0-9_]+\\.[a-z]+\$\''**
+  /// **'\'domain.name\' only; RegExp(r\'^[a-z0-9_]+\\.[a-z]+\$\')'**
   String get csInvalidDomain;
+
+  /// No description provided for @csSupportEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Support email'**
+  String get csSupportEmail;
+
+  /// No description provided for @csSupportHint.
+  ///
+  /// In en, this message translates to:
+  /// **'If provided, the feedback system we use will be included.'**
+  String get csSupportHint;
+
+  /// No description provided for @csInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email'**
+  String get csInvalidEmail;
+
+  /// No description provided for @csInclude.
+  ///
+  /// In en, this message translates to:
+  /// **'Include'**
+  String get csInclude;
+
+  /// No description provided for @csEasy.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy to change later'**
+  String get csEasy;
+
+  /// No description provided for @csGenApp.
+  ///
+  /// In en, this message translates to:
+  /// **'When you generate {app_name} the current '**
+  String csGenApp(Object app_name);
+
+  /// No description provided for @csTheApp.
+  ///
+  /// In en, this message translates to:
+  /// **'the app'**
+  String get csTheApp;
+
+  /// No description provided for @csTheConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'the config'**
+  String get csTheConfig;
+
+  /// No description provided for @csSetColors.
+  ///
+  /// In en, this message translates to:
+  /// **' (except images) will become the default config for {app_name}.\n\nIt is recommended to set a custom color scheme. If you need help building one, try starting '**
+  String csSetColors(Object app_name);
+
+  /// No description provided for @csHere.
+  ///
+  /// In en, this message translates to:
+  /// **'here.'**
+  String get csHere;
+
+  /// No description provided for @csHereHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a link to an online color scheme builder'**
+  String get csHereHint;
+
+  /// No description provided for @csAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced settings'**
+  String get csAdvanced;
+
+  /// No description provided for @csPathRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Path required. Cannot use root folder.'**
+  String get csPathRequired;
+
+  /// No description provided for @csBadPath.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid path'**
+  String get csBadPath;
+
+  /// No description provided for @csCopyright.
+  ///
+  /// In en, this message translates to:
+  /// **'Copyright notice'**
+  String get csCopyright;
+
+  /// No description provided for @csCopyrightHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be included at the top of every Dart file'**
+  String get csCopyrightHint;
+
+  /// No description provided for @csL10nHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Localization (aka translations) config'**
+  String get csL10nHint;
+
+  /// No description provided for @csLintHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Lint rules'**
+  String get csLintHint;
+
+  /// No description provided for @csLaunchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Adds launch options to VS Code\'s debug menu'**
+  String get csLaunchHint;
+
+  /// No description provided for @csSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save config'**
+  String get csSave;
 
   /// No description provided for @csLoad.
   ///
   /// In en, this message translates to:
   /// **'Load config'**
   String get csLoad;
+
+  /// No description provided for @csGenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate app'**
+  String get csGenerate;
 
   /// No description provided for @csResetHint.
   ///
