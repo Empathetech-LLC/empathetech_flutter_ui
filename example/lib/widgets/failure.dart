@@ -31,7 +31,7 @@ class FailureHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              Lang.of(context)!.gFailure,
+              EFUILang.of(context)!.gFailure,
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),

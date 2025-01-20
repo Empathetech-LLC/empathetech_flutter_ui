@@ -206,7 +206,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   late final Widget fromImageButton = isDark
       ? Semantics(
           label: fromImageLabel.replaceAll('\n', ' '),
-          value: l10n.csOptional,
+          value: l10n.gOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(
@@ -221,7 +221,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
         )
       : Semantics(
           label: fromImageLabel.replaceAll('\n', ' '),
-          value: l10n.csOptional,
+          value: l10n.gOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(

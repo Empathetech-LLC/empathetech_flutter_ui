@@ -5,10 +5,13 @@
 
 import './export.dart';
 
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 /// Allows letters (upper and lower case) and underscores
 String? validateAppName({
   required String? value,
-  required Lang l10n,
+  required BuildContext context,
   Function? onSuccess,
   Function? onFailure,
 }) {
@@ -16,10 +19,10 @@ String? validateAppName({
 
   if (value == null || value.isEmpty) {
     onFailure?.call();
-    return '${l10n.gRequired}; ${l10n.csInvalidName.toLowerCase()}';
+    return '${EFUILang.of(context)!.gRequired}; ${Lang.of(context)!.csInvalidName.toLowerCase()}';
   } else if (!pattern.hasMatch(value)) {
     onFailure?.call();
-    return l10n.csInvalidName;
+    return Lang.of(context)!.csInvalidName;
   } else {
     onSuccess?.call();
     return null;
@@ -27,13 +30,13 @@ String? validateAppName({
 }
 
 /// Validates name.extension domains
-String? validateDomain(String? value, Lang l10n) {
+String? validateDomain(String? value, BuildContext context) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
   if (value == null || value.isEmpty) {
-    return '${l10n.gRequired}; ${l10n.csInvalidName}';
+    return '${EFUILang.of(context)!.gRequired}; ${Lang.of(context)!.csInvalidName}';
   } else if (!pattern.hasMatch(value)) {
-    return l10n.csInvalidDomain;
+    return Lang.of(context)!.csInvalidDomain;
   } else {
     return null;
   }
