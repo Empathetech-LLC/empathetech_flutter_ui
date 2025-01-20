@@ -9,7 +9,6 @@ import '../utils/export.dart';
 import '../widgets/export.dart';
 
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -38,16 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? subTitle = subTitleStyle(textTheme);
 
-  late final EFUILang l10n = EFUILang.of(context)!;
-
-  late final double singleLineFormWidth = min(
-    ezTextSize(
-      longestError,
-      context: context,
-      style: textTheme.bodyLarge,
-    ).width,
-    widthOf(context) * 0.75,
-  );
+  late final EFUILang el10n = EFUILang.of(context)!;
+  late final Lang l10n = Lang.of(context)!;
 
   // Define build data //
 
@@ -250,9 +241,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 EzPlainText(text: ezTitleToSnake('Best App Ever')),
               ]),
               controller: nameController,
-              width: singleLineFormWidth,
               validator: (String? entry) => validateAppName(
                 value: entry,
+                l10n: l10n,
                 onSuccess: () => setState(() {
                   final String previous = namePreview;
                   validName = true;
@@ -278,7 +269,6 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Publisher name',
               tip: 'Or: Example Person',
               controller: pubController,
-              width: singleLineFormWidth,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Required';
@@ -302,7 +292,6 @@ class _HomeScreenState extends State<HomeScreen> {
               textTheme: textTheme,
               title: 'Description',
               controller: descriptionController,
-              width: singleLineFormWidth,
               validator: (String? value) =>
                   (value == null || value.isEmpty) ? 'Required' : null,
               hintText: 'One or two sentences about your app.',
@@ -324,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: singleLineFormWidth),
+              constraints: ezTextFieldConstraints(context),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: domainController,
                       textAlign: TextAlign.start,
                       maxLines: 1,
-                      validator: validateDomain,
+                      validator: (String? text) => validateDomain(text, l10n),
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration:
                           const InputDecoration(hintText: 'com.example'),
@@ -370,7 +359,6 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Support email',
               tip: 'If provided, the feedback system we use will be included.',
               controller: supportEmailController,
-              width: singleLineFormWidth,
               validator: (String? value) {
                 if (value == null || value.isEmpty) return null;
 
@@ -528,9 +516,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       children: <Widget>[
                         // Text
                         ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: singleLineFormWidth,
-                          ),
+                          constraints: ezTextFieldConstraints(context),
                           child: TextFormField(
                             controller: pathController,
                             readOnly: !canGen,
@@ -644,7 +630,8 @@ It is recommended to set a custom color scheme. If you need help building one, t
                       if (validName &&
                           pubController.text.isNotEmpty &&
                           (exampleDomain ||
-                              validateDomain(domainController.text) == null) &&
+                              validateDomain(domainController.text, l10n) ==
+                                  null) &&
                           descriptionController.text.isNotEmpty &&
                           (supportEmailController.text.isEmpty ||
                               EmailValidator.validate(
@@ -715,7 +702,7 @@ It is recommended to set a custom color scheme. If you need help building one, t
                         if (validName &&
                             pubController.text.isNotEmpty &&
                             (exampleDomain ||
-                                validateDomain(domainController.text) ==
+                                validateDomain(domainController.text, l10n) ==
                                     null) &&
                             descriptionController.text.isNotEmpty &&
                             (supportEmailController.text.isEmpty ||
@@ -943,7 +930,6 @@ class _BasicField extends StatelessWidget {
   final String title;
   final dynamic tip;
   final TextEditingController controller;
-  final double width;
   final String? Function(String?)? validator;
   final String hintText;
 
@@ -952,7 +938,6 @@ class _BasicField extends StatelessWidget {
     required this.title,
     this.tip,
     required this.controller,
-    required this.width,
     required this.validator,
     required this.hintText,
   });
@@ -983,7 +968,7 @@ class _BasicField extends StatelessWidget {
 
         // Field
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: width),
+          constraints: ezTextFieldConstraints(context),
           child: TextFormField(
             controller: controller,
             textAlign: TextAlign.start,
