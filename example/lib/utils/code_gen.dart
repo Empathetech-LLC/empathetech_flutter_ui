@@ -573,7 +573,7 @@ class SettingsButton extends StatelessWidget {
 class EFUICredits extends StatelessWidget {
   final BuildContext parentContext;
 
-  /// [EzMenuButton] for opening EFUI's product page
+  /// [EzMenuButton] for opening Open UI's product page
   /// Honor system: keep a version of this in your app
   /// Remove iff appropriate contributions have been made to Empathetech LLC
   /// https://www.empathetech.net/#/contribute
@@ -583,8 +583,10 @@ class EFUICredits extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    final String label = isLefty ? 'made by' : EFUILang.of(context)!.gCreator;
-    const String tip = 'Open a link to Empathetic LLC';
+    final EFUILang l10n = EFUILang.of(context)!;
+    final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
+    final String tip = l10n.gOpenEmpathetech;
+    final String settings = l10n.ssPageTitle;
 
     return Tooltip(
       message: tip,
@@ -594,7 +596,7 @@ class EFUICredits extends StatelessWidget {
         icon: EzIcon(PlatformIcons(context).settings),
         label: label,
         semanticsLabel:
-            '\${isLefty ? 'Settings \$label' : '\$label settings'}. \$tip',
+            '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
       ),
     );
   }
