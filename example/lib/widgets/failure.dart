@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../utils/export.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -29,7 +31,7 @@ class FailureHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              'Failure',
+              Lang.of(context)!.gFailure,
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),
@@ -82,7 +84,7 @@ class DeleteOption extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           EzText(
-            'would you like to...',
+            Lang.of(context)!.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -96,7 +98,7 @@ class DeleteOption extends StatelessWidget {
               onSuccess: () async {
                 await ezSnackBar(
                   context: context,
-                  message: 'Success; fingers crossed for next time!',
+                  message: Lang.of(context)!.rsNextTime,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).pop();
@@ -104,7 +106,7 @@ class DeleteOption extends StatelessWidget {
               onFailure: (String message) async {
                 await ezSnackBar(
                   context: context,
-                  message: 'Another failure; you should probably take over...',
+                  message: Lang.of(context)!.rsAnotherOne,
                 ).closed;
 
                 if (context.mounted) Navigator.of(context).pop();
@@ -112,13 +114,13 @@ class DeleteOption extends StatelessWidget {
               readout: readout,
             ),
             icon: EzIcon(PlatformIcons(context).delete),
-            label: 'Wipe it',
+            label: Lang.of(context)!.rsWipe,
           ),
           spacer,
           EzElevatedIconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: EzIcon(PlatformIcons(context).back),
-            label: 'Leave it',
+            label: Lang.of(context)!.rsLeave,
           ),
         ],
       );
@@ -140,7 +142,7 @@ class LinkOption extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           EzText(
-            'would you like to...',
+            Lang.of(context)!.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -148,7 +150,7 @@ class LinkOption extends StatelessWidget {
           EzElevatedIconButton(
             onPressed: () => launchUrl(Uri.parse(installFlutter)),
             icon: EzIcon(Icons.computer),
-            label: 'Install it',
+            label: Lang.of(context)!.rsInstall,
           ),
         ],
       );

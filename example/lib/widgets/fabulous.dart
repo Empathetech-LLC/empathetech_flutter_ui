@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../utils/export.dart';
+
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -16,22 +18,24 @@ class ResetFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang el10n = EFUILang.of(context)!;
+    final Lang l10n = Lang.of(context)!;
 
     return Tooltip(
-      message: 'Reset',
+      message: el10n.gReset,
       excludeFromSemantics: true,
       child: Semantics(
-        label: 'Reset',
+        label: el10n.gReset,
         button: true,
-        hint: 'Activate and confirm what should be reset.',
+        hint: l10n.csResetHint,
         child: ExcludeSemantics(
           child: FloatingActionButton(
             onPressed: () => showPlatformDialog(
               context: context,
               builder: (BuildContext alertContext) {
                 return EzAlertDialog(
-                  title: Text('${l10n.gReset}...', textAlign: TextAlign.center),
+                  title:
+                      Text('${el10n.gReset}...', textAlign: TextAlign.center),
                   materialActions: <Widget>[
                     EzMaterialAction(
                       onPressed: () async {
@@ -40,7 +44,7 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'Builder values',
+                      text: l10n.csResetBuilder,
                       isDefaultAction: true,
                     ),
                     EzMaterialAction(
@@ -50,7 +54,7 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'App settings',
+                      text: l10n.csResetApp,
                       isDestructiveAction: true,
                     ),
                     EzMaterialAction(
@@ -61,12 +65,12 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'Both',
+                      text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
                     EzMaterialAction(
                       onPressed: () => Navigator.of(alertContext).pop(),
-                      text: 'Nothing',
+                      text: l10n.csResetNothing,
                     ),
                   ],
                   cupertinoActions: <EzCupertinoAction>[
@@ -77,7 +81,7 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'Builder values',
+                      text: l10n.csResetBuilder,
                       isDefaultAction: true,
                     ),
                     EzCupertinoAction(
@@ -87,7 +91,7 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'App settings',
+                      text: l10n.csResetApp,
                       isDestructiveAction: true,
                     ),
                     EzCupertinoAction(
@@ -98,12 +102,12 @@ class ResetFAB extends StatelessWidget {
                           Navigator.of(alertContext).pop();
                         }
                       },
-                      text: 'Both',
+                      text: l10n.csResetBoth,
                       isDestructiveAction: true,
                     ),
                     EzCupertinoAction(
                       onPressed: () => Navigator.of(alertContext).pop(),
-                      text: 'Nothing',
+                      text: l10n.csResetNothing,
                     ),
                   ],
                   needsClose: false,

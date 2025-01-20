@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../utils/export.dart';
+
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -37,7 +39,7 @@ class SuccessHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              'Success!',
+              Lang.of(context)!.gSuccess,
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),
@@ -81,7 +83,7 @@ class RunOption extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           EzText(
-            'would you like to...',
+            Lang.of(context)!.rsWouldYou,
             style: style,
             textAlign: TextAlign.center,
           ),
@@ -89,7 +91,7 @@ class RunOption extends StatelessWidget {
           EzElevatedIconButton(
             onPressed: emulate,
             icon: EzIcon(PlatformIcons(context).playArrowSolid),
-            label: 'Run it',
+            label: Lang.of(context)!.rsRun,
           ),
         ],
       );

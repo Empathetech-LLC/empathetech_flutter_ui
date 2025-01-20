@@ -1,7 +1,32 @@
 {
-  "@@locale" : "es",
+  "@@locale": "es",
 
 
 
-  "gWazza": "Wazza"
+  "gSuccess": "¡Éxito!",
+  "gFailure": "Fracaso",
+
+
+
+  "csLoad": "Cargar configuración",
+
+  "csResetHint": "Activa y confirma lo que se debe reiniciar.",
+  "csResetBuilder": "Valores del constructor",
+  "csResetApp": "Configuración de la aplicación",
+  "csResetBoth": "Ambos",
+  "csResetNothing": "Nada",
+
+
+
+  "rsWouldYou": "Te gustaría...",
+
+  "rsInstall": "Instalarlo",
+
+  "rsRun": "Ejecutarlo",
+
+  "rsWipe": "Borrarlo",
+  "rsNextTime": "¡Éxito, crucemos los dedos para la próxima!",
+  "rsAnotherOne": "Otro fracaso; probablemente deberías tomar el control...",
+
+  "rsLeave": "Dejarlo"
 }

@@ -7,5 +7,48 @@ class LangEn extends Lang {
   LangEn([String locale = 'en']) : super(locale);
 
   @override
-  String get gWazza => 'Wazza';
+  String get gSuccess => 'Success!';
+
+  @override
+  String get gFailure => 'Failure';
+
+  @override
+  String get csLoad => 'Load config';
+
+  @override
+  String get csResetHint => 'Activate and confirm what should be reset.';
+
+  @override
+  String get csResetBuilder => 'Builder values';
+
+  @override
+  String get csResetApp => 'App settings';
+
+  @override
+  String get csResetBoth => 'Both';
+
+  @override
+  String get csResetNothing => 'Nothing';
+
+  @override
+  String get rsWouldYou => 'would you like to...';
+
+  @override
+  String get rsInstall => 'Install it';
+
+  @override
+  String get rsRun => 'Run it';
+
+  @override
+  String get rsWipe => 'Wipe it';
+
+  @override
+  String get rsNextTime => 'Success, fingers crossed for next time!';
+
+  @override
+  String get rsAnotherOne =>
+      'Another failure; you should probably take over...';
+
+  @override
+  String get rsLeave => 'Leave it';
 }

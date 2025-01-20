@@ -3,5 +3,30 @@
 
 
 
-  "gWazza": "Wazza"
+  "gSuccess": "Success!",
+  "gFailure": "Failure",
+
+
+
+  "csLoad": "Load config",
+
+  "csResetHint": "Activate and confirm what should be reset.",
+  "csResetBuilder": "Builder values",
+  "csResetApp": "App settings",
+  "csResetBoth": "Both",
+  "csResetNothing": "Nothing",
+
+
+
+  "rsWouldYou": "would you like to...",
+
+  "rsInstall": "Install it",
+
+  "rsRun": "Run it",
+
+  "rsWipe": "Wipe it",
+  "rsNextTime": "Success, fingers crossed for next time!",
+  "rsAnotherOne": "Another failure; you should probably take over...",
+
+  "rsLeave": "Leave it"
 }

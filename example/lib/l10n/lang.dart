@@ -98,11 +98,95 @@ abstract class Lang {
     Locale('fr')
   ];
 
-  /// No description provided for @gWazza.
+  /// No description provided for @gSuccess.
   ///
   /// In en, this message translates to:
-  /// **'Wazza'**
-  String get gWazza;
+  /// **'Success!'**
+  String get gSuccess;
+
+  /// No description provided for @gFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Failure'**
+  String get gFailure;
+
+  /// No description provided for @csLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Load config'**
+  String get csLoad;
+
+  /// No description provided for @csResetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate and confirm what should be reset.'**
+  String get csResetHint;
+
+  /// No description provided for @csResetBuilder.
+  ///
+  /// In en, this message translates to:
+  /// **'Builder values'**
+  String get csResetBuilder;
+
+  /// No description provided for @csResetApp.
+  ///
+  /// In en, this message translates to:
+  /// **'App settings'**
+  String get csResetApp;
+
+  /// No description provided for @csResetBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get csResetBoth;
+
+  /// No description provided for @csResetNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing'**
+  String get csResetNothing;
+
+  /// No description provided for @rsWouldYou.
+  ///
+  /// In en, this message translates to:
+  /// **'would you like to...'**
+  String get rsWouldYou;
+
+  /// No description provided for @rsInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Install it'**
+  String get rsInstall;
+
+  /// No description provided for @rsRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Run it'**
+  String get rsRun;
+
+  /// No description provided for @rsWipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Wipe it'**
+  String get rsWipe;
+
+  /// No description provided for @rsNextTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Success, fingers crossed for next time!'**
+  String get rsNextTime;
+
+  /// No description provided for @rsAnotherOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Another failure; you should probably take over...'**
+  String get rsAnotherOne;
+
+  /// No description provided for @rsLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave it'**
+  String get rsLeave;
 }
 
 class _LangDelegate extends LocalizationsDelegate<Lang> {
