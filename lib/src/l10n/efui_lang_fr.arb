@@ -67,6 +67,7 @@
   "gAttention": "Attention",
   "gCurrently": "Actuellement :",
   "gSetToValue": "{name} est défini sur {value}",
+  "gRemove": "Retirer",
   "gReset": "Réinitialiser",
   "gResetTo": "Réinitialiser :",
   "gResetValue": "Réinitialiser {name} ?",
@@ -168,8 +169,6 @@
   "csUseCustom": "Utiliser personnalisé",
 
   "csAddColor": "Ajouter une couleur",
-  "csRemove": "Retirer",
-  "csReset": "Réinitialiser",
   "csCurrVal": "Valeur de couleur actuelle :",
 
   "csSchemeBase": "Construire le schéma\nà partir de l'image",

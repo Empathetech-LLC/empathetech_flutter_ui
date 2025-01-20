@@ -67,6 +67,7 @@
   "gAttention": "Attention",
   "gCurrently": "Currently:",
   "gSetToValue": "{name} is set to {value}",
+  "gRemove": "Remove",
   "gReset": "Reset",
   "gResetTo": "Reset:",
   "gResetValue": "Reset {name}?",
@@ -168,8 +169,6 @@
   "csUseCustom": "Use custom",
 
   "csAddColor": "Add a color",
-  "csRemove": "Remove",
-  "csReset": "Reset",
   "csCurrVal": "Current color value:",
 
   "csSchemeBase": "Build scheme\nfrom image",

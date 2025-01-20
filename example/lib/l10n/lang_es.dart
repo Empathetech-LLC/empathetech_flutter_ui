@@ -96,6 +96,11 @@ class LangEs extends Lang {
   String get csAdvanced => 'Configuraciones avanzadas';
 
   @override
+  String csRestore(Object setting) {
+    return 'Restaurar $setting';
+  }
+
+  @override
   String get csPathRequired =>
       'Se requiere ruta. No se puede usar la carpeta raíz.';
 
@@ -108,6 +113,10 @@ class LangEs extends Lang {
   @override
   String get csCopyrightHint =>
       'Se incluirá en la parte superior de cada archivo Dart';
+
+  @override
+  String get csLicenseDocs =>
+      'Abrir documentación sobre licencias de código abierto';
 
   @override
   String get csL10nHint =>
@@ -128,6 +137,9 @@ class LangEs extends Lang {
 
   @override
   String get csGenerate => 'Generar aplicación';
+
+  @override
+  String get csInvalidFields => 'Algunos campos son inválidos';
 
   @override
   String get csResetHint => 'Activa y confirma lo que se debe reiniciar.';

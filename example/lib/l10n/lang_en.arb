@@ -38,12 +38,15 @@
   "csHereHint": "Open a link to an online color scheme builder",
 
   "csAdvanced": "Advanced settings",
+  "csRestore": "Restore {setting}",
 
   "csPathRequired": "Path required. Cannot use root folder.",
   "csBadPath": "Invalid path",
 
   "csCopyright": "Copyright notice",
   "csCopyrightHint": "Will be included at the top of every Dart file",
+
+  "csLicenseDocs": "Open documentation on open source licenses",
 
   "csL10nHint": "Localization (aka translations) config",
 
@@ -55,6 +58,8 @@
   "csLoad": "Load config",
 
   "csGenerate": "Generate app",
+
+  "csInvalidFields": "Some fields are invalid",
 
   "csResetHint": "Activate and confirm what should be reset.",
   "csResetBuilder": "Builder values",

@@ -763,7 +763,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() => canGen = false);
                           await ezSnackBar(
                             context: context,
-                            message: 'Some fields are invalid',
+                            message: l10n.csInvalidFields,
                           ).closed;
                           setState(() => canGen = true);
                         }
@@ -782,11 +782,11 @@ class _HomeScreenState extends State<HomeScreen> {
       fab: ResetFAB(
         clearForms: () => setState(() {
           nameController.clear();
-          namePreview = 'your_app';
+          namePreview = l10n.csNamePreview;
           validName = false;
 
           pubController.clear();
-          pubPreview = 'Your org';
+          pubPreview = l10n.csPubPreview;
 
           descriptionController.clear();
 
@@ -1033,13 +1033,16 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late final EFUILang el10n = EFUILang.of(context)!;
+    late final Lang l10n = Lang.of(context)!;
+
     late final EzSpacer rowMargin = EzMargin(vertical: false);
     late final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
     late final Widget hideButton = Semantics(
-      label: visible ? 'Close' : 'Open',
+      label: visible ? el10n.gClose : el10n.gOpen,
       button: true,
       child: ExcludeSemantics(
         child: IconButton(
@@ -1052,7 +1055,7 @@ class _AdvancedSettingsField extends StatelessWidget {
     );
 
     late final Widget removeButton = Semantics(
-      hint: 'Remove',
+      hint: el10n.gRemove,
       button: true,
       child: ExcludeSemantics(
         child: IconButton(
@@ -1070,7 +1073,7 @@ class _AdvancedSettingsField extends StatelessWidget {
         ? EzTextIconButton(
             onPressed: onRestore,
             icon: EzIcon(Icons.undo),
-            label: "Restore '$title'",
+            label: l10n.csRestore(title),
           )
         : Column(
             mainAxisSize: MainAxisSize.min,
@@ -1151,6 +1154,9 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EFUILang el10n = EFUILang.of(context)!;
+    final Lang l10n = Lang.of(context)!;
+
     final EzMargin margin = EzMargin();
     final EzMargin rowMargin = EzMargin(vertical: false);
 
@@ -1182,7 +1188,7 @@ class _LicensePicker extends StatelessWidget {
     const Widget title = EzText('LICENSE', textAlign: TextAlign.start);
 
     final Widget hideButton = Semantics(
-      label: visible ? 'Close' : 'Open',
+      label: visible ? el10n.gClose : el10n.gOpen,
       button: true,
       child: ExcludeSemantics(
         child: IconButton(
@@ -1199,7 +1205,7 @@ class _LicensePicker extends StatelessWidget {
       richMessage: EzInlineLink(
         chooseALicense,
         url: Uri.parse(chooseALicense),
-        semanticsLabel: 'Open a link to documentation on open source licenses',
+        semanticsLabel: l10n.csLicenseDocs,
       ),
     );
 

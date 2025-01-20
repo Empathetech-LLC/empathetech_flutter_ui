@@ -96,6 +96,11 @@ class LangFr extends Lang {
   String get csAdvanced => 'Paramètres avancés';
 
   @override
+  String csRestore(Object setting) {
+    return 'Restaurer $setting';
+  }
+
+  @override
   String get csPathRequired =>
       'Chemin requis. Impossible d\'utiliser le dossier racine.';
 
@@ -107,6 +112,10 @@ class LangFr extends Lang {
 
   @override
   String get csCopyrightHint => 'Sera inclus en haut de chaque fichier Dart';
+
+  @override
+  String get csLicenseDocs =>
+      'Ouvrir la documentation sur les licences open source';
 
   @override
   String get csL10nHint =>
@@ -127,6 +136,9 @@ class LangFr extends Lang {
 
   @override
   String get csGenerate => 'Générer l\'application';
+
+  @override
+  String get csInvalidFields => 'Certains champs sont invalides';
 
   @override
   String get csResetHint =>

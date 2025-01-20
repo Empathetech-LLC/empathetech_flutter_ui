@@ -67,6 +67,7 @@
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
   "gSetToValue": "{name} está configurado a {value}",
+  "gRemove": "Quitar",
   "gReset": "Restablecer",
   "gResetTo": "Restablecer:",
   "gResetValue": "¿Restablecer {name}?",
@@ -168,8 +169,6 @@
   "csUseCustom": "Usar personalizado",
 
   "csAddColor": "Añadir un color",
-  "csRemove": "Quitar",
-  "csReset": "Restablecer",
   "csCurrVal": "Valor de color actual:",
 
   "csSchemeBase": "Crear tema\nusando imagen",

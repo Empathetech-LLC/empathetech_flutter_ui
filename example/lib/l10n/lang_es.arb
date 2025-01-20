@@ -38,12 +38,15 @@
   "csHereHint": "Abre un enlace a un constructor de esquemas de colores en línea",
 
   "csAdvanced": "Configuraciones avanzadas",
+  "csRestore": "Restaurar {setting}",
 
   "csPathRequired": "Se requiere ruta. No se puede usar la carpeta raíz.",
   "csBadPath": "Ruta no válida",
 
   "csCopyright": "Aviso de derechos de autor",
   "csCopyrightHint": "Se incluirá en la parte superior de cada archivo Dart",
+
+  "csLicenseDocs": "Abrir documentación sobre licencias de código abierto",
 
   "csL10nHint": "Configuración de localización (también conocida como traducciones)",
 
@@ -55,6 +58,8 @@
   "csLoad": "Cargar configuración",
 
   "csGenerate": "Generar aplicación",
+
+  "csInvalidFields": "Algunos campos son inválidos",
 
   "csResetHint": "Activa y confirma lo que se debe reiniciar.",
   "csResetBuilder": "Valores del constructor",

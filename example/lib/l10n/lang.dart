@@ -260,6 +260,12 @@ abstract class Lang {
   /// **'Advanced settings'**
   String get csAdvanced;
 
+  /// No description provided for @csRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore {setting}'**
+  String csRestore(Object setting);
+
   /// No description provided for @csPathRequired.
   ///
   /// In en, this message translates to:
@@ -283,6 +289,12 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'Will be included at the top of every Dart file'**
   String get csCopyrightHint;
+
+  /// No description provided for @csLicenseDocs.
+  ///
+  /// In en, this message translates to:
+  /// **'Open documentation on open source licenses'**
+  String get csLicenseDocs;
 
   /// No description provided for @csL10nHint.
   ///
@@ -319,6 +331,12 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'Generate app'**
   String get csGenerate;
+
+  /// No description provided for @csInvalidFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Some fields are invalid'**
+  String get csInvalidFields;
 
   /// No description provided for @csResetHint.
   ///

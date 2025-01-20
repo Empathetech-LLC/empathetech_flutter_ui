@@ -386,6 +386,12 @@ abstract class EFUILang {
   /// **'{name} is set to {value}'**
   String gSetToValue(Object name, Object value);
 
+  /// No description provided for @gRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get gRemove;
+
   /// No description provided for @gReset.
   ///
   /// In en, this message translates to:
@@ -805,18 +811,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Add a color'**
   String get csAddColor;
-
-  /// No description provided for @csRemove.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove'**
-  String get csRemove;
-
-  /// No description provided for @csReset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset'**
-  String get csReset;
 
   /// No description provided for @csCurrVal.
   ///

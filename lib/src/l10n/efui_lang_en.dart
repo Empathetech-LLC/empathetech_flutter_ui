@@ -159,6 +159,9 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get gRemove => 'Remove';
+
+  @override
   String get gReset => 'Reset';
 
   @override
@@ -380,12 +383,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get csAddColor => 'Add a color';
-
-  @override
-  String get csRemove => 'Remove';
-
-  @override
-  String get csReset => 'Reset';
 
   @override
   String get csCurrVal => 'Current color value:';

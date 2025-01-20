@@ -95,6 +95,11 @@ class LangEn extends Lang {
   String get csAdvanced => 'Advanced settings';
 
   @override
+  String csRestore(Object setting) {
+    return 'Restore $setting';
+  }
+
+  @override
   String get csPathRequired => 'Path required. Cannot use root folder.';
 
   @override
@@ -106,6 +111,9 @@ class LangEn extends Lang {
   @override
   String get csCopyrightHint =>
       'Will be included at the top of every Dart file';
+
+  @override
+  String get csLicenseDocs => 'Open documentation on open source licenses';
 
   @override
   String get csL10nHint => 'Localization (aka translations) config';
@@ -124,6 +132,9 @@ class LangEn extends Lang {
 
   @override
   String get csGenerate => 'Generate app';
+
+  @override
+  String get csInvalidFields => 'Some fields are invalid';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';
