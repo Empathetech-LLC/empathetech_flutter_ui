@@ -1206,6 +1206,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 void main() async {
+  // Setup the test environment //
+
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -1222,6 +1224,8 @@ void main() async {
     preferences: prefs,
     defaults: testConfig,
   );
+  
+  // Run the tests //
 
   group(
     'Generated tests',
@@ -1255,7 +1259,7 @@ void main() async {
       });
 
       testWidgets('Test CountFAB', (WidgetTester tester) async {
-        // Load the app //
+        // Re-load the app //
 
         ezLog('Loading $titleCaseAppName');
         await tester.pumpWidget(const $classCaseAppName());
