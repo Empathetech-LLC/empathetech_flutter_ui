@@ -1,6 +1,6 @@
 name: empathetech_flutter_ui
 description: "Build apps for anyone. EFUI makes building user accessible and customizable apps Ez. So everyone can enjoy your great idea!"
-version: 8.0.0-dev.6
+version: 8.0.0-dev.7
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
