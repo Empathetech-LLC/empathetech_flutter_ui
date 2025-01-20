@@ -66,6 +66,12 @@ class EFUILangEn extends EFUILang {
   String get gAdvanced => 'Advanced';
 
   @override
+  String get gMinimum => 'Minimum';
+
+  @override
+  String get gMaximum => 'Maximum';
+
+  @override
   String get gUpdates => 'Updates available';
 
   @override
@@ -199,6 +205,17 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get tsTextBackground => 'Text background opacity';
+
+  @override
+  String get tsIconSize => 'Icon size';
+
+  @override
+  String tsLinkHint(Object style) {
+    return 'Activate to edit $style';
+  }
+
+  @override
   String get tsDisplay => 'Display';
 
   @override
@@ -212,11 +229,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsLabel => 'Label';
-
-  @override
-  String tsLinkHint(Object style) {
-    return 'Activate to edit $style';
-  }
 
   @override
   String get tsFontFamily => 'Font family';

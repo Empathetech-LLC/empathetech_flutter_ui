@@ -29,6 +29,9 @@
   "gQuick": "Rápido",
   "gAdvanced": "Avanzado",
 
+  "gMinimum": "Mínimo",
+  "gMaximum": "Máximo",
+
   "gUpdates": "Actualizaciones disponibles",
   
   "gValidURL": "Por favor, introduzca una URL válida",
@@ -89,13 +92,16 @@
 
   "tsBatchOverride": "Ya has realizado cambios de \"{setting}\" granulares en la configuración avanzada.\n\n¿Seguro que quieres anular esos cambios con una actualización por lotes?",
 
+  "tsTextBackground": "Opacidad del fondo del texto",
+  "tsIconSize": "Tamaño del icono",
+
+  "tsLinkHint": "Activar para editar {style}",
+
   "tsDisplay": "Despliegue",
   "tsHeadline": "Encabezado",
   "tsTitle": "Título",
   "tsBody": "Cuerpo",
   "tsLabel": "Etiqueta",
-
-  "tsLinkHint": "Activar para editar {style}",
 
   "tsFontFamily": "Familia de fuente",
   "tsFontSize": "Tamaño de fuente",
@@ -157,7 +163,7 @@
 
   "csSchemeBase": "Crear tema\nusando imagen",
   "csOptional": "opcional",
-  "csFromImage": "Diseña un esquema de color a partir de una imagen",
+  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
   "csColorScheme": "esquema de color",
 
   "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",

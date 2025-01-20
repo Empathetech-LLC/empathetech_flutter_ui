@@ -212,6 +212,18 @@ abstract class EFUILang {
   /// **'Advanced'**
   String get gAdvanced;
 
+  /// No description provided for @gMinimum.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum'**
+  String get gMinimum;
+
+  /// No description provided for @gMaximum.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum'**
+  String get gMaximum;
+
   /// No description provided for @gUpdates.
   ///
   /// In en, this message translates to:
@@ -446,6 +458,24 @@ abstract class EFUILang {
   /// **'You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?'**
   String tsBatchOverride(Object setting);
 
+  /// No description provided for @tsTextBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Text background opacity'**
+  String get tsTextBackground;
+
+  /// No description provided for @tsIconSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon size'**
+  String get tsIconSize;
+
+  /// No description provided for @tsLinkHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to edit {style}'**
+  String tsLinkHint(Object style);
+
   /// No description provided for @tsDisplay.
   ///
   /// In en, this message translates to:
@@ -475,12 +505,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Label'**
   String get tsLabel;
-
-  /// No description provided for @tsLinkHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Activate to edit {style}'**
-  String tsLinkHint(Object style);
 
   /// No description provided for @tsFontFamily.
   ///

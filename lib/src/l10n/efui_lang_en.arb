@@ -29,6 +29,9 @@
   "gQuick": "Quick",
   "gAdvanced": "Advanced",
 
+  "gMinimum": "Minimum",
+  "gMaximum": "Maximum",
+
   "gUpdates": "Updates available",
 
   "gValidURL": "Please enter a valid URL",
@@ -89,13 +92,16 @@
 
   "tsBatchOverride": "You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?",
 
+  "tsTextBackground": "Text background opacity",
+  "tsIconSize": "Icon size",
+
+  "tsLinkHint": "Activate to edit {style}",
+
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
   "tsTitle": "Title",
   "tsBody": "Body",
   "tsLabel": "Label",
-
-  "tsLinkHint": "Activate to edit {style}",
 
   "tsFontFamily": "Font family",
   "tsFontSize": "Font size",
@@ -157,7 +163,7 @@
 
   "csSchemeBase": "Build scheme\nfrom image",
   "csOptional": "optional",
-  "csFromImage": "Build the color scheme from an image",
+  "csFromImage": "A color scheme will be generated from the image.",
   "csColorScheme": "color scheme",
 
   "csResetAll": "Reset all {themeType} theme colors?",
