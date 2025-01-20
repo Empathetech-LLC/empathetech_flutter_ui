@@ -7,10 +7,21 @@ class LangFr extends Lang {
   LangFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get gRequired => 'Requis';
+
+  @override
   String get gSuccess => 'Succès !';
 
   @override
   String get gFailure => 'Échec';
+
+  @override
+  String get csInvalidName =>
+      'Les lettres minuscules, les chiffres et les traits de soulignement sont autorisés.';
+
+  @override
+  String get csInvalidDomain =>
+      '\'dom.name\' seulement; r\'^[a-z0-9_]+\\.[a-z]+\$\'';
 
   @override
   String get csLoad => 'Charger la configuration';

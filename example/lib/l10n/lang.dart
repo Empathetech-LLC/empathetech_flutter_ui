@@ -98,6 +98,12 @@ abstract class Lang {
     Locale('fr')
   ];
 
+  /// No description provided for @gRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get gRequired;
+
   /// No description provided for @gSuccess.
   ///
   /// In en, this message translates to:
@@ -109,6 +115,18 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'Failure'**
   String get gFailure;
+
+  /// No description provided for @csInvalidName.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowercase letters, numbers, and underscores are allowed.'**
+  String get csInvalidName;
+
+  /// No description provided for @csInvalidDomain.
+  ///
+  /// In en, this message translates to:
+  /// **'\'dom.name\' only; r\'^[a-z0-9_]+\\.[a-z]+\$\''**
+  String get csInvalidDomain;
 
   /// No description provided for @csLoad.
   ///

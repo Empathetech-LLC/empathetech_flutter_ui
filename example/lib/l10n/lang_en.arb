@@ -3,11 +3,15 @@
 
 
 
+  "gRequired": "Required",
   "gSuccess": "Success!",
   "gFailure": "Failure",
 
 
 
+  "csInvalidName": "Lowercase letters, numbers, and underscores are allowed.",
+  "csInvalidDomain": "'dom.name' only; r'^[a-z0-9_]+\\.[a-z]+$'",
+  
   "csLoad": "Load config",
 
   "csResetHint": "Activate and confirm what should be reset.",

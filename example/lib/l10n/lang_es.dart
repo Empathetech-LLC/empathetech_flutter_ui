@@ -7,10 +7,21 @@ class LangEs extends Lang {
   LangEs([String locale = 'es']) : super(locale);
 
   @override
+  String get gRequired => 'Requerido';
+
+  @override
   String get gSuccess => '¡Éxito!';
 
   @override
   String get gFailure => 'Fracaso';
+
+  @override
+  String get csInvalidName =>
+      'Se permiten letras minúsculas, números y guiones bajos.';
+
+  @override
+  String get csInvalidDomain =>
+      '\'dom.name\' solo; r\'^[a-z0-9_]+\\.[a-z]+\$\'';
 
   @override
   String get csLoad => 'Cargar configuración';

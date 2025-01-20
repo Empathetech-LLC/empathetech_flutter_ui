@@ -7,10 +7,21 @@ class LangEn extends Lang {
   LangEn([String locale = 'en']) : super(locale);
 
   @override
+  String get gRequired => 'Required';
+
+  @override
   String get gSuccess => 'Success!';
 
   @override
   String get gFailure => 'Failure';
+
+  @override
+  String get csInvalidName =>
+      'Lowercase letters, numbers, and underscores are allowed.';
+
+  @override
+  String get csInvalidDomain =>
+      '\'dom.name\' only; r\'^[a-z0-9_]+\\.[a-z]+\$\'';
 
   @override
   String get csLoad => 'Load config';

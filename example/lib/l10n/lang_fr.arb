@@ -3,10 +3,14 @@
 
 
 
+  "gRequired": "Requis",
   "gSuccess": "Succès !",
   "gFailure": "Échec",
 
 
+
+  "csInvalidName": "Les lettres minuscules, les chiffres et les traits de soulignement sont autorisés.",
+  "csInvalidDomain": "'dom.name' seulement; r'^[a-z0-9_]+\\.[a-z]+$'",
 
   "csLoad": "Charger la configuration",
 

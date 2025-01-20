@@ -3,12 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-const String longestError =
-    'Required; lowercase letters, numbers, and underscores are allowed.';
+import './export.dart';
 
 /// Allows letters (upper and lower case) and underscores
 String? validateAppName({
   required String? value,
+  required Lang l10n,
   Function? onSuccess,
   Function? onFailure,
 }) {
@@ -16,10 +16,10 @@ String? validateAppName({
 
   if (value == null || value.isEmpty) {
     onFailure?.call();
-    return 'Required; lowercase letters, numbers, and underscores are allowed.';
+    return '${l10n.gRequired}; ${l10n.csInvalidName.toLowerCase()}';
   } else if (!pattern.hasMatch(value)) {
     onFailure?.call();
-    return 'Only lowercase letters, numbers, and underscores are allowed.';
+    return l10n.csInvalidName;
   } else {
     onSuccess?.call();
     return null;
@@ -27,13 +27,13 @@ String? validateAppName({
 }
 
 /// Validates name.extension domains
-String? validateDomain(String? value) {
+String? validateDomain(String? value, Lang l10n) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
   if (value == null || value.isEmpty) {
-    return "Required; 'dom.name'";
+    return '${l10n.gRequired}; ${l10n.csInvalidName}';
   } else if (!pattern.hasMatch(value)) {
-    return "'dom.name' only; r'^[a-z0-9_]+\\.[a-z]+\$'";
+    return l10n.csInvalidDomain;
   } else {
     return null;
   }
