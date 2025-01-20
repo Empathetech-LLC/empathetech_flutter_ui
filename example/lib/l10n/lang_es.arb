@@ -14,7 +14,7 @@
   
   "csPubName": "Nombre del editor",
   "csPubPreview": "Organización Ejemplo",
-  "csPubHint": "O Persona Ejemplo",
+  "csPubHint": "O, Persona Ejemplo",
 
   "csDescription": "Descripción",
   "csDescPreview": "Una o dos frases sobre tu aplicación.",
@@ -35,7 +35,7 @@
   "csTheConfig": "la configuración",
   "csSetColors": " (excepto imágenes) se convertirá en la configuración predeterminada para {app_name}.\n\nSe recomienda establecer un esquema de colores personalizado. Si necesitas ayuda para construir uno, intenta comenzar ",
   "csHere": "aquí.",
-  "csHereHint": "Abre un enlace a un constructor de esquemas de colores en línea",
+  "csHereHint": "Abra un generador de esquemas de color en línea",
 
   "csAdvanced": "Configuraciones avanzadas",
   "csRestore": "Restaurar {setting}",

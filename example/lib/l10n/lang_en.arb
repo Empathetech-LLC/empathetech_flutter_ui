@@ -14,7 +14,7 @@
 
   "csPubName": "Publisher name",
   "csPubPreview": "Example Organization",
-  "csPubHint": "Or Example Person",
+  "csPubHint": "Or, Example Person",
 
   "csDescription": "Description",
   "csDescPreview": "One or two sentences about your app.",
@@ -35,7 +35,7 @@
   "csTheConfig": "the config",
   "csSetColors": " (except images) will become the default config for {app_name}.\n\nIt is recommended to set a custom color scheme. If you need help building one, try starting ",
   "csHere": "here.",
-  "csHereHint": "Open a link to an online color scheme builder",
+  "csHereHint": "Open an online color scheme builder",
 
   "csAdvanced": "Advanced settings",
   "csRestore": "Restore {setting}",

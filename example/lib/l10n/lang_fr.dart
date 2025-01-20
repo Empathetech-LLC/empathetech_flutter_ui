@@ -35,7 +35,7 @@ class LangFr extends Lang {
   String get csPubPreview => 'Organisation Exemple';
 
   @override
-  String get csPubHint => 'Ou Personne Exemple';
+  String get csPubHint => 'Ou, Personne Exemple';
 
   @override
   String get csDescription => 'Description';
@@ -90,7 +90,7 @@ class LangFr extends Lang {
 
   @override
   String get csHereHint =>
-      'Ouvrez un lien vers un constructeur de schémas de couleurs en ligne';
+      'Ouvrir un générateur de palette de couleurs en ligne';
 
   @override
   String get csAdvanced => 'Paramètres avancés';

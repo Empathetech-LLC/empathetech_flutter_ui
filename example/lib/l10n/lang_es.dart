@@ -35,7 +35,7 @@ class LangEs extends Lang {
   String get csPubPreview => 'Organización Ejemplo';
 
   @override
-  String get csPubHint => 'O Persona Ejemplo';
+  String get csPubHint => 'O, Persona Ejemplo';
 
   @override
   String get csDescription => 'Descripción';
@@ -89,8 +89,7 @@ class LangEs extends Lang {
   String get csHere => 'aquí.';
 
   @override
-  String get csHereHint =>
-      'Abre un enlace a un constructor de esquemas de colores en línea';
+  String get csHereHint => 'Abra un generador de esquemas de color en línea';
 
   @override
   String get csAdvanced => 'Configuraciones avanzadas';

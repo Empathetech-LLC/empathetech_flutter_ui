@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: l10n.csPubName,
-              tip: l10n.csPubPreview,
+              tip: l10n.csPubHint,
               controller: pubController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) return el10n.gRequired;

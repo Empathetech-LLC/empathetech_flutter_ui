@@ -155,7 +155,7 @@ abstract class Lang {
   /// No description provided for @csPubHint.
   ///
   /// In en, this message translates to:
-  /// **'Or Example Person'**
+  /// **'Or, Example Person'**
   String get csPubHint;
 
   /// No description provided for @csDescription.
@@ -251,7 +251,7 @@ abstract class Lang {
   /// No description provided for @csHereHint.
   ///
   /// In en, this message translates to:
-  /// **'Open a link to an online color scheme builder'**
+  /// **'Open an online color scheme builder'**
   String get csHereHint;
 
   /// No description provided for @csAdvanced.

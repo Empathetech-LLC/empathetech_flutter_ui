@@ -35,7 +35,7 @@ class LangEn extends Lang {
   String get csPubPreview => 'Example Organization';
 
   @override
-  String get csPubHint => 'Or Example Person';
+  String get csPubHint => 'Or, Example Person';
 
   @override
   String get csDescription => 'Description';
@@ -89,7 +89,7 @@ class LangEn extends Lang {
   String get csHere => 'here.';
 
   @override
-  String get csHereHint => 'Open a link to an online color scheme builder';
+  String get csHereHint => 'Open an online color scheme builder';
 
   @override
   String get csAdvanced => 'Advanced settings';
