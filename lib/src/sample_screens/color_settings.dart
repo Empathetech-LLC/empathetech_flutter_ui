@@ -201,8 +201,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   // Define custom widgets  //
 
   late final String fromImageLabel = l10n.csSchemeBase;
-  late final String fromImageHint =
-      'A color scheme will be generated from the image.';
+  late final String fromImageHint = l10n.csFromImage;
 
   late final Widget fromImageButton = isDark
       ? Semantics(

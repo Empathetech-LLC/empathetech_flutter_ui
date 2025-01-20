@@ -331,7 +331,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           ),
           EzTextBackground(
             Text(
-              'Text background opacity',
+              l10n.tsTextBackground,
               style: labelProvider.value,
               textAlign: TextAlign.center,
             ),
@@ -343,7 +343,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
         // Icon size
         Tooltip(
-          message: 'Icon size',
+          message: l10n.tsIconSize,
           child: EzTextBackground(
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -356,7 +356,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           await EzConfig.setDouble(iconSizeKey, currIconSize);
                           setState(() {});
                         },
-                        tooltip: '${l10n.tsDecrease} icon size',
+                        tooltip:
+                            '${l10n.tsDecrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(
                           PlatformIcons(context).remove,
                           size: currIconSize,
@@ -369,7 +370,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           shadowColor: Colors.transparent,
                         ),
                         onPressed: doNothing,
-                        tooltip: 'Minimum',
+                        tooltip: l10n.gMinimum,
                         icon: Icon(
                           PlatformIcons(context).remove,
                           size: currIconSize,
@@ -394,7 +395,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           await EzConfig.setDouble(iconSizeKey, currIconSize);
                           setState(() {});
                         },
-                        tooltip: '${l10n.tsIncrease} icon size',
+                        tooltip:
+                            '${l10n.tsIncrease} ${l10n.tsIconSize.toLowerCase()}',
                         icon: Icon(
                           PlatformIcons(context).add,
                           size: currIconSize,
@@ -407,7 +409,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           shadowColor: Colors.transparent,
                         ),
                         onPressed: doNothing,
-                        tooltip: 'Maximum',
+                        tooltip: l10n.gMaximum,
                         icon: Icon(
                           PlatformIcons(context).add,
                           size: currIconSize,
