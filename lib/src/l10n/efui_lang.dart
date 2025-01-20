@@ -338,6 +338,12 @@ abstract class EFUILang {
   /// **'Open source'**
   String get gOpenSource;
 
+  /// No description provided for @gOpenEmpathetech.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a link to Empathetic LLC'**
+  String get gOpenEmpathetech;
+
   /// No description provided for @gEFUISourceHint.
   ///
   /// In en, this message translates to:

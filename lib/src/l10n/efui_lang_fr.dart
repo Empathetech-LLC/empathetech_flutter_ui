@@ -132,6 +132,9 @@ class EFUILangFr extends EFUILang {
   String get gOpenSource => 'Open source';
 
   @override
+  String get gOpenEmpathetech => 'Ouvre un lien vers Empathetic LLC';
+
+  @override
   String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
 
   @override
