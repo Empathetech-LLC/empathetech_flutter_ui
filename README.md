@@ -46,9 +46,9 @@ If you're new to Flutter: welcome! EFUI is full of doc comments to help you on y
 
 Here are some (unaffiliated) videos you might also find helpful.
 
-- [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38)
-- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek)
-- [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY)
+- [First app tutorial](https://www.youtube.com/watch?v=xWV71C2kp38) (Flutter)
+- [First app code lab](https://www.youtube.com/watch?v=8sAyPDLorek) (Flutter)
+- [Using external packages](https://www.youtube.com/watch?v=WdXcJdhWcEY) (Net Ninja)
 
 ## <br>Integrating EFUI with existing projects 
 ### TL;DR
@@ -215,7 +215,7 @@ And, If our samples don't fit your vibe, feel free to use the above widgets to b
 
 <br>And, as your app grows, use our library to keep things Ez
 
-* [Platform availability](lib/src/widgets/platform_availability/): Platform responsive `Widget`s that might help along the way
+* [Platform availability](lib/src/widgets/platform_availability/): Platform responsive `Widget`s that will help along the way
 * [Responsive design](lib/src/widgets/responsive_design/): `Widget`s that aid in building responsive UI/UX
 * [Screen reader support](lib/src/widgets/screen_reader_support/): `Widget`s with streamlined `Semantics`
 * [User customization](lib/src/widgets/helpers/): Wrapper `Widget`s that respond to `EzConfig` data when the `ThemeData` doesn't cut it
