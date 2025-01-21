@@ -3,7 +3,7 @@
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/localized_readme/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/example/localized_readme/README.fr.md)
 
-<br>Voir le [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme) source
+<br>Consultez la source [README](https://github.com/Empathetech-LLC/empathetech_flutter_ui#readme) pour un guide du développeur.
 
 ## <br>Mises en production
 
