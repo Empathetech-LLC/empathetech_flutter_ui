@@ -8,7 +8,7 @@
 - **Platform availability**
   - Thanks to Flutter, you can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
 - **Responsive design**
-  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design); checkout [our site](https://www.empathetech.net/#/contribute) to see it in action.
+  - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design); check out [our site](https://www.empathetech.net/#/contribute) to see it in action.
 - **Screen reader support**
   - Empathetech code is manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios).
 - **User customization**
@@ -17,7 +17,7 @@
 - **Internationalization**
   - Empathetech apps have been translated to Spanish and French (so far).
   - EFUI also provides the infrastructure for unlimited future translations.
-    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to a great car than just acceleration! If your translations are generated: disclose that. EFUI's translations started with A.I. and ended with [H.I.](#translations)
+    - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to a great car than just acceleration! If your translations are generated: disclose that. EFUI's translations started with A.I. and ended with H.I.
 - **Cost**
   - While we encourage [contributions](#contributing), EFUI is completely free and [open source](LICENSE).
   - [Open UI](#usage) can also get you started with a professionally polished, empathetic app in one click\*
