@@ -59,9 +59,13 @@ class EzAppProvider extends StatelessWidget {
         materialDarkTheme: _materialDark,
         cupertinoLightTheme: MaterialBasedCupertinoThemeData(
           materialTheme: _materialLight,
+        ).copyWith(
+          primaryColor: _materialLight.colorScheme.secondary,
         ),
         cupertinoDarkTheme: MaterialBasedCupertinoThemeData(
           materialTheme: _materialDark,
+        ).copyWith(
+          primaryColor: _materialDark.colorScheme.secondary,
         ),
         matchCupertinoSystemChromeBrightness: true,
       ),
