@@ -28,6 +28,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   static const EzSpacer spacer = EzSpacer();
   static const Widget divider = EzDivider();
 
+  late final EFUILang el10n = EFUILang.of(context)!;
   late final Lang l10n = Lang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -36,7 +37,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
-  String failureMessage = '';
+  String? failureMessage;
+  EzRichText? richFailureMessage;
 
   /// Quantum computing
   bool? showDelete = true;
@@ -83,7 +85,28 @@ class _GenerateScreenState extends State<GenerateScreen> {
       dir: workDir,
       onSuccess: delStuff,
       onFailure: (String message) {
-        if (message.contains('command not found')) {
+        if (message.contains('not permitted')) {
+          setState(() {
+            showDelete = false;
+            richFailureMessage = EzRichText(
+              <InlineSpan>[
+                EzPlainText(text: l10n.gsNeedPermission),
+                EzPlainText(text: l10n.gsSeeNBelieve),
+                EzInlineLink(
+                  l10n.csHere,
+                  style: subTitle,
+                  textAlign: TextAlign.center,
+                  url: Uri.parse(
+                      'https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/example/lib/screens/generator/generate.dart'),
+                  semanticsLabel: l10n.gsSeeNBelieveHint,
+                ),
+              ],
+              style: subTitle,
+              textAlign: TextAlign.center,
+            );
+            genState = GeneratorState.failed;
+          });
+        } else if (message.contains('command not found')) {
           setState(() {
             showDelete = null;
             failureMessage = l10n.gsNotInstalled;
@@ -323,7 +346,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
           width: double.infinity,
           child: EmpathetechLoadingAnimation(
             height: double.infinity,
-            semantics: EFUILang.of(context)!.gLoadingAnim,
+            semantics: el10n.gLoadingAnim,
           ),
         );
       case GeneratorState.successful:
@@ -377,6 +400,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 FailureHeader(
                   textTheme: textTheme,
                   message: failureMessage,
+                  richMessage: richFailureMessage,
                 ),
                 if (showDelete == true) ...<Widget>[
                   spacer,
