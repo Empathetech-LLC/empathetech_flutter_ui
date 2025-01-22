@@ -429,7 +429,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.0.0-dev.9
+  empathetech_flutter_ui: ^8.0.0-dev.10
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.1
