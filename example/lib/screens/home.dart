@@ -235,12 +235,15 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: l10n.csAppName,
-              tip: TextSpan(children: <InlineSpan>[
-                EzPlainText(text: l10n.csNameHint),
-                EzPlainText(
-                    text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
-                EzPlainText(text: ezTitleToSnake(l10n.csNameHint)),
-              ]),
+              tip: TextSpan(
+                children: <InlineSpan>[
+                  EzPlainText(text: l10n.csNameHint),
+                  EzPlainText(
+                      text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
+                  EzPlainText(text: ezTitleToSnake(l10n.csNameHint)),
+                ],
+                style: textTheme.bodyLarge,
+              ),
               controller: nameController,
               validator: (String? entry) => validateAppName(
                 value: entry,
@@ -439,29 +442,28 @@ class _HomeScreenState extends State<HomeScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                  text: l10n.csGenApp(isDesktop
-                      ? (validName ? namePreview : l10n.csTheApp)
-                      : l10n.csTheConfig),
-                  style: subTitle,
-                ),
+                    text: l10n.csGenApp(isDesktop
+                        ? (validName ? namePreview : l10n.csTheApp)
+                        : l10n.csTheConfig)),
                 EzInlineLink(
                   el10n.ssPageTitle.toLowerCase(),
                   style: subTitle,
+                  textAlign: TextAlign.start,
                   onTap: () => context.goNamed(settingsHomePath),
                   semanticsLabel: el10n.ssNavHint,
                 ),
                 EzPlainText(
-                  text: l10n
-                      .csSetColors(validName ? namePreview : l10n.csYourApp),
-                  style: subTitle,
-                ),
+                    text: l10n
+                        .csSetColors(validName ? namePreview : l10n.csYourApp)),
                 EzInlineLink(
                   l10n.csHere,
                   style: subTitle,
+                  textAlign: TextAlign.start,
                   url: Uri.parse('https://www.canva.com/colors/color-wheel/'),
                   semanticsLabel: l10n.csHereHint,
                 ),
               ],
+              style: subTitle,
               textAlign: TextAlign.start,
             ),
             divider,
@@ -1204,6 +1206,7 @@ class _LicensePicker extends StatelessWidget {
     final Widget tip = EzToolTipper(
       richMessage: EzInlineLink(
         chooseALicense,
+        textAlign: TextAlign.center,
         url: Uri.parse(chooseALicense),
         semanticsLabel: l10n.csLicenseDocs,
       ),
