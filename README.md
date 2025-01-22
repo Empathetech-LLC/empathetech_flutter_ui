@@ -21,7 +21,7 @@
 - **Cost**
   - While we encourage [contributions](#contributing), EFUI is completely free and [open source](./LICENSE).
   - [Open UI](#usage) can also get you started with a professionally polished, empathetic app in one click\*
-    - \*if you already have Flutter installed. A few more clicks if not.
+    - \*There's some (less than 10 minutes) first time setup. After that, one click per app.
 
 <br><br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a better place together!
 
