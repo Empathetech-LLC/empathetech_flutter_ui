@@ -187,7 +187,7 @@ class LangFr extends Lang {
 
   @override
   String get gsNeedPermission =>
-      'Open UI nécessite un accès complet au disque. Veuillez ouvrir Paramètres système > Confidentialité et sécurité > Accès complet au disque > Open UI activé, puis réessayez.';
+      'Open UI nécessite un accès complet au disque. S\'il vous plaît, allez à...\nParamètres système > Confidentialité et sécurité > Accès complet au disque > Open UI activé, puis réessayez.';
 
   @override
   String get gsSeeNBelieve =>

@@ -185,7 +185,7 @@ class LangEs extends Lang {
 
   @override
   String get gsNeedPermission =>
-      'Open UI necesita Acceso Completo al Disco.\n\nAbra Configuración del Sistema > Privacidad y Seguridad > Acceso Completo al Disco > Habilite Open UI; entonces inténtalo de nuevo.';
+      'Open UI necesita Acceso Completo al Disco.\n\nPor favor, vaya a...\nConfiguración del Sistema > Privacidad y Seguridad > Acceso Completo al Disco > Habilite Open UI; entonces inténtalo de nuevo.';
 
   @override
   String get gsSeeNBelieve => 'Si quieres verificar qué hace Open UI, ve ';

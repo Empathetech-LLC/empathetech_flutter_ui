@@ -419,7 +419,7 @@ abstract class Lang {
   /// No description provided for @gsNeedPermission.
   ///
   /// In en, this message translates to:
-  /// **'Open UI needs Full Disk Access.\n\nPlease open System Settings > Privacy & Security > Full Disk Access > Enable Open UI; then try again.'**
+  /// **'Open UI needs Full Disk Access.\n\nPlease go to...\nSystem Settings > Privacy & Security > Full Disk Access > Enable Open UI; then try again.'**
   String get gsNeedPermission;
 
   /// No description provided for @gsSeeNBelieve.

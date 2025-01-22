@@ -91,7 +91,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
             richFailureMessage = EzRichText(
               <InlineSpan>[
                 EzPlainText(text: l10n.gsNeedPermission),
-                EzPlainText(text: l10n.gsSeeNBelieve),
+                EzPlainText(text: '\n\n${l10n.gsSeeNBelieve}'),
                 EzInlineLink(
                   l10n.csHere,
                   style: subTitle,
