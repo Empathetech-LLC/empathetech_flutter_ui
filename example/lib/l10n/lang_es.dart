@@ -184,6 +184,17 @@ class LangEs extends Lang {
   String get gsFirstRun => 'La primera ejecución suele tardar un tiempo';
 
   @override
+  String get gsNeedPermission =>
+      'Open UI necesita Acceso Completo al Disco.\n\nAbra Configuración del Sistema > Privacidad y Seguridad > Acceso Completo al Disco > Habilite Open UI; entonces inténtalo de nuevo.';
+
+  @override
+  String get gsSeeNBelieve => 'Si quieres verificar qué hace Open UI, ve ';
+
+  @override
+  String get gsSeeNBelieveHint =>
+      'Abrir el código de generación de código de Open UI.';
+
+  @override
   String get gsNotInstalled => 'Flutter no está instalado';
 
   @override

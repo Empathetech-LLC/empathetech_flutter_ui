@@ -180,6 +180,16 @@ class LangEn extends Lang {
   String get gsFirstRun => 'First run usually takes awhile';
 
   @override
+  String get gsNeedPermission =>
+      'Open UI needs Full Disk Access.\n\nPlease open System Settings > Privacy & Security > Full Disk Access > Enable Open UI; then try again.';
+
+  @override
+  String get gsSeeNBelieve => 'If you want to verify what Open UI does, go ';
+
+  @override
+  String get gsSeeNBelieveHint => 'Open Open UI\'s code generation code.';
+
+  @override
   String get gsNotInstalled => 'Flutter is not installed';
 
   @override

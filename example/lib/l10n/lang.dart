@@ -416,6 +416,24 @@ abstract class Lang {
   /// **'First run usually takes awhile'**
   String get gsFirstRun;
 
+  /// No description provided for @gsNeedPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Open UI needs Full Disk Access.\n\nPlease open System Settings > Privacy & Security > Full Disk Access > Enable Open UI; then try again.'**
+  String get gsNeedPermission;
+
+  /// No description provided for @gsSeeNBelieve.
+  ///
+  /// In en, this message translates to:
+  /// **'If you want to verify what Open UI does, go '**
+  String get gsSeeNBelieve;
+
+  /// No description provided for @gsSeeNBelieveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Open UI\'s code generation code.'**
+  String get gsSeeNBelieveHint;
+
   /// No description provided for @gsNotInstalled.
   ///
   /// In en, this message translates to:

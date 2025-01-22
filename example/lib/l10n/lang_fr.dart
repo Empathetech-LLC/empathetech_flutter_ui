@@ -186,6 +186,18 @@ class LangFr extends Lang {
       'La première exécution prend généralement un certain temps';
 
   @override
+  String get gsNeedPermission =>
+      'Open UI nécessite un accès complet au disque. Veuillez ouvrir Paramètres système > Confidentialité et sécurité > Accès complet au disque > Open UI activé, puis réessayez.';
+
+  @override
+  String get gsSeeNBelieve =>
+      'Si vous souhaitez vérifier ce que fait Open UI, allez ';
+
+  @override
+  String get gsSeeNBelieveHint =>
+      'Ouvrir le code de génération de code d\'Open UI.';
+
+  @override
   String get gsNotInstalled => 'Flutter n\'est pas installé';
 
   @override

@@ -84,6 +84,9 @@
   "gsIsReadyIn": "está listo en",
   "gsFirstRun": "La primera ejecución suele tardar un tiempo",
 
+  "gsNeedPermission": "Open UI necesita Acceso Completo al Disco.\n\nAbra Configuración del Sistema > Privacidad y Seguridad > Acceso Completo al Disco > Habilite Open UI; entonces inténtalo de nuevo.",
+  "gsSeeNBelieve": "Si quieres verificar qué hace Open UI, ve ",
+  "gsSeeNBelieveHint": "Abrir el código de generación de código de Open UI.",
   "gsNotInstalled": "Flutter no está instalado",
   "gsPartialSuccess": "El código se generó correctamente, pero falló parte de la configuración del proyecto.",
 

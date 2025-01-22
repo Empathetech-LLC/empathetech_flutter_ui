@@ -14,15 +14,22 @@ class FailureHeader extends StatelessWidget {
   /// [ThemeData.textTheme] passthrough
   final TextTheme textTheme;
 
-  /// Core message to display... under 'Failure'
-  final String message;
+  /// Core [Text] to display... under 'Failure'
+  /// Provide [message] OR [richMessage]
+  final String? message;
+
+  /// Core [Text.rich] to display... under 'Failure'
+  /// Provide [message] OR [richMessage]
+  final EzRichText? richMessage;
 
   /// header [Widget] for a failed run
   const FailureHeader({
     super.key,
     required this.textTheme,
-    required this.message,
-  });
+    this.message,
+    this.richMessage,
+  }) : assert((message == null) != (richMessage == null),
+            'Either message or richMessage must be provided, not both');
 
   @override
   Widget build(BuildContext context) => Column(
@@ -39,13 +46,15 @@ class FailureHeader extends StatelessWidget {
           const Spacer(),
 
           // Error message
-          Flexible(
-            child: EzText(
-              message,
-              style: subTitleStyle(textTheme),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          message != null
+              ? Flexible(
+                  child: EzText(
+                    message!,
+                    style: subTitleStyle(textTheme),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : richMessage!,
         ],
       );
 }
