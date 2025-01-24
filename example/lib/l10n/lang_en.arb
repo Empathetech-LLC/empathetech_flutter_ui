@@ -37,11 +37,15 @@
   "csHere": "here.",
   "csHereHint": "Open an online color scheme builder",
 
+  "csFlutterPath": "Flutter path",
+  "csNotInstalled": "Not installed?",
+  "csPathRequired": "Path required. Cannot use root folder.",
+  "csBadPath": "Invalid path",
+
   "csAdvanced": "Advanced settings",
   "csRestore": "Restore {setting}",
 
-  "csPathRequired": "Path required. Cannot use root folder.",
-  "csBadPath": "Invalid path",
+  "csOutputPath": "Output path",
 
   "csCopyright": "Copyright notice",
   "csCopyrightHint": "Will be included at the top of every Dart file",

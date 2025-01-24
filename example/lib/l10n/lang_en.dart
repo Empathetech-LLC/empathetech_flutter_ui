@@ -92,6 +92,18 @@ class LangEn extends Lang {
   String get csHereHint => 'Open an online color scheme builder';
 
   @override
+  String get csFlutterPath => 'Flutter path';
+
+  @override
+  String get csNotInstalled => 'Not installed?';
+
+  @override
+  String get csPathRequired => 'Path required. Cannot use root folder.';
+
+  @override
+  String get csBadPath => 'Invalid path';
+
+  @override
   String get csAdvanced => 'Advanced settings';
 
   @override
@@ -100,10 +112,7 @@ class LangEn extends Lang {
   }
 
   @override
-  String get csPathRequired => 'Path required. Cannot use root folder.';
-
-  @override
-  String get csBadPath => 'Invalid path';
+  String get csOutputPath => 'Output path';
 
   @override
   String get csCopyright => 'Copyright notice';

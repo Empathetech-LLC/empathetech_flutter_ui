@@ -37,11 +37,15 @@
   "csHere": "ici.",
   "csHereHint": "Ouvrir un générateur de palette de couleurs en ligne",
 
+  "csFlutterPath": "Flutter chemin",
+  "csNotInstalled": "N'est pas installé?",
+  "csPathRequired": "Chemin requis. Impossible d'utiliser le dossier racine.",
+  "csBadPath": "Chemin invalide",
+  
   "csAdvanced": "Paramètres avancés",
   "csRestore": "Restaurer {setting}",
 
-  "csPathRequired": "Chemin requis. Impossible d'utiliser le dossier racine.",
-  "csBadPath": "Chemin invalide",
+  "csOutputPath": "Chemin de sortie",
 
   "csCopyright": "Avis de droits d'auteur",
   "csCopyrightHint": "Sera inclus en haut de chaque fichier Dart",

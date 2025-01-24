@@ -93,6 +93,19 @@ class LangFr extends Lang {
       'Ouvrir un générateur de palette de couleurs en ligne';
 
   @override
+  String get csFlutterPath => 'Flutter chemin';
+
+  @override
+  String get csNotInstalled => 'N\'est pas installé?';
+
+  @override
+  String get csPathRequired =>
+      'Chemin requis. Impossible d\'utiliser le dossier racine.';
+
+  @override
+  String get csBadPath => 'Chemin invalide';
+
+  @override
   String get csAdvanced => 'Paramètres avancés';
 
   @override
@@ -101,11 +114,7 @@ class LangFr extends Lang {
   }
 
   @override
-  String get csPathRequired =>
-      'Chemin requis. Impossible d\'utiliser le dossier racine.';
-
-  @override
-  String get csBadPath => 'Chemin invalide';
+  String get csOutputPath => 'Chemin de sortie';
 
   @override
   String get csCopyright => 'Avis de droits d\'auteur';

@@ -92,6 +92,19 @@ class LangEs extends Lang {
   String get csHereHint => 'Abra un generador de esquemas de color en línea';
 
   @override
+  String get csFlutterPath => 'Flutter ruta';
+
+  @override
+  String get csNotInstalled => '¿No está instalado?';
+
+  @override
+  String get csPathRequired =>
+      'Se requiere ruta. No se puede usar la carpeta raíz.';
+
+  @override
+  String get csBadPath => 'Ruta no válida';
+
+  @override
   String get csAdvanced => 'Configuraciones avanzadas';
 
   @override
@@ -100,11 +113,7 @@ class LangEs extends Lang {
   }
 
   @override
-  String get csPathRequired =>
-      'Se requiere ruta. No se puede usar la carpeta raíz.';
-
-  @override
-  String get csBadPath => 'Ruta no válida';
+  String get csOutputPath => 'Ruta de salida';
 
   @override
   String get csCopyright => 'Aviso de derechos de autor';

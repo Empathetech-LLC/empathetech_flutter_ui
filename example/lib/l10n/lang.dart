@@ -254,17 +254,17 @@ abstract class Lang {
   /// **'Open an online color scheme builder'**
   String get csHereHint;
 
-  /// No description provided for @csAdvanced.
+  /// No description provided for @csFlutterPath.
   ///
   /// In en, this message translates to:
-  /// **'Advanced settings'**
-  String get csAdvanced;
+  /// **'Flutter path'**
+  String get csFlutterPath;
 
-  /// No description provided for @csRestore.
+  /// No description provided for @csNotInstalled.
   ///
   /// In en, this message translates to:
-  /// **'Restore {setting}'**
-  String csRestore(Object setting);
+  /// **'Not installed?'**
+  String get csNotInstalled;
 
   /// No description provided for @csPathRequired.
   ///
@@ -277,6 +277,24 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'Invalid path'**
   String get csBadPath;
+
+  /// No description provided for @csAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced settings'**
+  String get csAdvanced;
+
+  /// No description provided for @csRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore {setting}'**
+  String csRestore(Object setting);
+
+  /// No description provided for @csOutputPath.
+  ///
+  /// In en, this message translates to:
+  /// **'Output path'**
+  String get csOutputPath;
 
   /// No description provided for @csCopyright.
   ///
