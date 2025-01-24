@@ -113,6 +113,7 @@ class EzText extends StatelessWidget {
   final Color? selectionColor;
 
   /// Quick wrapper for creating [Text] with a default [EzTextBackground]
+  /// [style] defaults to [TextTheme.bodyLarge]
   const EzText(
     this.data, {
     this.useSurface = false,
