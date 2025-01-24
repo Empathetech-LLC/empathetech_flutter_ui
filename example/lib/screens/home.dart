@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           platform == TargetPlatform.macOS ||
           platform == TargetPlatform.windows);
 
-  late final String homeEnv = isDesktop
+  late final String homePath = isDesktop
       ? (platform == TargetPlatform.windows)
           ? '${Platform.environment['UserProfile']}\\Documents'
           : '${Platform.environment['HOME']}/Documents'
@@ -76,10 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
   bool colorSettings = true;
   bool imageSettings = true;
 
+  late final TextEditingController flutterPathControl =
+      TextEditingController(text: homePath);
+
   bool showAdvanced = false;
 
-  late final TextEditingController pathController =
-      TextEditingController(text: homeEnv);
+  late final TextEditingController workPathControl =
+      TextEditingController(text: homePath);
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -114,8 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
   // Define custom functions //
 
   /// Validate the code gen file path (Desktop only)
-  Future<bool> checkPath() async {
-    if (await Directory(pathController.text).exists()) return true;
+  Future<bool> checkPath(TextEditingController controller) async {
+    if (await Directory(controller.text).exists()) return true;
 
     final String badPath = l10n.csBadPath;
 
@@ -124,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
       canGen = false;
 
       showAdvanced = true;
-      pathController.text = badPath;
+      controller.text = badPath;
     });
 
     // Wait a sec
@@ -132,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Re-enable interaction
     setState(() {
-      pathController.text = homeEnv;
+      controller.text = homePath;
 
       canGen = true;
     });
@@ -182,9 +185,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
         await EzConfig.loadConfig(config.appDefaults);
 
-        if (config.genPath != null &&
-            await Directory(config.genPath!).exists()) {
-          pathController.text = config.genPath!;
+        if (config.flutterPath != null &&
+            await Directory(config.flutterPath!).exists()) {
+          flutterPathControl.text = config.flutterPath!;
+        }
+
+        if (config.workPath != null &&
+            await Directory(config.workPath!).exists()) {
+          workPathControl.text = config.workPath!;
         }
 
         config.copyright == null
@@ -468,6 +476,54 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             divider,
 
+            // Flutter path picker
+            Visibility(
+              visible: isDesktop,
+              child: EzScrollView(
+                mainAxisSize: MainAxisSize.min,
+                scrollDirection: Axis.horizontal,
+                reverseHands: true,
+                children: <Widget>[
+                  // Text
+                  ConstrainedBox(
+                    constraints: ezTextFieldConstraints(context),
+                    child: TextFormField(
+                      controller: flutterPathControl,
+                      readOnly: !canGen,
+                      textAlign: TextAlign.start,
+                      maxLines: 1,
+                      validator: (String? path) =>
+                          (path == null || path.isEmpty)
+                              ? l10n.csPathRequired
+                              : null,
+                      autovalidateMode: AutovalidateMode.onUnfocus,
+                      decoration: InputDecoration(
+                          hintText:
+                              (isDesktop && platform == TargetPlatform.windows)
+                                  ? 'example_path\\flutter\\bin'
+                                  : 'example_path/flutter/bin'),
+                    ),
+                  ),
+                  rowMargin,
+
+                  // Browse
+                  IconButton(
+                    onPressed: () async {
+                      final String? selectedDirectory =
+                          await FilePicker.platform.getDirectoryPath();
+
+                      if (selectedDirectory != null) {
+                        setState(
+                            () => flutterPathControl.text = selectedDirectory);
+                      }
+                    },
+                    icon: EzIcon(PlatformIcons(context).folderOpen),
+                  ),
+                ],
+              ),
+            ),
+            spacer,
+
             // Advanced settings //
 
             // Toggle
@@ -508,7 +564,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   if (isDesktop) spacer,
 
-                  // Path picker
+                  // Work path picker
                   Visibility(
                     visible: isDesktop,
                     child: EzScrollView(
@@ -520,7 +576,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ConstrainedBox(
                           constraints: ezTextFieldConstraints(context),
                           child: TextFormField(
-                            controller: pathController,
+                            controller: workPathControl,
                             readOnly: !canGen,
                             textAlign: TextAlign.start,
                             maxLines: 1,
@@ -541,7 +597,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             if (selectedDirectory != null) {
                               setState(() =>
-                                  pathController.text = selectedDirectory);
+                                  workPathControl.text = selectedDirectory);
                             }
                           },
                           icon: EzIcon(PlatformIcons(context).folderOpen),
@@ -638,7 +694,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           (supportEmailController.text.isEmpty ||
                               EmailValidator.validate(
                                   supportEmailController.text)) &&
-                          (!isDesktop || await checkPath()) &&
+                          (!isDesktop ||
+                              (await checkPath(flutterPathControl) &&
+                                  await checkPath(workPathControl))) &&
                           context.mounted) {
                         context.goNamed(
                           archiveScreenPath,
@@ -662,7 +720,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     key, EzConfig.get(key)),
                               ),
                             ),
-                            genPath: isDesktop ? pathController.text : null,
+                            flutterPath:
+                                isDesktop ? flutterPathControl.text : null,
+                            workPath: isDesktop ? workPathControl.text : null,
                             copyright: (removeCopyright ||
                                     copyrightController.text.isEmpty)
                                 ? null
@@ -711,7 +771,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             (supportEmailController.text.isEmpty ||
                                 EmailValidator.validate(
                                     supportEmailController.text)) &&
-                            await checkPath() &&
+                            await checkPath(flutterPathControl) &&
+                            await checkPath(workPathControl) &&
                             context.mounted) {
                           context.goNamed(
                             generateScreenPath,
@@ -735,7 +796,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       key, EzConfig.get(key)),
                                 ),
                               ),
-                              genPath: pathController.text,
+                              flutterPath: flutterPathControl.text,
+                              workPath: workPathControl.text,
                               copyright: (removeCopyright ||
                                       copyrightController.text.isEmpty)
                                   ? null
@@ -802,9 +864,11 @@ class _HomeScreenState extends State<HomeScreen> {
           colorSettings = true;
           imageSettings = true;
 
+          flutterPathControl.clear();
+
           showAdvanced = false;
 
-          pathController.text = homeEnv;
+          workPathControl.text = homePath;
 
           showCopyright = false;
           removeCopyright = false;
@@ -836,7 +900,8 @@ class _HomeScreenState extends State<HomeScreen> {
     descriptionController.dispose();
     domainController.dispose();
     supportEmailController.dispose();
-    pathController.dispose();
+    flutterPathControl.dispose();
+    workPathControl.dispose();
     copyrightController.dispose();
     l10nController.dispose();
     analysisController.dispose();
