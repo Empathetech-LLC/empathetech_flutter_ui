@@ -29,6 +29,7 @@ class EzCLI extends StatefulWidget {
   /// [ezCmd] passthrough
   final ValueNotifier<String>? readout;
 
+  /// Simple interface for running CLI commands via [ezCmd]
   const EzCLI({
     super.key,
     this.platform,
