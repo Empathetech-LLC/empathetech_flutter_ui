@@ -535,10 +535,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               await FilePicker.platform.getDirectoryPath(
                                   dialogTitle: l10n.csFlutterPath);
 
-                          if (selectedDirectory != null) {
-                            setState(() => flutterPathControl.text =
-                                '$homePath${selectedDirectory.split(homePath)[1]}');
-                          }
+                          if (selectedDirectory == null) return;
+
+                          setState(() {
+                            flutterPathControl.text = selectedDirectory
+                                    .contains(homePath)
+                                ? '$homePath${selectedDirectory.split(homePath)[1]}'
+                                : selectedDirectory;
+                          });
                         },
                         icon: EzIcon(PlatformIcons(context).folderOpen),
                       ),
@@ -653,10 +657,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     await FilePicker.platform
                                         .getDirectoryPath();
 
-                                if (selectedDirectory != null) {
-                                  setState(() => workPathControl.text =
-                                      '$homePath${selectedDirectory.split(homePath)[1]}');
-                                }
+                                if (selectedDirectory == null) return;
+
+                                setState(() {
+                                  workPathControl.text = selectedDirectory
+                                          .contains(homePath)
+                                      ? '$homePath${selectedDirectory.split(homePath)[1]}'
+                                      : selectedDirectory;
+                                });
                               },
                               icon: EzIcon(PlatformIcons(context).folderOpen),
                             ),
