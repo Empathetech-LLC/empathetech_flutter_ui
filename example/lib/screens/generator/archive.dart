@@ -97,14 +97,17 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(text: l10n.asSavedTo(archivePath())),
-                EzInlineLink(
-                  appTitle,
-                  style: subTitleStyle(textTheme),
-                  textAlign: TextAlign.center,
-                  url: Uri.parse(openUIReleases),
-                  semanticsLabel: el10n.gOpenUIReleases,
-                ),
-                EzPlainText(text: l10n.asToGen(widget.config.appName)),
+                if (!isDesktop) ...<InlineSpan>[
+                  EzPlainText(text: l10n.asUseIt),
+                  EzInlineLink(
+                    appTitle,
+                    style: subTitleStyle(textTheme),
+                    textAlign: TextAlign.center,
+                    url: Uri.parse(openUIReleases),
+                    semanticsLabel: el10n.gOpenUIReleases,
+                  ),
+                  EzPlainText(text: l10n.asToGen(widget.config.appName)),
+                ]
               ],
               style: subTitleStyle(textTheme),
               textAlign: TextAlign.center,

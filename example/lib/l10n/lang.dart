@@ -401,8 +401,14 @@ abstract class Lang {
   /// No description provided for @asSavedTo.
   ///
   /// In en, this message translates to:
-  /// **'Your configuration has been saved to {path}\n\nUse it on '**
+  /// **'Your configuration has been saved to {path}'**
   String asSavedTo(Object path);
+
+  /// No description provided for @asUseIt.
+  ///
+  /// In en, this message translates to:
+  /// **'\n\nUse it on '**
+  String get asUseIt;
 
   /// No description provided for @asToGen.
   ///

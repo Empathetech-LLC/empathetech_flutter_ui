@@ -173,8 +173,11 @@ class LangFr extends Lang {
 
   @override
   String asSavedTo(Object path) {
-    return 'Votre configuration a été enregistrée dans $path\n\nUtilisez-le sur ';
+    return 'Votre configuration a été enregistrée dans $path';
   }
+
+  @override
+  String get asUseIt => '\n\nUtilisez-le sur ';
 
   @override
   String asToGen(Object app_name) {

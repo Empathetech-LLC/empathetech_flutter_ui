@@ -172,8 +172,11 @@ class LangEs extends Lang {
 
   @override
   String asSavedTo(Object path) {
-    return 'Su configuración se ha guardado en $path\n\nÚselo en ';
+    return 'Su configuración se ha guardado en $path';
   }
+
+  @override
+  String get asUseIt => '\n\nÚselo en ';
 
   @override
   String asToGen(Object app_name) {

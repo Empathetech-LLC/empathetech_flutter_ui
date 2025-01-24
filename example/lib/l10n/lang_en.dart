@@ -168,8 +168,11 @@ class LangEn extends Lang {
 
   @override
   String asSavedTo(Object path) {
-    return 'Your configuration has been saved to $path\n\nUse it on ';
+    return 'Your configuration has been saved to $path';
   }
+
+  @override
+  String get asUseIt => '\n\nUse it on ';
 
   @override
   String asToGen(Object app_name) {

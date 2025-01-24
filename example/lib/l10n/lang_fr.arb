@@ -76,7 +76,8 @@
 
   "asPageTitle": "Archiviste",
 
-  "asSavedTo": "Votre configuration a été enregistrée dans {path}\n\nUtilisez-le sur ",
+  "asSavedTo": "Votre configuration a été enregistrée dans {path}",
+  "asUseIt": "\n\nUtilisez-le sur ",
   "asToGen": " pour le bureau pour générer le code pour {app_name}",
   "asBadFile": "Le fichier n'a pas été enregistré comme ",
   
