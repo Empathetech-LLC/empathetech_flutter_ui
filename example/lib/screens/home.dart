@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -76,8 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool colorSettings = true;
   bool imageSettings = true;
 
-  late final TextEditingController flutterPathControl =
-      TextEditingController(text: homePath);
+  late final TextEditingController flutterPathControl = TextEditingController();
 
   bool showAdvanced = false;
 
@@ -479,50 +479,84 @@ class _HomeScreenState extends State<HomeScreen> {
             // Flutter path picker
             Visibility(
               visible: isDesktop,
-              child: EzScrollView(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
-                scrollDirection: Axis.horizontal,
-                reverseHands: true,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Text
-                  ConstrainedBox(
-                    constraints: ezTextFieldConstraints(context),
-                    child: TextFormField(
-                      controller: flutterPathControl,
-                      readOnly: !canGen,
-                      textAlign: TextAlign.start,
-                      maxLines: 1,
-                      validator: (String? path) =>
-                          (path == null || path.isEmpty)
-                              ? l10n.csPathRequired
-                              : null,
-                      autovalidateMode: AutovalidateMode.onUnfocus,
-                      decoration: InputDecoration(
-                          hintText:
-                              (isDesktop && platform == TargetPlatform.windows)
+                  // Title
+                  EzText(
+                    l10n.csFlutterPath,
+                    style: textTheme.titleLarge,
+                    textAlign: TextAlign.start,
+                  ),
+
+                  // Picker
+                  EzScrollView(
+                    mainAxisSize: MainAxisSize.min,
+                    scrollDirection: Axis.horizontal,
+                    reverseHands: true,
+                    children: <Widget>[
+                      // Text box
+                      ConstrainedBox(
+                        constraints: ezTextFieldConstraints(context),
+                        child: TextFormField(
+                          controller: flutterPathControl,
+                          readOnly: !canGen,
+                          textAlign: TextAlign.start,
+                          maxLines: 1,
+                          validator: (String? path) =>
+                              (path == null || path.isEmpty)
+                                  ? l10n.csPathRequired
+                                  : null,
+                          autovalidateMode: AutovalidateMode.onUnfocus,
+                          decoration: InputDecoration(
+                              hintText: (isDesktop &&
+                                      platform == TargetPlatform.windows)
                                   ? 'example_path\\flutter\\bin'
                                   : 'example_path/flutter/bin'),
-                    ),
+                        ),
+                      ),
+                      rowMargin,
+
+                      // Browse
+                      IconButton(
+                        onPressed: () async {
+                          final String? selectedDirectory =
+                              await FilePicker.platform.getDirectoryPath();
+
+                          if (selectedDirectory != null) {
+                            setState(() =>
+                                flutterPathControl.text = selectedDirectory);
+                          }
+                        },
+                        icon: EzIcon(PlatformIcons(context).folderOpen),
+                      ),
+                    ],
                   ),
-                  rowMargin,
+                  separator,
 
-                  // Browse
-                  IconButton(
-                    onPressed: () async {
-                      final String? selectedDirectory =
-                          await FilePicker.platform.getDirectoryPath();
-
-                      if (selectedDirectory != null) {
-                        setState(
-                            () => flutterPathControl.text = selectedDirectory);
-                      }
-                    },
-                    icon: EzIcon(PlatformIcons(context).folderOpen),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Flexible(
+                        child: EzText(
+                          l10n.csNotInstalled,
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      spacer,
+                      EzElevatedIconButton(
+                        onPressed: () => launchUrl(Uri.parse(installFlutter)),
+                        icon: EzIcon(Icons.computer),
+                        label: Lang.of(context)!.rsInstall,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            spacer,
+            divider,
 
             // Advanced settings //
 
