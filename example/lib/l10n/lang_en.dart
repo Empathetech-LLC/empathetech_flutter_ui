@@ -95,6 +95,9 @@ class LangEn extends Lang {
   String get csFlutterPath => 'Flutter path';
 
   @override
+  String get csNoSpaces => 'Path cannot have spaces';
+
+  @override
   String get csNotInstalled => 'Not installed?';
 
   @override

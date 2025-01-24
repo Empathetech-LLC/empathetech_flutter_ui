@@ -260,6 +260,12 @@ abstract class Lang {
   /// **'Flutter path'**
   String get csFlutterPath;
 
+  /// No description provided for @csNoSpaces.
+  ///
+  /// In en, this message translates to:
+  /// **'Path cannot have spaces'**
+  String get csNoSpaces;
+
   /// No description provided for @csNotInstalled.
   ///
   /// In en, this message translates to:

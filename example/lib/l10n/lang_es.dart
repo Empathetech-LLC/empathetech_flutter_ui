@@ -95,6 +95,9 @@ class LangEs extends Lang {
   String get csFlutterPath => 'Flutter ruta';
 
   @override
+  String get csNoSpaces => 'La ruta no puede tener espacios';
+
+  @override
   String get csNotInstalled => '¿No está instalado?';
 
   @override

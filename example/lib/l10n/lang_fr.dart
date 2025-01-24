@@ -96,6 +96,9 @@ class LangFr extends Lang {
   String get csFlutterPath => 'Flutter chemin';
 
   @override
+  String get csNoSpaces => 'Le chemin ne peut pas contenir d\'espaces';
+
+  @override
   String get csNotInstalled => 'N\'est pas installé?';
 
   @override

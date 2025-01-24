@@ -38,6 +38,7 @@
   "csHereHint": "Ouvrir un générateur de palette de couleurs en ligne",
 
   "csFlutterPath": "Flutter chemin",
+  "csNoSpaces": "Le chemin ne peut pas contenir d'espaces",
   "csNotInstalled": "N'est pas installé?",
   "csPathRequired": "Chemin requis. Impossible d'utiliser le dossier racine.",
   "csBadPath": "Chemin invalide",

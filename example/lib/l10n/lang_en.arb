@@ -38,6 +38,7 @@
   "csHereHint": "Open an online color scheme builder",
 
   "csFlutterPath": "Flutter path",
+  "csNoSpaces": "Path cannot have spaces",
   "csNotInstalled": "Not installed?",
   "csPathRequired": "Path required. Cannot use root folder.",
   "csBadPath": "Invalid path",
