@@ -70,7 +70,7 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
         // Label
         EzText(
           l10n.ssThemeMode,
-          style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
+          style: widget.labelStyle,
           textAlign: TextAlign.center,
         ),
         EzMargin(),
