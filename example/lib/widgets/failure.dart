@@ -135,15 +135,14 @@ class DeleteOption extends StatelessWidget {
       );
 }
 
+const String installFlutter = 'https://docs.flutter.dev/get-started/install';
+
 class LinkOption extends StatelessWidget {
   /// [TextStyle] for 'would you like to...'
   final TextStyle? style;
 
   /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
   const LinkOption(this.style, {super.key});
-
-  static const String installFlutter =
-      'https://docs.flutter.dev/get-started/install';
 
   @override
   Widget build(BuildContext context) => Column(
