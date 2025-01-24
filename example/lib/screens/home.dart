@@ -52,8 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final String homePath = isDesktop
       ? (platform == TargetPlatform.windows)
-          ? '${Platform.environment['UserProfile']}\\Documents'
-          : '${Platform.environment['HOME']}/Documents'
+          ? Platform.environment['UserProfile'] ?? ''
+          : Platform.environment['HOME'] ?? ''
+      : '';
+
+  late final String docsPath = isDesktop
+      ? (platform == TargetPlatform.windows)
+          ? '$homePath\\Documents'
+          : '$homePath/Documents'
       : '';
 
   final TextEditingController nameController = TextEditingController();
@@ -82,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showAdvanced = false;
 
   late final TextEditingController workPathControl =
-      TextEditingController(text: homePath);
+      TextEditingController(text: docsPath);
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -134,11 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await Future<void>.delayed(ezReadingTime(badPath));
 
     // Re-enable interaction
-    setState(() {
-      controller.text = homePath;
-
-      canGen = true;
-    });
+    setState(() => canGen = true);
 
     return false;
   }
@@ -484,10 +486,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // Title
-                  EzText(
-                    l10n.csFlutterPath,
-                    style: textTheme.titleLarge,
-                    textAlign: TextAlign.start,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Flexible(
+                        child: EzText(
+                          l10n.csFlutterPath,
+                          style: textTheme.titleLarge,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      EzToolTipper(message: l10n.csNoSpaces),
+                    ],
                   ),
 
                   // Picker
@@ -522,11 +532,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       IconButton(
                         onPressed: () async {
                           final String? selectedDirectory =
-                              await FilePicker.platform.getDirectoryPath();
+                              await FilePicker.platform.getDirectoryPath(
+                                  dialogTitle: l10n.csFlutterPath);
 
                           if (selectedDirectory != null) {
-                            setState(() =>
-                                flutterPathControl.text = selectedDirectory);
+                            setState(() => flutterPathControl.text =
+                                '$homePath${selectedDirectory.split(homePath)[1]}');
                           }
                         },
                         icon: EzIcon(PlatformIcons(context).folderOpen),
@@ -643,8 +654,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .getDirectoryPath();
 
                                 if (selectedDirectory != null) {
-                                  setState(() =>
-                                      workPathControl.text = selectedDirectory);
+                                  setState(() => workPathControl.text =
+                                      '$homePath${selectedDirectory.split(homePath)[1]}');
                                 }
                               },
                               icon: EzIcon(PlatformIcons(context).folderOpen),
@@ -917,7 +928,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           showAdvanced = false;
 
-          workPathControl.text = homePath;
+          workPathControl.text = docsPath;
 
           showCopyright = false;
           removeCopyright = false;
