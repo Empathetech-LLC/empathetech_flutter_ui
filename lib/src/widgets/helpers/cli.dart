@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 
 class EzCLI extends StatefulWidget {
   /// [ezCmd] passthrough
-  final TargetPlatform? platform;
+  final String dir;
 
   /// [ezCmd] passthrough
-  final String dir;
+  final TargetPlatform platform;
 
   /// [ezCmd] passthrough
   final void Function() onSuccess;
@@ -32,8 +32,8 @@ class EzCLI extends StatefulWidget {
   /// Simple interface for running CLI commands via [ezCmd]
   const EzCLI({
     super.key,
-    this.platform,
     required this.dir,
+    required this.platform,
     required this.onSuccess,
     required this.onFailure,
     this.onError,
