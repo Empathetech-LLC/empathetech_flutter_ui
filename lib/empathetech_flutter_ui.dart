@@ -17,7 +17,7 @@ export 'src/consts/google_fonts.dart';
 // Functions //
 
 // General
-export 'src/functions/cli.dart';
+export 'src/functions/cmd.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
@@ -52,6 +52,7 @@ export 'src/sample_screens/text_settings.dart';
 
 // Helpers
 export 'src/widgets/helpers/checkbox.dart';
+export 'src/widgets/helpers/cli.dart';
 export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';

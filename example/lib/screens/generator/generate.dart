@@ -80,7 +80,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// The only way to begin
   /// Is by beginning
   Future<void> genStuff() async {
-    await ezCLI(
+    await ezCmd(
       'flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
       onSuccess: delStuff,
@@ -127,7 +127,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     const String dirs = 'lib test';
 
     // Files
-    await ezCLI(
+    await ezCmd(
       'rm -f $files',
       winCMD: 'del /f /q $files',
       platform: platform,
@@ -138,7 +138,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     );
 
     // Folders
-    await ezCLI(
+    await ezCmd(
       'rm -rf $dirs',
       winCMD: 'rmdir /s /q $dirs',
       platform: platform,
@@ -375,7 +375,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                       message: l10n.gsFirstRun,
                     );
 
-                    await ezCLI(
+                    await ezCmd(
                       'flutter run -d ${device()}',
                       dir: projDir,
                       onSuccess: () =>

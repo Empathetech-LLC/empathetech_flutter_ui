@@ -72,7 +72,7 @@ class DeleteOption extends StatelessWidget {
   /// [TextStyle] for 'would you like to...'
   final TextStyle? style;
 
-  /// Optional [ezCLI] readout passthrough
+  /// Optional [ezCmd] readout passthrough
   final ValueNotifier<String>? readout;
 
   /// Iterable [Widget] containing a [EzElevatedIconButton] for wiping the partial build
@@ -99,7 +99,7 @@ class DeleteOption extends StatelessWidget {
           ),
           spacer,
           EzElevatedIconButton(
-            onPressed: () => ezCLI(
+            onPressed: () => ezCmd(
               'rm -rf $appName',
               winCMD: 'rmdir /s /q $appName',
               platform: platform,

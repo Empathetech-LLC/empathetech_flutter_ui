@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 
 /// Run a command line interface [cmd] on Desktop [platform]s
 /// And track the stdout/err with [debug] and [readout]
-Future<void> ezCLI(
+Future<void> ezCmd(
   String cmd, {
   String? winCMD,
   TargetPlatform? platform,

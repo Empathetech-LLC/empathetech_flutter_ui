@@ -159,7 +159,7 @@ If you have a dream that wants to be made a reality, try Open UI!
     const String localeDir = 'localized_readme';
 
     // Make localized dir
-    await ezCLI(
+    await ezCmd(
       'mkdir $localeDir',
       dir: dir,
       onSuccess: doNothing,
@@ -475,7 +475,7 @@ Future<void> genLib({
 
   // Directories //
 
-  await ezCLI(
+  await ezCmd(
     'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
     winCMD:
         'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings',
@@ -1227,7 +1227,7 @@ Future<void> genL10n({
       : getArbDir(config)!;
 
   // Make dir
-  await ezCLI(
+  await ezCmd(
     'mkdir $arbPath',
     dir: dir,
     onSuccess: doNothing,
@@ -1307,7 +1307,7 @@ Future<void> genVSCode({
   if (config.vsCodeConfig == null) return;
 
   // Make dir
-  await ezCLI(
+  await ezCmd(
     'mkdir .vscode',
     dir: dir,
     onSuccess: doNothing,
@@ -1345,7 +1345,7 @@ Future<void> genIntegrationTests({
 
   // Make dir(s) //
 
-  await ezCLI(
+  await ezCmd(
     'mkdir test_driver integration_test',
     dir: dir,
     onSuccess: doNothing,
@@ -1490,7 +1490,7 @@ done
 flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" --target="\$project_dir/integration_test/test.dart" \$device
 ''');
 
-    await ezCLI(
+    await ezCmd(
       'chmod a+x integration_test/run_int_tests.sh',
       winCMD: 'attrib +x integration_test\\run_int_tests.sh',
       platform: platform,
