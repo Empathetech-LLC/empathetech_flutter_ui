@@ -535,15 +535,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   separator,
 
-                  Row(
+                  EzScrollView(
                     mainAxisSize: MainAxisSize.min,
+                    scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      Flexible(
-                        child: EzText(
-                          l10n.csNotInstalled,
-                          style: textTheme.bodyLarge,
-                          textAlign: TextAlign.start,
-                        ),
+                      EzText(
+                        l10n.csNotInstalled,
+                        textAlign: TextAlign.start,
                       ),
                       spacer,
                       EzElevatedIconButton(
@@ -556,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            divider,
+            separator,
 
             // Advanced settings //
 
@@ -601,40 +599,57 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Work path picker
                   Visibility(
                     visible: isDesktop,
-                    child: EzScrollView(
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      scrollDirection: Axis.horizontal,
-                      reverseHands: true,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Text
-                        ConstrainedBox(
-                          constraints: ezTextFieldConstraints(context),
-                          child: TextFormField(
-                            controller: workPathControl,
-                            readOnly: !canGen,
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            validator: (String? path) =>
-                                (path == null || path.isEmpty)
-                                    ? l10n.csPathRequired
-                                    : null,
-                            autovalidateMode: AutovalidateMode.onUnfocus,
+                        // Title
+                        EzText(
+                          l10n.csOutputPath,
+                          style: textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.start,
                         ),
-                        rowMargin,
 
-                        // Browse
-                        IconButton(
-                          onPressed: () async {
-                            final String? selectedDirectory =
-                                await FilePicker.platform.getDirectoryPath();
+                        // Picker
+                        EzScrollView(
+                          mainAxisSize: MainAxisSize.min,
+                          scrollDirection: Axis.horizontal,
+                          reverseHands: true,
+                          children: <Widget>[
+                            // Text
+                            ConstrainedBox(
+                              constraints: ezTextFieldConstraints(context),
+                              child: TextFormField(
+                                controller: workPathControl,
+                                readOnly: !canGen,
+                                textAlign: TextAlign.start,
+                                maxLines: 1,
+                                validator: (String? path) =>
+                                    (path == null || path.isEmpty)
+                                        ? l10n.csPathRequired
+                                        : null,
+                                autovalidateMode: AutovalidateMode.onUnfocus,
+                              ),
+                            ),
+                            rowMargin,
 
-                            if (selectedDirectory != null) {
-                              setState(() =>
-                                  workPathControl.text = selectedDirectory);
-                            }
-                          },
-                          icon: EzIcon(PlatformIcons(context).folderOpen),
+                            // Browse
+                            IconButton(
+                              onPressed: () async {
+                                final String? selectedDirectory =
+                                    await FilePicker.platform
+                                        .getDirectoryPath();
+
+                                if (selectedDirectory != null) {
+                                  setState(() =>
+                                      workPathControl.text = selectedDirectory);
+                                }
+                              },
+                              icon: EzIcon(PlatformIcons(context).folderOpen),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -706,7 +721,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            showAdvanced ? divider : separator,
+            divider,
 
             // Make it so //
 
