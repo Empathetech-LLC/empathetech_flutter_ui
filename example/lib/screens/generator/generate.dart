@@ -40,27 +40,33 @@ class _GenerateScreenState extends State<GenerateScreen> {
   String? failureMessage;
   EzRichText? richFailureMessage;
 
-  /// Quantum computing
+  /// Quantum supremacy achieved
   bool? showDelete = true;
 
   late final TargetPlatform platform = getBasePlatform(context);
-
-  late final String workDir = widget.config.genPath!;
-  late final String projDir = platform == TargetPlatform.windows
-      ? '$workDir\\${widget.config.appName}'
-      : '$workDir/${widget.config.appName}';
+  late final bool isWindows = platform == TargetPlatform.windows;
 
   String device() {
     if (platform == TargetPlatform.linux) {
       return 'linux';
     } else if (platform == TargetPlatform.macOS) {
       return 'macos';
-    } else if (platform == TargetPlatform.windows) {
+    } else if (isWindows) {
       return 'windows';
     } else {
       return 'chrome';
     }
   }
+
+  late final String workDir = widget.config.workPath!;
+
+  late final String projDir = isWindows
+      ? '$workDir\\${widget.config.appName}'
+      : '$workDir/${widget.config.appName}';
+
+  late final String flutterPath = isWindows
+      ? '${widget.config.flutterPath}\\'
+      : '${widget.config.flutterPath}/';
 
   ValueNotifier<String> readout = ValueNotifier<String>('');
   bool showReadout = false;
@@ -81,7 +87,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Is by beginning
   Future<void> genStuff() async {
     await ezCmd(
-      'flutter create --org ${widget.config.domainName} ${widget.config.appName}',
+      '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
       onSuccess: delStuff,
       onFailure: (String message) {
@@ -277,7 +283,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       ezLog('flutter clean...', buffer: readout);
       runResult = await Process.run(
-        'flutter',
+        '${flutterPath}flutter',
         <String>['clean'],
         runInShell: true,
         workingDirectory: projDir,
@@ -287,7 +293,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       ezLog('flutter upgrade...', buffer: readout);
       runResult = await Process.run(
-        'flutter',
+        '${flutterPath}flutter',
         <String>[
           'pub',
           'upgrade',
@@ -301,7 +307,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
       ezLog('flutter tighten...', buffer: readout);
       runResult = await Process.run(
-        'flutter',
+        '${flutterPath}flutter',
         <String>[
           'pub',
           'upgrade',
@@ -318,7 +324,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
       if (widget.config.l10nConfig != null) {
         ezLog('flutter gen-l10n...', buffer: readout);
         runResult = await Process.run(
-          'flutter',
+          '${flutterPath}flutter',
           <String>['gen-l10n'],
           runInShell: true,
           workingDirectory: projDir,
@@ -360,7 +366,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 SuccessHeader(
                   textTheme: textTheme,
                   message:
-                      '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.genPath}',
+                      '${widget.config.appName} ${l10n.gsIsReadyIn}\n${widget.config.workPath}',
                 ),
                 const EzSeparator(),
                 RunOption(
@@ -376,7 +382,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                     );
 
                     await ezCmd(
-                      'flutter run -d ${device()}',
+                      '${flutterPath}flutter run -d ${device()}',
                       dir: projDir,
                       onSuccess: () =>
                           setState(() => genState = GeneratorState.successful),
