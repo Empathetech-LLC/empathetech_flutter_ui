@@ -5,13 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [8.0.0] - 2025-01-99
 ### Updated
 - Oops, I did it again...
-  - "Honestly, pretty much everything" (Empathetech, version [7.0.0], 2024-09-06)
+  - "Honestly, pretty much everything" (Empathetech, v7: Sep 2024)
 - Summary
   - Standardized naming
     - Every method and class that isn't a direct alias has been labeled ez/Ez
   - Even more comments
     - Just about every method, class, and parameter has a doc comment
-  - Lots of [helper](lib/src/widgets/helpers/) Widgets to streamline creating EzConfig responsive layouts
+  - Lots of helper Widgets to streamline creating EzConfig responsive layouts
   - While making EAG (below) and comment auditing, gave some old code some TLC. Things with known breaking changes...
     - EzAlertDialog
     - Some EzConfig keys (names)
@@ -26,8 +26,8 @@ All notable changes to this project will be documented in this file.
     - Open UI now has it's own l10n library as well
 - Open UI version tracking
   - And a FABulous Widget to go with it
-- [ezCLI](lib/src/functions/cli.dart)
-- Lots of text helper [functions](lib/src/functions/text.dart)
+- ezCmd
+- Lots of text helper functions
 
 ## [7.3.1] - 2024-10-19
 ### Updated
