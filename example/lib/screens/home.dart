@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           platform == TargetPlatform.macOS ||
           platform == TargetPlatform.windows);
 
-  late final String defaultPath = isDesktop
+  late final String homeEnv = isDesktop
       ? (platform == TargetPlatform.windows)
           ? '${Platform.environment['UserProfile']}\\Documents'
           : '${Platform.environment['HOME']}/Documents'
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showAdvanced = false;
 
   late final TextEditingController pathController =
-      TextEditingController(text: defaultPath);
+      TextEditingController(text: homeEnv);
 
   bool showCopyright = false;
   bool removeCopyright = false;
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Re-enable interaction
     setState(() {
-      pathController.text = defaultPath;
+      pathController.text = homeEnv;
 
       canGen = true;
     });
@@ -804,7 +804,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           showAdvanced = false;
 
-          pathController.text = defaultPath;
+          pathController.text = homeEnv;
 
           showCopyright = false;
           removeCopyright = false;
