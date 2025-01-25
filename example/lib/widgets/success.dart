@@ -6,6 +6,7 @@
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -78,21 +79,28 @@ class RunOption extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          EzText(
-            Lang.of(context)!.rsWouldYou,
-            style: style,
-            textAlign: TextAlign.center,
-          ),
-          const EzSpacer(),
-          EzElevatedIconButton(
-            onPressed: emulate,
-            icon: EzIcon(PlatformIcons(context).playArrowSolid),
-            label: Lang.of(context)!.rsRun,
-          ),
-        ],
-      );
+  Widget build(BuildContext context) {
+    final bool isMac =
+        !kIsWeb && getBasePlatform(context) == TargetPlatform.macOS;
+
+    return isMac
+        ? const SizedBox.shrink()
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              EzText(
+                Lang.of(context)!.rsWouldYou,
+                style: style,
+                textAlign: TextAlign.center,
+              ),
+              const EzSpacer(),
+              EzElevatedIconButton(
+                onPressed: emulate,
+                icon: EzIcon(PlatformIcons(context).playArrowSolid),
+                label: Lang.of(context)!.rsRun,
+              ),
+            ],
+          );
+  }
 }
