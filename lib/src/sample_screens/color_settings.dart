@@ -121,7 +121,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             style: theme.textTheme.labelLarge,
             textAlign: TextAlign.center,
           ),
-          EzSpacer(space: EzConfig.get(marginKey)),
+          EzMargin(),
 
           // Mode switch
           SegmentedButton<String>(
