@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       : (platform == TargetPlatform.linux ||
           platform == TargetPlatform.macOS ||
           platform == TargetPlatform.windows);
+  late final bool isMac = isDesktop && platform == TargetPlatform.macOS;
 
   late final String homePath = isDesktop
       ? (platform == TargetPlatform.windows)
@@ -188,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
         await EzConfig.loadConfig(config.appDefaults);
 
         if (config.flutterPath != null &&
+            isMac &&
             await Directory(config.flutterPath!).exists()) {
           flutterPathControl.text = config.flutterPath!;
         }
@@ -480,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Flutter path picker
             Visibility(
-              visible: isDesktop,
+              visible: isMac,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -569,7 +571,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            separator,
+            if (isMac) separator,
 
             // Advanced settings //
 
@@ -740,7 +742,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            divider,
+            (isMac || showAdvanced) ? divider : separator,
 
             // Make it so //
 
@@ -763,7 +765,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               EmailValidator.validate(
                                   supportEmailController.text)) &&
                           (!isDesktop ||
-                              (await checkPath(flutterPathControl) &&
+                              ((!isMac ||
+                                      await checkPath(flutterPathControl)) &&
                                   await checkPath(workPathControl))) &&
                           context.mounted) {
                         context.goNamed(
@@ -788,8 +791,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     key, EzConfig.get(key)),
                               ),
                             ),
-                            flutterPath:
-                                isDesktop ? flutterPathControl.text : null,
+                            flutterPath: isMac ? flutterPathControl.text : null,
                             workPath: isDesktop ? workPathControl.text : null,
                             copyright: (removeCopyright ||
                                     copyrightController.text.isEmpty)
@@ -839,7 +841,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             (supportEmailController.text.isEmpty ||
                                 EmailValidator.validate(
                                     supportEmailController.text)) &&
-                            await checkPath(flutterPathControl) &&
+                            (!isMac || await checkPath(flutterPathControl)) &&
                             await checkPath(workPathControl) &&
                             context.mounted) {
                           context.goNamed(
@@ -864,7 +866,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       key, EzConfig.get(key)),
                                 ),
                               ),
-                              flutterPath: flutterPathControl.text,
+                              flutterPath:
+                                  isMac ? flutterPathControl.text : null,
                               workPath: workPathControl.text,
                               copyright: (removeCopyright ||
                                       copyrightController.text.isEmpty)
