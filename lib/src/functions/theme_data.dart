@@ -69,7 +69,7 @@ ThemeData ezThemeData(Brightness brightness) {
     primaryIconTheme: iconData,
 
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: colorScheme.primary,
+      cursorColor: colorScheme.secondary,
       selectionColor: colorScheme.secondary.withValues(alpha: selectionOpacity),
       selectionHandleColor: colorScheme.primary,
     ),
