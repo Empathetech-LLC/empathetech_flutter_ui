@@ -138,11 +138,11 @@ String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
 // Getters //
 
 /// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? subHeadingStyle(TextTheme textTheme) =>
+TextStyle? ezSubHeadingStyle(TextTheme textTheme) =>
     textTheme.headlineLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
 /// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
-TextStyle? subTitleStyle(TextTheme textTheme) =>
+TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
     textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
 // Setters //

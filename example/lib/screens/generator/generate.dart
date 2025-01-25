@@ -32,7 +32,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
   late final Lang l10n = Lang.of(context)!;
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
-  late final TextStyle? subTitle = subTitleStyle(textTheme);
+  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
   // Define the build data //
 

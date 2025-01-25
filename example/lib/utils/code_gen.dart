@@ -957,7 +957,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
               separator,
               Text(
                 l10n.g404,
-                style: subTitleStyle(textTheme),
+                style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
               separator,
@@ -999,7 +999,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ${config.l10nConfig != null ? 'late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = subTitleStyle(textTheme);
+  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
   // Define the build data //
 

@@ -101,7 +101,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
                     appTitle,
-                    style: subTitleStyle(textTheme),
+                    style: ezSubTitleStyle(textTheme),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),
                     semanticsLabel: el10n.gOpenUIReleases,
@@ -109,7 +109,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   EzPlainText(text: l10n.asToGen(widget.config.appName)),
                 ]
               ],
-              style: subTitleStyle(textTheme),
+              style: ezSubTitleStyle(textTheme),
               textAlign: TextAlign.center,
             ),
           ),

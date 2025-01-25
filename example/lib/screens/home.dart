@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final EzSpacer rowMargin = EzMargin(vertical: false);
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = subTitleStyle(textTheme);
+  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
   late final EFUILang el10n = EFUILang.of(context)!;
   late final Lang l10n = Lang.of(context)!;

@@ -54,7 +54,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
               separator,
               Text(
                 l10n.g404,
-                style: subTitleStyle(textTheme),
+                style: ezSubTitleStyle(textTheme),
                 textAlign: TextAlign.center,
               ),
               separator,
