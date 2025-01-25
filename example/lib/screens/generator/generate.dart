@@ -64,9 +64,11 @@ class _GenerateScreenState extends State<GenerateScreen> {
       ? '$workDir\\${widget.config.appName}'
       : '$workDir/${widget.config.appName}';
 
-  late final String flutterPath = isWindows
-      ? '${widget.config.flutterPath}\\'
-      : '${widget.config.flutterPath}/';
+  late final String flutterPath = widget.config.flutterPath == null
+      ? ''
+      : isWindows
+          ? '${widget.config.flutterPath}\\'
+          : '${widget.config.flutterPath}/';
 
   ValueNotifier<String> readout = ValueNotifier<String>('');
   bool showReadout = false;
