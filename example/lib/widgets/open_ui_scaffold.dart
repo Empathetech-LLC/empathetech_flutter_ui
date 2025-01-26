@@ -62,8 +62,6 @@ class OpenUIScaffold extends StatelessWidget {
             (controller.isOpen) ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
         icon: const Icon(Icons.more_vert),
-        padding: EdgeInsets.zero,
-        style: IconButton.styleFrom(side: BorderSide.none),
       ),
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
