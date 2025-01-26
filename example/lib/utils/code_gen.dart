@@ -826,8 +826,6 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
     late final Widget options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
-        style: IconButton.styleFrom(side: BorderSide.none),
-        padding: EdgeInsets.zero,
         onPressed: () =>
             controller.isOpen ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
