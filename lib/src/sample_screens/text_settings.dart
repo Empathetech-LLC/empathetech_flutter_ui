@@ -350,7 +350,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               children: <Widget>[
                 // Minus
                 (currIconSize > minIconSize)
-                    ? IconButton(
+                    ? EzIconButton(
                         onPressed: () async {
                           currIconSize -= iconDelta;
                           await EzConfig.setDouble(iconSizeKey, currIconSize);
@@ -358,22 +358,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         },
                         tooltip:
                             '${l10n.tsDecrease} ${l10n.tsIconSize.toLowerCase()}',
-                        icon: Icon(
-                          PlatformIcons(context).remove,
-                          size: currIconSize,
-                        ),
+                        iconSize: currIconSize,
+                        icon: Icon(PlatformIcons(context).remove),
                       )
-                    : IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.outlineVariant),
-                          overlayColor: colorScheme.outline,
-                          shadowColor: Colors.transparent,
-                        ),
-                        onPressed: doNothing,
+                    : EzIconButton(
+                        enabled: false,
                         tooltip: l10n.gMinimum,
+                        iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).remove,
-                          size: currIconSize,
                           color: colorScheme.outline,
                         ),
                       ),
@@ -389,7 +382,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
                 // Plus
                 (currIconSize < maxIconSize)
-                    ? IconButton(
+                    ? EzIconButton(
                         onPressed: () async {
                           currIconSize += iconDelta;
                           await EzConfig.setDouble(iconSizeKey, currIconSize);
@@ -397,22 +390,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         },
                         tooltip:
                             '${l10n.tsIncrease} ${l10n.tsIconSize.toLowerCase()}',
-                        icon: Icon(
-                          PlatformIcons(context).add,
-                          size: currIconSize,
-                        ),
+                        iconSize: currIconSize,
+                        icon: Icon(PlatformIcons(context).add),
                       )
-                    : IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.outlineVariant),
-                          overlayColor: colorScheme.outline,
-                          shadowColor: Colors.transparent,
-                        ),
-                        onPressed: doNothing,
+                    : EzIconButton(
+                        enabled: false,
                         tooltip: l10n.gMaximum,
+                        iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).add,
-                          size: currIconSize,
                           color: colorScheme.outline,
                         ),
                       ),

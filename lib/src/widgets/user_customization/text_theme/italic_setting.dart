@@ -37,39 +37,23 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
   late bool isItalic = EzConfig.get(widget.configKey) ?? false;
 
-  // Define the build //
-
-  late final String tooltip = EFUILang.of(context)!.tsItalic;
-
-  void swapState() async {
-    isItalic = !isItalic;
-    await EzConfig.setBool(widget.configKey, isItalic);
-    widget.notifierCallback(isItalic);
-    setState(() {});
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return isItalic
-        ? IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_italic),
-          )
-        : IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.outline,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_italic_outlined),
-          );
+    return EzIconButton(
+      style: IconButton.styleFrom(
+        foregroundColor: isItalic ? colorScheme.primary : colorScheme.outline,
+      ),
+      onPressed: () async {
+        isItalic = !isItalic;
+        await EzConfig.setBool(widget.configKey, isItalic);
+        widget.notifierCallback(isItalic);
+        setState(() {});
+      },
+      tooltip: EFUILang.of(context)!.tsItalic,
+      iconSize: widget.size,
+      icon: const Icon(Icons.format_italic),
+    );
   }
 }

@@ -37,39 +37,23 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
   late bool isBold = EzConfig.get(widget.configKey) ?? false;
 
-  // Define the build //
-
-  late final String tooltip = EFUILang.of(context)!.tsBold;
-
-  void swapState() async {
-    isBold = !isBold;
-    await EzConfig.setBool(widget.configKey, isBold);
-    widget.notifierCallback(isBold);
-    setState(() {});
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return isBold
-        ? IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_bold),
-          )
-        : IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.outline,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_bold_outlined),
-          );
+    return EzIconButton(
+      style: IconButton.styleFrom(
+        foregroundColor: isBold ? colorScheme.primary : colorScheme.outline,
+      ),
+      onPressed: () async {
+        isBold = !isBold;
+        await EzConfig.setBool(widget.configKey, isBold);
+        widget.notifierCallback(isBold);
+        setState(() {});
+      },
+      tooltip: EFUILang.of(context)!.tsBold,
+      iconSize: widget.size,
+      icon: const Icon(Icons.format_bold_outlined),
+    );
   }
 }

@@ -37,39 +37,24 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
 
   late bool isUnderlined = EzConfig.get(widget.configKey) ?? false;
 
-  // Define the build //
-
-  late final String tooltip = EFUILang.of(context)!.tsUnderline;
-
-  void swapState() async {
-    isUnderlined = !isUnderlined;
-    await EzConfig.setBool(widget.configKey, isUnderlined);
-    widget.notifierCallback(isUnderlined);
-    setState(() {});
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return isUnderlined
-        ? IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_underline),
-          )
-        : IconButton(
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.outline,
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: EzIcon(Icons.format_underline_outlined),
-          );
+    return EzIconButton(
+      style: IconButton.styleFrom(
+        foregroundColor:
+            isUnderlined ? colorScheme.primary : colorScheme.outline,
+      ),
+      onPressed: () async {
+        isUnderlined = !isUnderlined;
+        await EzConfig.setBool(widget.configKey, isUnderlined);
+        widget.notifierCallback(isUnderlined);
+        setState(() {});
+      },
+      tooltip: EFUILang.of(context)!.tsUnderline,
+      iconSize: widget.size,
+      icon: const Icon(Icons.format_underline),
+    );
   }
 }

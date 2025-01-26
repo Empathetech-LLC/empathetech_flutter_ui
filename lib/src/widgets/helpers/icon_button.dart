@@ -170,7 +170,7 @@ class EzIconButton extends StatelessWidget {
       highlightColor: highlightColor,
       splashColor: splashColor,
       disabledColor: disabledColor,
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : doNothing,
       mouseCursor: mouseCursor,
       focusNode: focusNode,
       autofocus: autofocus,

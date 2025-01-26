@@ -125,7 +125,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
               // Minus
               if (widget.plusMinus) ...<Widget>[
                 (currValue > widget.min)
-                    ? IconButton(
+                    ? EzIconButton(
                         onPressed: () async {
                           currValue -= widget.delta;
                           controller.text = currValue.toString();
@@ -139,13 +139,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                             '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).remove),
                       )
-                    : IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.outlineVariant),
-                          overlayColor: colorScheme.outline,
-                          shadowColor: Colors.transparent,
-                        ),
-                        onPressed: doNothing,
+                    : EzIconButton(
+                        enabled: false,
                         tooltip: l10n.gMinimum,
                         icon: EzIcon(
                           PlatformIcons(context).remove,
@@ -217,7 +212,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
                 // Plus icon
                 (currValue < widget.max)
-                    ? IconButton(
+                    ? EzIconButton(
                         onPressed: () async {
                           currValue += widget.delta;
                           controller.text = currValue.toString();
@@ -231,13 +226,8 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                             '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).add),
                       )
-                    : IconButton(
-                        style: IconButton.styleFrom(
-                          side: BorderSide(color: colorScheme.outlineVariant),
-                          overlayColor: colorScheme.outline,
-                          shadowColor: Colors.transparent,
-                        ),
-                        onPressed: doNothing,
+                    : EzIconButton(
+                        enabled: false,
                         tooltip: l10n.gMaximum,
                         icon: EzIcon(
                           PlatformIcons(context).add,
