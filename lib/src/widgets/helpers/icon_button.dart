@@ -86,6 +86,10 @@ class EzIconButton extends StatelessWidget {
   /// [IconButton.style] passthrough
   final ButtonStyle? style;
 
+  /// Updates [style] to be grey when false
+  /// Overriding [style] makes [enabled] moot
+  final bool enabled;
+
   /// [IconButton.isSelected] passthrough
   final bool? isSelected;
 
@@ -120,6 +124,7 @@ class EzIconButton extends StatelessWidget {
     this.enableFeedback,
     this.constraints,
     this.style,
+    this.enabled = true,
     this.isSelected,
     this.selectedIcon,
     required this.icon,
@@ -128,7 +133,30 @@ class EzIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     late final double savedIconSized = EzConfig.get(iconSizeKey);
+
+    late final ButtonStyle buttonStyle = style ??
+        (enabled
+            ? IconButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                foregroundColor: colorScheme.primary,
+                overlayColor: colorScheme.primary,
+                side: BorderSide(color: colorScheme.primaryContainer),
+                iconSize: iconSize ?? savedIconSized,
+                alignment: Alignment.center,
+                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+              )
+            : IconButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                foregroundColor: colorScheme.outline,
+                overlayColor: colorScheme.outline,
+                shadowColor: Colors.transparent,
+                side: BorderSide(color: colorScheme.outlineVariant),
+                iconSize: iconSize ?? savedIconSized,
+                alignment: Alignment.center,
+                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+              ));
 
     return IconButton(
       iconSize: iconSize ?? savedIconSized,
@@ -149,17 +177,7 @@ class EzIconButton extends StatelessWidget {
       tooltip: tooltip,
       enableFeedback: enableFeedback,
       constraints: constraints,
-      style: style ??
-          IconButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            foregroundColor: colorScheme.primary,
-            disabledForegroundColor: colorScheme.outline,
-            overlayColor: colorScheme.primary,
-            side: BorderSide(color: colorScheme.primaryContainer),
-            iconSize: iconSize ?? savedIconSized,
-            alignment: Alignment.center,
-            padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-          ),
+      style: buttonStyle,
       isSelected: isSelected,
       selectedIcon: selectedIcon,
       icon: icon,
