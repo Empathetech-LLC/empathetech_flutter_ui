@@ -531,7 +531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       rowMargin,
 
                       // Browse
-                      IconButton(
+                      EzIconButton(
                         onPressed: () async {
                           final String? selectedDirectory =
                               await FilePicker.platform.getDirectoryPath(
@@ -590,7 +590,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   hint: showAdvanced ? el10n.gClose : el10n.gOpen,
                   button: true,
                   child: ExcludeSemantics(
-                    child: IconButton(
+                    child: EzIconButton(
                       onPressed: () =>
                           setState(() => showAdvanced = !showAdvanced),
                       icon: EzIcon(
@@ -653,7 +653,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             rowMargin,
 
                             // Browse
-                            IconButton(
+                            EzIconButton(
                               onPressed: () async {
                                 final String? selectedDirectory =
                                     await FilePicker.platform
@@ -1183,7 +1183,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       label: visible ? el10n.gClose : el10n.gOpen,
       button: true,
       child: ExcludeSemantics(
-        child: IconButton(
+        child: EzIconButton(
           onPressed: onHide,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
@@ -1196,7 +1196,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       hint: el10n.gRemove,
       button: true,
       child: ExcludeSemantics(
-        child: IconButton(
+        child: EzIconButton(
           onPressed: onRemove,
           icon: EzIcon(PlatformIcons(context).delete),
         ),
@@ -1329,7 +1329,7 @@ class _LicensePicker extends StatelessWidget {
       label: visible ? el10n.gClose : el10n.gOpen,
       button: true,
       child: ExcludeSemantics(
-        child: IconButton(
+        child: EzIconButton(
           onPressed: onHide,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,

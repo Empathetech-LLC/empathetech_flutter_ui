@@ -462,7 +462,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                 textAlign: TextAlign.center,
               ),
               EzMargin(vertical: false),
-              IconButton(
+              EzIconButton(
                 onPressed: () => setState(() => showReadout = !showReadout),
                 icon: EzIcon(
                   showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
