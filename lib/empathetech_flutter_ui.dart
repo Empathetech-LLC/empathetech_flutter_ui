@@ -57,7 +57,7 @@ export 'src/widgets/helpers/countdown_timer.dart';
 export 'src/widgets/helpers/dropdown_menu.dart';
 export 'src/widgets/helpers/elevated_button.dart';
 export 'src/widgets/helpers/feedback_button.dart';
-export 'src/widgets/helpers/icon.dart';
+export 'src/widgets/helpers/icon_button.dart';
 export 'src/widgets/helpers/menu_button.dart';
 export 'src/widgets/helpers/radio.dart';
 export 'src/widgets/helpers/sizing.dart';
