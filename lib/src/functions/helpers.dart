@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -62,5 +61,9 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
-/// Return the [double] scale factor for an [Image] based on [EzConfig]s [iconSizeKey]
-double ezImageScale() => min(EzConfig.get(iconSizeKey) / defaultIconSize, 1.0);
+/// Recommended size for an image
+/// Starts with 160.0; chosen by visual inspection
+/// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
+double ezImageSize(BuildContext context) =>
+    MediaQuery.textScalerOf(context).scale(160.0) *
+    ((EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize);
