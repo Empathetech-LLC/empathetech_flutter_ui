@@ -41,6 +41,18 @@ const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
 /// [BorderRadius].all([Radius.circular] => 64.0)
 const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(64.0));
 
+class EzBox extends BoxConstraints {
+  /// [BoxConstraints] with everything (min && max) set to [base]
+  const EzBox.sym(double base)
+      : super(minWidth: base, maxWidth: base, minHeight: base, maxHeight: base);
+
+  /// [BoxConstraints] with [minWidth] && [maxWidth] set to [base]
+  const EzBox.vertical(double base) : super(minHeight: base, maxHeight: base);
+
+  /// [BoxConstraints] with [minHeight] && [maxHeight] set to [base]
+  const EzBox.horizontal(double base) : super(minWidth: base, maxWidth: base);
+}
+
 /// threeQs = [widthOf] context * 0.75
 /// min: threeQs, max: min(threeQs, [smallBreakpoint])
 BoxConstraints ezTextFieldConstraints(BuildContext context) {
