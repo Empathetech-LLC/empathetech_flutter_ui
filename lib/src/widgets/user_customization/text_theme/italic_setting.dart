@@ -42,9 +42,17 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
   @override
   Widget build(BuildContext context) {
     return EzIconButton(
-      style: IconButton.styleFrom(
-        foregroundColor: isItalic ? colorScheme.primary : colorScheme.outline,
-      ),
+      style: isItalic
+          ? IconButton.styleFrom(
+              foregroundColor: colorScheme.primary,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            )
+          : IconButton.styleFrom(
+              foregroundColor: colorScheme.outline,
+              side: BorderSide(color: colorScheme.outlineVariant),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            ),
       onPressed: () async {
         isItalic = !isItalic;
         await EzConfig.setBool(widget.configKey, isItalic);

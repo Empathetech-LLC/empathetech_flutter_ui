@@ -42,9 +42,17 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
   @override
   Widget build(BuildContext context) {
     return EzIconButton(
-      style: IconButton.styleFrom(
-        foregroundColor: isBold ? colorScheme.primary : colorScheme.outline,
-      ),
+      style: isBold
+          ? IconButton.styleFrom(
+              foregroundColor: colorScheme.primary,
+              side: BorderSide(color: colorScheme.primaryContainer),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            )
+          : IconButton.styleFrom(
+              foregroundColor: colorScheme.outline,
+              side: BorderSide(color: colorScheme.outlineVariant),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            ),
       onPressed: () async {
         isBold = !isBold;
         await EzConfig.setBool(widget.configKey, isBold);
