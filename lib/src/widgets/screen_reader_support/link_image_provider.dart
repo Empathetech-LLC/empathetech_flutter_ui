@@ -27,7 +27,7 @@ class EzLinkImageProvider extends StatefulWidget {
   final String semanticLabel;
 
   /// What does it do?
-  final String semanticHint;
+  final String hint;
 
   /// Is it unique?
   final String? semanticValue;
@@ -92,7 +92,7 @@ class EzLinkImageProvider extends StatefulWidget {
     super.key,
     required this.image,
     required this.semanticLabel,
-    required this.semanticHint,
+    required this.hint,
     this.semanticValue,
     required this.tooltip,
     this.onTap,
@@ -153,7 +153,7 @@ class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
         value: widget.semanticValue,
         link: true,
         image: true,
-        hint: widget.semanticHint,
+        hint: widget.hint,
         child: ExcludeSemantics(
           child: Focus(
             focusNode: FocusNode(),

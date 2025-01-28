@@ -16,7 +16,7 @@ class LangEn extends Lang {
   String get csNamePreview => 'example_app';
 
   @override
-  String get csNameHint => 'Best App Ever';
+  String get csNameTip => 'Best App Ever';
 
   @override
   String get csBecomes => 'becomes';
@@ -35,7 +35,7 @@ class LangEn extends Lang {
   String get csPubPreview => 'Example Organization';
 
   @override
-  String get csPubHint => 'Or, Example Person';
+  String get csPubTip => 'Or, Example Person';
 
   @override
   String get csDescription => 'Description';
@@ -47,7 +47,7 @@ class LangEn extends Lang {
   String get csDomainName => 'Domain name';
 
   @override
-  String get csDomainHint => 'Backwards, it is';
+  String get csDomainTip => 'Backwards, it is';
 
   @override
   String get csInvalidDomain =>
@@ -57,7 +57,7 @@ class LangEn extends Lang {
   String get csSupportEmail => 'Support email';
 
   @override
-  String get csSupportHint =>
+  String get csSupportTip =>
       'If provided, the feedback system we use will be included.';
 
   @override
@@ -121,20 +121,19 @@ class LangEn extends Lang {
   String get csCopyright => 'Copyright notice';
 
   @override
-  String get csCopyrightHint =>
-      'Will be included at the top of every Dart file';
+  String get csCopyrightTip => 'Will be included at the top of every Dart file';
 
   @override
   String get csLicenseDocs => 'Open documentation on open source licenses';
 
   @override
-  String get csL10nHint => 'Localization (aka translations) config';
+  String get csL10nTip => 'Localization (aka translations) config';
 
   @override
-  String get csLintHint => 'Lint rules';
+  String get csLintTip => 'Lint rules';
 
   @override
-  String get csLaunchHint => 'Adds launch options to VS Code\'s debug menu';
+  String get csLaunchTip => 'Adds launch options to VS Code\'s debug menu';
 
   @override
   String get csSave => 'Save config';

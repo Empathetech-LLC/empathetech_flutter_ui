@@ -16,7 +16,7 @@ class LangEs extends Lang {
   String get csNamePreview => 'ejemplo_app';
 
   @override
-  String get csNameHint => 'La mejor aplicación de todas';
+  String get csNameTip => 'La mejor aplicación de todas';
 
   @override
   String get csBecomes => 'se convierte en';
@@ -35,7 +35,7 @@ class LangEs extends Lang {
   String get csPubPreview => 'Organización Ejemplo';
 
   @override
-  String get csPubHint => 'O, Persona Ejemplo';
+  String get csPubTip => 'O, Persona Ejemplo';
 
   @override
   String get csDescription => 'Descripción';
@@ -47,7 +47,7 @@ class LangEs extends Lang {
   String get csDomainName => 'Nombre de dominio';
 
   @override
-  String get csDomainHint => 'Revés, esta al';
+  String get csDomainTip => 'Revés, esta al';
 
   @override
   String get csInvalidDomain =>
@@ -57,7 +57,7 @@ class LangEs extends Lang {
   String get csSupportEmail => 'Correo de soporte';
 
   @override
-  String get csSupportHint =>
+  String get csSupportTip =>
       'Si se proporciona, se incluirá el sistema de comentarios que utilizamos.';
 
   @override
@@ -122,7 +122,7 @@ class LangEs extends Lang {
   String get csCopyright => 'Aviso de derechos de autor';
 
   @override
-  String get csCopyrightHint =>
+  String get csCopyrightTip =>
       'Se incluirá en la parte superior de cada archivo Dart';
 
   @override
@@ -130,14 +130,14 @@ class LangEs extends Lang {
       'Abrir documentación sobre licencias de código abierto';
 
   @override
-  String get csL10nHint =>
+  String get csL10nTip =>
       'Configuración de localización (también conocida como traducciones)';
 
   @override
-  String get csLintHint => 'Reglas de lint';
+  String get csLintTip => 'Reglas de lint';
 
   @override
-  String get csLaunchHint =>
+  String get csLaunchTip =>
       'Agrega opciones de lanzamiento al menú de depuración de VS Code';
 
   @override

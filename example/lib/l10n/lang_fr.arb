@@ -7,24 +7,24 @@
 
   "csAppName": "Nom de l'application",
   "csNamePreview": "exemple_app",
-  "csNameHint": "La meilleure application de toutes",
+  "csNameTip": "La meilleure application de toutes",
   "csBecomes": "devient",
   "csInvalidName": "Les lettres minuscules, les chiffres et les traits de soulignement sont autorisés.",
   "csYourApp": "votre application",
 
   "csPubName": "Nom de l'éditeur",
   "csPubPreview": "Organisation Exemple",
-  "csPubHint": "Ou, Personne Exemple",
+  "csPubTip": "Ou, Personne Exemple",
 
   "csDescription": "Description",
   "csDescPreview": "Une ou deux phrases sur votre application.",
 
   "csDomainName": "Nom de domaine",
-  "csDomainHint": "À l'envers, c'est",
+  "csDomainTip": "À l'envers, c'est",
   "csInvalidDomain": "'domain.name' seulement; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
 
   "csSupportEmail": "Courriel de soutien",
-  "csSupportHint": "Si fourni, le système de commentaires que nous utilisons sera inclus.",
+  "csSupportTip": "Si fourni, le système de commentaires que nous utilisons sera inclus.",
   "csInvalidEmail": "Courriel invalide",
 
   "csInclude": "Inclure",
@@ -49,15 +49,15 @@
   "csOutputPath": "Chemin de sortie",
 
   "csCopyright": "Avis de droits d'auteur",
-  "csCopyrightHint": "Sera inclus en haut de chaque fichier Dart",
+  "csCopyrightTip": "Sera inclus en haut de chaque fichier Dart",
 
   "csLicenseDocs": "Ouvrir la documentation sur les licences open source",
 
-  "csL10nHint": "Configuration de localisation (également connue sous le nom de traductions)",
+  "csL10nTip": "Configuration de localisation (également connue sous le nom de traductions)",
 
-  "csLintHint": "Règles de lint",
+  "csLintTip": "Règles de lint",
 
-  "csLaunchHint": "Ajoute des options de lancement au menu de débogage de VS Code",
+  "csLaunchTip": "Ajoute des options de lancement au menu de débogage de VS Code",
 
   "csSave": "Enregistrer la configuration",
   "csLoad": "Charger la configuration",

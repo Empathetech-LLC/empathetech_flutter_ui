@@ -16,7 +16,7 @@ class LangFr extends Lang {
   String get csNamePreview => 'exemple_app';
 
   @override
-  String get csNameHint => 'La meilleure application de toutes';
+  String get csNameTip => 'La meilleure application de toutes';
 
   @override
   String get csBecomes => 'devient';
@@ -35,7 +35,7 @@ class LangFr extends Lang {
   String get csPubPreview => 'Organisation Exemple';
 
   @override
-  String get csPubHint => 'Ou, Personne Exemple';
+  String get csPubTip => 'Ou, Personne Exemple';
 
   @override
   String get csDescription => 'Description';
@@ -47,7 +47,7 @@ class LangFr extends Lang {
   String get csDomainName => 'Nom de domaine';
 
   @override
-  String get csDomainHint => 'À l\'envers, c\'est';
+  String get csDomainTip => 'À l\'envers, c\'est';
 
   @override
   String get csInvalidDomain =>
@@ -57,7 +57,7 @@ class LangFr extends Lang {
   String get csSupportEmail => 'Courriel de soutien';
 
   @override
-  String get csSupportHint =>
+  String get csSupportTip =>
       'Si fourni, le système de commentaires que nous utilisons sera inclus.';
 
   @override
@@ -123,21 +123,21 @@ class LangFr extends Lang {
   String get csCopyright => 'Avis de droits d\'auteur';
 
   @override
-  String get csCopyrightHint => 'Sera inclus en haut de chaque fichier Dart';
+  String get csCopyrightTip => 'Sera inclus en haut de chaque fichier Dart';
 
   @override
   String get csLicenseDocs =>
       'Ouvrir la documentation sur les licences open source';
 
   @override
-  String get csL10nHint =>
+  String get csL10nTip =>
       'Configuration de localisation (également connue sous le nom de traductions)';
 
   @override
-  String get csLintHint => 'Règles de lint';
+  String get csLintTip => 'Règles de lint';
 
   @override
-  String get csLaunchHint =>
+  String get csLaunchTip =>
       'Ajoute des options de lancement au menu de débogage de VS Code';
 
   @override

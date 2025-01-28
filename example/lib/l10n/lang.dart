@@ -116,11 +116,11 @@ abstract class Lang {
   /// **'example_app'**
   String get csNamePreview;
 
-  /// No description provided for @csNameHint.
+  /// No description provided for @csNameTip.
   ///
   /// In en, this message translates to:
   /// **'Best App Ever'**
-  String get csNameHint;
+  String get csNameTip;
 
   /// No description provided for @csBecomes.
   ///
@@ -152,11 +152,11 @@ abstract class Lang {
   /// **'Example Organization'**
   String get csPubPreview;
 
-  /// No description provided for @csPubHint.
+  /// No description provided for @csPubTip.
   ///
   /// In en, this message translates to:
   /// **'Or, Example Person'**
-  String get csPubHint;
+  String get csPubTip;
 
   /// No description provided for @csDescription.
   ///
@@ -176,11 +176,11 @@ abstract class Lang {
   /// **'Domain name'**
   String get csDomainName;
 
-  /// No description provided for @csDomainHint.
+  /// No description provided for @csDomainTip.
   ///
   /// In en, this message translates to:
   /// **'Backwards, it is'**
-  String get csDomainHint;
+  String get csDomainTip;
 
   /// No description provided for @csInvalidDomain.
   ///
@@ -194,11 +194,11 @@ abstract class Lang {
   /// **'Support email'**
   String get csSupportEmail;
 
-  /// No description provided for @csSupportHint.
+  /// No description provided for @csSupportTip.
   ///
   /// In en, this message translates to:
   /// **'If provided, the feedback system we use will be included.'**
-  String get csSupportHint;
+  String get csSupportTip;
 
   /// No description provided for @csInvalidEmail.
   ///
@@ -308,11 +308,11 @@ abstract class Lang {
   /// **'Copyright notice'**
   String get csCopyright;
 
-  /// No description provided for @csCopyrightHint.
+  /// No description provided for @csCopyrightTip.
   ///
   /// In en, this message translates to:
   /// **'Will be included at the top of every Dart file'**
-  String get csCopyrightHint;
+  String get csCopyrightTip;
 
   /// No description provided for @csLicenseDocs.
   ///
@@ -320,23 +320,23 @@ abstract class Lang {
   /// **'Open documentation on open source licenses'**
   String get csLicenseDocs;
 
-  /// No description provided for @csL10nHint.
+  /// No description provided for @csL10nTip.
   ///
   /// In en, this message translates to:
   /// **'Localization (aka translations) config'**
-  String get csL10nHint;
+  String get csL10nTip;
 
-  /// No description provided for @csLintHint.
+  /// No description provided for @csLintTip.
   ///
   /// In en, this message translates to:
   /// **'Lint rules'**
-  String get csLintHint;
+  String get csLintTip;
 
-  /// No description provided for @csLaunchHint.
+  /// No description provided for @csLaunchTip.
   ///
   /// In en, this message translates to:
   /// **'Adds launch options to VS Code\'s debug menu'**
-  String get csLaunchHint;
+  String get csLaunchTip;
 
   /// No description provided for @csSave.
   ///

@@ -7,24 +7,24 @@
 
   "csAppName": "App name",
   "csNamePreview": "example_app",
-  "csNameHint": "Best App Ever",
+  "csNameTip": "Best App Ever",
   "csBecomes": "becomes",
   "csInvalidName": "Lowercase letters, numbers, and underscores are allowed.",
   "csYourApp": "your app",
 
   "csPubName": "Publisher name",
   "csPubPreview": "Example Organization",
-  "csPubHint": "Or, Example Person",
+  "csPubTip": "Or, Example Person",
 
   "csDescription": "Description",
   "csDescPreview": "One or two sentences about your app.",
 
   "csDomainName": "Domain name",
-  "csDomainHint": "Backwards, it is",
+  "csDomainTip": "Backwards, it is",
   "csInvalidDomain": "'domain.name' only; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
 
   "csSupportEmail": "Support email",
-  "csSupportHint": "If provided, the feedback system we use will be included.",
+  "csSupportTip": "If provided, the feedback system we use will be included.",
   "csInvalidEmail": "Invalid email",
 
   "csInclude": "Include",
@@ -49,15 +49,15 @@
   "csOutputPath": "Output path",
 
   "csCopyright": "Copyright notice",
-  "csCopyrightHint": "Will be included at the top of every Dart file",
+  "csCopyrightTip": "Will be included at the top of every Dart file",
 
   "csLicenseDocs": "Open documentation on open source licenses",
 
-  "csL10nHint": "Localization (aka translations) config",
+  "csL10nTip": "Localization (aka translations) config",
 
-  "csLintHint": "Lint rules",
+  "csLintTip": "Lint rules",
 
-  "csLaunchHint": "Adds launch options to VS Code's debug menu",
+  "csLaunchTip": "Adds launch options to VS Code's debug menu",
 
   "csSave": "Save config",
   "csLoad": "Load config",

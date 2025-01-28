@@ -249,10 +249,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: l10n.csAppName,
               tip: TextSpan(
                 children: <InlineSpan>[
-                  EzPlainText(text: l10n.csNameHint),
+                  EzPlainText(text: l10n.csNameTip),
                   EzPlainText(
                       text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
-                  EzPlainText(text: ezTitleToSnake(l10n.csNameHint)),
+                  EzPlainText(text: ezTitleToSnake(l10n.csNameTip)),
                 ],
                 style: textTheme.bodyLarge,
               ),
@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: l10n.csPubName,
-              tip: l10n.csPubHint,
+              tip: l10n.csPubTip,
               controller: pubController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) return el10n.gRequired;
@@ -323,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                EzToolTipper(message: l10n.csDomainHint),
+                EzToolTipper(message: l10n.csDomainTip),
               ],
             ),
             ConstrainedBox(
@@ -372,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _BasicField(
               textTheme: textTheme,
               title: l10n.csSupportEmail,
-              tip: l10n.csSupportHint,
+              tip: l10n.csSupportTip,
               controller: supportEmailController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) return null;
@@ -680,7 +680,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Copyright config
                   _AdvancedSettingsField(
                     title: l10n.csCopyright,
-                    tip: l10n.csCopyrightHint,
+                    tip: l10n.csCopyrightTip,
                     controller: copyrightController,
                     visible: showCopyright,
                     onHide: () =>
@@ -705,7 +705,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // l10n config
                   _AdvancedSettingsField(
                     title: 'l10n.yaml',
-                    tip: l10n.csL10nHint,
+                    tip: l10n.csL10nTip,
                     controller: l10nController,
                     visible: showL10n,
                     onHide: () => setState(() => showL10n = !showL10n),
@@ -718,7 +718,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Analysis options config
                   _AdvancedSettingsField(
                     title: 'analysis_options.yaml',
-                    tip: l10n.csLintHint,
+                    tip: l10n.csLintTip,
                     controller: analysisController,
                     visible: showAnalysis,
                     onHide: () => setState(() => showAnalysis = !showAnalysis),
@@ -731,7 +731,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // VS Code launch config
                   _AdvancedSettingsField(
                     title: '.vscode/launch.json',
-                    tip: l10n.csLaunchHint,
+                    tip: l10n.csLaunchTip,
                     controller: vscController,
                     visible: showVSC,
                     onHide: () => setState(() => showVSC = !showVSC),
