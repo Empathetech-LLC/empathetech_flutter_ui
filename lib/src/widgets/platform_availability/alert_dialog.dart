@@ -65,8 +65,8 @@ class EzAlertDialog extends PlatformAlertDialog {
 
           late final List<Widget>? actions = needsClose
               ? <Widget>[
+                  closeAction,
                   if (materialActions != null) ...materialActions!,
-                  closeAction
                 ]
               : materialActions;
 
