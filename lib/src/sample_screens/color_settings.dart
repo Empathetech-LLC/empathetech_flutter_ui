@@ -22,6 +22,9 @@ class EzColorSettings extends StatefulWidget {
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
+  /// Optional starting [EzSettingType] target
+  final EzSettingType? target;
+
   /// Empathetech color settings
   /// Recommended to use as a [Scaffold.body]
   const EzColorSettings({
@@ -46,6 +49,7 @@ class EzColorSettings extends StatefulWidget {
       lightSurfaceContainerKey,
       lightSurfaceTintKey,
     ],
+    this.target,
   });
 
   @override
@@ -63,12 +67,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   // Define the build data //
 
-  // Quick
-  static const String quick = 'quick';
-
-  // Advanced
-  static const String advanced = 'advanced';
-
   late final List<String> defaultList =
       isDark ? widget.darkStarterSet : widget.lightStarterSet;
 
@@ -81,7 +79,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
-  String currentTab = quick;
+  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
 
   late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
@@ -124,26 +122,26 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           EzMargin(),
 
           // Mode switch
-          SegmentedButton<String>(
-            segments: <ButtonSegment<String>>[
-              ButtonSegment<String>(
-                value: quick,
+          SegmentedButton<EzSettingType>(
+            segments: <ButtonSegment<EzSettingType>>[
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<String>(
-                value: advanced,
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <String>{currentTab},
+            selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) =>
+            onSelectionChanged: (Set<EzSettingType> selected) =>
                 setState(() => currentTab = selected.first),
           ),
           separator,
 
           // Core settings
-          if (currentTab == quick)
+          if (currentTab == EzSettingType.quick)
             _QuickColorSettings(
               l10n: l10n,
               isDark: isDark,

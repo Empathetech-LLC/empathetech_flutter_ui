@@ -26,6 +26,9 @@ class EzTextSettings extends StatelessWidget {
   /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   final bool showSpacing;
 
+  /// Optional starting [EzSettingType] target
+  final EzSettingType? target;
+
   /// Empathetech text settings
   /// Recommended to use as a [Scaffold.body]
   const EzTextSettings({
@@ -34,6 +37,7 @@ class EzTextSettings extends StatelessWidget {
     this.showOpacity = true,
     this.additionalBatchSettings,
     this.showSpacing = true,
+    this.target,
   });
 
   // Set the page title //
@@ -65,6 +69,7 @@ class EzTextSettings extends StatelessWidget {
         showOpacity: showOpacity,
         additionalBatchSettings: additionalBatchSettings,
         showSpacing: showSpacing,
+        target: target,
       ),
     );
   }
@@ -75,12 +80,14 @@ class _TextSettings extends StatefulWidget {
   final bool showOpacity;
   final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
+  final EzSettingType? target;
 
   const _TextSettings({
     required this.useImageDecoration,
     required this.showOpacity,
     required this.additionalBatchSettings,
     required this.showSpacing,
+    required this.target,
   });
 
   @override
@@ -97,10 +104,7 @@ class _TextSettingsState extends State<_TextSettings> {
 
   // Define the build data //
 
-  static const String quick = 'quick';
-  static const String advanced = 'advanced';
-
-  String currentTab = quick;
+  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
 
   @override
   void didChangeDependencies() {
@@ -119,26 +123,26 @@ class _TextSettingsState extends State<_TextSettings> {
           if (spacing > margin) EzSpacer(space: spacing - margin),
 
           // Mode selector
-          SegmentedButton<String>(
-            segments: <ButtonSegment<String>>[
-              ButtonSegment<String>(
-                value: quick,
+          SegmentedButton<EzSettingType>(
+            segments: <ButtonSegment<EzSettingType>>[
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<String>(
-                value: advanced,
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <String>{currentTab},
+            selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) =>
+            onSelectionChanged: (Set<EzSettingType> selected) =>
                 setState(() => currentTab = selected.first),
           ),
           const EzSpacer(),
 
           // Settings
-          if (currentTab == quick)
+          if (currentTab == EzSettingType.quick)
             _QuickTextSettings(
               widget.showOpacity,
               widget.additionalBatchSettings,
