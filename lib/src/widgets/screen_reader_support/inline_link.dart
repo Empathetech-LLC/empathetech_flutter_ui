@@ -32,12 +32,12 @@ class EzInlineLink extends WidgetSpan {
   /// [EzLink.url] passthrough
   final Uri? url;
 
-  /// [EzLink.semanticsLabel]
+  /// [EzLink.hint] passthrough
   /// Don't repeat [text] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// Message for screen readers when the parent [EzRichText] is focused
-  final String? richSemanticsLabel;
+  final String? richLabel;
 
   /// [EzLink.tooltip] passthrough
   final String? tooltip;
@@ -59,8 +59,8 @@ class EzInlineLink extends WidgetSpan {
     this.textAlign,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
-    this.richSemanticsLabel, // Not used here, but in EzRichText
+    required this.hint,
+    this.richLabel, // Not used here, but in EzRichText
     this.tooltip,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
@@ -76,7 +76,7 @@ class EzInlineLink extends WidgetSpan {
             padding: EdgeInsets.zero,
             onTap: onTap,
             url: url,
-            semanticsLabel: semanticsLabel,
+            hint: hint,
             tooltip: tooltip,
           ),
         );

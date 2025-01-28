@@ -41,15 +41,15 @@ class EzLink extends StatefulWidget {
 
   /// Message for screen readers
   /// Don't repeat [text] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// On hover/focus hint
-  /// Defaults to [semanticsLabel] (or [text])
+  /// Defaults to [hint] (or [text])
   final String? tooltip;
 
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a [tooltip]; if one is not provided, it will default to [semanticsLabel]
+  /// Always has a [tooltip]; if one is not provided, it will default to [hint]
   /// Automatically draws [text] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzLink(
     this.text, {
@@ -62,7 +62,7 @@ class EzLink extends StatefulWidget {
     this.padding,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    required this.hint,
     this.tooltip,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
@@ -98,10 +98,10 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.text}; ${widget.semanticsLabel}';
+    final String semantics = '${widget.text}; ${widget.hint}';
 
     return Tooltip(
-      message: widget.tooltip ?? widget.semanticsLabel,
+      message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
       child: Semantics(
         link: true,
@@ -162,15 +162,15 @@ class EzIconLink extends StatefulWidget {
 
   /// Message for screen readers
   /// Don't repeat [label] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// On hover/focus hint
-  /// Defaults to [semanticsLabel] (or [label])
+  /// Defaults to [hint] (or [label])
   final String? tooltip;
 
   /// [TextButton.icon] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a tool [tooltip]; if one is not provided, it will default to [semanticsLabel]
+  /// Always has a tool [tooltip]; if one is not provided, it will default to [hint]
   /// Highlights [label] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzIconLink({
     super.key,
@@ -183,7 +183,7 @@ class EzIconLink extends StatefulWidget {
     this.padding,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    required this.hint,
     this.tooltip,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
@@ -219,10 +219,10 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.label}; ${widget.semanticsLabel}';
+    final String semantics = '${widget.label}; ${widget.hint}';
 
     return Tooltip(
-      message: widget.tooltip ?? widget.semanticsLabel,
+      message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
       child: Semantics(
         link: true,

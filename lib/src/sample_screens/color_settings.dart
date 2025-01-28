@@ -391,7 +391,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         style: theme.textTheme.labelLarge!,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
-        semanticsLabel: l10n.gHowThisWorksHint,
+        hint: l10n.gHowThisWorksHint,
         tooltip: materialColorRoles,
       ),
     );
