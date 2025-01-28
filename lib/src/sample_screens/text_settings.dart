@@ -1034,7 +1034,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   editing = EzTextSettingType.display;
                   setState(() {});
                 },
-                semanticsLabel: l10n.tsLinkHint(display),
+                hint: l10n.tsLinkHint(display),
               ),
               EzPlainText(text: l10n.tsDisplayP2),
             ],
@@ -1062,7 +1062,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   editing = EzTextSettingType.headline;
                   setState(() {});
                 },
-                semanticsLabel: l10n.tsLinkHint(headline),
+                hint: l10n.tsLinkHint(headline),
               ),
               EzPlainText(text: l10n.tsHeadlineP2),
             ],
@@ -1090,7 +1090,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   editing = EzTextSettingType.title;
                   setState(() {});
                 },
-                semanticsLabel: l10n.tsLinkHint(title),
+                hint: l10n.tsLinkHint(title),
               ),
             ],
             textBackground: false,
@@ -1117,7 +1117,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   editing = EzTextSettingType.body;
                   setState(() {});
                 },
-                semanticsLabel: l10n.tsLinkHint(body),
+                hint: l10n.tsLinkHint(body),
               ),
               EzPlainText(text: l10n.tsBodyP2),
             ],
@@ -1145,7 +1145,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                   editing = EzTextSettingType.label;
                   setState(() {});
                 },
-                semanticsLabel: l10n.tsLinkHint(label),
+                hint: l10n.tsLinkHint(label),
               ),
               EzPlainText(text: l10n.tsLabelP2),
             ],

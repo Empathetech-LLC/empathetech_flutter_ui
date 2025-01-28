@@ -47,7 +47,7 @@ class EzToolTipper extends StatelessWidget {
 
             if (richMessage != null) {
               if (richMessage.runtimeType == EzInlineLink) {
-                message = (richMessage as EzInlineLink).semanticsLabel;
+                message = (richMessage as EzInlineLink).hint;
               } else if (richMessage.runtimeType == TextSpan) {
                 for (final InlineSpan child
                     in (richMessage as TextSpan).children!) {
@@ -62,7 +62,7 @@ class EzToolTipper extends StatelessWidget {
                       break;
                     case const (EzInlineLink):
                       final EzInlineLink linkSpan = child as EzInlineLink;
-                      message += linkSpan.richSemanticsLabel ?? linkSpan.text;
+                      message += linkSpan.richLabel ?? linkSpan.text;
                       break;
                     default:
                       break;

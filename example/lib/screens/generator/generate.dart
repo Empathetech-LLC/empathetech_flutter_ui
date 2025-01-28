@@ -106,7 +106,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
                   textAlign: TextAlign.center,
                   url: Uri.parse(
                       'https://github.com/Empathetech-LLC/empathetech_flutter_ui/tree/main/example/lib/screens/generator/generate.dart'),
-                  semanticsLabel: l10n.gsSeeNBelieveHint,
+                  hint: l10n.gsSeeNBelieveHint,
                 ),
               ],
               style: subTitle,

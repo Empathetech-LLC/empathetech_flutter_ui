@@ -462,7 +462,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: subTitle,
                   textAlign: TextAlign.start,
                   onTap: () => context.goNamed(settingsHomePath),
-                  semanticsLabel: el10n.ssNavHint,
+                  hint: el10n.ssNavHint,
                 ),
                 EzPlainText(
                     text: l10n
@@ -472,7 +472,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: subTitle,
                   textAlign: TextAlign.start,
                   url: Uri.parse('https://www.canva.com/colors/color-wheel/'),
-                  semanticsLabel: l10n.csHereHint,
+                  hint: l10n.csHereHint,
                 ),
               ],
               style: subTitle,
@@ -1344,7 +1344,7 @@ class _LicensePicker extends StatelessWidget {
         chooseALicense,
         textAlign: TextAlign.center,
         url: Uri.parse(chooseALicense),
-        semanticsLabel: l10n.csLicenseDocs,
+        hint: l10n.csLicenseDocs,
       ),
     );
 

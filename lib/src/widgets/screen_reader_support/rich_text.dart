@@ -85,7 +85,7 @@ class EzRichText extends StatelessWidget {
           break;
         case const (EzInlineLink):
           final EzInlineLink linkSpan = child as EzInlineLink;
-          label.write(linkSpan.richSemanticsLabel ?? linkSpan.text);
+          label.write(linkSpan.richLabel ?? linkSpan.text);
           break;
         default:
           break;
