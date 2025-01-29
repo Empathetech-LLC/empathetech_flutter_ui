@@ -159,7 +159,7 @@ Future<void> _mobileTests(
   await ezTouchText(tester, l10n.gClose);
 }
 
-/// Desktop (Linux, MacOS, Windows) sub-set of [testImageSetting]
+/// Desktop (Linux, macOS, Windows) sub-set of [testImageSetting]
 Future<void> _desktopTests(
   WidgetTester tester, {
   required Finder finder,

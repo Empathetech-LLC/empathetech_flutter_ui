@@ -194,7 +194,7 @@ class EzCupertinoAction extends StatelessWidget {
   final TextStyle? style;
 
   /// [EzTextButton] wrapper with custom styling for a [CupertinoAlertDialog]
-  /// Includes a [MouseCursor] layer for MacOS
+  /// Includes a [MouseCursor] layer for macOS
   const EzCupertinoAction({
     super.key,
     required this.text,

@@ -6,7 +6,7 @@
 <br>EFUI is a [Flutter](https://flutter.dev/) library for building highly accessible apps. EFUI simplifies...
 
 - **Platform availability**
-  - Thanks to Flutter, you can use EFUI to create on Android, iOS, Linux, MacOS, Windows and Web!
+  - Thanks to Flutter, you can use EFUI to create on Android, iOS, Linux, macOS, Windows and Web!
 - **Responsive design**
   - Here's the [definition](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design); check out [our site](https://www.empathetech.net/#/contribute) to see it in action.
 - **Screen reader support**
@@ -16,14 +16,15 @@
     - EFUI provides an elegant UX for full control over an app's appearance.
 - **Internationalization**
   - Empathetech apps have been translated to Spanish and French (so far).
-  - EFUI also provides the infrastructure for unlimited future translations.
+  - EFUI provides the infrastructure for unlimited future translations.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to a great car than just acceleration! If your translations are generated: disclose that. EFUI's translations started with A.I. and ended with H.I.
 - **Cost**
   - While we encourage [contributions](#contributing), EFUI is completely free and [open source](./LICENSE).
   - [Open UI](#usage) can also get you started with a professionally polished, empathetic app in one click\*
-    - \*There's some (less than 10 minutes) first time setup. After that, one click per app.
+    - \*There's some first time setup. After that, one click per app.
 
-<br><br>When built with EFUI, your apps can truly reach any audience. Let's make the internet a better place together!
+<br><br>When built with EFUI, your apps can truly reach any audience!
+<br>Let's build a better world together, bit x bit.
 
 ## <br>Table of Contents
 
@@ -36,7 +37,7 @@
 
 Is an app generator. It is available everywhere, and can give your idea an accessible, production ready foundation with one click.
 
-&nbsp;&nbsp;&nbsp;[Android](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[MacOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-windows.exe)
+&nbsp;&nbsp;&nbsp;[Android (Google Play)](https://play.google.com/store/apps/details?id=net.empathetech.open_ui)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Android (.apk)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-android.apk)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[iOS](https://apps.apple.com/us/app/open-ui/id6499560244)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (deb)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.deb)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Linux (rpm)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-linux.rpm)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[macOS](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-mac.zip)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Windows](https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases/download/8.0.0/open-ui-windows.exe)
 
 <br>*Mobile platforms simply save a configuration file that can be used on Desktop. Flutter must be [installed](https://docs.flutter.dev/get-started/install) (on Desktop) for code generation to work.
 
