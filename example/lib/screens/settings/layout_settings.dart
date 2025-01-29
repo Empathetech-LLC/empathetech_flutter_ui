@@ -16,5 +16,6 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: EFUILang.of(context)!.lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
+        fab: EzBackFAB(context),
       );
 }
