@@ -586,6 +586,20 @@ final GoRouter router = GoRouter(
               path: textSettingsPath,
               name: textSettingsPath,
               builder: (_, __) => const TextSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzSettingType.quick.path,
+                  name: 'text_${EzSettingType.quick.path}',
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.quick),
+                ),
+                GoRoute(
+                  path: EzSettingType.advanced.path,
+                  name: 'text_${EzSettingType.advanced.path}',
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.advanced),
+                ),
+              ],
             ),''' : ''}
             ${config.layoutSettings ? '''GoRoute(
               path: layoutSettingsPath,
@@ -596,6 +610,20 @@ final GoRouter router = GoRouter(
               path: colorSettingsPath,
               name: colorSettingsPath,
               builder: (_, __) => const ColorSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzSettingType.quick.path,
+                  name: 'color_${EzSettingType.quick.path}',
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.quick),
+                ),
+                GoRoute(
+                  path: EzSettingType.advanced.path,
+                  name: 'color_${EzSettingType.advanced.path}',
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.advanced),
+                ),
+              ],
             ),''' : ''}
             ${config.imageSettings ? '''GoRoute(
               path: imageSettingsPath,
@@ -1083,13 +1111,16 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class TextSettingsScreen extends StatelessWidget {
-  const TextSettingsScreen({super.key});
+  final EzSettingType? target;
+
+  const TextSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: EFUILang.of(context)!.tsPageTitle,
         showSettings: false,
-        body: const EzTextSettings(),
+        body: EzTextSettings(target: target),
+        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1114,6 +1145,7 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: EFUILang.of(context)!.lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
+        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1131,13 +1163,16 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ColorSettingsScreen extends StatelessWidget {
-  const ColorSettingsScreen({super.key});
+  final EzSettingType? target;
+
+  const ColorSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: EFUILang.of(context)!.csPageTitle,
         showSettings: false,
-        body: const EzColorSettings(),
+        body: EzColorSettings(target: target),
+        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1162,6 +1197,7 @@ class ImageSettingsScreen extends StatelessWidget {
         title: EFUILang.of(context)!.isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
+        fab: EzBackFAB(context),
       );
 }
 """);
