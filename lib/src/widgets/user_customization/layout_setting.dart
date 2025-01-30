@@ -107,10 +107,14 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     switch (widget.type) {
       // Margin
       case EzLayoutSettingType.margin:
+        late final bool isDark = isDarkTheme(context);
+
         late final String? backgroundImagePath = EzConfig.get(
-            isDarkTheme(context)
-                ? darkBackgroundImageKey
-                : lightBackgroundImageKey);
+            isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
+
+        late final BoxFit? backgroundImageFit = ezFitFromName(isDark
+            ? EzConfig.get('$darkBackgroundImageKey$boxFitSuffix')
+            : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
           spacer,
@@ -136,7 +140,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                     ? null
                     : DecorationImage(
                         image: ezImageProvider(backgroundImagePath),
-                        fit: BoxFit.fill,
+                        fit: backgroundImageFit,
                       ),
               ),
               margin: EdgeInsets.all(currValue * 0.25),
