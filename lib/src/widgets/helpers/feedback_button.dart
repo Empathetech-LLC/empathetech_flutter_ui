@@ -74,7 +74,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
                   mimeType: MimeType.png,
                 );
                 await launchUrl(Uri.parse(
-                  'mailto:$empathSupport?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
+                  'mailto:$supportEmail?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
                 ));
               }
             },
