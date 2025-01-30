@@ -3,7 +3,7 @@
 [![es](https://img.shields.io/badge/lang-es-red.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.es.md)
 [![fr](https://img.shields.io/badge/lang-fr-white.svg)](https://github.com/Empathetech-LLC/empathetech_flutter_ui/blob/main/localized_readme/README.fr.md)
 
-<br>EFUI is a [Flutter](https://flutter.dev/) library for building highly accessible apps. EFUI simplifies...
+<br>EFUI is a [Flutter](https://flutter.dev/) library for building truly accessible apps. It simplifies...
 
 - **Platform availability**
   - Thanks to Flutter, you can use EFUI to create on Android, iOS, Linux, macOS, Windows and Web!
@@ -12,11 +12,11 @@
 - **Screen reader support**
   - Empathetech code is manually verified with [TalkBack](https://support.google.com/accessibility/android/answer/6006598?hl=en) and [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios).
 - **User customization**
-  - The only way to be truly accessible for ALL customers is to empower them with the freedom of choice!
+  - The only way to be truly accessible to ALL customers is to empower them with the freedom of choice!
     - EFUI provides an elegant UX for full control over an app's appearance.
 - **Internationalization**
   - Empathetech apps have been translated to Spanish and French (so far).
-  - EFUI provides the infrastructure for unlimited future translations.
+  - EFUI also provides the infrastructure for unlimited future translations.
     - Moral fiber moment: Remember that LLMs are a tool for acceleration. But, there's a lot more to a great car than just acceleration! If your translations are generated: disclose that. EFUI's translations started with A.I. and ended with H.I.
 - **Cost**
   - While we encourage [contributions](#contributing), EFUI is completely free and [open source](./LICENSE).
