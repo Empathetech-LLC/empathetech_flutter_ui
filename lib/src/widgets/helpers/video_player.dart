@@ -279,30 +279,20 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             child: Padding(
                               padding: EdgeInsets.only(right: spacing),
                               child: widget.controller.value.isPlaying
-                                  ? Semantics(
-                                      button: true,
-                                      hint: l10n.gPause,
-                                      child: ExcludeSemantics(
-                                        child: EzIconButton(
-                                          onPressed: pause,
-                                          color: iconColor,
-                                          icon: EzIcon(
-                                            PlatformIcons(context).pause,
-                                          ),
-                                        ),
+                                  ? EzIconButton(
+                                      onPressed: pause,
+                                      tooltip: l10n.gPause,
+                                      color: iconColor,
+                                      icon: EzIcon(
+                                        PlatformIcons(context).pause,
                                       ),
                                     )
-                                  : Semantics(
-                                      button: true,
-                                      hint: l10n.gPlay,
-                                      child: ExcludeSemantics(
-                                        child: EzIconButton(
-                                          onPressed: play,
-                                          color: iconColor,
-                                          icon: EzIcon(
-                                            PlatformIcons(context).playArrow,
-                                          ),
-                                        ),
+                                  : EzIconButton(
+                                      onPressed: play,
+                                      tooltip: l10n.gPlay,
+                                      color: iconColor,
+                                      icon: EzIcon(
+                                        PlatformIcons(context).playArrow,
                                       ),
                                     ),
                             ),
@@ -315,27 +305,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               padding: EdgeInsets.only(
                                 right: widget.variableVolume ? margin : spacing,
                               ),
-                              child: Semantics(
-                                button: true,
-                                hint: EFUILang.of(context)!.gMute,
-                                child: ExcludeSemantics(
-                                  child: (widget.controller.value.volume == 0.0)
-                                      ? EzIconButton(
-                                          onPressed: unMute,
-                                          color: iconColor,
-                                          icon: EzIcon(
-                                            PlatformIcons(context).volumeMute,
-                                          ),
-                                        )
-                                      : EzIconButton(
-                                          onPressed: mute,
-                                          color: iconColor,
-                                          icon: EzIcon(
-                                            PlatformIcons(context).volumeUp,
-                                          ),
-                                        ),
-                                ),
-                              ),
+                              child: (widget.controller.value.volume == 0.0)
+                                  ? EzIconButton(
+                                      onPressed: unMute,
+                                      tooltip: l10n.gUnMute,
+                                      color: iconColor,
+                                      icon: EzIcon(
+                                        PlatformIcons(context).volumeMute,
+                                      ),
+                                    )
+                                  : EzIconButton(
+                                      onPressed: mute,
+                                      tooltip: l10n.gMute,
+                                      color: iconColor,
+                                      icon: EzIcon(
+                                        PlatformIcons(context).volumeUp,
+                                      ),
+                                    ),
                             ),
                           ),
 
@@ -381,17 +367,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             child: Padding(
                               padding:
                                   EdgeInsets.symmetric(horizontal: spacing),
-                              child: Semantics(
-                                button: true,
-                                hint: EFUILang.of(context)!.gReplay,
-                                child: ExcludeSemantics(
-                                  child: EzIconButton(
-                                    icon:
-                                        EzIcon(PlatformIcons(context).refresh),
-                                    onPressed: replay,
-                                    color: iconColor,
-                                  ),
-                                ),
+                              child: EzIconButton(
+                                onPressed: replay,
+                                tooltip: l10n.gReplay,
+                                color: iconColor,
+                                icon: EzIcon(PlatformIcons(context).refresh),
                               ),
                             ),
                           ),
