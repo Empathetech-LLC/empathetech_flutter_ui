@@ -133,8 +133,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     }
                     setState(() {});
                   },
-                  tooltip:
-                      '${l10n.tsDecrease} ${l10n.tsFontSize.toLowerCase()}',
+                  tooltip: '${l10n.gDecrease} ${l10n.tsFontSize.toLowerCase()}',
                   iconSize: widget.iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).remove),
                 ),
@@ -182,8 +181,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                     }
                     setState(() {});
                   },
-                  tooltip:
-                      '${l10n.tsIncrease} ${l10n.tsFontSize.toLowerCase()}',
+                  tooltip: '${l10n.gIncrease} ${l10n.tsFontSize.toLowerCase()}',
                   iconSize: widget.iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).add),
                 ),

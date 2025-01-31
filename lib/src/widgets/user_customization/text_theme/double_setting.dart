@@ -136,7 +136,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.tsDecrease} ${widget.tooltip.toLowerCase()}',
+                            '${l10n.gDecrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).remove),
                       )
                     : EzIconButton(
@@ -223,7 +223,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.tsIncrease} ${widget.tooltip.toLowerCase()}',
+                            '${l10n.gIncrease} ${widget.tooltip.toLowerCase()}',
                         icon: EzIcon(PlatformIcons(context).add),
                       )
                     : EzIconButton(
