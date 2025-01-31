@@ -30,6 +30,12 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
 
+  /// Time/progress slider visibility
+  final EzButtonVis timeSliderVis;
+
+  /// Time completed / total time visibility
+  final EzButtonVis timeLabelVis;
+
   /// Play button visibility
   final EzButtonVis playVis;
 
@@ -41,9 +47,6 @@ class EzVideoPlayer extends StatefulWidget {
 
   /// Replay button visibility
   final EzButtonVis replayVis;
-
-  /// Time/progress slider visibility
-  final EzButtonVis sliderVis;
 
   /// Whether buttons set to [EzButtonVis.auto] should showControls when the video is paused
   final bool showOnPause;
@@ -69,11 +72,12 @@ class EzVideoPlayer extends StatefulWidget {
     this.sliderColor,
     this.sliderBufferColor,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
+    this.timeSliderVis = EzButtonVis.auto,
+    this.timeLabelVis = EzButtonVis.auto,
     this.playVis = EzButtonVis.auto,
     this.volumeVis = EzButtonVis.auto,
     this.variableVolume = true,
     this.replayVis = EzButtonVis.auto,
-    this.sliderVis = EzButtonVis.auto,
     this.showOnPause = false,
     this.autoPlay = true,
     this.autoLoop = false,
@@ -113,11 +117,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late final bool noControls = widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
       widget.replayVis == EzButtonVis.alwaysOff &&
-      widget.sliderVis == EzButtonVis.alwaysOff;
+      widget.timeSliderVis == EzButtonVis.alwaysOff;
 
   late final double controlsHeight = noControls
       ? 0
-      : (widget.sliderVis == EzButtonVis.alwaysOff)
+      : (widget.timeSliderVis == EzButtonVis.alwaysOff)
           ? (2 * margin + iconSize + padding)
           : (3 * margin + 2 * (iconSize + padding));
 
@@ -159,6 +163,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           milliseconds:
               (widget.controller.value.duration.inMilliseconds * completion)
                   .round());
+
+  String formatTime(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+
+    final String mins = twoDigits(duration.inMinutes.remainder(60));
+    final String secs = twoDigits(duration.inSeconds.remainder(60));
+
+    return '$mins:$secs';
+  }
 
   // Init //
 
@@ -225,8 +238,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               child: Positioned(
                 height: controlsHeight,
                 bottom: 0,
-                left: margin / 2,
-                right: margin / 2,
+                left: 0,
+                right: 0,
                 child: Container(
                   decoration: widget.controlsBackground,
                   child: Column(
@@ -235,7 +248,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     children: <Widget>[
                       // Time seeker
                       Visibility(
-                        visible: widget.sliderVis != EzButtonVis.alwaysOff,
+                        visible: widget.timeSliderVis != EzButtonVis.alwaysOff,
                         child: SizedBox(
                           height: iconSize,
                           width: double.infinity,
@@ -258,7 +271,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       EzScrollView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
-                          ezMargin,
+                          const EzSpacer(vertical: false),
 
                           // Play/pause
                           Visibility(
@@ -328,7 +341,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                           // Volume slider
                           Visibility(
-                            visible: widget.volumeVis != EzButtonVis.alwaysOff,
+                            visible: (widget.variableVolume &&
+                                widget.volumeVis != EzButtonVis.alwaysOff),
                             child: Padding(
                               padding: EdgeInsets.only(right: spacing),
                               child: SizedBox(
@@ -347,11 +361,25 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             ),
                           ),
 
+                          // Time label
+                          Visibility(
+                            visible:
+                                widget.timeLabelVis != EzButtonVis.alwaysOff,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: spacing),
+                              child: Text(
+                                '${formatTime(widget.controller.value.position)} / ${formatTime(widget.controller.value.duration)}',
+                                style: Theme.of(context).textTheme.labelLarge,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+
                           // Replay
                           Visibility(
                             visible: widget.replayVis != EzButtonVis.alwaysOff,
                             child: Padding(
-                              padding: EdgeInsets.only(right: spacing),
+                              padding: EdgeInsets.only(left: spacing),
                               child: Semantics(
                                 button: true,
                                 hint: EFUILang.of(context)!.gReplay,
@@ -366,9 +394,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
+                          ezMargin,
                         ],
                       ),
-                      ezMargin,
                     ],
                   ),
                 ),
