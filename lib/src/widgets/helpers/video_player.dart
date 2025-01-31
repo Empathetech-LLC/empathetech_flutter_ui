@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -35,6 +36,9 @@ class EzVideoPlayer extends StatefulWidget {
 
   /// Defaults to [ColorScheme.outline]
   final Color? sliderBufferColor;
+
+  /// Seconds to skip forward/backward on arrow key press
+  final int skipTime = 10;
 
   /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
@@ -172,6 +176,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     await widget.controller.play();
   }
 
+  Future<void> skipForward() => widget.controller.seekTo(
+      widget.controller.value.position + Duration(seconds: widget.skipTime));
+
+  Future<void> skipBackward() => widget.controller.seekTo(
+      widget.controller.value.position - Duration(seconds: widget.skipTime));
+
   /// Get the percent of the total video that is complete from the passed [Duration]
   double pComplete(Duration position) {
     return (position.isNegative || position.inMilliseconds == 0)
@@ -217,230 +227,255 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Widget build(BuildContext context) {
     return Semantics(
       label: widget.semantics,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => showControls = true),
-        onExit: (_) => setState(() => showControls = false),
-        child: Stack(
-          fit: StackFit.passthrough,
-          clipBehavior: Clip.none,
-          children: <Widget>[
-            // Video
-            Container(
-              constraints: BoxConstraints(
-                maxHeight: widget.maxHeight,
-                maxWidth: widget.maxWidth,
-              ),
-              child: AspectRatio(
-                aspectRatio: widget.aspectRatio,
-                child: VideoPlayer(widget.controller),
-              ),
-            ),
-
-            // Tap-to-pause
-            Positioned(
-              top: 0,
-              bottom: controlsHeight,
-              left: 0,
-              right: 0,
-              child: ExcludeSemantics(
-                child: GestureDetector(
-                  child: Container(color: Colors.transparent),
-                  onTap: () async {
-                    widget.controller.value.isPlaying
-                        ? await pause()
-                        : await play();
-                  },
+      child: Focus(
+        autofocus: true,
+        onKeyEvent: (FocusNode node, KeyEvent event) {
+          if (event is KeyDownEvent) {
+            switch (event.logicalKey) {
+              case LogicalKeyboardKey.arrowRight:
+                skipForward();
+                return KeyEventResult.handled;
+              case LogicalKeyboardKey.arrowLeft:
+                skipBackward();
+                return KeyEventResult.handled;
+              default:
+                return KeyEventResult.ignored;
+            }
+          }
+          return KeyEventResult.ignored;
+        },
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => setState(() => showControls = true),
+          onExit: (_) => setState(() => showControls = false),
+          child: Stack(
+            fit: StackFit.passthrough,
+            clipBehavior: Clip.none,
+            children: <Widget>[
+              // Video
+              Container(
+                constraints: BoxConstraints(
+                  maxHeight: widget.maxHeight,
+                  maxWidth: widget.maxWidth,
+                ),
+                child: AspectRatio(
+                  aspectRatio: widget.aspectRatio,
+                  child: VideoPlayer(widget.controller),
                 ),
               ),
-            ),
 
-            // Controls
-            Visibility(
-              visible: showControls,
-              child: Positioned(
-                height: controlsHeight,
-                bottom: 0,
+              // Tap-to-pause
+              Positioned(
+                top: 0,
+                bottom: controlsHeight,
                 left: 0,
                 right: 0,
-                child: Container(
-                  decoration: widget.controlsBackground,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Time seeker
-                      Visibility(
-                        visible: widget.timeSliderVis != EzButtonVis.alwaysOff,
-                        child: SizedBox(
-                          height: iconSize,
-                          width: double.infinity,
-                          child: SliderTheme(
-                            data: sliderTheme,
-                            child: Slider(
-                              value: currentPosition,
-                              onChangeStart: (_) => pause,
-                              onChanged: (double value) => setState(() {
-                                currentPosition = value;
-                                widget.controller.seekTo(findP(value));
-                              }),
+                child: ExcludeSemantics(
+                  child: GestureDetector(
+                    child: Container(color: Colors.transparent),
+                    onTap: () async {
+                      widget.controller.value.isPlaying
+                          ? await pause()
+                          : await play();
+                    },
+                  ),
+                ),
+              ),
+
+              // Controls
+              Visibility(
+                visible: showControls,
+                child: Positioned(
+                  height: controlsHeight,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    decoration: widget.controlsBackground,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // Time seeker
+                        Visibility(
+                          visible:
+                              widget.timeSliderVis != EzButtonVis.alwaysOff,
+                          child: SizedBox(
+                            height: iconSize,
+                            width: double.infinity,
+                            child: SliderTheme(
+                              data: sliderTheme,
+                              child: Slider(
+                                value: currentPosition,
+                                onChangeStart: (_) => pause,
+                                onChanged: (double value) => setState(() {
+                                  currentPosition = value;
+                                  widget.controller.seekTo(findP(value));
+                                }),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      ezMargin,
+                        ezMargin,
 
-                      // Buttons
-                      EzScrollView(
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          const EzSpacer(vertical: false),
+                        // Buttons
+                        EzScrollView(
+                          scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                            const EzSpacer(vertical: false),
 
-                          // Play/pause
-                          Visibility(
-                            visible: widget.playVis != EzButtonVis.alwaysOff,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: spacing),
-                              child: widget.controller.value.isPlaying
-                                  ? EzIconButton(
-                                      onPressed: pause,
-                                      tooltip: l10n.gPause,
-                                      color: iconColor,
-                                      icon: Icon(PlatformIcons(context).pause),
-                                    )
-                                  : EzIconButton(
-                                      onPressed: play,
-                                      tooltip: l10n.gPlay,
-                                      color: iconColor,
-                                      icon: Icon(
-                                          PlatformIcons(context).playArrow),
-                                    ),
-                            ),
-                          ),
-
-                          // Volume toggle
-                          Visibility(
-                            visible: widget.volumeVis != EzButtonVis.alwaysOff,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                right: widget.variableVolume ? margin : spacing,
+                            // Play/pause
+                            Visibility(
+                              visible: widget.playVis != EzButtonVis.alwaysOff,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: spacing),
+                                child: widget.controller.value.isPlaying
+                                    ? EzIconButton(
+                                        onPressed: pause,
+                                        tooltip: l10n.gPause,
+                                        color: iconColor,
+                                        icon:
+                                            Icon(PlatformIcons(context).pause),
+                                      )
+                                    : EzIconButton(
+                                        onPressed: play,
+                                        tooltip: l10n.gPlay,
+                                        color: iconColor,
+                                        icon: Icon(
+                                            PlatformIcons(context).playArrow),
+                                      ),
                               ),
-                              child: (widget.controller.value.volume == 0.0)
-                                  ? EzIconButton(
-                                      onPressed: unMute,
-                                      tooltip: l10n.gUnMute,
-                                      color: iconColor,
-                                      icon: Icon(
-                                          PlatformIcons(context).volumeMute),
-                                    )
-                                  : EzIconButton(
-                                      onPressed: mute,
-                                      tooltip: l10n.gMute,
-                                      color: iconColor,
-                                      icon:
-                                          Icon(PlatformIcons(context).volumeUp),
-                                    ),
                             ),
-                          ),
 
-                          // Volume slider
-                          Visibility(
-                            visible: (widget.variableVolume &&
-                                widget.volumeVis != EzButtonVis.alwaysOff),
-                            child: Padding(
-                              padding: EdgeInsets.only(right: spacing),
-                              child: SizedBox(
-                                height: iconSize,
-                                width: spacing * 2.0,
-                                child: SliderTheme(
-                                  data: sliderTheme,
-                                  child: Slider(
-                                    value: widget.controller.value.volume,
-                                    onChanged: (double value) => setState(
-                                      () => widget.controller.setVolume(value),
+                            // Volume toggle
+                            Visibility(
+                              visible:
+                                  widget.volumeVis != EzButtonVis.alwaysOff,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  right:
+                                      widget.variableVolume ? margin : spacing,
+                                ),
+                                child: (widget.controller.value.volume == 0.0)
+                                    ? EzIconButton(
+                                        onPressed: unMute,
+                                        tooltip: l10n.gUnMute,
+                                        color: iconColor,
+                                        icon: Icon(
+                                            PlatformIcons(context).volumeMute),
+                                      )
+                                    : EzIconButton(
+                                        onPressed: mute,
+                                        tooltip: l10n.gMute,
+                                        color: iconColor,
+                                        icon: Icon(
+                                            PlatformIcons(context).volumeUp),
+                                      ),
+                              ),
+                            ),
+
+                            // Volume slider
+                            Visibility(
+                              visible: (widget.variableVolume &&
+                                  widget.volumeVis != EzButtonVis.alwaysOff),
+                              child: Padding(
+                                padding: EdgeInsets.only(right: spacing),
+                                child: SizedBox(
+                                  height: iconSize,
+                                  width: spacing * 2.0,
+                                  child: SliderTheme(
+                                    data: sliderTheme,
+                                    child: Slider(
+                                      value: widget.controller.value.volume,
+                                      onChanged: (double value) => setState(
+                                        () =>
+                                            widget.controller.setVolume(value),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
 
-                          // Time label
-                          Visibility(
-                            visible:
-                                widget.timeLabelVis != EzButtonVis.alwaysOff,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: spacing),
-                              child: Text(
-                                '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
-                                    ?.copyWith(color: widget.timeTextColor),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-
-                          // Playback speed selector
-                          Visibility(
-                            visible: widget.speedVis != EzButtonVis.alwaysOff,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: spacing),
-                              child: Tooltip(
-                                message: l10n.gPlaybackSpeed,
-                                child: EzDropdownMenu<double>(
-                                  initialSelection: widget.speed,
-                                  widthEntries: <String>['1.0'],
-                                  dropdownMenuEntries: <double>[
-                                    0.25,
-                                    0.5,
-                                    0.75,
-                                    1.0,
-                                    1.25,
-                                    1.5,
-                                    1.75,
-                                    2.0,
-                                  ]
-                                      .map((double value) =>
-                                          DropdownMenuEntry<double>(
-                                            value: value,
-                                            label: value.toString(),
-                                          ))
-                                      .toList(),
-                                  enableSearch: false,
-                                  requestFocusOnTap: true,
-                                  onSelected: (double? value) => (value == null)
-                                      ? doNothing
-                                      : setState(() => widget.controller
-                                          .setPlaybackSpeed(value)),
+                            // Time label
+                            Visibility(
+                              visible:
+                                  widget.timeLabelVis != EzButtonVis.alwaysOff,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: spacing),
+                                child: Text(
+                                  '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(color: widget.timeTextColor),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
-                          ),
 
-                          // Replay
-                          Visibility(
-                            visible: widget.replayVis != EzButtonVis.alwaysOff,
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: spacing),
-                              child: EzIconButton(
-                                onPressed: replay,
-                                tooltip: l10n.gReplay,
-                                color: iconColor,
-                                icon: Icon(PlatformIcons(context).refresh),
+                            // Playback speed selector
+                            Visibility(
+                              visible: widget.speedVis != EzButtonVis.alwaysOff,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: spacing),
+                                child: Tooltip(
+                                  message: l10n.gPlaybackSpeed,
+                                  child: EzDropdownMenu<double>(
+                                    initialSelection: widget.speed,
+                                    widthEntries: <String>['1.0'],
+                                    dropdownMenuEntries: <double>[
+                                      0.25,
+                                      0.5,
+                                      0.75,
+                                      1.0,
+                                      1.25,
+                                      1.5,
+                                      1.75,
+                                      2.0,
+                                    ]
+                                        .map((double value) =>
+                                            DropdownMenuEntry<double>(
+                                              value: value,
+                                              label: value.toString(),
+                                            ))
+                                        .toList(),
+                                    enableSearch: false,
+                                    requestFocusOnTap: true,
+                                    onSelected: (double? value) =>
+                                        (value == null)
+                                            ? doNothing
+                                            : setState(() => widget.controller
+                                                .setPlaybackSpeed(value)),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+
+                            // Replay
+                            Visibility(
+                              visible:
+                                  widget.replayVis != EzButtonVis.alwaysOff,
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: spacing),
+                                child: EzIconButton(
+                                  onPressed: replay,
+                                  tooltip: l10n.gReplay,
+                                  color: iconColor,
+                                  icon: Icon(PlatformIcons(context).refresh),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
