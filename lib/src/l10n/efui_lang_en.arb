@@ -47,6 +47,7 @@
   "gPause": "Pause",
   "gMute": "Mute",
   "gReplay": "Replay",
+  "gFullScreen": "Full screen",
 
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",

@@ -308,6 +308,12 @@ abstract class EFUILang {
   /// **'Replay'**
   String get gReplay;
 
+  /// No description provided for @gFullScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Full screen'**
+  String get gFullScreen;
+
   /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:

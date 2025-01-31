@@ -115,6 +115,9 @@ class EFUILangEn extends EFUILang {
   String get gReplay => 'Replay';
 
   @override
+  String get gFullScreen => 'Full screen';
+
+  @override
   String get gHowThisWorks => 'How this works';
 
   @override
