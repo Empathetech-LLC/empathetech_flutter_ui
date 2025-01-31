@@ -440,13 +440,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                               label: value.toString(),
                                             ))
                                         .toList(),
-                                    enableSearch: false,
-                                    requestFocusOnTap: true,
-                                    onSelected: (double? value) =>
-                                        (value == null)
-                                            ? doNothing
-                                            : setState(() => widget.controller
-                                                .setPlaybackSpeed(value)),
+                                    onSelected: (double? value) async {
+                                      if (value == null) return;
+                                      await widget.controller
+                                          .setPlaybackSpeed(value);
+                                    },
                                   ),
                                 ),
                               ),
