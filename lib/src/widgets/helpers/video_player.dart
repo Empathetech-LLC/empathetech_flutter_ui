@@ -283,17 +283,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       onPressed: pause,
                                       tooltip: l10n.gPause,
                                       color: iconColor,
-                                      icon: EzIcon(
-                                        PlatformIcons(context).pause,
-                                      ),
+                                      icon: Icon(PlatformIcons(context).pause),
                                     )
                                   : EzIconButton(
                                       onPressed: play,
                                       tooltip: l10n.gPlay,
                                       color: iconColor,
-                                      icon: EzIcon(
-                                        PlatformIcons(context).playArrow,
-                                      ),
+                                      icon: Icon(
+                                          PlatformIcons(context).playArrow),
                                     ),
                             ),
                           ),
@@ -310,17 +307,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       onPressed: unMute,
                                       tooltip: l10n.gUnMute,
                                       color: iconColor,
-                                      icon: EzIcon(
-                                        PlatformIcons(context).volumeMute,
-                                      ),
+                                      icon: Icon(
+                                          PlatformIcons(context).volumeMute),
                                     )
                                   : EzIconButton(
                                       onPressed: mute,
                                       tooltip: l10n.gMute,
                                       color: iconColor,
-                                      icon: EzIcon(
-                                        PlatformIcons(context).volumeUp,
-                                      ),
+                                      icon:
+                                          Icon(PlatformIcons(context).volumeUp),
                                     ),
                             ),
                           ),
@@ -371,7 +366,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 onPressed: replay,
                                 tooltip: l10n.gReplay,
                                 color: iconColor,
-                                icon: EzIcon(PlatformIcons(context).refresh),
+                                icon: Icon(PlatformIcons(context).refresh),
                               ),
                             ),
                           ),
