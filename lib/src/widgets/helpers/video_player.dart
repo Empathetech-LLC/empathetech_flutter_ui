@@ -30,12 +30,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
 
-  /// [EzScrollView.mainAxisAlignment] passthrough for the controls
-  final MainAxisAlignment controlsMainAxis;
-
-  /// [EzScrollView.crossAxisAlignment] passthrough for the controls
-  final CrossAxisAlignment controlsCrossAxis;
-
   /// Play button visibility
   final EzButtonVis playVis;
 
@@ -75,8 +69,6 @@ class EzVideoPlayer extends StatefulWidget {
     this.sliderColor,
     this.sliderBufferColor,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
-    this.controlsMainAxis = MainAxisAlignment.start,
-    this.controlsCrossAxis = CrossAxisAlignment.center,
     this.playVis = EzButtonVis.auto,
     this.volumeVis = EzButtonVis.auto,
     this.variableVolume = true,
@@ -95,7 +87,10 @@ class EzVideoPlayer extends StatefulWidget {
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather the theme data //
 
+  final EzSpacer ezMargin = EzMargin();
+
   final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
   final double iconSize = EzConfig.get(iconSizeKey);
@@ -123,8 +118,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late final double controlsHeight = noControls
       ? 0
       : (widget.sliderVis == EzButtonVis.alwaysOff)
-          ? (2 * margin + iconSize)
-          : (3 * margin + 2 * iconSize);
+          ? (2 * margin + iconSize + padding)
+          : (3 * margin + 2 * (iconSize + padding));
 
   double? savedVolume;
   double currentPosition = 0.0;
@@ -221,13 +216,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               child: Positioned(
                 height: controlsHeight,
                 bottom: 0,
-                left: margin,
-                right: margin,
+                left: margin / 2,
+                right: margin / 2,
                 child: Container(
                   decoration: widget.controlsBackground,
                   child: Column(
-                    mainAxisAlignment: widget.controlsMainAxis,
-                    crossAxisAlignment: widget.controlsCrossAxis,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // Time seeker
                       Visibility(
@@ -248,38 +243,46 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           ),
                         ),
                       ),
-                      EzMargin(),
+                      ezMargin,
 
                       // Buttons
                       EzScrollView(
                         scrollDirection: Axis.horizontal,
-                        mainAxisAlignment: widget.controlsMainAxis,
-                        crossAxisAlignment: widget.controlsCrossAxis,
                         children: <Widget>[
+                          ezMargin,
+
                           // Play/pause
                           Visibility(
                             visible: widget.playVis != EzButtonVis.alwaysOff,
                             child: Padding(
                               padding: EdgeInsets.only(right: spacing),
-                              child: Semantics(
-                                button: true,
-                                hint: widget.controller.value.isPlaying
-                                    ? l10n.gPause
-                                    : l10n.gPlay,
-                                child: ExcludeSemantics(
-                                  child: EzIconButton(
-                                    onPressed: () =>
-                                        (widget.controller.value.isPlaying)
-                                            ? pause()
-                                            : play(),
-                                    color: iconColor,
-                                    icon: EzIcon(
-                                        widget.controller.value.isPlaying
-                                            ? PlatformIcons(context).pause
-                                            : PlatformIcons(context).playArrow),
-                                  ),
-                                ),
-                              ),
+                              child: widget.controller.value.isPlaying
+                                  ? Semantics(
+                                      button: true,
+                                      hint: l10n.gPause,
+                                      child: ExcludeSemantics(
+                                        child: EzIconButton(
+                                          onPressed: pause,
+                                          color: iconColor,
+                                          icon: EzIcon(
+                                            PlatformIcons(context).pause,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Semantics(
+                                      button: true,
+                                      hint: l10n.gPlay,
+                                      child: ExcludeSemantics(
+                                        child: EzIconButton(
+                                          onPressed: play,
+                                          color: iconColor,
+                                          icon: EzIcon(
+                                            PlatformIcons(context).playArrow,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                             ),
                           ),
 
@@ -294,17 +297,21 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 button: true,
                                 hint: EFUILang.of(context)!.gMute,
                                 child: ExcludeSemantics(
-                                  child: EzIconButton(
-                                    onPressed: () =>
-                                        (widget.controller.value.volume == 0.0)
-                                            ? unMute()
-                                            : mute(),
-                                    color: iconColor,
-                                    icon: EzIcon(
-                                        widget.controller.value.volume == 0.0
-                                            ? PlatformIcons(context).volumeMute
-                                            : PlatformIcons(context).volumeUp),
-                                  ),
+                                  child: (widget.controller.value.volume == 0.0)
+                                      ? EzIconButton(
+                                          onPressed: unMute,
+                                          color: iconColor,
+                                          icon: EzIcon(
+                                            PlatformIcons(context).volumeMute,
+                                          ),
+                                        )
+                                      : EzIconButton(
+                                          onPressed: mute,
+                                          color: iconColor,
+                                          icon: EzIcon(
+                                            PlatformIcons(context).volumeUp,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),
@@ -314,12 +321,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           Visibility(
                             visible: widget.volumeVis != EzButtonVis.alwaysOff,
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                right: widget.variableVolume ? margin : spacing,
-                              ),
+                              padding: EdgeInsets.only(right: spacing),
                               child: SizedBox(
                                 height: iconSize,
-                                width: iconSize * 3.0,
+                                width: spacing * 2.0,
                                 child: SliderTheme(
                                   data: sliderTheme,
                                   child: Slider(
@@ -354,6 +359,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           ),
                         ],
                       ),
+                      ezMargin,
                     ],
                   ),
                 ),
