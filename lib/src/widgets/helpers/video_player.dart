@@ -62,7 +62,7 @@ class EzVideoPlayer extends StatefulWidget {
   final EzButtonVis timeLabelVis;
 
   /// Defaults to [Colors.white]
-  final Color timeTextColor;
+  final Color textColor;
 
   /// Playback speed selector visibility
   final EzButtonVis speedVis;
@@ -103,7 +103,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.variableVolume = true,
     this.startingVolume = 0.0,
     this.timeLabelVis = EzButtonVis.auto,
-    this.timeTextColor = Colors.white,
+    this.textColor = Colors.white,
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
     this.replayVis = EzButtonVis.auto,
@@ -120,6 +120,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather the theme data //
 
   final EzSpacer ezMargin = EzMargin();
+  final EzSpacer pmSpacer = EzMargin(vertical: false);
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
@@ -139,6 +140,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   late final EFUILang l10n = EFUILang.of(context)!;
 
+  late final TextStyle? labelStyle =
+      Theme.of(context).textTheme.labelLarge?.copyWith(color: widget.textColor);
+
   // Define the build data //
 
   bool showControls = false;
@@ -154,7 +158,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           : (3 * margin + 2 * (iconSize + padding));
 
   double? savedVolume;
-  double currentPosition = 0.0;
+  double currPos = 0.0;
+  late double currSpeed = widget.speed;
 
   // Define custom functions //
 
@@ -215,8 +220,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       await widget.controller.initialize();
     }
 
-    widget.controller.addListener(() => setState(
-        () => currentPosition = pComplete(widget.controller.value.position)));
+    widget.controller.addListener(() =>
+        setState(() => currPos = pComplete(widget.controller.value.position)));
 
     if (widget.autoPlay) await play();
   }
@@ -272,24 +277,32 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 right: 0,
                 child: ExcludeSemantics(
                   child: GestureDetector(
-                    child: Container(color: Colors.transparent),
                     onTap: () async {
                       widget.controller.value.isPlaying
                           ? await pause()
                           : await play();
                     },
+                    onDoubleTapDown: (TapDownDetails tap) async {
+                      final RenderBox mySpace =
+                          context.findRenderObject() as RenderBox;
+
+                      (tap.localPosition.dx < mySpace.size.width / 2)
+                          ? await skipBackward()
+                          : await skipForward();
+                    },
+                    child: Container(color: Colors.transparent),
                   ),
                 ),
               ),
 
               // Controls
-              Visibility(
-                visible: showControls,
-                child: Positioned(
-                  height: controlsHeight,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
+              Positioned(
+                height: controlsHeight,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Visibility(
+                  visible: showControls,
                   child: Container(
                     decoration: widget.controlsBackground,
                     child: Column(
@@ -306,10 +319,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             child: SliderTheme(
                               data: sliderTheme,
                               child: Slider(
-                                value: currentPosition,
+                                value: currPos,
                                 onChangeStart: (_) => pause,
                                 onChanged: (double value) => setState(() {
-                                  currentPosition = value;
+                                  currPos = value;
                                   widget.controller.seekTo(findP(value));
                                 }),
                               ),
@@ -405,10 +418,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 padding: EdgeInsets.only(right: spacing),
                                 child: Text(
                                   '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge
-                                      ?.copyWith(color: widget.timeTextColor),
+                                  style: labelStyle,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -418,34 +428,45 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             Visibility(
                               visible: widget.speedVis != EzButtonVis.alwaysOff,
                               child: Padding(
-                                padding: EdgeInsets.only(right: spacing),
-                                child: Tooltip(
-                                  message: l10n.gPlaybackSpeed,
-                                  child: EzDropdownMenu<double>(
-                                    initialSelection: widget.speed,
-                                    widthEntries: <String>['1.0'],
-                                    dropdownMenuEntries: <double>[
-                                      0.25,
-                                      0.5,
-                                      0.75,
-                                      1.0,
-                                      1.25,
-                                      1.5,
-                                      1.75,
-                                      2.0,
-                                    ]
-                                        .map((double value) =>
-                                            DropdownMenuEntry<double>(
-                                              value: value,
-                                              label: value.toString(),
-                                            ))
-                                        .toList(),
-                                    onSelected: (double? value) async {
-                                      if (value == null) return;
-                                      await widget.controller
-                                          .setPlaybackSpeed(value);
-                                    },
-                                  ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: spacing,
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    EzIconButton(
+                                      enabled: currSpeed > 0.25,
+                                      onPressed: () async {
+                                        setState(() => currSpeed -= 0.25);
+                                        await widget.controller
+                                            .setPlaybackSpeed(currSpeed);
+                                      },
+                                      tooltip:
+                                          '${l10n.gDecrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
+                                      icon: Icon(PlatformIcons(context).remove),
+                                    ),
+                                    pmSpacer,
+                                    Tooltip(
+                                      message: l10n.gPlaybackSpeed,
+                                      child: Text(
+                                        currSpeed.toStringAsFixed(2),
+                                        style: labelStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    pmSpacer,
+                                    EzIconButton(
+                                      enabled: currSpeed < 2.0,
+                                      onPressed: () async {
+                                        setState(() => currSpeed += 0.25);
+                                        await widget.controller
+                                            .setPlaybackSpeed(currSpeed);
+                                      },
+                                      tooltip:
+                                          '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
+                                      icon: Icon(PlatformIcons(context).add),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
