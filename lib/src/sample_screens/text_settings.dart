@@ -361,7 +361,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.tsDecrease} ${l10n.tsIconSize.toLowerCase()}',
+                            '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
                         iconSize: currIconSize,
                         icon: Icon(PlatformIcons(context).remove),
                       )
@@ -393,7 +393,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                           setState(() {});
                         },
                         tooltip:
-                            '${l10n.tsIncrease} ${l10n.tsIconSize.toLowerCase()}',
+                            '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
                         iconSize: currIconSize,
                         icon: Icon(PlatformIcons(context).add),
                       )
