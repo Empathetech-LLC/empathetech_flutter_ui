@@ -93,6 +93,12 @@ class EFUILangFr extends EFUILang {
   String get gQuick => 'Rapide';
 
   @override
+  String get gDecrease => 'Réduire';
+
+  @override
+  String get gIncrease => 'Augmenter';
+
+  @override
   String get gMaximum => 'Maximum';
 
   @override
@@ -321,12 +327,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get tsLineHeight => 'Hauteur de ligne';
-
-  @override
-  String get tsDecrease => 'Réduire';
-
-  @override
-  String get tsIncrease => 'Augmenter';
 
   @override
   String get tsDisplayP1 => 'Est-ce que ça ';

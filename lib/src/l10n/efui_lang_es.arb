@@ -38,6 +38,8 @@
   "gAdvanced": "Avanzado",
   "gQuick": "Rápido",
 
+  "gDecrease": "Disminuir",
+  "gIncrease": "Aumentar",
   "gMaximum": "Máximo",
   "gMinimum": "Mínimo",
 
@@ -135,8 +137,6 @@
   "tsLetterSpacing": "Espaciado entre letras",
   "tsWordSpacing": "Espaciado entre palabras",
   "tsLineHeight": "Altura de línea",
-  "tsDecrease": "Disminuir",
-  "tsIncrease": "Aumentar",
 
   "tsDisplayP1": "¿Se ",
   "tsDisplayLink": "despliegue",

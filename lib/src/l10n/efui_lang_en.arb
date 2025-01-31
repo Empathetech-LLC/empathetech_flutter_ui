@@ -38,6 +38,8 @@
   "gAdvanced": "Advanced",
   "gQuick": "Quick",
 
+  "gDecrease": "Decrease",
+  "gIncrease": "Increase",
   "gMaximum": "Maximum",
   "gMinimum": "Minimum",
 
@@ -135,8 +137,6 @@
   "tsLetterSpacing": "Letter spacing",
   "tsWordSpacing": "Word spacing",
   "tsLineHeight": "Line height",
-  "tsDecrease": "Decrease",
-  "tsIncrease": "Increase",
 
   "tsDisplayP1": "Does this ",
   "tsDisplayLink": "display",

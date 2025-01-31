@@ -266,6 +266,18 @@ abstract class EFUILang {
   /// **'Quick'**
   String get gQuick;
 
+  /// No description provided for @gDecrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease'**
+  String get gDecrease;
+
+  /// No description provided for @gIncrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase'**
+  String get gIncrease;
+
   /// No description provided for @gMaximum.
   ///
   /// In en, this message translates to:
@@ -685,18 +697,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Line height'**
   String get tsLineHeight;
-
-  /// No description provided for @tsDecrease.
-  ///
-  /// In en, this message translates to:
-  /// **'Decrease'**
-  String get tsDecrease;
-
-  /// No description provided for @tsIncrease.
-  ///
-  /// In en, this message translates to:
-  /// **'Increase'**
-  String get tsIncrease;
 
   /// No description provided for @tsDisplayP1.
   ///
