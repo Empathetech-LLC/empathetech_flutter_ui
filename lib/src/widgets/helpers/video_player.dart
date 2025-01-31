@@ -174,17 +174,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   Future<void> setupVideo() async {
     await widget.controller.setVolume(widget.startingVolume);
+    await widget.controller.setLooping(widget.autoLoop);
 
-    // It seems that when autoLoop is false, the asset can sometimes be unloaded
-    // Personally, (autoLoop == false) != (being able to play again at all == false)
-    // So, we add this workaround
-    await widget.controller.setLooping(true);
-
-    widget.controller.addListener(() {
-      currentPosition = pComplete(widget.controller.value.position);
-      if (!widget.autoLoop && currentPosition >= 0.99) pause();
-      setState(() {});
-    });
+    widget.controller.addListener(() => setState(
+        () => currentPosition = pComplete(widget.controller.value.position)));
 
     if (!widget.controller.value.isInitialized) {
       await widget.controller.initialize();
