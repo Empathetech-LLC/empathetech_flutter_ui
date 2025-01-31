@@ -361,31 +361,34 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             visible: widget.speedVis != EzButtonVis.alwaysOff,
                             child: Padding(
                               padding: EdgeInsets.only(right: spacing),
-                              child: EzDropdownMenu<double>(
-                                initialSelection: widget.speed,
-                                widthEntries: <String>['1.0'],
-                                dropdownMenuEntries: <double>[
-                                  0.25,
-                                  0.5,
-                                  0.75,
-                                  1.0,
-                                  1.25,
-                                  1.5,
-                                  1.75,
-                                  2.0,
-                                ]
-                                    .map((double value) =>
-                                        DropdownMenuEntry<double>(
-                                          value: value,
-                                          label: value.toString(),
-                                        ))
-                                    .toList(),
-                                enableSearch: false,
-                                requestFocusOnTap: true,
-                                onSelected: (double? value) => (value == null)
-                                    ? doNothing
-                                    : setState(() => widget.controller
-                                        .setPlaybackSpeed(value)),
+                              child: Tooltip(
+                                message: l10n.gPlaybackSpeed,
+                                child: EzDropdownMenu<double>(
+                                  initialSelection: widget.speed,
+                                  widthEntries: <String>['1.0'],
+                                  dropdownMenuEntries: <double>[
+                                    0.25,
+                                    0.5,
+                                    0.75,
+                                    1.0,
+                                    1.25,
+                                    1.5,
+                                    1.75,
+                                    2.0,
+                                  ]
+                                      .map((double value) =>
+                                          DropdownMenuEntry<double>(
+                                            value: value,
+                                            label: value.toString(),
+                                          ))
+                                      .toList(),
+                                  enableSearch: false,
+                                  requestFocusOnTap: true,
+                                  onSelected: (double? value) => (value == null)
+                                      ? doNothing
+                                      : setState(() => widget.controller
+                                          .setPlaybackSpeed(value)),
+                                ),
                               ),
                             ),
                           ),
