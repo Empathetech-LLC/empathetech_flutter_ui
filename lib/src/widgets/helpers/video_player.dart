@@ -15,6 +15,15 @@ class EzVideoPlayer extends StatefulWidget {
   /// [VideoPlayerController] passthrough
   final VideoPlayerController controller;
 
+  /// [AspectRatio.aspectRatio] for the video
+  final double aspectRatio;
+
+  /// [BoxConstraints.maxHeight] for the video
+  final double maxHeight;
+
+  /// [BoxConstraints.maxWidth] for the video
+  final double maxWidth;
+
   /// [String] label for screen readers
   final String semantics;
 
@@ -76,6 +85,9 @@ class EzVideoPlayer extends StatefulWidget {
   const EzVideoPlayer({
     super.key,
     required this.controller,
+    required this.aspectRatio,
+    required this.maxHeight,
+    required this.maxWidth,
     required this.semantics,
     this.iconColor,
     this.sliderColor,
@@ -214,7 +226,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           clipBehavior: Clip.none,
           children: <Widget>[
             // Video
-            Positioned.fill(child: VideoPlayer(widget.controller)),
+            Container(
+              constraints: BoxConstraints(
+                maxHeight: widget.maxHeight,
+                maxWidth: widget.maxWidth,
+              ),
+              child: AspectRatio(
+                aspectRatio: widget.aspectRatio,
+                child: VideoPlayer(widget.controller),
+              ),
+            ),
 
             // Tap-to-pause
             Positioned(
