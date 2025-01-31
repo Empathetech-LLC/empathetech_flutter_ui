@@ -142,23 +142,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   // Define custom functions //
 
-  void play() => setState(() => widget.controller.play());
+  Future<void> play() => widget.controller.play();
 
-  void pause() => setState(() => widget.controller.pause());
+  Future<void> pause() => widget.controller.pause();
 
-  void mute() => setState(() {
-        savedVolume = widget.controller.value.volume;
-        widget.controller.setVolume(0.0);
-      });
+  Future<void> mute() async {
+    savedVolume = widget.controller.value.volume;
+    await widget.controller.setVolume(0.0);
+    setState(() {});
+  }
 
-  void unMute() =>
-      setState(() => widget.controller.setVolume(savedVolume ?? 1.0));
+  Future<void> unMute() => widget.controller.setVolume(savedVolume ?? 1.0);
 
-  void replay() => setState(() {
-        widget.controller.pause();
-        widget.controller.seekTo(Duration.zero);
-        widget.controller.play();
-      });
+  Future<void> replay() async {
+    await widget.controller.pause();
+    await widget.controller.seekTo(Duration.zero);
+    await widget.controller.play();
+  }
 
   /// Get the percent of the total video that is complete from the passed [Duration]
   double pComplete(Duration position) {
@@ -189,14 +189,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     await widget.controller.setPlaybackSpeed(widget.speed);
     await widget.controller.setLooping(widget.autoLoop);
 
-    widget.controller.addListener(() => setState(
-        () => currentPosition = pComplete(widget.controller.value.position)));
-
     if (!widget.controller.value.isInitialized) {
       await widget.controller.initialize();
     }
 
-    if (widget.autoPlay) play();
+    widget.controller.addListener(() => setState(
+        () => currentPosition = pComplete(widget.controller.value.position)));
+
+    if (widget.autoPlay) await play();
   }
 
   // Return the build //
@@ -210,6 +210,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         onEnter: (_) => setState(() => showControls = true),
         onExit: (_) => setState(() => showControls = false),
         child: Stack(
+          fit: StackFit.passthrough,
+          clipBehavior: Clip.none,
           children: <Widget>[
             // Video
             Positioned.fill(child: VideoPlayer(widget.controller)),
@@ -223,8 +225,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               child: ExcludeSemantics(
                 child: GestureDetector(
                   child: Container(color: Colors.transparent),
-                  onTap: () =>
-                      (widget.controller.value.isPlaying) ? pause() : play(),
+                  onTap: () async {
+                    widget.controller.value.isPlaying
+                        ? await pause()
+                        : await play();
+                  },
                 ),
               ),
             ),
