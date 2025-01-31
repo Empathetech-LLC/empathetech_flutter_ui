@@ -204,7 +204,7 @@ const int transparentHex = 0x00000000;
 
 // Brand config //
 
-/// Empathetech's [EzConfig.defaults]
+/// Empathetech [EzConfig.defaults]
 const Map<String, Object> empathetechConfig = <String, Object>{
   // Global settings //
 

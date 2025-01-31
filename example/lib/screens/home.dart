@@ -1001,7 +1001,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ]
 }''';
 
-  /// Empathetech's recommended l10n config
+  /// Recommended Empathetech l10n config
   static const String l10nDefault = '''arb-dir: lib/l10n
 output-dir: lib/l10n
 template-arb-file: lang_en.arb
@@ -1014,7 +1014,7 @@ required-resource-attributes: false
 format: true
 suppress-warnings: false''';
 
-  /// Empathetech's recommended lints
+  /// Recommended Empathetech lints
   static const String analysisDefault =
       '''include: package:flutter_lints/flutter.yaml
 
