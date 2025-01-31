@@ -302,6 +302,12 @@ abstract class EFUILang {
   /// **'Mute'**
   String get gMute;
 
+  /// No description provided for @gUnMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Un-mute'**
+  String get gUnMute;
+
   /// No description provided for @gReplay.
   ///
   /// In en, this message translates to:

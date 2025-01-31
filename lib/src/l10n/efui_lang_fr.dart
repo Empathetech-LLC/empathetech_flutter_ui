@@ -112,6 +112,9 @@ class EFUILangFr extends EFUILang {
   String get gMute => 'Muet';
 
   @override
+  String get gUnMute => 'Désactiver le son';
+
+  @override
   String get gReplay => 'Rejouer';
 
   @override

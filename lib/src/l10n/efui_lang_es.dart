@@ -112,6 +112,9 @@ class EFUILangEs extends EFUILang {
   String get gMute => 'Silenciar';
 
   @override
+  String get gUnMute => 'Desactivar silencio';
+
+  @override
   String get gReplay => 'Repetir';
 
   @override

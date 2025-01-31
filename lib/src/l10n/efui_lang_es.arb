@@ -46,6 +46,7 @@
   "gPlay": "Reproducir",
   "gPause": "Pausa",
   "gMute": "Silenciar",
+  "gUnMute": "Desactivar silencio",
   "gReplay": "Repetir",
   "gFullScreen": "Pantalla completa",
 
