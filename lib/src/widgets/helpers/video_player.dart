@@ -164,15 +164,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               (widget.controller.value.duration.inMilliseconds * completion)
                   .round());
 
-  String formatTime(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-
-    final String mins = twoDigits(duration.inMinutes.remainder(60));
-    final String secs = twoDigits(duration.inSeconds.remainder(60));
-
-    return '$mins:$secs';
-  }
-
   // Init //
 
   @override
@@ -349,7 +340,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             child: Padding(
                               padding: EdgeInsets.only(right: spacing),
                               child: Text(
-                                '${formatTime(widget.controller.value.position)} / ${formatTime(widget.controller.value.duration)}',
+                                '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
                                 style: Theme.of(context).textTheme.labelLarge,
                                 textAlign: TextAlign.center,
                               ),
@@ -382,4 +373,35 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       ),
     );
   }
+}
+
+const int _milisPerSec = 1000;
+const int _milisPerMin = 60000;
+const int _milisPerHour = 3600000;
+
+String _tooTwo(int n) => n.toString().padLeft(2, '0');
+
+/// Format [duration] into a video time format
+/// Defaults to 'mm:ss', and will adapt to 'hh:mm:ss' if necessary
+/// Optionally [showMili]
+String ezVideoTime(Duration duration, {bool showMili = false}) {
+  int miliSecs = duration.inMilliseconds;
+
+  final int hours = ((miliSecs as double) / (_milisPerHour as double)).floor();
+  final String hourS = _tooTwo(hours);
+
+  miliSecs -= (hours * _milisPerHour);
+
+  final int minutes = ((miliSecs as double) / (_milisPerMin as double)).floor();
+  final String minS = _tooTwo(minutes);
+
+  miliSecs -= (minutes * _milisPerMin);
+
+  final int seconds = ((miliSecs as double) / (_milisPerSec as double)).floor();
+  final String secS = _tooTwo(seconds);
+
+  miliSecs -= (seconds * _milisPerSec);
+  final String miliS = showMili ? ':${_tooTwo(miliSecs)}' : '';
+
+  return hours > 0 ? '$hourS:$minS:$secS$miliS' : '$minS:$secS$miliS';
 }
