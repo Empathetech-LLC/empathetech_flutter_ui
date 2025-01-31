@@ -379,7 +379,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           Visibility(
                             visible: widget.replayVis != EzButtonVis.alwaysOff,
                             child: Padding(
-                              padding: EdgeInsets.only(left: spacing),
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: spacing),
                               child: Semantics(
                                 button: true,
                                 hint: EFUILang.of(context)!.gReplay,
@@ -394,7 +395,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               ),
                             ),
                           ),
-                          ezMargin,
                         ],
                       ),
                     ],
