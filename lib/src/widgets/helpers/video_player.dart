@@ -33,9 +33,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Time/progress slider visibility
   final EzButtonVis timeSliderVis;
 
-  /// Time completed / total time visibility
-  final EzButtonVis timeLabelVis;
-
   /// Play button visibility
   final EzButtonVis playVis;
 
@@ -44,6 +41,21 @@ class EzVideoPlayer extends StatefulWidget {
 
   /// Whether a volume slider is available
   final bool variableVolume;
+
+  /// Volume the video should begin with
+  final double startingVolume;
+
+  /// Time completed / total time visibility
+  final EzButtonVis timeLabelVis;
+
+  /// Defaults to [Colors.white]
+  final Color timeTextColor;
+
+  /// Playback speed selector visibility
+  final EzButtonVis speedVis;
+
+  /// Playback speed
+  final double speed;
 
   /// Replay button visibility
   final EzButtonVis replayVis;
@@ -56,9 +68,6 @@ class EzVideoPlayer extends StatefulWidget {
 
   /// Whether the video should replay when complete
   final bool autoLoop;
-
-  /// Volume the video should begin with
-  final double startingVolume;
 
   /// [Stack]s control buttons on top of a [VideoPlayer]
   /// Also supports tap-to-pause on the main window via [MouseRegion]
@@ -73,15 +82,18 @@ class EzVideoPlayer extends StatefulWidget {
     this.sliderBufferColor,
     this.controlsBackground = const BoxDecoration(color: Colors.transparent),
     this.timeSliderVis = EzButtonVis.auto,
-    this.timeLabelVis = EzButtonVis.auto,
     this.playVis = EzButtonVis.auto,
     this.volumeVis = EzButtonVis.auto,
     this.variableVolume = true,
+    this.startingVolume = 0.0,
+    this.timeLabelVis = EzButtonVis.auto,
+    this.timeTextColor = Colors.white,
+    this.speedVis = EzButtonVis.auto,
+    this.speed = 1.0,
     this.replayVis = EzButtonVis.auto,
     this.showOnPause = false,
     this.autoPlay = true,
     this.autoLoop = false,
-    this.startingVolume = 0.0,
   });
 
   @override
@@ -174,6 +186,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   Future<void> setupVideo() async {
     await widget.controller.setVolume(widget.startingVolume);
+    await widget.controller.setPlaybackSpeed(widget.speed);
     await widget.controller.setLooping(widget.autoLoop);
 
     widget.controller.addListener(() => setState(
@@ -334,8 +347,45 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               padding: EdgeInsets.only(right: spacing),
                               child: Text(
                                 '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
-                                style: Theme.of(context).textTheme.labelLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(color: widget.timeTextColor),
                                 textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+
+                          // Playback speed selector
+                          Visibility(
+                            visible: widget.speedVis != EzButtonVis.alwaysOff,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: spacing),
+                              child: EzDropdownMenu<double>(
+                                initialSelection: widget.speed,
+                                widthEntries: <String>['1.0'],
+                                dropdownMenuEntries: <double>[
+                                  0.25,
+                                  0.5,
+                                  0.75,
+                                  1.0,
+                                  1.25,
+                                  1.5,
+                                  1.75,
+                                  2.0,
+                                ]
+                                    .map((double value) =>
+                                        DropdownMenuEntry<double>(
+                                          value: value,
+                                          label: value.toString(),
+                                        ))
+                                    .toList(),
+                                enableSearch: false,
+                                requestFocusOnTap: true,
+                                onSelected: (double? value) => (value == null)
+                                    ? doNothing
+                                    : setState(() => widget.controller
+                                        .setPlaybackSpeed(value)),
                               ),
                             ),
                           ),
