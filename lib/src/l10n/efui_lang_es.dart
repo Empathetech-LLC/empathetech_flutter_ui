@@ -103,6 +103,18 @@ class EFUILangEs extends EFUILang {
       'Cargando. El logotipo empático animado como un reloj de arena giratorio.';
 
   @override
+  String get gPlay => 'Reproducir';
+
+  @override
+  String get gPause => 'Pausa';
+
+  @override
+  String get gMute => 'Silenciar';
+
+  @override
+  String get gReplay => 'Repetir';
+
+  @override
   String get gHowThisWorks => 'Cómo funciona';
 
   @override

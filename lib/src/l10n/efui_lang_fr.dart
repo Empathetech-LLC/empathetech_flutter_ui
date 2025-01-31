@@ -103,6 +103,18 @@ class EFUILangFr extends EFUILang {
       'Chargement. Le logo empathique animé comme un sablier tournant.';
 
   @override
+  String get gPlay => 'Lecture';
+
+  @override
+  String get gPause => 'Pause';
+
+  @override
+  String get gMute => 'Muet';
+
+  @override
+  String get gReplay => 'Rejouer';
+
+  @override
   String get gHowThisWorks => 'Comment ça marche';
 
   @override

@@ -103,6 +103,18 @@ class EFUILangEn extends EFUILang {
       'Loading. The empathetic logo animated as a spinning hourglass.';
 
   @override
+  String get gPlay => 'Play';
+
+  @override
+  String get gPause => 'Pause';
+
+  @override
+  String get gMute => 'Mute';
+
+  @override
+  String get gReplay => 'Replay';
+
+  @override
   String get gHowThisWorks => 'How this works';
 
   @override

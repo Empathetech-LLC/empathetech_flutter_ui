@@ -43,6 +43,11 @@
 
   "gLoadingAnim": "Cargando. El logotipo empático animado como un reloj de arena giratorio.",
 
+  "gPlay": "Reproducir",
+  "gPause": "Pausa",
+  "gMute": "Silenciar",
+  "gReplay": "Repetir",
+
   "gHowThisWorks": "Cómo funciona",
   "gHowThisWorksHint": "Abrir documentación útil",
 

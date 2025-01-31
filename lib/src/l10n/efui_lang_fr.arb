@@ -43,6 +43,11 @@
 
   "gLoadingAnim": "Chargement. Le logo empathique animé comme un sablier tournant.",
 
+  "gPlay": "Lecture",
+  "gPause": "Pause",
+  "gMute": "Muet",
+  "gReplay": "Rejouer",
+
   "gHowThisWorks": "Comment ça marche",
   "gHowThisWorksHint": "Ouvre la documentation utile",
 

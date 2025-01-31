@@ -284,6 +284,30 @@ abstract class EFUILang {
   /// **'Loading. The empathetic logo animated as a spinning hourglass.'**
   String get gLoadingAnim;
 
+  /// No description provided for @gPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get gPlay;
+
+  /// No description provided for @gPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get gPause;
+
+  /// No description provided for @gMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get gMute;
+
+  /// No description provided for @gReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay'**
+  String get gReplay;
+
   /// No description provided for @gHowThisWorks.
   ///
   /// In en, this message translates to:

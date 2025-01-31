@@ -43,6 +43,11 @@
 
   "gLoadingAnim": "Loading. The empathetic logo animated as a spinning hourglass.",
 
+  "gPlay": "Play",
+  "gPause": "Pause",
+  "gMute": "Mute",
+  "gReplay": "Replay",
+
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
