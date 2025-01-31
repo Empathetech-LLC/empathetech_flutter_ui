@@ -115,6 +115,9 @@ class EFUILangEn extends EFUILang {
   String get gUnMute => 'Un-mute';
 
   @override
+  String get gPlaybackSpeed => 'Playback speed';
+
+  @override
   String get gReplay => 'Replay';
 
   @override

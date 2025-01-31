@@ -308,6 +308,12 @@ abstract class EFUILang {
   /// **'Un-mute'**
   String get gUnMute;
 
+  /// No description provided for @gPlaybackSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback speed'**
+  String get gPlaybackSpeed;
+
   /// No description provided for @gReplay.
   ///
   /// In en, this message translates to:
