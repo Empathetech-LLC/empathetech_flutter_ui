@@ -68,6 +68,7 @@ export 'src/widgets/helpers/text_button.dart';
 export 'src/widgets/helpers/text.dart';
 export 'src/widgets/helpers/tool_tipper.dart';
 export 'src/widgets/helpers/translations_pending.dart';
+export 'src/widgets/helpers/video_player.dart';
 export 'src/widgets/helpers/warning.dart';
 
 // Platform availability
