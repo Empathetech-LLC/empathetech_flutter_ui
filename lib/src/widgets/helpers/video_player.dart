@@ -76,8 +76,15 @@ class EzVideoPlayer extends StatefulWidget {
   /// Replay button visibility
   final EzButtonVis replayVis;
 
+  /// Fullscreen button visibility
+  final EzButtonVis fullScreenVis;
+
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
+  /// Only for desktop (and desktop Web), is always true for mobile (and mobile Web)
   final bool showOnPause;
+
+  /// Amount of seconds the controls should show on mobile after user interaction
+  final int mobileDelay;
 
   /// Whether the video should begin upon initialization
   final bool autoPlay;
@@ -111,7 +118,9 @@ class EzVideoPlayer extends StatefulWidget {
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
     this.replayVis = EzButtonVis.auto,
+    this.fullScreenVis = EzButtonVis.auto,
     this.showOnPause = false,
+    this.mobileDelay = 3,
     this.autoPlay = true,
     this.autoLoop = false,
   });
@@ -152,7 +161,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   // Define the build data //
 
+  double currPos = 0.0;
+  double? savedVolume;
+  late double currSpeed = widget.speed;
+  bool fullScreen = false;
+
   bool hovering = false;
+
   late final bool persistentControls = isMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
       widget.volumeVis == EzButtonVis.alwaysOn ||
@@ -169,15 +184,33 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           ? (2 * margin + iconSize + padding)
           : (3 * margin + 2 * (iconSize + padding));
 
-  double? savedVolume;
-  double currPos = 0.0;
-  late double currSpeed = widget.speed;
-
   // Define custom functions //
 
-  Future<void> play() => widget.controller.play();
+  Future<void> play() async {
+    if (isMobile) setState(() => hovering = true);
 
-  Future<void> pause() => widget.controller.pause();
+    await widget.controller.play();
+
+    if (isMobile) {
+      Future<void>.delayed(
+        Duration(seconds: widget.mobileDelay),
+        () => setState(() => hovering = false),
+      );
+    }
+  }
+
+  Future<void> pause() async {
+    if (isMobile) setState(() => hovering = true);
+
+    await widget.controller.pause();
+
+    if (isMobile) {
+      Future<void>.delayed(
+        Duration(seconds: widget.mobileDelay),
+        () => setState(() => hovering = false),
+      );
+    }
+  }
 
   Future<void> mute() async {
     savedVolume = widget.controller.value.volume;
@@ -199,6 +232,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Future<void> skipBackward() => widget.controller.seekTo(
       widget.controller.value.position - Duration(seconds: widget.skipTime));
 
+  Future<void> toggleFullscreen() async {
+    fullScreen = !fullScreen;
+    fullScreen
+        ? await SystemChrome.setEnabledSystemUIMode(
+            SystemUiMode.immersiveSticky)
+        : await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    setState(() {});
+  }
+
   bool showControl(EzButtonVis vis) {
     switch (vis) {
       case EzButtonVis.alwaysOn:
@@ -206,9 +248,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       case EzButtonVis.alwaysOff:
         return false;
       case EzButtonVis.auto:
-        if (isMobile ||
-            hovering ||
-            (widget.showOnPause && !widget.controller.value.isPlaying)) {
+        if (hovering ||
+            ((isMobile || widget.showOnPause) &&
+                !widget.controller.value.isPlaying)) {
           return true;
         } else {
           return false;
@@ -272,6 +314,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               case LogicalKeyboardKey.arrowLeft:
                 skipBackward();
                 return KeyEventResult.handled;
+              case LogicalKeyboardKey.space:
+                widget.controller.value.isPlaying ? pause() : play();
+                return KeyEventResult.handled;
+              case LogicalKeyboardKey.escape:
+                if (fullScreen) {
+                  toggleFullscreen();
+                  return KeyEventResult.handled;
+                } else {
+                  return KeyEventResult.ignored;
+                }
               default:
                 return KeyEventResult.ignored;
             }
@@ -509,6 +561,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                   tooltip: l10n.gReplay,
                                   color: iconColor,
                                   icon: Icon(PlatformIcons(context).refresh),
+                                ),
+                              ),
+                            ),
+
+                            // Fullscreen
+                            Visibility(
+                              visible: showControl(widget.fullScreenVis),
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: spacing),
+                                child: EzIconButton(
+                                  onPressed: toggleFullscreen,
+                                  tooltip: l10n.gFullScreen,
+                                  color: iconColor,
+                                  icon: Icon(fullScreen
+                                      ? PlatformIcons(context).fullscreenExit
+                                      : PlatformIcons(context).fullscreen),
                                 ),
                               ),
                             ),
