@@ -76,7 +76,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Replay button visibility
   final EzButtonVis replayVis;
 
-  /// Whether buttons set to [EzButtonVis.auto] should showControls when the video is paused
+  /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
   final bool showOnPause;
 
   /// Whether the video should begin upon initialization
@@ -152,8 +152,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   // Define the build data //
 
-  bool showControls = false;
-  late final bool alwaysShow = widget.playVis == EzButtonVis.alwaysOn ||
+  bool hovering = false;
+  late final bool persistentControls = isMobile ||
+      widget.playVis == EzButtonVis.alwaysOn ||
       widget.volumeVis == EzButtonVis.alwaysOn ||
       widget.replayVis == EzButtonVis.alwaysOn ||
       widget.timeSliderVis == EzButtonVis.alwaysOn;
@@ -206,7 +207,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         return false;
       case EzButtonVis.auto:
         if (isMobile ||
-            showControls ||
+            hovering ||
             (widget.showOnPause && !widget.controller.value.isPlaying)) {
           return true;
         } else {
@@ -279,8 +280,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         },
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
-          onEnter: (_) => setState(() => showControls = true),
-          onExit: (_) => setState(() => showControls = false),
+          onEnter: (_) => setState(() => hovering = true),
+          onExit: (_) => setState(() => hovering = false),
           child: Stack(
             fit: StackFit.passthrough,
             clipBehavior: Clip.none,
@@ -331,7 +332,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 left: 0,
                 right: 0,
                 child: Visibility(
-                  visible: alwaysShow || showControls,
+                  visible: persistentControls || hovering,
                   child: Container(
                     decoration: widget.controlsBackground,
                     child: Column(
