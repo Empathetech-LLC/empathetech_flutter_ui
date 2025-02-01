@@ -25,6 +25,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// [BoxConstraints.maxWidth] for the video
   final double maxWidth;
 
+  /// Defaults to [ColorScheme.surface]
+  final Color? backgroundColor;
+
   /// [String] label for screen readers
   final String semantics;
 
@@ -92,6 +95,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.aspectRatio,
     required this.maxHeight,
     required this.maxWidth,
+    this.backgroundColor,
     required this.semantics,
     this.iconColor,
     this.sliderColor,
@@ -119,6 +123,10 @@ class EzVideoPlayer extends StatefulWidget {
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather the theme data //
 
+  late final TargetPlatform platform = getBasePlatform(context);
+  late final bool isMobile =
+      platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+
   final EzSpacer ezMargin = EzMargin();
   final EzSpacer pmSpacer = EzMargin(vertical: false);
 
@@ -126,11 +134,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  final double iconSize = EzConfig.get(iconSizeKey);
-
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late final Color iconColor = widget.iconColor ?? colorScheme.primary;
+  final double iconSize = EzConfig.get(iconSizeKey);
 
   late final SliderThemeData sliderTheme = SliderThemeData(
     activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
@@ -146,6 +153,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Define the build data //
 
   bool showControls = false;
+  late final bool alwaysShow = widget.playVis == EzButtonVis.alwaysOn ||
+      widget.volumeVis == EzButtonVis.alwaysOn ||
+      widget.replayVis == EzButtonVis.alwaysOn ||
+      widget.timeSliderVis == EzButtonVis.alwaysOn;
   late final bool noControls = widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
       widget.replayVis == EzButtonVis.alwaysOff &&
@@ -186,6 +197,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   Future<void> skipBackward() => widget.controller.seekTo(
       widget.controller.value.position - Duration(seconds: widget.skipTime));
+
+  bool showControl(EzButtonVis vis) {
+    switch (vis) {
+      case EzButtonVis.alwaysOn:
+        return true;
+      case EzButtonVis.alwaysOff:
+        return false;
+      case EzButtonVis.auto:
+        if (isMobile ||
+            showControls ||
+            (widget.showOnPause && !widget.controller.value.isPlaying)) {
+          return true;
+        } else {
+          return false;
+        }
+    }
+  }
 
   /// Get the percent of the total video that is complete from the passed [Duration]
   double pComplete(Duration position) {
@@ -263,7 +291,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   maxHeight: widget.maxHeight,
                   maxWidth: widget.maxWidth,
                 ),
-                color: colorScheme.surface,
+                color: widget.backgroundColor ?? colorScheme.surface,
                 child: AspectRatio(
                   aspectRatio: widget.aspectRatio,
                   child: VideoPlayer(widget.controller),
@@ -303,7 +331,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 left: 0,
                 right: 0,
                 child: Visibility(
-                  visible: showControls,
+                  visible: alwaysShow || showControls,
                   child: Container(
                     decoration: widget.controlsBackground,
                     child: Column(
@@ -312,8 +340,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       children: <Widget>[
                         // Time seeker
                         Visibility(
-                          visible:
-                              widget.timeSliderVis != EzButtonVis.alwaysOff,
+                          visible: showControl(widget.timeSliderVis),
                           child: SizedBox(
                             height: iconSize,
                             width: double.infinity,
@@ -340,7 +367,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                             // Play/pause
                             Visibility(
-                              visible: widget.playVis != EzButtonVis.alwaysOff,
+                              visible: showControl(widget.playVis),
                               child: Padding(
                                 padding: EdgeInsets.only(right: spacing),
                                 child: widget.controller.value.isPlaying
@@ -363,8 +390,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                             // Volume toggle
                             Visibility(
-                              visible:
-                                  widget.volumeVis != EzButtonVis.alwaysOff,
+                              visible: showControl(widget.volumeVis),
                               child: Padding(
                                 padding: EdgeInsets.only(
                                   right:
@@ -391,7 +417,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             // Volume slider
                             Visibility(
                               visible: (widget.variableVolume &&
-                                  widget.volumeVis != EzButtonVis.alwaysOff),
+                                  showControl(widget.volumeVis)),
                               child: Padding(
                                 padding: EdgeInsets.only(right: spacing),
                                 child: SizedBox(
@@ -413,8 +439,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                             // Time label
                             Visibility(
-                              visible:
-                                  widget.timeLabelVis != EzButtonVis.alwaysOff,
+                              visible: showControl(widget.timeLabelVis),
                               child: Padding(
                                 padding: EdgeInsets.only(right: spacing),
                                 child: Text(
@@ -427,7 +452,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                             // Playback speed selector
                             Visibility(
-                              visible: widget.speedVis != EzButtonVis.alwaysOff,
+                              visible: showControl(widget.speedVis),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: spacing,
@@ -474,8 +499,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                             // Replay
                             Visibility(
-                              visible:
-                                  widget.replayVis != EzButtonVis.alwaysOff,
+                              visible: showControl(widget.replayVis),
                               child: Padding(
                                 padding:
                                     EdgeInsets.symmetric(horizontal: spacing),
