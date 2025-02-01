@@ -396,10 +396,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               child: Slider(
                                 value: currPos,
                                 onChangeStart: (_) => pause,
-                                onChanged: (double value) => setState(() {
+                                onChanged: (double value) {
                                   currPos = value;
-                                  widget.controller.seekTo(findP(value));
-                                }),
+                                  setState(() {});
+                                },
+                                onChangeEnd: (double value) async {
+                                  currPos = value;
+                                  await widget.controller.seekTo(findP(value));
+                                  await play();
+                                },
                               ),
                             ),
                           ),
