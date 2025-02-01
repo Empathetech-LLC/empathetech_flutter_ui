@@ -293,7 +293,7 @@ abstract class EFUILang {
   /// No description provided for @gLoadingAnim.
   ///
   /// In en, this message translates to:
-  /// **'Loading. The empathetic logo animated as a spinning hourglass.'**
+  /// **'Loading. The Empathetic logo animated as a spinning hourglass.'**
   String get gLoadingAnim;
 
   /// No description provided for @gPlay.

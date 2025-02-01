@@ -106,7 +106,7 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gLoadingAnim =>
-      'Loading. The empathetic logo animated as a spinning hourglass.';
+      'Loading. The Empathetic logo animated as a spinning hourglass.';
 
   @override
   String get gPlay => 'Play';
