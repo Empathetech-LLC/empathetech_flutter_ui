@@ -73,9 +73,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Playback speed
   final double speed;
 
-  /// Replay button visibility
-  final EzButtonVis replayVis;
-
   /// Fullscreen button visibility
   /// Not currently working... feel free to fix it :)
   final EzButtonVis fullScreenVis;
@@ -118,7 +115,6 @@ class EzVideoPlayer extends StatefulWidget {
     this.textColor = Colors.white,
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
-    this.replayVis = EzButtonVis.auto,
     this.fullScreenVis = EzButtonVis.alwaysOff,
     this.showOnPause = false,
     this.mobileDelay = 3,
@@ -172,11 +168,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late final bool persistentControls = isMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
       widget.volumeVis == EzButtonVis.alwaysOn ||
-      widget.replayVis == EzButtonVis.alwaysOn ||
       widget.timeSliderVis == EzButtonVis.alwaysOn;
   late final bool noControls = widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
-      widget.replayVis == EzButtonVis.alwaysOff &&
       widget.timeSliderVis == EzButtonVis.alwaysOff;
 
   late final double controlsHeight = noControls
@@ -190,7 +184,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Future<void> play() async {
     if (isMobile) setState(() => hovering = true);
 
-    await widget.controller.play();
+    if (widget.controller.value.isCompleted) {
+      await widget.controller.seekTo(Duration.zero);
+      await widget.controller.play();
+    } else {
+      await widget.controller.play();
+    }
 
     if (isMobile) {
       Future<void>.delayed(
@@ -220,12 +219,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   }
 
   Future<void> unMute() => widget.controller.setVolume(savedVolume ?? 1.0);
-
-  Future<void> replay() async {
-    await widget.controller.pause();
-    await widget.controller.seekTo(Duration.zero);
-    await widget.controller.play();
-  }
 
   Future<void> skipForward() => widget.controller.seekTo(
       widget.controller.value.position + Duration(seconds: widget.skipTime));
@@ -547,21 +540,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       icon: Icon(PlatformIcons(context).add),
                                     ),
                                   ],
-                                ),
-                              ),
-                            ),
-
-                            // Replay
-                            Visibility(
-                              visible: showControl(widget.replayVis),
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: spacing),
-                                child: EzIconButton(
-                                  onPressed: replay,
-                                  tooltip: l10n.gReplay,
-                                  color: iconColor,
-                                  icon: Icon(PlatformIcons(context).refresh),
                                 ),
                               ),
                             ),
