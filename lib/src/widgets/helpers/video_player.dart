@@ -263,6 +263,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   maxHeight: widget.maxHeight,
                   maxWidth: widget.maxWidth,
                 ),
+                color: colorScheme.surface,
                 child: AspectRatio(
                   aspectRatio: widget.aspectRatio,
                   child: VideoPlayer(widget.controller),
