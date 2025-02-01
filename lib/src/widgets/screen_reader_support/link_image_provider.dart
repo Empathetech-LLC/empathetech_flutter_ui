@@ -8,12 +8,9 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EzLinkImageProvider extends StatefulWidget {
+class EzLinkImageProvider extends StatelessWidget {
   /// [Image.image] passthrough
   final ImageProvider<Object> image;
-
-  /// Optional [List] of [BoxShadow]s to be drawn on hover/focus
-  final List<BoxShadow>? shadows;
 
   /// Destination function
   /// Provide [onTap] or [url], but not both
@@ -24,13 +21,13 @@ class EzLinkImageProvider extends StatefulWidget {
   final Uri? url;
 
   /// What is it?
-  final String semanticLabel;
+  final String label;
 
   /// What does it do?
   final String hint;
 
   /// Is it unique?
-  final String? semanticValue;
+  final String? value;
 
   /// [Tooltip.message] for on hover/focus
   final String tooltip;
@@ -85,19 +82,15 @@ class EzLinkImageProvider extends StatefulWidget {
 
   /// [Image] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Automatically draws a [BoxShadow] which mimics button hover based on...
-  /// https://m3.material.io/foundations/interaction/states/state-layers
-  /// The [shadows] can be overridden
   const EzLinkImageProvider({
     super.key,
     required this.image,
-    required this.semanticLabel,
+    required this.label,
     required this.hint,
-    this.semanticValue,
+    this.value,
     required this.tooltip,
     this.onTap,
     this.url,
-    this.shadows,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -118,81 +111,45 @@ class EzLinkImageProvider extends StatefulWidget {
             'Either onTap or url should be provided, but not both.');
 
   @override
-  State<EzLinkImageProvider> createState() => _EzLinkImageProviderState();
-}
-
-class _EzLinkImageProviderState extends State<EzLinkImageProvider> {
-  // Gather the theme data //
-
-  List<BoxShadow> boxShadow = <BoxShadow>[];
-
-  late final List<BoxShadow> shadows = widget.shadows ??
-      <BoxShadow>[
-        BoxShadow(
-          color: Theme.of(context)
-              .colorScheme
-              .primary
-              .withValues(alpha: highlightOpacity),
-        ),
-      ];
-
-  // Define the styling function(s) //
-
-  void showShadow(bool sun) =>
-      setState(() => boxShadow = sun ? shadows : <BoxShadow>[]);
-
-  // Return the build //
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: widget.tooltip,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: widget.semanticLabel,
-        value: widget.semanticValue,
-        link: true,
-        image: true,
-        hint: widget.hint,
-        child: ExcludeSemantics(
-          child: Focus(
-            focusNode: FocusNode(),
-            onFocusChange: (bool hasFocus) => showShadow(hasFocus),
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              onEnter: (_) => showShadow(true),
-              onExit: (_) => showShadow(false),
-              child: GestureDetector(
-                onTap: widget.onTap ?? () => launchUrl(widget.url!),
-                child: Container(
-                  decoration: BoxDecoration(boxShadow: boxShadow),
-                  child: Image(
-                    image: widget.image,
-                    frameBuilder: widget.frameBuilder,
-                    loadingBuilder: widget.loadingBuilder,
-                    errorBuilder: widget.errorBuilder,
-                    semanticLabel: null,
-                    excludeFromSemantics: true,
-                    width: widget.width,
-                    height: widget.height,
-                    color: widget.color,
-                    opacity: widget.opacity,
-                    colorBlendMode: widget.colorBlendMode,
-                    fit: widget.fit,
-                    alignment: widget.alignment,
-                    repeat: widget.repeat,
-                    centerSlice: widget.centerSlice,
-                    matchTextDirection: widget.matchTextDirection,
-                    gaplessPlayback: widget.gaplessPlayback,
-                    isAntiAlias: widget.isAntiAlias,
-                    filterQuality: widget.filterQuality,
-                  ),
-                ),
+  Widget build(BuildContext context) => Tooltip(
+        message: tooltip,
+        excludeFromSemantics: true,
+        child: Semantics(
+          label: label,
+          value: value,
+          link: true,
+          image: true,
+          hint: hint,
+          child: ExcludeSemantics(
+            child: InkWell(
+              focusColor: Theme.of(context)
+                  .colorScheme
+                  .primary
+                  .withValues(alpha: focusOpacity),
+              onTap: onTap ?? () => launchUrl(url!),
+              child: Image(
+                image: image,
+                frameBuilder: frameBuilder,
+                loadingBuilder: loadingBuilder,
+                errorBuilder: errorBuilder,
+                semanticLabel: null,
+                excludeFromSemantics: true,
+                width: width,
+                height: height,
+                color: color,
+                opacity: opacity,
+                colorBlendMode: colorBlendMode,
+                fit: fit,
+                alignment: alignment,
+                repeat: repeat,
+                centerSlice: centerSlice,
+                matchTextDirection: matchTextDirection,
+                gaplessPlayback: gaplessPlayback,
+                isAntiAlias: isAntiAlias,
+                filterQuality: filterQuality,
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
