@@ -302,19 +302,19 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         onEnter: (_) => setState(() => hovering = true),
         onExit: (_) => setState(() => hovering = false),
         child: Stack(
-          fit: StackFit.passthrough,
-          clipBehavior: Clip.none,
           children: <Widget>[
             // Video
-            Container(
-              constraints: BoxConstraints(
-                maxHeight: widget.maxHeight,
-                maxWidth: widget.maxWidth,
-              ),
-              color: widget.backgroundColor ?? colorScheme.surface,
-              child: AspectRatio(
-                aspectRatio: widget.aspectRatio,
-                child: VideoPlayer(widget.controller),
+            ExcludeSemantics(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: widget.maxHeight,
+                  maxWidth: widget.maxWidth,
+                ),
+                color: widget.backgroundColor ?? colorScheme.surface,
+                child: AspectRatio(
+                  aspectRatio: widget.aspectRatio,
+                  child: VideoPlayer(widget.controller),
+                ),
               ),
             ),
 
@@ -325,32 +325,36 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               left: 0,
               right: 0,
               child: ExcludeSemantics(
-                child: Focus(
-                  onKeyEvent: (FocusNode node, KeyEvent event) {
-                    if (event is KeyDownEvent) {
-                      switch (event.logicalKey) {
-                        case LogicalKeyboardKey.arrowRight:
-                          skipForward();
-                          return KeyEventResult.handled;
-                        case LogicalKeyboardKey.arrowLeft:
-                          skipBackward();
-                          return KeyEventResult.handled;
-                        case LogicalKeyboardKey.space:
-                          widget.controller.value.isPlaying ? pause() : play();
-                          return KeyEventResult.handled;
-                        case LogicalKeyboardKey.escape:
-                          if (fullScreen) {
-                            toggleFullscreen();
+                child: KeyboardListener(
+                  focusNode: FocusNode(
+                    onKeyEvent: (_, KeyEvent event) {
+                      if (event is KeyDownEvent) {
+                        switch (event.logicalKey) {
+                          case LogicalKeyboardKey.arrowRight:
+                            skipForward();
                             return KeyEventResult.handled;
-                          } else {
+                          case LogicalKeyboardKey.arrowLeft:
+                            skipBackward();
+                            return KeyEventResult.handled;
+                          case LogicalKeyboardKey.space:
+                            widget.controller.value.isPlaying
+                                ? pause()
+                                : play();
+                            return KeyEventResult.handled;
+                          case LogicalKeyboardKey.escape:
+                            if (fullScreen) {
+                              toggleFullscreen();
+                              return KeyEventResult.handled;
+                            } else {
+                              return KeyEventResult.ignored;
+                            }
+                          default:
                             return KeyEventResult.ignored;
-                          }
-                        default:
-                          return KeyEventResult.ignored;
+                        }
                       }
-                    }
-                    return KeyEventResult.ignored;
-                  },
+                      return KeyEventResult.ignored;
+                    },
+                  ),
                   child: GestureDetector(
                     onTap: () async {
                       widget.controller.value.isPlaying
