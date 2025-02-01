@@ -26,5 +26,8 @@ const double largeBreakpoint = 1000.0;
 /// 0.08
 const double highlightOpacity = 0.08;
 
+/// 0.12
+const double focusOpacity = 0.12;
+
 /// 0.25
 const double selectionOpacity = 0.25;
