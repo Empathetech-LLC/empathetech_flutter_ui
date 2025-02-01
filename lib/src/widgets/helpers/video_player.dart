@@ -41,12 +41,14 @@ class EzVideoPlayer extends StatefulWidget {
   final Color? sliderBufferColor;
 
   /// Seconds to skip forward/backward on arrow key press
+  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   final int skipTime = 10;
 
   /// [Container.decoration] for the region behind the controls
   final Decoration controlsBackground;
 
   /// Time/progress slider visibility
+  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   final EzButtonVis timeSliderVis;
 
   /// Play button visibility
@@ -94,6 +96,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Also supports tap-to-pause on the main window via [MouseRegion]
   /// The visibility of each button can be controlled with [EzButtonVis]
   /// The video will begin muted unless [startingVolume] is specified
+  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   const EzVideoPlayer({
     super.key,
     required this.controller,
@@ -235,6 +238,34 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     setState(() {});
   }
 
+  late final FocusNode keyboardControls = FocusNode(
+    onKeyEvent: (_, KeyEvent event) {
+      if (event is KeyDownEvent) {
+        switch (event.logicalKey) {
+          case LogicalKeyboardKey.arrowRight:
+            skipForward();
+            return KeyEventResult.handled;
+          case LogicalKeyboardKey.arrowLeft:
+            skipBackward();
+            return KeyEventResult.handled;
+          case LogicalKeyboardKey.space:
+            widget.controller.value.isPlaying ? pause() : play();
+            return KeyEventResult.handled;
+          case LogicalKeyboardKey.escape:
+            if (fullScreen) {
+              toggleFullscreen();
+              return KeyEventResult.handled;
+            } else {
+              return KeyEventResult.ignored;
+            }
+          default:
+            return KeyEventResult.ignored;
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+  );
+
   bool showControl(EzButtonVis vis) {
     switch (vis) {
       case EzButtonVis.alwaysOn:
@@ -326,35 +357,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               right: 0,
               child: ExcludeSemantics(
                 child: KeyboardListener(
-                  focusNode: FocusNode(
-                    onKeyEvent: (_, KeyEvent event) {
-                      if (event is KeyDownEvent) {
-                        switch (event.logicalKey) {
-                          case LogicalKeyboardKey.arrowRight:
-                            skipForward();
-                            return KeyEventResult.handled;
-                          case LogicalKeyboardKey.arrowLeft:
-                            skipBackward();
-                            return KeyEventResult.handled;
-                          case LogicalKeyboardKey.space:
-                            widget.controller.value.isPlaying
-                                ? pause()
-                                : play();
-                            return KeyEventResult.handled;
-                          case LogicalKeyboardKey.escape:
-                            if (fullScreen) {
-                              toggleFullscreen();
-                              return KeyEventResult.handled;
-                            } else {
-                              return KeyEventResult.ignored;
-                            }
-                          default:
-                            return KeyEventResult.ignored;
-                        }
-                      }
-                      return KeyEventResult.ignored;
-                    },
-                  ),
+                  focusNode: keyboardControls,
                   child: GestureDetector(
                     onTap: () async {
                       widget.controller.value.isPlaying
@@ -369,7 +372,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           ? await skipBackward()
                           : await skipForward();
                     },
-                    child: Container(color: Colors.transparent),
+                    child: Container(
+                      color: Colors.transparent,
+                      height: double.infinity,
+                      width: double.infinity,
+                    ),
                   ),
                 ),
               ),
