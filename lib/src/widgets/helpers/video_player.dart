@@ -77,6 +77,7 @@ class EzVideoPlayer extends StatefulWidget {
   final EzButtonVis replayVis;
 
   /// Fullscreen button visibility
+  /// Not currently working... feel free to fix it :)
   final EzButtonVis fullScreenVis;
 
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
@@ -118,7 +119,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
     this.replayVis = EzButtonVis.auto,
-    this.fullScreenVis = EzButtonVis.auto,
+    this.fullScreenVis = EzButtonVis.alwaysOff,
     this.showOnPause = false,
     this.mobileDelay = 3,
     this.autoPlay = true,
