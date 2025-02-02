@@ -93,7 +93,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
       dir: workDir,
       onSuccess: delStuff,
       onFailure: (String message) {
-        if (message.contains('not permitted')) {
+        if (message.contains('not permitted') &&
+            platform == TargetPlatform.macOS) {
           setState(() {
             showDelete = false;
             richFailureMessage = EzRichText(
