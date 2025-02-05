@@ -393,10 +393,11 @@ Future<void> genPubspec({
   // Cool idea, causes headaches...
   // What if the latest package is actually incompatible with something else?
   //
+  //
   // Future<String?> getLatest(String packageName) async {
   //   final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
   //   final http.Response response = await http.get(url);
-
+  //
   //   if (response.statusCode == 200) {
   //     final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
   //     return '^${jsonResponse['latest']['version']}';
@@ -405,7 +406,6 @@ Future<void> genPubspec({
   //   }
   // }
 
-  // TODO: empathetech_flutter_ui: ${await getLatest('empathetech_flutter_ui') ?? '^8.0.0'}
   try {
     final File file = File('$dir/pubspec.yaml');
     await file.writeAsString('''name: ${config.appName}
@@ -429,7 +429,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.0.0-dev.12
+  empathetech_flutter_ui: ^8.0.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.1
