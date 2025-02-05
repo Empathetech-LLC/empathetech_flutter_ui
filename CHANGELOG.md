@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [8.0.0] - 2025-01-99
+## [8.0.0] - 2025-02-04
 ### Updated
 - Oops, I did it again...
   - "Honestly, pretty much everything" (Empathetech, v7: Sep 2024)
@@ -28,6 +28,10 @@ All notable changes to this project will be documented in this file.
   - And a FABulous Widget to go with it
 - ezCmd
 - Lots of text helper functions
+
+### Revived
+- EFUI video player
+  - Now just a class in EFUI
 
 ## [7.3.1] - 2024-10-19
 ### Updated
