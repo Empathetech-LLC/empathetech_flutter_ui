@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -15,7 +15,7 @@ void testSuite({
   Locale locale = english,
   bool isLefty = false,
 }) =>
-    testWidgets('home-screen', (WidgetTester tester) async {
+    testWidgets('settings-home-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
       ezLog('Loading localizations');
@@ -32,23 +32,23 @@ void testSuite({
       // Verify text loaded //
 
       ezLog('\nValidating text');
-      await validateText(tester, appTitle);
-      await validateWidget(tester, EzWarning);
-      await validateText(tester, l10n.ssDominantHand);
-      await validateText(tester, l10n.ssThemeMode);
+      await ezFindText(tester, appTitle);
+      await ezFindWidget(tester, EzWarning);
+      await ezFindText(tester, l10n.ssDominantHand);
+      await ezFindText(tester, l10n.ssThemeMode);
 
       //* Test functionality *//
 
       // Options menu //
 
       ezLog('\nTesting options menu');
-      await touch(tester, find.byType(MenuAnchor).last);
+      await ezTouch(tester, find.byType(MenuAnchor).last);
 
-      expect(find.text(l10n.gBYO).last, findsOneWidget);
+      expect(find.text(l10n.gOpenSource).last, findsOneWidget);
       expect(find.text(l10n.gGiveFeedback).last, findsOneWidget);
 
       ezLog('Dismissing');
-      await dismissTap(tester);
+      await ezDismiss(tester);
 
       await testDHSetting(tester, l10n: l10n, isLefty: isLefty);
       await testTMSwitch(tester, l10n: l10n, isLefty: isLefty);

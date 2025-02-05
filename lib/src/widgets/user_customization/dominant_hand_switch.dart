@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -14,7 +14,7 @@ class EzDominantHandSwitch extends StatefulWidget {
   /// Defaults to [ColorScheme.surface]
   final Color? backgroundColor;
 
-  /// Standardized tool for updating [EzConfig] dominantHand
+  /// Standardized tool for updating [EzConfig]s [isLeftyKey]
   const EzDominantHandSwitch({
     super.key,
     this.labelStyle,
@@ -61,23 +61,18 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        EzTextBackground(
-          Text(
-            l10n.ssDominantHand,
-            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+        EzText(
+          l10n.ssDominantHand,
+          style: widget.labelStyle,
+          textAlign: TextAlign.center,
         ),
-        EzSpacer(space: EzConfig.get(marginKey)),
+        EzMargin(),
 
         // Button
-        DropdownMenu<bool>(
-          width: dropdownWidth(
-            context: context,
-            entries: entries
-                .map((DropdownMenuEntry<bool> entry) => entry.label)
-                .toList(),
-          ),
+        EzDropdownMenu<bool>(
+          widthEntries: entries
+              .map((DropdownMenuEntry<bool> entry) => entry.label)
+              .toList(),
           dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: isLefty,

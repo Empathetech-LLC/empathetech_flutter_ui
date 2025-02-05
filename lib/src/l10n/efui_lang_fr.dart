@@ -7,22 +7,46 @@ class EFUILangFr extends EFUILang {
   EFUILangFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get gYes => 'Oui';
+  String get gApply => 'Appliquer';
 
   @override
-  String get gNo => 'Non';
+  String get gContinue => 'Continuer';
+
+  @override
+  String get gOpen => 'Ouvrir';
+
+  @override
+  String get gSuccess => 'Succès';
+
+  @override
+  String get gSuccessExl => 'Succès !';
+
+  @override
+  String get gYes => 'Oui';
 
   @override
   String get gAnd => 'et';
 
   @override
+  String get gHelp => 'Aide';
+
+  @override
+  String get gNA => 'N/D';
+
+  @override
+  String get gNAHint => 'Non disponible';
+
+  @override
+  String get gOptional => 'optionnel';
+
+  @override
   String get gOptions => 'Paramètres';
 
   @override
-  String get gApply => 'Appliquer';
+  String get gRequired => 'Requis';
 
   @override
-  String get gContinue => 'Continuer';
+  String get gBack => 'Retour';
 
   @override
   String get gCancel => 'Annuler';
@@ -31,50 +55,22 @@ class EFUILangFr extends EFUILang {
   String get gClose => 'Fermer';
 
   @override
-  String gClipboard(Object thing) {
-    return '$thing a été copié dans le presse-papiers';
-  }
+  String get gError => 'Erreur';
 
   @override
-  String get gBYO => 'Construisez la vôtre';
+  String get gFailure => 'Échec';
 
   @override
-  String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
+  String get gNo => 'Non';
 
   @override
-  String get gGiveFeedback => 'Partager des commentaires';
-
-  @override
-  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
-
-  @override
-  String get gSupportEmail => 'Notre Email de support';
-
-  @override
-  String gSubmitWebFeedback(Object hint) {
-    return 'Veuillez prendre une capture d\'écran$hint du problème.';
-  }
-
-  @override
-  String get gAttachScreenshot => 'Veuillez joindre votre capture d\'écran';
-
-  @override
-  String get gLeft => 'Gauche';
-
-  @override
-  String get gRight => 'Droite';
-
-  @override
-  String get gBack => 'Retour';
-
-  @override
-  String get gSystem => 'Système';
+  String get gDark => 'Sombre';
 
   @override
   String get gLight => 'Clair';
 
   @override
-  String get gDark => 'Sombre';
+  String get gSystem => 'Système';
 
   @override
   String get gEditing => 'Modification : ';
@@ -85,16 +81,109 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get gQuick => 'Rapide';
+  String get gLeft => 'Gauche';
+
+  @override
+  String get gRight => 'Droite';
 
   @override
   String get gAdvanced => 'Avancé';
+
+  @override
+  String get gQuick => 'Rapide';
+
+  @override
+  String get gDecrease => 'Réduire';
+
+  @override
+  String get gIncrease => 'Augmenter';
+
+  @override
+  String get gMaximum => 'Maximum';
+
+  @override
+  String get gMinimum => 'Minimum';
+
+  @override
+  String get gLoadingAnim =>
+      'Chargement. Le logo empathique animé comme un sablier tournant.';
+
+  @override
+  String get gPlay => 'Lecture';
+
+  @override
+  String get gPause => 'Pause';
+
+  @override
+  String get gMute => 'Muet';
+
+  @override
+  String get gUnMute => 'Désactiver le son';
+
+  @override
+  String get gPlaybackSpeed => 'Vitesse de lecture';
+
+  @override
+  String get gReplay => 'Rejouer';
+
+  @override
+  String get gFullScreen => 'Plein écran';
 
   @override
   String get gHowThisWorks => 'Comment ça marche';
 
   @override
   String get gHowThisWorksHint => 'Ouvre la documentation utile';
+
+  @override
+  String get gTranslationsPending =>
+      'Traductions en attente de révision humaine';
+
+  @override
+  String get gUpdates => 'Mises à jour disponibles';
+
+  @override
+  String get gValidURL => 'Veuillez saisir une URL valide';
+
+  @override
+  String get g404Wonder => 'Tous ceux qui errent ne sont pas perdus.';
+
+  @override
+  String get g404 => 'Mais, dans ce cas : page 404 non trouvée.';
+
+  @override
+  String get g404Note =>
+      'Remarque : Flutter Web utilise le routage par hachage, comme...\nhttps://www.example.com/#/settings';
+
+  @override
+  String get gOpenSource => 'Open source';
+
+  @override
+  String get gOpenEmpathetech => 'Ouvre un lien vers Empathetic LLC';
+
+  @override
+  String get gEFUISourceHint => 'Ouvre la page GitHub d\'EFUI';
+
+  @override
+  String get gOpenUIReleases => 'Ouvre la page des versions d\'Open UI';
+
+  @override
+  String get gGiveFeedback => 'Partager des commentaires';
+
+  @override
+  String get gOpeningFeedback => 'Ouverture de l\'outil de feedback.';
+
+  @override
+  String get gAttachScreenshot =>
+      'Veuillez joindre votre capture d\'écran (dans le dossier de Téléchargements)';
+
+  @override
+  String get gSupportEmail => 'Notre Email de support';
+
+  @override
+  String gClipboard(Object thing) {
+    return '$thing a été copié dans le presse-papiers.';
+  }
 
   @override
   String get gAttention => 'Attention';
@@ -106,6 +195,9 @@ class EFUILangFr extends EFUILang {
   String gSetToValue(Object name, Object value) {
     return '$name est défini sur $value';
   }
+
+  @override
+  String get gRemove => 'Retirer';
 
   @override
   String get gReset => 'Réinitialiser';
@@ -133,10 +225,19 @@ class EFUILangFr extends EFUILang {
   String get gCreditTo => 'Crédits à :';
 
   @override
+  String get gCreator => 'Créateur de';
+
+  @override
+  String get gMadeBy => 'Fait par';
+
+  @override
   String get gYou => 'Défini par vous';
 
   @override
   String get ssPageTitle => 'Paramètres';
+
+  @override
+  String get ssNavHint => 'Ouvrir la page des paramètres';
 
   @override
   String get ssSettingsGuide =>
@@ -156,10 +257,7 @@ class EFUILangFr extends EFUILang {
   String get ssLanguage => 'Langue';
 
   @override
-  String get ssLanguages => 'Langues';
-
-  @override
-  String get ssLangHint => 'Langue de l\'appli';
+  String get ssLangHint => 'Activer pour changer la langue de l\'application';
 
   @override
   String get ssRandom => 'Randomiser';
@@ -181,6 +279,17 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
+  String get tsTextBackground => 'Opacité de l\'arrière-plan du texte';
+
+  @override
+  String get tsIconSize => 'Taille de l\'icône';
+
+  @override
+  String tsLinkHint(Object style) {
+    return 'Activer pour modifier $style';
+  }
+
+  @override
   String get tsDisplay => 'Affichage';
 
   @override
@@ -194,11 +303,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get tsLabel => 'Label';
-
-  @override
-  String tsLinkHint(Object style) {
-    return 'Activer pour modifier $style';
-  }
 
   @override
   String get tsFontFamily => 'Police de caractères';
@@ -223,12 +327,6 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get tsLineHeight => 'Hauteur de ligne';
-
-  @override
-  String get tsDecrease => 'Réduire';
-
-  @override
-  String get tsIncrease => 'Augmenter';
 
   @override
   String get tsDisplayP1 => 'Est-ce que ça ';
@@ -298,153 +396,14 @@ class EFUILangFr extends EFUILang {
   String get csPageTitle => 'Paramètres de couleur';
 
   @override
-  String csPickerHint(Object name) {
-    return 'Ouvre un sélecteur de couleurs pour $name. Appuyer longuement pour plus d\'options.';
-  }
+  String get csPickerHint =>
+      'Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d\'options.';
 
   @override
   String get csMonoChrome => 'Utiliser un schéma monochrome';
 
   @override
   String get csHighContrast => 'Utiliser un schéma à contraste élevé';
-
-  @override
-  String get csPrimary => 'Primary';
-
-  @override
-  String get csOnPrimary => 'On primary';
-
-  @override
-  String get csPrimaryContainer => 'Primary container';
-
-  @override
-  String get csOnPrimaryContainer => 'On primary container';
-
-  @override
-  String get csPrimaryFixed => 'Primary fixed';
-
-  @override
-  String get csPrimaryFixedDim => 'Primary fixed dim';
-
-  @override
-  String get csOnPrimaryFixed => 'On primary fixed';
-
-  @override
-  String get csOnPrimaryFixedVariant => 'On primary fixed variant';
-
-  @override
-  String get csSecondary => 'Secondary';
-
-  @override
-  String get csOnSecondary => 'On secondary';
-
-  @override
-  String get csSecondaryContainer => 'Secondary container';
-
-  @override
-  String get csOnSecondaryContainer => 'On secondary container';
-
-  @override
-  String get csSecondaryFixed => 'Secondary fixed';
-
-  @override
-  String get csSecondaryFixedDim => 'Secondary fixed dim';
-
-  @override
-  String get csOnSecondaryFixed => 'On secondary fixed';
-
-  @override
-  String get csOnSecondaryFixedVariant => 'On secondary fixed variant';
-
-  @override
-  String get csTertiary => 'Tertiary';
-
-  @override
-  String get csOnTertiary => 'On tertiary';
-
-  @override
-  String get csTertiaryContainer => 'Tertiary container';
-
-  @override
-  String get csOnTertiaryContainer => 'On tertiary container';
-
-  @override
-  String get csTertiaryFixed => 'Tertiary fixed';
-
-  @override
-  String get csTertiaryFixedDim => 'Tertiary fixed dim';
-
-  @override
-  String get csOnTertiaryFixed => 'On tertiary fixed';
-
-  @override
-  String get csOnTertiaryFixedVariant => 'On tertiary fixed variant';
-
-  @override
-  String get csError => 'Error';
-
-  @override
-  String get csOnError => 'On error';
-
-  @override
-  String get csErrorContainer => 'Error container';
-
-  @override
-  String get csOnErrorContainer => 'On error container';
-
-  @override
-  String get csOutline => 'Outline';
-
-  @override
-  String get csOutlineVariant => 'Outline variant';
-
-  @override
-  String get csSurface => 'Surface';
-
-  @override
-  String get csOnSurface => 'On surface';
-
-  @override
-  String get csSurfaceDim => 'Surface dim';
-
-  @override
-  String get csSurfaceBright => 'Surface bright';
-
-  @override
-  String get csSurfaceContainerLowest => 'Surface container lowest';
-
-  @override
-  String get csSurfaceContainerLow => 'Surface container low';
-
-  @override
-  String get csSurfaceContainer => 'Surface container';
-
-  @override
-  String get csSurfaceContainerHigh => 'Surface container high';
-
-  @override
-  String get csSurfaceContainerHighest => 'Surface container highest';
-
-  @override
-  String get csOnSurfaceVariant => 'On surface variant';
-
-  @override
-  String get csInverseSurface => 'Inverse surface';
-
-  @override
-  String get csOnInverseSurface => 'On inverse surface';
-
-  @override
-  String get csInversePrimary => 'Inverse primary';
-
-  @override
-  String get csScrim => 'Scrim';
-
-  @override
-  String get csShadow => 'Shadow';
-
-  @override
-  String get csSurfaceTint => 'Surface tint';
 
   @override
   String get csPickerTitle => 'Choisissez une couleur';
@@ -459,23 +418,14 @@ class EFUILangFr extends EFUILang {
   String get csAddColor => 'Ajouter une couleur';
 
   @override
-  String get csRemove => 'Retirer';
-
-  @override
-  String get csReset => 'Réinitialiser';
-
-  @override
   String get csCurrVal => 'Valeur de couleur actuelle :';
 
   @override
   String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
 
   @override
-  String get csOptional => 'optionnel';
-
-  @override
   String get csFromImage =>
-      'Construire le schéma de couleurs à partir d\'une image';
+      'Un schéma de couleurs sera généré à partir de l\'image.';
 
   @override
   String get csColorScheme => 'schéma de couleurs';
@@ -497,11 +447,6 @@ class EFUILangFr extends EFUILang {
   @override
   String isButtonHint(Object title) {
     return 'Mettre à jour l\'image $title';
-  }
-
-  @override
-  String isDialogTitle(Object title) {
-    return 'Comment l\'image $title doit-elle être mise à jour ?';
   }
 
   @override

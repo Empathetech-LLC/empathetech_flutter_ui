@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
+
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -19,7 +22,7 @@ class EzColorSetting extends StatefulWidget {
   final void Function()? onRemove;
 
   /// Creates a tool for [configKey] ColorScheme values via [EzConfig]
-  /// When [configKey] is a text ("on") color, the base color will be used to generate a recommendation via [getTextColor]
+  /// When [configKey] is a text color (has [textColorPrefix]), the base color will be used to generate a recommendation via [getTextColor]
   /// [EzColorSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
   const EzColorSetting({
     super.key,
@@ -119,6 +122,17 @@ class _ColorSettingState extends State<EzColorSetting> {
             }
           }
 
+          late final List<Widget> materialActions;
+          late final List<Widget> cupertinoActions;
+
+          (materialActions, cupertinoActions) = ezActionPairs(
+            context: context,
+            onConfirm: onConfirm,
+            confirmIsDestructive: true,
+            denyMsg: denyMsg,
+            onDeny: onDeny,
+          );
+
           return EzAlertDialog(
             title: Text(
               l10n.csRecommended,
@@ -136,10 +150,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                         backgroundColor: theme.colorScheme.surface,
                         foregroundColor: theme.colorScheme.onSurface,
                         radius: padding + margin,
-                        child: Icon(
-                          PlatformIcons(context).eyeSlash,
-                          size: theme.textTheme.titleLarge?.fontSize,
-                        ),
+                        child: EzIcon(PlatformIcons(context).eyeSlash),
                       )
                     : CircleAvatar(
                         backgroundColor: Color(recommended),
@@ -148,22 +159,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                       ),
               ),
             ],
-            materialActions: ezMaterialActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              denyMsg: denyMsg,
-              onDeny: onDeny,
-              denyIsDestructive: true,
-            ),
-            cupertinoActions: ezCupertinoActions(
-              context: context,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              denyMsg: denyMsg,
-              onDeny: onDeny,
-              denyIsDestructive: true,
-            ),
+            materialActions: materialActions,
+            cupertinoActions: cupertinoActions,
           );
         },
       );
@@ -192,36 +189,36 @@ class _ColorSettingState extends State<EzColorSetting> {
 
         void onDeny() => Navigator.of(dialogContext).pop();
 
+        late final List<Widget> materialActions;
+        late final List<Widget> cupertinoActions;
+
+        (materialActions, cupertinoActions) = ezActionPairs(
+          context: context,
+          onConfirm: onConfirm,
+          confirmIsDestructive: true,
+          onDeny: onDeny,
+        );
+
         return EzAlertDialog(
           title: Text(
             l10n.gResetValue(
-              getColorName(context, widget.configKey).toLowerCase(),
+              getColorName(widget.configKey).toLowerCase(),
             ),
             textAlign: TextAlign.center,
           ),
           contents: <Widget>[
             Text(l10n.csCurrVal, textAlign: TextAlign.center),
-            EzSpacer(space: margin),
+            EzMargin(),
             EzTextIconButton(
               onPressed: () => Clipboard.setData(
                 ClipboardData(text: currColorLabel),
               ),
-              icon: const Icon(Icons.copy),
+              icon: EzIcon(Icons.copy),
               label: currColorLabel,
             ),
           ],
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
+          materialActions: materialActions,
+          cupertinoActions: cupertinoActions,
           needsClose: false,
         );
       },
@@ -249,8 +246,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                     widget.onRemove!();
                     Navigator.of(dialogContext).pop();
                   },
-                  icon: Icon(PlatformIcons(context).delete),
-                  label: l10n.csRemove,
+                  icon: EzIcon(PlatformIcons(context).delete),
+                  label: l10n.gRemove,
                 ),
                 spacer,
 
@@ -263,8 +260,8 @@ class _ColorSettingState extends State<EzColorSetting> {
                       Navigator.of(dialogContext).pop(resetResponse);
                     }
                   },
-                  icon: Icon(PlatformIcons(context).refresh),
-                  label: l10n.csReset,
+                  icon: EzIcon(PlatformIcons(context).refresh),
+                  label: l10n.gReset,
                 ),
               ],
               needsClose: true,
@@ -277,11 +274,12 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final String label = getColorName(context, widget.configKey);
+    final String label = getColorName(widget.configKey);
 
     return Semantics(
+      label: label,
       button: true,
-      hint: l10n.csPickerHint(label),
+      hint: l10n.csPickerHint,
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(
@@ -299,10 +297,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
                     radius: padding + margin,
-                    child: Icon(
-                      PlatformIcons(context).eyeSlash,
-                      size: theme.textTheme.titleLarge?.fontSize,
-                    ),
+                    child: EzIcon(PlatformIcons(context).eyeSlash),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,

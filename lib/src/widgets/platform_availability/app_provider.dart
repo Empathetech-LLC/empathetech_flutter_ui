@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,13 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
+  /// Provided to [PlatformProvider] with a [ScaffoldMessenger] layer
   final Widget app;
 
   /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
-  /// To enable [SnackBar]s, [MaterialBanner]s, etc.
+  /// To track [SnackBar]s, [MaterialBanner]s, etc.
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
 
+  /// [PlatformProvider.initialPlatform] passthrough
   final TargetPlatform? initialPlatform;
+
+  /// [PlatformProvider.settings] passthrough
   final PlatformSettingsData? settings;
 
   /// [PlatformProvider] wrapper with [ezThemeData] defaults
@@ -55,9 +59,13 @@ class EzAppProvider extends StatelessWidget {
         materialDarkTheme: _materialDark,
         cupertinoLightTheme: MaterialBasedCupertinoThemeData(
           materialTheme: _materialLight,
+        ).copyWith(
+          primaryColor: _materialLight.colorScheme.secondary,
         ),
         cupertinoDarkTheme: MaterialBasedCupertinoThemeData(
           materialTheme: _materialDark,
+        ).copyWith(
+          primaryColor: _materialDark.colorScheme.secondary,
         ),
         matchCupertinoSystemChromeBrightness: true,
       ),

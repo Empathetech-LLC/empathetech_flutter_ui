@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -30,8 +30,6 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
   // Gather the theme data //
 
   late final EFUILang l10n = EFUILang.of(context)!;
-
-  final double margin = EzConfig.get(marginKey);
 
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.wrap(EzConfig.get(paddingKey)),
@@ -70,26 +68,21 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Label
-        EzTextBackground(
-          Text(
-            l10n.ssThemeMode,
-            style: widget.labelStyle ?? Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
+        EzText(
+          l10n.ssThemeMode,
+          style: widget.labelStyle,
+          textAlign: TextAlign.center,
         ),
-        EzSpacer(space: margin),
+        EzMargin(),
 
         // Button
-        DropdownMenu<ThemeMode>(
-          width: dropdownWidth(
-            context: context,
-            entries: entries
-                .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
-                .toList(),
-          ),
+        EzDropdownMenu<ThemeMode>(
+          widthEntries: entries
+              .map((DropdownMenuEntry<ThemeMode> entry) => entry.label)
+              .toList(),
+          dropdownMenuEntries: entries,
           enableSearch: false,
           initialSelection: platformTheme,
-          dropdownMenuEntries: entries,
           onSelected: (ThemeMode? newThemeMode) async {
             switch (newThemeMode) {
               case ThemeMode.system:

@@ -1,12 +1,12 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter/foundation.dart';
 
 /// Custom [ColorScheme.highContrastDark]
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
@@ -71,11 +71,14 @@ const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
 );
 
 class EzMonoChromeColorsSetting extends StatelessWidget {
+  /// [ThemeData.colorScheme] for [Brightness.dark]
   final ColorScheme dark;
+
+  /// [ThemeData.colorScheme] for [Brightness.light]
   final ColorScheme light;
 
-  /// Easily store Flutter's built in high contrast color scheme(s) to EzConfig
-  /// Uses flutter_platform_widgets, specifically [PlatformTheme]
+  /// Easily store a custom mono chrome [ColorScheme] to [EzConfig]
+  /// [ezHighContrastDark] and [ezHighContrastLight] by default
   const EzMonoChromeColorsSetting({
     super.key,
     this.dark = ezHighContrastDark,
@@ -85,22 +88,29 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = EFUILang.of(context)!;
 
     return EzElevatedIconButton(
-      onPressed: isDark
-          ? () async {
-              await storeColorScheme(
+      onPressed: () async {
+        isDark
+            ? await storeColorScheme(
                 colorScheme: dark,
                 brightness: Brightness.dark,
-              );
-            }
-          : () async {
-              await storeColorScheme(
+              )
+            : await storeColorScheme(
                 colorScheme: light,
                 brightness: Brightness.light,
               );
-            },
-      icon: Icon(
+
+        if (context.mounted) {
+          ezSnackBar(
+            context: context,
+            message: (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)
+                .split('\n')[0],
+          );
+        }
+      },
+      icon: EzIcon(
         Icons.contrast,
         color: Theme.of(context).colorScheme.onSurface,
       ),

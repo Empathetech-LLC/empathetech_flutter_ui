@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,15 +8,17 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzBoldSetting extends StatefulWidget {
+  /// The [EzConfig] whose value is being updated
   final String configKey;
 
-  /// Use this to live update the [TextStyle] on your UI
+  /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool bold) notifierCallback;
 
-  /// Optional iconSize
+  /// Optional override
+  /// Defaults to [ThemeData.iconButtonTheme]s value
   final double? size;
 
-  /// Standardized tool for updating the [TextStyle.fontWeight] for the passed [configKey]
+  /// Standardized tool for toggling [FontWeight.bold] in the [TextStyle.fontWeight] that matches [configKey]
   const EzBoldSetting({
     super.key,
     required this.configKey,
@@ -35,41 +37,31 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
   late bool isBold = EzConfig.get(widget.configKey) ?? false;
 
-  // Define the build //
-
-  late final String tooltip = EFUILang.of(context)!.tsBold;
-
-  void swapState() async {
-    isBold = !isBold;
-    await EzConfig.setBool(widget.configKey, isBold);
-    widget.notifierCallback(isBold);
-    setState(() {});
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return isBold
-        ? IconButton(
-            style: IconButton.styleFrom(
+    return EzIconButton(
+      style: isBold
+          ? IconButton.styleFrom(
               foregroundColor: colorScheme.primary,
               side: BorderSide(color: colorScheme.primaryContainer),
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: const Icon(Icons.format_bold),
-          )
-        : IconButton(
-            style: IconButton.styleFrom(
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            )
+          : IconButton.styleFrom(
               foregroundColor: colorScheme.outline,
-              side: BorderSide(color: colorScheme.primaryContainer),
-              iconSize: widget.size,
+              side: BorderSide(color: colorScheme.outlineVariant),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
             ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: const Icon(Icons.format_bold_outlined),
-          );
+      onPressed: () async {
+        isBold = !isBold;
+        await EzConfig.setBool(widget.configKey, isBold);
+        widget.notifierCallback(isBold);
+        setState(() {});
+      },
+      tooltip: EFUILang.of(context)!.tsBold,
+      iconSize: widget.size,
+      icon: const Icon(Icons.format_bold_outlined),
+    );
   }
 }

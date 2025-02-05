@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,7 +9,6 @@ import 'package:example/main.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -34,9 +33,9 @@ void testSuite({
 
       ezLog('\nTesting navigation');
 
-      await touch(
+      await ezTouch(
         tester,
-        find.widgetWithText(ElevatedButton, l10n.csPageTitle),
+        find.widgetWithText(EzElevatedIconButton, l10n.csPageTitle),
       );
 
       //* Test functionality: Quick settings *//
@@ -44,13 +43,13 @@ void testSuite({
       ezLog('\nTesting quick settings');
 
       ezLog('\nValidating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
       ezLog('\nMonochrome');
-      await touchText(tester, l10n.csMonoChrome);
+      await ezTouchText(tester, l10n.csMonoChrome);
 
       ezLog('\nColorScheme from image');
       await testImageSetting(
@@ -75,17 +74,17 @@ void testSuite({
       ezLog('\nTesting advanced settings');
 
       ezLog('Navigation');
-      await touchText(tester, l10n.gAdvanced);
+      await ezTouchText(tester, l10n.gAdvanced);
 
       ezLog('Validating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.gEditingTheme(l10n.gDark.toLowerCase()),
       );
 
       await testCS(
         tester,
-        text: l10n.csPrimary,
+        text: csPrimary,
         l10n: l10n,
         defaultColor: true,
         textColor: false,
@@ -93,7 +92,7 @@ void testSuite({
       );
       await testCS(
         tester,
-        text: l10n.csOnSurface,
+        text: csOnSurface,
         l10n: l10n,
         defaultColor: true,
         textColor: true,
@@ -101,17 +100,17 @@ void testSuite({
       );
 
       ezLog('Testing add color modal');
-      await touchText(tester, l10n.csAddColor);
+      await ezTouchText(tester, l10n.csAddColor);
 
       ezLog('How this works');
-      await validateText(tester, l10n.gHowThisWorks);
+      await ezFindText(tester, l10n.gHowThisWorks);
 
       ezLog('Add on primary');
-      await touchText(tester, l10n.csOnPrimary);
-      await dismissTap(tester);
+      await ezTouchText(tester, csOnPrimary);
+      await ezDismiss(tester);
       await testCS(
         tester,
-        text: l10n.csOnPrimary,
+        text: csOnPrimary,
         l10n: l10n,
         defaultColor: false,
         textColor: true,
@@ -119,8 +118,8 @@ void testSuite({
       );
 
       ezLog('Add surface tint');
-      await touchText(tester, l10n.csAddColor);
-      await tester.ensureVisible(find.text(l10n.csSurfaceTint).last);
+      await ezTouchText(tester, l10n.csAddColor);
+      await tester.ensureVisible(find.text(csSurfaceTint).last);
       await tester.fling(
         find.descendant(
           of: find.byType(BottomSheet),
@@ -130,12 +129,12 @@ void testSuite({
         2000,
       );
       await tester.pumpAndSettle();
-      await touchText(tester, l10n.csSurfaceTint);
-      await dismissTap(tester);
+      await ezTouchText(tester, csSurfaceTint);
+      await ezDismiss(tester);
 
       await testCS(
         tester,
-        text: l10n.csSurfaceTint,
+        text: csSurfaceTint,
         l10n: l10n,
         defaultColor: false,
         textColor: false,
@@ -151,7 +150,7 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n.gBack);
+      await ezTapBack(tester, l10n.gBack);
       ezLog('\nColor settings test suite complete\n\n');
     });
 
@@ -164,119 +163,119 @@ Future<void> testCS(
   required bool isLefty,
 }) async {
   ezLog('\nTesting $text update\n');
-  await touchText(tester, text);
+  await ezTouchText(tester, text);
 
   if (textColor) {
     ezLog('Text options');
-    await validateText(tester, l10n.csRecommended);
+    await ezFindText(tester, l10n.csRecommended);
 
     ezLog('Close');
-    await touchText(tester, l10n.gClose);
+    await ezTouchText(tester, l10n.gClose);
 
     ezLog('Yes');
-    await touchText(tester, text);
-    await touchText(tester, l10n.gYes);
+    await ezTouchText(tester, text);
+    await ezTouchText(tester, l10n.gYes);
 
     ezLog('Custom\n');
-    await touchText(tester, text);
-    await touchText(tester, l10n.csUseCustom);
+    await ezTouchText(tester, text);
+    await ezTouchText(tester, l10n.csUseCustom);
   }
 
   ezLog('Layout');
   final bool isCupertino = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
 
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   }
 
   ezLog('Cancel');
-  await touchText(tester, l10n.gCancel);
+  await ezTouchText(tester, l10n.gCancel);
 
   ezLog('Apply');
-  await touchText(tester, text);
-  if (textColor) await touchText(tester, l10n.csUseCustom);
-  await chaChaNow(tester, find.byType(Slider));
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, text);
+  if (textColor) await ezTouchText(tester, l10n.csUseCustom);
+  await ezChaCha(tester, find.byType(Slider));
+  await ezTouchText(tester, l10n.gApply);
 
   ezLog('\nTesting $text reset\n');
-  await holdText(tester, text);
+  await ezHoldText(tester, text);
 
   ezLog('Text/layout');
 
   if (!defaultColor) {
-    await validateText(tester, l10n.gOptions);
-    await touchText(tester, l10n.gReset);
+    await ezFindText(tester, l10n.gOptions);
+    await ezTouchText(tester, l10n.gReset);
   }
 
-  await validateText(tester, l10n.gReset);
+  await ezFindText(tester, l10n.gReset);
 
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, Text(l10n.gYes));
+      expect(actions[1].text, Text(l10n.gNo));
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, Text(l10n.gNo));
+      expect(actions[1].text, Text(l10n.gYes));
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gYes).toString());
-      expect(actions[1].child.toString(), Text(l10n.gNo).toString());
+      expect(actions[0].text, Text(l10n.gYes));
+      expect(actions[1].text, Text(l10n.gNo));
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gNo).toString());
-      expect(actions[1].child.toString(), Text(l10n.gYes).toString());
+      expect(actions[0].text, Text(l10n.gNo));
+      expect(actions[1].text, Text(l10n.gYes));
     }
   }
 
   ezLog('No');
-  await touchText(tester, l10n.gNo);
+  await ezTouchText(tester, l10n.gNo);
 
   ezLog('Yes');
-  await holdText(tester, text);
-  if (!defaultColor) await touchText(tester, l10n.gReset);
-  await touchText(tester, l10n.gYes);
+  await ezHoldText(tester, text);
+  if (!defaultColor) await ezTouchText(tester, l10n.gReset);
+  await ezTouchText(tester, l10n.gYes);
 
   if (!defaultColor) {
     ezLog('Remove');
 
-    await holdText(tester, text);
-    await touchText(tester, l10n.gClose);
-    await holdText(tester, text);
-    await touchText(tester, l10n.csRemove);
+    await ezHoldText(tester, text);
+    await ezTouchText(tester, l10n.gClose);
+    await ezHoldText(tester, text);
+    await ezTouchText(tester, l10n.gRemove);
     expect(find.text(text), findsNothing);
   }
 }

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,10 +8,14 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzSwapWidget extends StatelessWidget {
+  /// When ! [ScreenSpace.isLimited]
   final Widget large;
+
+  /// When [ScreenSpace.isLimited]
   final Widget small;
 
-  /// [small] when[ScreenSpace.isLimited], [large] otherwise
+  /// [ScreenSpace.isLimited] ? [small] : [large]
+  /// Returns [small] if there is no [ScreenSpace] in the context
   const EzSwapWidget({
     super.key,
     required this.large,
@@ -19,8 +23,6 @@ class EzSwapWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
-    return limitedSpace ? small : large;
-  }
+  Widget build(BuildContext context) =>
+      (ScreenSpace.of(context)?.isLimited ?? true) ? small : large;
 }

@@ -1,9 +1,10 @@
 /* open_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import './screens/export.dart';
+import './structs/export.dart';
 import './utils/export.dart';
 
 import 'package:flutter/material.dart';
@@ -18,11 +19,8 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 void main() async {
   // Setup the app //
 
-  // Most apps need this
-  // https://stackoverflow.com/questions/63873338/
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set device orientation(s)
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -35,22 +33,17 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    // Paths to any locally stored images the app uses
     assetPaths: <String>{},
-
     preferences: prefs,
-
-    // Your brand colors, custom styling, etc
     defaults: empathetechConfig,
   );
 
   // Run the app //
   // With a feedback wrapper
 
-  late final TextStyle lightFeedbackText = buildBody(Colors.black);
-  late final TextStyle darkFeedbackText = buildBody(Colors.white);
+  late final TextStyle lightFeedbackText = ezBodyStyle(Colors.black);
+  late final TextStyle darkFeedbackText = ezBodyStyle(Colors.white);
 
-  // Run the app!
   runApp(BetterFeedback(
     theme: FeedbackThemeData(
       background: Colors.grey,
@@ -76,6 +69,7 @@ void main() async {
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
       const LocaleNamesLocalizationsDelegate(),
       ...EFUILang.localizationsDelegates,
+      ...Lang.localizationsDelegates,
       EmpathetechFeedbackLocalizationsDelegate(),
     ],
     localeOverride: EzConfig.getLocale(),
@@ -88,6 +82,7 @@ void main() async {
 /// https://docs.flutter.dev/ui/navigation/deep-linking
 final GoRouter router = GoRouter(
   initialLocation: homePath,
+  errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
   routes: <RouteBase>[
     GoRoute(
       path: homePath,
@@ -95,24 +90,75 @@ final GoRouter router = GoRouter(
       builder: (_, __) => const HomeScreen(),
       routes: <RouteBase>[
         GoRoute(
-          path: textSettingsPath,
-          name: textSettingsPath,
-          builder: (_, __) => const TextSettingsScreen(),
+          path: generateScreenPath,
+          name: generateScreenPath,
+          builder: (_, GoRouterState state) {
+            final EAGConfig config = state.extra as EAGConfig;
+            return GenerateScreen(config: config);
+          },
         ),
         GoRoute(
-          path: layoutSettingsPath,
-          name: layoutSettingsPath,
-          builder: (_, __) => const LayoutSettingsScreen(),
+          path: archiveScreenPath,
+          name: archiveScreenPath,
+          builder: (_, GoRouterState state) {
+            final EAGConfig config = state.extra as EAGConfig;
+            return ArchiveScreen(config: config);
+          },
         ),
         GoRoute(
-          path: colorSettingsPath,
-          name: colorSettingsPath,
-          builder: (_, __) => const ColorSettingsScreen(),
-        ),
-        GoRoute(
-          path: imageSettingsPath,
-          name: imageSettingsPath,
-          builder: (_, __) => const ImageSettingsScreen(),
+          path: settingsHomePath,
+          name: settingsHomePath,
+          builder: (_, __) => const SettingsHomeScreen(),
+          routes: <RouteBase>[
+            GoRoute(
+              path: textSettingsPath,
+              name: textSettingsPath,
+              builder: (_, __) => const TextSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzSettingType.quick.path,
+                  name: 'text_${EzSettingType.quick.path}',
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.quick),
+                ),
+                GoRoute(
+                  path: EzSettingType.advanced.path,
+                  name: 'text_${EzSettingType.advanced.path}',
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.advanced),
+                ),
+              ],
+            ),
+            GoRoute(
+              path: layoutSettingsPath,
+              name: layoutSettingsPath,
+              builder: (_, __) => const LayoutSettingsScreen(),
+            ),
+            GoRoute(
+              path: colorSettingsPath,
+              name: colorSettingsPath,
+              builder: (_, __) => const ColorSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzSettingType.quick.path,
+                  name: 'color_${EzSettingType.quick.path}',
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.quick),
+                ),
+                GoRoute(
+                  path: EzSettingType.advanced.path,
+                  name: 'color_${EzSettingType.advanced.path}',
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.advanced),
+                ),
+              ],
+            ),
+            GoRoute(
+              path: imageSettingsPath,
+              name: imageSettingsPath,
+              builder: (_, __) => const ImageSettingsScreen(),
+            ),
+          ],
         ),
       ],
     ),
@@ -126,18 +172,18 @@ class OpenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return EzAppProvider(
       app: PlatformApp.router(
-        // Production ready!
         debugShowCheckedModeBanner: false,
 
         // Language handlers
         localizationsDelegates: <LocalizationsDelegate<dynamic>>{
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
+          ...Lang.localizationsDelegates,
           EmpathetechFeedbackLocalizationsDelegate(),
         },
 
         // Supported languages
-        supportedLocales: EFUILang.supportedLocales,
+        supportedLocales: Lang.supportedLocales,
 
         // Current language
         locale: EzConfig.getLocale(),

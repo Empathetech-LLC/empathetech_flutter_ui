@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,37 +8,39 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzInlineLink extends WidgetSpan {
-  /// Link message
+  /// [EzLink.text] passthrough
   final String text;
 
+  /// [EzLink.key] passthrough
   final Key? key;
 
-  /// Optional [Color] to overwrite the default [ColorScheme.primary]
+  /// [EzLink.textColor] passthrough
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
-  /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
+  /// [EzLink.decorationColor] passthrough
   final Color? decorationColor;
 
+  /// Defaults to [Colors.transparent]
+  final Color backgroundColor;
+
+  /// [EzLink.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// Destination function
+  /// [EzLink.onTap] passthrough
   final void Function()? onTap;
 
-  /// Destination URL
+  /// [EzLink.url] passthrough
   final Uri? url;
 
-  /// Message for screen readers
+  /// [EzLink.hint] passthrough
   /// Don't repeat [text] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// Message for screen readers when the parent [EzRichText] is focused
-  final String? richSemanticsLabel;
+  final String? richLabel;
 
-  /// Optional tooltip override
+  /// [EzLink.tooltip] passthrough
   final String? tooltip;
-
-  final WidgetStatesController? statesController;
 
   /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
   /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
@@ -53,13 +55,13 @@ class EzInlineLink extends WidgetSpan {
     this.key,
     this.textColor,
     this.decorationColor,
+    this.backgroundColor = Colors.transparent,
     this.textAlign,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
-    this.richSemanticsLabel, // Not used here, but in EzRichText
+    required this.hint,
+    this.richLabel, // Not used here, but in EzRichText
     this.tooltip,
-    this.statesController,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
@@ -69,13 +71,13 @@ class EzInlineLink extends WidgetSpan {
             style: style,
             textColor: textColor,
             decorationColor: decorationColor,
+            backgroundColor: backgroundColor,
             textAlign: textAlign,
             padding: EdgeInsets.zero,
             onTap: onTap,
             url: url,
-            semanticsLabel: semanticsLabel,
+            hint: hint,
             tooltip: tooltip,
-            statesController: statesController,
           ),
         );
 }

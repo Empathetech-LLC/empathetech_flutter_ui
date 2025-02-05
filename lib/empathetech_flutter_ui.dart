@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -17,6 +17,7 @@ export 'src/consts/google_fonts.dart';
 // Functions //
 
 // General
+export 'src/functions/cmd.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
 export 'src/functions/feedback_localizations.dart';
@@ -44,19 +45,30 @@ export 'src/l10n/efui_lang.dart';
 export 'src/sample_screens/color_settings.dart';
 export 'src/sample_screens/image_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
+export 'src/sample_screens/setting_type.dart';
+export 'src/sample_screens/settings_home.dart';
 export 'src/sample_screens/text_settings.dart';
 
 // Widgets //
 
 // Helpers
+export 'src/widgets/helpers/checkbox.dart';
+export 'src/widgets/helpers/cli.dart';
 export 'src/widgets/helpers/countdown_timer.dart';
+export 'src/widgets/helpers/dropdown_menu.dart';
+export 'src/widgets/helpers/elevated_button.dart';
+export 'src/widgets/helpers/fabulous.dart';
 export 'src/widgets/helpers/feedback_button.dart';
-export 'src/widgets/helpers/row.dart';
-export 'src/widgets/helpers/screen.dart';
-export 'src/widgets/helpers/scroll_view.dart';
+export 'src/widgets/helpers/icon_button.dart';
+export 'src/widgets/helpers/menu_button.dart';
+export 'src/widgets/helpers/radio.dart';
 export 'src/widgets/helpers/sizing.dart';
 export 'src/widgets/helpers/spacers.dart';
-export 'src/widgets/helpers/text_background.dart';
+export 'src/widgets/helpers/text_button.dart';
+export 'src/widgets/helpers/text.dart';
+export 'src/widgets/helpers/tool_tipper.dart';
+export 'src/widgets/helpers/translations_pending.dart';
+export 'src/widgets/helpers/video_player.dart';
 export 'src/widgets/helpers/warning.dart';
 
 // Platform availability
@@ -65,12 +77,12 @@ export 'src/widgets/platform_availability/app_provider.dart';
 export 'src/widgets/platform_availability/back_action.dart';
 
 // Responsive design
-export 'src/widgets/responsive_design/elevated_button.dart';
-export 'src/widgets/responsive_design/menu_button.dart';
 export 'src/widgets/responsive_design/row_col.dart';
+export 'src/widgets/responsive_design/row.dart';
+export 'src/widgets/responsive_design/screen.dart';
+export 'src/widgets/responsive_design/scroll_view.dart';
 export 'src/widgets/responsive_design/swap_scaffold.dart';
 export 'src/widgets/responsive_design/swap_widget.dart';
-export 'src/widgets/responsive_design/text_button.dart';
 export 'src/widgets/responsive_design/transitions.dart';
 
 // Screen reader support

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EzLink extends StatefulWidget {
-  /// Link message
+  /// The [TextButton.child] will be [Text] with [text] and all provided styling
   final String text;
 
   /// Defaults to [TextTheme.bodyLarge]
@@ -18,10 +18,13 @@ class EzLink extends StatefulWidget {
   /// Defaults to [ColorScheme.primary]
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
   /// Defaults to [textColor]... which defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// Optional override for [TextButton.style]
+  final Color? backgroundColor;
+
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
@@ -29,39 +32,38 @@ class EzLink extends StatefulWidget {
   final EdgeInsets? padding;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
   /// Message for screen readers
   /// Don't repeat [text] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// On hover/focus hint
-  /// Defaults to [semanticsLabel] (or [text])
+  /// Defaults to [hint] (or [text])
   final String? tooltip;
-
-  final WidgetStatesController? statesController;
 
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]
-  /// Automatically draws [text] with [ColorScheme.primary] and adds an [TextDecoration.underline] on hover/focus
-  /// The [color] can optionally be overwritten
+  /// Always has a [tooltip]; if one is not provided, it will default to [hint]
+  /// Automatically draws [text] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzLink(
     this.text, {
     super.key,
     this.style,
     this.textColor,
     this.decorationColor,
+    this.backgroundColor,
     this.textAlign,
     this.padding,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    required this.hint,
     this.tooltip,
-    this.statesController,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -96,10 +98,10 @@ class _EzLinkState extends State<EzLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.text}; ${widget.semanticsLabel}';
+    final String semantics = '${widget.text}; ${widget.hint}';
 
     return Tooltip(
-      message: widget.tooltip ?? widget.semanticsLabel,
+      message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
       child: Semantics(
         link: true,
@@ -109,6 +111,7 @@ class _EzLinkState extends State<EzLink> {
             style: TextButton.styleFrom(
               padding: widget.padding,
               overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+              backgroundColor: widget.backgroundColor,
             ),
             onPressed: widget.onTap ?? () => launchUrl(widget.url!),
             onLongPress: null,
@@ -127,21 +130,22 @@ class _EzLinkState extends State<EzLink> {
 }
 
 class EzIconLink extends StatefulWidget {
-  /// Link message
+  /// The [TextButton.icon] label will be [Text] with [label] and all provided styling
   final String label;
 
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? style;
 
+  /// [TextButton.icon] passthrough
   final Widget icon;
 
   /// Defaults to [ColorScheme.onSurface]
   final Color? textColor;
 
-  /// Optional [TextDecoration] color override
   /// Defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [Text.textAlign] passthrough
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
@@ -149,27 +153,25 @@ class EzIconLink extends StatefulWidget {
   final EdgeInsets? padding;
 
   /// Destination function
+  /// Provide [onTap] or [url], but not both
   final void Function()? onTap;
 
   /// Destination URL
+  /// Provide [onTap] or [url], but not both
   final Uri? url;
 
   /// Message for screen readers
   /// Don't repeat [label] here, it is appended automatically
-  final String semanticsLabel;
+  final String hint;
 
   /// On hover/focus hint
-  /// Defaults to [semanticsLabel] (or [label])
+  /// Defaults to [hint] (or [label])
   final String? tooltip;
-
-  final WidgetStatesController? statesController;
 
   /// [TextButton.icon] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  /// Always has a tool [tooltip]. If one is not provided, it will default to [semanticsLabel]...
-  /// Highlights [label] of [baseColor] [ColorScheme.onSurface] with [ColorScheme.primary]
-  /// ...and adds an [TextDecoration.underline] on hover/focus
-  /// The [decorationColor] and [textColor] can optionally be overwritten
+  /// Always has a tool [tooltip]; if one is not provided, it will default to [hint]
+  /// Highlights [label] with [decorationColor] and adds an [TextDecoration.underline] on hover/focus
   const EzIconLink({
     super.key,
     required this.label,
@@ -181,9 +183,8 @@ class EzIconLink extends StatefulWidget {
     this.padding,
     this.onTap,
     this.url,
-    required this.semanticsLabel,
+    required this.hint,
     this.tooltip,
-    this.statesController,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -218,10 +219,10 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.label}; ${widget.semanticsLabel}';
+    final String semantics = '${widget.label}; ${widget.hint}';
 
     return Tooltip(
-      message: widget.tooltip ?? widget.semanticsLabel,
+      message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
       child: Semantics(
         link: true,

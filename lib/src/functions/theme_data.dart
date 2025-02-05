@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,19 +7,17 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-/// Creates a [ThemeData] with a [ColorScheme] generated via [ezColorScheme]
-/// Also has some tweaks to the base Material [ThemeData], such as...
-///   margin, padding, [TextStyle]s, [IconData]
+/// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
   // Gather values from EzConfig //
 
   final ColorScheme colorScheme = ezColorScheme(brightness);
   final Color highlightColor =
-      colorScheme.primary.withOpacity(highlightOpacity);
+      colorScheme.primary.withValues(alpha: highlightOpacity);
 
   final TextTheme textTheme = ezTextTheme(colorScheme.onSurface);
 
-  final double iconSize = textTheme.titleLarge!.fontSize!;
+  final double iconSize = EzConfig.get(iconSizeKey);
 
   final IconThemeData iconData = IconThemeData(
     color: colorScheme.primary,
@@ -34,8 +32,8 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double textBackgroundOpacity = EzConfig.get(
     brightness == Brightness.dark
-        ? darkTextBackgroundOKey
-        : lightTextBackgroundOKey,
+        ? darkTextBackgroundOpacityKey
+        : lightTextBackgroundOpacityKey,
   );
 
   final double margin = EzConfig.get(marginKey);
@@ -71,8 +69,8 @@ ThemeData ezThemeData(Brightness brightness) {
     primaryIconTheme: iconData,
 
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: colorScheme.primary,
-      selectionColor: colorScheme.secondary.withOpacity(selectionOpacity),
+      cursorColor: colorScheme.secondary,
+      selectionColor: colorScheme.secondary.withValues(alpha: selectionOpacity),
       selectionHandleColor: colorScheme.primary,
     ),
 
@@ -105,7 +103,7 @@ ThemeData ezThemeData(Brightness brightness) {
       fillColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected))
             ? colorScheme.primary
-            : colorScheme.surface.withOpacity(textBackgroundOpacity),
+            : colorScheme.surface.withValues(alpha: textBackgroundOpacity),
       ),
       checkColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected))
@@ -144,10 +142,11 @@ ThemeData ezThemeData(Brightness brightness) {
         prefixIconColor: colorScheme.primary,
         iconColor: colorScheme.primary,
         suffixIconColor: colorScheme.primary,
-        hintStyle: textTheme.bodyLarge,
+        hintStyle: textTheme.bodyLarge?.copyWith(color: colorScheme.outline),
         labelStyle: textTheme.labelLarge,
         helperStyle: textTheme.labelLarge,
         errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
+        errorMaxLines: 1,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.primaryContainer),
           borderRadius: ezRoundEdge,
@@ -193,7 +192,7 @@ ThemeData ezThemeData(Brightness brightness) {
         foregroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
-        side: null,
+        side: BorderSide.none,
         iconSize: iconSize,
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
@@ -203,12 +202,13 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surface.withOpacity(textBackgroundOpacity),
+      fillColor: colorScheme.surface,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
-      hintStyle: textTheme.bodyLarge,
+      hintStyle: textTheme.bodyLarge?.copyWith(color: colorScheme.outline),
       labelStyle: textTheme.labelLarge,
+      helperStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
     ),
@@ -276,7 +276,8 @@ ThemeData ezThemeData(Brightness brightness) {
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor:
+            colorScheme.surface.withValues(alpha: textBackgroundOpacity),
         foregroundColor: colorScheme.onSurface,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
@@ -298,7 +299,7 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       textStyle: textTheme.bodyLarge,
       textAlign: TextAlign.center,
-      margin: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(margin),
       waitDuration: const Duration(milliseconds: 750),
     ),

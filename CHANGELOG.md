@@ -2,11 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.0.0] - 2025-02-04
+### Updated
+- Oops, I did it again...
+  - "Honestly, pretty much everything" (Empathetech, v7: Sep 2024)
+- Summary
+  - Standardized naming
+    - Every method and class that isn't a direct alias has been labeled ez/Ez
+  - Even more comments
+    - Just about every method, class, and parameter has a doc comment
+  - Lots of helper Widgets to streamline creating EzConfig responsive layouts
+  - While making EAG (below) and comment auditing, gave some old code some TLC. Things with known breaking changes...
+    - EzAlertDialog
+    - Some EzConfig keys (names)
+      - bold and italics across the board
+      - google font keys
+      - iconSize is new and required
+  - Bug fixes
+
+### Added
+- Empathetech App Generator!
+  - Open UI is no longer a demo app, and can now be used to generate new empathetic apps
+    - Open UI now has it's own l10n library as well
+- Open UI version tracking
+  - And a FABulous Widget to go with it
+- ezCmd
+- Lots of text helper functions
+
+### Revived
+- EFUI video player
+  - Now just a class in EFUI
+
 ## [7.3.1] - 2024-10-19
 ### Updated
 - Feedback button
   - Better communication and works on web!
 - Feedback related localizations
+- Moved color key names to consts
 
 ### Added
 - ezLog function to differentiate permanent and temporary logs

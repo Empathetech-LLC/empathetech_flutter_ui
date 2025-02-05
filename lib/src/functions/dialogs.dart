@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// Log the passed message and display an [EzAlertDialog] to notify the user
-Future<dynamic> logAlert(
+/// [ezLog] the passed message and display an [EzAlertDialog] to notify the user
+Future<dynamic> ezLogAlert(
   BuildContext context, {
   String? title,
   required String message,
@@ -29,7 +29,7 @@ Future<dynamic> logAlert(
   );
 }
 
-/// Wrap a [ColorPicker] in an [EzAlertDialog]
+/// Wraps a [ColorPicker] in an [EzAlertDialog]
 Future<dynamic> ezColorPicker(
   BuildContext context, {
   String? title,
@@ -55,6 +55,18 @@ Future<dynamic> ezColorPicker(
         onDeny();
         Navigator.of(dialogContext).pop();
       }
+
+      late final List<Widget> materialActions;
+      late final List<Widget> cupertinoActions;
+
+      (materialActions, cupertinoActions) = ezActionPairs(
+        context: context,
+        confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
+        onConfirm: confirm,
+        confirmIsDestructive: true,
+        denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
+        onDeny: deny,
+      );
 
       return EzAlertDialog(
         title: Text(
@@ -84,22 +96,8 @@ Future<dynamic> ezColorPicker(
           opacityTrackHeight: min(padding * 2, 50.0),
           showColorCode: true,
         ),
-        materialActions: ezMaterialActions(
-          context: context,
-          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-          onConfirm: confirm,
-          confirmIsDestructive: true,
-          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-          onDeny: deny,
-        ),
-        cupertinoActions: ezCupertinoActions(
-          context: context,
-          confirmMsg: confirmMsg ?? EFUILang.of(context)!.gApply,
-          onConfirm: confirm,
-          confirmIsDestructive: true,
-          denyMsg: denyMsg ?? EFUILang.of(context)!.gCancel,
-          onDeny: deny,
-        ),
+        materialActions: materialActions,
+        cupertinoActions: cupertinoActions,
         needsClose: false,
       );
     },

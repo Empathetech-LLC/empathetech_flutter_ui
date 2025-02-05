@@ -1,9 +1,9 @@
 /* open_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
-import 'screens/home.dart' as home;
+import 'screens/settings_home.dart' as home;
 import 'screens/text_settings.dart' as text;
 import 'screens/layout_settings.dart' as layout;
 import 'screens/color_settings.dart' as color;
@@ -22,7 +22,7 @@ void main() async {
   final Map<String, Object> testConfig = <String, Object>{
     ...empathetechConfig,
     isDarkThemeKey: true,
-    localeKey: <String>['fr'],
+    appLocaleKey: <String>['fr'],
   };
 
   SharedPreferences.setMockInitialValues(testConfig);

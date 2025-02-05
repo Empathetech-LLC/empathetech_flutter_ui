@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -56,7 +56,7 @@ class EzMenuButton extends StatefulWidget {
     this.requestFocusOnHover = true,
     this.onHover,
     this.onFocusChange,
-    this.underline = true,
+    this.underline = false,
     this.decorationColor,
     this.focusNode,
     this.autofocus = false,
@@ -128,7 +128,7 @@ class _EzMenuButtonState extends State<EzMenuButton> {
         widget.label,
         style: textStyle,
         textAlign:
-            widget.textAlign ?? (isLefty ? TextAlign.left : TextAlign.right),
+            widget.textAlign ?? (isLefty ? TextAlign.start : TextAlign.end),
       ),
     );
   }

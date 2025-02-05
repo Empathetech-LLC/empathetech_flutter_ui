@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,15 +8,17 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzItalicSetting extends StatefulWidget {
+  /// The [EzConfig] whose value is being updated
   final String configKey;
 
-  /// Use this to live update the [TextStyle] on your UI
+  /// Optional callback to live update the [TextStyle] on your UI
   final void Function(bool italic) notifierCallback;
 
-  /// Optional iconSize
+  /// Optional override
+  /// Defaults to [ThemeData.iconButtonTheme]s value
   final double? size;
 
-  /// Standardized tool for updating the [TextStyle.fontStyle] for the passed [configKey]
+  /// Standardized tool for toggling [FontStyle.italic] in the [TextStyle.fontStyle] that matches [configKey]
   const EzItalicSetting({
     super.key,
     required this.configKey,
@@ -35,41 +37,31 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
   late bool isItalic = EzConfig.get(widget.configKey) ?? false;
 
-  // Define the build //
-
-  late final String tooltip = EFUILang.of(context)!.tsItalic;
-
-  void swapState() async {
-    isItalic = !isItalic;
-    await EzConfig.setBool(widget.configKey, isItalic);
-    widget.notifierCallback(isItalic);
-    setState(() {});
-  }
-
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    return isItalic
-        ? IconButton(
-            style: IconButton.styleFrom(
+    return EzIconButton(
+      style: isItalic
+          ? IconButton.styleFrom(
               foregroundColor: colorScheme.primary,
               side: BorderSide(color: colorScheme.primaryContainer),
-              iconSize: widget.size,
-            ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: const Icon(Icons.format_italic),
-          )
-        : IconButton(
-            style: IconButton.styleFrom(
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+            )
+          : IconButton.styleFrom(
               foregroundColor: colorScheme.outline,
-              side: BorderSide(color: colorScheme.primaryContainer),
-              iconSize: widget.size,
+              side: BorderSide(color: colorScheme.outlineVariant),
+              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
             ),
-            onPressed: swapState,
-            tooltip: tooltip,
-            icon: const Icon(Icons.format_italic_outlined),
-          );
+      onPressed: () async {
+        isItalic = !isItalic;
+        await EzConfig.setBool(widget.configKey, isItalic);
+        widget.notifierCallback(isItalic);
+        setState(() {});
+      },
+      tooltip: EFUILang.of(context)!.tsItalic,
+      iconSize: widget.size,
+      icon: const Icon(Icons.format_italic),
+    );
   }
 }

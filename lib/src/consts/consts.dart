@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -26,8 +26,8 @@ const double largeBreakpoint = 1000.0;
 /// 0.08
 const double highlightOpacity = 0.08;
 
-/// 0.40
-const double selectionOpacity = 0.40;
+/// 0.12
+const double focusOpacity = 0.12;
 
 /// 0.25
-const double containerOpacity = 0.25;
+const double selectionOpacity = 0.25;

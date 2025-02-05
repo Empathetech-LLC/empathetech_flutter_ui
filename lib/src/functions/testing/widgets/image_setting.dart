@@ -1,7 +1,9 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'dart:math';
@@ -9,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// For integration testing
 /// Tests [EzImageSetting]
@@ -23,10 +24,9 @@ Future<void> testImageSetting(
   required bool isLefty,
 }) async {
   ezLog('Opening dialog');
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('Validating text');
-  await validateText(tester, l10n.isDialogTitle(type));
 
   if (updateCS) {
     final List<Widget> updateCSWidgets =
@@ -47,7 +47,7 @@ Future<void> testImageSetting(
       );
     }
 
-    await validateText(tester, l10n.isUseForColors);
+    await ezFindText(tester, l10n.isUseForColors);
   }
 
   ezLog('Validating platform options\n');
@@ -96,15 +96,15 @@ Future<void> _webTests(
     isLefty: isLefty,
     isCupertino: false,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(tester, find.byIcon(Icons.clear));
+  await ezTouch(tester, find.byIcon(Icons.clear));
   expect(find.byIcon(Icons.edit), findsOneWidget);
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
 /// Mobile (Android, iOS) sub-set of [testImageSetting]
@@ -123,7 +123,7 @@ Future<void> _mobileTests(
   ezLog('\nFrom file');
   await _testFile(tester,
       l10n: l10n, isLefty: isLefty, isCupertino: isCupertino);
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom camera');
   await _testCamera(
@@ -132,7 +132,7 @@ Future<void> _mobileTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom network');
   await _testNetwork(
@@ -142,10 +142,10 @@ Future<void> _mobileTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.clear : Icons.clear),
   );
@@ -153,13 +153,13 @@ Future<void> _mobileTests(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsOneWidget,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
-/// Desktop (Linux, MacOS, Windows) sub-set of [testImageSetting]
+/// Desktop (Linux, macOS, Windows) sub-set of [testImageSetting]
 Future<void> _desktopTests(
   WidgetTester tester, {
   required Finder finder,
@@ -179,7 +179,7 @@ Future<void> _desktopTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nFrom network');
   await _testNetwork(
@@ -189,10 +189,10 @@ Future<void> _desktopTests(
     isLefty: isLefty,
     isCupertino: isCupertino,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClear');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(Platform.isIOS ? CupertinoIcons.clear : Icons.clear),
   );
@@ -200,12 +200,13 @@ Future<void> _desktopTests(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsOneWidget,
   );
-  await touch(tester, finder);
+  await ezTouch(tester, finder);
 
   ezLog('\nClose');
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
+/// Test picking images from the file system
 Future<void> _testFile(
   WidgetTester tester, {
   required EFUILang l10n,
@@ -216,9 +217,10 @@ Future<void> _testFile(
     find.byIcon(isCupertino ? CupertinoIcons.folder : Icons.folder),
     findsOneWidget,
   );
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
+/// Test using images from camera
 Future<void> _testCamera(
   WidgetTester tester, {
   required EFUILang l10n,
@@ -229,9 +231,10 @@ Future<void> _testCamera(
     find.byIcon(isCupertino ? CupertinoIcons.photo_camera : Icons.photo_camera),
     findsOneWidget,
   );
-  await touchText(tester, l10n.gClose);
+  await ezTouchText(tester, l10n.gClose);
 }
 
+/// Test using images from the web
 Future<void> _testNetwork(
   WidgetTester tester, {
   required EFUILang l10n,
@@ -239,51 +242,51 @@ Future<void> _testNetwork(
   required bool isLefty,
   required bool isCupertino,
 }) async {
-  await touch(tester, find.byIcon(Icons.computer_outlined));
+  await ezTouch(tester, find.byIcon(Icons.computer_outlined));
 
   ezLog('Validating text');
-  await validateText(tester, l10n.isEnterURL);
+  await ezFindText(tester, l10n.isEnterURL);
 
   ezLog('Validating layout');
   if (isCupertino) {
-    final List<CupertinoDialogAction> actions =
+    final List<EzCupertinoAction> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .cupertinoActions!;
+            .cupertinoActions! as List<EzCupertinoAction>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   } else {
-    final List<TextButton> actions =
+    final List<EzTextButton> actions =
         (tester.widget(find.byType(EzAlertDialog).last) as EzAlertDialog)
-            .materialActions! as List<TextButton>;
+            .materialActions! as List<EzTextButton>;
 
     expect(actions.length, 2);
     if (isLefty) {
-      expect(actions[0].child.toString(), Text(l10n.gApply).toString());
-      expect(actions[1].child.toString(), Text(l10n.gCancel).toString());
+      expect(actions[0].text, l10n.gApply);
+      expect(actions[1].text, l10n.gCancel);
     } else {
-      expect(actions[0].child.toString(), Text(l10n.gCancel).toString());
-      expect(actions[1].child.toString(), Text(l10n.gApply).toString());
+      expect(actions[0].text, l10n.gCancel);
+      expect(actions[1].text, l10n.gApply);
     }
   }
 
   ezLog('Cancel');
-  await touchText(tester, l10n.gCancel);
+  await ezTouchText(tester, l10n.gCancel);
 
   ezLog('Apply w/ invalid URL');
-  await touch(tester, find.byIcon(Icons.computer_outlined));
+  await ezTouch(tester, find.byIcon(Icons.computer_outlined));
   await tester.enterText(find.byType(TextFormField), 'invalid');
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, l10n.gApply);
 
   ezLog('Apply w/ valid URL');
   await tester.enterText(find.byType(TextFormField), getRandomURL(imageURLs));
-  await touchText(tester, l10n.gApply);
+  await ezTouchText(tester, l10n.gApply);
   expect(
     find.byIcon(isCupertino ? CupertinoIcons.pencil : Icons.edit),
     findsNothing,

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,55 +8,54 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzWarning extends StatelessWidget {
-  /// Warning [String] to grab the user's attention
-  final String? title;
-
-  final TextStyle? titleStyle;
-
   /// What does the user need to know?
   final String body;
 
+  /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
-  /// Optional icon [Color] override, defaults to [ColorScheme.secondary]
+  /// Warning [String] to grab the user's attention
+  /// Defaults to [EFUILang.gAttention]
+  final String? title;
+
+  /// Defaults to [TextTheme.titleLarge]
+  final TextStyle? titleStyle;
+
+  /// Defaults to [ColorScheme.secondary]
   final Color? iconColor;
 
   /// [Card] wrapper designed to grab attention for warnings...
   ///  /!\ [title] /!\
   ///      [body]
-  const EzWarning({
-    super.key,
+  const EzWarning(
+    this.body, {
+    this.bodyStyle,
     this.title,
     this.titleStyle,
-    required this.body,
-    this.bodyStyle,
     this.iconColor,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final ThemeData theme = Theme.of(context);
+    final EzSpacer margin = EzMargin(vertical: false);
 
-    final String warning = title ?? EFUILang.of(context)!.gAttention;
+    final ThemeData theme = Theme.of(context);
 
     final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
     final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
 
     final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
-    final EzSpacer rowPadding = EzSpacer(
-      space: EzConfig.get(paddingKey),
-      vertical: false,
-    );
-
     // Return the build
 
+    final String warning = title ?? EFUILang.of(context)!.gAttention;
+
     return Semantics(
-      button: false,
-      readOnly: true,
       label: '$warning: $body',
+      readOnly: true,
       child: ExcludeSemantics(
         child: Card(
           child: Container(
@@ -66,8 +65,8 @@ class EzWarning extends StatelessWidget {
               children: <Widget>[
                 // Title
                 EzScrollView(
-                  startCentered: true,
                   scrollDirection: Axis.horizontal,
+                  startCentered: true,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     // Thing1
@@ -76,14 +75,14 @@ class EzWarning extends StatelessWidget {
                       color: alertColor,
                       size: tStyle?.fontSize,
                     ),
-                    rowPadding,
+                    margin,
 
                     Text(
                       warning,
                       style: tStyle,
                       textAlign: TextAlign.center,
                     ),
-                    rowPadding,
+                    margin,
 
                     // Thing 2
                     Icon(
@@ -93,13 +92,10 @@ class EzWarning extends StatelessWidget {
                     ),
                   ],
                 ),
+                const EzSpacer(),
 
-                // Label
-                Text(
-                  '\n$body',
-                  style: bStyle,
-                  textAlign: TextAlign.center,
-                ),
+                // Body
+                Text(body, style: bStyle, textAlign: TextAlign.center),
               ],
             ),
           ),

@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -17,8 +17,7 @@ class EzSpacer extends StatelessWidget {
   /// Whether [space] should be provided to [SizedBox.width]
   final bool horizontal;
 
-  /// [SizedBox] with [space] dimensions for creating space in your layout
-  /// Defaults to [EzConfig]s [spacingKey] value
+  /// [SizedBox] with [space] dimensions for organizing your layout
   const EzSpacer({
     super.key,
     this.space,
@@ -39,6 +38,15 @@ class EzSpacer extends StatelessWidget {
   }
 }
 
+class EzMargin extends EzSpacer {
+  /// [EzSpacer] with [EzConfig]s [marginKey] space
+  EzMargin({
+    super.key,
+    super.vertical,
+    super.horizontal,
+  }) : super(space: EzConfig.get(marginKey));
+}
+
 class EzSwapSpacer extends StatelessWidget {
   /// Optional [EzSpacer.space] passthrough
   final double? space;
@@ -55,6 +63,11 @@ class EzSwapSpacer extends StatelessWidget {
         ? EzSpacer(space: space, horizontal: false)
         : EzSpacer(space: space, vertical: false);
   }
+}
+
+class EzSwapMargin extends EzSwapSpacer {
+  /// [EzSwapSpacer] with [EzConfig]s [marginKey] space
+  EzSwapMargin({super.key}) : super(space: EzConfig.get(marginKey));
 }
 
 class EzSeparator extends StatelessWidget {
@@ -105,4 +118,19 @@ class EzSwapSeparator extends StatelessWidget {
         ? EzSeparator(space: space, horizontal: false)
         : EzSeparator(space: space, vertical: false);
   }
+}
+
+class EzDivider extends StatelessWidget {
+  /// [widthOf] multiplier override
+  /// Defaults to 0.667
+  final double widthM;
+
+  /// A [Divider] bounded by [BoxConstraints.maxWidth] => [widthOf] * [widthM]
+  const EzDivider({super.key, this.widthM = 0.667});
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: widthOf(context) * widthM),
+        child: const Divider(),
+      );
 }

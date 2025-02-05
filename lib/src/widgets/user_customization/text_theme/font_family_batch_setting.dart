@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,7 +10,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
-  const EzFontFamilyBatchSetting({super.key});
+  /// Optional [EzDropdownMenu.iconSize] passthrough
+  final double? iconSize;
+
+  /// Standardized tool for updating the [TextStyle.fontFamily] for all five [EzTextStyleProvider]s at once
+  /// As such, the parent widget must have them in the context
+  const EzFontFamilyBatchSetting({super.key, this.iconSize});
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -25,70 +30,50 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   final double padding = EzConfig.get(paddingKey);
 
-  late final DisplayTextStyleProvider displayProvider;
-  late final HeadlineTextStyleProvider headlineProvider;
-  late final TitleTextStyleProvider titleProvider;
-  late final BodyTextStyleProvider bodyProvider;
-  late final LabelTextStyleProvider labelProvider;
+  late final EzDisplayStyleProvider displayProvider =
+      context.watch<EzDisplayStyleProvider>();
+  late final EzHeadlineStyleProvider headlineProvider =
+      context.watch<EzHeadlineStyleProvider>();
+  late final EzTitleStyleProvider titleProvider =
+      context.watch<EzTitleStyleProvider>();
+  late final EzBodyStyleProvider bodyProvider =
+      context.watch<EzBodyStyleProvider>();
+  late final EzLabelStyleProvider labelProvider =
+      context.watch<EzLabelStyleProvider>();
 
   // Define the build data //
 
-  late Map<String, String> currFonts = <String, String>{
-    displayFontFamilyKey: firstWord(
-        displayProvider.value.fontFamily ?? EzConfig.get(displayFontFamilyKey)),
-    headlineFontFamilyKey: firstWord(headlineProvider.value.fontFamily ??
-        EzConfig.get(headlineFontFamilyKey)),
-    titleFontFamilyKey: firstWord(
-        titleProvider.value.fontFamily ?? EzConfig.get(titleFontFamilyKey)),
-    bodyFontFamilyKey: firstWord(
-        bodyProvider.value.fontFamily ?? EzConfig.get(bodyFontFamilyKey)),
-    labelFontFamilyKey: firstWord(
-        labelProvider.value.fontFamily ?? EzConfig.get(labelFontFamilyKey)),
+  late Map<String, String?> currFonts = <String, String?>{
+    displayFontFamilyKey: displayProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(displayProvider.value.fontFamily!)),
+    headlineFontFamilyKey: headlineProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(headlineProvider.value.fontFamily!)),
+    titleFontFamilyKey: titleProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(titleProvider.value.fontFamily!)),
+    bodyFontFamilyKey: bodyProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(bodyProvider.value.fontFamily!)),
+    labelFontFamilyKey: labelProvider.value.fontFamily == null
+        ? null
+        : ezClassToCamel(ezFirstWord(labelProvider.value.fontFamily!)),
   };
 
   late bool isUniform =
-      currFonts.values.every((String font) => font == currFonts.values.first);
+      currFonts.values.every((String? font) => font == currFonts.values.first);
 
-  late String currFontFamily = isUniform
-      ? currFonts.values.first
-      : mostCommonFont(currFonts.values.toList());
+  late String? currFontFamily = isUniform ? currFonts.values.first : null;
 
   // Define button functions //
-
-  /// Lazily returns the most common font, or the body font if all are unique
-  String mostCommonFont(List<String> fonts) {
-    final String body = EzConfig.get(bodyFontFamilyKey) ??
-        EzConfig.getDefault(bodyFontFamilyKey);
-
-    if (fonts.isEmpty) return body;
-
-    final Map<String, int> fontCount = <String, int>{};
-    String? mostCommon;
-    int highestCount = 0;
-
-    for (final String font in fonts) {
-      final int count = (fontCount[font] ?? 0) + 1;
-      fontCount[font] = count;
-
-      if (count > highestCount) {
-        mostCommon = font;
-        highestCount = count;
-      }
-    }
-
-    if (highestCount <= 1) {
-      return body;
-    } else {
-      return mostCommon!;
-    }
-  }
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: googleStyleNames[entry.key]!,
+      label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
@@ -103,8 +88,17 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       context: context,
       builder: (BuildContext dialogContext) {
         void onConfirm() => Navigator.of(dialogContext).pop(true);
-
         void onDeny() => Navigator.of(dialogContext).pop(false);
+
+        late final List<Widget> materialActions;
+        late final List<Widget> cupertinoActions;
+
+        (materialActions, cupertinoActions) = ezActionPairs(
+          context: context,
+          onConfirm: onConfirm,
+          confirmIsDestructive: true,
+          onDeny: onDeny,
+        );
 
         return EzAlertDialog(
           title: Text(
@@ -115,35 +109,12 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             l10n.tsBatchOverride(l10n.tsFontFamily),
             textAlign: TextAlign.center,
           ),
-          materialActions: ezMaterialActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: dialogContext,
-            onConfirm: onConfirm,
-            confirmIsDestructive: true,
-            onDeny: onDeny,
-            denyIsDefault: true,
-          ),
+          materialActions: materialActions,
+          cupertinoActions: cupertinoActions,
           needsClose: false,
         );
       },
     );
-  }
-
-  // Initialize the build //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    displayProvider = context.watch<DisplayTextStyleProvider>();
-    headlineProvider = context.watch<HeadlineTextStyleProvider>();
-    titleProvider = context.watch<TitleTextStyleProvider>();
-    bodyProvider = context.watch<BodyTextStyleProvider>();
-    labelProvider = context.watch<LabelTextStyleProvider>();
   }
 
   // Return the build //
@@ -152,8 +123,9 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: l10n.tsFontFamily,
-      child: DropdownMenu<String>(
-        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+      child: EzDropdownMenu<String>(
+        widthEntries: <String>[fingerPaint],
+        iconSize: widget.iconSize,
         textStyle: bodyProvider.value,
         dropdownMenuEntries: entries,
         enableSearch: false,

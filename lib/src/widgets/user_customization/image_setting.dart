@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -11,28 +11,26 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-// EzImageSetting has not yet been verified with TalkBack or VoiceOver //
-
 class EzImageSetting extends StatefulWidget {
   /// [EzConfig] key whose value is being updated
   final String configKey;
 
-  /// [String] to display on the [ElevatedButton]
+  /// [EzElevatedIconButton.label] passthrough
   final String label;
 
   /// Effectively whether the image is nullable
-  /// Recommended to true
+  /// true is recommended
   /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
   final bool allowClear;
 
-  /// Optional [EzAlertDialog] title override
-  final String? dialogTitle;
-
   /// Who made this/where did it come from?
-  /// [credits] will be displayed via [EzAlertDialog] on [EzImageSetting] long press
+  /// [credits] will be displayed via [EzAlertDialog] on long press
   final String? credits;
 
-  /// Which theme this image should be used for [ColorScheme.fromImageProvider] (if any)
+  /// For [ColorScheme.fromImageProvider]
+  /// If provided and [updateThemeOption] is true, the user will have the final say
+  /// If provided and [updateThemeOption] is false, it will be automatic
+  /// If null, no theme will be updated
   final Brightness? updateTheme;
 
   /// Whether the update theme checkbox && message should be displayed
@@ -41,14 +39,12 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
   final bool showFitOption;
 
-  /// Creates a tool for updating the image at [configKey]'s path
-  /// [EzImageSetting] inherits styling from the [ElevatedButton] and [AlertDialog] values in your [ThemeData]
+  /// [EzElevatedIconButton] for updating the image at [configKey]'s path
   const EzImageSetting({
     super.key,
     required this.configKey,
     required this.label,
     this.allowClear = true,
-    this.dialogTitle,
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
@@ -98,7 +94,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     final String name = fit.name;
 
-    final double toolbarHeight = measureText(
+    final double toolbarHeight = ezTextSize(
           name,
           style: theme.textTheme.bodyLarge,
           context: context,
@@ -106,7 +102,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         scaleMargin;
 
     final Widget selectButton = ExcludeSemantics(
-      child: Radio<BoxFit>(
+      child: EzRadio<BoxFit>(
         groupValue: selected,
         value: fit,
         onChanged: (BoxFit? value) {
@@ -155,7 +151,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Image(
                       width: width - scaleMargin,
                       height: height - toolbarHeight - scaleMargin,
-                      image: provideImage(currPath!),
+                      image: ezImageProvider(currPath!),
                       fit: fit,
                     ),
                   ],
@@ -185,10 +181,9 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Validate a URL
   String? urlValidator(String? value) {
-    if (value == null || value.isEmpty || !isUrl(value)) {
-      return 'Enter a valid URL';
-    }
-    return null;
+    return (value == null || value.isEmpty || !ezUrlCheck(value))
+        ? l10n.gValidURL
+        : null;
   }
 
   /// Build the list of [ImageSource] options
@@ -204,10 +199,11 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (!kIsWeb &&
         (platform == TargetPlatform.android ||
             platform == TargetPlatform.iOS)) {
-      options.addAll(<Widget>[
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await saveImage(
+            final String? changed = await ezImagePicker(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.camera,
@@ -217,20 +213,20 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: Icon(PlatformIcons(context).photoCamera),
+          icon: EzIcon(PlatformIcons(context).photoCamera),
           label: l10n.isFromCamera,
         ),
-        spacer,
-      ]);
+      ));
     }
 
     // From file
-    // Doesn't work on web
+    // Doesn't work on Web
     if (!kIsWeb) {
-      options.addAll(<Widget>[
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
-            final String? changed = await saveImage(
+            final String? changed = await ezImagePicker(
               context: context,
               prefsPath: widget.configKey,
               source: ImageSource.gallery,
@@ -240,17 +236,17 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(changed);
             }
           },
-          icon: Icon(PlatformIcons(context).folder),
+          icon: EzIcon(PlatformIcons(context).folder),
           label: l10n.isFromFile,
         ),
-        spacer,
-      ]);
+      ));
     }
 
     // From network
     // Works everywhere
-    options.addAll(<Widget>[
-      EzElevatedIconButton(
+    options.add(Padding(
+      padding: EzInsets.col(spacing),
+      child: EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext networkDialogContext) {
@@ -267,7 +263,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               try {
                 image = NetworkImage(urlText.text);
               } catch (e) {
-                await logAlert(
+                await ezLogAlert(
                   context,
                   title: l10n.isGetFailed,
                   message: '${e.toString()}\n\n${l10n.isPermission}',
@@ -294,6 +290,18 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             void onDeny() => Navigator.of(networkDialogContext).pop(null);
 
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              confirmMsg: l10n.gApply,
+              onConfirm: onConfirm,
+              confirmIsDestructive: true,
+              denyMsg: l10n.gCancel,
+              onDeny: onDeny,
+            );
+
             return EzAlertDialog(
               title: Text(
                 l10n.isEnterURL,
@@ -309,36 +317,22 @@ class _ImageSettingState extends State<EzImageSetting> {
                   validator: urlValidator,
                 ),
               ),
-              materialActions: ezMaterialActions(
-                context: context,
-                confirmMsg: l10n.gApply,
-                onConfirm: onConfirm,
-                confirmIsDestructive: true,
-                denyMsg: l10n.gCancel,
-                onDeny: onDeny,
-              ),
-              cupertinoActions: ezCupertinoActions(
-                context: context,
-                confirmMsg: l10n.gApply,
-                onConfirm: onConfirm,
-                confirmIsDestructive: true,
-                denyMsg: l10n.gCancel,
-                onDeny: onDeny,
-              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
               needsClose: false,
             );
           },
         ),
-        icon: const Icon(Icons.computer_outlined),
+        icon: EzIcon(Icons.computer_outlined),
         label: l10n.isFromNetwork,
       ),
-    ]);
+    ));
 
     // Reset
     if (defaultPath != null && defaultPath != noImageValue) {
-      options.addAll(<Widget>[
-        spacer,
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.remove(widget.configKey);
@@ -347,17 +341,17 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(defaultPath);
             }
           },
-          icon: Icon(PlatformIcons(context).refresh),
+          icon: EzIcon(PlatformIcons(context).refresh),
           label: l10n.isResetIt,
         ),
-      ]);
+      ));
     }
 
     // Clear (optional)
     if (widget.allowClear) {
-      options.addAll(<Widget>[
-        spacer,
-        EzElevatedIconButton(
+      options.add(Padding(
+        padding: EzInsets.col(spacing),
+        child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
             await EzConfig.setString(widget.configKey, noImageValue);
@@ -366,17 +360,22 @@ class _ImageSettingState extends State<EzImageSetting> {
               Navigator.of(dialogContext).pop(noImageValue);
             }
           },
-          icon: Icon(PlatformIcons(context).clear),
+          icon: EzIcon(PlatformIcons(context).clear),
           label: l10n.isClearIt,
         ),
-      ]);
+      ));
     }
 
     // Update theme (optional)
     if (widget.updateTheme != null && widget.updateThemeOption) {
-      options.addAll(<Widget>[
-        spacer,
-        EzRow(
+      options.add(Padding(
+        padding: EdgeInsets.only(
+          left: spacing / 2,
+          right: spacing / 2,
+          top: spacing / 2,
+          bottom: spacing,
+        ),
+        child: EzRow(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             // Label
@@ -388,7 +387,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
 
             // Check box
-            Checkbox(
+            EzCheckbox(
               value: updateTheme,
               onChanged: (bool? choice) {
                 updateTheme = (choice == null) ? false : choice;
@@ -397,35 +396,27 @@ class _ImageSettingState extends State<EzImageSetting> {
               },
             ),
           ],
-        )
-      ]);
+        ),
+      ));
     }
 
     return options;
   }
 
-  /// Opens an [EzAlertDialog] for choosing the [ImageSource] for updating [widget.configKey]
+  /// Opens an [BottomSheet] to pick the [ImageSource] for updating [widget.configKey]
   /// Returns the path, if any, to the new [Image]
-  Future<dynamic> chooseImage(BuildContext context) {
-    return showPlatformDialog(
-      context: context,
-      builder: (_) => StatefulBuilder(
-        builder: (BuildContext dialogContext, StateSetter dialogState) {
-          return EzAlertDialog(
-            title: Text(
-              widget.dialogTitle ??
-                  l10n.isDialogTitle(widget.label.toLowerCase()),
-              textAlign: TextAlign.center,
+  Future<dynamic> chooseImage(BuildContext context) => showModalBottomSheet(
+        context: context,
+        builder: (BuildContext modalContext) => StatefulBuilder(
+          builder: (_, StateSetter modalState) => EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            children: sourceOptions(
+              dialogContext: modalContext,
+              dialogState: modalState,
             ),
-            contents: sourceOptions(
-              dialogContext: dialogContext,
-              dialogState: dialogState,
-            ),
-          );
-        },
-      ),
-    );
-  }
+          ),
+        ),
+      );
 
   /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
   Future<void> chooseFit() {
@@ -551,7 +542,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (newPath is String) {
       currPath = newPath;
-      final String defaultPath = EzConfig.getDefault(widget.configKey);
+      final String? defaultPath = EzConfig.getDefault(widget.configKey);
 
       if (widget.updateTheme != null &&
           updateTheme &&
@@ -571,11 +562,12 @@ class _ImageSettingState extends State<EzImageSetting> {
           setState(() => inProgress = false);
 
           if (context.mounted) {
-            await logAlert(
+            await ezLogAlert(
               // ignore: use_build_context_synchronously
               context,
               title: l10n.isGetFailed,
-              message: '$result\n\n${l10n.isPermission}',
+              message:
+                  '$result${ezUrlCheck(newPath) ? '\n\n${l10n.isPermission}' : ''}',
             );
           }
           return;
@@ -586,8 +578,24 @@ class _ImageSettingState extends State<EzImageSetting> {
             : await EzConfig.setString(darkColorSchemeImageKey, newPath);
       }
 
-      if (widget.showFitOption && currPath != noImageValue) {
-        await chooseFit();
+      if (currPath != noImageValue) {
+        if (widget.showFitOption) await chooseFit();
+
+        // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a change to read things
+        final double? lightOpacity =
+            EzConfig.getDouble(lightTextBackgroundOpacityKey);
+        final double? darkOpacity =
+            EzConfig.getDouble(darkTextBackgroundOpacityKey);
+
+        if (widget.updateTheme == Brightness.light) {
+          if (lightOpacity == null || lightOpacity == 0.0) {
+            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          }
+        } else {
+          if (darkOpacity == null || darkOpacity == 0.0) {
+            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          }
+        }
       }
     }
 
@@ -616,6 +624,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   @override
   Widget build(BuildContext context) {
     return Semantics(
+      label: widget.label,
       button: true,
       hint: l10n.isButtonHint(widget.label),
       child: ExcludeSemantics(
@@ -635,16 +644,15 @@ class _ImageSettingState extends State<EzImageSetting> {
               foregroundImage:
                   (inProgress || currPath == null || currPath == noImageValue)
                       ? null
-                      : provideImage(currPath!),
+                      : ezImageProvider(currPath!),
               backgroundColor: Colors.transparent,
               foregroundColor: theme.colorScheme.onSurface,
               child: inProgress
                   ? const CircularProgressIndicator()
                   : (currPath == null || currPath == noImageValue)
-                      ? Icon(
+                      ? EzIcon(
                           PlatformIcons(context).edit,
                           color: theme.colorScheme.primary,
-                          size: theme.textTheme.headlineLarge?.fontSize,
                         )
                       : null,
             ),

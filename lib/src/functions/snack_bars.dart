@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -23,7 +23,7 @@ double snackWidth({
   final double snackMargin = margin ?? EzConfig.get(marginKey);
 
   final double countDownSize =
-      measureIcon(Icons.circle, context: context, style: snackStyle).width * 2;
+      ezIconSize(Icons.circle, context, style: snackStyle).width * 2;
 
   final double closeIconSize = showCloseIcon
       ? (Theme.of(context)
@@ -35,7 +35,7 @@ double snackWidth({
           EzConfig.get(spacingKey)
       : 0;
 
-  return measureText(message, context: context, style: snackStyle).width +
+  return ezTextSize(message, context: context, style: snackStyle).width +
       countDownSize +
       closeIconSize +
       (snackMargin * 3);
@@ -63,7 +63,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> ezSnackBar({
   double? margin,
   Duration? duration,
 }) {
-  final Duration toastLength = duration ?? readingTime(message);
+  final Duration toastLength = duration ?? ezReadingTime(message);
   final double toastMargin = margin ?? EzConfig.get(marginKey);
 
   return ScaffoldMessenger.of(context).showSnackBar(

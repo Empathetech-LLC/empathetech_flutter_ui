@@ -1,0 +1,112 @@
+{
+  "@@locale": "es",
+
+  
+
+  "csPageTitle": "Constructor",
+
+  "csAppName": "Nombre de la aplicación",
+  "csNamePreview": "ejemplo_app",
+  "csNameTip": "La mejor aplicación de todas",
+  "csBecomes": "se convierte en",
+  "csInvalidName": "Se permiten letras minúsculas, números y guiones bajos.",
+  "csYourApp": "tu aplicación",
+  
+  "csPubName": "Nombre del editor",
+  "csPubPreview": "Organización Ejemplo",
+  "csPubTip": "O, Persona Ejemplo",
+
+  "csDescription": "Descripción",
+  "csDescPreview": "Una o dos frases sobre tu aplicación.",
+
+  "csDomainName": "Nombre de dominio",
+  "csDomainTip": "Revés, esta al",
+  "csInvalidDomain": "'domain.name' solamente; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
+
+  "csSupportEmail": "Correo de soporte",
+  "csSupportTip": "Si se proporciona, se incluirá el sistema de comentarios que utilizamos.",
+  "csInvalidEmail": "Correo no válido",
+
+  "csInclude": "Incluir",
+  "csEasy": "Fácil de cambiar más tarde",
+
+  "csGenApp": "Cuando generas {app_name} el actual ",
+  "csTheApp": "la aplicación",
+  "csTheConfig": "la configuración",
+  "csSetColors": " (excepto imágenes) se convertirá en la configuración predeterminada para {app_name}.\n\nSe recomienda establecer un esquema de colores personalizado. Si necesitas ayuda para construir uno, intenta comenzar ",
+  "csHere": "aquí.",
+  "csHereHint": "Abra un generador de esquemas de color en línea",
+
+  "csFlutterPath": "Flutter ruta",
+  "csNoSpaces": "La ruta no puede tener espacios",
+  "csNotInstalled": "¿No está instalado?",
+  "csPathRequired": "Se requiere ruta. No se puede usar la carpeta raíz.",
+  "csBadPath": "Ruta no válida",
+  
+  "csAdvanced": "Configuraciones avanzadas",
+  "csRestore": "Restaurar {setting}",
+
+  "csOutputPath": "Ruta de salida",
+
+  "csCopyright": "Aviso de derechos de autor",
+  "csCopyrightTip": "Se incluirá en la parte superior de cada archivo Dart",
+
+  "csLicenseDocs": "Abrir documentación sobre licencias de código abierto",
+
+  "csL10nTip": "Configuración de localización (también conocida como traducciones)",
+
+  "csLintTip": "Reglas de lint",
+
+  "csLaunchTip": "Agrega opciones de lanzamiento al menú de depuración de VS Code",
+
+  "csSave": "Guardar configuración",
+  "csLoad": "Cargar configuración",
+
+  "csGenerate": "Generar aplicación",
+
+  "csInvalidFields": "Algunos campos son inválidos",
+
+  "csResetHint": "Activa y confirma lo que se debe reiniciar.",
+  "csResetBuilder": "Valores del constructor",
+  "csResetApp": "Configuración de la aplicación",
+  "csResetBoth": "Ambos",
+  "csResetNothing": "Nada",
+
+
+
+  "asPageTitle": "Archivador",
+
+  "asSavedTo": "Su configuración se ha guardado en {path}",
+  "asUseIt": "\n\nÚselo en ",
+  "asToGen": " para escritorio para generar el código para {app_name}",
+  "asBadFile": "El archivo no se guardó como ",
+
+
+
+  "gsPageTitle": "Generador",
+  
+  "gsConsole": "Salida de la consola",
+
+  "gsIsReadyIn": "está listo en",
+  "gsFirstRun": "La primera ejecución suele tardar un tiempo",
+
+  "gsNeedPermission": "Open UI necesita Acceso Completo al Disco.\n\nPor favor, vaya a...\nConfiguración del Sistema > Privacidad y Seguridad > Acceso Completo al Disco > Habilite Open UI; entonces inténtalo de nuevo.",
+  "gsSeeNBelieve": "Si quieres verificar qué hace Open UI, ve ",
+  "gsSeeNBelieveHint": "Abrir el código de generación de código de Open UI.",
+  "gsNotInstalled": "Flutter no está instalado",
+  "gsPartialSuccess": "El código se generó correctamente, pero falló parte de la configuración del proyecto.",
+
+  
+  
+  "rsWouldYou": "Te gustaría...",
+
+  "rsInstall": "Instalarlo",
+
+  "rsRun": "Ejecutarlo",
+
+  "rsWipe": "Borrarlo",
+  "rsNextTime": "¡Éxito, crucemos los dedos para la próxima!",
+  "rsAnotherOne": "Otro fracaso; probablemente deberías tomar el control...",
+
+  "rsLeave": "Dejarlo"
+}

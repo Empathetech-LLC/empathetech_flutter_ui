@@ -3,43 +3,85 @@
 
 
 
-  "gYes": "Yes",
-  "gNo": "No",
-  "gAnd": "and",
-  "gOptions": "Options",
   "gApply": "Apply",
   "gContinue": "Continue",
+  "gOpen": "Open",
+  "gSuccess": "Success",
+  "gSuccessExl": "Success!",
+  "gYes": "Yes",
+
+  "gAnd": "and",
+  "gHelp": "Help",
+  "gNA": "N/A",
+  "gNAHint": "Not applicable",
+  "gOptional": "optional",
+  "gOptions": "Options",
+  "gRequired": "Required",
+
+  "gBack": "Back",
   "gCancel": "Cancel",
   "gClose": "Close",
-  "gClipboard": "{thing} has been copied to the clipboard",
+  "gError": "Error",
+  "gFailure": "Failure",
+  "gNo": "No",
 
-  "gBYO": "Build your own",
-  "gEFUISourceHint": "Open the GitHub page for EFUI",
-  "gGiveFeedback": "Give feedback",
-  "gOpeningFeedback": "Opening the feedback tool.",
-  "gSupportEmail": "Our support Email",
-  "gSubmitWebFeedback": "Please take a screenshot{hint} of the issue.",
-  "gAttachScreenshot": "Please attach your screenshot",
-
-  "gLeft": "Left",
-  "gRight": "Right",
-  "gBack": "Back",
-
-  "gSystem": "System",
-  "gLight": "Light",
   "gDark": "Dark",
+  "gLight": "Light",
+  "gSystem": "System",
+
   "gEditing": "Editing: ",
   "gEditingTheme": "Editing: {themeType} theme",
 
-  "gQuick": "Quick",
+  "gLeft": "Left",
+  "gRight": "Right",
+
   "gAdvanced": "Advanced",
+  "gQuick": "Quick",
+
+  "gDecrease": "Decrease",
+  "gIncrease": "Increase",
+  "gMaximum": "Maximum",
+  "gMinimum": "Minimum",
+
+  "gLoadingAnim": "Loading. The Empathetic logo animated as a spinning hourglass.",
+
+  "gPlay": "Play",
+  "gPause": "Pause",
+  "gMute": "Mute",
+  "gUnMute": "Un-mute",
+  "gPlaybackSpeed": "Playback speed",
+  "gReplay": "Replay",
+  "gFullScreen": "Full screen",
 
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
 
+  "gTranslationsPending": "Translations pending human review",
+
+  "gUpdates": "Updates available",
+
+  "gValidURL": "Please enter a valid URL",
+
+  "g404Wonder": "Not all who wander are lost.",
+  "g404": "But, in this case: 404 page not found.",
+  "g404Note": "Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/destination",
+
+  "gOpenSource": "Open source",
+  "gOpenEmpathetech": "Open a link to Empathetic LLC",
+  "gEFUISourceHint": "Open the GitHub page for EFUI",
+  "gOpenUIReleases": "Open the releases page for Open UI",
+
+  "gGiveFeedback": "Give feedback",
+  "gOpeningFeedback": "Opening the feedback tool.",
+  "gAttachScreenshot": "Please attach your screenshot (in Downloads folder)",
+
+  "gSupportEmail": "Our support Email",
+  "gClipboard": "{thing} has been copied to the clipboard.",
+  
   "gAttention": "Attention",
   "gCurrently": "Currently:",
   "gSetToValue": "{name} is set to {value}",
+  "gRemove": "Remove",
   "gReset": "Reset",
   "gResetTo": "Reset:",
   "gResetValue": "Reset {name}?",
@@ -48,11 +90,14 @@
   "gUndoWarn": "Cannot be undone",
 
   "gCreditTo": "Credit to:",
+  "gCreator": "Creator of",
+  "gMadeBy": "Made by",
   "gYou": "Set by you",
 
 
 
   "ssPageTitle": "Settings",
+  "ssNavHint": "Open the settings page",
   "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
   "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
 
@@ -60,8 +105,7 @@
   "ssDominantHand": "Dominant hand",
   
   "ssLanguage": "Language",
-  "ssLanguages": "Languages",
-  "ssLangHint": "App language",
+  "ssLangHint": "Activate to change the app language",
 
   "ssRandom": "Randomize",
   "ssRandomize": "Randomize {themeType} theme?",
@@ -74,13 +118,16 @@
 
   "tsBatchOverride": "You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?",
 
+  "tsTextBackground": "Text background opacity",
+  "tsIconSize": "Icon size",
+
+  "tsLinkHint": "Activate to edit {style}",
+
   "tsDisplay": "Display",
   "tsHeadline": "Headline",
   "tsTitle": "Title",
   "tsBody": "Body",
   "tsLabel": "Label",
-
-  "tsLinkHint": "Activate to edit {style}",
 
   "tsFontFamily": "Font family",
   "tsFontSize": "Font size",
@@ -90,8 +137,6 @@
   "tsLetterSpacing": "Letter spacing",
   "tsWordSpacing": "Word spacing",
   "tsLineHeight": "Line height",
-  "tsDecrease": "Decrease",
-  "tsIncrease": "Increase",
 
   "tsDisplayP1": "Does this ",
   "tsDisplayLink": "display",
@@ -126,70 +171,20 @@
   
   "csPageTitle": "Color settings",
 
-  "csPickerHint": "Open a color picker for {name}. Long press for more options.",
+  "csPickerHint": "Open a color picker. Long press for more options.",
 
   "csMonoChrome": "Use monochrome scheme",
   "csHighContrast": "Use high contrast scheme",
-  
-  "csPrimary": "Primary",
-  "csOnPrimary": "On primary",
-  "csPrimaryContainer": "Primary container",
-  "csOnPrimaryContainer": "On primary container",
-  "csPrimaryFixed": "Primary fixed",
-  "csPrimaryFixedDim": "Primary fixed dim",
-  "csOnPrimaryFixed": "On primary fixed",
-  "csOnPrimaryFixedVariant": "On primary fixed variant",
-  "csSecondary": "Secondary",
-  "csOnSecondary": "On secondary",
-  "csSecondaryContainer": "Secondary container",
-  "csOnSecondaryContainer": "On secondary container",
-  "csSecondaryFixed": "Secondary fixed",
-  "csSecondaryFixedDim": "Secondary fixed dim",
-  "csOnSecondaryFixed": "On secondary fixed",
-  "csOnSecondaryFixedVariant": "On secondary fixed variant",
-  "csTertiary": "Tertiary",
-  "csOnTertiary": "On tertiary",
-  "csTertiaryContainer": "Tertiary container",
-  "csOnTertiaryContainer": "On tertiary container",
-  "csTertiaryFixed": "Tertiary fixed",
-  "csTertiaryFixedDim": "Tertiary fixed dim",
-  "csOnTertiaryFixed": "On tertiary fixed",
-  "csOnTertiaryFixedVariant": "On tertiary fixed variant",
-  "csError": "Error",
-  "csOnError": "On error",
-  "csErrorContainer": "Error container",
-  "csOnErrorContainer": "On error container",
-  "csOutline": "Outline",
-  "csOutlineVariant": "Outline variant",
-  "csSurface": "Surface",
-  "csOnSurface": "On surface",
-  "csSurfaceDim": "Surface dim",
-  "csSurfaceBright": "Surface bright",
-  "csSurfaceContainerLowest": "Surface container lowest",
-  "csSurfaceContainerLow": "Surface container low",
-  "csSurfaceContainer": "Surface container",
-  "csSurfaceContainerHigh": "Surface container high",
-  "csSurfaceContainerHighest": "Surface container highest",
-  "csOnSurfaceVariant": "On surface variant",
-  "csInverseSurface": "Inverse surface",
-  "csOnInverseSurface": "On inverse surface",
-  "csInversePrimary": "Inverse primary",
-  "csScrim": "Scrim",
-  "csShadow": "Shadow",
-  "csSurfaceTint": "Surface tint",
 
   "csPickerTitle": "Pick a color",
   "csRecommended": "Use contrast recommendation?",
   "csUseCustom": "Use custom",
 
   "csAddColor": "Add a color",
-  "csRemove": "Remove",
-  "csReset": "Reset",
   "csCurrVal": "Current color value:",
 
   "csSchemeBase": "Build scheme\nfrom image",
-  "csOptional": "optional",
-  "csFromImage": "Build the color scheme from an image",
+  "csFromImage": "A color scheme will be generated from the image.",
   "csColorScheme": "color scheme",
 
   "csResetAll": "Reset all {themeType} theme colors?",
@@ -202,7 +197,6 @@
   "isImage": "image",
 
   "isButtonHint": "Update the {title} image",
-  "isDialogTitle": "How should the {title} image be updated?",
   "isFromFile": "From file",
   "isFromCamera": "From camera",
   "isFromNetwork": "From URL",

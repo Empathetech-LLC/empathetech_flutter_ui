@@ -1,16 +1,15 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzResetButton extends StatelessWidget {
-  /// Button label
+  /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
@@ -23,7 +22,7 @@ class EzResetButton extends StatelessWidget {
   final String? dialogContent;
 
   /// What happens when the user choses to reset
-  /// Defaults to clearing user [SharedPreferences]
+  /// Defaults to [EzConfig.reset]
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onConfirm;
 
@@ -31,9 +30,7 @@ class EzResetButton extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [ElevatedButton] for clearing user settings (aka resetting the apps')
-  /// Colors are reversed to stand out
-  /// [EzResetButton] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  /// [EzElevatedIconButton] for clearing user settings
   const EzResetButton({
     super.key,
     this.label,
@@ -49,61 +46,46 @@ class EzResetButton extends StatelessWidget {
 
     final EFUILang l10n = EFUILang.of(context)!;
 
-    // Define the button functions //
-
-    final void Function() confirm = onConfirm ?? () => EzConfig.reset();
-
-    final void Function() deny = onDeny ?? doNothing;
-
-    // Define the dialog //
-
-    void resetDialog() {
-      showPlatformDialog(
-        context: context,
-        builder: (BuildContext dialogContext) => EzAlertDialog(
-          title: Text(
-            dialogTitle ?? l10n.ssResetAll,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            dialogContent ?? l10n.gUndoWarn,
-            textAlign: TextAlign.center,
-          ),
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-            denyIsDefault: true,
-          ),
-          needsClose: false,
-        ),
-      );
-    }
-
     // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: resetDialog,
-      icon: Icon(PlatformIcons(context).refresh),
+      onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            final void Function() confirm = onConfirm ?? () => EzConfig.reset();
+            final void Function() deny = onDeny ?? doNothing;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              onConfirm: () {
+                confirm();
+                Navigator.of(dialogContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                deny();
+                Navigator.of(dialogContext).pop();
+              },
+            );
+
+            return EzAlertDialog(
+              title: Text(
+                dialogTitle ?? l10n.ssResetAll,
+                textAlign: TextAlign.center,
+              ),
+              content: Text(
+                dialogContent ?? l10n.gUndoWarn,
+                textAlign: TextAlign.center,
+              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
+              needsClose: false,
+            );
+          }),
+      icon: EzIcon(PlatformIcons(context).refresh),
       label: label ?? l10n.gResetAll,
     );
   }

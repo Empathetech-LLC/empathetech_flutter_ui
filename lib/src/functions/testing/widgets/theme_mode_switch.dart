@@ -1,11 +1,12 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
+import '../../../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// For integration testing
 /// Test [EzThemeModeSwitch]
@@ -33,16 +34,16 @@ Future<void> testTMSwitch(
 
   // Activate light theme
   ezLog('Light');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gLight);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gLight);
 
   // Activate system theme
   ezLog('System');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gSystem);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gSystem);
 
   // Activate dark theme
   ezLog('Dark');
-  await touch(tester, find.byType(DropdownMenu<ThemeMode>));
-  await touchText(tester, l10n.gDark);
+  await ezTouch(tester, find.byType(DropdownMenu<ThemeMode>));
+  await ezTouchText(tester, l10n.gDark);
 }

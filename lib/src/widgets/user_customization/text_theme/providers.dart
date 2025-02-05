@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,11 +8,12 @@ import '../../../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-abstract class BaseTextStyleProvider extends ChangeNotifier {
+abstract class EzTextStyleProvider extends ChangeNotifier {
   TextStyle _style;
   int _id;
 
-  BaseTextStyleProvider(TextStyle style)
+  /// [ChangeNotifier] for tracking and modifying a [TextStyle]
+  EzTextStyleProvider(TextStyle style)
       : _style = style,
         _id = Random().nextInt(rMax);
 
@@ -80,71 +81,81 @@ abstract class BaseTextStyleProvider extends ChangeNotifier {
   }
 }
 
-class DisplayTextStyleProvider extends BaseTextStyleProvider {
+class EzDisplayStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  DisplayTextStyleProvider(Color? color)
+  /// [EzTextStyleProvider] for [ezDisplayStyle]s values
+  EzDisplayStyleProvider(Color? color)
       : _textColor = color,
-        super(buildDisplay(color));
+        super(ezDisplayStyle(color));
 
+  /// Reset via [ezDefaultDisplayStyle]
   void reset() {
-    _style = buildDisplayFromDefaults(_textColor);
+    _style = ezDefaultDisplayStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
-class HeadlineTextStyleProvider extends BaseTextStyleProvider {
+class EzHeadlineStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  HeadlineTextStyleProvider(Color? color)
+  /// [EzTextStyleProvider] for [ezHeadlineStyle]s values
+  EzHeadlineStyleProvider(Color? color)
       : _textColor = color,
-        super(buildHeadline(color));
+        super(ezHeadlineStyle(color));
 
+  /// Reset via [ezDefaultHeadlineStyle]
   void reset() {
-    _style = buildHeadlineFromDefaults(_textColor);
+    _style = ezDefaultHeadlineStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
-class TitleTextStyleProvider extends BaseTextStyleProvider {
+class EzTitleStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  TitleTextStyleProvider(Color? color)
+  /// [EzTextStyleProvider] for [ezTitleStyle]s values
+  EzTitleStyleProvider(Color? color)
       : _textColor = color,
-        super(buildTitle(color));
+        super(ezTitleStyle(color));
 
+  /// Reset via [ezDefaultTitleStyle]
   void reset() {
-    _style = buildTitleFromDefaults(_textColor);
+    _style = ezDefaultTitleStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
-class BodyTextStyleProvider extends BaseTextStyleProvider {
+class EzBodyStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  BodyTextStyleProvider(Color? color)
+  /// [EzTextStyleProvider] for [ezBodyStyle]s values
+  EzBodyStyleProvider(Color? color)
       : _textColor = color,
-        super(buildBody(color));
+        super(ezBodyStyle(color));
 
+  /// Reset via [ezDefaultBodyStyle]
   void reset() {
-    _style = buildBodyFromDefaults(_textColor);
+    _style = ezDefaultBodyStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
-class LabelTextStyleProvider extends BaseTextStyleProvider {
+class EzLabelStyleProvider extends EzTextStyleProvider {
   final Color? _textColor;
 
-  LabelTextStyleProvider(Color? color)
+  /// [EzTextStyleProvider] for [ezLabelStyle]s values
+  EzLabelStyleProvider(Color? color)
       : _textColor = color,
-        super(buildLabel(color));
+        super(ezLabelStyle(color));
 
+  /// Reset via [ezDefaultLabelStyle]
   void reset() {
-    _style = buildLabelFromDefaults(_textColor);
+    _style = ezDefaultLabelStyle(_textColor);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }

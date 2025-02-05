@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,7 +10,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzConfigRandomizer extends StatelessWidget {
-  /// Button label
+  /// [EzElevatedIconButton.label] passthrough
   /// Defaults to [EFUILang.ssRandom]
   final String? label;
 
@@ -31,8 +31,7 @@ class EzConfigRandomizer extends StatelessWidget {
   /// DO NOT include a pop() for the dialog, this is included automatically
   final void Function()? onDeny;
 
-  /// Standardized [EzElevatedIconButton] for randomizing EzConfig
-  /// [EzConfigRandomizer] inherits [ElevatedButton] and [AlertDialog] styling from your [ThemeData]
+  /// [EzElevatedIconButton] for randomizing [EzConfig]
   const EzConfigRandomizer({
     super.key,
     this.label,
@@ -52,62 +51,47 @@ class EzConfigRandomizer extends StatelessWidget {
         ? l10n.gDark.toLowerCase()
         : l10n.gLight.toLowerCase();
 
-    // Define the button functions //
-
-    final void Function() confirm =
-        onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
-
-    final void Function() deny = onDeny ?? doNothing;
-
-    // Define the dialog //
-
-    void randomizeDialog() {
-      showPlatformDialog(
-        context: context,
-        builder: (BuildContext dialogContext) => EzAlertDialog(
-          title: Text(
-            dialogTitle ?? l10n.ssRandomize(themeProfile),
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            dialogContent ?? l10n.gUndoWarn,
-            textAlign: TextAlign.center,
-          ),
-          materialActions: ezMaterialActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-          ),
-          cupertinoActions: ezCupertinoActions(
-            context: context,
-            onConfirm: () {
-              confirm();
-              Navigator.of(dialogContext).pop();
-            },
-            confirmIsDestructive: true,
-            onDeny: () {
-              deny();
-              Navigator.of(dialogContext).pop();
-            },
-            denyIsDefault: true,
-          ),
-          needsClose: false,
-        ),
-      );
-    }
-
     // Return the build //
 
     return EzElevatedIconButton(
-      onPressed: randomizeDialog,
-      icon: const Icon(LineIcons.diceD6),
+      onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            final void Function() confirm =
+                onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
+            final void Function() deny = onDeny ?? doNothing;
+
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              onConfirm: () {
+                confirm();
+                Navigator.of(dialogContext).pop();
+              },
+              confirmIsDestructive: true,
+              onDeny: () {
+                deny();
+                Navigator.of(dialogContext).pop();
+              },
+            );
+
+            return EzAlertDialog(
+              title: Text(
+                dialogTitle ?? l10n.ssRandomize(themeProfile),
+                textAlign: TextAlign.center,
+              ),
+              content: Text(
+                dialogContent ?? l10n.gUndoWarn,
+                textAlign: TextAlign.center,
+              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
+              needsClose: false,
+            );
+          }),
+      icon: EzIcon(LineIcons.diceD6),
       label: label ?? l10n.ssRandom,
     );
   }

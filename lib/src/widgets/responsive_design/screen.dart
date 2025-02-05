@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzScreen extends StatelessWidget {
-  /// Alignment of screen context
+  /// [Container.alignment] passthrough
   final AlignmentGeometry? alignment;
 
   /// Margin around the screen content
@@ -18,7 +18,7 @@ class EzScreen extends StatelessWidget {
   /// If provided, must set [useImageDecoration] to false
   final Decoration? decoration;
 
-  /// Whether the [darkDecorationImageKey] and [lightDecorationImageKey] should be used
+  /// Whether the [darkDecorationImageKey]/[lightDecorationImageKey] should be used
   final bool useImageDecoration;
 
   /// [EzConfig] key that will be used to create a [DecorationImage] background for the screen (dark theme)
@@ -33,14 +33,23 @@ class EzScreen extends StatelessWidget {
   /// Screen height
   final double height;
 
+  /// [Container.constraints] passthrough
   final BoxConstraints? constraints;
+
+  /// [Container.transform] passthrough
   final Matrix4? transform;
+
+  /// [Container.transformAlignment] passthrough
   final AlignmentGeometry? transformAlignment;
+
+  /// [Container.clipBehavior] passthrough
   final Clip clipBehavior;
+
+  /// Screen content
   final Widget child;
 
   /// [Container] wrapper that defaults to max size with a "margin" from [EzConfig]
-  /// In this case, the screen's "margin" is the actually the Container's padding
+  /// In this case, the screen's "margin" is the actually the [Container.padding]
   const EzScreen({
     super.key,
     this.alignment,
@@ -75,10 +84,10 @@ class EzScreen extends StatelessWidget {
         return null;
       } else {
         final BoxFit? fit =
-            boxFitFromName(EzConfig.get('$decorationKey$boxFitSuffix'));
+            ezFitFromName(EzConfig.get('$decorationKey$boxFitSuffix'));
 
         return BoxDecoration(
-          image: DecorationImage(image: provideImage(imagePath), fit: fit),
+          image: DecorationImage(image: ezImageProvider(imagePath), fit: fit),
         );
       }
     }
@@ -98,6 +107,7 @@ class EzScreen extends StatelessWidget {
   }
 
   /// [EzScreen] with a horizontal [EzScrollView] as the top level child
+  /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
   EzScreen.hScroll({
     super.key,
     this.alignment,
@@ -121,6 +131,7 @@ class EzScreen extends StatelessWidget {
         );
 
   /// [EzScreen] with a [EzScrollView] as the top level child
+  /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
   EzScreen.vScroll({
     super.key,
     this.alignment,

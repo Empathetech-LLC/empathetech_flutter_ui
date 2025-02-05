@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -8,26 +8,33 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ColorSettings extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+class EzColorSettings extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional addition quick settings
+  /// Will appear just above the reset button
   final List<Widget>? additionalQuickSettings;
 
-  /// Initial set of color configKeys to display in the advanced settings (light theme)
-  final List<String> lightStarterSet;
-
-  /// Initial set of color configKeys to display in the advanced settings (dark theme)
+  /// Initial set of [Brightness.dark] configKeys to display in the advanced settings
   final List<String> darkStarterSet;
 
-  const ColorSettings({
+  /// Initial set of [Brightness.light] configKeys to display in the advanced settings
+  final List<String> lightStarterSet;
+
+  /// Optional starting [EzSettingType] target
+  final EzSettingType? target;
+
+  /// Empathetech color settings
+  /// Recommended to use as a [Scaffold.body]
+  const EzColorSettings({
     super.key,
     this.useImageDecoration = true,
     this.additionalQuickSettings,
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
+      darkTertiaryKey,
       darkSurfaceKey,
       darkOnSurfaceKey,
       darkSurfaceContainerKey,
@@ -36,18 +43,20 @@ class ColorSettings extends StatefulWidget {
     this.lightStarterSet = const <String>[
       lightPrimaryKey,
       lightSecondaryKey,
+      lightTertiaryKey,
       lightSurfaceKey,
       lightOnSurfaceKey,
       lightSurfaceContainerKey,
       lightSurfaceTintKey,
     ],
+    this.target,
   });
 
   @override
-  State<ColorSettings> createState() => _ColorSettingsState();
+  State<EzColorSettings> createState() => _EzColorSettingsState();
 }
 
-class _ColorSettingsState extends State<ColorSettings> {
+class _EzColorSettingsState extends State<EzColorSettings> {
   // Gather the theme data //
 
   static const EzSeparator separator = EzSeparator();
@@ -57,12 +66,6 @@ class _ColorSettingsState extends State<ColorSettings> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   // Define the build data //
-
-  // Quick
-  static const String quick = 'quick';
-
-  // Advanced
-  static const String advanced = 'advanced';
 
   late final List<String> defaultList =
       isDark ? widget.darkStarterSet : widget.lightStarterSet;
@@ -76,7 +79,7 @@ class _ColorSettingsState extends State<ColorSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
-  String currentTab = quick;
+  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
 
   late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
@@ -99,7 +102,7 @@ class _ColorSettingsState extends State<ColorSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.csPageTitle, theme.colorScheme.primary);
+    ezWindowNamer(l10n.csPageTitle, theme.colorScheme.primary);
   }
 
   // Return the build //
@@ -111,36 +114,34 @@ class _ColorSettingsState extends State<ColorSettings> {
       child: EzScrollView(
         children: <Widget>[
           // Current theme reminder
-          EzTextBackground(
-            Text(
-              l10n.gEditingTheme(themeProfile),
-              style: theme.textTheme.labelLarge,
-              textAlign: TextAlign.center,
-            ),
+          EzText(
+            l10n.gEditingTheme(themeProfile),
+            style: theme.textTheme.labelLarge,
+            textAlign: TextAlign.center,
           ),
-          EzSpacer(space: EzConfig.get(marginKey)),
+          EzMargin(),
 
           // Mode switch
-          SegmentedButton<String>(
-            segments: <ButtonSegment<String>>[
-              ButtonSegment<String>(
-                value: quick,
+          SegmentedButton<EzSettingType>(
+            segments: <ButtonSegment<EzSettingType>>[
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<String>(
-                value: advanced,
+              ButtonSegment<EzSettingType>(
+                value: EzSettingType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <String>{currentTab},
+            selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<String> selected) =>
+            onSelectionChanged: (Set<EzSettingType> selected) =>
                 setState(() => currentTab = selected.first),
           ),
           separator,
 
           // Core settings
-          if (currentTab == quick)
+          if (currentTab == EzSettingType.quick)
             _QuickColorSettings(
               l10n: l10n,
               isDark: isDark,
@@ -198,20 +199,18 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
   // Define custom widgets  //
 
   late final String fromImageLabel = l10n.csSchemeBase;
-  late final String fromImageHint = '${l10n.csOptional}: ${l10n.csFromImage}';
-
-  /// Build from image button dialog title
-  late final String fromImageTitle = '$themeProfile ${l10n.csColorScheme}';
+  late final String fromImageHint = l10n.csFromImage;
 
   late final Widget fromImageButton = isDark
       ? Semantics(
+          label: fromImageLabel.replaceAll('\n', ' '),
+          value: l10n.gOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(
             child: EzImageSetting(
               configKey: darkColorSchemeImageKey,
               label: fromImageLabel,
-              dialogTitle: fromImageTitle,
               updateTheme: Brightness.dark,
               updateThemeOption: false,
               showFitOption: false,
@@ -219,13 +218,14 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           ),
         )
       : Semantics(
+          label: fromImageLabel.replaceAll('\n', ' '),
+          value: l10n.gOptional,
           button: true,
           hint: fromImageHint,
           child: ExcludeSemantics(
             child: EzImageSetting(
               configKey: lightColorSchemeImageKey,
               label: fromImageLabel,
-              dialogTitle: fromImageTitle,
               updateTheme: Brightness.light,
               updateThemeOption: false,
               showFitOption: false,
@@ -346,18 +346,18 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
     final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
-        .map<Widget>((String configKeyKey) {
-      final Color liveColor = getLiveColor(context, configKeyKey);
+        .map<Widget>((String configKey) {
+      final Color liveColor = getLiveColor(context, configKey);
 
       return Container(
         padding: EzInsets.col(padding),
         child: EzElevatedIconButton(
-          key: ValueKey<String>(configKeyKey),
+          key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: () {
-            currList.add(configKeyKey);
+            currList.add(configKey);
             currList.sort(
               (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
             );
@@ -373,11 +373,11 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               backgroundColor: liveColor,
               radius: padding + margin,
               child: liveColor == Colors.transparent
-                  ? Icon(PlatformIcons(context).eyeSlash)
+                  ? EzIcon(PlatformIcons(context).eyeSlash)
                   : null,
             ),
           ),
-          label: getColorName(context, configKeyKey),
+          label: getColorName(configKey),
         ),
       );
     }).toList();
@@ -389,7 +389,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         style: theme.textTheme.labelLarge!,
         textAlign: TextAlign.center,
         url: Uri.parse(materialColorRoles),
-        semanticsLabel: l10n.gHowThisWorksHint,
+        hint: l10n.gHowThisWorksHint,
         tooltip: materialColorRoles,
       ),
     );
@@ -455,7 +455,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
-          icon: Icon(PlatformIcons(context).addCircledOutline),
+          icon: EzIcon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),
       ],

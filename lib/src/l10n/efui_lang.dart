@@ -98,30 +98,6 @@ abstract class EFUILang {
     Locale('fr')
   ];
 
-  /// No description provided for @gYes.
-  ///
-  /// In en, this message translates to:
-  /// **'Yes'**
-  String get gYes;
-
-  /// No description provided for @gNo.
-  ///
-  /// In en, this message translates to:
-  /// **'No'**
-  String get gNo;
-
-  /// No description provided for @gAnd.
-  ///
-  /// In en, this message translates to:
-  /// **'and'**
-  String get gAnd;
-
-  /// No description provided for @gOptions.
-  ///
-  /// In en, this message translates to:
-  /// **'Options'**
-  String get gOptions;
-
   /// No description provided for @gApply.
   ///
   /// In en, this message translates to:
@@ -133,6 +109,78 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Continue'**
   String get gContinue;
+
+  /// No description provided for @gOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get gOpen;
+
+  /// No description provided for @gSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get gSuccess;
+
+  /// No description provided for @gSuccessExl.
+  ///
+  /// In en, this message translates to:
+  /// **'Success!'**
+  String get gSuccessExl;
+
+  /// No description provided for @gYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get gYes;
+
+  /// No description provided for @gAnd.
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get gAnd;
+
+  /// No description provided for @gHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get gHelp;
+
+  /// No description provided for @gNA.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get gNA;
+
+  /// No description provided for @gNAHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Not applicable'**
+  String get gNAHint;
+
+  /// No description provided for @gOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get gOptional;
+
+  /// No description provided for @gOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Options'**
+  String get gOptions;
+
+  /// No description provided for @gRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get gRequired;
+
+  /// No description provided for @gBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get gBack;
 
   /// No description provided for @gCancel.
   ///
@@ -146,77 +194,29 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
-  /// No description provided for @gClipboard.
+  /// No description provided for @gError.
   ///
   /// In en, this message translates to:
-  /// **'{thing} has been copied to the clipboard'**
-  String gClipboard(Object thing);
+  /// **'Error'**
+  String get gError;
 
-  /// No description provided for @gBYO.
+  /// No description provided for @gFailure.
   ///
   /// In en, this message translates to:
-  /// **'Build your own'**
-  String get gBYO;
+  /// **'Failure'**
+  String get gFailure;
 
-  /// No description provided for @gEFUISourceHint.
+  /// No description provided for @gNo.
   ///
   /// In en, this message translates to:
-  /// **'Open the GitHub page for EFUI'**
-  String get gEFUISourceHint;
+  /// **'No'**
+  String get gNo;
 
-  /// No description provided for @gGiveFeedback.
+  /// No description provided for @gDark.
   ///
   /// In en, this message translates to:
-  /// **'Give feedback'**
-  String get gGiveFeedback;
-
-  /// No description provided for @gOpeningFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Opening the feedback tool.'**
-  String get gOpeningFeedback;
-
-  /// No description provided for @gSupportEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Our support Email'**
-  String get gSupportEmail;
-
-  /// No description provided for @gSubmitWebFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Please take a screenshot{hint} of the issue.'**
-  String gSubmitWebFeedback(Object hint);
-
-  /// No description provided for @gAttachScreenshot.
-  ///
-  /// In en, this message translates to:
-  /// **'Please attach your screenshot'**
-  String get gAttachScreenshot;
-
-  /// No description provided for @gLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'Left'**
-  String get gLeft;
-
-  /// No description provided for @gRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Right'**
-  String get gRight;
-
-  /// No description provided for @gBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get gBack;
-
-  /// No description provided for @gSystem.
-  ///
-  /// In en, this message translates to:
-  /// **'System'**
-  String get gSystem;
+  /// **'Dark'**
+  String get gDark;
 
   /// No description provided for @gLight.
   ///
@@ -224,11 +224,11 @@ abstract class EFUILang {
   /// **'Light'**
   String get gLight;
 
-  /// No description provided for @gDark.
+  /// No description provided for @gSystem.
   ///
   /// In en, this message translates to:
-  /// **'Dark'**
-  String get gDark;
+  /// **'System'**
+  String get gSystem;
 
   /// No description provided for @gEditing.
   ///
@@ -242,17 +242,101 @@ abstract class EFUILang {
   /// **'Editing: {themeType} theme'**
   String gEditingTheme(Object themeType);
 
-  /// No description provided for @gQuick.
+  /// No description provided for @gLeft.
   ///
   /// In en, this message translates to:
-  /// **'Quick'**
-  String get gQuick;
+  /// **'Left'**
+  String get gLeft;
+
+  /// No description provided for @gRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get gRight;
 
   /// No description provided for @gAdvanced.
   ///
   /// In en, this message translates to:
   /// **'Advanced'**
   String get gAdvanced;
+
+  /// No description provided for @gQuick.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick'**
+  String get gQuick;
+
+  /// No description provided for @gDecrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease'**
+  String get gDecrease;
+
+  /// No description provided for @gIncrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase'**
+  String get gIncrease;
+
+  /// No description provided for @gMaximum.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum'**
+  String get gMaximum;
+
+  /// No description provided for @gMinimum.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum'**
+  String get gMinimum;
+
+  /// No description provided for @gLoadingAnim.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading. The Empathetic logo animated as a spinning hourglass.'**
+  String get gLoadingAnim;
+
+  /// No description provided for @gPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get gPlay;
+
+  /// No description provided for @gPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get gPause;
+
+  /// No description provided for @gMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get gMute;
+
+  /// No description provided for @gUnMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Un-mute'**
+  String get gUnMute;
+
+  /// No description provided for @gPlaybackSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback speed'**
+  String get gPlaybackSpeed;
+
+  /// No description provided for @gReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay'**
+  String get gReplay;
+
+  /// No description provided for @gFullScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Full screen'**
+  String get gFullScreen;
 
   /// No description provided for @gHowThisWorks.
   ///
@@ -265,6 +349,96 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Open helpful documentation'**
   String get gHowThisWorksHint;
+
+  /// No description provided for @gTranslationsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Translations pending human review'**
+  String get gTranslationsPending;
+
+  /// No description provided for @gUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates available'**
+  String get gUpdates;
+
+  /// No description provided for @gValidURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid URL'**
+  String get gValidURL;
+
+  /// No description provided for @g404Wonder.
+  ///
+  /// In en, this message translates to:
+  /// **'Not all who wander are lost.'**
+  String get g404Wonder;
+
+  /// No description provided for @g404.
+  ///
+  /// In en, this message translates to:
+  /// **'But, in this case: 404 page not found.'**
+  String get g404;
+
+  /// No description provided for @g404Note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: Flutter web uses hash routing, like...\nhttps://www.example.com/#/destination'**
+  String get g404Note;
+
+  /// No description provided for @gOpenSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Open source'**
+  String get gOpenSource;
+
+  /// No description provided for @gOpenEmpathetech.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a link to Empathetic LLC'**
+  String get gOpenEmpathetech;
+
+  /// No description provided for @gEFUISourceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the GitHub page for EFUI'**
+  String get gEFUISourceHint;
+
+  /// No description provided for @gOpenUIReleases.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the releases page for Open UI'**
+  String get gOpenUIReleases;
+
+  /// No description provided for @gGiveFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Give feedback'**
+  String get gGiveFeedback;
+
+  /// No description provided for @gOpeningFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening the feedback tool.'**
+  String get gOpeningFeedback;
+
+  /// No description provided for @gAttachScreenshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Please attach your screenshot (in Downloads folder)'**
+  String get gAttachScreenshot;
+
+  /// No description provided for @gSupportEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Our support Email'**
+  String get gSupportEmail;
+
+  /// No description provided for @gClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'{thing} has been copied to the clipboard.'**
+  String gClipboard(Object thing);
 
   /// No description provided for @gAttention.
   ///
@@ -283,6 +457,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'{name} is set to {value}'**
   String gSetToValue(Object name, Object value);
+
+  /// No description provided for @gRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get gRemove;
 
   /// No description provided for @gReset.
   ///
@@ -326,6 +506,18 @@ abstract class EFUILang {
   /// **'Credit to:'**
   String get gCreditTo;
 
+  /// No description provided for @gCreator.
+  ///
+  /// In en, this message translates to:
+  /// **'Creator of'**
+  String get gCreator;
+
+  /// No description provided for @gMadeBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Made by'**
+  String get gMadeBy;
+
   /// No description provided for @gYou.
   ///
   /// In en, this message translates to:
@@ -337,6 +529,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Settings'**
   String get ssPageTitle;
+
+  /// No description provided for @ssNavHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the settings page'**
+  String get ssNavHint;
 
   /// No description provided for @ssSettingsGuide.
   ///
@@ -368,16 +566,10 @@ abstract class EFUILang {
   /// **'Language'**
   String get ssLanguage;
 
-  /// No description provided for @ssLanguages.
-  ///
-  /// In en, this message translates to:
-  /// **'Languages'**
-  String get ssLanguages;
-
   /// No description provided for @ssLangHint.
   ///
   /// In en, this message translates to:
-  /// **'App language'**
+  /// **'Activate to change the app language'**
   String get ssLangHint;
 
   /// No description provided for @ssRandom.
@@ -410,6 +602,24 @@ abstract class EFUILang {
   /// **'You have already made granular \"{setting}\" changes in advanced settings.\n\nAre you sure you want to override those changes with a batch update?'**
   String tsBatchOverride(Object setting);
 
+  /// No description provided for @tsTextBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Text background opacity'**
+  String get tsTextBackground;
+
+  /// No description provided for @tsIconSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon size'**
+  String get tsIconSize;
+
+  /// No description provided for @tsLinkHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to edit {style}'**
+  String tsLinkHint(Object style);
+
   /// No description provided for @tsDisplay.
   ///
   /// In en, this message translates to:
@@ -439,12 +649,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Label'**
   String get tsLabel;
-
-  /// No description provided for @tsLinkHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Activate to edit {style}'**
-  String tsLinkHint(Object style);
 
   /// No description provided for @tsFontFamily.
   ///
@@ -493,18 +697,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Line height'**
   String get tsLineHeight;
-
-  /// No description provided for @tsDecrease.
-  ///
-  /// In en, this message translates to:
-  /// **'Decrease'**
-  String get tsDecrease;
-
-  /// No description provided for @tsIncrease.
-  ///
-  /// In en, this message translates to:
-  /// **'Increase'**
-  String get tsIncrease;
 
   /// No description provided for @tsDisplayP1.
   ///
@@ -641,8 +833,8 @@ abstract class EFUILang {
   /// No description provided for @csPickerHint.
   ///
   /// In en, this message translates to:
-  /// **'Open a color picker for {name}. Long press for more options.'**
-  String csPickerHint(Object name);
+  /// **'Open a color picker. Long press for more options.'**
+  String get csPickerHint;
 
   /// No description provided for @csMonoChrome.
   ///
@@ -655,282 +847,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Use high contrast scheme'**
   String get csHighContrast;
-
-  /// No description provided for @csPrimary.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary'**
-  String get csPrimary;
-
-  /// No description provided for @csOnPrimary.
-  ///
-  /// In en, this message translates to:
-  /// **'On primary'**
-  String get csOnPrimary;
-
-  /// No description provided for @csPrimaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary container'**
-  String get csPrimaryContainer;
-
-  /// No description provided for @csOnPrimaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'On primary container'**
-  String get csOnPrimaryContainer;
-
-  /// No description provided for @csPrimaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary fixed'**
-  String get csPrimaryFixed;
-
-  /// No description provided for @csPrimaryFixedDim.
-  ///
-  /// In en, this message translates to:
-  /// **'Primary fixed dim'**
-  String get csPrimaryFixedDim;
-
-  /// No description provided for @csOnPrimaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'On primary fixed'**
-  String get csOnPrimaryFixed;
-
-  /// No description provided for @csOnPrimaryFixedVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'On primary fixed variant'**
-  String get csOnPrimaryFixedVariant;
-
-  /// No description provided for @csSecondary.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary'**
-  String get csSecondary;
-
-  /// No description provided for @csOnSecondary.
-  ///
-  /// In en, this message translates to:
-  /// **'On secondary'**
-  String get csOnSecondary;
-
-  /// No description provided for @csSecondaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary container'**
-  String get csSecondaryContainer;
-
-  /// No description provided for @csOnSecondaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'On secondary container'**
-  String get csOnSecondaryContainer;
-
-  /// No description provided for @csSecondaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary fixed'**
-  String get csSecondaryFixed;
-
-  /// No description provided for @csSecondaryFixedDim.
-  ///
-  /// In en, this message translates to:
-  /// **'Secondary fixed dim'**
-  String get csSecondaryFixedDim;
-
-  /// No description provided for @csOnSecondaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'On secondary fixed'**
-  String get csOnSecondaryFixed;
-
-  /// No description provided for @csOnSecondaryFixedVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'On secondary fixed variant'**
-  String get csOnSecondaryFixedVariant;
-
-  /// No description provided for @csTertiary.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary'**
-  String get csTertiary;
-
-  /// No description provided for @csOnTertiary.
-  ///
-  /// In en, this message translates to:
-  /// **'On tertiary'**
-  String get csOnTertiary;
-
-  /// No description provided for @csTertiaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary container'**
-  String get csTertiaryContainer;
-
-  /// No description provided for @csOnTertiaryContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'On tertiary container'**
-  String get csOnTertiaryContainer;
-
-  /// No description provided for @csTertiaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary fixed'**
-  String get csTertiaryFixed;
-
-  /// No description provided for @csTertiaryFixedDim.
-  ///
-  /// In en, this message translates to:
-  /// **'Tertiary fixed dim'**
-  String get csTertiaryFixedDim;
-
-  /// No description provided for @csOnTertiaryFixed.
-  ///
-  /// In en, this message translates to:
-  /// **'On tertiary fixed'**
-  String get csOnTertiaryFixed;
-
-  /// No description provided for @csOnTertiaryFixedVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'On tertiary fixed variant'**
-  String get csOnTertiaryFixedVariant;
-
-  /// No description provided for @csError.
-  ///
-  /// In en, this message translates to:
-  /// **'Error'**
-  String get csError;
-
-  /// No description provided for @csOnError.
-  ///
-  /// In en, this message translates to:
-  /// **'On error'**
-  String get csOnError;
-
-  /// No description provided for @csErrorContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Error container'**
-  String get csErrorContainer;
-
-  /// No description provided for @csOnErrorContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'On error container'**
-  String get csOnErrorContainer;
-
-  /// No description provided for @csOutline.
-  ///
-  /// In en, this message translates to:
-  /// **'Outline'**
-  String get csOutline;
-
-  /// No description provided for @csOutlineVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'Outline variant'**
-  String get csOutlineVariant;
-
-  /// No description provided for @csSurface.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface'**
-  String get csSurface;
-
-  /// No description provided for @csOnSurface.
-  ///
-  /// In en, this message translates to:
-  /// **'On surface'**
-  String get csOnSurface;
-
-  /// No description provided for @csSurfaceDim.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface dim'**
-  String get csSurfaceDim;
-
-  /// No description provided for @csSurfaceBright.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface bright'**
-  String get csSurfaceBright;
-
-  /// No description provided for @csSurfaceContainerLowest.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface container lowest'**
-  String get csSurfaceContainerLowest;
-
-  /// No description provided for @csSurfaceContainerLow.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface container low'**
-  String get csSurfaceContainerLow;
-
-  /// No description provided for @csSurfaceContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface container'**
-  String get csSurfaceContainer;
-
-  /// No description provided for @csSurfaceContainerHigh.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface container high'**
-  String get csSurfaceContainerHigh;
-
-  /// No description provided for @csSurfaceContainerHighest.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface container highest'**
-  String get csSurfaceContainerHighest;
-
-  /// No description provided for @csOnSurfaceVariant.
-  ///
-  /// In en, this message translates to:
-  /// **'On surface variant'**
-  String get csOnSurfaceVariant;
-
-  /// No description provided for @csInverseSurface.
-  ///
-  /// In en, this message translates to:
-  /// **'Inverse surface'**
-  String get csInverseSurface;
-
-  /// No description provided for @csOnInverseSurface.
-  ///
-  /// In en, this message translates to:
-  /// **'On inverse surface'**
-  String get csOnInverseSurface;
-
-  /// No description provided for @csInversePrimary.
-  ///
-  /// In en, this message translates to:
-  /// **'Inverse primary'**
-  String get csInversePrimary;
-
-  /// No description provided for @csScrim.
-  ///
-  /// In en, this message translates to:
-  /// **'Scrim'**
-  String get csScrim;
-
-  /// No description provided for @csShadow.
-  ///
-  /// In en, this message translates to:
-  /// **'Shadow'**
-  String get csShadow;
-
-  /// No description provided for @csSurfaceTint.
-  ///
-  /// In en, this message translates to:
-  /// **'Surface tint'**
-  String get csSurfaceTint;
 
   /// No description provided for @csPickerTitle.
   ///
@@ -956,18 +872,6 @@ abstract class EFUILang {
   /// **'Add a color'**
   String get csAddColor;
 
-  /// No description provided for @csRemove.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove'**
-  String get csRemove;
-
-  /// No description provided for @csReset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset'**
-  String get csReset;
-
   /// No description provided for @csCurrVal.
   ///
   /// In en, this message translates to:
@@ -980,16 +884,10 @@ abstract class EFUILang {
   /// **'Build scheme\nfrom image'**
   String get csSchemeBase;
 
-  /// No description provided for @csOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'optional'**
-  String get csOptional;
-
   /// No description provided for @csFromImage.
   ///
   /// In en, this message translates to:
-  /// **'Build the color scheme from an image'**
+  /// **'A color scheme will be generated from the image.'**
   String get csFromImage;
 
   /// No description provided for @csColorScheme.
@@ -1027,12 +925,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Update the {title} image'**
   String isButtonHint(Object title);
-
-  /// No description provided for @isDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How should the {title} image be updated?'**
-  String isDialogTitle(Object title);
 
   /// No description provided for @isFromFile.
   ///

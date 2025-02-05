@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -48,6 +48,15 @@ const String empathMastodon = 'https://mastodon.social/@empathetech';
 /// https://github.com/Empathetech-LLC
 const String empathGitHub = 'https://github.com/Empathetech-LLC';
 
+/// Where we rep the goods
+/// 'https://www.empathetech.net/#/products/open-ui'
+const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
+
+/// Where new journeys begin
+/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
+const String openUIReleases =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
+
 /// EFUI source
 /// https://github.com/Empathetech-LLC/empathetech_flutter_ui
 const String efuiGitHub =
@@ -71,7 +80,7 @@ const String empathPayPal =
 const String empathVenmo = 'https://venmo.com/empathetech';
 
 /// If you want to show some love
-/// https://cash.app/\$empathetech
+/// https://cash.app/$empathetech
 const String empathCashApp = 'https://cash.app/\$empathetech';
 
 /// If you want to show some love
@@ -107,6 +116,12 @@ const double defaultBodySize = 16.0;
 
 /// 14.0
 const double defaultLabelSize = 14.0;
+
+/// 0.0
+const double defaultTextOpacity = 0.0;
+
+/// 20.0
+const double defaultIconSize = 20.0;
 
 /// 1.5
 const double defaultFontHeight = 1.5;
@@ -189,7 +204,7 @@ const int transparentHex = 0x00000000;
 
 // Brand config //
 
-/// Empathetech's default configuration for [EzConfig]
+/// Empathetech [EzConfig.defaults]
 const Map<String, Object> empathetechConfig = <String, Object>{
   // Global settings //
 
@@ -200,8 +215,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Display
   displayFontFamilyKey: roboto,
   displayFontSizeKey: defaultDisplaySize,
-  displayBoldKey: false,
-  displayItalicsKey: false,
+  displayBoldedKey: false,
+  displayItalicizedKey: false,
   displayUnderlinedKey: false,
   displayFontHeightKey: defaultFontHeight,
   displayLetterSpacingKey: defaultLetterSpacing,
@@ -210,8 +225,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Headline
   headlineFontFamilyKey: roboto,
   headlineFontSizeKey: defaultHeadlineSize,
-  headlineBoldKey: false,
-  headlineItalicsKey: false,
+  headlineBoldedKey: false,
+  headlineItalicizedKey: false,
   headlineUnderlinedKey: false,
   headlineFontHeightKey: defaultFontHeight,
   headlineLetterSpacingKey: defaultLetterSpacing,
@@ -220,8 +235,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Title
   titleFontFamilyKey: roboto,
   titleFontSizeKey: defaultTitleSize,
-  titleBoldKey: true,
-  titleItalicsKey: false,
+  titleBoldedKey: true,
+  titleItalicizedKey: false,
   titleUnderlinedKey: false,
   titleFontHeightKey: defaultFontHeight,
   titleLetterSpacingKey: defaultLetterSpacing,
@@ -230,8 +245,8 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Body
   bodyFontFamilyKey: roboto,
   bodyFontSizeKey: defaultBodySize,
-  bodyBoldKey: false,
-  bodyItalicsKey: false,
+  bodyBoldedKey: false,
+  bodyItalicizedKey: false,
   bodyUnderlinedKey: false,
   bodyFontHeightKey: defaultFontHeight,
   bodyLetterSpacingKey: defaultLetterSpacing,
@@ -240,29 +255,32 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Label
   labelFontFamilyKey: roboto,
   labelFontSizeKey: defaultLabelSize,
-  labelBoldKey: false,
-  labelItalicsKey: false,
+  labelBoldedKey: false,
+  labelItalicizedKey: false,
   labelUnderlinedKey: false,
   labelFontHeightKey: defaultFontHeight,
   labelLetterSpacingKey: defaultLetterSpacing,
   labelWordSpacingKey: defaultWordSpacing,
 
   // Background opacity
-  darkTextBackgroundOKey: 0.0,
-  lightTextBackgroundOKey: 0.0,
+  darkTextBackgroundOpacityKey: defaultTextOpacity,
+  lightTextBackgroundOpacityKey: defaultTextOpacity,
+
+  // Icon size
+  iconSizeKey: defaultIconSize,
 
   // Layout settings //
 
-  marginKey: defaultMargin, // required key
-  paddingKey: defaultPadding, // required key
-  spacingKey: defaultSpacing, // required key
+  marginKey: defaultMargin,
+  paddingKey: defaultPadding,
+  spacingKey: defaultSpacing,
 
   hideScrollKey: false,
 
   // Color settings //
 
   // Light
-  lightPrimaryKey: empathPurpleHex, // required key
+  lightPrimaryKey: empathPurpleHex,
   lightPrimaryContainerKey: empathPurpleDimHex,
   lightOnPrimaryKey: whiteHex,
   lightOnPrimaryContainerKey: whiteHex,
@@ -284,7 +302,7 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   lightSurfaceTintKey: transparentHex,
 
   // Dark
-  darkPrimaryKey: empathEucalyptusHex, // required key
+  darkPrimaryKey: empathEucalyptusHex,
   darkPrimaryContainerKey: empathEucalyptusDimHex,
   darkOnPrimaryKey: blackHex,
   darkOnPrimaryContainerKey: blackHex,

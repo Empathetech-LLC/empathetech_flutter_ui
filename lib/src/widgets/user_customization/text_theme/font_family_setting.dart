@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EzFontFamilySetting extends StatefulWidget {
-  /// The [EzConfig] key for the [TextStyle.fontFamily] to be updated
+  /// The [EzConfig] key whose value is being updated
   final String configKey;
 
   /// [Provider] tracking the [TextStyle] to be updated
-  /// [EzFontFamilySetting] uses [BaseTextStyleProvider.fuse]
-  final BaseTextStyleProvider provider;
+  /// [EzFontFamilySetting] uses [EzTextStyleProvider.fuse]
+  final EzTextStyleProvider provider;
 
+  /// [Tooltip.message] passthrough
   final String? tooltip;
 
   /// Base [TextStyle] for the [DropdownMenu]
@@ -45,15 +46,16 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   // Define the build data  //
 
-  late String currFontFamily = firstWord(
-      widget.provider.value.fontFamily ?? EzConfig.get(widget.configKey));
+  late String? currFontFamily = widget.provider.value.fontFamily == null
+      ? null
+      : ezClassToCamel(ezFirstWord(widget.provider.value.fontFamily!));
 
   /// Builds an [EzAlertDialog] with [googleStyles] mapped to a list of [DropdownMenuEntry]s
   late final List<DropdownMenuEntry<String>> entries =
       googleStyles.entries.map((MapEntry<String, TextStyle> entry) {
     return DropdownMenuEntry<String>(
       value: entry.key,
-      label: googleStyleNames[entry.key]!,
+      label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
         padding: EzInsets.wrap(padding),
@@ -67,11 +69,11 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
   Widget build(BuildContext context) {
     return Tooltip(
       message: widget.tooltip ?? EFUILang.of(context)!.tsFontFamily,
-      child: DropdownMenu<String>(
-        width: dropdownWidth(context: context, entries: <String>[fingerPaint]),
+      child: EzDropdownMenu<String>(
+        widthEntries: <String>[fingerPaint],
         textStyle: fuseWithGFont(
           starter: widget.baseStyle,
-          gFont: currFontFamily,
+          gFont: currFontFamily ?? EzConfig.get(widget.configKey),
         ),
         dropdownMenuEntries: entries,
         enableSearch: false,

@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -32,31 +32,31 @@ void testSuite({
 
       ezLog('\nTesting navigation');
 
-      await touch(
+      await ezTouch(
         tester,
-        find.widgetWithText(ElevatedButton, l10n.tsPageTitle),
+        find.widgetWithText(EzElevatedIconButton, l10n.tsPageTitle),
       );
 
       // Verify text loaded //
 
       ezLog('\nValidating text');
-      await validateText(
+      await ezFindText(
         tester,
         l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
       );
-      await validateText(
+      await ezFindText(
         tester,
         l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
       );
-      await validateText(
+      await ezFindText(
         tester,
         l10n.tsTitleP1 + l10n.tsTitleLink,
       );
-      await validateText(
+      await ezFindText(
         tester,
         l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
       );
-      await validateText(
+      await ezFindText(
         tester,
         l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
       );
@@ -69,14 +69,14 @@ void testSuite({
       // Batch font updates //
 
       ezLog('Batch font updater');
-      await touch(tester, find.byType(DropdownMenu<String>));
-      await touchText(tester, roboto);
+      await ezTouch(tester, find.byType(DropdownMenu<String>));
+      await ezTouchText(tester, roboto);
 
       // Batch size updates //
 
       ezLog('Batch font size: max');
       for (int i = 0; i < 15; i++) {
-        await touch(
+        await ezTouch(
           tester,
           find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
         );
@@ -84,7 +84,7 @@ void testSuite({
 
       ezLog('Batch font size: min');
       for (int i = 0; i < 15; i++) {
-        await touch(
+        await ezTouch(
           tester,
           find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
         );
@@ -104,12 +104,12 @@ void testSuite({
       ezLog('\nTesting advanced settings');
 
       ezLog('\nNavigation');
-      await touchText(tester, l10n.gAdvanced);
+      await ezTouchText(tester, l10n.gAdvanced);
 
       ezLog('\nDisplay');
-      await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touch(tester, find.text(l10n.tsDisplay.toLowerCase()).first);
-      await touch(
+      await ezTouch(tester, find.byType(DropdownMenu<String>).first);
+      await ezTouch(tester, find.text(l10n.tsDisplay.toLowerCase()).first);
+      await ezTouch(
         tester,
         find.widgetWithText(EzLink, l10n.tsDisplayLink),
       );
@@ -120,9 +120,9 @@ void testSuite({
       );
 
       ezLog('\nHeadline');
-      await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touch(tester, find.text(l10n.tsHeadline.toLowerCase()).first);
-      await touch(
+      await ezTouch(tester, find.byType(DropdownMenu<String>).first);
+      await ezTouch(tester, find.text(l10n.tsHeadline.toLowerCase()).first);
+      await ezTouch(
         tester,
         find.widgetWithText(EzLink, l10n.tsHeadlineLink),
       );
@@ -133,9 +133,9 @@ void testSuite({
       );
 
       ezLog('\nTitle');
-      await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touch(tester, find.text(l10n.tsTitle.toLowerCase()).first);
-      await touch(
+      await ezTouch(tester, find.byType(DropdownMenu<String>).first);
+      await ezTouch(tester, find.text(l10n.tsTitle.toLowerCase()).first);
+      await ezTouch(
         tester,
         find.widgetWithText(EzLink, l10n.tsTitleLink),
       );
@@ -146,9 +146,9 @@ void testSuite({
       );
 
       ezLog('\nBody');
-      await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touch(tester, find.text(l10n.tsBody.toLowerCase()).first);
-      await touch(
+      await ezTouch(tester, find.byType(DropdownMenu<String>).first);
+      await ezTouch(tester, find.text(l10n.tsBody.toLowerCase()).first);
+      await ezTouch(
         tester,
         find.widgetWithText(EzLink, l10n.tsBodyLink),
       );
@@ -159,9 +159,9 @@ void testSuite({
       );
 
       ezLog('\nLabel');
-      await touch(tester, find.byType(DropdownMenu<String>).first);
-      await touch(tester, find.text(l10n.tsLabel.toLowerCase()).first);
-      await touch(
+      await ezTouch(tester, find.byType(DropdownMenu<String>).first);
+      await ezTouch(tester, find.text(l10n.tsLabel.toLowerCase()).first);
+      await ezTouch(
         tester,
         find.widgetWithText(EzLink, l10n.tsLabelLink),
       );
@@ -182,7 +182,7 @@ void testSuite({
 
       // Reset for next test suite  //
 
-      await goBack(tester, l10n.gBack);
+      await ezTapBack(tester, l10n.gBack);
       ezLog('\nText settings test suite complete\n\n');
     });
 
@@ -192,16 +192,16 @@ Future<void> testAdvancedOptions(
   required double fontSize,
 }) async {
   ezLog('Font family');
-  await touch(tester, find.byType(DropdownMenu<String>).last);
-  await touchText(tester, roboto);
+  await ezTouch(tester, find.byType(DropdownMenu<String>).last);
+  await ezTouchText(tester, roboto);
 
   ezLog('Font size');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.minus : Icons.remove),
   );
   await tester.enterText(find.byType(TextFormField).at(0), '$fontSize');
-  await touch(
+  await ezTouch(
     tester,
     find.byIcon(isCupertino ? CupertinoIcons.add : Icons.add),
   );
@@ -227,33 +227,33 @@ Future<void> testAdvancedOptions(
 
 Future<void> touchBold(WidgetTester tester) async {
   try {
-    await touch(tester, find.byIcon(Icons.format_bold));
+    await ezTouch(tester, find.byIcon(Icons.format_bold));
   } catch (_) {
-    await touch(tester, find.byIcon(Icons.format_bold_outlined));
-    await touch(tester, find.byIcon(Icons.format_bold));
+    await ezTouch(tester, find.byIcon(Icons.format_bold_outlined));
+    await ezTouch(tester, find.byIcon(Icons.format_bold));
     return;
   }
-  await touch(tester, find.byIcon(Icons.format_bold_outlined));
+  await ezTouch(tester, find.byIcon(Icons.format_bold_outlined));
 }
 
 Future<void> touchItalics(WidgetTester tester) async {
   try {
-    await touch(tester, find.byIcon(Icons.format_italic));
+    await ezTouch(tester, find.byIcon(Icons.format_italic));
   } catch (_) {
-    await touch(tester, find.byIcon(Icons.format_italic_outlined));
-    await touch(tester, find.byIcon(Icons.format_italic));
+    await ezTouch(tester, find.byIcon(Icons.format_italic_outlined));
+    await ezTouch(tester, find.byIcon(Icons.format_italic));
     return;
   }
-  await touch(tester, find.byIcon(Icons.format_italic_outlined));
+  await ezTouch(tester, find.byIcon(Icons.format_italic_outlined));
 }
 
 Future<void> touchUnderline(WidgetTester tester) async {
   try {
-    await touch(tester, find.byIcon(Icons.format_underline));
+    await ezTouch(tester, find.byIcon(Icons.format_underline));
   } catch (_) {
-    await touch(tester, find.byIcon(Icons.format_underline_outlined));
-    await touch(tester, find.byIcon(Icons.format_underline));
+    await ezTouch(tester, find.byIcon(Icons.format_underline_outlined));
+    await ezTouch(tester, find.byIcon(Icons.format_underline));
     return;
   }
-  await touch(tester, find.byIcon(Icons.format_underline_outlined));
+  await ezTouch(tester, find.byIcon(Icons.format_underline_outlined));
 }

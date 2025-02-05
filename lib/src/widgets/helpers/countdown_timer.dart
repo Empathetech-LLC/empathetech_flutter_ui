@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,12 +9,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class EzCountdownTimer extends StatefulWidget {
+  /// How long is the countdown
   final Duration duration;
 
   /// Defaults to a [SnackBar] appropriate value
   final double? radius;
 
-  /// Optional color override, defaults to [ColorScheme.secondary]
+  /// Defaults to [ColorScheme.secondary]
   final Color? color;
 
   /// An animated circle/pie countdown timer
@@ -49,9 +50,9 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
   @override
   Widget build(BuildContext context) {
     final double size = (widget.radius ??
-            measureIcon(
+            ezIconSize(
               Icons.circle,
-              context: context,
+              context,
               style: Theme.of(context).snackBarTheme.contentTextStyle,
             ).width) *
         2;

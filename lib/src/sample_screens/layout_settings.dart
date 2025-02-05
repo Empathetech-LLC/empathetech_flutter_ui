@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,24 +7,27 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class LayoutSettings extends StatefulWidget {
-  /// For [EzScreen.useImageDecoration]
+class EzLayoutSettings extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
   /// Optional additional settings
+  /// Will appear just above the reset button
   final List<Widget>? additionalSettings;
 
-  const LayoutSettings({
+  /// Empathetech layout settings
+  /// Recommended to use as a [Scaffold.body]
+  const EzLayoutSettings({
     super.key,
     this.useImageDecoration = true,
     this.additionalSettings,
   });
 
   @override
-  State<LayoutSettings> createState() => _LayoutSettingsState();
+  State<EzLayoutSettings> createState() => _EzLayoutSettingsState();
 }
 
-class _LayoutSettingsState extends State<LayoutSettings> {
+class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Gather the theme data //
 
   final double margin = EzConfig.get(marginKey);
@@ -47,7 +50,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setPageTitle(l10n.lsPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(l10n.lsPageTitle, Theme.of(context).colorScheme.primary);
   }
 
   // Return the build //
@@ -63,7 +66,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,
-            type: LayoutSettingType.margin,
+            type: EzLayoutSettingType.margin,
             min: minMargin,
             max: maxMargin,
             steps: 6,
@@ -74,7 +77,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           // Padding
           const EzLayoutSetting(
             configKey: paddingKey,
-            type: LayoutSettingType.padding,
+            type: EzLayoutSettingType.padding,
             min: minPadding,
             max: maxPadding,
             steps: 12,
@@ -85,7 +88,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
           // Spacing
           const EzLayoutSetting(
             configKey: spacingKey,
-            type: LayoutSettingType.spacing,
+            type: EzLayoutSettingType.spacing,
             min: minSpacing,
             max: maxSpacing,
             steps: 13,
@@ -105,7 +108,7 @@ class _LayoutSettingsState extends State<LayoutSettings> {
                 ),
                 margin: EzInsets.col(margin),
               ),
-              Checkbox(
+              EzCheckbox(
                 value: hideScroll,
                 onChanged: (bool? value) async {
                   if (value == null) return;

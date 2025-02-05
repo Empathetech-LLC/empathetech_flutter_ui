@@ -3,43 +3,85 @@
 
 
 
-  "gYes": "Sí",
-  "gNo": "No",
-  "gAnd": "y",
-  "gOptions": "Opciones",
   "gApply": "Aplicar",
   "gContinue": "Continuar",
+  "gOpen": "Abrir",
+  "gSuccess": "Éxito",
+  "gSuccessExl": "¡Éxito!",
+  "gYes": "Sí",
+
+  "gAnd": "y",
+  "gHelp": "Ayuda",
+  "gNA": "N/D",
+  "gNAHint": "No disponible",
+  "gOptional": "opcional",
+  "gOptions": "Opciones",
+  "gRequired": "Requerido",
+
+  "gBack": "Atrás",
   "gCancel": "Cancelar",
   "gClose": "Cerrar",
-  "gClipboard": "{thing} ha sido copiado al portapapeles",
+  "gError": "Error",
+  "gFailure": "Fracaso",
+  "gNo": "No",
 
-  "gBYO": "Construye uno",
-  "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
-  "gGiveFeedback": "Dar feedback",
-  "gOpeningFeedback": "Apertura de la herramienta de feedback.",
-  "gSupportEmail": "Nuestro Email de soporte",
-  "gSubmitWebFeedback": "Por favor, tome una captura de pantalla{hint} del problema.",
-  "gAttachScreenshot": "Adjunte su captura de pantalla",
-
-  "gLeft": "Izquierda",
-  "gRight": "Derecha",
-  "gBack": "Atrás",
-
-  "gSystem": "Sistema",
-  "gLight": "Claro",
   "gDark": "Oscuro",
+  "gLight": "Claro",
+  "gSystem": "Sistema",
+
   "gEditing": "Editando: ",
   "gEditingTheme": "Editando: tema {themeType}",
 
-  "gQuick": "Rápido",
+  "gLeft": "Izquierda",
+  "gRight": "Derecha",
+
   "gAdvanced": "Avanzado",
-  
+  "gQuick": "Rápido",
+
+  "gDecrease": "Disminuir",
+  "gIncrease": "Aumentar",
+  "gMaximum": "Máximo",
+  "gMinimum": "Mínimo",
+
+  "gLoadingAnim": "Cargando. El logotipo empático animado como un reloj de arena giratorio.",
+
+  "gPlay": "Reproducir",
+  "gPause": "Pausa",
+  "gMute": "Silenciar",
+  "gUnMute": "Desactivar silencio",
+  "gPlaybackSpeed": "Velocidad de reproducción",
+  "gReplay": "Repetir",
+  "gFullScreen": "Pantalla completa",
+
   "gHowThisWorks": "Cómo funciona",
   "gHowThisWorksHint": "Abrir documentación útil",
+
+  "gTranslationsPending": "Traducciones pendientes de revisión humana",
+
+  "gUpdates": "Actualizaciones disponibles",
+  
+  "gValidURL": "Por favor, introduzca una URL válida",
+
+  "g404Wonder": "No todos los que deambulan están perdidos.",
+  "g404": "Pero, en este caso: 404 página no encontrada.",
+  "g404Note": "Nota: Flutter web utiliza enrutamiento hash, como...\nhttps://www.example.com/#/settings",
+
+  "gOpenSource": "Código abierto",
+  "gOpenEmpathetech": "Abrir un enlace a Empathetic LLC",
+  "gEFUISourceHint": "Abrir la página de GitHub de EFUI",
+  "gOpenUIReleases": "Abrir la página de lanzamientos de Open UI",
+
+  "gGiveFeedback": "Dar feedback",
+  "gOpeningFeedback": "Apertura de la herramienta de feedback.",
+  "gAttachScreenshot": "Adjunte su captura de pantalla (en la carpeta de Descargas)",
+  
+  "gSupportEmail": "Nuestro Email de soporte",
+  "gClipboard": "{thing} ha sido copiado al portapapeles.",
 
   "gAttention": "Atención",
   "gCurrently": "Actualmente:",
   "gSetToValue": "{name} está configurado a {value}",
+  "gRemove": "Quitar",
   "gReset": "Restablecer",
   "gResetTo": "Restablecer:",
   "gResetValue": "¿Restablecer {name}?",
@@ -48,11 +90,14 @@
   "gUndoWarn": "No se puede deshacer",
 
   "gCreditTo": "Acreditando a:",
+  "gCreator": "Creador de",
+  "gMadeBy": "Hecho por",
   "gYou": "Configurado por ti",
   
 
 
   "ssPageTitle": "Configuración",
+  "ssNavHint": "Abrir la página de configuración",
   "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
   "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
 
@@ -60,8 +105,7 @@
   "ssDominantHand": "Mano preferente",
   
   "ssLanguage": "Idioma",
-  "ssLanguages": "Idiomas",
-  "ssLangHint": "Idioma de la aplicación",
+  "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
   "ssRandom": "Aleatorizar",
   "ssRandomize": "¿Aleatorizar el tema {themeType}?",
@@ -74,13 +118,16 @@
 
   "tsBatchOverride": "Ya has realizado cambios de \"{setting}\" granulares en la configuración avanzada.\n\n¿Seguro que quieres anular esos cambios con una actualización por lotes?",
 
+  "tsTextBackground": "Opacidad del fondo del texto",
+  "tsIconSize": "Tamaño del icono",
+
+  "tsLinkHint": "Activar para editar {style}",
+
   "tsDisplay": "Despliegue",
   "tsHeadline": "Encabezado",
   "tsTitle": "Título",
   "tsBody": "Cuerpo",
   "tsLabel": "Etiqueta",
-
-  "tsLinkHint": "Activar para editar {style}",
 
   "tsFontFamily": "Familia de fuente",
   "tsFontSize": "Tamaño de fuente",
@@ -90,8 +137,6 @@
   "tsLetterSpacing": "Espaciado entre letras",
   "tsWordSpacing": "Espaciado entre palabras",
   "tsLineHeight": "Altura de línea",
-  "tsDecrease": "Disminuir",
-  "tsIncrease": "Aumentar",
 
   "tsDisplayP1": "¿Se ",
   "tsDisplayLink": "despliegue",
@@ -126,70 +171,20 @@
   
   "csPageTitle": "Configuración de color",
 
-  "csPickerHint": "Abre un selector de color para {name}. Mantén pulsado para ver más opciones.",
+  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
 
   "csMonoChrome": "Usar esquema monocromático",
   "csHighContrast": "Usar esquema de alto contraste",
-  
-  "csPrimary": "Primary",
-  "csOnPrimary": "On primary",
-  "csPrimaryContainer": "Primary container",
-  "csOnPrimaryContainer": "On primary container",
-  "csPrimaryFixed": "Primary fixed",
-  "csPrimaryFixedDim": "Primary fixed dim",
-  "csOnPrimaryFixed": "On primary fixed",
-  "csOnPrimaryFixedVariant": "On primary fixed variant",
-  "csSecondary": "Secondary",
-  "csOnSecondary": "On secondary",
-  "csSecondaryContainer": "Secondary container",
-  "csOnSecondaryContainer": "On secondary container",
-  "csSecondaryFixed": "Secondary fixed",
-  "csSecondaryFixedDim": "Secondary fixed dim",
-  "csOnSecondaryFixed": "On secondary fixed",
-  "csOnSecondaryFixedVariant": "On secondary fixed variant",
-  "csTertiary": "Tertiary",
-  "csOnTertiary": "On tertiary",
-  "csTertiaryContainer": "Tertiary container",
-  "csOnTertiaryContainer": "On tertiary container",
-  "csTertiaryFixed": "Tertiary fixed",
-  "csTertiaryFixedDim": "Tertiary fixed dim",
-  "csOnTertiaryFixed": "On tertiary fixed",
-  "csOnTertiaryFixedVariant": "On tertiary fixed variant",
-  "csError": "Error",
-  "csOnError": "On error",
-  "csErrorContainer": "Error container",
-  "csOnErrorContainer": "On error container",
-  "csOutline": "Outline",
-  "csOutlineVariant": "Outline variant",
-  "csSurface": "Surface",
-  "csOnSurface": "On surface",
-  "csSurfaceDim": "Surface dim",
-  "csSurfaceBright": "Surface bright",
-  "csSurfaceContainerLowest": "Surface container lowest",
-  "csSurfaceContainerLow": "Surface container low",
-  "csSurfaceContainer": "Surface container",
-  "csSurfaceContainerHigh": "Surface container high",
-  "csSurfaceContainerHighest": "Surface container highest",
-  "csOnSurfaceVariant": "On surface variant",
-  "csInverseSurface": "Inverse surface",
-  "csOnInverseSurface": "On inverse surface",
-  "csInversePrimary": "Inverse primary",
-  "csScrim": "Scrim",
-  "csShadow": "Shadow",
-  "csSurfaceTint": "Surface tint",
 
   "csPickerTitle": "Selecciona un color",
   "csRecommended": "¿Usar contraste recomendado?",
   "csUseCustom": "Usar personalizado",
 
   "csAddColor": "Añadir un color",
-  "csRemove": "Quitar",
-  "csReset": "Restablecer",
   "csCurrVal": "Valor de color actual:",
 
   "csSchemeBase": "Crear tema\nusando imagen",
-  "csOptional": "opcional",
-  "csFromImage": "Diseña un esquema de color a partir de una imagen",
+  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
   "csColorScheme": "esquema de color",
 
   "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
@@ -202,7 +197,6 @@
   "isImage": "imagen",
 
   "isButtonHint": "Actualizar la imagen {title}",
-  "isDialogTitle": "¿Cómo quieres actualizar la imagen {title}?",
   "isFromFile": "Usando un archivo",
   "isFromCamera": "Usando la cámara",
   "isFromNetwork": "Usando un link",

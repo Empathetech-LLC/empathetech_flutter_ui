@@ -1,49 +1,62 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FeedbackButton extends StatelessWidget {
-  final EFUILang l10n;
+class EzFeedbackMenuButton extends StatelessWidget {
+  /// [BuildContext] passthrough
+  final BuildContext parentContext;
+
+  /// Included in the email subject
   final String appName;
+
+  /// Feedback recipient
   final String supportEmail;
 
-  const FeedbackButton({
+  /// Activates the [BetterFeedback] tool and shares the results with [supportEmail]
+  /// [Share.shareXFiles] on mobile, classic mailto everywhere else
+  const EzFeedbackMenuButton({
     super.key,
-    required this.l10n,
+    required this.parentContext,
     required this.appName,
-    this.supportEmail = empathSupport,
+    required this.supportEmail,
   });
 
   @override
   Widget build(BuildContext context) {
-    final String message = kIsWeb
-        ? '${l10n.gOpeningFeedback}\n${l10n.gSubmitWebFeedback(screenshotHint(context))}'
-        : '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}';
+    final EFUILang l10n = EFUILang.of(context)!;
+
+    final bool isMobile = !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 
     return EzMenuButton(
       onPressed: () async {
-        await ezSnackBar(context: context, message: message).closed;
+        if (isMobile) {
+          await Clipboard.setData(ClipboardData(text: supportEmail));
 
-        if (context.mounted) {
-          BetterFeedback.of(context).show(
+          if (parentContext.mounted) {
+            await ezSnackBar(
+              context: parentContext,
+              message:
+                  '${l10n.gOpeningFeedback}\n${l10n.gClipboard(l10n.gSupportEmail)}',
+            ).closed;
+          }
+        }
+
+        if (parentContext.mounted) {
+          BetterFeedback.of(parentContext).show(
             (UserFeedback feedback) async {
-              if (kIsWeb) {
-                await launchUrl(Uri.parse(
-                  'mailto:$empathSupport?subject=$appName%20feedback&body=${feedback.text}\n\n${l10n.gAttachScreenshot}',
-                ));
-              } else {
-                await Clipboard.setData(ClipboardData(text: supportEmail));
-
+              if (isMobile) {
                 await Share.shareXFiles(
                   <XFile>[
                     XFile.fromData(
@@ -54,12 +67,21 @@ class FeedbackButton extends StatelessWidget {
                   ],
                   text: feedback.text,
                 );
+              } else {
+                await FileSaver.instance.saveFile(
+                  name: 'screenshot.png',
+                  bytes: feedback.screenshot,
+                  mimeType: MimeType.png,
+                );
+                await launchUrl(Uri.parse(
+                  'mailto:$supportEmail?subject=$appName%20feedback&body=${feedback.text}\n\n----%20%20----%20%20----\n\n${l10n.gAttachScreenshot}',
+                ));
               }
             },
           );
         }
       },
-      icon: const Icon(Icons.feedback_outlined),
+      icon: EzIcon(Icons.feedback_outlined),
       label: l10n.gGiveFeedback,
     );
   }

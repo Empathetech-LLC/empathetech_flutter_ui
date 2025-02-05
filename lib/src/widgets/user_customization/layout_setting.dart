@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,35 +10,29 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which piece of the layout is being updated
 /// This will determine the preview [Widget]s
-enum LayoutSettingType {
-  margin,
-  padding,
-  spacing,
-}
+enum EzLayoutSettingType { margin, padding, spacing }
 
-/// Get the proper [String] name for [LayoutSettingType]
-String lstName(BuildContext context, LayoutSettingType settingType) {
+/// Get human readable name for [settingType]
+String ezLstName(BuildContext context, EzLayoutSettingType settingType) {
   switch (settingType) {
-    case LayoutSettingType.margin:
+    case EzLayoutSettingType.margin:
       return EFUILang.of(context)!.lsMargin;
-    case LayoutSettingType.padding:
+    case EzLayoutSettingType.padding:
       return EFUILang.of(context)!.lsPadding;
-    case LayoutSettingType.spacing:
+    case EzLayoutSettingType.spacing:
       return EFUILang.of(context)!.lsSpacing;
   }
 }
 
-/// Enumerator extension for getting the proper button [Icon] for [EzLayoutSetting.type]
-extension SettingIcon on LayoutSettingType {
-  Icon get icon {
-    switch (this) {
-      case LayoutSettingType.margin:
-        return const Icon(Icons.margin);
-      case LayoutSettingType.padding:
-        return const Icon(Icons.padding);
-      case LayoutSettingType.spacing:
-        return const Icon(Icons.space_bar);
-    }
+/// Get the [Icon] for [settingType]
+Icon ezLstIcon(EzLayoutSettingType settingType) {
+  switch (settingType) {
+    case EzLayoutSettingType.margin:
+      return EzIcon(Icons.margin);
+    case EzLayoutSettingType.padding:
+      return EzIcon(Icons.padding);
+    case EzLayoutSettingType.spacing:
+      return EzIcon(Icons.space_bar);
   }
 }
 
@@ -46,8 +40,8 @@ class EzLayoutSetting extends StatefulWidget {
   /// The [EzConfig] key whose value is being updated
   final String configKey;
 
-  /// enum for determining the preview Widget(s) required
-  final LayoutSettingType type;
+  /// enum for determining the preview Widget(s)
+  final EzLayoutSettingType type;
 
   /// Smallest value that can be set
   final double min;
@@ -58,7 +52,7 @@ class EzLayoutSetting extends StatefulWidget {
   /// Number of divisions between [min] and [max]
   final int steps;
 
-  /// Number of significant figures to display AFTER the decimal point
+  /// Number of significant figures to display after the decimal point
   final int decimals;
 
   /// Defaults to [TextTheme.titleLarge]
@@ -67,8 +61,8 @@ class EzLayoutSetting extends StatefulWidget {
   /// Defaults to [TextTheme.bodyLarge]
   final TextStyle? bodyStyle;
 
-  /// Standardized [Widget] for updating layout values in [EzConfig]
-  /// Supports all [LayoutSettingType]s
+  /// Standardized [EzElevatedIconButton] for updating layout values in [EzConfig]
+  /// Supports all [EzLayoutSettingType]s
   const EzLayoutSetting({
     super.key,
     required this.configKey,
@@ -91,7 +85,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late double currValue = EzConfig.get(widget.configKey);
   late final double defaultValue = EzConfig.getDefault(widget.configKey);
 
-  late final String label = lstName(context, widget.type);
+  late final String label = ezLstName(context, widget.type);
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -106,17 +100,21 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   // Define build functions //
 
-  /// Return the preview Widget(s) for the passed [LayoutSettingType]
+  /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
   List<Widget> _buildPreview(BuildContext context) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
       // Margin
-      case LayoutSettingType.margin:
+      case EzLayoutSettingType.margin:
+        late final bool isDark = isDarkTheme(context);
+
         late final String? backgroundImagePath = EzConfig.get(
-            isDarkTheme(context)
-                ? darkBackgroundImageKey
-                : lightBackgroundImageKey);
+            isDark ? darkBackgroundImageKey : lightBackgroundImageKey);
+
+        late final BoxFit? backgroundImageFit = ezFitFromName(isDark
+            ? EzConfig.get('$darkBackgroundImageKey$boxFitSuffix')
+            : EzConfig.get('$lightBackgroundImageKey$boxFitSuffix'));
 
         return <Widget>[
           spacer,
@@ -126,10 +124,10 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               style: bodyStyle?.copyWith(color: theme.colorScheme.surface),
               textAlign: TextAlign.center,
             ),
-            margin: EdgeInsets.all(currValue),
+            margin: EzInsets.wrap(currValue),
             backgroundColor: theme.colorScheme.onSurface,
           ),
-          spacer,
+          EzSpacer(space: currValue),
           Container(
             color: theme.colorScheme.onSurface,
             height: heightOf(context) * 0.25,
@@ -141,8 +139,8 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
                         backgroundImagePath == noImageValue)
                     ? null
                     : DecorationImage(
-                        image: provideImage(backgroundImagePath),
-                        fit: BoxFit.fill,
+                        image: ezImageProvider(backgroundImagePath),
+                        fit: backgroundImageFit,
                       ),
               ),
               margin: EdgeInsets.all(currValue * 0.25),
@@ -152,7 +150,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Padding
-      case LayoutSettingType.padding:
+      case EzLayoutSettingType.padding:
         return <Widget>[
           spacer,
 
@@ -162,23 +160,21 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
+              EzElevatedButton(
+                enabled: false,
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(currValue),
-                  foregroundColor: theme.colorScheme.onSurface,
                 ),
-                onPressed: doNothing,
-                child: Text(l10n.gCurrently),
+                text: l10n.gCurrently,
               ),
               const EzSpacer(vertical: false),
-              ElevatedButton(
+              EzElevatedButton(
+                enabled: false,
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(currValue),
-                  foregroundColor: theme.colorScheme.onSurface,
                   shape: const CircleBorder(),
                 ),
-                onPressed: doNothing,
-                child: Text(valString),
+                text: valString,
               ),
             ],
           ),
@@ -187,7 +183,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
         ];
 
       // Spacing
-      case LayoutSettingType.spacing:
+      case EzLayoutSettingType.spacing:
         return <Widget>[
           // Preview 1
           EzSpacer(space: currValue),
@@ -198,20 +194,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             scrollDirection: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: theme.colorScheme.onSurface,
-                ),
-                onPressed: doNothing,
-                child: Text(l10n.gCurrently),
-              ),
+              EzElevatedButton(enabled: false, text: l10n.gCurrently),
               EzSpacer(space: currValue, vertical: false),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: theme.colorScheme.onSurface,
-                ),
-                onPressed: doNothing,
-                child: Text(valString),
+              EzElevatedButton(
+                enabled: false,
+                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+                text: valString,
               ),
             ],
           ),
@@ -291,7 +279,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
             currValue = defaultValue;
           });
         },
-        icon: Icon(PlatformIcons(context).refresh),
+        icon: EzIcon(PlatformIcons(context).refresh),
         label:
             '${l10n.gResetTo} ${defaultValue.toStringAsFixed(widget.decimals)}',
       ),
@@ -319,7 +307,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           },
         ),
       ),
-      icon: widget.type.icon,
+      icon: ezLstIcon(widget.type),
       label: label,
     );
   }

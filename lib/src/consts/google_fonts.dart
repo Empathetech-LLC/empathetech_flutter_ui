@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,35 +9,35 @@ import 'package:google_fonts/google_fonts.dart';
 // Accessible fonts taken from https://material.io/blog/how-to-make-text-more-accessible
 // Plus some ones we think are cute
 
-/// 'AlexBrush'
-const String alexBrush = 'AlexBrush';
+/// 'alexBrush'
+const String alexBrush = 'alexBrush';
 
-/// 'AtkinsonHyperlegible'
-const String atkinsonHyperlegible = 'AtkinsonHyperlegible';
+/// 'atkinsonHyperlegible'
+const String atkinsonHyperlegible = 'atkinsonHyperlegible';
 
-/// 'FingerPaint'
-const String fingerPaint = 'FingerPaint';
+/// 'fingerPaint'
+const String fingerPaint = 'fingerPaint';
 
-/// 'Lexend'
-const String lexend = 'Lexend';
+/// 'lexend'
+const String lexend = 'lexend';
 
-/// 'NotoSans'
-const String noto = 'NotoSans';
+/// 'noto'
+const String noto = 'noto';
 
-/// 'OpenSans'
-const String openSans = 'OpenSans';
+/// 'openSans'
+const String openSans = 'openSans';
 
-/// 'PressStart2P'
-const String pressStart2P = 'PressStart2P';
+/// 'pressStart2P'
+const String pressStart2P = 'pressStart2P';
 
-/// 'ReadexPro'
-const String readexPro = 'ReadexPro';
+/// 'readexPro'
+const String readexPro = 'readexPro';
 
-/// 'Roboto'
-const String roboto = 'Roboto';
+/// 'roboto'
+const String roboto = 'roboto';
 
-/// 'SourceCodePro'
-const String sourceCodePro = 'SourceCodePro';
+/// 'sourceCodePro'
+const String sourceCodePro = 'sourceCodePro';
 
 /// All the [GoogleFonts] currently supported
 final Map<String, TextStyle> googleStyles = <String, TextStyle>{
@@ -53,21 +53,8 @@ final Map<String, TextStyle> googleStyles = <String, TextStyle>{
   sourceCodePro: GoogleFonts.sourceCodePro(),
 };
 
-/// Human readable names for the [GoogleFonts] currently supported
-const Map<String, String> googleStyleNames = <String, String>{
-  alexBrush: 'Alex Brush',
-  atkinsonHyperlegible: 'Atkinson Hyperlegible',
-  fingerPaint: 'Finger Paint',
-  lexend: 'Lexend',
-  noto: 'Noto Sans',
-  openSans: 'Open Sans',
-  pressStart2P: 'Press Start 2P',
-  readexPro: 'Readex Pro',
-  roboto: 'Roboto',
-  sourceCodePro: 'Source Code Pro',
-};
-
-/// Pass [starter] to the [gFont]'s [GoogleFonts.textStyle] param
+/// Passes [starter] to the [gFont]'s [GoogleFonts.textStyle] param
+/// Returns [starter] if [gFont] is not found/supported
 TextStyle fuseWithGFont({required TextStyle starter, required String gFont}) {
   switch (gFont) {
     case alexBrush:

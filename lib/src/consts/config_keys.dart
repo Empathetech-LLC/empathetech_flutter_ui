@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -9,13 +9,13 @@ const String isLeftyKey = 'isLefty';
 
 const String isDarkThemeKey = 'isDarkTheme';
 
-const String localeKey = 'appLocale';
+const String appLocaleKey = 'appLocale';
 
-///  [isLeftyKey], [isDarkThemeKey], [localeKey]
+///  [isLeftyKey], [isDarkThemeKey], [appLocaleKey]
 const Map<String, Type> globalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
-  localeKey: List<String>,
+  appLocaleKey: List<String>,
 };
 
 // Text settings' keys //
@@ -23,8 +23,8 @@ const Map<String, Type> globalKeys = <String, Type>{
 // Display
 const String displayFontFamilyKey = 'displayFontFamily';
 const String displayFontSizeKey = 'displayFontSize';
-const String displayBoldKey = 'displayBolded';
-const String displayItalicsKey = 'displayItalicized';
+const String displayBoldedKey = 'displayBolded';
+const String displayItalicizedKey = 'displayItalicized';
 const String displayUnderlinedKey = 'displayUnderlined';
 const String displayLetterSpacingKey = 'displayLetterSpacing';
 const String displayWordSpacingKey = 'displayWordSpacing';
@@ -33,8 +33,8 @@ const String displayFontHeightKey = 'displayFontHeight';
 // Headline
 const String headlineFontFamilyKey = 'headlineFontFamily';
 const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineBoldKey = 'headlineBolded';
-const String headlineItalicsKey = 'headlineItalicized';
+const String headlineBoldedKey = 'headlineBolded';
+const String headlineItalicizedKey = 'headlineItalicized';
 const String headlineUnderlinedKey = 'headlineUnderlined';
 const String headlineLetterSpacingKey = 'headlineLetterSpacing';
 const String headlineWordSpacingKey = 'headlineWordSpacing';
@@ -43,8 +43,8 @@ const String headlineFontHeightKey = 'headlineFontHeight';
 // Title
 const String titleFontFamilyKey = 'titleFontFamily';
 const String titleFontSizeKey = 'titleFontSize';
-const String titleBoldKey = 'titleBolded';
-const String titleItalicsKey = 'titleItalicized';
+const String titleBoldedKey = 'titleBolded';
+const String titleItalicizedKey = 'titleItalicized';
 const String titleUnderlinedKey = 'titleUnderlined';
 const String titleLetterSpacingKey = 'titleLetterSpacing';
 const String titleWordSpacingKey = 'titleWordSpacing';
@@ -53,8 +53,8 @@ const String titleFontHeightKey = 'titleFontHeight';
 // Body
 const String bodyFontFamilyKey = 'bodyFontFamily';
 const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyBoldKey = 'bodyBolded';
-const String bodyItalicsKey = 'bodyItalicized';
+const String bodyBoldedKey = 'bodyBolded';
+const String bodyItalicizedKey = 'bodyItalicized';
 const String bodyUnderlinedKey = 'bodyUnderlined';
 const String bodyLetterSpacingKey = 'bodyLetterSpacing';
 const String bodyWordSpacingKey = 'bodyWordSpacing';
@@ -63,26 +63,31 @@ const String bodyFontHeightKey = 'bodyFontHeight';
 // Label
 const String labelFontFamilyKey = 'labelFontFamily';
 const String labelFontSizeKey = 'labelFontSize';
-const String labelBoldKey = 'labelBolded';
-const String labelItalicsKey = 'labelItalicized';
+const String labelBoldedKey = 'labelBolded';
+const String labelItalicizedKey = 'labelItalicized';
 const String labelUnderlinedKey = 'labelUnderlined';
 const String labelLetterSpacingKey = 'labelLetterSpacing';
 const String labelWordSpacingKey = 'labelWordSpacing';
 const String labelFontHeightKey = 'labelFontHeight';
 
 // Background opacity
-const String darkTextBackgroundOKey = 'darkTextBackgroundOpacity';
-const String lightTextBackgroundOKey = 'lightTextBackgroundOpacity';
+const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
+const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
+
+// Icons
+const String iconSizeKey = 'iconSize'; // Required
 
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// y
+/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
 const Map<String, Type> textStyleKeys = <String, Type>{
   // Display
   displayFontFamilyKey: String,
   displayFontSizeKey: double,
-  displayBoldKey: bool,
-  displayItalicsKey: bool,
+  displayBoldedKey: bool,
+  displayItalicizedKey: bool,
   displayUnderlinedKey: bool,
   displayLetterSpacingKey: double,
   displayWordSpacingKey: double,
@@ -91,8 +96,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Headline
   headlineFontFamilyKey: String,
   headlineFontSizeKey: double,
-  headlineBoldKey: bool,
-  headlineItalicsKey: bool,
+  headlineBoldedKey: bool,
+  headlineItalicizedKey: bool,
   headlineUnderlinedKey: bool,
   headlineLetterSpacingKey: double,
   headlineWordSpacingKey: double,
@@ -101,8 +106,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Title
   titleFontFamilyKey: String,
   titleFontSizeKey: double,
-  titleBoldKey: bool,
-  titleItalicsKey: bool,
+  titleBoldedKey: bool,
+  titleItalicizedKey: bool,
   titleUnderlinedKey: bool,
   titleLetterSpacingKey: double,
   titleWordSpacingKey: double,
@@ -111,8 +116,8 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Body
   bodyFontFamilyKey: String,
   bodyFontSizeKey: double,
-  bodyBoldKey: bool,
-  bodyItalicsKey: bool,
+  bodyBoldedKey: bool,
+  bodyItalicizedKey: bool,
   bodyUnderlinedKey: bool,
   bodyLetterSpacingKey: double,
   bodyWordSpacingKey: double,
@@ -121,25 +126,33 @@ const Map<String, Type> textStyleKeys = <String, Type>{
   // Label
   labelFontFamilyKey: String,
   labelFontSizeKey: double,
-  labelBoldKey: bool,
-  labelItalicsKey: bool,
+  labelBoldedKey: bool,
+  labelItalicizedKey: bool,
   labelUnderlinedKey: bool,
   labelLetterSpacingKey: double,
   labelWordSpacingKey: double,
   labelFontHeightKey: double,
 
   // Background opacity
-  darkTextBackgroundOKey: double,
-  lightTextBackgroundOKey: double,
+  darkTextBackgroundOpacityKey: double,
+  lightTextBackgroundOpacityKey: double,
+
+  // Icons
+  iconSizeKey: double, // Required
 };
 
 // Text settings' values //
 
+/// bold
 const String bold = 'bold';
+
+/// italic
 const String italic = 'italic';
+
+/// underlined
 const String underlined = 'underlined';
 
-/// '-5.5'
+/// '-55.55'
 const String sampleString = '55.55';
 
 // Text settings' recommended parameters //
@@ -174,6 +187,7 @@ const double maxLabel = 28.0;
 /// 7.0
 const double minLabel = 7.0;
 
+/// 84.0, 64.0, 42.0, 32.0, 28.0
 const Map<String, double> fontSizeMaxes = <String, double>{
   displayFontSizeKey: maxDisplay,
   headlineFontSizeKey: maxHeadline,
@@ -182,6 +196,7 @@ const Map<String, double> fontSizeMaxes = <String, double>{
   labelFontSizeKey: maxLabel,
 };
 
+/// 21.0, 16.0, 11.0, 8.0, 7.0
 const Map<String, double> fontSizeMins = <String, double>{
   displayFontSizeKey: minDisplay,
   headlineFontSizeKey: minHeadline,
@@ -195,6 +210,12 @@ const double minOpacity = 0.0;
 
 /// 1.0
 const double maxOpacity = 1.0;
+
+/// 10.0
+const double minIconSize = 10.0;
+
+/// 40.0
+const double maxIconSize = 40.0;
 
 /// -1.0
 const double minFontLetterSpacing = -1.0;
@@ -216,17 +237,17 @@ const double maxFontHeight = 2.0;
 
 // Layout keys //
 
-const String marginKey = 'margin'; // Required key
-const String paddingKey = 'padding'; // Required key
-const String spacingKey = 'spacing'; // Required key
+const String marginKey = 'margin'; // Required
+const String paddingKey = 'padding'; // Required
+const String spacingKey = 'spacing'; // Required
 
 const String hideScrollKey = 'hideScroll';
 
 /// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
 const Map<String, Type> layoutKeys = <String, Type>{
-  marginKey: double,
-  paddingKey: double,
-  spacingKey: double,
+  marginKey: double, // Required
+  paddingKey: double, // Required
+  spacingKey: double, // Required
   hideScrollKey: bool,
 };
 
@@ -252,10 +273,11 @@ const double maxSpacing = 75.0;
 
 // Color settings' keys //
 
+/// 'On'
 const String textColorPrefix = 'On';
 
 // Light theme
-const String lightPrimaryKey = 'lightPrimary'; // Required key
+const String lightPrimaryKey = 'lightPrimary'; // Required
 const String lightOnPrimaryKey = 'lightOnPrimary';
 const String lightPrimaryContainerKey = 'lightPrimaryContainer';
 const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
@@ -314,7 +336,7 @@ const String lightScrimKey = 'lightScrim';
 const String lightSurfaceTintKey = 'lightSurfaceTint';
 
 // Dark theme
-const String darkPrimaryKey = 'darkPrimary'; // Required key
+const String darkPrimaryKey = 'darkPrimary'; // Required
 const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
@@ -374,7 +396,7 @@ const String darkSurfaceTintKey = 'darkSurfaceTint';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColors = <String>[
-  lightPrimaryKey, // Required key
+  lightPrimaryKey, // Required
   lightOnPrimaryKey,
   lightPrimaryContainerKey,
   lightOnPrimaryContainerKey,
@@ -424,7 +446,7 @@ const List<String> lightColors = <String>[
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> darkColors = <String>[
-  darkPrimaryKey, // Required key
+  darkPrimaryKey, // Required
   darkOnPrimaryKey,
   darkPrimaryContainerKey,
   darkOnPrimaryContainerKey,
@@ -475,11 +497,12 @@ const List<String> darkColors = <String>[
 const String userColorsKey = 'userColors';
 
 /// [light, dark] X all 26 material color scheme keys
+/// y the [userColorsKey]
 const Map<String, Type> colorKeys = <String, Type>{
   userColorsKey: List<String>,
 
   // Light theme
-  lightPrimaryKey: int, // Required key
+  lightPrimaryKey: int, // Required
   lightOnPrimaryKey: int,
   lightPrimaryContainerKey: int,
   lightOnPrimaryContainerKey: int,
@@ -527,7 +550,7 @@ const Map<String, Type> colorKeys = <String, Type>{
   lightSurfaceTintKey: int,
 
   // Dark theme
-  darkPrimaryKey: int, // Required key
+  darkPrimaryKey: int, // Required
   darkOnPrimaryKey: int,
   darkPrimaryContainerKey: int,
   darkOnPrimaryContainerKey: int,
@@ -575,6 +598,55 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkSurfaceTintKey: int,
 };
 
+// Color settings' values //
+
+const String csPrimary = 'Primary';
+const String csOnPrimary = 'On primary';
+const String csPrimaryContainer = 'Primary container';
+const String csOnPrimaryContainer = 'On primary container';
+const String csPrimaryFixed = 'Primary fixed';
+const String csPrimaryFixedDim = 'Primary fixed dim';
+const String csOnPrimaryFixed = 'On primary fixed';
+const String csOnPrimaryFixedVariant = 'On primary fixed variant';
+const String csSecondary = 'Secondary';
+const String csOnSecondary = 'On secondary';
+const String csSecondaryContainer = 'Secondary container';
+const String csOnSecondaryContainer = 'On secondary container';
+const String csSecondaryFixed = 'Secondary fixed';
+const String csSecondaryFixedDim = 'Secondary fixed dim';
+const String csOnSecondaryFixed = 'On secondary fixed';
+const String csOnSecondaryFixedVariant = 'On secondary fixed variant';
+const String csTertiary = 'Tertiary';
+const String csOnTertiary = 'On tertiary';
+const String csTertiaryContainer = 'Tertiary container';
+const String csOnTertiaryContainer = 'On tertiary container';
+const String csTertiaryFixed = 'Tertiary fixed';
+const String csTertiaryFixedDim = 'Tertiary fixed dim';
+const String csOnTertiaryFixed = 'On tertiary fixed';
+const String csOnTertiaryFixedVariant = 'On tertiary fixed variant';
+const String csError = 'Error';
+const String csOnError = 'On error';
+const String csErrorContainer = 'Error container';
+const String csOnErrorContainer = 'On error container';
+const String csOutline = 'Outline';
+const String csOutlineVariant = 'Outline variant';
+const String csSurface = 'Surface';
+const String csOnSurface = 'On surface';
+const String csSurfaceDim = 'Surface dim';
+const String csSurfaceBright = 'Surface bright';
+const String csSurfaceContainerLowest = 'Surface container lowest';
+const String csSurfaceContainerLow = 'Surface container low';
+const String csSurfaceContainer = 'Surface container';
+const String csSurfaceContainerHigh = 'Surface container high';
+const String csSurfaceContainerHighest = 'Surface container highest';
+const String csOnSurfaceVariant = 'On surface variant';
+const String csInverseSurface = 'Inverse surface';
+const String csOnInverseSurface = 'On inverse surface';
+const String csInversePrimary = 'Inverse primary';
+const String csScrim = 'Scrim';
+const String csShadow = 'Shadow';
+const String csSurfaceTint = 'Surface tint';
+
 // Image settings' keys //
 
 const String lightColorSchemeImageKey = 'lightColorSchemeImage';
@@ -585,7 +657,7 @@ const String darkBackgroundImageKey = 'darkBackgroundImage';
 
 /// [light, dark]
 ///      X
-/// [colorSchemeImageKey, pageImageKey]
+/// [ColorSchemeImageKey, BackgroundImageKey, BackgroundImageKeyFit]
 const Map<String, Type> imageKeys = <String, Type>{
   // Light theme
   lightColorSchemeImageKey: String,
@@ -629,6 +701,7 @@ const String scaleDown = 'scaleDown';
 
 // Global trackers //
 
+/// [globalKeys], [textStyleKeys], [layoutKeys], [colorKeys], [imageKeys]
 const Map<String, Type> allKeys = <String, Type>{
   ...globalKeys,
   ...textStyleKeys,

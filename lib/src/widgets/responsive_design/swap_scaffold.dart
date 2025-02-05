@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -23,9 +23,8 @@ class ScreenSpace extends InheritedWidget {
     required super.child,
   });
 
-  static ScreenSpace? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ScreenSpace>();
-  }
+  static ScreenSpace? of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<ScreenSpace>();
 
   @override
   bool updateShouldNotify(ScreenSpace oldWidget) =>
@@ -34,12 +33,15 @@ class ScreenSpace extends InheritedWidget {
 
 class EzSwapScaffold extends StatelessWidget {
   /// The [double] value where the swap should happen
+  /// [smallBreakpoint] is recommended
   final double threshold;
 
-  /// Smaller [Scaffold]; think mobile thoughts
+  /// [small]er [Scaffold]
+  /// Think mobile thoughts
   final Widget small;
 
-  /// Smaller [Scaffold]; think desktop thoughts
+  /// [large]r [Scaffold]
+  /// Think desktop thoughts
   final Widget large;
 
   /// Enables real-time responses to screen space changes
@@ -53,9 +55,7 @@ class EzSwapScaffold extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return (widthOf(context) <= threshold)
-        ? ScreenSpace(isLimited: true, child: small)
-        : ScreenSpace(isLimited: false, child: large);
-  }
+  Widget build(BuildContext context) => (widthOf(context) <= threshold)
+      ? ScreenSpace(isLimited: true, child: small)
+      : ScreenSpace(isLimited: false, child: large);
 }

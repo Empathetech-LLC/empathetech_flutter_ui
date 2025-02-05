@@ -1,7 +1,10 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2024 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+
+// ignore_for_file: deprecated_member_use
+// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
 
 import '../../empathetech_flutter_ui.dart';
 
@@ -10,8 +13,8 @@ import 'package:flutter/services.dart';
 
 // Helpers //
 
-/// Returns the soon-to-be rendered size of [text] via a [TextPainter]
-Size measureText(
+/// Returns the soon-to-be rendered [Size] of [text] via a [TextPainter]
+Size ezTextSize(
   String text, {
   required BuildContext context,
   required TextStyle? style,
@@ -26,14 +29,19 @@ Size measureText(
   return textPainter.size;
 }
 
-/// Returns the soon-to-be rendered size of an [icon] via a [TextPainter]
-Size measureIcon(
-  IconData icon, {
-  required BuildContext context,
-  required TextStyle? style,
+/// Returns the soon-to-be rendered [Size] of an [icon] via a [TextPainter]
+Size ezIconSize(
+  IconData icon,
+  BuildContext context, {
+  TextStyle? style,
+  double? size,
 }) {
   final TextPainter textPainter = TextPainter(
-    text: TextSpan(text: String.fromCharCode(icon.codePoint), style: style),
+    text: TextSpan(
+      text: String.fromCharCode(icon.codePoint),
+      style: (style ?? Theme.of(context).textTheme.titleLarge)
+          ?.copyWith(fontSize: size ?? EzConfig.get(iconSizeKey)),
+    ),
     maxLines: 1,
     textScaler: MediaQuery.textScalerOf(context),
     textDirection: TextDirection.ltr,
@@ -42,37 +50,113 @@ Size measureIcon(
   return textPainter.size;
 }
 
-/// For web apps, set the tab's title
-void setPageTitle(String title, Color primaryColor) {
-  SystemChrome.setApplicationSwitcherDescription(
-    ApplicationSwitcherDescription(
-      label: title,
-      primaryColor: primaryColor.value,
-    ),
-  );
-}
+/// [SystemChrome.setApplicationSwitcherDescription] wrapper
+/// Sets the title of the tab on web and the title of the window on desktop
+void ezWindowNamer(String title, Color primaryColor) =>
+    SystemChrome.setApplicationSwitcherDescription(
+      ApplicationSwitcherDescription(
+        label: title,
+        primaryColor: primaryColor.value,
+      ),
+    );
 
 /// Returns whether the passed [text] follows a URL pattern
-bool isUrl(String text) {
-  return Uri.parse(text).host.isNotEmpty;
-}
+bool ezUrlCheck(String text) => Uri.parse(text).host.isNotEmpty;
 
 /// Splits the string on '_' and/or ' ' and returns the first word
-String firstWord(String text) {
-  return text.split(RegExp(r'[_\s]+')).first;
-}
+String ezFirstWord(String text) => text.split(RegExp(r'[_\s]+')).first;
+
+// Converters //
+
+/// snake_case -> camelCase
+String ezSnakeToCamel(String name) => name.replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => match.group(1)!.toUpperCase(),
+    );
+
+// snake_case -> ClassCase
+String ezSnakeToClass(String name) =>
+    ezSnakeToCamel(name).replaceRange(0, 1, name[0].toUpperCase());
+
+/// snake_case -> Title Case
+String ezSnakeToTitle(String name) => name
+    .replaceAllMapped(
+      RegExp(r'_(\w)'),
+      (Match match) => ' ${match.group(1)!.toUpperCase()}',
+    )
+    .replaceRange(0, 1, name[0].toUpperCase());
+
+/// camelCase -> snake_case
+String ezCamelToSnake(String name) => name.replaceAllMapped(
+      RegExp(r'[A-Z]'),
+      (Match match) => '_${match.group(0)!.toLowerCase()}',
+    );
+
+/// camelCase -> ClassCase
+String ezCamelToClass(String name) =>
+    name.replaceRange(0, 1, name[0].toUpperCase());
+
+/// camelCase -> Title Case
+String ezCamelToTitle(String name) => name
+    .replaceAllMapped(
+      RegExp(r'[A-Z]'),
+      (Match match) => ' ${match.group(0)!}',
+    )
+    .replaceRange(0, 1, name[0].toUpperCase());
+
+/// ClassCase -> snake_case
+String ezClassToSnake(String name) =>
+    name.replaceRange(0, 1, name[0].toLowerCase()).replaceAllMapped(
+          RegExp(r'[A-Z]'),
+          (Match match) => '_${match.group(0)!.toLowerCase()}',
+        );
+
+/// ClassCase -> camelCase
+String ezClassToCamel(String name) =>
+    name.replaceRange(0, 1, name[0].toLowerCase());
+
+/// ClassCase -> Title Case
+String ezClassToTitle(String name) => name
+    .replaceAllMapped(RegExp(r'[A-Z]'), (Match match) => ' ${match.group(0)!}')
+    .trim();
+
+/// Title Case -> snake_case
+String ezTitleToSnake(String name) => name
+    .replaceAllMapped(
+      RegExp(r'\s(\w)'),
+      (Match match) => '_${match.group(1)!.toLowerCase()}',
+    )
+    .replaceRange(0, 1, name[0].toLowerCase());
+
+/// Title Case -> camelCase
+String ezTitleToCamel(String name) =>
+    ezTitleToClass(name).replaceRange(0, 1, name[0].toLowerCase());
+
+/// Title Case -> ClassCase
+String ezTitleToClass(String name) => name.replaceAll(RegExp(r'\s'), '');
+
+// Getters //
+
+/// [TextTheme.headlineLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
+TextStyle? ezSubHeadingStyle(TextTheme textTheme) =>
+    textTheme.headlineLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
+
+/// [TextTheme.bodyLarge] w/ the [TextStyle.fontSize] of [TextTheme.titleLarge]
+TextStyle? ezSubTitleStyle(TextTheme textTheme) =>
+    textTheme.bodyLarge?.copyWith(fontSize: textTheme.titleLarge?.fontSize);
 
 // Setters //
 
-/// Creates a [TextTheme] with sizes from...
+/// Creates a [TextTheme] with sizes inspired by...
 /// https://m3.material.io/styles/typography/type-scale-tokens
-/// Each variant triplet (large, medium, small) are the same size: large
+/// Each variant triplet (large, medium, small) are identical
+/// 15 different options would be overload for users... 5 makes much more sense
 TextTheme ezTextTheme(Color? color) {
-  final TextStyle display = buildDisplay(color);
-  final TextStyle headline = buildHeadline(color);
-  final TextStyle title = buildTitle(color);
-  final TextStyle body = buildBody(color);
-  final TextStyle label = buildLabel(color);
+  final TextStyle display = ezDisplayStyle(color);
+  final TextStyle headline = ezHeadlineStyle(color);
+  final TextStyle title = ezTitleStyle(color);
+  final TextStyle body = ezBodyStyle(color);
+  final TextStyle label = ezLabelStyle(color);
 
   return TextTheme(
     displayLarge: display,
@@ -93,15 +177,15 @@ TextTheme ezTextTheme(Color? color) {
   );
 }
 
-/// Builds [TextTheme.displayLarge] w/ values from [EzConfig]
-TextStyle buildDisplay(Color? color) {
+/// Builds [TextTheme.displayLarge] w/ values from [EzConfig.prefs]
+TextStyle ezDisplayStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(displayFontSizeKey),
-    fontWeight: EzConfig.get(displayBoldKey) == true
+    fontWeight: EzConfig.get(displayBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
     fontStyle:
-        EzConfig.get(displayItalicsKey) == true ? FontStyle.italic : null,
+        EzConfig.get(displayItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(displayUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -119,13 +203,13 @@ TextStyle buildDisplay(Color? color) {
 }
 
 /// Builds [TextTheme.displayLarge] w/ values from [EzConfig.defaults]
-TextStyle buildDisplayFromDefaults(Color? color) {
+TextStyle ezDefaultDisplayStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(displayFontSizeKey),
-    fontWeight: EzConfig.getDefault(displayBoldKey) == true
+    fontWeight: EzConfig.getDefault(displayBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(displayItalicsKey) == true
+    fontStyle: EzConfig.getDefault(displayItalicizedKey) == true
         ? FontStyle.italic
         : null,
     decoration: EzConfig.getDefault(displayUnderlinedKey) == true
@@ -144,15 +228,15 @@ TextStyle buildDisplayFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig]
-TextStyle buildHeadline(Color? color) {
+/// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.prefs]
+TextStyle ezHeadlineStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(headlineFontSizeKey),
-    fontWeight: EzConfig.get(headlineBoldKey) == true
+    fontWeight: EzConfig.get(headlineBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
     fontStyle:
-        EzConfig.get(headlineItalicsKey) == true ? FontStyle.italic : null,
+        EzConfig.get(headlineItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(headlineUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -170,13 +254,13 @@ TextStyle buildHeadline(Color? color) {
 }
 
 /// Builds [TextTheme.headlineLarge] w/ values from [EzConfig.defaults]
-TextStyle buildHeadlineFromDefaults(Color? color) {
+TextStyle ezDefaultHeadlineStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(headlineFontSizeKey),
-    fontWeight: EzConfig.getDefault(headlineBoldKey) == true
+    fontWeight: EzConfig.getDefault(headlineBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.getDefault(headlineItalicsKey) == true
+    fontStyle: EzConfig.getDefault(headlineItalicizedKey) == true
         ? FontStyle.italic
         : null,
     decoration: EzConfig.getDefault(headlineUnderlinedKey) == true
@@ -195,14 +279,15 @@ TextStyle buildHeadlineFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.titleLarge] w/ values from [EzConfig]
-TextStyle buildTitle(Color? color) {
+/// Builds [TextTheme.titleLarge] w/ values from [EzConfig.prefs]
+TextStyle ezTitleStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(titleFontSizeKey),
-    fontWeight: EzConfig.get(titleBoldKey) == true
+    fontWeight: EzConfig.get(titleBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.get(titleItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle:
+        EzConfig.get(titleItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(titleUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -220,14 +305,15 @@ TextStyle buildTitle(Color? color) {
 }
 
 /// Builds [TextTheme.titleLarge] w/ values from [EzConfig.defaults]
-TextStyle buildTitleFromDefaults(Color? color) {
+TextStyle ezDefaultTitleStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(titleFontSizeKey),
-    fontWeight: EzConfig.getDefault(titleBoldKey) == true
+    fontWeight: EzConfig.getDefault(titleBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(titleItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(titleItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(titleUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -244,13 +330,15 @@ TextStyle buildTitleFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig]
-TextStyle buildBody(Color? color) {
+/// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.prefs]
+TextStyle ezBodyStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(bodyFontSizeKey),
-    fontWeight:
-        EzConfig.get(bodyBoldKey) == true ? FontWeight.bold : FontWeight.normal,
-    fontStyle: EzConfig.get(bodyItalicsKey) == true ? FontStyle.italic : null,
+    fontWeight: EzConfig.get(bodyBoldedKey) == true
+        ? FontWeight.bold
+        : FontWeight.normal,
+    fontStyle:
+        EzConfig.get(bodyItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(bodyUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -268,14 +356,15 @@ TextStyle buildBody(Color? color) {
 }
 
 /// Builds [TextTheme.bodyLarge] w/ values from [EzConfig.defaults]
-TextStyle buildBodyFromDefaults(Color? color) {
+TextStyle ezDefaultBodyStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(bodyFontSizeKey),
-    fontWeight: EzConfig.getDefault(bodyBoldKey) == true
+    fontWeight: EzConfig.getDefault(bodyBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(bodyItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(bodyItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(bodyUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -292,14 +381,15 @@ TextStyle buildBodyFromDefaults(Color? color) {
   );
 }
 
-/// Builds [TextTheme.labelLarge] w/ values from [EzConfig]
-TextStyle buildLabel(Color? color) {
+/// Builds [TextTheme.labelLarge] w/ values from [EzConfig.prefs]
+TextStyle ezLabelStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.get(labelFontSizeKey),
-    fontWeight: EzConfig.get(labelBoldKey) == true
+    fontWeight: EzConfig.get(labelBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle: EzConfig.get(labelItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle:
+        EzConfig.get(labelItalicizedKey) == true ? FontStyle.italic : null,
     decoration: EzConfig.get(labelUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
@@ -317,14 +407,15 @@ TextStyle buildLabel(Color? color) {
 }
 
 /// Builds [TextTheme.labelLarge] w/ values from [EzConfig.defaults]
-TextStyle buildLabelFromDefaults(Color? color) {
+TextStyle ezDefaultLabelStyle(Color? color) {
   final TextStyle starter = TextStyle(
     fontSize: EzConfig.getDefault(labelFontSizeKey),
-    fontWeight: EzConfig.getDefault(labelBoldKey) == true
+    fontWeight: EzConfig.getDefault(labelBoldedKey) == true
         ? FontWeight.bold
         : FontWeight.normal,
-    fontStyle:
-        EzConfig.getDefault(labelItalicsKey) == true ? FontStyle.italic : null,
+    fontStyle: EzConfig.getDefault(labelItalicizedKey) == true
+        ? FontStyle.italic
+        : null,
     decoration: EzConfig.getDefault(labelUnderlinedKey) == true
         ? TextDecoration.underline
         : null,
