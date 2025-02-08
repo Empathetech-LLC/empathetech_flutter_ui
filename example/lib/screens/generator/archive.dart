@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../structs/export.dart';
+import '../../models/export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
 import 'package:efui_bios/efui_bios.dart';

@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../structs/export.dart';
+import '../models/export.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
