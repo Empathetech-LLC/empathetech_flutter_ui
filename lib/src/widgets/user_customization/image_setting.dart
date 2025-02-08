@@ -180,7 +180,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Validate a URL
-  String? urlValidator(String? value) {
+  String? validateUrl(String? value) {
     return (value == null || value.isEmpty || !ezUrlCheck(value))
         ? l10n.gValidURL
         : null;
@@ -256,7 +256,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               // Validate the URL
               final String url = urlText.text.trim();
 
-              if (urlValidator(url) != null) return;
+              if (validateUrl(url) != null) return;
 
               // Verify that the image is accessible
               late final NetworkImage image;
@@ -314,7 +314,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   autofillHints: const <String>[AutofillHints.url],
                   decoration: const InputDecoration(hintText: webImgHint),
                   autovalidateMode: AutovalidateMode.onUnfocus,
-                  validator: urlValidator,
+                  validator: validateUrl,
                 ),
               ),
               materialActions: materialActions,
