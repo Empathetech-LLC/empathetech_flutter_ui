@@ -78,7 +78,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(l10n.ssPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, l10n.ssPageTitle);
   }
 
   // Return the build //

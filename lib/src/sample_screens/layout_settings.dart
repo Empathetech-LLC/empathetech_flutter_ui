@@ -50,7 +50,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(l10n.lsPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, l10n.lsPageTitle);
   }
 
   // Return the build //
