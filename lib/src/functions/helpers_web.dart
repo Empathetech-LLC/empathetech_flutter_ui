@@ -3,15 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
-// ignore_for_file: avoid_web_libraries_in_flutter
-
-import 'dart:html' as html;
+import 'package:web/web.dart';
 import 'package:flutter/material.dart';
 
 /// Get the host [TargetPlatform] on web
-/// via [html.window]'s userAgent
+/// via the [window]'s userAgent
 TargetPlatform getHostPlatform(BuildContext context) {
-  final String userAgent = html.window.navigator.userAgent;
+  final String userAgent = window.navigator.userAgent;
 
   if (userAgent.contains('Android')) {
     return TargetPlatform.android;
