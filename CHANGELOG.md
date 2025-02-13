@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.0.1] - 2025-02-13
+### Updated
+- Flutter 3.29
+- ezWindowNamer
+- urlValidator -> validateUrl
+
 ## [8.0.0] - 2025-02-04
 ### Updated
 - Oops, I did it again...
