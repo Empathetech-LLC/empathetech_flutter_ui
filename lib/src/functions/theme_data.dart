@@ -51,7 +51,6 @@ ThemeData ezThemeData(Brightness brightness) {
     brightness: brightness,
     colorScheme: colorScheme,
 
-    dialogBackgroundColor: colorScheme.surface,
     dividerColor: colorScheme.secondary,
     hoverColor: highlightColor,
     scaffoldBackgroundColor: colorScheme.surfaceContainer,
@@ -116,7 +115,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialog
     dialogTheme: DialogTheme(
-      backgroundColor: colorScheme.surfaceContainer,
+      backgroundColor: colorScheme.surface,
       titleTextStyle: textTheme.titleLarge,
       contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
