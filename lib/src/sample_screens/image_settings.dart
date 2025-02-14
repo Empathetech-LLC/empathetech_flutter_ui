@@ -58,7 +58,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(l10n.isPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, l10n.isPageTitle);
   }
 
   // Return the build //

@@ -52,11 +52,11 @@ Size ezIconSize(
 
 /// [SystemChrome.setApplicationSwitcherDescription] wrapper
 /// Sets the title of the tab on web and the title of the window on desktop
-void ezWindowNamer(String title, Color primaryColor) =>
+void ezWindowNamer(BuildContext context, String title) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
-        primaryColor: primaryColor.value,
+        primaryColor: Theme.of(context).primaryColor.value,
       ),
     );
 

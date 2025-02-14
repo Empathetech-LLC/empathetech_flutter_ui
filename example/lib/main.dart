@@ -3,8 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import './models/export.dart';
 import './screens/export.dart';
-import './structs/export.dart';
 import './utils/export.dart';
 
 import 'package:flutter/material.dart';

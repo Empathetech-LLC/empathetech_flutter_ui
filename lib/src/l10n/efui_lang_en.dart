@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'efui_lang.dart';
 
 // ignore_for_file: type=lint

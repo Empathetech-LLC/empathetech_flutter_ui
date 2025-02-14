@@ -4,7 +4,7 @@
  */
 
 import './export.dart';
-import '../structs/export.dart';
+import '../models/export.dart';
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';

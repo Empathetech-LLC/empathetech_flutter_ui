@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../structs/export.dart';
+import '../models/export.dart';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -961,7 +961,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer('404 \${l10n.gError}', Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, '404 \${l10n.gError}');
   }
 
   // Return the build //
@@ -1036,7 +1036,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(appTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, appTitle);
   }
 
   // Return the build //

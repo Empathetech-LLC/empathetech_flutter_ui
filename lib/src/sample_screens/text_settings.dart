@@ -109,7 +109,7 @@ class _TextSettingsState extends State<_TextSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(l10n.tsPageTitle, Theme.of(context).colorScheme.primary);
+    ezWindowNamer(context, l10n.tsPageTitle);
   }
 
   // Return the build //

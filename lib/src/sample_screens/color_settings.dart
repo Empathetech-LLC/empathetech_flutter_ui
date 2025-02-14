@@ -102,7 +102,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(l10n.csPageTitle, theme.colorScheme.primary);
+    ezWindowNamer(context, l10n.csPageTitle);
   }
 
   // Return the build //

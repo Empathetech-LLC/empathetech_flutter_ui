@@ -69,28 +69,6 @@ class EAGConfig {
     this.vsCodeConfig,
   });
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      appNameKey: appName,
-      publisherNameKey: publisherName,
-      appDescriptionKey: appDescription,
-      domainNameKey: domainName,
-      supportEmailKey: supportEmail,
-      textSettingsKey: textSettings,
-      layoutSettingsKey: layoutSettings,
-      colorSettingsKey: colorSettings,
-      imageSettingsKey: imageSettings,
-      appDefaultsKey: appDefaults,
-      flutterPathKey: flutterPath,
-      workPathKey: workPath,
-      copyrightKey: copyright,
-      licenseKey: license,
-      l10nConfigKey: l10nConfig,
-      analysisOptionsKey: analysisOptions,
-      vsCodeConfigKey: vsCodeConfig,
-    };
-  }
-
   factory EAGConfig.fromJson(dynamic json) {
     return EAGConfig(
       appName: json[appNameKey] as String,
@@ -111,6 +89,28 @@ class EAGConfig {
       analysisOptions: json[analysisOptionsKey] as String?,
       vsCodeConfig: json[vsCodeConfigKey] as String?,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      appNameKey: appName,
+      publisherNameKey: publisherName,
+      appDescriptionKey: appDescription,
+      domainNameKey: domainName,
+      supportEmailKey: supportEmail,
+      textSettingsKey: textSettings,
+      layoutSettingsKey: layoutSettings,
+      colorSettingsKey: colorSettings,
+      imageSettingsKey: imageSettings,
+      appDefaultsKey: appDefaults,
+      flutterPathKey: flutterPath,
+      workPathKey: workPath,
+      copyrightKey: copyright,
+      licenseKey: license,
+      l10nConfigKey: l10nConfig,
+      analysisOptionsKey: analysisOptions,
+      vsCodeConfigKey: vsCodeConfig,
+    };
   }
 
   @override
