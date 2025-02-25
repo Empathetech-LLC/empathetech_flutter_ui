@@ -22,7 +22,7 @@ dependencies:
   # Community
   email_validator: ^3.0.0
   feedback: ^3.1.0
-  file_picker: ^8.3.5
+  file_picker: ^9.0.1
   file_saver: ^0.2.14
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^7.0.1
@@ -38,7 +38,7 @@ dev_dependencies:
   dependency_validator: ^5.0.2
   flutter_launcher_icons: ^0.14.3
   flutter_lints: ^5.0.0
-  flutter_native_splash: ^2.4.4
+  flutter_native_splash: ^2.4.5
   flutter_test:
     sdk: flutter
   integration_test:
