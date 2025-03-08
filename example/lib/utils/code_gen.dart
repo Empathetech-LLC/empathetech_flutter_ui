@@ -423,16 +423,16 @@ dependencies:
     sdk: flutter
 
   # Flutter (Google)
-  go_router: ^14.6.3
+  go_router: ^14.8.1
   intl: ^0.19.0
-  shared_preferences: ^2.3.5
+  shared_preferences: ^2.5.2
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.0.0
+  empathetech_flutter_ui: ^8.0.1
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^7.0.1
+  flutter_platform_widgets: ^8.0.0
 
 dev_dependencies:
   dependency_validator: ^5.0.2
@@ -683,8 +683,10 @@ class $classCaseAppName extends StatelessWidget {
                 '${entry.key}Key: <String>${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
           } else if (entry.key == userColorsKey) {
             // Updates to which colors are default in the advanced color settings screen
-            final String colorList =
-                entry.value.toString().replaceAll(',', 'Key,');
+            final String colorList = entry.value.toString().replaceAll(
+                  ',',
+                  'Key,',
+                );
 
             result +=
                 '${entry.key}Key: <String>${colorList.replaceRange(colorList.length - 1, null, 'Key,]')},';
@@ -804,8 +806,9 @@ class EFUICredits extends StatelessWidget {
 """);
 
     // scaffold file
-    final File scaffoldWidget =
-        File('$dir/lib/widgets/${config.appName}_scaffold.dart');
+    final File scaffoldWidget = File(
+      '$dir/lib/widgets/${config.appName}_scaffold.dart',
+    );
     await scaffoldWidget.writeAsString("""$copyright
 
 import './export.dart';
@@ -1071,8 +1074,9 @@ class _HomeScreenState extends State<HomeScreen> {
 """);
 
     // settings_home.dart
-    final File settingsHome =
-        File('$dir/lib/screens/settings/settings_home.dart');
+    final File settingsHome = File(
+      '$dir/lib/screens/settings/settings_home.dart',
+    );
     await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
@@ -1101,8 +1105,9 @@ class SettingsHomeScreen extends StatelessWidget {
 
     // text_settings_screen.dart?
     if (config.textSettings) {
-      final File textSettings =
-          File('$dir/lib/screens/settings/text_settings.dart');
+      final File textSettings = File(
+        '$dir/lib/screens/settings/text_settings.dart',
+      );
       await textSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -1128,8 +1133,9 @@ class TextSettingsScreen extends StatelessWidget {
 
     // layout_settings_screen.dart?
     if (config.layoutSettings) {
-      final File layoutSettings =
-          File('$dir/lib/screens/settings/layout_settings.dart');
+      final File layoutSettings = File(
+        '$dir/lib/screens/settings/layout_settings.dart',
+      );
       await layoutSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -1153,8 +1159,9 @@ class LayoutSettingsScreen extends StatelessWidget {
 
     // color_settings_screen.dart?
     if (config.colorSettings) {
-      final File colorSettings =
-          File('$dir/lib/screens/settings/color_settings.dart');
+      final File colorSettings = File(
+        '$dir/lib/screens/settings/color_settings.dart',
+      );
       await colorSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -1180,8 +1187,9 @@ class ColorSettingsScreen extends StatelessWidget {
 
     // image_settings_screen.dart?
     if (config.imageSettings) {
-      final File imageSettings =
-          File('$dir/lib/screens/settings/image_settings.dart');
+      final File imageSettings = File(
+        '$dir/lib/screens/settings/image_settings.dart',
+      );
       await imageSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
@@ -1399,7 +1407,7 @@ import 'package:integration_test/integration_test_driver.dart';
 Future<void> main() => integrationDriver();
 """);
 
-// Tests
+    // Tests
     final File tests = File('$dir/integration_test/test.dart');
     await tests.writeAsString("""$copyright
 
@@ -1491,8 +1499,10 @@ void main() async {
 
       final List<String> split = dir.split(home);
 
-      return (split.length > 1 ? '$home${split.last}' : split.first)
-          .replaceAll(' ', '\\ ');
+      return (split.length > 1 ? '$home${split.last}' : split.first).replaceAll(
+        ' ',
+        '\\ ',
+      );
     }
 
     final File runner = File('$dir/integration_test/run_int_tests.sh');
