@@ -12,9 +12,6 @@ class EzCLI extends StatefulWidget {
   final String dir;
 
   /// [ezCmd] passthrough
-  final TargetPlatform platform;
-
-  /// [ezCmd] passthrough
   final void Function() onSuccess;
 
   /// [ezCmd] passthrough
@@ -33,7 +30,6 @@ class EzCLI extends StatefulWidget {
   const EzCLI({
     super.key,
     required this.dir,
-    required this.platform,
     required this.onSuccess,
     required this.onFailure,
     this.onError,
@@ -79,7 +75,6 @@ class _EzCLIState extends State<EzCLI> {
               onFieldSubmitted: (String value) async {
                 await ezCmd(
                   value,
-                  platform: widget.platform,
                   dir: widget.dir,
                   onSuccess: widget.onSuccess,
                   onFailure: widget.onFailure,

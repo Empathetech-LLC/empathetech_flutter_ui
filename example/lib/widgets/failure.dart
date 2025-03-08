@@ -100,9 +100,9 @@ class DeleteOption extends StatelessWidget {
           spacer,
           EzElevatedIconButton(
             onPressed: () => ezCmd(
-              'rm -rf $appName',
-              winCMD: 'rmdir /s /q $appName',
-              platform: platform,
+              platform == TargetPlatform.windows
+                  ? 'rmdir /s /q $appName'
+                  : 'rm -rf $appName',
               dir: dir,
               onSuccess: () async {
                 await ezSnackBar(

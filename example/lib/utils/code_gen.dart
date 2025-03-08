@@ -476,10 +476,9 @@ Future<void> genLib({
   // Directories //
 
   await ezCmd(
-    'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
-    winCMD:
-        'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings',
-    platform: platform,
+    platform == TargetPlatform.windows
+        ? 'mkdir lib lib\\utils lib\\widgets lib\\screens lib\\screens\\settings'
+        : 'mkdir lib lib/utils lib/widgets lib/screens lib/screens/settings',
     dir: dir,
     onSuccess: doNothing,
     onFailure: onFailure,
@@ -1535,9 +1534,9 @@ flutter drive --driver="\$project_dir/test_driver/integration_test_driver.dart" 
 ''');
 
     await ezCmd(
-      'chmod a+x integration_test/run_int_tests.sh',
-      winCMD: 'attrib +x integration_test\\run_int_tests.sh',
-      platform: platform,
+      platform == TargetPlatform.windows
+          ? 'attrib +x integration_test\\run_int_tests.sh'
+          : 'chmod a+x integration_test/run_int_tests.sh',
       dir: dir,
       onSuccess: doNothing,
       onFailure: onFailure,
