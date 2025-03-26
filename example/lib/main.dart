@@ -53,7 +53,6 @@ void main() async {
       bottomSheetTextInputStyle: lightFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.black,
-      colorScheme: const ColorScheme.light(primary: empathPurple),
     ),
     darkTheme: FeedbackThemeData(
       background: Colors.grey,
@@ -63,7 +62,6 @@ void main() async {
       bottomSheetTextInputStyle: darkFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.white,
-      colorScheme: const ColorScheme.dark(primary: empathEucalyptus),
     ),
     themeMode: EzConfig.getThemeMode(),
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
