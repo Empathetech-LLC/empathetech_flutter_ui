@@ -65,6 +65,9 @@ class EzIconButton extends StatelessWidget {
   /// [IconButton.onPressed] passthrough
   final VoidCallback? onPressed;
 
+  /// [IconButton.onLongPress] passthrough
+  final VoidCallback? onLongPress;
+
   /// [IconButton.mouseCursor] passthrough
   final MouseCursor? mouseCursor;
 
@@ -117,6 +120,7 @@ class EzIconButton extends StatelessWidget {
     this.splashColor,
     this.disabledColor,
     this.onPressed,
+    this.onLongPress,
     this.mouseCursor,
     this.focusNode,
     this.autofocus = false,
@@ -171,6 +175,7 @@ class EzIconButton extends StatelessWidget {
       splashColor: splashColor,
       disabledColor: disabledColor,
       onPressed: enabled ? onPressed : doNothing,
+      onLongPress: enabled ? onLongPress : doNothing,
       mouseCursor: mouseCursor,
       focusNode: focusNode,
       autofocus: autofocus,
