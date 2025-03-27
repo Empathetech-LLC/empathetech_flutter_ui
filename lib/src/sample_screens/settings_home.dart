@@ -10,6 +10,10 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
+  /// Remove the 'Have fun!' part of the settings disclaimer
+  /// There are some apps where fun is not appropriate
+  final bool notFun;
+
   /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
@@ -50,6 +54,7 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
+    this.notFun = false,
     this.useImageDecoration = true,
     this.additionalSettings,
     required this.textSettingsPath,
@@ -90,7 +95,11 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
       child: EzScrollView(
         children: <Widget>[
           // Functionality disclaimer
-          EzWarning(kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide),
+          EzWarning(widget.notFun
+              ? (kIsWeb
+                  ? l10n.ssSettingsGuideWeb.split('\n').first
+                  : l10n.ssSettingsGuide.split('\n').first)
+              : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
           separator,
 
           // Global settings
