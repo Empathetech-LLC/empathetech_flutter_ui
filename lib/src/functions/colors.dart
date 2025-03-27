@@ -461,7 +461,7 @@ String getColorName(String key) {
     case darkSurfaceTintKey:
       return csSurfaceTint;
     default:
-      return 'null';
+      return key;
   }
 }
 
