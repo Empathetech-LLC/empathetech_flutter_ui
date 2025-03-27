@@ -112,6 +112,9 @@ class EzText extends StatelessWidget {
   /// [Text.selectionColor] passthrough
   final Color? selectionColor;
 
+  /// [EzTextBackground.backgroundColor] passthrough
+  final Color? backgroundColor;
+
   /// Quick wrapper for creating [Text] with a default [EzTextBackground]
   /// [style] defaults to [TextTheme.bodyLarge]
   const EzText(
@@ -131,6 +134,7 @@ class EzText extends StatelessWidget {
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
+    this.backgroundColor,
   });
 
   @override
@@ -152,6 +156,7 @@ class EzText extends StatelessWidget {
         selectionColor: selectionColor,
       ),
       useSurface: useSurface,
+      backgroundColor: backgroundColor,
     );
   }
 }
