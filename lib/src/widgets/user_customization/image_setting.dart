@@ -561,9 +561,8 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           setState(() => inProgress = false);
 
-          if (context.mounted) {
+          if (mounted) {
             await ezLogAlert(
-              // ignore: use_build_context_synchronously
               context,
               title: l10n.isGetFailed,
               message:
