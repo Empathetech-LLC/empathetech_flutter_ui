@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.0.2] - 2025-02-27
+### Updated
+- Copyright year from range to current year
+- More 3.29 dependencies
+
 ## [8.0.1] - 2025-02-13
 ### Updated
 - Flutter 3.29
