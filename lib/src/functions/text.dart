@@ -3,9 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-// ignore_for_file: deprecated_member_use
-// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
-
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -56,7 +53,7 @@ void ezWindowNamer(BuildContext context, String title) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
-        primaryColor: Theme.of(context).primaryColor.value,
+        primaryColor: Theme.of(context).primaryColor.toARGB32(),
       ),
     );
 

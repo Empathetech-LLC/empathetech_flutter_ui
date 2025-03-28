@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use
-// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
-
 /* empathetech_flutter_ui
  * Copyright (c) 2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
@@ -13,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSetting extends StatefulWidget {
-  /// [EzConfig] key whose [Color.value] will be updated
+  /// [EzConfig] key whose [Color] will be updated
   final String configKey;
 
   /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
@@ -55,7 +52,7 @@ class _ColorSettingState extends State<EzColorSetting> {
   // Define button functions //
 
   /// Opens an [ezColorPicker] for updating [currColor]
-  /// Returns the [Color.value] of what was chosen (null otherwise)
+  /// Returns the [Color] of what was chosen (null otherwise)
   Future<dynamic> openColorPicker(BuildContext context) {
     final Color backup = currColor;
 
@@ -65,14 +62,14 @@ class _ColorSettingState extends State<EzColorSetting> {
       onColorChange: (Color chosenColor) =>
           setState(() => currColor = chosenColor),
       onConfirm: () async {
-        await EzConfig.setInt(widget.configKey, currColor.value);
+        await EzConfig.setInt(widget.configKey, currColor.toARGB32());
       },
       onDeny: () => setState(() => currColor = backup),
     );
   }
 
   /// Opens an [EzAlertDialog] for users to chose how they want to update the color
-  /// Returns the [Color.value] of what was chosen (null if none)
+  /// Returns the [Color] of what was chosen (null if none)
   Future<dynamic> changeColor(BuildContext context) {
     if (!widget.configKey.contains(textColorPrefix)) {
       // Base color //
@@ -92,10 +89,10 @@ class _ColorSettingState extends State<EzColorSetting> {
           ? getLiveColor(context, widget.configKey)
           : Color(backgroundColorValue);
 
-      final int recommended = getTextColor(backgroundColor).value;
+      final int recommended = getTextColor(backgroundColor).toARGB32();
 
       // Just open a color picker if the value is already what's recommended
-      if (recommended == currColor.value) return openColorPicker(context);
+      if (recommended == currColor.toARGB32()) return openColorPicker(context);
 
       // Define action button parameters
       final String denyMsg = l10n.csUseCustom;
@@ -176,7 +173,7 @@ class _ColorSettingState extends State<EzColorSetting> {
       builder: (BuildContext dialogContext) {
         final int? resetValue = EzConfig.getDefault(widget.configKey);
         final String currColorLabel =
-            currColor.value.toRadixString(16).toUpperCase().substring(2);
+            currColor.toARGB32().toRadixString(16).toUpperCase().substring(2);
 
         void onConfirm() async {
           // Remove the user's configKey and reset the current state
