@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -10,9 +10,6 @@ import 'package:flutter/material.dart';
 class EzCLI extends StatefulWidget {
   /// [ezCmd] passthrough
   final String dir;
-
-  /// [ezCmd] passthrough
-  final TargetPlatform platform;
 
   /// [ezCmd] passthrough
   final void Function() onSuccess;
@@ -33,7 +30,6 @@ class EzCLI extends StatefulWidget {
   const EzCLI({
     super.key,
     required this.dir,
-    required this.platform,
     required this.onSuccess,
     required this.onFailure,
     this.onError,
@@ -79,7 +75,6 @@ class _EzCLIState extends State<EzCLI> {
               onFieldSubmitted: (String value) async {
                 await ezCmd(
                   value,
-                  platform: widget.platform,
                   dir: widget.dir,
                   onSuccess: widget.onSuccess,
                   onFailure: widget.onFailure,

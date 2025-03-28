@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -137,9 +137,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     // Files
     await ezCmd(
-      'rm -f $files',
-      winCMD: 'del /f /q $files',
-      platform: platform,
+      isWindows ? 'del /f /q $files' : 'rm -f $files',
       dir: projDir,
       onSuccess: doNothing,
       onFailure: onFailure,
@@ -148,9 +146,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
     // Folders
     await ezCmd(
-      'rm -rf $dirs',
-      winCMD: 'rmdir /s /q $dirs',
-      platform: platform,
+      isWindows ? 'rmdir /s /q $dirs' : 'rm -rf $dirs',
       dir: projDir,
       onSuccess: addStuff,
       onFailure: onFailure,

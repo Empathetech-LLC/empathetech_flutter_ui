@@ -1,5 +1,5 @@
 /* empathetech_flutter_ui
- * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,7 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-// Brand names //
+//// Brand names ////
 
 /// Short == EFUI
 const String efuiS = 'EFUI';
@@ -18,7 +18,34 @@ const String efuiL = 'Empathetech Flutter UI';
 /// Empathetic Flutter UI
 const String efuiLFix = 'Empathetic Flutter UI';
 
-// Brand links //
+//// Brand links ////
+
+// Code //
+
+/// Where the magic happens
+/// https://github.com/Empathetech-LLC
+const String empathGitHub = 'https://github.com/Empathetech-LLC';
+
+/// EFUI source
+/// https://github.com/Empathetech-LLC/empathetech_flutter_ui
+const String efuiGitHub =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui';
+
+/// [https://m3.material.io/styles/color/roles]
+const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
+
+// Internal links //
+
+/// Where we rep the goods
+/// 'https://www.empathetech.net/#/products/open-ui'
+const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
+
+/// Where new journeys begin
+/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
+const String openUIReleases =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
+
+// Emails //
 
 /// If you want to lend a hand
 /// community@empathetech.net
@@ -32,43 +59,47 @@ const String empathSupport = 'support@empathetech.net';
 /// mwaldron@empathetech.net
 const String empathFounder = 'mwaldron@empathetech.net';
 
+// Socials //
+
 /// If you want to stay informed
 /// http://eepurl.com/iHe_I2
 const String empathNewsletter = 'http://eepurl.com/iHe_I2';
 
 /// If you want to get in touch
-/// https://linkedin.com/company/empathetech-llc
-const String empathLinkedIn = 'https://linkedin.com/company/empathetech-llc';
-
-/// If you want to get in touch
 /// https://mastodon.social/@empathetech
 const String empathMastodon = 'https://mastodon.social/@empathetech';
 
-/// Where the magic happens
-/// https://github.com/Empathetech-LLC
-const String empathGitHub = 'https://github.com/Empathetech-LLC';
+/// If you want to get in touch
+/// https://bsky.app/profile/empathetech.net
+const String empathBluesky = 'https://bsky.app/profile/empathetech.net';
 
-/// Where we rep the goods
-/// 'https://www.empathetech.net/#/products/open-ui'
-const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
+/// If you want to get in touch
+/// https://linkedin.com/company/empathetech-llc
+const String empathLinkedIn = 'https://linkedin.com/company/empathetech-llc';
 
-/// Where new journeys begin
-/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
-const String openUIReleases =
-    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
-
-/// EFUI source
-/// https://github.com/Empathetech-LLC/empathetech_flutter_ui
-const String efuiGitHub =
-    'https://github.com/Empathetech-LLC/empathetech_flutter_ui';
+// Community //
 
 /// One of us, one of us, one of us!
 /// https://stats.foldingathome.org/team/1063265
 const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
 
+// Crowdfunding //
+
 /// If you want to show some love
 /// https://gofund.me/c047d07e
 const String empathGoFundMe = 'https://gofund.me/c047d07e';
+
+/// If you want to show some love
+/// https://patreon.com/empathetech
+const String empathPatreon = 'https://patreon.com/empathetech';
+
+/// If you want to show some love
+/// https://www.buymeacoffee.com/empathetech
+const String empathCoffee = 'https://www.buymeacoffee.com/empathetech';
+
+/// If you want to show some love
+/// https://ko-fi.com/empathetech
+const String empathKofi = 'https://ko-fi.com/empathetech';
 
 /// If you want to show some love
 /// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
@@ -83,24 +114,9 @@ const String empathVenmo = 'https://venmo.com/empathetech';
 /// https://cash.app/$empathetech
 const String empathCashApp = 'https://cash.app/\$empathetech';
 
-/// If you want to show some love
-/// https://patreon.com/empathetech
-const String empathPatreon = 'https://patreon.com/empathetech';
+//// Brand config ////
 
-/// If you want to show some love
-/// https://www.buymeacoffee.com/empathetech
-const String empathCoffee = 'https://www.buymeacoffee.com/empathetech';
-
-/// If you want to show some love
-/// https://ko-fi.com/empathetech
-const String empathKofi = 'https://ko-fi.com/empathetech';
-
-// Documentation links //
-
-/// [https://m3.material.io/styles/color/roles]
-const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
-
-// Brand text theme //
+// Text theme //
 
 /// 42.0
 const double defaultDisplaySize = 42.0;
@@ -132,7 +148,7 @@ const double defaultLetterSpacing = 0.25;
 /// 1.0
 const double defaultWordSpacing = 1.0;
 
-// Brand layout //
+// Layout //
 
 /// 10.0
 const double defaultMargin = 10.0;
@@ -143,7 +159,7 @@ const double defaultPadding = 20.0;
 /// 25.0
 const double defaultSpacing = 25.0;
 
-// Brand color scheme //
+// Color scheme //
 
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
@@ -202,7 +218,7 @@ const Color empathOffBlack = Color(offBlackHex);
 /// 0xFF000000
 const int transparentHex = 0x00000000;
 
-// Brand config //
+// Map //
 
 /// Empathetech [EzConfig.defaults]
 const Map<String, Object> empathetechConfig = <String, Object>{

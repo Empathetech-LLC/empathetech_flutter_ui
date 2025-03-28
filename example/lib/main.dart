@@ -1,5 +1,5 @@
 /* open_ui
- * Copyright (c) 2022-2025 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 Empathetech LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -53,7 +53,6 @@ void main() async {
       bottomSheetTextInputStyle: lightFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.black,
-      colorScheme: const ColorScheme.light(primary: empathPurple),
     ),
     darkTheme: FeedbackThemeData(
       background: Colors.grey,
@@ -63,7 +62,6 @@ void main() async {
       bottomSheetTextInputStyle: darkFeedbackText,
       sheetIsDraggable: true,
       dragHandleColor: Colors.white,
-      colorScheme: const ColorScheme.dark(primary: empathEucalyptus),
     ),
     themeMode: EzConfig.getThemeMode(),
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
