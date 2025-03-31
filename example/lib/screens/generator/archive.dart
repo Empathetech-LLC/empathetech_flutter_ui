@@ -85,10 +85,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(
-            height: double.infinity,
-            semantics: el10n.gLoadingAnim,
-          ),
+          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return Center(
