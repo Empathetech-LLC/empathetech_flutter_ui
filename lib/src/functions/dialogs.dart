@@ -21,7 +21,7 @@ Future<dynamic> ezLogAlert(
 
   return showPlatformDialog(
     context: context,
-    builder: (BuildContext context) => EzAlertDialog(
+    builder: (_) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
