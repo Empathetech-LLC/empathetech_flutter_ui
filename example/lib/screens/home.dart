@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       EzCheckbox(
                         value: exampleDomain,
-                        onChanged: (bool? value) async {
+                        onChanged: (bool? value) {
                           if (value == null) return;
                           setState(() => exampleDomain = value);
                         },
@@ -412,7 +412,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.tsPageTitle,
                     value: textSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => textSettings = value);
                     },
@@ -421,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.lsPageTitle,
                     value: layoutSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => layoutSettings = value);
                     },
@@ -430,7 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.csPageTitle,
                     value: colorSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => colorSettings = value);
                     },
@@ -439,7 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.isPageTitle,
                     value: imageSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => imageSettings = value);
                     },
