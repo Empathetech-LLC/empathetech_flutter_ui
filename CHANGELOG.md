@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.1.0] - 2025-04-06
+### Changed
+- Background colors
+  - Dark mode: 0xFF191919 -> 0xFF001427
+  - Light mode: 0xFFF5F5F5 -> 
+
 ## [8.0.2] - 2025-02-27
 ### Updated
 - Copyright year from range to current year
