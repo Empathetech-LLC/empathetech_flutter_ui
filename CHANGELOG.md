@@ -7,10 +7,7 @@ All notable changes to this project will be documented in this file.
 - customActions param to ezLog
 
 ### Changed
-- Background colors
-  - Dark mode: 0xFF191919 -> 0xFF001427
-  - Light mode: 0xFFF5F5F5 -> 
-- Code cleanup; updated deprecated calls
+- Code cleanup
 
 ## [8.0.2] - 2025-02-27
 ### Updated
