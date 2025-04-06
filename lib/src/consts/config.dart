@@ -209,10 +209,10 @@ const Color empathOffWhite = Color(offWhiteHex);
 /// 0xFF000000
 const int blackHex = 0xFF000000;
 
-/// 0xFF191919
-const int offBlackHex = 0xFF191919;
+/// 0xFF001427
+const int offBlackHex = 0xFF001427;
 
-/// 0xFF191919
+/// 0xFF001427
 const Color empathOffBlack = Color(offBlackHex);
 
 /// 0xFF000000
