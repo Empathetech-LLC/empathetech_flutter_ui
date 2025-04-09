@@ -212,10 +212,10 @@ const double minOpacity = 0.0;
 const double maxOpacity = 1.0;
 
 /// 10.0
-const double minIconSize = 10.0;
+const double minIconSize = 12.0;
 
 /// 40.0
-const double maxIconSize = 40.0;
+const double maxIconSize = 42.0;
 
 /// 0.0
 const double minLetterSpacing = 0.0;
