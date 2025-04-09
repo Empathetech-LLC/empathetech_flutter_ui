@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - customActions param to ezLog
 - Testing configs
+- ezToolbarHeight
 
 ### Changed
 - Code cleanup
