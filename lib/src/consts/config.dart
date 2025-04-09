@@ -347,3 +347,91 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
 };
+
+/// For testing
+/// [EzConfig.defaults] set to all recommended max values
+final Map<String, Object> empathetechMaxConfig = <String, Object>{
+  ...empathetechConfig,
+
+  // Text settings //
+
+  // Display
+  displayFontSizeKey: maxDisplay,
+  displayFontHeightKey: maxFontHeight,
+  displayLetterSpacingKey: maxFontLetterSpacing,
+  displayWordSpacingKey: maxFontWordSpacing,
+
+  // Headline
+  headlineFontSizeKey: maxHeadline,
+  headlineFontHeightKey: maxFontHeight,
+  headlineLetterSpacingKey: maxFontLetterSpacing,
+  headlineWordSpacingKey: maxFontWordSpacing,
+
+  // Title
+  titleFontSizeKey: maxTitle,
+  titleFontHeightKey: maxFontHeight,
+  titleLetterSpacingKey: maxFontLetterSpacing,
+  titleWordSpacingKey: maxFontWordSpacing,
+
+  // Body
+  bodyFontSizeKey: maxBody,
+  bodyFontHeightKey: maxFontHeight,
+  bodyLetterSpacingKey: maxFontLetterSpacing,
+  bodyWordSpacingKey: maxFontWordSpacing,
+
+  // Label
+  labelFontSizeKey: maxLabel,
+  labelFontHeightKey: maxFontHeight,
+  labelLetterSpacingKey: maxFontLetterSpacing,
+  labelWordSpacingKey: maxFontWordSpacing,
+
+  // Layout settings //
+
+  marginKey: maxMargin,
+  paddingKey: maxPadding,
+  spacingKey: maxSpacing,
+};
+
+/// For testing
+/// [EzConfig.defaults] set to all recommended min values
+final Map<String, Object> empathetechMinConfig = <String, Object>{
+  ...empathetechConfig,
+
+  // Text settings //
+
+  // Display
+  displayFontSizeKey: minDisplay,
+  displayFontHeightKey: minFontHeight,
+  displayLetterSpacingKey: minFontLetterSpacing,
+  displayWordSpacingKey: minFontWordSpacing,
+
+  // Headline
+  headlineFontSizeKey: minHeadline,
+  headlineFontHeightKey: minFontHeight,
+  headlineLetterSpacingKey: minFontLetterSpacing,
+  headlineWordSpacingKey: minFontWordSpacing,
+
+  // Title
+  titleFontSizeKey: minTitle,
+  titleFontHeightKey: minFontHeight,
+  titleLetterSpacingKey: minFontLetterSpacing,
+  titleWordSpacingKey: minFontWordSpacing,
+
+  // Body
+  bodyFontSizeKey: minBody,
+  bodyFontHeightKey: minFontHeight,
+  bodyLetterSpacingKey: minFontLetterSpacing,
+  bodyWordSpacingKey: minFontWordSpacing,
+
+  // Label
+  labelFontSizeKey: minLabel,
+  labelFontHeightKey: minFontHeight,
+  labelLetterSpacingKey: minFontLetterSpacing,
+  labelWordSpacingKey: minFontWordSpacing,
+
+  // Layout settings //
+
+  marginKey: minMargin,
+  paddingKey: minPadding,
+  spacingKey: minSpacing,
+};

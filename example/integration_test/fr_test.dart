@@ -21,7 +21,6 @@ void main() async {
 
   final Map<String, Object> testConfig = <String, Object>{
     ...empathetechConfig,
-    isDarkThemeKey: true,
     appLocaleKey: <String>['fr'],
   };
 

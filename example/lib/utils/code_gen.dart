@@ -1424,18 +1424,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  final Map<String, Object> testConfig = <String, Object>{
-    ...${camelCaseAppName}Config,
-    isDarkThemeKey: true,
-  };
-
-  SharedPreferences.setMockInitialValues(testConfig);
+  SharedPreferences.setMockInitialValues(${camelCaseAppName}Config);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: testConfig,
+    defaults: ${camelCaseAppName}Config,
   );
   
   // Run the tests //

@@ -19,18 +19,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  final Map<String, Object> testConfig = <String, Object>{
-    ...empathetechConfig,
-    isDarkThemeKey: true,
-  };
-
-  SharedPreferences.setMockInitialValues(testConfig);
+  SharedPreferences.setMockInitialValues(empathetechConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: testConfig,
+    defaults: empathetechConfig,
   );
 
   group(
