@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [8.1.0] - 2025-04-06
+## [8.1.0] - 2025-04-??
 ### Added
 - customActions param to ezLog
+- Testing configs
 
 ### Changed
 - Code cleanup
