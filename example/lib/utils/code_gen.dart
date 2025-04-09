@@ -847,12 +847,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final double toolbarHeight = ezTextSize(
-          appTitle,
-          style: Theme.of(context).appBarTheme.titleTextStyle,
-          context: context,
-        ).height +
-        EzConfig.get(marginKey);
+    final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
     // Define custom widgets //
 
