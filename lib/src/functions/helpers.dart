@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -67,3 +68,19 @@ Duration ezReadingTime(String passage) {
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
     ((EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize);
+
+/// Calculate a recommended [AppBar.toolbarHeight]
+/// Assumptions:
+/// - The [title] is a single line, using [TextTheme.titleLarge]
+/// - The tallest [IconData] is [Icons.more_vert]
+double ezToolbarHeight(BuildContext context, String title) {
+  return max(
+    ezTextSize(
+          title,
+          context: context,
+          style: Theme.of(context).appBarTheme.titleTextStyle,
+        ).height +
+        2 * EzConfig.get(marginKey),
+    ezIconSize(Icons.more_vert, context).height + EzConfig.get(paddingKey),
+  );
+}
