@@ -351,6 +351,10 @@ Future<void> genVersionTracking({
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - ${now.year}-XX-XX
+### Added
+- ${config.appName} V1
+
 ## [0.0.0] - ${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}
 ### Added
 - ${config.appName} foundation generated via [Open UI]($openUIProdPage)
