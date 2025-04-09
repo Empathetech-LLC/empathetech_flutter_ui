@@ -385,6 +385,8 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
   labelLetterSpacingKey: maxLetterSpacing,
   labelWordSpacingKey: maxWordSpacing,
 
+  iconSizeKey: maxIconSize,
+
   // Layout settings //
 
   marginKey: maxMargin,
@@ -428,6 +430,8 @@ final Map<String, Object> empathetechMinConfig = <String, Object>{
   labelFontHeightKey: minFontHeight,
   labelLetterSpacingKey: minLetterSpacing,
   labelWordSpacingKey: minWordSpacing,
+
+  iconSizeKey: minIconSize,
 
   // Layout settings //
 
