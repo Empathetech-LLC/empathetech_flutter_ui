@@ -143,7 +143,7 @@ class EzIconButton extends StatelessWidget {
     late final ButtonStyle buttonStyle = style ??
         (enabled
             ? IconButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.surface,
+                backgroundColor: colorScheme.surface,
                 foregroundColor: colorScheme.primary,
                 overlayColor: colorScheme.primary,
                 side: BorderSide(color: colorScheme.primaryContainer),
@@ -152,7 +152,7 @@ class EzIconButton extends StatelessWidget {
                 padding: EzInsets.wrap(EzConfig.get(paddingKey)),
               )
             : IconButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.surface,
+                backgroundColor: colorScheme.surface,
                 foregroundColor: colorScheme.outline,
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
