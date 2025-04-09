@@ -358,32 +358,32 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
   // Display
   displayFontSizeKey: maxDisplay,
   displayFontHeightKey: maxFontHeight,
-  displayLetterSpacingKey: maxFontLetterSpacing,
-  displayWordSpacingKey: maxFontWordSpacing,
+  displayLetterSpacingKey: maxLetterSpacing,
+  displayWordSpacingKey: maxWordSpacing,
 
   // Headline
   headlineFontSizeKey: maxHeadline,
   headlineFontHeightKey: maxFontHeight,
-  headlineLetterSpacingKey: maxFontLetterSpacing,
-  headlineWordSpacingKey: maxFontWordSpacing,
+  headlineLetterSpacingKey: maxLetterSpacing,
+  headlineWordSpacingKey: maxWordSpacing,
 
   // Title
   titleFontSizeKey: maxTitle,
   titleFontHeightKey: maxFontHeight,
-  titleLetterSpacingKey: maxFontLetterSpacing,
-  titleWordSpacingKey: maxFontWordSpacing,
+  titleLetterSpacingKey: maxLetterSpacing,
+  titleWordSpacingKey: maxWordSpacing,
 
   // Body
   bodyFontSizeKey: maxBody,
   bodyFontHeightKey: maxFontHeight,
-  bodyLetterSpacingKey: maxFontLetterSpacing,
-  bodyWordSpacingKey: maxFontWordSpacing,
+  bodyLetterSpacingKey: maxLetterSpacing,
+  bodyWordSpacingKey: maxWordSpacing,
 
   // Label
   labelFontSizeKey: maxLabel,
   labelFontHeightKey: maxFontHeight,
-  labelLetterSpacingKey: maxFontLetterSpacing,
-  labelWordSpacingKey: maxFontWordSpacing,
+  labelLetterSpacingKey: maxLetterSpacing,
+  labelWordSpacingKey: maxWordSpacing,
 
   // Layout settings //
 
@@ -402,32 +402,32 @@ final Map<String, Object> empathetechMinConfig = <String, Object>{
   // Display
   displayFontSizeKey: minDisplay,
   displayFontHeightKey: minFontHeight,
-  displayLetterSpacingKey: minFontLetterSpacing,
-  displayWordSpacingKey: minFontWordSpacing,
+  displayLetterSpacingKey: minLetterSpacing,
+  displayWordSpacingKey: minWordSpacing,
 
   // Headline
   headlineFontSizeKey: minHeadline,
   headlineFontHeightKey: minFontHeight,
-  headlineLetterSpacingKey: minFontLetterSpacing,
-  headlineWordSpacingKey: minFontWordSpacing,
+  headlineLetterSpacingKey: minLetterSpacing,
+  headlineWordSpacingKey: minWordSpacing,
 
   // Title
   titleFontSizeKey: minTitle,
   titleFontHeightKey: minFontHeight,
-  titleLetterSpacingKey: minFontLetterSpacing,
-  titleWordSpacingKey: minFontWordSpacing,
+  titleLetterSpacingKey: minLetterSpacing,
+  titleWordSpacingKey: minWordSpacing,
 
   // Body
   bodyFontSizeKey: minBody,
   bodyFontHeightKey: minFontHeight,
-  bodyLetterSpacingKey: minFontLetterSpacing,
-  bodyWordSpacingKey: minFontWordSpacing,
+  bodyLetterSpacingKey: minLetterSpacing,
+  bodyWordSpacingKey: minWordSpacing,
 
   // Label
   labelFontSizeKey: minLabel,
   labelFontHeightKey: minFontHeight,
-  labelLetterSpacingKey: minFontLetterSpacing,
-  labelWordSpacingKey: minFontWordSpacing,
+  labelLetterSpacingKey: minLetterSpacing,
+  labelWordSpacingKey: minWordSpacing,
 
   // Layout settings //
 

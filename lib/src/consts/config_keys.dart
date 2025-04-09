@@ -217,17 +217,17 @@ const double minIconSize = 10.0;
 /// 40.0
 const double maxIconSize = 40.0;
 
-/// -1.0
-const double minFontLetterSpacing = -1.0;
+/// 0.0
+const double minLetterSpacing = 0.0;
 
-/// 1.0
-const double maxFontLetterSpacing = 1.0;
+/// 2.0
+const double maxLetterSpacing = 2.0;
 
-/// -3.0
-const double minFontWordSpacing = -3.0;
+/// 0.0
+const double minWordSpacing = 0.0;
 
 /// 3.0
-const double maxFontWordSpacing = 3.0;
+const double maxWordSpacing = 3.0;
 
 /// 1.0
 const double minFontHeight = 1.0;
