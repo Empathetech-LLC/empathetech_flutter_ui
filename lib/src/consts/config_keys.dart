@@ -171,26 +171,6 @@ const Map<String, Type> layoutKeys = <String, Type>{
   hideScrollKey: bool,
 };
 
-// Layout settings recommended parameters //
-
-/// 5.0
-const double minMargin = 5.0;
-
-/// 20.0
-const double maxMargin = 20.0;
-
-/// 10.0
-const double minPadding = 10.0;
-
-/// 40.0
-const double maxPadding = 40.0;
-
-/// 10.0
-const double minSpacing = 10.0;
-
-/// 50.0
-const double maxSpacing = 75.0;
-
 // Color settings' keys //
 
 /// 'On'

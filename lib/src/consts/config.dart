@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 //* Default *//
 
-// Text theme //
+// Text settings //
 
 /// 42.0
 const double defaultDisplaySize = 42.0;
@@ -43,7 +43,7 @@ const double defaultLetterSpacing = 0.25;
 /// 1.0
 const double defaultWordSpacing = 1.0;
 
-// Layout //
+// Layout settings //
 
 /// 10.0
 const double defaultMargin = 10.0;
@@ -54,7 +54,7 @@ const double defaultPadding = 20.0;
 /// 25.0
 const double defaultSpacing = 25.0;
 
-// Color scheme //
+// Color settings //
 
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
@@ -115,6 +115,8 @@ const int transparentHex = 0x00000000;
 
 //* Min *//
 
+// Text theme //
+
 /// 21.0
 const double minDisplay = 21.0;
 
@@ -154,7 +156,20 @@ const double minWordSpacing = 0.0;
 /// 1.0
 const double minFontHeight = 1.0;
 
+// Layout settings //
+
+/// 5.0
+const double minMargin = 5.0;
+
+/// 10.0
+const double minPadding = 10.0;
+
+/// 10.0
+const double minSpacing = 10.0;
+
 //* Max *//
+
+// Text settings //
 
 /// 84.0
 const double maxDisplay = 84.0;
@@ -194,6 +209,17 @@ const double maxWordSpacing = 3.0;
 
 /// 2.0
 const double maxFontHeight = 2.0;
+
+// Layout settings //
+
+/// 20.0
+const double maxMargin = 20.0;
+
+/// 40.0
+const double maxPadding = 40.0;
+
+/// 50.0
+const double maxSpacing = 75.0;
 
 //* Maps *//
 
