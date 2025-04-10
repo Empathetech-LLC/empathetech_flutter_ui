@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Code cleanup
 
+### Removed
+- Config bloat
+
 ## [8.0.2] - 2025-02-27
 ### Updated
 - Copyright year from range to current year
