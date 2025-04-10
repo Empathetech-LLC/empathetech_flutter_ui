@@ -64,7 +64,7 @@ class OpenUIScaffold extends StatelessWidget {
         EzFeedbackMenuButton(
           parentContext: context,
           appName: appTitle,
-          supportEmail: empathSupport,
+          supportEmail: 'support@empathetech.net',
         ),
         const OpenSourceButton(),
       ],

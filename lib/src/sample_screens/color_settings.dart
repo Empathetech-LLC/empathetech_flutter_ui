@@ -388,9 +388,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         l10n.gHowThisWorks,
         style: theme.textTheme.labelLarge!,
         textAlign: TextAlign.center,
-        url: Uri.parse(materialColorRoles),
+        url: Uri.parse('https://m3.material.io/styles/color/roles'),
         hint: l10n.gHowThisWorksHint,
-        tooltip: materialColorRoles,
+        tooltip: 'https://m3.material.io/styles/color/roles',
       ),
     );
 
