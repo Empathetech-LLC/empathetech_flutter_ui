@@ -48,8 +48,8 @@ const double defaultWordSpacing = 1.0;
 /// 10.0
 const double defaultMargin = 10.0;
 
-/// 20.0
-const double defaultPadding = 20.0;
+/// 17.5
+const double defaultPadding = 17.5;
 
 /// 25.0
 const double defaultSpacing = 25.0;
