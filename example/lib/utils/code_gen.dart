@@ -9,6 +9,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// Consts //
+
+const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
+
 // Sub-string getters //
 
 /// Copyright notice for the top of code files
@@ -475,7 +479,7 @@ Future<void> genLib({
 
   final String copyright = genCopyright(config);
 
-  //// Make it so ////
+  //* Make it so *//
 
   // Directories //
 
