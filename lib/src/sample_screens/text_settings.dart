@@ -174,7 +174,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color surfaceContainer = colorScheme.surfaceContainer;
+  late final Color surface = Theme.of(context).colorScheme.surface;
 
   // Gather the build data //
 
@@ -199,7 +199,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       EzConfig.getDefault(oKey) ??
       defaultTextOpacity;
 
-  late Color backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+  late Color backgroundColor = surface.withValues(alpha: currOpacity);
 
   late double currIconSize = EzConfig.getDouble(iconSizeKey) ??
       EzConfig.getDefault(iconSizeKey) ??
@@ -230,9 +230,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 key: UniqueKey(),
                 iconSize: currIconSize,
               ),
-              useSurface: true,
-              borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
+              borderRadius: ezPillShape,
             ),
           ],
         ),
@@ -320,8 +319,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               onChanged: (double value) {
                 setState(() {
                   currOpacity = value;
-                  backgroundColor =
-                      surfaceContainer.withValues(alpha: currOpacity);
+                  backgroundColor = surface.withValues(alpha: currOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -408,9 +406,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                       ),
               ],
             ),
-            useSurface: true,
-            borderRadius: ezPillShape,
             backgroundColor: backgroundColor,
+            borderRadius: ezPillShape,
           ),
         ),
         separator,
@@ -427,7 +424,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             labelProvider.reset();
 
             currOpacity = EzConfig.getDefault(oKey) ?? defaultTextOpacity;
-            backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+            backgroundColor = surface.withValues(alpha: currOpacity);
 
             currIconSize = EzConfig.getDefault(iconSizeKey) ?? defaultIconSize;
 
