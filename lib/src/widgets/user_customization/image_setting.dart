@@ -425,6 +425,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     return showModalBottomSheet(
       context: context,
+      useSafeArea: true,
       isScrollControlled: true,
       builder: (_) => StatefulBuilder(
         builder: (BuildContext fitContext, StateSetter fitState) {
