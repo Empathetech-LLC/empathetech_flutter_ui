@@ -64,7 +64,7 @@ class _EzUpdaterState extends State<EzUpdater> {
 
   @override
   Widget build(BuildContext context) {
-    final TargetPlatform platform = getBasePlatform(context);
+    final TargetPlatform platform = getBasePlatform();
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Visibility(

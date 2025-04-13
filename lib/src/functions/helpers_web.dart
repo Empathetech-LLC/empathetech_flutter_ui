@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 /// Get the host [TargetPlatform] on web
 /// via the [window]'s userAgent
-TargetPlatform getHostPlatform(BuildContext context) {
+TargetPlatform getHostPlatform() {
   final String userAgent = window.navigator.userAgent;
 
   if (userAgent.contains('Android')) {

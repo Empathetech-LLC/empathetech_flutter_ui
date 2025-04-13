@@ -43,22 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define build data //
 
-  late final TargetPlatform platform = getBasePlatform(context);
+  final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
       ? false
       : (platform == TargetPlatform.linux ||
           platform == TargetPlatform.macOS ||
           platform == TargetPlatform.windows);
+
   late final bool isMac = isDesktop && platform == TargetPlatform.macOS;
+  late final bool isWindows = isDesktop && platform == TargetPlatform.windows;
 
   late final String homePath = isDesktop
-      ? (platform == TargetPlatform.windows)
+      ? isWindows
           ? Platform.environment['UserProfile'] ?? ''
           : Platform.environment['HOME'] ?? ''
       : '';
 
   late final String docsPath = isDesktop
-      ? (platform == TargetPlatform.windows)
+      ? isWindows
           ? '$homePath\\Documents'
           : '$homePath/Documents'
       : '';
@@ -454,9 +456,10 @@ class _HomeScreenState extends State<HomeScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                    text: l10n.csGenApp(isDesktop
-                        ? (validName ? namePreview : l10n.csTheApp)
-                        : l10n.csTheConfig)),
+                  text: l10n.csGenApp(isDesktop
+                      ? (validName ? namePreview : l10n.csTheApp)
+                      : l10n.csTheConfig),
+                ),
                 EzInlineLink(
                   el10n.ssPageTitle.toLowerCase(),
                   style: subTitle,
@@ -522,8 +525,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : null,
                           autovalidateMode: AutovalidateMode.onUnfocus,
                           decoration: InputDecoration(
-                              hintText: (isDesktop &&
-                                      platform == TargetPlatform.windows)
+                              hintText: isWindows
                                   ? 'example_path\\flutter\\bin'
                                   : 'example_path/flutter/bin'),
                         ),

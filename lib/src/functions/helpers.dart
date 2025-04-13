@@ -33,14 +33,13 @@ double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 
 /// Get the current [TargetPlatform]
-/// Even when [kIsWeb]
-TargetPlatform getBasePlatform(BuildContext context) =>
-    getHostPlatform(context);
+/// Alias exists for [kIsWeb] support
+TargetPlatform getBasePlatform() => getHostPlatform();
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
-String screenshotHint(BuildContext context) {
-  final TargetPlatform platform = getBasePlatform(context);
+String screenshotHint() {
+  final TargetPlatform platform = getBasePlatform();
 
   switch (platform) {
     case TargetPlatform.linux:

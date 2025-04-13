@@ -132,7 +132,7 @@ class EzVideoPlayer extends StatefulWidget {
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather the theme data //
 
-  late final TargetPlatform platform = getBasePlatform(context);
+  final TargetPlatform platform = getBasePlatform();
   late final bool isMobile =
       platform == TargetPlatform.iOS || platform == TargetPlatform.android;
 
