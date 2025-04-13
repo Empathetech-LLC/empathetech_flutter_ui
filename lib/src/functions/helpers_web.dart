@@ -13,7 +13,9 @@ TargetPlatform getHostPlatform() {
 
   if (userAgent.contains('Android')) {
     return TargetPlatform.android;
-  } else if (userAgent.contains('iPhone') || userAgent.contains('iPad')) {
+  } else if (userAgent.contains('iPhone') ||
+      userAgent.contains('iPad') ||
+      userAgent.contains('iPod')) {
     return TargetPlatform.iOS;
   } else if (userAgent.contains('Mac OS')) {
     return TargetPlatform.macOS;
@@ -21,5 +23,18 @@ TargetPlatform getHostPlatform() {
     return TargetPlatform.windows;
   } else {
     return TargetPlatform.linux;
+  }
+}
+
+bool cupertinoCheck() {
+  final String userAgent = window.navigator.userAgent;
+
+  if (userAgent.contains('iPhone') ||
+      userAgent.contains('Mac OS') ||
+      userAgent.contains('iPad') ||
+      userAgent.contains('iPod')) {
+    return true;
+  } else {
+    return false;
   }
 }

@@ -21,3 +21,6 @@ TargetPlatform getHostPlatform() {
     return TargetPlatform.linux;
   }
 }
+
+/// True if [Platform.isIOS] or [Platform.isMacOS]
+bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
