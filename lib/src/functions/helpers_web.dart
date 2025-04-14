@@ -26,6 +26,7 @@ TargetPlatform getHostPlatform() {
   }
 }
 
+/// Checks the [window]'s userAgent for Apple devices
 bool cupertinoCheck() {
   final String userAgent = window.navigator.userAgent;
 
