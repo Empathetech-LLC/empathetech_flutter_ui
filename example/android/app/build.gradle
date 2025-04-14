@@ -49,8 +49,8 @@ android {
 
     defaultConfig {
         applicationId "net.empathetech.open_ui"
-        minSdkVersion 30
-        targetSdkVersion 34
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
