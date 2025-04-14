@@ -37,7 +37,7 @@ double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 TargetPlatform getBasePlatform() => getHostPlatform();
 
 /// Alias exists for [kIsWeb] support
-bool isCupertino() => cupertinoCheck();
+bool isApple() => cupertinoCheck();
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
