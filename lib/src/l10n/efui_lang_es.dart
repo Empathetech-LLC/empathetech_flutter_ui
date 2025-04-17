@@ -57,6 +57,9 @@ class EFUILangEs extends EFUILang {
   String get gClose => 'Cerrar';
 
   @override
+  String get gDisabled => 'Deshabilitado';
+
+  @override
   String get gError => 'Error';
 
   @override
