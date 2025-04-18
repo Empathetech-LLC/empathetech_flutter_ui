@@ -6,6 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSettings extends StatefulWidget {
@@ -135,8 +136,16 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             ],
             selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) =>
-                setState(() => currentTab = selected.first),
+            onSelectionChanged: (Set<EzSettingType> selected) {
+              switch (selected.first) {
+                case EzSettingType.quick:
+                  context.goNamed('color_${EzSettingType.quick.path}');
+                  break;
+                case EzSettingType.advanced:
+                  context.goNamed('color_${EzSettingType.advanced.path}');
+                  break;
+              }
+            },
           ),
           separator,
 

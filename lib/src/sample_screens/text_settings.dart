@@ -7,6 +7,7 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
@@ -136,8 +137,16 @@ class _TextSettingsState extends State<_TextSettings> {
             ],
             selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) =>
-                setState(() => currentTab = selected.first),
+            onSelectionChanged: (Set<EzSettingType> selected) {
+              switch (selected.first) {
+                case EzSettingType.quick:
+                  context.goNamed('text_${EzSettingType.quick.path}');
+                  break;
+                case EzSettingType.advanced:
+                  context.goNamed('text_${EzSettingType.advanced.path}');
+                  break;
+              }
+            },
           ),
           const EzSpacer(),
 
