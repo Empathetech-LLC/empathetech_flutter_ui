@@ -16,10 +16,10 @@ const String _gPlay =
 const String _appStore = 'https://apps.apple.com/us/app/open-ui/id6499560244';
 
 const String _github =
-    'https://_github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
 
 const String _versionSource =
-    'https://raw._githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
+    'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
