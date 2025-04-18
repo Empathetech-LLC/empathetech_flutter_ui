@@ -140,10 +140,16 @@ class _TextSettingsState extends State<_TextSettings> {
             onSelectionChanged: (Set<EzSettingType> selected) {
               switch (selected.first) {
                 case EzSettingType.quick:
-                  context.goNamed('text_${EzSettingType.quick.path}');
+                  context.pushReplacementNamed(
+                    'text_${EzSettingType.quick.path}',
+                    extra: false,
+                  );
                   break;
                 case EzSettingType.advanced:
-                  context.goNamed('text_${EzSettingType.advanced.path}');
+                  context.pushReplacementNamed(
+                    'text_${EzSettingType.advanced.path}',
+                    extra: false,
+                  );
                   break;
               }
             },

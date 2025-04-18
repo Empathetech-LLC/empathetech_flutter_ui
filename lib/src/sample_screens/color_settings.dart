@@ -139,10 +139,16 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             onSelectionChanged: (Set<EzSettingType> selected) {
               switch (selected.first) {
                 case EzSettingType.quick:
-                  context.goNamed('color_${EzSettingType.quick.path}');
+                  context.pushReplacementNamed(
+                    'color_${EzSettingType.quick.path}',
+                    extra: false,
+                  );
                   break;
                 case EzSettingType.advanced:
-                  context.goNamed('color_${EzSettingType.advanced.path}');
+                  context.pushReplacementNamed(
+                    'color_${EzSettingType.advanced.path}',
+                    extra: false,
+                  );
                   break;
               }
             },
