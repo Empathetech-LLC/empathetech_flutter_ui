@@ -288,6 +288,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Icon size
   iconSizeKey: defaultIconSize,
 
+  // Selector
+  advancedTextKey: false,
+
   // Layout settings //
 
   marginKey: defaultMargin,
@@ -341,6 +344,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkSurfaceContainerKey: offBlackHex,
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
+
+  // Selector
+  advancedColorsKey: false,
 
   // Image settings //
 

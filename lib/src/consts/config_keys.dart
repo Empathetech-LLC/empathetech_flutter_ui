@@ -77,6 +77,9 @@ const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 // Icons
 const String iconSizeKey = 'iconSize'; // Required
 
+// Selector
+const String advancedTextKey = 'advancedTextSettings';
+
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
@@ -139,6 +142,9 @@ const Map<String, Type> textStyleKeys = <String, Type>{
 
   // Icons
   iconSizeKey: double, // Required
+
+  // Selector
+  advancedTextKey: bool,
 };
 
 // Text settings' values //
@@ -293,6 +299,10 @@ const String darkInversePrimaryKey = 'darkInversePrimary';
 const String darkShadowKey = 'darkShadow';
 const String darkScrimKey = 'darkScrim';
 const String darkSurfaceTintKey = 'darkSurfaceTint';
+
+// Selector
+
+const String advancedColorsKey = 'advancedColorSettings';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColors = <String>[
@@ -496,6 +506,9 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkScrimKey: int,
   darkShadowKey: int,
   darkSurfaceTintKey: int,
+
+  // Selector
+  advancedColorsKey: bool,
 };
 
 // Color settings' values //

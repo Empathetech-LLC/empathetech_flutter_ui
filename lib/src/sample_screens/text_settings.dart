@@ -7,7 +7,6 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Enumerator for selecting which [TextStyle] is being updated
@@ -105,7 +104,10 @@ class _TextSettingsState extends State<_TextSettings> {
 
   // Define the build data //
 
-  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
+  late EzSettingType currentTab = widget.target ??
+      (EzConfig.get(advancedTextKey) == true
+          ? EzSettingType.advanced
+          : EzSettingType.quick);
 
   @override
   void didChangeDependencies() {
@@ -137,21 +139,18 @@ class _TextSettingsState extends State<_TextSettings> {
             ],
             selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) {
+            onSelectionChanged: (Set<EzSettingType> selected) async {
               switch (selected.first) {
                 case EzSettingType.quick:
-                  context.pushReplacementNamed(
-                    'text_${EzSettingType.quick.path}',
-                    extra: false,
-                  );
+                  currentTab = EzSettingType.quick;
+                  await EzConfig.setBool(advancedTextKey, false);
                   break;
                 case EzSettingType.advanced:
-                  context.pushReplacementNamed(
-                    'text_${EzSettingType.advanced.path}',
-                    extra: false,
-                  );
+                  currentTab = EzSettingType.advanced;
+                  await EzConfig.setBool(advancedTextKey, true);
                   break;
               }
+              setState(() {});
             },
           ),
           const EzSpacer(),

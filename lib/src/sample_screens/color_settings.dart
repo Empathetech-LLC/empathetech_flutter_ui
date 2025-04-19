@@ -6,7 +6,6 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSettings extends StatefulWidget {
@@ -80,7 +79,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
-  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
+  late EzSettingType currentTab = widget.target ??
+      (EzConfig.get(advancedColorsKey) == true
+          ? EzSettingType.advanced
+          : EzSettingType.quick);
 
   late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
@@ -136,21 +138,18 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             ],
             selected: <EzSettingType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) {
+            onSelectionChanged: (Set<EzSettingType> selected) async {
               switch (selected.first) {
                 case EzSettingType.quick:
-                  context.pushReplacementNamed(
-                    'color_${EzSettingType.quick.path}',
-                    extra: false,
-                  );
+                  currentTab = EzSettingType.quick;
+                  await EzConfig.setBool(advancedColorsKey, false);
                   break;
                 case EzSettingType.advanced:
-                  context.pushReplacementNamed(
-                    'color_${EzSettingType.advanced.path}',
-                    extra: false,
-                  );
+                  currentTab = EzSettingType.advanced;
+                  await EzConfig.setBool(advancedColorsKey, true);
                   break;
               }
+              setState(() {});
             },
           ),
           separator,
