@@ -116,42 +116,14 @@ final GoRouter router = GoRouter(
                 GoRoute(
                   path: EzSettingType.quick.path,
                   name: 'text_${EzSettingType.quick.path}',
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    final bool skipAnim = state.extra == false;
-
-                    return skipAnim
-                        ? NoTransitionPage<Widget>(
-                            key: state.pageKey,
-                            child: const TextSettingsScreen(
-                              target: EzSettingType.quick,
-                            ))
-                        : platformPage(
-                            context: context,
-                            key: state.pageKey,
-                            child: const TextSettingsScreen(
-                              target: EzSettingType.quick,
-                            ));
-                  },
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.quick),
                 ),
                 GoRoute(
                   path: EzSettingType.advanced.path,
                   name: 'text_${EzSettingType.advanced.path}',
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    final bool skipAnim = state.extra == false;
-
-                    return skipAnim
-                        ? NoTransitionPage<Widget>(
-                            key: state.pageKey,
-                            child: const TextSettingsScreen(
-                              target: EzSettingType.advanced,
-                            ))
-                        : platformPage(
-                            context: context,
-                            key: state.pageKey,
-                            child: const TextSettingsScreen(
-                              target: EzSettingType.advanced,
-                            ));
-                  },
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzSettingType.advanced),
                 ),
               ],
             ),
@@ -168,42 +140,14 @@ final GoRouter router = GoRouter(
                 GoRoute(
                   path: EzSettingType.quick.path,
                   name: 'color_${EzSettingType.quick.path}',
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    final bool skipAnim = state.extra == false;
-
-                    return skipAnim
-                        ? NoTransitionPage<Widget>(
-                            key: state.pageKey,
-                            child: const ColorSettingsScreen(
-                              target: EzSettingType.quick,
-                            ))
-                        : platformPage(
-                            context: context,
-                            key: state.pageKey,
-                            child: const ColorSettingsScreen(
-                              target: EzSettingType.quick,
-                            ));
-                  },
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.quick),
                 ),
                 GoRoute(
                   path: EzSettingType.advanced.path,
                   name: 'color_${EzSettingType.advanced.path}',
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    final bool skipAnim = state.extra == false;
-
-                    return skipAnim
-                        ? NoTransitionPage<Widget>(
-                            key: state.pageKey,
-                            child: const ColorSettingsScreen(
-                              target: EzSettingType.advanced,
-                            ))
-                        : platformPage(
-                            context: context,
-                            key: state.pageKey,
-                            child: const ColorSettingsScreen(
-                              target: EzSettingType.advanced,
-                            ));
-                  },
+                  builder: (_, __) =>
+                      const ColorSettingsScreen(target: EzSettingType.advanced),
                 ),
               ],
             ),
