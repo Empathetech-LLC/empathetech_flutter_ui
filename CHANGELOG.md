@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Code cleanup
+- EzSettingType enum
+  - Breaking change; split into separate enums
 
 ### Removed
 - Config bloat
