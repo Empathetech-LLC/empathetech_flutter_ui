@@ -7,12 +7,15 @@ All notable changes to this project will be documented in this file.
 - customActions param to ezLog
 - Testing configs
 - ezToolbarHeight
+- Consideration for kMinInteractiveDimension in adaptive layout(s)
 
 ### Changed
 - Code cleanup
 
 ### Removed
 - Config bloat
+- ezIconSize
+  - Added iconSizeKey to EzConfig
 
 ## [8.0.2] - 2025-02-27
 ### Updated
