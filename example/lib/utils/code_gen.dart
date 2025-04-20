@@ -594,13 +594,13 @@ final GoRouter router = GoRouter(
               routes: <RouteBase>[
                 GoRoute(
                   path: EzSettingType.quick.path,
-                  name: 'text_${EzSettingType.quick.path}',
+                  name: 'text_\${EzSettingType.quick.path}',
                   builder: (_, __) =>
                       const TextSettingsScreen(target: EzSettingType.quick),
                 ),
                 GoRoute(
                   path: EzSettingType.advanced.path,
-                  name: 'text_${EzSettingType.advanced.path}',
+                  name: 'text_\${EzSettingType.advanced.path}',
                   builder: (_, __) =>
                       const TextSettingsScreen(target: EzSettingType.advanced),
                 ),
@@ -618,13 +618,13 @@ final GoRouter router = GoRouter(
               routes: <RouteBase>[
                 GoRoute(
                   path: EzSettingType.quick.path,
-                  name: 'color_${EzSettingType.quick.path}',
+                  name: 'color_\${EzSettingType.quick.path}',
                   builder: (_, __) =>
                       const ColorSettingsScreen(target: EzSettingType.quick),
                 ),
                 GoRoute(
                   path: EzSettingType.advanced.path,
-                  name: 'color_${EzSettingType.advanced.path}',
+                  name: 'color_\${EzSettingType.advanced.path}',
                   builder: (_, __) =>
                       const ColorSettingsScreen(target: EzSettingType.advanced),
                 ),
