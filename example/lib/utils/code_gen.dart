@@ -799,7 +799,7 @@ class EFUICredits extends StatelessWidget {
       message: tip,
       excludeFromSemantics: true,
       child: EzMenuButton(
-        onPressed: () => launchUrl(Uri.parse($openUIProdPage)),
+        onPressed: () => launchUrl(Uri.parse('$openUIProdPage')),
         icon: EzIcon(PlatformIcons(context).settings),
         label: label,
         semanticsLabel:
