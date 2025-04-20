@@ -26,8 +26,8 @@ class EzTextSettings extends StatelessWidget {
   /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   final bool showSpacing;
 
-  /// Optional starting [EzSettingType] target
-  final EzSettingType? target;
+  /// Optional starting [EzTSType] target
+  final EzTSType? target;
 
   /// Empathetech text settings
   /// Recommended to use as a [Scaffold.body]
@@ -80,7 +80,7 @@ class _TextSettings extends StatefulWidget {
   final bool showOpacity;
   final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
-  final EzSettingType? target;
+  final EzTSType? target;
 
   const _TextSettings({
     required this.useImageDecoration,
@@ -104,10 +104,10 @@ class _TextSettingsState extends State<_TextSettings> {
 
   // Define the build data //
 
-  late EzSettingType currentTab = widget.target ??
+  late EzTSType currentTab = widget.target ??
       (EzConfig.get(advancedTextKey) == true
-          ? EzSettingType.advanced
-          : EzSettingType.quick);
+          ? EzTSType.advanced
+          : EzTSType.quick);
 
   @override
   void didChangeDependencies() {
@@ -126,27 +126,27 @@ class _TextSettingsState extends State<_TextSettings> {
           if (spacing > margin) EzSpacer(space: spacing - margin),
 
           // Mode selector
-          SegmentedButton<EzSettingType>(
-            segments: <ButtonSegment<EzSettingType>>[
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.quick,
+          SegmentedButton<EzTSType>(
+            segments: <ButtonSegment<EzTSType>>[
+              ButtonSegment<EzTSType>(
+                value: EzTSType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.advanced,
+              ButtonSegment<EzTSType>(
+                value: EzTSType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <EzSettingType>{currentTab},
+            selected: <EzTSType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) async {
+            onSelectionChanged: (Set<EzTSType> selected) async {
               switch (selected.first) {
-                case EzSettingType.quick:
-                  currentTab = EzSettingType.quick;
+                case EzTSType.quick:
+                  currentTab = EzTSType.quick;
                   await EzConfig.setBool(advancedTextKey, false);
                   break;
-                case EzSettingType.advanced:
-                  currentTab = EzSettingType.advanced;
+                case EzTSType.advanced:
+                  currentTab = EzTSType.advanced;
                   await EzConfig.setBool(advancedTextKey, true);
                   break;
               }
@@ -156,7 +156,7 @@ class _TextSettingsState extends State<_TextSettings> {
           const EzSpacer(),
 
           // Settings
-          if (currentTab == EzSettingType.quick)
+          if (currentTab == EzTSType.quick)
             _QuickTextSettings(
               widget.showOpacity,
               widget.additionalBatchSettings,

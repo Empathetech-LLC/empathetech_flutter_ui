@@ -23,7 +23,7 @@ class EzColorSettings extends StatefulWidget {
   final List<String> lightStarterSet;
 
   /// Optional starting [EzSettingType] target
-  final EzSettingType? target;
+  final EzCSType? target;
 
   /// Empathetech color settings
   /// Recommended to use as a [Scaffold.body]
@@ -79,10 +79,10 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
-  late EzSettingType currentTab = widget.target ??
+  late EzCSType currentTab = widget.target ??
       (EzConfig.get(advancedColorsKey) == true
-          ? EzSettingType.advanced
-          : EzSettingType.quick);
+          ? EzCSType.advanced
+          : EzCSType.quick);
 
   late final String resetDialogTitle = l10n.csResetAll(themeProfile);
 
@@ -125,27 +125,27 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           EzMargin(),
 
           // Mode switch
-          SegmentedButton<EzSettingType>(
-            segments: <ButtonSegment<EzSettingType>>[
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.quick,
+          SegmentedButton<EzCSType>(
+            segments: <ButtonSegment<EzCSType>>[
+              ButtonSegment<EzCSType>(
+                value: EzCSType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.advanced,
+              ButtonSegment<EzCSType>(
+                value: EzCSType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <EzSettingType>{currentTab},
+            selected: <EzCSType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) async {
+            onSelectionChanged: (Set<EzCSType> selected) async {
               switch (selected.first) {
-                case EzSettingType.quick:
-                  currentTab = EzSettingType.quick;
+                case EzCSType.quick:
+                  currentTab = EzCSType.quick;
                   await EzConfig.setBool(advancedColorsKey, false);
                   break;
-                case EzSettingType.advanced:
-                  currentTab = EzSettingType.advanced;
+                case EzCSType.advanced:
+                  currentTab = EzCSType.advanced;
                   await EzConfig.setBool(advancedColorsKey, true);
                   break;
               }
@@ -155,7 +155,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           separator,
 
           // Core settings
-          if (currentTab == EzSettingType.quick)
+          if (currentTab == EzCSType.quick)
             _QuickColorSettings(
               l10n: l10n,
               isDark: isDark,
