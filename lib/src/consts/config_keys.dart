@@ -78,7 +78,7 @@ const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 const String iconSizeKey = 'iconSize'; // Required
 
 // Selector
-const String advancedTextKey = 'advancedTextSettings';
+const String advancedTextKey = 'advancedText';
 
 /// [display, headline, title, body, label]
 ///                 X
@@ -302,7 +302,7 @@ const String darkSurfaceTintKey = 'darkSurfaceTint';
 
 // Selector
 
-const String advancedColorsKey = 'advancedColorSettings';
+const String advancedColorsKey = 'advancedColors';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColors = <String>[
