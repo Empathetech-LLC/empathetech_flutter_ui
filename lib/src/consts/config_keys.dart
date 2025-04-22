@@ -77,6 +77,9 @@ const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 // Icons
 const String iconSizeKey = 'iconSize'; // Required
 
+// Selector
+const String advancedTextKey = 'advancedText';
+
 /// [display, headline, title, body, label]
 ///                 X
 /// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
@@ -139,6 +142,9 @@ const Map<String, Type> textStyleKeys = <String, Type>{
 
   // Icons
   iconSizeKey: double, // Required
+
+  // Selector
+  advancedTextKey: bool,
 };
 
 // Text settings' values //
@@ -155,86 +161,6 @@ const String underlined = 'underlined';
 /// '-55.55'
 const String sampleString = '55.55';
 
-// Text settings' recommended parameters //
-
-/// 84.0
-const double maxDisplay = 84.0;
-
-/// 21.0
-const double minDisplay = 21.0;
-
-/// 64.0
-const double maxHeadline = 64.0;
-
-/// 16.0
-const double minHeadline = 16.0;
-
-/// 42.0
-const double maxTitle = 42.0;
-
-/// 11.0
-const double minTitle = 11.0;
-
-/// 32.0
-const double maxBody = 32.0;
-
-/// 8.0
-const double minBody = 8.0;
-
-/// 28.0
-const double maxLabel = 28.0;
-
-/// 7.0
-const double minLabel = 7.0;
-
-/// 84.0, 64.0, 42.0, 32.0, 28.0
-const Map<String, double> fontSizeMaxes = <String, double>{
-  displayFontSizeKey: maxDisplay,
-  headlineFontSizeKey: maxHeadline,
-  titleFontSizeKey: maxTitle,
-  bodyFontSizeKey: maxBody,
-  labelFontSizeKey: maxLabel,
-};
-
-/// 21.0, 16.0, 11.0, 8.0, 7.0
-const Map<String, double> fontSizeMins = <String, double>{
-  displayFontSizeKey: minDisplay,
-  headlineFontSizeKey: minHeadline,
-  titleFontSizeKey: minTitle,
-  bodyFontSizeKey: minBody,
-  labelFontSizeKey: minLabel,
-};
-
-/// 0.0
-const double minOpacity = 0.0;
-
-/// 1.0
-const double maxOpacity = 1.0;
-
-/// 10.0
-const double minIconSize = 10.0;
-
-/// 40.0
-const double maxIconSize = 40.0;
-
-/// -1.0
-const double minFontLetterSpacing = -1.0;
-
-/// 1.0
-const double maxFontLetterSpacing = 1.0;
-
-/// -3.0
-const double minFontWordSpacing = -3.0;
-
-/// 3.0
-const double maxFontWordSpacing = 3.0;
-
-/// 1.0
-const double minFontHeight = 1.0;
-
-/// 2.0
-const double maxFontHeight = 2.0;
-
 // Layout keys //
 
 const String marginKey = 'margin'; // Required
@@ -250,26 +176,6 @@ const Map<String, Type> layoutKeys = <String, Type>{
   spacingKey: double, // Required
   hideScrollKey: bool,
 };
-
-// Layout settings recommended parameters //
-
-/// 5.0
-const double minMargin = 5.0;
-
-/// 20.0
-const double maxMargin = 20.0;
-
-/// 10.0
-const double minPadding = 10.0;
-
-/// 40.0
-const double maxPadding = 40.0;
-
-/// 10.0
-const double minSpacing = 10.0;
-
-/// 50.0
-const double maxSpacing = 75.0;
 
 // Color settings' keys //
 
@@ -393,6 +299,10 @@ const String darkInversePrimaryKey = 'darkInversePrimary';
 const String darkShadowKey = 'darkShadow';
 const String darkScrimKey = 'darkScrim';
 const String darkSurfaceTintKey = 'darkSurfaceTint';
+
+// Selector
+
+const String advancedColorsKey = 'advancedColors';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColors = <String>[
@@ -596,6 +506,9 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkScrimKey: int,
   darkShadowKey: int,
   darkSurfaceTintKey: int,
+
+  // Selector
+  advancedColorsKey: bool,
 };
 
 // Color settings' values //

@@ -5,6 +5,7 @@
 
 import '../../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -88,8 +89,10 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     context: context,
   );
 
-  late double formFieldWidth = sizeLimit.width + padding;
-  late double formFieldHeight = sizeLimit.height + padding;
+  late double formFieldWidth =
+      max(sizeLimit.width + padding, kMinInteractiveDimension);
+  late double formFieldHeight =
+      max(sizeLimit.height + padding, kMinInteractiveDimension);
 
   late final TextStyle? style =
       widget.style ?? Theme.of(context).textTheme.bodyLarge;

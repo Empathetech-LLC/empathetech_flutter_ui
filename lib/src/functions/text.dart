@@ -3,9 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-// ignore_for_file: deprecated_member_use
-// Color.value was deprecated without replacement, .toARGB32() should be in next stable release
-
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -29,34 +26,13 @@ Size ezTextSize(
   return textPainter.size;
 }
 
-/// Returns the soon-to-be rendered [Size] of an [icon] via a [TextPainter]
-Size ezIconSize(
-  IconData icon,
-  BuildContext context, {
-  TextStyle? style,
-  double? size,
-}) {
-  final TextPainter textPainter = TextPainter(
-    text: TextSpan(
-      text: String.fromCharCode(icon.codePoint),
-      style: (style ?? Theme.of(context).textTheme.titleLarge)
-          ?.copyWith(fontSize: size ?? EzConfig.get(iconSizeKey)),
-    ),
-    maxLines: 1,
-    textScaler: MediaQuery.textScalerOf(context),
-    textDirection: TextDirection.ltr,
-  )..layout();
-
-  return textPainter.size;
-}
-
 /// [SystemChrome.setApplicationSwitcherDescription] wrapper
 /// Sets the title of the tab on web and the title of the window on desktop
 void ezWindowNamer(BuildContext context, String title) =>
     SystemChrome.setApplicationSwitcherDescription(
       ApplicationSwitcherDescription(
         label: title,
-        primaryColor: Theme.of(context).primaryColor.value,
+        primaryColor: Theme.of(context).primaryColor.toARGB32(),
       ),
     );
 

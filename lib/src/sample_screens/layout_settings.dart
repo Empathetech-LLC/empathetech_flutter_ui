@@ -97,16 +97,16 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           separator,
 
           // Hide scroll
+
           EzRow(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              EzTextBackground(
-                Text(
+              Flexible(
+                child: EzText(
                   l10n.lsScroll,
                   style: style,
                   textAlign: TextAlign.center,
                 ),
-                margin: EzInsets.col(margin),
               ),
               EzCheckbox(
                 value: hideScroll,

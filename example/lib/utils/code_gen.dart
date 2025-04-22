@@ -9,6 +9,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+// Consts //
+
+const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
+
 // Sub-string getters //
 
 /// Copyright notice for the top of code files
@@ -351,7 +355,11 @@ Future<void> genVersionTracking({
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - ${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}
+## [1.0.0] - ${now.year}-XX-XX
+### Added
+- ${config.appName} V1
+
+## [0.0.0] - ${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}
 ### Added
 - ${config.appName} foundation generated via [Open UI]($openUIProdPage)
 
@@ -429,7 +437,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.0.2
+  empathetech_flutter_ui: ^8.1.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^8.0.0
@@ -471,7 +479,7 @@ Future<void> genLib({
 
   final String copyright = genCopyright(config);
 
-  //// Make it so ////
+  //* Make it so *//
 
   // Directories //
 
@@ -585,16 +593,16 @@ final GoRouter router = GoRouter(
               builder: (_, __) => const TextSettingsScreen(),
               routes: <RouteBase>[
                 GoRoute(
-                  path: EzSettingType.quick.path,
-                  name: 'text_${EzSettingType.quick.path}',
+                  path: EzTSType.quick.path,
+                  name: EzTSType.quick.name,
                   builder: (_, __) =>
-                      const TextSettingsScreen(target: EzSettingType.quick),
+                      const TextSettingsScreen(target: EzTSType.quick),
                 ),
                 GoRoute(
-                  path: EzSettingType.advanced.path,
-                  name: 'text_${EzSettingType.advanced.path}',
+                  path: EzTSType.advanced.path,
+                  name: EzTSType.advanced.name,
                   builder: (_, __) =>
-                      const TextSettingsScreen(target: EzSettingType.advanced),
+                      const TextSettingsScreen(target: EzTSType.advanced),
                 ),
               ],
             ),''' : ''}
@@ -609,16 +617,16 @@ final GoRouter router = GoRouter(
               builder: (_, __) => const ColorSettingsScreen(),
               routes: <RouteBase>[
                 GoRoute(
-                  path: EzSettingType.quick.path,
-                  name: 'color_${EzSettingType.quick.path}',
+                  path: EzCSType.quick.path,
+                  name: EzCSType.quick.name,
                   builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzSettingType.quick),
+                      const ColorSettingsScreen(target: EzCSType.quick),
                 ),
                 GoRoute(
-                  path: EzSettingType.advanced.path,
-                  name: 'color_${EzSettingType.advanced.path}',
+                  path: EzCSType.advanced.path,
+                  name: EzCSType.advanced.name,
                   builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzSettingType.advanced),
+                      const ColorSettingsScreen(target: EzCSType.advanced),
                 ),
               ],
             ),''' : ''}
@@ -791,7 +799,7 @@ class EFUICredits extends StatelessWidget {
       message: tip,
       excludeFromSemantics: true,
       child: EzMenuButton(
-        onPressed: () => launchUrl(Uri.parse(openUIProdPage)),
+        onPressed: () => launchUrl(Uri.parse('$openUIProdPage')),
         icon: EzIcon(PlatformIcons(context).settings),
         label: label,
         semanticsLabel:
@@ -843,12 +851,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final double toolbarHeight = ezTextSize(
-          appTitle,
-          style: Theme.of(context).appBarTheme.titleTextStyle,
-          context: context,
-        ).height +
-        EzConfig.get(marginKey);
+    final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
     // Define custom widgets //
 
@@ -857,7 +860,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         onPressed: () =>
             controller.isOpen ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
-        icon: const Icon(Icons.more_vert),
+        icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
       ),
       menuChildren: <Widget>[
         (showSettings) ? SettingsButton(context) : EFUICredits(context),
@@ -1424,18 +1427,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  final Map<String, Object> testConfig = <String, Object>{
-    ...${camelCaseAppName}Config,
-    isDarkThemeKey: true,
-  };
-
-  SharedPreferences.setMockInitialValues(testConfig);
+  SharedPreferences.setMockInitialValues(${camelCaseAppName}Config);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: testConfig,
+    defaults: ${camelCaseAppName}Config,
   );
   
   // Run the tests //

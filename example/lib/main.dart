@@ -114,16 +114,16 @@ final GoRouter router = GoRouter(
               builder: (_, __) => const TextSettingsScreen(),
               routes: <RouteBase>[
                 GoRoute(
-                  path: EzSettingType.quick.path,
-                  name: 'text_${EzSettingType.quick.path}',
+                  path: EzTSType.quick.path,
+                  name: EzTSType.quick.name,
                   builder: (_, __) =>
-                      const TextSettingsScreen(target: EzSettingType.quick),
+                      const TextSettingsScreen(target: EzTSType.quick),
                 ),
                 GoRoute(
-                  path: EzSettingType.advanced.path,
-                  name: 'text_${EzSettingType.advanced.path}',
+                  path: EzTSType.advanced.path,
+                  name: EzTSType.advanced.name,
                   builder: (_, __) =>
-                      const TextSettingsScreen(target: EzSettingType.advanced),
+                      const TextSettingsScreen(target: EzTSType.advanced),
                 ),
               ],
             ),
@@ -138,16 +138,16 @@ final GoRouter router = GoRouter(
               builder: (_, __) => const ColorSettingsScreen(),
               routes: <RouteBase>[
                 GoRoute(
-                  path: EzSettingType.quick.path,
-                  name: 'color_${EzSettingType.quick.path}',
+                  path: EzCSType.quick.path,
+                  name: EzCSType.quick.name,
                   builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzSettingType.quick),
+                      const ColorSettingsScreen(target: EzCSType.quick),
                 ),
                 GoRoute(
-                  path: EzSettingType.advanced.path,
-                  name: 'color_${EzSettingType.advanced.path}',
+                  path: EzCSType.advanced.path,
+                  name: EzCSType.advanced.name,
                   builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzSettingType.advanced),
+                      const ColorSettingsScreen(target: EzCSType.advanced),
                 ),
               ],
             ),

@@ -15,16 +15,21 @@ Future<dynamic> ezLogAlert(
   BuildContext context, {
   String? title,
   required String message,
+  (List<Widget> materialActions, List<Widget> cupertinoActions)? customActions,
 }) async {
   ezLog(message);
+
   return showPlatformDialog(
     context: context,
-    builder: (BuildContext context) => EzAlertDialog(
+    builder: (_) => EzAlertDialog(
       title: Text(
         title ?? EFUILang.of(context)!.gAttention,
         textAlign: TextAlign.center,
       ),
       contents: <Widget>[Text(message, textAlign: TextAlign.center)],
+      materialActions: customActions?.$1,
+      cupertinoActions: customActions?.$2,
+      needsClose: customActions == null,
     ),
   );
 }

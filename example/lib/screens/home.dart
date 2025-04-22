@@ -43,22 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Define build data //
 
-  late final TargetPlatform platform = getBasePlatform(context);
+  final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
       ? false
       : (platform == TargetPlatform.linux ||
           platform == TargetPlatform.macOS ||
           platform == TargetPlatform.windows);
+
   late final bool isMac = isDesktop && platform == TargetPlatform.macOS;
+  late final bool isWindows = isDesktop && platform == TargetPlatform.windows;
 
   late final String homePath = isDesktop
-      ? (platform == TargetPlatform.windows)
+      ? isWindows
           ? Platform.environment['UserProfile'] ?? ''
           : Platform.environment['HOME'] ?? ''
       : '';
 
   late final String docsPath = isDesktop
-      ? (platform == TargetPlatform.windows)
+      ? isWindows
           ? '$homePath\\Documents'
           : '$homePath/Documents'
       : '';
@@ -356,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       EzCheckbox(
                         value: exampleDomain,
-                        onChanged: (bool? value) async {
+                        onChanged: (bool? value) {
                           if (value == null) return;
                           setState(() => exampleDomain = value);
                         },
@@ -412,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.tsPageTitle,
                     value: textSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => textSettings = value);
                     },
@@ -421,7 +423,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.lsPageTitle,
                     value: layoutSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => layoutSettings = value);
                     },
@@ -430,7 +432,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.csPageTitle,
                     value: colorSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => colorSettings = value);
                     },
@@ -439,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _SettingsCheckbox(
                     title: el10n.isPageTitle,
                     value: imageSettings,
-                    onChanged: (bool? value) async {
+                    onChanged: (bool? value) {
                       if (value == null) return;
                       setState(() => imageSettings = value);
                     },
@@ -454,9 +456,10 @@ class _HomeScreenState extends State<HomeScreen> {
             EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                    text: l10n.csGenApp(isDesktop
-                        ? (validName ? namePreview : l10n.csTheApp)
-                        : l10n.csTheConfig)),
+                  text: l10n.csGenApp(isDesktop
+                      ? (validName ? namePreview : l10n.csTheApp)
+                      : l10n.csTheConfig),
+                ),
                 EzInlineLink(
                   el10n.ssPageTitle.toLowerCase(),
                   style: subTitle,
@@ -522,8 +525,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : null,
                           autovalidateMode: AutovalidateMode.onUnfocus,
                           decoration: InputDecoration(
-                              hintText: (isDesktop &&
-                                      platform == TargetPlatform.windows)
+                              hintText: isWindows
                                   ? 'example_path\\flutter\\bin'
                                   : 'example_path/flutter/bin'),
                         ),

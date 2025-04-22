@@ -26,8 +26,8 @@ class EzTextSettings extends StatelessWidget {
   /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   final bool showSpacing;
 
-  /// Optional starting [EzSettingType] target
-  final EzSettingType? target;
+  /// Optional starting [EzTSType] target
+  final EzTSType? target;
 
   /// Empathetech text settings
   /// Recommended to use as a [Scaffold.body]
@@ -80,7 +80,7 @@ class _TextSettings extends StatefulWidget {
   final bool showOpacity;
   final List<Widget>? additionalBatchSettings;
   final bool showSpacing;
-  final EzSettingType? target;
+  final EzTSType? target;
 
   const _TextSettings({
     required this.useImageDecoration,
@@ -104,7 +104,10 @@ class _TextSettingsState extends State<_TextSettings> {
 
   // Define the build data //
 
-  late EzSettingType currentTab = widget.target ?? EzSettingType.quick;
+  late EzTSType currentTab = widget.target ??
+      (EzConfig.get(advancedTextKey) == true
+          ? EzTSType.advanced
+          : EzTSType.quick);
 
   @override
   void didChangeDependencies() {
@@ -123,26 +126,37 @@ class _TextSettingsState extends State<_TextSettings> {
           if (spacing > margin) EzSpacer(space: spacing - margin),
 
           // Mode selector
-          SegmentedButton<EzSettingType>(
-            segments: <ButtonSegment<EzSettingType>>[
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.quick,
+          SegmentedButton<EzTSType>(
+            segments: <ButtonSegment<EzTSType>>[
+              ButtonSegment<EzTSType>(
+                value: EzTSType.quick,
                 label: Text(l10n.gQuick),
               ),
-              ButtonSegment<EzSettingType>(
-                value: EzSettingType.advanced,
+              ButtonSegment<EzTSType>(
+                value: EzTSType.advanced,
                 label: Text(l10n.gAdvanced),
               ),
             ],
-            selected: <EzSettingType>{currentTab},
+            selected: <EzTSType>{currentTab},
             showSelectedIcon: false,
-            onSelectionChanged: (Set<EzSettingType> selected) =>
-                setState(() => currentTab = selected.first),
+            onSelectionChanged: (Set<EzTSType> selected) async {
+              switch (selected.first) {
+                case EzTSType.quick:
+                  currentTab = EzTSType.quick;
+                  await EzConfig.setBool(advancedTextKey, false);
+                  break;
+                case EzTSType.advanced:
+                  currentTab = EzTSType.advanced;
+                  await EzConfig.setBool(advancedTextKey, true);
+                  break;
+              }
+              setState(() {});
+            },
           ),
           const EzSpacer(),
 
           // Settings
-          if (currentTab == EzSettingType.quick)
+          if (currentTab == EzTSType.quick)
             _QuickTextSettings(
               widget.showOpacity,
               widget.additionalBatchSettings,
@@ -174,7 +188,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final EFUILang l10n = EFUILang.of(context)!;
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color surfaceContainer = colorScheme.surfaceContainer;
+  late final Color surface = Theme.of(context).colorScheme.surface;
 
   // Gather the build data //
 
@@ -199,7 +213,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       EzConfig.getDefault(oKey) ??
       defaultTextOpacity;
 
-  late Color backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+  late Color backgroundColor = surface.withValues(alpha: currOpacity);
 
   late double currIconSize = EzConfig.getDouble(iconSizeKey) ??
       EzConfig.getDefault(iconSizeKey) ??
@@ -230,9 +244,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 key: UniqueKey(),
                 iconSize: currIconSize,
               ),
-              useSurface: true,
-              borderRadius: ezPillShape,
               backgroundColor: backgroundColor,
+              borderRadius: ezPillShape,
             ),
           ],
         ),
@@ -320,8 +333,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               onChanged: (double value) {
                 setState(() {
                   currOpacity = value;
-                  backgroundColor =
-                      surfaceContainer.withValues(alpha: currOpacity);
+                  backgroundColor = surface.withValues(alpha: currOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -408,9 +420,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                       ),
               ],
             ),
-            useSurface: true,
-            borderRadius: ezPillShape,
             backgroundColor: backgroundColor,
+            borderRadius: ezPillShape,
           ),
         ),
         separator,
@@ -427,7 +438,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             labelProvider.reset();
 
             currOpacity = EzConfig.getDefault(oKey) ?? defaultTextOpacity;
-            backgroundColor = surfaceContainer.withValues(alpha: currOpacity);
+            backgroundColor = surface.withValues(alpha: currOpacity);
 
             currIconSize = EzConfig.getDefault(iconSizeKey) ?? defaultIconSize;
 
@@ -768,8 +779,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$displayLetterSpacingKey-${displayProvider.id}'),
       configKey: displayLetterSpacingKey,
       initialValue: displayProvider.value.letterSpacing!,
-      min: minFontLetterSpacing,
-      max: maxFontLetterSpacing,
+      min: minLetterSpacing,
+      max: maxLetterSpacing,
       notifierCallback: displayProvider.setLetterSpacing,
       style: bodyProvider.value,
       icon: letterSpacingIcon,
@@ -779,8 +790,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$headlineLetterSpacingKey-${headlineProvider.id}'),
       configKey: headlineLetterSpacingKey,
       initialValue: headlineProvider.value.letterSpacing!,
-      min: minFontLetterSpacing,
-      max: maxFontLetterSpacing,
+      min: minLetterSpacing,
+      max: maxLetterSpacing,
       notifierCallback: headlineProvider.setLetterSpacing,
       style: bodyProvider.value,
       icon: letterSpacingIcon,
@@ -790,8 +801,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$titleLetterSpacingKey-${titleProvider.id}'),
       configKey: titleLetterSpacingKey,
       initialValue: titleProvider.value.letterSpacing!,
-      min: minFontLetterSpacing,
-      max: maxFontLetterSpacing,
+      min: minLetterSpacing,
+      max: maxLetterSpacing,
       notifierCallback: titleProvider.setLetterSpacing,
       style: bodyProvider.value,
       icon: letterSpacingIcon,
@@ -801,8 +812,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$bodyLetterSpacingKey-${bodyProvider.id}'),
       configKey: bodyLetterSpacingKey,
       initialValue: bodyProvider.value.letterSpacing!,
-      min: minFontLetterSpacing,
-      max: maxFontLetterSpacing,
+      min: minLetterSpacing,
+      max: maxLetterSpacing,
       notifierCallback: bodyProvider.setLetterSpacing,
       style: bodyProvider.value,
       icon: letterSpacingIcon,
@@ -812,8 +823,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$labelLetterSpacingKey-${labelProvider.id}'),
       configKey: labelLetterSpacingKey,
       initialValue: labelProvider.value.letterSpacing!,
-      min: minFontLetterSpacing,
-      max: maxFontLetterSpacing,
+      min: minLetterSpacing,
+      max: maxLetterSpacing,
       notifierCallback: labelProvider.setLetterSpacing,
       style: bodyProvider.value,
       icon: letterSpacingIcon,
@@ -828,8 +839,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$displayWordSpacingKey-${displayProvider.id}'),
       configKey: displayWordSpacingKey,
       initialValue: displayProvider.value.wordSpacing!,
-      min: minFontWordSpacing,
-      max: maxFontWordSpacing,
+      min: minWordSpacing,
+      max: maxWordSpacing,
       notifierCallback: displayProvider.setWordSpacing,
       style: bodyProvider.value,
       icon: wordSpacingIcon,
@@ -839,8 +850,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$headlineWordSpacingKey-${headlineProvider.id}'),
       configKey: headlineWordSpacingKey,
       initialValue: headlineProvider.value.wordSpacing!,
-      min: minFontWordSpacing,
-      max: maxFontWordSpacing,
+      min: minWordSpacing,
+      max: maxWordSpacing,
       notifierCallback: headlineProvider.setWordSpacing,
       style: bodyProvider.value,
       icon: wordSpacingIcon,
@@ -850,8 +861,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$titleWordSpacingKey-${titleProvider.id}'),
       configKey: titleWordSpacingKey,
       initialValue: titleProvider.value.wordSpacing!,
-      min: minFontWordSpacing,
-      max: maxFontWordSpacing,
+      min: minWordSpacing,
+      max: maxWordSpacing,
       notifierCallback: titleProvider.setWordSpacing,
       style: bodyProvider.value,
       icon: wordSpacingIcon,
@@ -861,8 +872,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$bodyWordSpacingKey-${bodyProvider.id}'),
       configKey: bodyWordSpacingKey,
       initialValue: bodyProvider.value.wordSpacing!,
-      min: minFontWordSpacing,
-      max: maxFontWordSpacing,
+      min: minWordSpacing,
+      max: maxWordSpacing,
       notifierCallback: bodyProvider.setWordSpacing,
       style: bodyProvider.value,
       icon: wordSpacingIcon,
@@ -872,8 +883,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
       key: ValueKey<String>('$labelWordSpacingKey-${labelProvider.id}'),
       configKey: labelWordSpacingKey,
       initialValue: labelProvider.value.wordSpacing!,
-      min: minFontWordSpacing,
-      max: maxFontWordSpacing,
+      min: minWordSpacing,
+      max: maxWordSpacing,
       notifierCallback: labelProvider.setWordSpacing,
       style: bodyProvider.value,
       icon: wordSpacingIcon,

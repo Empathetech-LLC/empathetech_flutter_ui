@@ -47,12 +47,7 @@ class OpenUIScaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final double toolbarHeight = ezTextSize(
-          appTitle,
-          style: Theme.of(context).appBarTheme.titleTextStyle,
-          context: context,
-        ).height +
-        EzConfig.get(marginKey);
+    final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
     // Define custom widgets //
 
@@ -61,7 +56,7 @@ class OpenUIScaffold extends StatelessWidget {
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
         tooltip: l10n.gOptions,
-        icon: const Icon(Icons.more_vert),
+        icon: Icon(Icons.more_vert, semanticLabel: l10n.gOptions),
       ),
       menuChildren: <Widget>[
         if (showSettings) SettingsButton(context),
@@ -69,7 +64,7 @@ class OpenUIScaffold extends StatelessWidget {
         EzFeedbackMenuButton(
           parentContext: context,
           appName: appTitle,
-          supportEmail: empathSupport,
+          supportEmail: 'support@empathetech.net',
         ),
         const OpenSourceButton(),
       ],

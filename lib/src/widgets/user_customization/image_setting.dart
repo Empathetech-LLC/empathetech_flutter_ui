@@ -425,6 +425,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     return showModalBottomSheet(
       context: context,
+      useSafeArea: true,
       isScrollControlled: true,
       builder: (_) => StatefulBuilder(
         builder: (BuildContext fitContext, StateSetter fitState) {
@@ -561,9 +562,8 @@ class _ImageSettingState extends State<EzImageSetting> {
 
           setState(() => inProgress = false);
 
-          if (context.mounted) {
+          if (mounted) {
             await ezLogAlert(
-              // ignore: use_build_context_synchronously
               context,
               title: l10n.isGetFailed,
               message:

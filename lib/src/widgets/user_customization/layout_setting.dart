@@ -294,6 +294,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
     return EzElevatedIconButton(
       onPressed: () => showModalBottomSheet(
         context: context,
+        useSafeArea: true,
         isScrollControlled: true,
         builder: (_) => StatefulBuilder(
           builder: (_, StateSetter setModalState) {

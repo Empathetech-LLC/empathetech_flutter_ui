@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -32,14 +33,16 @@ double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 
 /// Get the current [TargetPlatform]
-/// Even when [kIsWeb]
-TargetPlatform getBasePlatform(BuildContext context) =>
-    getHostPlatform(context);
+/// Alias exists for [kIsWeb] support
+TargetPlatform getBasePlatform() => getHostPlatform();
+
+/// Alias exists for [kIsWeb] support
+bool isApple() => cupertinoCheck();
 
 /// Button combo for taking a screenshot on the current (desktop) [TargetPlatform]
 /// Defaults to an empty string on mobile (and unknown) platforms
-String screenshotHint(BuildContext context) {
-  final TargetPlatform platform = getBasePlatform(context);
+String screenshotHint() {
+  final TargetPlatform platform = getBasePlatform();
 
   switch (platform) {
     case TargetPlatform.linux:
@@ -67,3 +70,17 @@ Duration ezReadingTime(String passage) {
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
     ((EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize);
+
+/// Calculate a recommended [AppBar.toolbarHeight]
+/// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
+double ezToolbarHeight(BuildContext context, String title, {TextStyle? style}) {
+  return max(
+    ezTextSize(
+          title,
+          context: context,
+          style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
+        ).height +
+        2 * EzConfig.get(marginKey),
+    kMinInteractiveDimension,
+  );
+}

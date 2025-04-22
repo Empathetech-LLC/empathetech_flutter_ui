@@ -35,7 +35,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   GeneratorState genState = GeneratorState.running;
   String failureMessage = '';
 
-  late final TargetPlatform platform = getBasePlatform(context);
+  final TargetPlatform platform = getBasePlatform();
 
   late final bool isDesktop = platform == TargetPlatform.linux ||
       platform == TargetPlatform.macOS ||
@@ -85,10 +85,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         return SizedBox(
           height: heightOf(context) / 3,
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(
-            height: double.infinity,
-            semantics: el10n.gLoadingAnim,
-          ),
+          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return Center(

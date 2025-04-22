@@ -22,8 +22,7 @@ double snackWidth({
 
   final double snackMargin = margin ?? EzConfig.get(marginKey);
 
-  final double countDownSize =
-      ezIconSize(Icons.circle, context, style: snackStyle).width * 2;
+  final double countDownSize = EzConfig.get(iconSizeKey) * 1.5;
 
   final double closeIconSize = showCloseIcon
       ? (Theme.of(context)

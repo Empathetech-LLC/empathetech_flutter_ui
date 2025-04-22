@@ -84,7 +84,9 @@ class OpenSourceButton extends StatelessWidget {
     final String text = l10n.gOpenSource;
 
     return EzMenuButton(
-      onPressed: () => launchUrl(Uri.parse(efuiGitHub)),
+      onPressed: () => launchUrl(
+        Uri.parse('https://github.com/Empathetech-LLC/empathetech_flutter_ui'),
+      ),
       semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
       icon: EzIcon(LineIcons.github),
       label: text,

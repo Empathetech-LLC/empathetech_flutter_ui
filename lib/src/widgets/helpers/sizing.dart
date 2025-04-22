@@ -69,18 +69,18 @@ double ezDropdownWidth({
   required BuildContext context,
   required List<String> entries,
 }) {
-  final TextTheme textTheme = Theme.of(context).textTheme;
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double iconSize = EzConfig.get(iconSizeKey);
 
-  return margin +
+  final TextTheme textTheme = Theme.of(context).textTheme;
+
+  return 2 * margin +
       ezTextSize(
         getLongest(entries),
         context: context,
         style: textTheme.bodyLarge,
       ).width +
-      (padding * 2) +
-      ezIconSize(Icons.arrow_drop_down, context).width +
       padding +
-      margin;
+      max(padding + iconSize, kMinInteractiveDimension);
 }

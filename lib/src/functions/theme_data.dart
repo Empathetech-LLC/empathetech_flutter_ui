@@ -194,7 +194,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: BorderSide.none,
         iconSize: iconSize,
         alignment: Alignment.center,
-        padding: EdgeInsets.zero,
+        padding: EzInsets.wrap(padding),
       ),
     ),
 

@@ -8,9 +8,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// [debugPrint] alias; for permanent logging
 /// Reserving [debugPrint] for temporary logging makes them easier to remove when the time comes
+/// Optionally provide a [prefix] to make log filtering easier (include spaces!)
 /// Also supports logging to a [String] 'buffer' (aka [ValueNotifier])
-void ezLog(String message, {int? wrapWidth, ValueNotifier<String>? buffer}) {
-  debugPrint(message, wrapWidth: wrapWidth);
+void ezLog(
+  String message, {
+  String prefix = '',
+  int? wrapWidth,
+  ValueNotifier<String>? buffer,
+}) {
+  debugPrint(prefix + message, wrapWidth: wrapWidth);
   if (buffer != null) buffer.value += ('$message\n');
 }
 

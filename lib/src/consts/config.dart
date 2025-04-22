@@ -7,116 +7,11 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-//// Brand names ////
+//** Brand config **//
 
-/// Short == EFUI
-const String efuiS = 'EFUI';
+//* Default *//
 
-/// Long == Empathetech Flutter UI
-const String efuiL = 'Empathetech Flutter UI';
-
-/// Empathetic Flutter UI
-const String efuiLFix = 'Empathetic Flutter UI';
-
-//// Brand links ////
-
-// Code //
-
-/// Where the magic happens
-/// https://github.com/Empathetech-LLC
-const String empathGitHub = 'https://github.com/Empathetech-LLC';
-
-/// EFUI source
-/// https://github.com/Empathetech-LLC/empathetech_flutter_ui
-const String efuiGitHub =
-    'https://github.com/Empathetech-LLC/empathetech_flutter_ui';
-
-/// [https://m3.material.io/styles/color/roles]
-const String materialColorRoles = 'https://m3.material.io/styles/color/roles';
-
-// Internal links //
-
-/// Where we rep the goods
-/// 'https://www.empathetech.net/#/products/open-ui'
-const String openUIProdPage = 'https://www.empathetech.net/#/products/open-ui';
-
-/// Where new journeys begin
-/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
-const String openUIReleases =
-    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
-
-// Emails //
-
-/// If you want to lend a hand
-/// community@empathetech.net
-const String empathCommunity = 'community@empathetech.net';
-
-/// If you need a hand
-/// support@empathetech.net
-const String empathSupport = 'support@empathetech.net';
-
-/// If you want to say hi
-/// mwaldron@empathetech.net
-const String empathFounder = 'mwaldron@empathetech.net';
-
-// Socials //
-
-/// If you want to stay informed
-/// http://eepurl.com/iHe_I2
-const String empathNewsletter = 'http://eepurl.com/iHe_I2';
-
-/// If you want to get in touch
-/// https://mastodon.social/@empathetech
-const String empathMastodon = 'https://mastodon.social/@empathetech';
-
-/// If you want to get in touch
-/// https://bsky.app/profile/empathetech.net
-const String empathBluesky = 'https://bsky.app/profile/empathetech.net';
-
-/// If you want to get in touch
-/// https://linkedin.com/company/empathetech-llc
-const String empathLinkedIn = 'https://linkedin.com/company/empathetech-llc';
-
-// Community //
-
-/// One of us, one of us, one of us!
-/// https://stats.foldingathome.org/team/1063265
-const String empathFoldingTeam = 'https://stats.foldingathome.org/team/1063265';
-
-// Crowdfunding //
-
-/// If you want to show some love
-/// https://gofund.me/c047d07e
-const String empathGoFundMe = 'https://gofund.me/c047d07e';
-
-/// If you want to show some love
-/// https://patreon.com/empathetech
-const String empathPatreon = 'https://patreon.com/empathetech';
-
-/// If you want to show some love
-/// https://www.buymeacoffee.com/empathetech
-const String empathCoffee = 'https://www.buymeacoffee.com/empathetech';
-
-/// If you want to show some love
-/// https://ko-fi.com/empathetech
-const String empathKofi = 'https://ko-fi.com/empathetech';
-
-/// If you want to show some love
-/// https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL
-const String empathPayPal =
-    'https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL';
-
-/// If you want to show some love
-/// https://venmo.com/empathetech
-const String empathVenmo = 'https://venmo.com/empathetech';
-
-/// If you want to show some love
-/// https://cash.app/$empathetech
-const String empathCashApp = 'https://cash.app/\$empathetech';
-
-//// Brand config ////
-
-// Text theme //
+// Text settings //
 
 /// 42.0
 const double defaultDisplaySize = 42.0;
@@ -148,18 +43,18 @@ const double defaultLetterSpacing = 0.25;
 /// 1.0
 const double defaultWordSpacing = 1.0;
 
-// Layout //
+// Layout settings //
 
 /// 10.0
 const double defaultMargin = 10.0;
 
-/// 20.0
-const double defaultPadding = 20.0;
+/// 17.5
+const double defaultPadding = 17.5;
 
 /// 25.0
 const double defaultSpacing = 25.0;
 
-// Color scheme //
+// Color settings //
 
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
@@ -218,7 +113,115 @@ const Color empathOffBlack = Color(offBlackHex);
 /// 0xFF000000
 const int transparentHex = 0x00000000;
 
-// Map //
+//* Min *//
+
+// Text theme //
+
+/// 21.0
+const double minDisplay = 21.0;
+
+/// 16.0
+const double minHeadline = 16.0;
+
+/// 11.0
+const double minTitle = 11.0;
+
+/// 8.0
+const double minBody = 8.0;
+
+/// 7.0
+const double minLabel = 7.0;
+
+/// 21.0, 16.0, 11.0, 8.0, 7.0
+const Map<String, double> fontSizeMins = <String, double>{
+  displayFontSizeKey: minDisplay,
+  headlineFontSizeKey: minHeadline,
+  titleFontSizeKey: minTitle,
+  bodyFontSizeKey: minBody,
+  labelFontSizeKey: minLabel,
+};
+
+/// 0.0
+const double minOpacity = 0.0;
+
+/// 16.0
+const double minIconSize = 16.0;
+
+/// 0.0
+const double minLetterSpacing = 0.0;
+
+/// 0.0
+const double minWordSpacing = 0.0;
+
+/// 1.0
+const double minFontHeight = 1.0;
+
+// Layout settings //
+
+/// 5.0
+const double minMargin = 5.0;
+
+/// 10.0
+const double minPadding = 10.0;
+
+/// 10.0
+const double minSpacing = 10.0;
+
+//* Max *//
+
+// Text settings //
+
+/// 84.0
+const double maxDisplay = 84.0;
+
+/// 64.0
+const double maxHeadline = 64.0;
+
+/// 42.0
+const double maxTitle = 42.0;
+
+/// 32.0
+const double maxBody = 32.0;
+
+/// 28.0
+const double maxLabel = 28.0;
+
+/// 84.0, 64.0, 42.0, 32.0, 28.0
+const Map<String, double> fontSizeMaxes = <String, double>{
+  displayFontSizeKey: maxDisplay,
+  headlineFontSizeKey: maxHeadline,
+  titleFontSizeKey: maxTitle,
+  bodyFontSizeKey: maxBody,
+  labelFontSizeKey: maxLabel,
+};
+
+/// 1.0
+const double maxOpacity = 1.0;
+
+/// 48.0
+const double maxIconSize = 48.0;
+
+/// 2.0
+const double maxLetterSpacing = 2.0;
+
+/// 3.0
+const double maxWordSpacing = 3.0;
+
+/// 2.0
+const double maxFontHeight = 2.0;
+
+// Layout settings //
+
+/// 20.0
+const double maxMargin = 20.0;
+
+/// 40.0
+const double maxPadding = 40.0;
+
+/// 50.0
+const double maxSpacing = 75.0;
+
+//* Maps *//
 
 /// Empathetech [EzConfig.defaults]
 const Map<String, Object> empathetechConfig = <String, Object>{
@@ -285,6 +288,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Icon size
   iconSizeKey: defaultIconSize,
 
+  // Selector
+  advancedTextKey: false,
+
   // Layout settings //
 
   marginKey: defaultMargin,
@@ -339,6 +345,9 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
 
+  // Selector
+  advancedColorsKey: false,
+
   // Image settings //
 
   lightBackgroundImageKey: noImageValue,
@@ -346,4 +355,96 @@ const Map<String, Object> empathetechConfig = <String, Object>{
 
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
+};
+
+/// For testing
+/// [EzConfig.defaults] set to all recommended max values
+final Map<String, Object> empathetechMaxConfig = <String, Object>{
+  ...empathetechConfig,
+
+  // Text settings //
+
+  // Display
+  displayFontSizeKey: maxDisplay,
+  displayFontHeightKey: maxFontHeight,
+  displayLetterSpacingKey: maxLetterSpacing,
+  displayWordSpacingKey: maxWordSpacing,
+
+  // Headline
+  headlineFontSizeKey: maxHeadline,
+  headlineFontHeightKey: maxFontHeight,
+  headlineLetterSpacingKey: maxLetterSpacing,
+  headlineWordSpacingKey: maxWordSpacing,
+
+  // Title
+  titleFontSizeKey: maxTitle,
+  titleFontHeightKey: maxFontHeight,
+  titleLetterSpacingKey: maxLetterSpacing,
+  titleWordSpacingKey: maxWordSpacing,
+
+  // Body
+  bodyFontSizeKey: maxBody,
+  bodyFontHeightKey: maxFontHeight,
+  bodyLetterSpacingKey: maxLetterSpacing,
+  bodyWordSpacingKey: maxWordSpacing,
+
+  // Label
+  labelFontSizeKey: maxLabel,
+  labelFontHeightKey: maxFontHeight,
+  labelLetterSpacingKey: maxLetterSpacing,
+  labelWordSpacingKey: maxWordSpacing,
+
+  iconSizeKey: maxIconSize,
+
+  // Layout settings //
+
+  marginKey: maxMargin,
+  paddingKey: maxPadding,
+  spacingKey: maxSpacing,
+};
+
+/// For testing
+/// [EzConfig.defaults] set to all recommended min values
+final Map<String, Object> empathetechMinConfig = <String, Object>{
+  ...empathetechConfig,
+
+  // Text settings //
+
+  // Display
+  displayFontSizeKey: minDisplay,
+  displayFontHeightKey: minFontHeight,
+  displayLetterSpacingKey: minLetterSpacing,
+  displayWordSpacingKey: minWordSpacing,
+
+  // Headline
+  headlineFontSizeKey: minHeadline,
+  headlineFontHeightKey: minFontHeight,
+  headlineLetterSpacingKey: minLetterSpacing,
+  headlineWordSpacingKey: minWordSpacing,
+
+  // Title
+  titleFontSizeKey: minTitle,
+  titleFontHeightKey: minFontHeight,
+  titleLetterSpacingKey: minLetterSpacing,
+  titleWordSpacingKey: minWordSpacing,
+
+  // Body
+  bodyFontSizeKey: minBody,
+  bodyFontHeightKey: minFontHeight,
+  bodyLetterSpacingKey: minLetterSpacing,
+  bodyWordSpacingKey: minWordSpacing,
+
+  // Label
+  labelFontSizeKey: minLabel,
+  labelFontHeightKey: minFontHeight,
+  labelLetterSpacingKey: minLetterSpacing,
+  labelWordSpacingKey: minWordSpacing,
+
+  iconSizeKey: minIconSize,
+
+  // Layout settings //
+
+  marginKey: minMargin,
+  paddingKey: minPadding,
+  spacingKey: minSpacing,
 };

@@ -19,56 +19,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  final Map<String, Object> testConfig = <String, Object>{
-    ...empathetechConfig,
-    isDarkThemeKey: true,
-
-    // Text settings //
-
-    // Display
-    displayFontSizeKey: maxDisplay,
-    displayFontHeightKey: maxFontHeight,
-    displayLetterSpacingKey: maxFontLetterSpacing,
-    displayWordSpacingKey: maxFontWordSpacing,
-
-    // Headline
-    headlineFontSizeKey: maxHeadline,
-    headlineFontHeightKey: maxFontHeight,
-    headlineLetterSpacingKey: maxFontLetterSpacing,
-    headlineWordSpacingKey: maxFontWordSpacing,
-
-    // Title
-    titleFontSizeKey: maxTitle,
-    titleFontHeightKey: maxFontHeight,
-    titleLetterSpacingKey: maxFontLetterSpacing,
-    titleWordSpacingKey: maxFontWordSpacing,
-
-    // Body
-    bodyFontSizeKey: maxBody,
-    bodyFontHeightKey: maxFontHeight,
-    bodyLetterSpacingKey: maxFontLetterSpacing,
-    bodyWordSpacingKey: maxFontWordSpacing,
-
-    // Label
-    labelFontSizeKey: maxLabel,
-    labelFontHeightKey: maxFontHeight,
-    labelLetterSpacingKey: maxFontLetterSpacing,
-    labelWordSpacingKey: maxFontWordSpacing,
-
-    // Layout settings //
-
-    marginKey: maxMargin,
-    paddingKey: maxPadding,
-    spacingKey: maxSpacing,
-  };
-
-  SharedPreferences.setMockInitialValues(testConfig);
+  SharedPreferences.setMockInitialValues(empathetechMaxConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: testConfig,
+    defaults: empathetechMaxConfig,
   );
 
   group(

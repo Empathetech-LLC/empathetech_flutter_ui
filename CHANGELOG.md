@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.1.0] - 2025-04-20
+### Added
+- customActions param to ezLog
+- Testing configs
+- ezToolbarHeight
+- Consideration for kMinInteractiveDimension in adaptive layout(s)
+
+### Changed
+- Code cleanup
+- EzSettingType enum
+  - Breaking change; split into separate enums
+
+### Removed
+- Config bloat
+- ezIconSize
+  - Added iconSizeKey to EzConfig
+
 ## [8.0.2] - 2025-02-27
 ### Updated
 - Copyright year from range to current year

@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 
 /// Get the host [TargetPlatform] on web
 /// via the [window]'s userAgent
-TargetPlatform getHostPlatform(BuildContext context) {
+TargetPlatform getHostPlatform() {
   final String userAgent = window.navigator.userAgent;
 
   if (userAgent.contains('Android')) {
     return TargetPlatform.android;
-  } else if (userAgent.contains('iPhone') || userAgent.contains('iPad')) {
+  } else if (userAgent.contains('iPhone') ||
+      userAgent.contains('iPad') ||
+      userAgent.contains('iPod')) {
     return TargetPlatform.iOS;
   } else if (userAgent.contains('Mac OS')) {
     return TargetPlatform.macOS;
@@ -21,5 +23,19 @@ TargetPlatform getHostPlatform(BuildContext context) {
     return TargetPlatform.windows;
   } else {
     return TargetPlatform.linux;
+  }
+}
+
+/// Checks the [window]'s userAgent for Apple devices
+bool cupertinoCheck() {
+  final String userAgent = window.navigator.userAgent;
+
+  if (userAgent.contains('iPhone') ||
+      userAgent.contains('Mac OS') ||
+      userAgent.contains('iPad') ||
+      userAgent.contains('iPod')) {
+    return true;
+  } else {
+    return false;
   }
 }

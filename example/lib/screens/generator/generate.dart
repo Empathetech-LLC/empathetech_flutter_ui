@@ -43,18 +43,19 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// Quantum supremacy achieved
   bool? showDelete = true;
 
-  late final TargetPlatform platform = getBasePlatform(context);
+  final TargetPlatform platform = getBasePlatform();
   late final bool isWindows = platform == TargetPlatform.windows;
 
   String device() {
-    if (platform == TargetPlatform.linux) {
-      return 'linux';
-    } else if (platform == TargetPlatform.macOS) {
-      return 'macos';
-    } else if (isWindows) {
-      return 'windows';
-    } else {
-      return 'chrome';
+    switch (platform) {
+      case TargetPlatform.linux:
+        return 'linux';
+      case TargetPlatform.macOS:
+        return 'macos';
+      case TargetPlatform.windows:
+        return 'windows';
+      default:
+        return 'chrome';
     }
   }
 
@@ -349,10 +350,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         return SizedBox(
           height: (heightOf(context) / 3),
           width: double.infinity,
-          child: EmpathetechLoadingAnimation(
-            height: double.infinity,
-            semantics: el10n.gLoadingAnim,
-          ),
+          child: EmpathetechLoadingAnimation(semantics: el10n.gLoadingAnim),
         );
       case GeneratorState.successful:
         return SizedBox(

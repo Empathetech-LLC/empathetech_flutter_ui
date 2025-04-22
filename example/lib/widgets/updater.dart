@@ -10,6 +10,17 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+const String _gPlay =
+    'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
+
+const String _appStore = 'https://apps.apple.com/us/app/open-ui/id6499560244';
+
+const String _github =
+    'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
+
+const String _versionSource =
+    'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
+
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
   /// [FloatingActionButton] (wrapped in a [Visibility]) that links to the latest version
@@ -22,17 +33,16 @@ class EzUpdater extends StatefulWidget {
 class _EzUpdaterState extends State<EzUpdater> {
   // Define build data //
 
-  bool isLatest = true;
   String? latestVersion;
+  String? url;
 
-  static const String appVersionLink =
-      'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
+  bool isLatest = true; // True to start to prevent flickering
 
   // Define custom functions //
 
   /// Check for Open UI updates
   void checkVersion() async {
-    final http.Response response = await http.get(Uri.parse(appVersionLink));
+    final http.Response response = await http.get(Uri.parse(_versionSource));
 
     if (response.statusCode != 200) return;
 
@@ -60,32 +70,27 @@ class _EzUpdaterState extends State<EzUpdater> {
   void initState() {
     super.initState();
     checkVersion();
+
+    final TargetPlatform platform = getBasePlatform();
+    switch (platform) {
+      case TargetPlatform.android:
+        url = _gPlay;
+      case TargetPlatform.iOS:
+        url = _appStore;
+      default:
+        url = _github;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final TargetPlatform platform = getBasePlatform(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Visibility(
       visible: !isLatest,
       child: FloatingActionButton(
         heroTag: null,
-        onPressed: () {
-          late String url;
-
-          switch (platform) {
-            case TargetPlatform.android:
-              url =
-                  'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
-            case TargetPlatform.iOS:
-              url = 'https://apps.apple.com/us/app/open-ui/id6499560244';
-            default:
-              url = openUIReleases;
-          }
-
-          launchUrl(Uri.parse(url));
-        },
+        onPressed: () => launchUrl(Uri.parse(url ?? _github)),
         tooltip: EFUILang.of(context)!.gUpdates,
         backgroundColor: colorScheme.secondary,
         foregroundColor: colorScheme.onSecondary,

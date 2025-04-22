@@ -194,6 +194,12 @@ abstract class EFUILang {
   /// **'Close'**
   String get gClose;
 
+  /// No description provided for @gDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get gDisabled;
+
   /// No description provided for @gError.
   ///
   /// In en, this message translates to:
