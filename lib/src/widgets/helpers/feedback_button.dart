@@ -25,7 +25,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
   final String supportEmail;
 
   /// Activates the [BetterFeedback] tool and shares the results with [supportEmail]
-  /// [Share.shareXFiles] on mobile, classic mailto everywhere else
+  /// Uses [SharePlus] on mobile, classic mailto everywhere else
   const EzFeedbackMenuButton({
     super.key,
     required this.parentContext,
@@ -57,16 +57,16 @@ class EzFeedbackMenuButton extends StatelessWidget {
           BetterFeedback.of(parentContext).show(
             (UserFeedback feedback) async {
               if (isMobile) {
-                await Share.shareXFiles(
-                  <XFile>[
+                await SharePlus.instance.share(ShareParams(
+                  text: feedback.text,
+                  files: <XFile>[
                     XFile.fromData(
                       feedback.screenshot,
                       name: 'screenshot.png',
                       mimeType: 'image/png',
                     )
                   ],
-                  text: feedback.text,
-                );
+                ));
               } else {
                 await FileSaver.instance.saveFile(
                   name: 'screenshot.png',
