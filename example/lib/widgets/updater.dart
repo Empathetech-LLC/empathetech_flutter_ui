@@ -67,7 +67,7 @@ class _EzUpdaterState extends State<EzUpdater> {
           return;
         } else if (latestDigits[i] < appDigits[i]) {
           return;
-        }
+        } // if == continue
       }
     }
   }
