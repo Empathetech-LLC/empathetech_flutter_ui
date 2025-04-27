@@ -19,13 +19,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(empathetechConfig);
+  SharedPreferences.setMockInitialValues(mobileEmpathConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: empathetechConfig,
+    defaults: mobileEmpathConfig,
   );
 
   group(

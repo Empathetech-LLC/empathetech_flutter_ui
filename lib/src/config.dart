@@ -297,6 +297,7 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Define data //
 
     final Random random = Random();
+    final bool onMobile = isMobile();
 
     double getScalar() => (random.nextDouble() * 1.5) + 0.5;
 
@@ -389,8 +390,14 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Update layout settings //
 
     await setDouble(marginKey, defaultMargin * getScalar());
-    await setDouble(paddingKey, defaultPadding * getScalar());
-    await setDouble(spacingKey, defaultSpacing * getScalar());
+    await setDouble(
+      paddingKey,
+      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+    );
+    await setDouble(
+      spacingKey,
+      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+    );
 
     await setBool(hideScrollKey, random.nextBool());
 

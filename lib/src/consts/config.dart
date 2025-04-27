@@ -49,10 +49,16 @@ const double defaultWordSpacing = 1.0;
 const double defaultMargin = 10.0;
 
 /// 17.5
-const double defaultPadding = 17.5;
+const double defaultMobilePadding = 17.5;
+
+/// 17.5
+const double defaultDesktopPadding = 22.5;
 
 /// 25.0
-const double defaultSpacing = 25.0;
+const double defaultMobileSpacing = 25.0;
+
+/// 25.0
+const double defaultDesktopSpacing = 30.0;
 
 // Color settings //
 
@@ -223,8 +229,8 @@ const double maxSpacing = 75.0;
 
 //* Maps *//
 
-/// Empathetech [EzConfig.defaults]
-const Map<String, Object> empathetechConfig = <String, Object>{
+/// Empathetech [EzConfig.defaults] base to build from
+const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Global settings //
 
   isLeftyKey: false,
@@ -294,9 +300,6 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   // Layout settings //
 
   marginKey: defaultMargin,
-  paddingKey: defaultPadding,
-  spacingKey: defaultSpacing,
-
   hideScrollKey: false,
 
   // Color settings //
@@ -357,10 +360,22 @@ const Map<String, Object> empathetechConfig = <String, Object>{
   '$darkBackgroundImageKey$boxFitSuffix': none,
 };
 
+const Map<String, Object> mobileEmpathConfig = <String, Object>{
+  ...baseEmpathConfig,
+  paddingKey: defaultMobilePadding,
+  spacingKey: defaultMobileSpacing,
+};
+
+const Map<String, Object> desktopEmpathConfig = <String, Object>{
+  ...baseEmpathConfig,
+  paddingKey: defaultDesktopPadding,
+  spacingKey: defaultDesktopSpacing,
+};
+
 /// For testing
 /// [EzConfig.defaults] set to all recommended max values
 final Map<String, Object> empathetechMaxConfig = <String, Object>{
-  ...empathetechConfig,
+  ...baseEmpathConfig,
 
   // Text settings //
 
@@ -406,7 +421,7 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
 /// For testing
 /// [EzConfig.defaults] set to all recommended min values
 final Map<String, Object> empathetechMinConfig = <String, Object>{
-  ...empathetechConfig,
+  ...baseEmpathConfig,
 
   // Text settings //
 

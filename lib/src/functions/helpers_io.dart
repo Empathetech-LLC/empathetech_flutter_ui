@@ -6,8 +6,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
+/// True if [Platform.isIOS] or [Platform.isMacOS]
+bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
+
+/// True if [Platform.isAndroid] or [Platform.isIOS]
+bool mobileCheck() => Platform.isAndroid || Platform.isIOS;
+
+/// True if [Platform.isMacOS], [Platform.isWindows], or [Platform.isLinux]
+/// [Platform.isFuchsia] is currently skipped
+bool desktopCheck() =>
+    Platform.isMacOS || Platform.isWindows || Platform.isLinux;
+
 /// Get the current [TargetPlatform] the slow (and reliable) way
 /// Checking each [Platform].is
+/// [TargetPlatform.fuchsia] is currently absorbed by [TargetPlatform.linux]
 TargetPlatform getHostPlatform() {
   if (Platform.isAndroid) {
     return TargetPlatform.android;
@@ -21,6 +33,3 @@ TargetPlatform getHostPlatform() {
     return TargetPlatform.linux;
   }
 }
-
-/// True if [Platform.isIOS] or [Platform.isMacOS]
-bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
