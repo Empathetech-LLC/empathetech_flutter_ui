@@ -133,8 +133,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Gather the theme data //
 
   final TargetPlatform platform = getBasePlatform();
-  late final bool isMobile =
-      platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+  late final bool onMobile = isMobile();
 
   final EzSpacer ezMargin = EzMargin();
   final EzSpacer pmSpacer = EzMargin(vertical: false);
@@ -168,7 +167,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   bool hovering = false;
 
-  late final bool persistentControls = isMobile ||
+  late final bool persistentControls = onMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
       widget.volumeVis == EzButtonVis.alwaysOn ||
       widget.timeSliderVis == EzButtonVis.alwaysOn;
@@ -185,7 +184,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   // Define custom functions //
 
   Future<void> play() async {
-    if (isMobile) setState(() => hovering = true);
+    if (onMobile) setState(() => hovering = true);
 
     if (widget.controller.value.isCompleted) {
       await widget.controller.seekTo(Duration.zero);
@@ -194,7 +193,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       await widget.controller.play();
     }
 
-    if (isMobile) {
+    if (onMobile) {
       Future<void>.delayed(
         Duration(seconds: widget.mobileDelay),
         () => setState(() => hovering = false),
@@ -203,11 +202,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   }
 
   Future<void> pause() async {
-    if (isMobile) setState(() => hovering = true);
+    if (onMobile) setState(() => hovering = true);
 
     await widget.controller.pause();
 
-    if (isMobile) {
+    if (onMobile) {
       Future<void>.delayed(
         Duration(seconds: widget.mobileDelay),
         () => setState(() => hovering = false),
@@ -246,7 +245,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         return false;
       case EzButtonVis.auto:
         if (hovering ||
-            ((isMobile || widget.showOnPause) &&
+            ((onMobile || widget.showOnPause) &&
                 !widget.controller.value.isPlaying)) {
           return true;
         } else {

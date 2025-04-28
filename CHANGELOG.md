@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.1.1] - 2025-04-27
+### Added
+- Split between default mobile and desktop configs
+  - Technically a breaking change, just need to update the parameter name
+    - Implementing the split is optional; the old default is now mobileEmpathConfig
+- isMobile and isDesktop PlatformTarget helpers
+
+### Updated
+- Version tracking checks in CI/CD
+- SharePlus package
+
 ## [8.1.0] - 2025-04-20
 ### Added
 - customActions param to ezLog

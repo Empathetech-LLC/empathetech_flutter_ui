@@ -75,7 +75,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
             style: Theme.of(context).textTheme.labelLarge,
             textAlign: TextAlign.center,
           ),
-          EzMargin(),
+          separator,
 
           // Page image setting
           EzScrollView(

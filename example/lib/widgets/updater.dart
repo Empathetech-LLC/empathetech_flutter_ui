@@ -3,23 +3,28 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../utils/export.dart';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+/// 'https://play.google.com/store/apps/details?id=net.empathetech.open_ui'
 const String _gPlay =
     'https://play.google.com/store/apps/details?id=net.empathetech.open_ui';
 
+/// 'https://apps.apple.com/us/app/open-ui/id6499560244'
 const String _appStore = 'https://apps.apple.com/us/app/open-ui/id6499560244';
 
+/// 'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases'
 const String _github =
     'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases';
 
+/// 'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION'
 const String _versionSource =
     'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
+
+/// '2.1.1'
+const String _appVersion = '2.1.1';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
@@ -47,13 +52,14 @@ class _EzUpdaterState extends State<EzUpdater> {
     if (response.statusCode != 200) return;
 
     latestVersion = response.body;
-    if (latestVersion != appVersion && latestVersion != null) {
+    if (latestVersion != _appVersion && latestVersion != null) {
       final List<int> latestDigits =
           latestVersion!.split('.').map(int.parse).toList();
 
       if (latestDigits.length != 3) return;
 
-      final List<int> appDigits = appVersion.split('.').map(int.parse).toList();
+      final List<int> appDigits =
+          _appVersion.split('.').map(int.parse).toList();
 
       for (int i = 0; i < latestDigits.length; i++) {
         if (latestDigits[i] > appDigits[i]) {
@@ -61,7 +67,7 @@ class _EzUpdaterState extends State<EzUpdater> {
           return;
         } else if (latestDigits[i] < appDigits[i]) {
           return;
-        }
+        } // if == continue
       }
     }
   }

@@ -35,7 +35,7 @@ void main() async {
   EzConfig.init(
     assetPaths: <String>{},
     preferences: prefs,
-    defaults: empathetechConfig,
+    defaults: isMobile() ? mobileEmpathConfig : desktopEmpathConfig,
   );
 
   // Run the app //

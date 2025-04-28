@@ -5,7 +5,6 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:feedback/feedback.dart';
@@ -25,7 +24,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
   final String supportEmail;
 
   /// Activates the [BetterFeedback] tool and shares the results with [supportEmail]
-  /// [Share.shareXFiles] on mobile, classic mailto everywhere else
+  /// Uses [SharePlus] on mobile, classic mailto everywhere else
   const EzFeedbackMenuButton({
     super.key,
     required this.parentContext,
@@ -37,11 +36,11 @@ class EzFeedbackMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final EFUILang l10n = EFUILang.of(context)!;
 
-    final bool isMobile = !kIsWeb && (Platform.isAndroid || Platform.isIOS);
+    final bool strictMobile = !kIsWeb && isMobile();
 
     return EzMenuButton(
       onPressed: () async {
-        if (isMobile) {
+        if (strictMobile) {
           await Clipboard.setData(ClipboardData(text: supportEmail));
 
           if (parentContext.mounted) {
@@ -56,17 +55,17 @@ class EzFeedbackMenuButton extends StatelessWidget {
         if (parentContext.mounted) {
           BetterFeedback.of(parentContext).show(
             (UserFeedback feedback) async {
-              if (isMobile) {
-                await Share.shareXFiles(
-                  <XFile>[
+              if (strictMobile) {
+                await SharePlus.instance.share(ShareParams(
+                  text: feedback.text,
+                  files: <XFile>[
                     XFile.fromData(
                       feedback.screenshot,
                       name: 'screenshot.png',
                       mimeType: 'image/png',
                     )
                   ],
-                  text: feedback.text,
-                );
+                ));
               } else {
                 await FileSaver.instance.saveFile(
                   name: 'screenshot.png',
