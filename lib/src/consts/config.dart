@@ -52,7 +52,7 @@ const double defaultMargin = 10.0;
 const double defaultMobilePadding = 17.5;
 
 /// 17.5
-const double defaultDesktopPadding = 22.5;
+const double defaultDesktopPadding = 20.0;
 
 /// 25.0
 const double defaultMobileSpacing = 25.0;

@@ -63,7 +63,7 @@ import 'efui_lang_fr.dart' deferred as efui_lang_fr;
 /// property.
 abstract class EFUILang {
   EFUILang(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -85,17 +85,17 @@ abstract class EFUILang {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
-    Locale('fr')
+    Locale('fr'),
   ];
 
   /// No description provided for @gApply.
@@ -1025,22 +1025,23 @@ Future<EFUILang> lookupEFUILang(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return efui_lang_en
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_en.EFUILangEn());
+      return efui_lang_en.loadLibrary().then(
+        (dynamic _) => efui_lang_en.EFUILangEn(),
+      );
     case 'es':
-      return efui_lang_es
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_es.EFUILangEs());
+      return efui_lang_es.loadLibrary().then(
+        (dynamic _) => efui_lang_es.EFUILangEs(),
+      );
     case 'fr':
-      return efui_lang_fr
-          .loadLibrary()
-          .then((dynamic _) => efui_lang_fr.EFUILangFr());
+      return efui_lang_fr.loadLibrary().then(
+        (dynamic _) => efui_lang_fr.EFUILangFr(),
+      );
   }
 
   throw FlutterError(
-      'EFUILang.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'EFUILang.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }
