@@ -153,7 +153,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     thumbColor: iconColor,
   );
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final TextStyle? labelStyle =
       Theme.of(context).textTheme.labelLarge?.copyWith(color: widget.textColor);

@@ -16,11 +16,11 @@ enum EzLayoutSettingType { margin, padding, spacing }
 String ezLstName(BuildContext context, EzLayoutSettingType settingType) {
   switch (settingType) {
     case EzLayoutSettingType.margin:
-      return EFUILang.of(context)!.lsMargin;
+      return ezL10n(context).lsMargin;
     case EzLayoutSettingType.padding:
-      return EFUILang.of(context)!.lsPadding;
+      return ezL10n(context).lsPadding;
     case EzLayoutSettingType.spacing:
-      return EFUILang.of(context)!.lsSpacing;
+      return ezL10n(context).lsSpacing;
   }
 }
 
@@ -96,7 +96,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   late final TextStyle? bodyStyle =
       widget.bodyStyle ?? theme.textTheme.bodyLarge;
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define build functions //
 

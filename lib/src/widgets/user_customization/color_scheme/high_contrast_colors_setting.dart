@@ -44,7 +44,7 @@ class EzHighContrastColorsSetting extends StatelessWidget {
         Icons.contrast,
         color: Theme.of(context).colorScheme.onSurface,
       ),
-      label: EFUILang.of(context)!.csHighContrast,
+      label: ezL10n(context).csHighContrast,
     );
   }
 }
