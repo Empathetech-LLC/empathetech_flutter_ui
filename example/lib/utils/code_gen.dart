@@ -437,7 +437,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.1.1
+  empathetech_flutter_ui: ^9.0.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^8.0.0
@@ -773,7 +773,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: EFUILang.of(context)!.ssPageTitle,
+        label: ezL10n(context).ssPageTitle,
       );
 }
 
@@ -790,7 +790,7 @@ class EFUICredits extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
     final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
     final String tip = l10n.gOpenEmpathetech;
     final String settings = l10n.ssPageTitle;
@@ -849,7 +849,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     // Gather the theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
@@ -955,7 +955,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -1090,7 +1090,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.ssPageTitle,
+        title: ezL10n(context).ssPageTitle,
         showSettings: false,
         body: const EzSettingsHome(
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
@@ -1122,7 +1122,7 @@ class TextSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.tsPageTitle,
+        title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzTextSettings(target: target),
         fab: EzBackFAB(context),
@@ -1148,7 +1148,7 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.lsPageTitle,
+        title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
         fab: EzBackFAB(context),
@@ -1176,7 +1176,7 @@ class ColorSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.csPageTitle,
+        title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzColorSettings(target: target),
         fab: EzBackFAB(context),
@@ -1202,7 +1202,7 @@ class ImageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.isPageTitle,
+        title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
         fab: EzBackFAB(context),

@@ -45,7 +45,7 @@ class OpenUIScaffold extends StatelessWidget {
     // Gather the theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
