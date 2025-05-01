@@ -59,7 +59,7 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
         widget.notifierCallback(isBold);
         setState(() {});
       },
-      tooltip: EFUILang.of(context)!.tsBold,
+      tooltip: ezL10n(context).tsBold,
       iconSize: widget.size,
       icon: const Icon(Icons.format_bold_outlined),
     );

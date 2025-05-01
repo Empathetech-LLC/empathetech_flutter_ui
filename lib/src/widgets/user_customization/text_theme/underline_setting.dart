@@ -59,7 +59,7 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
         widget.notifierCallback(isUnderlined);
         setState(() {});
       },
-      tooltip: EFUILang.of(context)!.tsUnderline,
+      tooltip: ezL10n(context).tsUnderline,
       iconSize: widget.size,
       icon: const Icon(Icons.format_underline),
     );

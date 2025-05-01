@@ -32,7 +32,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   // Gather the build data  //
 
-  late EFUILang l10n = EFUILang.of(context)!;
+  late EFUILang l10n = ezL10n(context);
   late Locale currLocale = Localizations.localeOf(context);
 
   Widget flag(Locale lang) => (lang.countryCode == null)

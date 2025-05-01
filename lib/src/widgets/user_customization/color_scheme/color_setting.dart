@@ -47,7 +47,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   late final ThemeData theme = Theme.of(context);
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define button functions //
 

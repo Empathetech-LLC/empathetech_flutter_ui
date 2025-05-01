@@ -32,7 +32,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
     padding: EzInsets.wrap(EzConfig.get(paddingKey)),
   );
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
 
