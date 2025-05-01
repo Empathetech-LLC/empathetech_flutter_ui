@@ -34,7 +34,7 @@ class EzFeedbackMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     final bool strictMobile = !kIsWeb && isMobile();
 
