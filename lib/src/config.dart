@@ -13,14 +13,15 @@ class EzConfig {
   /// [SharedPreferences] instance
   final SharedPreferences preferences;
 
-  /// [AssetImage] paths for the app
-  final Set<String> assetPaths;
-
   /// Default config
   final Map<String, dynamic> defaults;
 
-  /// All keys (and their value [Type]) in the known EzConfigverse
-  final Map<String, Type> keys;
+  /// Fallback [EFUILang] for unsupported [Locale]s
+  /// [english] is recommended
+  final EFUILang l10nFallback;
+
+  /// [AssetImage] paths for the app
+  final Set<String> assetPaths;
 
   /// Live values in use
   /// [defaults] merged with user [preferences]
@@ -31,32 +32,38 @@ class EzConfig {
 
   /// Private/internal constructor
   const EzConfig._({
+    // External
     required this.preferences,
-    required this.assetPaths,
     required this.defaults,
-    required this.keys,
+    required this.l10nFallback,
+    required this.assetPaths,
+
+    // Internal
     required this.prefs,
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
-  /// [assetPaths] => provide the [AssetImage] paths for this app
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
+  /// [l10nFallback] => provide a fallback [EFUILang] for apps with [Locale]s that [EFUILang] doesn't support (yet)
+  /// [assetPaths] => provide the [AssetImage] paths for this app
   factory EzConfig.init({
     required SharedPreferences preferences,
-    required Set<String> assetPaths,
     required Map<String, dynamic> defaults,
+    required EFUILang l10nFallback,
+    required Set<String> assetPaths,
   }) {
     if (_instance == null) {
-      // Build this.keys //
+      // Get the value type for each key //
 
       // Start with the known EzConfigverse
-      final Map<String, Type> keys = Map<String, Type>.from(allKeys);
+      final Map<String, Type> keyTypes = Map<String, Type>.from(allKeys);
 
       // Include defaults
-      for (final MapEntry<String, dynamic> entry in defaults.entries) {
-        if (!keys.containsKey(entry.key)) {
-          keys[entry.key] = entry.value.runtimeType;
-        }
+      final Set<String> uniqueDefaults =
+          defaults.keys.toSet().difference(keyTypes.keys.toSet());
+
+      for (final String key in uniqueDefaults) {
+        keyTypes[key] = defaults[key].runtimeType;
       }
 
       // Build this.prefs //
@@ -66,11 +73,11 @@ class EzConfig {
 
       // Find the keys that users have overwritten
       final Set<String> overwritten =
-          preferences.getKeys().intersection(keys.keys.toSet());
+          preferences.getKeys().intersection(keyTypes.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
-        final Type? valueType = keys[key];
+        final Type? valueType = keyTypes[key];
         dynamic userPref;
 
         switch (valueType) {
@@ -107,10 +114,10 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       _instance = EzConfig._(
         assetPaths: assetPaths,
-        preferences: preferences,
         defaults: defaults,
+        l10nFallback: l10nFallback,
+        preferences: preferences,
         prefs: prefs,
-        keys: keys,
       );
     }
 
@@ -551,7 +558,7 @@ Must be one of [int, bool, double, String, List<String>]''');
   static Future<bool> reset({bool storageOnly = false}) async {
     bool success = true;
 
-    for (final String key in _instance!.keys.keys) {
+    for (final String key in _instance!.prefs.keys) {
       final bool result = await _instance!.preferences.remove(key);
 
       if (result) {
