@@ -13,7 +13,7 @@ class ImageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: EFUILang.of(context)!.isPageTitle,
+        title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
         fab: EzBackFAB(context),

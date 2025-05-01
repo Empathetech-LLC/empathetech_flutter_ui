@@ -88,7 +88,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
       onPressed: () async {
@@ -114,7 +114,7 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
         Icons.contrast,
         color: Theme.of(context).colorScheme.onSurface,
       ),
-      label: EFUILang.of(context)!.csMonoChrome,
+      label: ezL10n(context).csMonoChrome,
     );
   }
 }

@@ -69,7 +69,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
   late final ThemeData theme = Theme.of(context);
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final TargetPlatform platform = Theme.of(context).platform;
 
