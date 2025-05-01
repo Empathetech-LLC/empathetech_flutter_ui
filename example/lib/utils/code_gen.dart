@@ -561,8 +561,6 @@ void main() async {
     ),
     themeMode: EzConfig.getThemeMode(),
     localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-      const LocaleNamesLocalizationsDelegate(),
-      ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
       EmpathetechFeedbackLocalizationsDelegate(),
     ],
     localeOverride: EzConfig.getLocale(),
