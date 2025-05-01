@@ -40,7 +40,7 @@ class SuccessHeader extends StatelessWidget {
           // Headline
           Flexible(
             child: EzText(
-              EFUILang.of(context)!.gSuccessExl,
+              ezL10n(context).gSuccessExl,
               style: textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),

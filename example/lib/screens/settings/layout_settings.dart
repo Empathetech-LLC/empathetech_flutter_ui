@@ -13,7 +13,7 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OpenUIScaffold(
-        title: EFUILang.of(context)!.lsPageTitle,
+        title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
         fab: EzBackFAB(context),

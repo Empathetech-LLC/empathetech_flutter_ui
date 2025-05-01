@@ -51,7 +51,7 @@ class EzWarning extends StatelessWidget {
 
     // Return the build
 
-    final String warning = title ?? EFUILang.of(context)!.gAttention;
+    final String warning = title ?? ezL10n(context).gAttention;
 
     return Semantics(
       label: '$warning: $body',

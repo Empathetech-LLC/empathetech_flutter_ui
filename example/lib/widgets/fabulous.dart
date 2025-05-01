@@ -18,7 +18,7 @@ class ResetFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang el10n = EFUILang.of(context)!;
+    final EFUILang el10n = ezL10n(context);
     final Lang l10n = Lang.of(context)!;
 
     return Tooltip(

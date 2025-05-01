@@ -29,7 +29,7 @@ class EzToolTipper extends StatelessWidget {
     final GlobalKey<TooltipState> key = GlobalKey<TooltipState>();
     bool isTooltipVisible = false;
 
-    final String help = EFUILang.of(context)!.gHelp;
+    final String help = ezL10n(context).gHelp;
 
     return EzTextBackground(
       Semantics(
