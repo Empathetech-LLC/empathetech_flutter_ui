@@ -10,7 +10,7 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
-  /// Pass in any custom supported [Locale]s
+  /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
 
   /// [EzElevatedIconButton] for updating the current [Locale]
@@ -30,47 +30,40 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late final Color primary = Theme.of(context).colorScheme.primary;
 
-  late Locale currLocale = Localizations.localeOf(context);
+  // Gather the build data  //
 
   late EFUILang l10n = EFUILang.of(context)!;
+  late Locale currLocale = Localizations.localeOf(context);
 
-  // Gather the list items //
-
-  Widget flag(Locale locale) {
-    final Locale flagLocale = locale;
-
-    return (flagLocale.countryCode == null)
-        ? Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primary),
-            ),
-            child: CountryFlag.fromLanguageCode(
-              flagLocale.languageCode,
-              shape: const Circle(),
-              width: padding * 2 + margin,
-            ),
-          )
-        : Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primary),
-            ),
-            child: CountryFlag.fromCountryCode(
-              flagLocale.countryCode!,
-              shape: const Circle(),
-              width: padding * 2 + margin,
-            ),
-          );
-  }
+  Widget flag(Locale lang) => (lang.countryCode == null)
+      ? Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: primary),
+          ),
+          child: CountryFlag.fromLanguageCode(
+            lang.languageCode,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          ),
+        )
+      : Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: primary),
+          ),
+          child: CountryFlag.fromCountryCode(
+            lang.countryCode!,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          ),
+        );
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final List<Locale> locales = (widget.locales == null)
-        ? EFUILang.supportedLocales
-        : EFUILang.supportedLocales + widget.locales!;
+    final List<Locale> locales = widget.locales ?? EFUILang.supportedLocales;
 
     return Semantics(
       label: l10n.ssLanguage,
@@ -113,7 +106,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                         },
                         icon: flag(locale),
                         label: LocaleNames.of(context)!
-                            .nameOf(locale.languageCode)!,
+                                .nameOf(locale.languageCode) ??
+                            'Language',
                         labelPadding: false,
                       ),
                     ),
