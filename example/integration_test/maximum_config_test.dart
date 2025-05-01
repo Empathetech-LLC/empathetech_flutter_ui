@@ -23,9 +23,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: empathetechMaxConfig,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
 
   group(
