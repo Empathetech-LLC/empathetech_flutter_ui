@@ -18,7 +18,7 @@ class EzConfig {
 
   /// Fallback [EFUILang] for unsupported [Locale]s
   /// [english] is recommended
-  final EFUILang l10nFallback;
+  final EFUILang fallbackLang;
 
   /// [AssetImage] paths for the app
   final Set<String> assetPaths;
@@ -35,7 +35,7 @@ class EzConfig {
     // External
     required this.preferences,
     required this.defaults,
-    required this.l10nFallback,
+    required this.fallbackLang,
     required this.assetPaths,
 
     // Internal
@@ -44,12 +44,12 @@ class EzConfig {
 
   /// [preferences] => provide a [SharedPreferences] instance
   /// [defaults] => provide your brand colors, text styles, layout settings, etc.
-  /// [l10nFallback] => provide a fallback [EFUILang] for apps with [Locale]s that [EFUILang] doesn't support (yet)
+  /// [fallbackLang] => provide a fallback [EFUILang] for [Locale]s that [EFUILang] doesn't support (yet)
   /// [assetPaths] => provide the [AssetImage] paths for this app
   factory EzConfig.init({
     required SharedPreferences preferences,
     required Map<String, dynamic> defaults,
-    required EFUILang l10nFallback,
+    required EFUILang fallbackLang,
     required Set<String> assetPaths,
   }) {
     if (_instance == null) {
@@ -115,7 +115,7 @@ Must be one of [int, bool, double, String, List<String>]''');
       _instance = EzConfig._(
         assetPaths: assetPaths,
         defaults: defaults,
-        l10nFallback: l10nFallback,
+        fallbackLang: fallbackLang,
         preferences: preferences,
         prefs: prefs,
       );
@@ -128,6 +128,8 @@ Must be one of [int, bool, double, String, List<String>]''');
   // EFUI won't work at all if EzConfig isn't initialized, so they're moot
 
   // Getters //
+
+  static EFUILang get l10nFallback => _instance!.fallbackLang;
 
   /// Get the [key]s EzConfig (nullable) value
   /// Uses the live values from [prefs]
