@@ -34,7 +34,7 @@ Future<String?> ezImagePicker({
     return picked.path;
   } on Exception catch (e) {
     if (context.mounted) {
-      final String errorMsg = EFUILang.of(context)!.isSetFailed(e.toString());
+      final String errorMsg = ezL10n(context).isSetFailed(e.toString());
       await ezLogAlert(context, message: errorMsg);
     }
     return null;
