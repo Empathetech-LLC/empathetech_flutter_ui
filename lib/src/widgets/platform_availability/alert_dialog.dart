@@ -60,7 +60,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         material: (BuildContext dialogContext, _) {
           late final Widget closeAction = EzTextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            text: EFUILang.of(context)!.gClose,
+            text: ezL10n(context).gClose,
           );
 
           late final List<Widget>? actions = needsClose
@@ -102,7 +102,7 @@ class EzAlertDialog extends PlatformAlertDialog {
         cupertino: (BuildContext dialogContext, _) {
           late final Widget closeAction = EzCupertinoAction(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            text: EFUILang.of(context)!.gClose,
+            text: ezL10n(context).gClose,
           );
 
           late final List<Widget>? actions = needsClose
@@ -247,14 +247,14 @@ class EzCupertinoAction extends StatelessWidget {
 }) {
   final List<EzMaterialAction> materialActions = <EzMaterialAction>[
     EzMaterialAction(
-      text: denyMsg ?? EFUILang.of(context)!.gNo,
+      text: denyMsg ?? ezL10n(context).gNo,
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
       style: style,
     ),
     EzMaterialAction(
-      text: confirmMsg ?? EFUILang.of(context)!.gYes,
+      text: confirmMsg ?? ezL10n(context).gYes,
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,
@@ -263,14 +263,14 @@ class EzCupertinoAction extends StatelessWidget {
   ];
   final List<EzCupertinoAction> cupertinoActions = <EzCupertinoAction>[
     EzCupertinoAction(
-      text: denyMsg ?? EFUILang.of(context)!.gNo,
+      text: denyMsg ?? ezL10n(context).gNo,
       onPressed: onDeny,
       isDefaultAction: denyIsDefault,
       isDestructiveAction: denyIsDestructive,
       style: style,
     ),
     EzCupertinoAction(
-      text: confirmMsg ?? EFUILang.of(context)!.gYes,
+      text: confirmMsg ?? ezL10n(context).gYes,
       onPressed: onConfirm,
       isDefaultAction: confirmIsDefault,
       isDestructiveAction: confirmIsDestructive,

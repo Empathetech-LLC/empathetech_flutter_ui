@@ -45,7 +45,7 @@ class EzConfigRandomizer extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather theme data //
 
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     final String themeProfile = isDarkTheme(context)
         ? l10n.gDark.toLowerCase()

@@ -25,7 +25,7 @@ class ArchiveScreen extends StatefulWidget {
 class _ArchiveScreenState extends State<ArchiveScreen> {
   // Gather the theme data //
 
-  late final EFUILang el10n = EFUILang.of(context)!;
+  late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
