@@ -109,7 +109,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           const EzThemeModeSwitch(),
           spacer,
 
-          const EzLocaleSetting(),
+          const EzLocaleSetting(skip: <Locale>[english]),
           separator,
 
           if (widget.additionalSettings != null) ...<Widget>[
