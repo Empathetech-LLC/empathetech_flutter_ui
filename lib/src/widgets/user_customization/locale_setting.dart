@@ -59,6 +59,22 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
           ),
         );
 
+  // Create custom functions //
+
+  String localeName(Locale locale) {
+    final String? supported =
+        LocaleNames.of(context)?.nameOf(locale.languageCode);
+
+    if (supported != null) return supported;
+
+    switch (locale) {
+      case creole:
+        return 'Creole';
+      default:
+        return 'Language';
+    }
+  }
+
   // Return the build //
 
   @override
@@ -105,9 +121,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                           }
                         },
                         icon: flag(locale),
-                        label: LocaleNames.of(context)!
-                                .nameOf(locale.languageCode) ??
-                            'Language',
+                        label: localeName(locale),
                         labelPadding: false,
                       ),
                     ),
