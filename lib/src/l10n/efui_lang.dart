@@ -94,6 +94,7 @@ abstract class EFUILang {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
+    Locale('en', 'US'),
     Locale('es'),
     Locale('fr')
   ];
@@ -1022,6 +1023,20 @@ class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {
 }
 
 Future<EFUILang> lookupEFUILang(Locale locale) {
+  // Lookup logic when language+country codes are specified.
+  switch (locale.languageCode) {
+    case 'en':
+      {
+        switch (locale.countryCode) {
+          case 'US':
+            return efui_lang_en
+                .loadLibrary()
+                .then((dynamic _) => efui_lang_en.EFUILangEnUs());
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
