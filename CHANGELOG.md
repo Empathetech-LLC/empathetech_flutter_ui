@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
       - If calling EFUILang in your code, here is the updated recommendation:
         - `late final EFUILang el10n = ezL10n(context);`
   - Updated EzLocaleSetting for the new strategy
+  - Added skip parameter to EzLocaleSetting
 - Improved EzConfig.init() efficiency
 
 ## [8.1.1] - 2025-04-27
