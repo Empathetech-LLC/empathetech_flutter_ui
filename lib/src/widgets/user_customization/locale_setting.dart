@@ -13,9 +13,17 @@ class EzLocaleSetting extends StatefulWidget {
   /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
 
+  /// [Locale]s to [skip]
+  /// Works for both default and custom [locales]
+  final List<Locale> skip;
+
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
-  const EzLocaleSetting({super.key, this.locales});
+  const EzLocaleSetting({
+    super.key,
+    this.locales,
+    this.skip = const <Locale>[],
+  });
 
   @override
   State<EzLocaleSetting> createState() => _LocaleSettingState();
@@ -33,6 +41,8 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the build data  //
 
   late EFUILang l10n = ezL10n(context);
+
+  late final List<Locale> locales;
   late Locale currLocale = Localizations.localeOf(context);
 
   Widget flag(Locale lang) => (lang.countryCode == null)
@@ -75,12 +85,19 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     }
   }
 
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    locales = List<Locale>.from(widget.locales ?? EFUILang.supportedLocales);
+    locales.removeWhere((final Locale locale) => widget.skip.contains(locale));
+  }
+
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final List<Locale> locales = widget.locales ?? EFUILang.supportedLocales;
-
     return Semantics(
       label: l10n.ssLanguage,
       button: true,
