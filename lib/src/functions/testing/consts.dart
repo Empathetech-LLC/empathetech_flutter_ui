@@ -8,17 +8,20 @@ import 'package:flutter/material.dart';
 /// 'ar'
 const Locale arabic = Locale('ar');
 
-/// 'ht'
-const Locale creole = Locale('ht');
-
 /// 'ar_EG'
 const Locale egyptianArabic = Locale('ar', 'EG');
 
 /// 'en'
 const Locale english = Locale('en');
 
-/// 'fr'
-const Locale french = Locale('fr');
+/// 'en_US'
+const Locale americanEnglish = Locale('en', 'US');
 
 /// 'es'
 const Locale spanish = Locale('es');
+
+/// 'fr'
+const Locale french = Locale('fr');
+
+/// 'ht'
+const Locale creole = Locale('ht');
