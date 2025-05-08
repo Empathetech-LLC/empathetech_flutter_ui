@@ -65,9 +65,7 @@ void main() async {
       dragHandleColor: Colors.white,
     ),
     themeMode: EzConfig.getThemeMode(),
-    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-      EmpathetechFeedbackLocalizationsDelegate(),
-    ],
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
     localeOverride: EzConfig.getLocale(),
     child: const OpenUI(),
   ));
