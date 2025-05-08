@@ -3,10 +3,26 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:feedback/feedback.dart';
 
-class EmpathetechEnFeedbackLocalizations extends FeedbackLocalizations {
+class EzArFeedback extends FeedbackLocalizations {
+  @override
+  String get draw => '';
+
+  @override
+  String get feedbackDescriptionText => '';
+
+  @override
+  String get navigate => '';
+
+  @override
+  String get submitButtonText => '';
+}
+
+class EzEnFeedback extends FeedbackLocalizations {
   @override
   String get draw => 'Draw';
 
@@ -20,7 +36,7 @@ class EmpathetechEnFeedbackLocalizations extends FeedbackLocalizations {
   String get submitButtonText => 'Submit';
 }
 
-class EmpathetechEsFeedbackLocalizations extends FeedbackLocalizations {
+class EzEsFeedback extends FeedbackLocalizations {
   @override
   String get draw => 'Dibujar';
 
@@ -34,28 +50,44 @@ class EmpathetechEsFeedbackLocalizations extends FeedbackLocalizations {
   String get submitButtonText => 'Entregar';
 }
 
-class EmpathetechFrFeedbackLocalizations extends FeedbackLocalizations {
+class EzFrFeedback extends FeedbackLocalizations {
   @override
   String get draw => 'Dessiner';
 
   @override
-  String get feedbackDescriptionText =>
-      "Qu'est-ce qui préoccupe votre esprit ?";
+  String get feedbackDescriptionText => "Qu'est-ce qui vous préoccupe ?";
 
   @override
   String get navigate => 'Interagir';
 
   @override
-  String get submitButtonText => 'Soumettre';
+  String get submitButtonText => 'Envoyer';
 }
 
-class EmpathetechFeedbackLocalizationsDelegate
-    extends GlobalFeedbackLocalizationsDelegate {
+class EzHtFeedback extends FeedbackLocalizations {
+  @override
+  String get draw => '';
+
+  @override
+  String get feedbackDescriptionText => '';
+
+  @override
+  String get navigate => '';
+
+  @override
+  String get submitButtonText => '';
+}
+
+class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
   @override
   Map<Locale, FeedbackLocalizations> get supportedLocales =>
       <Locale, FeedbackLocalizations>{
-        const Locale('en'): EmpathetechEnFeedbackLocalizations(),
-        const Locale('es'): EmpathetechEsFeedbackLocalizations(),
-        const Locale('fr'): EmpathetechFrFeedbackLocalizations(),
+        arabic: EzArFeedback(),
+        egyptianArabic: EzArFeedback(),
+        english: EzEnFeedback(),
+        americanEnglish: EzEnFeedback(),
+        spanish: EzEsFeedback(),
+        french: EzFrFeedback(),
+        creole: EzHtFeedback(),
       };
 }
