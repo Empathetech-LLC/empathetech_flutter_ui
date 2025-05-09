@@ -66,16 +66,16 @@ class EzFrFeedback extends FeedbackLocalizations {
 
 class EzHtFeedback extends FeedbackLocalizations {
   @override
-  String get draw => '';
+  String get draw => 'Desine';
 
   @override
-  String get feedbackDescriptionText => '';
+  String get feedbackDescriptionText => 'A kisa ou ap panse?';
 
   @override
-  String get navigate => '';
+  String get navigate => 'Entèraji';
 
   @override
-  String get submitButtonText => '';
+  String get submitButtonText => 'Soumèt';
 }
 
 class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
