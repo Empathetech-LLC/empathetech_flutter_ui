@@ -10,16 +10,16 @@ import 'package:feedback/feedback.dart';
 
 class EzArFeedback extends FeedbackLocalizations {
   @override
-  String get draw => '';
+  String get draw => 'ارسم';
 
   @override
-  String get feedbackDescriptionText => '';
+  String get feedbackDescriptionText => 'ما الذي يدور في ذهنك؟';
 
   @override
-  String get navigate => '';
+  String get navigate => 'تفاعل';
 
   @override
-  String get submitButtonText => '';
+  String get submitButtonText => 'أرسل';
 }
 
 class EzEnFeedback extends FeedbackLocalizations {
