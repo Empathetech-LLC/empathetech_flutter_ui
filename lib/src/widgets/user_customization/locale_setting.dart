@@ -128,7 +128,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                             localeData,
                           );
                           currLocale = locale;
-                          l10n = await EFUILang.delegate.load(locale);
+
+                          try {
+                            l10n = await EFUILang.delegate.load(locale);
+                          } catch (_) {
+                            l10n = EzConfig.l10nFallback;
+                          }
 
                           setState(() {});
 
