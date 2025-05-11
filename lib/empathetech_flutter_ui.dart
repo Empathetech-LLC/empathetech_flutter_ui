@@ -20,7 +20,6 @@ export 'src/consts/google_fonts.dart';
 export 'src/functions/cmd.dart';
 export 'src/functions/colors.dart';
 export 'src/functions/dialogs.dart';
-export 'src/functions/feedback_localizations.dart';
 export 'src/functions/helpers.dart';
 export 'src/functions/images.dart';
 export 'src/functions/snack_bars.dart';
@@ -39,6 +38,9 @@ export 'src/functions/testing/widgets/theme_mode_switch.dart';
 // l10n //
 
 export 'src/l10n/efui_lang.dart';
+
+export 'src/l10n/custom_delegates/creole.dart';
+export 'src/l10n/custom_delegates/feedback.dart';
 
 // Sample screens //
 
