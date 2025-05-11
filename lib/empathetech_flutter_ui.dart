@@ -9,6 +9,11 @@ export 'src/config.dart';
 
 // Constants //
 
+// Localization delegates
+export 'src/consts/custom_delegates/creole.dart';
+export 'src/consts/custom_delegates/feedback.dart';
+
+// General
 export 'src/consts/config_keys.dart';
 export 'src/consts/config.dart';
 export 'src/consts/consts.dart';
@@ -26,9 +31,11 @@ export 'src/functions/snack_bars.dart';
 export 'src/functions/text.dart';
 export 'src/functions/theme_data.dart';
 
-// Testing
+// Testing (general)
 export 'src/functions/testing/consts.dart';
 export 'src/functions/testing/utils.dart';
+
+// Testing (widgets)
 export 'src/functions/testing/widgets/dominant_hand_switch.dart';
 export 'src/functions/testing/widgets/image_setting.dart';
 export 'src/functions/testing/widgets/locale_setting.dart';
@@ -38,9 +45,6 @@ export 'src/functions/testing/widgets/theme_mode_switch.dart';
 // l10n //
 
 export 'src/l10n/efui_lang.dart';
-
-export 'src/l10n/custom_delegates/creole.dart';
-export 'src/l10n/custom_delegates/feedback.dart';
 
 // Sample screens //
 
