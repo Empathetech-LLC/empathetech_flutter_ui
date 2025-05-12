@@ -1113,7 +1113,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class TextSettingsScreen extends StatelessWidget {
-  final EzSettingType? target;
+  final EzTSType? target;
 
   const TextSettingsScreen({super.key, this.target});
 
@@ -1167,7 +1167,7 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ColorSettingsScreen extends StatelessWidget {
-  final EzSettingType? target;
+  final EzCSType? target;
 
   const ColorSettingsScreen({super.key, this.target});
 

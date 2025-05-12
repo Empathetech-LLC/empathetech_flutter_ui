@@ -22,7 +22,7 @@ class EzColorSettings extends StatefulWidget {
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
-  /// Optional starting [EzSettingType] target
+  /// Optional starting [EzCSType] target
   final EzCSType? target;
 
   /// Empathetech color settings
