@@ -529,9 +529,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
 
   // Run the app //
@@ -1427,9 +1428,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
   
   // Run the tests //
