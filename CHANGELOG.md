@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [9.0.0] - 2025-05-??
+## [9.0.0] - 2025-05-12
 ### Updated
 - Localization strategy
   - EzConfig now requires a fallback
