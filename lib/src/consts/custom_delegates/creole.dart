@@ -24,15 +24,19 @@ const List<String> _shortWeekdays = <String>[
   'Dim',
 ];
 
-// const List<String> _weekdays = <String>[
-//   'Lendi',
-//   'Madi',
-//   'Mèkredi',
-//   'Jedi',
-//   'Vandredi',
-//   'Samdi',
-//   'Dimanch',
-// ];
+const List<String> _weekdays = <String>[
+  'Lendi',
+  'Madi',
+  'Mèkredi',
+  'Jedi',
+  'Vandredi',
+  'Samdi',
+  'Dimanch',
+];
+
+String _formatDayPeriod(TimeOfDay timeOfDay) {
+  return timeOfDay.hour < 12 ? 'dimaten' : 'apremidi';
+}
 
 const List<String> _shortMonths = <String>[
   'Jan',
@@ -63,6 +67,31 @@ const List<String> _months = <String>[
   'Novanm',
   'Desanm',
 ];
+
+int _getDaysInMonth(int year, int month) {
+  if (month == DateTime.february) {
+    final bool isLeapYear =
+        (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+    return isLeapYear ? 29 : 28;
+  }
+
+  const List<int> daysInMonth = <int>[
+    31,
+    -1,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+  ];
+
+  return daysInMonth[month - 1];
+}
 
 // Cupertino //
 
@@ -621,6 +650,223 @@ class CreoleMaterialLocalizations implements MaterialLocalizations {
 
   @override
   String get timePickerHourModeAnnouncement => 'Chwazi lè';
+
+  @override
+  String get timePickerInputHelpText => 'Antre lè a';
+
+  @override
+  String get timePickerMinuteLabel => 'Minit';
+
+  @override
+  String get timePickerMinuteModeAnnouncement => 'Chwazi minit';
+
+  @override
+  String get unspecifiedDate => 'Dat';
+
+  @override
+  String get unspecifiedDateRange => 'Entèval Dat';
+
+  @override
+  String get viewLicensesButtonLabel => 'Gade lisans yo';
+
+  @override
+  String aboutListTileTitle(String applicationName) =>
+      'A pwopo $applicationName';
+
+  @override
+  String dateRangeEndDateSemanticLabel(String formattedDate) =>
+      'Dat fen $formattedDate';
+
+  @override
+  String dateRangeStartDateSemanticLabel(String formattedDate) =>
+      'Dat kòmansman $formattedDate';
+
+  @override
+  String formatCompactDate(DateTime date) {
+    final String day = date.day.toString().padLeft(2, '0');
+    final String month = date.month.toString().padLeft(2, '0');
+    final String year = date.year.toString().padLeft(4, '0');
+
+    return '$day/$month/$year';
+  }
+
+  @override
+  String formatDecimal(int number) {
+    if (number > -1000 && number < 1000) return number.toString();
+
+    final String digits = number.abs().toString();
+    final StringBuffer result = StringBuffer(number < 0 ? '-' : '');
+    final int maxDigitIndex = digits.length - 1;
+
+    for (int i = 0; i <= maxDigitIndex; i += 1) {
+      result.write(digits[i]);
+      if (i < maxDigitIndex && (maxDigitIndex - i) % 3 == 0) {
+        result.write('.');
+      }
+    }
+
+    return result.toString();
+  }
+
+  @override
+  String formatFullDate(DateTime date) {
+    final String month = _months[date.month - DateTime.january];
+    return '${_weekdays[date.weekday - DateTime.monday]}, $month ${date.day}, ${date.year}';
+  }
+
+  @override
+  String formatHour(TimeOfDay timeOfDay, {bool alwaysUse24HourFormat = false}) {
+    final TimeOfDayFormat format =
+        timeOfDayFormat(alwaysUse24HourFormat: alwaysUse24HourFormat);
+    switch (format) {
+      case TimeOfDayFormat.h_colon_mm_space_a:
+        return formatDecimal(
+            timeOfDay.hourOfPeriod == 0 ? 12 : timeOfDay.hourOfPeriod);
+      case TimeOfDayFormat.HH_colon_mm:
+        return timeOfDay.hour.toString();
+      case TimeOfDayFormat.a_space_h_colon_mm:
+      case TimeOfDayFormat.frenchCanadian:
+      case TimeOfDayFormat.H_colon_mm:
+      case TimeOfDayFormat.HH_dot_mm:
+        throw AssertionError('$runtimeType pa sipòte $format.');
+    }
+  }
+
+  @override
+  String formatMediumDate(DateTime date) {
+    final String day = _shortWeekdays[date.weekday - DateTime.monday];
+    final String month = _shortMonths[date.month - DateTime.january];
+    return '$day, $month ${date.day}';
+  }
+
+  @override
+  String formatMinute(TimeOfDay timeOfDay) {
+    final int minute = timeOfDay.minute;
+    return minute < 10 ? '0$minute' : minute.toString();
+  }
+
+  @override
+  String formatMonthYear(DateTime date) {
+    final String year = formatYear(date);
+    final String month = _months[date.month - DateTime.january];
+    return '$month $year';
+  }
+
+  @override
+  String formatShortDate(DateTime date) {
+    final String month = _shortMonths[date.month - DateTime.january];
+    return '$month ${date.day}, ${date.year}';
+  }
+
+  @override
+  String formatShortMonthDay(DateTime date) {
+    final String month = _shortMonths[date.month - DateTime.january];
+    return '$month ${date.day}';
+  }
+
+  @override
+  String formatTimeOfDay(
+    TimeOfDay timeOfDay, {
+    bool alwaysUse24HourFormat = false,
+  }) {
+    final StringBuffer buffer = StringBuffer();
+
+    buffer
+      ..write(
+          formatHour(timeOfDay, alwaysUse24HourFormat: alwaysUse24HourFormat))
+      ..write(':')
+      ..write(formatMinute(timeOfDay));
+
+    if (alwaysUse24HourFormat) return '$buffer';
+
+    buffer
+      ..write(' ')
+      ..write(_formatDayPeriod(timeOfDay));
+
+    return '$buffer';
+  }
+
+  @override
+  String formatYear(DateTime date) => date.year.toString();
+
+  @override
+  String licensesPackageDetailText(int licenseCount) {
+    assert(licenseCount >= 0);
+    return switch (licenseCount) {
+      0 => 'Pa gen lisans.',
+      1 => '1 lisans.',
+      _ => '$licenseCount lisans.',
+    };
+  }
+
+  @override
+  String pageRowsInfoTitle(
+      int firstRow, int lastRow, int rowCount, bool rowCountIsApproximate) {
+    return rowCountIsApproximate
+        ? '$firstRow-$lastRow sou apeprè $rowCount'
+        : '$firstRow-$lastRow sou $rowCount';
+  }
+
+  @override
+  DateTime? parseCompactDate(String? inputString) {
+    if (inputString == null) return null;
+
+    final List<String> inputParts = inputString.split('/');
+    if (inputParts.length != 3) return null;
+
+    final int? month = int.tryParse(inputParts[1], radix: 10);
+    if (month == null || month < 1 || month > 12) return null;
+
+    final int? year = int.tryParse(inputParts[2], radix: 10);
+    if (year == null || year < 1) return null;
+
+    final int? day = int.tryParse(inputParts[0], radix: 10);
+    if (day == null || day < 1 || day > _getDaysInMonth(year, month)) {
+      return null;
+    }
+
+    try {
+      return DateTime(year, month, day);
+    } on ArgumentError {
+      return null;
+    }
+  }
+
+  @override
+  String remainingTextFieldCharacterCount(int remaining) {
+    return switch (remaining) {
+      0 => 'Pa gen karaktè ki rete',
+      1 => '1 karaktè rete',
+      _ => '$remaining karaktè ki rete',
+    };
+  }
+
+  @override
+  String scrimOnTapHint(String modalRouteContentName) =>
+      'Fèmen $modalRouteContentName';
+
+  @override
+  String selectedRowCountTitle(int selectedRowCount) {
+    return switch (selectedRowCount) {
+      0 => 'Pa gen atik ki chwazi',
+      1 => '1 atik chwazi',
+      _ => '$selectedRowCount atik chwazi',
+    };
+  }
+
+  @override
+  String tabLabel({required int tabIndex, required int tabCount}) {
+    assert(tabIndex >= 1);
+    assert(tabCount >= 1);
+    return 'Onglet $tabIndex sou $tabCount';
+  }
+
+  @override
+  TimeOfDayFormat timeOfDayFormat({bool alwaysUse24HourFormat = false}) {
+    return alwaysUse24HourFormat
+        ? TimeOfDayFormat.HH_colon_mm
+        : TimeOfDayFormat.h_colon_mm_space_a;
+  }
 }
 
 class _CreoleMaterialLocalizationsDelegate
