@@ -100,7 +100,7 @@ class _TextSettingsState extends State<_TextSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
 
@@ -185,7 +185,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
   late final Color surface = Theme.of(context).colorScheme.surface;
@@ -477,7 +477,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Gather the build data //
 

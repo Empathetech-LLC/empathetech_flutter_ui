@@ -59,7 +59,7 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
         widget.notifierCallback(isItalic);
         setState(() {});
       },
-      tooltip: EFUILang.of(context)!.tsItalic,
+      tooltip: ezL10n(context).tsItalic,
       iconSize: widget.size,
       icon: const Icon(Icons.format_italic),
     );

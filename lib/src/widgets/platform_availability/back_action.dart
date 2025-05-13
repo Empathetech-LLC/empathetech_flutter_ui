@@ -15,13 +15,15 @@ class EzBackAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EFUILang l10n = ezL10n(context);
+
     return Navigator.canPop(context)
         ? IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            tooltip: EFUILang.of(context)!.gBack,
+            tooltip: l10n.gBack,
             icon: Icon(
               PlatformIcons(context).back,
-              semanticLabel: EFUILang.of(context)!.gBack,
+              semanticLabel: l10n.gBack,
             ),
           )
         : const SizedBox.shrink();

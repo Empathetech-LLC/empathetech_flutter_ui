@@ -19,7 +19,7 @@ String? validateAppName({
 
   if (value == null || value.isEmpty) {
     onFailure?.call();
-    return '${EFUILang.of(context)!.gRequired}; ${Lang.of(context)!.csInvalidName.toLowerCase()}';
+    return '${ezL10n(context).gRequired}; ${Lang.of(context)!.csInvalidName.toLowerCase()}';
   } else if (!pattern.hasMatch(value)) {
     onFailure?.call();
     return Lang.of(context)!.csInvalidName;
@@ -34,7 +34,7 @@ String? validateDomain(String? value, BuildContext context) {
   final RegExp pattern = RegExp(r'^[a-z0-9_]+\.[a-z]+$');
 
   if (value == null || value.isEmpty) {
-    return '${EFUILang.of(context)!.gRequired}; ${Lang.of(context)!.csInvalidName}';
+    return '${ezL10n(context).gRequired}; ${Lang.of(context)!.csInvalidName}';
   } else if (!pattern.hasMatch(value)) {
     return Lang.of(context)!.csInvalidDomain;
   } else {

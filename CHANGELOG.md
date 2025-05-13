@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [9.0.0] - 2025-05-12
+### Updated
+- Localization strategy
+  - EzConfig now requires a fallback
+    - Example: `fallbackLang: await EFUILang.delegate.load(english),`
+    - Enables all things EFUI to continue working in apps that have unsupported Locales
+      - If calling EFUILang in your code, here is the updated recommendation:
+        - `late final EFUILang el10n = ezL10n(context);`
+  - Updated EzLocaleSetting for the new strategy
+  - Added skip parameter to EzLocaleSetting
+- Improved EzConfig.init() efficiency
+
 ## [8.1.1] - 2025-04-27
 ### Added
 - Split between default mobile and desktop configs

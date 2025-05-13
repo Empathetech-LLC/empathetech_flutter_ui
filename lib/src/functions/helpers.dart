@@ -58,14 +58,22 @@ String screenshotHint() {
 /// Then [doNothing]!
 void doNothing() {}
 
-/// More readable than MediaQuery.of(context).size.width
+/// More readable than...
+/// MediaQuery.of(context).size.width
 double widthOf(BuildContext context) => MediaQuery.of(context).size.width;
 
-/// More readable than MediaQuery.of(context).size.height
+/// More readable than...
+/// MediaQuery.of(context).size.height
 double heightOf(BuildContext context) => MediaQuery.of(context).size.height;
 
-/// More readable than FocusScope.of(context).unfocus();
+/// More readable than...
+/// FocusScope.of(context).unfocus();
 void closeKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
+
+/// More readable than...
+/// EFUILang.of(context) ?? EzConfig.l10nFallback
+EFUILang ezL10n(BuildContext context) =>
+    EFUILang.of(context) ?? EzConfig.l10nFallback;
 
 // Custom //
 

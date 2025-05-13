@@ -33,9 +33,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: isMobile() ? mobileEmpathConfig : desktopEmpathConfig,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
 
   // Run the app //
@@ -64,12 +65,7 @@ void main() async {
       dragHandleColor: Colors.white,
     ),
     themeMode: EzConfig.getThemeMode(),
-    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-      const LocaleNamesLocalizationsDelegate(),
-      ...EFUILang.localizationsDelegates,
-      ...Lang.localizationsDelegates,
-      EmpathetechFeedbackLocalizationsDelegate(),
-    ],
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
     localeOverride: EzConfig.getLocale(),
     child: const OpenUI(),
   ));
@@ -177,7 +173,6 @@ class OpenUI extends StatelessWidget {
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,
           ...Lang.localizationsDelegates,
-          EmpathetechFeedbackLocalizationsDelegate(),
         },
 
         // Supported languages

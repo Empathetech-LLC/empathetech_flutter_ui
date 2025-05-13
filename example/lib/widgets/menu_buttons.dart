@@ -27,7 +27,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: EFUILang.of(context)!.ssPageTitle,
+        label: ezL10n(context).ssPageTitle,
       );
 }
 
@@ -80,7 +80,7 @@ class OpenSourceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
     final String text = l10n.gOpenSource;
 
     return EzMenuButton(

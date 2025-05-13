@@ -437,7 +437,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^8.1.1
+  empathetech_flutter_ui: ^9.0.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^8.0.0
@@ -529,9 +529,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
 
   // Run the app //
@@ -560,11 +561,7 @@ void main() async {
       dragHandleColor: Colors.white,
     ),
     themeMode: EzConfig.getThemeMode(),
-    localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-      const LocaleNamesLocalizationsDelegate(),
-      ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
-      EmpathetechFeedbackLocalizationsDelegate(),
-    ],
+    localizationsDelegates: <LocalizationsDelegate<dynamic>>[EzFeedbackLD()],
     localeOverride: EzConfig.getLocale(),
     child: const $classCaseAppName(),
   ));''' : '\n  runApp(const $classCaseAppName());'}
@@ -773,7 +770,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) => EzMenuButton(
         onPressed: () => parentContext.goNamed(settingsHomePath),
         icon: EzIcon(PlatformIcons(context).settings),
-        label: EFUILang.of(context)!.ssPageTitle,
+        label: ezL10n(context).ssPageTitle,
       );
 }
 
@@ -790,7 +787,7 @@ class EFUICredits extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
     final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
     final String tip = l10n.gOpenEmpathetech;
     final String settings = l10n.ssPageTitle;
@@ -849,7 +846,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     // Gather the theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
-    final EFUILang l10n = EFUILang.of(context)!;
+    final EFUILang l10n = ezL10n(context);
 
     final double toolbarHeight = ezToolbarHeight(context, appTitle);
 
@@ -955,7 +952,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -1090,7 +1087,7 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.ssPageTitle,
+        title: ezL10n(context).ssPageTitle,
         showSettings: false,
         body: const EzSettingsHome(
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
@@ -1116,13 +1113,13 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class TextSettingsScreen extends StatelessWidget {
-  final EzSettingType? target;
+  final EzTSType? target;
 
   const TextSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.tsPageTitle,
+        title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzTextSettings(target: target),
         fab: EzBackFAB(context),
@@ -1148,7 +1145,7 @@ class LayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.lsPageTitle,
+        title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
         fab: EzBackFAB(context),
@@ -1170,13 +1167,13 @@ import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class ColorSettingsScreen extends StatelessWidget {
-  final EzSettingType? target;
+  final EzCSType? target;
 
   const ColorSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.csPageTitle,
+        title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzColorSettings(target: target),
         fab: EzBackFAB(context),
@@ -1202,7 +1199,7 @@ class ImageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: EFUILang.of(context)!.isPageTitle,
+        title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
         fab: EzBackFAB(context),
@@ -1431,9 +1428,10 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
-    assetPaths: <String>{},
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
+    fallbackLang: await EFUILang.delegate.load(english),
+    assetPaths: <String>{},
   );
   
   // Run the tests //

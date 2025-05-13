@@ -44,7 +44,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   static const EzSeparator separator = EzSeparator();
 
   late bool isDark = isDarkTheme(context);
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define the page content //
 

@@ -97,7 +97,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final TextStyle? style =
       widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
 

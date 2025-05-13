@@ -14,6 +14,6 @@ class EzBackFAB extends FloatingActionButton {
       : super(
           child: EzIcon(PlatformIcons(context).back),
           onPressed: () => Navigator.of(context).pop(),
-          tooltip: EFUILang.of(context)!.gBack,
+          tooltip: ezL10n(context).gBack,
         );
 }

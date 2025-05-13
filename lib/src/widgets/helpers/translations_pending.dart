@@ -44,7 +44,7 @@ class EzTranslationsPendingNotice extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                message ?? EFUILang.of(context)!.gTranslationsPending,
+                message ?? ezL10n(context).gTranslationsPending,
                 style: style ?? Theme.of(context).textTheme.labelLarge,
                 textAlign: textAlign,
               ),

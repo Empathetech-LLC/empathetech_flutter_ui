@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final TextTheme textTheme = Theme.of(context).textTheme;
   late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
-  late final EFUILang el10n = EFUILang.of(context)!;
+  late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
   // Define build data //
@@ -1173,7 +1173,7 @@ class _AdvancedSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final EFUILang el10n = EFUILang.of(context)!;
+    late final EFUILang el10n = ezL10n(context);
     late final Lang l10n = Lang.of(context)!;
 
     late final EzSpacer rowMargin = EzMargin(vertical: false);
@@ -1294,7 +1294,7 @@ class _LicensePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EFUILang el10n = EFUILang.of(context)!;
+    final EFUILang el10n = ezL10n(context);
     final Lang l10n = Lang.of(context)!;
 
     final EzMargin margin = EzMargin();

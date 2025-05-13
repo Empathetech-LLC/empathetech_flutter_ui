@@ -10,12 +10,20 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 class EzLocaleSetting extends StatefulWidget {
-  /// Pass in any custom supported [Locale]s
+  /// Override [EFUILang.supportedLocales] default
   final List<Locale>? locales;
+
+  /// [Locale]s to [skip]
+  /// Works for both default and custom [locales]
+  final List<Locale> skip;
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
-  const EzLocaleSetting({super.key, this.locales});
+  const EzLocaleSetting({
+    super.key,
+    this.locales,
+    this.skip = const <Locale>[],
+  });
 
   @override
   State<EzLocaleSetting> createState() => _LocaleSettingState();
@@ -30,48 +38,66 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   late final Color primary = Theme.of(context).colorScheme.primary;
 
+  // Gather the build data  //
+
+  late EFUILang l10n = ezL10n(context);
+
+  late final List<Locale> locales;
   late Locale currLocale = Localizations.localeOf(context);
 
-  late EFUILang l10n = EFUILang.of(context)!;
+  Widget flag(Locale lang) => (lang.countryCode == null)
+      ? Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: primary),
+          ),
+          child: CountryFlag.fromLanguageCode(
+            lang.languageCode,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          ),
+        )
+      : Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: primary),
+          ),
+          child: CountryFlag.fromCountryCode(
+            lang.countryCode!,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          ),
+        );
 
-  // Gather the list items //
+  // Create custom functions //
 
-  Widget flag(Locale locale) {
-    final Locale flagLocale = locale;
+  String localeName(Locale locale) {
+    final String? supported =
+        LocaleNames.of(context)?.nameOf(locale.languageCode);
 
-    return (flagLocale.countryCode == null)
-        ? Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primary),
-            ),
-            child: CountryFlag.fromLanguageCode(
-              flagLocale.languageCode,
-              shape: const Circle(),
-              width: padding * 2 + margin,
-            ),
-          )
-        : Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primary),
-            ),
-            child: CountryFlag.fromCountryCode(
-              flagLocale.countryCode!,
-              shape: const Circle(),
-              width: padding * 2 + margin,
-            ),
-          );
+    if (supported != null) return supported;
+
+    switch (locale) {
+      case creole:
+        return 'Creole';
+      default:
+        return 'Language';
+    }
+  }
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    locales = List<Locale>.from(widget.locales ?? EFUILang.supportedLocales);
+    locales.removeWhere((final Locale locale) => widget.skip.contains(locale));
   }
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
-    final List<Locale> locales = (widget.locales == null)
-        ? EFUILang.supportedLocales
-        : EFUILang.supportedLocales + widget.locales!;
-
     return Semantics(
       label: l10n.ssLanguage,
       button: true,
@@ -102,7 +128,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                             localeData,
                           );
                           currLocale = locale;
-                          l10n = await EFUILang.delegate.load(locale);
+
+                          try {
+                            l10n = await EFUILang.delegate.load(locale);
+                          } catch (_) {
+                            l10n = EzConfig.l10nFallback;
+                          }
 
                           setState(() {});
 
@@ -112,8 +143,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
                           }
                         },
                         icon: flag(locale),
-                        label: LocaleNames.of(context)!
-                            .nameOf(locale.languageCode)!,
+                        label: localeName(locale),
                         labelPadding: false,
                       ),
                     ),

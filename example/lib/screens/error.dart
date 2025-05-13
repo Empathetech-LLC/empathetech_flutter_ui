@@ -23,7 +23,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
 

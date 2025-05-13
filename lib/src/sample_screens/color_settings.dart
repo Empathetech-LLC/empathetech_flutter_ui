@@ -22,7 +22,7 @@ class EzColorSettings extends StatefulWidget {
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
-  /// Optional starting [EzSettingType] target
+  /// Optional starting [EzCSType] target
   final EzCSType? target;
 
   /// Empathetech color settings
@@ -63,7 +63,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   late final ThemeData theme = Theme.of(context);
   late bool isDark = isDarkTheme(context);
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
 

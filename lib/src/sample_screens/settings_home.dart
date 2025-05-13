@@ -76,7 +76,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
-  late final EFUILang l10n = EFUILang.of(context)!;
+  late final EFUILang l10n = ezL10n(context);
 
   // Set the page title //
 
@@ -109,7 +109,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           const EzThemeModeSwitch(),
           spacer,
 
-          const EzLocaleSetting(),
+          const EzLocaleSetting(skip: <Locale>[english]),
           separator,
 
           if (widget.additionalSettings != null) ...<Widget>[
