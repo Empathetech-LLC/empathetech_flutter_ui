@@ -8,6 +8,12 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
+/// Readability alias
+void _log(String message, bool debug, ValueNotifier<String>? readout) {
+  if (debug) ezLog(message);
+  if (readout != null) readout.value += '$message\n';
+}
+
 /// Run a CLI [cmd]
 /// Track the stdout/err with [debug] and [readout]
 Future<void> ezCmd(
@@ -19,11 +25,9 @@ Future<void> ezCmd(
   bool debug = true,
   ValueNotifier<String>? readout,
 }) async {
-  if (debug) ezLog('$cmd...');
-  if (readout != null) readout.value += '$cmd...\n';
+  _log(cmd, debug, readout);
 
   final List<String> args = cmd.split(' ');
-
   late final ProcessResult runResult;
   try {
     runResult = await Process.run(
@@ -33,21 +37,16 @@ Future<void> ezCmd(
       workingDirectory: dir,
     );
   } catch (e) {
+    _log(e.toString(), debug, readout);
     onError == null ? onFailure(e.toString()) : onError(e.toString());
+    return;
   }
 
   final String out = runResult.stdout.toString();
   final String err = runResult.stderr.toString();
 
-  if (debug) {
-    ezLog(out);
-    if (err.isNotEmpty) ezLog(err);
-  }
-
-  if (readout != null) {
-    readout.value += '$out\n';
-    if (err.isNotEmpty) readout.value += '$err\n';
-  }
+  _log(out, debug, readout);
+  if (err.isNotEmpty) _log(err, debug, readout);
 
   runResult.exitCode == 0 ? onSuccess() : onFailure(err);
 }
