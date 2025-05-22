@@ -432,12 +432,12 @@ dependencies:
 
   # Flutter (Google)
   go_router: ^14.8.1
-  intl: ^0.19.0
-  shared_preferences: ^2.5.2
+  intl: ^0.20.2
+  shared_preferences: ^2.5.3
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^9.0.0
+  empathetech_flutter_ui: ^9.0.1
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^8.0.0
