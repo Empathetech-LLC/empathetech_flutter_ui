@@ -112,6 +112,12 @@ class CreoleCupertinoLocalizations implements CupertinoLocalizations {
   String get anteMeridiemAbbreviation => 'dimaten';
 
   @override
+  String get backButtonLabel => 'Retounen';
+
+  @override
+  String get cancelButtonLabel => 'Anile';
+
+  @override
   String get clearButtonLabel => 'Klè';
 
   @override
@@ -907,6 +913,27 @@ class CreoleWidgetsLocalizations extends WidgetsLocalizations {
 
   @override
   String get reorderItemToEnd => 'Deplase nan fen an';
+
+  @override
+  String get selectAllButtonLabel => 'Chwazi tout';
+
+  @override
+  String get copyButtonLabel => 'Kopi';
+
+  @override
+  String get cutButtonLabel => 'Koupe';
+
+  @override
+  String get pasteButtonLabel => 'Kole';
+
+  @override
+  String get shareButtonLabel => 'Pataje...';
+
+  @override
+  String get lookUpButtonLabel => 'Leve tèt ou';
+
+  @override
+  String get searchWebButtonLabel => 'Rechèch sou entènèt';
 }
 
 class CreoleWidgetsLocalizationsDelegate
