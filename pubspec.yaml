@@ -40,7 +40,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter 
 
-  dartdoc: ^8.3.3
+  dartdoc: ^8.3.4
   dependency_validator: ^5.0.2
   flutter_lints: ^5.0.0
 
