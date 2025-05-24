@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.2.1] - 2025-05-??
+## [2.2.1] - 2025-05-24
 ### Added
 - Changelog tracking
 
