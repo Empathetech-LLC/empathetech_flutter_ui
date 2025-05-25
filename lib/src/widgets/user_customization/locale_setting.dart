@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -45,29 +46,43 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   late final List<Locale> locales;
   late Locale currLocale = Localizations.localeOf(context);
 
-  Widget flag(Locale lang) => (lang.countryCode == null)
-      ? Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: primary),
-          ),
-          child: CountryFlag.fromLanguageCode(
-            lang.languageCode,
-            shape: const Circle(),
-            width: padding * 2 + margin,
-          ),
-        )
-      : Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: primary),
-          ),
-          child: CountryFlag.fromCountryCode(
-            lang.countryCode!,
-            shape: const Circle(),
-            width: padding * 2 + margin,
-          ),
-        );
+  Widget flag(Locale lang) {
+    late final Widget flag;
+    bool? democracyInDistress;
+
+    if (lang.countryCode == null) {
+      flag = CountryFlag.fromLanguageCode(
+        lang.languageCode,
+        shape: const Circle(),
+        width: padding * 2 + margin,
+      );
+    } else {
+      flag = CountryFlag.fromCountryCode(
+        lang.countryCode!,
+        shape: const Circle(),
+        width: padding * 2 + margin,
+      );
+
+      switch (lang.countryCode) {
+        case 'US':
+          democracyInDistress = true;
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: primary),
+      ),
+      child: (democracyInDistress == true)
+          ? Transform.rotate(angle: pi, child: flag)
+          : flag,
+    );
+  }
 
   // Create custom functions //
 

@@ -95,7 +95,10 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Card
-    cardTheme: CardTheme(color: colorScheme.surface, margin: EdgeInsets.zero),
+    cardTheme: CardThemeData(
+      color: colorScheme.surface,
+      margin: EdgeInsets.zero,
+    ),
 
     // Checkbox
     checkboxTheme: CheckboxThemeData(
@@ -114,7 +117,7 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
 
     // Dialog
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       backgroundColor: colorScheme.surface,
       titleTextStyle: textTheme.titleLarge,
       contentTextStyle: textTheme.bodyLarge,

@@ -41,13 +41,13 @@ class EzEsFeedback extends FeedbackLocalizations {
   String get draw => 'Dibujar';
 
   @override
-  String get feedbackDescriptionText => '¿Qué tienes en mente?';
+  String get feedbackDescriptionText => 'Cuéntanos';
 
   @override
   String get navigate => 'Interactuar';
 
   @override
-  String get submitButtonText => 'Entregar';
+  String get submitButtonText => 'Enviar';
 }
 
 class EzFrFeedback extends FeedbackLocalizations {
