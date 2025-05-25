@@ -45,8 +45,10 @@ class _EzUpdaterState extends State<EzUpdater> {
 
   // Define custom functions //
 
-  /// Check for Open UI updates
+  /// Check for Open UI updates (Desktop only)
   void checkVersion() async {
+    if (isMobile()) return;
+
     final http.Response response = await http.get(Uri.parse(_versionSource));
 
     if (response.statusCode != 200) return;
