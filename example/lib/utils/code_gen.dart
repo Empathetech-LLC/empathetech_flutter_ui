@@ -440,11 +440,11 @@ dependencies:
   empathetech_flutter_ui: ^9.0.1
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^8.0.0
+  flutter_platform_widgets: ^9.0.0
 
 dev_dependencies:
   dependency_validator: ^5.0.2
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
   integration_test:
