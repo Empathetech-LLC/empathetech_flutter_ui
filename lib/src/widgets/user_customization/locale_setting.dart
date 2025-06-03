@@ -52,7 +52,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
     if (lang.countryCode == null) {
       flag = CountryFlag.fromLanguageCode(
-        lang.languageCode,
+        lang.languageCode.replaceFirst('fil', 'tl'),
         shape: const Circle(),
         width: padding * 2 + margin,
       );
@@ -88,11 +88,13 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   String localeName(Locale locale) {
     final String? supported =
-        LocaleNames.of(context)?.nameOf(locale.languageCode);
+        LocaleNames.of(context)!.nameOf(locale.languageCode);
 
     if (supported != null) return supported;
 
     switch (locale) {
+      case filipino:
+        return 'Filipino';
       case creole:
         return 'Creole';
       default:
