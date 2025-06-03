@@ -108,16 +108,16 @@ class EzPtFeedback extends FeedbackLocalizations {
 
 class EzZhFeedback extends FeedbackLocalizations {
   @override
-  String get draw => 'Pending';
+  String get draw => '画画';
 
   @override
-  String get feedbackDescriptionText => 'Pending';
+  String get feedbackDescriptionText => '您在想什么？';
 
   @override
-  String get navigate => 'Pending';
+  String get navigate => '互动';
 
   @override
-  String get submitButtonText => 'Pending';
+  String get submitButtonText => '提交';
 }
 
 class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
