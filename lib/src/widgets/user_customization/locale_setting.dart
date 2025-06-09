@@ -52,7 +52,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
     if (lang.countryCode == null) {
       flag = CountryFlag.fromLanguageCode(
-        lang.languageCode.replaceFirst('fil', 'tl'),
+        lang.languageCode.replaceFirst('fil', 'tl'), // Filipino to Tagalog
         shape: const Circle(),
         width: padding * 2 + margin,
       );
@@ -73,15 +73,9 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: primary),
-      ),
-      child: (democracyInDistress == true)
-          ? Transform.rotate(angle: pi, child: flag)
-          : flag,
-    );
+    return (democracyInDistress == true)
+        ? Transform.rotate(angle: pi, child: flag)
+        : flag;
   }
 
   // Create custom functions //
