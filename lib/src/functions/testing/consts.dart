@@ -34,3 +34,6 @@ const Locale portuguese = Locale('pt');
 
 /// 'zh'
 const Locale chinese = Locale('zh');
+
+/// 'zh_CN'
+const Locale simplifiedChinese = Locale('zh', 'CN');
