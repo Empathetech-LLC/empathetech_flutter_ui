@@ -50,9 +50,19 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     late final Widget flag;
     bool? democracyInDistress;
 
+    // Fix language code != flag code
+    switch (lang.languageCode) {
+      case 'fil':
+        lang = const Locale('tl'); // Filipino to Tagalog
+        break;
+
+      default:
+        break;
+    }
+
     if (lang.countryCode == null) {
       flag = CountryFlag.fromLanguageCode(
-        lang.languageCode.replaceFirst('fil', 'tl'), // Filipino to Tagalog
+        lang.languageCode,
         shape: const Circle(),
         width: padding * 2 + margin,
       );
@@ -63,6 +73,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         width: padding * 2 + margin,
       );
 
+      // Hopefully temporary
       switch (lang.countryCode) {
         case 'US':
           democracyInDistress = true;
