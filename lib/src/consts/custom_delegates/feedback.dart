@@ -55,7 +55,7 @@ class EzFilFeedback extends FeedbackLocalizations {
   String get draw => 'Iguhit';
 
   @override
-  String get feedbackDescriptionText => "Ano ang nasa isip mo?";
+  String get feedbackDescriptionText => 'Ano ang nasa isip mo?';
 
   @override
   String get navigate => 'Makipag-ugnayan';
