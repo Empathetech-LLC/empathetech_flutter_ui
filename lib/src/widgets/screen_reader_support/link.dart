@@ -6,7 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 
 class EzLink extends StatefulWidget {
   /// The [TextButton.child] will be [Text] with [text] and all provided styling
@@ -87,7 +87,7 @@ class _EzLinkState extends State<EzLink> {
 
   // Define custom functions //
 
-  void addUnderline(bool addIt) {
+  void underline(bool addIt) {
     textStyle = textStyle?.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
@@ -100,6 +100,12 @@ class _EzLinkState extends State<EzLink> {
   Widget build(BuildContext context) {
     final String semantics = '${widget.text}; ${widget.hint}';
 
+    final ButtonStyle buttonStyle = TextButton.styleFrom(
+      padding: widget.padding,
+      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+      backgroundColor: widget.backgroundColor,
+    );
+
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
@@ -107,22 +113,34 @@ class _EzLinkState extends State<EzLink> {
         link: true,
         hint: semantics,
         child: ExcludeSemantics(
-          child: TextButton(
-            style: TextButton.styleFrom(
-              padding: widget.padding,
-              overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
-              backgroundColor: widget.backgroundColor,
-            ),
-            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-            onLongPress: null,
-            onHover: (bool isHovering) => addUnderline(isHovering),
-            onFocusChange: (bool hasFocus) => addUnderline(hasFocus),
-            child: Text(
-              widget.text,
-              style: textStyle,
-              textAlign: widget.textAlign,
-            ),
-          ),
+          child: (widget.onTap != null)
+              ? TextButton(
+                  style: buttonStyle,
+                  onPressed: widget.onTap,
+                  onLongPress: null,
+                  onHover: (bool isHovering) => underline(isHovering),
+                  onFocusChange: (bool hasFocus) => underline(hasFocus),
+                  child: Text(
+                    widget.text,
+                    style: textStyle,
+                    textAlign: widget.textAlign,
+                  ),
+                )
+              : Link(
+                  uri: widget.url,
+                  builder: (_, FollowLink? followLink) => TextButton(
+                    style: buttonStyle,
+                    onPressed: followLink,
+                    onLongPress: null,
+                    onHover: (bool isHovering) => underline(isHovering),
+                    onFocusChange: (bool hasFocus) => underline(hasFocus),
+                    child: Text(
+                      widget.text,
+                      style: textStyle,
+                      textAlign: widget.textAlign,
+                    ),
+                  ),
+                ),
         ),
       ),
     );
@@ -208,7 +226,7 @@ class _EzIconLinkState extends State<EzIconLink> {
 
   // Define custom functions //
 
-  void highlight(bool addIt) {
+  void underline(bool addIt) {
     textStyle = textStyle?.copyWith(
       decoration: addIt ? TextDecoration.underline : TextDecoration.none,
     );
@@ -221,6 +239,11 @@ class _EzIconLinkState extends State<EzIconLink> {
   Widget build(BuildContext context) {
     final String semantics = '${widget.label}; ${widget.hint}';
 
+    final ButtonStyle buttonStyle = TextButton.styleFrom(
+      padding: widget.padding,
+      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+    );
+
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
@@ -228,25 +251,42 @@ class _EzIconLinkState extends State<EzIconLink> {
         link: true,
         hint: semantics,
         child: ExcludeSemantics(
-          child: TextButton.icon(
-            style: TextButton.styleFrom(
-              padding: widget.padding,
-              overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
-            ),
-            onPressed: widget.onTap ?? () => launchUrl(widget.url!),
-            onLongPress: null,
-            onHover: (bool isHovering) => highlight(isHovering),
-            onFocusChange: (bool hasFocus) => highlight(hasFocus),
-            icon: widget.icon,
-            iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
-                ? IconAlignment.start
-                : IconAlignment.end,
-            label: Text(
-              widget.label,
-              style: textStyle,
-              textAlign: widget.textAlign,
-            ),
-          ),
+          child: (widget.onTap != null)
+              ? TextButton.icon(
+                  style: buttonStyle,
+                  onPressed: widget.onTap,
+                  onLongPress: null,
+                  onHover: (bool isHovering) => underline(isHovering),
+                  onFocusChange: (bool hasFocus) => underline(hasFocus),
+                  icon: widget.icon,
+                  iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
+                      ? IconAlignment.start
+                      : IconAlignment.end,
+                  label: Text(
+                    widget.label,
+                    style: textStyle,
+                    textAlign: widget.textAlign,
+                  ),
+                )
+              : Link(
+                  uri: widget.url,
+                  builder: (_, FollowLink? followLink) => TextButton.icon(
+                    style: buttonStyle,
+                    onPressed: followLink,
+                    onLongPress: null,
+                    onHover: (bool isHovering) => underline(isHovering),
+                    onFocusChange: (bool hasFocus) => underline(hasFocus),
+                    icon: widget.icon,
+                    iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
+                        ? IconAlignment.start
+                        : IconAlignment.end,
+                    label: Text(
+                      widget.label,
+                      style: textStyle,
+                      textAlign: widget.textAlign,
+                    ),
+                  ),
+                ),
         ),
       ),
     );
