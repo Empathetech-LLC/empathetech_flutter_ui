@@ -9,52 +9,38 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
 class EzElevatedLink extends StatelessWidget {
-  /// Destination function
-  /// Provide [onTap] or [url], but not both
-  final void Function()? onTap;
-
-  /// Destination URL
-  /// Provide [onTap] or [url], but not both
-  final Uri? url;
-
-  /// What is it?
-  final String label;
-
-  /// Is it unique?
-  final String? value;
-
-  /// Is this an image?
-  final bool isImage;
-
-  /// What does it do?
-  final String hint;
-
   /// [Tooltip.message] passthrough
   final String tooltip;
 
-  /// [InkWell.child] passthrough
-  final Widget child;
+  /// [Semantics] label; What is it?
+  final String label;
 
-  /// [InkWell] wrapper that either opens an internal link via [onTap]
-  /// Or an external link to [url]
+  /// [Semantics] value; is it unique?
+  final String? value;
+
+  /// [Semantics] hint; what does it do?
+  final String hint;
+
+  /// Destination URL
+  final Uri? url;
+
+  /// [EzElevatedButton.text] passthrough
+  final String text;
+
+  /// Minimal [EzElevatedButton] wrapped in a [Link]
+  /// If you want an [ElevatedButton] with a web context menu
   const EzElevatedLink({
     super.key,
-    this.onTap,
-    this.url,
     required this.tooltip,
     required this.label,
     this.value,
-    this.isImage = false,
     required this.hint,
-    required this.child,
-  }) : assert((onTap == null) != (url == null),
-            'Either onTap or url should be provided, but not both.');
+    required this.url,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final Color focusColor =
-        Theme.of(context).colorScheme.primary.withValues(alpha: focusOpacity);
-
     return Tooltip(
       message: tooltip,
       excludeFromSemantics: true,
@@ -62,19 +48,73 @@ class EzElevatedLink extends StatelessWidget {
         label: label,
         value: value,
         link: true,
-        image: isImage,
         hint: hint,
         child: ExcludeSemantics(
-          child: onTap != null
-              ? InkWell(focusColor: focusColor, onTap: onTap, child: child)
-              : Link(
-                  uri: url,
-                  builder: (_, FollowLink? followLink) => InkWell(
-                    focusColor: focusColor,
-                    onTap: followLink,
-                    child: child,
-                  ),
-                ),
+          child: Link(
+            uri: url,
+            builder: (_, FollowLink? followLink) =>
+                EzElevatedButton(onPressed: followLink, text: text),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EzElevatedIconLink extends StatelessWidget {
+  /// [Tooltip.message] passthrough
+  final String tooltip;
+
+  /// [Semantics] label; What is it?
+  final String label;
+
+  /// [Semantics] value; is it unique?
+  final String? value;
+
+  /// [Semantics] hint; what does it do?
+  final String hint;
+
+  /// Destination URL
+  final Uri? url;
+
+  /// [EzElevatedIconButton.icon] passthrough
+  final Widget icon;
+
+  /// [EzElevatedIconButton.label] passthrough
+  final String buttonLabel;
+
+  /// Minimal [EzElevatedIconButton] wrapped in a [Link]
+  /// If you want an [ElevatedButton.icon] with a web context menu
+  const EzElevatedIconLink({
+    super.key,
+    required this.tooltip,
+    required this.label,
+    this.value,
+    required this.hint,
+    required this.url,
+    required this.icon,
+    required this.buttonLabel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      excludeFromSemantics: true,
+      child: Semantics(
+        label: label,
+        value: value,
+        link: true,
+        hint: hint,
+        child: ExcludeSemantics(
+          child: Link(
+            uri: url,
+            builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+              onPressed: followLink,
+              icon: icon,
+              label: label,
+            ),
+          ),
         ),
       ),
     );
