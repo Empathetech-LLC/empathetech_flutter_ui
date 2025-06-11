@@ -3,12 +3,12 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
-class EzLinkImageProvider extends StatelessWidget {
+class EzImageLink extends StatelessWidget {
   /// [Image.image] passthrough
   final ImageProvider<Object> image;
 
@@ -82,7 +82,7 @@ class EzLinkImageProvider extends StatelessWidget {
 
   /// [Image] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
-  const EzLinkImageProvider({
+  const EzImageLink({
     super.key,
     required this.image,
     required this.label,
