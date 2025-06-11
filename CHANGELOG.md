@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [9.1.0] - 2025-06-??
 ### Updated
 - Web links have proper context menus
+  - No developer changes required, except EzLinkImageProvider is now EzImageLink
 - Config randomizer is a little more random
 
 ### Added
