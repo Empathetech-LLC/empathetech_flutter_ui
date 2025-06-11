@@ -17,16 +17,16 @@ class EzLinkWidget extends StatelessWidget {
   /// Provide [onTap] or [url], but not both
   final Uri? url;
 
-  /// What is it?
+  /// [Semantics] label; What is it?
   final String label;
 
-  /// Is it unique?
+  /// [Semantics] value; is it unique?
   final String? value;
 
   /// Is this an image?
   final bool isImage;
 
-  /// What does it do?
+  /// [Semantics] hint; what does it do?
   final String hint;
 
   /// [Tooltip.message] passthrough

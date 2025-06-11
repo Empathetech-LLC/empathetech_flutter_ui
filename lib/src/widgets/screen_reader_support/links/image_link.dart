@@ -20,13 +20,13 @@ class EzImageLink extends StatelessWidget {
   /// Provide [onTap] or [url], but not both
   final Uri? url;
 
-  /// What is it?
+  /// [Semantics] label; What is it?
   final String label;
 
-  /// What does it do?
+  /// [Semantics] hint; what does it do?
   final String hint;
 
-  /// Is it unique?
+  /// [Semantics] value; is it unique?
   final String? value;
 
   /// [Tooltip.message] for on hover/focus
