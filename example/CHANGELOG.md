@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.2] - 2025-06-??
+### Removed
+- Back FAB
+
+### Updated
+- Updated widget only appears on desktop
+
 ## [2.2.1] - 2025-05-24
 ### Added
 - Changelog tracking
