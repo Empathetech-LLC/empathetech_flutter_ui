@@ -7,8 +7,10 @@ All notable changes to this project will be documented in this file.
 - Web links have proper context menus
   - No developer changes required, except EzLinkImageProvider is now EzImageLink
 - Config randomizer is a little more random
+- Code comments
 
 ### Added
+- EzElevated(Icon)Link
 - More feedback localizations
 - SemanticsRole to EzToolTipper
 
