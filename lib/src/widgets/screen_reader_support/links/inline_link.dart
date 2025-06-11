@@ -36,23 +36,21 @@ class EzInlineLink extends WidgetSpan {
   /// Don't repeat [text] here, it is appended automatically
   final String hint;
 
-  /// Message for screen readers when the parent [EzRichText] is focused
-  final String? richLabel;
-
   /// [EzLink.tooltip] passthrough
   final String? tooltip;
 
-  /// [WidgetSpan] wrapper with an [EzLink] for a [WidgetSpan.child]
+  /// Message for screen readers when the parent [EzRichText] is focused
+  final String? richLabel;
+
+  /// [WidgetSpan] extension with an [EzLink] for a child
+  /// The [EzLink] has zero padding and custom [Semantics] for [EzRichText]; [richLabel]
   /// If the link [text] is too short, spacing will be off due to the min [MaterialTapTargetSize]
   /// 6+ characters usually does the trick
   EzInlineLink(
-    this.text, {
-    super.alignment = PlaceholderAlignment.baseline,
-    super.baseline = TextBaseline.alphabetic,
-    super.style,
-
     // EzLink
+    this.text, {
     this.key,
+    super.style,
     this.textColor,
     this.decorationColor,
     this.backgroundColor = Colors.transparent,
@@ -60,8 +58,12 @@ class EzInlineLink extends WidgetSpan {
     this.onTap,
     this.url,
     required this.hint,
-    this.richLabel, // Not used here, but in EzRichText
     this.tooltip,
+    this.richLabel, // Not used here, but in EzRichText
+
+    // WidgetSpan
+    super.alignment = PlaceholderAlignment.baseline,
+    super.baseline = TextBaseline.alphabetic,
   })  : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.'),
         super(
