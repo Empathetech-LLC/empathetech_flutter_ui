@@ -106,6 +106,12 @@ class _EzLinkState extends State<EzLink> {
       backgroundColor: widget.backgroundColor,
     );
 
+    final Text text = Text(
+      widget.text,
+      style: textStyle,
+      textAlign: widget.textAlign,
+    );
+
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
@@ -120,11 +126,7 @@ class _EzLinkState extends State<EzLink> {
                   onLongPress: null,
                   onHover: (bool isHovering) => underline(isHovering),
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
-                  child: Text(
-                    widget.text,
-                    style: textStyle,
-                    textAlign: widget.textAlign,
-                  ),
+                  child: text,
                 )
               : Link(
                   uri: widget.url,
@@ -134,11 +136,7 @@ class _EzLinkState extends State<EzLink> {
                     onLongPress: null,
                     onHover: (bool isHovering) => underline(isHovering),
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
-                    child: Text(
-                      widget.text,
-                      style: textStyle,
-                      textAlign: widget.textAlign,
-                    ),
+                    child: text,
                   ),
                 ),
         ),
@@ -244,6 +242,12 @@ class _EzIconLinkState extends State<EzIconLink> {
       overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
     );
 
+    final Text text = Text(
+      widget.label,
+      style: textStyle,
+      textAlign: widget.textAlign,
+    );
+
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
       excludeFromSemantics: true,
@@ -262,11 +266,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                   iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
                       ? IconAlignment.start
                       : IconAlignment.end,
-                  label: Text(
-                    widget.label,
-                    style: textStyle,
-                    textAlign: widget.textAlign,
-                  ),
+                  label: text,
                 )
               : Link(
                   uri: widget.url,
@@ -280,11 +280,7 @@ class _EzIconLinkState extends State<EzIconLink> {
                     iconAlignment: (EzConfig.get(isLeftyKey) ?? false)
                         ? IconAlignment.start
                         : IconAlignment.end,
-                    label: Text(
-                      widget.label,
-                      style: textStyle,
-                      textAlign: widget.textAlign,
-                    ),
+                    label: text,
                   ),
                 ),
         ),
