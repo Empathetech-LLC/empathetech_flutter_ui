@@ -1122,7 +1122,6 @@ class TextSettingsScreen extends StatelessWidget {
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzTextSettings(target: target),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1148,7 +1147,6 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1176,7 +1174,6 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzColorSettings(target: target),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1202,7 +1199,6 @@ class ImageSettingsScreen extends StatelessWidget {
         title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
-        fab: EzBackFAB(context),
       );
 }
 """);
