@@ -489,6 +489,12 @@ abstract class Lang {
   /// **'Install it'**
   String get rsInstall;
 
+  /// No description provided for @rsInstallHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Flutter\'s installation guide'**
+  String get rsInstallHint;
+
   /// No description provided for @rsRun.
   ///
   /// In en, this message translates to:

@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -563,8 +562,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         textAlign: TextAlign.start,
                       ),
                       spacer,
-                      EzElevatedIconButton(
-                        onPressed: () => launchUrl(Uri.parse(installFlutter)),
+                      EzElevatedIconLink(
+                        url: Uri.parse(installFlutter),
+                        tooltip: installFlutter,
+                        hint: l10n.rsInstallHint,
                         icon: EzIcon(Icons.computer),
                         label: Lang.of(context)!.rsInstall,
                       ),

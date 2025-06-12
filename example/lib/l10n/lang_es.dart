@@ -225,6 +225,9 @@ class LangEs extends Lang {
   String get rsInstall => 'Instalarlo';
 
   @override
+  String get rsInstallHint => 'Abra la guía de instalación de Flutter';
+
+  @override
   String get rsRun => 'Ejecutarlo';
 
   @override

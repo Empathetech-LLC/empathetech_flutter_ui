@@ -219,6 +219,9 @@ class LangEn extends Lang {
   String get rsInstall => 'Install it';
 
   @override
+  String get rsInstallHint => 'Open Flutter\'s installation guide';
+
+  @override
   String get rsRun => 'Run it';
 
   @override
@@ -448,6 +451,9 @@ class LangEnUs extends LangEn {
 
   @override
   String get rsInstall => 'Install it';
+
+  @override
+  String get rsInstallHint => 'Open Flutter\'s installation guide';
 
   @override
   String get rsRun => 'Run it';

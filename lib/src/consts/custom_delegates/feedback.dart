@@ -50,6 +50,20 @@ class EzEsFeedback extends FeedbackLocalizations {
   String get submitButtonText => 'Enviar';
 }
 
+class EzFilFeedback extends FeedbackLocalizations {
+  @override
+  String get draw => 'Iguhit';
+
+  @override
+  String get feedbackDescriptionText => 'Ano ang nasa isip mo?';
+
+  @override
+  String get navigate => 'Makipag-ugnayan';
+
+  @override
+  String get submitButtonText => 'Isumite';
+}
+
 class EzFrFeedback extends FeedbackLocalizations {
   @override
   String get draw => 'Dessiner';
@@ -78,6 +92,34 @@ class EzHtFeedback extends FeedbackLocalizations {
   String get submitButtonText => 'Soumèt';
 }
 
+class EzPtFeedback extends FeedbackLocalizations {
+  @override
+  String get draw => 'Pending';
+
+  @override
+  String get feedbackDescriptionText => 'Pending';
+
+  @override
+  String get navigate => 'Pending';
+
+  @override
+  String get submitButtonText => 'Pending';
+}
+
+class EzZhFeedback extends FeedbackLocalizations {
+  @override
+  String get draw => '画画';
+
+  @override
+  String get feedbackDescriptionText => '您在想什么？';
+
+  @override
+  String get navigate => '互动';
+
+  @override
+  String get submitButtonText => '提交';
+}
+
 class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
   @override
   Map<Locale, FeedbackLocalizations> get supportedLocales =>
@@ -87,7 +129,10 @@ class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
         english: EzEnFeedback(),
         americanEnglish: EzEnFeedback(),
         spanish: EzEsFeedback(),
+        filipino: EzFilFeedback(),
         french: EzFrFeedback(),
         creole: EzHtFeedback(),
+        portuguese: EzPtFeedback(),
+        chinese: EzZhFeedback(),
       };
 }

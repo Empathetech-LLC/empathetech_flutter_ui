@@ -16,6 +16,5 @@ class ImageSettingsScreen extends StatelessWidget {
         title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
-        fab: EzBackFAB(context),
       );
 }

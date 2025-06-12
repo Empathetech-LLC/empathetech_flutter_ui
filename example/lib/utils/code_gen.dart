@@ -437,14 +437,14 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^9.0.1
+  empathetech_flutter_ui: ^9.1.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
-  flutter_platform_widgets: ^8.0.0
+  flutter_platform_widgets: ^9.0.0
 
 dev_dependencies:
   dependency_validator: ^5.0.2
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
   integration_test:
@@ -755,8 +755,8 @@ class CountFAB extends StatelessWidget {
 import '../screens/export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -792,15 +792,18 @@ class EFUICredits extends StatelessWidget {
     final String tip = l10n.gOpenEmpathetech;
     final String settings = l10n.ssPageTitle;
 
-    return Tooltip(
-      message: tip,
-      excludeFromSemantics: true,
-      child: EzMenuButton(
-        onPressed: () => launchUrl(Uri.parse('$openUIProdPage')),
-        icon: EzIcon(PlatformIcons(context).settings),
-        label: label,
-        semanticsLabel:
+    return Link(
+      uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
+      builder: (_, FollowLink? followLink) => Tooltip(
+        message: tip,
+        excludeFromSemantics: true,
+        child: EzMenuButton(
+          onPressed: followLink,
+          icon: EzIcon(PlatformIcons(context).settings),
+          label: label,
+          semanticsLabel:
             '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
+        ),
       ),
     );
   }
@@ -1122,7 +1125,6 @@ class TextSettingsScreen extends StatelessWidget {
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
         body: EzTextSettings(target: target),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1148,7 +1150,6 @@ class LayoutSettingsScreen extends StatelessWidget {
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
         body: const EzLayoutSettings(),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1176,7 +1177,6 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzColorSettings(target: target),
-        fab: EzBackFAB(context),
       );
 }
 """);
@@ -1202,7 +1202,6 @@ class ImageSettingsScreen extends StatelessWidget {
         title: ezL10n(context).isPageTitle,
         showSettings: false,
         body: const EzImageSettings(),
-        fab: EzBackFAB(context),
       );
 }
 """);

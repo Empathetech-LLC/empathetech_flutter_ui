@@ -3,10 +3,10 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../empathetech_flutter_ui.dart';
+import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 
 class EzLinkWidget extends StatelessWidget {
   /// Destination function
@@ -17,16 +17,13 @@ class EzLinkWidget extends StatelessWidget {
   /// Provide [onTap] or [url], but not both
   final Uri? url;
 
-  /// What is it?
+  /// [Semantics] label; What is it?
   final String label;
-
-  /// Is it unique?
-  final String? value;
 
   /// Is this an image?
   final bool isImage;
 
-  /// What does it do?
+  /// [Semantics] hint; what does it do?
   final String hint;
 
   /// [Tooltip.message] passthrough
@@ -43,7 +40,6 @@ class EzLinkWidget extends StatelessWidget {
     this.url,
     required this.tooltip,
     required this.label,
-    this.value,
     this.isImage = false,
     required this.hint,
     required this.child,
@@ -51,25 +47,31 @@ class EzLinkWidget extends StatelessWidget {
             'Either onTap or url should be provided, but not both.');
 
   @override
-  Widget build(BuildContext context) => Tooltip(
-        message: tooltip,
-        excludeFromSemantics: true,
-        child: Semantics(
-          label: label,
-          value: value,
-          link: true,
-          image: isImage,
-          hint: hint,
-          child: ExcludeSemantics(
-            child: InkWell(
-              focusColor: Theme.of(context)
-                  .colorScheme
-                  .primary
-                  .withValues(alpha: focusOpacity),
-              onTap: onTap ?? () => launchUrl(url!),
-              child: child,
-            ),
-          ),
+  Widget build(BuildContext context) {
+    final Color focusColor =
+        Theme.of(context).colorScheme.primary.withValues(alpha: focusOpacity);
+
+    return Tooltip(
+      message: tooltip,
+      excludeFromSemantics: true,
+      child: Semantics(
+        label: label,
+        link: true,
+        image: isImage,
+        hint: hint,
+        child: ExcludeSemantics(
+          child: onTap != null
+              ? InkWell(focusColor: focusColor, onTap: onTap, child: child)
+              : Link(
+                  uri: url,
+                  builder: (_, FollowLink? followLink) => InkWell(
+                    focusColor: focusColor,
+                    onTap: followLink,
+                    child: child,
+                  ),
+                ),
         ),
-      );
+      ),
+    );
+  }
 }

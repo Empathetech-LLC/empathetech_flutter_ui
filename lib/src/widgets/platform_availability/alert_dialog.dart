@@ -25,7 +25,7 @@ class EzAlertDialog extends PlatformAlertDialog {
   final bool needsClose;
 
   /// [PlatformAlertDialog] wrapper with custom styling
-  EzAlertDialog({
+  const EzAlertDialog({
     super.key,
     super.widgetKey,
     super.title,

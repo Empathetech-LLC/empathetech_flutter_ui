@@ -50,6 +50,16 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     late final Widget flag;
     bool? democracyInDistress;
 
+    // Fix language code != flag code
+    switch (lang.languageCode) {
+      case 'fil':
+        lang = const Locale('tl'); // Filipino to Tagalog
+        break;
+
+      default:
+        break;
+    }
+
     if (lang.countryCode == null) {
       flag = CountryFlag.fromLanguageCode(
         lang.languageCode,
@@ -63,6 +73,7 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         width: padding * 2 + margin,
       );
 
+      // Hopefully temporary
       switch (lang.countryCode) {
         case 'US':
           democracyInDistress = true;
@@ -73,26 +84,22 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: primary),
-      ),
-      child: (democracyInDistress == true)
-          ? Transform.rotate(angle: pi, child: flag)
-          : flag,
-    );
+    return (democracyInDistress == true)
+        ? Transform.rotate(angle: pi, child: flag)
+        : flag;
   }
 
   // Create custom functions //
 
   String localeName(Locale locale) {
     final String? supported =
-        LocaleNames.of(context)?.nameOf(locale.languageCode);
+        LocaleNames.of(context)!.nameOf(locale.languageCode);
 
     if (supported != null) return supported;
 
     switch (locale) {
+      case filipino:
+        return 'Filipino';
       case creole:
         return 'Creole';
       default:

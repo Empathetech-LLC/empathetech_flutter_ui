@@ -10,10 +10,10 @@ import '../utils/export.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -83,13 +83,16 @@ class OpenSourceButton extends StatelessWidget {
     final EFUILang l10n = ezL10n(context);
     final String text = l10n.gOpenSource;
 
-    return EzMenuButton(
-      onPressed: () => launchUrl(
-        Uri.parse('https://github.com/Empathetech-LLC/empathetech_flutter_ui'),
+    return Link(
+      uri: Uri.parse(
+        'https://github.com/Empathetech-LLC/empathetech_flutter_ui',
       ),
-      semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-      icon: EzIcon(LineIcons.github),
-      label: text,
+      builder: (_, FollowLink? followLink) => EzMenuButton(
+        onPressed: followLink,
+        semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
+        icon: EzIcon(LineIcons.github),
+        label: text,
+      ),
     );
   }
 }

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [9.1.0] - 2025-06-11
+### Updated
+- Web links have proper context menus
+  - Minimal developer changes required
+    - EzLinkImageProvider is now EzImageLink
+    - Some EzXLink parameters have been updated
+- Config randomizer is a little more random
+- Code comments
+
+### Added
+- EzElevated(Icon)Link
+- More feedback localizations
+- SemanticsRole to EzToolTipper
+
 ## [9.0.1] - 2025-05-24
 ### Updated
 - Flutter 3.32.0

@@ -20,8 +20,20 @@ const Locale americanEnglish = Locale('en', 'US');
 /// 'es'
 const Locale spanish = Locale('es');
 
+/// 'fil'
+const Locale filipino = Locale('fil');
+
 /// 'fr'
 const Locale french = Locale('fr');
 
 /// 'ht'
 const Locale creole = Locale('ht');
+
+/// 'pt'
+const Locale portuguese = Locale('pt');
+
+/// 'zh'
+const Locale chinese = Locale('zh');
+
+/// 'zh_CN'
+const Locale simplifiedChinese = Locale('zh', 'CN');

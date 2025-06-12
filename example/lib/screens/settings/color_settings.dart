@@ -18,6 +18,5 @@ class ColorSettingsScreen extends StatelessWidget {
         title: ezL10n(context).csPageTitle,
         showSettings: false,
         body: EzColorSettings(target: target),
-        fab: EzBackFAB(context),
       );
 }

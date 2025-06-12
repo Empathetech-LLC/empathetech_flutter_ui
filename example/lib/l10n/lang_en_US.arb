@@ -101,6 +101,7 @@
   "rsWouldYou": "would you like to...",
 
   "rsInstall": "Install it",
+  "rsInstallHint": "Open Flutter's installation guide",
 
   "rsRun": "Run it",
 

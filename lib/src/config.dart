@@ -460,14 +460,7 @@ Must be one of [int, bool, double, String, List<String>]''');
               tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
               onTertiary: onTertiary,
               onTertiaryContainer: onTertiary,
-              surface: Colors.black,
               onSurface: Colors.white,
-              surfaceContainer: Color.fromRGBO(
-                (primary.r * (1 - 0.8)).toInt(),
-                (primary.g * (1 - 0.8)).toInt(),
-                (primary.b * (1 - 0.8)).toInt(),
-                1.0,
-              ),
               surfaceTint: Colors.transparent,
             )
           : ColorScheme.fromSeed(
@@ -485,14 +478,7 @@ Must be one of [int, bool, double, String, List<String>]''');
               tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
               onTertiary: onTertiary,
               onTertiaryContainer: onTertiary,
-              surface: Colors.white,
               onSurface: Colors.black,
-              surfaceContainer: Color.fromRGBO(
-                ((primary.r * (1 - 0.8)) + (255 * 0.8)).toInt(),
-                ((primary.g * (1 - 0.8)) + (255 * 0.8)).toInt(),
-                ((primary.b * (1 - 0.8)) + (255 * 0.8)).toInt(),
-                1.0,
-              ),
               surfaceTint: Colors.transparent,
             ),
       brightness: isDark ? Brightness.dark : Brightness.light,
