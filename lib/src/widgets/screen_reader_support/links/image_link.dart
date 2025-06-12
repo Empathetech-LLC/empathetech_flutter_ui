@@ -26,9 +26,6 @@ class EzImageLink extends StatelessWidget {
   /// [Semantics] hint; what does it do?
   final String hint;
 
-  /// [Semantics] value; is it unique?
-  final String? value;
-
   /// [Tooltip.message] for on hover/focus
   final String tooltip;
 
@@ -84,13 +81,14 @@ class EzImageLink extends StatelessWidget {
   /// Or an external link to [url]
   const EzImageLink({
     super.key,
-    required this.image,
     required this.label,
     required this.hint,
-    this.value,
     required this.tooltip,
     this.onTap,
     this.url,
+
+    // Image
+    required this.image,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -142,7 +140,6 @@ class EzImageLink extends StatelessWidget {
       excludeFromSemantics: true,
       child: Semantics(
         label: label,
-        value: value,
         link: true,
         image: true,
         hint: hint,

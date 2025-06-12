@@ -20,9 +20,6 @@ class EzLinkWidget extends StatelessWidget {
   /// [Semantics] label; What is it?
   final String label;
 
-  /// [Semantics] value; is it unique?
-  final String? value;
-
   /// Is this an image?
   final bool isImage;
 
@@ -43,7 +40,6 @@ class EzLinkWidget extends StatelessWidget {
     this.url,
     required this.tooltip,
     required this.label,
-    this.value,
     this.isImage = false,
     required this.hint,
     required this.child,
@@ -60,7 +56,6 @@ class EzLinkWidget extends StatelessWidget {
       excludeFromSemantics: true,
       child: Semantics(
         label: label,
-        value: value,
         link: true,
         image: isImage,
         hint: hint,

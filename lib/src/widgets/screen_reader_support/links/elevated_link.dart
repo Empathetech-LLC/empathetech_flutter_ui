@@ -10,15 +10,12 @@ import 'package:url_launcher/link.dart';
 
 class EzElevatedLink extends StatelessWidget {
   /// [Tooltip.message] passthrough
-  final String tooltip;
-
-  /// [Semantics] label; What is it?
-  final String label;
-
-  /// [Semantics] value; is it unique?
-  final String? value;
+  /// On hover/focus hint
+  /// Defaults to [hint]
+  final String? tooltip;
 
   /// [Semantics] hint; what does it do?
+  /// Don't repeat [text] here, it is appended automatically
   final String hint;
 
   /// Destination URL
@@ -28,50 +25,43 @@ class EzElevatedLink extends StatelessWidget {
   final String text;
 
   /// Minimal [EzElevatedButton] wrapped in a [Link]
-  /// If you want an [ElevatedButton] with a web context menu
+  /// If you want an [ElevatedButton] with web [Semantics] and context menu
+  /// Always has a [tooltip]; if one is not provided, it will default to [hint]
   const EzElevatedLink({
     super.key,
-    required this.tooltip,
-    required this.label,
-    this.value,
+    this.tooltip,
     required this.hint,
     required this.url,
     required this.text,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: label,
-        value: value,
-        link: true,
-        hint: hint,
-        child: ExcludeSemantics(
-          child: Link(
-            uri: url,
-            builder: (_, FollowLink? followLink) =>
-                EzElevatedButton(onPressed: followLink, text: text),
+  Widget build(BuildContext context) => Tooltip(
+        message: tooltip ?? hint,
+        excludeFromSemantics: true,
+        child: Semantics(
+          button: true,
+          link: true,
+          hint: '$text; $hint',
+          child: ExcludeSemantics(
+            child: Link(
+              uri: url,
+              builder: (_, FollowLink? followLink) =>
+                  EzElevatedButton(onPressed: followLink, text: text),
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class EzElevatedIconLink extends StatelessWidget {
   /// [Tooltip.message] passthrough
-  final String tooltip;
-
-  /// [Semantics] label; What is it?
-  final String label;
-
-  /// [Semantics] value; is it unique?
-  final String? value;
+  /// On hover/focus hint
+  /// Defaults to [hint]
+  final String? tooltip;
 
   /// [Semantics] hint; what does it do?
+  /// Don't repeat [label] here, it is appended automatically
   final String hint;
 
   /// Destination URL
@@ -81,42 +71,38 @@ class EzElevatedIconLink extends StatelessWidget {
   final Widget icon;
 
   /// [EzElevatedIconButton.label] passthrough
-  final String buttonLabel;
+  final String label;
 
   /// Minimal [EzElevatedIconButton] wrapped in a [Link]
-  /// If you want an [ElevatedButton.icon] with a web context menu
+  /// If you want an [ElevatedButton.icon] with web [Semantics] and context menu
+  /// Always has a [tooltip]; if one is not provided, it will default to [hint]
   const EzElevatedIconLink({
     super.key,
-    required this.tooltip,
-    required this.label,
-    this.value,
+    this.tooltip,
     required this.hint,
     required this.url,
     required this.icon,
-    required this.buttonLabel,
+    required this.label,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      excludeFromSemantics: true,
-      child: Semantics(
-        label: label,
-        value: value,
-        link: true,
-        hint: hint,
-        child: ExcludeSemantics(
-          child: Link(
-            uri: url,
-            builder: (_, FollowLink? followLink) => EzElevatedIconButton(
-              onPressed: followLink,
-              icon: icon,
-              label: label,
+  Widget build(BuildContext context) => Tooltip(
+        message: tooltip ?? hint,
+        excludeFromSemantics: true,
+        child: Semantics(
+          button: true,
+          link: true,
+          hint: '$label; $hint',
+          child: ExcludeSemantics(
+            child: Link(
+              uri: url,
+              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                onPressed: followLink,
+                icon: icon,
+                label: label,
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

@@ -43,8 +43,9 @@ class EzLink extends StatefulWidget {
   /// Don't repeat [text] here, it is appended automatically
   final String hint;
 
+  /// [Tooltip.message] passthrough
   /// On hover/focus hint
-  /// Defaults to [hint] (or [text])
+  /// Defaults to [hint]
   final String? tooltip;
 
   /// [TextButton] wrapper that either opens an internal link via [onTap]

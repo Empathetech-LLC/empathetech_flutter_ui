@@ -43,8 +43,9 @@ class EzIconLink extends StatefulWidget {
   /// Don't repeat [label] here, it is appended automatically
   final String hint;
 
+  /// [Tooltip.message] passthrough
   /// On hover/focus hint
-  /// Defaults to [hint] (or [label])
+  /// Defaults to [hint]
   final String? tooltip;
 
   /// [TextButton.icon] wrapper that either opens an internal link via [onTap]
