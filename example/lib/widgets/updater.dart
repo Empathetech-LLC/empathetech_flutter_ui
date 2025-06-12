@@ -23,8 +23,8 @@ const String _github =
 const String _versionSource =
     'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
 
-/// '2.2.1'
-const String _appVersion = '2.2.1';
+/// '2.2.2'
+const String _appVersion = '2.2.2';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
