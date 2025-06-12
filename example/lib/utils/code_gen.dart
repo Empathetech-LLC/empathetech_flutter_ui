@@ -792,15 +792,18 @@ class EFUICredits extends StatelessWidget {
     final String tip = l10n.gOpenEmpathetech;
     final String settings = l10n.ssPageTitle;
 
-    return Tooltip(
-      message: tip,
-      excludeFromSemantics: true,
-      child: EzMenuButton(
-        onPressed: () => launchUrl(Uri.parse('$openUIProdPage')),
-        icon: EzIcon(PlatformIcons(context).settings),
-        label: label,
-        semanticsLabel:
+    return Link(
+      uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
+      builder: (_, FollowLink? followLink) => Tooltip(
+        message: tip,
+        excludeFromSemantics: true,
+        child: EzMenuButton(
+          onPressed: followLink,
+          icon: EzIcon(PlatformIcons(context).settings),
+          label: label,
+          semanticsLabel:
             '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
+        ),
       ),
     );
   }
