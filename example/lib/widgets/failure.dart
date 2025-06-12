@@ -6,7 +6,6 @@
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -135,6 +134,7 @@ class DeleteOption extends StatelessWidget {
       );
 }
 
+/// https://docs.flutter.dev/get-started/install
 const String installFlutter = 'https://docs.flutter.dev/get-started/install';
 
 class LinkOption extends StatelessWidget {
@@ -145,21 +145,27 @@ class LinkOption extends StatelessWidget {
   const LinkOption(this.style, {super.key});
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          EzText(
-            Lang.of(context)!.rsWouldYou,
-            style: style,
-            textAlign: TextAlign.center,
-          ),
-          const EzSpacer(),
-          EzElevatedIconButton(
-            onPressed: () => launchUrl(Uri.parse(installFlutter)),
-            icon: EzIcon(Icons.computer),
-            label: Lang.of(context)!.rsInstall,
-          ),
-        ],
-      );
+  Widget build(BuildContext context) {
+    final Lang l10n = Lang.of(context)!;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        EzText(
+          l10n.rsWouldYou,
+          style: style,
+          textAlign: TextAlign.center,
+        ),
+        const EzSpacer(),
+        EzElevatedIconLink(
+          url: Uri.parse(installFlutter),
+          tooltip: installFlutter,
+          hint: l10n.rsInstallHint,
+          icon: EzIcon(Icons.computer),
+          label: l10n.rsInstall,
+        ),
+      ],
+    );
+  }
 }
