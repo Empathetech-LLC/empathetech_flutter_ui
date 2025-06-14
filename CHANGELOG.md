@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## [9.1.1] - 2025-06-??
+
 ## [9.1.0] - 2025-06-11
 ### Updated
 - Web links have proper context menus
