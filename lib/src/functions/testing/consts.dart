@@ -29,9 +29,6 @@ const Locale french = Locale('fr');
 /// 'ht'
 const Locale creole = Locale('ht');
 
-/// 'pt'
-const Locale portuguese = Locale('pt');
-
 /// 'zh'
 const Locale chinese = Locale('zh');
 
