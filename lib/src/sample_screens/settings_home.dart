@@ -10,12 +10,16 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
+  /// [EzScreen.useImageDecoration] passthrough
+  final bool useImageDecoration;
+
   /// Remove the 'Have fun!' part of the settings disclaimer
   /// There are some apps where fun is not appropriate
   final bool notFun;
 
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
+  /// Locales to skip in the [EzLocaleSetting]
+  /// Defaults to [english] to not dupe [americanEnglish]
+  final List<Locale> skipLocales;
 
   /// Widgets to be added below language and above any present routes
   /// Do not include a trailing spacer, one will be provided
@@ -54,8 +58,9 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
-    this.notFun = false,
     this.useImageDecoration = true,
+    this.notFun = false,
+    this.skipLocales = const <Locale>[english],
     this.additionalSettings,
     required this.textSettingsPath,
     required this.layoutSettingsPath,
@@ -109,7 +114,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           const EzThemeModeSwitch(),
           spacer,
 
-          const EzLocaleSetting(skip: <Locale>[english]),
+          EzLocaleSetting(skip: widget.skipLocales),
           separator,
 
           if (widget.additionalSettings != null) ...<Widget>[
