@@ -163,10 +163,11 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           ],
 
           // Turn trailing spacer (if present) into a separator
-          if (widget.textSettingsPath != null ||
-              widget.layoutSettingsPath != null ||
-              widget.colorSettingsPath != null ||
-              widget.imageSettingsPath != null)
+          if (widget.additionalRoutes == null &&
+              (widget.textSettingsPath != null ||
+                  widget.layoutSettingsPath != null ||
+                  widget.colorSettingsPath != null ||
+                  widget.imageSettingsPath != null))
             spacer,
 
           if (widget.additionalRoutes != null) ...<Widget>[
