@@ -131,7 +131,7 @@ class EzSwitchPair extends StatelessWidget {
           textHeightBehavior: textHeightBehavior,
           selectionColor: selectionColor,
         ),
-        const EzSpacer(),
+        const EzSpacer(vertical: false),
         Switch(
           value: value,
           onChanged: onChanged,
