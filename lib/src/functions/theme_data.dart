@@ -280,13 +280,15 @@ ThemeData ezThemeData(Brightness brightness) {
       thumbColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected))
             ? colorScheme.primary
-            : colorScheme.surface.withValues(alpha: textBackgroundOpacity),
+            : colorScheme.outline,
       ),
       trackColor: WidgetStateProperty.resolveWith(
-        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected) ||
+                states.contains(WidgetState.focused))
             ? colorScheme.primaryContainer
-            : colorScheme.outline.withValues(alpha: textBackgroundOpacity),
+            : colorScheme.surface,
       ),
+      trackOutlineColor: WidgetStateProperty.all(colorScheme.primaryContainer),
       padding: EdgeInsets.all(margin),
     ),
 
