@@ -581,11 +581,10 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (currPath != noImageValue) {
         if (widget.showFitOption) await chooseFit();
 
-        // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a change to read things
+        // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a chance to read things
         final double? lightOpacity =
-            EzConfig.getDouble(lightTextBackgroundOpacityKey);
-        final double? darkOpacity =
-            EzConfig.getDouble(darkTextBackgroundOpacityKey);
+            EzConfig.get(lightTextBackgroundOpacityKey);
+        final double? darkOpacity = EzConfig.get(darkTextBackgroundOpacityKey);
 
         if (widget.updateTheme == Brightness.light) {
           if (lightOpacity == null || lightOpacity == 0.0) {
