@@ -209,13 +209,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
       ? darkTextBackgroundOpacityKey
       : lightTextBackgroundOpacityKey;
 
-  late double currOpacity = EzConfig.getDouble(oKey) ??
-      EzConfig.getDefault(oKey) ??
-      defaultTextOpacity;
+  late double currOpacity =
+      EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? defaultTextOpacity;
 
   late Color backgroundColor = surface.withValues(alpha: currOpacity);
 
-  late double currIconSize = EzConfig.getDouble(iconSizeKey) ??
+  late double currIconSize = EzConfig.get(iconSizeKey) ??
       EzConfig.getDefault(iconSizeKey) ??
       defaultIconSize;
 
