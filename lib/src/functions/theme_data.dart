@@ -275,6 +275,21 @@ ThemeData ezThemeData(Brightness brightness) {
       insetPadding: EdgeInsets.all(margin),
     ),
 
+    // Switch
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+            ? colorScheme.primary
+            : colorScheme.surface.withValues(alpha: textBackgroundOpacity),
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+            ? colorScheme.primaryContainer
+            : colorScheme.outline.withValues(alpha: textBackgroundOpacity),
+      ),
+      padding: EdgeInsets.all(margin),
+    ),
+
     // Text button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(

@@ -70,6 +70,7 @@ export 'src/widgets/helpers/menu_button.dart';
 export 'src/widgets/helpers/radio.dart';
 export 'src/widgets/helpers/sizing.dart';
 export 'src/widgets/helpers/spacers.dart';
+export 'src/widgets/helpers/switch_pair.dart';
 export 'src/widgets/helpers/text_button.dart';
 export 'src/widgets/helpers/text.dart';
 export 'src/widgets/helpers/tool_tipper.dart';
