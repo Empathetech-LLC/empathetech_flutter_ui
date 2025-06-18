@@ -12,6 +12,7 @@ class EzBackFAB extends FloatingActionButton {
   /// [FloatingActionButton] that goes back; [Navigator.pop]
   EzBackFAB(BuildContext context, {super.key})
       : super(
+          heroTag: 'back_fab',
           child: EzIcon(PlatformIcons(context).back),
           onPressed: () => Navigator.of(context).pop(),
           tooltip: ezL10n(context).gBack,

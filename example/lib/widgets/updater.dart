@@ -97,7 +97,7 @@ class _EzUpdaterState extends State<EzUpdater> {
     return Visibility(
       visible: !isLatest,
       child: FloatingActionButton(
-        heroTag: null,
+        heroTag: 'updater_fab',
         onPressed: () => launchUrl(Uri.parse(url ?? _github)),
         tooltip: ezL10n(context).gUpdates,
         backgroundColor: colorScheme.secondary,
