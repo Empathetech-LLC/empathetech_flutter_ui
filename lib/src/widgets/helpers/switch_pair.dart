@@ -8,8 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-// TODO: Smart semantics
-// Also, do I need to add any EzTextBackground s?
+// TODO: Better semantics
 
 class EzSwitchPair extends StatelessWidget {
   // Row
@@ -20,6 +19,7 @@ class EzSwitchPair extends StatelessWidget {
 
   // Text
   final String text;
+  final bool useSurface;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
@@ -30,10 +30,10 @@ class EzSwitchPair extends StatelessWidget {
   final TextScaler? textScaler;
   final int? maxLines;
   final String? semanticsLabel;
-  final String? semanticsIdentifier;
   final TextWidthBasis? textWidthBasis;
   final TextHeightBehavior? textHeightBehavior;
   final Color? selectionColor;
+  final Color? backgroundColor;
 
   // Switch
   final bool value;
@@ -68,6 +68,7 @@ class EzSwitchPair extends StatelessWidget {
 
     // Text
     required this.text,
+    this.useSurface = false,
     this.style,
     this.strutStyle,
     this.textAlign,
@@ -78,10 +79,10 @@ class EzSwitchPair extends StatelessWidget {
     this.textScaler,
     this.maxLines,
     this.semanticsLabel,
-    this.semanticsIdentifier,
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
+    this.backgroundColor,
 
     // Switch
     required this.value,
@@ -114,24 +115,26 @@ class EzSwitchPair extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,
       children: <Widget>[
-        Text(
-          text,
-          style: style,
-          strutStyle: strutStyle,
-          textAlign: textAlign,
-          textDirection: textDirection,
-          locale: locale,
-          softWrap: softWrap,
-          overflow: overflow,
-          textScaler: textScaler,
-          maxLines: maxLines,
-          semanticsLabel: semanticsLabel,
-          semanticsIdentifier: semanticsIdentifier,
-          textWidthBasis: textWidthBasis,
-          textHeightBehavior: textHeightBehavior,
-          selectionColor: selectionColor,
+        Flexible(
+          child: EzText(
+            text,
+            useSurface: useSurface,
+            style: style,
+            strutStyle: strutStyle,
+            textAlign: textAlign,
+            textDirection: textDirection,
+            locale: locale,
+            softWrap: softWrap,
+            overflow: overflow,
+            textScaler: textScaler,
+            maxLines: maxLines,
+            semanticsLabel: semanticsLabel,
+            textWidthBasis: textWidthBasis,
+            textHeightBehavior: textHeightBehavior,
+            selectionColor: selectionColor,
+            backgroundColor: backgroundColor,
+          ),
         ),
-        const EzSpacer(vertical: false),
         Switch(
           value: value,
           onChanged: onChanged,
