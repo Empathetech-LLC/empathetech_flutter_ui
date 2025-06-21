@@ -98,26 +98,16 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           separator,
 
           // Hide scroll
-
-          EzRow(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Flexible(
-                child: EzText(
-                  l10n.lsScroll,
-                  style: style,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              EzCheckbox(
-                value: hideScroll,
-                onChanged: (bool? value) async {
-                  if (value == null) return;
-                  await EzConfig.setBool(hideScrollKey, value);
-                  setState(() => hideScroll = value);
-                },
-              ),
-            ],
+          EzSwitchPair(
+            text: l10n.lsScroll,
+            style: style,
+            textAlign: TextAlign.center,
+            value: hideScroll,
+            onChanged: (bool? value) async {
+              if (value == null) return;
+              await EzConfig.setBool(hideScrollKey, value);
+              setState(() => hideScroll = value);
+            },
           ),
           separator,
 
