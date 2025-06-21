@@ -375,27 +375,15 @@ class _ImageSettingState extends State<EzImageSetting> {
           top: spacing / 2,
           bottom: spacing,
         ),
-        child: EzRow(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Label
-            Flexible(
-              child: Text(
-                l10n.isUseForColors,
-                textAlign: TextAlign.center,
-              ),
-            ),
-
-            // Check box
-            EzCheckbox(
-              value: updateTheme,
-              onChanged: (bool? choice) {
-                updateTheme = (choice == null) ? false : choice;
-                dialogState(() {});
-                setState(() {});
-              },
-            ),
-          ],
+        child: EzSwitchPair(
+          text: l10n.isUseForColors,
+          textAlign: TextAlign.center,
+          value: updateTheme,
+          onChanged: (bool? choice) {
+            updateTheme = (choice == null) ? false : choice;
+            dialogState(() {});
+            setState(() {});
+          },
         ),
       ));
     }
