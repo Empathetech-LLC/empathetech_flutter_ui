@@ -350,10 +350,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     children: <Widget>[
-                      EzText(
-                        el10n.gNA,
-                        semanticsLabel: el10n.gNAHint,
-                        textAlign: TextAlign.start,
+                      Flexible(
+                        child: EzText(
+                          el10n.gNA,
+                          semanticsLabel: el10n.gNAHint,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                       EzCheckbox(
                         value: exampleDomain,
@@ -410,8 +412,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.tsPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.tsPageTitle,
                     value: textSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -419,8 +421,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.lsPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.lsPageTitle,
                     value: layoutSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -428,8 +430,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.csPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.csPageTitle,
                     value: colorSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -437,8 +439,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.isPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.isPageTitle,
                     value: imageSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -1119,32 +1121,6 @@ class _BasicField extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUnfocus,
             decoration: InputDecoration(hintText: hintText),
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SettingsCheckbox extends StatelessWidget {
-  final String title;
-  final bool value;
-  final void Function(bool?) onChanged;
-
-  const _SettingsCheckbox({
-    required this.title,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Flexible(child: EzText(title, textAlign: TextAlign.start)),
-        EzCheckbox(
-          value: value,
-          onChanged: onChanged,
         ),
       ],
     );
