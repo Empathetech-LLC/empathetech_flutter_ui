@@ -13,6 +13,7 @@ class EzLayoutSettings extends StatefulWidget {
 
   /// Optional additional settings
   /// Will appear just above the reset button
+  /// A trailing [EzSeparator] will be added automatically
   final List<Widget>? additionalSettings;
 
   /// Empathetech layout settings
