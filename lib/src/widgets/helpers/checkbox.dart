@@ -245,13 +245,13 @@ class EzCheckboxPair extends StatelessWidget {
 
   const EzCheckboxPair({
     super.key,
-    // Row
+    // EzRow
     this.reverseHands = true,
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
 
-    // Text
+    // EzText
     required this.text,
     this.useSurface = false,
     this.style,
@@ -269,7 +269,7 @@ class EzCheckboxPair extends StatelessWidget {
     this.selectionColor,
     this.backgroundColor,
 
-    // Checkbox
+    // EzCheckbox
     this.scale,
     this.padding,
     this.value,
