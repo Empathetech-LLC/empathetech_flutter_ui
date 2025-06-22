@@ -12,16 +12,39 @@ class EzLayoutSettings extends StatefulWidget {
   final bool useImageDecoration;
 
   /// Optional additional settings
-  /// Will appear just above the reset button
-  /// A trailing [EzSeparator] will be added automatically
-  final List<Widget>? additionalSettings;
+  /// Before the main settings
+  /// See [prefixSpacer] for layout tuning
+  final List<Widget>? beforeLayout;
+
+  /// If [beforeLayout] is not null, the spacer between it and the main settings
+  final Widget prefixSpacer;
+
+  /// Spacer between the main settings and [afterLayout], if present
+  final Widget postfixSpacer;
+
+  /// Optional additional settings
+  /// After the main settings
+  /// See [postfixSpacer] and [resetSpacer] for layout tuning
+  final List<Widget>? afterLayout;
+
+  /// Spacer between the main (or [afterLayout], if present) settings and the trailing [EzResetButton]
+  final Widget resetSpacer;
+
+  /// Additional [EzConfig] keys for the local [EzResetButton]
+  /// [layoutKeys] are included by default
+  final Set<String>? resetKeys;
 
   /// Empathetech layout settings
   /// Recommended to use as a [Scaffold.body]
   const EzLayoutSettings({
     super.key,
     this.useImageDecoration = true,
-    this.additionalSettings,
+    this.beforeLayout,
+    this.prefixSpacer = const EzSeparator(),
+    this.postfixSpacer = const EzSeparator(),
+    this.afterLayout,
+    this.resetSpacer = const EzSeparator(),
+    this.resetKeys,
   });
 
   @override
@@ -64,6 +87,13 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         children: <Widget>[
           if (spacing > margin) EzSpacer(space: spacing - margin),
 
+          // Before layout
+          if (widget.beforeLayout != null) ...<Widget>[
+            ...widget.beforeLayout!,
+            widget.prefixSpacer,
+          ],
+
+          // Main //
           // Margin
           const EzLayoutSetting(
             configKey: marginKey,
@@ -109,19 +139,22 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
               setState(() => hideScroll = value);
             },
           ),
-          separator,
 
-          // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>[
-            ...widget.additionalSettings!,
-            separator,
+          // After layout
+          if (widget.afterLayout != null) ...<Widget>[
+            widget.postfixSpacer,
+            ...widget.afterLayout!,
           ],
 
           // Local reset all
+          widget.resetSpacer,
           EzResetButton(
             dialogTitle: l10n.lsResetAll,
             onConfirm: () async {
               await EzConfig.removeKeys(layoutKeys.keys.toSet());
+              if (widget.resetKeys != null) {
+                await EzConfig.removeKeys(widget.resetKeys!);
+              }
             },
           ),
           separator,
