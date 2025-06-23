@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [9.1.1] - 2025-06-??
+## [9.2.0] - 2025-06-??
 ### Updated
 - Settings home params (non-breaking)
 
