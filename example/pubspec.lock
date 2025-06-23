@@ -534,10 +534,10 @@ packages:
     dependency: transitive
     description:
       name: jovial_svg
-      sha256: a3cab3d46dc8df80cf0792e5e4246cbe13287542d9a357007114b1057da2fe89
+      sha256: "6791b1435547bdc0793081a166d41a8a313ebc61e4e5136fb7a3218781fb9e50"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.26"
+    version: "1.1.27"
   json_annotation:
     dependency: transitive
     description:
