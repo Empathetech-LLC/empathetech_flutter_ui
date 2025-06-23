@@ -543,10 +543,14 @@ Must be one of [int, bool, double, String, List<String>]''');
   /// By default, both the live [EzConfig.prefs] and stored [EzConfig.preferences] values are updated
   /// Set [storageOnly] to true to only update [EzConfig.preferences]
   /// Returns false if any keys fail to be reset, but all keys will be attempted
-  static Future<bool> reset({bool storageOnly = false}) async {
+  static Future<bool> reset({
+    Set<String>? skip,
+    bool storageOnly = false,
+  }) async {
     bool success = true;
 
     for (final String key in _instance!.prefs.keys) {
+      if (skip?.contains(key) ?? false) continue;
       final bool result = await _instance!.preferences.remove(key);
 
       if (result) {
