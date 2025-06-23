@@ -208,6 +208,7 @@ class EzSwitchPair extends StatelessWidget {
             backgroundColor: backgroundColor,
           ),
         ),
+        // Could be PlatformSwitch... but iOS switches are lame ¯\_(ツ)_/¯
         Switch(
           value: value,
           onChanged: onChanged,
