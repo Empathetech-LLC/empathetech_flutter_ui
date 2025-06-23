@@ -300,7 +300,6 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Layout settings //
 
   marginKey: defaultMargin,
-  hideScrollKey: false,
 
   // Color settings //
 
@@ -362,14 +361,20 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
 const Map<String, Object> mobileEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout
   paddingKey: defaultMobilePadding,
   spacingKey: defaultMobileSpacing,
+  hideScrollKey: true,
 };
 
 const Map<String, Object> desktopEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout
   paddingKey: defaultDesktopPadding,
   spacingKey: defaultDesktopSpacing,
+  hideScrollKey: false,
 };
 
 /// For testing
