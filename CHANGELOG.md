@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Settings home params (non-breaking)
 
+### Added
+- More EzLayoutSettings customization
+- skipLocales param to EzSettingsHome
+- Set<String>? skip param to EzConfig.reset
+- EzCheckboxPair
+- SwitchThemeData to ezThemeData
+- EzSwitchPair
+
 ## [9.1.0] - 2025-06-11
 ### Updated
 - Web links have proper context menus
