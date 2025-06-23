@@ -19,7 +19,7 @@ class EzSettingsHome extends StatefulWidget {
 
   /// Locales to skip in the [EzLocaleSetting]
   /// Defaults to [english] to not dupe [americanEnglish]
-  final List<Locale> skipLocales;
+  final Set<Locale>? skipLocales;
 
   /// Widgets to be added below language and above any present routes
   /// Do not include a trailing spacer, one will be provided
@@ -60,7 +60,7 @@ class EzSettingsHome extends StatefulWidget {
     super.key,
     this.useImageDecoration = true,
     this.notFun = false,
-    this.skipLocales = const <Locale>[english],
+    this.skipLocales,
     this.additionalSettings,
     required this.textSettingsPath,
     required this.layoutSettingsPath,
@@ -114,7 +114,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           const EzThemeModeSwitch(),
           spacer,
 
-          EzLocaleSetting(skip: widget.skipLocales),
+          EzLocaleSetting(skip: widget.skipLocales ?? <Locale>{english}),
           separator,
 
           if (widget.additionalSettings != null) ...<Widget>[

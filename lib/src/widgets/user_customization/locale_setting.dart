@@ -16,14 +16,14 @@ class EzLocaleSetting extends StatefulWidget {
 
   /// [Locale]s to [skip]
   /// Works for both default and custom [locales]
-  final List<Locale> skip;
+  final Set<Locale>? skip;
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
   const EzLocaleSetting({
     super.key,
     this.locales,
-    this.skip = const <Locale>[],
+    this.skip,
   });
 
   @override
@@ -113,7 +113,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   void initState() {
     super.initState();
     locales = List<Locale>.from(widget.locales ?? EFUILang.supportedLocales);
-    locales.removeWhere((final Locale locale) => widget.skip.contains(locale));
+
+    if (widget.skip != null && widget.skip!.isNotEmpty) {
+      locales.removeWhere(
+        (final Locale locale) => widget.skip!.contains(locale),
+      );
+    }
   }
 
   // Return the build //
