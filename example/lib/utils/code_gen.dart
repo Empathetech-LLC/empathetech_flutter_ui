@@ -398,22 +398,6 @@ Future<void> genPubspec({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  // Cool idea, causes headaches...
-  // What if the latest package is actually incompatible with something else?
-  //
-  //
-  // Future<String?> getLatest(String packageName) async {
-  //   final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
-  //   final http.Response response = await http.get(url);
-  //
-  //   if (response.statusCode == 200) {
-  //     final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-  //     return '^${jsonResponse['latest']['version']}';
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   try {
     final File file = File('$dir/pubspec.yaml');
     await file.writeAsString('''name: ${config.appName}
