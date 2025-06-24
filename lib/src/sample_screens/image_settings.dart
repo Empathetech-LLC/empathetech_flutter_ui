@@ -43,6 +43,8 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  final EzSpacer margin = EzMargin();
+
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
@@ -75,7 +77,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
             style: Theme.of(context).textTheme.labelLarge,
             textAlign: TextAlign.center,
           ),
-          separator,
+          margin,
 
           // Page image setting
           EzScrollView(
