@@ -5,7 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzImageSettings extends StatefulWidget {
@@ -13,9 +12,12 @@ class EzImageSettings extends StatefulWidget {
   final bool useImageDecoration;
 
   /// Optional additional settings
-  /// Recommended to use [EzImageSetting]
-  /// Will appear just above the reset button
-  final List<Widget>? additionalSettings;
+  /// Before the main settings
+  /// See [prefixSpacer] for layout tuning
+  final List<Widget>? beforeBackground;
+
+  /// If [beforeBackground] is not null, the spacer between it and the main settings
+  final Widget prefixSpacer;
 
   /// Optional credits for dark background image
   final String? darkBackgroundCredits;
@@ -23,14 +25,34 @@ class EzImageSettings extends StatefulWidget {
   /// Optional credits for light background image
   final String? lightBackgroundCredits;
 
+  /// Spacer between the main settings and [afterBackground], if present
+  final Widget postfixSpacer;
+
+  /// Optional additional settings
+  /// After the main settings
+  /// See [postfixSpacer] and [resetSpacer] for layout tuning
+  final List<Widget>? afterBackground;
+
+  /// Spacer between the main (or [afterBackground], if present) settings and the trailing [EzResetButton]
+  final Widget resetSpacer;
+
+  /// Additional [EzConfig] keys for the local [EzResetButton]
+  /// [layoutKeys] are included by default
+  final Set<String>? resetKeys;
+
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzImageSettings({
     super.key,
     this.useImageDecoration = true,
+    this.beforeBackground,
+    this.prefixSpacer = const EzSeparator(),
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.additionalSettings,
+    this.postfixSpacer = const EzSeparator(),
+    this.afterBackground,
+    this.resetSpacer = const EzSeparator(),
+    this.resetKeys,
   });
 
   @override
@@ -40,7 +62,6 @@ class EzImageSettings extends StatefulWidget {
 class _EzImageSettingsState extends State<EzImageSettings> {
   // Gather the theme data //
 
-  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
   final EzSpacer margin = EzMargin();
@@ -48,9 +69,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
-  // Define the page content //
-
-  int keyValue = Random().nextInt(rMax);
+  // Define the build data //
 
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
@@ -79,21 +98,27 @@ class _EzImageSettingsState extends State<EzImageSettings> {
           ),
           margin,
 
-          // Page image setting
+          // Before background
+          if (widget.beforeBackground != null) ...<Widget>[
+            ...widget.beforeBackground!,
+            widget.prefixSpacer,
+          ],
+
+          // Background
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
             mainAxisSize: MainAxisSize.min,
             child: isDark
                 ? EzImageSetting(
-                    key: ValueKey<String>('dark$keyValue'),
+                    key: UniqueKey(),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
                     label: l10n.isBackground,
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
-                    key: ValueKey<String>('light$keyValue'),
+                    key: UniqueKey(),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
                     label: l10n.isBackground,
@@ -101,18 +126,21 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                   ),
           ),
 
-          if (widget.additionalSettings != null) ...<Widget>[
-            spacer,
-            ...widget.additionalSettings!,
+          // After background
+          if (widget.afterBackground != null) ...<Widget>[
+            widget.postfixSpacer,
+            ...widget.afterBackground!,
           ],
-          separator,
 
           // Local reset all
+          widget.resetSpacer,
           EzResetButton(
             dialogTitle: l10n.isResetAll(themeProfile),
             onConfirm: () async {
               await EzConfig.removeKeys(imageKeys.keys.toSet());
-              setState(() => keyValue = Random().nextInt(rMax));
+              if (widget.resetKeys != null) {
+                await EzConfig.removeKeys(widget.resetKeys!);
+              }
             },
           ),
           separator,
