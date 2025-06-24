@@ -289,7 +289,7 @@ ThemeData ezThemeData(Brightness brightness) {
             : colorScheme.surface,
       ),
       trackOutlineColor: WidgetStateProperty.all(colorScheme.primaryContainer),
-      padding: EdgeInsets.all(margin),
+      padding: EdgeInsets.symmetric(horizontal: margin),
     ),
 
     // Text button
