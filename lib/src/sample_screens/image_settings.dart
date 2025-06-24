@@ -37,7 +37,7 @@ class EzImageSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [layoutKeys] are included by default
+  /// [imageKeys] are included by default
   final Set<String>? resetKeys;
 
   /// Empathetech image settings
