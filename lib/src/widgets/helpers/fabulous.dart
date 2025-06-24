@@ -10,10 +10,12 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzBackFAB extends FloatingActionButton {
   /// [FloatingActionButton] that goes back; [Navigator.pop]
-  EzBackFAB(BuildContext context, {super.key})
+  EzBackFAB(BuildContext context, {super.key, bool showHome = false})
       : super(
           heroTag: 'back_fab',
-          child: EzIcon(PlatformIcons(context).back),
+          child: EzIcon(showHome
+              ? PlatformIcons(context).home
+              : PlatformIcons(context).back),
           onPressed: () => Navigator.of(context).pop(),
           tooltip: ezL10n(context).gBack,
         );
