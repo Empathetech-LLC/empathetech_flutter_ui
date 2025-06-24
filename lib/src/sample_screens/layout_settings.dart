@@ -54,18 +54,18 @@ class EzLayoutSettings extends StatefulWidget {
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   // Gather the theme data //
 
-  final double margin = EzConfig.get(marginKey);
-  final double spacing = EzConfig.get(spacingKey);
-
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
+
+  final double margin = EzConfig.get(marginKey);
+  final double spacing = EzConfig.get(spacingKey);
 
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
   late final TextStyle style = Theme.of(context).textTheme.bodyLarge!;
 
-  // Define build data //
+  // Define the build data //
 
   bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
 
