@@ -54,13 +54,13 @@ class EzBox extends BoxConstraints {
 }
 
 /// threeQs = [widthOf] context * 0.75
-/// min: threeQs, max: min(threeQs, [smallBreakpoint])
+/// min: threeQs, max: min(threeQs, [ScreenSize.small])
 BoxConstraints ezTextFieldConstraints(BuildContext context) {
   final double threeQs = widthOf(context) * 0.75;
 
   return BoxConstraints(
-    minWidth: min(threeQs, smallBreakpoint),
-    maxWidth: min(threeQs, smallBreakpoint),
+    minWidth: min(threeQs, ScreenSize.small.size),
+    maxWidth: min(threeQs, ScreenSize.small.size),
   );
 }
 
