@@ -15,14 +15,6 @@ const String webImgHint = 'example.com/image.jpg';
 /// 255
 const int rMax = 255;
 
-/// 700
-/// https://pub.dev/packages/flutter_adaptive_scaffold
-const double smallBreakpoint = 700.0;
-
-/// 1000
-/// https://pub.dev/packages/flutter_adaptive_scaffold
-const double largeBreakpoint = 1000.0;
-
 /// 0.08
 const double highlightOpacity = 0.08;
 
