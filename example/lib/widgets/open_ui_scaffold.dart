@@ -72,58 +72,54 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Return the build //
 
-    final Widget theBuild = SelectionArea(
-      child: Scaffold(
-        // AppBar
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, toolbarHeight),
-          child: AppBar(
-            excludeHeaderSemantics: true,
-            toolbarHeight: toolbarHeight,
+    return EzAdaptiveScaffold(
+      small: SelectionArea(
+        child: Scaffold(
+          // AppBar
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, toolbarHeight),
+            child: AppBar(
+              excludeHeaderSemantics: true,
+              toolbarHeight: toolbarHeight,
 
-            // Leading (aka left)
-            leading: running
-                ? const SizedBox.shrink()
-                : (isLefty ? options : const EzBackAction()),
-            leadingWidth: toolbarHeight,
-
-            // Title
-            title: Text(title, textAlign: TextAlign.center),
-            centerTitle: true,
-            titleSpacing: 0,
-
-            // Actions (aka trailing aka right)
-            actions: <Widget>[
-              running
+              // Leading (aka left)
+              leading: running
                   ? const SizedBox.shrink()
-                  : (isLefty ? const EzBackAction() : options)
-            ],
+                  : (isLefty ? options : const EzBackAction()),
+              leadingWidth: toolbarHeight,
+
+              // Title
+              title: Text(title, textAlign: TextAlign.center),
+              centerTitle: true,
+              titleSpacing: 0,
+
+              // Actions (aka trailing aka right)
+              actions: <Widget>[
+                running
+                    ? const SizedBox.shrink()
+                    : (isLefty ? const EzBackAction() : options)
+              ],
+            ),
           ),
+
+          // Body
+          body: body,
+
+          // FAB
+          floatingActionButton: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: fab == null
+                ? <Widget>[const EzUpdater()]
+                : <Widget>[const EzUpdater(), const EzSpacer(), fab!],
+          ),
+          floatingActionButtonLocation: isLefty
+              ? FloatingActionButtonLocation.startFloat
+              : FloatingActionButtonLocation.endFloat,
+
+          // Prevents the keyboard from pushing the body up
+          resizeToAvoidBottomInset: false,
         ),
-
-        // Body
-        body: body,
-
-        // FAB
-        floatingActionButton: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: fab == null
-              ? <Widget>[const EzUpdater()]
-              : <Widget>[const EzUpdater(), const EzSpacer(), fab!],
-        ),
-        floatingActionButtonLocation: isLefty
-            ? FloatingActionButtonLocation.startFloat
-            : FloatingActionButtonLocation.endFloat,
-
-        // Prevents the keyboard from pushing the body up
-        resizeToAvoidBottomInset: false,
       ),
-    );
-
-    return EzSwapScaffold(
-      small: theBuild,
-      large: theBuild,
-      threshold: smallBreakpoint,
     );
   }
 }
