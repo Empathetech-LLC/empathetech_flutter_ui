@@ -49,7 +49,7 @@ class EzSettingsHome extends StatefulWidget {
   final String? imageSettingsPath;
 
   /// Widgets to be added below any present routes and above randomize
-  /// See [randomSpacer] or [resetSpacer] for layout tuning
+  /// See [randomSpacer] and/or [resetSpacer] for layout tuning
   final List<Widget>? additionalRoutes;
 
   /// Spacer after the navigation buttons and before the [EzConfigRandomizer]
@@ -77,7 +77,7 @@ class EzSettingsHome extends StatefulWidget {
     this.useImageDecoration = true,
     this.notFun = false,
     this.skipLocales,
-    this.localeSpacer = const EzSeparator(),
+    this.localeSpacer = const EzDivider(),
     this.additionalSettings,
     this.preNavSpacer = const EzSeparator(),
     required this.textSettingsPath,
@@ -85,8 +85,8 @@ class EzSettingsHome extends StatefulWidget {
     required this.colorSettingsPath,
     required this.imageSettingsPath,
     this.additionalRoutes,
-    this.randomSpacer = const EzSeparator(),
-    this.resetSpacer = const EzSeparator(),
+    this.randomSpacer = const EzDivider(),
+    this.resetSpacer = const EzSpacer(),
     this.skipKeys,
     this.footerSpacer = const EzSeparator(),
     this.footer,
@@ -102,6 +102,8 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
+  late final double spacing = EzConfig.get(spacingKey);
+
   late final EFUILang l10n = ezL10n(context);
 
   // Set the page title //
@@ -112,6 +114,58 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     ezWindowNamer(context, l10n.ssPageTitle);
   }
 
+  // Define custom functions //
+
+  List<Widget> navButtons() {
+    late final Widget navIcon = EzIcon(Icons.navigate_next);
+    final List<Widget> buttons = <Widget>[];
+
+    if (widget.textSettingsPath != null) {
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.textSettingsPath!),
+        icon: navIcon,
+        label: l10n.tsPageTitle,
+      ));
+    }
+
+    if (widget.layoutSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.layoutSettingsPath!),
+        icon: navIcon,
+        label: l10n.lsPageTitle,
+      ));
+    }
+
+    if (widget.colorSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.colorSettingsPath!),
+        icon: navIcon,
+        label: l10n.csPageTitle,
+      ));
+    }
+
+    if (widget.imageSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.imageSettingsPath!),
+        icon: navIcon,
+        label: l10n.isPageTitle,
+      ));
+    }
+
+    if (widget.additionalRoutes != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+      buttons.addAll(widget.additionalRoutes!);
+    }
+
+    return buttons;
+  }
+
   // Return the build //
 
   @override
@@ -120,7 +174,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
       useImageDecoration: widget.useImageDecoration,
       child: EzScrollView(
         children: <Widget>[
-          // Functionality disclaimer
+          // Restart disclaimer
           EzWarning(widget.notFun
               ? (kIsWeb
                   ? l10n.ssSettingsGuideWeb.split('\n').first
@@ -128,62 +182,26 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
               : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
           separator,
 
-          // Global settings
+          // Right/left
           const EzDominantHandSwitch(),
           spacer,
 
+          // Theme mode
           const EzThemeModeSwitch(),
           spacer,
 
+          // Language
           EzLocaleSetting(skip: widget.skipLocales ?? <Locale>{english}),
           widget.localeSpacer,
 
+          // Additional settings
           if (widget.additionalSettings != null) ...<Widget>[
             ...widget.additionalSettings!,
             widget.preNavSpacer,
           ],
 
-          // Text settings
-          if (widget.textSettingsPath != null) ...<Widget>[
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.textSettingsPath!),
-              icon: EzIcon(Icons.navigate_next),
-              label: l10n.tsPageTitle,
-            ),
-            spacer,
-          ],
-
-          // Layout settings
-          if (widget.layoutSettingsPath != null) ...<Widget>[
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.layoutSettingsPath!),
-              icon: EzIcon(Icons.navigate_next),
-              label: l10n.lsPageTitle,
-            ),
-            spacer,
-          ],
-
-          // Color settings
-          if (widget.colorSettingsPath != null) ...<Widget>[
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.colorSettingsPath!),
-              icon: EzIcon(Icons.navigate_next),
-              label: l10n.csPageTitle,
-            ),
-            spacer,
-          ],
-
-          // Image settings
-          if (widget.imageSettingsPath != null) ...<Widget>[
-            EzElevatedIconButton(
-              onPressed: () => context.goNamed(widget.imageSettingsPath!),
-              icon: EzIcon(Icons.navigate_next),
-              label: l10n.isPageTitle,
-            ),
-            spacer,
-          ],
-
-          if (widget.additionalRoutes != null) ...widget.additionalRoutes!,
+          // Navigation buttons
+          ...navButtons(),
 
           // Feeling lucky
           if (widget.randomSpacer != null) ...<Widget>[
@@ -195,6 +213,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
           widget.resetSpacer,
           EzResetButton(skip: widget.skipKeys),
 
+          // Footer
           if (widget.footer != null) ...<Widget>[
             widget.footerSpacer,
             ...widget.footer!,
