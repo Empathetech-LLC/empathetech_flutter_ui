@@ -8,15 +8,20 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzRowCol extends StatelessWidget {
-  /// ! [ScreenSpace.isLimited] child
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
+
+  /// Displayed when [EzScreenSize] >= [breakpoint]
   final Widget row;
 
-  /// [ScreenSpace.isLimited] child
+  /// Displayed when [EzScreenSize] < [breakpoint]
   final Column col;
 
-  /// [Row] or [EzRow] that will switch to a [Column] if the [ScreenSpace.isLimited]
+  /// [row] that will switch to a [col] if the [EzScreenSize] < [breakpoint]
+  /// Will always be [col] if [EzScreenSize] is not in the Widget tree
   EzRowCol({
     super.key,
+    this.breakpoint = ScreenSize.medium,
     required this.row,
     required this.col,
   })  : assert(
@@ -31,15 +36,18 @@ class EzRowCol extends StatelessWidget {
         );
 
   @override
-  Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
-    return limitedSpace ? col : row;
-  }
+  Widget build(BuildContext context) =>
+      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <
+              breakpoint.size)
+          ? col
+          : row;
 
-  /// Horizontal [EzScrollView] that will switch to a [Column] if the [ScreenSpace.isLimited]
+  /// Horizontal [EzScrollView] that will switch to a [Column] based on [breakpoint]
   /// Alignment, size, and direction values will be shared (symmetric)
   EzRowCol.sym({
     super.key,
+    this.breakpoint = ScreenSize.medium,
+    bool reverseHands = false,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     MainAxisSize mainAxisSize = MainAxisSize.max,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
@@ -47,16 +55,15 @@ class EzRowCol extends StatelessWidget {
     VerticalDirection verticalDirection = VerticalDirection.down,
     TextBaseline? textBaseline,
     required List<Widget> children,
-    bool reverseHands = false,
   })  : row = EzScrollView(
           scrollDirection: Axis.horizontal,
+          reverseHands: reverseHands,
           mainAxisAlignment: mainAxisAlignment,
           mainAxisSize: mainAxisSize,
           crossAxisAlignment: crossAxisAlignment,
           textDirection: textDirection,
           verticalDirection: verticalDirection,
           textBaseline: textBaseline,
-          reverseHands: reverseHands,
           children: children,
         ),
         col = Column(
