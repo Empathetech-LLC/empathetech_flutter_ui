@@ -110,10 +110,10 @@ const Color empathOffWhite = Color(offWhiteHex);
 /// 0xFF000000
 const int blackHex = 0xFF000000;
 
-/// 0xFF1E1E1E
-const int darkSurfaceHex = 0xFF1E1E1E;
+/// 0xFF232323
+const int darkSurfaceHex = 0xFF232323;
 
-/// 0xFF1E1E1E
+/// 0xFF232323
 const Color darkSurface = Color(darkSurfaceHex);
 
 /// 0xFF0F0F0F
