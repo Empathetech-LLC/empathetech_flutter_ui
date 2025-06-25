@@ -12,9 +12,32 @@ class EzColorSettings extends StatefulWidget {
   /// [EzScreen.useImageDecoration] passthrough
   final bool useImageDecoration;
 
-  /// Optional addition quick settings
-  /// Will appear just above the reset button
-  final List<Widget>? additionalQuickSettings;
+  /// Optional starting [EzCSType] target
+  final EzCSType? target;
+
+  /// Spacer above the [EzResetButton], on both sub-screens
+  final Widget resetSpacer;
+
+  /// Additional [EzConfig] keys for the local [EzResetButton]
+  /// [colorKeys] are included by default
+  final Set<String>? resetKeys;
+
+  /// Optional additional quick settings
+  /// Will appear first, above the monochrome setting
+  /// See [headerSpacer] for layout tuning
+  final List<Widget>? quickHeader;
+
+  /// Spacer between the [quickHeader] and the main settings
+  /// Only drawn if [quickHeader] is no null
+  final Widget headerSpacer;
+
+  /// Spacer above the [quickFooter], if present
+  final Widget footerSpacer;
+
+  /// Optional additional quick settings
+  /// Will appear last, below the main settings (above the [EzResetButton])
+  /// See [footerSpacer] for layout tuning
+  final List<Widget>? quickFooter;
 
   /// Initial set of [Brightness.dark] configKeys to display in the advanced settings
   final List<String> darkStarterSet;
@@ -22,15 +45,23 @@ class EzColorSettings extends StatefulWidget {
   /// Initial set of [Brightness.light] configKeys to display in the advanced settings
   final List<String> lightStarterSet;
 
-  /// Optional starting [EzCSType] target
-  final EzCSType? target;
-
   /// Empathetech color settings
   /// Recommended to use as a [Scaffold.body]
   const EzColorSettings({
+    // Shared
     super.key,
     this.useImageDecoration = true,
-    this.additionalQuickSettings,
+    this.target,
+    this.resetSpacer = const EzSeparator(),
+    this.resetKeys,
+
+    // Quick
+    this.quickHeader,
+    this.headerSpacer = const EzSeparator(),
+    this.footerSpacer = const EzSeparator(),
+    this.quickFooter,
+
+    // Advanced
     this.darkStarterSet = const <String>[
       darkPrimaryKey,
       darkSecondaryKey,
@@ -49,7 +80,6 @@ class EzColorSettings extends StatefulWidget {
       lightSurfaceContainerKey,
       lightSurfaceTintKey,
     ],
-    this.target,
   });
 
   @override
@@ -95,6 +125,9 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         darkColorSchemeImageKey,
         lightColorSchemeImageKey,
       });
+      if (widget.resetKeys != null) {
+        await EzConfig.removeKeys(widget.resetKeys!);
+      }
 
       setState(() => currList = List<String>.from(defaultList));
     },
@@ -157,23 +190,26 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           // Core settings
           if (currentTab == EzCSType.quick)
             _QuickColorSettings(
-              l10n: l10n,
               isDark: isDark,
               themeProfile: themeProfile,
-              additionalSettings: widget.additionalQuickSettings,
+              l10n: l10n,
+              quickHeader: widget.quickHeader,
+              headerSpacer: widget.headerSpacer,
+              footerSpacer: widget.footerSpacer,
+              quickFooter: widget.quickFooter,
             )
           else
             _AdvancedColorSettings(
               key: UniqueKey(),
+              theme: theme,
+              l10n: l10n,
               defaultList: defaultList,
               currList: currList,
               fullList: fullList,
-              theme: theme,
-              l10n: l10n,
             ),
-          separator,
 
           // Reset button
+          widget.resetSpacer,
           resetButton,
           separator,
         ],
@@ -183,16 +219,22 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
-  final EFUILang l10n;
   final bool isDark;
   final String themeProfile;
-  final List<Widget>? additionalSettings;
+  final EFUILang l10n;
+  final List<Widget>? quickHeader;
+  final Widget headerSpacer;
+  final Widget footerSpacer;
+  final List<Widget>? quickFooter;
 
   const _QuickColorSettings({
-    required this.l10n,
     required this.isDark,
     required this.themeProfile,
-    required this.additionalSettings,
+    required this.l10n,
+    required this.quickHeader,
+    required this.headerSpacer,
+    required this.footerSpacer,
+    required this.quickFooter,
   });
 
   @override
@@ -200,15 +242,14 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  // Make pointers //
-
-  late final EFUILang l10n = widget.l10n;
-  late bool isDark = widget.isDark;
-  late final String themeProfile = widget.themeProfile;
-
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
+
+  late bool isDark = widget.isDark;
+  late final String themeProfile = widget.themeProfile;
+
+  late final EFUILang l10n = widget.l10n;
 
   // Define custom widgets  //
 
@@ -258,6 +299,11 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          if (widget.quickHeader != null) ...<Widget>[
+            ...widget.quickHeader!,
+            widget.headerSpacer,
+          ],
+
           // MonoChrome
           const EzMonoChromeColorsSetting(),
           spacer,
@@ -266,9 +312,9 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           fromImageButton,
 
           // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>[
-            spacer,
-            ...widget.additionalSettings!,
+          if (widget.quickFooter != null) ...<Widget>[
+            widget.footerSpacer,
+            ...widget.quickFooter!,
           ],
         ],
       ),
@@ -277,19 +323,19 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
+  final ThemeData theme;
+  final EFUILang l10n;
   final List<String> defaultList;
   final List<String> currList;
   final List<String> fullList;
-  final ThemeData theme;
-  final EFUILang l10n;
 
   const _AdvancedColorSettings({
     super.key,
+    required this.theme,
+    required this.l10n,
     required this.defaultList,
     required this.currList,
     required this.fullList,
-    required this.theme,
-    required this.l10n,
   });
 
   @override
@@ -297,14 +343,6 @@ class _AdvancedColorSettings extends StatefulWidget {
 }
 
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
-  // Make pointers //
-
-  late final List<String> defaultList = widget.defaultList;
-  late final List<String> currList = widget.currList;
-  late final List<String> fullList = widget.fullList;
-  late final ThemeData theme = widget.theme;
-  late final EFUILang l10n = widget.l10n;
-
   // Gather the theme data //
 
   final double margin = EzConfig.get(marginKey);
@@ -312,9 +350,18 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
 
-  // Define custom Widgets //
+  late final ThemeData theme = widget.theme;
+  late final EFUILang l10n = widget.l10n;
 
+  // Define the build data //
+
+  late final List<String> defaultList = widget.defaultList;
   late final Set<String> defaultSet = defaultList.toSet();
+
+  late final List<String> currList = widget.currList;
+  late final List<String> fullList = widget.fullList;
+
+  // Define custom Widgets //
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
   List<Widget> dynamicColorSettings() {
