@@ -32,9 +32,9 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
   onTertiaryFixedVariant: Colors.black,
 
   // Surface
-  surface: Colors.black,
+  surface: darkSurface,
   onSurface: Colors.white,
-  surfaceContainer: empathOffBlack,
+  surfaceContainer: darkSurfaceContainer,
   inversePrimary: Colors.white,
   surfaceTint: Colors.transparent,
 );
