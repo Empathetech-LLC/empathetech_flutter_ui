@@ -110,11 +110,17 @@ const Color empathOffWhite = Color(offWhiteHex);
 /// 0xFF000000
 const int blackHex = 0xFF000000;
 
-/// 0xFF191919
-const int offBlackHex = 0xFF191919;
+/// 0xFF1E1E1E
+const int darkSurfaceHex = 0xFF1E1E1E;
 
-/// 0xFF191919
-const Color empathOffBlack = Color(offBlackHex);
+/// 0xFF1E1E1E
+const Color darkSurface = Color(darkSurfaceHex);
+
+/// 0xFF0F0F0F
+const int darkSurfaceContainerHex = 0xFF0F0F0F;
+
+/// 0xFF0F0F0F
+const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
 
 /// 0xFF000000
 const int transparentHex = 0x00000000;
@@ -341,9 +347,9 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   darkOnTertiaryKey: whiteHex,
   darkOnTertiaryContainerKey: whiteHex,
 
-  darkSurfaceKey: blackHex,
+  darkSurfaceKey: darkSurfaceHex,
   darkOnSurfaceKey: whiteHex,
-  darkSurfaceContainerKey: offBlackHex,
+  darkSurfaceContainerKey: darkSurfaceContainerHex,
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
 
