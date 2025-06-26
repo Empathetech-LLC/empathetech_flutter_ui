@@ -467,7 +467,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       children: <Widget>[
         // Dynamic color settings
         EzSwapWidget(
-          large: ConstrainedBox(
+          expanded: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: widthOf(context) * 0.667,
             ),
@@ -478,7 +478,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               children: dynamicColorSettings(),
             ),
           ),
-          small: EzScrollView(
+          restricted: EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
             mainAxisSize: MainAxisSize.min,
