@@ -81,18 +81,19 @@ class EzAdaptiveScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = widthOf(context);
+
     late final ScreenSize size;
     late final Widget child;
 
-    if (width > (ScreenSize.large.size + offset)) {
-      size = ScreenSize.large;
-      child = large ?? medium ?? small;
-    } else if (width > (ScreenSize.medium.size + offset)) {
+    if (width <= (ScreenSize.small.size + offset)) {
+      size = ScreenSize.small;
+      child = small;
+    } else if (width <= (ScreenSize.medium.size + offset)) {
       size = ScreenSize.medium;
       child = medium ?? small;
     } else {
-      size = ScreenSize.small;
-      child = small;
+      size = ScreenSize.large;
+      child = large ?? medium ?? small;
     }
 
     return EzScreenSize(screenSize: size, child: child);
