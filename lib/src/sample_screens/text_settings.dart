@@ -397,7 +397,16 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               Padding(
                 padding: wrapPadding,
                 child: EzColorSetting(
+                  key: UniqueKey(),
                   configKey: isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
+                  onUpdate: (Color color) {
+                    displayProvider.redraw(color);
+                    headlineProvider.redraw(color);
+                    titleProvider.redraw(color);
+                    bodyProvider.redraw(color);
+                    labelProvider.redraw(color);
+                    setState(() {});
+                  },
                 ),
               ),
 
@@ -546,6 +555,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           dialogTitle: l10n.tsResetAll,
           onConfirm: () async {
             await EzConfig.removeKeys(textStyleKeys.keys.toSet());
+            await EzConfig.remove(
+                isDark ? darkOnSurfaceKey : lightOnSurfaceKey);
+
             displayProvider.reset();
             headlineProvider.reset();
             titleProvider.reset();
@@ -554,7 +566,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
             currOpacity = EzConfig.getDefault(oKey) ?? defaultTextOpacity;
             backgroundColor = surface.withValues(alpha: currOpacity);
-
             currIconSize = EzConfig.getDefault(iconSizeKey) ?? defaultIconSize;
 
             setState(() {});
