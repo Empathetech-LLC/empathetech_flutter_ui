@@ -8,21 +8,29 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzSwapWidget extends StatelessWidget {
-  /// When ! [ScreenSpace.isLimited]
-  final Widget large;
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
 
-  /// When [ScreenSpace.isLimited]
-  final Widget small;
+  /// When [EzScreenSize] <= [breakpoint]
+  final Widget restricted;
 
-  /// [ScreenSpace.isLimited] ? [small] : [large]
-  /// Returns [small] if there is no [ScreenSpace] in the context
+  /// When [EzScreenSize] > [breakpoint]
+  final Widget expanded;
+
+  /// [EzScreenSize] > [breakpoint] => [expanded]
+  /// [EzScreenSize] <= [breakpoint] => [restricted]
+  /// [EzScreenSize] is not in the Widget tree => [restricted]
   const EzSwapWidget({
     super.key,
-    required this.large,
-    required this.small,
+    this.breakpoint = ScreenSize.small,
+    required this.restricted,
+    required this.expanded,
   });
 
   @override
   Widget build(BuildContext context) =>
-      (ScreenSpace.of(context)?.isLimited ?? true) ? small : large;
+      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
+              breakpoint.size)
+          ? restricted
+          : expanded;
 }

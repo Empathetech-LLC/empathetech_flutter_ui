@@ -48,21 +48,27 @@ class EzMargin extends EzSpacer {
 }
 
 class EzSwapSpacer extends StatelessWidget {
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
+
   /// Optional [EzSpacer.space] passthrough
   final double? space;
 
-  /// Defaults to [EzSpacer.vertical] => false
-  /// When [ScreenSpace.isLimited], it swaps to [EzSpacer.horizontal] => false
-  const EzSwapSpacer({super.key, this.space});
+  /// When [EzScreenSize] > [breakpoint]; [EzSpacer.vertical] => false
+  /// When [EzScreenSize] <= [breakpoint]; [EzSpacer.horizontal] => false
+  /// If [EzScreenSize] is not in the Widget tree; [EzSpacer.horizontal] => false
+  const EzSwapSpacer({
+    super.key,
+    this.breakpoint = ScreenSize.small,
+    this.space,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
-
-    return limitedSpace
-        ? EzSpacer(space: space, horizontal: false)
-        : EzSpacer(space: space, vertical: false);
-  }
+  Widget build(BuildContext context) =>
+      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
+              breakpoint.size)
+          ? EzSpacer(space: space, horizontal: false)
+          : EzSpacer(space: space, vertical: false);
 }
 
 class EzSwapMargin extends EzSwapSpacer {
@@ -103,21 +109,27 @@ class EzSeparator extends StatelessWidget {
 }
 
 class EzSwapSeparator extends StatelessWidget {
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
+
   /// Optional [EzSeparator.space] passthrough
   final double? space;
 
-  /// Defaults to [EzSeparator.vertical] => false
-  /// When [ScreenSpace.isLimited], it swaps to [EzSeparator.horizontal] => false
-  const EzSwapSeparator({super.key, this.space});
+  /// When [EzScreenSize] > [breakpoint]; [EzSeparator.vertical] => false
+  /// When [EzScreenSize] <= [breakpoint]; [EzSeparator.horizontal] => false
+  /// If [EzScreenSize] is not in the Widget tree; [EzSeparator.horizontal] => false
+  const EzSwapSeparator({
+    super.key,
+    this.breakpoint = ScreenSize.small,
+    this.space,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
-
-    return limitedSpace
-        ? EzSeparator(space: space, horizontal: false)
-        : EzSeparator(space: space, vertical: false);
-  }
+  Widget build(BuildContext context) =>
+      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
+              breakpoint.size)
+          ? EzSeparator(space: space, horizontal: false)
+          : EzSeparator(space: space, vertical: false);
 }
 
 class EzDivider extends StatelessWidget {

@@ -11,17 +11,17 @@ class EzRowCol extends StatelessWidget {
   /// Which [ScreenSize] the Widget should respond to
   final ScreenSize breakpoint;
 
-  /// Displayed when [EzScreenSize] >= [breakpoint]
+  /// Displayed when [EzScreenSize] > [breakpoint]
   final Widget row;
 
-  /// Displayed when [EzScreenSize] < [breakpoint]
+  /// Displayed when [EzScreenSize] <= [breakpoint]
   final Column col;
 
-  /// [row] that will switch to a [col] if the [EzScreenSize] < [breakpoint]
+  /// [row] that will switch to a [col] if the [EzScreenSize] <= [breakpoint]
   /// Will always be [col] if [EzScreenSize] is not in the Widget tree
   EzRowCol({
     super.key,
-    this.breakpoint = ScreenSize.medium,
+    this.breakpoint = ScreenSize.small,
     required this.row,
     required this.col,
   })  : assert(
@@ -37,7 +37,7 @@ class EzRowCol extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <
+      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
               breakpoint.size)
           ? col
           : row;
