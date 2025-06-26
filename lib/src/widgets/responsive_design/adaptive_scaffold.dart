@@ -76,13 +76,13 @@ class EzAdaptiveScaffold extends StatelessWidget {
     late final ScreenSize size;
     late final Widget child;
 
-    if (width >= ScreenSize.extraLarge.size) {
+    if (width > ScreenSize.extraLarge.size) {
       size = ScreenSize.extraLarge;
       child = extraLarge ?? large ?? medium ?? small;
-    } else if (width >= ScreenSize.large.size) {
+    } else if (width > ScreenSize.large.size) {
       size = ScreenSize.large;
       child = large ?? medium ?? small;
-    } else if (width >= ScreenSize.medium.size) {
+    } else if (width > ScreenSize.medium.size) {
       size = ScreenSize.medium;
       child = medium ?? small;
     } else {
