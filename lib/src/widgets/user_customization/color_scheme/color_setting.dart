@@ -148,18 +148,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                   shape: BoxShape.circle,
                   border: Border.all(color: backgroundColor),
                 ),
-                child: recommended == transparentHex
-                    ? CircleAvatar(
-                        backgroundColor: theme.colorScheme.surface,
-                        foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding + margin,
-                        child: EzIcon(PlatformIcons(context).eyeSlash),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: Color(recommended),
-                        foregroundColor: backgroundColor,
-                        radius: padding + margin,
-                      ),
+                child: CircleAvatar(
+                  backgroundColor: Color(recommended),
+                  radius: padding + margin,
+                ),
               ),
             ],
             materialActions: materialActions,
@@ -304,7 +296,6 @@ class _ColorSettingState extends State<EzColorSetting> {
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,
-                    foregroundColor: getTextColor(currColor),
                     radius: padding + margin,
                   ),
           ),
