@@ -46,7 +46,7 @@ class EzRowCol extends StatelessWidget {
   /// Alignment, size, and direction values will be shared (symmetric)
   EzRowCol.sym({
     super.key,
-    this.breakpoint = ScreenSize.medium,
+    this.breakpoint = ScreenSize.small,
     bool reverseHands = false,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     MainAxisSize mainAxisSize = MainAxisSize.max,
