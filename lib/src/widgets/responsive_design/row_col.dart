@@ -11,13 +11,13 @@ class EzRowCol extends StatelessWidget {
   /// Which [ScreenSize] the Widget should respond to
   final ScreenSize breakpoint;
 
-  /// Displayed when [EzScreenSize] > [breakpoint]
+  /// Displayed when the context's [ScreenSize] > [breakpoint]
   final Widget row;
 
-  /// Displayed when [EzScreenSize] <= [breakpoint]
+  /// Displayed when the context's [ScreenSize] <= [breakpoint]
   final Column col;
 
-  /// [row] that will switch to a [col] if the [EzScreenSize] <= [breakpoint]
+  /// [row] that will switch to a [col] when the context's [ScreenSize] <= [breakpoint]
   /// Will always be [col] if [EzScreenSize] is not in the Widget tree
   EzRowCol({
     super.key,
@@ -36,11 +36,11 @@ class EzRowCol extends StatelessWidget {
         );
 
   @override
-  Widget build(BuildContext context) =>
-      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
-              breakpoint.size)
-          ? col
-          : row;
+  Widget build(BuildContext context) {
+    final ScreenSize? size = EzScreenSize.of(context)?.screenSize;
+
+    return (size == null || size.order <= breakpoint.order) ? col : row;
+  }
 
   /// Horizontal [EzScrollView] that will switch to a [Column] based on [breakpoint]
   /// Alignment, size, and direction values will be shared (symmetric)

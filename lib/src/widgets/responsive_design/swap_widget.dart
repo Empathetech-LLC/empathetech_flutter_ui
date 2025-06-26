@@ -11,15 +11,15 @@ class EzSwapWidget extends StatelessWidget {
   /// Which [ScreenSize] the Widget should respond to
   final ScreenSize breakpoint;
 
-  /// When [EzScreenSize] <= [breakpoint]
-  final Widget restricted;
-
-  /// When [EzScreenSize] > [breakpoint]
+  /// Displayed when the context's [ScreenSize] > [breakpoint]
   final Widget expanded;
 
-  /// [EzScreenSize] > [breakpoint] => [expanded]
-  /// [EzScreenSize] <= [breakpoint] => [restricted]
-  /// [EzScreenSize] is not in the Widget tree => [restricted]
+  /// Displayed when the context's [ScreenSize] <= [breakpoint]
+  final Widget restricted;
+
+  /// [ScreenSize] > [breakpoint] => [expanded]
+  /// [ScreenSize] <= [breakpoint] => [restricted]
+  /// [ScreenSize] is not in the Widget tree => [restricted]
   const EzSwapWidget({
     super.key,
     this.breakpoint = ScreenSize.small,
@@ -28,9 +28,11 @@ class EzSwapWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-      ((EzScreenSize.of(context)?.screenSize ?? ScreenSize.small).size <=
-              breakpoint.size)
-          ? restricted
-          : expanded;
+  Widget build(BuildContext context) {
+    final ScreenSize? size = EzScreenSize.of(context)?.screenSize;
+
+    return (size == null || size.order <= breakpoint.order)
+        ? restricted
+        : expanded;
+  }
 }
