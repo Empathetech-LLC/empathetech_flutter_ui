@@ -19,21 +19,32 @@ class EzTextSettings extends StatelessWidget {
   /// Optional starting [EzTSType] target
   final EzTSType? target;
 
-  /// Spacer above the [EzResetButton]
+  /// Spacer above the [EzResetButton] (shared by both tabs)
   final Widget resetSpacer;
-
-  /// Whether the text background opacity (quick) setting should be shown
-  final bool showOpacity;
 
   /// Whether the onSurfaceColor (quick) setting should be shown
   final bool showOnSurface;
 
-  /// Spacer below the default quick settings if [moreQuickSettings] is present
-  final Widget quickSettingsSpacer;
+  /// Spacer above [moreQuickHeaderSettings], if present
+  final Widget quickHeaderSpacer;
+
+  /// Optional additional quick settings
+  /// Will appear just above the text block
+  /// See [quickHeaderSpacer] for layout tuning
+  final List<Widget>? moreQuickHeaderSettings;
+
+  /// Spacer above and below the text block (when [ScreenSize.medium] or smaller)
+  final Widget textBlockSpacer;
+
+  /// Whether the text background opacity (quick) setting should be shown
+  final bool showOpacity;
+
+  /// Spacer below the default quick settings, if [moreQuickFooterSettings] is present
+  final Widget quickFooterSpacer;
 
   /// Optional additional quick settings
   /// Will appear just below the default quick settings
-  final List<Widget>? moreQuickSettings;
+  final List<Widget>? moreQuickFooterSettings;
 
   /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
   /// [TextStyle.letterSpacing], [TextStyle.wordSpacing], and [TextStyle.height]
@@ -49,10 +60,13 @@ class EzTextSettings extends StatelessWidget {
     this.resetSpacer = const EzSeparator(),
 
     // Quick
-    this.showOpacity = true,
     this.showOnSurface = true,
-    this.quickSettingsSpacer = const EzSeparator(),
-    this.moreQuickSettings,
+    this.quickHeaderSpacer = const EzSpacer(),
+    this.moreQuickHeaderSettings,
+    this.textBlockSpacer = const EzDivider(),
+    this.showOpacity = true,
+    this.quickFooterSpacer = const EzSpacer(),
+    this.moreQuickFooterSettings,
 
     // Advanced
     this.showSpacing = true,
@@ -86,10 +100,13 @@ class EzTextSettings extends StatelessWidget {
         useImageDecoration: useImageDecoration,
         target: target,
         resetSpacer: resetSpacer,
-        showOpacity: showOpacity,
         showOnSurface: showOnSurface,
-        quickSettingsSpacer: quickSettingsSpacer,
-        moreQuickSettings: moreQuickSettings,
+        quickHeaderSpacer: quickHeaderSpacer,
+        moreQuickHeaderSettings: moreQuickHeaderSettings,
+        textBlockSpacer: textBlockSpacer,
+        showOpacity: showOpacity,
+        quickFooterSpacer: quickFooterSpacer,
+        moreQuickFooterSettings: moreQuickFooterSettings,
         showSpacing: showSpacing,
       ),
     );
@@ -100,10 +117,13 @@ class _TextSettings extends StatefulWidget {
   final bool useImageDecoration;
   final EzTSType? target;
   final Widget resetSpacer;
-  final bool showOpacity;
   final bool showOnSurface;
-  final Widget quickSettingsSpacer;
-  final List<Widget>? moreQuickSettings;
+  final Widget quickHeaderSpacer;
+  final List<Widget>? moreQuickHeaderSettings;
+  final Widget textBlockSpacer;
+  final bool showOpacity;
+  final Widget quickFooterSpacer;
+  final List<Widget>? moreQuickFooterSettings;
   final bool showSpacing;
 
   const _TextSettings({
@@ -113,10 +133,13 @@ class _TextSettings extends StatefulWidget {
     required this.resetSpacer,
 
     // Quick
-    required this.showOpacity,
     required this.showOnSurface,
-    required this.quickSettingsSpacer,
-    required this.moreQuickSettings,
+    required this.quickHeaderSpacer,
+    required this.moreQuickHeaderSettings,
+    required this.textBlockSpacer,
+    required this.showOpacity,
+    required this.quickFooterSpacer,
+    required this.moreQuickFooterSettings,
 
     // Advanced
     required this.showSpacing,
@@ -185,21 +208,23 @@ class _TextSettingsState extends State<_TextSettings> {
               setState(() {});
             },
           ),
-          const EzSpacer(),
 
           // Settings
           if (currentTab == EzTSType.quick)
             _QuickTextSettings(
-              resetSpacer: widget.resetSpacer,
-              showOpacity: widget.showOpacity,
               showOnSurface: widget.showOnSurface,
-              quickSettingsSpacer: widget.quickSettingsSpacer,
-              moreQuickSettings: widget.moreQuickSettings,
+              quickHeaderSpacer: widget.quickHeaderSpacer,
+              moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
+              textBlockSpacer: widget.textBlockSpacer,
+              showOpacity: widget.showOpacity,
+              quickFooterSpacer: widget.quickFooterSpacer,
+              moreQuickFooterSettings: widget.moreQuickFooterSettings,
+              resetSpacer: widget.resetSpacer,
             )
           else
             _AdvancedTextSettings(
-              resetSpacer: widget.resetSpacer,
               showSpacing: widget.showSpacing,
+              resetSpacer: widget.resetSpacer,
             ),
         ],
       ),
@@ -208,18 +233,24 @@ class _TextSettingsState extends State<_TextSettings> {
 }
 
 class _QuickTextSettings extends StatefulWidget {
-  final Widget resetSpacer;
-  final bool showOpacity;
   final bool showOnSurface;
-  final Widget quickSettingsSpacer;
-  final List<Widget>? moreQuickSettings;
+  final Widget quickHeaderSpacer;
+  final List<Widget>? moreQuickHeaderSettings;
+  final Widget textBlockSpacer;
+  final bool showOpacity;
+  final Widget quickFooterSpacer;
+  final List<Widget>? moreQuickFooterSettings;
+  final Widget resetSpacer;
 
   const _QuickTextSettings({
-    required this.resetSpacer,
-    required this.showOpacity,
     required this.showOnSurface,
-    required this.quickSettingsSpacer,
-    required this.moreQuickSettings,
+    required this.quickHeaderSpacer,
+    required this.moreQuickHeaderSettings,
+    required this.textBlockSpacer,
+    required this.showOpacity,
+    required this.quickFooterSpacer,
+    required this.moreQuickFooterSettings,
+    required this.resetSpacer,
   });
 
   @override
@@ -230,9 +261,16 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the theme data //
 
   static const EzSpacer spacer = EzSpacer();
-  static const EzSeparator separator = EzSeparator();
 
-  late final EdgeInsets colMargin = EzInsets.col(EzConfig.get(marginKey));
+  final double margin = EzConfig.get(marginKey);
+  final double spacing = EzConfig.get(spacingKey);
+
+  late final EdgeInsets colMargin = EzInsets.col(margin);
+  late final EdgeInsets wrapPadding = EdgeInsets.only(
+    top: spacing,
+    left: spacing / 2,
+    right: spacing / 2,
+  );
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -240,6 +278,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final Color surface = Theme.of(context).colorScheme.surface;
 
   // Gather the build data //
+
+  late final bool isDark = isDarkTheme(context);
 
   late final EzDisplayStyleProvider displayProvider =
       Provider.of<EzDisplayStyleProvider>(context);
@@ -252,9 +292,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final EzLabelStyleProvider labelProvider =
       Provider.of<EzLabelStyleProvider>(context);
 
-  late final String oKey = isDarkTheme(context)
-      ? darkTextBackgroundOpacityKey
-      : lightTextBackgroundOpacityKey;
+  late final String oKey =
+      isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
 
   late double currOpacity =
       EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? defaultTextOpacity;
@@ -270,39 +309,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Return the build //
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        // Required batch settings
-        EzRowCol.sym(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Font family
-            EzFontFamilyBatchSetting(key: UniqueKey(), iconSize: currIconSize),
-            const EzSwapSpacer(),
-
-            // Font size
-            EzTextBackground(
-              EzFontDoubleBatchSetting(
-                key: UniqueKey(),
-                iconSize: currIconSize,
-              ),
-              backgroundColor: backgroundColor,
-              borderRadius: ezPillShape,
-            ),
-          ],
-        ),
-
-        // Optional additional settings
-        // if (widget.additionalSettings != null) ...<Widget>[
-        //   spacer,
-        //   ...widget.additionalSettings!,
-        // ],
-        separator,
-
+  List<Widget> textBlock() => <Widget>[
         // Display preview
         EzTextBackground(
           Text(
@@ -361,7 +368,63 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
           backgroundColor: backgroundColor,
           margin: colMargin,
         ),
-        separator,
+      ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        EzSpacer(space: spacing / 2),
+
+        // Required batch settings
+        Wrap(
+          alignment: WrapAlignment.center,
+          runAlignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: <Widget>[
+            // Font family
+            Padding(
+              padding: wrapPadding,
+              child: EzFontFamilyBatchSetting(
+                key: UniqueKey(),
+                iconSize: currIconSize,
+              ),
+            ),
+
+            // Optional onSurface Color setting
+            if (widget.showOnSurface)
+              Padding(
+                padding: wrapPadding,
+                child: EzColorSetting(
+                  configKey: isDark ? darkOnSurfaceKey : lightOnSurfaceKey,
+                ),
+              ),
+
+            // Font size
+            Padding(
+              padding: wrapPadding,
+              child: EzTextBackground(
+                EzFontDoubleBatchSetting(
+                  key: UniqueKey(),
+                  iconSize: currIconSize,
+                ),
+                backgroundColor: backgroundColor,
+                borderRadius: ezPillShape,
+              ),
+            ),
+          ],
+        ),
+
+        // Optional additional settings
+        if (widget.moreQuickHeaderSettings != null) ...<Widget>[
+          widget.quickHeaderSpacer,
+          ...widget.moreQuickHeaderSettings!,
+        ],
+
+        widget.textBlockSpacer,
+        ...textBlock(),
+        widget.textBlockSpacer,
 
         if (widget.showOpacity) ...<Widget>[
           // Text background opacity
@@ -400,7 +463,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             backgroundColor: backgroundColor,
             margin: colMargin,
           ),
-          separator,
+          spacer,
         ],
 
         // Icon size
@@ -470,9 +533,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             borderRadius: ezPillShape,
           ),
         ),
-        separator,
+
+        // Optional additional settings
+        if (widget.moreQuickFooterSettings != null) ...<Widget>[
+          widget.quickFooterSpacer,
+          ...widget.moreQuickFooterSettings!,
+        ],
 
         // Reset all
+        widget.resetSpacer,
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () async {
@@ -491,19 +560,19 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             setState(() {});
           },
         ),
-        separator,
+        const EzSeparator(),
       ],
     );
   }
 }
 
 class _AdvancedTextSettings extends StatefulWidget {
-  final Widget resetSpacer;
   final bool showSpacing;
+  final Widget resetSpacer;
 
   const _AdvancedTextSettings({
-    required this.resetSpacer,
     required this.showSpacing,
+    required this.resetSpacer,
   });
 
   @override
@@ -1010,6 +1079,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        spacer,
+
         // Style selector
         EzScrollView(
           scrollDirection: Axis.horizontal,
@@ -1224,9 +1295,9 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           margin: colMargin,
           borderRadius: ezPillShape,
         ),
-        separator,
 
         // Reset all
+        widget.resetSpacer,
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () async {
