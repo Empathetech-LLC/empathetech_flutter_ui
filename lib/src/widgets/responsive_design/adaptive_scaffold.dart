@@ -23,6 +23,17 @@ extension ScreenSizeConfig on ScreenSize {
         return 1300.0;
     }
   }
+
+  int get order {
+    switch (this) {
+      case ScreenSize.small:
+        return 0;
+      case ScreenSize.medium:
+        return 1;
+      case ScreenSize.large:
+        return 2;
+    }
+  }
 }
 
 class EzScreenSize extends InheritedWidget {
