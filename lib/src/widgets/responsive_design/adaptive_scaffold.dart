@@ -9,9 +9,8 @@ import 'package:flutter/material.dart';
 
 /// small: 700.0
 /// medium: 1000.0
-/// large: 1200.0
-/// extraLarge: 1600.0
-enum ScreenSize { small, medium, large, extraLarge }
+/// large: 1300.0
+enum ScreenSize { small, medium, large }
 
 extension ScreenSizeConfig on ScreenSize {
   double get size {
@@ -21,9 +20,7 @@ extension ScreenSizeConfig on ScreenSize {
       case ScreenSize.medium:
         return 1000.0;
       case ScreenSize.large:
-        return 1200.0;
-      case ScreenSize.extraLarge:
-        return 1600.0;
+        return 1300.0;
     }
   }
 }
@@ -57,8 +54,8 @@ class EzAdaptiveScaffold extends StatelessWidget {
   /// Think desktop thoughts
   final Widget? large;
 
-  /// Think gamer thoughts
-  final Widget? extraLarge;
+  /// Will be added to all [ScreenSize] calculations
+  final double offset;
 
   /// Enables real-time responses to screen space changes
   /// If a Widget is not provided, the next smaller size will be used
@@ -67,7 +64,7 @@ class EzAdaptiveScaffold extends StatelessWidget {
     required this.small,
     this.medium,
     this.large,
-    this.extraLarge,
+    this.offset = 0.0,
   });
 
   @override
@@ -76,13 +73,10 @@ class EzAdaptiveScaffold extends StatelessWidget {
     late final ScreenSize size;
     late final Widget child;
 
-    if (width > ScreenSize.extraLarge.size) {
-      size = ScreenSize.extraLarge;
-      child = extraLarge ?? large ?? medium ?? small;
-    } else if (width > ScreenSize.large.size) {
+    if (width > (ScreenSize.large.size + offset)) {
       size = ScreenSize.large;
       child = large ?? medium ?? small;
-    } else if (width > ScreenSize.medium.size) {
+    } else if (width > (ScreenSize.medium.size + offset)) {
       size = ScreenSize.medium;
       child = medium ?? small;
     } else {
