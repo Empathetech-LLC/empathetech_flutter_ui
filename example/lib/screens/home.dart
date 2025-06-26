@@ -345,26 +345,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           const InputDecoration(hintText: 'com.example'),
                     ),
                   ],
-                  EzRow(
+                  EzSwitchPair(
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: exampleDomain
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
-                    children: <Widget>[
-                      Flexible(
-                        child: EzText(
-                          el10n.gNA,
-                          semanticsLabel: el10n.gNAHint,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      EzCheckbox(
-                        value: exampleDomain,
-                        onChanged: (bool? value) {
-                          if (value == null) return;
-                          setState(() => exampleDomain = value);
-                        },
-                      ),
-                    ],
+                    text: el10n.gNA,
+                    semanticsLabel: el10n.gNAHint,
+                    textAlign: TextAlign.start,
+                    value: exampleDomain,
+                    onChanged: (bool? value) {
+                      if (value == null) return;
+                      setState(() => exampleDomain = value);
+                    },
                   ),
                 ],
               ),
