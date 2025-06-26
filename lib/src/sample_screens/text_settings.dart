@@ -515,7 +515,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSpacer rowSpacer = EzSpacer(vertical: false);
-  static const EzSwapSpacer swapSpacer = EzSwapSpacer();
+  static const EzSwapSpacer swapSpacer =
+      EzSwapSpacer(breakpoint: ScreenSize.medium);
   static const EzSeparator separator = EzSeparator();
 
   final double margin = EzConfig.get(marginKey);
@@ -1040,6 +1041,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
         // Controls
         EzRowCol.sym(
+          breakpoint: ScreenSize.medium,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
