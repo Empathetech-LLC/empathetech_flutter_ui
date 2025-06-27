@@ -106,22 +106,22 @@ const Color empathPurpleDim = Color(empathPurpleDimHex);
 
 // Dark //
 
-/// BLARG
-const int darkSurfaceContainerHex = 0xFF0A0A0A;
+/// 0xFF111111 => 17 of each
+const int darkSurfaceContainerHex = 0xFF111111;
 
-/// BLARG
+/// 0xFF111111 => 17 of each
 const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
 
-/// BLARG
-const int darkSurfaceDimHex = 0xFF141414;
+/// 0xFF191919 => 25 of each
+const int darkSurfaceDimHex = 0xFF191919;
 
-/// BLARG
+/// 0xFF191919 => 25 of each
 const Color darkSurfaceDim = Color(darkSurfaceDimHex);
 
-/// BLARG
-const int darkSurfaceHex = 0xFF1E1E1E;
+/// 0xFF222222 => 34 of each
+const int darkSurfaceHex = 0xFF222222;
 
-/// BLARG
+/// 0xFF222222 => 34 of each
 const Color darkSurface = Color(darkSurfaceHex);
 
 // Light //
