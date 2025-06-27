@@ -9,12 +9,17 @@ All notable changes to this project will be documented in this file.
 - EzSwapScaffold -> EzAdaptiveScaffold
   - No longer requires a threshold, they are included (and can be modified)
   - Now only requires a `small` screen Widget
+  - Supports `small`, `medium`, and `large` breakpoints
 - Default surface colors
 - Open UI code gen to match changes
+- Fixed getTextColor; calculations hadn't been updated for Flutter's new double .rgb values
+- Default EzDivider size (and added more passthrough parameters)
 
 ### Added
 - surfaceDim to default config and ThemeData
 - EzLocaleSetting customization
+- EzAdaptiveWidget
+  - Existing EzSwapX widgets now have a breakpoint parameter, default to `small` (same value as before)
 - Set<String>? skip param to EzConfig.reset
 - EzCheckboxPair
 - SwitchThemeData to ezThemeData
