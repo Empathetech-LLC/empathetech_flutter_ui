@@ -77,7 +77,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // App bar
     appBarTheme: AppBarTheme(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       foregroundColor: colorScheme.onSurface,
       titleTextStyle: textTheme.headlineLarge,
       iconTheme: appBarIconData,
@@ -96,7 +96,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Card
     cardTheme: CardThemeData(
-      color: colorScheme.surface,
+      color: colorScheme.surfaceDim,
       margin: EdgeInsets.zero,
     ),
 
