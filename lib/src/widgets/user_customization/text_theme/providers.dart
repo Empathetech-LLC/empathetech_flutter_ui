@@ -28,6 +28,13 @@ abstract class EzTextStyleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Update the [TextStyle.color] to the passed [color]
+  void redraw(Color? color) {
+    _style = _style.copyWith(color: color);
+    _id = Random().nextInt(rMax);
+    notifyListeners();
+  }
+
   /// Update the [TextStyle.fontSize] to the passed [size]
   void resize(double size) {
     _style = _style.copyWith(fontSize: size);

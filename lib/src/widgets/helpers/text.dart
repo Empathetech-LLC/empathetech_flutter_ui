@@ -18,9 +18,11 @@ class EzTextBackground extends StatelessWidget {
   /// Defaults to [ezRoundEdge]
   final BorderRadiusGeometry? borderRadius;
 
-  /// false: [ColorScheme.surfaceContainer]
+  /// false (default): [ColorScheme.surfaceContainer]
   /// true: [ColorScheme.surface]
-  final bool useSurface;
+  /// null: [ColorScheme.surfaceDim]
+  /// Quantum supremacy achieved
+  final bool? useSurface;
 
   /// Optional override
   /// Will ignore [useSurface] if this is set
@@ -36,6 +38,23 @@ class EzTextBackground extends StatelessWidget {
     this.backgroundColor,
   });
 
+  Color _color(BuildContext context, double percent) {
+    if (backgroundColor != null) {
+      return backgroundColor!;
+    }
+
+    late final Color baseColor;
+    if (useSurface == null) {
+      baseColor = Theme.of(context).colorScheme.surfaceDim;
+    } else if (useSurface!) {
+      baseColor = Theme.of(context).colorScheme.surface;
+    } else {
+      baseColor = Theme.of(context).colorScheme.surfaceContainer;
+    }
+
+    return baseColor.withValues(alpha: percent);
+  }
+
   @override
   Widget build(BuildContext context) {
     late final String oKey = isDarkTheme(context)
@@ -45,19 +64,10 @@ class EzTextBackground extends StatelessWidget {
     late final double percent =
         EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
 
-    final Color color = (backgroundColor == null)
-        ? useSurface
-            ? Theme.of(context).colorScheme.surface.withValues(alpha: percent)
-            : Theme.of(context)
-                .colorScheme
-                .surfaceContainer
-                .withValues(alpha: percent)
-        : backgroundColor!;
-
     return Container(
       padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),
       decoration: BoxDecoration(
-        color: color,
+        color: _color(context, percent),
         borderRadius: borderRadius ?? ezRoundEdge,
       ),
       child: text,

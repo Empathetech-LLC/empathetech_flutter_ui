@@ -21,6 +21,14 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gUndoWarn]
   final String? dialogContent;
 
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? skip;
+
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final bool storageOnly;
+
   /// What happens when the user choses to reset
   /// Defaults to [EzConfig.reset]
   /// DO NOT include a pop() for the dialog, this is included automatically
@@ -36,6 +44,8 @@ class EzResetButton extends StatelessWidget {
     this.label,
     this.dialogTitle,
     this.dialogContent,
+    this.skip,
+    this.storageOnly = false,
     this.onConfirm,
     this.onDeny,
   });
@@ -55,7 +65,11 @@ class EzResetButton extends StatelessWidget {
             late final List<Widget> materialActions;
             late final List<Widget> cupertinoActions;
 
-            final void Function() confirm = onConfirm ?? () => EzConfig.reset();
+            final void Function() confirm = onConfirm ??
+                () => EzConfig.reset(
+                      skip: skip,
+                      storageOnly: storageOnly,
+                    );
             final void Function() deny = onDeny ?? doNothing;
 
             (materialActions, cupertinoActions) = ezActionPairs(

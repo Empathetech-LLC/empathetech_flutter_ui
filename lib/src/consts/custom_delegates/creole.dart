@@ -5,10 +5,6 @@
 
 // ignore_for_file: prefer_asserts_with_message
 
-// TODO: Human verified translations; this is all machine translated
-// via Google Translate, one phrase at a time
-// Definitely not a "ChatGPT, please translate this entire chunk" (and hallucinate half of it)
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -23,8 +23,8 @@ const String _github =
 const String _versionSource =
     'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
 
-/// '2.2.2'
-const String _appVersion = '2.2.2';
+/// '2.2.3'
+const String _appVersion = '2.2.3';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
@@ -97,7 +97,7 @@ class _EzUpdaterState extends State<EzUpdater> {
     return Visibility(
       visible: !isLatest,
       child: FloatingActionButton(
-        heroTag: null,
+        heroTag: 'updater_fab',
         onPressed: () => launchUrl(Uri.parse(url ?? _github)),
         tooltip: ezL10n(context).gUpdates,
         backgroundColor: colorScheme.secondary,

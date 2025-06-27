@@ -478,7 +478,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
               ),
               padding: EdgeInsets.all(EzConfig.get(marginKey)),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.surfaceDim,
                 borderRadius: ezRoundEdge,
               ),
               child: ValueListenableBuilder<String>(

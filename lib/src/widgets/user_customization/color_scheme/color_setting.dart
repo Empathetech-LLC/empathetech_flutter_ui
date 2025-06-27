@@ -13,6 +13,9 @@ class EzColorSetting extends StatefulWidget {
   /// [EzConfig] key whose [Color] will be updated
   final String configKey;
 
+  /// Optional callback function for when the color is updated
+  final void Function(Color)? onUpdate;
+
   /// Optional callback for when the [configKey] is removed, if it is part of a dynamic set/list
   /// If null, the remove button will not be shown
   /// DO NOT include a pop() for the dialog, this is included automatically
@@ -24,6 +27,7 @@ class EzColorSetting extends StatefulWidget {
   const EzColorSetting({
     super.key,
     required this.configKey,
+    this.onUpdate,
     this.onRemove,
   });
 
@@ -63,6 +67,7 @@ class _ColorSettingState extends State<EzColorSetting> {
           setState(() => currColor = chosenColor),
       onConfirm: () async {
         await EzConfig.setInt(widget.configKey, currColor.toARGB32());
+        widget.onUpdate?.call(currColor);
       },
       onDeny: () => setState(() => currColor = backup),
     );
@@ -85,8 +90,8 @@ class _ColorSettingState extends State<EzColorSetting> {
 
       // Find the recommended contrast color for the background
       final int? backgroundColorValue = EzConfig.get(backgroundKey);
-      final Color backgroundColor = backgroundColorValue == null
-          ? getLiveColor(context, widget.configKey)
+      final Color backgroundColor = (backgroundColorValue == null)
+          ? getLiveColor(context, backgroundKey)
           : Color(backgroundColorValue);
 
       final int recommended = getTextColor(backgroundColor).toARGB32();
@@ -105,6 +110,7 @@ class _ColorSettingState extends State<EzColorSetting> {
             currColor = Color(recommended);
             await EzConfig.setInt(widget.configKey, recommended);
             setState(() {});
+            widget.onUpdate?.call(currColor);
 
             if (dialogContext.mounted) {
               Navigator.of(dialogContext).pop(recommended);
@@ -142,18 +148,10 @@ class _ColorSettingState extends State<EzColorSetting> {
                   shape: BoxShape.circle,
                   border: Border.all(color: backgroundColor),
                 ),
-                child: recommended == transparentHex
-                    ? CircleAvatar(
-                        backgroundColor: theme.colorScheme.surface,
-                        foregroundColor: theme.colorScheme.onSurface,
-                        radius: padding + margin,
-                        child: EzIcon(PlatformIcons(context).eyeSlash),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: Color(recommended),
-                        foregroundColor: getTextColor(Color(recommended)),
-                        radius: padding + margin,
-                      ),
+                child: CircleAvatar(
+                  backgroundColor: Color(recommended),
+                  radius: padding + margin,
+                ),
               ),
             ],
             materialActions: materialActions,
@@ -298,7 +296,6 @@ class _ColorSettingState extends State<EzColorSetting> {
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,
-                    foregroundColor: getTextColor(currColor),
                     radius: padding + margin,
                   ),
           ),

@@ -8,14 +8,12 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 /// Returns the guesstimated most readable text color (black/white) for [background]
-/// Formula credit: https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
 Color getTextColor(Color background) {
-  return Color((((background.r * 0.299) +
-              (background.g * 0.587) +
-              (background.b * 0.114)) >=
-          150)
-      ? blackHex
-      : whiteHex);
+  final int lumR = (background.r * 255.0 * 0.299).round();
+  final int lumG = (background.g * 255.0 * 0.587).round();
+  final int lumB = (background.b * 255.0 * 0.114).round();
+
+  return Color(((lumR + lumG + lumB) >= 150) ? blackHex : whiteHex);
 }
 
 /// Generate a [ColorScheme] based on values present in [EzConfig.prefs]

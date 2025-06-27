@@ -398,22 +398,6 @@ Future<void> genPubspec({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  // Cool idea, causes headaches...
-  // What if the latest package is actually incompatible with something else?
-  //
-  //
-  // Future<String?> getLatest(String packageName) async {
-  //   final Uri url = Uri.parse('https://pub.dev/api/packages/$packageName');
-  //   final http.Response response = await http.get(url);
-  //
-  //   if (response.statusCode == 200) {
-  //     final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-  //     return '^${jsonResponse['latest']['version']}';
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   try {
     final File file = File('$dir/pubspec.yaml');
     await file.writeAsString('''name: ${config.appName}
@@ -437,7 +421,7 @@ dependencies:
   url_launcher: ^6.3.1
 
   # Community
-  empathetech_flutter_ui: ^9.1.0
+  empathetech_flutter_ui: ^9.2.0
   ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^9.0.0
@@ -874,47 +858,43 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
     // Return the build //
 
-    final Widget theBuild = SelectionArea(
-      child: Scaffold(
-        // AppBar
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, toolbarHeight),
-          child: AppBar(
-            excludeHeaderSemantics: true,
-            toolbarHeight: toolbarHeight,
+    return EzAdaptiveScaffold(
+      small: SelectionArea(
+        child: Scaffold(
+          // AppBar
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, toolbarHeight),
+            child: AppBar(
+              excludeHeaderSemantics: true,
+              toolbarHeight: toolbarHeight,
 
-            // Leading (aka left)
-            leading: isLefty ? options : const EzBackAction(),
-            leadingWidth: toolbarHeight,
+              // Leading (aka left)
+              leading: isLefty ? options : const EzBackAction(),
+              leadingWidth: toolbarHeight,
 
-            // Title
-            title: Text(title, textAlign: TextAlign.center),
-            centerTitle: true,
-            titleSpacing: 0,
+              // Title
+              title: Text(title, textAlign: TextAlign.center),
+              centerTitle: true,
+              titleSpacing: 0,
 
-            // Actions (aka trailing aka right)
-            actions: <Widget>[isLefty ? const EzBackAction() : options],
+              // Actions (aka trailing aka right)
+              actions: <Widget>[isLefty ? const EzBackAction() : options],
+            ),
           ),
+
+          // Body
+          body: body,
+
+          // FAB
+          floatingActionButton: fab,
+          floatingActionButtonLocation: isLefty
+              ? FloatingActionButtonLocation.startFloat
+              : FloatingActionButtonLocation.endFloat,
+
+          // Prevents the keyboard from pushing the body up
+          resizeToAvoidBottomInset: false,
         ),
-
-        // Body
-        body: body,
-
-        // FAB
-        floatingActionButton: fab,
-        floatingActionButtonLocation: isLefty
-            ? FloatingActionButtonLocation.startFloat
-            : FloatingActionButtonLocation.endFloat,
-
-        // Prevents the keyboard from pushing the body up
-        resizeToAvoidBottomInset: false,
       ),
-    );
-
-    return EzSwapScaffold(
-      small: theBuild,
-      large: theBuild,
-      threshold: smallBreakpoint,
     );
   }
 }
@@ -1096,8 +1076,7 @@ class SettingsHomeScreen extends StatelessWidget {
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
-          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}
-          allowRandom: true,                                
+          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}                  
         ),
       );
 }

@@ -12,29 +12,27 @@ import 'package:flutter/foundation.dart';
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
   // Primary
   primary: Colors.white,
+  primaryContainer: lightSurfaceDim,
   onPrimary: Colors.black,
   onPrimaryContainer: Colors.black,
-  onPrimaryFixed: Colors.black,
-  onPrimaryFixedVariant: Colors.black,
 
   // Secondary
   secondary: Colors.white,
+  secondaryContainer: lightSurfaceDim,
   onSecondary: Colors.black,
   onSecondaryContainer: Colors.black,
-  onSecondaryFixed: Colors.black,
-  onSecondaryFixedVariant: Colors.black,
 
   // Tertiary
   tertiary: Colors.white,
+  tertiaryContainer: lightSurfaceDim,
   onTertiary: Colors.black,
   onTertiaryContainer: Colors.black,
-  onTertiaryFixed: Colors.black,
-  onTertiaryFixedVariant: Colors.black,
 
   // Surface
-  surface: Colors.black,
+  surface: darkSurface,
   onSurface: Colors.white,
-  surfaceContainer: empathOffBlack,
+  surfaceDim: darkSurfaceDim,
+  surfaceContainer: darkSurfaceContainer,
   inversePrimary: Colors.white,
   surfaceTint: Colors.transparent,
 );
@@ -43,29 +41,27 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
 const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
   // Primary
   primary: Colors.black,
+  primaryContainer: darkSurfaceDim,
   onPrimary: Colors.white,
   onPrimaryContainer: Colors.white,
-  onPrimaryFixed: Colors.white,
-  onPrimaryFixedVariant: Colors.white,
 
   // Secondary
   secondary: Colors.black,
+  secondaryContainer: darkSurfaceDim,
   onSecondary: Colors.white,
   onSecondaryContainer: Colors.white,
-  onSecondaryFixed: Colors.white,
-  onSecondaryFixedVariant: Colors.white,
 
   // Tertiary
   tertiary: Colors.black,
+  tertiaryContainer: darkSurfaceDim,
   onTertiary: Colors.white,
   onTertiaryContainer: Colors.white,
-  onTertiaryFixed: Colors.white,
-  onTertiaryFixedVariant: Colors.white,
 
   // Surface
-  surface: Colors.white,
+  surface: lightSurface,
   onSurface: Colors.black,
-  surfaceContainer: empathOffWhite,
+  surfaceDim: lightSurfaceDim,
+  surfaceContainer: lightSurfaceContainer,
   inversePrimary: Colors.black,
   surfaceTint: Colors.transparent,
 );

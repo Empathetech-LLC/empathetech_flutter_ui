@@ -16,14 +16,22 @@ class EzLocaleSetting extends StatefulWidget {
 
   /// [Locale]s to [skip]
   /// Works for both default and custom [locales]
-  final List<Locale> skip;
+  final Set<Locale>? skip;
+
+  /// [protest] to show a flipped flag
+  final bool protest;
+
+  /// Set of [String] language codes you'd like to (optionally) [protest]
+  final Set<String> inDistress;
 
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
   const EzLocaleSetting({
     super.key,
     this.locales,
-    this.skip = const <Locale>[],
+    this.skip,
+    this.protest = false,
+    this.inDistress = const <String>{'US'},
   });
 
   @override
@@ -48,7 +56,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
 
   Widget flag(Locale lang) {
     late final Widget flag;
-    bool? democracyInDistress;
 
     // Fix language code != flag code
     switch (lang.languageCode) {
@@ -60,31 +67,19 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         break;
     }
 
-    if (lang.countryCode == null) {
-      flag = CountryFlag.fromLanguageCode(
-        lang.languageCode,
-        shape: const Circle(),
-        width: padding * 2 + margin,
-      );
-    } else {
-      flag = CountryFlag.fromCountryCode(
-        lang.countryCode!,
-        shape: const Circle(),
-        width: padding * 2 + margin,
-      );
+    flag = (lang.countryCode == null)
+        ? CountryFlag.fromLanguageCode(
+            lang.languageCode,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          )
+        : CountryFlag.fromCountryCode(
+            lang.countryCode!,
+            shape: const Circle(),
+            width: padding * 2 + margin,
+          );
 
-      // Hopefully temporary
-      switch (lang.countryCode) {
-        case 'US':
-          democracyInDistress = true;
-          break;
-
-        default:
-          break;
-      }
-    }
-
-    return (democracyInDistress == true)
+    return (widget.protest && widget.inDistress.contains(lang.countryCode))
         ? Transform.rotate(angle: pi, child: flag)
         : flag;
   }
@@ -113,7 +108,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   void initState() {
     super.initState();
     locales = List<Locale>.from(widget.locales ?? EFUILang.supportedLocales);
-    locales.removeWhere((final Locale locale) => widget.skip.contains(locale));
+
+    if (widget.skip != null && widget.skip!.isNotEmpty) {
+      locales.removeWhere(
+        (final Locale locale) => widget.skip!.contains(locale),
+      );
+    }
   }
 
   // Return the build //

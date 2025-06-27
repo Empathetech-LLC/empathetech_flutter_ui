@@ -7,9 +7,9 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-//** Brand config **//
+//*** Brand config ***//
 
-//* Default *//
+//** Default **//
 
 // Text settings //
 
@@ -60,7 +60,23 @@ const double defaultMobileSpacing = 25.0;
 /// 25.0
 const double defaultDesktopSpacing = 30.0;
 
-// Color settings //
+//* Color settings *//
+
+// Secondary //
+
+/// 0xFFDAA520
+const int empathSandHex = 0xFFDAA520;
+
+/// 0xFFDAA520
+const Color empathSand = Color(empathSandHex);
+
+/// 0x40DAA520
+const int empathSandDimHex = 0x40DAA520;
+
+/// 0x40DAA520
+const Color empathSandDim = Color(empathSandHex);
+
+// Dark:Primary | Light:Tertiary //
 
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
@@ -74,6 +90,8 @@ const int empathEucalyptusDimHex = 0x4020DAA5;
 /// 0x4020DAA5
 const Color empathEucalyptusDim = Color(empathEucalyptusHex);
 
+// Dark:Tertiary | Light:Primary //
+
 /// 0xFFA520DA
 const int empathPurpleHex = 0xFFA520DA;
 
@@ -86,40 +104,58 @@ const int empathPurpleDimHex = 0x40A520DA;
 /// 0x40A520DA
 const Color empathPurpleDim = Color(empathPurpleDimHex);
 
-/// 0xFFDAA520
-const int empathSandHex = 0xFFDAA520;
+// Dark //
 
-/// 0xFFDAA520
-const Color empathSand = Color(empathSandHex);
+/// 0xFF111111 == 17 of each
+const int darkSurfaceContainerHex = 0xFF111111;
 
-/// 0x40DAA520
-const int empathSandDimHex = 0x40DAA520;
+/// 0xFF111111 == 17 of each
+const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
 
-/// 0x40DAA520
-const Color empathSandSim = Color(empathSandHex);
+/// 0xFF191919 == 25 of each
+const int darkSurfaceDimHex = 0xFF191919;
+
+/// 0xFF191919 == 25 of each
+const Color darkSurfaceDim = Color(darkSurfaceDimHex);
+
+/// 0xFF222222 == 34 of each
+const int darkSurfaceHex = 0xFF222222;
+
+/// 0xFF222222 == 34 of each
+const Color darkSurface = Color(darkSurfaceHex);
+
+// Light //
+
+/// 0xFFF0F0F0 == -15 of each
+const int lightSurfaceContainerHex = 0xFFF0F0F0;
+
+/// 0xFFF0F0F0 == -15 of each
+const Color lightSurfaceContainer = Color(lightSurfaceContainerHex);
+
+/// 0xFFF8F8F8 == -7 of each
+const int lightSurfaceDimHex = 0xFFF8F8F8;
+
+/// 0xFFF8F8F8 == -7 of each
+const Color lightSurfaceDim = Color(lightSurfaceDimHex);
+
+/// 0xFFFFFFFF == white
+const int lightSurfaceHex = whiteHex;
+
+/// 0xFFFFFFFF == white
+const Color lightSurface = Color(lightSurfaceHex);
+
+// Misc //
 
 /// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
 
-/// 0xFFF5F5F5
-const int offWhiteHex = 0xFFF5F5F5;
-
-/// 0xFFF5F5F5
-const Color empathOffWhite = Color(offWhiteHex);
-
 /// 0xFF000000
 const int blackHex = 0xFF000000;
 
-/// 0xFF191919
-const int offBlackHex = 0xFF191919;
-
-/// 0xFF191919
-const Color empathOffBlack = Color(offBlackHex);
-
-/// 0xFF000000
+/// 0x00000000
 const int transparentHex = 0x00000000;
 
-//* Min *//
+//** Min **//
 
 // Text theme //
 
@@ -173,7 +209,7 @@ const double minPadding = 10.0;
 /// 10.0
 const double minSpacing = 10.0;
 
-//* Max *//
+//** Max **//
 
 // Text settings //
 
@@ -227,7 +263,7 @@ const double maxPadding = 40.0;
 /// 50.0
 const double maxSpacing = 75.0;
 
-//* Maps *//
+//** Maps **//
 
 /// Empathetech [EzConfig.defaults] base to build from
 const Map<String, Object> baseEmpathConfig = <String, Object>{
@@ -300,31 +336,8 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Layout settings //
 
   marginKey: defaultMargin,
-  hideScrollKey: false,
 
   // Color settings //
-
-  // Light
-  lightPrimaryKey: empathPurpleHex,
-  lightPrimaryContainerKey: empathPurpleDimHex,
-  lightOnPrimaryKey: whiteHex,
-  lightOnPrimaryContainerKey: whiteHex,
-
-  lightSecondaryKey: empathSandHex,
-  lightSecondaryContainerKey: empathSandDimHex,
-  lightOnSecondaryKey: blackHex,
-  lightOnSecondaryContainerKey: blackHex,
-
-  lightTertiaryKey: empathEucalyptusHex,
-  lightTertiaryContainerKey: empathEucalyptusDimHex,
-  lightOnTertiaryKey: blackHex,
-  lightOnTertiaryContainerKey: blackHex,
-
-  lightSurfaceKey: whiteHex,
-  lightOnSurfaceKey: blackHex,
-  lightSurfaceContainerKey: offWhiteHex,
-  lightInversePrimaryKey: empathPurpleHex,
-  lightSurfaceTintKey: transparentHex,
 
   // Dark
   darkPrimaryKey: empathEucalyptusHex,
@@ -342,34 +355,64 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   darkOnTertiaryKey: whiteHex,
   darkOnTertiaryContainerKey: whiteHex,
 
-  darkSurfaceKey: blackHex,
+  darkSurfaceKey: darkSurfaceHex,
   darkOnSurfaceKey: whiteHex,
-  darkSurfaceContainerKey: offBlackHex,
+  darkSurfaceDimKey: darkSurfaceDimHex,
+  darkSurfaceContainerKey: darkSurfaceContainerHex,
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
+
+  // Light
+  lightPrimaryKey: empathPurpleHex,
+  lightPrimaryContainerKey: empathPurpleDimHex,
+  lightOnPrimaryKey: whiteHex,
+  lightOnPrimaryContainerKey: whiteHex,
+
+  lightSecondaryKey: empathSandHex,
+  lightSecondaryContainerKey: empathSandDimHex,
+  lightOnSecondaryKey: blackHex,
+  lightOnSecondaryContainerKey: blackHex,
+
+  lightTertiaryKey: empathEucalyptusHex,
+  lightTertiaryContainerKey: empathEucalyptusDimHex,
+  lightOnTertiaryKey: blackHex,
+  lightOnTertiaryContainerKey: blackHex,
+
+  lightSurfaceKey: lightSurfaceHex,
+  lightOnSurfaceKey: blackHex,
+  lightSurfaceDimKey: lightSurfaceDimHex,
+  lightSurfaceContainerKey: lightSurfaceContainerHex,
+  lightInversePrimaryKey: empathPurpleHex,
+  lightSurfaceTintKey: transparentHex,
 
   // Selector
   advancedColorsKey: false,
 
   // Image settings //
 
-  lightBackgroundImageKey: noImageValue,
-  '$lightBackgroundImageKey$boxFitSuffix': none,
-
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
+
+  lightBackgroundImageKey: noImageValue,
+  '$lightBackgroundImageKey$boxFitSuffix': none,
 };
 
 const Map<String, Object> mobileEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout
   paddingKey: defaultMobilePadding,
   spacingKey: defaultMobileSpacing,
+  hideScrollKey: true,
 };
 
 const Map<String, Object> desktopEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout
   paddingKey: defaultDesktopPadding,
   spacingKey: defaultDesktopSpacing,
+  hideScrollKey: false,
 };
 
 /// For testing

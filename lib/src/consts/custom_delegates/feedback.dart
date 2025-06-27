@@ -92,20 +92,6 @@ class EzHtFeedback extends FeedbackLocalizations {
   String get submitButtonText => 'Soumèt';
 }
 
-class EzPtFeedback extends FeedbackLocalizations {
-  @override
-  String get draw => 'Pending';
-
-  @override
-  String get feedbackDescriptionText => 'Pending';
-
-  @override
-  String get navigate => 'Pending';
-
-  @override
-  String get submitButtonText => 'Pending';
-}
-
 class EzZhFeedback extends FeedbackLocalizations {
   @override
   String get draw => '画画';
@@ -132,7 +118,6 @@ class EzFeedbackLD extends GlobalFeedbackLocalizationsDelegate {
         filipino: EzFilFeedback(),
         french: EzFrFeedback(),
         creole: EzHtFeedback(),
-        portuguese: EzPtFeedback(),
         chinese: EzZhFeedback(),
       };
 }

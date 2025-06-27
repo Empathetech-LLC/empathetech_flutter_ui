@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.3] - 2025-06-27
+### Updated
+- Builder and settings screens layout
+  - EFUI 9.2.0
+
 ## [2.2.2] - 2025-06-11
 ### Removed
 - Back FAB

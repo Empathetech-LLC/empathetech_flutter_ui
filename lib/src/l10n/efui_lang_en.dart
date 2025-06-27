@@ -390,7 +390,7 @@ class EFUILangEn extends EFUILang {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars?';
+  String get lsScroll => 'Hide scrollbars';
 
   @override
   String get lsResetAll => 'Reset all layout settings?';
@@ -879,7 +879,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get lsSpacing => 'Spacing';
 
   @override
-  String get lsScroll => 'Hide scrollbars?';
+  String get lsScroll => 'Hide scrollbars';
 
   @override
   String get lsResetAll => 'Reset all layout settings?';

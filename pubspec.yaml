@@ -1,6 +1,6 @@
 name: empathetech_flutter_ui
 description: "Build apps for anyone. EFUI makes building truly accessible apps Ez. So anyone can enjoy your great idea!"
-version: 9.1.0
+version: 9.2.0
 repository: https://github.com/Empathetech-LLC/empathetech_flutter_ui
 
 environment:
@@ -51,7 +51,7 @@ dev_dependencies:
     path: ../efui_bios
   
   email_validator: ^3.0.0
-  file_picker: ^10.1.9
+  file_picker: ^10.2.0
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.6
   http: ^1.4.0

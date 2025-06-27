@@ -77,7 +77,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // App bar
     appBarTheme: AppBarTheme(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       foregroundColor: colorScheme.onSurface,
       titleTextStyle: textTheme.headlineLarge,
       iconTheme: appBarIconData,
@@ -96,7 +96,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Card
     cardTheme: CardThemeData(
-      color: colorScheme.surface,
+      color: colorScheme.surfaceDim,
       margin: EdgeInsets.zero,
     ),
 
@@ -118,7 +118,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialog
     dialogTheme: DialogThemeData(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       titleTextStyle: textTheme.titleLarge,
       contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
@@ -132,7 +132,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Drawer
     navigationDrawerTheme: NavigationDrawerThemeData(
-      backgroundColor: colorScheme.surfaceContainer,
+      backgroundColor: colorScheme.surfaceDim,
     ),
 
     // Dropdown menu
@@ -190,7 +190,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: colorScheme.surfaceDim,
         foregroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
@@ -265,7 +265,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Snackbar
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       closeIconColor: colorScheme.primary,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: colorScheme.secondary),
@@ -273,6 +273,23 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       contentTextStyle: textTheme.bodyLarge,
       insetPadding: EdgeInsets.all(margin),
+    ),
+
+    // Switch
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected))
+            ? colorScheme.primary
+            : colorScheme.outline,
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => (states.contains(WidgetState.selected) ||
+                states.contains(WidgetState.focused))
+            ? colorScheme.primaryContainer
+            : colorScheme.surface,
+      ),
+      trackOutlineColor: WidgetStateProperty.all(colorScheme.primaryContainer),
+      padding: EdgeInsets.symmetric(horizontal: margin),
     ),
 
     // Text button
@@ -295,7 +312,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Tooltip
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: colorScheme.surfaceDim,
         border: Border.all(color: colorScheme.secondary),
         borderRadius: ezRoundEdge,
       ),

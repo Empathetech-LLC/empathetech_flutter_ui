@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
-  static const Widget divider = Center(child: EzDivider());
+  static const Widget divider = EzDivider();
 
   final EzMargin margin = EzMargin();
   late final EzSpacer rowMargin = EzMargin(vertical: false);
@@ -345,24 +345,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           const InputDecoration(hintText: 'com.example'),
                     ),
                   ],
-                  EzRow(
+                  EzSwitchPair(
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: exampleDomain
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
-                    children: <Widget>[
-                      EzText(
-                        el10n.gNA,
-                        semanticsLabel: el10n.gNAHint,
-                        textAlign: TextAlign.start,
-                      ),
-                      EzCheckbox(
-                        value: exampleDomain,
-                        onChanged: (bool? value) {
-                          if (value == null) return;
-                          setState(() => exampleDomain = value);
-                        },
-                      ),
-                    ],
+                    text: el10n.gNA,
+                    semanticsLabel: el10n.gNAHint,
+                    textAlign: TextAlign.start,
+                    value: exampleDomain,
+                    onChanged: (bool? value) {
+                      if (value == null) return;
+                      setState(() => exampleDomain = value);
+                    },
                   ),
                 ],
               ),
@@ -410,8 +405,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.tsPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.tsPageTitle,
                     value: textSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -419,8 +414,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.lsPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.lsPageTitle,
                     value: layoutSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -428,8 +423,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.csPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.csPageTitle,
                     value: colorSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -437,8 +432,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   margin,
-                  _SettingsCheckbox(
-                    title: el10n.isPageTitle,
+                  EzCheckboxPair(
+                    text: el10n.isPageTitle,
                     value: imageSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
@@ -551,7 +546,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  separator,
+                  spacer,
 
                   EzScrollView(
                     mainAxisSize: MainAxisSize.min,
@@ -574,7 +569,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            if (isMac) separator,
+            if (isMac) divider,
 
             // Advanced settings //
 
@@ -745,16 +740,88 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            (isMac || showAdvanced) ? divider : separator,
+            showAdvanced ? divider : separator,
 
             // Make it so //
 
-            Center(
-              child: EzScrollView(
-                scrollDirection: Axis.horizontal,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // Save config
+            EzScrollView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                // Save config
+                EzElevatedIconButton(
+                  enabled: canGen,
+                  onPressed: () async {
+                    if (validName &&
+                        pubController.text.isNotEmpty &&
+                        (exampleDomain ||
+                            validateDomain(domainController.text, context) ==
+                                null) &&
+                        descriptionController.text.isNotEmpty &&
+                        (supportEmailController.text.isEmpty ||
+                            EmailValidator.validate(
+                                supportEmailController.text)) &&
+                        (!isDesktop ||
+                            ((!isMac || await checkPath(flutterPathControl)) &&
+                                await checkPath(workPathControl))) &&
+                        context.mounted) {
+                      context.goNamed(
+                        archiveScreenPath,
+                        extra: EAGConfig(
+                          appName: nameController.text,
+                          publisherName: pubController.text,
+                          appDescription: descriptionController.text,
+                          domainName: exampleDomain
+                              ? 'com.example'
+                              : domainController.text,
+                          supportEmail: supportEmailController.text.isEmpty
+                              ? null
+                              : supportEmailController.text,
+                          textSettings: textSettings,
+                          layoutSettings: layoutSettings,
+                          colorSettings: colorSettings,
+                          imageSettings: imageSettings,
+                          appDefaults: Map<String, dynamic>.fromEntries(
+                            allKeys.keys.map(
+                              (String key) => MapEntry<String, dynamic>(
+                                  key, EzConfig.get(key)),
+                            ),
+                          ),
+                          flutterPath: isMac ? flutterPathControl.text : null,
+                          workPath: isDesktop ? workPathControl.text : null,
+                          copyright: (removeCopyright ||
+                                  copyrightController.text.isEmpty)
+                              ? null
+                              : copyrightController.text,
+                          license: pickLicense(
+                            license: license,
+                            appName: nameController.text,
+                            publisher: pubController.text,
+                            description: descriptionController.text,
+                            year: currentYear.toString(),
+                          ),
+                          l10nConfig:
+                              (removeL10n || l10nController.text.isEmpty)
+                                  ? null
+                                  : l10nController.text,
+                          analysisOptions: (removeAnalysis ||
+                                  analysisController.text.isEmpty)
+                              ? null
+                              : analysisController.text,
+                          vsCodeConfig:
+                              (removeVSC || vscController.text.isEmpty)
+                                  ? null
+                                  : vscController.text,
+                        ),
+                      );
+                    }
+                  },
+                  icon: EzIcon(Icons.save),
+                  label: l10n.csSave,
+                ),
+
+                // Generate app
+                if (isDesktop) ...<Widget>[
+                  spacer,
                   EzElevatedIconButton(
                     enabled: canGen,
                     onPressed: () async {
@@ -767,13 +834,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           (supportEmailController.text.isEmpty ||
                               EmailValidator.validate(
                                   supportEmailController.text)) &&
-                          (!isDesktop ||
-                              ((!isMac ||
-                                      await checkPath(flutterPathControl)) &&
-                                  await checkPath(workPathControl))) &&
+                          (!isMac || await checkPath(flutterPathControl)) &&
+                          await checkPath(workPathControl) &&
                           context.mounted) {
                         context.goNamed(
-                          archiveScreenPath,
+                          generateScreenPath,
                           extra: EAGConfig(
                             appName: nameController.text,
                             publisherName: pubController.text,
@@ -795,7 +860,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             flutterPath: isMac ? flutterPathControl.text : null,
-                            workPath: isDesktop ? workPathControl.text : null,
+                            workPath: workPathControl.text,
                             copyright: (removeCopyright ||
                                     copyrightController.text.isEmpty)
                                 ? null
@@ -821,97 +886,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                     : vscController.text,
                           ),
                         );
+                      } else {
+                        setState(() => canGen = false);
+                        await ezSnackBar(
+                          context: context,
+                          message: l10n.csInvalidFields,
+                        ).closed;
+                        setState(() => canGen = true);
                       }
                     },
-                    icon: EzIcon(Icons.save),
-                    label: l10n.csSave,
-                    textAlign: TextAlign.center,
+                    icon: EzIcon(PlatformIcons(context).create),
+                    label: l10n.csGenerate,
                   ),
-
-                  // Generate app
-                  if (isDesktop) ...<Widget>[
-                    spacer,
-                    EzElevatedIconButton(
-                      enabled: canGen,
-                      onPressed: () async {
-                        if (validName &&
-                            pubController.text.isNotEmpty &&
-                            (exampleDomain ||
-                                validateDomain(
-                                        domainController.text, context) ==
-                                    null) &&
-                            descriptionController.text.isNotEmpty &&
-                            (supportEmailController.text.isEmpty ||
-                                EmailValidator.validate(
-                                    supportEmailController.text)) &&
-                            (!isMac || await checkPath(flutterPathControl)) &&
-                            await checkPath(workPathControl) &&
-                            context.mounted) {
-                          context.goNamed(
-                            generateScreenPath,
-                            extra: EAGConfig(
-                              appName: nameController.text,
-                              publisherName: pubController.text,
-                              appDescription: descriptionController.text,
-                              domainName: exampleDomain
-                                  ? 'com.example'
-                                  : domainController.text,
-                              supportEmail: supportEmailController.text.isEmpty
-                                  ? null
-                                  : supportEmailController.text,
-                              textSettings: textSettings,
-                              layoutSettings: layoutSettings,
-                              colorSettings: colorSettings,
-                              imageSettings: imageSettings,
-                              appDefaults: Map<String, dynamic>.fromEntries(
-                                allKeys.keys.map(
-                                  (String key) => MapEntry<String, dynamic>(
-                                      key, EzConfig.get(key)),
-                                ),
-                              ),
-                              flutterPath:
-                                  isMac ? flutterPathControl.text : null,
-                              workPath: workPathControl.text,
-                              copyright: (removeCopyright ||
-                                      copyrightController.text.isEmpty)
-                                  ? null
-                                  : copyrightController.text,
-                              license: pickLicense(
-                                license: license,
-                                appName: nameController.text,
-                                publisher: pubController.text,
-                                description: descriptionController.text,
-                                year: currentYear.toString(),
-                              ),
-                              l10nConfig:
-                                  (removeL10n || l10nController.text.isEmpty)
-                                      ? null
-                                      : l10nController.text,
-                              analysisOptions: (removeAnalysis ||
-                                      analysisController.text.isEmpty)
-                                  ? null
-                                  : analysisController.text,
-                              vsCodeConfig:
-                                  (removeVSC || vscController.text.isEmpty)
-                                      ? null
-                                      : vscController.text,
-                            ),
-                          );
-                        } else {
-                          setState(() => canGen = false);
-                          await ezSnackBar(
-                            context: context,
-                            message: l10n.csInvalidFields,
-                          ).closed;
-                          setState(() => canGen = true);
-                        }
-                      },
-                      icon: EzIcon(PlatformIcons(context).create),
-                      label: l10n.csGenerate,
-                    ),
-                  ],
                 ],
-              ),
+              ],
             ),
             separator,
           ],
@@ -1119,32 +1107,6 @@ class _BasicField extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUnfocus,
             decoration: InputDecoration(hintText: hintText),
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SettingsCheckbox extends StatelessWidget {
-  final String title;
-  final bool value;
-  final void Function(bool?) onChanged;
-
-  const _SettingsCheckbox({
-    required this.title,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return EzRow(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Flexible(child: EzText(title, textAlign: TextAlign.start)),
-        EzCheckbox(
-          value: value,
-          onChanged: onChanged,
         ),
       ],
     );

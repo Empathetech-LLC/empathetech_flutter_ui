@@ -136,43 +136,59 @@ class EzDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     late final double? savedIconSize = EzConfig.get(iconSizeKey);
 
-    return DropdownMenu<T>(
-      key: key,
-      enabled: enabled,
-      width: width ??
-          (widthEntries == null
-              ? null
-              : ezDropdownWidth(context: context, entries: widthEntries!)),
-      menuHeight: menuHeight,
-      leadingIcon: leadingIcon,
-      trailingIcon: trailingIcon ??
-          Icon(Icons.arrow_drop_down, size: iconSize ?? savedIconSize),
-      label: label,
-      hintText: hintText,
-      helperText: helperText,
-      errorText: errorText,
-      selectedTrailingIcon: selectedTrailingIcon ??
-          Icon(Icons.arrow_drop_up, size: iconSize ?? savedIconSize),
-      enableFilter: enableFilter,
-      enableSearch: enableSearch,
-      keyboardType: keyboardType,
-      textStyle: textStyle,
-      textAlign: textAlign,
-      inputDecorationTheme: inputDecorationTheme,
-      menuStyle: menuStyle,
-      controller: controller,
-      initialSelection: initialSelection,
-      onSelected: onSelected,
-      focusNode: focusNode,
-      requestFocusOnTap: requestFocusOnTap,
-      expandedInsets: expandedInsets,
-      filterCallback: filterCallback,
-      searchCallback: searchCallback,
-      alignmentOffset: alignmentOffset,
-      dropdownMenuEntries: dropdownMenuEntries,
-      inputFormatters: inputFormatters,
+    return IconButtonTheme(
+      data: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          backgroundColor: colorScheme.surface,
+          foregroundColor: colorScheme.primary,
+          disabledForegroundColor: colorScheme.outline,
+          overlayColor: colorScheme.primary,
+          side: BorderSide.none,
+          iconSize: iconSize,
+          alignment: Alignment.center,
+          padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+        ),
+      ),
+      child: DropdownMenu<T>(
+        key: key,
+        enabled: enabled,
+        width: width ??
+            (widthEntries == null
+                ? null
+                : ezDropdownWidth(context: context, entries: widthEntries!)),
+        menuHeight: menuHeight,
+        leadingIcon: leadingIcon,
+        trailingIcon: trailingIcon ??
+            Icon(Icons.arrow_drop_down, size: iconSize ?? savedIconSize),
+        label: label,
+        hintText: hintText,
+        helperText: helperText,
+        errorText: errorText,
+        selectedTrailingIcon: selectedTrailingIcon ??
+            Icon(Icons.arrow_drop_up, size: iconSize ?? savedIconSize),
+        enableFilter: enableFilter,
+        enableSearch: enableSearch,
+        keyboardType: keyboardType,
+        textStyle: textStyle,
+        textAlign: textAlign,
+        inputDecorationTheme: inputDecorationTheme,
+        menuStyle: menuStyle,
+        controller: controller,
+        initialSelection: initialSelection,
+        onSelected: onSelected,
+        focusNode: focusNode,
+        requestFocusOnTap: requestFocusOnTap,
+        expandedInsets: expandedInsets,
+        filterCallback: filterCallback,
+        searchCallback: searchCallback,
+        alignmentOffset: alignmentOffset,
+        dropdownMenuEntries: dropdownMenuEntries,
+        inputFormatters: inputFormatters,
+      ),
     );
   }
 }

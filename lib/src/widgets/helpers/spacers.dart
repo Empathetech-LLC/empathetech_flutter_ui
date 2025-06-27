@@ -48,18 +48,26 @@ class EzMargin extends EzSpacer {
 }
 
 class EzSwapSpacer extends StatelessWidget {
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
+
   /// Optional [EzSpacer.space] passthrough
   final double? space;
 
-  /// Defaults to [EzSpacer.vertical] => false
-  /// When [ScreenSpace.isLimited], it swaps to [EzSpacer.horizontal] => false
-  const EzSwapSpacer({super.key, this.space});
+  /// When the context's [ScreenSize] > [breakpoint]; [EzSpacer.vertical] => false
+  /// When the context's [ScreenSize] <= [breakpoint]; [EzSpacer.horizontal] => false
+  /// If [EzScreenSize] is not in the Widget tree; [EzSpacer.horizontal] => false
+  const EzSwapSpacer({
+    super.key,
+    this.breakpoint = ScreenSize.small,
+    this.space,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
+    final ScreenSize? size = EzScreenSize.of(context)?.screenSize;
 
-    return limitedSpace
+    return (size == null || size.order <= breakpoint.order)
         ? EzSpacer(space: space, horizontal: false)
         : EzSpacer(space: space, vertical: false);
   }
@@ -103,34 +111,79 @@ class EzSeparator extends StatelessWidget {
 }
 
 class EzSwapSeparator extends StatelessWidget {
+  /// Which [ScreenSize] the Widget should respond to
+  final ScreenSize breakpoint;
+
   /// Optional [EzSeparator.space] passthrough
   final double? space;
 
-  /// Defaults to [EzSeparator.vertical] => false
-  /// When [ScreenSpace.isLimited], it swaps to [EzSeparator.horizontal] => false
-  const EzSwapSeparator({super.key, this.space});
+  /// When the context's [ScreenSize] > [breakpoint]; [EzSeparator.vertical] => false
+  /// When the context's [ScreenSize] <= [breakpoint]; [EzSeparator.horizontal] => false
+  /// If [EzScreenSize] is not in the Widget tree; [EzSeparator.horizontal] => false
+  const EzSwapSeparator({
+    super.key,
+    this.breakpoint = ScreenSize.small,
+    this.space,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final bool limitedSpace = ScreenSpace.of(context)?.isLimited ?? true;
+    final ScreenSize? size = EzScreenSize.of(context)?.screenSize;
 
-    return limitedSpace
+    return (size == null || size.order <= breakpoint.order)
         ? EzSeparator(space: space, horizontal: false)
         : EzSeparator(space: space, vertical: false);
   }
 }
 
 class EzDivider extends StatelessWidget {
-  /// [widthOf] multiplier override
-  /// Defaults to 0.5
-  final double widthM;
+  /// Bounds for the [Divider]
+  final BoxConstraints constraints;
 
-  /// A [Divider] bounded by [BoxConstraints.maxWidth] => [widthOf] * [widthM]
-  const EzDivider({super.key, this.widthM = 0.5});
+  /// [Divider.height] passthrough
+  final double? height;
+
+  /// [Divider.thickness] passthrough
+  final double? thickness;
+
+  /// [Divider.indent] passthrough
+  final double? indent;
+
+  /// [Divider.color] passthrough
+  final Color? color;
+
+  /// [Divider.endIndent] passthrough
+  final double? endIndent;
+
+  /// [Divider.radius] passthrough
+  final BorderRadius? radius;
+
+  /// A [Divider] wrapped in a [ConstrainedBox]
+  const EzDivider({
+    super.key,
+
+    // Constraints
+    this.constraints = const BoxConstraints(maxWidth: 200),
+
+    // Divider
+    this.height,
+    this.thickness,
+    this.indent,
+    this.color,
+    this.endIndent,
+    this.radius,
+  });
 
   @override
   Widget build(BuildContext context) => ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: widthOf(context) * widthM),
-        child: const Divider(),
+        constraints: constraints,
+        child: Divider(
+          height: height,
+          thickness: thickness,
+          indent: indent,
+          endIndent: endIndent,
+          color: color,
+          radius: radius,
+        ),
       );
 }
