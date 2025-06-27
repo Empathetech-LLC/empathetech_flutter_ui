@@ -190,7 +190,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Icon button
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: colorScheme.surfaceDim,
         foregroundColor: colorScheme.primary,
         disabledForegroundColor: colorScheme.outline,
         overlayColor: colorScheme.primary,
