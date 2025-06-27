@@ -106,51 +106,53 @@ const Color empathPurpleDim = Color(empathPurpleDimHex);
 
 // Dark //
 
-/// 0xFF111111 => 17 of each
+/// 0xFF111111 == 17 of each
 const int darkSurfaceContainerHex = 0xFF111111;
 
-/// 0xFF111111 => 17 of each
+/// 0xFF111111 == 17 of each
 const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
 
-/// 0xFF191919 => 25 of each
+/// 0xFF191919 == 25 of each
 const int darkSurfaceDimHex = 0xFF191919;
 
-/// 0xFF191919 => 25 of each
+/// 0xFF191919 == 25 of each
 const Color darkSurfaceDim = Color(darkSurfaceDimHex);
 
-/// 0xFF222222 => 34 of each
+/// 0xFF222222 == 34 of each
 const int darkSurfaceHex = 0xFF222222;
 
-/// 0xFF222222 => 34 of each
+/// 0xFF222222 == 34 of each
 const Color darkSurface = Color(darkSurfaceHex);
 
 // Light //
 
-/// BLARG
-const int lightSurfaceContainerHex = 0xFFE6E6E6;
+/// 0xFFF0F0F0 == -15 of each
+const int lightSurfaceContainerHex = 0xFFF0F0F0;
 
-/// BLARG
+/// 0xFFF0F0F0 == -15 of each
 const Color lightSurfaceContainer = Color(lightSurfaceContainerHex);
 
-/// BLARG
-const int lightSurfaceDimHex = 0xFFF0F0F0;
+/// 0xFFF8F8F8 == -7 of each
+const int lightSurfaceDimHex = 0xFFF8F8F8;
 
-/// BLARG
+/// 0xFFF8F8F8 == -7 of each
 const Color lightSurfaceDim = Color(lightSurfaceDimHex);
 
-/// BLARG
-const int lightSurfaceHex = 0xFFFAFAFA;
+/// 0xFFFFFFFF == white
+const int lightSurfaceHex = whiteHex;
 
-/// BLARG
+/// 0xFFFFFFFF == white
 const Color lightSurface = Color(lightSurfaceHex);
 
 // Misc //
 
+/// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
 
+/// 0xFF000000
 const int blackHex = 0xFF000000;
 
-/// 0xFF000000
+/// 0x00000000
 const int transparentHex = 0x00000000;
 
 //** Min **//
