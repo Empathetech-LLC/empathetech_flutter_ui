@@ -104,7 +104,7 @@ class EzIconButton extends StatelessWidget {
 
   /// [IconButton] wrapper with custom styling
   /// All [AppBar] IconButtons use [ThemeData.iconButtonTheme] for styling... and are super annoying to overwrite
-  /// But, IMO [AppBar] IconBUttons and "regular" ones shouldn't behave the same
+  /// But, IMO [AppBar] IconButtons and "regular" ones shouldn't behave the same
   /// So, it's recommended to use regular [IconButton]s in the [AppBar] and [EzIconButton]s everywhere else
   const EzIconButton({
     super.key,
