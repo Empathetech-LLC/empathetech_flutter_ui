@@ -309,67 +309,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Return the build //
 
-  List<Widget> textBlock() => <Widget>[
-        // Display preview
-        EzTextBackground(
-          Text(
-            l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
-            textAlign: TextAlign.center,
-            style: displayProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        spacer,
-
-        // Headline preview
-        EzTextBackground(
-          Text(
-            l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
-            textAlign: TextAlign.center,
-            style: headlineProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        spacer,
-
-        // Title preview
-        EzTextBackground(
-          Text(
-            l10n.tsTitleP1 + l10n.tsTitleLink,
-            textAlign: TextAlign.center,
-            style: titleProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        spacer,
-
-        // Body preview
-        EzTextBackground(
-          Text(
-            l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
-            textAlign: TextAlign.center,
-            style: bodyProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-        spacer,
-
-        // Label preview
-        EzTextBackground(
-          Text(
-            l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
-            textAlign: TextAlign.center,
-            style: labelProvider.value,
-          ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
-        ),
-      ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -432,7 +371,64 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         widget.textBlockSpacer,
-        ...textBlock(),
+        // Display preview
+        EzTextBackground(
+          Text(
+            l10n.tsDisplayP1 + l10n.tsDisplayLink + l10n.tsDisplayP2,
+            textAlign: TextAlign.center,
+            style: displayProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+        spacer,
+
+        // Headline preview
+        EzTextBackground(
+          Text(
+            l10n.tsHeadlineP1 + l10n.tsHeadlineLink + l10n.tsHeadlineP2,
+            textAlign: TextAlign.center,
+            style: headlineProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+        spacer,
+
+        // Title preview
+        EzTextBackground(
+          Text(
+            l10n.tsTitleP1 + l10n.tsTitleLink,
+            textAlign: TextAlign.center,
+            style: titleProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+        spacer,
+
+        // Body preview
+        EzTextBackground(
+          Text(
+            l10n.tsBodyP1 + l10n.tsBodyLink + l10n.tsBodyP2,
+            textAlign: TextAlign.center,
+            style: bodyProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+        spacer,
+
+        // Label preview
+        EzTextBackground(
+          Text(
+            l10n.tsLabelP1 + l10n.tsLabelLink + l10n.tsLabelP2,
+            textAlign: TextAlign.center,
+            style: labelProvider.value,
+          ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
         widget.textBlockSpacer,
 
         if (widget.showOpacity) ...<Widget>[
