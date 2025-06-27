@@ -2,13 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [9.2.0] - 2025-06-??
+## [9.2.0] - 2025-06-27
 ### Updated
-- Settings home params (non-breaking)
+- sample_screen (all 5) customization
+  - Defaults constructors are unchanged, default behavior 90+% unchanged
+- EzSwapScaffold -> EzAdaptiveScaffold
+  - No longer requires a threshold, they are included (and can be modified)
+  - Now only requires a `small` screen Widget
+- Default surface colors
+- Open UI code gen to match changes
 
 ### Added
-- More EzLayoutSettings customization
-- skipLocales param to EzSettingsHome
+- surfaceDim to default config and ThemeData
+- EzLocaleSetting customization
 - Set<String>? skip param to EzConfig.reset
 - EzCheckboxPair
 - SwitchThemeData to ezThemeData
