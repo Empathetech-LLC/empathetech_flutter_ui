@@ -118,7 +118,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Dialog
     dialogTheme: DialogThemeData(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       titleTextStyle: textTheme.titleLarge,
       contentTextStyle: textTheme.bodyLarge,
       alignment: Alignment.center,
@@ -132,7 +132,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Drawer
     navigationDrawerTheme: NavigationDrawerThemeData(
-      backgroundColor: colorScheme.surfaceContainer,
+      backgroundColor: colorScheme.surfaceDim,
     ),
 
     // Dropdown menu
@@ -265,7 +265,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Snackbar
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.surfaceDim,
       closeIconColor: colorScheme.primary,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: colorScheme.secondary),
@@ -312,7 +312,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Tooltip
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: colorScheme.surfaceDim,
         border: Border.all(color: colorScheme.secondary),
         borderRadius: ezRoundEdge,
       ),
