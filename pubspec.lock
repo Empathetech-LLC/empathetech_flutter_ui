@@ -206,7 +206,7 @@ packages:
       path: example
       relative: true
     source: path
-    version: "2.2.2+30"
+    version: "2.2.3+31"
   fake_async:
     dependency: transitive
     description:
