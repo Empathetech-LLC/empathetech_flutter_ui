@@ -7,9 +7,9 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-//** Brand config **//
+//*** Brand config ***//
 
-//* Default *//
+//** Default **//
 
 // Text settings //
 
@@ -60,7 +60,23 @@ const double defaultMobileSpacing = 25.0;
 /// 25.0
 const double defaultDesktopSpacing = 30.0;
 
-// Color settings //
+//* Color settings *//
+
+// Secondary //
+
+/// 0xFFDAA520
+const int empathSandHex = 0xFFDAA520;
+
+/// 0xFFDAA520
+const Color empathSand = Color(empathSandHex);
+
+/// 0x40DAA520
+const int empathSandDimHex = 0x40DAA520;
+
+/// 0x40DAA520
+const Color empathSandDim = Color(empathSandHex);
+
+// Dark:Primary | Light:Tertiary //
 
 /// 0xFF20DAA5
 const int empathEucalyptusHex = 0xFF20DAA5;
@@ -74,6 +90,8 @@ const int empathEucalyptusDimHex = 0x4020DAA5;
 /// 0x4020DAA5
 const Color empathEucalyptusDim = Color(empathEucalyptusHex);
 
+// Dark:Tertiary | Light:Primary //
+
 /// 0xFFA520DA
 const int empathPurpleHex = 0xFFA520DA;
 
@@ -86,46 +104,56 @@ const int empathPurpleDimHex = 0x40A520DA;
 /// 0x40A520DA
 const Color empathPurpleDim = Color(empathPurpleDimHex);
 
-/// 0xFFDAA520
-const int empathSandHex = 0xFFDAA520;
+// Dark //
 
-/// 0xFFDAA520
-const Color empathSand = Color(empathSandHex);
+/// BLARG
+const int darkSurfaceContainerHex = 0xFF0A0A0A;
 
-/// 0x40DAA520
-const int empathSandDimHex = 0x40DAA520;
+/// BLARG
+const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
 
-/// 0x40DAA520
-const Color empathSandSim = Color(empathSandHex);
+/// BLARG
+const int darkSurfaceDimHex = 0xFF141414;
 
-/// 0xFFFFFFFF
-const int whiteHex = 0xFFFFFFFF;
+/// BLARG
+const Color darkSurfaceDim = Color(darkSurfaceDimHex);
 
-/// 0xFFF5F5F5
-const int offWhiteHex = 0xFFF5F5F5;
+/// BLARG
+const int darkSurfaceHex = 0xFF1E1E1E;
 
-/// 0xFFF5F5F5
-const Color empathOffWhite = Color(offWhiteHex);
-
-/// 0xFF000000
-const int blackHex = 0xFF000000;
-
-/// 0xFF232323
-const int darkSurfaceHex = 0xFF232323;
-
-/// 0xFF232323
+/// BLARG
 const Color darkSurface = Color(darkSurfaceHex);
 
-/// 0xFF0F0F0F
-const int darkSurfaceContainerHex = 0xFF0F0F0F;
+// Light //
 
-/// 0xFF0F0F0F
-const Color darkSurfaceContainer = Color(darkSurfaceContainerHex);
+/// BLARG
+const int lightSurfaceContainerHex = 0xFFE6E6E6;
+
+/// BLARG
+const Color lightSurfaceContainer = Color(lightSurfaceContainerHex);
+
+/// BLARG
+const int lightSurfaceDimHex = 0xFFF0F0F0;
+
+/// BLARG
+const Color lightSurfaceDim = Color(lightSurfaceDimHex);
+
+/// BLARG
+const int lightSurfaceHex = 0xFFFAFAFA;
+
+/// BLARG
+const Color lightSurface = Color(lightSurfaceHex);
+
+// Misc //
+
+const int whiteHex = 0xFFFFFFFF;
+
+const int blackHex = 0xFF000000;
 
 /// 0xFF000000
 const int transparentHex = 0x00000000;
 
-//* Min *//
+//** Min **//
 
 // Text theme //
 
@@ -179,7 +207,7 @@ const double minPadding = 10.0;
 /// 10.0
 const double minSpacing = 10.0;
 
-//* Max *//
+//** Max **//
 
 // Text settings //
 
@@ -233,7 +261,7 @@ const double maxPadding = 40.0;
 /// 50.0
 const double maxSpacing = 75.0;
 
-//* Maps *//
+//** Maps **//
 
 /// Empathetech [EzConfig.defaults] base to build from
 const Map<String, Object> baseEmpathConfig = <String, Object>{
@@ -309,28 +337,6 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Color settings //
 
-  // Light
-  lightPrimaryKey: empathPurpleHex,
-  lightPrimaryContainerKey: empathPurpleDimHex,
-  lightOnPrimaryKey: whiteHex,
-  lightOnPrimaryContainerKey: whiteHex,
-
-  lightSecondaryKey: empathSandHex,
-  lightSecondaryContainerKey: empathSandDimHex,
-  lightOnSecondaryKey: blackHex,
-  lightOnSecondaryContainerKey: blackHex,
-
-  lightTertiaryKey: empathEucalyptusHex,
-  lightTertiaryContainerKey: empathEucalyptusDimHex,
-  lightOnTertiaryKey: blackHex,
-  lightOnTertiaryContainerKey: blackHex,
-
-  lightSurfaceKey: whiteHex,
-  lightOnSurfaceKey: blackHex,
-  lightSurfaceContainerKey: offWhiteHex,
-  lightInversePrimaryKey: empathPurpleHex,
-  lightSurfaceTintKey: transparentHex,
-
   // Dark
   darkPrimaryKey: empathEucalyptusHex,
   darkPrimaryContainerKey: empathEucalyptusDimHex,
@@ -349,20 +355,44 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   darkSurfaceKey: darkSurfaceHex,
   darkOnSurfaceKey: whiteHex,
+  darkSurfaceDimKey: darkSurfaceDimHex,
   darkSurfaceContainerKey: darkSurfaceContainerHex,
   darkInversePrimaryKey: empathEucalyptusHex,
   darkSurfaceTintKey: transparentHex,
+
+  // Light
+  lightPrimaryKey: empathPurpleHex,
+  lightPrimaryContainerKey: empathPurpleDimHex,
+  lightOnPrimaryKey: whiteHex,
+  lightOnPrimaryContainerKey: whiteHex,
+
+  lightSecondaryKey: empathSandHex,
+  lightSecondaryContainerKey: empathSandDimHex,
+  lightOnSecondaryKey: blackHex,
+  lightOnSecondaryContainerKey: blackHex,
+
+  lightTertiaryKey: empathEucalyptusHex,
+  lightTertiaryContainerKey: empathEucalyptusDimHex,
+  lightOnTertiaryKey: blackHex,
+  lightOnTertiaryContainerKey: blackHex,
+
+  lightSurfaceKey: lightSurfaceHex,
+  lightOnSurfaceKey: blackHex,
+  lightSurfaceDimKey: lightSurfaceDimHex,
+  lightSurfaceContainerKey: lightSurfaceContainerHex,
+  lightInversePrimaryKey: empathPurpleHex,
+  lightSurfaceTintKey: transparentHex,
 
   // Selector
   advancedColorsKey: false,
 
   // Image settings //
 
-  lightBackgroundImageKey: noImageValue,
-  '$lightBackgroundImageKey$boxFitSuffix': none,
-
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
+
+  lightBackgroundImageKey: noImageValue,
+  '$lightBackgroundImageKey$boxFitSuffix': none,
 };
 
 const Map<String, Object> mobileEmpathConfig = <String, Object>{
