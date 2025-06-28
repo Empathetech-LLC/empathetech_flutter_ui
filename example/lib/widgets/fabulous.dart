@@ -136,11 +136,14 @@ class MacStoreFAB extends StatelessWidget {
           context: context,
           builder: (BuildContext alertContext) {
             return EzAlertDialog(contents: <Widget>[
-              const Text('''Good news: Open UI is now an app generator!
+              const Text(
+                '''Good news: Open UI is now an app generator!
 
 Bad news: the new features cannot be supported on the App Store.
 
-The full, free and open source, app generator can be downloaded from the '''),
+The full (free and open source) app generator can be downloaded from the ''',
+                textAlign: TextAlign.center,
+              ),
               EzLink(
                 'GitHub releases',
                 url: Uri.parse(openUIReleases),
@@ -151,6 +154,6 @@ The full, free and open source, app generator can be downloaded from the '''),
         ),
         backgroundColor: Theme.of(context).colorScheme.error,
         foregroundColor: Theme.of(context).colorScheme.onError,
-        child: EzIcon(PlatformIcons(context).error),
+        child: EzIcon(Icons.error_outline),
       );
 }
