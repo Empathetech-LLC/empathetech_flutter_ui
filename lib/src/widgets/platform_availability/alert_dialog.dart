@@ -171,6 +171,7 @@ class EzMaterialAction extends StatelessWidget {
 
     return EzTextButton(
       onPressed: onPressed,
+      style: TextButton.styleFrom(backgroundColor: Colors.transparent),
       text: text,
       textStyle: textStyle,
     );
