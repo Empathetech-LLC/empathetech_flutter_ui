@@ -197,14 +197,12 @@ class EzSwitchPair extends StatefulWidget {
     this.padding,
   })  : assert((value == null) != (valueKey == null),
             'Provide value OR valueKey, but not both'),
-        assert((onChanged == null) != (onChangedCallback == null),
-            'Provide onChanged OR onChangedCallback, but not both'),
         assert((value == null) == (onChanged == null),
-            'Must use onChanged with value'),
-        assert((value == null) != (onChangedCallback == null),
-            'Cannot use onChangedCallback with value'),
+            'Must pair value and onChanged'),
         assert((valueKey == null) != (onChanged == null),
-            'Cannot use onChanged with valueKey');
+            'Cannot use onChanged with valueKey'),
+        assert(valueKey == null || (value == null && onChangedCallback == null),
+            'Cannot use onChangedCallback with value');
 
   @override
   State<EzSwitchPair> createState() => _EzSwitchPairState();
