@@ -69,11 +69,25 @@ class EzSwitchPair extends StatefulWidget {
   /// [EzText.backgroundColor] passthrough
   final Color? backgroundColor;
 
+  /// [Switch.value] passthrough
+  /// Provide [value] OR [valueKey]
+  /// Must pair with [onChanged]
+  final bool? value;
+
   /// [EzConfig] key to provide to [Switch.value]
   /// And update in [Switch.onChanged]
-  final String valueKey;
+  /// Provide [valueKey] OR [value]
+  /// Optionally provide [onChangedCallback]
+  final String? valueKey;
+
+  /// [Switch.onChanged] passthrough
+  /// Provide [onChanged] OR [onChangedCallback]
+  /// Pairs with [value]
+  final void Function(bool?)? onChanged;
 
   /// If you want to do more than just update [valueKey] in [Switch.onChanged]
+  /// Provide [onChangedCallback] OR [onChanged]
+  /// Pairs with [valueKey]
   final void Function(bool?)? onChangedCallback;
 
   /// [Switch.activeColor] passthrough
@@ -159,7 +173,9 @@ class EzSwitchPair extends StatefulWidget {
     this.backgroundColor,
 
     // Switch
-    required this.valueKey,
+    this.value,
+    this.valueKey,
+    this.onChanged,
     this.onChangedCallback,
     this.activeColor,
     this.activeTrackColor,
@@ -179,15 +195,34 @@ class EzSwitchPair extends StatefulWidget {
     this.onFocusChange,
     this.autofocus = false,
     this.padding,
-  });
+  })  : assert((value == null) != (valueKey == null),
+            'Provide value OR valueKey, but not both'),
+        assert((onChanged == null) != (onChangedCallback == null),
+            'Provide onChanged OR onChangedCallback, but not both'),
+        assert((value == null) == (onChanged == null),
+            'Must use onChanged with value'),
+        assert((value == null) != (onChangedCallback == null),
+            'Cannot use onChangedCallback with value'),
+        assert((valueKey == null) != (onChanged == null),
+            'Cannot use onChanged with valueKey');
 
   @override
   State<EzSwitchPair> createState() => _EzSwitchPairState();
 }
 
 class _EzSwitchPairState extends State<EzSwitchPair> {
-  late bool value =
-      EzConfig.get(widget.valueKey) ?? EzConfig.getDefault(widget.valueKey);
+  late bool value = widget.value ??
+      (EzConfig.get(widget.valueKey!) ?? EzConfig.getDefault(widget.valueKey!));
+
+  late final void Function(bool?) onChanged = widget.onChanged ??
+      (bool? choice) async {
+        if (choice == null) return;
+
+        await EzConfig.setBool(widget.valueKey!, choice);
+        setState(() => value = choice);
+
+        widget.onChangedCallback?.call(choice);
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -218,17 +253,10 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
           ),
         ),
         // Could be PlatformSwitch
-        // Dev-option: Material switches are better
+        // Dev's opinion: Material switches are better
         Switch(
           value: value,
-          onChanged: (bool? choice) async {
-            if (choice == null) return;
-
-            await EzConfig.setBool(widget.valueKey, choice);
-            setState(() => value = choice);
-
-            widget.onChangedCallback?.call(choice);
-          },
+          onChanged: onChanged,
           activeColor: widget.activeColor,
           activeTrackColor: widget.activeTrackColor,
           inactiveThumbColor: widget.inactiveThumbColor,
