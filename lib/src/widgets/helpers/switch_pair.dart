@@ -8,7 +8,7 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzSwitchPair extends StatelessWidget {
+class EzSwitchPair extends StatefulWidget {
   /// [EzRow.reverseHands] passthrough
   final bool reverseHands;
 
@@ -69,11 +69,9 @@ class EzSwitchPair extends StatelessWidget {
   /// [EzText.backgroundColor] passthrough
   final Color? backgroundColor;
 
-  /// [Switch.value] passthrough
-  final bool value;
-
-  /// [Switch.onChanged] passthrough
-  final ValueChanged<bool?>? onChanged;
+  /// [EzConfig] key to provide to [Switch.value]
+  /// And update in [Switch.onChanged]
+  final String valueKey;
 
   /// [Switch.activeColor] passthrough
   final Color? activeColor;
@@ -158,8 +156,7 @@ class EzSwitchPair extends StatelessWidget {
     this.backgroundColor,
 
     // Switch
-    required this.value,
-    this.onChanged,
+    required this.valueKey,
     this.activeColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
@@ -181,55 +178,69 @@ class EzSwitchPair extends StatelessWidget {
   });
 
   @override
+  State<EzSwitchPair> createState() => _EzSwitchPairState();
+}
+
+class _EzSwitchPairState extends State<EzSwitchPair> {
+  late bool value =
+      EzConfig.get(widget.valueKey) ?? EzConfig.getDefault(widget.valueKey);
+
+  @override
   Widget build(BuildContext context) {
     return EzRow(
-      reverseHands: reverseHands,
-      mainAxisSize: mainAxisSize,
-      mainAxisAlignment: mainAxisAlignment,
-      crossAxisAlignment: crossAxisAlignment,
+      reverseHands: widget.reverseHands,
+      mainAxisSize: widget.mainAxisSize,
+      mainAxisAlignment: widget.mainAxisAlignment,
+      crossAxisAlignment: widget.crossAxisAlignment,
       children: <Widget>[
         Flexible(
           child: EzText(
-            text,
-            useSurface: useSurface,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            locale: locale,
-            softWrap: softWrap,
-            overflow: overflow,
-            textScaler: textScaler,
-            maxLines: maxLines,
-            semanticsLabel: semanticsLabel,
-            textWidthBasis: textWidthBasis,
-            textHeightBehavior: textHeightBehavior,
-            selectionColor: selectionColor,
-            backgroundColor: backgroundColor,
+            widget.text,
+            useSurface: widget.useSurface,
+            style: widget.style,
+            strutStyle: widget.strutStyle,
+            textAlign: widget.textAlign,
+            textDirection: widget.textDirection,
+            locale: widget.locale,
+            softWrap: widget.softWrap,
+            overflow: widget.overflow,
+            textScaler: widget.textScaler,
+            maxLines: widget.maxLines,
+            semanticsLabel: widget.semanticsLabel,
+            textWidthBasis: widget.textWidthBasis,
+            textHeightBehavior: widget.textHeightBehavior,
+            selectionColor: widget.selectionColor,
+            backgroundColor: widget.backgroundColor,
           ),
         ),
-        // Could be PlatformSwitch... but iOS switches are lame ¯\_(ツ)_/¯
+        // Could be PlatformSwitch
+        // Dev-option: Material switches are better
         Switch(
           value: value,
-          onChanged: onChanged,
-          activeColor: activeColor,
-          activeTrackColor: activeTrackColor,
-          inactiveThumbColor: inactiveThumbColor,
-          inactiveTrackColor: inactiveTrackColor,
-          activeThumbImage: activeThumbImage,
-          onActiveThumbImageError: onActiveThumbImageError,
-          inactiveThumbImage: inactiveThumbImage,
-          onInactiveThumbImageError: onInactiveThumbImageError,
-          materialTapTargetSize: materialTapTargetSize,
-          dragStartBehavior: dragStartBehavior,
-          mouseCursor: mouseCursor,
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          splashRadius: splashRadius,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          autofocus: autofocus,
-          padding: padding,
+          onChanged: (bool? choice) async {
+            if (choice == null) return;
+
+            await EzConfig.setBool(widget.valueKey, choice);
+            setState(() => value = choice);
+          },
+          activeColor: widget.activeColor,
+          activeTrackColor: widget.activeTrackColor,
+          inactiveThumbColor: widget.inactiveThumbColor,
+          inactiveTrackColor: widget.inactiveTrackColor,
+          activeThumbImage: widget.activeThumbImage,
+          onActiveThumbImageError: widget.onActiveThumbImageError,
+          inactiveThumbImage: widget.inactiveThumbImage,
+          onInactiveThumbImageError: widget.onInactiveThumbImageError,
+          materialTapTargetSize: widget.materialTapTargetSize,
+          dragStartBehavior: widget.dragStartBehavior,
+          mouseCursor: widget.mouseCursor,
+          focusColor: widget.focusColor,
+          hoverColor: widget.hoverColor,
+          splashRadius: widget.splashRadius,
+          focusNode: widget.focusNode,
+          onFocusChange: widget.onFocusChange,
+          autofocus: widget.autofocus,
+          padding: widget.padding,
         ),
       ],
     );
