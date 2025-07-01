@@ -152,8 +152,8 @@ The full (free and open source) app generator can be downloaded from the ''',
             ]);
           },
         ),
-        backgroundColor: Theme.of(context).colorScheme.error,
-        foregroundColor: Theme.of(context).colorScheme.onError,
-        child: EzIcon(Icons.error_outline),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        child: EzIcon(Icons.update),
       );
 }
