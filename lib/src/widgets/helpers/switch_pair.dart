@@ -144,8 +144,9 @@ class EzSwitchPair extends StatefulWidget {
   /// [Switch.padding] passthrough
   final EdgeInsetsGeometry? padding;
 
-  /// [EzRow] with [EzText] and a [Switch]
-  /// The [text] is [Flexible]
+  /// [EzRow] with flexible [EzText] and a [Switch]
+  /// Provide the traditional [value] and [onChanged]
+  /// Or and EzConfig optimized [valueKey] and optional [onChangedCallback]
   const EzSwitchPair({
     super.key,
     // Row
