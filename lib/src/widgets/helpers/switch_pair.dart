@@ -73,6 +73,9 @@ class EzSwitchPair extends StatefulWidget {
   /// And update in [Switch.onChanged]
   final String valueKey;
 
+  /// If you want to do more than just update [valueKey] in [Switch.onChanged]
+  final void Function(bool?)? onChangedCallback;
+
   /// [Switch.activeColor] passthrough
   final Color? activeColor;
 
@@ -157,6 +160,7 @@ class EzSwitchPair extends StatefulWidget {
 
     // Switch
     required this.valueKey,
+    this.onChangedCallback,
     this.activeColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
@@ -222,6 +226,8 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
             await EzConfig.setBool(widget.valueKey, choice);
             setState(() => value = choice);
+
+            widget.onChangedCallback?.call(choice);
           },
           activeColor: widget.activeColor,
           activeTrackColor: widget.activeTrackColor,
