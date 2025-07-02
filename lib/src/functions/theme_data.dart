@@ -6,6 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:feedback/feedback.dart';
 
 /// Creates a [ThemeData] from [EzConfig] values
 ThemeData ezThemeData(Brightness brightness) {
@@ -324,3 +325,29 @@ ThemeData ezThemeData(Brightness brightness) {
     ),
   );
 }
+
+/// For open source consumers: this is Empathetech LLC's feedback theme
+/// You have permission to modify this code
+/// You do not have permission to use this theme in your app
+final FeedbackThemeData empathFeedbackDark = FeedbackThemeData(
+  background: Colors.grey,
+  feedbackSheetColor: Colors.black,
+  activeFeedbackModeColor: empathEucalyptus,
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.black),
+  sheetIsDraggable: true,
+  dragHandleColor: Colors.white,
+);
+
+/// For open source consumers: this is Empathetech LLC's feedback theme
+/// You have permission to modify this code
+/// You do not have permission to use this theme in your app
+final FeedbackThemeData empathFeedbackLight = FeedbackThemeData(
+  background: Colors.grey,
+  feedbackSheetColor: Colors.white,
+  activeFeedbackModeColor: empathPurple,
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.white),
+  sheetIsDraggable: true,
+  dragHandleColor: Colors.black,
+);
