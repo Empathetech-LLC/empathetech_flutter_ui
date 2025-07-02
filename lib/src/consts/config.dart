@@ -76,43 +76,55 @@ const int transparentHex = 0x00000000;
 // Secondary //
 
 /// 0xFFDAA520
+/// Open source consumers: DO NOT USE
 const int empathSandHex = 0xFFDAA520;
 
 /// 0xFFDAA520
+/// Open source consumers: DO NOT USE
 const Color empathSand = Color(empathSandHex);
 
 /// 0x40DAA520
+/// Open source consumers: DO NOT USE
 const int empathSandDimHex = 0x40DAA520;
 
 /// 0x40DAA520
+/// Open source consumers: DO NOT USE
 const Color empathSandDim = Color(empathSandHex);
 
 // Dark:Primary | Light:Tertiary //
 
 /// 0xFF20DAA5
+/// Open source consumers: DO NOT USE
 const int empathEucalyptusHex = 0xFF20DAA5;
 
 /// 0xFF20DAA5
+/// Open source consumers: DO NOT USE
 const Color empathEucalyptus = Color(empathEucalyptusHex);
 
 /// 0x4020DAA5
+/// Open source consumers: DO NOT USE
 const int empathEucalyptusDimHex = 0x4020DAA5;
 
 /// 0x4020DAA5
+/// Open source consumers: DO NOT USE
 const Color empathEucalyptusDim = Color(empathEucalyptusHex);
 
 // Dark:Tertiary | Light:Primary //
 
 /// 0xFFA520DA
+/// Open source consumers: DO NOT USE
 const int empathPurpleHex = 0xFFA520DA;
 
 /// 0xFFA520DA
+/// Open source consumers: DO NOT USE
 const Color empathPurple = Color(empathPurpleHex);
 
 /// 0x40A520DA
+/// Open source consumers: DO NOT USE
 const int empathPurpleDimHex = 0x40A520DA;
 
 /// 0x40A520DA
+/// Open source consumers: DO NOT USE
 const Color empathPurpleDim = Color(empathPurpleDimHex);
 
 // Dark //
@@ -266,6 +278,9 @@ const double maxSpacing = 75.0;
 //** Maps **//
 
 /// Empathetech [EzConfig.defaults] base to build from
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
 const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Global settings //
 
@@ -397,6 +412,10 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   '$lightBackgroundImageKey$boxFitSuffix': none,
 };
 
+/// base with a more compact layout and hidden scrolls
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
 const Map<String, Object> mobileEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -406,6 +425,10 @@ const Map<String, Object> mobileEmpathConfig = <String, Object>{
   hideScrollKey: true,
 };
 
+/// base with a more open layout and visible scrolls
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
 const Map<String, Object> desktopEmpathConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -415,8 +438,8 @@ const Map<String, Object> desktopEmpathConfig = <String, Object>{
   hideScrollKey: false,
 };
 
-/// For testing
 /// [EzConfig.defaults] set to all recommended max values
+/// For open source consumers: you may use this in testing, but not in production
 final Map<String, Object> empathetechMaxConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -461,8 +484,8 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
   spacingKey: maxSpacing,
 };
 
-/// For testing
 /// [EzConfig.defaults] set to all recommended min values
+/// For open source consumers: you may use this in testing, but not in production
 final Map<String, Object> empathetechMinConfig = <String, Object>{
   ...baseEmpathConfig,
 
