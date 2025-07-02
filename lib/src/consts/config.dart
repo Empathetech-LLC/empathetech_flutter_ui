@@ -62,6 +62,17 @@ const double defaultDesktopSpacing = 30.0;
 
 //* Color settings *//
 
+// Shared //
+
+/// 0xFFFFFFFF
+const int whiteHex = 0xFFFFFFFF;
+
+/// 0xFF000000
+const int blackHex = 0xFF000000;
+
+/// 0x00000000
+const int transparentHex = 0x00000000;
+
 // Secondary //
 
 /// 0xFFDAA520
@@ -126,16 +137,16 @@ const Color darkSurface = Color(darkSurfaceHex);
 
 // Light //
 
-/// 0xFFF0F0F0 == -15 of each
-const int lightSurfaceContainerHex = 0xFFF0F0F0;
+/// 0xFFF5F5F5 == -10 of each
+const int lightSurfaceContainerHex = 0xFFF5F5F5;
 
-/// 0xFFF0F0F0 == -15 of each
+/// 0xFFF5F5F5 == -10 of each
 const Color lightSurfaceContainer = Color(lightSurfaceContainerHex);
 
-/// 0xFFF8F8F8 == -7 of each
-const int lightSurfaceDimHex = 0xFFF8F8F8;
+/// 0xFFFAFAFA == -5 of each
+const int lightSurfaceDimHex = 0xFFFAFAFA;
 
-/// 0xFFF8F8F8 == -7 of each
+/// 0xFFF8F8F8 == -5 of each
 const Color lightSurfaceDim = Color(lightSurfaceDimHex);
 
 /// 0xFFFFFFFF == white
@@ -143,17 +154,6 @@ const int lightSurfaceHex = whiteHex;
 
 /// 0xFFFFFFFF == white
 const Color lightSurface = Color(lightSurfaceHex);
-
-// Misc //
-
-/// 0xFFFFFFFF
-const int whiteHex = 0xFFFFFFFF;
-
-/// 0xFF000000
-const int blackHex = 0xFF000000;
-
-/// 0x00000000
-const int transparentHex = 0x00000000;
 
 //** Min **//
 
