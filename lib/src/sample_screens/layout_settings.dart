@@ -60,14 +60,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
-
-  late final TextStyle style = Theme.of(context).textTheme.bodyLarge!;
-
-  // Define the build data //
-
-  bool hideScroll = EzConfig.get(hideScrollKey) ?? false;
 
   // Set the page title //
 
@@ -128,17 +121,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
           separator,
 
           // Hide scroll
-          EzSwitchPair(
-            text: l10n.lsScroll,
-            style: style,
-            textAlign: TextAlign.center,
-            value: hideScroll,
-            onChanged: (bool? value) async {
-              if (value == null) return;
-              await EzConfig.setBool(hideScrollKey, value);
-              setState(() => hideScroll = value);
-            },
-          ),
+          EzSwitchPair(text: l10n.lsScroll, valueKey: hideScrollKey),
 
           // After layout
           if (widget.afterLayout != null) ...<Widget>[
