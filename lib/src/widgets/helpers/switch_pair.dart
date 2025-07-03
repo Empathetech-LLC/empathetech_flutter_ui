@@ -74,6 +74,10 @@ class EzSwitchPair extends StatefulWidget {
   /// Must pair with [onChanged]
   final bool? value;
 
+  /// Optional pre-requisite to [onChanged]
+  /// Only for when using [valueKey]
+  final Future<bool> Function(bool)? canChange;
+
   /// [EzConfig] key to provide to [Switch.value]
   /// And update in [Switch.onChanged]
   /// Provide [valueKey] OR [value]
@@ -177,6 +181,7 @@ class EzSwitchPair extends StatefulWidget {
     this.value,
     this.valueKey,
     this.onChanged,
+    this.canChange,
     this.onChangedCallback,
     this.activeColor,
     this.activeTrackColor,
@@ -216,6 +221,11 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
   late final void Function(bool?) onChanged = widget.onChanged ??
       (bool? choice) async {
         if (choice == null) return;
+
+        if (widget.canChange != null) {
+          final bool canChange = await widget.canChange!(choice);
+          if (!canChange) return;
+        }
 
         await EzConfig.setBool(widget.valueKey!, choice);
         setState(() => value = choice);
