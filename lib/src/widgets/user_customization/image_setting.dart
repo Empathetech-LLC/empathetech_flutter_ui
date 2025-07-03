@@ -377,7 +377,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
         child: EzSwitchPair(
           text: l10n.isUseForColors,
-          textAlign: TextAlign.center,
           value: updateTheme,
           onChanged: (bool? choice) {
             updateTheme = (choice == null) ? false : choice;
