@@ -208,8 +208,8 @@ class EzSwitchPair extends StatefulWidget {
         assert((valueKey == null) != (onChanged == null),
             'Cannot use onChanged with valueKey'),
         assert(
-            ((onChangedCallback == null) != (value != null)) ||
-                ((onChangedCallback == null) && (value != null)),
+            ((onChangedCallback == null) && (value == null) ||
+                ((onChangedCallback == null) != (value == null))),
             'Cannot use onChangedCallback with value');
 
   @override
