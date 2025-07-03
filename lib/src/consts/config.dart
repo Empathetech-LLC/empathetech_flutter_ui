@@ -149,16 +149,16 @@ const Color darkSurface = Color(darkSurfaceHex);
 
 // Light //
 
-/// 0xFFF5F5F5 == -10 of each
-const int lightSurfaceContainerHex = 0xFFF5F5F5;
+/// 0xFFF0F0F0 == -15 of each
+const int lightSurfaceContainerHex = 0xFFF0F0F0;
 
-/// 0xFFF5F5F5 == -10 of each
+/// 0xFFF0F0F0 == -15 of each
 const Color lightSurfaceContainer = Color(lightSurfaceContainerHex);
 
-/// 0xFFFAFAFA == -5 of each
-const int lightSurfaceDimHex = 0xFFFAFAFA;
+/// 0xFFF8F8F8 == -7 of each
+const int lightSurfaceDimHex = 0xFFF8F8F8;
 
-/// 0xFFF8F8F8 == -5 of each
+/// 0xFFF8F8F8 == -7 of each
 const Color lightSurfaceDim = Color(lightSurfaceDimHex);
 
 /// 0xFFFFFFFF == white
