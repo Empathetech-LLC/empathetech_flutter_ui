@@ -36,7 +36,7 @@ class EzMenuButton extends StatefulWidget {
   final Clip clipBehavior;
 
   /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
-  final Widget icon;
+  final Widget? icon;
 
   final bool closeOnActivate;
   final Axis overflowAxis;
@@ -65,7 +65,7 @@ class EzMenuButton extends StatefulWidget {
     this.style,
     this.statesController,
     this.clipBehavior = Clip.none,
-    required this.icon,
+    this.icon,
     this.closeOnActivate = true,
     this.overflowAxis = Axis.horizontal,
     required this.label,
