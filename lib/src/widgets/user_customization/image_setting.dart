@@ -376,6 +376,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           bottom: spacing,
         ),
         child: EzSwitchPair(
+          key: ValueKey<bool>(updateTheme),
           text: l10n.isUseForColors,
           value: updateTheme,
           onChanged: (bool? choice) {
