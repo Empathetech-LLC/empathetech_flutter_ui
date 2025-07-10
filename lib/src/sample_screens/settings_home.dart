@@ -10,9 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
-
   /// Optionally remove 'Have fun!' part of the settings disclaimer
   /// There are some apps where fun is not appropriate
   final bool notFun;
@@ -80,7 +77,6 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
-    this.useImageDecoration = true,
     this.notFun = false,
     this.skipLocales,
     this.protest = false,
@@ -178,61 +174,58 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      useImageDecoration: widget.useImageDecoration,
-      child: EzScrollView(
-        children: <Widget>[
-          // Restart disclaimer
-          EzWarning(widget.notFun
-              ? (kIsWeb
-                  ? l10n.ssSettingsGuideWeb.split('\n').first
-                  : l10n.ssSettingsGuide.split('\n').first)
-              : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
-          separator,
+    return EzScrollView(
+      children: <Widget>[
+        // Restart disclaimer
+        EzWarning(widget.notFun
+            ? (kIsWeb
+                ? l10n.ssSettingsGuideWeb.split('\n').first
+                : l10n.ssSettingsGuide.split('\n').first)
+            : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
+        separator,
 
-          // Right/left
-          const EzDominantHandSwitch(),
-          spacer,
+        // Right/left
+        const EzDominantHandSwitch(),
+        spacer,
 
-          // Theme mode
-          const EzThemeModeSwitch(),
-          spacer,
+        // Theme mode
+        const EzThemeModeSwitch(),
+        spacer,
 
-          // Language
-          EzLocaleSetting(
-            skip: widget.skipLocales ?? <Locale>{english},
-            protest: widget.protest,
-            inDistress: widget.inDistress,
-          ),
-          widget.localeSpacer,
+        // Language
+        EzLocaleSetting(
+          skip: widget.skipLocales ?? <Locale>{english},
+          protest: widget.protest,
+          inDistress: widget.inDistress,
+        ),
+        widget.localeSpacer,
 
-          // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>[
-            ...widget.additionalSettings!,
-            widget.preNavSpacer,
-          ],
-
-          // Navigation buttons
-          ...navButtons(),
-
-          // Feeling lucky
-          if (widget.randomSpacer != null) ...<Widget>[
-            widget.randomSpacer!,
-            const EzConfigRandomizer(),
-          ],
-
-          // Reset button
-          widget.resetSpacer,
-          EzResetButton(skip: widget.skipKeys),
-
-          // Footer
-          if (widget.footer != null) ...<Widget>[
-            widget.footerSpacer,
-            ...widget.footer!,
-          ],
-          separator,
+        // Additional settings
+        if (widget.additionalSettings != null) ...<Widget>[
+          ...widget.additionalSettings!,
+          widget.preNavSpacer,
         ],
-      ),
+
+        // Navigation buttons
+        ...navButtons(),
+
+        // Feeling lucky
+        if (widget.randomSpacer != null) ...<Widget>[
+          widget.randomSpacer!,
+          const EzConfigRandomizer(),
+        ],
+
+        // Reset button
+        widget.resetSpacer,
+        EzResetButton(skip: widget.skipKeys),
+
+        // Footer
+        if (widget.footer != null) ...<Widget>[
+          widget.footerSpacer,
+          ...widget.footer!,
+        ],
+        separator,
+      ],
     );
   }
 }

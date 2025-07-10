@@ -13,9 +13,6 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 enum EzTextSettingType { display, headline, title, body, label }
 
 class EzTextSettings extends StatelessWidget {
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
-
   /// Optional starting [EzTSType] target
   final EzTSType? target;
 
@@ -55,7 +52,6 @@ class EzTextSettings extends StatelessWidget {
   const EzTextSettings({
     // Shared
     super.key,
-    this.useImageDecoration = true,
     this.target,
     this.resetSpacer = const EzSeparator(),
 
@@ -97,7 +93,6 @@ class EzTextSettings extends StatelessWidget {
         ),
       ],
       child: _TextSettings(
-        useImageDecoration: useImageDecoration,
         target: target,
         resetSpacer: resetSpacer,
         showOnSurface: showOnSurface,
@@ -114,7 +109,6 @@ class EzTextSettings extends StatelessWidget {
 }
 
 class _TextSettings extends StatefulWidget {
-  final bool useImageDecoration;
   final EzTSType? target;
   final Widget resetSpacer;
   final bool showOnSurface;
@@ -128,7 +122,6 @@ class _TextSettings extends StatefulWidget {
 
   const _TextSettings({
     // Shared
-    required this.useImageDecoration,
     required this.target,
     required this.resetSpacer,
 
@@ -174,60 +167,57 @@ class _TextSettingsState extends State<_TextSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      useImageDecoration: widget.useImageDecoration,
-      child: EzScrollView(
-        children: <Widget>[
-          if (spacing > margin) EzSpacer(space: spacing - margin),
+    return EzScrollView(
+      children: <Widget>[
+        if (spacing > margin) EzSpacer(space: spacing - margin),
 
-          // Mode selector
-          SegmentedButton<EzTSType>(
-            segments: <ButtonSegment<EzTSType>>[
-              ButtonSegment<EzTSType>(
-                value: EzTSType.quick,
-                label: Text(l10n.gQuick),
-              ),
-              ButtonSegment<EzTSType>(
-                value: EzTSType.advanced,
-                label: Text(l10n.gAdvanced),
-              ),
-            ],
-            selected: <EzTSType>{currentTab},
-            showSelectedIcon: false,
-            onSelectionChanged: (Set<EzTSType> selected) async {
-              switch (selected.first) {
-                case EzTSType.quick:
-                  currentTab = EzTSType.quick;
-                  await EzConfig.setBool(advancedTextKey, false);
-                  break;
-                case EzTSType.advanced:
-                  currentTab = EzTSType.advanced;
-                  await EzConfig.setBool(advancedTextKey, true);
-                  break;
-              }
-              setState(() {});
-            },
-          ),
-
-          // Settings
-          if (currentTab == EzTSType.quick)
-            _QuickTextSettings(
-              showOnSurface: widget.showOnSurface,
-              quickHeaderSpacer: widget.quickHeaderSpacer,
-              moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
-              textBlockSpacer: widget.textBlockSpacer,
-              showOpacity: widget.showOpacity,
-              quickFooterSpacer: widget.quickFooterSpacer,
-              moreQuickFooterSettings: widget.moreQuickFooterSettings,
-              resetSpacer: widget.resetSpacer,
-            )
-          else
-            _AdvancedTextSettings(
-              showSpacing: widget.showSpacing,
-              resetSpacer: widget.resetSpacer,
+        // Mode selector
+        SegmentedButton<EzTSType>(
+          segments: <ButtonSegment<EzTSType>>[
+            ButtonSegment<EzTSType>(
+              value: EzTSType.quick,
+              label: Text(l10n.gQuick),
             ),
-        ],
-      ),
+            ButtonSegment<EzTSType>(
+              value: EzTSType.advanced,
+              label: Text(l10n.gAdvanced),
+            ),
+          ],
+          selected: <EzTSType>{currentTab},
+          showSelectedIcon: false,
+          onSelectionChanged: (Set<EzTSType> selected) async {
+            switch (selected.first) {
+              case EzTSType.quick:
+                currentTab = EzTSType.quick;
+                await EzConfig.setBool(advancedTextKey, false);
+                break;
+              case EzTSType.advanced:
+                currentTab = EzTSType.advanced;
+                await EzConfig.setBool(advancedTextKey, true);
+                break;
+            }
+            setState(() {});
+          },
+        ),
+
+        // Settings
+        if (currentTab == EzTSType.quick)
+          _QuickTextSettings(
+            showOnSurface: widget.showOnSurface,
+            quickHeaderSpacer: widget.quickHeaderSpacer,
+            moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
+            textBlockSpacer: widget.textBlockSpacer,
+            showOpacity: widget.showOpacity,
+            quickFooterSpacer: widget.quickFooterSpacer,
+            moreQuickFooterSettings: widget.moreQuickFooterSettings,
+            resetSpacer: widget.resetSpacer,
+          )
+        else
+          _AdvancedTextSettings(
+            showSpacing: widget.showSpacing,
+            resetSpacer: widget.resetSpacer,
+          ),
+      ],
     );
   }
 }

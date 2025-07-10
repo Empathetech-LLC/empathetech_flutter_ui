@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzColorSettings extends StatefulWidget {
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
-
   /// Optional starting [EzCSType] target
   final EzCSType? target;
 
@@ -50,7 +47,6 @@ class EzColorSettings extends StatefulWidget {
   const EzColorSettings({
     // Shared
     super.key,
-    this.useImageDecoration = true,
     this.target,
     this.resetSpacer = const EzSeparator(),
     this.resetKeys,
@@ -145,75 +141,72 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      useImageDecoration: widget.useImageDecoration,
-      child: EzScrollView(
-        children: <Widget>[
-          // Current theme reminder
-          EzText(
-            l10n.gEditingTheme(themeProfile),
-            style: theme.textTheme.labelLarge,
-            textAlign: TextAlign.center,
-          ),
-          EzMargin(),
+    return EzScrollView(
+      children: <Widget>[
+        // Current theme reminder
+        EzText(
+          l10n.gEditingTheme(themeProfile),
+          style: theme.textTheme.labelLarge,
+          textAlign: TextAlign.center,
+        ),
+        EzMargin(),
 
-          // Mode switch
-          SegmentedButton<EzCSType>(
-            segments: <ButtonSegment<EzCSType>>[
-              ButtonSegment<EzCSType>(
-                value: EzCSType.quick,
-                label: Text(l10n.gQuick),
-              ),
-              ButtonSegment<EzCSType>(
-                value: EzCSType.advanced,
-                label: Text(l10n.gAdvanced),
-              ),
-            ],
-            selected: <EzCSType>{currentTab},
-            showSelectedIcon: false,
-            onSelectionChanged: (Set<EzCSType> selected) async {
-              switch (selected.first) {
-                case EzCSType.quick:
-                  currentTab = EzCSType.quick;
-                  await EzConfig.setBool(advancedColorsKey, false);
-                  break;
-                case EzCSType.advanced:
-                  currentTab = EzCSType.advanced;
-                  await EzConfig.setBool(advancedColorsKey, true);
-                  break;
-              }
-              setState(() {});
-            },
-          ),
-          separator,
-
-          // Core settings
-          if (currentTab == EzCSType.quick)
-            _QuickColorSettings(
-              isDark: isDark,
-              themeProfile: themeProfile,
-              l10n: l10n,
-              quickHeader: widget.quickHeader,
-              headerSpacer: widget.headerSpacer,
-              footerSpacer: widget.footerSpacer,
-              quickFooter: widget.quickFooter,
-            )
-          else
-            _AdvancedColorSettings(
-              key: UniqueKey(),
-              theme: theme,
-              l10n: l10n,
-              defaultList: defaultList,
-              currList: currList,
-              fullList: fullList,
+        // Mode switch
+        SegmentedButton<EzCSType>(
+          segments: <ButtonSegment<EzCSType>>[
+            ButtonSegment<EzCSType>(
+              value: EzCSType.quick,
+              label: Text(l10n.gQuick),
             ),
+            ButtonSegment<EzCSType>(
+              value: EzCSType.advanced,
+              label: Text(l10n.gAdvanced),
+            ),
+          ],
+          selected: <EzCSType>{currentTab},
+          showSelectedIcon: false,
+          onSelectionChanged: (Set<EzCSType> selected) async {
+            switch (selected.first) {
+              case EzCSType.quick:
+                currentTab = EzCSType.quick;
+                await EzConfig.setBool(advancedColorsKey, false);
+                break;
+              case EzCSType.advanced:
+                currentTab = EzCSType.advanced;
+                await EzConfig.setBool(advancedColorsKey, true);
+                break;
+            }
+            setState(() {});
+          },
+        ),
+        separator,
 
-          // Reset button
-          widget.resetSpacer,
-          resetButton,
-          separator,
-        ],
-      ),
+        // Core settings
+        if (currentTab == EzCSType.quick)
+          _QuickColorSettings(
+            isDark: isDark,
+            themeProfile: themeProfile,
+            l10n: l10n,
+            quickHeader: widget.quickHeader,
+            headerSpacer: widget.headerSpacer,
+            footerSpacer: widget.footerSpacer,
+            quickFooter: widget.quickFooter,
+          )
+        else
+          _AdvancedColorSettings(
+            key: UniqueKey(),
+            theme: theme,
+            l10n: l10n,
+            defaultList: defaultList,
+            currList: currList,
+            fullList: fullList,
+          ),
+
+        // Reset button
+        widget.resetSpacer,
+        resetButton,
+        separator,
+      ],
     );
   }
 }

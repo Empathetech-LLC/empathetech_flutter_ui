@@ -8,9 +8,6 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzLayoutSettings extends StatefulWidget {
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
-
   /// Optional additional settings
   /// Before the main settings
   /// See [prefixSpacer] for layout tuning
@@ -38,7 +35,6 @@ class EzLayoutSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzLayoutSettings({
     super.key,
-    this.useImageDecoration = true,
     this.beforeLayout,
     this.prefixSpacer = const EzSeparator(),
     this.postfixSpacer = const EzSeparator(),
@@ -74,75 +70,72 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      useImageDecoration: widget.useImageDecoration,
-      child: EzScrollView(
-        children: <Widget>[
-          if (spacing > margin) EzSpacer(space: spacing - margin),
+    return EzScrollView(
+      children: <Widget>[
+        if (spacing > margin) EzSpacer(space: spacing - margin),
 
-          // Before layout
-          if (widget.beforeLayout != null) ...<Widget>[
-            ...widget.beforeLayout!,
-            widget.prefixSpacer,
-          ],
-
-          // Main //
-          // Margin
-          const EzLayoutSetting(
-            configKey: marginKey,
-            type: EzLayoutSettingType.margin,
-            min: minMargin,
-            max: maxMargin,
-            steps: 6,
-            decimals: 1,
-          ),
-          spacer,
-
-          // Padding
-          const EzLayoutSetting(
-            configKey: paddingKey,
-            type: EzLayoutSettingType.padding,
-            min: minPadding,
-            max: maxPadding,
-            steps: 12,
-            decimals: 1,
-          ),
-          spacer,
-
-          // Spacing
-          const EzLayoutSetting(
-            configKey: spacingKey,
-            type: EzLayoutSettingType.spacing,
-            min: minSpacing,
-            max: maxSpacing,
-            steps: 13,
-            decimals: 0,
-          ),
-          separator,
-
-          // Hide scroll
-          EzSwitchPair(text: l10n.lsScroll, valueKey: hideScrollKey),
-
-          // After layout
-          if (widget.afterLayout != null) ...<Widget>[
-            widget.postfixSpacer,
-            ...widget.afterLayout!,
-          ],
-
-          // Local reset all
-          widget.resetSpacer,
-          EzResetButton(
-            dialogTitle: l10n.lsResetAll,
-            onConfirm: () async {
-              await EzConfig.removeKeys(layoutKeys.keys.toSet());
-              if (widget.resetKeys != null) {
-                await EzConfig.removeKeys(widget.resetKeys!);
-              }
-            },
-          ),
-          separator,
+        // Before layout
+        if (widget.beforeLayout != null) ...<Widget>[
+          ...widget.beforeLayout!,
+          widget.prefixSpacer,
         ],
-      ),
+
+        // Main //
+        // Margin
+        const EzLayoutSetting(
+          configKey: marginKey,
+          type: EzLayoutSettingType.margin,
+          min: minMargin,
+          max: maxMargin,
+          steps: 6,
+          decimals: 1,
+        ),
+        spacer,
+
+        // Padding
+        const EzLayoutSetting(
+          configKey: paddingKey,
+          type: EzLayoutSettingType.padding,
+          min: minPadding,
+          max: maxPadding,
+          steps: 12,
+          decimals: 1,
+        ),
+        spacer,
+
+        // Spacing
+        const EzLayoutSetting(
+          configKey: spacingKey,
+          type: EzLayoutSettingType.spacing,
+          min: minSpacing,
+          max: maxSpacing,
+          steps: 13,
+          decimals: 0,
+        ),
+        separator,
+
+        // Hide scroll
+        EzSwitchPair(text: l10n.lsScroll, valueKey: hideScrollKey),
+
+        // After layout
+        if (widget.afterLayout != null) ...<Widget>[
+          widget.postfixSpacer,
+          ...widget.afterLayout!,
+        ],
+
+        // Local reset all
+        widget.resetSpacer,
+        EzResetButton(
+          dialogTitle: l10n.lsResetAll,
+          onConfirm: () async {
+            await EzConfig.removeKeys(layoutKeys.keys.toSet());
+            if (widget.resetKeys != null) {
+              await EzConfig.removeKeys(widget.resetKeys!);
+            }
+          },
+        ),
+        separator,
+      ],
     );
   }
 }
