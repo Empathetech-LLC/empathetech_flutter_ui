@@ -17,6 +17,6 @@ class TextSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
-        body: EzTextSettings(target: target),
+        body: EzScreen(EzTextSettings(target: target)),
       );
 }

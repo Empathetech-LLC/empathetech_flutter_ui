@@ -238,8 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() => canGen = true);
       },
       body: EzScreen(
-        alignment: Alignment.topLeft,
-        child: EzScrollView(
+        EzScrollView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Basic settings //
@@ -905,6 +904,7 @@ class _HomeScreenState extends State<HomeScreen> {
             separator,
           ],
         ),
+        alignment: Alignment.topLeft,
       ),
       fab: ResetFAB(
         clearForms: () => setState(() {

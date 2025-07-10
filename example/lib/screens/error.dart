@@ -41,8 +41,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   Widget build(BuildContext context) {
     return OpenUIScaffold(
       body: EzScreen(
-        useImageDecoration: false,
-        child: Center(
+        Center(
           child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -67,6 +66,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ],
           ),
         ),
+        useImageDecoration: false,
       ),
     );
   }

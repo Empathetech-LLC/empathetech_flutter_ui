@@ -15,6 +15,6 @@ class ImageSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).isPageTitle,
         showSettings: false,
-        body: const EzImageSettings(),
+        body: const EzScreen(EzImageSettings()),
       );
 }

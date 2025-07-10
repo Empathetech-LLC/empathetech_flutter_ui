@@ -135,6 +135,6 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   Widget build(_) => OpenUIScaffold(
         title: l10n.asPageTitle,
         running: genState == GeneratorState.running,
-        body: EzScreen(alignment: Alignment.center, child: header()),
+        body: EzScreen(header(), alignment: Alignment.center),
       );
 }

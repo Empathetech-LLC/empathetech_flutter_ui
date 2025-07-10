@@ -8,6 +8,9 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzScreen extends StatelessWidget {
+  /// Screen content
+  final Widget child;
+
   /// [Container.alignment] passthrough
   final AlignmentGeometry? alignment;
 
@@ -45,12 +48,10 @@ class EzScreen extends StatelessWidget {
   /// [Container.clipBehavior] passthrough
   final Clip clipBehavior;
 
-  /// Screen content
-  final Widget child;
-
   /// [Container] wrapper that defaults to max size with a "margin" from [EzConfig]
   /// In this case, the screen's "margin" is the actually the [Container.padding]
-  const EzScreen({
+  const EzScreen(
+    this.child, {
     super.key,
     this.alignment,
     this.margin,
@@ -64,7 +65,6 @@ class EzScreen extends StatelessWidget {
     this.transform,
     this.transformAlignment,
     this.clipBehavior = Clip.none,
-    required this.child,
   });
 
   @override
@@ -108,7 +108,8 @@ class EzScreen extends StatelessWidget {
 
   /// [EzScreen] with a horizontal [EzScrollView] as the top level child
   /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
-  EzScreen.hScroll({
+  EzScreen.hScroll(
+    Widget kid, {
     super.key,
     this.alignment,
     this.margin,
@@ -122,7 +123,6 @@ class EzScreen extends StatelessWidget {
     this.transform,
     this.transformAlignment,
     this.clipBehavior = Clip.none,
-    required Widget kid,
   }) : child = EzScrollView(
           scrollDirection: Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +132,8 @@ class EzScreen extends StatelessWidget {
 
   /// [EzScreen] with a [EzScrollView] as the top level child
   /// For fancier solutions, see https://api.flutter.dev/flutter/widgets/TwoDimensionalScrollView-class.html
-  EzScreen.vScroll({
+  EzScreen.vScroll(
+    Widget kid, {
     super.key,
     this.alignment,
     this.margin,
@@ -146,6 +147,5 @@ class EzScreen extends StatelessWidget {
     this.transform,
     this.transformAlignment,
     this.clipBehavior = Clip.none,
-    required Widget kid,
   }) : child = EzScrollView(child: kid);
 }
