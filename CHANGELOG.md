@@ -49,7 +49,7 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Localization strategy
   - EzConfig now requires a fallback
-    - Example: `fallbackLang: await EFUILang.delegate.load(english),`
+    - Example: `fallbackLang: await EFUILang.delegate.load(americanEnglish),`
     - Enables all things EFUI to continue working in apps that have unsupported Locales
       - If calling EFUILang in your code, here is the updated recommendation:
         - `late final EFUILang el10n = ezL10n(context);`

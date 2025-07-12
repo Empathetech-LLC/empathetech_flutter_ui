@@ -94,7 +94,7 @@ void main() async {
     defaults: <String, Object>{},
 
     // Fallback Lang for unsupported Locales
-    fallbackLang: await EFUILang.delegate.load(english),
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
 
     // Paths to any locally stored images the app uses
     assetPaths: <String>{},

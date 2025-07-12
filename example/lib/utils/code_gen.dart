@@ -510,7 +510,7 @@ void main() async {
   EzConfig.init(
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(english),
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );
 
@@ -1403,7 +1403,7 @@ void main() async {
   EzConfig.init(
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(english),
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );
   
