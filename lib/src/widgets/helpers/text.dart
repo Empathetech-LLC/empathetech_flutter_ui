@@ -61,8 +61,7 @@ class EzTextBackground extends StatelessWidget {
         ? darkTextBackgroundOpacityKey
         : lightTextBackgroundOpacityKey;
 
-    late final double percent =
-        EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
+    late final double percent = EzConfig.get(oKey);
 
     return Container(
       padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),

@@ -284,17 +284,12 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final String oKey =
       isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
-
-  late double currOpacity =
-      EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? defaultTextOpacity;
-
+  late double currOpacity = EzConfig.get(oKey);
   late Color backgroundColor = surface.withValues(alpha: currOpacity);
 
-  late double currIconSize = EzConfig.get(iconSizeKey) ??
-      EzConfig.getDefault(iconSizeKey) ??
-      defaultIconSize;
-
+  late double currIconSize = EzConfig.get(iconSizeKey);
   static const double iconDelta = 2.0;
+
   final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   // Return the build //
@@ -550,9 +545,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             bodyProvider.reset();
             labelProvider.reset();
 
-            currOpacity = EzConfig.getDefault(oKey) ?? defaultTextOpacity;
+            currOpacity = EzConfig.getDefault(oKey);
             backgroundColor = surface.withValues(alpha: currOpacity);
-            currIconSize = EzConfig.getDefault(iconSizeKey) ?? defaultIconSize;
+            currIconSize = EzConfig.getDefault(iconSizeKey);
 
             setState(() {});
           },

@@ -74,8 +74,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   late final String oKey = isDarkTheme(context)
       ? darkTextBackgroundOpacityKey
       : lightTextBackgroundOpacityKey;
-  late final double fieldOpacity =
-      EzConfig.get(oKey) ?? EzConfig.getDefault(oKey) ?? 0.0;
+  late final double fieldOpacity = EzConfig.get(oKey);
   late final Color fieldColor =
       colorScheme.surface.withValues(alpha: fieldOpacity);
 

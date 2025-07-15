@@ -217,8 +217,7 @@ class EzSwitchPair extends StatefulWidget {
 }
 
 class _EzSwitchPairState extends State<EzSwitchPair> {
-  late bool value = widget.value ??
-      (EzConfig.get(widget.valueKey!) ?? EzConfig.getDefault(widget.valueKey!));
+  late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
 
   late final void Function(bool?) onChanged = widget.onChanged ??
       (bool? choice) async {
