@@ -132,9 +132,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   static EFUILang get l10nFallback => _instance!.fallbackLang;
 
   /// Get the [key]s EzConfig (nullable) value
-  /// Uses the live values from [prefs]
+  /// Uses the live values from [prefs], falling back to [defaults]
   static dynamic get(String key) {
-    return _instance!.prefs[key];
+    return _instance!.prefs[key] ?? _instance!.defaults[key];
   }
 
   /// Get the [key]s default EzConfig (nullable) value
