@@ -180,6 +180,7 @@ ThemeData ezThemeData(Brightness brightness) {
       foregroundColor: colorScheme.onPrimary,
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
+      iconSize: iconSize,
       sizeConstraints: BoxConstraints(
         minWidth: (iconSize / 2) + (padding * 2),
         maxWidth: (iconSize / 2) + (padding * 2),
@@ -188,7 +189,8 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
     ),
 
-    // Icon button
+    // Icon button; styled for Scaffolds
+    // EzIconButtons are styled for page content
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         backgroundColor: colorScheme.surfaceDim,
@@ -239,13 +241,18 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding / 2),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
     // Progress indicator
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: colorScheme.secondary,
+    ),
+
+    // Radio button
+    radioTheme: RadioThemeData(
+      overlayColor: WidgetStateProperty.all(highlightColor),
     ),
 
     // Segmented button
@@ -259,7 +266,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: BorderSide(color: colorScheme.primaryContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EdgeInsets.all(padding),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
@@ -290,6 +297,7 @@ ThemeData ezThemeData(Brightness brightness) {
             : colorScheme.surface,
       ),
       trackOutlineColor: WidgetStateProperty.all(colorScheme.primaryContainer),
+      overlayColor: WidgetStateProperty.all(highlightColor),
       padding: EdgeInsets.symmetric(horizontal: margin),
     ),
 
