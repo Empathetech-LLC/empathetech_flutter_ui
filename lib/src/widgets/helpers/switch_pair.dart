@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
@@ -93,6 +94,9 @@ class EzSwitchPair extends StatefulWidget {
   /// Provide [onChangedCallback] OR [onChanged]
   /// Pairs with [valueKey]
   final void Function(bool?)? onChangedCallback;
+
+  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  final double? scale;
 
   /// [Switch.activeColor] passthrough
   final Color? activeColor;
@@ -183,6 +187,7 @@ class EzSwitchPair extends StatefulWidget {
     this.onChanged,
     this.canChange,
     this.onChangedCallback,
+    this.scale,
     this.activeColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
@@ -236,6 +241,9 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
 
   @override
   Widget build(BuildContext context) {
+    final double ratio = widget.scale ??
+        (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
+
     return EzRow(
       reverseHands: widget.reverseHands,
       mainAxisSize: widget.mainAxisSize,
@@ -262,29 +270,32 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
             backgroundColor: widget.backgroundColor,
           ),
         ),
-        // Could be PlatformSwitch
-        // Dev's opinion: Material switches are better
-        Switch(
-          value: value,
-          onChanged: onChanged,
-          activeColor: widget.activeColor,
-          activeTrackColor: widget.activeTrackColor,
-          inactiveThumbColor: widget.inactiveThumbColor,
-          inactiveTrackColor: widget.inactiveTrackColor,
-          activeThumbImage: widget.activeThumbImage,
-          onActiveThumbImageError: widget.onActiveThumbImageError,
-          inactiveThumbImage: widget.inactiveThumbImage,
-          onInactiveThumbImageError: widget.onInactiveThumbImageError,
-          materialTapTargetSize: widget.materialTapTargetSize,
-          dragStartBehavior: widget.dragStartBehavior,
-          mouseCursor: widget.mouseCursor,
-          focusColor: widget.focusColor,
-          hoverColor: widget.hoverColor,
-          splashRadius: widget.splashRadius,
-          focusNode: widget.focusNode,
-          onFocusChange: widget.onFocusChange,
-          autofocus: widget.autofocus,
-          padding: widget.padding,
+        Transform.scale(
+          scale: max(1.0, ratio),
+          // Could be PlatformSwitch
+          // Dev's opinion: Material switches are better
+          child: Switch(
+            value: value,
+            onChanged: onChanged,
+            activeColor: widget.activeColor,
+            activeTrackColor: widget.activeTrackColor,
+            inactiveThumbColor: widget.inactiveThumbColor,
+            inactiveTrackColor: widget.inactiveTrackColor,
+            activeThumbImage: widget.activeThumbImage,
+            onActiveThumbImageError: widget.onActiveThumbImageError,
+            inactiveThumbImage: widget.inactiveThumbImage,
+            onInactiveThumbImageError: widget.onInactiveThumbImageError,
+            materialTapTargetSize: widget.materialTapTargetSize,
+            dragStartBehavior: widget.dragStartBehavior,
+            mouseCursor: widget.mouseCursor,
+            focusColor: widget.focusColor,
+            hoverColor: widget.hoverColor,
+            splashRadius: widget.splashRadius,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
+            autofocus: widget.autofocus,
+            padding: widget.padding,
+          ),
         ),
       ],
     );
