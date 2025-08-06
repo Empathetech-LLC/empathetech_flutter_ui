@@ -92,14 +92,25 @@ double ezImageSize(BuildContext context) =>
 
 /// Calculate a recommended [AppBar.toolbarHeight]
 /// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
-double ezToolbarHeight(BuildContext context, String title, {TextStyle? style}) {
+double ezToolbarHeight({
+  required BuildContext context,
+  required String title,
+  bool includeIconButton = true,
+  TextStyle? style,
+}) {
+  late final double margin = EzConfig.get(marginKey);
+  late final double padding = EzConfig.get(paddingKey);
+  late final double iconSize = EzConfig.get(iconSizeKey) ?? defaultIconSize;
+
   return max(
-    ezTextSize(
+        ezTextSize(
           title,
           context: context,
           style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
-        ).height +
-        EzConfig.get(marginKey),
-    kMinInteractiveDimension,
-  );
+        ).height,
+        includeIconButton
+            ? max(iconSize + padding, kMinInteractiveDimension)
+            : kMinInteractiveDimension,
+      ) +
+      margin;
 }
