@@ -99,7 +99,7 @@ double ezToolbarHeight(BuildContext context, String title, {TextStyle? style}) {
           context: context,
           style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
         ).height +
-        2 * EzConfig.get(marginKey),
+        EzConfig.get(marginKey),
     kMinInteractiveDimension,
   );
 }
