@@ -9,9 +9,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzCheckbox extends StatelessWidget {
-  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
-  final double? scale;
-
   /// Defaults to [EdgeInsets.all] with [EzConfig]s [marginKey] when [scale] > 1.1
   final EdgeInsetsGeometry? padding;
 
@@ -23,6 +20,9 @@ class EzCheckbox extends StatelessWidget {
 
   /// [Checkbox.onChanged] passthrough
   final ValueChanged<bool?>? onChanged;
+
+  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  final double? scale;
 
   /// [Checkbox.mouseCursor] passthrough
   final MouseCursor? mouseCursor;
@@ -69,11 +69,11 @@ class EzCheckbox extends StatelessWidget {
   /// [Checkbox] with custom styling and scaling
   const EzCheckbox({
     super.key,
-    this.scale,
     this.padding,
     this.value,
     this.tristate = false,
     this.onChanged,
+    this.scale,
     this.mouseCursor,
     this.activeColor,
     this.checkColor,
