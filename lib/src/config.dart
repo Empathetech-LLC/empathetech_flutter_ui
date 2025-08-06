@@ -548,8 +548,9 @@ Must be one of [int, bool, double, String, List<String>]''');
     bool storageOnly = false,
   }) async {
     bool success = true;
+    final List<String> itr = List<String>.from(_instance!.prefs.keys);
 
-    for (final String key in _instance!.prefs.keys) {
+    for (final String key in itr) {
       if (skip?.contains(key) ?? false) continue;
       final bool result = await _instance!.preferences.remove(key);
 
