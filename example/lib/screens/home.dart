@@ -345,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                   EzSwitchPair(
-                    key: ValueKey<String>('domain_$exampleDomain'),
+                    key: ValueKey<bool>(exampleDomain),
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: exampleDomain
                         ? MainAxisAlignment.start
