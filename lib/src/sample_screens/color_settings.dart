@@ -282,6 +282,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
             hint: fromImageHint,
             child: ExcludeSemantics(
               child: EzImageSetting(
+                key: UniqueKey(),
                 configKey: fromImageKey,
                 label: fromImageLabel,
                 updateTheme: brightness,
