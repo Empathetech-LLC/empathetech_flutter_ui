@@ -49,7 +49,8 @@ class _EzCountdownTimerState extends State<EzCountdownTimer>
 
   @override
   Widget build(BuildContext context) {
-    final double size = widget.radius ?? EzConfig.get(iconSizeKey) * 1.5;
+    final double size =
+        widget.radius ?? EzConfig.get(iconSizeKey) + EzConfig.get(paddingKey);
 
     return AnimatedBuilder(
       animation: _animation,

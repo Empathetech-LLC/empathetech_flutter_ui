@@ -65,6 +65,9 @@ class _ImageSettingState extends State<EzImageSetting> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
+  final double iconSize = EzConfig.get(iconSizeKey);
+
+  late final EdgeInsets colInsets = EzInsets.col(spacing);
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
@@ -200,7 +203,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         (platform == TargetPlatform.android ||
             platform == TargetPlatform.iOS)) {
       options.add(Padding(
-        padding: EzInsets.col(spacing),
+        padding: colInsets,
         child: EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await ezImagePicker(
@@ -223,7 +226,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Doesn't work on Web
     if (!kIsWeb) {
       options.add(Padding(
-        padding: EzInsets.col(spacing),
+        padding: colInsets,
         child: EzElevatedIconButton(
           onPressed: () async {
             final String? changed = await ezImagePicker(
@@ -245,7 +248,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // From network
     // Works everywhere
     options.add(Padding(
-      padding: EzInsets.col(spacing),
+      padding: colInsets,
       child: EzElevatedIconButton(
         onPressed: () => showPlatformDialog(
           context: context,
@@ -331,7 +334,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Reset
     if (defaultPath != null && defaultPath != noImageValue) {
       options.add(Padding(
-        padding: EzInsets.col(spacing),
+        padding: colInsets,
         child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
@@ -350,7 +353,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Clear (optional)
     if (widget.allowClear) {
       options.add(Padding(
-        padding: EzInsets.col(spacing),
+        padding: colInsets,
         child: EzElevatedIconButton(
           onPressed: () async {
             cleanup();
@@ -369,12 +372,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Update theme (optional)
     if (widget.updateTheme != null && widget.updateThemeOption) {
       options.add(Padding(
-        padding: EdgeInsets.only(
-          left: spacing / 2,
-          right: spacing / 2,
-          top: spacing / 2,
-          bottom: spacing,
-        ),
+        padding: EzInsets.wrap(spacing),
         child: EzSwitchPair(
           key: ValueKey<bool>(updateTheme),
           text: l10n.isUseForColors,
@@ -627,7 +625,7 @@ class _ImageSettingState extends State<EzImageSetting> {
               border: Border.all(color: theme.colorScheme.onSurface),
             ),
             child: CircleAvatar(
-              radius: padding * 2 + margin * 0.5,
+              radius: iconSize + padding,
               foregroundImage:
                   (inProgress || currPath == null || currPath == noImageValue)
                       ? null

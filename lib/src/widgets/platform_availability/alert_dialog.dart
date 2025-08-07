@@ -45,7 +45,6 @@ class EzAlertDialog extends PlatformAlertDialog {
     // Gather theme data //
 
     final double margin = EzConfig.get(marginKey);
-    final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
@@ -73,24 +72,32 @@ class EzAlertDialog extends PlatformAlertDialog {
           return MaterialAlertDialogData(
             // Title
             title: title,
-            titlePadding: EdgeInsets.only(
-              left: padding,
-              right: padding,
-              top: padding,
-              bottom: spacing / 2,
-            ),
+            titlePadding: title == null
+                ? null
+                : dialogContent == null
+                    ? EdgeInsets.zero
+                    : EdgeInsets.only(bottom: spacing / 2),
 
             // Content
             content: dialogContent,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: margin,
-              vertical: spacing / 2,
-            ),
+            contentPadding: dialogContent == null
+                ? null
+                : title == null
+                    ? EdgeInsets.zero
+                    : EdgeInsets.symmetric(
+                        horizontal: margin,
+                        vertical: spacing / 2,
+                      ),
 
             // Actions
-            actions: isLefty ? actions?.reversed.toList() : actions,
-            actionsAlignment:
-                isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+            actions: (isLefty && (actions != null && actions.length <= 2))
+                ? actions.reversed.toList()
+                : actions,
+            actionsAlignment: (actions != null && actions.length > 2)
+                ? MainAxisAlignment.center
+                : isLefty
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.end,
 
             // General
             actionsPadding: EzInsets.wrap(spacing),
@@ -113,19 +120,33 @@ class EzAlertDialog extends PlatformAlertDialog {
               : cupertinoActions;
 
           return CupertinoAlertDialogData(
-            title: Padding(
-              padding: dialogContent == null
-                  ? EdgeInsets.zero
-                  : EdgeInsets.only(bottom: spacing / 2),
-              child: title,
-            ),
+            // Title
+            title: title == null
+                ? null
+                : Padding(
+                    padding: dialogContent == null
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(bottom: spacing / 2),
+                    child: title,
+                  ),
+
+            // Content
             content: dialogContent == null
                 ? null
                 : Padding(
-                    padding: EdgeInsets.symmetric(vertical: spacing / 2),
+                    padding: title == null
+                        ? EdgeInsets.zero
+                        : EdgeInsets.symmetric(
+                            horizontal: margin,
+                            vertical: spacing / 2,
+                          ),
                     child: dialogContent,
                   ),
-            actions: isLefty ? actions?.reversed.toList() : actions,
+
+            // Actions
+            actions: (isLefty && (actions != null && actions.length <= 2))
+                ? actions.reversed.toList()
+                : actions,
           );
         },
       ),

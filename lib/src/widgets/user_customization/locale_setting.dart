@@ -41,7 +41,7 @@ class EzLocaleSetting extends StatefulWidget {
 class _LocaleSettingState extends State<EzLocaleSetting> {
   // Gather the theme data //
 
-  final double margin = EzConfig.get(marginKey);
+  final double iconSize = EzConfig.get(iconSizeKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
@@ -71,12 +71,12 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
         ? CountryFlag.fromLanguageCode(
             lang.languageCode,
             shape: const Circle(),
-            width: padding * 2 + margin,
+            width: iconSize + padding,
           )
         : CountryFlag.fromCountryCode(
             lang.countryCode!,
             shape: const Circle(),
-            width: padding * 2 + margin,
+            width: iconSize + padding,
           );
 
     return (widget.protest && widget.inDistress.contains(lang.countryCode))

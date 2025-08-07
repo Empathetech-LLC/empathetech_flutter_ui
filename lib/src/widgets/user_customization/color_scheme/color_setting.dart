@@ -44,8 +44,8 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
-  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double iconRadius = EzConfig.get(iconSizeKey) / 2;
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -150,7 +150,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ),
                 child: CircleAvatar(
                   backgroundColor: Color(recommended),
-                  radius: padding + margin,
+                  radius: iconRadius + padding,
                 ),
               ),
             ],
@@ -291,12 +291,12 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ? CircleAvatar(
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
-                    radius: padding + margin,
+                    radius: iconRadius + padding,
                     child: EzIcon(PlatformIcons(context).eyeSlash),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,
-                    radius: padding + margin,
+                    radius: iconRadius + padding,
                   ),
           ),
           label: label,
