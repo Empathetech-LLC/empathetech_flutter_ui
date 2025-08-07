@@ -35,7 +35,7 @@ class EzImageSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [imageKeys] are included by default
+  /// [darkImageKeys] or [lightImageKeys] are included by default
   final Set<String>? resetKeys;
 
   /// Empathetech image settings
@@ -166,6 +166,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                   if (dialogContext.mounted) {
                     Navigator.of(dialogContext).pop();
                   }
+                  setState(() {});
                 },
                 confirmIsDestructive: true,
                 onDeny: () => Navigator.of(dialogContext).pop(),
