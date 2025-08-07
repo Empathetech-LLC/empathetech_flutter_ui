@@ -93,10 +93,8 @@ class EzCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        max(
-            (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize,
-            (EzConfig.get(paddingKey) ?? defaultDesktopPadding) /
-                defaultDesktopPadding);
+        max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
+            EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
 
     return Padding(
       padding: ratio > 1.1

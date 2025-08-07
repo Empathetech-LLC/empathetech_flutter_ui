@@ -298,7 +298,6 @@ ThemeData ezThemeData(Brightness brightness) {
       ),
       trackOutlineColor: WidgetStateProperty.all(colorScheme.primaryContainer),
       overlayColor: WidgetStateProperty.all(highlightColor),
-      padding: EdgeInsets.symmetric(horizontal: margin),
     ),
 
     // Text button

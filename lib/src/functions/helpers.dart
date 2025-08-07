@@ -88,7 +88,7 @@ Duration ezReadingTime(String passage) {
 /// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
-    ((EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize);
+    (EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey));
 
 /// Calculate a recommended [AppBar.toolbarHeight]
 /// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
@@ -100,7 +100,7 @@ double ezToolbarHeight({
 }) {
   late final double margin = EzConfig.get(marginKey);
   late final double padding = EzConfig.get(paddingKey);
-  late final double iconSize = EzConfig.get(iconSizeKey) ?? defaultIconSize;
+  late final double iconSize = EzConfig.get(iconSizeKey);
 
   return max(
         ezTextSize(
