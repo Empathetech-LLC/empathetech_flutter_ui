@@ -101,7 +101,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   late List<String> currList =
       EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
-  late final List<String> fullList = isDark ? darkColors : lightColors;
+  late final List<String> fullList = isDark ? darkColorKeys : lightColorKeys;
 
   late final String imageKey =
       isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
