@@ -131,8 +131,9 @@ class _EzImageSettingsState extends State<EzImageSettings> {
 
         // Local reset all
         widget.resetSpacer,
-        EzElevatedButton(
-          text: l10n.gResetAll,
+        EzElevatedIconButton(
+          icon: EzIcon(PlatformIcons(context).refresh),
+          label: l10n.gResetAll,
           onPressed: () => showPlatformDialog(
             context: context,
             builder: (BuildContext dialogContext) =>
@@ -150,6 +151,11 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                   if (clearColors) {
                     await EzConfig.removeKeys(
                       isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
+                    );
+                    await EzConfig.remove(
+                      isDark
+                          ? darkTextBackgroundOpacityKey
+                          : lightTextBackgroundOpacityKey,
                     );
                   }
 
@@ -171,23 +177,22 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                   textAlign: TextAlign.center,
                 ),
                 contents: <Widget>[
+                  EzSwitchPair(
+                    key: ValueKey<bool>(clearColors),
+                    text: 'And the ${isDark ? 'dark' : 'light'} color scheme',
+                    textAlign: TextAlign.center,
+                    value: clearColors,
+                    onChanged: (bool? choice) {
+                      clearColors = (choice == null) ? false : choice;
+                      dialogState(() {});
+                      setState(() {});
+                    },
+                  ),
+                  const EzSpacer(),
                   Text(
                     l10n.gUndoWarn,
                     textAlign: TextAlign.center,
                   ),
-                  Padding(
-                    padding: EzInsets.wrap(EzConfig.get(spacingKey)),
-                    child: EzSwitchPair(
-                      key: ValueKey<bool>(clearColors),
-                      text: l10n.isUseForColors,
-                      value: clearColors,
-                      onChanged: (bool? choice) {
-                        clearColors = (choice == null) ? false : choice;
-                        dialogState(() {});
-                        setState(() {});
-                      },
-                    ),
-                  )
                 ],
                 materialActions: materialActions,
                 cupertinoActions: cupertinoActions,
