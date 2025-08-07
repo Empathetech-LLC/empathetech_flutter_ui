@@ -96,10 +96,15 @@ class _EzColorSettingsState extends State<EzColorSettings> {
   late final List<String> defaultList =
       isDark ? widget.darkStarterSet : widget.lightStarterSet;
 
+  late final String userColorsKey =
+      isDark ? userDarkColorsKey : userLightColorsKey;
   late List<String> currList =
       EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
 
   late final List<String> fullList = isDark ? darkColors : lightColors;
+
+  late final String imageKey =
+      isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
 
   // Shared
   late final String themeProfile =
@@ -118,8 +123,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
       await EzConfig.removeKeys(<String>{
         ...fullList,
         userColorsKey,
-        darkColorSchemeImageKey,
-        lightColorSchemeImageKey,
+        imageKey,
       });
       if (widget.resetKeys != null) {
         await EzConfig.removeKeys(widget.resetKeys!);
@@ -185,7 +189,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
             isDark: isDark,
-            themeProfile: themeProfile,
             l10n: l10n,
             quickHeader: widget.quickHeader,
             headerSpacer: widget.headerSpacer,
@@ -196,6 +199,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
           _AdvancedColorSettings(
             key: UniqueKey(),
             theme: theme,
+            isDark: isDark,
             l10n: l10n,
             defaultList: defaultList,
             currList: currList,
@@ -213,7 +217,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
 class _QuickColorSettings extends StatefulWidget {
   final bool isDark;
-  final String themeProfile;
   final EFUILang l10n;
   final List<Widget>? quickHeader;
   final Widget headerSpacer;
@@ -222,7 +225,6 @@ class _QuickColorSettings extends StatefulWidget {
 
   const _QuickColorSettings({
     required this.isDark,
-    required this.themeProfile,
     required this.l10n,
     required this.quickHeader,
     required this.headerSpacer,
@@ -239,47 +241,18 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   static const EzSpacer spacer = EzSpacer();
 
-  late bool isDark = widget.isDark;
-  late final String themeProfile = widget.themeProfile;
+  // Define the build data //
 
-  late final EFUILang l10n = widget.l10n;
+  late final Brightness brightness =
+      widget.isDark ? Brightness.dark : Brightness.light;
+
+  late final String fromImageKey =
+      widget.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
 
   // Define custom widgets  //
 
-  late final String fromImageLabel = l10n.csSchemeBase;
-  late final String fromImageHint = l10n.csFromImage;
-
-  late final Widget fromImageButton = isDark
-      ? Semantics(
-          label: fromImageLabel.replaceAll('\n', ' '),
-          value: l10n.gOptional,
-          button: true,
-          hint: fromImageHint,
-          child: ExcludeSemantics(
-            child: EzImageSetting(
-              configKey: darkColorSchemeImageKey,
-              label: fromImageLabel,
-              updateTheme: Brightness.dark,
-              updateThemeOption: false,
-              showFitOption: false,
-            ),
-          ),
-        )
-      : Semantics(
-          label: fromImageLabel.replaceAll('\n', ' '),
-          value: l10n.gOptional,
-          button: true,
-          hint: fromImageHint,
-          child: ExcludeSemantics(
-            child: EzImageSetting(
-              configKey: lightColorSchemeImageKey,
-              label: fromImageLabel,
-              updateTheme: Brightness.light,
-              updateThemeOption: false,
-              showFitOption: false,
-            ),
-          ),
-        );
+  late final String fromImageLabel = widget.l10n.csSchemeBase;
+  late final String fromImageHint = widget.l10n.csFromImage;
 
   // Return the build //
 
@@ -302,7 +275,21 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
           spacer,
 
           // From image
-          fromImageButton,
+          Semantics(
+            label: fromImageLabel.replaceAll('\n', ' '),
+            value: widget.l10n.gOptional,
+            button: true,
+            hint: fromImageHint,
+            child: ExcludeSemantics(
+              child: EzImageSetting(
+                configKey: fromImageKey,
+                label: fromImageLabel,
+                updateTheme: brightness,
+                updateThemeOption: false,
+                showFitOption: false,
+              ),
+            ),
+          ),
 
           // Additional settings
           if (widget.quickFooter != null) ...<Widget>[
@@ -317,6 +304,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
 class _AdvancedColorSettings extends StatefulWidget {
   final ThemeData theme;
+  final bool isDark;
   final EFUILang l10n;
   final List<String> defaultList;
   final List<String> currList;
@@ -325,6 +313,7 @@ class _AdvancedColorSettings extends StatefulWidget {
   const _AdvancedColorSettings({
     super.key,
     required this.theme,
+    required this.isDark,
     required this.l10n,
     required this.defaultList,
     required this.currList,
@@ -347,6 +336,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   late final EFUILang l10n = widget.l10n;
 
   // Define the build data //
+
+  late final String userColorsKey =
+      widget.isDark ? userDarkColorsKey : userLightColorsKey;
 
   late final List<String> defaultList = widget.defaultList;
   late final Set<String> defaultSet = defaultList.toSet();
