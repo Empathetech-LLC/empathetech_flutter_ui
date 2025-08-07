@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzLayoutSettings extends StatefulWidget {
@@ -58,6 +59,10 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
   late final EFUILang l10n = ezL10n(context);
 
+  // Define the build data //
+
+  int redraw = 0;
+
   // Set the page title //
 
   @override
@@ -82,7 +87,8 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
 
         // Main //
         // Margin
-        const EzLayoutSetting(
+        EzLayoutSetting(
+          key: ValueKey<String>('margin_$redraw'),
           configKey: marginKey,
           type: EzLayoutSettingType.margin,
           min: minMargin,
@@ -93,7 +99,8 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         spacer,
 
         // Padding
-        const EzLayoutSetting(
+        EzLayoutSetting(
+          key: ValueKey<String>('padding_$redraw'),
           configKey: paddingKey,
           type: EzLayoutSettingType.padding,
           min: minPadding,
@@ -104,7 +111,8 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         spacer,
 
         // Spacing
-        const EzLayoutSetting(
+        EzLayoutSetting(
+          key: ValueKey<String>('spacing_$redraw'),
           configKey: spacingKey,
           type: EzLayoutSettingType.spacing,
           min: minSpacing,
@@ -115,7 +123,11 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         separator,
 
         // Hide scroll
-        EzSwitchPair(text: l10n.lsScroll, valueKey: hideScrollKey),
+        EzSwitchPair(
+          key: ValueKey<String>('scroll_$redraw'),
+          text: l10n.lsScroll,
+          valueKey: hideScrollKey,
+        ),
 
         // After layout
         if (widget.afterLayout != null) ...<Widget>[
@@ -132,6 +144,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
             if (widget.resetKeys != null) {
               await EzConfig.removeKeys(widget.resetKeys!);
             }
+            setState(() => redraw = Random().nextInt(rMax));
           },
         ),
         separator,
