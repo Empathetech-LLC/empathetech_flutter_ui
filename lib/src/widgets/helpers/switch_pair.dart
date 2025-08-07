@@ -242,7 +242,10 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
   @override
   Widget build(BuildContext context) {
     final double ratio = widget.scale ??
-        (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
+        max(
+            (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize,
+            (EzConfig.get(paddingKey) ?? defaultDesktopPadding) /
+                defaultDesktopPadding);
 
     return EzRow(
       reverseHands: widget.reverseHands,
@@ -270,31 +273,36 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
             backgroundColor: widget.backgroundColor,
           ),
         ),
-        Transform.scale(
-          scale: max(1.0, ratio),
-          // Could be PlatformSwitch
-          // Dev's opinion: Material switches are better
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: widget.activeColor,
-            activeTrackColor: widget.activeTrackColor,
-            inactiveThumbColor: widget.inactiveThumbColor,
-            inactiveTrackColor: widget.inactiveTrackColor,
-            activeThumbImage: widget.activeThumbImage,
-            onActiveThumbImageError: widget.onActiveThumbImageError,
-            inactiveThumbImage: widget.inactiveThumbImage,
-            onInactiveThumbImageError: widget.onInactiveThumbImageError,
-            materialTapTargetSize: widget.materialTapTargetSize,
-            dragStartBehavior: widget.dragStartBehavior,
-            mouseCursor: widget.mouseCursor,
-            focusColor: widget.focusColor,
-            hoverColor: widget.hoverColor,
-            splashRadius: widget.splashRadius,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            autofocus: widget.autofocus,
-            padding: widget.padding,
+        Padding(
+          padding: ratio > 1.1
+              ? EdgeInsets.symmetric(vertical: EzConfig.get(marginKey))
+              : EdgeInsets.zero,
+          child: Transform.scale(
+            scale: max(1.0, ratio),
+            // Could be PlatformSwitch
+            // Dev's opinion: Material switches are better
+            child: Switch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: widget.activeColor,
+              activeTrackColor: widget.activeTrackColor,
+              inactiveThumbColor: widget.inactiveThumbColor,
+              inactiveTrackColor: widget.inactiveTrackColor,
+              activeThumbImage: widget.activeThumbImage,
+              onActiveThumbImageError: widget.onActiveThumbImageError,
+              inactiveThumbImage: widget.inactiveThumbImage,
+              onInactiveThumbImageError: widget.onInactiveThumbImageError,
+              materialTapTargetSize: widget.materialTapTargetSize,
+              dragStartBehavior: widget.dragStartBehavior,
+              mouseCursor: widget.mouseCursor,
+              focusColor: widget.focusColor,
+              hoverColor: widget.hoverColor,
+              splashRadius: widget.splashRadius,
+              focusNode: widget.focusNode,
+              onFocusChange: widget.onFocusChange,
+              autofocus: widget.autofocus,
+              padding: widget.padding,
+            ),
           ),
         ),
       ],
