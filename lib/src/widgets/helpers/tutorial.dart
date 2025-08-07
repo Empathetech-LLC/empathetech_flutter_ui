@@ -49,7 +49,6 @@ class EzTutorial extends StatelessWidget {
     // Gather theme data //
 
     final double margin = EzConfig.get(marginKey);
-    final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
@@ -69,12 +68,7 @@ class EzTutorial extends StatelessWidget {
         child: AlertDialog(
           // Title
           title: Text(title, textAlign: TextAlign.center),
-          titlePadding: EdgeInsets.only(
-            left: padding,
-            right: padding,
-            top: padding,
-            bottom: spacing / 2,
-          ),
+          titlePadding: EdgeInsets.symmetric(vertical: spacing / 2),
 
           // Content
           content: Text(content, textAlign: TextAlign.center),
@@ -84,7 +78,7 @@ class EzTutorial extends StatelessWidget {
           ),
 
           // Actions
-          actions: isLefty ? actions.reversed.toList() : actions,
+          actions: actions,
           actionsAlignment:
               isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
 
