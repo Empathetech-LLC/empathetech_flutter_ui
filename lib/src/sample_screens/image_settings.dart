@@ -6,6 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageSettings extends StatefulWidget {
   /// Optional additional settings
@@ -70,6 +71,8 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   late final String themeProfile =
       isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
+  bool clearColors = false;
+
   // Set the page title //
 
   @override
@@ -128,14 +131,70 @@ class _EzImageSettingsState extends State<EzImageSettings> {
 
         // Local reset all
         widget.resetSpacer,
-        EzResetButton(
-          dialogTitle: l10n.isResetAll(themeProfile),
-          onConfirm: () async {
-            await EzConfig.removeKeys(imageKeys.keys.toSet());
-            if (widget.resetKeys != null) {
-              await EzConfig.removeKeys(widget.resetKeys!);
-            }
-          },
+        EzElevatedButton(
+          text: l10n.gResetAll,
+          onPressed: () => showPlatformDialog(
+            context: context,
+            builder: (BuildContext dialogContext) =>
+                StatefulBuilder(builder: (_, StateSetter dialogState) {
+              late final List<Widget> materialActions;
+              late final List<Widget> cupertinoActions;
+
+              (materialActions, cupertinoActions) = ezActionPairs(
+                context: context,
+                onConfirm: () async {
+                  await EzConfig.removeKeys(
+                    isDark ? darkImageKeys : lightImageKeys,
+                  );
+
+                  if (clearColors) {
+                    await EzConfig.removeKeys(
+                      isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
+                    );
+                  }
+
+                  if (widget.resetKeys != null) {
+                    await EzConfig.removeKeys(widget.resetKeys!);
+                  }
+
+                  if (dialogContext.mounted) {
+                    Navigator.of(dialogContext).pop();
+                  }
+                },
+                confirmIsDestructive: true,
+                onDeny: () => Navigator.of(dialogContext).pop(),
+              );
+
+              return EzAlertDialog(
+                title: Text(
+                  l10n.isResetAll(themeProfile),
+                  textAlign: TextAlign.center,
+                ),
+                contents: <Widget>[
+                  Text(
+                    l10n.gUndoWarn,
+                    textAlign: TextAlign.center,
+                  ),
+                  Padding(
+                    padding: EzInsets.wrap(EzConfig.get(spacingKey)),
+                    child: EzSwitchPair(
+                      key: ValueKey<bool>(clearColors),
+                      text: l10n.isUseForColors,
+                      value: clearColors,
+                      onChanged: (bool? choice) {
+                        clearColors = (choice == null) ? false : choice;
+                        dialogState(() {});
+                        setState(() {});
+                      },
+                    ),
+                  )
+                ],
+                materialActions: materialActions,
+                cupertinoActions: cupertinoActions,
+                needsClose: false,
+              );
+            }),
+          ),
         ),
         separator,
       ],
