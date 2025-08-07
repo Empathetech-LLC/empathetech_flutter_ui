@@ -77,7 +77,10 @@ class EzRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
+        max(
+            (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize,
+            (EzConfig.get(paddingKey) ?? defaultDesktopPadding) /
+                defaultDesktopPadding);
 
     return Container(
       padding: ratio > 1.1
