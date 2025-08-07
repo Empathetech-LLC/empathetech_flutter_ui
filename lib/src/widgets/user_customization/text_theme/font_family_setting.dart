@@ -42,7 +42,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
 
   late final ThemeData theme = Theme.of(context);
 
-  final double padding = EzConfig.get(paddingKey);
+  final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
 
   // Define the build data  //
 
@@ -58,7 +58,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
       label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
-        padding: EzInsets.wrap(padding),
+        padding: menuButtonPadding,
       ),
     );
   }).toList();

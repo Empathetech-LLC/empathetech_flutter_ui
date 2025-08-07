@@ -33,6 +33,8 @@ class EzUnderlineSetting extends StatefulWidget {
 class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
   // Gather the theme data //
 
+  late final double padding = EzConfig.get(paddingKey);
+
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   late bool isUnderlined = EzConfig.get(widget.configKey) ?? false;
@@ -46,12 +48,12 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
           ? IconButton.styleFrom(
               foregroundColor: colorScheme.primary,
               side: BorderSide(color: colorScheme.primaryContainer),
-              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+              padding: EzInsets.wrap(padding),
             )
           : IconButton.styleFrom(
               foregroundColor: colorScheme.outline,
               side: BorderSide(color: colorScheme.outlineVariant),
-              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
+              padding: EzInsets.wrap(padding),
             ),
       onPressed: () async {
         isUnderlined = !isUnderlined;

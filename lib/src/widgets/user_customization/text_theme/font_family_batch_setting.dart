@@ -27,7 +27,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  final double padding = EzConfig.get(paddingKey);
+  final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
 
   late final EzDisplayStyleProvider displayProvider =
       context.watch<EzDisplayStyleProvider>();
@@ -75,7 +75,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
-        padding: EzInsets.wrap(padding),
+        padding: menuButtonPadding,
       ),
     );
   }).toList();

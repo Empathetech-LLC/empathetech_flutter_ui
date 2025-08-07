@@ -28,7 +28,6 @@ class EzIconLink extends StatefulWidget {
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
-  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
   final EdgeInsets? padding;
 
   /// Destination function

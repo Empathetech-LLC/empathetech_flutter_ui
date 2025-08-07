@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-import '../../../../empathetech_flutter_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
@@ -28,7 +26,6 @@ class EzLink extends StatefulWidget {
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
-  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
   final EdgeInsets? padding;
 
   /// Destination function
