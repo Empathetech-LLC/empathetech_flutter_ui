@@ -24,58 +24,8 @@ ColorScheme ezColorScheme(Brightness brightness) {
     return (value == null) ? null : Color(value);
   }
 
-  return (brightness == Brightness.light)
+  return (brightness == Brightness.dark)
       ? ColorScheme.fromSeed(
-          brightness: Brightness.light,
-          seedColor: getColor(lightPrimaryKey)!,
-          primary: getColor(lightPrimaryKey),
-          onPrimary: getColor(lightOnPrimaryKey),
-          primaryContainer: getColor(lightPrimaryContainerKey),
-          onPrimaryContainer: getColor(lightOnPrimaryContainerKey),
-          primaryFixed: getColor(lightPrimaryFixedKey),
-          primaryFixedDim: getColor(lightPrimaryFixedDimKey),
-          onPrimaryFixed: getColor(lightOnPrimaryFixedKey),
-          onPrimaryFixedVariant: getColor(lightOnPrimaryFixedVariantKey),
-          secondary: getColor(lightSecondaryKey),
-          onSecondary: getColor(lightOnSecondaryKey),
-          secondaryContainer: getColor(lightSecondaryContainerKey),
-          onSecondaryContainer: getColor(lightOnSecondaryContainerKey),
-          secondaryFixed: getColor(lightSecondaryFixedKey),
-          secondaryFixedDim: getColor(lightSecondaryFixedDimKey),
-          onSecondaryFixed: getColor(lightOnSecondaryFixedKey),
-          onSecondaryFixedVariant: getColor(lightOnSecondaryFixedVariantKey),
-          tertiary: getColor(lightTertiaryKey),
-          onTertiary: getColor(lightOnTertiaryKey),
-          tertiaryContainer: getColor(lightTertiaryContainerKey),
-          onTertiaryContainer: getColor(lightOnTertiaryContainerKey),
-          tertiaryFixed: getColor(lightTertiaryFixedKey),
-          tertiaryFixedDim: getColor(lightTertiaryFixedDimKey),
-          onTertiaryFixed: getColor(lightOnTertiaryFixedKey),
-          onTertiaryFixedVariant: getColor(lightOnTertiaryFixedVariantKey),
-          error: getColor(lightErrorKey),
-          onError: getColor(lightOnErrorKey),
-          errorContainer: getColor(lightErrorContainerKey),
-          onErrorContainer: getColor(lightOnErrorContainerKey),
-          outline: getColor(lightOutlineKey),
-          outlineVariant: getColor(lightOutlineVariantKey),
-          surface: getColor(lightSurfaceKey),
-          onSurface: getColor(lightOnSurfaceKey),
-          surfaceDim: getColor(lightSurfaceDimKey),
-          surfaceBright: getColor(lightSurfaceBrightKey),
-          surfaceContainerLowest: getColor(lightSurfaceContainerLowestKey),
-          surfaceContainerLow: getColor(lightSurfaceContainerLowKey),
-          surfaceContainer: getColor(lightSurfaceContainerKey),
-          surfaceContainerHigh: getColor(lightSurfaceContainerHighKey),
-          surfaceContainerHighest: getColor(lightSurfaceContainerHighestKey),
-          onSurfaceVariant: getColor(lightOnSurfaceVariantKey),
-          inverseSurface: getColor(lightInverseSurfaceKey),
-          onInverseSurface: getColor(lightOnInverseSurfaceKey),
-          inversePrimary: getColor(lightInversePrimaryKey),
-          shadow: getColor(lightShadowKey),
-          scrim: getColor(lightScrimKey),
-          surfaceTint: getColor(lightSurfaceTintKey),
-        )
-      : ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: getColor(darkPrimaryKey)!,
           primary: getColor(darkPrimaryKey),
@@ -124,6 +74,56 @@ ColorScheme ezColorScheme(Brightness brightness) {
           shadow: getColor(darkShadowKey),
           scrim: getColor(darkScrimKey),
           surfaceTint: getColor(darkSurfaceTintKey),
+        )
+      : ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: getColor(lightPrimaryKey)!,
+          primary: getColor(lightPrimaryKey),
+          onPrimary: getColor(lightOnPrimaryKey),
+          primaryContainer: getColor(lightPrimaryContainerKey),
+          onPrimaryContainer: getColor(lightOnPrimaryContainerKey),
+          primaryFixed: getColor(lightPrimaryFixedKey),
+          primaryFixedDim: getColor(lightPrimaryFixedDimKey),
+          onPrimaryFixed: getColor(lightOnPrimaryFixedKey),
+          onPrimaryFixedVariant: getColor(lightOnPrimaryFixedVariantKey),
+          secondary: getColor(lightSecondaryKey),
+          onSecondary: getColor(lightOnSecondaryKey),
+          secondaryContainer: getColor(lightSecondaryContainerKey),
+          onSecondaryContainer: getColor(lightOnSecondaryContainerKey),
+          secondaryFixed: getColor(lightSecondaryFixedKey),
+          secondaryFixedDim: getColor(lightSecondaryFixedDimKey),
+          onSecondaryFixed: getColor(lightOnSecondaryFixedKey),
+          onSecondaryFixedVariant: getColor(lightOnSecondaryFixedVariantKey),
+          tertiary: getColor(lightTertiaryKey),
+          onTertiary: getColor(lightOnTertiaryKey),
+          tertiaryContainer: getColor(lightTertiaryContainerKey),
+          onTertiaryContainer: getColor(lightOnTertiaryContainerKey),
+          tertiaryFixed: getColor(lightTertiaryFixedKey),
+          tertiaryFixedDim: getColor(lightTertiaryFixedDimKey),
+          onTertiaryFixed: getColor(lightOnTertiaryFixedKey),
+          onTertiaryFixedVariant: getColor(lightOnTertiaryFixedVariantKey),
+          error: getColor(lightErrorKey),
+          onError: getColor(lightOnErrorKey),
+          errorContainer: getColor(lightErrorContainerKey),
+          onErrorContainer: getColor(lightOnErrorContainerKey),
+          outline: getColor(lightOutlineKey),
+          outlineVariant: getColor(lightOutlineVariantKey),
+          surface: getColor(lightSurfaceKey),
+          onSurface: getColor(lightOnSurfaceKey),
+          surfaceDim: getColor(lightSurfaceDimKey),
+          surfaceBright: getColor(lightSurfaceBrightKey),
+          surfaceContainerLowest: getColor(lightSurfaceContainerLowestKey),
+          surfaceContainerLow: getColor(lightSurfaceContainerLowKey),
+          surfaceContainer: getColor(lightSurfaceContainerKey),
+          surfaceContainerHigh: getColor(lightSurfaceContainerHighKey),
+          surfaceContainerHighest: getColor(lightSurfaceContainerHighestKey),
+          onSurfaceVariant: getColor(lightOnSurfaceVariantKey),
+          inverseSurface: getColor(lightInverseSurfaceKey),
+          onInverseSurface: getColor(lightOnInverseSurfaceKey),
+          inversePrimary: getColor(lightInversePrimaryKey),
+          shadow: getColor(lightShadowKey),
+          scrim: getColor(lightScrimKey),
+          surfaceTint: getColor(lightSurfaceTintKey),
         );
 }
 
@@ -132,7 +132,89 @@ Future<void> storeColorScheme({
   required ColorScheme colorScheme,
   required Brightness brightness,
 }) async {
-  if (brightness == Brightness.light) {
+  if (brightness == Brightness.dark) {
+    await EzConfig.removeKeys(darkColorKeys.toSet());
+
+    await EzConfig.setInt(darkPrimaryKey, colorScheme.primary.toARGB32());
+    await EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.toARGB32());
+    await EzConfig.setInt(
+        darkPrimaryContainerKey, colorScheme.primaryContainer.toARGB32());
+    await EzConfig.setInt(
+        darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.toARGB32());
+    await EzConfig.setInt(
+        darkPrimaryFixedKey, colorScheme.primaryFixed.toARGB32());
+    await EzConfig.setInt(
+        darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.toARGB32());
+    await EzConfig.setInt(
+        darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.toARGB32());
+    await EzConfig.setInt(darkOnPrimaryFixedVariantKey,
+        colorScheme.onPrimaryFixedVariant.toARGB32());
+    await EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.toARGB32());
+    await EzConfig.setInt(
+        darkOnSecondaryKey, colorScheme.onSecondary.toARGB32());
+    await EzConfig.setInt(
+        darkSecondaryContainerKey, colorScheme.secondaryContainer.toARGB32());
+    await EzConfig.setInt(darkOnSecondaryContainerKey,
+        colorScheme.onSecondaryContainer.toARGB32());
+    await EzConfig.setInt(
+        darkSecondaryFixedKey, colorScheme.secondaryFixed.toARGB32());
+    await EzConfig.setInt(
+        darkSecondaryFixedDimKey, colorScheme.secondaryFixedDim.toARGB32());
+    await EzConfig.setInt(
+        darkOnSecondaryFixedKey, colorScheme.onSecondaryFixed.toARGB32());
+    await EzConfig.setInt(darkOnSecondaryFixedVariantKey,
+        colorScheme.onSecondaryFixedVariant.toARGB32());
+    await EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.toARGB32());
+    await EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.toARGB32());
+    await EzConfig.setInt(
+        darkTertiaryContainerKey, colorScheme.tertiaryContainer.toARGB32());
+    await EzConfig.setInt(
+        darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.toARGB32());
+    await EzConfig.setInt(
+        darkTertiaryFixedKey, colorScheme.tertiaryFixed.toARGB32());
+    await EzConfig.setInt(
+        darkTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.toARGB32());
+    await EzConfig.setInt(
+        darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.toARGB32());
+    await EzConfig.setInt(darkOnTertiaryFixedVariantKey,
+        colorScheme.onTertiaryFixedVariant.toARGB32());
+    await EzConfig.setInt(darkErrorKey, colorScheme.error.toARGB32());
+    await EzConfig.setInt(darkOnErrorKey, colorScheme.onError.toARGB32());
+    await EzConfig.setInt(
+        darkErrorContainerKey, colorScheme.errorContainer.toARGB32());
+    await EzConfig.setInt(
+        darkOnErrorContainerKey, colorScheme.onErrorContainer.toARGB32());
+    await EzConfig.setInt(darkOutlineKey, colorScheme.outline.toARGB32());
+    await EzConfig.setInt(
+        darkOutlineVariantKey, colorScheme.outlineVariant.toARGB32());
+    await EzConfig.setInt(darkSurfaceKey, colorScheme.surface.toARGB32());
+    await EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.toARGB32());
+    await EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.toARGB32());
+    await EzConfig.setInt(
+        darkSurfaceBrightKey, colorScheme.surfaceBright.toARGB32());
+    await EzConfig.setInt(darkSurfaceContainerLowestKey,
+        colorScheme.surfaceContainerLowest.toARGB32());
+    await EzConfig.setInt(
+        darkSurfaceContainerLowKey, colorScheme.surfaceContainerLow.toARGB32());
+    await EzConfig.setInt(
+        darkSurfaceContainerKey, colorScheme.surfaceContainer.toARGB32());
+    await EzConfig.setInt(darkSurfaceContainerHighKey,
+        colorScheme.surfaceContainerHigh.toARGB32());
+    await EzConfig.setInt(darkSurfaceContainerHighestKey,
+        colorScheme.surfaceContainerHighest.toARGB32());
+    await EzConfig.setInt(
+        darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.toARGB32());
+    await EzConfig.setInt(
+        darkInverseSurfaceKey, colorScheme.inverseSurface.toARGB32());
+    await EzConfig.setInt(
+        darkOnInverseSurfaceKey, colorScheme.onInverseSurface.toARGB32());
+    await EzConfig.setInt(
+        darkInversePrimaryKey, colorScheme.inversePrimary.toARGB32());
+    await EzConfig.setInt(darkShadowKey, colorScheme.shadow.toARGB32());
+    await EzConfig.setInt(darkScrimKey, colorScheme.scrim.toARGB32());
+    await EzConfig.setInt(
+        darkSurfaceTintKey, colorScheme.surfaceTint.toARGB32());
+  } else {
     await EzConfig.removeKeys(lightColorKeys.toSet());
 
     await EzConfig.setInt(lightPrimaryKey, colorScheme.primary.toARGB32());
@@ -216,88 +298,6 @@ Future<void> storeColorScheme({
     await EzConfig.setInt(lightScrimKey, colorScheme.scrim.toARGB32());
     await EzConfig.setInt(
         lightSurfaceTintKey, colorScheme.surfaceTint.toARGB32());
-  } else {
-    await EzConfig.removeKeys(darkColorKeys.toSet());
-
-    await EzConfig.setInt(darkPrimaryKey, colorScheme.primary.toARGB32());
-    await EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.toARGB32());
-    await EzConfig.setInt(
-        darkPrimaryContainerKey, colorScheme.primaryContainer.toARGB32());
-    await EzConfig.setInt(
-        darkOnPrimaryContainerKey, colorScheme.onPrimaryContainer.toARGB32());
-    await EzConfig.setInt(
-        darkPrimaryFixedKey, colorScheme.primaryFixed.toARGB32());
-    await EzConfig.setInt(
-        darkPrimaryFixedDimKey, colorScheme.primaryFixedDim.toARGB32());
-    await EzConfig.setInt(
-        darkOnPrimaryFixedKey, colorScheme.onPrimaryFixed.toARGB32());
-    await EzConfig.setInt(darkOnPrimaryFixedVariantKey,
-        colorScheme.onPrimaryFixedVariant.toARGB32());
-    await EzConfig.setInt(darkSecondaryKey, colorScheme.secondary.toARGB32());
-    await EzConfig.setInt(
-        darkOnSecondaryKey, colorScheme.onSecondary.toARGB32());
-    await EzConfig.setInt(
-        darkSecondaryContainerKey, colorScheme.secondaryContainer.toARGB32());
-    await EzConfig.setInt(darkOnSecondaryContainerKey,
-        colorScheme.onSecondaryContainer.toARGB32());
-    await EzConfig.setInt(
-        darkSecondaryFixedKey, colorScheme.secondaryFixed.toARGB32());
-    await EzConfig.setInt(
-        darkSecondaryFixedDimKey, colorScheme.secondaryFixedDim.toARGB32());
-    await EzConfig.setInt(
-        darkOnSecondaryFixedKey, colorScheme.onSecondaryFixed.toARGB32());
-    await EzConfig.setInt(darkOnSecondaryFixedVariantKey,
-        colorScheme.onSecondaryFixedVariant.toARGB32());
-    await EzConfig.setInt(darkTertiaryKey, colorScheme.tertiary.toARGB32());
-    await EzConfig.setInt(darkOnTertiaryKey, colorScheme.onTertiary.toARGB32());
-    await EzConfig.setInt(
-        darkTertiaryContainerKey, colorScheme.tertiaryContainer.toARGB32());
-    await EzConfig.setInt(
-        darkOnTertiaryContainerKey, colorScheme.onTertiaryContainer.toARGB32());
-    await EzConfig.setInt(
-        darkTertiaryFixedKey, colorScheme.tertiaryFixed.toARGB32());
-    await EzConfig.setInt(
-        darkTertiaryFixedDimKey, colorScheme.tertiaryFixedDim.toARGB32());
-    await EzConfig.setInt(
-        darkOnTertiaryFixedKey, colorScheme.onTertiaryFixed.toARGB32());
-    await EzConfig.setInt(darkOnTertiaryFixedVariantKey,
-        colorScheme.onTertiaryFixedVariant.toARGB32());
-    await EzConfig.setInt(darkErrorKey, colorScheme.error.toARGB32());
-    await EzConfig.setInt(darkOnErrorKey, colorScheme.onError.toARGB32());
-    await EzConfig.setInt(
-        darkErrorContainerKey, colorScheme.errorContainer.toARGB32());
-    await EzConfig.setInt(
-        darkOnErrorContainerKey, colorScheme.onErrorContainer.toARGB32());
-    await EzConfig.setInt(darkOutlineKey, colorScheme.outline.toARGB32());
-    await EzConfig.setInt(
-        darkOutlineVariantKey, colorScheme.outlineVariant.toARGB32());
-    await EzConfig.setInt(darkSurfaceKey, colorScheme.surface.toARGB32());
-    await EzConfig.setInt(darkOnSurfaceKey, colorScheme.onSurface.toARGB32());
-    await EzConfig.setInt(darkSurfaceDimKey, colorScheme.surfaceDim.toARGB32());
-    await EzConfig.setInt(
-        darkSurfaceBrightKey, colorScheme.surfaceBright.toARGB32());
-    await EzConfig.setInt(darkSurfaceContainerLowestKey,
-        colorScheme.surfaceContainerLowest.toARGB32());
-    await EzConfig.setInt(
-        darkSurfaceContainerLowKey, colorScheme.surfaceContainerLow.toARGB32());
-    await EzConfig.setInt(
-        darkSurfaceContainerKey, colorScheme.surfaceContainer.toARGB32());
-    await EzConfig.setInt(darkSurfaceContainerHighKey,
-        colorScheme.surfaceContainerHigh.toARGB32());
-    await EzConfig.setInt(darkSurfaceContainerHighestKey,
-        colorScheme.surfaceContainerHighest.toARGB32());
-    await EzConfig.setInt(
-        darkOnSurfaceVariantKey, colorScheme.onSurfaceVariant.toARGB32());
-    await EzConfig.setInt(
-        darkInverseSurfaceKey, colorScheme.inverseSurface.toARGB32());
-    await EzConfig.setInt(
-        darkOnInverseSurfaceKey, colorScheme.onInverseSurface.toARGB32());
-    await EzConfig.setInt(
-        darkInversePrimaryKey, colorScheme.inversePrimary.toARGB32());
-    await EzConfig.setInt(darkShadowKey, colorScheme.shadow.toARGB32());
-    await EzConfig.setInt(darkScrimKey, colorScheme.scrim.toARGB32());
-    await EzConfig.setInt(
-        darkSurfaceTintKey, colorScheme.surfaceTint.toARGB32());
   }
 }
 
