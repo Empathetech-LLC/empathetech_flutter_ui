@@ -74,6 +74,8 @@ class _EzUpdaterState extends State<EzUpdater> {
     }
   }
 
+  // Init //
+
   @override
   void initState() {
     super.initState();
@@ -89,6 +91,8 @@ class _EzUpdaterState extends State<EzUpdater> {
         url = _github;
     }
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
