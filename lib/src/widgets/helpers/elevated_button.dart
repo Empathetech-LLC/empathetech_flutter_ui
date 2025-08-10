@@ -82,52 +82,54 @@ class EzElevatedButton extends StatefulWidget {
 }
 
 class _EzElevatedButtonState extends State<EzElevatedButton> {
-  // Gather the fixed theme data //
-
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color decorationColor = widget.decorationColor ??
-      (widget.enabled ? colorScheme.primary : colorScheme.outline);
-
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
-          ?.copyWith(decorationColor: decorationColor);
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
-  Widget build(_) => ElevatedButton(
-        onPressed: widget.enabled ? widget.onPressed : doNothing,
-        onLongPress: widget.enabled ? widget.onLongPress : doNothing,
-        onHover: onHover,
-        onFocusChange: onFocusChange,
-        style: widget.enabled
-            ? widget.style
-            : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
-                ?.copyWith(
-                overlayColor: WidgetStateProperty.all(colorScheme.outline),
-                shadowColor: WidgetStateProperty.all(Colors.transparent),
-              ),
-        focusNode: widget.focusNode,
-        autofocus: widget.autofocus,
-        clipBehavior: widget.clipBehavior,
-        statesController: widget.statesController,
-        child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
+  Widget build(_) {
+    // Gather the dynamic theme data //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color decorationColor = widget.decorationColor ??
+        (widget.enabled ? colorScheme.primary : colorScheme.outline);
+
+    TextStyle? textStyle =
+        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)
+            ?.copyWith(decorationColor: decorationColor);
+
+    // Define custom functions //
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
       );
+      setState(() {});
+    }
+
+    // Return the build //
+
+    return ElevatedButton(
+      onPressed: widget.enabled ? widget.onPressed : doNothing,
+      onLongPress: widget.enabled ? widget.onLongPress : doNothing,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
+      style: widget.enabled
+          ? widget.style
+          : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
+              ?.copyWith(
+              overlayColor: WidgetStateProperty.all(colorScheme.outline),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+            ),
+      focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
+      clipBehavior: widget.clipBehavior,
+      statesController: widget.statesController,
+      child: Text(widget.text, style: textStyle, textAlign: widget.textAlign),
+    );
+  }
 }
 
 class EzElevatedIconButton extends StatefulWidget {
@@ -214,52 +216,54 @@ class EzElevatedIconButton extends StatefulWidget {
 }
 
 class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
-  // Gather the fixed theme data //
-
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
-  late final Color decorationColor = widget.decorationColor ??
-      (widget.enabled ? colorScheme.primary : colorScheme.outline);
+  // Gather the static theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late TextStyle? textStyle = (widget.textStyle ?? textTheme.bodyLarge)
-      ?.copyWith(decorationColor: decorationColor);
-
-  late final double margin =
-      ezTextSize('\t', context: context, style: textStyle).width;
-
-  late final EdgeInsets labelPadding = widget.labelPadding
-      ? (isLefty
-          ? EdgeInsets.only(right: margin)
-          : EdgeInsets.only(left: margin))
-      : EdgeInsets.zero;
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    final Color decorationColor = widget.decorationColor ??
+        (widget.enabled ? colorScheme.primary : colorScheme.outline);
+
+    TextStyle? textStyle = (widget.textStyle ?? textTheme.bodyLarge)
+        ?.copyWith(decorationColor: decorationColor);
+
+    final double margin =
+        ezTextSize('\t', context: context, style: textStyle).width;
+
+    final EdgeInsets labelPadding = widget.labelPadding
+        ? (isLefty
+            ? EdgeInsets.only(right: margin)
+            : EdgeInsets.only(left: margin))
+        : EdgeInsets.zero;
+
+    // Define custom functions //
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
+
     return ElevatedButton.icon(
       onPressed: widget.enabled ? widget.onPressed : doNothing,
       onLongPress: widget.enabled ? widget.onLongPress : doNothing,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
       style: widget.enabled
           ? widget.style
           : (widget.style ?? Theme.of(context).elevatedButtonTheme.style)
