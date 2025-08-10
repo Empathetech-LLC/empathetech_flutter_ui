@@ -34,11 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final EzMargin margin = EzMargin();
   late final EzSpacer rowMargin = EzMargin(vertical: false);
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
-
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
+  late TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
 
   // Define build data //
 
@@ -245,7 +243,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // App name
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csAppName,
               tip: TextSpan(
                 children: <InlineSpan>[
@@ -254,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
                   EzPlainText(text: ezTitleToSnake(l10n.csNameTip)),
                 ],
-                style: textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               controller: nameController,
               validator: (String? entry) => validateAppName(
@@ -281,7 +278,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Publisher name
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csPubName,
               tip: l10n.csPubTip,
               controller: pubController,
@@ -303,7 +299,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Description
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csDescription,
               controller: descriptionController,
               validator: (String? value) =>
@@ -319,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csDomainName,
-                    style: textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -366,7 +361,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Support email
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csSupportEmail,
               tip: l10n.csSupportTip,
               controller: supportEmailController,
@@ -389,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csInclude,
-                    style: textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -491,7 +485,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Flexible(
                         child: EzText(
                           l10n.csFlutterPath,
-                          style: textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.titleLarge,
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -579,7 +573,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csAdvanced,
-                    style: textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -621,9 +615,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Title
                         EzText(
                           l10n.csOutputPath,
-                          style: textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                           textAlign: TextAlign.start,
                         ),
 
@@ -1056,8 +1051,6 @@ linter:
 }
 
 class _BasicField extends StatelessWidget {
-  final TextTheme textTheme;
-
   final String title;
   final dynamic tip;
   final TextEditingController controller;
@@ -1065,7 +1058,6 @@ class _BasicField extends StatelessWidget {
   final String hintText;
 
   const _BasicField({
-    required this.textTheme,
     required this.title,
     this.tip,
     required this.controller,
@@ -1075,12 +1067,6 @@ class _BasicField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget titleText = EzText(
-      title,
-      style: textTheme.titleLarge,
-      textAlign: TextAlign.start,
-    );
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1089,7 +1075,13 @@ class _BasicField extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Flexible(child: titleText),
+            Flexible(
+              child: EzText(
+                title,
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.start,
+              ),
+            ),
             if (tip != null)
               tip.runtimeType == String
                   ? EzToolTipper(message: tip)
