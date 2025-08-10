@@ -933,8 +933,6 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
   // Set the page title //
 
   @override
@@ -943,10 +941,14 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 \${l10n.gError}');
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    // Return the build //
+
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
         useImageDecoration: false,
@@ -999,14 +1001,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the fixed theme data //
+  ${config.l10nConfig != null ? '''// Gather the fixed theme data //
 
-  ${config.l10nConfig != null ? 'late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
+  late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
-
-  // Define the build data //
+  ''' : ''}// Define the build data //
 
   int count = 0;
 
@@ -1018,10 +1017,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ezWindowNamer(context, appTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
+    // Return the build //
+
     return ${classCaseAppName}Scaffold(
       title: appTitle,
       body: EzScreen(
