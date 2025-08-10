@@ -494,4 +494,9 @@ class EFUILangEs extends EFUILang {
   String isResetAll(Object themeType) {
     return '¿Restablecer todas las imágenes del tema $themeType?';
   }
+
+  @override
+  String isAndColors(Object themeType) {
+    return '¿Y el esquema de colores $themeType?';
+  }
 }

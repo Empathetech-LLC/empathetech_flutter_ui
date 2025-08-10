@@ -180,7 +180,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                 contents: <Widget>[
                   EzSwitchPair(
                     key: ValueKey<bool>(clearColors),
-                    text: 'And the ${isDark ? 'dark' : 'light'} color scheme',
+                    text: l10n.isAndColors(themeProfile),
                     textAlign: TextAlign.center,
                     value: clearColors,
                     onChanged: (bool? choice) {

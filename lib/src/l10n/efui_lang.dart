@@ -1004,6 +1004,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Reset all {themeType} theme images?'**
   String isResetAll(Object themeType);
+
+  /// No description provided for @isAndColors.
+  ///
+  /// In en, this message translates to:
+  /// **'And the {themeType} color scheme?'**
+  String isAndColors(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

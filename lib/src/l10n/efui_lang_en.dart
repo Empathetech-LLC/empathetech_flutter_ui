@@ -491,6 +491,11 @@ class EFUILangEn extends EFUILang {
   String isResetAll(Object themeType) {
     return 'Reset all $themeType theme images?';
   }
+
+  @override
+  String isAndColors(Object themeType) {
+    return 'And the $themeType color scheme?';
+  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -979,5 +984,10 @@ class EFUILangEnUs extends EFUILangEn {
   @override
   String isResetAll(Object themeType) {
     return 'Reset all $themeType theme images?';
+  }
+
+  @override
+  String isAndColors(Object themeType) {
+    return 'And the $themeType color scheme?';
   }
 }

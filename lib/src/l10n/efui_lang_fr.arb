@@ -213,5 +213,6 @@
   
   "isFit": "Comment devrait-il s'adapter ?",
 
-  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
+  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
+  "isAndColors": "Et le schéma de couleurs {themeType} ?"
 }

@@ -213,5 +213,6 @@
 
   "isFit": "How should it fit?",
 
-  "isResetAll": "Reset all {themeType} theme images?"
+  "isResetAll": "Reset all {themeType} theme images?",
+  "isAndColors": "And the {themeType} color scheme?"
 }
