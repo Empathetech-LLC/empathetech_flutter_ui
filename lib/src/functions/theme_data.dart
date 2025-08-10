@@ -266,7 +266,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: BorderSide(color: colorScheme.primaryContainer),
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(padding),
+        padding: EdgeInsets.all(padding),
       ),
     ),
 
