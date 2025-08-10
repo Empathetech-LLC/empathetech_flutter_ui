@@ -25,8 +25,6 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
   // Set the page title //
 
   @override
@@ -35,10 +33,14 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 ${l10n.gError}');
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    // Return the build //
+
     return OpenUIScaffold(
       body: EzScreen(
         Center(

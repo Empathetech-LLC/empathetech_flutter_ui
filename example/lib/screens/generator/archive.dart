@@ -28,8 +28,6 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
   // Define the build data //
 
   GeneratorState genState = GeneratorState.running;
@@ -80,6 +78,8 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   }
 
   Widget header() {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
