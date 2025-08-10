@@ -80,7 +80,7 @@ class EzLayoutSetting extends StatefulWidget {
 }
 
 class _LayoutSettingState extends State<EzLayoutSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late double currValue = EzConfig.get(widget.configKey);
   late final double defaultValue = EzConfig.getDefault(widget.configKey);

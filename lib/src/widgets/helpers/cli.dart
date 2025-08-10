@@ -42,7 +42,7 @@ class EzCLI extends StatefulWidget {
 }
 
 class _EzCLIState extends State<EzCLI> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final TextTheme textTheme = Theme.of(context).textTheme;
 

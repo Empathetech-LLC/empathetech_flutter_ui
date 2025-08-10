@@ -78,7 +78,7 @@ class EzMenuButton extends StatefulWidget {
 }
 
 class _EzMenuButtonState extends State<EzMenuButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 

@@ -19,7 +19,7 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 

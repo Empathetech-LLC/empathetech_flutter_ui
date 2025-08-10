@@ -41,7 +41,7 @@ class EzAppProvider extends StatelessWidget {
     this.settings,
   });
 
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final bool? _savedDark = EzConfig.get(isDarkThemeKey);
 

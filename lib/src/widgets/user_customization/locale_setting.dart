@@ -39,7 +39,7 @@ class EzLocaleSetting extends StatefulWidget {
 }
 
 class _LocaleSettingState extends State<EzLocaleSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   final double iconSize = EzConfig.get(iconSizeKey);
   final double padding = EzConfig.get(paddingKey);

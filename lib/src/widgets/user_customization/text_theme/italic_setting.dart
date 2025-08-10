@@ -31,7 +31,7 @@ class EzItalicSetting extends StatefulWidget {
 }
 
 class _EzItalicSettingState extends State<EzItalicSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final double padding = EzConfig.get(paddingKey);
 

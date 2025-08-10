@@ -101,7 +101,7 @@ class EzSettingsHome extends StatefulWidget {
 }
 
 class _EzSettingsHomeState extends State<EzSettingsHome> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();

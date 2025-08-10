@@ -42,7 +42,7 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final double margin = EzConfig.get(marginKey);
     final double spacing = EzConfig.get(spacingKey);

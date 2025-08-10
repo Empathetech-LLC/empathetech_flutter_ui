@@ -826,7 +826,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the theme data //
+    // Gather the fixed theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = ezL10n(context);
@@ -927,7 +927,7 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 
@@ -999,7 +999,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   ${config.l10nConfig != null ? 'late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
 

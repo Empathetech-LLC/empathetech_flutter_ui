@@ -43,7 +43,7 @@ class EzConfigRandomizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final EFUILang l10n = ezL10n(context);
 

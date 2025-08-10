@@ -35,7 +35,7 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 }
 
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final EFUILang l10n = ezL10n(context);
 

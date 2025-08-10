@@ -83,7 +83,7 @@ class EzColorSettings extends StatefulWidget {
 }
 
 class _EzColorSettingsState extends State<EzColorSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 
@@ -237,7 +237,7 @@ class _QuickColorSettings extends StatefulWidget {
 }
 
 class _QuickColorSettingsState extends State<_QuickColorSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -326,7 +326,7 @@ class _AdvancedColorSettings extends StatefulWidget {
 }
 
 class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);

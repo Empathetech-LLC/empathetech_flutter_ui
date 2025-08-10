@@ -31,7 +31,7 @@ class EzBoldSetting extends StatefulWidget {
 }
 
 class _EzBoldSettingState extends State<EzBoldSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final double padding = EzConfig.get(paddingKey);
 

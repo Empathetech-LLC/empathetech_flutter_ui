@@ -67,7 +67,7 @@ class EzFontDoubleSetting extends StatefulWidget {
 }
 
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 

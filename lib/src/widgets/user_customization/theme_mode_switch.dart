@@ -27,7 +27,7 @@ class EzThemeModeSwitch extends StatefulWidget {
 }
 
 class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final EFUILang l10n = ezL10n(context);
 

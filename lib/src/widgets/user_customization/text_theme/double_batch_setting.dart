@@ -27,7 +27,7 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
 }
 
 class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final EFUILang l10n = ezL10n(context);
 

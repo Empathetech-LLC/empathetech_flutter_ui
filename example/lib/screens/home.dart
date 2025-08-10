@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
-  late TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
 
   // Define build data //
 
@@ -153,10 +152,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ezWindowNamer(context, appTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
+    // Return the build //
+
     return OpenUIScaffold(
       title: l10n.csPageTitle,
       onUpload: (EAGConfig config) async {
@@ -251,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       text: '  -->  ', semanticsLabel: ' ${l10n.csBecomes} '),
                   EzPlainText(text: ezTitleToSnake(l10n.csNameTip)),
                 ],
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: textTheme.bodyLarge,
               ),
               controller: nameController,
               validator: (String? entry) => validateAppName(
@@ -314,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csDomainName,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -383,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csInclude,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -485,7 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Flexible(
                         child: EzText(
                           l10n.csFlutterPath,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: textTheme.titleLarge,
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -573,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   child: EzText(
                     l10n.csAdvanced,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: textTheme.titleLarge,
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -615,10 +619,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Title
                         EzText(
                           l10n.csOutputPath,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          style: textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                           textAlign: TextAlign.start,
                         ),
 

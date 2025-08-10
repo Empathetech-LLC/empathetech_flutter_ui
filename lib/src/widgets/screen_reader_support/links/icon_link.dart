@@ -72,7 +72,7 @@ class EzIconLink extends StatefulWidget {
 }
 
 class _EzIconLinkState extends State<EzIconLink> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   late final ThemeData theme = Theme.of(context);
 

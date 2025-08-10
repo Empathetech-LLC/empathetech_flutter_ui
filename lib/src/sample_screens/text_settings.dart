@@ -164,7 +164,7 @@ class _TextSettings extends StatefulWidget {
 }
 
 class _TextSettingsState extends State<_TextSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -317,7 +317,7 @@ class _QuickTextSettings extends StatefulWidget {
 }
 
 class _QuickTextSettingsState extends State<_QuickTextSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
 
@@ -667,7 +667,7 @@ class _AdvancedTextSettings extends StatefulWidget {
 }
 
 class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSpacer rowSpacer = EzSpacer(vertical: false);

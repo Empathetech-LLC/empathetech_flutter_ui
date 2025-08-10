@@ -70,7 +70,7 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   late final ThemeData theme = Theme.of(context);
 

@@ -36,7 +36,7 @@ class EzColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 

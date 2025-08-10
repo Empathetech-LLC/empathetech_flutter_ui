@@ -31,7 +31,7 @@ class EzUnderlineSetting extends StatefulWidget {
 }
 
 class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final double padding = EzConfig.get(paddingKey);
 

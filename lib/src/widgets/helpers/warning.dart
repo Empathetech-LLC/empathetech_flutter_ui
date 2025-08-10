@@ -38,7 +38,7 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final EzSpacer margin = EzMargin(vertical: false);
 

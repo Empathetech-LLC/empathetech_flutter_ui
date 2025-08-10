@@ -56,7 +56,7 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSpacer rowSpacer = EzSpacer(vertical: false);

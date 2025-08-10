@@ -82,7 +82,7 @@ class EzElevatedButton extends StatefulWidget {
 }
 
 class _EzElevatedButtonState extends State<EzElevatedButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
   late final Color decorationColor = widget.decorationColor ??
@@ -214,7 +214,7 @@ class EzElevatedIconButton extends StatefulWidget {
 }
 
 class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   late final ColorScheme colorScheme = Theme.of(context).colorScheme;
   late final TextTheme textTheme = Theme.of(context).textTheme;

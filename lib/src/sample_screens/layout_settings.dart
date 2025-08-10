@@ -49,7 +49,7 @@ class EzLayoutSettings extends StatefulWidget {
 }
 
 class _EzLayoutSettingsState extends State<EzLayoutSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();

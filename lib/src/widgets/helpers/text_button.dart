@@ -77,7 +77,7 @@ class EzTextButton extends StatefulWidget {
 }
 
 class _EzTextButtonState extends State<EzTextButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   late final Color primary = Theme.of(context).colorScheme.primary;
 
@@ -194,7 +194,7 @@ class EzTextIconButton extends StatefulWidget {
 }
 
 class _EzTextIconButtonState extends State<EzTextIconButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 

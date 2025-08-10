@@ -57,7 +57,7 @@ class EzImageSettings extends StatefulWidget {
 }
 
 class _EzImageSettingsState extends State<EzImageSettings> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 

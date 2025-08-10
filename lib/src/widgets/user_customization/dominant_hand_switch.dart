@@ -26,7 +26,7 @@ class EzDominantHandSwitch extends StatefulWidget {
 }
 
 class _HandSwitchState extends State<EzDominantHandSwitch> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
     padding: EzInsets.wrap(EzConfig.get(paddingKey)),

@@ -38,7 +38,7 @@ class EzFontFamilySetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final ThemeData theme = Theme.of(context);
 

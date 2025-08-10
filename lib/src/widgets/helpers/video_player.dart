@@ -130,7 +130,7 @@ class EzVideoPlayer extends StatefulWidget {
 }
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   final TargetPlatform platform = getBasePlatform();
   late final bool onMobile = isMobile();
