@@ -45,7 +45,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  generate: true # For l10n
+  generate: true
   uses-material-design: true
 
   assets:
