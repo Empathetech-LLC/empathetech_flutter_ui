@@ -70,38 +70,22 @@ class EzLink extends StatefulWidget {
 }
 
 class _EzLinkState extends State<EzLink> {
-  // Gather the fixed theme data //
+  // Define the build data //
 
-  late final ThemeData theme = Theme.of(context);
-
-  late final Color textColor = widget.textColor ?? theme.colorScheme.primary;
-
-  late TextStyle? textStyle =
-      (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
-    color: textColor,
-    decoration: TextDecoration.none,
-    decorationColor: widget.decorationColor ?? textColor,
-  );
-
-  // Define custom functions //
-
-  void underline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  // Return the build //
+  late final String semantics = '${widget.text}; ${widget.hint}';
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.text}; ${widget.hint}';
+    // Gather the dynamic theme data //
 
-    final ButtonStyle buttonStyle = TextButton.styleFrom(
-      padding: widget.padding,
-      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
-      backgroundColor: widget.backgroundColor,
+    final ThemeData theme = Theme.of(context);
+    final Color textColor = widget.textColor ?? theme.colorScheme.primary;
+
+    TextStyle? textStyle =
+        (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
+      color: textColor,
+      decoration: TextDecoration.none,
+      decorationColor: widget.decorationColor ?? textColor,
     );
 
     final Text text = Text(
@@ -109,6 +93,23 @@ class _EzLinkState extends State<EzLink> {
       style: textStyle,
       textAlign: widget.textAlign,
     );
+
+    final ButtonStyle buttonStyle = TextButton.styleFrom(
+      padding: widget.padding,
+      overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
+      backgroundColor: widget.backgroundColor,
+    );
+
+    // Define custom functions //
+
+    void underline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
 
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
