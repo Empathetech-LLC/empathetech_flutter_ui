@@ -333,8 +333,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  late final Color surface = Theme.of(context).colorScheme.surface;
+  late Color surface = Theme.of(context).colorScheme.surface;
 
   // Gather the build data //
 
@@ -370,6 +369,11 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               padding: wrapPadding,
               child: EzFontFamilyBatchSetting(
                 key: UniqueKey(),
+                displayProvider: widget.displayProvider,
+                headlineProvider: widget.headlineProvider,
+                titleProvider: widget.titleProvider,
+                bodyProvider: widget.bodyProvider,
+                labelProvider: widget.labelProvider,
                 iconSize: currIconSize,
               ),
             ),
@@ -540,7 +544,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).remove,
-                          color: colorScheme.outline,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                       ),
                 pMSpacer,
@@ -549,7 +553,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 Icon(
                   Icons.sync_alt,
                   size: currIconSize,
-                  color: colorScheme.onSurface,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 pMSpacer,
 
@@ -572,7 +576,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).add,
-                          color: colorScheme.outline,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                       ),
               ],
@@ -678,8 +682,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   );
   late final EdgeInsets colMargin = EzInsets.col(margin);
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late final EFUILang l10n = ezL10n(context);
 
   // Gather the build data //
@@ -724,37 +726,37 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   // Define the setting controllers //
 
-  late final Widget fontSizeIcon = EzTextBackground(
+  late Widget fontSizeIcon = EzTextBackground(
     Icon(
       Icons.text_fields_sharp,
-      color: colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onSurface,
       size: widget.labelProvider.value.fontSize,
     ),
     borderRadius: textFieldRadius,
   );
 
-  late final Widget letterSpacingIcon = EzTextBackground(
+  late Widget letterSpacingIcon = EzTextBackground(
     Icon(
       Icons.horizontal_distribute_sharp,
-      color: colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onSurface,
       size: widget.labelProvider.value.fontSize,
     ),
     borderRadius: textFieldRadius,
   );
 
-  late final Widget wordSpacingIcon = EzTextBackground(
+  late Widget wordSpacingIcon = EzTextBackground(
     Icon(
       Icons.space_bar_sharp,
-      color: colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onSurface,
       size: widget.labelProvider.value.fontSize,
     ),
     borderRadius: textFieldRadius,
   );
 
-  late final Widget lineHeightIcon = EzTextBackground(
+  late Widget lineHeightIcon = EzTextBackground(
     Icon(
       Icons.format_line_spacing_sharp,
-      color: colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onSurface,
       size: widget.labelProvider.value.fontSize,
     ),
     borderRadius: textFieldRadius,
