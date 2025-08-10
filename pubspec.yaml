@@ -51,10 +51,10 @@ dev_dependencies:
     path: ../efui_bios
   
   email_validator: ^3.0.0
-  file_picker: ^10.2.1
+  file_picker: ^10.2.4
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.6
-  http: ^1.4.0
+  http: ^1.5.0
   xml: ^6.5.0
 
 flutter:
