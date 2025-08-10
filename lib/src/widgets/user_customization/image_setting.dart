@@ -76,7 +76,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late final TargetPlatform platform = Theme.of(context).platform;
 
-  // Define build data //
+  // Define the build data //
 
   late String? currPath = EzConfig.get(widget.configKey);
 

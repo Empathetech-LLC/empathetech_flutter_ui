@@ -36,7 +36,7 @@ class EzUpdater extends StatefulWidget {
 }
 
 class _EzUpdaterState extends State<EzUpdater> {
-  // Define build data //
+  // Define the build data //
 
   String? latestVersion;
   String? url;

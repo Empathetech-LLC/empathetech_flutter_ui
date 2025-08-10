@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
-  // Define build data //
+  // Define the build data //
 
   final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
