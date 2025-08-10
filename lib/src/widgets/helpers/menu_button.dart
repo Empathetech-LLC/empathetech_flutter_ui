@@ -82,37 +82,36 @@ class _EzMenuButtonState extends State<EzMenuButton> {
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final Color primary = Theme.of(context).colorScheme.primary;
+
+    TextStyle? textStyle =
+        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? primary,
+    );
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
     return MenuItemButton(
       onPressed: widget.onPressed,
-      onHover: onHover,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
       requestFocusOnHover: widget.requestFocusOnHover,
-      onFocusChange: onFocusChange,
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       shortcut: widget.shortcut,
