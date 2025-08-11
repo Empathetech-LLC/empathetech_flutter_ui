@@ -30,9 +30,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
   // Define the build data //
 
@@ -89,6 +86,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// The only way to begin
   /// Is by beginning
   Future<void> genStuff() async {
+    final TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
+
     await ezCmd(
       '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
@@ -344,7 +343,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         : onFailure(l10n.gsPartialSuccess);
   }
 
-  Widget header() {
+  Widget header(TextTheme textTheme, TextStyle? subTitle) {
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -437,11 +436,14 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   @override
   Widget build(_) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
     return OpenUIScaffold(
       title: l10n.gsPageTitle,
       running: genState == GeneratorState.running,
       body: EzScreen(EzScrollView(children: <Widget>[
-        header(),
+        header(textTheme, subTitle),
         divider,
 
         // Console output //

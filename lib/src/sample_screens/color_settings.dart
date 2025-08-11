@@ -87,7 +87,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   static const EzSeparator separator = EzSeparator();
 
-  late final ThemeData theme = Theme.of(context);
   late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
@@ -150,7 +149,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Current theme reminder
         EzText(
           l10n.gEditingTheme(themeProfile),
-          style: theme.textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
         EzMargin(),
@@ -198,7 +197,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         else
           _AdvancedColorSettings(
             key: UniqueKey(),
-            theme: theme,
             isDark: isDark,
             l10n: l10n,
             defaultList: defaultList,
@@ -304,7 +302,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
-  final ThemeData theme;
   final bool isDark;
   final EFUILang l10n;
   final List<String> defaultList;
@@ -313,7 +310,6 @@ class _AdvancedColorSettings extends StatefulWidget {
 
   const _AdvancedColorSettings({
     super.key,
-    required this.theme,
     required this.isDark,
     required this.l10n,
     required this.defaultList,
@@ -333,7 +329,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
 
-  late final ThemeData theme = widget.theme;
   late final EFUILang l10n = widget.l10n;
 
   // Define the build data //
@@ -414,7 +409,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: theme.colorScheme.primaryContainer),
+              border: Border.all(
+                  color: Theme.of(context).colorScheme.primaryContainer),
             ),
             child: CircleAvatar(
               backgroundColor: liveColor,
@@ -433,7 +429,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       0,
       EzLink(
         l10n.gHowThisWorks,
-        style: theme.textTheme.labelLarge!,
+        style: Theme.of(context).textTheme.labelLarge!,
         textAlign: TextAlign.center,
         url: Uri.parse('https://m3.material.io/styles/color/roles'),
         hint: l10n.gHowThisWorksHint,
