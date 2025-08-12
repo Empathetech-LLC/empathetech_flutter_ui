@@ -89,80 +89,60 @@ abstract class EzTextStyleProvider extends ChangeNotifier {
 }
 
 class EzDisplayStyleProvider extends EzTextStyleProvider {
-  final Color? _textColor;
-
   /// [EzTextStyleProvider] for [ezDisplayStyle]s values
-  EzDisplayStyleProvider(Color? color)
-      : _textColor = color,
-        super(ezDisplayStyle(color));
+  EzDisplayStyleProvider() : super(ezDisplayStyle(null));
 
   /// Reset via [ezDefaultDisplayStyle]
   void reset() {
-    _style = ezDefaultDisplayStyle(_textColor);
+    _style = ezDefaultDisplayStyle(null);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
 class EzHeadlineStyleProvider extends EzTextStyleProvider {
-  final Color? _textColor;
-
   /// [EzTextStyleProvider] for [ezHeadlineStyle]s values
-  EzHeadlineStyleProvider(Color? color)
-      : _textColor = color,
-        super(ezHeadlineStyle(color));
+  EzHeadlineStyleProvider() : super(ezHeadlineStyle(null));
 
   /// Reset via [ezDefaultHeadlineStyle]
   void reset() {
-    _style = ezDefaultHeadlineStyle(_textColor);
+    _style = ezDefaultHeadlineStyle(null);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
 class EzTitleStyleProvider extends EzTextStyleProvider {
-  final Color? _textColor;
-
   /// [EzTextStyleProvider] for [ezTitleStyle]s values
-  EzTitleStyleProvider(Color? color)
-      : _textColor = color,
-        super(ezTitleStyle(color));
+  EzTitleStyleProvider(Color? color) : super(ezTitleStyle(color));
 
   /// Reset via [ezDefaultTitleStyle]
   void reset() {
-    _style = ezDefaultTitleStyle(_textColor);
+    _style = ezDefaultTitleStyle(null);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
 class EzBodyStyleProvider extends EzTextStyleProvider {
-  final Color? _textColor;
-
   /// [EzTextStyleProvider] for [ezBodyStyle]s values
-  EzBodyStyleProvider(Color? color)
-      : _textColor = color,
-        super(ezBodyStyle(color));
+  EzBodyStyleProvider(Color? color) : super(ezBodyStyle(color));
 
   /// Reset via [ezDefaultBodyStyle]
   void reset() {
-    _style = ezDefaultBodyStyle(_textColor);
+    _style = ezDefaultBodyStyle(null);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
 }
 
 class EzLabelStyleProvider extends EzTextStyleProvider {
-  final Color? _textColor;
-
   /// [EzTextStyleProvider] for [ezLabelStyle]s values
-  EzLabelStyleProvider(Color? color)
-      : _textColor = color,
-        super(ezLabelStyle(color));
+  EzLabelStyleProvider(Color? color) : super(ezLabelStyle(color));
 
   /// Reset via [ezDefaultLabelStyle]
   void reset() {
-    _style = ezDefaultLabelStyle(_textColor);
+    _style = ezDefaultLabelStyle(null);
     _id = Random().nextInt(rMax);
     notifyListeners();
   }
