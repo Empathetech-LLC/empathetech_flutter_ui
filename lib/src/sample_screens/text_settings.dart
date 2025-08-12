@@ -81,48 +81,44 @@ class EzTextSettings extends StatelessWidget {
   // Set the page title //
 
   @override
-  Widget build(BuildContext context) {
-    final Color textColor = Theme.of(context).colorScheme.onSurface;
+  Widget build(BuildContext context) => MultiProvider(
+        providers: <ChangeNotifierProvider<dynamic>>[
+          ChangeNotifierProvider<EzDisplayStyleProvider>(
+            create: (_) => EzDisplayStyleProvider(),
+          ),
+          ChangeNotifierProvider<EzHeadlineStyleProvider>(
+            create: (_) => EzHeadlineStyleProvider(),
+          ),
+          ChangeNotifierProvider<EzTitleStyleProvider>(
+            create: (_) => EzTitleStyleProvider(null),
+          ),
+          ChangeNotifierProvider<EzBodyStyleProvider>(
+            create: (_) => EzBodyStyleProvider(null),
+          ),
+          ChangeNotifierProvider<EzLabelStyleProvider>(
+            create: (_) => EzLabelStyleProvider(null),
+          ),
+        ],
+        child: _TextSettings(
+          //Shared
+          target: target,
+          resetSpacer: resetSpacer,
+          darkThemeResetKeys: darkThemeResetKeys,
+          lightThemeResetKeys: lightThemeResetKeys,
 
-    return MultiProvider(
-      providers: <ChangeNotifierProvider<dynamic>>[
-        ChangeNotifierProvider<EzDisplayStyleProvider>(
-          create: (_) => EzDisplayStyleProvider(textColor),
-        ),
-        ChangeNotifierProvider<EzHeadlineStyleProvider>(
-          create: (_) => EzHeadlineStyleProvider(textColor),
-        ),
-        ChangeNotifierProvider<EzTitleStyleProvider>(
-          create: (_) => EzTitleStyleProvider(textColor),
-        ),
-        ChangeNotifierProvider<EzBodyStyleProvider>(
-          create: (_) => EzBodyStyleProvider(textColor),
-        ),
-        ChangeNotifierProvider<EzLabelStyleProvider>(
-          create: (_) => EzLabelStyleProvider(textColor),
-        ),
-      ],
-      child: _TextSettings(
-        //Shared
-        target: target,
-        resetSpacer: resetSpacer,
-        darkThemeResetKeys: darkThemeResetKeys,
-        lightThemeResetKeys: lightThemeResetKeys,
+          // Quick
+          showOnSurface: showOnSurface,
+          quickHeaderSpacer: quickHeaderSpacer,
+          moreQuickHeaderSettings: moreQuickHeaderSettings,
+          textBlockSpacer: textBlockSpacer,
+          showOpacity: showOpacity,
+          quickFooterSpacer: quickFooterSpacer,
+          moreQuickFooterSettings: moreQuickFooterSettings,
 
-        // Quick
-        showOnSurface: showOnSurface,
-        quickHeaderSpacer: quickHeaderSpacer,
-        moreQuickHeaderSettings: moreQuickHeaderSettings,
-        textBlockSpacer: textBlockSpacer,
-        showOpacity: showOpacity,
-        quickFooterSpacer: quickFooterSpacer,
-        moreQuickFooterSettings: moreQuickFooterSettings,
-
-        // Advanced
-        showSpacing: showSpacing,
-      ),
-    );
-  }
+          // Advanced
+          showSpacing: showSpacing,
+        ),
+      );
 }
 
 class _TextSettings extends StatefulWidget {
