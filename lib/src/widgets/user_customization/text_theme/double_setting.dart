@@ -69,11 +69,6 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the fixed theme data //
 
-  late final String oKey = isDarkTheme(context)
-      ? darkTextBackgroundOpacityKey
-      : lightTextBackgroundOpacityKey;
-  late final double fieldOpacity = EzConfig.get(oKey);
-
   late final double padding = EzConfig.get(paddingKey);
 
   final EzSpacer pMSpacer = EzMargin(vertical: false);
@@ -110,6 +105,12 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     // Gather the dynamic theme data //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final String oKey = isDarkTheme(context)
+        ? darkTextBackgroundOpacityKey
+        : lightTextBackgroundOpacityKey;
+    final double fieldOpacity = EzConfig.get(oKey);
+
     final Color fieldColor =
         colorScheme.surface.withValues(alpha: fieldOpacity);
 
