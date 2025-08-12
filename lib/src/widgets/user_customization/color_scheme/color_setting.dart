@@ -49,8 +49,6 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   static const EzSpacer spacer = EzSpacer();
 
-  late final ThemeData theme = Theme.of(context);
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define button functions //
@@ -269,6 +267,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final String label = getColorName(widget.configKey);
 
     return Semantics(

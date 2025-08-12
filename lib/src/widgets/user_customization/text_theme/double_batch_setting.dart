@@ -45,8 +45,6 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
     labelFontSizeKey,
   ];
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   // Define the build data //
@@ -94,6 +92,8 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Tooltip(
       message: l10n.tsFontSize,
       child: Row(

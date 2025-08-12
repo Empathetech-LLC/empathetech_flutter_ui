@@ -69,14 +69,10 @@ class EzFontDoubleSetting extends StatefulWidget {
 class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
   // Gather the fixed theme data //
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late final String oKey = isDarkTheme(context)
       ? darkTextBackgroundOpacityKey
       : lightTextBackgroundOpacityKey;
   late final double fieldOpacity = EzConfig.get(oKey);
-  late final Color fieldColor =
-      colorScheme.surface.withValues(alpha: fieldOpacity);
 
   late final double padding = EzConfig.get(paddingKey);
 
@@ -84,7 +80,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
   late final Size sizeLimit = ezTextSize(
     widget.sizingString,
-    style: style,
+    style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
     context: context,
   );
 
@@ -92,9 +88,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
       max(sizeLimit.width + padding, kMinInteractiveDimension);
   late double formFieldHeight =
       max(sizeLimit.height + padding, kMinInteractiveDimension);
-
-  late final TextStyle? style =
-      widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -112,10 +105,16 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
     controller.text = currValue.toString();
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color fieldColor =
+        colorScheme.surface.withValues(alpha: fieldOpacity);
+
+    // Return the build //
+
     return Tooltip(
       message: widget.tooltip,
       child: Column(
@@ -165,7 +164,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                 ),
                 child: TextFormField(
                   controller: controller,
-                  style: style,
+                  style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                   textAlignVertical: TextAlignVertical.top,
                   maxLines: 1,
