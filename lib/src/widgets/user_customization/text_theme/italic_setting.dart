@@ -35,14 +35,14 @@ class _EzItalicSettingState extends State<EzItalicSetting> {
 
   late final double padding = EzConfig.get(paddingKey);
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late bool isItalic = EzConfig.get(widget.configKey) ?? false;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return EzIconButton(
       style: isItalic
           ? IconButton.styleFrom(

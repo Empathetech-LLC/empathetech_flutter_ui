@@ -35,14 +35,14 @@ class _EzUnderlineSettingState extends State<EzUnderlineSetting> {
 
   late final double padding = EzConfig.get(paddingKey);
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late bool isUnderlined = EzConfig.get(widget.configKey) ?? false;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return EzIconButton(
       style: isUnderlined
           ? IconButton.styleFrom(

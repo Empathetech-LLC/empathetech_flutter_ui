@@ -333,8 +333,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  late Color surface = Theme.of(context).colorScheme.surface;
-
   // Gather the build data //
 
   late final bool isDark = isDarkTheme(context);
@@ -342,17 +340,22 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late final String oKey =
       isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
   late double currOpacity = EzConfig.get(oKey);
-  late Color backgroundColor = surface.withValues(alpha: currOpacity);
 
   late double currIconSize = EzConfig.get(iconSizeKey);
   static const double iconDelta = 2.0;
 
   final EzSpacer pMSpacer = EzMargin(vertical: false);
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color surface = colorScheme.surface;
+    Color backgroundColor = surface.withValues(alpha: currOpacity);
+
+    // Return the build //
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -544,7 +547,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).remove,
-                          color: Theme.of(context).colorScheme.outline,
+                          color: colorScheme.outline,
                         ),
                       ),
                 pMSpacer,
@@ -553,7 +556,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 Icon(
                   Icons.sync_alt,
                   size: currIconSize,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: colorScheme.onSurface,
                 ),
                 pMSpacer,
 
@@ -576,7 +579,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                         iconSize: currIconSize,
                         icon: Icon(
                           PlatformIcons(context).add,
-                          color: Theme.of(context).colorScheme.outline,
+                          color: colorScheme.outline,
                         ),
                       ),
               ],

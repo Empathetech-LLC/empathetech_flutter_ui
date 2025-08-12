@@ -35,14 +35,14 @@ class _EzBoldSettingState extends State<EzBoldSetting> {
 
   late final double padding = EzConfig.get(paddingKey);
 
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late bool isBold = EzConfig.get(widget.configKey) ?? false;
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return EzIconButton(
       style: isBold
           ? IconButton.styleFrom(
