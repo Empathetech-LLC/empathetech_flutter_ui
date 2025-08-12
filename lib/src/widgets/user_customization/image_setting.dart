@@ -71,7 +71,6 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = ezL10n(context);
 
   late final TargetPlatform platform = Theme.of(context).platform;
@@ -92,6 +91,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     required double width,
     required double height,
     required StateSetter modalState,
+    required ThemeData theme,
   }) {
     final double scaleMargin = margin * 0.25;
 
@@ -405,7 +405,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       );
 
   /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
-  Future<void> chooseFit() {
+  Future<void> chooseFit(ThemeData theme) {
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
@@ -435,6 +435,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -442,6 +443,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -449,6 +451,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -456,6 +459,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -463,6 +467,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -470,6 +475,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                   fitPreview(
@@ -477,6 +483,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     width: width,
                     height: height,
                     modalState: fitState,
+                    theme: theme,
                   ),
                   rowSpacer,
                 ],
@@ -524,7 +531,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// First-layer [ElevatedButton.onPressed]
   /// Runs the [chooseImage] dialog and updates the state accordingly
-  Future<void> activateSetting() async {
+  Future<void> activateSetting(ThemeData theme) async {
     final dynamic newPath = await chooseImage(context);
 
     if (newPath is String) {
@@ -565,7 +572,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
 
       if (currPath != noImageValue) {
-        if (widget.showFitOption) await chooseFit();
+        if (widget.showFitOption) await chooseFit(theme);
 
         // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a chance to read things
         final double? lightOpacity =
@@ -604,10 +611,13 @@ class _ImageSettingState extends State<EzImageSetting> {
         : null;
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    late final ThemeData theme = Theme.of(context);
+
+    // Return the build //
     return Semantics(
       label: widget.label,
       button: true,
@@ -617,8 +627,8 @@ class _ImageSettingState extends State<EzImageSetting> {
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
-          onPressed: inProgress ? doNothing : activateSetting,
-          onLongPress: inProgress ? doNothing : showCredits,
+          onPressed: () => inProgress ? doNothing() : activateSetting(theme),
+          onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
