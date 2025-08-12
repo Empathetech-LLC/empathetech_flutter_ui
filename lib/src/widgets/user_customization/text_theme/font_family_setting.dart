@@ -40,8 +40,6 @@ class EzFontFamilySetting extends StatefulWidget {
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
   // Gather the fixed theme data //
 
-  late final ThemeData theme = Theme.of(context);
-
   final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
 
   // Define the build data  //
