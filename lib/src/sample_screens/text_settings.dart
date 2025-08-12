@@ -331,12 +331,6 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Gather the build data //
 
-  late final bool isDark = isDarkTheme(context);
-
-  late final String oKey =
-      isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
-  late double currOpacity = EzConfig.get(oKey);
-
   late double currIconSize = EzConfig.get(iconSizeKey);
   static const double iconDelta = 2.0;
 
@@ -348,9 +342,15 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color surface = colorScheme.surface;
-    Color backgroundColor = surface.withValues(alpha: currOpacity);
+
+    final bool isDark = isDarkTheme(context);
+    final String oKey =
+        isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
 
     // Return the build //
+
+    double currOpacity = EzConfig.get(oKey);
+    Color backgroundColor = surface.withValues(alpha: currOpacity);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -686,7 +686,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   // Gather the build data //
 
   EzTextSettingType editing = EzTextSettingType.display;
-  late final bool isDark = isDarkTheme(context);
 
   late final String display = l10n.tsDisplay.toLowerCase();
   late final String headline = l10n.tsHeadline.toLowerCase();
@@ -1390,7 +1389,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
           onConfirm: () async {
             final Set<String> textKeys = textStyleKeys.keys.toSet();
 
-            if (isDark) {
+            if (isDarkTheme(context)) {
               textKeys.remove(lightTextBackgroundOpacityKey);
               await EzConfig.removeKeys(textKeys);
               await EzConfig.remove(darkOnSurfaceKey);

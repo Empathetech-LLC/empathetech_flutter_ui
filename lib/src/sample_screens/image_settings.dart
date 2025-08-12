@@ -60,16 +60,11 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
-
   final EzSpacer margin = EzMargin();
 
-  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
-
-  late final String themeProfile =
-      isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
   bool clearColors = false;
 
@@ -85,6 +80,10 @@ class _EzImageSettingsState extends State<EzImageSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = isDarkTheme(context);
+    final String themeProfile =
+        isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
+
     return EzScrollView(
       children: <Widget>[
         // Current theme reminder
