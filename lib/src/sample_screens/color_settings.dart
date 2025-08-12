@@ -16,7 +16,7 @@ class EzColorSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [colorKeys] are included by default
+  /// [darkColorKeys]/[lightColorKeys] are included by default (and current mode aware)
   final Set<String>? resetKeys;
 
   /// Optional additional quick settings
@@ -87,50 +87,17 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   static const EzSeparator separator = EzSeparator();
 
-  late bool isDark = isDarkTheme(context);
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
-
-  late final List<String> defaultList =
-      isDark ? widget.darkStarterSet : widget.lightStarterSet;
-
-  late final String userColorsKey =
-      isDark ? userDarkColorsKey : userLightColorsKey;
-  late List<String> currList =
-      EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
-
-  late final List<String> fullList = isDark ? darkColorKeys : lightColorKeys;
-
-  late final String imageKey =
-      isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
-
-  // Shared
-  late final String themeProfile =
-      isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
   late EzCSType currentTab = widget.target ??
       (EzConfig.get(advancedColorsKey) == true
           ? EzCSType.advanced
           : EzCSType.quick);
 
-  late final String resetDialogTitle = l10n.csResetAll(themeProfile);
-
-  late final Widget resetButton = EzResetButton(
-    dialogTitle: resetDialogTitle,
-    onConfirm: () async {
-      await EzConfig.removeKeys(<String>{
-        ...fullList,
-        userColorsKey,
-        imageKey,
-      });
-      if (widget.resetKeys != null) {
-        await EzConfig.removeKeys(widget.resetKeys!);
-      }
-
-      setState(() => currList = List<String>.from(defaultList));
-    },
-  );
+  late final String darkString = l10n.gDark.toLowerCase();
+  late final String lightString = l10n.gLight.toLowerCase();
 
   // Set the page title //
 
@@ -144,11 +111,25 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final bool isDark = isDarkTheme(context);
+
+    // Return the build //
+
+    final List<String> defaultList =
+        isDark ? widget.darkStarterSet : widget.lightStarterSet;
+
+    final String userColorsKey =
+        isDark ? userDarkColorsKey : userLightColorsKey;
+    List<String> currList =
+        EzConfig.get(userColorsKey) ?? List<String>.from(defaultList);
+
     return EzScrollView(
       children: <Widget>[
         // Current theme reminder
         EzText(
-          l10n.gEditingTheme(themeProfile),
+          l10n.gEditingTheme(isDark ? darkString : lightString),
           style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
@@ -201,12 +182,43 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             l10n: l10n,
             defaultList: defaultList,
             currList: currList,
-            fullList: fullList,
           ),
 
         // Reset button
         widget.resetSpacer,
-        resetButton,
+        isDark
+            ? EzResetButton(
+                dialogTitle: l10n.csResetAll(darkString),
+                onConfirm: () async {
+                  await EzConfig.removeKeys(<String>{
+                    ...darkColorKeys,
+                    userDarkColorsKey,
+                    darkColorSchemeImageKey,
+                  });
+
+                  if (widget.resetKeys != null) {
+                    await EzConfig.removeKeys(widget.resetKeys!);
+                  }
+
+                  setState(() => currList = List<String>.from(defaultList));
+                },
+              )
+            : EzResetButton(
+                dialogTitle: l10n.csResetAll(lightString),
+                onConfirm: () async {
+                  await EzConfig.removeKeys(<String>{
+                    ...lightColorKeys,
+                    userLightColorsKey,
+                    lightColorSchemeImageKey,
+                  });
+
+                  if (widget.resetKeys != null) {
+                    await EzConfig.removeKeys(widget.resetKeys!);
+                  }
+
+                  setState(() => currList = List<String>.from(defaultList));
+                },
+              ),
         separator,
       ],
     );
@@ -306,7 +318,6 @@ class _AdvancedColorSettings extends StatefulWidget {
   final EFUILang l10n;
   final List<String> defaultList;
   final List<String> currList;
-  final List<String> fullList;
 
   const _AdvancedColorSettings({
     super.key,
@@ -314,7 +325,6 @@ class _AdvancedColorSettings extends StatefulWidget {
     required this.l10n,
     required this.defaultList,
     required this.currList,
-    required this.fullList,
   });
 
   @override
@@ -340,7 +350,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   late final Set<String> defaultSet = defaultList.toSet();
 
   late final List<String> currList = widget.currList;
-  late final List<String> fullList = widget.fullList;
 
   // Define custom Widgets //
 
@@ -385,6 +394,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
   List<Widget> getUntrackedColors(StateSetter setModalState) {
     final Set<String> currSet = currList.toSet();
+    final List<String> fullList =
+        widget.isDark ? darkColorKeys : lightColorKeys;
 
     final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
