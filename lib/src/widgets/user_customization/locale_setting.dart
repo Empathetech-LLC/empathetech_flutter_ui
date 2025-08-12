@@ -45,8 +45,6 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
   // Gather the build data  //
 
   late EFUILang l10n = ezL10n(context);

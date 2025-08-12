@@ -42,12 +42,14 @@ class EzWarning extends StatelessWidget {
 
     final EzSpacer margin = EzMargin(vertical: false);
 
+    // Gather the dynamic theme data //
+
     final ThemeData theme = Theme.of(context);
+
+    final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
     final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
     final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
-
-    final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
     // Return the build
 

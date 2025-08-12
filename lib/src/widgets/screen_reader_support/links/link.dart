@@ -88,12 +88,6 @@ class _EzLinkState extends State<EzLink> {
       decorationColor: widget.decorationColor ?? textColor,
     );
 
-    final Text text = Text(
-      widget.text,
-      style: textStyle,
-      textAlign: widget.textAlign,
-    );
-
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
       overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
@@ -110,6 +104,12 @@ class _EzLinkState extends State<EzLink> {
     }
 
     // Return the build //
+
+    final Text text = Text(
+      widget.text,
+      style: textStyle,
+      textAlign: widget.textAlign,
+    );
 
     return Tooltip(
       message: widget.tooltip ?? widget.hint,
