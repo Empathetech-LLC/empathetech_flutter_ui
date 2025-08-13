@@ -159,7 +159,8 @@ class _TextSettings extends StatefulWidget {
   State<_TextSettings> createState() => _TextSettingsState();
 }
 
-class _TextSettingsState extends State<_TextSettings> {
+class _TextSettingsState extends State<_TextSettings>
+    with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
@@ -185,13 +186,36 @@ class _TextSettingsState extends State<_TextSettings> {
           ? EzTSType.advanced
           : EzTSType.quick);
 
-  // Return the build //
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     ezWindowNamer(context, l10n.tsPageTitle);
   }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+
+    final String key =
+        isDarkTheme(context) ? darkOnSurfaceKey : lightOnSurfaceKey;
+    final Color color = Color(EzConfig.get(key));
+
+    displayProvider.redraw(color);
+    headlineProvider.redraw(color);
+    titleProvider.redraw(color);
+    bodyProvider.redraw(color);
+    labelProvider.redraw(color);
+  }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {
@@ -267,6 +291,12 @@ class _TextSettingsState extends State<_TextSettings> {
           ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
 
