@@ -168,7 +168,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         // Core settings
         if (currentTab == EzCSType.quick)
           _QuickColorSettings(
-            isDark: isDark,
             l10n: l10n,
             quickHeader: widget.quickHeader,
             headerSpacer: widget.headerSpacer,
@@ -178,7 +177,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
         else
           _AdvancedColorSettings(
             key: UniqueKey(),
-            isDark: isDark,
             l10n: l10n,
             defaultList: defaultList,
             currList: currList,
@@ -226,7 +224,6 @@ class _EzColorSettingsState extends State<EzColorSettings> {
 }
 
 class _QuickColorSettings extends StatefulWidget {
-  final bool isDark;
   final EFUILang l10n;
   final List<Widget>? quickHeader;
   final Widget headerSpacer;
@@ -234,7 +231,6 @@ class _QuickColorSettings extends StatefulWidget {
   final List<Widget>? quickFooter;
 
   const _QuickColorSettings({
-    required this.isDark,
     required this.l10n,
     required this.quickHeader,
     required this.headerSpacer,
@@ -251,14 +247,6 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   static const EzSpacer spacer = EzSpacer();
 
-  // Define the build data //
-
-  late final Brightness brightness =
-      widget.isDark ? Brightness.dark : Brightness.light;
-
-  late final String fromImageKey =
-      widget.isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
-
   // Define custom widgets  //
 
   late final String fromImageLabel = widget.l10n.csSchemeBase;
@@ -268,6 +256,12 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = isDarkTheme(context);
+    final Brightness brightness = isDark ? Brightness.dark : Brightness.light;
+
+    final String fromImageKey =
+        isDark ? darkColorSchemeImageKey : lightColorSchemeImageKey;
+
     return EzScrollView(
       scrollDirection: Axis.horizontal,
       startCentered: true,
@@ -314,14 +308,12 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
 }
 
 class _AdvancedColorSettings extends StatefulWidget {
-  final bool isDark;
   final EFUILang l10n;
   final List<String> defaultList;
   final List<String> currList;
 
   const _AdvancedColorSettings({
     super.key,
-    required this.isDark,
     required this.l10n,
     required this.defaultList,
     required this.currList,
@@ -343,9 +335,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
 
   // Define the build data //
 
-  late final String userColorsKey =
-      widget.isDark ? userDarkColorsKey : userLightColorsKey;
-
   late final List<String> defaultList = widget.defaultList;
   late final Set<String> defaultSet = defaultList.toSet();
 
@@ -354,7 +343,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   // Define custom Widgets //
 
   /// Return the live [List] of [EzConfig.prefs] keys that the user is tracking
-  List<Widget> dynamicColorSettings() {
+  List<Widget> dynamicColorSettings(String userColorsKey) {
     final List<Widget> toReturn = <Widget>[];
 
     for (final String key in currList) {
@@ -392,10 +381,9 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   }
 
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
-  List<Widget> getUntrackedColors(StateSetter setModalState) {
+  List<Widget> getUntrackedColors(StateSetter setModalState, bool isDark) {
     final Set<String> currSet = currList.toSet();
-    final List<String> fullList =
-        widget.isDark ? darkColorKeys : lightColorKeys;
+    final List<String> fullList = isDark ? darkColorKeys : lightColorKeys;
 
     final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
@@ -451,10 +439,16 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
     return untrackedColors;
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final bool isDark = isDarkTheme(context);
+    final String userColorsKey =
+        isDark ? userDarkColorsKey : userLightColorsKey;
+
+    // Return the build //
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -468,7 +462,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               alignment: WrapAlignment.center,
               runAlignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
-              children: dynamicColorSettings(),
+              children: dynamicColorSettings(userColorsKey),
             ),
           ),
           restricted: EzScrollView(
@@ -477,7 +471,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             mainAxisSize: MainAxisSize.min,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: dynamicColorSettings(),
+              children: dynamicColorSettings(userColorsKey),
             ),
           ),
         ),
@@ -497,7 +491,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                     mainAxisSize: MainAxisSize.min,
                     child: EzScrollView(
                       mainAxisSize: MainAxisSize.min,
-                      children: getUntrackedColors(setModalState),
+                      children: getUntrackedColors(setModalState, isDark),
                     ),
                   );
                 },
