@@ -55,11 +55,16 @@ class EzSettingsHome extends StatefulWidget {
   /// See [randomSpacer] and/or [resetSpacer] for layout tuning
   final List<Widget>? additionalRoutes;
 
-  /// Spacer after the navigation buttons and before the [EzConfigRandomizer]
+  /// Spacer before the [EzQuickConfig]
+  /// If null, [EzQuickConfig] will not be included
+  final Widget? quickConfigSpacer;
+
+  /// Spacer before the [EzConfigRandomizer]
   /// If null, [EzConfigRandomizer] will not be included
   final Widget? randomSpacer;
 
-  /// Spacer between the [EzResetButton] and the navigation buttons, or [EzConfigRandomizer] if present
+  /// Spacer before the [EzResetButton]
+  /// [EzResetButton] is always included
   final Widget resetSpacer;
 
   /// [EzResetButton.skip] passthrough
@@ -89,7 +94,8 @@ class EzSettingsHome extends StatefulWidget {
     required this.colorSettingsPath,
     required this.imageSettingsPath,
     this.additionalRoutes,
-    this.randomSpacer = const EzDivider(),
+    this.quickConfigSpacer = const EzDivider(),
+    this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSpacer(),
     this.skipKeys,
     this.footerSpacer = const EzSeparator(),
@@ -208,6 +214,12 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
         // Navigation buttons
         ...navButtons(),
+
+        // Quick config
+        if (widget.quickConfigSpacer != null) ...<Widget>[
+          widget.quickConfigSpacer!,
+          const EzQuickConfig(),
+        ],
 
         // Feeling lucky
         if (widget.randomSpacer != null) ...<Widget>[
