@@ -218,7 +218,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         // Quick config
         if (widget.quickConfigSpacer != null) ...<Widget>[
           widget.quickConfigSpacer!,
-          const EzQuickConfig(),
+          EzQuickConfig(context: context),
         ],
 
         // Feeling lucky

@@ -591,6 +591,12 @@ abstract class EFUILang {
   /// **'Activate to show quick config options'**
   String get ssQuickConfigHint;
 
+  /// No description provided for @ssTryMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Try me'**
+  String get ssTryMe;
+
   /// No description provided for @ssRandom.
   ///
   /// In en, this message translates to:

@@ -111,6 +111,7 @@
   "ssQuickConfig": "Quick config",
   "ssQuickConfigHint": "Activate to show quick config options",
 
+  "ssTryMe": "Try me",
   "ssRandom": "Randomize",
   "ssRandomize": "Randomize {themeType} theme?",
   "ssAccessible": "Accessible controls",

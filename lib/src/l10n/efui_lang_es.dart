@@ -272,6 +272,9 @@ class EFUILangEs extends EFUILang {
       'Activar para mostrar opciones de configuración rápida';
 
   @override
+  String get ssTryMe => 'Pruébame';
+
+  @override
   String get ssRandom => 'Randomiser';
 
   @override

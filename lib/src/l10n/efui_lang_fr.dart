@@ -272,6 +272,9 @@ class EFUILangFr extends EFUILang {
       'Activer pour afficher les options de configuration rapide';
 
   @override
+  String get ssTryMe => 'Essayez-moi';
+
+  @override
   String get ssRandom => 'Randomiser';
 
   @override

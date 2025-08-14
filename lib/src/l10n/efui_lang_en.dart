@@ -270,6 +270,9 @@ class EFUILangEn extends EFUILang {
   String get ssQuickConfigHint => 'Activate to show quick config options';
 
   @override
+  String get ssTryMe => 'Try me';
+
+  @override
   String get ssRandom => 'Randomize';
 
   @override
@@ -783,6 +786,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssQuickConfigHint => 'Activate to show quick config options';
+
+  @override
+  String get ssTryMe => 'Try me';
 
   @override
   String get ssRandom => 'Randomize';
