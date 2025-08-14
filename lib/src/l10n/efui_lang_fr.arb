@@ -107,9 +107,18 @@
 
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
+  
+  "ssQuickConfig": "Configuration rapide",
+  "ssQuickConfigHint": "Activer pour afficher les options de configuration rapide",
 
+  "ssTryMe": "Essayez-moi",
   "ssRandom": "Randomiser",
   "ssRandomize": "Thème {themeType} aléatoire ?",
+  "ssAccessible": "Commandes accessibles",
+  "ssZeroStrain": "Zéro fatigue oculaire",
+  "ssVideoGame": "Mode jeu",
+  "ssChalkboard": "Tableau noir",
+  "ssFancyPants": "Pantalons élégants",
 
   "ssResetAll": "Réinitialiser tous les paramètres ?",
 

@@ -579,6 +579,18 @@ abstract class EFUILang {
   /// **'Activate to change the app language'**
   String get ssLangHint;
 
+  /// No description provided for @ssQuickConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick config'**
+  String get ssQuickConfig;
+
+  /// No description provided for @ssQuickConfigHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to show quick config options'**
+  String get ssQuickConfigHint;
+
   /// No description provided for @ssRandom.
   ///
   /// In en, this message translates to:
@@ -590,6 +602,36 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Randomize {themeType} theme?'**
   String ssRandomize(Object themeType);
+
+  /// No description provided for @ssAccessible.
+  ///
+  /// In en, this message translates to:
+  /// **'Accessible controls'**
+  String get ssAccessible;
+
+  /// No description provided for @ssZeroStrain.
+  ///
+  /// In en, this message translates to:
+  /// **'Zero eye strain'**
+  String get ssZeroStrain;
+
+  /// No description provided for @ssVideoGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Game mode'**
+  String get ssVideoGame;
+
+  /// No description provided for @ssChalkboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Chalkboard'**
+  String get ssChalkboard;
+
+  /// No description provided for @ssFancyPants.
+  ///
+  /// In en, this message translates to:
+  /// **'Fancy pants'**
+  String get ssFancyPants;
 
   /// No description provided for @ssResetAll.
   ///

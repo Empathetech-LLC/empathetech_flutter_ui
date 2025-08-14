@@ -265,12 +265,34 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
-  String get ssRandom => 'Aleatorizar';
+  String get ssQuickConfig => 'Configuración rápida';
+
+  @override
+  String get ssQuickConfigHint =>
+      'Activar para mostrar opciones de configuración rápida';
+
+  @override
+  String get ssRandom => 'Randomiser';
 
   @override
   String ssRandomize(Object themeType) {
-    return '¿Aleatorizar el tema $themeType?';
+    return 'Thème $themeType aléatoire ?';
   }
+
+  @override
+  String get ssAccessible => 'Controles accesibles';
+
+  @override
+  String get ssZeroStrain => 'Cero fatiga visual';
+
+  @override
+  String get ssVideoGame => 'Modo juego';
+
+  @override
+  String get ssChalkboard => 'Pizarra';
+
+  @override
+  String get ssFancyPants => 'Pantalones elegantes';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';

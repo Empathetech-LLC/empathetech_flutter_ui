@@ -264,12 +264,33 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
+  String get ssQuickConfig => 'Quick config';
+
+  @override
+  String get ssQuickConfigHint => 'Activate to show quick config options';
+
+  @override
   String get ssRandom => 'Randomize';
 
   @override
   String ssRandomize(Object themeType) {
     return 'Randomize $themeType theme?';
   }
+
+  @override
+  String get ssAccessible => 'Accessible controls';
+
+  @override
+  String get ssZeroStrain => 'Zero eye strain';
+
+  @override
+  String get ssVideoGame => 'Game mode';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
 
   @override
   String get ssResetAll => 'Reset all settings?';
@@ -758,12 +779,33 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
+  String get ssQuickConfig => 'Quick config';
+
+  @override
+  String get ssQuickConfigHint => 'Activate to show quick config options';
+
+  @override
   String get ssRandom => 'Randomize';
 
   @override
   String ssRandomize(Object themeType) {
     return 'Randomize $themeType theme?';
   }
+
+  @override
+  String get ssAccessible => 'Accessible controls';
+
+  @override
+  String get ssZeroStrain => 'Zero eye strain';
+
+  @override
+  String get ssVideoGame => 'Game mode';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
 
   @override
   String get ssResetAll => 'Reset all settings?';
