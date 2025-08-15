@@ -500,10 +500,10 @@ class EzQuickConfig extends StatelessWidget {
                 darkSecondaryContainerKey, empathEucalyptusDimHex);
             await EzConfig.setInt(darkOnSecondaryContainerKey, blackHex);
           } else {
-            await EzConfig.setInt(darkPrimaryKey, empathSandHex);
-            await EzConfig.setInt(darkOnPrimaryKey, blackHex);
-            await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
-            await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
+            await EzConfig.setInt(lightPrimaryKey, empathSandHex);
+            await EzConfig.setInt(lightOnPrimaryKey, blackHex);
+            await EzConfig.setInt(lightPrimaryContainerKey, empathSandDimHex);
+            await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
 
             await EzConfig.setInt(lightSecondaryKey, empathPurpleHex);
             await EzConfig.setInt(lightOnSecondaryKey, whiteHex);
