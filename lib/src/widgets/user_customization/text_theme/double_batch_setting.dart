@@ -6,10 +6,24 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzFontDoubleBatchSetting extends StatefulWidget {
+class EzFontDoubleBatchSetting extends StatelessWidget {
+  /// Required for max/min awareness
+  final EzDisplayStyleProvider displayProvider;
+
+  /// Required for max/min awareness
+  final EzHeadlineStyleProvider headlineProvider;
+
+  /// Required for max/min awareness
+  final EzTitleStyleProvider titleProvider;
+
+  /// Required for max/min awareness
+  final EzBodyStyleProvider bodyProvider;
+
+  /// Required for max/min awareness
+  final EzLabelStyleProvider labelProvider;
+
   /// Amount to scale on each click
   final double delta;
 
@@ -19,23 +33,18 @@ class EzFontDoubleBatchSetting extends StatefulWidget {
   /// Must have each iteration of [EzTextStyleProvider] in this parent's widget tree
   /// Updates all [TextStyle.fontSize]s at once by [delta]
   /// Follows [EzConfig] limits: [minDisplay], [minHeadline], [maxTitle], etc.
-  const EzFontDoubleBatchSetting({super.key, this.delta = 0.1, this.iconSize});
+  EzFontDoubleBatchSetting({
+    super.key,
+    required this.displayProvider,
+    required this.headlineProvider,
+    required this.titleProvider,
+    required this.bodyProvider,
+    required this.labelProvider,
+    this.delta = 0.1,
+    this.iconSize,
+  });
 
-  @override
-  State<EzFontDoubleBatchSetting> createState() =>
-      _FontDoubleBatchSettingState();
-}
-
-class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
-  // Gather the fixed theme data //
-
-  late final EFUILang l10n = ezL10n(context);
-
-  late final EzDisplayStyleProvider displayProvider;
-  late final EzHeadlineStyleProvider headlineProvider;
-  late final EzTitleStyleProvider titleProvider;
-  late final EzBodyStyleProvider bodyProvider;
-  late final EzLabelStyleProvider labelProvider;
+  // Define the build data //
 
   static const List<String> keys = <String>[
     displayFontSizeKey,
@@ -45,15 +54,11 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
     labelFontSizeKey,
   ];
 
-  late final EzSpacer pMSpacer = EzMargin(vertical: false);
-
-  // Define the build data //
-
-  late bool atMax = fontSizeMaxes.entries.every(
+  final bool atMax = fontSizeMaxes.entries.every(
     (MapEntry<String, double> max) => max.value == EzConfig.get(max.key),
   );
 
-  late bool atMin = fontSizeMins.entries.every(
+  final bool atMin = fontSizeMins.entries.every(
     (MapEntry<String, double> min) => min.value == EzConfig.get(min.key),
   );
 
@@ -76,23 +81,17 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
     }
   }
 
-  // Initialize the build //
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    displayProvider = context.watch<EzDisplayStyleProvider>();
-    headlineProvider = context.watch<EzHeadlineStyleProvider>();
-    titleProvider = context.watch<EzTitleStyleProvider>();
-    bodyProvider = context.watch<EzBodyStyleProvider>();
-    labelProvider = context.watch<EzLabelStyleProvider>();
-  }
-
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final EzSpacer pMSpacer = EzMargin(vertical: false);
+
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    // Return the build //
+
+    final EFUILang l10n = ezL10n(context);
 
     return Tooltip(
       message: l10n.tsFontSize,
@@ -104,7 +103,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               ? EzIconButton(
                   enabled: false,
                   tooltip: l10n.gMinimum,
-                  iconSize: widget.iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     PlatformIcons(context).remove,
                     color: colorScheme.outline,
@@ -119,7 +118,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                           provider.value.fontSize ?? EzConfig.get(key);
 
                       if (currSize != fontSizeMins[key]) {
-                        final double newSize = currSize * (1 - widget.delta);
+                        final double newSize = currSize * (1 - delta);
                         final double sizeLimit = fontSizeMins[key]!;
 
                         if (newSize >= sizeLimit) {
@@ -131,10 +130,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                         }
                       }
                     }
-                    setState(() {});
                   },
                   tooltip: '${l10n.gDecrease} ${l10n.tsFontSize.toLowerCase()}',
-                  iconSize: widget.iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).remove),
                 ),
           pMSpacer,
@@ -142,7 +140,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
           // Core
           Icon(
             Icons.text_fields_sharp,
-            size: widget.iconSize ?? titleProvider.value.fontSize,
+            size: iconSize ?? titleProvider.value.fontSize,
             color: colorScheme.onSurface,
           ),
           pMSpacer,
@@ -152,7 +150,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
               ? EzIconButton(
                   enabled: false,
                   tooltip: l10n.gMaximum,
-                  iconSize: widget.iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(
                     PlatformIcons(context).add,
                     color: colorScheme.outline,
@@ -167,7 +165,7 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                           provider.value.fontSize ?? EzConfig.get(key);
 
                       if (currSize != fontSizeMaxes[key]) {
-                        final double newSize = currSize * (1 + widget.delta);
+                        final double newSize = currSize * (1 + delta);
                         final double sizeLimit = fontSizeMaxes[key]!;
 
                         if (newSize <= sizeLimit) {
@@ -179,10 +177,9 @@ class _FontDoubleBatchSettingState extends State<EzFontDoubleBatchSetting> {
                         }
                       }
                     }
-                    setState(() {});
                   },
                   tooltip: '${l10n.gIncrease} ${l10n.tsFontSize.toLowerCase()}',
-                  iconSize: widget.iconSize ?? titleProvider.value.fontSize,
+                  iconSize: iconSize ?? titleProvider.value.fontSize,
                   icon: Icon(PlatformIcons(context).add),
                 ),
         ],
