@@ -430,7 +430,11 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               padding: wrapPadding,
               child: EzTextBackground(
                 EzFontDoubleBatchSetting(
-                  key: UniqueKey(),
+                  displayProvider: widget.displayProvider,
+                  headlineProvider: widget.headlineProvider,
+                  titleProvider: widget.titleProvider,
+                  bodyProvider: widget.bodyProvider,
+                  labelProvider: widget.labelProvider,
                   iconSize: currIconSize,
                 ),
                 backgroundColor: backgroundColor,
