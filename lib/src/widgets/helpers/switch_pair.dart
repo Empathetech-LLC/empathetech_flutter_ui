@@ -98,8 +98,8 @@ class EzSwitchPair extends StatefulWidget {
   /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
   final double? scale;
 
-  /// [Switch.activeColor] passthrough
-  final Color? activeColor;
+  /// [Switch.activeThumbColor] passthrough
+  final Color? activeThumbColor;
 
   /// [Switch.activeTrackColor] passthrough
   final Color? activeTrackColor;
@@ -188,7 +188,7 @@ class EzSwitchPair extends StatefulWidget {
     this.canChange,
     this.onChangedCallback,
     this.scale,
-    this.activeColor,
+    this.activeThumbColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
     this.inactiveTrackColor,
@@ -279,7 +279,7 @@ class _EzSwitchPairState extends State<EzSwitchPair> {
           child: Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: widget.activeColor,
+            activeThumbColor: widget.activeThumbColor,
             activeTrackColor: widget.activeTrackColor,
             inactiveThumbColor: widget.inactiveThumbColor,
             inactiveTrackColor: widget.inactiveTrackColor,
