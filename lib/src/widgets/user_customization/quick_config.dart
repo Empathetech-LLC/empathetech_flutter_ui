@@ -439,23 +439,24 @@ class EzChalkboardConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    const int chalkboardGreenHex = 0xFF264941;
+    const Color chalkboardGreen = Color(chalkboardGreenHex);
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
       child: EzElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.surface,
-          foregroundColor: colorScheme.onSurface,
-          disabledForegroundColor: colorScheme.outline,
-          iconColor: colorScheme.primary,
-          disabledIconColor: colorScheme.outline,
-          overlayColor: colorScheme.primary,
-          side: BorderSide(color: colorScheme.primaryContainer),
-          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
+          backgroundColor: chalkboardGreen,
+          foregroundColor: Colors.white,
+          iconColor: empathSand,
+          overlayColor: empathSand,
+          side: const BorderSide(color: empathSandDim),
+          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontFamily: fingerPaint,
+                fontStyle: FontStyle.normal,
+              ),
         ),
         onPressed: () async {
           // Reset (conditional) //
@@ -493,7 +494,6 @@ class EzChalkboardConfig extends StatelessWidget {
 
           // Update colors //
 
-          const int chalkboardGreen = 0xFF264941;
           if (isDark) {
             await storeColorScheme(
               colorScheme: ezHighContrastDark,
@@ -506,9 +506,9 @@ class EzChalkboardConfig extends StatelessWidget {
             await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
             await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
             await EzConfig.setInt(darkShadowKey, transparentHex);
-            await EzConfig.setInt(darkSurfaceKey, chalkboardGreen);
-            await EzConfig.setInt(darkSurfaceContainerKey, chalkboardGreen);
-            await EzConfig.setInt(darkSurfaceDimKey, chalkboardGreen);
+            await EzConfig.setInt(darkSurfaceKey, chalkboardGreenHex);
+            await EzConfig.setInt(darkSurfaceContainerKey, chalkboardGreenHex);
+            await EzConfig.setInt(darkSurfaceDimKey, chalkboardGreenHex);
           } else {
             await storeColorScheme(
               colorScheme: ezHighContrastDark,
@@ -521,9 +521,9 @@ class EzChalkboardConfig extends StatelessWidget {
             await EzConfig.setInt(lightPrimaryContainerKey, empathSandDimHex);
             await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
             await EzConfig.setInt(lightShadowKey, transparentHex);
-            await EzConfig.setInt(lightSurfaceKey, chalkboardGreen);
-            await EzConfig.setInt(lightSurfaceContainerKey, chalkboardGreen);
-            await EzConfig.setInt(lightSurfaceDimKey, chalkboardGreen);
+            await EzConfig.setInt(lightSurfaceKey, chalkboardGreenHex);
+            await EzConfig.setInt(lightSurfaceContainerKey, chalkboardGreenHex);
+            await EzConfig.setInt(lightSurfaceDimKey, chalkboardGreenHex);
           }
 
           // Callback //
@@ -550,24 +550,25 @@ class EzFancyPantsConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final EFUILang l10n = ezL10n(context);
+
+    final TextStyle? localBody =
+        Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontFamily: alexBrush,
+              fontSize: 24.0,
+              fontStyle: FontStyle.normal,
+            );
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
       child: EzElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.surface,
-          foregroundColor: colorScheme.onSurface,
-          disabledForegroundColor: colorScheme.outline,
-          iconColor: colorScheme.primary,
-          disabledIconColor: colorScheme.outline,
-          overlayColor: colorScheme.primary,
-          side: BorderSide(color: colorScheme.primaryContainer),
-          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
+          iconColor: empathSand,
+          overlayColor: empathSand,
+          side: const BorderSide(color: empathSandDim),
+          textStyle: localBody,
+          padding: EdgeInsets.all(onMobile ? 15 : 17.5),
         ),
         onPressed: () async {
           // Reset (conditional) //
@@ -609,10 +610,7 @@ class EzFancyPantsConfig extends StatelessWidget {
 
           // Update layout //
 
-          await EzConfig.setDouble(
-            paddingKey,
-            (onMobile ? defaultMobilePadding : defaultDesktopPadding) - 2.5,
-          );
+          await EzConfig.setDouble(paddingKey, onMobile ? 15 : 17.5);
 
           // Update colors //
 
