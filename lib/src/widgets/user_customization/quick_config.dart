@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-// TODO: l10n things
-
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -98,7 +96,7 @@ class EzQuickConfig extends StatelessWidget {
         },
       ),
       icon: EzIcon(Icons.save),
-      label: 'Load config',
+      label: ezL10n(context).ssLoadConfig,
     );
   }
 }
@@ -301,7 +299,7 @@ class EzLowVisionConfig extends StatelessWidget {
 
           onComplete?.call();
         },
-        text: 'Low vision', // TODO: Is this still in dotnet l10n?
+        text: l10n.ssZeroStrain,
       ),
     );
   }
@@ -419,7 +417,7 @@ class EzVideoGameConfig extends StatelessWidget {
 
           onComplete?.call();
         },
-        text: 'Video game',
+        text: l10n.ssVideoGame,
       ),
     );
   }
@@ -530,7 +528,7 @@ class EzChalkboardConfig extends StatelessWidget {
 
           onComplete?.call();
         },
-        text: 'Chalkboard',
+        text: l10n.ssChalkboard,
       ),
     );
   }
@@ -642,7 +640,7 @@ class EzFancyPantsConfig extends StatelessWidget {
 
           onComplete?.call();
         },
-        text: 'Fancy pants',
+        text: l10n.ssFancyPants,
       ),
     );
   }
