@@ -138,16 +138,16 @@ class EzLowMobilityConfig extends StatelessWidget {
           }
 
           // Update text
-          await EzConfig.setDouble(iconSizeKey, defaultIconSize * 1.5);
+          await EzConfig.setDouble(iconSizeKey, 30);
 
           // Update layout
-          await EzConfig.setDouble(marginKey, defaultMargin * 1.5);
+          await EzConfig.setDouble(marginKey, 15);
           if (onMobile) {
-            await EzConfig.setDouble(paddingKey, defaultMobilePadding * 1.5);
-            await EzConfig.setDouble(spacingKey, defaultMobileSpacing * 2.0);
+            await EzConfig.setDouble(paddingKey, 25);
+            await EzConfig.setDouble(spacingKey, 50);
           } else {
-            await EzConfig.setDouble(paddingKey, defaultDesktopPadding * 1.5);
-            await EzConfig.setDouble(spacingKey, defaultDesktopSpacing * 2.0);
+            await EzConfig.setDouble(paddingKey, 30);
+            await EzConfig.setDouble(spacingKey, 60);
           }
           await EzConfig.setBool(hideScrollKey, false);
 
@@ -179,13 +179,13 @@ class EzLowVisionConfig extends StatelessWidget {
     final TextStyle? localBody =
         Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontFamily: atkinsonHyperlegible,
-              fontSize: defaultBodySize * 1.2,
+              fontSize: 20,
               fontWeight: FontWeight.normal,
               fontStyle: FontStyle.normal,
               decoration: TextDecoration.none,
-              height: defaultFontHeight * 1.2,
-              letterSpacing: defaultLetterSpacing * 1.1,
-              wordSpacing: defaultWordSpacing * 1.2,
+              height: 1.75,
+              letterSpacing: 0.30,
+              wordSpacing: 1.25,
             );
 
     return Tooltip(
@@ -221,125 +221,65 @@ class EzLowVisionConfig extends StatelessWidget {
 
           // Display
           await EzConfig.setString(displayFontFamilyKey, atkinsonHyperlegible);
-          await EzConfig.setDouble(
-            displayFontSizeKey,
-            defaultDisplaySize * 1.2,
-          );
+          await EzConfig.setDouble(displayFontSizeKey, 50);
           await EzConfig.setBool(displayBoldedKey, false);
           await EzConfig.setBool(displayItalicizedKey, false);
           await EzConfig.setBool(displayUnderlinedKey, false);
-          await EzConfig.setDouble(
-            displayFontHeightKey,
-            defaultFontHeight,
-          );
-          await EzConfig.setDouble(
-            displayLetterSpacingKey,
-            defaultLetterSpacing * 1.1,
-          );
-          await EzConfig.setDouble(
-            displayWordSpacingKey,
-            defaultWordSpacing * 1.2,
-          );
+          await EzConfig.setDouble(displayFontHeightKey, 1.5);
+          await EzConfig.setDouble(displayLetterSpacingKey, 0.30);
+          await EzConfig.setDouble(displayWordSpacingKey, 1.25);
 
           // Headline
           await EzConfig.setString(headlineFontFamilyKey, atkinsonHyperlegible);
-          await EzConfig.setDouble(
-            headlineFontSizeKey,
-            defaultHeadlineSize * 1.2,
-          );
+          await EzConfig.setDouble(headlineFontSizeKey, 38);
           await EzConfig.setBool(headlineBoldedKey, false);
           await EzConfig.setBool(headlineItalicizedKey, false);
           await EzConfig.setBool(headlineUnderlinedKey, false);
-          await EzConfig.setDouble(
-            headlineFontHeightKey,
-            defaultFontHeight * 1.1,
-          );
-          await EzConfig.setDouble(
-            headlineLetterSpacingKey,
-            defaultLetterSpacing * 1.1,
-          );
-          await EzConfig.setDouble(
-            headlineWordSpacingKey,
-            defaultWordSpacing * 1.2,
-          );
+          await EzConfig.setDouble(headlineFontHeightKey, 1.625);
+          await EzConfig.setDouble(headlineLetterSpacingKey, 0.30);
+          await EzConfig.setDouble(headlineWordSpacingKey, 1.25);
 
           // Title
           await EzConfig.setString(titleFontFamilyKey, atkinsonHyperlegible);
-          await EzConfig.setDouble(
-            titleFontSizeKey,
-            defaultTitleSize * 1.2,
-          );
-          await EzConfig.setBool(titleBoldedKey, true);
+          await EzConfig.setDouble(titleFontSizeKey, 26);
+          await EzConfig.setBool(titleBoldedKey, false);
           await EzConfig.setBool(titleItalicizedKey, false);
-          await EzConfig.setBool(titleUnderlinedKey, false);
-          await EzConfig.setDouble(
-            titleFontHeightKey,
-            defaultFontHeight * 1.2,
-          );
-          await EzConfig.setDouble(
-            titleLetterSpacingKey,
-            defaultLetterSpacing * 1.1,
-          );
-          await EzConfig.setDouble(
-            titleWordSpacingKey,
-            defaultWordSpacing * 1.2,
-          );
+          await EzConfig.setBool(titleUnderlinedKey, true);
+          await EzConfig.setDouble(titleFontHeightKey, 1.75);
+          await EzConfig.setDouble(titleLetterSpacingKey, 0.30);
+          await EzConfig.setDouble(titleWordSpacingKey, 1.25);
 
           // Body
           await EzConfig.setString(bodyFontFamilyKey, atkinsonHyperlegible);
-          await EzConfig.setDouble(
-            bodyFontSizeKey,
-            defaultBodySize * 1.2,
-          );
+          await EzConfig.setDouble(bodyFontSizeKey, 20);
           await EzConfig.setBool(bodyBoldedKey, false);
           await EzConfig.setBool(bodyItalicizedKey, false);
           await EzConfig.setBool(bodyUnderlinedKey, false);
-          await EzConfig.setDouble(
-            bodyFontHeightKey,
-            defaultFontHeight * 1.2,
-          );
-          await EzConfig.setDouble(
-            bodyLetterSpacingKey,
-            defaultLetterSpacing * 1.1,
-          );
-          await EzConfig.setDouble(
-            bodyWordSpacingKey,
-            defaultWordSpacing * 1.2,
-          );
+          await EzConfig.setDouble(bodyFontHeightKey, 1.75);
+          await EzConfig.setDouble(bodyLetterSpacingKey, 0.30);
+          await EzConfig.setDouble(bodyWordSpacingKey, 1.25);
 
           // Label
           await EzConfig.setString(labelFontFamilyKey, atkinsonHyperlegible);
-          await EzConfig.setDouble(
-            labelFontSizeKey,
-            defaultLabelSize * 1.2,
-          );
+          await EzConfig.setDouble(labelFontSizeKey, 16);
           await EzConfig.setBool(labelBoldedKey, false);
           await EzConfig.setBool(labelItalicizedKey, false);
           await EzConfig.setBool(labelUnderlinedKey, false);
-          await EzConfig.setDouble(
-            labelFontHeightKey,
-            defaultFontHeight * 1.2,
-          );
-          await EzConfig.setDouble(
-            labelLetterSpacingKey,
-            defaultLetterSpacing * 1.1,
-          );
-          await EzConfig.setDouble(
-            labelWordSpacingKey,
-            defaultWordSpacing * 1.2,
-          );
+          await EzConfig.setDouble(labelFontHeightKey, 1.75);
+          await EzConfig.setDouble(labelLetterSpacingKey, 0.30);
+          await EzConfig.setDouble(labelWordSpacingKey, 1.25);
 
-          await EzConfig.setDouble(iconSizeKey, defaultIconSize * 1.1);
+          await EzConfig.setDouble(iconSizeKey, 22.0);
 
           // Update layout //
 
-          await EzConfig.setDouble(marginKey, defaultMargin * 1.2);
+          await EzConfig.setDouble(marginKey, 12.5);
           if (onMobile) {
-            await EzConfig.setDouble(paddingKey, defaultMobilePadding);
-            await EzConfig.setDouble(spacingKey, defaultMobileSpacing * 1.2);
+            await EzConfig.setDouble(paddingKey, 17.5);
+            await EzConfig.setDouble(spacingKey, 30);
           } else {
-            await EzConfig.setDouble(paddingKey, defaultDesktopPadding);
-            await EzConfig.setDouble(spacingKey, defaultDesktopSpacing * 1.2);
+            await EzConfig.setDouble(paddingKey, 20);
+            await EzConfig.setDouble(spacingKey, 35);
           }
           await EzConfig.setBool(hideScrollKey, true);
 
@@ -382,24 +322,34 @@ class EzVideoGameConfig extends StatelessWidget {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final TextStyle? localBody =
+        Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontFamily: pressStart2P,
+              fontSize: 14.0,
+              fontWeight: FontWeight.normal,
+              fontStyle: FontStyle.normal,
+            );
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
       child: EzElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.surface,
-          foregroundColor: colorScheme.onSurface,
-          disabledForegroundColor: colorScheme.outline,
-          iconColor: colorScheme.primary,
-          disabledIconColor: colorScheme.outline,
-          overlayColor: colorScheme.primary,
-          side: BorderSide(color: colorScheme.primaryContainer),
-          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
-        ),
+        style: isDark
+            ? ElevatedButton.styleFrom(
+                iconColor: Colors.white,
+                overlayColor: Colors.white,
+                side: const BorderSide(color: Colors.white),
+                textStyle: localBody,
+                padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
+              )
+            : ElevatedButton.styleFrom(
+                iconColor: Colors.black,
+                overlayColor: Colors.black,
+                side: const BorderSide(color: Colors.black),
+                textStyle: localBody,
+                padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
+              ),
         onPressed: () async {
           // Reset (conditional) //
 
@@ -456,7 +406,7 @@ class EzVideoGameConfig extends StatelessWidget {
             await EzConfig.setDouble(spacingKey, 35.0);
           }
 
-          await EzConfig.setDouble(iconSizeKey, defaultIconSize * 1.1);
+          await EzConfig.setDouble(iconSizeKey, 22.0);
 
           // Update colors //
 
