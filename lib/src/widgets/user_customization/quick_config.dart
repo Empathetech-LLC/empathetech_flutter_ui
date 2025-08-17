@@ -10,10 +10,6 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzQuickConfig extends StatelessWidget {
-  /// Context passthrough
-  /// So this can be Stateless, and the buttons can be accessed externally
-  final BuildContext context;
-
   /// Toggle the low mobility quick config
   final bool lowMobility;
 
@@ -32,33 +28,104 @@ class EzQuickConfig extends StatelessWidget {
   /// Reset the theme before applying the quick config
   final bool resetFirst;
 
+  /// Optional callback for when the quick config is completed
+  final void Function()? onComplete;
+
   /// [EzElevatedIconButton] for updating the current [Locale]
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
   const EzQuickConfig({
     super.key,
-    required this.context,
     this.lowMobility = true,
     this.lowVision = true,
     this.videoGame = true,
     this.chalkboard = true,
     this.fancyPants = true,
     this.resetFirst = true,
+    this.onComplete,
   });
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> reloadSnack(
-    String message,
-  ) =>
-      ezSnackBar(context: context, message: message);
+  // Return the build //
 
-  Widget get lowMobilityConfig {
-    final EFUILang l10n = ezL10n(context);
+  @override
+  Widget build(BuildContext context) {
+    final EdgeInsets modalPadding = EzInsets.col(EzConfig.get(spacingKey));
+
+    return EzElevatedIconButton(
+      onPressed: () => showModalBottomSheet(
+        context: context,
+        builder: (BuildContext modalContext) {
+          void closeModal() => Navigator.pop(modalContext);
+
+          return EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Low mobility
+              if (lowMobility)
+                Padding(
+                  padding: modalPadding,
+                  child: EzLowMobilityConfig(onComplete: closeModal),
+                ),
+
+              // Low vision
+              if (lowVision)
+                Padding(
+                  padding: modalPadding,
+                  child: EzLowVisionConfig(onComplete: closeModal),
+                ),
+
+              // Video game
+              if (videoGame)
+                Padding(
+                  padding: modalPadding,
+                  child: EzVideoGameConfig(onComplete: closeModal),
+                ),
+
+              // Chalkboard
+              if (chalkboard)
+                Padding(
+                  padding: modalPadding,
+                  child: EzChalkboardConfig(onComplete: closeModal),
+                ),
+
+              // Fancy pants
+              if (fancyPants)
+                Padding(
+                  padding: modalPadding,
+                  child: EzFancyPantsConfig(onComplete: closeModal),
+                ),
+            ],
+          );
+        },
+      ),
+      icon: EzIcon(Icons.save),
+      label: 'Load config',
+    );
+  }
+}
+
+class EzLowMobilityConfig extends StatelessWidget {
+  final bool resetFirst;
+  final void Function()? onComplete;
+
+  const EzLowMobilityConfig({
+    super.key,
+    this.resetFirst = true,
+    this.onComplete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = ezL10n(context);
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
-      child: EzTextIconButton(
+      child: EzElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(EzConfig.getDefault(paddingKey) * 1.5),
+        ),
         onPressed: () async {
           // Reset (conditional)
           if (resetFirst) {
@@ -84,26 +151,63 @@ class EzQuickConfig extends StatelessWidget {
           }
           await EzConfig.setBool(hideScrollKey, false);
 
-          // Prompt for reload
-          reloadSnack(l10n.ssSettingsGuideWeb.split('\n')[0]);
+          // Callback
+          onComplete?.call();
         },
-        icon: EzIcon(Icons.touch_app),
-        label: l10n.ssAccessible,
+        text: l10n.ssAccessible,
       ),
     );
   }
+}
 
-  Widget get lowVisionConfig {
-    final EFUILang l10n = ezL10n(context);
+class EzLowVisionConfig extends StatelessWidget {
+  final bool resetFirst;
+  final void Function()? onComplete;
+
+  const EzLowVisionConfig({
+    super.key,
+    this.resetFirst = true,
+    this.onComplete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = ezL10n(context);
+
+    final TextStyle? localBody =
+        Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontFamily: atkinsonHyperlegible,
+              fontSize: defaultBodySize * 1.2,
+              fontWeight: FontWeight.normal,
+              fontStyle: FontStyle.normal,
+              decoration: TextDecoration.none,
+              height: defaultFontHeight * 1.2,
+              letterSpacing: defaultLetterSpacing * 1.1,
+              wordSpacing: defaultWordSpacing * 1.2,
+            );
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
-      child: EzTextIconButton(
+      child: EzElevatedButton(
+        style: isDark
+            ? ElevatedButton.styleFrom(
+                iconColor: Colors.white,
+                overlayColor: Colors.white,
+                side: const BorderSide(color: Colors.white),
+                textStyle: localBody,
+              )
+            : ElevatedButton.styleFrom(
+                iconColor: Colors.black,
+                overlayColor: Colors.black,
+                side: const BorderSide(color: Colors.black),
+                textStyle: localBody,
+              ),
         onPressed: () async {
           // Reset (conditional) //
+
           if (resetFirst) {
             await EzConfig.removeKeys(textStyleKeys.keys.toSet());
             await EzConfig.removeKeys(layoutKeys.keys.toSet());
@@ -253,25 +357,49 @@ class EzQuickConfig extends StatelessWidget {
             );
           }
 
-          // Prompt for reload //
+          // Callback //
 
-          reloadSnack(l10n.ssSettingsGuideWeb.split('\n')[0]);
+          onComplete?.call();
         },
-        icon: EzIcon(Icons.contrast),
-        label: 'Low vision', // Is this still in dotnet l10n?
+        text: 'Low vision', // TODO: Is this still in dotnet l10n?
       ),
     );
   }
+}
 
-  Widget get videoGameConfig {
-    final EFUILang l10n = ezL10n(context);
+class EzVideoGameConfig extends StatelessWidget {
+  final bool resetFirst;
+  final void Function()? onComplete;
+
+  const EzVideoGameConfig({
+    super.key,
+    this.resetFirst = true,
+    this.onComplete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = ezL10n(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
-      child: EzTextIconButton(
+      child: EzElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.surface,
+          foregroundColor: colorScheme.onSurface,
+          disabledForegroundColor: colorScheme.outline,
+          iconColor: colorScheme.primary,
+          disabledIconColor: colorScheme.outline,
+          overlayColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primaryContainer),
+          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
+        ),
         onPressed: () async {
           // Reset (conditional) //
 
@@ -337,26 +465,51 @@ class EzQuickConfig extends StatelessWidget {
             brightness: isDark ? Brightness.dark : Brightness.light,
           );
 
-          // Prompt for reload //
+          // Callback //
 
-          reloadSnack(l10n.ssSettingsGuideWeb.split('\n')[0]);
+          onComplete?.call();
         },
-        icon: EzIcon(Icons.contrast),
-        label: 'Video game',
+        text: 'Video game',
       ),
     );
   }
+}
 
-  Widget get chalkboardConfig {
-    final EFUILang l10n = ezL10n(context);
+class EzChalkboardConfig extends StatelessWidget {
+  final bool resetFirst;
+  final void Function()? onComplete;
+
+  const EzChalkboardConfig({
+    super.key,
+    this.resetFirst = true,
+    this.onComplete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final bool isDark = isDarkTheme(context);
+    final EFUILang l10n = ezL10n(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
-      child: EzTextIconButton(
+      child: EzElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.surface,
+          foregroundColor: colorScheme.onSurface,
+          disabledForegroundColor: colorScheme.outline,
+          iconColor: colorScheme.primary,
+          disabledIconColor: colorScheme.outline,
+          overlayColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primaryContainer),
+          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
+        ),
         onPressed: () async {
           // Reset (conditional) //
+
           if (resetFirst) {
             await EzConfig.removeKeys(textStyleKeys.keys.toSet());
             await EzConfig.removeKeys(layoutKeys.keys.toSet());
@@ -423,24 +576,49 @@ class EzQuickConfig extends StatelessWidget {
             await EzConfig.setInt(lightSurfaceDimKey, chalkboardGreen);
           }
 
-          // Prompt for reload
-          reloadSnack(l10n.ssSettingsGuideWeb.split('\n')[0]);
+          // Callback //
+
+          onComplete?.call();
         },
-        icon: EzIcon(Icons.contrast),
-        label: 'Chalkboard',
+        text: 'Chalkboard',
       ),
     );
   }
+}
 
-  Widget get fancyPantsConfig {
-    final EFUILang l10n = ezL10n(context);
+class EzFancyPantsConfig extends StatelessWidget {
+  final bool resetFirst;
+  final void Function()? onComplete;
+
+  const EzFancyPantsConfig({
+    super.key,
+    this.resetFirst = true,
+    this.onComplete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final EFUILang l10n = ezL10n(context);
 
     return Tooltip(
       message: l10n.ssTryMe,
       excludeFromSemantics: true,
-      child: EzTextIconButton(
+      child: EzElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.surface,
+          foregroundColor: colorScheme.onSurface,
+          disabledForegroundColor: colorScheme.outline,
+          iconColor: colorScheme.primary,
+          disabledIconColor: colorScheme.outline,
+          overlayColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primaryContainer),
+          textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(),
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(EzConfig.get(paddingKey)),
+        ),
         onPressed: () async {
           // Reset (conditional) //
 
@@ -512,57 +690,12 @@ class EzQuickConfig extends StatelessWidget {
             await EzConfig.setInt(lightOnSecondaryContainerKey, whiteHex);
           }
 
-          // Prompt for reload //
+          // Callback //
 
-          reloadSnack(l10n.ssSettingsGuideWeb.split('\n')[0]);
+          onComplete?.call();
         },
-        icon: EzIcon(Icons.contrast),
-        label: 'Fancy pants',
+        text: 'Fancy pants',
       ),
-    );
-  }
-
-  // Return the build //
-
-  @override
-  Widget build(BuildContext context) {
-    final EdgeInsets modalPadding = EzInsets.col(EzConfig.get(spacingKey));
-
-    return EzElevatedIconButton(
-      onPressed: () => showModalBottomSheet(
-        context: context,
-        builder: (BuildContext modalContext) => EzScrollView(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Low mobility
-            if (lowMobility) ...<Widget>[
-              Padding(padding: modalPadding, child: lowMobilityConfig),
-            ],
-
-            // Low vision
-            if (lowVision) ...<Widget>[
-              Padding(padding: modalPadding, child: lowVisionConfig),
-            ],
-
-            // Video game
-            if (videoGame) ...<Widget>[
-              Padding(padding: modalPadding, child: videoGameConfig),
-            ],
-
-            // Chalkboard
-            if (chalkboard) ...<Widget>[
-              Padding(padding: modalPadding, child: chalkboardConfig),
-            ],
-
-            // Fancy pants
-            if (fancyPants) ...<Widget>[
-              Padding(padding: modalPadding, child: fancyPantsConfig),
-            ],
-          ],
-        ),
-      ),
-      icon: EzIcon(Icons.save),
-      label: 'Load config',
     );
   }
 }
