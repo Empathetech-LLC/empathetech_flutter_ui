@@ -108,15 +108,15 @@
   "ssLanguage": "Idioma",
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
-  "ssQuickConfig": "Configuración rápida",
-  "ssQuickConfigHint": "Activar para mostrar opciones de configuración rápida",
+  "ssLoadConfig": "Cargar configuración",
+  "ssLoadConfigHint": "Activar para mostrar ajustes preestablecidos",
 
   "ssTryMe": "Pruébame",
   "ssRandom": "Randomiser",
   "ssRandomize": "Thème {themeType} aléatoire ?",
   "ssAccessible": "Controles accesibles",
   "ssZeroStrain": "Cero fatiga visual",
-  "ssVideoGame": "Modo juego",
+  "ssVideoGame": "Videojuego",
   "ssChalkboard": "Pizarra",
   "ssFancyPants": "Pantalones elegantes",
 

@@ -264,10 +264,10 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssQuickConfig => 'Quick config';
+  String get ssLoadConfig => 'Load config';
 
   @override
-  String get ssQuickConfigHint => 'Activate to show quick config options';
+  String get ssLoadConfigHint => 'Activate to show presets';
 
   @override
   String get ssTryMe => 'Try me';
@@ -287,7 +287,7 @@ class EFUILangEn extends EFUILang {
   String get ssZeroStrain => 'Zero eye strain';
 
   @override
-  String get ssVideoGame => 'Game mode';
+  String get ssVideoGame => 'Video game';
 
   @override
   String get ssChalkboard => 'Chalkboard';
@@ -782,10 +782,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssQuickConfig => 'Quick config';
+  String get ssLoadConfig => 'Load config';
 
   @override
-  String get ssQuickConfigHint => 'Activate to show quick config options';
+  String get ssLoadConfigHint => 'Activate to show presets';
 
   @override
   String get ssTryMe => 'Try me';
@@ -805,7 +805,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssZeroStrain => 'Zero eye strain';
 
   @override
-  String get ssVideoGame => 'Game mode';
+  String get ssVideoGame => 'Video game';
 
   @override
   String get ssChalkboard => 'Chalkboard';

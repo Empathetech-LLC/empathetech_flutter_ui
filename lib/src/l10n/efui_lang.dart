@@ -579,17 +579,17 @@ abstract class EFUILang {
   /// **'Activate to change the app language'**
   String get ssLangHint;
 
-  /// No description provided for @ssQuickConfig.
+  /// No description provided for @ssLoadConfig.
   ///
   /// In en, this message translates to:
-  /// **'Quick config'**
-  String get ssQuickConfig;
+  /// **'Load config'**
+  String get ssLoadConfig;
 
-  /// No description provided for @ssQuickConfigHint.
+  /// No description provided for @ssLoadConfigHint.
   ///
   /// In en, this message translates to:
-  /// **'Activate to show quick config options'**
-  String get ssQuickConfigHint;
+  /// **'Activate to show presets'**
+  String get ssLoadConfigHint;
 
   /// No description provided for @ssTryMe.
   ///
@@ -624,7 +624,7 @@ abstract class EFUILang {
   /// No description provided for @ssVideoGame.
   ///
   /// In en, this message translates to:
-  /// **'Game mode'**
+  /// **'Video game'**
   String get ssVideoGame;
 
   /// No description provided for @ssChalkboard.

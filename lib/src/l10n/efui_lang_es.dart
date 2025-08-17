@@ -265,11 +265,10 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
-  String get ssQuickConfig => 'Configuración rápida';
+  String get ssLoadConfig => 'Cargar configuración';
 
   @override
-  String get ssQuickConfigHint =>
-      'Activar para mostrar opciones de configuración rápida';
+  String get ssLoadConfigHint => 'Activar para mostrar ajustes preestablecidos';
 
   @override
   String get ssTryMe => 'Pruébame';
@@ -289,7 +288,7 @@ class EFUILangEs extends EFUILang {
   String get ssZeroStrain => 'Cero fatiga visual';
 
   @override
-  String get ssVideoGame => 'Modo juego';
+  String get ssVideoGame => 'Videojuego';
 
   @override
   String get ssChalkboard => 'Pizarra';

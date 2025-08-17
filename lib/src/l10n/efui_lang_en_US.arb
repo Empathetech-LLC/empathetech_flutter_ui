@@ -108,15 +108,15 @@
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
-  "ssQuickConfig": "Quick config",
-  "ssQuickConfigHint": "Activate to show quick config options",
+  "ssLoadConfig": "Load config",
+  "ssLoadConfigHint": "Activate to show presets",
 
   "ssTryMe": "Try me",
   "ssRandom": "Randomize",
   "ssRandomize": "Randomize {themeType} theme?",
   "ssAccessible": "Accessible controls",
   "ssZeroStrain": "Zero eye strain",
-  "ssVideoGame": "Game mode",
+  "ssVideoGame": "Video game",
   "ssChalkboard": "Chalkboard",
   "ssFancyPants": "Fancy pants",
 

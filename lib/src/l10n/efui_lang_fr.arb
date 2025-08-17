@@ -108,8 +108,8 @@
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
   
-  "ssQuickConfig": "Configuration rapide",
-  "ssQuickConfigHint": "Activer pour afficher les options de configuration rapide",
+  "ssLoadConfig": "Charger la configuration",
+  "ssLoadConfigHint": "Activer pour afficher les préréglages",
 
   "ssTryMe": "Essayez-moi",
   "ssRandom": "Randomiser",
