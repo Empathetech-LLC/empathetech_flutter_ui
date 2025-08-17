@@ -104,18 +104,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         ).height +
         scaleMargin;
 
-    final Widget selectButton = ExcludeSemantics(
-      child: EzRadio<BoxFit>(
-        groupValue: selected,
-        value: fit,
-        onChanged: (BoxFit? value) {
-          selected = value;
-          setState(() {});
-          modalState(() {});
-        },
-      ),
-    );
-
     return Column(
       children: <Widget>[
         GestureDetector(
@@ -163,7 +151,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
           ),
         ),
-        selectButton,
+        ExcludeSemantics(child: EzRadio<BoxFit>(value: fit)),
       ],
     );
   }
@@ -424,69 +412,77 @@ class _ImageSettingState extends State<EzImageSetting> {
                 textAlign: TextAlign.center,
               ),
               separator,
-              EzScrollView(
-                scrollDirection: Axis.horizontal,
-                primary: false,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.contain,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.cover,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fill,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitWidth,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitHeight,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.none,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.scaleDown,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                    theme: theme,
-                  ),
-                  rowSpacer,
-                ],
+              RadioGroup<BoxFit>(
+                groupValue: selected,
+                onChanged: (BoxFit? value) {
+                  selected = value;
+                  setState(() {});
+                  fitState(() {});
+                },
+                child: EzScrollView(
+                  scrollDirection: Axis.horizontal,
+                  primary: false,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.contain,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.cover,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fill,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fitWidth,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.fitHeight,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.none,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      fit: BoxFit.scaleDown,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                  ],
+                ),
               ),
               separator,
               EzRow(

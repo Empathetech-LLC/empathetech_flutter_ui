@@ -1273,13 +1273,7 @@ class _LicensePicker extends StatelessWidget {
             textAlign: TextAlign.center,
             onPressed: () => onChanged(value),
           ),
-          ExcludeSemantics(
-            child: EzRadio<String>(
-              value: value,
-              groupValue: groupValue,
-              onChanged: onChanged,
-            ),
-          ),
+          ExcludeSemantics(child: EzRadio<String>(value: value)),
         ],
       );
     }
@@ -1338,47 +1332,51 @@ class _LicensePicker extends StatelessWidget {
           visible: visible,
           child: Padding(
             padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
-            child: EzScrollView(
-              scrollDirection: Axis.horizontal,
-              thumbVisibility: false,
-              children: <Widget>[
-                margin,
-                radio(
-                  title: 'GNU GPLv3',
-                  value: gnuKey,
-                ),
-                spacer,
-                radio(
-                  title: 'MIT',
-                  value: mitKey,
-                ),
-                spacer,
-                radio(
-                  title: 'ISC',
-                  value: iscKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Apache 2.0',
-                  value: apacheKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Mozilla 2.0',
-                  value: mozillaKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Unlicense',
-                  value: unlicenseKey,
-                ),
-                spacer,
-                radio(
-                  title: 'DWTFYW',
-                  value: dwtfywKey,
-                ),
-                margin,
-              ],
+            child: RadioGroup<String>(
+              groupValue: groupValue,
+              onChanged: onChanged,
+              child: EzScrollView(
+                scrollDirection: Axis.horizontal,
+                thumbVisibility: false,
+                children: <Widget>[
+                  margin,
+                  radio(
+                    title: 'GNU GPLv3',
+                    value: gnuKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'MIT',
+                    value: mitKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'ISC',
+                    value: iscKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Apache 2.0',
+                    value: apacheKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Mozilla 2.0',
+                    value: mozillaKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Unlicense',
+                    value: unlicenseKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'DWTFYW',
+                    value: dwtfywKey,
+                  ),
+                  margin,
+                ],
+              ),
             ),
           ),
         ),
