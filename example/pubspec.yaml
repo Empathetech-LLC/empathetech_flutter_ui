@@ -27,7 +27,7 @@ dependencies:
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^9.0.0
   line_icons: ^2.0.3
-  xml: ^6.5.0
+  xml: ^6.6.1
 
   empathetech_flutter_ui:
     path: ../
