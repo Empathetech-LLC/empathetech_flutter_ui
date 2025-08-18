@@ -814,7 +814,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   },
                   icon: EzIcon(Icons.save),
-                  label: l10n.csSave,
+                  label: el10n.ssSaveConfig,
                 ),
 
                 // Generate app
@@ -999,7 +999,6 @@ output-localization-file: lang.dart
 output-class: Lang
 use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/l10n
-synthetic-package: false
 required-resource-attributes: false
 format: true
 suppress-warnings: false''';
