@@ -5,7 +5,6 @@ output-localization-file: efui_lang.dart
 output-class: EFUILang
 use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/src/l10n
-synthetic-package: false
 required-resource-attributes: false
 format: true
 suppress-warnings: false
