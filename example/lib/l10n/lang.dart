@@ -339,17 +339,23 @@ abstract class Lang {
   /// **'Adds launch options to VS Code\'s debug menu'**
   String get csLaunchTip;
 
-  /// No description provided for @csSave.
+  /// No description provided for @csLoadPreset.
+  ///
+  /// In en, this message translates to:
+  /// **'Load preset'**
+  String get csLoadPreset;
+
+  /// No description provided for @csSaveConfig.
   ///
   /// In en, this message translates to:
   /// **'Save config'**
-  String get csSave;
+  String get csSaveConfig;
 
-  /// No description provided for @csLoad.
+  /// No description provided for @csLoadConfig.
   ///
   /// In en, this message translates to:
   /// **'Load config'**
-  String get csLoad;
+  String get csLoadConfig;
 
   /// No description provided for @csGenerate.
   ///

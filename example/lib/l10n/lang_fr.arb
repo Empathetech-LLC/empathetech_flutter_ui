@@ -59,8 +59,9 @@
 
   "csLaunchTip": "Ajoute des options de lancement au menu de débogage de VS Code",
 
-  "csSave": "Enregistrer la configuration",
-  "csLoad": "Charger la configuration",
+  "csLoadPreset": "Charger un préréglage",
+  "csSaveConfig": "Enregistrer la configuration",
+  "csLoadConfig": "Charger la configuration",
 
   "csGenerate": "Générer l'application",
 

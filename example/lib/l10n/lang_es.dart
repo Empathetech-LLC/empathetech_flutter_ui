@@ -143,10 +143,13 @@ class LangEs extends Lang {
       'Agrega opciones de lanzamiento al menú de depuración de VS Code';
 
   @override
-  String get csSave => 'Guardar configuración';
+  String get csLoadPreset => 'Cargar preajuste';
 
   @override
-  String get csLoad => 'Cargar configuración';
+  String get csSaveConfig => 'Guardar configuración';
+
+  @override
+  String get csLoadConfig => 'Cargar configuración';
 
   @override
   String get csGenerate => 'Generar aplicación';

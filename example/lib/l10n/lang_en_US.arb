@@ -59,8 +59,9 @@
 
   "csLaunchTip": "Adds launch options to VS Code's debug menu",
 
-  "csSave": "Save config",
-  "csLoad": "Load config",
+  "csLoadPreset": "Load preset",
+  "csSaveConfig": "Save config",
+  "csLoadConfig": "Load config",
 
   "csGenerate": "Generate app",
 

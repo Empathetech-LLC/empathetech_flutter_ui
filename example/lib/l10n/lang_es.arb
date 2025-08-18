@@ -59,8 +59,9 @@
 
   "csLaunchTip": "Agrega opciones de lanzamiento al menú de depuración de VS Code",
 
-  "csSave": "Guardar configuración",
-  "csLoad": "Cargar configuración",
+  "csLoadPreset": "Cargar preajuste",
+  "csSaveConfig": "Guardar configuración",
+  "csLoadConfig": "Cargar configuración",
 
   "csGenerate": "Generar aplicación",
 
