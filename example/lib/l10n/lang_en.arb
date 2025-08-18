@@ -11,22 +11,17 @@
   "csBecomes": "becomes",
   "csInvalidName": "Lowercase letters, numbers, and underscores are allowed.",
   "csYourApp": "your app",
-
   "csPubName": "Publisher name",
   "csPubPreview": "Example Organization",
   "csPubTip": "Or, Example Person",
-
   "csDescription": "Description",
   "csDescPreview": "One or two sentences about your app.",
-
   "csDomainName": "Domain name",
   "csDomainTip": "Backwards, it is",
   "csInvalidDomain": "'domain.name' only; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
-
   "csSupportEmail": "Support email",
   "csSupportTip": "If provided, the feedback system we use will be included.",
   "csInvalidEmail": "Invalid email",
-
   "csInclude": "Include",
   "csEasy": "Easy to change later",
 
@@ -45,26 +40,15 @@
 
   "csAdvanced": "Advanced settings",
   "csRestore": "Restore {setting}",
-
   "csOutputPath": "Output path",
-
   "csCopyright": "Copyright notice",
   "csCopyrightTip": "Will be included at the top of every Dart file",
-
   "csLicenseDocs": "Open documentation on open source licenses",
-
   "csL10nTip": "Localization (aka translations) config",
-
   "csLintTip": "Lint rules",
-
   "csLaunchTip": "Adds launch options to VS Code's debug menu",
 
-  "csLoadPreset": "Load preset",
-  "csSaveConfig": "Save config",
-  "csLoadConfig": "Load config",
-
   "csGenerate": "Generate app",
-
   "csInvalidFields": "Some fields are invalid",
 
   "csResetHint": "Activate and confirm what should be reset.",

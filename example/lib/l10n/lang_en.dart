@@ -138,15 +138,6 @@ class LangEn extends Lang {
   String get csLaunchTip => 'Adds launch options to VS Code\'s debug menu';
 
   @override
-  String get csLoadPreset => 'Load preset';
-
-  @override
-  String get csSaveConfig => 'Save config';
-
-  @override
-  String get csLoadConfig => 'Load config';
-
-  @override
   String get csGenerate => 'Generate app';
 
   @override
@@ -373,15 +364,6 @@ class LangEnUs extends LangEn {
 
   @override
   String get csLaunchTip => 'Adds launch options to VS Code\'s debug menu';
-
-  @override
-  String get csLoadPreset => 'Load preset';
-
-  @override
-  String get csSaveConfig => 'Save config';
-
-  @override
-  String get csLoadConfig => 'Load config';
 
   @override
   String get csGenerate => 'Generate app';

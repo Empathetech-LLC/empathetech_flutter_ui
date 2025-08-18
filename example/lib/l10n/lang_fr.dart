@@ -143,15 +143,6 @@ class LangFr extends Lang {
       'Ajoute des options de lancement au menu de débogage de VS Code';
 
   @override
-  String get csLoadPreset => 'Charger un préréglage';
-
-  @override
-  String get csSaveConfig => 'Enregistrer la configuration';
-
-  @override
-  String get csLoadConfig => 'Charger la configuration';
-
-  @override
   String get csGenerate => 'Générer l\'application';
 
   @override
