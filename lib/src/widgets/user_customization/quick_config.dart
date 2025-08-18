@@ -107,7 +107,7 @@ class EzQuickConfig extends StatelessWidget {
         },
       ),
       icon: EzIcon(Icons.save),
-      label: ezL10n(context).ssLoadConfig,
+      label: ezL10n(context).ssLoadPreset,
     );
   }
 }
@@ -417,6 +417,8 @@ class EzChalkboardConfig extends StatelessWidget {
 
     const int chalkboardGreenHex = 0xFF264941;
     const Color chalkboardGreen = Color(chalkboardGreenHex);
+    const int dimWhiteHex = 0x7FFFFFFF;
+    const Color dimWhite = Color(dimWhiteHex);
 
     final TextStyle localBody = fuseWithGFont(
       starter: const TextStyle(
@@ -439,7 +441,7 @@ class EzChalkboardConfig extends StatelessWidget {
         foregroundColor: Colors.white,
         iconColor: empathSand,
         overlayColor: empathSand,
-        side: const BorderSide(color: empathSandDim),
+        side: const BorderSide(color: dimWhite),
         textStyle: localBody,
       ),
       onPressed: () async {
@@ -485,7 +487,7 @@ class EzChalkboardConfig extends StatelessWidget {
           await EzConfig.setInt(darkErrorKey, whiteHex);
           await EzConfig.setInt(darkPrimaryKey, empathSandHex);
           await EzConfig.setInt(darkOnPrimaryKey, blackHex);
-          await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
+          await EzConfig.setInt(darkPrimaryContainerKey, dimWhiteHex);
           await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
           await EzConfig.setInt(darkShadowKey, transparentHex);
           await EzConfig.setInt(darkSurfaceKey, chalkboardGreenHex);
@@ -500,7 +502,7 @@ class EzChalkboardConfig extends StatelessWidget {
           await EzConfig.setInt(lightErrorKey, whiteHex);
           await EzConfig.setInt(lightPrimaryKey, empathSandHex);
           await EzConfig.setInt(lightOnPrimaryKey, blackHex);
-          await EzConfig.setInt(lightPrimaryContainerKey, empathSandDimHex);
+          await EzConfig.setInt(lightPrimaryContainerKey, dimWhiteHex);
           await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
           await EzConfig.setInt(lightShadowKey, transparentHex);
           await EzConfig.setInt(lightSurfaceKey, chalkboardGreenHex);
