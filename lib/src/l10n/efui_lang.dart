@@ -579,17 +579,29 @@ abstract class EFUILang {
   /// **'Activate to change the app language'**
   String get ssLangHint;
 
+  /// No description provided for @ssLoadPreset.
+  ///
+  /// In en, this message translates to:
+  /// **'Load config'**
+  String get ssLoadPreset;
+
+  /// No description provided for @ssLoadPresetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate to show presets'**
+  String get ssLoadPresetHint;
+
+  /// No description provided for @ssSaveConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Save config'**
+  String get ssSaveConfig;
+
   /// No description provided for @ssLoadConfig.
   ///
   /// In en, this message translates to:
   /// **'Load config'**
   String get ssLoadConfig;
-
-  /// No description provided for @ssLoadConfigHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Activate to show presets'**
-  String get ssLoadConfigHint;
 
   /// No description provided for @ssTryMe.
   ///

@@ -265,10 +265,16 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
-  String get ssLoadConfig => 'Cargar configuración';
+  String get ssLoadPreset => 'Cargar preajuste';
 
   @override
-  String get ssLoadConfigHint => 'Activar para mostrar ajustes preestablecidos';
+  String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssSaveConfig => 'Guardar configuración';
+
+  @override
+  String get ssLoadConfig => 'Cargar configuración';
 
   @override
   String get ssTryMe => 'Pruébame';

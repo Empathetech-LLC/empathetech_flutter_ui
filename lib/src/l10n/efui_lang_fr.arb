@@ -108,8 +108,10 @@
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
   
+  "ssLoadPreset": "Charger un préréglage",
+  "ssLoadPresetHint": "Activer pour afficher les préréglages",
+  "ssSaveConfig": "Enregistrer la configuration",
   "ssLoadConfig": "Charger la configuration",
-  "ssLoadConfigHint": "Activer pour afficher les préréglages",
 
   "ssTryMe": "Essayez-moi",
   "ssRandom": "Randomiser",

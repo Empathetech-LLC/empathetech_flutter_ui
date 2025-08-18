@@ -264,10 +264,16 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssLoadConfig => 'Load config';
+  String get ssLoadPreset => 'Load config';
 
   @override
-  String get ssLoadConfigHint => 'Activate to show presets';
+  String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssSaveConfig => 'Save config';
+
+  @override
+  String get ssLoadConfig => 'Load config';
 
   @override
   String get ssTryMe => 'Try me';
@@ -782,10 +788,16 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssLoadConfig => 'Load config';
+  String get ssLoadPreset => 'Load config';
 
   @override
-  String get ssLoadConfigHint => 'Activate to show presets';
+  String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssSaveConfig => 'Save config';
+
+  @override
+  String get ssLoadConfig => 'Load config';
 
   @override
   String get ssTryMe => 'Try me';

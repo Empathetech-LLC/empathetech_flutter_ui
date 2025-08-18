@@ -108,8 +108,10 @@
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
+  "ssLoadPreset": "Load config",
+  "ssLoadPresetHint": "Activate to show presets",
+  "ssSaveConfig": "Save config",
   "ssLoadConfig": "Load config",
-  "ssLoadConfigHint": "Activate to show presets",
 
   "ssTryMe": "Try me",
   "ssRandom": "Randomize",

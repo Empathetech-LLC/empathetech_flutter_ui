@@ -265,10 +265,16 @@ class EFUILangFr extends EFUILang {
   String get ssLangHint => 'Activer pour changer la langue de l\'application';
 
   @override
-  String get ssLoadConfig => 'Charger la configuration';
+  String get ssLoadPreset => 'Charger un préréglage';
 
   @override
-  String get ssLoadConfigHint => 'Activer pour afficher les préréglages';
+  String get ssLoadPresetHint => 'Activer pour afficher les préréglages';
+
+  @override
+  String get ssSaveConfig => 'Enregistrer la configuration';
+
+  @override
+  String get ssLoadConfig => 'Charger la configuration';
 
   @override
   String get ssTryMe => 'Essayez-moi';
