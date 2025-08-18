@@ -415,10 +415,8 @@ class EzChalkboardConfig extends StatelessWidget {
     final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
 
-    const int chalkboardGreenHex = 0xFF264941;
-    const Color chalkboardGreen = Color(chalkboardGreenHex);
-    const int dimWhiteHex = 0x7FFFFFFF;
-    const Color dimWhite = Color(dimWhiteHex);
+    const Color chalkboardGreen = Color(0xFF264941);
+    const Color dimWhite = Color(0x7FFFFFFF);
 
     final TextStyle localBody = fuseWithGFont(
       starter: const TextStyle(
@@ -478,37 +476,58 @@ class EzChalkboardConfig extends StatelessWidget {
 
         // Update colors //
 
-        if (isDark) {
-          await storeColorScheme(
-            colorScheme: ezHighContrastDark,
-            brightness: Brightness.dark,
-          );
-
-          await EzConfig.setInt(darkErrorKey, whiteHex);
-          await EzConfig.setInt(darkPrimaryKey, empathSandHex);
-          await EzConfig.setInt(darkOnPrimaryKey, blackHex);
-          await EzConfig.setInt(darkPrimaryContainerKey, dimWhiteHex);
-          await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
-          await EzConfig.setInt(darkShadowKey, transparentHex);
-          await EzConfig.setInt(darkSurfaceKey, chalkboardGreenHex);
-          await EzConfig.setInt(darkSurfaceContainerKey, chalkboardGreenHex);
-          await EzConfig.setInt(darkSurfaceDimKey, chalkboardGreenHex);
-        } else {
-          await storeColorScheme(
-            colorScheme: ezHighContrastDark,
-            brightness: Brightness.light,
-          );
-
-          await EzConfig.setInt(lightErrorKey, whiteHex);
-          await EzConfig.setInt(lightPrimaryKey, empathSandHex);
-          await EzConfig.setInt(lightOnPrimaryKey, blackHex);
-          await EzConfig.setInt(lightPrimaryContainerKey, dimWhiteHex);
-          await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
-          await EzConfig.setInt(lightShadowKey, transparentHex);
-          await EzConfig.setInt(lightSurfaceKey, chalkboardGreenHex);
-          await EzConfig.setInt(lightSurfaceContainerKey, chalkboardGreenHex);
-          await EzConfig.setInt(lightSurfaceDimKey, chalkboardGreenHex);
-        }
+        await storeColorScheme(
+          colorScheme: ColorScheme(
+            brightness: isDark ? Brightness.dark : Brightness.light,
+            primary: empathSand,
+            onPrimary: Colors.black,
+            primaryContainer: dimWhite,
+            onPrimaryContainer: Colors.black,
+            primaryFixed: empathSand,
+            primaryFixedDim: empathSand,
+            onPrimaryFixed: Colors.black,
+            onPrimaryFixedVariant: Colors.black,
+            secondary: Colors.white,
+            onSecondary: Colors.black,
+            secondaryContainer: Colors.white,
+            onSecondaryContainer: Colors.black,
+            secondaryFixed: Colors.white,
+            secondaryFixedDim: Colors.white,
+            onSecondaryFixed: Colors.black,
+            onSecondaryFixedVariant: Colors.black,
+            tertiary: Colors.white,
+            onTertiary: Colors.black,
+            tertiaryContainer: Colors.white,
+            onTertiaryContainer: Colors.black,
+            tertiaryFixed: Colors.white,
+            tertiaryFixedDim: Colors.white,
+            onTertiaryFixed: Colors.black,
+            onTertiaryFixedVariant: Colors.black,
+            error: Colors.red,
+            onError: Colors.white,
+            errorContainer: Colors.redAccent,
+            onErrorContainer: Colors.white,
+            surface: chalkboardGreen,
+            onSurface: Colors.white,
+            surfaceDim: chalkboardGreen,
+            surfaceBright: chalkboardGreen,
+            surfaceContainerLowest: chalkboardGreen,
+            surfaceContainerLow: chalkboardGreen,
+            surfaceContainer: chalkboardGreen,
+            surfaceContainerHigh: chalkboardGreen,
+            surfaceContainerHighest: chalkboardGreen,
+            onSurfaceVariant: Colors.white,
+            outline: dimWhite,
+            outlineVariant: dimWhite,
+            shadow: Colors.transparent,
+            scrim: Colors.black,
+            inverseSurface: chalkboardGreen,
+            onInverseSurface: Colors.white,
+            inversePrimary: empathSand,
+            surfaceTint: Colors.transparent,
+          ),
+          brightness: isDark ? Brightness.dark : Brightness.light,
+        );
 
         // Callback //
 
