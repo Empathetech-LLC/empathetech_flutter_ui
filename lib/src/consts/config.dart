@@ -64,11 +64,23 @@ const double defaultDesktopSpacing = 30.0;
 
 // Shared //
 
+/// 0xFF000000
+const int blackHex = 0xFF000000;
+
+/// 0x7F000000
+const int dimBlackHex = 0x7F000000;
+
+/// 0x7F000000
+const Color dimBlack = Color(dimBlackHex);
+
 /// 0xFFFFFFFF
 const int whiteHex = 0xFFFFFFFF;
 
-/// 0xFF000000
-const int blackHex = 0xFF000000;
+/// 0x7FFFFFFF
+const int dimWhiteHex = 0x7FFFFFFF;
+
+/// 0x7FFFFFFF
+const Color dimWhite = Color(dimWhiteHex);
 
 /// 0x00000000
 const int transparentHex = 0x00000000;
