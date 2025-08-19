@@ -137,16 +137,16 @@ class EzLowMobilityConfig extends StatelessWidget {
         await EzConfig.removeKeys(allImageKeys.keys.toSet());
 
         // Update text
-        await EzConfig.setDouble(iconSizeKey, 30);
+        await EzConfig.setDouble(iconSizeKey, 25);
 
         // Update layout
-        await EzConfig.setDouble(marginKey, 15);
+        await EzConfig.setDouble(marginKey, 12.5);
         if (onMobile) {
-          await EzConfig.setDouble(paddingKey, 25);
-          await EzConfig.setDouble(spacingKey, 50);
+          await EzConfig.setDouble(paddingKey, 22.5);
+          await EzConfig.setDouble(spacingKey, 35.0);
         } else {
-          await EzConfig.setDouble(paddingKey, 30);
-          await EzConfig.setDouble(spacingKey, 60);
+          await EzConfig.setDouble(paddingKey, 25.0);
+          await EzConfig.setDouble(spacingKey, 40.0);
         }
         await EzConfig.setBool(hideScrollKey, false);
 
@@ -267,10 +267,10 @@ class EzLowVisionConfig extends StatelessWidget {
         await EzConfig.setDouble(marginKey, 12.5);
         if (onMobile) {
           await EzConfig.setDouble(paddingKey, 17.5);
-          await EzConfig.setDouble(spacingKey, 30);
+          await EzConfig.setDouble(spacingKey, 30.0);
         } else {
-          await EzConfig.setDouble(paddingKey, 20);
-          await EzConfig.setDouble(spacingKey, 35);
+          await EzConfig.setDouble(paddingKey, 20.0);
+          await EzConfig.setDouble(spacingKey, 35.0);
         }
         await EzConfig.setBool(hideScrollKey, true);
 
@@ -326,6 +326,8 @@ class EzVideoGameConfig extends StatelessWidget {
 
     return EzElevatedButton(
       style: ElevatedButton.styleFrom(
+        backgroundColor: darkSurface,
+        foregroundColor: empathEucalyptus,
         iconColor: Colors.white,
         overlayColor: empathEucalyptus,
         side: const BorderSide(color: empathEucalyptusDim),
