@@ -287,10 +287,10 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get ssAccessible => 'Accessible controls';
+  String get ssBigButtons => 'Big buttons';
 
   @override
-  String get ssZeroStrain => 'Zero eye strain';
+  String get ssHighVisibility => 'High visibility';
 
   @override
   String get ssVideoGame => 'Video game';
@@ -811,10 +811,10 @@ class EFUILangEnUs extends EFUILangEn {
   }
 
   @override
-  String get ssAccessible => 'Accessible controls';
+  String get ssBigButtons => 'Big buttons';
 
   @override
-  String get ssZeroStrain => 'Zero eye strain';
+  String get ssHighVisibility => 'High visibility';
 
   @override
   String get ssVideoGame => 'Video game';

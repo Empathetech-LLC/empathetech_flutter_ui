@@ -153,7 +153,7 @@ class EzLowMobilityConfig extends StatelessWidget {
         // Callback
         onComplete?.call();
       },
-      text: l10n.ssAccessible,
+      text: l10n.ssBigButtons,
     );
   }
 }
@@ -292,7 +292,7 @@ class EzLowVisionConfig extends StatelessWidget {
 
         onComplete?.call();
       },
-      text: l10n.ssZeroStrain,
+      text: l10n.ssHighVisibility,
       textStyle: localBody,
     );
   }

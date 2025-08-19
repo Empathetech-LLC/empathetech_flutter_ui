@@ -288,10 +288,10 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get ssAccessible => 'Commandes accessibles';
+  String get ssBigButtons => 'Gros boutons';
 
   @override
-  String get ssZeroStrain => 'Zéro fatigue oculaire';
+  String get ssHighVisibility => 'Haute visibilité';
 
   @override
   String get ssVideoGame => 'Mode jeu';

@@ -621,17 +621,17 @@ abstract class EFUILang {
   /// **'Randomize {themeType} theme?'**
   String ssRandomize(Object themeType);
 
-  /// No description provided for @ssAccessible.
+  /// No description provided for @ssBigButtons.
   ///
   /// In en, this message translates to:
-  /// **'Accessible controls'**
-  String get ssAccessible;
+  /// **'Big buttons'**
+  String get ssBigButtons;
 
-  /// No description provided for @ssZeroStrain.
+  /// No description provided for @ssHighVisibility.
   ///
   /// In en, this message translates to:
-  /// **'Zero eye strain'**
-  String get ssZeroStrain;
+  /// **'High visibility'**
+  String get ssHighVisibility;
 
   /// No description provided for @ssVideoGame.
   ///
