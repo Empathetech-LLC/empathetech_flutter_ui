@@ -418,7 +418,6 @@ class EzChalkboardConfig extends StatelessWidget {
     final EFUILang l10n = ezL10n(context);
 
     const Color chalkboardGreen = Color(0xFF264941);
-    const Color dimWhite = Color(0x7FFFFFFF);
 
     final TextStyle localBody = fuseWithGFont(
       starter: const TextStyle(
