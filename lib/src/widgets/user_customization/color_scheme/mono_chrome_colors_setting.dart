@@ -12,19 +12,19 @@ import 'package:flutter/foundation.dart';
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
   // Primary
   primary: Colors.white,
-  primaryContainer: lightSurfaceDim,
+  primaryContainer: dimWhite,
   onPrimary: Colors.black,
   onPrimaryContainer: Colors.black,
 
   // Secondary
   secondary: Colors.white,
-  secondaryContainer: lightSurfaceDim,
+  secondaryContainer: dimWhite,
   onSecondary: Colors.black,
   onSecondaryContainer: Colors.black,
 
   // Tertiary
   tertiary: Colors.white,
-  tertiaryContainer: lightSurfaceDim,
+  tertiaryContainer: dimWhite,
   onTertiary: Colors.black,
   onTertiaryContainer: Colors.black,
 
@@ -41,19 +41,19 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
 const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
   // Primary
   primary: Colors.black,
-  primaryContainer: darkSurfaceDim,
+  primaryContainer: dimBlack,
   onPrimary: Colors.white,
   onPrimaryContainer: Colors.white,
 
   // Secondary
   secondary: Colors.black,
-  secondaryContainer: darkSurfaceDim,
+  secondaryContainer: dimBlack,
   onSecondary: Colors.white,
   onSecondaryContainer: Colors.white,
 
   // Tertiary
   tertiary: Colors.black,
-  tertiaryContainer: darkSurfaceDim,
+  tertiaryContainer: dimBlack,
   onTertiary: Colors.white,
   onTertiaryContainer: Colors.white,
 
