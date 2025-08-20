@@ -113,6 +113,8 @@
   "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
   "ssSaveConfig": "Guardar configuración",
   "ssLoadConfig": "Cargar configuración",
+  "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?",
+  "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?",
   "ssApplied": "{config} aplicado.",
 
   "ssTryMe": "Pruébame",

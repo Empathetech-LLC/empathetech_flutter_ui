@@ -267,7 +267,7 @@ class EFUILangEn extends EFUILang {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssLoadPreset => 'Load config';
+  String get ssLoadPreset => 'Load preset';
 
   @override
   String get ssLoadPresetHint => 'Activate to show presets';
@@ -277,6 +277,14 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssLoadConfig => 'Load config';
+
+  @override
+  String get ssDarkOnly =>
+      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?';
+
+  @override
+  String get ssLightOnly =>
+      'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {
@@ -799,7 +807,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLangHint => 'Activate to change the app language';
 
   @override
-  String get ssLoadPreset => 'Load config';
+  String get ssLoadPreset => 'Load preset';
 
   @override
   String get ssLoadPresetHint => 'Activate to show presets';
@@ -809,6 +817,14 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssLoadConfig => 'Load config';
+
+  @override
+  String get ssDarkOnly =>
+      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?';
+
+  @override
+  String get ssLightOnly =>
+      'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?';
 
   @override
   String ssApplied(Object config) {

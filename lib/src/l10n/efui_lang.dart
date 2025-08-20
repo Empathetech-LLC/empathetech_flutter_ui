@@ -588,7 +588,7 @@ abstract class EFUILang {
   /// No description provided for @ssLoadPreset.
   ///
   /// In en, this message translates to:
-  /// **'Load config'**
+  /// **'Load preset'**
   String get ssLoadPreset;
 
   /// No description provided for @ssLoadPresetHint.
@@ -608,6 +608,18 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Load config'**
   String get ssLoadConfig;
+
+  /// No description provided for @ssDarkOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?'**
+  String get ssDarkOnly;
+
+  /// No description provided for @ssLightOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?'**
+  String get ssLightOnly;
 
   /// No description provided for @ssApplied.
   ///

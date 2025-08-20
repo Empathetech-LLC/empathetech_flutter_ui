@@ -280,6 +280,14 @@ class EFUILangFr extends EFUILang {
   String get ssLoadConfig => 'Charger la configuration';
 
   @override
+  String get ssDarkOnly =>
+      'Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?';
+
+  @override
+  String get ssLightOnly =>
+      'Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?';
+
+  @override
   String ssApplied(Object config) {
     return '$config appliqué.';
   }

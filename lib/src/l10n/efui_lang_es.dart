@@ -280,6 +280,14 @@ class EFUILangEs extends EFUILang {
   String get ssLoadConfig => 'Cargar configuración';
 
   @override
+  String get ssDarkOnly =>
+      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?';
+
+  @override
+  String get ssLightOnly =>
+      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?';
+
+  @override
   String ssApplied(Object config) {
     return '$config aplicado.';
   }
