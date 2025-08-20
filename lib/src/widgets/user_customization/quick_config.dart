@@ -3,6 +3,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:flutter/foundation.dart';
+
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -23,11 +25,11 @@ class TryTip extends StatelessWidget {
 }
 
 class EzQuickConfig extends StatelessWidget {
-  /// Toggle the low mobility quick config
-  final bool lowMobility;
+  /// Toggle the big buttons quick config
+  final bool bigButtons;
 
-  /// Toggle the low vision quick config
-  final bool lowVision;
+  /// Toggle the high visibility quick config
+  final bool highVisibility;
 
   /// Toggle the video game quick config
   final bool videoGame;
@@ -45,8 +47,8 @@ class EzQuickConfig extends StatelessWidget {
   /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
   const EzQuickConfig({
     super.key,
-    this.lowMobility = true,
-    this.lowVision = true,
+    this.bigButtons = true,
+    this.highVisibility = true,
     this.videoGame = true,
     this.chalkboard = true,
     this.fancyPants = true,
@@ -58,49 +60,63 @@ class EzQuickConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EdgeInsets modalPadding = EzInsets.col(EzConfig.get(spacingKey));
+    final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
       onPressed: () => showModalBottomSheet(
         context: context,
         builder: (BuildContext modalContext) {
-          void closeModal() => Navigator.pop(modalContext);
+          void onComplete(String configName) {
+            Navigator.pop(modalContext);
+
+            ezSnackBar(
+              context: context,
+              message:
+                  '${l10n.ssApplied(configName)} ${kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide}',
+            );
+          }
 
           return EzScrollView(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // Low mobility
-              if (lowMobility)
+              // Big buttons
+              if (bigButtons)
                 Padding(
                   padding: modalPadding,
-                  child: EzLowMobilityConfig(onComplete: closeModal),
+                  child: EzBigButtonsConfig(
+                      onComplete: () => onComplete(l10n.ssBigButtons)),
                 ),
 
-              // Low vision
-              if (lowVision)
+              // High visibility
+              if (highVisibility)
                 Padding(
                   padding: modalPadding,
-                  child: EzLowVisionConfig(onComplete: closeModal),
+                  child: EzHighVisibilityConfig(
+                      onComplete: () => onComplete(l10n.ssHighVisibility)),
                 ),
 
               // Video game
               if (videoGame)
                 Padding(
                   padding: modalPadding,
-                  child: EzVideoGameConfig(onComplete: closeModal),
+                  child: EzVideoGameConfig(
+                      onComplete: () => onComplete(l10n.ssVideoGame)),
                 ),
 
               // Chalkboard
               if (chalkboard)
                 Padding(
                   padding: modalPadding,
-                  child: EzChalkboardConfig(onComplete: closeModal),
+                  child: EzChalkboardConfig(
+                      onComplete: () => onComplete(l10n.ssChalkboard)),
                 ),
 
               // Fancy pants
               if (fancyPants)
                 Padding(
                   padding: modalPadding,
-                  child: EzFancyPantsConfig(onComplete: closeModal),
+                  child: EzFancyPantsConfig(
+                      onComplete: () => onComplete(l10n.ssFancyPants)),
                 ),
             ],
           );
@@ -112,10 +128,10 @@ class EzQuickConfig extends StatelessWidget {
   }
 }
 
-class EzLowMobilityConfig extends StatelessWidget {
+class EzBigButtonsConfig extends StatelessWidget {
   final void Function()? onComplete;
 
-  const EzLowMobilityConfig({super.key, this.onComplete});
+  const EzBigButtonsConfig({super.key, this.onComplete});
 
   @override
   Widget build(BuildContext context) {
@@ -158,10 +174,10 @@ class EzLowMobilityConfig extends StatelessWidget {
   }
 }
 
-class EzLowVisionConfig extends StatelessWidget {
+class EzHighVisibilityConfig extends StatelessWidget {
   final void Function()? onComplete;
 
-  const EzLowVisionConfig({super.key, this.onComplete});
+  const EzHighVisibilityConfig({super.key, this.onComplete});
 
   @override
   Widget build(BuildContext context) {
