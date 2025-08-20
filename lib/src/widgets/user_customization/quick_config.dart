@@ -3,11 +3,11 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/foundation.dart';
-
 import '../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class TryTip extends StatelessWidget {
   final Widget child;
@@ -345,6 +345,36 @@ class EzVideoGameConfig extends StatelessWidget {
         padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
       ),
       onPressed: () async {
+        if (!isDarkTheme(context)) {
+          final bool doIt = await showPlatformDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              void onConfirm() => Navigator.of(dialogContext).pop(true);
+              void onDeny() => Navigator.of(dialogContext).pop(false);
+
+              late final List<Widget> materialActions;
+              late final List<Widget> cupertinoActions;
+
+              (materialActions, cupertinoActions) = ezActionPairs(
+                context: context,
+                onConfirm: onConfirm,
+                confirmIsDestructive: true,
+                onDeny: onDeny,
+              );
+
+              return EzAlertDialog(
+                title: Text(l10n.gAttention, textAlign: TextAlign.center),
+                content: Text(l10n.ssDarkOnly, textAlign: TextAlign.center),
+                materialActions: materialActions,
+                cupertinoActions: cupertinoActions,
+                needsClose: false,
+              );
+            },
+          );
+
+          if (!doIt) return;
+        }
+
         // Reset //
 
         await EzConfig.removeKeys(textStyleKeys.keys.toSet());
