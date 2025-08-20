@@ -564,7 +564,7 @@ class EzFancyPantsConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: isDark ? Colors.white : Colors.black,
+        color: Theme.of(context).colorScheme.onSurface,
         height: defaultFontHeight,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: defaultLetterSpacing,
