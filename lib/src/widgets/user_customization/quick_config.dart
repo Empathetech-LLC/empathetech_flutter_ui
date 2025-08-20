@@ -17,7 +17,7 @@ class TryTip extends StatelessWidget {
     return Tooltip(
       message: ezL10n(context).ssTryMe,
       excludeFromSemantics: true,
-      child: EzIcon(Icons.lightbulb_outline),
+      child: child,
     );
   }
 }
@@ -168,6 +168,7 @@ class EzLowVisionConfig extends StatelessWidget {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
+    final Color onSurface = Theme.of(context).colorScheme.onSurface;
 
     final TextStyle localBody = fuseWithGFont(
       starter: TextStyle(
@@ -175,9 +176,7 @@ class EzLowVisionConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: isDark
-            ? Colors.white
-            : Colors.black, // TODO: fix these (&& search for things like it)
+        color: onSurface,
         height: 1.75,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: 0.30,
@@ -187,19 +186,12 @@ class EzLowVisionConfig extends StatelessWidget {
     );
 
     return EzElevatedButton(
-      style: isDark
-          ? ElevatedButton.styleFrom(
-              iconColor: Colors.white,
-              overlayColor: Colors.white,
-              side: const BorderSide(color: dimWhite),
-              textStyle: localBody,
-            )
-          : ElevatedButton.styleFrom(
-              iconColor: Colors.black,
-              overlayColor: Colors.black,
-              side: const BorderSide(color: dimBlack),
-              textStyle: localBody,
-            ),
+      style: ElevatedButton.styleFrom(
+        iconColor: onSurface,
+        overlayColor: onSurface,
+        side: BorderSide(color: onSurface.withValues(alpha: 0.5)),
+        textStyle: localBody,
+      ),
       onPressed: () async {
         // Reset //
 
@@ -262,6 +254,7 @@ class EzLowVisionConfig extends StatelessWidget {
         await EzConfig.setDouble(labelLetterSpacingKey, 0.30);
         await EzConfig.setDouble(labelWordSpacingKey, 1.25);
 
+        // Icons
         await EzConfig.setDouble(iconSizeKey, 22.0);
 
         // Update layout //
@@ -317,7 +310,7 @@ class EzVideoGameConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: empathEucalyptus,
+        color: Colors.white,
         height: defaultFontHeight,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: defaultLetterSpacing,
@@ -329,9 +322,9 @@ class EzVideoGameConfig extends StatelessWidget {
     return EzElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: darkSurface,
-        foregroundColor: empathEucalyptus,
-        iconColor: Colors.white,
-        overlayColor: Colors.white,
+        foregroundColor: Colors.white,
+        iconColor: empathEucalyptus,
+        overlayColor: empathEucalyptus,
         side: const BorderSide(color: empathEucalyptusDim),
         textStyle: localBody,
         padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
@@ -396,60 +389,7 @@ class EzVideoGameConfig extends StatelessWidget {
         // Update colors //
 
         await storeColorScheme(
-          colorScheme: ColorScheme(
-            brightness: isDark ? Brightness.dark : Brightness.light,
-            // Primary
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            primaryContainer: empathEucalyptusDim,
-            onPrimaryContainer: Colors.black,
-            primaryFixed: Colors.white,
-            primaryFixedDim: empathEucalyptusDim,
-            onPrimaryFixed: Colors.black,
-            onPrimaryFixedVariant: Colors.black,
-
-            // Secondary
-            secondary: empathSand,
-            onSecondary: Colors.black,
-            secondaryContainer: empathSandDim,
-            onSecondaryContainer: Colors.black,
-            secondaryFixed: empathSand,
-            secondaryFixedDim: empathSandDim,
-            onSecondaryFixed: Colors.black,
-            onSecondaryFixedVariant: Colors.black,
-
-            // Tertiary
-            tertiary: Colors.white,
-            onTertiary: Colors.black,
-            tertiaryContainer: empathPurpleDim,
-            onTertiaryContainer: Colors.white,
-            tertiaryFixed: Colors.white,
-            tertiaryFixedDim: empathPurpleDim,
-            onTertiaryFixed: Colors.black,
-            onTertiaryFixedVariant: Colors.white,
-
-            // Error
-            error: Colors.red,
-            onError: Colors.white,
-            errorContainer: Colors.redAccent,
-            onErrorContainer: Colors.white,
-
-            // Surface
-            surface: darkSurface,
-            onSurface: empathEucalyptus,
-            surfaceDim: darkSurfaceDim,
-            surfaceContainer: darkSurfaceContainer,
-            onSurfaceVariant: empathEucalyptus,
-
-            // Misc
-            outline: empathEucalyptusDim,
-            outlineVariant: empathEucalyptusDim,
-            scrim: Colors.black,
-            inverseSurface: darkSurface,
-            onInverseSurface: empathEucalyptus,
-            inversePrimary: Colors.white,
-            surfaceTint: Colors.transparent,
-          ),
+          colorScheme: ezColorScheme(Brightness.dark),
           brightness: isDark ? Brightness.dark : Brightness.light,
         );
 
