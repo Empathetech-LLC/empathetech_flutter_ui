@@ -61,12 +61,10 @@
 
   "asPageTitle": "Archiver",
 
-  "asSavedTo": "Your configuration has been saved to {path}",
   "asUseIt": "\n\nUse it on ",
   "asToGen": " for desktop to generate the code for {app_name}",
-  "asBadFile": "The file was not saved as ",
 
-
+  
 
   "gsPageTitle": "Generator",
 

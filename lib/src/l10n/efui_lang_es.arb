@@ -38,6 +38,7 @@
 
   "gAdvanced": "Avanzado",
   "gQuick": "Rápido",
+  "gConfig": "Configuración",
 
   "gDecrease": "Disminuir",
   "gIncrease": "Aumentar",
@@ -125,6 +126,9 @@
   "ssVideoGame": "Videojuego",
   "ssChalkboard": "Pizarra",
   "ssFancyPants": "Pantalones elegantes",
+
+  "ssConfigSaved": "Su configuración se ha guardado en {path}",
+  "ssWrongConfigExt": "El archivo no se guardó como ",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 

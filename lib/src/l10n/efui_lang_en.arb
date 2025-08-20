@@ -38,6 +38,7 @@
 
   "gAdvanced": "Advanced",
   "gQuick": "Quick",
+  "gConfig": "Config",
 
   "gDecrease": "Decrease",
   "gIncrease": "Increase",
@@ -125,6 +126,9 @@
   "ssVideoGame": "Video game",
   "ssChalkboard": "Chalkboard",
   "ssFancyPants": "Fancy pants",
+
+  "ssConfigSaved": "Your configuration has been saved to {path}",
+  "ssWrongConfigExt": "The file was not saved as ",
 
   "ssResetAll": "Reset all settings?",
 

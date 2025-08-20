@@ -98,6 +98,9 @@ class EFUILangFr extends EFUILang {
   String get gQuick => 'Rapide';
 
   @override
+  String get gConfig => 'Configuration';
+
+  @override
   String get gDecrease => 'Réduire';
 
   @override
@@ -317,6 +320,14 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssFancyPants => 'Pantalons élégants';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Votre configuration a été enregistrée dans $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'Le fichier n\'a pas été enregistré comme ';
 
   @override
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';

@@ -38,6 +38,7 @@
 
   "gAdvanced": "Avancé",
   "gQuick": "Rapide",
+  "gConfig": "Configuration",
 
   "gDecrease": "Réduire",
   "gIncrease": "Augmenter",
@@ -125,6 +126,9 @@
   "ssVideoGame": "Mode jeu",
   "ssChalkboard": "Tableau noir",
   "ssFancyPants": "Pantalons élégants",
+
+  "ssConfigSaved": "Votre configuration a été enregistrée dans {path}",
+  "ssWrongConfigExt": "Le fichier n'a pas été enregistré comme ",
 
   "ssResetAll": "Réinitialiser tous les paramètres ?",
 

@@ -60,21 +60,10 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
     savedConfig.endsWith('.json')
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
-            failureMessage = '${l10n.asBadFile} .json...\n\n$savedConfig';
+            failureMessage =
+                '${el10n.ssWrongConfigExt} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
-  }
-
-  /// Generate a (platform aware) human readable path for the saved config
-  String archivePath() {
-    switch (platform) {
-      case TargetPlatform.android:
-        return 'Root > Android > Data > net.empathetech.open_ui > files';
-      case TargetPlatform.iOS:
-        return 'Files > Browse > Open UI';
-      default:
-        return 'Downloads';
-    }
   }
 
   Widget header() {
@@ -93,7 +82,11 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             textTheme: textTheme,
             richMessage: EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.asSavedTo(archivePath())),
+                EzPlainText(
+                    text: el10n.ssConfigSaved(archivePath(
+                  packageName: 'net.empathetech.open_ui',
+                  appName: 'Open UI',
+                ))),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(

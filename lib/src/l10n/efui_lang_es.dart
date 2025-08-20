@@ -98,6 +98,9 @@ class EFUILangEs extends EFUILang {
   String get gQuick => 'Rápido';
 
   @override
+  String get gConfig => 'Configuración';
+
+  @override
   String get gDecrease => 'Disminuir';
 
   @override
@@ -317,6 +320,14 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssFancyPants => 'Pantalones elegantes';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Su configuración se ha guardado en $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'El archivo no se guardó como ';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';

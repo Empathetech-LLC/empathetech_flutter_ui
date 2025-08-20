@@ -52,6 +52,19 @@ String screenshotHint() {
   }
 }
 
+String archivePath({required String packageName, required String appName}) {
+  final TargetPlatform platform = getBasePlatform();
+
+  switch (platform) {
+    case TargetPlatform.android:
+      return 'Root > Android > Data > $packageName > files';
+    case TargetPlatform.iOS:
+      return 'Files > Browse > $appName';
+    default:
+      return 'Downloads';
+  }
+}
+
 // Readability //
 
 /// Is there a required [Function] that you wish was optional?

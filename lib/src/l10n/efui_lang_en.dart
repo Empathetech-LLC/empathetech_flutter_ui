@@ -98,6 +98,9 @@ class EFUILangEn extends EFUILang {
   String get gQuick => 'Quick';
 
   @override
+  String get gConfig => 'Config';
+
+  @override
   String get gDecrease => 'Decrease';
 
   @override
@@ -316,6 +319,14 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssFancyPants => 'Fancy pants';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Your configuration has been saved to $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'The file was not saved as ';
 
   @override
   String get ssResetAll => 'Reset all settings?';
@@ -638,6 +649,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gQuick => 'Quick';
 
   @override
+  String get gConfig => 'Config';
+
+  @override
   String get gDecrease => 'Decrease';
 
   @override
@@ -856,6 +870,14 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssFancyPants => 'Fancy pants';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Your configuration has been saved to $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'The file was not saved as ';
 
   @override
   String get ssResetAll => 'Reset all settings?';

@@ -387,12 +387,6 @@ abstract class Lang {
   /// **'Archiver'**
   String get asPageTitle;
 
-  /// No description provided for @asSavedTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Your configuration has been saved to {path}'**
-  String asSavedTo(Object path);
-
   /// No description provided for @asUseIt.
   ///
   /// In en, this message translates to:
@@ -404,12 +398,6 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **' for desktop to generate the code for {app_name}'**
   String asToGen(Object app_name);
-
-  /// No description provided for @asBadFile.
-  ///
-  /// In en, this message translates to:
-  /// **'The file was not saved as '**
-  String get asBadFile;
 
   /// No description provided for @gsPageTitle.
   ///

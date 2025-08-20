@@ -162,20 +162,12 @@ class LangEn extends Lang {
   String get asPageTitle => 'Archiver';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Your configuration has been saved to $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUse it on ';
 
   @override
   String asToGen(Object app_name) {
     return ' for desktop to generate the code for $app_name';
   }
-
-  @override
-  String get asBadFile => 'The file was not saved as ';
 
   @override
   String get gsPageTitle => 'Generator';
@@ -390,20 +382,12 @@ class LangEnUs extends LangEn {
   String get asPageTitle => 'Archiver';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Your configuration has been saved to $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUse it on ';
 
   @override
   String asToGen(Object app_name) {
     return ' for desktop to generate the code for $app_name';
   }
-
-  @override
-  String get asBadFile => 'The file was not saved as ';
 
   @override
   String get gsPageTitle => 'Generator';

@@ -61,10 +61,8 @@
 
   "asPageTitle": "Archivador",
 
-  "asSavedTo": "Su configuración se ha guardado en {path}",
   "asUseIt": "\n\nÚselo en ",
   "asToGen": " para escritorio para generar el código para {app_name}",
-  "asBadFile": "El archivo no se guardó como ",
 
 
 

@@ -273,6 +273,12 @@ abstract class EFUILang {
   /// **'Quick'**
   String get gQuick;
 
+  /// No description provided for @gConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Config'**
+  String get gConfig;
+
   /// No description provided for @gDecrease.
   ///
   /// In en, this message translates to:
@@ -674,6 +680,18 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Fancy pants'**
   String get ssFancyPants;
+
+  /// No description provided for @ssConfigSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your configuration has been saved to {path}'**
+  String ssConfigSaved(Object path);
+
+  /// No description provided for @ssWrongConfigExt.
+  ///
+  /// In en, this message translates to:
+  /// **'The file was not saved as '**
+  String get ssWrongConfigExt;
 
   /// No description provided for @ssResetAll.
   ///

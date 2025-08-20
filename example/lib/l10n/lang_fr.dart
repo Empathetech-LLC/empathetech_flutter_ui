@@ -168,20 +168,12 @@ class LangFr extends Lang {
   String get asPageTitle => 'Archiviste';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Votre configuration a été enregistrée dans $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUtilisez-le sur ';
 
   @override
   String asToGen(Object app_name) {
     return ' pour le bureau pour générer le code pour $app_name';
   }
-
-  @override
-  String get asBadFile => 'Le fichier n\'a pas été enregistré comme ';
 
   @override
   String get gsPageTitle => 'Générateur';
