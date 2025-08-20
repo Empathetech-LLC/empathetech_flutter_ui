@@ -317,7 +317,6 @@ class EzVideoGameConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool onMobile = isMobile();
-    final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
 
     final TextStyle localBody = fuseWithGFont(
@@ -350,9 +349,7 @@ class EzVideoGameConfig extends StatelessWidget {
 
         await EzConfig.removeKeys(textStyleKeys.keys.toSet());
         await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(
-          isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-        );
+        await EzConfig.removeKeys(darkColorKeys.toSet());
         await EzConfig.removeKeys(allImageKeys.keys.toSet());
 
         // Update text //
@@ -404,9 +401,10 @@ class EzVideoGameConfig extends StatelessWidget {
 
         // Update colors //
 
+        await EzConfig.setBool(isDarkThemeKey, true);
         await storeColorScheme(
           colorScheme: ezColorScheme(Brightness.dark),
-          brightness: isDark ? Brightness.dark : Brightness.light,
+          brightness: Brightness.dark,
         );
 
         // Callback //
@@ -426,10 +424,8 @@ class EzChalkboardConfig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = isDarkTheme(context);
-    final EFUILang l10n = ezL10n(context);
-
     const Color chalkboardGreen = Color(0xFF264941);
+    final EFUILang l10n = ezL10n(context);
 
     final TextStyle localBody = fuseWithGFont(
       starter: const TextStyle(
@@ -460,9 +456,7 @@ class EzChalkboardConfig extends StatelessWidget {
 
         await EzConfig.removeKeys(textStyleKeys.keys.toSet());
         await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(
-          isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-        );
+        await EzConfig.removeKeys(darkColorKeys.toSet());
         await EzConfig.removeKeys(allImageKeys.keys.toSet());
 
         // Update text //
@@ -489,9 +483,10 @@ class EzChalkboardConfig extends StatelessWidget {
 
         // Update colors //
 
+        await EzConfig.setBool(isDarkThemeKey, true);
         await storeColorScheme(
-          colorScheme: ColorScheme(
-            brightness: isDark ? Brightness.dark : Brightness.light,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.dark,
             // Primary
             primary: empathSand,
             onPrimary: Colors.black,
@@ -550,7 +545,7 @@ class EzChalkboardConfig extends StatelessWidget {
             inversePrimary: empathSand,
             surfaceTint: Colors.transparent,
           ),
-          brightness: isDark ? Brightness.dark : Brightness.light,
+          brightness: Brightness.dark,
         );
 
         // Callback //
