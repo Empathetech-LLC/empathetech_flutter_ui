@@ -543,17 +543,23 @@ abstract class EFUILang {
   /// **'Open the settings page'**
   String get ssNavHint;
 
-  /// No description provided for @ssSettingsGuide.
+  /// No description provided for @ssRestartReminder.
   ///
   /// In en, this message translates to:
-  /// **'Close and reopen the app to apply your changes.\n\nHave fun!'**
-  String get ssSettingsGuide;
+  /// **'Close and reopen the app to apply your changes.'**
+  String get ssRestartReminder;
 
-  /// No description provided for @ssSettingsGuideWeb.
+  /// No description provided for @ssRestartReminderWeb.
   ///
   /// In en, this message translates to:
-  /// **'Reload/refresh the page to apply your changes.\n\nHave fun!'**
-  String get ssSettingsGuideWeb;
+  /// **'Reload/refresh the page to apply your changes.'**
+  String get ssRestartReminderWeb;
+
+  /// No description provided for @ssHaveFun.
+  ///
+  /// In en, this message translates to:
+  /// **'Have fun!'**
+  String get ssHaveFun;
 
   /// No description provided for @ssThemeMode.
   ///

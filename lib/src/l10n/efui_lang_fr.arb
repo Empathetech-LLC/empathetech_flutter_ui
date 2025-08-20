@@ -99,8 +99,9 @@
 
   "ssPageTitle": "Paramètres",
   "ssNavHint": "Ouvrir la page des paramètres",
-  "ssSettingsGuide": "Fermez et rouvrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
-  "ssSettingsGuideWeb": "Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssRestartReminder": "Fermez et rouvrez l'application pour appliquer vos modifications.",
+  "ssRestartReminderWeb": "Rechargez/actualisez la page pour appliquer vos modifications.",
+  "ssHaveFun": "Amusez-vous bien !",
 
   "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",

@@ -245,12 +245,15 @@ class EFUILangFr extends EFUILang {
   String get ssNavHint => 'Ouvrir la page des paramètres';
 
   @override
-  String get ssSettingsGuide =>
-      'Fermez et rouvrez l\'application pour appliquer vos modifications.\n\nAmusez-vous bien !';
+  String get ssRestartReminder =>
+      'Fermez et rouvrez l\'application pour appliquer vos modifications.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !';
+  String get ssRestartReminderWeb =>
+      'Rechargez/actualisez la page pour appliquer vos modifications.';
+
+  @override
+  String get ssHaveFun => 'Amusez-vous bien !';
 
   @override
   String get ssThemeMode => 'Mode de thème';

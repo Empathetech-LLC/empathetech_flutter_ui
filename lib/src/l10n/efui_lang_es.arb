@@ -99,8 +99,9 @@
 
   "ssPageTitle": "Configuración",
   "ssNavHint": "Abrir la página de configuración",
-  "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
-  "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
+  "ssRestartReminder": "Cierre y vuelva a abrir la app para aplicar los cambios.",
+  "ssRestartReminderWeb": "Recarga o actualice la página para aplicar tus cambios.",
+  "ssHaveFun": "¡Diviértete!",
 
   "ssThemeMode": "Modo del tema",
   "ssDominantHand": "Mano preferente",

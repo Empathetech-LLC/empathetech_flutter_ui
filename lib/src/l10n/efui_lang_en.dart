@@ -244,12 +244,15 @@ class EFUILangEn extends EFUILang {
   String get ssNavHint => 'Open the settings page';
 
   @override
-  String get ssSettingsGuide =>
-      'Close and reopen the app to apply your changes.\n\nHave fun!';
+  String get ssRestartReminder =>
+      'Close and reopen the app to apply your changes.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Reload/refresh the page to apply your changes.\n\nHave fun!';
+  String get ssRestartReminderWeb =>
+      'Reload/refresh the page to apply your changes.';
+
+  @override
+  String get ssHaveFun => 'Have fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';
@@ -773,12 +776,15 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssNavHint => 'Open the settings page';
 
   @override
-  String get ssSettingsGuide =>
-      'Close and reopen the app to apply your changes.\n\nHave fun!';
+  String get ssRestartReminder =>
+      'Close and reopen the app to apply your changes.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Reload/refresh the page to apply your changes.\n\nHave fun!';
+  String get ssRestartReminderWeb =>
+      'Reload/refresh the page to apply your changes.';
+
+  @override
+  String get ssHaveFun => 'Have fun!';
 
   @override
   String get ssThemeMode => 'Theme mode';

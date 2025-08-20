@@ -245,12 +245,15 @@ class EFUILangEs extends EFUILang {
   String get ssNavHint => 'Abrir la página de configuración';
 
   @override
-  String get ssSettingsGuide =>
-      'Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!';
+  String get ssRestartReminder =>
+      'Cierre y vuelva a abrir la app para aplicar los cambios.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!';
+  String get ssRestartReminderWeb =>
+      'Recarga o actualice la página para aplicar tus cambios.';
+
+  @override
+  String get ssHaveFun => '¡Diviértete!';
 
   @override
   String get ssThemeMode => 'Modo del tema';

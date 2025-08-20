@@ -99,8 +99,9 @@
 
   "ssPageTitle": "Settings",
   "ssNavHint": "Open the settings page",
-  "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
+  "ssRestartReminder": "Close and reopen the app to apply your changes.",
+  "ssRestartReminderWeb": "Reload/refresh the page to apply your changes.",
+  "ssHaveFun": "Have fun!",
 
   "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",
