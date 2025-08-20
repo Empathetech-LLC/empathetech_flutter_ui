@@ -72,7 +72,7 @@ class EzQuickConfig extends StatelessWidget {
             ezSnackBar(
               context: context,
               message:
-                  '${l10n.ssApplied(configName)} ${kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide}',
+                  '${l10n.ssApplied(configName)} ${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}',
             );
           }
 

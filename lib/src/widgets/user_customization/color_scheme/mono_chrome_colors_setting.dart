@@ -101,8 +101,8 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
         if (context.mounted) {
           ezSnackBar(
             context: context,
-            message: (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)
-                .split('\n')[0],
+            message:
+                kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder,
           );
         }
       },

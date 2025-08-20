@@ -183,11 +183,8 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     return EzScrollView(
       children: <Widget>[
         // Restart disclaimer
-        EzWarning(widget.notFun
-            ? (kIsWeb
-                ? l10n.ssSettingsGuideWeb.split('\n').first
-                : l10n.ssSettingsGuide.split('\n').first)
-            : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
+        EzWarning(
+            '${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}${widget.notFun ? '' : '\n\n${l10n.ssHaveFun}'}'),
         separator,
 
         // Right/left
