@@ -109,9 +109,10 @@
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
   "ssLoadPreset": "Cargar preajuste",
-  "ssLoadConfigHint": "Activar para mostrar ajustes preestablecidos",
+  "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
   "ssSaveConfig": "Guardar configuración",
   "ssLoadConfig": "Cargar configuración",
+  "ssApplied": "{config} aplicado.",
 
   "ssTryMe": "Pruébame",
   "ssRandom": "Randomiser",

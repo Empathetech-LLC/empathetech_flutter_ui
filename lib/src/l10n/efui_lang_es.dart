@@ -268,13 +268,18 @@ class EFUILangEs extends EFUILang {
   String get ssLoadPreset => 'Cargar preajuste';
 
   @override
-  String get ssLoadPresetHint => 'Activate to show presets';
+  String get ssLoadPresetHint => 'Activar para mostrar ajustes preestablecidos';
 
   @override
   String get ssSaveConfig => 'Guardar configuración';
 
   @override
   String get ssLoadConfig => 'Cargar configuración';
+
+  @override
+  String ssApplied(Object config) {
+    return '$config aplicado.';
+  }
 
   @override
   String get ssTryMe => 'Pruébame';

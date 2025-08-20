@@ -112,6 +112,7 @@
   "ssLoadPresetHint": "Activer pour afficher les préréglages",
   "ssSaveConfig": "Enregistrer la configuration",
   "ssLoadConfig": "Charger la configuration",
+  "ssApplied": "{config} appliqué.",
 
   "ssTryMe": "Essayez-moi",
   "ssRandom": "Randomiser",

@@ -603,6 +603,12 @@ abstract class EFUILang {
   /// **'Load config'**
   String get ssLoadConfig;
 
+  /// No description provided for @ssApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'{config} applied.'**
+  String ssApplied(Object config);
+
   /// No description provided for @ssTryMe.
   ///
   /// In en, this message translates to:

@@ -276,6 +276,11 @@ class EFUILangEn extends EFUILang {
   String get ssLoadConfig => 'Load config';
 
   @override
+  String ssApplied(Object config) {
+    return '$config applied.';
+  }
+
+  @override
   String get ssTryMe => 'Try me';
 
   @override
@@ -798,6 +803,11 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssLoadConfig => 'Load config';
+
+  @override
+  String ssApplied(Object config) {
+    return '$config applied.';
+  }
 
   @override
   String get ssTryMe => 'Try me';

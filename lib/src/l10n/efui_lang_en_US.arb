@@ -112,6 +112,7 @@
   "ssLoadPresetHint": "Activate to show presets",
   "ssSaveConfig": "Save config",
   "ssLoadConfig": "Load config",
+  "ssApplied": "{config} applied.",
 
   "ssTryMe": "Try me",
   "ssRandom": "Randomize",

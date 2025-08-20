@@ -277,6 +277,11 @@ class EFUILangFr extends EFUILang {
   String get ssLoadConfig => 'Charger la configuration';
 
   @override
+  String ssApplied(Object config) {
+    return '$config appliqué.';
+  }
+
+  @override
   String get ssTryMe => 'Essayez-moi';
 
   @override
