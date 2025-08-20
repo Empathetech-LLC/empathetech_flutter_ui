@@ -175,7 +175,9 @@ class EzLowVisionConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: isDark ? Colors.white : Colors.black,
+        color: isDark
+            ? Colors.white
+            : Colors.black, // TODO: fix these (&& search for things like it)
         height: 1.75,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: 0.30,
@@ -189,13 +191,13 @@ class EzLowVisionConfig extends StatelessWidget {
           ? ElevatedButton.styleFrom(
               iconColor: Colors.white,
               overlayColor: Colors.white,
-              side: const BorderSide(color: Colors.white),
+              side: const BorderSide(color: dimWhite),
               textStyle: localBody,
             )
           : ElevatedButton.styleFrom(
               iconColor: Colors.black,
               overlayColor: Colors.black,
-              side: const BorderSide(color: Colors.black),
+              side: const BorderSide(color: dimBlack),
               textStyle: localBody,
             ),
       onPressed: () async {
@@ -329,7 +331,7 @@ class EzVideoGameConfig extends StatelessWidget {
         backgroundColor: darkSurface,
         foregroundColor: empathEucalyptus,
         iconColor: Colors.white,
-        overlayColor: empathEucalyptus,
+        overlayColor: Colors.white,
         side: const BorderSide(color: empathEucalyptusDim),
         textStyle: localBody,
         padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
@@ -376,6 +378,9 @@ class EzVideoGameConfig extends StatelessWidget {
         await EzConfig.setBool(labelBoldedKey, false);
         await EzConfig.setBool(labelItalicizedKey, false);
 
+        // Icons
+        if (!onMobile) await EzConfig.setDouble(iconSizeKey, 22.0);
+
         // Update layout //
 
         if (onMobile) {
@@ -388,12 +393,63 @@ class EzVideoGameConfig extends StatelessWidget {
           await EzConfig.setDouble(spacingKey, 35.0);
         }
 
-        await EzConfig.setDouble(iconSizeKey, 22.0);
-
         // Update colors //
 
         await storeColorScheme(
-          colorScheme: ezColorScheme(Brightness.dark),
+          colorScheme: ColorScheme(
+            brightness: isDark ? Brightness.dark : Brightness.light,
+            // Primary
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            primaryContainer: empathEucalyptusDim,
+            onPrimaryContainer: Colors.black,
+            primaryFixed: Colors.white,
+            primaryFixedDim: empathEucalyptusDim,
+            onPrimaryFixed: Colors.black,
+            onPrimaryFixedVariant: Colors.black,
+
+            // Secondary
+            secondary: empathSand,
+            onSecondary: Colors.black,
+            secondaryContainer: empathSandDim,
+            onSecondaryContainer: Colors.black,
+            secondaryFixed: empathSand,
+            secondaryFixedDim: empathSandDim,
+            onSecondaryFixed: Colors.black,
+            onSecondaryFixedVariant: Colors.black,
+
+            // Tertiary
+            tertiary: Colors.white,
+            onTertiary: Colors.black,
+            tertiaryContainer: empathPurpleDim,
+            onTertiaryContainer: Colors.white,
+            tertiaryFixed: Colors.white,
+            tertiaryFixedDim: empathPurpleDim,
+            onTertiaryFixed: Colors.black,
+            onTertiaryFixedVariant: Colors.white,
+
+            // Error
+            error: Colors.red,
+            onError: Colors.white,
+            errorContainer: Colors.redAccent,
+            onErrorContainer: Colors.white,
+
+            // Surface
+            surface: darkSurface,
+            onSurface: empathEucalyptus,
+            surfaceDim: darkSurfaceDim,
+            surfaceContainer: darkSurfaceContainer,
+            onSurfaceVariant: empathEucalyptus,
+
+            // Misc
+            outline: empathEucalyptusDim,
+            outlineVariant: empathEucalyptusDim,
+            scrim: Colors.black,
+            inverseSurface: darkSurface,
+            onInverseSurface: empathEucalyptus,
+            inversePrimary: Colors.white,
+            surfaceTint: Colors.transparent,
+          ),
           brightness: isDark ? Brightness.dark : Brightness.light,
         );
 
@@ -480,6 +536,7 @@ class EzChalkboardConfig extends StatelessWidget {
         await storeColorScheme(
           colorScheme: ColorScheme(
             brightness: isDark ? Brightness.dark : Brightness.light,
+            // Primary
             primary: empathSand,
             onPrimary: Colors.black,
             primaryContainer: dimWhite,
@@ -488,6 +545,8 @@ class EzChalkboardConfig extends StatelessWidget {
             primaryFixedDim: empathSand,
             onPrimaryFixed: Colors.black,
             onPrimaryFixedVariant: Colors.black,
+
+            // Secondary
             secondary: Colors.white,
             onSecondary: Colors.black,
             secondaryContainer: Colors.white,
@@ -496,6 +555,8 @@ class EzChalkboardConfig extends StatelessWidget {
             secondaryFixedDim: Colors.white,
             onSecondaryFixed: Colors.black,
             onSecondaryFixedVariant: Colors.black,
+
+            // Tertiary
             tertiary: Colors.white,
             onTertiary: Colors.black,
             tertiaryContainer: Colors.white,
@@ -504,10 +565,14 @@ class EzChalkboardConfig extends StatelessWidget {
             tertiaryFixedDim: Colors.white,
             onTertiaryFixed: Colors.black,
             onTertiaryFixedVariant: Colors.black,
+
+            // Error
             error: Colors.red,
             onError: Colors.white,
             errorContainer: Colors.redAccent,
             onErrorContainer: Colors.white,
+
+            // Surface
             surface: chalkboardGreen,
             onSurface: Colors.white,
             surfaceDim: chalkboardGreen,
@@ -518,6 +583,8 @@ class EzChalkboardConfig extends StatelessWidget {
             surfaceContainerHigh: chalkboardGreen,
             surfaceContainerHighest: chalkboardGreen,
             onSurfaceVariant: Colors.white,
+
+            // Misc
             outline: dimWhite,
             outlineVariant: dimWhite,
             shadow: Colors.transparent,
