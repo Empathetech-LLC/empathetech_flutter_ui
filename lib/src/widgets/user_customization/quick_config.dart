@@ -122,7 +122,7 @@ class EzQuickConfig extends StatelessWidget {
           );
         },
       ),
-      icon: EzIcon(Icons.save),
+      icon: EzIcon(PlatformIcons(context).edit),
       label: ezL10n(context).ssLoadPreset,
     );
   }
