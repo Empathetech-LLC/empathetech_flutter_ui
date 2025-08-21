@@ -51,7 +51,7 @@ class EzConfigFAB extends FloatingActionButton {
             late final String savedConfig;
             try {
               savedConfig = await FileSaver.instance.saveFile(
-                name: '${appName}_settings.json',
+                name: '${ezTitleToSnake(appName)}_settings.json',
                 bytes: utf8.encode(jsonEncode(config)),
                 mimeType: MimeType.json,
               );
