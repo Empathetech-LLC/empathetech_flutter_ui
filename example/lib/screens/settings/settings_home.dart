@@ -22,5 +22,10 @@ class SettingsHomeScreen extends StatelessWidget {
           colorSettingsPath: colorSettingsPath,
           imageSettingsPath: imageSettingsPath,
         )),
+        fab: EzConfigFAB(
+          context,
+          packageName: 'net.empathetech.open_ui',
+          appName: 'Open UI',
+        ),
       );
 }
