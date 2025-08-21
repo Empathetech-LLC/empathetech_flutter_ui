@@ -273,12 +273,6 @@ abstract class EFUILang {
   /// **'Quick'**
   String get gQuick;
 
-  /// No description provided for @gConfig.
-  ///
-  /// In en, this message translates to:
-  /// **'Config'**
-  String get gConfig;
-
   /// No description provided for @gDecrease.
   ///
   /// In en, this message translates to:
@@ -567,17 +561,17 @@ abstract class EFUILang {
   /// **'Have fun!'**
   String get ssHaveFun;
 
-  /// No description provided for @ssThemeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme mode'**
-  String get ssThemeMode;
-
   /// No description provided for @ssDominantHand.
   ///
   /// In en, this message translates to:
   /// **'Dominant hand'**
   String get ssDominantHand;
+
+  /// No description provided for @ssThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode'**
+  String get ssThemeMode;
 
   /// No description provided for @ssLanguage.
   ///
@@ -603,17 +597,35 @@ abstract class EFUILang {
   /// **'Activate to show presets'**
   String get ssLoadPresetHint;
 
-  /// No description provided for @ssSaveConfig.
+  /// No description provided for @ssBigButtons.
   ///
   /// In en, this message translates to:
-  /// **'Save config'**
-  String get ssSaveConfig;
+  /// **'Big buttons'**
+  String get ssBigButtons;
 
-  /// No description provided for @ssLoadConfig.
+  /// No description provided for @ssHighVisibility.
   ///
   /// In en, this message translates to:
-  /// **'Load config'**
-  String get ssLoadConfig;
+  /// **'High visibility'**
+  String get ssHighVisibility;
+
+  /// No description provided for @ssVideoGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Video game'**
+  String get ssVideoGame;
+
+  /// No description provided for @ssChalkboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Chalkboard'**
+  String get ssChalkboard;
+
+  /// No description provided for @ssFancyPants.
+  ///
+  /// In en, this message translates to:
+  /// **'Fancy pants'**
+  String get ssFancyPants;
 
   /// No description provided for @ssDarkOnly.
   ///
@@ -651,35 +663,17 @@ abstract class EFUILang {
   /// **'Randomize {themeType} theme?'**
   String ssRandomize(Object themeType);
 
-  /// No description provided for @ssBigButtons.
+  /// No description provided for @ssConfigTip.
   ///
   /// In en, this message translates to:
-  /// **'Big buttons'**
-  String get ssBigButtons;
+  /// **'Save/load config'**
+  String get ssConfigTip;
 
-  /// No description provided for @ssHighVisibility.
+  /// No description provided for @ssSaveConfig.
   ///
   /// In en, this message translates to:
-  /// **'High visibility'**
-  String get ssHighVisibility;
-
-  /// No description provided for @ssVideoGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Video game'**
-  String get ssVideoGame;
-
-  /// No description provided for @ssChalkboard.
-  ///
-  /// In en, this message translates to:
-  /// **'Chalkboard'**
-  String get ssChalkboard;
-
-  /// No description provided for @ssFancyPants.
-  ///
-  /// In en, this message translates to:
-  /// **'Fancy pants'**
-  String get ssFancyPants;
+  /// **'Save config'**
+  String get ssSaveConfig;
 
   /// No description provided for @ssConfigSaved.
   ///
@@ -692,6 +686,12 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'The file was not saved as '**
   String get ssWrongConfigExt;
+
+  /// No description provided for @ssLoadConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Load config'**
+  String get ssLoadConfig;
 
   /// No description provided for @ssResetAll.
   ///

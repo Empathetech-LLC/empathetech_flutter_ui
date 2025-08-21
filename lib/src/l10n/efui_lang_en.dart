@@ -98,9 +98,6 @@ class EFUILangEn extends EFUILang {
   String get gQuick => 'Quick';
 
   @override
-  String get gConfig => 'Config';
-
-  @override
   String get gDecrease => 'Decrease';
 
   @override
@@ -258,10 +255,10 @@ class EFUILangEn extends EFUILang {
   String get ssHaveFun => 'Have fun!';
 
   @override
-  String get ssThemeMode => 'Theme mode';
+  String get ssDominantHand => 'Dominant hand';
 
   @override
-  String get ssDominantHand => 'Dominant hand';
+  String get ssThemeMode => 'Theme mode';
 
   @override
   String get ssLanguage => 'Language';
@@ -276,10 +273,19 @@ class EFUILangEn extends EFUILang {
   String get ssLoadPresetHint => 'Activate to show presets';
 
   @override
-  String get ssSaveConfig => 'Save config';
+  String get ssBigButtons => 'Big buttons';
 
   @override
-  String get ssLoadConfig => 'Load config';
+  String get ssHighVisibility => 'High visibility';
+
+  @override
+  String get ssVideoGame => 'Video game';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
 
   @override
   String get ssDarkOnly =>
@@ -306,19 +312,10 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get ssBigButtons => 'Big buttons';
+  String get ssConfigTip => 'Save/load config';
 
   @override
-  String get ssHighVisibility => 'High visibility';
-
-  @override
-  String get ssVideoGame => 'Video game';
-
-  @override
-  String get ssChalkboard => 'Chalkboard';
-
-  @override
-  String get ssFancyPants => 'Fancy pants';
+  String get ssSaveConfig => 'Save config';
 
   @override
   String ssConfigSaved(Object path) {
@@ -327,6 +324,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get ssWrongConfigExt => 'The file was not saved as ';
+
+  @override
+  String get ssLoadConfig => 'Load config';
 
   @override
   String get ssResetAll => 'Reset all settings?';
@@ -649,9 +649,6 @@ class EFUILangEnUs extends EFUILangEn {
   String get gQuick => 'Quick';
 
   @override
-  String get gConfig => 'Config';
-
-  @override
   String get gDecrease => 'Decrease';
 
   @override
@@ -809,10 +806,10 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssHaveFun => 'Have fun!';
 
   @override
-  String get ssThemeMode => 'Theme mode';
+  String get ssDominantHand => 'Dominant hand';
 
   @override
-  String get ssDominantHand => 'Dominant hand';
+  String get ssThemeMode => 'Theme mode';
 
   @override
   String get ssLanguage => 'Language';
@@ -827,10 +824,19 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssLoadPresetHint => 'Activate to show presets';
 
   @override
-  String get ssSaveConfig => 'Save config';
+  String get ssBigButtons => 'Big buttons';
 
   @override
-  String get ssLoadConfig => 'Load config';
+  String get ssHighVisibility => 'High visibility';
+
+  @override
+  String get ssVideoGame => 'Video game';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
 
   @override
   String get ssDarkOnly =>
@@ -857,19 +863,10 @@ class EFUILangEnUs extends EFUILangEn {
   }
 
   @override
-  String get ssBigButtons => 'Big buttons';
+  String get ssConfigTip => 'Save/load config';
 
   @override
-  String get ssHighVisibility => 'High visibility';
-
-  @override
-  String get ssVideoGame => 'Video game';
-
-  @override
-  String get ssChalkboard => 'Chalkboard';
-
-  @override
-  String get ssFancyPants => 'Fancy pants';
+  String get ssSaveConfig => 'Save config';
 
   @override
   String ssConfigSaved(Object path) {
@@ -878,6 +875,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get ssWrongConfigExt => 'The file was not saved as ';
+
+  @override
+  String get ssLoadConfig => 'Load config';
 
   @override
   String get ssResetAll => 'Reset all settings?';

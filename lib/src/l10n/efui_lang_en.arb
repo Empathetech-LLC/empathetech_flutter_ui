@@ -38,7 +38,6 @@
 
   "gAdvanced": "Advanced",
   "gQuick": "Quick",
-  "gConfig": "Config",
 
   "gDecrease": "Decrease",
   "gIncrease": "Increase",
@@ -104,31 +103,32 @@
   "ssRestartReminderWeb": "Reload/refresh the page to apply your changes.",
   "ssHaveFun": "Have fun!",
 
-  "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",
+  "ssThemeMode": "Theme mode",
   
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
   "ssLoadPreset": "Load preset",
   "ssLoadPresetHint": "Activate to show presets",
-  "ssSaveConfig": "Save config",
-  "ssLoadConfig": "Load config",
-  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?",
-  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?",
-  "ssApplied": "{config} applied.",
-
-  "ssTryMe": "Try me",
-  "ssRandom": "Randomize",
-  "ssRandomize": "Randomize {themeType} theme?",
   "ssBigButtons": "Big buttons",
   "ssHighVisibility": "High visibility",
   "ssVideoGame": "Video game",
   "ssChalkboard": "Chalkboard",
   "ssFancyPants": "Fancy pants",
+  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?",
+  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?",
+  "ssApplied": "{config} applied.",
+  "ssTryMe": "Try me",
 
+  "ssRandom": "Randomize",
+  "ssRandomize": "Randomize {themeType} theme?",
+
+  "ssConfigTip": "Save/load config",
+  "ssSaveConfig": "Save config",
   "ssConfigSaved": "Your configuration has been saved to {path}",
   "ssWrongConfigExt": "The file was not saved as ",
+  "ssLoadConfig": "Load config",
 
   "ssResetAll": "Reset all settings?",
 

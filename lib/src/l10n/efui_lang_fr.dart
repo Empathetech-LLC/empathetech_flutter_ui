@@ -98,9 +98,6 @@ class EFUILangFr extends EFUILang {
   String get gQuick => 'Rapide';
 
   @override
-  String get gConfig => 'Configuration';
-
-  @override
   String get gDecrease => 'Réduire';
 
   @override
@@ -259,10 +256,10 @@ class EFUILangFr extends EFUILang {
   String get ssHaveFun => 'Amusez-vous bien !';
 
   @override
-  String get ssThemeMode => 'Mode de thème';
+  String get ssDominantHand => 'Main dominante';
 
   @override
-  String get ssDominantHand => 'Main dominante';
+  String get ssThemeMode => 'Mode de thème';
 
   @override
   String get ssLanguage => 'Langue';
@@ -277,10 +274,19 @@ class EFUILangFr extends EFUILang {
   String get ssLoadPresetHint => 'Activer pour afficher les préréglages';
 
   @override
-  String get ssSaveConfig => 'Enregistrer la configuration';
+  String get ssBigButtons => 'Gros boutons';
 
   @override
-  String get ssLoadConfig => 'Charger la configuration';
+  String get ssHighVisibility => 'Haute visibilité';
+
+  @override
+  String get ssVideoGame => 'Mode jeu';
+
+  @override
+  String get ssChalkboard => 'Tableau noir';
+
+  @override
+  String get ssFancyPants => 'Pantalons élégants';
 
   @override
   String get ssDarkOnly =>
@@ -307,19 +313,10 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get ssBigButtons => 'Gros boutons';
+  String get ssConfigTip => 'Enregistrer/charger la configuration';
 
   @override
-  String get ssHighVisibility => 'Haute visibilité';
-
-  @override
-  String get ssVideoGame => 'Mode jeu';
-
-  @override
-  String get ssChalkboard => 'Tableau noir';
-
-  @override
-  String get ssFancyPants => 'Pantalons élégants';
+  String get ssSaveConfig => 'Enregistrer la configuration';
 
   @override
   String ssConfigSaved(Object path) {
@@ -328,6 +325,9 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssWrongConfigExt => 'Le fichier n\'a pas été enregistré comme ';
+
+  @override
+  String get ssLoadConfig => 'Charger la configuration';
 
   @override
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';

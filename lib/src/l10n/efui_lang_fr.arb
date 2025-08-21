@@ -38,7 +38,6 @@
 
   "gAdvanced": "Avancé",
   "gQuick": "Rapide",
-  "gConfig": "Configuration",
 
   "gDecrease": "Réduire",
   "gIncrease": "Augmenter",
@@ -104,29 +103,30 @@
   "ssRestartReminderWeb": "Rechargez/actualisez la page pour appliquer vos modifications.",
   "ssHaveFun": "Amusez-vous bien !",
 
-  "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",
+  "ssThemeMode": "Mode de thème",
 
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
   
   "ssLoadPreset": "Charger un préréglage",
   "ssLoadPresetHint": "Activer pour afficher les préréglages",
-  "ssSaveConfig": "Enregistrer la configuration",
-  "ssLoadConfig": "Charger la configuration",
-  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?",
-  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?",
-  "ssApplied": "{config} appliqué.",
-
-  "ssTryMe": "Essayez-moi",
-  "ssRandom": "Randomiser",
-  "ssRandomize": "Thème {themeType} aléatoire ?",
   "ssBigButtons": "Gros boutons",
   "ssHighVisibility": "Haute visibilité",
   "ssVideoGame": "Mode jeu",
   "ssChalkboard": "Tableau noir",
   "ssFancyPants": "Pantalons élégants",
+  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?",
+  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?",
+  "ssApplied": "{config} appliqué.",
+  "ssTryMe": "Essayez-moi",
 
+  "ssRandom": "Randomiser",
+  "ssRandomize": "Thème {themeType} aléatoire ?",
+
+  "ssConfigTip": "Enregistrer/charger la configuration",
+  "ssSaveConfig": "Enregistrer la configuration",
+  "ssLoadConfig": "Charger la configuration",
   "ssConfigSaved": "Votre configuration a été enregistrée dans {path}",
   "ssWrongConfigExt": "Le fichier n'a pas été enregistré comme ",
 

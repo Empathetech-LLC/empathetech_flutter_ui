@@ -38,7 +38,6 @@
 
   "gAdvanced": "Avanzado",
   "gQuick": "Rápido",
-  "gConfig": "Configuración",
 
   "gDecrease": "Disminuir",
   "gIncrease": "Aumentar",
@@ -104,31 +103,32 @@
   "ssRestartReminderWeb": "Recarga o actualice la página para aplicar tus cambios.",
   "ssHaveFun": "¡Diviértete!",
 
-  "ssThemeMode": "Modo del tema",
   "ssDominantHand": "Mano preferente",
+  "ssThemeMode": "Modo del tema",
   
   "ssLanguage": "Idioma",
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
   "ssLoadPreset": "Cargar preajuste",
   "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
-  "ssSaveConfig": "Guardar configuración",
-  "ssLoadConfig": "Cargar configuración",
-  "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?",
-  "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?",
-  "ssApplied": "{config} aplicado.",
-
-  "ssTryMe": "Pruébame",
-  "ssRandom": "Randomiser",
-  "ssRandomize": "Thème {themeType} aléatoire ?",
   "ssBigButtons": "Botones grandes",
   "ssHighVisibility": "Alta visibilidad",
   "ssVideoGame": "Videojuego",
   "ssChalkboard": "Pizarra",
   "ssFancyPants": "Pantalones elegantes",
+  "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?",
+  "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?",
+  "ssApplied": "{config} aplicado.",
+  "ssTryMe": "Pruébame",
 
+  "ssRandom": "Randomiser",
+  "ssRandomize": "Thème {themeType} aléatoire ?",
+
+  "ssConfigTip": "Guardar/cargar configuración",
+  "ssSaveConfig": "Guardar configuración",
   "ssConfigSaved": "Su configuración se ha guardado en {path}",
   "ssWrongConfigExt": "El archivo no se guardó como ",
+  "ssLoadConfig": "Cargar configuración",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
 

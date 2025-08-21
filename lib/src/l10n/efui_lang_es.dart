@@ -98,9 +98,6 @@ class EFUILangEs extends EFUILang {
   String get gQuick => 'Rápido';
 
   @override
-  String get gConfig => 'Configuración';
-
-  @override
   String get gDecrease => 'Disminuir';
 
   @override
@@ -259,10 +256,10 @@ class EFUILangEs extends EFUILang {
   String get ssHaveFun => '¡Diviértete!';
 
   @override
-  String get ssThemeMode => 'Modo del tema';
+  String get ssDominantHand => 'Mano preferente';
 
   @override
-  String get ssDominantHand => 'Mano preferente';
+  String get ssThemeMode => 'Modo del tema';
 
   @override
   String get ssLanguage => 'Idioma';
@@ -277,10 +274,19 @@ class EFUILangEs extends EFUILang {
   String get ssLoadPresetHint => 'Activar para mostrar ajustes preestablecidos';
 
   @override
-  String get ssSaveConfig => 'Guardar configuración';
+  String get ssBigButtons => 'Botones grandes';
 
   @override
-  String get ssLoadConfig => 'Cargar configuración';
+  String get ssHighVisibility => 'Alta visibilidad';
+
+  @override
+  String get ssVideoGame => 'Videojuego';
+
+  @override
+  String get ssChalkboard => 'Pizarra';
+
+  @override
+  String get ssFancyPants => 'Pantalones elegantes';
 
   @override
   String get ssDarkOnly =>
@@ -307,19 +313,10 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get ssBigButtons => 'Botones grandes';
+  String get ssConfigTip => 'Guardar/cargar configuración';
 
   @override
-  String get ssHighVisibility => 'Alta visibilidad';
-
-  @override
-  String get ssVideoGame => 'Videojuego';
-
-  @override
-  String get ssChalkboard => 'Pizarra';
-
-  @override
-  String get ssFancyPants => 'Pantalones elegantes';
+  String get ssSaveConfig => 'Guardar configuración';
 
   @override
   String ssConfigSaved(Object path) {
@@ -328,6 +325,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssWrongConfigExt => 'El archivo no se guardó como ';
+
+  @override
+  String get ssLoadConfig => 'Cargar configuración';
 
   @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
