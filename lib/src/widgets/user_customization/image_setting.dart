@@ -36,6 +36,9 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the update theme checkbox && message should be displayed
   final bool updateThemeOption;
 
+  /// Whether the [EzImageEditor] should be displayed upon successful image selection
+  final bool showEditor;
+
   /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
   final bool showFitOption;
 
@@ -48,6 +51,7 @@ class EzImageSetting extends StatefulWidget {
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
+    this.showEditor = true,
     this.showFitOption = true,
   });
 
@@ -392,6 +396,20 @@ class _ImageSettingState extends State<EzImageSetting> {
         ),
       );
 
+  /// Opens [EzImageEditor] and overrides the image as necessary
+  Future<void> editImage(ThemeData theme) async {
+    final String? editResult = await Navigator.of(context).push(
+      platformPageRoute(
+        context: context,
+        builder: (_) => EzImageEditor(currPath!),
+      ),
+    );
+
+    if (editResult != null && editResult.isNotEmpty && editResult != currPath) {
+      setState(() => currPath = editResult);
+    }
+  }
+
   /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
   Future<void> chooseFit(ThemeData theme) {
     final double width = widthOf(context) * 0.25;
@@ -568,6 +586,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
 
       if (currPath != noImageValue) {
+        if (widget.showEditor) await editImage(theme);
         if (widget.showFitOption) await chooseFit(theme);
 
         // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a chance to read things
