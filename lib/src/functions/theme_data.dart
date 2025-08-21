@@ -39,6 +39,7 @@ ThemeData ezThemeData(Brightness brightness) {
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
   // Build the ThemeData //
 
@@ -241,7 +242,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(padding),
+        padding: EzInsets.wrap(spacing),
       ),
     ),
 
