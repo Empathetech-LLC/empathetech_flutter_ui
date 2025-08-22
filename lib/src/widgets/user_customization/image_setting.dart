@@ -36,11 +36,11 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the update theme checkbox && message should be displayed
   final bool updateThemeOption;
 
-  /// Whether the [EzImageEditor] should be displayed upon successful image selection
-  final bool showEditor;
-
   /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
   final bool showFitOption;
+
+  /// Whether the [EzImageEditor] should be displayed upon successful image selection
+  final bool showEditor;
 
   /// [EzElevatedIconButton] for updating the image at [configKey]'s path
   const EzImageSetting({
@@ -586,8 +586,50 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
 
       if (currPath != noImageValue) {
-        if (widget.showEditor) await editImage(theme);
-        if (widget.showFitOption) await chooseFit(theme);
+        // TODO: l10n
+        // TODO: check exit cases, when is it saved? when should it? is the background (below) getting set?
+        // TODO: On successful crop, set to contain
+        if (widget.showEditor && widget.showFitOption) {
+          if (mounted) {
+            await showPlatformDialog<bool?>(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                void useFull() async {
+                  Navigator.of(dialogContext).pop();
+                  await chooseFit(theme);
+                }
+
+                void crop() async {
+                  Navigator.of(dialogContext).pop();
+                  await editImage(theme);
+                }
+
+                void cancel() => Navigator.of(dialogContext).pop();
+
+                return EzAlertDialog(
+                  title: const Text(
+                    'Use full image?',
+                    textAlign: TextAlign.center,
+                  ),
+                  materialActions: <EzMaterialAction>[
+                    EzMaterialAction(text: 'Yes', onPressed: useFull),
+                    EzMaterialAction(text: 'Crop', onPressed: crop),
+                    EzMaterialAction(text: 'Cancel', onPressed: cancel),
+                  ],
+                  cupertinoActions: <EzCupertinoAction>[
+                    EzCupertinoAction(text: 'Yes', onPressed: useFull),
+                    EzCupertinoAction(text: 'Crop', onPressed: crop),
+                    EzCupertinoAction(text: 'Cancel', onPressed: cancel),
+                  ],
+                  needsClose: false,
+                );
+              },
+            );
+          }
+        } else {
+          if (widget.showEditor) await editImage(theme);
+          if (widget.showFitOption) await chooseFit(theme);
+        }
 
         // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a chance to read things
         final double? lightOpacity =
