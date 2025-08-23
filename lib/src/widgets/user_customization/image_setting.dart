@@ -407,6 +407,10 @@ class _ImageSettingState extends State<EzImageSetting> {
 
     if (editResult != null && editResult.isNotEmpty && editResult != currPath) {
       setState(() => currPath = editResult);
+      await EzConfig.setString(
+        '${widget.configKey}$boxFitSuffix',
+        BoxFit.contain.name,
+      );
     }
   }
 
@@ -588,7 +592,6 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (currPath != noImageValue) {
         // TODO: l10n
         // TODO: check exit cases, when is it saved? when should it? is the background (below) getting set?
-        // TODO: On successful crop, set to contain
         if (widget.showEditor && widget.showFitOption) {
           if (mounted) {
             await showPlatformDialog<bool?>(
