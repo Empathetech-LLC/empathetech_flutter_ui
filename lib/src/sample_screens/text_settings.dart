@@ -268,6 +268,9 @@ class _TextSettingsState extends State<_TextSettings>
             moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
             textBlockSpacer: widget.textBlockSpacer,
             showOpacity: widget.showOpacity,
+            opacityKey: isDarkTheme(context)
+                ? darkTextBackgroundOpacityKey
+                : lightTextBackgroundOpacityKey,
             quickFooterSpacer: widget.quickFooterSpacer,
             moreQuickFooterSettings: widget.moreQuickFooterSettings,
             resetSpacer: widget.resetSpacer,
@@ -314,6 +317,7 @@ class _QuickTextSettings extends StatefulWidget {
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
   final bool showOpacity;
+  final String opacityKey;
   final Widget quickFooterSpacer;
   final List<Widget>? moreQuickFooterSettings;
   final Widget resetSpacer;
@@ -331,6 +335,7 @@ class _QuickTextSettings extends StatefulWidget {
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
     required this.showOpacity,
+    required this.opacityKey,
     required this.quickFooterSpacer,
     required this.moreQuickFooterSettings,
     required this.resetSpacer,
@@ -346,6 +351,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
+  final EzSpacer pMSpacer = EzMargin(vertical: false);
 
   final double margin = EzConfig.get(marginKey);
   final double spacing = EzConfig.get(spacingKey);
@@ -364,22 +370,18 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
   late double currIconSize = EzConfig.get(iconSizeKey);
   static const double iconDelta = 2.0;
 
-  final EzSpacer pMSpacer = EzMargin(vertical: false);
+  late double currOpacity = EzConfig.get(widget.opacityKey);
 
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
 
+    final bool isDark = isDarkTheme(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color surface = colorScheme.surface;
 
-    final bool isDark = isDarkTheme(context);
-    final String oKey =
-        isDark ? darkTextBackgroundOpacityKey : lightTextBackgroundOpacityKey;
-
     // Return the build //
 
-    double currOpacity = EzConfig.get(oKey);
     Color backgroundColor = surface.withValues(alpha: currOpacity);
 
     return Column(
@@ -531,7 +533,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 });
               },
               onChangeEnd: (double value) async {
-                await EzConfig.setDouble(oKey, value);
+                await EzConfig.setDouble(widget.opacityKey, value);
               },
 
               // Slider semantics
@@ -656,7 +658,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             widget.bodyProvider.reset();
             widget.labelProvider.reset();
 
-            currOpacity = EzConfig.getDefault(oKey);
+            currOpacity = EzConfig.getDefault(widget.opacityKey);
             backgroundColor = surface.withValues(alpha: currOpacity);
             currIconSize = EzConfig.getDefault(iconSizeKey);
 
