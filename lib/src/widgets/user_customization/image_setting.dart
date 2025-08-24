@@ -590,7 +590,6 @@ class _ImageSettingState extends State<EzImageSetting> {
       }
 
       if (currPath != noImageValue) {
-        // TODO: l10n
         // TODO: check exit cases, when is it saved? when should it? is the background (below) getting set?
         if (widget.showEditor && widget.showFitOption) {
           if (mounted) {
@@ -610,19 +609,16 @@ class _ImageSettingState extends State<EzImageSetting> {
                 void cancel() => Navigator.of(dialogContext).pop();
 
                 return EzAlertDialog(
-                  title: const Text(
-                    'Use full image?',
-                    textAlign: TextAlign.center,
-                  ),
+                  title: Text(l10n.isUseFull, textAlign: TextAlign.center),
                   materialActions: <EzMaterialAction>[
-                    EzMaterialAction(text: 'Yes', onPressed: useFull),
-                    EzMaterialAction(text: 'Crop', onPressed: crop),
-                    EzMaterialAction(text: 'Cancel', onPressed: cancel),
+                    EzMaterialAction(text: l10n.gYes, onPressed: useFull),
+                    EzMaterialAction(text: l10n.isCrop, onPressed: crop),
+                    EzMaterialAction(text: l10n.gCancel, onPressed: cancel),
                   ],
                   cupertinoActions: <EzCupertinoAction>[
-                    EzCupertinoAction(text: 'Yes', onPressed: useFull),
-                    EzCupertinoAction(text: 'Crop', onPressed: crop),
-                    EzCupertinoAction(text: 'Cancel', onPressed: cancel),
+                    EzCupertinoAction(text: l10n.gYes, onPressed: useFull),
+                    EzCupertinoAction(text: l10n.isCrop, onPressed: crop),
+                    EzCupertinoAction(text: l10n.gCancel, onPressed: cancel),
                   ],
                   needsClose: false,
                 );
