@@ -542,7 +542,37 @@ class EFUILangEn extends EFUILang {
   String get isUseForColors => 'Update the app colors using this image';
 
   @override
+  String get isUseFull => 'Use full image?';
+
+  @override
   String get isFit => 'How should it fit?';
+
+  @override
+  String get isCrop => 'Crop';
+
+  @override
+  String get isDrag => 'Drag';
+
+  @override
+  String get isDragHint => 'Drag to reposition the image';
+
+  @override
+  String get isSwipe => 'Swipe';
+
+  @override
+  String get isSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get isPinch => 'Pinch';
+
+  @override
+  String get isPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get isScroll => 'Scroll';
+
+  @override
+  String get isScrollHint => 'Scroll to zoom in/out';
 
   @override
   String isResetAll(Object themeType) {
@@ -1093,7 +1123,37 @@ class EFUILangEnUs extends EFUILangEn {
   String get isUseForColors => 'Update the app colors using this image';
 
   @override
+  String get isUseFull => 'Use full image?';
+
+  @override
   String get isFit => 'How should it fit?';
+
+  @override
+  String get isCrop => 'Crop';
+
+  @override
+  String get isDrag => 'Drag';
+
+  @override
+  String get isDragHint => 'Drag to reposition the image';
+
+  @override
+  String get isSwipe => 'Swipe';
+
+  @override
+  String get isSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get isPinch => 'Pinch';
+
+  @override
+  String get isPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get isScroll => 'Scroll';
+
+  @override
+  String get isScrollHint => 'Scroll to zoom in/out';
 
   @override
   String isResetAll(Object themeType) {

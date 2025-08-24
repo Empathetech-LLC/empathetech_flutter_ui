@@ -545,7 +545,37 @@ class EFUILangEs extends EFUILang {
       'Actualiza los colores de la app usando esta imagen';
 
   @override
+  String get isUseFull => '¿Usar la imagen completa?';
+
+  @override
   String get isFit => '¿Cómo debe quedar?';
+
+  @override
+  String get isCrop => 'Recortar';
+
+  @override
+  String get isDrag => 'Arrastrar';
+
+  @override
+  String get isDragHint => 'Arrastra para mover la imagen';
+
+  @override
+  String get isSwipe => 'Deslizar';
+
+  @override
+  String get isSwipeHint => 'Desliza para mover la imagen';
+
+  @override
+  String get isPinch => 'Pellizcar';
+
+  @override
+  String get isPinchHint => 'Pellizca para acercar/alejar la imagen';
+
+  @override
+  String get isScroll => 'Desplazar';
+
+  @override
+  String get isScrollHint => 'Desplaza para acercar/alejar la imagen';
 
   @override
   String isResetAll(Object themeType) {

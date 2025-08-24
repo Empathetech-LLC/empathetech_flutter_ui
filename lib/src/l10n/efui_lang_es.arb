@@ -230,7 +230,17 @@
 
   "isUseForColors": "Actualiza los colores de la app usando esta imagen",
 
+  "isUseFull": "¿Usar la imagen completa?",
   "isFit": "¿Cómo debe quedar?",
+  "isCrop": "Recortar",
+  "isDrag": "Arrastrar",
+  "isDragHint": "Arrastra para mover la imagen",
+  "isSwipe": "Deslizar",
+  "isSwipeHint": "Desliza para mover la imagen",
+  "isPinch": "Pellizcar",
+  "isPinchHint": "Pellizca para acercar/alejar la imagen",
+  "isScroll": "Desplazar",
+  "isScrollHint": "Desplaza para acercar/alejar la imagen",
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
   "isAndColors": "¿Y el esquema de colores {themeType}?"

@@ -546,7 +546,37 @@ class EFUILangFr extends EFUILang {
       'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
 
   @override
+  String get isUseFull => 'Utiliser l\'image complète ?';
+
+  @override
   String get isFit => 'Comment devrait-il s\'adapter ?';
+
+  @override
+  String get isCrop => 'Recadrer';
+
+  @override
+  String get isDrag => 'Glisser';
+
+  @override
+  String get isDragHint => 'Glissez pour repositionner l\'image';
+
+  @override
+  String get isSwipe => 'Balayer';
+
+  @override
+  String get isSwipeHint => 'Balayez pour repositionner l\'image';
+
+  @override
+  String get isPinch => 'Pincer';
+
+  @override
+  String get isPinchHint => 'Pincez pour zoomer/dézoomer l\'image';
+
+  @override
+  String get isScroll => 'Faire défiler';
+
+  @override
+  String get isScrollHint => 'Faites défiler pour zoomer/dézoomer';
 
   @override
   String isResetAll(Object themeType) {

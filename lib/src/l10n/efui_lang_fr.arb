@@ -230,7 +230,17 @@
 
   "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
   
+  "isUseFull": "Utiliser l'image complète ?",
   "isFit": "Comment devrait-il s'adapter ?",
+  "isCrop": "Recadrer",
+  "isDrag": "Glisser",
+  "isDragHint": "Glissez pour repositionner l'image",
+  "isSwipe": "Balayer",
+  "isSwipeHint": "Balayez pour repositionner l'image",
+  "isPinch": "Pincer",
+  "isPinchHint": "Pincez pour zoomer/dézoomer l'image",
+  "isScroll": "Faire défiler",
+  "isScrollHint": "Faites défiler pour zoomer/dézoomer",
 
   "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
   "isAndColors": "Et le schéma de couleurs {themeType} ?"

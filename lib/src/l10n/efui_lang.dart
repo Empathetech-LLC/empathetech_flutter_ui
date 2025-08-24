@@ -1095,11 +1095,71 @@ abstract class EFUILang {
   /// **'Update the app colors using this image'**
   String get isUseForColors;
 
+  /// No description provided for @isUseFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Use full image?'**
+  String get isUseFull;
+
   /// No description provided for @isFit.
   ///
   /// In en, this message translates to:
   /// **'How should it fit?'**
   String get isFit;
+
+  /// No description provided for @isCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get isCrop;
+
+  /// No description provided for @isDrag.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag'**
+  String get isDrag;
+
+  /// No description provided for @isDragHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to reposition the image'**
+  String get isDragHint;
+
+  /// No description provided for @isSwipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe'**
+  String get isSwipe;
+
+  /// No description provided for @isSwipeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to reposition the image'**
+  String get isSwipeHint;
+
+  /// No description provided for @isPinch.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch'**
+  String get isPinch;
+
+  /// No description provided for @isPinchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch to zoom in/out'**
+  String get isPinchHint;
+
+  /// No description provided for @isScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll'**
+  String get isScroll;
+
+  /// No description provided for @isScrollHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll to zoom in/out'**
+  String get isScrollHint;
 
   /// No description provided for @isResetAll.
   ///

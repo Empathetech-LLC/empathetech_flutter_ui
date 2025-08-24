@@ -230,7 +230,17 @@
 
   "isUseForColors": "Update the app colors using this image",
 
+  "isUseFull": "Use full image?",
   "isFit": "How should it fit?",
+  "isCrop": "Crop",
+  "isDrag": "Drag",
+  "isDragHint": "Drag to reposition the image",
+  "isSwipe": "Swipe",
+  "isSwipeHint": "Swipe to reposition the image",
+  "isPinch": "Pinch",
+  "isPinchHint": "Pinch to zoom in/out",
+  "isScroll": "Scroll",
+  "isScrollHint": "Scroll to zoom in/out",
 
   "isResetAll": "Reset all {themeType} theme images?",
   "isAndColors": "And the {themeType} color scheme?"
