@@ -483,7 +483,6 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
-              constraints: const BoxConstraints(minWidth: double.infinity),
               builder: (_) => StatefulBuilder(
                 builder: (_, StateSetter setModalState) {
                   return EzScrollView(
