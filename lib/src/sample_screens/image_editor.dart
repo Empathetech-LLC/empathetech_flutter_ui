@@ -7,7 +7,9 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -61,6 +63,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
   // Define the build data //
 
   final ImageEditorController _editorController = ImageEditorController();
+  final GlobalKey<ExtendedImageEditorState> editorKey =
+      GlobalKey<ExtendedImageEditorState>();
 
   // Define custom functions && widgets //
 
@@ -131,6 +135,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
               fit: BoxFit.contain,
               mode: ExtendedImageMode.editor,
               enableLoadState: true,
+              extendedImageEditorKey: editorKey,
               initEditorConfigHandler: (_) => EditorConfig(
                 cropAspectRatio: widget.cropAspectRatio ?? liveAspectRatio(),
                 initialCropAspectRatio:
@@ -258,7 +263,21 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Done
                 EzIconButton(
                   tooltip: l10n.gApply,
-                  onPressed: () => Navigator.pop(context, widget.imagePath),
+                  onPressed: () async {
+                    final ExtendedImageEditorState? state =
+                        editorKey.currentState;
+                    if (state == null) return;
+
+                    final Uint8List editedImage = state.rawImageData;
+
+                    final Directory dir = await getTemporaryDirectory();
+                    final String filePath =
+                        '${dir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.png';
+
+                    final File file = File(filePath);
+                    await file.writeAsBytes(editedImage, flush: true);
+                    if (context.mounted) Navigator.pop(context, file.path);
+                  },
                   icon: EzIcon(Icons.check),
                 ),
                 spacer,
