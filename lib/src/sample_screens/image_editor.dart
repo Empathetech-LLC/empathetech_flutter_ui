@@ -117,6 +117,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
     // Return the build //
 
+    // TODO: Adaptive scaffold => margin, padding, spacing
     return Scaffold(
       body: EzScreen(
         Column(children: <Widget>[
@@ -167,6 +168,16 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   name: l10n.isSwipe,
                   tooltip: l10n.isSwipeHint,
                 ),
+                spacer,
+
+                // Scroll
+                keyIcon(
+                  icon: Icons.mouse,
+                  color: colorScheme.outline,
+                  name: l10n.isScroll,
+                  tooltip: l10n.isScrollHint,
+                ),
+                spacer,
 
                 // Pinch
                 keyIcon(
@@ -188,6 +199,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Done
                 EzIconButton(
+                  tooltip: l10n.gApply,
                   onPressed: () => Navigator.pop(context, widget.imagePath),
                   icon: EzIcon(Icons.check),
                 ),
@@ -195,6 +207,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Undo
                 EzIconButton(
+                  tooltip: l10n.isUndo,
                   enabled: _editorController.canUndo,
                   onPressed: () {
                     _editorController.undo();
@@ -206,6 +219,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Redo
                 EzIconButton(
+                  tooltip: l10n.isRedo,
                   enabled: _editorController.canRedo,
                   onPressed: () {
                     _editorController.redo();
@@ -217,6 +231,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Reset
                 EzIconButton(
+                  tooltip: l10n.gReset,
                   onPressed: () {
                     _editorController.reset();
                     setState(() {});
@@ -227,6 +242,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Cancel
                 EzIconButton(
+                  tooltip: l10n.gCancel,
                   onPressed: () => Navigator.pop(context, null),
                   icon: EzIcon(PlatformIcons(context).delete),
                 ),
