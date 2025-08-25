@@ -109,11 +109,17 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+    // Return the build //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    // Return the build //
+    final Widget divider = SizedBox(
+      height: iconSize + padding,
+      child: VerticalDivider(
+        width: spacing * 2,
+        color: colorScheme.secondary,
+      ),
+    );
 
     return Scaffold(
       body: EzScreen(
@@ -183,16 +189,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   name: l10n.isPinch,
                   tooltip: l10n.isPinchHint,
                 ),
-                spacer,
-
-                // Divider
-                SizedBox(
-                  height: iconSize + padding,
-                  child: VerticalDivider(
-                    width: spacing * 2,
-                    color: colorScheme.secondary,
-                  ),
-                ),
+                divider,
 
                 // Rotate left
                 EzIconButton(
@@ -207,6 +204,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                   },
                   icon: EzIcon(Icons.rotate_left),
                 ),
+                spacer,
 
                 // Rotate right
                 EzIconButton(
@@ -219,13 +217,6 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     setState(() {});
                   },
                   icon: EzIcon(Icons.rotate_right),
-                ),
-
-                // Done
-                EzIconButton(
-                  tooltip: l10n.gApply,
-                  onPressed: () => Navigator.pop(context, widget.imagePath),
-                  icon: EzIcon(Icons.check),
                 ),
                 spacer,
 
@@ -261,6 +252,14 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     setState(() {});
                   },
                   icon: EzIcon(PlatformIcons(context).refresh),
+                ),
+                divider,
+
+                // Done
+                EzIconButton(
+                  tooltip: l10n.gApply,
+                  onPressed: () => Navigator.pop(context, widget.imagePath),
+                  icon: EzIcon(Icons.check),
                 ),
                 spacer,
 
