@@ -20,17 +20,18 @@ ImageProvider ezImageProvider(String path) {
   }
 }
 
-/// Wraps an [ImagePicker] in a try/catch and successful results to [EzConfig]
+/// Wraps an [ImagePicker] in a try/catch
+/// Provide [prefsPath] to auto save successful results to [EzConfig]
 Future<String?> ezImagePicker({
   required BuildContext context,
-  required String prefsPath,
   required ImageSource source,
+  String? prefsPath,
 }) async {
   try {
     final XFile? picked = await ImagePicker().pickImage(source: source);
     if (picked == null) return null;
 
-    await EzConfig.setString(prefsPath, picked.path);
+    if (prefsPath != null) await EzConfig.setString(prefsPath, picked.path);
     return picked.path;
   } on Exception catch (e) {
     if (context.mounted) {
