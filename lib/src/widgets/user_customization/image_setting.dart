@@ -40,6 +40,7 @@ class EzImageSetting extends StatefulWidget {
   final bool showFitOption;
 
   /// Whether the [EzImageEditor] should be displayed upon successful image selection
+  /// By current design, [AssetImage]s cannot be edited/will be skipped
   final bool showEditor;
 
   /// [EzElevatedIconButton] for updating the image at [configKey]'s path
@@ -141,8 +142,9 @@ class _ImageSettingState extends State<EzImageSetting> {
     );
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
 
-    // Ask if they want to use the 'full image' or 'crop'
-    if (widget.showEditor &&
+    // Choose fit and/or edit image
+    if (!kIsWeb &&
+        widget.showEditor &&
         widget.showFitOption &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
@@ -180,7 +182,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
     } else {
-      if (widget.showEditor && !EzConfig.isPathAsset(newPath)) {
+      if (widget.showEditor && !kIsWeb && !EzConfig.isPathAsset(newPath)) {
         newPath = await editImage(newPath, theme);
         if (newPath == null) return;
       }
