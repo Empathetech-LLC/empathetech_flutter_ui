@@ -19,6 +19,7 @@ dependencies:
   go_router: ^14.8.1
   image_picker: ^1.2.0
   intl: ^0.20.2
+  path_provider: ^2.1.5
   shared_preferences: ^2.5.3
   url_launcher: ^6.3.2
   video_player: ^2.10.0
