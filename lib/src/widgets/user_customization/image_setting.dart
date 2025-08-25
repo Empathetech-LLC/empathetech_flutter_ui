@@ -146,25 +146,14 @@ class _ImageSettingState extends State<EzImageSetting> {
         widget.showFitOption &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
-        bool cancelled = false;
-        await showPlatformDialog(
+        final Future<dynamic> Function(String path, ThemeData theme) toDo =
+            await showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
-            void useFull() async {
-              Navigator.of(dialogContext).pop();
-              cancelled = (await chooseFit(theme) == null);
-            }
-
-            void crop() async {
-              Navigator.of(dialogContext).pop();
-              newPath = await editImage(theme);
-              if (newPath == null) cancelled = true;
-            }
-
-            void cancel() {
-              Navigator.of(dialogContext).pop();
-              cancelled = true;
-            }
+            void useFull() => Navigator.of(dialogContext).pop(chooseFit);
+            void crop() => Navigator.of(dialogContext).pop(editImage);
+            void cancel() =>
+                Navigator.of(dialogContext).pop((_, __) async => null);
 
             return EzAlertDialog(
               title: Text(l10n.isUseFull, textAlign: TextAlign.center),
@@ -182,21 +171,27 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
         );
-        if (cancelled) return;
+
+        final dynamic result = await toDo(newPath, theme);
+        if (result == null) {
+          return;
+        } else if (result is String) {
+          newPath = result;
+        }
       }
     } else {
       if (widget.showEditor && !EzConfig.isPathAsset(newPath)) {
-        newPath = await editImage(theme);
+        newPath = await editImage(newPath, theme);
         if (newPath == null) return;
       }
       if (widget.showFitOption) {
-        final bool canceled = (await chooseFit(theme) == null);
+        final bool canceled = (await chooseFit(newPath, theme) == null);
         if (canceled) return;
       }
     }
 
     // Set the new path
-    final bool setPath = await EzConfig.setString(widget.configKey, newPath!);
+    final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
       if (mounted) ezLogAlert(context, message: 'BLARG');
     } else {
@@ -221,7 +216,7 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (widget.updateTheme != null && updateTheme) {
         final String result = await storeImageColorScheme(
           brightness: widget.updateTheme!,
-          path: newPath!,
+          path: newPath,
         );
 
         if (result != success && mounted) {
@@ -229,12 +224,12 @@ class _ImageSettingState extends State<EzImageSetting> {
             context,
             title: l10n.isGetFailed,
             message:
-                '$result${ezUrlCheck(newPath!) ? '\n\n${l10n.isPermission}' : ''}',
+                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.isPermission}' : ''}',
           );
         } else {
           widget.updateTheme == Brightness.light
-              ? await EzConfig.setString(lightColorSchemeImageKey, newPath!)
-              : await EzConfig.setString(darkColorSchemeImageKey, newPath!);
+              ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
+              : await EzConfig.setString(darkColorSchemeImageKey, newPath);
         }
       }
     }
@@ -433,7 +428,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Opens a preview modal for choosing the desired [BoxFit]
-  Future<bool?> chooseFit(ThemeData theme) {
+  Future<bool?> chooseFit(String path, ThemeData theme) {
     final double width = widthOf(context) * 0.25;
     final double height = heightOf(context) * 0.25;
 
@@ -467,6 +462,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                   children: <Widget>[
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.contain,
                       width: width,
                       height: height,
@@ -475,6 +471,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.cover,
                       width: width,
                       height: height,
@@ -483,6 +480,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.fill,
                       width: width,
                       height: height,
@@ -491,6 +489,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.fitWidth,
                       width: width,
                       height: height,
@@ -499,6 +498,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.fitHeight,
                       width: width,
                       height: height,
@@ -507,6 +507,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.none,
                       width: width,
                       height: height,
@@ -515,6 +516,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     ),
                     rowSpacer,
                     fitPreview(
+                      path: path,
                       fit: BoxFit.scaleDown,
                       width: width,
                       height: height,
@@ -570,6 +572,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   /// Creates a mini-[Scaffold] to preview the [BoxFit] option(s)
   Widget fitPreview({
+    required String path,
     required BoxFit fit,
     required double width,
     required double height,
@@ -625,7 +628,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Image(
                       width: width - scaleMargin,
                       height: height - toolbarHeight - scaleMargin,
-                      image: ezImageProvider(currPath!),
+                      image: ezImageProvider(path),
                       fit: fit,
                     ),
                   ],
@@ -640,11 +643,11 @@ class _ImageSettingState extends State<EzImageSetting> {
   }
 
   /// Opens [EzImageEditor] and overrides the image as necessary
-  Future<String?> editImage(ThemeData theme) async {
+  Future<String?> editImage(String path, ThemeData theme) async {
     final String? editResult = await Navigator.of(context).push(
       platformPageRoute(
         context: context,
-        builder: (_) => EzImageEditor(currPath!),
+        builder: (_) => EzImageEditor(path),
       ),
     );
 
