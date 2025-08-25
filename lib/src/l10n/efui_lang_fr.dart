@@ -579,6 +579,12 @@ class EFUILangFr extends EFUILang {
   String get isScrollHint => 'Faites défiler pour zoomer/dézoomer';
 
   @override
+  String get isRotateLeft => 'Tourner à gauche';
+
+  @override
+  String get isRotateRight => 'Tourner à droite';
+
+  @override
   String get isUndo => 'Annuler';
 
   @override

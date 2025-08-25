@@ -241,6 +241,8 @@
   "isPinchHint": "Pinch to zoom in/out",
   "isScroll": "Scroll",
   "isScrollHint": "Scroll to zoom in/out",
+  "isRotateLeft": "Rotate left",
+  "isRotateRight": "Rotate right",
   "isUndo": "Undo",
   "isRedo": "Redo",
 

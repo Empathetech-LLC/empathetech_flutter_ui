@@ -1161,6 +1161,18 @@ abstract class EFUILang {
   /// **'Scroll to zoom in/out'**
   String get isScrollHint;
 
+  /// No description provided for @isRotateLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate left'**
+  String get isRotateLeft;
+
+  /// No description provided for @isRotateRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate right'**
+  String get isRotateRight;
+
   /// No description provided for @isUndo.
   ///
   /// In en, this message translates to:

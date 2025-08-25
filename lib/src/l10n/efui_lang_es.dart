@@ -578,6 +578,12 @@ class EFUILangEs extends EFUILang {
   String get isScrollHint => 'Desplaza para acercar/alejar la imagen';
 
   @override
+  String get isRotateLeft => 'Girar a la izquierda';
+
+  @override
+  String get isRotateRight => 'Girar a la derecha';
+
+  @override
   String get isUndo => 'Deshacer';
 
   @override

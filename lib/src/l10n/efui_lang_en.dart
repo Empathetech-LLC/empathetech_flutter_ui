@@ -575,6 +575,12 @@ class EFUILangEn extends EFUILang {
   String get isScrollHint => 'Scroll to zoom in/out';
 
   @override
+  String get isRotateLeft => 'Rotate left';
+
+  @override
+  String get isRotateRight => 'Rotate right';
+
+  @override
   String get isUndo => 'Undo';
 
   @override
@@ -1160,6 +1166,12 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get isScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get isRotateLeft => 'Rotate left';
+
+  @override
+  String get isRotateRight => 'Rotate right';
 
   @override
   String get isUndo => 'Undo';

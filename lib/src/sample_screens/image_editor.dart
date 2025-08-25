@@ -5,8 +5,6 @@
 
 import '../../empathetech_flutter_ui.dart';
 
-// TODO: Actually update the image path on completion
-
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -191,9 +189,36 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 SizedBox(
                   height: iconSize + padding,
                   child: VerticalDivider(
-                    width: spacing * 4,
+                    width: spacing * 2,
                     color: colorScheme.secondary,
                   ),
+                ),
+
+                // Rotate left
+                EzIconButton(
+                  tooltip: l10n.isRotateLeft,
+                  onPressed: () {
+                    _editorController.rotate(
+                      degree: -90.0,
+                      animation: true,
+                      rotateCropRect: false,
+                    );
+                    setState(() {});
+                  },
+                  icon: EzIcon(Icons.rotate_left),
+                ),
+
+                // Rotate right
+                EzIconButton(
+                  tooltip: l10n.isRotateRight,
+                  onPressed: () {
+                    _editorController.rotate(
+                      animation: true,
+                      rotateCropRect: false,
+                    );
+                    setState(() {});
+                  },
+                  icon: EzIcon(Icons.rotate_right),
                 ),
 
                 // Done

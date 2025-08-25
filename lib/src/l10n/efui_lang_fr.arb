@@ -241,6 +241,8 @@
   "isPinchHint": "Pincez pour zoomer/dézoomer l'image",
   "isScroll": "Faire défiler",
   "isScrollHint": "Faites défiler pour zoomer/dézoomer",
+  "isRotateLeft": "Tourner à gauche",
+  "isRotateRight": "Tourner à droite",
   "isUndo": "Annuler",
   "isRedo": "Rétablir",
 

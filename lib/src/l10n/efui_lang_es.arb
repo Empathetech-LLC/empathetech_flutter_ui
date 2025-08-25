@@ -241,6 +241,8 @@
   "isPinchHint": "Pellizca para acercar/alejar la imagen",
   "isScroll": "Desplazar",
   "isScrollHint": "Desplaza para acercar/alejar la imagen",
+  "isRotateLeft": "Girar a la izquierda",
+  "isRotateRight": "Girar a la derecha",
   "isUndo": "Deshacer",
   "isRedo": "Rehacer",
 
