@@ -1161,6 +1161,18 @@ abstract class EFUILang {
   /// **'Scroll to zoom in/out'**
   String get isScrollHint;
 
+  /// No description provided for @isUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get isUndo;
+
+  /// No description provided for @isRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get isRedo;
+
   /// No description provided for @isResetAll.
   ///
   /// In en, this message translates to:

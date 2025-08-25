@@ -241,6 +241,8 @@
   "isPinchHint": "Pinch to zoom in/out",
   "isScroll": "Scroll",
   "isScrollHint": "Scroll to zoom in/out",
+  "isUndo": "Undo",
+  "isRedo": "Redo",
 
   "isResetAll": "Reset all {themeType} theme images?",
   "isAndColors": "And the {themeType} color scheme?"

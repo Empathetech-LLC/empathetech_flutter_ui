@@ -241,6 +241,8 @@
   "isPinchHint": "Pincez pour zoomer/dézoomer l'image",
   "isScroll": "Faire défiler",
   "isScrollHint": "Faites défiler pour zoomer/dézoomer",
+  "isUndo": "Annuler",
+  "isRedo": "Rétablir",
 
   "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
   "isAndColors": "Et le schéma de couleurs {themeType} ?"

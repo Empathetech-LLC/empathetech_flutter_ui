@@ -575,6 +575,12 @@ class EFUILangEn extends EFUILang {
   String get isScrollHint => 'Scroll to zoom in/out';
 
   @override
+  String get isUndo => 'Undo';
+
+  @override
+  String get isRedo => 'Redo';
+
+  @override
   String isResetAll(Object themeType) {
     return 'Reset all $themeType theme images?';
   }
@@ -1154,6 +1160,12 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get isScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get isUndo => 'Undo';
+
+  @override
+  String get isRedo => 'Redo';
 
   @override
   String isResetAll(Object themeType) {

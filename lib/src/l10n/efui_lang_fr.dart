@@ -579,6 +579,12 @@ class EFUILangFr extends EFUILang {
   String get isScrollHint => 'Faites défiler pour zoomer/dézoomer';
 
   @override
+  String get isUndo => 'Annuler';
+
+  @override
+  String get isRedo => 'Rétablir';
+
+  @override
   String isResetAll(Object themeType) {
     return 'Réinitialiser toutes les images du thème $themeType ?';
   }

@@ -241,6 +241,8 @@
   "isPinchHint": "Pellizca para acercar/alejar la imagen",
   "isScroll": "Desplazar",
   "isScrollHint": "Desplaza para acercar/alejar la imagen",
+  "isUndo": "Deshacer",
+  "isRedo": "Rehacer",
 
   "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
   "isAndColors": "¿Y el esquema de colores {themeType}?"

@@ -578,6 +578,12 @@ class EFUILangEs extends EFUILang {
   String get isScrollHint => 'Desplaza para acercar/alejar la imagen';
 
   @override
+  String get isUndo => 'Deshacer';
+
+  @override
+  String get isRedo => 'Rehacer';
+
+  @override
   String isResetAll(Object themeType) {
     return '¿Restablecer todas las imágenes del tema $themeType?';
   }
