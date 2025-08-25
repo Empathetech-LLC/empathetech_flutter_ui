@@ -117,7 +117,6 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
     // Return the build //
 
-    // TODO: Adaptive scaffold => margin, padding, spacing
     return Scaffold(
       body: EzScreen(
         Column(children: <Widget>[
