@@ -127,8 +127,6 @@ class _ImageSettingState extends State<EzImageSetting> {
   /// First-layer [ElevatedButton.onPressed]
   /// Opens an options modal and updates the state accordingly
   Future<void> activateSetting(ThemeData theme) async {
-    setState(() => inProgress = true);
-
     String? newPath = await showModalBottomSheet<String?>(
       context: context,
       builder: (BuildContext modalContext) => StatefulBuilder(
@@ -148,24 +146,24 @@ class _ImageSettingState extends State<EzImageSetting> {
         widget.showFitOption &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
+        bool cancelled = false;
         await showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
             void useFull() async {
               Navigator.of(dialogContext).pop();
-              final bool canceled = (await chooseFit(theme) == null);
-              if (canceled) return;
+              cancelled = (await chooseFit(theme) == null);
             }
 
             void crop() async {
               Navigator.of(dialogContext).pop();
               newPath = await editImage(theme);
-              if (newPath == null) return;
+              if (newPath == null) cancelled = true;
             }
 
             void cancel() {
               Navigator.of(dialogContext).pop();
-              return;
+              cancelled = true;
             }
 
             return EzAlertDialog(
@@ -184,6 +182,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
           },
         );
+        if (cancelled) return;
       }
     } else {
       if (widget.showEditor && !EzConfig.isPathAsset(newPath)) {
@@ -239,7 +238,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
     }
-    setState(() => inProgress = false);
   }
 
   /// Build the list of [ImageSource] options
@@ -259,7 +257,6 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             final String? picked = await ezImagePicker(
               context: context,
-              prefsPath: widget.configKey,
               source: ImageSource.camera,
             );
 
@@ -282,7 +279,6 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             final String? picked = await ezImagePicker(
               context: context,
-              prefsPath: widget.configKey,
               source: ImageSource.gallery,
             );
 
@@ -679,7 +675,13 @@ class _ImageSettingState extends State<EzImageSetting> {
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
-          onPressed: () => inProgress ? doNothing() : activateSetting(theme),
+          onPressed: () async {
+            if (inProgress) return;
+
+            setState(() => inProgress = true);
+            await activateSetting(theme);
+            setState(() => inProgress = false);
+          },
           onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
             decoration: BoxDecoration(
