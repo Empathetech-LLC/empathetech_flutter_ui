@@ -379,7 +379,7 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String get dsPageTitle => 'Paramètres d\'image';
+  String get dsPageTitle => 'Paramètres de conception';
 
   @override
   String get dsBackground => 'Arrière-plan';

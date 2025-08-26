@@ -786,7 +786,7 @@ abstract class EFUILang {
   /// No description provided for @dsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Image settings'**
+  /// **'Design settings'**
   String get dsPageTitle;
 
   /// No description provided for @dsBackground.

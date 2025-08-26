@@ -377,7 +377,7 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String get dsPageTitle => 'Image settings';
+  String get dsPageTitle => 'Design settings';
 
   @override
   String get dsBackground => 'Background';
@@ -971,7 +971,7 @@ class EFUILangEnUs extends EFUILangEn {
   }
 
   @override
-  String get dsPageTitle => 'Image settings';
+  String get dsPageTitle => 'Design settings';
 
   @override
   String get dsBackground => 'Background';

@@ -379,7 +379,7 @@ class EFUILangEs extends EFUILang {
   }
 
   @override
-  String get dsPageTitle => 'Configuración de imagen';
+  String get dsPageTitle => 'Configuración de diseño';
 
   @override
   String get dsBackground => 'Fondo';
