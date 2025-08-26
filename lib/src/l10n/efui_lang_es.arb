@@ -226,7 +226,7 @@
 
   "isEnterURL": "Inserta el link",
   "isGetFailed": "Error al intentar obtener la imagen",
-  "isSetFailed": "Error al intentar actualizar la imagen:\n{error}",
+  "isSetFailed": "Error al intentar actualizar la imagen",
   "isPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
 
   "isUseForColors": "Actualiza los colores de la app usando esta imagen",

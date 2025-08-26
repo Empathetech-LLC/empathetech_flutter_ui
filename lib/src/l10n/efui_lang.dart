@@ -1086,8 +1086,8 @@ abstract class EFUILang {
   /// No description provided for @isSetFailed.
   ///
   /// In en, this message translates to:
-  /// **'Failed to update image:\n{error}'**
-  String isSetFailed(Object error);
+  /// **'Failed to update image'**
+  String get isSetFailed;
 
   /// No description provided for @isPermission.
   ///

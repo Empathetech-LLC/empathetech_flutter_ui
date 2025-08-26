@@ -226,7 +226,7 @@
 
   "isEnterURL": "Entrer l'URL",
   "isGetFailed": "Impossible de récupérer l'image",
-  "isSetFailed": "Échec de la mise à jour de l'image :\n{error}",
+  "isSetFailed": "Échec de la mise à jour de l'image",
   "isPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
 
   "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",

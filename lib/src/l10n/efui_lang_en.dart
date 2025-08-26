@@ -533,9 +533,7 @@ class EFUILangEn extends EFUILang {
   String get isGetFailed => 'Failed to retrieve image';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
+  String get isSetFailed => 'Failed to update image';
 
   @override
   String get isPermission =>
@@ -1129,9 +1127,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get isGetFailed => 'Failed to retrieve image';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
+  String get isSetFailed => 'Failed to update image';
 
   @override
   String get isPermission =>

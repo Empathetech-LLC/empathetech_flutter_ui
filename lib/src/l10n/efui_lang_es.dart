@@ -535,9 +535,7 @@ class EFUILangEs extends EFUILang {
   String get isGetFailed => 'Error al intentar obtener la imagen';
 
   @override
-  String isSetFailed(Object error) {
-    return 'Error al intentar actualizar la imagen:\n$error';
-  }
+  String get isSetFailed => 'Error al intentar actualizar la imagen';
 
   @override
   String get isPermission =>
