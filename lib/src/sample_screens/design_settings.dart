@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -67,6 +68,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Define the build data //
 
   bool clearColors = false;
+  int redraw = 0;
 
   // Set the page title //
 
@@ -128,6 +130,15 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
           ...widget.afterBackground!,
         ],
 
+        // TODO: Wrap in conditionals/spacers
+        // Hide scroll
+        separator,
+        EzSwitchPair(
+          key: ValueKey<String>('scroll_$redraw'),
+          text: l10n.lsScroll,
+          valueKey: hideScrollKey,
+        ),
+
         // Local reset all
         widget.resetSpacer,
         EzElevatedIconButton(
@@ -165,7 +176,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                   if (dialogContext.mounted) {
                     Navigator.of(dialogContext).pop();
                   }
-                  setState(() {});
+                  setState(() => redraw = Random().nextInt(rMax));
                 },
                 confirmIsDestructive: true,
                 onDeny: () => Navigator.of(dialogContext).pop(),
