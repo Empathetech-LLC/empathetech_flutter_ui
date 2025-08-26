@@ -49,8 +49,8 @@ export 'src/l10n/efui_lang.dart';
 // Sample screens //
 
 export 'src/sample_screens/color_settings.dart';
+export 'src/sample_screens/design_settings.dart';
 export 'src/sample_screens/image_editor.dart';
-export 'src/sample_screens/image_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
 export 'src/sample_screens/setting_type.dart';
 export 'src/sample_screens/settings_home.dart';
