@@ -15,7 +15,7 @@ void testSuite({
   Locale locale = english,
   bool isLefty = false,
 }) =>
-    testWidgets('image-settings-screen', (WidgetTester tester) async {
+    testWidgets('design-settings-screen', (WidgetTester tester) async {
       // Load localization(s) //
 
       ezLog('Loading localizations');
@@ -33,7 +33,7 @@ void testSuite({
 
       await ezTouch(
         tester,
-        find.widgetWithText(EzElevatedIconButton, l10n.isPageTitle),
+        find.widgetWithText(EzElevatedIconButton, l10n.dsPageTitle),
       );
 
       // Verify text loaded //
@@ -52,7 +52,7 @@ void testSuite({
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
-        type: l10n.isBackground,
+        type: l10n.dsBackground,
         updateCS: true,
         l10n: l10n,
         networkImageURLs: imageURLs,
@@ -71,5 +71,5 @@ void testSuite({
       // Reset for next test suite  //
 
       await ezTapBack(tester, l10n.gBack);
-      ezLog('\nImage settings test suite complete\n\n');
+      ezLog('\nDesign settings test suite complete\n\n');
     });
