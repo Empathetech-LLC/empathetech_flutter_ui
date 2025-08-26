@@ -705,6 +705,306 @@ abstract class EFUILang {
   /// **'Reset all settings?'**
   String get ssResetAll;
 
+  /// No description provided for @csPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Color settings'**
+  String get csPageTitle;
+
+  /// No description provided for @csPickerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a color picker. Long press for more options.'**
+  String get csPickerHint;
+
+  /// No description provided for @csMonoChrome.
+  ///
+  /// In en, this message translates to:
+  /// **'Use monochrome scheme'**
+  String get csMonoChrome;
+
+  /// No description provided for @csHighContrast.
+  ///
+  /// In en, this message translates to:
+  /// **'Use high contrast scheme'**
+  String get csHighContrast;
+
+  /// No description provided for @csPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color'**
+  String get csPickerTitle;
+
+  /// No description provided for @csRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Use contrast recommendation?'**
+  String get csRecommended;
+
+  /// No description provided for @csUseCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Use custom'**
+  String get csUseCustom;
+
+  /// No description provided for @csAddColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a color'**
+  String get csAddColor;
+
+  /// No description provided for @csCurrVal.
+  ///
+  /// In en, this message translates to:
+  /// **'Current color value:'**
+  String get csCurrVal;
+
+  /// No description provided for @csSchemeBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Build scheme\nfrom image'**
+  String get csSchemeBase;
+
+  /// No description provided for @csFromImage.
+  ///
+  /// In en, this message translates to:
+  /// **'A color scheme will be generated from the image.'**
+  String get csFromImage;
+
+  /// No description provided for @csColorScheme.
+  ///
+  /// In en, this message translates to:
+  /// **'color scheme'**
+  String get csColorScheme;
+
+  /// No description provided for @csResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme colors?'**
+  String csResetAll(Object themeType);
+
+  /// No description provided for @dsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Image settings'**
+  String get dsPageTitle;
+
+  /// No description provided for @dsBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get dsBackground;
+
+  /// No description provided for @dsImage.
+  ///
+  /// In en, this message translates to:
+  /// **'image'**
+  String get dsImage;
+
+  /// No description provided for @dsButtonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the {title} image'**
+  String dsButtonHint(Object title);
+
+  /// No description provided for @dsFromFile.
+  ///
+  /// In en, this message translates to:
+  /// **'From file'**
+  String get dsFromFile;
+
+  /// No description provided for @dsFromCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'From camera'**
+  String get dsFromCamera;
+
+  /// No description provided for @dsFromNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'From URL'**
+  String get dsFromNetwork;
+
+  /// No description provided for @dsResetIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset it'**
+  String get dsResetIt;
+
+  /// No description provided for @dsClearIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear it'**
+  String get dsClearIt;
+
+  /// No description provided for @dsEnterURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter URL'**
+  String get dsEnterURL;
+
+  /// No description provided for @dsGetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to retrieve image'**
+  String get dsGetFailed;
+
+  /// No description provided for @dsSetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update image'**
+  String get dsSetFailed;
+
+  /// No description provided for @dsPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.'**
+  String get dsPermission;
+
+  /// No description provided for @dsUseForColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the app colors using this image'**
+  String get dsUseForColors;
+
+  /// No description provided for @dsUseFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Use full image?'**
+  String get dsUseFull;
+
+  /// No description provided for @dsFit.
+  ///
+  /// In en, this message translates to:
+  /// **'How should it fit?'**
+  String get dsFit;
+
+  /// No description provided for @dsCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get dsCrop;
+
+  /// No description provided for @dsDrag.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag'**
+  String get dsDrag;
+
+  /// No description provided for @dsDragHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to reposition the image'**
+  String get dsDragHint;
+
+  /// No description provided for @dsSwipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe'**
+  String get dsSwipe;
+
+  /// No description provided for @dsSwipeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to reposition the image'**
+  String get dsSwipeHint;
+
+  /// No description provided for @dsPinch.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch'**
+  String get dsPinch;
+
+  /// No description provided for @dsPinchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch to zoom in/out'**
+  String get dsPinchHint;
+
+  /// No description provided for @dsScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll'**
+  String get dsScroll;
+
+  /// No description provided for @dsScrollHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll to zoom in/out'**
+  String get dsScrollHint;
+
+  /// No description provided for @dsRotateLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate left'**
+  String get dsRotateLeft;
+
+  /// No description provided for @dsRotateRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate right'**
+  String get dsRotateRight;
+
+  /// No description provided for @dsUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get dsUndo;
+
+  /// No description provided for @dsRedo.
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get dsRedo;
+
+  /// No description provided for @dsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all {themeType} theme images?'**
+  String dsResetAll(Object themeType);
+
+  /// No description provided for @dsAndColors.
+  ///
+  /// In en, this message translates to:
+  /// **'And the {themeType} color scheme?'**
+  String dsAndColors(Object themeType);
+
+  /// No description provided for @lsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout settings'**
+  String get lsPageTitle;
+
+  /// No description provided for @lsMargin.
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get lsMargin;
+
+  /// No description provided for @lsPadding.
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get lsPadding;
+
+  /// No description provided for @lsSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Spacing'**
+  String get lsSpacing;
+
+  /// No description provided for @lsScroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide scrollbars'**
+  String get lsScroll;
+
+  /// No description provided for @lsResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all layout settings?'**
+  String get lsResetAll;
+
   /// No description provided for @tsPageTitle.
   ///
   /// In en, this message translates to:
@@ -902,306 +1202,6 @@ abstract class EFUILang {
   /// In en, this message translates to:
   /// **'Reset all text settings?'**
   String get tsResetAll;
-
-  /// No description provided for @lsPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Layout settings'**
-  String get lsPageTitle;
-
-  /// No description provided for @lsMargin.
-  ///
-  /// In en, this message translates to:
-  /// **'Margin'**
-  String get lsMargin;
-
-  /// No description provided for @lsPadding.
-  ///
-  /// In en, this message translates to:
-  /// **'Padding'**
-  String get lsPadding;
-
-  /// No description provided for @lsSpacing.
-  ///
-  /// In en, this message translates to:
-  /// **'Spacing'**
-  String get lsSpacing;
-
-  /// No description provided for @lsScroll.
-  ///
-  /// In en, this message translates to:
-  /// **'Hide scrollbars'**
-  String get lsScroll;
-
-  /// No description provided for @lsResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all layout settings?'**
-  String get lsResetAll;
-
-  /// No description provided for @csPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Color settings'**
-  String get csPageTitle;
-
-  /// No description provided for @csPickerHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Open a color picker. Long press for more options.'**
-  String get csPickerHint;
-
-  /// No description provided for @csMonoChrome.
-  ///
-  /// In en, this message translates to:
-  /// **'Use monochrome scheme'**
-  String get csMonoChrome;
-
-  /// No description provided for @csHighContrast.
-  ///
-  /// In en, this message translates to:
-  /// **'Use high contrast scheme'**
-  String get csHighContrast;
-
-  /// No description provided for @csPickerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a color'**
-  String get csPickerTitle;
-
-  /// No description provided for @csRecommended.
-  ///
-  /// In en, this message translates to:
-  /// **'Use contrast recommendation?'**
-  String get csRecommended;
-
-  /// No description provided for @csUseCustom.
-  ///
-  /// In en, this message translates to:
-  /// **'Use custom'**
-  String get csUseCustom;
-
-  /// No description provided for @csAddColor.
-  ///
-  /// In en, this message translates to:
-  /// **'Add a color'**
-  String get csAddColor;
-
-  /// No description provided for @csCurrVal.
-  ///
-  /// In en, this message translates to:
-  /// **'Current color value:'**
-  String get csCurrVal;
-
-  /// No description provided for @csSchemeBase.
-  ///
-  /// In en, this message translates to:
-  /// **'Build scheme\nfrom image'**
-  String get csSchemeBase;
-
-  /// No description provided for @csFromImage.
-  ///
-  /// In en, this message translates to:
-  /// **'A color scheme will be generated from the image.'**
-  String get csFromImage;
-
-  /// No description provided for @csColorScheme.
-  ///
-  /// In en, this message translates to:
-  /// **'color scheme'**
-  String get csColorScheme;
-
-  /// No description provided for @csResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all {themeType} theme colors?'**
-  String csResetAll(Object themeType);
-
-  /// No description provided for @isPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Image settings'**
-  String get isPageTitle;
-
-  /// No description provided for @isBackground.
-  ///
-  /// In en, this message translates to:
-  /// **'Background'**
-  String get isBackground;
-
-  /// No description provided for @isImage.
-  ///
-  /// In en, this message translates to:
-  /// **'image'**
-  String get isImage;
-
-  /// No description provided for @isButtonHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Update the {title} image'**
-  String isButtonHint(Object title);
-
-  /// No description provided for @isFromFile.
-  ///
-  /// In en, this message translates to:
-  /// **'From file'**
-  String get isFromFile;
-
-  /// No description provided for @isFromCamera.
-  ///
-  /// In en, this message translates to:
-  /// **'From camera'**
-  String get isFromCamera;
-
-  /// No description provided for @isFromNetwork.
-  ///
-  /// In en, this message translates to:
-  /// **'From URL'**
-  String get isFromNetwork;
-
-  /// No description provided for @isResetIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset it'**
-  String get isResetIt;
-
-  /// No description provided for @isClearIt.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear it'**
-  String get isClearIt;
-
-  /// No description provided for @isEnterURL.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter URL'**
-  String get isEnterURL;
-
-  /// No description provided for @isGetFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to retrieve image'**
-  String get isGetFailed;
-
-  /// No description provided for @isSetFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to update image'**
-  String get isSetFailed;
-
-  /// No description provided for @isPermission.
-  ///
-  /// In en, this message translates to:
-  /// **'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.'**
-  String get isPermission;
-
-  /// No description provided for @isUseForColors.
-  ///
-  /// In en, this message translates to:
-  /// **'Update the app colors using this image'**
-  String get isUseForColors;
-
-  /// No description provided for @isUseFull.
-  ///
-  /// In en, this message translates to:
-  /// **'Use full image?'**
-  String get isUseFull;
-
-  /// No description provided for @isFit.
-  ///
-  /// In en, this message translates to:
-  /// **'How should it fit?'**
-  String get isFit;
-
-  /// No description provided for @isCrop.
-  ///
-  /// In en, this message translates to:
-  /// **'Crop'**
-  String get isCrop;
-
-  /// No description provided for @isDrag.
-  ///
-  /// In en, this message translates to:
-  /// **'Drag'**
-  String get isDrag;
-
-  /// No description provided for @isDragHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Drag to reposition the image'**
-  String get isDragHint;
-
-  /// No description provided for @isSwipe.
-  ///
-  /// In en, this message translates to:
-  /// **'Swipe'**
-  String get isSwipe;
-
-  /// No description provided for @isSwipeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Swipe to reposition the image'**
-  String get isSwipeHint;
-
-  /// No description provided for @isPinch.
-  ///
-  /// In en, this message translates to:
-  /// **'Pinch'**
-  String get isPinch;
-
-  /// No description provided for @isPinchHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Pinch to zoom in/out'**
-  String get isPinchHint;
-
-  /// No description provided for @isScroll.
-  ///
-  /// In en, this message translates to:
-  /// **'Scroll'**
-  String get isScroll;
-
-  /// No description provided for @isScrollHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Scroll to zoom in/out'**
-  String get isScrollHint;
-
-  /// No description provided for @isRotateLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'Rotate left'**
-  String get isRotateLeft;
-
-  /// No description provided for @isRotateRight.
-  ///
-  /// In en, this message translates to:
-  /// **'Rotate right'**
-  String get isRotateRight;
-
-  /// No description provided for @isUndo.
-  ///
-  /// In en, this message translates to:
-  /// **'Undo'**
-  String get isUndo;
-
-  /// No description provided for @isRedo.
-  ///
-  /// In en, this message translates to:
-  /// **'Redo'**
-  String get isRedo;
-
-  /// No description provided for @isResetAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset all {themeType} theme images?'**
-  String isResetAll(Object themeType);
-
-  /// No description provided for @isAndColors.
-  ///
-  /// In en, this message translates to:
-  /// **'And the {themeType} color scheme?'**
-  String isAndColors(Object themeType);
 }
 
 class _EFUILangDelegate extends LocalizationsDelegate<EFUILang> {

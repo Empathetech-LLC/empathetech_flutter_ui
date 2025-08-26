@@ -336,6 +336,169 @@ class EFUILangFr extends EFUILang {
   String get ssResetAll => 'Réinitialiser tous les paramètres ?';
 
   @override
+  String get csPageTitle => 'Paramètres de couleur';
+
+  @override
+  String get csPickerHint =>
+      'Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d\'options.';
+
+  @override
+  String get csMonoChrome => 'Utiliser un schéma monochrome';
+
+  @override
+  String get csHighContrast => 'Utiliser un schéma à contraste élevé';
+
+  @override
+  String get csPickerTitle => 'Choisissez une couleur';
+
+  @override
+  String get csRecommended => 'Utiliser la recommandation de contraste ?';
+
+  @override
+  String get csUseCustom => 'Utiliser personnalisé';
+
+  @override
+  String get csAddColor => 'Ajouter une couleur';
+
+  @override
+  String get csCurrVal => 'Valeur de couleur actuelle :';
+
+  @override
+  String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
+
+  @override
+  String get csFromImage =>
+      'Un schéma de couleurs sera généré à partir de l\'image.';
+
+  @override
+  String get csColorScheme => 'schéma de couleurs';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
+  }
+
+  @override
+  String get dsPageTitle => 'Paramètres d\'image';
+
+  @override
+  String get dsBackground => 'Arrière-plan';
+
+  @override
+  String get dsImage => 'image';
+
+  @override
+  String dsButtonHint(Object title) {
+    return 'Mettre à jour l\'image $title';
+  }
+
+  @override
+  String get dsFromFile => 'Depuis un fichier';
+
+  @override
+  String get dsFromCamera => 'Depuis la caméra';
+
+  @override
+  String get dsFromNetwork => 'Depuis une URL';
+
+  @override
+  String get dsResetIt => 'Réinitialiser';
+
+  @override
+  String get dsClearIt => 'Effacer';
+
+  @override
+  String get dsEnterURL => 'Entrer l\'URL';
+
+  @override
+  String get dsGetFailed => 'Impossible de récupérer l\'image';
+
+  @override
+  String get dsSetFailed => 'Échec de la mise à jour de l\'image';
+
+  @override
+  String get dsPermission =>
+      'Certains sites ne permettent pas à d\'autres d\'accéder à leurs images.\nEssayez une image provenant d\'un autre hébergeur.';
+
+  @override
+  String get dsUseForColors =>
+      'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
+
+  @override
+  String get dsUseFull => 'Utiliser l\'image complète ?';
+
+  @override
+  String get dsFit => 'Comment devrait-il s\'adapter ?';
+
+  @override
+  String get dsCrop => 'Recadrer';
+
+  @override
+  String get dsDrag => 'Glisser';
+
+  @override
+  String get dsDragHint => 'Glissez pour repositionner l\'image';
+
+  @override
+  String get dsSwipe => 'Balayer';
+
+  @override
+  String get dsSwipeHint => 'Balayez pour repositionner l\'image';
+
+  @override
+  String get dsPinch => 'Pincer';
+
+  @override
+  String get dsPinchHint => 'Pincez pour zoomer/dézoomer l\'image';
+
+  @override
+  String get dsScroll => 'Faire défiler';
+
+  @override
+  String get dsScrollHint => 'Faites défiler pour zoomer/dézoomer';
+
+  @override
+  String get dsRotateLeft => 'Tourner à gauche';
+
+  @override
+  String get dsRotateRight => 'Tourner à droite';
+
+  @override
+  String get dsUndo => 'Annuler';
+
+  @override
+  String get dsRedo => 'Rétablir';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return 'Réinitialiser toutes les images du thème $themeType ?';
+  }
+
+  @override
+  String dsAndColors(Object themeType) {
+    return 'Et le schéma de couleurs $themeType ?';
+  }
+
+  @override
+  String get lsPageTitle => 'Paramètres de mise en page';
+
+  @override
+  String get lsMargin => 'Marge extérieure';
+
+  @override
+  String get lsPadding => 'Marge intérieure';
+
+  @override
+  String get lsSpacing => 'Espacement';
+
+  @override
+  String get lsScroll => 'Masquer les barres de défilement';
+
+  @override
+  String get lsResetAll =>
+      'Réinitialiser tous les paramètres de mise en page ?';
+
+  @override
   String get tsPageTitle => 'Paramètres de texte';
 
   @override
@@ -437,167 +600,4 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get tsResetAll => 'Réinitialiser tous les paramètres de texte ?';
-
-  @override
-  String get lsPageTitle => 'Paramètres de mise en page';
-
-  @override
-  String get lsMargin => 'Marge extérieure';
-
-  @override
-  String get lsPadding => 'Marge intérieure';
-
-  @override
-  String get lsSpacing => 'Espacement';
-
-  @override
-  String get lsScroll => 'Masquer les barres de défilement';
-
-  @override
-  String get lsResetAll =>
-      'Réinitialiser tous les paramètres de mise en page ?';
-
-  @override
-  String get csPageTitle => 'Paramètres de couleur';
-
-  @override
-  String get csPickerHint =>
-      'Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d\'options.';
-
-  @override
-  String get csMonoChrome => 'Utiliser un schéma monochrome';
-
-  @override
-  String get csHighContrast => 'Utiliser un schéma à contraste élevé';
-
-  @override
-  String get csPickerTitle => 'Choisissez une couleur';
-
-  @override
-  String get csRecommended => 'Utiliser la recommandation de contraste ?';
-
-  @override
-  String get csUseCustom => 'Utiliser personnalisé';
-
-  @override
-  String get csAddColor => 'Ajouter une couleur';
-
-  @override
-  String get csCurrVal => 'Valeur de couleur actuelle :';
-
-  @override
-  String get csSchemeBase => 'Construire le schéma\nà partir de l\'image';
-
-  @override
-  String get csFromImage =>
-      'Un schéma de couleurs sera généré à partir de l\'image.';
-
-  @override
-  String get csColorScheme => 'schéma de couleurs';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Réinitialiser toutes les couleurs du thème $themeType ?';
-  }
-
-  @override
-  String get isPageTitle => 'Paramètres d\'image';
-
-  @override
-  String get isBackground => 'Arrière-plan';
-
-  @override
-  String get isImage => 'image';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Mettre à jour l\'image $title';
-  }
-
-  @override
-  String get isFromFile => 'Depuis un fichier';
-
-  @override
-  String get isFromCamera => 'Depuis la caméra';
-
-  @override
-  String get isFromNetwork => 'Depuis une URL';
-
-  @override
-  String get isResetIt => 'Réinitialiser';
-
-  @override
-  String get isClearIt => 'Effacer';
-
-  @override
-  String get isEnterURL => 'Entrer l\'URL';
-
-  @override
-  String get isGetFailed => 'Impossible de récupérer l\'image';
-
-  @override
-  String get isSetFailed => 'Échec de la mise à jour de l\'image';
-
-  @override
-  String get isPermission =>
-      'Certains sites ne permettent pas à d\'autres d\'accéder à leurs images.\nEssayez une image provenant d\'un autre hébergeur.';
-
-  @override
-  String get isUseForColors =>
-      'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
-
-  @override
-  String get isUseFull => 'Utiliser l\'image complète ?';
-
-  @override
-  String get isFit => 'Comment devrait-il s\'adapter ?';
-
-  @override
-  String get isCrop => 'Recadrer';
-
-  @override
-  String get isDrag => 'Glisser';
-
-  @override
-  String get isDragHint => 'Glissez pour repositionner l\'image';
-
-  @override
-  String get isSwipe => 'Balayer';
-
-  @override
-  String get isSwipeHint => 'Balayez pour repositionner l\'image';
-
-  @override
-  String get isPinch => 'Pincer';
-
-  @override
-  String get isPinchHint => 'Pincez pour zoomer/dézoomer l\'image';
-
-  @override
-  String get isScroll => 'Faire défiler';
-
-  @override
-  String get isScrollHint => 'Faites défiler pour zoomer/dézoomer';
-
-  @override
-  String get isRotateLeft => 'Tourner à gauche';
-
-  @override
-  String get isRotateRight => 'Tourner à droite';
-
-  @override
-  String get isUndo => 'Annuler';
-
-  @override
-  String get isRedo => 'Rétablir';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Réinitialiser toutes les images du thème $themeType ?';
-  }
-
-  @override
-  String isAndColors(Object themeType) {
-    return 'Et le schéma de couleurs $themeType ?';
-  }
 }

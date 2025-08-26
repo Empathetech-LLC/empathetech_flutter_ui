@@ -335,6 +335,166 @@ class EFUILangEn extends EFUILang {
   String get ssResetAll => 'Reset all settings?';
 
   @override
+  String get csPageTitle => 'Color settings';
+
+  @override
+  String get csPickerHint =>
+      'Open a color picker. Long press for more options.';
+
+  @override
+  String get csMonoChrome => 'Use monochrome scheme';
+
+  @override
+  String get csHighContrast => 'Use high contrast scheme';
+
+  @override
+  String get csPickerTitle => 'Pick a color';
+
+  @override
+  String get csRecommended => 'Use contrast recommendation?';
+
+  @override
+  String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
+
+  @override
+  String get csCurrVal => 'Current color value:';
+
+  @override
+  String get csSchemeBase => 'Build scheme\nfrom image';
+
+  @override
+  String get csFromImage => 'A color scheme will be generated from the image.';
+
+  @override
+  String get csColorScheme => 'color scheme';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get dsPageTitle => 'Image settings';
+
+  @override
+  String get dsBackground => 'Background';
+
+  @override
+  String get dsImage => 'image';
+
+  @override
+  String dsButtonHint(Object title) {
+    return 'Update the $title image';
+  }
+
+  @override
+  String get dsFromFile => 'From file';
+
+  @override
+  String get dsFromCamera => 'From camera';
+
+  @override
+  String get dsFromNetwork => 'From URL';
+
+  @override
+  String get dsResetIt => 'Reset it';
+
+  @override
+  String get dsClearIt => 'Clear it';
+
+  @override
+  String get dsEnterURL => 'Enter URL';
+
+  @override
+  String get dsGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsSetFailed => 'Failed to update image';
+
+  @override
+  String get dsPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+
+  @override
+  String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsUseFull => 'Use full image?';
+
+  @override
+  String get dsFit => 'How should it fit?';
+
+  @override
+  String get dsCrop => 'Crop';
+
+  @override
+  String get dsDrag => 'Drag';
+
+  @override
+  String get dsDragHint => 'Drag to reposition the image';
+
+  @override
+  String get dsSwipe => 'Swipe';
+
+  @override
+  String get dsSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get dsPinch => 'Pinch';
+
+  @override
+  String get dsPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get dsScroll => 'Scroll';
+
+  @override
+  String get dsScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get dsRotateLeft => 'Rotate left';
+
+  @override
+  String get dsRotateRight => 'Rotate right';
+
+  @override
+  String get dsUndo => 'Undo';
+
+  @override
+  String get dsRedo => 'Redo';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
+
+  @override
+  String dsAndColors(Object themeType) {
+    return 'And the $themeType color scheme?';
+  }
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsScroll => 'Hide scrollbars';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
+
+  @override
   String get tsPageTitle => 'Text settings';
 
   @override
@@ -436,166 +596,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsResetAll => 'Reset all text settings?';
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsScroll => 'Hide scrollbars';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
-
-  @override
-  String get csPageTitle => 'Color settings';
-
-  @override
-  String get csPickerHint =>
-      'Open a color picker. Long press for more options.';
-
-  @override
-  String get csMonoChrome => 'Use monochrome scheme';
-
-  @override
-  String get csHighContrast => 'Use high contrast scheme';
-
-  @override
-  String get csPickerTitle => 'Pick a color';
-
-  @override
-  String get csRecommended => 'Use contrast recommendation?';
-
-  @override
-  String get csUseCustom => 'Use custom';
-
-  @override
-  String get csAddColor => 'Add a color';
-
-  @override
-  String get csCurrVal => 'Current color value:';
-
-  @override
-  String get csSchemeBase => 'Build scheme\nfrom image';
-
-  @override
-  String get csFromImage => 'A color scheme will be generated from the image.';
-
-  @override
-  String get csColorScheme => 'color scheme';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
-
-  @override
-  String get isPageTitle => 'Image settings';
-
-  @override
-  String get isBackground => 'Background';
-
-  @override
-  String get isImage => 'image';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
-  }
-
-  @override
-  String get isFromFile => 'From file';
-
-  @override
-  String get isFromCamera => 'From camera';
-
-  @override
-  String get isFromNetwork => 'From URL';
-
-  @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isEnterURL => 'Enter URL';
-
-  @override
-  String get isGetFailed => 'Failed to retrieve image';
-
-  @override
-  String get isSetFailed => 'Failed to update image';
-
-  @override
-  String get isPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
-  String get isUseForColors => 'Update the app colors using this image';
-
-  @override
-  String get isUseFull => 'Use full image?';
-
-  @override
-  String get isFit => 'How should it fit?';
-
-  @override
-  String get isCrop => 'Crop';
-
-  @override
-  String get isDrag => 'Drag';
-
-  @override
-  String get isDragHint => 'Drag to reposition the image';
-
-  @override
-  String get isSwipe => 'Swipe';
-
-  @override
-  String get isSwipeHint => 'Swipe to reposition the image';
-
-  @override
-  String get isPinch => 'Pinch';
-
-  @override
-  String get isPinchHint => 'Pinch to zoom in/out';
-
-  @override
-  String get isScroll => 'Scroll';
-
-  @override
-  String get isScrollHint => 'Scroll to zoom in/out';
-
-  @override
-  String get isRotateLeft => 'Rotate left';
-
-  @override
-  String get isRotateRight => 'Rotate right';
-
-  @override
-  String get isUndo => 'Undo';
-
-  @override
-  String get isRedo => 'Redo';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
-
-  @override
-  String isAndColors(Object themeType) {
-    return 'And the $themeType color scheme?';
-  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -929,6 +929,166 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssResetAll => 'Reset all settings?';
 
   @override
+  String get csPageTitle => 'Color settings';
+
+  @override
+  String get csPickerHint =>
+      'Open a color picker. Long press for more options.';
+
+  @override
+  String get csMonoChrome => 'Use monochrome scheme';
+
+  @override
+  String get csHighContrast => 'Use high contrast scheme';
+
+  @override
+  String get csPickerTitle => 'Pick a color';
+
+  @override
+  String get csRecommended => 'Use contrast recommendation?';
+
+  @override
+  String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
+
+  @override
+  String get csCurrVal => 'Current color value:';
+
+  @override
+  String get csSchemeBase => 'Build scheme\nfrom image';
+
+  @override
+  String get csFromImage => 'A color scheme will be generated from the image.';
+
+  @override
+  String get csColorScheme => 'color scheme';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get dsPageTitle => 'Image settings';
+
+  @override
+  String get dsBackground => 'Background';
+
+  @override
+  String get dsImage => 'image';
+
+  @override
+  String dsButtonHint(Object title) {
+    return 'Update the $title image';
+  }
+
+  @override
+  String get dsFromFile => 'From file';
+
+  @override
+  String get dsFromCamera => 'From camera';
+
+  @override
+  String get dsFromNetwork => 'From URL';
+
+  @override
+  String get dsResetIt => 'Reset it';
+
+  @override
+  String get dsClearIt => 'Clear it';
+
+  @override
+  String get dsEnterURL => 'Enter URL';
+
+  @override
+  String get dsGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsSetFailed => 'Failed to update image';
+
+  @override
+  String get dsPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+
+  @override
+  String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsUseFull => 'Use full image?';
+
+  @override
+  String get dsFit => 'How should it fit?';
+
+  @override
+  String get dsCrop => 'Crop';
+
+  @override
+  String get dsDrag => 'Drag';
+
+  @override
+  String get dsDragHint => 'Drag to reposition the image';
+
+  @override
+  String get dsSwipe => 'Swipe';
+
+  @override
+  String get dsSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get dsPinch => 'Pinch';
+
+  @override
+  String get dsPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get dsScroll => 'Scroll';
+
+  @override
+  String get dsScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get dsRotateLeft => 'Rotate left';
+
+  @override
+  String get dsRotateRight => 'Rotate right';
+
+  @override
+  String get dsUndo => 'Undo';
+
+  @override
+  String get dsRedo => 'Redo';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return 'Reset all $themeType theme images?';
+  }
+
+  @override
+  String dsAndColors(Object themeType) {
+    return 'And the $themeType color scheme?';
+  }
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsScroll => 'Hide scrollbars';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
+
+  @override
   String get tsPageTitle => 'Text settings';
 
   @override
@@ -1030,164 +1190,4 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get tsResetAll => 'Reset all text settings?';
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsScroll => 'Hide scrollbars';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
-
-  @override
-  String get csPageTitle => 'Color settings';
-
-  @override
-  String get csPickerHint =>
-      'Open a color picker. Long press for more options.';
-
-  @override
-  String get csMonoChrome => 'Use monochrome scheme';
-
-  @override
-  String get csHighContrast => 'Use high contrast scheme';
-
-  @override
-  String get csPickerTitle => 'Pick a color';
-
-  @override
-  String get csRecommended => 'Use contrast recommendation?';
-
-  @override
-  String get csUseCustom => 'Use custom';
-
-  @override
-  String get csAddColor => 'Add a color';
-
-  @override
-  String get csCurrVal => 'Current color value:';
-
-  @override
-  String get csSchemeBase => 'Build scheme\nfrom image';
-
-  @override
-  String get csFromImage => 'A color scheme will be generated from the image.';
-
-  @override
-  String get csColorScheme => 'color scheme';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
-
-  @override
-  String get isPageTitle => 'Image settings';
-
-  @override
-  String get isBackground => 'Background';
-
-  @override
-  String get isImage => 'image';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
-  }
-
-  @override
-  String get isFromFile => 'From file';
-
-  @override
-  String get isFromCamera => 'From camera';
-
-  @override
-  String get isFromNetwork => 'From URL';
-
-  @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isEnterURL => 'Enter URL';
-
-  @override
-  String get isGetFailed => 'Failed to retrieve image';
-
-  @override
-  String get isSetFailed => 'Failed to update image';
-
-  @override
-  String get isPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
-  String get isUseForColors => 'Update the app colors using this image';
-
-  @override
-  String get isUseFull => 'Use full image?';
-
-  @override
-  String get isFit => 'How should it fit?';
-
-  @override
-  String get isCrop => 'Crop';
-
-  @override
-  String get isDrag => 'Drag';
-
-  @override
-  String get isDragHint => 'Drag to reposition the image';
-
-  @override
-  String get isSwipe => 'Swipe';
-
-  @override
-  String get isSwipeHint => 'Swipe to reposition the image';
-
-  @override
-  String get isPinch => 'Pinch';
-
-  @override
-  String get isPinchHint => 'Pinch to zoom in/out';
-
-  @override
-  String get isScroll => 'Scroll';
-
-  @override
-  String get isScrollHint => 'Scroll to zoom in/out';
-
-  @override
-  String get isRotateLeft => 'Rotate left';
-
-  @override
-  String get isRotateRight => 'Rotate right';
-
-  @override
-  String get isUndo => 'Undo';
-
-  @override
-  String get isRedo => 'Redo';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
-
-  @override
-  String isAndColors(Object themeType) {
-    return 'And the $themeType color scheme?';
-  }
 }

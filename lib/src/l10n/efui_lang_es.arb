@@ -135,6 +135,80 @@
 
 
 
+  "csPageTitle": "Configuración de color",
+
+  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
+
+  "csMonoChrome": "Usar esquema monocromático",
+  "csHighContrast": "Usar esquema de alto contraste",
+
+  "csPickerTitle": "Selecciona un color",
+  "csRecommended": "¿Usar contraste recomendado?",
+  "csUseCustom": "Usar personalizado",
+
+  "csAddColor": "Añadir un color",
+  "csCurrVal": "Valor de color actual:",
+
+  "csSchemeBase": "Crear tema\nusando imagen",
+  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
+  "csColorScheme": "esquema de color",
+
+  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
+
+
+
+  "dsPageTitle": "Configuración de imagen",
+
+  "dsBackground": "Fondo",
+  "dsImage": "imagen",
+
+  "dsButtonHint": "Actualizar la imagen {title}",
+  "dsFromFile": "Usando un archivo",
+  "dsFromCamera": "Usando la cámara",
+  "dsFromNetwork": "Usando un link",
+  "dsResetIt": "Restablecer",
+  "dsClearIt": "Borrar",
+
+  "dsEnterURL": "Inserta el link",
+  "dsGetFailed": "Error al intentar obtener la imagen",
+  "dsSetFailed": "Error al intentar actualizar la imagen",
+  "dsPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
+
+  "dsUseForColors": "Actualiza los colores de la app usando esta imagen",
+
+  "dsUseFull": "¿Usar la imagen completa?",
+  "dsFit": "¿Cómo debe quedar?",
+  "dsCrop": "Recortar",
+  "dsDrag": "Arrastrar",
+  "dsDragHint": "Arrastra para mover la imagen",
+  "dsSwipe": "Deslizar",
+  "dsSwipeHint": "Desliza para mover la imagen",
+  "dsPinch": "Pellizcar",
+  "dsPinchHint": "Pellizca para acercar/alejar la imagen",
+  "dsScroll": "Desplazar",
+  "dsScrollHint": "Desplaza para acercar/alejar la imagen",
+  "dsRotateLeft": "Girar a la izquierda",
+  "dsRotateRight": "Girar a la derecha",
+  "dsUndo": "Deshacer",
+  "dsRedo": "Rehacer",
+
+  "dsResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
+  "dsAndColors": "¿Y el esquema de colores {themeType}?",
+
+
+
+  "lsPageTitle": "Configuración del esquema",
+
+  "lsMargin": "Margen",
+  "lsPadding": "Acolchado",
+  "lsSpacing": "Espaciado",
+
+  "lsScroll": "Ocultar las barras de desplazamiento",
+
+  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
+
+
+
   "tsPageTitle": "Configuración del texto",
 
   "tsBatchOverride": "Ya has realizado cambios de \"{setting}\" granulares en la configuración avanzada.\n\n¿Seguro que quieres anular esos cambios con una actualización por lotes?",
@@ -174,79 +248,5 @@
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
 
-  "tsResetAll": "¿Restablecer la configuración del texto?",
-
-
-
-  "lsPageTitle": "Configuración del esquema",
-
-  "lsMargin": "Margen",
-  "lsPadding": "Acolchado",
-  "lsSpacing": "Espaciado",
-
-  "lsScroll": "Ocultar las barras de desplazamiento",
-
-  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
-  
-  
-  
-  "csPageTitle": "Configuración de color",
-
-  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
-
-  "csMonoChrome": "Usar esquema monocromático",
-  "csHighContrast": "Usar esquema de alto contraste",
-
-  "csPickerTitle": "Selecciona un color",
-  "csRecommended": "¿Usar contraste recomendado?",
-  "csUseCustom": "Usar personalizado",
-
-  "csAddColor": "Añadir un color",
-  "csCurrVal": "Valor de color actual:",
-
-  "csSchemeBase": "Crear tema\nusando imagen",
-  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
-  "csColorScheme": "esquema de color",
-
-  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
-
-
-
-  "isPageTitle": "Configuración de imagen",
-
-  "isBackground": "Fondo",
-  "isImage": "imagen",
-
-  "isButtonHint": "Actualizar la imagen {title}",
-  "isFromFile": "Usando un archivo",
-  "isFromCamera": "Usando la cámara",
-  "isFromNetwork": "Usando un link",
-  "isResetIt": "Restablecer",
-  "isClearIt": "Borrar",
-
-  "isEnterURL": "Inserta el link",
-  "isGetFailed": "Error al intentar obtener la imagen",
-  "isSetFailed": "Error al intentar actualizar la imagen",
-  "isPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
-
-  "isUseForColors": "Actualiza los colores de la app usando esta imagen",
-
-  "isUseFull": "¿Usar la imagen completa?",
-  "isFit": "¿Cómo debe quedar?",
-  "isCrop": "Recortar",
-  "isDrag": "Arrastrar",
-  "isDragHint": "Arrastra para mover la imagen",
-  "isSwipe": "Deslizar",
-  "isSwipeHint": "Desliza para mover la imagen",
-  "isPinch": "Pellizcar",
-  "isPinchHint": "Pellizca para acercar/alejar la imagen",
-  "isScroll": "Desplazar",
-  "isScrollHint": "Desplaza para acercar/alejar la imagen",
-  "isRotateLeft": "Girar a la izquierda",
-  "isRotateRight": "Girar a la derecha",
-  "isUndo": "Deshacer",
-  "isRedo": "Rehacer",
-
-  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
-  "isAndColors": "¿Y el esquema de colores {themeType}?"
+  "tsResetAll": "¿Restablecer la configuración del texto?"
 }

@@ -135,6 +135,80 @@
 
 
 
+  "csPageTitle": "Paramètres de couleur",
+
+  "csPickerHint": "Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d'options.",
+
+  "csMonoChrome": "Utiliser un schéma monochrome",
+  "csHighContrast": "Utiliser un schéma à contraste élevé",
+
+  "csPickerTitle": "Choisissez une couleur",
+  "csRecommended": "Utiliser la recommandation de contraste ?",
+  "csUseCustom": "Utiliser personnalisé",
+
+  "csAddColor": "Ajouter une couleur",
+  "csCurrVal": "Valeur de couleur actuelle :",
+
+  "csSchemeBase": "Construire le schéma\nà partir de l'image",
+  "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
+  "csColorScheme": "schéma de couleurs",
+
+  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
+
+
+
+  "dsPageTitle": "Paramètres d'image",
+
+  "dsBackground": "Arrière-plan",
+  "dsImage": "image",
+
+  "dsButtonHint": "Mettre à jour l'image {title}",
+  "dsFromFile": "Depuis un fichier",
+  "dsFromCamera": "Depuis la caméra",
+  "dsFromNetwork": "Depuis une URL",
+  "dsResetIt": "Réinitialiser",
+  "dsClearIt": "Effacer",
+
+  "dsEnterURL": "Entrer l'URL",
+  "dsGetFailed": "Impossible de récupérer l'image",
+  "dsSetFailed": "Échec de la mise à jour de l'image",
+  "dsPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
+
+  "dsUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
+  
+  "dsUseFull": "Utiliser l'image complète ?",
+  "dsFit": "Comment devrait-il s'adapter ?",
+  "dsCrop": "Recadrer",
+  "dsDrag": "Glisser",
+  "dsDragHint": "Glissez pour repositionner l'image",
+  "dsSwipe": "Balayer",
+  "dsSwipeHint": "Balayez pour repositionner l'image",
+  "dsPinch": "Pincer",
+  "dsPinchHint": "Pincez pour zoomer/dézoomer l'image",
+  "dsScroll": "Faire défiler",
+  "dsScrollHint": "Faites défiler pour zoomer/dézoomer",
+  "dsRotateLeft": "Tourner à gauche",
+  "dsRotateRight": "Tourner à droite",
+  "dsUndo": "Annuler",
+  "dsRedo": "Rétablir",
+
+  "dsResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
+  "dsAndColors": "Et le schéma de couleurs {themeType} ?",
+
+
+
+  "lsPageTitle": "Paramètres de mise en page",
+
+  "lsMargin": "Marge extérieure",
+  "lsPadding": "Marge intérieure",
+  "lsSpacing": "Espacement",
+
+  "lsScroll": "Masquer les barres de défilement",
+
+  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
+
+
+
   "tsPageTitle": "Paramètres de texte",
 
   "tsBatchOverride": "Vous avez déjà apporté des modifications à \"{setting}\" dans les paramètres avancés.\n\nÊtes-vous sûr de vouloir remplacer ces modifications par une mise à jour de masse ?",
@@ -174,79 +248,5 @@
   "tsLabelLink": "les labels ?",
   "tsLabelP2": " Ni trop gros, ni trop petits ?",
 
-  "tsResetAll": "Réinitialiser tous les paramètres de texte ?",
-
-
-
-  "lsPageTitle": "Paramètres de mise en page",
-
-  "lsMargin": "Marge extérieure",
-  "lsPadding": "Marge intérieure",
-  "lsSpacing": "Espacement",
-
-  "lsScroll": "Masquer les barres de défilement",
-
-  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
-
-
-
-  "csPageTitle": "Paramètres de couleur",
-
-  "csPickerHint": "Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d'options.",
-
-  "csMonoChrome": "Utiliser un schéma monochrome",
-  "csHighContrast": "Utiliser un schéma à contraste élevé",
-
-  "csPickerTitle": "Choisissez une couleur",
-  "csRecommended": "Utiliser la recommandation de contraste ?",
-  "csUseCustom": "Utiliser personnalisé",
-
-  "csAddColor": "Ajouter une couleur",
-  "csCurrVal": "Valeur de couleur actuelle :",
-
-  "csSchemeBase": "Construire le schéma\nà partir de l'image",
-  "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
-  "csColorScheme": "schéma de couleurs",
-
-  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
-
-
-
-  "isPageTitle": "Paramètres d'image",
-
-  "isBackground": "Arrière-plan",
-  "isImage": "image",
-
-  "isButtonHint": "Mettre à jour l'image {title}",
-  "isFromFile": "Depuis un fichier",
-  "isFromCamera": "Depuis la caméra",
-  "isFromNetwork": "Depuis une URL",
-  "isResetIt": "Réinitialiser",
-  "isClearIt": "Effacer",
-
-  "isEnterURL": "Entrer l'URL",
-  "isGetFailed": "Impossible de récupérer l'image",
-  "isSetFailed": "Échec de la mise à jour de l'image",
-  "isPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
-
-  "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
-  
-  "isUseFull": "Utiliser l'image complète ?",
-  "isFit": "Comment devrait-il s'adapter ?",
-  "isCrop": "Recadrer",
-  "isDrag": "Glisser",
-  "isDragHint": "Glissez pour repositionner l'image",
-  "isSwipe": "Balayer",
-  "isSwipeHint": "Balayez pour repositionner l'image",
-  "isPinch": "Pincer",
-  "isPinchHint": "Pincez pour zoomer/dézoomer l'image",
-  "isScroll": "Faire défiler",
-  "isScrollHint": "Faites défiler pour zoomer/dézoomer",
-  "isRotateLeft": "Tourner à gauche",
-  "isRotateRight": "Tourner à droite",
-  "isUndo": "Annuler",
-  "isRedo": "Rétablir",
-
-  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
-  "isAndColors": "Et le schéma de couleurs {themeType} ?"
+  "tsResetAll": "Réinitialiser tous les paramètres de texte ?"
 }
