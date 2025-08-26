@@ -160,15 +160,15 @@ class _ImageSettingState extends State<EzImageSetting> {
                 Navigator.of(dialogContext).pop((_, __) async => null);
 
             return EzAlertDialog(
-              title: Text(l10n.isUseFull, textAlign: TextAlign.center),
+              title: Text(l10n.dsUseFull, textAlign: TextAlign.center),
               materialActions: <EzMaterialAction>[
                 EzMaterialAction(text: l10n.gYes, onPressed: useFull),
-                EzMaterialAction(text: l10n.isCrop, onPressed: crop),
+                EzMaterialAction(text: l10n.dsCrop, onPressed: crop),
                 EzMaterialAction(text: l10n.gCancel, onPressed: cancel),
               ],
               cupertinoActions: <EzCupertinoAction>[
                 EzCupertinoAction(text: l10n.gYes, onPressed: useFull),
-                EzCupertinoAction(text: l10n.isCrop, onPressed: crop),
+                EzCupertinoAction(text: l10n.dsCrop, onPressed: crop),
                 EzCupertinoAction(text: l10n.gCancel, onPressed: cancel),
               ],
               needsClose: false,
@@ -200,7 +200,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) ezLogAlert(context, message: l10n.isSetFailed);
+      if (mounted) ezLogAlert(context, message: l10n.dsSetFailed);
     } else {
       currPath = newPath;
 
@@ -229,9 +229,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result != success && mounted) {
           await ezLogAlert(
             context,
-            title: l10n.isGetFailed,
+            title: l10n.dsGetFailed,
             message:
-                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.isPermission}' : ''}',
+                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.dsPermission}' : ''}',
           );
         } else {
           widget.updateTheme == Brightness.light
@@ -268,7 +268,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).photoCamera),
-          label: l10n.isFromCamera,
+          label: l10n.dsFromCamera,
         ),
       ));
     }
@@ -291,7 +291,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).folder),
-          label: l10n.isFromFile,
+          label: l10n.dsFromFile,
         ),
       ));
     }
@@ -318,8 +318,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               } catch (e) {
                 await ezLogAlert(
                   context,
-                  title: l10n.isGetFailed,
-                  message: '${e.toString()}\n\n${l10n.isPermission}',
+                  title: l10n.dsGetFailed,
+                  message: '${e.toString()}\n\n${l10n.dsPermission}',
                 );
 
                 if (dialogContext.mounted) {
@@ -354,7 +354,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             return EzAlertDialog(
               title: Text(
-                l10n.isEnterURL,
+                l10n.dsEnterURL,
                 textAlign: TextAlign.center,
               ),
               content: Form(
@@ -374,7 +374,7 @@ class _ImageSettingState extends State<EzImageSetting> {
           },
         ),
         icon: EzIcon(Icons.computer_outlined),
-        label: l10n.isFromNetwork,
+        label: l10n.dsFromNetwork,
       ),
     ));
 
@@ -392,7 +392,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).refresh),
-          label: l10n.isResetIt,
+          label: l10n.dsResetIt,
         ),
       ));
     }
@@ -411,7 +411,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             }
           },
           icon: EzIcon(PlatformIcons(context).clear),
-          label: l10n.isClearIt,
+          label: l10n.dsClearIt,
         ),
       ));
     }
@@ -422,7 +422,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         padding: EzInsets.wrap(spacing),
         child: EzSwitchPair(
           key: ValueKey<bool>(updateTheme),
-          text: l10n.isUseForColors,
+          text: l10n.dsUseForColors,
           value: updateTheme,
           onChanged: (bool? choice) {
             updateTheme = (choice == null) ? false : choice;
@@ -452,7 +452,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                l10n.isFit,
+                l10n.dsFit,
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -681,7 +681,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return Semantics(
       label: widget.label,
       button: true,
-      hint: l10n.isButtonHint(widget.label),
+      hint: l10n.dsButtonHint(widget.label),
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: ElevatedButton.styleFrom(
