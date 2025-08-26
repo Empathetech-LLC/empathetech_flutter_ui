@@ -17,10 +17,10 @@ class SettingsHomeScreen extends StatelessWidget {
         title: ezL10n(context).ssPageTitle,
         showSettings: false,
         body: const EzScreen(EzSettingsHome(
-          textSettingsPath: textSettingsPath,
-          layoutSettingsPath: layoutSettingsPath,
           colorSettingsPath: colorSettingsPath,
-          imageSettingsPath: imageSettingsPath,
+          designSettingsPath: designSettingsPath,
+          layoutSettingsPath: layoutSettingsPath,
+          textSettingsPath: textSettingsPath,
         )),
         fab: EzConfigFAB(
           context,
