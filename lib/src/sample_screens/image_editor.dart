@@ -7,8 +7,10 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -65,6 +67,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final ImageEditorController _editorController = ImageEditorController();
   final GlobalKey<ExtendedImageEditorState> editorKey =
       GlobalKey<ExtendedImageEditorState>();
+
+  bool processing = false;
 
   // Define custom functions && widgets //
 
@@ -200,6 +204,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Rotate left
                 EzIconButton(
                   tooltip: l10n.dsRotateLeft,
+                  enabled: !processing,
                   onPressed: () {
                     _editorController.rotate(
                       degree: -90.0,
@@ -215,6 +220,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Rotate right
                 EzIconButton(
                   tooltip: l10n.dsRotateRight,
+                  enabled: !processing,
                   onPressed: () {
                     _editorController.rotate(
                       animation: true,
@@ -229,7 +235,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Undo
                 EzIconButton(
                   tooltip: l10n.dsUndo,
-                  enabled: _editorController.canUndo,
+                  enabled: !processing && _editorController.canUndo,
                   onPressed: () {
                     _editorController.undo();
                     setState(() {});
@@ -241,7 +247,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Redo
                 EzIconButton(
                   tooltip: l10n.dsRedo,
-                  enabled: _editorController.canRedo,
+                  enabled: !processing && _editorController.canRedo,
                   onPressed: () {
                     _editorController.redo();
                     setState(() {});
@@ -253,6 +259,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 // Reset
                 EzIconButton(
                   tooltip: l10n.gReset,
+                  enabled: !processing,
                   onPressed: () {
                     _editorController.reset();
                     setState(() {});
@@ -265,21 +272,77 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 EzIconButton(
                   tooltip: l10n.gApply,
                   onPressed: () async {
+                    // Check exit cases
+                    if (processing) return;
+
                     final ExtendedImageEditorState? state =
                         editorKey.currentState;
                     if (state == null) return;
 
-                    final Uint8List editedImage = state.rawImageData;
+                    setState(() => processing = true);
 
-                    final Directory dir = await getTemporaryDirectory();
-                    final String filePath =
-                        '${dir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.png';
+                    try {
+                      // Get image data
+                      final Uint8List imgData = state.rawImageData;
+                      img.Image? src = img.decodeImage(imgData);
 
-                    final File file = File(filePath);
-                    await file.writeAsBytes(editedImage, flush: true);
-                    if (context.mounted) Navigator.pop(context, file.path);
+                      if (src == null) {
+                        setState(() => processing = false);
+                        return;
+                      }
+
+                      // Get the edits
+                      final EditActionDetails? editAction = state.editAction;
+                      final Rect? cropRect = state.getCropRect();
+
+                      // Apply the edits
+                      if (editAction != null) {
+                        src = img.bakeOrientation(src);
+
+                        if (editAction.hasRotateDegrees) {
+                          src = img.copyRotate(
+                            src,
+                            angle: editAction.rotateDegrees,
+                          );
+                        }
+
+                        if (editAction.needCrop && cropRect != null) {
+                          src = img.copyCrop(
+                            src,
+                            x: cropRect.left.toInt(),
+                            y: cropRect.top.toInt(),
+                            width: cropRect.width.toInt(),
+                            height: cropRect.height.toInt(),
+                          );
+                        }
+                      }
+
+                      // Encode the image: TODO: What if not JPEG?
+                      final Uint8List fileData =
+                          await compute(img.encodeJpg, src);
+
+                      // Save to a new file
+                      final Directory tempDir = await getTemporaryDirectory();
+                      final String newPath =
+                          '${tempDir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.jpg'; // TODO: ditto
+                      final File newFile = File(newPath)
+                        ..writeAsBytesSync(fileData);
+
+                      // Return the new file path
+                      setState(() => processing = false);
+                      if (context.mounted) {
+                        Navigator.pop(context, newFile.path);
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        await ezLogAlert(context, message: e.toString());
+                      }
+                      setState(() => processing = false);
+                    }
                   },
-                  icon: EzIcon(Icons.check),
+                  icon: processing
+                      ? const CircularProgressIndicator()
+                      : EzIcon(Icons.check),
                 ),
                 spacer,
 
