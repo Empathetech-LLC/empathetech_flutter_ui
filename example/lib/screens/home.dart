@@ -404,11 +404,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   margin,
                   EzCheckboxPair(
-                    text: el10n.tsPageTitle,
-                    value: textSettings,
+                    text: el10n.csPageTitle,
+                    value: colorSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
-                      setState(() => textSettings = value);
+                      setState(() => colorSettings = value);
+                    },
+                  ),
+                  margin,
+                  EzCheckboxPair(
+                    text: el10n.dsPageTitle,
+                    value: imageSettings,
+                    onChanged: (bool? value) {
+                      if (value == null) return;
+                      setState(() => imageSettings = value);
                     },
                   ),
                   margin,
@@ -422,20 +431,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   EzCheckboxPair(
-                    text: el10n.csPageTitle,
-                    value: colorSettings,
+                    text: el10n.tsPageTitle,
+                    value: textSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
-                      setState(() => colorSettings = value);
-                    },
-                  ),
-                  margin,
-                  EzCheckboxPair(
-                    text: el10n.isPageTitle,
-                    value: imageSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => imageSettings = value);
+                      setState(() => textSettings = value);
                     },
                   ),
                 ],
