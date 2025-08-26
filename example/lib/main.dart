@@ -81,30 +81,6 @@ final GoRouter router = GoRouter(
           builder: (_, __) => const SettingsHomeScreen(),
           routes: <RouteBase>[
             GoRoute(
-              path: textSettingsPath,
-              name: textSettingsPath,
-              builder: (_, __) => const TextSettingsScreen(),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: EzTSType.quick.path,
-                  name: EzTSType.quick.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.quick),
-                ),
-                GoRoute(
-                  path: EzTSType.advanced.path,
-                  name: EzTSType.advanced.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.advanced),
-                ),
-              ],
-            ),
-            GoRoute(
-              path: layoutSettingsPath,
-              name: layoutSettingsPath,
-              builder: (_, __) => const LayoutSettingsScreen(),
-            ),
-            GoRoute(
               path: colorSettingsPath,
               name: colorSettingsPath,
               builder: (_, __) => const ColorSettingsScreen(),
@@ -124,9 +100,33 @@ final GoRouter router = GoRouter(
               ],
             ),
             GoRoute(
-              path: imageSettingsPath,
-              name: imageSettingsPath,
-              builder: (_, __) => const ImageSettingsScreen(),
+              path: designSettingsPath,
+              name: designSettingsPath,
+              builder: (_, __) => const DesignSettingsScreen(),
+            ),
+            GoRoute(
+              path: layoutSettingsPath,
+              name: layoutSettingsPath,
+              builder: (_, __) => const LayoutSettingsScreen(),
+            ),
+            GoRoute(
+              path: textSettingsPath,
+              name: textSettingsPath,
+              builder: (_, __) => const TextSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzTSType.quick.path,
+                  name: EzTSType.quick.name,
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzTSType.quick),
+                ),
+                GoRoute(
+                  path: EzTSType.advanced.path,
+                  name: EzTSType.advanced.name,
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzTSType.advanced),
+                ),
+              ],
             ),
           ],
         ),
