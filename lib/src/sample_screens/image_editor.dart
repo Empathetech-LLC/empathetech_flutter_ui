@@ -165,8 +165,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 keyIcon(
                   icon: Icons.touch_app,
                   color: colorScheme.outline,
-                  name: l10n.isDrag,
-                  tooltip: l10n.isDragHint,
+                  name: l10n.dsDrag,
+                  tooltip: l10n.dsDragHint,
                 ),
                 spacer,
 
@@ -174,8 +174,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 keyIcon(
                   icon: Icons.swipe,
                   color: colorScheme.outline,
-                  name: l10n.isSwipe,
-                  tooltip: l10n.isSwipeHint,
+                  name: l10n.dsSwipe,
+                  tooltip: l10n.dsSwipeHint,
                 ),
                 spacer,
 
@@ -183,8 +183,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 keyIcon(
                   icon: Icons.mouse,
                   color: colorScheme.outline,
-                  name: l10n.isScroll,
-                  tooltip: l10n.isScrollHint,
+                  name: l10n.dsScroll,
+                  tooltip: l10n.dsScrollHint,
                 ),
                 spacer,
 
@@ -192,14 +192,14 @@ class _EzImageEditorState extends State<EzImageEditor> {
                 keyIcon(
                   icon: Icons.pinch,
                   color: colorScheme.outline,
-                  name: l10n.isPinch,
-                  tooltip: l10n.isPinchHint,
+                  name: l10n.dsPinch,
+                  tooltip: l10n.dsPinchHint,
                 ),
                 divider,
 
                 // Rotate left
                 EzIconButton(
-                  tooltip: l10n.isRotateLeft,
+                  tooltip: l10n.dsRotateLeft,
                   onPressed: () {
                     _editorController.rotate(
                       degree: -90.0,
@@ -214,7 +214,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Rotate right
                 EzIconButton(
-                  tooltip: l10n.isRotateRight,
+                  tooltip: l10n.dsRotateRight,
                   onPressed: () {
                     _editorController.rotate(
                       animation: true,
@@ -228,7 +228,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Undo
                 EzIconButton(
-                  tooltip: l10n.isUndo,
+                  tooltip: l10n.dsUndo,
                   enabled: _editorController.canUndo,
                   onPressed: () {
                     _editorController.undo();
@@ -240,7 +240,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
 
                 // Redo
                 EzIconButton(
-                  tooltip: l10n.isRedo,
+                  tooltip: l10n.dsRedo,
                   enabled: _editorController.canRedo,
                   onPressed: () {
                     _editorController.redo();
