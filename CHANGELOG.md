@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [9.3.0] - 2025-08-1X
+## [10.0.0] - 2025-XX-XX
 ### Updated
 - Theme data calls; split into `fixed` (outside build) and `dynamic` (inside build) chunks
   - TextTheme and ColorScheme are now dynamic, so background ThemeMode changes will automatically redraw the UI
