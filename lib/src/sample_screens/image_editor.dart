@@ -14,7 +14,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzImageEditor extends StatefulWidget {
-  /// File path of the image being edited
+  /// [File] path of the image being edited
   final String imagePath;
 
   /// [ExtendedImageMode.editor] cropAspectRatio passthrough
