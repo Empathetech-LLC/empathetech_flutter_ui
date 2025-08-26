@@ -4,10 +4,10 @@
  */
 
 import 'screens/settings_home.dart' as home;
-import 'screens/text_settings.dart' as text;
-import 'screens/layout_settings.dart' as layout;
 import 'screens/color_settings.dart' as color;
-import 'screens/image_settings.dart' as image;
+import 'screens/design_settings.dart' as design;
+import 'screens/layout_settings.dart' as layout;
+import 'screens/text_settings.dart' as text;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,10 +38,10 @@ void main() async {
     'fr-locale',
     () {
       home.testSuite(locale: french);
-      text.testSuite(locale: french);
-      layout.testSuite(locale: french);
       color.testSuite(locale: french);
-      image.testSuite(locale: french);
+      design.testSuite(locale: french);
+      layout.testSuite(locale: french);
+      text.testSuite(locale: french);
     },
   );
 }
