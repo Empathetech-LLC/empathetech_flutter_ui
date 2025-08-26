@@ -111,6 +111,12 @@ abstract class EFUILang {
   /// **'Continue'**
   String get gContinue;
 
+  /// No description provided for @gSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get gSkip;
+
   /// No description provided for @gOpen.
   ///
   /// In en, this message translates to:

@@ -15,6 +15,9 @@ class EFUILangEn extends EFUILang {
   String get gContinue => 'Continue';
 
   @override
+  String get gSkip => 'Skip';
+
+  @override
   String get gOpen => 'Open';
 
   @override
@@ -606,6 +609,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gContinue => 'Continue';
+
+  @override
+  String get gSkip => 'Skip';
 
   @override
   String get gOpen => 'Open';

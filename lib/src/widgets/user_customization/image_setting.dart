@@ -555,7 +555,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                         Navigator.of(fitContext).pop(true);
                       }
                     },
-                    text: l10n.gApply,
+                    text: selectedFit == null ? l10n.gSkip : l10n.gApply,
                     textStyle: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.primary,
                     ),

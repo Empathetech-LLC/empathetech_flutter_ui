@@ -15,6 +15,9 @@ class EFUILangEs extends EFUILang {
   String get gContinue => 'Continuar';
 
   @override
+  String get gSkip => 'Saltar';
+
+  @override
   String get gOpen => 'Abrir';
 
   @override
