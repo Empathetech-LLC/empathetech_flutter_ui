@@ -77,10 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final int currentYear = DateTime.now().year;
 
-  bool textSettings = true;
-  bool layoutSettings = true;
   bool colorSettings = true;
-  bool imageSettings = true;
+  bool designSettings = true;
+  bool layoutSettings = true;
+  bool textSettings = true;
 
   late final TextEditingController flutterPathControl = TextEditingController();
 
@@ -184,10 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
         domainController.text = config.domainName;
         if (config.domainName == 'com.example') exampleDomain = true;
 
-        textSettings = config.textSettings;
-        layoutSettings = config.layoutSettings;
         colorSettings = config.colorSettings;
-        imageSettings = config.imageSettings;
+        designSettings = config.designSettings;
+        layoutSettings = config.layoutSettings;
+        textSettings = config.textSettings;
 
         await EzConfig.loadConfig(config.appDefaults);
 
@@ -414,10 +414,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin,
                   EzCheckboxPair(
                     text: el10n.dsPageTitle,
-                    value: imageSettings,
+                    value: designSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
-                      setState(() => imageSettings = value);
+                      setState(() => designSettings = value);
                     },
                   ),
                   margin,
@@ -774,10 +774,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           supportEmail: supportEmailController.text.isEmpty
                               ? null
                               : supportEmailController.text,
-                          textSettings: textSettings,
-                          layoutSettings: layoutSettings,
                           colorSettings: colorSettings,
-                          imageSettings: imageSettings,
+                          designSettings: designSettings,
+                          layoutSettings: layoutSettings,
+                          textSettings: textSettings,
                           appDefaults: Map<String, dynamic>.fromEntries(
                             allKeys.keys.map(
                               (String key) => MapEntry<String, dynamic>(
@@ -847,10 +847,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             supportEmail: supportEmailController.text.isEmpty
                                 ? null
                                 : supportEmailController.text,
-                            textSettings: textSettings,
-                            layoutSettings: layoutSettings,
                             colorSettings: colorSettings,
-                            imageSettings: imageSettings,
+                            designSettings: designSettings,
+                            layoutSettings: layoutSettings,
+                            textSettings: textSettings,
                             appDefaults: Map<String, dynamic>.fromEntries(
                               allKeys.keys.map(
                                 (String key) => MapEntry<String, dynamic>(
@@ -920,10 +920,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           supportEmailController.clear();
 
-          textSettings = true;
-          layoutSettings = true;
           colorSettings = true;
-          imageSettings = true;
+          designSettings = true;
+          layoutSettings = true;
+          textSettings = true;
 
           flutterPathControl.clear();
 
