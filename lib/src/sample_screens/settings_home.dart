@@ -35,21 +35,21 @@ class EzSettingsHome extends StatefulWidget {
   /// If [additionalSettings] is not null, the spacer between it and the navigation buttons
   final Widget preNavSpacer;
 
-  /// [GoRouter.goNamed] path to the text settings screen
+  /// [GoRouter.goNamed] path to the color settings screen
   /// If null, no button will appear
-  final String? textSettingsPath;
+  final String? colorSettingsPath;
+
+  /// [GoRouter.goNamed] path to the design settings screen
+  /// If null, no button will appear
+  final String? designSettingsPath;
 
   /// [GoRouter.goNamed] path to the layout settings screen
   /// If null, no button will appear
   final String? layoutSettingsPath;
 
-  /// [GoRouter.goNamed] path to the color settings screen
+  /// [GoRouter.goNamed] path to the text settings screen
   /// If null, no button will appear
-  final String? colorSettingsPath;
-
-  /// [GoRouter.goNamed] path to the image settings screen
-  /// If null, no button will appear
-  final String? imageSettingsPath;
+  final String? textSettingsPath;
 
   /// Widgets to be added below any present routes and above randomize
   /// See [randomSpacer] and/or [resetSpacer] for layout tuning
@@ -89,10 +89,10 @@ class EzSettingsHome extends StatefulWidget {
     this.localeSpacer = const EzDivider(),
     this.additionalSettings,
     this.preNavSpacer = const EzSeparator(),
-    required this.textSettingsPath,
-    required this.layoutSettingsPath,
     required this.colorSettingsPath,
-    required this.imageSettingsPath,
+    required this.designSettingsPath,
+    required this.layoutSettingsPath,
+    required this.textSettingsPath,
     this.additionalRoutes,
     this.quickConfigSpacer = const EzDivider(),
     this.randomSpacer = const EzSpacer(),
@@ -130,11 +130,23 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     late final Widget navIcon = EzIcon(Icons.navigate_next);
     final List<Widget> buttons = <Widget>[];
 
-    if (widget.textSettingsPath != null) {
+    if (widget.colorSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+
       buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.textSettingsPath!),
+        onPressed: () => context.goNamed(widget.colorSettingsPath!),
         icon: navIcon,
-        label: l10n.tsPageTitle,
+        label: l10n.csPageTitle,
+      ));
+    }
+
+    if (widget.designSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.designSettingsPath!),
+        icon: navIcon,
+        label: l10n.dsPageTitle,
       ));
     }
 
@@ -148,23 +160,11 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
       ));
     }
 
-    if (widget.colorSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
-
+    if (widget.textSettingsPath != null) {
       buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.colorSettingsPath!),
+        onPressed: () => context.goNamed(widget.textSettingsPath!),
         icon: navIcon,
-        label: l10n.csPageTitle,
-      ));
-    }
-
-    if (widget.imageSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
-
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.imageSettingsPath!),
-        icon: navIcon,
-        label: l10n.isPageTitle,
+        label: l10n.tsPageTitle,
       ));
     }
 
