@@ -8,7 +8,7 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class EzImageSettings extends StatefulWidget {
+class EzDesignSettings extends StatefulWidget {
   /// Optional additional settings
   /// Before the main settings
   /// See [prefixSpacer] for layout tuning
@@ -40,7 +40,7 @@ class EzImageSettings extends StatefulWidget {
 
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
-  const EzImageSettings({
+  const EzDesignSettings({
     super.key,
     this.beforeBackground,
     this.prefixSpacer = const EzSeparator(),
@@ -53,10 +53,10 @@ class EzImageSettings extends StatefulWidget {
   });
 
   @override
-  State<EzImageSettings> createState() => _EzImageSettingsState();
+  State<EzDesignSettings> createState() => _EzDesignSettingsState();
 }
 
-class _EzImageSettingsState extends State<EzImageSettings> {
+class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
@@ -73,7 +73,7 @@ class _EzImageSettingsState extends State<EzImageSettings> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, l10n.isPageTitle);
+    ezWindowNamer(context, l10n.dsPageTitle);
   }
 
   // Return the build //
@@ -110,14 +110,14 @@ class _EzImageSettingsState extends State<EzImageSettings> {
                   key: UniqueKey(),
                   configKey: darkBackgroundImageKey,
                   credits: widget.darkBackgroundCredits,
-                  label: l10n.isBackground,
+                  label: l10n.dsBackground,
                   updateTheme: Brightness.dark,
                 )
               : EzImageSetting(
                   key: UniqueKey(),
                   configKey: lightBackgroundImageKey,
                   credits: widget.lightBackgroundCredits,
-                  label: l10n.isBackground,
+                  label: l10n.dsBackground,
                   updateTheme: Brightness.light,
                 ),
         ),
@@ -173,13 +173,13 @@ class _EzImageSettingsState extends State<EzImageSettings> {
 
               return EzAlertDialog(
                 title: Text(
-                  l10n.isResetAll(themeProfile),
+                  l10n.dsResetAll(themeProfile),
                   textAlign: TextAlign.center,
                 ),
                 contents: <Widget>[
                   EzSwitchPair(
                     key: ValueKey<bool>(clearColors),
-                    text: l10n.isAndColors(themeProfile),
+                    text: l10n.dsAndColors(themeProfile),
                     textAlign: TextAlign.center,
                     value: clearColors,
                     onChanged: (bool? choice) {
