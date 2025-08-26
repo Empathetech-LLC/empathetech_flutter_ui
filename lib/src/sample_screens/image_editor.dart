@@ -134,8 +134,9 @@ class _EzImageEditorState extends State<EzImageEditor> {
               File(widget.imagePath),
               fit: BoxFit.contain,
               mode: ExtendedImageMode.editor,
-              enableLoadState: true,
               extendedImageEditorKey: editorKey,
+              enableLoadState: true,
+              cacheRawData: true,
               initEditorConfigHandler: (_) => EditorConfig(
                 cropAspectRatio: widget.cropAspectRatio ?? liveAspectRatio(),
                 initialCropAspectRatio:
