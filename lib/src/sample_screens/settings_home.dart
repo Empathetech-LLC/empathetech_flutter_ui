@@ -131,8 +131,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     final List<Widget> buttons = <Widget>[];
 
     if (widget.colorSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
-
       buttons.add(EzElevatedIconButton(
         onPressed: () => context.goNamed(widget.colorSettingsPath!),
         icon: navIcon,
@@ -142,7 +140,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
     if (widget.designSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-
       buttons.add(EzElevatedIconButton(
         onPressed: () => context.goNamed(widget.designSettingsPath!),
         icon: navIcon,
@@ -152,7 +149,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
     if (widget.layoutSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-
       buttons.add(EzElevatedIconButton(
         onPressed: () => context.goNamed(widget.layoutSettingsPath!),
         icon: navIcon,
@@ -161,6 +157,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.textSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
       buttons.add(EzElevatedIconButton(
         onPressed: () => context.goNamed(widget.textSettingsPath!),
         icon: navIcon,
