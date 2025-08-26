@@ -83,6 +83,7 @@ class _ImageSettingState extends State<EzImageSetting> {
   late String? currPath = EzConfig.get(widget.configKey);
   bool inProgress = false;
 
+  bool fromLocal = false;
   late bool updateTheme = (widget.updateTheme != null);
   BoxFit? selectedFit;
 
@@ -143,9 +144,10 @@ class _ImageSettingState extends State<EzImageSetting> {
     if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
 
     // Choose fit and/or edit image
-    if (!kIsWeb &&
+    if (fromLocal &&
         widget.showEditor &&
         widget.showFitOption &&
+        !kIsWeb &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
         final Future<dynamic> Function(String path, ThemeData theme) toDo =
@@ -182,7 +184,10 @@ class _ImageSettingState extends State<EzImageSetting> {
         }
       }
     } else {
-      if (widget.showEditor && !kIsWeb && !EzConfig.isPathAsset(newPath)) {
+      if (fromLocal &&
+          widget.showEditor &&
+          !kIsWeb &&
+          !EzConfig.isPathAsset(newPath)) {
         newPath = await editImage(newPath, theme);
         if (newPath == null) return;
       }
@@ -258,6 +263,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             if (modalContext.mounted) {
+              setState(() => fromLocal = true);
               Navigator.of(modalContext).pop(picked);
             }
           },
@@ -280,6 +286,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             );
 
             if (modalContext.mounted) {
+              setState(() => fromLocal = true);
               Navigator.of(modalContext).pop(picked);
             }
           },
@@ -683,7 +690,10 @@ class _ImageSettingState extends State<EzImageSetting> {
           onPressed: () async {
             if (inProgress) return;
 
-            setState(() => inProgress = true);
+            setState(() {
+              inProgress = true;
+              fromLocal = false;
+            });
             await activateSetting(theme);
             setState(() => inProgress = false);
           },
