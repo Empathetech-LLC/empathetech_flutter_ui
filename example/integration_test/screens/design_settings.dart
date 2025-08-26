@@ -63,7 +63,7 @@ void testSuite({
 
       await testResetButton(
         tester,
-        type: RBType.image,
+        type: RBType.design,
         l10n: l10n,
         isLefty: isLefty,
       );
