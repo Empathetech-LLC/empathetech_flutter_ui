@@ -27,6 +27,9 @@ class EzConfig {
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
+  /// [EzConfig] key : value runtime [Type] map
+  final Map<String, Type> typeMap;
+
   /// Private instance
   static EzConfig? _instance;
 
@@ -40,6 +43,7 @@ class EzConfig {
 
     // Internal
     required this.prefs,
+    required this.typeMap,
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
@@ -56,14 +60,14 @@ class EzConfig {
       // Get the value type for each key //
 
       // Start with the known EzConfigverse
-      final Map<String, Type> keyTypes = Map<String, Type>.from(allKeys);
+      final Map<String, Type> typeMap = Map<String, Type>.from(allKeys);
 
       // Include defaults
       final Set<String> uniqueDefaults =
-          defaults.keys.toSet().difference(keyTypes.keys.toSet());
+          defaults.keys.toSet().difference(typeMap.keys.toSet());
 
       for (final String key in uniqueDefaults) {
-        keyTypes[key] = defaults[key].runtimeType;
+        typeMap[key] = defaults[key].runtimeType;
       }
 
       // Build this.prefs //
@@ -73,11 +77,11 @@ class EzConfig {
 
       // Find the keys that users have overwritten
       final Set<String> overwritten =
-          preferences.getKeys().intersection(keyTypes.keys.toSet());
+          preferences.getKeys().intersection(typeMap.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
-        final Type? valueType = keyTypes[key];
+        final Type? valueType = typeMap[key];
         dynamic userPref;
 
         switch (valueType) {
@@ -118,6 +122,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         fallbackLang: fallbackLang,
         preferences: preferences,
         prefs: prefs,
+        typeMap: typeMap,
       );
     }
 
@@ -278,8 +283,31 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Load values to [prefs]/[preferences]
-  static Future<void> loadConfig(Map<String, dynamic> config) async {
+  static Future<void> loadConfig(
+    Map<String, dynamic> config, {
+    Set<String>? filter,
+  }) async {
     for (final MapEntry<String, dynamic> entry in config.entries) {
+      // Check filter
+      if (filter != null && filter.contains(entry.key)) {
+        ezLog('Filtering [${entry.key}]');
+        continue;
+      }
+
+      // Check type
+      final dynamic expectedType = _instance!.typeMap[entry.key];
+      if (expectedType == null) {
+        ezLog('Skipping unknown key [${entry.key}]');
+        continue;
+      }
+      if (expectedType != entry.value.runtimeType) {
+        ezLog(
+          'Skipping key [${entry.key}], mismatched types: [$expectedType != ${entry.value.runtimeType}]',
+        );
+        continue;
+      }
+
+      // Load value
       switch (entry.value.runtimeType) {
         case const (bool):
           await setBool(entry.key, entry.value);
