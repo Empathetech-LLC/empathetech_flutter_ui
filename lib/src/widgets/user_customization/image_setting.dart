@@ -36,12 +36,16 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the update theme checkbox && message should be displayed
   final bool updateThemeOption;
 
-  /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
-  final bool showFitOption;
-
   /// Whether the [EzImageEditor] should be displayed upon successful image selection
   /// By current design, [AssetImage]s cannot be edited/will be skipped
   final bool showEditor;
+
+  /// Optional default [BoxFit] for the image
+  /// Note: If the user makes edits, the default will always be [BoxFit.contain]
+  final BoxFit? defaultFit;
+
+  /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
+  final bool showFitOption;
 
   /// [EzElevatedIconButton] for updating the image at [configKey]'s path
   const EzImageSetting({
@@ -53,6 +57,7 @@ class EzImageSetting extends StatefulWidget {
     this.updateTheme,
     this.updateThemeOption = true,
     this.showEditor = true,
+    this.defaultFit,
     this.showFitOption = true,
   });
 
@@ -85,7 +90,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   bool fromLocal = false;
   late bool updateTheme = (widget.updateTheme != null);
-  BoxFit? selectedFit;
+  late BoxFit? selectedFit = widget.defaultFit;
 
   late final TextEditingController urlController = TextEditingController();
 
@@ -146,7 +151,6 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Choose fit and/or edit image
     if (fromLocal &&
         widget.showEditor &&
-        widget.showFitOption &&
         !kIsWeb &&
         !EzConfig.isPathAsset(newPath)) {
       if (mounted) {
@@ -154,7 +158,8 @@ class _ImageSettingState extends State<EzImageSetting> {
             await showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
-            void useFull() => Navigator.of(dialogContext).pop(chooseFit);
+            void useFull() =>
+                Navigator.of(dialogContext).pop((_, __) async => true);
             void crop() => Navigator.of(dialogContext).pop(editImage);
             void cancel() =>
                 Navigator.of(dialogContext).pop((_, __) async => null);
@@ -177,24 +182,22 @@ class _ImageSettingState extends State<EzImageSetting> {
         );
 
         final dynamic result = await toDo(newPath, theme);
-        if (result == null) {
-          return;
-        } else if (result is String) {
-          newPath = result;
+        switch (result.runtimeType) {
+          case const (bool):
+            break;
+          case const (String):
+            newPath = result;
+            setState(() => selectedFit = BoxFit.contain);
+          default:
+            return;
         }
       }
-    } else {
-      if (fromLocal &&
-          widget.showEditor &&
-          !kIsWeb &&
-          !EzConfig.isPathAsset(newPath)) {
-        newPath = await editImage(newPath, theme);
-        if (newPath == null) return;
-      }
-      if (widget.showFitOption) {
-        final bool canceled = (await chooseFit(newPath, theme) == null);
-        if (canceled) return;
-      }
+    }
+
+    if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+    if (widget.showFitOption) {
+      final bool canceled = (await chooseFit(newPath, theme) == null);
+      if (canceled) return;
     }
 
     // Set the new path
@@ -436,6 +439,17 @@ class _ImageSettingState extends State<EzImageSetting> {
     return options;
   }
 
+  /// Opens [EzImageEditor] and overrides the image as necessary
+  Future<String?> editImage(String path, ThemeData theme) async {
+    final String? editResult = await Navigator.of(context).push(
+      platformPageRoute(
+        context: context,
+        builder: (_) => EzImageEditor(path),
+      ),
+    );
+    return (editResult != null && editResult.isNotEmpty) ? editResult : null;
+  }
+
   /// Opens a preview modal for choosing the desired [BoxFit]
   Future<bool?> chooseFit(String path, ThemeData theme) {
     final double width = widthOf(context) * 0.25;
@@ -649,26 +663,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         ExcludeSemantics(child: EzRadio<BoxFit>(value: fit)),
       ],
     );
-  }
-
-  /// Opens [EzImageEditor] and overrides the image as necessary
-  Future<String?> editImage(String path, ThemeData theme) async {
-    final String? editResult = await Navigator.of(context).push(
-      platformPageRoute(
-        context: context,
-        builder: (_) => EzImageEditor(path),
-      ),
-    );
-
-    if (editResult != null && editResult.isNotEmpty) {
-      await EzConfig.setString(
-        '${widget.configKey}$boxFitSuffix',
-        BoxFit.contain.name,
-      );
-      return editResult;
-    } else {
-      return null;
-    }
   }
 
   @override
