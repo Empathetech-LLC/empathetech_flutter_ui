@@ -291,6 +291,7 @@ class _QuickColorSettingsState extends State<_QuickColorSettings> {
                 label: fromImageLabel,
                 updateTheme: brightness,
                 updateThemeOption: false,
+                showEditor: false,
                 showFitOption: false,
               ),
             ),
