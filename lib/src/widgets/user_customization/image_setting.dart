@@ -41,6 +41,7 @@ class EzImageSetting extends StatefulWidget {
   final bool showEditor;
 
   /// Optional default [BoxFit] for the image
+  /// Recommended if [showFitOption] is false
   /// Note: If the user makes edits, the default will always be [BoxFit.contain]
   final BoxFit? defaultFit;
 
