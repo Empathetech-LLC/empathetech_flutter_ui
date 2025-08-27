@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-//* Global settings' keys *//
+//* Global (home) settings' keys *//
 
 const String isLeftyKey = 'isLefty';
 
@@ -16,165 +16,6 @@ const Map<String, Type> globalKeys = <String, Type>{
   isLeftyKey: bool,
   isDarkThemeKey: bool,
   appLocaleKey: List<String>,
-};
-
-//* Text settings' keys *//
-
-// Display
-const String displayFontFamilyKey = 'displayFontFamily';
-const String displayFontSizeKey = 'displayFontSize';
-const String displayBoldedKey = 'displayBolded';
-const String displayItalicizedKey = 'displayItalicized';
-const String displayUnderlinedKey = 'displayUnderlined';
-const String displayLetterSpacingKey = 'displayLetterSpacing';
-const String displayWordSpacingKey = 'displayWordSpacing';
-const String displayFontHeightKey = 'displayFontHeight';
-
-// Headline
-const String headlineFontFamilyKey = 'headlineFontFamily';
-const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineBoldedKey = 'headlineBolded';
-const String headlineItalicizedKey = 'headlineItalicized';
-const String headlineUnderlinedKey = 'headlineUnderlined';
-const String headlineLetterSpacingKey = 'headlineLetterSpacing';
-const String headlineWordSpacingKey = 'headlineWordSpacing';
-const String headlineFontHeightKey = 'headlineFontHeight';
-
-// Title
-const String titleFontFamilyKey = 'titleFontFamily';
-const String titleFontSizeKey = 'titleFontSize';
-const String titleBoldedKey = 'titleBolded';
-const String titleItalicizedKey = 'titleItalicized';
-const String titleUnderlinedKey = 'titleUnderlined';
-const String titleLetterSpacingKey = 'titleLetterSpacing';
-const String titleWordSpacingKey = 'titleWordSpacing';
-const String titleFontHeightKey = 'titleFontHeight';
-
-// Body
-const String bodyFontFamilyKey = 'bodyFontFamily';
-const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyBoldedKey = 'bodyBolded';
-const String bodyItalicizedKey = 'bodyItalicized';
-const String bodyUnderlinedKey = 'bodyUnderlined';
-const String bodyLetterSpacingKey = 'bodyLetterSpacing';
-const String bodyWordSpacingKey = 'bodyWordSpacing';
-const String bodyFontHeightKey = 'bodyFontHeight';
-
-// Label
-const String labelFontFamilyKey = 'labelFontFamily';
-const String labelFontSizeKey = 'labelFontSize';
-const String labelBoldedKey = 'labelBolded';
-const String labelItalicizedKey = 'labelItalicized';
-const String labelUnderlinedKey = 'labelUnderlined';
-const String labelLetterSpacingKey = 'labelLetterSpacing';
-const String labelWordSpacingKey = 'labelWordSpacing';
-const String labelFontHeightKey = 'labelFontHeight';
-
-// Background opacity
-const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
-const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
-
-// Icons
-const String iconSizeKey = 'iconSize'; // Required
-
-// Selector
-const String advancedTextKey = 'advancedText';
-
-/// [display, headline, title, body, label]
-///                 X
-/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
-/// y
-/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
-const Map<String, Type> textStyleKeys = <String, Type>{
-  // Display
-  displayFontFamilyKey: String,
-  displayFontSizeKey: double,
-  displayBoldedKey: bool,
-  displayItalicizedKey: bool,
-  displayUnderlinedKey: bool,
-  displayLetterSpacingKey: double,
-  displayWordSpacingKey: double,
-  displayFontHeightKey: double,
-
-  // Headline
-  headlineFontFamilyKey: String,
-  headlineFontSizeKey: double,
-  headlineBoldedKey: bool,
-  headlineItalicizedKey: bool,
-  headlineUnderlinedKey: bool,
-  headlineLetterSpacingKey: double,
-  headlineWordSpacingKey: double,
-  headlineFontHeightKey: double,
-
-  // Title
-  titleFontFamilyKey: String,
-  titleFontSizeKey: double,
-  titleBoldedKey: bool,
-  titleItalicizedKey: bool,
-  titleUnderlinedKey: bool,
-  titleLetterSpacingKey: double,
-  titleWordSpacingKey: double,
-  titleFontHeightKey: double,
-
-  // Body
-  bodyFontFamilyKey: String,
-  bodyFontSizeKey: double,
-  bodyBoldedKey: bool,
-  bodyItalicizedKey: bool,
-  bodyUnderlinedKey: bool,
-  bodyLetterSpacingKey: double,
-  bodyWordSpacingKey: double,
-  bodyFontHeightKey: double,
-
-  // Label
-  labelFontFamilyKey: String,
-  labelFontSizeKey: double,
-  labelBoldedKey: bool,
-  labelItalicizedKey: bool,
-  labelUnderlinedKey: bool,
-  labelLetterSpacingKey: double,
-  labelWordSpacingKey: double,
-  labelFontHeightKey: double,
-
-  // Background opacity
-  darkTextBackgroundOpacityKey: double,
-  lightTextBackgroundOpacityKey: double,
-
-  // Icons
-  iconSizeKey: double, // Required
-
-  // Selector
-  advancedTextKey: bool,
-};
-
-//* Text settings' values *//
-
-/// bold
-const String bold = 'bold';
-
-/// italic
-const String italic = 'italic';
-
-/// underlined
-const String underlined = 'underlined';
-
-/// '-55.55'
-const String sampleString = '55.55';
-
-//* Layout settings' keys *//
-
-const String marginKey = 'margin'; // Required
-const String paddingKey = 'padding'; // Required
-const String spacingKey = 'spacing'; // Required
-
-const String hideScrollKey = 'hideScroll';
-
-/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
-const Map<String, Type> layoutKeys = <String, Type>{
-  marginKey: double, // Required
-  paddingKey: double, // Required
-  spacingKey: double, // Required
-  hideScrollKey: bool,
 };
 
 //* Color settings' keys *//
@@ -564,7 +405,7 @@ const String csScrim = 'Scrim';
 const String csShadow = 'Shadow';
 const String csSurfaceTint = 'Surface tint';
 
-//* Image settings' keys *//
+//* Design settings' keys *//
 
 // Dark theme //
 
@@ -575,6 +416,17 @@ const Set<String> darkImageKeys = <String>{
   darkColorSchemeImageKey,
   darkBackgroundImageKey,
   '$darkBackgroundImageKey$boxFitSuffix',
+};
+
+const String darkButtonOpacityKey = 'darkButtonOpacity';
+const String darkIncludeOutlineKey = 'darkIncludeOutline';
+const String darkGlassKey = 'darkGlass';
+
+const Set<String> darkDesignKeys = <String>{
+  ...darkImageKeys,
+  darkButtonOpacityKey,
+  darkIncludeOutlineKey,
+  darkGlassKey,
 };
 
 // Light theme //
@@ -588,21 +440,46 @@ const Set<String> lightImageKeys = <String>{
   '$lightBackgroundImageKey$boxFitSuffix',
 };
 
+const String lightButtonOpacityKey = 'lightButtonOpacity';
+const String lightIncludeOutlineKey = 'lightIncludeOutline';
+const String lightGlassKey = 'lightGlass';
+
+const Set<String> lightDesignKeys = <String>{
+  ...lightImageKeys,
+  lightButtonOpacityKey,
+  lightIncludeOutlineKey,
+  lightGlassKey,
+};
+
 // Shared //
 
 /// [light, dark]
 ///      X
 /// [ColorSchemeImageKey, BackgroundImageKey, BackgroundImageKeyFit]
 const Map<String, Type> allImageKeys = <String, Type>{
-  // Light theme
-  lightColorSchemeImageKey: String,
-  lightBackgroundImageKey: String,
-  '$lightBackgroundImageKey$boxFitSuffix': String,
-
   // Dark theme
   darkColorSchemeImageKey: String,
   darkBackgroundImageKey: String,
   '$darkBackgroundImageKey$boxFitSuffix': String,
+
+  // Light theme
+  lightColorSchemeImageKey: String,
+  lightBackgroundImageKey: String,
+  '$lightBackgroundImageKey$boxFitSuffix': String,
+};
+
+const Map<String, Type> allDesignKeys = <String, Type>{
+  ...allImageKeys,
+
+  // Dark theme
+  darkButtonOpacityKey: double,
+  darkIncludeOutlineKey: bool,
+  darkGlassKey: bool,
+
+  // Light theme
+  lightButtonOpacityKey: double,
+  lightIncludeOutlineKey: bool,
+  lightGlassKey: bool,
 };
 
 //* Image settings' values *//
@@ -634,13 +511,172 @@ const String none = 'none';
 /// 'scaleDown'
 const String scaleDown = 'scaleDown';
 
+//* Layout settings' keys *//
+
+const String marginKey = 'margin'; // Required
+const String paddingKey = 'padding'; // Required
+const String spacingKey = 'spacing'; // Required
+
+const String hideScrollKey = 'hideScroll';
+
+/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
+const Map<String, Type> layoutKeys = <String, Type>{
+  marginKey: double, // Required
+  paddingKey: double, // Required
+  spacingKey: double, // Required
+  hideScrollKey: bool,
+};
+
+//* Text settings' keys *//
+
+// Display
+const String displayFontFamilyKey = 'displayFontFamily';
+const String displayFontSizeKey = 'displayFontSize';
+const String displayBoldedKey = 'displayBolded';
+const String displayItalicizedKey = 'displayItalicized';
+const String displayUnderlinedKey = 'displayUnderlined';
+const String displayLetterSpacingKey = 'displayLetterSpacing';
+const String displayWordSpacingKey = 'displayWordSpacing';
+const String displayFontHeightKey = 'displayFontHeight';
+
+// Headline
+const String headlineFontFamilyKey = 'headlineFontFamily';
+const String headlineFontSizeKey = 'headlineFontSize';
+const String headlineBoldedKey = 'headlineBolded';
+const String headlineItalicizedKey = 'headlineItalicized';
+const String headlineUnderlinedKey = 'headlineUnderlined';
+const String headlineLetterSpacingKey = 'headlineLetterSpacing';
+const String headlineWordSpacingKey = 'headlineWordSpacing';
+const String headlineFontHeightKey = 'headlineFontHeight';
+
+// Title
+const String titleFontFamilyKey = 'titleFontFamily';
+const String titleFontSizeKey = 'titleFontSize';
+const String titleBoldedKey = 'titleBolded';
+const String titleItalicizedKey = 'titleItalicized';
+const String titleUnderlinedKey = 'titleUnderlined';
+const String titleLetterSpacingKey = 'titleLetterSpacing';
+const String titleWordSpacingKey = 'titleWordSpacing';
+const String titleFontHeightKey = 'titleFontHeight';
+
+// Body
+const String bodyFontFamilyKey = 'bodyFontFamily';
+const String bodyFontSizeKey = 'bodyFontSize';
+const String bodyBoldedKey = 'bodyBolded';
+const String bodyItalicizedKey = 'bodyItalicized';
+const String bodyUnderlinedKey = 'bodyUnderlined';
+const String bodyLetterSpacingKey = 'bodyLetterSpacing';
+const String bodyWordSpacingKey = 'bodyWordSpacing';
+const String bodyFontHeightKey = 'bodyFontHeight';
+
+// Label
+const String labelFontFamilyKey = 'labelFontFamily';
+const String labelFontSizeKey = 'labelFontSize';
+const String labelBoldedKey = 'labelBolded';
+const String labelItalicizedKey = 'labelItalicized';
+const String labelUnderlinedKey = 'labelUnderlined';
+const String labelLetterSpacingKey = 'labelLetterSpacing';
+const String labelWordSpacingKey = 'labelWordSpacing';
+const String labelFontHeightKey = 'labelFontHeight';
+
+// Background opacity
+const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
+const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
+
+// Icons
+const String iconSizeKey = 'iconSize'; // Required
+
+// Selector
+const String advancedTextKey = 'advancedText';
+
+/// [display, headline, title, body, label]
+///                 X
+/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// y
+/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
+const Map<String, Type> textStyleKeys = <String, Type>{
+  // Display
+  displayFontFamilyKey: String,
+  displayFontSizeKey: double,
+  displayBoldedKey: bool,
+  displayItalicizedKey: bool,
+  displayUnderlinedKey: bool,
+  displayLetterSpacingKey: double,
+  displayWordSpacingKey: double,
+  displayFontHeightKey: double,
+
+  // Headline
+  headlineFontFamilyKey: String,
+  headlineFontSizeKey: double,
+  headlineBoldedKey: bool,
+  headlineItalicizedKey: bool,
+  headlineUnderlinedKey: bool,
+  headlineLetterSpacingKey: double,
+  headlineWordSpacingKey: double,
+  headlineFontHeightKey: double,
+
+  // Title
+  titleFontFamilyKey: String,
+  titleFontSizeKey: double,
+  titleBoldedKey: bool,
+  titleItalicizedKey: bool,
+  titleUnderlinedKey: bool,
+  titleLetterSpacingKey: double,
+  titleWordSpacingKey: double,
+  titleFontHeightKey: double,
+
+  // Body
+  bodyFontFamilyKey: String,
+  bodyFontSizeKey: double,
+  bodyBoldedKey: bool,
+  bodyItalicizedKey: bool,
+  bodyUnderlinedKey: bool,
+  bodyLetterSpacingKey: double,
+  bodyWordSpacingKey: double,
+  bodyFontHeightKey: double,
+
+  // Label
+  labelFontFamilyKey: String,
+  labelFontSizeKey: double,
+  labelBoldedKey: bool,
+  labelItalicizedKey: bool,
+  labelUnderlinedKey: bool,
+  labelLetterSpacingKey: double,
+  labelWordSpacingKey: double,
+  labelFontHeightKey: double,
+
+  // Background opacity
+  darkTextBackgroundOpacityKey: double,
+  lightTextBackgroundOpacityKey: double,
+
+  // Icons
+  iconSizeKey: double, // Required
+
+  // Selector
+  advancedTextKey: bool,
+};
+
+//* Text settings' values *//
+
+/// bold
+const String bold = 'bold';
+
+/// italic
+const String italic = 'italic';
+
+/// underlined
+const String underlined = 'underlined';
+
+/// '-55.55'
+const String sampleString = '55.55';
+
 //* Global trackers *//
 
 /// [globalKeys], [textStyleKeys], [layoutKeys], [allColorKeys], [allImageKeys]
 const Map<String, Type> allKeys = <String, Type>{
   ...globalKeys,
-  ...textStyleKeys,
-  ...layoutKeys,
   ...allColorKeys,
-  ...allImageKeys,
+  ...allDesignKeys,
+  ...layoutKeys,
+  ...textStyleKeys,
 };
