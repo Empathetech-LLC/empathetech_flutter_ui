@@ -3,6 +3,9 @@
  * See LICENSE for distribution and usage details.
  */
 
+// TODO: Update conditionals/spacers
+// TODO: l10n
+
 import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
@@ -61,7 +64,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
-  final EzSpacer margin = EzMargin();
+
+  final double margin = EzConfig.get(marginKey);
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -88,13 +92,27 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
 
     return EzScrollView(
       children: <Widget>[
+        // Animation duration
+        const Text('Animation duration'),
+
+        // Hide scroll
+        separator,
+        EzSwitchPair(
+          key: ValueKey<String>('scroll_$redraw'),
+          text: l10n.lsScroll,
+          valueKey: hideScrollKey,
+        ),
+
+        // Global/theme based divider
+        separator,
+        EzDivider(height: margin * 2),
         // Current theme reminder
         EzText(
           l10n.gEditingTheme(themeProfile),
           style: Theme.of(context).textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
-        margin,
+        separator,
 
         // Before background
         if (widget.beforeBackground != null) ...<Widget>[
@@ -102,7 +120,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
           widget.prefixSpacer,
         ],
 
-        // Background
+        // Background TODO: Add 'image'
         EzScrollView(
           scrollDirection: Axis.horizontal,
           startCentered: true,
@@ -130,14 +148,20 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
           ...widget.afterBackground!,
         ],
 
-        // TODO: Wrap in conditionals/spacers
-        // Hide scroll
-        separator,
         EzSwitchPair(
-          key: ValueKey<String>('scroll_$redraw'),
-          text: l10n.lsScroll,
-          valueKey: hideScrollKey,
+          text: 'Button transparency',
+          valueKey: isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
         ),
+
+        EzSwitchPair(
+          text: 'Include outlines',
+          valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
+        ),
+
+        EzSwitchPair(
+          text: 'Glass buttons',
+          valueKey: isDark ? darkGlassKey : lightGlassKey,
+        ), // TODO: enabling this greys out above (not remove, just disable)
 
         // Local reset all
         widget.resetSpacer,
