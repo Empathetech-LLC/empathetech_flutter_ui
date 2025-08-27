@@ -10,8 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
-  /// Optionally remove 'Have fun!' part of the settings disclaimer
-  /// There are some apps where fun is not appropriate
+  /// Optionally remove the 'Have fun!' part of the settings disclaimer
+  /// There are apps where it's not appropriate
   final bool notFun;
 
   /// Locales to skip in the [EzLocaleSetting]
@@ -29,11 +29,8 @@ class EzSettingsHome extends StatefulWidget {
   final Widget localeSpacer;
 
   /// [Widget]s to be added below the [EzLocaleSetting] and above the navigation buttons
-  /// See [localeSpacer] and [preNavSpacer] for layout tuning
+  /// BYO trailing spacer, see [localeSpacer] for leading spacer
   final List<Widget>? additionalSettings;
-
-  /// If [additionalSettings] is not null, the spacer between it and the navigation buttons
-  final Widget preNavSpacer;
 
   /// [GoRouter.goNamed] path to the color settings screen
   /// If null, no button will appear
@@ -51,8 +48,8 @@ class EzSettingsHome extends StatefulWidget {
   /// If null, no button will appear
   final String? textSettingsPath;
 
-  /// Widgets to be added below any present routes and above randomize
-  /// See [randomSpacer] and/or [resetSpacer] for layout tuning
+  /// Widgets to be added directly below any present routes
+  /// BYO leading spacer, trailing spacer will be one of the parameters below
   final List<Widget>? additionalRoutes;
 
   /// Spacer before the [EzQuickConfig]
@@ -70,11 +67,8 @@ class EzSettingsHome extends StatefulWidget {
   /// [EzResetButton.skip] passthrough
   final Set<String>? skipKeys;
 
-  /// Spacer before the [footer], if present
-  final Widget footerSpacer;
-
-  /// Widgets to be added below reset
-  /// Do not include a trailing spacer, one will be provided
+  /// Widgets to be added below the [EzResetButton]
+  /// BYO leading spacer, trailing is always [EzSeparator]
   final List<Widget>? footer;
 
   /// Empathetech settings landing page
@@ -88,7 +82,6 @@ class EzSettingsHome extends StatefulWidget {
     this.inDistress = const <String>{'US'},
     this.localeSpacer = const EzDivider(),
     this.additionalSettings,
-    this.preNavSpacer = const EzSeparator(),
     required this.colorSettingsPath,
     required this.designSettingsPath,
     required this.layoutSettingsPath,
@@ -98,7 +91,6 @@ class EzSettingsHome extends StatefulWidget {
     this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSpacer(),
     this.skipKeys,
-    this.footerSpacer = const EzSeparator(),
     this.footer,
   });
 
@@ -166,7 +158,6 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     }
 
     if (widget.additionalRoutes != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
       buttons.addAll(widget.additionalRoutes!);
     }
 
@@ -201,10 +192,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         widget.localeSpacer,
 
         // Additional settings
-        if (widget.additionalSettings != null) ...<Widget>[
-          ...widget.additionalSettings!,
-          widget.preNavSpacer,
-        ],
+        if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
         // Navigation buttons
         ...navButtons(),
@@ -226,10 +214,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
         EzResetButton(skip: widget.skipKeys),
 
         // Footer
-        if (widget.footer != null) ...<Widget>[
-          widget.footerSpacer,
-          ...widget.footer!,
-        ],
+        if (widget.footer != null) ...widget.footer!,
         separator,
       ],
     );

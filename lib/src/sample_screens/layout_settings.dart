@@ -9,20 +9,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class EzLayoutSettings extends StatefulWidget {
-  /// Optional additional settings
-  /// Before the main settings
-  /// See [prefixSpacer] for layout tuning
+  /// Optional additional settings, before the main settings
+  /// BYO spacers
   final List<Widget>? beforeLayout;
 
-  /// If [beforeLayout] is not null, the spacer between it and the main settings
-  final Widget prefixSpacer;
-
-  /// Spacer between the main settings and [afterLayout], if present
-  final Widget postfixSpacer;
-
-  /// Optional additional settings
-  /// After the main settings
-  /// See [postfixSpacer] and [resetSpacer] for layout tuning
+  /// Optional additional settings, after the main settings
+  /// BYO spacers
   final List<Widget>? afterLayout;
 
   /// Spacer between the main (or [afterLayout], if present) settings and the trailing [EzResetButton]
@@ -37,8 +29,6 @@ class EzLayoutSettings extends StatefulWidget {
   const EzLayoutSettings({
     super.key,
     this.beforeLayout,
-    this.prefixSpacer = const EzSeparator(),
-    this.postfixSpacer = const EzSeparator(),
     this.afterLayout,
     this.resetSpacer = const EzSeparator(),
     this.resetKeys,
@@ -80,10 +70,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
         // Before layout
-        if (widget.beforeLayout != null) ...<Widget>[
-          ...widget.beforeLayout!,
-          widget.prefixSpacer,
-        ],
+        if (widget.beforeLayout != null) ...widget.beforeLayout!,
 
         // Main //
         // Margin
@@ -130,10 +117,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         ),
 
         // After layout
-        if (widget.afterLayout != null) ...<Widget>[
-          widget.postfixSpacer,
-          ...widget.afterLayout!,
-        ],
+        if (widget.afterLayout != null) ...widget.afterLayout!,
 
         // Local reset all
         widget.resetSpacer,

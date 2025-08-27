@@ -20,22 +20,19 @@ class EzTextSettings extends StatelessWidget {
   final Widget resetSpacer;
 
   /// Optional additional reset keys for the dark theme
-  /// [textStyleKeys] are included by default
+  /// [textStyleKeys] and [darkOnSurfaceKey] are included by default
   final Set<String>? darkThemeResetKeys;
 
   /// Optional additional reset keys for the light theme
-  /// [textStyleKeys] are included by default
+  /// [textStyleKeys] and [lightOnSurfaceKey] are included by default
   final Set<String>? lightThemeResetKeys;
 
   /// Whether the onSurfaceColor (quick) setting should be shown
   final bool showOnSurface;
 
-  /// Spacer above [moreQuickHeaderSettings], if present
-  final Widget quickHeaderSpacer;
-
   /// Optional additional quick settings
   /// Will appear just above the text block
-  /// See [quickHeaderSpacer] for layout tuning
+  /// BYO leading spacer, trailing will be [textBlockSpacer]
   final List<Widget>? moreQuickHeaderSettings;
 
   /// Spacer above and below the text block (when [ScreenSize.medium] or smaller)
@@ -44,11 +41,9 @@ class EzTextSettings extends StatelessWidget {
   /// Whether the text background opacity (quick) setting should be shown
   final bool showOpacity;
 
-  /// Spacer below the default quick settings, if [moreQuickFooterSettings] is present
-  final Widget quickFooterSpacer;
-
   /// Optional additional quick settings
   /// Will appear just below the default quick settings
+  /// BYO leading spacer, trailing will be [resetSpacer]
   final List<Widget>? moreQuickFooterSettings;
 
   /// Whether the [TextStyle] spacing controls should be shown in the advanced tab
@@ -67,11 +62,9 @@ class EzTextSettings extends StatelessWidget {
 
     // Quick
     this.showOnSurface = true,
-    this.quickHeaderSpacer = const EzSpacer(),
     this.moreQuickHeaderSettings,
     this.textBlockSpacer = const EzDivider(),
     this.showOpacity = true,
-    this.quickFooterSpacer = const EzSpacer(),
     this.moreQuickFooterSettings,
 
     // Advanced
@@ -108,11 +101,9 @@ class EzTextSettings extends StatelessWidget {
 
           // Quick
           showOnSurface: showOnSurface,
-          quickHeaderSpacer: quickHeaderSpacer,
           moreQuickHeaderSettings: moreQuickHeaderSettings,
           textBlockSpacer: textBlockSpacer,
           showOpacity: showOpacity,
-          quickFooterSpacer: quickFooterSpacer,
           moreQuickFooterSettings: moreQuickFooterSettings,
 
           // Advanced
@@ -130,11 +121,9 @@ class _TextSettings extends StatefulWidget {
 
   // Quick
   final bool showOnSurface;
-  final Widget quickHeaderSpacer;
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
   final bool showOpacity;
-  final Widget quickFooterSpacer;
   final List<Widget>? moreQuickFooterSettings;
 
   // Advanced
@@ -146,11 +135,9 @@ class _TextSettings extends StatefulWidget {
     required this.darkThemeResetKeys,
     required this.lightThemeResetKeys,
     required this.showOnSurface,
-    required this.quickHeaderSpacer,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
     required this.showOpacity,
-    required this.quickFooterSpacer,
     required this.moreQuickFooterSettings,
     required this.showSpacing,
   });
@@ -264,14 +251,12 @@ class _TextSettingsState extends State<_TextSettings>
 
             // Settings config
             showOnSurface: widget.showOnSurface,
-            quickHeaderSpacer: widget.quickHeaderSpacer,
             moreQuickHeaderSettings: widget.moreQuickHeaderSettings,
             textBlockSpacer: widget.textBlockSpacer,
             showOpacity: widget.showOpacity,
             opacityKey: isDarkTheme(context)
                 ? darkTextBackgroundOpacityKey
                 : lightTextBackgroundOpacityKey,
-            quickFooterSpacer: widget.quickFooterSpacer,
             moreQuickFooterSettings: widget.moreQuickFooterSettings,
             resetSpacer: widget.resetSpacer,
             darkThemeResetKeys: widget.darkThemeResetKeys,
@@ -304,7 +289,7 @@ class _TextSettingsState extends State<_TextSettings>
 }
 
 class _QuickTextSettings extends StatefulWidget {
-  //Providers
+  // Providers
   final EzDisplayStyleProvider displayProvider;
   final EzHeadlineStyleProvider headlineProvider;
   final EzTitleStyleProvider titleProvider;
@@ -313,12 +298,10 @@ class _QuickTextSettings extends StatefulWidget {
 
   // Settings config
   final bool showOnSurface;
-  final Widget quickHeaderSpacer;
   final List<Widget>? moreQuickHeaderSettings;
   final Widget textBlockSpacer;
   final bool showOpacity;
   final String opacityKey;
-  final Widget quickFooterSpacer;
   final List<Widget>? moreQuickFooterSettings;
   final Widget resetSpacer;
   final Set<String>? darkThemeResetKeys;
@@ -331,12 +314,10 @@ class _QuickTextSettings extends StatefulWidget {
     required this.bodyProvider,
     required this.labelProvider,
     required this.showOnSurface,
-    required this.quickHeaderSpacer,
     required this.moreQuickHeaderSettings,
     required this.textBlockSpacer,
     required this.showOpacity,
     required this.opacityKey,
-    required this.quickFooterSpacer,
     required this.moreQuickFooterSettings,
     required this.resetSpacer,
     required this.darkThemeResetKeys,
@@ -447,10 +428,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ),
 
         // Optional additional settings
-        if (widget.moreQuickHeaderSettings != null) ...<Widget>[
-          widget.quickHeaderSpacer,
+        if (widget.moreQuickHeaderSettings != null)
           ...widget.moreQuickHeaderSettings!,
-        ],
 
         widget.textBlockSpacer,
         // Display preview
@@ -622,10 +601,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ),
 
         // Optional additional settings
-        if (widget.moreQuickFooterSettings != null) ...<Widget>[
-          widget.quickFooterSpacer,
+        if (widget.moreQuickFooterSettings != null)
           ...widget.moreQuickFooterSettings!,
-        ],
 
         // Reset all
         widget.resetSpacer,
