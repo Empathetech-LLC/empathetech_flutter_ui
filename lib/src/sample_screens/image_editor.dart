@@ -68,6 +68,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final GlobalKey<ExtendedImageEditorState> editorKey =
       GlobalKey<ExtendedImageEditorState>();
 
+  late String fileExt;
   bool processing = false;
 
   // Define custom functions && widgets //
@@ -113,6 +114,19 @@ class _EzImageEditorState extends State<EzImageEditor> {
   void initState() {
     super.initState();
     _editorController.addListener(updateState);
+
+    // Get the file extension
+    final String path = widget.imagePath;
+    final int dot = path.lastIndexOf('.');
+
+    fileExt = (dot != -1 && dot < path.length - 1)
+        ? path.substring(dot + 1).toLowerCase()
+        : 'jpg';
+    if (fileExt == 'jpeg') fileExt = 'jpg';
+
+    if (!<String>['bmp', 'gif', 'jpg', 'png'].contains(fileExt)) {
+      fileExt = 'jpg';
+    }
   }
 
   @override
@@ -317,14 +331,28 @@ class _EzImageEditorState extends State<EzImageEditor> {
                         }
                       }
 
-                      // Encode the image: TODO: What if not JPEG?
-                      final Uint8List fileData =
-                          await compute(img.encodeJpg, src);
+                      // Encode the image
+                      late final Uint8List fileData;
+                      switch (fileExt) {
+                        case 'bmp':
+                          fileData = await compute(img.encodeBmp, src);
+                          break;
+                        case 'gif':
+                          fileData = await compute(img.encodeGif, src);
+                          break;
+                        case 'png':
+                          fileData = await compute(img.encodePng, src);
+                          break;
+                        default:
+                          fileExt = 'jpg';
+                          fileData = await compute(img.encodeJpg, src);
+                          break;
+                      }
 
                       // Save to a new file
                       final Directory tempDir = await getTemporaryDirectory();
                       final String newPath =
-                          '${tempDir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.jpg'; // TODO: ditto
+                          '${tempDir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
                       final File newFile = File(newPath)
                         ..writeAsBytesSync(fileData);
 
