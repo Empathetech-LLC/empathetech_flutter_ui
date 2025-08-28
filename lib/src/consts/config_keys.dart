@@ -22,7 +22,7 @@ const Map<String, Type> globalKeys = <String, Type>{
 
 // Dark theme //
 
-const String darkPrimaryKey = 'darkPrimary'; // Required
+const String darkPrimaryKey = 'darkPrimary';
 const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
@@ -82,7 +82,7 @@ const String darkSurfaceTintKey = 'darkSurfaceTint';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> darkColorOrder = <String>[
-  darkPrimaryKey, // Required
+  darkPrimaryKey,
   darkOnPrimaryKey,
   darkPrimaryContainerKey,
   darkOnPrimaryContainerKey,
@@ -136,7 +136,7 @@ const String userDarkColorsKey = 'userDarkColors';
 /// [darkColorOrder], [darkColorSchemeImageKey], && [userDarkColorsKey]
 const Map<String, Type> darkColorKeys = <String, Type>{
   // Color scheme
-  darkPrimaryKey: int, // Required
+  darkPrimaryKey: int,
   darkOnPrimaryKey: int,
   darkPrimaryContainerKey: int,
   darkOnPrimaryContainerKey: int,
@@ -190,7 +190,7 @@ const Map<String, Type> darkColorKeys = <String, Type>{
 
 // Light theme //
 
-const String lightPrimaryKey = 'lightPrimary'; // Required
+const String lightPrimaryKey = 'lightPrimary';
 const String lightOnPrimaryKey = 'lightOnPrimary';
 const String lightPrimaryContainerKey = 'lightPrimaryContainer';
 const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
@@ -250,7 +250,7 @@ const String lightSurfaceTintKey = 'lightSurfaceTint';
 
 /// Ordered [List] for populating color setting screen(s)
 const List<String> lightColorOrder = <String>[
-  lightPrimaryKey, // Required
+  lightPrimaryKey,
   lightOnPrimaryKey,
   lightPrimaryContainerKey,
   lightOnPrimaryContainerKey,
@@ -304,7 +304,7 @@ const String userLightColorsKey = 'userLightColors';
 /// [lightColorOrder], [lightColorSchemeImageKey], && [userLightColorsKey]
 const Map<String, Type> lightColorKeys = <String, Type>{
   // Color scheme
-  lightPrimaryKey: int, // Required
+  lightPrimaryKey: int,
   lightOnPrimaryKey: int,
   lightPrimaryContainerKey: int,
   lightOnPrimaryContainerKey: int,
@@ -527,17 +527,17 @@ const String scaleDown = 'scaleDown';
 
 //* Layout settings' keys *//
 
-const String marginKey = 'margin'; // Required
-const String paddingKey = 'padding'; // Required
-const String spacingKey = 'spacing'; // Required
+const String marginKey = 'margin';
+const String paddingKey = 'padding';
+const String spacingKey = 'spacing';
 
 const String hideScrollKey = 'hideScroll';
 
 /// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
 const Map<String, Type> allLayoutKeys = <String, Type>{
-  marginKey: double, // Required
-  paddingKey: double, // Required
-  spacingKey: double, // Required
+  marginKey: double,
+  paddingKey: double,
+  spacingKey: double,
   hideScrollKey: bool,
 };
 
@@ -598,7 +598,7 @@ const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
 const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
 
 // Icons
-const String iconSizeKey = 'iconSize'; // Required
+const String iconSizeKey = 'iconSize';
 
 // Selector
 const String advancedTextKey = 'advancedText';
@@ -664,7 +664,7 @@ const Map<String, Type> allTextKeys = <String, Type>{
   lightTextBackgroundOpacityKey: double,
 
   // Icons
-  iconSizeKey: double, // Required
+  iconSizeKey: double,
 
   // Selector
   advancedTextKey: bool,
