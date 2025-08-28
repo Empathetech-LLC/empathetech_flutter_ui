@@ -41,6 +41,8 @@ ThemeData ezThemeData(Brightness brightness) {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
+  final double animDuration = EzConfig.get(animationDurationKey);
+
   // Build the ThemeData //
 
   return ThemeData(
@@ -59,7 +61,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Transitions //
 
-    pageTransitionsTheme: EzTransitions(),
+    pageTransitionsTheme: animDuration > minAnimationDuration
+        ? EzTransitions(animDuration.toInt())
+        : EzNoTransitions(),
 
     // Typography //
 
