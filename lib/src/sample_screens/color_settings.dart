@@ -16,11 +16,11 @@ class EzColorSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the shared [EzResetButton]
-  /// [darkColorKeys], [userDarkColorsKey], [darkColorSchemeImageKey] are included by default
+  /// [darkColorKeys] are included by default
   final Set<String>? darkThemeResetKeys;
 
   /// Additional [EzConfig] keys for the shared [EzResetButton]
-  /// [lightColorKeys], [userLightColorsKey], [lightColorSchemeImageKey] are included by default
+  /// [lightColorKeys] are included by default
   final Set<String>? lightThemeResetKeys;
 
   /// Optional additional quick settings
@@ -182,11 +182,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             ? EzResetButton(
                 dialogTitle: l10n.csResetAll(darkString),
                 onConfirm: () async {
-                  await EzConfig.removeKeys(<String>{
-                    ...darkColorKeys,
-                    userDarkColorsKey,
-                    darkColorSchemeImageKey,
-                  });
+                  await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
                   if (widget.darkThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.darkThemeResetKeys!);
@@ -198,11 +194,7 @@ class _EzColorSettingsState extends State<EzColorSettings> {
             : EzResetButton(
                 dialogTitle: l10n.csResetAll(lightString),
                 onConfirm: () async {
-                  await EzConfig.removeKeys(<String>{
-                    ...lightColorKeys,
-                    userLightColorsKey,
-                    lightColorSchemeImageKey,
-                  });
+                  await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
                   if (widget.lightThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.lightThemeResetKeys!);
@@ -368,7 +360,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   /// Return the [List] of [EzConfig.prefs] keys that the user is not tracking
   List<Widget> getUntrackedColors(StateSetter setModalState, bool isDark) {
     final Set<String> currSet = currList.toSet();
-    final List<String> fullList = isDark ? darkColorKeys : lightColorKeys;
+    final List<String> fullList = isDark ? darkColorOrder : lightColorOrder;
 
     final List<Widget> untrackedColors = fullList
         .where((String element) => !currSet.contains(element))
