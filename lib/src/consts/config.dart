@@ -370,20 +370,31 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Design settings //
 
+  // Global
   animationDurationKey: defaultAnimationDuration,
   // appIconPathKey: null => default
 
+  // Dark
   darkBackgroundImageKey: noImageValue,
   '$darkBackgroundImageKey$boxFitSuffix': none,
+  darkButtonOpacityKey: 100.0,
+  darkIncludeOutlineKey: false,
+  darkGlassKey: false,
 
+  // Light
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': none,
+  lightButtonOpacityKey: 100.0,
+  lightIncludeOutlineKey: false,
+  lightGlassKey: false,
 
   // Layout settings //
 
   marginKey: defaultMargin,
 
   // Text settings //
+  // Selector
+  advancedTextKey: false,
 
   // Display
   displayFontFamilyKey: roboto,
@@ -441,9 +452,6 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Icon size
   iconSizeKey: defaultIconSize,
-
-  // Selector
-  advancedTextKey: false,
 };
 
 /// base with a more compact layout and hidden scrolls
