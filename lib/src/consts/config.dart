@@ -372,7 +372,6 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Global
   animationDurationKey: defaultAnimationDuration,
-  // appIconPathKey: null => default
 
   // Dark
   darkBackgroundImageKey: noImageValue,
