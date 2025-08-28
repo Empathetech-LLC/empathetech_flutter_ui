@@ -144,24 +144,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         ),
         separator,
 
-        const Text('Button transparency'), // TODO? margin?
-        Slider(
-          value: buttonOpacity,
-          onChanged: (double value) => setState(() => buttonOpacity = value),
-          onChangeEnd: (double value) => EzConfig.setDouble(
-            isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-            value,
-          ),
-        ),
-        marginer,
-        EzSwitchPair(
-          text: 'Include outlines',
-          valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
-        ),
-
         // Background TODO: Add 'image' to button label
         if (widget.includeBackgroundImage) ...<Widget>[
-          spacer,
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
@@ -182,7 +166,23 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                     updateTheme: Brightness.light,
                   ),
           ),
+          spacer,
         ],
+
+        const Text('Button transparency'), // TODO? margin?
+        Slider(
+          value: buttonOpacity,
+          onChanged: (double value) => setState(() => buttonOpacity = value),
+          onChangeEnd: (double value) => EzConfig.setDouble(
+            isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+            value,
+          ),
+        ),
+        marginer,
+        EzSwitchPair(
+          text: 'Include outlines',
+          valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
+        ),
 
         if (widget.includeGlass) ...<Widget>[
           spacer,
