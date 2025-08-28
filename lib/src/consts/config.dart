@@ -130,6 +130,7 @@ const Color lightSurface = Color(lightSurfaceHex);
 
 //* Design settings *//
 
+/// 200.0
 const double defaultAnimationDuration = 200.0;
 
 //* Layout settings *//
@@ -185,6 +186,7 @@ const double defaultWordSpacing = 1.0;
 
 // Design settings //
 
+/// 0.0
 const double minAnimationDuration = 0.0;
 
 // Layout settings //
@@ -243,6 +245,7 @@ const double minFontHeight = 1.0;
 
 // Design settings //
 
+/// 1000.0
 const double maxAnimationDuration = 1000.0;
 
 // Layout settings //
