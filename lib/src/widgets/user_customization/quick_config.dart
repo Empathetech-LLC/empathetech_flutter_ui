@@ -145,12 +145,16 @@ class EzBigButtonsConfig extends StatelessWidget {
       ),
       onPressed: () async {
         // Reset
-        await EzConfig.removeKeys(textStyleKeys.keys.toSet());
-        await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(
-          isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-        );
-        await EzConfig.removeKeys(allImageKeys.keys.toSet());
+        if (isDark) {
+          await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+          await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+        } else {
+          await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+          await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
+        }
+        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+        await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
         // Update text
         await EzConfig.setDouble(iconSizeKey, 25);
@@ -211,12 +215,16 @@ class EzHighVisibilityConfig extends StatelessWidget {
       onPressed: () async {
         // Reset //
 
-        await EzConfig.removeKeys(textStyleKeys.keys.toSet());
-        await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(
-          isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-        );
-        await EzConfig.removeKeys(allImageKeys.keys.toSet());
+        if (isDark) {
+          await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+          await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+        } else {
+          await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+          await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
+        }
+        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+        await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
         // Update text //
 
@@ -377,10 +385,11 @@ class EzVideoGameConfig extends StatelessWidget {
 
         // Reset //
 
-        await EzConfig.removeKeys(textStyleKeys.keys.toSet());
-        await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(darkColorKeys.toSet());
-        await EzConfig.removeKeys(allImageKeys.keys.toSet());
+        await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+        await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+        await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
         // Update text //
 
@@ -484,10 +493,11 @@ class EzChalkboardConfig extends StatelessWidget {
       onPressed: () async {
         // Reset //
 
-        await EzConfig.removeKeys(textStyleKeys.keys.toSet());
-        await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(darkColorKeys.toSet());
-        await EzConfig.removeKeys(allImageKeys.keys.toSet());
+        await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+        await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+        await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
         // Update text //
 
@@ -625,12 +635,16 @@ class EzFancyPantsConfig extends StatelessWidget {
       onPressed: () async {
         // Reset //
 
-        await EzConfig.removeKeys(textStyleKeys.keys.toSet());
-        await EzConfig.removeKeys(layoutKeys.keys.toSet());
-        await EzConfig.removeKeys(
-          isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-        );
-        await EzConfig.removeKeys(allImageKeys.keys.toSet());
+        if (isDark) {
+          await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+          await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+        } else {
+          await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+          await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
+        }
+        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
+        await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
         // Update text //
 
