@@ -80,6 +80,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   final EzSpacer marginer = EzMargin();
 
   final double margin = EzConfig.get(marginKey);
+  final double spacing = EzConfig.get(spacingKey);
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -107,6 +108,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
     final String themeProfile =
         isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
+    // TODO: theme listener thing from text, confirmed it's jumpy
     double buttonOpacity = isDark
         ? EzConfig.get(darkButtonOpacityKey)
         : EzConfig.get(lightButtonOpacityKey);
@@ -115,13 +117,22 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
 
     return EzScrollView(
       children: <Widget>[
+        if (spacing > margin) EzSpacer(space: spacing - margin),
+
         // Animation duration
-        const Text('Animation duration'), // TODO? margin?
-        Slider(
-          value: animDuration,
-          onChanged: (double value) => setState(() => animDuration = value),
-          onChangeEnd: (double value) =>
-              EzConfig.setDouble(animationDurationKey, value),
+        const Text('Animation duration (ms)'), // TODO? margin?
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+          child: Slider(
+            value: animDuration,
+            min: minAnimationDuration,
+            max: maxAnimationDuration,
+            divisions: 20,
+            label: animDuration.toStringAsFixed(0),
+            onChanged: (double value) => setState(() => animDuration = value),
+            onChangeEnd: (double value) =>
+                EzConfig.setDouble(animationDurationKey, value),
+          ),
         ),
 
         // App icon TODO (doesn't need switch, should be always on)
@@ -169,19 +180,39 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
           spacer,
         ],
 
-        const Text('Button transparency'), // TODO? margin?
-        Slider(
-          value: buttonOpacity,
-          onChanged: (double value) => setState(() => buttonOpacity = value),
-          onChangeEnd: (double value) => EzConfig.setDouble(
-            isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-            value,
+        Card(
+          color: Theme.of(context)
+              .colorScheme
+              .surface
+              .withValues(alpha: buttonOpacity), // TODO: looks weird
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Text('Button transparency'), // TODO: top padding
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+                child: Slider(
+                  value: buttonOpacity,
+                  min: minOpacity,
+                  max: maxOpacity,
+                  divisions: 20,
+                  label: buttonOpacity.toStringAsFixed(2),
+                  onChanged: (double value) =>
+                      setState(() => buttonOpacity = value),
+                  onChangeEnd: (double value) => EzConfig.setDouble(
+                    isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                    value,
+                  ),
+                ),
+              ),
+              marginer,
+              EzSwitchPair(
+                text: 'Include outlines',
+                valueKey:
+                    isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
+              ),
+            ],
           ),
-        ),
-        marginer,
-        EzSwitchPair(
-          text: 'Include outlines',
-          valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
         ),
 
         if (widget.includeGlass) ...<Widget>[
