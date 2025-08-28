@@ -20,11 +20,11 @@ class EzTextSettings extends StatelessWidget {
   final Widget resetSpacer;
 
   /// Optional additional reset keys for the dark theme
-  /// [textStyleKeys] and [darkOnSurfaceKey] are included by default
+  /// [allTextKeys] and [darkOnSurfaceKey] are included by default
   final Set<String>? darkThemeResetKeys;
 
   /// Optional additional reset keys for the light theme
-  /// [textStyleKeys] and [lightOnSurfaceKey] are included by default
+  /// [allTextKeys] and [lightOnSurfaceKey] are included by default
   final Set<String>? lightThemeResetKeys;
 
   /// Whether the onSurfaceColor (quick) setting should be shown
@@ -609,25 +609,24 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () async {
-            final Set<String> textKeys = textStyleKeys.keys.toSet();
+            final Set<String> textKeys = allTextKeys.keys.toSet();
 
             if (isDark) {
               textKeys.remove(lightTextBackgroundOpacityKey);
-              await EzConfig.removeKeys(textKeys);
-              await EzConfig.remove(darkOnSurfaceKey);
+              textKeys.add(darkOnSurfaceKey);
 
               if (widget.darkThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.darkThemeResetKeys!);
+                textKeys.addAll(widget.darkThemeResetKeys!);
               }
             } else {
               textKeys.remove(darkTextBackgroundOpacityKey);
-              await EzConfig.removeKeys(textKeys);
-              await EzConfig.remove(lightOnSurfaceKey);
+              textKeys.add(lightOnSurfaceKey);
 
               if (widget.lightThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.lightThemeResetKeys!);
+                textKeys.addAll(widget.lightThemeResetKeys!);
               }
             }
+            await EzConfig.removeKeys(textKeys);
 
             widget.displayProvider.reset();
             widget.headlineProvider.reset();
@@ -1400,25 +1399,24 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
         EzResetButton(
           dialogTitle: l10n.tsResetAll,
           onConfirm: () async {
-            final Set<String> textKeys = textStyleKeys.keys.toSet();
+            final Set<String> textKeys = allTextKeys.keys.toSet();
 
             if (isDarkTheme(context)) {
               textKeys.remove(lightTextBackgroundOpacityKey);
-              await EzConfig.removeKeys(textKeys);
-              await EzConfig.remove(darkOnSurfaceKey);
+              textKeys.add(darkOnSurfaceKey);
 
               if (widget.darkThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.darkThemeResetKeys!);
+                textKeys.addAll(widget.darkThemeResetKeys!);
               }
             } else {
               textKeys.remove(darkTextBackgroundOpacityKey);
-              await EzConfig.removeKeys(textKeys);
-              await EzConfig.remove(lightOnSurfaceKey);
+              textKeys.add(lightOnSurfaceKey);
 
               if (widget.lightThemeResetKeys != null) {
-                EzConfig.removeKeys(widget.lightThemeResetKeys!);
+                textKeys.addAll(widget.lightThemeResetKeys!);
               }
             }
+            await EzConfig.removeKeys(textKeys);
 
             widget.displayProvider.reset();
             widget.headlineProvider.reset();

@@ -21,7 +21,7 @@ class EzLayoutSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [layoutKeys] are included by default
+  /// [allLayoutKeys] are included by default
   final Set<String>? resetKeys;
 
   /// Empathetech layout settings
@@ -124,7 +124,7 @@ class _EzLayoutSettingsState extends State<EzLayoutSettings> {
         EzResetButton(
           dialogTitle: l10n.lsResetAll,
           onConfirm: () async {
-            await EzConfig.removeKeys(layoutKeys.keys.toSet());
+            await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
             if (widget.resetKeys != null) {
               await EzConfig.removeKeys(widget.resetKeys!);
             }
