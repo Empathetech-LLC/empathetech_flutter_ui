@@ -10,16 +10,12 @@ import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDesignSettings extends StatefulWidget {
-  /// Optional additional settings
-  /// Before the main settings
-  /// See [prefixSpacer] for layout tuning
-  final List<Widget>? beforeBackground;
-
-  /// If [beforeBackground] is not null, the spacer between it and the main settings
-  final Widget prefixSpacer;
+  /// Optional additional global design settings
+  /// Will appear after the default global design settings
+  /// BYO leading spacer, trailing will be a custom [EzDivider]
+  final List<Widget>? additionalGlobalSettings;
 
   /// Optional credits for dark background image
   final String? darkBackgroundCredits;
@@ -27,33 +23,33 @@ class EzDesignSettings extends StatefulWidget {
   /// Optional credits for light background image
   final String? lightBackgroundCredits;
 
-  /// Spacer between the main settings and [afterBackground], if present
-  final Widget postfixSpacer;
+  /// Optional additional theme design settings
+  /// Will appear after the default themed design settings
+  /// BYO leading spacer, trailing will be [resetSpacer]
+  final List<Widget>? additionalThemedSettings;
 
-  /// Optional additional settings
-  /// After the main settings
-  /// See [postfixSpacer] and [resetSpacer] for layout tuning
-  final List<Widget>? afterBackground;
-
-  /// Spacer between the main (or [afterBackground], if present) settings and the trailing [EzResetButton]
+  /// Spacer before the [EzResetButton]
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [darkImageKeys] or [lightImageKeys] are included by default
-  final Set<String>? resetKeys;
+  /// [globalDesignKeys] && [darkDesignKeys] are included by default
+  final Set<String>? darkThemeResetKeys;
+
+  /// Additional [EzConfig] keys for the local [EzResetButton]
+  /// [globalDesignKeys] && [lightDesignKeys] are included by default
+  final Set<String>? lightThemeResetKeys;
 
   /// Empathetech image settings
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
-    this.beforeBackground,
-    this.prefixSpacer = const EzSeparator(),
+    this.additionalGlobalSettings,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.postfixSpacer = const EzSeparator(),
-    this.afterBackground,
+    this.additionalThemedSettings,
     this.resetSpacer = const EzSeparator(),
-    this.resetKeys,
+    this.darkThemeResetKeys,
+    this.lightThemeResetKeys,
   });
 
   @override
@@ -63,6 +59,7 @@ class EzDesignSettings extends StatefulWidget {
 class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Gather the fixed theme data //
 
+  static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
 
   final double margin = EzConfig.get(marginKey);
@@ -71,8 +68,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
 
   // Define the build data //
 
-  bool clearColors = false;
   int redraw = 0;
+  double animDuration = EzConfig.get(animationDurationKey);
+
+  late final String darkString = l10n.gDark.toLowerCase();
+  late final String lightString = l10n.gLight.toLowerCase();
 
   // Set the page title //
 
@@ -82,31 +82,44 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
     ezWindowNamer(context, l10n.dsPageTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
     final bool isDark = isDarkTheme(context);
     final String themeProfile =
         isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
 
+    double buttonOpacity = isDark
+        ? EzConfig.get(darkButtonOpacityKey)
+        : EzConfig.get(lightButtonOpacityKey);
+
+    // Return the build //
+
     return EzScrollView(
       children: <Widget>[
         // Animation duration
-        const Text('Animation duration'),
+        const Text('Animation duration'), // TODO: margin?
+        Slider(
+          value: animDuration,
+          onChanged: (double value) => setState(() => animDuration = value),
+          onChangeEnd: (double value) =>
+              EzConfig.setDouble(animationDurationKey, value),
+        ),
+
+        // App icon TODO
 
         // Hide scroll
-        separator,
+        spacer,
         EzSwitchPair(
           key: ValueKey<String>('scroll_$redraw'),
           text: l10n.lsScroll,
           valueKey: hideScrollKey,
         ),
 
-        // Global/theme based divider
+        // Global/themed divider, w/ theme reminder
         separator,
         EzDivider(height: margin * 2),
-        // Current theme reminder
         EzText(
           l10n.gEditingTheme(themeProfile),
           style: Theme.of(context).textTheme.labelLarge,
@@ -114,13 +127,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         ),
         separator,
 
-        // Before background
-        if (widget.beforeBackground != null) ...<Widget>[
-          ...widget.beforeBackground!,
-          widget.prefixSpacer,
-        ],
-
-        // Background TODO: Add 'image'
+        // Background TODO: Add 'image' to button label
         EzScrollView(
           scrollDirection: Axis.horizontal,
           startCentered: true,
@@ -141,101 +148,63 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                   updateTheme: Brightness.light,
                 ),
         ),
+        spacer,
 
-        // After background
-        if (widget.afterBackground != null) ...<Widget>[
-          widget.postfixSpacer,
-          ...widget.afterBackground!,
-        ],
-
-        EzSwitchPair(
-          text: 'Button transparency',
-          valueKey: isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+        const Text('Animation duration'), // TODO: margin?
+        Slider(
+          value: buttonOpacity,
+          onChanged: (double value) => setState(() => buttonOpacity = value),
+          onChangeEnd: (double value) => EzConfig.setDouble(
+            isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+            value,
+          ),
         ),
+        spacer,
 
         EzSwitchPair(
           text: 'Include outlines',
           valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
         ),
+        spacer,
 
         EzSwitchPair(
           text: 'Glass buttons',
           valueKey: isDark ? darkGlassKey : lightGlassKey,
         ), // TODO: enabling this greys out above (not remove, just disable)
 
-        // Local reset all
+        // After background
+        if (widget.additionalThemedSettings != null)
+          ...widget.additionalThemedSettings!,
+
+        // Reset button
         widget.resetSpacer,
-        EzElevatedIconButton(
-          icon: EzIcon(PlatformIcons(context).refresh),
-          label: l10n.gResetAll,
-          onPressed: () => showPlatformDialog(
-            context: context,
-            builder: (BuildContext dialogContext) =>
-                StatefulBuilder(builder: (_, StateSetter dialogState) {
-              late final List<Widget> materialActions;
-              late final List<Widget> cupertinoActions;
-
-              (materialActions, cupertinoActions) = ezActionPairs(
-                context: context,
+        isDark
+            ? EzResetButton(
+                dialogTitle: l10n.dsResetAll(darkString),
                 onConfirm: () async {
-                  await EzConfig.removeKeys(
-                    isDark ? darkImageKeys : lightImageKeys,
-                  );
+                  await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+                  await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
 
-                  if (clearColors) {
-                    await EzConfig.removeKeys(
-                      isDark ? darkColorKeys.toSet() : lightColorKeys.toSet(),
-                    );
-                    await EzConfig.remove(
-                      isDark
-                          ? darkTextBackgroundOpacityKey
-                          : lightTextBackgroundOpacityKey,
-                    );
+                  if (widget.darkThemeResetKeys != null) {
+                    await EzConfig.removeKeys(widget.darkThemeResetKeys!);
                   }
 
-                  if (widget.resetKeys != null) {
-                    await EzConfig.removeKeys(widget.resetKeys!);
-                  }
-
-                  if (dialogContext.mounted) {
-                    Navigator.of(dialogContext).pop();
-                  }
                   setState(() => redraw = Random().nextInt(rMax));
                 },
-                confirmIsDestructive: true,
-                onDeny: () => Navigator.of(dialogContext).pop(),
-              );
+              )
+            : EzResetButton(
+                dialogTitle: l10n.dsResetAll(lightString),
+                onConfirm: () async {
+                  await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+                  await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
 
-              return EzAlertDialog(
-                title: Text(
-                  l10n.dsResetAll(themeProfile),
-                  textAlign: TextAlign.center,
-                ),
-                contents: <Widget>[
-                  EzSwitchPair(
-                    key: ValueKey<bool>(clearColors),
-                    text: l10n.dsAndColors(themeProfile),
-                    textAlign: TextAlign.center,
-                    value: clearColors,
-                    onChanged: (bool? choice) {
-                      clearColors = (choice == null) ? false : choice;
-                      dialogState(() {});
-                      setState(() {});
-                    },
-                  ),
-                  const EzSpacer(),
-                  Text(
-                    l10n.gUndoWarn,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-                materialActions: materialActions,
-                cupertinoActions: cupertinoActions,
-                needsClose: false,
-              );
-            }),
-          ),
-        ),
+                  if (widget.lightThemeResetKeys != null) {
+                    await EzConfig.removeKeys(widget.lightThemeResetKeys!);
+                  }
+
+                  setState(() => redraw = Random().nextInt(rMax));
+                },
+              ),
         separator,
       ],
     );
