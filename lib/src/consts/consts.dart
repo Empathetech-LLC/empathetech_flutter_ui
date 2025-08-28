@@ -23,6 +23,3 @@ const double focusOpacity = 0.12;
 
 /// 0.25
 const double selectionOpacity = 0.25;
-
-/// 250 milliseconds
-const Duration animDuration = Duration(milliseconds: 250);
