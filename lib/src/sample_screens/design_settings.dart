@@ -3,13 +3,13 @@
  * See LICENSE for distribution and usage details.
  */
 
-// TODO: Update conditionals/spacers
-// TODO: l10n
+// TODO: l10n, semantics, tooltips
 
 import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class EzDesignSettings extends StatefulWidget {
   /// Optional additional global design settings
@@ -63,7 +63,7 @@ class EzDesignSettings extends StatefulWidget {
     this.lightBackgroundCredits,
     this.includeGlass = true,
     this.additionalThemedSettings,
-    this.resetSpacer = const EzSeparator(),
+    this.resetSpacer = const EzDivider(),
     this.darkThemeResetKeys,
     this.lightThemeResetKeys,
   });
@@ -72,7 +72,8 @@ class EzDesignSettings extends StatefulWidget {
   State<EzDesignSettings> createState() => _EzDesignSettingsState();
 }
 
-class _EzDesignSettingsState extends State<EzDesignSettings> {
+class _EzDesignSettingsState extends State<EzDesignSettings>
+    with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
@@ -83,16 +84,30 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   final double spacing = EzConfig.get(spacingKey);
 
   late final EFUILang l10n = ezL10n(context);
-
-  // Define the build data //
-
-  int redraw = 0;
-  double animDuration = EzConfig.get(animationDurationKey) ?? 0.0;
-
   late final String darkString = l10n.gDark.toLowerCase();
   late final String lightString = l10n.gLight.toLowerCase();
 
-  // Set the page title //
+  // Define the build data //
+
+  final bool strictMobile = !kIsWeb && isMobile();
+  double animDuration = EzConfig.get(animationDurationKey) ?? 0.0;
+
+  late bool isDark = isDarkTheme(context);
+  late String themeProfile = isDark ? darkString : lightString;
+
+  late double buttonOpacity = isDark
+      ? EzConfig.get(darkButtonOpacityKey)
+      : EzConfig.get(lightButtonOpacityKey);
+
+  int redraw = 0;
+
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   @override
   void didChangeDependencies() {
@@ -101,26 +116,29 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    // Gather the dynamic theme data //
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
 
-    final bool isDark = isDarkTheme(context);
-    final String themeProfile =
-        isDark ? l10n.gDark.toLowerCase() : l10n.gLight.toLowerCase();
+    isDark = isDarkTheme(context);
+    themeProfile = isDark ? darkString : lightString;
 
-    // TODO: theme listener thing from text, confirmed it's jumpy
-    double buttonOpacity = isDark
+    buttonOpacity = isDark
         ? EzConfig.get(darkButtonOpacityKey)
         : EzConfig.get(lightButtonOpacityKey);
 
-    // Return the build //
+    setState(() => redraw = Random().nextInt(rMax));
+  }
 
+  // Return the build //
+
+  @override
+  Widget build(BuildContext context) {
     return EzScrollView(
       children: <Widget>[
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
         // Animation duration
-        const Text('Animation duration (ms)'), // TODO? margin?
+        const Text('Animation duration (ms)'),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
           child: Slider(
@@ -134,8 +152,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                 EzConfig.setDouble(animationDurationKey, value),
           ),
         ),
-
-        // App icon TODO (doesn't need switch, should be always on)
+        spacer,
 
         // Hide scroll
         spacer,
@@ -155,8 +172,47 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         ),
         separator,
 
+        Card(
+          color: Theme.of(context)
+              .colorScheme
+              .surface
+              .withValues(alpha: buttonOpacity), // TODO: looks weird
+          child: Padding(
+            padding: EdgeInsets.all(margin),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('Button transparency'),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+                  child: Slider(
+                    value: buttonOpacity,
+                    min: minOpacity,
+                    max: maxOpacity,
+                    divisions: 20,
+                    label: buttonOpacity.toStringAsFixed(2),
+                    onChanged: (double value) =>
+                        setState(() => buttonOpacity = value),
+                    onChangeEnd: (double value) => EzConfig.setDouble(
+                      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                      value,
+                    ),
+                  ),
+                ),
+                marginer,
+                EzSwitchPair(
+                  text: 'Include outlines',
+                  valueKey:
+                      isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
+                ),
+              ],
+            ),
+          ),
+        ),
+
         // Background TODO: Add 'image' to button label
         if (widget.includeBackgroundImage) ...<Widget>[
+          spacer,
           EzScrollView(
             scrollDirection: Axis.horizontal,
             startCentered: true,
@@ -177,45 +233,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                     updateTheme: Brightness.light,
                   ),
           ),
-          spacer,
         ],
 
-        Card(
-          color: Theme.of(context)
-              .colorScheme
-              .surface
-              .withValues(alpha: buttonOpacity), // TODO: looks weird
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Text('Button transparency'), // TODO: top padding
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-                child: Slider(
-                  value: buttonOpacity,
-                  min: minOpacity,
-                  max: maxOpacity,
-                  divisions: 20,
-                  label: buttonOpacity.toStringAsFixed(2),
-                  onChanged: (double value) =>
-                      setState(() => buttonOpacity = value),
-                  onChangeEnd: (double value) => EzConfig.setDouble(
-                    isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                    value,
-                  ),
-                ),
-              ),
-              marginer,
-              EzSwitchPair(
-                text: 'Include outlines',
-                valueKey:
-                    isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
-              ),
-            ],
-          ),
-        ),
-
-        if (widget.includeGlass) ...<Widget>[
+        if (widget.includeGlass && strictMobile) ...<Widget>[
           spacer,
           EzSwitchPair(
             text: 'Glass buttons',
@@ -231,7 +251,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         widget.resetSpacer,
         isDark
             ? EzResetButton(
-                dialogTitle: l10n.dsResetAll(darkString),
+                dialogTitle: l10n.dsResetAll(darkString), // TODO: update entry
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
                   await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
@@ -261,5 +281,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         separator,
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
