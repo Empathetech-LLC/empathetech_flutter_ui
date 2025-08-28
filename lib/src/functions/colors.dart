@@ -133,7 +133,7 @@ Future<void> storeColorScheme({
   required Brightness brightness,
 }) async {
   if (brightness == Brightness.dark) {
-    await EzConfig.removeKeys(darkColorKeys.toSet());
+    await EzConfig.removeKeys(darkColorKeys.keys.toSet());
 
     await EzConfig.setInt(darkPrimaryKey, colorScheme.primary.toARGB32());
     await EzConfig.setInt(darkOnPrimaryKey, colorScheme.onPrimary.toARGB32());
@@ -215,7 +215,7 @@ Future<void> storeColorScheme({
     await EzConfig.setInt(
         darkSurfaceTintKey, colorScheme.surfaceTint.toARGB32());
   } else {
-    await EzConfig.removeKeys(lightColorKeys.toSet());
+    await EzConfig.removeKeys(lightColorKeys.keys.toSet());
 
     await EzConfig.setInt(lightPrimaryKey, colorScheme.primary.toARGB32());
     await EzConfig.setInt(lightOnPrimaryKey, colorScheme.onPrimary.toARGB32());
