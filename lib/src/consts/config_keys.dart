@@ -425,12 +425,10 @@ const String csSurfaceTint = 'Surface tint';
 // Global settings //
 
 const String animationDurationKey = 'animationDuration';
-const String appIconPathKey = 'appIconPath';
 
-/// [animationDurationKey], [appIconPathKey]
+/// [animationDurationKey]
 const Map<String, Type> globalDesignKeys = <String, Type>{
   animationDurationKey: double,
-  appIconPathKey: String,
 };
 
 // Dark theme //
