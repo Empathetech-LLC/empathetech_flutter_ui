@@ -17,11 +17,21 @@ class EzDesignSettings extends StatefulWidget {
   /// BYO leading spacer, trailing will be a custom [EzDivider]
   final List<Widget>? additionalGlobalSettings;
 
-  /// Optional credits for dark background image
+  /// Whether to include the background image setting
+  /// When true, pairs well with [EzScreen], specifically [EzScreen.useImageDecoration]
+  final bool includeBackgroundImage;
+
+  /// Optional credits for the dark background image
+  /// Moot if [includeBackgroundImage] is false
   final String? darkBackgroundCredits;
 
-  /// Optional credits for light background image
+  /// Optional credits for the light background image
+  /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
+
+  /// Whether to include the "Liquid Glass" setting
+  /// Only applicable for mobile
+  final bool includeGlass;
 
   /// Optional additional theme design settings
   /// Will appear after the default themed design settings
@@ -32,11 +42,15 @@ class EzDesignSettings extends StatefulWidget {
   final Widget resetSpacer;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [globalDesignKeys] && [darkDesignKeys] are included by default
+  /// [globalDesignKeys], [darkDesignKeys], && [darkColorSchemeImageKey] are included by default
+  /// Intentionally just resets the image, not the color scheme itself
+  /// Include [darkColorKeys] if desired
   final Set<String>? darkThemeResetKeys;
 
   /// Additional [EzConfig] keys for the local [EzResetButton]
-  /// [globalDesignKeys] && [lightDesignKeys] are included by default
+  /// [globalDesignKeys], [lightDesignKeys], && [lightColorSchemeImageKey] are included by default
+  /// /// Intentionally just resets the image, not the color scheme itself
+  /// Include [lightColorKeys] if desired
   final Set<String>? lightThemeResetKeys;
 
   /// Empathetech image settings
@@ -44,8 +58,10 @@ class EzDesignSettings extends StatefulWidget {
   const EzDesignSettings({
     super.key,
     this.additionalGlobalSettings,
+    this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
+    this.includeGlass = true,
     this.additionalThemedSettings,
     this.resetSpacer = const EzSeparator(),
     this.darkThemeResetKeys,
@@ -61,6 +77,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
+  final EzSpacer marginer = EzMargin();
 
   final double margin = EzConfig.get(marginKey);
 
@@ -69,7 +86,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
   // Define the build data //
 
   int redraw = 0;
-  double animDuration = EzConfig.get(animationDurationKey);
+  double animDuration = EzConfig.get(animationDurationKey) ?? 0.0;
 
   late final String darkString = l10n.gDark.toLowerCase();
   late final String lightString = l10n.gLight.toLowerCase();
@@ -99,7 +116,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
     return EzScrollView(
       children: <Widget>[
         // Animation duration
-        const Text('Animation duration'), // TODO: margin?
+        const Text('Animation duration'), // TODO? margin?
         Slider(
           value: animDuration,
           onChanged: (double value) => setState(() => animDuration = value),
@@ -107,7 +124,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
               EzConfig.setDouble(animationDurationKey, value),
         ),
 
-        // App icon TODO
+        // App icon TODO (doesn't need switch, should be always on)
 
         // Hide scroll
         spacer,
@@ -127,30 +144,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
         ),
         separator,
 
-        // Background TODO: Add 'image' to button label
-        EzScrollView(
-          scrollDirection: Axis.horizontal,
-          startCentered: true,
-          mainAxisSize: MainAxisSize.min,
-          child: isDark
-              ? EzImageSetting(
-                  key: UniqueKey(),
-                  configKey: darkBackgroundImageKey,
-                  credits: widget.darkBackgroundCredits,
-                  label: l10n.dsBackground,
-                  updateTheme: Brightness.dark,
-                )
-              : EzImageSetting(
-                  key: UniqueKey(),
-                  configKey: lightBackgroundImageKey,
-                  credits: widget.lightBackgroundCredits,
-                  label: l10n.dsBackground,
-                  updateTheme: Brightness.light,
-                ),
-        ),
-        spacer,
-
-        const Text('Animation duration'), // TODO: margin?
+        const Text('Button transparency'), // TODO? margin?
         Slider(
           value: buttonOpacity,
           onChanged: (double value) => setState(() => buttonOpacity = value),
@@ -159,18 +153,44 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
             value,
           ),
         ),
-        spacer,
-
+        marginer,
         EzSwitchPair(
           text: 'Include outlines',
           valueKey: isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
         ),
-        spacer,
 
-        EzSwitchPair(
-          text: 'Glass buttons',
-          valueKey: isDark ? darkGlassKey : lightGlassKey,
-        ), // TODO: enabling this greys out above (not remove, just disable)
+        // Background TODO: Add 'image' to button label
+        if (widget.includeBackgroundImage) ...<Widget>[
+          spacer,
+          EzScrollView(
+            scrollDirection: Axis.horizontal,
+            startCentered: true,
+            mainAxisSize: MainAxisSize.min,
+            child: isDark
+                ? EzImageSetting(
+                    key: UniqueKey(),
+                    configKey: darkBackgroundImageKey,
+                    credits: widget.darkBackgroundCredits,
+                    label: l10n.dsBackground,
+                    updateTheme: Brightness.dark,
+                  )
+                : EzImageSetting(
+                    key: UniqueKey(),
+                    configKey: lightBackgroundImageKey,
+                    credits: widget.lightBackgroundCredits,
+                    label: l10n.dsBackground,
+                    updateTheme: Brightness.light,
+                  ),
+          ),
+        ],
+
+        if (widget.includeGlass) ...<Widget>[
+          spacer,
+          EzSwitchPair(
+            text: 'Glass buttons',
+            valueKey: isDark ? darkGlassKey : lightGlassKey,
+          ), // TODO: enabling this greys out above (not remove, just disable)
+        ],
 
         // After background
         if (widget.additionalThemedSettings != null)
@@ -184,6 +204,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
                   await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
+                  await EzConfig.remove(darkColorSchemeImageKey);
 
                   if (widget.darkThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.darkThemeResetKeys!);
@@ -197,6 +218,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings> {
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
                   await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
+                  await EzConfig.remove(lightColorSchemeImageKey);
 
                   if (widget.lightThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.lightThemeResetKeys!);
