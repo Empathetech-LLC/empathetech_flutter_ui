@@ -99,6 +99,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ? EzConfig.get(darkButtonOpacityKey)
       : EzConfig.get(lightButtonOpacityKey);
 
+  late Color surface = Theme.of(context).colorScheme.surface;
+  late Color buttonBackground = surface.withValues(alpha: buttonOpacity);
+
   int redraw = 0;
 
   // Init //
@@ -125,6 +128,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     buttonOpacity = isDark
         ? EzConfig.get(darkButtonOpacityKey)
         : EzConfig.get(lightButtonOpacityKey);
+
+    surface = Theme.of(context).colorScheme.surface;
+    buttonBackground = surface.withValues(alpha: buttonOpacity);
 
     setState(() => redraw = Random().nextInt(rMax));
   }
@@ -173,10 +179,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         separator,
 
         Card(
-          color: Theme.of(context)
-              .colorScheme
-              .surface
-              .withValues(alpha: buttonOpacity), // TODO: looks weird
+          color: buttonBackground,
+          shadowColor: Colors.transparent,
           child: Padding(
             padding: EdgeInsets.all(margin),
             child: Column(
@@ -186,17 +190,27 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
+                    // Slider values
                     value: buttonOpacity,
                     min: minOpacity,
                     max: maxOpacity,
                     divisions: 20,
                     label: buttonOpacity.toStringAsFixed(2),
-                    onChanged: (double value) =>
-                        setState(() => buttonOpacity = value),
-                    onChangeEnd: (double value) => EzConfig.setDouble(
-                      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                      value,
-                    ),
+
+                    // Slider functions
+                    onChanged: (double value) {
+                      setState(() {
+                        buttonOpacity = value;
+                        buttonBackground =
+                            surface.withValues(alpha: buttonOpacity);
+                      });
+                    },
+                    onChangeEnd: (double value) async {
+                      await EzConfig.setDouble(
+                        isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                        value,
+                      );
+                    },
                   ),
                 ),
                 marginer,
