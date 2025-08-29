@@ -96,6 +96,10 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
+/// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
+Duration ezAnimDuration() => Duration(
+    milliseconds: (EzConfig.get(animationDurationKey) as double).toInt());
+
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection
 /// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
