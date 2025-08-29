@@ -90,7 +90,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   // Define the build data //
 
   final bool strictMobile = !kIsWeb && isMobile();
-  double animDuration = EzConfig.get(animationDurationKey) ?? 0.0;
+  double animDuration = EzConfig.get(animationDurationKey);
 
   late bool isDark = isDarkTheme(context);
   late String themeProfile = isDark ? darkString : lightString;
