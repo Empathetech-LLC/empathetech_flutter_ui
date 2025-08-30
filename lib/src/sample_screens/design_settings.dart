@@ -161,7 +161,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         spacer,
 
         // Hide scroll
-        spacer,
         EzSwitchPair(
           key: ValueKey<String>('scroll_$redraw'),
           text: l10n.lsScroll,
