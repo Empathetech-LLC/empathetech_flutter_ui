@@ -229,6 +229,7 @@ ThemeData ezThemeData(Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryButtonBackground,
       foregroundColor: colorScheme.onPrimary,
+      hoverColor: highlightColor,
       extendedPadding: EdgeInsets.zero,
       shape: const CircleBorder(),
       iconSize: iconSize,
@@ -274,8 +275,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Menu
     menuTheme: MenuThemeData(
       style: MenuStyle(
-        backgroundColor: WidgetStateProperty.all(buttonBackground),
-        shadowColor: WidgetStateProperty.all(buttonShadow),
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
         side: WidgetStateProperty.all(BorderSide(color: buttonContainer)),
         alignment: Alignment.center,
       ),
@@ -284,7 +284,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Menu button
     menuButtonTheme: MenuButtonThemeData(
       style: TextButton.styleFrom(
-        backgroundColor: buttonBackground,
+        backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
