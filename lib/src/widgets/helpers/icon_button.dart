@@ -149,12 +149,12 @@ class EzIconButton extends StatelessWidget {
             ? Colors.transparent
             : colorScheme.surface.withValues(alpha: buttonOpacity)
         : colorScheme.surface;
-    late final Color buttonContainer = calcButton && includeOutline
+    late final Color enabledOutline = calcButton && includeOutline
         ? (buttonOpacity < 0.01)
             ? Colors.transparent
             : colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
         : colorScheme.primaryContainer;
-    late final Color buttonOutline = calcButton && includeOutline
+    late final Color disabledOutline = calcButton && includeOutline
         ? (buttonOpacity < 0.01)
             ? Colors.transparent
             : colorScheme.outlineVariant.withValues(alpha: buttonOpacity)
@@ -164,7 +164,7 @@ class EzIconButton extends StatelessWidget {
         (enabled
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
-                side: BorderSide(color: buttonContainer),
+                side: BorderSide(color: enabledOutline),
                 iconSize: iconSize ?? savedIconSized,
               )
             : IconButton.styleFrom(
@@ -172,7 +172,7 @@ class EzIconButton extends StatelessWidget {
                 foregroundColor: colorScheme.outline,
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
-                side: BorderSide(color: buttonOutline),
+                side: BorderSide(color: disabledOutline),
                 iconSize: iconSize ?? savedIconSized,
               ));
 
