@@ -135,18 +135,44 @@ class EzIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     late final double savedIconSized = EzConfig.get(iconSizeKey);
     late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    late final bool isDark = isDarkTheme(context);
+
+    late final double buttonOpacity =
+        EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+    late final bool includeOutline =
+        EzConfig.get(isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey);
+
+    late final bool calcButton = buttonOpacity < 1.0;
+
+    late final Color buttonBackground = calcButton
+        ? (buttonOpacity < 0.01)
+            ? Colors.transparent
+            : colorScheme.surface.withValues(alpha: buttonOpacity)
+        : colorScheme.surface;
+    late final Color buttonContainer = calcButton && includeOutline
+        ? (buttonOpacity < 0.01)
+            ? Colors.transparent
+            : colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
+        : colorScheme.primaryContainer;
+    late final Color buttonOutline = calcButton && includeOutline
+        ? (buttonOpacity < 0.01)
+            ? Colors.transparent
+            : colorScheme.outlineVariant.withValues(alpha: buttonOpacity)
+        : colorScheme.outlineVariant;
 
     late final ButtonStyle buttonStyle = style ??
         (enabled
             ? IconButton.styleFrom(
-                side: BorderSide(color: colorScheme.primaryContainer),
+                backgroundColor: buttonBackground,
+                side: BorderSide(color: buttonContainer),
                 iconSize: iconSize ?? savedIconSized,
               )
             : IconButton.styleFrom(
+                backgroundColor: buttonBackground,
                 foregroundColor: colorScheme.outline,
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
-                side: BorderSide(color: colorScheme.outlineVariant),
+                side: BorderSide(color: buttonOutline),
                 iconSize: iconSize ?? savedIconSized,
               ));
 
