@@ -33,16 +33,17 @@ class EzTutorial extends StatelessWidget {
 
   /// [AlertDialog] wrapped in a [SelectionArea] and [Positioned] widget
   /// Pairs well with [OverlayPortal] for displaying tutorials
-  const EzTutorial(
-      {super.key,
-      this.top,
-      this.bottom,
-      this.left,
-      this.right,
-      required this.title,
-      required this.content,
-      required this.acceptMessage,
-      required this.onAccept});
+  const EzTutorial({
+    super.key,
+    this.top,
+    this.bottom,
+    this.left,
+    this.right,
+    required this.title,
+    required this.content,
+    required this.acceptMessage,
+    required this.onAccept,
+  });
 
   @override
   Widget build(BuildContext context) {
