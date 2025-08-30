@@ -60,20 +60,30 @@ ThemeData ezThemeData(Brightness brightness) {
         ? darkButtonOpacityKey
         : lightButtonOpacityKey,
   );
-  final bool calcButton = buttonOpacity < 1.0;
-  final Color buttonBackground = calcButton
-      ? colorScheme.surface.withValues(alpha: buttonOpacity)
-      : colorScheme.surface;
-  final Color primaryButtonBackground = calcButton
-      ? colorScheme.primary.withValues(alpha: buttonOpacity)
-      : colorScheme.primary;
 
+  final bool calcButton = buttonOpacity < 1.0;
   final bool calcOutline = calcButton &&
       EzConfig.get(
         brightness == Brightness.dark
             ? darkIncludeOutlineKey
             : lightIncludeOutlineKey,
       );
+
+  final Color buttonBackground = calcButton
+      ? (buttonOpacity < 0.01)
+          ? Colors.transparent
+          : colorScheme.surface.withValues(alpha: buttonOpacity)
+      : colorScheme.surface;
+  final Color buttonShadow = calcButton
+      ? (buttonOpacity < 0.01)
+          ? Colors.transparent
+          : colorScheme.shadow.withValues(alpha: buttonOpacity)
+      : colorScheme.shadow;
+
+  final Color primaryButtonBackground = calcButton
+      ? colorScheme.primary.withValues(alpha: buttonOpacity)
+      : colorScheme.primary;
+
   final Color buttonContainer = calcOutline
       ? colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
       : colorScheme.primaryContainer;
@@ -203,6 +213,7 @@ ThemeData ezThemeData(Brightness brightness) {
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonBackground,
         foregroundColor: colorScheme.onSurface,
+        shadowColor: buttonShadow,
         disabledForegroundColor: colorScheme.outline,
         iconColor: colorScheme.primary,
         disabledIconColor: colorScheme.outline,
@@ -264,6 +275,7 @@ ThemeData ezThemeData(Brightness brightness) {
     menuTheme: MenuThemeData(
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(buttonBackground),
+        shadowColor: WidgetStateProperty.all(buttonShadow),
         side: WidgetStateProperty.all(BorderSide(color: buttonContainer)),
         alignment: Alignment.center,
       ),
