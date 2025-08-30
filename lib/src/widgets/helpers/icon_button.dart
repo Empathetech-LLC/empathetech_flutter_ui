@@ -133,30 +133,21 @@ class EzIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     late final double savedIconSized = EzConfig.get(iconSizeKey);
+    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     late final ButtonStyle buttonStyle = style ??
         (enabled
             ? IconButton.styleFrom(
-                backgroundColor: colorScheme.surface,
-                foregroundColor: colorScheme.primary,
-                overlayColor: colorScheme.primary,
                 side: BorderSide(color: colorScheme.primaryContainer),
                 iconSize: iconSize ?? savedIconSized,
-                alignment: Alignment.center,
-                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
               )
             : IconButton.styleFrom(
-                backgroundColor: colorScheme.surface,
                 foregroundColor: colorScheme.outline,
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
                 side: BorderSide(color: colorScheme.outlineVariant),
                 iconSize: iconSize ?? savedIconSized,
-                alignment: Alignment.center,
-                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
               ));
 
     return IconButton(
