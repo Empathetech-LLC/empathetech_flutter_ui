@@ -74,12 +74,6 @@ ThemeData ezThemeData(Brightness brightness) {
           ? Colors.transparent
           : colorScheme.surface.withValues(alpha: buttonOpacity)
       : colorScheme.surface;
-  final Color buttonShadow = calcButton
-      ? (buttonOpacity < 0.01)
-          ? Colors.transparent
-          : colorScheme.shadow.withValues(alpha: buttonOpacity)
-      : colorScheme.shadow;
-
   final Color primaryButtonBackground = calcButton
       ? colorScheme.primary.withValues(alpha: buttonOpacity)
       : colorScheme.primary;
@@ -87,6 +81,18 @@ ThemeData ezThemeData(Brightness brightness) {
   final Color buttonContainer = calcOutline
       ? colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
       : colorScheme.primaryContainer;
+  final Color enabledOutline = calcOutline
+      ? colorScheme.outline.withValues(alpha: buttonOpacity)
+      : colorScheme.outline;
+  final Color disabledOutline = calcOutline
+      ? colorScheme.outlineVariant.withValues(alpha: buttonOpacity)
+      : colorScheme.outlineVariant;
+
+  final Color buttonShadow = calcButton
+      ? (buttonOpacity < 0.01)
+          ? Colors.transparent
+          : colorScheme.shadow.withValues(alpha: buttonOpacity)
+      : colorScheme.shadow;
 
   //* Return the ThemeData *//
 
@@ -270,6 +276,24 @@ ThemeData ezThemeData(Brightness brightness) {
       helperStyle: textTheme.labelLarge,
       errorStyle: textTheme.labelLarge!.copyWith(color: colorScheme.error),
       errorMaxLines: 1,
+      errorBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: colorScheme.errorContainer),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: buttonContainer),
+      ),
+      focusedErrorBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: colorScheme.error),
+      ),
+      disabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: disabledOutline),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: enabledOutline),
+      ),
+      border: UnderlineInputBorder(
+        borderSide: BorderSide(color: enabledOutline),
+      ),
     ),
 
     // Menu
