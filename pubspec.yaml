@@ -36,6 +36,7 @@ dependencies:
   flutter_platform_widgets: ^9.0.0
   image: ^4.5.4
   line_icons: ^2.0.3 
+  page_transition: ^2.2.1
   provider: ^6.1.5+1
   share_plus: ^11.1.0
 
