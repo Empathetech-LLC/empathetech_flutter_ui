@@ -62,7 +62,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Transitions //
 
     pageTransitionsTheme: animDuration > minAnimationDuration
-        ? EzTransitions(animDuration.toInt())
+        ? EzTransitions()
         : EzNoTransitions(),
 
     // Typography //
