@@ -98,9 +98,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   late double buttonOpacity = isDark
       ? EzConfig.get(darkButtonOpacityKey)
       : EzConfig.get(lightButtonOpacityKey);
+  late double outlineOpacity = isDark
+      ? EzConfig.get(darkOutlineOpacityKey)
+      : EzConfig.get(lightOutlineOpacityKey);
 
   late Color surface = Theme.of(context).colorScheme.surface;
+  late Color container = Theme.of(context).colorScheme.primaryContainer;
+  late Color outline = Theme.of(context).colorScheme.outline;
+
   late Color buttonBackground = surface.withValues(alpha: buttonOpacity);
+  late Color buttonContainer = container.withValues(alpha: outlineOpacity);
+  late Color buttonOutline = outline.withValues(alpha: outlineOpacity);
 
   int redraw = 0;
 
@@ -128,9 +136,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
     buttonOpacity = isDark
         ? EzConfig.get(darkButtonOpacityKey)
         : EzConfig.get(lightButtonOpacityKey);
+    outlineOpacity = isDark
+        ? EzConfig.get(darkOutlineOpacityKey)
+        : EzConfig.get(lightOutlineOpacityKey);
 
     surface = Theme.of(context).colorScheme.surface;
+    container = Theme.of(context).colorScheme.primaryContainer;
+    outline = Theme.of(context).colorScheme.outline;
+
     buttonBackground = surface.withValues(alpha: buttonOpacity);
+    buttonContainer = container.withValues(alpha: outlineOpacity);
+    buttonOutline = outline.withValues(alpha: outlineOpacity);
 
     setState(() => redraw = Random().nextInt(rMax));
   }
@@ -177,49 +193,59 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ),
         separator,
 
-        Card(
-          color: buttonBackground,
-          shadowColor: Colors.transparent,
-          child: Padding(
-            padding: EdgeInsets.all(margin),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Button transparency'),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-                  child: Slider(
-                    // Slider values
-                    value: buttonOpacity,
-                    min: minOpacity,
-                    max: maxOpacity,
-                    divisions: 20,
-                    label: buttonOpacity.toStringAsFixed(2),
+        // Button background
+        const Text('Background'),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+          child: Slider(
+            // Slider values
+            value: buttonOpacity,
+            min: minOpacity,
+            max: maxOpacity,
+            divisions: 20,
+            label: buttonOpacity.toStringAsFixed(2),
 
-                    // Slider functions
-                    onChanged: (double value) {
-                      setState(() {
-                        buttonOpacity = value;
-                        buttonBackground =
-                            surface.withValues(alpha: buttonOpacity);
-                      });
-                    },
-                    onChangeEnd: (double value) async {
-                      await EzConfig.setDouble(
-                        isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                        value,
-                      );
-                    },
-                  ),
-                ),
-                marginer,
-                EzSwitchPair(
-                  text: 'Include outlines',
-                  valueKey:
-                      isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey,
-                ),
-              ],
-            ),
+            // Slider functions
+            onChanged: (double value) {
+              buttonOpacity = value;
+              buttonBackground = surface.withValues(alpha: buttonOpacity);
+              setState(() {});
+            },
+            onChangeEnd: (double value) async {
+              await EzConfig.setDouble(
+                isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                value,
+              );
+            },
+          ),
+        ),
+        spacer,
+
+        // Button outline
+        const Text('Outline'),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+          child: Slider(
+            // Slider values
+            value: outlineOpacity,
+            min: minOpacity,
+            max: maxOpacity,
+            divisions: 20,
+            label: outlineOpacity.toStringAsFixed(2),
+
+            // Slider functions
+            onChanged: (double value) {
+              outlineOpacity = value;
+              buttonContainer = container.withValues(alpha: outlineOpacity);
+              buttonOutline = outline.withValues(alpha: outlineOpacity);
+              setState(() {});
+            },
+            onChangeEnd: (double value) async {
+              await EzConfig.setDouble(
+                isDark ? darkOutlineOpacityKey : lightOutlineOpacityKey,
+                value,
+              );
+            },
           ),
         ),
 
