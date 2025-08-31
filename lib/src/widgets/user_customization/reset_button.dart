@@ -13,6 +13,13 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
+  /// [EzElevatedIconButton.style] passthrough
+  final ButtonStyle? style;
+
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? skip;
+
   /// [EzAlertDialog.title] that shows on click
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
@@ -20,10 +27,6 @@ class EzResetButton extends StatelessWidget {
   /// [EzAlertDialog.content] that shows on click
   /// Defaults to [EFUILang.gUndoWarn]
   final String? dialogContent;
-
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final Set<String>? skip;
 
   /// [EzConfig.reset] passthrough
   /// Moot if [onConfirm] is provided
@@ -42,9 +45,10 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton({
     super.key,
     this.label,
+    this.style,
+    this.skip,
     this.dialogTitle,
     this.dialogContent,
-    this.skip,
     this.storageOnly = false,
     this.onConfirm,
     this.onDeny,
@@ -59,6 +63,7 @@ class EzResetButton extends StatelessWidget {
     // Return the build //
 
     return EzElevatedIconButton(
+      style: style,
       onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
