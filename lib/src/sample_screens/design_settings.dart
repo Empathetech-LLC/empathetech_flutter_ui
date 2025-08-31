@@ -103,14 +103,30 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       : EzConfig.get(lightOutlineOpacityKey);
 
   late Color surface = Theme.of(context).colorScheme.surface;
+  late Color shadow = Theme.of(context).colorScheme.shadow;
   late Color container = Theme.of(context).colorScheme.primaryContainer;
   late Color outline = Theme.of(context).colorScheme.outline;
 
   late Color buttonBackground = surface.withValues(alpha: buttonOpacity);
+  late Color buttonShadow = shadow.withValues(alpha: buttonOpacity);
   late Color buttonContainer = container.withValues(alpha: outlineOpacity);
   late Color buttonOutline = outline.withValues(alpha: outlineOpacity);
 
   int redraw = 0;
+
+  // Define custom functions //
+
+  void setColors() {
+    surface = Theme.of(context).colorScheme.surface;
+    shadow = Theme.of(context).colorScheme.shadow;
+    container = Theme.of(context).colorScheme.primaryContainer;
+    outline = Theme.of(context).colorScheme.outline;
+
+    buttonBackground = surface.withValues(alpha: buttonOpacity);
+    buttonShadow = shadow.withValues(alpha: buttonOpacity);
+    buttonContainer = container.withValues(alpha: outlineOpacity);
+    buttonOutline = outline.withValues(alpha: outlineOpacity);
+  }
 
   // Init //
 
@@ -140,14 +156,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ? EzConfig.get(darkOutlineOpacityKey)
         : EzConfig.get(lightOutlineOpacityKey);
 
-    surface = Theme.of(context).colorScheme.surface;
-    container = Theme.of(context).colorScheme.primaryContainer;
-    outline = Theme.of(context).colorScheme.outline;
-
-    buttonBackground = surface.withValues(alpha: buttonOpacity);
-    buttonContainer = container.withValues(alpha: outlineOpacity);
-    buttonOutline = outline.withValues(alpha: outlineOpacity);
-
+    setColors();
     setState(() => redraw = Random().nextInt(rMax));
   }
 
@@ -194,58 +203,76 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         separator,
 
         // Button background
-        const Text('Background'),
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-          child: Slider(
-            // Slider values
-            value: buttonOpacity,
-            min: minOpacity,
-            max: maxOpacity,
-            divisions: 20,
-            label: buttonOpacity.toStringAsFixed(2),
-
-            // Slider functions
-            onChanged: (double value) {
-              buttonOpacity = value;
-              buttonBackground = surface.withValues(alpha: buttonOpacity);
-              setState(() {});
-            },
-            onChangeEnd: (double value) async {
-              await EzConfig.setDouble(
-                isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-                value,
-              );
-            },
+        Card(
+          color: buttonBackground,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: buttonOutline),
+            borderRadius: ezRoundEdge,
           ),
-        ),
-        spacer,
+          shadowColor: buttonShadow,
+          child: Padding(
+            padding: EdgeInsets.all(margin),
+            child: Column(
+              children: <Widget>[
+                const Text('Background opacity'),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+                  child: Slider(
+                    // Slider values
+                    value: buttonOpacity,
+                    min: minOpacity,
+                    max: maxOpacity,
+                    divisions: 20,
+                    label: buttonOpacity.toStringAsFixed(2),
 
-        // Button outline
-        const Text('Outline'),
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-          child: Slider(
-            // Slider values
-            value: outlineOpacity,
-            min: minOpacity,
-            max: maxOpacity,
-            divisions: 20,
-            label: outlineOpacity.toStringAsFixed(2),
+                    // Slider functions
+                    onChanged: (double value) {
+                      buttonOpacity = value;
+                      buttonBackground =
+                          surface.withValues(alpha: buttonOpacity);
+                      buttonShadow = shadow.withValues(alpha: buttonOpacity);
+                      setState(() {});
+                    },
+                    onChangeEnd: (double value) async {
+                      await EzConfig.setDouble(
+                        isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+                        value,
+                      );
+                    },
+                  ),
+                ),
+                spacer,
 
-            // Slider functions
-            onChanged: (double value) {
-              outlineOpacity = value;
-              buttonContainer = container.withValues(alpha: outlineOpacity);
-              buttonOutline = outline.withValues(alpha: outlineOpacity);
-              setState(() {});
-            },
-            onChangeEnd: (double value) async {
-              await EzConfig.setDouble(
-                isDark ? darkOutlineOpacityKey : lightOutlineOpacityKey,
-                value,
-              );
-            },
+                // Button outline
+                const Text('Outline opacity'),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+                  child: Slider(
+                    // Slider values
+                    value: outlineOpacity,
+                    min: minOpacity,
+                    max: maxOpacity,
+                    divisions: 20,
+                    label: outlineOpacity.toStringAsFixed(2),
+
+                    // Slider functions
+                    onChanged: (double value) {
+                      outlineOpacity = value;
+                      buttonContainer =
+                          container.withValues(alpha: outlineOpacity);
+                      buttonOutline = outline.withValues(alpha: outlineOpacity);
+                      setState(() {});
+                    },
+                    onChangeEnd: (double value) async {
+                      await EzConfig.setDouble(
+                        isDark ? darkOutlineOpacityKey : lightOutlineOpacityKey,
+                        value,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
 
@@ -290,6 +317,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         widget.resetSpacer,
         isDark
             ? EzResetButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: buttonBackground,
+                  shadowColor: buttonShadow,
+                  side: BorderSide(color: buttonContainer),
+                ),
                 dialogTitle: l10n.dsResetAll(darkString), // TODO: update entry
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
@@ -300,10 +332,20 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     await EzConfig.removeKeys(widget.darkThemeResetKeys!);
                   }
 
+                  animDuration = EzConfig.getDefault(animationDurationKey);
+                  buttonOpacity = EzConfig.getDefault(darkButtonOpacityKey);
+                  outlineOpacity = EzConfig.getDefault(darkOutlineOpacityKey);
+                  setColors();
+
                   setState(() => redraw = Random().nextInt(rMax));
                 },
               )
             : EzResetButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: buttonBackground,
+                  shadowColor: buttonShadow,
+                  side: BorderSide(color: buttonContainer),
+                ),
                 dialogTitle: l10n.dsResetAll(lightString),
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
@@ -313,6 +355,11 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   if (widget.lightThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.lightThemeResetKeys!);
                   }
+
+                  animDuration = EzConfig.getDefault(animationDurationKey);
+                  buttonOpacity = EzConfig.getDefault(lightButtonOpacityKey);
+                  outlineOpacity = EzConfig.getDefault(lightOutlineOpacityKey);
+                  setColors();
 
                   setState(() => redraw = Random().nextInt(rMax));
                 },
