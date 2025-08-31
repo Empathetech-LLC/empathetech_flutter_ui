@@ -60,39 +60,49 @@ ThemeData ezThemeData(Brightness brightness) {
         ? darkButtonOpacityKey
         : lightButtonOpacityKey,
   );
+  final double outlineOpacity = EzConfig.get(
+    brightness == Brightness.dark
+        ? darkOutlineOpacityKey
+        : lightOutlineOpacityKey,
+  );
 
   final bool calcButton = buttonOpacity < 1.0;
-  final bool calcOutline = calcButton &&
-      EzConfig.get(
-        brightness == Brightness.dark
-            ? darkIncludeOutlineKey
-            : lightIncludeOutlineKey,
-      );
+  final bool calcOutline = outlineOpacity < 1.0;
+
+  final bool clearButton = buttonOpacity < 0.01;
+  final bool clearOutline = outlineOpacity < 0.01;
 
   final Color buttonBackground = calcButton
-      ? (buttonOpacity < 0.01)
+      ? clearButton
           ? Colors.transparent
           : colorScheme.surface.withValues(alpha: buttonOpacity)
       : colorScheme.surface;
   final Color primaryButtonBackground = calcButton
-      ? colorScheme.primary.withValues(alpha: buttonOpacity)
+      ? clearButton
+          ? Colors.transparent
+          : colorScheme.primary.withValues(alpha: buttonOpacity)
       : colorScheme.primary;
-
-  final Color buttonContainer = calcOutline
-      ? colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
-      : colorScheme.primaryContainer;
-  final Color enabledOutline = calcOutline
-      ? colorScheme.outline.withValues(alpha: buttonOpacity)
-      : colorScheme.outline;
-  final Color disabledOutline = calcOutline
-      ? colorScheme.outlineVariant.withValues(alpha: buttonOpacity)
-      : colorScheme.outlineVariant;
-
   final Color buttonShadow = calcButton
-      ? (buttonOpacity < 0.01)
+      ? clearButton
           ? Colors.transparent
           : colorScheme.shadow.withValues(alpha: buttonOpacity)
       : colorScheme.shadow;
+
+  final Color buttonContainer = calcOutline
+      ? clearOutline
+          ? Colors.transparent
+          : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
+      : colorScheme.primaryContainer;
+  final Color enabledOutline = calcOutline
+      ? clearOutline
+          ? Colors.transparent
+          : colorScheme.outline.withValues(alpha: outlineOpacity)
+      : colorScheme.outline;
+  final Color disabledOutline = calcOutline
+      ? clearOutline
+          ? Colors.transparent
+          : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
+      : colorScheme.outlineVariant;
 
   //* Return the ThemeData *//
 

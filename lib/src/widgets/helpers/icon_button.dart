@@ -139,25 +139,29 @@ class EzIconButton extends StatelessWidget {
 
     late final double buttonOpacity =
         EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
-    late final bool includeOutline =
-        EzConfig.get(isDark ? darkIncludeOutlineKey : lightIncludeOutlineKey);
+    late final double outlineOpacity =
+        EzConfig.get(isDark ? darkOutlineOpacityKey : lightOutlineOpacityKey);
 
     late final bool calcButton = buttonOpacity < 1.0;
+    late final bool calcOutline = outlineOpacity < 1.0;
+
+    late final bool clearButton = buttonOpacity < 0.01;
+    late final bool clearOutline = outlineOpacity < 0.01;
 
     late final Color buttonBackground = calcButton
-        ? (buttonOpacity < 0.01)
+        ? clearButton
             ? Colors.transparent
             : colorScheme.surface.withValues(alpha: buttonOpacity)
         : colorScheme.surface;
-    late final Color enabledOutline = calcButton && includeOutline
-        ? (buttonOpacity < 0.01)
+    late final Color enabledOutline = calcOutline
+        ? clearOutline
             ? Colors.transparent
-            : colorScheme.primaryContainer.withValues(alpha: buttonOpacity)
+            : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
         : colorScheme.primaryContainer;
-    late final Color disabledOutline = calcButton && includeOutline
-        ? (buttonOpacity < 0.01)
+    late final Color disabledOutline = calcOutline
+        ? clearOutline
             ? Colors.transparent
-            : colorScheme.outlineVariant.withValues(alpha: buttonOpacity)
+            : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
         : colorScheme.outlineVariant;
 
     late final ButtonStyle buttonStyle = style ??

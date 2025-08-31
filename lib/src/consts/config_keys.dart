@@ -442,7 +442,7 @@ const Map<String, Type> darkImageKeys = <String, Type>{
 };
 
 const String darkButtonOpacityKey = 'darkButtonOpacity';
-const String darkIncludeOutlineKey = 'darkIncludeOutline';
+const String darkOutlineOpacityKey = 'darkOutlineOpacity';
 const String darkGlassKey = 'darkGlass';
 
 /// [darkImageKeys]
@@ -450,7 +450,7 @@ const String darkGlassKey = 'darkGlass';
 const Map<String, Type> darkDesignKeys = <String, Type>{
   ...darkImageKeys,
   darkButtonOpacityKey: double,
-  darkIncludeOutlineKey: bool,
+  darkOutlineOpacityKey: double,
   darkGlassKey: bool,
 };
 
@@ -465,7 +465,7 @@ const Map<String, Type> lightImageKeys = <String, Type>{
 };
 
 const String lightButtonOpacityKey = 'lightButtonOpacity';
-const String lightIncludeOutlineKey = 'lightIncludeOutline';
+const String lightOutlineOpacityKey = 'lightOutlineOpacity';
 const String lightGlassKey = 'lightGlass';
 
 /// [lightImageKeys]
@@ -473,7 +473,7 @@ const String lightGlassKey = 'lightGlass';
 const Map<String, Type> lightDesignKeys = <String, Type>{
   ...lightImageKeys,
   lightButtonOpacityKey: double,
-  lightIncludeOutlineKey: bool,
+  lightOutlineOpacityKey: double,
   lightGlassKey: bool,
 };
 
