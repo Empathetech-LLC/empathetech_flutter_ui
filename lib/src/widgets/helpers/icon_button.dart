@@ -89,9 +89,14 @@ class EzIconButton extends StatelessWidget {
   /// [IconButton.style] passthrough
   final ButtonStyle? style;
 
-  /// Updates [style] to be grey when false
+  /// Uses disabled styling and sets [onPressed] and [onLongPress] to [doNothing] when false
   /// Overriding [style] makes [enabled] moot
   final bool enabled;
+
+  /// Switches to disabled styling when false
+  /// [onPressed] is unchanged
+  /// Overriding [style] makes [enabled] moot
+  final bool fauxDisabled;
 
   /// [IconButton.isSelected] passthrough
   final bool? isSelected;
@@ -126,6 +131,7 @@ class EzIconButton extends StatelessWidget {
     this.constraints,
     this.style,
     this.enabled = true,
+    this.fauxDisabled = false,
     this.isSelected,
     this.selectedIcon,
     required this.icon,
@@ -165,7 +171,7 @@ class EzIconButton extends StatelessWidget {
         : colorScheme.outlineVariant;
 
     late final ButtonStyle buttonStyle = style ??
-        (enabled
+        ((enabled && !fauxDisabled)
             ? IconButton.styleFrom(
                 backgroundColor: buttonBackground,
                 side: BorderSide(color: enabledOutline),
