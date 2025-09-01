@@ -18,6 +18,11 @@ class EzImageSetting extends StatefulWidget {
   /// [EzElevatedIconButton.label] passthrough
   final String label;
 
+  /// [EzElevatedButton.style] passthrough
+  /// If provided, recommended to include the default settings...
+  ///   padding: EdgeInsets.all(padding * 0.75),
+  final ButtonStyle? style;
+
   /// Effectively whether the image is nullable
   /// true is recommended
   /// Note: if there is no [EzConfig.defaults] value for [configKey], the reset option will not appear
@@ -53,6 +58,7 @@ class EzImageSetting extends StatefulWidget {
     super.key,
     required this.configKey,
     required this.label,
+    this.style,
     this.allowClear = true,
     this.credits,
     this.updateTheme,
@@ -679,9 +685,8 @@ class _ImageSettingState extends State<EzImageSetting> {
       hint: l10n.dsButtonHint(widget.label),
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
-          ),
+          style: widget.style ??
+              ElevatedButton.styleFrom(padding: EdgeInsets.all(padding * 0.75)),
           onPressed: () async {
             if (inProgress) return;
 
