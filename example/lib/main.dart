@@ -54,7 +54,8 @@ class OpenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GoTransition.defaultCurve = Curves.easeInOut;
-    GoTransition.defaultDuration = const Duration(milliseconds: 600);
+    GoTransition.defaultDuration =
+        Duration(milliseconds: EzConfig.get(animationDurationKey));
 
     return EzAppProvider(
       app: PlatformApp.router(
@@ -85,7 +86,7 @@ class OpenUI extends StatelessWidget {
               path: homePath,
               name: homePath,
               builder: (_, __) => const HomeScreen(),
-              pageBuilder: GoTransitions.none.call,
+              pageBuilder: ezGoTransition,
               routes: <RouteBase>[
                 GoRoute(
                   path: generateScreenPath,
@@ -94,7 +95,7 @@ class OpenUI extends StatelessWidget {
                     final EAGConfig config = state.extra as EAGConfig;
                     return GenerateScreen(config: config);
                   },
-                  pageBuilder: GoTransitions.none.call,
+                  pageBuilder: ezGoTransition,
                 ),
                 GoRoute(
                   path: archiveScreenPath,
@@ -103,33 +104,33 @@ class OpenUI extends StatelessWidget {
                     final EAGConfig config = state.extra as EAGConfig;
                     return ArchiveScreen(config: config);
                   },
-                  pageBuilder: GoTransitions.none.call,
+                  pageBuilder: ezGoTransition,
                 ),
                 GoRoute(
                   path: settingsHomePath,
                   name: settingsHomePath,
                   builder: (_, __) => const SettingsHomeScreen(),
-                  pageBuilder: GoTransitions.none.call,
+                  pageBuilder: ezGoTransition,
                   routes: <RouteBase>[
                     GoRoute(
                       path: colorSettingsPath,
                       name: colorSettingsPath,
                       builder: (_, __) => const ColorSettingsScreen(),
-                      pageBuilder: GoTransitions.none.call,
+                      pageBuilder: ezGoTransition,
                       routes: <RouteBase>[
                         GoRoute(
                           path: EzCSType.quick.path,
                           name: EzCSType.quick.name,
                           builder: (_, __) =>
                               const ColorSettingsScreen(target: EzCSType.quick),
-                          pageBuilder: GoTransitions.none.call,
+                          pageBuilder: ezGoTransition,
                         ),
                         GoRoute(
                           path: EzCSType.advanced.path,
                           name: EzCSType.advanced.name,
                           builder: (_, __) => const ColorSettingsScreen(
                               target: EzCSType.advanced),
-                          pageBuilder: GoTransitions.none.call,
+                          pageBuilder: ezGoTransition,
                         ),
                       ],
                     ),
@@ -137,33 +138,33 @@ class OpenUI extends StatelessWidget {
                       path: designSettingsPath,
                       name: designSettingsPath,
                       builder: (_, __) => const DesignSettingsScreen(),
-                      pageBuilder: GoTransitions.none.call,
+                      pageBuilder: ezGoTransition,
                     ),
                     GoRoute(
                       path: layoutSettingsPath,
                       name: layoutSettingsPath,
                       builder: (_, __) => const LayoutSettingsScreen(),
-                      pageBuilder: GoTransitions.none.call,
+                      pageBuilder: ezGoTransition,
                     ),
                     GoRoute(
                       path: textSettingsPath,
                       name: textSettingsPath,
                       builder: (_, __) => const TextSettingsScreen(),
-                      pageBuilder: GoTransitions.none.call,
+                      pageBuilder: ezGoTransition,
                       routes: <RouteBase>[
                         GoRoute(
                           path: EzTSType.quick.path,
                           name: EzTSType.quick.name,
                           builder: (_, __) =>
                               const TextSettingsScreen(target: EzTSType.quick),
-                          pageBuilder: GoTransitions.none.call,
+                          pageBuilder: ezGoTransition,
                         ),
                         GoRoute(
                           path: EzTSType.advanced.path,
                           name: EzTSType.advanced.name,
                           builder: (_, __) => const TextSettingsScreen(
                               target: EzTSType.advanced),
-                          pageBuilder: GoTransitions.none.call,
+                          pageBuilder: ezGoTransition,
                         ),
                       ],
                     ),
