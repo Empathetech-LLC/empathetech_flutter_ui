@@ -99,12 +99,31 @@ Duration ezReadingTime(String passage) {
 }
 
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
-Duration ezAnimDuration() => Duration(
-    milliseconds: (EzConfig.get(animationDurationKey) as double).toInt());
+Duration ezAnimDuration({bool half = false}) {
+  final double duration = EzConfig.get(animationDurationKey) as double;
+  return Duration(milliseconds: (half ? (duration / 2) : duration).toInt());
+}
 
-Page<dynamic> ezGoTransition(BuildContext context, GoRouterState state) {
-  if (EzConfig.get(animationDurationKey) < 1.0) return GoTransitions.none;
-  return GoTransitions.cupertino;
+/// A [GoTransition] based on the current platform and [EzConfig] setup
+Page<dynamic> ezGoTransition(
+  BuildContext context,
+  GoRouterState state,
+  int animDuration,
+  TargetPlatform platform,
+) {
+  if (animDuration < 1) return GoTransitions.none(context, state);
+
+  switch (platform) {
+    case TargetPlatform.android:
+      return GoTransitions.zoom(context, state);
+    case TargetPlatform.iOS:
+    case TargetPlatform.macOS:
+      return GoTransitions.cupertino(context, state);
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.linux:
+    case TargetPlatform.windows:
+      return GoTransitions.slide.withFade(context, state);
+  }
 }
 
 /// Recommended size for an image
