@@ -60,7 +60,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final double spacing = EzConfig.get(spacingKey);
   final double iconSize = EzConfig.get(iconSizeKey);
 
-  final int animDuration = EzConfig.get(animationDurationKey).toInt();
+  final int rotateDuration =
+      ((EzConfig.get(animationDurationKey) as double) / 2).toInt();
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -225,8 +226,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     _editorController.rotate(
                       degree: -90.0,
                       rotateCropRect: false,
-                      animation: animDuration > 0 ? true : false,
-                      duration: Duration(milliseconds: animDuration),
+                      animation: rotateDuration > 0 ? true : false,
+                      duration: Duration(milliseconds: rotateDuration),
                     );
                     setState(() {});
                   },
@@ -242,8 +243,8 @@ class _EzImageEditorState extends State<EzImageEditor> {
                     _editorController.rotate(
                       degree: 90.0,
                       rotateCropRect: false,
-                      animation: animDuration > 0 ? true : false,
-                      duration: Duration(milliseconds: animDuration),
+                      animation: rotateDuration > 0 ? true : false,
+                      duration: Duration(milliseconds: rotateDuration),
                     );
                     setState(() {});
                   },
