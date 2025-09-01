@@ -8,6 +8,8 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
@@ -99,6 +101,11 @@ Duration ezReadingTime(String passage) {
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
 Duration ezAnimDuration() => Duration(
     milliseconds: (EzConfig.get(animationDurationKey) as double).toInt());
+
+Page<dynamic> ezGoTransition(BuildContext context, GoRouterState state) {
+  if (EzConfig.get(animationDurationKey) < 1.0) return GoTransitions.none;
+  return GoTransitions.cupertino;
+}
 
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection
