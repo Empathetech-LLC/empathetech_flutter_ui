@@ -99,8 +99,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
       ? EzConfig.get(darkButtonOpacityKey)
       : EzConfig.get(lightButtonOpacityKey);
   late double outlineOpacity = isDark
-      ? EzConfig.get(darkOutlineOpacityKey)
-      : EzConfig.get(lightOutlineOpacityKey);
+      ? EzConfig.get(darkButtonOutlineOpacityKey)
+      : EzConfig.get(lightButtonOutlineOpacityKey);
 
   late Color surface = Theme.of(context).colorScheme.surface;
   late Color shadow = Theme.of(context).colorScheme.shadow;
@@ -153,8 +153,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         ? EzConfig.get(darkButtonOpacityKey)
         : EzConfig.get(lightButtonOpacityKey);
     outlineOpacity = isDark
-        ? EzConfig.get(darkOutlineOpacityKey)
-        : EzConfig.get(lightOutlineOpacityKey);
+        ? EzConfig.get(darkButtonOutlineOpacityKey)
+        : EzConfig.get(lightButtonOutlineOpacityKey);
 
     setColors();
     setState(() => redraw = Random().nextInt(rMax));
@@ -265,7 +265,9 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     },
                     onChangeEnd: (double value) async {
                       await EzConfig.setDouble(
-                        isDark ? darkOutlineOpacityKey : lightOutlineOpacityKey,
+                        isDark
+                            ? darkButtonOutlineOpacityKey
+                            : lightButtonOutlineOpacityKey,
                         value,
                       );
                     },
@@ -334,7 +336,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                   animDuration = EzConfig.getDefault(animationDurationKey);
                   buttonOpacity = EzConfig.getDefault(darkButtonOpacityKey);
-                  outlineOpacity = EzConfig.getDefault(darkOutlineOpacityKey);
+                  outlineOpacity =
+                      EzConfig.getDefault(darkButtonOutlineOpacityKey);
                   setColors();
 
                   setState(() => redraw = Random().nextInt(rMax));
@@ -358,7 +361,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                   animDuration = EzConfig.getDefault(animationDurationKey);
                   buttonOpacity = EzConfig.getDefault(lightButtonOpacityKey);
-                  outlineOpacity = EzConfig.getDefault(lightOutlineOpacityKey);
+                  outlineOpacity =
+                      EzConfig.getDefault(lightButtonOutlineOpacityKey);
                   setColors();
 
                   setState(() => redraw = Random().nextInt(rMax));
