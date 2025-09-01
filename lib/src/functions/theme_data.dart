@@ -62,8 +62,8 @@ ThemeData ezThemeData(Brightness brightness) {
   );
   final double outlineOpacity = EzConfig.get(
     brightness == Brightness.dark
-        ? darkOutlineOpacityKey
-        : lightOutlineOpacityKey,
+        ? darkButtonOutlineOpacityKey
+        : lightButtonOutlineOpacityKey,
   );
 
   final bool calcButton = buttonOpacity < 1.0;
