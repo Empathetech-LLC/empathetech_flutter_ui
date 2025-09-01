@@ -215,7 +215,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             padding: EdgeInsets.all(margin),
             child: Column(
               children: <Widget>[
-                const Text('Background opacity'),
+                const Text('Button background opacity'),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
@@ -245,7 +245,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 spacer,
 
                 // Button outline
-                const Text('Outline opacity'),
+                const Text('Button outline opacity'),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
