@@ -31,39 +31,19 @@ class EzItalicSetting extends StatefulWidget {
 }
 
 class _EzItalicSettingState extends State<EzItalicSetting> {
-  // Gather the fixed theme data //
-
-  late final double padding = EzConfig.get(paddingKey);
-
   late bool isItalic = EzConfig.get(widget.configKey) ?? false;
 
-  // Return the build //
-
   @override
-  Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    return EzIconButton(
-      style: isItalic
-          ? IconButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-              side: BorderSide(color: colorScheme.primaryContainer),
-              padding: EzInsets.wrap(padding),
-            )
-          : IconButton.styleFrom(
-              foregroundColor: colorScheme.outline,
-              side: BorderSide(color: colorScheme.outlineVariant),
-              padding: EzInsets.wrap(padding),
-            ),
-      onPressed: () async {
-        isItalic = !isItalic;
-        await EzConfig.setBool(widget.configKey, isItalic);
-        widget.notifierCallback(isItalic);
-        setState(() {});
-      },
-      tooltip: ezL10n(context).tsItalic,
-      iconSize: widget.size,
-      icon: const Icon(Icons.format_italic),
-    );
-  }
+  Widget build(BuildContext context) => EzIconButton(
+        fauxDisabled: !isItalic,
+        onPressed: () async {
+          isItalic = !isItalic;
+          await EzConfig.setBool(widget.configKey, isItalic);
+          widget.notifierCallback(isItalic);
+          setState(() {});
+        },
+        tooltip: ezL10n(context).tsItalic,
+        iconSize: widget.size,
+        icon: const Icon(Icons.format_italic),
+      );
 }
