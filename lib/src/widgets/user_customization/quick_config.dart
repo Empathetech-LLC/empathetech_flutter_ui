@@ -487,7 +487,7 @@ class EzChalkboardConfig extends StatelessWidget {
         foregroundColor: Colors.white,
         iconColor: empathSand,
         overlayColor: empathSand,
-        side: const BorderSide(color: dimWhite),
+        side: const BorderSide(color: darkOutline),
         textStyle: localBody,
       ),
       onPressed: () async {
@@ -530,7 +530,7 @@ class EzChalkboardConfig extends StatelessWidget {
             // Primary
             primary: empathSand,
             onPrimary: Colors.black,
-            primaryContainer: dimWhite,
+            primaryContainer: darkOutline,
             onPrimaryContainer: Colors.black,
             primaryFixed: empathSand,
             primaryFixedDim: empathSand,
@@ -576,8 +576,8 @@ class EzChalkboardConfig extends StatelessWidget {
             onSurfaceVariant: Colors.white,
 
             // Misc
-            outline: dimWhite,
-            outlineVariant: dimWhite,
+            outline: darkOutline,
+            outlineVariant: darkOutlineVariant,
             shadow: Colors.transparent,
             scrim: Colors.black,
             inverseSurface: chalkboardGreen,
