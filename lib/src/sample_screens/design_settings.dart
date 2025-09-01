@@ -81,6 +81,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   final EzSpacer marginer = EzMargin();
 
   final double margin = EzConfig.get(marginKey);
+  final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
   late final EFUILang l10n = ezL10n(context);
@@ -288,6 +289,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             child: isDark
                 ? EzImageSetting(
                     key: UniqueKey(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonBackground,
+                      shadowColor: buttonShadow,
+                      side: BorderSide(color: buttonContainer),
+                      padding: EdgeInsets.all(padding * 0.75),
+                    ),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
                     label: l10n.dsBackground,
@@ -295,6 +302,12 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   )
                 : EzImageSetting(
                     key: UniqueKey(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonBackground,
+                      shadowColor: buttonShadow,
+                      side: BorderSide(color: buttonContainer),
+                      padding: EdgeInsets.all(padding * 0.75),
+                    ),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
                     label: l10n.dsBackground,
