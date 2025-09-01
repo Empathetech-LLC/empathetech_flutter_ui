@@ -12,27 +12,29 @@ import 'package:flutter/foundation.dart';
 const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
   // Primary
   primary: Colors.white,
-  primaryContainer: dimWhite,
+  primaryContainer: darkOutline,
   onPrimary: Colors.black,
   onPrimaryContainer: Colors.black,
 
   // Secondary
   secondary: Colors.white,
-  secondaryContainer: dimWhite,
+  secondaryContainer: darkOutline,
   onSecondary: Colors.black,
   onSecondaryContainer: Colors.black,
 
   // Tertiary
   tertiary: Colors.white,
-  tertiaryContainer: dimWhite,
+  tertiaryContainer: darkOutline,
   onTertiary: Colors.black,
   onTertiaryContainer: Colors.black,
 
-  // Surface
+  // Misc
   surface: darkSurface,
   onSurface: Colors.white,
   surfaceDim: darkSurfaceDim,
   surfaceContainer: darkSurfaceContainer,
+  outline: darkOutline,
+  outlineVariant: darkOutlineVariant,
   inversePrimary: Colors.white,
   surfaceTint: Colors.transparent,
 );
@@ -41,19 +43,19 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
 const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
   // Primary
   primary: Colors.black,
-  primaryContainer: dimBlack,
+  primaryContainer: lightOutline,
   onPrimary: Colors.white,
   onPrimaryContainer: Colors.white,
 
   // Secondary
   secondary: Colors.black,
-  secondaryContainer: dimBlack,
+  secondaryContainer: lightOutline,
   onSecondary: Colors.white,
   onSecondaryContainer: Colors.white,
 
   // Tertiary
   tertiary: Colors.black,
-  tertiaryContainer: dimBlack,
+  tertiaryContainer: lightOutline,
   onTertiary: Colors.white,
   onTertiaryContainer: Colors.white,
 
@@ -62,6 +64,8 @@ const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
   onSurface: Colors.black,
   surfaceDim: lightSurfaceDim,
   surfaceContainer: lightSurfaceContainer,
+  outline: lightOutline,
+  outlineVariant: lightOutlineVariant,
   inversePrimary: Colors.black,
   surfaceTint: Colors.transparent,
 );
