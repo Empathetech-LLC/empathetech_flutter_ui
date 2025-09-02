@@ -35,11 +35,19 @@ class EzInsets extends EdgeInsets {
   const EzInsets.wrap(double base) : super.all(base / 2);
 }
 
-/// [BorderRadius].all([Radius.circular] => 4.0)
-const BorderRadius ezRoundEdge = BorderRadius.all(Radius.circular(4.0));
+/// 4.0
+const double ezRoundRadius = 4.0;
 
-/// [BorderRadius].all([Radius.circular] => 64.0)
-const BorderRadius ezPillShape = BorderRadius.all(Radius.circular(64.0));
+/// [BorderRadius].all([Radius.circular] => [ezRoundRadius] == 4.0)
+const BorderRadius ezRoundEdge =
+    BorderRadius.all(Radius.circular(ezRoundRadius));
+
+/// 64.0
+const double ezPillRadius = 64.0;
+
+/// [BorderRadius].all([Radius.circular] => [ezPillRadius] == 64.0)
+const BorderRadius ezPillShape =
+    BorderRadius.all(Radius.circular(ezPillRadius));
 
 class EzBox extends BoxConstraints {
   /// [BoxConstraints] with everything (min && max) set to [base]
