@@ -26,6 +26,7 @@ dependencies:
   web: ^1.1.1
   
   # Community
+  blurrycontainer: ^2.1.0
   country_flags: ^3.3.0
   extended_image: ^10.0.1
   feedback: ^3.2.0
@@ -36,7 +37,8 @@ dependencies:
   flutter_platform_widgets: ^9.0.0
   go_transitions: ^0.8.2
   image: ^4.5.4
-  line_icons: ^2.0.3 
+  line_icons: ^2.0.3
+  liquid_glass_renderer: ^0.1.1-dev.10
   provider: ^6.1.5+1
   share_plus: ^11.1.0
 
