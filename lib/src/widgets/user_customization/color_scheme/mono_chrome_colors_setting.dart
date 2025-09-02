@@ -36,6 +36,7 @@ const ColorScheme ezHighContrastDark = ColorScheme.highContrastDark(
   outline: darkOutline,
   outlineVariant: darkOutlineVariant,
   inversePrimary: Colors.white,
+  shadow: Colors.transparent,
   surfaceTint: Colors.transparent,
 );
 
@@ -67,6 +68,7 @@ const ColorScheme ezHighContrastLight = ColorScheme.highContrastLight(
   outline: lightOutline,
   outlineVariant: lightOutlineVariant,
   inversePrimary: Colors.black,
+  shadow: Colors.transparent,
   surfaceTint: Colors.transparent,
 );
 
@@ -91,6 +93,31 @@ class EzMonoChromeColorsSetting extends StatelessWidget {
     final EFUILang l10n = ezL10n(context);
 
     return EzElevatedIconButton(
+      style: isDark
+          ? ElevatedButton.styleFrom(
+              backgroundColor: darkSurface,
+              foregroundColor: Colors.white,
+              shadowColor: Colors.transparent,
+              iconColor: Colors.white,
+              overlayColor: Colors.white,
+              side: const BorderSide(color: darkOutline),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Colors.white),
+            )
+          : ElevatedButton.styleFrom(
+              backgroundColor: lightSurface,
+              foregroundColor: Colors.black,
+              shadowColor: Colors.transparent,
+              iconColor: Colors.black,
+              overlayColor: Colors.black,
+              side: const BorderSide(color: lightOutline),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Colors.black),
+            ),
       onPressed: () async {
         isDark
             ? await storeColorScheme(
