@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
   - Example inherited breaking changes: new EzRadio
 - Explicit ndkVersion in build.gradle
 - Image settings -> design settings (breaking change)
-  - Has previous background image settings and new animation duration, button transparency, and glass buttons (on mobile)
+  - Has previous background image setting(s) and new animation duration and button transparency settings
   - Reminder that "isX" l10n entries are now "dsX"
   - Re-ordered the default settings: Color, Design, Layout, Text
 - Theme data calls; split into `fixed` (outside build) and `dynamic` (inside build) chunks
