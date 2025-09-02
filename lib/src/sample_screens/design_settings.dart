@@ -3,8 +3,6 @@
  * See LICENSE for distribution and usage details.
  */
 
-// TODO: l10n, semantics, tooltips
-
 import '../../empathetech_flutter_ui.dart';
 
 import 'dart:math';
@@ -282,7 +280,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
           ),
         ),
 
-        // Background TODO: Add 'image' to button label
+        // Background
         if (widget.includeBackgroundImage) ...<Widget>[
           spacer,
           EzScrollView(
@@ -338,7 +336,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             backgroundColor: buttonBackground,
             shadowColor: buttonShadow,
             side: BorderSide(color: buttonContainer),
-          ), // TODO: Add color scheme reset option (scratch ez elevated button)
+          ),
           dialogTitle: l10n.dsResetAll(darkString),
           onConfirm: isDark
               ? () async {
