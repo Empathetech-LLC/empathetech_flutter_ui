@@ -8,8 +8,6 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class EzDesignSettings extends StatefulWidget {
   /// Optional additional global design settings
@@ -28,10 +26,6 @@ class EzDesignSettings extends StatefulWidget {
   /// Optional credits for the light background image
   /// Moot if [includeBackgroundImage] is false
   final String? lightBackgroundCredits;
-
-  /// Whether to include the "Liquid Glass" setting
-  /// Only applicable for mobile
-  final bool includeGlass;
 
   /// Optional additional theme design settings
   /// Will appear after the default themed design settings
@@ -61,7 +55,6 @@ class EzDesignSettings extends StatefulWidget {
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
     this.lightBackgroundCredits,
-    this.includeGlass = true,
     this.additionalThemedSettings,
     this.resetSpacer = const EzDivider(),
     this.darkThemeResetKeys,
@@ -318,38 +311,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   ),
           ),
         ],
-
-        if (widget.includeGlass && strictMobile) ...<Widget>[
-          spacer,
-          EzSwitchPair(
-            text: l10n.dsGlassButtons,
-            valueKey: isDark ? darkGlassKey : lightGlassKey,
-          ), // TODO: enabling this greys out above (not remove, just disable)
-        ],
-        Stack(children: <Widget>[
-          // This is the content that will be behind the glass
-          Positioned.fill(
-            child: Image.network(
-              'https://picsum.photos/seed/glass/800/800',
-              fit: BoxFit.cover,
-            ),
-          ),
-          // The LiquidGlass widget sits on top
-          const Center(
-            child: LiquidGlass(
-              shape: LiquidRoundedSuperellipse(
-                borderRadius: Radius.circular(50),
-              ),
-              child: SizedBox(
-                height: 200,
-                width: 200,
-                child: Center(
-                  child: FlutterLogo(size: 100),
-                ),
-              ),
-            ),
-          ),
-        ]),
 
         // After background
         if (widget.additionalThemedSettings != null)
