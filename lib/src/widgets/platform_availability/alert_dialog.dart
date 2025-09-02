@@ -49,6 +49,25 @@ class EzAlertDialog extends PlatformAlertDialog {
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
+    // Define custom functions //
+
+    List<Widget>? buildMActions(List<Widget>? actions) {
+      if (actions == null) return null;
+
+      return actions.length <= 2
+          ? isLefty
+              ? actions.reversed.toList()
+              : actions
+          : <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: actions,
+              )
+            ];
+    }
+
     // Return the build //
 
     final Widget? dialogContent = content ??
@@ -62,7 +81,7 @@ class EzAlertDialog extends PlatformAlertDialog {
             text: ezL10n(context).gClose,
           );
 
-          late final List<Widget>? actions = needsClose
+          late final List<Widget>? mActions = needsClose
               ? <Widget>[
                   closeAction,
                   if (materialActions != null) ...materialActions!,
@@ -76,7 +95,7 @@ class EzAlertDialog extends PlatformAlertDialog {
                 ? null
                 : dialogContent == null
                     ? EdgeInsets.zero
-                    : EdgeInsets.only(bottom: spacing / 2),
+                    : EdgeInsets.only(top: margin, bottom: spacing / 2),
 
             // Content
             content: dialogContent,
@@ -90,10 +109,8 @@ class EzAlertDialog extends PlatformAlertDialog {
                       ),
 
             // Actions
-            actions: (isLefty && (actions != null && actions.length <= 2))
-                ? actions.reversed.toList()
-                : actions,
-            actionsAlignment: (actions != null && actions.length > 2)
+            actions: buildMActions(mActions),
+            actionsAlignment: (mActions != null && mActions.length > 2)
                 ? MainAxisAlignment.center
                 : isLefty
                     ? MainAxisAlignment.start
@@ -112,7 +129,7 @@ class EzAlertDialog extends PlatformAlertDialog {
             text: ezL10n(context).gClose,
           );
 
-          late final List<Widget>? actions = needsClose
+          late final List<Widget>? cActions = needsClose
               ? <Widget>[
                   if (cupertinoActions != null) ...cupertinoActions!,
                   closeAction
@@ -144,9 +161,9 @@ class EzAlertDialog extends PlatformAlertDialog {
                   ),
 
             // Actions
-            actions: (isLefty && (actions != null && actions.length <= 2))
-                ? actions.reversed.toList()
-                : actions,
+            actions: (cActions != null && cActions.length <= 2 && isLefty)
+                ? cActions.reversed.toList()
+                : cActions,
           );
         },
       ),
