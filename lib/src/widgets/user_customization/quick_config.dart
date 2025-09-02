@@ -25,26 +25,25 @@ class TryTip extends StatelessWidget {
 }
 
 class EzQuickConfig extends StatelessWidget {
-  /// Toggle the big buttons quick config
+  /// Toggle the [EzBigButtonsConfig]
   final bool bigButtons;
 
-  /// Toggle the high visibility quick config
+  /// Toggle the [EzHighVisibilityConfig]
   final bool highVisibility;
 
-  /// Toggle the video game quick config
+  /// Toggle the [EzVideoGameConfig]
   final bool videoGame;
 
-  /// Toggle the chalkboard quick config
+  /// Toggle the [EzChalkboardConfig]
   final bool chalkboard;
 
-  /// Toggle the fancy pants quick config
+  /// Toggle the [EzFancyPantsConfig]
   final bool fancyPants;
 
   /// Optional callback for when the quick config is completed
   final void Function()? onComplete;
 
-  /// [EzElevatedIconButton] for updating the current [Locale]
-  /// Opens a [BottomSheet] with a [EzElevatedIconButton] for each supported [Locale]
+  /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
   const EzQuickConfig({
     super.key,
     this.bigButtons = true,
@@ -131,33 +130,25 @@ class EzQuickConfig extends StatelessWidget {
 class EzBigButtonsConfig extends StatelessWidget {
   final void Function()? onComplete;
 
+  /// Only modifies the layout settings and [iconSizeKey]
+  /// Slight bump to all layout values, for easier tapping
   const EzBigButtonsConfig({super.key, this.onComplete});
 
   @override
   Widget build(BuildContext context) {
     final bool onMobile = isMobile();
-    final bool isDark = isDarkTheme(context);
+
     final EFUILang l10n = ezL10n(context);
 
     return EzElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(EzConfig.getDefault(paddingKey) * 1.5),
+        padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
       ),
       onPressed: () async {
-        // Reset
-        if (isDark) {
-          await EzConfig.removeKeys(darkColorKeys.keys.toSet());
-          await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
-        } else {
-          await EzConfig.removeKeys(lightColorKeys.keys.toSet());
-          await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
+        // Conditionally update text
+        if (EzConfig.get(iconSizeKey) < 25.0) {
+          await EzConfig.setDouble(iconSizeKey, 25.0);
         }
-        await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
-        await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
-        await EzConfig.removeKeys(allTextKeys.keys.toSet());
-
-        // Update text
-        await EzConfig.setDouble(iconSizeKey, 25);
 
         // Update layout
         await EzConfig.setDouble(marginKey, 12.5);
@@ -181,6 +172,9 @@ class EzBigButtonsConfig extends StatelessWidget {
 class EzHighVisibilityConfig extends StatelessWidget {
   final void Function()? onComplete;
 
+  /// Resets the current config and applies the [ezHighContrastLight] | [ezHighContrastDark] color scheme
+  /// With text theme built with [atkinsonHyperlegible] and is slightly larger than the default
+  /// Spacing is also increased, but not as much as [EzBigButtonsConfig]
   const EzHighVisibilityConfig({super.key, this.onComplete});
 
   @override
@@ -188,7 +182,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
     final bool onMobile = isMobile();
     final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
-    final Color onSurface = Theme.of(context).colorScheme.onSurface;
 
     final TextStyle localBody = fuseWithGFont(
       starter: TextStyle(
@@ -196,7 +189,7 @@ class EzHighVisibilityConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: onSurface,
+        color: isDark ? Colors.white : Colors.black,
         height: 1.75,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: 0.30,
@@ -206,12 +199,27 @@ class EzHighVisibilityConfig extends StatelessWidget {
     );
 
     return EzElevatedButton(
-      style: ElevatedButton.styleFrom(
-        iconColor: onSurface,
-        overlayColor: onSurface,
-        side: BorderSide(color: onSurface.withValues(alpha: 0.5)),
-        textStyle: localBody,
-      ),
+      style: isDark
+          ? ElevatedButton.styleFrom(
+              backgroundColor: darkSurface,
+              foregroundColor: Colors.white,
+              shadowColor: Colors.transparent,
+              iconColor: Colors.white,
+              overlayColor: Colors.white,
+              side: const BorderSide(color: darkOutline),
+              textStyle: localBody,
+              padding: EdgeInsets.all(onMobile ? 17.5 : 20.0),
+            )
+          : ElevatedButton.styleFrom(
+              backgroundColor: lightSurface,
+              foregroundColor: Colors.black,
+              shadowColor: Colors.transparent,
+              iconColor: Colors.black,
+              overlayColor: Colors.black,
+              side: const BorderSide(color: lightOutline),
+              textStyle: localBody,
+              padding: EdgeInsets.all(onMobile ? 17.5 : 20.0),
+            ),
       onPressed: () async {
         // Reset //
 
@@ -225,6 +233,32 @@ class EzHighVisibilityConfig extends StatelessWidget {
         await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
         await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
         await EzConfig.removeKeys(allTextKeys.keys.toSet());
+
+        // Update colors //
+
+        if (isDark) {
+          await storeColorScheme(
+            colorScheme: ezHighContrastDark,
+            brightness: Brightness.dark,
+          );
+        } else {
+          await storeColorScheme(
+            colorScheme: ezHighContrastLight,
+            brightness: Brightness.light,
+          );
+        }
+
+        // Update layout //
+
+        await EzConfig.setDouble(marginKey, 12.5);
+        if (onMobile) {
+          await EzConfig.setDouble(paddingKey, 17.5);
+          await EzConfig.setDouble(spacingKey, 30.0);
+        } else {
+          await EzConfig.setDouble(paddingKey, 20.0);
+          await EzConfig.setDouble(spacingKey, 35.0);
+        }
+        await EzConfig.setBool(hideScrollKey, true);
 
         // Update text //
 
@@ -281,32 +315,6 @@ class EzHighVisibilityConfig extends StatelessWidget {
         // Icons
         await EzConfig.setDouble(iconSizeKey, 22.0);
 
-        // Update layout //
-
-        await EzConfig.setDouble(marginKey, 12.5);
-        if (onMobile) {
-          await EzConfig.setDouble(paddingKey, 17.5);
-          await EzConfig.setDouble(spacingKey, 30.0);
-        } else {
-          await EzConfig.setDouble(paddingKey, 20.0);
-          await EzConfig.setDouble(spacingKey, 35.0);
-        }
-        await EzConfig.setBool(hideScrollKey, true);
-
-        // Update colors //
-
-        if (isDark) {
-          await storeColorScheme(
-            colorScheme: ezHighContrastDark,
-            brightness: Brightness.dark,
-          );
-        } else {
-          await storeColorScheme(
-            colorScheme: ezHighContrastLight,
-            brightness: Brightness.light,
-          );
-        }
-
         // Callback //
 
         onComplete?.call();
@@ -320,6 +328,10 @@ class EzHighVisibilityConfig extends StatelessWidget {
 class EzVideoGameConfig extends StatelessWidget {
   final void Function()? onComplete;
 
+  /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
+  /// Sets [ezColorScheme] with [Brightness.dark]
+  /// Slightly increases the layout spacing
+  /// Sets the [TextTheme] to a [pressStart2P] based theme
   const EzVideoGameConfig({super.key, this.onComplete});
 
   @override
@@ -391,6 +403,30 @@ class EzVideoGameConfig extends StatelessWidget {
         await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
         await EzConfig.removeKeys(allTextKeys.keys.toSet());
 
+        // Update colors //
+
+        await EzConfig.setBool(isDarkThemeKey, true);
+        await storeColorScheme(
+          colorScheme: ezColorScheme(Brightness.dark),
+          brightness: Brightness.dark,
+        );
+
+        // Update design //
+
+        await EzConfig.setDouble(animationDurationKey, 400.0);
+
+        // Update layout //
+
+        if (onMobile) {
+          await EzConfig.setDouble(marginKey, 10.0);
+          await EzConfig.setDouble(paddingKey, 22.5);
+          await EzConfig.setDouble(spacingKey, 30.0);
+        } else {
+          await EzConfig.setDouble(marginKey, 12.5);
+          await EzConfig.setDouble(paddingKey, 25.0);
+          await EzConfig.setDouble(spacingKey, 35.0);
+        }
+
         // Update text //
 
         // Display
@@ -426,26 +462,6 @@ class EzVideoGameConfig extends StatelessWidget {
         // Icons
         if (!onMobile) await EzConfig.setDouble(iconSizeKey, 22.0);
 
-        // Update layout //
-
-        if (onMobile) {
-          await EzConfig.setDouble(marginKey, 10.0);
-          await EzConfig.setDouble(paddingKey, 22.5);
-          await EzConfig.setDouble(spacingKey, 30.0);
-        } else {
-          await EzConfig.setDouble(marginKey, 12.5);
-          await EzConfig.setDouble(paddingKey, 25.0);
-          await EzConfig.setDouble(spacingKey, 35.0);
-        }
-
-        // Update colors //
-
-        await EzConfig.setBool(isDarkThemeKey, true);
-        await storeColorScheme(
-          colorScheme: ezColorScheme(Brightness.dark),
-          brightness: Brightness.dark,
-        );
-
         // Callback //
 
         onComplete?.call();
@@ -459,6 +475,9 @@ class EzVideoGameConfig extends StatelessWidget {
 class EzChalkboardConfig extends StatelessWidget {
   final void Function()? onComplete;
 
+  /// Dark theme only config; sets [ThemeMode.dark], resets it, and...
+  /// Sets a [ColorScheme] similar to [ezHighContrastDark], but with a chalkboard surface (0xFF264941) and [empathSand] accents
+  /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
   const EzChalkboardConfig({super.key, this.onComplete});
 
   @override
@@ -485,10 +504,13 @@ class EzChalkboardConfig extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: chalkboardGreen,
         foregroundColor: Colors.white,
+        shadowColor: Colors.transparent,
         iconColor: empathSand,
         overlayColor: empathSand,
         side: const BorderSide(color: darkOutline),
         textStyle: localBody,
+        padding: EdgeInsets.all(
+            isMobile() ? defaultMobilePadding : defaultDesktopPadding),
       ),
       onPressed: () async {
         // Reset //
@@ -498,28 +520,6 @@ class EzChalkboardConfig extends StatelessWidget {
         await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
         await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
         await EzConfig.removeKeys(allTextKeys.keys.toSet());
-
-        // Update text //
-
-        // Display
-        await EzConfig.setString(displayFontFamilyKey, fingerPaint);
-        await EzConfig.setBool(displayItalicizedKey, false);
-
-        // Headline
-        await EzConfig.setString(headlineFontFamilyKey, fingerPaint);
-        await EzConfig.setBool(headlineItalicizedKey, false);
-
-        // Title
-        await EzConfig.setString(titleFontFamilyKey, fingerPaint);
-        await EzConfig.setBool(titleItalicizedKey, false);
-
-        // Body
-        await EzConfig.setString(bodyFontFamilyKey, fingerPaint);
-        await EzConfig.setBool(bodyItalicizedKey, false);
-
-        // Label
-        await EzConfig.setString(labelFontFamilyKey, fingerPaint);
-        await EzConfig.setBool(labelItalicizedKey, false);
 
         // Update colors //
 
@@ -588,6 +588,28 @@ class EzChalkboardConfig extends StatelessWidget {
           brightness: Brightness.dark,
         );
 
+        // Update text //
+
+        // Display
+        await EzConfig.setString(displayFontFamilyKey, fingerPaint);
+        await EzConfig.setBool(displayItalicizedKey, false);
+
+        // Headline
+        await EzConfig.setString(headlineFontFamilyKey, fingerPaint);
+        await EzConfig.setBool(headlineItalicizedKey, false);
+
+        // Title
+        await EzConfig.setString(titleFontFamilyKey, fingerPaint);
+        await EzConfig.setBool(titleItalicizedKey, false);
+
+        // Body
+        await EzConfig.setString(bodyFontFamilyKey, fingerPaint);
+        await EzConfig.setBool(bodyItalicizedKey, false);
+
+        // Label
+        await EzConfig.setString(labelFontFamilyKey, fingerPaint);
+        await EzConfig.setBool(labelItalicizedKey, false);
+
         // Callback //
 
         onComplete?.call();
@@ -601,6 +623,10 @@ class EzChalkboardConfig extends StatelessWidget {
 class EzFancyPantsConfig extends StatelessWidget {
   final void Function()? onComplete;
 
+  /// Reset the current config
+  /// Applies a [ezColorScheme] with the primary and secondary colors swapped (primary is always [empathSand])
+  /// Slightly decreases the padding and sets an [alexBrush] based [TextTheme]
+  /// Otherwise default
   const EzFancyPantsConfig({super.key, this.onComplete});
 
   @override
@@ -615,7 +641,7 @@ class EzFancyPantsConfig extends StatelessWidget {
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: isDark ? Colors.white : Colors.black,
         height: defaultFontHeight,
         leadingDistribution: TextLeadingDistribution.even,
         letterSpacing: defaultLetterSpacing,
@@ -625,13 +651,25 @@ class EzFancyPantsConfig extends StatelessWidget {
     );
 
     return EzElevatedButton(
-      style: ElevatedButton.styleFrom(
-        iconColor: empathSand,
-        overlayColor: empathSand,
-        side: const BorderSide(color: empathSandDim),
-        textStyle: localBody,
-        padding: EdgeInsets.all(onMobile ? 15 : 17.5),
-      ),
+      style: isDark
+          ? ElevatedButton.styleFrom(
+              backgroundColor: darkSurface,
+              foregroundColor: Colors.white,
+              iconColor: empathSand,
+              overlayColor: empathSand,
+              side: const BorderSide(color: empathSandDim),
+              textStyle: localBody,
+              padding: EdgeInsets.all(onMobile ? 15 : 17.5),
+            )
+          : ElevatedButton.styleFrom(
+              backgroundColor: lightSurface,
+              foregroundColor: Colors.black,
+              iconColor: empathSand,
+              overlayColor: empathSand,
+              side: const BorderSide(color: empathSandDim),
+              textStyle: localBody,
+              padding: EdgeInsets.all(onMobile ? 15 : 17.5),
+            ),
       onPressed: () async {
         // Reset //
 
@@ -645,6 +683,39 @@ class EzFancyPantsConfig extends StatelessWidget {
         await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
         await EzConfig.removeKeys(allLayoutKeys.keys.toSet());
         await EzConfig.removeKeys(allTextKeys.keys.toSet());
+
+        // Update colors //
+
+        if (isDark) {
+          await EzConfig.setInt(darkPrimaryKey, empathSandHex);
+          await EzConfig.setInt(darkOnPrimaryKey, blackHex);
+          await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
+          await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
+
+          await EzConfig.setInt(darkSecondaryKey, empathEucalyptusHex);
+          await EzConfig.setInt(darkOnSecondaryKey, blackHex);
+          await EzConfig.setInt(
+              darkSecondaryContainerKey, empathEucalyptusDimHex);
+          await EzConfig.setInt(darkOnSecondaryContainerKey, blackHex);
+        } else {
+          await EzConfig.setInt(lightPrimaryKey, empathSandHex);
+          await EzConfig.setInt(lightOnPrimaryKey, blackHex);
+          await EzConfig.setInt(lightPrimaryContainerKey, empathSandDimHex);
+          await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
+
+          await EzConfig.setInt(lightSecondaryKey, empathPurpleHex);
+          await EzConfig.setInt(lightOnSecondaryKey, whiteHex);
+          await EzConfig.setInt(lightSecondaryContainerKey, empathPurpleDimHex);
+          await EzConfig.setInt(lightOnSecondaryContainerKey, whiteHex);
+        }
+
+        // Update design //
+
+        await EzConfig.setDouble(animationDurationKey, 600.0);
+
+        // Update layout //
+
+        await EzConfig.setDouble(paddingKey, onMobile ? 15 : 17.5);
 
         // Update text //
 
@@ -671,35 +742,6 @@ class EzFancyPantsConfig extends StatelessWidget {
         await EzConfig.setString(labelFontFamilyKey, alexBrush);
         await EzConfig.setDouble(labelFontSizeKey, 20.0);
         await EzConfig.setBool(labelItalicizedKey, false);
-
-        // Update layout //
-
-        await EzConfig.setDouble(paddingKey, onMobile ? 15 : 17.5);
-
-        // Update colors //
-
-        if (isDark) {
-          await EzConfig.setInt(darkPrimaryKey, empathSandHex);
-          await EzConfig.setInt(darkOnPrimaryKey, blackHex);
-          await EzConfig.setInt(darkPrimaryContainerKey, empathSandDimHex);
-          await EzConfig.setInt(darkOnPrimaryContainerKey, blackHex);
-
-          await EzConfig.setInt(darkSecondaryKey, empathEucalyptusHex);
-          await EzConfig.setInt(darkOnSecondaryKey, blackHex);
-          await EzConfig.setInt(
-              darkSecondaryContainerKey, empathEucalyptusDimHex);
-          await EzConfig.setInt(darkOnSecondaryContainerKey, blackHex);
-        } else {
-          await EzConfig.setInt(lightPrimaryKey, empathSandHex);
-          await EzConfig.setInt(lightOnPrimaryKey, blackHex);
-          await EzConfig.setInt(lightPrimaryContainerKey, empathSandDimHex);
-          await EzConfig.setInt(lightOnPrimaryContainerKey, blackHex);
-
-          await EzConfig.setInt(lightSecondaryKey, empathPurpleHex);
-          await EzConfig.setInt(lightOnSecondaryKey, whiteHex);
-          await EzConfig.setInt(lightSecondaryContainerKey, empathPurpleDimHex);
-          await EzConfig.setInt(lightOnSecondaryContainerKey, whiteHex);
-        }
 
         // Callback //
 
