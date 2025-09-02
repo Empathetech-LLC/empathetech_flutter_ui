@@ -5,6 +5,7 @@
 
 import '../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:feedback/feedback.dart';
 
@@ -103,6 +104,12 @@ ThemeData ezThemeData(Brightness brightness) {
           ? Colors.transparent
           : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
       : colorScheme.outlineVariant;
+
+  // Forms //
+
+  final double formOpacity =
+      <double>[buttonOpacity, textOpacity, 0.50].reduce(max);
+  final bool calcForm = formOpacity < 1.0;
 
   //* Return the ThemeData *//
 
@@ -277,7 +284,9 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surface,
+      fillColor: calcForm
+          ? colorScheme.surface.withValues(alpha: formOpacity)
+          : colorScheme.surface,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
@@ -425,8 +434,8 @@ final FeedbackThemeData empathFeedbackDark = FeedbackThemeData(
   background: Colors.grey,
   feedbackSheetColor: Colors.black,
   activeFeedbackModeColor: empathEucalyptus,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.black),
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.white),
   sheetIsDraggable: true,
   dragHandleColor: Colors.white,
 );
@@ -438,8 +447,8 @@ final FeedbackThemeData empathFeedbackLight = FeedbackThemeData(
   background: Colors.grey,
   feedbackSheetColor: Colors.white,
   activeFeedbackModeColor: empathPurple,
-  bottomSheetDescriptionStyle: ezBodyStyle(Colors.white),
-  bottomSheetTextInputStyle: ezBodyStyle(Colors.white),
+  bottomSheetDescriptionStyle: ezBodyStyle(Colors.black),
+  bottomSheetTextInputStyle: ezBodyStyle(Colors.black),
   sheetIsDraggable: true,
   dragHandleColor: Colors.black,
 );
