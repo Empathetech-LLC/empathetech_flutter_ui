@@ -340,6 +340,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 dialogTitle: l10n.dsResetAll(darkString), // TODO: update entry
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+                  await EzConfig.remove(hideScrollKey);
                   await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
                   await EzConfig.remove(darkColorSchemeImageKey);
 
@@ -365,6 +366,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 dialogTitle: l10n.dsResetAll(lightString),
                 onConfirm: () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
+                  await EzConfig.remove(hideScrollKey);
                   await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
                   await EzConfig.remove(lightColorSchemeImageKey);
 
