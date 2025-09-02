@@ -365,6 +365,7 @@ class EzVideoGameConfig extends StatelessWidget {
         padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
       ),
       onPressed: () async {
+        // If the current theme is not dark, show a warning dialog
         if (!isDarkTheme(context)) {
           final bool doIt = await showPlatformDialog(
             context: context,
@@ -507,12 +508,43 @@ class EzChalkboardConfig extends StatelessWidget {
         shadowColor: Colors.transparent,
         iconColor: empathSand,
         overlayColor: empathSand,
-        side: const BorderSide(color: darkOutline),
+        side: const BorderSide(color: chalkboardGreen),
         textStyle: localBody,
         padding: EdgeInsets.all(
             isMobile() ? defaultMobilePadding : defaultDesktopPadding),
       ),
       onPressed: () async {
+        // If the current theme is not dark, show a warning dialog
+        if (!isDarkTheme(context)) {
+          final bool doIt = await showPlatformDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              void onConfirm() => Navigator.of(dialogContext).pop(true);
+              void onDeny() => Navigator.of(dialogContext).pop(false);
+
+              late final List<Widget> materialActions;
+              late final List<Widget> cupertinoActions;
+
+              (materialActions, cupertinoActions) = ezActionPairs(
+                context: context,
+                onConfirm: onConfirm,
+                confirmIsDestructive: true,
+                onDeny: onDeny,
+              );
+
+              return EzAlertDialog(
+                title: Text(l10n.gAttention, textAlign: TextAlign.center),
+                content: Text(l10n.ssDarkOnly, textAlign: TextAlign.center),
+                materialActions: materialActions,
+                cupertinoActions: cupertinoActions,
+                needsClose: false,
+              );
+            },
+          );
+
+          if (!doIt) return;
+        }
+
         // Reset //
 
         await EzConfig.removeKeys(darkColorKeys.keys.toSet());
@@ -530,8 +562,8 @@ class EzChalkboardConfig extends StatelessWidget {
             // Primary
             primary: empathSand,
             onPrimary: Colors.black,
-            primaryContainer: darkOutline,
-            onPrimaryContainer: Colors.black,
+            primaryContainer: chalkboardGreen,
+            onPrimaryContainer: Colors.white,
             primaryFixed: empathSand,
             primaryFixedDim: empathSand,
             onPrimaryFixed: Colors.black,
@@ -540,8 +572,8 @@ class EzChalkboardConfig extends StatelessWidget {
             // Secondary
             secondary: Colors.white,
             onSecondary: Colors.black,
-            secondaryContainer: Colors.white,
-            onSecondaryContainer: Colors.black,
+            secondaryContainer: chalkboardGreen,
+            onSecondaryContainer: Colors.white,
             secondaryFixed: Colors.white,
             secondaryFixedDim: Colors.white,
             onSecondaryFixed: Colors.black,
@@ -550,8 +582,8 @@ class EzChalkboardConfig extends StatelessWidget {
             // Tertiary
             tertiary: Colors.white,
             onTertiary: Colors.black,
-            tertiaryContainer: Colors.white,
-            onTertiaryContainer: Colors.black,
+            tertiaryContainer: chalkboardGreen,
+            onTertiaryContainer: Colors.white,
             tertiaryFixed: Colors.white,
             tertiaryFixedDim: Colors.white,
             onTertiaryFixed: Colors.black,
