@@ -476,9 +476,6 @@ class EFUILangEs extends EFUILang {
   String get dsRedo => 'Rehacer';
 
   @override
-  String get dsGlassButtons => 'Botones de cristal';
-
-  @override
   String dsResetAll(Object themeType) {
     return '¿Restablecer todas las configuraciones de diseño globales y de $themeType?';
   }

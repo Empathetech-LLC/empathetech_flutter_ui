@@ -194,8 +194,6 @@
   "dsUndo": "Undo",
   "dsRedo": "Redo",
 
-  "dsGlassButtons": "Glass buttons",
-
   "dsResetAll": "Reset all global and {themeType} theme design settings?",
 
 

@@ -393,14 +393,12 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   '$darkBackgroundImageKey$boxFitSuffix': none,
   darkButtonOpacityKey: maxOpacity,
   darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
-  darkGlassKey: false,
 
   // Light
   lightBackgroundImageKey: noImageValue,
   '$lightBackgroundImageKey$boxFitSuffix': none,
   lightButtonOpacityKey: maxOpacity,
   lightButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
-  lightGlassKey: false,
 
   // Layout settings //
 

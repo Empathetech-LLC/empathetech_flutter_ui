@@ -476,9 +476,6 @@ class EFUILangFr extends EFUILang {
   String get dsRedo => 'Rétablir';
 
   @override
-  String get dsGlassButtons => 'Boutons en verre';
-
-  @override
   String dsResetAll(Object themeType) {
     return 'Réinitialiser tous les paramètres de conception globaux et du thème $themeType ?';
   }

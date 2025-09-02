@@ -443,15 +443,13 @@ const Map<String, Type> darkImageKeys = <String, Type>{
 
 const String darkButtonOpacityKey = 'darkButtonOpacity';
 const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
-const String darkGlassKey = 'darkGlass';
 
 /// [darkImageKeys]
-/// && [darkButtonOpacityKey], [darkIncludeOutlineKey], [darkGlassKey]
+/// && [darkButtonOpacityKey], [darkButtonOutlineOpacityKey]
 const Map<String, Type> darkDesignKeys = <String, Type>{
   ...darkImageKeys,
   darkButtonOpacityKey: double,
   darkButtonOutlineOpacityKey: double,
-  darkGlassKey: bool,
 };
 
 // Light theme //
@@ -466,15 +464,13 @@ const Map<String, Type> lightImageKeys = <String, Type>{
 
 const String lightButtonOpacityKey = 'lightButtonOpacity';
 const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
-const String lightGlassKey = 'lightGlass';
 
 /// [lightImageKeys]
-/// && [lightButtonOpacityKey], [lightIncludeOutlineKey], [lightGlassKey]
+/// && [lightButtonOpacityKey], [lightButtonOutlineOpacityKey]
 const Map<String, Type> lightDesignKeys = <String, Type>{
   ...lightImageKeys,
   lightButtonOpacityKey: double,
   lightButtonOutlineOpacityKey: double,
-  lightGlassKey: bool,
 };
 
 // Shared //

@@ -473,9 +473,6 @@ class EFUILangEn extends EFUILang {
   String get dsRedo => 'Redo';
 
   @override
-  String get dsGlassButtons => 'Glass buttons';
-
-  @override
   String dsResetAll(Object themeType) {
     return 'Reset all global and $themeType theme design settings?';
   }
@@ -1069,9 +1066,6 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsRedo => 'Redo';
-
-  @override
-  String get dsGlassButtons => 'Glass buttons';
 
   @override
   String dsResetAll(Object themeType) {

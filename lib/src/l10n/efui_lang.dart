@@ -969,12 +969,6 @@ abstract class EFUILang {
   /// **'Redo'**
   String get dsRedo;
 
-  /// No description provided for @dsGlassButtons.
-  ///
-  /// In en, this message translates to:
-  /// **'Glass buttons'**
-  String get dsGlassButtons;
-
   /// No description provided for @dsResetAll.
   ///
   /// In en, this message translates to:

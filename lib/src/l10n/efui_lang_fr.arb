@@ -194,8 +194,6 @@
   "dsUndo": "Annuler",
   "dsRedo": "Rétablir",
 
-  "dsGlassButtons": "Boutons en verre",
-
   "dsResetAll": "Réinitialiser tous les paramètres de conception globaux et du thème {themeType} ?",
 
 
