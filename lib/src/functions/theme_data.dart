@@ -50,6 +50,7 @@ ThemeData ezThemeData(Brightness brightness) {
         : lightTextBackgroundOpacityKey,
   );
   final bool calcText = textOpacity < 1.0;
+
   final Color textSurfaceColor = calcText
       ? colorScheme.surface.withValues(alpha: textOpacity)
       : colorScheme.surface;
@@ -105,11 +106,19 @@ ThemeData ezThemeData(Brightness brightness) {
           : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
       : colorScheme.outlineVariant;
 
-  // Forms //
+  // Misc //
 
-  final double formOpacity =
+  final double crucialOpacity =
       <double>[buttonOpacity, textOpacity, 0.50].reduce(max);
-  final bool calcForm = formOpacity < 1.0;
+
+  final bool calcCrucial = crucialOpacity < 1.0;
+
+  final Color crucialSurface = calcCrucial
+      ? colorScheme.surface.withValues(alpha: crucialOpacity)
+      : colorScheme.surface;
+  final Color crucialContainer = calcCrucial
+      ? colorScheme.surfaceContainer.withValues(alpha: crucialOpacity)
+      : colorScheme.surfaceContainer;
 
   //* Return the ThemeData *//
 
@@ -170,7 +179,9 @@ ThemeData ezThemeData(Brightness brightness) {
 
     // Card
     cardTheme: CardThemeData(
-      color: colorScheme.surfaceDim,
+      color: calcCrucial
+          ? colorScheme.surfaceDim.withValues(alpha: crucialOpacity)
+          : colorScheme.surfaceDim,
       margin: EdgeInsets.zero,
     ),
 
@@ -284,9 +295,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: calcForm
-          ? colorScheme.surface.withValues(alpha: formOpacity)
-          : colorScheme.surface,
+      fillColor: crucialSurface,
       prefixIconColor: colorScheme.primary,
       iconColor: colorScheme.primary,
       suffixIconColor: colorScheme.primary,
@@ -388,8 +397,8 @@ ThemeData ezThemeData(Brightness brightness) {
       trackColor: WidgetStateProperty.resolveWith(
         (Set<WidgetState> states) => (states.contains(WidgetState.selected) ||
                 states.contains(WidgetState.focused))
-            ? colorScheme.primaryContainer
-            : colorScheme.surface,
+            ? crucialContainer
+            : crucialSurface,
       ),
       trackOutlineColor: WidgetStateProperty.all(buttonContainer),
       overlayColor: WidgetStateProperty.all(highlightColor),
