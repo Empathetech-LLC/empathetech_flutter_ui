@@ -61,12 +61,10 @@ class EzTextBackground extends StatelessWidget {
         ? darkTextBackgroundOpacityKey
         : lightTextBackgroundOpacityKey;
 
-    late final double percent = EzConfig.get(oKey);
-
     return Container(
       padding: margin ?? EzInsets.wrap(EzConfig.get(marginKey)),
       decoration: BoxDecoration(
-        color: _color(context, percent),
+        color: _color(context, EzConfig.get(oKey)),
         borderRadius: borderRadius ?? ezRoundEdge,
       ),
       child: text,
