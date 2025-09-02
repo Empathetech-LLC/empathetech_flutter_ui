@@ -484,11 +484,6 @@ class EFUILangFr extends EFUILang {
   }
 
   @override
-  String dsAndColors(Object themeType) {
-    return 'Et le schéma de couleurs $themeType ?';
-  }
-
-  @override
   String get lsPageTitle => 'Paramètres de mise en page';
 
   @override

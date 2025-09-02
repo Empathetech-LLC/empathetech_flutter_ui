@@ -481,11 +481,6 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
-  String dsAndColors(Object themeType) {
-    return 'And the $themeType color scheme?';
-  }
-
-  @override
   String get lsPageTitle => 'Layout settings';
 
   @override
@@ -1081,11 +1076,6 @@ class EFUILangEnUs extends EFUILangEn {
   @override
   String dsResetAll(Object themeType) {
     return 'Reset all global and $themeType theme design settings?';
-  }
-
-  @override
-  String dsAndColors(Object themeType) {
-    return 'And the $themeType color scheme?';
   }
 
   @override

@@ -981,12 +981,6 @@ abstract class EFUILang {
   /// **'Reset all global and {themeType} theme design settings?'**
   String dsResetAll(Object themeType);
 
-  /// No description provided for @dsAndColors.
-  ///
-  /// In en, this message translates to:
-  /// **'And the {themeType} color scheme?'**
-  String dsAndColors(Object themeType);
-
   /// No description provided for @lsPageTitle.
   ///
   /// In en, this message translates to:
