@@ -173,7 +173,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
         // Animation duration
-        EzText(l10n.dsAnimDuration, style: textTheme.titleLarge),
+        EzText(l10n.dsAnimDuration, style: textTheme.bodyLarge),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
           child: Slider(
@@ -218,7 +218,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             padding: EdgeInsets.all(margin),
             child: Column(
               children: <Widget>[
-                Text(l10n.dsButtonBackground, style: textTheme.titleLarge),
+                Text(l10n.dsButtonBackground, style: textTheme.bodyLarge),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
@@ -248,7 +248,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 spacer,
 
                 // Button outline
-                Text(l10n.dsButtonOutline, style: textTheme.titleLarge),
+                Text(l10n.dsButtonOutline, style: textTheme.bodyLarge),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
@@ -300,7 +300,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     ),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
-                    label: l10n.dsBackgroundImg,
+                    label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
@@ -313,7 +313,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     ),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
-                    label: l10n.dsBackgroundImg,
+                    label: l10n.dsBackgroundImg.replaceAll(' ', '\n'),
                     updateTheme: Brightness.light,
                   ),
           ),
