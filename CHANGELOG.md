@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
   - Condensed, BYO spacing widgets
 - Properly consuming iconSize in EzImageSettings and EzLocaleSettings
 - Cleanup spacing for EzAlertDialogs when entries are null
+  - And alignment when there are more than 2 actions
 - Text color for the text style providers
   - Removed constructor param, added redraw method
 -  Text style settings widgets now require the providers as params, rather than checking the context (breaking change)
