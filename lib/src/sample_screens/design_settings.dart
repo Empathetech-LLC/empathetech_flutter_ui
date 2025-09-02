@@ -8,6 +8,8 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class EzDesignSettings extends StatefulWidget {
   /// Optional additional global design settings
@@ -324,6 +326,30 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             valueKey: isDark ? darkGlassKey : lightGlassKey,
           ), // TODO: enabling this greys out above (not remove, just disable)
         ],
+        Stack(children: <Widget>[
+          // This is the content that will be behind the glass
+          Positioned.fill(
+            child: Image.network(
+              'https://picsum.photos/seed/glass/800/800',
+              fit: BoxFit.cover,
+            ),
+          ),
+          // The LiquidGlass widget sits on top
+          const Center(
+            child: LiquidGlass(
+              shape: LiquidRoundedSuperellipse(
+                borderRadius: Radius.circular(50),
+              ),
+              child: SizedBox(
+                height: 200,
+                width: 200,
+                child: Center(
+                  child: FlutterLogo(size: 100),
+                ),
+              ),
+            ),
+          ),
+        ]),
 
         // After background
         if (widget.additionalThemedSettings != null)
