@@ -210,7 +210,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     // Set the new path
     final bool setPath = await EzConfig.setString(widget.configKey, newPath);
     if (!setPath) {
-      if (mounted) ezLogAlert(context, message: l10n.dsSetFailed);
+      if (mounted) ezLogAlert(context, message: l10n.dsImgSetFailed);
     } else {
       currPath = newPath;
 
@@ -239,9 +239,9 @@ class _ImageSettingState extends State<EzImageSetting> {
         if (result != success && mounted) {
           await ezLogAlert(
             context,
-            title: l10n.dsGetFailed,
+            title: l10n.dsImgGetFailed,
             message:
-                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.dsPermission}' : ''}',
+                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.dsImgPermission}' : ''}',
           );
         } else {
           widget.updateTheme == Brightness.light
@@ -328,8 +328,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               } catch (e) {
                 await ezLogAlert(
                   context,
-                  title: l10n.dsGetFailed,
-                  message: '${e.toString()}\n\n${l10n.dsPermission}',
+                  title: l10n.dsImgGetFailed,
+                  message: '${e.toString()}\n\n${l10n.dsImgPermission}',
                 );
 
                 if (dialogContext.mounted) {
@@ -364,7 +364,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
             return EzAlertDialog(
               title: Text(
-                l10n.dsEnterURL,
+                l10n.gEnterURL,
                 textAlign: TextAlign.center,
               ),
               content: Form(
@@ -682,7 +682,7 @@ class _ImageSettingState extends State<EzImageSetting> {
     return Semantics(
       label: widget.label,
       button: true,
-      hint: l10n.dsButtonHint(widget.label),
+      hint: l10n.dsImgSettingHint(widget.label),
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
           style: widget.style ??

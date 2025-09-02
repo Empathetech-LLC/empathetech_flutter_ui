@@ -375,6 +375,12 @@ abstract class EFUILang {
   /// **'Updates available'**
   String get gUpdates;
 
+  /// No description provided for @gEnterURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter URL'**
+  String get gEnterURL;
+
   /// No description provided for @gValidURL.
   ///
   /// In en, this message translates to:
@@ -789,23 +795,35 @@ abstract class EFUILang {
   /// **'Design settings'**
   String get dsPageTitle;
 
-  /// No description provided for @dsBackground.
+  /// No description provided for @dsAnimDuration.
   ///
   /// In en, this message translates to:
-  /// **'Background'**
-  String get dsBackground;
+  /// **'Animation duration (ms)'**
+  String get dsAnimDuration;
 
-  /// No description provided for @dsImage.
+  /// No description provided for @dsButtonBackground.
   ///
   /// In en, this message translates to:
-  /// **'image'**
-  String get dsImage;
+  /// **'Button background opacity'**
+  String get dsButtonBackground;
 
-  /// No description provided for @dsButtonHint.
+  /// No description provided for @dsButtonOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Button outline opacity'**
+  String get dsButtonOutline;
+
+  /// No description provided for @dsBackgroundImg.
+  ///
+  /// In en, this message translates to:
+  /// **'Background image'**
+  String get dsBackgroundImg;
+
+  /// No description provided for @dsImgSettingHint.
   ///
   /// In en, this message translates to:
   /// **'Update the {title} image'**
-  String dsButtonHint(Object title);
+  String dsImgSettingHint(Object title);
 
   /// No description provided for @dsFromFile.
   ///
@@ -837,35 +855,29 @@ abstract class EFUILang {
   /// **'Clear it'**
   String get dsClearIt;
 
-  /// No description provided for @dsEnterURL.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter URL'**
-  String get dsEnterURL;
-
-  /// No description provided for @dsGetFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to retrieve image'**
-  String get dsGetFailed;
-
-  /// No description provided for @dsSetFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to update image'**
-  String get dsSetFailed;
-
-  /// No description provided for @dsPermission.
-  ///
-  /// In en, this message translates to:
-  /// **'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.'**
-  String get dsPermission;
-
   /// No description provided for @dsUseForColors.
   ///
   /// In en, this message translates to:
   /// **'Update the app colors using this image'**
   String get dsUseForColors;
+
+  /// No description provided for @dsImgGetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to retrieve image'**
+  String get dsImgGetFailed;
+
+  /// No description provided for @dsImgSetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update image'**
+  String get dsImgSetFailed;
+
+  /// No description provided for @dsImgPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.'**
+  String get dsImgPermission;
 
   /// No description provided for @dsUseFull.
   ///
@@ -957,10 +969,16 @@ abstract class EFUILang {
   /// **'Redo'**
   String get dsRedo;
 
+  /// No description provided for @dsGlassButtons.
+  ///
+  /// In en, this message translates to:
+  /// **'Glass buttons'**
+  String get dsGlassButtons;
+
   /// No description provided for @dsResetAll.
   ///
   /// In en, this message translates to:
-  /// **'Reset all {themeType} theme images?'**
+  /// **'Reset all global and {themeType} theme design settings?'**
   String dsResetAll(Object themeType);
 
   /// No description provided for @dsAndColors.

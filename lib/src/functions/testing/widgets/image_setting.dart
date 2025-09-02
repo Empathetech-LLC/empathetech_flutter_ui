@@ -245,7 +245,7 @@ Future<void> _testNetwork(
   await ezTouch(tester, find.byIcon(Icons.computer_outlined));
 
   ezLog('Validating text');
-  await ezFindText(tester, l10n.dsEnterURL);
+  await ezFindText(tester, l10n.gEnterURL);
 
   ezLog('Validating layout');
   if (isCupertino) {

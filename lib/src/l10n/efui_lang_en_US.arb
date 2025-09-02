@@ -62,6 +62,7 @@
 
   "gUpdates": "Updates available",
 
+  "gEnterURL": "Enter URL",
   "gValidURL": "Please enter a valid URL",
 
   "g404Wonder": "Not all who wander are lost.",
@@ -159,22 +160,23 @@
 
   "dsPageTitle": "Design settings",
 
-  "dsBackground": "Background",
-  "dsImage": "image",
+  "dsAnimDuration": "Animation duration (ms)",
 
-  "dsButtonHint": "Update the {title} image",
+  "dsButtonBackground": "Button background opacity",
+  "dsButtonOutline": "Button outline opacity",
+
+  "dsBackgroundImg": "Background image",
+  "dsImgSettingHint": "Update the {title} image",
   "dsFromFile": "From file",
   "dsFromCamera": "From camera",
   "dsFromNetwork": "From URL",
   "dsResetIt": "Reset it",
   "dsClearIt": "Clear it",
-
-  "dsEnterURL": "Enter URL",
-  "dsGetFailed": "Failed to retrieve image",
-  "dsSetFailed": "Failed to update image",
-  "dsPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
-
   "dsUseForColors": "Update the app colors using this image",
+
+  "dsImgGetFailed": "Failed to retrieve image",
+  "dsImgSetFailed": "Failed to update image",
+  "dsImgPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
 
   "dsUseFull": "Use full image?",
   "dsFit": "How should it fit?",
@@ -192,7 +194,9 @@
   "dsUndo": "Undo",
   "dsRedo": "Redo",
 
-  "dsResetAll": "Reset all {themeType} theme images?",
+  "dsGlassButtons": "Glass buttons",
+
+  "dsResetAll": "Reset all global and {themeType} theme design settings?",
   "dsAndColors": "And the {themeType} color scheme?",
 
 

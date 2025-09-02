@@ -62,6 +62,7 @@
 
   "gUpdates": "Mises à jour disponibles",
 
+  "gEnterURL": "Entrer l'URL",
   "gValidURL": "Veuillez saisir une URL valide",
 
   "g404Wonder": "Tous ceux qui errent ne sont pas perdus.",
@@ -159,22 +160,23 @@
 
   "dsPageTitle": "Paramètres de conception",
 
-  "dsBackground": "Arrière-plan",
-  "dsImage": "image",
+  "dsAnimDuration": "Durée de l'animation (ms)",
 
-  "dsButtonHint": "Mettre à jour l'image {title}",
+  "dsButtonBackground": "Opacité de l'arrière-plan du bouton",
+  "dsButtonOutline": "Opacité du contour du bouton",
+
+  "dsBackgroundImg": "Arrière-plan de l'image",
+  "dsImgSettingHint": "Mettre à jour l'image {title}",
   "dsFromFile": "Depuis un fichier",
   "dsFromCamera": "Depuis la caméra",
   "dsFromNetwork": "Depuis une URL",
   "dsResetIt": "Réinitialiser",
   "dsClearIt": "Effacer",
-
-  "dsEnterURL": "Entrer l'URL",
-  "dsGetFailed": "Impossible de récupérer l'image",
-  "dsSetFailed": "Échec de la mise à jour de l'image",
-  "dsPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
-
   "dsUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
+
+  "dsImgGetFailed": "Impossible de récupérer l'image",
+  "dsImgSetFailed": "Échec de la mise à jour de l'image",
+  "dsImgPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
   
   "dsUseFull": "Utiliser l'image complète ?",
   "dsFit": "Comment devrait-il s'adapter ?",
@@ -192,7 +194,9 @@
   "dsUndo": "Annuler",
   "dsRedo": "Rétablir",
 
-  "dsResetAll": "Réinitialiser toutes les images du thème {themeType} ?",
+  "dsGlassButtons": "Boutons en verre",
+
+  "dsResetAll": "Réinitialiser tous les paramètres de conception globaux et du thème {themeType} ?",
   "dsAndColors": "Et le schéma de couleurs {themeType} ?",
 
 

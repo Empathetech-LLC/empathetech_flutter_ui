@@ -114,6 +114,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
   late Color buttonOutline = outline.withValues(alpha: outlineOpacity);
 
   int redraw = 0;
+  bool resetColors = false;
 
   // Define custom functions //
 
@@ -165,12 +166,14 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return EzScrollView(
       children: <Widget>[
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
         // Animation duration
-        const Text('Animation duration (ms)'),
+        EzText(l10n.dsAnimDuration, style: textTheme.titleLarge),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
           child: Slider(
@@ -198,7 +201,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         EzDivider(height: margin * 2),
         EzText(
           l10n.gEditingTheme(themeProfile),
-          style: Theme.of(context).textTheme.labelLarge,
+          style: textTheme.labelLarge,
           textAlign: TextAlign.center,
         ),
         separator,
@@ -215,7 +218,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             padding: EdgeInsets.all(margin),
             child: Column(
               children: <Widget>[
-                const Text('Button background opacity'),
+                Text(l10n.dsButtonBackground, style: textTheme.titleLarge),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
@@ -245,7 +248,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 spacer,
 
                 // Button outline
-                const Text('Button outline opacity'),
+                Text(l10n.dsButtonOutline, style: textTheme.titleLarge),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
                   child: Slider(
@@ -297,7 +300,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     ),
                     configKey: darkBackgroundImageKey,
                     credits: widget.darkBackgroundCredits,
-                    label: l10n.dsBackground,
+                    label: l10n.dsBackgroundImg,
                     updateTheme: Brightness.dark,
                   )
                 : EzImageSetting(
@@ -310,7 +313,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                     ),
                     configKey: lightBackgroundImageKey,
                     credits: widget.lightBackgroundCredits,
-                    label: l10n.dsBackground,
+                    label: l10n.dsBackgroundImg,
                     updateTheme: Brightness.light,
                   ),
           ),
@@ -319,7 +322,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         if (widget.includeGlass && strictMobile) ...<Widget>[
           spacer,
           EzSwitchPair(
-            text: 'Glass buttons',
+            text: l10n.dsGlassButtons,
             valueKey: isDark ? darkGlassKey : lightGlassKey,
           ), // TODO: enabling this greys out above (not remove, just disable)
         ],
@@ -330,20 +333,23 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Reset button
         widget.resetSpacer,
-        isDark
-            ? EzResetButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonBackground,
-                  shadowColor: buttonShadow,
-                  side: BorderSide(color: buttonContainer),
-                ),
-                dialogTitle: l10n.dsResetAll(darkString), // TODO: update entry
-                onConfirm: () async {
+        EzResetButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: buttonBackground,
+            shadowColor: buttonShadow,
+            side: BorderSide(color: buttonContainer),
+          ), // TODO: Add color scheme reset option (scratch ez elevated button)
+          dialogTitle: l10n.dsResetAll(darkString),
+          onConfirm: isDark
+              ? () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
                   await EzConfig.remove(hideScrollKey);
                   await EzConfig.removeKeys(darkDesignKeys.keys.toSet());
                   await EzConfig.remove(darkColorSchemeImageKey);
 
+                  if (resetColors) {
+                    await EzConfig.removeKeys(darkColorKeys.keys.toSet());
+                  }
                   if (widget.darkThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.darkThemeResetKeys!);
                   }
@@ -355,21 +361,16 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   setColors();
 
                   setState(() => redraw = Random().nextInt(rMax));
-                },
-              )
-            : EzResetButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonBackground,
-                  shadowColor: buttonShadow,
-                  side: BorderSide(color: buttonContainer),
-                ),
-                dialogTitle: l10n.dsResetAll(lightString),
-                onConfirm: () async {
+                }
+              : () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
                   await EzConfig.remove(hideScrollKey);
                   await EzConfig.removeKeys(lightDesignKeys.keys.toSet());
                   await EzConfig.remove(lightColorSchemeImageKey);
 
+                  if (resetColors) {
+                    await EzConfig.removeKeys(lightColorKeys.keys.toSet());
+                  }
                   if (widget.lightThemeResetKeys != null) {
                     await EzConfig.removeKeys(widget.lightThemeResetKeys!);
                   }
@@ -382,7 +383,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
                   setState(() => redraw = Random().nextInt(rMax));
                 },
-              ),
+        ),
         separator,
       ],
     );

@@ -62,6 +62,7 @@
 
   "gUpdates": "Actualizaciones disponibles",
   
+  "gEnterURL": "Inserta el link",
   "gValidURL": "Por favor, introduzca una URL válida",
 
   "g404Wonder": "No todos los que deambulan están perdidos.",
@@ -159,22 +160,23 @@
 
   "dsPageTitle": "Configuración de diseño",
 
-  "dsBackground": "Fondo",
-  "dsImage": "imagen",
+  "dsAnimDuration": "Duración de la animación (ms)",
 
-  "dsButtonHint": "Actualizar la imagen {title}",
+  "dsButtonBackground": "Opacidad del fondo del botón",
+  "dsButtonOutline": "Opacidad del contorno del botón",
+
+  "dsBackgroundImg": "Imagen de fondo",
+  "dsImgSettingHint": "Actualizar la imagen {title}",
   "dsFromFile": "Usando un archivo",
   "dsFromCamera": "Usando la cámara",
   "dsFromNetwork": "Usando un link",
   "dsResetIt": "Restablecer",
   "dsClearIt": "Borrar",
-
-  "dsEnterURL": "Inserta el link",
-  "dsGetFailed": "Error al intentar obtener la imagen",
-  "dsSetFailed": "Error al intentar actualizar la imagen",
-  "dsPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
-
   "dsUseForColors": "Actualiza los colores de la app usando esta imagen",
+
+  "dsImgGetFailed": "Error al intentar obtener la imagen",
+  "dsImgSetFailed": "Error al intentar actualizar la imagen",
+  "dsImgPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
 
   "dsUseFull": "¿Usar la imagen completa?",
   "dsFit": "¿Cómo debe quedar?",
@@ -192,7 +194,9 @@
   "dsUndo": "Deshacer",
   "dsRedo": "Rehacer",
 
-  "dsResetAll": "¿Restablecer todas las imágenes del tema {themeType}?",
+  "dsGlassButtons": "Botones de cristal",
+
+  "dsResetAll": "¿Restablecer todas las configuraciones de diseño globales y de {themeType}?",
   "dsAndColors": "¿Y el esquema de colores {themeType}?",
 
 

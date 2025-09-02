@@ -150,6 +150,9 @@ class EFUILangEn extends EFUILang {
   String get gUpdates => 'Updates available';
 
   @override
+  String get gEnterURL => 'Enter URL';
+
+  @override
   String get gValidURL => 'Please enter a valid URL';
 
   @override
@@ -380,13 +383,19 @@ class EFUILangEn extends EFUILang {
   String get dsPageTitle => 'Design settings';
 
   @override
-  String get dsBackground => 'Background';
+  String get dsAnimDuration => 'Animation duration (ms)';
 
   @override
-  String get dsImage => 'image';
+  String get dsButtonBackground => 'Button background opacity';
 
   @override
-  String dsButtonHint(Object title) {
+  String get dsButtonOutline => 'Button outline opacity';
+
+  @override
+  String get dsBackgroundImg => 'Background image';
+
+  @override
+  String dsImgSettingHint(Object title) {
     return 'Update the $title image';
   }
 
@@ -406,20 +415,17 @@ class EFUILangEn extends EFUILang {
   String get dsClearIt => 'Clear it';
 
   @override
-  String get dsEnterURL => 'Enter URL';
-
-  @override
-  String get dsGetFailed => 'Failed to retrieve image';
-
-  @override
-  String get dsSetFailed => 'Failed to update image';
-
-  @override
-  String get dsPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
   String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsImgGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsImgSetFailed => 'Failed to update image';
+
+  @override
+  String get dsImgPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
 
   @override
   String get dsUseFull => 'Use full image?';
@@ -467,8 +473,11 @@ class EFUILangEn extends EFUILang {
   String get dsRedo => 'Redo';
 
   @override
+  String get dsGlassButtons => 'Glass buttons';
+
+  @override
   String dsResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
+    return 'Reset all global and $themeType theme design settings?';
   }
 
   @override
@@ -744,6 +753,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gUpdates => 'Updates available';
 
   @override
+  String get gEnterURL => 'Enter URL';
+
+  @override
   String get gValidURL => 'Please enter a valid URL';
 
   @override
@@ -974,13 +986,19 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsPageTitle => 'Design settings';
 
   @override
-  String get dsBackground => 'Background';
+  String get dsAnimDuration => 'Animation duration (ms)';
 
   @override
-  String get dsImage => 'image';
+  String get dsButtonBackground => 'Button background opacity';
 
   @override
-  String dsButtonHint(Object title) {
+  String get dsButtonOutline => 'Button outline opacity';
+
+  @override
+  String get dsBackgroundImg => 'Background image';
+
+  @override
+  String dsImgSettingHint(Object title) {
     return 'Update the $title image';
   }
 
@@ -1000,20 +1018,17 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsClearIt => 'Clear it';
 
   @override
-  String get dsEnterURL => 'Enter URL';
-
-  @override
-  String get dsGetFailed => 'Failed to retrieve image';
-
-  @override
-  String get dsSetFailed => 'Failed to update image';
-
-  @override
-  String get dsPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
   String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsImgGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsImgSetFailed => 'Failed to update image';
+
+  @override
+  String get dsImgPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
 
   @override
   String get dsUseFull => 'Use full image?';
@@ -1061,8 +1076,11 @@ class EFUILangEnUs extends EFUILangEn {
   String get dsRedo => 'Redo';
 
   @override
+  String get dsGlassButtons => 'Glass buttons';
+
+  @override
   String dsResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
+    return 'Reset all global and $themeType theme design settings?';
   }
 
   @override

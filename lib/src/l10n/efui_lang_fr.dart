@@ -151,6 +151,9 @@ class EFUILangFr extends EFUILang {
   String get gUpdates => 'Mises à jour disponibles';
 
   @override
+  String get gEnterURL => 'Entrer l\'URL';
+
+  @override
   String get gValidURL => 'Veuillez saisir une URL valide';
 
   @override
@@ -382,13 +385,19 @@ class EFUILangFr extends EFUILang {
   String get dsPageTitle => 'Paramètres de conception';
 
   @override
-  String get dsBackground => 'Arrière-plan';
+  String get dsAnimDuration => 'Durée de l\'animation (ms)';
 
   @override
-  String get dsImage => 'image';
+  String get dsButtonBackground => 'Opacité de l\'arrière-plan du bouton';
 
   @override
-  String dsButtonHint(Object title) {
+  String get dsButtonOutline => 'Opacité du contour du bouton';
+
+  @override
+  String get dsBackgroundImg => 'Arrière-plan de l\'image';
+
+  @override
+  String dsImgSettingHint(Object title) {
     return 'Mettre à jour l\'image $title';
   }
 
@@ -408,21 +417,18 @@ class EFUILangFr extends EFUILang {
   String get dsClearIt => 'Effacer';
 
   @override
-  String get dsEnterURL => 'Entrer l\'URL';
-
-  @override
-  String get dsGetFailed => 'Impossible de récupérer l\'image';
-
-  @override
-  String get dsSetFailed => 'Échec de la mise à jour de l\'image';
-
-  @override
-  String get dsPermission =>
-      'Certains sites ne permettent pas à d\'autres d\'accéder à leurs images.\nEssayez une image provenant d\'un autre hébergeur.';
-
-  @override
   String get dsUseForColors =>
       'Mettre à jour les couleurs de l\'application à l\'aide de cette image';
+
+  @override
+  String get dsImgGetFailed => 'Impossible de récupérer l\'image';
+
+  @override
+  String get dsImgSetFailed => 'Échec de la mise à jour de l\'image';
+
+  @override
+  String get dsImgPermission =>
+      'Certains sites ne permettent pas à d\'autres d\'accéder à leurs images.\nEssayez une image provenant d\'un autre hébergeur.';
 
   @override
   String get dsUseFull => 'Utiliser l\'image complète ?';
@@ -470,8 +476,11 @@ class EFUILangFr extends EFUILang {
   String get dsRedo => 'Rétablir';
 
   @override
+  String get dsGlassButtons => 'Boutons en verre';
+
+  @override
   String dsResetAll(Object themeType) {
-    return 'Réinitialiser toutes les images du thème $themeType ?';
+    return 'Réinitialiser tous les paramètres de conception globaux et du thème $themeType ?';
   }
 
   @override

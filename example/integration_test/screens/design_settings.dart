@@ -52,7 +52,7 @@ void testSuite({
       await testImageSetting(
         tester,
         finder: find.byType(EzImageSetting),
-        type: l10n.dsBackground,
+        type: l10n.dsBackgroundImg,
         updateCS: true,
         l10n: l10n,
         networkImageURLs: imageURLs,

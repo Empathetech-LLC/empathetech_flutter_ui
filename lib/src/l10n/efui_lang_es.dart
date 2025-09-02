@@ -151,6 +151,9 @@ class EFUILangEs extends EFUILang {
   String get gUpdates => 'Actualizaciones disponibles';
 
   @override
+  String get gEnterURL => 'Inserta el link';
+
+  @override
   String get gValidURL => 'Por favor, introduzca una URL válida';
 
   @override
@@ -382,13 +385,19 @@ class EFUILangEs extends EFUILang {
   String get dsPageTitle => 'Configuración de diseño';
 
   @override
-  String get dsBackground => 'Fondo';
+  String get dsAnimDuration => 'Duración de la animación (ms)';
 
   @override
-  String get dsImage => 'imagen';
+  String get dsButtonBackground => 'Opacidad del fondo del botón';
 
   @override
-  String dsButtonHint(Object title) {
+  String get dsButtonOutline => 'Opacidad del contorno del botón';
+
+  @override
+  String get dsBackgroundImg => 'Imagen de fondo';
+
+  @override
+  String dsImgSettingHint(Object title) {
     return 'Actualizar la imagen $title';
   }
 
@@ -408,21 +417,18 @@ class EFUILangEs extends EFUILang {
   String get dsClearIt => 'Borrar';
 
   @override
-  String get dsEnterURL => 'Inserta el link';
-
-  @override
-  String get dsGetFailed => 'Error al intentar obtener la imagen';
-
-  @override
-  String get dsSetFailed => 'Error al intentar actualizar la imagen';
-
-  @override
-  String get dsPermission =>
-      'Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.';
-
-  @override
   String get dsUseForColors =>
       'Actualiza los colores de la app usando esta imagen';
+
+  @override
+  String get dsImgGetFailed => 'Error al intentar obtener la imagen';
+
+  @override
+  String get dsImgSetFailed => 'Error al intentar actualizar la imagen';
+
+  @override
+  String get dsImgPermission =>
+      'Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.';
 
   @override
   String get dsUseFull => '¿Usar la imagen completa?';
@@ -470,8 +476,11 @@ class EFUILangEs extends EFUILang {
   String get dsRedo => 'Rehacer';
 
   @override
+  String get dsGlassButtons => 'Botones de cristal';
+
+  @override
   String dsResetAll(Object themeType) {
-    return '¿Restablecer todas las imágenes del tema $themeType?';
+    return '¿Restablecer todas las configuraciones de diseño globales y de $themeType?';
   }
 
   @override
