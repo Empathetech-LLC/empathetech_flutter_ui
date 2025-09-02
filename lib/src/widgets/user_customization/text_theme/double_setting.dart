@@ -106,14 +106,6 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final String oKey = isDarkTheme(context)
-        ? darkTextBackgroundOpacityKey
-        : lightTextBackgroundOpacityKey;
-    final double fieldOpacity = EzConfig.get(oKey);
-
-    final Color fieldColor =
-        colorScheme.surface.withValues(alpha: fieldOpacity);
-
     // Return the build //
 
     return Tooltip(
@@ -159,10 +151,7 @@ class _FontDoubleSettingState extends State<EzFontDoubleSetting> {
                   maxWidth: formFieldWidth,
                   maxHeight: formFieldHeight,
                 ),
-                decoration: BoxDecoration(
-                  color: fieldColor,
-                  borderRadius: ezRoundEdge,
-                ),
+                decoration: const BoxDecoration(borderRadius: ezRoundEdge),
                 child: TextFormField(
                   controller: controller,
                   style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
