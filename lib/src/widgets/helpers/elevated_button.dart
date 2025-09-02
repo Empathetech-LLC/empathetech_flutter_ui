@@ -234,12 +234,12 @@ class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
         ?.copyWith(decorationColor: decorationColor);
 
     final double margin =
-        ezTextSize('\t', context: context, style: textStyle).width;
+        ezTextSize(' ', context: context, style: textStyle).width;
 
     final EdgeInsets labelPadding = widget.labelPadding
         ? (isLefty
-            ? EdgeInsets.only(right: margin)
-            : EdgeInsets.only(left: margin))
+            ? EdgeInsets.only(left: margin)
+            : EdgeInsets.only(right: margin))
         : EdgeInsets.zero;
 
     // Define custom functions //
