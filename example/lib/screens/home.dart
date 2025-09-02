@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final EzMargin margin = EzMargin();
   late final EzSpacer rowMargin = EzMargin(vertical: false);
 
+  final bool isLefty = EzConfig.get(isLeftyKey);
+
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
@@ -346,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   EzSwitchPair(
                     key: ValueKey<bool>(exampleDomain),
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: exampleDomain
+                    mainAxisAlignment: (exampleDomain || isLefty)
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     text: el10n.gNA,
