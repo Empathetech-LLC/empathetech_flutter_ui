@@ -273,10 +273,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.camera,
             );
 
-            if (modalContext.mounted) {
-              setState(() => fromLocal = true);
-              Navigator.of(modalContext).pop(picked);
-            }
+            fromLocal = true;
+            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).photoCamera),
           label: l10n.dsFromCamera,
@@ -296,10 +294,8 @@ class _ImageSettingState extends State<EzImageSetting> {
               source: ImageSource.gallery,
             );
 
-            if (modalContext.mounted) {
-              setState(() => fromLocal = true);
-              Navigator.of(modalContext).pop(picked);
-            }
+            fromLocal = true;
+            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
           },
           icon: EzIcon(PlatformIcons(context).folder),
           label: l10n.dsFromFile,
@@ -505,7 +501,6 @@ class _ImageSettingState extends State<EzImageSetting> {
                 groupValue: selectedFit,
                 onChanged: (BoxFit? value) {
                   selectedFit = value;
-                  setState(() {});
                   fitState(() {});
                 },
                 child: EzScrollView(
@@ -648,7 +643,6 @@ class _ImageSettingState extends State<EzImageSetting> {
         GestureDetector(
           onTap: () {
             selectedFit = fit;
-            setState(() {});
             modalState(() {});
           },
           child: Semantics(
