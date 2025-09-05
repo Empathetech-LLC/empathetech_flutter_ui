@@ -33,7 +33,6 @@ class EzToolTipper extends StatelessWidget {
 
     return EzTextBackground(
       Semantics(
-        role: SemanticsRole.tooltip,
         label: help,
         button: true,
         onTap: () async {
