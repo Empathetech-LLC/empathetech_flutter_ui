@@ -195,7 +195,7 @@ class _ImageSettingState extends State<EzImageSetting> {
             break;
           case const (String):
             newPath = result;
-            setState(() => selectedFit = BoxFit.contain);
+            selectedFit = BoxFit.contain;
           default:
             return;
         }
