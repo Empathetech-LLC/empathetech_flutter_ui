@@ -33,7 +33,7 @@ class EzImageEditor extends StatefulWidget {
   final InitCropRectType initCropRectType;
 
   /// Allows the user to crop/zoom/rotate the image
-  /// Has it's own [Scaffold], so it can (should) be used as a standalone screen
+  /// Intended to be used in a full-screen modal
   const EzImageEditor(
     this.imagePath, {
     super.key,
@@ -146,253 +146,251 @@ class _EzImageEditorState extends State<EzImageEditor> {
       ),
     );
 
-    return Scaffold(
-      body: EzScreen(
-        Column(children: <Widget>[
-          // Preview
-          Expanded(
-            child: ExtendedImage.file(
-              File(widget.imagePath),
-              fit: BoxFit.contain,
-              mode: ExtendedImageMode.editor,
-              extendedImageEditorKey: editorKey,
-              enableLoadState: true,
-              cacheRawData: true,
-              initEditorConfigHandler: (_) => EditorConfig(
-                cropAspectRatio: widget.cropAspectRatio ?? liveAspectRatio(),
-                initialCropAspectRatio:
-                    widget.initialCropAspectRatio ?? liveAspectRatio(),
-                initCropRectType: widget.initCropRectType,
-                cropRectPadding: EdgeInsets.only(
-                  top: spacing,
-                  left: spacing,
-                  right: spacing,
-                ),
-                hitTestSize: max(padding, kMinInteractiveDimension),
-                controller: _editorController,
+    return EzScreen(
+      Column(children: <Widget>[
+        // Preview
+        Expanded(
+          child: ExtendedImage.file(
+            File(widget.imagePath),
+            fit: BoxFit.contain,
+            mode: ExtendedImageMode.editor,
+            extendedImageEditorKey: editorKey,
+            enableLoadState: true,
+            cacheRawData: true,
+            initEditorConfigHandler: (_) => EditorConfig(
+              cropAspectRatio: widget.cropAspectRatio ?? liveAspectRatio(),
+              initialCropAspectRatio:
+                  widget.initialCropAspectRatio ?? liveAspectRatio(),
+              initCropRectType: widget.initCropRectType,
+              cropRectPadding: EdgeInsets.only(
+                top: spacing,
+                left: spacing,
+                right: spacing,
               ),
+              hitTestSize: max(padding, kMinInteractiveDimension),
+              controller: _editorController,
             ),
           ),
+        ),
 
-          // Key && controls
-          Padding(
-            padding: EdgeInsets.all(spacing),
-            child: EzScrollView(
-              mainAxisSize: MainAxisSize.min,
-              scrollDirection: Axis.horizontal,
-              startCentered: true,
-              children: <Widget>[
-                // Drag
-                keyIcon(
-                  icon: Icons.touch_app,
-                  color: colorScheme.outline,
-                  name: l10n.dsDrag,
-                  tooltip: l10n.dsDragHint,
-                ),
-                spacer,
+        // Key && controls
+        Padding(
+          padding: EdgeInsets.all(spacing),
+          child: EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            scrollDirection: Axis.horizontal,
+            startCentered: true,
+            children: <Widget>[
+              // Drag
+              keyIcon(
+                icon: Icons.touch_app,
+                color: colorScheme.outline,
+                name: l10n.dsDrag,
+                tooltip: l10n.dsDragHint,
+              ),
+              spacer,
 
-                // Swipe
-                keyIcon(
-                  icon: Icons.swipe,
-                  color: colorScheme.outline,
-                  name: l10n.dsSwipe,
-                  tooltip: l10n.dsSwipeHint,
-                ),
-                spacer,
+              // Swipe
+              keyIcon(
+                icon: Icons.swipe,
+                color: colorScheme.outline,
+                name: l10n.dsSwipe,
+                tooltip: l10n.dsSwipeHint,
+              ),
+              spacer,
 
-                // Scroll
-                keyIcon(
-                  icon: Icons.mouse,
-                  color: colorScheme.outline,
-                  name: l10n.dsScroll,
-                  tooltip: l10n.dsScrollHint,
-                ),
-                spacer,
+              // Scroll
+              keyIcon(
+                icon: Icons.mouse,
+                color: colorScheme.outline,
+                name: l10n.dsScroll,
+                tooltip: l10n.dsScrollHint,
+              ),
+              spacer,
 
-                // Pinch
-                keyIcon(
-                  icon: Icons.pinch,
-                  color: colorScheme.outline,
-                  name: l10n.dsPinch,
-                  tooltip: l10n.dsPinchHint,
-                ),
-                divider,
+              // Pinch
+              keyIcon(
+                icon: Icons.pinch,
+                color: colorScheme.outline,
+                name: l10n.dsPinch,
+                tooltip: l10n.dsPinchHint,
+              ),
+              divider,
 
-                // Rotate left
-                EzIconButton(
-                  tooltip: l10n.dsRotateLeft,
-                  enabled: !processing,
-                  onPressed: () {
-                    _editorController.rotate(
-                      degree: -90.0,
-                      rotateCropRect: false,
-                      animation: rotateDuration > 0 ? true : false,
-                      duration: Duration(milliseconds: rotateDuration),
-                    );
-                    setState(() {});
-                  },
-                  icon: EzIcon(Icons.rotate_left),
-                ),
-                spacer,
+              // Rotate left
+              EzIconButton(
+                tooltip: l10n.dsRotateLeft,
+                enabled: !processing,
+                onPressed: () {
+                  _editorController.rotate(
+                    degree: -90.0,
+                    rotateCropRect: false,
+                    animation: rotateDuration > 0 ? true : false,
+                    duration: Duration(milliseconds: rotateDuration),
+                  );
+                  setState(() {});
+                },
+                icon: EzIcon(Icons.rotate_left),
+              ),
+              spacer,
 
-                // Rotate right
-                EzIconButton(
-                  tooltip: l10n.dsRotateRight,
-                  enabled: !processing,
-                  onPressed: () {
-                    _editorController.rotate(
-                      degree: 90.0,
-                      rotateCropRect: false,
-                      animation: rotateDuration > 0 ? true : false,
-                      duration: Duration(milliseconds: rotateDuration),
-                    );
-                    setState(() {});
-                  },
-                  icon: EzIcon(Icons.rotate_right),
-                ),
-                spacer,
+              // Rotate right
+              EzIconButton(
+                tooltip: l10n.dsRotateRight,
+                enabled: !processing,
+                onPressed: () {
+                  _editorController.rotate(
+                    degree: 90.0,
+                    rotateCropRect: false,
+                    animation: rotateDuration > 0 ? true : false,
+                    duration: Duration(milliseconds: rotateDuration),
+                  );
+                  setState(() {});
+                },
+                icon: EzIcon(Icons.rotate_right),
+              ),
+              spacer,
 
-                // Undo
-                EzIconButton(
-                  tooltip: l10n.dsUndo,
-                  enabled: !processing && _editorController.canUndo,
-                  onPressed: () {
-                    _editorController.undo();
-                    setState(() {});
-                  },
-                  icon: EzIcon(Icons.undo),
-                ),
-                spacer,
+              // Undo
+              EzIconButton(
+                tooltip: l10n.dsUndo,
+                enabled: !processing && _editorController.canUndo,
+                onPressed: () {
+                  _editorController.undo();
+                  setState(() {});
+                },
+                icon: EzIcon(Icons.undo),
+              ),
+              spacer,
 
-                // Redo
-                EzIconButton(
-                  tooltip: l10n.dsRedo,
-                  enabled: !processing && _editorController.canRedo,
-                  onPressed: () {
-                    _editorController.redo();
-                    setState(() {});
-                  },
-                  icon: EzIcon(Icons.redo),
-                ),
-                spacer,
+              // Redo
+              EzIconButton(
+                tooltip: l10n.dsRedo,
+                enabled: !processing && _editorController.canRedo,
+                onPressed: () {
+                  _editorController.redo();
+                  setState(() {});
+                },
+                icon: EzIcon(Icons.redo),
+              ),
+              spacer,
 
-                // Reset
-                EzIconButton(
-                  tooltip: l10n.gReset,
-                  enabled: !processing,
-                  onPressed: () {
-                    _editorController.reset();
-                    setState(() {});
-                  },
-                  icon: EzIcon(PlatformIcons(context).refresh),
-                ),
-                divider,
+              // Reset
+              EzIconButton(
+                tooltip: l10n.gReset,
+                enabled: !processing,
+                onPressed: () {
+                  _editorController.reset();
+                  setState(() {});
+                },
+                icon: EzIcon(PlatformIcons(context).refresh),
+              ),
+              divider,
 
-                // Done
-                EzIconButton(
-                  tooltip: l10n.gApply,
-                  onPressed: () async {
-                    // Check exit cases
-                    if (processing) return;
+              // Done
+              EzIconButton(
+                tooltip: l10n.gApply,
+                onPressed: () async {
+                  // Check exit cases
+                  if (processing) return;
 
-                    final ExtendedImageEditorState? state =
-                        editorKey.currentState;
-                    if (state == null) return;
+                  final ExtendedImageEditorState? state =
+                      editorKey.currentState;
+                  if (state == null) return;
 
-                    setState(() => processing = true);
+                  setState(() => processing = true);
 
-                    try {
-                      // Get image data
-                      final Uint8List imgData = state.rawImageData;
-                      img.Image? src = img.decodeImage(imgData);
+                  try {
+                    // Get image data
+                    final Uint8List imgData = state.rawImageData;
+                    img.Image? src = img.decodeImage(imgData);
 
-                      if (src == null) {
-                        setState(() => processing = false);
-                        return;
-                      }
-
-                      // Get the edits
-                      final EditActionDetails? editAction = state.editAction;
-                      final Rect? cropRect = state.getCropRect();
-
-                      // Apply the edits
-                      if (editAction != null) {
-                        src = img.bakeOrientation(src);
-
-                        if (editAction.hasRotateDegrees) {
-                          src = img.copyRotate(
-                            src,
-                            angle: editAction.rotateDegrees,
-                          );
-                        }
-
-                        if (editAction.needCrop && cropRect != null) {
-                          src = img.copyCrop(
-                            src,
-                            x: cropRect.left.toInt(),
-                            y: cropRect.top.toInt(),
-                            width: cropRect.width.toInt(),
-                            height: cropRect.height.toInt(),
-                          );
-                        }
-                      }
-
-                      // Encode the image
-                      late final Uint8List fileData;
-                      switch (fileExt) {
-                        case 'bmp':
-                          fileData = await compute(img.encodeBmp, src);
-                          break;
-                        case 'gif':
-                          fileData = await compute(img.encodeGif, src);
-                          break;
-                        case 'png':
-                          fileData = await compute(img.encodePng, src);
-                          break;
-                        default:
-                          fileExt = 'jpg';
-                          fileData = await compute(img.encodeJpg, src);
-                          break;
-                      }
-
-                      // Save to a new file
-                      final Directory tempDir = await getTemporaryDirectory();
-                      final String newPath =
-                          '${tempDir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
-                      final File newFile = File(newPath)
-                        ..writeAsBytesSync(fileData);
-
-                      // Return the new file path
+                    if (src == null) {
                       setState(() => processing = false);
-                      if (context.mounted) {
-                        Navigator.pop(context, newFile.path);
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        await ezLogAlert(context, message: e.toString());
-                      }
-                      setState(() => processing = false);
+                      return;
                     }
-                  },
-                  icon: processing
-                      ? const CircularProgressIndicator()
-                      : EzIcon(Icons.check),
-                ),
-                spacer,
 
-                // Cancel
-                EzIconButton(
-                  tooltip: l10n.gCancel,
-                  onPressed: () => Navigator.pop(context, null),
-                  icon: EzIcon(PlatformIcons(context).delete),
-                ),
-              ],
-            ),
-          )
-        ]),
-        margin: EdgeInsets.zero,
-        useImageDecoration: false,
-      ),
+                    // Get the edits
+                    final EditActionDetails? editAction = state.editAction;
+                    final Rect? cropRect = state.getCropRect();
+
+                    // Apply the edits
+                    if (editAction != null) {
+                      src = img.bakeOrientation(src);
+
+                      if (editAction.hasRotateDegrees) {
+                        src = img.copyRotate(
+                          src,
+                          angle: editAction.rotateDegrees,
+                        );
+                      }
+
+                      if (editAction.needCrop && cropRect != null) {
+                        src = img.copyCrop(
+                          src,
+                          x: cropRect.left.toInt(),
+                          y: cropRect.top.toInt(),
+                          width: cropRect.width.toInt(),
+                          height: cropRect.height.toInt(),
+                        );
+                      }
+                    }
+
+                    // Encode the image
+                    late final Uint8List fileData;
+                    switch (fileExt) {
+                      case 'bmp':
+                        fileData = await compute(img.encodeBmp, src);
+                        break;
+                      case 'gif':
+                        fileData = await compute(img.encodeGif, src);
+                        break;
+                      case 'png':
+                        fileData = await compute(img.encodePng, src);
+                        break;
+                      default:
+                        fileExt = 'jpg';
+                        fileData = await compute(img.encodeJpg, src);
+                        break;
+                    }
+
+                    // Save to a new file
+                    final Directory tempDir = await getTemporaryDirectory();
+                    final String newPath =
+                        '${tempDir.path}/edited_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
+                    final File newFile = File(newPath)
+                      ..writeAsBytesSync(fileData);
+
+                    // Return the new file path
+                    setState(() => processing = false);
+                    if (context.mounted) {
+                      Navigator.pop(context, newFile.path);
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      await ezLogAlert(context, message: e.toString());
+                    }
+                    setState(() => processing = false);
+                  }
+                },
+                icon: processing
+                    ? const CircularProgressIndicator()
+                    : EzIcon(Icons.check),
+              ),
+              spacer,
+
+              // Cancel
+              EzIconButton(
+                tooltip: l10n.gCancel,
+                onPressed: () => Navigator.pop(context, null),
+                icon: EzIcon(PlatformIcons(context).delete),
+              ),
+            ],
+          ),
+        )
+      ]),
+      margin: EdgeInsets.zero,
+      useImageDecoration: false,
     );
   }
 
