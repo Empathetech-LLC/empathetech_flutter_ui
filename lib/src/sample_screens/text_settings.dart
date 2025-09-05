@@ -1266,10 +1266,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: widget.displayProvider.value,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(widget.displayProvider.id),
-                onTap: () {
-                  editing = EzTextSettingType.display;
-                  setState(() {});
-                },
+                onTap: () =>
+                    setState(() => editing = EzTextSettingType.display),
                 hint: l10n.tsLinkHint(display),
               ),
               EzPlainText(text: l10n.tsDisplayP2),
@@ -1294,10 +1292,8 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: widget.headlineProvider.value,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(widget.headlineProvider.id),
-                onTap: () {
-                  editing = EzTextSettingType.headline;
-                  setState(() {});
-                },
+                onTap: () =>
+                    setState(() => editing = EzTextSettingType.headline),
                 hint: l10n.tsLinkHint(headline),
               ),
               EzPlainText(text: l10n.tsHeadlineP2),
@@ -1322,10 +1318,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: widget.titleProvider.value,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(widget.titleProvider.id),
-                onTap: () {
-                  editing = EzTextSettingType.title;
-                  setState(() {});
-                },
+                onTap: () => setState(() => editing = EzTextSettingType.title),
                 hint: l10n.tsLinkHint(title),
               ),
             ],
@@ -1349,10 +1342,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: widget.bodyProvider.value,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(widget.bodyProvider.id),
-                onTap: () {
-                  editing = EzTextSettingType.body;
-                  setState(() {});
-                },
+                onTap: () => setState(() => editing = EzTextSettingType.body),
                 hint: l10n.tsLinkHint(body),
               ),
               EzPlainText(text: l10n.tsBodyP2),
@@ -1377,10 +1367,7 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
                 style: widget.labelProvider.value,
                 textAlign: TextAlign.center,
                 key: ValueKey<int>(widget.labelProvider.id),
-                onTap: () {
-                  editing = EzTextSettingType.label;
-                  setState(() {});
-                },
+                onTap: () => setState(() => editing = EzTextSettingType.label),
                 hint: l10n.tsLinkHint(label),
               ),
               EzPlainText(text: l10n.tsLabelP2),
