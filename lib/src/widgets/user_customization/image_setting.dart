@@ -474,7 +474,7 @@ class _ImageSettingState extends State<EzImageSetting> {
         minWidth: double.infinity,
         minHeight: double.infinity,
       ),
-      isScrollControlled: false,
+      isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
       showDragHandle: false,
