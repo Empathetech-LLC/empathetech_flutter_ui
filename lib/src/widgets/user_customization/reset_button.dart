@@ -60,10 +60,26 @@ class EzResetButton extends StatelessWidget {
 
     final EFUILang l10n = ezL10n(context);
 
+    // Gather the dynamic theme data //
+
+    late final bool isDark = isDarkTheme(context);
+    late final bool useCrucial =
+        (EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
+                as double) <
+            0.50;
+    late final Color crucialSurface =
+        Theme.of(context).colorScheme.surface.withValues(alpha: 0.50);
+
     // Return the build //
 
     return EzElevatedIconButton(
-      style: style,
+      // EzResetButton can at most be 50% transparent
+      // If a user accidentally borks their UI, they should be able to see the reset button
+      style: (style == null)
+          ? useCrucial
+              ? ElevatedButton.styleFrom(backgroundColor: crucialSurface)
+              : null
+          : style,
       onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
