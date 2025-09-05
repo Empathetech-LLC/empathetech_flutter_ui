@@ -6,6 +6,7 @@
 import '../../../empathetech_flutter_ui.dart';
 
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -322,29 +323,51 @@ class _ImageSettingState extends State<EzImageSetting> {
               if (validateUrl(url) != null) return;
 
               // Verify that the image is accessible
-              late final NetworkImage image;
               try {
-                image = NetworkImage(url);
-              } catch (e) {
-                await ezLogAlert(
-                  context,
-                  title: l10n.dsImgGetFailed,
-                  message: '${e.toString()}\n\n${l10n.dsImgPermission}',
+                final Completer<void> completer = Completer<void>();
+                final ImageStream stream =
+                    NetworkImage(url).resolve(const ImageConfiguration());
+
+                late ImageStreamListener listener;
+                listener = ImageStreamListener(
+                  // onImage (onSuccess)
+                  (_, __) {
+                    completer.complete();
+                    stream.removeListener(listener);
+                  },
+                  onError: (Object error, StackTrace? stackTrace) {
+                    completer.completeError(error, stackTrace);
+                    stream.removeListener(listener);
+                  },
                 );
 
+                stream.addListener(listener);
+                await completer.future;
+              } catch (e) {
                 if (dialogContext.mounted) {
                   Navigator.of(dialogContext).pop(null);
+                }
+                if (modalContext.mounted) {
+                  Navigator.of(modalContext).pop(null);
+                }
+
+                if (mounted) {
+                  await ezLogAlert(
+                    context,
+                    title: l10n.dsImgGetFailed,
+                    message: '${e.toString()}\n\n${l10n.dsImgPermission}',
+                  );
                 }
                 return;
               }
 
               // Pop dialogs
               if (dialogContext.mounted) {
-                Navigator.of(dialogContext).pop(image.url);
+                Navigator.of(dialogContext).pop(url);
               }
 
               if (modalContext.mounted) {
-                Navigator.of(modalContext).pop(image.url);
+                Navigator.of(modalContext).pop(url);
               }
             }
 
