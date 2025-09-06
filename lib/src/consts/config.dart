@@ -182,6 +182,9 @@ const double defaultTextOpacity = 0.0;
 /// 20.0
 const double defaultIconSize = 20.0;
 
+/// 2.0
+const double iconDelta = 2.0;
+
 /// 1.5
 const double defaultFontHeight = 1.5;
 
