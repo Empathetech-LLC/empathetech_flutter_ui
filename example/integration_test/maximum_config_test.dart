@@ -19,12 +19,12 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(empathetechMaxConfig);
+  SharedPreferences.setMockInitialValues(empathMaxConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     preferences: prefs,
-    defaults: empathetechMaxConfig,
+    defaults: empathMaxConfig,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );

@@ -470,7 +470,7 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 /// For open source consumers: this is Empathetech LLC's config
 /// You have permission to modify this code
 /// You do not have permission to use this config in your app
-const Map<String, Object> mobileEmpathConfig = <String, Object>{
+const Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout
@@ -483,7 +483,7 @@ const Map<String, Object> mobileEmpathConfig = <String, Object>{
 /// For open source consumers: this is Empathetech LLC's config
 /// You have permission to modify this code
 /// You do not have permission to use this config in your app
-const Map<String, Object> desktopEmpathConfig = <String, Object>{
+const Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout
@@ -494,8 +494,16 @@ const Map<String, Object> desktopEmpathConfig = <String, Object>{
 
 /// [EzConfig.defaults] set to all recommended max values
 /// For open source consumers: you may use this in testing, but not in production
-final Map<String, Object> empathetechMaxConfig = <String, Object>{
+final Map<String, Object> empathMaxConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout settings //
+
+  marginKey: maxMargin,
+  paddingKey: maxPadding,
+  spacingKey: maxSpacing,
+
+  hideScrollKey: false,
 
   // Text settings //
 
@@ -530,18 +538,20 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
   labelWordSpacingKey: maxWordSpacing,
 
   iconSizeKey: maxIconSize,
-
-  // Layout settings //
-
-  marginKey: maxMargin,
-  paddingKey: maxPadding,
-  spacingKey: maxSpacing,
 };
 
 /// [EzConfig.defaults] set to all recommended min values
 /// For open source consumers: you may use this in testing, but not in production
-final Map<String, Object> empathetechMinConfig = <String, Object>{
+final Map<String, Object> empathMinConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Layout settings //
+
+  marginKey: minMargin,
+  paddingKey: minPadding,
+  spacingKey: minSpacing,
+
+  hideScrollKey: true,
 
   // Text settings //
 
@@ -576,10 +586,4 @@ final Map<String, Object> empathetechMinConfig = <String, Object>{
   labelWordSpacingKey: minWordSpacing,
 
   iconSizeKey: minIconSize,
-
-  // Layout settings //
-
-  marginKey: minMargin,
-  paddingKey: minPadding,
-  spacingKey: minSpacing,
 };

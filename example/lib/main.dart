@@ -30,7 +30,7 @@ void main() async {
 
   EzConfig.init(
     preferences: prefs,
-    defaults: isMobile() ? mobileEmpathConfig : desktopEmpathConfig,
+    defaults: isMobile() ? empathMobileConfig : empathDesktopConfig,
     fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );

@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final Map<String, Object> testConfig = <String, Object>{
-    ...mobileEmpathConfig,
+    ...empathMobileConfig,
     appLocaleKey: <String>['fr'],
   };
 
