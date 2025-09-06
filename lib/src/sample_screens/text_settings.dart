@@ -348,10 +348,8 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
   // Gather the build data //
 
-  late double currIconSize = EzConfig.get(iconSizeKey);
-  static const double iconDelta = 2.0;
-
-  late double currOpacity = EzConfig.get(widget.opacityKey);
+  late double backOpacity = EzConfig.get(widget.opacityKey);
+  late double iconSize = EzConfig.get(iconSizeKey);
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +361,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
 
     // Return the build //
 
-    Color backgroundColor = surface.withValues(alpha: currOpacity);
+    Color backgroundColor = surface.withValues(alpha: backOpacity);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -386,7 +384,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 titleProvider: widget.titleProvider,
                 bodyProvider: widget.bodyProvider,
                 labelProvider: widget.labelProvider,
-                iconSize: currIconSize,
+                iconSize: iconSize,
               ),
             ),
 
@@ -418,7 +416,7 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   titleProvider: widget.titleProvider,
                   bodyProvider: widget.bodyProvider,
                   labelProvider: widget.labelProvider,
-                  iconSize: currIconSize,
+                  iconSize: iconSize,
                 ),
                 backgroundColor: backgroundColor,
                 borderRadius: ezPillShape,
@@ -498,17 +496,17 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
             child: Slider(
               // Slider values
-              value: currOpacity,
+              value: backOpacity,
               min: minOpacity,
               max: maxOpacity,
               divisions: 20,
-              label: currOpacity.toStringAsFixed(2),
+              label: backOpacity.toStringAsFixed(2),
 
               // Slider functions
               onChanged: (double value) {
                 setState(() {
-                  currOpacity = value;
-                  backgroundColor = surface.withValues(alpha: currOpacity);
+                  backOpacity = value;
+                  backgroundColor = surface.withValues(alpha: backOpacity);
                 });
               },
               onChangeEnd: (double value) async {
@@ -540,22 +538,22 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 // Minus
-                (currIconSize > minIconSize)
+                (iconSize > minIconSize)
                     ? EzIconButton(
                         onPressed: () async {
-                          currIconSize -= iconDelta;
-                          await EzConfig.setDouble(iconSizeKey, currIconSize);
+                          iconSize -= iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, iconSize);
                           setState(() {});
                         },
                         tooltip:
                             '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
-                        iconSize: currIconSize,
+                        iconSize: iconSize,
                         icon: Icon(PlatformIcons(context).remove),
                       )
                     : EzIconButton(
                         enabled: false,
                         tooltip: l10n.gMinimum,
-                        iconSize: currIconSize,
+                        iconSize: iconSize,
                         icon: Icon(
                           PlatformIcons(context).remove,
                           color: colorScheme.outline,
@@ -566,28 +564,28 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                 // Preview
                 Icon(
                   Icons.sync_alt,
-                  size: currIconSize,
+                  size: iconSize,
                   color: colorScheme.onSurface,
                 ),
                 pMSpacer,
 
                 // Plus
-                (currIconSize < maxIconSize)
+                (iconSize < maxIconSize)
                     ? EzIconButton(
                         onPressed: () async {
-                          currIconSize += iconDelta;
-                          await EzConfig.setDouble(iconSizeKey, currIconSize);
+                          iconSize += iconDelta;
+                          await EzConfig.setDouble(iconSizeKey, iconSize);
                           setState(() {});
                         },
                         tooltip:
                             '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
-                        iconSize: currIconSize,
+                        iconSize: iconSize,
                         icon: Icon(PlatformIcons(context).add),
                       )
                     : EzIconButton(
                         enabled: false,
                         tooltip: l10n.gMaximum,
-                        iconSize: currIconSize,
+                        iconSize: iconSize,
                         icon: Icon(
                           PlatformIcons(context).add,
                           color: colorScheme.outline,
@@ -634,9 +632,9 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
             widget.bodyProvider.reset();
             widget.labelProvider.reset();
 
-            currOpacity = EzConfig.getDefault(widget.opacityKey);
-            backgroundColor = surface.withValues(alpha: currOpacity);
-            currIconSize = EzConfig.getDefault(iconSizeKey);
+            backOpacity = EzConfig.getDefault(widget.opacityKey);
+            backgroundColor = surface.withValues(alpha: backOpacity);
+            iconSize = EzConfig.getDefault(iconSizeKey);
 
             setState(() {});
           },
