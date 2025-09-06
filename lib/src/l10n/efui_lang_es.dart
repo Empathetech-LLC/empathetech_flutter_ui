@@ -113,6 +113,9 @@ class EFUILangEs extends EFUILang {
   String get gMinimum => 'Mínimo';
 
   @override
+  String get gCenterReset => 'Mantén el centro para restablecer';
+
+  @override
   String get gLoadingAnim =>
       'Cargando. El logotipo empático animado como un reloj de arena giratorio.';
 

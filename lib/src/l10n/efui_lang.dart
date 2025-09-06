@@ -303,6 +303,12 @@ abstract class EFUILang {
   /// **'Minimum'**
   String get gMinimum;
 
+  /// No description provided for @gCenterReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold center to reset'**
+  String get gCenterReset;
+
   /// No description provided for @gLoadingAnim.
   ///
   /// In en, this message translates to:

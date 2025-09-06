@@ -113,6 +113,9 @@ class EFUILangEn extends EFUILang {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gCenterReset => 'Hold center to reset';
+
+  @override
   String get gLoadingAnim =>
       'Loading. The Empathetic logo animated as a spinning hourglass.';
 
@@ -706,6 +709,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gMinimum => 'Minimum';
+
+  @override
+  String get gCenterReset => 'Hold center to reset';
 
   @override
   String get gLoadingAnim =>

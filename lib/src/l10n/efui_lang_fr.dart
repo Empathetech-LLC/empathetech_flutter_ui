@@ -113,6 +113,9 @@ class EFUILangFr extends EFUILang {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gCenterReset => 'Maintenez le centre pour réinitialiser';
+
+  @override
   String get gLoadingAnim =>
       'Chargement. Le logo empathique animé comme un sablier tournant.';
 
