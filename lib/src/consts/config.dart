@@ -136,7 +136,7 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
 
-/// 200.0
+/// 500.0
 const double defaultAnimationDuration = 500.0;
 
 /// 0x45 / 255
