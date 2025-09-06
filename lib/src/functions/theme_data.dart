@@ -117,8 +117,8 @@ ThemeData ezThemeData(Brightness brightness) {
       ? colorScheme.surface.withValues(alpha: crucialOpacity)
       : colorScheme.surface;
   final Color crucialContainer = calcCrucial
-      ? colorScheme.surfaceContainer.withValues(alpha: crucialOpacity)
-      : colorScheme.surfaceContainer;
+      ? colorScheme.primaryContainer.withValues(alpha: crucialOpacity)
+      : colorScheme.primaryContainer;
 
   //* Return the ThemeData *//
 
