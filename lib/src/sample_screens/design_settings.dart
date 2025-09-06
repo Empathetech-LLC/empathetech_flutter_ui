@@ -324,7 +324,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
             shadowColor: buttonShadow,
             side: BorderSide(color: buttonContainer),
           ),
-          dialogTitle: l10n.dsResetAll(darkString),
+          dialogTitle: l10n.dsResetAll(isDark ? darkString : lightString),
           onConfirm: isDark
               ? () async {
                   await EzConfig.removeKeys(globalDesignKeys.keys.toSet());
