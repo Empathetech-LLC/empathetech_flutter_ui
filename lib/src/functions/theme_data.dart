@@ -359,6 +359,14 @@ ThemeData ezThemeData(Brightness brightness) {
       overlayColor: WidgetStateProperty.all(highlightColor),
     ),
 
+    // Slider
+    sliderTheme: SliderThemeData(
+      thumbShape: RoundSliderThumbShape(
+        enabledThumbRadius: iconSize / 2,
+        disabledThumbRadius: iconSize / 2,
+      ),
+    ),
+
     // Segmented button
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
