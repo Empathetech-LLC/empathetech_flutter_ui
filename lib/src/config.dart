@@ -351,8 +351,8 @@ Must be one of [int, bool, double, String, List<String>]''');
           List<Locale>.from(EFUILang.supportedLocales);
       trimmedLocales.remove(getLocale());
 
-      final Locale randomLocale = trimmedLocales
-          .elementAt(random.nextInt(EFUILang.supportedLocales.length));
+      final Locale randomLocale =
+          trimmedLocales.elementAt(random.nextInt(trimmedLocales.length));
 
       final List<String> localeData = <String>[randomLocale.languageCode];
       if (randomLocale.countryCode != null) {
@@ -361,6 +361,113 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setStringList(appLocaleKey, localeData);
     }
+
+    // Update color settings //
+
+    // Define random seed
+    final Color primary = Color.fromRGBO(
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+      1.0,
+    );
+    final Color onPrimary = getTextColor(primary);
+
+    // Build a triadic combo from the seed
+    final HSVColor primaryHSV = HSVColor.fromColor(primary);
+    final double secondaryHue = (primaryHSV.hue + 120) % 360;
+    final double tertiaryHue = (primaryHSV.hue + 240) % 360;
+
+    final Color secondary = HSVColor.fromAHSV(
+      1.0,
+      secondaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onSecondary = getTextColor(secondary);
+
+    final Color tertiary = HSVColor.fromAHSV(
+      1.0,
+      tertiaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onTertiary = getTextColor(tertiary);
+
+    // Create a pseudo-random ColorScheme that follows the default vibe
+    await storeColorScheme(
+      colorScheme: isDark
+          ? ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer:
+                  primary.withValues(alpha: defaultButtonOutlineOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer:
+                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer:
+                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              onSurface: Colors.white,
+              surfaceTint: Colors.transparent,
+            )
+          : ColorScheme.fromSeed(
+              brightness: Brightness.light,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer:
+                  primary.withValues(alpha: defaultButtonOutlineOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer:
+                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer:
+                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              onSurface: Colors.black,
+              surfaceTint: Colors.transparent,
+            ),
+      brightness: isDark ? Brightness.dark : Brightness.light,
+    );
+
+    // Update design settings //
+
+    await setDouble(animationDurationKey, random.nextDouble() * 500.0 + 250.0);
+
+    await setDouble(
+      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+      random.nextDouble() * 0.5 + 0.25,
+    );
+    await setDouble(
+      isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
+      random.nextDouble() * 0.5 + 0.25,
+    );
+
+    // Update layout settings //
+
+    await setDouble(marginKey, defaultMargin * getScalar());
+    await setDouble(
+      paddingKey,
+      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+    );
+    await setDouble(
+      spacingKey,
+      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+    );
+
+    await setBool(hideScrollKey, random.nextBool());
 
     // Update text settings //
 
@@ -423,94 +530,6 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Leave text background opacity as-is
 
     await setDouble(iconSizeKey, defaultIconSize * getScalar());
-
-    // Update layout settings //
-
-    await setDouble(marginKey, defaultMargin * getScalar());
-    await setDouble(
-      paddingKey,
-      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-    );
-    await setDouble(
-      spacingKey,
-      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-    );
-
-    await setBool(hideScrollKey, random.nextBool());
-
-    // Update color settings //
-
-    // Define random seed
-    final Color primary = Color.fromRGBO(
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-      1.0,
-    );
-    final Color onPrimary = getTextColor(primary);
-
-    // Build a triadic combo from the seed
-    final HSVColor primaryHSV = HSVColor.fromColor(primary);
-    final double secondaryHue = (primaryHSV.hue + 120) % 360;
-    final double tertiaryHue = (primaryHSV.hue + 240) % 360;
-
-    final Color secondary = HSVColor.fromAHSV(
-      1.0,
-      secondaryHue,
-      primaryHSV.saturation,
-      primaryHSV.value,
-    ).toColor();
-    final Color onSecondary = getTextColor(secondary);
-
-    final Color tertiary = HSVColor.fromAHSV(
-      1.0,
-      tertiaryHue,
-      primaryHSV.saturation,
-      primaryHSV.value,
-    ).toColor();
-    final Color onTertiary = getTextColor(tertiary);
-
-    // Create a pseudo-random ColorScheme that follows the default vibe
-    await storeColorScheme(
-      colorScheme: isDark
-          ? ColorScheme.fromSeed(
-              brightness: Brightness.dark,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer: primary.withValues(alpha: selectionOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer: secondary.withValues(alpha: selectionOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.white,
-              surfaceTint: Colors.transparent,
-            )
-          : ColorScheme.fromSeed(
-              brightness: Brightness.light,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer: primary.withValues(alpha: selectionOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer: secondary.withValues(alpha: selectionOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.black,
-              surfaceTint: Colors.transparent,
-            ),
-      brightness: isDark ? Brightness.dark : Brightness.light,
-    );
   }
 
   // Removers //
