@@ -497,6 +497,10 @@ const Map<String, Object> empathDesktopConfig = <String, Object>{
 final Map<String, Object> empathMaxConfig = <String, Object>{
   ...baseEmpathConfig,
 
+  // Design settings //
+
+  animationDurationKey: maxAnimationDuration,
+
   // Layout settings //
 
   marginKey: maxMargin,
@@ -544,6 +548,10 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
 /// For open source consumers: you may use this in testing, but not in production
 final Map<String, Object> empathMinConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Design settings //
+
+  animationDurationKey: minAnimationDuration,
 
   // Layout settings //
 
