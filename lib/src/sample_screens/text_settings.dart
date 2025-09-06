@@ -534,14 +534,17 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ],
 
         // Icon size
-        EzTextBackground(
-          Text(
-            l10n.tsIconSize,
-            style: widget.labelProvider.value,
-            textAlign: TextAlign.center,
+        Tooltip(
+          message: l10n.gCenterReset,
+          child: EzTextBackground(
+            Text(
+              l10n.tsIconSize,
+              style: widget.labelProvider.value,
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: backgroundColor,
+            margin: colMargin,
           ),
-          backgroundColor: backgroundColor,
-          margin: colMargin,
         ),
         EzTextBackground(
           Row(
@@ -572,10 +575,17 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
               pMSpacer,
 
               // Preview
-              Icon(
-                Icons.sync_alt,
-                size: iconSize,
-                color: colorScheme.onSurface,
+              GestureDetector(
+                onLongPress: () async {
+                  iconSize = defaultIconSize;
+                  await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+                  setState(() {});
+                },
+                child: Icon(
+                  Icons.sync_alt,
+                  size: iconSize,
+                  color: colorScheme.onSurface,
+                ),
               ),
               pMSpacer,
 

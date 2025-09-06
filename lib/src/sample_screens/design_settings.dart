@@ -90,7 +90,6 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
   double animDuration = EzConfig.get(animationDurationKey);
   double iconSize = EzConfig.get(iconSizeKey);
-  final double defaultIconSize = EzConfig.getDefault(iconSizeKey);
 
   late bool isDark = isDarkTheme(context);
   late String themeProfile = isDark ? darkString : lightString;
@@ -201,7 +200,10 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         spacer,
 
         // Icon size
-        EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
+        Tooltip(
+          message: l10n.gCenterReset,
+          child: EzText(l10n.tsIconSize, style: textTheme.bodyLarge),
+        ),
         EzTextBackground(
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -231,10 +233,17 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               pMSpacer,
 
               // Preview
-              Icon(
-                Icons.sync_alt,
-                size: iconSize,
-                color: colorScheme.onSurface,
+              GestureDetector(
+                onLongPress: () async {
+                  iconSize = defaultIconSize;
+                  await EzConfig.setDouble(iconSizeKey, defaultIconSize);
+                  drawState();
+                },
+                child: Icon(
+                  Icons.sync_alt,
+                  size: iconSize,
+                  color: colorScheme.onSurface,
+                ),
               ),
               pMSpacer,
 

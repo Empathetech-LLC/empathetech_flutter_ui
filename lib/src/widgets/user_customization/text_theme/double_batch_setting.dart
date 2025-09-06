@@ -138,10 +138,20 @@ class EzFontDoubleBatchSetting extends StatelessWidget {
           pMSpacer,
 
           // Core
-          Icon(
-            Icons.text_fields_sharp,
-            size: iconSize ?? titleProvider.value.fontSize,
-            color: colorScheme.onSurface,
+          GestureDetector(
+            onLongPress: () async {
+              for (final String key in keys) {
+                final EzTextStyleProvider provider = providerFromKey(key);
+
+                await EzConfig.setDouble(key, fontSizeDefaults[key]!);
+                provider.resize(fontSizeDefaults[key]!);
+              }
+            },
+            child: Icon(
+              Icons.text_fields_sharp,
+              size: iconSize ?? titleProvider.value.fontSize,
+              color: colorScheme.onSurface,
+            ),
           ),
           pMSpacer,
 
