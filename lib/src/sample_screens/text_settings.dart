@@ -490,8 +490,20 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
         ),
         widget.textBlockSpacer,
 
+        // Text background opacity
         if (widget.showOpacity) ...<Widget>[
-          // Text background opacity
+          // Label
+          EzTextBackground(
+            Text(
+              l10n.tsTextBackground,
+              style: widget.labelProvider.value,
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: backgroundColor,
+            margin: colMargin,
+          ),
+
+          // Slider
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
             child: Slider(
@@ -518,84 +530,81 @@ class _QuickTextSettingsState extends State<_QuickTextSettings> {
                   value.toStringAsFixed(2),
             ),
           ),
-          EzTextBackground(
-            Text(
-              l10n.tsTextBackground,
-              style: widget.labelProvider.value,
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: backgroundColor,
-            margin: colMargin,
-          ),
           spacer,
         ],
 
         // Icon size
-        Tooltip(
-          message: l10n.tsIconSize,
-          child: EzTextBackground(
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                // Minus
-                (iconSize > minIconSize)
-                    ? EzIconButton(
-                        onPressed: () async {
-                          iconSize -= iconDelta;
-                          await EzConfig.setDouble(iconSizeKey, iconSize);
-                          setState(() {});
-                        },
-                        tooltip:
-                            '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
-                        iconSize: iconSize,
-                        icon: Icon(PlatformIcons(context).remove),
-                      )
-                    : EzIconButton(
-                        enabled: false,
-                        tooltip: l10n.gMinimum,
-                        iconSize: iconSize,
-                        icon: Icon(
-                          PlatformIcons(context).remove,
-                          color: colorScheme.outline,
-                        ),
-                      ),
-                pMSpacer,
-
-                // Preview
-                Icon(
-                  Icons.sync_alt,
-                  size: iconSize,
-                  color: colorScheme.onSurface,
-                ),
-                pMSpacer,
-
-                // Plus
-                (iconSize < maxIconSize)
-                    ? EzIconButton(
-                        onPressed: () async {
-                          iconSize += iconDelta;
-                          await EzConfig.setDouble(iconSizeKey, iconSize);
-                          setState(() {});
-                        },
-                        tooltip:
-                            '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
-                        iconSize: iconSize,
-                        icon: Icon(PlatformIcons(context).add),
-                      )
-                    : EzIconButton(
-                        enabled: false,
-                        tooltip: l10n.gMaximum,
-                        iconSize: iconSize,
-                        icon: Icon(
-                          PlatformIcons(context).add,
-                          color: colorScheme.outline,
-                        ),
-                      ),
-              ],
-            ),
-            backgroundColor: backgroundColor,
-            borderRadius: ezPillShape,
+        EzTextBackground(
+          Text(
+            l10n.tsIconSize,
+            style: widget.labelProvider.value,
+            textAlign: TextAlign.center,
           ),
+          backgroundColor: backgroundColor,
+          margin: colMargin,
+        ),
+        EzTextBackground(
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Minus
+              (iconSize > minIconSize)
+                  ? EzIconButton(
+                      onPressed: () async {
+                        iconSize -= iconDelta;
+                        await EzConfig.setDouble(iconSizeKey, iconSize);
+                        setState(() {});
+                      },
+                      tooltip:
+                          '${l10n.gDecrease} ${l10n.tsIconSize.toLowerCase()}',
+                      iconSize: iconSize,
+                      icon: Icon(PlatformIcons(context).remove),
+                    )
+                  : EzIconButton(
+                      enabled: false,
+                      tooltip: l10n.gMinimum,
+                      iconSize: iconSize,
+                      icon: Icon(
+                        PlatformIcons(context).remove,
+                        color: colorScheme.outline,
+                      ),
+                    ),
+              pMSpacer,
+
+              // Preview
+              Icon(
+                Icons.sync_alt,
+                size: iconSize,
+                color: colorScheme.onSurface,
+              ),
+              pMSpacer,
+
+              // Plus
+              (iconSize < maxIconSize)
+                  ? EzIconButton(
+                      onPressed: () async {
+                        iconSize += iconDelta;
+                        await EzConfig.setDouble(iconSizeKey, iconSize);
+                        setState(() {});
+                      },
+                      tooltip:
+                          '${l10n.gIncrease} ${l10n.tsIconSize.toLowerCase()}',
+                      iconSize: iconSize,
+                      icon: Icon(PlatformIcons(context).add),
+                    )
+                  : EzIconButton(
+                      enabled: false,
+                      tooltip: l10n.gMaximum,
+                      iconSize: iconSize,
+                      icon: Icon(
+                        PlatformIcons(context).add,
+                        color: colorScheme.outline,
+                      ),
+                    ),
+            ],
+          ),
+          backgroundColor: backgroundColor,
+          borderRadius: ezPillShape,
         ),
 
         // Optional additional settings
