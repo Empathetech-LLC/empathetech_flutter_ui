@@ -176,6 +176,15 @@ const double defaultBodySize = 16.0;
 /// 14.0
 const double defaultLabelSize = 14.0;
 
+/// 42.0, 32.0, 22.0, 16.0, 14.0
+const Map<String, double> fontSizeDefaults = <String, double>{
+  displayFontSizeKey: defaultDisplaySize,
+  headlineFontSizeKey: defaultHeadlineSize,
+  titleFontSizeKey: defaultTitleSize,
+  bodyFontSizeKey: defaultBodySize,
+  labelFontSizeKey: defaultLabelSize,
+};
+
 /// 0.0
 const double defaultTextOpacity = 0.0;
 
