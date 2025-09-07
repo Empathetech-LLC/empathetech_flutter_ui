@@ -813,6 +813,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : vscController.text,
                         ),
                       );
+                    } else {
+                      setState(() => canGen = false);
+                      await ezSnackBar(
+                        context: context,
+                        message: l10n.csInvalidFields,
+                      ).closed;
+                      setState(() => canGen = true);
                     }
                   },
                   icon: EzIcon(Icons.save),
