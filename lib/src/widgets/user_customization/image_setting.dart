@@ -4,6 +4,8 @@
  */
 
 import '../../../empathetech_flutter_ui.dart';
+import 'images/image_editor_io.dart'
+    if (dart.library.html) 'images/image_editor_web.dart';
 
 import 'dart:io';
 import 'dart:async';
