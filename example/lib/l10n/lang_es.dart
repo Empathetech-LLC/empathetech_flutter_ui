@@ -94,6 +94,9 @@ class LangEs extends Lang {
   String get csHereHint => 'Abra un generador de esquemas de color en línea';
 
   @override
+  String get csFileBrowser => 'Abrir explorador de archivos';
+
+  @override
   String get csFlutterPath => 'Flutter ruta';
 
   @override

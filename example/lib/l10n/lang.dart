@@ -255,6 +255,12 @@ abstract class Lang {
   /// **'Open an online color scheme builder'**
   String get csHereHint;
 
+  /// No description provided for @csFileBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open file browser'**
+  String get csFileBrowser;
+
   /// No description provided for @csFlutterPath.
   ///
   /// In en, this message translates to:

@@ -94,6 +94,9 @@ class LangEn extends Lang {
   String get csHereHint => 'Open an online color scheme builder';
 
   @override
+  String get csFileBrowser => 'Open file browser';
+
+  @override
   String get csFlutterPath => 'Flutter path';
 
   @override
@@ -312,6 +315,9 @@ class LangEnUs extends LangEn {
 
   @override
   String get csHereHint => 'Open an online color scheme builder';
+
+  @override
+  String get csFileBrowser => 'Open file browser';
 
   @override
   String get csFlutterPath => 'Flutter path';

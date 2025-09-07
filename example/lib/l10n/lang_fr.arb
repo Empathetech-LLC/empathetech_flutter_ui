@@ -32,6 +32,7 @@
   "csHere": "ici.",
   "csHereHint": "Ouvrir un générateur de palette de couleurs en ligne",
 
+  "csFileBrowser": "Ouvrir l'explorateur de fichiers",
   "csFlutterPath": "Flutter chemin",
   "csNoSpaces": "Le chemin ne peut pas contenir d'espaces",
   "csNotInstalled": "N'est pas installé?",

@@ -32,6 +32,7 @@
   "csHere": "here.",
   "csHereHint": "Open an online color scheme builder",
 
+  "csFileBrowser": "Open file browser",
   "csFlutterPath": "Flutter path",
   "csNoSpaces": "Path cannot have spaces",
   "csNotInstalled": "Not installed?",

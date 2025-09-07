@@ -32,6 +32,7 @@
   "csHere": "aquí.",
   "csHereHint": "Abra un generador de esquemas de color en línea",
 
+  "csFileBrowser": "Abrir explorador de archivos",
   "csFlutterPath": "Flutter ruta",
   "csNoSpaces": "La ruta no puede tener espacios",
   "csNotInstalled": "¿No está instalado?",

@@ -95,6 +95,9 @@ class LangFr extends Lang {
       'Ouvrir un générateur de palette de couleurs en ligne';
 
   @override
+  String get csFileBrowser => 'Ouvrir l\'explorateur de fichiers';
+
+  @override
   String get csFlutterPath => 'Flutter chemin';
 
   @override
