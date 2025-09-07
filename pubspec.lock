@@ -214,7 +214,7 @@ packages:
       path: example
       relative: true
     source: path
-    version: "2.2.3+31"
+    version: "2.3.0+32"
   extended_image:
     dependency: "direct main"
     description:
