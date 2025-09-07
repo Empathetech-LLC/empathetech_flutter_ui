@@ -38,6 +38,7 @@ class EzConfigFAB extends StatelessWidget {
   /// Include any app specific keys you want backed up here
   final List<String>? extraKeys;
 
+  /// [FloatingActionButton] that saves/loads config to/from JSON file(s)
   const EzConfigFAB(
     BuildContext context, {
     super.key,
