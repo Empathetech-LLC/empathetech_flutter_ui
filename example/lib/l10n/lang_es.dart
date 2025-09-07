@@ -152,6 +152,10 @@ class LangEs extends Lang {
   String get csInvalidFields => 'Algunos campos son inválidos';
 
   @override
+  String get csRequired =>
+      'Todos los campos excepto el correo de soporte son obligatorios';
+
+  @override
   String get csResetHint => 'Activa y confirma lo que se debe reiniciar.';
 
   @override

@@ -51,6 +51,7 @@
 
   "csGenerate": "Generate app",
   "csInvalidFields": "Some fields are invalid",
+  "csRequired": "All fields except support email are required",
 
   "csResetHint": "Activate and confirm what should be reset.",
   "csResetBuilder": "Builder values",

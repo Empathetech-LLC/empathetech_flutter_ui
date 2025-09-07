@@ -51,6 +51,7 @@
 
   "csGenerate": "Générer l'application",
   "csInvalidFields": "Certains champs sont invalides",
+  "csRequired": "Tous les champs sauf le courriel de soutien sont obligatoires",
 
   "csResetHint": "Activez et confirmez ce qui doit être réinitialisé.",
   "csResetBuilder": "Valeurs du constructeur",

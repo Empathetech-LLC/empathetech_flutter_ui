@@ -147,6 +147,9 @@ class LangEn extends Lang {
   String get csInvalidFields => 'Some fields are invalid';
 
   @override
+  String get csRequired => 'All fields except support email are required';
+
+  @override
   String get csResetHint => 'Activate and confirm what should be reset.';
 
   @override
@@ -368,6 +371,9 @@ class LangEnUs extends LangEn {
 
   @override
   String get csInvalidFields => 'Some fields are invalid';
+
+  @override
+  String get csRequired => 'All fields except support email are required';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';

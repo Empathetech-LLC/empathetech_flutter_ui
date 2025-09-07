@@ -152,6 +152,10 @@ class LangFr extends Lang {
   String get csInvalidFields => 'Certains champs sont invalides';
 
   @override
+  String get csRequired =>
+      'Tous les champs sauf le courriel de soutien sont obligatoires';
+
+  @override
   String get csResetHint =>
       'Activez et confirmez ce qui doit être réinitialisé.';
 

@@ -357,6 +357,12 @@ abstract class Lang {
   /// **'Some fields are invalid'**
   String get csInvalidFields;
 
+  /// No description provided for @csRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'All fields except support email are required'**
+  String get csRequired;
+
   /// No description provided for @csResetHint.
   ///
   /// In en, this message translates to:
