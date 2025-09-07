@@ -5,3 +5,6 @@
 
 /// Open UI
 const String appTitle = 'Open UI';
+
+/// net.empathetech.open_ui
+const String packageName = 'net.empathetech.open_ui';
