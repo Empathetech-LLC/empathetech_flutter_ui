@@ -542,6 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : selectedDirectory;
                           });
                         },
+                        tooltip: l10n.csFileBrowser,
                         icon: EzIcon(PlatformIcons(context).folderOpen),
                       ),
                     ],
@@ -591,6 +592,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: EzIconButton(
                       onPressed: () =>
                           setState(() => showAdvanced = !showAdvanced),
+                      tooltip: showAdvanced ? el10n.gClose : el10n.gOpen,
                       icon: EzIcon(
                         showAdvanced
                             ? Icons.arrow_drop_up
@@ -666,6 +668,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : selectedDirectory;
                                 });
                               },
+                              tooltip: l10n.csFileBrowser,
                               icon: EzIcon(PlatformIcons(context).folderOpen),
                             ),
                           ],
@@ -1154,6 +1157,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
+          tooltip: visible ? el10n.gClose : el10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
@@ -1167,6 +1171,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onRemove,
+          tooltip: el10n.gRemove,
           icon: EzIcon(PlatformIcons(context).delete),
         ),
       ),
@@ -1294,6 +1299,7 @@ class _LicensePicker extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
+          tooltip: visible ? el10n.gClose : el10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
