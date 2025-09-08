@@ -440,6 +440,9 @@ class EFUILangEn extends EFUILang {
   String get dsCrop => 'Crop';
 
   @override
+  String get dsNoWeb => 'Image editing is not supported on web';
+
+  @override
   String get dsDrag => 'Drag';
 
   @override
@@ -1036,6 +1039,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get dsCrop => 'Crop';
+
+  @override
+  String get dsNoWeb => 'Image editing is not supported on web';
 
   @override
   String get dsDrag => 'Drag';

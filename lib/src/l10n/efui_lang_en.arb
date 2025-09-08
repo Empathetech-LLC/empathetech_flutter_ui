@@ -181,7 +181,9 @@
 
   "dsUseFull": "Use full image?",
   "dsFit": "How should it fit?",
+
   "dsCrop": "Crop",
+  "dsNoWeb": "Image editing is not supported on web",
   "dsDrag": "Drag",
   "dsDragHint": "Drag to reposition the image",
   "dsSwipe": "Swipe",

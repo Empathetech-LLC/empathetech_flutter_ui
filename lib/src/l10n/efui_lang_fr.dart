@@ -443,6 +443,10 @@ class EFUILangFr extends EFUILang {
   String get dsCrop => 'Recadrer';
 
   @override
+  String get dsNoWeb =>
+      'L\'édition d\'images n\'est pas prise en charge sur le web';
+
+  @override
   String get dsDrag => 'Glisser';
 
   @override

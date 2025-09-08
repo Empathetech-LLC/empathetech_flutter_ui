@@ -443,6 +443,9 @@ class EFUILangEs extends EFUILang {
   String get dsCrop => 'Recortar';
 
   @override
+  String get dsNoWeb => 'La edición de imágenes no es compatible en la web';
+
+  @override
   String get dsDrag => 'Arrastrar';
 
   @override

@@ -181,7 +181,9 @@
   
   "dsUseFull": "Utiliser l'image complète ?",
   "dsFit": "Comment devrait-il s'adapter ?",
+
   "dsCrop": "Recadrer",
+  "dsNoWeb": "L'édition d'images n'est pas prise en charge sur le web",
   "dsDrag": "Glisser",
   "dsDragHint": "Glissez pour repositionner l'image",
   "dsSwipe": "Balayer",

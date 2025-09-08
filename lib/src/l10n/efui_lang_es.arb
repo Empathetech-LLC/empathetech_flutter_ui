@@ -181,7 +181,9 @@
 
   "dsUseFull": "¿Usar la imagen completa?",
   "dsFit": "¿Cómo debe quedar?",
+
   "dsCrop": "Recortar",
+  "dsNoWeb": "La edición de imágenes no es compatible en la web",
   "dsDrag": "Arrastrar",
   "dsDragHint": "Arrastra para mover la imagen",
   "dsSwipe": "Deslizar",

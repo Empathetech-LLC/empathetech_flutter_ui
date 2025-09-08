@@ -903,6 +903,12 @@ abstract class EFUILang {
   /// **'Crop'**
   String get dsCrop;
 
+  /// No description provided for @dsNoWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Image editing is not supported on web'**
+  String get dsNoWeb;
+
   /// No description provided for @dsDrag.
   ///
   /// In en, this message translates to:
