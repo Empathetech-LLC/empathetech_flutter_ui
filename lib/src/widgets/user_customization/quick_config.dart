@@ -134,39 +134,35 @@ class EzBigButtonsConfig extends StatelessWidget {
   /// Slight bump to all layout values, for easier tapping
   const EzBigButtonsConfig({super.key, this.onComplete});
 
-  @override
-  Widget build(BuildContext context) {
-    final bool onMobile = isMobile();
+  static Future<void> onPressed() async {
+    // Conditionally update text
+    if (EzConfig.get(iconSizeKey) < 25.0) {
+      await EzConfig.setDouble(iconSizeKey, 25.0);
+    }
 
-    final EFUILang l10n = ezL10n(context);
-
-    return EzElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
-      ),
-      onPressed: () async {
-        // Conditionally update text
-        if (EzConfig.get(iconSizeKey) < 25.0) {
-          await EzConfig.setDouble(iconSizeKey, 25.0);
-        }
-
-        // Update layout
-        await EzConfig.setDouble(marginKey, 12.5);
-        if (onMobile) {
-          await EzConfig.setDouble(paddingKey, 22.5);
-          await EzConfig.setDouble(spacingKey, 35.0);
-        } else {
-          await EzConfig.setDouble(paddingKey, 25.0);
-          await EzConfig.setDouble(spacingKey, 40.0);
-        }
-        await EzConfig.setBool(hideScrollKey, false);
-
-        // Callback
-        onComplete?.call();
-      },
-      text: l10n.ssBigButtons,
-    );
+    // Update layout
+    await EzConfig.setDouble(marginKey, 12.5);
+    if (isMobile()) {
+      await EzConfig.setDouble(paddingKey, 22.5);
+      await EzConfig.setDouble(spacingKey, 35.0);
+    } else {
+      await EzConfig.setDouble(paddingKey, 25.0);
+      await EzConfig.setDouble(spacingKey, 40.0);
+    }
+    await EzConfig.setBool(hideScrollKey, false);
   }
+
+  @override
+  Widget build(BuildContext context) => EzElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(isMobile() ? 22.5 : 25.0),
+        ),
+        onPressed: () async {
+          await onPressed();
+          onComplete?.call();
+        },
+        text: ezL10n(context).ssBigButtons,
+      );
 }
 
 class EzHighVisibilityConfig extends StatelessWidget {
