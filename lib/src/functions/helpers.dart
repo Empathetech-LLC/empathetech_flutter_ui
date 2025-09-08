@@ -8,6 +8,8 @@ import '../../empathetech_flutter_ui.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'helpers_io.dart' if (dart.library.html) 'helpers_web.dart';
@@ -52,6 +54,19 @@ String screenshotHint() {
   }
 }
 
+String archivePath({required String packageName, required String appName}) {
+  final TargetPlatform platform = getBasePlatform();
+
+  switch (platform) {
+    case TargetPlatform.android:
+      return 'Root > Android > Data > $packageName > files';
+    case TargetPlatform.iOS:
+      return 'Files > Browse > $appName';
+    default:
+      return 'Downloads';
+  }
+}
+
 // Readability //
 
 /// Is there a required [Function] that you wish was optional?
@@ -83,23 +98,62 @@ Duration ezReadingTime(String passage) {
   return Duration(milliseconds: ((words / 100) * 60 * 1000).ceil());
 }
 
+/// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
+Duration ezAnimDuration({bool half = false}) {
+  final double duration = EzConfig.get(animationDurationKey) as double;
+  return Duration(milliseconds: (half ? (duration / 2) : duration).toInt());
+}
+
+/// A [GoTransition] based on the current platform and [EzConfig] setup
+Page<dynamic> ezGoTransition(
+  BuildContext context,
+  GoRouterState state,
+  int animDuration,
+  TargetPlatform platform,
+) {
+  if (animDuration < 1) return GoTransitions.none(context, state);
+
+  switch (platform) {
+    case TargetPlatform.android:
+      return GoTransitions.zoom(context, state);
+    case TargetPlatform.iOS:
+    case TargetPlatform.macOS:
+      return GoTransitions.cupertino(context, state);
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.linux:
+    case TargetPlatform.windows:
+      return GoTransitions.slide.withFade(context, state);
+  }
+}
+
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection
 /// Then, applies [MediaQuery] text scaling and [EzConfig] icon scaling
 double ezImageSize(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(160.0) *
-    ((EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize);
+    (EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey));
 
 /// Calculate a recommended [AppBar.toolbarHeight]
 /// max([ezTextSize] + 2 * [EzConfig.get]marginKey, [kMinInteractiveDimension])
-double ezToolbarHeight(BuildContext context, String title, {TextStyle? style}) {
+double ezToolbarHeight({
+  required BuildContext context,
+  required String title,
+  bool includeIconButton = true,
+  TextStyle? style,
+}) {
+  late final double margin = EzConfig.get(marginKey);
+  late final double padding = EzConfig.get(paddingKey);
+  late final double iconSize = EzConfig.get(iconSizeKey);
+
   return max(
-    ezTextSize(
+        ezTextSize(
           title,
           context: context,
           style: style ?? Theme.of(context).appBarTheme.titleTextStyle,
-        ).height +
-        2 * EzConfig.get(marginKey),
-    kMinInteractiveDimension,
-  );
+        ).height,
+        includeIconButton
+            ? max(iconSize + padding, kMinInteractiveDimension)
+            : kMinInteractiveDimension,
+      ) +
+      margin;
 }

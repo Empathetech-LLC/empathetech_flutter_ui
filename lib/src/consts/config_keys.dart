@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-// Global settings' keys //
+//* Global (home) settings' keys *//
 
 const String isLeftyKey = 'isLefty';
 
@@ -18,231 +18,11 @@ const Map<String, Type> globalKeys = <String, Type>{
   appLocaleKey: List<String>,
 };
 
-// Text settings' keys //
+//* Color settings' keys *//
 
-// Display
-const String displayFontFamilyKey = 'displayFontFamily';
-const String displayFontSizeKey = 'displayFontSize';
-const String displayBoldedKey = 'displayBolded';
-const String displayItalicizedKey = 'displayItalicized';
-const String displayUnderlinedKey = 'displayUnderlined';
-const String displayLetterSpacingKey = 'displayLetterSpacing';
-const String displayWordSpacingKey = 'displayWordSpacing';
-const String displayFontHeightKey = 'displayFontHeight';
+// Dark theme //
 
-// Headline
-const String headlineFontFamilyKey = 'headlineFontFamily';
-const String headlineFontSizeKey = 'headlineFontSize';
-const String headlineBoldedKey = 'headlineBolded';
-const String headlineItalicizedKey = 'headlineItalicized';
-const String headlineUnderlinedKey = 'headlineUnderlined';
-const String headlineLetterSpacingKey = 'headlineLetterSpacing';
-const String headlineWordSpacingKey = 'headlineWordSpacing';
-const String headlineFontHeightKey = 'headlineFontHeight';
-
-// Title
-const String titleFontFamilyKey = 'titleFontFamily';
-const String titleFontSizeKey = 'titleFontSize';
-const String titleBoldedKey = 'titleBolded';
-const String titleItalicizedKey = 'titleItalicized';
-const String titleUnderlinedKey = 'titleUnderlined';
-const String titleLetterSpacingKey = 'titleLetterSpacing';
-const String titleWordSpacingKey = 'titleWordSpacing';
-const String titleFontHeightKey = 'titleFontHeight';
-
-// Body
-const String bodyFontFamilyKey = 'bodyFontFamily';
-const String bodyFontSizeKey = 'bodyFontSize';
-const String bodyBoldedKey = 'bodyBolded';
-const String bodyItalicizedKey = 'bodyItalicized';
-const String bodyUnderlinedKey = 'bodyUnderlined';
-const String bodyLetterSpacingKey = 'bodyLetterSpacing';
-const String bodyWordSpacingKey = 'bodyWordSpacing';
-const String bodyFontHeightKey = 'bodyFontHeight';
-
-// Label
-const String labelFontFamilyKey = 'labelFontFamily';
-const String labelFontSizeKey = 'labelFontSize';
-const String labelBoldedKey = 'labelBolded';
-const String labelItalicizedKey = 'labelItalicized';
-const String labelUnderlinedKey = 'labelUnderlined';
-const String labelLetterSpacingKey = 'labelLetterSpacing';
-const String labelWordSpacingKey = 'labelWordSpacing';
-const String labelFontHeightKey = 'labelFontHeight';
-
-// Background opacity
-const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
-const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
-
-// Icons
-const String iconSizeKey = 'iconSize'; // Required
-
-// Selector
-const String advancedTextKey = 'advancedText';
-
-/// [display, headline, title, body, label]
-///                 X
-/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
-/// y
-/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
-const Map<String, Type> textStyleKeys = <String, Type>{
-  // Display
-  displayFontFamilyKey: String,
-  displayFontSizeKey: double,
-  displayBoldedKey: bool,
-  displayItalicizedKey: bool,
-  displayUnderlinedKey: bool,
-  displayLetterSpacingKey: double,
-  displayWordSpacingKey: double,
-  displayFontHeightKey: double,
-
-  // Headline
-  headlineFontFamilyKey: String,
-  headlineFontSizeKey: double,
-  headlineBoldedKey: bool,
-  headlineItalicizedKey: bool,
-  headlineUnderlinedKey: bool,
-  headlineLetterSpacingKey: double,
-  headlineWordSpacingKey: double,
-  headlineFontHeightKey: double,
-
-  // Title
-  titleFontFamilyKey: String,
-  titleFontSizeKey: double,
-  titleBoldedKey: bool,
-  titleItalicizedKey: bool,
-  titleUnderlinedKey: bool,
-  titleLetterSpacingKey: double,
-  titleWordSpacingKey: double,
-  titleFontHeightKey: double,
-
-  // Body
-  bodyFontFamilyKey: String,
-  bodyFontSizeKey: double,
-  bodyBoldedKey: bool,
-  bodyItalicizedKey: bool,
-  bodyUnderlinedKey: bool,
-  bodyLetterSpacingKey: double,
-  bodyWordSpacingKey: double,
-  bodyFontHeightKey: double,
-
-  // Label
-  labelFontFamilyKey: String,
-  labelFontSizeKey: double,
-  labelBoldedKey: bool,
-  labelItalicizedKey: bool,
-  labelUnderlinedKey: bool,
-  labelLetterSpacingKey: double,
-  labelWordSpacingKey: double,
-  labelFontHeightKey: double,
-
-  // Background opacity
-  darkTextBackgroundOpacityKey: double,
-  lightTextBackgroundOpacityKey: double,
-
-  // Icons
-  iconSizeKey: double, // Required
-
-  // Selector
-  advancedTextKey: bool,
-};
-
-// Text settings' values //
-
-/// bold
-const String bold = 'bold';
-
-/// italic
-const String italic = 'italic';
-
-/// underlined
-const String underlined = 'underlined';
-
-/// '-55.55'
-const String sampleString = '55.55';
-
-// Layout keys //
-
-const String marginKey = 'margin'; // Required
-const String paddingKey = 'padding'; // Required
-const String spacingKey = 'spacing'; // Required
-
-const String hideScrollKey = 'hideScroll';
-
-/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
-const Map<String, Type> layoutKeys = <String, Type>{
-  marginKey: double, // Required
-  paddingKey: double, // Required
-  spacingKey: double, // Required
-  hideScrollKey: bool,
-};
-
-// Color settings' keys //
-
-/// 'On'
-const String textColorPrefix = 'On';
-
-// Light theme
-const String lightPrimaryKey = 'lightPrimary'; // Required
-const String lightOnPrimaryKey = 'lightOnPrimary';
-const String lightPrimaryContainerKey = 'lightPrimaryContainer';
-const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
-
-const String lightPrimaryFixedKey = 'lightPrimaryFixed';
-const String lightPrimaryFixedDimKey = 'lightPrimaryFixedDim';
-const String lightOnPrimaryFixedKey = 'lightOnPrimaryFixed';
-const String lightOnPrimaryFixedVariantKey = 'lightOnPrimaryFixedVariant';
-
-const String lightSecondaryKey = 'lightSecondary';
-const String lightOnSecondaryKey = 'lightOnSecondary';
-const String lightSecondaryContainerKey = 'lightSecondaryContainer';
-const String lightOnSecondaryContainerKey = 'lightOnSecondaryContainer';
-
-const String lightSecondaryFixedKey = 'lightSecondaryFixed';
-const String lightSecondaryFixedDimKey = 'lightSecondaryFixedDim';
-const String lightOnSecondaryFixedKey = 'lightOnSecondaryFixed';
-const String lightOnSecondaryFixedVariantKey = 'lightOnSecondaryFixedVariant';
-
-const String lightTertiaryKey = 'lightTertiary';
-const String lightOnTertiaryKey = 'lightOnTertiary';
-const String lightTertiaryContainerKey = 'lightTertiaryContainer';
-const String lightOnTertiaryContainerKey = 'lightOnTertiaryContainer';
-
-const String lightTertiaryFixedKey = 'lightTertiaryFixed';
-const String lightTertiaryFixedDimKey = 'lightTertiaryFixedDim';
-const String lightOnTertiaryFixedKey = 'lightOnTertiaryFixed';
-const String lightOnTertiaryFixedVariantKey = 'lightOnTertiaryFixedVariant';
-
-const String lightErrorKey = 'lightError';
-const String lightOnErrorKey = 'lightOnError';
-const String lightErrorContainerKey = 'lightErrorContainer';
-const String lightOnErrorContainerKey = 'lightOnErrorContainer';
-
-const String lightOutlineKey = 'lightOutline';
-const String lightOutlineVariantKey = 'lightOutlineVariant';
-
-const String lightSurfaceKey = 'lightSurface';
-const String lightOnSurfaceKey = 'lightOnSurface';
-const String lightSurfaceDimKey = 'lightSurfaceDim';
-const String lightSurfaceBrightKey = 'lightSurfaceBright';
-
-const String lightSurfaceContainerLowestKey = 'lightSurfaceContainerLowest';
-const String lightSurfaceContainerLowKey = 'lightSurfaceContainerLow';
-const String lightSurfaceContainerKey = 'lightSurfaceContainer';
-const String lightSurfaceContainerHighKey = 'lightSurfaceContainerHigh';
-const String lightSurfaceContainerHighestKey = 'lightSurfaceContainerHighest';
-
-const String lightOnSurfaceVariantKey = 'lightOnSurfaceVariant';
-const String lightInverseSurfaceKey = 'lightInverseSurface';
-const String lightOnInverseSurfaceKey = 'lightOnInverseSurface';
-const String lightInversePrimaryKey = 'lightInversePrimary';
-
-const String lightShadowKey = 'lightShadow';
-const String lightScrimKey = 'lightScrim';
-const String lightSurfaceTintKey = 'lightSurfaceTint';
-
-// Dark theme
-const String darkPrimaryKey = 'darkPrimary'; // Required
+const String darkPrimaryKey = 'darkPrimary';
 const String darkOnPrimaryKey = 'darkOnPrimary';
 const String darkPrimaryContainerKey = 'darkPrimaryContainer';
 const String darkOnPrimaryContainerKey = 'darkOnPrimaryContainer';
@@ -300,63 +80,9 @@ const String darkShadowKey = 'darkShadow';
 const String darkScrimKey = 'darkScrim';
 const String darkSurfaceTintKey = 'darkSurfaceTint';
 
-// Selector
-
-const String advancedColorsKey = 'advancedColors';
-
 /// Ordered [List] for populating color setting screen(s)
-const List<String> lightColors = <String>[
-  lightPrimaryKey, // Required
-  lightOnPrimaryKey,
-  lightPrimaryContainerKey,
-  lightOnPrimaryContainerKey,
-  lightPrimaryFixedKey,
-  lightPrimaryFixedDimKey,
-  lightOnPrimaryFixedKey,
-  lightOnPrimaryFixedVariantKey,
-  lightSecondaryKey,
-  lightOnSecondaryKey,
-  lightSecondaryContainerKey,
-  lightOnSecondaryContainerKey,
-  lightSecondaryFixedKey,
-  lightSecondaryFixedDimKey,
-  lightOnSecondaryFixedKey,
-  lightOnSecondaryFixedVariantKey,
-  lightTertiaryKey,
-  lightOnTertiaryKey,
-  lightTertiaryContainerKey,
-  lightOnTertiaryContainerKey,
-  lightTertiaryFixedKey,
-  lightTertiaryFixedDimKey,
-  lightOnTertiaryFixedKey,
-  lightOnTertiaryFixedVariantKey,
-  lightErrorKey,
-  lightOnErrorKey,
-  lightErrorContainerKey,
-  lightOnErrorContainerKey,
-  lightOutlineKey,
-  lightOutlineVariantKey,
-  lightSurfaceKey,
-  lightOnSurfaceKey,
-  lightSurfaceDimKey,
-  lightSurfaceBrightKey,
-  lightSurfaceContainerLowestKey,
-  lightSurfaceContainerLowKey,
-  lightSurfaceContainerKey,
-  lightSurfaceContainerHighKey,
-  lightSurfaceContainerHighestKey,
-  lightOnSurfaceVariantKey,
-  lightInverseSurfaceKey,
-  lightOnInverseSurfaceKey,
-  lightInversePrimaryKey,
-  lightScrimKey,
-  lightShadowKey,
-  lightSurfaceTintKey,
-];
-
-/// Ordered [List] for populating color setting screen(s)
-const List<String> darkColors = <String>[
-  darkPrimaryKey, // Required
+const List<String> darkColorOrder = <String>[
+  darkPrimaryKey,
   darkOnPrimaryKey,
   darkPrimaryContainerKey,
   darkOnPrimaryContainerKey,
@@ -384,8 +110,6 @@ const List<String> darkColors = <String>[
   darkOnErrorKey,
   darkErrorContainerKey,
   darkOnErrorContainerKey,
-  darkOutlineKey,
-  darkOutlineVariantKey,
   darkSurfaceKey,
   darkOnSurfaceKey,
   darkSurfaceDimKey,
@@ -396,71 +120,23 @@ const List<String> darkColors = <String>[
   darkSurfaceContainerHighKey,
   darkSurfaceContainerHighestKey,
   darkOnSurfaceVariantKey,
+  darkOutlineKey,
+  darkOutlineVariantKey,
+  darkShadowKey,
+  darkScrimKey,
   darkInverseSurfaceKey,
   darkOnInverseSurfaceKey,
   darkInversePrimaryKey,
-  darkScrimKey,
-  darkShadowKey,
   darkSurfaceTintKey,
 ];
 
-const String userColorsKey = 'userColors';
+const String darkColorSchemeImageKey = 'darkColorSchemeImage';
+const String userDarkColorsKey = 'userDarkColors';
 
-/// [light, dark] X all 26 material color scheme keys
-/// y the [userColorsKey]
-const Map<String, Type> colorKeys = <String, Type>{
-  userColorsKey: List<String>,
-
-  // Light theme
-  lightPrimaryKey: int, // Required
-  lightOnPrimaryKey: int,
-  lightPrimaryContainerKey: int,
-  lightOnPrimaryContainerKey: int,
-  lightPrimaryFixedKey: int,
-  lightPrimaryFixedDimKey: int,
-  lightOnPrimaryFixedKey: int,
-  lightOnPrimaryFixedVariantKey: int,
-  lightSecondaryKey: int,
-  lightOnSecondaryKey: int,
-  lightSecondaryContainerKey: int,
-  lightOnSecondaryContainerKey: int,
-  lightSecondaryFixedKey: int,
-  lightSecondaryFixedDimKey: int,
-  lightOnSecondaryFixedKey: int,
-  lightOnSecondaryFixedVariantKey: int,
-  lightTertiaryKey: int,
-  lightOnTertiaryKey: int,
-  lightTertiaryContainerKey: int,
-  lightOnTertiaryContainerKey: int,
-  lightTertiaryFixedKey: int,
-  lightTertiaryFixedDimKey: int,
-  lightOnTertiaryFixedKey: int,
-  lightOnTertiaryFixedVariantKey: int,
-  lightErrorKey: int,
-  lightOnErrorKey: int,
-  lightErrorContainerKey: int,
-  lightOnErrorContainerKey: int,
-  lightOutlineKey: int,
-  lightOutlineVariantKey: int,
-  lightSurfaceKey: int,
-  lightOnSurfaceKey: int,
-  lightSurfaceDimKey: int,
-  lightSurfaceBrightKey: int,
-  lightSurfaceContainerLowestKey: int,
-  lightSurfaceContainerLowKey: int,
-  lightSurfaceContainerKey: int,
-  lightSurfaceContainerHighKey: int,
-  lightSurfaceContainerHighestKey: int,
-  lightOnSurfaceVariantKey: int,
-  lightInverseSurfaceKey: int,
-  lightOnInverseSurfaceKey: int,
-  lightInversePrimaryKey: int,
-  lightScrimKey: int,
-  lightShadowKey: int,
-  lightSurfaceTintKey: int,
-
-  // Dark theme
-  darkPrimaryKey: int, // Required
+/// [darkColorOrder], [darkColorSchemeImageKey], && [userDarkColorsKey]
+const Map<String, Type> darkColorKeys = <String, Type>{
+  // Color scheme
+  darkPrimaryKey: int,
   darkOnPrimaryKey: int,
   darkPrimaryContainerKey: int,
   darkOnPrimaryContainerKey: int,
@@ -507,11 +183,195 @@ const Map<String, Type> colorKeys = <String, Type>{
   darkShadowKey: int,
   darkSurfaceTintKey: int,
 
-  // Selector
-  advancedColorsKey: bool,
+  // Helpers
+  darkColorSchemeImageKey: String,
+  userDarkColorsKey: List<String>,
 };
 
-// Color settings' values //
+// Light theme //
+
+const String lightPrimaryKey = 'lightPrimary';
+const String lightOnPrimaryKey = 'lightOnPrimary';
+const String lightPrimaryContainerKey = 'lightPrimaryContainer';
+const String lightOnPrimaryContainerKey = 'lightOnPrimaryContainer';
+
+const String lightPrimaryFixedKey = 'lightPrimaryFixed';
+const String lightPrimaryFixedDimKey = 'lightPrimaryFixedDim';
+const String lightOnPrimaryFixedKey = 'lightOnPrimaryFixed';
+const String lightOnPrimaryFixedVariantKey = 'lightOnPrimaryFixedVariant';
+
+const String lightSecondaryKey = 'lightSecondary';
+const String lightOnSecondaryKey = 'lightOnSecondary';
+const String lightSecondaryContainerKey = 'lightSecondaryContainer';
+const String lightOnSecondaryContainerKey = 'lightOnSecondaryContainer';
+
+const String lightSecondaryFixedKey = 'lightSecondaryFixed';
+const String lightSecondaryFixedDimKey = 'lightSecondaryFixedDim';
+const String lightOnSecondaryFixedKey = 'lightOnSecondaryFixed';
+const String lightOnSecondaryFixedVariantKey = 'lightOnSecondaryFixedVariant';
+
+const String lightTertiaryKey = 'lightTertiary';
+const String lightOnTertiaryKey = 'lightOnTertiary';
+const String lightTertiaryContainerKey = 'lightTertiaryContainer';
+const String lightOnTertiaryContainerKey = 'lightOnTertiaryContainer';
+
+const String lightTertiaryFixedKey = 'lightTertiaryFixed';
+const String lightTertiaryFixedDimKey = 'lightTertiaryFixedDim';
+const String lightOnTertiaryFixedKey = 'lightOnTertiaryFixed';
+const String lightOnTertiaryFixedVariantKey = 'lightOnTertiaryFixedVariant';
+
+const String lightErrorKey = 'lightError';
+const String lightOnErrorKey = 'lightOnError';
+const String lightErrorContainerKey = 'lightErrorContainer';
+const String lightOnErrorContainerKey = 'lightOnErrorContainer';
+
+const String lightOutlineKey = 'lightOutline';
+const String lightOutlineVariantKey = 'lightOutlineVariant';
+
+const String lightSurfaceKey = 'lightSurface';
+const String lightOnSurfaceKey = 'lightOnSurface';
+const String lightSurfaceDimKey = 'lightSurfaceDim';
+const String lightSurfaceBrightKey = 'lightSurfaceBright';
+
+const String lightSurfaceContainerLowestKey = 'lightSurfaceContainerLowest';
+const String lightSurfaceContainerLowKey = 'lightSurfaceContainerLow';
+const String lightSurfaceContainerKey = 'lightSurfaceContainer';
+const String lightSurfaceContainerHighKey = 'lightSurfaceContainerHigh';
+const String lightSurfaceContainerHighestKey = 'lightSurfaceContainerHighest';
+
+const String lightOnSurfaceVariantKey = 'lightOnSurfaceVariant';
+const String lightInverseSurfaceKey = 'lightInverseSurface';
+const String lightOnInverseSurfaceKey = 'lightOnInverseSurface';
+const String lightInversePrimaryKey = 'lightInversePrimary';
+
+const String lightShadowKey = 'lightShadow';
+const String lightScrimKey = 'lightScrim';
+const String lightSurfaceTintKey = 'lightSurfaceTint';
+
+/// Ordered [List] for populating color setting screen(s)
+const List<String> lightColorOrder = <String>[
+  lightPrimaryKey,
+  lightOnPrimaryKey,
+  lightPrimaryContainerKey,
+  lightOnPrimaryContainerKey,
+  lightPrimaryFixedKey,
+  lightPrimaryFixedDimKey,
+  lightOnPrimaryFixedKey,
+  lightOnPrimaryFixedVariantKey,
+  lightSecondaryKey,
+  lightOnSecondaryKey,
+  lightSecondaryContainerKey,
+  lightOnSecondaryContainerKey,
+  lightSecondaryFixedKey,
+  lightSecondaryFixedDimKey,
+  lightOnSecondaryFixedKey,
+  lightOnSecondaryFixedVariantKey,
+  lightTertiaryKey,
+  lightOnTertiaryKey,
+  lightTertiaryContainerKey,
+  lightOnTertiaryContainerKey,
+  lightTertiaryFixedKey,
+  lightTertiaryFixedDimKey,
+  lightOnTertiaryFixedKey,
+  lightOnTertiaryFixedVariantKey,
+  lightErrorKey,
+  lightOnErrorKey,
+  lightErrorContainerKey,
+  lightOnErrorContainerKey,
+  lightSurfaceKey,
+  lightOnSurfaceKey,
+  lightSurfaceDimKey,
+  lightSurfaceBrightKey,
+  lightSurfaceContainerLowestKey,
+  lightSurfaceContainerLowKey,
+  lightSurfaceContainerKey,
+  lightSurfaceContainerHighKey,
+  lightSurfaceContainerHighestKey,
+  lightOnSurfaceVariantKey,
+  lightOutlineKey,
+  lightOutlineVariantKey,
+  lightShadowKey,
+  lightScrimKey,
+  lightInverseSurfaceKey,
+  lightOnInverseSurfaceKey,
+  lightInversePrimaryKey,
+  lightSurfaceTintKey,
+];
+
+const String lightColorSchemeImageKey = 'lightColorSchemeImage';
+const String userLightColorsKey = 'userLightColors';
+
+/// [lightColorOrder], [lightColorSchemeImageKey], && [userLightColorsKey]
+const Map<String, Type> lightColorKeys = <String, Type>{
+  // Color scheme
+  lightPrimaryKey: int,
+  lightOnPrimaryKey: int,
+  lightPrimaryContainerKey: int,
+  lightOnPrimaryContainerKey: int,
+  lightPrimaryFixedKey: int,
+  lightPrimaryFixedDimKey: int,
+  lightOnPrimaryFixedKey: int,
+  lightOnPrimaryFixedVariantKey: int,
+  lightSecondaryKey: int,
+  lightOnSecondaryKey: int,
+  lightSecondaryContainerKey: int,
+  lightOnSecondaryContainerKey: int,
+  lightSecondaryFixedKey: int,
+  lightSecondaryFixedDimKey: int,
+  lightOnSecondaryFixedKey: int,
+  lightOnSecondaryFixedVariantKey: int,
+  lightTertiaryKey: int,
+  lightOnTertiaryKey: int,
+  lightTertiaryContainerKey: int,
+  lightOnTertiaryContainerKey: int,
+  lightTertiaryFixedKey: int,
+  lightTertiaryFixedDimKey: int,
+  lightOnTertiaryFixedKey: int,
+  lightOnTertiaryFixedVariantKey: int,
+  lightErrorKey: int,
+  lightOnErrorKey: int,
+  lightErrorContainerKey: int,
+  lightOnErrorContainerKey: int,
+  lightOutlineKey: int,
+  lightOutlineVariantKey: int,
+  lightSurfaceKey: int,
+  lightOnSurfaceKey: int,
+  lightSurfaceDimKey: int,
+  lightSurfaceBrightKey: int,
+  lightSurfaceContainerLowestKey: int,
+  lightSurfaceContainerLowKey: int,
+  lightSurfaceContainerKey: int,
+  lightSurfaceContainerHighKey: int,
+  lightSurfaceContainerHighestKey: int,
+  lightOnSurfaceVariantKey: int,
+  lightInverseSurfaceKey: int,
+  lightOnInverseSurfaceKey: int,
+  lightInversePrimaryKey: int,
+  lightScrimKey: int,
+  lightShadowKey: int,
+  lightSurfaceTintKey: int,
+
+  // Helpers
+  lightColorSchemeImageKey: String,
+  userLightColorsKey: List<String>,
+};
+
+// Shared //
+
+/// For segmented button; 'advancedColors'
+const String advancedColorsKey = 'advancedColors';
+
+/// [advancedColorsKey], [darkColorKeys], && [lightColorKeys]
+const Map<String, Type> allColorKeys = <String, Type>{
+  advancedColorsKey: bool,
+  ...darkColorKeys,
+  ...lightColorKeys,
+};
+
+//* Color settings' values *//
+
+/// 'On'
+const String textColorPrefix = 'On';
 
 const String csPrimary = 'Primary';
 const String csOnPrimary = 'On primary';
@@ -560,30 +420,77 @@ const String csScrim = 'Scrim';
 const String csShadow = 'Shadow';
 const String csSurfaceTint = 'Surface tint';
 
-// Image settings' keys //
+//* Design settings' keys *//
 
-const String lightColorSchemeImageKey = 'lightColorSchemeImage';
-const String lightBackgroundImageKey = 'lightBackgroundImage';
+// Global settings //
 
-const String darkColorSchemeImageKey = 'darkColorSchemeImage';
+const String animationDurationKey = 'animationDuration';
+
+/// [animationDurationKey]
+const Map<String, Type> globalDesignKeys = <String, Type>{
+  animationDurationKey: double,
+};
+
+// Dark theme //
+
 const String darkBackgroundImageKey = 'darkBackgroundImage';
 
-/// [light, dark]
-///      X
-/// [ColorSchemeImageKey, BackgroundImageKey, BackgroundImageKeyFit]
-const Map<String, Type> imageKeys = <String, Type>{
-  // Light theme
-  lightColorSchemeImageKey: String,
-  lightBackgroundImageKey: String,
-  '$lightBackgroundImageKey$boxFitSuffix': String,
-
-  // Dark theme
-  darkColorSchemeImageKey: String,
+/// [darkBackgroundImageKey] && w/ [boxFitSuffix]
+const Map<String, Type> darkImageKeys = <String, Type>{
   darkBackgroundImageKey: String,
   '$darkBackgroundImageKey$boxFitSuffix': String,
 };
 
-// Image settings' values //
+const String darkButtonOpacityKey = 'darkButtonOpacity';
+const String darkButtonOutlineOpacityKey = 'darkButtonOutlineOpacity';
+
+/// [darkImageKeys]
+/// && [darkButtonOpacityKey], [darkButtonOutlineOpacityKey]
+const Map<String, Type> darkDesignKeys = <String, Type>{
+  ...darkImageKeys,
+  darkButtonOpacityKey: double,
+  darkButtonOutlineOpacityKey: double,
+};
+
+// Light theme //
+
+const String lightBackgroundImageKey = 'lightBackgroundImage';
+
+/// [lightBackgroundImageKey] && w/ [boxFitSuffix]
+const Map<String, Type> lightImageKeys = <String, Type>{
+  lightBackgroundImageKey: String,
+  '$lightBackgroundImageKey$boxFitSuffix': String,
+};
+
+const String lightButtonOpacityKey = 'lightButtonOpacity';
+const String lightButtonOutlineOpacityKey = 'lightButtonOutlineOpacity';
+
+/// [lightImageKeys]
+/// && [lightButtonOpacityKey], [lightButtonOutlineOpacityKey]
+const Map<String, Type> lightDesignKeys = <String, Type>{
+  ...lightImageKeys,
+  lightButtonOpacityKey: double,
+  lightButtonOutlineOpacityKey: double,
+};
+
+// Shared //
+
+/// [darkImageKeys] && [lightImageKeys]
+const Map<String, Type> allImageKeys = <String, Type>{
+  ...darkImageKeys,
+  ...lightImageKeys,
+};
+
+/// [globalDesignKeys], [darkDesignKeys], && [lightDesignKeys]
+const Map<String, Type> allDesignKeys = <String, Type>{
+  ...globalDesignKeys,
+  ...darkDesignKeys,
+  ...lightDesignKeys,
+};
+
+//* Design settings' values *//
+
+// Image values //
 
 /// Allows for app images whose default is an asset to be "null"
 const String noImageValue = 'noImage';
@@ -612,13 +519,172 @@ const String none = 'none';
 /// 'scaleDown'
 const String scaleDown = 'scaleDown';
 
-// Global trackers //
+//* Layout settings' keys *//
 
-/// [globalKeys], [textStyleKeys], [layoutKeys], [colorKeys], [imageKeys]
+const String marginKey = 'margin';
+const String paddingKey = 'padding';
+const String spacingKey = 'spacing';
+
+const String hideScrollKey = 'hideScroll';
+
+/// [marginKey], [paddingKey], [spacingKey], [hideScrollKey]
+const Map<String, Type> allLayoutKeys = <String, Type>{
+  marginKey: double,
+  paddingKey: double,
+  spacingKey: double,
+  hideScrollKey: bool,
+};
+
+//* Text settings' keys *//
+
+// Display
+const String displayFontFamilyKey = 'displayFontFamily';
+const String displayFontSizeKey = 'displayFontSize';
+const String displayBoldedKey = 'displayBolded';
+const String displayItalicizedKey = 'displayItalicized';
+const String displayUnderlinedKey = 'displayUnderlined';
+const String displayLetterSpacingKey = 'displayLetterSpacing';
+const String displayWordSpacingKey = 'displayWordSpacing';
+const String displayFontHeightKey = 'displayFontHeight';
+
+// Headline
+const String headlineFontFamilyKey = 'headlineFontFamily';
+const String headlineFontSizeKey = 'headlineFontSize';
+const String headlineBoldedKey = 'headlineBolded';
+const String headlineItalicizedKey = 'headlineItalicized';
+const String headlineUnderlinedKey = 'headlineUnderlined';
+const String headlineLetterSpacingKey = 'headlineLetterSpacing';
+const String headlineWordSpacingKey = 'headlineWordSpacing';
+const String headlineFontHeightKey = 'headlineFontHeight';
+
+// Title
+const String titleFontFamilyKey = 'titleFontFamily';
+const String titleFontSizeKey = 'titleFontSize';
+const String titleBoldedKey = 'titleBolded';
+const String titleItalicizedKey = 'titleItalicized';
+const String titleUnderlinedKey = 'titleUnderlined';
+const String titleLetterSpacingKey = 'titleLetterSpacing';
+const String titleWordSpacingKey = 'titleWordSpacing';
+const String titleFontHeightKey = 'titleFontHeight';
+
+// Body
+const String bodyFontFamilyKey = 'bodyFontFamily';
+const String bodyFontSizeKey = 'bodyFontSize';
+const String bodyBoldedKey = 'bodyBolded';
+const String bodyItalicizedKey = 'bodyItalicized';
+const String bodyUnderlinedKey = 'bodyUnderlined';
+const String bodyLetterSpacingKey = 'bodyLetterSpacing';
+const String bodyWordSpacingKey = 'bodyWordSpacing';
+const String bodyFontHeightKey = 'bodyFontHeight';
+
+// Label
+const String labelFontFamilyKey = 'labelFontFamily';
+const String labelFontSizeKey = 'labelFontSize';
+const String labelBoldedKey = 'labelBolded';
+const String labelItalicizedKey = 'labelItalicized';
+const String labelUnderlinedKey = 'labelUnderlined';
+const String labelLetterSpacingKey = 'labelLetterSpacing';
+const String labelWordSpacingKey = 'labelWordSpacing';
+const String labelFontHeightKey = 'labelFontHeight';
+
+// Background opacity
+const String darkTextBackgroundOpacityKey = 'darkTextBackgroundOpacity';
+const String lightTextBackgroundOpacityKey = 'lightTextBackgroundOpacity';
+
+// Icons
+const String iconSizeKey = 'iconSize';
+
+// Selector
+const String advancedTextKey = 'advancedText';
+
+/// [display, headline, title, body, label]
+///                 X
+/// [FontFamily, FontSize, FontWeight, FontStyle, LetterSpacing, WordSpacing, FontHeight, FontDecoration]
+/// &&
+/// [darkTextBackgroundOpacity, lightTextBackgroundOpacity, iconSize]
+const Map<String, Type> allTextKeys = <String, Type>{
+  // Display
+  displayFontFamilyKey: String,
+  displayFontSizeKey: double,
+  displayBoldedKey: bool,
+  displayItalicizedKey: bool,
+  displayUnderlinedKey: bool,
+  displayLetterSpacingKey: double,
+  displayWordSpacingKey: double,
+  displayFontHeightKey: double,
+
+  // Headline
+  headlineFontFamilyKey: String,
+  headlineFontSizeKey: double,
+  headlineBoldedKey: bool,
+  headlineItalicizedKey: bool,
+  headlineUnderlinedKey: bool,
+  headlineLetterSpacingKey: double,
+  headlineWordSpacingKey: double,
+  headlineFontHeightKey: double,
+
+  // Title
+  titleFontFamilyKey: String,
+  titleFontSizeKey: double,
+  titleBoldedKey: bool,
+  titleItalicizedKey: bool,
+  titleUnderlinedKey: bool,
+  titleLetterSpacingKey: double,
+  titleWordSpacingKey: double,
+  titleFontHeightKey: double,
+
+  // Body
+  bodyFontFamilyKey: String,
+  bodyFontSizeKey: double,
+  bodyBoldedKey: bool,
+  bodyItalicizedKey: bool,
+  bodyUnderlinedKey: bool,
+  bodyLetterSpacingKey: double,
+  bodyWordSpacingKey: double,
+  bodyFontHeightKey: double,
+
+  // Label
+  labelFontFamilyKey: String,
+  labelFontSizeKey: double,
+  labelBoldedKey: bool,
+  labelItalicizedKey: bool,
+  labelUnderlinedKey: bool,
+  labelLetterSpacingKey: double,
+  labelWordSpacingKey: double,
+  labelFontHeightKey: double,
+
+  // Background opacity
+  darkTextBackgroundOpacityKey: double,
+  lightTextBackgroundOpacityKey: double,
+
+  // Icons
+  iconSizeKey: double,
+
+  // Selector
+  advancedTextKey: bool,
+};
+
+//* Text settings' values *//
+
+/// bold
+const String bold = 'bold';
+
+/// italic
+const String italic = 'italic';
+
+/// underlined
+const String underlined = 'underlined';
+
+/// '-55.55'
+const String sampleString = '55.55';
+
+//* Global trackers *//
+
+/// [globalKeys], [allTextKeys], [allLayoutKeys], [allColorKeys], [allImageKeys]
 const Map<String, Type> allKeys = <String, Type>{
   ...globalKeys,
-  ...textStyleKeys,
-  ...layoutKeys,
-  ...colorKeys,
-  ...imageKeys,
+  ...allColorKeys,
+  ...allDesignKeys,
+  ...allLayoutKeys,
+  ...allTextKeys,
 };

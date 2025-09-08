@@ -28,7 +28,6 @@ class EzIconLink extends StatefulWidget {
   final TextAlign? textAlign;
 
   /// Optional padding override for [TextButton.style]
-  /// Defaults to [EdgeInsets.all] => [EzConfig.get] => [marginKey]
   final EdgeInsets? padding;
 
   /// Destination function
@@ -73,38 +72,40 @@ class EzIconLink extends StatefulWidget {
 }
 
 class _EzIconLinkState extends State<EzIconLink> {
-  // Gather theme data //
+  // Define the build data //
 
-  late final ThemeData theme = Theme.of(context);
-
-  late final Color textColor = widget.textColor ?? theme.colorScheme.onSurface;
-
-  late TextStyle? textStyle =
-      (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
-    color: textColor,
-    decoration: TextDecoration.none,
-    decorationColor: widget.decorationColor ?? theme.colorScheme.primary,
-  );
-
-  // Define custom functions //
-
-  void underline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  // Return the build //
+  late final String semantics = '${widget.label}; ${widget.hint}';
 
   @override
   Widget build(BuildContext context) {
-    final String semantics = '${widget.label}; ${widget.hint}';
+    // Gather the dynamic theme data //
+
+    final ThemeData theme = Theme.of(context);
+
+    final Color textColor = widget.textColor ?? theme.colorScheme.onSurface;
+
+    TextStyle? textStyle =
+        (widget.style ?? theme.textTheme.bodyLarge)?.copyWith(
+      color: textColor,
+      decoration: TextDecoration.none,
+      decorationColor: widget.decorationColor ?? theme.colorScheme.primary,
+    );
 
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       padding: widget.padding,
       overlayColor: widget.decorationColor ?? theme.colorScheme.primary,
     );
+
+    // Define custom functions //
+
+    void underline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
 
     final Text text = Text(
       widget.label,

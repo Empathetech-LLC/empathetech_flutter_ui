@@ -9,10 +9,10 @@ const String appDescriptionKey = 'appDescription';
 const String domainNameKey = 'domainName';
 const String supportEmailKey = 'supportEmail';
 
-const String textSettingsKey = 'textSettings';
-const String layoutSettingsKey = 'layoutSettings';
 const String colorSettingsKey = 'colorSettings';
-const String imageSettingsKey = 'imageSettings';
+const String designSettingsKey = 'designSettings';
+const String layoutSettingsKey = 'layoutSettings';
+const String textSettingsKey = 'textSettings';
 
 const String appDefaultsKey = 'appDefaults';
 
@@ -33,10 +33,10 @@ class EAGConfig {
   final String domainName;
   final String? supportEmail;
 
-  final bool textSettings;
-  final bool layoutSettings;
   final bool colorSettings;
-  final bool imageSettings;
+  final bool designSettings;
+  final bool layoutSettings;
+  final bool textSettings;
 
   final Map<String, dynamic> appDefaults;
 
@@ -55,10 +55,10 @@ class EAGConfig {
     required this.appDescription,
     required this.domainName,
     this.supportEmail,
-    required this.textSettings,
-    required this.layoutSettings,
     required this.colorSettings,
-    required this.imageSettings,
+    required this.designSettings,
+    required this.layoutSettings,
+    required this.textSettings,
     required this.appDefaults,
     this.flutterPath,
     this.workPath,
@@ -76,10 +76,10 @@ class EAGConfig {
       appDescription: json[appDescriptionKey] as String,
       domainName: json[domainNameKey] as String,
       supportEmail: json[supportEmailKey] as String?,
-      textSettings: json[textSettingsKey] as bool,
-      layoutSettings: json[layoutSettingsKey] as bool,
       colorSettings: json[colorSettingsKey] as bool,
-      imageSettings: json[imageSettingsKey] as bool,
+      designSettings: json[designSettingsKey] as bool,
+      layoutSettings: json[layoutSettingsKey] as bool,
+      textSettings: json[textSettingsKey] as bool,
       appDefaults: json[appDefaultsKey] as Map<String, dynamic>,
       flutterPath: json[flutterPathKey] as String?,
       workPath: json[workPathKey] as String?,
@@ -98,10 +98,10 @@ class EAGConfig {
       appDescriptionKey: appDescription,
       domainNameKey: domainName,
       supportEmailKey: supportEmail,
-      textSettingsKey: textSettings,
-      layoutSettingsKey: layoutSettings,
       colorSettingsKey: colorSettings,
-      imageSettingsKey: imageSettings,
+      designSettingsKey: designSettings,
+      layoutSettingsKey: layoutSettings,
+      textSettingsKey: textSettings,
       appDefaultsKey: appDefaults,
       flutterPathKey: flutterPath,
       workPathKey: workPath,
@@ -121,10 +121,10 @@ class EAGConfig {
   $appDescriptionKey: $appDescription,
   $domainNameKey: $domainName,
   $supportEmailKey: $supportEmail,
-  $textSettingsKey: $textSettings,
-  $layoutSettingsKey: $layoutSettings,
   $colorSettingsKey: $colorSettings,
-  $imageSettingsKey: $imageSettings,
+  $designSettingsKey: $designSettings,
+  $layoutSettingsKey: $layoutSettings,
+  $textSettingsKey: $textSettings,
   $appDefaultsKey: ${appDefaults.toString()}
   $flutterPathKey: $flutterPath,
   $workPathKey: $workPath,

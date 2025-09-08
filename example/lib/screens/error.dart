@@ -19,13 +19,11 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = ezL10n(context);
-
-  late final TextTheme textTheme = Theme.of(context).textTheme;
 
   // Set the page title //
 
@@ -35,14 +33,17 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 ${l10n.gError}');
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    // Return the build //
+
     return OpenUIScaffold(
       body: EzScreen(
-        useImageDecoration: false,
-        child: Center(
+        Center(
           child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -67,6 +68,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ],
           ),
         ),
+        useImageDecoration: false,
       ),
     );
   }

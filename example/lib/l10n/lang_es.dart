@@ -94,6 +94,9 @@ class LangEs extends Lang {
   String get csHereHint => 'Abra un generador de esquemas de color en línea';
 
   @override
+  String get csFileBrowser => 'Abrir explorador de archivos';
+
+  @override
   String get csFlutterPath => 'Flutter ruta';
 
   @override
@@ -143,16 +146,14 @@ class LangEs extends Lang {
       'Agrega opciones de lanzamiento al menú de depuración de VS Code';
 
   @override
-  String get csSave => 'Guardar configuración';
-
-  @override
-  String get csLoad => 'Cargar configuración';
-
-  @override
   String get csGenerate => 'Generar aplicación';
 
   @override
   String get csInvalidFields => 'Algunos campos son inválidos';
+
+  @override
+  String get csRequired =>
+      'Todos los campos excepto el correo de soporte son obligatorios';
 
   @override
   String get csResetHint => 'Activa y confirma lo que se debe reiniciar.';
@@ -173,20 +174,12 @@ class LangEs extends Lang {
   String get asPageTitle => 'Archivador';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Su configuración se ha guardado en $path';
-  }
-
-  @override
   String get asUseIt => '\n\nÚselo en ';
 
   @override
   String asToGen(Object app_name) {
     return ' para escritorio para generar el código para $app_name';
   }
-
-  @override
-  String get asBadFile => 'El archivo no se guardó como ';
 
   @override
   String get gsPageTitle => 'Generador';

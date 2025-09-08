@@ -31,37 +31,19 @@ class EzBoldSetting extends StatefulWidget {
 }
 
 class _EzBoldSettingState extends State<EzBoldSetting> {
-  // Gather the theme data //
-
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
   late bool isBold = EzConfig.get(widget.configKey) ?? false;
 
-  // Return the build //
-
   @override
-  Widget build(BuildContext context) {
-    return EzIconButton(
-      style: isBold
-          ? IconButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-              side: BorderSide(color: colorScheme.primaryContainer),
-              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-            )
-          : IconButton.styleFrom(
-              foregroundColor: colorScheme.outline,
-              side: BorderSide(color: colorScheme.outlineVariant),
-              padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-            ),
-      onPressed: () async {
-        isBold = !isBold;
-        await EzConfig.setBool(widget.configKey, isBold);
-        widget.notifierCallback(isBold);
-        setState(() {});
-      },
-      tooltip: ezL10n(context).tsBold,
-      iconSize: widget.size,
-      icon: const Icon(Icons.format_bold_outlined),
-    );
-  }
+  Widget build(BuildContext context) => EzIconButton(
+        fauxDisabled: !isBold,
+        onPressed: () async {
+          isBold = !isBold;
+          await EzConfig.setBool(widget.configKey, isBold);
+          widget.notifierCallback(isBold);
+          setState(() {});
+        },
+        tooltip: ezL10n(context).tsBold,
+        iconSize: widget.size,
+        icon: const Icon(Icons.format_bold_outlined),
+      );
 }

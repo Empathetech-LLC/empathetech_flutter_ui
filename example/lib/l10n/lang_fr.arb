@@ -11,22 +11,17 @@
   "csBecomes": "devient",
   "csInvalidName": "Les lettres minuscules, les chiffres et les traits de soulignement sont autorisés.",
   "csYourApp": "votre application",
-
   "csPubName": "Nom de l'éditeur",
   "csPubPreview": "Organisation Exemple",
   "csPubTip": "Ou, Personne Exemple",
-
   "csDescription": "Description",
   "csDescPreview": "Une ou deux phrases sur votre application.",
-
   "csDomainName": "Nom de domaine",
   "csDomainTip": "À l'envers, c'est",
   "csInvalidDomain": "'domain.name' seulement; RegExp(r'^[a-z0-9_]+\\.[a-z]+$')",
-
   "csSupportEmail": "Courriel de soutien",
   "csSupportTip": "Si fourni, le système de commentaires que nous utilisons sera inclus.",
   "csInvalidEmail": "Courriel invalide",
-
   "csInclude": "Inclure",
   "csEasy": "Facile à changer plus tard",
 
@@ -37,6 +32,7 @@
   "csHere": "ici.",
   "csHereHint": "Ouvrir un générateur de palette de couleurs en ligne",
 
+  "csFileBrowser": "Ouvrir l'explorateur de fichiers",
   "csFlutterPath": "Flutter chemin",
   "csNoSpaces": "Le chemin ne peut pas contenir d'espaces",
   "csNotInstalled": "N'est pas installé?",
@@ -45,26 +41,17 @@
   
   "csAdvanced": "Paramètres avancés",
   "csRestore": "Restaurer {setting}",
-
   "csOutputPath": "Chemin de sortie",
-
   "csCopyright": "Avis de droits d'auteur",
   "csCopyrightTip": "Sera inclus en haut de chaque fichier Dart",
-
   "csLicenseDocs": "Ouvrir la documentation sur les licences open source",
-
   "csL10nTip": "Configuration de localisation (également connue sous le nom de traductions)",
-
   "csLintTip": "Règles de lint",
-
   "csLaunchTip": "Ajoute des options de lancement au menu de débogage de VS Code",
 
-  "csSave": "Enregistrer la configuration",
-  "csLoad": "Charger la configuration",
-
   "csGenerate": "Générer l'application",
-
   "csInvalidFields": "Certains champs sont invalides",
+  "csRequired": "Tous les champs sauf le courriel de soutien sont obligatoires",
 
   "csResetHint": "Activez et confirmez ce qui doit être réinitialisé.",
   "csResetBuilder": "Valeurs du constructeur",
@@ -76,10 +63,8 @@
 
   "asPageTitle": "Archiviste",
 
-  "asSavedTo": "Votre configuration a été enregistrée dans {path}",
   "asUseIt": "\n\nUtilisez-le sur ",
   "asToGen": " pour le bureau pour générer le code pour {app_name}",
-  "asBadFile": "Le fichier n'a pas été enregistré comme ",
   
 
 

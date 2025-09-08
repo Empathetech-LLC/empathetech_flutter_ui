@@ -4,10 +4,10 @@
  */
 
 import 'screens/settings_home.dart' as home;
-import 'screens/text_settings.dart' as text;
-import 'screens/layout_settings.dart' as layout;
 import 'screens/color_settings.dart' as color;
-import 'screens/image_settings.dart' as image;
+import 'screens/design_settings.dart' as design;
+import 'screens/layout_settings.dart' as layout;
+import 'screens/text_settings.dart' as text;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,13 +19,13 @@ void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences.setMockInitialValues(empathetechMaxConfig);
+  SharedPreferences.setMockInitialValues(empathMaxConfig);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   EzConfig.init(
     preferences: prefs,
-    defaults: empathetechMaxConfig,
-    fallbackLang: await EFUILang.delegate.load(english),
+    defaults: empathMaxConfig,
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );
 
@@ -33,10 +33,10 @@ void main() async {
     'maximum-config',
     () {
       home.testSuite();
-      text.testSuite();
-      layout.testSuite();
       color.testSuite();
-      image.testSuite();
+      design.testSuite();
+      layout.testSuite();
+      text.testSuite();
     },
   );
 }

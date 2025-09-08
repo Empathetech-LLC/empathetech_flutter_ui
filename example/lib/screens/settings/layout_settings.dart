@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class LayoutSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
-        body: const EzLayoutSettings(),
+        body: const EzScreen(EzLayoutSettings()),
+        fab: EzConfigFAB(context, packageName: packageName, appName: appTitle),
       );
 }

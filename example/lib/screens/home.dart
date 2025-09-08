@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
@@ -34,13 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final EzMargin margin = EzMargin();
   late final EzSpacer rowMargin = EzMargin(vertical: false);
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+  final bool isLefty = EzConfig.get(isLeftyKey);
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
 
-  // Define build data //
+  // Define the build data //
 
   final TargetPlatform platform = getBasePlatform();
   late final bool isDesktop = kIsWeb
@@ -80,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final int currentYear = DateTime.now().year;
 
-  bool textSettings = true;
-  bool layoutSettings = true;
   bool colorSettings = true;
-  bool imageSettings = true;
+  bool designSettings = true;
+  bool layoutSettings = true;
+  bool textSettings = true;
 
   late final TextEditingController flutterPathControl = TextEditingController();
 
@@ -155,10 +154,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ezWindowNamer(context, appTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
+    // Return the build //
+
     return OpenUIScaffold(
       title: l10n.csPageTitle,
       onUpload: (EAGConfig config) async {
@@ -182,10 +186,10 @@ class _HomeScreenState extends State<HomeScreen> {
         domainController.text = config.domainName;
         if (config.domainName == 'com.example') exampleDomain = true;
 
-        textSettings = config.textSettings;
-        layoutSettings = config.layoutSettings;
         colorSettings = config.colorSettings;
-        imageSettings = config.imageSettings;
+        designSettings = config.designSettings;
+        layoutSettings = config.layoutSettings;
+        textSettings = config.textSettings;
 
         await EzConfig.loadConfig(config.appDefaults);
 
@@ -238,15 +242,13 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() => canGen = true);
       },
       body: EzScreen(
-        alignment: Alignment.topLeft,
-        child: EzScrollView(
+        EzScrollView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Basic settings //
 
             // App name
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csAppName,
               tip: TextSpan(
                 children: <InlineSpan>[
@@ -282,7 +284,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Publisher name
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csPubName,
               tip: l10n.csPubTip,
               controller: pubController,
@@ -304,7 +305,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Description
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csDescription,
               controller: descriptionController,
               validator: (String? value) =>
@@ -346,8 +346,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                   EzSwitchPair(
+                    key: ValueKey<bool>(exampleDomain),
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: exampleDomain
+                    mainAxisAlignment: (exampleDomain || isLefty)
                         ? MainAxisAlignment.start
                         : MainAxisAlignment.end,
                     text: el10n.gNA,
@@ -366,7 +367,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Support email
             _BasicField(
-              textTheme: textTheme,
               title: l10n.csSupportEmail,
               tip: l10n.csSupportTip,
               controller: supportEmailController,
@@ -406,11 +406,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   margin,
                   EzCheckboxPair(
-                    text: el10n.tsPageTitle,
-                    value: textSettings,
+                    text: el10n.csPageTitle,
+                    value: colorSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
-                      setState(() => textSettings = value);
+                      setState(() => colorSettings = value);
+                    },
+                  ),
+                  margin,
+                  EzCheckboxPair(
+                    text: el10n.dsPageTitle,
+                    value: designSettings,
+                    onChanged: (bool? value) {
+                      if (value == null) return;
+                      setState(() => designSettings = value);
                     },
                   ),
                   margin,
@@ -424,20 +433,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   margin,
                   EzCheckboxPair(
-                    text: el10n.csPageTitle,
-                    value: colorSettings,
+                    text: el10n.tsPageTitle,
+                    value: textSettings,
                     onChanged: (bool? value) {
                       if (value == null) return;
-                      setState(() => colorSettings = value);
-                    },
-                  ),
-                  margin,
-                  EzCheckboxPair(
-                    text: el10n.isPageTitle,
-                    value: imageSettings,
-                    onChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() => imageSettings = value);
+                      setState(() => textSettings = value);
                     },
                   ),
                 ],
@@ -542,6 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : selectedDirectory;
                           });
                         },
+                        tooltip: l10n.csFileBrowser,
                         icon: EzIcon(PlatformIcons(context).folderOpen),
                       ),
                     ],
@@ -591,6 +592,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: EzIconButton(
                       onPressed: () =>
                           setState(() => showAdvanced = !showAdvanced),
+                      tooltip: showAdvanced ? el10n.gClose : el10n.gOpen,
                       icon: EzIcon(
                         showAdvanced
                             ? Icons.arrow_drop_up
@@ -666,6 +668,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : selectedDirectory;
                                 });
                               },
+                              tooltip: l10n.csFileBrowser,
                               icon: EzIcon(PlatformIcons(context).folderOpen),
                             ),
                           ],
@@ -776,10 +779,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           supportEmail: supportEmailController.text.isEmpty
                               ? null
                               : supportEmailController.text,
-                          textSettings: textSettings,
-                          layoutSettings: layoutSettings,
                           colorSettings: colorSettings,
-                          imageSettings: imageSettings,
+                          designSettings: designSettings,
+                          layoutSettings: layoutSettings,
+                          textSettings: textSettings,
                           appDefaults: Map<String, dynamic>.fromEntries(
                             allKeys.keys.map(
                               (String key) => MapEntry<String, dynamic>(
@@ -813,10 +816,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : vscController.text,
                         ),
                       );
+                    } else {
+                      setState(() => canGen = false);
+                      await ezSnackBar(
+                        context: context,
+                        message:
+                            '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
+                      ).closed;
+                      setState(() => canGen = true);
                     }
                   },
                   icon: EzIcon(Icons.save),
-                  label: l10n.csSave,
+                  label: el10n.ssSaveConfig,
                 ),
 
                 // Generate app
@@ -849,10 +860,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             supportEmail: supportEmailController.text.isEmpty
                                 ? null
                                 : supportEmailController.text,
-                            textSettings: textSettings,
-                            layoutSettings: layoutSettings,
                             colorSettings: colorSettings,
-                            imageSettings: imageSettings,
+                            designSettings: designSettings,
+                            layoutSettings: layoutSettings,
+                            textSettings: textSettings,
                             appDefaults: Map<String, dynamic>.fromEntries(
                               allKeys.keys.map(
                                 (String key) => MapEntry<String, dynamic>(
@@ -890,7 +901,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         setState(() => canGen = false);
                         await ezSnackBar(
                           context: context,
-                          message: l10n.csInvalidFields,
+                          message:
+                              '${l10n.csInvalidFields}.\n${l10n.csRequired}.',
                         ).closed;
                         setState(() => canGen = true);
                       }
@@ -904,6 +916,7 @@ class _HomeScreenState extends State<HomeScreen> {
             separator,
           ],
         ),
+        alignment: Alignment.topLeft,
       ),
       fab: ResetFAB(
         clearForms: () => setState(() {
@@ -921,10 +934,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           supportEmailController.clear();
 
-          textSettings = true;
-          layoutSettings = true;
           colorSettings = true;
-          imageSettings = true;
+          designSettings = true;
+          layoutSettings = true;
+          textSettings = true;
 
           flutterPathControl.clear();
 
@@ -1000,7 +1013,6 @@ output-localization-file: lang.dart
 output-class: Lang
 use-deferred-loading: true
 gen-inputs-and-outputs-list: lib/l10n
-synthetic-package: false
 required-resource-attributes: false
 format: true
 suppress-warnings: false''';
@@ -1055,8 +1067,6 @@ linter:
 }
 
 class _BasicField extends StatelessWidget {
-  final TextTheme textTheme;
-
   final String title;
   final dynamic tip;
   final TextEditingController controller;
@@ -1064,7 +1074,6 @@ class _BasicField extends StatelessWidget {
   final String hintText;
 
   const _BasicField({
-    required this.textTheme,
     required this.title,
     this.tip,
     required this.controller,
@@ -1074,12 +1083,6 @@ class _BasicField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget titleText = EzText(
-      title,
-      style: textTheme.titleLarge,
-      textAlign: TextAlign.start,
-    );
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1088,7 +1091,13 @@ class _BasicField extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Flexible(child: titleText),
+            Flexible(
+              child: EzText(
+                title,
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.start,
+              ),
+            ),
             if (tip != null)
               tip.runtimeType == String
                   ? EzToolTipper(message: tip)
@@ -1150,6 +1159,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
+          tooltip: visible ? el10n.gClose : el10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
@@ -1163,6 +1173,7 @@ class _AdvancedSettingsField extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onRemove,
+          tooltip: el10n.gRemove,
           icon: EzIcon(PlatformIcons(context).delete),
         ),
       ),
@@ -1277,13 +1288,7 @@ class _LicensePicker extends StatelessWidget {
             textAlign: TextAlign.center,
             onPressed: () => onChanged(value),
           ),
-          ExcludeSemantics(
-            child: EzRadio<String>(
-              value: value,
-              groupValue: groupValue,
-              onChanged: onChanged,
-            ),
-          ),
+          ExcludeSemantics(child: EzRadio<String>(value: value)),
         ],
       );
     }
@@ -1296,6 +1301,7 @@ class _LicensePicker extends StatelessWidget {
       child: ExcludeSemantics(
         child: EzIconButton(
           onPressed: onHide,
+          tooltip: visible ? el10n.gClose : el10n.gOpen,
           icon: EzIcon(
             visible ? Icons.arrow_drop_up : Icons.arrow_drop_down,
           ),
@@ -1342,47 +1348,51 @@ class _LicensePicker extends StatelessWidget {
           visible: visible,
           child: Padding(
             padding: EdgeInsets.only(top: EzConfig.get(marginKey)),
-            child: EzScrollView(
-              scrollDirection: Axis.horizontal,
-              thumbVisibility: false,
-              children: <Widget>[
-                margin,
-                radio(
-                  title: 'GNU GPLv3',
-                  value: gnuKey,
-                ),
-                spacer,
-                radio(
-                  title: 'MIT',
-                  value: mitKey,
-                ),
-                spacer,
-                radio(
-                  title: 'ISC',
-                  value: iscKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Apache 2.0',
-                  value: apacheKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Mozilla 2.0',
-                  value: mozillaKey,
-                ),
-                spacer,
-                radio(
-                  title: 'Unlicense',
-                  value: unlicenseKey,
-                ),
-                spacer,
-                radio(
-                  title: 'DWTFYW',
-                  value: dwtfywKey,
-                ),
-                margin,
-              ],
+            child: RadioGroup<String>(
+              groupValue: groupValue,
+              onChanged: onChanged,
+              child: EzScrollView(
+                scrollDirection: Axis.horizontal,
+                thumbVisibility: false,
+                children: <Widget>[
+                  margin,
+                  radio(
+                    title: 'GNU GPLv3',
+                    value: gnuKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'MIT',
+                    value: mitKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'ISC',
+                    value: iscKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Apache 2.0',
+                    value: apacheKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Mozilla 2.0',
+                    value: mozillaKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'Unlicense',
+                    value: unlicenseKey,
+                  ),
+                  spacer,
+                  radio(
+                    title: 'DWTFYW',
+                    value: dwtfywKey,
+                  ),
+                  margin,
+                ],
+              ),
             ),
           ),
         ),

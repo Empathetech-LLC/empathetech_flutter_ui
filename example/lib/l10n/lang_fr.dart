@@ -95,6 +95,9 @@ class LangFr extends Lang {
       'Ouvrir un générateur de palette de couleurs en ligne';
 
   @override
+  String get csFileBrowser => 'Ouvrir l\'explorateur de fichiers';
+
+  @override
   String get csFlutterPath => 'Flutter chemin';
 
   @override
@@ -143,16 +146,14 @@ class LangFr extends Lang {
       'Ajoute des options de lancement au menu de débogage de VS Code';
 
   @override
-  String get csSave => 'Enregistrer la configuration';
-
-  @override
-  String get csLoad => 'Charger la configuration';
-
-  @override
   String get csGenerate => 'Générer l\'application';
 
   @override
   String get csInvalidFields => 'Certains champs sont invalides';
+
+  @override
+  String get csRequired =>
+      'Tous les champs sauf le courriel de soutien sont obligatoires';
 
   @override
   String get csResetHint =>
@@ -174,20 +175,12 @@ class LangFr extends Lang {
   String get asPageTitle => 'Archiviste';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Votre configuration a été enregistrée dans $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUtilisez-le sur ';
 
   @override
   String asToGen(Object app_name) {
     return ' pour le bureau pour générer le code pour $app_name';
   }
-
-  @override
-  String get asBadFile => 'Le fichier n\'a pas été enregistré comme ';
 
   @override
   String get gsPageTitle => 'Générateur';

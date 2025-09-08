@@ -23,8 +23,8 @@ const String _github =
 const String _versionSource =
     'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION';
 
-/// '2.2.3'
-const String _appVersion = '2.2.3';
+/// '2.3.0'
+const String _appVersion = '2.3.0';
 
 class EzUpdater extends StatefulWidget {
   /// Checks for Open UI updates
@@ -36,7 +36,7 @@ class EzUpdater extends StatefulWidget {
 }
 
 class _EzUpdaterState extends State<EzUpdater> {
-  // Define build data //
+  // Define the build data //
 
   String? latestVersion;
   String? url;
@@ -74,6 +74,8 @@ class _EzUpdaterState extends State<EzUpdater> {
     }
   }
 
+  // Init //
+
   @override
   void initState() {
     super.initState();
@@ -89,6 +91,8 @@ class _EzUpdaterState extends State<EzUpdater> {
         url = _github;
     }
   }
+
+  // Return the build //
 
   @override
   Widget build(BuildContext context) {

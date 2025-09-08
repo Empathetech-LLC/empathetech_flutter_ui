@@ -5,6 +5,7 @@
 
   "gApply": "Apply",
   "gContinue": "Continue",
+  "gSkip": "Skip",
   "gOpen": "Open",
   "gSuccess": "Success",
   "gSuccessExl": "Success!",
@@ -43,6 +44,7 @@
   "gIncrease": "Increase",
   "gMaximum": "Maximum",
   "gMinimum": "Minimum",
+  "gCenterReset": "Hold center to reset",
 
   "gLoadingAnim": "Loading. The Empathetic logo animated as a spinning hourglass.",
 
@@ -61,6 +63,7 @@
 
   "gUpdates": "Updates available",
 
+  "gEnterURL": "Enter URL",
   "gValidURL": "Please enter a valid URL",
 
   "g404Wonder": "Not all who wander are lost.",
@@ -99,19 +102,114 @@
 
   "ssPageTitle": "Settings",
   "ssNavHint": "Open the settings page",
-  "ssSettingsGuide": "Close and reopen the app to apply your changes.\n\nHave fun!",
-  "ssSettingsGuideWeb": "Reload/refresh the page to apply your changes.\n\nHave fun!",
+  "ssRestartReminder": "Close and reopen the app to apply your changes.",
+  "ssRestartReminderWeb": "Reload/refresh the page to apply your changes.",
+  "ssHaveFun": "Have fun!",
 
-  "ssThemeMode": "Theme mode",
   "ssDominantHand": "Dominant hand",
+  "ssThemeMode": "Theme mode",
   
   "ssLanguage": "Language",
   "ssLangHint": "Activate to change the app language",
 
+  "ssLoadPreset": "Load preset",
+  "ssLoadPresetHint": "Activate to show presets",
+  "ssBigButtons": "Big buttons",
+  "ssHighVisibility": "High visibility",
+  "ssVideoGame": "Video game",
+  "ssChalkboard": "Chalkboard",
+  "ssFancyPants": "Fancy pants",
+  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?",
+  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?",
+  "ssApplied": "{config} applied.",
+  "ssTryMe": "Try me",
+
   "ssRandom": "Randomize",
   "ssRandomize": "Randomize {themeType} theme?",
 
+  "ssConfigTip": "Save/load config",
+  "ssSaveConfig": "Save config",
+  "ssConfigSaved": "Your configuration has been saved to {path}",
+  "ssWrongConfigExt": "The file was not saved as ",
+  "ssLoadConfig": "Load config",
+
   "ssResetAll": "Reset all settings?",
+
+
+
+  "csPageTitle": "Color settings",
+
+  "csPickerHint": "Open a color picker. Long press for more options.",
+
+  "csMonoChrome": "Use monochrome scheme",
+  "csHighContrast": "Use high contrast scheme",
+
+  "csPickerTitle": "Pick a color",
+  "csRecommended": "Use contrast recommendation?",
+  "csUseCustom": "Use custom",
+
+  "csAddColor": "Add a color",
+  "csCurrVal": "Current color value:",
+
+  "csSchemeBase": "Build scheme\nfrom image",
+  "csFromImage": "A color scheme will be generated from the image.",
+  "csColorScheme": "color scheme",
+
+  "csResetAll": "Reset all {themeType} theme colors?",
+
+
+
+  "dsPageTitle": "Design settings",
+
+  "dsAnimDuration": "Animation duration (ms)",
+
+  "dsButtonBackground": "Button background opacity",
+  "dsButtonOutline": "Button outline opacity",
+
+  "dsBackgroundImg": "Background image",
+  "dsImgSettingHint": "Update the {title} image",
+  "dsFromFile": "From file",
+  "dsFromCamera": "From camera",
+  "dsFromNetwork": "From URL",
+  "dsResetIt": "Reset it",
+  "dsClearIt": "Clear it",
+  "dsUseForColors": "Update the app colors using this image",
+
+  "dsImgGetFailed": "Failed to retrieve image",
+  "dsImgSetFailed": "Failed to update image",
+  "dsImgPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
+
+  "dsUseFull": "Use full image?",
+  "dsFit": "How should it fit?",
+
+  "dsCrop": "Crop",
+  "dsNoWeb": "Image editing is not supported on web",
+  "dsDrag": "Drag",
+  "dsDragHint": "Drag to reposition the image",
+  "dsSwipe": "Swipe",
+  "dsSwipeHint": "Swipe to reposition the image",
+  "dsPinch": "Pinch",
+  "dsPinchHint": "Pinch to zoom in/out",
+  "dsScroll": "Scroll",
+  "dsScrollHint": "Scroll to zoom in/out",
+  "dsRotateLeft": "Rotate left",
+  "dsRotateRight": "Rotate right",
+  "dsUndo": "Undo",
+  "dsRedo": "Redo",
+
+  "dsResetAll": "Reset all global and {themeType} theme design settings?",
+
+
+
+  "lsPageTitle": "Layout settings",
+
+  "lsMargin": "Margin",
+  "lsPadding": "Padding",
+  "lsSpacing": "Spacing",
+
+  "lsScroll": "Hide scrollbars",
+
+  "lsResetAll": "Reset all layout settings?",
 
 
 
@@ -154,64 +252,5 @@
   "tsLabelLink": "the labels?",
   "tsLabelP2": " Not too big, not too small?",
 
-  "tsResetAll": "Reset all text settings?",
-
-
-
-  "lsPageTitle": "Layout settings",
-
-  "lsMargin": "Margin",
-  "lsPadding": "Padding",
-  "lsSpacing": "Spacing",
-
-  "lsScroll": "Hide scrollbars",
-
-  "lsResetAll": "Reset all layout settings?",
-  
-  
-  
-  "csPageTitle": "Color settings",
-
-  "csPickerHint": "Open a color picker. Long press for more options.",
-
-  "csMonoChrome": "Use monochrome scheme",
-  "csHighContrast": "Use high contrast scheme",
-
-  "csPickerTitle": "Pick a color",
-  "csRecommended": "Use contrast recommendation?",
-  "csUseCustom": "Use custom",
-
-  "csAddColor": "Add a color",
-  "csCurrVal": "Current color value:",
-
-  "csSchemeBase": "Build scheme\nfrom image",
-  "csFromImage": "A color scheme will be generated from the image.",
-  "csColorScheme": "color scheme",
-
-  "csResetAll": "Reset all {themeType} theme colors?",
-
-
-
-  "isPageTitle": "Image settings",
-
-  "isBackground": "Background",
-  "isImage": "image",
-
-  "isButtonHint": "Update the {title} image",
-  "isFromFile": "From file",
-  "isFromCamera": "From camera",
-  "isFromNetwork": "From URL",
-  "isResetIt": "Reset it",
-  "isClearIt": "Clear it",
-
-  "isEnterURL": "Enter URL",
-  "isGetFailed": "Failed to retrieve image",
-  "isSetFailed": "Failed to update image:\n{error}",
-  "isPermission": "Some sites don't allow their images to be accessed by others.\nTry an image from another host.",
-
-  "isUseForColors": "Update the app colors using this image",
-
-  "isFit": "How should it fit?",
-
-  "isResetAll": "Reset all {themeType} theme images?"
+  "tsResetAll": "Reset all text settings?"
 }

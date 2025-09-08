@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [10.0.0] - 2025-09-07
+### Updated
+- Flutter 3.35.0 (breaking changes(s))
+  - Example inherited breaking changes: new EzRadio
+- Explicit ndkVersion in build.gradle
+- Image settings -> design settings (breaking change)
+  - Has previous background image setting(s) and new animation duration and button transparency settings
+  - Reminder that "isX" l10n entries are now "dsX"
+  - Re-ordered the default settings: Color, Design, Layout, Text
+- Theme data calls; split into `fixed` (outside build) and `dynamic` (inside build) chunks
+  - TextTheme and ColorScheme are now dynamic, so background ThemeMode changes will automatically redraw the UI
+- GoRouter setup to consume the new animation duration setting
+- ezImagePicker prefsPath is now optional
+  - Previously returned the image and auto-set the config key, config is now optional
+- Extra parameters on sample setting screens (minor breaking change(s))
+  - Condensed, BYO spacing widgets
+- Properly consuming iconSize in EzImageSettings and EzLocaleSettings
+- Cleanup spacing for EzAlertDialogs when entries are null
+  - And alignment when there are more than 2 actions
+- Text color for the text style providers
+  - Removed constructor param, added redraw method
+-  Text style settings widgets now require the providers as params, rather than checking the context (breaking change)
+   -  Required for seamless theme mode changes
+
+### Added
+- Simple UX for saving and loading configs
+- Sample configs
+  - Previously defined accessible configs (large touch points and high vis) and new sillier configs
+- typeMap tracker to EzConfig
+  - Load config will check the typeMap for allowed entries
+- Sample image editor screen; crop, rotate, zoom, oh my!
+  - EzImageSetting has a new showEditor param, default true
+
+### Removed
+- Unused local fonts
+- Redundant ?? fallbacks for EzConfig.get calls
+
 ## [9.2.0] - 2025-06-27
 ### Updated
 - sample_screen (all 5) customization
@@ -49,7 +86,7 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Localization strategy
   - EzConfig now requires a fallback
-    - Example: `fallbackLang: await EFUILang.delegate.load(english),`
+    - Example: `fallbackLang: await EFUILang.delegate.load(americanEnglish),`
     - Enables all things EFUI to continue working in apps that have unsupported Locales
       - If calling EFUILang in your code, here is the updated recommendation:
         - `late final EFUILang el10n = ezL10n(context);`

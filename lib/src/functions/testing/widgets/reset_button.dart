@@ -9,7 +9,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-enum RBType { all, text, layout, color, image }
+enum RBType { all, color, design, layout, text }
 
 /// For integration testing
 /// Tests [EzResetButton]
@@ -27,17 +27,17 @@ Future<void> testResetButton(
     case RBType.all:
       await ezFindText(tester, l10n.gResetAll);
       break;
-    case RBType.text:
-      await ezFindText(tester, l10n.tsResetAll);
+    case RBType.color:
+      await ezFindText(tester, l10n.csResetAll(l10n.gDark.toLowerCase()));
+      break;
+    case RBType.design:
+      await ezFindText(tester, l10n.dsResetAll(l10n.gDark.toLowerCase()));
       break;
     case RBType.layout:
       await ezFindText(tester, l10n.lsResetAll);
       break;
-    case RBType.color:
-      await ezFindText(tester, l10n.csResetAll(l10n.gDark.toLowerCase()));
-      break;
-    case RBType.image:
-      await ezFindText(tester, l10n.isResetAll(l10n.gDark.toLowerCase()));
+    case RBType.text:
+      await ezFindText(tester, l10n.tsResetAll);
       break;
   }
   await ezFindText(tester, l10n.gUndoWarn);

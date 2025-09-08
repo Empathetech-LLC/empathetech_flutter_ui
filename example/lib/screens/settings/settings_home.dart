@@ -16,11 +16,16 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).ssPageTitle,
         showSettings: false,
-        body: const EzSettingsHome(
-          textSettingsPath: textSettingsPath,
-          layoutSettingsPath: layoutSettingsPath,
+        body: const EzScreen(EzSettingsHome(
           colorSettingsPath: colorSettingsPath,
-          imageSettingsPath: imageSettingsPath,
+          designSettingsPath: designSettingsPath,
+          layoutSettingsPath: layoutSettingsPath,
+          textSettingsPath: textSettingsPath,
+        )),
+        fab: EzConfigFAB(
+          context,
+          packageName: 'net.empathetech.open_ui',
+          appName: 'Open UI',
         ),
       );
 }

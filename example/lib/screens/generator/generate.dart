@@ -23,16 +23,13 @@ class GenerateScreen extends StatefulWidget {
 }
 
 class _GenerateScreenState extends State<GenerateScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const Widget divider = EzDivider();
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
 
   // Define the build data //
 
@@ -89,6 +86,8 @@ class _GenerateScreenState extends State<GenerateScreen> {
   /// The only way to begin
   /// Is by beginning
   Future<void> genStuff() async {
+    final TextStyle? subTitle = ezSubTitleStyle(Theme.of(context).textTheme);
+
     await ezCmd(
       '${flutterPath}flutter create --org ${widget.config.domainName} ${widget.config.appName}',
       dir: workDir,
@@ -344,7 +343,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
         : onFailure(l10n.gsPartialSuccess);
   }
 
-  Widget header() {
+  Widget header(TextTheme textTheme, TextStyle? subTitle) {
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -437,66 +436,67 @@ class _GenerateScreenState extends State<GenerateScreen> {
 
   @override
   Widget build(_) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
     return OpenUIScaffold(
       title: l10n.gsPageTitle,
       running: genState == GeneratorState.running,
-      body: EzScreen(
-        child: EzScrollView(children: <Widget>[
-          header(),
-          divider,
+      body: EzScreen(EzScrollView(children: <Widget>[
+        header(textTheme, subTitle),
+        divider,
 
-          // Console output //
+        // Console output //
 
-          // Toggle
-          EzRow(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              EzText(
-                l10n.gsConsole,
-                style: textTheme.titleLarge,
-                textAlign: TextAlign.center,
+        // Toggle
+        EzRow(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            EzText(
+              l10n.gsConsole,
+              style: textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
+            EzMargin(vertical: false),
+            EzIconButton(
+              onPressed: () => setState(() => showReadout = !showReadout),
+              icon: EzIcon(
+                showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
               ),
-              EzMargin(vertical: false),
-              EzIconButton(
-                onPressed: () => setState(() => showReadout = !showReadout),
-                icon: EzIcon(
-                  showReadout ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                ),
-              ),
-            ],
-          ),
-          EzMargin(),
+            ),
+          ],
+        ),
+        EzMargin(),
 
-          // Readout
-          Visibility(
-            visible: showReadout,
-            child: Container(
-              constraints: BoxConstraints(
-                minWidth: widthOf(context) * 0.667,
-                maxWidth: widthOf(context) * 0.667,
-                maxHeight: heightOf(context) / 2,
-              ),
-              padding: EdgeInsets.all(EzConfig.get(marginKey)),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceDim,
-                borderRadius: ezRoundEdge,
-              ),
-              child: ValueListenableBuilder<String>(
-                valueListenable: readout,
-                builder: (_, String value, __) => EzScrollView(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  child: Text(
-                    value,
-                    style: textTheme.bodyLarge,
-                    textAlign: TextAlign.start,
-                  ),
+        // Readout
+        Visibility(
+          visible: showReadout,
+          child: Container(
+            constraints: BoxConstraints(
+              minWidth: widthOf(context) * 0.667,
+              maxWidth: widthOf(context) * 0.667,
+              maxHeight: heightOf(context) / 2,
+            ),
+            padding: EdgeInsets.all(EzConfig.get(marginKey)),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceDim,
+              borderRadius: ezRoundEdge,
+            ),
+            child: ValueListenableBuilder<String>(
+              valueListenable: readout,
+              builder: (_, String value, __) => EzScrollView(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                child: Text(
+                  value,
+                  style: textTheme.bodyLarge,
+                  textAlign: TextAlign.start,
                 ),
               ),
             ),
           ),
-          const EzSeparator(),
-        ]),
-      ),
+        ),
+        const EzSeparator(),
+      ])),
     );
   }
 }

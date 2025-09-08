@@ -9,12 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzAppProvider extends StatelessWidget {
-  /// Provided to [PlatformProvider] with a [ScaffoldMessenger] layer
-  final Widget app;
-
   /// Optionally provide a [ScaffoldMessengerState] typed [GlobalKey]
   /// To track [SnackBar]s, [MaterialBanner]s, etc.
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
+
+  /// Provided to [PlatformProvider] with a [ScaffoldMessenger] layer
+  final Widget app;
+
+  /// Optional [PlatformTheme.materialDarkTheme] override
+  /// Defaults to [ezThemeData] with [Brightness.dark]
+  final ThemeData? darkTheme;
+
+  /// Optional [PlatformTheme.materialLightTheme] override
+  /// Defaults to [ezThemeData] with [Brightness.light]
+  final ThemeData? lightTheme;
 
   /// [PlatformProvider.initialPlatform] passthrough
   final TargetPlatform? initialPlatform;
@@ -27,11 +35,13 @@ class EzAppProvider extends StatelessWidget {
     super.key,
     this.scaffoldMessengerKey,
     required this.app,
+    this.darkTheme,
+    this.lightTheme,
     this.initialPlatform,
     this.settings,
   });
 
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final bool? _savedDark = EzConfig.get(isDarkThemeKey);
 
@@ -41,8 +51,10 @@ class EzAppProvider extends StatelessWidget {
           ? ThemeMode.dark
           : ThemeMode.light;
 
-  late final ThemeData _materialLight = ezThemeData(Brightness.light);
-  late final ThemeData _materialDark = ezThemeData(Brightness.dark);
+  late final ThemeData _materialDark =
+      darkTheme ?? ezThemeData(Brightness.dark);
+  late final ThemeData _materialLight =
+      lightTheme ?? ezThemeData(Brightness.light);
 
   // Return the build //
 

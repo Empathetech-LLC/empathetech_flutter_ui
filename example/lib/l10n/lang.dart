@@ -255,6 +255,12 @@ abstract class Lang {
   /// **'Open an online color scheme builder'**
   String get csHereHint;
 
+  /// No description provided for @csFileBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open file browser'**
+  String get csFileBrowser;
+
   /// No description provided for @csFlutterPath.
   ///
   /// In en, this message translates to:
@@ -339,18 +345,6 @@ abstract class Lang {
   /// **'Adds launch options to VS Code\'s debug menu'**
   String get csLaunchTip;
 
-  /// No description provided for @csSave.
-  ///
-  /// In en, this message translates to:
-  /// **'Save config'**
-  String get csSave;
-
-  /// No description provided for @csLoad.
-  ///
-  /// In en, this message translates to:
-  /// **'Load config'**
-  String get csLoad;
-
   /// No description provided for @csGenerate.
   ///
   /// In en, this message translates to:
@@ -362,6 +356,12 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'Some fields are invalid'**
   String get csInvalidFields;
+
+  /// No description provided for @csRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'All fields except support email are required'**
+  String get csRequired;
 
   /// No description provided for @csResetHint.
   ///
@@ -399,12 +399,6 @@ abstract class Lang {
   /// **'Archiver'**
   String get asPageTitle;
 
-  /// No description provided for @asSavedTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Your configuration has been saved to {path}'**
-  String asSavedTo(Object path);
-
   /// No description provided for @asUseIt.
   ///
   /// In en, this message translates to:
@@ -416,12 +410,6 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **' for desktop to generate the code for {app_name}'**
   String asToGen(Object app_name);
-
-  /// No description provided for @asBadFile.
-  ///
-  /// In en, this message translates to:
-  /// **'The file was not saved as '**
-  String get asBadFile;
 
   /// No description provided for @gsPageTitle.
   ///

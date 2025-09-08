@@ -5,10 +5,11 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class EzSwitchPair extends StatelessWidget {
+class EzSwitchPair extends StatefulWidget {
   /// [EzRow.reverseHands] passthrough
   final bool reverseHands;
 
@@ -70,13 +71,35 @@ class EzSwitchPair extends StatelessWidget {
   final Color? backgroundColor;
 
   /// [Switch.value] passthrough
-  final bool value;
+  /// Provide [value] OR [valueKey]
+  /// Must pair with [onChanged]
+  final bool? value;
+
+  /// Optional pre-requisite to [onChanged]
+  /// Only for when using [valueKey]
+  final Future<bool> Function(bool)? canChange;
+
+  /// [EzConfig] key to provide to [Switch.value]
+  /// And update in [Switch.onChanged]
+  /// Provide [valueKey] OR [value]
+  /// Optionally provide [onChangedCallback]
+  final String? valueKey;
 
   /// [Switch.onChanged] passthrough
-  final ValueChanged<bool?>? onChanged;
+  /// Provide [onChanged] OR [onChangedCallback]
+  /// Pairs with [value]
+  final void Function(bool?)? onChanged;
 
-  /// [Switch.activeColor] passthrough
-  final Color? activeColor;
+  /// If you want to do more than just update [valueKey] in [Switch.onChanged]
+  /// Provide [onChangedCallback] OR [onChanged]
+  /// Pairs with [valueKey]
+  final void Function(bool?)? onChangedCallback;
+
+  /// Defaults to max([EzConfig]s [iconSizeKey] / [defaultIconSize], 1.0)
+  final double? scale;
+
+  /// [Switch.activeThumbColor] passthrough
+  final Color? activeThumbColor;
 
   /// [Switch.activeTrackColor] passthrough
   final Color? activeTrackColor;
@@ -129,8 +152,9 @@ class EzSwitchPair extends StatelessWidget {
   /// [Switch.padding] passthrough
   final EdgeInsetsGeometry? padding;
 
-  /// [EzRow] with [EzText] and a [Switch]
-  /// The [text] is [Flexible]
+  /// [EzRow] with flexible [EzText] and a [Switch]
+  /// Provide the traditional [value] and [onChanged]
+  /// Or and EzConfig optimized [valueKey] and optional [onChangedCallback]
   const EzSwitchPair({
     super.key,
     // Row
@@ -158,9 +182,13 @@ class EzSwitchPair extends StatelessWidget {
     this.backgroundColor,
 
     // Switch
-    required this.value,
+    this.value,
+    this.valueKey,
     this.onChanged,
-    this.activeColor,
+    this.canChange,
+    this.onChangedCallback,
+    this.scale,
+    this.activeThumbColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
     this.inactiveTrackColor,
@@ -178,58 +206,101 @@ class EzSwitchPair extends StatelessWidget {
     this.onFocusChange,
     this.autofocus = false,
     this.padding,
-  });
+  })  : assert((value == null) != (valueKey == null),
+            'Provide value OR valueKey, but not both'),
+        assert((value == null) == (onChanged == null),
+            'Must pair value and onChanged'),
+        assert((valueKey == null) != (onChanged == null),
+            'Cannot use onChanged with valueKey'),
+        assert(
+            ((onChangedCallback == null) && (value == null) ||
+                ((onChangedCallback == null) != (value == null))),
+            'Cannot use onChangedCallback with value');
+
+  @override
+  State<EzSwitchPair> createState() => _EzSwitchPairState();
+}
+
+class _EzSwitchPairState extends State<EzSwitchPair> {
+  late bool value = widget.value ?? EzConfig.get(widget.valueKey!);
+
+  late final double margin = EzConfig.get(marginKey);
+  late final double ratio = widget.scale ??
+      max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
+          EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
+
+  late final void Function(bool?) onChanged = widget.onChanged ??
+      (bool? choice) async {
+        if (choice == null) return;
+
+        if (widget.canChange != null) {
+          final bool canChange = await widget.canChange!(choice);
+          if (!canChange) return;
+        }
+
+        await EzConfig.setBool(widget.valueKey!, choice);
+        setState(() => value = choice);
+
+        widget.onChangedCallback?.call(choice);
+      };
 
   @override
   Widget build(BuildContext context) {
     return EzRow(
-      reverseHands: reverseHands,
-      mainAxisSize: mainAxisSize,
-      mainAxisAlignment: mainAxisAlignment,
-      crossAxisAlignment: crossAxisAlignment,
+      reverseHands: widget.reverseHands,
+      mainAxisSize: widget.mainAxisSize,
+      mainAxisAlignment: widget.mainAxisAlignment,
+      crossAxisAlignment: widget.crossAxisAlignment,
       children: <Widget>[
         Flexible(
           child: EzText(
-            text,
-            useSurface: useSurface,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            locale: locale,
-            softWrap: softWrap,
-            overflow: overflow,
-            textScaler: textScaler,
-            maxLines: maxLines,
-            semanticsLabel: semanticsLabel,
-            textWidthBasis: textWidthBasis,
-            textHeightBehavior: textHeightBehavior,
-            selectionColor: selectionColor,
-            backgroundColor: backgroundColor,
+            widget.text,
+            useSurface: widget.useSurface,
+            style: widget.style,
+            strutStyle: widget.strutStyle,
+            textAlign: widget.textAlign,
+            textDirection: widget.textDirection,
+            locale: widget.locale,
+            softWrap: widget.softWrap,
+            overflow: widget.overflow,
+            textScaler: widget.textScaler,
+            maxLines: widget.maxLines,
+            semanticsLabel: widget.semanticsLabel,
+            textWidthBasis: widget.textWidthBasis,
+            textHeightBehavior: widget.textHeightBehavior,
+            selectionColor: widget.selectionColor,
+            backgroundColor: widget.backgroundColor,
           ),
         ),
-        // Could be PlatformSwitch... but iOS switches are lame ¯\_(ツ)_/¯
-        Switch(
-          value: value,
-          onChanged: onChanged,
-          activeColor: activeColor,
-          activeTrackColor: activeTrackColor,
-          inactiveThumbColor: inactiveThumbColor,
-          inactiveTrackColor: inactiveTrackColor,
-          activeThumbImage: activeThumbImage,
-          onActiveThumbImageError: onActiveThumbImageError,
-          inactiveThumbImage: inactiveThumbImage,
-          onInactiveThumbImageError: onInactiveThumbImageError,
-          materialTapTargetSize: materialTapTargetSize,
-          dragStartBehavior: dragStartBehavior,
-          mouseCursor: mouseCursor,
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          splashRadius: splashRadius,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          autofocus: autofocus,
-          padding: padding,
+        Transform.scale(
+          scale: max(1.0, ratio),
+          // Could be PlatformSwitch
+          // Dev's opinion: Material switches are better
+          child: Switch(
+            value: value,
+            onChanged: onChanged,
+            activeThumbColor: widget.activeThumbColor,
+            activeTrackColor: widget.activeTrackColor,
+            inactiveThumbColor: widget.inactiveThumbColor,
+            inactiveTrackColor: widget.inactiveTrackColor,
+            activeThumbImage: widget.activeThumbImage,
+            onActiveThumbImageError: widget.onActiveThumbImageError,
+            inactiveThumbImage: widget.inactiveThumbImage,
+            onInactiveThumbImageError: widget.onInactiveThumbImageError,
+            materialTapTargetSize: widget.materialTapTargetSize,
+            dragStartBehavior: widget.dragStartBehavior,
+            mouseCursor: widget.mouseCursor,
+            focusColor: widget.focusColor,
+            hoverColor: widget.hoverColor,
+            splashRadius: widget.splashRadius,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
+            autofocus: widget.autofocus,
+            padding: widget.padding ??
+                (ratio > 1.1
+                    ? EdgeInsets.all(margin * ratio)
+                    : EdgeInsets.symmetric(horizontal: margin)),
+          ),
         ),
       ],
     );

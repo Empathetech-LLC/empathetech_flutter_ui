@@ -5,7 +5,6 @@
 
 import '../models/export.dart';
 import '../screens/export.dart';
-import '../utils/export.dart';
 
 import 'dart:io';
 import 'dart:convert';
@@ -70,7 +69,7 @@ class UploadButton extends StatelessWidget {
           }
         },
         icon: EzIcon(Icons.upload),
-        label: Lang.of(context)!.csLoad,
+        label: ezL10n(context).ssLoadConfig,
       );
 }
 

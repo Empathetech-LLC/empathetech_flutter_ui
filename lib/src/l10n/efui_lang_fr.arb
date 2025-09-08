@@ -5,6 +5,7 @@
 
   "gApply": "Appliquer",
   "gContinue": "Continuer",
+  "gSkip": "Passer",
   "gOpen": "Ouvrir",
   "gSuccess": "Succès",
   "gSuccessExl": "Succès !",
@@ -43,6 +44,7 @@
   "gIncrease": "Augmenter",
   "gMaximum": "Maximum",
   "gMinimum": "Minimum",
+  "gCenterReset": "Maintenez le centre pour réinitialiser",
 
   "gLoadingAnim": "Chargement. Le logo empathique animé comme un sablier tournant.",
 
@@ -61,6 +63,7 @@
 
   "gUpdates": "Mises à jour disponibles",
 
+  "gEnterURL": "Entrer l'URL",
   "gValidURL": "Veuillez saisir une URL valide",
 
   "g404Wonder": "Tous ceux qui errent ne sont pas perdus.",
@@ -99,19 +102,114 @@
 
   "ssPageTitle": "Paramètres",
   "ssNavHint": "Ouvrir la page des paramètres",
-  "ssSettingsGuide": "Fermez et rouvrez l'application pour appliquer vos modifications.\n\nAmusez-vous bien !",
-  "ssSettingsGuideWeb": "Rechargez/actualisez la page pour appliquer vos modifications.\n\nAmusez-vous bien !",
+  "ssRestartReminder": "Fermez et rouvrez l'application pour appliquer vos modifications.",
+  "ssRestartReminderWeb": "Rechargez/actualisez la page pour appliquer vos modifications.",
+  "ssHaveFun": "Amusez-vous bien !",
 
-  "ssThemeMode": "Mode de thème",
   "ssDominantHand": "Main dominante",
+  "ssThemeMode": "Mode de thème",
 
   "ssLanguage": "Langue",
   "ssLangHint": "Activer pour changer la langue de l'application",
+  
+  "ssLoadPreset": "Charger un préréglage",
+  "ssLoadPresetHint": "Activer pour afficher les préréglages",
+  "ssBigButtons": "Gros boutons",
+  "ssHighVisibility": "Haute visibilité",
+  "ssVideoGame": "Mode jeu",
+  "ssChalkboard": "Tableau noir",
+  "ssFancyPants": "Pantalons élégants",
+  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?",
+  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?",
+  "ssApplied": "{config} appliqué.",
+  "ssTryMe": "Essayez-moi",
 
   "ssRandom": "Randomiser",
   "ssRandomize": "Thème {themeType} aléatoire ?",
 
+  "ssConfigTip": "Enregistrer/charger la configuration",
+  "ssSaveConfig": "Enregistrer la configuration",
+  "ssLoadConfig": "Charger la configuration",
+  "ssConfigSaved": "Votre configuration a été enregistrée dans {path}",
+  "ssWrongConfigExt": "Le fichier n'a pas été enregistré comme ",
+
   "ssResetAll": "Réinitialiser tous les paramètres ?",
+
+
+
+  "csPageTitle": "Paramètres de couleur",
+
+  "csPickerHint": "Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d'options.",
+
+  "csMonoChrome": "Utiliser un schéma monochrome",
+  "csHighContrast": "Utiliser un schéma à contraste élevé",
+
+  "csPickerTitle": "Choisissez une couleur",
+  "csRecommended": "Utiliser la recommandation de contraste ?",
+  "csUseCustom": "Utiliser personnalisé",
+
+  "csAddColor": "Ajouter une couleur",
+  "csCurrVal": "Valeur de couleur actuelle :",
+
+  "csSchemeBase": "Construire le schéma\nà partir de l'image",
+  "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
+  "csColorScheme": "schéma de couleurs",
+
+  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
+
+
+
+  "dsPageTitle": "Paramètres de conception",
+
+  "dsAnimDuration": "Durée de l'animation (ms)",
+
+  "dsButtonBackground": "Opacité de l'arrière-plan du bouton",
+  "dsButtonOutline": "Opacité du contour du bouton",
+
+  "dsBackgroundImg": "Arrière-plan de l'image",
+  "dsImgSettingHint": "Mettre à jour l'image {title}",
+  "dsFromFile": "Depuis un fichier",
+  "dsFromCamera": "Depuis la caméra",
+  "dsFromNetwork": "Depuis une URL",
+  "dsResetIt": "Réinitialiser",
+  "dsClearIt": "Effacer",
+  "dsUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
+
+  "dsImgGetFailed": "Impossible de récupérer l'image",
+  "dsImgSetFailed": "Échec de la mise à jour de l'image",
+  "dsImgPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
+  
+  "dsUseFull": "Utiliser l'image complète ?",
+  "dsFit": "Comment devrait-il s'adapter ?",
+
+  "dsCrop": "Recadrer",
+  "dsNoWeb": "L'édition d'images n'est pas prise en charge sur le web",
+  "dsDrag": "Glisser",
+  "dsDragHint": "Glissez pour repositionner l'image",
+  "dsSwipe": "Balayer",
+  "dsSwipeHint": "Balayez pour repositionner l'image",
+  "dsPinch": "Pincer",
+  "dsPinchHint": "Pincez pour zoomer/dézoomer l'image",
+  "dsScroll": "Faire défiler",
+  "dsScrollHint": "Faites défiler pour zoomer/dézoomer",
+  "dsRotateLeft": "Tourner à gauche",
+  "dsRotateRight": "Tourner à droite",
+  "dsUndo": "Annuler",
+  "dsRedo": "Rétablir",
+
+  "dsResetAll": "Réinitialiser tous les paramètres de conception globaux et du thème {themeType} ?",
+
+
+
+  "lsPageTitle": "Paramètres de mise en page",
+
+  "lsMargin": "Marge extérieure",
+  "lsPadding": "Marge intérieure",
+  "lsSpacing": "Espacement",
+
+  "lsScroll": "Masquer les barres de défilement",
+
+  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
 
 
 
@@ -154,64 +252,5 @@
   "tsLabelLink": "les labels ?",
   "tsLabelP2": " Ni trop gros, ni trop petits ?",
 
-  "tsResetAll": "Réinitialiser tous les paramètres de texte ?",
-
-
-
-  "lsPageTitle": "Paramètres de mise en page",
-
-  "lsMargin": "Marge extérieure",
-  "lsPadding": "Marge intérieure",
-  "lsSpacing": "Espacement",
-
-  "lsScroll": "Masquer les barres de défilement",
-
-  "lsResetAll": "Réinitialiser tous les paramètres de mise en page ?",
-
-
-
-  "csPageTitle": "Paramètres de couleur",
-
-  "csPickerHint": "Ouvre un sélecteur de couleurs. Appuyer longuement pour plus d'options.",
-
-  "csMonoChrome": "Utiliser un schéma monochrome",
-  "csHighContrast": "Utiliser un schéma à contraste élevé",
-
-  "csPickerTitle": "Choisissez une couleur",
-  "csRecommended": "Utiliser la recommandation de contraste ?",
-  "csUseCustom": "Utiliser personnalisé",
-
-  "csAddColor": "Ajouter une couleur",
-  "csCurrVal": "Valeur de couleur actuelle :",
-
-  "csSchemeBase": "Construire le schéma\nà partir de l'image",
-  "csFromImage": "Un schéma de couleurs sera généré à partir de l'image.",
-  "csColorScheme": "schéma de couleurs",
-
-  "csResetAll": "Réinitialiser toutes les couleurs du thème {themeType} ?",
-
-
-
-  "isPageTitle": "Paramètres d'image",
-
-  "isBackground": "Arrière-plan",
-  "isImage": "image",
-
-  "isButtonHint": "Mettre à jour l'image {title}",
-  "isFromFile": "Depuis un fichier",
-  "isFromCamera": "Depuis la caméra",
-  "isFromNetwork": "Depuis une URL",
-  "isResetIt": "Réinitialiser",
-  "isClearIt": "Effacer",
-
-  "isEnterURL": "Entrer l'URL",
-  "isGetFailed": "Impossible de récupérer l'image",
-  "isSetFailed": "Échec de la mise à jour de l'image :\n{error}",
-  "isPermission": "Certains sites ne permettent pas à d'autres d'accéder à leurs images.\nEssayez une image provenant d'un autre hébergeur.",
-
-  "isUseForColors": "Mettre à jour les couleurs de l'application à l'aide de cette image",
-  
-  "isFit": "Comment devrait-il s'adapter ?",
-
-  "isResetAll": "Réinitialiser toutes les images du thème {themeType} ?"
+  "tsResetAll": "Réinitialiser tous les paramètres de texte ?"
 }

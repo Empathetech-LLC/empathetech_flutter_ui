@@ -4,8 +4,11 @@
  */
 
 import '../../../empathetech_flutter_ui.dart';
+import 'images/image_editor_io.dart'
+    if (dart.library.html) 'images/image_editor_web.dart';
 
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +20,11 @@ class EzImageSetting extends StatefulWidget {
 
   /// [EzElevatedIconButton.label] passthrough
   final String label;
+
+  /// [EzElevatedButton.style] passthrough
+  /// If provided, recommended to include the default settings...
+  ///   padding: EdgeInsets.all(padding * 0.75),
+  final ButtonStyle? style;
 
   /// Effectively whether the image is nullable
   /// true is recommended
@@ -36,6 +44,15 @@ class EzImageSetting extends StatefulWidget {
   /// Whether the update theme checkbox && message should be displayed
   final bool updateThemeOption;
 
+  /// Whether the [EzImageEditor] should be displayed upon successful image selection
+  /// By current design, [AssetImage]s cannot be edited/will be skipped
+  final bool showEditor;
+
+  /// Optional default [BoxFit] for the image
+  /// Recommended if [showFitOption] is false
+  /// Note: If the user makes edits, the default will always be [BoxFit.contain]
+  final BoxFit? defaultFit;
+
   /// Whether the [BoxFit] options dialog should be displayed upon successful image selection
   final bool showFitOption;
 
@@ -44,10 +61,13 @@ class EzImageSetting extends StatefulWidget {
     super.key,
     required this.configKey,
     required this.label,
+    this.style,
     this.allowClear = true,
     this.credits,
     this.updateTheme,
     this.updateThemeOption = true,
+    this.showEditor = true,
+    this.defaultFit,
     this.showFitOption = true,
   });
 
@@ -56,7 +76,7 @@ class EzImageSetting extends StatefulWidget {
 }
 
 class _ImageSettingState extends State<EzImageSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSpacer rowSpacer = EzSpacer(vertical: false);
@@ -65,30 +85,557 @@ class _ImageSettingState extends State<EzImageSetting> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
+  final double iconSize = EzConfig.get(iconSizeKey);
+
+  late final EdgeInsets colInsets = EzInsets.col(spacing);
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final ThemeData theme = Theme.of(context);
   late final EFUILang l10n = ezL10n(context);
 
-  late final TargetPlatform platform = Theme.of(context).platform;
-
-  // Define build data //
+  // Define the build data //
 
   late String? currPath = EzConfig.get(widget.configKey);
-
-  late bool updateTheme = (widget.updateTheme != null);
   bool inProgress = false;
-  BoxFit? selected;
 
-  late final TextEditingController urlText = TextEditingController();
+  bool fromLocal = false;
+  late bool updateTheme = (widget.updateTheme != null);
+  late BoxFit? selectedFit = widget.defaultFit;
+
+  late final TextEditingController urlController = TextEditingController();
+
+  // Define custom widgets && functions //
+
+  /// Open an [EzAlertDialog] with the [Image]s source information
+  Future<dynamic>? showCredits() {
+    final bool hasChanged = currPath != EzConfig.getDefault(widget.configKey);
+    final bool showCredits = !hasChanged && (widget.credits != null);
+
+    return showCredits
+        ? showPlatformDialog(
+            context: context,
+            builder: (_) => EzAlertDialog(
+              title: Text(l10n.gCreditTo, textAlign: TextAlign.center),
+              content: Text(widget.credits!, textAlign: TextAlign.center),
+            ),
+          )
+        : null;
+  }
+
+  /// Cleanup any custom [File]s
+  Future<void> fileCleanup() async {
+    if (!EzConfig.isKeyAsset(widget.configKey)) {
+      try {
+        final File toDelete = File(widget.configKey);
+        await toDelete.delete();
+      } catch (e) {
+        ezLog(e.toString());
+      }
+    }
+  }
+
+  /// Validate a URL
+  String? validateUrl(String? value) {
+    return (value == null || value.isEmpty || !ezUrlCheck(value))
+        ? l10n.gValidURL
+        : null;
+  }
+
+  /// First-layer [ElevatedButton.onPressed]
+  /// Opens an options modal and updates the state accordingly
+  Future<void> activateSetting(ThemeData theme) async {
+    String? newPath = await showModalBottomSheet<String?>(
+      context: context,
+      builder: (BuildContext modalContext) => StatefulBuilder(
+        builder: (_, StateSetter modalState) => EzScrollView(
+          mainAxisSize: MainAxisSize.min,
+          children: sourceOptions(
+            modalContext: modalContext,
+            modalState: modalState,
+          ),
+        ),
+      ),
+    );
+    if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+
+    // Choose fit and/or edit image
+    if (fromLocal &&
+        widget.showEditor &&
+        !kIsWeb &&
+        !EzConfig.isPathAsset(newPath)) {
+      if (mounted) {
+        final Future<dynamic> Function(String path, ThemeData theme) toDo =
+            await showPlatformDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            void useFull() =>
+                Navigator.of(dialogContext).pop((_, __) async => true);
+            void crop() => Navigator.of(dialogContext).pop(editImage);
+            void cancel() =>
+                Navigator.of(dialogContext).pop((_, __) async => null);
+
+            return EzAlertDialog(
+              title: Text(l10n.dsUseFull, textAlign: TextAlign.center),
+              materialActions: <EzMaterialAction>[
+                EzMaterialAction(text: l10n.gYes, onPressed: useFull),
+                EzMaterialAction(text: l10n.dsCrop, onPressed: crop),
+                EzMaterialAction(text: l10n.gCancel, onPressed: cancel),
+              ],
+              cupertinoActions: <EzCupertinoAction>[
+                EzCupertinoAction(text: l10n.gYes, onPressed: useFull),
+                EzCupertinoAction(text: l10n.dsCrop, onPressed: crop),
+                EzCupertinoAction(text: l10n.gCancel, onPressed: cancel),
+              ],
+              needsClose: false,
+            );
+          },
+        );
+
+        final dynamic result = await toDo(newPath, theme);
+        switch (result.runtimeType) {
+          case const (bool):
+            break;
+          case const (String):
+            newPath = result;
+            selectedFit = BoxFit.contain;
+          default:
+            return;
+        }
+      }
+    }
+
+    if (newPath == null || newPath.isEmpty || newPath == noImageValue) return;
+    if (widget.showFitOption) {
+      final bool canceled = (await chooseFit(newPath, theme) == null);
+      if (canceled) return;
+    }
+
+    // Set the new path
+    final bool setPath = await EzConfig.setString(widget.configKey, newPath);
+    if (!setPath) {
+      if (mounted) ezLogAlert(context, message: l10n.dsImgSetFailed);
+    } else {
+      currPath = newPath;
+
+      // If there is little/no text background opacity, set it to 50%
+      // It will be more annoying to have to turn it down, than turn it up without being able to read
+      if (widget.updateTheme == Brightness.dark) {
+        final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
+        if (opacity == null || opacity <= 0.05) {
+          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+        }
+      }
+      if (widget.updateTheme == Brightness.light) {
+        final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
+        if (opacity == null || opacity <= 0.05) {
+          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+        }
+      }
+
+      // Update the theme (conditionally)
+      if (widget.updateTheme != null && updateTheme) {
+        final String result = await storeImageColorScheme(
+          brightness: widget.updateTheme!,
+          path: newPath,
+        );
+
+        if (result != success && mounted) {
+          await ezLogAlert(
+            context,
+            title: l10n.dsImgGetFailed,
+            message:
+                '$result${ezUrlCheck(newPath) ? '\n\n${l10n.dsImgPermission}' : ''}',
+          );
+        } else {
+          widget.updateTheme == Brightness.light
+              ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
+              : await EzConfig.setString(darkColorSchemeImageKey, newPath);
+        }
+      }
+    }
+  }
+
+  /// Build the list of [ImageSource] options
+  List<Widget> sourceOptions({
+    required BuildContext modalContext,
+    required StateSetter modalState,
+  }) {
+    final List<Widget> options = <Widget>[];
+    final String? defaultPath = EzConfig.getDefault(widget.configKey);
+
+    // From camera
+    // Only works on mobile
+    if (!kIsWeb && isMobile()) {
+      options.add(Padding(
+        padding: colInsets,
+        child: EzElevatedIconButton(
+          onPressed: () async {
+            final String? picked = await ezImagePicker(
+              context: context,
+              source: ImageSource.camera,
+            );
+
+            fromLocal = true;
+            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
+          },
+          icon: EzIcon(PlatformIcons(context).photoCamera),
+          label: l10n.dsFromCamera,
+        ),
+      ));
+    }
+
+    // From file
+    // Doesn't work on Web
+    if (!kIsWeb) {
+      options.add(Padding(
+        padding: colInsets,
+        child: EzElevatedIconButton(
+          onPressed: () async {
+            final String? picked = await ezImagePicker(
+              context: context,
+              source: ImageSource.gallery,
+            );
+
+            fromLocal = true;
+            if (modalContext.mounted) Navigator.of(modalContext).pop(picked);
+          },
+          icon: EzIcon(PlatformIcons(context).folder),
+          label: l10n.dsFromFile,
+        ),
+      ));
+    }
+
+    // From network
+    // Works everywhere
+    options.add(Padding(
+      padding: colInsets,
+      child: EzElevatedIconButton(
+        onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            void onConfirm() async {
+              closeKeyboard(dialogContext);
+
+              // Validate the URL
+              final String url = urlController.text.trim();
+              if (validateUrl(url) != null) return;
+
+              // Verify that the image is accessible
+              try {
+                final Completer<void> completer = Completer<void>();
+                final ImageStream stream =
+                    NetworkImage(url).resolve(const ImageConfiguration());
+
+                late ImageStreamListener listener;
+                listener = ImageStreamListener(
+                  // onImage (onSuccess)
+                  (_, __) {
+                    completer.complete();
+                    stream.removeListener(listener);
+                  },
+                  onError: (Object error, StackTrace? stackTrace) {
+                    completer.completeError(error, stackTrace);
+                    stream.removeListener(listener);
+                  },
+                );
+
+                stream.addListener(listener);
+                await completer.future;
+              } catch (e) {
+                if (dialogContext.mounted) {
+                  Navigator.of(dialogContext).pop(null);
+                }
+                if (modalContext.mounted) {
+                  Navigator.of(modalContext).pop(null);
+                }
+
+                if (mounted) {
+                  await ezLogAlert(
+                    context,
+                    title: l10n.dsImgGetFailed,
+                    message: '${e.toString()}\n\n${l10n.dsImgPermission}',
+                  );
+                }
+                return;
+              }
+
+              // Pop dialogs
+              if (dialogContext.mounted) {
+                Navigator.of(dialogContext).pop(url);
+              }
+
+              if (modalContext.mounted) {
+                Navigator.of(modalContext).pop(url);
+              }
+            }
+
+            void onDeny() => Navigator.of(dialogContext).pop(null);
+
+            late final List<Widget> materialActions;
+            late final List<Widget> cupertinoActions;
+
+            (materialActions, cupertinoActions) = ezActionPairs(
+              context: context,
+              confirmMsg: l10n.gApply,
+              onConfirm: onConfirm,
+              confirmIsDestructive: true,
+              denyMsg: l10n.gCancel,
+              onDeny: onDeny,
+            );
+
+            return EzAlertDialog(
+              title: Text(
+                l10n.gEnterURL,
+                textAlign: TextAlign.center,
+              ),
+              content: Form(
+                child: TextFormField(
+                  controller: urlController,
+                  maxLines: 1,
+                  autofillHints: const <String>[AutofillHints.url],
+                  decoration: const InputDecoration(hintText: webImgHint),
+                  autovalidateMode: AutovalidateMode.onUnfocus,
+                  validator: validateUrl,
+                ),
+              ),
+              materialActions: materialActions,
+              cupertinoActions: cupertinoActions,
+              needsClose: false,
+            );
+          },
+        ),
+        icon: EzIcon(Icons.computer_outlined),
+        label: l10n.dsFromNetwork,
+      ),
+    ));
+
+    // Reset
+    if (defaultPath != null && defaultPath != noImageValue) {
+      options.add(Padding(
+        padding: colInsets,
+        child: EzElevatedIconButton(
+          onPressed: () async {
+            await fileCleanup();
+            await EzConfig.remove(widget.configKey);
+
+            if (modalContext.mounted) {
+              Navigator.of(modalContext).pop(defaultPath);
+            }
+          },
+          icon: EzIcon(PlatformIcons(context).refresh),
+          label: l10n.dsResetIt,
+        ),
+      ));
+    }
+
+    // Clear (optional)
+    if (widget.allowClear) {
+      options.add(Padding(
+        padding: colInsets,
+        child: EzElevatedIconButton(
+          onPressed: () async {
+            await fileCleanup();
+            await EzConfig.setString(widget.configKey, noImageValue);
+
+            if (modalContext.mounted) {
+              Navigator.of(modalContext).pop(noImageValue);
+            }
+          },
+          icon: EzIcon(PlatformIcons(context).clear),
+          label: l10n.dsClearIt,
+        ),
+      ));
+    }
+
+    // Update theme (optional)
+    if (widget.updateTheme != null && widget.updateThemeOption) {
+      options.add(Padding(
+        padding: EzInsets.wrap(spacing),
+        child: EzSwitchPair(
+          key: ValueKey<bool>(updateTheme),
+          text: l10n.dsUseForColors,
+          value: updateTheme,
+          onChanged: (bool? choice) {
+            updateTheme = (choice == null) ? false : choice;
+            modalState(() {});
+            setState(() {});
+          },
+        ),
+      ));
+    }
+
+    return options;
+  }
+
+  /// Opens [EzImageEditor] and overrides the image as necessary
+  Future<String?> editImage(String path, ThemeData theme) async {
+    final String? editResult = await showModalBottomSheet<String?>(
+      context: context,
+      builder: (_) => EzImageEditor(path),
+      constraints: const BoxConstraints(
+        minWidth: double.infinity,
+        minHeight: double.infinity,
+      ),
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      showDragHandle: false,
+      useSafeArea: true,
+    );
+
+    return (editResult != null && editResult.isNotEmpty) ? editResult : null;
+  }
+
+  /// Opens a preview modal for choosing the desired [BoxFit]
+  Future<bool?> chooseFit(String path, ThemeData theme) {
+    final double width = widthOf(context) * 0.25;
+    final double height = heightOf(context) * 0.25;
+
+    return showModalBottomSheet<bool?>(
+      context: context,
+      useSafeArea: true,
+      constraints: const BoxConstraints(minWidth: double.infinity),
+      isScrollControlled: true,
+      builder: (_) => StatefulBuilder(
+        builder: (BuildContext fitContext, StateSetter fitState) {
+          return EzScrollView(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                l10n.dsFit,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              separator,
+              RadioGroup<BoxFit>(
+                groupValue: selectedFit,
+                onChanged: (BoxFit? value) {
+                  selectedFit = value;
+                  fitState(() {});
+                },
+                child: EzScrollView(
+                  scrollDirection: Axis.horizontal,
+                  primary: false,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.contain,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.cover,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.fill,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.fitWidth,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.fitHeight,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.none,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                    fitPreview(
+                      path: path,
+                      fit: BoxFit.scaleDown,
+                      width: width,
+                      height: height,
+                      modalState: fitState,
+                      theme: theme,
+                    ),
+                    rowSpacer,
+                  ],
+                ),
+              ),
+              separator,
+              EzRow(
+                mainAxisAlignment:
+                    isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+                children: <Widget>[
+                  rowSpacer,
+                  EzTextButton(
+                    onPressed: () => Navigator.of(fitContext).pop(null),
+                    text: l10n.gCancel,
+                    textStyle: theme.textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  rowSpacer,
+                  EzTextButton(
+                    onPressed: () async {
+                      if (selectedFit != null) {
+                        await EzConfig.setString(
+                          '${widget.configKey}$boxFitSuffix',
+                          selectedFit!.name,
+                        );
+                      }
+
+                      if (fitContext.mounted) {
+                        Navigator.of(fitContext).pop(true);
+                      }
+                    },
+                    text: selectedFit == null ? l10n.gSkip : l10n.gApply,
+                    textStyle: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.primary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  rowSpacer,
+                ],
+              ),
+              spacer,
+            ],
+          );
+        },
+      ),
+    );
+  }
 
   /// Creates a mini-[Scaffold] to preview the [BoxFit] option(s)
   Widget fitPreview({
+    required String path,
     required BoxFit fit,
     required double width,
     required double height,
     required StateSetter modalState,
+    required ThemeData theme,
   }) {
     final double scaleMargin = margin * 0.25;
 
@@ -101,24 +648,11 @@ class _ImageSettingState extends State<EzImageSetting> {
         ).height +
         scaleMargin;
 
-    final Widget selectButton = ExcludeSemantics(
-      child: EzRadio<BoxFit>(
-        groupValue: selected,
-        value: fit,
-        onChanged: (BoxFit? value) {
-          selected = value;
-          setState(() {});
-          modalState(() {});
-        },
-      ),
-    );
-
     return Column(
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            selected = fit;
-            setState(() {});
+            selectedFit = fit;
             modalState(() {});
           },
           child: Semantics(
@@ -151,7 +685,7 @@ class _ImageSettingState extends State<EzImageSetting> {
                     Image(
                       width: width - scaleMargin,
                       height: height - toolbarHeight - scaleMargin,
-                      image: ezImageProvider(currPath!),
+                      image: ezImageProvider(path),
                       fit: fit,
                     ),
                   ],
@@ -160,474 +694,44 @@ class _ImageSettingState extends State<EzImageSetting> {
             ),
           ),
         ),
-        selectButton,
+        ExcludeSemantics(child: EzRadio<BoxFit>(value: fit)),
       ],
     );
   }
 
-  // Define button functions //
-
-  /// Cleanup any custom [File]s
-  void cleanup() async {
-    if (!EzConfig.isKeyAsset(widget.configKey)) {
-      try {
-        final File toDelete = File(widget.configKey);
-        await toDelete.delete();
-      } catch (e) {
-        doNothing();
-      }
-    }
-  }
-
-  /// Validate a URL
-  String? validateUrl(String? value) {
-    return (value == null || value.isEmpty || !ezUrlCheck(value))
-        ? l10n.gValidURL
-        : null;
-  }
-
-  /// Build the list of [ImageSource] options
-  List<Widget> sourceOptions({
-    required BuildContext dialogContext,
-    required StateSetter dialogState,
-  }) {
-    final List<Widget> options = <Widget>[];
-    final String? defaultPath = EzConfig.getDefault(widget.configKey);
-
-    // From camera
-    // Only works on mobile
-    if (!kIsWeb &&
-        (platform == TargetPlatform.android ||
-            platform == TargetPlatform.iOS)) {
-      options.add(Padding(
-        padding: EzInsets.col(spacing),
-        child: EzElevatedIconButton(
-          onPressed: () async {
-            final String? changed = await ezImagePicker(
-              context: context,
-              prefsPath: widget.configKey,
-              source: ImageSource.camera,
-            );
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(changed);
-            }
-          },
-          icon: EzIcon(PlatformIcons(context).photoCamera),
-          label: l10n.isFromCamera,
-        ),
-      ));
-    }
-
-    // From file
-    // Doesn't work on Web
-    if (!kIsWeb) {
-      options.add(Padding(
-        padding: EzInsets.col(spacing),
-        child: EzElevatedIconButton(
-          onPressed: () async {
-            final String? changed = await ezImagePicker(
-              context: context,
-              prefsPath: widget.configKey,
-              source: ImageSource.gallery,
-            );
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(changed);
-            }
-          },
-          icon: EzIcon(PlatformIcons(context).folder),
-          label: l10n.isFromFile,
-        ),
-      ));
-    }
-
-    // From network
-    // Works everywhere
-    options.add(Padding(
-      padding: EzInsets.col(spacing),
-      child: EzElevatedIconButton(
-        onPressed: () => showPlatformDialog(
-          context: context,
-          builder: (BuildContext networkDialogContext) {
-            void onConfirm() async {
-              closeKeyboard(networkDialogContext);
-
-              // Validate the URL
-              final String url = urlText.text.trim();
-
-              if (validateUrl(url) != null) return;
-
-              // Verify that the image is accessible
-              late final NetworkImage image;
-              try {
-                image = NetworkImage(urlText.text);
-              } catch (e) {
-                await ezLogAlert(
-                  context,
-                  title: l10n.isGetFailed,
-                  message: '${e.toString()}\n\n${l10n.isPermission}',
-                );
-
-                if (networkDialogContext.mounted) {
-                  Navigator.of(networkDialogContext).pop(null);
-                }
-                return;
-              }
-
-              // Save the URL
-              await EzConfig.setString(widget.configKey, image.url);
-
-              // Pop dialogs
-              if (networkDialogContext.mounted) {
-                Navigator.of(networkDialogContext).pop(image.url);
-              }
-
-              if (dialogContext.mounted) {
-                Navigator.of(dialogContext).pop(image.url);
-              }
-            }
-
-            void onDeny() => Navigator.of(networkDialogContext).pop(null);
-
-            late final List<Widget> materialActions;
-            late final List<Widget> cupertinoActions;
-
-            (materialActions, cupertinoActions) = ezActionPairs(
-              context: context,
-              confirmMsg: l10n.gApply,
-              onConfirm: onConfirm,
-              confirmIsDestructive: true,
-              denyMsg: l10n.gCancel,
-              onDeny: onDeny,
-            );
-
-            return EzAlertDialog(
-              title: Text(
-                l10n.isEnterURL,
-                textAlign: TextAlign.center,
-              ),
-              content: Form(
-                child: TextFormField(
-                  controller: urlText,
-                  maxLines: 1,
-                  autofillHints: const <String>[AutofillHints.url],
-                  decoration: const InputDecoration(hintText: webImgHint),
-                  autovalidateMode: AutovalidateMode.onUnfocus,
-                  validator: validateUrl,
-                ),
-              ),
-              materialActions: materialActions,
-              cupertinoActions: cupertinoActions,
-              needsClose: false,
-            );
-          },
-        ),
-        icon: EzIcon(Icons.computer_outlined),
-        label: l10n.isFromNetwork,
-      ),
-    ));
-
-    // Reset
-    if (defaultPath != null && defaultPath != noImageValue) {
-      options.add(Padding(
-        padding: EzInsets.col(spacing),
-        child: EzElevatedIconButton(
-          onPressed: () async {
-            cleanup();
-            await EzConfig.remove(widget.configKey);
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(defaultPath);
-            }
-          },
-          icon: EzIcon(PlatformIcons(context).refresh),
-          label: l10n.isResetIt,
-        ),
-      ));
-    }
-
-    // Clear (optional)
-    if (widget.allowClear) {
-      options.add(Padding(
-        padding: EzInsets.col(spacing),
-        child: EzElevatedIconButton(
-          onPressed: () async {
-            cleanup();
-            await EzConfig.setString(widget.configKey, noImageValue);
-
-            if (dialogContext.mounted) {
-              Navigator.of(dialogContext).pop(noImageValue);
-            }
-          },
-          icon: EzIcon(PlatformIcons(context).clear),
-          label: l10n.isClearIt,
-        ),
-      ));
-    }
-
-    // Update theme (optional)
-    if (widget.updateTheme != null && widget.updateThemeOption) {
-      options.add(Padding(
-        padding: EdgeInsets.only(
-          left: spacing / 2,
-          right: spacing / 2,
-          top: spacing / 2,
-          bottom: spacing,
-        ),
-        child: EzSwitchPair(
-          text: l10n.isUseForColors,
-          textAlign: TextAlign.center,
-          value: updateTheme,
-          onChanged: (bool? choice) {
-            updateTheme = (choice == null) ? false : choice;
-            dialogState(() {});
-            setState(() {});
-          },
-        ),
-      ));
-    }
-
-    return options;
-  }
-
-  /// Opens an [BottomSheet] to pick the [ImageSource] for updating [widget.configKey]
-  /// Returns the path, if any, to the new [Image]
-  Future<dynamic> chooseImage(BuildContext context) => showModalBottomSheet(
-        context: context,
-        builder: (BuildContext modalContext) => StatefulBuilder(
-          builder: (_, StateSetter modalState) => EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            children: sourceOptions(
-              dialogContext: modalContext,
-              dialogState: modalState,
-            ),
-          ),
-        ),
-      );
-
-  /// Opens a preview [EzAlertDialog] for choosing the desired [BoxFit]
-  Future<void> chooseFit() {
-    final double width = widthOf(context) * 0.25;
-    final double height = heightOf(context) * 0.25;
-
-    return showModalBottomSheet(
-      context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      builder: (_) => StatefulBuilder(
-        builder: (BuildContext fitContext, StateSetter fitState) {
-          return EzScrollView(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                l10n.isFit,
-                style: theme.textTheme.titleLarge,
-                textAlign: TextAlign.center,
-              ),
-              separator,
-              EzScrollView(
-                scrollDirection: Axis.horizontal,
-                primary: false,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.contain,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.cover,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fill,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitWidth,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.fitHeight,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.none,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                  fitPreview(
-                    fit: BoxFit.scaleDown,
-                    width: width,
-                    height: height,
-                    modalState: fitState,
-                  ),
-                  rowSpacer,
-                ],
-              ),
-              separator,
-              EzRow(
-                mainAxisAlignment:
-                    isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
-                children: <Widget>[
-                  rowSpacer,
-                  EzTextButton(
-                    onPressed: () => Navigator.of(fitContext).pop(),
-                    text: l10n.gCancel,
-                    textStyle: theme.textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  rowSpacer,
-                  EzTextButton(
-                    onPressed: () async {
-                      if (selected != null) {
-                        await EzConfig.setString(
-                          '${widget.configKey}$boxFitSuffix',
-                          selected!.name,
-                        );
-                      }
-
-                      if (fitContext.mounted) Navigator.of(fitContext).pop();
-                    },
-                    text: l10n.gApply,
-                    textStyle: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  rowSpacer,
-                ],
-              ),
-              spacer,
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  /// First-layer [ElevatedButton.onPressed]
-  /// Runs the [chooseImage] dialog and updates the state accordingly
-  Future<void> activateSetting() async {
-    final dynamic newPath = await chooseImage(context);
-
-    if (newPath is String) {
-      currPath = newPath;
-      final String? defaultPath = EzConfig.getDefault(widget.configKey);
-
-      if (widget.updateTheme != null &&
-          updateTheme &&
-          newPath != noImageValue &&
-          newPath != defaultPath) {
-        setState(() => inProgress = true);
-
-        final String result = await storeImageColorScheme(
-          brightness: widget.updateTheme!,
-          path: newPath,
-        );
-
-        if (result != success) {
-          await EzConfig.remove(widget.configKey);
-          currPath = null;
-
-          setState(() => inProgress = false);
-
-          if (mounted) {
-            await ezLogAlert(
-              context,
-              title: l10n.isGetFailed,
-              message:
-                  '$result${ezUrlCheck(newPath) ? '\n\n${l10n.isPermission}' : ''}',
-            );
-          }
-          return;
-        }
-
-        widget.updateTheme == Brightness.light
-            ? await EzConfig.setString(lightColorSchemeImageKey, newPath)
-            : await EzConfig.setString(darkColorSchemeImageKey, newPath);
-      }
-
-      if (currPath != noImageValue) {
-        if (widget.showFitOption) await chooseFit();
-
-        // If the user set a background image and doesn't have text opacity, quickly set it to 50% so they will have a chance to read things
-        final double? lightOpacity =
-            EzConfig.get(lightTextBackgroundOpacityKey);
-        final double? darkOpacity = EzConfig.get(darkTextBackgroundOpacityKey);
-
-        if (widget.updateTheme == Brightness.light) {
-          if (lightOpacity == null || lightOpacity == 0.0) {
-            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
-          }
-        } else {
-          if (darkOpacity == null || darkOpacity == 0.0) {
-            await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
-          }
-        }
-      }
-    }
-
-    // Here to act as a a "default" for clearing and/or resetting the image
-    setState(() => inProgress = false);
-  }
-
-  /// Open an [EzAlertDialog] with the [Image]s source information
-  Future<dynamic>? showCredits() {
-    final bool hasChanged = currPath != EzConfig.getDefault(widget.configKey);
-    final bool showCredits = !hasChanged && (widget.credits != null);
-
-    return showCredits
-        ? showPlatformDialog(
-            context: context,
-            builder: (_) => EzAlertDialog(
-              title: Text(l10n.gCreditTo, textAlign: TextAlign.center),
-              content: Text(widget.credits!, textAlign: TextAlign.center),
-            ),
-          )
-        : null;
-  }
-
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    late final ThemeData theme = Theme.of(context);
+
+    // Return the build //
     return Semantics(
       label: widget.label,
       button: true,
-      hint: l10n.isButtonHint(widget.label),
+      hint: l10n.dsImgSettingHint(widget.label),
       child: ExcludeSemantics(
         child: EzElevatedIconButton(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(padding * 0.75),
-          ),
-          onPressed: inProgress ? doNothing : activateSetting,
-          onLongPress: inProgress ? doNothing : showCredits,
+          style: widget.style ??
+              ElevatedButton.styleFrom(padding: EdgeInsets.all(padding * 0.75)),
+          onPressed: () async {
+            if (inProgress) return;
+
+            setState(() {
+              inProgress = true;
+              fromLocal = false;
+            });
+            await activateSetting(theme);
+            setState(() => inProgress = false);
+          },
+          onLongPress: () => inProgress ? doNothing() : showCredits(),
           icon: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: theme.colorScheme.onSurface),
             ),
             child: CircleAvatar(
-              radius: padding * 2 + margin * 0.5,
+              radius: iconSize + padding,
               foregroundImage:
                   (inProgress || currPath == null || currPath == noImageValue)
                       ? null
@@ -654,7 +758,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   @override
   void dispose() {
-    urlText.dispose();
+    urlController.dispose();
     super.dispose();
   }
 }

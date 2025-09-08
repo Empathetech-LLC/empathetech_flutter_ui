@@ -42,13 +42,31 @@ class EzAlertDialog extends PlatformAlertDialog {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final double margin = EzConfig.get(marginKey);
-    final double padding = EzConfig.get(paddingKey);
     final double spacing = EzConfig.get(spacingKey);
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+
+    // Define custom functions //
+
+    List<Widget>? buildMActions(List<Widget>? actions) {
+      if (actions == null) return null;
+
+      return actions.length <= 2
+          ? isLefty
+              ? actions.reversed.toList()
+              : actions
+          : <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: actions,
+              )
+            ];
+    }
 
     // Return the build //
 
@@ -63,7 +81,7 @@ class EzAlertDialog extends PlatformAlertDialog {
             text: ezL10n(context).gClose,
           );
 
-          late final List<Widget>? actions = needsClose
+          late final List<Widget>? mActions = needsClose
               ? <Widget>[
                   closeAction,
                   if (materialActions != null) ...materialActions!,
@@ -73,24 +91,30 @@ class EzAlertDialog extends PlatformAlertDialog {
           return MaterialAlertDialogData(
             // Title
             title: title,
-            titlePadding: EdgeInsets.only(
-              left: padding,
-              right: padding,
-              top: padding,
-              bottom: spacing / 2,
-            ),
+            titlePadding: title == null
+                ? null
+                : dialogContent == null
+                    ? EdgeInsets.zero
+                    : EdgeInsets.only(top: margin, bottom: spacing / 2),
 
             // Content
             content: dialogContent,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: margin,
-              vertical: spacing / 2,
-            ),
+            contentPadding: dialogContent == null
+                ? null
+                : title == null
+                    ? EdgeInsets.zero
+                    : EdgeInsets.symmetric(
+                        horizontal: margin,
+                        vertical: spacing / 2,
+                      ),
 
             // Actions
-            actions: isLefty ? actions?.reversed.toList() : actions,
-            actionsAlignment:
-                isLefty ? MainAxisAlignment.start : MainAxisAlignment.end,
+            actions: buildMActions(mActions),
+            actionsAlignment: (mActions != null && mActions.length > 2)
+                ? MainAxisAlignment.center
+                : isLefty
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.end,
 
             // General
             actionsPadding: EzInsets.wrap(spacing),
@@ -105,7 +129,7 @@ class EzAlertDialog extends PlatformAlertDialog {
             text: ezL10n(context).gClose,
           );
 
-          late final List<Widget>? actions = needsClose
+          late final List<Widget>? cActions = needsClose
               ? <Widget>[
                   if (cupertinoActions != null) ...cupertinoActions!,
                   closeAction
@@ -113,19 +137,33 @@ class EzAlertDialog extends PlatformAlertDialog {
               : cupertinoActions;
 
           return CupertinoAlertDialogData(
-            title: Padding(
-              padding: dialogContent == null
-                  ? EdgeInsets.zero
-                  : EdgeInsets.only(bottom: spacing / 2),
-              child: title,
-            ),
+            // Title
+            title: title == null
+                ? null
+                : Padding(
+                    padding: dialogContent == null
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(bottom: spacing / 2),
+                    child: title,
+                  ),
+
+            // Content
             content: dialogContent == null
                 ? null
                 : Padding(
-                    padding: EdgeInsets.symmetric(vertical: spacing / 2),
+                    padding: title == null
+                        ? EdgeInsets.zero
+                        : EdgeInsets.symmetric(
+                            horizontal: margin,
+                            vertical: spacing / 2,
+                          ),
                     child: dialogContent,
                   ),
-            actions: isLefty ? actions?.reversed.toList() : actions,
+
+            // Actions
+            actions: (cActions != null && cActions.length <= 2 && isLefty)
+                ? cActions.reversed.toList()
+                : cActions,
           );
         },
       ),
@@ -171,6 +209,7 @@ class EzMaterialAction extends StatelessWidget {
 
     return EzTextButton(
       onPressed: onPressed,
+      style: TextButton.styleFrom(backgroundColor: Colors.transparent),
       text: text,
       textStyle: textStyle,
     );

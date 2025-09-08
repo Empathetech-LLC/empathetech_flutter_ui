@@ -38,16 +38,18 @@ class EzWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final EzSpacer margin = EzMargin(vertical: false);
 
+    // Gather the dynamic theme data //
+
     final ThemeData theme = Theme.of(context);
+
+    final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
     final TextStyle? tStyle = titleStyle ?? theme.textTheme.titleLarge;
     final TextStyle? bStyle = bodyStyle ?? theme.textTheme.bodyLarge;
-
-    final Color alertColor = iconColor ?? theme.colorScheme.secondary;
 
     // Return the build
 

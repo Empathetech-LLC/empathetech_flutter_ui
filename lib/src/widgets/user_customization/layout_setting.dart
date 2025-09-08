@@ -80,7 +80,7 @@ class EzLayoutSetting extends StatefulWidget {
 }
 
 class _LayoutSettingState extends State<EzLayoutSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late double currValue = EzConfig.get(widget.configKey);
   late final double defaultValue = EzConfig.getDefault(widget.configKey);
@@ -89,19 +89,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
 
   static const EzSpacer spacer = EzSpacer();
 
-  late final ThemeData theme = Theme.of(context);
-
-  late final TextStyle? titleStyle =
-      widget.titleStyle ?? theme.textTheme.titleLarge;
-  late final TextStyle? bodyStyle =
-      widget.bodyStyle ?? theme.textTheme.bodyLarge;
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define build functions //
 
   /// Return the preview Widget(s) for the passed [EzLayoutSettingType]
-  List<Widget> _buildPreview(BuildContext context) {
+  List<Widget> _buildPreview(BuildContext context, ThemeData theme) {
     final String valString = currValue.toStringAsFixed(widget.decimals);
 
     switch (widget.type) {
@@ -121,7 +114,9 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
           EzTextBackground(
             Text(
               valString,
-              style: bodyStyle?.copyWith(color: theme.colorScheme.surface),
+              style: widget.bodyStyle ??
+                  theme.textTheme.bodyLarge
+                      ?.copyWith(color: theme.colorScheme.surface),
               textAlign: TextAlign.center,
             ),
             margin: EzInsets.wrap(currValue),
@@ -213,6 +208,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
   /// [widget.title] + [_buildPreview] + [PlatformSlider] + reset [EzElevatedIconButton]
   List<Widget> buildModal({
     required BuildContext context,
+    required ThemeData theme,
     required StateSetter setModalState,
   }) {
     return <Widget>[
@@ -232,12 +228,12 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               // Title
               Text(
                 label,
-                style: titleStyle,
+                style: widget.titleStyle ?? theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
 
               // Preview
-              ..._buildPreview(context),
+              ..._buildPreview(context, theme),
             ],
           ),
         ),
@@ -302,6 +298,7 @@ class _LayoutSettingState extends State<EzLayoutSetting> {
               mainAxisSize: MainAxisSize.min,
               children: buildModal(
                 context: context,
+                theme: Theme.of(context),
                 setModalState: setModalState,
               ),
             );

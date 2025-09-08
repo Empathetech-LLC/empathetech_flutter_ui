@@ -6,16 +6,28 @@
 import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzFontFamilyBatchSetting extends StatefulWidget {
+  final EzDisplayStyleProvider displayProvider;
+  final EzHeadlineStyleProvider headlineProvider;
+  final EzTitleStyleProvider titleProvider;
+  final EzBodyStyleProvider bodyProvider;
+  final EzLabelStyleProvider labelProvider;
+
   /// Optional [EzDropdownMenu.iconSize] passthrough
   final double? iconSize;
 
-  /// Standardized tool for updating the [TextStyle.fontFamily] for all five [EzTextStyleProvider]s at once
-  /// As such, the parent widget must have them in the context
-  const EzFontFamilyBatchSetting({super.key, this.iconSize});
+  /// Standardized tool for updating the 5 [TextStyle.fontFamily]s
+  const EzFontFamilyBatchSetting({
+    super.key,
+    required this.displayProvider,
+    required this.headlineProvider,
+    required this.titleProvider,
+    required this.bodyProvider,
+    required this.labelProvider,
+    this.iconSize,
+  });
 
   @override
   State<EzFontFamilyBatchSetting> createState() =>
@@ -23,41 +35,31 @@ class EzFontFamilyBatchSetting extends StatefulWidget {
 }
 
 class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final EFUILang l10n = ezL10n(context);
 
-  final double padding = EzConfig.get(paddingKey);
-
-  late final EzDisplayStyleProvider displayProvider =
-      context.watch<EzDisplayStyleProvider>();
-  late final EzHeadlineStyleProvider headlineProvider =
-      context.watch<EzHeadlineStyleProvider>();
-  late final EzTitleStyleProvider titleProvider =
-      context.watch<EzTitleStyleProvider>();
-  late final EzBodyStyleProvider bodyProvider =
-      context.watch<EzBodyStyleProvider>();
-  late final EzLabelStyleProvider labelProvider =
-      context.watch<EzLabelStyleProvider>();
+  final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
 
   // Define the build data //
 
   late Map<String, String?> currFonts = <String, String?>{
-    displayFontFamilyKey: displayProvider.value.fontFamily == null
+    displayFontFamilyKey: widget.displayProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(ezFirstWord(displayProvider.value.fontFamily!)),
-    headlineFontFamilyKey: headlineProvider.value.fontFamily == null
+        : ezClassToCamel(ezFirstWord(widget.displayProvider.value.fontFamily!)),
+    headlineFontFamilyKey: widget.headlineProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(ezFirstWord(headlineProvider.value.fontFamily!)),
-    titleFontFamilyKey: titleProvider.value.fontFamily == null
+        : ezClassToCamel(
+            ezFirstWord(widget.headlineProvider.value.fontFamily!)),
+    titleFontFamilyKey: widget.titleProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(ezFirstWord(titleProvider.value.fontFamily!)),
-    bodyFontFamilyKey: bodyProvider.value.fontFamily == null
+        : ezClassToCamel(ezFirstWord(widget.titleProvider.value.fontFamily!)),
+    bodyFontFamilyKey: widget.bodyProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(ezFirstWord(bodyProvider.value.fontFamily!)),
-    labelFontFamilyKey: labelProvider.value.fontFamily == null
+        : ezClassToCamel(ezFirstWord(widget.bodyProvider.value.fontFamily!)),
+    labelFontFamilyKey: widget.labelProvider.value.fontFamily == null
         ? null
-        : ezClassToCamel(ezFirstWord(labelProvider.value.fontFamily!)),
+        : ezClassToCamel(ezFirstWord(widget.labelProvider.value.fontFamily!)),
   };
 
   late bool isUniform =
@@ -75,7 +77,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       label: ezCamelToTitle(entry.key),
       style: TextButton.styleFrom(
         textStyle: entry.value,
-        padding: EzInsets.wrap(padding),
+        padding: menuButtonPadding,
       ),
     );
   }).toList();
@@ -125,7 +127,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
       child: EzDropdownMenu<String>(
         widthEntries: <String>[fingerPaint],
         iconSize: widget.iconSize,
-        textStyle: bodyProvider.value,
+        textStyle: widget.bodyProvider.value,
         dropdownMenuEntries: entries,
         enableSearch: false,
         initialSelection: currFontFamily,
@@ -148,11 +150,11 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
             await EzConfig.setString(key, fontFamily);
           }
 
-          displayProvider.fuse(fontFamily);
-          headlineProvider.fuse(fontFamily);
-          titleProvider.fuse(fontFamily);
-          bodyProvider.fuse(fontFamily);
-          labelProvider.fuse(fontFamily);
+          widget.displayProvider.fuse(fontFamily);
+          widget.headlineProvider.fuse(fontFamily);
+          widget.titleProvider.fuse(fontFamily);
+          widget.bodyProvider.fuse(fontFamily);
+          widget.labelProvider.fuse(fontFamily);
 
           setState(() {});
         },

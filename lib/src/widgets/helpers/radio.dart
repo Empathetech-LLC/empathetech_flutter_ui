@@ -18,12 +18,6 @@ class EzRadio<T> extends StatelessWidget {
   /// [Radio.value] passthrough
   final T value;
 
-  /// [Radio.groupValue] passthrough
-  final T? groupValue;
-
-  /// [Radio.onChanged] passthrough
-  final ValueChanged<T?>? onChanged;
-
   /// [Radio.mouseCursor] passthrough
   final MouseCursor? mouseCursor;
 
@@ -60,8 +54,6 @@ class EzRadio<T> extends StatelessWidget {
     this.scale,
     this.padding,
     required this.value,
-    this.groupValue,
-    this.onChanged,
     this.mouseCursor,
     this.toggleable = false,
     this.activeColor,
@@ -77,7 +69,8 @@ class EzRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double ratio = scale ??
-        (EzConfig.get(iconSizeKey) ?? defaultIconSize) / defaultIconSize;
+        max(EzConfig.get(iconSizeKey) / EzConfig.getDefault(iconSizeKey),
+            EzConfig.get(paddingKey) / EzConfig.getDefault(paddingKey));
 
     return Container(
       padding: ratio > 1.1
@@ -95,8 +88,6 @@ class EzRadio<T> extends StatelessWidget {
         scale: max(1.0, ratio),
         child: Radio<T>(
           value: value,
-          groupValue: groupValue,
-          onChanged: onChanged,
           mouseCursor: mouseCursor,
           toggleable: toggleable,
           activeColor: activeColor,

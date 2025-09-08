@@ -1,6 +1,6 @@
 name: example
 description: "Open UI is a sandbox application that demonstrates the power of an Empathetech UI. If you like Open UI, checkout https://github.com/Empathetech-LLC/empathetech_flutter_ui"
-version: 2.2.3+31
+version: 2.3.0+32
 publish_to: 'none'
 
 environment:
@@ -14,20 +14,21 @@ dependencies:
 
   # Flutter (Google)
   go_router: ^14.8.1
-  http: ^1.4.0
+  http: ^1.5.0
   intl: ^0.20.2
   shared_preferences: ^2.5.3
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
   # Community
   email_validator: ^3.0.0
-  feedback: ^3.1.0
-  file_picker: ^10.2.0
+  feedback: ^3.2.0
+  file_picker: ^10.3.2
   file_saver: ^0.2.14
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^9.0.0
+  go_transitions: ^0.8.2
   line_icons: ^2.0.3
-  xml: ^6.5.0
+  xml: ^6.6.1
 
   empathetech_flutter_ui:
     path: ../
@@ -45,24 +46,11 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  generate: true # For l10n
+  generate: true
   uses-material-design: true
 
   assets:
     - assets/
-    - assets/fonts/
-    - assets/fonts/Roboto-Black.ttf
-    - assets/fonts/Roboto-BlackItalic.ttf
-    - assets/fonts/Roboto-Bold.ttf
-    - assets/fonts/Roboto-BoldItalic.ttf
-    - assets/fonts/Roboto-Italic.ttf
-    - assets/fonts/Roboto-Light.ttf
-    - assets/fonts/Roboto-LightItalic.ttf
-    - assets/fonts/Roboto-Medium.ttf
-    - assets/fonts/Roboto-MediumItalic.ttf
-    - assets/fonts/Roboto-Regular.ttf
-    - assets/fonts/Roboto-Thin.ttf
-    - assets/fonts/Roboto-ThinItalic.ttf
     - assets/images/
     - assets/images/settings-sandbox.jpg
     - assets/images/settings-sandbox-round.png

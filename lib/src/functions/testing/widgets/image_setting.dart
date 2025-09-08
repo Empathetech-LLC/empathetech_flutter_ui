@@ -36,18 +36,18 @@ Future<void> testImageSetting(
     if (isLefty) {
       assert(
         tester.getCenter(find.byType(Checkbox)).dx <
-            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+            tester.getCenter(find.text(l10n.dsUseForColors)).dx,
         'DH layout mismatch',
       );
     } else {
       assert(
         tester.getCenter(find.byType(Checkbox)).dx >
-            tester.getCenter(find.text(l10n.isUseForColors)).dx,
+            tester.getCenter(find.text(l10n.dsUseForColors)).dx,
         'DH layout mismatch',
       );
     }
 
-    await ezFindText(tester, l10n.isUseForColors);
+    await ezFindText(tester, l10n.dsUseForColors);
   }
 
   ezLog('Validating platform options\n');
@@ -245,7 +245,7 @@ Future<void> _testNetwork(
   await ezTouch(tester, find.byIcon(Icons.computer_outlined));
 
   ezLog('Validating text');
-  await ezFindText(tester, l10n.isEnterURL);
+  await ezFindText(tester, l10n.gEnterURL);
 
   ezLog('Validating layout');
   if (isCupertino) {

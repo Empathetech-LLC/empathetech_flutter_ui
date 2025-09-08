@@ -13,6 +13,13 @@ class EzResetButton extends StatelessWidget {
   /// Defaults to [EFUILang.gResetAll]
   final String? label;
 
+  /// [EzElevatedIconButton.style] passthrough
+  final ButtonStyle? style;
+
+  /// [EzConfig.reset] passthrough
+  /// Moot if [onConfirm] is provided
+  final Set<String>? skip;
+
   /// [EzAlertDialog.title] that shows on click
   /// Defaults to [EFUILang.ssResetAll]
   final String? dialogTitle;
@@ -20,10 +27,6 @@ class EzResetButton extends StatelessWidget {
   /// [EzAlertDialog.content] that shows on click
   /// Defaults to [EFUILang.gUndoWarn]
   final String? dialogContent;
-
-  /// [EzConfig.reset] passthrough
-  /// Moot if [onConfirm] is provided
-  final Set<String>? skip;
 
   /// [EzConfig.reset] passthrough
   /// Moot if [onConfirm] is provided
@@ -42,9 +45,10 @@ class EzResetButton extends StatelessWidget {
   const EzResetButton({
     super.key,
     this.label,
+    this.style,
+    this.skip,
     this.dialogTitle,
     this.dialogContent,
-    this.skip,
     this.storageOnly = false,
     this.onConfirm,
     this.onDeny,
@@ -52,13 +56,30 @@ class EzResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
+    // Gather the fixed theme data //
 
     final EFUILang l10n = ezL10n(context);
+
+    // Gather the dynamic theme data //
+
+    late final bool isDark = isDarkTheme(context);
+    late final bool useCrucial =
+        (EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey)
+                as double) <
+            0.50;
+    late final Color crucialSurface =
+        Theme.of(context).colorScheme.surface.withValues(alpha: 0.50);
 
     // Return the build //
 
     return EzElevatedIconButton(
+      // EzResetButton can at most be 50% transparent
+      // If a user accidentally borks their UI, they should be able to see the reset button
+      style: (style == null)
+          ? useCrucial
+              ? ElevatedButton.styleFrom(backgroundColor: crucialSurface)
+              : null
+          : style,
       onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {

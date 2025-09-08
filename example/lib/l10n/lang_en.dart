@@ -94,6 +94,9 @@ class LangEn extends Lang {
   String get csHereHint => 'Open an online color scheme builder';
 
   @override
+  String get csFileBrowser => 'Open file browser';
+
+  @override
   String get csFlutterPath => 'Flutter path';
 
   @override
@@ -138,16 +141,13 @@ class LangEn extends Lang {
   String get csLaunchTip => 'Adds launch options to VS Code\'s debug menu';
 
   @override
-  String get csSave => 'Save config';
-
-  @override
-  String get csLoad => 'Load config';
-
-  @override
   String get csGenerate => 'Generate app';
 
   @override
   String get csInvalidFields => 'Some fields are invalid';
+
+  @override
+  String get csRequired => 'All fields except support email are required';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';
@@ -168,20 +168,12 @@ class LangEn extends Lang {
   String get asPageTitle => 'Archiver';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Your configuration has been saved to $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUse it on ';
 
   @override
   String asToGen(Object app_name) {
     return ' for desktop to generate the code for $app_name';
   }
-
-  @override
-  String get asBadFile => 'The file was not saved as ';
 
   @override
   String get gsPageTitle => 'Generator';
@@ -328,6 +320,9 @@ class LangEnUs extends LangEn {
   String get csHereHint => 'Open an online color scheme builder';
 
   @override
+  String get csFileBrowser => 'Open file browser';
+
+  @override
   String get csFlutterPath => 'Flutter path';
 
   @override
@@ -372,16 +367,13 @@ class LangEnUs extends LangEn {
   String get csLaunchTip => 'Adds launch options to VS Code\'s debug menu';
 
   @override
-  String get csSave => 'Save config';
-
-  @override
-  String get csLoad => 'Load config';
-
-  @override
   String get csGenerate => 'Generate app';
 
   @override
   String get csInvalidFields => 'Some fields are invalid';
+
+  @override
+  String get csRequired => 'All fields except support email are required';
 
   @override
   String get csResetHint => 'Activate and confirm what should be reset.';
@@ -402,20 +394,12 @@ class LangEnUs extends LangEn {
   String get asPageTitle => 'Archiver';
 
   @override
-  String asSavedTo(Object path) {
-    return 'Your configuration has been saved to $path';
-  }
-
-  @override
   String get asUseIt => '\n\nUse it on ';
 
   @override
   String asToGen(Object app_name) {
     return ' for desktop to generate the code for $app_name';
   }
-
-  @override
-  String get asBadFile => 'The file was not saved as ';
 
   @override
   String get gsPageTitle => 'Generator';

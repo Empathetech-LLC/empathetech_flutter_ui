@@ -27,6 +27,9 @@ class EzConfig {
   /// [defaults] merged with user [preferences]
   final Map<String, dynamic> prefs;
 
+  /// [EzConfig] key : value runtime [Type] map
+  final Map<String, Type> typeMap;
+
   /// Private instance
   static EzConfig? _instance;
 
@@ -40,6 +43,7 @@ class EzConfig {
 
     // Internal
     required this.prefs,
+    required this.typeMap,
   });
 
   /// [preferences] => provide a [SharedPreferences] instance
@@ -56,14 +60,14 @@ class EzConfig {
       // Get the value type for each key //
 
       // Start with the known EzConfigverse
-      final Map<String, Type> keyTypes = Map<String, Type>.from(allKeys);
+      final Map<String, Type> typeMap = Map<String, Type>.from(allKeys);
 
       // Include defaults
       final Set<String> uniqueDefaults =
-          defaults.keys.toSet().difference(keyTypes.keys.toSet());
+          defaults.keys.toSet().difference(typeMap.keys.toSet());
 
       for (final String key in uniqueDefaults) {
-        keyTypes[key] = defaults[key].runtimeType;
+        typeMap[key] = defaults[key].runtimeType;
       }
 
       // Build this.prefs //
@@ -73,11 +77,11 @@ class EzConfig {
 
       // Find the keys that users have overwritten
       final Set<String> overwritten =
-          preferences.getKeys().intersection(keyTypes.keys.toSet());
+          preferences.getKeys().intersection(typeMap.keys.toSet());
 
       // Get the updated values
       for (final String key in overwritten) {
-        final Type? valueType = keyTypes[key];
+        final Type? valueType = typeMap[key];
         dynamic userPref;
 
         switch (valueType) {
@@ -118,6 +122,7 @@ Must be one of [int, bool, double, String, List<String>]''');
         fallbackLang: fallbackLang,
         preferences: preferences,
         prefs: prefs,
+        typeMap: typeMap,
       );
     }
 
@@ -132,9 +137,9 @@ Must be one of [int, bool, double, String, List<String>]''');
   static EFUILang get l10nFallback => _instance!.fallbackLang;
 
   /// Get the [key]s EzConfig (nullable) value
-  /// Uses the live values from [prefs]
+  /// Uses the live values from [prefs], falling back to [defaults]
   static dynamic get(String key) {
-    return _instance!.prefs[key];
+    return _instance!.prefs[key] ?? _instance!.defaults[key];
   }
 
   /// Get the [key]s default EzConfig (nullable) value
@@ -278,8 +283,31 @@ Must be one of [int, bool, double, String, List<String>]''');
   }
 
   /// Load values to [prefs]/[preferences]
-  static Future<void> loadConfig(Map<String, dynamic> config) async {
+  static Future<void> loadConfig(
+    Map<String, dynamic> config, {
+    Set<String>? filter,
+  }) async {
     for (final MapEntry<String, dynamic> entry in config.entries) {
+      // Check filter
+      if (filter != null && filter.contains(entry.key)) {
+        ezLog('Filtering [${entry.key}]');
+        continue;
+      }
+
+      // Check type
+      final dynamic expectedType = _instance!.typeMap[entry.key];
+      if (expectedType == null) {
+        ezLog('Skipping unknown key [${entry.key}]');
+        continue;
+      }
+      if (expectedType != entry.value.runtimeType) {
+        ezLog(
+          'Skipping key [${entry.key}], mismatched types: [$expectedType != ${entry.value.runtimeType}]',
+        );
+        continue;
+      }
+
+      // Load value
       switch (entry.value.runtimeType) {
         case const (bool):
           await setBool(entry.key, entry.value);
@@ -323,8 +351,8 @@ Must be one of [int, bool, double, String, List<String>]''');
           List<Locale>.from(EFUILang.supportedLocales);
       trimmedLocales.remove(getLocale());
 
-      final Locale randomLocale = trimmedLocales
-          .elementAt(random.nextInt(EFUILang.supportedLocales.length));
+      final Locale randomLocale =
+          trimmedLocales.elementAt(random.nextInt(trimmedLocales.length));
 
       final List<String> localeData = <String>[randomLocale.languageCode];
       if (randomLocale.countryCode != null) {
@@ -333,6 +361,113 @@ Must be one of [int, bool, double, String, List<String>]''');
 
       await setStringList(appLocaleKey, localeData);
     }
+
+    // Update color settings //
+
+    // Define random seed
+    final Color primary = Color.fromRGBO(
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+      1.0,
+    );
+    final Color onPrimary = getTextColor(primary);
+
+    // Build a triadic combo from the seed
+    final HSVColor primaryHSV = HSVColor.fromColor(primary);
+    final double secondaryHue = (primaryHSV.hue + 120) % 360;
+    final double tertiaryHue = (primaryHSV.hue + 240) % 360;
+
+    final Color secondary = HSVColor.fromAHSV(
+      1.0,
+      secondaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onSecondary = getTextColor(secondary);
+
+    final Color tertiary = HSVColor.fromAHSV(
+      1.0,
+      tertiaryHue,
+      primaryHSV.saturation,
+      primaryHSV.value,
+    ).toColor();
+    final Color onTertiary = getTextColor(tertiary);
+
+    // Create a pseudo-random ColorScheme that follows the default vibe
+    await storeColorScheme(
+      colorScheme: isDark
+          ? ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer:
+                  primary.withValues(alpha: defaultButtonOutlineOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer:
+                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer:
+                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              onSurface: Colors.white,
+              surfaceTint: Colors.transparent,
+            )
+          : ColorScheme.fromSeed(
+              brightness: Brightness.light,
+              seedColor: primary,
+              primary: primary,
+              primaryContainer:
+                  primary.withValues(alpha: defaultButtonOutlineOpacity),
+              onPrimary: onPrimary,
+              onPrimaryContainer: onPrimary,
+              secondary: secondary,
+              secondaryContainer:
+                  secondary.withValues(alpha: defaultButtonOutlineOpacity),
+              onSecondary: onSecondary,
+              onSecondaryContainer: onSecondary,
+              tertiary: tertiary,
+              tertiaryContainer:
+                  tertiary.withValues(alpha: defaultButtonOutlineOpacity),
+              onTertiary: onTertiary,
+              onTertiaryContainer: onTertiary,
+              onSurface: Colors.black,
+              surfaceTint: Colors.transparent,
+            ),
+      brightness: isDark ? Brightness.dark : Brightness.light,
+    );
+
+    // Update design settings //
+
+    await setDouble(animationDurationKey, random.nextDouble() * 500.0 + 250.0);
+
+    await setDouble(
+      isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
+      random.nextDouble() * 0.5 + 0.25,
+    );
+    await setDouble(
+      isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
+      random.nextDouble() * 0.5 + 0.25,
+    );
+
+    // Update layout settings //
+
+    await setDouble(marginKey, defaultMargin * getScalar());
+    await setDouble(
+      paddingKey,
+      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
+    );
+    await setDouble(
+      spacingKey,
+      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
+    );
+
+    await setBool(hideScrollKey, random.nextBool());
 
     // Update text settings //
 
@@ -395,94 +530,6 @@ Must be one of [int, bool, double, String, List<String>]''');
     // Leave text background opacity as-is
 
     await setDouble(iconSizeKey, defaultIconSize * getScalar());
-
-    // Update layout settings //
-
-    await setDouble(marginKey, defaultMargin * getScalar());
-    await setDouble(
-      paddingKey,
-      (onMobile ? defaultMobilePadding : defaultDesktopPadding) * getScalar(),
-    );
-    await setDouble(
-      spacingKey,
-      (onMobile ? defaultMobileSpacing : defaultDesktopSpacing) * getScalar(),
-    );
-
-    await setBool(hideScrollKey, random.nextBool());
-
-    // Update color settings //
-
-    // Define random seed
-    final Color primary = Color.fromRGBO(
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
-      1.0,
-    );
-    final Color onPrimary = getTextColor(primary);
-
-    // Build a triadic combo from the seed
-    final HSVColor primaryHSV = HSVColor.fromColor(primary);
-    final double secondaryHue = (primaryHSV.hue + 120) % 360;
-    final double tertiaryHue = (primaryHSV.hue + 240) % 360;
-
-    final Color secondary = HSVColor.fromAHSV(
-      1.0,
-      secondaryHue,
-      primaryHSV.saturation,
-      primaryHSV.value,
-    ).toColor();
-    final Color onSecondary = getTextColor(secondary);
-
-    final Color tertiary = HSVColor.fromAHSV(
-      1.0,
-      tertiaryHue,
-      primaryHSV.saturation,
-      primaryHSV.value,
-    ).toColor();
-    final Color onTertiary = getTextColor(tertiary);
-
-    // Create a pseudo-random ColorScheme that follows the default vibe
-    await storeColorScheme(
-      colorScheme: isDark
-          ? ColorScheme.fromSeed(
-              brightness: Brightness.dark,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer: primary.withValues(alpha: selectionOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer: secondary.withValues(alpha: selectionOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.white,
-              surfaceTint: Colors.transparent,
-            )
-          : ColorScheme.fromSeed(
-              brightness: Brightness.light,
-              seedColor: primary,
-              primary: primary,
-              primaryContainer: primary.withValues(alpha: selectionOpacity),
-              onPrimary: onPrimary,
-              onPrimaryContainer: onPrimary,
-              secondary: secondary,
-              secondaryContainer: secondary.withValues(alpha: selectionOpacity),
-              onSecondary: onSecondary,
-              onSecondaryContainer: onSecondary,
-              tertiary: tertiary,
-              tertiaryContainer: tertiary.withValues(alpha: selectionOpacity),
-              onTertiary: onTertiary,
-              onTertiaryContainer: onTertiary,
-              onSurface: Colors.black,
-              surfaceTint: Colors.transparent,
-            ),
-      brightness: isDark ? Brightness.dark : Brightness.light,
-    );
   }
 
   // Removers //
@@ -548,8 +595,9 @@ Must be one of [int, bool, double, String, List<String>]''');
     bool storageOnly = false,
   }) async {
     bool success = true;
+    final List<String> itr = List<String>.from(_instance!.prefs.keys);
 
-    for (final String key in _instance!.prefs.keys) {
+    for (final String key in itr) {
       if (skip?.contains(key) ?? false) continue;
       final bool result = await _instance!.preferences.remove(key);
 

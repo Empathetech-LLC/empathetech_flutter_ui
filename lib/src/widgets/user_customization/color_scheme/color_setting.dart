@@ -36,7 +36,7 @@ class EzColorSetting extends StatefulWidget {
 }
 
 class _ColorSettingState extends State<EzColorSetting> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final int? _prefsValue = EzConfig.get(widget.configKey);
 
@@ -44,12 +44,10 @@ class _ColorSettingState extends State<EzColorSetting> {
       ? getLiveColor(context, widget.configKey)
       : Color(_prefsValue);
 
-  final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double iconRadius = EzConfig.get(iconSizeKey) / 2;
 
   static const EzSpacer spacer = EzSpacer();
-
-  late final ThemeData theme = Theme.of(context);
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -150,7 +148,7 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ),
                 child: CircleAvatar(
                   backgroundColor: Color(recommended),
-                  radius: padding + margin,
+                  radius: iconRadius + padding,
                 ),
               ),
             ],
@@ -269,6 +267,7 @@ class _ColorSettingState extends State<EzColorSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final String label = getColorName(widget.configKey);
 
     return Semantics(
@@ -291,12 +290,12 @@ class _ColorSettingState extends State<EzColorSetting> {
                 ? CircleAvatar(
                     backgroundColor: theme.colorScheme.surface,
                     foregroundColor: theme.colorScheme.onSurface,
-                    radius: padding + margin,
+                    radius: iconRadius + padding,
                     child: EzIcon(PlatformIcons(context).eyeSlash),
                   )
                 : CircleAvatar(
                     backgroundColor: currColor,
-                    radius: padding + margin,
+                    radius: iconRadius + padding,
                   ),
           ),
           label: label,

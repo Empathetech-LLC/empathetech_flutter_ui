@@ -8,100 +8,66 @@ import '../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 //*** Brand config ***//
-
 //** Default **//
 
-// Text settings //
-
-/// 42.0
-const double defaultDisplaySize = 42.0;
-
-/// 32.0
-const double defaultHeadlineSize = 32.0;
-
-/// 22.0
-const double defaultTitleSize = 22.0;
-
-/// 16.0
-const double defaultBodySize = 16.0;
-
-/// 14.0
-const double defaultLabelSize = 14.0;
-
-/// 0.0
-const double defaultTextOpacity = 0.0;
-
-/// 20.0
-const double defaultIconSize = 20.0;
-
-/// 1.5
-const double defaultFontHeight = 1.5;
-
-/// 0.25
-const double defaultLetterSpacing = 0.25;
-
-/// 1.0
-const double defaultWordSpacing = 1.0;
-
-// Layout settings //
-
-/// 10.0
-const double defaultMargin = 10.0;
-
-/// 17.5
-const double defaultMobilePadding = 17.5;
-
-/// 17.5
-const double defaultDesktopPadding = 20.0;
-
-/// 25.0
-const double defaultMobileSpacing = 25.0;
-
-/// 25.0
-const double defaultDesktopSpacing = 30.0;
-
 //* Color settings *//
+
+const int blackHex = 0xFF000000;
+const int whiteHex = 0xFFFFFFFF;
+const int transparentHex = 0x00000000;
 
 // Secondary //
 
 /// 0xFFDAA520
+/// Open source consumers: DO NOT USE
 const int empathSandHex = 0xFFDAA520;
 
 /// 0xFFDAA520
+/// Open source consumers: DO NOT USE
 const Color empathSand = Color(empathSandHex);
 
-/// 0x40DAA520
-const int empathSandDimHex = 0x40DAA520;
+/// 0x45DAA520
+/// Open source consumers: DO NOT USE
+const int empathSandDimHex = 0x45DAA520;
 
-/// 0x40DAA520
+/// 0x45DAA520
+/// Open source consumers: DO NOT USE
 const Color empathSandDim = Color(empathSandHex);
 
 // Dark:Primary | Light:Tertiary //
 
 /// 0xFF20DAA5
+/// Open source consumers: DO NOT USE
 const int empathEucalyptusHex = 0xFF20DAA5;
 
 /// 0xFF20DAA5
+/// Open source consumers: DO NOT USE
 const Color empathEucalyptus = Color(empathEucalyptusHex);
 
-/// 0x4020DAA5
-const int empathEucalyptusDimHex = 0x4020DAA5;
+/// 0x4520DAA5
+/// Open source consumers: DO NOT USE
+const int empathEucalyptusDimHex = 0x4520DAA5;
 
-/// 0x4020DAA5
+/// 0x4520DAA5
+/// Open source consumers: DO NOT USE
 const Color empathEucalyptusDim = Color(empathEucalyptusHex);
 
 // Dark:Tertiary | Light:Primary //
 
 /// 0xFFA520DA
+/// Open source consumers: DO NOT USE
 const int empathPurpleHex = 0xFFA520DA;
 
 /// 0xFFA520DA
+/// Open source consumers: DO NOT USE
 const Color empathPurple = Color(empathPurpleHex);
 
-/// 0x40A520DA
-const int empathPurpleDimHex = 0x40A520DA;
+/// 0x45A520DA
+/// Open source consumers: DO NOT USE
+const int empathPurpleDimHex = 0x45A520DA;
 
-/// 0x40A520DA
+/// 0x45A520DA
+/// Open source consumers: DO NOT USE
 const Color empathPurpleDim = Color(empathPurpleDimHex);
 
 // Dark //
@@ -124,6 +90,18 @@ const int darkSurfaceHex = 0xFF222222;
 /// 0xFF222222 == 34 of each
 const Color darkSurface = Color(darkSurfaceHex);
 
+/// 0x8AFFFFFF == white w/ double [defaultButtonOutlineOpacity]
+const int darkOutlineHex = 0x8AFFFFFF;
+
+/// 0x8AFFFFFF == white w/ double [defaultButtonOutlineOpacity]
+const Color darkOutline = Color(darkOutlineHex);
+
+/// 0x45FFFFFF == white w/ [defaultButtonOutlineOpacity]
+const int darkOutlineVariantHex = 0x45FFFFFF;
+
+/// 0x45FFFFFF == white w/ [defaultButtonOutlineOpacity]
+const Color darkOutlineVariant = Color(darkOutlineVariantHex);
+
 // Light //
 
 /// 0xFFF0F0F0 == -15 of each
@@ -144,20 +122,106 @@ const int lightSurfaceHex = whiteHex;
 /// 0xFFFFFFFF == white
 const Color lightSurface = Color(lightSurfaceHex);
 
-// Misc //
+/// 0x8A000000 == black w/ double [defaultButtonOutlineOpacity]
+const int lightOutlineHex = 0x8A000000;
 
-/// 0xFFFFFFFF
-const int whiteHex = 0xFFFFFFFF;
+/// 0x8A000000 == black w/ double [defaultButtonOutlineOpacity]
+const Color lightOutline = Color(lightOutlineHex);
 
-/// 0xFF000000
-const int blackHex = 0xFF000000;
+/// 0x45000000 == black w/ [defaultButtonOutlineOpacity]
+const int lightOutlineVariantHex = 0x45000000;
 
-/// 0x00000000
-const int transparentHex = 0x00000000;
+/// 0x45000000 == black w/ [defaultButtonOutlineOpacity]
+const Color lightOutlineVariant = Color(lightOutlineVariantHex);
+
+//* Design settings *//
+
+/// 500.0
+const double defaultAnimationDuration = 500.0;
+
+/// 0x45 / 255
+const double defaultButtonOutlineOpacity = 0.270588235294;
+
+//* Layout settings *//
+
+/// 10.0
+const double defaultMargin = 10.0;
+
+/// 17.5
+const double defaultMobilePadding = 17.5;
+
+/// 17.5
+const double defaultDesktopPadding = 20.0;
+
+/// 25.0
+const double defaultMobileSpacing = 25.0;
+
+/// 25.0
+const double defaultDesktopSpacing = 30.0;
+
+//* Text settings *//
+
+/// 42.0
+const double defaultDisplaySize = 42.0;
+
+/// 32.0
+const double defaultHeadlineSize = 32.0;
+
+/// 22.0
+const double defaultTitleSize = 22.0;
+
+/// 16.0
+const double defaultBodySize = 16.0;
+
+/// 14.0
+const double defaultLabelSize = 14.0;
+
+/// 42.0, 32.0, 22.0, 16.0, 14.0
+const Map<String, double> fontSizeDefaults = <String, double>{
+  displayFontSizeKey: defaultDisplaySize,
+  headlineFontSizeKey: defaultHeadlineSize,
+  titleFontSizeKey: defaultTitleSize,
+  bodyFontSizeKey: defaultBodySize,
+  labelFontSizeKey: defaultLabelSize,
+};
+
+/// 0.0
+const double defaultTextOpacity = 0.0;
+
+/// 20.0
+const double defaultIconSize = 20.0;
+
+/// 2.0
+const double iconDelta = 2.0;
+
+/// 1.5
+const double defaultFontHeight = 1.5;
+
+/// 0.25
+const double defaultLetterSpacing = 0.25;
+
+/// 1.0
+const double defaultWordSpacing = 1.0;
 
 //** Min **//
 
-// Text theme //
+// Design settings //
+
+/// 0.0
+const double minAnimationDuration = 0.0;
+
+// Layout settings //
+
+/// 5.0
+const double minMargin = 5.0;
+
+/// 10.0
+const double minPadding = 10.0;
+
+/// 10.0
+const double minSpacing = 10.0;
+
+// Text settings //
 
 /// 21.0
 const double minDisplay = 21.0;
@@ -198,18 +262,23 @@ const double minWordSpacing = 0.0;
 /// 1.0
 const double minFontHeight = 1.0;
 
+//** Max **//
+
+// Design settings //
+
+/// 1000.0
+const double maxAnimationDuration = 1000.0;
+
 // Layout settings //
 
-/// 5.0
-const double minMargin = 5.0;
+/// 20.0
+const double maxMargin = 20.0;
 
-/// 10.0
-const double minPadding = 10.0;
+/// 40.0
+const double maxPadding = 40.0;
 
-/// 10.0
-const double minSpacing = 10.0;
-
-//** Max **//
+/// 50.0
+const double maxSpacing = 75.0;
 
 // Text settings //
 
@@ -252,26 +321,104 @@ const double maxWordSpacing = 3.0;
 /// 2.0
 const double maxFontHeight = 2.0;
 
-// Layout settings //
-
-/// 20.0
-const double maxMargin = 20.0;
-
-/// 40.0
-const double maxPadding = 40.0;
-
-/// 50.0
-const double maxSpacing = 75.0;
-
 //** Maps **//
 
 /// Empathetech [EzConfig.defaults] base to build from
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
 const Map<String, Object> baseEmpathConfig = <String, Object>{
   // Global settings //
 
   isLeftyKey: false,
+  // isDarkThemeKey: null => system
+  // appLocaleKey: null => system
+
+  // Color settings //
+  // Selector
+  advancedColorsKey: false,
+
+  // Dark
+  darkPrimaryKey: empathEucalyptusHex,
+  darkPrimaryContainerKey: empathEucalyptusDimHex,
+  darkOnPrimaryKey: blackHex,
+  darkOnPrimaryContainerKey: blackHex,
+
+  darkSecondaryKey: empathSandHex,
+  darkSecondaryContainerKey: empathSandDimHex,
+  darkOnSecondaryKey: blackHex,
+  darkOnSecondaryContainerKey: blackHex,
+
+  darkTertiaryKey: empathPurpleHex,
+  darkTertiaryContainerKey: empathPurpleDimHex,
+  darkOnTertiaryKey: whiteHex,
+  darkOnTertiaryContainerKey: whiteHex,
+
+  darkSurfaceKey: darkSurfaceHex,
+  darkOnSurfaceKey: whiteHex,
+  darkSurfaceDimKey: darkSurfaceDimHex,
+  darkSurfaceContainerKey: darkSurfaceContainerHex,
+  darkOutlineKey: darkOutlineHex,
+  darkOutlineVariantKey: darkOutlineVariantHex,
+  darkInversePrimaryKey: empathEucalyptusHex,
+  darkSurfaceTintKey: transparentHex,
+
+  darkColorSchemeImageKey: noImageValue,
+  // userDarkColorsKey: null, default defined in EzColorSettings()
+
+  // Light
+  lightPrimaryKey: empathPurpleHex,
+  lightPrimaryContainerKey: empathPurpleDimHex,
+  lightOnPrimaryKey: whiteHex,
+  lightOnPrimaryContainerKey: whiteHex,
+
+  lightSecondaryKey: empathSandHex,
+  lightSecondaryContainerKey: empathSandDimHex,
+  lightOnSecondaryKey: blackHex,
+  lightOnSecondaryContainerKey: blackHex,
+
+  lightTertiaryKey: empathEucalyptusHex,
+  lightTertiaryContainerKey: empathEucalyptusDimHex,
+  lightOnTertiaryKey: blackHex,
+  lightOnTertiaryContainerKey: blackHex,
+
+  lightSurfaceKey: lightSurfaceHex,
+  lightOnSurfaceKey: blackHex,
+  lightSurfaceDimKey: lightSurfaceDimHex,
+  lightSurfaceContainerKey: lightSurfaceContainerHex,
+  lightOutlineKey: lightOutlineHex,
+  lightOutlineVariantKey: lightOutlineVariantHex,
+  lightInversePrimaryKey: empathPurpleHex,
+  lightSurfaceTintKey: transparentHex,
+
+  lightColorSchemeImageKey: noImageValue,
+  // userLightColorsKey: null, default defined in EzColorSettings()
+  // Unassigned colors are automatically generated by ColorScheme.fromSeed
+
+  // Design settings //
+
+  // Global
+  animationDurationKey: defaultAnimationDuration,
+
+  // Dark
+  darkBackgroundImageKey: noImageValue,
+  '$darkBackgroundImageKey$boxFitSuffix': none,
+  darkButtonOpacityKey: maxOpacity,
+  darkButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
+
+  // Light
+  lightBackgroundImageKey: noImageValue,
+  '$lightBackgroundImageKey$boxFitSuffix': none,
+  lightButtonOpacityKey: maxOpacity,
+  lightButtonOutlineOpacityKey: defaultButtonOutlineOpacity,
+
+  // Layout settings //
+
+  marginKey: defaultMargin,
 
   // Text settings //
+  // Selector
+  advancedTextKey: false,
 
   // Display
   displayFontFamilyKey: roboto,
@@ -329,75 +476,13 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
 
   // Icon size
   iconSizeKey: defaultIconSize,
-
-  // Selector
-  advancedTextKey: false,
-
-  // Layout settings //
-
-  marginKey: defaultMargin,
-
-  // Color settings //
-
-  // Dark
-  darkPrimaryKey: empathEucalyptusHex,
-  darkPrimaryContainerKey: empathEucalyptusDimHex,
-  darkOnPrimaryKey: blackHex,
-  darkOnPrimaryContainerKey: blackHex,
-
-  darkSecondaryKey: empathSandHex,
-  darkSecondaryContainerKey: empathSandDimHex,
-  darkOnSecondaryKey: blackHex,
-  darkOnSecondaryContainerKey: blackHex,
-
-  darkTertiaryKey: empathPurpleHex,
-  darkTertiaryContainerKey: empathPurpleDimHex,
-  darkOnTertiaryKey: whiteHex,
-  darkOnTertiaryContainerKey: whiteHex,
-
-  darkSurfaceKey: darkSurfaceHex,
-  darkOnSurfaceKey: whiteHex,
-  darkSurfaceDimKey: darkSurfaceDimHex,
-  darkSurfaceContainerKey: darkSurfaceContainerHex,
-  darkInversePrimaryKey: empathEucalyptusHex,
-  darkSurfaceTintKey: transparentHex,
-
-  // Light
-  lightPrimaryKey: empathPurpleHex,
-  lightPrimaryContainerKey: empathPurpleDimHex,
-  lightOnPrimaryKey: whiteHex,
-  lightOnPrimaryContainerKey: whiteHex,
-
-  lightSecondaryKey: empathSandHex,
-  lightSecondaryContainerKey: empathSandDimHex,
-  lightOnSecondaryKey: blackHex,
-  lightOnSecondaryContainerKey: blackHex,
-
-  lightTertiaryKey: empathEucalyptusHex,
-  lightTertiaryContainerKey: empathEucalyptusDimHex,
-  lightOnTertiaryKey: blackHex,
-  lightOnTertiaryContainerKey: blackHex,
-
-  lightSurfaceKey: lightSurfaceHex,
-  lightOnSurfaceKey: blackHex,
-  lightSurfaceDimKey: lightSurfaceDimHex,
-  lightSurfaceContainerKey: lightSurfaceContainerHex,
-  lightInversePrimaryKey: empathPurpleHex,
-  lightSurfaceTintKey: transparentHex,
-
-  // Selector
-  advancedColorsKey: false,
-
-  // Image settings //
-
-  darkBackgroundImageKey: noImageValue,
-  '$darkBackgroundImageKey$boxFitSuffix': none,
-
-  lightBackgroundImageKey: noImageValue,
-  '$lightBackgroundImageKey$boxFitSuffix': none,
 };
 
-const Map<String, Object> mobileEmpathConfig = <String, Object>{
+/// base with a more compact layout and hidden scrolls
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
+const Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout
@@ -406,7 +491,11 @@ const Map<String, Object> mobileEmpathConfig = <String, Object>{
   hideScrollKey: true,
 };
 
-const Map<String, Object> desktopEmpathConfig = <String, Object>{
+/// base with a more open layout and visible scrolls
+/// For open source consumers: this is Empathetech LLC's config
+/// You have permission to modify this code
+/// You do not have permission to use this config in your app
+const Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
   // Layout
@@ -415,10 +504,22 @@ const Map<String, Object> desktopEmpathConfig = <String, Object>{
   hideScrollKey: false,
 };
 
-/// For testing
 /// [EzConfig.defaults] set to all recommended max values
-final Map<String, Object> empathetechMaxConfig = <String, Object>{
+/// For open source consumers: you may use this in testing, but not in production
+final Map<String, Object> empathMaxConfig = <String, Object>{
   ...baseEmpathConfig,
+
+  // Design settings //
+
+  animationDurationKey: maxAnimationDuration,
+
+  // Layout settings //
+
+  marginKey: maxMargin,
+  paddingKey: maxPadding,
+  spacingKey: maxSpacing,
+
+  hideScrollKey: false,
 
   // Text settings //
 
@@ -453,18 +554,24 @@ final Map<String, Object> empathetechMaxConfig = <String, Object>{
   labelWordSpacingKey: maxWordSpacing,
 
   iconSizeKey: maxIconSize,
+};
+
+/// [EzConfig.defaults] set to all recommended min values
+/// For open source consumers: you may use this in testing, but not in production
+final Map<String, Object> empathMinConfig = <String, Object>{
+  ...baseEmpathConfig,
+
+  // Design settings //
+
+  animationDurationKey: minAnimationDuration,
 
   // Layout settings //
 
-  marginKey: maxMargin,
-  paddingKey: maxPadding,
-  spacingKey: maxSpacing,
-};
+  marginKey: minMargin,
+  paddingKey: minPadding,
+  spacingKey: minSpacing,
 
-/// For testing
-/// [EzConfig.defaults] set to all recommended min values
-final Map<String, Object> empathetechMinConfig = <String, Object>{
-  ...baseEmpathConfig,
+  hideScrollKey: true,
 
   // Text settings //
 
@@ -499,10 +606,4 @@ final Map<String, Object> empathetechMinConfig = <String, Object>{
   labelWordSpacingKey: minWordSpacing,
 
   iconSizeKey: minIconSize,
-
-  // Layout settings //
-
-  marginKey: minMargin,
-  paddingKey: minPadding,
-  spacingKey: minSpacing,
 };

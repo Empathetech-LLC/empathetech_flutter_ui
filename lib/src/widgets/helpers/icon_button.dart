@@ -89,9 +89,14 @@ class EzIconButton extends StatelessWidget {
   /// [IconButton.style] passthrough
   final ButtonStyle? style;
 
-  /// Updates [style] to be grey when false
+  /// Uses disabled styling and sets [onPressed] and [onLongPress] to [doNothing] when false
   /// Overriding [style] makes [enabled] moot
   final bool enabled;
+
+  /// Switches to disabled styling when false
+  /// [onPressed] is unchanged
+  /// Overriding [style] makes [enabled] moot
+  final bool fauxDisabled;
 
   /// [IconButton.isSelected] passthrough
   final bool? isSelected;
@@ -126,6 +131,7 @@ class EzIconButton extends StatelessWidget {
     this.constraints,
     this.style,
     this.enabled = true,
+    this.fauxDisabled = false,
     this.isSelected,
     this.selectedIcon,
     required this.icon,
@@ -133,30 +139,51 @@ class EzIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     late final double savedIconSized = EzConfig.get(iconSizeKey);
+    late final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    late final bool isDark = isDarkTheme(context);
+
+    late final double buttonOpacity =
+        EzConfig.get(isDark ? darkButtonOpacityKey : lightButtonOpacityKey);
+    late final double outlineOpacity = EzConfig.get(
+        isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey);
+
+    late final bool calcButton = buttonOpacity < 1.0;
+    late final bool calcOutline = outlineOpacity < 1.0;
+
+    late final bool clearButton = buttonOpacity < 0.01;
+    late final bool clearOutline = outlineOpacity < 0.01;
+
+    late final Color buttonBackground = calcButton
+        ? clearButton
+            ? Colors.transparent
+            : colorScheme.surface.withValues(alpha: buttonOpacity)
+        : colorScheme.surface;
+    late final Color enabledOutline = calcOutline
+        ? clearOutline
+            ? Colors.transparent
+            : colorScheme.primaryContainer.withValues(alpha: outlineOpacity)
+        : colorScheme.primaryContainer;
+    late final Color disabledOutline = calcOutline
+        ? clearOutline
+            ? Colors.transparent
+            : colorScheme.outlineVariant.withValues(alpha: outlineOpacity)
+        : colorScheme.outlineVariant;
 
     late final ButtonStyle buttonStyle = style ??
-        (enabled
+        ((enabled && !fauxDisabled)
             ? IconButton.styleFrom(
-                backgroundColor: colorScheme.surface,
-                foregroundColor: colorScheme.primary,
-                overlayColor: colorScheme.primary,
-                side: BorderSide(color: colorScheme.primaryContainer),
+                backgroundColor: buttonBackground,
+                side: BorderSide(color: enabledOutline),
                 iconSize: iconSize ?? savedIconSized,
-                alignment: Alignment.center,
-                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
               )
             : IconButton.styleFrom(
-                backgroundColor: colorScheme.surface,
+                backgroundColor: buttonBackground,
                 foregroundColor: colorScheme.outline,
                 overlayColor: colorScheme.outline,
                 shadowColor: Colors.transparent,
-                side: BorderSide(color: colorScheme.outlineVariant),
+                side: BorderSide(color: disabledOutline),
                 iconSize: iconSize ?? savedIconSized,
-                alignment: Alignment.center,
-                padding: EzInsets.wrap(EzConfig.get(paddingKey)),
               ));
 
     return IconButton(

@@ -15,6 +15,9 @@ class EFUILangEs extends EFUILang {
   String get gContinue => 'Continuar';
 
   @override
+  String get gSkip => 'Saltar';
+
+  @override
   String get gOpen => 'Abrir';
 
   @override
@@ -110,6 +113,9 @@ class EFUILangEs extends EFUILang {
   String get gMinimum => 'Mínimo';
 
   @override
+  String get gCenterReset => 'Mantén el centro para restablecer';
+
+  @override
   String get gLoadingAnim =>
       'Cargando. El logotipo empático animado como un reloj de arena giratorio.';
 
@@ -146,6 +152,9 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get gUpdates => 'Actualizaciones disponibles';
+
+  @override
+  String get gEnterURL => 'Inserta el link';
 
   @override
   String get gValidURL => 'Por favor, introduzca una URL válida';
@@ -245,18 +254,21 @@ class EFUILangEs extends EFUILang {
   String get ssNavHint => 'Abrir la página de configuración';
 
   @override
-  String get ssSettingsGuide =>
-      'Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!';
+  String get ssRestartReminder =>
+      'Cierre y vuelva a abrir la app para aplicar los cambios.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!';
+  String get ssRestartReminderWeb =>
+      'Recarga o actualice la página para aplicar tus cambios.';
 
   @override
-  String get ssThemeMode => 'Modo del tema';
+  String get ssHaveFun => '¡Diviértete!';
 
   @override
   String get ssDominantHand => 'Mano preferente';
+
+  @override
+  String get ssThemeMode => 'Modo del tema';
 
   @override
   String get ssLanguage => 'Idioma';
@@ -265,15 +277,232 @@ class EFUILangEs extends EFUILang {
   String get ssLangHint => 'Activar para cambiar el idioma de la aplicación';
 
   @override
-  String get ssRandom => 'Aleatorizar';
+  String get ssLoadPreset => 'Cargar preajuste';
 
   @override
-  String ssRandomize(Object themeType) {
-    return '¿Aleatorizar el tema $themeType?';
+  String get ssLoadPresetHint => 'Activar para mostrar ajustes preestablecidos';
+
+  @override
+  String get ssBigButtons => 'Botones grandes';
+
+  @override
+  String get ssHighVisibility => 'Alta visibilidad';
+
+  @override
+  String get ssVideoGame => 'Videojuego';
+
+  @override
+  String get ssChalkboard => 'Pizarra';
+
+  @override
+  String get ssFancyPants => 'Pantalones elegantes';
+
+  @override
+  String get ssDarkOnly =>
+      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?';
+
+  @override
+  String get ssLightOnly =>
+      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?';
+
+  @override
+  String ssApplied(Object config) {
+    return '$config aplicado.';
   }
 
   @override
+  String get ssTryMe => 'Pruébame';
+
+  @override
+  String get ssRandom => 'Randomiser';
+
+  @override
+  String ssRandomize(Object themeType) {
+    return 'Thème $themeType aléatoire ?';
+  }
+
+  @override
+  String get ssConfigTip => 'Guardar/cargar configuración';
+
+  @override
+  String get ssSaveConfig => 'Guardar configuración';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Su configuración se ha guardado en $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'El archivo no se guardó como ';
+
+  @override
+  String get ssLoadConfig => 'Cargar configuración';
+
+  @override
   String get ssResetAll => '¿Restablecer todas las configuraciones?';
+
+  @override
+  String get csPageTitle => 'Configuración de color';
+
+  @override
+  String get csPickerHint =>
+      'Abre un selector de color. Mantén pulsado para ver más opciones.';
+
+  @override
+  String get csMonoChrome => 'Usar esquema monocromático';
+
+  @override
+  String get csHighContrast => 'Usar esquema de alto contraste';
+
+  @override
+  String get csPickerTitle => 'Selecciona un color';
+
+  @override
+  String get csRecommended => '¿Usar contraste recomendado?';
+
+  @override
+  String get csUseCustom => 'Usar personalizado';
+
+  @override
+  String get csAddColor => 'Añadir un color';
+
+  @override
+  String get csCurrVal => 'Valor de color actual:';
+
+  @override
+  String get csSchemeBase => 'Crear tema\nusando imagen';
+
+  @override
+  String get csFromImage =>
+      'Se generará un esquema de color a partir de la imagen.';
+
+  @override
+  String get csColorScheme => 'esquema de color';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Restablecer todos los esquemas de colores de $themeType?';
+  }
+
+  @override
+  String get dsPageTitle => 'Configuración de diseño';
+
+  @override
+  String get dsAnimDuration => 'Duración de la animación (ms)';
+
+  @override
+  String get dsButtonBackground => 'Opacidad del fondo del botón';
+
+  @override
+  String get dsButtonOutline => 'Opacidad del contorno del botón';
+
+  @override
+  String get dsBackgroundImg => 'Imagen de fondo';
+
+  @override
+  String dsImgSettingHint(Object title) {
+    return 'Actualizar la imagen $title';
+  }
+
+  @override
+  String get dsFromFile => 'Usando un archivo';
+
+  @override
+  String get dsFromCamera => 'Usando la cámara';
+
+  @override
+  String get dsFromNetwork => 'Usando un link';
+
+  @override
+  String get dsResetIt => 'Restablecer';
+
+  @override
+  String get dsClearIt => 'Borrar';
+
+  @override
+  String get dsUseForColors =>
+      'Actualiza los colores de la app usando esta imagen';
+
+  @override
+  String get dsImgGetFailed => 'Error al intentar obtener la imagen';
+
+  @override
+  String get dsImgSetFailed => 'Error al intentar actualizar la imagen';
+
+  @override
+  String get dsImgPermission =>
+      'Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.';
+
+  @override
+  String get dsUseFull => '¿Usar la imagen completa?';
+
+  @override
+  String get dsFit => '¿Cómo debe quedar?';
+
+  @override
+  String get dsCrop => 'Recortar';
+
+  @override
+  String get dsNoWeb => 'La edición de imágenes no es compatible en la web';
+
+  @override
+  String get dsDrag => 'Arrastrar';
+
+  @override
+  String get dsDragHint => 'Arrastra para mover la imagen';
+
+  @override
+  String get dsSwipe => 'Deslizar';
+
+  @override
+  String get dsSwipeHint => 'Desliza para mover la imagen';
+
+  @override
+  String get dsPinch => 'Pellizcar';
+
+  @override
+  String get dsPinchHint => 'Pellizca para acercar/alejar la imagen';
+
+  @override
+  String get dsScroll => 'Desplazar';
+
+  @override
+  String get dsScrollHint => 'Desplaza para acercar/alejar la imagen';
+
+  @override
+  String get dsRotateLeft => 'Girar a la izquierda';
+
+  @override
+  String get dsRotateRight => 'Girar a la derecha';
+
+  @override
+  String get dsUndo => 'Deshacer';
+
+  @override
+  String get dsRedo => 'Rehacer';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return '¿Restablecer todas las configuraciones de diseño globales y de $themeType?';
+  }
+
+  @override
+  String get lsPageTitle => 'Configuración del esquema';
+
+  @override
+  String get lsMargin => 'Margen';
+
+  @override
+  String get lsPadding => 'Acolchado';
+
+  @override
+  String get lsSpacing => 'Espaciado';
+
+  @override
+  String get lsScroll => 'Ocultar las barras de desplazamiento';
+
+  @override
+  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
 
   @override
   String get tsPageTitle => 'Configuración del texto';
@@ -377,121 +606,4 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get tsResetAll => '¿Restablecer la configuración del texto?';
-
-  @override
-  String get lsPageTitle => 'Configuración del esquema';
-
-  @override
-  String get lsMargin => 'Margen';
-
-  @override
-  String get lsPadding => 'Acolchado';
-
-  @override
-  String get lsSpacing => 'Espaciado';
-
-  @override
-  String get lsScroll => 'Ocultar las barras de desplazamiento';
-
-  @override
-  String get lsResetAll => '¿Restablecer todos los configuración del esquema?';
-
-  @override
-  String get csPageTitle => 'Configuración de color';
-
-  @override
-  String get csPickerHint =>
-      'Abre un selector de color. Mantén pulsado para ver más opciones.';
-
-  @override
-  String get csMonoChrome => 'Usar esquema monocromático';
-
-  @override
-  String get csHighContrast => 'Usar esquema de alto contraste';
-
-  @override
-  String get csPickerTitle => 'Selecciona un color';
-
-  @override
-  String get csRecommended => '¿Usar contraste recomendado?';
-
-  @override
-  String get csUseCustom => 'Usar personalizado';
-
-  @override
-  String get csAddColor => 'Añadir un color';
-
-  @override
-  String get csCurrVal => 'Valor de color actual:';
-
-  @override
-  String get csSchemeBase => 'Crear tema\nusando imagen';
-
-  @override
-  String get csFromImage =>
-      'Se generará un esquema de color a partir de la imagen.';
-
-  @override
-  String get csColorScheme => 'esquema de color';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Restablecer todos los esquemas de colores de $themeType?';
-  }
-
-  @override
-  String get isPageTitle => 'Configuración de imagen';
-
-  @override
-  String get isBackground => 'Fondo';
-
-  @override
-  String get isImage => 'imagen';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Actualizar la imagen $title';
-  }
-
-  @override
-  String get isFromFile => 'Usando un archivo';
-
-  @override
-  String get isFromCamera => 'Usando la cámara';
-
-  @override
-  String get isFromNetwork => 'Usando un link';
-
-  @override
-  String get isResetIt => 'Restablecer';
-
-  @override
-  String get isClearIt => 'Borrar';
-
-  @override
-  String get isEnterURL => 'Inserta el link';
-
-  @override
-  String get isGetFailed => 'Error al intentar obtener la imagen';
-
-  @override
-  String isSetFailed(Object error) {
-    return 'Error al intentar actualizar la imagen:\n$error';
-  }
-
-  @override
-  String get isPermission =>
-      'Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.';
-
-  @override
-  String get isUseForColors =>
-      'Actualiza los colores de la app usando esta imagen';
-
-  @override
-  String get isFit => '¿Cómo debe quedar?';
-
-  @override
-  String isResetAll(Object themeType) {
-    return '¿Restablecer todas las imágenes del tema $themeType?';
-  }
 }

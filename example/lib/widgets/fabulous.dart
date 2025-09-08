@@ -4,6 +4,7 @@
  */
 
 import '../utils/export.dart';
+import 'package:efui_bios/efui_bios.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -120,4 +121,39 @@ class ResetFAB extends StatelessWidget {
       ),
     );
   }
+}
+
+/// When needed, add this an modify the main router
+class MacStoreFAB extends StatelessWidget {
+  /// Opens an [EzAlertDialog] for resetting the form fields, app settings, both, or none
+  const MacStoreFAB({super.key});
+
+  @override
+  Widget build(BuildContext context) => FloatingActionButton(
+        heroTag: 'macStore',
+        tooltip: 'EoL',
+        onPressed: () => showPlatformDialog(
+          context: context,
+          builder: (BuildContext alertContext) {
+            return EzAlertDialog(contents: <Widget>[
+              const Text(
+                '''Good news: Open UI is now an app generator!
+
+Bad news: the new features cannot be supported on the App Store.
+
+The full (free and open source) app generator can be downloaded from the ''',
+                textAlign: TextAlign.center,
+              ),
+              EzLink(
+                'GitHub releases',
+                url: Uri.parse(openUIReleases),
+                hint: openUIReleases,
+              )
+            ]);
+          },
+        ),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.onSecondary,
+        child: EzIcon(Icons.update),
+      );
 }

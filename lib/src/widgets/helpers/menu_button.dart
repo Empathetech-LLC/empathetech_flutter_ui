@@ -36,7 +36,7 @@ class EzMenuButton extends StatefulWidget {
   final Clip clipBehavior;
 
   /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
-  final Widget icon;
+  final Widget? icon;
 
   final bool closeOnActivate;
   final Axis overflowAxis;
@@ -65,7 +65,7 @@ class EzMenuButton extends StatefulWidget {
     this.style,
     this.statesController,
     this.clipBehavior = Clip.none,
-    required this.icon,
+    this.icon,
     this.closeOnActivate = true,
     this.overflowAxis = Axis.horizontal,
     required this.label,
@@ -78,41 +78,41 @@ class EzMenuButton extends StatefulWidget {
 }
 
 class _EzMenuButtonState extends State<EzMenuButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final Color primary = Theme.of(context).colorScheme.primary;
+
+    TextStyle? textStyle =
+        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? primary,
+    );
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
+
     return MenuItemButton(
       onPressed: widget.onPressed,
-      onHover: onHover,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
       requestFocusOnHover: widget.requestFocusOnHover,
-      onFocusChange: onFocusChange,
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       shortcut: widget.shortcut,

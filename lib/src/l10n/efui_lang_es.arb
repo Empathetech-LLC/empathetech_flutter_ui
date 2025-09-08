@@ -5,6 +5,7 @@
 
   "gApply": "Aplicar",
   "gContinue": "Continuar",
+  "gSkip": "Saltar",
   "gOpen": "Abrir",
   "gSuccess": "Éxito",
   "gSuccessExl": "¡Éxito!",
@@ -43,6 +44,7 @@
   "gIncrease": "Aumentar",
   "gMaximum": "Máximo",
   "gMinimum": "Mínimo",
+  "gCenterReset": "Mantén el centro para restablecer",
 
   "gLoadingAnim": "Cargando. El logotipo empático animado como un reloj de arena giratorio.",
 
@@ -61,6 +63,7 @@
 
   "gUpdates": "Actualizaciones disponibles",
   
+  "gEnterURL": "Inserta el link",
   "gValidURL": "Por favor, introduzca una URL válida",
 
   "g404Wonder": "No todos los que deambulan están perdidos.",
@@ -99,19 +102,114 @@
 
   "ssPageTitle": "Configuración",
   "ssNavHint": "Abrir la página de configuración",
-  "ssSettingsGuide": "Cierre y vuelva a abrir la app para aplicar los cambios.\n\n¡Diviértete!",
-  "ssSettingsGuideWeb": "Recarga o actualice la página para aplicar tus cambios.\n\n¡Diviértete!",
+  "ssRestartReminder": "Cierre y vuelva a abrir la app para aplicar los cambios.",
+  "ssRestartReminderWeb": "Recarga o actualice la página para aplicar tus cambios.",
+  "ssHaveFun": "¡Diviértete!",
 
-  "ssThemeMode": "Modo del tema",
   "ssDominantHand": "Mano preferente",
+  "ssThemeMode": "Modo del tema",
   
   "ssLanguage": "Idioma",
   "ssLangHint": "Activar para cambiar el idioma de la aplicación",
 
-  "ssRandom": "Aleatorizar",
-  "ssRandomize": "¿Aleatorizar el tema {themeType}?",
+  "ssLoadPreset": "Cargar preajuste",
+  "ssLoadPresetHint": "Activar para mostrar ajustes preestablecidos",
+  "ssBigButtons": "Botones grandes",
+  "ssHighVisibility": "Alta visibilidad",
+  "ssVideoGame": "Videojuego",
+  "ssChalkboard": "Pizarra",
+  "ssFancyPants": "Pantalones elegantes",
+  "ssDarkOnly": "Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?",
+  "ssLightOnly": "Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?",
+  "ssApplied": "{config} aplicado.",
+  "ssTryMe": "Pruébame",
+
+  "ssRandom": "Randomiser",
+  "ssRandomize": "Thème {themeType} aléatoire ?",
+
+  "ssConfigTip": "Guardar/cargar configuración",
+  "ssSaveConfig": "Guardar configuración",
+  "ssConfigSaved": "Su configuración se ha guardado en {path}",
+  "ssWrongConfigExt": "El archivo no se guardó como ",
+  "ssLoadConfig": "Cargar configuración",
 
   "ssResetAll": "¿Restablecer todas las configuraciones?",
+
+
+
+  "csPageTitle": "Configuración de color",
+
+  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
+
+  "csMonoChrome": "Usar esquema monocromático",
+  "csHighContrast": "Usar esquema de alto contraste",
+
+  "csPickerTitle": "Selecciona un color",
+  "csRecommended": "¿Usar contraste recomendado?",
+  "csUseCustom": "Usar personalizado",
+
+  "csAddColor": "Añadir un color",
+  "csCurrVal": "Valor de color actual:",
+
+  "csSchemeBase": "Crear tema\nusando imagen",
+  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
+  "csColorScheme": "esquema de color",
+
+  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
+
+
+
+  "dsPageTitle": "Configuración de diseño",
+
+  "dsAnimDuration": "Duración de la animación (ms)",
+
+  "dsButtonBackground": "Opacidad del fondo del botón",
+  "dsButtonOutline": "Opacidad del contorno del botón",
+
+  "dsBackgroundImg": "Imagen de fondo",
+  "dsImgSettingHint": "Actualizar la imagen {title}",
+  "dsFromFile": "Usando un archivo",
+  "dsFromCamera": "Usando la cámara",
+  "dsFromNetwork": "Usando un link",
+  "dsResetIt": "Restablecer",
+  "dsClearIt": "Borrar",
+  "dsUseForColors": "Actualiza los colores de la app usando esta imagen",
+
+  "dsImgGetFailed": "Error al intentar obtener la imagen",
+  "dsImgSetFailed": "Error al intentar actualizar la imagen",
+  "dsImgPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
+
+  "dsUseFull": "¿Usar la imagen completa?",
+  "dsFit": "¿Cómo debe quedar?",
+
+  "dsCrop": "Recortar",
+  "dsNoWeb": "La edición de imágenes no es compatible en la web",
+  "dsDrag": "Arrastrar",
+  "dsDragHint": "Arrastra para mover la imagen",
+  "dsSwipe": "Deslizar",
+  "dsSwipeHint": "Desliza para mover la imagen",
+  "dsPinch": "Pellizcar",
+  "dsPinchHint": "Pellizca para acercar/alejar la imagen",
+  "dsScroll": "Desplazar",
+  "dsScrollHint": "Desplaza para acercar/alejar la imagen",
+  "dsRotateLeft": "Girar a la izquierda",
+  "dsRotateRight": "Girar a la derecha",
+  "dsUndo": "Deshacer",
+  "dsRedo": "Rehacer",
+
+  "dsResetAll": "¿Restablecer todas las configuraciones de diseño globales y de {themeType}?",
+
+
+
+  "lsPageTitle": "Configuración del esquema",
+
+  "lsMargin": "Margen",
+  "lsPadding": "Acolchado",
+  "lsSpacing": "Espaciado",
+
+  "lsScroll": "Ocultar las barras de desplazamiento",
+
+  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
 
 
 
@@ -154,64 +252,5 @@
   "tsLabelLink": "las etiquetas?",
   "tsLabelP2": " ¿No muy grandes, no muy pequeñas?",
 
-  "tsResetAll": "¿Restablecer la configuración del texto?",
-
-
-
-  "lsPageTitle": "Configuración del esquema",
-
-  "lsMargin": "Margen",
-  "lsPadding": "Acolchado",
-  "lsSpacing": "Espaciado",
-
-  "lsScroll": "Ocultar las barras de desplazamiento",
-
-  "lsResetAll": "¿Restablecer todos los configuración del esquema?",
-  
-  
-  
-  "csPageTitle": "Configuración de color",
-
-  "csPickerHint": "Abre un selector de color. Mantén pulsado para ver más opciones.",
-
-  "csMonoChrome": "Usar esquema monocromático",
-  "csHighContrast": "Usar esquema de alto contraste",
-
-  "csPickerTitle": "Selecciona un color",
-  "csRecommended": "¿Usar contraste recomendado?",
-  "csUseCustom": "Usar personalizado",
-
-  "csAddColor": "Añadir un color",
-  "csCurrVal": "Valor de color actual:",
-
-  "csSchemeBase": "Crear tema\nusando imagen",
-  "csFromImage": "Se generará un esquema de color a partir de la imagen.",
-  "csColorScheme": "esquema de color",
-
-  "csResetAll": "Restablecer todos los esquemas de colores de {themeType}?",
-
-
-
-  "isPageTitle": "Configuración de imagen",
-
-  "isBackground": "Fondo",
-  "isImage": "imagen",
-
-  "isButtonHint": "Actualizar la imagen {title}",
-  "isFromFile": "Usando un archivo",
-  "isFromCamera": "Usando la cámara",
-  "isFromNetwork": "Usando un link",
-  "isResetIt": "Restablecer",
-  "isClearIt": "Borrar",
-
-  "isEnterURL": "Inserta el link",
-  "isGetFailed": "Error al intentar obtener la imagen",
-  "isSetFailed": "Error al intentar actualizar la imagen:\n{error}",
-  "isPermission": "Algunas webs restringen el acceso a sus imágenes.\nIntenta usar una imagen de otra página.",
-
-  "isUseForColors": "Actualiza los colores de la app usando esta imagen",
-
-  "isFit": "¿Cómo debe quedar?",
-
-  "isResetAll": "¿Restablecer todas las imágenes del tema {themeType}?"
+  "tsResetAll": "¿Restablecer la configuración del texto?"
 }

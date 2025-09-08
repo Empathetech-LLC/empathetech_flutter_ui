@@ -3,6 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class ColorSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => OpenUIScaffold(
         title: ezL10n(context).csPageTitle,
         showSettings: false,
-        body: EzColorSettings(target: target),
+        body: EzScreen(EzColorSettings(target: target)),
+        fab: EzConfigFAB(context, packageName: packageName, appName: appTitle),
       );
 }

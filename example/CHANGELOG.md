@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2025-09-07
+### Updated
+- Flutter 3.35
+- EFUI 10
+
 ## [2.2.3] - 2025-06-27
 ### Updated
 - Builder and settings screens layout

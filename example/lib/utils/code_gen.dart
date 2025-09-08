@@ -501,12 +501,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]);
+  await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
 
   // Initialize EzConfig //
 
@@ -515,7 +510,7 @@ void main() async {
   EzConfig.init(
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(english),
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );
 
@@ -568,30 +563,6 @@ final GoRouter router = GoRouter(
           name: settingsHomePath,
           builder: (_, __) => const SettingsHomeScreen(),
           routes: <RouteBase>[
-            ${config.textSettings ? '''GoRoute(
-              path: textSettingsPath,
-              name: textSettingsPath,
-              builder: (_, __) => const TextSettingsScreen(),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: EzTSType.quick.path,
-                  name: EzTSType.quick.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.quick),
-                ),
-                GoRoute(
-                  path: EzTSType.advanced.path,
-                  name: EzTSType.advanced.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.advanced),
-                ),
-              ],
-            ),''' : ''}
-            ${config.layoutSettings ? '''GoRoute(
-              path: layoutSettingsPath,
-              name: layoutSettingsPath,
-              builder: (_, __) => const LayoutSettingsScreen(),
-            ),''' : ''}
             ${config.colorSettings ? '''GoRoute(
               path: colorSettingsPath,
               name: colorSettingsPath,
@@ -611,10 +582,34 @@ final GoRouter router = GoRouter(
                 ),
               ],
             ),''' : ''}
-            ${config.imageSettings ? '''GoRoute(
-              path: imageSettingsPath,
-              name: imageSettingsPath,
-              builder: (_, __) => const ImageSettingsScreen(),
+            ${config.designSettings ? '''GoRoute(
+              path: designSettingsPath,
+              name: designSettingsPath,
+              builder: (_, __) => const DesignSettingsScreen(),
+            ),''' : ''}
+            ${config.layoutSettings ? '''GoRoute(
+              path: layoutSettingsPath,
+              name: layoutSettingsPath,
+              builder: (_, __) => const LayoutSettingsScreen(),
+            ),''' : ''}
+            ${config.textSettings ? '''GoRoute(
+              path: textSettingsPath,
+              name: textSettingsPath,
+              builder: (_, __) => const TextSettingsScreen(),
+              routes: <RouteBase>[
+                GoRoute(
+                  path: EzTSType.quick.path,
+                  name: EzTSType.quick.name,
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzTSType.quick),
+                ),
+                GoRoute(
+                  path: EzTSType.advanced.path,
+                  name: EzTSType.advanced.name,
+                  builder: (_, __) =>
+                      const TextSettingsScreen(target: EzTSType.advanced),
+                ),
+              ],
             ),''' : ''}                     
           ],
         ),
@@ -667,7 +662,8 @@ class $classCaseAppName extends StatelessWidget {
             // Update to the default Locale
             result +=
                 '${entry.key}Key: <String>${entry.value.toString().replaceAll('[', "['").replaceAll(']', "']")},';
-          } else if (entry.key == userColorsKey) {
+          } else if (entry.key == userDarkColorsKey ||
+              entry.key == userLightColorsKey) {
             // Updates to which colors are default in the advanced color settings screen
             final String colorList = entry.value.toString().replaceAll(
                   ',',
@@ -830,7 +826,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the theme data //
+    // Gather the fixed theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = ezL10n(context);
@@ -931,13 +927,11 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSeparator separator = EzSeparator();
 
   late final EFUILang l10n = ezL10n(context);
-
-  late final TextTheme textTheme = Theme.of(context).textTheme;
 
   // Set the page title //
 
@@ -947,10 +941,14 @@ class _ErrorScreenState extends State<ErrorScreen> {
     ezWindowNamer(context, '404 \${l10n.gError}');
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    // Return the build //
+
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
         useImageDecoration: false,
@@ -1003,14 +1001,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Gather the theme data //
+  ${config.l10nConfig != null ? '''// Gather the fixed theme data //
 
-  ${config.l10nConfig != null ? 'late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;' : ''}
+  late final ${l10nClassName(config)} l10n = ${l10nClassName(config)}.of(context)!;
 
-  late final TextTheme textTheme = Theme.of(context).textTheme;
-  late final TextStyle? subTitle = ezSubTitleStyle(textTheme);
-
-  // Define the build data //
+  ''' : ''}// Define the build data //
 
   int count = 0;
 
@@ -1022,10 +1017,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ezWindowNamer(context, appTitle);
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? subTitle = ezSubTitleStyle(textTheme);
+
+    // Return the build //
+
     return ${classCaseAppName}Scaffold(
       title: appTitle,
       body: EzScreen(
@@ -1073,37 +1073,62 @@ class SettingsHomeScreen extends StatelessWidget {
         title: ezL10n(context).ssPageTitle,
         showSettings: false,
         body: const EzSettingsHome(
-          textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
-          layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
-          imageSettingsPath: ${config.imageSettings ? 'imageSettingsPath,' : 'null,'}                  
+          designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
+          layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
+          textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
         ),
       );
 }
 """);
 
-    // text_settings_screen.dart?
-    if (config.textSettings) {
-      final File textSettings = File(
-        '$dir/lib/screens/settings/text_settings.dart',
+    // color_settings_screen.dart?
+    if (config.colorSettings) {
+      final File colorSettings = File(
+        '$dir/lib/screens/settings/color_settings.dart',
       );
-      await textSettings.writeAsString("""$copyright
+      await colorSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class TextSettingsScreen extends StatelessWidget {
-  final EzTSType? target;
+class ColorSettingsScreen extends StatelessWidget {
+  final EzCSType? target;
 
-  const TextSettingsScreen({super.key, this.target});
+  const ColorSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).tsPageTitle,
+        title: ezL10n(context).csPageTitle,
         showSettings: false,
-        body: EzTextSettings(target: target),
+        body: EzColorSettings(target: target),
+      );
+}
+""");
+    }
+
+    // design_settings_screen.dart?
+    if (config.designSettings) {
+      final File designSettings = File(
+        '$dir/lib/screens/settings/design_settings.dart',
+      );
+      await designSettings.writeAsString("""$copyright
+
+import '../../widgets/export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+class DesignSettingsScreen extends StatelessWidget {
+  const DesignSettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
+        title: ezL10n(context).isPageTitle,
+        showSettings: false,
+        body: const EzDesignSettings(),
       );
 }
 """);
@@ -1134,53 +1159,28 @@ class LayoutSettingsScreen extends StatelessWidget {
 """);
     }
 
-    // color_settings_screen.dart?
-    if (config.colorSettings) {
-      final File colorSettings = File(
-        '$dir/lib/screens/settings/color_settings.dart',
+    // text_settings_screen.dart?
+    if (config.textSettings) {
+      final File textSettings = File(
+        '$dir/lib/screens/settings/text_settings.dart',
       );
-      await colorSettings.writeAsString("""$copyright
+      await textSettings.writeAsString("""$copyright
 
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-class ColorSettingsScreen extends StatelessWidget {
-  final EzCSType? target;
+class TextSettingsScreen extends StatelessWidget {
+  final EzTSType? target;
 
-  const ColorSettingsScreen({super.key, this.target});
-
-  @override
-  Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).csPageTitle,
-        showSettings: false,
-        body: EzColorSettings(target: target),
-      );
-}
-""");
-    }
-
-    // image_settings_screen.dart?
-    if (config.imageSettings) {
-      final File imageSettings = File(
-        '$dir/lib/screens/settings/image_settings.dart',
-      );
-      await imageSettings.writeAsString("""$copyright
-
-import '../../widgets/export.dart';
-
-import 'package:flutter/material.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
-
-class ImageSettingsScreen extends StatelessWidget {
-  const ImageSettingsScreen({super.key});
+  const TextSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).isPageTitle,
+        title: ezL10n(context).tsPageTitle,
         showSettings: false,
-        body: const EzImageSettings(),
+        body: EzTextSettings(target: target),
       );
 }
 """);
@@ -1196,27 +1196,27 @@ export 'error.dart';
 export 'home.dart';
 
 export 'settings/settings_home.dart';
-${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
-${config.layoutSettings ? "export 'settings/layout_settings.dart';" : ''}
 ${config.colorSettings ? "export 'settings/color_settings.dart';" : ''}
-${config.imageSettings ? "export 'settings/image_settings.dart';" : ''}
+${config.designSettings ? "export 'settings/design_settings.dart';" : ''}
+${config.layoutSettings ? "export 'settings/layout_settings.dart';" : ''}
+${config.textSettings ? "export 'settings/text_settings.dart';" : ''}
 
 // Route names //
 
 /// 'settings-home'
 const String settingsHomePath = 'settings-home';
 
-${config.textSettings ? """/// 'text-settings'
-const String textSettingsPath = 'text-settings';""" : ''}
+${config.colorSettings ? """/// 'color-settings'
+const String colorSettingsPath = 'color-settings';""" : ''}
+
+${config.designSettings ? """/// 'design-settings'
+const String designSettingsPath = 'design-settings';""" : ''}
 
 ${config.layoutSettings ? """/// 'layout-settings'
 const String layoutSettingsPath = 'layout-settings';""" : ''}
 
-${config.colorSettings ? """/// 'color-settings'
-const String colorSettingsPath = 'color-settings';""" : ''}
-
-${config.imageSettings ? """/// 'image-settings'
-const String imageSettingsPath = 'image-settings';""" : ''}
+${config.textSettings ? """/// 'text-settings'
+const String textSettingsPath = 'text-settings';""" : ''}
 """);
   } catch (e) {
     onFailure(e.toString());
@@ -1408,7 +1408,7 @@ void main() async {
   EzConfig.init(
     preferences: prefs,
     defaults: ${camelCaseAppName}Config,
-    fallbackLang: await EFUILang.delegate.load(english),
+    fallbackLang: await EFUILang.delegate.load(americanEnglish),
     assetPaths: <String>{},
   );
   
@@ -1421,7 +1421,7 @@ void main() async {
         // Load localization(s) //
 
         ezLog('Loading localizations');
-        final EFUILang l10n = await EFUILang.delegate.load(english);
+        final EFUILang l10n = await EFUILang.delegate.load(americanEnglish);
 
         // Load the app //
 

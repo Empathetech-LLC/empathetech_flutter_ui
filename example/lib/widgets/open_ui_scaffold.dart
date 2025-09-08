@@ -42,12 +42,13 @@ class OpenUIScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather the theme data //
+    // Gather the fixed theme data //
 
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = ezL10n(context);
 
-    final double toolbarHeight = ezToolbarHeight(context, appTitle);
+    final double toolbarHeight =
+        ezToolbarHeight(context: context, title: appTitle);
 
     // Define custom widgets //
 

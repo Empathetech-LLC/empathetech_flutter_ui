@@ -49,7 +49,7 @@ export 'src/l10n/efui_lang.dart';
 // Sample screens //
 
 export 'src/sample_screens/color_settings.dart';
-export 'src/sample_screens/image_settings.dart';
+export 'src/sample_screens/design_settings.dart';
 export 'src/sample_screens/layout_settings.dart';
 export 'src/sample_screens/setting_type.dart';
 export 'src/sample_screens/settings_home.dart';
@@ -75,6 +75,7 @@ export 'src/widgets/helpers/text_button.dart';
 export 'src/widgets/helpers/text.dart';
 export 'src/widgets/helpers/tool_tipper.dart';
 export 'src/widgets/helpers/translations_pending.dart';
+export 'src/widgets/helpers/tutorial.dart';
 export 'src/widgets/helpers/video_player.dart';
 export 'src/widgets/helpers/warning.dart';
 
@@ -107,7 +108,6 @@ export 'src/widgets/screen_reader_support/rich_text.dart';
 
 // User customization
 export 'src/widgets/user_customization/color_scheme/color_setting.dart';
-export 'src/widgets/user_customization/color_scheme/high_contrast_colors_setting.dart';
 export 'src/widgets/user_customization/color_scheme/mono_chrome_colors_setting.dart';
 
 export 'src/widgets/user_customization/text_theme/bold_setting.dart';
@@ -123,6 +123,7 @@ export 'src/widgets/user_customization/dominant_hand_switch.dart';
 export 'src/widgets/user_customization/image_setting.dart';
 export 'src/widgets/user_customization/layout_setting.dart';
 export 'src/widgets/user_customization/locale_setting.dart';
+export 'src/widgets/user_customization/quick_config.dart';
 export 'src/widgets/user_customization/random_button.dart';
 export 'src/widgets/user_customization/reset_button.dart';
 export 'src/widgets/user_customization/theme_mode_switch.dart';

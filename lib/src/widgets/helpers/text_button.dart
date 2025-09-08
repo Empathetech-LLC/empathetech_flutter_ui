@@ -77,39 +77,37 @@ class EzTextButton extends StatefulWidget {
 }
 
 class _EzTextButtonState extends State<EzTextButton> {
-  // Gather theme data //
-
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final Color primary = Theme.of(context).colorScheme.primary;
+
+    TextStyle? textStyle =
+        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? primary,
+    );
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
+
     return TextButton(
       onPressed: widget.onPressed,
       onLongPress: widget.onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
       style: widget.style,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
@@ -194,41 +192,41 @@ class EzTextIconButton extends StatefulWidget {
 }
 
 class _EzTextIconButtonState extends State<EzTextIconButton> {
-  // Gather theme data //
+  // Gather the fixed theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
-  late final Color primary = Theme.of(context).colorScheme.primary;
-
-  late TextStyle? textStyle =
-      (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
-    decorationColor: widget.decorationColor ?? primary,
-  );
-
-  // Define custom functions //
-
-  void addUnderline(bool addIt) {
-    textStyle = textStyle?.copyWith(
-      decoration: addIt ? TextDecoration.underline : TextDecoration.none,
-    );
-    setState(() {});
-  }
-
-  late final void Function(bool)? onHover = widget.onHover ??
-      (widget.underline
-          ? (bool isHovering) => addUnderline(isHovering)
-          : (_) {});
-
-  late final void Function(bool)? onFocusChange = widget.onFocusChange ??
-      (widget.underline ? (bool isFocused) => addUnderline(isFocused) : (_) {});
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final Color primary = Theme.of(context).colorScheme.primary;
+
+    TextStyle? textStyle =
+        (widget.textStyle ?? Theme.of(context).textTheme.bodyLarge)?.copyWith(
+      decorationColor: widget.decorationColor ?? primary,
+    );
+
+    void addUnderline(bool addIt) {
+      textStyle = textStyle?.copyWith(
+        decoration: addIt ? TextDecoration.underline : TextDecoration.none,
+      );
+      setState(() {});
+    }
+
+    // Return the build //
+
     return TextButton.icon(
       onPressed: widget.onPressed,
       onLongPress: widget.onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onHover: widget.onHover ??
+          (widget.underline
+              ? (bool isHovering) => addUnderline(isHovering)
+              : (_) {}),
+      onFocusChange: widget.onFocusChange ??
+          (widget.underline
+              ? (bool isFocused) => addUnderline(isFocused)
+              : (_) {}),
       style: widget.style,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,

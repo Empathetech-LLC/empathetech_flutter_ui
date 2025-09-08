@@ -23,12 +23,10 @@ class ArchiveScreen extends StatefulWidget {
 }
 
 class _ArchiveScreenState extends State<ArchiveScreen> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   late final EFUILang el10n = ezL10n(context);
   late final Lang l10n = Lang.of(context)!;
-
-  late final TextTheme textTheme = Theme.of(context).textTheme;
 
   // Define the build data //
 
@@ -62,24 +60,15 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
     savedConfig.endsWith('.json')
         ? setState(() => genState = GeneratorState.successful)
         : setState(() {
-            failureMessage = '${l10n.asBadFile} .json...\n\n$savedConfig';
+            failureMessage =
+                '${el10n.ssWrongConfigExt} .json...\n\n$savedConfig';
             genState = GeneratorState.failed;
           });
   }
 
-  /// Generate a (platform aware) human readable path for the saved config
-  String archivePath() {
-    switch (platform) {
-      case TargetPlatform.android:
-        return 'Root > Android > Data > net.empathetech.open_ui > files';
-      case TargetPlatform.iOS:
-        return 'Files > Browse > Open UI';
-      default:
-        return 'Downloads';
-    }
-  }
-
   Widget header() {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     switch (genState) {
       case GeneratorState.running:
         return SizedBox(
@@ -93,7 +82,11 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             textTheme: textTheme,
             richMessage: EzRichText(
               <InlineSpan>[
-                EzPlainText(text: l10n.asSavedTo(archivePath())),
+                EzPlainText(
+                    text: el10n.ssConfigSaved(archivePath(
+                  packageName: 'net.empathetech.open_ui',
+                  appName: 'Open UI',
+                ))),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
@@ -135,6 +128,6 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
   Widget build(_) => OpenUIScaffold(
         title: l10n.asPageTitle,
         running: genState == GeneratorState.running,
-        body: EzScreen(alignment: Alignment.center, child: header()),
+        body: EzScreen(header(), alignment: Alignment.center),
       );
 }

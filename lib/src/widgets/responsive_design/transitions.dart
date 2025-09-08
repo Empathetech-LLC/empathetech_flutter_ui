@@ -16,16 +16,26 @@ class EzTransitions extends PageTransitionsTheme {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-  ) {
-    if (kIsWeb) {
-      return child;
-    }
-    return super.buildTransitions(
-      route,
-      context,
-      animation,
-      secondaryAnimation,
-      child,
-    );
-  }
+  ) =>
+      kIsWeb
+          ? child
+          : super.buildTransitions(
+              route,
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            );
+}
+
+class EzNoTransitions extends PageTransitionsTheme {
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) =>
+      child;
 }

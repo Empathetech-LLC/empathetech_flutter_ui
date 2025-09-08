@@ -130,9 +130,8 @@ class EzVideoPlayer extends StatefulWidget {
 }
 
 class _EzVideoPlayerState extends State<EzVideoPlayer> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
-  final TargetPlatform platform = getBasePlatform();
   late final bool onMobile = isMobile();
 
   final EzSpacer ezMargin = EzMargin();
@@ -141,22 +140,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
-
-  late final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-  late final Color iconColor = widget.iconColor ?? colorScheme.primary;
   final double iconSize = EzConfig.get(iconSizeKey);
 
-  late final SliderThemeData sliderTheme = SliderThemeData(
-    activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
-    inactiveTrackColor: widget.sliderBufferColor ?? colorScheme.outline,
-    thumbColor: iconColor,
-  );
-
   late final EFUILang l10n = ezL10n(context);
-
-  late final TextStyle? labelStyle =
-      Theme.of(context).textTheme.labelLarge?.copyWith(color: widget.textColor);
 
   // Define the build data //
 
@@ -293,10 +279,27 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (widget.autoPlay) await play();
   }
 
-  // Return the build //
-
   @override
   Widget build(BuildContext context) {
+    // Gather the dynamic theme data //
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final Color iconColor = widget.iconColor ?? colorScheme.primary;
+
+    final SliderThemeData sliderTheme = SliderThemeData(
+      activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
+      inactiveTrackColor: widget.sliderBufferColor ?? colorScheme.outline,
+      thumbColor: iconColor,
+    );
+
+    final TextStyle? labelStyle = Theme.of(context)
+        .textTheme
+        .labelLarge
+        ?.copyWith(color: widget.textColor);
+
+    // Return the build //
+
     return Semantics(
       label: widget.semantics,
       child: Focus(

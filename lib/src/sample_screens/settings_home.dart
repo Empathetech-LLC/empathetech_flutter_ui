@@ -10,11 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class EzSettingsHome extends StatefulWidget {
-  /// [EzScreen.useImageDecoration] passthrough
-  final bool useImageDecoration;
-
-  /// Optionally remove 'Have fun!' part of the settings disclaimer
-  /// There are some apps where fun is not appropriate
+  /// Optionally remove the 'Have fun!' part of the settings disclaimer
+  /// There are apps where it's not appropriate
   final bool notFun;
 
   /// Locales to skip in the [EzLocaleSetting]
@@ -32,47 +29,46 @@ class EzSettingsHome extends StatefulWidget {
   final Widget localeSpacer;
 
   /// [Widget]s to be added below the [EzLocaleSetting] and above the navigation buttons
-  /// See [localeSpacer] and [preNavSpacer] for layout tuning
+  /// BYO trailing spacer, see [localeSpacer] for leading spacer
   final List<Widget>? additionalSettings;
-
-  /// If [additionalSettings] is not null, the spacer between it and the navigation buttons
-  final Widget preNavSpacer;
-
-  /// [GoRouter.goNamed] path to the text settings screen
-  /// If null, no button will appear
-  final String? textSettingsPath;
-
-  /// [GoRouter.goNamed] path to the layout settings screen
-  /// If null, no button will appear
-  final String? layoutSettingsPath;
 
   /// [GoRouter.goNamed] path to the color settings screen
   /// If null, no button will appear
   final String? colorSettingsPath;
 
-  /// [GoRouter.goNamed] path to the image settings screen
+  /// [GoRouter.goNamed] path to the design settings screen
   /// If null, no button will appear
-  final String? imageSettingsPath;
+  final String? designSettingsPath;
 
-  /// Widgets to be added below any present routes and above randomize
-  /// See [randomSpacer] and/or [resetSpacer] for layout tuning
+  /// [GoRouter.goNamed] path to the layout settings screen
+  /// If null, no button will appear
+  final String? layoutSettingsPath;
+
+  /// [GoRouter.goNamed] path to the text settings screen
+  /// If null, no button will appear
+  final String? textSettingsPath;
+
+  /// Widgets to be added directly below any present routes
+  /// BYO leading spacer, trailing spacer will be one of the parameters below
   final List<Widget>? additionalRoutes;
 
-  /// Spacer after the navigation buttons and before the [EzConfigRandomizer]
+  /// Spacer before the [EzQuickConfig]
+  /// If null, [EzQuickConfig] will not be included
+  final Widget? quickConfigSpacer;
+
+  /// Spacer before the [EzConfigRandomizer]
   /// If null, [EzConfigRandomizer] will not be included
   final Widget? randomSpacer;
 
-  /// Spacer between the [EzResetButton] and the navigation buttons, or [EzConfigRandomizer] if present
+  /// Spacer before the [EzResetButton]
+  /// [EzResetButton] is always included
   final Widget resetSpacer;
 
   /// [EzResetButton.skip] passthrough
   final Set<String>? skipKeys;
 
-  /// Spacer before the [footer], if present
-  final Widget footerSpacer;
-
-  /// Widgets to be added below reset
-  /// Do not include a trailing spacer, one will be provided
+  /// Widgets to be added below the [EzResetButton]
+  /// BYO leading spacer, trailing is always [EzSeparator]
   final List<Widget>? footer;
 
   /// Empathetech settings landing page
@@ -80,23 +76,21 @@ class EzSettingsHome extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzSettingsHome({
     super.key,
-    this.useImageDecoration = true,
     this.notFun = false,
     this.skipLocales,
     this.protest = false,
     this.inDistress = const <String>{'US'},
     this.localeSpacer = const EzDivider(),
     this.additionalSettings,
-    this.preNavSpacer = const EzSeparator(),
-    required this.textSettingsPath,
-    required this.layoutSettingsPath,
     required this.colorSettingsPath,
-    required this.imageSettingsPath,
+    required this.designSettingsPath,
+    required this.layoutSettingsPath,
+    required this.textSettingsPath,
     this.additionalRoutes,
-    this.randomSpacer = const EzDivider(),
+    this.quickConfigSpacer = const EzDivider(),
+    this.randomSpacer = const EzSpacer(),
     this.resetSpacer = const EzSpacer(),
     this.skipKeys,
-    this.footerSpacer = const EzSeparator(),
     this.footer,
   });
 
@@ -105,7 +99,7 @@ class EzSettingsHome extends StatefulWidget {
 }
 
 class _EzSettingsHomeState extends State<EzSettingsHome> {
-  // Gather the theme data //
+  // Gather the fixed theme data //
 
   static const EzSpacer spacer = EzSpacer();
   static const EzSeparator separator = EzSeparator();
@@ -128,27 +122,7 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     late final Widget navIcon = EzIcon(Icons.navigate_next);
     final List<Widget> buttons = <Widget>[];
 
-    if (widget.textSettingsPath != null) {
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.textSettingsPath!),
-        icon: navIcon,
-        label: l10n.tsPageTitle,
-      ));
-    }
-
-    if (widget.layoutSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
-
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.layoutSettingsPath!),
-        icon: navIcon,
-        label: l10n.lsPageTitle,
-      ));
-    }
-
     if (widget.colorSettingsPath != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
-
       buttons.add(EzElevatedIconButton(
         onPressed: () => context.goNamed(widget.colorSettingsPath!),
         icon: navIcon,
@@ -156,18 +130,34 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
       ));
     }
 
-    if (widget.imageSettingsPath != null) {
+    if (widget.designSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-
       buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.imageSettingsPath!),
+        onPressed: () => context.goNamed(widget.designSettingsPath!),
         icon: navIcon,
-        label: l10n.isPageTitle,
+        label: l10n.dsPageTitle,
+      ));
+    }
+
+    if (widget.layoutSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.layoutSettingsPath!),
+        icon: navIcon,
+        label: l10n.lsPageTitle,
+      ));
+    }
+
+    if (widget.textSettingsPath != null) {
+      if (buttons.isNotEmpty) buttons.add(spacer);
+      buttons.add(EzElevatedIconButton(
+        onPressed: () => context.goNamed(widget.textSettingsPath!),
+        icon: navIcon,
+        label: l10n.tsPageTitle,
       ));
     }
 
     if (widget.additionalRoutes != null) {
-      if (buttons.isNotEmpty) buttons.add(spacer);
       buttons.addAll(widget.additionalRoutes!);
     }
 
@@ -178,61 +168,55 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
 
   @override
   Widget build(BuildContext context) {
-    return EzScreen(
-      useImageDecoration: widget.useImageDecoration,
-      child: EzScrollView(
-        children: <Widget>[
-          // Restart disclaimer
-          EzWarning(widget.notFun
-              ? (kIsWeb
-                  ? l10n.ssSettingsGuideWeb.split('\n').first
-                  : l10n.ssSettingsGuide.split('\n').first)
-              : (kIsWeb ? l10n.ssSettingsGuideWeb : l10n.ssSettingsGuide)),
-          separator,
+    return EzScrollView(
+      children: <Widget>[
+        // Restart disclaimer
+        EzWarning(
+            '${kIsWeb ? l10n.ssRestartReminderWeb : l10n.ssRestartReminder}${widget.notFun ? '' : '\n\n${l10n.ssHaveFun}'}'),
+        separator,
 
-          // Right/left
-          const EzDominantHandSwitch(),
-          spacer,
+        // Right/left
+        const EzDominantHandSwitch(),
+        spacer,
 
-          // Theme mode
-          const EzThemeModeSwitch(),
-          spacer,
+        // Theme mode
+        const EzThemeModeSwitch(),
+        spacer,
 
-          // Language
-          EzLocaleSetting(
-            skip: widget.skipLocales ?? <Locale>{english},
-            protest: widget.protest,
-            inDistress: widget.inDistress,
-          ),
-          widget.localeSpacer,
+        // Language
+        EzLocaleSetting(
+          skip: widget.skipLocales ?? <Locale>{english},
+          protest: widget.protest,
+          inDistress: widget.inDistress,
+        ),
+        widget.localeSpacer,
 
-          // Additional settings
-          if (widget.additionalSettings != null) ...<Widget>[
-            ...widget.additionalSettings!,
-            widget.preNavSpacer,
-          ],
+        // Additional settings
+        if (widget.additionalSettings != null) ...widget.additionalSettings!,
 
-          // Navigation buttons
-          ...navButtons(),
+        // Navigation buttons
+        ...navButtons(),
 
-          // Feeling lucky
-          if (widget.randomSpacer != null) ...<Widget>[
-            widget.randomSpacer!,
-            const EzConfigRandomizer(),
-          ],
-
-          // Reset button
-          widget.resetSpacer,
-          EzResetButton(skip: widget.skipKeys),
-
-          // Footer
-          if (widget.footer != null) ...<Widget>[
-            widget.footerSpacer,
-            ...widget.footer!,
-          ],
-          separator,
+        // Quick config
+        if (widget.quickConfigSpacer != null) ...<Widget>[
+          widget.quickConfigSpacer!,
+          const EzQuickConfig(),
         ],
-      ),
+
+        // Feeling lucky
+        if (widget.randomSpacer != null) ...<Widget>[
+          widget.randomSpacer!,
+          const EzConfigRandomizer(),
+        ],
+
+        // Reset button
+        widget.resetSpacer,
+        EzResetButton(skip: widget.skipKeys),
+
+        // Footer
+        if (widget.footer != null) ...widget.footer!,
+        separator,
+      ],
     );
   }
 }

@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "net.empathetech.open_ui"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "27.3.13750724"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

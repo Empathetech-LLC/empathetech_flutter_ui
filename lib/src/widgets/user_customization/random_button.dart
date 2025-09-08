@@ -43,22 +43,15 @@ class EzConfigRandomizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Gather theme data //
-
+    final bool isDark = isDarkTheme(context);
     final EFUILang l10n = ezL10n(context);
-
-    final String themeProfile = isDarkTheme(context)
-        ? l10n.gDark.toLowerCase()
-        : l10n.gLight.toLowerCase();
-
-    // Return the build //
 
     return EzElevatedIconButton(
       onPressed: () => showPlatformDialog(
           context: context,
           builder: (BuildContext dialogContext) {
             final void Function() confirm =
-                onConfirm ?? () => EzConfig.randomize(isDarkTheme(context));
+                onConfirm ?? () => EzConfig.randomize(isDark);
             final void Function() deny = onDeny ?? doNothing;
 
             late final List<Widget> materialActions;
@@ -79,7 +72,10 @@ class EzConfigRandomizer extends StatelessWidget {
 
             return EzAlertDialog(
               title: Text(
-                dialogTitle ?? l10n.ssRandomize(themeProfile),
+                dialogTitle ??
+                    l10n.ssRandomize(isDark
+                        ? l10n.gDark.toLowerCase()
+                        : l10n.gLight.toLowerCase()),
                 textAlign: TextAlign.center,
               ),
               content: Text(

@@ -15,6 +15,9 @@ class EFUILangEn extends EFUILang {
   String get gContinue => 'Continue';
 
   @override
+  String get gSkip => 'Skip';
+
+  @override
   String get gOpen => 'Open';
 
   @override
@@ -110,6 +113,9 @@ class EFUILangEn extends EFUILang {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gCenterReset => 'Hold center to reset';
+
+  @override
   String get gLoadingAnim =>
       'Loading. The Empathetic logo animated as a spinning hourglass.';
 
@@ -145,6 +151,9 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get gUpdates => 'Updates available';
+
+  @override
+  String get gEnterURL => 'Enter URL';
 
   @override
   String get gValidURL => 'Please enter a valid URL';
@@ -244,24 +253,64 @@ class EFUILangEn extends EFUILang {
   String get ssNavHint => 'Open the settings page';
 
   @override
-  String get ssSettingsGuide =>
-      'Close and reopen the app to apply your changes.\n\nHave fun!';
+  String get ssRestartReminder =>
+      'Close and reopen the app to apply your changes.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Reload/refresh the page to apply your changes.\n\nHave fun!';
+  String get ssRestartReminderWeb =>
+      'Reload/refresh the page to apply your changes.';
 
   @override
-  String get ssThemeMode => 'Theme mode';
+  String get ssHaveFun => 'Have fun!';
 
   @override
   String get ssDominantHand => 'Dominant hand';
+
+  @override
+  String get ssThemeMode => 'Theme mode';
 
   @override
   String get ssLanguage => 'Language';
 
   @override
   String get ssLangHint => 'Activate to change the app language';
+
+  @override
+  String get ssLoadPreset => 'Load preset';
+
+  @override
+  String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssBigButtons => 'Big buttons';
+
+  @override
+  String get ssHighVisibility => 'High visibility';
+
+  @override
+  String get ssVideoGame => 'Video game';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
+
+  @override
+  String get ssDarkOnly =>
+      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?';
+
+  @override
+  String get ssLightOnly =>
+      'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?';
+
+  @override
+  String ssApplied(Object config) {
+    return '$config applied.';
+  }
+
+  @override
+  String get ssTryMe => 'Try me';
 
   @override
   String get ssRandom => 'Randomize';
@@ -272,7 +321,185 @@ class EFUILangEn extends EFUILang {
   }
 
   @override
+  String get ssConfigTip => 'Save/load config';
+
+  @override
+  String get ssSaveConfig => 'Save config';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Your configuration has been saved to $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'The file was not saved as ';
+
+  @override
+  String get ssLoadConfig => 'Load config';
+
+  @override
   String get ssResetAll => 'Reset all settings?';
+
+  @override
+  String get csPageTitle => 'Color settings';
+
+  @override
+  String get csPickerHint =>
+      'Open a color picker. Long press for more options.';
+
+  @override
+  String get csMonoChrome => 'Use monochrome scheme';
+
+  @override
+  String get csHighContrast => 'Use high contrast scheme';
+
+  @override
+  String get csPickerTitle => 'Pick a color';
+
+  @override
+  String get csRecommended => 'Use contrast recommendation?';
+
+  @override
+  String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
+
+  @override
+  String get csCurrVal => 'Current color value:';
+
+  @override
+  String get csSchemeBase => 'Build scheme\nfrom image';
+
+  @override
+  String get csFromImage => 'A color scheme will be generated from the image.';
+
+  @override
+  String get csColorScheme => 'color scheme';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get dsPageTitle => 'Design settings';
+
+  @override
+  String get dsAnimDuration => 'Animation duration (ms)';
+
+  @override
+  String get dsButtonBackground => 'Button background opacity';
+
+  @override
+  String get dsButtonOutline => 'Button outline opacity';
+
+  @override
+  String get dsBackgroundImg => 'Background image';
+
+  @override
+  String dsImgSettingHint(Object title) {
+    return 'Update the $title image';
+  }
+
+  @override
+  String get dsFromFile => 'From file';
+
+  @override
+  String get dsFromCamera => 'From camera';
+
+  @override
+  String get dsFromNetwork => 'From URL';
+
+  @override
+  String get dsResetIt => 'Reset it';
+
+  @override
+  String get dsClearIt => 'Clear it';
+
+  @override
+  String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsImgGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsImgSetFailed => 'Failed to update image';
+
+  @override
+  String get dsImgPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+
+  @override
+  String get dsUseFull => 'Use full image?';
+
+  @override
+  String get dsFit => 'How should it fit?';
+
+  @override
+  String get dsCrop => 'Crop';
+
+  @override
+  String get dsNoWeb => 'Image editing is not supported on web';
+
+  @override
+  String get dsDrag => 'Drag';
+
+  @override
+  String get dsDragHint => 'Drag to reposition the image';
+
+  @override
+  String get dsSwipe => 'Swipe';
+
+  @override
+  String get dsSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get dsPinch => 'Pinch';
+
+  @override
+  String get dsPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get dsScroll => 'Scroll';
+
+  @override
+  String get dsScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get dsRotateLeft => 'Rotate left';
+
+  @override
+  String get dsRotateRight => 'Rotate right';
+
+  @override
+  String get dsUndo => 'Undo';
+
+  @override
+  String get dsRedo => 'Redo';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return 'Reset all global and $themeType theme design settings?';
+  }
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsScroll => 'Hide scrollbars';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 
   @override
   String get tsPageTitle => 'Text settings';
@@ -376,121 +603,6 @@ class EFUILangEn extends EFUILang {
 
   @override
   String get tsResetAll => 'Reset all text settings?';
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsScroll => 'Hide scrollbars';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
-
-  @override
-  String get csPageTitle => 'Color settings';
-
-  @override
-  String get csPickerHint =>
-      'Open a color picker. Long press for more options.';
-
-  @override
-  String get csMonoChrome => 'Use monochrome scheme';
-
-  @override
-  String get csHighContrast => 'Use high contrast scheme';
-
-  @override
-  String get csPickerTitle => 'Pick a color';
-
-  @override
-  String get csRecommended => 'Use contrast recommendation?';
-
-  @override
-  String get csUseCustom => 'Use custom';
-
-  @override
-  String get csAddColor => 'Add a color';
-
-  @override
-  String get csCurrVal => 'Current color value:';
-
-  @override
-  String get csSchemeBase => 'Build scheme\nfrom image';
-
-  @override
-  String get csFromImage => 'A color scheme will be generated from the image.';
-
-  @override
-  String get csColorScheme => 'color scheme';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
-
-  @override
-  String get isPageTitle => 'Image settings';
-
-  @override
-  String get isBackground => 'Background';
-
-  @override
-  String get isImage => 'image';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
-  }
-
-  @override
-  String get isFromFile => 'From file';
-
-  @override
-  String get isFromCamera => 'From camera';
-
-  @override
-  String get isFromNetwork => 'From URL';
-
-  @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isEnterURL => 'Enter URL';
-
-  @override
-  String get isGetFailed => 'Failed to retrieve image';
-
-  @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
-
-  @override
-  String get isPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
-  String get isUseForColors => 'Update the app colors using this image';
-
-  @override
-  String get isFit => 'How should it fit?';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -504,6 +616,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gContinue => 'Continue';
 
   @override
+  String get gSkip => 'Skip';
+
+  @override
   String get gOpen => 'Open';
 
   @override
@@ -599,6 +714,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gMinimum => 'Minimum';
 
   @override
+  String get gCenterReset => 'Hold center to reset';
+
+  @override
   String get gLoadingAnim =>
       'Loading. The Empathetic logo animated as a spinning hourglass.';
 
@@ -634,6 +752,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gUpdates => 'Updates available';
+
+  @override
+  String get gEnterURL => 'Enter URL';
 
   @override
   String get gValidURL => 'Please enter a valid URL';
@@ -733,24 +854,64 @@ class EFUILangEnUs extends EFUILangEn {
   String get ssNavHint => 'Open the settings page';
 
   @override
-  String get ssSettingsGuide =>
-      'Close and reopen the app to apply your changes.\n\nHave fun!';
+  String get ssRestartReminder =>
+      'Close and reopen the app to apply your changes.';
 
   @override
-  String get ssSettingsGuideWeb =>
-      'Reload/refresh the page to apply your changes.\n\nHave fun!';
+  String get ssRestartReminderWeb =>
+      'Reload/refresh the page to apply your changes.';
 
   @override
-  String get ssThemeMode => 'Theme mode';
+  String get ssHaveFun => 'Have fun!';
 
   @override
   String get ssDominantHand => 'Dominant hand';
+
+  @override
+  String get ssThemeMode => 'Theme mode';
 
   @override
   String get ssLanguage => 'Language';
 
   @override
   String get ssLangHint => 'Activate to change the app language';
+
+  @override
+  String get ssLoadPreset => 'Load preset';
+
+  @override
+  String get ssLoadPresetHint => 'Activate to show presets';
+
+  @override
+  String get ssBigButtons => 'Big buttons';
+
+  @override
+  String get ssHighVisibility => 'High visibility';
+
+  @override
+  String get ssVideoGame => 'Video game';
+
+  @override
+  String get ssChalkboard => 'Chalkboard';
+
+  @override
+  String get ssFancyPants => 'Fancy pants';
+
+  @override
+  String get ssDarkOnly =>
+      'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?';
+
+  @override
+  String get ssLightOnly =>
+      'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?';
+
+  @override
+  String ssApplied(Object config) {
+    return '$config applied.';
+  }
+
+  @override
+  String get ssTryMe => 'Try me';
 
   @override
   String get ssRandom => 'Randomize';
@@ -761,7 +922,185 @@ class EFUILangEnUs extends EFUILangEn {
   }
 
   @override
+  String get ssConfigTip => 'Save/load config';
+
+  @override
+  String get ssSaveConfig => 'Save config';
+
+  @override
+  String ssConfigSaved(Object path) {
+    return 'Your configuration has been saved to $path';
+  }
+
+  @override
+  String get ssWrongConfigExt => 'The file was not saved as ';
+
+  @override
+  String get ssLoadConfig => 'Load config';
+
+  @override
   String get ssResetAll => 'Reset all settings?';
+
+  @override
+  String get csPageTitle => 'Color settings';
+
+  @override
+  String get csPickerHint =>
+      'Open a color picker. Long press for more options.';
+
+  @override
+  String get csMonoChrome => 'Use monochrome scheme';
+
+  @override
+  String get csHighContrast => 'Use high contrast scheme';
+
+  @override
+  String get csPickerTitle => 'Pick a color';
+
+  @override
+  String get csRecommended => 'Use contrast recommendation?';
+
+  @override
+  String get csUseCustom => 'Use custom';
+
+  @override
+  String get csAddColor => 'Add a color';
+
+  @override
+  String get csCurrVal => 'Current color value:';
+
+  @override
+  String get csSchemeBase => 'Build scheme\nfrom image';
+
+  @override
+  String get csFromImage => 'A color scheme will be generated from the image.';
+
+  @override
+  String get csColorScheme => 'color scheme';
+
+  @override
+  String csResetAll(Object themeType) {
+    return 'Reset all $themeType theme colors?';
+  }
+
+  @override
+  String get dsPageTitle => 'Design settings';
+
+  @override
+  String get dsAnimDuration => 'Animation duration (ms)';
+
+  @override
+  String get dsButtonBackground => 'Button background opacity';
+
+  @override
+  String get dsButtonOutline => 'Button outline opacity';
+
+  @override
+  String get dsBackgroundImg => 'Background image';
+
+  @override
+  String dsImgSettingHint(Object title) {
+    return 'Update the $title image';
+  }
+
+  @override
+  String get dsFromFile => 'From file';
+
+  @override
+  String get dsFromCamera => 'From camera';
+
+  @override
+  String get dsFromNetwork => 'From URL';
+
+  @override
+  String get dsResetIt => 'Reset it';
+
+  @override
+  String get dsClearIt => 'Clear it';
+
+  @override
+  String get dsUseForColors => 'Update the app colors using this image';
+
+  @override
+  String get dsImgGetFailed => 'Failed to retrieve image';
+
+  @override
+  String get dsImgSetFailed => 'Failed to update image';
+
+  @override
+  String get dsImgPermission =>
+      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
+
+  @override
+  String get dsUseFull => 'Use full image?';
+
+  @override
+  String get dsFit => 'How should it fit?';
+
+  @override
+  String get dsCrop => 'Crop';
+
+  @override
+  String get dsNoWeb => 'Image editing is not supported on web';
+
+  @override
+  String get dsDrag => 'Drag';
+
+  @override
+  String get dsDragHint => 'Drag to reposition the image';
+
+  @override
+  String get dsSwipe => 'Swipe';
+
+  @override
+  String get dsSwipeHint => 'Swipe to reposition the image';
+
+  @override
+  String get dsPinch => 'Pinch';
+
+  @override
+  String get dsPinchHint => 'Pinch to zoom in/out';
+
+  @override
+  String get dsScroll => 'Scroll';
+
+  @override
+  String get dsScrollHint => 'Scroll to zoom in/out';
+
+  @override
+  String get dsRotateLeft => 'Rotate left';
+
+  @override
+  String get dsRotateRight => 'Rotate right';
+
+  @override
+  String get dsUndo => 'Undo';
+
+  @override
+  String get dsRedo => 'Redo';
+
+  @override
+  String dsResetAll(Object themeType) {
+    return 'Reset all global and $themeType theme design settings?';
+  }
+
+  @override
+  String get lsPageTitle => 'Layout settings';
+
+  @override
+  String get lsMargin => 'Margin';
+
+  @override
+  String get lsPadding => 'Padding';
+
+  @override
+  String get lsSpacing => 'Spacing';
+
+  @override
+  String get lsScroll => 'Hide scrollbars';
+
+  @override
+  String get lsResetAll => 'Reset all layout settings?';
 
   @override
   String get tsPageTitle => 'Text settings';
@@ -865,119 +1204,4 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get tsResetAll => 'Reset all text settings?';
-
-  @override
-  String get lsPageTitle => 'Layout settings';
-
-  @override
-  String get lsMargin => 'Margin';
-
-  @override
-  String get lsPadding => 'Padding';
-
-  @override
-  String get lsSpacing => 'Spacing';
-
-  @override
-  String get lsScroll => 'Hide scrollbars';
-
-  @override
-  String get lsResetAll => 'Reset all layout settings?';
-
-  @override
-  String get csPageTitle => 'Color settings';
-
-  @override
-  String get csPickerHint =>
-      'Open a color picker. Long press for more options.';
-
-  @override
-  String get csMonoChrome => 'Use monochrome scheme';
-
-  @override
-  String get csHighContrast => 'Use high contrast scheme';
-
-  @override
-  String get csPickerTitle => 'Pick a color';
-
-  @override
-  String get csRecommended => 'Use contrast recommendation?';
-
-  @override
-  String get csUseCustom => 'Use custom';
-
-  @override
-  String get csAddColor => 'Add a color';
-
-  @override
-  String get csCurrVal => 'Current color value:';
-
-  @override
-  String get csSchemeBase => 'Build scheme\nfrom image';
-
-  @override
-  String get csFromImage => 'A color scheme will be generated from the image.';
-
-  @override
-  String get csColorScheme => 'color scheme';
-
-  @override
-  String csResetAll(Object themeType) {
-    return 'Reset all $themeType theme colors?';
-  }
-
-  @override
-  String get isPageTitle => 'Image settings';
-
-  @override
-  String get isBackground => 'Background';
-
-  @override
-  String get isImage => 'image';
-
-  @override
-  String isButtonHint(Object title) {
-    return 'Update the $title image';
-  }
-
-  @override
-  String get isFromFile => 'From file';
-
-  @override
-  String get isFromCamera => 'From camera';
-
-  @override
-  String get isFromNetwork => 'From URL';
-
-  @override
-  String get isResetIt => 'Reset it';
-
-  @override
-  String get isClearIt => 'Clear it';
-
-  @override
-  String get isEnterURL => 'Enter URL';
-
-  @override
-  String get isGetFailed => 'Failed to retrieve image';
-
-  @override
-  String isSetFailed(Object error) {
-    return 'Failed to update image:\n$error';
-  }
-
-  @override
-  String get isPermission =>
-      'Some sites don\'t allow their images to be accessed by others.\nTry an image from another host.';
-
-  @override
-  String get isUseForColors => 'Update the app colors using this image';
-
-  @override
-  String get isFit => 'How should it fit?';
-
-  @override
-  String isResetAll(Object themeType) {
-    return 'Reset all $themeType theme images?';
-  }
 }
