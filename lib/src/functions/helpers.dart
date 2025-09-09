@@ -54,12 +54,12 @@ String screenshotHint() {
   }
 }
 
-String archivePath({required String packageName, required String appName}) {
+String archivePath({required String? androidPackage, required String appName}) {
   final TargetPlatform platform = getBasePlatform();
 
   switch (platform) {
     case TargetPlatform.android:
-      return 'Root > Android > Data > $packageName > files';
+      return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
     case TargetPlatform.iOS:
       return 'Files > Browse > $appName';
     default:

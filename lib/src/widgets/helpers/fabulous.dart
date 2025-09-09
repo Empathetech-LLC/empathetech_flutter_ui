@@ -28,11 +28,11 @@ class EzBackFAB extends FloatingActionButton {
 }
 
 class EzConfigFAB extends StatelessWidget {
-  /// 'com.example.app'
-  final String packageName;
-
   /// 'App Name'
   final String appName;
+
+  /// 'com.example.app'
+  final String? androidPackage;
 
   /// [allKeys] included by default
   /// Include any app specific keys you want backed up here
@@ -42,8 +42,8 @@ class EzConfigFAB extends StatelessWidget {
   const EzConfigFAB(
     BuildContext context, {
     super.key,
-    required this.packageName,
     required this.appName,
+    required this.androidPackage,
     this.extraKeys,
   });
 
@@ -96,8 +96,8 @@ class EzConfigFAB extends StatelessWidget {
                   ? ezSnackBar(
                       context: context,
                       message: l10n.ssConfigSaved(archivePath(
-                        packageName: packageName,
                         appName: appName,
+                        androidPackage: androidPackage,
                       )),
                     )
                   : ezLogAlert(

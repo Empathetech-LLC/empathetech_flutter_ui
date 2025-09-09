@@ -4,6 +4,7 @@
  */
 
 import '../../screens/export.dart';
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class SettingsHomeScreen extends StatelessWidget {
         )),
         fab: EzConfigFAB(
           context,
-          packageName: 'net.empathetech.open_ui',
           appName: 'Open UI',
+          androidPackage: androidPackage,
         ),
       );
 }
