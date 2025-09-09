@@ -112,17 +112,25 @@ class EzConfigFAB extends StatelessWidget {
               allowedExtensions: <String>['json'],
             );
 
-            if (result != null && result.files.single.path != null) {
-              final String filePath = result.files.single.path!;
-              final String fileContent = await File(filePath).readAsString();
+            try {
+              if (result != null && result.files.single.path != null) {
+                if (kIsWeb) {
+                  final Uint8List? fileBytes = result.files.first.bytes;
+                  if (fileBytes == null) throw 'null file';
 
-              try {
-                await EzConfig.loadConfig(jsonDecode(fileContent));
-              } catch (e) {
-                if (context.mounted) {
-                  ezLogAlert(context, message: e.toString());
+                  final String fileContent = utf8.decode(fileBytes);
+                  await EzConfig.loadConfig(jsonDecode(fileContent));
+                } else {
+                  final String filePath = result.files.single.path!;
+                  final String fileContent =
+                      await File(filePath).readAsString();
+
+                  await EzConfig.loadConfig(jsonDecode(fileContent));
                 }
               }
+            } catch (e) {
+              if (context.mounted) ezLogAlert(context, message: e.toString());
+              return;
             }
 
             if (context.mounted) {
