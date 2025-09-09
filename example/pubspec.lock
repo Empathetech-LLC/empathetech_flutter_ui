@@ -206,7 +206,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "10.0.0"
+    version: "10.0.1"
   extended_image:
     dependency: transitive
     description:
