@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2025-09-XX
+### Updated
+- Stuff
+
 ## [2.3.0] - 2025-09-07
 ### Updated
 - Flutter 3.35
