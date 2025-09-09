@@ -79,9 +79,8 @@ class EzConfigFAB extends StatelessWidget {
               ),
             ));
 
-            late final String savedConfig;
             try {
-              savedConfig = await FileSaver.instance.saveFile(
+              await FileSaver.instance.saveFile(
                 name: '${ezTitleToSnake(appName)}_settings.json',
                 bytes: utf8.encode(jsonEncode(config)),
                 mimeType: MimeType.json,
@@ -92,19 +91,13 @@ class EzConfigFAB extends StatelessWidget {
             }
 
             if (context.mounted) {
-              savedConfig.endsWith('.json')
-                  ? ezSnackBar(
-                      context: context,
-                      message: l10n.ssConfigSaved(archivePath(
-                        appName: appName,
-                        androidPackage: androidPackage,
-                      )),
-                    )
-                  : ezLogAlert(
-                      context,
-                      message:
-                          '${l10n.ssWrongConfigExt} .json...\n\n$savedConfig',
-                    );
+              ezSnackBar(
+                context: context,
+                message: l10n.ssConfigSaved(archivePath(
+                  appName: appName,
+                  androidPackage: androidPackage,
+                )),
+              );
             }
           },
         ),
