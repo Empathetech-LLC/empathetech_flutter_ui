@@ -68,13 +68,17 @@ class _LocaleSettingState extends State<EzLocaleSetting> {
     flag = (lang.countryCode == null)
         ? CountryFlag.fromLanguageCode(
             lang.languageCode,
-            shape: const Circle(),
-            width: iconSize + padding,
+            theme: ImageTheme(
+              shape: const Circle(),
+              width: iconSize + padding,
+            ),
           )
         : CountryFlag.fromCountryCode(
             lang.countryCode!,
-            shape: const Circle(),
-            width: iconSize + padding,
+            theme: ImageTheme(
+              shape: const Circle(),
+              width: iconSize + padding,
+            ),
           );
 
     return (widget.protest && widget.inDistress.contains(lang.countryCode))
