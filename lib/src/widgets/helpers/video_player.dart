@@ -455,10 +455,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             Visibility(
                               visible: showControl(widget.volumeVis),
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                  right:
-                                      widget.variableVolume ? margin : spacing,
-                                ),
+                                padding: widget.variableVolume
+                                    ? EdgeInsets.zero
+                                    : EdgeInsets.only(right: spacing),
                                 child: (widget.controller.value.volume == 0.0)
                                     ? EzIconButton(
                                         onPressed: unMute,
@@ -485,7 +484,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 padding: EdgeInsets.only(right: spacing),
                                 child: SizedBox(
                                   height: iconSize,
-                                  width: spacing * 2.0,
+                                  width: 100,
                                   child: SliderTheme(
                                     data: sliderTheme,
                                     child: Slider(
@@ -518,9 +517,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             Visibility(
                               visible: showControl(widget.speedVis),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: spacing,
-                                ),
+                                padding: EdgeInsets.only(right: spacing),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
@@ -538,10 +535,21 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                     pmSpacer,
                                     Tooltip(
                                       message: l10n.gPlaybackSpeed,
-                                      child: Text(
-                                        currSpeed.toStringAsFixed(2),
-                                        style: labelStyle,
-                                        textAlign: TextAlign.center,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(
+                                            currSpeed.toStringAsFixed(2),
+                                            style: labelStyle,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Icon(
+                                            Icons.time_to_leave,
+                                            size: EzConfig.get(iconSizeKey) / 2,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     pmSpacer,
@@ -565,8 +573,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             Visibility(
                               visible: showControl(widget.fullScreenVis),
                               child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: spacing),
+                                padding: EdgeInsets.only(right: spacing),
                                 child: EzIconButton(
                                   onPressed: toggleFullscreen,
                                   tooltip: l10n.gFullScreen,
