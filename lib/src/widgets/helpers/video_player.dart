@@ -37,7 +37,7 @@ class EzVideoPlayer extends StatefulWidget {
   /// Defaults to [ColorScheme.secondary]
   final Color? sliderColor;
 
-  /// Defaults to [ColorScheme.outline]
+  /// Defaults to [textColor] with 50% opacity
   final Color? sliderBufferColor;
 
   /// Seconds to skip forward/backward on arrow key press
@@ -290,7 +290,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
     final SliderThemeData sliderTheme = SliderThemeData(
       activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
-      inactiveTrackColor: widget.sliderBufferColor ?? colorScheme.outline,
+      inactiveTrackColor:
+          widget.sliderBufferColor ?? widget.textColor.withValues(alpha: 0.5),
       thumbColor: iconColor,
     );
 
