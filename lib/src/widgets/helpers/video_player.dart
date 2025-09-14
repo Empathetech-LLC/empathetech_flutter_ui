@@ -45,6 +45,7 @@ class EzVideoPlayer extends StatefulWidget {
   final int skipTime = 10;
 
   /// [Container.decoration] for the region behind the controls
+  /// Defaults to black with 50% opacity -> 0x80000000
   final Decoration controlsBackground;
 
   /// Time/progress slider visibility
@@ -108,7 +109,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.iconColor,
     this.sliderColor,
     this.sliderBufferColor,
-    this.controlsBackground = const BoxDecoration(color: Colors.transparent),
+    this.controlsBackground = const BoxDecoration(color: Color(0x80000000)),
     this.timeSliderVis = EzButtonVis.auto,
     this.playVis = EzButtonVis.auto,
     this.volumeVis = EzButtonVis.auto,
@@ -540,14 +541,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: <Widget>[
+                                          Icon(
+                                            Icons.speed,
+                                            size: EzConfig.get(iconSizeKey) *
+                                                0.667,
+                                            color: widget.textColor,
+                                          ),
                                           Text(
                                             currSpeed.toStringAsFixed(2),
                                             style: labelStyle,
                                             textAlign: TextAlign.center,
-                                          ),
-                                          Icon(
-                                            Icons.time_to_leave,
-                                            size: EzConfig.get(iconSizeKey) / 2,
                                           ),
                                         ],
                                       ),
