@@ -47,7 +47,7 @@ class EzLink extends StatefulWidget {
 
   /// Optional callback for hover events
   /// Will run in addition to the built-in [EzLink] hover effects
-  final Function? onHover;
+  final Function(bool hovering)? onHover;
 
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
@@ -130,7 +130,7 @@ class _EzLinkState extends State<EzLink> {
                   onLongPress: null,
                   onHover: (bool isHovering) {
                     underline(isHovering);
-                    widget.onHover?.call();
+                    widget.onHover?.call(isHovering);
                   },
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
                   child: text,
@@ -143,7 +143,7 @@ class _EzLinkState extends State<EzLink> {
                     onLongPress: null,
                     onHover: (bool isHovering) {
                       underline(isHovering);
-                      widget.onHover?.call();
+                      widget.onHover?.call(isHovering);
                     },
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
                     child: text,
