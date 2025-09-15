@@ -50,10 +50,11 @@
 
   "gPlay": "Lecture",
   "gPause": "Pause",
+  "gReplay": "Rejouer",
   "gMute": "Muet",
   "gUnMute": "Désactiver le son",
   "gPlaybackSpeed": "Vitesse de lecture",
-  "gReplay": "Rejouer",
+  "gCaptions": "Sous-titres/légendes",
   "gFullScreen": "Plein écran",
 
   "gHowThisWorks": "Comment ça marche",

@@ -50,10 +50,11 @@
 
   "gPlay": "Play",
   "gPause": "Pause",
+  "gReplay": "Replay",
   "gMute": "Mute",
   "gUnMute": "Un-mute",
   "gPlaybackSpeed": "Playback speed",
-  "gReplay": "Replay",
+  "gCaptions": "Subtitles/captions",
   "gFullScreen": "Full screen",
 
   "gHowThisWorks": "How this works",

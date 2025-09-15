@@ -126,6 +126,9 @@ class EFUILangEn extends EFUILang {
   String get gPause => 'Pause';
 
   @override
+  String get gReplay => 'Replay';
+
+  @override
   String get gMute => 'Mute';
 
   @override
@@ -135,7 +138,7 @@ class EFUILangEn extends EFUILang {
   String get gPlaybackSpeed => 'Playback speed';
 
   @override
-  String get gReplay => 'Replay';
+  String get gCaptions => 'Subtitles/captions';
 
   @override
   String get gFullScreen => 'Full screen';
@@ -727,6 +730,9 @@ class EFUILangEnUs extends EFUILangEn {
   String get gPause => 'Pause';
 
   @override
+  String get gReplay => 'Replay';
+
+  @override
   String get gMute => 'Mute';
 
   @override
@@ -736,7 +742,7 @@ class EFUILangEnUs extends EFUILangEn {
   String get gPlaybackSpeed => 'Playback speed';
 
   @override
-  String get gReplay => 'Replay';
+  String get gCaptions => 'Subtitles/captions';
 
   @override
   String get gFullScreen => 'Full screen';

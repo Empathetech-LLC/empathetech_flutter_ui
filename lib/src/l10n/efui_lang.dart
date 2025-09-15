@@ -327,6 +327,12 @@ abstract class EFUILang {
   /// **'Pause'**
   String get gPause;
 
+  /// No description provided for @gReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay'**
+  String get gReplay;
+
   /// No description provided for @gMute.
   ///
   /// In en, this message translates to:
@@ -345,11 +351,11 @@ abstract class EFUILang {
   /// **'Playback speed'**
   String get gPlaybackSpeed;
 
-  /// No description provided for @gReplay.
+  /// No description provided for @gCaptions.
   ///
   /// In en, this message translates to:
-  /// **'Replay'**
-  String get gReplay;
+  /// **'Subtitles/captions'**
+  String get gCaptions;
 
   /// No description provided for @gFullScreen.
   ///

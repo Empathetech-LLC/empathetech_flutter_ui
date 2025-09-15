@@ -126,6 +126,9 @@ class EFUILangFr extends EFUILang {
   String get gPause => 'Pause';
 
   @override
+  String get gReplay => 'Rejouer';
+
+  @override
   String get gMute => 'Muet';
 
   @override
@@ -135,7 +138,7 @@ class EFUILangFr extends EFUILang {
   String get gPlaybackSpeed => 'Vitesse de lecture';
 
   @override
-  String get gReplay => 'Rejouer';
+  String get gCaptions => 'Sous-titres/légendes';
 
   @override
   String get gFullScreen => 'Plein écran';
