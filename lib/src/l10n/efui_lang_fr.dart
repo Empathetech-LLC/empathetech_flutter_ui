@@ -141,6 +141,9 @@ class EFUILangFr extends EFUILang {
   String get gCaptions => 'Sous-titres/légendes';
 
   @override
+  String get gCaptionsHint => 'Maintenez pour les polices';
+
+  @override
   String get gFullScreen => 'Plein écran';
 
   @override

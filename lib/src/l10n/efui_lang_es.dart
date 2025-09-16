@@ -141,6 +141,9 @@ class EFUILangEs extends EFUILang {
   String get gCaptions => 'Subtítulos/captions';
 
   @override
+  String get gCaptionsHint => 'Mantén pulsado para fuentes';
+
+  @override
   String get gFullScreen => 'Pantalla completa';
 
   @override

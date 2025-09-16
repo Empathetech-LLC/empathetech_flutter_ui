@@ -357,6 +357,12 @@ abstract class EFUILang {
   /// **'Subtitles/captions'**
   String get gCaptions;
 
+  /// No description provided for @gCaptionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold for fonts'**
+  String get gCaptionsHint;
+
   /// No description provided for @gFullScreen.
   ///
   /// In en, this message translates to:

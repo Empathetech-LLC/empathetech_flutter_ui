@@ -141,6 +141,9 @@ class EFUILangEn extends EFUILang {
   String get gCaptions => 'Subtitles/captions';
 
   @override
+  String get gCaptionsHint => 'Hold for fonts';
+
+  @override
   String get gFullScreen => 'Full screen';
 
   @override
@@ -743,6 +746,9 @@ class EFUILangEnUs extends EFUILangEn {
 
   @override
   String get gCaptions => 'Subtitles/captions';
+
+  @override
+  String get gCaptionsHint => 'Hold for fonts';
 
   @override
   String get gFullScreen => 'Full screen';
