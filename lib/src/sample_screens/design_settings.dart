@@ -11,6 +11,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class EzDesignSettings extends StatefulWidget {
+  /// Whether to disable animation control
+  final bool noAnimation;
+
   /// Optional additional global design settings
   /// Will appear after the default global design settings
   /// BYO leading spacer, trailing will be a custom [EzDivider]
@@ -52,6 +55,7 @@ class EzDesignSettings extends StatefulWidget {
   /// Recommended to use as a [Scaffold.body]
   const EzDesignSettings({
     super.key,
+    this.noAnimation = false,
     this.additionalGlobalSettings,
     this.includeBackgroundImage = true,
     this.darkBackgroundCredits,
@@ -175,29 +179,32 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
         if (spacing > margin) EzSpacer(space: spacing - margin),
 
         // Animation duration
-        EzText(l10n.dsAnimDuration, style: textTheme.bodyLarge),
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
-          child: SliderTheme(
-            data: SliderThemeData(
-              thumbShape: RoundSliderThumbShape(
-                enabledThumbRadius: iconSize / 2,
-                disabledThumbRadius: iconSize / 2,
+        if (!widget.noAnimation) ...<Widget>[
+          EzText(l10n.dsAnimDuration, style: textTheme.bodyLarge),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: ScreenSize.small.size),
+            child: SliderTheme(
+              data: SliderThemeData(
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: iconSize / 2,
+                  disabledThumbRadius: iconSize / 2,
+                ),
+              ),
+              child: Slider(
+                value: animDuration,
+                min: minAnimationDuration,
+                max: maxAnimationDuration,
+                divisions: 20,
+                label: animDuration.toStringAsFixed(0),
+                onChanged: (double value) =>
+                    setState(() => animDuration = value),
+                onChangeEnd: (double value) =>
+                    EzConfig.setDouble(animationDurationKey, value),
               ),
             ),
-            child: Slider(
-              value: animDuration,
-              min: minAnimationDuration,
-              max: maxAnimationDuration,
-              divisions: 20,
-              label: animDuration.toStringAsFixed(0),
-              onChanged: (double value) => setState(() => animDuration = value),
-              onChangeEnd: (double value) =>
-                  EzConfig.setDouble(animationDurationKey, value),
-            ),
           ),
-        ),
-        spacer,
+          spacer,
+        ],
 
         // Icon size
         Tooltip(
