@@ -31,6 +31,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// [String] label for screen readers
   final String semantics;
 
+  /// Whether the video has captions available
+  final bool hasCaptions;
+
   /// Defaults to [ColorScheme.primary]
   final Color? iconColor;
 
@@ -77,7 +80,6 @@ class EzVideoPlayer extends StatefulWidget {
   final double speed;
 
   /// Fullscreen button visibility
-  /// Not currently working... feel free to fix it :)
   final EzButtonVis fullScreenVis;
 
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
@@ -106,6 +108,7 @@ class EzVideoPlayer extends StatefulWidget {
     required this.maxWidth,
     this.backgroundColor,
     required this.semantics,
+    this.hasCaptions = false,
     this.iconColor,
     this.sliderColor,
     this.sliderBufferColor,
@@ -119,7 +122,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.textColor = Colors.white,
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
-    this.fullScreenVis = EzButtonVis.alwaysOff,
+    this.fullScreenVis = EzButtonVis.auto,
     this.showOnPause = false,
     this.mobileDelay = 3,
     this.autoPlay = true,
@@ -147,12 +150,18 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   // Define the build data //
 
-  double currPos = 0.0;
-  double? savedVolume;
-  late double currSpeed = widget.speed;
-  bool fullScreen = false;
-
   bool hovering = false;
+
+  double currPos = 0.0;
+  late double currSpeed = widget.speed;
+
+  double? savedVolume;
+
+  bool showCaptions = false;
+  final MenuController subMenuControl = MenuController();
+  int captionStyle = 0;
+
+  bool fullScreen = false;
 
   late final bool persistentControls = onMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
@@ -232,6 +241,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         return false;
       case EzButtonVis.auto:
         if (hovering ||
+            subMenuControl.isOpen ||
             ((onMobile || widget.showOnPause) &&
                 !widget.controller.value.isPlaying)) {
           return true;
@@ -285,8 +295,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     // Gather the dynamic theme data //
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     final Color iconColor = widget.iconColor ?? colorScheme.primary;
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle? labelStyle =
+        textTheme.labelLarge?.copyWith(color: widget.textColor);
 
     final SliderThemeData sliderTheme = SliderThemeData(
       activeTrackColor: widget.sliderColor ?? colorScheme.secondary,
@@ -294,11 +307,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
           widget.sliderBufferColor ?? widget.textColor.withValues(alpha: 0.5),
       thumbColor: iconColor,
     );
-
-    final TextStyle? labelStyle = Theme.of(context)
-        .textTheme
-        .labelLarge
-        ?.copyWith(color: widget.textColor);
 
     // Return the build //
 
@@ -384,6 +392,31 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 ),
               ),
 
+              // Captions
+              if (showCaptions)
+                Positioned(
+                  bottom: controlsHeight,
+                  left: 0,
+                  right: 0,
+                  child: ExcludeSemantics(
+                    child: EzText(
+                      widget.controller.value.caption.text,
+                      style: switch (captionStyle) {
+                        4 => textTheme.displayLarge
+                            ?.copyWith(color: widget.textColor),
+                        3 => textTheme.headlineLarge
+                            ?.copyWith(color: widget.textColor),
+                        2 => textTheme.titleLarge
+                            ?.copyWith(color: widget.textColor),
+                        1 => textTheme.bodyLarge
+                            ?.copyWith(color: widget.textColor),
+                        _ => labelStyle,
+                      },
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+
               // Controls
               Positioned(
                 height: controlsHeight,
@@ -391,7 +424,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                 left: 0,
                 right: 0,
                 child: Visibility(
-                  visible: persistentControls || hovering,
+                  visible:
+                      persistentControls || hovering || subMenuControl.isOpen,
                   child: Container(
                     decoration: widget.controlsBackground,
                     child: Column(
@@ -567,6 +601,69 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       tooltip:
                                           '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
                                       icon: Icon(PlatformIcons(context).add),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            // Captions
+                            Visibility(
+                              visible: widget.hasCaptions,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: spacing),
+                                child: MenuAnchor(
+                                  controller: subMenuControl,
+                                  builder: (_, __, ___) => EzIconButton(
+                                    onPressed: () => subMenuControl.isOpen
+                                        ? subMenuControl.close()
+                                        : setState(
+                                            () => showCaptions = !showCaptions),
+                                    onLongPress: () => subMenuControl.isOpen
+                                        ? subMenuControl.close()
+                                        : subMenuControl.open(),
+                                    tooltip:
+                                        '${l10n.gCaptions}\n${l10n.gCaptionsHint}',
+                                    color: showCaptions
+                                        ? iconColor
+                                        : colorScheme.outline,
+                                    icon: const Icon(Icons.subtitles),
+                                  ),
+                                  menuChildren: <Widget>[
+                                    EzMenuButton(
+                                      label: l10n.tsDisplay,
+                                      textStyle: textTheme.displayLarge,
+                                      textAlign: TextAlign.center,
+                                      onPressed: () =>
+                                          setState(() => captionStyle = 4),
+                                    ),
+                                    EzMenuButton(
+                                      label: l10n.tsHeadline,
+                                      textStyle: textTheme.headlineLarge,
+                                      textAlign: TextAlign.center,
+                                      onPressed: () =>
+                                          setState(() => captionStyle = 3),
+                                    ),
+                                    EzMenuButton(
+                                      label: l10n.tsTitle,
+                                      textStyle: textTheme.titleLarge,
+                                      textAlign: TextAlign.center,
+                                      onPressed: () =>
+                                          setState(() => captionStyle = 2),
+                                    ),
+                                    EzMenuButton(
+                                      label: l10n.tsBody,
+                                      textStyle: textTheme.bodyLarge,
+                                      textAlign: TextAlign.center,
+                                      onPressed: () =>
+                                          setState(() => captionStyle = 1),
+                                    ),
+                                    EzMenuButton(
+                                      label: l10n.tsLabel,
+                                      textStyle: textTheme.labelLarge,
+                                      textAlign: TextAlign.center,
+                                      onPressed: () =>
+                                          setState(() => captionStyle = 0),
                                     ),
                                   ],
                                 ),
