@@ -6,6 +6,7 @@
 import '../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,19 +33,23 @@ class EzSettingsHome extends StatefulWidget {
   /// BYO trailing spacer, see [localeSpacer] for leading spacer
   final List<Widget>? additionalSettings;
 
-  /// [GoRouter.goNamed] path to the color settings screen
+  /// [GoRouter.goNamed] path or URL to the color settings screen
+  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
   final String? colorSettingsPath;
 
-  /// [GoRouter.goNamed] path to the design settings screen
+  /// [GoRouter.goNamed] path or URL to the design settings screen
+  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
   final String? designSettingsPath;
 
-  /// [GoRouter.goNamed] path to the layout settings screen
+  /// [GoRouter.goNamed] path or URL to the layout settings screen
+  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
   final String? layoutSettingsPath;
 
-  /// [GoRouter.goNamed] path to the text settings screen
+  /// [GoRouter.goNamed] path or URL to the text settings screen
+  /// If a URL string is provided, the [EzElevatedIconButton] will be wrapped in a [Link]
   /// If null, no button will appear
   final String? textSettingsPath;
 
@@ -123,38 +128,77 @@ class _EzSettingsHomeState extends State<EzSettingsHome> {
     final List<Widget> buttons = <Widget>[];
 
     if (widget.colorSettingsPath != null) {
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.colorSettingsPath!),
-        icon: navIcon,
-        label: l10n.csPageTitle,
-      ));
+      ezUrlCheck(widget.colorSettingsPath!)
+          ? buttons.add(Link(
+              uri: Uri.parse(widget.colorSettingsPath!),
+              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                onPressed: followLink,
+                icon: navIcon,
+                label: l10n.csPageTitle,
+              ),
+            ))
+          : buttons.add(EzElevatedIconButton(
+              onPressed: () => context.goNamed(widget.colorSettingsPath!),
+              icon: navIcon,
+              label: l10n.csPageTitle,
+            ));
     }
 
     if (widget.designSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.designSettingsPath!),
-        icon: navIcon,
-        label: l10n.dsPageTitle,
-      ));
+
+      ezUrlCheck(widget.designSettingsPath!)
+          ? buttons.add(Link(
+              uri: Uri.parse(widget.designSettingsPath!),
+              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                onPressed: followLink,
+                icon: navIcon,
+                label: l10n.dsPageTitle,
+              ),
+            ))
+          : buttons.add(EzElevatedIconButton(
+              onPressed: () => context.goNamed(widget.designSettingsPath!),
+              icon: navIcon,
+              label: l10n.dsPageTitle,
+            ));
     }
 
     if (widget.layoutSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.layoutSettingsPath!),
-        icon: navIcon,
-        label: l10n.lsPageTitle,
-      ));
+
+      ezUrlCheck(widget.layoutSettingsPath!)
+          ? buttons.add(Link(
+              uri: Uri.parse(widget.layoutSettingsPath!),
+              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                onPressed: followLink,
+                icon: navIcon,
+                label: l10n.lsPageTitle,
+              ),
+            ))
+          : buttons.add(EzElevatedIconButton(
+              onPressed: () => context.goNamed(widget.layoutSettingsPath!),
+              icon: navIcon,
+              label: l10n.lsPageTitle,
+            ));
     }
 
     if (widget.textSettingsPath != null) {
       if (buttons.isNotEmpty) buttons.add(spacer);
-      buttons.add(EzElevatedIconButton(
-        onPressed: () => context.goNamed(widget.textSettingsPath!),
-        icon: navIcon,
-        label: l10n.tsPageTitle,
-      ));
+
+      ezUrlCheck(widget.textSettingsPath!)
+          ? buttons.add(Link(
+              uri: Uri.parse(widget.textSettingsPath!),
+              builder: (_, FollowLink? followLink) => EzElevatedIconButton(
+                onPressed: followLink,
+                icon: navIcon,
+                label: l10n.tsPageTitle,
+              ),
+            ))
+          : buttons.add(EzElevatedIconButton(
+              onPressed: () => context.goNamed(widget.textSettingsPath!),
+              icon: navIcon,
+              label: l10n.tsPageTitle,
+            ));
     }
 
     if (widget.additionalRoutes != null) {
