@@ -5,6 +5,7 @@
 
 import '../../../empathetech_flutter_ui.dart';
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
@@ -158,12 +159,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   late double currSpeed = widget.speed;
 
   double? savedVolume;
+  Timer? showVolume;
 
   bool showCaptions = false;
   final MenuController subMenuControl = MenuController();
   int captionStyle = 0;
 
-  bool fullScreen = false;
+  bool fullscreen = false;
 
   late final bool persistentControls = onMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
@@ -227,11 +229,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
       widget.controller.value.position - Duration(seconds: widget.skipTime));
 
   Future<void> toggleFullscreen() async {
-    fullScreen = !fullScreen;
-    fullScreen
-        ? await SystemChrome.setEnabledSystemUIMode(
-            SystemUiMode.immersiveSticky)
-        : await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    doNothing(); // TODO
+  }
+
+  void showVolumeLabel() {
+    showVolume?.cancel();
+    showVolume = Timer(const Duration(milliseconds: 500), () {
+      showVolume?.cancel();
+      setState(() {});
+    });
     setState(() {});
   }
 
@@ -319,17 +325,47 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
         onKeyEvent: (_, KeyEvent event) {
           if (event is KeyDownEvent) {
             switch (event.logicalKey) {
+              // Up/Down -> volume control (if relevant)
+              case LogicalKeyboardKey.arrowUp:
+                if (widget.variableVolume) {
+                  double newVol = widget.controller.value.volume + 0.05;
+                  if (newVol > 1.0) newVol = 1.0;
+
+                  widget.controller.setVolume(newVol);
+                  showVolumeLabel();
+                }
+                return KeyEventResult.handled;
+              case LogicalKeyboardKey.arrowDown:
+                if (widget.variableVolume) {
+                  double newVol = widget.controller.value.volume - 0.05;
+                  if (newVol < 0.0) newVol = 0.0;
+
+                  widget.controller.setVolume(newVol);
+                  showVolumeLabel();
+                }
+                return KeyEventResult.handled;
+
+              // Left/Right -> time skip
               case LogicalKeyboardKey.arrowRight:
                 skipForward();
                 return KeyEventResult.handled;
               case LogicalKeyboardKey.arrowLeft:
                 skipBackward();
                 return KeyEventResult.handled;
+
+              // Space -> play/pause
               case LogicalKeyboardKey.space:
                 widget.controller.value.isPlaying ? pause() : play();
                 return KeyEventResult.handled;
+
+              // F -> fullscreen toggle
+              case LogicalKeyboardKey.keyF:
+                toggleFullscreen();
+                return KeyEventResult.handled;
+
+              // Esc -> exit fullscreen
               case LogicalKeyboardKey.escape:
-                if (fullScreen) {
+                if (fullscreen) {
                   toggleFullscreen();
                   return KeyEventResult.handled;
                 } else {
@@ -360,6 +396,33 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: AspectRatio(
                     aspectRatio: widget.aspectRatio,
                     child: VideoPlayer(widget.controller),
+                  ),
+                ),
+              ),
+
+              // Volume label (shows on arrow up/down)
+              Visibility(
+                visible: showVolume?.isActive == true,
+                child: ExcludeSemantics(
+                  child: Positioned(
+                    left: 0,
+                    right: 0,
+                    top: spacing * 2,
+                    child: EzText(
+                      '${(widget.controller.value.volume * 100).toStringAsFixed(0)}%',
+                      style: switch (captionStyle) {
+                        4 => textTheme.displayLarge
+                            ?.copyWith(color: widget.textColor),
+                        3 => textTheme.headlineLarge
+                            ?.copyWith(color: widget.textColor),
+                        2 => textTheme.titleLarge
+                            ?.copyWith(color: widget.textColor),
+                        1 => textTheme.bodyLarge
+                            ?.copyWith(color: widget.textColor),
+                        _ => labelStyle,
+                      },
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
@@ -397,7 +460,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               // Captions
               if (showCaptions)
                 Positioned(
-                  bottom: controlsHeight,
+                  bottom:
+                      (persistentControls || hovering || subMenuControl.isOpen)
+                          ? controlsHeight + margin
+                          : margin,
                   left: 0,
                   right: 0,
                   child: ExcludeSemantics(
@@ -681,7 +747,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                   onPressed: toggleFullscreen,
                                   tooltip: l10n.gFullScreen,
                                   color: iconColor,
-                                  icon: Icon(fullScreen
+                                  icon: Icon(fullscreen
                                       ? PlatformIcons(context).fullscreenExit
                                       : PlatformIcons(context).fullscreen),
                                 ),
