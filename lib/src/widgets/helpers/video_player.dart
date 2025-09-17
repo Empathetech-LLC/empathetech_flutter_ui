@@ -9,9 +9,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+import 'package:go_transitions/go_transitions.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
-// TODO: fix set state (slider not updating at all, captions and watch not updating until interaction)
 
 enum EzButtonVis { alwaysOff, alwaysOn, auto }
 
@@ -85,6 +84,15 @@ class EzVideoPlayer extends StatefulWidget {
   /// Fullscreen button visibility
   final EzButtonVis fullScreenVis;
 
+  /// Whether the video is in fullscreen mode
+  /// Recommended to leave as false to start
+  /// Navigating to the fullscreen page is made much simpler with this as a parameter
+  final bool isFullscreen;
+
+  /// The platform the app is running on
+  /// Recommended to use [getBasePlatform]
+  final TargetPlatform platform;
+
   /// Whether buttons set to [EzButtonVis.auto] should appear when the video is paused
   /// Only for desktop (and desktop Web), is always true for mobile (and mobile Web)
   final bool showOnPause;
@@ -126,6 +134,8 @@ class EzVideoPlayer extends StatefulWidget {
     this.speedVis = EzButtonVis.auto,
     this.speed = 1.0,
     this.fullScreenVis = EzButtonVis.auto,
+    this.isFullscreen = false,
+    required this.platform,
     this.showOnPause = false,
     this.mobileDelay = 3,
     this.autoPlay = true,
@@ -164,8 +174,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   bool showCaptions = false;
   final MenuController subMenuControl = MenuController();
   int captionStyle = 0;
-
-  bool fullscreen = false;
 
   late final bool persistentControls = onMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
@@ -228,8 +236,54 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Future<void> skipBackward() => widget.controller.seekTo(
       widget.controller.value.position - Duration(seconds: widget.skipTime));
 
-  Future<void> toggleFullscreen() async {
-    doNothing(); // TODO
+  void toggleFullscreen() {
+    if (widget.isFullscreen) {
+      ezFullscreenToggle(widget.platform, widget.isFullscreen);
+      Navigator.of(context).pop();
+    } else {
+      ezFullscreenToggle(widget.platform, widget.isFullscreen);
+      Navigator.of(context).push(
+        GoTransitionRoute(
+          transition: GoTransitions.zoom,
+          builder: (_) => Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            body: SafeArea(
+              child: Center(
+                child: EzVideoPlayer(
+                  controller: widget.controller,
+                  aspectRatio: widget.aspectRatio,
+                  maxHeight: double.infinity,
+                  maxWidth: double.infinity,
+                  backgroundColor: widget.backgroundColor,
+                  semantics: widget.semantics,
+                  hasCaptions: widget.hasCaptions,
+                  iconColor: widget.iconColor,
+                  sliderColor: widget.sliderColor,
+                  sliderBufferColor: widget.sliderBufferColor,
+                  controlsBackground: widget.controlsBackground,
+                  timeSliderVis: widget.timeSliderVis,
+                  playVis: widget.playVis,
+                  volumeVis: widget.volumeVis,
+                  variableVolume: widget.variableVolume,
+                  startingVolume: widget.controller.value.volume,
+                  timeLabelVis: widget.timeLabelVis,
+                  textColor: widget.textColor,
+                  speedVis: widget.speedVis,
+                  speed: currSpeed,
+                  fullScreenVis: widget.fullScreenVis,
+                  isFullscreen: true,
+                  platform: widget.platform,
+                  showOnPause: widget.showOnPause,
+                  mobileDelay: widget.mobileDelay,
+                  autoPlay: false,
+                  autoLoop: widget.autoLoop,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   void showVolumeLabel() {
@@ -365,7 +419,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
               // Esc -> exit fullscreen
               case LogicalKeyboardKey.escape:
-                if (fullscreen) {
+                if (widget.isFullscreen) {
                   toggleFullscreen();
                   return KeyEventResult.handled;
                 } else {
@@ -747,7 +801,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                   onPressed: toggleFullscreen,
                                   tooltip: l10n.gFullScreen,
                                   color: iconColor,
-                                  icon: Icon(fullscreen
+                                  icon: Icon(widget.isFullscreen
                                       ? PlatformIcons(context).fullscreenExit
                                       : PlatformIcons(context).fullscreen),
                                 ),
