@@ -4,7 +4,8 @@
  */
 
 import 'dart:io';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// True if [Platform.isIOS] or [Platform.isMacOS]
 bool cupertinoCheck() => Platform.isIOS || Platform.isMacOS;
@@ -31,5 +32,28 @@ TargetPlatform getHostPlatform() {
     return TargetPlatform.windows;
   } else {
     return TargetPlatform.linux;
+  }
+}
+
+/// Request/exit a fullscreen window
+Future<void> toggleFullscreen(TargetPlatform platform, bool isFull) async {
+  switch (platform) {
+    case TargetPlatform.android:
+    case TargetPlatform.iOS:
+    case TargetPlatform.fuchsia:
+      isFull
+          ? await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+          : await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+      break;
+
+    case TargetPlatform.linux:
+    case TargetPlatform.macOS:
+    case TargetPlatform.windows:
+      if (isFull) {
+        await windowManager.setFullScreen(true);
+      } else {
+        await windowManager.setFullScreen(false);
+      }
+      break;
   }
 }

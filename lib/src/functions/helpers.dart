@@ -54,6 +54,7 @@ String screenshotHint() {
   }
 }
 
+/// Where to find saved files on the current [TargetPlatform]
 String archivePath({required String? androidPackage, required String appName}) {
   final TargetPlatform platform = getBasePlatform();
 
@@ -125,6 +126,10 @@ Page<dynamic> ezGoTransition(
       return GoTransitions.slide.withFade(context, state);
   }
 }
+
+/// [TargetPlatform] aware helper that will request/exit a fullscreen window
+Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
+    toggleFullscreen(platform, isFull);
 
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection
