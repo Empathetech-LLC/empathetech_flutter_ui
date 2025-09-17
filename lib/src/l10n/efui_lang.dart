@@ -366,7 +366,7 @@ abstract class EFUILang {
   /// No description provided for @gFullScreen.
   ///
   /// In en, this message translates to:
-  /// **'Full screen'**
+  /// **'Fullscreen'**
   String get gFullScreen;
 
   /// No description provided for @gHowThisWorks.
