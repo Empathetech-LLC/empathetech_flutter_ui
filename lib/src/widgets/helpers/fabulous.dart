@@ -22,7 +22,7 @@ class EzBackFAB extends FloatingActionButton {
           child: EzIcon(showHome
               ? PlatformIcons(context).home
               : PlatformIcons(context).back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).maybePop(),
           tooltip: ezL10n(context).gBack,
         );
 }
