@@ -96,11 +96,13 @@ export 'src/widgets/responsive_design/transitions.dart';
 
 // Screen reader support
 export 'src/widgets/screen_reader_support/links/elevated_link.dart';
+export 'src/widgets/screen_reader_support/links/fab_link.dart';
 export 'src/widgets/screen_reader_support/links/icon_link.dart';
 export 'src/widgets/screen_reader_support/links/inline_link.dart';
 export 'src/widgets/screen_reader_support/links/image_link.dart';
 export 'src/widgets/screen_reader_support/links/link_widget.dart';
 export 'src/widgets/screen_reader_support/links/link.dart';
+export 'src/widgets/screen_reader_support/links/menu_link.dart';
 
 export 'src/widgets/screen_reader_support/image.dart';
 export 'src/widgets/screen_reader_support/plain_text.dart';
