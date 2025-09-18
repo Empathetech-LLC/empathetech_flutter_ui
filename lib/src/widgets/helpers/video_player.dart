@@ -236,54 +236,53 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   Future<void> skipBackward() => widget.controller.seekTo(
       widget.controller.value.position - Duration(seconds: widget.skipTime));
 
-  void toggleFullscreen() {
-    if (widget.isFullscreen) {
-      ezFullscreenToggle(widget.platform, widget.isFullscreen);
-      Navigator.of(context).pop();
-    } else {
-      ezFullscreenToggle(widget.platform, widget.isFullscreen);
-      Navigator.of(context).push(
-        GoTransitionRoute(
-          transition: GoTransitions.zoom,
-          builder: (_) => Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            body: SafeArea(
-              child: Center(
-                child: EzVideoPlayer(
-                  controller: widget.controller,
-                  aspectRatio: widget.aspectRatio,
-                  maxHeight: double.infinity,
-                  maxWidth: double.infinity,
-                  backgroundColor: widget.backgroundColor,
-                  semantics: widget.semantics,
-                  hasCaptions: widget.hasCaptions,
-                  iconColor: widget.iconColor,
-                  sliderColor: widget.sliderColor,
-                  sliderBufferColor: widget.sliderBufferColor,
-                  controlsBackground: widget.controlsBackground,
-                  timeSliderVis: widget.timeSliderVis,
-                  playVis: widget.playVis,
-                  volumeVis: widget.volumeVis,
-                  variableVolume: widget.variableVolume,
-                  startingVolume: widget.controller.value.volume,
-                  timeLabelVis: widget.timeLabelVis,
-                  textColor: widget.textColor,
-                  speedVis: widget.speedVis,
-                  speed: currSpeed,
-                  fullScreenVis: widget.fullScreenVis,
-                  isFullscreen: true,
-                  platform: widget.platform,
-                  showOnPause: widget.showOnPause,
-                  mobileDelay: widget.mobileDelay,
-                  autoPlay: false,
-                  autoLoop: widget.autoLoop,
+  Future<void> toggleFullscreen() async {
+    await ezFullscreenToggle(widget.platform, widget.isFullscreen);
+    if (!mounted) return;
+
+    widget.isFullscreen
+        ? Navigator.of(context).maybePop()
+        : Navigator.of(context).push(
+            GoTransitionRoute(
+              transition: GoTransitions.zoom,
+              builder: (_) => Scaffold(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                body: SafeArea(
+                  child: Center(
+                    child: EzVideoPlayer(
+                      controller: widget.controller,
+                      aspectRatio: widget.aspectRatio,
+                      maxHeight: double.infinity,
+                      maxWidth: double.infinity,
+                      backgroundColor: widget.backgroundColor,
+                      semantics: widget.semantics,
+                      hasCaptions: widget.hasCaptions,
+                      iconColor: widget.iconColor,
+                      sliderColor: widget.sliderColor,
+                      sliderBufferColor: widget.sliderBufferColor,
+                      controlsBackground: widget.controlsBackground,
+                      timeSliderVis: widget.timeSliderVis,
+                      playVis: widget.playVis,
+                      volumeVis: widget.volumeVis,
+                      variableVolume: widget.variableVolume,
+                      startingVolume: widget.controller.value.volume,
+                      timeLabelVis: widget.timeLabelVis,
+                      textColor: widget.textColor,
+                      speedVis: widget.speedVis,
+                      speed: currSpeed,
+                      fullScreenVis: widget.fullScreenVis,
+                      isFullscreen: true,
+                      platform: widget.platform,
+                      showOnPause: widget.showOnPause,
+                      mobileDelay: widget.mobileDelay,
+                      autoPlay: false,
+                      autoLoop: widget.autoLoop,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      );
-    }
+          );
   }
 
   void showVolumeLabel() {
