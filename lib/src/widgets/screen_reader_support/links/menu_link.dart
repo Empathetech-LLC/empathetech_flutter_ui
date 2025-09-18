@@ -66,7 +66,7 @@ class EzMenuLink extends StatelessWidget {
   /// [EzMenuButton.textAlign] passthrough
   final TextAlign? textAlign;
 
-  /// [ElevatedButton.icon] wrapper that responds to [isLeftyKey]
+  /// [EzMenuButton] wrapped in a [Link]
   const EzMenuLink({
     super.key,
     required this.uri,
