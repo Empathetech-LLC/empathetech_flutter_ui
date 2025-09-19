@@ -185,8 +185,8 @@ const Map<String, double> fontSizeDefaults = <String, double>{
   labelFontSizeKey: defaultLabelSize,
 };
 
-/// 0.50
-const double defaultTextOpacity = 0.50;
+/// 0.0
+const double defaultTextOpacity = 0.0;
 
 /// 20.0
 const double defaultIconSize = 20.0;
