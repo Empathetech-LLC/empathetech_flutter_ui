@@ -48,9 +48,9 @@ class EzVideoPlayer extends StatefulWidget {
   /// Seconds to skip forward/backward on arrow key press
   final int skipTime = 10;
 
-  /// [Container.decoration] for the region behind the controls
+  /// [Color] for the controls region [Container.decoration]
   /// Defaults to black with 50% opacity -> 0x80000000
-  final Decoration controlsBackground;
+  final Color controlsBackground;
 
   /// Time/progress slider visibility
   final EzButtonVis timeSliderVis;
@@ -120,7 +120,7 @@ class EzVideoPlayer extends StatefulWidget {
     this.iconColor,
     this.sliderColor,
     this.sliderBufferColor,
-    this.controlsBackground = const BoxDecoration(color: Color(0x80000000)),
+    this.controlsBackground = const Color(0x80000000),
     this.timeSliderVis = EzButtonVis.auto,
     this.playVis = EzButtonVis.auto,
     this.volumeVis = EzButtonVis.auto,
@@ -461,6 +461,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           _ => labelStyle,
                         },
                         textAlign: TextAlign.center,
+                        backgroundColor: widget.controlsBackground,
                       ),
                     ),
                   ),
@@ -519,6 +520,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           _ => labelStyle,
                         },
                         textAlign: TextAlign.center,
+                        backgroundColor: widget.controlsBackground,
                       ),
                     ),
                   ),
@@ -533,7 +535,8 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     visible:
                         persistentControls || hovering || subMenuControl.isOpen,
                     child: Container(
-                      decoration: widget.controlsBackground,
+                      decoration:
+                          BoxDecoration(color: widget.controlsBackground),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
