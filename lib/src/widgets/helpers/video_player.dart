@@ -46,7 +46,6 @@ class EzVideoPlayer extends StatefulWidget {
   final Color? sliderBufferColor;
 
   /// Seconds to skip forward/backward on arrow key press
-  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   final int skipTime = 10;
 
   /// [Container.decoration] for the region behind the controls
@@ -54,7 +53,6 @@ class EzVideoPlayer extends StatefulWidget {
   final Decoration controlsBackground;
 
   /// Time/progress slider visibility
-  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   final EzButtonVis timeSliderVis;
 
   /// Play button visibility
@@ -110,7 +108,6 @@ class EzVideoPlayer extends StatefulWidget {
   /// Also supports tap-to-pause on the main window via [MouseRegion]
   /// The visibility of each button can be controlled with [EzButtonVis]
   /// The video will begin muted unless [startingVolume] is specified
-  /// IMPORTANT NOTE: time scrubbing does NOT work when running in DEBUG
   const EzVideoPlayer({
     super.key,
     required this.controller,
@@ -165,7 +162,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   bool hovering = false;
 
-  double currPos = 0.0;
   late double currSpeed = widget.speed;
 
   double? savedVolume;
@@ -345,10 +341,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
     if (!widget.controller.value.isInitialized) {
       await widget.controller.initialize();
     }
-
-    widget.controller.addListener(() =>
-        setState(() => currPos = pComplete(widget.controller.value.position)));
-
     if (widget.autoPlay) await play();
   }
 
@@ -455,13 +447,13 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
               ),
 
               // Volume label (shows on arrow up/down)
-              Visibility(
-                visible: showVolume?.isActive == true,
-                child: ExcludeSemantics(
-                  child: Positioned(
-                    left: 0,
-                    right: 0,
-                    top: spacing * 2,
+              Positioned(
+                left: 0,
+                right: 0,
+                top: spacing * 2,
+                child: Visibility(
+                  visible: showVolume?.isActive == true,
+                  child: ExcludeSemantics(
                     child: EzText(
                       '${(widget.controller.value.volume * 100).toStringAsFixed(0)}%',
                       style: switch (captionStyle) {
@@ -521,20 +513,23 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   left: 0,
                   right: 0,
                   child: ExcludeSemantics(
-                    child: EzText(
-                      widget.controller.value.caption.text,
-                      style: switch (captionStyle) {
-                        4 => textTheme.displayLarge
-                            ?.copyWith(color: widget.textColor),
-                        3 => textTheme.headlineLarge
-                            ?.copyWith(color: widget.textColor),
-                        2 => textTheme.titleLarge
-                            ?.copyWith(color: widget.textColor),
-                        1 => textTheme.bodyLarge
-                            ?.copyWith(color: widget.textColor),
-                        _ => labelStyle,
-                      },
-                      textAlign: TextAlign.center,
+                    child: ValueListenableBuilder<VideoPlayerValue>(
+                      valueListenable: widget.controller,
+                      builder: (_, VideoPlayerValue value, __) => EzText(
+                        value.caption.text,
+                        style: switch (captionStyle) {
+                          4 => textTheme.displayLarge
+                              ?.copyWith(color: widget.textColor),
+                          3 => textTheme.headlineLarge
+                              ?.copyWith(color: widget.textColor),
+                          2 => textTheme.titleLarge
+                              ?.copyWith(color: widget.textColor),
+                          1 => textTheme.bodyLarge
+                              ?.copyWith(color: widget.textColor),
+                          _ => labelStyle,
+                        },
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
@@ -562,18 +557,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                             width: double.infinity,
                             child: SliderTheme(
                               data: sliderTheme,
-                              child: Slider(
-                                value: currPos,
-                                onChangeStart: (_) async {
-                                  await pause();
-                                },
-                                onChanged: (double value) =>
-                                    setState(() => currPos = value),
-                                onChangeEnd: (double value) async {
-                                  currPos = value;
-                                  await widget.controller.seekTo(findP(value));
-                                  await play();
-                                },
+                              child: ValueListenableBuilder<VideoPlayerValue>(
+                                valueListenable: widget.controller,
+                                builder: (_, VideoPlayerValue value, __) =>
+                                    Slider(
+                                  value: pComplete(value.position),
+                                  onChangeStart: (_) => pause(),
+                                  onChanged: (double value) =>
+                                      widget.controller.seekTo(findP(value)),
+                                  onChangeEnd: (_) => play(),
+                                ),
                               ),
                             ),
                           ),
@@ -663,10 +656,14 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                               visible: showControl(widget.timeLabelVis),
                               child: Padding(
                                 padding: EdgeInsets.only(right: spacing),
-                                child: Text(
-                                  '${ezVideoTime(widget.controller.value.position)} / ${ezVideoTime(widget.controller.value.duration)}',
-                                  style: labelStyle,
-                                  textAlign: TextAlign.center,
+                                child: ValueListenableBuilder<VideoPlayerValue>(
+                                  valueListenable: widget.controller,
+                                  builder: (_, VideoPlayerValue value, __) =>
+                                      Text(
+                                    '${ezVideoTime(value.position)} / ${ezVideoTime(value.duration)}',
+                                    style: labelStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                             ),
