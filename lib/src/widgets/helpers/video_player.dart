@@ -447,21 +447,27 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: Visibility(
                     visible: showVolume?.isActive == true,
                     child: ExcludeSemantics(
-                      child: EzText(
-                        '${(value.volume * 100).toStringAsFixed(0)}%',
-                        style: switch (captionStyle) {
-                          4 => textTheme.displayLarge
-                              ?.copyWith(color: widget.textColor),
-                          3 => textTheme.headlineLarge
-                              ?.copyWith(color: widget.textColor),
-                          2 => textTheme.titleLarge
-                              ?.copyWith(color: widget.textColor),
-                          1 => textTheme.bodyLarge
-                              ?.copyWith(color: widget.textColor),
-                          _ => labelStyle,
-                        },
-                        textAlign: TextAlign.center,
-                        backgroundColor: widget.controlsBackground,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          // Row seems weird, but it prevents the Text from auto-expanding
+                          EzText(
+                            '${(value.volume * 100).toStringAsFixed(0)}%',
+                            style: switch (captionStyle) {
+                              4 => textTheme.displayLarge
+                                  ?.copyWith(color: widget.textColor),
+                              3 => textTheme.headlineLarge
+                                  ?.copyWith(color: widget.textColor),
+                              2 => textTheme.titleLarge
+                                  ?.copyWith(color: widget.textColor),
+                              1 => textTheme.bodyLarge
+                                  ?.copyWith(color: widget.textColor),
+                              _ => labelStyle,
+                            },
+                            textAlign: TextAlign.center,
+                            backgroundColor: widget.controlsBackground,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -503,25 +509,31 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     bottom: (persistentControls ||
                             hovering ||
                             subMenuControl.isOpen)
-                        ? controlsHeight + margin
+                        ? controlsHeight
                         : margin,
-                    child: ExcludeSemantics(
-                      child: EzText(
-                        value.caption.text,
-                        style: switch (captionStyle) {
-                          4 => textTheme.displayLarge
-                              ?.copyWith(color: widget.textColor),
-                          3 => textTheme.headlineLarge
-                              ?.copyWith(color: widget.textColor),
-                          2 => textTheme.titleLarge
-                              ?.copyWith(color: widget.textColor),
-                          1 => textTheme.bodyLarge
-                              ?.copyWith(color: widget.textColor),
-                          _ => labelStyle,
-                        },
-                        textAlign: TextAlign.center,
-                        backgroundColor: widget.controlsBackground,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // Row seems weird, but it prevents the Text from auto-expanding
+                        ExcludeSemantics(
+                          child: EzText(
+                            value.caption.text,
+                            style: switch (captionStyle) {
+                              4 => textTheme.displayLarge
+                                  ?.copyWith(color: widget.textColor),
+                              3 => textTheme.headlineLarge
+                                  ?.copyWith(color: widget.textColor),
+                              2 => textTheme.titleLarge
+                                  ?.copyWith(color: widget.textColor),
+                              1 => textTheme.bodyLarge
+                                  ?.copyWith(color: widget.textColor),
+                              _ => labelStyle,
+                            },
+                            textAlign: TextAlign.center,
+                            backgroundColor: widget.controlsBackground,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
