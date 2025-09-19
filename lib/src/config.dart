@@ -448,11 +448,11 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     await setDouble(
       isDark ? darkButtonOpacityKey : lightButtonOpacityKey,
-      random.nextDouble() * 0.75 + 0.25,
+      random.nextDouble(),
     );
     await setDouble(
       isDark ? darkButtonOutlineOpacityKey : lightButtonOutlineOpacityKey,
-      random.nextDouble() * 0.75 + 0.25,
+      random.nextDouble(),
     );
 
     // Update layout settings //
