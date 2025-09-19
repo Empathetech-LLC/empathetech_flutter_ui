@@ -480,6 +480,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
+          style: TextButton.styleFrom(padding: EzInsets.wrap(margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),
