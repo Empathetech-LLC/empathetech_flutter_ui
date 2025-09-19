@@ -6,7 +6,6 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Stuff
 
-
 ## [10.0.0] - 2025-09-07
 ### Updated
 - Flutter 3.35.0 (breaking changes(s))
