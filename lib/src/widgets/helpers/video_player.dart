@@ -397,6 +397,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   value.isPlaying ? pause() : play(value);
                   return KeyEventResult.handled;
 
+                // C -> captions toggle (if relevant)
+                case LogicalKeyboardKey.keyC:
+                  if (widget.hasCaptions) {
+                    setState(() => showCaptions = !showCaptions);
+                    return KeyEventResult.handled;
+                  } else {
+                    return KeyEventResult.ignored;
+                  }
+
                 // // F -> fullscreen toggle
                 // case LogicalKeyboardKey.keyF:
                 //   toggleFullscreen();
