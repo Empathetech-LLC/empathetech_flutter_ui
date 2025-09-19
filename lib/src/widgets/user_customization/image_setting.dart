@@ -222,13 +222,19 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (widget.updateTheme == Brightness.dark) {
         final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
-          await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.5);
+          await EzConfig.setDouble(
+            darkTextBackgroundOpacityKey,
+            defaultTextOpacity,
+          );
         }
       }
       if (widget.updateTheme == Brightness.light) {
         final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
-          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          await EzConfig.setDouble(
+            lightTextBackgroundOpacityKey,
+            defaultTextOpacity,
+          );
         }
       }
 
