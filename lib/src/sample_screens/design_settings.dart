@@ -292,7 +292,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
         // Global/themed divider, w/ theme reminder
         separator,
-        EzDivider(height: margin * 2),
+        EzDivider(height: margin),
         EzText(
           l10n.gEditingTheme(themeProfile),
           style: textTheme.labelLarge,
