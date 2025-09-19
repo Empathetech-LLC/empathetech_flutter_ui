@@ -169,7 +169,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   bool showCaptions = false;
   final MenuController subMenuControl = MenuController();
-  int captionStyle = 0;
+  int captionStyle = 1;
 
   late final bool persistentControls = onMobile ||
       widget.playVis == EzButtonVis.alwaysOn ||
