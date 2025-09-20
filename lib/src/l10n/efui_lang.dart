@@ -660,13 +660,13 @@ abstract class EFUILang {
   /// No description provided for @ssDarkOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?'**
+  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?'**
   String get ssDarkOnly;
 
   /// No description provided for @ssLightOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?'**
+  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?'**
   String get ssLightOnly;
 
   /// No description provided for @ssApplied.
