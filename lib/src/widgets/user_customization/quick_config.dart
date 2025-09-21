@@ -337,7 +337,7 @@ class EzVideoGameConfig extends StatelessWidget {
   /// Sets the [TextTheme] to a [pressStart2P] based theme
   const EzVideoGameConfig({super.key, this.onComplete});
 
-  static Future<void> onPressed(BuildContext context) async {
+  static Future<bool> onPressed(BuildContext context) async {
     final bool onMobile = isMobile();
     final EFUILang l10n = ezL10n(context);
 
@@ -369,7 +369,7 @@ class EzVideoGameConfig extends StatelessWidget {
         },
       );
 
-      if (!doIt) return;
+      if (!doIt) return false;
     }
 
     // Reset //
@@ -438,6 +438,8 @@ class EzVideoGameConfig extends StatelessWidget {
 
     // Icons
     if (!onMobile) await EzConfig.setDouble(iconSizeKey, 22.0);
+
+    return true;
   }
 
   @override
@@ -470,8 +472,8 @@ class EzVideoGameConfig extends StatelessWidget {
         padding: EdgeInsets.all(onMobile ? 22.5 : 25.0),
       ),
       onPressed: () async {
-        await onPressed(context);
-        onComplete?.call();
+        final bool confirmed = await onPressed(context);
+        if (confirmed) onComplete?.call();
       },
       text: ezL10n(context).ssVideoGame,
       textStyle: localBody,
@@ -491,7 +493,7 @@ class EzChalkboardConfig extends StatelessWidget {
   /// Has default design and layout settings, but a [fingerPaint] based [TextTheme]
   const EzChalkboardConfig({super.key, this.onComplete});
 
-  static Future<void> onPressed(BuildContext context) async {
+  static Future<bool> onPressed(BuildContext context) async {
     final EFUILang l10n = ezL10n(context);
 
     // If the current theme is not dark, show a warning dialog
@@ -522,7 +524,7 @@ class EzChalkboardConfig extends StatelessWidget {
         },
       );
 
-      if (!doIt) return;
+      if (!doIt) return false;
     }
 
     // Reset //
@@ -621,6 +623,8 @@ class EzChalkboardConfig extends StatelessWidget {
     // Label
     await EzConfig.setString(labelFontFamilyKey, fingerPaint);
     await EzConfig.setBool(labelItalicizedKey, false);
+
+    return true;
   }
 
   @override
@@ -655,8 +659,8 @@ class EzChalkboardConfig extends StatelessWidget {
             isMobile() ? defaultMobilePadding : defaultDesktopPadding),
       ),
       onPressed: () async {
-        await onPressed(context);
-        onComplete?.call();
+        final bool confirmed = await onPressed(context);
+        if (confirmed) onComplete?.call();
       },
       text: l10n.ssChalkboard,
       textStyle: localBody,
