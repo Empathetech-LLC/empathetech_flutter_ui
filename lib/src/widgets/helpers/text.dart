@@ -167,3 +167,31 @@ class EzText extends StatelessWidget {
     );
   }
 }
+
+class EzNewLine extends StatelessWidget {
+  /// [Text.style] passthrough
+  /// Defaults to [TextTheme.bodyLarge]
+  final TextStyle? style;
+
+  /// [Text.textAlign] passthrough
+  /// Defaults to [TextAlign.start]
+  final TextAlign? textAlign;
+
+  /// Quick wrapper for creating a [TextStyle]d blank line
+  const EzNewLine({
+    super.key,
+    this.style,
+    this.textAlign,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ExcludeSemantics(
+      child: Text(
+        '',
+        style: style ?? Theme.of(context).textTheme.bodyLarge,
+        textAlign: textAlign ?? TextAlign.start,
+      ),
+    );
+  }
+}
