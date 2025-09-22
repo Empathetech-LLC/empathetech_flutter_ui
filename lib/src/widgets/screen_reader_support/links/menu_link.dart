@@ -7,6 +7,7 @@ import '../../../../empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EzMenuLink extends StatelessWidget {
   /// [Link.uri] to open
@@ -94,7 +95,7 @@ class EzMenuLink extends StatelessWidget {
   Widget build(BuildContext context) => Link(
         uri: uri,
         builder: (_, FollowLink? followLink) => EzMenuButton(
-          onPressed: followLink,
+          onPressed: () => launchUrl(uri),
           requestFocusOnHover: requestFocusOnHover,
           onHover: onHover,
           onFocusChange: onFocusChange,
@@ -116,3 +117,6 @@ class EzMenuLink extends StatelessWidget {
         ),
       );
 }
+
+// Idk why, but it seems followLink doesn't work for EzMenuButtons... maybe something to do with focus/the anchor closing?
+// Any who, launchUrl works and the Link wrapper means we still get the proper context menu
