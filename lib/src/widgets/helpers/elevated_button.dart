@@ -216,7 +216,7 @@ class EzElevatedIconButton extends StatefulWidget {
 }
 
 class _EzElevatedIconButtonState extends State<EzElevatedIconButton> {
-  // Gather the static theme data //
+  // Gather the fixed theme data //
 
   final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
 
