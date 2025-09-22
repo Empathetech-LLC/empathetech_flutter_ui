@@ -546,6 +546,26 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                     ),
                   ),
 
+                // Big button in the middle that technically does nothing
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Visibility(
+                    visible: !value.isPlaying &&
+                        (value.isCompleted || value.position.inSeconds < 1),
+                    child: Center(
+                      child: EzIconButton(
+                        onPressed: doNothing,
+                        icon: Icon(value.isCompleted
+                            ? Icons.replay
+                            : Icons.play_arrow),
+                      ),
+                    ),
+                  ),
+                ),
+
                 // Controls
                 Positioned(
                   left: 0,
@@ -607,8 +627,10 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           onPressed: () => play(value),
                                           tooltip: l10n.gPlay,
                                           color: iconColor,
-                                          icon: Icon(
-                                              PlatformIcons(context).playArrow),
+                                          icon: Icon(value.isCompleted
+                                              ? Icons.replay
+                                              : PlatformIcons(context)
+                                                  .playArrow),
                                         ),
                                 ),
                               ),
