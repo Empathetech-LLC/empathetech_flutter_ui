@@ -487,37 +487,6 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   ),
                 ),
 
-                // Middle play button
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  child: Visibility(
-                    visible: (onMobile && hovering) ||
-                        (!value.isPlaying &&
-                            (value.isCompleted ||
-                                value.position.inSeconds < 1)),
-                    child: ExcludeSemantics(
-                      child: Center(
-                        child: value.isPlaying
-                            ? EzIconButton(
-                                onPressed: pause,
-                                color: iconColor,
-                                icon: Icon(PlatformIcons(context).pause),
-                              )
-                            : EzIconButton(
-                                onPressed: () => play(value),
-                                color: iconColor,
-                                icon: Icon(value.isCompleted
-                                    ? Icons.replay
-                                    : PlatformIcons(context).playArrow),
-                              ),
-                      ),
-                    ),
-                  ),
-                ),
-
                 // Layer for taps, gestures, and key events
                 Positioned(
                   left: 0,
@@ -527,11 +496,15 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: ExcludeSemantics(
                     child: GestureDetector(
                       onTap: () async {
-                        onMobile
-                            ? setState(() => hovering = !hovering)
-                            : value.isPlaying
-                                ? await pause()
-                                : await play(value);
+                        if (onMobile) {
+                          mobileHover?.cancel();
+
+                          hovering
+                              ? setState(() => hovering = false)
+                              : handleMobileHover();
+                        } else {
+                          value.isPlaying ? await pause() : await play(value);
+                        }
                       },
                       onDoubleTapDown: (TapDownDetails tap) async {
                         final RenderBox mySpace =
@@ -585,6 +558,37 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                       ],
                     ),
                   ),
+
+                // Middle play button
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Visibility(
+                    visible: (onMobile && hovering) ||
+                        (!value.isPlaying &&
+                            (value.isCompleted ||
+                                value.position.inSeconds < 1)),
+                    child: ExcludeSemantics(
+                      child: Center(
+                        child: value.isPlaying
+                            ? EzIconButton(
+                                onPressed: pause,
+                                color: iconColor,
+                                icon: Icon(PlatformIcons(context).pause),
+                              )
+                            : EzIconButton(
+                                onPressed: () => play(value),
+                                color: iconColor,
+                                icon: Icon(value.isCompleted
+                                    ? Icons.replay
+                                    : PlatformIcons(context).playArrow),
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
 
                 // Controls
                 Positioned(
