@@ -161,6 +161,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   late final int videoLength = widget.controller.value.duration.inMilliseconds;
   bool hovering = false;
+  Timer? mobileHover;
 
   late double currSpeed = widget.speed;
 
@@ -193,41 +194,39 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
   // Define custom functions //
 
+  void handleMobileHover() {
+    if (!onMobile) return;
+
+    mobileHover?.cancel();
+    if (!hovering) setState(() => hovering = true);
+
+    mobileHover = Timer(
+      Duration(seconds: widget.mobileDelay),
+      () => setState(() => hovering = false),
+    );
+  }
+
   Future<void> play(VideoPlayerValue value) async {
-    if (onMobile) setState(() => hovering = true);
-
-    if (value.isCompleted) {
-      await widget.controller.seekTo(Duration.zero);
-    }
+    if (value.isCompleted) await widget.controller.seekTo(Duration.zero);
     await widget.controller.play();
-
-    if (onMobile) {
-      Future<void>.delayed(
-        Duration(seconds: widget.mobileDelay),
-        () => setState(() => hovering = false),
-      );
-    }
+    handleMobileHover();
   }
 
   Future<void> pause() async {
-    if (onMobile) setState(() => hovering = true);
-
     await widget.controller.pause();
-
-    if (onMobile) {
-      Future<void>.delayed(
-        Duration(seconds: widget.mobileDelay),
-        () => setState(() => hovering = false),
-      );
-    }
+    handleMobileHover();
   }
 
   Future<void> mute(VideoPlayerValue value) async {
     savedVolume = value.volume;
     await widget.controller.setVolume(0.0);
+    handleMobileHover();
   }
 
-  Future<void> unMute() => widget.controller.setVolume(savedVolume ?? 1.0);
+  Future<void> unMute() async {
+    await widget.controller.setVolume(savedVolume ?? 1.0);
+    handleMobileHover();
+  }
 
   Future<void> skipForward(VideoPlayerValue value) => widget.controller
       .seekTo(value.position + Duration(seconds: widget.skipTime));
@@ -488,23 +487,32 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   ),
                 ),
 
-                // Big button in the middle that technically does nothing
+                // Middle play button
                 Positioned(
                   left: 0,
                   right: 0,
                   top: 0,
                   bottom: 0,
                   child: Visibility(
-                    visible: !value.isPlaying &&
-                        (value.isCompleted || value.position.inSeconds < 1),
+                    visible: (onMobile && hovering) ||
+                        (!value.isPlaying &&
+                            (value.isCompleted ||
+                                value.position.inSeconds < 1)),
                     child: ExcludeSemantics(
                       child: Center(
-                        child: EzIconButton(
-                          onPressed: doNothing,
-                          icon: Icon(value.isCompleted
-                              ? Icons.replay
-                              : Icons.play_arrow),
-                        ),
+                        child: value.isPlaying
+                            ? EzIconButton(
+                                onPressed: pause,
+                                color: iconColor,
+                                icon: Icon(PlatformIcons(context).pause),
+                              )
+                            : EzIconButton(
+                                onPressed: () => play(value),
+                                color: iconColor,
+                                icon: Icon(value.isCompleted
+                                    ? Icons.replay
+                                    : PlatformIcons(context).playArrow),
+                              ),
                       ),
                     ),
                   ),
@@ -519,7 +527,11 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                   child: ExcludeSemantics(
                     child: GestureDetector(
                       onTap: () async {
-                        value.isPlaying ? await pause() : await play(value);
+                        onMobile
+                            ? setState(() => hovering = !hovering)
+                            : value.isPlaying
+                                ? await pause()
+                                : await play(value);
                       },
                       onDoubleTapDown: (TapDownDetails tap) async {
                         final RenderBox mySpace =
@@ -601,10 +613,16 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                 data: sliderTheme,
                                 child: Slider(
                                   value: pComplete(value.position),
-                                  onChangeStart: (_) => pause(),
+                                  onChangeStart: (_) async {
+                                    await pause();
+                                    if (onMobile) mobileHover?.cancel();
+                                  },
                                   onChanged: (double value) =>
                                       widget.controller.seekTo(findP(value)),
-                                  onChangeEnd: (_) => play(value),
+                                  onChangeEnd: (_) async {
+                                    await play(value);
+                                    handleMobileHover();
+                                  },
                                 ),
                               ),
                             ),
@@ -683,8 +701,12 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                       data: sliderTheme,
                                       child: Slider(
                                         value: value.volume,
+                                        onChangeStart: (_) {
+                                          if (onMobile) mobileHover?.cancel();
+                                        },
                                         onChanged: (double value) =>
                                             widget.controller.setVolume(value),
+                                        onChangeEnd: (_) => handleMobileHover(),
                                       ),
                                     ),
                                   ),
@@ -720,6 +742,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           setState(() => currSpeed -= 0.25);
                                           await widget.controller
                                               .setPlaybackSpeed(currSpeed);
+                                          handleMobileHover();
                                         },
                                         tooltip:
                                             '${l10n.gDecrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
@@ -755,6 +778,7 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                                           setState(() => currSpeed += 0.25);
                                           await widget.controller
                                               .setPlaybackSpeed(currSpeed);
+                                          handleMobileHover();
                                         },
                                         tooltip:
                                             '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
