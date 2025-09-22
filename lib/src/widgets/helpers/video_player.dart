@@ -171,13 +171,19 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
   final MenuController subMenuControl = MenuController();
   int captionStyle = 1;
 
-  late final bool persistentControls = onMobile ||
-      widget.playVis == EzButtonVis.alwaysOn ||
-      widget.volumeVis == EzButtonVis.alwaysOn ||
-      widget.timeSliderVis == EzButtonVis.alwaysOn;
-  late final bool noControls = widget.playVis == EzButtonVis.alwaysOff &&
+  late final bool persistentControls =
+      widget.timeSliderVis == EzButtonVis.alwaysOn ||
+          widget.playVis == EzButtonVis.alwaysOn ||
+          widget.volumeVis == EzButtonVis.alwaysOn ||
+          widget.timeLabelVis == EzButtonVis.alwaysOn ||
+          widget.speedVis == EzButtonVis.alwaysOn;
+  // || widget.fullScreenVis == EzButtonVis.alwaysOn;
+  late final bool noControls = widget.timeSliderVis == EzButtonVis.alwaysOff &&
+      widget.playVis == EzButtonVis.alwaysOff &&
       widget.volumeVis == EzButtonVis.alwaysOff &&
-      widget.timeSliderVis == EzButtonVis.alwaysOff;
+      widget.timeLabelVis == EzButtonVis.alwaysOff &&
+      widget.speedVis == EzButtonVis.alwaysOff;
+  // && widget.fullScreenVis == EzButtonVis.alwaysOff;
 
   late final double controlsHeight = noControls
       ? 0
