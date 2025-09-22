@@ -761,7 +761,9 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
 
                               // Captions
                               Visibility(
-                                visible: widget.hasCaptions,
+                                visible: widget.hasCaptions &&
+                                    showControl(
+                                        EzButtonVis.auto, value.isPlaying),
                                 child: Padding(
                                   padding: EdgeInsets.only(right: spacing),
                                   child: MenuAnchor(
