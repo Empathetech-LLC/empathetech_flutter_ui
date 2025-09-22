@@ -95,7 +95,12 @@ class EzAlertDialog extends PlatformAlertDialog {
                 ? null
                 : dialogContent == null
                     ? EdgeInsets.zero
-                    : EdgeInsets.only(top: margin, bottom: spacing / 2),
+                    : EdgeInsets.only(
+                        right: margin,
+                        left: margin,
+                        top: margin,
+                        bottom: spacing / 2,
+                      ),
 
             // Content
             content: dialogContent,
