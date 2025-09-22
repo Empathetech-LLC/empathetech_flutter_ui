@@ -753,142 +753,117 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   // Define the setting controllers //
 
-  late Widget fontSizeIcon = EzTextBackground(
-    Icon(
-      Icons.text_fields_sharp,
-      color: Theme.of(context).colorScheme.onSurface,
-      size: widget.labelProvider.value.fontSize,
-    ),
-    borderRadius: textFieldRadius,
-  );
-
-  late Widget letterSpacingIcon = EzTextBackground(
-    Icon(
-      Icons.horizontal_distribute_sharp,
-      color: Theme.of(context).colorScheme.onSurface,
-      size: widget.labelProvider.value.fontSize,
-    ),
-    borderRadius: textFieldRadius,
-  );
-
-  late Widget wordSpacingIcon = EzTextBackground(
-    Icon(
-      Icons.space_bar_sharp,
-      color: Theme.of(context).colorScheme.onSurface,
-      size: widget.labelProvider.value.fontSize,
-    ),
-    borderRadius: textFieldRadius,
-  );
-
-  late Widget lineHeightIcon = EzTextBackground(
-    Icon(
-      Icons.format_line_spacing_sharp,
-      color: Theme.of(context).colorScheme.onSurface,
-      size: widget.labelProvider.value.fontSize,
-    ),
-    borderRadius: textFieldRadius,
-  );
-
   /// Font family setting(s)
-  late final Map<EzTextSettingType, EzFontFamilySetting> familyControllers =
+  Map<EzTextSettingType, EzFontFamilySetting> buildFamilyControls() =>
       <EzTextSettingType, EzFontFamilySetting>{
-    EzTextSettingType.display: EzFontFamilySetting(
-      key: UniqueKey(),
-      configKey: displayFontFamilyKey,
-      provider: widget.displayProvider,
-      baseStyle: widget.bodyProvider.value,
-    ),
-    EzTextSettingType.headline: EzFontFamilySetting(
-      key: UniqueKey(),
-      configKey: headlineFontFamilyKey,
-      provider: widget.headlineProvider,
-      baseStyle: widget.bodyProvider.value,
-    ),
-    EzTextSettingType.title: EzFontFamilySetting(
-      key: UniqueKey(),
-      configKey: titleFontFamilyKey,
-      provider: widget.titleProvider,
-      baseStyle: widget.bodyProvider.value,
-    ),
-    EzTextSettingType.body: EzFontFamilySetting(
-      key: UniqueKey(),
-      configKey: bodyFontFamilyKey,
-      provider: widget.bodyProvider,
-      baseStyle: widget.bodyProvider.value,
-    ),
-    EzTextSettingType.label: EzFontFamilySetting(
-      key: UniqueKey(),
-      configKey: labelFontFamilyKey,
-      provider: widget.labelProvider,
-      baseStyle: widget.bodyProvider.value,
-    ),
-  };
+        EzTextSettingType.display: EzFontFamilySetting(
+          key: UniqueKey(),
+          configKey: displayFontFamilyKey,
+          provider: widget.displayProvider,
+          baseStyle: widget.bodyProvider.value,
+        ),
+        EzTextSettingType.headline: EzFontFamilySetting(
+          key: UniqueKey(),
+          configKey: headlineFontFamilyKey,
+          provider: widget.headlineProvider,
+          baseStyle: widget.bodyProvider.value,
+        ),
+        EzTextSettingType.title: EzFontFamilySetting(
+          key: UniqueKey(),
+          configKey: titleFontFamilyKey,
+          provider: widget.titleProvider,
+          baseStyle: widget.bodyProvider.value,
+        ),
+        EzTextSettingType.body: EzFontFamilySetting(
+          key: UniqueKey(),
+          configKey: bodyFontFamilyKey,
+          provider: widget.bodyProvider,
+          baseStyle: widget.bodyProvider.value,
+        ),
+        EzTextSettingType.label: EzFontFamilySetting(
+          key: UniqueKey(),
+          configKey: labelFontFamilyKey,
+          provider: widget.labelProvider,
+          baseStyle: widget.bodyProvider.value,
+        ),
+      };
 
   /// Font size setting(s)
-  late final Map<EzTextSettingType, Widget> sizeControllers =
-      <EzTextSettingType, Widget>{
-    EzTextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>('$displayFontSizeKey-${widget.displayProvider.id}'),
-      configKey: displayFontSizeKey,
-      initialValue: widget.displayProvider.value.fontSize!,
-      min: minDisplay,
-      max: maxDisplay,
-      notifierCallback: widget.displayProvider.resize,
-      style: widget.bodyProvider.value,
-      icon: fontSizeIcon,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
-    ),
-    EzTextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineFontSizeKey-${widget.headlineProvider.id}'),
-      configKey: headlineFontSizeKey,
-      initialValue: widget.headlineProvider.value.fontSize!,
-      min: minHeadline,
-      max: maxHeadline,
-      notifierCallback: widget.headlineProvider.resize,
-      style: widget.bodyProvider.value,
-      icon: fontSizeIcon,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
-    ),
-    EzTextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleFontSizeKey-${widget.titleProvider.id}'),
-      configKey: titleFontSizeKey,
-      initialValue: widget.titleProvider.value.fontSize!,
-      min: minTitle,
-      max: maxTitle,
-      notifierCallback: widget.titleProvider.resize,
-      style: widget.bodyProvider.value,
-      icon: fontSizeIcon,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
-    ),
-    EzTextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyFontSizeKey-${widget.bodyProvider.id}'),
-      configKey: bodyFontSizeKey,
-      initialValue: widget.bodyProvider.value.fontSize!,
-      min: minBody,
-      max: maxBody,
-      notifierCallback: widget.bodyProvider.resize,
-      style: widget.bodyProvider.value,
-      icon: fontSizeIcon,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
-    ),
-    EzTextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelFontSizeKey-${widget.labelProvider.id}'),
-      configKey: labelFontSizeKey,
-      initialValue: widget.labelProvider.value.fontSize!,
-      min: minLabel,
-      max: maxLabel,
-      notifierCallback: widget.labelProvider.resize,
-      style: widget.bodyProvider.value,
-      icon: fontSizeIcon,
-      plusMinus: true,
-      tooltip: l10n.tsFontSize,
-    ),
-  };
+  Map<EzTextSettingType, Widget> buildSizeControls() {
+    final Widget fontSizeIcon = EzTextBackground(
+      Icon(
+        Icons.text_fields_sharp,
+        color: Theme.of(context).colorScheme.onSurface,
+        size: widget.labelProvider.value.fontSize,
+      ),
+      borderRadius: textFieldRadius,
+    );
+
+    return <EzTextSettingType, Widget>{
+      EzTextSettingType.display: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$displayFontSizeKey-${widget.displayProvider.id}'),
+        configKey: displayFontSizeKey,
+        initialValue: widget.displayProvider.value.fontSize!,
+        min: minDisplay,
+        max: maxDisplay,
+        notifierCallback: widget.displayProvider.resize,
+        style: widget.bodyProvider.value,
+        icon: fontSizeIcon,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      EzTextSettingType.headline: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$headlineFontSizeKey-${widget.headlineProvider.id}'),
+        configKey: headlineFontSizeKey,
+        initialValue: widget.headlineProvider.value.fontSize!,
+        min: minHeadline,
+        max: maxHeadline,
+        notifierCallback: widget.headlineProvider.resize,
+        style: widget.bodyProvider.value,
+        icon: fontSizeIcon,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      EzTextSettingType.title: EzFontDoubleSetting(
+        key: ValueKey<String>('$titleFontSizeKey-${widget.titleProvider.id}'),
+        configKey: titleFontSizeKey,
+        initialValue: widget.titleProvider.value.fontSize!,
+        min: minTitle,
+        max: maxTitle,
+        notifierCallback: widget.titleProvider.resize,
+        style: widget.bodyProvider.value,
+        icon: fontSizeIcon,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      EzTextSettingType.body: EzFontDoubleSetting(
+        key: ValueKey<String>('$bodyFontSizeKey-${widget.bodyProvider.id}'),
+        configKey: bodyFontSizeKey,
+        initialValue: widget.bodyProvider.value.fontSize!,
+        min: minBody,
+        max: maxBody,
+        notifierCallback: widget.bodyProvider.resize,
+        style: widget.bodyProvider.value,
+        icon: fontSizeIcon,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+      EzTextSettingType.label: EzFontDoubleSetting(
+        key: ValueKey<String>('$labelFontSizeKey-${widget.labelProvider.id}'),
+        configKey: labelFontSizeKey,
+        initialValue: widget.labelProvider.value.fontSize!,
+        min: minLabel,
+        max: maxLabel,
+        notifierCallback: widget.labelProvider.resize,
+        style: widget.bodyProvider.value,
+        icon: fontSizeIcon,
+        plusMinus: true,
+        tooltip: l10n.tsFontSize,
+      ),
+    };
+  }
 
   /// Font weight setting(s)
   late final Map<EzTextSettingType, EzBoldSetting> boldControllers =
@@ -1000,197 +975,240 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
   };
 
   /// Letter spacing setting(s)
-  late final Map<EzTextSettingType, EzFontDoubleSetting>
-      letterSpacingControllers = <EzTextSettingType, EzFontDoubleSetting>{
-    EzTextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$displayLetterSpacingKey-${widget.displayProvider.id}'),
-      configKey: displayLetterSpacingKey,
-      initialValue: widget.displayProvider.value.letterSpacing!,
-      min: minLetterSpacing,
-      max: maxLetterSpacing,
-      notifierCallback: widget.displayProvider.setLetterSpacing,
-      style: widget.bodyProvider.value,
-      icon: letterSpacingIcon,
-      tooltip: l10n.tsLetterSpacing,
-    ),
-    EzTextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineLetterSpacingKey-${widget.headlineProvider.id}'),
-      configKey: headlineLetterSpacingKey,
-      initialValue: widget.headlineProvider.value.letterSpacing!,
-      min: minLetterSpacing,
-      max: maxLetterSpacing,
-      notifierCallback: widget.headlineProvider.setLetterSpacing,
-      style: widget.bodyProvider.value,
-      icon: letterSpacingIcon,
-      tooltip: l10n.tsLetterSpacing,
-    ),
-    EzTextSettingType.title: EzFontDoubleSetting(
-      key:
-          ValueKey<String>('$titleLetterSpacingKey-${widget.titleProvider.id}'),
-      configKey: titleLetterSpacingKey,
-      initialValue: widget.titleProvider.value.letterSpacing!,
-      min: minLetterSpacing,
-      max: maxLetterSpacing,
-      notifierCallback: widget.titleProvider.setLetterSpacing,
-      style: widget.bodyProvider.value,
-      icon: letterSpacingIcon,
-      tooltip: l10n.tsLetterSpacing,
-    ),
-    EzTextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyLetterSpacingKey-${widget.bodyProvider.id}'),
-      configKey: bodyLetterSpacingKey,
-      initialValue: widget.bodyProvider.value.letterSpacing!,
-      min: minLetterSpacing,
-      max: maxLetterSpacing,
-      notifierCallback: widget.bodyProvider.setLetterSpacing,
-      style: widget.bodyProvider.value,
-      icon: letterSpacingIcon,
-      tooltip: l10n.tsLetterSpacing,
-    ),
-    EzTextSettingType.label: EzFontDoubleSetting(
-      key:
-          ValueKey<String>('$labelLetterSpacingKey-${widget.labelProvider.id}'),
-      configKey: labelLetterSpacingKey,
-      initialValue: widget.labelProvider.value.letterSpacing!,
-      min: minLetterSpacing,
-      max: maxLetterSpacing,
-      notifierCallback: widget.labelProvider.setLetterSpacing,
-      style: widget.bodyProvider.value,
-      icon: letterSpacingIcon,
-      tooltip: l10n.tsLetterSpacing,
-    ),
-  };
+  Map<EzTextSettingType, EzFontDoubleSetting> buildLetterSpaceControls() {
+    final Widget letterSpacingIcon = EzTextBackground(
+      Icon(
+        Icons.horizontal_distribute_sharp,
+        color: Theme.of(context).colorScheme.onSurface,
+        size: widget.labelProvider.value.fontSize,
+      ),
+      borderRadius: textFieldRadius,
+    );
+
+    return <EzTextSettingType, EzFontDoubleSetting>{
+      EzTextSettingType.display: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$displayLetterSpacingKey-${widget.displayProvider.id}'),
+        configKey: displayLetterSpacingKey,
+        initialValue: widget.displayProvider.value.letterSpacing!,
+        min: minLetterSpacing,
+        max: maxLetterSpacing,
+        notifierCallback: widget.displayProvider.setLetterSpacing,
+        style: widget.bodyProvider.value,
+        icon: letterSpacingIcon,
+        tooltip: l10n.tsLetterSpacing,
+      ),
+      EzTextSettingType.headline: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$headlineLetterSpacingKey-${widget.headlineProvider.id}'),
+        configKey: headlineLetterSpacingKey,
+        initialValue: widget.headlineProvider.value.letterSpacing!,
+        min: minLetterSpacing,
+        max: maxLetterSpacing,
+        notifierCallback: widget.headlineProvider.setLetterSpacing,
+        style: widget.bodyProvider.value,
+        icon: letterSpacingIcon,
+        tooltip: l10n.tsLetterSpacing,
+      ),
+      EzTextSettingType.title: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$titleLetterSpacingKey-${widget.titleProvider.id}'),
+        configKey: titleLetterSpacingKey,
+        initialValue: widget.titleProvider.value.letterSpacing!,
+        min: minLetterSpacing,
+        max: maxLetterSpacing,
+        notifierCallback: widget.titleProvider.setLetterSpacing,
+        style: widget.bodyProvider.value,
+        icon: letterSpacingIcon,
+        tooltip: l10n.tsLetterSpacing,
+      ),
+      EzTextSettingType.body: EzFontDoubleSetting(
+        key:
+            ValueKey<String>('$bodyLetterSpacingKey-${widget.bodyProvider.id}'),
+        configKey: bodyLetterSpacingKey,
+        initialValue: widget.bodyProvider.value.letterSpacing!,
+        min: minLetterSpacing,
+        max: maxLetterSpacing,
+        notifierCallback: widget.bodyProvider.setLetterSpacing,
+        style: widget.bodyProvider.value,
+        icon: letterSpacingIcon,
+        tooltip: l10n.tsLetterSpacing,
+      ),
+      EzTextSettingType.label: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$labelLetterSpacingKey-${widget.labelProvider.id}'),
+        configKey: labelLetterSpacingKey,
+        initialValue: widget.labelProvider.value.letterSpacing!,
+        min: minLetterSpacing,
+        max: maxLetterSpacing,
+        notifierCallback: widget.labelProvider.setLetterSpacing,
+        style: widget.bodyProvider.value,
+        icon: letterSpacingIcon,
+        tooltip: l10n.tsLetterSpacing,
+      ),
+    };
+  }
 
   /// Word spacing setting(s)
-  late final Map<EzTextSettingType, EzFontDoubleSetting>
-      wordSpacingControllers = <EzTextSettingType, EzFontDoubleSetting>{
-    EzTextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$displayWordSpacingKey-${widget.displayProvider.id}'),
-      configKey: displayWordSpacingKey,
-      initialValue: widget.displayProvider.value.wordSpacing!,
-      min: minWordSpacing,
-      max: maxWordSpacing,
-      notifierCallback: widget.displayProvider.setWordSpacing,
-      style: widget.bodyProvider.value,
-      icon: wordSpacingIcon,
-      tooltip: l10n.tsWordSpacing,
-    ),
-    EzTextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineWordSpacingKey-${widget.headlineProvider.id}'),
-      configKey: headlineWordSpacingKey,
-      initialValue: widget.headlineProvider.value.wordSpacing!,
-      min: minWordSpacing,
-      max: maxWordSpacing,
-      notifierCallback: widget.headlineProvider.setWordSpacing,
-      style: widget.bodyProvider.value,
-      icon: wordSpacingIcon,
-      tooltip: l10n.tsWordSpacing,
-    ),
-    EzTextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleWordSpacingKey-${widget.titleProvider.id}'),
-      configKey: titleWordSpacingKey,
-      initialValue: widget.titleProvider.value.wordSpacing!,
-      min: minWordSpacing,
-      max: maxWordSpacing,
-      notifierCallback: widget.titleProvider.setWordSpacing,
-      style: widget.bodyProvider.value,
-      icon: wordSpacingIcon,
-      tooltip: l10n.tsWordSpacing,
-    ),
-    EzTextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyWordSpacingKey-${widget.bodyProvider.id}'),
-      configKey: bodyWordSpacingKey,
-      initialValue: widget.bodyProvider.value.wordSpacing!,
-      min: minWordSpacing,
-      max: maxWordSpacing,
-      notifierCallback: widget.bodyProvider.setWordSpacing,
-      style: widget.bodyProvider.value,
-      icon: wordSpacingIcon,
-      tooltip: l10n.tsWordSpacing,
-    ),
-    EzTextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelWordSpacingKey-${widget.labelProvider.id}'),
-      configKey: labelWordSpacingKey,
-      initialValue: widget.labelProvider.value.wordSpacing!,
-      min: minWordSpacing,
-      max: maxWordSpacing,
-      notifierCallback: widget.labelProvider.setWordSpacing,
-      style: widget.bodyProvider.value,
-      icon: wordSpacingIcon,
-      tooltip: l10n.tsWordSpacing,
-    ),
-  };
+  Map<EzTextSettingType, EzFontDoubleSetting> buildWordSpaceControls() {
+    final Widget wordSpacingIcon = EzTextBackground(
+      Icon(
+        Icons.space_bar_sharp,
+        color: Theme.of(context).colorScheme.onSurface,
+        size: widget.labelProvider.value.fontSize,
+      ),
+      borderRadius: textFieldRadius,
+    );
+
+    return <EzTextSettingType, EzFontDoubleSetting>{
+      EzTextSettingType.display: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$displayWordSpacingKey-${widget.displayProvider.id}'),
+        configKey: displayWordSpacingKey,
+        initialValue: widget.displayProvider.value.wordSpacing!,
+        min: minWordSpacing,
+        max: maxWordSpacing,
+        notifierCallback: widget.displayProvider.setWordSpacing,
+        style: widget.bodyProvider.value,
+        icon: wordSpacingIcon,
+        tooltip: l10n.tsWordSpacing,
+      ),
+      EzTextSettingType.headline: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$headlineWordSpacingKey-${widget.headlineProvider.id}'),
+        configKey: headlineWordSpacingKey,
+        initialValue: widget.headlineProvider.value.wordSpacing!,
+        min: minWordSpacing,
+        max: maxWordSpacing,
+        notifierCallback: widget.headlineProvider.setWordSpacing,
+        style: widget.bodyProvider.value,
+        icon: wordSpacingIcon,
+        tooltip: l10n.tsWordSpacing,
+      ),
+      EzTextSettingType.title: EzFontDoubleSetting(
+        key:
+            ValueKey<String>('$titleWordSpacingKey-${widget.titleProvider.id}'),
+        configKey: titleWordSpacingKey,
+        initialValue: widget.titleProvider.value.wordSpacing!,
+        min: minWordSpacing,
+        max: maxWordSpacing,
+        notifierCallback: widget.titleProvider.setWordSpacing,
+        style: widget.bodyProvider.value,
+        icon: wordSpacingIcon,
+        tooltip: l10n.tsWordSpacing,
+      ),
+      EzTextSettingType.body: EzFontDoubleSetting(
+        key: ValueKey<String>('$bodyWordSpacingKey-${widget.bodyProvider.id}'),
+        configKey: bodyWordSpacingKey,
+        initialValue: widget.bodyProvider.value.wordSpacing!,
+        min: minWordSpacing,
+        max: maxWordSpacing,
+        notifierCallback: widget.bodyProvider.setWordSpacing,
+        style: widget.bodyProvider.value,
+        icon: wordSpacingIcon,
+        tooltip: l10n.tsWordSpacing,
+      ),
+      EzTextSettingType.label: EzFontDoubleSetting(
+        key:
+            ValueKey<String>('$labelWordSpacingKey-${widget.labelProvider.id}'),
+        configKey: labelWordSpacingKey,
+        initialValue: widget.labelProvider.value.wordSpacing!,
+        min: minWordSpacing,
+        max: maxWordSpacing,
+        notifierCallback: widget.labelProvider.setWordSpacing,
+        style: widget.bodyProvider.value,
+        icon: wordSpacingIcon,
+        tooltip: l10n.tsWordSpacing,
+      ),
+    };
+  }
 
   /// Line height setting(s)
-  late final Map<EzTextSettingType, EzFontDoubleSetting> lineHeightControllers =
-      <EzTextSettingType, EzFontDoubleSetting>{
-    EzTextSettingType.display: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$displayFontHeightKey-${widget.displayProvider.id}'),
-      configKey: displayFontHeightKey,
-      initialValue: widget.displayProvider.value.height!,
-      min: minFontHeight,
-      max: maxFontHeight,
-      notifierCallback: widget.displayProvider.setHeight,
-      style: widget.bodyProvider.value,
-      icon: lineHeightIcon,
-      tooltip: l10n.tsLineHeight,
-    ),
-    EzTextSettingType.headline: EzFontDoubleSetting(
-      key: ValueKey<String>(
-          '$headlineFontHeightKey-${widget.headlineProvider.id}'),
-      configKey: headlineFontHeightKey,
-      initialValue: widget.headlineProvider.value.height!,
-      min: minFontHeight,
-      max: maxFontHeight,
-      notifierCallback: widget.headlineProvider.setHeight,
-      style: widget.bodyProvider.value,
-      icon: lineHeightIcon,
-      tooltip: l10n.tsLineHeight,
-    ),
-    EzTextSettingType.title: EzFontDoubleSetting(
-      key: ValueKey<String>('$titleFontHeightKey-${widget.titleProvider.id}'),
-      configKey: titleFontHeightKey,
-      initialValue: widget.titleProvider.value.height!,
-      min: minFontHeight,
-      max: maxFontHeight,
-      notifierCallback: widget.titleProvider.setHeight,
-      style: widget.bodyProvider.value,
-      icon: lineHeightIcon,
-      tooltip: l10n.tsLineHeight,
-    ),
-    EzTextSettingType.body: EzFontDoubleSetting(
-      key: ValueKey<String>('$bodyFontHeightKey-${widget.bodyProvider.id}'),
-      configKey: bodyFontHeightKey,
-      initialValue: widget.bodyProvider.value.height!,
-      min: minFontHeight,
-      max: maxFontHeight,
-      notifierCallback: widget.bodyProvider.setHeight,
-      style: widget.bodyProvider.value,
-      icon: lineHeightIcon,
-      tooltip: l10n.tsLineHeight,
-    ),
-    EzTextSettingType.label: EzFontDoubleSetting(
-      key: ValueKey<String>('$labelFontHeightKey-${widget.labelProvider.id}'),
-      configKey: labelFontHeightKey,
-      initialValue: widget.labelProvider.value.height!,
-      min: minFontHeight,
-      max: maxFontHeight,
-      notifierCallback: widget.labelProvider.setHeight,
-      style: widget.bodyProvider.value,
-      icon: lineHeightIcon,
-      tooltip: l10n.tsLineHeight,
-    ),
-  };
+  Map<EzTextSettingType, EzFontDoubleSetting> buildLineHeightControls() {
+    final Widget lineHeightIcon = EzTextBackground(
+      Icon(
+        Icons.format_line_spacing_sharp,
+        color: Theme.of(context).colorScheme.onSurface,
+        size: widget.labelProvider.value.fontSize,
+      ),
+      borderRadius: textFieldRadius,
+    );
+
+    return <EzTextSettingType, EzFontDoubleSetting>{
+      EzTextSettingType.display: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$displayFontHeightKey-${widget.displayProvider.id}'),
+        configKey: displayFontHeightKey,
+        initialValue: widget.displayProvider.value.height!,
+        min: minFontHeight,
+        max: maxFontHeight,
+        notifierCallback: widget.displayProvider.setHeight,
+        style: widget.bodyProvider.value,
+        icon: lineHeightIcon,
+        tooltip: l10n.tsLineHeight,
+      ),
+      EzTextSettingType.headline: EzFontDoubleSetting(
+        key: ValueKey<String>(
+            '$headlineFontHeightKey-${widget.headlineProvider.id}'),
+        configKey: headlineFontHeightKey,
+        initialValue: widget.headlineProvider.value.height!,
+        min: minFontHeight,
+        max: maxFontHeight,
+        notifierCallback: widget.headlineProvider.setHeight,
+        style: widget.bodyProvider.value,
+        icon: lineHeightIcon,
+        tooltip: l10n.tsLineHeight,
+      ),
+      EzTextSettingType.title: EzFontDoubleSetting(
+        key: ValueKey<String>('$titleFontHeightKey-${widget.titleProvider.id}'),
+        configKey: titleFontHeightKey,
+        initialValue: widget.titleProvider.value.height!,
+        min: minFontHeight,
+        max: maxFontHeight,
+        notifierCallback: widget.titleProvider.setHeight,
+        style: widget.bodyProvider.value,
+        icon: lineHeightIcon,
+        tooltip: l10n.tsLineHeight,
+      ),
+      EzTextSettingType.body: EzFontDoubleSetting(
+        key: ValueKey<String>('$bodyFontHeightKey-${widget.bodyProvider.id}'),
+        configKey: bodyFontHeightKey,
+        initialValue: widget.bodyProvider.value.height!,
+        min: minFontHeight,
+        max: maxFontHeight,
+        notifierCallback: widget.bodyProvider.setHeight,
+        style: widget.bodyProvider.value,
+        icon: lineHeightIcon,
+        tooltip: l10n.tsLineHeight,
+      ),
+      EzTextSettingType.label: EzFontDoubleSetting(
+        key: ValueKey<String>('$labelFontHeightKey-${widget.labelProvider.id}'),
+        configKey: labelFontHeightKey,
+        initialValue: widget.labelProvider.value.height!,
+        min: minFontHeight,
+        max: maxFontHeight,
+        notifierCallback: widget.labelProvider.setHeight,
+        style: widget.bodyProvider.value,
+        icon: lineHeightIcon,
+        tooltip: l10n.tsLineHeight,
+      ),
+    };
+  }
 
   // Return the build //
 
   @override
   Widget build(BuildContext context) {
+    final Map<EzTextSettingType, EzFontFamilySetting> familyControllers =
+        buildFamilyControls();
+    final Map<EzTextSettingType, Widget> sizeControllers = buildSizeControls();
+    final Map<EzTextSettingType, EzFontDoubleSetting> letterSpacingControllers =
+        buildLetterSpaceControls();
+    final Map<EzTextSettingType, EzFontDoubleSetting> wordSpacingControllers =
+        buildWordSpaceControls();
+    final Map<EzTextSettingType, EzFontDoubleSetting> lineHeightControllers =
+        buildLineHeightControls();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
