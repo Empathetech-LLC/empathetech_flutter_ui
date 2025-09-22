@@ -300,7 +300,8 @@ class _AdvancedColorSettings extends StatefulWidget {
   State<_AdvancedColorSettings> createState() => _AdvancedColorSettingsState();
 }
 
-class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
+class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
+    with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
@@ -316,6 +317,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   late final Set<String> defaultSet = defaultList.toSet();
 
   late final List<String> currList = widget.currList;
+  bool modalOpen = false;
 
   // Define custom Widgets //
 
@@ -416,6 +418,23 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
     return untrackedColors;
   }
 
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    if (modalOpen) {
+      Navigator.of(context).pop();
+      modalOpen = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
@@ -457,6 +476,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         // Add a color button
         EzTextIconButton(
           onPressed: () async {
+            modalOpen = true;
+
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
@@ -474,6 +495,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                 },
               ),
             );
+            modalOpen = false;
 
             // Save the user's changes
             if (currList != defaultList) {
@@ -486,5 +508,11 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
