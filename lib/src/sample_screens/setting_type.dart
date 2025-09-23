@@ -8,7 +8,7 @@
 enum EzTSType { quick, advanced }
 
 /// [EzTSType] path name
-extension TextPaths on EzTSType {
+extension TSConfig on EzTSType {
   String get path {
     switch (this) {
       case EzTSType.quick:
@@ -17,9 +17,7 @@ extension TextPaths on EzTSType {
         return 'advanced';
     }
   }
-}
 
-extension TextNames on EzTSType {
   String get name {
     switch (this) {
       case EzTSType.quick:
@@ -35,7 +33,7 @@ extension TextNames on EzTSType {
 enum EzCSType { quick, advanced }
 
 /// [EzCSType] path name
-extension ColorPaths on EzCSType {
+extension CSConfig on EzCSType {
   String get path {
     switch (this) {
       case EzCSType.quick:
@@ -44,10 +42,7 @@ extension ColorPaths on EzCSType {
         return 'advanced';
     }
   }
-}
 
-/// [EzCSType] path name
-extension ColorNames on EzCSType {
   String get name {
     switch (this) {
       case EzCSType.quick:
