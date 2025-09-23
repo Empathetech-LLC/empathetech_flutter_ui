@@ -765,7 +765,7 @@ class EFUICredits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
 
     final EFUILang l10n = ezL10n(context);
     final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
@@ -825,7 +825,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
     final EFUILang l10n = ezL10n(context);
 
     final double toolbarHeight = ezToolbarHeight(context, appName);
