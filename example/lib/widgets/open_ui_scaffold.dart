@@ -52,7 +52,7 @@ class OpenUIScaffold extends StatelessWidget {
 
     // Define custom widgets //
 
-    late final MenuAnchor options = MenuAnchor(
+    final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
@@ -69,6 +69,17 @@ class OpenUIScaffold extends StatelessWidget {
         ),
         const OpenSourceButton(),
       ],
+    );
+
+    const Widget updater = EzUpdaterFAB(
+      appVersion: '2.3.1',
+      versionSource:
+          'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+      gPlay:
+          'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+      appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
+      github:
+          'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
     );
 
     // Return the build //
@@ -107,12 +118,12 @@ class OpenUIScaffold extends StatelessWidget {
           body: body,
 
           // FAB
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: fab == null
-                ? <Widget>[const EzUpdater()]
-                : <Widget>[const EzUpdater(), const EzSpacer(), fab!],
-          ),
+          floatingActionButton: fab == null
+              ? updater
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[updater, const EzSpacer(), fab!],
+                ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,
