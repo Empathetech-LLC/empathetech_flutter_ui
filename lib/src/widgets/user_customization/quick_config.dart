@@ -40,9 +40,6 @@ class EzQuickConfig extends StatelessWidget {
   /// Toggle the [EzFancyPantsConfig]
   final bool fancyPants;
 
-  /// Optional callback for when the quick config is completed
-  final void Function()? onComplete;
-
   /// Opens a [BottomSheet] with [EzElevatedIconButton]s for different [EzConfig] presets
   const EzQuickConfig({
     super.key,
@@ -51,7 +48,6 @@ class EzQuickConfig extends StatelessWidget {
     this.videoGame = true,
     this.chalkboard = true,
     this.fancyPants = true,
-    this.onComplete,
   });
 
   // Return the build //
