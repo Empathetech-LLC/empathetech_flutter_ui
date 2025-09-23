@@ -47,7 +47,7 @@ class EzAlertDialog extends PlatformAlertDialog {
     final double margin = EzConfig.get(marginKey);
     final double spacing = EzConfig.get(spacingKey);
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
 
     // Define custom functions //
 

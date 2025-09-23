@@ -36,7 +36,7 @@ class _HandSwitchState extends State<EzDominantHandSwitch> {
 
   // Define the build data //
 
-  bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  bool isLefty = EzConfig.get(isLeftyKey);
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
     DropdownMenuEntry<bool>(

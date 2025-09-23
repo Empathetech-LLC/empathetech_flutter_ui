@@ -89,7 +89,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late final EdgeInsets colInsets = EzInsets.col(spacing);
 
-  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  final bool isLefty = EzConfig.get(isLeftyKey);
 
   late final EFUILang l10n = ezL10n(context);
 
