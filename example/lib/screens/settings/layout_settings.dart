@@ -19,7 +19,7 @@ class LayoutSettingsScreen extends StatelessWidget {
         body: const EzScreen(EzLayoutSettings()),
         fab: EzConfigFAB(
           context,
-          appName: appTitle,
+          appName: appName,
           androidPackage: androidPackage,
         ),
       );

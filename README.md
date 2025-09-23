@@ -142,7 +142,7 @@ class YourApp extends StatelessWidget {
         // Current language
         locale: EzConfig.getLocale(),
 
-        title: appTitle,
+        title: appName,
         routerConfig: router,
       ),
     );

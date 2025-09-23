@@ -91,7 +91,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
-                    appTitle,
+                    appName,
                     style: ezSubTitleStyle(textTheme),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),

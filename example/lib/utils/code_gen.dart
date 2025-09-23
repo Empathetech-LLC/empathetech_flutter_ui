@@ -78,11 +78,11 @@ Future<void> genREADME({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  final String appTitle = ezSnakeToTitle(config.appName);
+  final String appName = ezSnakeToTitle(config.appName);
   try {
     // English
     final File enFile = File('$dir/README.md');
-    await enFile.writeAsString('''# $appTitle
+    await enFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -153,7 +153,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -173,7 +173,7 @@ If you have a dream that wants to be made a reality, try Open UI!
 
     // Spanish
     final File esFile = File('$dir/$localeDir/README.es.md');
-    await esFile.writeAsString('''# $appTitle
+    await esFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -244,7 +244,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -253,7 +253,7 @@ If you have a dream that wants to be made a reality, try Open UI!
 
     // French
     final File frFile = File('$dir/$localeDir/README.fr.md');
-    await frFile.writeAsString('''# $appTitle
+    await frFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -324,7 +324,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -639,7 +639,7 @@ class $classCaseAppName extends StatelessWidget {
         // Current language
         locale: EzConfig.getLocale(),
 
-        title: appTitle,
+        title: appName,
         routerConfig: router,
       ),
     );
@@ -688,7 +688,7 @@ class $classCaseAppName extends StatelessWidget {
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// $titleCaseAppName
-const String appTitle = '$titleCaseAppName';
+const String appName = '$titleCaseAppName';
 
 /// Default [EzConfig] values
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
@@ -815,7 +815,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ${classCaseAppName}Scaffold({
     super.key,
-    this.title = appTitle,
+    this.title = appName,
     this.showSettings = true,
     required this.body,
     this.fab,
@@ -828,7 +828,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
     final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
     final EFUILang l10n = ezL10n(context);
 
-    final double toolbarHeight = ezToolbarHeight(context, appTitle);
+    final double toolbarHeight = ezToolbarHeight(context, appName);
 
     // Define custom widgets //
 
@@ -843,7 +843,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         (showSettings) ? SettingsButton(context) : EFUICredits(context),
         ${config.supportEmail != null ? '''EzFeedbackMenuButton(
           parentContext: context,
-          appName: appTitle,
+          appName: appName,
           supportEmail: '${config.supportEmail}',
         ),''' : ''}
       ],
@@ -1011,7 +1011,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, appTitle);
+    ezWindowNamer(context, appName);
   }
 
   @override
@@ -1024,7 +1024,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Return the build //
 
     return ${classCaseAppName}Scaffold(
-      title: appTitle,
+      title: appName,
       body: EzScreen(
         child: Center(
           child: Column(

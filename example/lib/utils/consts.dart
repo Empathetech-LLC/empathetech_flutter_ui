@@ -4,7 +4,7 @@
  */
 
 /// Open UI
-const String appTitle = 'Open UI';
+const String appName = 'Open UI';
 
 /// net.empathetech.open_ui
 const String androidPackage = 'net.empathetech.open_ui';

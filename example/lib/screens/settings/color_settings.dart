@@ -21,7 +21,7 @@ class ColorSettingsScreen extends StatelessWidget {
         body: EzScreen(EzColorSettings(target: target)),
         fab: EzConfigFAB(
           context,
-          appName: appTitle,
+          appName: appName,
           androidPackage: androidPackage,
         ),
       );

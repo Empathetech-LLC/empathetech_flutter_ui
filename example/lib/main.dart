@@ -81,7 +81,7 @@ class OpenUI extends StatelessWidget {
         locale: EzConfig.getLocale(),
 
         // App title
-        title: appTitle,
+        title: appName,
 
         // Router (page) config
         routerConfig: GoRouter(
