@@ -116,9 +116,6 @@ ThemeData ezThemeData(Brightness brightness) {
   final Color crucialSurface = calcCrucial
       ? colorScheme.surface.withValues(alpha: crucialOpacity)
       : colorScheme.surface;
-  final Color crucialContainer = calcCrucial
-      ? colorScheme.primaryContainer.withValues(alpha: crucialOpacity)
-      : colorScheme.primaryContainer;
 
   //* Return the ThemeData *//
 
@@ -402,12 +399,7 @@ ThemeData ezThemeData(Brightness brightness) {
             ? colorScheme.primary
             : colorScheme.outline,
       ),
-      trackColor: WidgetStateProperty.resolveWith(
-        (Set<WidgetState> states) => (states.contains(WidgetState.selected) ||
-                states.contains(WidgetState.focused))
-            ? crucialContainer
-            : crucialSurface,
-      ),
+      trackColor: WidgetStateProperty.all(crucialSurface),
       trackOutlineColor: WidgetStateProperty.all(buttonContainer),
       overlayColor: WidgetStateProperty.all(highlightColor),
     ),
