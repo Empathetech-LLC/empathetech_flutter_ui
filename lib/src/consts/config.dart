@@ -478,10 +478,10 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   iconSizeKey: defaultIconSize,
 };
 
-/// base with a more compact layout and hidden scrolls
+/// [baseEmpathConfig] with a more compact layout and hidden scrolls
+/// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
-/// You have permission to modify this code
-/// You do not have permission to use this config in your app
+/// You do NOT have permission to use this config in your production app
 const Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -491,10 +491,10 @@ const Map<String, Object> empathMobileConfig = <String, Object>{
   hideScrollKey: true,
 };
 
-/// base with a more open layout and visible scrolls
+/// [baseEmpathConfig] with a more open layout and visible scrolls
+/// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
-/// You have permission to modify this code
-/// You do not have permission to use this config in your app
+/// You do NOT have permission to use this config in your production app
 const Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -505,7 +505,9 @@ const Map<String, Object> empathDesktopConfig = <String, Object>{
 };
 
 /// [EzConfig.defaults] set to all recommended max values
-/// For open source consumers: you may use this in testing, but not in production
+/// -- ATTENTION --
+/// Open source do NOT have permission to use this config in production apps
+/// Also, this is intended for testing anyway
 final Map<String, Object> empathMaxConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -557,7 +559,9 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
 };
 
 /// [EzConfig.defaults] set to all recommended min values
-/// For open source consumers: you may use this in testing, but not in production
+/// -- ATTENTION --
+/// Open source do NOT have permission to use this config in production apps
+/// Also, this is intended for testing anyway
 final Map<String, Object> empathMinConfig = <String, Object>{
   ...baseEmpathConfig,
 
