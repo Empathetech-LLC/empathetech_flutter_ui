@@ -705,9 +705,6 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
 
   final double margin = EzConfig.get(marginKey);
 
-  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-  );
   late final EdgeInsets colMargin = EzInsets.col(margin);
 
   late final EFUILang l10n = ezL10n(context);
@@ -727,27 +724,22 @@ class _AdvancedTextSettingsState extends State<_AdvancedTextSettings> {
     DropdownMenuEntry<EzTextSettingType>(
       value: EzTextSettingType.display,
       label: display,
-      style: menuButtonStyle,
     ),
     DropdownMenuEntry<EzTextSettingType>(
       value: EzTextSettingType.headline,
       label: headline,
-      style: menuButtonStyle,
     ),
     DropdownMenuEntry<EzTextSettingType>(
       value: EzTextSettingType.title,
       label: title,
-      style: menuButtonStyle,
     ),
     DropdownMenuEntry<EzTextSettingType>(
       value: EzTextSettingType.body,
       label: body,
-      style: menuButtonStyle,
     ),
     DropdownMenuEntry<EzTextSettingType>(
       value: EzTextSettingType.label,
       label: label,
-      style: menuButtonStyle,
     ),
   ];
 

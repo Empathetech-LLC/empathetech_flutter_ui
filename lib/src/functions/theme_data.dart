@@ -209,7 +209,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: EzConfig.get(spacingKey) * 4,
+      space: spacing * 4,
     ),
 
     // Drawer
@@ -342,7 +342,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(spacing),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 

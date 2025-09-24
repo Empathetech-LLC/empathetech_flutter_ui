@@ -38,10 +38,6 @@ class EzFontFamilySetting extends StatefulWidget {
 }
 
 class _FontFamilySettingState extends State<EzFontFamilySetting> {
-  // Gather the fixed theme data //
-
-  final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
-
   // Define the build data  //
 
   late String? currFontFamily = widget.provider.value.fontFamily == null
@@ -54,10 +50,7 @@ class _FontFamilySettingState extends State<EzFontFamilySetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: ezCamelToTitle(entry.key),
-      style: TextButton.styleFrom(
-        textStyle: entry.value,
-        padding: menuButtonPadding,
-      ),
+      style: TextButton.styleFrom(textStyle: entry.value),
     );
   }).toList();
 
