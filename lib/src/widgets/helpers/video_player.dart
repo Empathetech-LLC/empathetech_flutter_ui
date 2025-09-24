@@ -630,246 +630,256 @@ class _EzVideoPlayerState extends State<EzVideoPlayer> {
                           EzMargin(),
 
                           // Buttons
-                          EzScrollView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              const EzSpacer(vertical: false),
+                          NotificationListener<ScrollNotification>(
+                            onNotification: (_) {
+                              handleMobileHover();
+                              return false;
+                            },
+                            child: EzScrollView(
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>[
+                                const EzSpacer(vertical: false),
 
-                              // Play/pause
-                              Visibility(
-                                visible: showControl(
-                                    widget.playVis, value.isPlaying),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: spacing),
-                                  child: value.isPlaying
-                                      ? EzIconButton(
-                                          onPressed: pause,
-                                          tooltip: l10n.gPause,
-                                          color: iconColor,
-                                          icon: Icon(
-                                              PlatformIcons(context).pause),
-                                        )
-                                      : EzIconButton(
-                                          onPressed: () => play(value),
-                                          tooltip: l10n.gPlay,
-                                          color: iconColor,
-                                          icon: Icon(value.isCompleted
-                                              ? Icons.replay
-                                              : PlatformIcons(context)
-                                                  .playArrow),
-                                        ),
+                                // Play/pause
+                                Visibility(
+                                  visible: showControl(
+                                      widget.playVis, value.isPlaying),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: spacing),
+                                    child: value.isPlaying
+                                        ? EzIconButton(
+                                            onPressed: pause,
+                                            tooltip: l10n.gPause,
+                                            color: iconColor,
+                                            icon: Icon(
+                                                PlatformIcons(context).pause),
+                                          )
+                                        : EzIconButton(
+                                            onPressed: () => play(value),
+                                            tooltip: l10n.gPlay,
+                                            color: iconColor,
+                                            icon: Icon(value.isCompleted
+                                                ? Icons.replay
+                                                : PlatformIcons(context)
+                                                    .playArrow),
+                                          ),
+                                  ),
                                 ),
-                              ),
 
-                              // Volume toggle
-                              Visibility(
-                                visible: showControl(
-                                    widget.volumeVis, value.isPlaying),
-                                child: Padding(
-                                  padding: widget.variableVolume
-                                      ? EdgeInsets.zero
-                                      : EdgeInsets.only(right: spacing),
-                                  child: (value.volume == 0.0)
-                                      ? EzIconButton(
-                                          onPressed: unMute,
-                                          tooltip: l10n.gUnMute,
-                                          color: iconColor,
-                                          icon: Icon(PlatformIcons(context)
-                                              .volumeMute),
-                                        )
-                                      : EzIconButton(
-                                          onPressed: () => mute(value),
-                                          tooltip: l10n.gMute,
-                                          color: iconColor,
-                                          icon: Icon(
-                                              PlatformIcons(context).volumeUp),
-                                        ),
+                                // Volume toggle
+                                Visibility(
+                                  visible: showControl(
+                                      widget.volumeVis, value.isPlaying),
+                                  child: Padding(
+                                    padding: widget.variableVolume
+                                        ? EdgeInsets.zero
+                                        : EdgeInsets.only(right: spacing),
+                                    child: (value.volume == 0.0)
+                                        ? EzIconButton(
+                                            onPressed: unMute,
+                                            tooltip: l10n.gUnMute,
+                                            color: iconColor,
+                                            icon: Icon(PlatformIcons(context)
+                                                .volumeMute),
+                                          )
+                                        : EzIconButton(
+                                            onPressed: () => mute(value),
+                                            tooltip: l10n.gMute,
+                                            color: iconColor,
+                                            icon: Icon(PlatformIcons(context)
+                                                .volumeUp),
+                                          ),
+                                  ),
                                 ),
-                              ),
 
-                              // Volume slider
-                              Visibility(
-                                visible: (widget.variableVolume &&
-                                    showControl(
-                                        widget.volumeVis, value.isPlaying)),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: spacing),
-                                  child: SizedBox(
-                                    height: iconSize,
-                                    width: 100,
-                                    child: SliderTheme(
-                                      data: sliderTheme,
-                                      child: Slider(
-                                        value: value.volume,
-                                        onChangeStart: (_) {
-                                          if (onMobile) mobileHover?.cancel();
-                                        },
-                                        onChanged: (double value) =>
-                                            widget.controller.setVolume(value),
-                                        onChangeEnd: (_) => handleMobileHover(),
+                                // Volume slider
+                                Visibility(
+                                  visible: (widget.variableVolume &&
+                                      showControl(
+                                          widget.volumeVis, value.isPlaying)),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: spacing),
+                                    child: SizedBox(
+                                      height: iconSize,
+                                      width: 100,
+                                      child: SliderTheme(
+                                        data: sliderTheme,
+                                        child: Slider(
+                                          value: value.volume,
+                                          onChangeStart: (_) {
+                                            if (onMobile) mobileHover?.cancel();
+                                          },
+                                          onChanged: (double value) => widget
+                                              .controller
+                                              .setVolume(value),
+                                          onChangeEnd: (_) =>
+                                              handleMobileHover(),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
 
-                              // Time label
-                              Visibility(
-                                visible: showControl(
-                                    widget.timeLabelVis, value.isPlaying),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: spacing),
-                                  child: Text(
-                                    '${ezVideoTime(value.position)} / ${ezVideoTime(value.duration)}',
-                                    style: labelStyle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-
-                              // Playback speed selector
-                              Visibility(
-                                visible: showControl(
-                                    widget.speedVis, value.isPlaying),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: spacing),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      EzIconButton(
-                                        enabled: currSpeed > 0.25,
-                                        onPressed: () async {
-                                          setState(() => currSpeed -= 0.25);
-                                          await widget.controller
-                                              .setPlaybackSpeed(currSpeed);
-                                          handleMobileHover();
-                                        },
-                                        tooltip:
-                                            '${l10n.gDecrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
-                                        icon:
-                                            Icon(PlatformIcons(context).remove),
-                                      ),
-                                      pmSpacer,
-                                      Tooltip(
-                                        message: l10n.gPlaybackSpeed,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.speed,
-                                              size: EzConfig.get(iconSizeKey) *
-                                                  0.667,
-                                              color: widget.textColor,
-                                            ),
-                                            Text(
-                                              currSpeed.toStringAsFixed(2),
-                                              style: labelStyle,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      pmSpacer,
-                                      EzIconButton(
-                                        enabled: currSpeed < 2.0,
-                                        onPressed: () async {
-                                          setState(() => currSpeed += 0.25);
-                                          await widget.controller
-                                              .setPlaybackSpeed(currSpeed);
-                                          handleMobileHover();
-                                        },
-                                        tooltip:
-                                            '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
-                                        icon: Icon(PlatformIcons(context).add),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              // Captions
-                              Visibility(
-                                visible: widget.hasCaptions &&
-                                    showControl(
-                                        EzButtonVis.auto, value.isPlaying),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: spacing),
-                                  child: MenuAnchor(
-                                    controller: subMenuControl,
-                                    builder: (_, __, ___) => EzIconButton(
-                                      onPressed: () => subMenuControl.isOpen
-                                          ? subMenuControl.close()
-                                          : setState(() =>
-                                              showCaptions = !showCaptions),
-                                      onLongPress: () => subMenuControl.isOpen
-                                          ? subMenuControl.close()
-                                          : subMenuControl.open(),
-                                      tooltip:
-                                          '${l10n.gCaptions}\n${l10n.gCaptionsHint}',
-                                      color: showCaptions
-                                          ? iconColor
-                                          : colorScheme.outline,
-                                      icon: const Icon(Icons.subtitles),
+                                // Time label
+                                Visibility(
+                                  visible: showControl(
+                                      widget.timeLabelVis, value.isPlaying),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: spacing),
+                                    child: Text(
+                                      '${ezVideoTime(value.position)} / ${ezVideoTime(value.duration)}',
+                                      style: labelStyle,
+                                      textAlign: TextAlign.center,
                                     ),
-                                    menuChildren: <Widget>[
-                                      EzMenuButton(
-                                        label: l10n.tsDisplay,
-                                        textStyle: textTheme.displayLarge,
-                                        textAlign: TextAlign.center,
-                                        onPressed: () =>
-                                            setState(() => captionStyle = 4),
-                                      ),
-                                      EzMenuButton(
-                                        label: l10n.tsHeadline,
-                                        textStyle: textTheme.headlineLarge,
-                                        textAlign: TextAlign.center,
-                                        onPressed: () =>
-                                            setState(() => captionStyle = 3),
-                                      ),
-                                      EzMenuButton(
-                                        label: l10n.tsTitle,
-                                        textStyle: textTheme.titleLarge,
-                                        textAlign: TextAlign.center,
-                                        onPressed: () =>
-                                            setState(() => captionStyle = 2),
-                                      ),
-                                      EzMenuButton(
-                                        label: l10n.tsBody,
-                                        textStyle: textTheme.bodyLarge,
-                                        textAlign: TextAlign.center,
-                                        onPressed: () =>
-                                            setState(() => captionStyle = 1),
-                                      ),
-                                      EzMenuButton(
-                                        label: l10n.tsLabel,
-                                        textStyle: textTheme.labelLarge,
-                                        textAlign: TextAlign.center,
-                                        onPressed: () =>
-                                            setState(() => captionStyle = 0),
-                                      ),
-                                    ],
                                   ),
                                 ),
-                              ),
 
-                              // // Fullscreen
-                              // Visibility(
-                              //   visible: showControl(widget.fullScreenVis),
-                              //   child: Padding(
-                              //     padding: EdgeInsets.only(right: spacing),
-                              //     child: EzIconButton(
-                              //       onPressed: toggleFullscreen,
-                              //       tooltip: l10n.gFullScreen,
-                              //       color: iconColor,
-                              //       icon: Icon(widget.isFullscreen
-                              //           ? PlatformIcons(context).fullscreenExit
-                              //           : PlatformIcons(context).fullscreen),
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
+                                // Playback speed selector
+                                Visibility(
+                                  visible: showControl(
+                                      widget.speedVis, value.isPlaying),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: spacing),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        EzIconButton(
+                                          enabled: currSpeed > 0.25,
+                                          onPressed: () async {
+                                            setState(() => currSpeed -= 0.25);
+                                            await widget.controller
+                                                .setPlaybackSpeed(currSpeed);
+                                            handleMobileHover();
+                                          },
+                                          tooltip:
+                                              '${l10n.gDecrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
+                                          icon: Icon(
+                                              PlatformIcons(context).remove),
+                                        ),
+                                        pmSpacer,
+                                        Tooltip(
+                                          message: l10n.gPlaybackSpeed,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.speed,
+                                                size:
+                                                    EzConfig.get(iconSizeKey) *
+                                                        0.667,
+                                                color: widget.textColor,
+                                              ),
+                                              Text(
+                                                currSpeed.toStringAsFixed(2),
+                                                style: labelStyle,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        pmSpacer,
+                                        EzIconButton(
+                                          enabled: currSpeed < 2.0,
+                                          onPressed: () async {
+                                            setState(() => currSpeed += 0.25);
+                                            await widget.controller
+                                                .setPlaybackSpeed(currSpeed);
+                                            handleMobileHover();
+                                          },
+                                          tooltip:
+                                              '${l10n.gIncrease} ${l10n.gPlaybackSpeed.toLowerCase()}',
+                                          icon:
+                                              Icon(PlatformIcons(context).add),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                // Captions
+                                Visibility(
+                                  visible: widget.hasCaptions &&
+                                      showControl(
+                                          EzButtonVis.auto, value.isPlaying),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: spacing),
+                                    child: MenuAnchor(
+                                      controller: subMenuControl,
+                                      builder: (_, __, ___) => EzIconButton(
+                                        onPressed: () => subMenuControl.isOpen
+                                            ? subMenuControl.close()
+                                            : setState(() =>
+                                                showCaptions = !showCaptions),
+                                        onLongPress: () => subMenuControl.isOpen
+                                            ? subMenuControl.close()
+                                            : subMenuControl.open(),
+                                        tooltip:
+                                            '${l10n.gCaptions}\n${l10n.gCaptionsHint}',
+                                        color: showCaptions
+                                            ? iconColor
+                                            : colorScheme.outline,
+                                        icon: const Icon(Icons.subtitles),
+                                      ),
+                                      menuChildren: <Widget>[
+                                        EzMenuButton(
+                                          label: l10n.tsDisplay,
+                                          textStyle: textTheme.displayLarge,
+                                          textAlign: TextAlign.center,
+                                          onPressed: () =>
+                                              setState(() => captionStyle = 4),
+                                        ),
+                                        EzMenuButton(
+                                          label: l10n.tsHeadline,
+                                          textStyle: textTheme.headlineLarge,
+                                          textAlign: TextAlign.center,
+                                          onPressed: () =>
+                                              setState(() => captionStyle = 3),
+                                        ),
+                                        EzMenuButton(
+                                          label: l10n.tsTitle,
+                                          textStyle: textTheme.titleLarge,
+                                          textAlign: TextAlign.center,
+                                          onPressed: () =>
+                                              setState(() => captionStyle = 2),
+                                        ),
+                                        EzMenuButton(
+                                          label: l10n.tsBody,
+                                          textStyle: textTheme.bodyLarge,
+                                          textAlign: TextAlign.center,
+                                          onPressed: () =>
+                                              setState(() => captionStyle = 1),
+                                        ),
+                                        EzMenuButton(
+                                          label: l10n.tsLabel,
+                                          textStyle: textTheme.labelLarge,
+                                          textAlign: TextAlign.center,
+                                          onPressed: () =>
+                                              setState(() => captionStyle = 0),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                // // Fullscreen
+                                // Visibility(
+                                //   visible: showControl(widget.fullScreenVis),
+                                //   child: Padding(
+                                //     padding: EdgeInsets.only(right: spacing),
+                                //     child: EzIconButton(
+                                //       onPressed: toggleFullscreen,
+                                //       tooltip: l10n.gFullScreen,
+                                //       color: iconColor,
+                                //       icon: Icon(widget.isFullscreen
+                                //           ? PlatformIcons(context).fullscreenExit
+                                //           : PlatformIcons(context).fullscreen),
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
