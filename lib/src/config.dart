@@ -444,7 +444,7 @@ Must be one of [int, bool, double, String, List<String>]''');
 
     // Update design settings //
 
-    await setDouble(animationDurationKey, random.nextDouble() * 500.0 + 250.0);
+    await setInt(animationDurationKey, random.nextInt(500) + 250);
 
     await setDouble(
       isDark ? darkButtonOpacityKey : lightButtonOpacityKey,

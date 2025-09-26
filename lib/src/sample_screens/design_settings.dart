@@ -173,7 +173,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                 onChanged: (double value) =>
                     setState(() => animDuration = value),
                 onChangeEnd: (double value) =>
-                    EzConfig.setDouble(animationDurationKey, value),
+                    EzConfig.setInt(animationDurationKey, value.toInt()),
               ),
             ),
           ),

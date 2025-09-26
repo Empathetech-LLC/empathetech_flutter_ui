@@ -386,7 +386,7 @@ class EzVideoGameConfig extends StatelessWidget {
 
     // Update design //
 
-    await EzConfig.setDouble(animationDurationKey, 400.0);
+    await EzConfig.setInt(animationDurationKey, 400);
 
     // Update layout //
 
@@ -715,7 +715,7 @@ class EzFancyPantsConfig extends StatelessWidget {
 
     // Update design //
 
-    await EzConfig.setDouble(animationDurationKey, 600.0);
+    await EzConfig.setInt(animationDurationKey, 600);
 
     // Update layout //
 

@@ -61,7 +61,7 @@ class _EzImageEditorState extends State<EzImageEditor> {
   final double iconSize = EzConfig.get(iconSizeKey);
 
   final int rotateDuration =
-      ((EzConfig.get(animationDurationKey) as double) / 2).toInt();
+      ((EzConfig.get(animationDurationKey) as int) / 2).toInt();
 
   late final EFUILang l10n = ezL10n(context);
 

@@ -25,7 +25,7 @@ ThemeData ezThemeData(Brightness brightness) {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  final double animDuration = EzConfig.get(animationDurationKey);
+  final int animDuration = EzConfig.get(animationDurationKey);
 
   // Icons //
 
