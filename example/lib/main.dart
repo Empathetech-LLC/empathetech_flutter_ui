@@ -76,11 +76,7 @@ class OpenUI extends StatelessWidget {
           ...EFUILang.localizationsDelegates,
           ...Lang.localizationsDelegates,
         },
-
-        // Supported languages
         supportedLocales: Lang.supportedLocales,
-
-        // Current language
         locale: EzConfig.getLocale(),
 
         // App title
