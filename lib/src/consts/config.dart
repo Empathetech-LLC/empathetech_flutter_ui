@@ -136,8 +136,8 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
 
-/// 500.0
-const double defaultAnimationDuration = 500.0;
+/// 500
+const int defaultAnimationDuration = 500;
 
 /// 0x45 / 255
 const double defaultButtonOutlineOpacity = 0.270588235294;
@@ -207,8 +207,8 @@ const double defaultWordSpacing = 1.0;
 
 // Design settings //
 
-/// 0.0
-const double minAnimationDuration = 0.0;
+/// 0
+const int minAnimationDuration = 0;
 
 // Layout settings //
 
@@ -266,8 +266,8 @@ const double minFontHeight = 1.0;
 
 // Design settings //
 
-/// 1000.0
-const double maxAnimationDuration = 1000.0;
+/// 1000
+const int maxAnimationDuration = 1000;
 
 // Layout settings //
 

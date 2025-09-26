@@ -91,7 +91,7 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
 
   final bool strictMobile = !kIsWeb && isMobile();
 
-  double animDuration = EzConfig.get(animationDurationKey);
+  double animDuration = (EzConfig.get(animationDurationKey) as int).toDouble();
   double iconSize = EzConfig.get(iconSizeKey);
 
   late double buttonOpacity = isDarkTheme(context)
@@ -166,8 +166,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
               ),
               child: Slider(
                 value: animDuration,
-                min: minAnimationDuration,
-                max: maxAnimationDuration,
+                min: minAnimationDuration.toDouble(),
+                max: maxAnimationDuration.toDouble(),
                 divisions: 20,
                 label: animDuration.toStringAsFixed(0),
                 onChanged: (double value) =>
@@ -448,7 +448,8 @@ class _EzDesignSettingsState extends State<EzDesignSettings>
                   EzConfig.getDefault(lightButtonOutlineOpacityKey);
             }
 
-            animDuration = EzConfig.getDefault(animationDurationKey);
+            animDuration =
+                (EzConfig.getDefault(animationDurationKey) as int).toDouble();
             iconSize = defaultIconSize;
 
             drawState();
