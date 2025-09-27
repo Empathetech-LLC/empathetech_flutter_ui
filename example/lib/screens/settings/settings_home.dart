@@ -25,7 +25,7 @@ class SettingsHomeScreen extends StatelessWidget {
         )),
         fab: EzConfigFAB(
           context,
-          appName: 'Open UI',
+          appName: appName,
           androidPackage: androidPackage,
         ),
       );
