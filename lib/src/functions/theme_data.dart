@@ -25,7 +25,7 @@ ThemeData ezThemeData(Brightness brightness) {
   final double padding = EzConfig.get(paddingKey);
   final double spacing = EzConfig.get(spacingKey);
 
-  final double animDuration = EzConfig.get(animationDurationKey);
+  final int animDuration = EzConfig.get(animationDurationKey);
 
   // Icons //
 
@@ -116,9 +116,6 @@ ThemeData ezThemeData(Brightness brightness) {
   final Color crucialSurface = calcCrucial
       ? colorScheme.surface.withValues(alpha: crucialOpacity)
       : colorScheme.surface;
-  final Color crucialContainer = calcCrucial
-      ? colorScheme.primaryContainer.withValues(alpha: crucialOpacity)
-      : colorScheme.primaryContainer;
 
   //* Return the ThemeData *//
 
@@ -212,7 +209,7 @@ ThemeData ezThemeData(Brightness brightness) {
     // Divider
     dividerTheme: DividerThemeData(
       color: colorScheme.secondary,
-      space: EzConfig.get(spacingKey) * 4,
+      space: spacing * 4,
     ),
 
     // Drawer
@@ -345,7 +342,7 @@ ThemeData ezThemeData(Brightness brightness) {
         side: null,
         textStyle: textTheme.bodyLarge,
         alignment: Alignment.center,
-        padding: EzInsets.wrap(spacing),
+        padding: EzInsets.wrap(padding),
       ),
     ),
 
@@ -402,12 +399,7 @@ ThemeData ezThemeData(Brightness brightness) {
             ? colorScheme.primary
             : colorScheme.outline,
       ),
-      trackColor: WidgetStateProperty.resolveWith(
-        (Set<WidgetState> states) => (states.contains(WidgetState.selected) ||
-                states.contains(WidgetState.focused))
-            ? crucialContainer
-            : crucialSurface,
-      ),
+      trackColor: WidgetStateProperty.all(crucialSurface),
       trackOutlineColor: WidgetStateProperty.all(buttonContainer),
       overlayColor: WidgetStateProperty.all(highlightColor),
     ),

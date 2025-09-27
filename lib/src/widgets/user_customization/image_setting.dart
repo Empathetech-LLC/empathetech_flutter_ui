@@ -89,7 +89,7 @@ class _ImageSettingState extends State<EzImageSetting> {
 
   late final EdgeInsets colInsets = EzInsets.col(spacing);
 
-  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  final bool isLefty = EzConfig.get(isLeftyKey);
 
   late final EFUILang l10n = ezL10n(context);
 
@@ -222,13 +222,13 @@ class _ImageSettingState extends State<EzImageSetting> {
       if (widget.updateTheme == Brightness.dark) {
         final double? opacity = EzConfig.get(darkTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
-          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          await EzConfig.setDouble(darkTextBackgroundOpacityKey, 0.50);
         }
       }
       if (widget.updateTheme == Brightness.light) {
         final double? opacity = EzConfig.get(lightTextBackgroundOpacityKey);
         if (opacity == null || opacity <= 0.05) {
-          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.5);
+          await EzConfig.setDouble(lightTextBackgroundOpacityKey, 0.50);
         }
       }
 

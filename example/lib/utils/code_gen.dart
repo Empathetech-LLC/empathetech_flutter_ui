@@ -78,11 +78,11 @@ Future<void> genREADME({
   required void Function(String) onFailure,
   required ValueNotifier<String> readout,
 }) async {
-  final String appTitle = ezSnakeToTitle(config.appName);
+  final String appName = ezSnakeToTitle(config.appName);
   try {
     // English
     final File enFile = File('$dir/README.md');
-    await enFile.writeAsString('''# $appTitle
+    await enFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -153,7 +153,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -173,7 +173,7 @@ If you have a dream that wants to be made a reality, try Open UI!
 
     // Spanish
     final File esFile = File('$dir/$localeDir/README.es.md');
-    await esFile.writeAsString('''# $appTitle
+    await esFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -244,7 +244,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -253,7 +253,7 @@ If you have a dream that wants to be made a reality, try Open UI!
 
     // French
     final File frFile = File('$dir/$localeDir/README.fr.md');
-    await frFile.writeAsString('''# $appTitle
+    await frFile.writeAsString('''# $appName
 
 An empathetic Flutter project.
 
@@ -324,7 +324,7 @@ Has been setup along with a basic runner script; `integration_test/run_int_tests
 
 ## <br>Credits
 
-$appTitle began with [Open UI]($openUIProdPage)'s app generation service.
+$appName began with [Open UI]($openUIProdPage)'s app generation service.
 
 It is free and open source, maintained by [Empathetech LLC](https://www.empathetech.net/).
 
@@ -418,13 +418,14 @@ dependencies:
   go_router: ^14.8.1
   intl: ^0.20.2
   shared_preferences: ^2.5.3
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
   # Community
-  empathetech_flutter_ui: ^9.2.0
-  ${config.supportEmail != null ? 'feedback: ^3.1.0' : ''}
+  empathetech_flutter_ui: ^10.0.0
+  ${config.supportEmail != null ? 'feedback: ^3.2.0' : ''}
   flutter_localized_locales: ^2.0.5
   flutter_platform_widgets: ^9.0.0
+  go_transitions: ^0.8.2
 
 dev_dependencies:
   dependency_validator: ^5.0.2
@@ -491,6 +492,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 ${config.supportEmail != null ? "import 'package:feedback/feedback.dart';" : ''}
 import 'package:go_router/go_router.dart';
+import 'package:go_transitions/go_transitions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -546,83 +548,24 @@ void main() async {
   ));''' : '\n  runApp(const $classCaseAppName());'}
 }
 
-/// Initialize a path based router for web-enabled apps
-/// Or any other app that requires deep linking
-/// https://docs.flutter.dev/ui/navigation/deep-linking
-final GoRouter router = GoRouter(
-  initialLocation: homePath,
-  errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
-  routes: <RouteBase>[
-    GoRoute(
-      path: homePath,
-      name: homePath,
-      builder: (_, __) => const HomeScreen(),
-      routes: <RouteBase>[
-        GoRoute(
-          path: settingsHomePath,
-          name: settingsHomePath,
-          builder: (_, __) => const SettingsHomeScreen(),
-          routes: <RouteBase>[
-            ${config.colorSettings ? '''GoRoute(
-              path: colorSettingsPath,
-              name: colorSettingsPath,
-              builder: (_, __) => const ColorSettingsScreen(),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: EzCSType.quick.path,
-                  name: EzCSType.quick.name,
-                  builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzCSType.quick),
-                ),
-                GoRoute(
-                  path: EzCSType.advanced.path,
-                  name: EzCSType.advanced.name,
-                  builder: (_, __) =>
-                      const ColorSettingsScreen(target: EzCSType.advanced),
-                ),
-              ],
-            ),''' : ''}
-            ${config.designSettings ? '''GoRoute(
-              path: designSettingsPath,
-              name: designSettingsPath,
-              builder: (_, __) => const DesignSettingsScreen(),
-            ),''' : ''}
-            ${config.layoutSettings ? '''GoRoute(
-              path: layoutSettingsPath,
-              name: layoutSettingsPath,
-              builder: (_, __) => const LayoutSettingsScreen(),
-            ),''' : ''}
-            ${config.textSettings ? '''GoRoute(
-              path: textSettingsPath,
-              name: textSettingsPath,
-              builder: (_, __) => const TextSettingsScreen(),
-              routes: <RouteBase>[
-                GoRoute(
-                  path: EzTSType.quick.path,
-                  name: EzTSType.quick.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.quick),
-                ),
-                GoRoute(
-                  path: EzTSType.advanced.path,
-                  name: EzTSType.advanced.name,
-                  builder: (_, __) =>
-                      const TextSettingsScreen(target: EzTSType.advanced),
-                ),
-              ],
-            ),''' : ''}                     
-          ],
-        ),
-      ],
-    ),
-  ],
-);
-
 class $classCaseAppName extends StatelessWidget {
   const $classCaseAppName({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Prep the router //
+
+    final int animDuration = EzConfig.get(animationDurationKey);
+    final TargetPlatform currPlatform = getBasePlatform();
+
+    GoTransition.defaultCurve = Curves.easeInOut;
+    GoTransition.defaultDuration = Duration(milliseconds: animDuration);
+
+    Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
+        ezGoTransition(context, state, animDuration, currPlatform);
+
+    // Return the app //
+
     return EzAppProvider(
       app: PlatformApp.router(
         debugShowCheckedModeBanner: false,
@@ -632,15 +575,91 @@ class $classCaseAppName extends StatelessWidget {
           const LocaleNamesLocalizationsDelegate(),
           ...EFUILang.localizationsDelegates,${l10nDelegateHandler(config)}
         },
-
-        // Supported languages
         supportedLocales: ${l10nClassName(config) ?? 'EFUILang'}.supportedLocales,
-
-        // Current language
         locale: EzConfig.getLocale(),
 
-        title: appTitle,
-        routerConfig: router,
+        // App title
+        title: appName,
+
+        // Router (page) config
+        routerConfig: GoRouter(
+          initialLocation: homePath,
+          errorBuilder: (_, GoRouterState state) => ErrorScreen(state.error),
+          routes: <RouteBase>[
+            GoRoute(
+              path: homePath,
+              name: homePath,
+              builder: (_, __) => const HomeScreen(),
+              pageBuilder: getTransition,
+              routes: <RouteBase>[
+                GoRoute(
+                  path: settingsHomePath,
+                  name: settingsHomePath,
+                  builder: (_, __) => const SettingsHomeScreen(),
+                  pageBuilder: getTransition,
+                  routes: <RouteBase>[
+                    ${config.colorSettings ? '''GoRoute(
+                      path: colorSettingsPath,
+                      name: colorSettingsPath,
+                      builder: (_, __) => const ColorSettingsScreen(),
+                      pageBuilder: getTransition,
+                      routes: <RouteBase>[
+                        GoRoute(
+                          path: EzCSType.quick.path,
+                          name: EzCSType.quick.name,
+                          builder: (_, __) =>
+                              const ColorSettingsScreen(target: EzCSType.quick),
+                          pageBuilder: getTransition,
+                        ),
+                        GoRoute(
+                          path: EzCSType.advanced.path,
+                          name: EzCSType.advanced.name,
+                          builder: (_, __) =>
+                              const ColorSettingsScreen(target: EzCSType.advanced),
+                          pageBuilder: getTransition,
+                        ),
+                      ],
+                    ),''' : ''}
+                    ${config.designSettings ? '''GoRoute(
+                      path: designSettingsPath,
+                      name: designSettingsPath,
+                      builder: (_, __) => const DesignSettingsScreen(),
+                      pageBuilder: getTransition,
+                    ),''' : ''}
+                    ${config.layoutSettings ? '''GoRoute(
+                      path: layoutSettingsPath,
+                      name: layoutSettingsPath,
+                      builder: (_, __) => const LayoutSettingsScreen(),
+                      pageBuilder: getTransition,
+                    ),''' : ''}
+                    ${config.textSettings ? '''GoRoute(
+                      path: textSettingsPath,
+                      name: textSettingsPath,
+                      builder: (_, __) => const TextSettingsScreen(),
+                      pageBuilder: getTransition,
+                      routes: <RouteBase>[
+                        GoRoute(
+                          path: EzTSType.quick.path,
+                          name: EzTSType.quick.name,
+                          builder: (_, __) =>
+                              const TextSettingsScreen(target: EzTSType.quick),
+                          pageBuilder: getTransition,
+                        ),
+                        GoRoute(
+                          path: EzTSType.advanced.path,
+                          name: EzTSType.advanced.name,
+                          builder: (_, __) =>
+                              const TextSettingsScreen(target: EzTSType.advanced),
+                          pageBuilder: getTransition,
+                        ),
+                      ],
+                    ),''' : ''}                     
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -688,7 +707,10 @@ class $classCaseAppName extends StatelessWidget {
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 /// $titleCaseAppName
-const String appTitle = '$titleCaseAppName';
+const String appName = '$titleCaseAppName';
+
+/// ${config.domainName}.${config.appName}
+const String androidPackage = '${config.domainName}.${config.appName}';
 
 /// Default [EzConfig] values
 const Map<String, Object> ${camelCaseAppName}Config = <String, Object>${configString()};
@@ -735,7 +757,6 @@ class CountFAB extends StatelessWidget {
 import '../screens/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -765,25 +786,22 @@ class EFUICredits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
 
     final EFUILang l10n = ezL10n(context);
     final String label = isLefty ? l10n.gMadeBy : l10n.gCreator;
     final String tip = l10n.gOpenEmpathetech;
     final String settings = l10n.ssPageTitle;
 
-    return Link(
-      uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
-      builder: (_, FollowLink? followLink) => Tooltip(
-        message: tip,
-        excludeFromSemantics: true,
-        child: EzMenuButton(
-          onPressed: followLink,
-          icon: EzIcon(PlatformIcons(context).settings),
-          label: label,
-          semanticsLabel:
-            '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
-        ),
+    return Tooltip(
+      message: tip,
+      excludeFromSemantics: true,
+      child: EzMenuLink(
+        uri: Uri.parse('https://www.empathetech.net/#/products/open-ui'),
+        icon: EzIcon(PlatformIcons(context).settings),
+        label: label,
+        semanticsLabel:
+          '\${isLefty ? '\$settings \$label' : '\$label \$settings'}. \$tip',
       ),
     );
   }
@@ -818,7 +836,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const ${classCaseAppName}Scaffold({
     super.key,
-    this.title = appTitle,
+    this.title = appName,
     this.showSettings = true,
     required this.body,
     this.fab,
@@ -828,10 +846,11 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
     final EFUILang l10n = ezL10n(context);
 
-    final double toolbarHeight = ezToolbarHeight(context, appTitle);
+    final double toolbarHeight =
+        ezToolbarHeight(context: context, title: appName);
 
     // Define custom widgets //
 
@@ -846,7 +865,7 @@ class ${classCaseAppName}Scaffold extends StatelessWidget {
         (showSettings) ? SettingsButton(context) : EFUICredits(context),
         ${config.supportEmail != null ? '''EzFeedbackMenuButton(
           parentContext: context,
-          appName: appTitle,
+          appName: appName,
           supportEmail: '${config.supportEmail}',
         ),''' : ''}
       ],
@@ -951,8 +970,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
     return ${classCaseAppName}Scaffold(
       body: EzScreen(
-        useImageDecoration: false,
-        child: Center(
+        Center(
           child: EzScrollView(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -977,6 +995,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ],
           ),
         ),
+        useImageDecoration: false,
       ),
     );
   }
@@ -1014,7 +1033,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, appTitle);
+    ezWindowNamer(context, appName);
   }
 
   @override
@@ -1027,9 +1046,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // Return the build //
 
     return ${classCaseAppName}Scaffold(
-      title: appTitle,
+      title: appName,
       body: EzScreen(
-        child: Center(
+        Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -1060,6 +1079,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await settingsHome.writeAsString("""$copyright
 
 import '../../screens/export.dart';
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1072,23 +1092,29 @@ class SettingsHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).ssPageTitle,
         showSettings: false,
-        body: const EzSettingsHome(
+        body: const EzScreen(EzSettingsHome(
           colorSettingsPath: ${config.colorSettings ? 'colorSettingsPath,' : 'null,'}
           designSettingsPath: ${config.designSettings ? 'designSettingsPath,' : 'null,'}   
           layoutSettingsPath: ${config.layoutSettings ? 'layoutSettingsPath,' : 'null,'}
           textSettingsPath: ${config.textSettings ? 'textSettingsPath,' : 'null,'}
+        )),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
         ),
       );
 }
 """);
 
-    // color_settings_screen.dart?
+    // color_settings.dart?
     if (config.colorSettings) {
       final File colorSettings = File(
         '$dir/lib/screens/settings/color_settings.dart',
       );
       await colorSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1103,19 +1129,25 @@ class ColorSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).csPageTitle,
         showSettings: false,
-        body: EzColorSettings(target: target),
+        body: EzScreen(EzColorSettings(target: target)),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // design_settings_screen.dart?
+    // design_settings.dart?
     if (config.designSettings) {
       final File designSettings = File(
         '$dir/lib/screens/settings/design_settings.dart',
       );
       await designSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1126,21 +1158,27 @@ class DesignSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
-        title: ezL10n(context).isPageTitle,
+        title: ezL10n(context).dsPageTitle,
         showSettings: false,
-        body: const EzDesignSettings(),
+        body: const EzScreen(EzDesignSettings()),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // layout_settings_screen.dart?
+    // layout_settings.dart?
     if (config.layoutSettings) {
       final File layoutSettings = File(
         '$dir/lib/screens/settings/layout_settings.dart',
       );
       await layoutSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1153,19 +1191,25 @@ class LayoutSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).lsPageTitle,
         showSettings: false,
-        body: const EzLayoutSettings(),
+        body: const EzScreen(EzLayoutSettings()),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);
     }
 
-    // text_settings_screen.dart?
+    // text_settings.dart?
     if (config.textSettings) {
       final File textSettings = File(
         '$dir/lib/screens/settings/text_settings.dart',
       );
       await textSettings.writeAsString("""$copyright
 
+import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
 import 'package:flutter/material.dart';
@@ -1180,7 +1224,12 @@ class TextSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) => ${classCaseAppName}Scaffold(
         title: ezL10n(context).tsPageTitle,
         showSettings: false,
-        body: EzTextSettings(target: target),
+        body: EzScreen(EzTextSettings(target: target)),
+        fab: EzConfigFAB(
+          context,
+          appName: appName,
+          androidPackage: androidPackage,
+        ),
       );
 }
 """);

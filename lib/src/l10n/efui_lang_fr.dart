@@ -126,6 +126,9 @@ class EFUILangFr extends EFUILang {
   String get gPause => 'Pause';
 
   @override
+  String get gReplay => 'Rejouer';
+
+  @override
   String get gMute => 'Muet';
 
   @override
@@ -135,7 +138,10 @@ class EFUILangFr extends EFUILang {
   String get gPlaybackSpeed => 'Vitesse de lecture';
 
   @override
-  String get gReplay => 'Rejouer';
+  String get gCaptions => 'Sous-titres/légendes';
+
+  @override
+  String get gCaptionsHint => 'Maintenez pour les polices';
 
   @override
   String get gFullScreen => 'Plein écran';
@@ -299,11 +305,11 @@ class EFUILangFr extends EFUILang {
 
   @override
   String get ssDarkOnly =>
-      'Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?';
+      'Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?';
 
   @override
   String get ssLightOnly =>
-      'Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?';
+      'Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\nContinuer ?';
 
   @override
   String ssApplied(Object config) {

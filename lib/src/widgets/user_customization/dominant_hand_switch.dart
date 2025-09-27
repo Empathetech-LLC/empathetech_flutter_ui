@@ -28,27 +28,15 @@ class EzDominantHandSwitch extends StatefulWidget {
 class _HandSwitchState extends State<EzDominantHandSwitch> {
   // Gather the fixed theme data //
 
-  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-  );
-
   late final EFUILang l10n = ezL10n(context);
 
   // Define the build data //
 
-  bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  bool isLefty = EzConfig.get(isLeftyKey);
 
   late final List<DropdownMenuEntry<bool>> entries = <DropdownMenuEntry<bool>>[
-    DropdownMenuEntry<bool>(
-      value: false,
-      label: l10n.gRight,
-      style: menuButtonStyle,
-    ),
-    DropdownMenuEntry<bool>(
-      value: true,
-      label: l10n.gLeft,
-      style: menuButtonStyle,
-    ),
+    DropdownMenuEntry<bool>(value: false, label: l10n.gRight),
+    DropdownMenuEntry<bool>(value: true, label: l10n.gLeft),
   ];
 
   // Return the build //

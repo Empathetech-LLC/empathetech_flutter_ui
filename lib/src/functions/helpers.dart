@@ -54,12 +54,13 @@ String screenshotHint() {
   }
 }
 
-String archivePath({required String packageName, required String appName}) {
+/// Where to find saved files on the current [TargetPlatform]
+String archivePath({required String? androidPackage, required String appName}) {
   final TargetPlatform platform = getBasePlatform();
 
   switch (platform) {
     case TargetPlatform.android:
-      return 'Root > Android > Data > $packageName > files';
+      return 'Root > Android > Data > ${androidPackage ?? 'com.example.app'} > files';
     case TargetPlatform.iOS:
       return 'Files > Browse > $appName';
     default:
@@ -100,8 +101,8 @@ Duration ezReadingTime(String passage) {
 
 /// [Duration] with milliseconds set to [EzConfig]s [animationDurationKey]
 Duration ezAnimDuration({bool half = false}) {
-  final double duration = EzConfig.get(animationDurationKey) as double;
-  return Duration(milliseconds: (half ? (duration / 2) : duration).toInt());
+  final int duration = EzConfig.get(animationDurationKey);
+  return Duration(milliseconds: half ? (duration / 2).toInt() : duration);
 }
 
 /// A [GoTransition] based on the current platform and [EzConfig] setup
@@ -125,6 +126,10 @@ Page<dynamic> ezGoTransition(
       return GoTransitions.slide.withFade(context, state);
   }
 }
+
+/// [TargetPlatform] aware helper that will request/exit a fullscreen window
+Future<void> ezFullscreenToggle(TargetPlatform platform, bool isFull) =>
+    toggleFullscreen(platform, isFull);
 
 /// Recommended size for an image
 /// Starts with 160.0; chosen by visual inspection

@@ -83,14 +83,15 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
             richMessage: EzRichText(
               <InlineSpan>[
                 EzPlainText(
-                    text: el10n.ssConfigSaved(archivePath(
-                  packageName: 'net.empathetech.open_ui',
-                  appName: 'Open UI',
-                ))),
+                  text: el10n.ssConfigSaved(archivePath(
+                    appName: 'Open UI',
+                    androidPackage: 'net.empathetech.open_ui',
+                  )),
+                ),
                 if (!isDesktop) ...<InlineSpan>[
                   EzPlainText(text: l10n.asUseIt),
                   EzInlineLink(
-                    appTitle,
+                    appName,
                     style: ezSubTitleStyle(textTheme),
                     textAlign: TextAlign.center,
                     url: Uri.parse(openUIReleases),

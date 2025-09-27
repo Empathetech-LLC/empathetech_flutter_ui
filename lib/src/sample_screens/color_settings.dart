@@ -300,13 +300,15 @@ class _AdvancedColorSettings extends StatefulWidget {
   State<_AdvancedColorSettings> createState() => _AdvancedColorSettingsState();
 }
 
-class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
+class _AdvancedColorSettingsState extends State<_AdvancedColorSettings>
+    with WidgetsBindingObserver {
   // Gather the fixed theme data //
 
   final double margin = EzConfig.get(marginKey);
   final double padding = EzConfig.get(paddingKey);
+  final double spacing = EzConfig.get(spacingKey);
 
-  late final EdgeInsets wrapPadding = EzInsets.wrap(padding);
+  late final EdgeInsets wrapPadding = EzInsets.wrap(spacing);
 
   late final EFUILang l10n = widget.l10n;
 
@@ -316,6 +318,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
   late final Set<String> defaultSet = defaultList.toSet();
 
   late final List<String> currList = widget.currList;
+  bool modalOpen = false;
 
   // Define custom Widgets //
 
@@ -368,17 +371,24 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
       final Color liveColor = getLiveColor(context, configKey);
 
       return Container(
-        padding: EzInsets.col(padding),
+        padding: EzInsets.col(spacing),
         child: EzElevatedIconButton(
           key: ValueKey<String>(configKey),
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(padding * 0.75),
           ),
           onPressed: () {
-            currList.add(configKey);
-            currList.sort(
-              (String a, String b) => fullList.indexOf(a) - fullList.indexOf(b),
-            );
+            final int newColorIndex = fullList.indexOf(configKey);
+
+            int insertAt = currList.length;
+            for (int i = 0; i < currList.length; i++) {
+              if (fullList.indexOf(currList[i]) > newColorIndex) {
+                insertAt = i;
+                break;
+              }
+            }
+            currList.insert(insertAt, configKey);
+
             setState(() {});
             setModalState(() {});
           },
@@ -416,6 +426,23 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
     return untrackedColors;
   }
 
+  // Init //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    if (modalOpen) {
+      Navigator.of(context).pop();
+      modalOpen = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Gather the dynamic theme data //
@@ -433,7 +460,7 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         EzSwapWidget(
           expanded: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: widthOf(context) * 0.667,
+              maxWidth: widthOf(context) * 0.75,
             ),
             child: Wrap(
               alignment: WrapAlignment.center,
@@ -457,6 +484,8 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
         // Add a color button
         EzTextIconButton(
           onPressed: () async {
+            modalOpen = true;
+
             // Show available color configKeys
             await showModalBottomSheet(
               context: context,
@@ -474,16 +503,24 @@ class _AdvancedColorSettingsState extends State<_AdvancedColorSettings> {
                 },
               ),
             );
+            modalOpen = false;
 
             // Save the user's changes
             if (currList != defaultList) {
               await EzConfig.setStringList(userColorsKey, currList);
             }
           },
+          style: TextButton.styleFrom(padding: EzInsets.wrap(margin)),
           icon: EzIcon(PlatformIcons(context).addCircledOutline),
           label: l10n.csAddColor,
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }

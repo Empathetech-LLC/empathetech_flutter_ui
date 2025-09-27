@@ -39,8 +39,6 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  final EdgeInsets menuButtonPadding = EzInsets.wrap(EzConfig.get(paddingKey));
-
   // Define the build data //
 
   late Map<String, String?> currFonts = <String, String?>{
@@ -75,10 +73,7 @@ class _FontFamilyBatchSettingState extends State<EzFontFamilyBatchSetting> {
     return DropdownMenuEntry<String>(
       value: entry.key,
       label: ezCamelToTitle(entry.key),
-      style: TextButton.styleFrom(
-        textStyle: entry.value,
-        padding: menuButtonPadding,
-      ),
+      style: TextButton.styleFrom(textStyle: entry.value),
     );
   }).toList();
 

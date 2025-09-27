@@ -50,10 +50,12 @@
 
   "gPlay": "Lecture",
   "gPause": "Pause",
+  "gReplay": "Rejouer",
   "gMute": "Muet",
   "gUnMute": "Désactiver le son",
   "gPlaybackSpeed": "Vitesse de lecture",
-  "gReplay": "Rejouer",
+  "gCaptions": "Sous-titres/légendes",
+  "gCaptionsHint": "Maintenez pour les polices",
   "gFullScreen": "Plein écran",
 
   "gHowThisWorks": "Comment ça marche",
@@ -119,8 +121,8 @@
   "ssVideoGame": "Mode jeu",
   "ssChalkboard": "Tableau noir",
   "ssFancyPants": "Pantalons élégants",
-  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\n\nContinuer ?",
-  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\n\nContinuer ?",
+  "ssDarkOnly": "Ceci est un préréglage de thème sombre. Il définira le mode de thème sur sombre et mettra à jour ce thème.\nContinuer ?",
+  "ssLightOnly": "Ceci est un préréglage de thème clair. Il définira le mode de thème sur clair et mettra à jour ce thème.\nContinuer ?",
   "ssApplied": "{config} appliqué.",
   "ssTryMe": "Essayez-moi",
 

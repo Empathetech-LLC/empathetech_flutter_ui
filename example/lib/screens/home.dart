@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ezWindowNamer(context, appTitle);
+    ezWindowNamer(context, appName);
   }
 
   @override
@@ -1149,7 +1149,7 @@ class _AdvancedSettingsField extends StatelessWidget {
     late final Lang l10n = Lang.of(context)!;
 
     late final EzSpacer rowMargin = EzMargin(vertical: false);
-    late final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    late final bool isLefty = EzConfig.get(isLeftyKey);
 
     late final Widget titleText = EzText(title, textAlign: TextAlign.start);
 
@@ -1274,7 +1274,7 @@ class _LicensePicker extends StatelessWidget {
     final EzMargin margin = EzMargin();
     final EzMargin rowMargin = EzMargin(vertical: false);
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
 
     Widget radio({
       required String title,

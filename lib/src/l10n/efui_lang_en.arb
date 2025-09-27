@@ -50,11 +50,13 @@
 
   "gPlay": "Play",
   "gPause": "Pause",
+  "gReplay": "Replay",
   "gMute": "Mute",
   "gUnMute": "Un-mute",
   "gPlaybackSpeed": "Playback speed",
-  "gReplay": "Replay",
-  "gFullScreen": "Full screen",
+  "gCaptions": "Subtitles/captions",
+  "gCaptionsHint": "Hold for fonts",
+  "gFullScreen": "Fullscreen",
 
   "gHowThisWorks": "How this works",
   "gHowThisWorksHint": "Open helpful documentation",
@@ -119,8 +121,8 @@
   "ssVideoGame": "Video game",
   "ssChalkboard": "Chalkboard",
   "ssFancyPants": "Fancy pants",
-  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?",
-  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?",
+  "ssDarkOnly": "This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?",
+  "ssLightOnly": "This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?",
   "ssApplied": "{config} applied.",
   "ssTryMe": "Try me",
 

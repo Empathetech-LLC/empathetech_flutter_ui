@@ -9,7 +9,6 @@ import '../screens/export.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
 import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:file_picker/file_picker.dart';
@@ -82,16 +81,13 @@ class OpenSourceButton extends StatelessWidget {
     final EFUILang l10n = ezL10n(context);
     final String text = l10n.gOpenSource;
 
-    return Link(
+    return EzMenuLink(
       uri: Uri.parse(
         'https://github.com/Empathetech-LLC/empathetech_flutter_ui',
       ),
-      builder: (_, FollowLink? followLink) => EzMenuButton(
-        onPressed: followLink,
-        semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
-        icon: EzIcon(LineIcons.github),
-        label: text,
-      ),
+      icon: EzIcon(LineIcons.github),
+      label: text,
+      semanticsLabel: '$text: ${l10n.gEFUISourceHint}',
     );
   }
 }

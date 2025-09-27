@@ -8,8 +8,10 @@ import '../../../empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class EzMenuButton extends StatefulWidget {
+  /// [MenuItemButton.onPressed] passthrough
   final void Function()? onPressed;
 
+  /// [MenuItemButton.onPressed] passthrough
   final bool requestFocusOnHover;
 
   /// Defaults to add an [TextDecoration.underline] to the [label]
@@ -27,20 +29,37 @@ class EzMenuButton extends StatefulWidget {
   /// [TextDecoration.underline]'s color, defaults to [ColorScheme.primary]
   final Color? decorationColor;
 
+  /// [MenuItemButton.focusNode] passthrough
   final FocusNode? focusNode;
+
+  /// [MenuItemButton.autofocus] passthrough
   final bool autofocus;
+
+  /// [MenuItemButton.shortcut] passthrough
   final MenuSerializableShortcut? shortcut;
+
+  /// [MenuItemButton.semanticsLabel] passthrough
   final String? semanticsLabel;
+
+  /// [MenuItemButton.style] passthrough
   final ButtonStyle? style;
+
+  /// [MenuItemButton.statesController] passthrough
   final WidgetStatesController? statesController;
+
+  /// [MenuItemButton.clipBehavior] passthrough
   final Clip clipBehavior;
 
   /// iconAlignment: [EzConfig.get] -> [isLeftyKey] ? [IconAlignment.start] : [IconAlignment.end]
   final Widget? icon;
 
+  /// [MenuItemButton.closeOnActivate] passthrough
   final bool closeOnActivate;
+
+  /// [MenuItemButton.overflowAxis] passthrough
   final Axis overflowAxis;
 
+  /// The text for the user
   final String label;
 
   /// Defaults to [TextTheme.bodyLarge]
@@ -80,7 +99,7 @@ class EzMenuButton extends StatefulWidget {
 class _EzMenuButtonState extends State<EzMenuButton> {
   // Gather the fixed theme data //
 
-  final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+  final bool isLefty = EzConfig.get(isLeftyKey);
 
   @override
   Widget build(BuildContext context) {

@@ -45,6 +45,10 @@ class EzLink extends StatefulWidget {
   /// Defaults to [hint]
   final String? tooltip;
 
+  /// Optional callback for hover events
+  /// Will run in addition to the built-in [EzLink] hover effects
+  final Function(bool hovering)? onHover;
+
   /// [TextButton] wrapper that either opens an internal link via [onTap]
   /// Or an external link to [url]
   /// Always has a [tooltip]; if one is not provided, it will default to [hint]
@@ -62,6 +66,7 @@ class EzLink extends StatefulWidget {
     this.url,
     required this.hint,
     this.tooltip,
+    this.onHover,
   }) : assert((onTap == null) != (url == null),
             'Either onTap or url should be provided, but not both.');
 
@@ -123,7 +128,10 @@ class _EzLinkState extends State<EzLink> {
                   style: buttonStyle,
                   onPressed: widget.onTap,
                   onLongPress: null,
-                  onHover: (bool isHovering) => underline(isHovering),
+                  onHover: (bool isHovering) {
+                    underline(isHovering);
+                    widget.onHover?.call(isHovering);
+                  },
                   onFocusChange: (bool hasFocus) => underline(hasFocus),
                   child: text,
                 )
@@ -133,7 +141,10 @@ class _EzLinkState extends State<EzLink> {
                     style: buttonStyle,
                     onPressed: followLink,
                     onLongPress: null,
-                    onHover: (bool isHovering) => underline(isHovering),
+                    onHover: (bool isHovering) {
+                      underline(isHovering);
+                      widget.onHover?.call(isHovering);
+                    },
                     onFocusChange: (bool hasFocus) => underline(hasFocus),
                     child: text,
                   ),

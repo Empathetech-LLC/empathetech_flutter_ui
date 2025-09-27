@@ -126,6 +126,9 @@ class EFUILangEs extends EFUILang {
   String get gPause => 'Pausa';
 
   @override
+  String get gReplay => 'Repetir';
+
+  @override
   String get gMute => 'Silenciar';
 
   @override
@@ -135,7 +138,10 @@ class EFUILangEs extends EFUILang {
   String get gPlaybackSpeed => 'Velocidad de reproducción';
 
   @override
-  String get gReplay => 'Repetir';
+  String get gCaptions => 'Subtítulos/captions';
+
+  @override
+  String get gCaptionsHint => 'Mantén pulsado para fuentes';
 
   @override
   String get gFullScreen => 'Pantalla completa';
@@ -299,11 +305,11 @@ class EFUILangEs extends EFUILang {
 
   @override
   String get ssDarkOnly =>
-      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n\n¿Continuar?';
+      'Este es un preajuste de tema oscuro. Cambiará el modo del tema a oscuro y actualizará ese tema.\n¿Continuar?';
 
   @override
   String get ssLightOnly =>
-      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n\n¿Continuar?';
+      'Este es un preajuste de tema claro. Cambiará el modo del tema a claro y actualizará ese tema.\n¿Continuar?';
 
   @override
   String ssApplied(Object config) {

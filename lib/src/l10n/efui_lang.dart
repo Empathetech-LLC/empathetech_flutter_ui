@@ -327,6 +327,12 @@ abstract class EFUILang {
   /// **'Pause'**
   String get gPause;
 
+  /// No description provided for @gReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay'**
+  String get gReplay;
+
   /// No description provided for @gMute.
   ///
   /// In en, this message translates to:
@@ -345,16 +351,22 @@ abstract class EFUILang {
   /// **'Playback speed'**
   String get gPlaybackSpeed;
 
-  /// No description provided for @gReplay.
+  /// No description provided for @gCaptions.
   ///
   /// In en, this message translates to:
-  /// **'Replay'**
-  String get gReplay;
+  /// **'Subtitles/captions'**
+  String get gCaptions;
+
+  /// No description provided for @gCaptionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold for fonts'**
+  String get gCaptionsHint;
 
   /// No description provided for @gFullScreen.
   ///
   /// In en, this message translates to:
-  /// **'Full screen'**
+  /// **'Fullscreen'**
   String get gFullScreen;
 
   /// No description provided for @gHowThisWorks.
@@ -648,13 +660,13 @@ abstract class EFUILang {
   /// No description provided for @ssDarkOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\n\nContinue?'**
+  /// **'This is a dark theme preset. It will set the theme mode to dark, and update that theme.\nContinue?'**
   String get ssDarkOnly;
 
   /// No description provided for @ssLightOnly.
   ///
   /// In en, this message translates to:
-  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\n\nContinue?'**
+  /// **'This is a light theme preset. It will set the theme mode to light, and update that theme.\nContinue?'**
   String get ssLightOnly;
 
   /// No description provided for @ssApplied.

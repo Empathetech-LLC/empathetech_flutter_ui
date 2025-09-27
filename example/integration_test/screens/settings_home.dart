@@ -32,7 +32,7 @@ void testSuite({
       // Verify text loaded //
 
       ezLog('\nValidating text');
-      await ezFindText(tester, appTitle);
+      await ezFindText(tester, appName);
       await ezFindWidget(tester, EzWarning);
       await ezFindText(tester, l10n.ssDominantHand);
       await ezFindText(tester, l10n.ssThemeMode);

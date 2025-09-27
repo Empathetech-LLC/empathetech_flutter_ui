@@ -136,8 +136,8 @@ const Color lightOutlineVariant = Color(lightOutlineVariantHex);
 
 //* Design settings *//
 
-/// 500.0
-const double defaultAnimationDuration = 500.0;
+/// 500
+const int defaultAnimationDuration = 500;
 
 /// 0x45 / 255
 const double defaultButtonOutlineOpacity = 0.270588235294;
@@ -207,8 +207,8 @@ const double defaultWordSpacing = 1.0;
 
 // Design settings //
 
-/// 0.0
-const double minAnimationDuration = 0.0;
+/// 0
+const int minAnimationDuration = 0;
 
 // Layout settings //
 
@@ -266,8 +266,8 @@ const double minFontHeight = 1.0;
 
 // Design settings //
 
-/// 1000.0
-const double maxAnimationDuration = 1000.0;
+/// 1000
+const int maxAnimationDuration = 1000;
 
 // Layout settings //
 
@@ -478,10 +478,10 @@ const Map<String, Object> baseEmpathConfig = <String, Object>{
   iconSizeKey: defaultIconSize,
 };
 
-/// base with a more compact layout and hidden scrolls
+/// [baseEmpathConfig] with a more compact layout and hidden scrolls
+/// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
-/// You have permission to modify this code
-/// You do not have permission to use this config in your app
+/// You do NOT have permission to use this config in your production app
 const Map<String, Object> empathMobileConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -491,10 +491,10 @@ const Map<String, Object> empathMobileConfig = <String, Object>{
   hideScrollKey: true,
 };
 
-/// base with a more open layout and visible scrolls
+/// [baseEmpathConfig] with a more open layout and visible scrolls
+/// -- ATTENTION --
 /// For open source consumers: this is Empathetech LLC's config
-/// You have permission to modify this code
-/// You do not have permission to use this config in your app
+/// You do NOT have permission to use this config in your production app
 const Map<String, Object> empathDesktopConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -505,7 +505,9 @@ const Map<String, Object> empathDesktopConfig = <String, Object>{
 };
 
 /// [EzConfig.defaults] set to all recommended max values
-/// For open source consumers: you may use this in testing, but not in production
+/// -- ATTENTION --
+/// Open source do NOT have permission to use this config in production apps
+/// Also, this is intended for testing anyway
 final Map<String, Object> empathMaxConfig = <String, Object>{
   ...baseEmpathConfig,
 
@@ -557,7 +559,9 @@ final Map<String, Object> empathMaxConfig = <String, Object>{
 };
 
 /// [EzConfig.defaults] set to all recommended min values
-/// For open source consumers: you may use this in testing, but not in production
+/// -- ATTENTION --
+/// Open source do NOT have permission to use this config in production apps
+/// Also, this is intended for testing anyway
 final Map<String, Object> empathMinConfig = <String, Object>{
   ...baseEmpathConfig,
 

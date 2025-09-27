@@ -428,7 +428,7 @@ const String animationDurationKey = 'animationDuration';
 
 /// [animationDurationKey]
 const Map<String, Type> globalDesignKeys = <String, Type>{
-  animationDurationKey: double,
+  animationDurationKey: int,
 };
 
 // Dark theme //

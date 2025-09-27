@@ -31,31 +31,15 @@ class _ThemeModeSwitchState extends State<EzThemeModeSwitch> {
 
   late final EFUILang l10n = ezL10n(context);
 
-  late final ButtonStyle menuButtonStyle = TextButton.styleFrom(
-    padding: EzInsets.wrap(EzConfig.get(paddingKey)),
-  );
-
   // Define the build data //
 
   late ThemeMode? platformTheme = PlatformTheme.of(context)!.themeMode;
 
   late final List<DropdownMenuEntry<ThemeMode>> entries =
       <DropdownMenuEntry<ThemeMode>>[
-    DropdownMenuEntry<ThemeMode>(
-      value: ThemeMode.system,
-      label: l10n.gSystem,
-      style: menuButtonStyle,
-    ),
-    DropdownMenuEntry<ThemeMode>(
-      value: ThemeMode.light,
-      label: l10n.gLight,
-      style: menuButtonStyle,
-    ),
-    DropdownMenuEntry<ThemeMode>(
-      value: ThemeMode.dark,
-      label: l10n.gDark,
-      style: menuButtonStyle,
-    ),
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.system, label: l10n.gSystem),
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.light, label: l10n.gLight),
+    DropdownMenuEntry<ThemeMode>(value: ThemeMode.dark, label: l10n.gDark),
   ];
 
   // Return the build //

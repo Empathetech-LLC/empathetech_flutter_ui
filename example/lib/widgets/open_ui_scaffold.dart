@@ -32,7 +32,7 @@ class OpenUIScaffold extends StatelessWidget {
   /// Standardized [Scaffold] for all of the EFUI example app's screens
   const OpenUIScaffold({
     super.key,
-    this.title = appTitle,
+    this.title = appName,
     this.running = false,
     this.showSettings = true,
     this.onUpload,
@@ -44,15 +44,15 @@ class OpenUIScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Gather the fixed theme data //
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
     final EFUILang l10n = ezL10n(context);
 
     final double toolbarHeight =
-        ezToolbarHeight(context: context, title: appTitle);
+        ezToolbarHeight(context: context, title: appName);
 
     // Define custom widgets //
 
-    late final MenuAnchor options = MenuAnchor(
+    final MenuAnchor options = MenuAnchor(
       builder: (_, MenuController controller, ___) => IconButton(
         onPressed: () =>
             (controller.isOpen) ? controller.close() : controller.open(),
@@ -64,11 +64,22 @@ class OpenUIScaffold extends StatelessWidget {
         if (onUpload != null) UploadButton(context, onUpload: onUpload!),
         EzFeedbackMenuButton(
           parentContext: context,
-          appName: appTitle,
+          appName: appName,
           supportEmail: 'support@empathetech.net',
         ),
         const OpenSourceButton(),
       ],
+    );
+
+    const Widget updater = EzUpdaterFAB(
+      appVersion: '2.3.1',
+      versionSource:
+          'https://raw.githubusercontent.com/Empathetech-LLC/empathetech_flutter_ui/refs/heads/main/example/APP_VERSION',
+      gPlay:
+          'https://play.google.com/store/apps/details?id=net.empathetech.open_ui',
+      appStore: 'https://apps.apple.com/us/app/open-ui/id6499560244',
+      github:
+          'https://github.com/Empathetech-LLC/empathetech_flutter_ui/releases',
     );
 
     // Return the build //
@@ -107,12 +118,12 @@ class OpenUIScaffold extends StatelessWidget {
           body: body,
 
           // FAB
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: fab == null
-                ? <Widget>[const EzUpdater()]
-                : <Widget>[const EzUpdater(), const EzSpacer(), fab!],
-          ),
+          floatingActionButton: fab == null
+              ? updater
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[updater, const EzSpacer(), fab!],
+                ),
           floatingActionButtonLocation: isLefty
               ? FloatingActionButtonLocation.startFloat
               : FloatingActionButtonLocation.endFloat,

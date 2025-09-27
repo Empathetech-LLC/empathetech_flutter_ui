@@ -53,8 +53,9 @@ class OpenUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int animDuration =
-        (EzConfig.get(animationDurationKey) as double).toInt();
+    // Prep the router //
+
+    final int animDuration = EzConfig.get(animationDurationKey);
     final TargetPlatform currPlatform = getBasePlatform();
 
     GoTransition.defaultCurve = Curves.easeInOut;
@@ -62,6 +63,8 @@ class OpenUI extends StatelessWidget {
 
     Page<dynamic> getTransition(BuildContext context, GoRouterState state) =>
         ezGoTransition(context, state, animDuration, currPlatform);
+
+    // Return the app //
 
     return EzAppProvider(
       app: PlatformApp.router(
@@ -73,15 +76,11 @@ class OpenUI extends StatelessWidget {
           ...EFUILang.localizationsDelegates,
           ...Lang.localizationsDelegates,
         },
-
-        // Supported languages
         supportedLocales: Lang.supportedLocales,
-
-        // Current language
         locale: EzConfig.getLocale(),
 
         // App title
-        title: appTitle,
+        title: appName,
 
         // Router (page) config
         routerConfig: GoRouter(

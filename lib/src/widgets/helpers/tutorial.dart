@@ -52,7 +52,7 @@ class EzTutorial extends StatelessWidget {
     final double margin = EzConfig.get(marginKey);
     final double spacing = EzConfig.get(spacingKey);
 
-    final bool isLefty = EzConfig.get(isLeftyKey) ?? false;
+    final bool isLefty = EzConfig.get(isLeftyKey);
 
     // Return the build //
 

@@ -28,6 +28,9 @@ class EzScrollView extends StatefulWidget {
   /// [Scrollbar.scrollbarOrientation] passthrough
   final ScrollbarOrientation? scrollbarOrientation;
 
+  /// If true, when there is scrollable content, a halo of [ColorScheme.secondary] will be shown
+  final bool showScrollHint;
+
   /// [SingleChildScrollView.scrollDirection] passthrough
   final Axis scrollDirection;
 
@@ -94,16 +97,16 @@ class EzScrollView extends StatefulWidget {
   const EzScrollView({
     super.key,
 
-    // Scrollbar parameters //
+    // Scrollbar
     this.controller,
     this.thumbVisibility,
     this.thickness,
     this.radius,
     this.notificationPredicate,
     this.scrollbarOrientation,
+    this.showScrollHint = false,
 
-    // SingleChildScrollView parameters //
-
+    // SingleChildScrollView
     this.scrollDirection = Axis.vertical,
     this.reverseHands = false,
     this.reverse = false,
@@ -116,8 +119,7 @@ class EzScrollView extends StatefulWidget {
     this.restorationId,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
 
-    // EzRow/Column parameters //
-
+    // EzRow/Column parameters
     this.mainAxisSize = MainAxisSize.max,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
@@ -136,9 +138,18 @@ class EzScrollView extends StatefulWidget {
 }
 
 class _EzScrollViewState extends State<EzScrollView> {
+  // Gather the fixed theme data //
+
+  final double margin = EzConfig.get(marginKey);
+
   // Define the build data //
 
   late final ScrollController controller;
+  late final bool hideScroll =
+      EzConfig.get(hideScrollKey) || (widget.thumbVisibility == false);
+
+  bool canScrollUp = false;
+  bool canScrollDown = false;
 
   // Init //
 
@@ -149,9 +160,26 @@ class _EzScrollViewState extends State<EzScrollView> {
 
     if (widget.startCentered) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (controller.hasClients) {
-          final double position = controller.position.maxScrollExtent / 2;
-          controller.jumpTo(position);
+        if (!mounted || !controller.hasClients) return;
+
+        final double position = controller.position.maxScrollExtent / 2;
+        controller.jumpTo(position);
+      });
+    }
+
+    if (widget.showScrollHint) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || !controller.hasClients) return;
+
+        final ScrollPosition pos = controller.position;
+        final bool up = pos.pixels > 0;
+        final bool down = pos.pixels < pos.maxScrollExtent;
+
+        if (up || down) {
+          setState(() {
+            canScrollUp = up;
+            canScrollDown = down;
+          });
         }
       });
     }
@@ -161,8 +189,51 @@ class _EzScrollViewState extends State<EzScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool hideScroll = (EzConfig.get(hideScrollKey) ?? false) ||
-        (widget.thumbVisibility == false);
+    late final Color hover =
+        Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5);
+
+    late final Widget core = PlatformScrollbar(
+      controller: controller,
+      thumbVisibility: hideScroll ? false : widget.thumbVisibility,
+      thickness: hideScroll ? 0.0 : widget.thickness,
+      radius: hideScroll ? Radius.zero : widget.radius,
+      notificationPredicate: widget.notificationPredicate,
+      scrollbarOrientation: widget.scrollbarOrientation,
+      child: SingleChildScrollView(
+        scrollDirection: widget.scrollDirection,
+        reverse: widget.reverse,
+        padding: widget.padding,
+        primary: widget.primary,
+        physics: widget.physics,
+        controller: controller,
+        dragStartBehavior: widget.dragStartBehavior,
+        clipBehavior: widget.clipBehavior,
+        restorationId: widget.restorationId,
+        keyboardDismissBehavior: widget.keyboardDismissBehavior,
+        child: (widget.child != null)
+            ? widget.child!
+            : (widget.scrollDirection == Axis.vertical)
+                ? Column(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    children: widget.children!,
+                  )
+                : EzRow(
+                    mainAxisSize: widget.mainAxisSize,
+                    mainAxisAlignment: widget.mainAxisAlignment,
+                    crossAxisAlignment: widget.crossAxisAlignment,
+                    textDirection: widget.textDirection,
+                    verticalDirection: widget.verticalDirection,
+                    textBaseline: widget.textBaseline,
+                    reverseHands: widget.reverseHands,
+                    children: widget.children!,
+                  ),
+      ),
+    );
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
@@ -176,48 +247,80 @@ class _EzScrollViewState extends State<EzScrollView> {
               } // No mouse
             : PointerDeviceKind.values.toSet(),
       ),
-      child: PlatformScrollbar(
-        controller: controller,
-        thumbVisibility: hideScroll ? false : widget.thumbVisibility,
-        thickness: hideScroll ? 0.0 : widget.thickness,
-        radius: hideScroll ? Radius.zero : widget.radius,
-        notificationPredicate: widget.notificationPredicate,
-        scrollbarOrientation: widget.scrollbarOrientation,
-        child: SingleChildScrollView(
-          scrollDirection: widget.scrollDirection,
-          reverse: widget.reverse,
-          padding: widget.padding,
-          primary: widget.primary,
-          physics: widget.physics,
-          controller: controller,
-          dragStartBehavior: widget.dragStartBehavior,
-          clipBehavior: widget.clipBehavior,
-          restorationId: widget.restorationId,
-          keyboardDismissBehavior: widget.keyboardDismissBehavior,
-          child: (widget.child != null)
-              ? widget.child
-              : (widget.scrollDirection == Axis.vertical)
-                  ? Column(
-                      mainAxisSize: widget.mainAxisSize,
-                      mainAxisAlignment: widget.mainAxisAlignment,
-                      crossAxisAlignment: widget.crossAxisAlignment,
-                      textDirection: widget.textDirection,
-                      verticalDirection: widget.verticalDirection,
-                      textBaseline: widget.textBaseline,
-                      children: widget.children!,
-                    )
-                  : EzRow(
-                      mainAxisSize: widget.mainAxisSize,
-                      mainAxisAlignment: widget.mainAxisAlignment,
-                      crossAxisAlignment: widget.crossAxisAlignment,
-                      textDirection: widget.textDirection,
-                      verticalDirection: widget.verticalDirection,
-                      textBaseline: widget.textBaseline,
-                      reverseHands: widget.reverseHands,
-                      children: widget.children!,
-                    ),
-        ),
-      ),
+      child: widget.showScrollHint
+          ? NotificationListener<ScrollNotification>(
+              onNotification: (ScrollNotification notif) {
+                final ScrollMetrics metrics = notif.metrics;
+                final bool up = metrics.pixels > 0;
+                final bool down = metrics.pixels < metrics.maxScrollExtent;
+
+                if (up != canScrollUp || down != canScrollDown) {
+                  setState(() {
+                    canScrollUp = up;
+                    canScrollDown = down;
+                  });
+                }
+                return false;
+              },
+              child: Stack(
+                children: <Widget>[
+                  core,
+
+                  // Up/left
+                  if (canScrollUp)
+                    widget.scrollDirection == Axis.vertical
+                        ? Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).upArrow,
+                                color: hover,
+                              ),
+                            ),
+                          )
+                        : Positioned(
+                            left: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).leftChevron,
+                                color: hover,
+                              ),
+                            ),
+                          ),
+
+                  // Down/right
+                  if (canScrollDown)
+                    widget.scrollDirection == Axis.vertical
+                        ? Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).downArrow,
+                                color: hover,
+                              ),
+                            ),
+                          )
+                        : Positioned(
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: ExcludeSemantics(
+                              child: EzIcon(
+                                PlatformIcons(context).rightChevron,
+                                color: hover,
+                              ),
+                            ),
+                          )
+                ],
+              ),
+            )
+          : core,
     );
   }
 }
