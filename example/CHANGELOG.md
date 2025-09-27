@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.3.1] - 2025-09-26
 ### Updated
-- Stuff
+- EFUI 10.1
 
 ## [2.3.0] - 2025-09-07
 ### Updated
