@@ -223,8 +223,8 @@ class _EzScrollViewState extends State<EzScrollView> {
             ? NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification notif) {
                   final ScrollMetrics metrics = notif.metrics;
-                  final bool up = metrics.extentBefore > 0;
-                  final bool down = metrics.extentAfter > 0;
+                  final bool up = metrics.pixels > 0;
+                  final bool down = metrics.pixels < metrics.maxScrollExtent;
 
                   if (up != canScrollUp || down != canScrollDown) {
                     setState(() {
@@ -255,8 +255,12 @@ class _EzScrollViewState extends State<EzScrollView> {
                           left: 0,
                           right: 0,
                           top: 0,
-                          height: margin,
-                          child: Container(color: hover),
+                          child: EzIcon(
+                            widget.scrollDirection == Axis.vertical
+                                ? PlatformIcons(context).upArrow
+                                : PlatformIcons(context).leftChevron,
+                            color: hover,
+                          ),
                         ),
 
                       // Down/right
@@ -265,8 +269,12 @@ class _EzScrollViewState extends State<EzScrollView> {
                           left: 0,
                           right: 0,
                           bottom: 0,
-                          height: margin,
-                          child: Container(color: hover),
+                          child: EzIcon(
+                            widget.scrollDirection == Axis.vertical
+                                ? PlatformIcons(context).downArrow
+                                : PlatformIcons(context).rightChevron,
+                            color: hover,
+                          ),
                         )
                     ],
                   ),
